@@ -22,6 +22,75 @@
       "revId": "d7014a4033260181f9c405fdaf7d8f0d69f560cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaaf013d_492e82d8",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-21T11:36:37Z",
+      "side": 1,
+      "message": "not sure it is needed.\nafaik MockRtpRtcp and ModuleRtpRtcpImple are the only two implementaions of the RtpRtcp interface.",
+      "range": {
+        "startLine": 241,
+        "startChar": 5,
+        "endLine": 241,
+        "endChar": 23
+      },
+      "revId": "d7014a4033260181f9c405fdaf7d8f0d69f560cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de56c790_7f30e1c1",
+        "filename": "modules/rtp_rtcp/mocks/mock_rtp_rtcp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-21T11:36:37Z",
+      "side": 1,
+      "message": "why void ?\n(few lines above signature with 0 parameters use just \u0027()\u0027",
+      "range": {
+        "startLine": 87,
+        "startChar": 56,
+        "endLine": 87,
+        "endChar": 60
+      },
+      "revId": "d7014a4033260181f9c405fdaf7d8f0d69f560cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31b0c6c1_8ebafb79",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2018-12-21T11:36:37Z",
+      "side": 1,
+      "message": "why this change?",
+      "range": {
+        "startLine": 237,
+        "startChar": 17,
+        "endLine": 237,
+        "endChar": 21
+      },
+      "revId": "d7014a4033260181f9c405fdaf7d8f0d69f560cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
