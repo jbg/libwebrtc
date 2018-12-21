@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "c711608f_749e5a34",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-21T11:03:00Z",
+      "side": 1,
+      "message": "Check if you can use libyuv::CopyPlane16 (libyuv/planar_functions.h).",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 0
+      },
+      "revId": "801a6f392bc2cfe2a40094a76acf6b4c32ae5bd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d52cdf2_2d772b1c",
+        "filename": "api/video/i010_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-21T11:03:00Z",
+      "side": 1,
+      "message": "Rename to PasteFrom, for consistency with the above functions. Also consider if it needs to be a method, rather than a function or static method.\n\nDo you need the return value? Without it, you\u0027d either need to RTC_D?CHECK or clip if the buffer to paste doens\u0027t fit.",
+      "range": {
+        "startLine": 71,
+        "startChar": 7,
+        "endLine": 71,
+        "endChar": 22
+      },
+      "revId": "801a6f392bc2cfe2a40094a76acf6b4c32ae5bd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d85e698d_1f786971",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-21T11:03:00Z",
+      "side": 1,
+      "message": "Prefer GetI420() and GetI010() over casts.",
+      "range": {
+        "startLine": 262,
+        "startChar": 22,
+        "endLine": 262,
+        "endChar": 33
+      },
+      "revId": "801a6f392bc2cfe2a40094a76acf6b4c32ae5bd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92ea7d64_b8a39645",
         "filename": "common_video/video_frame_unittest.cc",
         "patchSetId": 2
