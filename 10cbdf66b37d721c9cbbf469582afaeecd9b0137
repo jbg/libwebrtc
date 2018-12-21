@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69b9dcc5_7836e469",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-21T12:26:59Z",
+      "side": 1,
+      "message": "Update commit message, it\u0027s I420Buffer and I010Buffer that gets this feature.",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "10cbdf66b37d721c9cbbf469582afaeecd9b0137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0b5ff06_8996f84d",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-21T12:26:59Z",
+      "side": 1,
+      "message": "Not needed?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "10cbdf66b37d721c9cbbf469582afaeecd9b0137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a840691_07a0c177",
+        "filename": "api/video/i420_buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2018-12-21T12:26:59Z",
+      "side": 1,
+      "message": "I\u0027d prefer just \"PasteFrom\", no \"Buffer\" in the name.",
+      "range": {
+        "startLine": 102,
+        "startChar": 7,
+        "endLine": 102,
+        "endChar": 22
+      },
+      "revId": "10cbdf66b37d721c9cbbf469582afaeecd9b0137",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
