@@ -24,10 +24,12 @@
 #include "api/video/video_stream_encoder_observer.h"
 #include "api/video/video_stream_encoder_settings.h"
 #include "api/video_codecs/video_encoder.h"
+#include "modules/video_coding/utility/frame_dropper.h"
 #include "modules/video_coding/utility/quality_scaler.h"
 #include "modules/video_coding/video_coding_impl.h"
 #include "rtc_base/criticalsection.h"
 #include "rtc_base/event.h"
+#include "rtc_base/rate_statistics.h"
 #include "rtc_base/sequenced_task_checker.h"
 #include "rtc_base/task_queue.h"
 #include "video/overuse_frame_detector.h"
@@ -131,6 +133,11 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   bool EncoderPaused() const;
   void TraceFrameDropStart();
   void TraceFrameDropEnd();
+
+  VideoBitrateAllocation GetBitrateAllocationAndNotifyObserver(
+      const uint32_t target_bitrate_bps,
+      uint32_t framerate_fps) RTC_RUN_ON(&encoder_queue_);
+  uint32_t GetInputFramerateFps() RTC_RUN_ON(&encoder_queue_);
 
   // Class holding adaptation information.
   class AdaptCounter final {
@@ -269,6 +276,19 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
       RTC_GUARDED_BY(&encoder_queue_);
 
   VideoEncoder::EncoderInfo encoder_info_ RTC_GUARDED_BY(&encoder_queue_);
+  // These need to be guarded by a lock since the are used by the OnEncodedImage
+  // callback, which may need to return a status synchronously in case internal
+  // source is used.
+  // TODO(sprang): Remove this lock when internal source is gone.
+  rtc::CriticalSection frame_control_lock_;
+  bool encoder_has_internal_source_ RTC_GUARDED_BY(&frame_control_lock_);
+  FrameDropper frame_dropper_ RTC_GUARDED_BY(&frame_control_lock_);
+  // Even if frame dropper is not force disabled, frame dropping might still be
+  // disabled if VideoEncoder::GetEncoderInfo() indicates that the encoder has a
+  // trusted rate controller. This is determined on a per-frame basis, as the
+  // encoder behavior might dynamically change.
+  bool force_disable_frame_dropper_ RTC_GUARDED_BY(&frame_control_lock_);
+  RateStatistics input_framerate_ RTC_GUARDED_BY(&frame_control_lock_);
 
   // All public methods are proxied to |encoder_queue_|. It must must be
   // destroyed first to make sure no tasks are run that use other members.
