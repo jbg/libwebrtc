@@ -11,4 +11,16 @@ specific_include_rules = {
     "+rtc_base/thread.h",
     "+rtc_base/thread_checker.h",
   ],
+  "create_network_emulation_manager\.h": [
+    "+system_wrappers/include/clock.h",
+  ],
+  "network\.h": [
+    "+rtc_base/asyncsocket.h",
+    "+rtc_base/copyonwritebuffer.h",
+    "+rtc_base/socketaddress.h",
+    "+rtc_base/thread.h",
+  ],
+  "network_emulation_manager\.h": [
+    "+rtc_base/thread.h",
+  ],
 }
