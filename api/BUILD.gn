@@ -321,6 +321,36 @@ rtc_source_set("simulated_network_api") {
   ]
 }
 
+rtc_source_set("simulated_network_manager") {
+  visibility = [ "*" ]
+  sources = [
+    "test/network.cc",
+    "test/network.h",
+    "test/network_emulation_manager.h",
+  ]
+  deps = [
+    ":simulated_network_api",
+    "//api/units:timestamp",
+    "//rtc_base:rtc_base",
+    "//system_wrappers:system_wrappers",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
+rtc_source_set("create_simulated_network_manager") {
+  visibility = [ "*" ]
+  sources = [
+    "test/create_network_emulation_manager.cc",
+    "test/create_network_emulation_manager.h",
+  ]
+  deps = [
+    ":simulated_network_manager",
+    "//system_wrappers:system_wrappers",
+    "//test:network_emulation_manager_impl",
+    "//third_party/abseil-cpp/absl/memory:memory",
+  ]
+}
+
 rtc_source_set("fec_controller_api") {
   visibility = [ "*" ]
   sources = [

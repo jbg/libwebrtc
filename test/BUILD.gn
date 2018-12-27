@@ -864,3 +864,42 @@ if (!build_with_chromium && is_android) {
     ]
   }
 }
+
+rtc_source_set("network_emulation_manager_impl") {
+  sources = [
+    "pc/e2e/fake_network_socket_server.cc",
+    "pc/e2e/fake_network_socket_server.h",
+    "pc/e2e/network.cc",
+    "pc/e2e/network.h",
+    "pc/e2e/network_emulation_manager.cc",
+    "pc/e2e/network_emulation_manager.h",
+  ]
+  deps = [
+    "//api:simulated_network_api",
+    "//api:simulated_network_manager",
+    "//api/units:time_delta",
+    "//api/units:timestamp",
+    "//rtc_base:checks",
+    "//rtc_base:rtc_base",
+    "//rtc_base:rtc_base_approved",
+    "//rtc_base:rtc_task_queue_api",
+    "//rtc_base/third_party/sigslot:sigslot",
+    "//system_wrappers:system_wrappers",
+    "//third_party/abseil-cpp/absl/memory:memory",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
+rtc_source_set("network_emulation_unittest") {
+  testonly = true
+  sources = [
+    "pc/e2e/network_emulation_unittest.cc",
+  ]
+  deps = [
+    ":test_support",
+    "//api:create_simulated_network_manager",
+    "//api:simulated_network_manager",
+    "//rtc_base:logging",
+    "//rtc_base:rtc_event",
+  ]
+}
