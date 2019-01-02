@@ -66,7 +66,11 @@ void TestLibYuv::SetUp() {
   rtc::scoped_refptr<I420BufferInterface> buffer(
       test::ReadI420Buffer(width_, height_, source_file_));
 
-  orig_frame_.reset(new VideoFrame(buffer, kVideoRotation_0, 0));
+  orig_frame_ = VideoFrame::Builder()
+                    .set_video_frame_buffer(buffer)
+                    .set_rotation(webrtc::kVideoRotation_0)
+                    .set_timestamp_us(0)
+                    .buildUnique();
 }
 
 void TestLibYuv::TearDown() {
