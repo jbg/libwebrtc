@@ -49,6 +49,52 @@
     },
     {
       "key": {
+        "uuid": "a861d4c1_f1e2735e",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-02T14:46:28Z",
+      "side": 1,
+      "message": "nit: I don\u0027t know what\u0027s the practice, but this list of deps doesn\u0027t look like it\u0027s sorted lexically.",
+      "range": {
+        "startLine": 335,
+        "startChar": 4,
+        "endLine": 335,
+        "endChar": 17
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bf87d48_19621f3d",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-02T14:46:28Z",
+      "side": 1,
+      "message": "nit: in one place you call it \"simulated network manager\" and in another \"network emulation manager\" -- could we stick to one name?",
+      "range": {
+        "startLine": 340,
+        "startChar": 23,
+        "endLine": 340,
+        "endChar": 40
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "878842b8_ac560aa7",
         "filename": "api/test/create_network_emulation_manager.h",
         "patchSetId": 5
@@ -234,6 +280,29 @@
       "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20240c6e_3e5609d9",
+        "filename": "api/test/network.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-02T14:46:28Z",
+      "side": 1,
+      "message": "nit: isn\u0027t it typically \"const int\" and not \"int const\"?",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 12
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
