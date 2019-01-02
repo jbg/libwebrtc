@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ca06092_6054041b",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-02T09:19:12Z",
+      "side": 1,
+      "message": "This says \"simulated\", but the file name uses \"emulation\".",
+      "range": {
+        "startLine": 324,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 25
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "878842b8_ac560aa7",
+        "filename": "api/test/create_network_emulation_manager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-02T09:19:12Z",
+      "side": 1,
+      "message": "Note that we have two clock implementations rtc::Get... and webrtc::Clock, overriding one doesn\u0027t guarantee consistency with the other.",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fc55486_3a95fd56",
+        "filename": "api/test/network.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-02T09:19:12Z",
+      "side": 1,
+      "message": "Is this a representation of an IP packet? Might be good to be explicit on the abstraction level here.",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c419fca_739777c5",
+        "filename": "api/test/network.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-02T09:19:12Z",
+      "side": 1,
+      "message": "This constructor takes a bit too many arguments, which is hard to maintain. I suggest using brace initialisation if it\u0027s only created internally to this target or explicit field assignment if created externally.",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 23
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94c47331_fc584ed9",
+        "filename": "api/test/network.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-02T09:19:12Z",
+      "side": 1,
+      "message": "Suggestion, use |this| instead of maintaining a separate id, as long as NetworkNodes are not destroyed during a session it will be unique.",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 31
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
