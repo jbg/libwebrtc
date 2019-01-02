@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c76d3cc_fad949a6",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1962,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-01-02T09:08:54Z",
+      "side": 1,
+      "message": "Not sure if it is fragile to require that the timestamp difference should be exactly equal to the packet duration. WDYT?",
+      "range": {
+        "startLine": 1962,
+        "startChar": 10,
+        "endLine": 1962,
+        "endChar": 36
+      },
+      "revId": "669b6c5b6e328267ab2b6529a3bd6dadd18d70f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
