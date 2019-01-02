@@ -120,12 +120,13 @@ int H264DecoderImpl::AVGetBuffer2(
   // TODO(nisse): The VideoFrame's timestamp and rotation info is not used.
   // Refactor to do not use a VideoFrame object at all.
   av_frame->buf[0] = av_buffer_create(
-      av_frame->data[kYPlaneIndex],
-      total_size,
-      AVFreeBuffer2,
-      static_cast<void*>(new VideoFrame(frame_buffer,
-                                        kVideoRotation_0,
-                                        0 /* timestamp_us */)),
+      av_frame->data[kYPlaneIndex], total_size, AVFreeBuffer2,
+      static_cast<void*>(VideoFrame::Builder()
+                             .set_video_frame_buffer(frame_buffer)
+                             .set_rotation(kVideoRotation_0)
+                             .set_timestamp_us(0)
+                             .buildUnique()
+                             .release()),
       0);
   RTC_CHECK(av_frame->buf[0]);
   return 0;
