@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f0262e9_6935a2d0",
+        "filename": "video/end_to_end_tests/stats_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-02T08:33:26Z",
+      "side": 1,
+      "message": "The cpplint presubmit check wants a blank line before public:,unclear why.",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 12
+      },
+      "revId": "9e0804f779e37bf3a3cd25bc02b2c9f72991f3d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
