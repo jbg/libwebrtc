@@ -22,6 +22,30 @@
       "revId": "9e0804f779e37bf3a3cd25bc02b2c9f72991f3d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7aeee43b_26ae4c32",
+        "filename": "video/end_to_end_tests/stats_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-02T08:40:18Z",
+      "side": 1,
+      "message": "That is weird. I suggest we add this comment on line 247:\n\n// NOLINT(whitespace/blank_line)",
+      "parentUuid": "5f0262e9_6935a2d0",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 12
+      },
+      "revId": "9e0804f779e37bf3a3cd25bc02b2c9f72991f3d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
