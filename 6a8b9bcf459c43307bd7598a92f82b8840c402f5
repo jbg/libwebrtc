@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "26a747aa_fa0c7f37",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-02T15:39:50Z",
+      "side": 1,
+      "message": "I didn\u0027t see such requirement in other builders, so don\u0027t know :(\n\nIt is not only in test code, so copy constructor can have too much overhead. Should I switch to move? I\u0027m not sure, will there be overhead because of it..",
+      "parentUuid": "c0754a9c_027f64e1",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "6a8b9bcf459c43307bd7598a92f82b8840c402f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4408684a_97cd418e",
         "filename": "api/video/video_frame.h",
         "patchSetId": 14
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "15fc49f4_c2374814",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-02T15:39:50Z",
+      "side": 1,
+      "message": "Only tests use is expected, so to add lower memory overhead and to be able to fit it into transports in test, so it will also less affect real data size.",
+      "parentUuid": "4408684a_97cd418e",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "6a8b9bcf459c43307bd7598a92f82b8840c402f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5a20011_cfcb569e",
         "filename": "api/video/video_frame.h",
         "patchSetId": 14
@@ -68,6 +116,30 @@
       "revId": "6a8b9bcf459c43307bd7598a92f82b8840c402f5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e601b47_6119f5d6",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-02T15:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5a20011_cfcb569e",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 63
+      },
+      "revId": "6a8b9bcf459c43307bd7598a92f82b8840c402f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
