@@ -69,8 +69,11 @@ class FakeWebRtcVideoCaptureModule : public webrtc::VideoCaptureModule {
       // Initialize memory to satisfy DrMemory tests. See
       // https://bugs.chromium.org/p/libyuv/issues/detail?id=377
       buffer->InitializeData();
-      callback_->OnFrame(webrtc::VideoFrame(buffer, webrtc::kVideoRotation_0,
-                                            0 /* timestamp_us */));
+      callback_->OnFrame(webrtc::VideoFrame::Builder()
+                             .set_video_frame_buffer(buffer)
+                             .set_rotation(webrtc::kVideoRotation_0)
+                             .set_timestamp_us(0)
+                             .build());
     });
   }
 
