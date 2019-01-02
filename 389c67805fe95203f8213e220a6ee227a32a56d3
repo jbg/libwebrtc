@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "00c52570_1f791ed3",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-02T09:54:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ca06092_6054041b",
+      "range": {
+        "startLine": 324,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 25
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "878842b8_ac560aa7",
         "filename": "api/test/create_network_emulation_manager.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "096fed64_bdf8c85f",
+        "filename": "api/test/create_network_emulation_manager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-02T09:54:13Z",
+      "side": 1,
+      "message": "Clock are required not to override clock, but for time measurements inside network pipeline, so client can provide right one for pipeline, if he will decide to override clock in webrtc.",
+      "parentUuid": "878842b8_ac560aa7",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0d100c24_2d5761c0",
+        "filename": "api/test/network.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-02T09:54:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fc55486_3a95fd56",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c419fca_739777c5",
         "filename": "api/test/network.h",
         "patchSetId": 5
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "b0ce81ff_dc65c1db",
+        "filename": "api/test/network.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-02T09:54:13Z",
+      "side": 1,
+      "message": "I put them in constructor to show, that all of them are required. If you field setters, some of them can be missed and it will lead to unexpected behavior somewhere in the pipeline. With brace initialization also some arguments can be missed.",
+      "parentUuid": "5c419fca_739777c5",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 23
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94c47331_fc584ed9",
         "filename": "api/test/network.h",
         "patchSetId": 5
@@ -114,6 +210,30 @@
       "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7c86e71_eefdb7b1",
+        "filename": "api/test/network.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-02T09:54:13Z",
+      "side": 1,
+      "message": "I think small ids will be easier to read during debugging, and main purpose of ids is to make it more traceable and debugable, it is why I think id is better. Also they will be equal between different runs (usually), which also will make it easier to debug.",
+      "parentUuid": "94c47331_fc584ed9",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 31
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
