@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0754a9c_027f64e1",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-02T13:57:46Z",
+      "side": 1,
+      "message": "Do any other builders have a method like this? If it\u0027s used by tests only, I\u0027d prefer to go via copy (or move) constructor,\n\nstd::unique_ptr\u003cVideoFrame\u003e frame \u003d absl::make_unique\u003cVideoFrame\u003e(builder.build());",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "6a8b9bcf459c43307bd7598a92f82b8840c402f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4408684a_97cd418e",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-02T13:57:46Z",
+      "side": 1,
+      "message": "Why only 16 bits?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "6a8b9bcf459c43307bd7598a92f82b8840c402f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5a20011_cfcb569e",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-02T13:57:46Z",
+      "side": 1,
+      "message": "Some more context would be nice. Is it intended to be copied to and from encoded frames? When used, is it intended to be unique per video source, or more globally?\n\nNits: \"transferred\" with double r. And either \"from sender to receiver\" or \"from the sender to the receiver\".",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 63
+      },
+      "revId": "6a8b9bcf459c43307bd7598a92f82b8840c402f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
