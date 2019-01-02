@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1eda3afb_3e55e910",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-02T08:01:59Z",
+      "side": 1,
+      "message": "const bool?\n\nNaming is a bit unclear, it\u0027s not obviously connected neither to assignment nor use.\n\nLogic below seems to be to call various callbacks the first time rate_allocator_ is assigned a non-null value, *if* we also have a non-zero |last_observed_bitrate_bps_| at that time. Probably deserves a motivating comment.",
+      "range": {
+        "startLine": 558,
+        "startChar": 2,
+        "endLine": 558,
+        "endChar": 6
+      },
+      "revId": "5b2ebb0eb265cbe0f0db851118a4087d35d03a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
