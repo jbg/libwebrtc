@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "aea68767_9056a6c2",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-03T13:03:25Z",
+      "side": 1,
+      "message": "I like ReadAll() as a name becaue it is a) clear, and b) unusual. ReadData is neither.",
+      "parentUuid": "0bef059c_73a94c96",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "753cf6dd_25c3a637",
         "filename": "rtc_base/filerotatingstream.h",
         "patchSetId": 9
@@ -69,6 +87,24 @@
       "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "515bf6aa_b6a7e6b3",
+        "filename": "rtc_base/filerotatingstream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-03T13:03:25Z",
+      "side": 1,
+      "message": "OK, that\u0027s a reasonable argument.",
+      "parentUuid": "e2f53dde_db563670",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "7d282137_e979eef7",
+        "filename": "rtc_base/filerotatingstream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-03T13:03:25Z",
+      "side": 1,
+      "message": "Both marking the methods as const and calling the method ReadAll() would help make it clear what this class is doing.\n\nYou\u0027re missing a class comment anyway - saying \"This class reads a bunch of files as if they were one file, all in one go\" would make the intent obvious.",
+      "parentUuid": "4d33ba55_475df1c0",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "979b7838_3c2e76e1",
         "filename": "rtc_base/filerotatingstream_unittest.cc",
         "patchSetId": 9
@@ -136,6 +190,24 @@
       "side": 1,
       "message": "I would prefer to temporarily keep it this way, and then delete the above half of the method together with all read-support in FileRotatingStream.\n\nAnd I view this as primarily a test for FileRotatingStream.\n\nDo you think we need separate tests for FileRotatingStreamReader? Such a test should create a directory, populate it with some files, and then ues FileRotatingStreamReader to read the data.",
       "parentUuid": "979b7838_3c2e76e1",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd79f6a2_5355c362",
+        "filename": "rtc_base/filerotatingstream_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-03T13:03:25Z",
+      "side": 1,
+      "message": "OK, please add TODO() delete test so that it\u0027s obvious to people who read this in the meantime.",
+      "parentUuid": "3ffb6719_db07cf6c",
       "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
