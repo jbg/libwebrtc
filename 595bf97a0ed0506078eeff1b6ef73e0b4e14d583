@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "01fb9da4_26be8d07",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T13:22:34Z",
+      "side": 1,
+      "message": "Renamed accordingly.",
+      "parentUuid": "aea68767_9056a6c2",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "753cf6dd_25c3a637",
         "filename": "rtc_base/filerotatingstream.h",
         "patchSetId": 9
@@ -161,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "41d5d390_db71224f",
+        "filename": "rtc_base/filerotatingstream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T13:22:34Z",
+      "side": 1,
+      "message": "\u003e Both marking the methods as const and calling the method ReadAll() would help make it clear what this class is doing.\n\nDone.\n\n\u003e You\u0027re missing a class comment anyway - saying \"This class reads a bunch of files as if they were one file, all in one go\" would make the intent obvious.\n\nLatest patchset has a class comment. Does it look ok?",
+      "parentUuid": "7d282137_e979eef7",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "979b7838_3c2e76e1",
         "filename": "rtc_base/filerotatingstream_unittest.cc",
         "patchSetId": 9
@@ -211,6 +247,24 @@
       "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84fb580e_a97cb198",
+        "filename": "rtc_base/filerotatingstream_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T13:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd79f6a2_5355c362",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -321,6 +375,30 @@
       "side": 1,
       "message": "No, unfortunately primitive arrays\u0027 length cannot be modified. It would probably be better if the API used ByteBuffers instead but I think that goes beyond the scope of this CL.",
       "parentUuid": "d2c8ff88_ada0cf8c",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a13892c_34a58473",
+        "filename": "sdk/android/src/jni/pc/callsessionfilerotatinglogsink.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T13:22:34Z",
+      "side": 1,
+      "message": "I\u0027ll add a TODO item on that.",
+      "parentUuid": "7b1bf452_4f927fd8",
       "range": {
         "startLine": 61,
         "startChar": 0,
