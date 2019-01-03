@@ -67,6 +67,29 @@
       "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8548bdc9_593e8f86",
+        "filename": "sdk/android/src/jni/pc/callsessionfilerotatinglogsink.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-01-03T11:37:48Z",
+      "side": 1,
+      "message": "I don\u0027t think it is necessary to make a copy here. You could create the Java byte array, call GetByteArrayElements and then call ReleaseByteArrayElements with JNI_COMMIT.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
