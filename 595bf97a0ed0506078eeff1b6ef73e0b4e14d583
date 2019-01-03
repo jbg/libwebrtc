@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10db31fc_186f6f2b",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-03T11:22:38Z",
+      "side": 1,
+      "message": "This ReadData() implementation will always read from the start of the first file, and the only way to get something far into the file series is to slurp it all in at once.\n\nThat\u0027s very different from the current implementation of FileRotatingStream::Read(), but is similar to the semantics of ReadAll(). Is there a reason why it\u0027s not called ReadAll()?",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "753cf6dd_25c3a637",
+        "filename": "rtc_base/filerotatingstream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-03T11:22:38Z",
+      "side": 1,
+      "message": "It seems a bit weird to not inherit from StreamInterface, even if the whole point is to create a class that has no write() methods. Inheritance would help avoid gratuitous differences (like the ReadAll/ReadData distinction remarked on below).",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "844b5d1a_c751b6e7",
+        "filename": "rtc_base/filerotatingstream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-03T11:22:38Z",
+      "side": 1,
+      "message": "The special semantics of ReadData() as opposed to Read() needs a comment.",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "979b7838_3c2e76e1",
+        "filename": "rtc_base/filerotatingstream_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-03T11:22:38Z",
+      "side": 1,
+      "message": "I would prefer to have the tests for FileRotatingStreamReader written as separate tests. While they share setup, they are tests for two completely different classes.",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
