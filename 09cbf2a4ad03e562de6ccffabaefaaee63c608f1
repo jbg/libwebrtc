@@ -22,6 +22,30 @@
       "revId": "09cbf2a4ad03e562de6ccffabaefaaee63c608f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbb430f0_c6ab458a",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-03T13:18:32Z",
+      "side": 1,
+      "message": "Forgot to remove it from interface, thanks.",
+      "parentUuid": "1472e76b_bbdb81ae",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "09cbf2a4ad03e562de6ccffabaefaaee63c608f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
