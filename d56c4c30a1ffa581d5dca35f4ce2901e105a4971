@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc4b3542_8fa81b00",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2266,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-03T18:21:22Z",
+      "side": 1,
+      "message": "Yes, just go ahead and make this a std::string",
+      "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2396a7bf_60170215",
+        "filename": "pc/unique_id_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-03T18:21:22Z",
+      "side": 1,
+      "message": "May be it\u0027s more obvious to others, but it might be nice have a comment on why we don\u0027t need to add it to the known ID set if it\u0027s not an integer.",
+      "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95faf6e6_5fe36873",
+        "filename": "pc/unique_id_generator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-03T18:21:22Z",
+      "side": 1,
+      "message": "This comment isn\u0027t quite accurate any more unless AddKnownId isn\u0027t supported.\n\nAn alternative API that would still allow this implementation is to not have AddKnownId and instead a getter for the set of known IDs. Then the client would get the set, add its known IDs, and construct a new generator.\n\nAnother alternative is to have AddKnownId return a new generator.",
+      "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e30bf7aa_f2f8e306",
+        "filename": "pc/unique_id_generator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-03T18:21:22Z",
+      "side": 1,
+      "message": "absl::string_view",
+      "range": {
+        "startLine": 100,
+        "startChar": 18,
+        "endLine": 100,
+        "endChar": 36
+      },
+      "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
