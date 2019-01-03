@@ -42,6 +42,7 @@
 #include "pc/sctputils.h"
 #include "pc/sdputils.h"
 #include "pc/streamcollection.h"
+#include "pc/unique_id_generator.h"
 #include "pc/videocapturertracksource.h"
 #include "pc/videotrack.h"
 #include "rtc_base/bind.h"
@@ -648,25 +649,6 @@ DataMessageType ToWebrtcDataMessageType(cricket::DataMessageType type) {
       RTC_NOTREACHED();
   }
   return DataMessageType::kControl;
-}
-
-// Find a new MID that is not already in |used_mids|, then add it to |used_mids|
-// and return a reference to it.
-// Generated MIDs should be no more than 3 bytes long to take up less space in
-// the RTP packet.
-const std::string& AllocateMid(std::set<std::string>* used_mids) {
-  RTC_DCHECK(used_mids);
-  // We're boring: just generate MIDs 0, 1, 2, ...
-  size_t i = 0;
-  std::set<std::string>::iterator it;
-  bool inserted;
-  do {
-    std::string mid = rtc::ToString(i++);
-    auto insert_result = used_mids->insert(mid);
-    it = insert_result.first;
-    inserted = insert_result.second;
-  } while (!inserted);
-  return *it;
 }
 
 }  // namespace
@@ -2275,12 +2257,12 @@ void PeerConnection::FillInMissingRemoteMids(
   const cricket::ContentInfos& local_contents =
       (local_description() ? local_description()->description()->contents()
                            : cricket::ContentInfos());
-  std::set<std::string> used_mids = seen_mids_;
   for (size_t i = 0; i < remote_description->contents().size(); ++i) {
     cricket::ContentInfo& content = remote_description->contents()[i];
     if (!content.name.empty()) {
       continue;
     }
+    std::string generated_mid;
     absl::string_view new_mid;
     absl::string_view source_explanation;
     if (IsUnifiedPlan()) {
@@ -2288,7 +2270,8 @@ void PeerConnection::FillInMissingRemoteMids(
         new_mid = local_contents[i].name;
         source_explanation = "from the matching local media section";
       } else {
-        new_mid = AllocateMid(&used_mids);
+        generated_mid = mid_generator_();
+        new_mid = generated_mid;
         source_explanation = "generated just now";
       }
     } else {
@@ -2793,7 +2776,7 @@ RTCError PeerConnection::UpdateTransceiversAndDataChannels(
   for (size_t i = 0; i < new_contents.size(); ++i) {
     const cricket::ContentInfo& new_content = new_contents[i];
     cricket::MediaType media_type = new_content.media_description()->type();
-    seen_mids_.insert(new_content.name);
+    mid_generator_.AddKnownId(new_content.name);
     if (media_type == cricket::MEDIA_TYPE_AUDIO ||
         media_type == cricket::MEDIA_TYPE_VIDEO) {
       const cricket::ContentInfo* old_local_content = nullptr;
@@ -4075,9 +4058,6 @@ void PeerConnection::GetOptionsForUnifiedPlanOffer(
   // The mline indices that can be recycled. New transceivers should reuse these
   // slots first.
   std::queue<size_t> recycleable_mline_indices;
-  // Track the MIDs used in previous offer/answer exchanges and the current
-  // offer so that new, unique MIDs are generated.
-  std::set<std::string> used_mids = seen_mids_;
   // First, go through each media section that exists in either the local or
   // remote description and generate a media section in this offer for the
   // associated transceiver. If a media section can be recycled, generate a
@@ -4135,6 +4115,7 @@ void PeerConnection::GetOptionsForUnifiedPlanOffer(
       }
     }
   }
+
   // Next, look for transceivers that are newly added (that is, are not stopped
   // and not associated). Reuse media sections marked as recyclable first,
   // otherwise append to the end of the offer. New media sections should be
@@ -4149,12 +4130,12 @@ void PeerConnection::GetOptionsForUnifiedPlanOffer(
       recycleable_mline_indices.pop();
       session_options->media_description_options[mline_index] =
           GetMediaDescriptionOptionsForTransceiver(transceiver,
-                                                   AllocateMid(&used_mids));
+                                                   mid_generator_());
     } else {
       mline_index = session_options->media_description_options.size();
       session_options->media_description_options.push_back(
           GetMediaDescriptionOptionsForTransceiver(transceiver,
-                                                   AllocateMid(&used_mids)));
+                                                   mid_generator_()));
     }
     // See comment above for why CreateOffer changes the transceiver's state.
     transceiver->internal()->set_mline_index(mline_index);
@@ -4163,7 +4144,7 @@ void PeerConnection::GetOptionsForUnifiedPlanOffer(
   // does not already exist.
   if (!GetDataMid() && HasDataChannels()) {
     session_options->media_description_options.push_back(
-        GetMediaDescriptionOptionsForActiveData(AllocateMid(&used_mids)));
+        GetMediaDescriptionOptionsForActiveData(mid_generator_()));
   }
 }
 
