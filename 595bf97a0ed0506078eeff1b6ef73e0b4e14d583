@@ -306,6 +306,30 @@
       "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b1bf452_4f927fd8",
+        "filename": "sdk/android/src/jni/pc/callsessionfilerotatinglogsink.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-01-03T13:07:24Z",
+      "side": 1,
+      "message": "No, unfortunately primitive arrays\u0027 length cannot be modified. It would probably be better if the API used ByteBuffers instead but I think that goes beyond the scope of this CL.",
+      "parentUuid": "d2c8ff88_ada0cf8c",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
