@@ -210,6 +210,30 @@
       "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2c8ff88_ada0cf8c",
+        "filename": "sdk/android/src/jni/pc/callsessionfilerotatinglogsink.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T13:01:19Z",
+      "side": 1,
+      "message": "Is there no way to truncate a java byte array without copying it? \n\nThe corresponding objc code allocates storage with malloc, and then moves it to an objc NSMutableData using initWithBytesNoCopy:length:, where the argument for length: is the actual (possibly smaller) size.",
+      "parentUuid": "1dc112be_f1a856dc",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
