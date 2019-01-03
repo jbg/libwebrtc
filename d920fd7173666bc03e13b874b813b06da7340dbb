@@ -22,6 +22,30 @@
       "revId": "d920fd7173666bc03e13b874b813b06da7340dbb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fde0fdac_2b26bb09",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-01-03T09:32:06Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion either way. I think it\u0027s fine as-is but feel free to change it.",
+      "parentUuid": "10f5cc9f_e83a6ee3",
+      "range": {
+        "startLine": 542,
+        "startChar": 32,
+        "endLine": 542,
+        "endChar": 39
+      },
+      "revId": "d920fd7173666bc03e13b874b813b06da7340dbb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
