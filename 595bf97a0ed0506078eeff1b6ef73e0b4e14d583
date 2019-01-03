@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0bef059c_73a94c96",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T12:39:51Z",
+      "side": 1,
+      "message": "\u003e This ReadData() implementation will always read from the start of the first file, and the only way to get something far into the file series is to slurp it all in at once.\n\nExactly.\n\n\u003e That\u0027s very different from the current implementation of FileRotatingStream::Read(), but is similar to the semantics of ReadAll(). Is there a reason why it\u0027s not called ReadAll()?\n\nIt can be ReadAll, if you think that\u0027s a good name. I don\u0027t think consistency with the current ReadAll method is important, though, because it becomes unused and I intend to delete it in a followup cl.",
+      "parentUuid": "10db31fc_186f6f2b",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "753cf6dd_25c3a637",
         "filename": "rtc_base/filerotatingstream.h",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2019-01-03T11:22:38Z",
       "side": 1,
       "message": "It seems a bit weird to not inherit from StreamInterface, even if the whole point is to create a class that has no write() methods. Inheritance would help avoid gratuitous differences (like the ReadAll/ReadData distinction remarked on below).",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2f53dde_db563670",
+        "filename": "rtc_base/filerotatingstream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T12:39:51Z",
+      "side": 1,
+      "message": "To me, the defining feature of a stream is that the data can be processed incrementally. The new class intentionally doesn\u0027t support that at all. It only supports the usecase of the mobile api, which is to get all data at once.",
+      "parentUuid": "753cf6dd_25c3a637",
       "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4d33ba55_475df1c0",
+        "filename": "rtc_base/filerotatingstream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T12:39:51Z",
+      "side": 1,
+      "message": "Is it sufficient with a class-level comment, saying that the purpose of the class is help reading out the complete data produced by a FileRotatingStream? I\u0027d be happy to rename this method; it could be plain Read, except that maybe there will be some confusion with the stream interface which it\u0027s not really doing.\n\nWould it make things clearer to mark the GetSize and ReadData methods as const? They depend on filesystem state, but they don\u0027t change the state of the object in any way.",
+      "parentUuid": "844b5d1a_c751b6e7",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "979b7838_3c2e76e1",
         "filename": "rtc_base/filerotatingstream_unittest.cc",
         "patchSetId": 9
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "3ffb6719_db07cf6c",
+        "filename": "rtc_base/filerotatingstream_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T12:39:51Z",
+      "side": 1,
+      "message": "I would prefer to temporarily keep it this way, and then delete the above half of the method together with all read-support in FileRotatingStream.\n\nAnd I view this as primarily a test for FileRotatingStream.\n\nDo you think we need separate tests for FileRotatingStreamReader? Such a test should create a directory, populate it with some files, and then ues FileRotatingStreamReader to read the data.",
+      "parentUuid": "979b7838_3c2e76e1",
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8548bdc9_593e8f86",
         "filename": "sdk/android/src/jni/pc/callsessionfilerotatinglogsink.cc",
         "patchSetId": 9
@@ -81,6 +153,30 @@
       "writtenOn": "2019-01-03T11:37:48Z",
       "side": 1,
       "message": "I don\u0027t think it is necessary to make a copy here. You could create the Java byte array, call GetByteArrayElements and then call ReleaseByteArrayElements with JNI_COMMIT.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "595bf97a0ed0506078eeff1b6ef73e0b4e14d583",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b68fc2a3_a47f68cf",
+        "filename": "sdk/android/src/jni/pc/callsessionfilerotatinglogsink.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-03T12:39:51Z",
+      "side": 1,
+      "message": "To do that, I\u0027d create the byte array with size log_size. But I\u0027d also need to set the actual size, returned by ReadData, which might be smaller. How can I do that? I see nothing obvious on https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/functions.html",
+      "parentUuid": "8548bdc9_593e8f86",
       "range": {
         "startLine": 61,
         "startChar": 0,
