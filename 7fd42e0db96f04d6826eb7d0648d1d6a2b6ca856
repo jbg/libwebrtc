@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b03cd35a_8560bde4",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-01-03T16:26:30Z",
+      "side": 1,
+      "message": "remove this comma",
+      "range": {
+        "startLine": 80,
+        "startChar": 28,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "7fd42e0db96f04d6826eb7d0648d1d6a2b6ca856",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0a84ead_598f67be",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-01-03T16:26:30Z",
+      "side": 1,
+      "message": "It is intended",
+      "range": {
+        "startLine": 83,
+        "startChar": 51,
+        "endLine": 83,
+        "endChar": 52
+      },
+      "revId": "7fd42e0db96f04d6826eb7d0648d1d6a2b6ca856",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cae2796_bdcad1ae",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-01-03T16:26:30Z",
+      "side": 1,
+      "message": "Is there a reason for uint16 instead of int64_t for instance?",
+      "range": {
+        "startLine": 160,
+        "startChar": 2,
+        "endLine": 160,
+        "endChar": 10
+      },
+      "revId": "7fd42e0db96f04d6826eb7d0648d1d6a2b6ca856",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
