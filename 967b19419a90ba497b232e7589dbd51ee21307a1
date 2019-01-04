@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e905723_81e9cfed",
+        "filename": "api/test/network.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-04T01:05:12Z",
+      "side": 1,
+      "message": "std::strings that are just going to be copied into a member should probably be taken as const ref parameters.",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 40
+      },
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2eb740c_12ab5e71",
+        "filename": "api/test/network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-04T01:05:12Z",
+      "side": 1,
+      "message": "Should this be a reference?",
+      "range": {
+        "startLine": 35,
+        "startChar": 43,
+        "endLine": 35,
+        "endChar": 44
+      },
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c0eab4c_58051c33",
+        "filename": "api/test/network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-04T01:05:12Z",
+      "side": 1,
+      "message": "From reading this header and the cc file, it\u0027s not clear to me what the dest_endpoint_id is for.  Is it required to route the packet?  Shouldn\u0027t `to` be sufficient for that?  Or is it just for logging/debug purposes?",
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2531e414_4bdc6827",
+        "filename": "api/test/network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-04T01:05:12Z",
+      "side": 1,
+      "message": "Nit:  if we\u0027re just going to copy the id into a member, it\u0027s probably better to take the id parameter as a const std::string\u0026.\n\n(Same applies to a few places below.)",
+      "range": {
+        "startLine": 51,
+        "startChar": 36,
+        "endLine": 51,
+        "endChar": 61
+      },
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "452296bf_af9f77c9",
+        "filename": "test/pc/e2e/network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-04T01:05:12Z",
+      "side": 1,
+      "message": "Are we assuming that the IP is always the same for sockets on the same endpoint node?\n\nDoes that exclude any cases we might want to test (eg. endpoints with multiple network interfaces)?\n\nWe don\u0027t necessarily need to support or test those cases in the first iteration, but I\u0027d like to understand what we intend to support.",
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ca8a4c3_e49e1aef",
+        "filename": "test/pc/e2e/network_emulation_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-04T01:05:12Z",
+      "side": 1,
+      "message": "At least to me, it would make more sense for a method called NextTime to return last_call_time_ + interval_ (the next time which it should be called), rather than cur_time + interval_ (one interval after some arbitrary time).\n\nThe way it\u0027s used above, that\u0027s what it does.  However, calling it with any other time just returns \"one interval later\", not the next call time.",
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c94cbac_9c485d10",
+        "filename": "test/pc/e2e/network_emulation_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-04T01:05:12Z",
+      "side": 1,
+      "message": "It seems that CreateRoute is asymmetric--it requires calling CreateRoute(a, b) and CreateRoute(b, a) in order to establish bidirectional connectivity.  However, we set both endpoints as connected to each other in the first call.  Why is that?",
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
