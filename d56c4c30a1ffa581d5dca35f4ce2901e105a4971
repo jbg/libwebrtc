@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "48b65067_1343fcf0",
+        "filename": "pc/peerconnection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2266,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-01-04T00:25:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc4b3542_8fa81b00",
+      "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2396a7bf_60170215",
         "filename": "pc/unique_id_generator.cc",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e03cfc48_09795089",
+        "filename": "pc/unique_id_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-01-04T00:25:27Z",
+      "side": 1,
+      "message": "// The underlying generator works for uint32_t values, so if the provided\n// value is not a uint32_t it will never be generated anyway.",
+      "parentUuid": "2396a7bf_60170215",
+      "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95faf6e6_5fe36873",
         "filename": "pc/unique_id_generator.h",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f557dd91_bd656bf0",
+        "filename": "pc/unique_id_generator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-01-04T00:25:27Z",
+      "side": 1,
+      "message": "What this means is that there should be two versions of this class, one that is a strict generator, and the other that can receive values from the outside, and the user should be unaware that these are actually two different implementations.\ni will remove the comment altogether as it has become more complicated to do this (and it\u0027s not even required).",
+      "parentUuid": "95faf6e6_5fe36873",
+      "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -73,6 +127,30 @@
       "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d08c4bbb_742964f1",
+        "filename": "pc/unique_id_generator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-01-04T00:25:27Z",
+      "side": 1,
+      "message": "in general, i agree with you that this method should have been written with string_view, but in this case, the parameter should match the value_type (for template reasons).\ni can add an overload, though.\nAfter trying to add the overload, it would be terrible because rtc::StringToNumber doesn\u0027t support string_view which will make a somewhat circular route and be even less efficient:\nFoo(string) { string_view(string); Foo(string_view); }\nFoo(string_view) { string(string_view); Bar(string); }",
+      "parentUuid": "e30bf7aa_f2f8e306",
+      "range": {
+        "startLine": 100,
+        "startChar": 18,
+        "endLine": 100,
+        "endChar": 36
+      },
+      "revId": "d56c4c30a1ffa581d5dca35f4ce2901e105a4971",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
