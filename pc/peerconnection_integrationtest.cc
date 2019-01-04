@@ -5004,6 +5004,36 @@ TEST_F(PeerConnectionIntegrationTestPlanB, TwoVideoUnifiedPlanToNoMediaPlanB) {
   ASSERT_TRUE(ExpectNewFrames(media_expectations));
 }
 
+TEST_F(PeerConnectionIntegrationTestUnifiedPlan, Blah) {
+  RTCConfiguration config;
+  config.bundle_policy = PeerConnectionInterface::kBundlePolicyMaxBundle;
+  ASSERT_TRUE(CreatePeerConnectionWrappersWithConfig(config, config));
+  ConnectFakeSignaling();
+  auto audio_transceiver_or_error =
+      caller()->pc()->AddTransceiver(caller()->CreateLocalAudioTrack());
+  ASSERT_TRUE(audio_transceiver_or_error.ok());
+  auto audio_transceiver = audio_transceiver_or_error.MoveValue();
+
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+  {
+    MediaExpectations media_expectations;
+    media_expectations.CalleeExpectsSomeAudio();
+    ASSERT_TRUE(ExpectNewFrames(media_expectations));
+  }
+
+  audio_transceiver->Stop();
+  caller()->pc()->AddTransceiver(caller()->CreateLocalVideoTrack());
+
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+  {
+    MediaExpectations media_expectations;
+    media_expectations.CalleeExpectsSomeVideo();
+    ASSERT_TRUE(ExpectNewFrames(media_expectations));
+  }
+}
+
 }  // namespace
 }  // namespace webrtc
 
