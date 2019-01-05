@@ -22,6 +22,30 @@
       "revId": "5b2ebb0eb265cbe0f0db851118a4087d35d03a63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f3c3dc7_6b20799e",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-05T18:48:55Z",
+      "side": 1,
+      "message": "Added comment. Some of the confusion stems from weird expectations for test cases, should fix that in follow-ups.",
+      "parentUuid": "1eda3afb_3e55e910",
+      "range": {
+        "startLine": 558,
+        "startChar": 2,
+        "endLine": 558,
+        "endChar": 6
+      },
+      "revId": "5b2ebb0eb265cbe0f0db851118a4087d35d03a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
