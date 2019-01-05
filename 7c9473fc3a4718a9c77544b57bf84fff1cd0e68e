@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b5999c79_53a87d1b",
+        "filename": "pc/jseptransportcontroller_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-05T01:52:15Z",
+      "side": 1,
+      "message": "Yeah, it is a bit dodgy but is the common practice in this file. I think improving the situation is outside the scope of this CL.",
+      "parentUuid": "692d1526_81b62c9a",
+      "revId": "7c9473fc3a4718a9c77544b57bf84fff1cd0e68e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d54c413_c8dbb72d",
         "filename": "pc/mediasession_unittest.cc",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "7c9473fc3a4718a9c77544b57bf84fff1cd0e68e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "888107e7_b44a4e5d",
+        "filename": "pc/mediasession_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-05T01:52:15Z",
+      "side": 1,
+      "message": "I don\u0027t think anything special cases \u0027audio\u0027 or \u0027video\u0027 any more. It seems to be the common practice in this test file.",
+      "parentUuid": "9d54c413_c8dbb72d",
+      "revId": "7c9473fc3a4718a9c77544b57bf84fff1cd0e68e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
