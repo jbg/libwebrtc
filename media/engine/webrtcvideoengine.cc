@@ -818,6 +818,15 @@ webrtc::RTCError WebRtcVideoChannel::SetRtpSendParameters(
       preferred_dscp_ = new_dscp;
       MediaChannel::UpdateDscp();
     }
+    // TODO(shampson): This is a quick fix for a bug where the prober's max
+    // bitrate isn't updated based upon the RtpEncodingParameter.max_bitrate_bps
+    // value.
+    if (parameters.encodings[0].max_bitrate_bps) {
+      bitrate_config_.max_bitrate_bps =
+          *parameters.encodings[0].max_bitrate_bps;
+      call_->GetTransportControllerSend()->SetSdpBitrateParameters(
+          bitrate_config_);
+    }
   }
 
   return it->second->SetRtpParameters(parameters);
