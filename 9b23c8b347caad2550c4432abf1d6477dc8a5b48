@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b38e1442_f796384e",
+        "filename": "pc/peerconnection_integrationtest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 5031,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-07T12:31:18Z",
+      "side": 1,
+      "message": "A separate CL perhaps: Should we add a test that makes sure that if we stop the transceiver of the offerer-tagged m\u003d section between offer and answer and bundling is used, we end up rejecting/stopping all of them?",
+      "revId": "9b23c8b347caad2550c4432abf1d6477dc8a5b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
