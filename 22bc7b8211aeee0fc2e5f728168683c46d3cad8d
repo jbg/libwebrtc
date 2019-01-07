@@ -69,6 +69,30 @@
       "revId": "22bc7b8211aeee0fc2e5f728168683c46d3cad8d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9169b72_7b99fc55",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-07T09:45:48Z",
+      "side": 1,
+      "message": "I was thinking of just doing\n\n  result.drop_next_frame \u003d drop_next_frame_.load();\n  drop_next_frame_.store();\n\n(possibly with relaxed memory order), if we don\u0027t aim for any guarantees. Then, we use the atomic to get well defined accesses on platforms where it matters, and silence tsan warnings, but not really guaranteeing anything.\n\nWith a counter, we could do something like\n\n  result.drop_next_frame \u003d (drop_next_frame.fetch_sub(1) \u003e 0);\n  if (!result.drop_next_frame) drop_next_frame.fetch_add(1);  // Undo subtract",
+      "parentUuid": "d862e0a6_40475aeb",
+      "range": {
+        "startLine": 1041,
+        "startChar": 0,
+        "endLine": 1045,
+        "endChar": 0
+      },
+      "revId": "22bc7b8211aeee0fc2e5f728168683c46d3cad8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
