@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c57cf84f_0f72ac19",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-07T13:46:24Z",
+      "side": 1,
+      "message": "Possible but requires some work; it\u0027s used in a couple of places.",
+      "parentUuid": "ca0c6cfd_8207d89b",
+      "range": {
+        "startLine": 249,
+        "startChar": 1,
+        "endLine": 250,
+        "endChar": 0
+      },
+      "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4532070a_ad912060",
         "filename": "rtc_base/filerotatingstream.cc",
         "patchSetId": 6
