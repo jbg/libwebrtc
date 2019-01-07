@@ -93,6 +93,30 @@
       "revId": "22bc7b8211aeee0fc2e5f728168683c46d3cad8d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3341d550_dc166748",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-07T09:52:15Z",
+      "side": 1,
+      "message": "We currently don\u0027t support more than one callback thread with internal encoders anyway, so I think it\u0027s fine to just read and do a fetch_sub if it\u0027s \u003e 0.",
+      "parentUuid": "f9169b72_7b99fc55",
+      "range": {
+        "startLine": 1041,
+        "startChar": 0,
+        "endLine": 1045,
+        "endChar": 0
+      },
+      "revId": "22bc7b8211aeee0fc2e5f728168683c46d3cad8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
