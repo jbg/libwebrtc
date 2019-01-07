@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 
+#include "logging/log_writer/log_writer.h"
 #include "rtc_base/constructormagic.h"
 #include "test/fake_encoder.h"
 #include "test/frame_generator_capturer.h"
@@ -104,7 +105,7 @@ class VideoStreamPair {
   VideoStreamPair(CallClient* sender,
                   CallClient* receiver,
                   VideoStreamConfig config,
-                  std::string quality_log_file_name);
+                  std::unique_ptr<LogWriter> quality_writer);
 
   const VideoStreamConfig config_;
 

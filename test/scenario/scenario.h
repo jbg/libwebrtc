@@ -14,6 +14,7 @@
 #include <utility>
 #include <vector>
 
+#include "logging/log_writer/log_writer.h"
 #include "rtc_base/constructormagic.h"
 #include "rtc_base/fakeclock.h"
 #include "test/scenario/audio_stream.h"
@@ -63,6 +64,8 @@ class Scenario {
   Scenario();
   explicit Scenario(std::string file_name);
   Scenario(std::string file_name, bool real_time);
+  Scenario(std::unique_ptr<LogWriterImplManagerInterface> log_writer_manager,
+           bool real_time);
   RTC_DISALLOW_COPY_AND_ASSIGN(Scenario);
   ~Scenario();
 
@@ -162,15 +165,15 @@ class Scenario {
   // Return the duration of the current session so far.
   TimeDelta Duration();
 
-  std::string GetFullPathOrEmpty(std::string name) const {
-    if (base_filename_.empty() || name.empty())
-      return std::string();
-    return base_filename_ + "." + name;
+  std::unique_ptr<LogWriter> GetLogWriter(std::string name) {
+    if (!log_writer_factory_ || name.empty())
+      return nullptr;
+    return log_writer_factory_->Create(name);
   }
 
  private:
   NullReceiver null_receiver_;
-  std::string base_filename_;
+  std::unique_ptr<LogWriterFactory> log_writer_factory_;
   const bool real_time_mode_;
   SimulatedClock sim_clock_;
   Clock* clock_;

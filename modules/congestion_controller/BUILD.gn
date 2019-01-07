@@ -100,6 +100,7 @@ if (rtc_include_tests) {
       "../../api/units:data_size",
       "../../api/units:time_delta",
       "../../api/units:timestamp",
+      "../../logging/log_writer",
       "../../rtc_base:checks",
       "//third_party/abseil-cpp/absl/types:optional",
     ]

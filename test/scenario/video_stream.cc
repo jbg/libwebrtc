@@ -402,9 +402,10 @@ VideoStreamPair::~VideoStreamPair() = default;
 VideoStreamPair::VideoStreamPair(CallClient* sender,
                                  CallClient* receiver,
                                  VideoStreamConfig config,
-                                 std::string quality_log_file_name)
+                                 std::unique_ptr<LogWriter> quality_writer)
     : config_(config),
-      analyzer_(quality_log_file_name, config.analyzer.frame_quality_handler),
+      analyzer_(std::move(quality_writer),
+                config.analyzer.frame_quality_handler),
       send_stream_(sender, config, &sender->transport_, &analyzer_),
       receive_stream_(receiver,
                       config,

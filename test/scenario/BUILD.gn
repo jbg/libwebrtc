@@ -66,6 +66,8 @@ if (rtc_include_tests) {
       "../../logging:rtc_event_log_api",
       "../../logging:rtc_event_log_impl_base",
       "../../logging:rtc_event_log_impl_output",
+      "../../logging/log_writer",
+      "../../logging/log_writer:file_log_writer",
       "../../media:rtc_audio_video",
       "../../media:rtc_internal_video_codecs",
       "../../media:rtc_media_base",

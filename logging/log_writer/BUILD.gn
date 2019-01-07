@@ -1,0 +1,46 @@
+# Copyright (c) 2019 The WebRTC project authors. All Rights Reserved.
+#
+# Use of this source code is governed by a BSD-style license
+# that can be found in the LICENSE file in the root of the source
+# tree. An additional intellectual property rights grant can be found
+# in the file PATENTS.  All contributing project authors may
+# be found in the AUTHORS file in the root of the source tree.
+
+import("../../webrtc.gni")
+
+rtc_source_set("log_writer") {
+  visibility = [ "*" ]
+  sources = [
+    "log_writer.cc",
+    "log_writer.h",
+  ]
+
+  deps = [
+    "../../api:log_writer_impl",
+    "../../rtc_base:stringutils",
+    "//third_party/abseil-cpp/absl/memory",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
+if (rtc_include_tests) {
+  rtc_source_set("file_log_writer") {
+    testonly = true
+    visibility = [ "*" ]
+    sources = [
+      "file_log_writer.cc",
+      "file_log_writer.h",
+    ]
+
+    deps = [
+      "../../api:log_writer_impl",
+      "../../rtc_base:checks",
+      "../../rtc_base:criticalsection",
+      "../../rtc_base:logging",
+      "../../rtc_base:macromagic",
+      "../../test:fileutils",
+      "//third_party/abseil-cpp/absl/memory",
+      "//third_party/abseil-cpp/absl/types:optional",
+    ]
+  }
+}
