@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ca0c6cfd_8207d89b",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-01-07T13:03:57Z",
+      "side": 1,
+      "message": "is it possible to delete this method completely as it no longer does anything useful?",
+      "range": {
+        "startLine": 249,
+        "startChar": 1,
+        "endLine": 250,
+        "endChar": 0
+      },
+      "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4532070a_ad912060",
         "filename": "rtc_base/filerotatingstream.cc",
         "patchSetId": 6
@@ -22,6 +45,30 @@
       "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "177ff9e3_ca36e3a5",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-01-07T13:03:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4532070a_ad912060",
+      "range": {
+        "startLine": 287,
+        "startChar": 2,
+        "endLine": 287,
+        "endChar": 39
+      },
+      "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
