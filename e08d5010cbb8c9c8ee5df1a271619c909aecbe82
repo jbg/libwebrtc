@@ -22,6 +22,30 @@
       "revId": "e08d5010cbb8c9c8ee5df1a271619c909aecbe82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7f5beb6_284b045c",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-07T14:21:15Z",
+      "side": 1,
+      "message": "\u003e Do you need volatile with atomic?\nSeems not.\n\n\u003e Please add a comment on intended usage (incremented by one thread, decremented by (only one) other thread).\n\nDone.",
+      "parentUuid": "c6ddc7d5_1be35925",
+      "range": {
+        "startLine": 292,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 27
+      },
+      "revId": "e08d5010cbb8c9c8ee5df1a271619c909aecbe82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
