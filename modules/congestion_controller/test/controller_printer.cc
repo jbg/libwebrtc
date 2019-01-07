@@ -20,20 +20,20 @@
 namespace webrtc {
 
 ControlStatePrinter::ControlStatePrinter(
-    FILE* output,
+    std::unique_ptr<LogWriter> output,
     std::unique_ptr<DebugStatePrinter> debug_printer)
-    : output_(output), debug_printer_(std::move(debug_printer)) {}
+    : output_(std::move(output)), debug_printer_(std::move(debug_printer)) {}
 
 ControlStatePrinter::~ControlStatePrinter() = default;
 
 void ControlStatePrinter::PrintHeaders() {
-  fprintf(output_, "time bandwidth rtt target pacing padding window");
+  output_->Write("time bandwidth rtt target pacing padding window");
   if (debug_printer_) {
-    fprintf(output_, " ");
-    debug_printer_->PrintHeaders(output_);
+    output_->Write(" ");
+    debug_printer_->PrintHeaders(output_.get());
   }
-  fprintf(output_, "\n");
-  fflush(output_);
+  output_->Write("\n");
+  output_->Flush();
 }
 
 void ControlStatePrinter::PrintState(const Timestamp time,
@@ -48,16 +48,15 @@ void ControlStatePrinter::PrintState(const Timestamp time,
   double congestion_window = state.congestion_window
                                  ? state.congestion_window->bytes<double>()
                                  : std::numeric_limits<double>::infinity();
-
-  fprintf(output_, "%f %f %f %f %f %f %f", timestamp, bandwidth, rtt,
-          target_rate, pacing_rate, padding_rate, congestion_window);
+  output_->Format("%f %f %f %f %f %f %f", timestamp, bandwidth, rtt,
+                  target_rate, pacing_rate, padding_rate, congestion_window);
 
   if (debug_printer_) {
-    fprintf(output_, " ");
-    debug_printer_->PrintValues(output_);
+    output_->Write(" ");
+    debug_printer_->PrintValues(output_.get());
   }
-  fprintf(output_, "\n");
-  fflush(output_);
+  output_->Write("\n");
+  output_->Flush();
 }
 
 void ControlStatePrinter::PrintState(const Timestamp time) {

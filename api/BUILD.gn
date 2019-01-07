@@ -297,6 +297,16 @@ rtc_source_set("transport_api") {
   ]
 }
 
+rtc_source_set("log_writer_impl") {
+  visibility = [ "*" ]
+  sources = [
+    "log_writer_impl.h",
+  ]
+  deps = [
+    "//third_party/abseil-cpp/absl/strings",
+  ]
+}
+
 rtc_source_set("bitrate_allocation") {
   visibility = [ "*" ]
   sources = [
