@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3294c37c_78c63bcf",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 7833
+      },
+      "writtenOn": "2019-01-07T07:40:35Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 1036,
+        "startChar": 20,
+        "endLine": 1036,
+        "endChar": 23
+      },
+      "revId": "22bc7b8211aeee0fc2e5f728168683c46d3cad8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdc4ddce_2ca859a0",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 7833
+      },
+      "writtenOn": "2019-01-07T07:40:35Z",
+      "side": 1,
+      "message": "It\u0027s unclear to me what synchronization is intended here. The flag is set to true unconditionally in RunPostEncode, which will be a nop if the flag already was true. And here, we do something pretty complex.\n\nTo get something that\u0027s more accurate, is it possible to do an atomic increment when deciding to drop a frame, and an atomic decrement-if-non-zero when applying the decision here? Or if it\u0027s ok to sometimes lose the decision to drop a frame, I don\u0027t think we need an atomic compare-and-exchange here either.",
+      "range": {
+        "startLine": 1041,
+        "startChar": 0,
+        "endLine": 1045,
+        "endChar": 0
+      },
+      "revId": "22bc7b8211aeee0fc2e5f728168683c46d3cad8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
