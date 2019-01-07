@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4532070a_ad912060",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-07T12:16:19Z",
+      "side": 1,
+      "message": "This is the only use of FileStream in webrtc. I\u0027d like to switch to FILE* here too, and delete FileStream. But that\u0027s for a later cl (and I\u0027m afraid there\u0027s some downstream usage of FileStream too).",
+      "range": {
+        "startLine": 287,
+        "startChar": 2,
+        "endLine": 287,
+        "endChar": 39
+      },
+      "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
