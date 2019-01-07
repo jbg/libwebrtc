@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "712a2eed_b26a2459",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-07T11:01:46Z",
+      "side": 1,
+      "message": "Please use .load(), to make it clear that something special is going on.",
+      "range": {
+        "startLine": 1039,
+        "startChar": 8,
+        "endLine": 1039,
+        "endChar": 24
+      },
+      "revId": "40e7c307e6c9c524b1e675258ec4d7106c07f99c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
