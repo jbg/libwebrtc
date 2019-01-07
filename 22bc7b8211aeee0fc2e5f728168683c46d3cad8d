@@ -45,6 +45,30 @@
       "revId": "22bc7b8211aeee0fc2e5f728168683c46d3cad8d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d862e0a6_40475aeb",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-07T08:18:15Z",
+      "side": 1,
+      "message": "My intention was that it would be fine to occasionally drop a drop.\nI haven\u0027t used std::atomic before, maybe this can be simplified? The intention is just to compare exchange from true to false, and if that succeeded it the flag was true and we do a drop.\n\nWe can do increment instead, though that will require a read first too.",
+      "parentUuid": "fdc4ddce_2ca859a0",
+      "range": {
+        "startLine": 1041,
+        "startChar": 0,
+        "endLine": 1045,
+        "endChar": 0
+      },
+      "revId": "22bc7b8211aeee0fc2e5f728168683c46d3cad8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
