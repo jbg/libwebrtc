@@ -1,0 +1,435 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "924da2a1_86bf3cc3",
+        "filename": "test/pc/e2e/api/audio_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "nit: virtual destructor?",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4738bea_3ea70104",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "please document all custom classes (if they mimic some other classes, please specify, and provide justification why they are needed).",
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab6c0fb1_4b571b22",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "please document (we discussed it earlier, but the reader of this code won\u0027t know about it) why you are adding PCFComponents instead of using Dependencies.",
+      "range": {
+        "startLine": 40,
+        "startChar": 9,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76fa4a92_0821942b",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "check if null? is there ABSL_DIE_IF_NULL?",
+      "range": {
+        "startLine": 62,
+        "startChar": 47,
+        "endLine": 62,
+        "endChar": 61
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36ecebbf_81d7d2ef",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "const?",
+      "range": {
+        "startLine": 65,
+        "startChar": 17,
+        "endLine": 65,
+        "endChar": 31
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fa5f35c_4856b410",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "what\u0027s the unit? \n\nPlease document, and/or change the type to TimeDelta.",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 33
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ca2d767_810c6b12",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "does it have to be int32_t? Can it just be int? Same above.",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 11
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d708a4a_0deb548e",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "This is an important part of the quality analyzer framework, so it would be good to have a really good documentation here. You have a good start, but I think it can be improved. Can you embed an ascii drawing of the flow of the video frame / or link to some public design doc?\n\nI think it will be helpful to the reader to understand the flow and the methods invoked.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 5
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aec10b4a_1a16c0d9",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "this interface provides empty implementations instead of being abstract. Can you document why is that?",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6713891f_3436c6a5",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "nit: remove",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1225d2a7_e8223f55",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "it is",
+      "range": {
+        "startLine": 31,
+        "startChar": 20,
+        "endLine": 31,
+        "endChar": 23
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d83a525_8a127ca0",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "should this be max_threads_count? Is the analyzer required to use this many threads?",
+      "range": {
+        "startLine": 32,
+        "startChar": 30,
+        "endLine": 32,
+        "endChar": 43
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e8562a6_8c339de6",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "https://google.github.io/styleguide/cppguide.html#Integer_Types\n\nDoes it have to be uint16_t? int should be perfectly fine.\n\nBtw this is an unused variable; should this be an abstract method?\n\nAlso: should this be a constructor parameter instead, and saved to protected const field?",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7998f775_5409f5a3",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "absl::string_view, or const string\u0026 ?",
+      "range": {
+        "startLine": 36,
+        "startChar": 35,
+        "endLine": 36,
+        "endChar": 47
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0935d8c9_26ededb2",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "nit: int?",
+      "range": {
+        "startLine": 43,
+        "startChar": 30,
+        "endLine": 43,
+        "endChar": 38
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a919dee_b7f84f0c",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "what\u0027s the alternative to the \"real decoder\"? Fake decoder?\nMaybe omit \u0027real\u0027?",
+      "range": {
+        "startLine": 47,
+        "startChar": 39,
+        "endLine": 47,
+        "endChar": 52
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45ae26a9_ae2a2893",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "document what are the allowed values. what\u0027s \"ok\" error code, and what is the error. Or consider using RTCError.",
+      "range": {
+        "startLine": 61,
+        "startChar": 57,
+        "endLine": 61,
+        "endChar": 67
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "715c7eed_87c723b4",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "nit: remove comma.",
+      "range": {
+        "startLine": 63,
+        "startChar": 19,
+        "endLine": 63,
+        "endChar": 20
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7df26c69_b8f42e73",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-08T15:15:55Z",
+      "side": 1,
+      "message": "should the interface provide a way to obtain those calculated statistics? I can imagine the caller might want to do something with them (e.g. save in some graphs, etc.)",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 64,
+        "endChar": 15
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
