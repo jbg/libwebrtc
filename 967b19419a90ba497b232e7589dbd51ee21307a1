@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "023ef0cf_7b9f2686",
+        "filename": "api/test/network.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T12:57:39Z",
+      "side": 1,
+      "message": "Here will be int.",
+      "parentUuid": "7e905723_81e9cfed",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 40
+      },
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2eb740c_12ab5e71",
         "filename": "api/test/network.h",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8c119ccb_3914bdd4",
+        "filename": "api/test/network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T12:57:39Z",
+      "side": 1,
+      "message": "Will be fixed.",
+      "parentUuid": "e2eb740c_12ab5e71",
+      "range": {
+        "startLine": 35,
+        "startChar": 43,
+        "endLine": 35,
+        "endChar": 44
+      },
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0eab4c_58051c33",
         "filename": "api/test/network.h",
         "patchSetId": 7
@@ -62,6 +110,24 @@
       "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4757f9a8_ce486cea",
+        "filename": "api/test/network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T12:57:39Z",
+      "side": 1,
+      "message": "dest endpoint id will be used for routing. It is required to setup routing in the network layer before any packets will flow. So also it will be used for routing for packets and from \"to\" only port will be used.",
+      "parentUuid": "5c0eab4c_58051c33",
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "9211ac34_5d9fbfb8",
+        "filename": "test/pc/e2e/network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T12:57:39Z",
+      "side": 1,
+      "message": "Single endpoint represents single interface. If we want multiple interfaces - we will provide multiple endpoints.",
+      "parentUuid": "452296bf_af9f77c9",
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ca8a4c3_e49e1aef",
         "filename": "test/pc/e2e/network_emulation_manager.cc",
         "patchSetId": 7
@@ -136,6 +220,24 @@
       "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c72b61b_ef3f0297",
+        "filename": "test/pc/e2e/network_emulation_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T12:57:39Z",
+      "side": 1,
+      "message": "We can setup different uplink and downlink paths for endpoints.",
+      "parentUuid": "7c94cbac_9c485d10",
+      "revId": "967b19419a90ba497b232e7589dbd51ee21307a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

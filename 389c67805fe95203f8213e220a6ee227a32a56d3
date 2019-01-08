@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "59501835_fe440a71",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T12:57:39Z",
+      "side": 1,
+      "message": "git cl format keeps the right order",
+      "parentUuid": "a861d4c1_f1e2735e",
+      "range": {
+        "startLine": 335,
+        "startChar": 4,
+        "endLine": 335,
+        "endChar": 17
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7bf87d48_19621f3d",
         "filename": "api/BUILD.gn",
         "patchSetId": 5
@@ -92,6 +116,30 @@
       "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e64f3cd0_4889313a",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T12:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bf87d48_19621f3d",
+      "range": {
+        "startLine": 340,
+        "startChar": 23,
+        "endLine": 340,
+        "endChar": 40
+      },
+      "revId": "389c67805fe95203f8213e220a6ee227a32a56d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
