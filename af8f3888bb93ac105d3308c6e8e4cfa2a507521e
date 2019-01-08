@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ef8e6b26_397df35c",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:08:08Z",
+      "side": 1,
+      "message": "Ah, thanks, that wouldn\u0027t be good for text files either as they might be processed using other tools assuming unix endings.",
+      "parentUuid": "60cce530_7aacd462",
+      "range": {
+        "startLine": 21,
+        "startChar": 42,
+        "endLine": 21,
+        "endChar": 43
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "febc0910_e02b96b7",
         "filename": "test/logging/file_log_writer.cc",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-08T15:30:10Z",
       "side": 1,
       "message": "If you have a success/fail return value for Write, you should have it for Flush too.\n\nIs anyone checking the return values?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 4
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be26653d_44a7ed0a",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:08:08Z",
+      "side": 1,
+      "message": "I figure a flush is just a request, so it shouldn\u0027t matter if it fails. (it\u0027s useful for being able to immediately see that a file is being written and possibly plot it early, but if it fails it doesn\u0027t matter much.",
+      "parentUuid": "febc0910_e02b96b7",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "23b4bc60_b85fad46",
+        "filename": "test/logging/log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:08:08Z",
+      "side": 1,
+      "message": "Obviously much better, thanks!",
+      "parentUuid": "f0143ef1_502f797f",
+      "range": {
+        "startLine": 44,
+        "startChar": 20,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3af6d64c_d87067cd",
         "filename": "test/logging/memory_log_writer.h",
         "patchSetId": 5
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "2830c249_ef6f4174",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:08:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3af6d64c_d87067cd",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72d74c9e_f1a092b1",
         "filename": "test/logging/memory_log_writer.h",
         "patchSetId": 5
@@ -105,6 +201,30 @@
       "writtenOn": "2019-01-08T15:30:10Z",
       "side": 1,
       "message": "This makes me confused; you have a \"Manager\" creating a \"Factory\"?",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2997cdb_08d41092",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:08:08Z",
+      "side": 1,
+      "message": "Yes, since we need to provide a unique_ptr owner factory to the code that wants to create the logreaders, but want to keep ownership of the underlying results map (finalized_)\n\nDo you have another name suggestion?",
+      "parentUuid": "72d74c9e_f1a092b1",
       "range": {
         "startLine": 53,
         "startChar": 2,
