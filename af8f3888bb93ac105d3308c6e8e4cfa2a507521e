@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "2e3a31d4_fb558c3d",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:22:16Z",
+      "side": 1,
+      "message": "Added CHECK to Flush as well, then we can be sure that we don\u0027t get true from IsActive if we have had a failed write or flush before.",
+      "parentUuid": "4e1b3f92_bb78150a",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 4
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f0143ef1_502f797f",
         "filename": "test/logging/log_writer.h",
         "patchSetId": 5
