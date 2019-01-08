@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74f57659_70f8b975",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:12:21Z",
+      "side": 1,
+      "message": "I added this check here instead, this makes it easier to detect that writes are failing. (compared to any form of silent/logging failure that would be harder to detect). This avoids running a long simulation just to realize too late that there is no result.",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 14
+      },
+      "revId": "43b03a3bcf2f40555b3e3c8ee4aa93df9154cd0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
