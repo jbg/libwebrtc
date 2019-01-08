@@ -22,7 +22,7 @@ namespace webrtc {
 
 namespace {
 const int kMinFrameSamplesToDetectFreeze = 5;
-const int kMinCallDurationMs = 3000;
+const int kMinVideoDurationMs = 3000;
 const int kMinRequiredSamples = 1;
 const int kMinIncreaseForFreezeMs = 150;
 const int kPixelsInHighResolution = 960 * 540;  // CPU-adapted HD still counts.
@@ -33,13 +33,10 @@ const int kBlockyQpThresholdVp9 = 60;  // TODO(ilnik): tune this value.
 }  // namespace
 
 VideoQualityObserver::VideoQualityObserver(VideoContentType content_type)
-    : last_frame_decoded_ms_(-1),
-      last_frame_rendered_ms_(-1),
-      num_frames_decoded_(0),
+    : last_frame_rendered_ms_(-1),
       num_frames_rendered_(0),
-      first_frame_decoded_ms_(-1),
+      first_frame_rendered_ms_(-1),
       last_frame_pixels_(0),
-      last_frame_qp_(0),
       last_unfreeze_time_(0),
       time_in_resolution_ms_(3, 0),
       current_resolution_(Resolution::Low),
@@ -54,15 +51,15 @@ VideoQualityObserver::~VideoQualityObserver() {
 
 void VideoQualityObserver::UpdateHistograms() {
   // Don't report anything on an empty video stream.
-  if (num_frames_decoded_ == 0) {
+  if (num_frames_rendered_ == 0) {
     return;
   }
 
   char log_stream_buf[2 * 1024];
   rtc::SimpleStringBuilder log_stream(log_stream_buf);
 
-  if (last_frame_decoded_ms_ > last_unfreeze_time_) {
-    smooth_playback_durations_.Add(last_frame_decoded_ms_ -
+  if (last_frame_rendered_ms_ > last_unfreeze_time_) {
+    smooth_playback_durations_.Add(last_frame_rendered_ms_ -
                                    last_unfreeze_time_);
   }
 
@@ -86,25 +83,26 @@ void VideoQualityObserver::UpdateHistograms() {
                << "\n";
   }
 
-  int64_t call_duration_ms = last_frame_decoded_ms_ - first_frame_decoded_ms_;
+  int64_t video_duration_ms =
+      last_frame_rendered_ms_ - first_frame_rendered_ms_;
 
-  if (call_duration_ms >= kMinCallDurationMs) {
+  if (video_duration_ms >= kMinVideoDurationMs) {
     int time_spent_in_hd_percentage = static_cast<int>(
-        time_in_resolution_ms_[Resolution::High] * 100 / call_duration_ms);
+        time_in_resolution_ms_[Resolution::High] * 100 / video_duration_ms);
     RTC_HISTOGRAM_COUNTS_SPARSE_100(uma_prefix + ".TimeInHdPercentage",
                                     time_spent_in_hd_percentage);
     log_stream << uma_prefix << ".TimeInHdPercentage "
                << time_spent_in_hd_percentage << "\n";
 
     int time_with_blocky_video_percentage =
-        static_cast<int>(time_in_blocky_video_ms_ * 100 / call_duration_ms);
+        static_cast<int>(time_in_blocky_video_ms_ * 100 / video_duration_ms);
     RTC_HISTOGRAM_COUNTS_SPARSE_100(uma_prefix + ".TimeInBlockyVideoPercentage",
                                     time_with_blocky_video_percentage);
     log_stream << uma_prefix << ".TimeInBlockyVideoPercentage "
                << time_with_blocky_video_percentage << "\n";
 
     int num_resolution_downgrades_per_minute =
-        num_resolution_downgrades_ * 60000 / call_duration_ms;
+        num_resolution_downgrades_ * 60000 / video_duration_ms;
     RTC_HISTOGRAM_COUNTS_SPARSE_100(
         uma_prefix + ".NumberResolutionDownswitchesPerMinute",
         num_resolution_downgrades_per_minute);
@@ -112,7 +110,7 @@ void VideoQualityObserver::UpdateHistograms() {
                << num_resolution_downgrades_per_minute << "\n";
 
     int num_freezes_per_minute =
-        freezes_durations_.NumSamples() * 60000 / call_duration_ms;
+        freezes_durations_.NumSamples() * 60000 / video_duration_ms;
     RTC_HISTOGRAM_COUNTS_SPARSE_100(uma_prefix + ".NumberFreezesPerMinute",
                                     num_freezes_per_minute);
     log_stream << uma_prefix << ".NumberFreezesPerMinute "
@@ -121,9 +119,10 @@ void VideoQualityObserver::UpdateHistograms() {
   RTC_LOG(LS_INFO) << log_stream.str();
 }
 
-void VideoQualityObserver::OnRenderedFrame(int64_t now_ms) {
+void VideoQualityObserver::OnRenderedFrame(const VideoFrame& frame,
+                                           int64_t now_ms) {
   if (num_frames_rendered_ == 0) {
-    last_unfreeze_time_ = now_ms;
+    first_frame_rendered_ms_ = last_unfreeze_time_ = now_ms;
   }
 
   ++num_frames_rendered_;
@@ -143,6 +142,15 @@ void VideoQualityObserver::OnRenderedFrame(int64_t now_ms) {
       smooth_playback_durations_.Add(last_frame_rendered_ms_ -
                                      last_unfreeze_time_);
       last_unfreeze_time_ = now_ms;
+    } else {
+      // Count spatial metrics if there were no freeze.
+      time_in_resolution_ms_[current_resolution_] += interframe_delay_ms;
+
+      auto blocky_frame_it = blocky_frames.find(frame.timestamp_us());
+      if (blocky_frame_it != blocky_frames.end()) {
+        time_in_blocky_video_ms_ += interframe_delay_ms;
+        blocky_frames.erase(blocky_frames.begin(), ++blocky_frame_it);
+      }
     }
   }
 
@@ -158,51 +166,7 @@ void VideoQualityObserver::OnRenderedFrame(int64_t now_ms) {
     last_unfreeze_time_ = now_ms;
   }
 
-  last_frame_rendered_ms_ = now_ms;
-}
-
-void VideoQualityObserver::OnDecodedFrame(absl::optional<uint8_t> qp,
-                                          int width,
-                                          int height,
-                                          int64_t now_ms,
-                                          VideoCodecType codec) {
-  if (num_frames_decoded_ == 0) {
-    first_frame_decoded_ms_ = now_ms;
-  }
-
-  ++num_frames_decoded_;
-
-  if (!is_paused_ && num_frames_decoded_ > 1) {
-    // Process inter-frame delay.
-    int64_t interframe_delay_ms = now_ms - last_frame_decoded_ms_;
-    decode_interframe_delays_.Add(interframe_delay_ms);
-    absl::optional<int> avg_interframe_delay =
-        decode_interframe_delays_.Avg(kMinFrameSamplesToDetectFreeze);
-    // Count spatial metrics if there were no freeze.
-    if (!avg_interframe_delay ||
-        interframe_delay_ms <
-            std::max(3 * *avg_interframe_delay,
-                     *avg_interframe_delay + kMinIncreaseForFreezeMs)) {
-      time_in_resolution_ms_[current_resolution_] += interframe_delay_ms;
-      absl::optional<int> qp_blocky_threshold;
-      // TODO(ilnik): add other codec types when we have QP for them.
-      switch (codec) {
-        case kVideoCodecVP8:
-          qp_blocky_threshold = kBlockyQpThresholdVp8;
-          break;
-        case kVideoCodecVP9:
-          qp_blocky_threshold = kBlockyQpThresholdVp9;
-          break;
-        default:
-          qp_blocky_threshold = absl::nullopt;
-      }
-      if (qp_blocky_threshold && qp.value_or(0) > *qp_blocky_threshold) {
-        time_in_blocky_video_ms_ += interframe_delay_ms;
-      }
-    }
-  }
-
-  int64_t pixels = width * height;
+  int64_t pixels = frame.width() * frame.height();
   if (pixels >= kPixelsInHighResolution) {
     current_resolution_ = Resolution::High;
   } else if (pixels >= kPixelsInMediumResolution) {
@@ -215,9 +179,34 @@ void VideoQualityObserver::OnDecodedFrame(absl::optional<uint8_t> qp,
     ++num_resolution_downgrades_;
   }
 
-  last_frame_decoded_ms_ = now_ms;
-  last_frame_qp_ = qp.value_or(0);
   last_frame_pixels_ = pixels;
+  last_frame_rendered_ms_ = now_ms;
+}
+
+void VideoQualityObserver::OnDecodedFrame(const VideoFrame& frame,
+                                          absl::optional<uint8_t> qp,
+                                          VideoCodecType codec) {
+  if (qp) {
+    absl::optional<int> qp_blocky_threshold;
+    // TODO(ilnik): add other codec types when we have QP for them.
+    switch (codec) {
+      case kVideoCodecVP8:
+        qp_blocky_threshold = kBlockyQpThresholdVp8;
+        break;
+      case kVideoCodecVP9:
+        qp_blocky_threshold = kBlockyQpThresholdVp9;
+        break;
+      default:
+        qp_blocky_threshold = absl::nullopt;
+    }
+
+    if (qp_blocky_threshold && *qp > *qp_blocky_threshold) {
+      // Sanity check that we don't cache too many frames.
+      RTC_DCHECK_LT(blocky_frames.size(), 1000);
+
+      blocky_frames.insert(frame.timestamp_us());
+    }
+  }
 }
 
 void VideoQualityObserver::OnStreamInactive() {
