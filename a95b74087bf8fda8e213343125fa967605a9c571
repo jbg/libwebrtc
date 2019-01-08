@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a7bea51a_c8359a4e",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T13:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a39b0ba4_ccb20dcb",
+      "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35af22ea_665d0222",
         "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d8d533c_7f3eb5a3",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T13:56:22Z",
+      "side": 1,
+      "message": "Analyzer is generating ids so it can control how to use ids universe. For example if implementation is interesting only in the single stream, it can ignore other frames.",
+      "parentUuid": "35af22ea_665d0222",
+      "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f57fce6a_d0f3aa2a",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T13:56:22Z",
+      "side": 1,
+      "message": "Because encoder doesn\u0027t provide that data for us.",
+      "parentUuid": "8bf289d4_e9e67b93",
+      "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c664bba_9f57abfa",
         "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66264463_dc2fac57",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-08T13:56:22Z",
+      "side": 1,
+      "message": "Actually I don\u0027t know exactly. The only thing, that I know is that it is connected to quality and provided as feedback by decoder :(",
+      "parentUuid": "1c664bba_9f57abfa",
+      "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
