@@ -702,8 +702,8 @@ TEST(FullStackTest, ScreenshareSlidesVP8_2TL) {
   fixture->RunWithAnalyzer(screenshare);
 }
 
-// TODO(bugs.webrtc.org/9840): Investigate why is this test flaky on MAC.
-#if !defined(WEBRTC_MAC)
+// TODO(bugs.webrtc.org/9840): Investigate why is this test flaky on Win/Mac.
+#if !defined(WEBRTC_MAC) && !defined(WEBRTC_WIN)
 const char kScreenshareSimulcastExperiment[] =
     "WebRTC-SimulcastScreenshare/Enabled/";
 
