@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60cce530_7aacd462",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T15:30:10Z",
+      "side": 1,
+      "message": "Will give you platform specific line endings. Might be fine if used for text files only, otherwise use \"wb\",",
+      "range": {
+        "startLine": 21,
+        "startChar": 42,
+        "endLine": 21,
+        "endChar": 43
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "febc0910_e02b96b7",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T15:30:10Z",
+      "side": 1,
+      "message": "If you have a success/fail return value for Write, you should have it for Flush too.\n\nIs anyone checking the return values?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 4
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0143ef1_502f797f",
+        "filename": "test/logging/log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T15:30:10Z",
+      "side": 1,
+      "message": "Rename to |name_prefix_| or just |prefix_|? Consider renaming class too, maybe ...AddPrefix.",
+      "range": {
+        "startLine": 44,
+        "startChar": 20,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3af6d64c_d87067cd",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T15:30:10Z",
+      "side": 1,
+      "message": "Any way to move this to the .cc file?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72d74c9e_f1a092b1",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T15:30:10Z",
+      "side": 1,
+      "message": "This makes me confused; you have a \"Manager\" creating a \"Factory\"?",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
