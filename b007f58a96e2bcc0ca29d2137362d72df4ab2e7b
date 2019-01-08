@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "9dfc0356_999cebdd",
+        "filename": "api/rtceventlogoutput.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T14:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "348e6b32_34a9182f",
+      "range": {
+        "startLine": 36,
+        "startChar": 57,
+        "endLine": 36,
+        "endChar": 68
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "427fcbd2_f448ec9d",
+        "filename": "api/rtceventlogoutput.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T14:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f147b449_f387288f",
+      "range": {
+        "startLine": 36,
+        "startChar": 63,
+        "endLine": 36,
+        "endChar": 64
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "311c0f2d_5eaa2633",
         "filename": "modules/congestion_controller/test/controller_printer.h",
         "patchSetId": 3
@@ -142,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "63bd24bf_91f2d6dd",
+        "filename": "test/logging/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T14:51:25Z",
+      "side": 1,
+      "message": "For synchronization checks that I had in an earlier version, not needed anymore.",
+      "parentUuid": "73cb170e_83fd8883",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 30
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5846477d_4f49005a",
         "filename": "test/logging/file_log_writer.cc",
         "patchSetId": 3
@@ -153,6 +225,30 @@
       "writtenOn": "2019-01-08T12:19:55Z",
       "side": 1,
       "message": "Include cstdio in this file?",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 21
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b2ad184_4d219522",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T14:51:25Z",
+      "side": 1,
+      "message": "Included in #include \"test/logging/file_log_writer.h\", we usually do not duplicate includes in the cc file, right?",
+      "parentUuid": "5846477d_4f49005a",
       "range": {
         "startLine": 21,
         "startChar": 16,
@@ -185,6 +281,30 @@
       "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "022fe6e0_43e9f526",
+        "filename": "test/logging/file_log_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T14:51:25Z",
+      "side": 1,
+      "message": "This is file_log_writer.h",
+      "parentUuid": "ec763313_91c4938b",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 36
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -234,6 +354,54 @@
     },
     {
       "key": {
+        "uuid": "844d0b6c_1d85e53d",
+        "filename": "test/logging/file_log_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T14:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e774b40_18fa862e",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de0ad0c4_b9fde4b8",
+        "filename": "test/logging/file_log_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T14:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6922c01_4cf3b099",
+      "range": {
+        "startLine": 34,
+        "startChar": 42,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f496f4d0_ff6b40e4",
         "filename": "test/scenario/quality_stats.cc",
         "patchSetId": 3
@@ -245,6 +413,30 @@
       "writtenOn": "2019-01-08T12:12:47Z",
       "side": 1,
       "message": "Where is Format defined? I don\u0027t see it in the cl, but I might be confused. Is it better than SimpleStringBuilder?",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 8
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fe57017_61f0f11b",
+        "filename": "test/scenario/quality_stats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T14:51:25Z",
+      "side": 1,
+      "message": "In log_writer.h\n\nIt uses stringbuilder internally, but we avoid having to create a local builder here, which would add an extra dependency everywhere it\u0027s used and also be more verbose etc.",
+      "parentUuid": "f496f4d0_ff6b40e4",
       "range": {
         "startLine": 117,
         "startChar": 2,
