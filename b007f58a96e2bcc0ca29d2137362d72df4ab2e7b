@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "348e6b32_34a9182f",
+        "filename": "api/rtceventlogoutput.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T12:12:47Z",
+      "side": 1,
+      "message": "Spelling, should be single c.",
+      "range": {
+        "startLine": 36,
+        "startChar": 57,
+        "endLine": 36,
+        "endChar": 68
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6922c01_4cf3b099",
+        "filename": "test/logging/file_log_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T12:12:47Z",
+      "side": 1,
+      "message": "Consider adding Interface to the name of the interface class.",
+      "range": {
+        "startLine": 34,
+        "startChar": 42,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e774b40_18fa862e",
+        "filename": "test/logging/file_log_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T12:12:47Z",
+      "side": 1,
+      "message": "Rename FileLogWriterFactory?",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f496f4d0_ff6b40e4",
+        "filename": "test/scenario/quality_stats.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T12:12:47Z",
+      "side": 1,
+      "message": "Where is Format defined? I don\u0027t see it in the cl, but I might be confused. Is it better than SimpleStringBuilder?",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 8
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
