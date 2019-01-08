@@ -11,7 +11,6 @@
 #define TEST_SCENARIO_SIMULATED_TIME_H_
 
 #include <stdint.h>
-#include <stdio.h>
 #include <deque>
 #include <map>
 #include <memory>
@@ -25,6 +24,7 @@
 #include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
 #include "rtc_base/copyonwritebuffer.h"
+#include "test/logging/log_writer.h"
 #include "test/scenario/call_client.h"
 #include "test/scenario/network_node.h"
 #include "test/scenario/scenario_config.h"
@@ -121,6 +121,7 @@ class SimulatedSender {
 class SimulatedTimeClient : EmulatedNetworkReceiverInterface {
  public:
   SimulatedTimeClient(std::string log_filename,
+                      LogWriterFactory* log_writer_factory,
                       SimulatedTimeClientConfig config,
                       std::vector<PacketStreamConfig> stream_configs,
                       std::vector<NetworkNode*> send_link,
@@ -153,7 +154,7 @@ class SimulatedTimeClient : EmulatedNetworkReceiverInterface {
   TargetRateConstraints current_contraints_;
   DataRate target_rate_ = DataRate::Infinity();
   DataRate link_capacity_ = DataRate::Infinity();
-  FILE* packet_log_ = nullptr;
+  std::unique_ptr<RtcEventLogOutput> packet_log_;
 
   std::vector<std::unique_ptr<PacketStream>> packet_streams_;
 };

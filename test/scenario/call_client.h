@@ -19,6 +19,7 @@
 #include "modules/congestion_controller/test/controller_printer.h"
 #include "modules/rtp_rtcp/include/rtp_header_parser.h"
 #include "rtc_base/constructormagic.h"
+#include "test/logging/log_writer.h"
 #include "test/scenario/column_printer.h"
 #include "test/scenario/network/network_emulation.h"
 #include "test/scenario/network_node.h"
@@ -30,7 +31,8 @@ namespace test {
 class LoggingNetworkControllerFactory
     : public NetworkControllerFactoryInterface {
  public:
-  LoggingNetworkControllerFactory(std::string filename,
+  LoggingNetworkControllerFactory(std::string log_name,
+                                  LogWriterFactory* log_writer_factory,
                                   TransportControllerConfig config);
   RTC_DISALLOW_COPY_AND_ASSIGN(LoggingNetworkControllerFactory);
   ~LoggingNetworkControllerFactory();
@@ -46,7 +48,6 @@ class LoggingNetworkControllerFactory
   std::unique_ptr<NetworkControllerFactoryInterface> owned_cc_factory_;
   NetworkControllerFactoryInterface* cc_factory_ = nullptr;
   std::unique_ptr<ControlStatePrinter> cc_printer_;
-  FILE* cc_out_ = nullptr;
 };
 
 struct CallClientFakeAudio {
@@ -61,7 +62,7 @@ class CallClient : public EmulatedNetworkReceiverInterface {
  public:
   CallClient(Clock* clock,
              std::string name,
-             std::string log_filename,
+             LogWriterFactory* log_writer_factory,
              CallClientConfig config);
   RTC_DISALLOW_COPY_AND_ASSIGN(CallClient);
 

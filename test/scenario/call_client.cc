@@ -11,7 +11,7 @@
 
 #include <utility>
 
-#include "logging/rtc_event_log/output/rtc_event_log_output_file.h"
+#include "absl/memory/memory.h"
 #include "modules/audio_mixer/audio_mixer_impl.h"
 #include "modules/congestion_controller/goog_cc/test/goog_cc_printer.h"
 #include "test/call_test.h"
@@ -56,39 +56,40 @@ Call* CreateCall(CallClientConfig config,
 }
 
 LoggingNetworkControllerFactory::LoggingNetworkControllerFactory(
-    std::string filename,
+    std::string log_name,
+    LogWriterFactory* log_writer_factory,
     TransportControllerConfig config) {
-  if (filename.empty()) {
+  std::unique_ptr<RtcEventLogOutput> cc_out;
+  if (!log_writer_factory || log_name.empty()) {
     event_log_ = RtcEventLog::CreateNull();
   } else {
     event_log_ = RtcEventLog::Create(RtcEventLog::EncodingType::Legacy);
     bool success = event_log_->StartLogging(
-        absl::make_unique<RtcEventLogOutputFile>(filename + ".rtc.dat",
-                                                 RtcEventLog::kUnlimitedOutput),
+        log_writer_factory->Create(log_name + ".rtc.dat"),
         RtcEventLog::kImmediateOutput);
     RTC_CHECK(success);
-    cc_out_ = fopen((filename + ".cc_state.txt").c_str(), "w");
+    cc_out = log_writer_factory->Create(log_name + ".cc_state.txt");
   }
   switch (config.cc) {
     case TransportControllerConfig::CongestionController::kGoogCc:
-      if (cc_out_) {
+      if (cc_out) {
         auto goog_printer = absl::make_unique<GoogCcStatePrinter>();
         owned_cc_factory_.reset(
             new GoogCcDebugFactory(event_log_.get(), goog_printer.get()));
-        cc_printer_.reset(
-            new ControlStatePrinter(cc_out_, std::move(goog_printer)));
+        cc_printer_.reset(new ControlStatePrinter(std::move(cc_out),
+                                                  std::move(goog_printer)));
       } else {
         owned_cc_factory_.reset(
             new GoogCcNetworkControllerFactory(event_log_.get()));
       }
       break;
     case TransportControllerConfig::CongestionController::kGoogCcFeedback:
-      if (cc_out_) {
+      if (cc_out) {
         auto goog_printer = absl::make_unique<GoogCcStatePrinter>();
         owned_cc_factory_.reset(new GoogCcFeedbackDebugFactory(
             event_log_.get(), goog_printer.get()));
-        cc_printer_.reset(
-            new ControlStatePrinter(cc_out_, std::move(goog_printer)));
+        cc_printer_.reset(new ControlStatePrinter(std::move(cc_out),
+                                                  std::move(goog_printer)));
       } else {
         owned_cc_factory_.reset(
             new GoogCcFeedbackNetworkControllerFactory(event_log_.get()));
@@ -96,7 +97,7 @@ LoggingNetworkControllerFactory::LoggingNetworkControllerFactory(
       break;
     case TransportControllerConfig::CongestionController::kInjected:
       cc_factory_ = config.cc_factory;
-      if (cc_out_)
+      if (cc_out)
         RTC_LOG(LS_WARNING)
             << "Can't log controller state for injected network controllers";
       break;
@@ -110,8 +111,6 @@ LoggingNetworkControllerFactory::LoggingNetworkControllerFactory(
 }
 
 LoggingNetworkControllerFactory::~LoggingNetworkControllerFactory() {
-  if (cc_out_)
-    fclose(cc_out_);
 }
 
 void LoggingNetworkControllerFactory::LogCongestionControllerStats(
@@ -135,11 +134,11 @@ TimeDelta LoggingNetworkControllerFactory::GetProcessInterval() const {
 
 CallClient::CallClient(Clock* clock,
                        std::string name,
-                       std::string log_filename,
+                       LogWriterFactory* log_writer_factory,
                        CallClientConfig config)
     : clock_(clock),
       name_(name),
-      network_controller_factory_(log_filename, config.transport),
+      network_controller_factory_(name, log_writer_factory, config.transport),
       fake_audio_setup_(InitAudio()),
       call_(CreateCall(config,
                        &network_controller_factory_,
