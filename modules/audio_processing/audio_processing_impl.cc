@@ -34,6 +34,7 @@
 #include "modules/audio_processing/logging/apm_data_dumper.h"
 #include "modules/audio_processing/low_cut_filter.h"
 #include "modules/audio_processing/noise_suppression_impl.h"
+#include "modules/audio_processing/noise_suppression_proxy.h"
 #include "modules/audio_processing/residual_echo_detector.h"
 #include "modules/audio_processing/transient/transient_suppressor.h"
 #include "modules/audio_processing/voice_detection_impl.h"
@@ -105,6 +106,22 @@ int FindNativeProcessRateToUse(int minimum_rate, bool band_splitting_required) {
   }
   RTC_NOTREACHED();
   return uppermost_native_rate;
+}
+
+NoiseSuppression::Level NsConfigLevelToInterfaceLevel(
+    AudioProcessing::Config::NoiseSuppression::Level level) {
+  switch (level) {
+    case AudioProcessing::Config::NoiseSuppression::kLow:
+      return NoiseSuppression::kLow;
+    case AudioProcessing::Config::NoiseSuppression::kModerate:
+      return NoiseSuppression::kModerate;
+    case AudioProcessing::Config::NoiseSuppression::kHigh:
+      return NoiseSuppression::kHigh;
+    case AudioProcessing::Config::NoiseSuppression::kVeryHigh:
+      return NoiseSuppression::kVeryHigh;
+    default:
+      RTC_NOTREACHED();
+  }
 }
 
 // Maximum lengths that frame of samples being passed from the render side to
@@ -235,6 +252,7 @@ struct AudioProcessingImpl::ApmPublicSubmodules {
   std::unique_ptr<GainControlImpl> gain_control;
   std::unique_ptr<LevelEstimatorImpl> level_estimator;
   std::unique_ptr<NoiseSuppressionImpl> noise_suppression;
+  std::unique_ptr<NoiseSuppressionProxy> noise_suppression_proxy;
   std::unique_ptr<VoiceDetectionImpl> voice_detection;
   std::unique_ptr<GainControlForExperimentalAgc>
       gain_control_for_experimental_agc;
@@ -380,6 +398,8 @@ AudioProcessingImpl::AudioProcessingImpl(
         new LevelEstimatorImpl(&crit_capture_));
     public_submodules_->noise_suppression.reset(
         new NoiseSuppressionImpl(&crit_capture_));
+    public_submodules_->noise_suppression_proxy.reset(new NoiseSuppressionProxy(
+        this, public_submodules_->noise_suppression.get()));
     public_submodules_->voice_detection.reset(
         new VoiceDetectionImpl(&crit_capture_));
     public_submodules_->gain_control_for_experimental_agc.reset(
@@ -663,6 +683,11 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
       config.echo_canceller.legacy_moderate_suppression_level
           ? EchoCancellationImpl::SuppressionLevel::kModerateSuppression
           : EchoCancellationImpl::SuppressionLevel::kHighSuppression);
+
+  public_submodules_->noise_suppression->Enable(
+      config.noise_suppression.enabled);
+  public_submodules_->noise_suppression->set_level(
+      NsConfigLevelToInterfaceLevel(config.noise_suppression.level));
 
   InitializeLowCutFilter();
 
@@ -1690,7 +1715,7 @@ LevelEstimator* AudioProcessingImpl::level_estimator() const {
 }
 
 NoiseSuppression* AudioProcessingImpl::noise_suppression() const {
-  return public_submodules_->noise_suppression.get();
+  return public_submodules_->noise_suppression_proxy.get();
 }
 
 VoiceDetection* AudioProcessingImpl::voice_detection() const {
