@@ -282,6 +282,76 @@
       "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8ffa675_67ac6cb6",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T16:22:28Z",
+      "side": 1,
+      "message": "I think this explanation deserves a class-comment.\n\nAs for naming, I don\u0027t see anything obviously better. Can you think of some name related to the main responsibility of this class, which seems to be the ownership of the |finalized_| map?",
+      "parentUuid": "b2997cdb_08d41092",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3f1b092_1c3b3318",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T16:22:28Z",
+      "side": 1,
+      "message": "Why do you need the friend declaration? Could you make the Deliver method public instead?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b30c876_df3ec221",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T16:22:28Z",
+      "side": 1,
+      "message": "nit: Empty line before the member variables.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 48
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
