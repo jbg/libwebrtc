@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b9f09eff_3b86be34",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-08T11:28:55Z",
+      "side": 1,
+      "message": "Should there be an RTC_NOTIMPLEMENTED here, so that we get an actual error (at least in debug)?",
+      "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca0c6cfd_8207d89b",
         "filename": "rtc_base/filerotatingstream.cc",
         "patchSetId": 6
@@ -93,6 +110,40 @@
       "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f2bb12d_e3a98dbb",
+        "filename": "rtc_base/filerotatingstream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-08T11:28:55Z",
+      "side": 1,
+      "message": "Grammar: we writing -\u003e be writing",
+      "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52deb4df_2d58d6b9",
+        "filename": "rtc_base/filerotatingstream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-08T11:28:55Z",
+      "side": 1,
+      "message": "Optional: Add a pointer to the reader class - \"For reading from a directory created by CallSessionFileRotatingStream, use the class .....\"",
+      "revId": "ad562fe35cb5433a9b91237241877e7520f9bd2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
