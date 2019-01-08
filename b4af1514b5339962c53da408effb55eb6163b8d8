@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "373fc8e3_40d421a0",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-08T13:56:15Z",
+      "side": 1,
+      "message": "This is an implementation detail and maybe shouldn\u0027t be part of the interface.\nA concrete child class actually using multi-threads can always add a dedicated constructor/setter.",
+      "revId": "b4af1514b5339962c53da408effb55eb6163b8d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a60ae4d4_964fde0f",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-08T13:56:15Z",
+      "side": 1,
+      "message": "Ok this one should remains pure, since the empty implementation doesn\u0027t return an uint16_t!",
+      "revId": "b4af1514b5339962c53da408effb55eb6163b8d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
