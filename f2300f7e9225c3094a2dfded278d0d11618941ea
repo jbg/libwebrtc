@@ -22,6 +22,30 @@
       "revId": "f2300f7e9225c3094a2dfded278d0d11618941ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dabfdc43_a2c6a7ca",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-08T10:45:43Z",
+      "side": 1,
+      "message": "Since there will probably be only one Analyzer with this interface, i don\u0027t see the merit of doing so.",
+      "parentUuid": "712766db_e7fa4758",
+      "range": {
+        "startLine": 30,
+        "startChar": 45,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "f2300f7e9225c3094a2dfded278d0d11618941ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
