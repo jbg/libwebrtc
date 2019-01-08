@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "4e1b3f92_bb78150a",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-08T16:17:59Z",
+      "side": 1,
+      "message": "The thing is, in case there\u0027s some problem with the i/o, e.g, disk is full so log can\u0027t be written, that will produce an error return from either fwrite or fflush (or fclose, if one doesn\u0027t call fflush explicitly prior to fclose). Where you get the error is unpredictable and depending on details in the buffering.\n\nHence anyone who wants to know about failure ought to check both fflush and fwrite.\n\nI think I\u0027d be fine with dropping return value for all these methods and treat them as fire-and-forget, but if I recall correctly, there were some subtleties with how IsActive was used. Maybe one needs to arrange so that IsActive returns false if any error, from either fwrite or fflush, has occurred?",
+      "parentUuid": "be26653d_44a7ed0a",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 4
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f0143ef1_502f797f",
         "filename": "test/logging/log_writer.h",
         "patchSetId": 5
