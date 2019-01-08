@@ -25,6 +25,121 @@
     },
     {
       "key": {
+        "uuid": "f147b449_f387288f",
+        "filename": "api/rtceventlogoutput.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-08T12:19:55Z",
+      "side": 1,
+      "message": "nit: applicable",
+      "range": {
+        "startLine": 36,
+        "startChar": 63,
+        "endLine": 36,
+        "endChar": 64
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "311c0f2d_5eaa2633",
+        "filename": "modules/congestion_controller/test/controller_printer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-08T12:19:55Z",
+      "side": 1,
+      "message": "It\u0027s a bit odd to use RtcEventLogOutput for something that isn\u0027t an event log. On the other hand, I don\u0027t have a better suggestion.",
+      "range": {
+        "startLine": 23,
+        "startChar": 28,
+        "endLine": 23,
+        "endChar": 45
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73cb170e_83fd8883",
+        "filename": "test/logging/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-08T12:19:55Z",
+      "side": 1,
+      "message": "What is this used for?",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 30
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5846477d_4f49005a",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-08T12:19:55Z",
+      "side": 1,
+      "message": "Include cstdio in this file?",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 21
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec763313_91c4938b",
+        "filename": "test/logging/file_log_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-08T12:19:55Z",
+      "side": 1,
+      "message": "Includes itself?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 36
+      },
+      "revId": "b007f58a96e2bcc0ca29d2137362d72df4ab2e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f6922c01_4cf3b099",
         "filename": "test/logging/file_log_writer.h",
         "patchSetId": 3
