@@ -309,6 +309,30 @@
     },
     {
       "key": {
+        "uuid": "1adb0759_ff3c68a7",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8ffa675_67ac6cb6",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3f1b092_1c3b3318",
         "filename": "test/logging/memory_log_writer.h",
         "patchSetId": 5
@@ -332,6 +356,30 @@
     },
     {
       "key": {
+        "uuid": "55ac90de_c6d6b287",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:33:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3f1b092_1c3b3318",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b30c876_df3ec221",
         "filename": "test/logging/memory_log_writer.h",
         "patchSetId": 5
@@ -352,6 +400,30 @@
       "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97dd0d5f_1cd28a4a",
+        "filename": "test/logging/memory_log_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-08T16:33:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0b30c876_df3ec221",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 48
+      },
+      "revId": "af8f3888bb93ac105d3308c6e8e4cfa2a507521e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
