@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a39b0ba4_ccb20dcb",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-08T13:49:13Z",
+      "side": 1,
+      "message": "Extra threads? Does it mean we should pass 0 for monothread?",
+      "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35af22ea_665d0222",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-08T13:49:13Z",
+      "side": 1,
+      "message": "Who is meant to set the id? Why is the Analyzer responsible to generate a \"fresh\" id?",
+      "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bf289d4_e9e67b93",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-08T13:49:13Z",
+      "side": 1,
+      "message": "Nice, but why don\u0027t we have the same for OnFrameEncoded?",
+      "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c664bba_9f57abfa",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-08T13:49:13Z",
+      "side": 1,
+      "message": "What\u0027s that?",
+      "revId": "a95b74087bf8fda8e213343125fa967605a9c571",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
