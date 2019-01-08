@@ -22,6 +22,30 @@
       "revId": "27799ddd2f43335abed4c9d2f62a5f82177c30f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86de2e9a_bfecb9a8",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-08T13:58:37Z",
+      "side": 1,
+      "message": "That\u0027s really a function RateStatistics and not this change though. It\u0027s also no different for fec and video bitrate above. I can add a comment for all three of them?",
+      "parentUuid": "7d8b747a_279d2124",
+      "range": {
+        "startLine": 173,
+        "startChar": 60,
+        "endLine": 173,
+        "endChar": 69
+      },
+      "revId": "27799ddd2f43335abed4c9d2f62a5f82177c30f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
