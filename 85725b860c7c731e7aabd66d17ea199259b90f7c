@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7bdb9b4a_115a6753",
+        "filename": "api/units/data_rate.h.autosave",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-09T13:23:47Z",
+      "side": 1,
+      "message": "Delete. (And consider adding *.autosave to some local .gitignore file...)",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 0
+      },
+      "revId": "85725b860c7c731e7aabd66d17ea199259b90f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "badb6b8c_61f002f7",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-09T13:23:47Z",
+      "side": 1,
+      "message": "Can you add a message with errno here too?",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 44,
+        "endChar": 0
+      },
+      "revId": "85725b860c7c731e7aabd66d17ea199259b90f7c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
