@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "67a5236c_d5fde4ad",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-09T13:00:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5df006c_ee24002f",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 14
+      },
+      "revId": "43b03a3bcf2f40555b3e3c8ee4aa93df9154cd0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45f8ecb4_baf18505",
         "filename": "test/logging/file_log_writer.cc",
         "patchSetId": 6
