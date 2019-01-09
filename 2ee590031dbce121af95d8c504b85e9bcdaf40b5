@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "efa15374_2bbc6ba1",
+        "filename": "video/video_quality_observer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-01-09T12:45:27Z",
+      "side": 1,
+      "message": "I limited size of cache by 100 frames. First half of them is erased on overflow.\n\nAlso added DCHECK for timestamp dups. It is unexpected to get this at the moment.",
+      "parentUuid": "78711b05_1d1a6841",
+      "range": {
+        "startLine": 204,
+        "startChar": 27,
+        "endLine": 204,
+        "endChar": 57
+      },
+      "revId": "2ee590031dbce121af95d8c504b85e9bcdaf40b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ba7b6f5_e1a042f2",
         "filename": "video/video_quality_observer.h",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "2ee590031dbce121af95d8c504b85e9bcdaf40b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85423070_d63bdf6a",
+        "filename": "video/video_quality_observer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-01-09T12:45:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ba7b6f5_e1a042f2",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 79,
+        "endChar": 33
+      },
+      "revId": "2ee590031dbce121af95d8c504b85e9bcdaf40b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
