@@ -22,6 +22,47 @@
       "revId": "43b03a3bcf2f40555b3e3c8ee4aa93df9154cd0d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5df006c_ee24002f",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-09T07:52:51Z",
+      "side": 1,
+      "message": "I usually wouldn\u0027t use CHECK or DCHECK for conditions that aren\u0027t necessarily bugs (e.g., this can be triggered by a full disk). It makes some sense in this case, but it would be good to add a message. You could also eliminate the local variable. So something like\n\nRTC_CHECK_EQ(std::fwrite(...), value.size()) \u003c\u003c \"fwrite failed unexpectedly: \" \u003c\u003c errno;",
+      "parentUuid": "74f57659_70f8b975",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 14
+      },
+      "revId": "43b03a3bcf2f40555b3e3c8ee4aa93df9154cd0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45f8ecb4_baf18505",
+        "filename": "test/logging/file_log_writer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-09T07:52:51Z",
+      "side": 1,
+      "message": "Thanks, this makes it a lot clearer.",
+      "revId": "43b03a3bcf2f40555b3e3c8ee4aa93df9154cd0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
