@@ -22,6 +22,30 @@
       "revId": "669b6c5b6e328267ab2b6529a3bd6dadd18d70f6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94b3368f_af4c831e",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1962,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-01-09T15:20:03Z",
+      "side": 1,
+      "message": "Since packet_duration is sometimes a guesstimate (per line 1945 above), it might be a bit fragile. But, what could happen?\n\n- If packet_duration is estimated too large, ts_diff will be smaller than packer_duration (for adjacent packets). In that case, accepting the next packet doesn\u0027t hurt.\n\n- If packet_duration is estimated too small, ts_diff will be larger than packet_duration. Here we cannot accept the next packet, since we don\u0027t know if the first packet is a CNG packet.\n\nSo, if I\u0027m not mistaken, you can change the criterion to be\n ts_diff \u003c\u003d packet_duration",
+      "parentUuid": "8c76d3cc_fad949a6",
+      "range": {
+        "startLine": 1962,
+        "startChar": 10,
+        "endLine": 1962,
+        "endChar": 36
+      },
+      "revId": "669b6c5b6e328267ab2b6529a3bd6dadd18d70f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
