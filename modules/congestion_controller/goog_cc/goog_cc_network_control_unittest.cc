@@ -210,6 +210,41 @@ TEST_F(GoogCcNetworkControllerTest, ReactsToChangedNetworkConditions) {
             kInitialBitrate * kDefaultPacingRate);
 }
 
+TEST_F(GoogCcNetworkControllerTest, CongestionWindowPushbackOnNetworkDelay) {
+  // Test congestion window pushback on network delay happens.
+  ScopedFieldTrials trial(
+      "WebRTC-CongestionWindowPushback/Enabled/WebRTC-CwndExperiment/"
+      "Enabled-200/");
+  Scenario s("googcc_unit/cwnd_on_delay", false);
+  auto send_net = s.CreateSimulationNode([=](NetworkNodeConfig* c) {
+    c->simulation.bandwidth = DataRate::kbps(1000);
+    c->simulation.delay = TimeDelta::ms(100);
+    c->update_frequency = TimeDelta::ms(5);
+  });
+  auto ret_net = s.CreateSimulationNode([](NetworkNodeConfig* c) {
+    c->simulation.delay = TimeDelta::ms(100);
+    c->update_frequency = TimeDelta::ms(5);
+  });
+  SimulatedTimeClientConfig config;
+  config.transport.cc =
+      TransportControllerConfig::CongestionController::kGoogCcFeedback;
+  // Start high so bandwidth drop has max effect.
+  config.transport.rates.start_rate = DataRate::kbps(300);
+  config.transport.rates.max_rate = DataRate::kbps(2000);
+  config.transport.rates.min_rate = DataRate::kbps(10);
+  SimulatedTimeClient* client = s.CreateSimulatedTimeClient(
+      "send", config, {PacketStreamConfig()}, {send_net}, {ret_net});
+
+  s.RunFor(TimeDelta::seconds(10));
+  send_net->PauseTransmissionUntil(s.Now() + TimeDelta::seconds(10));
+  s.RunFor(TimeDelta::seconds(3));
+
+  // Expect behavior: after a 3 seconds delay, the target rate is reduced to the
+  // minimum pushback threshold kDefaultMinPushbackTargetBitrateBps, which is
+  // defined in congestion_window_pushback_controller.
+  EXPECT_LT(client->target_rate_kbps(), 40);
+}
+
 TEST_F(GoogCcNetworkControllerTest, OnNetworkRouteChanged) {
   NetworkControlUpdate update;
   DataRate new_bitrate = DataRate::bps(200000);
