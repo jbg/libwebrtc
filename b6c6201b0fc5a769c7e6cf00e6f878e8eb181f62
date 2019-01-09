@@ -904,6 +904,30 @@
       "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83a264cb_ffa6429b",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-09T15:05:53Z",
+      "side": 1,
+      "message": "s/into code/into comment in the code/",
+      "parentUuid": "3a4a1f5b_7efa51ab",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 64,
+        "endChar": 15
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
