@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "577c1ad1_01c3af09",
+        "filename": "test/pc/e2e/api/audio_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "924da2a1_86bf3cc3",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4738bea_3ea70104",
         "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
         "patchSetId": 6
@@ -39,6 +63,24 @@
       "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e665e64_939cdb7a",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4738bea_3ea70104",
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "146e5afd_425372b9",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab6c0fb1_4b571b22",
+      "range": {
+        "startLine": 40,
+        "startChar": 9,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76fa4a92_0821942b",
         "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
         "patchSetId": 6
@@ -85,6 +151,30 @@
       "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c694da6_457c4fba",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76fa4a92_0821942b",
+      "range": {
+        "startLine": 62,
+        "startChar": 47,
+        "endLine": 62,
+        "endChar": 61
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "6180540c_964fdfeb",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36ecebbf_81d7d2ef",
+      "range": {
+        "startLine": 65,
+        "startChar": 17,
+        "endLine": 65,
+        "endChar": 31
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fa5f35c_4856b410",
         "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
         "patchSetId": 6
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "49be6588_18c53b60",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fa5f35c_4856b410",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 33
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ca2d767_810c6b12",
         "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
         "patchSetId": 6
@@ -154,6 +292,30 @@
       "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90855455_ec181a7d",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ca2d767_810c6b12",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 11
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -203,6 +365,54 @@
     },
     {
       "key": {
+        "uuid": "dcc6c8a1_2f405ee2",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d708a4a_0deb548e",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 5
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52820006_069de91a",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aec10b4a_1a16c0d9",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6713891f_3436c6a5",
         "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
         "patchSetId": 6
@@ -226,6 +436,30 @@
     },
     {
       "key": {
+        "uuid": "36f11ae8_fb632cf5",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6713891f_3436c6a5",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1225d2a7_e8223f55",
         "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
         "patchSetId": 6
@@ -246,6 +480,30 @@
       "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e4cacf6_9139c7cb",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1225d2a7_e8223f55",
+      "range": {
+        "startLine": 31,
+        "startChar": 20,
+        "endLine": 31,
+        "endChar": 23
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -295,6 +553,54 @@
     },
     {
       "key": {
+        "uuid": "4f9f145f_66c76672",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "In the last patch set method is abstract. Also this value can\u0027t be provided in constructor, because analyzer will be constructed by user and user don;t know, how many thread framework will use, so can\u0027t tell how may free cores will be available. It is why framework will provide this value to the analyzer.",
+      "parentUuid": "1e8562a6_8c339de6",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "614f4578_798a48e8",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d83a525_8a127ca0",
+      "range": {
+        "startLine": 32,
+        "startChar": 30,
+        "endLine": 32,
+        "endChar": 43
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7998f775_5409f5a3",
         "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
         "patchSetId": 6
@@ -315,6 +621,30 @@
       "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "882fe3ab_284f5fc1",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7998f775_5409f5a3",
+      "range": {
+        "startLine": 36,
+        "startChar": 35,
+        "endLine": 36,
+        "endChar": 47
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -341,6 +671,30 @@
     },
     {
       "key": {
+        "uuid": "341c155b_5902b84d",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Frame id size is specified exactly, because it will be injected into frame and encoded image on different levels, so bytes count is important to us here.",
+      "parentUuid": "0935d8c9_26ededb2",
+      "range": {
+        "startLine": 43,
+        "startChar": 30,
+        "endLine": 43,
+        "endChar": 38
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a919dee_b7f84f0c",
         "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
         "patchSetId": 6
@@ -361,6 +715,30 @@
       "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84d935f9_3b44623e",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a919dee_b7f84f0c",
+      "range": {
+        "startLine": 47,
+        "startChar": 39,
+        "endLine": 47,
+        "endChar": 52
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -387,6 +765,30 @@
     },
     {
       "key": {
+        "uuid": "8b250f34_ee0122ab",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45ae26a9_ae2a2893",
+      "range": {
+        "startLine": 61,
+        "startChar": 57,
+        "endLine": 61,
+        "endChar": 67
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "715c7eed_87c723b4",
         "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
         "patchSetId": 6
@@ -410,6 +812,30 @@
     },
     {
       "key": {
+        "uuid": "bc4ab5ea_701d0d31",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "715c7eed_87c723b4",
+      "range": {
+        "startLine": 63,
+        "startChar": 19,
+        "endLine": 63,
+        "endChar": 20
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7df26c69_b8f42e73",
         "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
         "patchSetId": 6
@@ -430,6 +856,30 @@
       "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4931603_5a720b5b",
+        "filename": "test/pc/e2e/api/video_quality_analyzer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-09T13:13:58Z",
+      "side": 1,
+      "message": "This interface won\u0027t provide any stats. Different implementations can have its own stats and stats API. So user can hold a reference to the analyzer and invoke implementation\u0027s methods to get stats in any format. Default implementation will use embedded reporting mechanism.",
+      "parentUuid": "7df26c69_b8f42e73",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 64,
+        "endChar": 15
+      },
+      "revId": "b6c6201b0fc5a769c7e6cf00e6f878e8eb181f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
