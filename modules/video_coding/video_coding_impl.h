@@ -59,7 +59,7 @@ class VCMProcessTimer {
 
 class VideoSender {
  public:
-  typedef VideoCodingModule::SenderNackMode SenderNackMode;
+  enum class SenderNackMode { kNackNone, kNackAll, kNackSelective };
 
   VideoSender(Clock* clock, EncodedImageCallback* post_encode_callback);
   ~VideoSender();
@@ -100,6 +100,8 @@ class VideoSender {
 
 class VideoReceiver : public Module {
  public:
+  enum ReceiverRobustness { kNone, kHardNack };
+
   VideoReceiver(Clock* clock,
                 VCMTiming* timing,
                 NackSender* nack_sender = nullptr,
@@ -130,9 +132,8 @@ class VideoReceiver : public Module {
   int32_t Delay() const;
 
   // DEPRECATED.
-  int SetReceiverRobustnessMode(
-      VideoCodingModule::ReceiverRobustness robustnessMode,
-      VCMDecodeErrorMode errorMode);
+  int SetReceiverRobustnessMode(ReceiverRobustness robustnessMode,
+                                VCMDecodeErrorMode errorMode);
 
   void SetNackSettings(size_t max_nack_list_size,
                        int max_packet_age_to_nack,
