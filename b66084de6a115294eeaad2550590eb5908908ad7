@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0d7bc53b_04341475",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-11T10:36:12Z",
+      "side": 1,
+      "message": "I remember a rule that class like this allowed to have Interface suffix (but even that one can\u0027t find anymore), but I\u0027m not aware of any rule that mandate it.\n\nCan you link to some rule about it?",
+      "parentUuid": "9a0dc956_9f829b1d",
+      "revId": "b66084de6a115294eeaad2550590eb5908908ad7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9e157bc7_657c54f7",
         "filename": "api/task_queue/queued_task.h",
         "patchSetId": 7
@@ -30,6 +48,30 @@
       "writtenOn": "2019-01-11T10:21:36Z",
       "side": 1,
       "message": "do we need to expose there as well? Or could we just expose the interface? If we need to expose, could we put them in a different file, to make the dependency more explicit.",
+      "range": {
+        "startLine": 42,
+        "startChar": 28,
+        "endLine": 42,
+        "endChar": 38
+      },
+      "revId": "b66084de6a115294eeaad2550590eb5908908ad7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d9484b5_c7ecff1e",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-11T10:36:12Z",
+      "side": 1,
+      "message": "Good point, we probably do not want to expose this helper, it is for TaskQueue users, i.e. better stay internally in the webrtc.\nReverted. (putting it into a different file seems like a good idea too, but then it should be a topic for another change)",
+      "parentUuid": "9e157bc7_657c54f7",
       "range": {
         "startLine": 42,
         "startChar": 28,
