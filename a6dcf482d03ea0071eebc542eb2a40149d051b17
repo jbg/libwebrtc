@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bdb8e82_94139be5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5528
+      },
+      "writtenOn": "2019-01-11T12:52:16Z",
+      "side": 1,
+      "message": "Can we get rid of the noise_suppression() function altogether? Or make it return a pointer-to-const? So that set_level doesn\u0027t work? That would force clients to use ApplyConfig instead.",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 24
+      },
+      "revId": "a6dcf482d03ea0071eebc542eb2a40149d051b17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b9afc70_527362cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5528
+      },
+      "writtenOn": "2019-01-11T12:52:16Z",
+      "side": 1,
+      "message": "Have you considered updating the config during the GetConfig() call instead?",
+      "range": {
+        "startLine": 16,
+        "startChar": 109,
+        "endLine": 16,
+        "endChar": 120
+      },
+      "revId": "a6dcf482d03ea0071eebc542eb2a40149d051b17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
