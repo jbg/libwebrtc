@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a0dc956_9f829b1d",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-11T10:21:36Z",
+      "side": 1,
+      "message": "Should this have an Interface suffix?",
+      "revId": "b66084de6a115294eeaad2550590eb5908908ad7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e157bc7_657c54f7",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-11T10:21:36Z",
+      "side": 1,
+      "message": "do we need to expose there as well? Or could we just expose the interface? If we need to expose, could we put them in a different file, to make the dependency more explicit.",
+      "range": {
+        "startLine": 42,
+        "startChar": 28,
+        "endLine": 42,
+        "endChar": 38
+      },
+      "revId": "b66084de6a115294eeaad2550590eb5908908ad7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
