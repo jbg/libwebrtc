@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d892d6f4_7f1f7a8c",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-11T10:44:13Z",
+      "side": 1,
+      "message": "It\u0027s optional, but if we add it, there\u0027s a rule saying that we don\u0027t allow it to have implementations. This can be nice as documentation and discouraging exanding on it in the future.",
+      "parentUuid": "0d7bc53b_04341475",
+      "revId": "b66084de6a115294eeaad2550590eb5908908ad7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9e157bc7_657c54f7",
         "filename": "api/task_queue/queued_task.h",
         "patchSetId": 7
