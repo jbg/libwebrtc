@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dabae4d4_106f668a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-01-11T14:13:26Z",
+      "side": 1,
+      "message": "Yes, but not yet. I added a sentence in the CL description to clarify that this is intended to replace noise_suppression().\n\nWe cannot get rid of / modify noise_suppression() until clients stop using it.\nClients can\u0027t stop using it without getting an alternative API.\nThis CL adds that alternative API.\n\nDuring a period where clients can migrate to the new API, both APIs need to work simultaneously (and be reasonably compatible). That\u0027s what the noise_suppression_proxy is for.",
+      "parentUuid": "0bdb8e82_94139be5",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 24
+      },
+      "revId": "a6dcf482d03ea0071eebc542eb2a40149d051b17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1b9afc70_527362cb",
         "filename": "/COMMIT_MSG",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-11T12:52:16Z",
       "side": 1,
       "message": "Have you considered updating the config during the GetConfig() call instead?",
+      "range": {
+        "startLine": 16,
+        "startChar": 109,
+        "endLine": 16,
+        "endChar": 120
+      },
+      "revId": "a6dcf482d03ea0071eebc542eb2a40149d051b17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8484489_6f0420aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-01-11T14:13:26Z",
+      "side": 1,
+      "message": "Do you mean like MutateConfig()?\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_processing/audio_processing_impl.h?q\u003dmutateconfig\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d126\n\nYes, but it doesn\u0027t help in this case: NoiseSuppression does not have any reference to APM. The interface NoiseSuppressionProxy adds that reference.\n\nMaybe MutateConfig should have prevailed as the reconfig-method of choice for APM. Then ApplyConfig should not have been a function in AudioProcesssing, but rather in AudioProcessingBuilder, with construction-time configuration.",
+      "parentUuid": "1b9afc70_527362cb",
       "range": {
         "startLine": 16,
         "startChar": 109,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7dd1059e_dfb79ea7",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-01-11T14:13:26Z",
+      "side": 1,
+      "message": "I have no strong opinion. The map version is neat. I may be leaning towards switch-case.\n\nThere is a small bit of extra mental work to load how std::map works, and how it handles failure. It does get vertically more compact, but I\u0027m not sure it\u0027s more readable. Do you have any strong preferences? Otherwise I will leave it as-is. (and keep the map solution in mind for the future :)\n\nNoiseSuppression::Level NsConfigLevelToInterfaceLevel(\n    AudioProcessing::Config::NoiseSuppression::Level level) {\n  using NsConfig \u003d AudioProcessing::Config::NoiseSuppression;\n  std::map\u003cNsConfig::Level, NoiseSuppression::Level\u003e config_map \u003d {\n      {NsConfig::kLow, NoiseSuppression::kLow},\n      {NsConfig::kModerate, NoiseSuppression::kModerate},\n      {NsConfig::kHigh, NoiseSuppression::kHigh},\n      {NsConfig::kVeryHigh, NoiseSuppression::kVeryHigh}};\n  return config_map.at(level);\n}",
+      "parentUuid": "5b30889d_9af060ac",
+      "range": {
+        "startLine": 125,
+        "startChar": 2,
+        "endLine": 125,
+        "endChar": 3
+      },
+      "revId": "a6dcf482d03ea0071eebc542eb2a40149d051b17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "594f2dd8_6b43d60d",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 11
@@ -82,6 +154,30 @@
       "writtenOn": "2019-01-11T12:52:28Z",
       "side": 1,
       "message": "Can noise_suppression be made into a private submodule now? Or maybe the proxy should own it (but then the proxy wouldn\u0027t be a proxy. APMAwareNoiseSuppressionContainer :-). I think we don\u0027t need two members for the same thing.",
+      "range": {
+        "startLine": 255,
+        "startChar": 2,
+        "endLine": 255,
+        "endChar": 57
+      },
+      "revId": "a6dcf482d03ea0071eebc542eb2a40149d051b17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1ff8fbc_e95d5d7c",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-01-11T14:13:26Z",
+      "side": 1,
+      "message": "I don\u0027t think it should be in private_submodules_ yet, if only to remind us that we cannot delete it while noise_suppression() still gives an (implicit) reference to it (via the proxy). I\u0027ll add a TODO to move it when the public API function is gone.\n\nI also think APM still needs a direct reference to the NoiseSuppressionImpl instance:\nNoiseSuppressionProxy::Enable() will need to call AudioProcessing::ApplyConfig() to update the internal Config, and AudioProcessing::ApplyConfig() will need to call NoiseSuppressionImpl::Enable() instance, since calling NoiseSuppressionProxy::Enable() will recursively call ApplyConfig again.",
+      "parentUuid": "594f2dd8_6b43d60d",
       "range": {
         "startLine": 255,
         "startChar": 2,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "96af52aa_00219908",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-01-11T14:13:26Z",
+      "side": 1,
+      "message": "Hmm, I don\u0027t think so.\n\nThe aim is to remove the class NoiseSuppression, which includes its Level enum. Hence another enum must be declared in the config.\n\nA NoiseSuppressionProxy::set_level() call must somehow update the APM config, so it must convert from the old enum to the new.\n\nAn ApplyConfig call must somehow update the suppression level in the NoiseSuppression, so it must convert from the new enum to the old.",
+      "parentUuid": "ce2d2ef3_9ce4b82c",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 0
+      },
+      "revId": "a6dcf482d03ea0071eebc542eb2a40149d051b17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "232d958c_327eeeb4",
         "filename": "modules/audio_processing/noise_suppression_proxy.cc",
         "patchSetId": 11
@@ -128,6 +248,30 @@
       "writtenOn": "2019-01-11T12:52:28Z",
       "side": 1,
       "message": "Consider using a std::map",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "a6dcf482d03ea0071eebc542eb2a40149d051b17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb01f6f2_ca8bd11e",
+        "filename": "modules/audio_processing/noise_suppression_proxy.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-01-11T14:13:26Z",
+      "side": 1,
+      "message": "(noted! let\u0027s discuss above)",
+      "parentUuid": "232d958c_327eeeb4",
       "range": {
         "startLine": 35,
         "startChar": 0,
