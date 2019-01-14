@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9c6ef28_0869863a",
+        "filename": "test/testsupport/y4m_frame_reader_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-14T12:51:08Z",
+      "side": 1,
+      "message": "Nit: change to more neutral \"abcdef\". This way it will be clear that this is an arbitrary test data.",
+      "range": {
+        "startLine": 29,
+        "startChar": 47,
+        "endLine": 29,
+        "endChar": 53
+      },
+      "revId": "abd704a84a69c6b5cd3cab6d41f0544668fedc5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
