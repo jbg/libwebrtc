@@ -141,7 +141,7 @@ RTPSender::RTPSender(
       transport_feedback_observer_(transport_feedback_observer),
       transport_(transport),
       sending_media_(true),  // Default to sending media.
-      force_part_of_allocation_(false),
+      part_of_allocation_(false),
       max_packet_size_(IP_PACKET_SIZE - 28),  // Default is IP-v4/UDP.
       last_payload_type_(-1),
       payload_type_map_(),
@@ -633,8 +633,7 @@ size_t RTPSender::SendPadData(size_t bytes,
       rtc::CritScope lock(&send_critsect_);
       has_transport_seq_num =
           UpdateTransportSequenceNumber(&padding_packet, &options.packet_id);
-      options.included_in_allocation =
-          has_transport_seq_num || force_part_of_allocation_;
+      options.included_in_allocation = part_of_allocation_;
       options.included_in_feedback = has_transport_seq_num;
     }
     padding_packet.SetPadding(padding_bytes_in_packet);
@@ -844,8 +843,7 @@ bool RTPSender::PrepareAndSendPacket(std::unique_ptr<RtpPacketToSend> packet,
     rtc::CritScope lock(&send_critsect_);
     has_transport_seq_num =
         UpdateTransportSequenceNumber(packet_to_send, &options.packet_id);
-    options.included_in_allocation =
-        has_transport_seq_num || force_part_of_allocation_;
+    options.included_in_allocation = part_of_allocation_;
     options.included_in_feedback = has_transport_seq_num;
   }
   if (has_transport_seq_num) {
@@ -988,8 +986,7 @@ bool RTPSender::SendToNetwork(std::unique_ptr<RtpPacketToSend> packet,
     rtc::CritScope lock(&send_critsect_);
     has_transport_seq_num =
         UpdateTransportSequenceNumber(packet.get(), &options.packet_id);
-    options.included_in_allocation =
-        has_transport_seq_num || force_part_of_allocation_;
+    options.included_in_allocation = part_of_allocation_;
     options.included_in_feedback = has_transport_seq_num;
   }
   if (has_transport_seq_num) {
@@ -1242,7 +1239,7 @@ bool RTPSender::SendingMedia() const {
 
 void RTPSender::SetAsPartOfAllocation(bool part_of_allocation) {
   rtc::CritScope lock(&send_critsect_);
-  force_part_of_allocation_ = part_of_allocation;
+  part_of_allocation_ = part_of_allocation;
 }
 
 void RTPSender::SetTimestampOffset(uint32_t timestamp) {
