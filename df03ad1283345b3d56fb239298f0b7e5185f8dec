@@ -45,6 +45,30 @@
       "revId": "df03ad1283345b3d56fb239298f0b7e5185f8dec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0c72c66_b14833e2",
+        "filename": "test/testsupport/copy_to_file_audio_capturer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-14T13:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fab307e4_7ff7e001",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 60
+      },
+      "revId": "df03ad1283345b3d56fb239298f0b7e5185f8dec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
