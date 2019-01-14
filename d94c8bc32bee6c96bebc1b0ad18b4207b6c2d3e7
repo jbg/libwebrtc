@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dd4f446d_140c8f8d",
+        "filename": "test/testsupport/video_frame_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-14T09:29:23Z",
+      "side": 1,
+      "message": "Moving was done to avoid copy, but I decided to remove const reference to prevent caller\u0027s variable corruption.",
+      "parentUuid": "3dc816f7_b34fed2f",
+      "range": {
+        "startLine": 30,
+        "startChar": 24,
+        "endLine": 30,
+        "endChar": 51
+      },
+      "revId": "d94c8bc32bee6c96bebc1b0ad18b4207b6c2d3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de24ce97_59215bc3",
         "filename": "test/testsupport/video_frame_writer.h",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e823e58c_07919229",
+        "filename": "test/testsupport/video_frame_writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-14T09:29:23Z",
+      "side": 1,
+      "message": "No. This one is similar, but accept rtc::VideoFrame instead of the raw buffer to the write method. It is the main reason, why this one was created.",
+      "parentUuid": "de24ce97_59215bc3",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "d94c8bc32bee6c96bebc1b0ad18b4207b6c2d3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ff9d114_52aac5c6",
         "filename": "test/testsupport/video_frame_writer.h",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "d94c8bc32bee6c96bebc1b0ad18b4207b6c2d3e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cf357b6_9ffc1720",
+        "filename": "test/testsupport/video_frame_writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-14T09:29:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ff9d114_52aac5c6",
+      "range": {
+        "startLine": 39,
+        "startChar": 40,
+        "endLine": 39,
+        "endChar": 63
+      },
+      "revId": "d94c8bc32bee6c96bebc1b0ad18b4207b6c2d3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
