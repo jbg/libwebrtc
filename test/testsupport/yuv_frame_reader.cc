@@ -24,7 +24,8 @@ YuvFrameReaderImpl::YuvFrameReaderImpl(std::string input_filename,
                                        int width,
                                        int height)
     : input_filename_(input_filename),
-      frame_length_in_bytes_(0),
+      frame_length_in_bytes_(width * height +
+                             2 * ((width + 1) / 2) * ((height + 1) / 2)),
       width_(width),
       height_(height),
       number_of_frames_(-1),
@@ -40,9 +41,6 @@ bool YuvFrameReaderImpl::Init() {
             height_);
     return false;
   }
-  frame_length_in_bytes_ =
-      width_ * height_ + 2 * ((width_ + 1) / 2) * ((height_ + 1) / 2);
-
   input_file_ = fopen(input_filename_.c_str(), "rb");
   if (input_file_ == nullptr) {
     fprintf(stderr, "Couldn't open input file for reading: %s\n",

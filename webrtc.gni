@@ -124,9 +124,6 @@ declare_args() {
   # NDK r16 or above.
   rtc_enable_android_aaudio = false
 
-  # TODO(henrika): can this flag be removed?
-  rtc_enable_android_opensl = false
-
   # Link-Time Optimizations.
   # Executes code generation at link-time instead of compile-time.
   # https://gcc.gnu.org/wiki/LinkTimeOptimization
@@ -170,9 +167,6 @@ declare_args() {
   # audio samples from NetEQ, a sinus tone will be generated and replace the
   # real audio samples.
   rtc_audio_device_plays_sinus_tone = false
-
-  # Disable this to build without support for built-in software codecs.
-  rtc_use_builtin_sw_codecs = true
 
   if (is_ios) {
     # Build broadcast extension in AppRTCMobile for iOS. This results in the

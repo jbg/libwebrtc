@@ -21,6 +21,7 @@ group("test") {
     ":test_renderer",
     ":test_support",
     ":video_test_common",
+    "pc/e2e",
     "pc/e2e/api:peer_connection_quality_test_fixture_api",
   ]
 
@@ -254,6 +255,7 @@ if (rtc_include_tests) {
       "testsupport/frame_reader.h",
       "testsupport/frame_writer.h",
       "testsupport/mock/mock_frame_reader.h",
+      "testsupport/y4m_frame_reader.cc",
       "testsupport/y4m_frame_writer.cc",
       "testsupport/yuv_frame_reader.cc",
       "testsupport/yuv_frame_writer.cc",
@@ -325,6 +327,7 @@ if (rtc_include_tests) {
 
   rtc_test("test_support_unittests") {
     deps = [
+      ":call_config_utils",
       ":direct_transport",
       ":fake_video_codecs",
       ":fileutils",
@@ -343,17 +346,21 @@ if (rtc_include_tests) {
       "../api/video:builtin_video_bitrate_allocator_factory",
       "../api/video:video_frame",
       "../api/video:video_frame_i420",
+      "../call:video_stream_api",
       "../modules/rtp_rtcp:rtp_rtcp",
       "../modules/video_capture",
       "../modules/video_coding:simulcast_test_fixture_impl",
       "../rtc_base:rtc_base_approved",
       "../test:single_threaded_task_queue",
+      "pc/e2e:e2e_unittests",
       "scenario:scenario_unittests",
       "//testing/gmock",
       "//testing/gtest",
       "//third_party/abseil-cpp/absl/memory",
+      "//third_party/abseil-cpp/absl/strings",
     ]
     sources = [
+      "call_config_utils_unittest.cc",
       "direct_transport_unittest.cc",
       "fake_vp8_encoder_unittest.cc",
       "frame_generator_unittest.cc",
@@ -363,6 +370,7 @@ if (rtc_include_tests) {
       "testsupport/always_passing_unittest.cc",
       "testsupport/perf_test_unittest.cc",
       "testsupport/test_artifacts_unittest.cc",
+      "testsupport/y4m_frame_reader_unittest.cc",
       "testsupport/y4m_frame_writer_unittest.cc",
       "testsupport/yuv_frame_reader_unittest.cc",
       "testsupport/yuv_frame_writer_unittest.cc",
