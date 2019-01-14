@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea4065b0_24fe4e7c",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-14T11:28:35Z",
+      "side": 1,
+      "message": "The return value is rather subtle, so I think we should seriously consider using an enum with descriptive names instead, to make the code handling and producing the value easier to read. For an example, see https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/refcounter.h?q\u003drtc_base/ref\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d29, where RefCounterDecRef() returns kDroppedLastRef if we just dropped the last reference (and are therefore responsible for freeing the resource), and kOtherRefsRemained if we didn\u0027t drop the last reference.\n\nMaybe something like\n\n  enum class QueuedTaskOwnership {\n    kCallerStillOwnsTask,\n    kCallerLostOwnershipOfTask,\n  };\n\nAlternatively, we could do something like\n\n  virtual void Run(std::unique_ptr\u003cQueuedTask\u003e*) \u003d 0;\n\nand just require callers to allow us to steal their reference directly. That would be much safer.",
+      "revId": "22502132004102be6ef5182c7ce84e55fc552063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
