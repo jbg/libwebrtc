@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "86a62ed9_03331bb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-01-14T17:05:37Z",
+      "side": 1,
+      "message": "VideoFrameWriter",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "1ae3d20b6cc78952cabdd417922c847f62ad0233",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7665a964_365cd230",
         "filename": "test/testsupport/video_frame_writer.cc",
         "patchSetId": 3
