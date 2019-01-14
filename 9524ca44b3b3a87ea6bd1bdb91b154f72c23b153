@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d6394b9_cbdb9e88",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-14T13:04:39Z",
+      "side": 1,
+      "message": "Add TODO about removal of this alias?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 27
+      },
+      "revId": "9524ca44b3b3a87ea6bd1bdb91b154f72c23b153",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
