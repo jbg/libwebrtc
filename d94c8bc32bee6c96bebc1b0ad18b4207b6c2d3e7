@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dc816f7_b34fed2f",
+        "filename": "test/testsupport/video_frame_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-14T09:06:01Z",
+      "side": 1,
+      "message": "Do we need to take ownership of the output_file_name? What about storing a std::string\u0026 as data member and just use it?",
+      "range": {
+        "startLine": 30,
+        "startChar": 24,
+        "endLine": 30,
+        "endChar": 51
+      },
+      "revId": "d94c8bc32bee6c96bebc1b0ad18b4207b6c2d3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de24ce97_59215bc3",
+        "filename": "test/testsupport/video_frame_writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-14T09:06:01Z",
+      "side": 1,
+      "message": "Is this class implementing the webrtc::test::FrameWriter interface (https://cs.chromium.org/chromium/src/third_party/webrtc/test/testsupport/frame_writer.h?l\u003d24-43\u0026rcl\u003da12c42a6b2d979c1bca1c4263354335fa6bd759d)?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "d94c8bc32bee6c96bebc1b0ad18b4207b6c2d3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ff9d114_52aac5c6",
+        "filename": "test/testsupport/video_frame_writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-14T09:06:01Z",
+      "side": 1,
+      "message": "For consistency with WriteFrame, should this be `const webrtc::VideoFrame\u0026 frame`?",
+      "range": {
+        "startLine": 39,
+        "startChar": 40,
+        "endLine": 39,
+        "endChar": 63
+      },
+      "revId": "d94c8bc32bee6c96bebc1b0ad18b4207b6c2d3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
