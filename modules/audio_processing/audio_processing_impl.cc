@@ -453,26 +453,31 @@ int AudioProcessingImpl::Initialize(const ProcessingConfig& processing_config) {
 
 int AudioProcessingImpl::MaybeInitializeRender(
     const ProcessingConfig& processing_config) {
-  return MaybeInitialize(processing_config, false);
+  if (processing_config == formats_.api_format) {
+    return kNoError;
+  }
+  rtc::CritScope cs_capture(&crit_capture_);
+  return InitializeLocked(processing_config);
 }
 
 int AudioProcessingImpl::MaybeInitializeCapture(
-    const ProcessingConfig& processing_config,
-    bool force_initialization) {
-  return MaybeInitialize(processing_config, force_initialization);
-}
-
-// Calls InitializeLocked() if any of the audio parameters have changed from
-// their current values (needs to be called while holding the crit_render_lock).
-int AudioProcessingImpl::MaybeInitialize(
-    const ProcessingConfig& processing_config,
-    bool force_initialization) {
-  // Called from both threads. Thread check is therefore not possible.
-  if (processing_config == formats_.api_format && !force_initialization) {
-    return kNoError;
+    const StreamConfig& input_config,
+    const StreamConfig& output_config) {
+  {
+    rtc::CritScope cs_capture(&crit_capture_);
+    if (!UpdateActiveSubmoduleStates() &&
+        input_config == formats_.api_format.input_stream() &&
+        output_config == formats_.api_format.output_stream()) {
+      return kNoError;
+    }
   }
-
+  rtc::CritScope cs_render(&crit_render_);
   rtc::CritScope cs_capture(&crit_capture_);
+  // Re-read formats_.api_format in case it has been changed by the render
+  // thread after crit_capture_ was released.
+  ProcessingConfig processing_config = formats_.api_format;
+  processing_config.input_stream() = input_config;
+  processing_config.output_stream() = output_config;
   return InitializeLocked(processing_config);
 }
 
@@ -804,24 +809,12 @@ int AudioProcessingImpl::ProcessStream(const float* const* src,
                                        ChannelLayout output_layout,
                                        float* const* dest) {
   TRACE_EVENT0("webrtc", "AudioProcessing::ProcessStream_ChannelLayout");
-  StreamConfig input_stream;
-  StreamConfig output_stream;
-  {
-    // Access the formats_.api_format.input_stream beneath the capture lock.
-    // The lock must be released as it is later required in the call
-    // to ProcessStream(,,,);
-    rtc::CritScope cs(&crit_capture_);
-    input_stream = formats_.api_format.input_stream();
-    output_stream = formats_.api_format.output_stream();
-  }
-
-  input_stream.set_sample_rate_hz(input_sample_rate_hz);
-  input_stream.set_num_channels(ChannelsFromLayout(input_layout));
-  input_stream.set_has_keyboard(LayoutHasKeyboard(input_layout));
-  output_stream.set_sample_rate_hz(output_sample_rate_hz);
-  output_stream.set_num_channels(ChannelsFromLayout(output_layout));
-  output_stream.set_has_keyboard(LayoutHasKeyboard(output_layout));
-
+  StreamConfig input_stream(input_sample_rate_hz,
+                            ChannelsFromLayout(input_layout),
+                            LayoutHasKeyboard(input_layout));
+  StreamConfig output_stream(output_sample_rate_hz,
+                             ChannelsFromLayout(output_layout),
+                             LayoutHasKeyboard(output_layout));
   if (samples_per_channel != input_stream.num_frames()) {
     return kBadDataLengthError;
   }
@@ -833,35 +826,21 @@ int AudioProcessingImpl::ProcessStream(const float* const* src,
                                        const StreamConfig& output_config,
                                        float* const* dest) {
   TRACE_EVENT0("webrtc", "AudioProcessing::ProcessStream_StreamConfig");
-  ProcessingConfig processing_config;
-  bool reinitialization_required = false;
+  if (!src || !dest) {
+    return kNullPointerError;
+  }
   {
     // Acquire the capture lock in order to safely call the function
     // that retrieves the render side data. This function accesses apm
     // getters that need the capture lock held when being called.
     rtc::CritScope cs_capture(&crit_capture_);
     EmptyQueuedRenderAudio();
-
-    if (!src || !dest) {
-      return kNullPointerError;
-    }
-
-    processing_config = formats_.api_format;
-    reinitialization_required = UpdateActiveSubmoduleStates();
   }
 
-  processing_config.input_stream() = input_config;
-  processing_config.output_stream() = output_config;
+  // Do conditional reinitialization.
+  RETURN_ON_ERR(MaybeInitializeCapture(input_config, output_config));
 
-  {
-    // Do conditional reinitialization.
-    rtc::CritScope cs_render(&crit_render_);
-    RETURN_ON_ERR(
-        MaybeInitializeCapture(processing_config, reinitialization_required));
-  }
   rtc::CritScope cs_capture(&crit_capture_);
-  RTC_DCHECK_EQ(processing_config.input_stream().num_frames(),
-                formats_.api_format.input_stream().num_frames());
 
   if (aec_dump_) {
     RecordUnprocessedCaptureStream(src);
@@ -1108,14 +1087,6 @@ void AudioProcessingImpl::EmptyQueuedRenderAudio() {
 
 int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
   TRACE_EVENT0("webrtc", "AudioProcessing::ProcessStream_AudioFrame");
-  {
-    // Acquire the capture lock in order to safely call the function
-    // that retrieves the render side data. This function accesses APM
-    // getters that need the capture lock held when being called.
-    rtc::CritScope cs_capture(&crit_capture_);
-    EmptyQueuedRenderAudio();
-  }
-
   if (!frame) {
     return kNullPointerError;
   }
@@ -1127,30 +1098,23 @@ int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
     return kBadSampleRateError;
   }
 
-  ProcessingConfig processing_config;
-  bool reinitialization_required = false;
   {
-    // Aquire lock for the access of api_format.
-    // The lock is released immediately due to the conditional
-    // reinitialization.
+    // Acquire the capture lock in order to safely call the function
+    // that retrieves the render side data. This function accesses APM
+    // getters that need the capture lock held when being called.
     rtc::CritScope cs_capture(&crit_capture_);
-    // TODO(ajm): The input and output rates and channels are currently
-    // constrained to be identical in the int16 interface.
-    processing_config = formats_.api_format;
-
-    reinitialization_required = UpdateActiveSubmoduleStates();
+    EmptyQueuedRenderAudio();
   }
-  processing_config.input_stream().set_sample_rate_hz(frame->sample_rate_hz_);
-  processing_config.input_stream().set_num_channels(frame->num_channels_);
-  processing_config.output_stream().set_sample_rate_hz(frame->sample_rate_hz_);
-  processing_config.output_stream().set_num_channels(frame->num_channels_);
+  // TODO(ajm): The input and output rates and channels are currently
+  // constrained to be identical in the int16 interface.
+  const StreamConfig input_config(frame->sample_rate_hz_, frame->num_channels_,
+                                  /*has_keyboard=*/false);
+  const StreamConfig output_config(frame->sample_rate_hz_, frame->num_channels_,
+                                   /*has_keyboard=*/false);
 
-  {
-    // Do conditional reinitialization.
-    rtc::CritScope cs_render(&crit_render_);
-    RETURN_ON_ERR(
-        MaybeInitializeCapture(processing_config, reinitialization_required));
-  }
+  // Do conditional reinitialization.
+  RETURN_ON_ERR(MaybeInitializeCapture(input_config, output_config));
+
   rtc::CritScope cs_capture(&crit_capture_);
   if (frame->samples_per_channel_ !=
       formats_.api_format.input_stream().num_frames()) {
