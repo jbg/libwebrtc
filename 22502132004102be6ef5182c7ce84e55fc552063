@@ -16,6 +16,24 @@
       "revId": "22502132004102be6ef5182c7ce84e55fc552063",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21bb058e_df47da1f",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-14T12:01:22Z",
+      "side": 1,
+      "message": "Changing (improving) widely used signatures of QueuedTask::Run, TaskQueue::PostTask and TaskQueue::PostDelayedTask are not part of my plan as that touch lot\u0027s of code but doesn\u0027t help with my main goals.\n\nDo you suggest that kind of changes before making QueuedTask and TaskQueue interface (more) public?\n\n(on the subject of actual Run function. I agree that return value can be very confusion, specially bool more often means if it is success or or not.\nI would prefer simpler signature void Run() \u003d 0; where task is always responsible for own deallocation if run, i.e. bool Run() { do somthing; return true; } would change to void Run() { do something; delete this; }",
+      "parentUuid": "ea4065b0_24fe4e7c",
+      "revId": "22502132004102be6ef5182c7ce84e55fc552063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
