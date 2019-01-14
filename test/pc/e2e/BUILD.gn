@@ -1,0 +1,34 @@
+# Copyright (c) 2018 The WebRTC project authors. All Rights Reserved.
+#
+# Use of this source code is governed by a BSD-style license
+# that can be found in the LICENSE file in the root of the source
+# tree. An additional intellectual property rights grant can be found
+# in the file PATENTS.  All contributing project authors may
+# be found in the AUTHORS file in the root of the source tree.
+
+import("../../../webrtc.gni")
+
+group("e2e") {
+  testonly = true
+
+  deps = [
+    ":example_video_quality_analyzer",
+  ]
+}
+
+rtc_source_set("example_video_quality_analyzer") {
+  visibility = [ "*" ]
+  testonly = true
+  sources = [
+    "analyzer/video/example_video_quality_analyzer.cc",
+    "analyzer/video/example_video_quality_analyzer.h",
+  ]
+
+  deps = [
+    "../../../api/video:encoded_image",
+    "../../../api/video:video_frame",
+    "../../../rtc_base:criticalsection",
+    "../../../rtc_base:logging",
+    "api:video_quality_analyzer_api",
+  ]
+}
