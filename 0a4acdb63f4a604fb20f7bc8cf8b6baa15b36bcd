@@ -22,6 +22,30 @@
       "revId": "0a4acdb63f4a604fb20f7bc8cf8b6baa15b36bcd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cdbcf41_a7f8e453",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-14T10:04:08Z",
+      "side": 1,
+      "message": "Or yes, you can also fix this. Thanks for doing it.",
+      "parentUuid": "af651eac_e0195c0f",
+      "range": {
+        "startLine": 873,
+        "startChar": 2,
+        "endLine": 874,
+        "endChar": 1
+      },
+      "revId": "0a4acdb63f4a604fb20f7bc8cf8b6baa15b36bcd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
