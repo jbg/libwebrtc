@@ -52,6 +52,24 @@
       "revId": "22502132004102be6ef5182c7ce84e55fc552063",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5d14e3f_1b22410e",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-14T12:50:11Z",
+      "side": 1,
+      "message": "yes, this kind of change would break out-of-tree code:\ncustom implementations of the TaskQueue have to rely on exact signature of the QueuedTask::Run",
+      "parentUuid": "c3176b8c_14eb7104",
+      "revId": "22502132004102be6ef5182c7ce84e55fc552063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
