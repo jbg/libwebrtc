@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af651eac_e0195c0f",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-14T08:04:38Z",
+      "side": 1,
+      "message": "Unfortunately our code triggers some clang bad constructs warnings (in this case it is the one that forces you to use `override` instead of `virtual` in subclasses). I will run https://clang.llvm.org/extra/clang-tidy/checks/modernize-use-override.html and auto-fix the code base as soon as I get some time.\n\nSo, to recap. Your code breaks because this build target #includes a header with this violation and it doesn\u0027t suppress the warning. To suppress please add:\n\n  if (!build_with_chromium \u0026\u0026 is_clang) {\n    # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).\n    suppressed_configs +\u003d [ \"//build/config/clang:find_bad_constructs\" ]\n  }",
+      "range": {
+        "startLine": 873,
+        "startChar": 2,
+        "endLine": 874,
+        "endChar": 1
+      },
+      "revId": "0a4acdb63f4a604fb20f7bc8cf8b6baa15b36bcd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
