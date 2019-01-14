@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7baf7876_37eee4ef",
+        "filename": "api/task_queue/queued_task.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-14T13:27:24Z",
+      "side": 1,
+      "message": "IIRC the Google style guide used to say that pure virtual classes (\"interfaces\") are an exception to the ban on multiple inheritance, and that such classes (and only such classes) may have an \"Interface\" suffix. Now all that text is gone, and it simply says \"Multiple inheritance is permitted, but multiple implementation inheritance is strongly discouraged.\"\n\nThe Chromium style guide refers to this now-missing text, and says explicitly that Chromium code doesn\u0027t need the \"Interface\" suffix: https://chromium.googlesource.com/chromium/src/+/HEAD/styleguide/c++/c++.md#multiple-inheritance\n\nIOW, add an \"Interface\" suffix if you feel it\u0027s necessary, but the default should be not to do that.",
+      "parentUuid": "d892d6f4_7f1f7a8c",
+      "revId": "b66084de6a115294eeaad2550590eb5908908ad7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e157bc7_657c54f7",
         "filename": "api/task_queue/queued_task.h",
         "patchSetId": 7
