@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b54ff1e_1e20d106",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-14T13:33:08Z",
+      "side": 1,
+      "message": "Typo: defined.",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "df03ad1283345b3d56fb239298f0b7e5185f8dec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fab307e4_7ff7e001",
+        "filename": "test/testsupport/copy_to_file_audio_capturer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-14T13:33:08Z",
+      "side": 1,
+      "message": "Maybe check that the remove is successful?",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 60
+      },
+      "revId": "df03ad1283345b3d56fb239298f0b7e5185f8dec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
