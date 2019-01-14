@@ -352,6 +352,7 @@ void PacedSender::Process() {
       break;
 
     critsect_.Leave();
+    pacing_info.prioritized = packet->priority == kHighPriority;
     bool success = packet_sender_->TimeToSendPacket(
         packet->ssrc, packet->sequence_number, packet->capture_time_ms,
         packet->retransmission, pacing_info);
@@ -378,6 +379,7 @@ void PacedSender::Process() {
                                       : padding_budget_.bytes_remaining());
       if (padding_needed > 0) {
         critsect_.Leave();
+        pacing_info.prioritized = false;
         size_t padding_sent =
             packet_sender_->TimeToSendPadding(padding_needed, pacing_info);
         critsect_.Enter();

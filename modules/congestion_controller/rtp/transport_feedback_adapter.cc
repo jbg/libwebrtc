@@ -113,6 +113,7 @@ absl::optional<SentPacket> TransportFeedbackAdapter::ProcessSentPacket(
       msg.size = DataSize::bytes(packet->payload_size);
       msg.send_time = Timestamp::ms(packet->send_time_ms);
       msg.sequence_number = packet->long_sequence_number;
+      msg.pacing_info = packet->pacing_info;
       msg.prior_unacked_data = DataSize::bytes(packet->unacknowledged_data);
       msg.data_in_flight =
           send_time_history_.GetOutstandingData(local_net_id_, remote_net_id_);

@@ -27,6 +27,7 @@ constexpr double kDefaultTrendlineThresholdGain = 4.0;
 
 DelayBasedRateControllerConfig::DelayBasedRateControllerConfig()
     : enabled("Enabled"),
+      ignore_prioritized_in_overuse("no_prio"),
       no_ack_backoff_fraction("no_ack_frac", 0.8),
       no_ack_backoff_interval("no_ack_int", TimeDelta::ms(1000)),
       ack_backoff_fraction("ack_dec", 0.90),
@@ -39,11 +40,11 @@ DelayBasedRateControllerConfig::DelayBasedRateControllerConfig()
       linear_increase_threshold("cut", DataRate::kbps(300)),
       reference_duration_offset("dur_offs", TimeDelta::ms(100)) {
   ParseFieldTrial(
-      {&enabled, &no_ack_backoff_fraction, &no_ack_backoff_interval,
-       &ack_backoff_fraction, &probe_backoff_fraction, &initial_increase_rate,
-       &increase_rate, &stop_increase_after, &min_increase_interval,
-       &first_period_increase_rate, &linear_increase_threshold,
-       &reference_duration_offset},
+      {&enabled, &ignore_prioritized_in_overuse, &no_ack_backoff_fraction,
+       &no_ack_backoff_interval, &ack_backoff_fraction, &probe_backoff_fraction,
+       &initial_increase_rate, &increase_rate, &stop_increase_after,
+       &min_increase_interval, &first_period_increase_rate,
+       &linear_increase_threshold, &reference_duration_offset},
       field_trial::FindFullName("WebRTC-Bwe-DelayBasedRateController"));
 }
 DelayBasedRateControllerConfig::~DelayBasedRateControllerConfig() = default;
@@ -96,6 +97,9 @@ void DelayBasedRateController::OnTransportPacketsFeedback(
   first_unacked_send_ = msg.first_unacked_send_time;
 
   for (auto& packet : packets) {
+    if (conf_.ignore_prioritized_in_overuse &&
+        packet.sent_packet.pacing_info.prioritized)
+      continue;
     packet_grouper_.AddPacketInfo(packet, msg.feedback_time);
   }
 
