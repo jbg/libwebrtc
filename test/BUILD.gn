@@ -254,6 +254,8 @@ if (rtc_include_tests) {
       "testsupport/frame_reader.h",
       "testsupport/frame_writer.h",
       "testsupport/mock/mock_frame_reader.h",
+      "testsupport/video_frame_writer.cc",
+      "testsupport/video_frame_writer.h",
       "testsupport/y4m_frame_writer.cc",
       "testsupport/yuv_frame_reader.cc",
       "testsupport/yuv_frame_writer.cc",
@@ -264,6 +266,7 @@ if (rtc_include_tests) {
       ":test_support",
       ":video_test_common",
       "..:webrtc_common",
+      "../api:scoped_refptr",
       "../api/video:video_frame",
       "../api/video:video_frame_i420",
       "../common_video",
@@ -271,6 +274,7 @@ if (rtc_include_tests) {
       "../rtc_base:rtc_base_approved",
       "../system_wrappers",
       "//testing/gtest",
+      "//third_party/abseil-cpp/absl/memory:memory",
       "//third_party/libyuv",
     ]
 
