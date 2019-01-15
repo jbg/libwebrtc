@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33b20139_3607e500",
+        "filename": "api/DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-15T19:56:33Z",
+      "side": 1,
+      "message": "Is this line needed? I think checkdeps should not complain when headers from api/ are included.",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 59
+      },
+      "revId": "7153eea1cca9cdc6e2ebca953ac08f137e5076b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad51f29b_edfaefb5",
+        "filename": "logging/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-15T19:56:33Z",
+      "side": 1,
+      "message": "Nit: TODO(webrtc:10206).",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "7153eea1cca9cdc6e2ebca953ac08f137e5076b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd65fadd_14157acc",
+        "filename": "logging/rtc_event_log/rtc_event_log_factory_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-15T19:56:33Z",
+      "side": 1,
+      "message": "TODO(webrtc:10206)",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "7153eea1cca9cdc6e2ebca953ac08f137e5076b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
