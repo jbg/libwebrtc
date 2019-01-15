@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "absl/strings/match.h"
+#include "api/rtc_event_log/rtc_event_log.h"
 #include "api/rtp_parameters.h"
 #include "api/test/mock_video_bitrate_allocator.h"
 #include "api/test/mock_video_bitrate_allocator_factory.h"
@@ -31,7 +32,6 @@
 #include "api/video_codecs/video_encoder_factory.h"
 #include "call/flexfec_receive_stream.h"
 #include "common_video/h264/profile_level_id.h"
-#include "logging/rtc_event_log/rtc_event_log.h"
 #include "media/base/fake_network_interface.h"
 #include "media/base/fake_video_capturer.h"
 #include "media/base/fake_video_renderer.h"

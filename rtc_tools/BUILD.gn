@@ -259,11 +259,11 @@ if (!build_with_chromium) {
         "../:webrtc_common",
 
         # TODO(kwiberg): Remove this dependency.
+        "../api:rtc_event_log_api",
         "../api/audio_codecs:audio_codecs_api",
         "../api/transport:goog_cc",
         "../call:call_interfaces",
         "../call:video_stream_api",
-        "../logging:rtc_event_log_api",
         "../logging:rtc_event_log_impl_base",
         "../logging:rtc_event_log_parser",
         "../logging:rtc_stream_config",
@@ -305,7 +305,7 @@ if (rtc_include_tests) {
       defines = [ "ENABLE_RTC_EVENT_LOG" ]
       deps = [
         ":event_log_visualizer_utils",
-        "../logging:rtc_event_log_api",
+        "../api:rtc_event_log_api",
         "../logging:rtc_event_log_parser",
         "../modules/audio_coding:neteq",
         "../modules/rtp_rtcp:rtp_rtcp_format",

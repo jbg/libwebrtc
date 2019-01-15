@@ -93,9 +93,9 @@ rtc_static_library("video") {
     "//third_party/abseil-cpp/absl/types:optional",
 
     # For RtxReceiveStream.
+    "../api:rtc_event_log_api",
     "../call:rtp_receiver",
     "../common_video",
-    "../logging:rtc_event_log_api",
     "../modules:module_api",
     "../modules/bitrate_controller",
     "../modules/pacing",
@@ -235,6 +235,7 @@ if (rtc_include_tests) {
     deps = [
       ":frame_dumping_decoder",
       "../api:fec_controller_api",
+      "../api:rtc_event_log_api",
       "../api:test_dependency_factory",
       "../api:video_quality_test_fixture_api",
       "../api/video:builtin_video_bitrate_allocator_factory",
@@ -243,7 +244,6 @@ if (rtc_include_tests) {
       "../call:fake_network",
       "../call:simulated_network",
       "../common_video",
-      "../logging:rtc_event_log_api",
       "../logging:rtc_event_log_impl_output",
       "../media:rtc_audio_video",
       "../media:rtc_encoder_simulcast_proxy",
@@ -411,11 +411,11 @@ if (rtc_include_tests) {
       "video_replay.cc",
     ]
     deps = [
+      "../api:rtc_event_log_api",
       "../api/test/video:function_video_factory",
       "../api/video_codecs:video_codecs_api",
       "../call:call_interfaces",
       "../common_video",
-      "../logging:rtc_event_log_api",
       "../media:rtc_internal_video_codecs",
       "../modules/rtp_rtcp",
       "../rtc_base:checks",
@@ -494,6 +494,7 @@ if (rtc_include_tests) {
       "../api:fake_frame_encryptor",
       "../api:libjingle_peerconnection_api",
       "../api:mock_frame_decryptor",
+      "../api:rtc_event_log_api",
       "../api:simulated_network_api",
       "../api/test/video:function_video_factory",
       "../api/video:builtin_video_bitrate_allocator_factory",
@@ -514,7 +515,6 @@ if (rtc_include_tests) {
       "../call:video_stream_api",
       "../common_video",
       "../common_video/test:utilities",
-      "../logging:rtc_event_log_api",
       "../media:rtc_audio_video",
       "../media:rtc_internal_video_codecs",
       "../media:rtc_media",

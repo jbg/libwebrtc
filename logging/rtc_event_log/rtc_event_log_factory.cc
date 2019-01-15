@@ -12,7 +12,7 @@
 
 #include <utility>
 
-#include "logging/rtc_event_log/rtc_event_log.h"
+#include "api/rtc_event_log/rtc_event_log.h"
 
 namespace webrtc {
 

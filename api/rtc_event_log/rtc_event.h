@@ -8,12 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef LOGGING_RTC_EVENT_LOG_EVENTS_RTC_EVENT_H_
-#define LOGGING_RTC_EVENT_LOG_EVENTS_RTC_EVENT_H_
+#ifndef API_RTC_EVENT_LOG_RTC_EVENT_H_
+#define API_RTC_EVENT_LOG_RTC_EVENT_H_
 
 #include <memory>
-
-#include "rtc_base/time_utils.h"
 
 namespace webrtc {
 
@@ -52,7 +50,7 @@ class RtcEvent {
     VideoSendStreamConfig
   };
 
-  RtcEvent() : timestamp_us_(rtc::TimeMicros()) {}
+  RtcEvent();
   virtual ~RtcEvent() = default;
 
   virtual Type GetType() const = 0;
@@ -63,11 +61,11 @@ class RtcEvent {
   int64_t timestamp_us() const { return timestamp_us_; }
 
  protected:
-  explicit RtcEvent(int64_t timestamp_us) : timestamp_us_(timestamp_us) {}
+  explicit RtcEvent(int64_t timestamp_us);
 
   const int64_t timestamp_us_;
 };
 
 }  // namespace webrtc
 
-#endif  // LOGGING_RTC_EVENT_LOG_EVENTS_RTC_EVENT_H_
+#endif  // API_RTC_EVENT_LOG_RTC_EVENT_H_

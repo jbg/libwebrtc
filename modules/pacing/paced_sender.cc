@@ -14,7 +14,7 @@
 #include <utility>
 
 #include "absl/memory/memory.h"
-#include "logging/rtc_event_log/rtc_event_log.h"
+#include "api/rtc_event_log/rtc_event_log.h"
 #include "modules/congestion_controller/goog_cc/alr_detector.h"
 #include "modules/pacing/bitrate_prober.h"
 #include "modules/pacing/interval_budget.h"
