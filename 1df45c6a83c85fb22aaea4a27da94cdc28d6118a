@@ -198,6 +198,24 @@
       "revId": "1df45c6a83c85fb22aaea4a27da94cdc28d6118a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aac7179b_a0c52a08",
+        "filename": "test/testsupport/copy_to_file_audio_capturer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-15T11:34:55Z",
+      "side": 1,
+      "message": "Ah, I got confused by the test fixture. Thanks for the comment!",
+      "parentUuid": "3390e706_2b4c1656",
+      "revId": "1df45c6a83c85fb22aaea4a27da94cdc28d6118a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
