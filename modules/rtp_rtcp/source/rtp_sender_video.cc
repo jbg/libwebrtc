@@ -505,10 +505,6 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
   // TODO(benwright@webrtc.org) - Allocate enough to always encrypt inline.
   rtc::Buffer encrypted_video_payload;
   if (frame_encryptor_ != nullptr) {
-    if (generic_descriptor_raw.empty()) {
-      return false;
-    }
-
     const size_t max_ciphertext_size =
         frame_encryptor_->GetMaxCiphertextByteSize(cricket::MEDIA_TYPE_VIDEO,
                                                    payload_size);
@@ -519,6 +515,9 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
     // Only enable header authentication if the field trial is enabled.
     rtc::ArrayView<const uint8_t> additional_data;
     if (generic_descriptor_auth_experiment_) {
+      if (generic_descriptor_raw.empty()) {
+        return false;
+      }
       additional_data = generic_descriptor_raw;
     }
 

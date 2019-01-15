@@ -54,13 +54,7 @@ BufferedFrameDecryptor::FrameDecision BufferedFrameDecryptor::DecryptFrame(
                            "stream. Dropping frame.";
     return FrameDecision::kDrop;
   }
-  // When using encryption we expect the frame to have the generic descriptor.
-  absl::optional<RtpGenericFrameDescriptor> descriptor =
-      frame->GetGenericFrameDescriptor();
-  if (!descriptor) {
-    RTC_LOG(LS_ERROR) << "No generic frame descriptor found dropping frame.";
-    return FrameDecision::kDrop;
-  }
+
   // Retrieve the maximum possible size of the decrypted payload.
   const size_t max_plaintext_byte_size =
       frame_decryptor_->GetMaxPlaintextByteSize(cricket::MEDIA_TYPE_VIDEO,
@@ -73,6 +67,13 @@ BufferedFrameDecryptor::FrameDecision BufferedFrameDecryptor::DecryptFrame(
   // Only enable authenticating the header if the field trial is enabled.
   rtc::ArrayView<const uint8_t> additional_data;
   if (generic_descriptor_auth_experiment_) {
+    // When using encryption we expect the frame to have the generic descriptor.
+    absl::optional<RtpGenericFrameDescriptor> descriptor =
+        frame->GetGenericFrameDescriptor();
+    if (!descriptor) {
+      RTC_LOG(LS_ERROR) << "No generic frame descriptor found dropping frame.";
+      return FrameDecision::kDrop;
+    }
     additional_data = descriptor->GetByteRepresentation();
   }
 
