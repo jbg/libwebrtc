@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7630f5e_bcf88c08",
+        "filename": "api/video/video_codec_constants.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-15T13:15:49Z",
+      "side": 1,
+      "message": "There\u0027s a competing definition, with value 3, in webrtc_vidoe_engine.cc. Can you delete that one here or in a followup?",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 30
+      },
+      "revId": "fc67675a5ec21d37606f23994ea32b794120cf8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
