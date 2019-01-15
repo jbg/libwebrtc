@@ -1,0 +1,192 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e57b5e2_110cafb1",
+        "filename": "p2p/base/no_op_dtls_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "Do you want to use the thread checker for verifying any other methods?",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73016e65_2749c619",
+        "filename": "p2p/base/no_op_dtls_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "debug?",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3994082b_c3aa2491",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "happy new year",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ab3f873_e289f818",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "just #include",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1c98294_761f9a3c",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "n",
+      "range": {
+        "startLine": 57,
+        "startChar": 26,
+        "endLine": 57,
+        "endChar": 27
+      },
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "914579b3_4964e092",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "redundant",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 10
+      },
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf408604_0f2f613a",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "Why make these private?",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1190fc50_13489de8",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "Pull this out to the top level to avoid duplication?",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1ec0f6a_1ceecb4e",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "One line",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14d07df2_bb0164b9",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:10:50Z",
+      "side": 1,
+      "message": "Could check it positively against ICE_CANDIDATE_COMPONENT_RTP",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
