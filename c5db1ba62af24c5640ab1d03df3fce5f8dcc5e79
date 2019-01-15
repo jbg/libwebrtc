@@ -283,6 +283,24 @@
     },
     {
       "key": {
+        "uuid": "073d8357_b72a25fa",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-15T18:45:42Z",
+      "side": 1,
+      "message": "It\u0027s a pretty weird practice given that anyone can just cast it to a superclass and call the method.",
+      "parentUuid": "c8c39252_f760c446",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1190fc50_13489de8",
         "filename": "pc/jsep_transport_controller.cc",
         "patchSetId": 1
