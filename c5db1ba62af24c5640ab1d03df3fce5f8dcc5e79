@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "111504d0_1278eb45",
+        "filename": "p2p/base/no_op_dtls_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "hmm, I can check the writable state.",
+      "parentUuid": "3e57b5e2_110cafb1",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73016e65_2749c619",
         "filename": "p2p/base/no_op_dtls_transport.cc",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6878d87_04e73253",
+        "filename": "p2p/base/no_op_dtls_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "Ah, I meant to remove logs.",
+      "parentUuid": "73016e65_2749c619",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "577d8f7f_f1d95888",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3994082b_c3aa2491",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ab3f873_e289f818",
         "filename": "p2p/base/no_op_dtls_transport.h",
         "patchSetId": 1
@@ -73,6 +133,24 @@
       "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8fd9dfa_22b9d553",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ab3f873_e289f818",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "4cbacbac_1272bd14",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1c98294_761f9a3c",
+      "range": {
+        "startLine": 57,
+        "startChar": 26,
+        "endLine": 57,
+        "endChar": 27
+      },
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "914579b3_4964e092",
         "filename": "p2p/base/no_op_dtls_transport.h",
         "patchSetId": 1
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "5c4b8463_f90396b1",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "914579b3_4964e092",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 10
+      },
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf408604_0f2f613a",
         "filename": "p2p/base/no_op_dtls_transport.h",
         "patchSetId": 1
@@ -136,6 +262,24 @@
       "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8c39252_f760c446",
+        "filename": "p2p/base/no_op_dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "It felt like this is a practice in webrtc, + we don\u0027t need them public :) I made transport_name(), writable(), and receiving() public.",
+      "parentUuid": "bf408604_0f2f613a",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "d351f391_2b46d95e",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "ah, now I can. (I couldn\u0027t when ICE was constructed inside ;P)",
+      "parentUuid": "1190fc50_13489de8",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1ec0f6a_1ceecb4e",
         "filename": "pc/jsep_transport_controller.cc",
         "patchSetId": 1
@@ -173,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "dd57916d_e78c24db",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "Done (It\u0027s still 2 ;-) )",
+      "parentUuid": "b1ec0f6a_1ceecb4e",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14d07df2_bb0164b9",
         "filename": "pc/jsep_transport_controller_unittest.cc",
         "patchSetId": 1
@@ -187,6 +367,24 @@
       "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ae54f7c_77819e8d",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-15T18:21:40Z",
+      "side": 1,
+      "message": "Didn\u0027t know about it. Nice :)",
+      "parentUuid": "14d07df2_bb0164b9",
+      "revId": "c5db1ba62af24c5640ab1d03df3fce5f8dcc5e79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
