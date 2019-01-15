@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': 'c6a258bb5d64045152f89681e84a982d7ae68f46',
+  'chromium_revision': 'a82f115f1eb907a8ed70bd87f82a45951ec62d26',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -46,7 +46,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    Var('chromium_git') + '/chromium/src/base' + '@' + '8ce4edcd7d58fd4b2e027b535ebe21c946abcefa',
+    Var('chromium_git') + '/chromium/src/base' + '@' + '61347f6416478a5d1b0904b5fa4c4e3ae190fa2c',
   'src/build':
     Var('chromium_git') + '/chromium/src/build' + '@' + 'e93ee685fe2ba67f050a6b3628d8754f96e6306b',
   'src/buildtools':
@@ -64,7 +64,7 @@ deps = {
   'src/testing':
     Var('chromium_git') + '/chromium/src/testing' + '@' + 'fa73c7d74f75d7305baeb988b5f56fc1657b0953',
   'src/third_party':
-    Var('chromium_git') + '/chromium/src/third_party' + '@' + '6f2ff7430088218f7d31e4c97ad34861f6b399a4',
+    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'bf5199f2299310d1ea1e29e781c3cdb7bcff74c7',
   'src/third_party/android_ndk': {
       'url': Var('chromium_git') + '/android_ndk.git' + '@' + '4e2cea441bfd43f0863d14f57b1e1844260b9884',
       'condition': 'checkout_android',
@@ -229,7 +229,7 @@ deps = {
   'src/third_party/yasm/source/patched-yasm':
     Var('chromium_git') + '/chromium/deps/yasm/patched-yasm.git' + '@' + '720b70524a4424b15fc57e82263568c8ba0496ad',
   'src/tools':
-    Var('chromium_git') + '/chromium/src/tools' + '@' + '43be1b9a51b8ca93ded14e04256f420f24155283',
+    Var('chromium_git') + '/chromium/src/tools' + '@' + 'c41730b5240a3ecdd6d12343a25353706f4c60e5',
   'src/tools/swarming_client':
     Var('chromium_git') + '/infra/luci/client-py.git' + '@' +  Var('swarming_revision'),
 
