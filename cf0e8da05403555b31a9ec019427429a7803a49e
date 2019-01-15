@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3704c69_c2f9676a",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-01-15T18:59:44Z",
+      "side": 1,
+      "message": "I think it would be cleaner to have if here:\n    if (media_transport) {\n            CreateFakeDTLS\n     } else {\n            CreateRealDTLS\n     }",
+      "revId": "cf0e8da05403555b31a9ec019427429a7803a49e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddbd8c1f_7cfd459d",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-01-15T18:59:44Z",
+      "side": 1,
+      "message": "CHECK-fail that media_transport \u003d\u003d nullptr?",
+      "revId": "cf0e8da05403555b31a9ec019427429a7803a49e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
