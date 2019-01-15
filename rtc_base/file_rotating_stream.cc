@@ -11,6 +11,7 @@
 #include "rtc_base/file_rotating_stream.h"
 
 #include <algorithm>
+#include <cerrno>
 #include <cstdio>
 #include <string>
 #include <utility>
@@ -175,7 +176,7 @@ FileRotatingStream::FileRotatingStream(const std::string& dir_path,
                                        size_t num_files)
     : dir_path_(AddTrailingPathDelimiterIfNeeded(dir_path)),
       file_prefix_(file_prefix),
-      file_stream_(nullptr),
+      file_(nullptr),
       max_file_size_(max_file_size),
       current_file_index_(0),
       rotation_index_(0),
@@ -194,10 +195,7 @@ FileRotatingStream::FileRotatingStream(const std::string& dir_path,
 FileRotatingStream::~FileRotatingStream() {}
 
 StreamState FileRotatingStream::GetState() const {
-  if (!file_stream_) {
-    return SS_CLOSED;
-  }
-  return file_stream_->GetState();
+  return (file_ ? SS_OPEN : SS_CLOSED);
 }
 
 StreamResult FileRotatingStream::Read(void* buffer,
@@ -213,7 +211,7 @@ StreamResult FileRotatingStream::Write(const void* data,
                                        size_t data_len,
                                        size_t* written,
                                        int* error) {
-  if (!file_stream_) {
+  if (!file_) {
     std::fprintf(stderr, "Open() must be called before Write.\n");
     return SR_ERROR;
   }
@@ -225,7 +223,7 @@ StreamResult FileRotatingStream::Write(const void* data,
   if (!written) {
     written = &local_written;
   }
-  StreamResult result = file_stream_->Write(data, write_length, written, error);
+  *written = std::fwrite(data, 1, write_length, file_.get());
   current_bytes_written_ += *written;
 
   // If we're done with this file, rotate it out.
@@ -233,14 +231,14 @@ StreamResult FileRotatingStream::Write(const void* data,
     RTC_DCHECK_EQ(current_bytes_written_, max_file_size_);
     RotateFiles();
   }
-  return result;
+  return (*written == write_length) ? SR_SUCCESS : SR_ERROR;
 }
 
 bool FileRotatingStream::Flush() {
-  if (!file_stream_) {
+  if (!file_) {
     return false;
   }
-  return file_stream_->Flush();
+  return std::fflush(file_.get()) == 0;
 }
 
 void FileRotatingStream::Close() {
@@ -261,11 +259,10 @@ bool FileRotatingStream::Open() {
 
 bool FileRotatingStream::DisableBuffering() {
   disable_buffering_ = true;
-  if (!file_stream_) {
-    std::fprintf(stderr, "Open() must be called before DisableBuffering().\n");
-    return false;
+  if (file_) {
+    std::setbuf(file_.get(), nullptr);
   }
-  return file_stream_->DisableBuffering();
+  return true;
 }
 
 std::string FileRotatingStream::GetFilePath(size_t index) const {
@@ -279,29 +276,27 @@ bool FileRotatingStream::OpenCurrentFile() {
   // Opens the appropriate file in the appropriate mode.
   RTC_DCHECK_LT(current_file_index_, file_names_.size());
   std::string file_path = file_names_[current_file_index_];
-  file_stream_.reset(new FileStream());
 
   // We should always be writing to the zero-th file.
   RTC_DCHECK_EQ(current_file_index_, 0);
-  int error = 0;
-  if (!file_stream_->Open(file_path, "w+", &error)) {
+  file_ = webrtc::OpenFile(file_path.c_str(), webrtc::OpenFileMode::kWriteOnly);
+  if (!file_) {
     std::fprintf(stderr, "Failed to open: %s Error: %i\n", file_path.c_str(),
-                 error);
-    file_stream_.reset();
+                 errno);
     return false;
   }
   if (disable_buffering_) {
-    file_stream_->DisableBuffering();
+    std::setbuf(file_.get(), nullptr);
   }
   return true;
 }
 
 void FileRotatingStream::CloseCurrentFile() {
-  if (!file_stream_) {
+  if (!file_) {
     return;
   }
   current_bytes_written_ = 0;
-  file_stream_.reset();
+  file_.reset();
 }
 
 void FileRotatingStream::RotateFiles() {
