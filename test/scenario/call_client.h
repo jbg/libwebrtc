@@ -9,12 +9,15 @@
  */
 #ifndef TEST_SCENARIO_CALL_CLIENT_H_
 #define TEST_SCENARIO_CALL_CLIENT_H_
+
+#include <map>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
+#include "api/rtc_event_log/rtc_event_log.h"
 #include "call/call.h"
-#include "logging/rtc_event_log/rtc_event_log.h"
 #include "modules/audio_device/include/test_audio_device.h"
 #include "modules/congestion_controller/test/controller_printer.h"
 #include "modules/rtp_rtcp/include/rtp_header_parser.h"

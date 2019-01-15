@@ -117,7 +117,7 @@ specific_include_rules = {
   ],
 
   "peer_connection_interface\.h": [
-    "+logging/rtc_event_log/rtc_event_log_factory_interface.h",
+    "+api/rtc_event_log/rtc_event_log_factory_interface.h",
     "+media/base/media_config.h",
     "+media/base/video_capturer.h",
     "+media/base/media_engine.h",

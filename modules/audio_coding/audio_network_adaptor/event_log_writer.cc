@@ -15,9 +15,9 @@
 
 #include "absl/memory/memory.h"
 #include "absl/types/optional.h"
-#include "logging/rtc_event_log/events/rtc_event.h"
+#include "api/rtc_event_log/rtc_event.h"
+#include "api/rtc_event_log/rtc_event_log.h"
 #include "logging/rtc_event_log/events/rtc_event_audio_network_adaptation.h"
-#include "logging/rtc_event_log/rtc_event_log.h"
 #include "modules/audio_coding/audio_network_adaptor/event_log_writer.h"
 #include "rtc_base/checks.h"
 

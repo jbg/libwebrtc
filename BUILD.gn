@@ -383,12 +383,12 @@ if (!build_with_chromium) {
     deps = [
       ":webrtc_common",
       "api:libjingle_peerconnection_api",
+      "api:rtc_event_log_api",
       "api:transport_api",
       "audio",
       "call",
       "common_audio",
       "common_video",
-      "logging:rtc_event_log_api",
       "logging:rtc_event_log_impl_base",
       "media",
       "modules",

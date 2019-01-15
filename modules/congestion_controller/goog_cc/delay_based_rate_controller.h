@@ -13,8 +13,8 @@
 #include <memory>
 
 #include "absl/types/optional.h"
+#include "api/rtc_event_log/rtc_event_log.h"
 #include "api/transport/network_types.h"
-#include "logging/rtc_event_log/rtc_event_log.h"
 #include "modules/congestion_controller/goog_cc/link_capacity_estimator.h"
 #include "modules/congestion_controller/goog_cc/packet_grouping.h"
 #include "modules/congestion_controller/goog_cc/trendline_estimator.h"

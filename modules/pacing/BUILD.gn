@@ -29,9 +29,9 @@ rtc_static_library("pacing") {
   deps = [
     ":interval_budget",
     "..:module_api",
+    "../../api:rtc_event_log_api",
     "../../api/transport:network_control",
     "../../logging:rtc_event_bwe",
-    "../../logging:rtc_event_log_api",
     "../../logging:rtc_event_pacing",
     "../../rtc_base:checks",
     "../../rtc_base:rtc_base_approved",

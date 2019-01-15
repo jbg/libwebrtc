@@ -10,15 +10,17 @@
 #ifndef TEST_CALL_TEST_H_
 #define TEST_CALL_TEST_H_
 
+#include <map>
 #include <memory>
+#include <string>
 #include <vector>
 
+#include "api/rtc_event_log/rtc_event_log.h"
 #include "api/test/video/function_video_decoder_factory.h"
 #include "api/test/video/function_video_encoder_factory.h"
 #include "api/video/video_bitrate_allocator_factory.h"
 #include "call/call.h"
 #include "call/rtp_transport_controller_send.h"
-#include "logging/rtc_event_log/rtc_event_log.h"
 #include "modules/audio_device/include/test_audio_device.h"
 #include "test/encoder_settings.h"
 #include "test/fake_decoder.h"
