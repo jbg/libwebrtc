@@ -39,6 +39,24 @@
       "revId": "88765f42a6000b85089eebd7401f41c07ff8e88f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb5106a4_f89225f7",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-16T14:59:31Z",
+      "side": 1,
+      "message": "\u003e This case is even worse, because you actually write to the ex-const data below. Should encoded_image not be a const reference argument?\n\nI agree this is ugly. And it is a const ref argument. It used to work despite that, because _buffer is a uint8_t*, and the pointer belonging to a const object doesn\u0027t imply the pointed to data can\u0027t be modified.\n\nSince this is not a change in behavior, I\u0027d prefer to just accept the uglyness for now. Unless there\u0027s some easy way to fix it?",
+      "parentUuid": "17cde516_93fd0bcd",
+      "revId": "88765f42a6000b85089eebd7401f41c07ff8e88f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
