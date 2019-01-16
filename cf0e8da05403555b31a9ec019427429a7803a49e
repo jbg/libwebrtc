@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "26293d33_26507558",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-16T16:25:31Z",
+      "side": 1,
+      "message": "I don\u0027t agree ;) this method is large enough without this condition. CreateDtlsTransport is already conditional, and adding this one extra condition there doesn\u0027t make it worse (it\u0027s still a short method).\n\nSo in other words: I\u0027d rather have this complexity in that method, than in this one.",
+      "parentUuid": "f3704c69_c2f9676a",
+      "revId": "cf0e8da05403555b31a9ec019427429a7803a49e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ddbd8c1f_7cfd459d",
         "filename": "pc/jsep_transport_controller.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "cf0e8da05403555b31a9ec019427429a7803a49e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90859785_dad11d5a",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-16T16:25:31Z",
+      "side": 1,
+      "message": "Done.\nI had to change some tests to use kRtcpMuxPolicyRequire policy",
+      "parentUuid": "ddbd8c1f_7cfd459d",
+      "revId": "cf0e8da05403555b31a9ec019427429a7803a49e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
