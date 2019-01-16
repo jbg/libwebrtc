@@ -80,10 +80,8 @@ void AddRtpHeaderExtensions(const RTPVideoHeader& video_header,
 
   if (video_header.generic) {
     RtpGenericFrameDescriptor generic_descriptor;
-    generic_descriptor.SetFirstPacketInSubFrame(first_packet);
-    generic_descriptor.SetLastPacketInSubFrame(last_packet);
-    generic_descriptor.SetFirstSubFrameInFrame(true);
-    generic_descriptor.SetLastSubFrameInFrame(true);
+    generic_descriptor.SetFirstPacketInFrame(first_packet);
+    generic_descriptor.SetLastPacketInFrame(last_packet);
 
     if (first_packet) {
       generic_descriptor.SetFrameId(
@@ -108,7 +106,8 @@ void AddRtpHeaderExtensions(const RTPVideoHeader& video_header,
                                          video_header.height);
       }
     }
-    packet->SetExtension<RtpGenericFrameDescriptorExtension>(
+    // TODO(eladalon): Choose between 00 and 01.
+    packet->SetExtension<RtpGenericFrameDescriptorExtension00>(
         generic_descriptor);
   }
 }
@@ -494,8 +493,20 @@ bool RTPSenderVideo::SendVideo(enum VideoCodecType video_type,
 
   RTPVideoHeader minimized_video_header;
   const RTPVideoHeader* packetize_video_header = video_header;
+
+  rtc::ArrayView<const uint8_t> generic_descriptor_raw_00 =
+      first_packet->GetRawExtension<RtpGenericFrameDescriptorExtension00>();
+  rtc::ArrayView<const uint8_t> generic_descriptor_raw_01 =
+      first_packet->GetRawExtension<RtpGenericFrameDescriptorExtension01>();
+
+  if (!generic_descriptor_raw_00.empty() &&
+      !generic_descriptor_raw_01.empty()) {
+    return false;
+  }
+
   rtc::ArrayView<const uint8_t> generic_descriptor_raw =
-      first_packet->GetRawExtension<RtpGenericFrameDescriptorExtension>();
+      !generic_descriptor_raw_00.empty() ? generic_descriptor_raw_00
+                                         : generic_descriptor_raw_01;
   if (!generic_descriptor_raw.empty()) {
     if (MinimizeDescriptor(*video_header, &minimized_video_header)) {
       packetize_video_header = &minimized_video_header;
