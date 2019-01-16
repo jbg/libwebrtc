@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "234d735d_eef4e64f",
+        "filename": "modules/video_coding/codecs/multiplex/multiplex_encoded_image_packer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-16T14:52:05Z",
+      "side": 1,
+      "message": "Icky! I can\u0027t think of an alternative that won\u0027t be a lot of work, though.\n\nDoes this sort of thing happen often? (Creating an EncodedImage that just describes an existing memory block.)",
+      "range": {
+        "startLine": 266,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 18
+      },
+      "revId": "88765f42a6000b85089eebd7401f41c07ff8e88f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17cde516_93fd0bcd",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-16T14:52:05Z",
+      "side": 1,
+      "message": "This case is even worse, because you actually write to the ex-const data below. Should encoded_image not be a const reference argument?",
+      "revId": "88765f42a6000b85089eebd7401f41c07ff8e88f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
