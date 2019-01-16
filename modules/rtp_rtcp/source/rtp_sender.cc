@@ -84,8 +84,10 @@ constexpr RtpExtensionSize kVideoExtensionSizes[] = {
     CreateMaxExtensionSize<RtpStreamId>(),
     CreateMaxExtensionSize<RepairedRtpStreamId>(),
     CreateMaxExtensionSize<RtpMid>(),
-    {RtpGenericFrameDescriptorExtension::kId,
-     RtpGenericFrameDescriptorExtension::kMaxSizeBytes},
+    {RtpGenericFrameDescriptorExtension00::kId,
+     RtpGenericFrameDescriptorExtension00::kMaxSizeBytes},
+    {RtpGenericFrameDescriptorExtension01::kId,
+     RtpGenericFrameDescriptorExtension01::kMaxSizeBytes},
 };
 
 const char* FrameTypeToString(FrameType frame_type) {
