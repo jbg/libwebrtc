@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14edc587_962913b4",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-16T17:32:49Z",
+      "side": 0,
+      "message": "might be good idea to leave these accessor behind (but feel free to mark them with RTC_DEPRECATED)",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "0acffb5b3686f9666eb44c7fd2154212a77d6eed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
