@@ -106,7 +106,7 @@ VCMFrameBufferEnum VCMFrameBuffer::InsertPacket(
       (packet.insertStartCode ? kH264StartCodeLengthBytes : 0) +
       EncodedImage::GetBufferPaddingBytes(packet.codec);
   if (requiredSizeBytes >= capacity()) {
-    const uint8_t* prevBuffer = _buffer;
+    const uint8_t* prevBuffer = data();
     const uint32_t increments =
         requiredSizeBytes / kBufferIncStepSizeBytes +
         (requiredSizeBytes % kBufferIncStepSizeBytes > 0);
@@ -117,7 +117,7 @@ VCMFrameBufferEnum VCMFrameBuffer::InsertPacket(
       return kSizeError;
     }
     VerifyAndAllocate(newSize);
-    _sessionInfo.UpdateDataPointers(prevBuffer, _buffer);
+    _sessionInfo.UpdateDataPointers(prevBuffer, data());
   }
 
   if (packet.width > 0 && packet.height > 0) {
@@ -130,7 +130,7 @@ VCMFrameBufferEnum VCMFrameBuffer::InsertPacket(
     CopyCodecSpecific(&packet.video_header);
 
   int retVal =
-      _sessionInfo.InsertPacket(packet, _buffer, decode_error_mode, frame_data);
+      _sessionInfo.InsertPacket(packet, data(), decode_error_mode, frame_data);
   if (retVal == -1) {
     return kSizeError;
   } else if (retVal == -2) {
