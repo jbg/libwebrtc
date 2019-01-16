@@ -82,6 +82,8 @@ VideoEncoder::ScalingSettings::~ScalingSettings() {}
 // static
 constexpr VideoEncoder::ScalingSettings::KOff
     VideoEncoder::ScalingSettings::kOff;
+// static
+constexpr uint8_t VideoEncoder::EncoderInfo::kFullFramerate;
 
 VideoEncoder::EncoderInfo::EncoderInfo()
     : scaling_settings(VideoEncoder::ScalingSettings::kOff),
