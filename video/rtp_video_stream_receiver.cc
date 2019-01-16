@@ -531,14 +531,12 @@ void RtpVideoStreamReceiver::ReceivePacket(const RtpPacketReceived& packet) {
     generic_descriptor_wire->SetByteRepresentation(
         packet.GetRawExtension<RtpGenericFrameDescriptorExtension>());
     webrtc_rtp_header.video_header().is_first_packet_in_frame =
-        generic_descriptor_wire->FirstSubFrameInFrame() &&
-        generic_descriptor_wire->FirstPacketInSubFrame();
+        generic_descriptor_wire->FirstPacketInFrame();
     webrtc_rtp_header.video_header().is_last_packet_in_frame =
         webrtc_rtp_header.header.markerBit ||
-        (generic_descriptor_wire->LastSubFrameInFrame() &&
-         generic_descriptor_wire->LastPacketInSubFrame());
+        generic_descriptor_wire->LastPacketInFrame();
 
-    if (generic_descriptor_wire->FirstPacketInSubFrame()) {
+    if (generic_descriptor_wire->FirstPacketInFrame()) {
       webrtc_rtp_header.frameType =
           generic_descriptor_wire->FrameDependenciesDiffs().empty()
               ? kVideoFrameKey

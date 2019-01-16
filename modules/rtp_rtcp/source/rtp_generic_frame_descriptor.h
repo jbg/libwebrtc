@@ -29,17 +29,12 @@ class RtpGenericFrameDescriptor {
   RtpGenericFrameDescriptor(const RtpGenericFrameDescriptor&);
   ~RtpGenericFrameDescriptor();
 
-  bool FirstPacketInSubFrame() const { return beginning_of_subframe_; }
-  void SetFirstPacketInSubFrame(bool first) { beginning_of_subframe_ = first; }
-  bool LastPacketInSubFrame() const { return end_of_subframe_; }
-  void SetLastPacketInSubFrame(bool last) { end_of_subframe_ = last; }
+  bool FirstPacketInFrame() const { return beginning_of_frame_; }
+  void SetFirstPacketInFrame(bool first) { beginning_of_frame_ = first; }
+  bool LastPacketInFrame() const { return end_of_frame_; }
+  void SetLastPacketInFrame(bool last) { end_of_frame_ = last; }
 
-  bool FirstSubFrameInFrame() const { return beginning_of_frame_; }
-  void SetFirstSubFrameInFrame(bool first) { beginning_of_frame_ = first; }
-  bool LastSubFrameInFrame() const { return end_of_frame_; }
-  void SetLastSubFrameInFrame(bool last) { end_of_frame_ = last; }
-
-  // Properties below undefined if !FirstPacketInSubFrame()
+  // Properties below undefined if !FirstPacketInFrame()
   // Valid range for temporal layer: [0, 7]
   int TemporalLayer() const;
   void SetTemporalLayer(int temporal_layer);
@@ -66,8 +61,6 @@ class RtpGenericFrameDescriptor {
   rtc::ArrayView<const uint8_t> GetByteRepresentation();
 
  private:
-  bool beginning_of_subframe_ = false;
-  bool end_of_subframe_ = false;
   bool beginning_of_frame_ = false;
   bool end_of_frame_ = false;
 
