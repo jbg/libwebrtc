@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c2afd8f2_fbb736ec",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-17T14:28:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "765d2fe9_96f92904",
+      "range": {
+        "startLine": 124,
+        "startChar": 29,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07eb8f60_87d296ff",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7a4778e_543fe702",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-17T14:28:55Z",
+      "side": 1,
+      "message": "Not sure what you\u0027re getting at. There\u0027s no member called spatial_layer_ here?\nBut rephrased to hopefully make it more clear.",
+      "parentUuid": "07eb8f60_87d296ff",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 77
+      },
+      "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "f072a070_c8f5cdc9",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-17T14:28:55Z",
+      "side": 1,
+      "message": "The array of templated classes was not very readable, and totw mentions that as an exception, but I guess it\u0027s borderline. I first had an actual struct, but then there so many indirections to get the values...",
+      "parentUuid": "42280e0c_2f852069",
+      "range": {
+        "startLine": 186,
+        "startChar": 10,
+        "endLine": 186,
+        "endChar": 28
+      },
+      "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "20dae350_2165ada8",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a5c382d_2845eb54",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-17T14:28:55Z",
+      "side": 1,
+      "message": "\u003e Document when the encoder is expected to make its decision. \nDone.\n\n\u003e I guess not at construction\nIt could be.\n\u003e not at InitEncode\nDefinitely could be.\n\u003e but at SetRates?\nThat\u0027s also valid.\n\nIt isn\u0027t currently, but there are situations where this might change on a per-frame basis as\na response to both signals from within the encoder as well as external (network) conditions.\n\n\u003e Would it make sense to instead pass this info as a return value from SetRates?\nThat would require a lot of work across multiple code bases as all encoders would need to be updated, and most of them will fall back to the default values anyway. Also see previous comment.",
+      "parentUuid": "20dae350_2165ada8",
+      "range": {
+        "startLine": 188,
+        "startChar": 23,
+        "endLine": 188,
+        "endChar": 37
+      },
+      "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
