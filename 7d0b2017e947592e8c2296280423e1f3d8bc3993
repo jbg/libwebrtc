@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f951b441_b7088a2a",
+        "filename": "api/task_queue/task_queue_default_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-17T20:09:01Z",
+      "side": 1,
+      "message": "Why is this class in api/? Will it eventually be an appropriate TQ factory for the current platform?\n\nIn that case, may I suggest that you instead expose a function (e.g. \"CreateDefaultTaskQueueFactory\") that returns a unique_ptr\u003cTaskQueueFactory\u003e? That will present a minimal API surface, and allow you to return several different subclasses of TaskQueueFactory. (We do exactly this in CreateBuiltinAudio{En,De}coderFactory().)",
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aa03cb8_be7acb1a",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-17T20:09:01Z",
+      "side": 1,
+      "message": "We don\u0027t usually bother with `public`---no one is going to #include .cc files anyway, and there are ~no cases where non-public headers are useful.",
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70e84ced_7831bfc4",
+        "filename": "rtc_base/task_queue_global_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-17T20:09:01Z",
+      "side": 1,
+      "message": "Could you put this in rtc_base/some_sub_dir/? rtc_base/ is an API directory.",
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73540c4f_27015c34",
+        "filename": "rtc_base/task_queue_global_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-17T20:09:01Z",
+      "side": 1,
+      "message": "\"May\"",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 7
+      },
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "316eceab_dc640e95",
+        "filename": "rtc_base/task_queue_global_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-17T20:09:01Z",
+      "side": 1,
+      "message": "\"SetGlobalTaskQueueFactory\" and \"GlobalTaskQueueFactory\"?",
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
