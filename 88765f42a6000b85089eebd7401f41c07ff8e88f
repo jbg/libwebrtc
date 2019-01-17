@@ -111,6 +111,24 @@
       "revId": "88765f42a6000b85089eebd7401f41c07ff8e88f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b64aca2_40781e9d",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-17T10:36:09Z",
+      "side": 1,
+      "message": "\u003e I wonder how to do the transition, though? I want to change EncodedImage to own the buffer, and then data() will return a pointer to owned data (and in the transition, it will sometimes return a pointer to owned data, sometimes unowned).\n\nIf you first change all callers to behave *as if* EncodedImage owned its buffer (w.r.t. the const issues we\u0027re discussing), and then change it to *actually* own its buffer?",
+      "parentUuid": "81f63267_1175b460",
+      "revId": "88765f42a6000b85089eebd7401f41c07ff8e88f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
