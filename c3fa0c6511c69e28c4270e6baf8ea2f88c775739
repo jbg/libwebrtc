@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "765d2fe9_96f92904",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-17T13:51:57Z",
+      "side": 1,
+      "message": "Rename so it\u0027s obviously *not* meaning 255 frames per second. Maybe |kMaxFramerateFraction| ?",
+      "range": {
+        "startLine": 124,
+        "startChar": 29,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07eb8f60_87d296ff",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-17T13:51:57Z",
+      "side": 1,
+      "message": "Please rephrase for clarity. At a minimum, \"For each spatial _layer_...\"",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 77
+      },
+      "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42280e0c_2f852069",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-17T13:51:57Z",
+      "side": 1,
+      "message": "Please avoid type aliases in header files. See totw#137",
+      "range": {
+        "startLine": 186,
+        "startChar": 10,
+        "endLine": 186,
+        "endChar": 28
+      },
+      "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20dae350_2165ada8",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-17T13:51:57Z",
+      "side": 1,
+      "message": "Document when the encoder is expected to make its decision. I guess not at construction, not at InitEncode, but at SetRates? Would it make sense to instead pass this info as a return value from SetRates?",
+      "range": {
+        "startLine": 188,
+        "startChar": 23,
+        "endLine": 188,
+        "endChar": 37
+      },
+      "revId": "c3fa0c6511c69e28c4270e6baf8ea2f88c775739",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
