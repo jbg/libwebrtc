@@ -9,6 +9,7 @@
  */
 
 #include <memory>
+#include <tuple>
 #include <vector>
 
 #include "absl/memory/memory.h"
@@ -45,10 +46,11 @@ const int kAbsoluteSendTimeExtensionId = 14;
 const int kTransportSequenceNumberExtensionId = 13;
 const int kVideoTimingExtensionId = 12;
 const int kMidExtensionId = 11;
-const int kGenericDescriptorId = 10;
-const int kAudioLevelExtensionId = 9;
-const int kRidExtensionId = 8;
-const int kRepairedRidExtensionId = 7;
+const int kGenericDescriptorId00 = 10;
+const int kGenericDescriptorId01 = 9;
+const int kAudioLevelExtensionId = 8;
+const int kRidExtensionId = 7;
+const int kRepairedRidExtensionId = 6;
 const int kVideoRotationExtensionId = 5;
 const int kPayload = 100;
 const int kRtxPayload = 98;
@@ -93,8 +95,10 @@ class LoopbackTransportTest : public webrtc::Transport {
     receivers_extensions_.Register(kRtpExtensionVideoTiming,
                                    kVideoTimingExtensionId);
     receivers_extensions_.Register(kRtpExtensionMid, kMidExtensionId);
-    receivers_extensions_.Register(kRtpExtensionGenericFrameDescriptor,
-                                   kGenericDescriptorId);
+    receivers_extensions_.Register(kRtpExtensionGenericFrameDescriptor00,
+                                   kGenericDescriptorId00);
+    receivers_extensions_.Register(kRtpExtensionGenericFrameDescriptor01,
+                                   kGenericDescriptorId01);
     receivers_extensions_.Register(kRtpExtensionRtpStreamId, kRidExtensionId);
     receivers_extensions_.Register(kRtpExtensionRepairedRtpStreamId,
                                    kRepairedRidExtensionId);
@@ -170,9 +174,9 @@ class MockOverheadObserver : public OverheadObserver {
   MOCK_METHOD1(OnOverheadChanged, void(size_t overhead_bytes_per_packet));
 };
 
-class RtpSenderTest : public ::testing::TestWithParam<bool> {
+class RtpSenderTestBase : public ::testing::Test {
  protected:
-  RtpSenderTest()
+  RtpSenderTestBase()
       : fake_clock_(kStartTime),
         mock_rtc_event_log_(),
         mock_paced_sender_(),
@@ -180,11 +184,17 @@ class RtpSenderTest : public ::testing::TestWithParam<bool> {
         rtp_sender_(),
         payload_(kPayload),
         transport_(),
-        kMarkerBit(true),
-        field_trials_(GetParam() ? "WebRTC-SendSideBwe-WithOverhead/Enabled/"
-                                 : "") {}
+        kMarkerBit(true) {}
 
   void SetUp() override { SetUpRtpSender(true, false); }
+
+  void SetUpFieldTrials(bool send_side_bwe_with_overhead) {
+    std::string trials_str;
+    if (send_side_bwe_with_overhead) {
+      trials_str += "WebRTC-SendSideBwe-WithOverhead/Enabled/";
+    }
+    field_trials_ = absl::make_unique<test::ScopedFieldTrials>(trials_str);
+  }
 
   void SetUpRtpSender(bool pacer, bool populate_network2) {
     rtp_sender_.reset(new RTPSender(
@@ -209,7 +219,7 @@ class RtpSenderTest : public ::testing::TestWithParam<bool> {
   int payload_;
   LoopbackTransportTest transport_;
   const bool kMarkerBit;
-  test::ScopedFieldTrials field_trials_;
+  std::unique_ptr<test::ScopedFieldTrials> field_trials_;
 
   void VerifyRTPHeaderCommon(const RTPHeader& rtp_header) {
     VerifyRTPHeaderCommon(rtp_header, kMarkerBit, 0);
@@ -272,11 +282,23 @@ class RtpSenderTest : public ::testing::TestWithParam<bool> {
   }
 };
 
+class RtpSenderTest : public RtpSenderTestBase,
+                      public testing::WithParamInterface<bool> {
+  void SetUp() override {
+    RtpSenderTestBase::SetUpFieldTrials(GetParam());
+    RtpSenderTestBase::SetUp();
+  }
+};
+
 // TODO(pbos): Move tests over from WithoutPacer to RtpSenderTest as this is our
 // default code path.
-class RtpSenderTestWithoutPacer : public RtpSenderTest {
+class RtpSenderTestWithoutPacer : public RtpSenderTestBase,
+                                  public testing::WithParamInterface<bool> {
  public:
-  void SetUp() override { SetUpRtpSender(false, false); }
+  void SetUp() override {
+    RtpSenderTestBase::SetUpFieldTrials(GetParam());
+    SetUpRtpSender(false, false);
+  }
 };
 
 class TestRtpSenderVideo : public RTPSenderVideo {
@@ -296,14 +318,24 @@ class TestRtpSenderVideo : public RTPSenderVideo {
   }
 };
 
-class RtpSenderVideoTest : public RtpSenderTest {
+class RtpSenderVideoTest
+    : public RtpSenderTestBase,
+      public testing::WithParamInterface<std::tuple<bool, size_t>> {
  protected:
+  RtpSenderVideoTest()
+      : send_side_bwe_with_overhead_(std::get<0>(GetParam())),
+        generic_frame_descriptor_version_(std::get<1>(GetParam())) {}
+
   void SetUp() override {
+    RtpSenderTestBase::SetUpFieldTrials(send_side_bwe_with_overhead_);
     // TODO(pbos): Set up to use pacer.
     SetUpRtpSender(false, false);
     rtp_sender_video_.reset(
         new TestRtpSenderVideo(&fake_clock_, rtp_sender_.get(), nullptr));
   }
+
+  const bool send_side_bwe_with_overhead_;
+  const size_t generic_frame_descriptor_version_;
   std::unique_ptr<TestRtpSenderVideo> rtp_sender_video_;
 };
 
@@ -1604,11 +1636,13 @@ TEST_P(RtpSenderTest, BitrateCallbacks) {
   rtp_sender_.reset();
 }
 
-class RtpSenderAudioTest : public RtpSenderTest {
+class RtpSenderAudioTest : public RtpSenderTestBase,
+                           public testing::WithParamInterface<bool> {
  protected:
   RtpSenderAudioTest() {}
 
   void SetUp() override {
+    RtpSenderTestBase::SetUpFieldTrials(GetParam());
     payload_ = kAudioPayload;
     rtp_sender_.reset(new RTPSender(
         true, &fake_clock_, &transport_, nullptr, nullptr, nullptr, nullptr,
@@ -2221,8 +2255,21 @@ TEST_P(RtpSenderVideoTest, ConditionalRetransmitLimit) {
 TEST_P(RtpSenderVideoTest, PopulateGenericFrameDescriptor) {
   const int64_t kFrameId = 100000;
   uint8_t kFrame[100];
-  EXPECT_EQ(0, rtp_sender_->RegisterRtpHeaderExtension(
-                   kRtpExtensionGenericFrameDescriptor, kGenericDescriptorId));
+
+  switch (generic_frame_descriptor_version_) {
+    case 0:
+      EXPECT_EQ(0, rtp_sender_->RegisterRtpHeaderExtension(
+                       kRtpExtensionGenericFrameDescriptor00,
+                       kGenericDescriptorId00));
+      break;
+    case 1:
+      EXPECT_EQ(0, rtp_sender_->RegisterRtpHeaderExtension(
+                       kRtpExtensionGenericFrameDescriptor01,
+                       kGenericDescriptorId01));
+      break;
+    default:
+      RTC_NOTREACHED();
+  }
 
   RTPVideoHeader hdr;
   RTPVideoHeader::GenericDescriptorInfo& generic = hdr.generic.emplace();
@@ -2238,9 +2285,22 @@ TEST_P(RtpSenderVideoTest, PopulateGenericFrameDescriptor) {
 
   RtpGenericFrameDescriptor descriptor_wire;
   EXPECT_EQ(1U, transport_.sent_packets_.size());
-  EXPECT_TRUE(
-      transport_.last_sent_packet()
-          .GetExtension<RtpGenericFrameDescriptorExtension>(&descriptor_wire));
+
+  switch (generic_frame_descriptor_version_) {
+    case 0:
+      EXPECT_TRUE(transport_.last_sent_packet()
+                      .GetExtension<RtpGenericFrameDescriptorExtension00>(
+                          &descriptor_wire));
+      break;
+    case 1:
+      EXPECT_TRUE(transport_.last_sent_packet()
+                      .GetExtension<RtpGenericFrameDescriptorExtension01>(
+                          &descriptor_wire));
+      break;
+    default:
+      RTC_NOTREACHED();
+  }
+
   EXPECT_EQ(static_cast<uint16_t>(generic.frame_id), descriptor_wire.FrameId());
   EXPECT_EQ(generic.temporal_index, descriptor_wire.TemporalLayer());
   EXPECT_THAT(descriptor_wire.FrameDependenciesDiffs(), ElementsAre(1, 500));
@@ -2253,8 +2313,23 @@ TEST_P(RtpSenderVideoTest,
   const int64_t kFrameId = 100000;
   const size_t kFrameSize = 100;
   uint8_t kFrame[kFrameSize];
-  ASSERT_TRUE(rtp_sender_->RegisterRtpHeaderExtension(
-      RtpGenericFrameDescriptorExtension::kUri, kGenericDescriptorId));
+
+  const char* uri;
+  int id;
+  switch (generic_frame_descriptor_version_) {
+    case 0:
+      uri = RtpGenericFrameDescriptorExtension00::kUri;
+      id = kGenericDescriptorId00;
+      break;
+    case 1:
+      uri = RtpGenericFrameDescriptorExtension01::kUri;
+      id = kGenericDescriptorId01;
+      break;
+    default:
+      RTC_NOTREACHED();
+      uri = nullptr;
+  }
+  ASSERT_TRUE(rtp_sender_->RegisterRtpHeaderExtension(uri, id));
 
   RTPVideoHeader hdr;
   hdr.codec = kVideoCodecVP8;
@@ -2351,7 +2426,8 @@ INSTANTIATE_TEST_CASE_P(WithAndWithoutOverhead,
                         ::testing::Bool());
 INSTANTIATE_TEST_CASE_P(WithAndWithoutOverhead,
                         RtpSenderVideoTest,
-                        ::testing::Bool());
+                        ::testing::Combine(::testing::Bool(),
+                                           ::testing::Values(0, 1)));
 INSTANTIATE_TEST_CASE_P(WithAndWithoutOverhead,
                         RtpSenderAudioTest,
                         ::testing::Bool());
