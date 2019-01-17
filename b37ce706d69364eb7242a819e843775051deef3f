@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75f33bb6_2f51c5ed",
+        "filename": "api/task_queue/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-17T22:46:37Z",
+      "side": 1,
+      "message": "Merge `public` into `sources` here too?",
+      "revId": "b37ce706d69364eb7242a819e843775051deef3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbda7641_db7b3857",
+        "filename": "api/task_queue/global_task_queue_factory.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-17T22:46:37Z",
+      "side": 1,
+      "message": "Change this to unique_ptr\u003cTaskQueueFactory\u003e? That way, the business of having raw pointers that own their pointees will be entirely confined to this one function.",
+      "range": {
+        "startLine": 19,
+        "startChar": 34,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "b37ce706d69364eb7242a819e843775051deef3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
