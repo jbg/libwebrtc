@@ -647,6 +647,21 @@ rtc_source_set("rtc_task_queue_stdlib") {
   ]
 }
 
+rtc_source_set("task_queue_global_factory") {
+  visibility = [ "*" ]
+  public = [
+    "task_queue_global_factory.h",
+  ]
+  sources = [
+    "task_queue_global_factory.cc",
+  ]
+  deps = [
+    ":checks",
+    "../api/task_queue:task_queue_default_factory",
+    "../api/task_queue:task_queue_factory",
+  ]
+}
+
 rtc_source_set("rtc_task_queue_impl") {
   visibility = [ "*" ]
   if (rtc_enable_libevent) {
