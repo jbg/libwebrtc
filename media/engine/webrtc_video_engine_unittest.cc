@@ -3254,6 +3254,10 @@ TEST_F(WebRtcVideoChannelTest, DoesNotAdaptOnOveruseWhenScreensharing) {
   TestCpuAdaptation(true, true);
 }
 
+TEST_F(WebRtcVideoChannelTest, DoesNotAdaptWhenScreeensharing) {
+  TestCpuAdaptation(false, true);
+}
+
 TEST_F(WebRtcVideoChannelTest, PreviousAdaptationDoesNotApplyToScreenshare) {
   cricket::VideoCodec codec = GetEngineCodec("VP8");
   cricket::VideoSendParameters parameters;
@@ -3369,7 +3373,6 @@ void WebRtcVideoChannelTest::TestCpuAdaptation(bool enable_overuse,
   if (!enable_overuse) {
     EXPECT_FALSE(send_stream->resolution_scaling_enabled());
     EXPECT_FALSE(send_stream->framerate_scaling_enabled());
-    EXPECT_EQ(is_screenshare, send_stream->framerate_scaling_enabled());
 
     EXPECT_TRUE(capturer.CaptureFrame());
     EXPECT_EQ(1, send_stream->GetNumberOfSwappedFrames());
