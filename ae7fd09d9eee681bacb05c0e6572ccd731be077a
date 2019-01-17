@@ -22,6 +22,30 @@
       "revId": "ae7fd09d9eee681bacb05c0e6572ccd731be077a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eac825aa_10055982",
+        "filename": "test/testsupport/video_frame_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-17T14:56:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8a77b0a_a16771fa",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 31
+      },
+      "revId": "ae7fd09d9eee681bacb05c0e6572ccd731be077a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
