@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cfbade18_2b4132cf",
+        "filename": "api/task_queue/task_queue_default_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-17T21:50:52Z",
+      "side": 1,
+      "message": "yes, the plan it to create current TaskQueue implementations with this factory.\n(https://webrtc-review.googlesource.com/c/src/+/116489/16/api/task_queue/BUILD.gn#55)\n\nDone.\nchanged to producing factory function for the default factory.\nwhich made it noticeable simpler (no need for the class when there is no supported factory)\nConsistency is another good reason to do it.",
+      "parentUuid": "f951b441_b7088a2a",
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa03cb8_be7acb1a",
         "filename": "rtc_base/BUILD.gn",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e50ccd5e_8cb9c1da",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-17T21:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa03cb8_be7acb1a",
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70e84ced_7831bfc4",
         "filename": "rtc_base/task_queue_global_factory.h",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13ee763c_7697e616",
+        "filename": "rtc_base/task_queue_global_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-17T21:50:52Z",
+      "side": 1,
+      "message": "I do want it in api though, but it is \u0027temporary api\u0027.\nIt suppose to be used by external projects (to set the global factory),\nbut in the end of my refactoring I plan to remove it.\n\nSo moved to api and added TODO comment",
+      "parentUuid": "70e84ced_7831bfc4",
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "c7c0e20b_c36ebe20",
+        "filename": "rtc_base/task_queue_global_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-17T21:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73540c4f_27015c34",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 7
+      },
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "316eceab_dc640e95",
         "filename": "rtc_base/task_queue_global_factory.h",
         "patchSetId": 3
@@ -90,6 +168,24 @@
       "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4053b388_ac4416a3",
+        "filename": "rtc_base/task_queue_global_factory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-17T21:50:52Z",
+      "side": 1,
+      "message": "Done,\nadjusted file names / build target names to match the function names.",
+      "parentUuid": "316eceab_dc640e95",
+      "revId": "7d0b2017e947592e8c2296280423e1f3d8bc3993",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
