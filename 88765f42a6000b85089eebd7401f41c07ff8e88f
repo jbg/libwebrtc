@@ -93,6 +93,24 @@
       "revId": "88765f42a6000b85089eebd7401f41c07ff8e88f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcd5f35c_e4b90c99",
+        "filename": "test/fake_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-17T10:34:38Z",
+      "side": 1,
+      "message": "\u003e \u003e You can do what ArrayView does: Return a non-const pointer from the const data() method. This makes perfect sense for an object that doesn\u0027t own the data it points to.\n\u003e \n\u003e Ah, that would solve the immediate problem.\n\nDone in latest patchset.",
+      "parentUuid": "81f63267_1175b460",
+      "revId": "88765f42a6000b85089eebd7401f41c07ff8e88f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
