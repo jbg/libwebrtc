@@ -53,7 +53,6 @@ class FileWrapper final {
 
   // Write any buffered data to the underlying file. Returns true on success,
   // false on write error. Note: Flushing when closing, is not required.
-  // TODO(nisse): Delete this method.
   bool Flush();
 
   // Seeks to the beginning of file. Returns true on success, false on failure,
