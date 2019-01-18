@@ -16,6 +16,24 @@
       "revId": "7abcb33272a7670755d38df731eba0d754f4d5be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db7c9036_c0eb24c1",
+        "filename": "pc/peer_connection_interface_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-18T13:01:14Z",
+      "side": 1,
+      "message": "Good catch. Fixed, and similarly for the helper method CreateAudioTrack.",
+      "parentUuid": "9bf179f6_885a044a",
+      "revId": "7abcb33272a7670755d38df731eba0d754f4d5be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
