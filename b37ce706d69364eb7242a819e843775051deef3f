@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "11e109fe_5d395b87",
+        "filename": "api/task_queue/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-18T09:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75f33bb6_2f51c5ed",
+      "revId": "b37ce706d69364eb7242a819e843775051deef3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dbda7641_db7b3857",
         "filename": "api/task_queue/global_task_queue_factory.cc",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "b37ce706d69364eb7242a819e843775051deef3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d54ba697_d3339dc4",
+        "filename": "api/task_queue/global_task_queue_factory.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-18T09:11:27Z",
+      "side": 1,
+      "message": "I did considered that, but found it less clear.\nYes, that localize treating raw pointers as unique pointers.\n\nBut, most of the time the parameter is nullptr and most of the time not used. raw pointer seems more fitting because of that.\nAlso it makes check RTC_CHECK(GlobalOrDefault(global) \u003d\u003d global) slightly trickier to write, still would need need to convert factory parameter to raw pointer.",
+      "parentUuid": "dbda7641_db7b3857",
+      "range": {
+        "startLine": 19,
+        "startChar": 34,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "b37ce706d69364eb7242a819e843775051deef3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
