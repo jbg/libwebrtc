@@ -35,9 +35,7 @@ class RtpGenericFrameDescriptor {
   void SetLastPacketInSubFrame(bool last) { end_of_subframe_ = last; }
 
   bool FirstSubFrameInFrame() const { return beginning_of_frame_; }
-  void SetFirstSubFrameInFrame(bool first) { beginning_of_frame_ = first; }
   bool LastSubFrameInFrame() const { return end_of_frame_; }
-  void SetLastSubFrameInFrame(bool last) { end_of_frame_ = last; }
 
   // Properties below undefined if !FirstPacketInSubFrame()
   // Valid range for temporal layer: [0, 7]
@@ -64,6 +62,11 @@ class RtpGenericFrameDescriptor {
 
   void SetByteRepresentation(rtc::ArrayView<const uint8_t> representation);
   rtc::ArrayView<const uint8_t> GetByteRepresentation();
+
+ protected:
+  friend class RtpGenericFrameDescriptorExtension;
+  void SetFirstSubFrameInFrame(bool first) { beginning_of_frame_ = first; }
+  void SetLastSubFrameInFrame(bool last) { end_of_frame_ = last; }
 
  private:
   bool beginning_of_subframe_ = false;
