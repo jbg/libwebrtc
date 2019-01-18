@@ -81,6 +81,30 @@
       "revId": "b37ce706d69364eb7242a819e843775051deef3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e534ce7d_0102ac06",
+        "filename": "api/task_queue/global_task_queue_factory.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-18T11:06:26Z",
+      "side": 1,
+      "message": "\u003e I did considered that, but found it less clear.\n\u003e Yes, that localize treating raw pointers as unique pointers.\n\u003e \n\u003e But, most of the time the parameter is nullptr and most of the time not used. raw pointer seems more fitting because of that.\n\nNull unique_ptrs work just fine. But the existing code is fine too; whether my suggestion would be an improvement or not is largely a matter of how much one dislikes raw pointers that own stuff...\n\n\u003e Also it makes check RTC_CHECK(GlobalOrDefault(global) \u003d\u003d global) slightly trickier to write, still would need need to convert factory parameter to raw pointer.\n\nWell, yes, you\u0027d need to call .get(). Not much of a hurdle...",
+      "parentUuid": "d54ba697_d3339dc4",
+      "range": {
+        "startLine": 19,
+        "startChar": 34,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "b37ce706d69364eb7242a819e843775051deef3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
