@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "706421e2_00ab8b92",
+        "filename": "rtc_base/file_rotating_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-18T08:57:30Z",
+      "side": 1,
+      "message": "This method is exposed as a property on the objc RTCFileLogger",
+      "range": {
+        "startLine": 264,
+        "startChar": 25,
+        "endLine": 264,
+        "endChar": 41
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4fd0795_026952a1",
+        "filename": "rtc_base/file_rotating_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-18T08:57:30Z",
+      "side": 1,
+      "message": "Note that this use of errno isn\u0027t documented in the FileWrapper class.",
+      "range": {
+        "startLine": 286,
+        "startChar": 17,
+        "endLine": 286,
+        "endChar": 22
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
