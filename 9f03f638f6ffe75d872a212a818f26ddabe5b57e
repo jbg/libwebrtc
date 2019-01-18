@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed36c93d_741e1931",
+        "filename": "api/task_queue/global_task_queue_factory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-18T09:36:05Z",
+      "side": 1,
+      "message": "You use reference to indicate that the function isn\u0027t expected to return null?\n\nOtherwise, pointer seems natural since SetGlobalTaskQueueFactory takes a pointer.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "9f03f638f6ffe75d872a212a818f26ddabe5b57e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
