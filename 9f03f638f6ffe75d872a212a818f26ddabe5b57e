@@ -22,6 +22,30 @@
       "revId": "9f03f638f6ffe75d872a212a818f26ddabe5b57e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6cacc85_4cc285ef",
+        "filename": "api/task_queue/global_task_queue_factory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-18T10:03:11Z",
+      "side": 1,
+      "message": "reference to indicate it never nullptr,\nalso stress caller should not take ownership of it (though raw pointer shouldn\u0027t assume ownership either).\n\nI do not understand advantage of using pointer.\nSetGlobal takes unique pointer because semantic is different there. It still can\u0027t be nullptr, but ownership is transferred.",
+      "parentUuid": "ed36c93d_741e1931",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "9f03f638f6ffe75d872a212a818f26ddabe5b57e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
