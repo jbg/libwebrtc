@@ -639,7 +639,6 @@ TEST_F(NetworkTest, MAYBE_TestIPv6Toggle) {
   // There should be at least one IPv6 network (fe80::/64 should be in there).
   // TODO(thaloun): Disabling this test on windows for the moment as the test
   // machines don't seem to have IPv6 installed on them at all.
-  manager.set_ipv6_enabled(true);
   list = GetNetworks(manager, true);
   for (NetworkManager::NetworkList::iterator it = list.begin();
        it != list.end(); ++it) {
@@ -654,21 +653,6 @@ TEST_F(NetworkTest, MAYBE_TestIPv6Toggle) {
     delete (*it);
   }
 #endif
-  ipv6_found = false;
-  manager.set_ipv6_enabled(false);
-  list = GetNetworks(manager, true);
-  for (NetworkManager::NetworkList::iterator it = list.begin();
-       it != list.end(); ++it) {
-    if ((*it)->prefix().family() == AF_INET6) {
-      ipv6_found = true;
-      break;
-    }
-  }
-  EXPECT_FALSE(ipv6_found);
-  for (NetworkManager::NetworkList::iterator it = list.begin();
-       it != list.end(); ++it) {
-    delete (*it);
-  }
 }
 
 // Test that when network interfaces are sorted and given preference values,
