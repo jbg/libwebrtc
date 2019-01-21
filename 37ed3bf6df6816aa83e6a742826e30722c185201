@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6160e313_62ae361a",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-21T10:38:48Z",
+      "side": 1,
+      "message": "protected is for functions supposed to be used by derived class.\nMove these to private [friend class has access to private section no matter where you write it]",
+      "range": {
+        "startLine": 66,
+        "startChar": 1,
+        "endLine": 66,
+        "endChar": 10
+      },
+      "revId": "37ed3bf6df6816aa83e6a742826e30722c185201",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e33cac96_4b9501a1",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-21T10:38:48Z",
+      "side": 1,
+      "message": "#include header that declares this symbol (or forward-declare if #including it would cause circular-dependency)",
+      "range": {
+        "startLine": 67,
+        "startChar": 15,
+        "endLine": 67,
+        "endChar": 49
+      },
+      "revId": "37ed3bf6df6816aa83e6a742826e30722c185201",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
