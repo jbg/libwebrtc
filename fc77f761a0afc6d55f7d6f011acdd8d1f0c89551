@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af6537eb_1dea4aaa",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-21T16:50:10Z",
+      "side": 1,
+      "message": "Any reason not to make the IceTransportInterface correct from the start?",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20eed11f_efe55f0c",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-21T16:50:10Z",
+      "side": 1,
+      "message": "Shouldn\u0027t a class named \"WithTransportChannel\" have an explicit P2PTransportChannel reference? This is the same as IceTransportWithPointer except it has ownership, there doesn\u0027t seem to be anything inherently about P2PTransportChannel here except for the constructor.\n\n- Should it be renamed or should the reference be explicitly to P2PTransportChannel?\n- Do we really need two implementations of the interface? Why? Can we merge them?",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ddcc808_c05d2238",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-21T16:50:10Z",
+      "side": 1,
+      "message": "These should be in an anonymous namespace webrtc::(anonymous), and since it\u0027s all in the .cc file you can inline the constructor for readability.",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bc93b3e_889fadbd",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-21T16:50:10Z",
+      "side": 1,
+      "message": "These arguments don\u0027t look like anything real. In practice we do need to set transport_name and component (they\u0027re used in getStats amongst other things). What is the plan for this?",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdd6f4ee_4e65b235",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-21T16:50:10Z",
+      "side": 1,
+      "message": "What is the threading model supposed to be?",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72835f93_3e174068",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-21T16:50:10Z",
+      "side": 1,
+      "message": "nit:\n  : internal_(internal) {}\n\nI think constructors should be in the .cc.",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
