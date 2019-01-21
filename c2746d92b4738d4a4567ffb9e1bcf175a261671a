@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6168d296_530cb7d3",
+        "filename": "rtc_base/file_rotating_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-21T12:54:06Z",
+      "side": 1,
+      "message": "Not sure what\u0027s the right thing. The easy way is to document that errno is the way to check the reason a call failed. Another way might be to return something more complex, or add an optional int* error argument where relevant errno value is copied.",
+      "parentUuid": "fbfba1c3_7066af68",
+      "range": {
+        "startLine": 286,
+        "startChar": 17,
+        "endLine": 286,
+        "endChar": 22
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3908fe40_d7b97858",
         "filename": "rtc_base/file_rotating_stream_unittest.cc",
         "patchSetId": 9
@@ -83,6 +107,30 @@
       "writtenOn": "2019-01-18T11:26:51Z",
       "side": 1,
       "message": "Are you sure we shouldn\u0027t have a const std::string\u0026 overload?",
+      "range": {
+        "startLine": 132,
+        "startChar": 52,
+        "endLine": 132,
+        "endChar": 60
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9f98e7e_1c0d7f0a",
+        "filename": "rtc_base/file_rotating_stream_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-21T12:54:06Z",
+      "side": 1,
+      "message": "I don\u0027t that strong an opinion. If we add it, I want to fail (either RTC_CHECK or returning failure) for embedded NULs. But I don\u0027t see a big problem with leaving .c_str() to callers; it\u0027s few characters, it\u0027s clear what it does, and what potential NUL-problems are.",
+      "parentUuid": "3908fe40_d7b97858",
       "range": {
         "startLine": 132,
         "startChar": 52,
