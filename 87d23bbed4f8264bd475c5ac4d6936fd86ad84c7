@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f1f9d43_65e8d740",
+        "filename": "api/dtls_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-21T12:27:21Z",
+      "side": 1,
+      "message": "\"IceTransport\"? -- https://google.github.io/styleguide/cppguide.html#Function_Names\n\nAlso, is it intentional to give the caller a new reference to the object? If the caller will never take a reference to the object, IceTransportInterface* or IceTransportInterface\u0026 is better (depending on whether null is an option); if the caller will sometimes take a reference, const scoped_refptr\u003cIceTransportInterface\u003e\u0026 is better. Only if the caller will almost always take a reference is scoped_refptr\u003cIceTransportInterface\u003e the best choice.",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cecf97a8_a6ff7a85",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-21T12:27:21Z",
+      "side": 1,
+      "message": "\"Internal\"? -- https://google.github.io/styleguide/cppguide.html#Function_Names",
+      "range": {
+        "startLine": 32,
+        "startChar": 41,
+        "endLine": 32,
+        "endChar": 49
+      },
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "378b41cc_13ba5ad0",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-21T12:27:21Z",
+      "side": 1,
+      "message": "Am I right in assuming that this interface can neither be implemented nor called by code outside our tree?",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "392a5c37_62de2993",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-21T12:27:21Z",
+      "side": 1,
+      "message": "It\u0027s generally better to describe what functions do, as opposed to who is calling them.",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed022d7b_b295f500",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-21T12:27:21Z",
+      "side": 1,
+      "message": "Please define functions in the same build target that declares them: https://webrtc.googlesource.com/src/+/master/style-guide.md#h-cc-pairs",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
