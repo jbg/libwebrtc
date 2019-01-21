@@ -1072,6 +1072,9 @@ void RTPSender::UpdateDelayStatistics(int64_t capture_time_ms, int64_t now_ms) {
     RTC_DCHECK_GE(capture_time_ms, static_cast<int64_t>(0));
     RTC_DCHECK_LE(capture_time_ms, std::numeric_limits<int64_t>::max() / 2);
     int64_t diff_ms = now_ms - capture_time_ms;
+    // TODO(nisse): Delete before landing.
+    RTC_LOG(LS_ERROR) << "XXX now = " << now_ms
+                      << " capture = " << capture_time_ms;
     RTC_DCHECK_GE(diff_ms, static_cast<int64_t>(0));
     RTC_DCHECK_LE(diff_ms,
                   static_cast<int64_t>(std::numeric_limits<int>::max()));
