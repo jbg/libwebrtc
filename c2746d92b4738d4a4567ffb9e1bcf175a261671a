@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "f5b75317_9ce4ee28",
+        "filename": "rtc_base/file_rotating_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-21T13:40:13Z",
+      "side": 1,
+      "message": "Since FileWrapper is explicitly a thin wrapper around FILE*, it might make sense to document that callers should use errno. On the other hand, if we ever change our minds, finding all those uses of errno is going to be hard.\n\nMy vote is on adding an optional int* argument where we fill in errno, but I can probably be persuaded to go with just the documentation too.",
+      "parentUuid": "6168d296_530cb7d3",
+      "range": {
+        "startLine": 286,
+        "startChar": 17,
+        "endLine": 286,
+        "endChar": 22
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3908fe40_d7b97858",
         "filename": "rtc_base/file_rotating_stream_unittest.cc",
         "patchSetId": 9
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "I don\u0027t that strong an opinion. If we add it, I want to fail (either RTC_CHECK or returning failure) for embedded NULs. But I don\u0027t see a big problem with leaving .c_str() to callers; it\u0027s few characters, it\u0027s clear what it does, and what potential NUL-problems are.",
       "parentUuid": "3908fe40_d7b97858",
+      "range": {
+        "startLine": 132,
+        "startChar": 52,
+        "endLine": 132,
+        "endChar": 60
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efc76a92_3ab1e86c",
+        "filename": "rtc_base/file_rotating_stream_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-21T13:40:13Z",
+      "side": 1,
+      "message": "Having dozens of separate calls to c_str() is only OK if you *don\u0027t* care. If you *do* care about the possibility of embedded nulls (and you seem to do), then checking it centrally seems like the only viable option.\n\nAnd as for the actual check, RTC_CHECK seems like a great choice. No caller should ask for filenames with embedded nulls.",
+      "parentUuid": "a9f98e7e_1c0d7f0a",
       "range": {
         "startLine": 132,
         "startChar": 52,
