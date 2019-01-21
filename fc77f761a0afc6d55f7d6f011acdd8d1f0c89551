@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "91b7a676_8375d379",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T17:57:43Z",
+      "side": 1,
+      "message": "Unlike dtlstransport, this is not a greenfield, it\u0027s a redesign of the existing implementation of blink::RTCIceTransport.\n\nI want to have the objects\u0027 creation, deletion and ownership clear in this CL, and do the exposure of more accessor functions in a next step.",
+      "parentUuid": "af6537eb_1dea4aaa",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "20eed11f_efe55f0c",
         "filename": "pc/ice_transport.cc",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2019-01-21T16:50:10Z",
       "side": 1,
       "message": "Shouldn\u0027t a class named \"WithTransportChannel\" have an explicit P2PTransportChannel reference? This is the same as IceTransportWithPointer except it has ownership, there doesn\u0027t seem to be anything inherently about P2PTransportChannel here except for the constructor.\n\n- Should it be renamed or should the reference be explicitly to P2PTransportChannel?\n- Do we really need two implementations of the interface? Why? Can we merge them?",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1259cd91_50501ef3",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T17:57:43Z",
+      "side": 1,
+      "message": "I can rename it to IceTransportOwningInternalTransport, would that be better?\nIt turns out we have two usage patterns - one where the accessor in Blink owns the transport (and where I want to slot in this version), and one where the primary ownership is with another entity (JsepTransport), and where I want to wrap it in the other one.\n\nI want a common interface that I can use in the rest of the Blink code. This split was the cleanest way I could see to achieve that without significant refactoring in one of the two places.",
+      "parentUuid": "20eed11f_efe55f0c",
       "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "cf014436_179db97b",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T17:57:43Z",
+      "side": 1,
+      "message": "It\u0027s exactly the parameters that are presently used for the IceTransport in the blink layer.",
+      "parentUuid": "0bc93b3e_889fadbd",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bdd6f4ee_4e65b235",
         "filename": "pc/ice_transport.cc",
         "patchSetId": 3
@@ -81,6 +135,24 @@
       "writtenOn": "2019-01-21T16:50:10Z",
       "side": 1,
       "message": "What is the threading model supposed to be?",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "713f9769_90701e32",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T17:57:43Z",
+      "side": 1,
+      "message": "All manipulation on the thread that created it. The code for checking that is boilerplate.",
+      "parentUuid": "bdd6f4ee_4e65b235",
       "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
