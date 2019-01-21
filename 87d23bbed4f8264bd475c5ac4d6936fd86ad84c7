@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ca9a2bec_50de2503",
+        "filename": "api/dtls_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T14:16:43Z",
+      "side": 1,
+      "message": "\"Accessors and mutators (get and set functions) may be named like variables. These often correspond to actual member variables, but this is not required. \"\n\nThe intention is to allow the caller to take a new reference to the object. This reference will be used to create a Blink-level object that has an independent lifetime to the DTLS transport.\n\nI don\u0027t know if there will be usages of this that don\u0027t take a reference (not having coded the calling code yet), so I don\u0027t know if const scoped_refptr\u0026 is better than scoped_refptr. I\u0027d prefer to leave it like this since it\u0027s my primary use case.",
+      "parentUuid": "5f1f9d43_65e8d740",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cecf97a8_a6ff7a85",
         "filename": "api/ice_transport_interface.h",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2019-01-21T12:27:21Z",
       "side": 1,
       "message": "\"Internal\"? -- https://google.github.io/styleguide/cppguide.html#Function_Names",
+      "range": {
+        "startLine": 32,
+        "startChar": 41,
+        "endLine": 32,
+        "endChar": 49
+      },
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7ba8bff_2e0823bb",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T14:16:43Z",
+      "side": 1,
+      "message": "There\u0027s code up in Blink that currently accesses a cricket::IceTransportInternal (even worse: it accesses a specific implementation of it). I want to expose the methods on this interface that the calling code needs, and no more, and thereafter hide the cricket::IceTransportInternal. I\u0027ll add a TODO here laying out that plan.",
+      "parentUuid": "cecf97a8_a6ff7a85",
       "range": {
         "startLine": 32,
         "startChar": 41,
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "1d29b330_4c048caf",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T14:16:43Z",
+      "side": 1,
+      "message": "It is not intended to be implemented (we have an unfortunate habit of having mock objects in Chrome where we inherit the interface, making new virtual methods hard to add, but that\u0027s the only reason I can see to implement it outside webrtc). It will be called from Chrome.",
+      "parentUuid": "378b41cc_13ba5ad0",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "392a5c37_62de2993",
         "filename": "api/ice_transport_interface.h",
         "patchSetId": 2
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "d75bc3c4_9014c0f0",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T14:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "392a5c37_62de2993",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed022d7b_b295f500",
         "filename": "api/ice_transport_interface.h",
         "patchSetId": 2
@@ -87,6 +165,24 @@
       "writtenOn": "2019-01-21T12:27:21Z",
       "side": 1,
       "message": "Please define functions in the same build target that declares them: https://webrtc.googlesource.com/src/+/master/style-guide.md#h-cc-pairs",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c4940fc_1ec15bf7",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-21T14:16:43Z",
+      "side": 1,
+      "message": "The implementation of this factory function (see implementation) has to have knowledge that doesn\u0027t belong in the api/ directory. While scanning other .h files for examples, I found examples of factory methods that were not defined in the same directory, so my thought was to follow that pattern.",
+      "parentUuid": "ed022d7b_b295f500",
       "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
