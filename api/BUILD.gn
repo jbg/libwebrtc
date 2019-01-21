@@ -89,6 +89,7 @@ rtc_static_library("libjingle_peerconnection_api") {
     "dtlstransportinterface.h",
     "dtmf_sender_interface.h",
     "dtmfsenderinterface.h",
+    "ice_transport_interface.h",
     "jsep.cc",
     "jsep.h",
     "jsep_ice_candidate.cc",
