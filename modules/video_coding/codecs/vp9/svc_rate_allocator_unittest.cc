@@ -245,8 +245,8 @@ TEST_P(SvcRateAllocatorTestParametrizedContentType, PaddingBitrate) {
   EXPECT_EQ(allocation.GetSpatialLayerSum(2), 0UL);
 }
 
-INSTANTIATE_TEST_CASE_P(_,
-                        SvcRateAllocatorTestParametrizedContentType,
-                        ::testing::Bool());
+INSTANTIATE_TEST_SUITE_P(_,
+                         SvcRateAllocatorTestParametrizedContentType,
+                         ::testing::Bool());
 
 }  // namespace webrtc
