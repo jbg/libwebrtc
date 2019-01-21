@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "02951ffd_67ad9b47",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-01-21T13:17:27Z",
+      "side": 1,
+      "message": "I know, but I like defining things used by friends as protected, as a way to keep things in private really private. But if this is not clear to other readers, then it\u0027s a waste of time. I\u0027ll move it to private, then.",
+      "parentUuid": "6160e313_62ae361a",
+      "range": {
+        "startLine": 66,
+        "startChar": 1,
+        "endLine": 66,
+        "endChar": 10
+      },
+      "revId": "37ed3bf6df6816aa83e6a742826e30722c185201",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e33cac96_4b9501a1",
         "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "37ed3bf6df6816aa83e6a742826e30722c185201",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4d8d6a2_49371862",
+        "filename": "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-01-21T13:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33cac96_4b9501a1",
+      "range": {
+        "startLine": 67,
+        "startChar": 15,
+        "endLine": 67,
+        "endChar": 49
+      },
+      "revId": "37ed3bf6df6816aa83e6a742826e30722c185201",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
