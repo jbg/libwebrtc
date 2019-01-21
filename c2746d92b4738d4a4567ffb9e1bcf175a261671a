@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "49f770bc_6a2e2959",
+        "filename": "rtc_base/file_rotating_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-21T14:24:59Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll add on optional argument (and only for the method(s) where it\u0027s used)",
+      "parentUuid": "f5b75317_9ce4ee28",
+      "range": {
+        "startLine": 286,
+        "startChar": 17,
+        "endLine": 286,
+        "endChar": 22
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3908fe40_d7b97858",
         "filename": "rtc_base/file_rotating_stream_unittest.cc",
         "patchSetId": 9
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Having dozens of separate calls to c_str() is only OK if you *don\u0027t* care. If you *do* care about the possibility of embedded nulls (and you seem to do), then checking it centrally seems like the only viable option.\n\nAnd as for the actual check, RTC_CHECK seems like a great choice. No caller should ask for filenames with embedded nulls.",
       "parentUuid": "a9f98e7e_1c0d7f0a",
+      "range": {
+        "startLine": 132,
+        "startChar": 52,
+        "endLine": 132,
+        "endChar": 60
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5de3f88d_12315898",
+        "filename": "rtc_base/file_rotating_stream_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-21T14:24:59Z",
+      "side": 1,
+      "message": "I don\u0027t care that much about *current* calls, I worry about future calls where silent truncation will be unexpected and possibly dangerous. We should avoid building foot-shooting devices.\n\nBut a convenience overload with a RTC_CHECK is fine with me. I\u0027ll add that.",
+      "parentUuid": "efc76a92_3ab1e86c",
       "range": {
         "startLine": 132,
         "startChar": 52,
