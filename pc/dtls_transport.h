@@ -14,10 +14,13 @@
 #include <memory>
 
 #include "api/dtls_transport_interface.h"
+#include "api/ice_transport_interface.h"
 #include "p2p/base/dtls_transport.h"
 #include "rtc_base/async_invoker.h"
 
 namespace webrtc {
+
+class IceTransportWithPointer;
 
 // This implementation wraps a cricket::DtlsTransport, and takes
 // ownership of it.
@@ -28,6 +31,7 @@ class DtlsTransport : public DtlsTransportInterface,
   explicit DtlsTransport(
       std::unique_ptr<cricket::DtlsTransportInternal> internal);
 
+  rtc::scoped_refptr<IceTransportInterface> ice_transport() override;
   DtlsTransportInformation Information() override;
   void RegisterObserver(DtlsTransportObserverInterface* observer) override;
   void UnregisterObserver() override;
@@ -51,6 +55,7 @@ class DtlsTransport : public DtlsTransportInterface,
   DtlsTransportObserverInterface* observer_ = nullptr;
   rtc::Thread* signaling_thread_;
   std::unique_ptr<cricket::DtlsTransportInternal> internal_dtls_transport_;
+  rtc::scoped_refptr<IceTransportWithPointer> ice_transport_;
 };
 
 }  // namespace webrtc

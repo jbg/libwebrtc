@@ -12,9 +12,12 @@
 #define API_DTLS_TRANSPORT_INTERFACE_H_
 
 #include "api/rtc_error.h"
+#include "api/scoped_refptr.h"
 #include "rtc_base/ref_count.h"
 
 namespace webrtc {
+
+class IceTransportInterface;
 
 // States of a DTLS transport, corresponding to the JS API specification.
 // http://w3c.github.io/webrtc-pc/#dom-rtcdtlstransportstate
@@ -59,6 +62,8 @@ class DtlsTransportObserverInterface {
 // be initiated by other threads.
 class DtlsTransportInterface : public rtc::RefCountInterface {
  public:
+  // Returns a pointer to the ICE transport that is owned by the DTLS transport.
+  virtual rtc::scoped_refptr<IceTransportInterface> ice_transport() = 0;
   // These functions can only be called from the signalling thread.
   virtual DtlsTransportInformation Information() = 0;
   // Observer management.
