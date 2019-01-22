@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "00541ef4_86228f5c",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-22T12:15:46Z",
+      "side": 1,
+      "message": "Thanks for catching this Fredrik! I will remove rtc_base/scoped_ref_ptr.h this week so we will not get confused in the future.",
+      "parentUuid": "13f4dd96_69e33846",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af6537eb_1dea4aaa",
         "filename": "api/ice_transport_interface.h",
         "patchSetId": 3
