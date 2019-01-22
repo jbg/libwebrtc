@@ -236,6 +236,30 @@
       "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b28999e_ce8ff6e0",
+        "filename": "rtc_base/file_rotating_stream_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-22T01:03:00Z",
+      "side": 1,
+      "message": "And my worry is that such future call sites will just use c_str() and not even realize that there might be a problem.\n\nA convenience overload with a RTC_CHECK solves the problem neatly.",
+      "parentUuid": "5de3f88d_12315898",
+      "range": {
+        "startLine": 132,
+        "startChar": 52,
+        "endLine": 132,
+        "endChar": 60
+      },
+      "revId": "c2746d92b4738d4a4567ffb9e1bcf175a261671a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

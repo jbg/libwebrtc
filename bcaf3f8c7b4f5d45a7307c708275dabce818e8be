@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "244fdae1_88e65ef4",
+        "filename": "rtc_base/system/file_wrapper.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-22T01:03:00Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "bcaf3f8c7b4f5d45a7307c708275dabce818e8be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5613b9a_01a81268",
+        "filename": "rtc_base/system/file_wrapper.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-22T01:03:00Z",
+      "side": 1,
+      "message": "Why error reporting only for the latter two functions? Because no one checks for errors when opening a file for reading? Or are you waiting for my opinion? (I like it. Not a platonic ideal of interface beauty, but simple, useful, and easy to understand.)",
+      "revId": "bcaf3f8c7b4f5d45a7307c708275dabce818e8be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
