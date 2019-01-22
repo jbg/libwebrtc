@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "3a8f1594_e906d1d9",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-22T12:56:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f4dd96_69e33846",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af6537eb_1dea4aaa",
         "filename": "api/ice_transport_interface.h",
         "patchSetId": 3
@@ -83,6 +101,24 @@
       "writtenOn": "2019-01-22T12:03:26Z",
       "side": 1,
       "message": "Looks like we should include api/scoped_refptr.h here",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d370aa8_bcba2dbe",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-22T12:56:38Z",
+      "side": 1,
+      "message": "By IWYU - yes. Done.",
+      "parentUuid": "0f199189_20fe34ef",
       "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -335,6 +371,24 @@
     },
     {
       "key": {
+        "uuid": "6947ba8c_4acf685b",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-22T12:56:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd272255_2f0c3ac9",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccd970c1_4e81d93f",
         "filename": "pc/ice_transport.h",
         "patchSetId": 3
@@ -346,6 +400,24 @@
       "writtenOn": "2019-01-22T12:03:26Z",
       "side": 1,
       "message": "This is a very brittle construct. Is there another way?",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4669ad9e_7e2da277",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-22T12:56:38Z",
+      "side": 1,
+      "message": "Hm.\n\nWe can do as we did for DTLSTransport and refactor JSEPTransport \u0026 friends to keep ownership inside a shared pointer instead of keeping ownership for itself and keeping track of the pointer inside the shared pointer on the side (as is currently implemented in this CL).\n\nBUT - the ICE transport is currently owned by the cricket::DtlsTransport, which lives deep down in p2p-land. Having cricket::DtlsTransport depend on webrtc::IceTransport seems like the wrong kind of dependency.\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/dtls_transport.h?type\u003dcs\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d226 is the critical line.\n\nThoughts?",
+      "parentUuid": "ccd970c1_4e81d93f",
       "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
