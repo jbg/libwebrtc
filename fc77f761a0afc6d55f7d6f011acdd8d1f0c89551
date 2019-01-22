@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "af8a75aa_814b433c",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-22T11:51:54Z",
+      "side": 1,
+      "message": "Yes, IceTransportOwningInternalTransport is for use with the present Blink allocation method (QUIC use case). IceTransportWithPointer is intended to fit with the current JsepTransport\u0027s usage of cricket::IceTransportInternal.\n\nI hope a next step is to refactor JsepTransport so that it can use an IceTransportOwningInternalTransport instead of a std::unique_pointer\u003ccricket::IceTransportInternal\u003e. One step at a time.",
+      "parentUuid": "1d369213_29afb5c0",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6ddcc808_c05d2238",
         "filename": "pc/ice_transport.cc",
         "patchSetId": 3
@@ -104,6 +122,24 @@
       "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8cc7fcb_d075a080",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-22T11:51:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ddcc808_c05d2238",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +245,24 @@
       "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c49f8351_94194014",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-22T11:51:54Z",
+      "side": 1,
+      "message": "Did the init thing, style checker doesn\u0027t complain, and body\u0027s now empty.",
+      "parentUuid": "909584ca_7f9fa9df",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
