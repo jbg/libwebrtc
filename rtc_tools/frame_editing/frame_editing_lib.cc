@@ -38,7 +38,7 @@ int EditFrames(const std::string& in_path,
   }
 
   // Frame size of I420.
-  size_t frame_length = CalcBufferSize(VideoType::kI420, width, height);
+  size_t frame_length = I420CalcBufferSize(width, height);
 
   std::unique_ptr<uint8_t[]> temp_buffer(new uint8_t[frame_length]);
 

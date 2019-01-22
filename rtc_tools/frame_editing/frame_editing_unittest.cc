@@ -25,7 +25,7 @@ namespace test {
 
 const int kWidth = 352;
 const int kHeight = 288;
-const size_t kFrameSize = CalcBufferSize(VideoType::kI420, kWidth, kHeight);
+const size_t kFrameSize = I420CalcBufferSize(kWidth, kHeight);
 
 class FrameEditingTest : public ::testing::Test {
  protected:

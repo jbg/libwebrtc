@@ -116,8 +116,8 @@ static void RtpFragmentize(EncodedImage* encoded_image,
     // should be more than enough to hold any encoded data of future frames of
     // the same size (avoiding possible future reallocation due to variations in
     // required size).
-    size_t new_capacity = CalcBufferSize(VideoType::kI420, frame_buffer.width(),
-                                         frame_buffer.height());
+    size_t new_capacity =
+        I420CalcBufferSize(frame_buffer.width(), frame_buffer.height());
     if (new_capacity < required_capacity) {
       // Encoded data > unencoded data. Allocate required bytes.
       RTC_LOG(LS_WARNING)
@@ -300,9 +300,8 @@ int32_t H264EncoderImpl::InitEncode(const VideoCodec* inst,
 
     // Initialize encoded image. Default buffer size: size of unencoded data.
 
-    const size_t new_capacity =
-        CalcBufferSize(VideoType::kI420, codec_.simulcastStream[idx].width,
-                       codec_.simulcastStream[idx].height);
+    const size_t new_capacity = I420CalcBufferSize(
+        codec_.simulcastStream[idx].width, codec_.simulcastStream[idx].height);
     encoded_images_[i].set_buffer(new uint8_t[new_capacity], new_capacity);
     encoded_image_buffers_[i].reset(encoded_images_[i].data());
     encoded_images_[i]._completeFrame = true;

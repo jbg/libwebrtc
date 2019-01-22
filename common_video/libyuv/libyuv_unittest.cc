@@ -55,7 +55,7 @@ TestLibYuv::TestLibYuv()
       height_(288),
       size_y_(width_ * height_),
       size_uv_(((width_ + 1) / 2) * ((height_ + 1) / 2)),
-      frame_length_(CalcBufferSize(VideoType::kI420, 352, 288)) {}
+      frame_length_(I420CalcBufferSize(352, 288)) {}
 
 void TestLibYuv::SetUp() {
   const std::string input_file_name =

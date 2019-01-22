@@ -47,6 +47,7 @@ rtc_static_library("common_video") {
     "../api/video:video_frame_i420",
     "../media:rtc_h264_profile_id",
     "../rtc_base:checks",
+    "../rtc_base:deprecation",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_task_queue",
     "../rtc_base:safe_minmax",

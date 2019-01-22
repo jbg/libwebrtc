@@ -395,8 +395,7 @@ int VP9EncoderImpl::InitEncode(const VideoCodec* inst,
   if (encoded_image_.data() != nullptr) {
     delete[] encoded_image_.data();
   }
-  size_t frame_capacity =
-      CalcBufferSize(VideoType::kI420, codec_.width, codec_.height);
+  size_t frame_capacity = I420CalcBufferSize(codec_.width, codec_.height);
   encoded_image_.set_buffer(new uint8_t[frame_capacity], frame_capacity);
   encoded_image_._completeFrame = true;
   // Populate encoder configuration with default values.

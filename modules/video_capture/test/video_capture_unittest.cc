@@ -389,8 +389,8 @@ class VideoCaptureExternalTest : public testing::Test {
 
 // Test input of external video frames.
 TEST_F(VideoCaptureExternalTest, TestExternalCapture) {
-  size_t length = webrtc::CalcBufferSize(
-      webrtc::VideoType::kI420, test_frame_->width(), test_frame_->height());
+  size_t length =
+      webrtc::I420CalcBufferSize(test_frame_->width(), test_frame_->height());
   std::unique_ptr<uint8_t[]> test_buffer(new uint8_t[length]);
   webrtc::ExtractBuffer(*test_frame_, length, test_buffer.get());
   EXPECT_EQ(0,
@@ -401,8 +401,8 @@ TEST_F(VideoCaptureExternalTest, TestExternalCapture) {
 
 TEST_F(VideoCaptureExternalTest, Rotation) {
   EXPECT_EQ(0, capture_module_->SetCaptureRotation(webrtc::kVideoRotation_0));
-  size_t length = webrtc::CalcBufferSize(
-      webrtc::VideoType::kI420, test_frame_->width(), test_frame_->height());
+  size_t length =
+      webrtc::I420CalcBufferSize(test_frame_->width(), test_frame_->height());
   std::unique_ptr<uint8_t[]> test_buffer(new uint8_t[length]);
   webrtc::ExtractBuffer(*test_frame_, length, test_buffer.get());
   EXPECT_EQ(0,

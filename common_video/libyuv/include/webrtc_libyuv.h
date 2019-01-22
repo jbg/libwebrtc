@@ -22,6 +22,7 @@
 #include "api/video/video_frame.h"
 #include "api/video/video_frame_buffer.h"
 #include "common_types.h"  // NOLINT(build/include)
+#include "rtc_base/deprecation.h"
 #include "rtc_base/scoped_ref_ptr.h"
 
 namespace webrtc {
@@ -33,6 +34,9 @@ const double kPerfectPSNR = 48.0f;
 // ::webrtc::kI420 as the first argument. Delete after they are updated.
 const VideoType kI420 = VideoType::kI420;
 
+// Needed buffer size for an I420 frame.
+size_t I420CalcBufferSize(int width, int height);
+
 // Calculate the required buffer size.
 // Input:
 //   - type         :The type of the designated video frame.
@@ -40,6 +44,7 @@ const VideoType kI420 = VideoType::kI420;
 //   - height       :frame height in pixels.
 // Return value:    :The required size in bytes to accommodate the specified
 //                   video frame.
+RTC_DEPRECATED
 size_t CalcBufferSize(VideoType type, int width, int height);
 
 // TODO(mikhal): Add unit test for these two functions and determine location.

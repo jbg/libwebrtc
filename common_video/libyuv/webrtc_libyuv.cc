@@ -20,40 +20,17 @@
 
 namespace webrtc {
 
-size_t CalcBufferSize(VideoType type, int width, int height) {
+size_t I420CalcBufferSize(int width, int height) {
   RTC_DCHECK_GE(width, 0);
   RTC_DCHECK_GE(height, 0);
-  size_t buffer_size = 0;
-  switch (type) {
-    case VideoType::kI420:
-    case VideoType::kNV12:
-    case VideoType::kNV21:
-    case VideoType::kIYUV:
-    case VideoType::kYV12: {
-      int half_width = (width + 1) >> 1;
-      int half_height = (height + 1) >> 1;
-      buffer_size = width * height + half_width * half_height * 2;
-      break;
-    }
-    case VideoType::kARGB4444:
-    case VideoType::kRGB565:
-    case VideoType::kARGB1555:
-    case VideoType::kYUY2:
-    case VideoType::kUYVY:
-      buffer_size = width * height * 2;
-      break;
-    case VideoType::kRGB24:
-      buffer_size = width * height * 3;
-      break;
-    case VideoType::kBGRA:
-    case VideoType::kARGB:
-      buffer_size = width * height * 4;
-      break;
-    default:
-      RTC_NOTREACHED();
-      break;
-  }
-  return buffer_size;
+  int half_width = (width + 1) >> 1;
+  int half_height = (height + 1) >> 1;
+  return width * height + half_width * half_height * 2;
+}
+
+size_t CalcBufferSize(VideoType type, int width, int height) {
+  RTC_DCHECK(type == VideoType::kI420);
+  return I420CalcBufferSize(width, height);
 }
 
 static int PrintPlane(const uint8_t* buf,
@@ -101,7 +78,7 @@ int ExtractBuffer(const rtc::scoped_refptr<I420BufferInterface>& input_frame,
     return -1;
   int width = input_frame->width();
   int height = input_frame->height();
-  size_t length = CalcBufferSize(VideoType::kI420, width, height);
+  size_t length = I420CalcBufferSize(width, height);
   if (size < length) {
     return -1;
   }

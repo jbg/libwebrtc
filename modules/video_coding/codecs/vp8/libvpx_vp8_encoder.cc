@@ -385,8 +385,7 @@ int LibvpxVp8Encoder::InitEncode(const VideoCodec* inst,
     if (encoded_images_[i].data() != nullptr) {
       delete[] encoded_images_[i].data();
     }
-    size_t frame_capacity =
-        CalcBufferSize(VideoType::kI420, codec_.width, codec_.height);
+    size_t frame_capacity = I420CalcBufferSize(codec_.width, codec_.height);
     encoded_images_[i].set_buffer(new uint8_t[frame_capacity], frame_capacity);
     encoded_images_[i]._completeFrame = true;
   }

@@ -63,8 +63,7 @@ MultiplexEncoderAdapter::~MultiplexEncoderAdapter() {
 int MultiplexEncoderAdapter::InitEncode(const VideoCodec* inst,
                                         int number_of_cores,
                                         size_t max_payload_size) {
-  const size_t buffer_size =
-      CalcBufferSize(VideoType::kI420, inst->width, inst->height);
+  const size_t buffer_size = I420CalcBufferSize(inst->width, inst->height);
   multiplex_dummy_planes_.resize(buffer_size);
   // It is more expensive to encode 0x00, so use 0x80 instead.
   std::fill(multiplex_dummy_planes_.begin(), multiplex_dummy_planes_.end(),
