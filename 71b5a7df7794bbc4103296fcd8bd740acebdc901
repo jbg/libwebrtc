@@ -70,6 +70,30 @@
       "revId": "71b5a7df7794bbc4103296fcd8bd740acebdc901",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1577934a_ebdff929",
+        "filename": "modules/video_capture/video_capture_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-22T10:41:53Z",
+      "side": 0,
+      "message": "\u003e Feel free to land it in libyuv if you think that makes more sense. But I think it\u0027s questionable if it\u0027s something worth spending too much time on?\n\nI was hoping it would be easy. Maybe it isn\u0027t.\n\n\u003e Why do we have to remove the VideoType enum?\n\nIf we don\u0027t delete it, we still have to move it out of the root common_types.h header.",
+      "parentUuid": "d5fe8c8c_cf40ec9d",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 3
+      },
+      "revId": "71b5a7df7794bbc4103296fcd8bd740acebdc901",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
