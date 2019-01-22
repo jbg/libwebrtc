@@ -46,6 +46,30 @@
       "revId": "71b5a7df7794bbc4103296fcd8bd740acebdc901",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5fe8c8c_cf40ec9d",
+        "filename": "modules/video_capture/video_capture_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-01-22T10:32:23Z",
+      "side": 0,
+      "message": "Not clear to me that it would be safe to remove this check, but I don\u0027t know the code.\n\nFeel free to land it in libyuv if you think that makes more sense. But I think it\u0027s questionable if it\u0027s something worth spending too much time on? Why do we have to remove the VideoType enum?",
+      "parentUuid": "0923775c_151026df",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 3
+      },
+      "revId": "71b5a7df7794bbc4103296fcd8bd740acebdc901",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
