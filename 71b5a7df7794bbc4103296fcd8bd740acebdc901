@@ -22,6 +22,30 @@
       "revId": "71b5a7df7794bbc4103296fcd8bd740acebdc901",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0923775c_151026df",
+        "filename": "modules/video_capture/video_capture_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-22T10:18:01Z",
+      "side": 0,
+      "message": "Hmm, I had expected libyuv::ConvertToI420 (called below) to do a similar check. But it looks like it doesn\u0027t; it uses videoFrameLength *only* for MJPG.\n\nThere seems to be 3 call sites:\n\n  video_capture_linux.cc (with length from some v4l syscall)\n\n  rtc_video_capture_objc.mm (with length computed as 2*width*height, kUYUY video format)\n\n  sink_filter_ds.cc (with length taken from some windows api involving the type IMediaSample)\n\nDo we need validation for these inputs? If so, would need to move the old CalcBufferSize switch statement to a local function in this file.\n\nI still think it would be better to leave it to libyuv, which gets the input buffer size, and ought to know how much data it needs for each supported format. I could try to add such checks to libyuv::ConvertToI420, before landing this?",
+      "parentUuid": "ae18135a_7937d74b",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 3
+      },
+      "revId": "71b5a7df7794bbc4103296fcd8bd740acebdc901",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

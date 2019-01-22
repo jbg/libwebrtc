@@ -22,6 +22,30 @@
       "revId": "f5116a8b8ab469acb2328e5cb37375a0734a15fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abf4440d_3097f8f6",
+        "filename": "common_video/libyuv/webrtc_libyuv.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-22T10:18:01Z",
+      "side": 1,
+      "message": "It works only for types with automagic connersions to string, for the message on failure. Gave a compile error when I tried to use it here.",
+      "parentUuid": "70eed15f_a421b71f",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 12
+      },
+      "revId": "f5116a8b8ab469acb2328e5cb37375a0734a15fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
