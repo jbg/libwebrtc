@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "1d369213_29afb5c0",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-22T08:02:51Z",
+      "side": 1,
+      "message": "Is IceTransportOwningInternalTransport the one to be used when RTCIceTransport is constructed independently of a PC (QUIC use case), and IceTransportWithPointer the one to be used when RTCIceTransport represents a transport constructed by the PC (webrtc-pc use case)?",
+      "parentUuid": "1259cd91_50501ef3",
+      "revId": "fc77f761a0afc6d55f7d6f011acdd8d1f0c89551",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6ddcc808_c05d2238",
         "filename": "pc/ice_transport.cc",
         "patchSetId": 3
