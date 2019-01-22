@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c7b83b0_e1de4464",
+        "filename": "api/DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-22T16:25:45Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed, right?",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "868bed2e_8b2760b6",
+        "filename": "api/dtls_transport_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-22T16:25:45Z",
+      "side": 1,
+      "message": "Just #include it?",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31ac4411_80cf0425",
+        "filename": "api/ice_transport_interface.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-22T16:25:45Z",
+      "side": 1,
+      "message": "absl::make_unique ?",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59041713_8609d35d",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-22T16:25:45Z",
+      "side": 1,
+      "message": "Maybe mention that the cricket::PortAllocator should outlive the IceTransportInterface.",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "268a7761_00f9946f",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-22T16:25:45Z",
+      "side": 1,
+      "message": "DCHECK internal is not null?",
+      "range": {
+        "startLine": 26,
+        "startChar": 66,
+        "endLine": 26,
+        "endChar": 74
+      },
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12182749_94ec6f8a",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-22T16:25:45Z",
+      "side": 1,
+      "message": "Another option is to use a ThreadChecker (which automatically grabs the current thread on construction).",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 50
+      },
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eefe5d51_0cc07028",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-22T16:25:45Z",
+      "side": 1,
+      "message": "document",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
