@@ -33,6 +33,24 @@
       "revId": "bcaf3f8c7b4f5d45a7307c708275dabce818e8be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "160a3dea_d7bfb8f4",
+        "filename": "rtc_base/system/file_wrapper.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-22T08:17:17Z",
+      "side": 1,
+      "message": "For consistency, all Open methods should have the error argument, as well as Read (with some convention for EOF vs error), Write, Close, Flush, Rewind. And I hesitate adding it to all these methods, when it\u0027s only used for one of them.\n\nI\u0027m thinking that it\u0027s easy to add to one method at a time, whenever need arises?",
+      "parentUuid": "b5613b9a_01a81268",
+      "revId": "bcaf3f8c7b4f5d45a7307c708275dabce818e8be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
