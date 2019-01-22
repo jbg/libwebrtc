@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "21cd3717_6ecdc00d",
+        "filename": "api/dtls_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-22T00:46:05Z",
+      "side": 1,
+      "message": "Regarding the name: OK, fair enough. I would still recommend CamelCase, but I won\u0027t insist.\n\nReturn value: OK. The difference between `const scoped_refptr\u003cIceTransportInterface\u003e\u0026` and `scoped_refptr\u003cIceTransportInterface\u003e` is probably small in that case.",
+      "parentUuid": "ca9a2bec_50de2503",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cecf97a8_a6ff7a85",
         "filename": "api/ice_transport_interface.h",
         "patchSetId": 2
@@ -84,6 +102,30 @@
     },
     {
       "key": {
+        "uuid": "813d26df_216fbf05",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-22T00:46:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b7ba8bff_2e0823bb",
+      "range": {
+        "startLine": 32,
+        "startChar": 41,
+        "endLine": 32,
+        "endChar": 49
+      },
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "378b41cc_13ba5ad0",
         "filename": "api/ice_transport_interface.h",
         "patchSetId": 2
@@ -116,6 +158,24 @@
       "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d922846_8a898281",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-22T00:46:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1d29b330_4c048caf",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -183,6 +243,24 @@
       "side": 1,
       "message": "The implementation of this factory function (see implementation) has to have knowledge that doesn\u0027t belong in the api/ directory. While scanning other .h files for examples, I found examples of factory methods that were not defined in the same directory, so my thought was to follow that pattern.",
       "parentUuid": "ed022d7b_b295f500",
+      "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d51ccf2e_c0334923",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-22T00:46:05Z",
+      "side": 1,
+      "message": "Unfortunately, that\u0027s a less than ideal pattern to follow. In order to put definitions and declarations in separate targets you in practice end up having to lie to the build system (by omitting to mention that the declaring target depends on the defining target), which has bitten us numerous times when supposedly safe refactorings cause linker errors that take more time than necessary to debug.\n\nThe lesser evil is to allow definitions in api/, even though they need to get at non-API code. Our DEPS rules are explicitly set up to give api/*.cc much more access than api/*.h for this reason. There\u0027s little practical downside to this, since users don\u0027t #include .cc files.\n\nIf implementations are large and/or particularly unsavory, you can always put a tiny forwarding implementation in api/ that just calls a real implementation elsewhere.",
+      "parentUuid": "8c4940fc_1ec15bf7",
       "revId": "87d23bbed4f8264bd475c5ac4d6936fd86ad84c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
