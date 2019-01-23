@@ -78,7 +78,13 @@ webrtc::RTCError ValidateRtpParameters(
                            "Attempted to set RtpParameters bitrate_priority to "
                            "an invalid number. bitrate_priority must be > 0.");
     }
-
+    if (rtp_parameters.encodings[i].scale_resolution_down_by &&
+        *rtp_parameters.encodings[i].scale_resolution_down_by < 1.0) {
+      LOG_AND_RETURN_ERROR(
+          RTCErrorType::INVALID_RANGE,
+          "Attempted to set RtpParameters scale_resolution_down_by to an "
+          "invalid number. scale_resolution_down_by must be >= 1.0");
+    }
     if (rtp_parameters.encodings[i].min_bitrate_bps &&
         rtp_parameters.encodings[i].max_bitrate_bps) {
       if (*rtp_parameters.encodings[i].max_bitrate_bps <

@@ -42,7 +42,6 @@ bool UnimplementedRtpEncodingParameterHasValue(
       encoding_params.fec.has_value() || encoding_params.rtx.has_value() ||
       encoding_params.dtx.has_value() || encoding_params.ptime.has_value() ||
       !encoding_params.rid.empty() ||
-      encoding_params.scale_resolution_down_by.has_value() ||
       encoding_params.scale_framerate_down_by.has_value() ||
       !encoding_params.dependency_rids.empty()) {
     return true;
