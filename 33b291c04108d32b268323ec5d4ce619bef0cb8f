@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "41808c9d_cd183915",
+        "filename": "api/dtls_transport_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-23T22:17:29Z",
+      "side": 1,
+      "message": "As an FYI:\n\n- Google style says to just #include\n- Chromium style overrides that to say use forward declarations\n- WebRTC style overrides that to say just #include",
+      "parentUuid": "75b41b76_47f38939",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31ac4411_80cf0425",
         "filename": "api/ice_transport_interface.cc",
         "patchSetId": 6
