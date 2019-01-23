@@ -46,6 +46,30 @@
       "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52b0f9bf_19ccba58",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-23T23:17:59Z",
+      "side": 1,
+      "message": "Looked at it again, it\u0027s doable in the current test frame, but it will somewhat complicate test code. I would rather not do it now if we want to continue refactorings (ie moving ANA out of encoder).",
+      "parentUuid": "57449dc0_5e5ef4ac",
+      "range": {
+        "startLine": 544,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 62
+      },
+      "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
