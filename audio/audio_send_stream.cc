@@ -111,6 +111,7 @@ AudioSendStream::AudioSendStream(
                       voe::CreateChannelSend(worker_queue,
                                              module_process_thread,
                                              config.media_transport,
+                                             /*overhead_observer=*/this,
                                              config.send_transport,
                                              rtcp_rtt_stats,
                                              event_log,
@@ -142,6 +143,9 @@ AudioSendStream::AudioSendStream(
                            kRecoverablePacketLossRateMinNumAckedPairs),
       rtp_rtcp_module_(nullptr),
       suspended_rtp_state_(suspended_rtp_state) {
+  // Initialize transport and observers.
+  channel_send_->Init();
+
   RTC_LOG(LS_INFO) << "AudioSendStream: " << config.rtp.ssrc;
   RTC_DCHECK(worker_queue_);
   RTC_DCHECK(audio_state_);
@@ -485,9 +489,35 @@ void AudioSendStream::OnPacketFeedbackVector(
   }
 }
 
-void AudioSendStream::SetTransportOverhead(int transport_overhead_per_packet) {
+void AudioSendStream::SetTransportOverhead(
+    int transport_overhead_per_packet_bytes) {
   RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
-  channel_send_->SetTransportOverhead(transport_overhead_per_packet);
+  rtc::CritScope cs(&overhead_per_packet_lock_);
+  transport_overhead_per_packet_bytes_ = transport_overhead_per_packet_bytes;
+  UpdateOverheadForEncoderLocked();
+}
+
+void AudioSendStream::OnOverheadChanged(
+    size_t overhead_bytes_per_packet_bytes) {
+  rtc::CritScope cs(&overhead_per_packet_lock_);
+  audio_overhead_per_packet_bytes_ = overhead_bytes_per_packet_bytes;
+  UpdateOverheadForEncoderLocked();
+}
+
+void AudioSendStream::UpdateOverheadForEncoder() {
+  rtc::CritScope cs(&overhead_per_packet_lock_);
+  UpdateOverheadForEncoderLocked();
+}
+
+void AudioSendStream::UpdateOverheadForEncoderLocked() {
+  size_t overhead_per_packet_bytes =
+      transport_overhead_per_packet_bytes_ + audio_overhead_per_packet_bytes_;
+
+  CallEncoder(channel_send_, [&](AudioEncoder* encoder) {
+    if (encoder) {
+      encoder->OnReceivedOverhead(overhead_per_packet_bytes);
+    }
+  });
 }
 
 RtpState AudioSendStream::GetRtpState() const {
@@ -634,6 +664,10 @@ bool AudioSendStream::ReconfigureSendCodec(AudioSendStream* stream,
 
   ReconfigureANA(stream, new_config);
   ReconfigureCNG(stream, new_config);
+
+  // Set currently known overhead for ANA (opus only). Note that we set overhead
+  // even if ANA is disabled -- in this case the overhead will not be used.
+  stream->UpdateOverheadForEncoder();
 
   return true;
 }

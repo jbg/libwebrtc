@@ -184,6 +184,7 @@ struct ConfigHelper {
   void SetupDefaultChannelSend(bool audio_bwe_enabled) {
     EXPECT_TRUE(channel_send_ == nullptr);
     channel_send_ = new testing::StrictMock<MockChannelSend>();
+    EXPECT_CALL(*channel_send_, Init()).Times(1);
     EXPECT_CALL(*channel_send_, GetRtpRtcp()).WillRepeatedly(Invoke([this]() {
       return &this->rtp_rtcp_;
     }));
@@ -522,7 +523,48 @@ TEST(AudioSendStreamTest, ReconfigureTransportCcResetsFirst) {
                                             helper.transport(), Ne(nullptr)))
         .Times(1);
   }
+
+  // Expect call to modify encoder to re-set current overhead.
+  EXPECT_CALL(*helper.channel_send(), ModifyEncoder(testing::_)).Times(1);
+
   send_stream->Reconfigure(new_config);
+}
+
+TEST(AudioSendStreamTest, OnTransportOverheadChanged) {
+  ConfigHelper helper(false, true);
+  auto send_stream = helper.CreateAudioSendStream();
+  auto new_config = helper.config();
+
+  // Expect 3 calls to ModifyEncoder:
+  // 1. Create encoder on Reconfigure.
+  // 2. Set initial overhead.
+  // 3. Mmodify overhead after SetTransportOverhead.
+  EXPECT_CALL(*helper.channel_send(), ModifyEncoder(testing::_)).Times(3);
+
+  const std::string kAnaConfigString = "abcde";
+  new_config.audio_network_adaptor_config = kAnaConfigString;
+  send_stream->Reconfigure(new_config);
+
+  send_stream->SetTransportOverhead(
+      /*transport_overhead_per_packet_bytes=*/555);
+}
+
+TEST(AudioSendStreamTest, OnAudioOverheadChanged) {
+  ConfigHelper helper(false, true);
+  auto send_stream = helper.CreateAudioSendStream();
+  auto new_config = helper.config();
+
+  // Expect 3 calls to ModifyEncoder:
+  // 1. Create encoder on Reconfigure.
+  // 2. Set initial overhead.
+  // 3. Mmodify overhead after OnOverheadChanged.
+  EXPECT_CALL(*helper.channel_send(), ModifyEncoder(testing::_)).Times(3);
+
+  const std::string kAnaConfigString = "abcde";
+  new_config.audio_network_adaptor_config = kAnaConfigString;
+  send_stream->Reconfigure(new_config);
+
+  send_stream->OnOverheadChanged(/*audio_overhead_per_packet_bytes=*/555);
 }
 
 // Validates that reconfiguring the AudioSendStream with a Frame encryptor
