@@ -89,6 +89,7 @@ rtc_static_library("libjingle_peerconnection_api") {
     "dtlstransportinterface.h",
     "dtmf_sender_interface.h",
     "dtmfsenderinterface.h",
+    "ice_transport_interface.h",
     "jsep.cc",
     "jsep.h",
     "jsep_ice_candidate.cc",
@@ -157,6 +158,7 @@ rtc_static_library("libjingle_peerconnection_api") {
     ":fec_controller_api",
     ":libjingle_logging_api",
     ":rtc_stats_api",
+    ":scoped_refptr",
     "audio:audio_mixer_api",
     "audio_codecs:audio_codecs_api",
     "transport:bitrate_settings",
@@ -377,6 +379,21 @@ rtc_source_set("refcountedbase") {
   ]
   deps = [
     "../rtc_base:rtc_base_approved",
+  ]
+}
+
+rtc_source_set("ice_transport_factory") {
+  visibility = [ "*" ]
+  sources = [
+    "ice_transport_factory.cc",
+    "ice_transport_factory.h",
+  ]
+  deps = [
+    ":libjingle_peerconnection_api",
+    ":scoped_refptr",
+    "../p2p:rtc_p2p",
+    "../rtc_base:rtc_base",
+    "//third_party/abseil-cpp/absl/memory:memory",
   ]
 }
 
