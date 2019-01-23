@@ -22,6 +22,30 @@
       "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57449dc0_5e5ef4ac",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-23T13:47:04Z",
+      "side": 1,
+      "message": "Could be done, although I do not like that ANA is inside Encoder and things like RTT, Overhead, etc are set on Encoder. It would make more sense to mock ANA and verify these things on ANAm, but I am not sure that it\u0027s easy in current implementation.",
+      "parentUuid": "92c73352_d3f775e2",
+      "range": {
+        "startLine": 544,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 62
+      },
+      "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
