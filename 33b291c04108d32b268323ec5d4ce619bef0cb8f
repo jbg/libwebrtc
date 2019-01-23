@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a480e57b_f3f114e6",
+        "filename": "api/DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-23T20:15:55Z",
+      "side": 1,
+      "message": "Nothing gets added unless there\u0027s something complaining about it!\nApparently it\u0027s needed.",
+      "parentUuid": "2c7b83b0_e1de4464",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "868bed2e_8b2760b6",
         "filename": "api/dtls_transport_interface.h",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "75b41b76_47f38939",
+        "filename": "api/dtls_transport_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-23T20:15:55Z",
+      "side": 1,
+      "message": "I kind of like forward declarations - they make the point that \"you don\u0027t need to know anything about the class but its existence in order to use the APIs defined in this file\".\nBut the style guide disagrees with me, so #include it is!\n\nhttps://google.github.io/styleguide/cppguide.html#Forward_Declarations",
+      "parentUuid": "868bed2e_8b2760b6",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31ac4411_80cf0425",
         "filename": "api/ice_transport_interface.cc",
         "patchSetId": 6
@@ -47,6 +83,41 @@
       "writtenOn": "2019-01-22T16:25:45Z",
       "side": 1,
       "message": "absl::make_unique ?",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a55ebec4_7a452606",
+        "filename": "api/ice_transport_interface.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-23T20:15:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31ac4411_80cf0425",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43a51d54_867fe0ed",
+        "filename": "api/ice_transport_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-23T20:15:55Z",
+      "side": 1,
+      "message": "Trying to include the file that defines this class gives me a dependency error, and trying to include the target that includes it gives me a dependency cycle, so keeping this forward declaration for now.",
       "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -93,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "e87083d3_f9f5d19b",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-23T20:15:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "268a7761_00f9946f",
+      "range": {
+        "startLine": 26,
+        "startChar": 66,
+        "endLine": 26,
+        "endChar": 74
+      },
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12182749_94ec6f8a",
         "filename": "pc/ice_transport.h",
         "patchSetId": 6
@@ -116,6 +211,30 @@
     },
     {
       "key": {
+        "uuid": "1721d0ad_038c880f",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-23T20:15:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12182749_94ec6f8a",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 50
+      },
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eefe5d51_0cc07028",
         "filename": "pc/ice_transport.h",
         "patchSetId": 6
@@ -130,6 +249,24 @@
       "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff3f8460_ee593721",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-23T20:15:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eefe5d51_0cc07028",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
