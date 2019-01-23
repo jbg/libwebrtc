@@ -1225,7 +1225,15 @@ TEST_P(VideoSendStreamTest, FragmentsVp8AccordingToMaxPacketSizeWithFec) {
 // 4. Signal a high REMB and then wait for the RTP stream to start again.
 //    When the stream is detected again, and the stats show that the stream
 //    is no longer suspended, the test ends.
-TEST_P(VideoSendStreamTest, SuspendBelowMinBitrate) {
+
+// TODO(srte): Enable this test in TSAN builds when root cause for flakyness has
+// been identified.
+#if defined(THREAD_SANITIZER)
+#define MAYBE_SuspendBelowMinBitrate DISABLED_SuspendBelowMinBitrate
+#else
+#define MAYBE_SuspendBelowMinBitrate SuspendBelowMinBitrate
+#endif
+TEST_P(VideoSendStreamTest, MAYBE_SuspendBelowMinBitrate) {
   static const int kSuspendTimeFrames = 60;  // Suspend for 2 seconds @ 30 fps.
 
   class RembObserver : public test::SendTest {
