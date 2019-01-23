@@ -55,6 +55,16 @@ class ChannelSendInterface {
  public:
   virtual ~ChannelSendInterface() = default;
 
+  // Initializes transports and observers, must be called before any other
+  // methods. Also initialized thread checker for RtpRtcp module, so all
+  // subsequent calls to methods that require access to RtpRtcp must be called
+  // on the same thread as Init().
+  //
+  // Init() is separated from constructor to avoid circular dependency when
+  // setting up overhead observers. Audio overhead observer may be called
+  // from Init() on the same thread.
+  virtual void Init() = 0;
+
   virtual bool ReceivedRTCPPacket(const uint8_t* packet, size_t length) = 0;
 
   virtual CallSendStatistics GetRTCPStatistics() const = 0;
@@ -89,7 +99,6 @@ class ChannelSendInterface {
 
   virtual void ProcessAndEncodeAudio(
       std::unique_ptr<AudioFrame> audio_frame) = 0;
-  virtual void SetTransportOverhead(size_t transport_overhead_per_packet) = 0;
   virtual RtpRtcp* GetRtpRtcp() const = 0;
 
   virtual void OnTwccBasedUplinkPacketLossRate(float packet_loss_rate) = 0;
@@ -118,6 +127,7 @@ std::unique_ptr<ChannelSendInterface> CreateChannelSend(
     rtc::TaskQueue* encoder_queue,
     ProcessThread* module_process_thread,
     MediaTransportInterface* media_transport,
+    OverheadObserver* overhead_observer,
     Transport* rtp_transport,
     RtcpRttStats* rtcp_rtt_stats,
     RtcEventLog* rtc_event_log,
