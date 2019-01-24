@@ -36,6 +36,7 @@ struct VideoStream {
   int min_bitrate_bps;
   int target_bitrate_bps;
   int max_bitrate_bps;
+  double scale_resolution_down_by;
   int max_qp;
 
   absl::optional<size_t> num_temporal_layers;
