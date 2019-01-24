@@ -215,6 +215,9 @@ void ReceiveStatisticsProxy::UpdateHistograms() {
     RTC_HISTOGRAM_COUNTS_10000("WebRTC.Video.AVSyncOffsetInMs",
                                *sync_offset_ms);
     log_stream << "WebRTC.Video.AVSyncOffsetInMs " << *sync_offset_ms << '\n';
+    fprintf(stderr, "ARTIT: Got frames: %d\n", static_cast<int>(sync_offset_counter_.NumSamples()));
+  } else {
+    fprintf(stderr, "ARTIT: Not enough samples, got just: %d\n", static_cast<int>(sync_offset_counter_.NumSamples()));
   }
   AggregatedStats freq_offset_stats = freq_offset_counter_.GetStats();
   if (freq_offset_stats.num_samples > 0) {
