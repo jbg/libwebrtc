@@ -1771,9 +1771,9 @@ TEST_P(PeerConnectionRtpTest, CreateTwoSendersWithSameTrack) {
   }
 }
 
-INSTANTIATE_TEST_CASE_P(PeerConnectionRtpTest,
-                        PeerConnectionRtpTest,
-                        Values(SdpSemantics::kPlanB,
-                               SdpSemantics::kUnifiedPlan));
+INSTANTIATE_TEST_SUITE_P(PeerConnectionRtpTest,
+                         PeerConnectionRtpTest,
+                         Values(SdpSemantics::kPlanB,
+                                SdpSemantics::kUnifiedPlan));
 
 }  // namespace webrtc

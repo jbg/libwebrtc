@@ -785,8 +785,8 @@ TEST_P(OpusTest, OpusDecodeRepacketized) {
   EXPECT_EQ(0, WebRtcOpus_DecoderFree(opus_decoder_));
 }
 
-INSTANTIATE_TEST_CASE_P(VariousMode,
-                        OpusTest,
-                        Combine(Values(1, 2), Values(0, 1)));
+INSTANTIATE_TEST_SUITE_P(VariousMode,
+                         OpusTest,
+                         Combine(Values(1, 2), Values(0, 1)));
 
 }  // namespace webrtc
