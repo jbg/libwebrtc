@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "88649552_dfb125a9",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2730,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-01-24T22:40:13Z",
+      "side": 1,
+      "message": "Don\u0027t you want the default to scale down by 2 for each layer to not break backwards compat? Meaning only override scaling down by 2/4/8/etc. if scale_resolution_down_by is set.",
+      "parentUuid": "327aa72e_9f8eec46",
+      "range": {
+        "startLine": 2730,
+        "startChar": 49,
+        "endLine": 2730,
+        "endChar": 74
+      },
+      "revId": "ed1b6e988494b7b2df79a75ba7aaeee32fa6b080",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c510027_3e18f8ca",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 1
