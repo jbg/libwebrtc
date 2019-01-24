@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "fea3106b_c3afafa6",
+        "filename": "api/DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-24T10:12:14Z",
+      "side": 1,
+      "message": "I agree this should not be needed because api/ headers should always be usable (see this rule: https://cs.chromium.org/chromium/src/third_party/webrtc/DEPS?l\u003d1424\u0026rcl\u003d914acd7589c3a31d8f99932b9c9a1917af2aa70f).\n\nLet me patch locally and take a look.",
+      "parentUuid": "a480e57b_f3f114e6",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "868bed2e_8b2760b6",
         "filename": "api/dtls_transport_interface.h",
         "patchSetId": 6
