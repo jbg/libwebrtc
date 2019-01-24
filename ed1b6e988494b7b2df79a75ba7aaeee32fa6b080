@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5832671_fffaa46f",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2730,
+      "author": {
+        "id": 5877
+      },
+      "writtenOn": "2019-01-24T04:35:31Z",
+      "side": 1,
+      "message": "Can\u0027t this value be -1? Since VideoStream is initialized to this value, and you\u0027re just checking that any_of the layers are \u003e 1. For example, would the following work? \nencoder_config.simulcast_layers[0].scale_resolution_down_by \u003d 2.0\nencoder_config.simulcast_layers[1].scale_resolution_down_by \u003d -1  // 16x16?\nencoder_config.simulcast_layers[0].scale_resolution_down_by \u003d 3.0\n\nIt\u0027s probably worth adding a test for it. What are you hoping the default to be if it\u0027s unspecified? The current default scales down by 2 for each layer, correct?",
+      "range": {
+        "startLine": 2730,
+        "startChar": 49,
+        "endLine": 2730,
+        "endChar": 74
+      },
+      "revId": "ed1b6e988494b7b2df79a75ba7aaeee32fa6b080",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c510027_3e18f8ca",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 5877
+      },
+      "writtenOn": "2019-01-24T04:35:31Z",
+      "side": 1,
+      "message": "What do you think of factoring this function out into two helpers? One that validates a single input of parameters and one that validates new parameters. That way you don\u0027t have to make this awkward call passing in the parameters twice.",
+      "range": {
+        "startLine": 1480,
+        "startChar": 25,
+        "endLine": 1480,
+        "endChar": 46
+      },
+      "revId": "ed1b6e988494b7b2df79a75ba7aaeee32fa6b080",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21119a08_283bb51d",
+        "filename": "pc/peer_connection_rtp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1522,
+      "author": {
+        "id": 5877
+      },
+      "writtenOn": "2019-01-24T04:35:31Z",
+      "side": 1,
+      "message": "Since you\u0027re adding in the validation to AddTransceiver, could you also add a test for the other invalid parameters? - max_bitrate \u003c min_bitrate, num_temporal_layers \u003c 1, bitrate_priority \u003c 0, etc?",
+      "range": {
+        "startLine": 1522,
+        "startChar": 41,
+        "endLine": 1522,
+        "endChar": 74
+      },
+      "revId": "ed1b6e988494b7b2df79a75ba7aaeee32fa6b080",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
