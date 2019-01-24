@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "b3221dde_9f51ec72",
+        "filename": "api/DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-24T10:33:26Z",
+      "side": 1,
+      "message": "Ok, I tried locally and what you need here is:\n\n\"ice_transport_interface\\.h\": [\n  \"+rtc_base/ref_count.h\",\n],\n\nAdding \"+api/scoped_refptr.h\" is not a problem per se, but it is redundant.",
+      "parentUuid": "fea3106b_c3afafa6",
+      "revId": "33b291c04108d32b268323ec5d4ce619bef0cb8f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "868bed2e_8b2760b6",
         "filename": "api/dtls_transport_interface.h",
         "patchSetId": 6
