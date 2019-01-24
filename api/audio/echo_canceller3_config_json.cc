@@ -138,8 +138,6 @@ void Aec3ConfigFromJsonString(absl::string_view json_string,
 
   Json::Value section;
   if (rtc::GetValueFromJsonObject(root, "buffering", &section)) {
-    ReadParam(section, "use_new_render_buffering",
-              &cfg.buffering.use_new_render_buffering);
     ReadParam(section, "excess_render_detection_interval_blocks",
               &cfg.buffering.excess_render_detection_interval_blocks);
     ReadParam(section, "max_allowed_excess_render_blocks",

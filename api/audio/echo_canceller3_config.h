@@ -27,7 +27,6 @@ struct RTC_EXPORT EchoCanceller3Config {
   EchoCanceller3Config(const EchoCanceller3Config& e);
 
   struct Buffering {
-    bool use_new_render_buffering = true;
     size_t excess_render_detection_interval_blocks = 250;
     size_t max_allowed_excess_render_blocks = 8;
   } buffering;
