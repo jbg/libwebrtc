@@ -52,6 +52,23 @@
       "revId": "faf3787a14e4291adb1646d057dfe8236cb61c02",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51d98ad0_490fce6f",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-01-25T21:17:05Z",
+      "side": 1,
+      "message": "s/use_media_transport_for_media/use_media_transport_for_media_and_data/? Or Enum? \n\nAt least the names should be consistent in Peer Connection configuration and Jsep config.",
+      "revId": "faf3787a14e4291adb1646d057dfe8236cb61c02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdf6be8e_1be225b1",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 3642,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-01-25T21:17:05Z",
+      "side": 1,
+      "message": "Is it bidirectional test?",
+      "revId": "11d469b78dc16f3d9afe4f8902e4a8b889bb69d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
