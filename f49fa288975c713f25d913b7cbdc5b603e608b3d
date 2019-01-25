@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88c5124d_132a30bd",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-25T10:18:57Z",
+      "side": 1,
+      "message": "nit: Add empty line",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5849045a_d8873d4a",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-25T10:18:57Z",
+      "side": 1,
+      "message": "Document the fact that this must be constructed on the signaling thread here too.\n\nThough P2PTransportChannel is constructed settings it\u0027s network_thread_ to rtc::Thread::Current().\n\nWe end up with IceTransportWithTransportChannel::signaling_thread_ \u003d\u003d P2PTransportChannel::network_thread_. Are they calling the thread different things or is there a mistake here? Should both say \"network\" or should both say \"signaling\"? Please fix or clarify with a comment why different names are used, reading the code looks like a bug.",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4f22812_97e35bd7",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-25T10:18:57Z",
+      "side": 1,
+      "message": "P2PTransportChannel has a DCHECK in its destructor that it is destroyed on the same thread that it was constructed on (what it calls network_thread_).\n\nBecause IceTransportInterface is reference counted and to be referenced from multiple threads I strongly suggest that you make the destructor of this class perform the destruction on the right thread. It\u0027s easy to get into racy situations where you do PostTasks and you don\u0027t control which threads releases its reference first.\n\nThere should also be test coverage for this.",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a10604e_fd7bd6cc",
+        "filename": "api/ice_transport_factory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-25T10:18:57Z",
+      "side": 1,
+      "message": "Document the fact that this must be constructed on the signaling thread. Or is it the network thread?? Or are these the same?\n\nSee comments in .cc file.",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d049c67_7dcd7847",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-25T10:18:57Z",
+      "side": 1,
+      "message": "Unnecessary comment",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc2c682b_51ce8da3",
+        "filename": "pc/ice_transport_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-25T10:18:57Z",
+      "side": 1,
+      "message": "Add a test that ensures thread-safety across threads, particularly what happens if the last reference is dropped on another thread representing the main thread.",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
