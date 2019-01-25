@@ -83,11 +83,18 @@ class JsepTransportController : public sigslot::has_slots<> {
     bool active_reset_srtp_params = false;
     RtcEventLog* event_log = nullptr;
 
+    // Whether media transport is used for media.
+    bool use_media_transport_for_media = false;
+
+    // Whether media transport is used for data channels.
+    bool use_media_transport_for_data_channels = false;
+
     // Optional media transport factory (experimental). If provided it will be
-    // used to create media_transport and will be used to send / receive
-    // audio and video frames instead of RTP. Note that currently
-    // media_transport co-exists with RTP / RTCP transports and uses the same
-    // underlying ICE transport.
+    // used to create media_transport. However, whether it will be used to send
+    // / receive audio and video frames instead of RTP is determined by
+    // |use_media_transport_for_media|. Note that currently media_transport
+    // co-exists with RTP / RTCP transports and may use the same underlying ICE
+    // transport.
     MediaTransportFactory* media_transport_factory = nullptr;
   };
 

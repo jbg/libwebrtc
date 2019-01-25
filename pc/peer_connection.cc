@@ -989,6 +989,9 @@ bool PeerConnection::Initialize(
       return false;
     }
 
+    config.use_media_transport_for_media = configuration.use_media_transport;
+    config.use_media_transport_for_data_channels =
+        configuration.use_media_transport_for_data_channels;
     config.media_transport_factory = factory_->media_transport_factory();
   }
 
