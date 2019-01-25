@@ -87,6 +87,24 @@
       "revId": "faf3787a14e4291adb1646d057dfe8236cb61c02",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "082409f3_74206a79",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-25T21:21:03Z",
+      "side": 1,
+      "message": "s/conifg/configuration/\nconfiguration is RTCConfig\n\nplus config.use_media_transport_for_media is just for media, not for data.",
+      "parentUuid": "da3be2c0_e32ceebb",
+      "revId": "faf3787a14e4291adb1646d057dfe8236cb61c02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
