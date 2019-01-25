@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ff0a81b_9de96a11",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-25T08:54:30Z",
+      "side": 0,
+      "message": "If we should keep these tests, can we make RTPSenderVideo::retransmission_settings_ configurable at construction time instead? It\u0027s currently set to the constant\n\nkRetransmitBaseLayer | kConditionallyRetransmitHigherLayers\n\non construction, and only ever modified in these two tests.",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
+      },
+      "revId": "8a40edd802b6a1b9c4d0949be392ade252cad217",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
