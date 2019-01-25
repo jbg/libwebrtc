@@ -16,6 +16,24 @@
       "revId": "11d469b78dc16f3d9afe4f8902e4a8b889bb69d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "188735c8_ed200875",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 3642,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-25T21:20:21Z",
+      "side": 1,
+      "message": "I would hope so :)\n\n\"  media_expectations.ExpectBidirectionalVideo();\nExpectNewFrames(media_expectations)\n\"\n\n-\u003e\n void ExpectBidirectionalVideo() {\n    CallerExpectsSomeVideo();\n    CalleeExpectsSomeVideo();\n  }\n-\u003e\n  void CalleeExpectsSomeVideo(\n      int expected_video_frames \u003d kDefaultExpectedVideoFrameCount) {\n    callee_video_expectation_ \u003d kExpectSomeFrames;\n    callee_video_frames_expected_ \u003d expected_video_frames;\n  }",
+      "parentUuid": "cdf6be8e_1be225b1",
+      "revId": "11d469b78dc16f3d9afe4f8902e4a8b889bb69d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

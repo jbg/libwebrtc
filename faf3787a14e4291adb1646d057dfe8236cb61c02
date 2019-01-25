@@ -69,6 +69,24 @@
       "revId": "faf3787a14e4291adb1646d057dfe8236cb61c02",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da3be2c0_e32ceebb",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-25T21:20:21Z",
+      "side": 1,
+      "message": "Not trivial. config here is RTCConfiguration which is a public API with bindings to java and objective c. We would have to rename all of them (preferably) and all of downstream clients.",
+      "parentUuid": "51d98ad0_490fce6f",
+      "revId": "faf3787a14e4291adb1646d057dfe8236cb61c02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
