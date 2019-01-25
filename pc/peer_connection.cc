@@ -989,6 +989,9 @@ bool PeerConnection::Initialize(
       return false;
     }
 
+    config.use_media_transport_for_media = configuration.use_media_transport;
+    config.use_media_transport_for_data_channels =
+        configuration.use_media_transport_for_data_channels;
     config.media_transport_factory = factory_->media_transport_factory();
   }
 
@@ -3207,11 +3210,9 @@ bool PeerConnection::SetConfiguration(const RTCConfiguration& configuration,
   }
 
   transport_controller_->SetIceConfig(ParseIceConfig(modified_config));
-  transport_controller_->SetMediaTransportFactory(
-      modified_config.use_media_transport ||
-              modified_config.use_media_transport_for_data_channels
-          ? factory_->media_transport_factory()
-          : nullptr);
+  transport_controller_->SetMediaTransportSettings(
+      modified_config.use_media_transport,
+      modified_config.use_media_transport_for_data_channels);
 
   if (configuration_.active_reset_srtp_params !=
       modified_config.active_reset_srtp_params) {
