@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f20b3919_abfa6d80",
+        "filename": "api/video_codecs/video_encoder_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-25T16:00:07Z",
+      "side": 1,
+      "message": "It\u0027s a bit confusing what this means in relation to width, height in this struct.\nwidth, height here is resolution _after_ being scaled down and normalized?",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 33
+      },
+      "revId": "ab0ba2ee59b741fb4fa81c132114a41d92fd2e8a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f4aa334_1fdf2fe5",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 2
@@ -13,6 +36,30 @@
       "writtenOn": "2019-01-24T22:40:13Z",
       "side": 1,
       "message": "Say I set all my layers to scale_resolution_down_by to 1.0 (this is legal). The layers will come from GetSimuclastConfig with all width x height divided by 2 for each layer, but the width x height will not be overridden here. Changing to \u003e\u003d 1.0 would fix this, but then you\u0027d have to change the initialized value for VideoStream.scale_resolution_down_by.\n\nI still think it\u0027s worth testing cases for the VideoStreams getting created appropriately here for cases like:\n-1 layer not set (middle/low/high)\n-All layers not set scales down by 2 for each layer (backwards compat)\n-Setting 1.0 for layers keeps width/height",
+      "range": {
+        "startLine": 2727,
+        "startChar": 0,
+        "endLine": 2727,
+        "endChar": 43
+      },
+      "revId": "ab0ba2ee59b741fb4fa81c132114a41d92fd2e8a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1caf4a1d_76f9e025",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2727,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-25T16:00:07Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "8f4aa334_1fdf2fe5",
       "range": {
         "startLine": 2727,
         "startChar": 0,
