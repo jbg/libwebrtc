@@ -766,7 +766,9 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
   TRACE_EVENT0("webrtc", "Call::CreateVideoSendStream");
   RTC_DCHECK_CALLED_SEQUENTIALLY(&configuration_sequence_checker_);
 
-  RTC_DCHECK(media_transport() == config.media_transport);
+  RTC_DCHECK(media_transport() == config.media_transport)
+      << "config.media_transport=" << (config.media_transport != nullptr)
+      << ", media_transport()=" << (media_transport() != nullptr);
 
   RegisterRateObserver();
 
