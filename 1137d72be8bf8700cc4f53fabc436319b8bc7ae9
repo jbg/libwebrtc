@@ -105,6 +105,30 @@
       "revId": "1137d72be8bf8700cc4f53fabc436319b8bc7ae9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "206fd557_11b419c0",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3213,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-25T18:17:42Z",
+      "side": 1,
+      "message": "This is addressed now.",
+      "parentUuid": "88067d5f_beef93ff",
+      "range": {
+        "startLine": 3213,
+        "startChar": 0,
+        "endLine": 3213,
+        "endChar": 50
+      },
+      "revId": "1137d72be8bf8700cc4f53fabc436319b8bc7ae9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
