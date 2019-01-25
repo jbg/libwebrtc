@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16f3a9b3_7b4e2e00",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-25T17:13:38Z",
+      "side": 1,
+      "message": "Isn\u0027t this expecting a real DTLS transport?  Why is the message \"expected no-op DTLS transport\"?",
+      "revId": "1137d72be8bf8700cc4f53fabc436319b8bc7ae9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f0d89d3_c5848f08",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3213,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-01-25T17:13:38Z",
+      "side": 1,
+      "message": "Do we need to modify the transport controller\u0027s config somewhere around here, so that it either starts or stops creating the real DTLS implementation properly?",
+      "range": {
+        "startLine": 3213,
+        "startChar": 0,
+        "endLine": 3213,
+        "endChar": 50
+      },
+      "revId": "1137d72be8bf8700cc4f53fabc436319b8bc7ae9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
