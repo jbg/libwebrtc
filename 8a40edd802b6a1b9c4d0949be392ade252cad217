@@ -22,6 +22,30 @@
       "revId": "8a40edd802b6a1b9c4d0949be392ade252cad217",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aba1823_c9ed9086",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-01-25T11:14:51Z",
+      "side": 0,
+      "message": "I don\u0027t think we need to keep support for anything that\u0027s not used today. Seems correct to keep the default (retransmissions of base layers and conditionally retransmit higher layers). We should however keep tests that verify the default mode.",
+      "parentUuid": "9ff0a81b_9de96a11",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
+      },
+      "revId": "8a40edd802b6a1b9c4d0949be392ade252cad217",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
