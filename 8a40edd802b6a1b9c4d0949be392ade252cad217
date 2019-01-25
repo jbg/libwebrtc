@@ -70,6 +70,30 @@
       "revId": "8a40edd802b6a1b9c4d0949be392ade252cad217",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "562fb081_dae856eb",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-01-25T12:44:27Z",
+      "side": 0,
+      "message": "Not sure, to me it seems like these are better and simpler tests? You can just remove the SetSelectiveREtransmissions() calls AFAICT in the last test and remove the first.",
+      "parentUuid": "b0f1fa40_e5e02638",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
+      },
+      "revId": "8a40edd802b6a1b9c4d0949be392ade252cad217",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
