@@ -31,9 +31,6 @@ SimulatedNetwork::~SimulatedNetwork() = default;
 
 void SimulatedNetwork::SetConfig(const SimulatedNetwork::Config& config) {
   rtc::CritScope crit(&config_lock_);
-  if (config_.link_capacity_kbps != config.link_capacity_kbps) {
-    reset_capacity_delay_error_ = true;
-  }
   config_ = config;  // Shallow copy of the struct.
   double prob_loss = config.loss_percent / 100.0;
   if (config_.avg_burst_loss_length == -1) {
@@ -72,40 +69,16 @@ bool SimulatedNetwork::EnqueuePacket(PacketInFlightInfo packet) {
     // Too many packet on the link, drop this one.
     return false;
   }
-  int64_t network_start_time_us = packet.send_time_us;
-  {
-    rtc::CritScope crit(&config_lock_);
-    if (reset_capacity_delay_error_) {
-      capacity_delay_error_bytes_ = 0;
-      reset_capacity_delay_error_ = false;
-    }
-    if (pause_transmission_until_us_) {
-      network_start_time_us =
-          std::max(network_start_time_us, *pause_transmission_until_us_);
-      pause_transmission_until_us_.reset();
-    }
-  }
 
-  // Delay introduced by the link capacity.
-  TimeDelta capacity_delay = TimeDelta::Zero();
-  if (config.link_capacity_kbps > 0) {
-    const DataRate link_capacity = DataRate::kbps(config.link_capacity_kbps);
-    int64_t compensated_size =
-        static_cast<int64_t>(packet.size) + capacity_delay_error_bytes_;
-    capacity_delay = DataSize::bytes(compensated_size) / link_capacity;
+  // Draining starts when first packet enters.
+  if (!last_capacity_link_visit_us_)
+    last_capacity_link_visit_us_ = packet.send_time_us;
 
-    capacity_delay_error_bytes_ +=
-        packet.size - (capacity_delay * link_capacity).bytes();
-  }
+  // Set arrival time = send time for now; actual arrival time will be
+  // calculated dynamically in DequeueDeliverablePackets.
+  queue_size_bytes_ += packet.size;
+  capacity_link_.push({packet, packet.send_time_us});
 
-  // Check if there already are packets on the link and change network start
-  // time forward if there is.
-  if (!capacity_link_.empty() &&
-      network_start_time_us < capacity_link_.back().arrival_time_us)
-    network_start_time_us = capacity_link_.back().arrival_time_us;
-
-  int64_t arrival_time_us = network_start_time_us + capacity_delay.us();
-  capacity_link_.push({packet, arrival_time_us});
   return true;
 }
 
@@ -121,64 +94,99 @@ std::vector<PacketDeliveryInfo> SimulatedNetwork::DequeueDeliverablePackets(
   Config config;
   double prob_loss_bursting;
   double prob_start_bursting;
+  int64_t pause_transmission_until_us;
   {
     rtc::CritScope crit(&config_lock_);
     config = config_;
     prob_loss_bursting = prob_loss_bursting_;
     prob_start_bursting = prob_start_bursting_;
+    pause_transmission_until_us = pause_transmission_until_us_.value_or(0);
   }
   {
     rtc::CritScope crit(&process_lock_);
+    bool needs_sort = false;
+
+    int64_t time_us = last_capacity_link_visit_us_.value_or(time_now_us);
     // Check the capacity link first.
-    if (!capacity_link_.empty()) {
+    while (!capacity_link_.empty()) {
+      int64_t time_till_front_exits_us = 0;
+      if (config.link_capacity_kbps > 0) {
+        int64_t remaining_bits =
+            capacity_link_.front().packet.size * 8 - pending_drain_bits_;
+        RTC_DCHECK(remaining_bits > 0);
+        // Division rounded up - packet not delivered until its last bit is.
+        time_till_front_exits_us =
+            (1000 * remaining_bits + config.link_capacity_kbps - 1) /
+            config.link_capacity_kbps;
+      }
+
+      if (time_us + time_till_front_exits_us > time_now_us) {
+        // Will not enter here on infinite capacity(=0) so no special handling
+        // needed.
+        pending_drain_bits_ +=
+            ((time_now_us - time_us) * config.link_capacity_kbps) / 1000;
+        break;
+      }
+      time_us += time_till_front_exits_us;
+      if (config.link_capacity_kbps > 0) {
+        pending_drain_bits_ +=
+            (time_till_front_exits_us * config.link_capacity_kbps) / 1000;
+      } else {
+        // Enough to drain the whole queue.
+        pending_drain_bits_ = queue_size_bytes_ * 8;
+      }
+
+      // Time to get this packet.
+      PacketInfo packet = std::move(capacity_link_.front());
+      capacity_link_.pop();
+
+      packet.arrival_time_us = std::max(pause_transmission_until_us, time_us);
+      queue_size_bytes_ -= packet.packet.size;
+      pending_drain_bits_ -= packet.packet.size * 8;
+      RTC_DCHECK(pending_drain_bits_ >= 0);
+
+      // Drop packets at an average rate of |config_.loss_percent| with
+      // and average loss burst length of |config_.avg_burst_loss_length|.
+      if ((bursting_ && random_.Rand<double>() < prob_loss_bursting) ||
+          (!bursting_ && random_.Rand<double>() < prob_start_bursting)) {
+        bursting_ = true;
+        continue;
+      } else {
+        bursting_ = false;
+      }
+
+      int64_t arrival_time_jitter_us =
+          std::max(random_.Gaussian(config.queue_delay_ms * 1000,
+                                    config.delay_standard_deviation_ms * 1000),
+                   0.0);
+
+      // If reordering is not allowed then adjust arrival_time_jitter
+      // to make sure all packets are sent in order.
       int64_t last_arrival_time_us =
           delay_link_.empty() ? -1 : delay_link_.back().arrival_time_us;
-      bool needs_sort = false;
-      while (!capacity_link_.empty() &&
-             time_now_us >= capacity_link_.front().arrival_time_us) {
-        // Time to get this packet.
-        PacketInfo packet = std::move(capacity_link_.front());
-        capacity_link_.pop();
-
-        // Drop packets at an average rate of |config_.loss_percent| with
-        // and average loss burst length of |config_.avg_burst_loss_length|.
-        if ((bursting_ && random_.Rand<double>() < prob_loss_bursting) ||
-            (!bursting_ && random_.Rand<double>() < prob_start_bursting)) {
-          bursting_ = true;
-          continue;
-        } else {
-          bursting_ = false;
-        }
-
-        int64_t arrival_time_jitter_us = std::max(
-            random_.Gaussian(config.queue_delay_ms * 1000,
-                             config.delay_standard_deviation_ms * 1000),
-            0.0);
-
-        // If reordering is not allowed then adjust arrival_time_jitter
-        // to make sure all packets are sent in order.
-        if (!config.allow_reordering && !delay_link_.empty() &&
-            packet.arrival_time_us + arrival_time_jitter_us <
-                last_arrival_time_us) {
-          arrival_time_jitter_us =
-              last_arrival_time_us - packet.arrival_time_us;
-        }
-        packet.arrival_time_us += arrival_time_jitter_us;
-        if (packet.arrival_time_us >= last_arrival_time_us) {
-          last_arrival_time_us = packet.arrival_time_us;
-        } else {
-          needs_sort = true;
-        }
-        delay_link_.emplace_back(std::move(packet));
+      if (!config.allow_reordering && !delay_link_.empty() &&
+          packet.arrival_time_us + arrival_time_jitter_us <
+              last_arrival_time_us) {
+        arrival_time_jitter_us = last_arrival_time_us - packet.arrival_time_us;
       }
-
-      if (needs_sort) {
-        // Packet(s) arrived out of order, make sure list is sorted.
-        std::sort(delay_link_.begin(), delay_link_.end(),
-                  [](const PacketInfo& p1, const PacketInfo& p2) {
-                    return p1.arrival_time_us < p2.arrival_time_us;
-                  });
+      packet.arrival_time_us += arrival_time_jitter_us;
+      if (packet.arrival_time_us >= last_arrival_time_us) {
+        last_arrival_time_us = packet.arrival_time_us;
+      } else {
+        needs_sort = true;
       }
+      delay_link_.emplace_back(std::move(packet));
+    }
+    last_capacity_link_visit_us_ = time_now_us;
+    // Cannot save unused capacity for later.
+    pending_drain_bits_ = std::min(pending_drain_bits_, queue_size_bytes_ * 8);
+
+    if (needs_sort) {
+      // Packet(s) arrived out of order, make sure list is sorted.
+      std::sort(delay_link_.begin(), delay_link_.end(),
+                [](const PacketInfo& p1, const PacketInfo& p2) {
+                  return p1.arrival_time_us < p2.arrival_time_us;
+                });
     }
 
     std::vector<PacketDeliveryInfo> packets_to_deliver;
