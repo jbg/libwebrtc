@@ -433,7 +433,12 @@ JsepTransportController::CreateDtlsTransport(
   RTC_DCHECK(network_thread_->IsCurrent());
 
   std::unique_ptr<cricket::DtlsTransportInternal> dtls;
-  if (config_.media_transport_factory) {
+  // If media transport is used for both media and data channels,
+  // then we don't need to create DTLS.
+  // Otherwise, DTLS is still created.
+  if (config_.media_transport_factory &&
+      config_.use_media_transport_for_media &&
+      config_.use_media_transport_for_data_channels) {
     dtls = absl::make_unique<cricket::NoOpDtlsTransport>(
         std::move(ice), config_.crypto_options);
   } else if (config_.external_transport_factory) {
