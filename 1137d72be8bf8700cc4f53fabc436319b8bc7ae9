@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aa66a209_4886bc2d",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-25T17:42:23Z",
+      "side": 1,
+      "message": "Good catch.",
+      "parentUuid": "16f3a9b3_7b4e2e00",
+      "revId": "1137d72be8bf8700cc4f53fabc436319b8bc7ae9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f0d89d3_c5848f08",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2019-01-25T17:13:38Z",
       "side": 1,
       "message": "Do we need to modify the transport controller\u0027s config somewhere around here, so that it either starts or stops creating the real DTLS implementation properly?",
+      "range": {
+        "startLine": 3213,
+        "startChar": 0,
+        "endLine": 3213,
+        "endChar": 50
+      },
+      "revId": "1137d72be8bf8700cc4f53fabc436319b8bc7ae9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a60f9a9_17764a3c",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3213,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-25T17:42:23Z",
+      "side": 1,
+      "message": "I don\u0027t think so, let me know if you agree:\nthe method above, where we create config.use_media_transport is called after local/remote description is set.\n\nOnce the local/remote description is set, we don\u0027t allow the config.use_media_transport to change (so this line would never change, and we have a dcheck for that inside transport controller (which was failing, see the other CL I sent)).\n\nIn fact, I think this transport_controller-\u003eSet() should only be called here _before_ local/remote description is set. Once it\u0027s set, we shouldn\u0027t call it again.\n\nLet\u0027s chat if I am not making sense.",
+      "parentUuid": "3f0d89d3_c5848f08",
       "range": {
         "startLine": 3213,
         "startChar": 0,
