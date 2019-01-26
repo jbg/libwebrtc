@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/algorithm/container.h"
 #include "p2p/base/basic_packet_socket_factory.h"
 #include "p2p/base/port.h"
 #include "p2p/base/relay_port.h"
@@ -417,8 +418,7 @@ void BasicPortAllocatorSession::RegatherOnFailedNetworks() {
   // regathers ports and candidates.
   for (AllocationSequence* sequence : sequences_) {
     if (!sequence->network_failed() &&
-        std::find(failed_networks.begin(), failed_networks.end(),
-                  sequence->network()) != failed_networks.end()) {
+        absl::c_linear_search(failed_networks, sequence->network())) {
       sequence->set_network_failed();
     }
   }
@@ -828,8 +828,7 @@ void BasicPortAllocatorSession::OnNetworksChanged() {
     // Mark the sequence as "network failed" if its network is not in
     // |networks|.
     if (!sequence->network_failed() &&
-        std::find(networks.begin(), networks.end(), sequence->network()) ==
-            networks.end()) {
+        !absl::c_linear_search(networks, sequence->network())) {
       sequence->OnNetworkFailed();
       failed_networks.push_back(sequence->network());
     }
@@ -1159,8 +1158,7 @@ BasicPortAllocatorSession::GetUnprunedPorts(
   std::vector<PortData*> unpruned_ports;
   for (PortData& port : ports_) {
     if (!port.pruned() &&
-        std::find(networks.begin(), networks.end(),
-                  port.sequence()->network()) != networks.end()) {
+        absl::c_linear_search(networks, port.sequence()->network())) {
       unpruned_ports.push_back(&port);
     }
   }
@@ -1619,7 +1617,7 @@ void AllocationSequence::OnPortDestroyed(PortInterface* port) {
     return;
   }
 
-  auto it = std::find(relay_ports_.begin(), relay_ports_.end(), port);
+  auto it = absl::c_find(relay_ports_, port);
   if (it != relay_ports_.end()) {
     relay_ports_.erase(it);
   } else {
