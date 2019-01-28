@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8327a357_df137a5a",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-28T19:11:41Z",
+      "side": 1,
+      "message": "would be good to mention what kind of problems.",
+      "range": {
+        "startLine": 746,
+        "startChar": 11,
+        "endLine": 746,
+        "endChar": 19
+      },
+      "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f01071e8_e7919473",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-28T19:11:41Z",
+      "side": 1,
+      "message": "nit:\nI would suggest adding a method IsIdentical(const std::vector\u003cuint8_t\u003e\u0026 v1, const std::vector\u003cuint8_t\u003e\u0026 v2) // or const uint8_t*\n\nand changing this to\nif (!remove_d || empty() || IsIdentical(rtcp_packets-\u003eback().rtcp.raw_data, proto.raw_packet())\n\nIt would make it much more readable",
+      "range": {
+        "startLine": 749,
+        "startChar": 6,
+        "endLine": 751,
+        "endChar": 71
+      },
+      "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "989369cd_d9801eee",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-28T19:11:41Z",
+      "side": 1,
+      "message": "duplicated code! :) definitely consider adding IsIdentical()",
+      "range": {
+        "startLine": 788,
+        "startChar": 8,
+        "endLine": 790,
+        "endChar": 13
+      },
+      "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06c9170f_146a67dc",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2191,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-01-28T19:11:41Z",
+      "side": 1,
+      "message": "nit: I thought clang prefers /*remove_duplicates\u003d*/.",
+      "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
