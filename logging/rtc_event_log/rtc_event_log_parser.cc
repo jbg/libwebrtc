@@ -736,12 +736,22 @@ void StoreRtpPackets(
 
 template <typename ProtoType, typename LoggedType>
 void StoreRtcpPackets(const ProtoType& proto,
-                      std::vector<LoggedType>* rtcp_packets) {
+                      std::vector<LoggedType>* rtcp_packets,
+                      bool remove_duplicates) {
   RTC_CHECK(proto.has_timestamp_ms());
   RTC_CHECK(proto.has_raw_packet());
 
-  // Base event
-  rtcp_packets->emplace_back(proto.timestamp_ms() * 1000, proto.raw_packet());
+  // TODO(terelius): Incoming RTCP may be delivered once for audio and once
+  // for video. As a work around, we remove the duplicated packets since they
+  // cause problems when analyzing the log or feeding it into the transport
+  // feedback adapter.
+  if (!remove_duplicates || rtcp_packets->empty() ||
+      rtcp_packets->back().rtcp.raw_data.size() != proto.raw_packet().size() ||
+      memcmp(rtcp_packets->back().rtcp.raw_data.data(),
+             proto.raw_packet().data(), proto.raw_packet().size()) != 0) {
+    // Base event
+    rtcp_packets->emplace_back(proto.timestamp_ms() * 1000, proto.raw_packet());
+  }
 
   const size_t number_of_deltas =
       proto.has_number_of_deltas() ? proto.number_of_deltas() : 0u;
@@ -767,10 +777,20 @@ void StoreRtcpPackets(const ProtoType& proto,
     int64_t timestamp_ms;
     RTC_CHECK(ToSigned(timestamp_ms_values[i].value(), &timestamp_ms));
 
-    rtcp_packets->emplace_back(
-        1000 * timestamp_ms,
-        reinterpret_cast<const uint8_t*>(raw_packet_values[i].data()),
-        raw_packet_values[i].size());
+    const size_t data_size = raw_packet_values[i].size();
+    const uint8_t* data =
+        reinterpret_cast<const uint8_t*>(raw_packet_values[i].data());
+    // TODO(terelius): Incoming RTCP may be delivered once for audio and once
+    // for video. As a work around, we remove the duplicated packets since they
+    // cause problems when analyzing the log or feeding it into the transport
+    // feedback adapter.
+    if (remove_duplicates && !rtcp_packets->empty() &&
+        rtcp_packets->back().rtcp.raw_data.size() == data_size &&
+        memcmp(rtcp_packets->back().rtcp.raw_data.data(), data, data_size) ==
+            0) {
+      continue;
+    }
+    rtcp_packets->emplace_back(1000 * timestamp_ms, data, data_size);
   }
 }
 
@@ -2168,12 +2188,12 @@ void ParsedRtcEventLog::StoreOutgoingRtpPackets(
 
 void ParsedRtcEventLog::StoreIncomingRtcpPackets(
     const rtclog2::IncomingRtcpPackets& proto) {
-  StoreRtcpPackets(proto, &incoming_rtcp_packets_);
+  StoreRtcpPackets(proto, &incoming_rtcp_packets_, true /*remove_duplicates*/);
 }
 
 void ParsedRtcEventLog::StoreOutgoingRtcpPackets(
     const rtclog2::OutgoingRtcpPackets& proto) {
-  StoreRtcpPackets(proto, &outgoing_rtcp_packets_);
+  StoreRtcpPackets(proto, &outgoing_rtcp_packets_, false /*remove_duplicates*/);
 }
 
 void ParsedRtcEventLog::StoreStartEvent(const rtclog2::BeginLogEvent& proto) {
