@@ -2168,7 +2168,19 @@ void ParsedRtcEventLog::StoreOutgoingRtpPackets(
 
 void ParsedRtcEventLog::StoreIncomingRtcpPackets(
     const rtclog2::IncomingRtcpPackets& proto) {
+  // Currently incoming RTCP packets are logged twice, both for audio and
+  // video. Only act on one of them. Compare against the previous parsed
+  // incoming RTCP packet.
+  RTC_CHECK(proto.has_raw_packet());
+  if (proto.raw_packet().size() == last_incoming_rtcp_packet_length_ &&
+      memcmp(last_incoming_rtcp_packet_, proto.raw_packet().data(),
+             proto.raw_packet().size()) == 0) {
+    return;
+  }
   StoreRtcpPackets(proto, &incoming_rtcp_packets_);
+  last_incoming_rtcp_packet_length_ = proto.raw_packet().size();
+  memcpy(last_incoming_rtcp_packet_, proto.raw_packet().data(),
+         proto.raw_packet().size());
 }
 
 void ParsedRtcEventLog::StoreOutgoingRtcpPackets(
