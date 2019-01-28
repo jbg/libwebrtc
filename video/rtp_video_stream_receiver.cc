@@ -410,6 +410,7 @@ void RtpVideoStreamReceiver::OnCompleteFrame(
         static_cast<video_coding::RtpFrameObject*>(frame.get());
     last_seq_num_for_pic_id_[rtp_frame->id.picture_id] =
         rtp_frame->last_seq_num();
+    timestamp_for_pic_id_[rtp_frame->id.picture_id] = rtp_frame->Timestamp();
   }
   complete_frame_callback_->OnCompleteFrame(std::move(frame));
 }
@@ -644,6 +645,7 @@ void RtpVideoStreamReceiver::FrameContinuous(int64_t picture_id) {
 
 void RtpVideoStreamReceiver::FrameDecoded(int64_t picture_id) {
   int seq_num = -1;
+  absl::optional<uint32_t> timestamp;
   {
     rtc::CritScope lock(&last_seq_num_cs_);
     auto seq_num_it = last_seq_num_for_pic_id_.find(picture_id);
@@ -652,10 +654,18 @@ void RtpVideoStreamReceiver::FrameDecoded(int64_t picture_id) {
       last_seq_num_for_pic_id_.erase(last_seq_num_for_pic_id_.begin(),
                                      ++seq_num_it);
     }
+    auto timestamp_it = timestamp_for_pic_id_.find(picture_id);
+    if (timestamp_it != timestamp_for_pic_id_.end()) {
+      timestamp = timestamp_it->second;
+      timestamp_for_pic_id_.erase(timestamp_for_pic_id_.begin(),
+                                  ++timestamp_it);
+    }
   }
   if (seq_num != -1) {
     packet_buffer_->ClearTo(seq_num);
-    reference_finder_->ClearTo(seq_num);
+  }
+  if (timestamp) {
+    reference_finder_->ClearTo(*timestamp);
   }
 }
 
