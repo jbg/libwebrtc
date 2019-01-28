@@ -132,6 +132,24 @@
     },
     {
       "key": {
+        "uuid": "c0de9329_d8d3ae47",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-28T22:32:41Z",
+      "side": 1,
+      "message": "Yes, the problem is the second AudioSendStream constructor, which takes ChannelSend. It is used in unit tests to pass mock channel. \n\nIf you have a better solution without splitting Init() from constructor let me know. I tried splitting just setter of overhead observer, but in RTP path it did not work, because observer is passed during creation of RtpRtcp module. Maybe we can introduce setter of observer on RtpRtcp module,  but it\u0027s a bigger change.\n\nIf you can think of a better code structure, let me know -- I would be happy to change.",
+      "parentUuid": "47319536_8f2fe8d3",
+      "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a32d349d_c0b5966d",
         "filename": "audio/channel_send.cc",
         "patchSetId": 14
@@ -216,6 +234,24 @@
       "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ec7198_0d906eaa",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-28T22:32:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26545061_b8be7e36",
+      "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
