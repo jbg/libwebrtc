@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a739fb07_bc9d5855",
+        "filename": "api/video_codecs/video_encoder_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2019-01-28T21:01:09Z",
+      "side": 1,
+      "message": "Added a comment to clarify.",
+      "parentUuid": "f20b3919_abfa6d80",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 33
+      },
+      "revId": "ab0ba2ee59b741fb4fa81c132114a41d92fd2e8a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f4aa334_1fdf2fe5",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 2
@@ -69,6 +93,30 @@
       "revId": "ab0ba2ee59b741fb4fa81c132114a41d92fd2e8a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ffd1df8_acf08aac",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2727,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2019-01-28T21:01:09Z",
+      "side": 1,
+      "message": "The intent is to keep the old behavior when no scale factors are set not to break existing apps (there is already ample test coverage for that).\nAdded some tests to check for sizes when a value is set for any layer.",
+      "parentUuid": "1caf4a1d_76f9e025",
+      "range": {
+        "startLine": 2727,
+        "startChar": 0,
+        "endLine": 2727,
+        "endChar": 43
+      },
+      "revId": "ab0ba2ee59b741fb4fa81c132114a41d92fd2e8a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
