@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "76230d39_f226864c",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-28T20:04:24Z",
+      "side": 1,
+      "message": "The current problem I have is hitting a DCHECK because the packets in the duplicate feedback are unrecognized. However, I prefer the vague formulation because there are lots of things that could potentially go wrong if we insert the same feedback twice Attempting to be precise would more likely be misleading, imo.",
+      "parentUuid": "8327a357_df137a5a",
+      "range": {
+        "startLine": 746,
+        "startChar": 11,
+        "endLine": 746,
+        "endChar": 19
+      },
+      "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f01071e8_e7919473",
         "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f32ffc3_e0101d60",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-28T20:04:24Z",
+      "side": 1,
+      "message": "Done. Thanks!\n\nI thought this would be difficult/ugly since there is small difference in types, but string_view wraps this very nicely.",
+      "parentUuid": "f01071e8_e7919473",
+      "range": {
+        "startLine": 749,
+        "startChar": 6,
+        "endLine": 751,
+        "endChar": 71
+      },
+      "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "dad2acac_12c24275",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-28T20:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "989369cd_d9801eee",
+      "range": {
+        "startLine": 788,
+        "startChar": 8,
+        "endLine": 790,
+        "endChar": 13
+      },
+      "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06c9170f_146a67dc",
         "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
         "patchSetId": 3
@@ -85,6 +157,24 @@
       "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bad284a_7db82b38",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2191,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-28T20:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06c9170f_146a67dc",
+      "revId": "453db269abb6862f4bcdc59898c672380c0cbf12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
