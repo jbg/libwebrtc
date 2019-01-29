@@ -107,14 +107,18 @@ bool SimulatedNetwork::EnqueuePacket(PacketInFlightInfo packet) {
 
   int64_t arrival_time_us = network_start_time_us + capacity_delay.us();
   capacity_link_.push({packet, arrival_time_us});
+  if (next_process_time_us_) {
+    next_process_time_us_ = std::min(*next_process_time_us_, arrival_time_us);
+  } else {
+    next_process_time_us_ = arrival_time_us;
+  }
+
   return true;
 }
 
 absl::optional<int64_t> SimulatedNetwork::NextDeliveryTimeUs() const {
   rtc::CritScope crit(&process_lock_);
-  if (!delay_link_.empty())
-    return delay_link_.begin()->arrival_time_us;
-  return absl::nullopt;
+  return next_process_time_us_;
 }
 std::vector<PacketDeliveryInfo> SimulatedNetwork::DequeueDeliverablePackets(
     int64_t receive_time_us) {
@@ -189,6 +193,18 @@ std::vector<PacketDeliveryInfo> SimulatedNetwork::DequeueDeliverablePackets(
       packets_to_deliver.emplace_back(
           PacketDeliveryInfo(packet_info.packet, packet_info.arrival_time_us));
       delay_link_.pop_front();
+    }
+    next_process_time_us_.reset();
+    if (!capacity_link_.empty())
+      next_process_time_us_ = capacity_link_.front().arrival_time_us;
+    absl::optional<int64_t> next_delay_process_time;
+    if (!delay_link_.empty())
+      next_delay_process_time = delay_link_.front().arrival_time_us;
+    if (!next_process_time_us_) {
+      next_process_time_us_ = next_delay_process_time;
+    } else if (next_process_time_us_ && next_delay_process_time) {
+      next_process_time_us_ =
+          std::min(next_process_time_us_, next_delay_process_time);
     }
     return packets_to_deliver;
   }
