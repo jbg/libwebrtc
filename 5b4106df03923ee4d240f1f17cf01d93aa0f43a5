@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02dc4396_d28e73a5",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-29T05:42:39Z",
+      "side": 1,
+      "message": "TODO(zstein): Split in to two classes - one containing the two ice_transactions_ based graphs and the other containing the two events_by_transaction_id_ based graphs.",
+      "revId": "5b4106df03923ee4d240f1f17cf01d93aa0f43a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
