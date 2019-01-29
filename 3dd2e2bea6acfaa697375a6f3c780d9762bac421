@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "4246938b_c7091003",
+        "filename": "tools_webrtc/clang_tidy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-29T12:31:13Z",
+      "side": 1,
+      "message": "If run-clang-tidy.py is available, it would be best to use it directly, no?\n\nRe clang-apply-replacements: I\u0027m not sure how it comes into play. The following command worked well:\ntools_webrtc/clang_tidy.py pc/peer_connection.cc -fix",
+      "parentUuid": "e69bcfbc_8cf59666",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 23
+      },
+      "revId": "3dd2e2bea6acfaa697375a6f3c780d9762bac421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f347ddd7_559ea569",
         "filename": "tools_webrtc/clang_tidy.py",
         "patchSetId": 1
@@ -68,6 +92,30 @@
       "revId": "3dd2e2bea6acfaa697375a6f3c780d9762bac421",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48ff6b3c_23c39e36",
+        "filename": "tools_webrtc/clang_tidy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-29T12:31:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f347ddd7_559ea569",
+      "range": {
+        "startLine": 74,
+        "startChar": 23,
+        "endLine": 74,
+        "endChar": 27
+      },
+      "revId": "3dd2e2bea6acfaa697375a6f3c780d9762bac421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
