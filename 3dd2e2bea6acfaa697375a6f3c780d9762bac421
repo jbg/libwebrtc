@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5b6ff3ef_7ca637c9",
+        "filename": "tools_webrtc/clang_tidy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-29T12:40:14Z",
+      "side": 1,
+      "message": "\u003e If run-clang-tidy.py is available, it would be best to use it directly, no?\n\nWe still have to generate the compdb, so automate that part will still be needed.\n \n\u003e Re clang-apply-replacements: I\u0027m not sure how it comes into play. The following command worked well:\n\u003e tools_webrtc/clang_tidy.py pc/peer_connection.cc -fix\n\nOh, maybe the old version of clang-tidy have the replacement capability embedded, the new version needs the binary.",
+      "parentUuid": "4246938b_c7091003",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 23
+      },
+      "revId": "3dd2e2bea6acfaa697375a6f3c780d9762bac421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f347ddd7_559ea569",
         "filename": "tools_webrtc/clang_tidy.py",
         "patchSetId": 1
