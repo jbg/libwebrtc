@@ -399,9 +399,6 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // requests.
   virtual void SetStorePacketsStatus(bool enable, uint16_t numberToStore) = 0;
 
-  // Returns true if the module is configured to store packets.
-  virtual bool StorePackets() const = 0;
-
   // Called on receipt of RTCP report block from remote side.
   virtual void RegisterRtcpStatisticsCallback(
       RtcpStatisticsCallback* callback) = 0;

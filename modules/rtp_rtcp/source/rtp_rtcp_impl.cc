@@ -742,10 +742,6 @@ void ModuleRtpRtcpImpl::SetStorePacketsStatus(const bool enable,
   rtp_sender_->SetStorePacketsStatus(enable, number_to_store);
 }
 
-bool ModuleRtpRtcpImpl::StorePackets() const {
-  return rtp_sender_->StorePackets();
-}
-
 void ModuleRtpRtcpImpl::RegisterRtcpStatisticsCallback(
     RtcpStatisticsCallback* callback) {
   rtcp_receiver_.RegisterRtcpStatisticsCallback(callback);

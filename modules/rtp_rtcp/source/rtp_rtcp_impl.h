@@ -242,8 +242,6 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   // requests.
   void SetStorePacketsStatus(bool enable, uint16_t number_to_store) override;
 
-  bool StorePackets() const override;
-
   // Called on receipt of RTCP report block from remote side.
   void RegisterRtcpStatisticsCallback(
       RtcpStatisticsCallback* callback) override;
