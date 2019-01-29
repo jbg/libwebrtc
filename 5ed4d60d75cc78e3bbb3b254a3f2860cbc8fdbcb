@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499064a9_68eac58d",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-29T15:03:53Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me if we expect StartSend to be called after StopSend. If so, this seems wrong, since we\u0027ll emit a RTCP BYE.\n\nHowever, I see nothing in the RtpRtcp module that resets ssrc or seqno on SetSendingStatus(false).",
+      "range": {
+        "startLine": 784,
+        "startChar": 22,
+        "endLine": 784,
+        "endChar": 38
+      },
+      "revId": "5ed4d60d75cc78e3bbb3b254a3f2860cbc8fdbcb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
