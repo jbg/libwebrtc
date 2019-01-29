@@ -204,6 +204,24 @@
     },
     {
       "key": {
+        "uuid": "ab4491ae_99d440aa",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-01-29T22:26:07Z",
+      "side": 1,
+      "message": "I see your reasoning.\n\nChannelSend is kind of a relic in my view - the functionality should to some degree be moved into AudioSendStream, except that\na) the transport layer stuff should be pulled out so AudioSendStream is transport agnostic\nb) audio coding module should be removed too - it doesn\u0027t add much these days except mixing up send/receive in one object\n\nRegarding 1/2/3:\n\n1) As an interim solution, I think that is less of a mess than having Init().\n2) How can you make it a callback? We need the overhead for new streams created. Will MediaTransport call back as soon as a listener is added? In general I\u0027d prefer less callbacks since they make modules more tightly coupled.\n3) Good point. If RtpRtcp makes the call from a different thread the critsect needs to be taken in the ctor as well.\n\nThe cleaner solution has the problem of introducing state mutation in RtpRtcp.",
+      "parentUuid": "6c163b35_a72b1e16",
+      "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a32d349d_c0b5966d",
         "filename": "audio/channel_send.cc",
         "patchSetId": 14
