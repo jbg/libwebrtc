@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "34516d31_78fc364e",
+        "filename": "api/DEPS",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-29T18:04:42Z",
+      "side": 1,
+      "message": "This one shouldn\u0027t be necessary, I think.",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "88c5124d_132a30bd",
         "filename": "api/ice_transport_factory.cc",
         "patchSetId": 8
@@ -30,6 +47,40 @@
       "writtenOn": "2019-01-25T10:18:57Z",
       "side": 1,
       "message": "Document the fact that this must be constructed on the signaling thread here too.\n\nThough P2PTransportChannel is constructed settings it\u0027s network_thread_ to rtc::Thread::Current().\n\nWe end up with IceTransportWithTransportChannel::signaling_thread_ \u003d\u003d P2PTransportChannel::network_thread_. Are they calling the thread different things or is there a mistake here? Should both say \"network\" or should both say \"signaling\"? Please fix or clarify with a comment why different names are used, reading the code looks like a bug.",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7b3705e_b923a50a",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-29T18:04:42Z",
+      "side": 1,
+      "message": "Use RTC_DCHECK_RUN_ON here, and RTC_GUARDED_BY on line 41? Good docs here: https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/thread_checker.h?rcl\u003d949f0fdc10bf36a0c8379d4b378ac2036675756e\u0026l\u003d102",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7d492b6_8130a254",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-29T18:04:42Z",
+      "side": 1,
+      "message": "Unless I\u0027m mistaken, both member variables can be const.",
       "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -70,6 +121,23 @@
     },
     {
       "key": {
+        "uuid": "0d1e64ca_e76d95c3",
+        "filename": "pc/dtls_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-29T18:04:42Z",
+      "side": 1,
+      "message": "Isn\u0027t\n\n  return ice_transport_;\n\nenough?",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d049c67_7dcd7847",
         "filename": "pc/ice_transport.cc",
         "patchSetId": 8
@@ -81,6 +149,57 @@
       "writtenOn": "2019-01-25T10:18:57Z",
       "side": 1,
       "message": "Unnecessary comment",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02cebd05_c81f2969",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-29T18:04:42Z",
+      "side": 1,
+      "message": "So, DCHECK that internal_ is null?",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "959d3f11_567d663d",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-29T18:04:42Z",
+      "side": 1,
+      "message": "RTC_DCHECK_RUN_ON(thread_checker_)",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de8195b1_35f36fd9",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-29T18:04:42Z",
+      "side": 1,
+      "message": "`RTC_GUARDED_BY(thread_checker_)`?",
       "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
