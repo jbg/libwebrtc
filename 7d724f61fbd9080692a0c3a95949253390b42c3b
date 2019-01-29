@@ -186,6 +186,24 @@
     },
     {
       "key": {
+        "uuid": "6c163b35_a72b1e16",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-29T19:16:04Z",
+      "side": 1,
+      "message": "Yes this works if we observer callback is never called from constructor. You fixed it by reading current overhead in stream instead of channel.\n\nI did not go this path initially because:\n\n1) AudioSendStream currently does not have any logic / difference between Media Transport and RTP and it would be great to keep it this way. The getter in AudioSendStream looks a bit out of place.\n\n2) We will most likely change MediaTransport to have callback for overhead instead of getter (various reasons, to be more consistent with RTP, other notifications and because in the future overhead may change dynamically).\n\n3) Is there a guarantee that RTP will not call overhead observer from constructor? Unless there is explicit requirement in the interface, it may be better not to make assumptions?\n\nBetween having Init() and 1/2/3 I am not sure.\n\nAlternative solution\n--------------------\n\nI think the cleaner solution without Init() and without 1/2/3 would be to have ChannelSend::SetOverheadObserver, but it will require propagation of the setter to RtpRtcp module.\n\n What do you think?",
+      "parentUuid": "3013f734_7193178e",
+      "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a32d349d_c0b5966d",
         "filename": "audio/channel_send.cc",
         "patchSetId": 14
