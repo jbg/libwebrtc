@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4eaf2bd_67512bd3",
+        "filename": "p2p/base/transport_description_factory_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-01-29T19:34:01Z",
+      "side": 1,
+      "message": "We had ASSERT for nullptr.",
+      "range": {
+        "startLine": 123,
+        "startChar": 16,
+        "endLine": 123,
+        "endChar": 23
+      },
+      "revId": "056b4e2b44ace53c7ad2ce411420251def45db34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
