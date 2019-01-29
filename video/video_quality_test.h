@@ -24,6 +24,7 @@
 #include "test/call_test.h"
 #include "test/frame_generator.h"
 #include "test/layer_filtering_transport.h"
+#include "test/partial_frame_compressor.h"
 #include "video/video_analyzer.h"
 #ifdef WEBRTC_WIN
 #include "modules/audio_device/win/core_audio_utility_win.h"
@@ -113,6 +114,8 @@ class VideoQualityTest :
   std::vector<VideoSendStream*> thumbnail_send_streams_;
   std::vector<VideoReceiveStream::Config> thumbnail_receive_configs_;
   std::vector<VideoReceiveStream*> thumbnail_receive_streams_;
+
+  std::unique_ptr<PartialFrameCompressor> partial_frame_compressor_;
 
   int receive_logs_;
   int send_logs_;
