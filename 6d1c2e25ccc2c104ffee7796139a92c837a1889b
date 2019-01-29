@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96f377e9_23c8b801",
+        "filename": "test/scenario/network/fake_network_socket.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-29T16:34:04Z",
+      "side": 1,
+      "message": "Replace LS_ERRORs with CHECKs. (goes for all instances of LS_ERROR in this CL)\n\nUnless it\u0027s something that we actually want to trigger, then we should be silent.",
+      "range": {
+        "startLine": 95,
+        "startChar": 12,
+        "endLine": 95,
+        "endChar": 20
+      },
+      "revId": "6d1c2e25ccc2c104ffee7796139a92c837a1889b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fc1fa3d_2cc993be",
+        "filename": "test/scenario/network/fake_network_socket_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-29T16:34:04Z",
+      "side": 1,
+      "message": "Accident? Maybe it should be a CHECK?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "6d1c2e25ccc2c104ffee7796139a92c837a1889b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8209581e_be92562a",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-29T16:34:04Z",
+      "side": 1,
+      "message": "If this is expected to happen without anything being wrong, we shouldn\u0027t print any warning.",
+      "range": {
+        "startLine": 225,
+        "startChar": 4,
+        "endLine": 226,
+        "endChar": 41
+      },
+      "revId": "6d1c2e25ccc2c104ffee7796139a92c837a1889b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
