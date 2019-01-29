@@ -33,6 +33,7 @@
 #include "rtc_base/sequenced_task_checker.h"
 #include "rtc_base/task_queue.h"
 #include "video/overuse_frame_detector.h"
+#include "video/partial_frame_decompressor.h"
 
 namespace webrtc {
 
@@ -298,6 +299,8 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   // All public methods are proxied to |encoder_queue_|. It must must be
   // destroyed first to make sure no tasks are run that use other members.
   rtc::TaskQueue encoder_queue_;
+
+  PartialFrameDecompressor partial_frame_decompressor_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(VideoStreamEncoder);
 };

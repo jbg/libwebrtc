@@ -712,7 +712,22 @@ void VideoStreamEncoder::ConfigureQualityScaler() {
 
 void VideoStreamEncoder::OnFrame(const VideoFrame& video_frame) {
   RTC_DCHECK_RUNS_SERIALIZED(&incoming_frame_race_checker_);
+
+  const VideoFrame::PartialFrameDescription* partial_desc =
+      video_frame.partial_frame_description();
   VideoFrame incoming_frame = video_frame;
+
+  if (partial_desc) {
+    VideoFrameBuffer* input_buffer = video_frame.video_frame_buffer();
+    if (!partial_frame_decompressor_.ApplyPartialUpdate(
+            input_buffer, &incoming_frame, partial_desc)) {
+      // Can't apply new image to the cached buffer - nothing sensible to
+      // encode.
+      return;
+    }
+  } else {
+    partial_frame_decompressor_.Reset();
+  }
 
   // Local time in webrtc time base.
   int64_t current_time_us = clock_->TimeInMicroseconds();
