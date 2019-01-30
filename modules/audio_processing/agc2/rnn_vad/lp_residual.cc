@@ -34,6 +34,7 @@ void ComputeCrossCorrelation(
   constexpr size_t max_lag = x_corr.size();
   RTC_DCHECK_EQ(x.size(), y.size());
   RTC_DCHECK_LT(max_lag, x.size());
+  // Nested loop which can be SIMD optimized.
   for (size_t lag = 0; lag < max_lag; ++lag) {
     x_corr[lag] =
         std::inner_product(x.begin(), x.end() - lag, y.begin() + lag, 0.f);
@@ -45,8 +46,11 @@ void DenoiseAutoCorrelation(
     rtc::ArrayView<float, kNumLpcCoefficients> auto_corr) {
   // Assume -40 dB white noise floor.
   auto_corr[0] *= 1.0001f;
+  float multiplier = 0.008f;
+  // Consider parallelizing using a tabularized multiplier.
   for (size_t i = 1; i < kNumLpcCoefficients; ++i) {
-    auto_corr[i] -= auto_corr[i] * (0.008f * i) * (0.008f * i);
+    auto_corr[i] -= auto_corr[i] * multiplier * multiplier;
+    multiplier += 0.008f;
   }
 }
 
@@ -56,6 +60,7 @@ void ComputeInitialInverseFilterCoefficients(
     rtc::ArrayView<const float, kNumLpcCoefficients> auto_corr,
     rtc::ArrayView<float, kNumLpcCoefficients - 1> lpc_coeffs) {
   float error = auto_corr[0];
+  // This nested loop seems quite expensive and should be possible to optimize.
   for (size_t i = 0; i < kNumLpcCoefficients - 1; ++i) {
     float reflection_coeff = 0.f;
     for (size_t j = 0; j < i; ++j) {
@@ -72,7 +77,8 @@ void ComputeInitialInverseFilterCoefficients(
     reflection_coeff /= -error;
     // Update LPC coefficients and total error.
     lpc_coeffs[i] = reflection_coeff;
-    for (size_t j = 0; j<(i + 1)>> 1; ++j) {
+    const size_t loop_limit = (i + 1) >> 1;
+    for (size_t j = 0; j < loop_limit; ++j) {
       const float tmp1 = lpc_coeffs[j];
       const float tmp2 = lpc_coeffs[i - 1 - j];
       lpc_coeffs[j] = tmp1 + reflection_coeff * tmp2;
@@ -102,15 +108,19 @@ void ComputeAndPostProcessLpcCoefficients(
   // LPC coefficients post-processing.
   // TODO(bugs.webrtc.org/9076): Consider removing these steps.
   float c1 = 1.f;
+
+  // This is expensive since it is recursive in nature. Parallelize using a
+  // table.
   for (size_t i = 0; i < kNumLpcCoefficients - 1; ++i) {
     c1 *= 0.9f;
     lpc_coeffs_pre[i] *= c1;
   }
+
   const float c2 = 0.8f;
   lpc_coeffs[0] = lpc_coeffs_pre[0] + c2;
-  lpc_coeffs[1] = lpc_coeffs_pre[1] + c2 * lpc_coeffs_pre[0];
-  lpc_coeffs[2] = lpc_coeffs_pre[2] + c2 * lpc_coeffs_pre[1];
-  lpc_coeffs[3] = lpc_coeffs_pre[3] + c2 * lpc_coeffs_pre[2];
+  for (size_t k = 1; k < 4; ++k) {
+    lpc_coeffs[k] += c2 * lpc_coeffs_pre[k - 1];
+  }
   lpc_coeffs[4] = c2 * lpc_coeffs_pre[3];
 }
 
@@ -122,10 +132,13 @@ void ComputeLpResidual(
   RTC_DCHECK_EQ(x.size(), y.size());
   std::array<float, kNumLpcCoefficients> input_chunk;
   input_chunk.fill(0.f);
+  // Nested loop: candidate for optimization for SIMD:
   for (size_t i = 0; i < y.size(); ++i) {
     const float sum = std::inner_product(input_chunk.begin(), input_chunk.end(),
                                          lpc_coeffs.begin(), x[i]);
     // Circular shift and add a new sample.
+    // This local copy of x is not really necessary. It is better to operate
+    // directly on x.
     for (size_t j = kNumLpcCoefficients - 1; j > 0; --j)
       input_chunk[j] = input_chunk[j - 1];
     input_chunk[0] = x[i];

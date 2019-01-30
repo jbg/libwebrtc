@@ -55,6 +55,7 @@ class SymmetricMatrixBuffer {
     // column left.
     std::memmove(buf_.data(), buf_.data() + S, (buf_.size() - S) * sizeof(T));
     // Copy new values in the last column in the right order.
+    // This is a reverse copy. implement as such.
     for (size_t i = 0; i < values.size(); ++i) {
       const size_t index = (S - 1 - i) * (S - 1) - 1;
       RTC_DCHECK_LE(static_cast<size_t>(0), index);
@@ -66,6 +67,7 @@ class SymmetricMatrixBuffer {
   // buffer having delay |delay1| and |delay2|. The two arguments must not be
   // equal and both must be in {0, ..., S - 1}.
   T GetValue(size_t delay1, size_t delay2) const {
+    // NIT: DCHECK on the delays to avoid wrapping.
     int row = S - 1 - static_cast<int>(delay1);
     int col = S - 1 - static_cast<int>(delay2);
     RTC_DCHECK_NE(row, col) << "The diagonal cannot be accessed.";

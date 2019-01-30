@@ -37,6 +37,7 @@ float ComputeAutoCorrelationCoeff(rtc::ArrayView<const float> pitch_buf,
   RTC_DCHECK_LT(max_pitch_period, pitch_buf.size());
   RTC_DCHECK_LE(inv_lag, max_pitch_period);
   // TODO(bugs.webrtc.org/9076): Maybe optimize using vectorization.
+  // Optimize with SIMD.
   return std::inner_product(pitch_buf.begin() + max_pitch_period,
                             pitch_buf.end(), pitch_buf.begin() + inv_lag, 0.f);
 }
@@ -74,6 +75,8 @@ size_t PitchPseudoInterpolationLagPitchBuf(
   int offset = 0;
   // Cannot apply pseudo-interpolation at the boundaries.
   if (lag > 0 && lag < kMaxPitch24kHz) {
+    // Compute all of ComputeAutoCorrelationCoeff together rather than
+    // separately to improve locality.
     offset = GetPitchPseudoInterpolationOffset(
         lag,
         ComputeAutoCorrelationCoeff(pitch_buf, GetInvertedLag(lag - 1),

@@ -44,7 +44,10 @@ using rnnoise::kOutputLayerOutputSize;
 static_assert(kOutputLayerOutputSize <= kFullyConnectedLayersMaxUnits,
               "Increase kFullyConnectedLayersMaxUnits.");
 
+// This is a one-liner. Look into making inline.
 using rnnoise::RectifiedLinearUnit;
+// These two are expensive. Look into optimizing. Also, move them locally to
+// allow simpler optimizations.
 using rnnoise::SigmoidApproximated;
 using rnnoise::TansigApproximated;
 
@@ -133,6 +136,7 @@ void GatedRecurrentLayer::ComputeOutput(rtc::ArrayView<const float> input) {
 
   // Compute update gates.
   std::array<float, kRecurrentLayersMaxUnits> update;
+  // This is a nested loop. Look into optimize.
   for (size_t o = 0; o < output_size_; ++o) {
     update[o] = bias_[o];
     // TODO(bugs.chromium.org/9076): Benchmark how different layouts for
@@ -150,6 +154,7 @@ void GatedRecurrentLayer::ComputeOutput(rtc::ArrayView<const float> input) {
   // Compute reset gates.
   offset += output_size_;
   std::array<float, kRecurrentLayersMaxUnits> reset;
+  // This is a nested loop. Look into optimize.
   for (size_t o = 0; o < output_size_; ++o) {
     reset[o] = bias_[offset + o];
     for (size_t i = 0; i < input_size_; ++i) {  // Add input.
@@ -164,6 +169,7 @@ void GatedRecurrentLayer::ComputeOutput(rtc::ArrayView<const float> input) {
   // Compute output.
   offset += output_size_;
   std::array<float, kRecurrentLayersMaxUnits> output;
+  // This is a nested loop. Look into optimize.
   for (size_t o = 0; o < output_size_; ++o) {
     output[o] = bias_[offset + o];
     for (size_t i = 0; i < input_size_; ++i) {  // Add input.

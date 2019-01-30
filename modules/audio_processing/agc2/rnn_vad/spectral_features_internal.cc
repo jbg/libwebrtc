@@ -32,6 +32,8 @@ std::array<size_t, kNumBands> ComputeBandBoundaryIndexes(
     size_t sample_rate_hz,
     size_t frame_size_samples) {
   std::array<size_t, kNumBands> indexes;
+  // This is a very complex real-valued division. Look into changing into a
+  // shift or a multiplication.
   for (size_t i = 0; i < kNumBands; ++i) {
     indexes[i] =
         kBandFrequencyBoundaries[i] * frame_size_samples / sample_rate_hz;
@@ -45,6 +47,7 @@ void ComputeBandCoefficients(
     size_t max_freq_bin_index,
     rtc::ArrayView<float, kNumBands> coefficients) {
   std::fill(coefficients.begin(), coefficients.end(), 0.f);
+  // Nested loop. Look into optimizing.
   for (size_t i = 0; i < coefficients.size() - 1; ++i) {
     RTC_DCHECK_EQ(0.f, coefficients[i + 1]);
     RTC_DCHECK_GT(band_boundaries[i + 1], band_boundaries[i]);
@@ -61,6 +64,7 @@ void ComputeBandCoefficients(
     // at the band boundary.
     for (size_t j = first_freq_bin; j <= last_freq_bin; ++j) {
       const float w = static_cast<float>(j - first_freq_bin) / band_size;
+      // This is a method call made in the inner of a nested loop.
       const float coefficient = functor(j);
       coefficients[i] += (1.f - w) * coefficient;
       coefficients[i + 1] += w * coefficient;
@@ -75,6 +79,9 @@ void ComputeBandCoefficients(
   // (*): "size_t i" must be declared before the main loop.
 }
 
+// Combine this method with ComputeBandCoefficients. The current construct with
+// a functor causes the nested loop in ComputeBandCoefficients to be extremely
+// complex.
 void ComputeBandEnergies(
     rtc::ArrayView<const std::complex<float>> fft_coeffs,
     rtc::ArrayView<const size_t, kNumBands> band_boundaries,
@@ -92,6 +99,8 @@ void ComputeLogBandEnergiesCoefficients(
     rtc::ArrayView<float, kNumBands> log_band_energy_coeffs) {
   float log_max = -2.f;
   float follow = -2.f;
+  // This is a very complex loop. Look into optimize using NEON operation for
+  // the logarithm,
   for (size_t i = 0; i < band_energy_coeffs.size(); ++i) {
     log_band_energy_coeffs[i] = std::log10(1e-2f + band_energy_coeffs[i]);
     // Smoothing across frequency bands.
@@ -104,9 +113,13 @@ void ComputeLogBandEnergiesCoefficients(
 
 std::array<float, kNumBands * kNumBands> ComputeDctTable() {
   std::array<float, kNumBands * kNumBands> dct_table;
+  // Make constrexpr or pre-compute to avoid the square root.
   const double k = std::sqrt(0.5);
+  // This is a very complex method doing a non-optimized cos in a nested loop.
+  // Optimize.
   for (size_t i = 0; i < kNumBands; ++i) {
     for (size_t j = 0; j < kNumBands; ++j)
+      // Ensure that the division is done at compilation time
       dct_table[i * kNumBands + j] = std::cos((i + 0.5) * j * kPi / kNumBands);
     dct_table[i * kNumBands] *= k;
   }
@@ -120,6 +133,7 @@ void ComputeDct(rtc::ArrayView<const float, kNumBands> in,
   RTC_DCHECK_LE(1, out.size());
   RTC_DCHECK_LE(out.size(), in.size());
   std::fill(out.begin(), out.end(), 0.f);
+  // Nested loop: optimize.
   for (size_t i = 0; i < out.size(); ++i) {
     for (size_t j = 0; j < in.size(); ++j) {
       out[i] += in[j] * dct_table[j * in.size() + i];

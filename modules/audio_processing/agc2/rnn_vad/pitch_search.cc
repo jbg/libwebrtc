@@ -33,6 +33,8 @@ PitchEstimator::~PitchEstimator() = default;
 PitchInfo PitchEstimator::Estimate(
     rtc::ArrayView<const float, kBufSize24kHz> pitch_buf) {
   // Perform the initial pitch search at 12 kHz.
+  // 12 kHz should not be needed as there is no pitch information to be gain at
+  // such high frequencies. Instead look at extending the look window over time.
   Decimate2x(pitch_buf, pitch_buf_decimated_view_);
   // Compute auto-correlation terms.
   ComputePitchAutoCorrelation(pitch_buf_decimated_view_, kMaxPitch12kHz,

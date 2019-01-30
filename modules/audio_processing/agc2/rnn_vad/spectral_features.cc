@@ -33,6 +33,9 @@ void UpdateSpectralDifferenceStats(
   RTC_DCHECK(sym_matrix_buf);
   // Compute the new spectral distance stats.
   std::array<float, kSpectralCoeffsHistorySize - 1> distances;
+  // Nested loop. Look into optimizing:
+  // Remove the use of an abstracted ring-buffer and instead use a more light
+  // weight data structure.
   for (size_t i = 0; i < kSpectralCoeffsHistorySize - 1; ++i) {
     const size_t delay = i + 1;
     auto old_spectral_coeffs = ring_buf.GetArrayView(delay);
@@ -85,6 +88,7 @@ bool SpectralFeaturesExtractor::CheckSilenceComputeFeatures(
     rtc::ArrayView<const float, kFrameSize20ms24kHz> reference_frame,
     rtc::ArrayView<const float, kFrameSize20ms24kHz> lagged_frame,
     SpectralFeaturesView spectral_features) {
+  // This method uses 3 ffts.
   // Analyze reference frame.
   fft_.ForwardFft(reference_frame, reference_frame_fft_);
   ComputeBandEnergies(reference_frame_fft_, band_boundaries_,
@@ -164,6 +168,8 @@ void SpectralFeaturesExtractor::ComputeCrossCorrelation(
   ComputeBandCoefficients(cross_corr, band_boundaries_, kNumFftPoints - 1,
                           cross_corr_coeffs);
   // Normalize.
+  // A strong candidate for SIMD optimization. This does a division and a square
+  // root inside  aloop.
   for (size_t i = 0; i < cross_corr_coeffs.size(); ++i) {
     cross_corr_coeffs[i] =
         cross_corr_coeffs[i] /
@@ -180,17 +186,21 @@ void SpectralFeaturesExtractor::ComputeCrossCorrelation(
 float SpectralFeaturesExtractor::ComputeVariability() {
   // Compute spectral variability score.
   float spec_variability = 0.f;
+  // Nested loop: look into optimizing.
   for (size_t delay1 = 0; delay1 < kSpectralCoeffsHistorySize; ++delay1) {
     float min_dist = std::numeric_limits<float>::max();
     for (size_t delay2 = 0; delay2 < kSpectralCoeffsHistorySize; ++delay2) {
       if (delay1 == delay2)  // The distance would be 0.
         continue;
+      // This is a function call in a nested loop. Ensure that it is inlined,
+      // and consider removing the abstraction of the symmetric matrix buffer.
       min_dist =
           std::min(min_dist, spectral_diffs_buf_.GetValue(delay1, delay2));
     }
     spec_variability += min_dist;
   }
   // Normalize (based on training set stats).
+  // Is the below division optimized into a multiplication?
   return spec_variability / kSpectralCoeffsHistorySize - 2.1f;
 }
 

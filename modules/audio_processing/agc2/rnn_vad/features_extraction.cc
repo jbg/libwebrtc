@@ -61,6 +61,7 @@ bool FeaturesExtractor::CheckSilenceComputeFeatures(
     // Feed buffer with |samples|.
     pitch_buf_24kHz_.Push(samples);
   }
+
   // Extract the LP residual.
   float lpc_coeffs[kNumLpcCoefficients];
   ComputeAndPostProcessLpcCoefficients(pitch_buf_24kHz_view_, lpc_coeffs);

@@ -46,11 +46,16 @@ void BandAnalysisFft::ForwardFft(rtc::ArrayView<const float> samples,
   RTC_DCHECK_EQ(samples.size(), dst.size());
   // Apply windowing.
   RTC_DCHECK_EQ(input_buf_.size(), 2 * half_window_.size());
+
+  // Apply using SIMD
   for (size_t i = 0; i < input_buf_.size() / 2; ++i) {
     input_buf_[i].real(samples[i] * half_window_[i]);
     size_t j = kFrameSize20ms24kHz - i - 1;
     input_buf_[j].real(samples[j] * half_window_[i]);
   }
+
+  // I think this is a complex valued FFT using real valued data. The complexity
+  // of should be possible to reduce significantly (halfed?).
   fft_.ForwardFft(kFrameSize20ms24kHz, input_buf_.data(), kFrameSize20ms24kHz,
                   dst.data());
 }

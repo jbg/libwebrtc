@@ -14,6 +14,8 @@
 namespace webrtc {
 namespace rnn_vad {
 
+// Is double precision needed? It will cause the operations using kPi to be more
+// expensive.
 constexpr double kPi = 3.14159265358979323846;
 
 constexpr size_t kSampleRate24kHz = 24000;

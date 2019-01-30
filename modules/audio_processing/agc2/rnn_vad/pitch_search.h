@@ -36,6 +36,8 @@ class PitchEstimator {
 
  private:
   PitchInfo last_pitch_48kHz_;
+  // The FFT below is not at all optimized. Consider replacing it with the Ooura
+  // FFT.
   std::unique_ptr<RealFourier> fft_;
   std::vector<float> pitch_buf_decimated_;
   rtc::ArrayView<float, kBufSize12kHz> pitch_buf_decimated_view_;
