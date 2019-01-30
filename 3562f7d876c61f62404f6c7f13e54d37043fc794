@@ -22,6 +22,30 @@
       "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22abe696_9a940172",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-30T11:50:55Z",
+      "side": 1,
+      "message": "Yes, there will be a problem and it\u0027s handled correctly in the following CLs. But to be even able to detect this problem we include these fields.\n\nE.g. if we omit them, we can\u0027t detect a bad user, who sents a partial update after the resolution have changed",
+      "parentUuid": "9e217a5d_a1ee0da2",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

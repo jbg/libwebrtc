@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "0e8f64fd_1204260e",
+        "filename": "api/video/i420_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-30T11:50:55Z",
+      "side": 1,
+      "message": "Idea of a nullptr frameBuffer is very nice. I will go with that.",
+      "parentUuid": "9a1b8fa1_3c8853ae",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ede6b7b6_77992a5a",
         "filename": "api/video/video_frame.h",
         "patchSetId": 1
@@ -191,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "bd062f6c_ce33d401",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-30T11:50:55Z",
+      "side": 1,
+      "message": "IT will be much easier to implement the logic closer to the actual encoder. The VideoStreamEncoder will receive a partial frame, \"unpack\" it using a previous known frame to a full resolution, but will mark it as \"unchanged\" if there was a zero-update, and always pass down. \n\nSo, the PartialDescription is consumed right after it\u0027s received by WebRTC and only the |changed| flag lives from that time.",
+      "parentUuid": "8a7224f1_2bb56b09",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 64
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d7d35ce_aabfc34f",
         "filename": "api/video/video_frame.h",
         "patchSetId": 1
@@ -226,6 +274,30 @@
       "side": 1,
       "message": "Use case is in https://webrtc-review.googlesource.com/c/src/+/120408.\n\nThis CL is the part of a large CL, split by files. I\u0027ve added you as a CC for all 5 of them. Feel free to review them also.\n\nI\u0027ve updated the commit description to include this change.",
       "parentUuid": "0d7d35ce_aabfc34f",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 75
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62d58386_fcf9afee",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-30T11:50:55Z",
+      "side": 1,
+      "message": "Ack? Or do i need to do something else here?",
+      "parentUuid": "75f94a74_2d073853",
       "range": {
         "startLine": 165,
         "startChar": 0,
