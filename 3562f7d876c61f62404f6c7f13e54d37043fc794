@@ -118,6 +118,30 @@
       "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1166f83c_ea76a195",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-30T13:30:05Z",
+      "side": 1,
+      "message": "\u003e First, it\u0027s a bit backwards to have the video source tell the encoder to enable a feature.\n\nBut it\u0027s the capturer feature. The capturer decides to do this, not all capturers would even be able to do it. Encoder doesn\u0027t know anything about partial frames, it always receives a full resolution frame (maybe marked as unchanged in the future). So, idea is that in WebRTC we can process these special partial frames if someone produces them.\n\n\u003e Only when we see the first partial frame, we need to allocate a copy of the last frame to use as a canvas.\n\nEven if we just keep the reference to the last full frame, it means the the extra buffer will be living all the time, which is additional memory. \n\n\u003e It\u0027s not really the allocation cost I\u0027m concerned with, but copying overhead. VideoFrameBuffer is large, and always passed by reference. While VideoFrame, on the other hand, is copied in a lot of places.\n\nThis optional structure should never be copied. It should be consumed at the very moment WebRTC receives the frame.",
+      "parentUuid": "1f9a7daf_263c56a2",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
