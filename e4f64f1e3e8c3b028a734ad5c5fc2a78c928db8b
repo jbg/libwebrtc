@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ef3e54c_21f8f2aa",
+        "filename": "test/scenario/network/network_emulation_manager.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-30T14:00:47Z",
+      "side": 1,
+      "message": "Instead of this, define local closures, makes it easier to follow the code.\n\nExample:\nstruct Closure {\nvoid operator()(){\n   manager-\u003enetwork_nodes_.push_back(std::move(node));\n}\nNetworkEmulationManager* manager;\nstd::unique_ptr\u003cEmulatedNetworkNode\u003e node;\n};\ntask_queue_.PostTask(Closure{this, std::move(node)});",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 2
+      },
+      "revId": "e4f64f1e3e8c3b028a734ad5c5fc2a78c928db8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61708187_dbbaae27",
+        "filename": "test/scenario/network/network_emulation_manager.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-30T14:00:47Z",
+      "side": 1,
+      "message": "If we can remove the lock, this check can be inlined and  CheckIdle can be removed.",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 45
+      },
+      "revId": "e4f64f1e3e8c3b028a734ad5c5fc2a78c928db8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de073191_fb849593",
+        "filename": "test/scenario/network/network_emulation_manager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-30T14:00:47Z",
+      "side": 1,
+      "message": "Is the lock still needed? Seems to me that we could just make sure that we only access this from one thread? AFAICT it\u0027s needed only for setup and Start/Stop, which should be done on the main thread, right?",
+      "range": {
+        "startLine": 66,
+        "startChar": 43,
+        "endLine": 66,
+        "endChar": 64
+      },
+      "revId": "e4f64f1e3e8c3b028a734ad5c5fc2a78c928db8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
