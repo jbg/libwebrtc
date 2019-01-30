@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3aa4bf73_2af986b8",
+        "filename": "modules/rtp_rtcp/source/playout_delay_oracle.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T15:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0872b12e_01b852ac",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 71,
+        "endChar": 46
+      },
+      "revId": "d9b1e33c2245f1d93c644cc8f1469446a91ade46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6e3b31f_0fa1326e",
         "filename": "modules/rtp_rtcp/source/playout_delay_oracle.cc",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-30T14:43:16Z",
       "side": 1,
       "message": "does it make sense to join (!playout_delay_acked_ and sequence_number_) into single optional?\n(i.e. does sequence_number_ value make sense when playout_delay_acked_ \u003d\u003d true ?)",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 20
+      },
+      "revId": "d9b1e33c2245f1d93c644cc8f1469446a91ade46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d44f94f1_867d9678",
+        "filename": "modules/rtp_rtcp/source/playout_delay_oracle.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T15:17:53Z",
+      "side": 1,
+      "message": "Nice idea. Done.",
+      "parentUuid": "d6e3b31f_0fa1326e",
       "range": {
         "startLine": 76,
         "startChar": 4,
@@ -82,6 +130,30 @@
       "writtenOn": "2019-01-30T14:43:16Z",
       "side": 1,
       "message": "alternative syntax (with reduced scoped for the optional):\nif (absl::optional\u003cPlayoutDelay\u003e playout_delay \u003d\n      playout_delay_oracle_.PlayoutDelayToSend({-1, -1})) {\n  packet-\u003eSetExtension\u003cPlayoutDelayLimits\u003e(*playout_delay);\n}",
+      "range": {
+        "startLine": 1078,
+        "startChar": 2,
+        "endLine": 1080,
+        "endChar": 22
+      },
+      "revId": "d9b1e33c2245f1d93c644cc8f1469446a91ade46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6430c97_f4cda7c8",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1080,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T15:17:53Z",
+      "side": 1,
+      "message": "I think assignment inside if is considered a bit obscure. Prefer to leave as is.",
+      "parentUuid": "fa96c6cb_89be838c",
       "range": {
         "startLine": 1078,
         "startChar": 2,
