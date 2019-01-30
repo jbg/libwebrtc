@@ -142,6 +142,30 @@
       "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12b8417f_7fa96ec9",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T13:45:09Z",
+      "side": 1,
+      "message": "\u003e But it\u0027s the capturer feature. The capturer decides to do this, not all capturers would even be able to do it. Encoder doesn\u0027t know anything about partial frames, it always receives a full resolution frame (maybe marked as unchanged in the future). So, idea is that in WebRTC we can process these special partial frames if someone produces them.\n\nNow I\u0027m getting confused. First, not all sinks can be expected to understand partial frames (e.g., local renderer). Which is why VideoSinkWants signalling seems reasonable.\n\nSecond, if it is a capturer feature, why expose partial frames at all to the pipeline downstream from the capturer?\n \n\u003e This optional structure should never be copied. It should be consumed at the very moment WebRTC receives the frame.\n\nVideoFrame can be passed by value, which implies copying. But maybe that\u0027s less common than I thought.",
+      "parentUuid": "1166f83c_ea76a195",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
