@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "c0987199_13d2e6b4",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "How about passing in the ParsedRtcEventLogs instead of passing in vector\u003cLoggedIceCandidatePairEvent\u003e? That way one could update the implementation to take RTP packets into account without having to update the calling code.\n\nAlso, maybe pass in the logs in the constructor instead?",
+      "range": {
+        "startLine": 22,
+        "startChar": 28,
+        "endLine": 22,
+        "endChar": 39
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "027078c0_84da18cb",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "This function seems to compute to essentially the same thing as BuildIceTransactions. If that function wasn\u0027t part of the MultiLogAnalyzer class, we could just reuse it here.",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 37
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33132ff5_18856a13",
         "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
         "patchSetId": 3
@@ -13,6 +59,24 @@
       "writtenOn": "2019-01-30T08:46:59Z",
       "side": 1,
       "message": "abs(a - b)",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "986e2869_868b452e",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "What\u0027s the reason for not computing std::abs(a - b)? (Possibly even inlined where it is used.)\n\nOr was your comment a suggestion that this should be changed?",
+      "parentUuid": "33132ff5_18856a13",
       "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +117,75 @@
     },
     {
       "key": {
+        "uuid": "38ffb946_397ede86",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "If this isn\u0027t critical, maybe it could be postponed for a separate CL? It seems it would also eliminate some other code like the AbsDiff function.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 60
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "173466bb_a4b8b848",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "It\u0027s generally unclear what the units are. One common option is to use a suffix like _ms or _us. Another is to use the Timestamp class where the accessors specify which unit it is measured in.",
+      "range": {
+        "startLine": 56,
+        "startChar": 43,
+        "endLine": 56,
+        "endChar": 53
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81467a6c_42510b35",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "Is this equivalent to offsets_.size()?",
+      "range": {
+        "startLine": 68,
+        "startChar": 10,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d781394_f5dbd4dd",
         "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator_unittest.cc",
         "patchSetId": 3
@@ -64,6 +197,29 @@
       "writtenOn": "2019-01-30T08:46:59Z",
       "side": 1,
       "message": "I think this comment is obsolete.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a68c969_6a442fc6",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "nit: even",
+      "range": {
+        "startLine": 179,
+        "startChar": 57,
+        "endLine": 179,
+        "endChar": 58
+      },
       "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -87,6 +243,24 @@
     },
     {
       "key": {
+        "uuid": "70fe3265_aa5899d4",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "I agree; I prefer this approach.",
+      "parentUuid": "20f5b268_9f2c2fe0",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5254d83e_6230112d",
         "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.cc",
         "patchSetId": 3
@@ -98,6 +272,167 @@
       "writtenOn": "2019-01-30T08:46:59Z",
       "side": 1,
       "message": "These are intended to be used for the SuggestedXAxis, and graphs are currently all in the first log\u0027s timeline.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96724095_54040756",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "Doesn\u0027t BuildIceTransactions give you all the information you need, i.e. the check send, check receive, response send and response receive times? Maybe I miss something?",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 68
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b91dbb3d_775c97ee",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "The margin sizes could be part of a CommonConfigs struct.",
+      "range": {
+        "startLine": 334,
+        "startChar": 28,
+        "endLine": 334,
+        "endChar": 32
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92973858_919c9261",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "The SetSuggested functions sets the axis limits based on the data in the time_series objects. Hence, it\u0027s meant to be called after all points and time series have been added.",
+      "range": {
+        "startLine": 355,
+        "startChar": 8,
+        "endLine": 355,
+        "endChar": 25
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7d71193_3d2e38ef",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "Microsecond resolution is deprecated. Please use log_time_ms instead.",
+      "range": {
+        "startLine": 29,
+        "startChar": 23,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73afae06_3ad4821e",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "SourcedIceEvent? IceEventWithSourceId?",
+      "range": {
+        "startLine": 66,
+        "startChar": 7,
+        "endLine": 66,
+        "endChar": 19
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4741e67a_f707d885",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "Doesn\u0027t SetSuggestedXAxis() already do the same thing?",
+      "range": {
+        "startLine": 76,
+        "startChar": 6,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5594245a_4f435a41",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "I think it would be cleaner if the struct didn\u0027t do any magic in the constructor, but rather let the user set individual fields. This would support parameters that can\u0027t be computed from the logs, such as window sizes for moving averages.\n\nE.g\nCommonConfig config;\nconfig.first_timestamp \u003d log1.first_timestamp();\nconfig.clock_offset \u003d ClockOffsetCalculator(log1, log2).CalculateMean();\netc.",
+      "range": {
+        "startLine": 88,
+        "startChar": 7,
+        "endLine": 88,
+        "endChar": 34
+      },
       "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -138,6 +473,47 @@
     },
     {
       "key": {
+        "uuid": "81dde614_7e8e4f4f",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "I agree. The problem we have with the current EventLogAnalyzer is that the very broad name has accumulated a bunch of mostly independent functions. Since the analyzer a class, all member functions should be in the same file, which makes it hard to navigate. Breaking up the MultiEventLogAnalyzer into more narrow components will avoid getting the same problem here.\n\nYou might want to consider whether a class is useful in the first place, or whether separate functions with a common Config object would be cleaner.",
+      "parentUuid": "a9b01da2_db92e346",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69d2d1e9_766aa96f",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "nit: We generally use size_t over std::size_t.",
+      "range": {
+        "startLine": 145,
+        "startChar": 23,
+        "endLine": 145,
+        "endChar": 34
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9be8c902_2b783dd5",
         "filename": "rtc_tools/event_log_visualizer/multilog_analyzer_unittest.cc",
         "patchSetId": 3
@@ -149,6 +525,24 @@
       "writtenOn": "2019-01-30T08:46:59Z",
       "side": 1,
       "message": "This gives really spammy output but I\u0027m not sure of a built-in way to do approximate comparison on a vector of floats.\nIt might be worth it to give the class a way to output int timestamps to get around the float comparison issue here.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1caad936_0005ea48",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "It\u0027s only spammy if there is a bug, right? I\u0027m ok with this code.",
+      "parentUuid": "9be8c902_2b783dd5",
       "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true

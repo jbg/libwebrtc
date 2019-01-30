@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0be6afc2_414a0321",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-30T17:17:04Z",
+      "side": 1,
+      "message": "This seems a bit confusing given that we already have a Timestamp class.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 17
+      },
+      "revId": "5b4106df03923ee4d240f1f17cf01d93aa0f43a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "02dc4396_d28e73a5",
         "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
         "patchSetId": 2
