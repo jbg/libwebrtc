@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61c78e74_1879358e",
+        "filename": "api/video/i420_buffer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T14:42:14Z",
+      "side": 1,
+      "message": "As discussed offline, if the typical user of this metod needs to duplicate checks like these (because they don\u0027t want to crash on invalid inputs), it would make sense to add a return value and to do all useful validity checks here. But that\u0027s for some other cl.",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 55
+      },
+      "revId": "8ac244cf9943b635d92272a3aa06a51d449a7192",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8701445_628fa241",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T14:42:14Z",
+      "side": 1,
+      "message": "Please document.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 43
+      },
+      "revId": "8ac244cf9943b635d92272a3aa06a51d449a7192",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
