@@ -267,6 +267,11 @@ void JavaMapBuilder::put(const JavaRef<jobject>& key,
   JNI_Map::Java_Map_put(env_, j_map_, key, value);
 }
 
+JavaIntArrayWritableRef NewJavaIntArray(JNIEnv* env, size_t size) {
+  return JavaIntArrayWritableRef(
+      env, ScopedJavaLocalRef<jintArray>(env, env->NewIntArray(size)));
+}
+
 jlong NativeToJavaPointer(void* ptr) {
   static_assert(sizeof(intptr_t) <= sizeof(jlong),
                 "Time to rethink the use of jlongs");

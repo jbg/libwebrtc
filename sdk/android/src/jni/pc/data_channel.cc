@@ -146,10 +146,10 @@ static jboolean JNI_DataChannel_Send(JNIEnv* jni,
                                      const JavaParamRef<jobject>& j_dc,
                                      const JavaParamRef<jbyteArray>& data,
                                      jboolean binary) {
-  jbyte* bytes = jni->GetByteArrayElements(data.obj(), nullptr);
+  JavaByteArrayReadableRef readable_data(jni, data);
   bool ret = ExtractNativeDC(jni, j_dc)->Send(DataBuffer(
-      rtc::CopyOnWriteBuffer(bytes, jni->GetArrayLength(data.obj())), binary));
-  jni->ReleaseByteArrayElements(data.obj(), bytes, JNI_ABORT);
+      rtc::CopyOnWriteBuffer(readable_data.data(), readable_data.size()),
+      binary));
   return ret;
 }
 
