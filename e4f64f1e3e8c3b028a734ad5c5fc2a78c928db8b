@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "75555751_0dd490c7",
+        "filename": "test/scenario/network/network_emulation_manager.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-30T14:10:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ef3e54c_21f8f2aa",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 2
+      },
+      "revId": "e4f64f1e3e8c3b028a734ad5c5fc2a78c928db8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61708187_dbbaae27",
         "filename": "test/scenario/network/network_emulation_manager.cc",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a879a3f2_7c0495c8",
+        "filename": "test/scenario/network/network_emulation_manager.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-30T14:10:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61708187_dbbaae27",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 45
+      },
+      "revId": "e4f64f1e3e8c3b028a734ad5c5fc2a78c928db8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de073191_fb849593",
         "filename": "test/scenario/network/network_emulation_manager.h",
         "patchSetId": 5
@@ -68,6 +116,30 @@
       "revId": "e4f64f1e3e8c3b028a734ad5c5fc2a78c928db8b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d75d1798_0feea199",
+        "filename": "test/scenario/network/network_emulation_manager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-30T14:10:48Z",
+      "side": 1,
+      "message": "I though about rerouting, but EmulatedNetworkNode has its own lock for setting and removing route, so yep, we can remove this one.",
+      "parentUuid": "de073191_fb849593",
+      "range": {
+        "startLine": 66,
+        "startChar": 43,
+        "endLine": 66,
+        "endChar": 64
+      },
+      "revId": "e4f64f1e3e8c3b028a734ad5c5fc2a78c928db8b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
