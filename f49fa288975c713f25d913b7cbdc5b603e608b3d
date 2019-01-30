@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8f7b1c3a_6d0bc89d",
+        "filename": "api/DEPS",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34516d31_78fc364e",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88c5124d_132a30bd",
         "filename": "api/ice_transport_factory.cc",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf282272_63541e17",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88c5124d_132a30bd",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0b75911c_6768dd97",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "Out of scope for this CL, but should be clarified.\nThe code that this is going to replace is running on the signaling thread in the blink layer.",
+      "parentUuid": "5849045a_d8873d4a",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7b3705e_b923a50a",
         "filename": "api/ice_transport_factory.cc",
         "patchSetId": 8
@@ -67,6 +121,24 @@
       "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d72a4488_224efc82",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7b3705e_b923a50a",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "86acbde6_4c59672f",
+        "filename": "api/ice_transport_factory.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "Added a check in the destructor, and a statement in the .h file that it had to be created, accessed and destroyed on the thread that created it.",
+      "parentUuid": "b4f22812_97e35bd7",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a10604e_fd7bd6cc",
         "filename": "api/ice_transport_factory.h",
         "patchSetId": 8
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "d620a08f_4795a7f6",
+        "filename": "pc/dtls_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d1e64ca_e76d95c3",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d049c67_7dcd7847",
         "filename": "pc/ice_transport.cc",
         "patchSetId": 8
@@ -152,6 +260,24 @@
       "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebc7e91b_c459536c",
+        "filename": "pc/ice_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d049c67_7dcd7847",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -206,6 +332,24 @@
     },
     {
       "key": {
+        "uuid": "51802a2b_88715d8b",
+        "filename": "pc/ice_transport.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de8195b1_35f36fd9",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cc2c682b_51ce8da3",
         "filename": "pc/ice_transport_unittest.cc",
         "patchSetId": 8
@@ -217,6 +361,24 @@
       "writtenOn": "2019-01-25T10:18:57Z",
       "side": 1,
       "message": "Add a test that ensures thread-safety across threads, particularly what happens if the last reference is dropped on another thread representing the main thread.",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c34bf113_5d61ec68",
+        "filename": "pc/ice_transport_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-01-30T13:18:58Z",
+      "side": 1,
+      "message": "I think I\u0027ll skip this for this iteration, since the first usage I am going to use this for is single-threaded (the blink ICE transport proxy host).",
+      "parentUuid": "cc2c682b_51ce8da3",
       "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
