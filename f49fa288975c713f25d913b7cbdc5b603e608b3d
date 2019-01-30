@@ -382,6 +382,24 @@
       "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "290f4b3f_4b3ac9f1",
+        "filename": "pc/ice_transport_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-01-30T15:39:34Z",
+      "side": 1,
+      "message": "OK I won\u0027t block this CL then, and I realize PostTask doesn\u0027t work in webrtc.\n\nI have an idea about a helper method that would allow you to do the equivalent of PostTask, I might write it up so that we can have destructor traits and multi-thread tests in webrtc without hassle.",
+      "parentUuid": "c34bf113_5d61ec68",
+      "revId": "f49fa288975c713f25d913b7cbdc5b603e608b3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
