@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9a1b8fa1_3c8853ae",
+        "filename": "api/video/i420_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T11:03:55Z",
+      "side": 1,
+      "message": "If it\u0027s a special case only handled with partial screen capture, can\u0027t you just as well leave video_frame_buffer as nullptr? Or use some special subclass of VideoFrameBuffer?",
+      "parentUuid": "c1e3df34_b3ac0554",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ede6b7b6_77992a5a",
         "filename": "api/video/video_frame.h",
         "patchSetId": 1
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "This will be used by encoder to skip encoding unchanged picture if it has already achieved steady state. This will help to reduce used bandwidth and CPU in high fps mode and achieve variable frame rate.\n\nRemoved the negation here.",
       "parentUuid": "1eccf30c_c0053945",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 64
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a7224f1_2bb56b09",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T11:03:55Z",
+      "side": 1,
+      "message": "If it\u0027s used together with partial frame info, it seems equivalent to passing a partial frame that is empty.\n\nAnd for the general case, it sounds like a useful feature, but I\u0027d much prefer if we can do it without passing fake frames down the pipeline. E.g., let VideoStreamEncoder pass additional copies of the latest frame to the encoder if (i) qp values are low, and (ii) no new frame arrives within some configured time limit.\n\nI think it will ease review to implement this feature separately from the support for partial frames. (Splitting by feature is more useful than splitting by file, in  my experience).",
+      "parentUuid": "ba670516_0a5b4f02",
       "range": {
         "startLine": 155,
         "startChar": 0,
