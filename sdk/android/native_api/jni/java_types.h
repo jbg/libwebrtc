@@ -17,9 +17,9 @@
 #ifndef SDK_ANDROID_NATIVE_API_JNI_JAVA_TYPES_H_
 #define SDK_ANDROID_NATIVE_API_JNI_JAVA_TYPES_H_
 
-#include <jni.h>
 #include <map>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "absl/types/optional.h"
@@ -274,6 +274,138 @@ class JavaMapBuilder {
   ScopedJavaLocalRef<jobject> j_map_;
 };
 
+// Helper. Do not use directly.
+template <typename CType, typename JArrayType, typename JArrayAccessor>
+class JavaArrayBaseRef {
+ private:
+  typedef JavaArrayBaseRef<CType, JArrayType, JArrayAccessor> SelfType;
+
+ protected:
+  JavaArrayBaseRef(JNIEnv* env, const JavaRef<JArrayType>& array)
+      : env_(env), array_(env, array), pointer_(accessor_.get(env, array)) {}
+  JavaArrayBaseRef(const SelfType&) = delete;  // NOLINT(runtime/explicit)
+  JavaArrayBaseRef(SelfType&& other) {         // NOLINT(runtime/explicit)
+    std::swap(accessor_, other.accessor_);
+    std::swap(env_, other.env_);
+    std::swap(array_, other.array_);
+    std::swap(pointer_, other.pointer_);
+  }
+  ~JavaArrayBaseRef() = default;
+
+  JavaArrayBaseRef<CType, JArrayType, JArrayAccessor>& operator=(
+      const SelfType& other) = delete;
+  JavaArrayBaseRef<CType, JArrayType, JArrayAccessor>& operator=(
+      SelfType&& other) {
+    std::swap(accessor_, other.accessor_);
+    std::swap(env_, other.env_);
+    std::swap(array_, other.array_);
+    std::swap(pointer_, other.pointer_);
+    return *this;
+  }
+
+  JArrayAccessor accessor_;
+  JNIEnv* env_;
+  ScopedJavaLocalRef<JArrayType> array_;
+  CType* pointer_;
+
+ public:
+  // Returns the underlying Java array.
+  const ScopedJavaLocalRef<JArrayType>& jarray() { return array_; }
+
+  size_t size() {
+    return pointer_ == nullptr ? 0 : env_->GetArrayLength(array_.obj());
+  }
+};
+
+// Helpers for Java<Primitive>ArrayWritableRef types. Use those instead of
+// accessing this directly.
+template <typename CType, typename JArrayType, typename JArrayAccessor>
+class JavaArrayWritableRef
+    : public JavaArrayBaseRef<CType, JArrayType, JArrayAccessor> {
+ private:
+  typedef JavaArrayWritableRef<CType, JArrayType, JArrayAccessor> SelfType;
+  typedef JavaArrayBaseRef<CType, JArrayType, JArrayAccessor> BaseType;
+
+ public:
+  JavaArrayWritableRef(JNIEnv* env, const JavaRef<JArrayType>& array)
+      : BaseType(env, array) {}
+  JavaArrayWritableRef(const SelfType&) = delete;  // NOLINT(runtime/explicit)
+  JavaArrayWritableRef(SelfType&&) = default;      // NOLINT(runtime/explicit)
+
+  ~JavaArrayWritableRef() {
+    if (this->pointer_ != nullptr) {
+      this->accessor_.release(this->env_, this->array_, this->pointer_,
+                              /*mode=*/0);
+    }
+  }
+
+  // Can be used to access/modify array contents. Please note that the changes
+  // are not committed until the object is destroyed.
+  CType& operator[](size_t i) { return this->pointer_[i]; }
+
+  // Returns a pointer to the underlying data.
+  CType* data() { return this->pointer_; }
+};
+
+// Helpers for Java<Primitive>ArrayReadableRef types. Use those instead of
+// accessing this directly.
+template <typename CType, typename JArrayType, typename JArrayAccessor>
+class JavaArrayReadableRef
+    : public JavaArrayBaseRef<CType, JArrayType, JArrayAccessor> {
+ private:
+  typedef JavaArrayReadableRef<CType, JArrayType, JArrayAccessor> SelfType;
+  typedef JavaArrayBaseRef<CType, JArrayType, JArrayAccessor> BaseType;
+
+ public:
+  JavaArrayReadableRef(JNIEnv* env, const JavaRef<JArrayType>& array)
+      : BaseType(env, array) {}
+  JavaArrayReadableRef(const SelfType&) = delete;  // NOLINT(runtime/explicit)
+  JavaArrayReadableRef(SelfType&&) = default;      // NOLINT(runtime/explicit)
+
+  ~JavaArrayReadableRef() {
+    if (this->pointer_ != nullptr) {
+      this->accessor_.release(this->env_, this->array_, this->pointer_,
+                              JNI_ABORT);
+    }
+  }
+
+  // Can be used to access array contents.
+  const CType& operator[](size_t i) { return this->pointer_[i]; }
+
+  // Returns a pointer to the underlying data.
+  const CType* data() { return this->pointer_; }
+};
+
+// Helper. Do not use directly.
+class JavaByteArrayAccessor {
+ public:
+  jbyte* get(JNIEnv* env, const JavaRef<jbyteArray>& array) {
+    return env->GetByteArrayElements(array.obj(), /*isCopy=*/nullptr);
+  }
+
+  void release(JNIEnv* env,
+               const JavaRef<jbyteArray>& array,
+               jbyte* pointer,
+               int mode) {
+    env->ReleaseByteArrayElements(array.obj(), pointer, mode);
+  }
+};
+
+// Helper. Do not use directly.
+class JavaIntArrayAccessor {
+ public:
+  jint* get(JNIEnv* env, const JavaRef<jintArray>& array) {
+    return env->GetIntArrayElements(array.obj(), /*isCopy=*/nullptr);
+  }
+
+  void release(JNIEnv* env,
+               const JavaRef<jintArray>& array,
+               jint* pointer,
+               int mode) {
+    env->ReleaseIntArrayElements(array.obj(), pointer, mode);
+  }
+};
+
 template <typename C, typename Convert>
 ScopedJavaLocalRef<jobject> NativeToJavaMap(JNIEnv* env,
                                             const C& container,
@@ -297,6 +429,18 @@ ScopedJavaLocalRef<jobject> NativeToJavaStringMap(JNIEnv* env,
   }
   return builder.GetJavaMap();
 }
+
+// Convenient helpers for zero-copy write access to Java arrays.
+typedef JavaArrayWritableRef<jint, jintArray, JavaIntArrayAccessor>
+    JavaIntArrayWritableRef;
+
+// Convenient helper for zero-copy read access to Java arrays
+typedef JavaArrayReadableRef<jbyte, jbyteArray, JavaByteArrayAccessor>
+    JavaByteArrayReadableRef;
+typedef JavaArrayReadableRef<jint, jintArray, JavaIntArrayAccessor>
+    JavaIntArrayReadableRef;
+
+JavaIntArrayWritableRef NewJavaIntArray(JNIEnv* env, size_t size);
 
 // Return a |jlong| that will correctly convert back to |ptr|.  This is needed
 // because the alternative (of silently passing a 32-bit pointer to a vararg

@@ -30,6 +30,26 @@ TEST(JavaTypesTest, TestJavaToNativeStringMap) {
   };
   EXPECT_EQ(expected, output);
 }
+
+TEST(JavaTypesTest, TestJavaArrayRef) {
+  JNIEnv* env = AttachCurrentThreadIfNeeded();
+
+  ScopedJavaLocalRef<jintArray> array;
+
+  {
+    JavaIntArrayWritableRef writable = NewJavaIntArray(env, 3);
+    writable[0] = 1;
+    writable[1] = 20;
+    writable[2] = 300;
+
+    array = writable.jarray();
+  }
+
+  JavaIntArrayReadableRef readable(env, array);
+  EXPECT_EQ(1, readable[0]);
+  EXPECT_EQ(20, readable[1]);
+  EXPECT_EQ(300, readable[2]);
+}
 }  // namespace
 }  // namespace test
 }  // namespace webrtc
