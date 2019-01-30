@@ -152,7 +152,7 @@ class RTC_EXPORT VideoFrame {
     return partial_frame_description_ ? &*partial_frame_description_ : nullptr;
   }
   void set_partial_frame_description(
-      const PartialFrameDescription& description) {
+      const absl::optional<PartialFrameDescription>& description) {
     partial_frame_description_ = description;
   }
 
@@ -160,7 +160,7 @@ class RTC_EXPORT VideoFrame {
       bool cache_buffer_for_partial_updates) {
     cache_buffer_for_partial_updates_ = cache_buffer_for_partial_updates;
   }
-  bool cache_buffer_for_partial_updates() {
+  bool cache_buffer_for_partial_updates() const {
     return cache_buffer_for_partial_updates_;
   }
 
