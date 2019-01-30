@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57a79ce6_c9fa41c2",
+        "filename": "test/scenario/network/network_emulation_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-30T10:21:45Z",
+      "side": 1,
+      "message": "Use RepeatingTaskHandle. That way you\u0027ll get a stop function for free and you don\u0027t have to reallocate the task every iteration. Also, it compensates for delays when reposting..",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 59
+      },
+      "revId": "ad003ca8d0283e8796dda28974041543075a0140",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
