@@ -93,6 +93,30 @@
       "revId": "8ac244cf9943b635d92272a3aa06a51d449a7192",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a43e009_0c14ddfc",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T14:57:26Z",
+      "side": 1,
+      "message": "Sorry, thought I was looking at the VideoFrame class. The docs of the corresponding VideoFrame member is sufficient.",
+      "parentUuid": "014571d9_49a674cb",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 43
+      },
+      "revId": "8ac244cf9943b635d92272a3aa06a51d449a7192",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
