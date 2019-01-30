@@ -19,6 +19,7 @@
 #include "api/video/video_source_interface.h"
 #include "rtc_base/time_utils.h"
 #include "test/layer_filtering_transport.h"
+#include "test/partial_frame_compressor.h"
 #include "test/rtp_file_writer.h"
 #include "test/statistics.h"
 
@@ -42,7 +43,8 @@ class VideoAnalyzer : public PacketReceiver,
                 int selected_tl,
                 bool is_quick_test_enabled,
                 Clock* clock,
-                std::string rtp_dump_name);
+                std::string rtp_dump_name,
+                bool partial_updates);
   ~VideoAnalyzer();
 
   virtual void SetReceiver(PacketReceiver* receiver);
@@ -136,7 +138,9 @@ class VideoAnalyzer : public PacketReceiver,
   class CapturedFrameForwarder : public rtc::VideoSinkInterface<VideoFrame>,
                                  public rtc::VideoSourceInterface<VideoFrame> {
    public:
-    explicit CapturedFrameForwarder(VideoAnalyzer* analyzer, Clock* clock);
+    CapturedFrameForwarder(VideoAnalyzer* analyzer,
+                           Clock* clock,
+                           bool partial_updates);
     void SetSource(rtc::VideoSourceInterface<VideoFrame>* video_source);
 
    private:
@@ -155,6 +159,7 @@ class VideoAnalyzer : public PacketReceiver,
         RTC_GUARDED_BY(crit_);
     VideoSourceInterface<VideoFrame>* video_source_;
     Clock* clock_;
+    std::unique_ptr<PartialFrameCompressor> partial_frames_compressor_;
   };
 
   struct FrameWithPsnr {
