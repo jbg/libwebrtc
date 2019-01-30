@@ -46,6 +46,30 @@
       "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bb5ac34_a6d95e0e",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T12:26:20Z",
+      "side": 1,
+      "message": "I\u0027m thinking that it\u0027s not worth 8 bytes in this struct, just to detecting bad usage.\n\nDownstream code can just check that the partial frame fits inside the previous frame (it has to do that anyway), and then just paste it at the given position. It\u0027s then the responsibility of the frame source to produce a consistent stream of full and partial frames.\n\nI mean, there are lots of ways a camera or capturer could misbehave, resulting in garbled data; it\u0027s not clear to me why we\u0027d need special handling of this particular way it could possibly misbehave.",
+      "parentUuid": "22abe696_9a940172",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

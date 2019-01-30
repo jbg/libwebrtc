@@ -239,6 +239,30 @@
     },
     {
       "key": {
+        "uuid": "311c2904_53f78a59",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T12:26:20Z",
+      "side": 1,
+      "message": "Please drop this part of the change for now. We\u0027ll get back to it with the cl that adds that optimization, and them we can discuss the options. My feeling is that the feature belongs close to the encoder, instead of having one half close to the capturer and the other at the encoder, and having them coordinate with metadata passed throughout the pipeline.",
+      "parentUuid": "bd062f6c_ce33d401",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 64
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d7d35ce_aabfc34f",
         "filename": "api/video/video_frame.h",
         "patchSetId": 1
@@ -298,6 +322,30 @@
       "side": 1,
       "message": "Ack? Or do i need to do something else here?",
       "parentUuid": "75f94a74_2d073853",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 75
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cdee743_056385e9",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T12:26:20Z",
+      "side": 1,
+      "message": "For PartialFrameDecompressor::ApplyPartialUpdate on the other cl, there are a couple of options, e.g., returning the new buffer. But I don\u0027t think we should go into those details in the review of this cl.\n\nIn the future, I\u0027d prefer that simple methods like this are added together with the smallest new feature that makes use of them. For now, feel free to keep it, if you\u0027re confident that it will really be needed.",
+      "parentUuid": "62d58386_fcf9afee",
       "range": {
         "startLine": 165,
         "startChar": 0,
