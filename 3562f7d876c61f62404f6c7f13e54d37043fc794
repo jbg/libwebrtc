@@ -94,6 +94,30 @@
       "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f9a7daf_263c56a2",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T13:16:34Z",
+      "side": 1,
+      "message": "\u003e Sorry,I didn\u0027t mention the main reason for these fields. We need to somehow notify the webrtc that the frame is the full frame.\n\u003e \n\u003e Idea is that ParitalDescription is an optional field of VideoFrame and normally it\u0027s not set at all and nothing is changed in how WebRTC behaves. But if the field is present, webrtc will cache the last frame to support partial updates and perform them, if needed. This is a necessary and heavy operation, so we want to avoid it in case partial capture is not desired. \n\nThanks, that makes it a lot clearer. I don\u0027t quite like this way of signalling, though. I\u0027m thinking of alternatives.\n\nFirst, it\u0027s a bit backwards to have the video source tell the encoder to enable a feature. It would fit better with other coordination between sinks and sources to configure the encoder (VideoStreamEncoder level or close to that) to enable support for partial frames, and then let it signal via VideoSinkWants that it is willing to process partial frames.\n  \n\u003e It can be just a bool flag, but 8 bytes is nothing compared to a whole uncompressed frame buffer, and it allows to check for possible errors in the capturer at the chrome side.\n\nIt\u0027s not really the allocation cost I\u0027m concerned with, but copying overhead. VideoFrameBuffer is large, and always passed by reference. While VideoFrame, on the other hand, is copied in a lot of places.\n\nAs for the cost of the cache of the last frame, it might well be workable to always keep a reference to the last frame buffer (frame buffers are reference counted, so no copy needed, it only extends the lifetime of the buffer a little. And we\u0027d probably can\u0027t do it for texture frames (see handling of pending_frame_ in VideoStreamEncoder)).\n\nOnly when we see the first partial frame, we need to allocate a copy of the last frame to use as a canvas.\n\nThe same reference to last frame could be reused to implement the feature related to the |changed()| flag.",
+      "parentUuid": "bacc977c_dc6585b4",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
