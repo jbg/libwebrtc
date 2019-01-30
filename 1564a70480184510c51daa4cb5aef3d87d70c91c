@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32fe9e3a_261c90a3",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 7796
+      },
+      "writtenOn": "2019-01-30T09:08:53Z",
+      "side": 0,
+      "message": "Looks like we have to do the same for the internal cr-buildbucket.cfg?",
+      "revId": "1564a70480184510c51daa4cb5aef3d87d70c91c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
