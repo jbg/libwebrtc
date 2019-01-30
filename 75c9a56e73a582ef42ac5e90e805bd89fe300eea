@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a542c062_637e11f6",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-01-30T13:02:28Z",
+      "side": 1,
+      "message": "nit: spelling in this comment",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8425b5c5_ba0310ce",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-01-30T13:02:28Z",
+      "side": 1,
+      "message": "Do we need to take overhead_per_packet_lock_ here? If OnOverheadChanged is called on a different thread there may be a risk of a race if callbacks start happening immediately once RtpRtcp is created.",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7d669b1_79a9c807",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-01-30T13:02:28Z",
+      "side": 1,
+      "message": "Add thread checker to document which thread this is called on",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "865394b4_e8e75de0",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-01-30T13:02:28Z",
+      "side": 1,
+      "message": "Remove - the pointer is guaranteed to be !\u003d nullptr in CallEncoder",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62e28544_3ef6bfcc",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-01-30T13:02:28Z",
+      "side": 1,
+      "message": "It\u0027d be great if the CS could only be taken in functions which directly access the protected variables. Perhaps move the CS into GetPerPacketOverheadBytes()?",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7228940b_d8384185",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-01-30T13:02:28Z",
+      "side": 1,
+      "message": "I think I\u0027d rather:\n\n    CallEncoder(stream-\u003echannel_send_, [\u0026](AudioEncoder* encoder) {\n      encoder-\u003eOnReceivedOverhead(stream-\u003eGetPerPacketOverheadBytes());\n    });\n\nand move the CS into GetPerPacketOverheadBytes(). Also remove the TestOnly variant. But I see then we\u0027d either take the CS two times in the update functions, or recursively. Not sure the best way, but hopefully there\u0027s a nicer way than taking the CS here.",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "def3e5fb_4c665bb4",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-01-30T13:02:28Z",
+      "side": 1,
+      "message": "Remove the TODO",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
