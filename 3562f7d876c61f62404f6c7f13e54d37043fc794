@@ -166,6 +166,30 @@
       "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3010ccf7_b51a5fff",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-30T14:30:13Z",
+      "side": 1,
+      "message": "Removed full_widht and full_height.",
+      "parentUuid": "12b8417f_7fa96ec9",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "3562f7d876c61f62404f6c7f13e54d37043fc794",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
