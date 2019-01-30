@@ -208,5 +208,28 @@ TEST_P(TaskQueueTest, PostALot) {
   EXPECT_EQ(tasks_cleaned_up, kTaskCount);
 }
 
+// Test posting two tasks, that has shared state unprotected by lock.
+// TaskQueue should guarantee memory read-write order, so second task
+// always should see changes, that were made by first task.
+TEST_P(TaskQueueTest, PostTwoWithSharedUnprotectedState) {
+  struct SharedState {
+    // First task will set this value to 1 and second will assert it.
+    int state = 0;
+  } state;
+
+  auto queue = CreateTaskQueue(GetParam(), "PostTwoWithSharedUnprotectedState");
+  rtc::Event done;
+  queue->PostTask(rtc::NewClosure([&state, &queue, &done] {
+    // Post tasks from queue to guarantee, that 1st task won't be
+    // executed before the second one will be posted.
+    queue->PostTask(rtc::NewClosure([&state] { state.state = 1; }));
+    queue->PostTask(rtc::NewClosure([&state, &done] {
+      EXPECT_EQ(state.state, 1);
+      done.Set();
+    }));
+  }));
+  EXPECT_TRUE(done.Wait(1000));
+}
+
 }  // namespace
 }  // namespace webrtc
