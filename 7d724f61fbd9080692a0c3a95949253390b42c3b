@@ -222,6 +222,24 @@
     },
     {
       "key": {
+        "uuid": "a93e5ab9_fb5da390",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-30T01:35:12Z",
+      "side": 1,
+      "message": "OK, went with the simpler version suggested by Fredrik for the time being. I agree that between having Init() and out-of-place use of media_transport, the latter is probably less of a mess.\n\n- Added TODO to unify RTP and Media Transport approaches to audio overhead (i.e. both callbacks or both getters). We will have to do it anyway for RTP Media Transport implementation and it will improve this fix further.\n\n- Verified that RTP overhead is reported on packet sent, so we will not get observer callback during constructor (if we did we would probably crash anyway because at this time AudioSendStream is not fully initialized Channel is created inside AudioSendStream initializer list).\n\nThanks a lot for discussion and PTAL.",
+      "parentUuid": "ab4491ae_99d440aa",
+      "revId": "7d724f61fbd9080692a0c3a95949253390b42c3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a32d349d_c0b5966d",
         "filename": "audio/channel_send.cc",
         "patchSetId": 14
