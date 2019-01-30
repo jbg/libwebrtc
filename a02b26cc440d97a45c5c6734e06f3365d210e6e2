@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ba670516_0a5b4f02",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-30T10:05:22Z",
+      "side": 1,
+      "message": "This will be used by encoder to skip encoding unchanged picture if it has already achieved steady state. This will help to reduce used bandwidth and CPU in high fps mode and achieve variable frame rate.\n\nRemoved the negation here.",
+      "parentUuid": "1eccf30c_c0053945",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 64
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d7d35ce_aabfc34f",
         "filename": "api/video/video_frame.h",
         "patchSetId": 1
