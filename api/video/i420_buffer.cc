@@ -48,8 +48,8 @@ I420Buffer::I420Buffer(int width,
       data_(static_cast<uint8_t*>(
           AlignedMalloc(I420DataSize(height, stride_y, stride_u, stride_v),
                         kBufferAlignment))) {
-  RTC_DCHECK_GT(width, 0);
-  RTC_DCHECK_GT(height, 0);
+  RTC_DCHECK_GE(width, 0);
+  RTC_DCHECK_GE(height, 0);
   RTC_DCHECK_GE(stride_y, width);
   RTC_DCHECK_GE(stride_u, (width + 1) / 2);
   RTC_DCHECK_GE(stride_v, (width + 1) / 2);
@@ -231,14 +231,16 @@ void I420Buffer::PasteFrom(const I420BufferInterface& picture,
                            int offset_row) {
   RTC_CHECK_LE(picture.width() + offset_col, width());
   RTC_CHECK_LE(picture.height() + offset_row, height());
-  RTC_CHECK_GE(offset_col, 0);
-  RTC_CHECK_GE(offset_row, 0);
+  RTC_CHECK_GT(offset_col, 0);
+  RTC_CHECK_GT(offset_row, 0);
 
   // Pasted picture has to be aligned so subsumpled UV plane isn't corrupted.
   RTC_CHECK(offset_col % 2 == 0);
   RTC_CHECK(offset_row % 2 == 0);
-  RTC_CHECK(picture.width() % 2 == 0);
-  RTC_CHECK(picture.height() % 2 == 0);
+  RTC_CHECK(picture.width() % 2 == 0 ||
+            picture.width() + offset_col == width());
+  RTC_CHECK(picture.height() % 2 == 0 ||
+            picture.height() + offset_row == height());
 
   libyuv::CopyPlane(picture.DataY(), picture.StrideY(),
                     MutableDataY() + StrideY() * offset_row + offset_col,

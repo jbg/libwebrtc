@@ -25,6 +25,17 @@ namespace webrtc {
 
 class RTC_EXPORT VideoFrame {
  public:
+  // Describes a partial frame, which contains only a changed region compared
+  // to a previous frame.
+  struct PartialFrameDescription {
+    // Coordinates of top-left corner of the changed region in the full picture.
+    int offset_x;
+    int offset_y;
+    // Resolution of the full picture, which current one is a changed part of.
+    int full_width;
+    int full_height;
+  };
+
   // Preferred way of building VideoFrame objects.
   class Builder {
    public:
@@ -42,6 +53,8 @@ class RTC_EXPORT VideoFrame {
     Builder& set_color_space(const ColorSpace& color_space);
     Builder& set_color_space(const ColorSpace* color_space);
     Builder& set_id(uint16_t id);
+    Builder& set_partial_frame_description(
+        const PartialFrameDescription& description);
 
    private:
     uint16_t id_ = 0;
@@ -51,6 +64,7 @@ class RTC_EXPORT VideoFrame {
     int64_t ntp_time_ms_ = 0;
     VideoRotation rotation_ = kVideoRotation_0;
     absl::optional<ColorSpace> color_space_;
+    absl::optional<PartialFrameDescription> partial_frame_description_;
   };
 
   // To be deprecated. Migrate all use to Builder.
@@ -134,6 +148,17 @@ class RTC_EXPORT VideoFrame {
         color_space ? absl::make_optional(*color_space) : absl::nullopt;
   }
 
+  const PartialFrameDescription* partial_frame_description() const {
+    return partial_frame_description_ ? &*partial_frame_description_ : nullptr;
+  }
+  void set_partial_frame_description(
+      const PartialFrameDescription& description) {
+    partial_frame_description_ = description;
+  }
+
+  bool changed() { return changed_; }
+  void set_changed(bool changed) { changed_ = changed; }
+
   // Get render time in milliseconds.
   // TODO(nisse): Deprecated. Migrate all users to timestamp_us().
   int64_t render_time_ms() const;
@@ -141,6 +166,7 @@ class RTC_EXPORT VideoFrame {
   // Return the underlying buffer. Never nullptr for a properly
   // initialized VideoFrame.
   rtc::scoped_refptr<webrtc::VideoFrameBuffer> video_frame_buffer() const;
+  void set_video_frame_buffer(rtc::scoped_refptr<VideoFrameBuffer> buffer);
 
   // TODO(nisse): Deprecated.
   // Return true if the frame is stored in a texture.
@@ -149,13 +175,15 @@ class RTC_EXPORT VideoFrame {
   }
 
  private:
-  VideoFrame(uint16_t id,
-             const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-             int64_t timestamp_us,
-             uint32_t timestamp_rtp,
-             int64_t ntp_time_ms,
-             VideoRotation rotation,
-             const absl::optional<ColorSpace>& color_space);
+  VideoFrame(
+      uint16_t id,
+      const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
+      int64_t timestamp_us,
+      uint32_t timestamp_rtp,
+      int64_t ntp_time_ms,
+      VideoRotation rotation,
+      const absl::optional<ColorSpace>& color_space,
+      const absl::optional<PartialFrameDescription> partial_frame_description);
 
   uint16_t id_;
   // An opaque reference counted handle that stores the pixel data.
@@ -165,6 +193,10 @@ class RTC_EXPORT VideoFrame {
   int64_t timestamp_us_;
   VideoRotation rotation_;
   absl::optional<ColorSpace> color_space_;
+  absl::optional<PartialFrameDescription> partial_frame_description_;
+  // Set by WebRTC internally in partial screen capture mode.
+  // Indicates if the frame is different from the previous one.
+  bool changed_;
 };
 
 }  // namespace webrtc
