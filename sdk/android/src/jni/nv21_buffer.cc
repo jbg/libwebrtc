@@ -17,6 +17,7 @@
 #include "common_video/libyuv/include/webrtc_libyuv.h"
 #include "rtc_base/checks.h"
 #include "sdk/android/generated_video_jni/jni/NV21Buffer_jni.h"
+#include "sdk/android/native_api/jni/java_types.h"
 
 namespace webrtc {
 namespace jni {
@@ -42,10 +43,8 @@ static void JNI_NV21Buffer_CropAndScale(JNIEnv* jni,
   const int crop_chroma_x = crop_x / 2;
   const int crop_chroma_y = crop_y / 2;
 
-  jboolean was_copy;
-  jbyte* src_bytes = jni->GetByteArrayElements(j_src.obj(), &was_copy);
-  RTC_DCHECK(!was_copy);
-  uint8_t const* src_y = reinterpret_cast<uint8_t const*>(src_bytes);
+  JavaByteArrayReadableRef readable_src(jni, j_src);
+  uint8_t const* src_y = reinterpret_cast<uint8_t const*>(readable_src.data());
   uint8_t const* src_uv = src_y + src_height * src_stride_y;
 
   uint8_t* dst_y =
@@ -64,8 +63,6 @@ static void JNI_NV21Buffer_CropAndScale(JNIEnv* jni,
   scaler.NV12ToI420Scale(src_y, src_stride_y, src_uv, src_stride_uv, crop_width,
                          crop_height, dst_y, dst_stride_y, dst_v, dst_stride_v,
                          dst_u, dst_stride_u, scale_width, scale_height);
-
-  jni->ReleaseByteArrayElements(j_src.obj(), src_bytes, JNI_ABORT);
 }
 
 }  // namespace jni
