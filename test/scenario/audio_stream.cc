@@ -126,20 +126,30 @@ SendAudioStream::SendAudioStream(
             send_config.track_id,
             config.encoder.priority_rate->bps<uint32_t>()));
   }
-  send_stream_ = sender_->call_->CreateAudioSendStream(send_config);
+  sender_->task_runner_.Invoke([&] {
+    send_stream_ = sender_->call_->CreateAudioSendStream(send_config);
+  });
+
   if (field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")) {
     sender->call_->OnAudioTransportOverheadChanged(
-        sender_->transport_.packet_overhead().bytes());
+        sender_->transport_->packet_overhead().bytes());
   }
 }
 
 SendAudioStream::~SendAudioStream() {
-  sender_->call_->DestroyAudioSendStream(send_stream_);
+  sender_->task_runner_.Invoke(
+      [this] { sender_->call_->DestroyAudioSendStream(send_stream_); });
 }
 
 void SendAudioStream::Start() {
-  send_stream_->Start();
-  sender_->call_->SignalChannelNetworkState(MediaType::AUDIO, kNetworkUp);
+  sender_->task_runner_.Invoke([this] {
+    send_stream_->Start();
+    sender_->call_->SignalChannelNetworkState(MediaType::AUDIO, kNetworkUp);
+  });
+}
+
+void SendAudioStream::Stop() {
+  sender_->task_runner_.Invoke([this] { send_stream_->Stop(); });
 }
 
 void SendAudioStream::SetMuted(bool mute) {
@@ -178,15 +188,24 @@ ReceiveAudioStream::ReceiveAudioStream(
   recv_config.decoder_map = {
       {CallTest::kAudioSendPayloadType, {"opus", 48000, 2}}};
   recv_config.sync_group = config.render.sync_group;
-  receive_stream_ = receiver_->call_->CreateAudioReceiveStream(recv_config);
+  receiver_->task_runner_.Invoke([&] {
+    receive_stream_ = receiver_->call_->CreateAudioReceiveStream(recv_config);
+  });
 }
 ReceiveAudioStream::~ReceiveAudioStream() {
-  receiver_->call_->DestroyAudioReceiveStream(receive_stream_);
+  receiver_->task_runner_.Invoke(
+      [&] { receiver_->call_->DestroyAudioReceiveStream(receive_stream_); });
 }
 
 void ReceiveAudioStream::Start() {
-  receive_stream_->Start();
-  receiver_->call_->SignalChannelNetworkState(MediaType::AUDIO, kNetworkUp);
+  receiver_->task_runner_.Invoke([&] {
+    receive_stream_->Start();
+    receiver_->call_->SignalChannelNetworkState(MediaType::AUDIO, kNetworkUp);
+  });
+}
+
+void ReceiveAudioStream::Stop() {
+  receiver_->task_runner_.Invoke([&] { receive_stream_->Stop(); });
 }
 
 AudioStreamPair::~AudioStreamPair() = default;
@@ -198,12 +217,12 @@ AudioStreamPair::AudioStreamPair(
     rtc::scoped_refptr<AudioDecoderFactory> decoder_factory,
     AudioStreamConfig config)
     : config_(config),
-      send_stream_(sender, config, encoder_factory, &sender->transport_),
+      send_stream_(sender, config, encoder_factory, sender->transport_.get()),
       receive_stream_(receiver,
                       config,
                       &send_stream_,
                       decoder_factory,
-                      &receiver->transport_) {}
+                      receiver->transport_.get()) {}
 
 }  // namespace test
 }  // namespace webrtc

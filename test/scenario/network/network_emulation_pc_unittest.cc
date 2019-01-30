@@ -102,7 +102,7 @@ TEST(NetworkEmulationManagerPCTest, Run) {
   signaling_thread->Start();
 
   // Setup emulated network
-  NetworkEmulationManager network_manager(Clock::GetRealTimeClock());
+  NetworkEmulationManager network_manager;
 
   EmulatedNetworkNode* alice_node = network_manager.CreateEmulatedNode(
       absl::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig()));
@@ -156,8 +156,6 @@ TEST(NetworkEmulationManagerPCTest, Run) {
       absl::make_unique<PeerConnectionWrapper>(bob_pcf, bob_pc,
                                                std::move(bob_observer));
 
-  network_manager.Start();
-
   signaling_thread->Invoke<void>(RTC_FROM_HERE, [&]() {
     rtc::scoped_refptr<DataChannelInterface> channel =
         alice->CreateDataChannel("data");
@@ -195,8 +193,6 @@ TEST(NetworkEmulationManagerPCTest, Run) {
     alice.reset();
     bob.reset();
   });
-
-  network_manager.Stop();
 }
 
 }  // namespace test
