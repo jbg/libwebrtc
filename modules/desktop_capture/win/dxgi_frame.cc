@@ -38,11 +38,13 @@ bool DxgiFrame::Prepare(DesktopSize size, DesktopCapturer::SourceId source_id) {
   }
 
   if (!frame_) {
+    bool is_frame_data_zero_initialized = false;
     std::unique_ptr<DesktopFrame> frame;
     if (factory_) {
       frame = SharedMemoryDesktopFrame::Create(size, factory_);
     } else {
       frame.reset(new BasicDesktopFrame(size));
+      is_frame_data_zero_initialized = true;
     }
     if (!frame) {
       RTC_LOG(LS_WARNING) << "DxgiFrame cannot create a new DesktopFrame.";
@@ -54,7 +56,8 @@ bool DxgiFrame::Prepare(DesktopSize size, DesktopCapturer::SourceId source_id) {
     // http://crbug.com/708766.
     RTC_DCHECK_EQ(frame->stride(),
                   frame->size().width() * DesktopFrame::kBytesPerPixel);
-    memset(frame->data(), 0, frame->stride() * frame->size().height());
+    if (!is_frame_data_zero_initialized)
+      memset(frame->data(), 0, frame->stride() * frame->size().height());
 
     frame_ = SharedDesktopFrame::Wrap(std::move(frame));
   }
