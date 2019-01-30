@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bc5543c_af33612c",
+        "filename": "api/video/video_source_interface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T15:46:30Z",
+      "side": 1,
+      "message": "You can shorten to just partial_frames, so code will read\n\nwants.partial_frames \u003d true;\n\nCompare |black_frames| above. To make it useful, you\u0027d need to handle it in VideoBroadcaster::UpdateWants(). (This cl, or followup, as you like).",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "249b0bafef835a73116f40d77c876e1b25b10a5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
