@@ -429,8 +429,9 @@ ScopedJavaLocalRef<jobject> VideoEncoderWrapper::ToJavaBitrateAllocation(
       array_spatial_layer[temporal_i] =
           allocation.GetBitrate(spatial_i, temporal_i);
     }
+    // copy back the content and free the buffer
     jni->ReleaseIntArrayElements(j_array_spatial_layer.obj(),
-                                 array_spatial_layer, JNI_COMMIT);
+                                 array_spatial_layer, 0 /* mode */);
 
     jni->SetObjectArrayElement(j_allocation_array.obj(), spatial_i,
                                j_array_spatial_layer.obj());
