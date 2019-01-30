@@ -22,6 +22,30 @@
       "revId": "056b4e2b44ace53c7ad2ce411420251def45db34",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2a69911_71617d89",
+        "filename": "p2p/base/transport_description_factory_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-30T01:04:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4eaf2bd_67512bd3",
+      "range": {
+        "startLine": 123,
+        "startChar": 16,
+        "endLine": 123,
+        "endChar": 23
+      },
+      "revId": "056b4e2b44ace53c7ad2ce411420251def45db34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
