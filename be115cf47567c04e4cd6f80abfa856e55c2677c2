@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33132ff5_18856a13",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "abs(a - b)",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c81c6bb7_91adaa2d",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "The idea here is to find the min/max offsets that put the events in the right order, but I don\u0027t have it working for both events out of order in both directions yet.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7867e999_a587c76b",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "Make sure there is a test for this.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d781394_f5dbd4dd",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "I think this comment is obsolete.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20f5b268_9f2c2fe0",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "These changes subsume https://webrtc-review.googlesource.com/c/src/+/117461.\nI can pull them back in to that CL if necessary.\nI think this approach is better in retrospect.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5254d83e_6230112d",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "These are intended to be used for the SuggestedXAxis, and graphs are currently all in the first log\u0027s timeline.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07f21932_45434e4b",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "I first tried using some mocks instead, but some of the methods I needed are not virtual.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9b01da2_db92e346",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "This name is not very good, but I\u0027m not sure what is better. Maybe IceTransactionAnalyzer for the methods that use the IceTransaction object and CombinedEventLogAnalyzer for the other two?",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9be8c902_2b783dd5",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-30T08:46:59Z",
+      "side": 1,
+      "message": "This gives really spammy output but I\u0027m not sure of a built-in way to do approximate comparison on a vector of floats.\nIt might be worth it to give the class a way to output int timestamps to get around the float comparison issue here.",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
