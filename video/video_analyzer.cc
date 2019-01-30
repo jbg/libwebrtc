@@ -56,14 +56,15 @@ VideoAnalyzer::VideoAnalyzer(test::LayerFilteringTransport* transport,
                              int selected_tl,
                              bool is_quick_test_enabled,
                              Clock* clock,
-                             std::string rtp_dump_name)
+                             std::string rtp_dump_name,
+                             bool partial_updates)
     : transport_(transport),
       receiver_(nullptr),
       call_(nullptr),
       send_stream_(nullptr),
       receive_stream_(nullptr),
       audio_receive_stream_(nullptr),
-      captured_frame_forwarder_(this, clock),
+      captured_frame_forwarder_(this, clock, partial_updates),
       test_label_(test_label),
       graph_data_output_file_(graph_data_output_file),
       graph_title_(graph_title),
@@ -844,11 +845,15 @@ VideoAnalyzer::Sample::Sample(int dropped,
 
 VideoAnalyzer::CapturedFrameForwarder::CapturedFrameForwarder(
     VideoAnalyzer* analyzer,
-    Clock* clock)
+    Clock* clock,
+    bool partial_updates)
     : analyzer_(analyzer),
       send_stream_input_(nullptr),
       video_source_(nullptr),
-      clock_(clock) {}
+      clock_(clock) {
+  if (partial_updates)
+    partial_frames_compressor_.reset(new PartialFrameCompressor);
+}
 
 void VideoAnalyzer::CapturedFrameForwarder::SetSource(
     VideoSourceInterface<VideoFrame>* video_source) {
@@ -866,8 +871,11 @@ void VideoAnalyzer::CapturedFrameForwarder::OnFrame(
   copy.set_timestamp(copy.ntp_time_ms() * 90);
   analyzer_->AddCapturedFrameForComparison(copy);
   rtc::CritScope lock(&crit_);
-  if (send_stream_input_)
+  if (partial_frames_compressor_) {
+    partial_frames_compressor_->OnFrame(copy);
+  } else if (send_stream_input_) {
     send_stream_input_->OnFrame(copy);
+  }
 }
 
 void VideoAnalyzer::CapturedFrameForwarder::AddOrUpdateSink(
@@ -877,6 +885,9 @@ void VideoAnalyzer::CapturedFrameForwarder::AddOrUpdateSink(
     rtc::CritScope lock(&crit_);
     RTC_DCHECK(!send_stream_input_ || send_stream_input_ == sink);
     send_stream_input_ = sink;
+  }
+  if (partial_frames_compressor_) {
+    partial_frames_compressor_->AddOrUpdateSink(sink, wants);
   }
   if (video_source_) {
     video_source_->AddOrUpdateSink(this, wants);
@@ -888,6 +899,9 @@ void VideoAnalyzer::CapturedFrameForwarder::RemoveSink(
   rtc::CritScope lock(&crit_);
   RTC_DCHECK(sink == send_stream_input_);
   send_stream_input_ = nullptr;
+  if (partial_frames_compressor_) {
+    partial_frames_compressor_->RemoveSink(sink);
+  }
 }
 
 }  // namespace webrtc
