@@ -558,14 +558,15 @@ const std::vector<AudioCodec>& WebRtcVoiceEngine::recv_codecs() const {
 RtpCapabilities WebRtcVoiceEngine::GetCapabilities() const {
   RTC_DCHECK(signal_thread_checker_.CalledOnValidThread());
   RtpCapabilities capabilities;
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kAudioLevelUri,
-                           webrtc::RtpExtension::kAudioLevelDefaultId));
-  if (allocation_settings_.EnableTransportSequenceNumberExtension()) {
-    capabilities.header_extensions.push_back(webrtc::RtpExtension(
-        webrtc::RtpExtension::kTransportSequenceNumberUri,
-        webrtc::RtpExtension::kTransportSequenceNumberDefaultId));
-  }
+  // TODO: !!!
+  // capabilities.header_extensions.push_back(
+  //     webrtc::RtpExtension(webrtc::RtpExtension::kAudioLevelUri,
+  //                          webrtc::RtpExtension::kAudioLevelDefaultId));
+  // if (allocation_settings_.EnableTransportSequenceNumberExtension()) {
+  //   capabilities.header_extensions.push_back(webrtc::RtpExtension(
+  //       webrtc::RtpExtension::kTransportSequenceNumberUri,
+  //       webrtc::RtpExtension::kTransportSequenceNumberDefaultId));
+  // }
 
   return capabilities;
 }
