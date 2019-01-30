@@ -367,4 +367,24 @@ TEST(TaskQueueTest, PostALot) {
   EXPECT_EQ(kTaskCount, tasks_cleaned_up);
 }
 
+// Test posting two tasks, that has shared state unprotected by lock.
+// TaskQueue should guarantee memory read-write order, so second task
+// always should see changes, that were made by first task.
+TEST(TaskQueueTest, PostTwoWithSharedUnprotectedState) {
+  static const char kQueueName[] = "PostTwoWithSharedUnprotectedState";
+  TaskQueue queue(kQueueName);
+
+  class SharedState {
+   public:
+    // First task will set this value to 1 and second will assert it.
+    int state = 0;
+  } state;
+  queue.PostTask([&state, &queue] {
+    // We will post tasks from queue to guarantee, that 1st task won't be
+    // executed before we post the second one.
+    queue.PostTask([&state] { state.state = 1; });
+    queue.PostTask([&state] { EXPECT_EQ(state.state, 1); });
+  });
+}
+
 }  // namespace rtc
