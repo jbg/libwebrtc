@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d543fe4_19b14f05",
+        "filename": "modules/audio_processing/agc2/rnn_vad/common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-01-30T10:00:23Z",
+      "side": 1,
+      "message": "I think it\u0027s only used when computing tables (once) in BandAnalysisFft and SpectlarFeatures.",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 29
+      },
+      "revId": "d43f092fbff07123c80721ad31c70886a30f6ec9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
