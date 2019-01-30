@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34b80135_305efbb6",
+        "filename": "api/video/i420_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T09:04:29Z",
+      "side": 1,
+      "message": "Why do you need zero width and/or height? There may be better ways to deal with an empty picture.\n\nWill encoders accept empty input frames?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ede6b7b6_77992a5a",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T09:04:29Z",
+      "side": 1,
+      "message": "This needs documentation. In particular, it\u0027s unclear what full_width and full_height are used for. VideoFrame was intended to be small and cheap to copy...",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 4
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eccf30c_c0053945",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T09:04:29Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of passing an unchanged frame into the pipeline?\n\nIf it\u0027s really needed, I\u0027d prefer to avoid the negative and call it changed(), with a default value of true.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 64
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d7d35ce_aabfc34f",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-30T09:04:29Z",
+      "side": 1,
+      "message": "Looks like an unrelated change. I\u0027m not strongly opposed to this setter, but I\u0027d prefer you leave this out until you have a usecase for it, so that can be reviewed. The main way of getting a VideoFrame with the right data should be to use the Builder thing.",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 75
+      },
+      "revId": "a02b26cc440d97a45c5c6734e06f3365d210e6e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
