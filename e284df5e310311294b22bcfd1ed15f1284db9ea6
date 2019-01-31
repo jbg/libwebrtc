@@ -22,6 +22,30 @@
       "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13f28e10_03d95eb9",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T14:07:23Z",
+      "side": 1,
+      "message": "Any task that posts a task will use the impl_.\n\nThey are destroyed when the implementation is destroyed (that is how we can avoid requiring locks in TaskQueue implementations)",
+      "parentUuid": "07c7d062_7a4e6a39",
+      "range": {
+        "startLine": 138,
+        "startChar": 39,
+        "endLine": 138,
+        "endChar": 74
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
