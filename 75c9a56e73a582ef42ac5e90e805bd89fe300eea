@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "45945bea_dedbb77a",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-31T01:55:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a542c062_637e11f6",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8425b5c5_ba0310ce",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 18
@@ -33,6 +51,24 @@
       "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "679cd723_89637301",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-31T01:55:04Z",
+      "side": 1,
+      "message": "No, OnOverheadChanged may not be called, because RTP overhead is reported on rtp packet sent and should not be used with Media Transport, even though RtpRtcp module is still created. I am working on another changelist which will stop creating RtpRtcp module if media transport is used.",
+      "parentUuid": "8425b5c5_ba0310ce",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1bc87ea3_d654f7bc",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-31T01:55:04Z",
+      "side": 1,
+      "message": "ChannelSend::OnOverheadChanged did not have such checker and stored overhead value is protected by CS -- do you think there still value in adding thread checker?\n\nWe have not fully agreed on thread model for Media Transport callbacks (this will be part of RTP Media Transport design), so things may change.",
+      "parentUuid": "a7d669b1_79a9c807",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "865394b4_e8e75de0",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 18
@@ -64,6 +118,24 @@
       "writtenOn": "2019-01-30T13:02:28Z",
       "side": 1,
       "message": "Remove - the pointer is guaranteed to be !\u003d nullptr in CallEncoder",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d95f8fa7_74afe1bd",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-31T01:55:04Z",
+      "side": 1,
+      "message": "if (ecoder) was in old code updating encoder overhead in ChannelSend. If I remove it, some of PeerConnectionUnitTests fail (and they also fail in old codepath without if). \n\nMaybe SetTransportOverhead can be called before encoder is setup? \\\n\nUnfortunately I did not have time to investigate today -- will update tomorrow.",
+      "parentUuid": "865394b4_e8e75de0",
       "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "38770816_00c3e119",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-31T01:55:04Z",
+      "side": 1,
+      "message": "As mentioned in another comment, if I move lock into GetPerPacketOverheadBytes(), overhead can change after GetPerPacketOverheadBytes and before encoder was updated, which will lead to encoder getting wrong (not most recent) overhead. The old code in ChannelSend would take a lock, calculate total overhead and update encoder under the same lock.",
+      "parentUuid": "62e28544_3ef6bfcc",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7228940b_d8384185",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 18
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "b31330be_a54fc9f9",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-31T01:55:04Z",
+      "side": 1,
+      "message": "Taking lock twice is not ideal, because it can lead to Encoder getting not the most recent overhead. I can take a lock and call CallEncoder, but it would be equivalent to calling stream-\u003eUpdateOverheadForEncoder, just code duplication. In old code in ChannelSend we always called ModifyEncoder under the lock.\n\nHopefully overhead will not change often, so these locks will have no negative effect on performance or quality.\n\nTestOnly is used in test to make sure overhead is calculated correctly. Alternative is to to use mock encoder, I can change if you prefer it, but ideally I want to move ANA out of encoder and test ANA settings instead of encoder, but it\u0027s a separate discussion.",
+      "parentUuid": "7228940b_d8384185",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "def3e5fb_4c665bb4",
         "filename": "audio/channel_send.cc",
         "patchSetId": 18
@@ -118,6 +226,24 @@
       "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a5be1a6_cdfaaa69",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-01-31T01:55:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "def3e5fb_4c665bb4",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
