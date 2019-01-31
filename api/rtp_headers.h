@@ -82,6 +82,12 @@ typedef StringRtpHeaderExtension StreamId;
 // Mid represents RtpMid which is a string.
 typedef StringRtpHeaderExtension Mid;
 
+struct TransportFeedbackConfig {
+  bool on_request;
+  bool include_timestamps;
+  uint16_t sequence_count;
+};
+
 struct RTPHeaderExtension {
   RTPHeaderExtension();
   RTPHeaderExtension(const RTPHeaderExtension& other);
@@ -93,6 +99,7 @@ struct RTPHeaderExtension {
   uint32_t absoluteSendTime;
   bool hasTransportSequenceNumber;
   uint16_t transportSequenceNumber;
+  TransportFeedbackConfig feedback_config = {false, true, 0};
 
   // Audio Level includes both level in dBov and voiced/unvoiced bit. See:
   // https://datatracker.ietf.org/doc/draft-lennox-avt-rtp-audio-level-exthdr/

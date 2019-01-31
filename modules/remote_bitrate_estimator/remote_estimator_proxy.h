@@ -12,6 +12,7 @@
 #define MODULES_REMOTE_BITRATE_ESTIMATOR_REMOTE_ESTIMATOR_PROXY_H_
 
 #include <map>
+#include <queue>
 #include <vector>
 
 #include "modules/include/module_common_types.h"
@@ -54,7 +55,19 @@ class RemoteEstimatorProxy : public RemoteBitrateEstimator {
   static const int kBackWindowMs;
 
  private:
-  void OnPacketArrival(uint16_t sequence_number, int64_t arrival_time)
+  struct FeedbackRequest {
+    FeedbackRequest(int64_t seq_nr, bool include_timestamps, uint16_t seq_count)
+        : seq_nr(seq_nr),
+          include_timestamps(include_timestamps),
+          seq_count(seq_count) {}
+    int64_t seq_nr;
+    bool include_timestamps;
+    uint16_t seq_count;
+  };
+
+  void OnPacketArrival(uint16_t sequence_number,
+                       int64_t arrival_time,
+                       const TransportFeedbackConfig& feedback_config)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
   bool BuildFeedbackPacket(rtcp::TransportFeedback* feedback_packet);
 
@@ -71,6 +84,8 @@ class RemoteEstimatorProxy : public RemoteBitrateEstimator {
   // Map unwrapped seq -> time.
   std::map<int64_t, int64_t> packet_arrival_times_ RTC_GUARDED_BY(&lock_);
   int64_t send_interval_ms_ RTC_GUARDED_BY(&lock_);
+  bool feedback_on_request_ RTC_GUARDED_BY(&lock_);
+  std::queue<FeedbackRequest> feedback_requests_ RTC_GUARDED_BY(&lock_);
 };
 
 }  // namespace webrtc

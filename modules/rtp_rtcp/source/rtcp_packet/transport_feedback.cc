@@ -266,6 +266,7 @@ TransportFeedback::TransportFeedback()
       num_seq_no_(0),
       base_time_ticks_(0),
       feedback_seq_(0),
+      include_timestamps_(true),
       last_timestamp_us_(0),
       size_bytes_(kTransportFeedbackHeaderSizeBytes) {}
 
@@ -276,6 +277,7 @@ TransportFeedback::TransportFeedback(TransportFeedback&& other)
       num_seq_no_(other.num_seq_no_),
       base_time_ticks_(other.base_time_ticks_),
       feedback_seq_(other.feedback_seq_),
+      include_timestamps_(other.include_timestamps_),
       last_timestamp_us_(other.last_timestamp_us_),
       packets_(std::move(other.packets_)),
       encoded_chunks_(std::move(other.encoded_chunks_)),
@@ -297,6 +299,10 @@ void TransportFeedback::SetBase(uint16_t base_sequence,
 
 void TransportFeedback::SetFeedbackSequenceNumber(uint8_t feedback_sequence) {
   feedback_seq_ = feedback_sequence;
+}
+
+void TransportFeedback::SetIncludeTimestamps(bool include_timestamps) {
+  include_timestamps_ = include_timestamps;
 }
 
 bool TransportFeedback::AddReceivedPacket(uint16_t sequence_number,

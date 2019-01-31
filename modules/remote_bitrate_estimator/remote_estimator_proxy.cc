@@ -41,7 +41,8 @@ RemoteEstimatorProxy::RemoteEstimatorProxy(
       media_ssrc_(0),
       feedback_sequence_(0),
       window_start_seq_(-1),
-      send_interval_ms_(kDefaultSendIntervalMs) {}
+      send_interval_ms_(kDefaultSendIntervalMs),
+      feedback_on_request_(false) {}
 
 RemoteEstimatorProxy::~RemoteEstimatorProxy() {}
 
@@ -56,8 +57,9 @@ void RemoteEstimatorProxy::IncomingPacket(int64_t arrival_time_ms,
   }
   rtc::CritScope cs(&lock_);
   media_ssrc_ = header.ssrc;
-
-  OnPacketArrival(header.extension.transportSequenceNumber, arrival_time_ms);
+  feedback_on_request_ = header.extension.feedback_config.on_request;
+  OnPacketArrival(header.extension.transportSequenceNumber, arrival_time_ms,
+                  header.extension.feedback_config);
 }
 
 bool RemoteEstimatorProxy::LatestEstimate(std::vector<unsigned int>* ssrcs,
@@ -67,8 +69,11 @@ bool RemoteEstimatorProxy::LatestEstimate(std::vector<unsigned int>* ssrcs,
 
 int64_t RemoteEstimatorProxy::TimeUntilNextProcess() {
   int64_t time_until_next = 0;
-  if (last_process_time_ms_ != -1) {
-    rtc::CritScope cs(&lock_);
+  rtc::CritScope cs(&lock_);
+  if (feedback_on_request_) {
+    time_until_next =
+        feedback_requests_.empty() ? std::numeric_limits<int64_t>::max() : 0;
+  } else if (last_process_time_ms_ != -1) {
     int64_t now = clock_->TimeInMilliseconds();
     if (now - last_process_time_ms_ < send_interval_ms_)
       time_until_next = (last_process_time_ms_ + send_interval_ms_ - now);
@@ -110,8 +115,10 @@ void RemoteEstimatorProxy::OnBitrateChanged(int bitrate_bps) {
                 rtc::SafeClamp(0.05 * bitrate_bps, kMinTwccRate, kMaxTwccRate));
 }
 
-void RemoteEstimatorProxy::OnPacketArrival(uint16_t sequence_number,
-                                           int64_t arrival_time) {
+void RemoteEstimatorProxy::OnPacketArrival(
+    uint16_t sequence_number,
+    int64_t arrival_time,
+    const TransportFeedbackConfig& feedback_config) {
   if (arrival_time < 0 || arrival_time > kMaxTimeMs) {
     RTC_LOG(LS_WARNING) << "Arrival time out of bounds: " << arrival_time;
     return;
@@ -130,15 +137,17 @@ void RemoteEstimatorProxy::OnPacketArrival(uint16_t sequence_number,
     return;
   }
 
-  if (packet_arrival_times_.lower_bound(window_start_seq_) ==
-      packet_arrival_times_.end()) {
-    // Start new feedback packet, cull old packets.
-    for (auto it = packet_arrival_times_.begin();
-         it != packet_arrival_times_.end() && it->first < seq &&
-         arrival_time - it->second >= kBackWindowMs;) {
-      auto delete_it = it;
-      ++it;
-      packet_arrival_times_.erase(delete_it);
+  if (!feedback_on_request_) {
+    if (packet_arrival_times_.lower_bound(window_start_seq_) ==
+        packet_arrival_times_.end()) {
+      // Start new feedback packet, cull old packets.
+      for (auto it = packet_arrival_times_.begin();
+           it != packet_arrival_times_.end() && it->first < seq &&
+           arrival_time - it->second >= kBackWindowMs;) {
+        auto delete_it = it;
+        ++it;
+        packet_arrival_times_.erase(delete_it);
+      }
     }
   }
 
@@ -153,6 +162,9 @@ void RemoteEstimatorProxy::OnPacketArrival(uint16_t sequence_number,
     return;
 
   packet_arrival_times_[seq] = arrival_time;
+  if (feedback_config.sequence_count > 0)
+    feedback_requests_.emplace(seq, feedback_config.include_timestamps,
+                               feedback_config.sequence_count);
 }
 
 bool RemoteEstimatorProxy::BuildFeedbackPacket(
@@ -161,10 +173,30 @@ bool RemoteEstimatorProxy::BuildFeedbackPacket(
   // feedback packet. Some older may still be in the map, in case a reordering
   // happens and we need to retransmit them.
   rtc::CritScope cs(&lock_);
-  auto it = packet_arrival_times_.lower_bound(window_start_seq_);
-  if (it == packet_arrival_times_.end()) {
-    // Feedback for all packets already sent.
-    return false;
+  bool include_timestamps = true;
+  int64_t last_feedback_seq_nr = std::numeric_limits<int64_t>::max();
+  auto clear_to_it = packet_arrival_times_.begin();
+  std::map<int64_t, int64_t>::iterator it;
+  if (feedback_on_request_) {
+    if (feedback_requests_.empty())
+      return false;
+
+    FeedbackRequest feedback_request = feedback_requests_.front();
+    feedback_requests_.pop();
+    include_timestamps = feedback_request.include_timestamps;
+    window_start_seq_ =
+        feedback_request.seq_nr - feedback_request.seq_count + 1;
+    last_feedback_seq_nr = feedback_request.seq_nr;
+    it = packet_arrival_times_.lower_bound(window_start_seq_);
+    // Since the feedback request is from window_start_seq_ and forward, we
+    // assume that it's safe to remove data older than this sequence number.
+    clear_to_it = it;
+  } else {
+    it = packet_arrival_times_.lower_bound(window_start_seq_);
+    if (it == packet_arrival_times_.end()) {
+      // Feedback for all packets already sent.
+      return false;
+    }
   }
 
   // TODO(sprang): Measure receive times in microseconds and remove the
@@ -177,7 +209,9 @@ bool RemoteEstimatorProxy::BuildFeedbackPacket(
   feedback_packet->SetBase(static_cast<uint16_t>(window_start_seq_ & 0xFFFF),
                            it->second * 1000);
   feedback_packet->SetFeedbackSequenceNumber(feedback_sequence_++);
-  for (; it != packet_arrival_times_.end(); ++it) {
+  feedback_packet->SetIncludeTimestamps(include_timestamps);
+  for (; it != packet_arrival_times_.end() && it->first <= last_feedback_seq_nr;
+       ++it) {
     if (!feedback_packet->AddReceivedPacket(
             static_cast<uint16_t>(it->first & 0xFFFF), it->second * 1000)) {
       // If we can't even add the first seq to the feedback packet, we won't be
@@ -195,6 +229,7 @@ bool RemoteEstimatorProxy::BuildFeedbackPacket(
     window_start_seq_ = it->first + 1;
   }
 
+  packet_arrival_times_.erase(packet_arrival_times_.begin(), clear_to_it);
   return true;
 }
 
