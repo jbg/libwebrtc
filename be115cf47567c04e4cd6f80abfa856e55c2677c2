@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "3f481d4d_18540e51",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-31T23:55:05Z",
+      "side": 1,
+      "message": "To me, it looks like the code is already very specific to ICE events, and I think it would be easier to read code like\n\nconst int64_t total_time_ms \u003d transaction.response_received_-\u003elog_time_ms() - \n                              transaction.ping_sent_-\u003elog_time_ms();\n\nthan\n\nconst int64_t total_time_ms \u003d static_cast\u003cint64_t\u003e(*timestamps_ms[3]) -\n                              static_cast\u003cint64_t\u003e(*timestamps_ms[0]);\n\nMoreover, if we base the computations on RTP packets we could presumably use the LoggedPacketInfo struct which is very similar to the IceTransaction struct.",
+      "parentUuid": "e3b945ed_c22d7dc9",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 37
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33132ff5_18856a13",
         "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
         "patchSetId": 3
@@ -830,6 +854,30 @@
       "side": 1,
       "message": "It iterates through all of the points in all of the series each time it is called.\nI need to add a TODO to use the x limits from the config instead of the computed ones, which I will do separately. I\u0027m worried some of the graphs will become too zoomed out with that approach, but I acknowledge that using the same x axis makes intergraph comparison easier.",
       "parentUuid": "4741e67a_f707d885",
+      "range": {
+        "startLine": 76,
+        "startChar": 6,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1df74b75_678ace81",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-31T23:55:05Z",
+      "side": 1,
+      "message": "But you only call it once for each graph. And you compute the PlotLimits by iterating through all points of all timeseries anyway. Afaik, the difference is essentially\nfor each point {\n  // Compute value\n  // Update limits\n}\nvs\nfor each point {\n  // Compute points\n}\nfor each point {\n  // Update limits\n}\nThe first version might be slightly more efficient depending on cache locality, but even this isn\u0027t entirely clear to me. On the other hand, the second version seems easier to read given that we already have a function that does it.\n\nRegarding zooming; you can zoom in the visualization interface, so I think it\u0027s an advantage to start with a bird\u0027s eye view of the call.",
+      "parentUuid": "1fb59ff6_eb31d2c7",
       "range": {
         "startLine": 76,
         "startChar": 6,

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2df6d04a_9ec14765",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-01-31T23:55:05Z",
+      "side": 1,
+      "message": "nit: initiator\u0027s ?",
+      "range": {
+        "startLine": 92,
+        "startChar": 49,
+        "endLine": 92,
+        "endChar": 59
+      },
+      "revId": "1d906f79a4bc9771726b30ff15022fa569787cca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
