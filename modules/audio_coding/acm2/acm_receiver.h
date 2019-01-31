@@ -108,6 +108,10 @@ class AcmReceiver {
   //
   int SetMaximumDelay(int delay_ms);
 
+  int SetBaseMinimumDelay(int delay_ms);
+
+  int GetBaseMinimumDelay() const;
+
   //
   // Resets the initial delay to zero.
   //

@@ -1,6 +1,5 @@
 /*
  *  Copyright (c) 2004 The WebRTC project authors. All Rights Reserved.
- *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
  *  tree. An additional intellectual property rights grant can be found
@@ -192,6 +191,9 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
 
   // SSRC=0 will apply the new volume to current and future unsignaled streams.
   bool SetOutputVolume(uint32_t ssrc, double volume) override;
+
+  bool SetBaseMinimumPlayoutDelay(uint32_t ssrc, int delay_ms) override;
+  bool GetBaseMinimumPlayoutDelay(uint32_t ssrc, int* delay_ms) const override;
 
   bool CanInsertDtmf() override;
   bool InsertDtmf(uint32_t ssrc, int event, int duration) override;

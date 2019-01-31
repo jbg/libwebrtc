@@ -194,6 +194,9 @@ class NetEq {
   // the |max_delay_ms| value in the NetEq::Config struct.
   virtual bool SetMaximumDelay(int delay_ms) = 0;
 
+  virtual bool SetBaseMinimumDelay(int delay_ms) = 0;
+  virtual int GetBaseMinimumDelay() const = 0;
+
   // Returns the current target delay in ms. This includes any extra delay
   // requested through SetMinimumDelay.
   virtual int TargetDelayMs() const = 0;

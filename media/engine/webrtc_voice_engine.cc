@@ -1206,6 +1206,21 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     stream_->SetGain(volume);
   }
 
+  int SetBaseMinimumPlayoutDelay(int delay_ms) {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    int error_code = stream_->SetBaseMinimumPlayoutDelay(delay_ms);
+    if (error_code == 0) {
+      // Memorize only valid delay.
+      config_.jitter_buffer_min_delay_ms = delay_ms;
+    }
+    return error_code;
+  }
+
+  int GetBaseMinimumPlayoutDelay() const {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    return stream_->GetBaseMinimumPlayoutDelay();
+  }
+
   void SetPlayout(bool playout) {
     RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
     RTC_DCHECK(stream_);
@@ -1993,6 +2008,40 @@ bool WebRtcVoiceMediaChannel::SetOutputVolume(uint32_t ssrc, double volume) {
     RTC_LOG(LS_INFO) << "SetOutputVolume() to " << volume
                      << " for recv stream with ssrc " << ssrc;
   }
+  return true;
+}
+
+bool WebRtcVoiceMediaChannel::SetBaseMinimumPlayoutDelay(uint32_t ssrc,
+                                                         int delay_ms) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+  const auto it = recv_streams_.find(ssrc);
+  if (it == recv_streams_.end()) {
+    RTC_LOG(LS_WARNING) << "SetBaseMinimumPlayoutDelay: no recv stream "
+                        << ssrc;
+    return false;
+  }
+
+  int error_code = it->second->SetBaseMinimumPlayoutDelay(delay_ms);
+  if (error_code == 0) {
+    RTC_LOG(LS_INFO) << "SetBaseMinimumPlayoutDelay() to " << delay_ms
+                     << " for recv stream with ssrc " << ssrc;
+    return true;
+  }
+
+  return false;
+}
+
+bool WebRtcVoiceMediaChannel::GetBaseMinimumPlayoutDelay(uint32_t ssrc,
+                                                         int* delay_ms) const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+  const auto it = recv_streams_.find(ssrc);
+  if (it == recv_streams_.end()) {
+    RTC_LOG(LS_WARNING) << "GetBaseMinimumPlayoutDelay: no recv stream "
+                        << ssrc;
+    return false;
+  }
+
+  *delay_ms = it->second->GetBaseMinimumPlayoutDelay();
   return true;
 }
 

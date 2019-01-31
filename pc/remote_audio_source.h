@@ -17,8 +17,10 @@
 #include "api/call/audio_sink.h"
 #include "api/notifier.h"
 #include "pc/channel.h"
+#include "pc/rtp_receiver.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/message_handler.h"
+#include "rtc_base/weak_ptr.h"
 
 namespace rtc {
 struct Message;
@@ -27,13 +29,16 @@ class Thread;
 
 namespace webrtc {
 
+class AudioRtpReceiver;
+
 // This class implements the audio source used by the remote audio track.
 // This class works by configuring itself as a sink with the underlying media
 // engine, then when receiving data will fan out to all added sinks.
 class RemoteAudioSource : public Notifier<AudioSourceInterface>,
                           rtc::MessageHandler {
  public:
-  explicit RemoteAudioSource(rtc::Thread* worker_thread);
+  RemoteAudioSource(rtc::Thread* worker_thread,
+                    const rtc::WeakPtr<AudioRtpReceiver>& receiver);
 
   // Register and unregister remote audio source with the underlying media
   // engine.
@@ -46,6 +51,8 @@ class RemoteAudioSource : public Notifier<AudioSourceInterface>,
 
   // AudioSourceInterface implementation.
   void SetVolume(double volume) override;
+  void SetLatency(double latency) override;
+  double GetLatency() override;
   void RegisterAudioObserver(AudioObserver* observer) override;
   void UnregisterAudioObserver(AudioObserver* observer) override;
 
@@ -65,6 +72,7 @@ class RemoteAudioSource : public Notifier<AudioSourceInterface>,
 
   rtc::Thread* const main_thread_;
   rtc::Thread* const worker_thread_;
+  const rtc::WeakPtr<AudioRtpReceiver> receiver_;
   std::list<AudioObserver*> audio_observers_;
   rtc::CriticalSection sink_lock_;
   std::list<AudioTrackSinkInterface*> sinks_;

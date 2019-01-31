@@ -275,6 +275,10 @@ class AudioCodingModule {
   //
   virtual int SetMaximumPlayoutDelay(int time_ms) = 0;
 
+  virtual int SetBaseMinimumPlayoutDelay(int time_ms) = 0;
+
+  virtual int GetBaseMinimumPlayoutDelay() const = 0;
+
   ///////////////////////////////////////////////////////////////////////////
   // int32_t PlayoutTimestamp()
   // The send timestamp of an RTP packet is associated with the decoded
