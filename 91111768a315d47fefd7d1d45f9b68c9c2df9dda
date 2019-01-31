@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1faeb96c_48b4d9bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-01-31T08:21:46Z",
+      "side": 1,
+      "message": "Bug: 767505 ?",
+      "revId": "91111768a315d47fefd7d1d45f9b68c9c2df9dda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
