@@ -100,6 +100,10 @@ class AudioCodingModuleImpl final : public AudioCodingModule {
   // Maximum playout delay.
   int SetMaximumPlayoutDelay(int time_ms) override;
 
+  int SetBaseMinimumPlayoutDelay(int time_ms) override;
+
+  int GetBaseMinimumPlayoutDelay() const override;
+
   absl::optional<uint32_t> PlayoutTimestamp() override;
 
   int FilteredCurrentDelayMs() const override;
@@ -651,6 +655,7 @@ int AudioCodingModuleImpl::InitializeReceiverSafe() {
   receiver_.ResetInitialDelay();
   receiver_.SetMinimumDelay(0);
   receiver_.SetMaximumDelay(0);
+  receiver_.SetBaseMinimumDelay(0);
   receiver_.FlushBuffers();
 
   receiver_initialized_ = true;
@@ -706,6 +711,16 @@ int AudioCodingModuleImpl::SetMaximumPlayoutDelay(int time_ms) {
     return -1;
   }
   return receiver_.SetMaximumDelay(time_ms);
+}
+
+int AudioCodingModuleImpl::SetBaseMinimumPlayoutDelay(int time_ms) {
+  // check for assert(0 <= time_ms && time_ms <= 10000)
+  // already exists underneath, do I need to repeat it?
+  return receiver_.SetBaseMinimumDelay(time_ms);
+}
+
+int AudioCodingModuleImpl::GetBaseMinimumPlayoutDelay() const {
+  return receiver_.GetBaseMinimumDelay();
 }
 
 // Get 10 milliseconds of raw audio data to play out.

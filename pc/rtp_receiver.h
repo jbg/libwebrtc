@@ -35,6 +35,7 @@
 #include "rtc_base/ref_counted_object.h"
 #include "rtc_base/scoped_ref_ptr.h"
 #include "rtc_base/thread.h"
+#include "rtc_base/weak_ptr.h"
 
 namespace webrtc {
 
@@ -80,6 +81,8 @@ class RtpReceiverInternal : public RtpReceiverInterface {
   virtual int AttachmentId() const = 0;
 };
 
+class RemoteAudioSource;
+
 class AudioRtpReceiver : public ObserverInterface,
                          public AudioSourceInterface::AudioObserver,
                          public rtc::RefCountedObject<RtpReceiverInternal> {
@@ -99,6 +102,11 @@ class AudioRtpReceiver : public ObserverInterface,
 
   // AudioSourceInterface::AudioObserver implementation
   void OnSetVolume(double volume) override;
+
+  // AudioSourceInterface::AudioObserver implementation
+  void OnSetLatency(double latency) override;
+
+  bool GetLatency(double* latency);
 
   rtc::scoped_refptr<AudioTrackInterface> audio_track() const {
     return track_.get();
@@ -156,6 +164,7 @@ class AudioRtpReceiver : public ObserverInterface,
   bool SetOutputVolume(double volume);
 
   rtc::Thread* const worker_thread_;
+  rtc::WeakPtrFactory<AudioRtpReceiver> weak_factory_;
   const std::string id_;
   const rtc::scoped_refptr<RemoteAudioSource> source_;
   const rtc::scoped_refptr<AudioTrackInterface> track_;
