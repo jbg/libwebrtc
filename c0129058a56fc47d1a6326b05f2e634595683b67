@@ -39,6 +39,24 @@
       "revId": "c0129058a56fc47d1a6326b05f2e634595683b67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24153f0b_40f02af8",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-01-31T14:43:54Z",
+      "side": 1,
+      "message": "Searched cs, and found no other occurences of BweInitialThroughputWindowExperiment at all, so suggest that both configs are added into one field trial parser blob.",
+      "parentUuid": "4463c694_cde8a2a1",
+      "revId": "c0129058a56fc47d1a6326b05f2e634595683b67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
