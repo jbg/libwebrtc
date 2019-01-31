@@ -16,6 +16,24 @@
       "revId": "91111768a315d47fefd7d1d45f9b68c9c2df9dda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf6f681f_f9859f9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-01-31T08:29:23Z",
+      "side": 1,
+      "message": "I was gonna add a reference to this CL on the bug manually, but this is a good idea.",
+      "parentUuid": "1faeb96c_48b4d9bd",
+      "revId": "91111768a315d47fefd7d1d45f9b68c9c2df9dda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
