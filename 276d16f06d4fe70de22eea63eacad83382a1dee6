@@ -37,6 +37,41 @@
     },
     {
       "key": {
+        "uuid": "d2531ee0_02105d7d",
+        "filename": "api/task_queue/task_queue_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-31T09:32:43Z",
+      "side": 1,
+      "message": "Hmm. Good point. But as soon as you have UB, you can\u0027t expect the code to work properly; in particular, this test will succeed if the TQ implementation works, and do something completely unspecified otherwise.\n\nI guess in practice the compiler will not do aggressive optimizations that break this test, so you could simply document it. E.g.\n\n  // Test posting two tasks that have shared state not protected by a\n  // lock. The TaskQueue should guarantee memory read-write order and\n  // FIFO task execution order, so the second task should always see the\n  // changes that were made by the first task.\n  //\n  // If the TaskQueue doesn\u0027t properly synchronize the execution of\n  // tasks, there will be a data race, which is undefined behavior. The\n  // EXPECT calls may randomly catch this, but to make the most of this\n  // unit test, run it under TSan or some other tool that is able to\n  // directly detect data races.",
+      "parentUuid": "01b18d32_74eadd1f",
+      "revId": "276d16f06d4fe70de22eea63eacad83382a1dee6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae1ee453_71a60057",
+        "filename": "api/task_queue/task_queue_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-01-31T09:32:43Z",
+      "side": 1,
+      "message": "Add\n\n  EXPECT_EQ(state.state, 0);\n\nhere, to clarify that the tasks haven\u0027t started running yet?",
+      "revId": "276d16f06d4fe70de22eea63eacad83382a1dee6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "afa79b48_edf38d9b",
         "filename": "rtc_base/task_queue_unittest.cc",
         "patchSetId": 2
