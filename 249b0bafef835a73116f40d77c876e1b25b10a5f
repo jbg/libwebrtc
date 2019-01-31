@@ -22,6 +22,30 @@
       "revId": "249b0bafef835a73116f40d77c876e1b25b10a5f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43bfa67f_4eceda7c",
+        "filename": "api/video/video_source_interface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-31T11:00:50Z",
+      "side": 1,
+      "message": "Renamed, will change Broadcaster in a later CL",
+      "parentUuid": "2bc5543c_af33612c",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "249b0bafef835a73116f40d77c876e1b25b10a5f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

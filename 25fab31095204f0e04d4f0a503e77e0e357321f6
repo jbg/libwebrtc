@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d9c83ea1_f4df20af",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-31T11:00:50Z",
+      "side": 1,
+      "message": "The comment is also wrong, as partial update is supposed to send nullptr frame buffer for an empty update. I\u0027ve changed the comment and added the dcheck here.",
+      "parentUuid": "40cf3262_f3601de3",
+      "revId": "25fab31095204f0e04d4f0a503e77e0e357321f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d488e52b_36ae8cf5",
         "filename": "api/video/video_frame.h",
         "patchSetId": 13
@@ -39,6 +57,30 @@
       "revId": "25fab31095204f0e04d4f0a503e77e0e357321f6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94ae64c3_410659fa",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-31T11:00:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d488e52b_36ae8cf5",
+      "range": {
+        "startLine": 152,
+        "startChar": 40,
+        "endLine": 152,
+        "endChar": 68
+      },
+      "revId": "25fab31095204f0e04d4f0a503e77e0e357321f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
