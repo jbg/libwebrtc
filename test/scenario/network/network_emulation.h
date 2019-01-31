@@ -27,6 +27,7 @@
 #include "rtc_base/socket_address.h"
 #include "rtc_base/thread.h"
 #include "system_wrappers/include/clock.h"
+#include "test/task_runner/task_runner.h"
 
 namespace webrtc {
 namespace test {
@@ -73,12 +74,12 @@ class EmulatedNetworkNode : public EmulatedNetworkReceiverInterface {
   // is added to the size of each packet in the information provided to
   // |network_behavior|.
   explicit EmulatedNetworkNode(
+      TaskRunner* task_runner,
       std::unique_ptr<NetworkBehaviorInterface> network_behavior);
   ~EmulatedNetworkNode() override;
   RTC_DISALLOW_COPY_AND_ASSIGN(EmulatedNetworkNode);
 
   void OnPacketReceived(EmulatedIpPacket packet) override;
-  void Process(Timestamp at_time);
   void SetReceiver(uint64_t dest_endpoint_id,
                    EmulatedNetworkReceiverInterface* receiver);
   void RemoveReceiver(uint64_t dest_endpoint_id);
@@ -92,20 +93,22 @@ class EmulatedNetworkNode : public EmulatedNetworkReceiverInterface {
                          std::vector<EmulatedNetworkNode*> nodes);
 
  private:
+  void Process(Timestamp at_time) RTC_RUN_ON(task_runner_);
+  void HandlePacketReceived(EmulatedIpPacket packet) RTC_RUN_ON(task_runner_);
   struct StoredPacket {
     uint64_t id;
     EmulatedIpPacket packet;
     bool removed;
   };
 
-  rtc::CriticalSection lock_;
+  TaskRunner* task_runner_;
   std::map<uint64_t, EmulatedNetworkReceiverInterface*> routing_
-      RTC_GUARDED_BY(lock_);
+      RTC_GUARDED_BY(task_runner_);
   const std::unique_ptr<NetworkBehaviorInterface> network_behavior_
-      RTC_GUARDED_BY(lock_);
-  std::deque<StoredPacket> packets_ RTC_GUARDED_BY(lock_);
+      RTC_GUARDED_BY(task_runner_);
+  std::deque<StoredPacket> packets_ RTC_GUARDED_BY(task_runner_);
 
-  uint64_t next_packet_id_ RTC_GUARDED_BY(lock_) = 1;
+  uint64_t next_packet_id_ RTC_GUARDED_BY(task_runner_) = 1;
 };
 
 // Represents single network interface on the device.

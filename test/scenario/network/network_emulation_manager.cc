@@ -19,24 +19,19 @@
 
 namespace webrtc {
 namespace test {
-namespace {
 
-constexpr int64_t kPacketProcessingIntervalMs = 1;
-
-}  // namespace
-
-NetworkEmulationManager::NetworkEmulationManager(webrtc::Clock* clock)
-    : clock_(clock),
+NetworkEmulationManager::NetworkEmulationManager()
+    : clock_(Clock::GetRealTimeClock()),
       next_node_id_(1),
-      task_queue_("network_emulation_manager") {}
+      task_runner_(&real_time_runner_, "network_emulation_manager") {}
+
 NetworkEmulationManager::~NetworkEmulationManager() {
-  Stop();
 }
 
 EmulatedNetworkNode* NetworkEmulationManager::CreateEmulatedNode(
     std::unique_ptr<NetworkBehaviorInterface> network_behavior) {
-  auto node =
-      absl::make_unique<EmulatedNetworkNode>(std::move(network_behavior));
+  auto node = absl::make_unique<EmulatedNetworkNode>(
+      &task_runner_, std::move(network_behavior));
   EmulatedNetworkNode* out = node.get();
 
   struct Closure {
@@ -44,7 +39,7 @@ EmulatedNetworkNode* NetworkEmulationManager::CreateEmulatedNode(
     NetworkEmulationManager* manager;
     std::unique_ptr<EmulatedNetworkNode> node;
   };
-  task_queue_.PostTask(Closure{this, std::move(node)});
+  task_runner_.PostTask(Closure{this, std::move(node)});
   return out;
 }
 
@@ -101,17 +96,6 @@ rtc::Thread* NetworkEmulationManager::CreateNetworkThread(
   return out;
 }
 
-void NetworkEmulationManager::Start() {
-  process_task_handle_ = RepeatingTaskHandle::Start(&task_queue_, [this] {
-    ProcessNetworkPackets();
-    return TimeDelta::ms(kPacketProcessingIntervalMs);
-  });
-}
-
-void NetworkEmulationManager::Stop() {
-  process_task_handle_.PostStop();
-}
-
 FakeNetworkSocketServer* NetworkEmulationManager::CreateSocketServer(
     std::vector<EndpointNode*> endpoints) {
   auto socket_server =
@@ -119,13 +103,6 @@ FakeNetworkSocketServer* NetworkEmulationManager::CreateSocketServer(
   FakeNetworkSocketServer* out = socket_server.get();
   socket_servers_.push_back(std::move(socket_server));
   return out;
-}
-
-void NetworkEmulationManager::ProcessNetworkPackets() {
-  Timestamp current_time = Now();
-  for (auto& node : network_nodes_) {
-    node->Process(current_time);
-  }
 }
 
 Timestamp NetworkEmulationManager::Now() const {
