@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "32ccfd23_79fa339d",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T14:23:21Z",
+      "side": 1,
+      "message": "I\u0027d like to, but std::function is copyable: it can\u0027t take ownership of movable only types.",
+      "parentUuid": "d43be1ee_fc5433c8",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 26
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06498021_a1d1b451",
         "filename": "test/task_runner/task_runner_interface.h",
         "patchSetId": 5
@@ -95,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7e1f6ad1_81cae093",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T14:23:21Z",
+      "side": 1,
+      "message": "It\u0027s closely coupled with the TaskQueue api and a QueuedTask has a return value controlling ownership, something that\u0027s avoided here. It might make sense to base that implementation on this though.",
+      "parentUuid": "06498021_a1d1b451",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 28
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cc31099_3d5a8afe",
         "filename": "test/task_runner/task_runner_interface.h",
         "patchSetId": 5
@@ -106,6 +154,30 @@
       "writtenOn": "2019-01-31T14:09:35Z",
       "side": 1,
       "message": "This looks very similar to the TaskQueue interface, but using different vocabulary.\ncan you just use webrtc::TaskQueueBase interface instead?)",
+      "range": {
+        "startLine": 45,
+        "startChar": 6,
+        "endLine": 45,
+        "endChar": 29
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08be4356_35f43c28",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T14:23:21Z",
+      "side": 1,
+      "message": "I\u0027ts quite different, I\u0027d have hoped that it could become cleaner, but currently it uses ownership controlling QueuedTask class, has some reference counting scheme, hidden internal pointers (int the interface) and Delete() etc.\n\nMaybe when you are done with that refactoring it will look like this class?",
+      "parentUuid": "1cc31099_3d5a8afe",
       "range": {
         "startLine": 45,
         "startChar": 6,
