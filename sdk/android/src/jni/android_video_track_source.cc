@@ -12,7 +12,6 @@
 
 #include <utility>
 
-#include "api/video_track_source_proxy.h"
 #include "rtc_base/logging.h"
 
 namespace webrtc {
