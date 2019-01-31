@@ -1,0 +1,372 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfc1a443_781fd128",
+        "filename": "test/task_runner/default_task_runner.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "If remove PendingTaskInterface and use QueuedTask we needn\u0027t this class.",
+      "range": {
+        "startLine": 24,
+        "startChar": 45,
+        "endLine": 24,
+        "endChar": 65
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4b31db0_1e9c99b7",
+        "filename": "test/task_runner/default_task_runner.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Can we use RepeatingTaskHandle here?",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 32
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4fdcf6b_30b6c72a",
+        "filename": "test/task_runner/default_task_runner.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "What case is for delay less than 0?",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 13
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1c2e059_3b0cc9b2",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Add doc please",
+      "range": {
+        "startLine": 62,
+        "startChar": 6,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b6b20ad_c50d5677",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "I\u0027m confused. Why handle is holding another optional handle?",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 37
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4368c9da_e12c174f",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Pleas add docs and also expectations on args",
+      "range": {
+        "startLine": 81,
+        "startChar": 19,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a09437ad_1523bc35",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Can we use absl::make_unique here and below?",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 34
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ce0616e_8c1088b4",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Why we can\u0027t use RepeatingTaskHandleInterface here directly?",
+      "range": {
+        "startLine": 115,
+        "startChar": 2,
+        "endLine": 115,
+        "endChar": 12
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cbe000e_1cb1c910",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Maybe StartDelayed to have same semantic with Post?",
+      "range": {
+        "startLine": 125,
+        "startChar": 13,
+        "endLine": 125,
+        "endChar": 25
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6aeb8dd_9f1acb47",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Can we have a unique pointer to show ownership?",
+      "range": {
+        "startLine": 136,
+        "startChar": 2,
+        "endLine": 136,
+        "endChar": 32
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4c15dd6_3928a859",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Please a doc what this abstraction describes.\nMaybe we can use QueuedTask instead of it?",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 26
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96e293bc_86ef0972",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Maybe just Run()?",
+      "range": {
+        "startLine": 28,
+        "startChar": 15,
+        "endLine": 28,
+        "endChar": 25
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba43a948_bc9f3f84",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Name can confuse, that it is related to RepeatingTaskHandle from TaskQueue stack.\n\nAlso do we need to support some checks on is running? (if these class are actually connected)",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7178cad9_b0dcf33b",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Maybe just Run()?",
+      "range": {
+        "startLine": 41,
+        "startChar": 20,
+        "endLine": 41,
+        "endChar": 30
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79952dac_e8bf5134",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Why we need it as public interface?",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1c594c5_0e8ff71c",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T12:24:51Z",
+      "side": 1,
+      "message": "Can you a contract to these methods",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 56
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
