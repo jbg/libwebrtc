@@ -23,7 +23,7 @@ RTCStatsReport::ConstIterator::ConstIterator(
     StatsMap::const_iterator it)
     : report_(report), it_(it) {}
 
-RTCStatsReport::ConstIterator::ConstIterator(const ConstIterator&& other)
+RTCStatsReport::ConstIterator::ConstIterator(ConstIterator&& other)
     : report_(std::move(other.report_)), it_(std::move(other.it_)) {}
 
 RTCStatsReport::ConstIterator::~ConstIterator() {}
