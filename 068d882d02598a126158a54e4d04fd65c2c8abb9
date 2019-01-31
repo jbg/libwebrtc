@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "847865fa_0d3be031",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T11:48:54Z",
+      "side": 1,
+      "message": "Call::Create sets the thread for a checker that\u0027s checked later on.",
+      "parentUuid": "783f1016_c6632202",
+      "range": {
+        "startLine": 144,
+        "startChar": 2,
+        "endLine": 144,
+        "endChar": 27
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2020492b_08fb757e",
         "filename": "test/scenario/network/network_emulation.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff1f83d7_92fd7d6e",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T11:48:54Z",
+      "side": 1,
+      "message": "Done!\n\nRemoved comment as it isn\u0027t really relevant for now.",
+      "parentUuid": "2020492b_08fb757e",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 30
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a885db8c_9675d421",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T11:48:54Z",
+      "side": 1,
+      "message": "Good point. Done!",
+      "parentUuid": "92d4a441_f3fd97af",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 8
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a7004ab_6a9d22c4",
         "filename": "test/scenario/network/network_emulation.cc",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "30ce9513_f67ef040",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T11:48:54Z",
+      "side": 1,
+      "message": "I don\u0027t think it needs to block as tasks are guaranteed to be processed in order of posting. So a send packet task will not be run until the route change task has run.",
+      "parentUuid": "5a7004ab_6a9d22c4",
+      "range": {
+        "startLine": 130,
+        "startChar": 16,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5633dcb1_f550da4e",
         "filename": "test/scenario/network/network_emulation.h",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2019-01-31T11:02:42Z",
       "side": 1,
       "message": "I think it will block future option to have different nodes in the network. \nProbably qingsi@ will have such requirements, so adding him to review too.",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d291eb0a_248f279e",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T11:48:54Z",
+      "side": 1,
+      "message": "I don\u0027t think custom nodes should be needed, we should be able to customize nodes by providing a custom behavior implementation.",
+      "parentUuid": "5633dcb1_f550da4e",
       "range": {
         "startLine": 77,
         "startChar": 6,
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "ed7a5628_f0605dd3",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T11:48:54Z",
+      "side": 1,
+      "message": "No, this is an unused left over from an earlier design, good catch!",
+      "parentUuid": "f7388d78_49d49d57",
+      "range": {
+        "startLine": 112,
+        "startChar": 13,
+        "endLine": 112,
+        "endChar": 26
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5fb3810_b311fcd8",
         "filename": "test/scenario/scenario.cc",
         "patchSetId": 1
@@ -151,6 +295,30 @@
       "writtenOn": "2019-01-31T11:02:42Z",
       "side": 1,
       "message": "Can we avoid extra depending on implementation here and make it possible to use only TaskRunner abstraction?",
+      "range": {
+        "startLine": 331,
+        "startChar": 2,
+        "endLine": 331,
+        "endChar": 25
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fb71cdd_591924e8",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T11:48:54Z",
+      "side": 1,
+      "message": "Would need to to something very special, like having a custom Event class. It might make sense, but I would prefer to do that in a separate CL. I think this solution is readable enough for now. Acceptable?",
+      "parentUuid": "b5fb3810_b311fcd8",
       "range": {
         "startLine": 331,
         "startChar": 2,
