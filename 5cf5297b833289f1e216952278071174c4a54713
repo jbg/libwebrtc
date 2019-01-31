@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f44c5322_33237628",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-31T22:10:20Z",
+      "side": 1,
+      "message": "Use ASSERT_EQ_WAIT for better test failure diagnostic.",
+      "revId": "5cf5297b833289f1e216952278071174c4a54713",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc780445_0fad37d5",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-31T22:10:20Z",
+      "side": 1,
+      "message": "Use ASSERT_EQ_WAIT for better test failure diagnostic.",
+      "revId": "5cf5297b833289f1e216952278071174c4a54713",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "554d3f71_d82d601f",
+        "filename": "test/pc/e2e/test_peer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-01-31T22:10:20Z",
+      "side": 1,
+      "message": "This helper still bugs me! For instance, in case of failure we don\u0027t know which candidate failed.",
+      "revId": "5cf5297b833289f1e216952278071174c4a54713",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
