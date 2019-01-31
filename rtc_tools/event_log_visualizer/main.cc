@@ -23,6 +23,8 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/flags.h"
 #include "rtc_tools/event_log_visualizer/analyzer.h"
+#include "rtc_tools/event_log_visualizer/clock_offset_calculator.h"
+#include "rtc_tools/event_log_visualizer/ice_transaction_analyzer.h"
 #include "rtc_tools/event_log_visualizer/plot_base.h"
 #include "rtc_tools/event_log_visualizer/plot_protobuf.h"
 #include "rtc_tools/event_log_visualizer/plot_python.h"
@@ -35,7 +37,7 @@ WEBRTC_DEFINE_string(
     "default",
     "A profile that selects a certain subset of the plots. Currently "
     "defined profiles are \"all\", \"none\", \"sendside_bwe\","
-    "\"receiveside_bwe\" and \"default\"");
+    "\"receiveside_bwe\", \"ice_combined\", and \"default\"");
 
 WEBRTC_DEFINE_bool(plot_incoming_packet_sizes,
                    false,
@@ -157,6 +159,21 @@ WEBRTC_DEFINE_bool(plot_dtls_transport_state,
 WEBRTC_DEFINE_bool(plot_dtls_writable_state,
                    false,
                    "Plot DTLS writable state changes.");
+WEBRTC_DEFINE_bool(plot_ice_sequence_diagrams,
+                   false,
+                   "Plot ICE message flow between two clients.");
+WEBRTC_DEFINE_bool(
+    plot_ice_transaction_graphs,
+    false,
+    "Plot the progress of ICE transactions between two clients.");
+WEBRTC_DEFINE_bool(
+    plot_ice_transaction_state_graph,
+    false,
+    "Plot the state reached in each ICE transaction between two clients.");
+WEBRTC_DEFINE_bool(
+    plot_ice_transaction_rtt_graphs,
+    false,
+    "Plot the RTT of completed ICE transactions between two clients.");
 
 WEBRTC_DEFINE_string(
     force_fieldtrials,
@@ -233,6 +250,12 @@ int main(int argc, char* argv[]) {
     FLAG_plot_incoming_bitrate = true;
     FLAG_plot_incoming_stream_bitrate = true;
     FLAG_plot_simulated_receiveside_bwe = true;
+  } else if (strcmp(FLAG_plot_profile, "ice_combined") == 0) {
+    SetAllPlotFlags(false);
+    FLAG_plot_ice_sequence_diagrams = true;
+    FLAG_plot_ice_transaction_graphs = true;
+    FLAG_plot_ice_transaction_state_graph = true;
+    FLAG_plot_ice_transaction_rtt_graphs = true;
   } else if (strcmp(FLAG_plot_profile, "default") == 0) {
     // Do nothing.
   } else {
@@ -243,7 +266,7 @@ int main(int argc, char* argv[]) {
   // Parse the remaining flags. They are applied relative to the chosen profile.
   rtc::FlagList::SetFlagsFromCommandLine(&argc, argv, true);
 
-  if (argc != 2 || FLAG_help) {
+  if ((argc != 2 && argc != 3) || FLAG_help) {
     // Print usage information.
     std::cout << usage;
     if (FLAG_help)
@@ -482,6 +505,72 @@ int main(int argc, char* argv[]) {
     analyzer.CreateDtlsWritableStateGraph(collection->AppendNewPlot());
   }
 
+  absl::optional<webrtc::IceTransactionAnalyzer> ice_transaction_analyzer;
+  if (argc == 3) {
+    std::string second_filename = argv[2];
+
+    // Parse second log
+    webrtc::ParsedRtcEventLog second_log(header_extensions);
+    if (!second_log.ParseFile(second_filename)) {
+      std::cerr << "Could not parse the entire second log file." << std::endl;
+      std::cerr << "Only the parsable events will be analyzed." << std::endl;
+    }
+
+    webrtc::IceTransactionAnalyzerConfig config;
+    config.log1_first_timestamp_ms = parsed_log.first_timestamp() / 1000;
+    webrtc::ClockOffsetCalculator c;
+    c.ProcessLogs(parsed_log.ice_candidate_pair_events(),
+                  second_log.ice_candidate_pair_events());
+    config.clock_offset_ms = c.CalculateMedianOffsetMs();
+    config.use_same_x_axis = true;
+    // TODO(zstein): Respect FLAG_normalize_time
+    config.x_min_s = 0;
+    auto first_max_ms =
+        (parsed_log.last_timestamp() - parsed_log.first_timestamp()) / 1000;
+    auto second_max_ms =
+        (second_log.last_timestamp() - parsed_log.first_timestamp()) / 1000 -
+        config.clock_offset_ms;
+    config.x_max_s =
+        static_cast<float>(std::max(first_max_ms, second_max_ms)) / 1000;
+    ice_transaction_analyzer.emplace(config,
+                                     parsed_log.ice_candidate_pair_events(),
+                                     second_log.ice_candidate_pair_events());
+  }
+
+  if (FLAG_plot_ice_sequence_diagrams) {
+    if (ice_transaction_analyzer) {
+      ice_transaction_analyzer->CreateIceSequenceDiagrams(collection.get());
+    } else {
+      std::cerr << "--plot_ice_sequence_diagrams requires two filenames"
+                << std::endl;
+    }
+  }
+  if (FLAG_plot_ice_transaction_graphs) {
+    if (ice_transaction_analyzer) {
+      ice_transaction_analyzer->CreateIceTransactionGraphs(collection.get());
+    } else {
+      std::cerr << "--plot_ice_transaction_graphs requires two filenames"
+                << std::endl;
+    }
+  }
+  if (FLAG_plot_ice_transaction_state_graph) {
+    if (ice_transaction_analyzer) {
+      ice_transaction_analyzer->CreateIceTransactionStateGraph(
+          collection.get());
+    } else {
+      std::cerr << "--plot_ice_transaction_state_graph requires two filenames"
+                << std::endl;
+    }
+  }
+  if (FLAG_plot_ice_transaction_rtt_graphs) {
+    if (ice_transaction_analyzer) {
+      ice_transaction_analyzer->CreateIceTransactionRttGraphs(collection.get());
+    } else {
+      std::cerr << "--plot_ice_transaction_rtt_graphs requires two filenames"
+                << std::endl;
+    }
+  }
+
   collection->Draw();
 
   if (FLAG_print_triage_alerts) {
@@ -521,4 +610,8 @@ void SetAllPlotFlags(bool setting) {
   FLAG_plot_neteq_stats = setting;
   FLAG_plot_ice_candidate_pair_config = setting;
   FLAG_plot_ice_connectivity_check = setting;
+  FLAG_plot_ice_sequence_diagrams = setting;
+  FLAG_plot_ice_transaction_graphs = setting;
+  FLAG_plot_ice_transaction_state_graph = setting;
+  FLAG_plot_ice_transaction_rtt_graphs = setting;
 }

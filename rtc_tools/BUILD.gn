@@ -242,6 +242,10 @@ if (!build_with_chromium) {
       sources = [
         "event_log_visualizer/analyzer.cc",
         "event_log_visualizer/analyzer.h",
+        "event_log_visualizer/clock_offset_calculator.cc",
+        "event_log_visualizer/clock_offset_calculator.h",
+        "event_log_visualizer/ice_transaction_analyzer.cc",
+        "event_log_visualizer/ice_transaction_analyzer.h",
         "event_log_visualizer/plot_base.cc",
         "event_log_visualizer/plot_base.h",
         "event_log_visualizer/plot_protobuf.cc",
@@ -317,6 +321,29 @@ if (rtc_include_tests) {
         "../test:field_trial",
         "../test:fileutils",
         "../test:test_support",
+      ]
+    }
+
+    rtc_test("event_log_visualizer_unittests") {
+      testonly = true
+
+      sources = [
+        "event_log_visualizer/clock_offset_calculator_unittest.cc",
+        "event_log_visualizer/ice_transaction_analyzer_unittest.cc",
+      ]
+
+      if (!build_with_chromium && is_clang) {
+        # Suppress warnings from the Chromium Clang plugin (bugs.webrtc.org/163).
+        suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
+      }
+
+      deps = [
+        ":event_log_visualizer_utils",
+        "../rtc_base",
+        "../rtc_base:protobuf_utils",
+        "../test:test_main",
+        "../test:test_support",
+        "//testing/gtest",
       ]
     }
   }
