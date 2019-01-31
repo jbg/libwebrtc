@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "481b3cb9_00f1edc8",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-01-31T17:47:59Z",
+      "side": 1,
+      "message": "Maybe add a comment about what effect this is expecting to have?",
+      "revId": "df258efb2a6a6d1419aeddede8259a93fd09eefe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
