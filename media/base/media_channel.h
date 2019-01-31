@@ -731,6 +731,10 @@ class VoiceMediaChannel : public MediaChannel {
                             AudioSource* source) = 0;
   // Set speaker output volume of the specified ssrc.
   virtual bool SetOutputVolume(uint32_t ssrc, double volume) = 0;
+  // Set base minimum playout delay of the specified ssrc.
+  virtual bool SetBaseMinimumPlayoutDelay(uint32_t ssrc, int delay_ms) = 0;
+  virtual bool GetBaseMinimumPlayoutDelay(uint32_t ssrc,
+                                          int* delay_ms) const = 0;
   // Returns if the telephone-event has been negotiated.
   virtual bool CanInsertDtmf() = 0;
   // Send a DTMF |event|. The DTMF out-of-band signal will be used.

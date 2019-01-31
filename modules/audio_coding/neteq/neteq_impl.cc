@@ -279,6 +279,21 @@ bool NetEqImpl::SetMaximumDelay(int delay_ms) {
   return false;
 }
 
+bool NetEqImpl::SetBaseMinimumDelay(int delay_ms) {
+  rtc::CritScope lock(&crit_sect_);
+  if (delay_ms >= 0 && delay_ms <= 10000) {
+    assert(delay_manager_.get());
+    return delay_manager_->SetBaseMinimumDelay(delay_ms);
+  }
+  return false;
+}
+
+int NetEqImpl::GetBaseMinimumDelay() const {
+  rtc::CritScope lock(&crit_sect_);
+  RTC_DCHECK(delay_manager_.get());
+  return delay_manager_->GetBaseMinimumDelay();
+}
+
 int NetEqImpl::TargetDelayMs() const {
   rtc::CritScope lock(&crit_sect_);
   RTC_DCHECK(delay_manager_.get());

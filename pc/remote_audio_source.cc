@@ -46,9 +46,12 @@ class RemoteAudioSource::AudioDataProxy : public AudioSinkInterface {
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(AudioDataProxy);
 };
 
-RemoteAudioSource::RemoteAudioSource(rtc::Thread* worker_thread)
+RemoteAudioSource::RemoteAudioSource(
+    rtc::Thread* worker_thread,
+    const rtc::WeakPtr<AudioRtpReceiver>& receiver)
     : main_thread_(rtc::Thread::Current()),
       worker_thread_(worker_thread),
+      receiver_(receiver),
       state_(MediaSourceInterface::kLive) {
   RTC_DCHECK(main_thread_);
   RTC_DCHECK(worker_thread_);
@@ -97,6 +100,21 @@ void RemoteAudioSource::SetVolume(double volume) {
   for (auto* observer : audio_observers_) {
     observer->OnSetVolume(volume);
   }
+}
+
+void RemoteAudioSource::SetLatency(double latency) {
+  RTC_DCHECK_GE(latency, 0);
+  for (auto* observer : audio_observers_) {
+    observer->OnSetLatency(latency);
+  }
+}
+
+double RemoteAudioSource::GetLatency() {
+  double latency = 0.0;
+  if (receiver_ && receiver_->GetLatency(&latency)) {
+    return latency;
+  }
+  return 0.0;
 }
 
 void RemoteAudioSource::RegisterAudioObserver(AudioObserver* observer) {
