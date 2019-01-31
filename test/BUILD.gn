@@ -362,6 +362,7 @@ if (rtc_include_tests) {
       "../test:single_threaded_task_queue",
       "pc/e2e:e2e_unittests",
       "scenario:scenario_unittests",
+      "task_runner:task_runner_unittests",
       "//testing/gmock",
       "//testing/gtest",
       "//third_party/abseil-cpp/absl/memory",
