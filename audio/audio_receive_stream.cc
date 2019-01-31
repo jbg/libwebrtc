@@ -239,6 +239,16 @@ void AudioReceiveStream::SetGain(float gain) {
   channel_receive_->SetChannelOutputVolumeScaling(gain);
 }
 
+int AudioReceiveStream::SetBaseMinimumPlayoutDelay(int delay_ms) {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  return channel_receive_->SetBaseMinimumPlayoutDelay(delay_ms);
+}
+
+int AudioReceiveStream::GetBaseMinimumPlayoutDelay() const {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  return channel_receive_->GetBaseMinimumPlayoutDelay();
+}
+
 std::vector<RtpSource> AudioReceiveStream::GetSources() const {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   return channel_receive_->GetSources();

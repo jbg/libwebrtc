@@ -77,8 +77,11 @@ AudioRtpReceiver::AudioRtpReceiver(
     const std::string& receiver_id,
     const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams)
     : worker_thread_(worker_thread),
+      weak_factory_(this),
       id_(receiver_id),
-      source_(new rtc::RefCountedObject<RemoteAudioSource>(worker_thread)),
+      source_(new rtc::RefCountedObject<RemoteAudioSource>(
+          worker_thread,
+          weak_factory_.GetWeakPtr())),
       track_(AudioTrackProxy::Create(rtc::Thread::Current(),
                                      AudioTrack::Create(receiver_id, source_))),
       cached_track_enabled_(track_->enabled()),
@@ -130,6 +133,48 @@ void AudioRtpReceiver::OnSetVolume(double volume) {
       RTC_NOTREACHED();
     }
   }
+}
+
+void AudioRtpReceiver::OnSetLatency(double latency) {
+  RTC_LOG(LS_ERROR) << "Here lattency ! kuddai " << latency;
+  if (!media_channel_ || !ssrc_) {
+    RTC_LOG(LS_ERROR)
+        << "AudioRtpReceiver::OnSetLatency: No audio channel exists.";
+    return;
+  }
+
+  // Does it the same for latency as volume?
+  // Also what behaviour is desired for recreation (reconfigure)
+  if (!stopped_ && track_->enabled()) {
+    int delay_ms = static_cast<int>(latency * 1000);
+    worker_thread_->Invoke<bool>(RTC_FROM_HERE, [&] {
+      return media_channel_->SetBaseMinimumPlayoutDelay(*ssrc_, delay_ms);
+    });
+  }
+}
+
+bool AudioRtpReceiver::GetLatency(double* latency) {
+  if (!media_channel_ || !ssrc_) {
+    RTC_LOG(LS_ERROR)
+        << "AudioRtpReceiver::GetLatency: No audio channel exists.";
+    return false;
+  }
+
+  // Double check this.
+  if (stopped_ || !track_->enabled()) {
+    return false;
+  }
+
+  int delay_ms = 0;
+  bool success = worker_thread_->Invoke<bool>(RTC_FROM_HERE, [&] {
+    return media_channel_->GetBaseMinimumPlayoutDelay(*ssrc_, &delay_ms);
+  });
+
+  if (success) {
+    *latency = static_cast<double>(delay_ms) / 1000.0;
+  }
+
+  return success;
 }
 
 std::vector<std::string> AudioRtpReceiver::stream_ids() const {
