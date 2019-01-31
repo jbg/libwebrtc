@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5510999c_3f537427",
+        "filename": "modules/desktop_capture/win/dxgi_frame.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 6175
+      },
+      "writtenOn": "2019-01-31T21:59:24Z",
+      "side": 1,
+      "message": "nit: it looks like that SharedMemoryDesktopFrame::Create() may return null, but BasicDesktopFrame() won\u0027t, also I see no place else will do the null-check to BasicDesktopFrame(). So I suppose that we can move the \"if (!frame)\" check and memset to  SharedMemoryDesktopFrame branch only. Then no need the |is_frame_data_zero_initialized|.",
+      "range": {
+        "startLine": 44,
+        "startChar": 14,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "0fe87f1f3c6279eee24aeef93870e64f5e9231e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
