@@ -22,6 +22,30 @@
       "revId": "d4c6777ef3d4fbb8f7f7deb0af1e661f3edb247b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa2e220e_c72274d8",
+        "filename": "test/partial_frame_compressor.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-01-31T11:06:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0719b67b_90e174b0",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "d4c6777ef3d4fbb8f7f7deb0af1e661f3edb247b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
