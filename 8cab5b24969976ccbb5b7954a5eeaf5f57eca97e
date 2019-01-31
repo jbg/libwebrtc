@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "9285d386_d9571389",
+        "filename": "test/task_runner/default_task_runner.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "No real case, but since it\u0027s likely to be caused by flakiness it\u0027s safer to swallow it here and have checks at the call site.",
+      "parentUuid": "c4fdcf6b_30b6c72a",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 13
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e1c2e059_3b0cc9b2",
         "filename": "test/task_runner/task_runner.h",
         "patchSetId": 3
@@ -114,6 +138,30 @@
       "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "356fdf87_7cd42919",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "RepeatingTaskHandleInterface implementations are provided and owned by task runner implementations. TaskHandle is used at call sites.\n\nThis construct enforces that we can\u0027t have more than one pointer to a RepeatingTaskHandleInterface other than the one owned by the implementation. (This is based on the RepeatingTaskHandle implementation)",
+      "parentUuid": "1b6b20ad_c50d5677",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 37
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +234,30 @@
     },
     {
       "key": {
+        "uuid": "a131b1b4_f509b73e",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "No, because that is owned by the underlying implementation, see comment above.",
+      "parentUuid": "9ce0616e_8c1088b4",
+      "range": {
+        "startLine": 115,
+        "startChar": 2,
+        "endLine": 115,
+        "endChar": 12
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8cbe000e_1cb1c910",
         "filename": "test/task_runner/task_runner.h",
         "patchSetId": 3
@@ -206,6 +278,30 @@
       "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ab0574b_6599ae96",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cbe000e_1cb1c910",
+      "range": {
+        "startLine": 125,
+        "startChar": 13,
+        "endLine": 125,
+        "endChar": 25
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -232,6 +328,30 @@
     },
     {
       "key": {
+        "uuid": "e06e505d_0087592d",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "Added a comment explaining why we aren\u0027t using unique_ptr here.",
+      "parentUuid": "c6aeb8dd_9f1acb47",
+      "range": {
+        "startLine": 136,
+        "startChar": 2,
+        "endLine": 136,
+        "endChar": 32
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4c15dd6_3928a859",
         "filename": "test/task_runner/task_runner_interface.h",
         "patchSetId": 3
@@ -252,6 +372,30 @@
       "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a44f6ac_9c3b45c7",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "QueuedTask returns a bool to control ownership, I want to avoid that behavior here, preferring to use repeated tasks for those use cases.",
+      "parentUuid": "c4c15dd6_3928a859",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 26
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -278,6 +422,30 @@
     },
     {
       "key": {
+        "uuid": "91af979e_8698259f",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96e293bc_86ef0972",
+      "range": {
+        "startLine": 28,
+        "startChar": 15,
+        "endLine": 28,
+        "endChar": 25
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba43a948_bc9f3f84",
         "filename": "test/task_runner/task_runner_interface.h",
         "patchSetId": 3
@@ -289,6 +457,30 @@
       "writtenOn": "2019-01-31T12:24:51Z",
       "side": 1,
       "message": "Name can confuse, that it is related to RepeatingTaskHandle from TaskQueue stack.\n\nAlso do we need to support some checks on is running? (if these class are actually connected)",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f09be8c4_0ae4eb15",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "It\u0027s based on RepeatingTaskBase. Agree that it would be good to have only one. If this new interface turns out useful, we could replace RepeatingTaskBase. The checks might be nice to add, I\u0027ll consider it.",
+      "parentUuid": "ba43a948_bc9f3f84",
       "range": {
         "startLine": 30,
         "startChar": 6,
@@ -324,6 +516,30 @@
     },
     {
       "key": {
+        "uuid": "e913aca1_78b078f7",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7178cad9_b0dcf33b",
+      "range": {
+        "startLine": 41,
+        "startChar": 20,
+        "endLine": 41,
+        "endChar": 30
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79952dac_e8bf5134",
         "filename": "test/task_runner/task_runner_interface.h",
         "patchSetId": 3
@@ -347,6 +563,30 @@
     },
     {
       "key": {
+        "uuid": "bf650c42_39275fba",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "It\u0027s implemented by both SimulatedTimeTaskRunner and DefaultTaskRunner which does not share any private scope.",
+      "parentUuid": "79952dac_e8bf5134",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1c594c5_0e8ff71c",
         "filename": "test/task_runner/task_runner_interface.h",
         "patchSetId": 3
@@ -358,6 +598,30 @@
       "writtenOn": "2019-01-31T12:24:51Z",
       "side": 1,
       "message": "Can you a contract to these methods",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 56
+      },
+      "revId": "8cab5b24969976ccbb5b7954a5eeaf5f57eca97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0f6deb2_c0f85285",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T13:26:46Z",
+      "side": 1,
+      "message": "Are you asking about adding documentation?",
+      "parentUuid": "b1c594c5_0e8ff71c",
       "range": {
         "startLine": 49,
         "startChar": 0,
