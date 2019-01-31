@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21e29314_97a00230",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T15:26:36Z",
+      "side": 1,
+      "message": "Name the test after what it tests:\n\nSomething like TotalBitrateIsUnaffectedByProtectionRatio?",
+      "range": {
+        "startLine": 396,
+        "startChar": 37,
+        "endLine": 396,
+        "endChar": 77
+      },
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5999785f_c6d222cc",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T15:26:36Z",
+      "side": 1,
+      "message": "Could this be elaborated? Why do we need to set both loss and protection ratio to fulfill the test conditions?",
+      "range": {
+        "startLine": 413,
+        "startChar": 0,
+        "endLine": 413,
+        "endChar": 59
+      },
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc0a5d67_62ca7733",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T15:26:36Z",
+      "side": 1,
+      "message": "\"When loss rate and protection ratio is reset to 0 we expect no effect on target bitrate\" ?",
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8678ca86_8935d6f9",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T15:26:36Z",
+      "side": 1,
+      "message": "I\u0027d prefer 0 here, but up to you.",
+      "range": {
+        "startLine": 423,
+        "startChar": 18,
+        "endLine": 423,
+        "endChar": 40
+      },
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2aa5384_0fc9a8dc",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T15:26:36Z",
+      "side": 1,
+      "message": "Elaborate.",
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b42a53af_70b2c323",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-01-31T15:26:36Z",
+      "side": 1,
+      "message": "Is this tested?",
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
