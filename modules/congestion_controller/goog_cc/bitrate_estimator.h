@@ -38,6 +38,7 @@ class BitrateEstimator {
   float UpdateWindow(int64_t now_ms, int bytes, int rate_window_ms);
   int sum_;
   int64_t initial_window_ms_;
+  int64_t noninitial_window_ms_;
   int64_t current_window_ms_;
   int64_t prev_time_ms_;
   float bitrate_estimate_;

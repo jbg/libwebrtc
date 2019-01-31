@@ -25,6 +25,8 @@ constexpr int kRateWindowMs = 150;
 
 const char kBweInitialThroughputWindowExperiment[] =
     "WebRTC-BweInitialThroughputWindowExperiment";
+const char kBweThroughputWindowExperiment[] =
+    "WebRTC-BweThroughputWindowExperiment";
 
 int ReadInitialThroughputWindowSizeMs(
     const WebRtcKeyValueConfig* key_value_config) {
@@ -49,11 +51,33 @@ int ReadInitialThroughputWindowSizeMs(
   return kInitialRateWindowMs;
 }
 
+int ReadThroughputWindowSizeMs(const WebRtcKeyValueConfig* key_value_config) {
+  std::string experiment_string =
+      key_value_config->Lookup(kBweThroughputWindowExperiment);
+  int window_ms = kRateWindowMs;
+  int parsed_values =
+      sscanf(experiment_string.c_str(), "Enabled-%d", &window_ms);
+  if (parsed_values != 1) {
+    RTC_LOG(LS_ERROR) << "Incorrectly formatted field trial string for "
+                      << kBweThroughputWindowExperiment;
+    return kRateWindowMs;
+  }
+  if (kRateWindowMs <= window_ms && window_ms <= 500) {
+    RTC_LOG(LS_INFO) << kBweThroughputWindowExperiment << " enabled with "
+                     << window_ms << " ms window.";
+    return window_ms;
+  }
+  RTC_LOG(LS_ERROR) << "Window for throughput estimation must be between "
+                    << kRateWindowMs << " and 500 ms.";
+  return kRateWindowMs;
+}
+
 }  // namespace
 
 BitrateEstimator::BitrateEstimator(const WebRtcKeyValueConfig* key_value_config)
     : sum_(0),
       initial_window_ms_(kInitialRateWindowMs),
+      noninitial_window_ms_(kRateWindowMs),
       current_window_ms_(0),
       prev_time_ms_(-1),
       bitrate_estimate_(-1.0f),
@@ -62,12 +86,16 @@ BitrateEstimator::BitrateEstimator(const WebRtcKeyValueConfig* key_value_config)
           .find("Enabled") == 0) {
     initial_window_ms_ = ReadInitialThroughputWindowSizeMs(key_value_config);
   }
+  if (key_value_config->Lookup(kBweThroughputWindowExperiment)
+          .find("Enabled") == 0) {
+    noninitial_window_ms_ = ReadThroughputWindowSizeMs(key_value_config);
+  }
 }
 
 BitrateEstimator::~BitrateEstimator() = default;
 
 void BitrateEstimator::Update(int64_t now_ms, int bytes) {
-  int rate_window_ms = kRateWindowMs;
+  int rate_window_ms = noninitial_window_ms_;
   // We use a larger window at the beginning to get a more stable sample that
   // we can use to initialize the estimate.
   if (bitrate_estimate_ < 0.f)
