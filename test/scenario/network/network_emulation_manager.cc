@@ -102,14 +102,24 @@ rtc::Thread* NetworkEmulationManager::CreateNetworkThread(
 }
 
 void NetworkEmulationManager::Start() {
-  process_task_handle_ = RepeatingTaskHandle::Start(&task_queue_, [this] {
-    ProcessNetworkPackets();
-    return TimeDelta::ms(kPacketProcessingIntervalMs);
+  rtc::Event done;
+  task_queue_.PostTask([&done, this]() {
+    process_task_handle_ = RepeatingTaskHandle::Start(&task_queue_, [this] {
+      ProcessNetworkPackets();
+      return TimeDelta::ms(kPacketProcessingIntervalMs);
+    });
+    done.Set();
   });
+  done.Wait(rtc::Event::kForever);
 }
 
 void NetworkEmulationManager::Stop() {
-  process_task_handle_.PostStop();
+  rtc::Event done;
+  task_queue_.PostTask([&done, this]() {
+    process_task_handle_.Stop();
+    done.Set();
+  });
+  done.Wait(rtc::Event::kForever);
 }
 
 FakeNetworkSocketServer* NetworkEmulationManager::CreateSocketServer(
