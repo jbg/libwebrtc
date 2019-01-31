@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ace1f515_5bcdade6",
+        "filename": "sdk/android/src/jni/video_source.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-01-31T15:47:41Z",
+      "side": 0,
+      "message": "Nice to see code like this go. I probably don\u0027t want to know why this native method was needed.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 1
+      },
+      "revId": "8102a1a8ea497a20fe89dfe480f199023063b18c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
