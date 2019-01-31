@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0719b67b_90e174b0",
+        "filename": "test/partial_frame_compressor.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-31T10:23:24Z",
+      "side": 1,
+      "message": "nit: I think you can simplify this to\n  if (video_source) {\n    source_-\u003eAddOrUpdateSink(this, rtc::VideoSinkWants());\n  }",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "d4c6777ef3d4fbb8f7f7deb0af1e661f3edb247b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
