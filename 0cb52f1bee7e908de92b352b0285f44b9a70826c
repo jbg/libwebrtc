@@ -16,6 +16,24 @@
       "revId": "0cb52f1bee7e908de92b352b0285f44b9a70826c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "512c6bac_246ef62b",
+        "filename": "tools_webrtc/ios/tests/perf_trybot_tests.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7796
+      },
+      "writtenOn": "2019-01-31T08:32:09Z",
+      "side": 1,
+      "message": "This file, along the others in this directory, just lists the tests that should be run for that bot.\n\nYou mean we should not have different files for try and for ci waterfalls?",
+      "parentUuid": "739ec2fb_5706746a",
+      "revId": "0cb52f1bee7e908de92b352b0285f44b9a70826c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
