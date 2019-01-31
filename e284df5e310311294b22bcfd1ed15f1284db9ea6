@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07c7d062_7a4e6a39",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T13:59:08Z",
+      "side": 1,
+      "message": "Which tasks will do it?\nAlso should all tasks, that are running by this runner be destroyed first?",
+      "range": {
+        "startLine": 138,
+        "startChar": 39,
+        "endLine": 138,
+        "endChar": 74
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
