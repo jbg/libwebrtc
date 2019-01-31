@@ -46,6 +46,75 @@
       "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d43be1ee_fc5433c8",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-31T14:09:35Z",
+      "side": 1,
+      "message": "will it possible to use std::function\u003cvoid()\u003e instead of this interface?",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 26
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06498021_a1d1b451",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-31T14:09:35Z",
+      "side": 1,
+      "message": "What is missing in rtc_base/repeating_task.h to generate new interfaces ?",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 28
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cc31099_3d5a8afe",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-31T14:09:35Z",
+      "side": 1,
+      "message": "This looks very similar to the TaskQueue interface, but using different vocabulary.\ncan you just use webrtc::TaskQueueBase interface instead?)",
+      "range": {
+        "startLine": 45,
+        "startChar": 6,
+        "endLine": 45,
+        "endChar": 29
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
