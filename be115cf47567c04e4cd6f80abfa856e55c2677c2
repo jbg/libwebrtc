@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "e3b945ed_c22d7dc9",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a117495_da20377f",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 37
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33132ff5_18856a13",
         "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
         "patchSetId": 3
@@ -289,6 +313,30 @@
     },
     {
       "key": {
+        "uuid": "e70e55d3_e562256e",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "173466bb_a4b8b848",
+      "range": {
+        "startLine": 56,
+        "startChar": 43,
+        "endLine": 56,
+        "endChar": 53
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81467a6c_42510b35",
         "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.h",
         "patchSetId": 3
@@ -470,6 +518,24 @@
     },
     {
       "key": {
+        "uuid": "d5c5d11a_362c7ec0",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5254d83e_6230112d",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96724095_54040756",
         "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.cc",
         "patchSetId": 3
@@ -490,6 +556,30 @@
       "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4e04eeb_cc721268",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "This is a historical artifact at this point - I\u0027ll switch everything to use the IceTransactions (which used to store less data).",
+      "parentUuid": "96724095_54040756",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 68
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -634,6 +724,30 @@
     },
     {
       "key": {
+        "uuid": "a528129d_88c6e081",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df457681_b4f74905",
+      "range": {
+        "startLine": 29,
+        "startChar": 23,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73afae06_3ad4821e",
         "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
         "patchSetId": 3
@@ -775,6 +889,30 @@
     },
     {
       "key": {
+        "uuid": "4b9e7909_32f022a4",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "I think this is closer to what you were thinking.",
+      "parentUuid": "fe16b5f2_43d50af1",
+      "range": {
+        "startLine": 88,
+        "startChar": 7,
+        "endLine": 88,
+        "endChar": 34
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07f21932_45434e4b",
         "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
         "patchSetId": 3
@@ -857,6 +995,24 @@
       "side": 1,
       "message": "Right now the class shares the ice_transactions_/events_by_transaction_id_ intermediate objects and makes timestamp translation easier. I will look in to refactoring.",
       "parentUuid": "81dde614_7e8e4f4f",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69d7bacf_3c612fe0",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "Ended up using ice_transactions_ everywhere, so it doesn\u0027t make as much sense to break this up in to two parts any more. I will still consider using functions without a class.",
+      "parentUuid": "fa44fd57_a93e68b0",
       "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true

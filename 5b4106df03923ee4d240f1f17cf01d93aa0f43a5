@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "330a5868_7ace8082",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "Removed this.",
+      "parentUuid": "0be6afc2_414a0321",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 17
+      },
+      "revId": "5b4106df03923ee4d240f1f17cf01d93aa0f43a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02dc4396_d28e73a5",
         "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
         "patchSetId": 2
@@ -39,6 +63,24 @@
       "revId": "5b4106df03923ee4d240f1f17cf01d93aa0f43a5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c31d450c_e4ea94ed",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-01-31T04:35:46Z",
+      "side": 1,
+      "message": "Obsolete - switched all methods over to using ice_transactions_.",
+      "parentUuid": "02dc4396_d28e73a5",
+      "revId": "5b4106df03923ee4d240f1f17cf01d93aa0f43a5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
