@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40cf3262_f3601de3",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-31T10:11:06Z",
+      "side": 1,
+      "message": "nit: Comment in header says that the underlying buffer is \"Never nullptr for a properly initialized VideoFrame.\" so maybe we should DCHECK that here?",
+      "revId": "25fab31095204f0e04d4f0a503e77e0e357321f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d488e52b_36ae8cf5",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-01-31T10:11:06Z",
+      "side": 1,
+      "message": "nit: I usually prefer \u0026partial_frame_desciption_.value() so we don\u0027t have too many special characters back to back",
+      "range": {
+        "startLine": 152,
+        "startChar": 40,
+        "endLine": 152,
+        "endChar": 68
+      },
+      "revId": "25fab31095204f0e04d4f0a503e77e0e357321f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
