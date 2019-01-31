@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "783f1016_c6632202",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T11:02:42Z",
+      "side": 1,
+      "message": "What we want to achieve having task runner here?",
+      "range": {
+        "startLine": 144,
+        "startChar": 2,
+        "endLine": 144,
+        "endChar": 27
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2020492b_08fb757e",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T11:02:42Z",
+      "side": 1,
+      "message": "Can you move it into constant.\nAlso can you explain in more details about stop. As I understand if we will call stop here when there are no packets inside node will stop processing at all..",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 30
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92d4a441_f3fd97af",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T11:02:42Z",
+      "side": 1,
+      "message": "I think full type name here will be more readable, otherwise you need to jump to understand\nwhat is inside that map.",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 8
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a7004ab_6a9d22c4",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T11:02:42Z",
+      "side": 1,
+      "message": "Creating a routing should block, otherwise we can accidentally start sending packets before routing was created.",
+      "range": {
+        "startLine": 130,
+        "startChar": 16,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5633dcb1_f550da4e",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T11:02:42Z",
+      "side": 1,
+      "message": "I think it will block future option to have different nodes in the network. \nProbably qingsi@ will have such requirements, so adding him to review too.",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7388d78_49d49d57",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T11:02:42Z",
+      "side": 1,
+      "message": "Do we need to stop it?",
+      "range": {
+        "startLine": 112,
+        "startChar": 13,
+        "endLine": 112,
+        "endChar": 26
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5fb3810_b311fcd8",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-01-31T11:02:42Z",
+      "side": 1,
+      "message": "Can we avoid extra depending on implementation here and make it possible to use only TaskRunner abstraction?",
+      "range": {
+        "startLine": 331,
+        "startChar": 2,
+        "endLine": 331,
+        "endChar": 25
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
