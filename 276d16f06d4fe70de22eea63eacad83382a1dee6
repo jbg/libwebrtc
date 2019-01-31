@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "01b18d32_74eadd1f",
+        "filename": "api/task_queue/task_queue_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-01-31T07:25:16Z",
+      "side": 1,
+      "message": "the purpose of the test is to ensure TaskQueue sets proper memory barriers.\n\nwouldn\u0027t using atomic set those barries for the TaskQueue and thus stop testing what it suppose to test?\nAbsent of those barriers is UB which expected to be caught. Likely not with regular run, but with run under tsan.",
+      "parentUuid": "a70106fd_566c5066",
+      "revId": "276d16f06d4fe70de22eea63eacad83382a1dee6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "afa79b48_edf38d9b",
         "filename": "rtc_base/task_queue_unittest.cc",
         "patchSetId": 2
