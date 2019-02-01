@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f486e4ff_e7706f58",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2019-02-01T07:44:19Z",
+      "side": 1,
+      "message": "I\u0027m sorry, but I feel this is overengineered. What I had in mind was helper functions like these:\n\nScopedJavaLocalRef\u003cjintArray\u003e NativeToJavaIntArray(rtc::ArrayView\u003cconst int32_t\u003e arr);\nstd::vector\u003cint32_t\u003e JavaToNativeIntArray(const JavaRef\u003cjintArray\u003e\u0026 j_arr);\n\nThese are simple to understand and implementations should be straightforward, and they will suffice for the majority of cases. In cases where performance is not enough with these helper functions, we fall back to the manual JNI code we have today. It looks like that would only be for NV21Buffer (and I\u0027m open to using the helper functions here as well).",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 31
+      },
+      "revId": "f6c498c97c4adc046fc6ec7286fba821201e4f5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d43dc5fe_9c6a63f9",
+        "filename": "sdk/android/native_unittests/java_types_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2019-02-01T07:44:19Z",
+      "side": 1,
+      "message": "Can we add a regression test that converts ~2000 times that would reproduce the memory leak and catch any regression in those implementations? I guess it only makes sense if we are running these tests on old Android versions so we can actually reproduce it.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 4
+      },
+      "revId": "f6c498c97c4adc046fc6ec7286fba821201e4f5e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
