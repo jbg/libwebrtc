@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "c5de75df_d78e7189",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-02-01T08:33:51Z",
+      "side": 1,
+      "message": "A thread checker will serve to document current threading assumption, which makes it easier to reason about and change the code later on.\n\nPlease copy me on any design docs regarding media transport and threading.",
+      "parentUuid": "1bc87ea3_d654f7bc",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "865394b4_e8e75de0",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 18
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "if (ecoder) was in old code updating encoder overhead in ChannelSend. If I remove it, some of PeerConnectionUnitTests fail (and they also fail in old codepath without if). \n\nMaybe SetTransportOverhead can be called before encoder is setup? \\\n\nUnfortunately I did not have time to investigate today -- will update tomorrow.",
       "parentUuid": "865394b4_e8e75de0",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87298c23_67de1ee5",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-02-01T08:33:51Z",
+      "side": 1,
+      "message": "Ah, never mind - probably ChannelSend::ModifyEncoder should have the \"if\" instead of each use of it...",
+      "parentUuid": "d95f8fa7_74afe1bd",
       "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -177,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "491f6164_a1999ef3",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-02-01T08:33:51Z",
+      "side": 1,
+      "message": "True. I\u0027m ok with this as is but I\u0027d be happier if there was a way to have less CSs scattered.",
+      "parentUuid": "38770816_00c3e119",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7228940b_d8384185",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 18
@@ -206,6 +260,24 @@
       "side": 1,
       "message": "Taking lock twice is not ideal, because it can lead to Encoder getting not the most recent overhead. I can take a lock and call CallEncoder, but it would be equivalent to calling stream-\u003eUpdateOverheadForEncoder, just code duplication. In old code in ChannelSend we always called ModifyEncoder under the lock.\n\nHopefully overhead will not change often, so these locks will have no negative effect on performance or quality.\n\nTestOnly is used in test to make sure overhead is calculated correctly. Alternative is to to use mock encoder, I can change if you prefer it, but ideally I want to move ANA out of encoder and test ANA settings instead of encoder, but it\u0027s a separate discussion.",
       "parentUuid": "7228940b_d8384185",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "933d5231_cb32f5c8",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-02-01T08:33:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b31330be_a54fc9f9",
       "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
