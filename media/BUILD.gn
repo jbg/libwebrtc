@@ -20,10 +20,7 @@ group("media") {
 }
 
 config("rtc_media_defines_config") {
-  defines = [
-    "HAVE_WEBRTC_VIDEO",
-    "HAVE_WEBRTC_VOICE",
-  ]
+  defines = [ "HAVE_WEBRTC_VOICE" ]
 }
 
 rtc_source_set("rtc_h264_profile_id") {
@@ -308,7 +305,6 @@ rtc_static_library("rtc_audio_video") {
     "engine/adm_helpers.h",
     "engine/apm_helpers.cc",
     "engine/apm_helpers.h",
-    "engine/null_webrtc_video_engine.h",
     "engine/payload_type_mapper.cc",
     "engine/payload_type_mapper.h",
     "engine/simulcast.cc",
@@ -573,7 +569,6 @@ if (rtc_include_tests) {
       "engine/encoder_simulcast_proxy_unittest.cc",
       "engine/internal_decoder_factory_unittest.cc",
       "engine/multiplex_codec_factory_unittest.cc",
-      "engine/null_webrtc_video_engine_unittest.cc",
       "engine/payload_type_mapper_unittest.cc",
       "engine/simulcast_encoder_adapter_unittest.cc",
       "engine/simulcast_unittest.cc",
