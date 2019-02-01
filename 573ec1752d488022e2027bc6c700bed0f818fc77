@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52eee8ac_0c650d96",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-01T13:20:37Z",
+      "side": 1,
+      "message": "an",
+      "range": {
+        "startLine": 44,
+        "startChar": 65,
+        "endLine": 44,
+        "endChar": 66
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08b8488f_d23ccdb2",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-01T13:20:37Z",
+      "side": 1,
+      "message": "Having names switched here is quite confusing. I understood that in the config for the sender you set if the stream should be dumped on the other side. Consider changing it to configuring dumping of the received stream on a peer.\n\nOr at least add some comments here. It really looks like a typo.",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 62,
+        "endChar": 47
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "372feec7_937b6cf2",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-01T13:20:37Z",
+      "side": 1,
+      "message": "Nit: simplify to\nRTC_CHECK(!(video_config.input_file_name \u0026\u0026 video_config.generator));\nRTC_CHECK(!(video_config.input_file_name \u0026\u0026 video_config.screen_share_config));\nRTC_CHECK(!(video_config.screen_share_config \u0026\u0026 video_config.generator));",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 124,
+        "endChar": 7
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1abf4786_cbbf8564",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-01T13:20:37Z",
+      "side": 1,
+      "message": "pre-run",
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57a52644_3615b25c",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-01T13:20:37Z",
+      "side": 1,
+      "message": "Do something here. Maybe:\nframe_generator_type \u003d FrameGenerator::OutputType::kDefault;\n\nAlso, consider using FrameGenerator::OutputType in video_config.generator instead of extra VideoGeneratorType.",
+      "range": {
+        "startLine": 173,
+        "startChar": 67,
+        "endLine": 174,
+        "endChar": 6
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2231a80_acf6b05d",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-01T13:20:37Z",
+      "side": 1,
+      "message": "/*frame_repeate_count\u003d*/1",
+      "range": {
+        "startLine": 186,
+        "startChar": 51,
+        "endLine": 186,
+        "endChar": 52
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b94f136e_b81ccddd",
+        "filename": "test/pc/e2e/peerconnection_quality_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-01T13:20:37Z",
+      "side": 1,
+      "message": "What does this name mean? Consider RunInternal or RunOnSignallingThread.",
+      "range": {
+        "startLine": 58,
+        "startChar": 7,
+        "endLine": 58,
+        "endChar": 12
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8021e257_aac096ed",
+        "filename": "test/pc/e2e/test_peer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-01T13:20:37Z",
+      "side": 1,
+      "message": "What was wrong with ArrayView?",
+      "range": {
+        "startLine": 63,
+        "startChar": 29,
+        "endLine": 63,
+        "endChar": 35
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
