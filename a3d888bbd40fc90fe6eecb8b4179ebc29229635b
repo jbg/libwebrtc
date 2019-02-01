@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48236ddc_5bdce23e",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-01T13:38:55Z",
+      "side": 1,
+      "message": "Why this change? We used to have lots of methods passing const rtc::scoped_refptr\u003c...\u003e\u0026, motivated by a desire to eliminate refcount updates. But current recommendation is to pass scoped_refptr by value for those calls (this is one) that affect ownership, and raw pointer otherwise.",
+      "range": {
+        "startLine": 175,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 58
+      },
+      "revId": "a3d888bbd40fc90fe6eecb8b4179ebc29229635b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
