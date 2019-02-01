@@ -22,6 +22,30 @@
       "revId": "1d906f79a4bc9771726b30ff15022fa569787cca",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "931f2818_4ac7cb8b",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-02-01T09:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df6d04a_9ec14765",
+      "range": {
+        "startLine": 92,
+        "startChar": 49,
+        "endLine": 92,
+        "endChar": 59
+      },
+      "revId": "1d906f79a4bc9771726b30ff15022fa569787cca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

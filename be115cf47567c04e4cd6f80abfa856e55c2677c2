@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4115c634_033b7d52",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-02-01T09:50:06Z",
+      "side": 1,
+      "message": "This takes IceTransactions now. I think this can be easily changed in the future to be more general if necessary.",
+      "parentUuid": "b10f0212_191fa5b9",
+      "range": {
+        "startLine": 22,
+        "startChar": 28,
+        "endLine": 22,
+        "endChar": 39
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "027078c0_84da18cb",
         "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
         "patchSetId": 3
@@ -141,6 +165,30 @@
       "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fc66e68_1a3c6095",
+        "filename": "rtc_tools/event_log_visualizer/clock_offset_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-02-01T09:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f481d4d_18540e51",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 37
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -890,6 +938,30 @@
     },
     {
       "key": {
+        "uuid": "b0bbcf59_ab3a6047",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-02-01T09:50:06Z",
+      "side": 1,
+      "message": "Oh, I get what you are suggesting now - I thought the suggestion was to call SetSuggested each time I updated the PlotLimit. It didn\u0027t occur to me that SetSuggested could be called with dummy min/max values just to get it to compute the min/max based on the data. Makes sense.",
+      "parentUuid": "1df74b75_678ace81",
+      "range": {
+        "startLine": 76,
+        "startChar": 6,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5594245a_4f435a41",
         "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
         "patchSetId": 3
@@ -1064,6 +1136,24 @@
       "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c554275d_ff99a34a",
+        "filename": "rtc_tools/event_log_visualizer/multilog_analyzer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5281
+      },
+      "writtenOn": "2019-02-01T09:50:06Z",
+      "side": 1,
+      "message": "I will leave this as is for the ToCallTimeSec and SetSuggestedXAxis helpers.\nLet me know if you prefer something else.",
+      "parentUuid": "69d7bacf_3c612fe0",
+      "revId": "be115cf47567c04e4cd6f80abfa856e55c2677c2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
