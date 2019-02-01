@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "527b8bae_4c25d486",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-01T12:24:52Z",
+      "side": 0,
+      "message": "Appears to be a left-over from https://codereview.webrtc.org/2399463009.",
+      "range": {
+        "startLine": 215,
+        "startChar": 7,
+        "endLine": 215,
+        "endChar": 28
+      },
+      "revId": "f1d1061e51ca8554263323e995fbd534a080f61b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
