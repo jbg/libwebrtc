@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bd11a47_77eb5278",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T16:39:09Z",
+      "side": 1,
+      "message": "I was thinking this field should say |feedback_requested| since it indicates if we should send feed as of this packet.",
+      "range": {
+        "startLine": 86,
+        "startChar": 7,
+        "endLine": 86,
+        "endChar": 17
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bfd35e0_11a81cf1",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T16:39:09Z",
+      "side": 1,
+      "message": "Add some one-liner comments what these represent.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 26
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be49dc94_022c4c49",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T16:39:09Z",
+      "side": 1,
+      "message": "We need to specify what |sequence_count| \u003d 0 means.\nMy intent was that if feedback is not requested, then the last two bytes of the header is not\nsent. Should we set |sequence_count| \u003d 0 then? Is so, what does it mean if that value arrives on the wire? Do we force to 1 in that case? Or can we use it for some other signaling, such as to say \"let\u0027s turn on the feedback-on-request mechanism but don\u0027t send feedback now\"?",
+      "range": {
+        "startLine": 88,
+        "startChar": 11,
+        "endLine": 88,
+        "endChar": 25
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4935c571_bf58c5e6",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T16:39:09Z",
+      "side": 1,
+      "message": "Set this in the ctor instead, like the other members.",
+      "range": {
+        "startLine": 102,
+        "startChar": 44,
+        "endLine": 102,
+        "endChar": 60
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d6708e7_03676459",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T16:39:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be\nif (header.extension.feedback_config.on_request) {\n  feedback_on_request_ \u003d true;\n}\nie if we ever see a packet with the extended format, then we know we start only sending feedback on request.\nI\u0027m thinking maybe we should add a method to explicitly set this, based on creating a receive stream that support the next header extension.\nMaybe even default to only sending feedback on request, and if a stream with the old transport cc extension is created then we turn on periodic feedback. wdyt?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 69
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ddd0856_72bb63c3",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T16:39:09Z",
+      "side": 1,
+      "message": "Thinking even more here, can we not do this and instead immediately call the code to BuildFeedbackPacket() and send it to the transport, avoiding having to wait for thread switching? Then we could even remove this temporary storage of feedback requests.",
+      "range": {
+        "startLine": 62,
+        "startChar": 35,
+        "endLine": 62,
+        "endChar": 50
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86a67474_a1232ceb",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T16:39:09Z",
+      "side": 1,
+      "message": "nit: {}",
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9de8f07_2581d122",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T16:39:09Z",
+      "side": 1,
+      "message": "prefer not to abbreviate",
+      "range": {
+        "startLine": 59,
+        "startChar": 28,
+        "endLine": 59,
+        "endChar": 34
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
