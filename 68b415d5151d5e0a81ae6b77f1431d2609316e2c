@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eccc3a43_e11a9bc6",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-01T12:55:20Z",
+      "side": 1,
+      "message": "I don\u0027t understand really, what does the fraction loss have to do with how much protection is used in observer, how does the 80% come into the picture?\n\nIs the test that even IF bitrate_observer reports variable protection ratios, THEN we should NOT trigger OnAllocationLimitsChanged?\n\nWhy do we test the last bitrate_bps?\n\n\nMaybe we could use mocks instead of the test bitrate observer, that might make it more clear?",
+      "range": {
+        "startLine": 411,
+        "startChar": 0,
+        "endLine": 412,
+        "endChar": 79
+      },
+      "revId": "68b415d5151d5e0a81ae6b77f1431d2609316e2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
