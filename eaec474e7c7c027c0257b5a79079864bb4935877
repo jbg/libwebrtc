@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "780fd2fe_c8eea449",
+        "filename": "video/partial_frame_decompressor.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T15:36:03Z",
+      "side": 1,
+      "message": "nit: const here and below",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 5
+      },
+      "revId": "eaec474e7c7c027c0257b5a79079864bb4935877",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aa8e111_98e44bda",
+        "filename": "video/partial_frame_decompressor.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T15:36:03Z",
+      "side": 1,
+      "message": "\"Copy whole picture to \" ?",
+      "revId": "eaec474e7c7c027c0257b5a79079864bb4935877",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a92a5c5_2230580e",
+        "filename": "video/partial_frame_decompressor.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T15:36:03Z",
+      "side": 1,
+      "message": "Like the compressor class before it, I\u0027m not sure I like the name :)\nPartialFrameComposer? PartialFrameAssembler?",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 30
+      },
+      "revId": "eaec474e7c7c027c0257b5a79079864bb4935877",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
