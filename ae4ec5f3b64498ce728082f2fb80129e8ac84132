@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f8591ab6_88274c9a",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-01T11:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21e29314_97a00230",
+      "range": {
+        "startLine": 396,
+        "startChar": 37,
+        "endLine": 396,
+        "endChar": 77
+      },
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5999785f_c6d222cc",
         "filename": "call/bitrate_allocator_unittest.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-31T15:26:36Z",
       "side": 1,
       "message": "Could this be elaborated? Why do we need to set both loss and protection ratio to fulfill the test conditions?",
+      "range": {
+        "startLine": 413,
+        "startChar": 0,
+        "endLine": 413,
+        "endChar": 59
+      },
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b8793f4_39ef5906",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-01T11:39:48Z",
+      "side": 1,
+      "message": "This is just to be consistent. It would not be rational of the |bitrate_observer| to allocate bits to protection if there is no loss. But that does not affect the unit test. Would you prefer fraction_lost \u003d\u003d 0, to clarify the test?\n\nBtw, the loss rate and protection rate are conflated in the other tests (and in the earlier version of this test). In the new patchset, I split these up.",
+      "parentUuid": "5999785f_c6d222cc",
       "range": {
         "startLine": 413,
         "startChar": 0,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "d52c55fd_623522c7",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-01T11:39:48Z",
+      "side": 1,
+      "message": "Clarified with EXPECT_CALL and comment.",
+      "parentUuid": "cc0a5d67_62ca7733",
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8678ca86_8935d6f9",
         "filename": "call/bitrate_allocator_unittest.cc",
         "patchSetId": 3
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "32caf39a_2836be5c",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-01T11:39:48Z",
+      "side": 1,
+      "message": "No strong preference. Changed.",
+      "parentUuid": "8678ca86_8935d6f9",
+      "range": {
+        "startLine": 423,
+        "startChar": 18,
+        "endLine": 423,
+        "endChar": 40
+      },
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2aa5384_0fc9a8dc",
         "filename": "call/bitrate_allocator_unittest.cc",
         "patchSetId": 3
@@ -105,6 +195,47 @@
     },
     {
       "key": {
+        "uuid": "f968ff4f_53e7a0c9",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-01T11:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2aa5384_0fc9a8dc",
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cad4c53_759a7d8a",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-01T11:39:48Z",
+      "side": 1,
+      "message": "This is wrong...",
+      "range": {
+        "startLine": 430,
+        "startChar": 21,
+        "endLine": 430,
+        "endChar": 24
+      },
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b42a53af_70b2c323",
         "filename": "call/bitrate_allocator_unittest.cc",
         "patchSetId": 3
@@ -119,6 +250,24 @@
       "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81b80a63_e1050fa1",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-01T11:39:48Z",
+      "side": 1,
+      "message": "Yep, since the mock is strict. I changed to using Times(0) on the existing NiceMock instead.",
+      "parentUuid": "b42a53af_70b2c323",
+      "revId": "ae4ec5f3b64498ce728082f2fb80129e8ac84132",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
