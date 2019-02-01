@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d589dedc_44bd4bc8",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-01T13:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52eee8ac_0c650d96",
+      "range": {
+        "startLine": 44,
+        "startChar": 65,
+        "endLine": 44,
+        "endChar": 66
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08b8488f_d23ccdb2",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "20f3c8af_9c259aaf",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-01T13:41:04Z",
+      "side": 1,
+      "message": "Clarification comment added",
+      "parentUuid": "08b8488f_d23ccdb2",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 62,
+        "endChar": 47
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "372feec7_937b6cf2",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2019-02-01T13:20:37Z",
       "side": 1,
       "message": "Nit: simplify to\nRTC_CHECK(!(video_config.input_file_name \u0026\u0026 video_config.generator));\nRTC_CHECK(!(video_config.input_file_name \u0026\u0026 video_config.screen_share_config));\nRTC_CHECK(!(video_config.screen_share_config \u0026\u0026 video_config.generator));",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 124,
+        "endChar": 7
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42fe435c_e8675547",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-01T13:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "372feec7_937b6cf2",
       "range": {
         "startLine": 113,
         "startChar": 1,
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "aa25dfb2_f8a6da66",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-01T13:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1abf4786_cbbf8564",
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57a52644_3615b25c",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 2
@@ -108,6 +198,30 @@
       "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e5fa9b4_561ecb5c",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-01T13:41:04Z",
+      "side": 1,
+      "message": "That part will be move to public API, so I don\u0027t want to expose FrameGenerator itslef.",
+      "parentUuid": "57a52644_3615b25c",
+      "range": {
+        "startLine": 173,
+        "startChar": 67,
+        "endLine": 174,
+        "endChar": 6
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "1cf5c277_fa3a03f3",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-01T13:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2231a80_acf6b05d",
+      "range": {
+        "startLine": 186,
+        "startChar": 51,
+        "endLine": 186,
+        "endChar": 52
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b94f136e_b81ccddd",
         "filename": "test/pc/e2e/peerconnection_quality_test.h",
         "patchSetId": 2
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "b2d01db0_9c2615a1",
+        "filename": "test/pc/e2e/peerconnection_quality_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-01T13:41:04Z",
+      "side": 1,
+      "message": "Naming pattern was taken from other examples in the code base. But agree, it makes sense to rename.",
+      "parentUuid": "b94f136e_b81ccddd",
+      "range": {
+        "startLine": 58,
+        "startChar": 7,
+        "endLine": 58,
+        "endChar": 12
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8021e257_aac096ed",
         "filename": "test/pc/e2e/test_peer.h",
         "patchSetId": 2
@@ -168,6 +330,30 @@
       "writtenOn": "2019-02-01T13:20:37Z",
       "side": 1,
       "message": "What was wrong with ArrayView?",
+      "range": {
+        "startLine": 63,
+        "startChar": 29,
+        "endLine": 63,
+        "endChar": 35
+      },
+      "revId": "573ec1752d488022e2027bc6c700bed0f818fc77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7000a453_375239f4",
+        "filename": "test/pc/e2e/test_peer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-01T13:41:04Z",
+      "side": 1,
+      "message": "There was compilation error. I\u0027ll restore it, when the fix for array view will be landed.",
+      "parentUuid": "8021e257_aac096ed",
       "range": {
         "startLine": 63,
         "startChar": 29,
