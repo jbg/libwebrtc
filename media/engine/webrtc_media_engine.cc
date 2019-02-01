@@ -17,14 +17,9 @@
 #include "api/video/builtin_video_bitrate_allocator_factory.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
+#include "media/engine/webrtc_video_engine.h"
 #include "media/engine/webrtc_voice_engine.h"
 #include "system_wrappers/include/field_trial.h"
-
-#ifdef HAVE_WEBRTC_VIDEO
-#include "media/engine/webrtc_video_engine.h"
-#else
-#include "media/engine/null_webrtc_video_engine.h"
-#endif
 
 namespace cricket {
 
@@ -53,13 +48,9 @@ std::unique_ptr<MediaEngineInterface> WebRtcMediaEngineFactory::Create(
         video_bitrate_allocator_factory,
     rtc::scoped_refptr<webrtc::AudioMixer> audio_mixer,
     rtc::scoped_refptr<webrtc::AudioProcessing> audio_processing) {
-#ifdef HAVE_WEBRTC_VIDEO
   auto video_engine = absl::make_unique<WebRtcVideoEngine>(
       std::move(video_encoder_factory), std::move(video_decoder_factory),
       std::move(video_bitrate_allocator_factory));
-#else
-  auto video_engine = absl::make_unique<NullWebRtcVideoEngine>();
-#endif
   return std::unique_ptr<MediaEngineInterface>(new CompositeMediaEngine(
       absl::make_unique<WebRtcVoiceEngine>(adm, audio_encoder_factory,
                                            audio_decoder_factory, audio_mixer,
