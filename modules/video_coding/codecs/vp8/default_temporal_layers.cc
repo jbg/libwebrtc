@@ -135,7 +135,7 @@ std::vector<Vp8FrameConfig> DefaultTemporalLayers::GetTemporalPattern(
   switch (num_layers) {
     case 1:
       // All frames reference all buffers and the 'last' buffer is updated.
-      return {Vp8FrameConfig(kReferenceAndUpdate, kReference, kReference)};
+      return {Vp8FrameConfig(kReferenceAndUpdate, kNone, kNone)};
     case 2:
       // All layers can reference but not update the 'alt' buffer, this means
       // that the 'alt' buffer reference is effectively the last keyframe.
