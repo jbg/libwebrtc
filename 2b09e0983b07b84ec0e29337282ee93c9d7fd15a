@@ -22,6 +22,30 @@
       "revId": "2b09e0983b07b84ec0e29337282ee93c9d7fd15a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80b00904_1f356099",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-02-01T13:04:32Z",
+      "side": 1,
+      "message": "I am in fact looking right now into referencing all buffers all the time, with different periods of update for each. Specifically, I was thinking of updating LAST with every frame, then GOLDEN every 4 and ARF every 8. I was also thinking of 1-8-16. I\u0027d have to experiment, really. That\u0027s a bit more involved a tweak, intended to improve coding efficiency rather than CPU utilization. As a quicker fix (given that I am trying to concentrate on another project), I think this s/kReference/kNone is good to land. Wdyt?",
+      "parentUuid": "b7ff98bf_999f0164",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 14
+      },
+      "revId": "2b09e0983b07b84ec0e29337282ee93c9d7fd15a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
