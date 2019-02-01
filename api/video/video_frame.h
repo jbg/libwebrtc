@@ -172,7 +172,8 @@ class RTC_EXPORT VideoFrame {
   // Return the underlying buffer. This can only be a nullptr for a partial
   // update VideoFrame with no changed pixels.
   rtc::scoped_refptr<webrtc::VideoFrameBuffer> video_frame_buffer() const;
-  void set_video_frame_buffer(rtc::scoped_refptr<VideoFrameBuffer> buffer);
+  void set_video_frame_buffer(
+      const rtc::scoped_refptr<VideoFrameBuffer>& buffer);
 
   // TODO(nisse): Deprecated.
   // Return true if the frame is stored in a texture.
