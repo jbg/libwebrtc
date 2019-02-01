@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62233119_9e1130b5",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-01T15:59:46Z",
+      "side": 1,
+      "message": "Why not checked all the fields (e.g. frames_sent())?\nAlso, if the test is deterministic, you should check for equality.\nIf not, you should explain why, and maybe the number of frames is expected to be in a tighter range than just ]0 ; +inf[.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 65
+      },
+      "revId": "600c52df97e5d534d2999008c8b4c5627cc6d9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0417a52_a75449df",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-01T15:59:46Z",
+      "side": 1,
+      "message": "Expect rather than assert.",
+      "revId": "600c52df97e5d534d2999008c8b4c5627cc6d9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a56f9dda_e784cc28",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-01T15:59:46Z",
+      "side": 1,
+      "message": "From here, expect rather than assert.\nIf it is ok to call these functions even if previous steps failed, also use expect for those previous steps.",
+      "revId": "600c52df97e5d534d2999008c8b4c5627cc6d9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
