@@ -30,6 +30,9 @@ using ::testing::IsEmpty;
 template <typename T>
 void Call(ArrayView<T>) {}
 
+template <typename T, ptrdiff_t N>
+void CallFixed(ArrayView<T, N>) {}
+
 }  // namespace
 
 TEST(ArrayViewTest, TestConstructFromPtrAndArray) {
@@ -182,6 +185,8 @@ TEST(ArrayViewTest, TestCopyAssignmentFixed) {
 }
 
 TEST(ArrayViewTest, TestStdArray) {
+  Call<const int>(std::array<int, 4>{1, 2, 3, 4});
+  CallFixed<const int, 3>(std::array<int, 3>{2, 3, 4});
   constexpr size_t size = 5;
   std::array<float, size> arr{};
   // Fixed size view.
@@ -214,6 +219,7 @@ TEST(ArrayViewTest, TestConstStdArray) {
 }
 
 TEST(ArrayViewTest, TestStdVector) {
+  Call<const int>(std::vector<int>{4, 5, 6});
   std::vector<int> v;
   v.push_back(3);
   v.push_back(11);
