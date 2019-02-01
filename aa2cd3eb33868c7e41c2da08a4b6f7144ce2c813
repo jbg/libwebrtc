@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a12c25e0_c972dae2",
+        "filename": "test/scenario/audio_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-02-01T02:13:25Z",
+      "side": 1,
+      "message": "I am not familiar with the upstream CL introducing the TaskRunner. Is this Invoke sync or async? If this is sync, I would like to understand why we need a task runner in this case. If async, we need |this| to outlive the task or the task cancelled automatically after |this| becomes invalid, and for the latter do we have the support for cancellation? It looks to me we may need a weak pointer for that sake.",
+      "range": {
+        "startLine": 139,
+        "startChar": 24,
+        "endLine": 139,
+        "endChar": 30
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98edaa0e_d0dc28a1",
+        "filename": "test/scenario/audio_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-02-01T02:13:25Z",
+      "side": 1,
+      "message": "Similar comment as the above if the task runs asynchronously, given that we have captures of reference here and below.",
+      "range": {
+        "startLine": 163,
+        "startChar": 30,
+        "endLine": 163,
+        "endChar": 36
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7a52ff6_6b9b06c6",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-02-01T02:13:25Z",
+      "side": 1,
+      "message": "Maybe wrap it in a unique_ptr (absl::WrapUnique(RtpHeaderParser::Create())) so that we don\u0027t have to manually delete it in the destructor below.",
+      "range": {
+        "startLine": 141,
+        "startChar": 6,
+        "endLine": 141,
+        "endChar": 20
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
