@@ -16,6 +16,24 @@
       "revId": "a1ba3ff5febf4d15c0146aab223cfb4576f0061b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f94c4499_8c471c02",
+        "filename": "stats/rtc_stats_report.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-01T12:25:43Z",
+      "side": 1,
+      "message": "Good catch. Yes, this is exactly the same: \"The implicitly-defined copy/move constructor for a non-union class X performs a memberwise copy/move of its bases and members.\".\n\nLet\u0027s delegate to the compiler. :)",
+      "parentUuid": "f35fdc6a_34323429",
+      "revId": "a1ba3ff5febf4d15c0146aab223cfb4576f0061b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

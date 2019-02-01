@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3b98239_d9570e9d",
+        "filename": "stats/rtc_stats_report.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-01T12:25:43Z",
+      "side": 1,
+      "message": "I am keeping it here so I don\u0027t trigger \"[chromium-style] Complex constructor has an inlined body\", but this should be move in the declaration.\n\nWell, actually this .cc file should be also moved to api!",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 78
+      },
+      "revId": "22eff713d7646b165bcc6f63bb84351c66b36dc7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
