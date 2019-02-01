@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34a007cd_57184a6c",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T15:56:57Z",
+      "side": 1,
+      "message": "Log a warning?",
+      "revId": "9d855b7f95c0cebfa24b409786f13f157bfd026a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7cc1347_f6e954ef",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-01T15:56:57Z",
+      "side": 1,
+      "message": "RTC_GUARDED_BY(incoming_frame_race_checker_)\n\nAlso, I\u0027d put it above encoder_queue_",
+      "revId": "9d855b7f95c0cebfa24b409786f13f157bfd026a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
