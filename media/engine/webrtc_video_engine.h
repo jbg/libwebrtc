@@ -96,7 +96,7 @@ class WebRtcVideoEngine : public VideoEngineInterface {
       const webrtc::CryptoOptions& crypto_options) override;
 
   std::vector<VideoCodec> codecs() const override;
-  RtpCapabilities GetCapabilities() const override;
+  void AppendCapabilities(RtpCapabilities* rtp_capabilities) const override;
 
  private:
   const std::unique_ptr<webrtc::VideoDecoderFactory> decoder_factory_;

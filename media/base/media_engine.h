@@ -74,7 +74,7 @@ class VoiceEngineInterface {
 
   virtual const std::vector<AudioCodec>& send_codecs() const = 0;
   virtual const std::vector<AudioCodec>& recv_codecs() const = 0;
-  virtual RtpCapabilities GetCapabilities() const = 0;
+  virtual void AppendCapabilities(RtpCapabilities* rtp_capabilities) const = 0;
 
   // Starts AEC dump using existing file, a maximum file size in bytes can be
   // specified. Logging is stopped just before the size limit is exceeded.
@@ -100,7 +100,7 @@ class VideoEngineInterface {
       const webrtc::CryptoOptions& crypto_options) = 0;
 
   virtual std::vector<VideoCodec> codecs() const = 0;
-  virtual RtpCapabilities GetCapabilities() const = 0;
+  virtual void AppendCapabilities(RtpCapabilities* rtp_capabilities) const = 0;
 };
 
 // MediaEngineInterface is an abstraction of a media engine which can be

@@ -459,9 +459,7 @@ FakeVoiceEngine::FakeVoiceEngine() : fail_create_channel_(false) {
   // sanity checks against that.
   codecs_.push_back(AudioCodec(101, "fake_audio_codec", 0, 0, 1));
 }
-RtpCapabilities FakeVoiceEngine::GetCapabilities() const {
-  return RtpCapabilities();
-}
+void FakeVoiceEngine::AppendCapabilities(RtpCapabilities* rtp_capabilities) const {}
 void FakeVoiceEngine::Init() {}
 rtc::scoped_refptr<webrtc::AudioState> FakeVoiceEngine::GetAudioState() const {
   return rtc::scoped_refptr<webrtc::AudioState>();
@@ -514,9 +512,7 @@ FakeVideoEngine::FakeVideoEngine()
   // sanity checks against that.
   codecs_.push_back(VideoCodec(0, "fake_video_codec"));
 }
-RtpCapabilities FakeVideoEngine::GetCapabilities() const {
-  return RtpCapabilities();
-}
+void FakeVideoEngine::AppendCapabilities(RtpCapabilities* rtp_capabilities) const {}
 bool FakeVideoEngine::SetOptions(const VideoOptions& options) {
   options_ = options;
   return true;
