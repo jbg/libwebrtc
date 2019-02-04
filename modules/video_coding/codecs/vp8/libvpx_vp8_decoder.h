@@ -50,11 +50,12 @@ class LibvpxVp8Decoder : public VideoDecoder {
 
  private:
   class QpSmoother;
-  int ReturnFrame(const vpx_image_t* img,
-                  uint32_t timeStamp,
-                  int64_t ntp_time_ms,
-                  int qp,
-                  const ColorSpace* explicit_color_space);
+  int ReturnFrame(
+      const vpx_image_t* img,
+      uint32_t timeStamp,
+      int64_t ntp_time_ms,
+      int qp,
+      const absl::optional<webrtc::ColorSpace>& explicit_color_space);
   const bool use_postproc_arm_;
 
   I420BufferPool buffer_pool_;
