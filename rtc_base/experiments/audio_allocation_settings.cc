@@ -23,9 +23,11 @@ AudioAllocationSettings::AudioAllocationSettings()
       allocate_audio_in_video_calls_(
           field_trial::IsEnabled("WebRTC-Audio-IncludeInAllocation")),
       default_min_bitrate_("min", DataRate::kbps(10)),
-      default_max_bitrate_("max", DataRate::kbps(48)) {
-  ParseFieldTrial({&default_min_bitrate_, &default_max_bitrate_},
-                  field_trial::FindFullName("WebRTC-Audio-Allocation"));
+      default_max_bitrate_("max", DataRate::kbps(48)),
+      priority_bitrate_("prio", DataRate::Zero()) {
+  ParseFieldTrial(
+      {&default_min_bitrate_, &default_max_bitrate_, &priority_bitrate_},
+      field_trial::FindFullName("WebRTC-Audio-Allocation"));
   // If audio is included in feedback, it has to be part of the allocation,
   // otherwise we will allocat all of the estimated audio+video bitrate to
   // video.
@@ -57,6 +59,10 @@ DataRate AudioAllocationSettings::DefaultMinBitrate() const {
 
 DataRate AudioAllocationSettings::DefaultMaxBitrate() const {
   return default_max_bitrate_;
+}
+
+DataRate AudioAllocationSettings::DefaultPriorityBitrate() const {
+  return priority_bitrate_;
 }
 
 }  // namespace webrtc
