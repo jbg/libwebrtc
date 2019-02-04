@@ -383,6 +383,24 @@
     },
     {
       "key": {
+        "uuid": "6e01e0e5_9a4b9c50",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-04T19:24:15Z",
+      "side": 1,
+      "message": "What do you mean? If the check fails, none is provided.",
+      "parentUuid": "34497108_bce75c76",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e4474387_e975a600",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -394,6 +412,30 @@
       "writtenOn": "2019-02-04T16:45:18Z",
       "side": 1,
       "message": "please print which one is provided.",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 73
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76fde035_a0cac5a3",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-04T19:24:15Z",
+      "side": 1,
+      "message": "Similarly, if the check fails, both are provided.",
+      "parentUuid": "e4474387_e975a600",
       "range": {
         "startLine": 117,
         "startChar": 16,
