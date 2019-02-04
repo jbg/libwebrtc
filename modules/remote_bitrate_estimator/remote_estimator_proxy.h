@@ -47,6 +47,9 @@ class RemoteEstimatorProxy : public RemoteBitrateEstimator {
   int64_t TimeUntilNextProcess() override;
   void Process() override;
   void OnBitrateChanged(int bitrate);
+  void SetFeedbackOnRequest(bool feedback_on_request) {
+    feedback_on_request_ = feedback_on_request;
+  }
 
   static const int kMinSendIntervalMs;
   static const int kMaxSendIntervalMs;
@@ -71,6 +74,7 @@ class RemoteEstimatorProxy : public RemoteBitrateEstimator {
   // Map unwrapped seq -> time.
   std::map<int64_t, int64_t> packet_arrival_times_ RTC_GUARDED_BY(&lock_);
   int64_t send_interval_ms_ RTC_GUARDED_BY(&lock_);
+  bool feedback_on_request_;
 };
 
 }  // namespace webrtc

@@ -38,6 +38,7 @@ class ReceiveSideCongestionController : public CallStatsObserver,
                                 size_t payload_size,
                                 const RTPHeader& header);
 
+  void SetFeedbackOnRequest(bool feedback_on_request);
   // TODO(nisse): Delete these methods, design a more specific interface.
   virtual RemoteBitrateEstimator* GetRemoteBitrateEstimator(bool send_side_bwe);
   virtual const RemoteBitrateEstimator* GetRemoteBitrateEstimator(
