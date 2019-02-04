@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "a9dab3f7_9446c35c",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-02-04T23:16:23Z",
+      "side": 1,
+      "message": "I did a bit of research and what happens in tests (at least the ones I looked at) the AudioSendStream was created without send codec spec. As a result Encoder was not created, but transport overhead change AudioSendStream::SetTransportOverhead was called. I did not hit in end-to-end performance tests, so I am not sure if it\u0027s a test only or there is a real use case for it.\n\nAnyway it\u0027s better to keep if for now and yes we can move it to ChannelSend::ModifyEncoder, let\u0027s consider it in a separate CL.",
+      "parentUuid": "87298c23_67de1ee5",
+      "revId": "75c9a56e73a582ef42ac5e90e805bd89fe300eea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62e28544_3ef6bfcc",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 18
