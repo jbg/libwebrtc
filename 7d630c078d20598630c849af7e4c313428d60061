@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2921749d_51d491dd",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-04T03:41:22Z",
+      "side": 1,
+      "message": "dchecked_cast?",
+      "range": {
+        "startLine": 486,
+        "startChar": 12,
+        "endLine": 486,
+        "endChar": 23
+      },
+      "revId": "7d630c078d20598630c849af7e4c313428d60061",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a44e088_b99abeac",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-04T03:41:22Z",
+      "side": 1,
+      "message": "DCHECK. But I don\u0027t think it\u0027s necessary, since you dereference the pointer on the next line.",
+      "range": {
+        "startLine": 285,
+        "startChar": 4,
+        "endLine": 285,
+        "endChar": 10
+      },
+      "revId": "7d630c078d20598630c849af7e4c313428d60061",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
