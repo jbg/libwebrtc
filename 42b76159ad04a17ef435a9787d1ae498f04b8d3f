@@ -572,6 +572,23 @@
     },
     {
       "key": {
+        "uuid": "082c1947_46a41780",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T19:20:39Z",
+      "side": 1,
+      "message": "instead of using private field on_track_transceivers_ and then casting, consider using:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/api/peer_connection_interface.h?l\u003d1105\u0026rcl\u003d8573aae7d0fdeef6b67928c8ec60224e30d58e3a\n\nwhich has a vector of video streams:\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/api/media_stream_interface.h?l\u003d280\u0026rcl\u003d8573aae7d0fdeef6b67928c8ec60224e30d58e3a",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba61fce5_9688d729",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
