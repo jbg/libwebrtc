@@ -953,6 +953,30 @@
     },
     {
       "key": {
+        "uuid": "84964d96_9bdfec39",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:50:59Z",
+      "side": 1,
+      "message": "As I understand it can complete a bit before stable, but I\u0027m not 100% sure.",
+      "parentUuid": "133e2d25_2530b02f",
+      "range": {
+        "startLine": 232,
+        "startChar": 21,
+        "endLine": 232,
+        "endChar": 44
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3185bb7c_a465df30",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -967,6 +991,24 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77088dce_dbae1370",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:50:59Z",
+      "side": 1,
+      "message": "Got the point. I think it will make sense to do as a next CL. It will require to change current PC observer, so I don\u0027t wont to mix it.",
+      "parentUuid": "3185bb7c_a465df30",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1078,6 +1120,24 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33834a0d_40ee548d",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:50:59Z",
+      "side": 1,
+      "message": "Will do it in further CL with switching to fast media sending.",
+      "parentUuid": "082c1947_46a41780",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
