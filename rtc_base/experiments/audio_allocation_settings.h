@@ -40,6 +40,10 @@ class AudioAllocationSettings {
   // overhead. |rtp_parameter_max_bitrate_bps| max bitrate as configured in rtp
   // parameters, excluding overhead.
   DataRate DefaultMaxBitrate() const;
+  // Indicates the default priority bitrate for audio streams. The bitrate
+  // allocator will prioritize audio until it reaches this bitrate and will
+  // divide bitrate evently between audio and video above this bitrate.
+  DataRate DefaultPriorityBitrate() const;
 
  private:
   bool legacy_audio_send_side_bwe_trial_;
@@ -49,6 +53,7 @@ class AudioAllocationSettings {
   bool allocate_audio_in_video_calls_;
   FieldTrialParameter<DataRate> default_min_bitrate_;
   FieldTrialParameter<DataRate> default_max_bitrate_;
+  FieldTrialParameter<DataRate> priority_bitrate_;
 };
 }  // namespace webrtc
 
