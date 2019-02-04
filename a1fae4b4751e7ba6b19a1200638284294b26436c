@@ -22,6 +22,30 @@
       "revId": "a1fae4b4751e7ba6b19a1200638284294b26436c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64f51541_12731660",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-04T16:09:57Z",
+      "side": 0,
+      "message": "This is basically inverted, instead of forcing it to be disabled we now actively have to enable it. this makes sense as we don\u0027t want to add audio feedback unless we have configured bitrate allocation for audio.",
+      "parentUuid": "29dac6f7_a6faae40",
+      "range": {
+        "startLine": 259,
+        "startChar": 51,
+        "endLine": 259,
+        "endChar": 73
+      },
+      "revId": "a1fae4b4751e7ba6b19a1200638284294b26436c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
