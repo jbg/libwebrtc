@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29dac6f7_a6faae40",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-02-04T16:01:15Z",
+      "side": 0,
+      "message": "Is this no longer applicable? (or is it covered by the check for stream-\u003ertp_transport_?)",
+      "range": {
+        "startLine": 259,
+        "startChar": 51,
+        "endLine": 259,
+        "endChar": 73
+      },
+      "revId": "a1fae4b4751e7ba6b19a1200638284294b26436c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
