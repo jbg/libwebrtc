@@ -22,6 +22,53 @@
       "revId": "68b415d5151d5e0a81ae6b77f1431d2609316e2c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "953243b9_8b31ba1c",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-04T15:07:51Z",
+      "side": 1,
+      "message": "\u003e\u003e I don\u0027t understand really, what does the fraction loss have to do with how much protection is used in observer, how does the 80% come into the picture?\nIt\u0027s related in the sense that a rational causal observer would not spend bits on protection if there is no loss. But we don\u0027t need the rationality/causality here to test the behaviour that we want to change, so I removed that (see point below). Now we only test that if the observer, for whatever reason, uses bits for protection, we should not change the allocation limits.\n\n(Other tests in this file are conflating loss rate and protection rate -- but that\u0027s a different story.)\n\n\u003e\u003e Is the test that even IF bitrate_observer reports variable protection ratios, THEN we should NOT trigger OnAllocationLimitsChanged?\nYes, this is exactly it.\n\n\u003e\u003e Why do we test the last bitrate_bps?\nNot necessary, so removed.\n\n\u003e\u003e Maybe we could use mocks instead of the test bitrate observer, that might make it more clear?\nI guess the |bitrate_observer| is sort of used like a mock, even though it\u0027s not a gMock :) I\u0027ll continue doing that here though, to avoid refactoring all the other unit tests.",
+      "parentUuid": "eccc3a43_e11a9bc6",
+      "range": {
+        "startLine": 411,
+        "startChar": 0,
+        "endLine": 412,
+        "endChar": 79
+      },
+      "revId": "68b415d5151d5e0a81ae6b77f1431d2609316e2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63b9de1c_d389e15d",
+        "filename": "call/bitrate_allocator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-04T15:07:51Z",
+      "side": 1,
+      "message": "This was wrong anyway, because BitrateAllocatorForTest::OnNetworkChanged and BitrateAllocator::OnNetworkChange has different number of paramenters...",
+      "range": {
+        "startLine": 417,
+        "startChar": 42,
+        "endLine": 417,
+        "endChar": 55
+      },
+      "revId": "68b415d5151d5e0a81ae6b77f1431d2609316e2c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
