@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "644141fd_dbe49ec0",
+        "filename": "call/bitrate_allocator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-02-04T12:51:48Z",
+      "side": 1,
+      "message": "As bitrate can be negative here, so can extra_bitrate; we will then allocate below min_bitrate to the stream.",
+      "range": {
+        "startLine": 455,
+        "startChar": 5,
+        "endLine": 455,
+        "endChar": 74
+      },
+      "revId": "090e0b90c67ef3786a3e96b1edd24f0a0bf4c3c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
