@@ -61,15 +61,8 @@ VideoFrame::Builder& VideoFrame::Builder::set_rotation(VideoRotation rotation) {
 }
 
 VideoFrame::Builder& VideoFrame::Builder::set_color_space(
-    const ColorSpace& color_space) {
+    const absl::optional<webrtc::ColorSpace>& color_space) {
   color_space_ = color_space;
-  return *this;
-}
-
-VideoFrame::Builder& VideoFrame::Builder::set_color_space(
-    const ColorSpace* color_space) {
-  color_space_ =
-      color_space ? absl::make_optional(*color_space) : absl::nullopt;
   return *this;
 }
 
