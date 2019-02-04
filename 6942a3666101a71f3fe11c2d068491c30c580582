@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e001dcf3_7f0f75a7",
+        "filename": "api/array_view_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-04T11:49:02Z",
+      "side": 1,
+      "message": "putting expect inside helper function makes it hard to trace when it fail.\nmaybe instead Call should return value under test:\n\ntemplate \u003ctypename T\u003e\nint PassByValueReturnSize(ArrayView\u003cT\u003e av) {\n  return av.size();\n}\n\nTEST(...) {\n  EXPECT_EQ(PassByValueReturnSize(arr), 6);\n}",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 21
+      },
+      "revId": "6942a3666101a71f3fe11c2d068491c30c580582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b050913d_4c1e84d7",
+        "filename": "api/array_view_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-04T11:49:02Z",
+      "side": 1,
+      "message": "is it hard to write test that use SFINAE to test this scenario?\n\nif it is hard, then comment looks good enough.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "6942a3666101a71f3fe11c2d068491c30c580582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
