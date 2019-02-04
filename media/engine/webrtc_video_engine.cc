@@ -2710,15 +2710,13 @@ std::vector<webrtc::VideoStream> EncoderStreamFactory::CreateEncoderStreams(
                     });
     for (size_t i = 0; i < layers.size(); ++i) {
       layers[i].active = encoder_config.simulcast_layers[i].active;
-      if (!is_screenshare_) {
-        // Update simulcast framerates with max configured max framerate.
-        layers[i].max_framerate = max_framerate;
-        // Update with configured num temporal layers if supported by codec.
-        if (encoder_config.simulcast_layers[i].num_temporal_layers &&
-            IsTemporalLayersSupported(codec_name_)) {
-          layers[i].num_temporal_layers =
-              *encoder_config.simulcast_layers[i].num_temporal_layers;
-        }
+      // Update simulcast framerates with max configured max framerate.
+      layers[i].max_framerate = max_framerate;
+      // Update with configured num temporal layers if supported by codec.
+      if (encoder_config.simulcast_layers[i].num_temporal_layers &&
+          IsTemporalLayersSupported(codec_name_)) {
+        layers[i].num_temporal_layers =
+            *encoder_config.simulcast_layers[i].num_temporal_layers;
       }
       if (has_scale_resolution_down_by) {
         double scale_resolution_down_by = std::max(
