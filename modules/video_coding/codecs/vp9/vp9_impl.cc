@@ -1476,11 +1476,12 @@ int VP9DecoderImpl::Decode(const EncodedImage& input_image,
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
-int VP9DecoderImpl::ReturnFrame(const vpx_image_t* img,
-                                uint32_t timestamp,
-                                int64_t ntp_time_ms,
-                                int qp,
-                                const ColorSpace* explicit_color_space) {
+int VP9DecoderImpl::ReturnFrame(
+    const vpx_image_t* img,
+    uint32_t timestamp,
+    int64_t ntp_time_ms,
+    int qp,
+    const absl::optional<webrtc::ColorSpace>& explicit_color_space) {
   if (img == nullptr) {
     // Decoder OK and nullptr image => No show frame.
     return WEBRTC_VIDEO_CODEC_NO_OUTPUT;

@@ -59,12 +59,11 @@ class RTC_EXPORT EncodedImage {
     spatial_index_ = spatial_index;
   }
 
-  const webrtc::ColorSpace* ColorSpace() const {
-    return color_space_ ? &*color_space_ : nullptr;
+  const absl::optional<webrtc::ColorSpace>& ColorSpace() const {
+    return color_space_;
   }
-  void SetColorSpace(const webrtc::ColorSpace* color_space) {
-    color_space_ =
-        color_space ? absl::make_optional(*color_space) : absl::nullopt;
+  void SetColorSpace(const absl::optional<webrtc::ColorSpace>& color_space) {
+    color_space_ = color_space;
   }
 
   size_t size() const { return size_; }
