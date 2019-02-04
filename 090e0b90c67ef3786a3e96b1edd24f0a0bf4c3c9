@@ -22,6 +22,30 @@
       "revId": "090e0b90c67ef3786a3e96b1edd24f0a0bf4c3c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5aac5ce8_26906095",
+        "filename": "call/bitrate_allocator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-04T13:46:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "644141fd_dbe49ec0",
+      "range": {
+        "startLine": 455,
+        "startChar": 5,
+        "endLine": 455,
+        "endChar": 74
+      },
+      "revId": "090e0b90c67ef3786a3e96b1edd24f0a0bf4c3c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
