@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "57978507_6129d3b9",
+        "filename": "api/array_view_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-04T12:09:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e001dcf3_7f0f75a7",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 21
+      },
+      "revId": "6942a3666101a71f3fe11c2d068491c30c580582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b050913d_4c1e84d7",
         "filename": "api/array_view_unittest.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-02-04T11:49:02Z",
       "side": 1,
       "message": "is it hard to write test that use SFINAE to test this scenario?\n\nif it is hard, then comment looks good enough.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "6942a3666101a71f3fe11c2d068491c30c580582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5669f8a_b1bdaa89",
+        "filename": "api/array_view_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-04T12:09:39Z",
+      "side": 1,
+      "message": "It was a while ago now, but I remember trying this. IIRC it wasn\u0027t impossible, but the result wasn\u0027t readable. And there was no way to know that the correct error was causing the code to fail to compile.",
+      "parentUuid": "b050913d_4c1e84d7",
       "range": {
         "startLine": 48,
         "startChar": 0,
