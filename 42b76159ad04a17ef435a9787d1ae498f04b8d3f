@@ -1,0 +1,462 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16c8821c_6fed8ef3",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "somewhere I suggested using \u0027quality\u0027 test instead of \u0027smoke\u0027. In the end, we are measuring quality, right?\n\nEdit: maybe in here it is a smoke test indeed, and not a quality test. Up to you :)",
+      "range": {
+        "startLine": 38,
+        "startChar": 28,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a88de9e3_f11bb734",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "this bug suggests that this suppression shouldn\u0027t be enabled for new code? (and there are bunch of changes that fix existing constructors). Since you are adding new code, should the suppression be enabled?",
+      "range": {
+        "startLine": 226,
+        "startChar": 58,
+        "endLine": 226,
+        "endChar": 77
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e84f1d8_11f8d137",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87c89f54_66aff728",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5533a5f_be7177c4",
+        "filename": "test/pc/e2e/api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "why? is it ok to suppress these warnings for new code? If so, why isn\u0027t it globally suppressed?",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96c89248_f6ec6787",
+        "filename": "test/pc/e2e/api/create_peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "Curious: what\u0027s the value of creating static wrappers around constructor of PeerConnectionE2EQualityTest?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 42
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dacdbb59_d813557c",
+        "filename": "test/pc/e2e/api/create_peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "alice \u0026 bob do not indicate who comes up with the offer, and who comes up with the response.\n\nPlease at least document that (assuming that the offer/answer exchange is done inside). Alternatively, consider calling it caller/answerer.\n\nAnyway, if the call setup is outside of this method, then nevermind :)",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3aae525b_bac67621",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "I don\u0027t see much difference between \u0027output_file_name\u0027 and \u0027output_dump_file_name\u0027, and the former is shorter. What are the other output files that can be generated?",
+      "range": {
+        "startLine": 132,
+        "startChar": 39,
+        "endLine": 132,
+        "endChar": 44
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "777bff6f_e4d7e5b1",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "is this the maximum runtime? Should it be at least the time of the test file + connection set up time? Would it be worth documenting? (and maybe adding checks that it is long enough in the test framework?)",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 174,
+        "endChar": 49
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e37b7f3a_c50f3ba4",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "nit: is that port? if so: /*port\u003d*/0",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a7d2250_f008408f",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "check if null? here and all the others, except analyzers? ABSL_DIE_IF_NULL possibly.",
+      "range": {
+        "startLine": 34,
+        "startChar": 42,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2522e62e_94cb68be",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "consider absl::StrCat() if available in webrtc.",
+      "range": {
+        "startLine": 96,
+        "startChar": 12,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e5e9374_a3e64ca0",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "nit: we typically use \"Duplicate video_config.stream_label\u003d\" \u003c\u003c ...\n\nI don\u0027t know what\u0027s the practice in WebRTC :)",
+      "range": {
+        "startLine": 113,
+        "startChar": 30,
+        "endLine": 113,
+        "endChar": 60
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34497108_bce75c76",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "please print which one is provided.",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4474387_e975a600",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "please print which one is provided.",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 73
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "865875de_e31597a1",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "pls print which ones are provided here and below",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f73b189_c9be3fb9",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "are you checking anywhere that the file actually exists? if not, maybe you should? (maybe when audio_config is first created, if you don\u0027t plan to send it over network to different machines ;) )",
+      "range": {
+        "startLine": 125,
+        "startChar": 43,
+        "endLine": 125,
+        "endChar": 58
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46919af5_f5c92181",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "This is a quite long setup here. Consider:\n\nstd::unique_ptr\u003cFrameGenerator\u003e frame_generator \u003d CreateFrameGenerator(video_config)\n\nor alternatively (though I prefer the former, with the split to the latter internally)\n\nif(video_config.generator) {\n  CreateFrameGenerator(video_config.generator) ;\n}\nelse\n{\n      frame_generator \u003d FrameGenerator::CreateFromYuvFile(\n          std::vector\u003cstd::string\u003e(1, video_config.input_file_name.value()),\n          video_config.width, video_config.height, /*frame_repeate_count\u003d*/1);\n}\n\nOr even:\n\nstd::unique_ptr\u003cFrameGenerator\u003e frame_generator \u003d WrapFrameGenerator(CreateGenerator())",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd0ddad6_659afa1c",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "is it input file, or an output file? \u003cconfused\u003e",
+      "range": {
+        "startLine": 191,
+        "startChar": 21,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "133e2d25_2530b02f",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "does this block until it\u0027s exchanged? Or is waiting for \u0027kStable\u0027 below blocking?",
+      "range": {
+        "startLine": 232,
+        "startChar": 21,
+        "endLine": 232,
+        "endChar": 44
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3185bb7c_a465df30",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "this is not event driven -- that is you won\u0027t know right awayt when it is connected, will you? Shouldn\u0027t this use signals/events?\n\nIn particular what I have in mind is that the quality test might want to start sending media as soon as there is one candidate pair that is connected, and as soon as DTLS is established. The connectivity time is asymmetrical -- it takes 1.5RTT for the caller, and 2RTTs for the callee for DTLS (or the other way round) -- and I think we will want to start sending media from the caller as soon as possible. What do you think?",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "198044d2_c5c43877",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-04T16:45:18Z",
+      "side": 1,
+      "message": "maybe log something?",
+      "range": {
+        "startLine": 259,
+        "startChar": 1,
+        "endLine": 259,
+        "endChar": 11
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
