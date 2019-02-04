@@ -53,16 +53,13 @@ namespace webrtc {
 namespace {
 
 RtpHeaderExtensionMap ExtensionMapWithAllSupportedExtensions() {
+  int id = 0;
   RtpHeaderExtensionMap all_extensions;
-  all_extensions.Register<AudioLevel>(RtpExtension::kAudioLevelDefaultId);
-  all_extensions.Register<TransmissionOffset>(
-      RtpExtension::kTimestampOffsetDefaultId);
-  all_extensions.Register<AbsoluteSendTime>(
-      RtpExtension::kAbsSendTimeDefaultId);
-  all_extensions.Register<VideoOrientation>(
-      RtpExtension::kVideoRotationDefaultId);
-  all_extensions.Register<TransportSequenceNumber>(
-      RtpExtension::kTransportSequenceNumberDefaultId);
+  all_extensions.Register<AudioLevel>(id++);
+  all_extensions.Register<TransmissionOffset>(id++);
+  all_extensions.Register<AbsoluteSendTime>(id++);
+  all_extensions.Register<VideoOrientation>(id++);
+  all_extensions.Register<TransportSequenceNumber>(id++);
   return all_extensions;
 }
 

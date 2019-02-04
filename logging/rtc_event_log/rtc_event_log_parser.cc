@@ -919,22 +919,16 @@ ParsedRtcEventLog::LoggedRtpStreamView::LoggedRtpStreamView(
 //             audio streams. Tracking bug: webrtc:6399
 webrtc::RtpHeaderExtensionMap
 ParsedRtcEventLog::GetDefaultHeaderExtensionMap() {
+  int id = 0;
   webrtc::RtpHeaderExtensionMap default_map;
-  default_map.Register<AudioLevel>(webrtc::RtpExtension::kAudioLevelDefaultId);
-  default_map.Register<TransmissionOffset>(
-      webrtc::RtpExtension::kTimestampOffsetDefaultId);
-  default_map.Register<AbsoluteSendTime>(
-      webrtc::RtpExtension::kAbsSendTimeDefaultId);
-  default_map.Register<VideoOrientation>(
-      webrtc::RtpExtension::kVideoRotationDefaultId);
-  default_map.Register<VideoContentTypeExtension>(
-      webrtc::RtpExtension::kVideoContentTypeDefaultId);
-  default_map.Register<VideoTimingExtension>(
-      webrtc::RtpExtension::kVideoTimingDefaultId);
-  default_map.Register<TransportSequenceNumber>(
-      webrtc::RtpExtension::kTransportSequenceNumberDefaultId);
-  default_map.Register<PlayoutDelayLimits>(
-      webrtc::RtpExtension::kPlayoutDelayDefaultId);
+  default_map.Register<AudioLevel>(id++);
+  default_map.Register<TransmissionOffset>(id++);
+  default_map.Register<AbsoluteSendTime>(id++);
+  default_map.Register<VideoOrientation>(id++);
+  default_map.Register<VideoContentTypeExtension>(id++);
+  default_map.Register<VideoTimingExtension>(id++);
+  default_map.Register<TransportSequenceNumber>(id++);
+  default_map.Register<PlayoutDelayLimits>(id++);
   return default_map;
 }
 
