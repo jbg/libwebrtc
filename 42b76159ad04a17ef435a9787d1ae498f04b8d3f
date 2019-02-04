@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1b661a14_84954b16",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "This one isn\u0027t quality. It is more test of framework itself to check that everything is configured properly.",
+      "parentUuid": "16c8821c_6fed8ef3",
+      "range": {
+        "startLine": 38,
+        "startChar": 28,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ee4b9c7_d79343d5",
         "filename": "test/pc/e2e/BUILD.gn",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "119702df_2bae3e48",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ee4b9c7_d79343d5",
+      "range": {
+        "startLine": 204,
+        "startChar": 7,
+        "endLine": 204,
+        "endChar": 21
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +211,30 @@
     },
     {
       "key": {
+        "uuid": "a3e5bfcb_00d92501",
+        "filename": "test/pc/e2e/api/create_peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "PeerConnectionE2EQualityTest won\u0027t be available in public API and this static factory function will be.",
+      "parentUuid": "96c89248_f6ec6787",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 42
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dacdbb59_d813557c",
         "filename": "test/pc/e2e/api/create_peerconnection_quality_test_fixture.h",
         "patchSetId": 5
@@ -183,6 +255,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "029e1f06_07540389",
+        "filename": "test/pc/e2e/api/create_peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Comment added",
+      "parentUuid": "dacdbb59_d813557c",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -233,6 +329,30 @@
     },
     {
       "key": {
+        "uuid": "4911d93e_f5516a9d",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "I made to have same semantic with input dump file name.\nThere was a confusion about which I was told, that when you have input_file_name and output_file_name you assume some correlation between them, but the real correlation here is between input_dump_file_name and output_dump_file_name, because both of them are output files from the test, one is with what was captured and second is with what was rendered. And intput_file_name is just one of the ways to provide data on capturer",
+      "parentUuid": "3aae525b_bac67621",
+      "range": {
+        "startLine": 132,
+        "startChar": 39,
+        "endLine": 132,
+        "endChar": 44
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "777bff6f_e4d7e5b1",
         "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
         "patchSetId": 5
@@ -256,6 +376,30 @@
     },
     {
       "key": {
+        "uuid": "934c741d_c996d8b6",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Added better doc, PTAL.",
+      "parentUuid": "777bff6f_e4d7e5b1",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 174,
+        "endChar": 49
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e37b7f3a_c50f3ba4",
         "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
         "patchSetId": 5
@@ -270,6 +414,24 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d50f276_a4223713",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e37b7f3a_c50f3ba4",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -296,6 +458,30 @@
     },
     {
       "key": {
+        "uuid": "48bec7ab_f8d5818b",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a7d2250_f008408f",
+      "range": {
+        "startLine": 34,
+        "startChar": 42,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2522e62e_94cb68be",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -316,6 +502,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8465855e_b8d7250e",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "It\u0027s blacklisted https://webrtc.googlesource.com/src/+/HEAD/abseil-in-webrtc.md#disallowed\nrtc::SimpleStringBuilder here wll be a bit overkill, I think.",
+      "parentUuid": "2522e62e_94cb68be",
+      "range": {
+        "startLine": 96,
+        "startChar": 12,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -366,6 +576,30 @@
     },
     {
       "key": {
+        "uuid": "8b6fe670_2661069e",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e5e9374_a3e64ca0",
+      "range": {
+        "startLine": 113,
+        "startChar": 30,
+        "endLine": 113,
+        "endChar": 60
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34497108_bce75c76",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -398,6 +632,24 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b7f7d4b_91daa106",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34497108_bce75c76",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -472,6 +724,30 @@
     },
     {
       "key": {
+        "uuid": "6c6e4a6a_442f0e8f",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4474387_e975a600",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 73
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "865875de_e31597a1",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -507,6 +783,24 @@
     },
     {
       "key": {
+        "uuid": "67be53b7_eed84e36",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "865875de_e31597a1",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f73b189_c9be3fb9",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -530,6 +824,30 @@
     },
     {
       "key": {
+        "uuid": "4e127c0e_2d2e02a9",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f73b189_c9be3fb9",
+      "range": {
+        "startLine": 125,
+        "startChar": 43,
+        "endLine": 125,
+        "endChar": 58
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46919af5_f5c92181",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -544,6 +862,24 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "445c93dd_88a13110",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46919af5_f5c92181",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -567,6 +903,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b12e64d_637f71aa",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "It is input_dump_file, there file where framework will dump input video stream. For example if input video was generated you may want to see it or use in some other tools for analyzes, it is why we have it here.",
+      "parentUuid": "cd0ddad6_659afa1c",
+      "range": {
+        "startLine": 191,
+        "startChar": 21,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -633,6 +993,30 @@
     },
     {
       "key": {
+        "uuid": "f7a0487b_870256b2",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "763901ba_e5d38d71",
+      "range": {
+        "startLine": 256,
+        "startChar": 35,
+        "endLine": 256,
+        "endChar": 49
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "198044d2_c5c43877",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -653,6 +1037,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bd102b1_5b64905b",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Added summary of test at the start, PTAL",
+      "parentUuid": "198044d2_c5c43877",
+      "range": {
+        "startLine": 259,
+        "startChar": 1,
+        "endLine": 259,
+        "endChar": 11
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -696,6 +1104,30 @@
     },
     {
       "key": {
+        "uuid": "bb6c13e0_3b91c080",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba61fce5_9688d729",
+      "range": {
+        "startLine": 290,
+        "startChar": 4,
+        "endLine": 290,
+        "endChar": 9
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2dd13562_4648e45c",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -713,6 +1145,24 @@
     },
     {
       "key": {
+        "uuid": "8145d034_9942c9c8",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dd13562_4648e45c",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5484d8fb_301349bf",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -727,6 +1177,24 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "471e51f2_365607c4",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5484d8fb_301349bf",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -753,6 +1221,30 @@
     },
     {
       "key": {
+        "uuid": "8e60009e_0afb087e",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "819cbe25_e10eeedd",
+      "range": {
+        "startLine": 311,
+        "startChar": 7,
+        "endLine": 311,
+        "endChar": 11
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7729cbfc_921d4381",
         "filename": "test/pc/e2e/test_peer.cc",
         "patchSetId": 5
@@ -776,6 +1268,30 @@
     },
     {
       "key": {
+        "uuid": "ecff4b43_b085981b",
+        "filename": "test/pc/e2e/test_peer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Rephrased it a bit, PTAL",
+      "parentUuid": "7729cbfc_921d4381",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 72
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f90994c_802052b7",
         "filename": "test/pc/e2e/test_peer.cc",
         "patchSetId": 5
@@ -790,6 +1306,24 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1eeca28_ee3eaf8f",
+        "filename": "test/pc/e2e/test_peer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-04T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f90994c_802052b7",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
