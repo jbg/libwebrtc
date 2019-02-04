@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "938f0b07_c9d75122",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-02-04T16:09:19Z",
+      "side": 1,
+      "message": "Note that this adds possibility to configure the number of temporal layers for screenshare via https://cs.chromium.org/chromium/src/third_party/webrtc/api/rtp_parameters.h?l\u003d465\n\nIf that is supported, please update the comment in rtp_parameters about screenshare.",
+      "range": {
+        "startLine": 2717,
+        "startChar": 6,
+        "endLine": 2717,
+        "endChar": 8
+      },
+      "revId": "9f2475686a75fa2a75b38aca700f674a643e7d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffcb9167_b1e8ae1f",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2838,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-02-04T16:09:19Z",
+      "side": 1,
+      "message": "Possibly update also here?",
+      "range": {
+        "startLine": 2838,
+        "startChar": 6,
+        "endLine": 2838,
+        "endChar": 22
+      },
+      "revId": "9f2475686a75fa2a75b38aca700f674a643e7d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
