@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ee2e8bd_8aaef58f",
+        "filename": "sdk/android/native_api/jni/java_types.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2019-02-04T07:51:16Z",
+      "side": 1,
+      "message": "I would like to construct the vector immediately with the data:\nstd::vector\u003cint8_t\u003e container(array_ptr, array_ptr + env-\u003eGetArrayLength(jarray.obj()));",
+      "range": {
+        "startLine": 237,
+        "startChar": 2,
+        "endLine": 237,
+        "endChar": 73
+      },
+      "revId": "041c054c675507fe4bc5a2e99b3aaa0c58f1ffda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
