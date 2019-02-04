@@ -69,27 +69,36 @@ namespace webrtc {
 
 namespace {
 // TODO(nisse): This really begs for a shared context struct.
-bool UseSendSideBwe(const std::vector<RtpExtension>& extensions,
-                    bool transport_cc) {
+CongestionControl DetermineCongestionControl(
+    const std::vector<RtpExtension>& extensions,
+    bool transport_cc) {
   if (!transport_cc)
-    return false;
+    return CongestionControl::kReceiveSide;
   for (const auto& extension : extensions) {
     if (extension.uri == RtpExtension::kTransportSequenceNumberUri)
-      return true;
+      return CongestionControl::kSendSidePeriodic;
+    if (extension.uri == RtpExtension::kTransportSequenceNumberV2Uri)
+      return CongestionControl::kSendSideOnRequest;
   }
-  return false;
+  return CongestionControl::kReceiveSide;
 }
 
-bool UseSendSideBwe(const VideoReceiveStream::Config& config) {
-  return UseSendSideBwe(config.rtp.extensions, config.rtp.transport_cc);
+CongestionControl DetermineCongestionControl(
+    const VideoReceiveStream::Config& config) {
+  return DetermineCongestionControl(config.rtp.extensions,
+                                    config.rtp.transport_cc);
 }
 
-bool UseSendSideBwe(const AudioReceiveStream::Config& config) {
-  return UseSendSideBwe(config.rtp.extensions, config.rtp.transport_cc);
+CongestionControl DetermineCongestionControl(
+    const AudioReceiveStream::Config& config) {
+  return DetermineCongestionControl(config.rtp.extensions,
+                                    config.rtp.transport_cc);
 }
 
-bool UseSendSideBwe(const FlexfecReceiveStream::Config& config) {
-  return UseSendSideBwe(config.rtp_header_extensions, config.transport_cc);
+CongestionControl DetermineCongestionControl(
+    const FlexfecReceiveStream::Config& config) {
+  return DetermineCongestionControl(config.rtp_header_extensions,
+                                    config.transport_cc);
 }
 
 const int* FindKeyByValue(const std::map<int, int>& m, int v) {
@@ -298,13 +307,13 @@ class Call final : public webrtc::Call,
   struct ReceiveRtpConfig {
     explicit ReceiveRtpConfig(const webrtc::AudioReceiveStream::Config& config)
         : extensions(config.rtp.extensions),
-          use_send_side_bwe(UseSendSideBwe(config)) {}
+          congestion_control(DetermineCongestionControl(config)) {}
     explicit ReceiveRtpConfig(const webrtc::VideoReceiveStream::Config& config)
         : extensions(config.rtp.extensions),
-          use_send_side_bwe(UseSendSideBwe(config)) {}
+          congestion_control(DetermineCongestionControl(config)) {}
     explicit ReceiveRtpConfig(const FlexfecReceiveStream::Config& config)
         : extensions(config.rtp_header_extensions),
-          use_send_side_bwe(UseSendSideBwe(config)) {}
+          congestion_control(DetermineCongestionControl(config)) {}
 
     // Registered RTP header extensions for each stream. Note that RTP header
     // extensions are negotiated per track ("m= line") in the SDP, but we have
@@ -313,7 +322,7 @@ class Call final : public webrtc::Call,
     const RtpHeaderExtensionMap extensions;
     // Set if both RTP extension the RTCP feedback message needed for
     // send side BWE are negotiated.
-    const bool use_send_side_bwe;
+    const CongestionControl congestion_control;
   };
   std::map<uint32_t, ReceiveRtpConfig> receive_rtp_config_
       RTC_GUARDED_BY(receive_crit_);
@@ -742,7 +751,8 @@ void Call::DestroyAudioReceiveStream(
     WriteLockScoped write_lock(*receive_crit_);
     const AudioReceiveStream::Config& config = audio_receive_stream->config();
     uint32_t ssrc = config.rtp.remote_ssrc;
-    receive_side_cc_.GetRemoteBitrateEstimator(UseSendSideBwe(config))
+    receive_side_cc_
+        .GetRemoteBitrateEstimator(DetermineCongestionControl(config))
         ->RemoveStream(ssrc);
     audio_receive_streams_.erase(audio_receive_stream);
     const std::string& sync_group = audio_receive_stream->config().sync_group;
@@ -862,6 +872,9 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
   TRACE_EVENT0("webrtc", "Call::CreateVideoReceiveStream");
   RTC_DCHECK_CALLED_SEQUENTIALLY(&configuration_sequence_checker_);
 
+  receive_side_cc_.SetCongestionControl(
+      DetermineCongestionControl(configuration));
+
   RegisterRateObserver();
 
   VideoReceiveStream* receive_stream = new VideoReceiveStream(
@@ -912,7 +925,8 @@ void Call::DestroyVideoReceiveStream(
     ConfigureSync(config.sync_group);
   }
 
-  receive_side_cc_.GetRemoteBitrateEstimator(UseSendSideBwe(config))
+  receive_side_cc_
+      .GetRemoteBitrateEstimator(DetermineCongestionControl(config))
       ->RemoveStream(config.rtp.remote_ssrc);
 
   UpdateAggregateNetworkState();
@@ -966,7 +980,8 @@ void Call::DestroyFlexfecReceiveStream(FlexfecReceiveStream* receive_stream) {
 
     // Remove all SSRCs pointing to the FlexfecReceiveStreamImpl to be
     // destroyed.
-    receive_side_cc_.GetRemoteBitrateEstimator(UseSendSideBwe(config))
+    receive_side_cc_
+        .GetRemoteBitrateEstimator(DetermineCongestionControl(config))
         ->RemoveStream(ssrc);
   }
 
@@ -1418,7 +1433,8 @@ void Call::NotifyBweOfReceivedPacket(const RtpPacketReceived& packet,
                                      MediaType media_type) {
   auto it = receive_rtp_config_.find(packet.Ssrc());
   bool use_send_side_bwe =
-      (it != receive_rtp_config_.end()) && it->second.use_send_side_bwe;
+      (it != receive_rtp_config_.end()) &&
+      it->second.congestion_control != CongestionControl::kReceiveSide;
 
   RTPHeader header;
   packet.GetHeader(&header);

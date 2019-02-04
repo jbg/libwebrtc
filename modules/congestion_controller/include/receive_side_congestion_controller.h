@@ -22,6 +22,12 @@ namespace webrtc {
 class RemoteBitrateEstimator;
 class RemoteBitrateObserver;
 
+enum class CongestionControl {
+  kReceiveSide,
+  kSendSidePeriodic,
+  kSendSideOnRequest,
+};
+
 // This class represents the congestion control state for receive
 // streams. For send side bandwidth estimation, this is simply
 // relaying for each received RTP packet back to the sender. While for
@@ -38,10 +44,16 @@ class ReceiveSideCongestionController : public CallStatsObserver,
                                 size_t payload_size,
                                 const RTPHeader& header);
 
+  void SetCongestionControl(CongestionControl congestion_control);
   // TODO(nisse): Delete these methods, design a more specific interface.
   virtual RemoteBitrateEstimator* GetRemoteBitrateEstimator(bool send_side_bwe);
   virtual const RemoteBitrateEstimator* GetRemoteBitrateEstimator(
       bool send_side_bwe) const;
+
+  RemoteBitrateEstimator* GetRemoteBitrateEstimator(
+      CongestionControl congestion_control);
+  const RemoteBitrateEstimator* GetRemoteBitrateEstimator(
+      CongestionControl congestion_control) const;
 
   // Implements CallStatsObserver.
   void OnRttUpdate(int64_t avg_rtt_ms, int64_t max_rtt_ms) override;

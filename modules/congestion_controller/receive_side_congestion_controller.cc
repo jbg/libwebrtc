@@ -139,6 +139,15 @@ void ReceiveSideCongestionController::OnReceivedPacket(
   }
 }
 
+void ReceiveSideCongestionController::SetCongestionControl(
+    CongestionControl congestion_control) {
+  if (congestion_control == CongestionControl::kSendSidePeriodic) {
+    remote_estimator_proxy_.SetFeedbackOnRequest(false);
+  } else if (congestion_control == CongestionControl::kSendSideOnRequest) {
+    remote_estimator_proxy_.SetFeedbackOnRequest(true);
+  }
+}
+
 RemoteBitrateEstimator*
 ReceiveSideCongestionController::GetRemoteBitrateEstimator(bool send_side_bwe) {
   if (send_side_bwe) {
@@ -156,6 +165,20 @@ ReceiveSideCongestionController::GetRemoteBitrateEstimator(
   } else {
     return &remote_bitrate_estimator_;
   }
+}
+
+RemoteBitrateEstimator*
+ReceiveSideCongestionController::GetRemoteBitrateEstimator(
+    CongestionControl congestion_control) {
+  return GetRemoteBitrateEstimator(
+      congestion_control == CongestionControl::kReceiveSide ? false : true);
+}
+
+const RemoteBitrateEstimator*
+ReceiveSideCongestionController::GetRemoteBitrateEstimator(
+    CongestionControl congestion_control) const {
+  return GetRemoteBitrateEstimator(
+      congestion_control == CongestionControl::kReceiveSide ? false : true);
 }
 
 void ReceiveSideCongestionController::OnRttUpdate(int64_t avg_rtt_ms,

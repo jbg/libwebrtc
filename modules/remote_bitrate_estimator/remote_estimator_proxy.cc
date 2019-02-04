@@ -41,7 +41,8 @@ RemoteEstimatorProxy::RemoteEstimatorProxy(
       media_ssrc_(0),
       feedback_sequence_(0),
       window_start_seq_(-1),
-      send_interval_ms_(kDefaultSendIntervalMs) {}
+      send_interval_ms_(kDefaultSendIntervalMs),
+      feedback_on_request_(false) {}
 
 RemoteEstimatorProxy::~RemoteEstimatorProxy() {}
 
