@@ -3751,10 +3751,11 @@ class PacingFactorObserver : public test::SendTest {
     }
 
     if (configure_send_side_ && !has_send_side) {
-      // Want send side, not present by default, so add it.
-      send_config->rtp.extensions.emplace_back(
-          RtpExtension::kTransportSequenceNumberUri,
-          RtpExtension::kTransportSequenceNumberDefaultId);
+      // TODO: !!!
+      // // Want send side, not present by default, so add it.
+      // send_config->rtp.extensions.emplace_back(
+      //     RtpExtension::kTransportSequenceNumberUri,
+      //     RtpExtension::kTransportSequenceNumberDefaultId);
     }
 
     // ALR only enabled for screenshare.
