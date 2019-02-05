@@ -65,7 +65,7 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
 
   const std::vector<AudioCodec>& send_codecs() const override;
   const std::vector<AudioCodec>& recv_codecs() const override;
-  RtpCapabilities GetCapabilities() const override;
+  void AppendCapabilities(RtpCapabilities* rtp_capabilities) const override;
 
   // For tracking WebRtc channels. Needed because we have to pause them
   // all when switching devices.
