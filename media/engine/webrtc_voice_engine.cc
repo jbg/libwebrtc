@@ -555,19 +555,14 @@ const std::vector<AudioCodec>& WebRtcVoiceEngine::recv_codecs() const {
   return recv_codecs_;
 }
 
-RtpCapabilities WebRtcVoiceEngine::GetCapabilities() const {
+void WebRtcVoiceEngine::AddCapabilities(RtpCapabilities* capabilities) const {
   RTC_DCHECK(signal_thread_checker_.CalledOnValidThread());
-  RtpCapabilities capabilities;
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kAudioLevelUri,
-                           webrtc::RtpExtension::kAudioLevelDefaultId));
+  RTC_DCHECK(capabilities);
+  capabilities->AppendRtpExtension(webrtc::RtpExtension::kAudioLevelUri);
   if (allocation_settings_.EnableTransportSequenceNumberExtension()) {
-    capabilities.header_extensions.push_back(webrtc::RtpExtension(
-        webrtc::RtpExtension::kTransportSequenceNumberUri,
-        webrtc::RtpExtension::kTransportSequenceNumberDefaultId));
+    capabilities->AppendRtpExtension(
+        webrtc::RtpExtension::kTransportSequenceNumberUri);
   }
-
-  return capabilities;
 }
 
 void WebRtcVoiceEngine::RegisterChannel(WebRtcVoiceMediaChannel* channel) {

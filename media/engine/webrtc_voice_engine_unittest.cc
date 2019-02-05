@@ -2018,16 +2018,12 @@ class WebRtcVoiceEngineWithSendSideBweTest : public WebRtcVoiceEngineTestFake {
 
 TEST_F(WebRtcVoiceEngineWithSendSideBweTest,
        SupportsTransportSequenceNumberHeaderExtension) {
-  cricket::RtpCapabilities capabilities = engine_->GetCapabilities();
-  ASSERT_FALSE(capabilities.header_extensions.empty());
-  for (const webrtc::RtpExtension& extension : capabilities.header_extensions) {
-    if (extension.uri == webrtc::RtpExtension::kTransportSequenceNumberUri) {
-      EXPECT_EQ(webrtc::RtpExtension::kTransportSequenceNumberDefaultId,
-                extension.id);
-      return;
-    }
-  }
-  FAIL() << "Transport sequence number extension not in header-extension list.";
+  cricket::RtpCapabilities capabilities;
+  engine_->AddCapabilities(&capabilities);
+  EXPECT_THAT(capabilities.header_extensions,
+              testing::Contains(testing::Field(
+                  &RtpExtension::uri,
+                  webrtc::RtpExtension::kTransportSequenceNumberUri)));
 }
 
 // Test support for audio level header extension.
@@ -3218,7 +3214,8 @@ TEST_F(WebRtcVoiceEngineTestFake, ConfiguresAudioReceiveStreamRtpExtensions) {
   }
 
   // Set up receive extensions.
-  cricket::RtpCapabilities capabilities = engine_->GetCapabilities();
+  cricket::RtpCapabilities capabilities;
+  engine_->AddCapabilities(&capabilities);
   cricket::AudioRecvParameters recv_parameters;
   recv_parameters.extensions = capabilities.header_extensions;
   channel_->SetRecvParameters(recv_parameters);

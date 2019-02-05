@@ -11,6 +11,7 @@
 #include "media/base/media_engine.h"
 
 #include <stddef.h>
+#include <algorithm>
 #include <cstdint>
 #include <string>
 #include <utility>
@@ -23,6 +24,42 @@ namespace cricket {
 
 RtpCapabilities::RtpCapabilities() = default;
 RtpCapabilities::~RtpCapabilities() = default;
+
+bool RtpCapabilities::AppendRtpExtension(const std::string& uri) {
+  return AppendRtpExtension(uri, false);
+}
+
+bool RtpCapabilities::AppendRtpExtension(const std::string& uri, bool encrypt) {
+  std::vector<int> used_ids;
+  used_ids.reserve(header_extensions.size());
+
+  for (const webrtc::RtpExtension& header_extension : header_extensions) {
+    if (header_extension.uri == uri) {
+      // URI already registered.
+      return header_extension.encrypt == encrypt;
+    }
+    used_ids.push_back(header_extension.id);
+  }
+
+  std::sort(used_ids.begin(), used_ids.end());
+
+  // Find the lowest available ID.
+  int id = 1;
+  for (size_t i = 0; i < used_ids.size(); ++i, ++id) {
+    // RTC_DCHECKs demonstrate that used IDs are strictly increasing,
+    // beginning with 1, and therefore if there is a gap, it will be found,
+    // and if there is no gap, |id| will be set to used_ids.size() at the end.
+    RTC_DCHECK(i + 1 == used_ids.size() || used_ids[i] != used_ids[i + 1]);
+    RTC_DCHECK_LE(id, used_ids[i]);
+    if (id < used_ids[i]) {
+      break;
+    }
+  }
+
+  header_extensions.emplace_back(uri, id, encrypt);
+
+  return true;
+}
 
 webrtc::RtpParameters CreateRtpParametersWithOneEncoding() {
   webrtc::RtpParameters parameters;
