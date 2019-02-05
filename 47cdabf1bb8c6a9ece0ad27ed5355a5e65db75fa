@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "08d358f7_c34757e4",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-05T08:55:20Z",
+      "side": 1,
+      "message": "not sure this is the best namespace name, it seems unusual. But isolating this class inside a namespace is good.",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "931a2478_7c170959",
         "filename": "rtc_base/post_message_with_functor_unittest.cc",
         "patchSetId": 1
@@ -36,6 +53,40 @@
         "endLine": 49,
         "endChar": 22
       },
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f54ba08e_c70cd401",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-05T08:55:20Z",
+      "side": 1,
+      "message": "All the tests are using PostMessageWithFunctor(...Bind()). Is it possible to give some other examples?\nIn particular, is it possible to somehow do PostMessagewithFunctor(...., [](){}) (lambda)?",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c3009ce_64c6779f",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-05T08:55:20Z",
+      "side": 1,
+      "message": "I assume the test will fail with the global timeout if there\u0027s something wrong here. Waiting forever in a test looks iffy, but we have had lots of failures that result in timeout. Still, if it is easy to do ASSERT_EVENT_HAPPENED(fourth, kDefaultTimeout), I\u0027d be happier - better error message.",
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
