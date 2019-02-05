@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "18746bdc_8d5abe02",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:03:32Z",
+      "side": 1,
+      "message": "You\u0027re right. As a response to your other comment as well:\nI have removed |on_request| and changed the name to the struct to FeedbackRequest. By using it as optional\u003cFeedbackRequest\u003e, we will also solve the problems with |sequence_count|.",
+      "parentUuid": "0bd11a47_77eb5278",
+      "range": {
+        "startLine": 86,
+        "startChar": 7,
+        "endLine": 86,
+        "endChar": 17
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9bfd35e0_11a81cf1",
         "filename": "api/rtp_headers.h",
         "patchSetId": 1
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "96f70c82_258732a6",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bfd35e0_11a81cf1",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 26
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29fb59d9_cc79befe",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:03:32Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "be49dc94_022c4c49",
+      "range": {
+        "startLine": 88,
+        "startChar": 11,
+        "endLine": 88,
+        "endChar": 25
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4935c571_bf58c5e6",
         "filename": "api/rtp_headers.h",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7721c20_3d901327",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:03:32Z",
+      "side": 1,
+      "message": "Not needed anymore.",
+      "parentUuid": "4935c571_bf58c5e6",
+      "range": {
+        "startLine": 102,
+        "startChar": 44,
+        "endLine": 102,
+        "endChar": 60
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "454e175b_f47079d4",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:03:32Z",
+      "side": 1,
+      "message": "Done. I\u0027ve created a method that sets this.",
+      "parentUuid": "5d6708e7_03676459",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 69
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ddd0856_72bb63c3",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
         "patchSetId": 1
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "18bfcf4d_0bcada65",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:03:32Z",
+      "side": 1,
+      "message": "That sounds like a good idea. Wasn\u0027t sure how much work we were allowed to put in this thread.",
+      "parentUuid": "4ddd0856_72bb63c3",
+      "range": {
+        "startLine": 62,
+        "startChar": 35,
+        "endLine": 62,
+        "endChar": 50
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86a67474_a1232ceb",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
         "patchSetId": 1
@@ -154,6 +298,24 @@
       "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5705960_69242b0c",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86a67474_a1232ceb",
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -177,6 +339,30 @@
       "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14f2151a_0fe532b0",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:03:32Z",
+      "side": 1,
+      "message": "Code removed.",
+      "parentUuid": "e9de8f07_2581d122",
+      "range": {
+        "startLine": 59,
+        "startChar": 28,
+        "endLine": 59,
+        "endChar": 34
+      },
+      "revId": "a3b8b7b6032de62a4dcb6cff1cd069bf558a83e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
