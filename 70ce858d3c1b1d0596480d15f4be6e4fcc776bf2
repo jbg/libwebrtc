@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8024a7c_2d41a063",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-05T11:38:45Z",
+      "side": 1,
+      "message": "Maybe rename to SendTransportSequenceNumber. \n\nI think that audio transport sequence numbers are received, feedback should include them.  It make sense to have a flag that enables sending them.",
+      "range": {
+        "startLine": 263,
+        "startChar": 39,
+        "endLine": 263,
+        "endChar": 61
+      },
+      "revId": "70ce858d3c1b1d0596480d15f4be6e4fcc776bf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3a8ab95_8d1f8a4c",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-05T11:38:45Z",
+      "side": 1,
+      "message": "If transport sequence numbers are sent, it should be included in the allocation. So maybe instead use the new function to check\n\nif (allocation_settings_.SendTransportSequenceNumber() || allocation_settings_.CountPacketsBetweeVideoPackets or something like that)  {\nchannel_send-\u003eEnableSendTransportSequenceNumber(\n            new_ids.transport_sequence_number);\n} \n\n\n This should be set if transport seqeunc",
+      "range": {
+        "startLine": 309,
+        "startChar": 27,
+        "endLine": 309,
+        "endChar": 51
+      },
+      "revId": "70ce858d3c1b1d0596480d15f4be6e4fcc776bf2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
