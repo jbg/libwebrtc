@@ -105,6 +105,24 @@
       "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d715b12_5868a1ca",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-02-05T14:31:22Z",
+      "side": 1,
+      "message": "Can we pass it in the constructor instead so it can be made const?",
+      "parentUuid": "2661831f_c18a247d",
+      "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
