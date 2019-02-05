@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b053e9f6_11d37884",
+        "filename": "test/pc/e2e/api/create_peerconnection_quality_test_fixture.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "I\u0027ll move it there after stabilizing.",
+      "parentUuid": "f2c90a17_06bc0aac",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 64
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15f0af29_d1005b5f",
         "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bbd79c6_839a8613",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15f0af29_d1005b5f",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "73f29c32_5d32c60a",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e98c6f2_300a5995",
+      "range": {
+        "startLine": 91,
+        "startChar": 37,
+        "endLine": 91,
+        "endChar": 52
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "886d8202_4a054285",
         "filename": "test/pc/e2e/peer_connection_quality_test.cc",
         "patchSetId": 8
@@ -91,6 +163,30 @@
       "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f15ac52c_73e796ce",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Actually looks like it is almost impossible and even if I\u0027ll put it there it will be hard to follow what is going on.",
+      "parentUuid": "886d8202_4a054285",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 1
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "196514f0_e8a894b4",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3787cfd9_89d137b0",
+      "range": {
+        "startLine": 132,
+        "startChar": 8,
+        "endLine": 132,
+        "endChar": 15
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcafc8f9_4a448bac",
         "filename": "test/pc/e2e/peer_connection_quality_test.cc",
         "patchSetId": 8
@@ -137,6 +257,30 @@
       "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bcbf570_fcaecf1c",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Because video is passed as vector of video configs it can be empty and it will be handled inside. Should I add check that vector is not empty here to make it more clear?",
+      "parentUuid": "fcafc8f9_4a448bac",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 17
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "388f59f5_dc617932",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afa968e1_949dddd4",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 64
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f626c81e_aaa9353c",
         "filename": "test/pc/e2e/peer_connection_quality_test.h",
         "patchSetId": 8
@@ -183,6 +351,30 @@
       "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "623bcb9e_da48e8f9",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f626c81e_aaa9353c",
+      "range": {
+        "startLine": 54,
+        "startChar": 45,
+        "endLine": 54,
+        "endChar": 79
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "aea4165a_6c3ec334",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Can\u0027t move initialization into initialization list,\nAlso even if I\u0027ll move it there it will be really hard to follow.",
+      "parentUuid": "0325c874_73b91f54",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 35
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1fa1b139_c3782182",
         "filename": "test/pc/e2e/peer_connection_quality_test.h",
         "patchSetId": 8
@@ -229,6 +445,30 @@
       "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d01b71b_5dfca405",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T15:57:28Z",
+      "side": 1,
+      "message": "Can\u0027t move initialization into initialization list,\nAlso even if I\u0027ll move it there it will be really hard to follow.",
+      "parentUuid": "1fa1b139_c3782182",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 33
+      },
+      "revId": "b941a40c01da0a3a30e87d96f7b121751beab031",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
