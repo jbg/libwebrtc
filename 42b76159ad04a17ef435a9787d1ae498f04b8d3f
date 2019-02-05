@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "182ee43a_a7713f3b",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1b661a14_84954b16",
+      "range": {
+        "startLine": 38,
+        "startChar": 28,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ee4b9c7_d79343d5",
         "filename": "test/pc/e2e/BUILD.gn",
         "patchSetId": 5
@@ -119,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "5b08a881_88183b53",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a88de9e3_f11bb734",
+      "range": {
+        "startLine": 226,
+        "startChar": 58,
+        "endLine": 226,
+        "endChar": 77
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e84f1d8_11f8d137",
         "filename": "test/pc/e2e/BUILD.gn",
         "patchSetId": 5
@@ -136,6 +184,24 @@
     },
     {
       "key": {
+        "uuid": "bd7ffea9_4c05621a",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e84f1d8_11f8d137",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87c89f54_66aff728",
         "filename": "test/pc/e2e/BUILD.gn",
         "patchSetId": 5
@@ -150,6 +216,24 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e71cab7_5f83c9f7",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87c89f54_66aff728",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -182,6 +266,24 @@
       "side": 1,
       "message": "This is a good question indeed. Today we decided to globally disable this (it enforces some Chromium patters that don\u0027t always map well with WebRTC, the biggest example is the warning\" \"Complex class/struct needs an explicit out-of-line constructor\").\n\nI will investigate if it is possible to only turn off the warnings we are not interested in, but I suspect we will have to just suppress the whole clang plugin.\n\nOn the other hand we are investigating the usage of clang-tidy, so most of the things we are interested in should come from it.\n\nFor now, let\u0027s disable it. I will follow-up.",
       "parentUuid": "c5533a5f_be7177c4",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f36c2ce_ce625646",
+        "filename": "test/pc/e2e/api/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "Thanks Mirko!",
+      "parentUuid": "db9ef8bd_7b19740b",
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -282,6 +384,29 @@
     },
     {
       "key": {
+        "uuid": "6c826ce1_e857549a",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "if I understand it right: maybe add a comment that this is useful when generators are used (instead of an input file) because it will save the output of the generator to the file?",
+      "range": {
+        "startLine": 127,
+        "startChar": 10,
+        "endLine": 127,
+        "endChar": 74
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3aae525b_bac67621",
         "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
         "patchSetId": 5
@@ -350,6 +475,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7cab288_19fe89ac",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "\u003e input_dump_file_name and output_dump_file_name - both of them are output files from the test, one is with what was captured and second is with what was rendered. And intput_file_name is just one of the ways to provide data on capturer\n\nThis is a perfect comment to put in the struct ;) Now I understand.",
+      "parentUuid": "4911d93e_f5516a9d",
+      "range": {
+        "startLine": 132,
+        "startChar": 39,
+        "endLine": 132,
+        "endChar": 44
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
@@ -1012,6 +1161,24 @@
     },
     {
       "key": {
+        "uuid": "39545c1d_39868d4f",
+        "filename": "test/pc/e2e/peerconnection_quality_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "77088dce_dbae1370",
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "763901ba_e5d38d71",
         "filename": "test/pc/e2e/peerconnection_quality_test.cc",
         "patchSetId": 5
@@ -1349,6 +1516,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6cf874d_f72ec2f4",
+        "filename": "test/pc/e2e/test_peer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-05T00:41:23Z",
+      "side": 1,
+      "message": "Ah, now I get it. Now even the previous comment makes sense. I think \"actually\" was the confusing word.\n\nIt could be further simplified:\n// Use real network (on the loopback interface)\n\nand skip \"It will allow to run test\". :)",
+      "parentUuid": "ecff4b43_b085981b",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 72
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
