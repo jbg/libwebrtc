@@ -141,6 +141,24 @@
       "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebb94e4b_33f15367",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T16:39:03Z",
+      "side": 1,
+      "message": "That\u0027s unfortunate. That means we\u0027ll have no machine checked limitations on how this variable can change. It may take only a minute of code perusal to ensure that it\u0027s all OK, but casual readers of this code might not have a minute to spend.\n\nWe *could* solve the general problem of write-once members by defining a kind of \"mutex\" similar to the thread checker, which would instead CHECK that it was being taken at most (or exactly) once. But I\u0027m disinclined to do so, because I don\u0027t want to encourage this sort of pattern.\n\nWould it make sense to make this an optional\u003cbool\u003e, and DCHECK that it\u0027s unset in the setter and set whenever we read it?",
+      "parentUuid": "4c236a8d_521a5f4f",
+      "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
