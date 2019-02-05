@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e973456c_22c2bd21",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-02-05T10:01:52Z",
+      "side": 1,
+      "message": "This is a deep copy right? Any way we can avoid that in the case there is no partial update to apply? Or is that not expected to ever happen?",
+      "range": {
+        "startLine": 719,
+        "startChar": 0,
+        "endLine": 719,
+        "endChar": 42
+      },
+      "revId": "68c5dc4064a7f5e1db307eb8eb99e543ec47fb83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9d5703e_d7edd776",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-02-05T10:01:52Z",
+      "side": 1,
+      "message": "Do you mean there\u0027s no difference to encode?",
+      "range": {
+        "startLine": 725,
+        "startChar": 54,
+        "endLine": 726,
+        "endChar": 16
+      },
+      "revId": "68c5dc4064a7f5e1db307eb8eb99e543ec47fb83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
