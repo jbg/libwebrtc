@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7506c3_c2cdd7e9",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-05T16:56:14Z",
+      "side": 1,
+      "message": "settings.SendTransportSequenceNumber() \u0026\u0026 TransportSeqNumId(config) !\u003d 0;",
+      "range": {
+        "startLine": 221,
+        "startChar": 46,
+        "endLine": 221,
+        "endChar": 47
+      },
+      "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfc2ed2b_5508bfb1",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-05T16:56:14Z",
+      "side": 1,
+      "message": "use ShouldIncludeInBitrateAllocation here too",
+      "range": {
+        "startLine": 281,
+        "startChar": 10,
+        "endLine": 281,
+        "endChar": 16
+      },
+      "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "817d6b29_140f5b3f",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-05T16:56:14Z",
+      "side": 1,
+      "message": "What is the default for AllocationRangeConfigured?",
+      "range": {
+        "startLine": 283,
+        "startChar": 10,
+        "endLine": 283,
+        "endChar": 35
+      },
+      "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87b9a09c_690b1734",
+        "filename": "rtc_base/experiments/audio_allocation_settings.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-05T16:56:14Z",
+      "side": 1,
+      "message": "please comment that the rtp header extension also  has to be negotiated.",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 12
+      },
+      "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
