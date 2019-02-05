@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "609a190d_105df0ce",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-05T09:21:42Z",
+      "side": 1,
+      "message": "I would normally make it private but because of templates it has to be in the header meaning it can end up getting pulled in everywhere. But maybe \"rtc::internal::SingleMessageHandlerWithFunctor\" is fine? I\u0027m not worried about name conflicts in rtc.",
+      "parentUuid": "08d358f7_c34757e4",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "931a2478_7c170959",
         "filename": "rtc_base/post_message_with_functor_unittest.cc",
         "patchSetId": 1
@@ -56,6 +74,30 @@
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb0290c2_8f3f3a93",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-05T09:21:42Z",
+      "side": 1,
+      "message": "Yes, TEST_F creates a subclass of PostMessageWithFunctorTest, so \"this\" here is not of type PostMessageWithFunctorTest but rather a test-specific class. Bind\u0027s template magic expects the pointer to be the same Foo as \u0026Foo::Method and is not smart enough to deduce that Bar : Foo is a Foo.",
+      "parentUuid": "931a2478_7c170959",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +129,24 @@
       "writtenOn": "2019-02-05T08:55:20Z",
       "side": 1,
       "message": "I assume the test will fail with the global timeout if there\u0027s something wrong here. Waiting forever in a test looks iffy, but we have had lots of failures that result in timeout. Still, if it is easy to do ASSERT_EVENT_HAPPENED(fourth, kDefaultTimeout), I\u0027d be happier - better error message.",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17521ae0_f00fcc26",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-05T09:21:42Z",
+      "side": 1,
+      "message": "I don\u0027t know about third_party/webrtc, but test-specific timeouts are generally discouraged in other places (e.g. WPT) due to the possibility of flakiness on slow bots. The benefit of relying on the default is that the slow bots can have a larger default than fast bots based on parameters (or so I believe). This test is something that will either pass or wait forever, and it\u0027s pretty clear from the code that it\u0027s Waiting. I prefer not to introduce kDefaultTimeout constants, but I leave that up to other reviewers to give their opinion.",
+      "parentUuid": "7c3009ce_64c6779f",
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
