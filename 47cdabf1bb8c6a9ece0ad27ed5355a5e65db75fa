@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "3c446e21_e127d1f2",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "Is it possible to put this in a separate build target?",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08d358f7_c34757e4",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
@@ -48,6 +65,104 @@
       "side": 1,
       "message": "I would normally make it private but because of templates it has to be in the header meaning it can end up getting pulled in everywhere. But maybe \"rtc::internal::SingleMessageHandlerWithFunctor\" is fine? I\u0027m not worried about name conflicts in rtc.",
       "parentUuid": "08d358f7_c34757e4",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d600716b_1cbfcccb",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "I like the original namespace choice---it\u0027s exactly what I would have recommended. (Basically, you want something that\u0027s unique for this header file and that has \"impl\" or \"internal\" in it.)",
+      "parentUuid": "609a190d_105df0ce",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9bbc9cfa_8b91632b",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "Use a universal reference and std::forward here, to support copy in addition to move?",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bac325b6_cf0e048f",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "Document the call signature for the functor, please.",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d9c5c9a_aa497a1d",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "Don\u0027t declare static free functions in header files.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea7f9efc_ac3fd43b",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "std::forward, since `functor` is a forwarding reference?",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 29
+      },
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -101,6 +216,30 @@
     },
     {
       "key": {
+        "uuid": "5bd1d358_7ef692e0",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "Skip the test fixture, and use a plain utility class instead? This is almost always a good idea, and it would solve your specific problem here. See https://abseil.io/tips/122 for details if you have the time.",
+      "parentUuid": "bb0290c2_8f3f3a93",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f54ba08e_c70cd401",
         "filename": "rtc_base/post_message_with_functor_unittest.cc",
         "patchSetId": 1
@@ -112,6 +251,24 @@
       "writtenOn": "2019-02-05T08:55:20Z",
       "side": 1,
       "message": "All the tests are using PostMessageWithFunctor(...Bind()). Is it possible to give some other examples?\nIn particular, is it possible to somehow do PostMessagewithFunctor(...., [](){}) (lambda)?",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7da659ff_1bc9dc05",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "+1. I would expect lambdas to work.",
+      "parentUuid": "f54ba08e_c70cd401",
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -147,6 +304,24 @@
       "side": 1,
       "message": "I don\u0027t know about third_party/webrtc, but test-specific timeouts are generally discouraged in other places (e.g. WPT) due to the possibility of flakiness on slow bots. The benefit of relying on the default is that the slow bots can have a larger default than fast bots based on parameters (or so I believe). This test is something that will either pass or wait forever, and it\u0027s pretty clear from the code that it\u0027s Waiting. I prefer not to introduce kDefaultTimeout constants, but I leave that up to other reviewers to give their opinion.",
       "parentUuid": "7c3009ce_64c6779f",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "846ffa68_819e95e5",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T12:43:49Z",
+      "side": 1,
+      "message": "Instead of events, could you use a bunch of bools? Initialize them to false, and have each message EXPECT that one bool is true and then set another bool to true.\n\nI guess you\u0027ll still need events for the first and last message in the chain, but there should be no possibility of deadlock.",
+      "parentUuid": "17521ae0_f00fcc26",
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
