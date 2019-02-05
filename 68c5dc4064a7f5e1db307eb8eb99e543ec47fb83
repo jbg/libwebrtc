@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "60b88fab_954d10d8",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-05T10:50:43Z",
+      "side": 1,
+      "message": "No, this only copies a metadata and a pointer to the buffer.\nThis is done because we have to update some metadata here (timestamps). It\u0027s done regardless of partial update.",
+      "parentUuid": "e973456c_22c2bd21",
+      "range": {
+        "startLine": 719,
+        "startChar": 0,
+        "endLine": 719,
+        "endChar": 42
+      },
+      "revId": "68c5dc4064a7f5e1db307eb8eb99e543ec47fb83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9d5703e_d7edd776",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2019-02-05T10:01:52Z",
       "side": 1,
       "message": "Do you mean there\u0027s no difference to encode?",
+      "range": {
+        "startLine": 725,
+        "startChar": 54,
+        "endLine": 726,
+        "endChar": 16
+      },
+      "revId": "68c5dc4064a7f5e1db307eb8eb99e543ec47fb83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5802364_9fc6de05",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-05T10:50:43Z",
+      "side": 1,
+      "message": "No, we have a partial update but couldn\u0027t apply it to get a full resolution picture for some reason (it might be that there were no cached full resolution picture to begin with, or partial update is out of bounds of the frame). This means, that we don\u0027t have any correct frame at this point. Thus, we can\u0027t encode anything.\n\nDo you have a suggestion on how to describe it all in a clear and concise comment?",
+      "parentUuid": "b9d5703e_d7edd776",
       "range": {
         "startLine": 725,
         "startChar": 54,
