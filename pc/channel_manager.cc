@@ -84,7 +84,8 @@ void ChannelManager::GetSupportedAudioRtpHeaderExtensions(
   if (!media_engine_) {
     return;
   }
-  *ext = media_engine_->voice().GetCapabilities().header_extensions;
+  // TODO: !!!
+  // *ext = media_engine_->voice().GetCapabilities().header_extensions;
 }
 
 void ChannelManager::GetSupportedVideoCodecs(
@@ -109,7 +110,8 @@ void ChannelManager::GetSupportedVideoRtpHeaderExtensions(
   if (!media_engine_) {
     return;
   }
-  *ext = media_engine_->video().GetCapabilities().header_extensions;
+  // TODO: !!!
+  // *ext = media_engine_->video().GetCapabilities().header_extensions;
 }
 
 void ChannelManager::GetSupportedDataCodecs(
