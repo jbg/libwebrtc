@@ -407,6 +407,30 @@
     },
     {
       "key": {
+        "uuid": "f141461d_834bd41f",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T13:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c826ce1_e857549a",
+      "range": {
+        "startLine": 127,
+        "startChar": 10,
+        "endLine": 127,
+        "endChar": 74
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3aae525b_bac67621",
         "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
         "patchSetId": 5
@@ -499,6 +523,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eef600b1_a666fc7d",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T13:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7cab288_19fe89ac",
+      "range": {
+        "startLine": 132,
+        "startChar": 39,
+        "endLine": 132,
+        "endChar": 44
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -1540,6 +1588,30 @@
       "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df028616_bc08e123",
+        "filename": "test/pc/e2e/test_peer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-05T13:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6cf874d_f72ec2f4",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 72
+      },
+      "revId": "42b76159ad04a17ef435a9787d1ae498f04b8d3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
