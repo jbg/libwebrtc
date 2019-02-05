@@ -87,6 +87,24 @@
       "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2661831f_c18a247d",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T14:11:13Z",
+      "side": 1,
+      "message": "This should be set once before this module starts to get calls.\nDo you think that I should still guard with a lock to protect against unintended use cases?",
+      "parentUuid": "1caf44cd_b0be37af",
+      "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
