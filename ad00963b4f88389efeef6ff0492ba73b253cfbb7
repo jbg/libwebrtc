@@ -46,6 +46,23 @@
       "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1caf44cd_b0be37af",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-05T10:32:45Z",
+      "side": 1,
+      "message": "Why isn\u0027t this guarded by `lock_` like every other member variable?",
+      "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
