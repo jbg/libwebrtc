@@ -156,6 +156,11 @@ class AudioSendStream final : public webrtc::AudioSendStream,
       const std::vector<RtpExtension>& extensions);
   static int TransportSeqNumId(const Config& config);
 
+  static bool AllocationRangeConfigured(const Config& config);
+  static bool ShouldIncludeInBitrateAllocation(
+      const AudioAllocationSettings& settings,
+      const Config& config);
+
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(AudioSendStream);
 };
 }  // namespace internal
