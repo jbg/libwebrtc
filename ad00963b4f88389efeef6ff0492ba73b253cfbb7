@@ -22,6 +22,30 @@
       "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "557a610c_727bad12",
+        "filename": "api/rtp_parameters.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T10:06:52Z",
+      "side": 1,
+      "message": "We need someway of telling if the feedback should be periodic or on request.\n\nPerhaps, it would be enough to add support for RTP header extension attributes,\n\na\u003dextmap:5 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01 on-request\n\nThis seems to be allowed in the standard:\nhttps://tools.ietf.org/html/rfc8285#section-5",
+      "parentUuid": "da85fe42_ea032419",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 80
+      },
+      "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
