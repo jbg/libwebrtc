@@ -123,6 +123,24 @@
       "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c236a8d_521a5f4f",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-05T16:00:11Z",
+      "side": 1,
+      "message": "Yes, that would solve the problem.\nNot sure if that\u0027s possible without too much effort though. It\u0027s created in the constructor of ReceiveSideCongestionController which is created in the constructor of Call.\n\nPerhaps the construction could be delayed, but I don\u0027t think it\u0027s worth the effort.",
+      "parentUuid": "4d715b12_5868a1ca",
+      "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
