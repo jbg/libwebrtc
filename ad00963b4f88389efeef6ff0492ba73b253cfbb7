@@ -159,6 +159,24 @@
       "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c32ce2b0_fe0dd134",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-06T10:35:55Z",
+      "side": 1,
+      "message": "It\u0027s probably best to guard this variable with lock_ since all existing methods already uses a lock.",
+      "parentUuid": "ebb94e4b_33f15367",
+      "revId": "ad00963b4f88389efeef6ff0492ba73b253cfbb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
