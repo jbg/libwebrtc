@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "247b8811_0f93939c",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-06T10:40:39Z",
+      "side": 1,
+      "message": "Because of the need to avoid dependency graph cycles, it turns out that large build targets have a sort of \"gravity\" to them: If we add a new thing B that uses C and is used by A, and both A and C are in the same build target, then B is forced to become part of that target as well.\n\nrtc_base is already large enough to have a considerable gravity, so if possible I\u0027d like to not feed it more stuff.",
+      "parentUuid": "667a4d21_5c89711c",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08d358f7_c34757e4",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
