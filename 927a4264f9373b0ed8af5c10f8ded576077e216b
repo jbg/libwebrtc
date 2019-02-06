@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cd47f67_4358b898",
+        "filename": "api/media_stream_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T18:33:03Z",
+      "side": 1,
+      "message": "What is setting the latency, and where does it end up? Is there a more direct path than all these layers?",
+      "revId": "927a4264f9373b0ed8af5c10f8ded576077e216b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cf11515_f589a7b6",
+        "filename": "pc/rtp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T18:33:03Z",
+      "side": 1,
+      "message": "What does setting the minimum playout delay mean? What are the intended consequences? The receiver may become inactive and then become active again through multiple negotiations, in a sense it may be \"recycled\" for different uses depending on the application.",
+      "revId": "927a4264f9373b0ed8af5c10f8ded576077e216b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ab9683a_f71091e4",
+        "filename": "pc/rtp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T18:33:03Z",
+      "side": 1,
+      "message": "absl::optional\u003cdouble\u003e can be used for these. If you want a detailed error message there is also webrtc::RTCError and webrtc::RTCErrorOr\u003cT\u003e, (the error types can be used to map to javascript exceptions, though that is probably not relevant here).",
+      "revId": "927a4264f9373b0ed8af5c10f8ded576077e216b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
