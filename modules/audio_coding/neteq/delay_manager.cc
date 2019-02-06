@@ -31,6 +31,8 @@ constexpr int kLimitProbabilityStreaming = 536871;  // 1/2000 in Q30.
 constexpr int kMaxStreamingPeakPeriodMs = 600000;   // 10 minutes in ms.
 constexpr int kCumulativeSumDrift = 2;  // Drift term for cumulative sum
                                         // |iat_cumulative_sum_|.
+constexpr int kMinMinBaseDelayMs = 0;
+constexpr int kMaxMinBaseDelayMs = 10000;
 // Steady-state forgetting factor for |iat_vector_|, 0.9993 in Q15.
 constexpr int kIatFactor_ = 32745;
 constexpr int kMaxIat = 64;  // Max inter-arrival time to register.
@@ -48,6 +50,7 @@ absl::optional<int> GetForcedLimitProbability() {
         percentile >= 0.0 && percentile <= 100.0) {
       return absl::make_optional<int>(static_cast<int>(
           (1 << 30) * (100.0 - percentile) / 100.0 + 0.5));  // in Q30.
+
     } else {
       RTC_LOG(LS_WARNING) << "Invalid parameter for "
                           << kForceTargetDelayPercentileFieldTrial
@@ -273,12 +276,13 @@ void DelayManager::UpdateHistogram(size_t iat_packets) {
 // |maximum_delay_ms_| in packets. Note that in practice, if no
 // |maximum_delay_ms_| is specified, this does not have any impact, since the
 // target level is far below the buffer capacity in all reasonable cases.
-// The lower limit is equivalent of |minimum_delay_ms_| in packets. We update
-// |least_required_level_| while the above limits are applied.
+// The lower limit is equivalent of |effective_minimum_delay| in packets. We
+// update |least_required_level_| while the above limits are applied.
 // TODO(hlundin): Move this check to the buffer logistics class.
 void DelayManager::LimitTargetLevel() {
-  if (packet_len_ms_ > 0 && minimum_delay_ms_ > 0) {
-    int minimum_delay_packet_q8 = (minimum_delay_ms_ << 8) / packet_len_ms_;
+  if (packet_len_ms_ > 0 && effective_minimum_delay() > 0) {
+    int minimum_delay_packet_q8 =
+        (effective_minimum_delay() << 8) / packet_len_ms_;
     target_level_ = std::max(target_level_, minimum_delay_packet_q8);
   }
 
@@ -482,7 +486,7 @@ DelayManager::IATVector DelayManager::ScaleHistogram(const IATVector& histogram,
   return new_histogram;
 }
 
-bool DelayManager::IsValidMinimumDelay(int delay_ms) {
+bool DelayManager::IsValidMinimumDelay(int delay_ms) const {
   const int q75 =
       rtc::dchecked_cast<int>(3 * max_packets_in_buffer_ * packet_len_ms_ / 4);
   return delay_ms >= 0 &&
@@ -490,12 +494,16 @@ bool DelayManager::IsValidMinimumDelay(int delay_ms) {
          (packet_len_ms_ <= 0 || delay_ms <= q75);
 }
 
+bool DelayManager::IsValidBaseMinimumDelay(int delay_ms) const {
+  return kMinMinBaseDelayMs <= delay_ms && delay_ms <= kMaxMinBaseDelayMs;
+}
+
 bool DelayManager::SetMinimumDelay(int delay_ms) {
   if (!IsValidMinimumDelay(delay_ms)) {
     return false;
   }
-  // Ensure that minimum_delay_ms is no bigger than base_min_target_delay_ms_
-  minimum_delay_ms_ = std::max(delay_ms, base_min_target_delay_ms_);
+
+  minimum_delay_ms_ = delay_ms;
   return true;
 }
 
@@ -513,13 +521,11 @@ bool DelayManager::SetMaximumDelay(int delay_ms) {
 }
 
 bool DelayManager::SetBaseMinimumDelay(int delay_ms) {
-  if (!IsValidMinimumDelay(delay_ms)) {
+  if (!IsValidBaseMinimumDelay(delay_ms)) {
     return false;
   }
 
   base_min_target_delay_ms_ = delay_ms;
-  // Ensure that minimum_delay_ms is no bigger than base_min_target_delay_ms_
-  minimum_delay_ms_ = std::max(delay_ms, base_min_target_delay_ms_);
   return true;
 }
 
@@ -539,5 +545,14 @@ int DelayManager::last_pack_cng_or_dtmf() const {
 
 void DelayManager::set_last_pack_cng_or_dtmf(int value) {
   last_pack_cng_or_dtmf_ = value;
+}
+
+int DelayManager::effective_minimum_delay() const {
+  // Ignore |base_min_target_delay_ms_| if it is not compatible with current
+  // settings.
+  if (!IsValidMinimumDelay(base_min_target_delay_ms_)) {
+    return minimum_delay_ms_;
+  }
+  return std::max(minimum_delay_ms_, base_min_target_delay_ms_);
 }
 }  // namespace webrtc

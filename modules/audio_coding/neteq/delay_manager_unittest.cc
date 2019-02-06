@@ -32,6 +32,7 @@ class DelayManagerTest : public ::testing::Test {
   static const int kFs = 8000;
   static const int kFrameSizeMs = 20;
   static const int kTsIncrement = kFrameSizeMs * kFs / 1000;
+  static const int kMaxBufferSizeMs = kMaxNumberOfPackets * kFrameSizeMs;
 
   DelayManagerTest();
   virtual void SetUp();
@@ -267,6 +268,104 @@ TEST_F(DelayManagerTest, MinDelay) {
   EXPECT_EQ(kMinDelayPackets << 8, dm_->TargetLevel());
 }
 
+TEST_F(DelayManagerTest, BaseMinDelayCheckValidRange) {
+  SetPacketAudioLength(kFrameSizeMs);
+
+  // BaseMinDelay must be between [0, 10000] milliseconds.
+  EXPECT_FALSE(dm_->SetBaseMinimumDelay(-1));
+  EXPECT_FALSE(dm_->SetBaseMinimumDelay(10001));
+  EXPECT_EQ(dm_->GetBaseMinimumDelay(), 0);
+
+  EXPECT_TRUE(dm_->SetBaseMinimumDelay(7999));
+  EXPECT_EQ(dm_->GetBaseMinimumDelay(), 7999);
+}
+
+TEST_F(DelayManagerTest, BaseMinDelayLowerThanMinDelay) {
+  SetPacketAudioLength(kFrameSizeMs);
+  int kBaseMinDelayMs = 100;
+  int kMinDelayMs = 200;
+
+  // Base minimum delay sets lower bound on minimum. That is why when base
+  // minimum delay is lower than minimum delay we use minimum delay.
+  EXPECT_TRUE(kBaseMinDelayMs < kMinDelayMs);
+
+  EXPECT_TRUE(dm_->SetBaseMinimumDelay(kBaseMinDelayMs));
+  EXPECT_TRUE(dm_->SetMinimumDelay(kMinDelayMs));
+  EXPECT_EQ(dm_->effective_minimum_delay(), kMinDelayMs);
+}
+
+TEST_F(DelayManagerTest, BaseMinDelayGreaterThanMinDelay) {
+  SetPacketAudioLength(kFrameSizeMs);
+  int kBaseMinDelayMs = 70;
+  int kMinDelayMs = 30;
+
+  // Base minimum delay sets lower bound on minimum. That is why when base
+  // minimum delay is greater than minimum delay we use base minimum delay.
+  EXPECT_TRUE(kBaseMinDelayMs > kMinDelayMs);
+
+  EXPECT_TRUE(dm_->SetBaseMinimumDelay(kBaseMinDelayMs));
+  EXPECT_TRUE(dm_->SetMinimumDelay(kMinDelayMs));
+  EXPECT_EQ(dm_->effective_minimum_delay(), kBaseMinDelayMs);
+}
+
+TEST_F(DelayManagerTest, BaseMinDelayGreaterThanBufferSizeIsIgnored) {
+  SetPacketAudioLength(kFrameSizeMs);
+  int kBaseMinDelayMs = kMaxBufferSizeMs + 1;
+  int kMinDelayMs = 12;
+
+  // Base minimum delay is greater than minimum delay, but it is ignored as its
+  // value exceed maximum buffer size.
+  EXPECT_TRUE(kBaseMinDelayMs > kMinDelayMs);
+  EXPECT_TRUE(kBaseMinDelayMs > kMaxBufferSizeMs);
+
+  EXPECT_TRUE(dm_->SetMinimumDelay(kMinDelayMs));
+  EXPECT_TRUE(dm_->SetBaseMinimumDelay(kBaseMinDelayMs));
+  EXPECT_EQ(dm_->effective_minimum_delay(), kMinDelayMs);
+}
+
+TEST_F(DelayManagerTest, BaseMinDelayGreaterThanMaxSizeIsIgnored) {
+  SetPacketAudioLength(kFrameSizeMs);
+  int kMaxDelayMs = 400;
+  int kBaseMinDelayMs = kMaxDelayMs + 1;
+  int kMinDelayMs = 20;
+
+  // Base minimum delay is greater than minimum delay, but it is ignored as its
+  // value exceeds maximum delay.
+  EXPECT_TRUE(kBaseMinDelayMs > kMinDelayMs);
+  EXPECT_TRUE(kBaseMinDelayMs > kMaxDelayMs);
+
+  EXPECT_TRUE(dm_->SetMaximumDelay(kMaxDelayMs));
+  EXPECT_TRUE(dm_->SetMinimumDelay(kMinDelayMs));
+  EXPECT_TRUE(dm_->SetBaseMinimumDelay(kBaseMinDelayMs));
+  EXPECT_EQ(dm_->effective_minimum_delay(), kMinDelayMs);
+}
+
+TEST_F(DelayManagerTest, BaseMinDelayLowerThanMaxSizeIsUsed) {
+  SetPacketAudioLength(kFrameSizeMs);
+  int kMaxDelayMs = 400;
+  int kBaseMinDelayMs = kMaxDelayMs - 1;
+  int kMinDelayMs = 20;
+
+  // Base minimum delay is greater than minimum delay, and lower than maximum
+  // delays that is why it is used.
+  EXPECT_TRUE(kBaseMinDelayMs > kMinDelayMs);
+  EXPECT_TRUE(kBaseMinDelayMs < kMaxDelayMs);
+
+  EXPECT_TRUE(dm_->SetMaximumDelay(kMaxDelayMs));
+  EXPECT_TRUE(dm_->SetMinimumDelay(kMinDelayMs));
+  EXPECT_TRUE(dm_->SetBaseMinimumDelay(kBaseMinDelayMs));
+  EXPECT_EQ(dm_->effective_minimum_delay(), kBaseMinDelayMs);
+}
+
+TEST_F(DelayManagerTest, UpdateReorderedPacket) {
+  SetPacketAudioLength(kFrameSizeMs);
+  InsertNextPacket();
+
+  // Insert packet that was sent before the previous packet.
+  EXPECT_CALL(detector_, Update(_, true, _));
+  EXPECT_EQ(0, dm_->Update(seq_no_ - 1, ts_ - kFrameSizeMs, kFs));
+}
+
 TEST_F(DelayManagerTest, BaseMinDelay) {
   const int kExpectedTarget = 5;
   const int kTimeIncrement = kExpectedTarget * kFrameSizeMs;
@@ -297,27 +396,41 @@ TEST_F(DelayManagerTest, BaseMinDelay) {
   EXPECT_EQ(kBaseMinDelayPackets << 8, dm_->TargetLevel());
 }
 
-TEST_F(DelayManagerTest, BaseMinDelayGreaterThanMaxDelayIsInvalid) {
-  int kMaxDelayMs = 2 * kFrameSizeMs;
-  int kBaseMinDelayMs = 4 * kFrameSizeMs;
-  EXPECT_TRUE(dm_->SetMaximumDelay(kMaxDelayMs));
-  EXPECT_FALSE(dm_->SetBaseMinimumDelay(kBaseMinDelayMs));
-}
-
-TEST_F(DelayManagerTest, BaseMinDelayGreaterThanQ75MaxPacketsIsInvalid) {
-  // .75 of |max_packets_in_buffer|, + 1 to ensure that |kBaseMinDelayMs| is
-  // greater.
-  int kBaseMinDelayMs = (3 * kMaxNumberOfPackets * kFrameSizeMs / 4) + 1;
-  EXPECT_FALSE(dm_->SetBaseMinimumDelay(kBaseMinDelayMs));
-}
-
-TEST_F(DelayManagerTest, UpdateReorderedPacket) {
+TEST_F(DelayManagerTest, BaseMinDelayAndMinDelay) {
+  const int kExpectedTarget = 5;
+  const int kTimeIncrement = kExpectedTarget * kFrameSizeMs;
   SetPacketAudioLength(kFrameSizeMs);
+  // First packet arrival.
+  InsertNextPacket();
+  // Second packet arrival.
+  // Expect detector update method to be called once with inter-arrival time
+  // equal to |kExpectedTarget| packet. Return true to indicate peaks found.
+  EXPECT_CALL(detector_, Update(kExpectedTarget, false, _))
+      .WillRepeatedly(Return(true));
+  EXPECT_CALL(detector_, MaxPeakHeight())
+      .WillRepeatedly(Return(kExpectedTarget));
+  IncreaseTime(kTimeIncrement);
   InsertNextPacket();
 
-  // Insert packet that was sent before the previous packet.
-  EXPECT_CALL(detector_, Update(_, true, _));
-  EXPECT_EQ(0, dm_->Update(seq_no_ - 1, ts_ - kFrameSizeMs, kFs));
+  // No limit is applied.
+  EXPECT_EQ(kExpectedTarget << 8, dm_->TargetLevel());
+
+  // Minimum delay is lower than base minimum delay, that is why base minimum
+  // delay is used to calculate target level.
+  int kMinDelayPackets = kExpectedTarget + 1;
+  int kBaseMinDelayPackets = kExpectedTarget + 2;
+
+  int kMinDelayMs = kMinDelayPackets * kFrameSizeMs;
+  int kBaseMinDelayMs = kBaseMinDelayPackets * kFrameSizeMs;
+
+  EXPECT_TRUE(kMinDelayMs < kBaseMinDelayMs);
+  EXPECT_TRUE(dm_->SetBaseMinimumDelay(kBaseMinDelayMs));
+  EXPECT_EQ(dm_->GetBaseMinimumDelay(), kBaseMinDelayMs);
+
+  IncreaseTime(kTimeIncrement);
+  InsertNextPacket();
+  EXPECT_EQ(dm_->GetBaseMinimumDelay(), kBaseMinDelayMs);
+  EXPECT_EQ(kBaseMinDelayPackets << 8, dm_->TargetLevel());
 }
 
 // Tests that skipped sequence numbers (simulating empty packets) are handled
