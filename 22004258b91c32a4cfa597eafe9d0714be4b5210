@@ -65,6 +65,23 @@
     },
     {
       "key": {
+        "uuid": "5ddf3ed6_808bd1fd",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-06T14:33:34Z",
+      "side": 1,
+      "message": "If I\u0027m reading https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d10293#c5 correctly, this will leak if Post() fails. Check the return value, and delete the SingleMessageHandlerWithFunctor manually in that case?",
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0fd4dad2_fbd1bc59",
         "filename": "rtc_base/post_message_with_functor_unittest.cc",
         "patchSetId": 3
