@@ -112,9 +112,10 @@ void DirectTransport::SendPackets() {
 
   fake_network_->Process();
 
-  int64_t delay_ms = fake_network_->TimeUntilNextProcess();
-  next_scheduled_task_ =
-      task_queue_->PostDelayedTask([this]() { SendPackets(); }, delay_ms);
+  auto delay_ms = fake_network_->OptionalTimeUntilNextProcess();
+  // TODO(srte): Replace 5 ms default fallback with update in SendPacket.
+  next_scheduled_task_ = task_queue_->PostDelayedTask(
+      [this]() { SendPackets(); }, delay_ms.value_or(5));
 }
 }  // namespace test
 }  // namespace webrtc

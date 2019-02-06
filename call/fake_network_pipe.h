@@ -86,7 +86,7 @@ class NetworkPacket {
 
 // Class faking a network link, internally is uses an implementation of a
 // SimulatedNetworkInterface to simulate network behavior.
-class FakeNetworkPipe : public webrtc::SimulatedPacketReceiverInterface,
+class FakeNetworkPipe : public SimulatedPacketReceiverInterface,
                         public Transport {
  public:
   // Will keep |network_behavior| alive while pipe is alive itself.
@@ -139,6 +139,7 @@ class FakeNetworkPipe : public webrtc::SimulatedPacketReceiverInterface,
   // packets ready to be delivered.
   void Process() override;
   int64_t TimeUntilNextProcess() override;
+  absl::optional<int64_t> OptionalTimeUntilNextProcess() override;
   void ProcessThreadAttached(ProcessThread* process_thread) override;
 
   // Get statistics.
@@ -210,6 +211,7 @@ class FakeNetworkPipe : public webrtc::SimulatedPacketReceiverInterface,
   size_t dropped_packets_ RTC_GUARDED_BY(process_lock_);
   size_t sent_packets_ RTC_GUARDED_BY(process_lock_);
   int64_t total_packet_delay_us_ RTC_GUARDED_BY(process_lock_);
+  absl::optional<int64_t> next_process_time_us_ RTC_GUARDED_BY(process_lock_);
   int64_t last_log_time_us_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(FakeNetworkPipe);

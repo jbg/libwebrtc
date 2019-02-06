@@ -27,6 +27,8 @@ class SimulatedPacketReceiverInterface : public PacketReceiver, public Module {
 
   // Reports average packet delay.
   virtual int AverageDelay() = 0;
+
+  virtual absl::optional<int64_t> OptionalTimeUntilNextProcess() = 0;
 };
 
 }  // namespace webrtc
