@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "953d5f8e_19115ab2",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T13:26:44Z",
+      "side": 1,
+      "message": "OK so I tried to put it in its own target, but because the target only contains a header file (no .cc file because it uses templates), I get the following error if I make a target depend on the post_message_with_functor target:\n\nfatal error: /Users/hbos/workspace/webrtc/src/build/mac_files/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file list file: obj/rtc_base/libpost_message_with_functor.a.rsp is empty\n\nSo I would have to either put it in a different target or introduce a dummy .cc file that doesn\u0027t do anything. Or leave it in rtc_base. Thoughts? (For now I reverted my attempt to put it in a separate target since that doesn\u0027t compile)",
+      "parentUuid": "ee62c84e_b1a654d4",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08d358f7_c34757e4",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
@@ -178,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "db424a32_8136b2da",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T13:26:44Z",
+      "side": 1,
+      "message": "Done, but I had to introduce this below:\ntypename std::remove_reference\u003cFunctorT\u003e::type\n\nI added unittests to verify that \"PostMessageWithFunctor(std::move(functor))\" results in 1 move and 0 copies and that \"PostMessageWithFunctor(functor)\" results in 0 move and 1 copy. Without  the remove_reference, instead of copying it would hold a reference to the functor. This would be disastrous since the operation is async; functor_ has to be owned (and destroyed) by the target thread - whether it\u0027s a copied or moved object.",
+      "parentUuid": "9bbc9cfa_8b91632b",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bac325b6_cf0e048f",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
@@ -192,6 +228,24 @@
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4d42862_8e394f39",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T13:26:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bac325b6_cf0e048f",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -218,6 +272,30 @@
     },
     {
       "key": {
+        "uuid": "50630ef4_0b1681fb",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T13:26:44Z",
+      "side": 1,
+      "message": "Removed static.",
+      "parentUuid": "3d9c5c9a_aa497a1d",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea7f9efc_ac3fd43b",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
@@ -238,6 +316,30 @@
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c8770b_76b6e9da",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T13:26:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea7f9efc_ac3fd43b",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -312,6 +414,30 @@
     },
     {
       "key": {
+        "uuid": "9981bec2_d3623e6d",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T13:26:44Z",
+      "side": 1,
+      "message": "Nice tip, that turned out pretty nice! :)",
+      "parentUuid": "5bd1d358_7ef692e0",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f54ba08e_c70cd401",
         "filename": "rtc_base/post_message_with_functor_unittest.cc",
         "patchSetId": 1
@@ -344,6 +470,24 @@
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "610b70e3_b1c369b1",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T13:26:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7da659ff_1bc9dc05",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -397,6 +541,24 @@
       "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3ffd7ad_a9cacf93",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T13:26:44Z",
+      "side": 1,
+      "message": "Whether it\u0027s a deadlock preventing the signalling of an event or a different bug preventing the signalling of an event, the end result is the same: a Wait(kForever) blocks forever. This is true whether bools and just two events are used or multiple events are used, and this test is pretty small anyway, so I don\u0027t think introducing more helper functions in addition to WaitAndSetEventOnBackgroundThread is an improvement. I think it just makes it slightly more complicated.\n\nI didn\u0027t modify this test, but if you still think bools is a better idea or want me to introduce a kDefaultTimeout let me know and I will address this comment without further pushback.",
+      "parentUuid": "846ffa68_819e95e5",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
