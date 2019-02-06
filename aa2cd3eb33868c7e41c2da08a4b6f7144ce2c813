@@ -68,6 +68,351 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "455d57cd_51da96d4",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Millis?",
+      "range": {
+        "startLine": 23,
+        "startChar": 57,
+        "endLine": 23,
+        "endChar": 63
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f197fec_b8a8a470",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Do we need it here?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 36
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a6abc1b_2a8bcb26",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Why we need it here?",
+      "range": {
+        "startLine": 78,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41290dc0_18f6e50e",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Can you put this check to the receiver obtaining",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 24
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bd1ea12_5d73681f",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Why we need it?",
+      "range": {
+        "startLine": 134,
+        "startChar": 4,
+        "endLine": 134,
+        "endChar": 36
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a37fa68c_b605169c",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Why we can\u0027t run it from task runner thread?",
+      "range": {
+        "startLine": 142,
+        "startChar": 2,
+        "endLine": 142,
+        "endChar": 41
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a5a8cef_79913a9a",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Why we need it?",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 36
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ddc9026_379061da",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Add comment what for task_runner is used",
+      "range": {
+        "startLine": 77,
+        "startChar": 18,
+        "endLine": 77,
+        "endChar": 29
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19c5d1c3_cc23a09d",
+        "filename": "test/scenario/network/network_emulation_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "If we have clock here how they will correlate with clock in simulated time case?",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 12
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54f0f14b_2b8dbe2e",
+        "filename": "test/scenario/network/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Maybe real_time_runner_factory_?",
+      "range": {
+        "startLine": 57,
+        "startChar": 27,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04066b22_5877d541",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Can we put it into constant?",
+      "range": {
+        "startLine": 60,
+        "startChar": 58,
+        "endLine": 60,
+        "endChar": 64
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e918839_9b50a878",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "RunUntil sounds like it should run until some point of time, so duration parameter is confusing here. Can you rename method or at least document behavior.\n\nSame in overloaded method",
+      "range": {
+        "startLine": 322,
+        "startChar": 15,
+        "endLine": 322,
+        "endChar": 23
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a8a65af_fc00d348",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Maybe rename it in some way to show, that it is time spent from start, otherwise I\u0027m always confused what kind of duration we are subtracting here and why..",
+      "range": {
+        "startLine": 323,
+        "startChar": 24,
+        "endLine": 323,
+        "endChar": 32
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99dffdbd_c59ebc22",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "Suppose max_duration is 10s and poll_interval is 9s and current Duration() is 0, then we will run for 9s, then check exit function and then run for more 9s, so 18s totaly, but max was 10.",
+      "range": {
+        "startLine": 333,
+        "startChar": 6,
+        "endLine": 333,
+        "endChar": 46
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fdc5635_e7cfbb99",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:07:53Z",
+      "side": 1,
+      "message": "In this case we should return something else to stop future executions",
+      "range": {
+        "startLine": 342,
+        "startChar": 12,
+        "endLine": 342,
+        "endChar": 23
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
