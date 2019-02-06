@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "616e6d12_bd9af6ff",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-06T14:18:38Z",
+      "side": 1,
+      "message": "Suggestion: Just call it \"F\" or something short like that.",
+      "range": {
+        "startLine": 29,
+        "startChar": 18,
+        "endLine": 29,
+        "endChar": 37
+      },
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9c028cb_368a7f4a",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-06T14:18:38Z",
+      "side": 1,
+      "message": "Will we ever fail to get here? IOW, are we guaranteed that the thread will always try to call us? Or will we leak e.g. when the thread is destroyed?",
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2430b35f_d227b4db",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-06T14:18:38Z",
+      "side": 1,
+      "message": "This is called just \"movable\". Copy is a special case of move, which leaves the source object intact.",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fd4dad2_fbd1bc59",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-06T14:18:38Z",
+      "side": 1,
+      "message": "Not necessary?",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 40
+      },
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bfe9d90_05d05c14",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-06T14:18:38Z",
+      "side": 1,
+      "message": "I don\u0027t think you have to manually implement copy/move construction/assignment in this class. Just use the implicit defaults.",
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
