@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "b17efb55_08202d64",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:11:53Z",
+      "side": 1,
+      "message": "Please document provided guarantees for memory access order and task execution",
+      "range": {
+        "startLine": 81,
+        "startChar": 19,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07c7d062_7a4e6a39",
         "filename": "test/task_runner/task_runner.h",
         "patchSetId": 5
@@ -178,6 +201,29 @@
       "side": 1,
       "message": "I\u0027ts quite different, I\u0027d have hoped that it could become cleaner, but currently it uses ownership controlling QueuedTask class, has some reference counting scheme, hidden internal pointers (int the interface) and Delete() etc.\n\nMaybe when you are done with that refactoring it will look like this class?",
       "parentUuid": "1cc31099_3d5a8afe",
+      "range": {
+        "startLine": 45,
+        "startChar": 6,
+        "endLine": 45,
+        "endChar": 29
+      },
+      "revId": "e284df5e310311294b22bcfd1ed15f1284db9ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94ee77a0_04f37585",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-06T13:11:53Z",
+      "side": 1,
+      "message": "Why we need interface with no public methods?",
       "range": {
         "startLine": 45,
         "startChar": 6,
