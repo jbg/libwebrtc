@@ -32,10 +32,10 @@ class DelayManager {
   // Create a DelayManager object. Notify the delay manager that the packet
   // buffer can hold no more than |max_packets_in_buffer| packets (i.e., this
   // is the number of packet slots in the buffer) and that the target delay
-  // should be greater than or equal to |base_min_target_delay_ms|. Supply a
+  // should be greater than or equal to |base_min_delay_ms|. Supply a
   // PeakDetector object to the DelayManager.
   DelayManager(size_t max_packets_in_buffer,
-               int base_min_target_delay_ms,
+               int base_min_delay_ms,
                bool enable_rtx_handling,
                DelayPeakDetector* peak_detector,
                const TickTimer* tick_timer);
@@ -113,12 +113,18 @@ class DelayManager {
   // Assuming |delay| is in valid range.
   virtual bool SetMinimumDelay(int delay_ms);
   virtual bool SetMaximumDelay(int delay_ms);
+  // Base minimum delay provides lower bound on minimum delay values.
   virtual bool SetBaseMinimumDelay(int delay_ms);
   virtual int GetBaseMinimumDelay() const;
   virtual int base_target_level() const;
   virtual void set_streaming_mode(bool value);
   virtual int last_pack_cng_or_dtmf() const;
   virtual void set_last_pack_cng_or_dtmf(int value);
+
+  // Provides delay which is used by LimitTargetLevel as lower bound on target
+  // delay based on current |minimum_delay_ms_|, |base_min_delay_ms_| and
+  // |maximum_delay_ms_|. Exposed for testing.
+  int effective_minimum_delay() const;
 
   // This accessor is only intended for testing purposes.
   const absl::optional<int>& forced_limit_probability_for_test() const {
@@ -147,15 +153,17 @@ class DelayManager {
   // Makes sure that |delay_ms| is less than maximum delay, if any maximum
   // is set. Also, if possible check |delay_ms| to be less than 75% of
   // |max_packets_in_buffer_|.
-  bool IsValidMinimumDelay(int delay_ms);
+  bool IsValidMinimumDelay(int delay_ms) const;
+
+  bool IsValidBaseMinimumDelay(int delay_ms) const;
 
   bool first_packet_received_;
   const size_t max_packets_in_buffer_;  // Capacity of the packet buffer.
   IATVector iat_vector_;                // Histogram of inter-arrival times.
   int iat_factor_;  // Forgetting factor for updating the IAT histogram (Q15).
   const TickTimer* tick_timer_;
-  int base_min_target_delay_ms_;  // Lower bound for target_level_ and
-                                  // minimum_delay_ms_.
+  int base_min_delay_ms_;  // Lower bound for target_level_ and
+                           // minimum_delay_ms_.
   // Time elapsed since last packet.
   std::unique_ptr<TickTimer::Stopwatch> packet_iat_stopwatch_;
   int base_target_level_;  // Currently preferred buffer level before peak
