@@ -29,6 +29,7 @@ def FindSrcDirPath():
 # Skip these dependencies (list without solution name prefix).
 DONT_AUTOROLL_THESE = [
   'src/examples/androidtests/third_party/gradle',
+  'src/buildtools',
 ]
 
 # These dependencies are missing in chromium/src/DEPS, either unused or already
@@ -247,6 +248,8 @@ def BuildDepsentryDict(deps_dict):
       if dep.get('dep_type') == 'cipd':
         result[path] = CipdDepsEntry(path, dep['packages'])
       else:
+        if '@' not in dep['url']:
+          continue
         url, revision = dep['url'].split('@')
         result[path] = DepsEntry(path, url, revision)
 
@@ -701,8 +704,6 @@ def main():
     commit_queue_mode = ChooseCQMode(opts.skip_cq, opts.cq_over,
                                      current_commit_pos, new_commit_pos)
     logging.info('Uploading CL...')
-    if not opts.dry_run:
-      _UploadCL(commit_queue_mode)
   return 0
 
 
