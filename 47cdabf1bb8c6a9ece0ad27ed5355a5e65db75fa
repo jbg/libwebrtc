@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "667a4d21_5c89711c",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T10:19:17Z",
+      "side": 1,
+      "message": "What\u0027s the benefit of putting it in a separate build target? This is the same build target that has message_queue/handler.h/cc, thread.h/cc and async_invoker.h/cc of which I am trying to replace. This is very much a \"rtc_base\" thing, which I think should be available everywhere in our codebase where threads are available (which is everywhere).\n\nI\u0027m tempted to implement rtc::Thread::PostTask() and rtc::Thread::PostTaskAndReply() using it so that rtc::Threads can be used like chromium threads.",
+      "parentUuid": "3c446e21_e127d1f2",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08d358f7_c34757e4",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
