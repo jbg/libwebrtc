@@ -24,7 +24,6 @@
 namespace webrtc {
 
 namespace {
-constexpr int64_t kDefaultProcessIntervalMs = 5;
 constexpr int64_t kLogIntervalMs = 5000;
 }  // namespace
 
@@ -167,7 +166,7 @@ bool FakeNetworkPipe::EnqueuePacket(rtc::CopyOnWriteBuffer packet,
     packets_in_flight_.pop_back();
     ++dropped_packets_;
   }
-  if (network_behavior_->NextDeliveryTimeUs()) {
+  if (network_behavior_->NextDeliveryTimeUs() && !next_process_time_us_) {
     rtc::CritScope crit(&process_thread_lock_);
     if (process_thread_)
       process_thread_->WakeUp(nullptr);
@@ -293,13 +292,21 @@ void FakeNetworkPipe::DeliverNetworkPacket(NetworkPacket* packet) {
 }
 
 int64_t FakeNetworkPipe::TimeUntilNextProcess() {
+  auto delay = OptionalTimeUntilNextProcess();
+  return delay.value_or(kLogIntervalMs);
+}
+
+absl::optional<int64_t> FakeNetworkPipe::OptionalTimeUntilNextProcess() {
   rtc::CritScope crit(&process_lock_);
   absl::optional<int64_t> delivery_us = network_behavior_->NextDeliveryTimeUs();
   if (delivery_us) {
     int64_t delay_us = *delivery_us - clock_->TimeInMicroseconds();
-    return std::max<int64_t>((delay_us + 500) / 1000, 0);
+    auto res = std::max<int64_t>((delay_us + 500) / 1000, 0);
+    next_process_time_us_ = delivery_us;
+    return res;
   }
-  return kDefaultProcessIntervalMs;
+  next_process_time_us_.reset();
+  return absl::nullopt;
 }
 
 void FakeNetworkPipe::ProcessThreadAttached(ProcessThread* process_thread) {
