@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01302321_817267cd",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "I\u0027d really appreciate this (but in a separate CL so as to not block your work.) Preferably by separating the grouping of transactions from the Plot related code.\nMaybe a vector\u003c pair\u003cset\u003cCandidatePairId\u003e, vector\u003cIceTransaction\u003e\u003e \u003e ?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 58
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7d30974_e6ad9a6c",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "Would\u0027t a std::pair be more natural?",
+      "range": {
+        "startLine": 79,
+        "startChar": 30,
+        "endLine": 79,
+        "endChar": 48
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d7901a7_c69bad5b",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "Aren\u0027t you guaranteed that every transaction has a candidate pair id from each side? Or are you worried about the case where only one log is logging at the time of the transaction?",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 5
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4c9b3aa_8aa59baf",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "Is this still the case? You\u0027re calling ToCallTime() for the x values.",
+      "range": {
+        "startLine": 125,
+        "startChar": 32,
+        "endLine": 125,
+        "endChar": 44
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4552181b_4818e182",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "Is this still true?",
+      "range": {
+        "startLine": 197,
+        "startChar": 32,
+        "endLine": 197,
+        "endChar": 44
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49613b6f_4cc26321",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "Is this still true?",
+      "range": {
+        "startLine": 237,
+        "startChar": 27,
+        "endLine": 237,
+        "endChar": 39
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d0d7fd0_fdb18145",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "Is this still true?",
+      "range": {
+        "startLine": 273,
+        "startChar": 31,
+        "endLine": 273,
+        "endChar": 43
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2fd614b_bd7cbb10",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "If we want to move to log1 time, shouldn\u0027t we subtract the offset if the timestamp comes from log2?",
+      "range": {
+        "startLine": 284,
+        "startChar": 6,
+        "endLine": 284,
+        "endChar": 33
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ad4deba_a985c2c5",
+        "filename": "rtc_tools/event_log_visualizer/ice_transaction_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-06T20:20:41Z",
+      "side": 1,
+      "message": "I\u0027m still not sure in which situation you wouldn\u0027t want to have the same axes in all graphs.\nICE checks are sent throughout the call, so except for candidate pairs that are pruned early (and therefore probably never selected and not very interesting), the axes will be \"almost equal\", no? If my understanding is correct, exactly equal seems better than almost equal.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 31
+      },
+      "revId": "6feb985a691f402baa1d6e7b60dd65ea458d9caa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
