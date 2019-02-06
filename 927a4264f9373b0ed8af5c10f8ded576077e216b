@@ -50,6 +50,24 @@
       "revId": "927a4264f9373b0ed8af5c10f8ded576077e216b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1334ef5_014c6b81",
+        "filename": "pc/rtp_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-06T19:39:11Z",
+      "side": 1,
+      "message": "Taken, will use it in implementation.",
+      "parentUuid": "7ab9683a_f71091e4",
+      "revId": "927a4264f9373b0ed8af5c10f8ded576077e216b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
