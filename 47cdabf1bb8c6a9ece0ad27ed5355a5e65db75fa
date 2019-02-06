@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "5a8bf277_9ccb6aa8",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-06T10:45:36Z",
+      "side": 1,
+      "message": "In this CL, it would be possible to have:\n\npost_message_with_functor (PostMessageWithFunctor) -\u003e rtc_base (MessageHandler, etc)\n\nBut if I implement PostTask in Thread (https://crbug.com/webrtc/10294), without breaking Thread out of rtc_base, then we\u0027d end up with a cycle:\n\nrtc_base (Thread) -\u003e post_message_with_functor (PostMessageWithFunctor) -\u003e rtc_base (MessageHandler, etc)\n\nWhat do you suggest I do?",
+      "parentUuid": "247b8811_0f93939c",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08d358f7_c34757e4",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
