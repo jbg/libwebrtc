@@ -112,12 +112,18 @@ class DelayManager {
   // Assuming |delay| is in valid range.
   virtual bool SetMinimumDelay(int delay_ms);
   virtual bool SetMaximumDelay(int delay_ms);
+  // Base minimum delay provides lower bound on minimum delay values.
   virtual bool SetBaseMinimumDelay(int delay_ms);
   virtual int GetBaseMinimumDelay() const;
   virtual int base_target_level() const;
   virtual void set_streaming_mode(bool value);
   virtual int last_pack_cng_or_dtmf() const;
   virtual void set_last_pack_cng_or_dtmf(int value);
+
+  // Provides delay which is used by LimitTargetLevel as lower bound on target
+  // delay based on current |minimum_delay_ms_|, |base_min_target_delay_ms_| and
+  // |maximum_delay_ms_|. Exposed for testing.
+  int effective_minimum_delay() const;
 
   // This accessor is only intended for testing purposes.
   const absl::optional<int>& forced_limit_probability_for_test() const {
@@ -146,7 +152,10 @@ class DelayManager {
   // Makes sure that |delay_ms| is less than maximum delay, if any maximum
   // is set. Also, if possible check |delay_ms| to be less than 75% of
   // |max_packets_in_buffer_|.
-  bool IsValidMinimumDelay(int delay_ms);
+  bool IsValidMinimumDelay(int delay_ms) const;
+
+  // Makes sure that |delay_ms| is within [0, 10000] milliseconds range.
+  bool IsValidBaseMinimumDelay(int delay_ms) const;
 
   bool first_packet_received_;
   const size_t max_packets_in_buffer_;  // Capacity of the packet buffer.
