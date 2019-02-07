@@ -144,6 +144,24 @@
     },
     {
       "key": {
+        "uuid": "9c9c55c2_cdda5c13",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-07T12:00:39Z",
+      "side": 1,
+      "message": "When you implement PostTask in thread that depends on this, it seems logical to split rtc::Thread and everything it depends on out into a separate build target, and then let *that* target merge with post_message_with_functor.\n\nThen rtc_base would depend on new_target_containing_thread.\nBut that split would be a hassle; I wouldn\u0027t hold up this CL waiting for that to happen.",
+      "parentUuid": "ee62c84e_b1a654d4",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08d358f7_c34757e4",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
