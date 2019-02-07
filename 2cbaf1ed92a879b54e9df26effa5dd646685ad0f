@@ -22,6 +22,30 @@
       "revId": "2cbaf1ed92a879b54e9df26effa5dd646685ad0f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5160952e_f2238cd9",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-07T15:42:45Z",
+      "side": 1,
+      "message": "Actually I accidentally commented it.",
+      "parentUuid": "adad70b5_cc90bf86",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 53
+      },
+      "revId": "2cbaf1ed92a879b54e9df26effa5dd646685ad0f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
