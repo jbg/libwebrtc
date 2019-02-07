@@ -22,6 +22,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/system/fallthrough.h"
 #include "rtc_base/trace_event.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
@@ -68,6 +69,7 @@ class VideoDecoderSoftwareFallbackWrapper final : public VideoDecoder {
   int32_t number_of_cores_;
   const std::unique_ptr<VideoDecoder> fallback_decoder_;
   const std::string fallback_implementation_name_;
+  const bool forced_sw_fallback_enabled_;
   DecodedImageCallback* callback_;
 };
 
@@ -80,6 +82,8 @@ VideoDecoderSoftwareFallbackWrapper::VideoDecoderSoftwareFallbackWrapper(
       fallback_implementation_name_(
           std::string(fallback_decoder_->ImplementationName()) +
           " (fallback from: " + hw_decoder_->ImplementationName() + ")"),
+      forced_sw_fallback_enabled_(webrtc::field_trial::IsEnabled(
+          "WebRTC-Video-ForcedSwDecoderFallback")),
       callback_(nullptr) {}
 VideoDecoderSoftwareFallbackWrapper::~VideoDecoderSoftwareFallbackWrapper() =
     default;
@@ -90,6 +94,12 @@ int32_t VideoDecoderSoftwareFallbackWrapper::InitDecode(
   codec_settings_ = *codec_settings;
   number_of_cores_ = number_of_cores;
 
+  if (forced_sw_fallback_enabled_) {
+    RTC_LOG(LS_INFO) << "Forced software decoder fallback enabled.";
+    RTC_DCHECK(decoder_type_ == DecoderType::kNone);
+    return InitFallbackDecoder() ? WEBRTC_VIDEO_CODEC_OK
+                                 : WEBRTC_VIDEO_CODEC_ERROR;
+  }
   int32_t status = InitHwDecoder();
   if (status == WEBRTC_VIDEO_CODEC_OK) {
     return WEBRTC_VIDEO_CODEC_OK;
