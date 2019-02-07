@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "745a9b6d_f4938591",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-07T02:35:34Z",
+      "side": 1,
+      "message": "Here, optional value in case of ssrc missing, and as latency it is returned as 0.\nI think I can get away with just return 0 here.\nBut need to double check getCapabilities, maybe I will need to signal that value has changed because ssrc is missing.",
+      "revId": "2b89d0bc0548ea61ef3758031e506a07cf5a0f53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9b4c46b_86faea5f",
+        "filename": "pc/rtp_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-07T02:35:34Z",
+      "side": 1,
+      "message": "Here the same as question as in \nmedia/base/media_channel.h\n\nDon\u0027t see all scenarios in which stopped_ is true.\n\nFrom RemoteSource perspective it will look like the latency value has changed. Should it trigger some event so we check whether we remain within existing user constraints and if not mute remote track?",
+      "revId": "2b89d0bc0548ea61ef3758031e506a07cf5a0f53",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
