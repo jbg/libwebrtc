@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "51b79722_5203867a",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-07T00:48:41Z",
+      "side": 1,
+      "message": "\u003e Do we expect to add methods to these as we discover what\u0027s needed to implement the RTP?\n\nNot sure. But I\u0027d expect we\u0027ll add stats methods.\n\n\u003e Right now the only thing the caller can do with this one is delete it when they don\u0027t want any more callbacks, correct?\n\nCorrect.",
+      "parentUuid": "9d10eb09_e4b74746",
+      "revId": "1194386555968c2a582eb462bd6de1cfe2d6904e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c518727a_01d47180",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "426af09f_de161541",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-07T00:48:41Z",
+      "side": 1,
+      "message": "There should be no channel_id here, deleted.",
+      "parentUuid": "c518727a_01d47180",
+      "range": {
+        "startLine": 389,
+        "startChar": 35,
+        "endLine": 389,
+        "endChar": 54
+      },
+      "revId": "1194386555968c2a582eb462bd6de1cfe2d6904e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a211d81_cf7740da",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2019-02-07T00:37:38Z",
       "side": 1,
       "message": "Do we want to go with the model where these are created asynchronously, possibly when a packet arrives for an unsignalled stream?\n\nOr is the idea that we\u0027ll call this method from inside such a callback, after we\u0027ve created a new sink?",
+      "range": {
+        "startLine": 406,
+        "startChar": 2,
+        "endLine": 406,
+        "endChar": 44
+      },
+      "revId": "1194386555968c2a582eb462bd6de1cfe2d6904e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1756b8e_fe9d472b",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-07T00:48:41Z",
+      "side": 1,
+      "message": "Not sure. Letting the MediaTransport create them spontaneously has the drawback that we can\u0027t pass callbacks or any other arguments from the receive stream on construction.",
+      "parentUuid": "7a211d81_cf7740da",
       "range": {
         "startLine": 406,
         "startChar": 2,
