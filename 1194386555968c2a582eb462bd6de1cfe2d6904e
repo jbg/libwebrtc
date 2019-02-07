@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d10eb09_e4b74746",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-07T00:37:38Z",
+      "side": 1,
+      "message": "Do we expect to add methods to these as we discover what\u0027s needed to implement the RTP?\n\nRight now the only thing the caller can do with this one is delete it when they don\u0027t want any more callbacks, correct?",
+      "revId": "1194386555968c2a582eb462bd6de1cfe2d6904e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c518727a_01d47180",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-07T00:37:38Z",
+      "side": 1,
+      "message": "Does it need channel_id?  The channel_id is passed in along with the sink when creating it, right?  Can it remember that and use it instead?",
+      "range": {
+        "startLine": 389,
+        "startChar": 35,
+        "endLine": 389,
+        "endChar": 54
+      },
+      "revId": "1194386555968c2a582eb462bd6de1cfe2d6904e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a211d81_cf7740da",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-07T00:37:38Z",
+      "side": 1,
+      "message": "Do we want to go with the model where these are created asynchronously, possibly when a packet arrives for an unsignalled stream?\n\nOr is the idea that we\u0027ll call this method from inside such a callback, after we\u0027ve created a new sink?",
+      "range": {
+        "startLine": 406,
+        "startChar": 2,
+        "endLine": 406,
+        "endChar": 44
+      },
+      "revId": "1194386555968c2a582eb462bd6de1cfe2d6904e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
