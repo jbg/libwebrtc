@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65b2c6ec_b7ea8c4d",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-02-07T16:45:32Z",
+      "side": 1,
+      "message": "Yes I think we agreed to have overhead observers in Create audio/video sender.",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 59
+      },
+      "revId": "c6ab77aefc7ca7e4fb14bf043afe96e99de8e2c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
