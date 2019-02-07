@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c41c1a48_eed35af8",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-02-07T02:53:14Z",
+      "side": 1,
+      "message": "Perhaps store the value of `effective_minimum_delay()` into a variable rather than calling this function twice? This is because the accessor here is non-trivial, so it would be good to reduce the risk that the value changes in-between the calls.",
+      "range": {
+        "startLine": 292,
+        "startChar": 28,
+        "endLine": 292,
+        "endChar": 51
+      },
+      "revId": "d52b5598b47522788f11084597d4de3f59ae281b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fce3db18_f08c08c2",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-02-07T02:53:14Z",
+      "side": 1,
+      "message": "You should consider naming this `base_minimum_delay_ms` since there\u0027s already precedence from the other member variable named `minimum_delay_ms_`.",
+      "range": {
+        "startLine": 38,
+        "startChar": 19,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "d52b5598b47522788f11084597d4de3f59ae281b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98533b55_d3fdd96f",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-02-07T02:53:14Z",
+      "side": 1,
+      "message": "Better to get rid of this comment? I think it may cause confusion since there are so many different \"minimums\" involved here.",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 69
+      },
+      "revId": "d52b5598b47522788f11084597d4de3f59ae281b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "951e9c46_3abd7b64",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-02-07T02:53:14Z",
+      "side": 1,
+      "message": "I personally dislike changing the visibility of functions to make unit tests work. C++ has other options (typically involving `friend`, e.g. `FRIEND_TEST_ALL_PREFIXES`) to give unit tests access to object internals. You may want to check with someone more familiar with WebRTC on what they think is best in this code base.",
+      "range": {
+        "startLine": 126,
+        "startChar": 26,
+        "endLine": 126,
+        "endChar": 46
+      },
+      "revId": "d52b5598b47522788f11084597d4de3f59ae281b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc0f7fe0_87547c2f",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-02-07T02:53:14Z",
+      "side": 1,
+      "message": "This is messy.\n\nThere\u0027s precedence for using both snake_case and CamelCase for accessors in this class. I would say that because `SetMinimumDelay()`, `SetBaseMinimumDelay()`, and `GetBaseMinimumDelay()` uses CamelCase, then it would add clarity to have this function also be `GetEffectiveMinimumDelay()`.\n\nOr maybe even `CalculateEffectiveMinimumDelay()` to make it clear that it\u0027s not just a simple accessor? In particular: A change to `packet_len_ms_` may very unexpectedly affect the value returned by this function.",
+      "range": {
+        "startLine": 127,
+        "startChar": 6,
+        "endLine": 127,
+        "endChar": 29
+      },
+      "revId": "d52b5598b47522788f11084597d4de3f59ae281b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dae4e922_178e9b7b",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-02-07T02:53:14Z",
+      "side": 1,
+      "message": "This comment isn\u0027t 100% accurrate. For instance: There are now situations when this value is ignored (i.e. if it itself is out-of-bounds). I would rather get rid of this comment than to have a comment that could mislead the reader.",
+      "range": {
+        "startLine": 165,
+        "startChar": 27,
+        "endLine": 166,
+        "endChar": 48
+      },
+      "revId": "d52b5598b47522788f11084597d4de3f59ae281b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
