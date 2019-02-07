@@ -177,8 +177,7 @@ class MediaTransportAudioSinkInterface {
   virtual ~MediaTransportAudioSinkInterface() = default;
 
   // Called when new encoded audio frame is received.
-  virtual void OnData(uint64_t channel_id,
-                      MediaTransportEncodedAudioFrame frame) = 0;
+  virtual void OnData(MediaTransportEncodedAudioFrame frame) = 0;
 };
 
 // Represents encoded video frame, along with the codec information.
@@ -245,8 +244,7 @@ class MediaTransportVideoSinkInterface {
   virtual ~MediaTransportVideoSinkInterface() = default;
 
   // Called when new encoded video frame is received.
-  virtual void OnData(uint64_t channel_id,
-                      MediaTransportEncodedVideoFrame frame) = 0;
+  virtual void OnData(MediaTransportEncodedVideoFrame frame) = 0;
 };
 
 // Interface for video sender to be notified of received key frame request.
@@ -255,7 +253,7 @@ class MediaTransportKeyFrameRequestCallback {
   virtual ~MediaTransportKeyFrameRequestCallback() = default;
 
   // Called when a key frame request is received on the transport.
-  virtual void OnKeyFrameRequested(uint64_t channel_id) = 0;
+  virtual void OnKeyFrameRequested() = 0;
 };
 
 // State of the media transport.  Media transport begins in the pending state.
@@ -351,6 +349,46 @@ class DataChannelSink {
   virtual void OnChannelClosed(int channel_id) = 0;
 };
 
+class MediaTransportAudioSender {
+ public:
+  virtual ~MediaTransportAudioSender() = default;
+
+  // Start asynchronous send of audio frame. The status returned by this method
+  // only pertains to the synchronous operations (e.g.
+  // serialization/packetization), not to the asynchronous operation.
+
+  virtual RTCError SendAudioFrame(MediaTransportEncodedAudioFrame frame) = 0;
+};
+
+// Similar to RtpStreamReceiverInterface, only owns the association with the
+// demuxer.
+class MediaTransportAudioReceiver {
+ public:
+  virtual ~MediaTransportAudioReceiver() = default;
+};
+
+class MediaTransportVideoSender {
+ public:
+  virtual ~MediaTransportVideoSender() = default;
+
+  // Start asynchronous send of video frame. The status returned by this method
+  // only pertains to the synchronous operations (e.g.
+  // serialization/packetization), not to the asynchronous operation.
+  virtual RTCError SendVideoFrame(
+      const MediaTransportEncodedVideoFrame& frame) = 0;
+};
+
+class MediaTransportVideoReceiver {
+ public:
+  virtual ~MediaTransportVideoReceiver() = default;
+
+  // Requests a keyframe for the particular channel (stream). The caller should
+  // check that the keyframe is not present in a jitter buffer already (i.e.
+  // don't request a keyframe if there is one that you will get from the jitter
+  // buffer in a moment).
+  virtual RTCError RequestKeyFrame() = 0;
+};
+
 // Media transport interface for sending / receiving encoded audio/video frames
 // and receiving bandwidth estimate update from congestion control.
 class MediaTransportInterface {
@@ -358,37 +396,33 @@ class MediaTransportInterface {
   MediaTransportInterface();
   virtual ~MediaTransportInterface();
 
-  // Start asynchronous send of audio frame. The status returned by this method
-  // only pertains to the synchronous operations (e.g.
-  // serialization/packetization), not to the asynchronous operation.
+  // Creates an object representing the send end-point of a audio stream using
+  // this transport.
+  std::unique_ptr<MediaTransportVideoSender> CreateAudioSender(
+      uint64_t channel_id);
 
-  virtual RTCError SendAudioFrame(uint64_t channel_id,
-                                  MediaTransportEncodedAudioFrame frame) = 0;
-
-  // Start asynchronous send of video frame. The status returned by this method
-  // only pertains to the synchronous operations (e.g.
-  // serialization/packetization), not to the asynchronous operation.
-  virtual RTCError SendVideoFrame(
+  // Creates an object representing the receive end-point of a audio stream
+  // using this transport.
+  std::unique_ptr<MediaTransportVideoSender> CreateAudioReceiver(
       uint64_t channel_id,
-      const MediaTransportEncodedVideoFrame& frame) = 0;
+      // TODO(nisse): Add Rtt observer, or route that via Call to the receive
+      // stream instead?
+      MediaTransportAudioSinkInterface* sink);
 
-  // Used by video sender to be notified on key frame requests.
-  virtual void SetKeyFrameRequestCallback(
+  // Creates an object representing the send end-point of a video stream using
+  // this transport.
+  std::unique_ptr<MediaTransportVideoSender> CreateVideoSender(
+      uint64_t channel_id,
+      // TODO(nisse): Also add an overhead change callback?
       MediaTransportKeyFrameRequestCallback* callback);
 
-  // Requests a keyframe for the particular channel (stream). The caller should
-  // check that the keyframe is not present in a jitter buffer already (i.e.
-  // don't request a keyframe if there is one that you will get from the jitter
-  // buffer in a moment).
-  virtual RTCError RequestKeyFrame(uint64_t channel_id) = 0;
-
-  // Sets audio sink. Sink must be unset by calling SetReceiveAudioSink(nullptr)
-  // before the media transport is destroyed or before new sink is set.
-  virtual void SetReceiveAudioSink(MediaTransportAudioSinkInterface* sink) = 0;
-
-  // Registers a video sink. Before destruction of media transport, you must
-  // pass a nullptr.
-  virtual void SetReceiveVideoSink(MediaTransportVideoSinkInterface* sink) = 0;
+  // Creates an object representing the receive end-point of a video stream
+  // using this transport.
+  std::unique_ptr<MediaTransportVideoSender> CreateVideoReceiver(
+      uint64_t channel_id,
+      // TODO(nisse): Add Rtt observer, or route that via Call to the receive
+      // stream instead?
+      MediaTransportVideoSinkInterface* sink);
 
   // Adds a target bitrate observer. Before media transport is destructed
   // the observer must be unregistered (by calling
@@ -411,12 +445,6 @@ class MediaTransportInterface {
   // multiplexer may use it to demultiplex channel ids).
   virtual void SetFirstAudioPacketReceivedObserver(
       AudioPacketReceivedObserver* observer);
-
-  // Intended for receive side. AddRttObserver registers an observer to be
-  // called for each RTT measurement, typically once per ACK. Before media
-  // transport is destructed the observer must be unregistered.
-  virtual void AddRttObserver(MediaTransportRttObserver* observer);
-  virtual void RemoveRttObserver(MediaTransportRttObserver* observer);
 
   // Returns the last known target transfer rate as reported to the above
   // observers.
