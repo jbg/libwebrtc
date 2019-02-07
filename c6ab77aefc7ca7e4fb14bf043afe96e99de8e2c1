@@ -2,6 +2,63 @@
   "comments": [
     {
       "key": {
+        "uuid": "c6b733c8_acda308f",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-07T18:55:42Z",
+      "side": 1,
+      "message": "I understand the argument for getting rid of channel_id here. OTOH, if I want to have a single sink, I can\u0027t (because I won\u0027t be able to differentiate SSRCs)",
+      "revId": "c6ab77aefc7ca7e4fb14bf043afe96e99de8e2c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b81d0b40_009b871b",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-07T18:55:42Z",
+      "side": 1,
+      "message": "we should consider MediaTransportEncodedVideoFrame and std::move() here",
+      "range": {
+        "startLine": 378,
+        "startChar": 6,
+        "endLine": 378,
+        "endChar": 44
+      },
+      "revId": "c6ab77aefc7ca7e4fb14bf043afe96e99de8e2c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e34b7b0_01bb2e77",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-07T18:55:42Z",
+      "side": 1,
+      "message": "or media_transport.AddRttObserver(); (we should consider introducing MediaTransportNetworkStatisticsInterface)",
+      "revId": "c6ab77aefc7ca7e4fb14bf043afe96e99de8e2c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "65b2c6ec_b7ea8c4d",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 2

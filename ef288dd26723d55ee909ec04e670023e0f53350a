@@ -22,6 +22,30 @@
       "revId": "ef288dd26723d55ee909ec04e670023e0f53350a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "835c8be4_0a9f4575",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-07T18:55:42Z",
+      "side": 0,
+      "message": "I think we should allow multiple RTT observers, maybe it\u0027s fine to have one target transfer rate callback.\n\nYou should be able to have a video stream without call object (and with some dumb bitrate allocator). Call object should be a lightweight orchestrator.\n\nSo I would leave it here (maybe move it class NetworkStatisticsInterface, and make MediaTransportInterface inherit from NetworkStatisticsInterface.",
+      "parentUuid": "0c2f4cf5_bd4e731b",
+      "range": {
+        "startLine": 418,
+        "startChar": 67,
+        "endLine": 418,
+        "endChar": 0
+      },
+      "revId": "ef288dd26723d55ee909ec04e670023e0f53350a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
