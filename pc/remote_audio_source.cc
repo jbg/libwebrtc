@@ -16,10 +16,12 @@
 #include "absl/algorithm/container.h"
 #include "absl/memory/memory.h"
 #include "api/scoped_refptr.h"
+#include "pc/rtp_receiver.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/location.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_checker.h"
 
@@ -46,9 +48,12 @@ class RemoteAudioSource::AudioDataProxy : public AudioSinkInterface {
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(AudioDataProxy);
 };
 
-RemoteAudioSource::RemoteAudioSource(rtc::Thread* worker_thread)
+RemoteAudioSource::RemoteAudioSource(
+    rtc::Thread* worker_thread,
+    const rtc::WeakPtr<AudioRtpReceiver>& receiver)
     : main_thread_(rtc::Thread::Current()),
       worker_thread_(worker_thread),
+      receiver_(receiver),
       state_(MediaSourceInterface::kLive) {
   RTC_DCHECK(main_thread_);
   RTC_DCHECK(worker_thread_);
@@ -97,6 +102,21 @@ void RemoteAudioSource::SetVolume(double volume) {
   for (auto* observer : audio_observers_) {
     observer->OnSetVolume(volume);
   }
+}
+
+void RemoteAudioSource::SetLatency(double latency) {
+  if (receiver_) {
+    const int delay_ms = rtc::dchecked_cast<int>(latency * 1000);
+    receiver_->SetBaseMinimumPlayoutDelayMs(delay_ms);
+  }
+}
+
+double RemoteAudioSource::GetLatency() const {
+  int delay_ms = 0;
+  if (receiver_) {
+    delay_ms = receiver_->GetBaseMinimumPlayoutDelayMs();
+  }
+  return rtc::dchecked_cast<double>(delay_ms) / 1000.0;
 }
 
 void RemoteAudioSource::RegisterAudioObserver(AudioObserver* observer) {

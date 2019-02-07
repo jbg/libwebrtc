@@ -520,6 +520,39 @@ TEST_F(RtpSenderReceiverTest, RemoteAudioTrackSetVolume) {
   DestroyAudioRtpReceiver();
 }
 
+TEST_F(RtpSenderReceiverTest, RemoteAudioTrackSetLatency) {
+  CreateAudioRtpReceiver();
+
+  double eps = 0.001;            // 1 / 1000
+  absl::optional<int> delay_ms;  // In milliseconds.
+  double latency_s = 0.5;        // In seconds.
+  audio_track_->GetSource()->SetLatency(latency_s);
+  delay_ms = voice_media_channel_->GetBaseMinimumPlayoutDelayMs(kAudioSsrc);
+  EXPECT_NEAR(latency_s, delay_ms.value_or(0) / 1000.0, eps);
+
+  // Disabling the track should take no effect on previously set value.
+  audio_track_->set_enabled(false);
+  delay_ms = voice_media_channel_->GetBaseMinimumPlayoutDelayMs(kAudioSsrc);
+  EXPECT_NEAR(latency_s, delay_ms.value_or(0) / 1000.0, eps);
+
+  // When the track is disabled, we still should be able to set latency.
+  latency_s = 0.3;
+  audio_track_->GetSource()->SetLatency(latency_s);
+  delay_ms = voice_media_channel_->GetBaseMinimumPlayoutDelayMs(kAudioSsrc);
+  EXPECT_NEAR(latency_s, delay_ms.value_or(0) / 1000.0, eps);
+
+  // Enabling the track should take no effect on previously set value.
+  audio_track_->set_enabled(true);
+  delay_ms = voice_media_channel_->GetBaseMinimumPlayoutDelayMs(kAudioSsrc);
+  EXPECT_NEAR(latency_s, delay_ms.value_or(0) / 1000.0, eps);
+
+  // We still should be able to change latency.
+  latency_s = 0.4;
+  audio_track_->GetSource()->SetLatency(latency_s);
+  delay_ms = voice_media_channel_->GetBaseMinimumPlayoutDelayMs(kAudioSsrc);
+  EXPECT_NEAR(latency_s, delay_ms.value_or(0) / 1000.0, eps);
+}
+
 // Test that the media channel isn't enabled for sending if the audio sender
 // doesn't have both a track and SSRC.
 TEST_F(RtpSenderReceiverTest, AudioSenderWithoutTrackAndSsrc) {

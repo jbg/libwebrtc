@@ -92,6 +92,9 @@ class FakeAudioReceiveStream final : public webrtc::AudioReceiveStream {
   bool VerifyLastPacket(const uint8_t* data, size_t length) const;
   const webrtc::AudioSinkInterface* sink() const { return sink_; }
   float gain() const { return gain_; }
+  int base_minimum_playout_delay_ms() const {
+    return base_minimum_playout_delay_ms_;
+  }
   bool DeliverRtp(const uint8_t* packet, size_t length, int64_t packet_time_us);
   bool started() const { return started_; }
 
