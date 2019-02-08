@@ -157,12 +157,13 @@ struct ConfigHelper {
     stream_config_.max_bitrate_bps = 65000;
   }
 
-  std::unique_ptr<internal::AudioSendStream> CreateAudioSendStream() {
-    return std::unique_ptr<internal::AudioSendStream>(
+  internal::AudioSendStream* CreateAudioSendStream() {
+    send_stream_ = std::unique_ptr<internal::AudioSendStream>(
         new internal::AudioSendStream(
             stream_config_, audio_state_, &worker_queue_, &rtp_transport_,
             &bitrate_allocator_, &event_log_, &rtcp_rtt_stats_, absl::nullopt,
             std::unique_ptr<voe::ChannelSendInterface>(channel_send_)));
+    return send_stream_.get();
   }
 
   AudioSendStream::Config& config() { return stream_config_; }
@@ -295,6 +296,7 @@ struct ConfigHelper {
   MockRtcpRttStats rtcp_rtt_stats_;
   testing::NiceMock<MockLimitObserver> limit_observer_;
   BitrateAllocator bitrate_allocator_;
+  std::unique_ptr<internal::AudioSendStream> send_stream_;
   // |worker_queue| is defined last to ensure all pending tasks are cancelled
   // and deleted before any other members.
   rtc::TaskQueue worker_queue_;
@@ -334,7 +336,7 @@ TEST(AudioSendStreamTest, ConfigToString) {
 
 TEST(AudioSendStreamTest, ConstructDestruct) {
   ConfigHelper helper(false, true);
-  auto send_stream = helper.CreateAudioSendStream();
+  helper.CreateAudioSendStream();
 }
 
 TEST(AudioSendStreamTest, SendTelephoneEvent) {
@@ -355,12 +357,12 @@ TEST(AudioSendStreamTest, SetMuted) {
 
 TEST(AudioSendStreamTest, AudioBweCorrectObjectsOnChannelProxy) {
   ConfigHelper helper(true, true);
-  auto send_stream = helper.CreateAudioSendStream();
+  helper.CreateAudioSendStream();
 }
 
 TEST(AudioSendStreamTest, NoAudioBweCorrectObjectsOnChannelProxy) {
   ConfigHelper helper(false, true);
-  auto send_stream = helper.CreateAudioSendStream();
+  helper.CreateAudioSendStream();
 }
 
 TEST(AudioSendStreamTest, GetStats) {
@@ -447,7 +449,7 @@ TEST(AudioSendStreamTest, SendCodecCanApplyVad) {
             return true;
           }));
 
-  auto send_stream = helper.CreateAudioSendStream();
+  helper.CreateAudioSendStream();
 
   // We cannot truly determine if the encoder created is an AudioEncoderCng.  It
   // is the only reasonable implementation that will return something from
@@ -534,7 +536,10 @@ TEST(AudioSendStreamTest, OnTransportOverheadChanged) {
 
   // ModifyEncoder will be called on overhead change.
   EXPECT_CALL(*helper.channel_send(), ModifyEncoder(testing::_)).Times(1);
-
+  // We should get a OnBitrateAllocation callback, but as it will run on the
+  // task queue it might not be triggered before returning.
+  EXPECT_CALL(*helper.channel_send(), OnBitrateAllocation)
+      .WillRepeatedly(Return());
   const size_t transport_overhead_per_packet_bytes = 333;
   send_stream->SetTransportOverhead(transport_overhead_per_packet_bytes);
 
