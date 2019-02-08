@@ -174,6 +174,10 @@ class AudioSendStream final : public webrtc::AudioSendStream,
       const std::vector<RtpExtension>& extensions);
   static int TransportSeqNumId(const Config& config);
 
+  static bool AllocationRangeConfigured(const Config& config);
+  static bool ShouldIncludeInBitrateAllocation(
+      const AudioAllocationSettings& settings,
+      const Config& config);
   rtc::CriticalSection overhead_per_packet_lock_;
 
   // Current transport overhead (ICE, TURN, etc.)
@@ -183,6 +187,8 @@ class AudioSendStream final : public webrtc::AudioSendStream,
   // Current audio packetization overhead (RTP or Media Transport).
   size_t audio_overhead_per_packet_bytes_
       RTC_GUARDED_BY(overhead_per_packet_lock_) = 0;
+
+  DataSize total_overhead_per_packet_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(AudioSendStream);
 };
