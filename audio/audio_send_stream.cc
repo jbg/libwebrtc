@@ -219,6 +219,20 @@ int AudioSendStream::TransportSeqNumId(const AudioSendStream::Config& config) {
   return FindExtensionIds(config.rtp.extensions).transport_sequence_number;
 }
 
+bool AudioSendStream::AllocationRangeConfigured(const Config& config) {
+  return config.min_bitrate_bps != -1 && config.max_bitrate_bps != -1;
+}
+
+bool AudioSendStream::ShouldIncludeInBitrateAllocation(
+    const AudioAllocationSettings& settings,
+    const AudioSendStream::Config& config) {
+  bool sending_transport_seq_num =
+      settings.SendTransportSequenceNumber() || TransportSeqNumId(config) != 0;
+  return AllocationRangeConfigured(config) &&
+         (settings.AlwaysIncludeAudioInAllocation() ||
+          sending_transport_seq_num);
+}
+
 void AudioSendStream::ConfigureStream(
     webrtc::internal::AudioSendStream* stream,
     const webrtc::AudioSendStream::Config& new_config,
@@ -262,29 +276,30 @@ void AudioSendStream::ConfigureStream(
     channel_send->SetSendAudioLevelIndicationStatus(new_ids.audio_level != 0,
                                                     new_ids.audio_level);
   }
-  bool transport_seq_num_id_changed =
-      new_ids.transport_sequence_number != old_ids.transport_sequence_number;
-  if (first_time || (transport_seq_num_id_changed &&
-                     !stream->allocation_settings_.ForceNoAudioFeedback())) {
-    if (!first_time) {
+
+  if (stream->rtp_transport_) {
+    bool seq_num_id_changed =
+        new_ids.transport_sequence_number != old_ids.transport_sequence_number;
+    if (seq_num_id_changed && !first_time)
       channel_send->ResetSenderCongestionControlObjects();
-    }
 
-    RtcpBandwidthObserver* bandwidth_observer = nullptr;
+    if (seq_num_id_changed || first_time) {
+      // We need to have an allocation range configured so we can add audio to
+      // bitrate allocation if we enable transport sequence numbers for audio.
+      // Otherwise we would overestiamte the video bitrate capacity of the link.
+      if (stream->allocation_settings_.SendTransportSequenceNumber() &&
+          new_ids.transport_sequence_number != 0 &&
+          AllocationRangeConfigured(new_config))
+        channel_send->EnableSendTransportSequenceNumber(
+            new_ids.transport_sequence_number);
 
-    if (stream->allocation_settings_.IncludeAudioInFeedback(
-            new_ids.transport_sequence_number != 0)) {
-      channel_send->EnableSendTransportSequenceNumber(
-          new_ids.transport_sequence_number);
-      // Probing in application limited region is only used in combination with
-      // send side congestion control, wich depends on feedback packets which
-      // requires transport sequence numbers to be enabled.
-      if (stream->rtp_transport_) {
+      if (stream->allocation_settings_.EnableAlrProbing())
         stream->rtp_transport_->EnablePeriodicAlrProbing(true);
+
+      RtcpBandwidthObserver* bandwidth_observer = nullptr;
+      if (stream->allocation_settings_.RegisterRtcpObserver())
         bandwidth_observer = stream->rtp_transport_->GetBandwidthObserver();
-      }
-    }
-    if (stream->rtp_transport_) {
+
       channel_send->RegisterSenderCongestionControlObjects(
           stream->rtp_transport_, bandwidth_observer);
     }
@@ -319,9 +334,7 @@ void AudioSendStream::Start() {
     return;
   }
 
-  if (allocation_settings_.IncludeAudioInAllocationOnStart(
-          config_.min_bitrate_bps, config_.max_bitrate_bps, config_.has_dscp,
-          TransportSeqNumId(config_))) {
+  if (ShouldIncludeInBitrateAllocation(allocation_settings_, config_)) {
     rtp_transport_->packet_sender()->SetAccountForAudioPackets(true);
     rtp_rtcp_module_->SetAsPartOfAllocation(true);
     ConfigureBitrateObserver(config_.min_bitrate_bps, config_.max_bitrate_bps,
@@ -435,18 +448,18 @@ bool AudioSendStream::DeliverRtcp(const uint8_t* packet, size_t length) {
 }
 
 uint32_t AudioSendStream::OnBitrateUpdated(BitrateAllocationUpdate update) {
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  auto constraints = GetMinMaxBitrateConstraints();
   // A send stream may be allocated a bitrate of zero if the allocator decides
   // to disable it. For now we ignore this decision and keep sending on min
   // bitrate.
   if (update.target_bitrate.IsZero()) {
-    update.target_bitrate = DataRate::bps(config_.min_bitrate_bps);
+    update.target_bitrate = constraints.min;
   }
-  RTC_DCHECK_GE(update.target_bitrate.bps<int>(), config_.min_bitrate_bps);
+  RTC_DCHECK_GE(update.target_bitrate.bps(), constraints.min.bps());
   // The bitrate allocator might allocate an higher than max configured bitrate
   // if there is room, to allow for, as example, extra FEC. Ignore that for now.
-  const DataRate max_bitrate = DataRate::bps(config_.max_bitrate_bps);
-  if (update.target_bitrate > max_bitrate)
-    update.target_bitrate = max_bitrate;
+  update.target_bitrate.Clamp(constraints.min, constraints.max);
 
   channel_send_->OnBitrateAllocation(update);
 
@@ -575,9 +588,7 @@ bool AudioSendStream::SetupSendCodec(AudioSendStream* stream,
 
   // If a bitrate has been specified for the codec, use it over the
   // codec's default.
-  if (stream->allocation_settings_.UpdateAudioTargetBitrate(
-          TransportSeqNumId(new_config)) &&
-      spec.target_bitrate_bps) {
+  if (spec.target_bitrate_bps) {
     encoder->OnReceivedTargetAudioBitrate(*spec.target_bitrate_bps);
   }
 
@@ -652,9 +663,7 @@ bool AudioSendStream::ReconfigureSendCodec(AudioSendStream* stream,
       new_config.send_codec_spec->target_bitrate_bps;
   // If a bitrate has been specified for the codec, use it over the
   // codec's default.
-  if (stream->allocation_settings_.UpdateAudioTargetBitrate(
-          TransportSeqNumId(new_config)) &&
-      new_target_bitrate_bps &&
+  if (new_target_bitrate_bps &&
       new_target_bitrate_bps !=
           old_config.send_codec_spec->target_bitrate_bps) {
     CallEncoder(stream->channel_send_, [&](AudioEncoder* encoder) {
@@ -751,14 +760,13 @@ void AudioSendStream::ReconfigureBitrateObserver(
   if (stream->config_.min_bitrate_bps == new_config.min_bitrate_bps &&
       stream->config_.max_bitrate_bps == new_config.max_bitrate_bps &&
       stream->config_.bitrate_priority == new_config.bitrate_priority &&
-      (TransportSeqNumId(stream->config_) == TransportSeqNumId(new_config) ||
-       stream->allocation_settings_.IgnoreSeqNumIdChange())) {
+      (!stream->allocation_settings_.SendTransportSequenceNumber() ||
+       TransportSeqNumId(stream->config_) == TransportSeqNumId(new_config))) {
     return;
   }
 
-  if (stream->allocation_settings_.IncludeAudioInAllocationOnReconfigure(
-          new_config.min_bitrate_bps, new_config.max_bitrate_bps,
-          new_config.has_dscp, TransportSeqNumId(new_config))) {
+  if (ShouldIncludeInBitrateAllocation(stream->allocation_settings_,
+                                       new_config)) {
     stream->rtp_transport_->packet_sender()->SetAccountForAudioPackets(true);
     stream->ConfigureBitrateObserver(new_config.min_bitrate_bps,
                                      new_config.max_bitrate_bps,
@@ -778,17 +786,19 @@ void AudioSendStream::ConfigureBitrateObserver(int min_bitrate_bps,
   RTC_DCHECK_GE(max_bitrate_bps, min_bitrate_bps);
   rtc::Event thread_sync_event;
   worker_queue_->PostTask([&] {
+    RTC_DCHECK_RUN_ON(worker_queue_);
     // We may get a callback immediately as the observer is registered, so make
     // sure the bitrate limits in config_ are up-to-date.
     config_.min_bitrate_bps = min_bitrate_bps;
     config_.max_bitrate_bps = max_bitrate_bps;
     config_.bitrate_priority = bitrate_priority;
+    auto constraints = GetMinMaxBitrateConstraints();
     // This either updates the current observer or adds a new observer.
     bitrate_allocator_->AddObserver(
         this,
-        MediaStreamAllocationConfig{static_cast<uint32_t>(min_bitrate_bps),
-                                    static_cast<uint32_t>(max_bitrate_bps), 0,
-                                    true, config_.track_id, bitrate_priority});
+        MediaStreamAllocationConfig{constraints.min.bps<uint32_t>(),
+                                    constraints.max.bps<uint32_t>(), 0, true,
+                                    config_.track_id, bitrate_priority});
     thread_sync_event.Set();
   });
   thread_sync_event.Wait(rtc::Event::kForever);
@@ -802,6 +812,24 @@ void AudioSendStream::RemoveBitrateObserver() {
     thread_sync_event.Set();
   });
   thread_sync_event.Wait(rtc::Event::kForever);
+}
+
+AudioSendStream::TargetAudioBitrateConstraints
+AudioSendStream::GetMinMaxBitrateConstraints() const {
+  // TODO(srte): Replace these with values from encoder config.
+  TimeDelta min_frame_length = TimeDelta::ms(20);
+  TimeDelta max_frame_length = TimeDelta::ms(120);
+  if (allocation_settings_.UseLegacyFrameLengthForOverhead()) {
+    min_frame_length = TimeDelta::ms(120);
+    max_frame_length = TimeDelta::ms(120);
+  }
+  rtc::CritScope cs(&overhead_per_packet_lock_);
+  DataSize overhead_per_packet = DataSize::bytes(GetPerPacketOverheadBytes());
+  DataRate min_overhead = overhead_per_packet / max_frame_length;
+  DataRate max_overhead = overhead_per_packet / min_frame_length;
+
+  return {DataRate::bps(config_.min_bitrate_bps) + min_overhead,
+          DataRate::bps(config_.max_bitrate_bps) + max_overhead};
 }
 
 void AudioSendStream::RegisterCngPayloadType(int payload_type,
