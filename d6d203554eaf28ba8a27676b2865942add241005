@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec7228ba_d4af2d56",
+        "filename": "sdk/objc/api/peerconnection/RTCEncodedImage+Private.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-08T00:04:59Z",
+      "side": 1,
+      "message": "You could avoid the const_cast here by using encodedImage.mutable_data() (a somewhat ugly workaround for cases like this; it\u0027s a const method, and simply wraps that const_cast).\n\nI take it there\u0027s no way to create an immutable NSData from a const pointer?",
+      "range": {
+        "startLine": 20,
+        "startChar": 46,
+        "endLine": 20,
+        "endChar": 67
+      },
+      "revId": "d6d203554eaf28ba8a27676b2865942add241005",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
