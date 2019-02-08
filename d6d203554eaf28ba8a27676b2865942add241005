@@ -22,6 +22,30 @@
       "revId": "d6d203554eaf28ba8a27676b2865942add241005",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85e24470_d2fb547e",
+        "filename": "sdk/objc/api/peerconnection/RTCEncodedImage+Private.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 8539
+      },
+      "writtenOn": "2019-02-08T00:18:12Z",
+      "side": 1,
+      "message": "Thanks, made the change. At least it\u0027s perhaps more consistent ugliness. :)\n\nRe:NSData, AFAICT there isn\u0027t, but Kári, let me know if I\u0027ve missed something. They provide dataWithBytes:length: which copies the data and takes in a const pointer, but the versions that *skip* copying don\u0027t take in const pointers.",
+      "parentUuid": "ec7228ba_d4af2d56",
+      "range": {
+        "startLine": 20,
+        "startChar": 46,
+        "endLine": 20,
+        "endChar": 67
+      },
+      "revId": "d6d203554eaf28ba8a27676b2865942add241005",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
