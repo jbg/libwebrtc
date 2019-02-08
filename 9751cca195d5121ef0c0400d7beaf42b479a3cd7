@@ -16,6 +16,24 @@
       "revId": "9751cca195d5121ef0c0400d7beaf42b479a3cd7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec7101c2_350916e5",
+        "filename": "api/rtp_parameters.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-08T09:31:52Z",
+      "side": 1,
+      "message": "There will be more CLs to get this into place, both on SDP level and also on RTP level. I will add a comment during the work with those.",
+      "parentUuid": "bed88306_95e8c555",
+      "revId": "9751cca195d5121ef0c0400d7beaf42b479a3cd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
