@@ -46,6 +46,30 @@
       "revId": "ef288dd26723d55ee909ec04e670023e0f53350a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da718842_cd92dd20",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-02-11T19:33:08Z",
+      "side": 0,
+      "message": "It maybe a minor point but I think multiple observers \"facilitates\" mistakes with ownership which spreads the logic. If fan out is really necessary, Call object can distribute.\n\nPassing Media Transport down to Stream in order to subscribe to RTT/target rate is something I think we should avoid. Stream should only get Sender/Receive media transport objects.\n\nCreating video stream without call object is OK -- you will still need to initialize high-level things and can subscribe to RTT and transfer bitrate.",
+      "parentUuid": "835c8be4_0a9f4575",
+      "range": {
+        "startLine": 418,
+        "startChar": 67,
+        "endLine": 418,
+        "endChar": 0
+      },
+      "revId": "ef288dd26723d55ee909ec04e670023e0f53350a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
