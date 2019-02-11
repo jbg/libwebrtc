@@ -32,6 +32,8 @@ rtc_source_set("emulated_network") {
     "../../../rtc_base/task_utils:repeating_task",
     "../../../rtc_base/third_party/sigslot:sigslot",
     "../../../system_wrappers:system_wrappers",
+    "../../rtc_task_runner",
+    "../../rtc_task_runner:default_task_runner",
     "//third_party/abseil-cpp/absl/memory:memory",
     "//third_party/abseil-cpp/absl/types:optional",
   ]

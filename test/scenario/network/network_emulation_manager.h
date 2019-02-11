@@ -19,10 +19,10 @@
 #include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/task_queue.h"
-#include "rtc_base/task_utils/repeating_task.h"
 #include "rtc_base/thread.h"
 #include "system_wrappers/include/clock.h"
+#include "test/rtc_task_runner/default_task_runner.h"
+#include "test/rtc_task_runner/rtc_task_runner.h"
 #include "test/scenario/network/fake_network_socket_server.h"
 #include "test/scenario/network/network_emulation.h"
 
@@ -53,13 +53,12 @@ class NetworkEmulationManager {
  private:
   FakeNetworkSocketServer* CreateSocketServer(
       std::vector<EndpointNode*> endpoints);
-  void ProcessNetworkPackets();
   Timestamp Now() const;
+
+  DefaultTaskRunnerFactory real_time_runner_factory_;
 
   Clock* const clock_;
   int next_node_id_;
-
-  RepeatingTaskHandle process_task_handle_;
 
   // All objects can be added to the manager only when it is idle.
   std::vector<std::unique_ptr<EndpointNode>> endpoints_;
@@ -69,7 +68,7 @@ class NetworkEmulationManager {
 
   // Must be the last field, so it will be deleted first, because tasks
   // in the TaskQueue can access other fields of the instance of this class.
-  rtc::TaskQueue task_queue_;
+  RtcTaskRunner task_runner_;
 };
 
 }  // namespace test

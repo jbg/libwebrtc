@@ -132,20 +132,27 @@ TimeDelta LoggingNetworkControllerFactory::GetProcessInterval() const {
 
 CallClient::CallClient(
     Clock* clock,
+    RtcTaskRunnerFactory* task_runner_factory,
     std::unique_ptr<LogWriterFactoryInterface> log_writer_factory,
     CallClientConfig config)
     : clock_(clock),
       log_writer_factory_(std::move(log_writer_factory)),
       network_controller_factory_(log_writer_factory_.get(), config.transport),
-      fake_audio_setup_(InitAudio()),
-      call_(CreateCall(config,
-                       &network_controller_factory_,
-                       fake_audio_setup_.audio_state)),
-      transport_(clock_, call_.get()),
-      header_parser_(RtpHeaderParser::Create()) {}
+      header_parser_(RtpHeaderParser::Create()),
+      task_runner_(task_runner_factory, "CallClient") {
+  task_runner_.Invoke([&] {
+    fake_audio_setup_ = InitAudio();
+    call_.reset(CreateCall(config, &network_controller_factory_,
+                           fake_audio_setup_.audio_state));
+    transport_ = absl::make_unique<NetworkNodeTransport>(clock_, call_.get());
+  });
+}
 
 CallClient::~CallClient() {
-  delete header_parser_;
+  task_runner_.Invoke([&] {
+    call_.reset();
+    fake_audio_setup_ = {};
+  });
 }
 
 ColumnPrinter CallClient::StatsPrinter() {
@@ -181,8 +188,16 @@ void CallClient::OnPacketReceived(EmulatedIpPacket packet) {
     }
     media_type = ssrc_media_types_[header.ssrc];
   }
-  call_->Receiver()->DeliverPacket(media_type, packet.data,
-                                   packet.arrival_time.us());
+  struct Closure {
+    void operator()() {
+      call->Receiver()->DeliverPacket(media_type, packet.data,
+                                      packet.arrival_time.us());
+    }
+    Call* call;
+    MediaType media_type;
+    EmulatedIpPacket packet;
+  };
+  task_runner_.PostTask(Closure{call_.get(), media_type, std::move(packet)});
 }
 
 std::unique_ptr<RtcEventLogOutput> CallClient::GetLogWriter(std::string name) {

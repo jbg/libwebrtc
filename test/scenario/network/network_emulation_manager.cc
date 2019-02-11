@@ -19,21 +19,11 @@
 
 namespace webrtc {
 namespace test {
-namespace {
-
-constexpr int64_t kPacketProcessingIntervalMs = 1;
-
-}  // namespace
 
 NetworkEmulationManager::NetworkEmulationManager()
     : clock_(Clock::GetRealTimeClock()),
       next_node_id_(1),
-      task_queue_("network_emulation_manager") {
-  process_task_handle_ = RepeatingTaskHandle::Start(&task_queue_, [this] {
-    ProcessNetworkPackets();
-    return TimeDelta::ms(kPacketProcessingIntervalMs);
-  });
-}
+      task_runner_(&real_time_runner_factory_, "network_emulation_manager") {}
 
 // TODO(srte): Ensure that any pending task that must be run for consistency
 // (such as stats collection tasks) are not cancelled when the task queue is
@@ -42,8 +32,8 @@ NetworkEmulationManager::~NetworkEmulationManager() = default;
 
 EmulatedNetworkNode* NetworkEmulationManager::CreateEmulatedNode(
     std::unique_ptr<NetworkBehaviorInterface> network_behavior) {
-  auto node =
-      absl::make_unique<EmulatedNetworkNode>(std::move(network_behavior));
+  auto node = absl::make_unique<EmulatedNetworkNode>(
+      &task_runner_, std::move(network_behavior));
   EmulatedNetworkNode* out = node.get();
 
   struct Closure {
@@ -51,7 +41,7 @@ EmulatedNetworkNode* NetworkEmulationManager::CreateEmulatedNode(
     NetworkEmulationManager* manager;
     std::unique_ptr<EmulatedNetworkNode> node;
   };
-  task_queue_.PostTask(Closure{this, std::move(node)});
+  task_runner_.PostTask(Closure{this, std::move(node)});
   return out;
 }
 
@@ -115,13 +105,6 @@ FakeNetworkSocketServer* NetworkEmulationManager::CreateSocketServer(
   FakeNetworkSocketServer* out = socket_server.get();
   socket_servers_.push_back(std::move(socket_server));
   return out;
-}
-
-void NetworkEmulationManager::ProcessNetworkPackets() {
-  Timestamp current_time = Now();
-  for (auto& node : network_nodes_) {
-    node->Process(current_time);
-  }
 }
 
 Timestamp NetworkEmulationManager::Now() const {

@@ -63,6 +63,7 @@ struct CallClientFakeAudio {
 class CallClient : public EmulatedNetworkReceiverInterface {
  public:
   CallClient(Clock* clock,
+             RtcTaskRunnerFactory* task_runner_factory,
              std::unique_ptr<LogWriterFactoryInterface> log_writer_factory,
              CallClientConfig config);
   RTC_DISALLOW_COPY_AND_ASSIGN(CallClient);
@@ -98,8 +99,8 @@ class CallClient : public EmulatedNetworkReceiverInterface {
   LoggingNetworkControllerFactory network_controller_factory_;
   CallClientFakeAudio fake_audio_setup_;
   std::unique_ptr<Call> call_;
-  NetworkNodeTransport transport_;
-  RtpHeaderParser* const header_parser_;
+  std::unique_ptr<NetworkNodeTransport> transport_;
+  std::unique_ptr<RtpHeaderParser> const header_parser_;
 
   std::unique_ptr<FecControllerFactoryInterface> fec_controller_factory_;
   // Stores the configured overhead per known destination endpoint. This is used
@@ -110,6 +111,7 @@ class CallClient : public EmulatedNetworkReceiverInterface {
   int next_audio_ssrc_index_ = 0;
   int next_priority_index_ = 0;
   std::map<uint32_t, MediaType> ssrc_media_types_;
+  RtcTaskRunner task_runner_;
 };
 
 class CallClientPair {

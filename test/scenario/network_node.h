@@ -55,10 +55,12 @@ class SimulationNode : public EmulatedNetworkNode {
  private:
   friend class Scenario;
 
-  SimulationNode(NetworkNodeConfig config,
+  SimulationNode(RtcTaskRunner* task_runner,
+                 NetworkNodeConfig config,
                  std::unique_ptr<NetworkBehaviorInterface> behavior,
                  SimulatedNetwork* simulation);
-  static std::unique_ptr<SimulationNode> Create(NetworkNodeConfig config);
+  static std::unique_ptr<SimulationNode> Create(RtcTaskRunner* task_runner,
+                                                NetworkNodeConfig config);
 
   SimulatedNetwork* const simulated_network_;
   NetworkNodeConfig config_;
@@ -77,6 +79,7 @@ class NetworkNodeTransport : public Transport {
   void Connect(EmulatedNetworkNode* send_node,
                uint64_t receiver_id,
                DataSize packet_overhead);
+  void Disconnect();
 
   DataSize packet_overhead() {
     rtc::CritScope crit(&crit_sect_);

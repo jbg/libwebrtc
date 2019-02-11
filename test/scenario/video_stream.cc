@@ -244,35 +244,40 @@ SendVideoStream::SendVideoStream(CallClient* sender,
 
   VideoEncoderConfig encoder_config = CreateVideoEncoderConfig(config);
 
-  send_stream_ = sender_->call_->CreateVideoSendStream(
-      std::move(send_config), std::move(encoder_config));
-  std::vector<std::function<void(const VideoFrameQualityInfo&)> >
-      frame_info_handlers;
-  if (config.analyzer.frame_quality_handler)
-    frame_info_handlers.push_back(config.analyzer.frame_quality_handler);
+  sender_->task_runner_.Invoke([&] {
+    send_stream_ = sender_->call_->CreateVideoSendStream(
+        std::move(send_config), std::move(encoder_config));
+    std::vector<std::function<void(const VideoFrameQualityInfo&)> >
+        frame_info_handlers;
+    if (config.analyzer.frame_quality_handler)
+      frame_info_handlers.push_back(config.analyzer.frame_quality_handler);
 
-  if (analyzer->Active()) {
-    frame_tap_.reset(new ForwardingCapturedFrameTap(sender_->clock_, analyzer,
-                                                    video_capturer_.get()));
-    send_stream_->SetSource(frame_tap_.get(),
-                            config.encoder.degradation_preference);
-  } else {
-    send_stream_->SetSource(video_capturer_.get(),
-                            config.encoder.degradation_preference);
-  }
+    if (analyzer->Active()) {
+      frame_tap_.reset(new ForwardingCapturedFrameTap(sender_->clock_, analyzer,
+                                                      video_capturer_.get()));
+      send_stream_->SetSource(frame_tap_.get(),
+                              config.encoder.degradation_preference);
+    } else {
+      send_stream_->SetSource(video_capturer_.get(),
+                              config.encoder.degradation_preference);
+    }
+  });
 }
 
 SendVideoStream::~SendVideoStream() {
-  sender_->call_->DestroyVideoSendStream(send_stream_);
+  sender_->task_runner_.Invoke(
+      [this] { sender_->call_->DestroyVideoSendStream(send_stream_); });
 }
 
 void SendVideoStream::Start() {
-  send_stream_->Start();
-  sender_->call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
+  sender_->task_runner_.Invoke([this] {
+    send_stream_->Start();
+    sender_->call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
+  });
 }
 
 void SendVideoStream::Stop() {
-  send_stream_->Stop();
+  sender_->task_runner_.Invoke([this] { send_stream_->Stop(); });
 }
 
 void SendVideoStream::UpdateConfig(
@@ -386,23 +391,29 @@ ReceiveVideoStream::ReceiveVideoStream(CallClient* receiver,
     recv_config.rtp.rtx_associated_payload_types[CallTest::kRtxRedPayloadType] =
         CallTest::kRedPayloadType;
   }
-  receive_stream_ =
-      receiver_->call_->CreateVideoReceiveStream(std::move(recv_config));
+  receiver_->task_runner_.Invoke([&] {
+    receive_stream_ =
+        receiver_->call_->CreateVideoReceiveStream(std::move(recv_config));
+  });
 }
 
 ReceiveVideoStream::~ReceiveVideoStream() {
-  receiver_->call_->DestroyVideoReceiveStream(receive_stream_);
-  if (flecfec_stream_)
-    receiver_->call_->DestroyFlexfecReceiveStream(flecfec_stream_);
+  receiver_->task_runner_.Invoke([this] {
+    receiver_->call_->DestroyVideoReceiveStream(receive_stream_);
+    if (flecfec_stream_)
+      receiver_->call_->DestroyFlexfecReceiveStream(flecfec_stream_);
+  });
 }
 
 void ReceiveVideoStream::Start() {
-  receive_stream_->Start();
-  receiver_->call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
+  receiver_->task_runner_.Invoke([this] {
+    receive_stream_->Start();
+    receiver_->call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
+  });
 }
 
 void ReceiveVideoStream::Stop() {
-  receive_stream_->Stop();
+  receiver_->task_runner_.Invoke([this] { receive_stream_->Stop(); });
 }
 
 VideoStreamPair::~VideoStreamPair() = default;
@@ -415,12 +426,12 @@ VideoStreamPair::VideoStreamPair(
     : config_(config),
       analyzer_(std::move(quality_writer),
                 config.analyzer.frame_quality_handler),
-      send_stream_(sender, config, &sender->transport_, &analyzer_),
+      send_stream_(sender, config, sender->transport_.get(), &analyzer_),
       receive_stream_(receiver,
                       config,
                       &send_stream_,
                       /*chosen_stream=*/0,
-                      &receiver->transport_,
+                      receiver->transport_.get(),
                       &analyzer_) {}
 
 }  // namespace test

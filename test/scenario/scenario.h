@@ -18,6 +18,9 @@
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/fake_clock.h"
 #include "test/logging/log_writer.h"
+#include "test/rtc_task_runner/default_task_runner.h"
+#include "test/rtc_task_runner/rtc_task_runner.h"
+#include "test/rtc_task_runner/time_simulation.h"
 #include "test/scenario/audio_stream.h"
 #include "test/scenario/call_client.h"
 #include "test/scenario/column_printer.h"
@@ -28,30 +31,6 @@
 
 namespace webrtc {
 namespace test {
-// RepeatedActivity is created by the Scenario class and can be used to stop a
-// running activity at runtime.
-class RepeatedActivity {
- public:
-  void Stop();
-
- private:
-  friend class Scenario;
-  RepeatedActivity(TimeDelta interval, std::function<void(TimeDelta)> function);
-
-  void Poll(Timestamp time);
-  void SetStartTime(Timestamp time);
-  Timestamp NextTime();
-
-  TimeDelta interval_;
-  std::function<void(TimeDelta)> function_;
-  Timestamp last_update_ = Timestamp::MinusInfinity();
-};
-
-struct PendingActivity {
-  TimeDelta after_duration;
-  std::function<void()> function;
-};
-
 // Scenario is a class owning everything for a test scenario. It creates and
 // holds network nodes, call clients and media streams. It also provides methods
 // for changing behavior at runtime. Since it always keeps ownership of the
@@ -74,7 +53,6 @@ class Scenario {
   SimulationNode* CreateSimulationNode(
       std::function<void(NetworkNodeConfig*)> config_modifier);
   EmulatedNetworkNode* CreateNetworkNode(
-      NetworkNodeConfig config,
       std::unique_ptr<NetworkBehaviorInterface> behavior);
 
   CallClient* CreateClient(std::string name, CallClientConfig config);
@@ -130,9 +108,8 @@ class Scenario {
       CrossTrafficConfig config);
 
   // Runs the provided function with a fixed interval.
-  RepeatedActivity* Every(TimeDelta interval,
-                          std::function<void(TimeDelta)> function);
-  RepeatedActivity* Every(TimeDelta interval, std::function<void()> function);
+  void Every(TimeDelta interval, std::function<void(TimeDelta)> function);
+  void Every(TimeDelta interval, std::function<void()> function);
 
   // Runs the provided function after given duration has passed in a session.
   void At(TimeDelta offset, std::function<void()> function);
@@ -145,9 +122,12 @@ class Scenario {
   // Runs the scenario for the given time or until the exit function returns
   // true.
   void RunFor(TimeDelta duration);
-  void RunUntil(TimeDelta max_duration);
-  void RunUntil(TimeDelta max_duration,
-                TimeDelta probe_interval,
+  void RunUntil(TimeDelta target_time_since_start);
+  // Will check |exit_function| every |check_interval|. It stops after a check
+  // if either |target_time_since_start| has passed or if |exit_function|
+  // returns true.
+  void RunUntil(TimeDelta target_time_since_start,
+                TimeDelta check_interval,
                 std::function<bool()> exit_function);
   void Start();
   void Stop();
@@ -165,7 +145,7 @@ class Scenario {
   // Returns the current time.
   Timestamp Now();
   // Return the duration of the current session so far.
-  TimeDelta Duration();
+  TimeDelta TimeSinceStart();
 
   std::unique_ptr<RtcEventLogOutput> GetLogWriter(std::string name) {
     if (!log_writer_factory_ || name.empty())
@@ -181,14 +161,11 @@ class Scenario {
   }
 
  private:
-  NullReceiver null_receiver_;
-  std::unique_ptr<LogWriterFactoryInterface> log_writer_factory_;
-  const bool real_time_mode_;
-  SimulatedClock sim_clock_;
+  const std::unique_ptr<LogWriterFactoryInterface> log_writer_factory_;
+  const bool real_time_;
+  std::unique_ptr<RtcTaskRunnerFactory> task_runner_factory_;
   Clock* clock_;
-  // Event logs use a global clock instance, this is used to override that
-  // instance when not running in real time.
-  rtc::FakeClock event_log_fake_clock_;
+  NullReceiver null_receiver_;
 
   std::vector<std::unique_ptr<CallClient>> clients_;
   std::vector<std::unique_ptr<CallClientPair>> client_pairs_;
@@ -199,9 +176,7 @@ class Scenario {
 
   std::vector<std::unique_ptr<SimulatedTimeClient>> simulated_time_clients_;
 
-  std::vector<std::unique_ptr<RepeatedActivity>> repeated_activities_;
   std::vector<std::unique_ptr<ActionReceiver>> action_receivers_;
-  std::vector<std::unique_ptr<PendingActivity>> pending_activities_;
   std::vector<std::unique_ptr<StatesPrinter>> printers_;
 
   int64_t next_route_id_ = 40000;
@@ -209,6 +184,8 @@ class Scenario {
   rtc::scoped_refptr<AudioEncoderFactory> audio_encoder_factory_;
 
   Timestamp start_time_ = Timestamp::PlusInfinity();
+  // Defined last so it's destroyed first.
+  RtcTaskRunner network_task_runner_;
 };
 }  // namespace test
 }  // namespace webrtc

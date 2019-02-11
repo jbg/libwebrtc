@@ -39,13 +39,14 @@ void ActionReceiver::OnPacketReceived(EmulatedIpPacket packet) {
 }
 
 std::unique_ptr<SimulationNode> SimulationNode::Create(
+    RtcTaskRunner* task_runner,
     NetworkNodeConfig config) {
   RTC_DCHECK(config.mode == NetworkNodeConfig::TrafficMode::kSimulation);
   SimulatedNetwork::Config sim_config = CreateSimulationConfig(config);
   auto network = absl::make_unique<SimulatedNetwork>(sim_config);
   SimulatedNetwork* simulation_ptr = network.get();
-  return std::unique_ptr<SimulationNode>(
-      new SimulationNode(config, std::move(network), simulation_ptr));
+  return std::unique_ptr<SimulationNode>(new SimulationNode(
+      task_runner, config, std::move(network), simulation_ptr));
 }
 
 void SimulationNode::UpdateConfig(
@@ -71,10 +72,11 @@ ColumnPrinter SimulationNode::ConfigPrinter() const {
 }
 
 SimulationNode::SimulationNode(
+    RtcTaskRunner* task_runner,
     NetworkNodeConfig config,
     std::unique_ptr<NetworkBehaviorInterface> behavior,
     SimulatedNetwork* simulation)
-    : EmulatedNetworkNode(std::move(behavior)),
+    : EmulatedNetworkNode(task_runner, std::move(behavior)),
       simulated_network_(simulation),
       config_(config) {}
 
@@ -138,6 +140,18 @@ void NetworkNodeTransport::Connect(EmulatedNetworkNode* send_node,
   std::string transport_name = "dummy";
   sender_call_->GetTransportControllerSend()->OnNetworkRouteChanged(
       transport_name, route);
+}
+
+void NetworkNodeTransport::Disconnect() {
+  rtc::CritScope crit(&crit_sect_);
+  rtc::NetworkRoute route;
+  route.connected = false;
+  route.local_network_id = receiver_id_;
+  route.remote_network_id = receiver_id_;
+  std::string transport_name = "dummy";
+  sender_call_->GetTransportControllerSend()->OnNetworkRouteChanged(
+      transport_name, route);
+  send_net_ = nullptr;
 }
 
 CrossTrafficSource::CrossTrafficSource(EmulatedNetworkReceiverInterface* target,
