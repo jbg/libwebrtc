@@ -9,6 +9,7 @@
  */
 
 #include "test/call_test.h"
+#include "test/field_trial.h"
 #include "test/gtest.h"
 #include "test/rtcp_packet_parser.h"
 
@@ -173,6 +174,8 @@ TEST_F(AudioSendStreamCallTest, SupportsTransportWideSequenceNumbers) {
     }
   } test;
 
+  ScopedFieldTrials field_trials(
+      "WebRTC-Audio-SendTransportSequenceNumbers/Enabled/");
   RunBaseTest(&test);
 }
 

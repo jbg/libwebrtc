@@ -316,6 +316,8 @@ TEST_F(TransportFeedbackEndToEndTest, VideoTransportFeedbackNotConfigured) {
 }
 
 TEST_F(TransportFeedbackEndToEndTest, AudioReceivesTransportFeedback) {
+  test::ScopedFieldTrials override_field_trials(
+      "WebRTC-Audio-SendTransportSequenceNumbers/Enabled/");
   TransportFeedbackTester test(true, 0, 1);
   RunBaseTest(&test);
 }
@@ -490,6 +492,8 @@ TEST_F(TransportFeedbackEndToEndTest, TransportSeqNumOnAudioAndVideo) {
     std::set<int64_t> received_packet_ids_;
   } test;
 
+  test::ScopedFieldTrials override_field_trials(
+      "WebRTC-Audio-SendTransportSequenceNumbers/Enabled/");
   RunBaseTest(&test);
   // Double check conditions for successful test to produce better error
   // message when the test fail.
