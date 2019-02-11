@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b051d5c2_08c6bcbf",
+        "filename": "test/task_runner/task_runner.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48f1fb7f_f4360997",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 80
+      },
+      "revId": "ed23afe9549d8a3a35f404842889323090f45f46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "503e5cf8_c543cdeb",
         "filename": "test/task_runner/task_runner_interface.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "ed23afe9549d8a3a35f404842889323090f45f46",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f34a7bcd_5667ace8",
+        "filename": "test/task_runner/task_runner_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "503e5cf8_c543cdeb",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 54
+      },
+      "revId": "ed23afe9549d8a3a35f404842889323090f45f46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
