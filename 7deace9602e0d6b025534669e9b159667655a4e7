@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e3afe68_fc161b6c",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-11T09:57:58Z",
+      "side": 1,
+      "message": "nit: should these be names begin_iterator and end_iterator perhaps, to more clearly match stl?\nMight want to add a comment indicating if last_iterator is inclusive or exclusive.\nNot sure if it\u0027s worth adding an alias for the iterator type?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 63
+      },
+      "revId": "7deace9602e0d6b025534669e9b159667655a4e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
