@@ -52,33 +52,10 @@ std::string VideoConfigSourcePresenceToString(const VideoConfig& video_config) {
 }  // namespace
 
 PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
-    std::unique_ptr<InjectableComponents> alice_components,
-    std::unique_ptr<Params> alice_params,
-    std::unique_ptr<InjectableComponents> bob_components,
-    std::unique_ptr<Params> bob_params,
     std::unique_ptr<Analyzers> analyzers)
     : clock_(Clock::GetRealTimeClock()),
       signaling_thread_(rtc::Thread::Create()) {
-  RTC_CHECK(alice_components);
-  RTC_CHECK(alice_params);
-  RTC_CHECK(bob_components);
-  RTC_CHECK(bob_params);
   RTC_CHECK(analyzers);
-
-  // Print test summary
-  RTC_LOG(INFO)
-      << "Media quality test: Alice will make a call to Bob with media video="
-      << !alice_params->video_configs.empty()
-      << "; audio=" << alice_params->audio_config.has_value()
-      << ". Bob will respond with media video="
-      << !bob_params->video_configs.empty()
-      << "; audio=" << bob_params->audio_config.has_value();
-
-  // Check that at least Alice or Bob has at least one media stream.
-  RTC_CHECK(!alice_params->video_configs.empty() ||
-            alice_params->audio_config || !bob_params->video_configs.empty() ||
-            bob_params->audio_config)
-      << "No media in the call";
 
   signaling_thread_->SetName(kSignalThreadName, nullptr);
   signaling_thread_->Start();
@@ -97,6 +74,37 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
           std::move(analyzers->video_quality_analyzer),
           encoded_image_id_controller_.get(),
           encoded_image_id_controller_.get());
+}
+
+void PeerConnectionE2EQualityTest::PrintTestSummary(Params* alice_params,
+                                                    Params* bob_params) {
+  // Print test summary
+  RTC_LOG(INFO)
+      << "Media quality test: Alice will make a call to Bob with media video="
+      << !alice_params->video_configs.empty()
+      << "; audio=" << alice_params->audio_config.has_value()
+      << ". Bob will respond with media video="
+      << !bob_params->video_configs.empty()
+      << "; audio=" << bob_params->audio_config.has_value();
+
+  // Check that at least Alice or Bob has at least one media stream.
+  RTC_CHECK(!alice_params->video_configs.empty() ||
+            alice_params->audio_config || !bob_params->video_configs.empty() ||
+            bob_params->audio_config)
+      << "No media in the call";
+}
+
+void PeerConnectionE2EQualityTest::Run(
+    RunParams run_params,
+    std::unique_ptr<InjectableComponents> alice_components,
+    std::unique_ptr<Params> alice_params,
+    std::unique_ptr<InjectableComponents> bob_components,
+    std::unique_ptr<Params> bob_params) {
+  RTC_CHECK(alice_components);
+  RTC_CHECK(alice_params);
+  RTC_CHECK(bob_components);
+  RTC_CHECK(bob_params);
+  PrintTestSummary(alice_params.get(), bob_params.get());
 
   // Create call participants: Alice and Bob.
   // Audio streams are intercepted in AudioDeviceModule, so if it is required to
@@ -117,9 +125,7 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
       std::move(bob_components), std::move(bob_params),
       video_quality_analyzer_injection_helper_.get(), signaling_thread_.get(),
       bob_audio_output_dump_file_name);
-}
 
-void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   SetMissedVideoStreamLabels({alice_->params(), bob_->params()});
   ValidateParams({alice_->params(), bob_->params()});
 
@@ -141,6 +147,9 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
       rtc::Bind(&PeerConnectionE2EQualityTest::RunOnSignalingThread, this,
                 run_params));
   video_quality_analyzer_injection_helper_->Stop();
+
+  // alice_.reset();
+  // bob_.reset();
 }
 
 void PeerConnectionE2EQualityTest::SetMissedVideoStreamLabels(

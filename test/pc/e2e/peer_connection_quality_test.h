@@ -38,16 +38,15 @@ class PeerConnectionE2EQualityTest
   using RunParams = PeerConnectionE2EQualityTestFixture::RunParams;
   using VideoConfig = PeerConnectionE2EQualityTestFixture::VideoConfig;
 
-  PeerConnectionE2EQualityTest(
-      std::unique_ptr<InjectableComponents> alice_components,
-      std::unique_ptr<Params> alice_params,
-      std::unique_ptr<InjectableComponents> bob_components,
-      std::unique_ptr<Params> bob_params,
-      std::unique_ptr<Analyzers> analyzers);
+  PeerConnectionE2EQualityTest(std::unique_ptr<Analyzers> analyzers);
 
   ~PeerConnectionE2EQualityTest() override = default;
 
-  void Run(RunParams run_params) override;
+  void Run(RunParams run_params,
+           std::unique_ptr<InjectableComponents> alice_components,
+           std::unique_ptr<Params> alice_params,
+           std::unique_ptr<InjectableComponents> bob_components,
+           std::unique_ptr<Params> bob_params) override;
 
  private:
   // Sets video stream labels that are not specified in VideoConfigs to unique
@@ -71,6 +70,7 @@ class PeerConnectionE2EQualityTest
   VideoFrameWriter* MaybeCreateVideoWriter(
       absl::optional<std::string> file_name,
       const VideoConfig& config);
+  void PrintTestSummary(Params* alice_params, Params* bob_params);
 
   Clock* const clock_;
   std::unique_ptr<VideoQualityAnalyzerInjectionHelper>
