@@ -101,6 +101,30 @@ class AudioSendStream final : public webrtc::AudioSendStream,
 
  private:
   class TimedTransport;
+  // RFC 5285: Each distinct extension MUST have a unique ID. The value 0 is
+  // reserved for padding and MUST NOT be used as a local identifier.
+  // So it should be safe to use 0 here to indicate "not configured".
+  struct ExtensionIds {
+    int audio_level = 0;
+    int transport_sequence_number = 0;
+    int mid = 0;
+    int rid = 0;
+    int repaired_rid = 0;
+  };
+  // Constraints including overhead.
+  struct TargetAudioBitrateConstraints {
+    DataRate min;
+    DataRate max;
+  };
+
+  static ExtensionIds FindExtensionIds(
+      const std::vector<RtpExtension>& extensions);
+  static int TransportSeqNumId(const Config& config);
+
+  static bool AllocationRangeConfigured(const Config& config);
+  static bool ShouldIncludeInBitrateAllocation(
+      const AudioAllocationSettings& settings,
+      const Config& config);
 
   internal::AudioState* audio_state();
   const internal::AudioState* audio_state() const;
@@ -117,21 +141,19 @@ class AudioSendStream final : public webrtc::AudioSendStream,
                                    const Config& new_config);
   static void ReconfigureANA(AudioSendStream* stream, const Config& new_config);
   static void ReconfigureCNG(AudioSendStream* stream, const Config& new_config);
-  static void ReconfigureBitrateObserver(AudioSendStream* stream,
-                                         const Config& new_config);
-
-  void ConfigureBitrateObserver(int min_bitrate_bps,
-                                int max_bitrate_bps,
-                                double bitrate_priority);
+  void ReconfigureBitrateObserver(const Config& new_config);
+  void ConfigureBitrateObserver() RTC_RUN_ON(worker_queue_);
   void RemoveBitrateObserver();
+
+  // Returns bitrate constraints including overhead.
+  TargetAudioBitrateConstraints GetMinMaxBitrateConstraints() const;
 
   // Sets per-packet overhead on encoded (for ANA) based on current known values
   // of transport and packetization overheads.
-  void UpdateOverheadForEncoder()
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(overhead_per_packet_lock_);
+  void UpdateOverhead() RTC_EXCLUSIVE_LOCKS_REQUIRED(overhead_per_packet_lock_);
 
   // Returns combined per-packet overhead.
-  size_t GetPerPacketOverheadBytes() const
+  DataSize GetPerPacketOverhead() const
       RTC_EXCLUSIVE_LOCKS_REQUIRED(overhead_per_packet_lock_);
 
   void RegisterCngPayloadType(int payload_type, int clockrate_hz);
@@ -149,6 +171,7 @@ class AudioSendStream final : public webrtc::AudioSendStream,
   int encoder_sample_rate_hz_ = 0;
   size_t encoder_num_channels_ = 0;
   bool sending_ = false;
+  bool registered_in_allocator_ RTC_GUARDED_BY(worker_queue_) = false;
 
   BitrateAllocatorInterface* const bitrate_allocator_;
   RtpTransportControllerSendInterface* const rtp_transport_;
@@ -160,29 +183,17 @@ class AudioSendStream final : public webrtc::AudioSendStream,
   RtpRtcp* rtp_rtcp_module_;
   absl::optional<RtpState> const suspended_rtp_state_;
 
-  // RFC 5285: Each distinct extension MUST have a unique ID. The value 0 is
-  // reserved for padding and MUST NOT be used as a local identifier.
-  // So it should be safe to use 0 here to indicate "not configured".
-  struct ExtensionIds {
-    int audio_level = 0;
-    int transport_sequence_number = 0;
-    int mid = 0;
-    int rid = 0;
-    int repaired_rid = 0;
-  };
-  static ExtensionIds FindExtensionIds(
-      const std::vector<RtpExtension>& extensions);
-  static int TransportSeqNumId(const Config& config);
-
   rtc::CriticalSection overhead_per_packet_lock_;
 
   // Current transport overhead (ICE, TURN, etc.)
-  size_t transport_overhead_per_packet_bytes_
-      RTC_GUARDED_BY(overhead_per_packet_lock_) = 0;
+  DataSize transport_overhead_per_packet_
+      RTC_GUARDED_BY(overhead_per_packet_lock_) = DataSize::Zero();
 
   // Current audio packetization overhead (RTP or Media Transport).
-  size_t audio_overhead_per_packet_bytes_
-      RTC_GUARDED_BY(overhead_per_packet_lock_) = 0;
+  DataSize audio_overhead_per_packet_
+      RTC_GUARDED_BY(overhead_per_packet_lock_) = DataSize::Zero();
+
+  DataSize total_packet_overhead_ = DataSize::Zero();
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(AudioSendStream);
 };
