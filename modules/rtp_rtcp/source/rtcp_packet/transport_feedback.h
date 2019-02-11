@@ -53,6 +53,7 @@ class TransportFeedback : public Rtpfb {
   void SetBase(uint16_t base_sequence,     // Seq# of first packet in this msg.
                int64_t ref_timestamp_us);  // Reference timestamp for this msg.
   void SetFeedbackSequenceNumber(uint8_t feedback_sequence);
+  void SetIncludeTimestamps(bool include_timestamps);
   // NOTE: This method requires increasing sequence numbers (excepting wraps).
   bool AddReceivedPacket(uint16_t sequence_number, int64_t timestamp_us);
   const std::vector<ReceivedPacket>& GetReceivedPackets() const;
@@ -140,6 +141,7 @@ class TransportFeedback : public Rtpfb {
   uint16_t num_seq_no_;
   int32_t base_time_ticks_;
   uint8_t feedback_seq_;
+  bool include_timestamps_;
 
   int64_t last_timestamp_us_;
   std::vector<ReceivedPacket> packets_;
