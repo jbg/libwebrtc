@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cabcbc7f_fe2c8fbf",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T12:23:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a7506c3_c2cdd7e9",
+      "range": {
+        "startLine": 221,
+        "startChar": 46,
+        "endLine": 221,
+        "endChar": 47
+      },
+      "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dfc2ed2b_5508bfb1",
         "filename": "audio/audio_send_stream.cc",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "182dd56e_8df5855d",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T12:23:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfc2ed2b_5508bfb1",
+      "range": {
+        "startLine": 281,
+        "startChar": 10,
+        "endLine": 281,
+        "endChar": 16
+      },
+      "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0d5099c4_c6554af7",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T12:23:50Z",
+      "side": 1,
+      "message": "Not part of field trials but depends on the config. If no target rate is set on the codec and no min-max bitrate is set via field trial. It will default to false.",
+      "parentUuid": "817d6b29_140f5b3f",
+      "range": {
+        "startLine": 283,
+        "startChar": 10,
+        "endLine": 283,
+        "endChar": 35
+      },
+      "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87b9a09c_690b1734",
         "filename": "rtc_base/experiments/audio_allocation_settings.h",
         "patchSetId": 6
@@ -91,6 +163,30 @@
       "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d90af277_43ddd514",
+        "filename": "rtc_base/experiments/audio_allocation_settings.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T12:23:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87b9a09c_690b1734",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 12
+      },
+      "revId": "65b1bc3ee0e05e6871cd313f62bf3e177a38b92b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
