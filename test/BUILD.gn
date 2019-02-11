@@ -363,6 +363,7 @@ if (rtc_include_tests) {
       "../rtc_base/system:file_wrapper",
       "../test:single_threaded_task_queue",
       "pc/e2e:e2e_unittests",
+      "rtc_task_runner:task_runner_unittests",
       "scenario:scenario_unittests",
       "//testing/gmock",
       "//testing/gtest",
