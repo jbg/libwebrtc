@@ -34,9 +34,11 @@ AudioAllocationSettings::AudioAllocationSettings()
       include_in_acknowledged_estimate_(
           field_trial::IsEnabled("WebRTC-Audio-AddSentToAckedEstimate")),
       default_min_bitrate_("min"),
-      default_max_bitrate_("max") {
-  ParseFieldTrial({&default_min_bitrate_, &default_max_bitrate_},
-                  field_trial::FindFullName("WebRTC-Audio-Allocation"));
+      default_max_bitrate_("max"),
+      priority_bitrate_("prio", DataRate::Zero()) {
+  ParseFieldTrial(
+      {&default_min_bitrate_, &default_max_bitrate_, &priority_bitrate_},
+      field_trial::FindFullName("WebRTC-Audio-Allocation"));
 }
 
 AudioAllocationSettings::~AudioAllocationSettings() {}
@@ -72,6 +74,10 @@ absl::optional<DataRate> AudioAllocationSettings::DefaultMaxBitrate() const {
 
 bool AudioAllocationSettings::UseLegacyFrameLengthForOverhead() const {
   return legacy_audio_send_side_bwe_trial_;
+}
+
+DataRate AudioAllocationSettings::DefaultPriorityBitrate() const {
+  return priority_bitrate_;
 }
 
 }  // namespace webrtc

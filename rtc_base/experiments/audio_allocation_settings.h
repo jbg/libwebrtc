@@ -40,6 +40,10 @@ class AudioAllocationSettings {
   // Indicates that legacy frame length values should be used instead of
   // accurate values in overhead calculations.
   bool UseLegacyFrameLengthForOverhead() const;
+  // Indicates the default priority bitrate for audio streams. The bitrate
+  // allocator will prioritize audio until it reaches this bitrate and will
+  // divide bitrate evently between audio and video above this bitrate.
+  DataRate DefaultPriorityBitrate() const;
 
  private:
   bool legacy_audio_send_side_bwe_trial_;
@@ -51,6 +55,7 @@ class AudioAllocationSettings {
   bool include_in_acknowledged_estimate_;
   FieldTrialOptional<DataRate> default_min_bitrate_;
   FieldTrialOptional<DataRate> default_max_bitrate_;
+  FieldTrialParameter<DataRate> priority_bitrate_;
 };
 }  // namespace webrtc
 

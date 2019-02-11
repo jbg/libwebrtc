@@ -806,9 +806,10 @@ void AudioSendStream::ConfigureBitrateObserver() {
   // This either updates the current observer or adds a new observer.
   bitrate_allocator_->AddObserver(
       this,
-      MediaStreamAllocationConfig{constraints.min.bps<uint32_t>(),
-                                  constraints.max.bps<uint32_t>(), 0, true,
-                                  config_.track_id, config_.bitrate_priority});
+      MediaStreamAllocationConfig{
+          constraints.min.bps<uint32_t>(), constraints.max.bps<uint32_t>(), 0,
+          allocation_settings_.DefaultPriorityBitrate().bps(), true,
+          config_.track_id, config_.bitrate_priority});
 }
 
 void AudioSendStream::RemoveBitrateObserver() {
