@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a4126a1_fccc61a4",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-11T15:19:23Z",
+      "side": 1,
+      "message": "If the TestPeers only live for the duration of the call my proposal is to make them local to PeerConnectionE2EQualityTest::Run, pass raw pointers around and let them go out of scope instead of explicitly calling reset() on the unique pointers and keeping invalid TestPeers as class members. WDYT?",
+      "range": {
+        "startLine": 120,
+        "startChar": 2,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "ea58c2dbcdffbbff83a5a74efe321eae71554f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c72d0ba5_5ad36a75",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-11T15:19:23Z",
+      "side": 1,
+      "message": "We need to go through the big picture one more time tomorrow because if I uncomment these we will get this error:\n\n  (peer_connection_e2e_smoke_test.cc:114): Captured: 156\n  (peer_connection_e2e_smoke_test.cc:115): Sent    : 150\n  (peer_connection_e2e_smoke_test.cc:116): Received: 149\n  (peer_connection_e2e_smoke_test.cc:117): Rendered: 149\n  (peer_connection_e2e_smoke_test.cc:118): Dropped : 7\n\n  #\n  # Fatal error in: ../../rtc_base/platform_thread.cc, line 125\n  # last system error: 0\n  # Check failed: thread_checker_.CalledOnValidThread()\n  # Aborted",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 18
+      },
+      "revId": "ea58c2dbcdffbbff83a5a74efe321eae71554f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
