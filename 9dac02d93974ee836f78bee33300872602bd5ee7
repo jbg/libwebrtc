@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41924c1d_ef7bb0a6",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-02-11T17:03:41Z",
+      "side": 1,
+      "message": "This may add a lot of noise to logs as it\u0027s being logged every time the bitrate changes. It should probably be changed to LS_VERBOSE or something.",
+      "range": {
+        "startLine": 843,
+        "startChar": 0,
+        "endLine": 843,
+        "endChar": 69
+      },
+      "revId": "9dac02d93974ee836f78bee33300872602bd5ee7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
