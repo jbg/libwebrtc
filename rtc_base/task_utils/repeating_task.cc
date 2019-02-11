@@ -50,6 +50,7 @@ bool RepeatingTaskBase::Run() {
 }
 
 void RepeatingTaskBase::Stop() {
+  RTC_DCHECK_RUN_ON(task_queue_);
   RTC_DCHECK(next_run_time_.IsFinite());
   next_run_time_ = Timestamp::PlusInfinity();
 }
@@ -97,7 +98,6 @@ RepeatingTaskHandle::RepeatingTaskHandle(
 void RepeatingTaskHandle::Stop() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   if (repeating_task_) {
-    RTC_DCHECK_RUN_ON(repeating_task_->task_queue_);
     repeating_task_->Stop();
     repeating_task_ = nullptr;
   }

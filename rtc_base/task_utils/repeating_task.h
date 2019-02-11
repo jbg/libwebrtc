@@ -23,21 +23,17 @@
 
 namespace webrtc {
 
-class RepeatingTaskHandle;
-
 namespace webrtc_repeating_task_impl {
 class RepeatingTaskBase : public rtc::QueuedTask {
  public:
   RepeatingTaskBase(rtc::TaskQueue* task_queue, TimeDelta first_delay);
   ~RepeatingTaskBase() override;
   virtual TimeDelta RunClosure() = 0;
+  void Stop();
+  void PostStop();
 
  private:
-  friend class ::webrtc::RepeatingTaskHandle;
-
   bool Run() final;
-  void Stop() RTC_RUN_ON(task_queue_);
-  void PostStop();
 
   rtc::TaskQueue* const task_queue_;
   // This is always finite, except for the special case where it's PlusInfinity
