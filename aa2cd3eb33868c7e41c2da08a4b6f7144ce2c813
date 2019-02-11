@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a4789d9c_0e4e99da",
+        "filename": "test/scenario/audio_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "We need to use the synchronous Invoke to avoid triggering thread checkers in DestroyAudioSendStream.",
+      "parentUuid": "a12c25e0_c972dae2",
+      "range": {
+        "startLine": 139,
+        "startChar": 24,
+        "endLine": 139,
+        "endChar": 30
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98edaa0e_d0dc28a1",
         "filename": "test/scenario/audio_stream.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7879c4c_a6ec93eb",
+        "filename": "test/scenario/audio_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "98edaa0e_d0dc28a1",
+      "range": {
+        "startLine": 163,
+        "startChar": 30,
+        "endLine": 163,
+        "endChar": 36
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1295edf9_3a6458d8",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7a52ff6_6b9b06c6",
+      "range": {
+        "startLine": 141,
+        "startChar": 6,
+        "endLine": 141,
+        "endChar": 20
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "455d57cd_51da96d4",
         "filename": "test/scenario/network/network_emulation.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b77f803_cc613bdb",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "455d57cd_51da96d4",
+      "range": {
+        "startLine": 23,
+        "startChar": 57,
+        "endLine": 23,
+        "endChar": 63
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "3bc3c3de_2a0e252f",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Yes:\n void Process(Timestamp at_time) RTC_RUN_ON(task_runner_);",
+      "parentUuid": "1f197fec_b8a8a470",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 36
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a6abc1b_2a8bcb26",
         "filename": "test/scenario/network/network_emulation.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d65898c6_0da05f59",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Because of: void HandlePacketReceived(EmulatedIpPacket packet) RTC_RUN_ON(task_runner_);",
+      "parentUuid": "2a6abc1b_2a8bcb26",
+      "range": {
+        "startLine": 78,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "c98d60b4_5a18158a",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41290dc0_18f6e50e",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 24
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1bd1ea12_5d73681f",
         "filename": "test/scenario/network/network_emulation.cc",
         "patchSetId": 2
@@ -183,6 +351,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f9d5c9f_079215dc",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Because:\n  std::map\u003cuint64_t, EmulatedNetworkReceiverInterface*\u003e routing_\n      RTC_GUARDED_BY(task_runner_);",
+      "parentUuid": "1bd1ea12_5d73681f",
+      "range": {
+        "startLine": 134,
+        "startChar": 4,
+        "endLine": 134,
+        "endChar": 36
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "4e3b817f_022f030a",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Because we do an Invoke, which would cause a deadlock if called on the task runner. Also, if we would want to call it from task runner thread, we should have a separate function, to avoid variant behavior depending on calling thread.",
+      "parentUuid": "a37fa68c_b605169c",
+      "range": {
+        "startLine": 142,
+        "startChar": 2,
+        "endLine": 142,
+        "endChar": 41
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a5a8cef_79913a9a",
         "filename": "test/scenario/network/network_emulation.cc",
         "patchSetId": 2
@@ -229,6 +445,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bfbd30b_b8a9db32",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "std::map\u003cuint64_t, EmulatedNetworkReceiverInterface*\u003e routing_\n      RTC_GUARDED_BY(task_runner_);",
+      "parentUuid": "3a5a8cef_79913a9a",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 36
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "d55880da_b3b02e99",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ddc9026_379061da",
+      "range": {
+        "startLine": 77,
+        "startChar": 18,
+        "endLine": 77,
+        "endChar": 29
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19c5d1c3_cc23a09d",
         "filename": "test/scenario/network/network_emulation_manager.cc",
         "patchSetId": 2
@@ -275,6 +539,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b029acc_414725da",
+        "filename": "test/scenario/network/network_emulation_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "NetworkEmulationManager currently only supports real time clocks. (Since it uses task queue) This change maintains this. I suspect that we are a bit far from making it feasible to use simulated time for peer connections, so it will probably stay like this for foreseeable future.\n\nI don\u0027t think we need the socket server functionality for scenario tests. But if we need it in the future we might want to allow injecting both the task runner and the clock here.",
+      "parentUuid": "19c5d1c3_cc23a09d",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 12
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -301,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "edd2347a_e97eb623",
+        "filename": "test/scenario/network/network_emulation_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54f0f14b_2b8dbe2e",
+      "range": {
+        "startLine": 57,
+        "startChar": 27,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04066b22_5877d541",
         "filename": "test/scenario/scenario.cc",
         "patchSetId": 2
@@ -321,6 +633,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "526644d8_e07d98bc",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04066b22_5877d541",
+      "range": {
+        "startLine": 60,
+        "startChar": 58,
+        "endLine": 60,
+        "endChar": 64
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -347,6 +683,30 @@
     },
     {
       "key": {
+        "uuid": "678c7d12_531bf2c8",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e918839_9b50a878",
+      "range": {
+        "startLine": 322,
+        "startChar": 15,
+        "endLine": 322,
+        "endChar": 23
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a8a65af_fc00d348",
         "filename": "test/scenario/scenario.cc",
         "patchSetId": 2
@@ -367,6 +727,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b933c80c_9aaeea8b",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a8a65af_fc00d348",
+      "range": {
+        "startLine": 323,
+        "startChar": 24,
+        "endLine": 323,
+        "endChar": 32
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -393,6 +777,30 @@
     },
     {
       "key": {
+        "uuid": "bb83a68f_4fbdc079",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99dffdbd_c59ebc22",
+      "range": {
+        "startLine": 333,
+        "startChar": 6,
+        "endLine": 333,
+        "endChar": 46
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2fdc5635_e7cfbb99",
         "filename": "test/scenario/scenario.cc",
         "patchSetId": 2
@@ -413,6 +821,30 @@
       "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9680e285_f0145918",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "It is stopped below. (handle.PostStop();)",
+      "parentUuid": "2fdc5635_e7cfbb99",
+      "range": {
+        "startLine": 342,
+        "startChar": 12,
+        "endLine": 342,
+        "endChar": 23
+      },
+      "revId": "aa2cd3eb33868c7e41c2da08a4b6f7144ce2c813",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

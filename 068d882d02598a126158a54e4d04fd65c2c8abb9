@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6a41d4c2_f0dbb8ce",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "847865fa_0d3be031",
+      "range": {
+        "startLine": 144,
+        "startChar": 2,
+        "endLine": 144,
+        "endChar": 27
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2020492b_08fb757e",
         "filename": "test/scenario/network/network_emulation.cc",
         "patchSetId": 1
@@ -237,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "76855127_823fcda4",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d291eb0a_248f279e",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7388d78_49d49d57",
         "filename": "test/scenario/network/network_emulation.h",
         "patchSetId": 1
@@ -328,6 +376,30 @@
       "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b3a5d71_29b41f1f",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-11T16:44:41Z",
+      "side": 1,
+      "message": "Added the change to this CL.",
+      "parentUuid": "2fb71cdd_591924e8",
+      "range": {
+        "startLine": 331,
+        "startChar": 2,
+        "endLine": 331,
+        "endChar": 25
+      },
+      "revId": "068d882d02598a126158a54e4d04fd65c2c8abb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
