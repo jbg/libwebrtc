@@ -39,6 +39,23 @@
       "revId": "d8807d56a3165ce8ef7ca25d725dc213dab2405d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6f5cc20_5c31eade",
+        "filename": "pc/rtp_receiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-12T16:39:02Z",
+      "side": 1,
+      "message": "Context: kuddai wants to implement MediaStreamTrack.applyConstraints() for remote audio tracks, and is using the RTCRtpReceiver and lower layer plumbing (MediaChannel, etc) to configure the corresponding source.\n\nI\u0027m worried that the media channel or ssrc can change due to setLocalDescription/setRemoteDescription and that 1) the current configuration is lost, and/or 2) the old configuration is still around on an obsolete source. And so I\u0027m wondering, why is there a Reconfigure() method in AudioRtpReceiver?\n\nI\u0027m not sure I am the right reviewer for this. Steve do you know this stuff?",
+      "revId": "d8807d56a3165ce8ef7ca25d725dc213dab2405d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
