@@ -52,36 +52,9 @@ std::string VideoConfigSourcePresenceToString(const VideoConfig& video_config) {
 }  // namespace
 
 PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
-    std::unique_ptr<InjectableComponents> alice_components,
-    std::unique_ptr<Params> alice_params,
-    std::unique_ptr<InjectableComponents> bob_components,
-    std::unique_ptr<Params> bob_params,
     std::unique_ptr<Analyzers> analyzers)
-    : clock_(Clock::GetRealTimeClock()),
-      signaling_thread_(rtc::Thread::Create()) {
-  RTC_CHECK(alice_components);
-  RTC_CHECK(alice_params);
-  RTC_CHECK(bob_components);
-  RTC_CHECK(bob_params);
+    : clock_(Clock::GetRealTimeClock()) {
   RTC_CHECK(analyzers);
-
-  // Print test summary
-  RTC_LOG(INFO)
-      << "Media quality test: Alice will make a call to Bob with media video="
-      << !alice_params->video_configs.empty()
-      << "; audio=" << alice_params->audio_config.has_value()
-      << ". Bob will respond with media video="
-      << !bob_params->video_configs.empty()
-      << "; audio=" << bob_params->audio_config.has_value();
-
-  // Check that at least Alice or Bob has at least one media stream.
-  RTC_CHECK(!alice_params->video_configs.empty() ||
-            alice_params->audio_config || !bob_params->video_configs.empty() ||
-            bob_params->audio_config)
-      << "No media in the call";
-
-  signaling_thread_->SetName(kSignalThreadName, nullptr);
-  signaling_thread_->Start();
 
   // Create default video quality analyzer. We will always create an analyzer,
   // even if there are no video streams, because it will be installed into video
@@ -97,6 +70,38 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
           std::move(analyzers->video_quality_analyzer),
           encoded_image_id_controller_.get(),
           encoded_image_id_controller_.get());
+}
+
+void PeerConnectionE2EQualityTest::PrintTestSummary(Params* alice_params,
+                                                    Params* bob_params) {
+  // Print test summary
+  RTC_LOG(INFO)
+      << "Media quality test: Alice will make a call to Bob with media video="
+      << !alice_params->video_configs.empty()
+      << "; audio=" << alice_params->audio_config.has_value()
+      << ". Bob will respond with media video="
+      << !bob_params->video_configs.empty()
+      << "; audio=" << bob_params->audio_config.has_value();
+}
+
+void PeerConnectionE2EQualityTest::Run(
+    std::unique_ptr<InjectableComponents> alice_components,
+    std::unique_ptr<Params> alice_params,
+    std::unique_ptr<InjectableComponents> bob_components,
+    std::unique_ptr<Params> bob_params,
+    RunParams run_params) {
+  RTC_CHECK(alice_components);
+  RTC_CHECK(alice_params);
+  RTC_CHECK(bob_components);
+  RTC_CHECK(bob_params);
+
+  SetMissedVideoStreamLabels({alice_params.get(), bob_params.get()});
+  ValidateParams({alice_params.get(), bob_params.get()});
+  PrintTestSummary(alice_params.get(), bob_params.get());
+
+  const std::unique_ptr<rtc::Thread> signaling_thread = rtc::Thread::Create();
+  signaling_thread->SetName(kSignalThreadName, nullptr);
+  signaling_thread->Start();
 
   // Create call participants: Alice and Bob.
   // Audio streams are intercepted in AudioDeviceModule, so if it is required to
@@ -111,17 +116,12 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
           : absl::nullopt;
   alice_ = TestPeer::CreateTestPeer(
       std::move(alice_components), std::move(alice_params),
-      video_quality_analyzer_injection_helper_.get(), signaling_thread_.get(),
+      video_quality_analyzer_injection_helper_.get(), signaling_thread.get(),
       alice_audio_output_dump_file_name);
   bob_ = TestPeer::CreateTestPeer(
       std::move(bob_components), std::move(bob_params),
-      video_quality_analyzer_injection_helper_.get(), signaling_thread_.get(),
+      video_quality_analyzer_injection_helper_.get(), signaling_thread.get(),
       bob_audio_output_dump_file_name);
-}
-
-void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
-  SetMissedVideoStreamLabels({alice_->params(), bob_->params()});
-  ValidateParams({alice_->params(), bob_->params()});
 
   int num_cores = CpuInfo::DetectNumberOfCores();
   RTC_DCHECK_GE(num_cores, 1);
@@ -136,7 +136,7 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   RTC_LOG(INFO) << "video_analyzer_threads=" << video_analyzer_threads;
 
   video_quality_analyzer_injection_helper_->Start(video_analyzer_threads);
-  signaling_thread_->Invoke<void>(
+  signaling_thread->Invoke<void>(
       RTC_FROM_HERE,
       rtc::Bind(&PeerConnectionE2EQualityTest::RunOnSignalingThread, this,
                 run_params));
@@ -163,7 +163,14 @@ void PeerConnectionE2EQualityTest::SetMissedVideoStreamLabels(
 
 void PeerConnectionE2EQualityTest::ValidateParams(std::vector<Params*> params) {
   std::set<std::string> video_labels;
+  int media_streams = 0;
+
   for (Params* p : params) {
+    if (p->audio_config) {
+      media_streams++;
+    }
+    media_streams += p->video_configs.size();
+
     // Validate that each video config has exactly one of |generator|,
     // |input_file_name| or |screen_share_config| set. Also validate that all
     // video stream labels are unique.
@@ -195,13 +202,15 @@ void PeerConnectionE2EQualityTest::ValidateParams(std::vector<Params*> params) {
       }
     }
   }
+
+  RTC_CHECK_GT(media_streams, 0) << "No media in the call.";
 }
 
 void PeerConnectionE2EQualityTest::RunOnSignalingThread(RunParams run_params) {
   AddMedia(alice_.get());
   AddMedia(bob_.get());
 
-  SetupCall(alice_.get(), bob_.get());
+  SetupCall();
 
   WaitForTransceiversSetup(alice_->params(), bob_.get());
   WaitForTransceiversSetup(bob_->params(), alice_.get());
@@ -301,21 +310,21 @@ void PeerConnectionE2EQualityTest::AddAudio(TestPeer* peer) {
   peer->AddTransceiver(track);
 }
 
-void PeerConnectionE2EQualityTest::SetupCall(TestPeer* alice, TestPeer* bob) {
+void PeerConnectionE2EQualityTest::SetupCall() {
   // Connect peers.
-  ASSERT_TRUE(alice->ExchangeOfferAnswerWith(bob));
+  ASSERT_TRUE(alice_->ExchangeOfferAnswerWith(bob_.get()));
   // Do the SDP negotiation, and also exchange ice candidates.
-  ASSERT_EQ_WAIT(alice->signaling_state(), PeerConnectionInterface::kStable,
+  ASSERT_EQ_WAIT(alice_->signaling_state(), PeerConnectionInterface::kStable,
                  kDefaultTimeoutMs);
-  ASSERT_TRUE_WAIT(alice->IsIceGatheringDone(), kDefaultTimeoutMs);
-  ASSERT_TRUE_WAIT(bob->IsIceGatheringDone(), kDefaultTimeoutMs);
+  ASSERT_TRUE_WAIT(alice_->IsIceGatheringDone(), kDefaultTimeoutMs);
+  ASSERT_TRUE_WAIT(bob_->IsIceGatheringDone(), kDefaultTimeoutMs);
 
   // Connect an ICE candidate pairs.
-  ASSERT_TRUE(bob->AddIceCandidates(alice->observer()->GetAllCandidates()));
-  ASSERT_TRUE(alice->AddIceCandidates(bob->observer()->GetAllCandidates()));
+  ASSERT_TRUE(bob_->AddIceCandidates(alice_->observer()->GetAllCandidates()));
+  ASSERT_TRUE(alice_->AddIceCandidates(bob_->observer()->GetAllCandidates()));
   // This means that ICE and DTLS are connected.
-  ASSERT_TRUE_WAIT(bob->IsIceConnected(), kDefaultTimeoutMs);
-  ASSERT_TRUE_WAIT(alice->IsIceConnected(), kDefaultTimeoutMs);
+  ASSERT_TRUE_WAIT(bob_->IsIceConnected(), kDefaultTimeoutMs);
+  ASSERT_TRUE_WAIT(alice_->IsIceConnected(), kDefaultTimeoutMs);
 }
 
 void PeerConnectionE2EQualityTest::WaitForTransceiversSetup(
@@ -379,6 +388,10 @@ void PeerConnectionE2EQualityTest::TearDownCall() {
   for (const auto& video_writer : video_writers_) {
     video_writer->Close();
   }
+  video_sources_.clear();
+  video_writers_.clear();
+  alice_.reset();
+  bob_.reset();
 }
 
 VideoFrameWriter* PeerConnectionE2EQualityTest::MaybeCreateVideoWriter(
