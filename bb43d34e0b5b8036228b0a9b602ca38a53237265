@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f84b62a_67839bdb",
+        "filename": "rtc_base/system/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-12T21:36:50Z",
+      "side": 1,
+      "message": "Correct, this was pulled in by //rtc_base:rtc_base_all_dependent_config.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 37
+      },
+      "revId": "bb43d34e0b5b8036228b0a9b602ca38a53237265",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
