@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "852dc132_409f2251",
+        "filename": "sdk/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-12T13:14:26Z",
+      "side": 1,
+      "message": "We can probably add an rtc_source_set called \"media_constraints_tests\" (or \"sdk_tests\" if we want to stay generic) and add it to the \"rtc_unittests\" binary (https://cs.chromium.org/chromium/src/third_party/webrtc/BUILD.gn?l\u003d471-515\u0026rcl\u003db76b9ba8ce763eb342178e6c7787e1873dbf208d)?\n\nIt seems to be the first C++ test added to this folder.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "f8a81ab3ee0ee0a859edfc749f19fd2eb540fa5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
