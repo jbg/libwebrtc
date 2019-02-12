@@ -22,6 +22,30 @@
       "revId": "a4d0dbb1ac921343d0c8fc0131efbad7aa778ed6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab1f2efb_6c650050",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-12T14:09:05Z",
+      "side": 1,
+      "message": "Indeed a merge failure. Fixed.",
+      "parentUuid": "c84fe59c_1d63a04c",
+      "range": {
+        "startLine": 501,
+        "startChar": 2,
+        "endLine": 501,
+        "endChar": 43
+      },
+      "revId": "a4d0dbb1ac921343d0c8fc0131efbad7aa778ed6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
