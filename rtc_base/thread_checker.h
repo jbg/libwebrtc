@@ -32,9 +32,13 @@ namespace rtc {
 // right version for your build configuration.
 class ThreadCheckerDoNothing {
  public:
+  ThreadCheckerDoNothing() = default;
   bool CalledOnValidThread() const { return true; }
 
   void DetachFromThread() {}
+
+ private:
+  RTC_DISALLOW_COPY_AND_ASSIGN(ThreadCheckerDoNothing);
 };
 
 // ThreadChecker is a helper class used to help verify that some methods of a
