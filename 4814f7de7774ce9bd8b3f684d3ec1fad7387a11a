@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "7170588d_a63b5aa6",
+        "filename": "sdk/media_constraints.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T17:05:07Z",
+      "side": 1,
+      "message": "Put the unnamed namespace inside the webrtc namespace so that you don\u0027t have to name it here?",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24ce6c1e_808db735",
+        "filename": "sdk/media_constraints.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T17:05:07Z",
+      "side": 1,
+      "message": "I assume the contents of this file were just moved from the old file?",
+      "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "628fe7d5_2f33980e",
         "filename": "sdk/media_constraints.h",
         "patchSetId": 6
@@ -13,6 +53,30 @@
       "writtenOn": "2019-02-12T14:25:07Z",
       "side": 1,
       "message": "For some reason, \u003d default wasn\u0027t good enough for the compiler, even though Constraints have a default constructor above.",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a290567_949449d9",
+        "filename": "sdk/media_constraints.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T17:05:07Z",
+      "side": 1,
+      "message": "If you use default member initializers (i.e. say \u003d {}; on lines 116 and 117), can you write \u003ddefault here then? This experiment [https://godbolt.org/z/cOFt_n] suggests that\u0027s possible.",
+      "parentUuid": "628fe7d5_2f33980e",
       "range": {
         "startLine": 53,
         "startChar": 21,
