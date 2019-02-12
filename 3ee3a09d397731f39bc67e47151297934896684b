@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df357adb_56bb30e9",
+        "filename": "api/media_stream_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-12T19:44:01Z",
+      "side": 1,
+      "message": "nit: newline above",
+      "revId": "3ee3a09d397731f39bc67e47151297934896684b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79a289c5_a58deb0a",
+        "filename": "api/media_stream_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-12T19:44:01Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 203,
+        "startChar": 69,
+        "endLine": 203,
+        "endChar": 76
+      },
+      "revId": "3ee3a09d397731f39bc67e47151297934896684b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2af07483_e2734335",
+        "filename": "api/media_stream_interface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-12T19:44:01Z",
+      "side": 1,
+      "message": "Does this only apply to remote sources? If so, document that.",
+      "revId": "3ee3a09d397731f39bc67e47151297934896684b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc5d7ac5_724c6b3a",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-12T19:44:01Z",
+      "side": 1,
+      "message": "Document that this only works for receive streams.",
+      "revId": "3ee3a09d397731f39bc67e47151297934896684b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36ab8d8e_f656c1a1",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-12T19:44:01Z",
+      "side": 1,
+      "message": "What does this do?",
+      "revId": "3ee3a09d397731f39bc67e47151297934896684b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "094bfe07_dd3d4056",
+        "filename": "pc/remote_audio_source.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-12T19:44:01Z",
+      "side": 1,
+      "message": "Instead of piping through the RtpReceiver, how about storing this (media_channel, ssrc) pair and querying it.\n\nNote that if SetLatency is called before the underlying stream has been created, that value should be cached then applied when ::Start is called.",
+      "revId": "3ee3a09d397731f39bc67e47151297934896684b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
