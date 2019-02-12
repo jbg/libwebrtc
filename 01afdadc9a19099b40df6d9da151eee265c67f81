@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba6c7024_8ed3be16",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-12T13:51:01Z",
+      "side": 1,
+      "message": "External brackets can be removed.",
+      "range": {
+        "startLine": 209,
+        "startChar": 41,
+        "endLine": 209,
+        "endChar": 73
+      },
+      "revId": "01afdadc9a19099b40df6d9da151eee265c67f81",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
