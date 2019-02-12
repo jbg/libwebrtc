@@ -48,6 +48,29 @@
     },
     {
       "key": {
+        "uuid": "83d56122_4e4c87fe",
+        "filename": "webrtc.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-12T08:44:14Z",
+      "side": 1,
+      "message": "I think it is better to mention the name of the library (e.g. libwebrtc.{a,lib}).",
+      "range": {
+        "startLine": 185,
+        "startChar": 46,
+        "endLine": 185,
+        "endChar": 78
+      },
+      "revId": "89400f7975a410206339e2ba2a0727005cdc8d30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a2f5f82_619a11c0",
         "filename": "webrtc.gni",
         "patchSetId": 3
@@ -59,6 +82,30 @@
       "writtenOn": "2019-02-12T07:37:32Z",
       "side": 1,
       "message": "\"the sdk\" is a bit ambiguous. Is this referring to android and ios sdks, or some other set of libraries?",
+      "range": {
+        "startLine": 186,
+        "startChar": 32,
+        "endLine": 186,
+        "endChar": 39
+      },
+      "revId": "89400f7975a410206339e2ba2a0727005cdc8d30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9009eb9_79b8b08a",
+        "filename": "webrtc.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-12T08:44:14Z",
+      "side": 1,
+      "message": "Yes, I think it is better to mention build targets or the outputs as well. E.g. libjingle_peerconnection_so.so and WebRTC.framework.",
+      "parentUuid": "4a2f5f82_619a11c0",
       "range": {
         "startLine": 186,
         "startChar": 32,
