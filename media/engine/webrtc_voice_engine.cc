@@ -559,10 +559,9 @@ RtpCapabilities WebRtcVoiceEngine::GetCapabilities() const {
   int id = 1;
   capabilities.header_extensions.push_back(
       webrtc::RtpExtension(webrtc::RtpExtension::kAudioLevelUri, id++));
-  if (allocation_settings_.EnableTransportSequenceNumberExtension()) {
+
     capabilities.header_extensions.push_back(webrtc::RtpExtension(
         webrtc::RtpExtension::kTransportSequenceNumberUri, id++));
-  }
 
   return capabilities;
 }
@@ -983,10 +982,23 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
         config_.send_codec_spec &&
         absl::EqualsIgnoreCase(config_.send_codec_spec->format.name,
                                kOpusCodecName);
-    if (is_opus && allocation_settings_.ConfigureRateAllocationRange()) {
-      config_.min_bitrate_bps = allocation_settings_.MinBitrateBps();
-      config_.max_bitrate_bps = allocation_settings_.MaxBitrateBps(
-          rtp_parameters_.encodings[0].max_bitrate_bps);
+    if (is_opus) {
+      // TODO(srte): Default to the configured target bitrate if no explicit
+      // range has been set.
+
+      if (rtp_parameters_.encodings[0].min_bitrate_bps) {
+        config_.min_bitrate_bps = *rtp_parameters_.encodings[0].min_bitrate_bps;
+      } else if (allocation_settings_.DefaultMinBitrate()) {
+        config_.min_bitrate_bps =
+            allocation_settings_.DefaultMinBitrate()->bps();
+      }
+
+      if (rtp_parameters_.encodings[0].max_bitrate_bps) {
+        config_.max_bitrate_bps = *rtp_parameters_.encodings[0].max_bitrate_bps;
+      } else if (allocation_settings_.DefaultMaxBitrate()) {
+        config_.max_bitrate_bps =
+            allocation_settings_.DefaultMaxBitrate()->bps();
+      }
     }
   }
 
