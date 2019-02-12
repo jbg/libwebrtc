@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32a74391_4d335598",
+        "filename": "pc/dtls_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-12T18:37:16Z",
+      "side": 1,
+      "message": "signaling/network/owning?",
+      "revId": "76e48e09126e6513d407b53543727ba541017f61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b140d980_9ea45103",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-12T18:37:16Z",
+      "side": 1,
+      "message": "Can we be clear about which thread this is? Signaling, network?",
+      "revId": "76e48e09126e6513d407b53543727ba541017f61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c438f20_a5687fe5",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-12T18:37:16Z",
+      "side": 1,
+      "message": "You say it\u0027s guarded by info_lock_ but the internal() getter above doesn\u0027t guard in its call to internal_dtls_transport_.get(). Also, if the lock is used for more than just info_ I think it should just be called lock_ or something more generic.",
+      "revId": "76e48e09126e6513d407b53543727ba541017f61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5a6fdb6_e7d62436",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-12T18:37:16Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "76e48e09126e6513d407b53543727ba541017f61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
