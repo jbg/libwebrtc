@@ -180,6 +180,16 @@ declare_args() {
 
   # Determines whether Metal is available on iOS/macOS.
   rtc_use_metal_rendering = is_mac || (is_ios && current_cpu == "arm64")
+
+  # When set to false, builtin audio encoder/decode factories and all the audio
+  # codecs it depends on will not be included  in the top-level native library.
+  # (they are still included in the sdk)
+  rtc_include_builtin_audio_codecs = true
+
+  # When set to false, builtin video encoder/decode factories and all the video
+  # codecs it depends on will not be included in the top-level native library.
+  # (they are still included in the sdk)
+  rtc_include_builtin_video_codecs = true
 }
 
 if (!build_with_mozilla) {
