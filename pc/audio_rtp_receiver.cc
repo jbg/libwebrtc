@@ -37,8 +37,11 @@ AudioRtpReceiver::AudioRtpReceiver(
     const std::string& receiver_id,
     const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams)
     : worker_thread_(worker_thread),
+      weak_factory_(this),
       id_(receiver_id),
-      source_(new rtc::RefCountedObject<RemoteAudioSource>(worker_thread)),
+      source_(new rtc::RefCountedObject<RemoteAudioSource>(
+          worker_thread,
+          weak_factory_.GetWeakPtr())),
       track_(AudioTrackProxy::Create(rtc::Thread::Current(),
                                      AudioTrack::Create(receiver_id, source_))),
       cached_track_enabled_(track_->enabled()),
@@ -54,6 +57,26 @@ AudioRtpReceiver::~AudioRtpReceiver() {
   track_->GetSource()->UnregisterAudioObserver(this);
   track_->UnregisterObserver(this);
   Stop();
+}
+
+void AudioRtpReceiver::SetBaseMinimumPlayoutDelayMs(int delay_ms) {
+  if (!media_channel_ || !ssrc_ || stopped_) {
+    return;
+  }
+
+  worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+    media_channel_->SetBaseMinimumPlayoutDelayMs(*ssrc_, delay_ms);
+  });
+}
+
+int AudioRtpReceiver::GetBaseMinimumPlayoutDelayMs() const {
+  if (!media_channel_ || !ssrc_ || stopped_) {
+    return 0;
+  }
+
+  return worker_thread_->Invoke<int>(RTC_FROM_HERE, [&] {
+    return media_channel_->GetBaseMinimumPlayoutDelayMs(*ssrc_).value_or(0);
+  });
 }
 
 void AudioRtpReceiver::OnChanged() {

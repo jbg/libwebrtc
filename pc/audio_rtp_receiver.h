@@ -26,6 +26,7 @@
 #include "pc/rtp_receiver.h"
 #include "rtc_base/ref_counted_object.h"
 #include "rtc_base/thread.h"
+#include "rtc_base/weak_ptr.h"
 
 namespace webrtc {
 
@@ -42,6 +43,10 @@ class AudioRtpReceiver : public ObserverInterface,
       const std::string& receiver_id,
       const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams);
   virtual ~AudioRtpReceiver();
+
+  void SetBaseMinimumPlayoutDelayMs(int delay_ms);
+
+  int GetBaseMinimumPlayoutDelayMs() const;
 
   // ObserverInterface implementation
   void OnChanged() override;
@@ -105,6 +110,7 @@ class AudioRtpReceiver : public ObserverInterface,
   bool SetOutputVolume(double volume);
 
   rtc::Thread* const worker_thread_;
+  rtc::WeakPtrFactory<AudioRtpReceiver> weak_factory_;
   const std::string id_;
   const rtc::scoped_refptr<RemoteAudioSource> source_;
   const rtc::scoped_refptr<AudioTrackInterface> track_;
