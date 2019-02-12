@@ -16,6 +16,24 @@
       "revId": "ef288dd26723d55ee909ec04e670023e0f53350a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48e283f8_4f800992",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-12T15:49:58Z",
+      "side": 0,
+      "message": "Discussed it in person, as this behavior is needed for applyConstraints requirements.",
+      "parentUuid": "4e874f18_79378e6c",
+      "revId": "ef288dd26723d55ee909ec04e670023e0f53350a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

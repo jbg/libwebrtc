@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f14cba56_fbf15a0f",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-12T15:49:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6622f9cf_2ecba7a6",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 58
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b195991_d0dd1818",
         "filename": "modules/audio_coding/neteq/delay_manager.cc",
         "patchSetId": 13
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "34392bc4_b816f307",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-12T15:49:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c177bf7e_636cf8e2",
+      "range": {
+        "startLine": 295,
+        "startChar": 9,
+        "endLine": 295,
+        "endChar": 39
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a12c8802_bf5edfaf",
         "filename": "modules/audio_coding/neteq/delay_manager.cc",
         "patchSetId": 13
@@ -92,6 +140,30 @@
       "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f639361b_4b30ff44",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-12T15:49:58Z",
+      "side": 1,
+      "message": "Reduce the size with ternary operators instead of ifs.",
+      "parentUuid": "a12c8802_bf5edfaf",
+      "range": {
+        "startLine": 570,
+        "startChar": 0,
+        "endLine": 582,
+        "endChar": 32
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "2f66968f_3674ffe4",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-12T15:49:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "87ee6a0e_ffb354ec",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 77
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "166a226d_2ba493af",
         "filename": "modules/audio_coding/neteq/delay_manager.h",
         "patchSetId": 13
@@ -138,6 +234,30 @@
       "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "617a3f2a_1912ee74",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-12T15:49:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "166a226d_2ba493af",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 38
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
