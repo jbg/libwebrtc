@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3b834113_48ba01b5",
+        "filename": "rtc_base/experiments/audio_allocation_settings.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-12T08:08:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dcb83bd_63547060",
+      "range": {
+        "startLine": 24,
+        "startChar": 11,
+        "endLine": 24,
+        "endChar": 13
+      },
+      "revId": "f5458331201528fd178f0c9d48df0544e7657f05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb2078b9_33308cb6",
         "filename": "rtc_base/experiments/audio_allocation_settings.h",
         "patchSetId": 13
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5bebbdcb_fe4a74db",
+        "filename": "rtc_base/experiments/audio_allocation_settings.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-12T08:08:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb2078b9_33308cb6",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "f5458331201528fd178f0c9d48df0544e7657f05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a9de64d_b3248dba",
         "filename": "video/end_to_end_tests/transport_feedback_tests.cc",
         "patchSetId": 13
@@ -68,6 +116,30 @@
       "revId": "f5458331201528fd178f0c9d48df0544e7657f05",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f866504_88675420",
+        "filename": "video/end_to_end_tests/transport_feedback_tests.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-12T08:08:48Z",
+      "side": 1,
+      "message": "This was always required, it\u0027s just that it would behave incorrectly before. If audio is not added to bitrate allocator but added to feedback its bitrate would be assigned to video.",
+      "parentUuid": "0a9de64d_b3248dba",
+      "range": {
+        "startLine": 456,
+        "startChar": 19,
+        "endLine": 456,
+        "endChar": 34
+      },
+      "revId": "f5458331201528fd178f0c9d48df0544e7657f05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
