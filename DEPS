@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': 'b847e520394c5b984bf21dff6bda09912a51008f',
+  'chromium_revision': '7bcabb1035bf9e2bfbd66de1918058317f2e6f65',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -24,7 +24,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling catapult
   # and whatever else without interference from each other.
-  'catapult_revision': '51e7b1437ef6375446c1bbb7db835ad5a77be25f',
+  'catapult_revision': 'cbea2ee3dd1b85f8b6edb06dd219866f45387149',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling libFuzzer
   # and whatever else without interference from each other.
@@ -46,7 +46,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    Var('chromium_git') + '/chromium/src/base' + '@' + 'cd67f57674fad137ca6a1cd48af4d6dd713a9a8e',
+    Var('chromium_git') + '/chromium/src/base' + '@' + '98208e607c260eb105d8e204e82dde58da9f4882',
   'src/build':
     Var('chromium_git') + '/chromium/src/build' + '@' + '04baa51dc4767c91ac717cf3fa0b8e2788d56d2b',
   'src/buildtools':
@@ -64,7 +64,7 @@ deps = {
   'src/testing':
     Var('chromium_git') + '/chromium/src/testing' + '@' + 'b76f7df43a1c44034fc5ffbcdb8a22829fa13d66',
   'src/third_party':
-    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'bb0d6bd290bc8b09a6d62320ccdbb9ecccd39105',
+    Var('chromium_git') + '/chromium/src/third_party' + '@' + '9bcd4937416c332b0890b596e0a6fc2c4dc92814',
 
   'src/buildtools/clang_format/script':
     Var('chromium_git') + '/chromium/llvm-project/cfe/tools/clang-format.git' + '@' + '96636aa0e9f047f17447f2d45a094d0b59ed7917',
