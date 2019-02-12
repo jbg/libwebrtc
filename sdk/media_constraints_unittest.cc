@@ -8,11 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "api/media_constraints_interface.h"
+#include "sdk/media_constraints.h"
 
 #include "absl/types/optional.h"
-#include "api/test/fake_constraints.h"
-#include "media/base/media_config.h"
 #include "test/gtest.h"
 
 namespace webrtc {
@@ -33,7 +31,7 @@ bool Matches(const PeerConnectionInterface::RTCConfiguration& a,
          a.media_config == b.media_config;
 }
 
-TEST(MediaConstraintsInterface, CopyConstraintsIntoRtcConfiguration) {
+TEST(MediaConstraints, CopyConstraintsIntoRtcConfiguration) {
   FakeConstraints constraints;
   PeerConnectionInterface::RTCConfiguration old_configuration;
   PeerConnectionInterface::RTCConfiguration configuration;
@@ -41,15 +39,14 @@ TEST(MediaConstraintsInterface, CopyConstraintsIntoRtcConfiguration) {
   CopyConstraintsIntoRtcConfiguration(&constraints, &configuration);
   EXPECT_TRUE(Matches(old_configuration, configuration));
 
-  constraints.SetMandatory(MediaConstraintsInterface::kEnableIPv6, "true");
+  constraints.SetMandatory(MediaConstraints::kEnableIPv6, "true");
   CopyConstraintsIntoRtcConfiguration(&constraints, &configuration);
   EXPECT_FALSE(configuration.disable_ipv6);
-  constraints.SetMandatory(MediaConstraintsInterface::kEnableIPv6, "false");
+  constraints.SetMandatory(MediaConstraints::kEnableIPv6, "false");
   CopyConstraintsIntoRtcConfiguration(&constraints, &configuration);
   EXPECT_TRUE(configuration.disable_ipv6);
 
-  constraints.SetMandatory(MediaConstraintsInterface::kScreencastMinBitrate,
-                           27);
+  constraints.SetMandatory(MediaConstraints::kScreencastMinBitrate, 27);
   CopyConstraintsIntoRtcConfiguration(&constraints, &configuration);
   EXPECT_TRUE(configuration.screencast_min_bitrate);
   EXPECT_EQ(27, *(configuration.screencast_min_bitrate));
