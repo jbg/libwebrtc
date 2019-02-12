@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44da7bfc_eb25a14d",
+        "filename": "webrtc.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-12T07:37:32Z",
+      "side": 1,
+      "message": "\"encoder/decoder\" or \"encode/decode\".",
+      "range": {
+        "startLine": 184,
+        "startChar": 37,
+        "endLine": 184,
+        "endChar": 51
+      },
+      "revId": "89400f7975a410206339e2ba2a0727005cdc8d30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bc5ddc9_06f2486b",
+        "filename": "webrtc.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-12T07:37:32Z",
+      "side": 1,
+      "message": "\"they depend\"",
+      "range": {
+        "startLine": 185,
+        "startChar": 11,
+        "endLine": 185,
+        "endChar": 21
+      },
+      "revId": "89400f7975a410206339e2ba2a0727005cdc8d30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a2f5f82_619a11c0",
+        "filename": "webrtc.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-12T07:37:32Z",
+      "side": 1,
+      "message": "\"the sdk\" is a bit ambiguous. Is this referring to android and ios sdks, or some other set of libraries?",
+      "range": {
+        "startLine": 186,
+        "startChar": 32,
+        "endLine": 186,
+        "endChar": 39
+      },
+      "revId": "89400f7975a410206339e2ba2a0727005cdc8d30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
