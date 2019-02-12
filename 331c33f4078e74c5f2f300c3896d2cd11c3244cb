@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6622f9cf_2ecba7a6",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "do we really need to calculate this every time?",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 58
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b195991_d0dd1818",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "we should not calculate this every time. Please consider add a member variable.",
+      "range": {
+        "startLine": 295,
+        "startChar": 9,
+        "endLine": 295,
+        "endChar": 39
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a12c8802_bf5edfaf",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "Isn\u0027t this not concise enough?\n\nhow about\n\nconst ret \u003d std::min(maximum_delay_ms_, q75);\nreturn ret \u003e 0 ? ret : kMaxBaseMinimumDelayMs;",
+      "range": {
+        "startLine": 570,
+        "startChar": 0,
+        "endLine": 582,
+        "endChar": 32
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87ee6a0e_ffb354ec",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "I doubt the value of testing these methods. As long as we can test the intended min delay, it should be fine.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 77
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "166a226d_2ba493af",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "\"Calculate\" in the name is redundant, same with following methods.",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 38
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6d2c8cd_2948202b",
+        "filename": "modules/audio_coding/neteq/delay_manager_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "constexpr int",
+      "range": {
+        "startLine": 286,
+        "startChar": 2,
+        "endLine": 286,
+        "endChar": 5
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81806045_931c9c61",
+        "filename": "modules/audio_coding/neteq/delay_manager_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "use RTC_DCHECK, since these are not part of actual tests.",
+      "range": {
+        "startLine": 291,
+        "startChar": 2,
+        "endLine": 291,
+        "endChar": 13
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea5485c2_7d669dc7",
+        "filename": "modules/audio_coding/neteq/delay_manager_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "constexpr int",
+      "range": {
+        "startLine": 314,
+        "startChar": 2,
+        "endLine": 314,
+        "endChar": 5
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfdf803b_ade113f7",
+        "filename": "modules/audio_coding/neteq/delay_manager_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 1,
+      "message": "use RTC_DCHECK, since these are not part of actual tests.",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 54
+      },
+      "revId": "331c33f4078e74c5f2f300c3896d2cd11c3244cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

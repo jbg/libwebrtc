@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e874f18_79378e6c",
+        "filename": "modules/audio_coding/neteq/delay_manager.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T08:10:29Z",
+      "side": 0,
+      "message": "I think it is fine to update minimum_delay_ms_ hear by taking maximum_delay_ms_ into account, and maybe recalculate it when maximum_delay_ms_ is changed, the latter is even optional IMO, because, if I set SetMinDelay and it failed to show any effect, how can I expect to use SetMaxDelay to make the earlier SetMinDelay to do something ... the behavior is hard to understand.",
+      "revId": "ef288dd26723d55ee909ec04e670023e0f53350a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
