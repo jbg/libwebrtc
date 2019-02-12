@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a16c6805_9df0b253",
+        "filename": "test/rtc_task_runner/default_task_runner.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T18:42:00Z",
+      "side": 1,
+      "message": "Can you move these two classes to the .cc file, and have just two create functions here? (Is a create function for DefaultTaskRunner even necessary, or will one for the factory suffice?)",
+      "revId": "5bce7a61098e19a056e26abbf8611a4ce8f9be59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b97d47d7_8b4411ed",
+        "filename": "test/rtc_task_runner/rtc_task_runner.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T18:42:00Z",
+      "side": 1,
+      "message": "No one should be accessing this object once its destructor has started running.",
+      "revId": "5bce7a61098e19a056e26abbf8611a4ce8f9be59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "debd6541_1a117dd0",
+        "filename": "test/rtc_task_runner/rtc_task_runner_interfaces.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T18:42:00Z",
+      "side": 1,
+      "message": "Return optional\u003cTimeDelta\u003e instead, with nullopt meaning that the task should not be scheduled again? In addition to increased flexibility, that would allow us to get rid of PendingTaskInterface.\n\nWhy do repeating tasks but not one-shot tasks need the current time as argument?",
+      "revId": "5bce7a61098e19a056e26abbf8611a4ce8f9be59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c5a9081_f9d19992",
+        "filename": "test/rtc_task_runner/rtc_task_runner_interfaces.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T18:42:00Z",
+      "side": 1,
+      "message": "Do we really need this one? Blocking calls are troublesome, and we want people to use them as sparingly as possible.",
+      "revId": "5bce7a61098e19a056e26abbf8611a4ce8f9be59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0b574bb_e1520ac5",
+        "filename": "test/rtc_task_runner/rtc_task_runner_interfaces.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T18:42:00Z",
+      "side": 1,
+      "message": "Name this CreateTaskRunner, so that it can\u0027t be mistaken for a create function for the factory?\n\nAlso, why is this protected? That will make it impossible to proxy this interface properly, and to write tests for it.",
+      "revId": "5bce7a61098e19a056e26abbf8611a4ce8f9be59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9638995a_7abd67bf",
+        "filename": "test/rtc_task_runner/time_simulation.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-12T18:42:00Z",
+      "side": 1,
+      "message": "Move this class definition to the .cc file, and have just a create function here? That hides the implementation details nicely.",
+      "revId": "5bce7a61098e19a056e26abbf8611a4ce8f9be59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
