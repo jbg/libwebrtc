@@ -22,6 +22,30 @@
       "revId": "9dac02d93974ee836f78bee33300872602bd5ee7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fa8b382_91361962",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-02-12T09:04:17Z",
+      "side": 1,
+      "message": "Hi Stefan, thanks for asking! I think in the world of overhead, audio/video joint BWE, DTX, and many other things, it would be clearest to log in this way, and I would like it to logged in a same manner as \nhttps://cs.chromium.org/chromium/src/third_party/webrtc/call/bitrate_allocator.cc?q\u003dbitrate_allocator.cc\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d115\n\ni.e. LS_INFO\n\nWDYT?",
+      "parentUuid": "41924c1d_ef7bb0a6",
+      "range": {
+        "startLine": 843,
+        "startChar": 0,
+        "endLine": 843,
+        "endChar": 69
+      },
+      "revId": "9dac02d93974ee836f78bee33300872602bd5ee7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
