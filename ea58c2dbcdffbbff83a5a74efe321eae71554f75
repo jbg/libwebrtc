@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "a2434d43_eb47c084",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-12T01:08:17Z",
+      "side": 1,
+      "message": "Maybe put them before run params, because I want to add a callback there, so it will be more readable to have objects first, then function, I suppose.. WDYT?",
+      "range": {
+        "startLine": 186,
+        "startChar": 19,
+        "endLine": 189,
+        "endChar": 53
+      },
+      "revId": "ea58c2dbcdffbbff83a5a74efe321eae71554f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81e8866e_7c950bca",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-12T01:08:17Z",
+      "side": 1,
+      "message": "This also should be moved to Run() and can be converted to local var",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 29
+      },
+      "revId": "ea58c2dbcdffbbff83a5a74efe321eae71554f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c15a4c39_e996eed4",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-12T01:08:17Z",
+      "side": 1,
+      "message": "It\u0027s better to move to ValidateParams(...)",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 94,
+        "endChar": 32
+      },
+      "revId": "ea58c2dbcdffbbff83a5a74efe321eae71554f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a4126a1_fccc61a4",
         "filename": "test/pc/e2e/peer_connection_quality_test.cc",
         "patchSetId": 1
@@ -13,6 +82,30 @@
       "writtenOn": "2019-02-11T15:19:23Z",
       "side": 1,
       "message": "If the TestPeers only live for the duration of the call my proposal is to make them local to PeerConnectionE2EQualityTest::Run, pass raw pointers around and let them go out of scope instead of explicitly calling reset() on the unique pointers and keeping invalid TestPeers as class members. WDYT?",
+      "range": {
+        "startLine": 120,
+        "startChar": 2,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "ea58c2dbcdffbbff83a5a74efe321eae71554f75",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d267517_aa06c86e",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-12T01:08:17Z",
+      "side": 1,
+      "message": "Definitely a good idea, please do it.",
+      "parentUuid": "0a4126a1_fccc61a4",
       "range": {
         "startLine": 120,
         "startChar": 2,
