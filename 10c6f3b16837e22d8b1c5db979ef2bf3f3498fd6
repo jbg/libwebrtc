@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c2a5bac_655eca8f",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-12T23:04:19Z",
+      "side": 1,
+      "message": "Maybe use empty() here and in the next line?",
+      "range": {
+        "startLine": 151,
+        "startChar": 15,
+        "endLine": 151,
+        "endChar": 39
+      },
+      "revId": "10c6f3b16837e22d8b1c5db979ef2bf3f3498fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "952e6712_47a50783",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-12T23:04:19Z",
+      "side": 1,
+      "message": "maybe media_streams_count?",
+      "range": {
+        "startLine": 175,
+        "startChar": 6,
+        "endLine": 175,
+        "endChar": 19
+      },
+      "revId": "10c6f3b16837e22d8b1c5db979ef2bf3f3498fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe4de516_03b83c4e",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-12T23:04:19Z",
+      "side": 1,
+      "message": "Maybe here we also can use object state?",
+      "range": {
+        "startLine": 73,
+        "startChar": 24,
+        "endLine": 73,
+        "endChar": 64
+      },
+      "revId": "10c6f3b16837e22d8b1c5db979ef2bf3f3498fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
