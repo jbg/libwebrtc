@@ -21,7 +21,10 @@ AudioAllocationSettings::AudioAllocationSettings()
       allocate_audio_without_feedback_("Enabled"),
       force_no_audio_feedback_("Enabled"),
       audio_feedback_to_improve_video_bwe_("Enabled"),
-      send_side_bwe_with_overhead_("Enabled") {
+      send_side_bwe_with_overhead_("Enabled"),
+      default_min_bitrate_("min", DataRate::bps(kOpusMinBitrateBps)),
+      default_max_bitrate_("max", DataRate::bps(kOpusBitrateFbBps)),
+      priority_bitrate_("prio", DataRate::Zero()) {
   ParseFieldTrial({&audio_send_side_bwe_},
                   field_trial::FindFullName("WebRTC-Audio-SendSideBwe"));
   ParseFieldTrial({&allocate_audio_without_feedback_},
@@ -31,8 +34,12 @@ AudioAllocationSettings::AudioAllocationSettings()
   ParseFieldTrial(
       {&audio_feedback_to_improve_video_bwe_},
       field_trial::FindFullName("WebRTC-Audio-SendSideBwe-For-Video"));
+
   ParseFieldTrial({&send_side_bwe_with_overhead_},
                   field_trial::FindFullName("WebRTC-SendSideBwe-WithOverhead"));
+  ParseFieldTrial(
+      {&default_min_bitrate_, &default_max_bitrate_, &priority_bitrate_},
+      field_trial::FindFullName("WebRTC-Audio-Allocation"));
 
   // TODO(mflodman): Keep testing this and set proper values.
   // Note: This is an early experiment currently only supported by Opus.
@@ -116,7 +123,7 @@ bool AudioAllocationSettings::IncludeAudioInAllocationOnReconfigure(
 }
 
 int AudioAllocationSettings::MinBitrateBps() const {
-  return kOpusMinBitrateBps + min_overhead_bps_;
+  return default_min_bitrate_->bps() + min_overhead_bps_;
 }
 
 int AudioAllocationSettings::MaxBitrateBps(
@@ -133,6 +140,10 @@ int AudioAllocationSettings::MaxBitrateBps(
   // meanwhile change the cap to the output of BWE.
   if (rtp_parameter_max_bitrate_bps)
     return *rtp_parameter_max_bitrate_bps + min_overhead_bps_;
-  return kOpusBitrateFbBps + min_overhead_bps_;
+  return default_max_bitrate_->bps() + min_overhead_bps_;
 }
+DataRate AudioAllocationSettings::DefaultPriorityBitrate() const {
+  return priority_bitrate_;
+}
+
 }  // namespace webrtc
