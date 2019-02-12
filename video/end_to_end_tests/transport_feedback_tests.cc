@@ -292,6 +292,10 @@ class TransportFeedbackTester : public test::EndToEndTest {
     send_config->rtp.extensions.clear();
     send_config->rtp.extensions.push_back(
         RtpExtension(RtpExtension::kTransportSequenceNumberUri, kExtensionId));
+    // Feedback will only be added to audio packets if a bitrate range has been
+    // configured.
+    send_config->min_bitrate_bps = 32000;
+    send_config->max_bitrate_bps = 32000;
     (*receive_configs)[0].rtp.extensions.clear();
     (*receive_configs)[0].rtp.extensions = send_config->rtp.extensions;
     (*receive_configs)[0].rtp.transport_cc = feedback_enabled_;
@@ -316,6 +320,8 @@ TEST_F(TransportFeedbackEndToEndTest, VideoTransportFeedbackNotConfigured) {
 }
 
 TEST_F(TransportFeedbackEndToEndTest, AudioReceivesTransportFeedback) {
+  test::ScopedFieldTrials override_field_trials(
+      "WebRTC-Audio-SendTransportSequenceNumbers/Enabled/");
   TransportFeedbackTester test(true, 0, 1);
   RunBaseTest(&test);
 }
@@ -445,6 +451,10 @@ TEST_F(TransportFeedbackEndToEndTest, TransportSeqNumOnAudioAndVideo) {
       send_config->rtp.extensions.clear();
       send_config->rtp.extensions.push_back(RtpExtension(
           RtpExtension::kTransportSequenceNumberUri, kExtensionId));
+      // Feedback will only be added to audio packets if a bitrate range has
+      // been configured.
+      send_config->min_bitrate_bps = 32000;
+      send_config->max_bitrate_bps = 32000;
       (*receive_configs)[0].rtp.extensions.clear();
       (*receive_configs)[0].rtp.extensions = send_config->rtp.extensions;
     }
@@ -490,6 +500,8 @@ TEST_F(TransportFeedbackEndToEndTest, TransportSeqNumOnAudioAndVideo) {
     std::set<int64_t> received_packet_ids_;
   } test;
 
+  test::ScopedFieldTrials override_field_trials(
+      "WebRTC-Audio-SendTransportSequenceNumbers/Enabled/");
   RunBaseTest(&test);
   // Double check conditions for successful test to produce better error
   // message when the test fail.

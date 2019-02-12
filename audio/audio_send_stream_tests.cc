@@ -9,6 +9,7 @@
  */
 
 #include "test/call_test.h"
+#include "test/field_trial.h"
 #include "test/gtest.h"
 #include "test/rtcp_packet_parser.h"
 
@@ -166,6 +167,10 @@ TEST_F(AudioSendStreamCallTest, SupportsTransportWideSequenceNumbers) {
       send_config->rtp.extensions.clear();
       send_config->rtp.extensions.push_back(RtpExtension(
           RtpExtension::kTransportSequenceNumberUri, kExtensionId));
+      // Feedback will only be added to audio packets if a bitrate range has
+      // been configured.
+      send_config->min_bitrate_bps = 32000;
+      send_config->max_bitrate_bps = 32000;
     }
 
     void PerformTest() override {
@@ -173,6 +178,8 @@ TEST_F(AudioSendStreamCallTest, SupportsTransportWideSequenceNumbers) {
     }
   } test;
 
+  ScopedFieldTrials field_trials(
+      "WebRTC-Audio-SendTransportSequenceNumbers/Enabled/");
   RunBaseTest(&test);
 }
 
