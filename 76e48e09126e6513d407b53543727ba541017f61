@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "9d3c68b0_c237f7c3",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-12T19:21:13Z",
+      "side": 1,
+      "message": "Now it does! (it turned out that internal() was also called from off-thread).\nI can rename it to lock_ since it guards more than the info_ variable.\n\nRTC_DCHECK_RUN_ON acts like a critical section on owner_thread_, including thread-checking.",
+      "parentUuid": "5c438f20_a5687fe5",
+      "revId": "76e48e09126e6513d407b53543727ba541017f61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5a6fdb6_e7d62436",
         "filename": "pc/dtls_transport.h",
         "patchSetId": 1
@@ -64,6 +82,24 @@
       "writtenOn": "2019-02-12T18:37:16Z",
       "side": 1,
       "message": "Same here",
+      "revId": "76e48e09126e6513d407b53543727ba541017f61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3b5d78d_2bd6259f",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-12T19:21:13Z",
+      "side": 1,
+      "message": "This one *is* currently only accessed on the owner_thread_, but will eventually need to be allowed to escape, so I\u0027ll move it under the common lock.\nAnd that was the last variable guarded by the thread....",
+      "parentUuid": "a5a6fdb6_e7d62436",
       "revId": "76e48e09126e6513d407b53543727ba541017f61",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
