@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "628fe7d5_2f33980e",
+        "filename": "sdk/media_constraints.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-12T14:25:07Z",
+      "side": 1,
+      "message": "For some reason, \u003d default wasn\u0027t good enough for the compiler, even though Constraints have a default constructor above.",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
