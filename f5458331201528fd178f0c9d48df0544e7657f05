@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dcb83bd_63547060",
+        "filename": "rtc_base/experiments/audio_allocation_settings.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-12T07:27:00Z",
+      "side": 1,
+      "message": "sentence?",
+      "range": {
+        "startLine": 24,
+        "startChar": 11,
+        "endLine": 24,
+        "endChar": 13
+      },
+      "revId": "f5458331201528fd178f0c9d48df0544e7657f05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb2078b9_33308cb6",
+        "filename": "rtc_base/experiments/audio_allocation_settings.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-12T07:27:00Z",
+      "side": 1,
+      "message": "can some be const?",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "f5458331201528fd178f0c9d48df0544e7657f05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a9de64d_b3248dba",
+        "filename": "video/end_to_end_tests/transport_feedback_tests.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-02-12T07:27:00Z",
+      "side": 1,
+      "message": "It feels wrong to suddently require these settings. Why is that suddenly needed?",
+      "range": {
+        "startLine": 456,
+        "startChar": 19,
+        "endLine": 456,
+        "endChar": 34
+      },
+      "revId": "f5458331201528fd178f0c9d48df0544e7657f05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
