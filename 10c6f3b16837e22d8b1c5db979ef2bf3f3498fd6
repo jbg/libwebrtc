@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0eea7462_c0fc0bd5",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-13T08:08:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c2a5bac_655eca8f",
+      "range": {
+        "startLine": 151,
+        "startChar": 15,
+        "endLine": 151,
+        "endChar": 39
+      },
+      "revId": "10c6f3b16837e22d8b1c5db979ef2bf3f3498fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "952e6712_47a50783",
         "filename": "test/pc/e2e/peer_connection_quality_test.cc",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "05935c31_0972b377",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-13T08:08:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "952e6712_47a50783",
+      "range": {
+        "startLine": 175,
+        "startChar": 6,
+        "endLine": 175,
+        "endChar": 19
+      },
+      "revId": "10c6f3b16837e22d8b1c5db979ef2bf3f3498fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe4de516_03b83c4e",
         "filename": "test/pc/e2e/peer_connection_quality_test.h",
         "patchSetId": 7
@@ -68,6 +116,30 @@
       "revId": "10c6f3b16837e22d8b1c5db979ef2bf3f3498fd6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cc55c54_1de8e0cc",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-13T08:08:33Z",
+      "side": 1,
+      "message": "I am printing the test summary before TestPeers are created (right after validation) but let\u0027s just try to remove the method and switch back to the original implementation with the inlined RTC_LOG. I think it is more clear than an indirection for just a log.",
+      "parentUuid": "fe4de516_03b83c4e",
+      "range": {
+        "startLine": 73,
+        "startChar": 24,
+        "endLine": 73,
+        "endChar": 64
+      },
+      "revId": "10c6f3b16837e22d8b1c5db979ef2bf3f3498fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
