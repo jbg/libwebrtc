@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': 'aa7b61fdc440551f035c50ec9dcb312f45d46ef2',
+  'chromium_revision': '6f6016322c762ecb468aff5273bdf716c1adbb16',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -24,7 +24,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling catapult
   # and whatever else without interference from each other.
-  'catapult_revision': 'ed0a2fef2475995b6f3c3e62cc98313465f8b296',
+  'catapult_revision': '1a351b413fb6a9b697586799c6a4a59843a6dc53',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling libFuzzer
   # and whatever else without interference from each other.
@@ -48,7 +48,7 @@ deps = {
   'src/base':
     Var('chromium_git') + '/chromium/src/base' + '@' + '025e09f3ca2a2795662fb4a0f9a4be6435b1f11e',
   'src/build':
-    Var('chromium_git') + '/chromium/src/build' + '@' + 'e1e623809ca6cea5989b17cfe6f383efbc854d97',
+    Var('chromium_git') + '/chromium/src/build' + '@' + 'eba04e58d6f0844f41da8c78b8ebf1b603e281e5',
   'src/buildtools':
     Var('chromium_git') + '/chromium/src/buildtools' + '@' + '106e9fce3799633f42b45ca8bbe9e84e1e235603',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -64,7 +64,7 @@ deps = {
   'src/testing':
     Var('chromium_git') + '/chromium/src/testing' + '@' + '0704a2aafd773b50364f9a31d767f7104511156d',
   'src/third_party':
-    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'abd88f1df6f5fbb6300912db92e75d4af352daca',
+    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'd72eed473780327fdce9daecbc67af0523472d71',
 
   'src/buildtools/clang_format/script':
     Var('chromium_git') + '/chromium/llvm-project/cfe/tools/clang-format.git' + '@' + '96636aa0e9f047f17447f2d45a094d0b59ed7917',
