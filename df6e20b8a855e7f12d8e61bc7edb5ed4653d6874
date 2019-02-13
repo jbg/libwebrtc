@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b22994a2_a4d5c748",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-13T08:41:22Z",
+      "side": 1,
+      "message": "To prevent destruction race the return value must be scoped_refptr, otherwise the caller has to hold the lock.",
+      "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
