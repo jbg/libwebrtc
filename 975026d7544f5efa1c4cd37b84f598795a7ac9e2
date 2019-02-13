@@ -34,6 +34,24 @@
       "revId": "975026d7544f5efa1c4cd37b84f598795a7ac9e2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f259e72d_470db0a2",
+        "filename": "pc/dtls_transport.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-13T18:41:00Z",
+      "side": 1,
+      "message": "Now I see it (internal()). fixed.",
+      "parentUuid": "309190bc_664fbf86",
+      "revId": "975026d7544f5efa1c4cd37b84f598795a7ac9e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
