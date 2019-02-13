@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b7af3493_8a3f7a11",
+        "filename": "pc/dtls_transport.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-13T09:27:14Z",
+      "side": 1,
+      "message": "Done.\n(this imposes the additional requirement that this function is called without any additional locks captured after the calling function\u0027s RTC_DCHECK_RUN_ON - otherwise TSAN will complain about a lock sequence inversion. It ain\u0027t easy....)",
+      "parentUuid": "48ee1b96_fb62ba09",
+      "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b22994a2_a4d5c748",
         "filename": "pc/dtls_transport.h",
         "patchSetId": 5
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Ack. So only use the return value when something prevents Clear() from happening? It sort of defeats the purpose of a lock, but it does establish a happens-before relationship.",
       "parentUuid": "c0a6c34a_1abe4258",
+      "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16d9e5b7_baacad48",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-13T09:27:14Z",
+      "side": 1,
+      "message": "Clear() is called only from the destructor in jseptransport. Which is where it originally deallocated the object (without doing anything to the dangling pointers in other objects); since this hasn\u0027t crapped all over the place so far, I assume that the sequence of destruction in the jseptransport destructor was carefully managed.\n\nThe lock\u0027s purpose in this case is to make sure we don\u0027t get inconsistent updates - it doesn\u0027t lock the underlying object.",
+      "parentUuid": "1e75e351_716f2b8b",
       "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
