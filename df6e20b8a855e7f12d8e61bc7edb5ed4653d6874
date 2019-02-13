@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b6ebe9f6_211c9215",
+        "filename": "pc/dtls_transport.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-13T08:52:24Z",
+      "side": 1,
+      "message": "Can the internal object be modified on the network thread in other places which are unaware of this lock?",
+      "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b22994a2_a4d5c748",
         "filename": "pc/dtls_transport.h",
         "patchSetId": 5
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "Yep, but that requires redesigning the whole Cricket subsystem, which uses raw pointers all over the place. Out of scope for this CL.\n\nNote - this is returning a pointer to cricket::DtlsTransportInternal, which is not refcounted - not a pointer to webrtc::DtlsTransport{interface}, which is.",
       "parentUuid": "b22994a2_a4d5c748",
+      "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e75e351_716f2b8b",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-13T08:52:24Z",
+      "side": 1,
+      "message": "Ack. So only use the return value when something prevents Clear() from happening? It sort of defeats the purpose of a lock, but it does establish a happens-before relationship.",
+      "parentUuid": "c0a6c34a_1abe4258",
       "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
