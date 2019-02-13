@@ -16,6 +16,24 @@
       "revId": "7f00a61627d71a8e6babfec39c2a546324bd9c18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f620319_e840c51b",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-13T10:52:26Z",
+      "side": 1,
+      "message": "(Oops never completed a sentence: \"... otherwise our assumptions for UpdateInformation() don\u0027t hold.\")",
+      "parentUuid": "6a9601d7_0b97fccf",
+      "revId": "7f00a61627d71a8e6babfec39c2a546324bd9c18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
