@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a72171e2_0b3267c5",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2019-02-13T08:15:47Z",
+      "side": 1,
+      "message": "I\u0027m assuming all these constants should be prefixed with AudioFormat.",
+      "range": {
+        "startLine": 374,
+        "startChar": 11,
+        "endLine": 374,
+        "endChar": 28
+      },
+      "revId": "f0c61982de09ba1c6cd2da7379605eb650a1e17f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
