@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea8a2ed_cb854062",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-02-13T12:47:54Z",
+      "side": 1,
+      "message": "Is offset from the start of the test?",
+      "range": {
+        "startLine": 312,
+        "startChar": 28,
+        "endLine": 312,
+        "endChar": 34
+      },
+      "revId": "9c004b3b8f6cd3c865416e4d55aced8f2aea99c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
