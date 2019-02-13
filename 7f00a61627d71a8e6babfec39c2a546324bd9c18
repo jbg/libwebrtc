@@ -34,6 +34,24 @@
       "revId": "7f00a61627d71a8e6babfec39c2a546324bd9c18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79ae5d16_2311aed9",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-02-13T11:12:21Z",
+      "side": 1,
+      "message": "Added the restriction that it has to be the same as the one the cricket::DtlsTransportInternal lives on. I think we need to refactor the threads model at some point, so naming the threads\nmore than I have to is a Bad Thing.\n\nAdded a \"such as\" to the note about \"information\" - again, we shouldn\u0027t document what\u0027s presently done, we should document what\u0027s required - now that Information() is thread-safe,\nI suspect we might want to call it from the Chrome main thread in some cases.\n\nNow that I noticed ... also updated the dtls_transport_interface.h file with the thread info.",
+      "parentUuid": "0f620319_e840c51b",
+      "revId": "7f00a61627d71a8e6babfec39c2a546324bd9c18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
