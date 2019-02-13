@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a9601d7_0b97fccf",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-13T10:51:22Z",
+      "side": 1,
+      "message": "Can you document what thread that is intended to be somewhere? If I stumbled upon this code I would be very curious which thread we are talking about.\n\nAlso it\u0027s not just a \"consistent thread\", it has to be the same thread that the internal object lives on, otherwise our assumptions for UpdateInformation().\n\nPlease document the assumptions and/or rename the thread variable.",
+      "revId": "7f00a61627d71a8e6babfec39c2a546324bd9c18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

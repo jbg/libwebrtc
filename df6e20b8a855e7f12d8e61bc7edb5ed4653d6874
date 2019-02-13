@@ -123,6 +123,24 @@
       "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb10ed50_58ff9080",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-13T10:51:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "16d9e5b7_baacad48",
+      "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
