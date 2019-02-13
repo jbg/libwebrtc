@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "48ee1b96_fb62ba09",
+        "filename": "pc/dtls_transport.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-13T08:56:23Z",
+      "side": 1,
+      "message": "Nevermind, this always happens on the network thread and is therefor safe. Please add a thread check in this helper function too.",
+      "parentUuid": "b6ebe9f6_211c9215",
+      "revId": "df6e20b8a855e7f12d8e61bc7edb5ed4653d6874",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b22994a2_a4d5c748",
         "filename": "pc/dtls_transport.h",
         "patchSetId": 5
