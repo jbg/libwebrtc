@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03d74864_40cdae0f",
+        "filename": "pc/dtls_transport.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-02-13T15:15:41Z",
+      "side": 1,
+      "message": "We\u0027re recursively taking the lock here. Can that be avoided somehow?",
+      "revId": "975026d7544f5efa1c4cd37b84f598795a7ac9e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
