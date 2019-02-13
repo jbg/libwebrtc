@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8c8c8c6f_26f860b2",
+        "filename": "sdk/media_constraints.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-13T07:53:16Z",
+      "side": 1,
+      "message": "Done. Then also had to drop :: from uses of FindConstraints. And then I noticed that the other FindConstraint overloads could also be moved into the unnamed namespace.",
+      "parentUuid": "7170588d_a63b5aa6",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24ce6c1e_808db735",
         "filename": "sdk/media_constraints.cc",
         "patchSetId": 6
@@ -39,6 +63,24 @@
       "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec1a6e98_2430317b",
+        "filename": "sdk/media_constraints.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-13T07:53:16Z",
+      "side": 1,
+      "message": "That\u0027s right.",
+      "parentUuid": "24ce6c1e_808db735",
+      "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -86,6 +128,30 @@
       "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fad7ec8b_59584a88",
+        "filename": "sdk/media_constraints.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-13T07:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a290567_949449d9",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "4814f7de7774ce9bd8b3f684d3ec1fad7387a11a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
