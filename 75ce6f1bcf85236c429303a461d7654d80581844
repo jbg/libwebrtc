@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26fe391c_03d3d591",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-14T13:35:41Z",
+      "side": 1,
+      "message": "Nit: Put this comment above the declaration.",
+      "range": {
+        "startLine": 195,
+        "startChar": 41,
+        "endLine": 196,
+        "endChar": 65
+      },
+      "revId": "75ce6f1bcf85236c429303a461d7654d80581844",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
