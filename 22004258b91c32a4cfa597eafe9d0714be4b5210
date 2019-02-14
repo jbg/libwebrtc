@@ -202,6 +202,24 @@
     },
     {
       "key": {
+        "uuid": "8661f1ad_ffad8982",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-14T12:18:47Z",
+      "side": 1,
+      "message": "That\u0027s a brilliant idea :) if there is a race, that will catch it. Done. I also documented the fact that if you do want to post a task that quits the thread (without triggering a false positive) then you have to ensure that quitting does not happen before PostMessageWithFunctor() is done. This is easily doable if the caller uses an rtc::Event.",
+      "parentUuid": "c2fee796_e94cd672",
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fd4dad2_fbd1bc59",
         "filename": "rtc_base/post_message_with_functor_unittest.cc",
         "patchSetId": 3
