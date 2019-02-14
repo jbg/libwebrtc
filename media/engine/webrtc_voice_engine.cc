@@ -1176,6 +1176,29 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     playout_ = playout;
   }
 
+  bool SetBaseMinimumPlayoutDelayMs(int delay_ms) {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    RTC_DCHECK(stream_);
+    if (stream_->SetBaseMinimumPlayoutDelayMs(delay_ms)) {
+      // Memorize only valid delay because during stream recreation it will be
+      // passed to the constructor and it must be valid value.
+      config_.jitter_buffer_min_delay_ms = delay_ms;
+      return true;
+    } else {
+      RTC_LOG(LS_ERROR) << "Failed to SetBaseMinimumPlayoutDelayMs"
+                        << " on AudioReceiveStream on SSRC="
+                        << config_.rtp.remote_ssrc
+                        << " with delay_ms=" << delay_ms;
+      return false;
+    }
+  }
+
+  int GetBaseMinimumPlayoutDelayMs() const {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    RTC_DCHECK(stream_);
+    return stream_->GetBaseMinimumPlayoutDelayMs();
+  }
+
   std::vector<webrtc::RtpSource> GetSources() {
     RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
     RTC_DCHECK(stream_);
@@ -1953,6 +1976,27 @@ bool WebRtcVoiceMediaChannel::SetOutputVolume(uint32_t ssrc, double volume) {
                      << " for recv stream with ssrc " << ssrc;
   }
   return true;
+}
+
+bool WebRtcVoiceMediaChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
+                                                           int delay_ms) {
+  const auto it = recv_streams_.find(ssrc);
+  if (it == recv_streams_.end()) {
+    RTC_LOG(LS_WARNING) << "SetBaseMinimumPlayoutDelayMs: no recv stream "
+                        << ssrc;
+    return false;
+  } else {
+    return it->second->SetBaseMinimumPlayoutDelayMs(delay_ms);
+  }
+}
+
+absl::optional<int> WebRtcVoiceMediaChannel::GetBaseMinimumPlayoutDelayMs(
+    uint32_t ssrc) const {
+  const auto it = recv_streams_.find(ssrc);
+  if (it != recv_streams_.end()) {
+    return it->second->GetBaseMinimumPlayoutDelayMs();
+  }
+  return absl::nullopt;
 }
 
 bool WebRtcVoiceMediaChannel::CanInsertDtmf() {
