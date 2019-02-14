@@ -1176,6 +1176,20 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     playout_ = playout;
   }
 
+  void SetBaseMinimumPlayoutDelayMs(int delay_ms) {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    RTC_DCHECK(stream_);
+    if (stream_->SetBaseMinimumPlayoutDelayMs(delay_ms)) {
+      // Memorize only valid delay.
+      config_.jitter_buffer_min_delay_ms = delay_ms;
+    }
+  }
+
+  int GetBaseMinimumPlayoutDelayMs() const {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    return stream_->GetBaseMinimumPlayoutDelayMs();
+  }
+
   std::vector<webrtc::RtpSource> GetSources() {
     RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
     RTC_DCHECK(stream_);
@@ -1953,6 +1967,23 @@ bool WebRtcVoiceMediaChannel::SetOutputVolume(uint32_t ssrc, double volume) {
                      << " for recv stream with ssrc " << ssrc;
   }
   return true;
+}
+
+void WebRtcVoiceMediaChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
+                                                           int delay_ms) {
+  const auto it = recv_streams_.find(ssrc);
+  if (it != recv_streams_.end()) {
+    it->second->SetBaseMinimumPlayoutDelayMs(delay_ms);
+  }
+}
+
+absl::optional<int> WebRtcVoiceMediaChannel::GetBaseMinimumPlayoutDelayMs(
+    uint32_t ssrc) const {
+  const auto it = recv_streams_.find(ssrc);
+  if (it != recv_streams_.end()) {
+    return absl::make_optional<int>(it->second->GetBaseMinimumPlayoutDelayMs());
+  }
+  return absl::nullopt;
 }
 
 bool WebRtcVoiceMediaChannel::CanInsertDtmf() {
