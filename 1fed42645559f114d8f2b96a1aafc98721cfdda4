@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01724831_6098fffa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "May want to update the commit message now.",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "160b274b_291c6d99",
+        "filename": "api/media_stream_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "Mention that this only works for remote audio sources for now.",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c311309_c6a99faf",
+        "filename": "media/base/fake_media_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "nit: can just `return it-\u003esecond`",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2b9a008_3e79702b",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "nit: return a bool if the ssrc is found to match the other methods (SetAudioSend, SetOutputVolume)",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39e73248_39816639",
+        "filename": "media/engine/fake_webrtc_call.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "Why not base_minimum_playout_delay_ms ?",
+      "range": {
+        "startLine": 97,
+        "startChar": 9,
+        "endLine": 97,
+        "endChar": 30
+      },
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdeafd01_6f2d348d",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "I would recommend logging an error or something if this fails. Otherwise there will be no way to know.",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6adcefc5_1de21703",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "nit: also DCHECK(stream_);",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd68ada8_07c95744",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1985,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think you need make_optional",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "281ca9d7_b4453273",
+        "filename": "pc/remote_audio_source.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "media_channel_ (member)",
+      "range": {
+        "startLine": 74,
+        "startChar": 14,
+        "endLine": 74,
+        "endChar": 27
+      },
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0cb58c8_6ba75b34",
+        "filename": "pc/rtp_sender_receiver_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-14T19:23:06Z",
+      "side": 1,
+      "message": "nit: would EXPECT_DOUBLE_EQ be more suitable for these checks?",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
