@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "cbdda9e7_03f02a53",
+        "filename": "api/media_stream_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-14T19:47:09Z",
+      "side": 1,
+      "message": "here I put that it is for the remote source. However, this interface is called AudioSourceInterface, do you think it is necessary to also mention audio in the comment?",
+      "parentUuid": "160b274b_291c6d99",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7c311309_c6a99faf",
         "filename": "media/base/fake_media_engine.cc",
         "patchSetId": 6
@@ -64,6 +82,24 @@
       "writtenOn": "2019-02-14T19:23:06Z",
       "side": 1,
       "message": "nit: return a bool if the ssrc is found to match the other methods (SetAudioSend, SetOutputVolume)",
+      "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84f18ed9_0bdd8cb3",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-02-14T19:47:09Z",
+      "side": 1,
+      "message": "I can return bool from here, but I won\u0027t take any action upon that, essentially I would use it as void. If you are ok with that, then I don\u0027t have strong preferences on that.",
+      "parentUuid": "f2b9a008_3e79702b",
       "revId": "1fed42645559f114d8f2b96a1aafc98721cfdda4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
