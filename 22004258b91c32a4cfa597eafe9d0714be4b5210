@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a4d35636_4a680ebc",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-14T10:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "616e6d12_bd9af6ff",
+      "range": {
+        "startLine": 29,
+        "startChar": 18,
+        "endLine": 29,
+        "endChar": 37
+      },
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9c028cb_368a7f4a",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 3
@@ -39,6 +63,24 @@
       "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ae9d144_75e22e6a",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-14T10:47:51Z",
+      "side": 1,
+      "message": "If successfully posted this is guaranteed to be executed, and on the right thread, even if the thread shuts down. See other comment about what if Post fails.",
+      "parentUuid": "c9c028cb_368a7f4a",
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "efe8e3fb_bce96f6b",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-14T10:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2430b35f_d227b4db",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ddf3ed6_808bd1fd",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 3
@@ -76,6 +142,24 @@
       "writtenOn": "2019-02-06T14:33:34Z",
       "side": 1,
       "message": "If I\u0027m reading https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d10293#c5 correctly, this will leak if Post() fails. Check the return value, and delete the SingleMessageHandlerWithFunctor manually in that case?",
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e573a447_3f8e882b",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-14T10:47:51Z",
+      "side": 1,
+      "message": "Trying to post messages to a thread that doesn\u0027t run anymore is akin to trying to use an object that has been deleted - this should never happen, and if it does, the bug lies with the caller, not the function being invoked. It is OK to stop the thread while it has messages posted to it, since those messages will be executed in the process of stopping the thread, but it is never OK to post messages to a thread after it is stopped.\n\nIf an object has a dependency on a particular thread then we need to make sure that that object is stopped/destroyed before we tear down the thread.\n\nManually deleting the functor here would be possible, but it doesn\u0027t solve the problem, it just avoids some of the symptoms. In many cases we\u0027ll want to post messages in order to delete resources on the target thread - if the functor is executed or deleted on this thread then we are violating the contract of PostMessageWithFunctor.\n\nWhat I think is the right thing to do here is to DCHECK that Post() was successful. Unfortunately, Post() does not tell you whether or not it was successful. I added a DCHECK that the thread is not quitting when this function is called, but there could be a race such that the thread is stopped (from another thread) after the DCHECK but before we Post(). I can add a TODO to make Post() return a bool for future work, or I can leave it as-is since after all it is just a DCHECK and if it is racy it should sometimes trigger.\n\nWhat do you think?",
+      "parentUuid": "5ddf3ed6_808bd1fd",
       "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "8516a400_5951af03",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-14T10:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fd4dad2_fbd1bc59",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 40
+      },
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0bfe9d90_05d05c14",
         "filename": "rtc_base/post_message_with_functor_unittest.cc",
         "patchSetId": 3
@@ -119,6 +227,24 @@
       "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c90a277b_3031381d",
+        "filename": "rtc_base/post_message_with_functor_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-14T10:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bfe9d90_05d05c14",
+      "revId": "22004258b91c32a4cfa597eafe9d0714be4b5210",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

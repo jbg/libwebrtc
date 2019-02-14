@@ -180,6 +180,24 @@
     },
     {
       "key": {
+        "uuid": "2c0f3f64_7097036c",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-14T10:47:51Z",
+      "side": 1,
+      "message": "You\u0027re right I was doing rtc_static_library, I now changed it to rtc_source_set and was able to split up the targets.",
+      "parentUuid": "e62aa3f0_23e281ab",
+      "revId": "47cdabf1bb8c6a9ece0ad27ed5355a5e65db75fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08d358f7_c34757e4",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 1
