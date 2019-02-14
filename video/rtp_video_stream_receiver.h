@@ -15,10 +15,10 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "absl/types/optional.h"
-
 #include "api/crypto/frame_decryptor_interface.h"
 #include "api/video/color_space.h"
 #include "api/video_codecs/video_codec.h"
@@ -191,8 +191,10 @@ class RtpVideoStreamReceiver : public RecoveredPacketReceiver,
   rtc::scoped_refptr<video_coding::PacketBuffer> packet_buffer_;
   std::unique_ptr<video_coding::RtpFrameReferenceFinder> reference_finder_;
   rtc::CriticalSection last_seq_num_cs_;
-  std::map<int64_t, uint16_t> last_seq_num_for_pic_id_
-      RTC_GUARDED_BY(last_seq_num_cs_);
+  std::map<int64_t, std::pair<uint16_t, uint32_t>> last_seq_num_and_timestamps_
+      RTC_GUARDED_BY(last_seq_num_cs_);  // Map from pic_id to last sequence
+                                         // number and timestamp.
+
   video_coding::H264SpsPpsTracker tracker_;
 
   std::map<uint8_t, VideoCodecType> pt_codec_type_;
