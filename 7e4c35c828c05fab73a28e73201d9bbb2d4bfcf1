@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1e16b83_b9949aa0",
+        "filename": "pc/dtls_transport.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-02-14T12:47:17Z",
+      "side": 1,
+      "message": "We could use ThreadChecker as well",
+      "revId": "7e4c35c828c05fab73a28e73201d9bbb2d4bfcf1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
