@@ -3168,6 +3168,19 @@ TEST_F(WebRtcVoiceEngineTestFake, SetOutputVolumeUnsignaledRecvStream) {
   EXPECT_DOUBLE_EQ(4, GetRecvStream(kSsrcX).gain());
 }
 
+TEST_F(WebRtcVoiceEngineTestFake, GetBaseMinimumPlayoutDelayMs) {
+  EXPECT_TRUE(SetupChannel());
+  channel_->SetBaseMinimumPlayoutDelayMs(kSsrcY, 200);
+  EXPECT_FALSE(channel_->GetBaseMinimumPlayoutDelayMs(kSsrcY).has_value());
+
+  cricket::StreamParams stream;
+  stream.ssrcs.push_back(kSsrcY);
+  EXPECT_TRUE(channel_->AddRecvStream(stream));
+  EXPECT_EQ(0, GetRecvStream(kSsrcY).base_mininum_playout_delay_ms());
+  channel_->SetBaseMinimumPlayoutDelayMs(kSsrcY, 300);
+  EXPECT_EQ(300, GetRecvStream(kSsrcY).base_mininum_playout_delay_ms());
+}
+
 TEST_F(WebRtcVoiceEngineTestFake, SetsSyncGroupFromStreamId) {
   const uint32_t kAudioSsrc = 123;
   const std::string kStreamId = "AvSyncLabel";
