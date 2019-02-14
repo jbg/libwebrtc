@@ -388,6 +388,7 @@ VideoStreamEncoder::VideoStreamEncoder(
       captured_frame_count_(0),
       dropped_frame_count_(0),
       pending_frame_post_time_us_(0),
+      accumulated_update_rect_{0, 0, 0, 0},
       bitrate_observer_(nullptr),
       force_disable_frame_dropper_(false),
       input_framerate_(kFrameRateAvergingWindowSizeMs, 1000),
@@ -790,6 +791,7 @@ void VideoStreamEncoder::OnFrame(const VideoFrame& video_frame) {
           ++dropped_frame_count_;
           encoder_stats_observer_->OnFrameDropped(
               VideoStreamEncoderObserver::DropReason::kEncoderQueue);
+          accumulated_update_rect_.Union(incoming_frame.update_rect());
         }
         if (log_stats) {
           RTC_LOG(LS_INFO) << "Number of frames: captured "
@@ -878,6 +880,9 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
                      << last_frame_info_->width << "x"
                      << last_frame_info_->height
                      << ", texture=" << last_frame_info_->is_texture << ".";
+    // Force full frame update, since resolution has changed.
+    accumulated_update_rect_ =
+        VideoFrame::UpdateRect{0, 0, video_frame.width(), video_frame.height()};
   }
 
   // We have to create then encoder before the frame drop logic,
@@ -905,6 +910,14 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
     last_parameters_update_ms_.emplace(now_ms);
   }
 
+  // Because pending frame will be dropped in any case, we need to
+  // remember its updated region.
+  if (pending_frame_) {
+    encoder_stats_observer_->OnFrameDropped(
+        VideoStreamEncoderObserver::DropReason::kEncoderQueue);
+    accumulated_update_rect_.Union(pending_frame_->update_rect());
+  }
+
   if (DropDueToSize(video_frame.size())) {
     RTC_LOG(LS_INFO) << "Dropping frame. Too large for target bitrate.";
     int count = GetConstAdaptCounter().ResolutionCount(kQuality);
@@ -921,6 +934,7 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
     } else {
       // Ensure that any previously stored frame is dropped.
       pending_frame_.reset();
+      accumulated_update_rect_.Union(video_frame.update_rect());
     }
     return;
   }
@@ -938,6 +952,7 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
       // Ensure that any previously stored frame is dropped.
       pending_frame_.reset();
       TraceFrameDropStart();
+      accumulated_update_rect_.Union(video_frame.update_rect());
     }
     return;
   }
@@ -957,6 +972,7 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
                         << ", input frame rate " << framerate_fps;
     OnDroppedFrame(
         EncodedImageCallback::DropReason::kDroppedByMediaOptimizations);
+    accumulated_update_rect_.Union(video_frame.update_rect());
     return;
   }
 
@@ -977,13 +993,20 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
         I420Buffer::Create(cropped_width, cropped_height);
     // TODO(ilnik): Remove scaling if cropping is too big, as it should never
     // happen after SinkWants signaled correctly from ReconfigureEncoder.
+    VideoFrame::UpdateRect update_rect = video_frame.update_rect();
     if (crop_width_ < 4 && crop_height_ < 4) {
       cropped_buffer->CropAndScaleFrom(
           *video_frame.video_frame_buffer()->ToI420(), crop_width_ / 2,
           crop_height_ / 2, cropped_width, cropped_height);
+      update_rect.offset_x -= crop_width_ / 2;
+      update_rect.offset_y -= crop_height_ / 2;
+      update_rect.Intersect(
+          VideoFrame::UpdateRect{0, 0, cropped_width, cropped_height});
+
     } else {
       cropped_buffer->ScaleFrom(
           *video_frame.video_frame_buffer()->ToI420().get());
+      update_rect = VideoFrame::UpdateRect{0, 0, cropped_width, cropped_height};
     }
     out_frame = VideoFrame::Builder()
                     .set_video_frame_buffer(cropped_buffer)
@@ -991,8 +1014,15 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
                     .set_timestamp_ms(video_frame.render_time_ms())
                     .set_rotation(video_frame.rotation())
                     .set_id(video_frame.id())
+                    .set_update_rect(update_rect)
                     .build();
     out_frame.set_ntp_time_ms(video_frame.ntp_time_ms());
+  }
+
+  if (!accumulated_update_rect_.IsEmpty()) {
+    accumulated_update_rect_.Union(video_frame.update_rect());
+    out_frame.set_update_rect(accumulated_update_rect_);
+    accumulated_update_rect_.MakeEmptyUpdate();
   }
 
   TRACE_EVENT_ASYNC_STEP0("webrtc", "Video", video_frame.render_time_ms(),
