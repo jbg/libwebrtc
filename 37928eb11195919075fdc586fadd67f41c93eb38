@@ -22,6 +22,30 @@
       "revId": "37928eb11195919075fdc586fadd67f41c93eb38",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a6d0c16_f985a250",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 8385
+      },
+      "writtenOn": "2019-02-14T21:11:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "105a1278_eb9bc0bc",
+      "range": {
+        "startLine": 632,
+        "startChar": 27,
+        "endLine": 632,
+        "endChar": 64
+      },
+      "revId": "37928eb11195919075fdc586fadd67f41c93eb38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
