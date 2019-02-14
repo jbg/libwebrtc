@@ -659,7 +659,7 @@ void EventLogAnalyzer::CreateSequenceNumberGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Difference since last packet", kBottomMargin,
                           kTopMargin);
-  plot->SetTitle("Sequence number");
+  plot->SetTitle("Incoming sequence number delta");
 }
 
 void EventLogAnalyzer::CreateIncomingPacketLossGraph(Plot* plot) {
