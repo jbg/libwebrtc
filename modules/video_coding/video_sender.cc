@@ -205,6 +205,7 @@ int32_t VideoSender::AddVideoFrame(
                           .set_timestamp_ms(converted_frame.render_time_ms())
                           .set_rotation(converted_frame.rotation())
                           .set_id(converted_frame.id())
+                          .set_update_rect(converted_frame.update_rect())
                           .build();
   }
   int32_t ret =

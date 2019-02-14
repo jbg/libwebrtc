@@ -423,6 +423,7 @@ int SimulcastEncoderAdapter::Encode(
                              .set_timestamp_rtp(input_image.timestamp())
                              .set_rotation(webrtc::kVideoRotation_0)
                              .set_timestamp_ms(input_image.render_time_ms())
+                             .set_update_rect(input_image.update_rect())
                              .build();
       int ret = streaminfos_[stream_idx].encoder->Encode(
           frame, codec_specific_info, &stream_frame_types);
