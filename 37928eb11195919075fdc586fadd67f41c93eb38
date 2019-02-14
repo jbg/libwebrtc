@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "105a1278_eb9bc0bc",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-02-14T15:38:10Z",
+      "side": 1,
+      "message": "The comments looks like it is belonging to the audio playout graph.\nCould you change this to \"sequence number difference between consecutive incoming packets\".",
+      "range": {
+        "startLine": 632,
+        "startChar": 27,
+        "endLine": 632,
+        "endChar": 64
+      },
+      "revId": "37928eb11195919075fdc586fadd67f41c93eb38",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
