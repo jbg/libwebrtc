@@ -60,6 +60,7 @@ class VideoBroadcaster : public VideoSourceBase,
 
   VideoSinkWants current_wants_ RTC_GUARDED_BY(sinks_and_wants_lock_);
   rtc::scoped_refptr<webrtc::VideoFrameBuffer> black_frame_buffer_;
+  bool last_frame_was_discarded_ RTC_GUARDED_BY(sinks_and_wants_lock_);
 };
 
 }  // namespace rtc
