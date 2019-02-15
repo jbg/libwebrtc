@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "de1006e8_c360f40d",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-15T09:14:50Z",
+      "side": 1,
+      "message": "In practise, do we ever quit a thread today?",
+      "parentUuid": "152ff2b9_6673f13b",
+      "revId": "3ef3ae9bda12b2b61aa579acf87c92f7c0d9b0a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bbfab0a4_5aa44e91",
         "filename": "rtc_base/post_message_with_functor.h",
         "patchSetId": 5
@@ -39,6 +57,30 @@
       "revId": "3ef3ae9bda12b2b61aa579acf87c92f7c0d9b0a4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfab79c7_af011eb7",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-15T09:14:50Z",
+      "side": 1,
+      "message": "\"only do so\" as in only succeed if it\u0027s not quitting, but \"only fail if it is quitting\" is more accurate. Comment fixed.",
+      "parentUuid": "bbfab0a4_5aa44e91",
+      "range": {
+        "startLine": 67,
+        "startChar": 53,
+        "endLine": 68,
+        "endChar": 27
+      },
+      "revId": "3ef3ae9bda12b2b61aa579acf87c92f7c0d9b0a4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
