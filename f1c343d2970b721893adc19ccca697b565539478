@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "f5dc7c94_bbc09298",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-15T16:04:54Z",
+      "side": 1,
+      "message": "I set it to 2^15 now since that\u0027s the maximum number of packets that can be requested via the 15-bit field in the RTP header extension that will be used.",
+      "parentUuid": "13d98112_7c76bb37",
+      "range": {
+        "startLine": 149,
+        "startChar": 1,
+        "endLine": 150,
+        "endChar": 8
+      },
+      "revId": "f1c343d2970b721893adc19ccca697b565539478",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "afbe48a6_7282cd6a",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
         "patchSetId": 8
