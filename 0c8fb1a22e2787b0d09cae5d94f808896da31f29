@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "0a0def79_dc74548e",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-15T12:36:26Z",
+      "side": 1,
+      "message": "These functions will also be used in encoders in the same manner. They may also be useful for different capturer implementations. Chrome one has it\u0027s own VideoFrame, but some other WebRTC user might not. This kind of accumulation will be required in the capturer pipeline also.",
+      "parentUuid": "27288250_9d11df70",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d021b895_2267f48f",
         "filename": "api/video/video_frame.h",
         "patchSetId": 4
