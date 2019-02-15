@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dea650ca_69a7ecd6",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-15T11:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "907d2634_13d28197",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baf97afe_8c7a8b2f",
         "filename": "api/video/video_frame.h",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2019-02-15T10:43:11Z",
       "side": 1,
       "message": "I\u0027d prefer non-destructive const methods that return the new rectangle.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "994221e4_894d75db",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-15T11:57:29Z",
+      "side": 1,
+      "message": "See accumulated_update_rect usage in VideoStreamEncoder.\nThese are more efficient.",
+      "parentUuid": "baf97afe_8c7a8b2f",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4fd3292d_cb77d9df",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-15T11:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d021b895_2267f48f",
+      "range": {
+        "startLine": 41,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 24
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1dcbe752_db36ddda",
         "filename": "media/base/video_broadcaster.cc",
         "patchSetId": 4
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "3681ad2c_1034d602",
+        "filename": "media/base/video_broadcaster.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-15T11:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dcbe752_db36ddda",
+      "range": {
+        "startLine": 26,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 38
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2ba28f7_492a9152",
         "filename": "media/base/video_broadcaster.h",
         "patchSetId": 4
@@ -114,6 +210,30 @@
       "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8470bd83_18b50764",
+        "filename": "media/base/video_broadcaster.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-02-15T11:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2ba28f7_492a9152",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 70
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
