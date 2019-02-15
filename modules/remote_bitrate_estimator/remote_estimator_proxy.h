@@ -55,9 +55,22 @@ class RemoteEstimatorProxy : public RemoteBitrateEstimator {
   static const int kBackWindowMs;
 
  private:
-  void OnPacketArrival(uint16_t sequence_number, int64_t arrival_time)
+  void OnPacketArrival(uint16_t sequence_number,
+                       int64_t arrival_time,
+                       absl::optional<FeedbackRequest> feedback_request)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
-  bool BuildFeedbackPacket(rtcp::TransportFeedback* feedback_packet);
+  bool SendPeriodicFeedback() RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
+  void SendFeedbackOnRequest(int64_t sequence_number,
+                             const FeedbackRequest& feedback_request)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
+  int64_t BuildFeedbackPacket(
+      std::map<int64_t, int64_t>::const_iterator
+          begin_iterator,  // |begin_iterator| is inclusive.
+      std::map<int64_t, int64_t>::const_iterator
+          end_iterator,  // |end_iterator| is exclusive.
+      int64_t base_sequence_number,
+      rtcp::TransportFeedback* feedback_packet)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(&lock_);
 
   Clock* const clock_;
   TransportFeedbackSenderInterface* const feedback_sender_;
