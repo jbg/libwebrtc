@@ -1173,6 +1173,29 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     playout_ = playout;
   }
 
+  bool SetBaseMinimumPlayoutDelayMs(int delay_ms) {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    RTC_DCHECK(stream_);
+    if (stream_->SetBaseMinimumPlayoutDelayMs(delay_ms)) {
+      // Memorize only valid delay because during stream recreation it will be
+      // passed to the constructor and it must be valid value.
+      config_.jitter_buffer_min_delay_ms = delay_ms;
+      return true;
+    } else {
+      RTC_LOG(LS_ERROR) << "Failed to SetBaseMinimumPlayoutDelayMs"
+                        << " on AudioReceiveStream on SSRC="
+                        << config_.rtp.remote_ssrc
+                        << " with delay_ms=" << delay_ms;
+      return false;
+    }
+  }
+
+  int GetBaseMinimumPlayoutDelayMs() const {
+    RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+    RTC_DCHECK(stream_);
+    return stream_->GetBaseMinimumPlayoutDelayMs();
+  }
+
   std::vector<webrtc::RtpSource> GetSources() {
     RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
     RTC_DCHECK(stream_);
@@ -1933,23 +1956,64 @@ bool WebRtcVoiceMediaChannel::SetLocalSource(uint32_t ssrc,
 
 bool WebRtcVoiceMediaChannel::SetOutputVolume(uint32_t ssrc, double volume) {
   RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
-  std::vector<uint32_t> ssrcs(1, ssrc);
   // SSRC of 0 represents the default receive stream.
   if (ssrc == 0) {
     default_recv_volume_ = volume;
-    ssrcs = unsignaled_recv_ssrcs_;
   }
-  for (uint32_t ssrc : ssrcs) {
-    const auto it = recv_streams_.find(ssrc);
-    if (it == recv_streams_.end()) {
-      RTC_LOG(LS_WARNING) << "SetOutputVolume: no recv stream " << ssrc;
-      return false;
-    }
-    it->second->SetOutputVolume(volume);
+
+  auto streams = GetRecvStreamOrUnsignaledStreams(ssrc);
+
+  if (streams.empty()) {
+    RTC_LOG(LS_WARNING) << "SetOutputVolume: no recv stream " << ssrc;
+    return false;
+  }
+
+  for (auto stream : streams) {
+    stream->SetOutputVolume(volume);
     RTC_LOG(LS_INFO) << "SetOutputVolume() to " << volume
                      << " for recv stream with ssrc " << ssrc;
   }
+
   return true;
+}
+
+bool WebRtcVoiceMediaChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
+                                                           int delay_ms) {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+  // SSRC of 0 represents the default receive stream.
+  if (ssrc == 0) {
+    default_recv_base_minimum_delay_ms_ = delay_ms;
+  }
+
+  auto streams = GetRecvStreamOrUnsignaledStreams(ssrc);
+
+  if (streams.empty()) {
+    RTC_LOG(LS_WARNING) << "SetOutputVolume: no recv stream " << ssrc;
+    return false;
+  }
+
+  for (auto stream : streams) {
+    stream->SetBaseMinimumPlayoutDelayMs(delay_ms);
+    RTC_LOG(LS_INFO) << "SetBaseMinimumPlayoutDelayMs() to " << delay_ms
+                     << " for recv stream with ssrc " << ssrc;
+  }
+
+  return true;
+}
+
+absl::optional<int> WebRtcVoiceMediaChannel::GetBaseMinimumPlayoutDelayMs(
+    uint32_t ssrc) const {
+  // SSRC of 0 represents the default receive stream.
+  if (ssrc == 0) {
+    return default_recv_base_minimum_delay_ms_;
+  }
+
+  const auto it = recv_streams_.find(ssrc);
+
+  if (it != recv_streams_.end()) {
+    return it->second->GetBaseMinimumPlayoutDelayMs();
+  }
+  return absl::nullopt;
 }
 
 bool WebRtcVoiceMediaChannel::CanInsertDtmf() {
@@ -2047,6 +2111,7 @@ void WebRtcVoiceMediaChannel::OnPacketReceived(rtc::CopyOnWriteBuffer* packet,
   RTC_DCHECK_GE(kMaxUnsignaledRecvStreams, unsignaled_recv_ssrcs_.size());
 
   SetOutputVolume(ssrc, default_recv_volume_);
+  SetBaseMinimumPlayoutDelayMs(ssrc, default_recv_base_minimum_delay_ms_);
 
   // The default sink can only be attached to one stream at a time, so we hook
   // it up to the *latest* unsignaled stream we've seen, in order to support the
@@ -2278,5 +2343,26 @@ bool WebRtcVoiceMediaChannel::MaybeDeregisterUnsignaledRecvStream(
     return true;
   }
   return false;
+}
+
+std::vector<WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream*>
+WebRtcVoiceMediaChannel::GetRecvStreamOrUnsignaledStreams(uint32_t ssrc) const {
+  RTC_DCHECK(worker_thread_checker_.CalledOnValidThread());
+  std::vector<uint32_t> ssrcs(1, ssrc);
+  // SSRC of 0 represents the default receive stream.
+  if (ssrc == 0) {
+    ssrcs = unsignaled_recv_ssrcs_;
+  }
+
+  std::vector<WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream*> streams;
+  for (uint32_t ssrc : ssrcs) {
+    const auto it = recv_streams_.find(ssrc);
+    if (it == recv_streams_.end()) {
+      return {};
+    }
+    streams.push_back(it->second);
+  }
+
+  return streams;
 }
 }  // namespace cricket

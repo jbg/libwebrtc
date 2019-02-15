@@ -196,6 +196,10 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   // SSRC=0 will apply the new volume to current and future unsignaled streams.
   bool SetOutputVolume(uint32_t ssrc, double volume) override;
 
+  bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override;
+  absl::optional<int> GetBaseMinimumPlayoutDelayMs(
+      uint32_t ssrc) const override;
+
   bool CanInsertDtmf() override;
   bool InsertDtmf(uint32_t ssrc, int event, int duration) override;
 
@@ -260,6 +264,12 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   // unsignaled anymore (i.e. it is now removed, or signaled), and return true.
   bool MaybeDeregisterUnsignaledRecvStream(uint32_t ssrc);
 
+  class WebRtcAudioReceiveStream;
+  // Handles case of |ssrc| being 0 which means default recieve stream. In that
+  // case return all unsignaled_recv_ssrcs_.
+  std::vector<WebRtcAudioReceiveStream*> GetRecvStreamOrUnsignaledStreams(
+      uint32_t ssrc) const;
+
   rtc::ThreadChecker worker_thread_checker_;
 
   WebRtcVoiceEngine* const engine_ = nullptr;
@@ -295,6 +305,10 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
 
   // Volume for unsignaled streams, which may be set before the stream exists.
   double default_recv_volume_ = 1.0;
+
+  // Delay for unsignaled streams, which may be set before the stream exists.
+  int default_recv_base_minimum_delay_ms_ = 0;
+
   // Sink for latest unsignaled stream - may be set before the stream exists.
   std::unique_ptr<webrtc::AudioSinkInterface> default_sink_;
   // Default SSRC to use for RTCP receiver reports in case of no signaled
@@ -307,7 +321,6 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   std::vector<webrtc::RtpExtension> send_rtp_extensions_;
   std::string mid_;
 
-  class WebRtcAudioReceiveStream;
   std::map<uint32_t, WebRtcAudioReceiveStream*> recv_streams_;
   std::vector<webrtc::RtpExtension> recv_rtp_extensions_;
 
