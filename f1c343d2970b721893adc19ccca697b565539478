@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "13d98112_7c76bb37",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-15T15:23:30Z",
+      "side": 1,
+      "message": "Yes, that sees appropriate. Maybe a one minute time limit?",
+      "parentUuid": "1f1f8a69_5c149e60",
+      "range": {
+        "startLine": 149,
+        "startChar": 1,
+        "endLine": 150,
+        "endChar": 8
+      },
+      "revId": "f1c343d2970b721893adc19ccca697b565539478",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "afbe48a6_7282cd6a",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
         "patchSetId": 8
@@ -101,6 +125,24 @@
       "side": 1,
       "message": "I\u0027ll think about that. Perhaps a static method in TransportFeedback?\n\nI guess the \u0027problem\u0027 is to set the new value for windows_seq_ in a clean way.",
       "parentUuid": "afbe48a6_7282cd6a",
+      "revId": "f1c343d2970b721893adc19ccca697b565539478",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae9880ec_7bceb960",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-15T15:23:30Z",
+      "side": 1,
+      "message": "The \u0027problem\u0027 is actually also the benefit of moving it out, as it will be easier to see how it it updated.\n\nRather than making it static, just move it to the cc file since it\u0027s private.",
+      "parentUuid": "00f30bd9_15cfaa97",
       "revId": "f1c343d2970b721893adc19ccca697b565539478",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
