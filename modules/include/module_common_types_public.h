@@ -46,24 +46,18 @@ class Unwrapper {
  public:
   // Get the unwrapped value, but don't update the internal state.
   int64_t UnwrapWithoutUpdate(U value) const {
-    if (!last_value_)
-      return value;
-
-    constexpr int64_t kMaxPlusOne =
-        static_cast<int64_t>(std::numeric_limits<U>::max()) + 1;
-
-    U cropped_last = static_cast<U>(*last_value_);
+    U cropped_last = static_cast<U>(last_value_);
     int64_t delta = value - cropped_last;
     if (IsNewer(value, cropped_last)) {
       if (delta < 0)
         delta += kMaxPlusOne;  // Wrap forwards.
-    } else if (delta > 0 && (*last_value_ + delta - kMaxPlusOne) >= 0) {
+    } else if (delta > 0 && (last_value_ + delta - kMaxPlusOne) >= 0) {
       // If value is older but delta is positive, this is a backwards
       // wrap-around. However, don't wrap backwards past 0 (unwrapped).
       delta -= kMaxPlusOne;
     }
 
-    return *last_value_ + delta;
+    return last_value_ + delta;
   }
 
   // Only update the internal state to the specified last (unwrapped) value.
@@ -77,7 +71,11 @@ class Unwrapper {
   }
 
  private:
-  absl::optional<int64_t> last_value_;
+  constexpr static int64_t kMaxPlusOne =
+      static_cast<int64_t>(std::numeric_limits<U>::max()) + 1;
+  // Set last_value as kMaxPlusOne to handle a potential reordering of the first
+  // elements that are unwrapped.
+  int64_t last_value_ = kMaxPlusOne;
 };
 
 using SequenceNumberUnwrapper = Unwrapper<uint16_t>;
