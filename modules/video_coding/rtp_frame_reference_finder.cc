@@ -27,7 +27,6 @@ RtpFrameReferenceFinder::RtpFrameReferenceFinder(
     OnCompleteFrameCallback* frame_callback)
     : last_picture_id_(-1),
       current_ss_idx_(0),
-      cleared_to_seq_num_(-1),
       frame_callback_(frame_callback) {}
 
 RtpFrameReferenceFinder::~RtpFrameReferenceFinder() = default;
@@ -37,8 +36,8 @@ void RtpFrameReferenceFinder::ManageFrame(
   rtc::CritScope lock(&crit_);
 
   // If we have cleared past this frame, drop it.
-  if (cleared_to_seq_num_ != -1 &&
-      AheadOf<uint16_t>(cleared_to_seq_num_, frame->first_seq_num())) {
+  if (cleared_to_picture_id_ &&
+      *cleared_to_picture_id_ >= frame->id.picture_id) {
     return;
   }
 
@@ -117,13 +116,13 @@ void RtpFrameReferenceFinder::PaddingReceived(uint16_t seq_num) {
   RetryStashedFrames();
 }
 
-void RtpFrameReferenceFinder::ClearTo(uint16_t seq_num) {
+void RtpFrameReferenceFinder::ClearTo(int64_t picture_id) {
   rtc::CritScope lock(&crit_);
-  cleared_to_seq_num_ = seq_num;
+  cleared_to_picture_id_ = picture_id;
 
   auto it = stashed_frames_.begin();
   while (it != stashed_frames_.end()) {
-    if (AheadOf<uint16_t>(cleared_to_seq_num_, (*it)->first_seq_num())) {
+    if (picture_id >= (*it)->id.picture_id) {
       it = stashed_frames_.erase(it);
     } else {
       ++it;

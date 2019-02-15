@@ -18,7 +18,6 @@
 #include <vector>
 
 #include "absl/types/optional.h"
-
 #include "api/crypto/frame_decryptor_interface.h"
 #include "api/video/color_space.h"
 #include "api/video_codecs/video_codec.h"
