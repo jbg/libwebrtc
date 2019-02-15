@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "907d2634_13d28197",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-15T10:43:11Z",
+      "side": 1,
+      "message": "DCHECK that width and height \u003e 0 ?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baf97afe_8c7a8b2f",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-15T10:43:11Z",
+      "side": 1,
+      "message": "I\u0027d prefer non-destructive const methods that return the new rectangle.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d021b895_2267f48f",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-15T10:43:11Z",
+      "side": 1,
+      "message": "Document.",
+      "range": {
+        "startLine": 41,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 24
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dcbe752_db36ddda",
+        "filename": "media/base/video_broadcaster.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-15T10:43:11Z",
+      "side": 1,
+      "message": "You should perhaps set |last_frame_was_discarded_| when a new sink is added (and if so, rename the flag).",
+      "range": {
+        "startLine": 26,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 38
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2ba28f7_492a9152",
+        "filename": "media/base/video_broadcaster.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-15T10:43:11Z",
+      "side": 1,
+      "message": "Add \u003d false here; then you don\u0027t need to mention this in the constructor.",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 70
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
