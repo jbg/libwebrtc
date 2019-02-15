@@ -20,7 +20,7 @@
 
 namespace rtc {
 
-VideoBroadcaster::VideoBroadcaster() = default;
+VideoBroadcaster::VideoBroadcaster() : last_frame_was_discarded_(false) {}
 VideoBroadcaster::~VideoBroadcaster() = default;
 
 void VideoBroadcaster::AddOrUpdateSink(
@@ -52,6 +52,7 @@ VideoSinkWants VideoBroadcaster::wants() const {
 
 void VideoBroadcaster::OnFrame(const webrtc::VideoFrame& frame) {
   rtc::CritScope cs(&sinks_and_wants_lock_);
+  bool current_frame_was_discarded = false;
   for (auto& sink_pair : sink_pairs()) {
     if (sink_pair.wants.rotation_applied &&
         frame.rotation() != webrtc::kVideoRotation_0) {
@@ -60,6 +61,8 @@ void VideoBroadcaster::OnFrame(const webrtc::VideoFrame& frame) {
       // with rotation still pending. Protect sinks that don't expect any
       // pending rotation.
       RTC_LOG(LS_VERBOSE) << "Discarding frame with unexpected rotation.";
+      sink_pair.sink->OnDiscardedFrame();
+      current_frame_was_discarded = true;
       continue;
     }
     if (sink_pair.wants.black_frames) {
@@ -72,10 +75,22 @@ void VideoBroadcaster::OnFrame(const webrtc::VideoFrame& frame) {
               .set_id(frame.id())
               .build();
       sink_pair.sink->OnFrame(black_frame);
+    } else if (last_frame_was_discarded_) {
+      // Since last frame was not sent to some sinks, full update is needed.
+      // Update_rect is not set here for this reason.
+      webrtc::VideoFrame copy =
+          webrtc::VideoFrame::Builder()
+              .set_video_frame_buffer(frame.video_frame_buffer())
+              .set_rotation(frame.rotation())
+              .set_timestamp_us(frame.timestamp_us())
+              .set_id(frame.id())
+              .build();
+      sink_pair.sink->OnFrame(copy);
     } else {
       sink_pair.sink->OnFrame(frame);
     }
   }
+  last_frame_was_discarded_ = current_frame_was_discarded;
 }
 
 void VideoBroadcaster::OnDiscardedFrame() {
