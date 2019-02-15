@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "478a23ca_2e1b5768",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1981,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-15T01:55:32Z",
+      "side": 1,
+      "message": "Ah, you made a good point. These methods should be updated to handle unsignaled SSRCs. For SetBaseMinimumPlayoutDelayMs, just look at SetOutputVolume. For GetBaseMinimumPlayoutDelayMs, check if ssrc \u003d 0 and return the default value stored.",
+      "revId": "cfd8dcec9da926f2a56111be9ab597e381521c35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
