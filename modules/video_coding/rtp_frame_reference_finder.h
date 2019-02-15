@@ -18,6 +18,7 @@
 #include <set>
 #include <utility>
 
+#include "absl/types/optional.h"
 #include "modules/include/module_common_types.h"
 #include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h"
 #include "rtc_base/critical_section.h"
@@ -55,8 +56,9 @@ class RtpFrameReferenceFinder {
   // might need to calculate the references of a frame.
   void PaddingReceived(uint16_t seq_num);
 
-  // Clear all stashed frames that include packets older than |seq_num|.
-  void ClearTo(uint16_t seq_num);
+  // Clear all stashed frames that include packets older than or equal to
+  // |picture_id|.
+  void ClearTo(int64_t picture_id);
 
  private:
   static const uint16_t kPicIdLength = 1 << 15;
@@ -190,10 +192,10 @@ class RtpFrameReferenceFinder {
              kMaxTemporalLayers>
       missing_frames_for_layer_ RTC_GUARDED_BY(crit_);
 
-  // How far frames have been cleared by sequence number. A frame will be
-  // cleared if it contains a packet with a sequence number older than
-  // |cleared_to_seq_num_|.
-  int cleared_to_seq_num_ RTC_GUARDED_BY(crit_);
+  // How far frames have been cleared. A frame will be
+  // cleared if it contains a packet with a picture id older than or equal to
+  // |cleared_to_picture_id_|.
+  absl::optional<int64_t> cleared_to_picture_id_ RTC_GUARDED_BY(crit_);
 
   OnCompleteFrameCallback* frame_callback_;
 
