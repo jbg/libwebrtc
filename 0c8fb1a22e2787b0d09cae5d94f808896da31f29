@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "27288250_9d11df70",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-15T12:15:49Z",
+      "side": 1,
+      "message": "I\u0027m not so sure that there\u0027s any significant performance difference between \n\n  rect.Union(other);  // Destructive method\n\nand\n\n  rect \u003d rect.Union(other);  // const method\n\nBut I won\u0027t insist on this point. \n\nIn case we want to change this later, it would be helpful if these methods weren\u0027t included in the public api. If the only use is in video_stream_encoder.cc, can you change them to utility functions in the unnamed namespace in that file instead?",
+      "parentUuid": "994221e4_894d75db",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "0c8fb1a22e2787b0d09cae5d94f808896da31f29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d021b895_2267f48f",
         "filename": "api/video/video_frame.h",
         "patchSetId": 4

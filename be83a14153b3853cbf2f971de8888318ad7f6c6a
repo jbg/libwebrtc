@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96db5896_350a08cf",
+        "filename": "media/base/video_broadcaster.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-15T12:15:49Z",
+      "side": 1,
+      "message": "I think you need to clear flag here too; this is called from AdaptedVideoTrackSource::AdaptFrame.",
+      "range": {
+        "startLine": 100,
+        "startChar": 23,
+        "endLine": 100,
+        "endChar": 39
+      },
+      "revId": "be83a14153b3853cbf2f971de8888318ad7f6c6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
