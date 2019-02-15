@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "1f1f8a69_5c149e60",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-15T14:24:01Z",
+      "side": 1,
+      "message": "Yes, perhaps.\nHowever, I have started to think if there should be an else block with an automatic cleaning mechanism. Not sure how much of a problem this is, but as it is now, an evil sender that never requests feedback would cause the packet_arrival_times_ map to become full.",
+      "parentUuid": "b613ddad_012aa755",
+      "range": {
+        "startLine": 149,
+        "startChar": 1,
+        "endLine": 150,
+        "endChar": 8
+      },
+      "revId": "f1c343d2970b721893adc19ccca697b565539478",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "afbe48a6_7282cd6a",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
         "patchSetId": 8
@@ -59,6 +83,24 @@
       "writtenOn": "2019-02-15T12:59:05Z",
       "side": 1,
       "message": "Would it be possible to split this into two parts, one that creates the TransportFeedback that is defined in the cc file without side effects, and one part that contains only the side effects?",
+      "revId": "f1c343d2970b721893adc19ccca697b565539478",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00f30bd9_15cfaa97",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-15T14:24:01Z",
+      "side": 1,
+      "message": "I\u0027ll think about that. Perhaps a static method in TransportFeedback?\n\nI guess the \u0027problem\u0027 is to set the new value for windows_seq_ in a clean way.",
+      "parentUuid": "afbe48a6_7282cd6a",
       "revId": "f1c343d2970b721893adc19ccca697b565539478",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
