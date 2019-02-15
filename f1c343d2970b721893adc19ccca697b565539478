@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "381a5930_5e67909e",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-15T15:46:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31152349_d22f16f3",
+      "range": {
+        "startLine": 69,
+        "startChar": 30,
+        "endLine": 69,
+        "endChar": 50
+      },
+      "revId": "f1c343d2970b721893adc19ccca697b565539478",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b613ddad_012aa755",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
         "patchSetId": 8
@@ -142,6 +166,24 @@
       "writtenOn": "2019-02-15T15:23:30Z",
       "side": 1,
       "message": "The \u0027problem\u0027 is actually also the benefit of moving it out, as it will be easier to see how it it updated.\n\nRather than making it static, just move it to the cc file since it\u0027s private.",
+      "parentUuid": "00f30bd9_15cfaa97",
+      "revId": "f1c343d2970b721893adc19ccca697b565539478",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e8c03eb_5e158590",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-15T15:46:47Z",
+      "side": 1,
+      "message": "I think it was a good idea. I have extracted all strange side effects from it and created SendPeriodicFeedback where I moved some code from Process(). BuildFeedbackPacket still increments |feedback_sequence_|, which I think is fine. WDYT?\n\nI like that SendPeriodicFeedback and SendFeedbackOnRequest are now more similar.",
       "parentUuid": "00f30bd9_15cfaa97",
       "revId": "f1c343d2970b721893adc19ccca697b565539478",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
