@@ -94,6 +94,16 @@ WEBRTC_DEFINE_bool(plot_incoming_stream_bitrate,
 WEBRTC_DEFINE_bool(plot_outgoing_stream_bitrate,
                    true,
                    "Plot the bitrate used by each outgoing stream.");
+WEBRTC_DEFINE_bool(plot_incoming_layer_bitrate_allocation,
+                   true,
+                   "Plot the target bitrate for each incoming layer. Computed "
+                   "based on target bitrate signaling in incoming RTCP XR, so "
+                   "only populated if those are sent.");
+WEBRTC_DEFINE_bool(plot_outgoing_layer_bitrate_allocation,
+                   true,
+                   "Plot the target bitrate for each outgoing layer. Computed "
+                   "based on target bitrate signaling in outgoing RTCP XR, so "
+                   "only populated if those are sent.");
 WEBRTC_DEFINE_bool(
     plot_simulated_receiveside_bwe,
     false,
@@ -343,6 +353,14 @@ int main(int argc, char* argv[]) {
     analyzer.CreateStreamBitrateGraph(webrtc::kOutgoingPacket,
                                       collection->AppendNewPlot());
   }
+  if (FLAG_plot_incoming_layer_bitrate_allocation) {
+    analyzer.CreateBitrateAllocationGraph(webrtc::kIncomingPacket,
+                                          collection->AppendNewPlot());
+  }
+  if (FLAG_plot_outgoing_layer_bitrate_allocation) {
+    analyzer.CreateBitrateAllocationGraph(webrtc::kOutgoingPacket,
+                                          collection->AppendNewPlot());
+  }
   if (FLAG_plot_simulated_receiveside_bwe) {
     analyzer.CreateReceiveSideBweSimulationGraph(collection->AppendNewPlot());
   }
@@ -522,6 +540,8 @@ void SetAllPlotFlags(bool setting) {
   FLAG_plot_outgoing_bitrate = setting;
   FLAG_plot_incoming_stream_bitrate = setting;
   FLAG_plot_outgoing_stream_bitrate = setting;
+  FLAG_plot_incoming_layer_bitrate_allocation = setting;
+  FLAG_plot_outgoing_layer_bitrate_allocation = setting;
   FLAG_plot_simulated_receiveside_bwe = setting;
   FLAG_plot_simulated_sendside_bwe = setting;
   FLAG_plot_network_delay_feedback = setting;
