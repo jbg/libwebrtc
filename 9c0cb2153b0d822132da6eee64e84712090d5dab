@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9c64341b_243e48ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-15T09:17:54Z",
+      "side": 1,
+      "message": "Strange, I changed this online but it was overwritten when I uploaded a new patch.",
+      "parentUuid": "4870de9b_8de93a3f",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "9c0cb2153b0d822132da6eee64e84712090d5dab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "653133fc_f74d1b0b",
         "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
         "patchSetId": 5
@@ -68,6 +92,30 @@
       "revId": "9c0cb2153b0d822132da6eee64e84712090d5dab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed73a595_e6c08726",
+        "filename": "modules/video_coding/rtp_frame_reference_finder_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-15T09:17:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70ecd675_acfee025",
+      "range": {
+        "startLine": 362,
+        "startChar": 14,
+        "endLine": 362,
+        "endChar": 21
+      },
+      "revId": "9c0cb2153b0d822132da6eee64e84712090d5dab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
