@@ -81,6 +81,14 @@ class TestRtpFrameReferenceFinder : public ::testing::Test,
   void InsertGeneric(uint16_t seq_num_start,
                      uint16_t seq_num_end,
                      bool keyframe) {
+    InsertGeneric(seq_num_start, seq_num_end, /*picture_id=*/seq_num_end,
+                  keyframe);
+  }
+
+  void InsertGeneric(uint16_t seq_num_start,
+                     uint16_t seq_num_end,
+                     int64_t picture_id,
+                     bool keyframe) {
     VCMPacket packet;
     packet.codec = kVideoCodecGeneric;
     packet.seqNum = seq_num_start;
@@ -93,6 +101,7 @@ class TestRtpFrameReferenceFinder : public ::testing::Test,
 
     std::unique_ptr<RtpFrameObject> frame(new RtpFrameObject(
         ref_packet_buffer_, seq_num_start, seq_num_end, 0, 0, 0, 0));
+    frame->id.picture_id = picture_id;
     reference_finder_->ManageFrame(std::move(frame));
   }
 
@@ -325,20 +334,34 @@ TEST_F(TestRtpFrameReferenceFinder, AdvanceSavedKeyframe) {
 
 TEST_F(TestRtpFrameReferenceFinder, ClearTo) {
   uint16_t sn = Rand();
+  int64_t picture_id = Rand();
 
-  InsertGeneric(sn, sn + 1, true);
-  InsertGeneric(sn + 4, sn + 5, false);  // stashed
+  InsertGeneric(sn, sn + 1, picture_id, true);
+  InsertGeneric(sn + 4, sn + 5, picture_id + 2, false);  // stashed
   EXPECT_EQ(1UL, frames_from_callback_.size());
 
-  InsertGeneric(sn + 6, sn + 7, true);  // keyframe
+  InsertGeneric(sn + 6, sn + 7, picture_id + 3, true);  // keyframe
   EXPECT_EQ(2UL, frames_from_callback_.size());
-  reference_finder_->ClearTo(sn + 7);
+  reference_finder_->ClearTo(picture_id + 3);
 
-  InsertGeneric(sn + 8, sn + 9, false);  // first frame after keyframe.
+  InsertGeneric(sn + 8, sn + 9, picture_id + 4,
+                false);  // first frame after keyframe.
   EXPECT_EQ(3UL, frames_from_callback_.size());
 
-  InsertGeneric(sn + 2, sn + 3, false);  // late, cleared past this frame.
+  InsertGeneric(sn + 2, sn + 3, picture_id + 1,
+                false);  // late, cleared past this frame.
   EXPECT_EQ(3UL, frames_from_callback_.size());
+}
+
+TEST_F(TestRtpFrameReferenceFinder, ClearToWithSeqNumWrapAround) {
+  uint16_t sn = Rand();
+  int64_t picture_id = Rand();
+
+  InsertGeneric(sn, sn + 1, picture_id, true);
+  reference_finder_->ClearTo(picture_id);
+  // Simulate a lot of missing packets so that sequence number wraps around.
+  InsertGeneric(sn + 60000, sn + 60001, picture_id + 30000, true);
+  EXPECT_EQ(2UL, frames_from_callback_.size());
 }
 
 TEST_F(TestRtpFrameReferenceFinder, Vp8NoPictureId) {

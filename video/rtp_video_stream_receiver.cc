@@ -655,7 +655,7 @@ void RtpVideoStreamReceiver::FrameDecoded(int64_t picture_id) {
   }
   if (seq_num != -1) {
     packet_buffer_->ClearTo(seq_num);
-    reference_finder_->ClearTo(seq_num);
+    reference_finder_->ClearTo(picture_id);
   }
 }
 
