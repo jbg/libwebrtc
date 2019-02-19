@@ -282,6 +282,30 @@
       "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c571f3f_6d852b25",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-19T10:30:31Z",
+      "side": 1,
+      "message": "I\u0027m assuming that they are publicly exposed because they are used somewhere. If not, they should also be moved. We should not expose thing publicly unless it\u0027s required unless we specifically want to provide it to other code as it would encourage using the constant, locking in design choices.",
+      "parentUuid": "c0a71dd7_94288965",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
