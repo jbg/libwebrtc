@@ -102,8 +102,8 @@ class PacedSender : public Pacer {
   void SetPacingRates(uint32_t pacing_rate_bps,
                       uint32_t padding_rate_bps) override;
 
-  // Returns true if we send the packet now, else it will add the packet
-  // information to the queue and call TimeToSendPacket when it's time to send.
+  // Adds the packet information to the queue and call TimeToSendPacket when
+  // it's time to send.
   void InsertPacket(RtpPacketSender::Priority priority,
                     uint32_t ssrc,
                     uint16_t sequence_number,

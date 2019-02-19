@@ -81,6 +81,9 @@ struct PacedPacketInfo {
   int probe_cluster_id = kNotAProbe;
   int probe_cluster_min_probes = -1;
   int probe_cluster_min_bytes = -1;
+
+  // Packet size. Including transport overhead if known.
+  int total_packet_size = -1;
 };
 
 struct SentPacket {

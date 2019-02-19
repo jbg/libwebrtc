@@ -275,10 +275,17 @@ class TransportFeedbackObserver {
   virtual ~TransportFeedbackObserver() {}
 
   // Note: Transport-wide sequence number as sequence number.
+  // DEPRECATED;
   virtual void AddPacket(uint32_t ssrc,
                          uint16_t sequence_number,
                          size_t length,
                          const PacedPacketInfo& pacing_info) = 0;
+
+  // TODO(perkj) : Remove default implementation once the above implementation
+  // is no longer used.
+  virtual void AddPacket(uint32_t ssrc,
+                         uint16_t sequence_number,
+                         const PacedPacketInfo& pacing_info);
 
   virtual void OnTransportFeedback(const rtcp::TransportFeedback& feedback) = 0;
 };

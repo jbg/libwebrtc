@@ -355,7 +355,7 @@ void PacedSender::Process() {
     const auto* packet = GetPendingPacket(pacing_info);
     if (packet == nullptr)
       break;
-
+    pacing_info.total_packet_size = packet->bytes;
     critsect_.Leave();
     bool success = packet_sender_->TimeToSendPacket(
         packet->ssrc, packet->sequence_number, packet->capture_time_ms,

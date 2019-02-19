@@ -44,6 +44,8 @@ class RtpPacketHistory {
     absl::optional<int64_t> send_time_ms;
     int64_t capture_time_ms = 0;
     uint32_t ssrc = 0;
+    // Despite the name payload_size is the RTP packet size including headers.
+    // TODO(perkj), rename.
     size_t payload_size = 0;
     // Number of times RE-transmitted, ie not including the first transmission.
     size_t times_retransmitted = 0;
