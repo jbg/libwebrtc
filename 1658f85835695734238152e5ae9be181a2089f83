@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "241eb0aa_8c235461",
+        "filename": "pc/rtp_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-19T22:08:14Z",
+      "side": 1,
+      "message": "Please keep the RtpSenderInternal an interface so that the MockRtpSenderInternal does not inherit the concrete implementation.",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "1658f85835695734238152e5ae9be181a2089f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da763fe5_d2893c71",
         "filename": "pc/rtp_sender.h",
         "patchSetId": 2
