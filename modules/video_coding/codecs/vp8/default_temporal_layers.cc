@@ -23,6 +23,7 @@
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/system/fallthrough.h"
 #include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
@@ -240,7 +241,10 @@ DefaultTemporalLayers::DefaultTemporalLayers(int number_of_temporal_layers)
       temporal_ids_(GetTemporalIds(num_layers_)),
       temporal_pattern_(GetTemporalPattern(num_layers_)),
       kf_buffers_(FindKfBuffers(temporal_pattern_)),
-      pattern_idx_(kUninitializedPatternIndex) {
+      pattern_idx_(kUninitializedPatternIndex),
+      checker_(TemporalLayersChecker::CreateTemporalLayersChecker(
+          Vp8TemporalLayersType::kFixedPattern,
+          number_of_temporal_layers)) {
   RTC_CHECK_GE(kMaxTemporalStreams, number_of_temporal_layers);
   RTC_CHECK_GE(number_of_temporal_layers, 0);
   RTC_CHECK_LE(number_of_temporal_layers, 4);
@@ -446,7 +450,7 @@ void DefaultTemporalLayers::OnEncodeDone(uint32_t rtp_timestamp,
                                          size_t size_bytes,
                                          bool is_keyframe,
                                          int qp,
-                                         CodecSpecificInfoVP8* vp8_info) {
+                                         CodecSpecificInfo* info) {
   RTC_DCHECK_GT(num_layers_, 0);
 
   auto pending_frame = pending_frames_.find(rtp_timestamp);
@@ -466,14 +470,15 @@ void DefaultTemporalLayers::OnEncodeDone(uint32_t rtp_timestamp,
 #endif
 
   if (num_layers_ == 1) {
-    vp8_info->temporalIdx = kNoTemporalIdx;
-    vp8_info->layerSync = false;
+    info->codecSpecific.VP8.temporalIdx = kNoTemporalIdx;
+    info->codecSpecific.VP8.layerSync = false;
   } else {
     if (is_keyframe) {
       // Restart the temporal pattern on keyframes.
       pattern_idx_ = 0;
-      vp8_info->temporalIdx = 0;
-      vp8_info->layerSync = true;  // Keyframes are always sync frames.
+      info->codecSpecific.VP8.temporalIdx = 0;
+      info->codecSpecific.VP8.layerSync =
+          true;  // Keyframes are always sync frames.
 
       for (Vp8BufferReference buffer : kAllBuffers) {
         if (kf_buffers_.find(buffer) != kf_buffers_.end()) {
@@ -488,26 +493,48 @@ void DefaultTemporalLayers::OnEncodeDone(uint32_t rtp_timestamp,
       }
     } else {
       // Delta frame, update codec specifics with temporal id and sync flag.
-      vp8_info->temporalIdx = frame.frame_config.packetizer_temporal_idx;
-      vp8_info->layerSync = frame.frame_config.layer_sync;
+      info->codecSpecific.VP8.temporalIdx =
+          frame.frame_config.packetizer_temporal_idx;
+      info->codecSpecific.VP8.layerSync = frame.frame_config.layer_sync;
     }
   }
 
-  vp8_info->useExplicitDependencies = true;
-  RTC_DCHECK_EQ(vp8_info->referencedBuffersCount, 0u);
-  RTC_DCHECK_EQ(vp8_info->updatedBuffersCount, 0u);
+  info->codecSpecific.VP8.useExplicitDependencies = true;
+  RTC_DCHECK_EQ(info->codecSpecific.VP8.referencedBuffersCount, 0u);
+  RTC_DCHECK_EQ(info->codecSpecific.VP8.updatedBuffersCount, 0u);
 
   for (int i = 0; i < static_cast<int>(Buffer::kCount); ++i) {
     if (!is_keyframe && frame.frame_config.References(static_cast<Buffer>(i))) {
-      RTC_DCHECK_LT(vp8_info->referencedBuffersCount,
+      RTC_DCHECK_LT(info->codecSpecific.VP8.referencedBuffersCount,
                     arraysize(CodecSpecificInfoVP8::referencedBuffers));
-      vp8_info->referencedBuffers[vp8_info->referencedBuffersCount++] = i;
+      info->codecSpecific.VP8
+          .referencedBuffers[info->codecSpecific.VP8.referencedBuffersCount++] =
+          i;
     }
 
     if (is_keyframe || frame.frame_config.Updates(static_cast<Buffer>(i))) {
-      RTC_DCHECK_LT(vp8_info->updatedBuffersCount,
+      RTC_DCHECK_LT(info->codecSpecific.VP8.updatedBuffersCount,
                     arraysize(CodecSpecificInfoVP8::updatedBuffers));
-      vp8_info->updatedBuffers[vp8_info->updatedBuffersCount++] = i;
+      info->codecSpecific.VP8
+          .updatedBuffers[info->codecSpecific.VP8.updatedBuffersCount++] = i;
+    }
+  }
+
+  if (is_keyframe) {
+    auto& structure = info->template_structure.emplace();
+    structure.num_operating_points = num_layers_;
+
+    std::vector<GenericFrameInfo> generic_frame_infos =
+        GetFrameInfos(num_layers_);
+    for (const auto& gfi : generic_frame_infos) {
+      structure.templates.emplace_back();
+      structure.templates.back().generic_frame_info = gfi;
+      structure.templates.back().repeatable = true;
+    }
+
+    // Keyframes are not repeated.
+    if (!structure.templates.empty()) {
+      structure.templates[0].repeatable = false;
     }
   }
 
@@ -518,6 +545,77 @@ void DefaultTemporalLayers::OnEncodeDone(uint32_t rtp_timestamp,
       }
     }
   }
+}
+
+std::vector<GenericFrameInfo> DefaultTemporalLayers::GetFrameInfos(
+    int num_layers) const {
+  using Indication = GenericFrameInfo::OperatingPointIndication;
+  std::vector<GenericFrameInfo> res;
+
+  // Keyframes.
+  GenericFrameInfo frame_info;
+  frame_info.operating_points.resize(3, Indication::kSwitch);
+  res.push_back(frame_info);
+
+  RTC_CHECK_LT(num_layers, 5);
+  RTC_CHECK_GT(num_layers, 0);
+  switch (num_layers) {
+    case 4: {
+      // Four temporal layers are not used.
+      return {};
+    }
+    case 3: {
+      frame_info.temporal_id = 2;
+      frame_info.frame_diffs.push_back(1);
+      frame_info.operating_points[0] = Indication::kNotPresent;
+      frame_info.operating_points[1] = Indication::kNotPresent;
+      frame_info.operating_points[2] = Indication::kDiscardable;
+      res.push_back(frame_info);
+
+      RTC_FALLTHROUGH();
+    }
+    case 2: {
+      frame_info.temporal_id = 1;
+      frame_info.frame_diffs.clear();
+      frame_info.frame_diffs.push_back(1 << (num_layers - 2));
+      frame_info.operating_points[0] = Indication::kNotPresent;
+      frame_info.operating_points[1] = Indication::kSwitch;
+      frame_info.operating_points[2] = Indication::kRequired;
+      res.push_back(frame_info);
+
+      frame_info.frame_diffs.push_back(1 << (num_layers - 1));
+      frame_info.operating_points[1] = Indication::kDiscardable;
+      res.push_back(frame_info);
+
+      RTC_FALLTHROUGH();
+    }
+    case 1: {
+      frame_info.temporal_id = 0;
+      frame_info.frame_diffs.clear();
+      frame_info.frame_diffs.push_back(1 << (num_layers - 1));
+      frame_info.operating_points[0] = Indication::kSwitch;
+      frame_info.operating_points[1] = Indication::kRequired;
+      frame_info.operating_points[2] = Indication::kRequired;
+      res.push_back(frame_info);
+
+      break;
+    }
+    default:
+      RTC_NOTREACHED();
+  }
+
+  // When creating the templates we always populate the operating point
+  // indications for all layers, and then remove the higher layers here. This is
+  // easier than having to check the number of temporal layers for every
+  // template.
+  for (auto& gfi : res) {
+    gfi.operating_points.resize(num_layers);
+
+    for (auto& diff : gfi.frame_diffs)
+      diff *= num_layers;
+  }
+
+  return res;
 }
 
 // Returns list of temporal dependencies for each frame in the temporal pattern.

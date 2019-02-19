@@ -16,6 +16,7 @@
 #include "api/video_codecs/vp8_frame_config.h"
 #include "api/video_codecs/vp8_temporal_layers.h"
 #include "modules/video_coding/codecs/vp8/include/temporal_layers_checker.h"
+#include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/utility/frame_dropper.h"
 #include "rtc_base/rate_statistics.h"
 #include "rtc_base/time_utils.h"
@@ -53,7 +54,9 @@ class ScreenshareLayers : public Vp8TemporalLayers {
                     size_t size_bytes,
                     bool is_keyframe,
                     int qp,
-                    CodecSpecificInfoVP8* vp8_info) override;
+                    CodecSpecificInfo* info) override;
+
+  std::vector<GenericFrameInfo> GetFrameInfos(int num_layers) const;
 
  private:
   enum class TemporalLayerState : int { kDrop, kTl0, kTl1, kTl1Sync };
@@ -65,6 +68,7 @@ class ScreenshareLayers : public Vp8TemporalLayers {
 
   int number_of_temporal_layers_;
   int active_layer_;
+  int frames_since_last_tl0_frame_;
   int64_t last_timestamp_;
   int64_t last_sync_timestamp_;
   int64_t last_emitted_tl0_timestamp_;

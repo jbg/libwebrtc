@@ -44,7 +44,7 @@ namespace webrtc {
 // the bitrate produced.
 enum class Vp8TemporalLayersType { kFixedPattern, kBitrateDynamic };
 
-struct CodecSpecificInfoVP8;
+struct CodecSpecificInfo;
 
 struct Vp8EncoderConfig {
   static constexpr size_t kMaxPeriodicity = 16;
@@ -126,7 +126,7 @@ class Vp8TemporalLayers {
                             size_t size_bytes,
                             bool is_keyframe,
                             int qp,
-                            CodecSpecificInfoVP8* vp8_info) = 0;
+                            CodecSpecificInfo* info) = 0;
 };
 
 }  // namespace webrtc
