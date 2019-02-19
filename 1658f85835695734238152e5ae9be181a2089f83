@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a486d2e8_d231315f",
+        "filename": "pc/rtp_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-02-19T23:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "241eb0aa_8c235461",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "1658f85835695734238152e5ae9be181a2089f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da763fe5_d2893c71",
         "filename": "pc/rtp_sender.h",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a5084dd9_a4e6f598",
+        "filename": "pc/rtp_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-02-19T23:23:56Z",
+      "side": 1,
+      "message": "so that it can call RegisterObserver(this) and unregister etc.\ni removed the declaration (making the method pure-virtual).",
+      "parentUuid": "da763fe5_d2893c71",
+      "range": {
+        "startLine": 102,
+        "startChar": 2,
+        "endLine": 102,
+        "endChar": 28
+      },
+      "revId": "1658f85835695734238152e5ae9be181a2089f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb098aa9_84027dfa",
         "filename": "pc/rtp_sender.h",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "1658f85835695734238152e5ae9be181a2089f83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "213bc2b0_70571f8c",
+        "filename": "pc/rtp_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-02-19T23:23:56Z",
+      "side": 1,
+      "message": "yeah, so this is where you would declare all the hooks, so it\u0027s more of a category/organizational comment along the lines of: // Some interface implementation.\nI\u0027ll remove the detached, it\u0027s not very important in this context.",
+      "parentUuid": "cb098aa9_84027dfa",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 71
+      },
+      "revId": "1658f85835695734238152e5ae9be181a2089f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
