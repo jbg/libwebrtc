@@ -181,7 +181,7 @@ class RtpSenderReceiverTest : public testing::Test,
     audio_track_ = AudioTrack::Create(kAudioTrackId, source);
     EXPECT_TRUE(local_stream_->AddTrack(audio_track_));
     audio_rtp_sender_ =
-        new AudioRtpSender(worker_thread_, audio_track_->id(), nullptr);
+        AudioRtpSender::Create(worker_thread_, audio_track_->id(), nullptr);
     ASSERT_TRUE(audio_rtp_sender_->SetTrack(audio_track_));
     audio_rtp_sender_->set_stream_ids({local_stream_->id()});
     audio_rtp_sender_->SetMediaChannel(voice_media_channel_);
@@ -192,7 +192,8 @@ class RtpSenderReceiverTest : public testing::Test,
   }
 
   void CreateAudioRtpSenderWithNoTrack() {
-    audio_rtp_sender_ = new AudioRtpSender(worker_thread_, /*id=*/"", nullptr);
+    audio_rtp_sender_ =
+        AudioRtpSender::Create(worker_thread_, /*id=*/"", nullptr);
     audio_rtp_sender_->SetMediaChannel(voice_media_channel_);
   }
 
@@ -240,7 +241,8 @@ class RtpSenderReceiverTest : public testing::Test,
 
   void CreateVideoRtpSender(bool is_screencast, uint32_t ssrc = kVideoSsrc) {
     AddVideoTrack(is_screencast);
-    video_rtp_sender_ = new VideoRtpSender(worker_thread_, video_track_->id());
+    video_rtp_sender_ =
+        VideoRtpSender::Create(worker_thread_, video_track_->id());
     ASSERT_TRUE(video_rtp_sender_->SetTrack(video_track_));
     video_rtp_sender_->set_stream_ids({local_stream_->id()});
     video_rtp_sender_->SetMediaChannel(video_media_channel_);
@@ -248,7 +250,7 @@ class RtpSenderReceiverTest : public testing::Test,
     VerifyVideoChannelInput(ssrc);
   }
   void CreateVideoRtpSenderWithNoTrack() {
-    video_rtp_sender_ = new VideoRtpSender(worker_thread_, /*id=*/"");
+    video_rtp_sender_ = VideoRtpSender::Create(worker_thread_, /*id=*/"");
     video_rtp_sender_->SetMediaChannel(video_media_channel_);
   }
 
@@ -419,15 +421,15 @@ class RtpSenderReceiverTest : public testing::Test,
   void RunDisableSimulcastLayersWithoutMediaEngineTest(
       const std::vector<std::string>& all_layers,
       const std::vector<std::string>& disabled_layers) {
-    VideoRtpSender sender(rtc::Thread::Current(), "1");
+    auto sender = VideoRtpSender::Create(rtc::Thread::Current(), "1");
     RtpParameters parameters;
     parameters.encodings.resize(all_layers.size());
     for (size_t i = 0; i < all_layers.size(); ++i) {
       parameters.encodings[i].rid = all_layers[i];
     }
-    sender.set_init_send_encodings(parameters.encodings);
-    RunDisableEncodingLayersTest(all_layers, disabled_layers, &sender);
-    RunSetLastLayerAsInactiveTest(&sender);
+    sender->set_init_send_encodings(parameters.encodings);
+    RunDisableEncodingLayersTest(all_layers, disabled_layers, sender.get());
+    RunSetLastLayerAsInactiveTest(sender.get());
   }
 
   // Runs a test for disabling the encoding layers on a sender with a media
@@ -785,7 +787,8 @@ TEST_F(RtpSenderReceiverTest, AudioSenderCanSetParameters) {
 }
 
 TEST_F(RtpSenderReceiverTest, AudioSenderCanSetParametersBeforeNegotiation) {
-  audio_rtp_sender_ = new AudioRtpSender(worker_thread_, /*id=*/"", nullptr);
+  audio_rtp_sender_ =
+      AudioRtpSender::Create(worker_thread_, /*id=*/"", nullptr);
 
   RtpParameters params = audio_rtp_sender_->GetParameters();
   ASSERT_EQ(1u, params.encodings.size());
@@ -804,7 +807,7 @@ TEST_F(RtpSenderReceiverTest, AudioSenderInitParametersMovedAfterNegotiation) {
   EXPECT_TRUE(local_stream_->AddTrack(audio_track_));
 
   audio_rtp_sender_ =
-      new AudioRtpSender(worker_thread_, audio_track_->id(), nullptr);
+      AudioRtpSender::Create(worker_thread_, audio_track_->id(), nullptr);
   ASSERT_TRUE(audio_rtp_sender_->SetTrack(audio_track_));
   audio_rtp_sender_->set_stream_ids({local_stream_->id()});
 
@@ -833,7 +836,8 @@ TEST_F(RtpSenderReceiverTest, AudioSenderInitParametersMovedAfterNegotiation) {
 
 TEST_F(RtpSenderReceiverTest,
        AudioSenderMustCallGetParametersBeforeSetParametersBeforeNegotiation) {
-  audio_rtp_sender_ = new AudioRtpSender(worker_thread_, /*id=*/"", nullptr);
+  audio_rtp_sender_ =
+      AudioRtpSender::Create(worker_thread_, /*id=*/"", nullptr);
 
   RtpParameters params;
   RTCError result = audio_rtp_sender_->SetParameters(params);
@@ -1012,7 +1016,7 @@ TEST_F(RtpSenderReceiverTest, VideoSenderCanSetParameters) {
 }
 
 TEST_F(RtpSenderReceiverTest, VideoSenderCanSetParametersBeforeNegotiation) {
-  video_rtp_sender_ = new VideoRtpSender(worker_thread_, /*id=*/"");
+  video_rtp_sender_ = VideoRtpSender::Create(worker_thread_, /*id=*/"");
 
   RtpParameters params = video_rtp_sender_->GetParameters();
   ASSERT_EQ(1u, params.encodings.size());
@@ -1029,7 +1033,8 @@ TEST_F(RtpSenderReceiverTest, VideoSenderCanSetParametersBeforeNegotiation) {
 TEST_F(RtpSenderReceiverTest, VideoSenderInitParametersMovedAfterNegotiation) {
   AddVideoTrack(false);
 
-  video_rtp_sender_ = new VideoRtpSender(worker_thread_, video_track_->id());
+  video_rtp_sender_ =
+      VideoRtpSender::Create(worker_thread_, video_track_->id());
   ASSERT_TRUE(video_rtp_sender_->SetTrack(video_track_));
   video_rtp_sender_->set_stream_ids({local_stream_->id()});
 
@@ -1066,7 +1071,8 @@ TEST_F(RtpSenderReceiverTest,
        VideoSenderInitParametersMovedAfterManualSimulcastAndNegotiation) {
   AddVideoTrack(false);
 
-  video_rtp_sender_ = new VideoRtpSender(worker_thread_, video_track_->id());
+  video_rtp_sender_ =
+      VideoRtpSender::Create(worker_thread_, video_track_->id());
   ASSERT_TRUE(video_rtp_sender_->SetTrack(video_track_));
   video_rtp_sender_->set_stream_ids({local_stream_->id()});
 
@@ -1099,7 +1105,7 @@ TEST_F(RtpSenderReceiverTest,
 
 TEST_F(RtpSenderReceiverTest,
        VideoSenderMustCallGetParametersBeforeSetParametersBeforeNegotiation) {
-  video_rtp_sender_ = new VideoRtpSender(worker_thread_, /*id=*/"");
+  video_rtp_sender_ = VideoRtpSender::Create(worker_thread_, /*id=*/"");
 
   RtpParameters params;
   RTCError result = video_rtp_sender_->SetParameters(params);
@@ -1491,7 +1497,8 @@ TEST_F(RtpSenderReceiverTest,
   // Setting detailed overrides the default non-screencast mode. This should be
   // applied even if the track is set on construction.
   video_track_->set_content_hint(VideoTrackInterface::ContentHint::kDetailed);
-  video_rtp_sender_ = new VideoRtpSender(worker_thread_, video_track_->id());
+  video_rtp_sender_ =
+      VideoRtpSender::Create(worker_thread_, video_track_->id());
   ASSERT_TRUE(video_rtp_sender_->SetTrack(video_track_));
   video_rtp_sender_->set_stream_ids({local_stream_->id()});
   video_rtp_sender_->SetMediaChannel(video_media_channel_);

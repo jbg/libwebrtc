@@ -22,6 +22,7 @@ namespace webrtc {
 // The definition of MockRtpSender is copied in to avoid multiple inheritance.
 class MockRtpSenderInternal : public RtpSenderInternal {
  public:
+  MockRtpSenderInternal() : RtpSenderInternal(rtc::Thread::Current(), "") {}
   // RtpSenderInterface methods.
   MOCK_METHOD1(SetTrack, bool(MediaStreamTrackInterface*));
   MOCK_CONST_METHOD0(track, rtc::scoped_refptr<MediaStreamTrackInterface>());
@@ -51,6 +52,8 @@ class MockRtpSenderInternal : public RtpSenderInternal {
   MOCK_CONST_METHOD0(AttachmentId, int());
   MOCK_METHOD1(DisableEncodingLayers,
                RTCError(const std::vector<std::string>&));
+  MOCK_METHOD0(SetSend, void());
+  MOCK_METHOD0(ClearSend, void());
 };
 
 }  // namespace webrtc
