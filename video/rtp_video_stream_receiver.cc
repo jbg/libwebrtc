@@ -170,8 +170,8 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
   // Only construct the encrypted receiver if frame encryption is enabled.
   if (frame_decryptor != nullptr ||
       config_.crypto_options.sframe.require_frame_encryption) {
-    buffered_frame_decryptor_ =
-        absl::make_unique<BufferedFrameDecryptor>(this, frame_decryptor);
+    buffered_frame_decryptor_ = absl::make_unique<BufferedFrameDecryptor>(
+        this, frame_decryptor, keyframe_request_sender_);
   }
 }
 

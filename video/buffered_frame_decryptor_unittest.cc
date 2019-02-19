@@ -27,6 +27,11 @@ using ::testing::Return;
 namespace webrtc {
 namespace {
 
+class MockKeyFrameRequestSender : public KeyFrameRequestSender {
+ public:
+  MOCK_METHOD0(RequestKeyFrame, void());
+};
+
 class FakePacketBuffer : public video_coding::PacketBuffer {
  public:
   FakePacketBuffer() : PacketBuffer(nullptr, 0, 0, nullptr) {}
@@ -101,7 +106,7 @@ class BufferedFrameDecryptorTest
     seq_num_ = 0;
     mock_frame_decryptor_ = new rtc::RefCountedObject<MockFrameDecryptor>();
     buffered_frame_decryptor_ = absl::make_unique<BufferedFrameDecryptor>(
-        this, mock_frame_decryptor_.get());
+        this, mock_frame_decryptor_.get(), &mock_key_frame_request_sender_);
   }
 
   static const size_t kMaxStashedFrames;
@@ -110,6 +115,7 @@ class BufferedFrameDecryptorTest
   rtc::scoped_refptr<FakePacketBuffer> fake_packet_buffer_;
   rtc::scoped_refptr<MockFrameDecryptor> mock_frame_decryptor_;
   std::unique_ptr<BufferedFrameDecryptor> buffered_frame_decryptor_;
+  MockKeyFrameRequestSender mock_key_frame_request_sender_;
   size_t decrypted_frame_call_count_;
   uint16_t seq_num_;
 };
@@ -118,6 +124,7 @@ const size_t BufferedFrameDecryptorTest::kMaxStashedFrames = 24;
 
 // Callback should always be triggered on a successful decryption.
 TEST_F(BufferedFrameDecryptorTest, CallbackCalledOnSuccessfulDecryption) {
+  EXPECT_CALL(mock_key_frame_request_sender_, RequestKeyFrame).Times(0);
   EXPECT_CALL(*mock_frame_decryptor_, Decrypt).Times(1).WillOnce(Return(0));
   EXPECT_CALL(*mock_frame_decryptor_, GetMaxPlaintextByteSize)
       .Times(1)
@@ -128,6 +135,7 @@ TEST_F(BufferedFrameDecryptorTest, CallbackCalledOnSuccessfulDecryption) {
 
 // An initial fail to decrypt should not trigger the callback.
 TEST_F(BufferedFrameDecryptorTest, CallbackNotCalledOnFailedDecryption) {
+  EXPECT_CALL(mock_key_frame_request_sender_, RequestKeyFrame).Times(0);
   EXPECT_CALL(*mock_frame_decryptor_, Decrypt).Times(1).WillOnce(Return(1));
   EXPECT_CALL(*mock_frame_decryptor_, GetMaxPlaintextByteSize)
       .Times(1)
@@ -139,6 +147,7 @@ TEST_F(BufferedFrameDecryptorTest, CallbackNotCalledOnFailedDecryption) {
 // Initial failures should be stored and retried after the first successful
 // decryption.
 TEST_F(BufferedFrameDecryptorTest, DelayedCallbackOnBufferedFrames) {
+  EXPECT_CALL(mock_key_frame_request_sender_, RequestKeyFrame).Times(0);
   EXPECT_CALL(*mock_frame_decryptor_, Decrypt)
       .Times(3)
       .WillOnce(Return(1))
@@ -159,6 +168,7 @@ TEST_F(BufferedFrameDecryptorTest, DelayedCallbackOnBufferedFrames) {
 // Subsequent failure to decrypts after the first successful decryption should
 // fail to decryptk
 TEST_F(BufferedFrameDecryptorTest, FTDDiscardedAfterFirstSuccess) {
+  EXPECT_CALL(mock_key_frame_request_sender_, RequestKeyFrame).Times(0);
   EXPECT_CALL(*mock_frame_decryptor_, Decrypt)
       .Times(4)
       .WillOnce(Return(1))
@@ -185,6 +195,7 @@ TEST_F(BufferedFrameDecryptorTest, FTDDiscardedAfterFirstSuccess) {
 // more than its maximum arrives before the first successful decryption.
 TEST_F(BufferedFrameDecryptorTest, MaximumNumberOfFramesStored) {
   const size_t failed_to_decrypt_count = kMaxStashedFrames * 2;
+  EXPECT_CALL(mock_key_frame_request_sender_, RequestKeyFrame).Times(0);
   EXPECT_CALL(*mock_frame_decryptor_, Decrypt)
       .Times(failed_to_decrypt_count)
       .WillRepeatedly(Return(1));
@@ -201,6 +212,27 @@ TEST_F(BufferedFrameDecryptorTest, MaximumNumberOfFramesStored) {
       .WillRepeatedly(Return(0));
   buffered_frame_decryptor_->ManageEncryptedFrame(CreateRtpFrameObject(true));
   EXPECT_EQ(decrypted_frame_call_count_, kMaxStashedFrames + 1);
+}
+
+// Validate that a key frame will be requested if we FTD the only key frame
+// and it then was evicted from the stash.
+TEST_F(BufferedFrameDecryptorTest, EvictedKeyFrameFTDTriggersKeyFrameRequest) {
+  const size_t failed_to_decrypt_count = kMaxStashedFrames * 3;
+  EXPECT_CALL(mock_key_frame_request_sender_, RequestKeyFrame).Times(1);
+  EXPECT_CALL(*mock_frame_decryptor_, Decrypt).WillRepeatedly(Return(1));
+  EXPECT_CALL(*mock_frame_decryptor_, GetMaxPlaintextByteSize)
+      .WillRepeatedly(Return(0));
+
+  // The key frame that will be evicted and FTD.
+  buffered_frame_decryptor_->ManageEncryptedFrame(CreateRtpFrameObject(true));
+  for (size_t i = 0; i < failed_to_decrypt_count; ++i) {
+    buffered_frame_decryptor_->ManageEncryptedFrame(
+        CreateRtpFrameObject(false));
+  }
+  EXPECT_EQ(decrypted_frame_call_count_, static_cast<size_t>(0));
+
+  EXPECT_CALL(*mock_frame_decryptor_, Decrypt).WillRepeatedly(Return(0));
+  buffered_frame_decryptor_->ManageEncryptedFrame(CreateRtpFrameObject(false));
 }
 
 }  // namespace webrtc

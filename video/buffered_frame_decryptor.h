@@ -45,7 +45,8 @@ class BufferedFrameDecryptor final {
   // Constructs a new BufferedFrameDecryptor that can hold
   explicit BufferedFrameDecryptor(
       OnDecryptedFrameCallback* decrypted_frame_callback,
-      rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor);
+      rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor,
+      KeyFrameRequestSender* keyframe_request_sender);
   ~BufferedFrameDecryptor();
   // This object cannot be copied.
   BufferedFrameDecryptor(const BufferedFrameDecryptor&) = delete;
@@ -66,13 +67,18 @@ class BufferedFrameDecryptor final {
   // Retries all the stashed frames this is triggered each time a kDecrypted
   // event occurs.
   void RetryStashedFrames();
+  // Requests a key frame if we started decrypting a stream but failed to find a
+  // key frame in the stash.
+  void RequestKeyFrameIfNeeded();
 
   static const size_t kMaxStashedFrames = 24;
 
   const bool generic_descriptor_auth_experiment_;
   bool first_frame_decrypted_ = false;
+  bool request_key_frame_ = false;
   const rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor_;
   OnDecryptedFrameCallback* const decrypted_frame_callback_;
+  KeyFrameRequestSender* keyframe_request_sender_;
   std::deque<std::unique_ptr<video_coding::RtpFrameObject>> stashed_frames_;
 };
 
