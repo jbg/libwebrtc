@@ -212,6 +212,24 @@
       "revId": "f1c343d2970b721893adc19ccca697b565539478",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c102a97e_4f22b728",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-19T09:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e8c03eb_5e158590",
+      "revId": "f1c343d2970b721893adc19ccca697b565539478",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

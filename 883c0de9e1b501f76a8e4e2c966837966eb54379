@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9f5b2111_b0f7439e",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-19T09:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91b9849f_37882145",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 34
+      },
+      "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "420d0aa0_716500d0",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
         "patchSetId": 12
@@ -45,6 +69,30 @@
       "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f744fb12_43e83774",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-19T09:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "420d0aa0_716500d0",
+      "range": {
+        "startLine": 147,
+        "startChar": 9,
+        "endLine": 148,
+        "endChar": 6
+      },
+      "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "aad7dbc3_771326db",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-19T09:25:23Z",
+      "side": 1,
+      "message": "Then I think it\u0027s better to have them as arguments. I\u0027ve done that change now.",
+      "parentUuid": "a2fb83b5_947ab096",
+      "range": {
+        "startLine": 226,
+        "startChar": 30,
+        "endLine": 226,
+        "endChar": 49
+      },
+      "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa99bab_6d75174e",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
         "patchSetId": 12
@@ -142,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "00e3e9b9_26e6e437",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-19T09:25:23Z",
+      "side": 1,
+      "message": "I renamed |feedback_sequence| to |feedback_packet_count|. \n\n|base_sequence_number| and |feedback_packet_count| are the same names that are used in the definition of the feedback protocol.",
+      "parentUuid": "1aa99bab_6d75174e",
+      "range": {
+        "startLine": 229,
+        "startChar": 12,
+        "endLine": 229,
+        "endChar": 32
+      },
+      "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e0e5d39_b76f0995",
         "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
         "patchSetId": 12
@@ -153,6 +249,30 @@
       "writtenOn": "2019-02-18T12:36:31Z",
       "side": 1,
       "message": "Move this to cc file.",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0a71dd7_94288965",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-19T09:25:23Z",
+      "side": 1,
+      "message": "Why not have it next to the other constants?",
+      "parentUuid": "6e0e5d39_b76f0995",
       "range": {
         "startLine": 56,
         "startChar": 2,
