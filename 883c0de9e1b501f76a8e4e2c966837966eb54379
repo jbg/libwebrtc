@@ -306,6 +306,30 @@
       "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "147a4440_ccdb6ddf",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-02-19T11:25:48Z",
+      "side": 1,
+      "message": "Got it! I made it private to keep it within the class.\n\nThe other variables are used in unit tests, so I\u0027ll leave them as is.",
+      "parentUuid": "5c571f3f_6d852b25",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "883c0de9e1b501f76a8e4e2c966837966eb54379",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
