@@ -129,4 +129,10 @@ void RtpPacketCounter::AddPacket(const RtpPacket& packet) {
   payload_bytes += packet.payload_size();
 }
 
+void TransportFeedbackObserver::AddPacket(uint32_t ssrc,
+                       uint16_t sequence_number,
+                       const PacedPacketInfo& pacing_info) {
+  AddPacket(ssrc, sequence_number, pacing_info.total_packet_size, pacing_info);
+}
+
 }  // namespace webrtc
