@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da763fe5_d2893c71",
+        "filename": "pc/rtp_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-02-19T22:06:22Z",
+      "side": 1,
+      "message": "Why does the RtpSenderInternal subclass the ObserverInterface when there isn\u0027t any base implementation?",
+      "range": {
+        "startLine": 102,
+        "startChar": 2,
+        "endLine": 102,
+        "endChar": 28
+      },
+      "revId": "1658f85835695734238152e5ae9be181a2089f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb098aa9_84027dfa",
+        "filename": "pc/rtp_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-02-19T22:06:22Z",
+      "side": 1,
+      "message": "This copied comment doesn\u0027t look perfectly accurate. VideoRtpSender doesn\u0027t have DetachTrack().",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 71
+      },
+      "revId": "1658f85835695734238152e5ae9be181a2089f83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
