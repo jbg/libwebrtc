@@ -20,11 +20,13 @@ namespace webrtc {
 
 BufferedFrameDecryptor::BufferedFrameDecryptor(
     OnDecryptedFrameCallback* decrypted_frame_callback,
-    rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor)
+    rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor,
+    KeyFrameRequestSender* keyframe_request_sender)
     : generic_descriptor_auth_experiment_(
           field_trial::IsEnabled("WebRTC-GenericDescriptorAuth")),
       frame_decryptor_(std::move(frame_decryptor)),
-      decrypted_frame_callback_(decrypted_frame_callback) {}
+      decrypted_frame_callback_(decrypted_frame_callback),
+      keyframe_request_sender_(keyframe_request_sender) {}
 
 BufferedFrameDecryptor::~BufferedFrameDecryptor() {}
 
@@ -40,6 +42,7 @@ void BufferedFrameDecryptor::ManageEncryptedFrame(
     case FrameDecision::kDecrypted:
       RetryStashedFrames();
       decrypted_frame_callback_->OnDecryptedFrame(std::move(encrypted_frame));
+      RequestKeyFrameIfNeeded();
       break;
     case FrameDecision::kDrop:
       break;
@@ -81,6 +84,9 @@ BufferedFrameDecryptor::FrameDecision BufferedFrameDecryptor::DecryptFrame(
   if (frame_decryptor_->Decrypt(
           cricket::MEDIA_TYPE_VIDEO, /*csrcs=*/{}, additional_data, *frame,
           inline_decrypted_bitstream, &bytes_written) != 0) {
+    if (frame->frame_type() == kVideoFrameKey) {
+      request_key_frame_ = true;
+    }
     // Only stash frames if we have never decrypted a frame before.
     return first_frame_decrypted_ ? FrameDecision::kDrop
                                   : FrameDecision::kStash;
@@ -93,6 +99,10 @@ BufferedFrameDecryptor::FrameDecision BufferedFrameDecryptor::DecryptFrame(
   if (!first_frame_decrypted_) {
     first_frame_decrypted_ = true;
   }
+  // Prevent requesting a new key if we successfully decrypted one.
+  if (request_key_frame_ && frame->frame_type() == kVideoFrameKey) {
+    request_key_frame_ = false;
+  }
 
   return FrameDecision::kDecrypted;
 }
@@ -104,6 +114,13 @@ void BufferedFrameDecryptor::RetryStashedFrames() {
     }
   }
   stashed_frames_.clear();
+}
+
+void BufferedFrameDecryptor::RequestKeyFrameIfNeeded() {
+  if (request_key_frame_) {
+    keyframe_request_sender_->RequestKeyFrame();
+    request_key_frame_ = false;
+  }
 }
 
 }  // namespace webrtc
