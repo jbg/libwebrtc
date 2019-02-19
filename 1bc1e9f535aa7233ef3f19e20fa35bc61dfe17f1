@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b92968b_3a87a4ef",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-02-19T12:37:55Z",
+      "side": 1,
+      "message": "If it\u0027s possible it\u0027d be nice if this was a for loop to make it more clear what the end point conditions are.",
+      "range": {
+        "startLine": 180,
+        "startChar": 2,
+        "endLine": 180,
+        "endChar": 14
+      },
+      "revId": "1bc1e9f535aa7233ef3f19e20fa35bc61dfe17f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
