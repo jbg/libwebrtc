@@ -22,6 +22,30 @@
       "revId": "dee7b072ea9f6b62c239d09c57c7085cbd56ceae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40992cc6_44cb098a",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-20T13:38:05Z",
+      "side": 1,
+      "message": "I mean, it is not straightforward that in order to be able to get some results you need to take analyzer pointers before moving them. I would like to have a more clear API, another possibility is shared ownership (even if I prefer the getter).",
+      "parentUuid": "5b12953c_3ad560ee",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 42
+      },
+      "revId": "dee7b072ea9f6b62c239d09c57c7085cbd56ceae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
