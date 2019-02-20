@@ -17,7 +17,9 @@
 #include <memory>
 
 #include "absl/types/optional.h"
+#include "api/transport/field_trial_based_config.h"
 #include "api/transport/network_types.h"
+#include "api/transport/webrtc_key_value_config.h"
 #include "modules/pacing/bitrate_prober.h"
 #include "modules/pacing/interval_budget.h"
 #include "modules/pacing/pacer.h"
@@ -69,9 +71,11 @@ class PacedSender : public Pacer {
   // overshoots from the encoder.
   static const float kDefaultPaceMultiplier;
 
-  PacedSender(Clock* clock,
-              PacketSender* packet_sender,
-              RtcEventLog* event_log);
+  PacedSender(
+      Clock* clock,
+      PacketSender* packet_sender,
+      RtcEventLog* event_log,
+      const WebRtcKeyValueConfig& field_trials = FieldTrialBasedConfig());
 
   ~PacedSender() override;
 
