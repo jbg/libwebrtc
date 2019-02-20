@@ -64,6 +64,8 @@ class VideoQualityAnalyzerInjectionHelper {
   // Stops VideoQualityAnalyzerInterface to populate final data and metrics.
   void Stop();
 
+  VideoQualityAnalyzerInterface* GetAnalyzer() { return analyzer_.get(); }
+
  private:
   std::unique_ptr<VideoQualityAnalyzerInterface> analyzer_;
   EncodedImageIdInjector* injector_;
