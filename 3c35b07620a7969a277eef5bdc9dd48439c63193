@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbdd42ff_3febf570",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-20T12:35:32Z",
+      "side": 1,
+      "message": "The stream can be broken for reasons the BufferedFrameDecryptor can\u0027t detect (missing frame for example), so this won\u0027t work unfortunately.\n\nAn alternative solution would be to set |wait_ms| to kMaxWaitForFrameMs based on config_.crypto_options.sframe.require_frame_encryption instead (line 498).",
+      "range": {
+        "startLine": 559,
+        "startChar": 48,
+        "endLine": 560,
+        "endChar": 63
+      },
+      "revId": "3c35b07620a7969a277eef5bdc9dd48439c63193",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
