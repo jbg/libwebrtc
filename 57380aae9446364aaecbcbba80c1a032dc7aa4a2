@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51dce1dd_44e472a3",
+        "filename": "api/task_queue/task_queue_base.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-20T13:57:32Z",
+      "side": 1,
+      "message": "Hoist the `namespace webrtc` opening and closing out of the #ifdef? It\u0027s the same in both branches.",
+      "revId": "57380aae9446364aaecbcbba80c1a032dc7aa4a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
