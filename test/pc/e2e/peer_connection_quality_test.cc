@@ -93,23 +93,20 @@ class FixturePeerConnectionObserver : public MockPeerConnectionObserver {
 }  // namespace
 
 PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
-    std::unique_ptr<Analyzers> analyzers)
+    std::unique_ptr<AudioQualityAnalyzerInterface> audio_quality_analyzer,
+    std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer)
     : clock_(Clock::GetRealTimeClock()) {
-  RTC_CHECK(analyzers);
-
   // Create default video quality analyzer. We will always create an analyzer,
   // even if there are no video streams, because it will be installed into video
   // encoder/decoder factories.
-  if (analyzers->video_quality_analyzer == nullptr) {
-    analyzers->video_quality_analyzer =
-        absl::make_unique<ExampleVideoQualityAnalyzer>();
+  if (video_quality_analyzer == nullptr) {
+    video_quality_analyzer = absl::make_unique<ExampleVideoQualityAnalyzer>();
   }
   encoded_image_id_controller_ =
       absl::make_unique<SingleProcessEncodedImageIdInjector>();
   video_quality_analyzer_injection_helper_ =
       absl::make_unique<VideoQualityAnalyzerInjectionHelper>(
-          std::move(analyzers->video_quality_analyzer),
-          encoded_image_id_controller_.get(),
+          std::move(video_quality_analyzer), encoded_image_id_controller_.get(),
           encoded_image_id_controller_.get());
 }
 
@@ -469,6 +466,11 @@ VideoFrameWriter* PeerConnectionE2EQualityTest::MaybeCreateVideoWriter(
   VideoFrameWriter* out = video_writer.get();
   video_writers_.push_back(std::move(video_writer));
   return out;
+}
+
+VideoQualityAnalyzerInterface*
+PeerConnectionE2EQualityTest::GetVideoQualityAnalyzer() {
+  return video_quality_analyzer_injection_helper_->GetAnalyzer();
 }
 
 }  // namespace test
