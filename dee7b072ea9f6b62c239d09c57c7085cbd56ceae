@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b12953c_3ad560ee",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-20T13:17:12Z",
+      "side": 1,
+      "message": "I don\u0027t like the idea to take a raw pointer to something that gets moved and use after it. WDYT about exposing the analyzers from the fixture (which owns them)?",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 42
+      },
+      "revId": "dee7b072ea9f6b62c239d09c57c7085cbd56ceae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
