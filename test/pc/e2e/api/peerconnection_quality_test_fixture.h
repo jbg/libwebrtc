@@ -166,13 +166,6 @@ class PeerConnectionE2EQualityTestFixture {
     PeerConnectionInterface::RTCConfiguration rtc_configuration;
   };
 
-  // Contains analyzers for audio and video stream. Both of them are optional
-  // and default implementations will be provided, if any will be omitted.
-  struct Analyzers {
-    std::unique_ptr<AudioQualityAnalyzerInterface> audio_quality_analyzer;
-    std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer;
-  };
-
   // Contains parameters, that describe how long framework should run quality
   // test.
   struct RunParams {
@@ -187,6 +180,9 @@ class PeerConnectionE2EQualityTestFixture {
                    std::unique_ptr<InjectableComponents> bob_components,
                    std::unique_ptr<Params> bob_params,
                    RunParams run_params) = 0;
+
+  virtual VideoQualityAnalyzerInterface* GetVideoQualityAnalyzer() = 0;
+
   virtual ~PeerConnectionE2EQualityTestFixture() = default;
 };
 
