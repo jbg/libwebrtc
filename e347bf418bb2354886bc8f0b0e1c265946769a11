@@ -1,0 +1,290 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcefd20e_44320715",
+        "filename": "api/video_codecs/vp8_temporal_layers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "update documentation",
+      "range": {
+        "startLine": 118,
+        "startChar": 26,
+        "endLine": 118,
+        "endChar": 52
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a7ebe50_78420621",
+        "filename": "api/video_codecs/vp8_temporal_layers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "are you sure this /api change doesn\u0027t break anything?",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 57
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8367e5a_b4f69608",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "may be GetFrameInfos should directly generate templates.\nright now this code double-guessing result of that function, in particular it assumes that first template is for the key frame.",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed95c3d3_579b5b12",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "avoid abbreviations (res might mean resolution)\nhttps://google.github.io/styleguide/cppguide.html#General_Naming_Rules",
+      "range": {
+        "startLine": 546,
+        "startChar": 32,
+        "endLine": 546,
+        "endChar": 35
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bfbfa16_3ccbc728",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "may be order operating points from higher quality to lower,",
+      "range": {
+        "startLine": 563,
+        "startChar": 17,
+        "endLine": 563,
+        "endChar": 33
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54e3a93f_6b78e66c",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "may be it is clearer to be more verbose here.\ninstead of using RTC_FALLTHROUGH and complicated expression for the fdiff write out all the structure explicetly in all 3 supported cases.\ncase 2:\nresult \u003d {\n  {/*temporal_id\u003d*/0, 0, {}, {}, {Indication::kSwitch, Indication::kSwitch}},\n  {/*temporal_id\u003d*/0, 0, {}, {2}, {Indication::kSwitch, Indication::kSwitch}},\n  {/*temporal_id\u003d*/1, 0, {}, {1}, {Indication::kDiscardable, Indication::kNotPresent}}\n};\n\n(Not very clear even for simple structure, but may be more streight-forward.\nAnother idea - OPIs might be more readable to parse from string,\nextra support inline functions and types might make structure description more readable.\nresult \u003d {\n  {TL(0), SL(0), kNoChains, FDiffs(), OPI(\"SS\")},\n  {TL(0), SL(0), kNoChains, FDiffs(-2), OPI(\"SS\")},\n  {TL(1), SL(0), kNoChains, FDiffs(-1), OPI(\"D-\")},\n}",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c85720c5_00cb8451",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "do we even need who T1 frames? both in T\u003d2 and T\u003d3 cases?",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8247e696_36e3b427",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "it is important to sort templatea by spatial_id, temporal_id.\nWhere that will be done? (it is probably ok to postpone that all the way to the packetizer. since it is important for latest version, but may be we come up with some scheme where order of templates doesn\u0027t matter)",
+      "range": {
+        "startLine": 611,
+        "startChar": 9,
+        "endLine": 611,
+        "endChar": 12
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c689a74b_b6f94f82",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "prefer to put nested types before any functions (i.e. before constructors)\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ed9c34f_ecc4729b",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "this field probably doesn\u0027t belong to this structure, but to packetizer class. (and it would update the offset and convert template index into template id depending how much TemplateStructure changes)",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "796f4d25_b645061d",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "you are missing num_chains field and operating_point_protected_with_chain mapping.",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0ddd80a_e5f16c7d",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "does frame_id belong to this structure or will it be somewhere else?",
+      "range": {
+        "startLine": 142,
+        "startChar": 7,
+        "endLine": 142,
+        "endChar": 24
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e8ae070_8d0c5605",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "Does it mean copy of the template_structure is included into each packet?\nor will it be non-nullopt only for key frames",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 55
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b53c47aa_ea6c05d2",
+        "filename": "modules/video_coding/video_codec_interface.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 1,
+      "message": "2019",
+      "range": {
+        "startLine": 2,
+        "startChar": 21,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "709df9a4_fef082ae",
+        "filename": "modules/video_coding/video_codec_interface.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-21T16:11:03Z",
+      "side": 0,
+      "message": "add .cc file in the same folder as matching .h file\nhttps://chromium.googlesource.com/external/webrtc/+/refs/heads/master/style-guide.md#h-cc-pairs",
+      "revId": "4a2d57ac432d24606cd685f435ff050d43ab54da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
