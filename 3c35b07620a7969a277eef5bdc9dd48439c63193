@@ -22,6 +22,30 @@
       "revId": "3c35b07620a7969a277eef5bdc9dd48439c63193",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f506079_7c7cb604",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-21T15:34:18Z",
+      "side": 1,
+      "message": "Actually, what we should do is add a decryption_required and can_decrypt criteria to this check. This check would then become:\n\n  if (stream_is_active \u0026\u0026 !receiving_keyframe \u0026\u0026 \n     (!decryption_required || can_decrypt)) {\n    ...\n  }",
+      "parentUuid": "bbdd42ff_3febf570",
+      "range": {
+        "startLine": 559,
+        "startChar": 48,
+        "endLine": 560,
+        "endChar": 63
+      },
+      "revId": "3c35b07620a7969a277eef5bdc9dd48439c63193",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
