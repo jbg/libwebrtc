@@ -416,7 +416,7 @@ webrtc::IceTransportState P2PTransportChannel::ComputeIceTransportState()
 
   if (gathering_state_ == kIceGatheringNew)
     return webrtc::IceTransportState::kNew;
-  else if (has_connection)
+  else if (writable())
     return webrtc::IceTransportState::kConnected;
   else
     return webrtc::IceTransportState::kChecking;
