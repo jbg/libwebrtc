@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dc623708_d4e16827",
+        "filename": "api/video_codecs/vp8_temporal_layers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcefd20e_44320715",
+      "range": {
+        "startLine": 118,
+        "startChar": 26,
+        "endLine": 118,
+        "endChar": 52
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a7ebe50_78420621",
         "filename": "api/video_codecs/vp8_temporal_layers.h",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2019-02-21T16:11:03Z",
       "side": 1,
       "message": "are you sure this /api change doesn\u0027t break anything?",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 57
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "130e47c5_64e0cfbf",
+        "filename": "api/video_codecs/vp8_temporal_layers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "AFAIK Vp8TemporalLayers are not used outside WebRTC yet, so it should not break anything. This class was moved to api/ so that VP8 HW encoders (implemented in chrome) wouldn\u0027t have to reimplement the prediction logic.",
+      "parentUuid": "1a7ebe50_78420621",
       "range": {
         "startLine": 129,
         "startChar": 0,
@@ -88,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "fcc764b5_8ffd0e3c",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Renamed |res| to |template_structure|.",
+      "parentUuid": "ed95c3d3_579b5b12",
+      "range": {
+        "startLine": 546,
+        "startChar": 32,
+        "endLine": 546,
+        "endChar": 35
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bfbfa16_3ccbc728",
         "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
         "patchSetId": 4
@@ -99,6 +171,30 @@
       "writtenOn": "2019-02-21T16:11:03Z",
       "side": 1,
       "message": "may be order operating points from higher quality to lower,",
+      "range": {
+        "startLine": 563,
+        "startChar": 17,
+        "endLine": 563,
+        "endChar": 33
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a873293c_3407f8a2",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bfbfa16_3ccbc728",
       "range": {
         "startLine": 563,
         "startChar": 17,
@@ -128,6 +224,24 @@
     },
     {
       "key": {
+        "uuid": "84c84bdd_e1559147",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Done, much cleaner now.",
+      "parentUuid": "54e3a93f_6b78e66c",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c85720c5_00cb8451",
         "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
         "patchSetId": 4
@@ -142,6 +256,24 @@
       "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0b82cb8_ffc574a0",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Rewrote this funciton.",
+      "parentUuid": "c85720c5_00cb8451",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -185,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "092f6220_3c648810",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c689a74b_b6f94f82",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ed9c34f_ecc4729b",
         "filename": "modules/video_coding/include/video_codec_interface.h",
         "patchSetId": 4
@@ -199,6 +349,24 @@
       "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1c858da_dc1192e6",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "4ed9c34f_ecc4729b",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -219,6 +387,24 @@
     },
     {
       "key": {
+        "uuid": "2531a22f_173fa9fd",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "I planned on adding chains in a followup CL.",
+      "parentUuid": "796f4d25_b645061d",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0ddd80a_e5f16c7d",
         "filename": "modules/video_coding/include/video_codec_interface.h",
         "patchSetId": 4
@@ -230,6 +416,30 @@
       "writtenOn": "2019-02-21T16:11:03Z",
       "side": 1,
       "message": "does frame_id belong to this structure or will it be somewhere else?",
+      "range": {
+        "startLine": 142,
+        "startChar": 7,
+        "endLine": 142,
+        "endChar": 24
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b430336a_38d724db",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Where to assign frame ids is still not clear.",
+      "parentUuid": "b0ddd80a_e5f16c7d",
       "range": {
         "startLine": 142,
         "startChar": 7,
@@ -265,6 +475,30 @@
     },
     {
       "key": {
+        "uuid": "2822c8ea_a1d2a5d0",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "The packetizer should only include the template structure on the first packet of the frame.",
+      "parentUuid": "4e8ae070_8d0c5605",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 55
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b53c47aa_ea6c05d2",
         "filename": "modules/video_coding/video_codec_interface.cc",
         "patchSetId": 4
@@ -285,6 +519,30 @@
       "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f53d908_92d68a0d",
+        "filename": "modules/video_coding/video_codec_interface.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-22T15:51:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b53c47aa_ea6c05d2",
+      "range": {
+        "startLine": 2,
+        "startChar": 21,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
