@@ -16,8 +16,10 @@
 #include "api/peer_connection_interface.h"
 #include "api/scoped_refptr.h"
 #include "api/units/time_delta.h"
+#include "logging/rtc_event_log/output/rtc_event_log_output_file.h"
 #include "rtc_base/bind.h"
 #include "rtc_base/gunit.h"
+#include "rtc_base/unique_id_generator.h"
 #include "system_wrappers/include/cpu_info.h"
 #include "test/pc/e2e/analyzer/video/example_video_quality_analyzer.h"
 #include "test/pc/e2e/api/video_quality_analyzer_interface.h"
@@ -117,10 +119,13 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
       std::move(bob_components), std::move(bob_params),
       video_quality_analyzer_injection_helper_.get(), signaling_thread_.get(),
       bob_audio_output_dump_file_name);
+
+  // Ensure that all the required input parameters are correctly set before
+  // starting the call.
+  SetMissingParameters({alice_->params(), bob_->params()});
 }
 
 void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
-  SetMissedVideoStreamLabels({alice_->params(), bob_->params()});
   ValidateParams({alice_->params(), bob_->params()});
 
   int num_cores = CpuInfo::DetectNumberOfCores();
@@ -141,22 +146,36 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
       rtc::Bind(&PeerConnectionE2EQualityTest::RunOnSignalingThread, this,
                 run_params));
   video_quality_analyzer_injection_helper_->Stop();
+
+  for (auto& s : tmp_files_) {
+    RTC_LOG(INFO) << s;
+    RemoveFile(s);
+  }
 }
 
-void PeerConnectionE2EQualityTest::SetMissedVideoStreamLabels(
+void PeerConnectionE2EQualityTest::SetMissingParameters(
     std::vector<Params*> params) {
-  int counter = 0;
+  int video_stream_counter = 0;
+  rtc::UniqueStringGenerator unique_string_gen;
   std::set<std::string> video_labels;
   for (auto* p : params) {
+    // Setting missing video stream labels.
     for (auto& video_config : p->video_configs) {
       if (!video_config.stream_label) {
         std::string label;
         do {
-          label = "_auto_video_stream_label_" + std::to_string(counter);
-          ++counter;
+          label = "_auto_video_stream_label_" +
+                  std::to_string(video_stream_counter);
+          ++video_stream_counter;
         } while (!video_labels.insert(label).second);
         video_config.stream_label = label;
       }
+    }
+    // Setting missing RTCEventLog paths.
+    if (!p->rtc_event_log_path) {
+      std::string tmp_file = OutputPath() + unique_string_gen();
+      p->rtc_event_log_path = tmp_file;
+      tmp_files_.push_back(tmp_file);
     }
   }
 }
@@ -302,6 +321,13 @@ void PeerConnectionE2EQualityTest::AddAudio(TestPeer* peer) {
 }
 
 void PeerConnectionE2EQualityTest::SetupCall(TestPeer* alice, TestPeer* bob) {
+  auto alice_rtc_event_log = absl::make_unique<webrtc::RtcEventLogOutputFile>(
+      alice->params()->rtc_event_log_path.value());
+  auto bob_rtc_event_log = absl::make_unique<webrtc::RtcEventLogOutputFile>(
+      bob->params()->rtc_event_log_path.value());
+  alice->pc()->StartRtcEventLog(std::move(alice_rtc_event_log), 1000);
+  bob->pc()->StartRtcEventLog(std::move(bob_rtc_event_log), 1000);
+
   // Connect peers.
   ASSERT_TRUE(alice->ExchangeOfferAnswerWith(bob));
   // Do the SDP negotiation, and also exchange ice candidates.
@@ -379,6 +405,8 @@ void PeerConnectionE2EQualityTest::TearDownCall() {
   for (const auto& video_writer : video_writers_) {
     video_writer->Close();
   }
+  alice_->pc()->StopRtcEventLog();
+  bob_->pc()->StopRtcEventLog();
 }
 
 VideoFrameWriter* PeerConnectionE2EQualityTest::MaybeCreateVideoWriter(

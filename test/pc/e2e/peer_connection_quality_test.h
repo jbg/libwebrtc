@@ -50,9 +50,13 @@ class PeerConnectionE2EQualityTest
   void Run(RunParams run_params) override;
 
  private:
-  // Sets video stream labels that are not specified in VideoConfigs to unique
-  // generated values.
-  void SetMissedVideoStreamLabels(std::vector<Params*> params);
+  // Sets missing parameters that are required in order to successfully
+  // configure the call. For example:
+  // - Video stream labels that are not specified in VideoConfigs will be
+  //   set to unique generated values.
+  // - If |rtc_event_log_path| is not set, a temporary location will be
+  //   used and files will be automatically removed.
+  void SetMissingParameters(std::vector<Params*> params);
   // Validate peer's parameters, also ensure uniqueness of all video stream
   // labels.
   void ValidateParams(std::vector<Params*> params);
@@ -87,6 +91,8 @@ class PeerConnectionE2EQualityTest
   std::vector<std::unique_ptr<VideoFrameWriter>> video_writers_;
   std::vector<std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>>
       output_video_sinks_;
+  // Temporary files to delete after the test has finished to run.
+  std::vector<std::string> tmp_files_;
 };
 
 }  // namespace test
