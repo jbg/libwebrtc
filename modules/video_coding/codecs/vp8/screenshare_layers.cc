@@ -266,7 +266,7 @@ void ScreenshareLayers::OnEncodeDone(uint32_t rtp_timestamp,
                                      size_t size_bytes,
                                      bool is_keyframe,
                                      int qp,
-                                     CodecSpecificInfoVP8* vp8_info) {
+                                     CodecSpecificInfo* info) {
   if (size_bytes == 0) {
     layers_[active_layer_].state = TemporalLayer::State::kDropped;
     ++stats_.num_overshoots_;
@@ -284,44 +284,47 @@ void ScreenshareLayers::OnEncodeDone(uint32_t rtp_timestamp,
     }
   }
 
+  CodecSpecificInfoVP8& vp8_info = info->codecSpecific.VP8;
   if (number_of_temporal_layers_ == 1) {
-    vp8_info->temporalIdx = kNoTemporalIdx;
-    vp8_info->layerSync = false;
+    vp8_info.temporalIdx = kNoTemporalIdx;
+    vp8_info.layerSync = false;
   } else {
     int64_t unwrapped_timestamp = time_wrap_handler_.Unwrap(rtp_timestamp);
     if (frame_config) {
-      vp8_info->temporalIdx = frame_config->packetizer_temporal_idx;
-      vp8_info->layerSync = frame_config->layer_sync;
+      vp8_info.temporalIdx = frame_config->packetizer_temporal_idx;
+      vp8_info.layerSync = frame_config->layer_sync;
     } else {
       RTC_DCHECK(is_keyframe);
     }
 
     if (is_keyframe) {
-      vp8_info->temporalIdx = 0;
+      vp8_info.temporalIdx = 0;
       last_sync_timestamp_ = unwrapped_timestamp;
-      vp8_info->layerSync = true;
+      vp8_info.layerSync = true;
       layers_[0].state = TemporalLayer::State::kKeyFrame;
       layers_[1].state = TemporalLayer::State::kKeyFrame;
       active_layer_ = 1;
+      info->template_structure.emplace(
+          GetTemplateStructure(number_of_temporal_layers_));
     }
 
-    vp8_info->useExplicitDependencies = true;
-    RTC_DCHECK_EQ(vp8_info->referencedBuffersCount, 0u);
-    RTC_DCHECK_EQ(vp8_info->updatedBuffersCount, 0u);
+    vp8_info.useExplicitDependencies = true;
+    RTC_DCHECK_EQ(vp8_info.referencedBuffersCount, 0u);
+    RTC_DCHECK_EQ(vp8_info.updatedBuffersCount, 0u);
 
     // Note that |frame_config| is not derefernced if |is_keyframe|,
     // meaning it's never dereferenced if the optional may be unset.
     for (int i = 0; i < static_cast<int>(Buffer::kCount); ++i) {
       if (!is_keyframe && frame_config->References(static_cast<Buffer>(i))) {
-        RTC_DCHECK_LT(vp8_info->referencedBuffersCount,
+        RTC_DCHECK_LT(vp8_info.referencedBuffersCount,
                       arraysize(CodecSpecificInfoVP8::referencedBuffers));
-        vp8_info->referencedBuffers[vp8_info->referencedBuffersCount++] = i;
+        vp8_info.referencedBuffers[vp8_info.referencedBuffersCount++] = i;
       }
 
       if (is_keyframe || frame_config->Updates(static_cast<Buffer>(i))) {
-        RTC_DCHECK_LT(vp8_info->updatedBuffersCount,
+        RTC_DCHECK_LT(vp8_info.updatedBuffersCount,
                       arraysize(CodecSpecificInfoVP8::updatedBuffers));
-        vp8_info->updatedBuffers[vp8_info->updatedBuffersCount++] = i;
+        vp8_info.updatedBuffers[vp8_info.updatedBuffersCount++] = i;
       }
     }
   }
@@ -351,6 +354,37 @@ void ScreenshareLayers::OnEncodeDone(uint32_t rtp_timestamp,
     stats_.tl1_target_bitrate_sum_ += layers_[1].target_rate_kbps_;
     stats_.tl1_qp_sum_ += qp;
   }
+}
+
+TemplateStructure ScreenshareLayers::GetTemplateStructure(
+    int num_layers) const {
+  using Builder = GenericFrameInfoBuilder;
+  TemplateStructure template_structure;
+
+  RTC_CHECK_LT(num_layers, 3);
+  RTC_CHECK_GT(num_layers, 0);
+  switch (num_layers) {
+    case 1: {
+      template_structure.templates = {
+          Builder().tl(0).indications("S"),
+          Builder().tl(0).indications("S").fdiffs({1}),
+      };
+      return template_structure;
+    }
+    case 2: {
+      template_structure.templates = {
+          Builder().tl(0).indications("SS"),
+          Builder().tl(0).indications("SS").fdiffs({1}),
+          Builder().tl(1).indications("-S").fdiffs({1}),
+      };
+      return template_structure;
+    }
+    default:
+      RTC_NOTREACHED();
+  }
+
+  // To make the compiler happy!
+  return template_structure;
 }
 
 bool ScreenshareLayers::TimeToSync(int64_t timestamp) const {
