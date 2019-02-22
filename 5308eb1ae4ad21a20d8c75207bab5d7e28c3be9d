@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c3b3e33_d0c8f494",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-22T12:49:20Z",
+      "side": 1,
+      "message": "I thought I had deleted VideoCodec::plType, but it looks like it\u0027s still there. Is it used, here or on the receive side?",
+      "range": {
+        "startLine": 125,
+        "startChar": 50,
+        "endLine": 125,
+        "endChar": 56
+      },
+      "revId": "5308eb1ae4ad21a20d8c75207bab5d7e28c3be9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee7e7417_0f11b076",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-22T12:49:20Z",
+      "side": 1,
+      "message": "nit: I\u0027d prefer \"\u003d nullptr\" over \".reset()\".",
+      "range": {
+        "startLine": 468,
+        "startChar": 4,
+        "endLine": 468,
+        "endChar": 29
+      },
+      "revId": "5308eb1ae4ad21a20d8c75207bab5d7e28c3be9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

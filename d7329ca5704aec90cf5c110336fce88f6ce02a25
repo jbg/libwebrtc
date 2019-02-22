@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6cdae10_9b43e462",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-02-22T12:49:20Z",
+      "side": 0,
+      "message": "Left over from previous cl? Please either take it out to a separate followup cl, or mention it in the commit message of this cl.",
+      "range": {
+        "startLine": 60,
+        "startChar": 6,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "d7329ca5704aec90cf5c110336fce88f6ce02a25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
