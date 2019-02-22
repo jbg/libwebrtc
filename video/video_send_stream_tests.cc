@@ -2334,6 +2334,9 @@ TEST_F(VideoSendStreamTest, EncoderIsProperlyInitializedAndDestroyed) {
 
     int32_t Release() override {
       rtc::CritScope lock(&crit_);
+      if (!IsReadyForEncode()) {
+        printf("@wat\n");
+      }
       EXPECT_TRUE(IsReadyForEncode());
       EXPECT_FALSE(released_);
       initialized_ = false;
