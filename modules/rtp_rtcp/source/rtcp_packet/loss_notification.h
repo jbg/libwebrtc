@@ -23,6 +23,9 @@ class LossNotification : public Psfb {
   static constexpr uint8_t kFeedbackMessageType = 15;
 
   LossNotification();
+  LossNotification(uint16_t last_decoded,
+                   uint16_t last_received,
+                   bool decodability_flag);
   LossNotification(const LossNotification& other);
   ~LossNotification() override;
 

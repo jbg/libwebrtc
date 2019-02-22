@@ -813,6 +813,13 @@ int32_t ModuleRtpRtcpImpl::RequestKeyFrame() {
   return -1;
 }
 
+void ModuleRtpRtcpImpl::SendLossNotification(uint16_t last_decoded_seq_num,
+                                             uint16_t last_received_seq_num,
+                                             bool decodability_flag) {
+  rtcp_sender_.SendLossNotification(GetFeedbackState(), last_decoded_seq_num,
+                                    last_received_seq_num, decodability_flag);
+}
+
 void ModuleRtpRtcpImpl::SetUlpfecConfig(int red_payload_type,
                                         int ulpfec_payload_type) {
   RTC_DCHECK(video_);
