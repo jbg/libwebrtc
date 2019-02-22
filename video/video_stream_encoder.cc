@@ -61,6 +61,8 @@ const float kFramedropThreshold = 0.3;
 // optimization module defaults.
 const int64_t kFrameRateAvergingWindowSizeMs = (1000 / 30) * 90;
 
+const size_t kDefaultPayloadSize = 1440;
+
 // Initial limits for BALANCED degradation preference.
 int MinFps(int pixels) {
   if (pixels <= 320 * 240) {
@@ -118,6 +120,51 @@ CpuOveruseOptions GetCpuOveruseOptions(
   return options;
 }
 
+bool RequiresEncoderReset(const VideoCodec& previous_send_codec,
+                          const VideoCodec& new_send_codec) {
+  // Does not check startBitrate, maxFramerate or plType
+  if (new_send_codec.codecType != previous_send_codec.codecType ||
+      new_send_codec.width != previous_send_codec.width ||
+      new_send_codec.height != previous_send_codec.height ||
+      new_send_codec.maxBitrate != previous_send_codec.maxBitrate ||
+      new_send_codec.minBitrate != previous_send_codec.minBitrate ||
+      new_send_codec.qpMax != previous_send_codec.qpMax ||
+      new_send_codec.numberOfSimulcastStreams !=
+          previous_send_codec.numberOfSimulcastStreams ||
+      new_send_codec.mode != previous_send_codec.mode) {
+    return true;
+  }
+
+  switch (new_send_codec.codecType) {
+    case kVideoCodecVP8:
+      if (new_send_codec.VP8() != previous_send_codec.VP8()) {
+        return true;
+      }
+      break;
+
+    case kVideoCodecVP9:
+      if (new_send_codec.VP9() != previous_send_codec.VP9()) {
+        return true;
+      }
+      break;
+
+    case kVideoCodecH264:
+      if (new_send_codec.H264() != previous_send_codec.H264()) {
+        return true;
+      }
+      break;
+
+    default:
+      break;
+  }
+
+  for (unsigned char i = 0; i < new_send_codec.numberOfSimulcastStreams; ++i) {
+    if (new_send_codec.simulcastStream[i] !=
+        previous_send_codec.simulcastStream[i])
+      return true;
+  }
+  return false;
+}
 }  //  namespace
 
 // VideoSourceProxy is responsible ensuring thread safety between calls to
@@ -394,7 +441,6 @@ VideoStreamEncoder::VideoStreamEncoder(
       pending_frame_drops_(0),
       generic_encoder_(nullptr),
       generic_encoder_callback_(this),
-      codec_database_(&generic_encoder_callback_),
       next_frame_types_(1, kVideoFrameDelta),
       encoder_queue_("EncoderQueue") {
   RTC_DCHECK(encoder_stats_observer);
@@ -416,8 +462,10 @@ void VideoStreamEncoder::Stop() {
     overuse_detector_->StopCheckForOveruse();
     rate_allocator_.reset();
     bitrate_observer_ = nullptr;
-    codec_database_.DeregisterExternalEncoder();
-    generic_encoder_ = nullptr;
+    if (encoder_) {
+      encoder_->Release();
+    }
+    generic_encoder_.reset();
     quality_scaler_ = nullptr;
     shutdown_event_.Set();
   });
@@ -599,8 +647,8 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   // encoder_->InitEncode().
   if (pending_encoder_creation_) {
     if (encoder_) {
-      codec_database_.DeregisterExternalEncoder();
-      generic_encoder_ = nullptr;
+      encoder_->Release();
+      generic_encoder_.reset();
     }
 
     encoder_ = settings_.encoder_factory->CreateVideoEncoder(
@@ -611,15 +659,42 @@ void VideoStreamEncoder::ReconfigureEncoder() {
 
     codec_info_ = settings_.encoder_factory->QueryVideoEncoder(
         encoder_config_.video_format);
-
-    codec_database_.RegisterExternalEncoder(encoder_.get(),
-                                            HasInternalSource());
   }
 
-  // SetSendCodec implies an unconditional call to encoder_->InitEncode().
-  bool success = codec_database_.SetSendCodec(&codec, number_of_cores_,
-                                              max_data_payload_length_);
-  generic_encoder_ = codec_database_.GetEncoder();
+  if (codec.maxBitrate == 0) {
+    // max is one bit per pixel
+    codec.maxBitrate =
+        (static_cast<int>(codec.height) * static_cast<int>(codec.width) *
+         static_cast<int>(codec.maxFramerate)) /
+        1000;
+    if (codec.startBitrate > codec.maxBitrate) {
+      // But if the user tries to set a higher start bit rate we will
+      // increase the max accordingly.
+      codec.maxBitrate = codec.startBitrate;
+    }
+  }
+
+  if (codec.startBitrate > codec.maxBitrate) {
+    codec.startBitrate = codec.maxBitrate;
+  }
+
+  const bool reset_required = RequiresEncoderReset(codec, send_codec_);
+  send_codec_ = codec;
+
+  bool success = true;
+  if (pending_encoder_creation_ || reset_required || !generic_encoder_) {
+    RTC_DCHECK(encoder_);
+    generic_encoder_ = absl::make_unique<VCMGenericEncoder>(
+        encoder_.get(), &generic_encoder_callback_, HasInternalSource());
+    if (generic_encoder_->InitEncode(&send_codec_, number_of_cores_,
+                                     max_data_payload_length_ > 0
+                                         ? max_data_payload_length_
+                                         : kDefaultPayloadSize) < 0) {
+      encoder_->Release();
+      generic_encoder_.reset();
+      success = false;
+    }
+  }
 
   if (success) {
     RTC_DCHECK(generic_encoder_);
@@ -1117,8 +1192,8 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
 
   encoder_info_ = info;
   RTC_DCHECK(generic_encoder_);
-  RTC_DCHECK(codec_database_.MatchesCurrentResolution(out_frame.width(),
-                                                      out_frame.height()));
+  RTC_DCHECK_EQ(send_codec_.width, out_frame.width());
+  RTC_DCHECK_EQ(send_codec_.height, out_frame.height());
   const VideoFrameBuffer::Type buffer_type =
       out_frame.video_frame_buffer()->type();
   const bool is_buffer_type_supported =
