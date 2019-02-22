@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5e212b4_ca690394",
+        "filename": "p2p/base/turn_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-02-22T21:55:31Z",
+      "side": 1,
+      "message": "why do we need to manually trigger it in the creation?",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1188,
+        "endChar": 42
+      },
+      "revId": "f9dbc710aabec75753b773e43b5ac669384f421d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
