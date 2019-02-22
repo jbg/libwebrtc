@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0622cc30_f01f1c12",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-22T13:04:12Z",
+      "side": 1,
+      "message": "I don\u0027t see any usage of it in on the sender side.\nIt\u0027s being set to 0 in the VideoCodecInitializer, and it appears in equality checks in a few\nunit tests. There\u0027s some references on the receiver-side but I don\u0027t know if they\u0027re used.\n\nI can remove mention of it here.",
+      "parentUuid": "9c3b3e33_d0c8f494",
+      "range": {
+        "startLine": 125,
+        "startChar": 50,
+        "endLine": 125,
+        "endChar": 56
+      },
+      "revId": "5308eb1ae4ad21a20d8c75207bab5d7e28c3be9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee7e7417_0f11b076",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "5308eb1ae4ad21a20d8c75207bab5d7e28c3be9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87af867f_9a8fe2a3",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-22T13:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee7e7417_0f11b076",
+      "range": {
+        "startLine": 468,
+        "startChar": 4,
+        "endLine": 468,
+        "endChar": 29
+      },
+      "revId": "5308eb1ae4ad21a20d8c75207bab5d7e28c3be9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

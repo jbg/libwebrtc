@@ -22,6 +22,30 @@
       "revId": "d7329ca5704aec90cf5c110336fce88f6ce02a25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cae831e_8bdafe6d",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-22T13:04:12Z",
+      "side": 0,
+      "message": "Yes, leftover. Updated commit message.",
+      "parentUuid": "c6cdae10_9b43e462",
+      "range": {
+        "startLine": 60,
+        "startChar": 6,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "d7329ca5704aec90cf5c110336fce88f6ce02a25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
