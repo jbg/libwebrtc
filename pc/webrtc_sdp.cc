@@ -26,6 +26,7 @@
 #include "absl/algorithm/container.h"
 #include "absl/memory/memory.h"
 #include "absl/strings/match.h"
+#include "absl/strings/str_split.h"
 #include "api/candidate.h"
 #include "api/crypto_params.h"
 #include "api/jsep_ice_candidate.h"
@@ -1051,8 +1052,8 @@ bool ParseCandidate(const std::string& message,
     }
   }
 
-  std::vector<std::string> fields;
-  rtc::split(candidate_value, kSdpDelimiterSpaceChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(candidate_value, kSdpDelimiterSpaceChar);
 
   // RFC 5245
   // a=candidate:<foundation> <component-id> <transport> <priority>
@@ -1205,10 +1206,9 @@ bool ParseIceOptions(const std::string& line,
   if (!GetValue(line, kAttributeIceOption, &ice_options, error)) {
     return false;
   }
-  std::vector<std::string> fields;
-  rtc::split(ice_options, kSdpDelimiterSpaceChar, &fields);
-  for (size_t i = 0; i < fields.size(); ++i) {
-    transport_options->push_back(fields[i]);
+  for (const absl::string_view field :
+       absl::StrSplit(ice_options, kSdpDelimiterSpaceChar)) {
+    transport_options->push_back(std::string(field));
   }
   return true;
 }
@@ -1218,12 +1218,12 @@ bool ParseSctpPort(const std::string& line,
                    SdpParseError* error) {
   // draft-ietf-mmusic-sctp-sdp-07
   // a=sctp-port
-  std::vector<std::string> fields;
   const size_t expected_min_fields = 2;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterColonChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterColonChar);
   if (fields.size() < expected_min_fields) {
-    fields.resize(0);
-    rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+    fields =
+        absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
   }
   if (fields.size() < expected_min_fields) {
     return ParseFailedExpectMinFieldNum(line, expected_min_fields, error);
@@ -1239,8 +1239,8 @@ bool ParseExtmap(const std::string& line,
                  SdpParseError* error) {
   // RFC 5285
   // a=extmap:<value>["/"<direction>] <URI> <extensionattributes>
-  std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
   const size_t expected_min_fields = 2;
   if (fields.size() < expected_min_fields) {
     return ParseFailedExpectMinFieldNum(line, expected_min_fields, error);
@@ -1251,8 +1251,8 @@ bool ParseExtmap(const std::string& line,
   if (!GetValue(fields[0], kAttributeExtmap, &value_direction, error)) {
     return false;
   }
-  std::vector<std::string> sub_fields;
-  rtc::split(value_direction, kSdpDelimiterSlashChar, &sub_fields);
+  std::vector<std::string> sub_fields =
+      absl::StrSplit(value_direction, kSdpDelimiterSlashChar);
   int value = 0;
   if (!GetValueFromString(line, sub_fields[0], &value, error)) {
     return false;
@@ -2075,8 +2075,8 @@ bool ParseSessionDescription(const std::string& message,
     return ParseFailedExpectLine(message, *pos, kLineTypeOrigin, std::string(),
                                  error);
   }
-  std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
   const size_t expected_fields = 6;
   if (fields.size() != expected_fields) {
     return ParseFailedExpectFieldNum(line, expected_fields, error);
@@ -2219,8 +2219,8 @@ bool ParseGroupAttribute(const std::string& line,
 
   // RFC 5888 and draft-holmberg-mmusic-sdp-bundle-negotiation-00
   // a=group:BUNDLE video voice
-  std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
   std::string semantics;
   if (!GetValue(fields[0], kAttributeGroup, &semantics, error)) {
     return false;
@@ -2243,8 +2243,8 @@ static bool ParseFingerprintAttribute(
                                  kAttributeFingerprint, error);
   }
 
-  std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
   const size_t expected_fields = 2;
   if (fields.size() != expected_fields) {
     return ParseFailedExpectFieldNum(line, expected_fields, error);
@@ -2276,8 +2276,8 @@ static bool ParseDtlsSetup(const std::string& line,
                            SdpParseError* error) {
   // setup-attr           =  "a=setup:" role
   // role                 =  "active" / "passive" / "actpass" / "holdconn"
-  std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterColonChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterColonChar);
   const size_t expected_fields = 2;
   if (fields.size() != expected_fields) {
     return ParseFailedExpectFieldNum(line, expected_fields, error);
@@ -2582,8 +2582,8 @@ bool ParseMediaDescription(
   while (GetLineWithType(message, pos, &line, kLineTypeMedia)) {
     ++mline_index;
 
-    std::vector<std::string> fields;
-    rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+    std::vector<std::string> fields =
+        absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
 
     const size_t expected_min_fields = 4;
     if (fields.size() < expected_min_fields) {
@@ -3321,8 +3321,8 @@ bool ParseSsrcAttribute(const std::string& line,
   } else if (attribute == kSsrcAttributeMsid) {
     // draft-alvestrand-mmusic-msid-00
     // msid:identifier [appdata]
-    std::vector<std::string> fields;
-    rtc::split(value, kSdpDelimiterSpaceChar, &fields);
+    std::vector<std::string> fields =
+        absl::StrSplit(value, kSdpDelimiterSpaceChar);
     if (fields.size() < 1 || fields.size() > 2) {
       return ParseFailed(
           line, "Expected format \"msid:<identifier>[ <appdata>]\".", error);
@@ -3350,8 +3350,8 @@ bool ParseSsrcGroupAttribute(const std::string& line,
   RTC_DCHECK(ssrc_groups != NULL);
   // RFC 5576
   // a=ssrc-group:<semantics> <ssrc-id> ...
-  std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
   const size_t expected_min_fields = 2;
   if (fields.size() < expected_min_fields) {
     return ParseFailedExpectMinFieldNum(line, expected_min_fields, error);
@@ -3375,8 +3375,8 @@ bool ParseSsrcGroupAttribute(const std::string& line,
 bool ParseCryptoAttribute(const std::string& line,
                           MediaContentDescription* media_desc,
                           SdpParseError* error) {
-  std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
   // RFC 4568
   // a=crypto:<tag> <crypto-suite> <key-params> [<session-params>]
   const size_t expected_min_fields = 3;
@@ -3441,8 +3441,8 @@ bool ParseRtpmapAttribute(const std::string& line,
                           const std::vector<int>& payload_types,
                           MediaContentDescription* media_desc,
                           SdpParseError* error) {
-  std::vector<std::string> fields;
-  rtc::split(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line.substr(kLinePrefixLength), kSdpDelimiterSpaceChar);
   // RFC 4566
   // a=rtpmap:<payload type> <encoding name>/<clock rate>[/<encodingparameters>]
   const size_t expected_min_fields = 2;
@@ -3466,8 +3466,7 @@ bool ParseRtpmapAttribute(const std::string& line,
     return true;
   }
   const std::string& encoder = fields[1];
-  std::vector<std::string> codec_params;
-  rtc::split(encoder, '/', &codec_params);
+  std::vector<std::string> codec_params = absl::StrSplit(encoder, '/');
   // <encoding name>/<clock rate>[/<encodingparameters>]
   // 2 mandatory fields
   if (codec_params.size() < 2 || codec_params.size() > 3) {
@@ -3554,8 +3553,8 @@ bool ParseFmtpAttributes(const std::string& line,
   }
 
   // Parse out format specific parameters.
-  std::vector<std::string> fields;
-  rtc::split(line_params, kSdpDelimiterSemicolonChar, &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(line_params, kSdpDelimiterSemicolonChar);
 
   cricket::CodecParameterMap codec_params;
   for (auto& iter : fields) {
@@ -3591,8 +3590,8 @@ bool ParseRtcpFbAttribute(const std::string& line,
       media_type != cricket::MEDIA_TYPE_VIDEO) {
     return true;
   }
-  std::vector<std::string> rtcp_fb_fields;
-  rtc::split(line.c_str(), kSdpDelimiterSpaceChar, &rtcp_fb_fields);
+  std::vector<std::string> rtcp_fb_fields =
+      absl::StrSplit(line.c_str(), kSdpDelimiterSpaceChar);
   if (rtcp_fb_fields.size() < 2) {
     return ParseFailedGetValue(line, kAttributeRtcpFb, error);
   }
