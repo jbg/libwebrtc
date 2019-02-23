@@ -16,6 +16,24 @@
       "revId": "30e52189e0cf42e634999875418959823788f787",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0392b252_c6da5396",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-23T13:20:43Z",
+      "side": 1,
+      "message": "Trying to keep changes to a minimum in this CL, will update in future one.",
+      "parentUuid": "c5c1eb71_ae28555b",
+      "revId": "30e52189e0cf42e634999875418959823788f787",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
