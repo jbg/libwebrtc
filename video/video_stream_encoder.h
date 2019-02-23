@@ -12,6 +12,7 @@
 #define VIDEO_VIDEO_STREAM_ENCODER_H_
 
 #include <atomic>
+#include <list>
 #include <map>
 #include <memory>
 #include <string>
@@ -23,6 +24,7 @@
 #include "api/video/video_stream_encoder_interface.h"
 #include "api/video/video_stream_encoder_observer.h"
 #include "api/video/video_stream_encoder_settings.h"
+#include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
 #include "modules/video_coding/utility/frame_dropper.h"
 #include "modules/video_coding/utility/quality_scaler.h"
@@ -30,6 +32,7 @@
 #include "rtc_base/critical_section.h"
 #include "rtc_base/event.h"
 #include "rtc_base/experiments/rate_control_settings.h"
+#include "rtc_base/race_checker.h"
 #include "rtc_base/rate_statistics.h"
 #include "rtc_base/sequenced_task_checker.h"
 #include "rtc_base/task_queue.h"
@@ -186,8 +189,22 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
       AdaptReason reason) RTC_RUN_ON(&encoder_queue_);
   void RunPostEncode(EncodedImage encoded_image,
                      int64_t time_sent_us,
-                     int temporal_index);
+                     int temporal_index,
+                     const CodecSpecificInfo* codec_specific_info);
   bool HasInternalSource() const RTC_RUN_ON(&encoder_queue_);
+  size_t NumSpatialLayers() const RTC_RUN_ON(&encoder_queue_);
+  void OnEncodeStarted(uint32_t rtp_timestamps,
+                       int64_t capture_time_ms,
+                       size_t simulcast_svc_idx) RTC_RUN_ON(&encoder_queue_);
+  // For non-internal-source encoders, returns encode started time and fixes
+  // capture timestamp for the frame, if corrupted by the encoder.
+  absl::optional<int64_t> ExtractEncodeStartTime(size_t simulcast_svc_idx,
+                                                 EncodedImage* encoded_image)
+      RTC_RUN_ON(&encoder_queue_);
+
+  void FillTimingInfo(size_t simulcast_svc_idx,
+                      EncodedImage* encoded_image,
+                      int64_t encode_done_ms) RTC_RUN_ON(&encoder_queue_);
 
   rtc::Event shutdown_event_;
 
@@ -303,15 +320,47 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   std::unique_ptr<EncoderBitrateAdjuster> bitrate_adjuster_
       RTC_GUARDED_BY(&encoder_queue_);
 
-  // TODO(webrtc:10164): Refactor/remove these VCM classes.
-  // |generic_encoder_| instance is owned by |codec_database_|.
-  VCMGenericEncoder* generic_encoder_ RTC_GUARDED_BY(&encoder_queue_);
-  VCMEncodedFrameCallback generic_encoder_callback_
-      RTC_GUARDED_BY(&encoder_queue_);
-  VCMEncoderDataBase codec_database_ RTC_GUARDED_BY(&encoder_queue_);
+  VideoCodec send_codec_ RTC_GUARDED_BY(&encoder_queue_);
+
   // TODO(sprang): Change actually support keyframe per simulcast stream, or
   // turn this into a simple bool |pending_keyframe_request_|.
   std::vector<FrameType> next_frame_types_ RTC_GUARDED_BY(&encoder_queue_);
+
+  VideoBitrateAllocation last_bitrate_allocation_
+      RTC_GUARDED_BY(&encoder_queue_);
+  uint32_t last_framerate_fps_ RTC_GUARDED_BY(&encoder_queue_);
+
+  struct EncodeStartTimeRecord {
+    EncodeStartTimeRecord(uint32_t timestamp,
+                          int64_t capture_time,
+                          int64_t encode_start_time)
+        : rtp_timestamp(timestamp),
+          capture_time_ms(capture_time),
+          encode_start_time_ms(encode_start_time) {}
+    uint32_t rtp_timestamp;
+    int64_t capture_time_ms;
+    int64_t encode_start_time_ms;
+  };
+  // TODO(sprang): Remove |target_bitrate_bytes_per_sec|.
+  struct TimingFramesLayerInfo {
+    TimingFramesLayerInfo();
+    ~TimingFramesLayerInfo();
+    size_t target_bitrate_bytes_per_sec = 0;
+    std::list<EncodeStartTimeRecord> encode_start_list;
+  };
+  // Separate instance for each simulcast stream or spatial layer.
+  std::vector<TimingFramesLayerInfo> timing_frames_info_
+      RTC_GUARDED_BY(&encoder_queue_);
+  int64_t last_timing_frame_time_ms_ RTC_GUARDED_BY(&encoder_queue_);
+  size_t incorrect_capture_time_logged_messages_
+      RTC_GUARDED_BY(&encoder_queue_);
+  size_t reordered_frames_logged_messages_ RTC_GUARDED_BY(&encoder_queue_);
+  size_t stalled_encoder_logged_messages_ RTC_GUARDED_BY(&encoder_queue_);
+
+  // Experiment groups parsed from field trials for realtime video ([0]) and
+  // screenshare ([1]). 0 means no group specified. Positive values are
+  // experiment group numbers incremented by 1.
+  uint8_t experiment_groups_[2] RTC_GUARDED_BY(&encoder_queue_);
 
   // All public methods are proxied to |encoder_queue_|. It must must be
   // destroyed first to make sure no tasks are run that use other members.
