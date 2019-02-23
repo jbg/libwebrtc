@@ -15,12 +15,12 @@
 #include <vector>
 
 #include "absl/strings/match.h"
+#include "absl/strings/str_split.h"
 #include "absl/types/optional.h"
 #include "api/video/i420_buffer.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/ref_counted_object.h"
-#include "rtc_base/string_encode.h"
 #include "rtc_base/string_to_number.h"
 
 namespace webrtc {
@@ -148,8 +148,8 @@ rtc::scoped_refptr<Video> OpenY4mFile(const std::string& file_name) {
   absl::optional<int> height;
   absl::optional<float> fps;
 
-  std::vector<std::string> fields;
-  rtc::tokenize(header_line, ' ', &fields);
+  std::vector<std::string> fields =
+      absl::StrSplit(header_line, ' ', absl::SkipEmpty());
   for (const std::string& field : fields) {
     const char prefix = field.front();
     const std::string suffix = field.substr(1);
@@ -170,8 +170,7 @@ rtc::scoped_refptr<Video> OpenY4mFile(const std::string& file_name) {
         }
         break;
       case 'F': {
-        std::vector<std::string> fraction;
-        rtc::tokenize(suffix, ':', &fraction);
+        std::vector<std::string> fraction = absl::StrSplit(suffix, ':');
         if (fraction.size() == 2) {
           const absl::optional<int> numerator =
               rtc::StringToNumber<int>(fraction[0]);

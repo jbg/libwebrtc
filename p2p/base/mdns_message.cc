@@ -9,9 +9,10 @@
  */
 
 #include "p2p/base/mdns_message.h"
+
+#include "absl/strings/str_split.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/net_helpers.h"
-#include "rtc_base/string_encode.h"
 
 namespace webrtc {
 
@@ -77,10 +78,9 @@ bool ReadDomainName(MessageBufferReader* buf, std::string* name) {
 }
 
 void WriteDomainName(rtc::ByteBufferWriter* buf, const std::string& name) {
-  std::vector<std::string> labels;
-  rtc::tokenize(name, '.', &labels);
-  for (const auto& label : labels) {
-    buf->WriteUInt8(label.length());
+  for (const absl::string_view label :
+       absl::StrSplit(name, '.', absl::SkipEmpty())) {
+    buf->WriteUInt8(label.size());
     buf->WriteString(label);
   }
   buf->WriteUInt8(0);

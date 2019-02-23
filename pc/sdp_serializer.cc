@@ -18,7 +18,6 @@
 #include "absl/strings/str_split.h"
 #include "api/jsep.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/string_encode.h"
 #include "rtc_base/string_to_number.h"
 #include "rtc_base/strings/string_builder.h"
 
@@ -153,8 +152,8 @@ webrtc::RTCError ParseRidPayloadList(const std::string& payload_list,
   }
 
   // Tokenize the ',' delimited list
-  std::vector<std::string> string_payloads;
-  rtc::tokenize(payload_list, kDelimiterCommaChar, &string_payloads);
+  std::vector<std::string> string_payloads =
+      absl::StrSplit(payload_list, kDelimiterCommaChar, absl::SkipEmpty());
   if (string_payloads.empty()) {
     return ParseError("Payload list must have at least one value.");
   }
@@ -208,8 +207,8 @@ std::string SdpSerializer::SerializeSimulcastDescription(
 // rid-id       = 1*(alpha-numeric / "-" / "_") ; see: I-D.ietf-mmusic-rid
 RTCErrorOr<SimulcastDescription> SdpSerializer::DeserializeSimulcastDescription(
     absl::string_view string) const {
-  std::vector<std::string> tokens;
-  rtc::tokenize(std::string(string), kDelimiterSpaceChar, &tokens);
+  std::vector<std::string> tokens =
+      absl::StrSplit(string, kDelimiterSpaceChar, absl::SkipEmpty());
 
   if (tokens.size() != 2 && tokens.size() != 4) {
     return ParseError("Must have one or two <direction, streams> pairs.");
@@ -317,8 +316,8 @@ std::string SdpSerializer::SerializeRidDescription(
 //                      ; Any printable character except semicolon
 RTCErrorOr<RidDescription> SdpSerializer::DeserializeRidDescription(
     absl::string_view string) const {
-  std::vector<std::string> tokens;
-  rtc::tokenize(std::string(string), kDelimiterSpaceChar, &tokens);
+  std::vector<std::string> tokens =
+      absl::StrSplit(string, kDelimiterSpaceChar, absl::SkipEmpty());
 
   if (tokens.size() < 2) {
     return ParseError("RID Description must contain <RID> <direction>.");
@@ -339,8 +338,8 @@ RTCErrorOr<RidDescription> SdpSerializer::DeserializeRidDescription(
 
   // If there is a third argument it is a payload list and/or restriction list.
   if (tokens.size() == 3) {
-    std::vector<std::string> restrictions;
-    rtc::tokenize(tokens[2], kDelimiterSemicolonChar, &restrictions);
+    std::vector<std::string> restrictions =
+        absl::StrSplit(tokens[2], kDelimiterSemicolonChar, absl::SkipEmpty());
 
     // Check for malformed restriction list, such as ';' or ';;;' etc.
     if (restrictions.empty()) {
@@ -349,8 +348,8 @@ RTCErrorOr<RidDescription> SdpSerializer::DeserializeRidDescription(
 
     // Parse the restrictions. The payload indicator (pt) can only appear first.
     for (const std::string& restriction : restrictions) {
-      std::vector<std::string> parts;
-      rtc::tokenize(restriction, kDelimiterEqualChar, &parts);
+      std::vector<std::string> parts =
+          absl::StrSplit(restriction, kDelimiterEqualChar, absl::SkipEmpty());
       if (parts.empty() || parts.size() > 2) {
         return ParseError("Invalid format for restriction: " + restriction);
       }

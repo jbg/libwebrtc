@@ -34,11 +34,11 @@ static const int kMaxLogLineSize = 1024 - 60;
 #include <cstdarg>
 #include <vector>
 
+#include "absl/strings/str_split.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread_types.h"
-#include "rtc_base/string_encode.h"
 #include "rtc_base/string_utils.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/thread_annotations.h"
@@ -294,10 +294,8 @@ void LogMessage::ConfigureLogging(const char* params) {
   LoggingSeverity current_level = LS_VERBOSE;
   LoggingSeverity debug_level = GetLogToDebug();
 
-  std::vector<std::string> tokens;
-  tokenize(params, ' ', &tokens);
-
-  for (const std::string& token : tokens) {
+  for (const absl::string_view token :
+       absl::StrSplit(params, ' ', absl::SkipEmpty())) {
     if (token.empty())
       continue;
 
