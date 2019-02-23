@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "651c13bf_5709080b",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "That is 8-frame cycle pattern?\nmay be add a comment.\n\ne.g. add comment with template name at the end of each line.\n// (index)1 or shortname(KF)\n// 2\nand then do some ascii drawing.\n\nI guess we\u0027ll need to think more how to write template structure so it would be readable. (may be structures can be constexpr and live in own file, separate from logic). May be a bit later, may be better to do it sooner than later.",
+      "range": {
+        "startLine": 552,
+        "startChar": 25,
+        "endLine": 552,
+        "endChar": 34
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a36fdfb2_27adcde2",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "a.emplace(b,c,d);\nmeans a \u003d T(b,c,d);\n\nbut here it is simpler construct:\na \u003d b;  // with implicit conversion\n\nused it:\ninfo-\u003etemplate_structure \u003d GetTemplateStructure(number_of_temporal_layers_);",
+      "range": {
+        "startLine": 307,
+        "startChar": 31,
+        "endLine": 307,
+        "endChar": 38
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4be47ea_164d122e",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "where template_structure.num_operating_points is set?\nhow can you ensure it can\u0027t be forgotten?",
+      "range": {
+        "startLine": 362,
+        "startChar": 20,
+        "endLine": 362,
+        "endChar": 38
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c06a9d7_1f3e3b9b",
+        "filename": "modules/video_coding/include/video_codec_interface.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "with inlining and template black magic it should be possible to check it at compile time, but better not for now,\ni.e. this simple loop looks good.\n\nmay be add before loop this minor optimization:\ninfo_.operating_points.reserve(indication_sybmols.size());",
+      "range": {
+        "startLine": 45,
+        "startChar": 15,
+        "endLine": 45,
+        "endChar": 29
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ca21de1_b5f84eca",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "may be tailor these constants for the planned usage (the configurations introduced in this CL)\nretune later.\ni.e. 3-4 for chains, 3-4 for fdiffs, 9 - for operating points.\n\nor just used std::vector. (what is motivation for using less standard type?)",
+      "range": {
+        "startLine": 118,
+        "startChar": 27,
+        "endLine": 118,
+        "endChar": 29
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37af7ae4_0cb418b7",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "\"Use the explicit keyword for conversion operators.\"\nhttps://google.github.io/styleguide/cppguide.html#Implicit_Conversions\n\nCan it be a regular function Build() instead?\nOr may be more efficient (e.g. from binary size point of view) to merge the struct and Builder:\n\nclass GenericFrameInfo {\n public:\n  GenericFrameInfo(const GenericFrameInfo\u0026) \u003d default;\n \n  int temporal_id() { return temporal_id_; }\n\n  GenericFrameInfo\u0026 Tl(int temporal_id) { temporal_id_ \u003d temporal_id; return *this; }\n  GenericFrameInfo\u0026 Fdiffs(rtc::ArrayView\u003cconst int\u003e frame_diffs) { frame_diffs_.assign(frame_diffs.begin(), frame_diffs.end());\n  }\n  GenericFrameInfo\u0026 Indications(absl::string_view indication_symbols);//one of few non-inlined\n\n private:\n  int temporal_id_ \u003d 0;\n  absl::InlinedVector\u003cint, 10\u003e frame_diffs_;\n  absl::InlinedVector\u003c...\u003e operating_points_;\n};",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 10
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f2a1b3e_60341a13",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "These are not accessors, should follow FunctionName convention",
+      "range": {
+        "startLine": 130,
+        "startChar": 11,
+        "endLine": 130,
+        "endChar": 13
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3ef10df_f21c170e",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "absl::string_view",
+      "range": {
+        "startLine": 131,
+        "startChar": 23,
+        "endLine": 131,
+        "endChar": 41
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a500a2a_b9ff37b6",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "unlike std::vector, InlinedVector is not that cheap to move, \nmay be use generic rtc::ArrayView\u003cconst int\u003e, or use std::vector instead of InlinedVector",
+      "range": {
+        "startLine": 132,
+        "startChar": 24,
+        "endLine": 132,
+        "endChar": 37
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cddca45f_b908bcce",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "since you exlpicetly adding copy constructor, may be also add move constructor since it is more effecient for this struct than copy (std::vector cheap to move, not so much to copy)",
+      "range": {
+        "startLine": 141,
+        "startChar": 45,
+        "endLine": 141,
+        "endChar": 46
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

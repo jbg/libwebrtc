@@ -405,6 +405,24 @@
     },
     {
       "key": {
+        "uuid": "a0f6f658_683d4aed",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-23T09:22:05Z",
+      "side": 1,
+      "message": "sgtm, but then probably do not add chain_diffs to GenericFrameInfo",
+      "parentUuid": "2531a22f_173fa9fd",
+      "revId": "e347bf418bb2354886bc8f0b0e1c265946769a11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0ddd80a_e5f16c7d",
         "filename": "modules/video_coding/include/video_codec_interface.h",
         "patchSetId": 4
