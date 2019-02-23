@@ -22,6 +22,30 @@
       "revId": "f9dbc710aabec75753b773e43b5ac669384f421d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24714ef8_9988b01f",
+        "filename": "p2p/base/turn_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-02-23T10:50:13Z",
+      "side": 1,
+      "message": "this is the case where a connection was scheduled to be deleted,\nbut is \"resurrected\". it _should_ have the same remote ufrag...\nbut if it doesn\u0027t the idea is to update the TURN server.\n\nI clarified this in code, and gated the behavior behind the field trial.",
+      "parentUuid": "e5e212b4_ca690394",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1188,
+        "endChar": 42
+      },
+      "revId": "f9dbc710aabec75753b773e43b5ac669384f421d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
