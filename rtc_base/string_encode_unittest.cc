@@ -256,22 +256,6 @@ TEST(TokenizeTest, TokenizeWithMarks) {
   ASSERT_STREQ("E F", fields.at(3).c_str());
 }
 
-TEST(TokenizeTest, TokenizeWithEmptyTokens) {
-  std::vector<std::string> fields;
-  EXPECT_EQ(3ul, tokenize_with_empty_tokens("a.b.c", '.', &fields));
-  EXPECT_EQ("a", fields[0]);
-  EXPECT_EQ("b", fields[1]);
-  EXPECT_EQ("c", fields[2]);
-
-  EXPECT_EQ(3ul, tokenize_with_empty_tokens("..c", '.', &fields));
-  EXPECT_TRUE(fields[0].empty());
-  EXPECT_TRUE(fields[1].empty());
-  EXPECT_EQ("c", fields[2]);
-
-  EXPECT_EQ(1ul, tokenize_with_empty_tokens("", '.', &fields));
-  EXPECT_TRUE(fields[0].empty());
-}
-
 TEST(TokenizeFirstTest, NoLeadingSpaces) {
   std::string token;
   std::string rest;

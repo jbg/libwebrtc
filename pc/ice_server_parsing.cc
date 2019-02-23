@@ -14,13 +14,13 @@
 #include <cctype>  // For std::isdigit.
 #include <string>
 
+#include "absl/strings/str_split.h"
 #include "p2p/base/port_interface.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/ip_address.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/socket_address.h"
-#include "rtc_base/string_encode.h"
 
 namespace webrtc {
 
@@ -155,15 +155,14 @@ static RTCErrorType ParseIceServerUrl(
   // turn-port     = *DIGIT
   RTC_DCHECK(stun_servers != nullptr);
   RTC_DCHECK(turn_servers != nullptr);
-  std::vector<std::string> tokens;
   cricket::ProtocolType turn_transport_type = cricket::PROTO_UDP;
   RTC_DCHECK(!url.empty());
-  rtc::tokenize_with_empty_tokens(url, '?', &tokens);
+  std::vector<std::string> tokens = absl::StrSplit(url, '?');
   std::string uri_without_transport = tokens[0];
   // Let's look into transport= param, if it exists.
   if (tokens.size() == kTurnTransportTokensNum) {  // ?transport= is present.
     std::string uri_transport_param = tokens[1];
-    rtc::tokenize_with_empty_tokens(uri_transport_param, '=', &tokens);
+    tokens = absl::StrSplit(uri_transport_param, '=');
     if (tokens[0] != kTransport) {
       RTC_LOG(LS_WARNING) << "Invalid transport parameter key.";
       return RTCErrorType::SYNTAX_ERROR;
@@ -192,8 +191,7 @@ static RTCErrorType ParseIceServerUrl(
   RTC_DCHECK(!hoststring.empty());
 
   // Let's break hostname.
-  tokens.clear();
-  rtc::tokenize_with_empty_tokens(hoststring, '@', &tokens);
+  tokens = absl::StrSplit(hoststring, '@');
 
   std::string username(server.username);
   if (tokens.size() > kTurnHostTokensNum) {
