@@ -25,6 +25,7 @@
 #include "modules/video_coding/utility/default_video_bitrate_allocator.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/experiments/alr_experiment.h"
 #include "rtc_base/experiments/quality_scaling_experiment.h"
 #include "rtc_base/experiments/rate_control_settings.h"
 #include "rtc_base/location.h"
@@ -60,6 +61,12 @@ const float kFramedropThreshold = 0.3;
 // Averaging window spanning 90 frames at default 30fps, matching old media
 // optimization module defaults.
 const int64_t kFrameRateAvergingWindowSizeMs = (1000 / 30) * 90;
+
+const size_t kDefaultPayloadSize = 1440;
+
+// Constants for message throttling from former VCMGenericEncoder.
+const int kMessagesThrottlingThreshold = 2;
+const int kThrottleRatio = 100000;
 
 // Initial limits for BALANCED degradation preference.
 int MinFps(int pixels) {
@@ -118,6 +125,51 @@ CpuOveruseOptions GetCpuOveruseOptions(
   return options;
 }
 
+bool RequiresEncoderReset(const VideoCodec& previous_send_codec,
+                          const VideoCodec& new_send_codec) {
+  // Does not check startBitrate or maxFramerate.
+  if (new_send_codec.codecType != previous_send_codec.codecType ||
+      new_send_codec.width != previous_send_codec.width ||
+      new_send_codec.height != previous_send_codec.height ||
+      new_send_codec.maxBitrate != previous_send_codec.maxBitrate ||
+      new_send_codec.minBitrate != previous_send_codec.minBitrate ||
+      new_send_codec.qpMax != previous_send_codec.qpMax ||
+      new_send_codec.numberOfSimulcastStreams !=
+          previous_send_codec.numberOfSimulcastStreams ||
+      new_send_codec.mode != previous_send_codec.mode) {
+    return true;
+  }
+
+  switch (new_send_codec.codecType) {
+    case kVideoCodecVP8:
+      if (new_send_codec.VP8() != previous_send_codec.VP8()) {
+        return true;
+      }
+      break;
+
+    case kVideoCodecVP9:
+      if (new_send_codec.VP9() != previous_send_codec.VP9()) {
+        return true;
+      }
+      break;
+
+    case kVideoCodecH264:
+      if (new_send_codec.H264() != previous_send_codec.H264()) {
+        return true;
+      }
+      break;
+
+    default:
+      break;
+  }
+
+  for (unsigned char i = 0; i < new_send_codec.numberOfSimulcastStreams; ++i) {
+    if (new_send_codec.simulcastStream[i] !=
+        previous_send_codec.simulcastStream[i])
+      return true;
+  }
+  return false;
+}
 }  //  namespace
 
 // VideoSourceProxy is responsible ensuring thread safety between calls to
@@ -351,6 +403,9 @@ class VideoStreamEncoder::VideoSourceProxy {
   RTC_DISALLOW_COPY_AND_ASSIGN(VideoSourceProxy);
 };
 
+VideoStreamEncoder::TimingFramesLayerInfo::TimingFramesLayerInfo() = default;
+VideoStreamEncoder::TimingFramesLayerInfo::~TimingFramesLayerInfo() = default;
+
 VideoStreamEncoder::VideoStreamEncoder(
     uint32_t number_of_cores,
     VideoStreamEncoderObserver* encoder_stats_observer,
@@ -368,6 +423,7 @@ VideoStreamEncoder::VideoStreamEncoder(
       rate_control_settings_(RateControlSettings::ParseFromFieldTrials()),
       overuse_detector_(std::move(overuse_detector)),
       encoder_stats_observer_(encoder_stats_observer),
+      encoder_initialized_(false),
       max_framerate_(-1),
       pending_encoder_reconfiguration_(false),
       pending_encoder_creation_(false),
@@ -392,14 +448,33 @@ VideoStreamEncoder::VideoStreamEncoder(
       force_disable_frame_dropper_(false),
       input_framerate_(kFrameRateAvergingWindowSizeMs, 1000),
       pending_frame_drops_(0),
-      generic_encoder_(nullptr),
-      generic_encoder_callback_(this),
-      codec_database_(&generic_encoder_callback_),
       next_frame_types_(1, kVideoFrameDelta),
+      last_framerate_fps_(0),
+      last_timing_frame_time_ms_(-1),
+      incorrect_capture_time_logged_messages_(0),
+      reordered_frames_logged_messages_(0),
+      stalled_encoder_logged_messages_(0),
+      experiment_groups_{},
       encoder_queue_("EncoderQueue") {
   RTC_DCHECK(encoder_stats_observer);
   RTC_DCHECK(overuse_detector_);
   RTC_DCHECK_GE(number_of_cores, 1);
+  send_codec_.timing_frame_thresholds = {-1, 0};
+  absl::optional<AlrExperimentSettings> experiment_settings =
+      AlrExperimentSettings::CreateFromFieldTrial(
+          AlrExperimentSettings::kStrictPacingAndProbingExperimentName);
+  if (experiment_settings) {
+    experiment_groups_[0] = experiment_settings->group_id + 1;
+  } else {
+    experiment_groups_[0] = 0;
+  }
+  experiment_settings = AlrExperimentSettings::CreateFromFieldTrial(
+      AlrExperimentSettings::kScreenshareProbingBweExperimentName);
+  if (experiment_settings) {
+    experiment_groups_[1] = experiment_settings->group_id + 1;
+  } else {
+    experiment_groups_[1] = 0;
+  }
 }
 
 VideoStreamEncoder::~VideoStreamEncoder() {
@@ -414,10 +489,9 @@ void VideoStreamEncoder::Stop() {
   encoder_queue_.PostTask([this] {
     RTC_DCHECK_RUN_ON(&encoder_queue_);
     overuse_detector_->StopCheckForOveruse();
-    rate_allocator_.reset();
+    rate_allocator_ = nullptr;
     bitrate_observer_ = nullptr;
-    codec_database_.DeregisterExternalEncoder();
-    generic_encoder_ = nullptr;
+    ReleaseEncoder();
     quality_scaler_ = nullptr;
     shutdown_event_.Set();
   });
@@ -593,36 +667,70 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   }
   source_proxy_->SetMaxFramerate(max_framerate);
 
+  if (codec.maxBitrate == 0) {
+    // max is one bit per pixel
+    codec.maxBitrate =
+        (static_cast<int>(codec.height) * static_cast<int>(codec.width) *
+         static_cast<int>(codec.maxFramerate)) /
+        1000;
+    if (codec.startBitrate > codec.maxBitrate) {
+      // But if the user tries to set a higher start bit rate we will
+      // increase the max accordingly.
+      codec.maxBitrate = codec.startBitrate;
+    }
+  }
+
+  if (codec.startBitrate > codec.maxBitrate) {
+    codec.startBitrate = codec.maxBitrate;
+  }
+
+  // Reset (release existing encoder) if one exists and anything except
+  // start bitrate or max framerate has changed. Don't call Release() if
+  // |pending_encoder_creation_| as that means this is a new encoder
+  // that has not yet been initialized.
+  const bool reset_required = RequiresEncoderReset(codec, send_codec_);
+  send_codec_ = codec;
+
   // Keep the same encoder, as long as the video_format is unchanged.
   // Encoder creation block is split in two since EncoderInfo needed to start
   // CPU adaptation with the correct settings should be polled after
   // encoder_->InitEncode().
-  if (pending_encoder_creation_) {
-    if (encoder_) {
-      codec_database_.DeregisterExternalEncoder();
-      generic_encoder_ = nullptr;
+  bool success = true;
+  if (pending_encoder_creation_ || reset_required) {
+    ReleaseEncoder();
+    if (pending_encoder_creation_) {
+      encoder_ = settings_.encoder_factory->CreateVideoEncoder(
+          encoder_config_.video_format);
+      // TODO(nisse): What to do if creating the encoder fails? Crash,
+      // or just discard incoming frames?
+      RTC_CHECK(encoder_);
+
+      codec_info_ = settings_.encoder_factory->QueryVideoEncoder(
+          encoder_config_.video_format);
     }
 
-    encoder_ = settings_.encoder_factory->CreateVideoEncoder(
-        encoder_config_.video_format);
-    // TODO(nisse): What to do if creating the encoder fails? Crash,
-    // or just discard incoming frames?
-    RTC_CHECK(encoder_);
+    if (encoder_->InitEncode(&send_codec_, number_of_cores_,
+                             max_data_payload_length_ > 0
+                                 ? max_data_payload_length_
+                                 : kDefaultPayloadSize) != 0) {
+      RTC_LOG(LS_ERROR) << "Failed to initialize the encoder associated with "
+                           "codec type: "
+                        << CodecTypeToPayloadString(send_codec_.codecType)
+                        << " (" << send_codec_.codecType << ")";
+      ReleaseEncoder();
+      success = false;
+    } else {
+      encoder_initialized_ = true;
+      encoder_->RegisterEncodeCompleteCallback(this);
+    }
 
-    codec_info_ = settings_.encoder_factory->QueryVideoEncoder(
-        encoder_config_.video_format);
-
-    codec_database_.RegisterExternalEncoder(encoder_.get(),
-                                            HasInternalSource());
+    timing_frames_info_.clear();
+    last_timing_frame_time_ms_ = -1;
+    reordered_frames_logged_messages_ = 0;
+    stalled_encoder_logged_messages_ = 0;
   }
 
-  // SetSendCodec implies an unconditional call to encoder_->InitEncode().
-  bool success = codec_database_.SetSendCodec(&codec, number_of_cores_,
-                                              max_data_payload_length_);
-  generic_encoder_ = codec_database_.GetEncoder();
-
   if (success) {
-    RTC_DCHECK(generic_encoder_);
     next_frame_types_.clear();
     next_frame_types_.resize(
         std::max(static_cast<int>(codec.numberOfSimulcastStreams), 1),
@@ -633,7 +741,7 @@ void VideoStreamEncoder::ReconfigureEncoder() {
                         << " max payload size " << max_data_payload_length_;
   } else {
     RTC_LOG(LS_ERROR) << "Failed to configure encoder.";
-    rate_allocator_.reset();
+    rate_allocator_ = nullptr;
   }
 
   if (pending_encoder_creation_) {
@@ -901,7 +1009,7 @@ uint32_t VideoStreamEncoder::GetInputFramerateFps() {
 void VideoStreamEncoder::SetEncoderRates(
     const VideoBitrateAllocation& bitrate_allocation,
     uint32_t framerate_fps) {
-  if (!generic_encoder_) {
+  if (!encoder_) {
     return;
   }
 
@@ -918,7 +1026,26 @@ void VideoStreamEncoder::SetEncoderRates(
   }
 
   RTC_DCHECK_GT(framerate_fps, 0);
-  generic_encoder_->SetEncoderParameters(bitrate_allocation, framerate_fps);
+  if (bitrate_allocation != last_bitrate_allocation_ ||
+      framerate_fps != last_framerate_fps_) {
+    int res = encoder_->SetRateAllocation(bitrate_allocation, framerate_fps);
+    if (res != 0) {
+      RTC_LOG(LS_WARNING) << "Error set encoder rate (total bitrate bps = "
+                          << bitrate_allocation.get_sum_bps()
+                          << ", framerate = " << framerate_fps << "): " << res;
+    }
+    const size_t num_spatial_layers = NumSpatialLayers();
+    if (timing_frames_info_.size() < num_spatial_layers) {
+      timing_frames_info_.resize(num_spatial_layers);
+    }
+    for (size_t i = 0; i < num_spatial_layers; ++i) {
+      timing_frames_info_[i].target_bitrate_bytes_per_sec =
+          bitrate_allocation.GetSpatialLayerSum(i) / 8;
+    }
+  }
+
+  last_bitrate_allocation_ = bitrate_allocation;
+  last_framerate_fps_ = framerate_fps;
 }
 
 void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
@@ -1116,9 +1243,8 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
   }
 
   encoder_info_ = info;
-  RTC_DCHECK(generic_encoder_);
-  RTC_DCHECK(codec_database_.MatchesCurrentResolution(out_frame.width(),
-                                                      out_frame.height()));
+  RTC_DCHECK_EQ(send_codec_.width, out_frame.width());
+  RTC_DCHECK_EQ(send_codec_.height, out_frame.height());
   const VideoFrameBuffer::Type buffer_type =
       out_frame.video_frame_buffer()->type();
   const bool is_buffer_type_supported =
@@ -1147,8 +1273,16 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
                     .set_id(out_frame.id())
                     .build();
   }
+
+  TRACE_EVENT1("webrtc", "VCMGenericEncoder::Encode", "timestamp",
+               out_frame.timestamp());
+  const size_t num_spatial_layers = NumSpatialLayers();
+  for (size_t i = 0; i < num_spatial_layers; ++i) {
+    OnEncodeStarted(out_frame.timestamp(), out_frame.render_time_ms(), i);
+  }
   const int32_t encode_status =
-      generic_encoder_->Encode(out_frame, nullptr, next_frame_types_);
+      encoder_->Encode(out_frame, nullptr, &next_frame_types_);
+
   if (encode_status < 0) {
     RTC_LOG(LS_ERROR) << "Failed to encode frame. Error code: "
                       << encode_status;
@@ -1172,9 +1306,21 @@ void VideoStreamEncoder::SendKeyFrame() {
   if (HasInternalSource()) {
     // Try to request the frame if we have an external encoder with
     // internal source since AddVideoFrame never will be called.
-    RTC_DCHECK(generic_encoder_);
-    if (generic_encoder_->RequestFrame(next_frame_types_) ==
-        WEBRTC_VIDEO_CODEC_OK) {
+
+    // TODO(nisse): Used only with internal source. Delete as soon as
+    // that feature is removed. The only implementation I've been able
+    // to find ignores what's in the frame. With one exception: It seems
+    // a few test cases, e.g.,
+    // VideoSendStreamTest.VideoSendStreamStopSetEncoderRateToZero, set
+    // internal_source to true and use FakeEncoder. And the latter will
+    // happily encode this 1x1 frame and pass it on down the pipeline.
+    if (encoder_->Encode(VideoFrame::Builder()
+                             .set_video_frame_buffer(I420Buffer::Create(1, 1))
+                             .set_rotation(kVideoRotation_0)
+                             .set_timestamp_us(0)
+                             .build(),
+                         nullptr,
+                         &next_frame_types_) == WEBRTC_VIDEO_CODEC_OK) {
       // Try to remove just-performed keyframe request, if stream still exists.
       next_frame_types_[0] = kVideoFrameDelta;
     }
@@ -1185,12 +1331,6 @@ EncodedImageCallback::Result VideoStreamEncoder::OnEncodedImage(
     const EncodedImage& encoded_image,
     const CodecSpecificInfo* codec_specific_info,
     const RTPFragmentationHeader* fragmentation) {
-  // Encoded is called on whatever thread the real encoder implementation run
-  // on. In the case of hardware encoders, there might be several encoders
-  // running in parallel on different threads.
-  encoder_stats_observer_->OnSendEncodedImage(encoded_image,
-                                              codec_specific_info);
-
   EncodedImageCallback::Result result =
       sink_->OnEncodedImage(encoded_image, codec_specific_info, fragmentation);
 
@@ -1213,7 +1353,8 @@ EncodedImageCallback::Result VideoStreamEncoder::OnEncodedImage(
     temporal_index = 0;
   }
 
-  RunPostEncode(encoded_image_metadata, time_sent_us, temporal_index);
+  RunPostEncode(encoded_image_metadata, time_sent_us, temporal_index,
+                codec_specific_info);
 
   if (result.error == Result::OK) {
     // In case of an internal encoder running on a separate thread, the
@@ -1547,18 +1688,58 @@ VideoStreamEncoder::GetConstAdaptCounter() {
   return adapt_counters_[degradation_preference_];
 }
 
-void VideoStreamEncoder::RunPostEncode(EncodedImage encoded_image,
-                                       int64_t time_sent_us,
-                                       int temporal_index) {
+void VideoStreamEncoder::RunPostEncode(
+    EncodedImage encoded_image,
+    int64_t time_sent_us,
+    int temporal_index,
+    const CodecSpecificInfo* codec_specific_info) {
   if (!encoder_queue_.IsCurrent()) {
-    encoder_queue_.PostTask(
-        [this, encoded_image, time_sent_us, temporal_index] {
-          RunPostEncode(encoded_image, time_sent_us, temporal_index);
-        });
+    // TODO(sprang): Find better way to propagate codec specific.
+    absl::optional<CodecSpecificInfo> codec_specific_copy;
+    if (codec_specific_info) {
+      codec_specific_copy = *codec_specific_info;
+    }
+    encoder_queue_.PostTask([this, encoded_image, time_sent_us, temporal_index,
+                             codec_specific_copy] {
+      RunPostEncode(encoded_image, time_sent_us, temporal_index,
+                    codec_specific_copy.has_value()
+                        ? &codec_specific_copy.value()
+                        : nullptr);
+    });
     return;
   }
 
   RTC_DCHECK_RUN_ON(&encoder_queue_);
+
+  TRACE_EVENT_INSTANT1("webrtc", "VCMEncodedFrameCallback::Encoded",
+                       "timestamp", encoded_image.Timestamp());
+  const size_t spatial_idx = encoded_image.SpatialIndex().value_or(0);
+  EncodedImage image_copy(encoded_image);
+
+  FillTimingInfo(spatial_idx, &image_copy,
+                 time_sent_us / rtc::kNumNanosecsPerMillisec);
+
+  // Piggyback ALR experiment group id and simulcast id into the content type.
+  const uint8_t experiment_id =
+      experiment_groups_[videocontenttypehelpers::IsScreenshare(
+          image_copy.content_type_)];
+
+  // TODO(ilnik): This will force content type extension to be present even
+  // for realtime video. At the expense of miniscule overhead we will get
+  // sliced receive statistics.
+  RTC_CHECK(videocontenttypehelpers::SetExperimentId(&image_copy.content_type_,
+                                                     experiment_id));
+  // We count simulcast streams from 1 on the wire. That's why we set simulcast
+  // id in content type to +1 of that is actual simulcast index. This is because
+  // value 0 on the wire is reserved for 'no simulcast stream specified'.
+  RTC_CHECK(videocontenttypehelpers::SetSimulcastId(
+      &image_copy.content_type_, static_cast<uint8_t>(spatial_idx + 1)));
+
+  // Encoded is called on whatever thread the real encoder implementation run
+  // on. In the case of hardware encoders, there might be several encoders
+  // running in parallel on different threads.
+  encoder_stats_observer_->OnSendEncodedImage(encoded_image,
+                                              codec_specific_info);
 
   absl::optional<int> encode_duration_us;
   if (encoded_image.timing_.flags != VideoSendTiming::kInvalid) {
@@ -1603,6 +1784,193 @@ bool VideoStreamEncoder::HasInternalSource() const {
   // TODO(sprang): Checking both info from encoder and from encoder factory
   // until we have deprecated and removed the encoder factory info.
   return codec_info_.has_internal_source || encoder_info_.has_internal_source;
+}
+
+size_t VideoStreamEncoder::NumSpatialLayers() const {
+  size_t num_spatial_layers = send_codec_.numberOfSimulcastStreams;
+  if (send_codec_.codecType == kVideoCodecVP9) {
+    num_spatial_layers =
+        std::max(num_spatial_layers,
+                 static_cast<size_t>(send_codec_.VP9().numberOfSpatialLayers));
+  }
+  return std::max(num_spatial_layers, size_t{1});
+}
+
+void VideoStreamEncoder::ReleaseEncoder() {
+  if (!encoder_ || !encoder_initialized_) {
+    return;
+  }
+  encoder_->Release();
+  encoder_initialized_ = false;
+  TRACE_EVENT0("webrtc", "VCMGenericEncoder::Release");
+}
+
+void VideoStreamEncoder::OnEncodeStarted(uint32_t rtp_timestamp,
+                                         int64_t capture_time_ms,
+                                         size_t simulcast_svc_idx) {
+  if (HasInternalSource()) {
+    return;
+  }
+
+  if (timing_frames_info_.size() < simulcast_svc_idx + 1)
+    timing_frames_info_.resize(simulcast_svc_idx + 1);
+  RTC_DCHECK(
+      timing_frames_info_[simulcast_svc_idx].encode_start_list.empty() ||
+      rtc::TimeDiff(capture_time_ms, timing_frames_info_[simulcast_svc_idx]
+                                         .encode_start_list.back()
+                                         .capture_time_ms) >= 0);
+  // If stream is disabled due to low bandwidth OnEncodeStarted still will be
+  // called and have to be ignored.
+  if (timing_frames_info_[simulcast_svc_idx].target_bitrate_bytes_per_sec == 0)
+    return;
+  if (timing_frames_info_[simulcast_svc_idx].encode_start_list.size() ==
+      kMaxEncodeStartTimeListSize) {
+    ++stalled_encoder_logged_messages_;
+    if (stalled_encoder_logged_messages_ <= kMessagesThrottlingThreshold ||
+        stalled_encoder_logged_messages_ % kThrottleRatio == 0) {
+      RTC_LOG(LS_WARNING) << "Too many frames in the encode_start_list."
+                             " Did encoder stall?";
+      if (stalled_encoder_logged_messages_ == kMessagesThrottlingThreshold) {
+        RTC_LOG(LS_WARNING) << "Too many log messages. Further stalled encoder"
+                               "warnings will be throttled.";
+      }
+    }
+    OnDroppedFrame(DropReason::kDroppedByEncoder);
+    timing_frames_info_[simulcast_svc_idx].encode_start_list.pop_front();
+  }
+  timing_frames_info_[simulcast_svc_idx].encode_start_list.emplace_back(
+      rtp_timestamp, capture_time_ms, rtc::TimeMillis());
+}
+
+absl::optional<int64_t> VideoStreamEncoder::ExtractEncodeStartTime(
+    size_t simulcast_svc_idx,
+    EncodedImage* encoded_image) {
+  absl::optional<int64_t> result;
+  size_t num_simulcast_svc_streams = timing_frames_info_.size();
+  if (simulcast_svc_idx < num_simulcast_svc_streams) {
+    auto encode_start_list =
+        &timing_frames_info_[simulcast_svc_idx].encode_start_list;
+    // Skip frames for which there was OnEncodeStarted but no OnEncodedImage
+    // call. These are dropped by encoder internally.
+    // Because some hardware encoders don't preserve capture timestamp we
+    // use RTP timestamps here.
+    while (!encode_start_list->empty() &&
+           IsNewerTimestamp(encoded_image->Timestamp(),
+                            encode_start_list->front().rtp_timestamp)) {
+      OnDroppedFrame(DropReason::kDroppedByEncoder);
+      encode_start_list->pop_front();
+    }
+    if (encode_start_list->size() > 0 &&
+        encode_start_list->front().rtp_timestamp ==
+            encoded_image->Timestamp()) {
+      result.emplace(encode_start_list->front().encode_start_time_ms);
+      if (encoded_image->capture_time_ms_ !=
+          encode_start_list->front().capture_time_ms) {
+        // Force correct capture timestamp.
+        encoded_image->capture_time_ms_ =
+            encode_start_list->front().capture_time_ms;
+        ++incorrect_capture_time_logged_messages_;
+        if (incorrect_capture_time_logged_messages_ <=
+                kMessagesThrottlingThreshold ||
+            incorrect_capture_time_logged_messages_ % kThrottleRatio == 0) {
+          RTC_LOG(LS_WARNING)
+              << "Encoder is not preserving capture timestamps.";
+          if (incorrect_capture_time_logged_messages_ ==
+              kMessagesThrottlingThreshold) {
+            RTC_LOG(LS_WARNING) << "Too many log messages. Further incorrect "
+                                   "timestamps warnings will be throttled.";
+          }
+        }
+      }
+      encode_start_list->pop_front();
+    } else {
+      ++reordered_frames_logged_messages_;
+      if (reordered_frames_logged_messages_ <= kMessagesThrottlingThreshold ||
+          reordered_frames_logged_messages_ % kThrottleRatio == 0) {
+        RTC_LOG(LS_WARNING) << "Frame with no encode started time recordings. "
+                               "Encoder may be reordering frames "
+                               "or not preserving RTP timestamps.";
+        if (reordered_frames_logged_messages_ == kMessagesThrottlingThreshold) {
+          RTC_LOG(LS_WARNING) << "Too many log messages. Further frames "
+                                 "reordering warnings will be throttled.";
+        }
+      }
+    }
+  }
+  return result;
+}
+
+void VideoStreamEncoder::FillTimingInfo(size_t simulcast_svc_idx,
+                                        EncodedImage* encoded_image,
+                                        int64_t encode_done_ms) {
+  absl::optional<size_t> outlier_frame_size;
+  absl::optional<int64_t> encode_start_ms;
+  uint8_t timing_flags = VideoSendTiming::kNotTriggered;
+
+  // Encoders with internal sources do not call OnEncodeStarted
+  // |timing_frames_info_| may be not filled here.
+  if (!HasInternalSource()) {
+    encode_start_ms = ExtractEncodeStartTime(simulcast_svc_idx, encoded_image);
+  }
+
+  if (timing_frames_info_.size() > simulcast_svc_idx) {
+    size_t target_bitrate =
+        timing_frames_info_[simulcast_svc_idx].target_bitrate_bytes_per_sec;
+    const uint32_t framerate = GetInputFramerateFps();
+    if (framerate > 0 && target_bitrate > 0) {
+      // framerate and target bitrate were reported by encoder.
+      size_t average_frame_size = target_bitrate / framerate;
+      outlier_frame_size.emplace(
+          average_frame_size *
+          send_codec_.timing_frame_thresholds.outlier_ratio_percent / 100);
+    }
+  }
+
+  // Outliers trigger timing frames, but do not affect scheduled timing
+  // frames.
+  if (outlier_frame_size && encoded_image->size() >= *outlier_frame_size) {
+    timing_flags |= VideoSendTiming::kTriggeredBySize;
+  }
+
+  // Check if it's time to send a timing frame.
+  int64_t timing_frame_delay_ms =
+      encoded_image->capture_time_ms_ - last_timing_frame_time_ms_;
+  // Trigger threshold if it's a first frame, too long passed since the last
+  // timing frame, or we already sent timing frame on a different simulcast
+  // stream with the same capture time.
+  if (last_timing_frame_time_ms_ == -1 ||
+      timing_frame_delay_ms >= send_codec_.timing_frame_thresholds.delay_ms ||
+      timing_frame_delay_ms == 0) {
+    timing_flags |= VideoSendTiming::kTriggeredByTimer;
+    last_timing_frame_time_ms_ = encoded_image->capture_time_ms_;
+  }
+
+  // Workaround for chromoting encoder: it passes encode start and finished
+  // timestamps in |timing_| field, but they (together with capture timestamp)
+  // are not in the WebRTC clock.
+  if (HasInternalSource() && encoded_image->timing_.encode_finish_ms > 0 &&
+      encoded_image->timing_.encode_start_ms > 0) {
+    int64_t clock_offset_ms =
+        encode_done_ms - encoded_image->timing_.encode_finish_ms;
+    // Translate capture timestamp to local WebRTC clock.
+    encoded_image->capture_time_ms_ += clock_offset_ms;
+    encoded_image->SetTimestamp(
+        static_cast<uint32_t>(encoded_image->capture_time_ms_ * 90));
+    encode_start_ms.emplace(encoded_image->timing_.encode_start_ms +
+                            clock_offset_ms);
+  }
+
+  // If encode start is not available that means that encoder uses internal
+  // source. In that case capture timestamp may be from a different clock with a
+  // drift relative to rtc::TimeMillis(). We can't use it for Timing frames,
+  // because to being sent in the network capture time required to be less than
+  // all the other timestamps.
+  if (encode_start_ms) {
+    encoded_image->SetEncodeTime(*encode_start_ms, encode_done_ms);
+    encoded_image->timing_.flags = timing_flags;
+  } else {
+    encoded_image->timing_.flags = VideoSendTiming::kInvalid;
+  }
 }
 
 // Class holding adaptation information.
