@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "58bc82ee_da18bb57",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-25T10:22:25Z",
+      "side": 1,
+      "message": "This is to avoid calling Release() twice in some cases. All encoders seem to support that, but thought it best to fix it anyway.\nOnce we remove generic_encoder_ we should add more explicit state keeping to determine when init/release should be called...",
+      "range": {
+        "startLine": 465,
+        "startChar": 0,
+        "endLine": 465,
+        "endChar": 61
+      },
+      "revId": "24fc9567819bdb4b0b9c8ab2f715a48488eac749",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2953cf87_201c8dc9",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 6
@@ -22,6 +45,30 @@
       "revId": "24fc9567819bdb4b0b9c8ab2f715a48488eac749",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28e06727_052406ef",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-02-25T10:22:25Z",
+      "side": 1,
+      "message": "We could, the result is exactly the same.\nI have a pending CL removing VCMGenericEncoder and VCMEncodedFrameCallback :)\n(Accidentally patched into this cl and then removed)",
+      "parentUuid": "2953cf87_201c8dc9",
+      "range": {
+        "startLine": 674,
+        "startChar": 6,
+        "endLine": 674,
+        "endChar": 26
+      },
+      "revId": "24fc9567819bdb4b0b9c8ab2f715a48488eac749",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
