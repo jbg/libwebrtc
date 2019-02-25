@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01808462_e866ab14",
+        "filename": "p2p/base/turn_port.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-02-25T20:10:16Z",
+      "side": 1,
+      "message": "nit: CamelCase naming for a non-trivial method and move the implementation to the .cc. Also please comment the return value. Or alternative, you could just have a simple getter remote_ufrag() and inline the lines below since they are only used in one instance.",
+      "range": {
+        "startLine": 190,
+        "startChar": 7,
+        "endLine": 190,
+        "endChar": 35
+      },
+      "revId": "ca77a67a11ce90cf393aba02fc3aa15a7cd8d8bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
