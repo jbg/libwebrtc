@@ -13,20 +13,18 @@
 namespace webrtc {
 namespace test {
 namespace {
-VideoStreamConfig AnalyzerVideoConfig(VideoQualityStats* stats) {
+VideoStreamConfig AnalyzerVideoConfig(VideoQualityAnalyzer* analyzer) {
   VideoStreamConfig config;
   config.encoder.codec = VideoStreamConfig::Encoder::Codec::kVideoCodecVP8;
   config.encoder.implementation =
       VideoStreamConfig::Encoder::Implementation::kSoftware;
-  config.analyzer.frame_quality_handler = [stats](VideoFrameQualityInfo info) {
-    stats->HandleFrameInfo(info);
-  };
+  config.hooks.frame_pair_handlers = {analyzer->Handler()};
   return config;
 }
 }  // namespace
 
 TEST(ScenarioAnalyzerTest, PsnrIsHighWhenNetworkIsGood) {
-  VideoQualityStats stats;
+  VideoQualityAnalyzer analyzer;
   {
     Scenario s;
     NetworkNodeConfig good_network;
@@ -35,14 +33,14 @@ TEST(ScenarioAnalyzerTest, PsnrIsHighWhenNetworkIsGood) {
                                 {s.CreateSimulationNode(good_network)},
                                 s.CreateClient("callee", CallClientConfig()),
                                 {s.CreateSimulationNode(NetworkNodeConfig())});
-    s.CreateVideoStream(route->forward(), AnalyzerVideoConfig(&stats));
+    s.CreateVideoStream(route->forward(), AnalyzerVideoConfig(&analyzer));
     s.RunFor(TimeDelta::seconds(1));
   }
-  EXPECT_GT(stats.psnr.Mean(), 46);
+  EXPECT_GT(analyzer.stats().psnr.Mean(), 46);
 }
 
 TEST(ScenarioAnalyzerTest, PsnrIsLowWhenNetworkIsBad) {
-  VideoQualityStats stats;
+  VideoQualityAnalyzer analyzer;
   {
     Scenario s;
     NetworkNodeConfig bad_network;
@@ -53,10 +51,10 @@ TEST(ScenarioAnalyzerTest, PsnrIsLowWhenNetworkIsBad) {
                                 s.CreateClient("callee", CallClientConfig()),
                                 {s.CreateSimulationNode(NetworkNodeConfig())});
 
-    s.CreateVideoStream(route->forward(), AnalyzerVideoConfig(&stats));
+    s.CreateVideoStream(route->forward(), AnalyzerVideoConfig(&analyzer));
     s.RunFor(TimeDelta::seconds(2));
   }
-  EXPECT_LT(stats.psnr.Mean(), 40);
+  EXPECT_LT(analyzer.stats().psnr.Mean(), 40);
 }
 }  // namespace test
 }  // namespace webrtc

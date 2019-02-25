@@ -11,16 +11,19 @@
 #define TEST_SCENARIO_QUALITY_INFO_H_
 
 #include "api/units/timestamp.h"
+#include "api/video/video_frame_buffer.h"
 
 namespace webrtc {
 namespace test {
-struct VideoFrameQualityInfo {
-  Timestamp capture_time;
-  Timestamp received_capture_time;
-  Timestamp render_time;
-  int width;
-  int height;
-  double psnr;
+struct VideoFramePair {
+  rtc::scoped_refptr<webrtc::VideoFrameBuffer> captured;
+  rtc::scoped_refptr<webrtc::VideoFrameBuffer> decoded;
+  Timestamp capture_time = Timestamp::MinusInfinity();
+  Timestamp render_time = Timestamp::PlusInfinity();
+  int layer_id = 0;
+  int capture_id = 0;
+  int decode_id = 0;
+  int repeated = 0;
 };
 }  // namespace test
 }  // namespace webrtc
