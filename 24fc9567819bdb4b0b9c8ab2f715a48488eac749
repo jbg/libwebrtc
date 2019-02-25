@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2953cf87_201c8dc9",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-02-25T08:26:48Z",
+      "side": 1,
+      "message": "Is there a reason not to call ::Release on the generic encoder instead? Or is the plan to simplify the generic encoder in the future?",
+      "range": {
+        "startLine": 674,
+        "startChar": 6,
+        "endLine": 674,
+        "endChar": 26
+      },
+      "revId": "24fc9567819bdb4b0b9c8ab2f715a48488eac749",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
