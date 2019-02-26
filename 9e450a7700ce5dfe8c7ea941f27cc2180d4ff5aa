@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "e5009952_37a58dba",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T19:06:32Z",
+      "side": 1,
+      "message": "If we remove this, how are we going to set the PSK on the caller?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 59
+      },
+      "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b1ebcadb_8ef1680f",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 4
