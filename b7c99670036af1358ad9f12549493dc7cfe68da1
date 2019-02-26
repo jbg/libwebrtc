@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "79d27e8b_fb749711",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3014,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-02-26T19:33:55Z",
+      "side": 1,
+      "message": "will put something together.",
+      "parentUuid": "cd195ca3_9a02dba7",
+      "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f1fdcfe1_b1a2a2b0",
         "filename": "pc/rtp_sender.cc",
         "patchSetId": 1
@@ -48,6 +66,30 @@
       "writtenOn": "2019-02-26T19:16:51Z",
       "side": 1,
       "message": "Side comment: I was OOO when you made this change. Why do you remove all layers and invalidate future calls to Get/SetParameters if there\u0027s no media channel or ssrc set?",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 3
+      },
+      "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "875aadd3_7c6302e1",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-02-26T19:33:55Z",
+      "side": 1,
+      "message": "it\u0027s not removing all layers, it\u0027s removing the layers that were asked to be disabled.\nThe difference is that the media channel is configured once and we do not change the number of layers, but this object is more flexible.\nSo if there is no media channel we can directly remove the layers from the init parameters without having to do the book-keeping. the layers should not be set on the media_channel when it eventually gets set.\nif the media channel is set, we have to work around it by book-keeping which layers need to be added and removed when routing calls to/from the client.\n\nparameters are invalidated any time the number of layers is reduced because users holding parameters have the wrong number of layers in their object. We now expect the removed layers to \u0027disappear\u0027 from users\u0027 context.",
+      "parentUuid": "f1fdcfe1_b1a2a2b0",
       "range": {
         "startLine": 346,
         "startChar": 0,
@@ -80,6 +122,30 @@
       "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1be9861_d76ed53d",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-02-26T19:33:55Z",
+      "side": 1,
+      "message": "you can call it multiple times. if there are no arguments, this is a no-op.\nfuture negotiations should use get parameters on the sender to negotiate layers, so it should only use layers that were never disabled, hence calls will be valid.\nThe sender object should not be reused for different source or configuration, and the simulcast envelope cannot be changed, so the list doesn\u0027t really need to be cleared to allow regular operation.",
+      "parentUuid": "5a01a159_861bb4be",
+      "range": {
+        "startLine": 362,
+        "startChar": 4,
+        "endLine": 362,
+        "endChar": 25
+      },
+      "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
