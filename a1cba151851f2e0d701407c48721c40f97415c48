@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc165059_af0c45e5",
+        "filename": "p2p/base/turn_port.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-02-26T17:50:26Z",
+      "side": 1,
+      "message": "another nit in style: the simple getter in the codebase is usually just remote_ufrag().",
+      "range": {
+        "startLine": 190,
+        "startChar": 21,
+        "endLine": 190,
+        "endChar": 37
+      },
+      "revId": "a1cba151851f2e0d701407c48721c40f97415c48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
