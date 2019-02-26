@@ -126,6 +126,30 @@
     },
     {
       "key": {
+        "uuid": "eca4560d_c12b4d28",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-02-26T23:17:49Z",
+      "side": 1,
+      "message": "This API is only used internally during negotiation.\nFor example, you might want to send simulcast:\na\u003dsimulcast:send 1;2;3\nbut that could get rejected altogether if simulcast is not supported (and then SRD will call DisableEncodingLayers(2,3) when the answer does not contain the attribute.\nor a certain layer can be rejected in the response:\na\u003dsimulcast:recv 1;2\nand then again SRD will call DisableEncodingLayers(3).\n\nThe idea is that the user cannot interact with rejected layers. trying to do something like change resolution, set active/inactive do not make sense.\nso the layers are entirely inaccessible to them.",
+      "parentUuid": "9bc12481_686159be",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 3
+      },
+      "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a01a159_861bb4be",
         "filename": "pc/rtp_sender.cc",
         "patchSetId": 1
