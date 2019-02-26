@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6521c75f_39f3edf9",
+        "filename": "api/media_transport_interface.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T18:45:30Z",
+      "side": 1,
+      "message": "Why not return an empty string here?  IMHO we should do that and DCHECK that it\u0027s not empty when it\u0027s actually used (and of course delete the default implementation as soon as we can).",
+      "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1ebcadb_8ef1680f",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T18:45:30Z",
+      "side": 1,
+      "message": "I\u0027m not sure how I feel about naming this callers_config.  It\u0027s really a serialized blob of supported transport parameters.  It\u0027s real semantic is more like \"remote supported transport parameters\" (with the getter below returning \"supported transport parameters\").\n\nThe fact that it comes from the caller and goes to the callee feels like a prescription of what the SDP layer should do, rather than a description of what the property is and should contain.\n\nI think it\u0027s pretty natural for signaling to start out by creating a transport with no remote transport parameters (the offerer doesn\u0027t know them) and passing the local transport parameters to the answerer (which can then apply them as remote parameters).\n\nBut I don\u0027t think we need to mandate it.  What if, for example, we need to support swapping perspectives during the signaling flow?  We already know of one case where the callee generates a new offer (ICE restart), though in that case we don\u0027t need to reset media transports.  Could there be cases where we *do* need to reset media transports?\n\nI don\u0027t know if it will happen, but I\u0027d rather use generic, descriptive names in the interface that aren\u0027t too prescriptive about a particular mode of operation.\n\ntl;dr I\u0027d prefer to name this something like `remote_supported_transport_parameters` (or, if that\u0027s too long, maybe just `remote_transport_parameters`.",
+      "range": {
+        "startLine": 77,
+        "startChar": 30,
+        "endLine": 77,
+        "endChar": 44
+      },
+      "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c2b4a1b_874a7505",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T18:45:30Z",
+      "side": 1,
+      "message": "Are there ever cases when the perspectives need to switch?  For example, can the callee reject an offer and generate a new one with different parameters?",
+      "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afcd5541_b01e282e",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T18:45:30Z",
+      "side": 1,
+      "message": "As with naming above, I\u0027d probably call this GetSupportedTransportParameters() or GetTransportParameters().",
+      "range": {
+        "startLine": 208,
+        "startChar": 38,
+        "endLine": 208,
+        "endChar": 54
+      },
+      "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "817fd374_577b9c14",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T18:45:30Z",
+      "side": 1,
+      "message": "Nit: typo for caller",
+      "range": {
+        "startLine": 365,
+        "startChar": 23,
+        "endLine": 365,
+        "endChar": 28
+      },
+      "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
