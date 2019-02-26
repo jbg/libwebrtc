@@ -1,0 +1,273 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c842628a_1ccf482b",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "probably rtc_source_set",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 18
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "513057a3_35e26be9",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "since it is not in api, prefer not to make it globally public.\nRemove the tag (default visibility would then be public inside webrtc, private to targets outside)",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 22
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a637662b_18aad566",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "with new folder it might be better to create BUILD.gn in that new folder\n(doing it later is noticeably harder)",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 64,
+        "endChar": 30
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06db97b9_504c0633",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "you mean prepend (as it is now)\nor would it be make more sense to overwrite:\ninfo_.frame_diffs.assign(frame_diffs.begin(), frame_diffs.end());\n\nWith prepend I afraid of such pattern:\n\nBuilder common_template \u003d Builder().T(0).S(1);\ntemplates \u003d {\ncommon_template.Fdiffs({1}).Build(), \ncommon_template.Fdiffs({2}).Build() }\n\nthat would produce surprising result",
+      "range": {
+        "startLine": 59,
+        "startChar": 20,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b7490d6_afce593f",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 26
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9a9e942_388e6e24",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "(may be also create an OWNER file in the generic_frame_descriptor subfolder)",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3fa4c34_79fa504b",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "suggestion:\nadd comments with their character representation since Builder::Dtis expects it:\n// \u0027-\u0027\n// \u0027D\u0027\n// \u0027S\u0027\n// \u0027R\u0027",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d0182d_777cce5a",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "Are you using it now? or have plans to use it in nearby future?\nif not, do not hurry adding it.\nhttps://testing.googleblog.com/2017/08/code-health-eliminate-yagni-smells.html",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0e06296_f8bc3353",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "still needed?",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 40
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de44502b_15058e92",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "\u0027\u003d\u0027 fits here slightly better than emplace",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6026c2_2f92fb33",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "what is the purpose of this change?",
+      "range": {
+        "startLine": 855,
+        "startChar": 0,
+        "endLine": 855,
+        "endChar": 44
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0429f40a_c9871649",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "I would probably put these two lines into default clause to keep such comment next to RTC_NOTREACHED and double check all others branches properly return, but that just a matter of taste.",
+      "range": {
+        "startLine": 388,
+        "startChar": 2,
+        "endLine": 389,
+        "endChar": 28
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7bc1f2e_6d7e81a3",
+        "filename": "modules/video_coding/include/video_codec_interface.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T16:28:49Z",
+      "side": 1,
+      "message": "nit: this line looks scary (and at first I thought it was wrong).\nIt might help to put \nstatic_assert(std::is_trivially_copyable\u003cdecltype(codecSpecific)\u003e::value, \"\");\nright next to it.\n\nor initialize in modern way.\nDoes codecSpecific \u003d {} works?",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
