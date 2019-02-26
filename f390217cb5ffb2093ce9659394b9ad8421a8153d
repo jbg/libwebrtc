@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f80b6a47_fb018c6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-26T15:15:06Z",
+      "side": 1,
+      "message": "Yes, WebRTC flavor, like the clang warnings cherry-picking we have.\nAlso, we could imagine a smaller set of enabled checks for the presubmit than for the manual invokation.",
+      "parentUuid": "af62e60a_203f7e85",
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6086d897_18e080a9",
         "filename": "tools_webrtc/clang_tidy.py",
         "patchSetId": 7
@@ -39,6 +57,30 @@
       "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cc9dcb0_a721faba",
+        "filename": "tools_webrtc/clang_tidy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-26T15:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6086d897_18e080a9",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "ba6ffea4_8c5a4eea",
+        "filename": "tools_webrtc/presubmit_checks_lib/build_helpers.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-26T15:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52bca780_deb2c3e0",
+      "range": {
+        "startLine": 62,
+        "startChar": 25,
+        "endLine": 62,
+        "endChar": 55
+      },
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3376e605_679b073f",
         "filename": "tools_webrtc/presubmit_checks_lib/build_helpers_test.py",
         "patchSetId": 7
@@ -96,6 +162,24 @@
       "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f391b27f_6f600b30",
+        "filename": "tools_webrtc/presubmit_checks_lib/build_helpers_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-02-26T15:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3376e605_679b073f",
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
