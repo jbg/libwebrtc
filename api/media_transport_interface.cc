@@ -21,6 +21,9 @@
 #include <utility>
 
 namespace webrtc {
+namespace {
+static constexpr char kAbstractTransportName[] = "interface";
+}
 
 MediaTransportSettings::MediaTransportSettings() = default;
 MediaTransportSettings::MediaTransportSettings(const MediaTransportSettings&) =
@@ -51,8 +54,26 @@ MediaTransportFactory::CreateMediaTransport(
   return std::unique_ptr<MediaTransportInterface>(nullptr);
 }
 
+RTCErrorOr<std::unique_ptr<MediaTransportInterface>>
+MediaTransportFactory::CreateMediaTransport(
+    rtc::Thread* network_thread,
+    const MediaTransportSettings& settings) {
+  return std::unique_ptr<MediaTransportInterface>(nullptr);
+}
+
+std::string MediaTransportFactory::GetTransportName() const {
+  return kAbstractTransportName;
+}
+
 MediaTransportInterface::MediaTransportInterface() = default;
 MediaTransportInterface::~MediaTransportInterface() = default;
+
+absl::optional<std::string> MediaTransportInterface::GetCallersConfig() const {
+  return absl::nullopt;
+}
+
+void MediaTransportInterface::Connect(
+    rtc::PacketTransportInternal* packet_transport) {}
 
 void MediaTransportInterface::SetKeyFrameRequestCallback(
     MediaTransportKeyFrameRequestCallback* callback) {}
