@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1cbc0f31_52ccb06f",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "This is not an 8 frame cycling pattern, it\u0027s just the templates you would need for such a pattern. Adding ASCII art to show that pattern would be a bit misleading.",
+      "parentUuid": "651c13bf_5709080b",
+      "range": {
+        "startLine": 552,
+        "startChar": 25,
+        "endLine": 552,
+        "endChar": 34
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a36fdfb2_27adcde2",
         "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "00793bcc_165fb4bd",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a36fdfb2_27adcde2",
+      "range": {
+        "startLine": 307,
+        "startChar": 31,
+        "endLine": 307,
+        "endChar": 38
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4be47ea_164d122e",
         "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
         "patchSetId": 8
@@ -68,6 +116,30 @@
       "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34ad37a2_39b22763",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "Good catch, updated here and in default_temporal_layers.cc",
+      "parentUuid": "b4be47ea_164d122e",
+      "range": {
+        "startLine": 362,
+        "startChar": 20,
+        "endLine": 362,
+        "endChar": 38
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "ae5e1452_9e6e01aa",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "Removed chains for now.",
+      "parentUuid": "2ca21de1_b5f84eca",
+      "range": {
+        "startLine": 118,
+        "startChar": 27,
+        "endLine": 118,
+        "endChar": 29
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37af7ae4_0cb418b7",
         "filename": "modules/video_coding/include/video_codec_interface.h",
         "patchSetId": 8
@@ -128,6 +224,30 @@
       "writtenOn": "2019-02-23T09:22:05Z",
       "side": 1,
       "message": "\"Use the explicit keyword for conversion operators.\"\nhttps://google.github.io/styleguide/cppguide.html#Implicit_Conversions\n\nCan it be a regular function Build() instead?\nOr may be more efficient (e.g. from binary size point of view) to merge the struct and Builder:\n\nclass GenericFrameInfo {\n public:\n  GenericFrameInfo(const GenericFrameInfo\u0026) \u003d default;\n \n  int temporal_id() { return temporal_id_; }\n\n  GenericFrameInfo\u0026 Tl(int temporal_id) { temporal_id_ \u003d temporal_id; return *this; }\n  GenericFrameInfo\u0026 Fdiffs(rtc::ArrayView\u003cconst int\u003e frame_diffs) { frame_diffs_.assign(frame_diffs.begin(), frame_diffs.end());\n  }\n  GenericFrameInfo\u0026 Indications(absl::string_view indication_symbols);//one of few non-inlined\n\n private:\n  int temporal_id_ \u003d 0;\n  absl::InlinedVector\u003cint, 10\u003e frame_diffs_;\n  absl::InlinedVector\u003c...\u003e operating_points_;\n};",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 10
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0e4e55a_5728ce49",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "That rule does not really make sense for a builder class. I added the operator to avoid having a build() function, and making it explicit would force me to static_cast it, which would also look ugly.\n\nNot that I\u0027m a compiler expert, but I would not expect there to be any significant difference in binary size whether I put this functionality in a separate class or into the same class. I like this better because it does not muddle GenericFrameInfo.",
+      "parentUuid": "37af7ae4_0cb418b7",
       "range": {
         "startLine": 128,
         "startChar": 2,
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "ae8a95b9_998063ec",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f2a1b3e_60341a13",
+      "range": {
+        "startLine": 130,
+        "startChar": 11,
+        "endLine": 130,
+        "endChar": 13
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3ef10df_f21c170e",
         "filename": "modules/video_coding/include/video_codec_interface.h",
         "patchSetId": 8
@@ -183,6 +327,30 @@
       "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fa4d292_e7fb3c1a",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3ef10df_f21c170e",
+      "range": {
+        "startLine": 131,
+        "startChar": 23,
+        "endLine": 131,
+        "endChar": 41
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "aa96df17_e9b9c3ea",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "I understand that you have to copy the elements even when moving, but I would expect copying a few ints to be cheaper than a heap allocation.\n\nI think using an rtc::ArrayView would be nice since it is more general, but it does not allow me to use temporaries, which makes the building step kind of ugly (can\u0027t use Fdiffs({1}).\n\nUsing an std::vector instead.",
+      "parentUuid": "2a500a2a_b9ff37b6",
+      "range": {
+        "startLine": 132,
+        "startChar": 24,
+        "endLine": 132,
+        "endChar": 37
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cddca45f_b908bcce",
         "filename": "modules/video_coding/include/video_codec_interface.h",
         "patchSetId": 8
@@ -220,6 +412,30 @@
       "writtenOn": "2019-02-23T09:22:05Z",
       "side": 1,
       "message": "since you exlpicetly adding copy constructor, may be also add move constructor since it is more effecient for this struct than copy (std::vector cheap to move, not so much to copy)",
+      "range": {
+        "startLine": 141,
+        "startChar": 45,
+        "endLine": 141,
+        "endChar": 46
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a07e358f_f7746d57",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-26T12:12:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cddca45f_b908bcce",
       "range": {
         "startLine": 141,
         "startChar": 45,
