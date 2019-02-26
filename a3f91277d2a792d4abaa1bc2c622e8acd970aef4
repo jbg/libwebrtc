@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "26d2ac3e_f6f50fb3",
+        "filename": "pc/session_description.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T22:42:35Z",
+      "side": 1,
+      "message": "How about using a map instead of a vector of pairs?\n\nThen checking that it\u0027s not there is as simple as:\n\nRTC_DCHECK(media_transport_settings_.find(media_transport_name) \u003d\u003d media_transport_settings_.end());",
+      "parentUuid": "385b342e_7af0e691",
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3e615346_7bb3a6be",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 1
@@ -87,6 +105,29 @@
       "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0536b725_43b67e99",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2239,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T22:42:35Z",
+      "side": 1,
+      "message": "I can see a few options here.\n\nIf we need multiple transports of the same \"type\", they can still have different prefixes (eg. \"rtp\", \"rtp-1\", \"rtp-2\").  The receiver needs to understand that \"rtp-1\" and \"rtp-2\" are both aliases for the RtpMediaTransportFactory.  That seems backward-compatible:  x-mt lines that aren\u0027t recognized (eg. by an old webrtc) will be ignored, and those that are recognized as meaning \"make a second/third/fourth RTP transport\" will be processed as such.\n\nOr, as you suggested, we could ignore subsequent lines for now.  If I understand correctly, this is more in line with the way SDP generally works:  if you see an entry you don\u0027t recognize, ignore it.  Then, later on, we can interpret subsequent lines for the same transport as (a) requests for more than one of that type of transport, or (b) different options for how to configure the same transport, or (c) really however we decide is best to use that feature.\n\nIntuitively, I would lean toward the latter.  If you don\u0027t understand part of a message, but you can clearly separate the part you don\u0027t understand from parts you do understand, it seems best to just discard the part you don\u0027t.  Maybe log something, but making it an error seems unnecessary.",
+      "range": {
+        "startLine": 2236,
+        "startChar": 10,
+        "endLine": 2239,
+        "endChar": 24
+      },
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {

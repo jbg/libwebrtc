@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00354730_5388dfda",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4412,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T22:42:35Z",
+      "side": 1,
+      "message": "This behavior is part of why I\u0027d lean toward ignoring, rather than failing, repeated x-mt lines.  What\u0027s so different about a repeated line than a line with a nonsense key?",
+      "revId": "7d9a446f5a31de1214715d04ff34a4f0e3ce1287",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
