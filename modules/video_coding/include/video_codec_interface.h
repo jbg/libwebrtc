@@ -13,6 +13,9 @@
 
 #include <vector>
 
+#include "absl/container/inlined_vector.h"
+#include "absl/strings/string_view.h"
+#include "absl/types/optional.h"
 #include "api/video/video_frame.h"
 #include "api/video_codecs/video_decoder.h"
 #include "api/video_codecs/video_encoder.h"
@@ -96,15 +99,63 @@ union CodecSpecificInfoUnion {
 };
 static_assert(std::is_pod<CodecSpecificInfoUnion>::value, "");
 
-// Note: If any pointers are added to this struct or its sub-structs, it
+struct GenericFrameInfo {
+  enum class OperatingPointIndication {
+    kNotPresent,
+    kDiscardable,
+    kSwitch,
+    kRequired
+  };
+
+  class Builder;
+
+  GenericFrameInfo();
+  GenericFrameInfo(const GenericFrameInfo&);
+  ~GenericFrameInfo();
+
+  int temporal_id = 0;
+  int spatial_id = 0;
+  absl::InlinedVector<int, 10> frame_diffs;
+  absl::InlinedVector<OperatingPointIndication, 10> operating_points;
+};
+
+class GenericFrameInfo::Builder {
+ public:
+  Builder();
+  ~Builder();
+
+  operator GenericFrameInfo() const;
+  Builder& T(int temporal_id);
+  Builder& S(int spatial_id);
+  Builder& Dtis(absl::string_view indication_symbols);
+  Builder& Fdiffs(const std::vector<int>& frame_diffs);
+
+ private:
+  GenericFrameInfo info_;
+};
+
+struct TemplateStructure {
+  TemplateStructure();
+  TemplateStructure(const TemplateStructure&);
+  TemplateStructure(TemplateStructure&&);
+  TemplateStructure& operator=(const TemplateStructure&);
+  ~TemplateStructure();
+
+  int num_operating_points = 0;
+  std::vector<GenericFrameInfo> templates;
+};
+
+// Note: if any pointers are added to this struct or its sub-structs, it
 // must be fitted with a copy-constructor. This is because it is copied
 // in the copy-constructor of VCMEncodedFrame.
 struct CodecSpecificInfo {
-  CodecSpecificInfo() : codecType(kVideoCodecGeneric) {
-    memset(&codecSpecific, 0, sizeof(codecSpecific));
-  }
+  CodecSpecificInfo();
+  ~CodecSpecificInfo();
+
   VideoCodecType codecType;
   CodecSpecificInfoUnion codecSpecific;
+  absl::optional<GenericFrameInfo> generic_frame_info;
+  absl::optional<TemplateStructure> template_structure;
 };
 
 }  // namespace webrtc
