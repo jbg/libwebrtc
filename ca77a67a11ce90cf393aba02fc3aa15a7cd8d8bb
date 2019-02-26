@@ -22,6 +22,30 @@
       "revId": "ca77a67a11ce90cf393aba02fc3aa15a7cd8d8bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66bfe667_67dc4659",
+        "filename": "p2p/base/turn_port.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-02-26T17:41:18Z",
+      "side": 1,
+      "message": "I took the set_ and get_ approach. Thanks for suggesting that.\nDone",
+      "parentUuid": "01808462_e866ab14",
+      "range": {
+        "startLine": 190,
+        "startChar": 7,
+        "endLine": 190,
+        "endChar": 35
+      },
+      "revId": "ca77a67a11ce90cf393aba02fc3aa15a7cd8d8bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
