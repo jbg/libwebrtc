@@ -69,7 +69,12 @@ struct MediaTransportSettings final {
   // Must be set if a pre-shared key is used for the call.
   // TODO(bugs.webrtc.org/9944): This should become zero buffer in the distant
   // future.
+  // TODO(psla): to be removed when callers_config is used.
   absl::optional<std::string> pre_shared_key;
+
+  // If present, this is a config passed from the caller to the answerer.
+  // TODO(psla): remove pre_shared_key once callers_config is used.
+  absl::optional<std::string> callers_config;
 
   // If present, provides the event log that media transport should use.
   // Media transport does not own it. The lifetime of |event_log| will exceed
@@ -186,6 +191,27 @@ class MediaTransportInterface {
  public:
   MediaTransportInterface();
   virtual ~MediaTransportInterface();
+
+  // Retrieves callers config that should be passed to the callee, before the
+  // call is connected. Such config is opaque to SDP (sdp just passes it
+  // through). The config is a binary blob, so SDP may choose to use base64 to
+  // serialize it (or any other approach that guarantees that the binary blob
+  // goes through).
+  // This should only be called for the caller's perspective.
+  //
+  // This may return an unset optional, which means that the given media
+  // transport is not supported / disabled and shouldn't be reported in SDP.
+  //
+  // It may also return an empty string, in which case the media transport is
+  // supported, but without any extra settings.
+  // TODO(psla): Make abstract.
+  virtual absl::optional<std::string> GetCallersConfig() const;
+
+  // Connect the media transport to the ICE transport.
+  // The implementation must be able to ignore incoming packets that don't
+  // belong to it.
+  // TODO(psla): Make abstract.
+  virtual void Connect(rtc::PacketTransportInternal* packet_transport);
 
   // Start asynchronous send of audio frame. The status returned by this method
   // only pertains to the synchronous operations (e.g.
@@ -325,14 +351,33 @@ class MediaTransportFactory {
                        rtc::Thread* network_thread,
                        bool is_caller);
 
-  // Creates media transport.
+  // Creates media transport and connects it.
   // - Does not take ownership of packet_transport or network_thread.
   // TODO(bugs.webrtc.org/9938): remove default implementation once all children
   // override it.
+  // TODO(psla): Remove once new one (that doesn't connect) is used.
   virtual RTCErrorOr<std::unique_ptr<MediaTransportInterface>>
   CreateMediaTransport(rtc::PacketTransportInternal* packet_transport,
                        rtc::Thread* network_thread,
                        const MediaTransportSettings& settings);
+
+  // Creates a new Media Transport in a disconnected state. If the media
+  // transport for the caler is created, one can then call
+  // MediaTransportInterface::GetCallersConfig on that new instance.
+  // TODO(psla): Make abstract.
+  virtual RTCErrorOr<std::unique_ptr<webrtc::MediaTransportInterface>>
+  CreateMediaTransport(rtc::Thread* network_thread,
+                       const MediaTransportSettings& settings);
+
+  // Gets a transport name which is supported by the implementation.
+  // Different factories should return different transport names, and at runtime
+  // it will be checked that different names were used.
+  // For example, "rtp" or "generic" may be returned by two different
+  // implementations.
+  // The value returned by this method must never change in the lifetime of the
+  // factory.
+  // TODO(psla): Make abstract.
+  virtual const std::string& GetTransportName() const;
 };
 
 }  // namespace webrtc
