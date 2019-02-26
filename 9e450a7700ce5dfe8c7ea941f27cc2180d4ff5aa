@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "581aa860_caea3385",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T22:07:04Z",
+      "side": 1,
+      "message": "I think that relies on encrypted signaling.  So does SDES, where we get the PSK today.  But there might be other/better models for getting a PSK.  Let\u0027s not box ourselves in too quickly.\n\nLet\u0027s take further discussion offline.",
+      "parentUuid": "e2711714_270b1713",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 59
+      },
+      "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1ebcadb_8ef1680f",
         "filename": "api/media_transport_interface.h",
         "patchSetId": 4
@@ -160,6 +184,24 @@
       "side": 1,
       "message": "I put some thought into it and decided that it\u0027s not a scenario we have to worry about now.\nOnce we start the connection, the perspectives shouldn\u0027t change. If we restart the connection, maybe the perspective could change... but: shouldn\u0027t we recreate a new ICE?\n\nAs long as the same ICE is used, we don\u0027t want to mix packets from different perspectives. We would need more overhead (e.g. connection id) to differentiate the packets, etc.\n\nAlso, I think that at this point you cannot \"reject\" the offer and generate a new one. This would slow down the connection setup time and is impractical. Even if the standard allows this, at least for now we don\u0027t have to worry about it, IMO.",
       "parentUuid": "2c2b4a1b_874a7505",
+      "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31c7aac6_c046c0cc",
+        "filename": "api/media_transport_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-26T22:07:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3ce9d4a7_324b57a4",
       "revId": "9e450a7700ce5dfe8c7ea941f27cc2180d4ff5aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
