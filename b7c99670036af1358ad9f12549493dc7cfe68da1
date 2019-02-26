@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13cc77f5_fec9c71f",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3014,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-26T18:00:04Z",
+      "side": 1,
+      "message": "Can you add a test for the end-to-end scenario that this fixes?",
+      "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
