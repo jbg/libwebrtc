@@ -16,6 +16,70 @@
       "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd195ca3_9a02dba7",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3014,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-02-26T19:16:51Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "13cc77f5_fec9c71f",
+      "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1fdcfe1_b1a2a2b0",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-02-26T19:16:51Z",
+      "side": 1,
+      "message": "Side comment: I was OOO when you made this change. Why do you remove all layers and invalidate future calls to Get/SetParameters if there\u0027s no media channel or ssrc set?",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 3
+      },
+      "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a01a159_861bb4be",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-02-26T19:16:51Z",
+      "side": 1,
+      "message": "Can you call DisableEncodingLayers multiple times as part of a renegotiation? Would this be a problem that you are just inserting into a list, but it\u0027s never being cleared?",
+      "range": {
+        "startLine": 362,
+        "startChar": 4,
+        "endLine": 362,
+        "endChar": 25
+      },
+      "revId": "b7c99670036af1358ad9f12549493dc7cfe68da1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
