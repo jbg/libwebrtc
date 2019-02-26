@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "761fddf4_3a0f60ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-02-26T13:42:19Z",
+      "side": 1,
+      "message": "s/doesn\u0027t/does",
+      "range": {
+        "startLine": 16,
+        "startChar": 33,
+        "endLine": 16,
+        "endChar": 40
+      },
+      "revId": "37476cfdb3e4e06a80d5db382433833868bbd81d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
