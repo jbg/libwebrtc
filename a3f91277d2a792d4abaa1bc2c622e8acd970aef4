@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e584ff9c_f3f660b0",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2217,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-26T22:26:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e615346_7bb3a6be",
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5971089a_1c4b16f9",
         "filename": "pc/webrtc_sdp_unittest.cc",
         "patchSetId": 1
@@ -147,6 +165,30 @@
       "writtenOn": "2019-02-26T21:37:42Z",
       "side": 1,
       "message": "pull this out to a local for readability",
+      "range": {
+        "startLine": 4374,
+        "startChar": 16,
+        "endLine": 4374,
+        "endChar": 62
+      },
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a37e8a91_338e0468",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4374,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-26T22:26:52Z",
+      "side": 1,
+      "message": "Do you think that\nconst std::vector\u003cMediaTransportSetting\u003e\u0026 settings \u003d output.description()-\u003eMediaTransportSettings();\nEXPECT_EQ(2u, settings.size())\nmakes it more readable?\nor do you prefer\nconst auto\u0026 settings \u003d \n?",
+      "parentUuid": "cf213bd3_a363d2c9",
       "range": {
         "startLine": 4374,
         "startChar": 16,
