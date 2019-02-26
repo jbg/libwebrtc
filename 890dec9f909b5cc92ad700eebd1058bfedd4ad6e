@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99718600_0bafe71c",
+        "filename": "api/test/neteq_simulator_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7967
+      },
+      "writtenOn": "2019-02-26T09:00:34Z",
+      "side": 1,
+      "message": "This looks like a weird split of lines, doesn\u0027t it?",
+      "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1afc757f_72c02660",
+        "filename": "api/test/neteq_simulator_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 7967
+      },
+      "writtenOn": "2019-02-26T09:00:34Z",
+      "side": 1,
+      "message": "Aren\u0027t you reducing the abuse here? What else do you want to change?",
+      "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d533d9b0_213a3eb6",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7967
+      },
+      "writtenOn": "2019-02-26T09:00:34Z",
+      "side": 1,
+      "message": "I prefer to remove all the default values from this file. You also have the default values in the config struct definition. Duplicating them seems like asking for problems in the future.\n\nInstead, I would leave empty defaults and just overwrite the config struct fields if a value is added in as a command line flag.",
+      "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9035e411_a49b2d8a",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 7967
+      },
+      "writtenOn": "2019-02-26T09:00:34Z",
+      "side": 1,
+      "message": "As commented above, I would change this to conditional assignments.",
+      "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
