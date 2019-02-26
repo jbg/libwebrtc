@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "1d3d2ba4_53b8666c",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4330,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-26T22:25:16Z",
+      "side": 1,
+      "message": "kSdpSessionString is reaaaally long; unnecessarily long. But if that makes it more readable to you... :) Done.\n\nMakes the test slightly shorter.",
+      "parentUuid": "5971089a_1c4b16f9",
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52c66879_3918b85f",
         "filename": "pc/webrtc_sdp_unittest.cc",
         "patchSetId": 1
@@ -91,6 +109,30 @@
       "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c638e3b4_a1736826",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4340,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-26T22:25:16Z",
+      "side": 1,
+      "message": "Done here and below.",
+      "parentUuid": "52c66879_3918b85f",
+      "range": {
+        "startLine": 4340,
+        "startChar": 2,
+        "endLine": 4340,
+        "endChar": 11
+      },
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
