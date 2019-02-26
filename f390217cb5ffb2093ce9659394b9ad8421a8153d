@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af62e60a_203f7e85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-26T14:56:57Z",
+      "side": 1,
+      "message": "For the future: Is the plan for this tool to have a WebRTC-specific set of default options? I guess that sort of consideration will become apparent when this is promoted to a presubmit check...",
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6086d897_18e080a9",
+        "filename": "tools_webrtc/clang_tidy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-26T14:56:57Z",
+      "side": 1,
+      "message": "2019?",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b5bc21e_497a6bca",
+        "filename": "tools_webrtc/clang_tidy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-26T14:56:57Z",
+      "side": 1,
+      "message": "Check for .cc instead? Just in case the user tries a non-C++ file?",
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52bca780_deb2c3e0",
+        "filename": "tools_webrtc/presubmit_checks_lib/build_helpers.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-26T14:56:57Z",
+      "side": 1,
+      "message": "This is the same as\n\n  [\u0027gen\u0027, \u0027--check\u0027, out_dir]",
+      "range": {
+        "startLine": 62,
+        "startChar": 25,
+        "endLine": 62,
+        "endChar": 55
+      },
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3376e605_679b073f",
+        "filename": "tools_webrtc/presubmit_checks_lib/build_helpers_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-26T14:56:57Z",
+      "side": 1,
+      "message": "Why not just\n\n  import build_helpers\n\nand then refer to it as build_helpers.RunGnCheck? Doesn\u0027t seem too onerous. (More cases below.)",
+      "revId": "f390217cb5ffb2093ce9659394b9ad8421a8153d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
