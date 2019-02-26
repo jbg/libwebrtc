@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cd0ef591_903db671",
+        "filename": "api/test/neteq_simulator_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-02-26T10:41:27Z",
+      "side": 1,
+      "message": "Agreed, I fixed it, but it was already like this before I copy-pasted it.",
+      "parentUuid": "99718600_0bafe71c",
+      "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1afc757f_72c02660",
         "filename": "api/test/neteq_simulator_factory.cc",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "078c6bae_79aa151f",
+        "filename": "api/test/neteq_simulator_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-02-26T10:41:27Z",
+      "side": 1,
+      "message": "This CL reduces the abuse, but we\u0027re still passing in the arguments as command-line arguments into this function and calling rtc::FlagList::SetFlagsFromCommandLine on them (line 42). I would like to remove that eventually, but we need to work on a new API before we can make that change.",
+      "parentUuid": "1afc757f_72c02660",
+      "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "90a932b9_00734ae8",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-02-26T10:41:27Z",
+      "side": 1,
+      "message": "Good point. I\u0027ve added constexpr functions to the config struct for the default values so they can be reused here. PTAL.",
+      "parentUuid": "d533d9b0_213a3eb6",
+      "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9035e411_a49b2d8a",
         "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14926ddb_97e6cf2d",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-02-26T10:41:27Z",
+      "side": 1,
+      "message": "This is not possible with the WebRTC flags library, unfortunately.",
+      "parentUuid": "9035e411_a49b2d8a",
+      "revId": "890dec9f909b5cc92ad700eebd1058bfedd4ad6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
