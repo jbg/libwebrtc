@@ -401,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "f4527999_faf451f0",
+        "filename": "modules/video_coding/include/video_codec_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-26T13:27:16Z",
+      "side": 1,
+      "message": "yep, I keep forgeting rtc::ArrayView (same like std::span) doesn\u0027t have constructor that take initialize list (i.e. doesn\u0027t construct from {1,2,3}).\nI agree that my suggestion to use rtc::ArrayView doesn\u0027t work in this case.\nFew other (optional) ideas:\na) overload\n... NoFdiffs();\n... Fdiffs(int fdiff1);\n... Fdiffs(int fdiff1, int fdiff2);\n... for all common cases.\nb) Add, encourage to call it mutliple times [in practice number of fdiffs is low, afaik]\n... Depends(int fdiff) { info_.frame_diffs.push_back(fdiff); ... }\n...\nTemplate().Tl(0).Sl(1).Depends(2).Depends(1);\nc) Use std::initialize_list\u003cint\u003e directly.\n... Fdiffs(std::initializer_list\u003cint\u003e fdiffs) {\n  info_.frame_diffs.assign(fdiffs.begin(), fdiffs.end());\n}\nTEmplate()...Fdiffs({1, 2});",
+      "parentUuid": "aa96df17_e9b9c3ea",
+      "range": {
+        "startLine": 132,
+        "startChar": 24,
+        "endLine": 132,
+        "endChar": 37
+      },
+      "revId": "f8c4c19bbf982662a641f28ada94b1e626a02775",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cddca45f_b908bcce",
         "filename": "modules/video_coding/include/video_codec_interface.h",
         "patchSetId": 8
