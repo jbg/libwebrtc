@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "8ca9d523_da9f6e45",
+        "filename": "pc/session_description.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-26T22:47:20Z",
+      "side": 1,
+      "message": "Map is unordered. (or it\u0027s ordered by the keys), but not insertion order (and the spec for x-mt line specifies that order matters - it\u0027s a priority order). And I didn\u0027t want to have 2 collections.",
+      "parentUuid": "26d2ac3e_f6f50fb3",
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3e615346_7bb3a6be",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 1
@@ -178,6 +196,24 @@
       "side": 1,
       "message": "It only has one extra line right (a\u003dmsid-semantic) ?",
       "parentUuid": "1d3d2ba4_53b8666c",
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90e63ccc_74e39b18",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4330,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-26T22:47:20Z",
+      "side": 1,
+      "message": "Ah, I was thinking of kSdpFullString :)\n\nGood.",
+      "parentUuid": "4b6a3c76_730b9fcf",
       "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
