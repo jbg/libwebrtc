@@ -4324,3 +4324,118 @@ TEST_F(WebRtcSdpTest, ParseNoMid) {
               ElementsAre(Field("name", &cricket::ContentInfo::name, ""),
                           Field("name", &cricket::ContentInfo::name, "")));
 }
+
+TEST_F(WebRtcSdpTest, ParseMediaTransport) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp =
+      "v=0\r\n"
+      "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
+      "s=-\r\n"
+      "t=0 0\r\n"
+      "a=x-mt:rtp:dGVzdDY0\r\n";
+  SdpParseError error;
+
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error))
+      << error.description;
+  EXPECT_EQ(1u, output.description()->MediaTransportSettings().size());
+  EXPECT_EQ("rtp",
+            output.description()->MediaTransportSettings()[0].transport_name);
+  EXPECT_EQ(
+      "test64",
+      output.description()->MediaTransportSettings()[0].transport_setting);
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportInvalidBase64) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp =
+      "v=0\r\n"
+      "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
+      "s=-\r\n"
+      "t=0 0\r\n"
+      "a=x-mt:rtp:ThisIsInvalidBase64\r\n";
+  SdpParseError error;
+
+  ASSERT_FALSE(webrtc::SdpDeserialize(sdp, &output, &error));
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportMultipleLines) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp =
+      "v=0\r\n"
+      "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
+      "s=-\r\n"
+      "t=0 0\r\n"
+      "a=x-mt:rtp:dGVzdDY0\r\n"
+      "a=x-mt:generic:Z2VuZXJpY3NldHRpbmc=\r\n";
+  SdpParseError error;
+
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error))
+      << error.description;
+  EXPECT_EQ(2u, output.description()->MediaTransportSettings().size());
+  EXPECT_EQ("rtp",
+            output.description()->MediaTransportSettings()[0].transport_name);
+  EXPECT_EQ(
+      "test64",
+      output.description()->MediaTransportSettings()[0].transport_setting);
+  EXPECT_EQ("generic",
+            output.description()->MediaTransportSettings()[1].transport_name);
+  EXPECT_EQ(
+      "genericsetting",
+      output.description()->MediaTransportSettings()[1].transport_setting);
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportDontAllowRepeatedTransports) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp =
+      "v=0\r\n"
+      "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
+      "s=-\r\n"
+      "t=0 0\r\n"
+      "a=x-mt:rtp:dGVzdDY0\r\n"
+      "a=x-mt:rtp:Z2VuZXJpY3NldHRpbmc=\r\n";
+  SdpParseError error;
+
+  // Repeated 'rtp' transport setting.
+  ASSERT_FALSE(webrtc::SdpDeserialize(sdp, &output, &error));
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportMalformedLine) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp =
+      "v=0\r\n"
+      "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
+      "s=-\r\n"
+      "t=0 0\r\n"
+      "a=x-mt:rtp\r\n";
+  SdpParseError error;
+
+  ASSERT_FALSE(webrtc::SdpDeserialize(sdp, &output, &error));
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportMalformedLine2) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp =
+      "v=0\r\n"
+      "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
+      "s=-\r\n"
+      "t=0 0\r\n"
+      "a=x-mt\r\n";
+  SdpParseError error;
+
+  ASSERT_FALSE(webrtc::SdpDeserialize(sdp, &output, &error));
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportIgnoreNonsenseAttributeLines) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp =
+      "v=0\r\n"
+      "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
+      "s=-\r\n"
+      "t=0 0\r\n"
+      "a=x-nonsense:rtp:dGVzdDY0\r\n";
+  SdpParseError error;
+
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error))
+      << error.description;
+  EXPECT_TRUE(output.description()->MediaTransportSettings().empty());
+}
