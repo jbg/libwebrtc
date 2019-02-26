@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c01e0878_557d2a58",
+        "filename": "pc/session_description.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-26T21:37:42Z",
+      "side": 1,
+      "message": "Could replace this with:\n\nRTC_DCHECK(absl::c_none_of(media_transport_settings_, [\u0026](const MediaTransportSetting\u0026 setting) {\n    return media_transport_name \u003d\u003d setting.transport_name;\n});",
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3e615346_7bb3a6be",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 1
@@ -13,6 +30,69 @@
       "writtenOn": "2019-02-26T21:29:32Z",
       "side": 1,
       "message": "Now that I think about it, I\u0027ll move this to ParseXMtLine method",
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5971089a_1c4b16f9",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4330,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-26T21:37:42Z",
+      "side": 1,
+      "message": "Maybe just generate these by appending your line to kSdpSessionString.",
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52c66879_3918b85f",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4340,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-26T21:37:42Z",
+      "side": 1,
+      "message": "ASSERT_EQ",
+      "range": {
+        "startLine": 4340,
+        "startChar": 2,
+        "endLine": 4340,
+        "endChar": 11
+      },
+      "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf213bd3_a363d2c9",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4374,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-26T21:37:42Z",
+      "side": 1,
+      "message": "pull this out to a local for readability",
+      "range": {
+        "startLine": 4374,
+        "startChar": 16,
+        "endLine": 4374,
+        "endChar": 62
+      },
       "revId": "a3f91277d2a792d4abaa1bc2c622e8acd970aef4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
