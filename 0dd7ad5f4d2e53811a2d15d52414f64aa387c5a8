@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f945dda4_7eca6d3a",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-27T13:50:44Z",
+      "side": 1,
+      "message": "If you remove this function and paste its content directly into Thread::PostTask instead, you should be able to eliminate two layers of indirection, including the new .cc file.",
+      "revId": "0dd7ad5f4d2e53811a2d15d52414f64aa387c5a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a15835a_b371b8cb",
         "filename": "rtc_base/thread.h",
         "patchSetId": 1
@@ -13,6 +30,24 @@
       "writtenOn": "2019-02-27T13:31:04Z",
       "side": 1,
       "message": "Do the reviewers agree to this new note? :)",
+      "revId": "0dd7ad5f4d2e53811a2d15d52414f64aa387c5a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1015810d_158df442",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-27T13:50:44Z",
+      "side": 1,
+      "message": "Yes!",
+      "parentUuid": "0a15835a_b371b8cb",
       "revId": "0dd7ad5f4d2e53811a2d15d52414f64aa387c5a8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
