@@ -174,7 +174,7 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
   if (frame_decryptor != nullptr ||
       config_.crypto_options.sframe.require_frame_encryption) {
     buffered_frame_decryptor_ =
-        absl::make_unique<BufferedFrameDecryptor>(this, frame_decryptor);
+        absl::make_unique<BufferedFrameDecryptor>(this, this, frame_decryptor);
   }
 }
 
@@ -398,6 +398,11 @@ void RtpVideoStreamReceiver::RequestPacketRetransmit(
   rtp_rtcp_->SendNack(sequence_numbers);
 }
 
+bool RtpVideoStreamReceiver::IsDecryptable() const {
+  rtc::CritScope lock(&frames_decryptable_lock_);
+  return frames_decryptable_;
+}
+
 int32_t RtpVideoStreamReceiver::ResendPackets(const uint16_t* sequence_numbers,
                                               uint16_t length) {
   return rtp_rtcp_->SendNACK(sequence_numbers, length);
@@ -447,6 +452,11 @@ void RtpVideoStreamReceiver::OnCompleteFrame(
 void RtpVideoStreamReceiver::OnDecryptedFrame(
     std::unique_ptr<video_coding::RtpFrameObject> frame) {
   reference_finder_->ManageFrame(std::move(frame));
+}
+
+void RtpVideoStreamReceiver::OnDecryptionStatusChange(int status) {
+  rtc::CritScope lock(&frames_decryptable_lock_);
+  frames_decryptable_ = (status == 0);
 }
 
 void RtpVideoStreamReceiver::UpdateRtt(int64_t max_rtt_ms) {
