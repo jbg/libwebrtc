@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "4f418be9_4ed9e755",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-27T13:37:42Z",
+      "side": 1,
+      "message": "Still doesn\u0027t resolve my concern, my example would still produce surprising behavior.",
+      "parentUuid": "ff027fb8_e4433333",
+      "range": {
+        "startLine": 59,
+        "startChar": 20,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b7490d6_afce593f",
         "filename": "common_video/generic_frame_descriptor/generic_frame_info.cc",
         "patchSetId": 11
@@ -547,6 +571,24 @@
       "side": 1,
       "message": "We already have this check:\n  static_assert(std::is_pod\u003cCodecSpecificInfoUnion\u003e::value, \"\");\nin video_codec_interface.h\n\nIn this case a .cc file was required due to adding the complex type absl::optional to CodecSpecificInfo.",
       "parentUuid": "f7bc1f2e_6d7e81a3",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcadf18f_b4fabda1",
+        "filename": "modules/video_coding/include/video_codec_interface.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-02-27T13:37:42Z",
+      "side": 1,
+      "message": "Yep, that check calm me down a bit, it is just harder to spot it when it is in a different file\n(and when it is true for the CodecSpecficInfoUnion, but not true for CodecSpecficInfo)",
+      "parentUuid": "e2d03bbd_52dfeb88",
       "revId": "9d44000b14434acf7497386d248d109682cefaf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
