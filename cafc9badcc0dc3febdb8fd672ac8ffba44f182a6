@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d5792bbb_5522eaf9",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T21:06:48Z",
+      "side": 1,
+      "message": "acking: This usecase is ignored for now. :-) If you want, I can support that, it\u0027s not much code. I would rather keep it simple for now.",
+      "parentUuid": "13c3c16f_1289e428",
+      "range": {
+        "startLine": 1051,
+        "startChar": 6,
+        "endLine": 1052,
+        "endChar": 64
+      },
+      "revId": "cafc9badcc0dc3febdb8fd672ac8ffba44f182a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e1439bd_d3694fcd",
         "filename": "pc/jsep_transport_controller_unittest.cc",
         "patchSetId": 8
@@ -39,6 +63,24 @@
       "revId": "cafc9badcc0dc3febdb8fd672ac8ffba44f182a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e5a5266_009cfe65",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T21:06:48Z",
+      "side": 1,
+      "message": "For the caller I will have a separate test case (bear with me) that makes sure that the x-mt line is correctly propagated in the SDP.\n\nBut in the meantime, I added the test case you suggested.",
+      "parentUuid": "6e1439bd_d3694fcd",
+      "revId": "cafc9badcc0dc3febdb8fd672ac8ffba44f182a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
