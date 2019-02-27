@@ -4324,3 +4324,95 @@ TEST_F(WebRtcSdpTest, ParseNoMid) {
               ElementsAre(Field("name", &cricket::ContentInfo::name, ""),
                           Field("name", &cricket::ContentInfo::name, "")));
 }
+
+// Helper for the media transport settings getter, to make the tests shorter and
+// easier to read.
+const cricket::SessionDescription::MediaTransportSetting& GetTransportSettings(
+    const JsepSessionDescription& output,
+    uint32_t index) {
+  EXPECT_GT(output.description()->MediaTransportSettings().size(), index);
+  return output.description()->MediaTransportSettings()[index];
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransport) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp = kSdpSessionString;
+  sdp += "a=x-mt:rtp:dGVzdDY0\r\n";
+  SdpParseError error;
+
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error))
+      << error.description;
+  ASSERT_EQ(1u, output.description()->MediaTransportSettings().size());
+  EXPECT_EQ("rtp", GetTransportSettings(output, 0).transport_name);
+  EXPECT_EQ("test64", GetTransportSettings(output, 0).transport_setting);
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportInvalidBase64) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp = kSdpSessionString;
+  sdp += "a=x-mt:rtp:ThisIsInvalidBase64\r\n";
+  SdpParseError error;
+
+  ASSERT_FALSE(webrtc::SdpDeserialize(sdp, &output, &error));
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportMultipleLines) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp = kSdpSessionString;
+  sdp +=
+      "a=x-mt:rtp:dGVzdDY0\r\n"
+      "a=x-mt:generic:Z2VuZXJpY3NldHRpbmc=\r\n";
+  SdpParseError error;
+
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error))
+      << error.description;
+  ASSERT_EQ(2u, output.description()->MediaTransportSettings().size());
+  EXPECT_EQ("rtp", GetTransportSettings(output, 0).transport_name);
+  EXPECT_EQ("test64", GetTransportSettings(output, 0).transport_setting);
+  EXPECT_EQ("generic", GetTransportSettings(output, 1).transport_name);
+  EXPECT_EQ("genericsetting",
+            GetTransportSettings(output, 1).transport_setting);
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportSkipRepeatedTransport) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp = kSdpSessionString;
+  sdp +=
+      "a=x-mt:rtp:dGVzdDY0\r\n"
+      "a=x-mt:rtp:Z2VuZXJpY3NldHRpbmc=\r\n";
+  SdpParseError error;
+
+  // Repeated 'rtp' transport setting. We still parse the SDP successfully,
+  // but ignore the repeated transport.
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error));
+  EXPECT_EQ("test64", GetTransportSettings(output, 0).transport_setting);
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportMalformedLine) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp = kSdpSessionString;
+  sdp += "a=x-mt:rtp\r\n";
+  SdpParseError error;
+
+  ASSERT_FALSE(webrtc::SdpDeserialize(sdp, &output, &error));
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportMalformedLine2) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp = kSdpSessionString;
+  sdp += "a=x-mt\r\n";
+  SdpParseError error;
+
+  ASSERT_FALSE(webrtc::SdpDeserialize(sdp, &output, &error));
+}
+
+TEST_F(WebRtcSdpTest, ParseMediaTransportIgnoreNonsenseAttributeLines) {
+  JsepSessionDescription output(kDummyType);
+  std::string sdp = kSdpSessionString;
+  sdp += "a=x-nonsense:rtp:dGVzdDY0\r\n";
+  SdpParseError error;
+
+  ASSERT_TRUE(webrtc::SdpDeserialize(sdp, &output, &error))
+      << error.description;
+  EXPECT_TRUE(output.description()->MediaTransportSettings().empty());
+}
