@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "092bb072_5393aef0",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-27T17:56:35Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8c3ead8_6ba2c9ca",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-27T17:56:35Z",
+      "side": 1,
+      "message": "Optional pedantry: For increased robustness, make it \"rtc_thread_internal\", since C++ namespaces aren\u0027t in practice properly hierarchical.",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b3e2407_bd4c08b1",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-27T17:56:35Z",
+      "side": 1,
+      "message": "final?",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf363f85_e89a87ba",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-27T17:56:35Z",
+      "side": 1,
+      "message": "Does it still work if you de-templatize this constructor, and use FunctorT in place of F? I suspect it will.",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17e217b5_e791d443",
+        "filename": "rtc_base/thread_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-27T17:56:35Z",
+      "side": 1,
+      "message": "Did I miss something, or don\u0027t you have a single test with a lambda?",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
