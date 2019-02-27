@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e89ce025_e6131f39",
+        "filename": "rtc_base/post_message_with_functor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-27T15:38:38Z",
+      "side": 1,
+      "message": "You\u0027re right! But then I feel a bit silly about having a header file that contains nothing but an internal helper class that doesn\u0027t even share name with the file (SingleMessageHandlerWithFunctor), so I ended up moving that too into a \"thread_internal\" namespace in thread.h.",
+      "parentUuid": "f945dda4_7eca6d3a",
+      "revId": "0dd7ad5f4d2e53811a2d15d52414f64aa387c5a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a15835a_b371b8cb",
         "filename": "rtc_base/thread.h",
         "patchSetId": 1
