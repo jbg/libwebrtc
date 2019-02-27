@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98f1f2d8_fffa4965",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2247,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-27T19:26:25Z",
+      "side": 1,
+      "message": "It seems a little bit wasteful to iterate the list of settings both here and inside AddMediaTransportSetting.  That might be one reason to do something that can be completely enclosed in a DCHECK statement (so that it doesn\u0027t execute this iteration twice in production).\n\nThen again, we expect the list to be very short, so it\u0027s probably a minor issue.",
+      "range": {
+        "startLine": 2247,
+        "startChar": 0,
+        "endLine": 2247,
+        "endChar": 66
+      },
+      "revId": "de9a4906188d815474ecb21ee961ad85d9a38706",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
