@@ -22,6 +22,30 @@
       "revId": "de9a4906188d815474ecb21ee961ad85d9a38706",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7ee4fe8_9aee1c43",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2247,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T19:30:35Z",
+      "side": 1,
+      "message": "Ack.\n\n\u003e Then again, we expect the list to be very short, so it\u0027s probably a minor issue.\n\nExactly. Iterating through the list up to 3-4 elements is oftentimes faster than a hashset lookup (and you probably wouldn\u0027t say if this was a hashset!) and we probably won\u0027t have more than 2-3 elements in the media transport settings, and certainly not hundreds.",
+      "parentUuid": "98f1f2d8_fffa4965",
+      "range": {
+        "startLine": 2247,
+        "startChar": 0,
+        "endLine": 2247,
+        "endChar": 66
+      },
+      "revId": "de9a4906188d815474ecb21ee961ad85d9a38706",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
