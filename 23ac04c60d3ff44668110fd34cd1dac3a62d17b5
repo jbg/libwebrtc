@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34442aac_d25eaca1",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2080,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "I suggest moving this logic out of the function.\n\nIt reduces the number of function parameters (from 6 to 4) and keeps this helper focused just on parsing.",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a7057f3_c3d0e847",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2257,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "language suggestion:\n\nIgnore repeated transport names rather than failing to parse so that in the future the same transport could have multiple configs.",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e68c7053_ffea8f5e",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2261,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "If the logic is removed from the helper, this can just become:\n\nif (absl::c_none_of(desc-\u003eMediaTransportSettings(), [\u0026](const MediaTransportSetting\u0026 setting) {\n        return setting.transport_name \u003d\u003d transport_name;\n    }) {",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "673395ab_9cbf68dd",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4337,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "// Test that the media transport name and base64-decoded setting is parsed from an a\u003dx-mt line.",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42689dbb_c96e1bf9",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4350,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "// Test that an a\u003dx-mt line fails to parse if its setting is invalid base 64.",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd29f625_c33e958a",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4359,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "// Test that multiple a\u003dx-mt lines are parsed in the order of preference (the order of the lines in the SDP).",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de48ba11_16d42313",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4369,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "I think just assigning this to a local is more clear than the helper GetTransportSettings:\n\nconst auto\u0026 settings \u003d output.description()-\u003eMediaTransportSettings();\nASSERT_EQ(2u, settings.size());\nEXPECT_EQ(\"rtp\", settings[0].transport_name);\n...",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "041eae75_fcd6aa3b",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4377,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "// Test that only the first a\u003dx-mt line associated with a transport name is parsed and the rest ignored.",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d67db645_a938766d",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4391,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "// Test that an a\u003dx-mt line fails to parse if it is missing a setting.",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71fc6010_ceea8e62",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4400,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-02-27T18:14:32Z",
+      "side": 1,
+      "message": "// Test that an a\u003dx-mt line fails to parse if its missing a name and setting.",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
