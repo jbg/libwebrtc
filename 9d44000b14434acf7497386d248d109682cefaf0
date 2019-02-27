@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9dd2d2c4_f6a1c8b8",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Oops, copy paste error, fixed.",
+      "parentUuid": "c842628a_1ccf482b",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 18
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "513057a3_35e26be9",
         "filename": "common_video/BUILD.gn",
         "patchSetId": 11
@@ -45,6 +69,30 @@
       "revId": "9d44000b14434acf7497386d248d109682cefaf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62fd66b6_a6de73f2",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Ditto, fixed.",
+      "parentUuid": "513057a3_35e26be9",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 22
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ec1c6223_bb4e6678",
+        "filename": "common_video/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a637662b_18aad566",
+      "range": {
+        "startLine": 64,
+        "startChar": 5,
+        "endLine": 64,
+        "endChar": 30
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06db97b9_504c0633",
         "filename": "common_video/generic_frame_descriptor/generic_frame_info.cc",
         "patchSetId": 11
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "ff027fb8_e4433333",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Changed so that we now append.",
+      "parentUuid": "06db97b9_504c0633",
+      "range": {
+        "startLine": 59,
+        "startChar": 20,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b7490d6_afce593f",
         "filename": "common_video/generic_frame_descriptor/generic_frame_info.cc",
         "patchSetId": 11
@@ -105,6 +201,30 @@
       "writtenOn": "2019-02-26T16:28:49Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 26
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0dd4de6a_9721bc89",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "2b7490d6_afce593f",
       "range": {
         "startLine": 66,
         "startChar": 20,
@@ -134,6 +254,24 @@
     },
     {
       "key": {
+        "uuid": "becb324b_8f1c3ec3",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Don\u0027t know when it is appropriate to add a new OWNERS file. Done though.",
+      "parentUuid": "a9a9e942_388e6e24",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3fa4c34_79fa504b",
         "filename": "common_video/generic_frame_descriptor/generic_frame_info.h",
         "patchSetId": 11
@@ -151,6 +289,24 @@
     },
     {
       "key": {
+        "uuid": "186896bc_80ef9ba9",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3fa4c34_79fa504b",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79d0182d_777cce5a",
         "filename": "common_video/generic_frame_descriptor/generic_frame_info.h",
         "patchSetId": 11
@@ -162,6 +318,24 @@
       "writtenOn": "2019-02-26T16:28:49Z",
       "side": 1,
       "message": "Are you using it now? or have plans to use it in nearby future?\nif not, do not hurry adding it.\nhttps://testing.googleblog.com/2017/08/code-health-eliminate-yagni-smells.html",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c01240c2_2fe052cb",
+        "filename": "common_video/generic_frame_descriptor/generic_frame_info.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Not used, removed.",
+      "parentUuid": "79d0182d_777cce5a",
       "revId": "9d44000b14434acf7497386d248d109682cefaf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -191,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "5427fa57_0b3788fb",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "f0e06296_f8bc3353",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 40
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de44502b_15058e92",
         "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
         "patchSetId": 11
@@ -208,6 +406,24 @@
     },
     {
       "key": {
+        "uuid": "59c975e4_0324d808",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de44502b_15058e92",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6026c2_2f92fb33",
         "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
         "patchSetId": 11
@@ -219,6 +435,30 @@
       "writtenOn": "2019-02-26T16:28:49Z",
       "side": 1,
       "message": "what is the purpose of this change?",
+      "range": {
+        "startLine": 855,
+        "startChar": 0,
+        "endLine": 855,
+        "endChar": 44
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf7a9770_ec8b52c2",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Passing in a |codec_specific| instead of |vp8Info| on line 864, so getting a pointer to the CodecSpecificVP8 struct did not really make things clearer.",
+      "parentUuid": "9a6026c2_2f92fb33",
       "range": {
         "startLine": 855,
         "startChar": 0,
@@ -254,6 +494,30 @@
     },
     {
       "key": {
+        "uuid": "94f77b26_fb7418ad",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "Updated here and default_temporal_layers.cc as well.",
+      "parentUuid": "0429f40a_c9871649",
+      "range": {
+        "startLine": 388,
+        "startChar": 2,
+        "endLine": 389,
+        "endChar": 28
+      },
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7bc1f2e_6d7e81a3",
         "filename": "modules/video_coding/include/video_codec_interface.cc",
         "patchSetId": 11
@@ -265,6 +529,24 @@
       "writtenOn": "2019-02-26T16:28:49Z",
       "side": 1,
       "message": "nit: this line looks scary (and at first I thought it was wrong).\nIt might help to put \nstatic_assert(std::is_trivially_copyable\u003cdecltype(codecSpecific)\u003e::value, \"\");\nright next to it.\n\nor initialize in modern way.\nDoes codecSpecific \u003d {} works?",
+      "revId": "9d44000b14434acf7497386d248d109682cefaf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2d03bbd_52dfeb88",
+        "filename": "modules/video_coding/include/video_codec_interface.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-02-27T11:50:16Z",
+      "side": 1,
+      "message": "We already have this check:\n  static_assert(std::is_pod\u003cCodecSpecificInfoUnion\u003e::value, \"\");\nin video_codec_interface.h\n\nIn this case a .cc file was required due to adding the complex type absl::optional to CodecSpecificInfo.",
+      "parentUuid": "f7bc1f2e_6d7e81a3",
       "revId": "9d44000b14434acf7497386d248d109682cefaf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
