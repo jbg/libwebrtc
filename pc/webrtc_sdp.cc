@@ -2057,10 +2057,12 @@ bool ParseConnectionData(const std::string& line,
   return true;
 }
 
-bool ParseMediaTransportLine(const std::string& line,
+bool ParseMediaTransportLine(const cricket::SessionDescription* const desc,
+                             const std::string& line,
                              std::string* transport_name,
                              std::string* transport_setting,
-                             SdpParseError* error) {
+                             SdpParseError* error,
+                             bool* is_repeated_name) {
   std::string value;
   if (!GetValue(line, kMediaTransportSettingLine, &value, error)) {
     return false;
@@ -2074,6 +2076,12 @@ bool ParseMediaTransportLine(const std::string& line,
                            rtc::Base64::DO_STRICT, transport_setting,
                            nullptr)) {
     return ParseFailedGetValue(line, kMediaTransportSettingLine, error);
+  }
+  for (const auto& setting : desc->MediaTransportSettings()) {
+    if (setting.transport_name == *transport_name) {
+      *is_repeated_name = true;
+      return true;
+    }
   }
 
   return true;
@@ -2239,21 +2247,20 @@ bool ParseSessionDescription(const std::string& message,
     } else if (HasAttribute(line, kMediaTransportSettingLine)) {
       std::string transport_name;
       std::string transport_setting;
-      if (!ParseMediaTransportLine(line, &transport_name, &transport_setting,
-                                   error)) {
+      bool is_repeated_transport_name = false;
+      if (!ParseMediaTransportLine(desc, line, &transport_name,
+                                   &transport_setting, error,
+                                   &is_repeated_transport_name)) {
         return false;
       }
 
-      for (const auto& setting : desc->MediaTransportSettings()) {
-        if (setting.transport_name == transport_name) {
-          // Ignore repeated transport names rather than failing to parse so
-          // that in the future the same transport could have multiple configs.
-          RTC_LOG(INFO) << "x-mt line with repeated transport, transport_name="
-                        << transport_name;
-          return true;
-        }
+      // For now we ignore repeated transport names (instead of failing the SDP
+      // parsing). It's possible that in the future the same transport might
+      // have multiple configs, so we skip lines for the repeated configs for
+      // now.
+      if (!is_repeated_transport_name) {
+        desc->AddMediaTransportSetting(transport_name, transport_setting);
       }
-      desc->AddMediaTransportSetting(transport_name, transport_setting);
     }
   }
 
