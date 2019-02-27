@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7e785f33_63e8fbf3",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T18:36:41Z",
+      "side": 1,
+      "message": "It feels awkward to me to dereference the pointer simply to get the const reference, and these are private methods anyway. But done. The argument about explicitly showing that it isn\u0027t null convinced me :)",
+      "parentUuid": "10e91aa5_83e2ff03",
+      "range": {
+        "startLine": 961,
+        "startChar": 37,
+        "endLine": 961,
+        "endChar": 38
+      },
+      "revId": "ae931890d0134594a66e83bbfd5e2adf6612be21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c63ea1eb_fd8ee209",
         "filename": "pc/jsep_transport_controller.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8f604d9b_67ec2726",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1070,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c63ea1eb_fd8ee209",
+      "range": {
+        "startLine": 1070,
+        "startChar": 37,
+        "endLine": 1070,
+        "endChar": 38
+      },
+      "revId": "ae931890d0134594a66e83bbfd5e2adf6612be21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33c8dc5f_be4bfd31",
         "filename": "pc/jsep_transport_controller_unittest.cc",
         "patchSetId": 3
@@ -62,6 +110,24 @@
       "revId": "ae931890d0134594a66e83bbfd5e2adf6612be21",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "351e22c1_64ee4255",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T18:36:41Z",
+      "side": 1,
+      "message": "Great idea. Done.\n\nI will follow-up in a separate change for other places.\nE.g.\nEXPECT_TRUE(media_transport-\u003epre_shared_key().has_value());",
+      "parentUuid": "33c8dc5f_be4bfd31",
+      "revId": "ae931890d0134594a66e83bbfd5e2adf6612be21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
