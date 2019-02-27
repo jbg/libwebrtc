@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0b682370_f2e1264f",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2080,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T18:24:35Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "34442aac_d25eaca1",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a7057f3_c3d0e847",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e5fec942_0dd22104",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2257,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T18:24:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a7057f3_c3d0e847",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e68c7053_ffea8f5e",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 4
@@ -50,6 +86,24 @@
       "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30698c67_3cc9762f",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2261,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T18:24:35Z",
+      "side": 1,
+      "message": "I decided to add RTC_LOG(LS_INFO) now for the repeated transport, so iterating makes it easier/more-readable.",
+      "parentUuid": "e68c7053_ffea8f5e",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -118,6 +172,24 @@
       "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a6d0b4b_51c20d6e",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4369,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-02-27T18:24:35Z",
+      "side": 1,
+      "message": "Ok, whatever you prefer :)",
+      "parentUuid": "de48ba11_16d42313",
+      "revId": "23ac04c60d3ff44668110fd34cd1dac3a62d17b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
