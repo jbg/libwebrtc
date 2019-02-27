@@ -25,6 +25,7 @@
 #include "rtc_base/message_handler.h"
 #include "rtc_base/message_queue.h"
 #include "rtc_base/platform_thread_types.h"
+#include "rtc_base/post_message_with_functor.h"
 #include "rtc_base/socket_server.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -183,12 +184,42 @@ class RTC_LOCKABLE Thread : public MessageQueue {
   // &MyFunctionReturningBool);
   // NOTE: This function can only be called when synchronous calls are allowed.
   // See ScopedDisallowBlockingCalls for details.
+  // NOTE: Blocking invokes are DISCOURAGED, consider if what you're doing can
+  // be achieved with PostTask() and callbacks instead.
   template <class ReturnT, class FunctorT>
   ReturnT Invoke(const Location& posted_from, FunctorT&& functor) {
     FunctorMessageHandler<ReturnT, FunctorT> handler(
         std::forward<FunctorT>(functor));
     InvokeInternal(posted_from, &handler);
     return handler.MoveResult();
+  }
+
+  // Posts a task to invoke the functor on |this| thread asynchronously, i.e.
+  // without blocking the thread that invoked PostTask(). Ownership of |functor|
+  // is passed and destroyed on |this| thread after it is invoked.
+  // Requirements of FunctorT:
+  // - FunctorT is movable.
+  // - FunctorT implements "T operator()()" or "T operator()() const" for some T
+  //   (if T is not void, the return value is discarded on |this| thread).
+  // - FunctorT has a public destructor that can be invoked from |this| thread
+  //   after operation() has been invoked.
+  // - The functor must not cause the thread to quit before PostTask() is done.
+  //
+  // Example - Calling a class method:
+  // class Foo {
+  //  public:
+  //   void DoTheThing();
+  // };
+  // Foo foo;
+  // thread->PostTask(RTC_FROM_HERE, Bind(&Foo::DoTheThing, &foo));
+  //
+  // Example - Calling a lambda function:
+  // thread->PostTask(RTC_FROM_HERE,
+  //                  [&x, &y] { x.TrackComputations(y.Compute()); });
+  template <class FunctorT>
+  void PostTask(const Location& posted_from, FunctorT&& functor) {
+    post_message_with_functor_internal::PostMessageWithFunctor(
+        posted_from, this, std::forward<FunctorT>(functor));
   }
 
   // From MessageQueue

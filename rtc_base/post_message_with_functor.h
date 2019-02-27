@@ -17,11 +17,19 @@
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/location.h"
 #include "rtc_base/message_handler.h"
-#include "rtc_base/thread.h"
 
 namespace rtc {
 
+class Thread;
+
 namespace post_message_with_functor_internal {
+
+// Adds a layer of abstraction that allows moving the bulk of the
+// PostMessageWithFunctor() implementation to the .cc in order to avoid a
+// circular include dependency with rtc_base/thread.h.
+void PostMessageWithFunctorImpl(const Location& posted_from,
+                                Thread* thread,
+                                MessageHandler* message_handler);
 
 template <class FunctorT>
 class SingleMessageHandlerWithFunctor : public MessageHandler {
@@ -43,8 +51,6 @@ class SingleMessageHandlerWithFunctor : public MessageHandler {
   RTC_DISALLOW_COPY_AND_ASSIGN(SingleMessageHandlerWithFunctor);
 };
 
-}  // namespace post_message_with_functor_internal
-
 // Asynchronously posts a message that will invoke |functor| on the target
 // thread. Ownership is passed and |functor| is destroyed on the target thread.
 // Requirements of FunctorT:
@@ -59,18 +65,13 @@ template <class FunctorT>
 void PostMessageWithFunctor(const Location& posted_from,
                             Thread* thread,
                             FunctorT&& functor) {
-  thread->Post(
-      posted_from,
+  PostMessageWithFunctorImpl(
+      posted_from, thread,
       new post_message_with_functor_internal::SingleMessageHandlerWithFunctor<
           FunctorT>(std::forward<FunctorT>(functor)));
-  // This DCHECK guarantees that the post was successful.
-  // Post() doesn't say whether it succeeded, but it will only fail if the
-  // thread is quitting. DCHECKing that the thread is not quitting *after*
-  // posting might yield some false positives (where the thread did in fact
-  // quit, but only after posting), but if we have false positives here then we
-  // have a race condition anyway.
-  RTC_DCHECK(!thread->IsQuitting());
 }
+
+}  // namespace post_message_with_functor_internal
 
 }  // namespace rtc
 
