@@ -54,6 +54,7 @@ class FrameCombiner {
   std::unique_ptr<MixingBuffer> mixing_buffer_;
   Limiter limiter_;
   const bool use_limiter_;
+  const bool skip_cng_in_group_call_;
   mutable int uma_logging_counter_ = 0;
 };
 }  // namespace webrtc

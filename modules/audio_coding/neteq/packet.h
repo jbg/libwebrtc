@@ -71,6 +71,10 @@ struct Packet {
   uint8_t payload_type;
   // Datagram excluding RTP header and header extension.
   rtc::Buffer payload;
+  // voiced/unvoiced bit defined as in
+  // https://datatracker.ietf.org/doc/draft-lennox-avt-rtp-audio-level-exthdr/
+  absl::optional<bool> voice_activity;
+
   Priority priority;
   std::unique_ptr<TickTimer::Stopwatch> waiting_time;
   std::unique_ptr<AudioDecoder::EncodedAudioFrame> frame;

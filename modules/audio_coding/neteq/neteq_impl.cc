@@ -51,6 +51,7 @@
 #include "rtc_base/sanitizer.h"
 #include "rtc_base/strings/audio_format_to_string.h"
 #include "rtc_base/trace_event.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
@@ -115,7 +116,10 @@ NetEqImpl::NetEqImpl(const NetEq::Config& config,
                                 10,  // Report once every 10 s.
                                 tick_timer_.get()),
       no_time_stretching_(config.for_test_no_time_stretching),
-      enable_rtx_handling_(config.enable_rtx_handling) {
+      enable_rtx_handling_(config.enable_rtx_handling),
+      determine_speech_type_by_v_bit_after_codec_internal_cng_(
+          field_trial::IsEnabled(
+              "WebRTC-Audio-DetermineSpeechTypeByVBitAfterCodecInternalCng")) {
   RTC_LOG(LS_INFO) << "NetEq config: " << config.ToString();
   int fs = config.sample_rate_hz;
   if (fs != 8000 && fs != 16000 && fs != 32000 && fs != 48000) {
@@ -479,6 +483,10 @@ int NetEqImpl::InsertPacketInternal(const RTPHeader& rtp_header,
     packet.sequence_number = rtp_header.sequenceNumber;
     packet.timestamp = rtp_header.timestamp;
     packet.payload.SetData(payload.data(), payload.size());
+    packet.voice_activity =
+        rtp_header.extension.hasAudioLevel
+            ? absl::make_optional(rtp_header.extension.voiceActivity)
+            : absl::nullopt;
     // Waiting time will be set upon inserting the packet in the buffer.
     RTC_DCHECK(!packet.waiting_time);
     return packet;
@@ -611,10 +619,12 @@ int NetEqImpl::InsertPacketInternal(const RTPHeader& rtp_header,
       const auto sequence_number = packet.sequence_number;
       const auto payload_type = packet.payload_type;
       const Packet::Priority original_priority = packet.priority;
+      const auto voice_activity = packet.voice_activity;
       auto packet_from_result = [&](AudioDecoder::ParseResult& result) {
         Packet new_packet;
         new_packet.sequence_number = sequence_number;
         new_packet.payload_type = payload_type;
+        new_packet.voice_activity = voice_activity;
         new_packet.timestamp = result.timestamp;
         new_packet.priority.codec_level = result.priority;
         new_packet.priority.red_level = original_priority.red_level;
@@ -1388,10 +1398,19 @@ int NetEqImpl::DecodeLoop(PacketList* packet_list,
         rtc::ArrayView<int16_t>(&decoded_buffer_[*decoded_length],
                                 decoded_buffer_length_ - *decoded_length));
     last_decoded_timestamps_.push_back(packet_list->front().timestamp);
+    const absl::optional<bool> voice_activity =
+        packet_list->front().voice_activity;
     packet_list->pop_front();
     if (opt_result) {
       const auto& result = *opt_result;
-      *speech_type = result.speech_type;
+      if (last_mode_ == kModeCodecInternalCng &&
+          determine_speech_type_by_v_bit_after_codec_internal_cng_ &&
+          voice_activity.has_value()) {
+        *speech_type = voice_activity.value() ? AudioDecoder::kSpeech
+                                              : AudioDecoder::kComfortNoise;
+      } else {
+        *speech_type = result.speech_type;
+      }
       if (result.num_decoded_samples > 0) {
         *decoded_length += rtc::dchecked_cast<int>(result.num_decoded_samples);
         // Update |decoder_frame_length_| with number of samples per channel.
