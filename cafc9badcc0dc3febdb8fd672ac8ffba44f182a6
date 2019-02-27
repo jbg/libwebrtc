@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13c3c16f_1289e428",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-27T19:33:16Z",
+      "side": 1,
+      "message": "What if there\u0027s one that matches the factory\u0027s name, but it\u0027s not first?",
+      "range": {
+        "startLine": 1051,
+        "startChar": 6,
+        "endLine": 1052,
+        "endChar": 64
+      },
+      "revId": "cafc9badcc0dc3febdb8fd672ac8ffba44f182a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e1439bd_d3694fcd",
+        "filename": "pc/jsep_transport_controller_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-02-27T19:33:16Z",
+      "side": 1,
+      "message": "Should we add a test case where there\u0027s a setting but it\u0027s on the local description instead of remote?  Or where the remote description is an answer instead of an offer?  Or where the local description is set first, then remote?  (Basically whatever it takes to cover the \"caller\" case as well as the \"callee\".  We want to make sure the caller ignores its own outgoing parameters, right?)",
+      "revId": "cafc9badcc0dc3febdb8fd672ac8ffba44f182a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
