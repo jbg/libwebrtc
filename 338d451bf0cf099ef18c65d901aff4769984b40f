@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c38bd_273d374b",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-28T08:34:53Z",
+      "side": 1,
+      "message": "No this is used by ThreadManager which is declared before Thread",
+      "parentUuid": "092bb072_5393aef0",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8c3ead8_6ba2c9ca",
         "filename": "rtc_base/thread.h",
         "patchSetId": 4
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "de8c1479_f29784fe",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-28T08:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8c3ead8_6ba2c9ca",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b3e2407_bd4c08b1",
         "filename": "rtc_base/thread.h",
         "patchSetId": 4
@@ -56,6 +98,24 @@
       "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd71200b_7928f404",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-28T08:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b3e2407_bd4c08b1",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "1ae497c6_8ce50e82",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-28T08:34:53Z",
+      "side": 1,
+      "message": "It does! Do you know why? I was expecting invoking PostTask() with a reference to a functor would, instead of copying the functor, end up with a reference to it - violating the contract of where the invoked functor is destroyed. But my testing seem to suggest all is fine after de-templatizing.",
+      "parentUuid": "bf363f85_e89a87ba",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17e217b5_e791d443",
         "filename": "rtc_base/thread_unittest.cc",
         "patchSetId": 4
@@ -90,6 +168,24 @@
       "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd849c97_adc401e2",
+        "filename": "rtc_base/thread_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-28T08:34:53Z",
+      "side": 1,
+      "message": "Yes, see InvokesWithLambda",
+      "parentUuid": "17e217b5_e791d443",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
