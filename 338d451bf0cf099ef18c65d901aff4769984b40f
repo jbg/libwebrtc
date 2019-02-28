@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "622bd873_948dd608",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-28T09:58:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6e7c38bd_273d374b",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8c3ead8_6ba2c9ca",
         "filename": "rtc_base/thread.h",
         "patchSetId": 4
@@ -154,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "33a31f63_b1c1ffd8",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-28T09:58:56Z",
+      "side": 1,
+      "message": "\u003e It does! Do you know why?\n\nThe only reason you\u0027d need this constructor to be a template is if F would have to be not the same type as FunctorT. But they are always the same.\n\n\u003e I was expecting invoking PostTask() with a reference to a functor would, instead of copying the functor, end up with a reference to it - violating the contract of where the invoked functor is destroyed. But my testing seem to suggest all is fine after de-templatizing.\n\nYou pass the functor argument by reference everywhere, so you get no copies or moves---except on this line when you call the std::remove_reference\u003cFunctorT\u003e::type copy or move constructor. The only way you could get the error you describe is if you removed the std::remove_reference call.",
+      "parentUuid": "1ae497c6_8ce50e82",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17e217b5_e791d443",
         "filename": "rtc_base/thread_unittest.cc",
         "patchSetId": 4
@@ -183,6 +219,24 @@
       "side": 1,
       "message": "Yes, see InvokesWithLambda",
       "parentUuid": "17e217b5_e791d443",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59008391_3ab80928",
+        "filename": "rtc_base/thread_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-28T09:58:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dd849c97_adc401e2",
       "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false

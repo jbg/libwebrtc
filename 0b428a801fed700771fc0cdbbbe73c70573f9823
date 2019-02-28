@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09f0390d_e7024ec4",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-02-28T09:58:56Z",
+      "side": 1,
+      "message": "Excellent TODO comment.",
+      "revId": "0b428a801fed700771fc0cdbbbe73c70573f9823",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
