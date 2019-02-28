@@ -190,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "1d3a3396_98166c9d",
+        "filename": "rtc_base/thread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-02-28T10:07:50Z",
+      "side": 1,
+      "message": "Ohhh, I forgot about the std::remove_reference. That\u0027s awesome, now I see.",
+      "parentUuid": "33a31f63_b1c1ffd8",
+      "revId": "338d451bf0cf099ef18c65d901aff4769984b40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17e217b5_e791d443",
         "filename": "rtc_base/thread_unittest.cc",
         "patchSetId": 4
