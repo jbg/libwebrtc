@@ -26,6 +26,7 @@
 #include "modules/audio_processing/logging/apm_data_dumper.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
+#include "system_wrappers/include/field_trial.h"
 #include "system_wrappers/include/metrics.h"
 
 namespace webrtc {
@@ -76,6 +77,7 @@ void MixFewFramesWithNoLimiter(const std::vector<AudioFrame*>& mix_list,
 void MixToFloatFrame(const std::vector<AudioFrame*>& mix_list,
                      size_t samples_per_channel,
                      size_t number_of_channels,
+                     absl::optional<size_t> group_size_to_skip_cng_,
                      MixingBuffer* mixing_buffer) {
   RTC_DCHECK_LE(samples_per_channel, FrameCombiner::kMaximumChannelSize);
   RTC_DCHECK_LE(number_of_channels, FrameCombiner::kMaximumNumberOfChannels);
@@ -85,8 +87,14 @@ void MixToFloatFrame(const std::vector<AudioFrame*>& mix_list,
   }
 
   // Convert to FloatS16 and mix.
-  for (size_t i = 0; i < mix_list.size(); ++i) {
+  const size_t num_sources = mix_list.size();
+  for (size_t i = 0; i < num_sources; ++i) {
     const AudioFrame* const frame = mix_list[i];
+    if (group_size_to_skip_cng_.has_value() &&
+        num_sources > group_size_to_skip_cng_ &&
+        (frame->speech_type_ == AudioFrame::kCNG ||
+         frame->speech_type_ == AudioFrame::kPLCCNG))
+      continue;
     for (size_t j = 0; j < std::min(number_of_channels,
                                     FrameCombiner::kMaximumNumberOfChannels);
          ++j) {
@@ -120,6 +128,18 @@ void InterleaveToAudioFrame(AudioFrameView<const float> mixing_buffer_view,
     }
   }
 }
+
+absl::optional<size_t> GetGroupSizeToSkipCng() {
+  constexpr char kMixerSkipCngFieldTrial[] =
+      "WebRTC-Audio-MixerSkipCngInGroupCall";
+  const std::string field_trial_string =
+      webrtc::field_trial::FindFullName(kMixerSkipCngFieldTrial);
+  size_t value;
+  if (sscanf(field_trial_string.c_str(), "Enabled-%zu", &value) == 1)
+    return value;
+  return absl::nullopt;
+}
+
 }  // namespace
 
 constexpr size_t FrameCombiner::kMaximumNumberOfChannels;
@@ -131,7 +151,8 @@ FrameCombiner::FrameCombiner(bool use_limiter)
           absl::make_unique<std::array<std::array<float, kMaximumChannelSize>,
                                        kMaximumNumberOfChannels>>()),
       limiter_(static_cast<size_t>(48000), data_dumper_.get(), "AudioMixer"),
-      use_limiter_(use_limiter) {
+      use_limiter_(use_limiter),
+      group_size_to_skip_cng_(GetGroupSizeToSkipCng()) {
   static_assert(kMaximumChannelSize * kMaximumNumberOfChannels <=
                     AudioFrame::kMaxDataSizeSamples,
                 "");
@@ -171,7 +192,7 @@ void FrameCombiner::Combine(const std::vector<AudioFrame*>& mix_list,
   }
 
   MixToFloatFrame(mix_list, samples_per_channel, number_of_channels,
-                  mixing_buffer_.get());
+                  group_size_to_skip_cng_, mixing_buffer_.get());
 
   const size_t output_number_of_channels =
       std::min(number_of_channels, kMaximumNumberOfChannels);

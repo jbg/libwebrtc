@@ -14,6 +14,7 @@
 #include <memory>
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "api/audio/audio_frame.h"
 #include "modules/audio_processing/agc2/limiter.h"
 
@@ -54,6 +55,7 @@ class FrameCombiner {
   std::unique_ptr<MixingBuffer> mixing_buffer_;
   Limiter limiter_;
   const bool use_limiter_;
+  const absl::optional<size_t> group_size_to_skip_cng_;
   mutable int uma_logging_counter_ = 0;
 };
 }  // namespace webrtc
