@@ -468,9 +468,16 @@ if (is_mac && !build_with_chromium) {
 
 rtc_source_set("rtc_task_queue") {
   visibility = [ "*" ]
-  deps = []
-  public_deps = [
-    ":rtc_task_queue_api",
+  sources = [
+    "task_queue.cc",
+    "task_queue.h",
+  ]
+  deps = [
+    ":macromagic",
+    "../api/task_queue",
+    "../api/task_queue:global_task_queue_factory",
+    "system:rtc_export",
+    "//third_party/abseil-cpp/absl/memory",
   ]
 
   if (rtc_link_task_queue_impl) {
@@ -478,30 +485,8 @@ rtc_source_set("rtc_task_queue") {
   }
 }
 
-# WebRTC targets must not directly depend on rtc_task_queue_api or
-# rtc_task_queue_impl. Instead, depend on rtc_task_queue.
-# The build flag |rtc_link_task_queue_impl| decides if WebRTC targets will link
-# to the default implemenation in rtc_task_queue_impl or if an externally
-# provided implementation should be used. An external implementation should
-# depend on rtc_task_queue_api.
 rtc_source_set("rtc_task_queue_api") {
-  # The visibility list is commented out so that we won't break external
-  # implementations, but left here to manually test as well as for sake of what
-  # targets we expect to depend on rtc_task_queue_api.
-  # visibility = [
-  #   ":rtc_task_queue",
-  #   ":rtc_task_queue_impl",
-  #   ":sequenced_task_checker",
-  # ]
-  sources = [
-    "task_queue.h",
-  ]
-  deps = [
-    ":macromagic",
-    "../api/task_queue",
-    "system:rtc_export",
-    "//third_party/abseil-cpp/absl/memory",
-  ]
+  visibility = [ "*" ]
 }
 
 if (rtc_enable_libevent) {
@@ -561,7 +546,6 @@ if (is_win) {
       ":macromagic",
       ":platform_thread",
       ":rtc_event",
-      ":rtc_task_queue_api",
       ":safe_conversions",
       ":timeutils",
       "../api/task_queue",
@@ -584,7 +568,6 @@ rtc_source_set("rtc_task_queue_stdlib") {
     ":macromagic",
     ":platform_thread",
     ":rtc_event",
-    ":rtc_task_queue_api",
     ":safe_conversions",
     ":timeutils",
     "../api/task_queue",
