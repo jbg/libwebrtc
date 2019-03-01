@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dd8484dd_80778c62",
+        "filename": "video/buffered_frame_decryptor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2019-03-01T19:02:16Z",
+      "side": 1,
+      "message": "Updated the comment. I would prefer to keep this as a status for now since it might be useful to define other error types going forward for other applications of this callback.",
+      "parentUuid": "5f76981c_bbb42fc3",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 65
+      },
+      "revId": "9de39e2f14052bdea13cc81ec7d6e59c851d9067",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb79a8e4_b98224a5",
         "filename": "video/buffered_frame_decryptor_unittest.cc",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "9de39e2f14052bdea13cc81ec7d6e59c851d9067",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af16b32e_5f3bba2e",
+        "filename": "video/buffered_frame_decryptor_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6930
+      },
+      "writtenOn": "2019-03-01T19:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb79a8e4_b98224a5",
+      "range": {
+        "startLine": 73,
+        "startChar": 35,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "9de39e2f14052bdea13cc81ec7d6e59c851d9067",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
