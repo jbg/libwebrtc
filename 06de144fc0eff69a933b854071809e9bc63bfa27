@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97cef990_ed5a305e",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-03-03T22:21:48Z",
+      "side": 1,
+      "message": "All other member variables are RTC_GUARDED_BY(crit_sect_).",
+      "range": {
+        "startLine": 410,
+        "startChar": 13,
+        "endLine": 410,
+        "endChar": 69
+      },
+      "revId": "06de144fc0eff69a933b854071809e9bc63bfa27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84fd8f60_78d339eb",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-03-03T22:21:48Z",
+      "side": 1,
+      "message": "Drop the trailing underscore.",
+      "range": {
+        "startLine": 80,
+        "startChar": 66,
+        "endLine": 80,
+        "endChar": 67
+      },
+      "revId": "06de144fc0eff69a933b854071809e9bc63bfa27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "467d675b_11027aad",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-03-03T22:21:48Z",
+      "side": 1,
+      "message": "No need to use optional::value() here?",
+      "range": {
+        "startLine": 94,
+        "startChar": 22,
+        "endLine": 94,
+        "endChar": 45
+      },
+      "revId": "06de144fc0eff69a933b854071809e9bc63bfa27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43a478e9_a709d410",
+        "filename": "modules/audio_mixer/frame_combiner.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-03-03T22:21:48Z",
+      "side": 1,
+      "message": "What happens if all sources are CNG? Should we mix one? The last one to go silent?",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 45
+      },
+      "revId": "06de144fc0eff69a933b854071809e9bc63bfa27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
