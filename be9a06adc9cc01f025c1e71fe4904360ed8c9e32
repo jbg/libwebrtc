@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2b1df57_caaea11d",
+        "filename": "modules/audio_coding/neteq/histogram.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-04T13:11:41Z",
+      "side": 1,
+      "message": "shouldn\u0027t it be better if we do std::abs and include \u003ccmath\u003e?",
+      "range": {
+        "startLine": 65,
+        "startChar": 44,
+        "endLine": 65,
+        "endChar": 47
+      },
+      "revId": "be9a06adc9cc01f025c1e71fe4904360ed8c9e32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
