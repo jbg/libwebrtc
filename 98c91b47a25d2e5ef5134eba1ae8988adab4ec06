@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80b919c8_3396cf9e",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1991,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-03-04T21:11:34Z",
+      "side": 1,
+      "message": "When does this happen? Maybe a comment?",
+      "range": {
+        "startLine": 1991,
+        "startChar": 0,
+        "endLine": 1991,
+        "endChar": 36
+      },
+      "revId": "98c91b47a25d2e5ef5134eba1ae8988adab4ec06",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "884a951d_408aad11",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2003,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-03-04T21:11:34Z",
+      "side": 1,
+      "message": "nit: If",
+      "range": {
+        "startLine": 2003,
+        "startChar": 10,
+        "endLine": 2003,
+        "endChar": 11
+      },
+      "revId": "98c91b47a25d2e5ef5134eba1ae8988adab4ec06",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
