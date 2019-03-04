@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72f60834_4029ceb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-04T18:28:49Z",
+      "side": 1,
+      "message": "Expand the Vr abbreviation.",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 32
+      },
+      "revId": "4752d7b9b2b423b8aeb3dbc9900a3c81febfa973",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb13c7c9_6a043e4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-04T18:28:49Z",
+      "side": 1,
+      "message": "Please elaborate a bit on what this means, what changes you had to make, and why. It\u0027s not obvious to me at the moment, making it harder to inspect for correctness.",
+      "revId": "4752d7b9b2b423b8aeb3dbc9900a3c81febfa973",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "984a437a_a3af3320",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-04T18:28:49Z",
+      "side": 1,
+      "message": "Is it specified that this must be larger than 0?",
+      "range": {
+        "startLine": 200,
+        "startChar": 2,
+        "endLine": 200,
+        "endChar": 51
+      },
+      "revId": "4752d7b9b2b423b8aeb3dbc9900a3c81febfa973",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
