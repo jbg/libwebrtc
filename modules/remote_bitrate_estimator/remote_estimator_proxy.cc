@@ -197,10 +197,11 @@ void RemoteEstimatorProxy::SendPeriodicFeedbacks() {
 void RemoteEstimatorProxy::SendFeedbackOnRequest(
     int64_t sequence_number,
     const FeedbackRequest& feedback_request) {
+  RTC_CHECK_GT(feedback_request.sequence_count, 0);
   rtcp::TransportFeedback feedback_packet(feedback_request.include_timestamps);
 
   int64_t first_sequence_number =
-      sequence_number - feedback_request.sequence_count;
+      sequence_number - feedback_request.sequence_count + 1;
   auto begin_iterator =
       packet_arrival_times_.lower_bound(first_sequence_number);
   auto end_iterator = packet_arrival_times_.upper_bound(sequence_number);
