@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "158c66a4_080b2053",
+        "filename": "video/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-03-04T12:53:53Z",
+      "side": 1,
+      "message": "added this line,\nother changes are just (auto)resorting dependencies after I removed an empty line separating two blocks.",
+      "revId": "043c7d0fd15322ad87081c1147363465f843d485",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

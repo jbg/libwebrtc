@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29c277d9_8a13340a",
+        "filename": "rtc_base/task_queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-03-04T12:53:53Z",
+      "side": 0,
+      "message": "not completely related, shouldn\u0027t have done deleted this block when removed PostTaskAndReply function.\nnoticed this block because it mentions NewClosure.\n(also, this documentation didn\u0027t match the code: by default callback wasn\u0027t call on |Current()| queue, but on the same |queue_| where original task was posted to)",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 21
+      },
+      "revId": "e64a688167535424d4b34f149663e56ab83d244d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
