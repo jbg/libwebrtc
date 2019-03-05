@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3fb90c8b_b3e1e2a3",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-03-05T13:05:07Z",
+      "side": 1,
+      "message": "It belongs to this CL.\nPreviously, sequence_count \u003d\u003d 0 meant that we requested feedback for the current packet only. After the change of protocol (this CL), sequence_count \u003d\u003d 0 means that we don\u0027t request any feedback, and sequence_count \u003d\u003d 1 means that we request feedback for the current packet only.",
+      "parentUuid": "1b1cc64f_5127b1f1",
+      "range": {
+        "startLine": 197,
+        "startChar": 27,
+        "endLine": 197,
+        "endChar": 48
+      },
+      "revId": "4af296ddb1569fc845073854f503464b0a0d758c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58ad7af2_8bca1cbc",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 6
