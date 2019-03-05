@@ -56,20 +56,17 @@ TargetRateConstraints ConvertConstraints(const BitrateConstraints& contraints,
 }  // namespace
 
 RtpTransportControllerSend::RtpTransportControllerSend(
-    Clock* clock,
-    webrtc::RtcEventLog* event_log,
+    RtcContext context,
     NetworkControllerFactoryInterface* controller_factory,
-    const BitrateConstraints& bitrate_config,
-    std::unique_ptr<ProcessThread> process_thread,
-    TaskQueueFactory* task_queue_factory)
-    : clock_(clock),
-      pacer_(clock, &packet_router_, event_log),
+    const BitrateConstraints& bitrate_config)
+    : clock_(context.clock),
+      pacer_(clock_, &packet_router_, context.event_log),
       bitrate_configurator_(bitrate_config),
-      process_thread_(std::move(process_thread)),
+      process_thread_(context.process_thread_factory->Create("PacerThread")),
       observer_(nullptr),
       controller_factory_override_(controller_factory),
       controller_factory_fallback_(
-          absl::make_unique<GoogCcNetworkControllerFactory>(event_log)),
+          absl::make_unique<GoogCcNetworkControllerFactory>(context.event_log)),
       process_interval_(controller_factory_fallback_->GetProcessInterval()),
       last_report_block_time_(Timestamp::ms(clock_->TimeInMilliseconds())),
       reset_feedback_on_route_change_(
@@ -80,8 +77,8 @@ RtpTransportControllerSend::RtpTransportControllerSend(
           field_trial::IsEnabled("WebRTC-AddPacingToCongestionWindowPushback")),
       transport_overhead_bytes_per_packet_(0),
       network_available_(false),
-      retransmission_rate_limiter_(clock, kRetransmitWindowSizeMs),
-      task_queue_(task_queue_factory->CreateTaskQueue(
+      retransmission_rate_limiter_(clock_, kRetransmitWindowSizeMs),
+      task_queue_(context.task_queue_factory->CreateTaskQueue(
           "rtp_send_controller",
           TaskQueueFactory::Priority::NORMAL)) {
   initial_config_.constraints = ConvertConstraints(bitrate_config, clock_);

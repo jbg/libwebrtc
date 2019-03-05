@@ -28,6 +28,7 @@ rtc_source_set("call_interfaces") {
     sources += [ "audio_send_stream.cc" ]
   }
   deps = [
+    ":rtc_context",
     ":rtp_interfaces",
     ":video_stream_api",
     "..:webrtc_common",
@@ -50,6 +51,33 @@ rtc_source_set("call_interfaces") {
     "../rtc_base:rtc_base_approved",
     "../rtc_base/network:sent_packet",
     "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
+rtc_source_set("rtc_context") {
+  visibility = [ "*" ]
+  sources = [
+    "rtc_context.h",
+  ]
+  deps = [
+    "../api/task_queue",
+    "../api/transport:webrtc_key_value_config",
+    "../logging:rtc_event_log_api",
+    "../modules/utility",
+    "../system_wrappers",
+  ]
+}
+
+rtc_source_set("default_rtc_context") {
+  visibility = [ "*" ]
+  sources = [
+    "default_rtc_context.cc",
+    "default_rtc_context.h",
+  ]
+  deps = [
+    ":rtc_context",
+    "../api/task_queue:global_task_queue_factory",
+    "../api/transport:field_trial_based_config",
   ]
 }
 
@@ -122,6 +150,7 @@ rtc_source_set("rtp_sender") {
   ]
   deps = [
     ":bitrate_configurator",
+    ":rtc_context",
     ":rtp_interfaces",
     "..:webrtc_common",
     "../api:fec_controller_api",
@@ -209,6 +238,7 @@ rtc_static_library("call") {
   deps = [
     ":bitrate_allocator",
     ":call_interfaces",
+    ":default_rtc_context",
     ":fake_network",
     ":rtp_interfaces",
     ":rtp_receiver",

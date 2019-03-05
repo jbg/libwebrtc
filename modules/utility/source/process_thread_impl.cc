@@ -42,6 +42,11 @@ std::unique_ptr<ProcessThread> ProcessThread::Create(const char* thread_name) {
   return std::unique_ptr<ProcessThread>(new ProcessThreadImpl(thread_name));
 }
 
+std::unique_ptr<ProcessThread> DefaultProcessThreadFactory::Create(
+    const char* thread_name) {
+  return std::unique_ptr<ProcessThread>(new ProcessThreadImpl(thread_name));
+}
+
 ProcessThreadImpl::ProcessThreadImpl(const char* thread_name)
     : stop_(false), thread_name_(thread_name) {}
 

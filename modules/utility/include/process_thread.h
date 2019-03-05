@@ -62,6 +62,17 @@ class ProcessThread {
   virtual void DeRegisterModule(Module* module) = 0;
 };
 
+class ProcessThreadFactory {
+ public:
+  virtual std::unique_ptr<ProcessThread> Create(const char* thread_name) = 0;
+  virtual ~ProcessThreadFactory() = default;
+};
+
+class DefaultProcessThreadFactory : public ProcessThreadFactory {
+ public:
+  std::unique_ptr<ProcessThread> Create(const char* thread_name) override;
+};
+
 }  // namespace webrtc
 
 #endif  // MODULES_UTILITY_INCLUDE_PROCESS_THREAD_H_

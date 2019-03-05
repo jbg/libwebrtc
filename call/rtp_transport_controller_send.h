@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "api/transport/network_control.h"
+#include "call/rtc_context.h"
 #include "call/rtp_bitrate_configurator.h"
 #include "call/rtp_transport_controller_send_interface.h"
 #include "call/rtp_video_sender.h"
@@ -32,9 +33,7 @@
 #include "rtc_base/task_utils/repeating_task.h"
 
 namespace webrtc {
-class Clock;
 class FrameEncryptorInterface;
-class RtcEventLog;
 
 // TODO(nisse): When we get the underlying transports here, we should
 // have one object implementing RtpTransportControllerSendInterface
@@ -45,12 +44,9 @@ class RtpTransportControllerSend final
       public TransportFeedbackObserver {
  public:
   RtpTransportControllerSend(
-      Clock* clock,
-      RtcEventLog* event_log,
+      RtcContext context,
       NetworkControllerFactoryInterface* controller_factory,
-      const BitrateConstraints& bitrate_config,
-      std::unique_ptr<ProcessThread> process_thread,
-      TaskQueueFactory* task_queue_factory);
+      const BitrateConstraints& bitrate_config);
   ~RtpTransportControllerSend() override;
 
   RtpVideoSenderInterface* CreateRtpVideoSender(
