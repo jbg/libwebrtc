@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b1cc64f_5127b1f1",
+        "filename": "modules/remote_bitrate_estimator/remote_estimator_proxy.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-05T12:53:00Z",
+      "side": 1,
+      "message": "The changes here doesn\u0027t seem to belong to the issue described in the commit message, maybe they belong to a separate CL?",
+      "range": {
+        "startLine": 197,
+        "startChar": 27,
+        "endLine": 197,
+        "endChar": 48
+      },
+      "revId": "4af296ddb1569fc845073854f503464b0a0d758c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58ad7af2_8bca1cbc",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-05T12:53:00Z",
+      "side": 1,
+      "message": "Nit: I preffered the previous variant of setting this value only once per conditional branch. Setting it to nullopt in two places would make it more obvious in which situations it\u0027s null.",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 36
+      },
+      "revId": "4af296ddb1569fc845073854f503464b0a0d758c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
