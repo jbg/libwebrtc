@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c6067d4f_87285bf9",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-06T15:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f90e657_cabb99af",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 4
+      },
+      "revId": "b1e39716b9da8de07e8f31b525c6a0e1a6d45976",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "016da0c1_ad4e332b",
         "filename": "api/transport/network_types.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "b1e39716b9da8de07e8f31b525c6a0e1a6d45976",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de874b16_c026fe75",
+        "filename": "api/transport/network_types.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-06T15:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "016da0c1_ad4e332b",
+      "range": {
+        "startLine": 15,
+        "startChar": 31,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "b1e39716b9da8de07e8f31b525c6a0e1a6d45976",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
