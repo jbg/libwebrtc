@@ -815,6 +815,24 @@ rtc_source_set("webrtc_opus_c") {
 }
 
 if (rtc_enable_protobuf) {
+  # TODO(tikuta): remove this.
+  group("ana_proto_bridge") {
+    visibility += webrtc_default_visibility
+    public_deps = [  # no-presubmit-check TODO(webrtc:8603)
+      ":ana_config_proto",
+      ":ana_debug_dump_proto",
+    ]
+  }
+
+  group("ana_proto") {
+    visibility += webrtc_default_visibility
+    public_deps = [  # no-presubmit-check TODO(webrtc:8603)
+      ":ana_config_proto",
+      ":ana_debug_dump_proto",
+    ]
+  }
+
+  # TODO(tikuta): replace this to ana_proto after internal build change.
   proto_library("ana_debug_dump_proto") {
     visibility += webrtc_default_visibility
     sources = [
@@ -825,6 +843,8 @@ if (rtc_enable_protobuf) {
     ]
     proto_out_dir = "modules/audio_coding/audio_network_adaptor"
   }
+
+  # TODO(tikuta): merge this to ana_proto after internal build change.
   proto_library("ana_config_proto") {
     visibility += [ "*" ]
     sources = [
@@ -895,10 +915,7 @@ rtc_static_library("audio_network_adaptor") {
   ]
 
   if (rtc_enable_protobuf) {
-    deps += [
-      ":ana_config_proto",
-      ":ana_debug_dump_proto",
-    ]
+    deps += [ ":ana_proto" ]
   }
 }
 
@@ -2021,7 +2038,7 @@ if (rtc_include_tests) {
     if (rtc_enable_protobuf) {
       defines += [ "WEBRTC_NETEQ_UNITTEST_BITEXACT" ]
       deps += [
-        ":ana_config_proto",
+        ":ana_proto",
         ":neteq_unittest_proto",
       ]
     }
