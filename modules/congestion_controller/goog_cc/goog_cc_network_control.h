@@ -63,9 +63,10 @@ class GoogCcNetworkController : public NetworkControllerInterface {
 
  private:
   friend class GoogCcStatePrinter;
+  TargetRateConstraints GetUpdatedConstraints(
+      TargetRateConstraints new_constraints) const;
   std::vector<ProbeClusterConfig> UpdateBitrateConstraints(
-      TargetRateConstraints constraints,
-      absl::optional<DataRate> starting_rate);
+      TargetRateConstraints constraints);
   void MaybeTriggerOnNetworkChanged(NetworkControlUpdate* update,
                                     Timestamp at_time);
   PacerConfig GetPacingRates(Timestamp at_time) const;
