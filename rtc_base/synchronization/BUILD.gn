@@ -35,3 +35,16 @@ rtc_source_set("rw_lock_wrapper") {
     ]
   }
 }
+
+rtc_source_set("watchdog_timer") {
+  sources = [
+    "watchdog_timer.cc",
+    "watchdog_timer.h",
+  ]
+  deps = [
+    "..:criticalsection",
+    "..:logging",
+    "..:rtc_base_approved",
+    "//third_party/abseil-cpp/absl/base:core_headers",
+  ]
+}
