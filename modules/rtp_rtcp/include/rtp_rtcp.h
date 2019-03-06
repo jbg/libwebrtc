@@ -11,6 +11,7 @@
 #ifndef MODULES_RTP_RTCP_INCLUDE_RTP_RTCP_H_
 #define MODULES_RTP_RTCP_INCLUDE_RTP_RTCP_H_
 
+#include <memory>
 #include <set>
 #include <string>
 #include <utility>
@@ -121,6 +122,8 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
 
   // Create a RTP/RTCP module object using the system clock.
   // |configuration|  - Configuration of the RTP/RTCP module.
+  static std::unique_ptr<RtpRtcp> Create(const Configuration& configuration);
+  // Deprecated, prefer factory function just above.
   static RtpRtcp* CreateRtpRtcp(const RtpRtcp::Configuration& configuration);
 
   // **************************************************************************
