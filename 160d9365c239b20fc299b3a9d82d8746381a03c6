@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "191cb268_098a8573",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 6547
+      },
+      "writtenOn": "2019-03-06T17:00:43Z",
+      "side": 1,
+      "message": "Is this using the implicit conversion of optional to bool, or am I misunderstanding something?",
+      "range": {
+        "startLine": 141,
+        "startChar": 48,
+        "endLine": 141,
+        "endChar": 69
+      },
+      "revId": "160d9365c239b20fc299b3a9d82d8746381a03c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
