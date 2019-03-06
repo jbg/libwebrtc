@@ -815,21 +815,13 @@ rtc_source_set("webrtc_opus_c") {
 }
 
 if (rtc_enable_protobuf) {
-  proto_library("ana_debug_dump_proto") {
+  proto_library("ana_proto") {
     visibility += webrtc_default_visibility
     sources = [
+      "audio_network_adaptor/config.proto",
       "audio_network_adaptor/debug_dump.proto",
     ]
-    deps = [
-      ":ana_config_proto",
-    ]
-    proto_out_dir = "modules/audio_coding/audio_network_adaptor"
-  }
-  proto_library("ana_config_proto") {
-    visibility += [ "*" ]
-    sources = [
-      "audio_network_adaptor/config.proto",
-    ]
+
     proto_out_dir = "modules/audio_coding/audio_network_adaptor"
   }
 }
@@ -895,10 +887,7 @@ rtc_static_library("audio_network_adaptor") {
   ]
 
   if (rtc_enable_protobuf) {
-    deps += [
-      ":ana_config_proto",
-      ":ana_debug_dump_proto",
-    ]
+    deps += [ ":ana_proto" ]
   }
 }
 
@@ -2021,7 +2010,7 @@ if (rtc_include_tests) {
     if (rtc_enable_protobuf) {
       defines += [ "WEBRTC_NETEQ_UNITTEST_BITEXACT" ]
       deps += [
-        ":ana_config_proto",
+        ":ana_proto",
         ":neteq_unittest_proto",
       ]
     }

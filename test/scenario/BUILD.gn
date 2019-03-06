@@ -142,7 +142,7 @@ if (rtc_include_tests) {
       deps += [ "../../modules/video_coding:objc_codec_factory_helper" ]
     }
     if (rtc_enable_protobuf) {
-      deps += [ "../../modules/audio_coding:ana_config_proto" ]
+      deps += [ "../../modules/audio_coding:ana_proto" ]
     }
     data = scenario_resources
     if (is_ios) {
