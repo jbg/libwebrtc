@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f90e657_cabb99af",
+        "filename": "api/DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-06T14:46:36Z",
+      "side": 1,
+      "message": "Can we remove this one?",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 4
+      },
+      "revId": "b1e39716b9da8de07e8f31b525c6a0e1a6d45976",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "016da0c1_ad4e332b",
+        "filename": "api/transport/network_types.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-06T14:46:36Z",
+      "side": 1,
+      "message": "Is this needed because of the anonymous union? In that case, should we add a TODO and switch back to \"\u003d default\" after `min_pacing_rate` is removed?",
+      "range": {
+        "startLine": 15,
+        "startChar": 31,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "b1e39716b9da8de07e8f31b525c6a0e1a6d45976",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
