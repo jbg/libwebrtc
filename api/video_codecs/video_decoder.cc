@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#define DEPRECATED
+
 #include "api/video_codecs/video_decoder.h"
 
 namespace webrtc {
@@ -31,6 +33,19 @@ int32_t DecodedImageCallback::ReceivedDecodedReferenceFrame(
 
 int32_t DecodedImageCallback::ReceivedDecodedFrame(const uint64_t pictureId) {
   return -1;
+}
+
+int32_t VideoDecoder::Decode(const EncodedImage& input_image,
+                             bool missing_frames,
+                             int64_t render_time_ms) {
+  return Decode(input_image, missing_frames, nullptr, render_time_ms);
+}
+
+int32_t VideoDecoder::Decode(const EncodedImage& input_image,
+                             bool missing_frames,
+                             const CodecSpecificInfo* codec_specific_info,
+                             int64_t render_time_ms) {
+  return Decode(input_image, missing_frames, render_time_ms);
 }
 
 bool VideoDecoder::PrefersLateDecoding() const {
