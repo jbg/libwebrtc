@@ -820,9 +820,10 @@ if (rtc_enable_protobuf) {
     sources = [
       "audio_network_adaptor/debug_dump.proto",
     ]
-    deps = [
-      ":ana_config_proto",
-    ]
+
+    # We cannot use link_deps here because of the difference of semantics
+    # between proto_library in GN and Bazel(blaze).
+    proto_deps = [ ":ana_config_proto" ]
     proto_out_dir = "modules/audio_coding/audio_network_adaptor"
   }
   proto_library("ana_config_proto") {
