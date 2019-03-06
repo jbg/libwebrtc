@@ -12,7 +12,7 @@
 
 namespace webrtc {
 
-StreamsConfig::StreamsConfig() = default;
+StreamsConfig::StreamsConfig() {}
 StreamsConfig::StreamsConfig(const StreamsConfig&) = default;
 StreamsConfig::~StreamsConfig() = default;
 
