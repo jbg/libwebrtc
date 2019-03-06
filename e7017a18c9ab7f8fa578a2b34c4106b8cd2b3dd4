@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "294bf910_ad6ef736",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-06T10:13:22Z",
+      "side": 1,
+      "message": "This hack intended to catch remaining usage on the trybots. Should be deleted before landing.\n\n(Since the method is used by the circular default implementations, RTC_DEPRECATED can\u0027t be used directly).",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 6
+      },
+      "revId": "e7017a18c9ab7f8fa578a2b34c4106b8cd2b3dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
