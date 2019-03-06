@@ -63,9 +63,8 @@ class GoogCcNetworkController : public NetworkControllerInterface {
 
  private:
   friend class GoogCcStatePrinter;
-  std::vector<ProbeClusterConfig> UpdateBitrateConstraints(
-      TargetRateConstraints constraints,
-      absl::optional<DataRate> starting_rate);
+  void SetConstraints(TargetRateConstraints new_constraints);
+  std::vector<ProbeClusterConfig> TriggerConstraintsUpdate(Timestamp at_time);
   void MaybeTriggerOnNetworkChanged(NetworkControlUpdate* update,
                                     Timestamp at_time);
   PacerConfig GetPacingRates(Timestamp at_time) const;
@@ -91,6 +90,10 @@ class GoogCcNetworkController : public NetworkControllerInterface {
   std::unique_ptr<AcknowledgedBitrateEstimator> acknowledged_bitrate_estimator_;
 
   absl::optional<NetworkControllerConfig> initial_config_;
+
+  DataRate min_data_rate_ = DataRate::Zero();
+  DataRate max_data_rate_ = DataRate::PlusInfinity();
+  DataRate starting_rate_ = DataRate::PlusInfinity();
 
   bool first_packet_sent_ = false;
 
