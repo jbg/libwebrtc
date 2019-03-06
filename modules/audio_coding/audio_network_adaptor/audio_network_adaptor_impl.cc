@@ -157,7 +157,9 @@ AudioEncoderRuntimeConfig AudioNetworkAdaptorImpl::GetEncoderRuntimeConfig() {
 }
 
 void AudioNetworkAdaptorImpl::StartDebugDump(FILE* file_handle) {
+#ifdef WEBRTC_BUILD_ANA_DEBUG_DUMP
   debug_dump_writer_ = DebugDumpWriter::Create(file_handle);
+#endif
 }
 
 void AudioNetworkAdaptorImpl::StopDebugDump() {
