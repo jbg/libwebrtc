@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05ecdee3_9ee6d44a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-06T10:12:01Z",
+      "side": 1,
+      "message": "Please be a bit more explicit, and mention that you add a Create method returning a unique_ptr.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "a0cd985373b271fd93a5aa6560db34c3db524414",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b9a2eba_9efa461d",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-06T10:12:01Z",
+      "side": 1,
+      "message": "Comment seem inconsistent with\n\n  RTC_DCHECK(configuration.clock);\n\nin the method implementation. (For what it\u0027s worth, I prefer requiring a nonnull Clock* (as long as we inject a clock at all)).",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 60
+      },
+      "revId": "a0cd985373b271fd93a5aa6560db34c3db524414",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0a9b8d8_a38ccc74",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-06T10:12:01Z",
+      "side": 1,
+      "message": "Mark it with RTC_DEPRECATED?",
+      "range": {
+        "startLine": 126,
+        "startChar": 5,
+        "endLine": 126,
+        "endChar": 16
+      },
+      "revId": "a0cd985373b271fd93a5aa6560db34c3db524414",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
