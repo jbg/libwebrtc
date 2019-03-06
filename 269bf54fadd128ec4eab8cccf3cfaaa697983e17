@@ -22,6 +22,30 @@
       "revId": "269bf54fadd128ec4eab8cccf3cfaaa697983e17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72f6bfc7_4851adb3",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-06T10:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9a5c98c_1c617ba4",
+      "range": {
+        "startLine": 540,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 77
+      },
+      "revId": "269bf54fadd128ec4eab8cccf3cfaaa697983e17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
