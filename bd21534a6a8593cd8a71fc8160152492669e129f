@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeaecdc0_d3c09e00",
+        "filename": "api/video_codecs/video_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-03-06T10:31:44Z",
+      "side": 1,
+      "message": "I guess this would loop if implementations implement neither?",
+      "range": {
+        "startLine": 106,
+        "startChar": 51,
+        "endLine": 106,
+        "endChar": 54
+      },
+      "revId": "bd21534a6a8593cd8a71fc8160152492669e129f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
