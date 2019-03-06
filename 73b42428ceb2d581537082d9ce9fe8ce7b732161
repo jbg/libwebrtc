@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b71d42d_198c8bc4",
+        "filename": "modules/video_coding/codecs/vp8/default_temporal_layers.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-03-06T07:11:16Z",
+      "side": 1,
+      "message": "I think there\u0027s an issue here. Remember that the encoder may at any time drop a frame the has been enqued for encoding, but that drop does not mean that the references that would have been use are resumed be the next frame. Instead, the next frame will still take a step forward in the pattern but any prior buffer updates that are not guaranteed to be present will not be used.\nSo for instance, if a TL1 frame is dropped, the subsequent TL2 frame my be transformed from\n\nBuilder().T(2).Dtis(\"--D\").Fdiffs({1, 3}).Build()\n\nto\n\nBuilder().T(2).Dtis(\"--D\").Fdiffs({2}).Build(),",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 563,
+        "endChar": 60
+      },
+      "revId": "73b42428ceb2d581537082d9ce9fe8ce7b732161",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60999514_a288db5f",
+        "filename": "modules/video_coding/codecs/vp8/screenshare_layers.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-03-06T07:11:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be an additional entry for non-sync TL1 frames?",
+      "range": {
+        "startLine": 379,
+        "startChar": 10,
+        "endLine": 379,
+        "endChar": 56
+      },
+      "revId": "73b42428ceb2d581537082d9ce9fe8ce7b732161",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
