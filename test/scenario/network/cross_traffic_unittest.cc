@@ -69,9 +69,9 @@ TEST(CrossTrafficTest, TriggerPacketBurst) {
       absl::make_unique<CountingBehavior>();
   CountingBehavior* counter = behavior.get();
 
-  EmulatedNetworkNode* node_a = network_manager.CreateEmulatedNode(
+  EmulatedNetworkNodeInterface* node_a = network_manager.CreateEmulatedNode(
       absl::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig()));
-  EmulatedNetworkNode* node_b =
+  EmulatedNetworkNodeInterface* node_b =
       network_manager.CreateEmulatedNode(std::move(behavior));
 
   TrafficRoute* traffic = network_manager.CreateTrafficRoute({node_a, node_b});
@@ -92,9 +92,9 @@ TEST(CrossTrafficTest, PulsedPeaksCrossTraffic) {
       absl::make_unique<CountingBehavior>();
   CountingBehavior* counter = behavior.get();
 
-  EmulatedNetworkNode* node_a = network_manager.CreateEmulatedNode(
+  EmulatedNetworkNodeInterface* node_a = network_manager.CreateEmulatedNode(
       absl::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig()));
-  EmulatedNetworkNode* node_b =
+  EmulatedNetworkNodeInterface* node_b =
       network_manager.CreateEmulatedNode(std::move(behavior));
 
   PulsedPeaksConfig config;
@@ -125,9 +125,9 @@ TEST(CrossTrafficTest, RandomWalkCrossTraffic) {
       absl::make_unique<CountingBehavior>();
   CountingBehavior* counter = behavior.get();
 
-  EmulatedNetworkNode* node_a = network_manager.CreateEmulatedNode(
+  EmulatedNetworkNodeInterface* node_a = network_manager.CreateEmulatedNode(
       absl::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig()));
-  EmulatedNetworkNode* node_b =
+  EmulatedNetworkNodeInterface* node_b =
       network_manager.CreateEmulatedNode(std::move(behavior));
 
   RandomWalkConfig config;

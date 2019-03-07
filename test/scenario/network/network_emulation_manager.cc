@@ -27,14 +27,19 @@ constexpr uint32_t kMinIPv4Address = 0xC0A80000;
 // uint32_t representation of 192.168.255.255 address
 constexpr uint32_t kMaxIPv4Address = 0xC0A8FFFF;
 
-}  // namespace
+struct Route : public EmulatedRouteInterface {
+  Route(EndpointNode* from,
+        std::vector<EmulatedNetworkNode*> via_nodes,
+        EndpointNode* to)
+      : from(from), via_nodes(std::move(via_nodes)), to(to), active(true) {}
 
-EndpointConfig::EndpointConfig() = default;
-EndpointConfig::~EndpointConfig() = default;
-EndpointConfig::EndpointConfig(EndpointConfig&) = default;
-EndpointConfig& EndpointConfig::operator=(EndpointConfig&) = default;
-EndpointConfig::EndpointConfig(EndpointConfig&&) = default;
-EndpointConfig& EndpointConfig::operator=(EndpointConfig&&) = default;
+  EndpointNode* from;
+  std::vector<EmulatedNetworkNode*> via_nodes;
+  EndpointNode* to;
+  bool active;
+};
+
+}  // namespace
 
 NetworkEmulationManager::NetworkEmulationManager()
     : clock_(Clock::GetRealTimeClock()),
@@ -52,7 +57,7 @@ NetworkEmulationManager::NetworkEmulationManager()
 // destroyed.
 NetworkEmulationManager::~NetworkEmulationManager() = default;
 
-EmulatedNetworkNode* NetworkEmulationManager::CreateEmulatedNode(
+EmulatedNetworkNodeInterface* NetworkEmulationManager::CreateEmulatedNode(
     std::unique_ptr<NetworkBehaviorInterface> network_behavior) {
   auto node =
       absl::make_unique<EmulatedNetworkNode>(std::move(network_behavior));
@@ -67,15 +72,16 @@ EmulatedNetworkNode* NetworkEmulationManager::CreateEmulatedNode(
   return out;
 }
 
-EndpointNode* NetworkEmulationManager::CreateEndpoint(EndpointConfig config) {
+EmulatedEndpointInterface* NetworkEmulationManager::CreateEndpoint(
+    EmulatedEndpointConfig config) {
   absl::optional<rtc::IPAddress> ip = config.ip;
   if (!ip) {
     switch (config.generated_ip_family) {
-      case EndpointConfig::IpAddressFamily::kIpv4:
+      case EmulatedEndpointConfig::IpAddressFamily::kIpv4:
         ip = GetNextIPv4Address();
         RTC_CHECK(ip) << "All auto generated IPv4 addresses exhausted";
         break;
-      case EndpointConfig::IpAddressFamily::kIpv6:
+      case EmulatedEndpointConfig::IpAddressFamily::kIpv6:
         ip = GetNextIPv4Address();
         RTC_CHECK(ip) << "All auto generated IPv6 addresses exhausted";
         ip = ip->AsIPv6Address();
@@ -88,6 +94,25 @@ EndpointNode* NetworkEmulationManager::CreateEndpoint(EndpointConfig config) {
   auto node = absl::make_unique<EndpointNode>(next_node_id_++, *ip, clock_);
   EndpointNode* out = node.get();
   endpoints_.push_back(std::move(node));
+  return out;
+}
+
+EmulatedRouteInterface* NetworkEmulationManager::CreateRoute(
+    EmulatedEndpointInterface* from,
+    std::vector<EmulatedNetworkNodeInterface*> via_nodes,
+    EmulatedEndpointInterface* to) {
+  EndpointNode* from_impl = static_cast<EndpointNode*>(from);
+  EndpointNode* to_impl = static_cast<EndpointNode*>(to);
+  std::vector<EmulatedNetworkNode*> via_nodes_impl;
+  for (auto* n : via_nodes) {
+    via_nodes_impl.push_back(static_cast<EmulatedNetworkNode*>(n));
+  }
+
+  CreateRoute(from_impl, via_nodes_impl, to_impl);
+  std::unique_ptr<EmulatedRouteInterface> route =
+      absl::make_unique<Route>(from_impl, std::move(via_nodes_impl), to_impl);
+  EmulatedRouteInterface* out = route.get();
+  routes_.push_back(std::move(route));
   return out;
 }
 
@@ -109,6 +134,13 @@ void NetworkEmulationManager::CreateRoute(
   from->SetConnectedEndpointId(to->GetId());
 }
 
+void NetworkEmulationManager::ClearRoute(EmulatedRouteInterface* route) {
+  Route* route_impl = static_cast<Route*>(route);
+  RTC_CHECK(route_impl->active) << "Route already cleared";
+  ClearRoute(route_impl->from, route_impl->via_nodes, route_impl->to);
+  route_impl->active = false;
+}
+
 void NetworkEmulationManager::ClearRoute(
     EndpointNode* from,
     std::vector<EmulatedNetworkNode*> via_nodes,
@@ -125,9 +157,15 @@ void NetworkEmulationManager::ClearRoute(
 }
 
 TrafficRoute* NetworkEmulationManager::CreateTrafficRoute(
-    std::vector<EmulatedNetworkNode*> via_nodes) {
-  RTC_CHECK(!via_nodes.empty());
-  EndpointNode* endpoint = CreateEndpoint(EndpointConfig());
+    std::vector<EmulatedNetworkNodeInterface*> via_nodes_i) {
+  RTC_CHECK(!via_nodes_i.empty());
+  std::vector<EmulatedNetworkNode*> via_nodes;
+  for (auto* n : via_nodes_i) {
+    via_nodes.push_back(static_cast<EmulatedNetworkNode*>(n));
+  }
+
+  EndpointNode* endpoint =
+      static_cast<EndpointNode*>(CreateEndpoint(EmulatedEndpointConfig()));
 
   // Setup a route via specified nodes.
   EmulatedNetworkNode* cur_node = via_nodes[0];
@@ -179,7 +217,12 @@ PulsedPeaksCrossTraffic* NetworkEmulationManager::CreatePulsedPeaksCrossTraffic(
 }
 
 rtc::Thread* NetworkEmulationManager::CreateNetworkThread(
-    std::vector<EndpointNode*> endpoints) {
+    std::vector<EmulatedEndpointInterface*> endpoints_i) {
+  std::vector<EndpointNode*> endpoints;
+  for (auto* n : endpoints_i) {
+    endpoints.push_back(static_cast<EndpointNode*>(n));
+  }
+
   FakeNetworkSocketServer* socket_server = CreateSocketServer(endpoints);
   std::unique_ptr<rtc::Thread> network_thread =
       absl::make_unique<rtc::Thread>(socket_server);

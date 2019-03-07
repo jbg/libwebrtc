@@ -11,13 +11,13 @@
 #include <memory>
 
 #include "absl/memory/memory.h"
+#include "api/test/network_emulation_manager_interface.h"
 #include "api/test/simulated_network.h"
 #include "call/simulated_network.h"
 #include "rtc_base/event.h"
 #include "rtc_base/logging.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
-#include "test/scenario/network/network_emulation.h"
 #include "test/scenario/network/network_emulation_manager.h"
 
 namespace webrtc {
@@ -60,10 +60,11 @@ class SocketReader : public sigslot::has_slots<> {
 TEST(NetworkEmulationManagerTest, GeneratedIpv4AddressDoesNotCollide) {
   NetworkEmulationManager network_manager;
   std::set<rtc::IPAddress> ips;
-  EndpointConfig config;
-  config.generated_ip_family = EndpointConfig::IpAddressFamily::kIpv4;
+  EmulatedEndpointConfig config;
+  config.generated_ip_family = EmulatedEndpointConfig::IpAddressFamily::kIpv4;
   for (int i = 0; i < 1000; i++) {
-    EndpointNode* endpoint = network_manager.CreateEndpoint(config);
+    EmulatedEndpointInterface* endpoint =
+        network_manager.CreateEndpoint(config);
     ASSERT_EQ(endpoint->GetPeerLocalAddress().family(), AF_INET);
     bool result = ips.insert(endpoint->GetPeerLocalAddress()).second;
     ASSERT_TRUE(result);
@@ -73,10 +74,11 @@ TEST(NetworkEmulationManagerTest, GeneratedIpv4AddressDoesNotCollide) {
 TEST(NetworkEmulationManagerTest, GeneratedIpv6AddressDoesNotCollide) {
   NetworkEmulationManager network_manager;
   std::set<rtc::IPAddress> ips;
-  EndpointConfig config;
-  config.generated_ip_family = EndpointConfig::IpAddressFamily::kIpv6;
+  EmulatedEndpointConfig config;
+  config.generated_ip_family = EmulatedEndpointConfig::IpAddressFamily::kIpv6;
   for (int i = 0; i < 1000; i++) {
-    EndpointNode* endpoint = network_manager.CreateEndpoint(config);
+    EmulatedEndpointInterface* endpoint =
+        network_manager.CreateEndpoint(config);
     ASSERT_EQ(endpoint->GetPeerLocalAddress().family(), AF_INET6);
     bool result = ips.insert(endpoint->GetPeerLocalAddress()).second;
     ASSERT_TRUE(result);
@@ -86,13 +88,14 @@ TEST(NetworkEmulationManagerTest, GeneratedIpv6AddressDoesNotCollide) {
 TEST(NetworkEmulationManagerTest, Run) {
   NetworkEmulationManager network_manager;
 
-  EmulatedNetworkNode* alice_node = network_manager.CreateEmulatedNode(
+  EmulatedNetworkNodeInterface* alice_node = network_manager.CreateEmulatedNode(
       absl::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig()));
-  EmulatedNetworkNode* bob_node = network_manager.CreateEmulatedNode(
+  EmulatedNetworkNodeInterface* bob_node = network_manager.CreateEmulatedNode(
       absl::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig()));
-  EndpointNode* alice_endpoint =
-      network_manager.CreateEndpoint(EndpointConfig());
-  EndpointNode* bob_endpoint = network_manager.CreateEndpoint(EndpointConfig());
+  EmulatedEndpointInterface* alice_endpoint =
+      network_manager.CreateEndpoint(EmulatedEndpointConfig());
+  EmulatedEndpointInterface* bob_endpoint =
+      network_manager.CreateEndpoint(EmulatedEndpointConfig());
   network_manager.CreateRoute(alice_endpoint, {alice_node}, bob_endpoint);
   network_manager.CreateRoute(bob_endpoint, {bob_node}, alice_endpoint);
 

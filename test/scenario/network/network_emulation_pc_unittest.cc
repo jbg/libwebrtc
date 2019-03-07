@@ -17,6 +17,7 @@
 #include "api/call/call_factory_interface.h"
 #include "api/peer_connection_interface.h"
 #include "api/scoped_refptr.h"
+#include "api/test/network_emulation_manager_interface.h"
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "call/simulated_network.h"
@@ -31,7 +32,6 @@
 #include "rtc_base/gunit.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
-#include "test/scenario/network/network_emulation.h"
 #include "test/scenario/network/network_emulation_manager.h"
 
 namespace webrtc {
@@ -104,13 +104,14 @@ TEST(NetworkEmulationManagerPCTest, Run) {
   // Setup emulated network
   NetworkEmulationManager network_manager;
 
-  EmulatedNetworkNode* alice_node = network_manager.CreateEmulatedNode(
+  EmulatedNetworkNodeInterface* alice_node = network_manager.CreateEmulatedNode(
       absl::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig()));
-  EmulatedNetworkNode* bob_node = network_manager.CreateEmulatedNode(
+  EmulatedNetworkNodeInterface* bob_node = network_manager.CreateEmulatedNode(
       absl::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig()));
-  EndpointNode* alice_endpoint =
-      network_manager.CreateEndpoint(EndpointConfig());
-  EndpointNode* bob_endpoint = network_manager.CreateEndpoint(EndpointConfig());
+  EmulatedEndpointInterface* alice_endpoint =
+      network_manager.CreateEndpoint(EmulatedEndpointConfig());
+  EmulatedEndpointInterface* bob_endpoint =
+      network_manager.CreateEndpoint(EmulatedEndpointConfig());
   network_manager.CreateRoute(alice_endpoint, {alice_node}, bob_endpoint);
   network_manager.CreateRoute(bob_endpoint, {bob_node}, alice_endpoint);
 
