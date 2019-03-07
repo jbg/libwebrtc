@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbc56b59_af2cfd34",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-07T13:07:32Z",
+      "side": 1,
+      "message": "Comment removed by: Artem Titov",
+      "range": {
+        "startLine": 21,
+        "startChar": 10,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "467966463d9708817e2dbde42d399bb038685f1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22e503cf_a247ff31",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-07T13:07:32Z",
+      "side": 1,
+      "message": "EmulatedEndpointConfig?\n\nDon\u0027t use namespaces as a way to avoid name collisions, Endpointconfig seems like something that could be use to describe something non-test.",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 21
+      },
+      "revId": "467966463d9708817e2dbde42d399bb038685f1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "706552da_8de0e5a3",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-07T13:07:32Z",
+      "side": 1,
+      "message": "[Emulated]EndpointInterface? Calling it a node doesn\u0027t add any explanatory value AFAICT.",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "467966463d9708817e2dbde42d399bb038685f1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c763b230_093595c0",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-07T13:07:32Z",
+      "side": 1,
+      "message": "This is a bit unclear to me, what happens if two routes are created between the same endpoints, what happens if an nonexisting route is cleared? Maybe CreateRoute should return a RouteInterface* that can be provided to ClearRoute(), and be documented to implicitly clear previous routes?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 57
+      },
+      "revId": "467966463d9708817e2dbde42d399bb038685f1f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
