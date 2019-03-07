@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fd9b674_78d94cb0",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-07T09:22:10Z",
+      "side": 1,
+      "message": "nit: We usually use .reset() and I think it looks nicer as it\u0027s more obvious that the destruction side effect is intended.",
+      "revId": "79c8f27e096c133313056c9167b7432ba27674b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
