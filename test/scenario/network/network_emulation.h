@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/test/network_emulation_manager_interface.h"
 #include "api/test/simulated_network.h"
 #include "api/units/timestamp.h"
 #include "rtc_base/async_socket.h"
@@ -67,7 +68,8 @@ class EmulatedNetworkReceiverInterface {
 // other to form different networks with different behavior. The behavior of
 // the node itself is determined by a concrete implementation of
 // NetworkBehaviorInterface that is provided on construction.
-class EmulatedNetworkNode : public EmulatedNetworkReceiverInterface {
+class EmulatedNetworkNode : public EmulatedNetworkReceiverInterface,
+                            public EmulatedNetworkNodeInterface {
  public:
   // Creates node based on |network_behavior|. The specified |packet_overhead|
   // is added to the size of each packet in the information provided to
@@ -112,7 +114,8 @@ class EmulatedNetworkNode : public EmulatedNetworkReceiverInterface {
 // It will be used as sender from socket side to send data to the network and
 // will act as packet receiver from emulated network side to receive packets
 // from other EmulatedNetworkNodes.
-class EndpointNode : public EmulatedNetworkReceiverInterface {
+class EndpointNode : public EmulatedNetworkReceiverInterface,
+                     public EndpointNodeInterface {
  public:
   EndpointNode(uint64_t id, rtc::IPAddress, Clock* clock);
   ~EndpointNode() override;
@@ -144,7 +147,7 @@ class EndpointNode : public EmulatedNetworkReceiverInterface {
       EmulatedNetworkReceiverInterface* receiver);
   void UnbindReceiver(uint16_t port);
 
-  rtc::IPAddress GetPeerLocalAddress() const;
+  rtc::IPAddress GetPeerLocalAddress() const override;
 
   // Will be called to deliver packet into endpoint from network node.
   void OnPacketReceived(EmulatedIpPacket packet) override;
