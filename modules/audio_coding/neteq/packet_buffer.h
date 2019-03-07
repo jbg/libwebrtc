@@ -52,7 +52,9 @@ class PacketBuffer {
   // the packet object.
   // Returns PacketBuffer::kOK on success, PacketBuffer::kFlushed if the buffer
   // was flushed due to overfilling.
-  virtual int InsertPacket(Packet&& packet, StatisticsCalculator* stats);
+  virtual int InsertPacket(Packet&& packet,
+                           StatisticsCalculator* stats,
+                           int samples_per_packet);
 
   // Inserts a list of packets into the buffer. The buffer will take over
   // ownership of the packet objects.
@@ -67,7 +69,8 @@ class PacketBuffer {
       const DecoderDatabase& decoder_database,
       absl::optional<uint8_t>* current_rtp_payload_type,
       absl::optional<uint8_t>* current_cng_rtp_payload_type,
-      StatisticsCalculator* stats);
+      StatisticsCalculator* stats,
+      int samples_per_packet);
 
   // Gets the timestamp for the first packet in the buffer and writes it to the
   // output variable |next_timestamp|.
@@ -94,7 +97,8 @@ class PacketBuffer {
   // Discards the first packet in the buffer. The packet is deleted.
   // Returns PacketBuffer::kBufferEmpty if the buffer is empty,
   // PacketBuffer::kOK otherwise.
-  virtual int DiscardNextPacket(StatisticsCalculator* stats);
+  virtual int DiscardNextPacket(StatisticsCalculator* stats,
+                                int samples_per_packet);
 
   // Discards all packets that are (strictly) older than timestamp_limit,
   // but newer than timestamp_limit - horizon_samples. Setting horizon_samples
@@ -103,15 +107,18 @@ class PacketBuffer {
   // timestamp_limit (including wrap-around), it is considered old.
   virtual void DiscardOldPackets(uint32_t timestamp_limit,
                                  uint32_t horizon_samples,
-                                 StatisticsCalculator* stats);
+                                 StatisticsCalculator* stats,
+                                 int samples_per_packet);
 
   // Discards all packets that are (strictly) older than timestamp_limit.
   virtual void DiscardAllOldPackets(uint32_t timestamp_limit,
-                                    StatisticsCalculator* stats);
+                                    StatisticsCalculator* stats,
+                                    int samples_per_packet);
 
   // Removes all packets with a specific payload type from the buffer.
   virtual void DiscardPacketsWithPayloadType(uint8_t payload_type,
-                                             StatisticsCalculator* stats);
+                                             StatisticsCalculator* stats,
+                                             int samples_per_packet);
 
   // Returns the number of packets in the buffer, including duplicates and
   // redundant packets.

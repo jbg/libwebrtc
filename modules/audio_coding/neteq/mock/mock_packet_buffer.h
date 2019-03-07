@@ -27,7 +27,9 @@ class MockPacketBuffer : public PacketBuffer {
       void());
   MOCK_CONST_METHOD0(Empty,
       bool());
-  int InsertPacket(Packet&& packet, StatisticsCalculator* stats) {
+  int InsertPacket(Packet&& packet,
+                   StatisticsCalculator* stats,
+                   int /*samples_per_packet*/) {
     return InsertPacketWrapped(&packet, stats);
   }
   // Since gtest does not properly support move-only types, InsertPacket is
@@ -35,12 +37,13 @@ class MockPacketBuffer : public PacketBuffer {
   // instead and move from |*packet|.
   MOCK_METHOD2(InsertPacketWrapped,
                int(Packet* packet, StatisticsCalculator* stats));
-  MOCK_METHOD5(InsertPacketList,
+  MOCK_METHOD6(InsertPacketList,
                int(PacketList* packet_list,
                    const DecoderDatabase& decoder_database,
                    absl::optional<uint8_t>* current_rtp_payload_type,
                    absl::optional<uint8_t>* current_cng_rtp_payload_type,
-                   StatisticsCalculator* stats));
+                   StatisticsCalculator* stats,
+                   int samples_per_packet));
   MOCK_CONST_METHOD1(NextTimestamp,
       int(uint32_t* next_timestamp));
   MOCK_CONST_METHOD2(NextHigherTimestamp,
@@ -48,13 +51,17 @@ class MockPacketBuffer : public PacketBuffer {
   MOCK_CONST_METHOD0(PeekNextPacket,
       const Packet*());
   MOCK_METHOD0(GetNextPacket, absl::optional<Packet>());
-  MOCK_METHOD1(DiscardNextPacket, int(StatisticsCalculator* stats));
-  MOCK_METHOD3(DiscardOldPackets,
+  MOCK_METHOD2(DiscardNextPacket,
+               int(StatisticsCalculator* stats, int samples_per_packet));
+  MOCK_METHOD4(DiscardOldPackets,
                void(uint32_t timestamp_limit,
                     uint32_t horizon_samples,
-                    StatisticsCalculator* stats));
-  MOCK_METHOD2(DiscardAllOldPackets,
-               void(uint32_t timestamp_limit, StatisticsCalculator* stats));
+                    StatisticsCalculator* stats,
+                    int samples_per_packet));
+  MOCK_METHOD3(DiscardAllOldPackets,
+               void(uint32_t timestamp_limit,
+                    StatisticsCalculator* stats,
+                    int samples_per_packet));
   MOCK_CONST_METHOD0(NumPacketsInBuffer,
       size_t());
   MOCK_METHOD1(IncrementWaitingTimes,

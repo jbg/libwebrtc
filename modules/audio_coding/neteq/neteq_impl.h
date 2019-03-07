@@ -403,11 +403,18 @@ class NetEqImpl : public webrtc::NetEq {
   std::unique_ptr<TickTimer::Stopwatch> generated_noise_stopwatch_
       RTC_GUARDED_BY(crit_sect_);
   std::vector<uint32_t> last_decoded_timestamps_ RTC_GUARDED_BY(crit_sect_);
+  uint32_t last_decoded_timestamp_ RTC_GUARDED_BY(crit_sect_) = 0;
   ExpandUmaLogger expand_uma_logger_ RTC_GUARDED_BY(crit_sect_);
   ExpandUmaLogger speech_expand_uma_logger_ RTC_GUARDED_BY(crit_sect_);
   bool no_time_stretching_ RTC_GUARDED_BY(crit_sect_);  // Only used for test.
   rtc::BufferT<int16_t> concealment_audio_ RTC_GUARDED_BY(crit_sect_);
   const bool enable_rtx_handling_ RTC_GUARDED_BY(crit_sect_);
+
+  int last_received_sequence_number_ RTC_GUARDED_BY(crit_sect_) = 0;
+  bool last_received_padding_ RTC_GUARDED_BY(crit_sect_) = false;
+  bool last_DTX_packet_ RTC_GUARDED_BY(crit_sect_) = false;
+  int last_audio_content_samples_ RTC_GUARDED_BY(crit_sect_) = 0;
+  uint32_t last_RTP_timestamp_ RTC_GUARDED_BY(crit_sect_) = 0;
 
  private:
   RTC_DISALLOW_COPY_AND_ASSIGN(NetEqImpl);
