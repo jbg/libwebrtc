@@ -237,7 +237,8 @@ void NetEqImpl::SetCodecs(const std::map<int, SdpAudioFormat>& codecs) {
   const std::vector<int> changed_payload_types =
       decoder_database_->SetCodecs(codecs);
   for (const int pt : changed_payload_types) {
-    packet_buffer_->DiscardPacketsWithPayloadType(pt, stats_.get());
+    packet_buffer_->DiscardPacketsWithPayloadType(pt, stats_.get(),
+                                                  decoder_frame_length_);
   }
 }
 
@@ -255,8 +256,8 @@ int NetEqImpl::RemovePayloadType(uint8_t rtp_payload_type) {
   rtc::CritScope lock(&crit_sect_);
   int ret = decoder_database_->Remove(rtp_payload_type);
   if (ret == DecoderDatabase::kOK || ret == DecoderDatabase::kDecoderNotFound) {
-    packet_buffer_->DiscardPacketsWithPayloadType(rtp_payload_type,
-                                                  stats_.get());
+    packet_buffer_->DiscardPacketsWithPayloadType(
+        rtp_payload_type, stats_.get(), decoder_frame_length_);
     return kOK;
   }
   return kFail;
@@ -357,6 +358,14 @@ NetEqOperationsAndState NetEqImpl::GetOperationsAndState() const {
   result.next_packet_available = packet_buffer_->PeekNextPacket() &&
                                  packet_buffer_->PeekNextPacket()->timestamp ==
                                      sync_buffer_->end_timestamp();
+  result.sample_rate_hz = fs_hz_;
+  result.last_decoded_timestamp = last_decoded_timestamp_;
+  result.last_received_sequence_number = last_received_sequence_number_;
+  result.last_received_padding = last_received_padding_;
+  result.last_DTX_packet = last_DTX_packet_;
+  result.last_audio_content_samples = last_audio_content_samples_;
+  result.last_RTP_timestamp = last_RTP_timestamp_;
+
   return result;
 }
 
@@ -409,9 +418,12 @@ absl::optional<SdpAudioFormat> NetEqImpl::GetDecoderFormat(
 void NetEqImpl::FlushBuffers() {
   rtc::CritScope lock(&crit_sect_);
   RTC_LOG(LS_VERBOSE) << "FlushBuffers";
+  stats_->DiscardedSamples(
+      packet_buffer_->NumSamplesInBuffer(decoder_frame_length_));
   packet_buffer_->Flush();
   assert(sync_buffer_.get());
   assert(expand_.get());
+  stats_->DiscardedSamples(sync_buffer_->FutureLength());
   sync_buffer_->Flush();
   sync_buffer_->set_next_index(sync_buffer_->next_index() -
                                expand_->overlap_length());
@@ -477,6 +489,12 @@ int NetEqImpl::InsertPacketInternal(const RTPHeader& rtp_header,
   }
   stats_->ReceivedPacket();
 
+  last_received_sequence_number_ = rtp_header.sequenceNumber;
+  last_received_padding_ = rtp_header.paddingLength > 0;
+  last_DTX_packet_ = payload.size() > 2;
+  last_audio_content_samples_ = decoder_frame_length_;
+  last_RTP_timestamp_ = rtp_header.timestamp;
+
   PacketList packet_list;
   // Insert packet in a packet list.
   packet_list.push_back([&rtp_header, &payload] {
@@ -515,6 +533,8 @@ int NetEqImpl::InsertPacketInternal(const RTPHeader& rtp_header,
     // the packet has been successfully inserted into the packet buffer.
 
     // Flush the packet buffer and DTMF buffer.
+    stats_->DiscardedSamples(
+        packet_buffer_->NumSamplesInBuffer(decoder_frame_length_));
     packet_buffer_->Flush();
     dtmf_buffer_->Flush();
 
@@ -661,7 +681,7 @@ int NetEqImpl::InsertPacketInternal(const RTPHeader& rtp_header,
   // Insert packets in buffer.
   const int ret = packet_buffer_->InsertPacketList(
       &parsed_packet_list, *decoder_database_, &current_rtp_payload_type_,
-      &current_cng_rtp_payload_type_, stats_.get());
+      &current_cng_rtp_payload_type_, stats_.get(), decoder_frame_length_);
   if (ret == PacketBuffer::kFlushed) {
     // Reset DSP timestamp etc. if packet buffer flushed.
     new_codec_ = true;
@@ -988,7 +1008,7 @@ int NetEqImpl::GetDecision(Operations* operation,
   if (!new_codec_) {
     const uint32_t five_seconds_samples = 5 * fs_hz_;
     packet_buffer_->DiscardOldPackets(end_timestamp, five_seconds_samples,
-                                      stats_.get());
+                                      stats_.get(), decoder_frame_length_);
   }
   const Packet* packet = packet_buffer_->PeekNextPacket();
 
@@ -1008,14 +1028,14 @@ int NetEqImpl::GetDecision(Operations* operation,
            (end_timestamp >= packet->timestamp ||
             end_timestamp + generated_noise_samples > packet->timestamp)) {
       // Don't use this packet, discard it.
-      if (packet_buffer_->DiscardNextPacket(stats_.get()) !=
-          PacketBuffer::kOK) {
+      if (packet_buffer_->DiscardNextPacket(
+              stats_.get(), decoder_frame_length_) != PacketBuffer::kOK) {
         assert(false);  // Must be ok by design.
       }
       // Check buffer again.
       if (!new_codec_) {
         packet_buffer_->DiscardOldPackets(end_timestamp, 5 * fs_hz_,
-                                          stats_.get());
+                                          stats_.get(), decoder_frame_length_);
       }
       packet = packet_buffer_->PeekNextPacket();
     }
@@ -1396,6 +1416,7 @@ int NetEqImpl::DecodeLoop(PacketList* packet_list,
     auto opt_result = packet_list->front().frame->Decode(
         rtc::ArrayView<int16_t>(&decoded_buffer_[*decoded_length],
                                 decoded_buffer_length_ - *decoded_length));
+    last_decoded_timestamp_ = packet_list->front().timestamp;
     last_decoded_timestamps_.push_back(packet_list->front().timestamp);
     packet_list->pop_front();
     if (opt_result) {
@@ -1952,7 +1973,8 @@ int NetEqImpl::ExtractPackets(size_t required_samples,
     // we could end up in the situation where we never decode anything, since
     // all incoming packets are considered too old but the buffer will also
     // never be flooded and flushed.
-    packet_buffer_->DiscardAllOldPackets(timestamp_, stats_.get());
+    packet_buffer_->DiscardAllOldPackets(timestamp_, stats_.get(),
+                                         decoder_frame_length_);
   }
 
   return rtc::dchecked_cast<int>(extracted_samples);

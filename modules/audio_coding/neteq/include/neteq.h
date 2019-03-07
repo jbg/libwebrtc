@@ -66,6 +66,7 @@ struct NetEqNetworkStatistics {
 struct NetEqLifetimeStatistics {
   // Stats below correspond to similarly-named fields in the WebRTC stats spec.
   // https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamtrackstats
+  // Note: this is the number of samples sent to the sound card.
   uint64_t total_samples_received = 0;
   uint64_t concealed_samples = 0;
   uint64_t concealment_events = 0;
@@ -83,18 +84,19 @@ struct NetEqLifetimeStatistics {
   // packet can be made dynamic.
   uint64_t relative_packet_arrival_delay_ms = 0;
   uint64_t jitter_buffer_packets_received = 0;
+  // Total discarded samples due to late arrivals and buffer flushes.
+  uint64_t discarded_samples = 0;
+  // Total removed samples due to increasing the playout speed.
+  uint64_t accelerated_samples = 0;
+  // Total added samples due to decreasing the playout speed.
+  uint64_t decelerated_samples = 0;
+  // Total number of buffer flushes.
+  uint64_t packet_buffer_flushes = 0;
 };
 
 // Metrics that describe the operations performed in NetEq, and the internal
 // state.
 struct NetEqOperationsAndState {
-  // These sample counters are cumulative, and don't reset. As a reference, the
-  // total number of output samples can be found in
-  // NetEqLifetimeStatistics::total_samples_received.
-  uint64_t preemptive_samples = 0;
-  uint64_t accelerate_samples = 0;
-  // Count of the number of buffer flushes.
-  uint64_t packet_buffer_flushes = 0;
   // The number of primary packets that were discarded.
   uint64_t discarded_primary_packets = 0;
   // The statistics below are not cumulative.
@@ -106,6 +108,21 @@ struct NetEqOperationsAndState {
   uint64_t current_frame_size_ms = 0;
   // Flag to indicate that the next packet is available.
   bool next_packet_available = false;
+  // The sample rate in hz.
+  int sample_rate_hz = 0;
+  // The last decoded RTP timestamp.
+  uint32_t last_decoded_timestamp = 0;
+  // The sequence number of the last received RTP packet.
+  int last_received_sequence_number = 0;
+  // Indicate if the last received packet was a padding packet.
+  bool last_received_padding = false;
+  // Indicate if the last packet was a DTX marker packet.
+  bool last_DTX_packet = false;
+  // Amount of audio in the last packet in samples.
+  int last_audio_content_samples = 0;
+  // The RTP timestamp from the header of the last received packet. This
+  // corresponds to the number of the first sample in the packet.
+  uint32_t last_RTP_timestamp = 0;
 };
 
 // This is the interface class for NetEq.

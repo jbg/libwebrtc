@@ -257,11 +257,7 @@ void AcmReceiver::GetNetworkStatistics(NetworkStatistics* acm_stat) {
       neteq_lifetime_stat.jitter_buffer_emitted_count;
   acm_stat->delayedPacketOutageSamples =
       neteq_lifetime_stat.delayed_packet_outage_samples;
-
-  NetEqOperationsAndState neteq_operations_and_state =
-      neteq_->GetOperationsAndState();
-  acm_stat->packetBufferFlushes =
-      neteq_operations_and_state.packet_buffer_flushes;
+  acm_stat->packetBufferFlushes = neteq_lifetime_stat.packet_buffer_flushes;
 }
 
 int AcmReceiver::EnableNack(size_t max_nack_list_size) {
