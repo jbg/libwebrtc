@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b4a88b2_c5adc68a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-03-07T09:00:56Z",
+      "side": 1,
+      "message": "nit: they",
+      "range": {
+        "startLine": 16,
+        "startChar": 57,
+        "endLine": 16,
+        "endChar": 59
+      },
+      "revId": "63571801fc4ad49e893e994bad8b78ede826ae41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ecbd522_bf738fb6",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-03-07T09:00:56Z",
+      "side": 1,
+      "message": "This is really too late, since it will (likely) crash in the worker_queue_ initializer. Still useful documentation, though.",
+      "range": {
+        "startLine": 145,
+        "startChar": 2,
+        "endLine": 145,
+        "endChar": 28
+      },
+      "revId": "63571801fc4ad49e893e994bad8b78ede826ae41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93ce25a8_57cf72aa",
+        "filename": "audio/test/media_transport_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-03-07T09:00:56Z",
+      "side": 1,
+      "message": "Why do these now need to be nice?",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 10
+      },
+      "revId": "63571801fc4ad49e893e994bad8b78ede826ae41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
