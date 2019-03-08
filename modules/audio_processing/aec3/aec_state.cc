@@ -59,7 +59,6 @@ AecState::AecState(const EchoCanceller3Config& config)
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
       config_(config),
       initial_state_(config_),
-      delay_state_(config_),
       transparent_state_(config_),
       filter_quality_state_(config_),
       legacy_filter_quality_state_(config_),
@@ -250,8 +249,7 @@ void AecState::InitialState::InitialState::Update(bool active_render,
   transition_triggered_ = !initial_state_ && prev_initial_state;
 }
 
-AecState::FilterDelay::FilterDelay(const EchoCanceller3Config& config)
-    : delay_headroom_blocks_(config.delay.delay_headroom_blocks) {}
+AecState::FilterDelay::FilterDelay() {}
 
 void AecState::FilterDelay::Update(
     const FilterAnalyzer& filter_analyzer,
@@ -269,7 +267,7 @@ void AecState::FilterDelay::Update(
   const bool delay_estimator_may_not_have_converged =
       blocks_with_proper_filter_adaptation < 2 * kNumBlocksPerSecond;
   if (delay_estimator_may_not_have_converged && external_delay_) {
-    filter_delay_blocks_ = delay_headroom_blocks_;
+    filter_delay_blocks_ = 0;
   } else {
     filter_delay_blocks_ = filter_analyzer.DelayBlocks();
   }

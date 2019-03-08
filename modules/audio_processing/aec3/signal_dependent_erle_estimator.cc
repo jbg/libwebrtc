@@ -43,10 +43,9 @@ std::array<size_t, kFftLengthBy2Plus1> FormSubbandMap() {
 // sections that typically represent the direct path have a larger resolution
 // than the higher sections which typically represent more reverberant acoustic
 // paths.
-std::vector<size_t> DefineFilterSectionSizes(size_t delay_headroom_blocks,
-                                             size_t num_blocks,
+std::vector<size_t> DefineFilterSectionSizes(size_t num_blocks,
                                              size_t num_sections) {
-  size_t filter_length_blocks = num_blocks - delay_headroom_blocks;
+  size_t filter_length_blocks = num_blocks;
   std::vector<size_t> section_sizes(num_sections);
   size_t remaining_blocks = filter_length_blocks;
   size_t remaining_sections = num_sections;
@@ -74,8 +73,7 @@ std::vector<size_t> DefineFilterSectionSizes(size_t delay_headroom_blocks,
 // Forms the limits in blocks for each filter section. Those sections
 // are used for analyzing the echo estimates and investigating which
 // linear filter sections contribute most to the echo estimate energy.
-std::vector<size_t> SetSectionsBoundaries(size_t delay_headroom_blocks,
-                                          size_t num_blocks,
+std::vector<size_t> SetSectionsBoundaries(size_t num_blocks,
                                           size_t num_sections) {
   std::vector<size_t> estimator_boundaries_blocks(num_sections + 1);
   if (estimator_boundaries_blocks.size() == 2) {
@@ -84,15 +82,14 @@ std::vector<size_t> SetSectionsBoundaries(size_t delay_headroom_blocks,
     return estimator_boundaries_blocks;
   }
   RTC_DCHECK_GT(estimator_boundaries_blocks.size(), 2);
-  const std::vector<size_t> section_sizes =
-      DefineFilterSectionSizes(delay_headroom_blocks, num_blocks,
-                               estimator_boundaries_blocks.size() - 1);
+  const std::vector<size_t> section_sizes = DefineFilterSectionSizes(
+      num_blocks, estimator_boundaries_blocks.size() - 1);
 
   size_t idx = 0;
   size_t current_size_block = 0;
   RTC_DCHECK_EQ(section_sizes.size() + 1, estimator_boundaries_blocks.size());
-  estimator_boundaries_blocks[0] = delay_headroom_blocks;
-  for (size_t k = delay_headroom_blocks; k < num_blocks; ++k) {
+  estimator_boundaries_blocks[0] = 0;
+  for (size_t k = 0; k < num_blocks; ++k) {
     current_size_block++;
     if (current_size_block >= section_sizes[idx]) {
       idx = idx + 1;
@@ -122,14 +119,12 @@ SignalDependentErleEstimator::SignalDependentErleEstimator(
     : min_erle_(config.erle.min),
       num_sections_(config.erle.num_sections),
       num_blocks_(config.filter.main.length_blocks),
-      delay_headroom_blocks_(config.delay.delay_headroom_blocks),
       band_to_subband_(FormSubbandMap()),
       max_erle_(SetMaxErleSubbands(config.erle.max_l,
                                    config.erle.max_h,
                                    band_to_subband_[kFftLengthBy2 / 2])),
-      section_boundaries_blocks_(SetSectionsBoundaries(delay_headroom_blocks_,
-                                                       num_blocks_,
-                                                       num_sections_)),
+      section_boundaries_blocks_(
+          SetSectionsBoundaries(num_blocks_, num_sections_)),
       S2_section_accum_(num_sections_),
       erle_estimators_(num_sections_),
       correction_factors_(num_sections_) {

@@ -42,7 +42,7 @@ EchoPathDelayEstimator::EchoPathDelayEstimator(
           config.delay.delay_candidate_detection_threshold),
       matched_filter_lag_aggregator_(data_dumper_,
                                      matched_filter_.GetMaxFilterLag(),
-                                     config.delay.delay_selection_thresholds) {
+                                     config.delay) {
   RTC_DCHECK(data_dumper);
   RTC_DCHECK(down_sampling_factor_ > 0);
 }
