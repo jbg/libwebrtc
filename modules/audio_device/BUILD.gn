@@ -248,10 +248,8 @@ rtc_source_set("audio_device_impl") {
   }
   if (rtc_include_internal_audio_device) {
     sources += [
-      "audio_device_data_observer.cc",
       "audio_device_impl.cc",
       "audio_device_impl.h",
-      "include/audio_device_data_observer.h",
     ]
     if (is_android) {
       sources += [
