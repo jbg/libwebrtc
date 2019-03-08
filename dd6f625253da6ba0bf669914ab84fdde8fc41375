@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f19a1c5c_f0c2c25c",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-03-08T13:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2a5b4e1_c5318cf5",
+      "range": {
+        "startLine": 89,
+        "startChar": 31,
+        "endLine": 89,
+        "endChar": 63
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e90b13c7_871b4f03",
         "filename": "modules/audio_coding/neteq/include/neteq.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03cd526f_ab906a4f",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-03-08T13:30:18Z",
+      "side": 1,
+      "message": "Good point, done.",
+      "parentUuid": "e90b13c7_871b4f03",
+      "range": {
+        "startLine": 92,
+        "startChar": 11,
+        "endLine": 92,
+        "endChar": 30
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "309c71b3_e7a684bf",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-03-08T13:30:18Z",
+      "side": 1,
+      "message": "last_decoded_timestamps_ is cleared at the start of every GetAudio event, so that makes it tricky to use it to extract stats, since it will not always have the correct information (depending on when the call is made).\n\nAs far I understand (this may not be accurate) playout_timestamp_ and timestamp_ keep track of the timestamp of the next audio that needs to be sent to the soundcard, which is not the same as the timestamp of the last decoded packet. So unless my understanding of playout_timestamp_ and timestamp_ is incorrect we have no other place to get this timestamp from.",
+      "parentUuid": "61dfbc61_873e35f7",
+      "range": {
+        "startLine": 406,
+        "startChar": 11,
+        "endLine": 406,
+        "endChar": 34
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "711ad514_a40f6af3",
         "filename": "modules/audio_coding/neteq/neteq_impl.h",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a7bcf47_aa8d3eec",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-03-08T13:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "711ad514_a40f6af3",
+      "range": {
+        "startLine": 415,
+        "startChar": 7,
+        "endLine": 415,
+        "endChar": 23
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "086a789b_10757225",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-03-08T13:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cedb3c8_d7a6d38f",
+      "range": {
+        "startLine": 417,
+        "startChar": 11,
+        "endLine": 417,
+        "endChar": 30
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8eab5127_4070d23c",
         "filename": "modules/audio_coding/neteq/packet_buffer.cc",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "f5c13af5_5cb245b6",
+        "filename": "modules/audio_coding/neteq/packet_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-03-08T13:30:18Z",
+      "side": 1,
+      "message": "If we make the assumption that the frame size doesn\u0027t change often, we can calculate this metric fairly accurately. It will not be 100% accurate in corner case when packets are discarded and the frame size changes at the same time, I still think it will be useful to have and accurate enough for most use cases.",
+      "parentUuid": "8eab5127_4070d23c",
+      "range": {
+        "startLine": 54,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 23
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cfdba3f4_b26c66d2",
         "filename": "modules/audio_coding/neteq/packet_buffer.cc",
         "patchSetId": 2
@@ -151,6 +295,30 @@
       "writtenOn": "2019-03-08T12:07:31Z",
       "side": 1,
       "message": "I think it is weird to have both packet and (estimated) sample_per_packet, which, in principle, can be extract from the packet, in the method.",
+      "range": {
+        "startLine": 88,
+        "startChar": 35,
+        "endLine": 88,
+        "endChar": 53
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a994a5e_138b5611",
+        "filename": "modules/audio_coding/neteq/packet_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-03-08T13:30:18Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s possible to extract the number of samples inside of the packet buffer, since the packet buffer doesn\u0027t have an AudioDecoder (it is owned by NetEqImpl). I agree that it looks out-of-place to have samples_per_packet as an input to the packet buffer, but I\u0027m not sure how else we can log the number of discarded samples. Perhaps we could notify the StatisticsCalculator every time the frame size changes? \n\nAlthough I prefer logging the number of discarded samples, an alternative would be to log the number of discarded packets instead. Do you think that would be better?",
+      "parentUuid": "cfdba3f4_b26c66d2",
       "range": {
         "startLine": 88,
         "startChar": 35,
