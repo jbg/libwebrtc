@@ -203,12 +203,16 @@ void StatisticsCalculator::ConcealedSamplesCorrection(int num_samples,
 
 void StatisticsCalculator::PreemptiveExpandedSamples(size_t num_samples) {
   preemptive_samples_ += num_samples;
-  operations_and_state_.preemptive_samples += num_samples;
+  lifetime_stats_.preemptive_samples += num_samples;
 }
 
 void StatisticsCalculator::AcceleratedSamples(size_t num_samples) {
   accelerate_samples_ += num_samples;
-  operations_and_state_.accelerate_samples += num_samples;
+  lifetime_stats_.accelerated_samples += num_samples;
+}
+
+void StatisticsCalculator::DiscardedSamples(size_t num_samples) {
+  lifetime_stats_.discarded_samples += num_samples;
 }
 
 void StatisticsCalculator::AddZeros(size_t num_samples) {
@@ -254,7 +258,7 @@ void StatisticsCalculator::SecondaryDecodedSamples(int num_samples) {
 }
 
 void StatisticsCalculator::FlushedPacketBuffer() {
-  operations_and_state_.packet_buffer_flushes++;
+  lifetime_stats_.packet_buffer_flushes++;
   buffer_full_counter_.RegisterSample();
 }
 

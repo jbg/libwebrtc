@@ -57,6 +57,10 @@ class StatisticsCalculator {
   // Reports that |num_samples| samples were removed through accelerate.
   void AcceleratedSamples(size_t num_samples);
 
+  // Reports that |num_samples| samples were discarded due to late arrival or
+  // a buffer flush.
+  void DiscardedSamples(size_t num_samples);
+
   // Reports that |num_samples| zeros were inserted into the output.
   void AddZeros(size_t num_samples);
 

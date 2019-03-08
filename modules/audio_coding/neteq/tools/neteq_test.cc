@@ -185,13 +185,14 @@ NetEqTest::SimulationStepResult NetEqTest::RunToNextGetAudio() {
       result.simulation_step_ms =
           input_->NextEventTime().value_or(time_now_ms) - start_time_ms;
       const auto operations_state = neteq_->GetOperationsAndState();
+      const auto lifetime_stats = LifetimeStats();
       current_state_.current_delay_ms = operations_state.current_buffer_size_ms;
       current_state_.packet_size_ms = operations_state.current_frame_size_ms;
       current_state_.next_packet_available =
           operations_state.next_packet_available;
       current_state_.packet_buffer_flushed =
-          operations_state.packet_buffer_flushes >
-          prev_ops_state_.packet_buffer_flushes;
+          lifetime_stats.packet_buffer_flushes >
+          prev_lifetime_stats_.packet_buffer_flushes;
       // TODO(ivoc): Add more accurate reporting by tracking the origin of
       // samples in the sync buffer.
       result.action_times_ms[Action::kExpand] = 0;
@@ -203,13 +204,13 @@ NetEqTest::SimulationStepResult NetEqTest::RunToNextGetAudio() {
           out_frame.speech_type_ == AudioFrame::SpeechType::kPLCCNG) {
         // Consider the whole frame to be the result of expansion.
         result.action_times_ms[Action::kExpand] = 10;
-      } else if (operations_state.accelerate_samples -
-                     prev_ops_state_.accelerate_samples >
+      } else if (lifetime_stats.accelerated_samples -
+                     prev_lifetime_stats_.accelerated_samples >
                  0) {
         // Consider the whole frame to be the result of acceleration.
         result.action_times_ms[Action::kAccelerate] = 10;
-      } else if (operations_state.preemptive_samples -
-                     prev_ops_state_.preemptive_samples >
+      } else if (lifetime_stats.preemptive_samples -
+                     prev_lifetime_stats_.preemptive_samples >
                  0) {
         // Consider the whole frame to be the result of preemptive expansion.
         result.action_times_ms[Action::kPreemptiveExpand] = 10;
@@ -217,7 +218,6 @@ NetEqTest::SimulationStepResult NetEqTest::RunToNextGetAudio() {
         // Consider the whole frame to be the result of normal playout.
         result.action_times_ms[Action::kNormal] = 10;
       }
-      auto lifetime_stats = LifetimeStats();
       if (text_log_) {
         const bool plc =
             (out_frame.speech_type_ == AudioFrame::SpeechType::kPLC) ||
@@ -241,11 +241,11 @@ NetEqTest::SimulationStepResult NetEqTest::RunToNextGetAudio() {
                          prev_ops_state_.discarded_primary_packets)
                      << " primary packets." << std::endl;
         }
-        if (operations_state.packet_buffer_flushes >
-            prev_ops_state_.packet_buffer_flushes) {
+        if (lifetime_stats.packet_buffer_flushes >
+            prev_lifetime_stats_.packet_buffer_flushes) {
           *text_log_ << "Flushed packet buffer "
-                     << (operations_state.packet_buffer_flushes -
-                         prev_ops_state_.packet_buffer_flushes)
+                     << (lifetime_stats.packet_buffer_flushes -
+                         prev_lifetime_stats_.packet_buffer_flushes)
                      << " times." << std::endl;
         }
       }
