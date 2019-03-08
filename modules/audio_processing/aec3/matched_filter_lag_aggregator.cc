@@ -20,10 +20,13 @@ namespace webrtc {
 MatchedFilterLagAggregator::MatchedFilterLagAggregator(
     ApmDataDumper* data_dumper,
     size_t max_filter_lag,
-    const EchoCanceller3Config::Delay::DelaySelectionThresholds& thresholds)
+    const EchoCanceller3Config::Delay& config)
     : data_dumper_(data_dumper),
       histogram_(max_filter_lag + 1, 0),
-      thresholds_(thresholds) {
+      thresholds_(config.delay_selection_thresholds),
+      delay_headroom_samples_ds_(
+          (config.delay_headroom_samples + config.down_sampling_factor - 1) /
+          config.down_sampling_factor) {
   RTC_DCHECK(data_dumper);
   RTC_DCHECK_LE(thresholds_.initial, thresholds_.converged);
   histogram_data_.fill(0);
@@ -87,7 +90,9 @@ absl::optional<DelayEstimate> MatchedFilterLagAggregator::Aggregate(
       DelayEstimate::Quality quality = significant_candidate_found_
                                            ? DelayEstimate::Quality::kRefined
                                            : DelayEstimate::Quality::kCoarse;
-      return DelayEstimate(quality, candidate);
+      // The delay is the position of the peak minus the headroom.
+      const int delay_samples = candidate - delay_headroom_samples_ds_;
+      return DelayEstimate(quality, delay_samples);
     }
   }
 
