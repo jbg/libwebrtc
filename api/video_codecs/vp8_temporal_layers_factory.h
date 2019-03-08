@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef API_VIDEO_CODECS_CREATE_VP8_TEMPORAL_LAYERS_H_
-#define API_VIDEO_CODECS_CREATE_VP8_TEMPORAL_LAYERS_H_
+#ifndef API_VIDEO_CODECS_VP8_TEMPORAL_LAYERS_FACTORY_H_
+#define API_VIDEO_CODECS_VP8_TEMPORAL_LAYERS_FACTORY_H_
 
 #include <memory>
 
@@ -17,10 +17,14 @@
 
 namespace webrtc {
 
-std::unique_ptr<Vp8TemporalLayers> CreateVp8TemporalLayers(
-    Vp8TemporalLayersType type,
-    int num_temporal_layers);
+class Vp8TemporalLayersFactory : public Vp8FrameBufferControllerFactory {
+ public:
+  ~Vp8TemporalLayersFactory() override = default;
+
+  std::unique_ptr<Vp8FrameBufferController> Create(
+      const VideoCodec& codec) override;
+};
 
 }  // namespace webrtc
 
-#endif  // API_VIDEO_CODECS_CREATE_VP8_TEMPORAL_LAYERS_H_
+#endif  // API_VIDEO_CODECS_VP8_TEMPORAL_LAYERS_FACTORY_H_

@@ -19,6 +19,7 @@
 #include "api/video/encoded_image.h"
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
+#include "api/video_codecs/vp8_frame_buffer_controller.h"
 #include "api/video_codecs/vp8_temporal_layers.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/include/module_common_types.h"
@@ -58,7 +59,7 @@ class FakeVP8Encoder : public FakeEncoder {
 
   rtc::SequencedTaskChecker sequence_checker_;
 
-  std::vector<std::unique_ptr<Vp8TemporalLayers>> temporal_layers_
+  std::vector<std::unique_ptr<Vp8FrameBufferController>> temporal_layers_
       RTC_GUARDED_BY(sequence_checker_);
 };
 

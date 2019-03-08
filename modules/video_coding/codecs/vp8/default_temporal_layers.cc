@@ -7,6 +7,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include "modules/video_coding/codecs/vp8/default_temporal_layers.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -18,7 +20,6 @@
 #include <vector>
 
 #include "modules/include/module_common_types.h"
-#include "modules/video_coding/codecs/vp8/default_temporal_layers.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
@@ -260,12 +261,18 @@ DefaultTemporalLayers::DefaultTemporalLayers(int number_of_temporal_layers)
 
 DefaultTemporalLayers::~DefaultTemporalLayers() = default;
 
-bool DefaultTemporalLayers::SupportsEncoderFrameDropping() const {
+size_t DefaultTemporalLayers::StreamCount() const {
+  return 1;
+}
+
+bool DefaultTemporalLayers::SupportsEncoderFrameDropping(
+    size_t stream_index) const {
   // This class allows the encoder drop frames as it sees fit.
   return true;
 }
 
 void DefaultTemporalLayers::OnRatesUpdated(
+    size_t stream_index,
     const std::vector<uint32_t>& bitrates_bps,
     int framerate_fps) {
   RTC_DCHECK_GT(bitrates_bps.size(), 0);
@@ -279,7 +286,8 @@ void DefaultTemporalLayers::OnRatesUpdated(
   }
 }
 
-bool DefaultTemporalLayers::UpdateConfiguration(Vp8EncoderConfig* cfg) {
+bool DefaultTemporalLayers::UpdateConfiguration(size_t stream_index,
+                                                Vp8EncoderConfig* cfg) {
   if (!new_bitrates_bps_) {
     return false;
   }
@@ -328,7 +336,8 @@ bool DefaultTemporalLayers::IsSyncFrame(const Vp8FrameConfig& config) const {
   return true;
 }
 
-Vp8FrameConfig DefaultTemporalLayers::UpdateLayerConfig(uint32_t timestamp) {
+Vp8FrameConfig DefaultTemporalLayers::UpdateLayerConfig(size_t stream_index,
+                                                        uint32_t timestamp) {
   RTC_DCHECK_GT(num_layers_, 0);
   RTC_DCHECK_LT(0, temporal_pattern_.size());
 
@@ -440,7 +449,8 @@ void DefaultTemporalLayers::UpdateSearchOrder(Vp8FrameConfig* config) {
   }
 }
 
-void DefaultTemporalLayers::OnEncodeDone(uint32_t rtp_timestamp,
+void DefaultTemporalLayers::OnEncodeDone(size_t stream_index,
+                                         uint32_t rtp_timestamp,
                                          size_t size_bytes,
                                          bool is_keyframe,
                                          int qp,
@@ -524,6 +534,10 @@ void DefaultTemporalLayers::OnEncodeDone(uint32_t rtp_timestamp,
     }
   }
 }
+
+void DefaultTemporalLayers::OnPacketLossRateUpdate(float packet_loss_rate) {}
+
+void DefaultTemporalLayers::OnRttUpdate(int64_t rtt_ms) {}
 
 TemplateStructure DefaultTemporalLayers::GetTemplateStructure(
     int num_layers) const {

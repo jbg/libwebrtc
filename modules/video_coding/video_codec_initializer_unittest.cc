@@ -1,3 +1,4 @@
+#if 0
 /*
  *  Copyright (c) 2017 The WebRTC project authors. All Rights Reserved.
  *
@@ -20,9 +21,9 @@
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video/video_bitrate_allocator_factory.h"
-#include "api/video_codecs/create_vp8_temporal_layers.h"
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/vp8_temporal_layers.h"
+#include "api/video_codecs/vp8_temporal_layers_factory.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
 #include "rtc_base/checks.h"
@@ -358,3 +359,4 @@ TEST_F(VideoCodecInitializerTest, Vp9DeactivateLayers) {
 }
 
 }  // namespace webrtc
+#endif
