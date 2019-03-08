@@ -27,10 +27,9 @@ class ApmDataDumper;
 // reliable combined lag estimate.
 class MatchedFilterLagAggregator {
  public:
-  MatchedFilterLagAggregator(
-      ApmDataDumper* data_dumper,
-      size_t max_filter_lag,
-      const EchoCanceller3Config::Delay::DelaySelectionThresholds& thresholds);
+  MatchedFilterLagAggregator(ApmDataDumper* data_dumper,
+                             size_t max_filter_lag,
+                             const EchoCanceller3Config::Delay& config);
   ~MatchedFilterLagAggregator();
 
   // Resets the aggregator.
@@ -47,6 +46,7 @@ class MatchedFilterLagAggregator {
   int histogram_data_index_ = 0;
   bool significant_candidate_found_ = false;
   const EchoCanceller3Config::Delay::DelaySelectionThresholds thresholds_;
+  const int delay_headroom_samples_ds_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(MatchedFilterLagAggregator);
 };
