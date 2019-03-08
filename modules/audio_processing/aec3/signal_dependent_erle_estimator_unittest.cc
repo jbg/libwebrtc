@@ -109,24 +109,21 @@ TEST(SignalDependentErleEstimator, SweepSettings) {
   EchoCanceller3Config cfg;
   size_t max_length_blocks = 50;
   for (size_t blocks = 0; blocks < max_length_blocks; blocks = blocks + 10) {
-    for (size_t delay_headroom = 0; delay_headroom < 5; ++delay_headroom) {
-      for (size_t num_sections = 2; num_sections < max_length_blocks;
-           ++num_sections) {
-        cfg.filter.main.length_blocks = blocks;
-        cfg.filter.main_initial.length_blocks =
-            std::min(cfg.filter.main_initial.length_blocks, blocks);
-        cfg.delay.delay_headroom_blocks = delay_headroom;
-        cfg.erle.num_sections = num_sections;
-        if (EchoCanceller3Config::Validate(&cfg)) {
-          SignalDependentErleEstimator s(cfg);
-          std::array<float, kFftLengthBy2Plus1> average_erle;
-          average_erle.fill(cfg.erle.max_l);
-          TestInputs inputs(cfg);
-          for (size_t n = 0; n < 10; ++n) {
-            inputs.Update();
-            s.Update(inputs.GetRenderBuffer(), inputs.GetH2(), inputs.GetX2(),
-                     inputs.GetY2(), inputs.GetE2(), average_erle, true);
-          }
+    for (size_t num_sections = 2; num_sections < max_length_blocks;
+         ++num_sections) {
+      cfg.filter.main.length_blocks = blocks;
+      cfg.filter.main_initial.length_blocks =
+          std::min(cfg.filter.main_initial.length_blocks, blocks);
+      cfg.erle.num_sections = num_sections;
+      if (EchoCanceller3Config::Validate(&cfg)) {
+        SignalDependentErleEstimator s(cfg);
+        std::array<float, kFftLengthBy2Plus1> average_erle;
+        average_erle.fill(cfg.erle.max_l);
+        TestInputs inputs(cfg);
+        for (size_t n = 0; n < 10; ++n) {
+          inputs.Update();
+          s.Update(inputs.GetRenderBuffer(), inputs.GetH2(), inputs.GetX2(),
+                   inputs.GetY2(), inputs.GetE2(), average_erle, true);
         }
       }
     }
@@ -137,9 +134,7 @@ TEST(SignalDependentErleEstimator, LongerRun) {
   EchoCanceller3Config cfg;
   cfg.filter.main.length_blocks = 2;
   cfg.filter.main_initial.length_blocks = 1;
-  cfg.delay.delay_headroom_blocks = 0;
-  cfg.delay.hysteresis_limit_1_blocks = 0;
-  cfg.delay.hysteresis_limit_2_blocks = 0;
+  cfg.delay.hysteresis_limit_blocks = 0;
   cfg.erle.num_sections = 2;
   EXPECT_EQ(EchoCanceller3Config::Validate(&cfg), true);
   std::array<float, kFftLengthBy2Plus1> average_erle;
