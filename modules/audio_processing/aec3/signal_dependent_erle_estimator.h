@@ -76,7 +76,6 @@ class SignalDependentErleEstimator {
   const float min_erle_;
   const size_t num_sections_;
   const size_t num_blocks_;
-  const size_t delay_headroom_blocks_;
   const std::array<size_t, kFftLengthBy2Plus1> band_to_subband_;
   const std::array<float, kSubbands> max_erle_;
   const std::vector<size_t> section_boundaries_blocks_;
