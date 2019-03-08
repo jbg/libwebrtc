@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9429cf0_363f86b9",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-08T13:50:35Z",
+      "side": 1,
+      "message": "Hi,\n\nit looks like this line has been deleted since landing this cl. Making the member |is_media_transport_factory_enabled_| always true.\n\nAttempting to delete it in cl https://webrtc-review.googlesource.com/c/125040",
+      "range": {
+        "startLine": 979,
+        "startChar": 0,
+        "endLine": 979,
+        "endChar": 48
+      },
+      "revId": "63a176b34f5fced24b7f8c80b4221436c2a3fce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
