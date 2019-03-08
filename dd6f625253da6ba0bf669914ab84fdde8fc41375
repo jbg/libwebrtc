@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2a5b4e1_c5318cf5",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-08T12:07:31Z",
+      "side": 1,
+      "message": "\"playout speed\" may be misleading, since it may be misunderstood as the calling to getAudio.\nMaybe simply say \"due to acceleration\"",
+      "range": {
+        "startLine": 89,
+        "startChar": 31,
+        "endLine": 89,
+        "endChar": 63
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e90b13c7_871b4f03",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-08T12:07:31Z",
+      "side": 1,
+      "message": "I think it is better to use preemptive, to be consistent with NetEQ. When we expose it outside neteq, it is fine to rename there.",
+      "range": {
+        "startLine": 92,
+        "startChar": 11,
+        "endLine": 92,
+        "endChar": 30
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61dfbc61_873e35f7",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-08T12:07:31Z",
+      "side": 1,
+      "message": "why not reuse last_decoded_timestamps_.back(),\n\nyes, maybe they are different, then how about playout_timestamp_ or timestamp_?",
+      "range": {
+        "startLine": 406,
+        "startChar": 11,
+        "endLine": 406,
+        "endChar": 34
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "711ad514_a40f6af3",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-08T12:07:31Z",
+      "side": 1,
+      "message": "DTX-\u003edtx",
+      "range": {
+        "startLine": 415,
+        "startChar": 7,
+        "endLine": 415,
+        "endChar": 23
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cedb3c8_d7a6d38f",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-08T12:07:31Z",
+      "side": 1,
+      "message": "RTP -\u003e rtp",
+      "range": {
+        "startLine": 417,
+        "startChar": 11,
+        "endLine": 417,
+        "endChar": 30
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eab5127_4070d23c",
+        "filename": "modules/audio_coding/neteq/packet_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-08T12:07:31Z",
+      "side": 1,
+      "message": "I think a reason that we did not log discarded samples was that we don\u0027t want to decode it to know the duration of it.",
+      "range": {
+        "startLine": 54,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 23
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfdba3f4_b26c66d2",
+        "filename": "modules/audio_coding/neteq/packet_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-08T12:07:31Z",
+      "side": 1,
+      "message": "I think it is weird to have both packet and (estimated) sample_per_packet, which, in principle, can be extract from the packet, in the method.",
+      "range": {
+        "startLine": 88,
+        "startChar": 35,
+        "endLine": 88,
+        "endChar": 53
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcfbf6f8_702b7628",
+        "filename": "modules/audio_coding/neteq/packet_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-08T12:07:31Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 26
+      },
+      "revId": "dd6f625253da6ba0bf669914ab84fdde8fc41375",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
