@@ -16,6 +16,7 @@
 #include "absl/memory/memory.h"
 #include "api/units/time_delta.h"
 #include "api/units/timestamp.h"
+#include "rtc_base/fake_network.h"
 
 namespace webrtc {
 namespace test {
@@ -28,13 +29,6 @@ constexpr uint32_t kMinIPv4Address = 0xC0A80000;
 constexpr uint32_t kMaxIPv4Address = 0xC0A8FFFF;
 
 }  // namespace
-
-EndpointConfig::EndpointConfig() = default;
-EndpointConfig::~EndpointConfig() = default;
-EndpointConfig::EndpointConfig(EndpointConfig&) = default;
-EndpointConfig& EndpointConfig::operator=(EndpointConfig&) = default;
-EndpointConfig::EndpointConfig(EndpointConfig&&) = default;
-EndpointConfig& EndpointConfig::operator=(EndpointConfig&&) = default;
 
 NetworkEmulationManager::NetworkEmulationManager()
     : clock_(Clock::GetRealTimeClock()),
@@ -67,15 +61,16 @@ EmulatedNetworkNode* NetworkEmulationManager::CreateEmulatedNode(
   return out;
 }
 
-EndpointNode* NetworkEmulationManager::CreateEndpoint(EndpointConfig config) {
+EmulatedEndpoint* NetworkEmulationManager::CreateEndpoint(
+    EmulatedEndpointConfig config) {
   absl::optional<rtc::IPAddress> ip = config.ip;
   if (!ip) {
     switch (config.generated_ip_family) {
-      case EndpointConfig::IpAddressFamily::kIpv4:
+      case EmulatedEndpointConfig::IpAddressFamily::kIpv4:
         ip = GetNextIPv4Address();
         RTC_CHECK(ip) << "All auto generated IPv4 addresses exhausted";
         break;
-      case EndpointConfig::IpAddressFamily::kIpv6:
+      case EmulatedEndpointConfig::IpAddressFamily::kIpv6:
         ip = GetNextIPv4Address();
         RTC_CHECK(ip) << "All auto generated IPv6 addresses exhausted";
         ip = ip->AsIPv6Address();
@@ -85,16 +80,16 @@ EndpointNode* NetworkEmulationManager::CreateEndpoint(EndpointConfig config) {
 
   bool res = used_ip_addresses_.insert(*ip).second;
   RTC_CHECK(res) << "IP=" << ip->ToString() << " already in use";
-  auto node = absl::make_unique<EndpointNode>(next_node_id_++, *ip, clock_);
-  EndpointNode* out = node.get();
+  auto node = absl::make_unique<EmulatedEndpoint>(next_node_id_++, *ip, clock_);
+  EmulatedEndpoint* out = node.get();
   endpoints_.push_back(std::move(node));
   return out;
 }
 
-void NetworkEmulationManager::CreateRoute(
-    EndpointNode* from,
+EmulatedRoute* NetworkEmulationManager::CreateRoute(
+    EmulatedEndpoint* from,
     std::vector<EmulatedNetworkNode*> via_nodes,
-    EndpointNode* to) {
+    EmulatedEndpoint* to) {
   // Because endpoint has no send node by default at least one should be
   // provided here.
   RTC_CHECK(!via_nodes.empty());
@@ -107,27 +102,40 @@ void NetworkEmulationManager::CreateRoute(
   }
   cur_node->SetReceiver(to->GetId(), to);
   from->SetConnectedEndpointId(to->GetId());
+
+  std::unique_ptr<EmulatedRoute> route =
+      absl::make_unique<EmulatedRoute>(from, std::move(via_nodes), to);
+  EmulatedRoute* out = route.get();
+  routes_.push_back(std::move(route));
+  return out;
 }
 
-void NetworkEmulationManager::ClearRoute(
-    EndpointNode* from,
-    std::vector<EmulatedNetworkNode*> via_nodes,
-    EndpointNode* to) {
+void NetworkEmulationManager::ClearRoute(EmulatedRoute* route) {
+  RTC_CHECK(route->active) << "Route already cleared";
+
   // Remove receiver from intermediate nodes.
-  for (auto* node : via_nodes) {
-    node->RemoveReceiver(to->GetId());
+  for (auto* node : route->via_nodes) {
+    node->RemoveReceiver(route->to->GetId());
   }
   // Detach endpoint from current send node.
-  if (from->GetSendNode()) {
-    from->GetSendNode()->RemoveReceiver(to->GetId());
-    from->SetSendNode(nullptr);
+  if (route->from->GetSendNode()) {
+    route->from->GetSendNode()->RemoveReceiver(route->to->GetId());
+    route->from->SetSendNode(nullptr);
   }
+
+  route->active = false;
 }
 
 TrafficRoute* NetworkEmulationManager::CreateTrafficRoute(
-    std::vector<EmulatedNetworkNode*> via_nodes) {
-  RTC_CHECK(!via_nodes.empty());
-  EndpointNode* endpoint = CreateEndpoint(EndpointConfig());
+    std::vector<EmulatedNetworkNode*> via_nodes_i) {
+  RTC_CHECK(!via_nodes_i.empty());
+  std::vector<EmulatedNetworkNode*> via_nodes;
+  for (auto* n : via_nodes_i) {
+    via_nodes.push_back(static_cast<EmulatedNetworkNode*>(n));
+  }
+
+  EmulatedEndpoint* endpoint =
+      static_cast<EmulatedEndpoint*>(CreateEndpoint(EmulatedEndpointConfig()));
 
   // Setup a route via specified nodes.
   EmulatedNetworkNode* cur_node = via_nodes[0];
@@ -179,7 +187,7 @@ PulsedPeaksCrossTraffic* NetworkEmulationManager::CreatePulsedPeaksCrossTraffic(
 }
 
 rtc::Thread* NetworkEmulationManager::CreateNetworkThread(
-    std::vector<EndpointNode*> endpoints) {
+    std::vector<EmulatedEndpoint*> endpoints) {
   FakeNetworkSocketServer* socket_server = CreateSocketServer(endpoints);
   std::unique_ptr<rtc::Thread> network_thread =
       absl::make_unique<rtc::Thread>(socket_server);
@@ -191,8 +199,20 @@ rtc::Thread* NetworkEmulationManager::CreateNetworkThread(
   return out;
 }
 
+rtc::NetworkManager* NetworkEmulationManager::CreateNetworkManager(
+    std::vector<EmulatedEndpoint*> endpoints) {
+  auto network_manager = absl::make_unique<rtc::FakeNetworkManager>();
+  for (auto* endpoint : endpoints) {
+    network_manager->AddInterface(
+        rtc::SocketAddress(endpoint->GetPeerLocalAddress(), /*port=*/0));
+  }
+  rtc::NetworkManager* out = network_manager.get();
+  managers_.push_back(std::move(network_manager));
+  return out;
+}
+
 FakeNetworkSocketServer* NetworkEmulationManager::CreateSocketServer(
-    std::vector<EndpointNode*> endpoints) {
+    std::vector<EmulatedEndpoint*> endpoints) {
   auto socket_server =
       absl::make_unique<FakeNetworkSocketServer>(clock_, endpoints);
   FakeNetworkSocketServer* out = socket_server.get();
