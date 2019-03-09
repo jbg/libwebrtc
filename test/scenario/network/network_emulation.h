@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/test/network_emulation_manager_interface.h"
 #include "api/test/simulated_network.h"
 #include "api/units/timestamp.h"
 #include "rtc_base/async_socket.h"
@@ -30,6 +31,10 @@
 
 namespace webrtc {
 namespace test {
+
+class NetworkEmulationManager;
+
+}  // namespace test
 
 struct EmulatedIpPacket {
  public:
@@ -112,10 +117,10 @@ class EmulatedNetworkNode : public EmulatedNetworkReceiverInterface {
 // It will be used as sender from socket side to send data to the network and
 // will act as packet receiver from emulated network side to receive packets
 // from other EmulatedNetworkNodes.
-class EndpointNode : public EmulatedNetworkReceiverInterface {
+class EmulatedEndpoint : public EmulatedNetworkReceiverInterface {
  public:
-  EndpointNode(uint64_t id, rtc::IPAddress, Clock* clock);
-  ~EndpointNode() override;
+  EmulatedEndpoint(uint64_t id, rtc::IPAddress, Clock* clock);
+  ~EmulatedEndpoint() override;
 
   uint64_t GetId() const;
 
@@ -150,7 +155,7 @@ class EndpointNode : public EmulatedNetworkReceiverInterface {
   void OnPacketReceived(EmulatedIpPacket packet) override;
 
  protected:
-  friend class NetworkEmulationManager;
+  friend class test::NetworkEmulationManager;
 
   EmulatedNetworkNode* GetSendNode() const;
   void SetConnectedEndpointId(uint64_t endpoint_id);
@@ -174,7 +179,19 @@ class EndpointNode : public EmulatedNetworkReceiverInterface {
   absl::optional<uint64_t> connected_endpoint_id_;
 };
 
-}  // namespace test
+class EmulatedRoute {
+ public:
+  EmulatedRoute(EmulatedEndpoint* from,
+                std::vector<EmulatedNetworkNode*> via_nodes,
+                EmulatedEndpoint* to)
+      : from(from), via_nodes(std::move(via_nodes)), to(to), active(true) {}
+
+  EmulatedEndpoint* from;
+  std::vector<EmulatedNetworkNode*> via_nodes;
+  EmulatedEndpoint* to;
+  bool active;
+};
+
 }  // namespace webrtc
 
 #endif  // TEST_SCENARIO_NETWORK_NETWORK_EMULATION_H_
