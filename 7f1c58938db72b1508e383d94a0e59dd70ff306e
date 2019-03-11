@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54abf3bf_a5af37fe",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-11T07:31:51Z",
+      "side": 0,
+      "message": "Most of the code herein changes to use zero headroom blocks. Is that a necessary change? \nIt is definitely an ok change as long as we limit the headroom to be less than one block but right now we don\u0027t, and in the killswitch-fallback it is longer than that.\n\nWould it not be possible to keep the old implementation by mapping the headroom in samples to headroom in blocks?",
+      "range": {
+        "startLine": 130,
+        "startChar": 55,
+        "endLine": 130,
+        "endChar": 77
+      },
+      "revId": "7f1c58938db72b1508e383d94a0e59dd70ff306e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

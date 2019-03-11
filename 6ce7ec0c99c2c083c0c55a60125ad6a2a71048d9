@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc808b8b_320d1498",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-11T07:31:51Z",
+      "side": 1,
+      "message": "Why jumpstart it to zero instead of to delay_headroom_samples/block_size?",
+      "range": {
+        "startLine": 270,
+        "startChar": 4,
+        "endLine": 270,
+        "endChar": 29
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1005ddf_296c9a76",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-11T07:31:51Z",
+      "side": 1,
+      "message": "64 -\u003e kBlockSize",
+      "range": {
+        "startLine": 41,
+        "startChar": 48,
+        "endLine": 41,
+        "endChar": 50
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ff9762c_ddca7a9a",
+        "filename": "modules/audio_processing/aec3/erle_estimator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-11T07:31:51Z",
+      "side": 1,
+      "message": "This change overrules the parameter value headroom samples. Is there a good reason for not mapping it to headroom samples (but changed to the unit blocks)?",
+      "range": {
+        "startLine": 94,
+        "startChar": 30,
+        "endLine": 94,
+        "endChar": 31
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f28b9b93_7c3292f1",
+        "filename": "modules/audio_processing/aec3/matched_filter_lag_aggregator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-11T07:31:51Z",
+      "side": 1,
+      "message": "This formula is a bit strange\nAssume \ndelay_headroom_samples\u003d5\nand \ndown_sampling_factor\u003d2\nthen \ndelay_headroom_samples_ds_\u003d3\nwhich is maps to a higher headroom than the true headroom (rounded upwards)\n\nSince the delay_samples on line 94 is computed by subtracting the downsampled headroom delay I guess that that in theory could end up in a negative delay?",
+      "range": {
+        "startLine": 28,
+        "startChar": 11,
+        "endLine": 28,
+        "endChar": 17
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18e44256_19e9100d",
+        "filename": "modules/audio_processing/aec3/matched_filter_lag_aggregator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-11T07:31:51Z",
+      "side": 1,
+      "message": "This construct seems to change the behavior quite a lot. For instance, if delay_headroom_samples_ds_is very large then the returned delay in DelayEstimate would differ a lot from the previously returned delay. Is that handled elsewhere in the new code?",
+      "range": {
+        "startLine": 94,
+        "startChar": 16,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cebd3dd9_8dd8cc51",
+        "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-11T07:31:51Z",
+      "side": 1,
+      "message": "It feels a bit strange that the headroom is now handled by the delay estimator, in particular since the rest of the logic around the delay selection remains here.\n\nWould it not be easier to follow if the delay estimator should estimate the delay between render and capture, the delay controller selects the render buffer delay to use, and the render buffer applies that delay?",
+      "range": {
+        "startLine": 68,
+        "startChar": 9,
+        "endLine": 68,
+        "endChar": 25
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
