@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "78ea22d2_eaebc7dd",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-11T17:58:07Z",
+      "side": 1,
+      "message": "Will do.\nYes, they are treated as handles.",
+      "parentUuid": "972b1d60_5ac36b64",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "34ba0902_50a7ac3e",
         "filename": "api/test/network_emulation_manager_interface.h",
         "patchSetId": 6
