@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36de07fb_e42e920f",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-11T10:50:16Z",
+      "side": 1,
+      "message": "Maybe add a comment explaining why these are forward declared here (sin it\u0027s something we generally want to avoid)",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c65803ae_0d605582",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-11T10:50:16Z",
+      "side": 1,
+      "message": "Nit: \"Must\"",
+      "range": {
+        "startLine": 32,
+        "startChar": 64,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0bf9e7a_8972ea9d",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-11T10:50:16Z",
+      "side": 1,
+      "message": "Suggestion: Name this NetworkEmulationManager, and the implementation NetworkEmulationManagerImpl making this more consistent with how we use the pimpl pattern elsewhere.",
+      "range": {
+        "startLine": 37,
+        "startChar": 6,
+        "endLine": 37,
+        "endChar": 38
+      },
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df3a8b7a_8120ac2b",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-11T10:50:16Z",
+      "side": 1,
+      "message": "I think this can be simplified now that we are forward declaring rather than using magic interfaces.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
