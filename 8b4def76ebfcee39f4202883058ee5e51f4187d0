@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "972b1d60_5ac36b64",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-11T17:21:50Z",
+      "side": 1,
+      "message": "Yes please. Are these basically treated as handles by this API? Users pass them around, but never dereference them?",
+      "parentUuid": "36de07fb_e42e920f",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34ba0902_50a7ac3e",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-11T17:21:50Z",
+      "side": 1,
+      "message": "`enum class`, please, unless you have a good reason not to.",
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c65803ae_0d605582",
         "filename": "api/test/network_emulation_manager_interface.h",
         "patchSetId": 6
@@ -65,6 +106,40 @@
         "endLine": 37,
         "endChar": 38
       },
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e693711_8f4fe9ea",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-11T17:21:50Z",
+      "side": 1,
+      "message": "Document these two, including the ownership of the thing the returned pointers point to.",
+      "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b664ae17_e61a23e9",
+        "filename": "api/test/network_emulation_manager_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-11T17:21:50Z",
+      "side": 1,
+      "message": "Also document the ownership of the thing the returned pointers point to. (If the ownership is the same in all cases, you could document it once at the class level.)",
       "revId": "8b4def76ebfcee39f4202883058ee5e51f4187d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
