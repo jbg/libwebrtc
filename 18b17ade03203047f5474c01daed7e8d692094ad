@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f4f6b642_b2aa9444",
+        "filename": "test/scenario/network/fake_network_socket.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-11T10:37:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83af0bda_6a084ffa",
+      "range": {
+        "startLine": 42,
+        "startChar": 10,
+        "endLine": 42,
+        "endChar": 26
+      },
+      "revId": "18b17ade03203047f5474c01daed7e8d692094ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5370128_b88d88fd",
         "filename": "test/scenario/network/network_emulation.h",
         "patchSetId": 4
