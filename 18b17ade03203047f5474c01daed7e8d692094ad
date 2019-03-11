@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "83af0bda_6a084ffa",
+        "filename": "test/scenario/network/fake_network_socket.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-11T07:39:43Z",
+      "side": 1,
+      "message": "I think it\u0027s right to change this name before moving to API, but please do it in a preparation CL so make this CL easier to review.",
+      "range": {
+        "startLine": 42,
+        "startChar": 10,
+        "endLine": 42,
+        "endChar": 26
+      },
+      "revId": "18b17ade03203047f5474c01daed7e8d692094ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5370128_b88d88fd",
         "filename": "test/scenario/network/network_emulation.h",
         "patchSetId": 4
