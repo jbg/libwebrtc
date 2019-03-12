@@ -78,3 +78,16 @@ if (is_mac || is_ios) {
     libs = [ "Foundation.framework" ]
   }
 }
+
+rtc_source_set("thread_registry") {
+  sources = [
+    "thread_registry.h",
+  ]
+  deps = [
+    "..:rtc_base_approved",
+  ]
+  if (is_android) {
+    sources += [ "thread_registry.cc" ]
+    deps += [ "//third_party/abseil-cpp/absl/base:core_headers" ]
+  }
+}
