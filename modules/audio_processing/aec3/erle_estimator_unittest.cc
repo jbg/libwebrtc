@@ -85,15 +85,13 @@ void FormNearendFrame(rtc::ArrayView<float> x,
 }
 
 void GetFilterFreq(std::vector<std::array<float, kFftLengthBy2Plus1>>&
-                       filter_frequency_response,
-                   size_t delay_headroom_blocks) {
-  RTC_DCHECK_GE(filter_frequency_response.size(), delay_headroom_blocks);
+                       filter_frequency_response) {
   for (auto& block_freq_resp : filter_frequency_response) {
     block_freq_resp.fill(0.f);
   }
 
   for (size_t k = 0; k < kFftLengthBy2Plus1; ++k) {
-    filter_frequency_response[delay_headroom_blocks][k] = kEchoPathGain;
+    filter_frequency_response[0][k] = kEchoPathGain;
   }
 }
 
@@ -110,7 +108,7 @@ TEST(ErleEstimator, VerifyErleIncreaseAndHold) {
   std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
       RenderDelayBuffer::Create(config, 3));
 
-  GetFilterFreq(filter_frequency_response, config.delay.delay_headroom_blocks);
+  GetFilterFreq(filter_frequency_response);
 
   ErleEstimator estimator(0, config);
 
@@ -154,7 +152,7 @@ TEST(ErleEstimator, VerifyErleTrackingOnOnsets) {
   std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
       RenderDelayBuffer::Create(config, 3));
 
-  GetFilterFreq(filter_frequency_response, config.delay.delay_headroom_blocks);
+  GetFilterFreq(filter_frequency_response);
 
   ErleEstimator estimator(0, config);
 
