@@ -16,6 +16,24 @@
       "revId": "0ac660e537d411a21af0cd7791e5becc427d98aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c635ebda_22442bc5",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 5
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-03-12T14:57:58Z",
+      "side": 1,
+      "message": "The order is directly from https://webrtc-review.googlesource.com/c/src/+/126623/13/config.star, which is roughly similar to the order of CI builders\nhttps://ci.chromium.org/p/webrtc/g/ci",
+      "parentUuid": "bcef02b0_352c837f",
+      "revId": "0ac660e537d411a21af0cd7791e5becc427d98aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
