@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92a055ce_ea188dc4",
+        "filename": "test/fuzzers/field_trial_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-03-12T17:28:40Z",
+      "side": 1,
+      "message": "Please update this comment. This seems duplicate the one in url_decode_fuzzer.cc for a different purpose.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 57
+      },
+      "revId": "ab29793f7d0e701b7a3728c6030ed251491de39f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
