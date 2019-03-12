@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcef02b0_352c837f",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 5
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 7741
+      },
+      "writtenOn": "2019-03-12T14:20:38Z",
+      "side": 1,
+      "message": "Ordering seems to be quite strange. Is it based on something?",
+      "revId": "0ac660e537d411a21af0cd7791e5becc427d98aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
