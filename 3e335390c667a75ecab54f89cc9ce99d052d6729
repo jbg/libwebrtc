@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e369fc31_08b7957a",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-03-12T19:42:31Z",
+      "side": 1,
+      "message": "You may need to depend on the target for ArrayView.",
+      "range": {
+        "startLine": 566,
+        "startChar": 2,
+        "endLine": 566,
+        "endChar": 6
+      },
+      "revId": "3e335390c667a75ecab54f89cc9ce99d052d6729",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
