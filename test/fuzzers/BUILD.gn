@@ -558,3 +558,13 @@ webrtc_fuzzer_test("url_decode_fuzzer") {
     "../../rtc_base:rtc_base_approved",
   ]
 }
+
+webrtc_fuzzer_test("rtp_rtcp_demuxer_helper_fuzzer") {
+  sources = [
+    "rtp_rtcp_demuxer_helper_fuzzer.cc",
+  ]
+  deps = [
+    "../../call:rtp_receiver",
+  ]
+  seed_corpus = "corpora/rtcp-corpus"
+}
