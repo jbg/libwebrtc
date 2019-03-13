@@ -45,6 +45,30 @@
       "revId": "8cf1c2c4783fe3a5c8b3ca318fa966c77558fcff",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2473d49e_ea9887d5",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-13T21:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "636ce4f6_849519fa",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 33
+      },
+      "revId": "8cf1c2c4783fe3a5c8b3ca318fa966c77558fcff",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
