@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "371a5b28_0a46c3d2",
+        "filename": "test/mac_capturer.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-13T11:28:33Z",
+      "side": 1,
+      "message": "Probably not so important, but maybe use square norm, width_diff * width_diff + height_diff * height_diff? Or inf norm, max(abs(width_diff), abs(height_diff))? \n\nThat would, e.g., prefer a small diff in both dimensions, say (5, 5), over exact match in one dimension and a larger diff in the other dimension, say (0, 9).",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 98
+      },
+      "revId": "b8bddbd770687d54324c20a84af4a3058945801c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
