@@ -22,6 +22,30 @@
       "revId": "ba6eb15608afa41a4203268f8e665d4da3f19916",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa9840ae_204d443a",
+        "filename": "test/mac_capturer.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-03-13T10:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b8b98a4_eb36e5e7",
+      "range": {
+        "startLine": 40,
+        "startChar": 23,
+        "endLine": 40,
+        "endChar": 44
+      },
+      "revId": "ba6eb15608afa41a4203268f8e665d4da3f19916",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
