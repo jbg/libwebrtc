@@ -46,6 +46,30 @@
       "revId": "7f1c58938db72b1508e383d94a0e59dd70ff306e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae6d1354_e5f1ef78",
+        "filename": "modules/audio_processing/aec3/signal_dependent_erle_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-13T12:47:06Z",
+      "side": 0,
+      "message": "Fixed. It should now work correctly for high values of delay_headroom_samples.",
+      "parentUuid": "517583c5_ec0c1bbf",
+      "range": {
+        "startLine": 130,
+        "startChar": 55,
+        "endLine": 130,
+        "endChar": 77
+      },
+      "revId": "7f1c58938db72b1508e383d94a0e59dd70ff306e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

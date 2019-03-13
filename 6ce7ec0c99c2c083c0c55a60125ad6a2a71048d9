@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e538ea5d_899bb024",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-13T12:47:06Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "dc808b8b_320d1498",
+      "range": {
+        "startLine": 270,
+        "startChar": 4,
+        "endLine": 270,
+        "endChar": 29
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1005ddf_296c9a76",
         "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eb969f1_a1cacdb1",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-13T12:47:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1005ddf_296c9a76",
+      "range": {
+        "startLine": 41,
+        "startChar": 48,
+        "endLine": 41,
+        "endChar": 50
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "fc3a9dec_1ee380f6",
+        "filename": "modules/audio_processing/aec3/erle_estimator_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-13T12:47:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ff9762c_ddca7a9a",
+      "range": {
+        "startLine": 94,
+        "startChar": 30,
+        "endLine": 94,
+        "endChar": 31
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f28b9b93_7c3292f1",
         "filename": "modules/audio_processing/aec3/matched_filter_lag_aggregator.cc",
         "patchSetId": 5
@@ -91,6 +163,30 @@
       "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e57c6e2_10f33e4a",
+        "filename": "modules/audio_processing/aec3/matched_filter_lag_aggregator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-13T12:47:06Z",
+      "side": 1,
+      "message": "Fixed. Moved the subtraction of headroom to the render delay controller.",
+      "parentUuid": "f28b9b93_7c3292f1",
+      "range": {
+        "startLine": 28,
+        "startChar": 11,
+        "endLine": 28,
+        "endChar": 17
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "ba140e30_d9e5bcfc",
+        "filename": "modules/audio_processing/aec3/matched_filter_lag_aggregator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-13T12:47:06Z",
+      "side": 1,
+      "message": "Good find. Fixed.",
+      "parentUuid": "18e44256_19e9100d",
+      "range": {
+        "startLine": 94,
+        "startChar": 16,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cebd3dd9_8dd8cc51",
         "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
         "patchSetId": 5
@@ -137,6 +257,30 @@
       "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "202a20a9_8936475f",
+        "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-13T12:47:06Z",
+      "side": 1,
+      "message": "Fixed by moving the subtraction to where it was before.",
+      "parentUuid": "cebd3dd9_8dd8cc51",
+      "range": {
+        "startLine": 68,
+        "startChar": 9,
+        "endLine": 68,
+        "endChar": 25
+      },
+      "revId": "6ce7ec0c99c2c083c0c55a60125ad6a2a71048d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
