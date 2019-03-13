@@ -46,9 +46,7 @@ class RenderDelayControllerImpl final : public RenderDelayController {
  private:
   static int instance_count_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
-  const int delay_headroom_blocks_;
-  const int hysteresis_limit_1_blocks_;
-  const int hysteresis_limit_2_blocks_;
+  const int hysteresis_limit_blocks_;
   absl::optional<DelayEstimate> delay_;
   EchoPathDelayEstimator delay_estimator_;
   RenderDelayControllerMetrics metrics_;
@@ -61,32 +59,20 @@ class RenderDelayControllerImpl final : public RenderDelayController {
 
 DelayEstimate ComputeBufferDelay(
     const absl::optional<DelayEstimate>& current_delay,
-    int delay_headroom_blocks,
-    int hysteresis_limit_1_blocks,
-    int hysteresis_limit_2_blocks,
+    int hysteresis_limit_blocks,
     DelayEstimate estimated_delay) {
   // The below division is not exact and the truncation is intended.
   const int echo_path_delay_blocks = estimated_delay.delay >> kBlockSizeLog2;
 
   // Compute the buffer delay increase required to achieve the desired latency.
-  size_t new_delay_blocks =
-      std::max(echo_path_delay_blocks - delay_headroom_blocks, 0);
+  size_t new_delay_blocks = echo_path_delay_blocks;
 
   // Add hysteresis.
   if (current_delay) {
     size_t current_delay_blocks = current_delay->delay;
-    if (new_delay_blocks > current_delay_blocks) {
-      if (new_delay_blocks <=
-          current_delay_blocks + hysteresis_limit_1_blocks) {
-        new_delay_blocks = current_delay_blocks;
-      }
-    } else if (new_delay_blocks < current_delay_blocks) {
-      size_t hysteresis_limit = std::max(
-          static_cast<int>(current_delay_blocks) - hysteresis_limit_2_blocks,
-          0);
-      if (new_delay_blocks >= hysteresis_limit) {
-        new_delay_blocks = current_delay_blocks;
-      }
+    if (new_delay_blocks > current_delay_blocks &&
+        new_delay_blocks <= current_delay_blocks + hysteresis_limit_blocks) {
+      new_delay_blocks = current_delay_blocks;
     }
   }
 
@@ -102,12 +88,8 @@ RenderDelayControllerImpl::RenderDelayControllerImpl(
     int sample_rate_hz)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
-      delay_headroom_blocks_(
-          static_cast<int>(config.delay.delay_headroom_blocks)),
-      hysteresis_limit_1_blocks_(
-          static_cast<int>(config.delay.hysteresis_limit_1_blocks)),
-      hysteresis_limit_2_blocks_(
-          static_cast<int>(config.delay.hysteresis_limit_2_blocks)),
+      hysteresis_limit_blocks_(
+          static_cast<int>(config.delay.hysteresis_limit_blocks)),
       delay_estimator_(data_dumper_.get(), config),
       last_delay_estimate_quality_(DelayEstimate::Quality::kCoarse) {
   RTC_DCHECK(ValidFullBandRate(sample_rate_hz));
@@ -177,10 +159,8 @@ absl::optional<DelayEstimate> RenderDelayControllerImpl::GetDelay(
     const bool use_hysteresis =
         last_delay_estimate_quality_ == DelayEstimate::Quality::kRefined &&
         delay_samples_->quality == DelayEstimate::Quality::kRefined;
-    delay_ = ComputeBufferDelay(delay_, delay_headroom_blocks_,
-                                use_hysteresis ? hysteresis_limit_1_blocks_ : 0,
-                                use_hysteresis ? hysteresis_limit_2_blocks_ : 0,
-                                *delay_samples_);
+    delay_ = ComputeBufferDelay(
+        delay_, use_hysteresis ? hysteresis_limit_blocks_ : 0, *delay_samples_);
     last_delay_estimate_quality_ = delay_samples_->quality;
   }
 

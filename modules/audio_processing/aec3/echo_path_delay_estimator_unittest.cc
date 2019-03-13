@@ -93,8 +93,9 @@ TEST(EchoPathDelayEstimator, DelayEstimation) {
         // Allow estimated delay to be off by one sample in the down-sampled
         // domain.
         size_t delay_ds = delay_samples / down_sampling_factor;
-        size_t estimated_delay_ds =
-            estimated_delay_samples->delay / down_sampling_factor;
+        size_t estimated_delay_ds = (estimated_delay_samples->delay +
+                                     config.delay.delay_headroom_samples) /
+                                    down_sampling_factor;
         EXPECT_NEAR(delay_ds, estimated_delay_ds, 1);
       } else {
         ADD_FAILURE();
