@@ -176,7 +176,7 @@ class AecState {
   // AecState.
   class FilterDelay {
    public:
-    explicit FilterDelay(const EchoCanceller3Config& config);
+    FilterDelay();
 
     // Returns whether an external delay has been reported to the AecState (from
     // the delay estimator).
@@ -192,7 +192,6 @@ class AecState {
                 size_t blocks_with_proper_filter_adaptation);
 
    private:
-    const int delay_headroom_blocks_;
     bool external_delay_reported_ = false;
     int filter_delay_blocks_ = 0;
     absl::optional<DelayEstimate> external_delay_;
