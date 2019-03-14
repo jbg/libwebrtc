@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "93ac060d_a7dc3a27",
+        "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-14T10:25:44Z",
+      "side": 1,
+      "message": "Leaving this as is (following off-line discussion).",
+      "parentUuid": "4bbe0058_7bb2f080",
+      "revId": "df4badab4c16ac4e2fc88c2e5c492b6fa0528353",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "396d2cba_e761bd12",
         "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
         "patchSetId": 11
@@ -33,6 +51,24 @@
       "revId": "df4badab4c16ac4e2fc88c2e5c492b6fa0528353",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70fa70ad_d84a2cc2",
+        "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-03-14T10:25:44Z",
+      "side": 1,
+      "message": "Thanks, fixed!",
+      "parentUuid": "396d2cba_e761bd12",
+      "revId": "df4badab4c16ac4e2fc88c2e5c492b6fa0528353",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
