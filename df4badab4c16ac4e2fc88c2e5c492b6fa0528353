@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bbe0058_7bb2f080",
+        "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-14T09:27:14Z",
+      "side": 1,
+      "message": "Nit: What about\nconst int delay_with_headroom_samples \u003d std::max(\n      static_cast\u003cint\u003e(estimated_delay.delay) - delay_headroom_samples, 0);\n-\u003e\nconst int delay_with_headroom_samples \u003d \nestimated_delay.delay \u003e delay_headroom_samples ? estimated_delay.delay - delay_headroom_samples : 0;",
+      "revId": "df4badab4c16ac4e2fc88c2e5c492b6fa0528353",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "396d2cba_e761bd12",
+        "filename": "modules/audio_processing/aec3/render_delay_controller.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-14T09:27:14Z",
+      "side": 1,
+      "message": "echo_path_delay_blocks is only used on line 74 where it is used to initialize new_delay_blocks\n\nPlease remove echo_path_delay_blocks and instead immediately initialize new_delay_blocks",
+      "revId": "df4badab4c16ac4e2fc88c2e5c492b6fa0528353",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
