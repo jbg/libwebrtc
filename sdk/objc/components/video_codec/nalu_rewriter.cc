@@ -127,8 +127,9 @@ bool H264CMSampleBufferToAnnexBBuffer(
     // Read the length of the next packet of data. Must convert from big endian
     // to host endian.
     RTC_DCHECK_GE(bytes_remaining, (size_t)nalu_header_size);
-    uint32_t* uint32_data_ptr = reinterpret_cast<uint32_t*>(data_ptr);
-    uint32_t packet_size = CFSwapInt32BigToHost(*uint32_data_ptr);
+    uint32_t uint32_data;
+    std::memcpy(&uint32_data, data_ptr, sizeof(uint32_data));
+    uint32_t packet_size = CFSwapInt32BigToHost(uint32_data);
     // Update buffer.
     annexb_buffer->AppendData(kAnnexBHeaderBytes, sizeof(kAnnexBHeaderBytes));
     annexb_buffer->AppendData(data_ptr + nalu_header_size, packet_size);
