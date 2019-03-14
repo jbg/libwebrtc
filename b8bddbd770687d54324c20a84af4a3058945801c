@@ -22,6 +22,30 @@
       "revId": "b8bddbd770687d54324c20a84af4a3058945801c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f74ee2_d6ef5a6c",
+        "filename": "test/mac_capturer.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-03-14T13:28:58Z",
+      "side": 1,
+      "message": "That seems like a good idea, though this is in line with how we do it in AppRTCMobile, so I think unless we notice cases where the other behaviour is better I\u0027d prefer to keep it like this.",
+      "parentUuid": "371a5b28_0a46c3d2",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 98
+      },
+      "revId": "b8bddbd770687d54324c20a84af4a3058945801c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
