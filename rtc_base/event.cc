@@ -21,6 +21,7 @@
 #endif
 
 #include "rtc_base/checks.h"
+#include "rtc_base/synchronization/event_control.h"
 
 namespace rtc {
 
@@ -102,6 +103,8 @@ void Event::Reset() {
 }
 
 bool Event::Wait(int milliseconds) {
+  ThreadScopedEventSync::Yield();
+
   int error = 0;
 
   struct timespec ts;

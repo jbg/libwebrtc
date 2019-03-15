@@ -35,3 +35,13 @@ rtc_source_set("rw_lock_wrapper") {
     ]
   }
 }
+
+rtc_source_set("rtc_event_control") {
+  sources = [
+    "event_control.cc",
+    "event_control.h",
+  ]
+  deps = [
+    "//third_party/abseil-cpp/absl/base:core_headers",
+  ]
+}
