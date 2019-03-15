@@ -245,6 +245,16 @@ rtc_source_set("platform_thread") {
   ]
 }
 
+rtc_source_set("rtc_event_control") {
+  sources = [
+    "event_control.cc",
+    "event_control.h",
+  ]
+  deps = [
+    "//third_party/abseil-cpp/absl/base:core_headers",
+  ]
+}
+
 rtc_source_set("rtc_event") {
   deps = [
     ":checks",
@@ -258,6 +268,7 @@ rtc_source_set("rtc_event") {
       "../../webrtc_overrides/rtc_base/event.h",
     ]
   } else {
+    deps += [ ":rtc_event_control" ]
     sources = [
       "event.cc",
       "event.h",
