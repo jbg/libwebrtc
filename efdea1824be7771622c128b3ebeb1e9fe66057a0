@@ -42,6 +42,29 @@
     },
     {
       "key": {
+        "uuid": "f515517b_1094c16a",
+        "filename": "rtc_base/event_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-15T15:15:06Z",
+      "side": 1,
+      "message": "Prefer EventYieldInterface or just YieldInterface.",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 24
+      },
+      "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8252297b_54df2d7a",
         "filename": "rtc_base/event_control.h",
         "patchSetId": 1
@@ -70,6 +93,29 @@
       "writtenOn": "2019-03-15T14:15:09Z",
       "side": 1,
       "message": "Probably better to call this just \"Yield\", and to document that it will yield as specified by the currently active thread-local yield policy (which by default is a no-op).",
+      "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4693d0c6_5755b722",
+        "filename": "rtc_base/event_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-15T15:15:06Z",
+      "side": 1,
+      "message": "I\u0027m wondering if it would be better to arrange so one can do\n\ncurrent_sync_-\u003eYield()\n\nunconditionally. But perhaps not worth the effort to sort out if that is possible and/or beneficial. Event::Wait shouldn\u0027t be that performance critical.",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 29
+      },
       "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
