@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60192df3_0c5b3755",
+        "filename": "sdk/objc/components/video_codec/nalu_rewriter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-15T15:50:46Z",
+      "side": 1,
+      "message": "I\u0027d prefer to load these four bytes once and convert them to an integer on-the-fly, rather than this load + store + load + byteswap. \n\nBut I\u0027ll defer to Anders\u0027 judgement, if this is simple and good enough, sure, do it this way.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 61
+      },
+      "revId": "ee2fbf1f520d0e69b7a11ceb41776d651a1fedfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
