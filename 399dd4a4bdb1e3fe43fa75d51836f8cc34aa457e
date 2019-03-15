@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7382034_b4d6f245",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-03-15T21:54:47Z",
+      "side": 1,
+      "message": "nit: add a blank line before.",
+      "revId": "399dd4a4bdb1e3fe43fa75d51836f8cc34aa457e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
