@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40a65557_2c1bcceb",
+        "filename": "api/test/network_emulation_manager.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-15T13:33:05Z",
+      "side": 1,
+      "message": "Questions not answered by this documentation:\n\nIs it allowed to create two routes between the same pair of endpoints, as long as they have no network nodes in common?\n\nAre network nodes allowed to be part of multiple routes, as long as no two of those routes have the same endpoint pair?\n\nAre routes directional? IOW, does it matter which endpoint is `to` and which is `from`?",
+      "revId": "8dbf51f6cf9561586e172b34c471bc93ffdab0b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
