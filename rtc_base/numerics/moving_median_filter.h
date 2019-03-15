@@ -34,6 +34,9 @@ class MovingMedianFilter {
   // Removes all samples;
   void Reset();
 
+  // Number of samples in the window.
+  size_t NumSamples() const;
+
   // Get median over the latest window.
   T GetFilteredValue() const;
 
@@ -67,6 +70,11 @@ void MovingMedianFilter<T>::Insert(const T& value) {
 template <typename T>
 T MovingMedianFilter<T>::GetFilteredValue() const {
   return percentile_filter_.GetPercentileValue();
+}
+
+template <typename T>
+size_t MovingMedianFilter<T>::NumSamples() const {
+  return samples_stored_;
 }
 
 template <typename T>

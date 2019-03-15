@@ -67,7 +67,15 @@ class FakeAdmTest : public testing::Test, public webrtc::AudioTransport {
                       int64_t* elapsed_time_ms,
                       int64_t* ntp_time_ms) override {}
 
-  // ADM is pulling data.
+  void PullRenderData(int bits_per_sample,
+                      int sample_rate,
+                      size_t number_of_channels,
+                      size_t number_of_frames,
+                      void* audio_data,
+                      int64_t* elapsed_time_ms,
+                      int64_t* ntp_time_ms,
+                      int64_t* sender_ntp_time_ms) override {}
+
   int32_t NeedMorePlayData(const size_t nSamples,
                            const size_t nBytesPerSample,
                            const size_t nChannels,
@@ -76,6 +84,21 @@ class FakeAdmTest : public testing::Test, public webrtc::AudioTransport {
                            size_t& nSamplesOut,
                            int64_t* elapsed_time_ms,
                            int64_t* ntp_time_ms) override {
+    return NeedMorePlayData(nSamples, nBytesPerSample, nChannels, samplesPerSec,
+                            audioSamples, nSamplesOut, elapsed_time_ms,
+                            ntp_time_ms, nullptr);
+  }
+
+  // ADM is pulling data.
+  int32_t NeedMorePlayData(const size_t nSamples,
+                           const size_t nBytesPerSample,
+                           const size_t nChannels,
+                           const uint32_t samplesPerSec,
+                           void* audioSamples,
+                           size_t& nSamplesOut,
+                           int64_t* elapsed_time_ms,
+                           int64_t* ntp_time_ms,
+                           int64_t* sender_ntp_time_ms) override {
     rtc::CritScope cs(&crit_);
     ++pull_iterations_;
     const size_t audio_buffer_size = nSamples * nBytesPerSample;
@@ -86,6 +109,9 @@ class FakeAdmTest : public testing::Test, public webrtc::AudioTransport {
     nSamplesOut = bytes_out / nBytesPerSample;
     *elapsed_time_ms = 0;
     *ntp_time_ms = 0;
+    if (sender_ntp_time_ms) {
+      *sender_ntp_time_ms = 0;
+    }
     return 0;
   }
 

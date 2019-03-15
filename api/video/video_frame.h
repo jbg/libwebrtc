@@ -57,6 +57,7 @@ class RTC_EXPORT VideoFrame {
     Builder& set_timestamp_us(int64_t timestamp_us);
     Builder& set_timestamp_rtp(uint32_t timestamp_rtp);
     Builder& set_ntp_time_ms(int64_t ntp_time_ms);
+    Builder& set_sender_ntp_time_ms(int64_t sender_ntp_time_ms);
     Builder& set_rotation(VideoRotation rotation);
     Builder& set_color_space(const absl::optional<ColorSpace>& color_space);
     Builder& set_color_space(const ColorSpace* color_space);
@@ -69,6 +70,7 @@ class RTC_EXPORT VideoFrame {
     int64_t timestamp_us_ = 0;
     uint32_t timestamp_rtp_ = 0;
     int64_t ntp_time_ms_ = 0;
+    int64_t sender_ntp_time_ms_ = 0;
     VideoRotation rotation_ = kVideoRotation_0;
     absl::optional<ColorSpace> color_space_;
     absl::optional<UpdateRect> update_rect_;
@@ -126,12 +128,18 @@ class RTC_EXPORT VideoFrame {
   uint32_t transport_frame_id() const { return timestamp(); }
 
   // Set capture ntp time in milliseconds.
-  // TODO(nisse): Deprecated. Migrate all users to timestamp_us().
   void set_ntp_time_ms(int64_t ntp_time_ms) { ntp_time_ms_ = ntp_time_ms; }
 
   // Get capture ntp time in milliseconds.
-  // TODO(nisse): Deprecated. Migrate all users to timestamp_us().
   int64_t ntp_time_ms() const { return ntp_time_ms_; }
+
+  // Set capture ntp time in milliseconds.
+  void set_sender_ntp_time_ms(int64_t ntp_time_ms) {
+    sender_ntp_time_ms_ = ntp_time_ms;
+  }
+
+  // Get capture ntp time in milliseconds.
+  int64_t sender_ntp_time_ms() const { return sender_ntp_time_ms_; }
 
   // Naming convention for Coordination of Video Orientation. Please see
   // http://www.etsi.org/deliver/etsi_ts/126100_126199/126114/12.07.00_60/ts_126114v120700p.pdf
@@ -184,6 +192,7 @@ class RTC_EXPORT VideoFrame {
              int64_t timestamp_us,
              uint32_t timestamp_rtp,
              int64_t ntp_time_ms,
+             int64_t sender_ntp_time_ms,
              VideoRotation rotation,
              const absl::optional<ColorSpace>& color_space,
              const absl::optional<UpdateRect>& update_rect);
@@ -192,7 +201,13 @@ class RTC_EXPORT VideoFrame {
   // An opaque reference counted handle that stores the pixel data.
   rtc::scoped_refptr<webrtc::VideoFrameBuffer> video_frame_buffer_;
   uint32_t timestamp_rtp_;
-  int64_t ntp_time_ms_;
+  // NTP capture time in a local timebase. Known at the send side, estimated
+  // at the receive side.
+  int64_t ntp_time_ms_ = 0;
+  // NTP capture time in a sender timebase. Always equal to |ntp_time_ms_| at
+  // the send side. Is estimated on the receive side. Unlike |ntp_time_ms_|
+  // available even in absence of RTT estimate.
+  int64_t sender_ntp_time_ms_ = 0;
   int64_t timestamp_us_;
   VideoRotation rotation_;
   absl::optional<ColorSpace> color_space_;

@@ -54,6 +54,17 @@ class AudioTransport {
                                    int64_t* elapsed_time_ms,
                                    int64_t* ntp_time_ms) = 0;  // NOLINT
 
+  // Implementation has to setup safe values for all specified out parameters.
+  virtual int32_t NeedMorePlayData(const size_t nSamples,
+                                   const size_t nBytesPerSample,
+                                   const size_t nChannels,
+                                   const uint32_t samplesPerSec,
+                                   void* audioSamples,
+                                   size_t& nSamplesOut,  // NOLINT
+                                   int64_t* elapsed_time_ms,
+                                   int64_t* ntp_time_ms,
+                                   int64_t* sender_ntp_time_ms) = 0;  // NOLINT
+
   // Method to pull mixed render audio data from all active VoE channels.
   // The data will not be passed as reference for audio processing internally.
   virtual void PullRenderData(int bits_per_sample,
@@ -63,6 +74,17 @@ class AudioTransport {
                               void* audio_data,
                               int64_t* elapsed_time_ms,
                               int64_t* ntp_time_ms) = 0;
+
+  // Method to pull mixed render audio data from all active VoE channels.
+  // The data will not be passed as reference for audio processing internally.
+  virtual void PullRenderData(int bits_per_sample,
+                              int sample_rate,
+                              size_t number_of_channels,
+                              size_t number_of_frames,
+                              void* audio_data,
+                              int64_t* elapsed_time_ms,
+                              int64_t* ntp_time_ms,
+                              int64_t* sender_ntp_time_ms) = 0;
 
  protected:
   virtual ~AudioTransport() {}

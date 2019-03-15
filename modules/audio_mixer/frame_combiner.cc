@@ -57,6 +57,8 @@ void SetAudioFrameFields(const std::vector<AudioFrame*>& mix_list,
     audio_frame_for_mixing->timestamp_ = mix_list[0]->timestamp_;
     audio_frame_for_mixing->elapsed_time_ms_ = mix_list[0]->elapsed_time_ms_;
     audio_frame_for_mixing->ntp_time_ms_ = mix_list[0]->ntp_time_ms_;
+    audio_frame_for_mixing->sender_ntp_time_ms_ =
+        mix_list[0]->sender_ntp_time_ms_;
   }
 }
 

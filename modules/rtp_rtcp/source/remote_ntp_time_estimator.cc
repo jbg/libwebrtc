@@ -41,8 +41,9 @@ bool RemoteNtpTimeEstimator::UpdateRtcpTimestamp(int64_t rtt,
                                       &new_rtcp_sr)) {
     return false;
   }
-  if (!new_rtcp_sr) {
+  if (!new_rtcp_sr || rtt < 0) {
     // No new RTCP SR since last time this function was called.
+    // Or no RTT estimate available.
     return true;
   }
 
@@ -57,28 +58,44 @@ bool RemoteNtpTimeEstimator::UpdateRtcpTimestamp(int64_t rtt,
   return true;
 }
 
-int64_t RemoteNtpTimeEstimator::Estimate(uint32_t rtp_timestamp) {
-  int64_t sender_capture_ntp_ms = 0;
-  if (!rtp_to_ntp_.Estimate(rtp_timestamp, &sender_capture_ntp_ms)) {
-    return -1;
+void RemoteNtpTimeEstimator::EstimateSenderAndLocal(
+    uint32_t rtp_timestamp,
+    int64_t* sender_capture_ntp_ms,
+    int64_t* receiver_capture_ntp_ms) {
+  if (!rtp_to_ntp_.Estimate(rtp_timestamp, sender_capture_ntp_ms)) {
+    *sender_capture_ntp_ms = -1;
+    *receiver_capture_ntp_ms = -1;
+    return;
+  }
+
+  if (ntp_clocks_offset_estimator_.NumSamples() == 0) {
+    *receiver_capture_ntp_ms = -1;
+    return;
   }
 
   int64_t remote_to_local_clocks_offset =
       ntp_clocks_offset_estimator_.GetFilteredValue();
   int64_t receiver_capture_ms =
-      sender_capture_ntp_ms + remote_to_local_clocks_offset;
+      *sender_capture_ntp_ms + remote_to_local_clocks_offset;
   int64_t now_ms = clock_->TimeInMilliseconds();
   int64_t ntp_offset = clock_->CurrentNtpInMilliseconds() - now_ms;
-  int64_t receiver_capture_ntp_ms = receiver_capture_ms + ntp_offset;
+  *receiver_capture_ntp_ms = receiver_capture_ms + ntp_offset;
 
   if (now_ms - last_timing_log_ms_ > kTimingLogIntervalMs) {
     RTC_LOG(LS_INFO) << "RTP timestamp: " << rtp_timestamp
-                     << " in NTP clock: " << sender_capture_ntp_ms
+                     << " in NTP clock: " << *sender_capture_ntp_ms
                      << " estimated time in receiver clock: "
                      << receiver_capture_ms
-                     << " converted to NTP clock: " << receiver_capture_ntp_ms;
+                     << " converted to NTP clock: " << *receiver_capture_ntp_ms;
     last_timing_log_ms_ = now_ms;
   }
+}
+
+int64_t RemoteNtpTimeEstimator::Estimate(uint32_t rtp_timestamp) {
+  int64_t sender_capture_ntp_ms = -1;
+  int64_t receiver_capture_ntp_ms = -1;
+  EstimateSenderAndLocal(rtp_timestamp, &sender_capture_ntp_ms,
+                         &receiver_capture_ntp_ms);
   return receiver_capture_ntp_ms;
 }
 

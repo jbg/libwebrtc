@@ -40,7 +40,8 @@ class VCMPacket {
             const RTPHeader& rtp_header,
             const RTPVideoHeader& video_header,
             VideoFrameType frame_type,
-            int64_t ntp_time_ms);
+            int64_t ntp_time_ms,
+            int64_t sender_ntp_time_ms);
 
   ~VCMPacket();
 
@@ -59,6 +60,8 @@ class VCMPacket {
   uint32_t timestamp;
   // NTP time of the capture time in local timebase in milliseconds.
   int64_t ntp_time_ms_;
+  // NTP time of the capture time in sender timebase in milliseconds.
+  int64_t sender_ntp_time_ms_;
   uint16_t seqNum;
   const uint8_t* dataPtr;
   size_t sizeBytes;
