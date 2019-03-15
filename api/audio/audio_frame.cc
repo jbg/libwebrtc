@@ -33,6 +33,7 @@ void AudioFrame::ResetWithoutMuting() {
   timestamp_ = 0;
   elapsed_time_ms_ = -1;
   ntp_time_ms_ = -1;
+  sender_ntp_time_ms_ = -1;
   samples_per_channel_ = 0;
   sample_rate_hz_ = 0;
   num_channels_ = 0;
@@ -72,6 +73,7 @@ void AudioFrame::CopyFrom(const AudioFrame& src) {
   timestamp_ = src.timestamp_;
   elapsed_time_ms_ = src.elapsed_time_ms_;
   ntp_time_ms_ = src.ntp_time_ms_;
+  sender_ntp_time_ms_ = src.sender_ntp_time_ms_;
   muted_ = src.muted();
   samples_per_channel_ = src.samples_per_channel_;
   sample_rate_hz_ = src.sample_rate_hz_;

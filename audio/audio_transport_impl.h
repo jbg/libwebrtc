@@ -53,6 +53,16 @@ class AudioTransportImpl : public AudioTransport {
                            int64_t* elapsed_time_ms,
                            int64_t* ntp_time_ms) override;
 
+  int32_t NeedMorePlayData(const size_t nSamples,
+                           const size_t nBytesPerSample,
+                           const size_t nChannels,
+                           const uint32_t samplesPerSec,
+                           void* audioSamples,
+                           size_t& nSamplesOut,
+                           int64_t* elapsed_time_ms,
+                           int64_t* ntp_time_ms,
+                           int64_t* sender_ntp_time_ms) override;
+
   void PullRenderData(int bits_per_sample,
                       int sample_rate,
                       size_t number_of_channels,
@@ -60,6 +70,15 @@ class AudioTransportImpl : public AudioTransport {
                       void* audio_data,
                       int64_t* elapsed_time_ms,
                       int64_t* ntp_time_ms) override;
+
+  void PullRenderData(int bits_per_sample,
+                      int sample_rate,
+                      size_t number_of_channels,
+                      size_t number_of_frames,
+                      void* audio_data,
+                      int64_t* elapsed_time_ms,
+                      int64_t* ntp_time_ms,
+                      int64_t* sender_ntp_time_ms) override;
 
   void UpdateSendingStreams(std::vector<AudioSendStream*> streams,
                             int send_sample_rate_hz,

@@ -266,7 +266,8 @@ int LibvpxVp8Decoder::Decode(const EncodedImage& input_image,
   vpx_codec_err_t vpx_ret =
       vpx_codec_control(decoder_, VPXD_GET_LAST_QUANTIZER, &qp);
   RTC_DCHECK_EQ(vpx_ret, VPX_CODEC_OK);
-  ret = ReturnFrame(img, input_image.Timestamp(), input_image.ntp_time_ms_, qp,
+  ret = ReturnFrame(img, input_image.Timestamp(), input_image.ntp_time_ms_,
+                    input_image.sender_ntp_time_ms_, qp,
                     input_image.ColorSpace());
   if (ret != 0) {
     // Reset to avoid requesting key frames too often.
@@ -287,6 +288,7 @@ int LibvpxVp8Decoder::ReturnFrame(
     const vpx_image_t* img,
     uint32_t timestamp,
     int64_t ntp_time_ms,
+    int64_t sender_ntp_time_ms,
     int qp,
     const webrtc::ColorSpace* explicit_color_space) {
   if (img == NULL) {
@@ -324,6 +326,7 @@ int LibvpxVp8Decoder::ReturnFrame(
                                  .set_video_frame_buffer(buffer)
                                  .set_timestamp_rtp(timestamp)
                                  .set_ntp_time_ms(ntp_time_ms)
+                                 .set_sender_ntp_time_ms(sender_ntp_time_ms)
                                  .set_color_space(explicit_color_space)
                                  .build();
   decode_complete_callback_->Decoded(decoded_image, absl::nullopt, qp);
