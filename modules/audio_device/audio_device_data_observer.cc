@@ -67,22 +67,39 @@ class ADMWrapper : public AudioDeviceModule, public AudioTransport {
   int32_t NeedMorePlayData(const size_t nSamples,
                            const size_t nBytesPerSample,
                            const size_t nChannels,
-                           const uint32_t samples_per_sec,
+                           const uint32_t samplesPerSec,
                            void* audioSamples,
                            size_t& nSamplesOut,
                            int64_t* elapsed_time_ms,
                            int64_t* ntp_time_ms) override {
+    return NeedMorePlayData(nSamples, nBytesPerSample, nChannels, samplesPerSec,
+                            audioSamples, nSamplesOut, elapsed_time_ms,
+                            ntp_time_ms, nullptr);
+  }
+
+  int32_t NeedMorePlayData(const size_t nSamples,
+                           const size_t nBytesPerSample,
+                           const size_t nChannels,
+                           const uint32_t samples_per_sec,
+                           void* audioSamples,
+                           size_t& nSamplesOut,
+                           int64_t* elapsed_time_ms,
+                           int64_t* ntp_time_ms,
+                           int64_t* sender_ntp_time_ms) override {
     int32_t res = 0;
     // Set out parameters to safe values to be sure not to return corrupted
     // data.
     nSamplesOut = 0;
     *elapsed_time_ms = -1;
     *ntp_time_ms = -1;
+    if (sender_ntp_time_ms) {
+      *sender_ntp_time_ms = -1;
+    }
     // Request data from audio transport.
     if (audio_transport_) {
       res = audio_transport_->NeedMorePlayData(
           nSamples, nBytesPerSample, nChannels, samples_per_sec, audioSamples,
-          nSamplesOut, elapsed_time_ms, ntp_time_ms);
+          nSamplesOut, elapsed_time_ms, ntp_time_ms, sender_ntp_time_ms);
     }
 
     // Capture rendered data.
@@ -101,6 +118,19 @@ class ADMWrapper : public AudioDeviceModule, public AudioTransport {
                       void* audio_data,
                       int64_t* elapsed_time_ms,
                       int64_t* ntp_time_ms) override {
+    PullRenderData(bits_per_sample, sample_rate, number_of_channels,
+                   number_of_frames, audio_data, elapsed_time_ms, ntp_time_ms,
+                   nullptr);
+  }
+
+  void PullRenderData(int bits_per_sample,
+                      int sample_rate,
+                      size_t number_of_channels,
+                      size_t number_of_frames,
+                      void* audio_data,
+                      int64_t* elapsed_time_ms,
+                      int64_t* ntp_time_ms,
+                      int64_t* sender_ntp_time_ms) override {
     RTC_NOTREACHED();
   }
 

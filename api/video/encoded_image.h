@@ -114,6 +114,8 @@ class RTC_EXPORT EncodedImage {
   uint32_t _encodedHeight = 0;
   // NTP time of the capture time in local timebase in milliseconds.
   int64_t ntp_time_ms_ = 0;
+  // NTP capture time in sender timebase in milliseconds.
+  int64_t sender_ntp_time_ms_ = 0;
   int64_t capture_time_ms_ = 0;
   VideoFrameType _frameType = kVideoFrameDelta;
   VideoRotation rotation_ = kVideoRotation_0;

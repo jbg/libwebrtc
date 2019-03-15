@@ -392,8 +392,9 @@ AudioMixer::Source::AudioFrameInfo ChannelReceive::GetAudioFrameWithInfo(
     {
       rtc::CritScope lock(&ts_stats_lock_);
       // Compute ntp time.
-      audio_frame->ntp_time_ms_ =
-          ntp_estimator_.Estimate(audio_frame->timestamp_);
+      ntp_estimator_.EstimateSenderAndLocal(audio_frame->timestamp_,
+                                            &audio_frame->sender_ntp_time_ms_,
+                                            &audio_frame->ntp_time_ms_);
       // |ntp_time_ms_| won't be valid until at least 2 RTCP SRs are received.
       if (audio_frame->ntp_time_ms_ > 0) {
         // Compute |capture_start_ntp_time_ms_| so that
@@ -673,8 +674,8 @@ void ChannelReceive::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
 
   int64_t rtt = GetRTT();
   if (rtt == 0) {
-    // Waiting for valid RTT.
-    return;
+    // Waiting for valid RTT. Use -1 to signal that to NtpEstimator.
+    rtt = -1;
   }
 
   uint32_t ntp_secs = 0;

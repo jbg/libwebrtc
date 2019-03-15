@@ -48,6 +48,7 @@ RtpFrameObject::RtpFrameObject(PacketBuffer* packet_buffer,
   _payloadType = first_packet->payloadType;
   SetTimestamp(first_packet->timestamp);
   ntp_time_ms_ = first_packet->ntp_time_ms_;
+  sender_ntp_time_ms_ = first_packet->sender_ntp_time_ms_;
   _frameType = first_packet->frameType;
 
   // Setting frame's playout delays to the same values

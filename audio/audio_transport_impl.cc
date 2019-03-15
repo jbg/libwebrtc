@@ -168,6 +168,19 @@ int32_t AudioTransportImpl::RecordedDataIsAvailable(
   return 0;
 }
 
+int32_t AudioTransportImpl::NeedMorePlayData(const size_t nSamples,
+                                             const size_t nBytesPerSample,
+                                             const size_t nChannels,
+                                             const uint32_t samplesPerSec,
+                                             void* audioSamples,
+                                             size_t& nSamplesOut,
+                                             int64_t* elapsed_time_ms,
+                                             int64_t* ntp_time_ms) {
+  return NeedMorePlayData(nSamples, nBytesPerSample, nChannels, samplesPerSec,
+                          audioSamples, nSamplesOut, elapsed_time_ms,
+                          ntp_time_ms, nullptr);
+}
+
 // Mix all received streams, feed the result to the AudioProcessing module, then
 // resample the result to the requested output rate.
 int32_t AudioTransportImpl::NeedMorePlayData(const size_t nSamples,
@@ -177,7 +190,8 @@ int32_t AudioTransportImpl::NeedMorePlayData(const size_t nSamples,
                                              void* audioSamples,
                                              size_t& nSamplesOut,
                                              int64_t* elapsed_time_ms,
-                                             int64_t* ntp_time_ms) {
+                                             int64_t* ntp_time_ms,
+                                             int64_t* sender_ntp_time_ms) {
   RTC_DCHECK_EQ(sizeof(int16_t) * nChannels, nBytesPerSample);
   RTC_DCHECK_GE(nChannels, 1);
   RTC_DCHECK_LE(nChannels, 2);
@@ -193,6 +207,9 @@ int32_t AudioTransportImpl::NeedMorePlayData(const size_t nSamples,
   mixer_->Mix(nChannels, &mixed_frame_);
   *elapsed_time_ms = mixed_frame_.elapsed_time_ms_;
   *ntp_time_ms = mixed_frame_.ntp_time_ms_;
+  if (sender_ntp_time_ms) {
+    *sender_ntp_time_ms = mixed_frame_.sender_ntp_time_ms_;
+  }
 
   const auto error = audio_processing_->ProcessReverseStream(&mixed_frame_);
   RTC_DCHECK_EQ(error, AudioProcessing::kNoError);
@@ -212,6 +229,21 @@ void AudioTransportImpl::PullRenderData(int bits_per_sample,
                                         void* audio_data,
                                         int64_t* elapsed_time_ms,
                                         int64_t* ntp_time_ms) {
+  PullRenderData(bits_per_sample, sample_rate, number_of_channels,
+                 number_of_frames, audio_data, elapsed_time_ms, ntp_time_ms,
+                 nullptr);
+}
+
+// Used by Chromium - same as NeedMorePlayData() but because Chrome has its
+// own APM instance, does not call audio_processing_->ProcessReverseStream().
+void AudioTransportImpl::PullRenderData(int bits_per_sample,
+                                        int sample_rate,
+                                        size_t number_of_channels,
+                                        size_t number_of_frames,
+                                        void* audio_data,
+                                        int64_t* elapsed_time_ms,
+                                        int64_t* ntp_time_ms,
+                                        int64_t* sender_ntp_time_ms) {
   RTC_DCHECK_EQ(bits_per_sample, 16);
   RTC_DCHECK_GE(number_of_channels, 1);
   RTC_DCHECK_GE(sample_rate, AudioProcessing::NativeRate::kSampleRate8kHz);
@@ -225,6 +257,9 @@ void AudioTransportImpl::PullRenderData(int bits_per_sample,
   mixer_->Mix(number_of_channels, &mixed_frame_);
   *elapsed_time_ms = mixed_frame_.elapsed_time_ms_;
   *ntp_time_ms = mixed_frame_.ntp_time_ms_;
+  if (sender_ntp_time_ms) {
+    *sender_ntp_time_ms = mixed_frame_.sender_ntp_time_ms_;
+  }
 
   auto output_samples = Resample(mixed_frame_, sample_rate, &render_resampler_,
                                  static_cast<int16_t*>(audio_data));
