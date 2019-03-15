@@ -16,6 +16,24 @@
       "revId": "399dd4a4bdb1e3fe43fa75d51836f8cc34aa457e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a3af82e_3db00e9f",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 8244
+      },
+      "writtenOn": "2019-03-15T23:56:20Z",
+      "side": 1,
+      "message": "lol. i had one there and removed it for fear of the no-new-line police :)",
+      "parentUuid": "f7382034_b4d6f245",
+      "revId": "399dd4a4bdb1e3fe43fa75d51836f8cc34aa457e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
