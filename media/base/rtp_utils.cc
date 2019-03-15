@@ -304,13 +304,34 @@ bool IsValidRtpPayloadType(int payload_type) {
   return payload_type >= 0 && payload_type <= 127;
 }
 
-bool IsValidRtpRtcpPacketSize(bool rtcp, size_t size) {
-  return (rtcp ? size >= kMinRtcpPacketLen : size >= kMinRtpPacketLen) &&
-         size <= kMaxRtpPacketLen;
+bool IsValidPacketSize(PacketType packet_type, size_t size) {
+  // TODO(amithi): uncomment this before checking in.
+  // RTC_DCHECK_NE(PacketType::kUnknown, packet_type);
+  size_t min_packet_length =
+      packet_type == PacketType::kRtcp ? kMinRtcpPacketLen : kMinRtpPacketLen;
+  return size >= min_packet_length && size <= kMaxRtpPacketLen;
 }
 
-const char* RtpRtcpStringLiteral(bool rtcp) {
-  return rtcp ? "RTCP" : "RTP";
+const char* StringLiteral(PacketType packet_type) {
+  switch (packet_type) {
+    case PacketType::kRtp:
+      return "RTP";
+    case PacketType::kRtcp:
+      return "RTCP";
+    default:
+      return "Unknown";
+  }
+}
+
+PacketType GetPacketType(const void* data, size_t len) {
+  // RTCP packets are RTP packets so must check that first.
+  if (IsRtcpPacket(static_cast<const char*>(data), len)) {
+    return PacketType::kRtcp;
+  }
+  if (IsRtpPacket(data, len)) {
+    return PacketType::kRtp;
+  }
+  return PacketType::kUnknown;
 }
 
 bool ValidateRtpHeader(const uint8_t* rtp,

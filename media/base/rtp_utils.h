@@ -41,6 +41,12 @@ enum RtcpTypes {
   kRtcpTypePSFB = 206,   // Payload-specific Feedback message payload type.
 };
 
+enum class PacketType {
+  kRtp,      // RTP packet.
+  kRtcp,     // RTCP packet.
+  kUnknown,  // Not RTP or RTCP packet.
+};
+
 bool GetRtpPayloadType(const void* data, size_t len, int* value);
 bool GetRtpSeqNum(const void* data, size_t len, int* value);
 bool GetRtpTimestamp(const void* data, size_t len, uint32_t* value);
@@ -57,16 +63,16 @@ bool SetRtpHeader(void* data, size_t len, const RtpHeader& header);
 bool IsRtpPacket(const void* data, size_t len);
 
 bool IsRtcpPacket(const char* data, size_t len);
+
+PacketType GetPacketType(const void* data, size_t len);
 // True if |payload type| is 0-127.
 bool IsValidRtpPayloadType(int payload_type);
 
 // True if |size| is appropriate for the indicated packet type.
-bool IsValidRtpRtcpPacketSize(bool rtcp, size_t size);
+bool IsValidPacketSize(PacketType packet_type, size_t size);
 
-// TODO(zstein): Consider using an enum instead of a bool to differentiate
-// between RTP and RTCP.
-// Returns "RTCP" or "RTP" according to |rtcp|.
-const char* RtpRtcpStringLiteral(bool rtcp);
+// Returns "RTCP", "RTP" or "Unknown" according to |packet_type|.
+const char* StringLiteral(PacketType packet_type);
 
 // Verifies that a packet has a valid RTP header.
 bool RTC_EXPORT ValidateRtpHeader(const uint8_t* rtp,

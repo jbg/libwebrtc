@@ -344,4 +344,11 @@ TEST(RtpUtilsTest, ApplyPacketOptionsWithAuthParamsAndAbsSendTime) {
                       sizeof(kExpectedTimestamp)));
 }
 
+TEST(RtpUtilsTest, GetPacketType) {
+  EXPECT_EQ(PacketType::kRtp, GetPacketType(kPcmuFrame, sizeof(kPcmuFrame)));
+  EXPECT_EQ(PacketType::kRtcp, GetPacketType(kRtcpReport, sizeof(kRtcpReport)));
+  EXPECT_EQ(PacketType::kUnknown,
+            GetPacketType(kInvalidPacket, sizeof(kInvalidPacket)));
+}
+
 }  // namespace cricket
