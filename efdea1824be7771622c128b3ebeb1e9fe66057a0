@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee7fcf9c_083cafaf",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-15T14:15:09Z",
+      "side": 1,
+      "message": "Put the stuff in a subdirectory, please---rtc_base/synchronization/ maybe?",
+      "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "623959bc_89df30e8",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-15T14:15:09Z",
+      "side": 1,
+      "message": "ie",
+      "range": {
+        "startLine": 106,
+        "startChar": 31,
+        "endLine": 106,
+        "endChar": 33
+      },
+      "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8252297b_54df2d7a",
+        "filename": "rtc_base/event_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-15T14:15:09Z",
+      "side": 1,
+      "message": "Do these two need to be non-inlined? (Oh, yes, if you follow my advice below...)",
+      "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54455c21_7992db11",
+        "filename": "rtc_base/event_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-15T14:15:09Z",
+      "side": 1,
+      "message": "Probably better to call this just \"Yield\", and to document that it will yield as specified by the currently active thread-local yield policy (which by default is a no-op).",
+      "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "166e4df2_2747bed9",
+        "filename": "rtc_base/event_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-15T14:15:09Z",
+      "side": 1,
+      "message": "Put this is an unnamed namespace in the .cc file instead? That way you won\u0027t have to list it both here and there, and you keep the header clean.",
+      "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e45d25ee_5b814d6b",
+        "filename": "rtc_base/event_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-15T14:15:09Z",
+      "side": 1,
+      "message": "const?",
+      "revId": "efdea1824be7771622c128b3ebeb1e9fe66057a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
