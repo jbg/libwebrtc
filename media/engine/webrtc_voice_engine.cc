@@ -1691,12 +1691,11 @@ bool WebRtcVoiceMediaChannel::SetSendCodecs(
     for (const auto& kv : send_streams_) {
       kv.second->SetSendCodecSpec(*send_codec_spec_);
     }
-  } else {
-    // If the codec isn't changing, set the start bitrate to -1 which means
-    // "unchanged" so that BWE isn't affected.
-    bitrate_config.start_bitrate_bps = -1;
+    // We only want to update the bitrate settings if something is being
+    // updated.
+    call_->GetTransportControllerSend()->SetSdpBitrateParameters(
+        bitrate_config);
   }
-  call_->GetTransportControllerSend()->SetSdpBitrateParameters(bitrate_config);
 
   // Check if the transport cc feedback or NACK status has changed on the
   // preferred send codec, and in that case reconfigure all receive streams.
