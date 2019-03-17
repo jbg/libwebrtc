@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d66bf10_9eb716f8",
+        "filename": "rtc_base/synchronization/event_control.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-17T05:32:20Z",
+      "side": 1,
+      "message": "final?\n\nAlso, document that this class sets the current thread-local yield policy while it\u0027s in scope?",
+      "revId": "766bdbb8496f6eb0bd9328ddea75e3252daa424a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
