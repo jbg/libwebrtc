@@ -21,6 +21,7 @@
 #endif
 
 #include "rtc_base/checks.h"
+#include "rtc_base/synchronization/yield_policy.h"
 
 namespace rtc {
 
@@ -102,6 +103,8 @@ void Event::Reset() {
 }
 
 bool Event::Wait(int milliseconds) {
+  ScopedYieldPolicy::Yield();
+
   int error = 0;
 
   struct timespec ts;
