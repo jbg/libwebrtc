@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e78a0c5_2bf00a19",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-18T12:28:38Z",
+      "side": 1,
+      "message": "I am wondering if we should also RTC_CHECK here and crash as soon as the user is adding the third peer.",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 77
+      },
+      "revId": "f02e9849a401da0d68e491b7bcab1af2dfb5e1f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "940110c0_fa2aaba6",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-18T12:28:38Z",
+      "side": 1,
+      "message": "Only peer to peer calls are allowed, please add 2 peers.",
+      "range": {
+        "startLine": 209,
+        "startChar": 10,
+        "endLine": 209,
+        "endChar": 39
+      },
+      "revId": "f02e9849a401da0d68e491b7bcab1af2dfb5e1f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3cba6c2_f050e498",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-18T12:28:38Z",
+      "side": 1,
+      "message": "Do we care about clearing the peer_configurations here?",
+      "range": {
+        "startLine": 218,
+        "startChar": 2,
+        "endLine": 218,
+        "endChar": 31
+      },
+      "revId": "f02e9849a401da0d68e491b7bcab1af2dfb5e1f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
