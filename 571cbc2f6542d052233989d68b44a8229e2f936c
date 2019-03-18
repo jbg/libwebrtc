@@ -22,6 +22,30 @@
       "revId": "571cbc2f6542d052233989d68b44a8229e2f936c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1430d327_be825c6b",
+        "filename": "test/pc/e2e/analyzer/audio/default_audio_quality_analyzer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-18T15:27:41Z",
+      "side": 1,
+      "message": "pc and e2e are too general names, so we want to avoid them as namespace, also as I understand we don\u0027t want to have too deep nesting. We discussed it with Karl and agreed, that it will be better to have bottom webrtc namespaces in the form of webrtc_XXXX",
+      "parentUuid": "06629411_29bd3c6f",
+      "range": {
+        "startLine": 19,
+        "startChar": 10,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "571cbc2f6542d052233989d68b44a8229e2f936c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
