@@ -46,6 +46,30 @@
       "revId": "09935425ff237158cde13d62ec4747649155d14c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5dc0fa3_cae00dd9",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-03-18T18:04:44Z",
+      "side": 1,
+      "message": "But now you have \"PeerConfigurer\" that is visible outside. I don\u0027t quite see the difference.",
+      "parentUuid": "fbd61697_179df278",
+      "range": {
+        "startLine": 281,
+        "startChar": 8,
+        "endLine": 281,
+        "endChar": 33
+      },
+      "revId": "09935425ff237158cde13d62ec4747649155d14c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
