@@ -199,6 +199,43 @@ class PeerConnectionE2EQualityTestFixture {
     PeerConnectionInterface::RTCConfiguration rtc_configuration;
   };
 
+  class PeerConfigurer {
+   public:
+    virtual ~PeerConfigurer() = default;
+
+    virtual PeerConfigurer* SetCallFactory(
+        std::unique_ptr<CallFactoryInterface> call_factory) = 0;
+    virtual PeerConfigurer* SetEventLogFactory(
+        std::unique_ptr<RtcEventLogFactoryInterface> event_log_factory) = 0;
+    virtual PeerConfigurer* SetFecControllerFactory(
+        std::unique_ptr<FecControllerFactoryInterface>
+            fec_controller_factory) = 0;
+    virtual PeerConfigurer* SetNetworkControllerFactory(
+        std::unique_ptr<NetworkControllerFactoryInterface>
+            network_controller_factory) = 0;
+    virtual PeerConfigurer* SetMediaTransportFactory(
+        std::unique_ptr<MediaTransportFactory> media_transport_factory) = 0;
+    virtual PeerConfigurer* SetVideoEncoderFactory(
+        std::unique_ptr<VideoEncoderFactory> video_encoder_factory) = 0;
+    virtual PeerConfigurer* SetVideoDecoderFactory(
+        std::unique_ptr<VideoDecoderFactory> video_decoder_factory) = 0;
+
+    virtual PeerConfigurer* SetAsyncResolverFactory(
+        std::unique_ptr<webrtc::AsyncResolverFactory>
+            async_resolver_factory) = 0;
+    virtual PeerConfigurer* SetRTCCertificateGenerator(
+        std::unique_ptr<rtc::RTCCertificateGeneratorInterface>
+            cert_generator) = 0;
+    virtual PeerConfigurer* SetSSLCertificateVerifier(
+        std::unique_ptr<rtc::SSLCertificateVerifier> tls_cert_verifier) = 0;
+
+    virtual PeerConfigurer* AddVideoConfig(VideoConfig config) = 0;
+    virtual PeerConfigurer* SetAudioConfig(AudioConfig config) = 0;
+    virtual PeerConfigurer* SetRtcEventLogPath(std::string path) = 0;
+    virtual PeerConfigurer* SetRTCConfiguration(
+        PeerConnectionInterface::RTCConfiguration configuration) = 0;
+  };
+
   // Contains parameters, that describe how long framework should run quality
   // test.
   struct RunParams {
@@ -207,6 +244,8 @@ class PeerConnectionE2EQualityTestFixture {
     // it will be shut downed.
     TimeDelta run_duration;
   };
+
+  virtual ~PeerConnectionE2EQualityTestFixture() = default;
 
   // Add activity that will be executed on the best effort at least after
   // |target_time_since_start| after call will be set up (after offer/answer
@@ -222,12 +261,9 @@ class PeerConnectionE2EQualityTestFixture {
                             TimeDelta interval,
                             std::function<void(TimeDelta)> func) = 0;
 
-  virtual void Run(std::unique_ptr<InjectableComponents> alice_components,
-                   std::unique_ptr<Params> alice_params,
-                   std::unique_ptr<InjectableComponents> bob_components,
-                   std::unique_ptr<Params> bob_params,
-                   RunParams run_params) = 0;
-  virtual ~PeerConnectionE2EQualityTestFixture() = default;
+  virtual PeerConfigurer* AddPeer(rtc::Thread* network_thread,
+                                  rtc::NetworkManager* network_manager) = 0;
+  virtual void Run(RunParams run_params) = 0;
 };
 
 }  // namespace test
