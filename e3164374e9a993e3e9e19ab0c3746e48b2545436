@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "95cd7868_e8f189e9",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-03-18T17:04:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e664da2_23c49f4c",
+      "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fef681d_fcb85dff",
         "filename": "api/stats/rtc_stats.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d4080be_128aa269",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-03-18T17:04:22Z",
+      "side": 1,
+      "message": "Sure, I named them according to the origin trial names but as you say these IDs are have nothing to do with origin trials really.",
+      "parentUuid": "9fef681d_fcb85dff",
+      "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ff80acfa_70d94294",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-03-18T17:04:22Z",
+      "side": 1,
+      "message": "Sure, makes sense. Do you think I should prepend with RTC or nest it in RTCNonStandardStatsMember class?",
+      "parentUuid": "af3db5e3_5fbc026f",
+      "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0cd5636a_b034c13c",
         "filename": "api/stats/rtc_stats.h",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f60286ff_715c760e",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-03-18T17:04:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cd5636a_b034c13c",
+      "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
