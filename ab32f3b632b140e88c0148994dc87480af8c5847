@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b59c23ec_5c5a863c",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-18T15:06:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4681ef4a_37e0225f",
+      "range": {
+        "startLine": 207,
+        "startChar": 7,
+        "endLine": 207,
+        "endChar": 19
+      },
+      "revId": "ab32f3b632b140e88c0148994dc87480af8c5847",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "935dfbf1_970cc0b5",
         "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-18T14:17:07Z",
       "side": 1,
       "message": "Nit: since it only adds a configuration, maybe rename it to AddPeerConfig()",
+      "range": {
+        "startLine": 279,
+        "startChar": 26,
+        "endLine": 279,
+        "endChar": 33
+      },
+      "revId": "ab32f3b632b140e88c0148994dc87480af8c5847",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9b119a9_1d151e06",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-18T15:06:19Z",
+      "side": 1,
+      "message": "I think from user point of view it is similar to add peer into the test.",
+      "parentUuid": "935dfbf1_970cc0b5",
       "range": {
         "startLine": 279,
         "startChar": 26,
