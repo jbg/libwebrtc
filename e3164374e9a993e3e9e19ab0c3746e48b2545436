@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e664da2_23c49f4c",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-03-18T15:38:13Z",
+      "side": 1,
+      "message": "nit: JavaScript",
+      "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fef681d_fcb85dff",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-03-18T15:38:13Z",
+      "side": 1,
+      "message": "Can we be consistent with the naming? I.e. RTC vs Rtc\nI prefer Rtc",
+      "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af3db5e3_5fbc026f",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-03-18T15:38:13Z",
+      "side": 1,
+      "message": "What do you think about a more general name like NonStandardGroupId? Still explaining about the Origin Trial use case in the comment, but not naming it as such.\n\nI\u0027m thinking it\u0027s would be possible to have experiments on other platforms or care about the group ID outside of this particular use case (or even for just documentation), and there is nothing intrinsically \"Origin Trial\" about the group IDs. For example, someone might run a Finch experiment (another Chrome way of experimenting) which is not an Origin Trial.",
+      "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cd5636a_b034c13c",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-03-18T15:38:13Z",
+      "side": 1,
+      "message": "Can you add rtc_stats_unittest.cc coverage? Nothing fancy, just verify that you get the ID you constructed if you specify and an empty list if you don\u0027t specify.",
+      "revId": "e3164374e9a993e3e9e19ab0c3746e48b2545436",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
