@@ -22,6 +22,30 @@
       "revId": "09935425ff237158cde13d62ec4747649155d14c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbd61697_179df278",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-18T15:41:38Z",
+      "side": 1,
+      "message": "The problem here, that in such case you have to have some outside visible object, that will hold all values and we haven\u0027t such. \n\nSo basically here are the thoughts before it:\n1. We want to keep move only components separate from copyable params, because it is much easier to operate with such structures inside framework code and move-only objects won\u0027t obstruct us.\n2. We don\u0027t want to have a proxy object, that will just collect all values inside it and then will be disassembled into InjectableComponents and Params inside Run call, cause it will lead to code duplication and one more layer of moving objects around.\n3. We don\u0027t want to forward declare and expose InjectableComponents and Params to user if possible, cause such split is implementation details and user shouldn\u0027t be confused with that.\n\nIt leads to idea, that we can\u0027t give user a builder and accept some constructed object back, because in such case accepted interface have to expose internal objects to make it possible for framework to get required values from it. Other option will be static cast inside framework, but it looks much uglier, I think",
+      "parentUuid": "805af260_578adde4",
+      "range": {
+        "startLine": 281,
+        "startChar": 8,
+        "endLine": 281,
+        "endChar": 33
+      },
+      "revId": "09935425ff237158cde13d62ec4747649155d14c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
