@@ -319,8 +319,15 @@ class RTC_EXPORT RTCStatsMember : public RTCStatsMemberInterface {
   T value_;
 };
 
-// Same as above, but "is_standardized" returns false.
-//
+// Non-standard stats members can be exposed to the Javascript API in Chrome
+// through origin trials. Note that the origin trial IDs are just dummy IDs that
+// can be referenced from the blink layer to determine if a stats member should
+// be exposed or not.
+enum class OriginTrialId {
+  kRtcAudioJitterBufferMaxPackets,
+  kRTCStatsRelativePacketArrivalDelay,
+};
+
 // Using inheritance just so that it's obvious from the member's declaration
 // whether it's standardized or not.
 template <typename T>
@@ -328,21 +335,31 @@ class RTCNonStandardStatsMember : public RTCStatsMember<T> {
  public:
   explicit RTCNonStandardStatsMember(const char* name)
       : RTCStatsMember<T>(name) {}
+  RTCNonStandardStatsMember(
+      const char* name,
+      std::initializer_list<OriginTrialId> origin_trial_ids)
+      : RTCStatsMember<T>(name), origin_trial_ids_(origin_trial_ids) {}
   RTCNonStandardStatsMember(const char* name, const T& value)
       : RTCStatsMember<T>(name, value) {}
   RTCNonStandardStatsMember(const char* name, T&& value)
       : RTCStatsMember<T>(name, std::move(value)) {}
   explicit RTCNonStandardStatsMember(const RTCNonStandardStatsMember<T>& other)
-      : RTCStatsMember<T>(other) {}
+      : RTCStatsMember<T>(other), origin_trial_ids_(other.origin_trial_ids_) {}
   explicit RTCNonStandardStatsMember(RTCNonStandardStatsMember<T>&& other)
-      : RTCStatsMember<T>(std::move(other)) {}
+      : origin_trial_ids_(std::move(other.origin_trial_ids_)),
+        RTCStatsMember<T>(std::move(other)) {}
 
   bool is_standardized() const override { return false; }
+
+  std::vector<OriginTrialId> origin_trial_ids() const;
 
   T& operator=(const T& value) { return RTCStatsMember<T>::operator=(value); }
   T& operator=(const T&& value) {
     return RTCStatsMember<T>::operator=(std::move(value));
   }
+
+ private:
+  std::vector<OriginTrialId> origin_trial_ids_;
 };
 }  // namespace webrtc
 

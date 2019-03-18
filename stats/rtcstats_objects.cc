@@ -9,6 +9,7 @@
  */
 
 #include "api/stats/rtcstats_objects.h"
+#include "api/stats/rtc_stats.h"
 
 #include <utility>
 
@@ -426,9 +427,15 @@ RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(std::string&& id,
       total_samples_duration("totalSamplesDuration"),
       concealed_samples("concealedSamples"),
       concealment_events("concealmentEvents"),
-      jitter_buffer_flushes("jitterBufferFlushes"),
-      delayed_packet_outage_samples("delayedPacketOutageSamples"),
-      relative_packet_arrival_delay("relativePacketArrivalDelay"),
+      jitter_buffer_flushes("jitterBufferFlushes",
+                            {OriginTrialId::kRtcAudioJitterBufferMaxPackets}),
+      delayed_packet_outage_samples(
+          "delayedPacketOutageSamples",
+          {OriginTrialId::kRtcAudioJitterBufferMaxPackets,
+           OriginTrialId::kRTCStatsRelativePacketArrivalDelay}),
+      relative_packet_arrival_delay(
+          "relativePacketArrivalDelay",
+          {OriginTrialId::kRTCStatsRelativePacketArrivalDelay}),
       freeze_count("freezeCount"),
       pause_count("pauseCount"),
       total_freezes_duration("totalFreezesDuration"),
