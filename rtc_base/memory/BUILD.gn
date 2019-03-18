@@ -22,6 +22,16 @@ rtc_source_set("aligned_array") {
   ]
 }
 
+rtc_source_set("refptr") {
+  sources = [
+    "refptr.h",
+  ]
+  deps = [
+    "..:refcount",
+    "../../api:scoped_refptr",
+  ]
+}
+
 rtc_source_set("aligned_malloc") {
   sources = [
     "aligned_malloc.cc",
@@ -35,10 +45,12 @@ rtc_source_set("unittests") {
   sources = [
     "aligned_array_unittest.cc",
     "aligned_malloc_unittest.cc",
+    "refptr_unittest.cc",
   ]
   deps = [
     ":aligned_array",
     ":aligned_malloc",
+    ":refptr",
     "../../test:test_support",
   ]
 }
