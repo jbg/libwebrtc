@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "805af260_578adde4",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-03-18T15:31:34Z",
+      "side": 1,
+      "message": "this is a bit unsafe design: you first Create a peer in this factory and then you mutate it.\nA slightly better design would be to pass a configuration object to the \u0027AddPeer\u0027 and then not to allow mutation of peer.\n\nIn such case, your PeerConfigurer would become a \u0027PeerParametersBuilder\u0027 with the same set of methods as your PeerConfigurer, and your AddPeer would accept PeerParameters.",
+      "range": {
+        "startLine": 281,
+        "startChar": 8,
+        "endLine": 281,
+        "endChar": 33
+      },
+      "revId": "09935425ff237158cde13d62ec4747649155d14c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
