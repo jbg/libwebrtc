@@ -17,7 +17,7 @@
 #include "test/pc/e2e/analyzer/video/quality_analyzing_video_encoder.h"
 
 namespace webrtc {
-namespace test {
+namespace webrtc_pc_e2e {
 
 namespace {
 
@@ -148,5 +148,5 @@ void VideoQualityAnalyzerInjectionHelper::Stop() {
   analyzer_->Stop();
 }
 
-}  // namespace test
+}  // namespace webrtc_pc_e2e
 }  // namespace webrtc

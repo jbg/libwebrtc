@@ -31,7 +31,7 @@
 #include "test/testsupport/video_frame_writer.h"
 
 namespace webrtc {
-namespace test {
+namespace webrtc_pc_e2e {
 
 class PeerConnectionE2EQualityTest
     : public PeerConnectionE2EQualityTestFixture {
@@ -148,7 +148,7 @@ class PeerConnectionE2EQualityTest
   std::unique_ptr<rtc::TaskQueue> task_queue_;
 };
 
-}  // namespace test
+}  // namespace webrtc_pc_e2e
 }  // namespace webrtc
 
 #endif  // TEST_PC_E2E_PEER_CONNECTION_QUALITY_TEST_H_

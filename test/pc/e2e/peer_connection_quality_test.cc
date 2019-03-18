@@ -32,7 +32,7 @@
 #include "test/testsupport/file_utils.h"
 
 namespace webrtc {
-namespace test {
+namespace webrtc_pc_e2e {
 namespace {
 
 using VideoConfig = PeerConnectionE2EQualityTestFixture::VideoConfig;
@@ -659,5 +659,5 @@ PeerConnectionE2EQualityTest::ScheduledActivity::ScheduledActivity(
       interval(std::move(interval)),
       func(std::move(func)) {}
 
-}  // namespace test
+}  // namespace webrtc_pc_e2e
 }  // namespace webrtc

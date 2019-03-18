@@ -28,7 +28,7 @@
 #include "test/testsupport/video_frame_writer.h"
 
 namespace webrtc {
-namespace test {
+namespace webrtc_pc_e2e {
 
 // Provides factory methods for components, that will be used to inject
 // VideoQualityAnalyzerInterface into PeerConnection pipeline.
@@ -82,7 +82,7 @@ class VideoQualityAnalyzerInjectionHelper : public StatsObserverInterface {
   std::unique_ptr<IdGenerator<int>> encoding_entities_id_generator_;
 };
 
-}  // namespace test
+}  // namespace webrtc_pc_e2e
 }  // namespace webrtc
 
 #endif  // TEST_PC_E2E_ANALYZER_VIDEO_VIDEO_QUALITY_ANALYZER_INJECTION_HELPER_H_

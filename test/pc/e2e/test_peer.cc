@@ -27,7 +27,7 @@
 #include "test/testsupport/copy_to_file_audio_capturer.h"
 
 namespace webrtc {
-namespace test {
+namespace webrtc_pc_e2e {
 namespace {
 
 constexpr int16_t kGeneratedAudioMaxAmplitude = 32000;
@@ -297,5 +297,5 @@ TestPeer::TestPeer(
                                                    std::move(observer)),
       params_(std::move(params)) {}
 
-}  // namespace test
+}  // namespace webrtc_pc_e2e
 }  // namespace webrtc
