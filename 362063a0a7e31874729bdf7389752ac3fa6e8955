@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1c4abfe5_f2d7289c",
+        "filename": "modules/video_coding/utility/decoded_frames_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-03-18T14:55:17Z",
+      "side": 1,
+      "message": "Good catch, changed last picture id to an optional to avoid these issues.",
+      "parentUuid": "ab866851_ad0ec99c",
+      "range": {
+        "startLine": 51,
+        "startChar": 20,
+        "endLine": 51,
+        "endChar": 64
+      },
+      "revId": "362063a0a7e31874729bdf7389752ac3fa6e8955",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "acf73fc6_8440ec8f",
         "filename": "modules/video_coding/utility/decoded_frames_history.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "362063a0a7e31874729bdf7389752ac3fa6e8955",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d01f890_4c692e01",
+        "filename": "modules/video_coding/utility/decoded_frames_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-03-18T14:55:17Z",
+      "side": 1,
+      "message": "Ditto.",
+      "parentUuid": "acf73fc6_8440ec8f",
+      "range": {
+        "startLine": 82,
+        "startChar": 28,
+        "endLine": 82,
+        "endChar": 66
+      },
+      "revId": "362063a0a7e31874729bdf7389752ac3fa6e8955",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
