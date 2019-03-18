@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab866851_ad0ec99c",
+        "filename": "modules/video_coding/utility/decoded_frames_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-03-18T14:13:58Z",
+      "side": 1,
+      "message": "Could you please extend it to check for overflow like that or similar:\nhistory.last_picture_id \u003c 0 \u0026\u0026 numeric_limits\u003cint64_t\u003e::max() + history.last_picture_id \u003c frame_id.picture_id ? window_size_ + 1 : frameid.picture_id - history.last_picture_id;\n\nBecause now last_picture_id can be very big negative.",
+      "range": {
+        "startLine": 51,
+        "startChar": 20,
+        "endLine": 51,
+        "endChar": 64
+      },
+      "revId": "362063a0a7e31874729bdf7389752ac3fa6e8955",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acf73fc6_8440ec8f",
+        "filename": "modules/video_coding/utility/decoded_frames_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-03-18T14:13:58Z",
+      "side": 1,
+      "message": "Overflows for an empty history. Add history.last_picture_id \u003e std::numeric_limits\u003cint64_t\u003e::min() \u0026\u0026",
+      "range": {
+        "startLine": 82,
+        "startChar": 28,
+        "endLine": 82,
+        "endChar": 66
+      },
+      "revId": "362063a0a7e31874729bdf7389752ac3fa6e8955",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
