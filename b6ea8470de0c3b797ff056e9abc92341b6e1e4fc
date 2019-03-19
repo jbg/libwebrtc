@@ -69,6 +69,24 @@
       "revId": "b6ea8470de0c3b797ff056e9abc92341b6e1e4fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1774e41f_e40ac380",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-03-19T12:46:32Z",
+      "side": 1,
+      "message": "Oh OK, I think I confused myself, I forgot whether or not these should be exposed to the web.\n\nIf the idea is that they should not be exposed to the web, I think it\u0027s fine to have the CL as-is, with them not belonging to any group, and the default constructor not assigning a group.",
+      "parentUuid": "3da441bd_8089132d",
+      "revId": "b6ea8470de0c3b797ff056e9abc92341b6e1e4fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
