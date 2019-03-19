@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f80f9091_60387335",
+        "filename": "modules/video_coding/utility/decoded_frames_history.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-03-19T09:11:24Z",
+      "side": 1,
+      "message": "Actually, it just works here too. An empty optional is smaller than any possible value:\nhttps://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/types/optional.h?l\u003d955\n\nBut I agree, it might be more readable to put it in the if below.",
+      "parentUuid": "df2c8b51_7a4b6fe3",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 59
+      },
+      "revId": "019dad3ea2e4edac0f4af6c681d1ae1fd8d817b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9cf8b794_980ac6c1",
         "filename": "modules/video_coding/utility/decoded_frames_history.cc",
         "patchSetId": 2
