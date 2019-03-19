@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f25235be_65c574d0",
+        "filename": "api/stats/rtc_stats.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-03-19T12:23:59Z",
+      "side": 1,
+      "message": "Added intent to experiment links.",
+      "parentUuid": "432aca0c_93e47d00",
+      "revId": "b6ea8470de0c3b797ff056e9abc92341b6e1e4fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e17e1eab_817109fe",
         "filename": "stats/rtcstats_objects.cc",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2019-03-19T11:59:10Z",
       "side": 1,
       "message": "These are also RTCNonStandardStatsMembers - I think we need some sort of group for them too for us to keep exposing them to the web? I don\u0027t want \"no group\" to implicitly mean a special group.\n\nIn fact, perhaps we should remove the constructors that don\u0027t take groups as argument to make this explicit. If we decide that \"no group\" is useful in some cases we can pass \"no group\" explicitly, but this would prevent us from accidentally forgetting to add a group.",
+      "revId": "b6ea8470de0c3b797ff056e9abc92341b6e1e4fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3da441bd_8089132d",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-03-19T12:23:59Z",
+      "side": 1,
+      "message": "Hm..what origin trial/experiment should they be included in? My thought was that if they don\u0027t have a group then they should never be exposed to the web.",
+      "parentUuid": "e17e1eab_817109fe",
       "revId": "b6ea8470de0c3b797ff056e9abc92341b6e1e4fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
