@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df2c8b51_7a4b6fe3",
+        "filename": "modules/video_coding/utility/decoded_frames_history.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-03-19T09:07:32Z",
+      "side": 1,
+      "message": "Don\u0027t you need to put this check inside the if clause below and use *history.last_picture_id to get the value:\n\nRTC_DCHECK_LT(*history.last_picture_id, frameid.picture_id);",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 59
+      },
+      "revId": "019dad3ea2e4edac0f4af6c681d1ae1fd8d817b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cf8b794_980ac6c1",
+        "filename": "modules/video_coding/utility/decoded_frames_history.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-03-19T09:07:32Z",
+      "side": 1,
+      "message": "*history.last_picture_id",
+      "range": {
+        "startLine": 90,
+        "startChar": 27,
+        "endLine": 90,
+        "endChar": 50
+      },
+      "revId": "019dad3ea2e4edac0f4af6c681d1ae1fd8d817b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
