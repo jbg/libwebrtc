@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9adec1c_f03b0f7d",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-03-19T10:14:45Z",
+      "side": 1,
+      "message": "I\u0027d recommend to reuse naming from ManageFrameVp8 where this variable is named unwrapped_tl0.",
+      "range": {
+        "startLine": 710,
+        "startChar": 10,
+        "endLine": 710,
+        "endChar": 15
+      },
+      "revId": "bfdef34f44fd41cb813d19138e70868c69527b15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f0e70a2_2bdcd22b",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-03-19T10:14:45Z",
+      "side": 1,
+      "message": "This will erase recent entries in not_yet_received_seq_num_ if seq_num/picture_id wraps around. You can use Subtract to handle this. See https://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/rtp_frame_reference_finder.cc?rcl\u003d7dbc0eb2efa4708da5e3e44d2a15bfdee4ceb474\u0026l\u003d304",
+      "range": {
+        "startLine": 718,
+        "startChar": 2,
+        "endLine": 721,
+        "endChar": 51
+      },
+      "revId": "bfdef34f44fd41cb813d19138e70868c69527b15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cf74fb6_0f8b6951",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-03-19T10:14:45Z",
+      "side": 1,
+      "message": "It\u0027d be better to reuse names and order of arguments from UpdateLayerInfoVp8. Same for UpdateDataH264 below.",
+      "range": {
+        "startLine": 811,
+        "startChar": 4,
+        "endLine": 811,
+        "endChar": 49
+      },
+      "revId": "bfdef34f44fd41cb813d19138e70868c69527b15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa3ff7a1_bb9650a0",
+        "filename": "modules/video_coding/rtp_frame_reference_finder_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-03-19T10:14:45Z",
+      "side": 1,
+      "message": "I think we need couple more unit tests to verify that the below cases are handled correctly:\n1. wraparound of sequence number\n2. wraparound of tl0_pic_idx",
+      "range": {
+        "startLine": 1717,
+        "startChar": 0,
+        "endLine": 1717,
+        "endChar": 0
+      },
+      "revId": "bfdef34f44fd41cb813d19138e70868c69527b15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
