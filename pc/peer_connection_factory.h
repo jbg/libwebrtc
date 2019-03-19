@@ -21,6 +21,7 @@
 #include "api/scoped_refptr.h"
 #include "media/sctp/sctp_transport_internal.h"
 #include "pc/channel_manager.h"
+#include "rtc_base/deprecation.h"
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/thread.h"
 
@@ -92,6 +93,7 @@ class PeerConnectionFactory : public PeerConnectionFactoryInterface {
   }
 
  protected:
+  RTC_DEPRECATED
   PeerConnectionFactory(
       rtc::Thread* network_thread,
       rtc::Thread* worker_thread,
@@ -99,6 +101,7 @@ class PeerConnectionFactory : public PeerConnectionFactoryInterface {
       std::unique_ptr<cricket::MediaEngineInterface> media_engine,
       std::unique_ptr<webrtc::CallFactoryInterface> call_factory,
       std::unique_ptr<RtcEventLogFactoryInterface> event_log_factory);
+  RTC_DEPRECATED
   PeerConnectionFactory(
       rtc::Thread* network_thread,
       rtc::Thread* worker_thread,
