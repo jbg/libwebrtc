@@ -210,6 +210,7 @@ rtc_static_library("peerconnection") {
     "../media:rtc_media_base",
     "../p2p:rtc_p2p",
     "../rtc_base:checks",
+    "../rtc_base:deprecation",
     "../rtc_base:rtc_base",
     "../rtc_base:rtc_base_approved",
     "../rtc_base/system:rtc_export",
