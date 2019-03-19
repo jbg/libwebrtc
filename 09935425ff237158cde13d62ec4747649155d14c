@@ -70,6 +70,30 @@
       "revId": "09935425ff237158cde13d62ec4747649155d14c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb020a9f_7be1856a",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-19T09:31:18Z",
+      "side": 1,
+      "message": "Yep, we have to provide at least one class to user, so user will be able to configure peer. But here we needn\u0027t to disclose any implementation details classes like Params and InjectableComponenets and we have single class for configuring both move only and copyable parameters.",
+      "parentUuid": "f5dc0fa3_cae00dd9",
+      "range": {
+        "startLine": 281,
+        "startChar": 8,
+        "endLine": 281,
+        "endChar": 33
+      },
+      "revId": "09935425ff237158cde13d62ec4747649155d14c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
