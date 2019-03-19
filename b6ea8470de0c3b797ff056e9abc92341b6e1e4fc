@@ -87,6 +87,24 @@
       "revId": "b6ea8470de0c3b797ff056e9abc92341b6e1e4fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df404452_89d36de9",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-03-19T13:01:43Z",
+      "side": 1,
+      "message": "Well, there is currently no other origin trial than these two which is exposing non-standard stats at least.",
+      "parentUuid": "1774e41f_e40ac380",
+      "revId": "b6ea8470de0c3b797ff056e9abc92341b6e1e4fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
