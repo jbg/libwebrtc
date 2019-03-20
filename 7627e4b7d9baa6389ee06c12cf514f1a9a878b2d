@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "613e35f0_08118225",
+        "filename": "rtc_base/memory/refptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T04:18:11Z",
+      "side": 1,
+      "message": "Do you actually need this base for anything? If you remove it, you can make all methods non-virtual.",
+      "range": {
+        "startLine": 22,
+        "startChar": 34,
+        "endLine": 22,
+        "endChar": 63
+      },
+      "revId": "7627e4b7d9baa6389ee06c12cf514f1a9a878b2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "313293e5_b5606c9e",
+        "filename": "rtc_base/memory/refptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T04:18:11Z",
+      "side": 1,
+      "message": "Should we be `using T::T` here, to make T\u0027s constructors visible? And prevent copy and move?",
+      "revId": "7627e4b7d9baa6389ee06c12cf514f1a9a878b2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e8726fb_6e3f8809",
+        "filename": "rtc_base/memory/refptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T04:18:11Z",
+      "side": 1,
+      "message": "unnecessary?",
+      "range": {
+        "startLine": 37,
+        "startChar": 10,
+        "endLine": 37,
+        "endChar": 23
+      },
+      "revId": "7627e4b7d9baa6389ee06c12cf514f1a9a878b2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58401be1_0d5cb042",
+        "filename": "rtc_base/memory/refptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T04:18:11Z",
+      "side": 1,
+      "message": "I\u0027m skeptical about adding a new smart pointer type. I\u0027d rather see e.g. webrtc_impl::RefCountWrapper renamed to something shorter (RefCounted? Or is that taken already?) so that we can use scoped_refptr\u003cRefCounted\u003cFoo\u003e\u003e instead.",
+      "revId": "7627e4b7d9baa6389ee06c12cf514f1a9a878b2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfb776f2_d4b5b32d",
+        "filename": "rtc_base/memory/refptr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T04:18:11Z",
+      "side": 1,
+      "message": "Both of these ought to do perfect forwarding. But we may not need them if you follow my other advice.",
+      "revId": "7627e4b7d9baa6389ee06c12cf514f1a9a878b2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad6d5446_fb06dae9",
+        "filename": "rtc_base/memory/refptr_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T04:18:11Z",
+      "side": 1,
+      "message": "In addition to the unit tests, can you replace a manual AddRef+Release implementation with the new class? webrtc::PacketBuffer looks like it could work.",
+      "revId": "7627e4b7d9baa6389ee06c12cf514f1a9a878b2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
