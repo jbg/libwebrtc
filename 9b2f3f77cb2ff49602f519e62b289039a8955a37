@@ -22,6 +22,30 @@
       "revId": "9b2f3f77cb2ff49602f519e62b289039a8955a37",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "645cac49_519e73e3",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-03-20T14:54:54Z",
+      "side": 1,
+      "message": "These are not some true network synchronized clocks. These are just local time in NTP format.\n\nThus, the sender and receiver clocks are not synchronized and hence we need RTT to adjust a timestamp in the sender clock to the receiver clock.",
+      "parentUuid": "f7d22f75_92aeae40",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 34
+      },
+      "revId": "9b2f3f77cb2ff49602f519e62b289039a8955a37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

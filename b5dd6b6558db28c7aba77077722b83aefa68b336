@@ -16,6 +16,24 @@
       "revId": "b5dd6b6558db28c7aba77077722b83aefa68b336",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5bbc116_d6092a35",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-03-20T14:54:54Z",
+      "side": 0,
+      "message": "\u003e If the receiver is able to get the sender\u0027s ntp capture time in some more direct and reliable fashion, without involving any RTT estimate, why not *always* use that value to populate ntp_time_ms_?\n\nRTT is needed to convert the sender clock to the receiver clock, which are not synchronized.\nWe need the capture timestamps in the local time at the receive side for E2E delay metrics.\n\nThe capture timestamps in the sender time are more easily available and can be used for streams synchronization. They are currently used for A/V sync inside WebRTC. This CL\u0027s exposes them for users to synchronize streams manually (with e.g. non-webrtc data streams).\n\n\u003e Also consider the case that you receive a video stream on one peerconnection and pass them on to another peerconnection.\n\nThis actually happens in some NFU already. IF RTCP SR packets are adjusted accordingly (RTT is added to RTP timestamps and local time is populated to NTP timestamp field), then it doesn\u0027t matter how many middle nodes are there. The final receiver could easily reconstruct the capture time in the clock of the last pass-through node. Then, applying it\u0027s RTT measurements, it can also reconstruct the capture timestamps in the local time.",
+      "parentUuid": "7f86d09f_f4b16d9c",
+      "revId": "b5dd6b6558db28c7aba77077722b83aefa68b336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
