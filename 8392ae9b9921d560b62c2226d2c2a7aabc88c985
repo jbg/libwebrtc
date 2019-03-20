@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40f96124_03d92a44",
+        "filename": "modules/rtp_rtcp/source/rtp_utility_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-20T14:51:15Z",
+      "side": 1,
+      "message": "This test fails,\n\nExpected equality of these values:\n  header.extension.repaired_stream_id\n    Which is: \"str\\0am\"\n  \"str\"\n\nIs truncation at the NUL character desired behavior, or should test be updated?",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 56
+      },
+      "revId": "8392ae9b9921d560b62c2226d2c2a7aabc88c985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
