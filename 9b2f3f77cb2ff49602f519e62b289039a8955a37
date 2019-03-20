@@ -46,6 +46,30 @@
       "revId": "9b2f3f77cb2ff49602f519e62b289039a8955a37",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f351af4e_e70f069c",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-20T15:12:24Z",
+      "side": 1,
+      "message": "\u003e These are not some true network synchronized clocks. These are just local time in NTP format.\n\nThis makes little sense to me. Are you saying that you\u0027re exlicitly trying to handle the case where one or both peers lack a reliable walltime clock? If so, I\u0027m not sure the video pipeline really is the right place to adjust for that.",
+      "parentUuid": "645cac49_519e73e3",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 34
+      },
+      "revId": "9b2f3f77cb2ff49602f519e62b289039a8955a37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
