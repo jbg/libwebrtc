@@ -45,6 +45,9 @@ enum ProtectionType { kUnprotectedPacket, kProtectedPacket };
 
 enum StorageType { kDontRetransmit, kAllowRetransmission };
 
+bool IsLegalMidName(rtc::ArrayView<const char> name);
+bool IsLegalRsidName(rtc::ArrayView<const char> name);
+
 // This enum must not have any gaps, i.e., all integers between
 // kRtpExtensionNone and kRtpExtensionNumberOfExtensions must be valid enum
 // entries.

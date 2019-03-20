@@ -494,7 +494,7 @@ TEST_F(RtcpDemuxerTest, RsidMustBeAlphaNumeric) {
 
 TEST_F(RtcpDemuxerTest, RsidMustNotExceedMaximumLength) {
   MockRtcpPacketSink sink;
-  std::string rsid(StreamId::kMaxSize + 1, 'a');
+  std::string rsid(16 + 1, 'a');
   EXPECT_DEATH(AddRsidSink(rsid, &sink), "");
 }
 

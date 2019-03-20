@@ -13,6 +13,8 @@
 #include <assert.h>
 #include <stddef.h>
 
+#include <string>
+
 #include "api/array_view.h"
 #include "api/video/video_content_type.h"
 #include "api/video/video_frame_marking.h"
@@ -494,16 +496,18 @@ void RtpHeaderParser::ParseOneByteExtensionHeader(
           break;
         }
         case kRtpExtensionRtpStreamId: {
-          header->extension.stream_id.Set(rtc::MakeArrayView(ptr, len + 1));
+          header->extension.stream_id =
+              std::string(reinterpret_cast<const char*>(ptr), len + 1);
           break;
         }
         case kRtpExtensionRepairedRtpStreamId: {
-          header->extension.repaired_stream_id.Set(
-              rtc::MakeArrayView(ptr, len + 1));
+          header->extension.repaired_stream_id =
+              std::string(reinterpret_cast<const char*>(ptr), len + 1);
           break;
         }
         case kRtpExtensionMid: {
-          header->extension.mid.Set(rtc::MakeArrayView(ptr, len + 1));
+          header->extension.mid =
+              std::string(reinterpret_cast<const char*>(ptr), len + 1);
           break;
         }
         case kRtpExtensionGenericFrameDescriptor00:
