@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d9fab65b_a0f21210",
+        "filename": "api/rtp_headers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-20T15:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c00f4e1_34241a12",
+      "revId": "8392ae9b9921d560b62c2226d2c2a7aabc88c985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa44e10d_64ddb708",
         "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "68820eb5_92d2082f",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-20T15:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa44e10d_64ddb708",
+      "range": {
+        "startLine": 48,
+        "startChar": 20,
+        "endLine": 48,
+        "endChar": 46
+      },
+      "revId": "8392ae9b9921d560b62c2226d2c2a7aabc88c985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e6e3361_a126b57c",
         "filename": "modules/rtp_rtcp/source/rtp_utility.cc",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2019-03-20T15:01:38Z",
       "side": 1,
       "message": "may be use std::string::assign",
+      "range": {
+        "startLine": 499,
+        "startChar": 37,
+        "endLine": 499,
+        "endChar": 39
+      },
+      "revId": "8392ae9b9921d560b62c2226d2c2a7aabc88c985",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a286acb_1618d1e6",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-20T15:47:23Z",
+      "side": 1,
+      "message": "Thanks, I wanted that method but somehow missed it. Still not pretty with the reinterpret_cast, though.\n\nWe don\u0027t validate contents, though. Should we call some Parse method which validates the contents? I\u0027m a bit confused, we have both the old RtpHeaderParser (used here, and populating an RTPHeader) and the new way of getting extensions out of an RtpPacket. Can they share a parse-and-validate-function?\n\nAdding validation here, at least.\n\nBefore this change, the StreamId::Set truncated values at NUL.",
+      "parentUuid": "6e6e3361_a126b57c",
       "range": {
         "startLine": 499,
         "startChar": 37,
