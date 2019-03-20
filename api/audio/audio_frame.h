@@ -103,6 +103,9 @@ class AudioFrame {
   // NTP time of the estimated capture time in local timebase in milliseconds.
   // -1 represents an uninitialized value.
   int64_t ntp_time_ms_ = -1;
+  // NTP time of the estimated capture time in sender timebase in milliseconds.
+  // -1 represents an uninitialized value.
+  int64_t sender_ntp_time_ms_ = -1;
   size_t samples_per_channel_ = 0;
   int sample_rate_hz_ = 0;
   size_t num_channels_ = 0;

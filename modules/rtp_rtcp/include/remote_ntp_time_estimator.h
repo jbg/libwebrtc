@@ -33,6 +33,7 @@ class RemoteNtpTimeEstimator {
 
   // Updates the estimator with round trip time |rtt|, NTP seconds |ntp_secs|,
   // NTP fraction |ntp_frac| and RTP timestamp |rtcp_timestamp|.
+  // Negative RTT means no estimate available.
   bool UpdateRtcpTimestamp(int64_t rtt,
                            uint32_t ntp_secs,
                            uint32_t ntp_frac,
@@ -41,6 +42,15 @@ class RemoteNtpTimeEstimator {
   // Estimates the NTP timestamp in local timebase from |rtp_timestamp|.
   // Returns the NTP timestamp in ms when success. -1 if failed.
   int64_t Estimate(uint32_t rtp_timestamp);
+
+  // Estimates the NTP timestamp in sender and  local timebase from
+  // |rtp_timestamp|. Returns the NTP timestamps in ms when success.
+  // -1 if failed. Sender timestamp is not available until 2 valid RTCP SR
+  // packets. Local timestamp is not available until sender timestamp is
+  // available and at least one RTT estimate is provided.
+  void EstimateSenderAndLocal(uint32_t rtp_timestamp,
+                              int64_t* sender_capture_ntp_ms,
+                              int64_t* receiver_capture_ntp_ms);
 
  private:
   Clock* clock_;

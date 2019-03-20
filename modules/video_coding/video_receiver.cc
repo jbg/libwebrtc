@@ -396,7 +396,7 @@ int32_t VideoReceiver::IncomingPacket(const uint8_t* incomingPayload,
   }
   const VCMPacket packet(incomingPayload, payloadLength, rtpInfo.header,
                          rtpInfo.video_header(), rtpInfo.frameType,
-                         rtpInfo.ntp_time_ms);
+                         rtpInfo.ntp_time_ms, /*sender_ntp_time_ms=*/-1);
   int32_t ret = _receiver.InsertPacket(packet);
 
   // TODO(holmer): Investigate if this somehow should use the key frame

@@ -197,6 +197,7 @@ class VP9DecoderImpl : public VP9Decoder {
   int ReturnFrame(const vpx_image_t* img,
                   uint32_t timestamp,
                   int64_t ntp_time_ms,
+                  int64_t sender_ntp_time_ms,
                   int qp,
                   const webrtc::ColorSpace* explicit_color_space);
 

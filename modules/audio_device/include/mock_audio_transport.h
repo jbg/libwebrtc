@@ -44,6 +44,17 @@ class MockAudioTransport : public AudioTransport {
                        int64_t* elapsed_time_ms,
                        int64_t* ntp_time_ms));
 
+  MOCK_METHOD9(NeedMorePlayData,
+               int32_t(const size_t nSamples,
+                       const size_t nBytesPerSample,
+                       const size_t nChannels,
+                       const uint32_t samplesPerSec,
+                       void* audioSamples,
+                       size_t& nSamplesOut,
+                       int64_t* elapsed_time_ms,
+                       int64_t* ntp_time_ms,
+                       int64_t* sender_ntp_time_ms));
+
   MOCK_METHOD7(PullRenderData,
                void(int bits_per_sample,
                     int sample_rate,
@@ -52,6 +63,16 @@ class MockAudioTransport : public AudioTransport {
                     void* audio_data,
                     int64_t* elapsed_time_ms,
                     int64_t* ntp_time_ms));
+
+  MOCK_METHOD8(PullRenderData,
+               void(int bits_per_sample,
+                    int sample_rate,
+                    size_t number_of_channels,
+                    size_t number_of_frames,
+                    void* audio_data,
+                    int64_t* elapsed_time_ms,
+                    int64_t* ntp_time_ms,
+                    int64_t* sender_ntp_time_ms));
 };
 
 }  // namespace test

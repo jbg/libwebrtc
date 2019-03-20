@@ -231,8 +231,12 @@ int32_t RtpVideoStreamReceiver::OnReceivedPayloadData(
     FrameType frame_type,
     const absl::optional<RtpGenericFrameDescriptor>& generic_descriptor,
     bool is_recovered) {
+  int64_t sender_ntp_time;
+  int64_t local_ntp_time;
+  ntp_estimator_.EstimateSenderAndLocal(rtp_header.timestamp, &sender_ntp_time,
+                                        &local_ntp_time);
   VCMPacket packet(payload_data, payload_size, rtp_header, video_header,
-                   frame_type, ntp_estimator_.Estimate(rtp_header.timestamp));
+                   frame_type, local_ntp_time, sender_ntp_time);
   packet.generic_descriptor = generic_descriptor;
 
   if (nack_module_) {
@@ -647,7 +651,8 @@ bool RtpVideoStreamReceiver::DeliverRtcp(const uint8_t* rtcp_packet,
   rtp_rtcp_->RTT(config_.rtp.remote_ssrc, &rtt, nullptr, nullptr, nullptr);
   if (rtt == 0) {
     // Waiting for valid rtt.
-    return true;
+    // Use -1 to signal invalid rtt to NtpEstimator.
+    rtt = -1;
   }
   uint32_t ntp_secs = 0;
   uint32_t ntp_frac = 0;

@@ -300,6 +300,8 @@ int32_t H264DecoderImpl::Decode(const EncodedImage& input_image,
           .set_video_frame_buffer(input_frame->video_frame_buffer())
           .set_timestamp_us(input_frame->timestamp_us())
           .set_timestamp_rtp(input_image.Timestamp())
+          .set_ntp_time_ms(input_image.ntp_time_ms_)
+          .set_sender_ntp_time_ms(input_image.sender_ntp_time_ms_)
           .set_rotation(input_frame->rotation())
           .set_color_space(color_space)
           .build();
@@ -328,6 +330,8 @@ int32_t H264DecoderImpl::Decode(const EncodedImage& input_image,
             .set_timestamp_ms(decoded_frame.render_time_ms())
             .set_timestamp_rtp(decoded_frame.timestamp())
             .set_rotation(decoded_frame.rotation())
+            .set_ntp_time_ms(decoded_frame.ntp_time_ms())
+            .set_sender_ntp_time_ms(decoded_frame.sender_ntp_time_ms())
             .set_color_space(color_space)
             .build();
     // TODO(nisse): Timestamp and rotation are all zero here. Change decoder

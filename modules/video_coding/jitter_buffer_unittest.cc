@@ -248,7 +248,8 @@ class TestBasicJitterBuffer : public ::testing::TestWithParam<std::string>,
     video_header.codec = kVideoCodecGeneric;
     video_header.is_first_packet_in_frame = true;
     packet_.reset(new VCMPacket(data_, size_, rtp_header, video_header,
-                                kVideoFrameDelta, /*ntp_time_ms=*/0));
+                                kVideoFrameDelta, /*ntp_time_ms=*/0,
+                                /*sender_ntp_time_ms=*/0));
   }
 
   VCMEncodedFrame* DecodeCompleteFrame() {
@@ -770,7 +771,8 @@ TEST_F(TestBasicJitterBuffer, TestReorderingWithPadding) {
   rtp_header.markerBit = false;
   video_header.codec = kVideoCodecGeneric;
   VCMPacket empty_packet(data_, 0, rtp_header, video_header,
-                         VideoFrameType::kEmptyFrame, /*ntp_time_ms=*/0);
+                         VideoFrameType::kEmptyFrame, /*ntp_time_ms=*/0,
+                         /*sender_ntp_time_ms=*/0);
   EXPECT_EQ(kOldPacket,
             jitter_buffer_->InsertPacket(empty_packet, &retransmitted));
   empty_packet.seqNum += 1;
