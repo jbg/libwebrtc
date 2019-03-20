@@ -94,6 +94,47 @@
       "revId": "09935425ff237158cde13d62ec4747649155d14c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b85e4a26_a7d19dba",
+        "filename": "test/pc/e2e/api/peerconnection_quality_test_fixture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T05:06:54Z",
+      "side": 1,
+      "message": "I agree with Peter: It\u0027s worth going to some effort to avoid mutating already created objects. It makes the code much easier to think about.\n\nYou could still use your idea with a configuration interface if you do something like this:\n\n  virtual void AddPeer(rtc::Thread* network_thread,\n                       rtc::NetworkManager* network_manager,\n                       rtc::FunctionView\u003cvoid(PeerConfigurer*)\u003e) \u003d 0;\n\nThe user would then pass a lambda which gets to modify the PeerConfigurer before the new peer is added:\n\n  foo-\u003eAddPeer(\u0026net_thread, \u0026net_man, [\u0026](PeerConfigurer* pc){\n    pc-\u003eSetCallFactory(std::move(cf));\n    pc-\u003eSetAudioConfig(ac);\n  });",
+      "parentUuid": "cb020a9f_7be1856a",
+      "range": {
+        "startLine": 281,
+        "startChar": 8,
+        "endLine": 281,
+        "endChar": 33
+      },
+      "revId": "09935425ff237158cde13d62ec4747649155d14c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2dcc8bc_a96e43c5",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T05:06:54Z",
+      "side": 1,
+      "message": "final?\n\n(It\u0027s generally a good idea to add `final` to classes whenever you can.)",
+      "revId": "09935425ff237158cde13d62ec4747649155d14c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
