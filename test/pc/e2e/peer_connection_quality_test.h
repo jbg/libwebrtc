@@ -27,6 +27,7 @@
 #include "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.h"
 #include "test/pc/e2e/api/audio_quality_analyzer_interface.h"
 #include "test/pc/e2e/api/peerconnection_quality_test_fixture.h"
+#include "test/pc/e2e/peer_connection_quality_test_params.h"
 #include "test/pc/e2e/test_peer.h"
 #include "test/testsupport/video_frame_writer.h"
 
@@ -36,9 +37,6 @@ namespace webrtc_pc_e2e {
 class PeerConnectionE2EQualityTest
     : public PeerConnectionE2EQualityTestFixture {
  public:
-  using Params = PeerConnectionE2EQualityTestFixture::Params;
-  using InjectableComponents =
-      PeerConnectionE2EQualityTestFixture::InjectableComponents;
   using VideoGeneratorType =
       PeerConnectionE2EQualityTestFixture::VideoGeneratorType;
   using RunParams = PeerConnectionE2EQualityTestFixture::RunParams;

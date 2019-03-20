@@ -20,6 +20,7 @@
 #include "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h"
 #include "test/pc/e2e/api/create_peerconnection_quality_test_fixture.h"
 #include "test/pc/e2e/api/peerconnection_quality_test_fixture.h"
+#include "test/pc/e2e/peer_connection_quality_test_params.h"
 #include "test/testsupport/file_utils.h"
 
 namespace webrtc {
@@ -39,12 +40,9 @@ void PrintFrameCounters(const std::string& name,
 }  // namespace
 
 TEST(PeerConnectionE2EQualityTestSmokeTest, RunWithEmulatedNetwork) {
-  using Params = PeerConnectionE2EQualityTestFixture::Params;
   using RunParams = PeerConnectionE2EQualityTestFixture::RunParams;
   using VideoConfig = PeerConnectionE2EQualityTestFixture::VideoConfig;
   using AudioConfig = PeerConnectionE2EQualityTestFixture::AudioConfig;
-  using InjectableComponents =
-      PeerConnectionE2EQualityTestFixture::InjectableComponents;
 
   auto alice_params = absl::make_unique<Params>();
   VideoConfig alice_video_config(640, 360, 30);
