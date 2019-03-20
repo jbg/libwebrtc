@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f86d09f_f4b16d9c",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-20T14:23:24Z",
+      "side": 0,
+      "message": "I dislike adding even more timestamps to this struct. At a minimum, the difference should be documented.\n\nI\u0027d expect ntp capture time to be set on the send side (exactly how is a bit unclear to me). Then various timestamps are transmitted across the network. Receiver attempts to reconstruct sender\u0027s ntp time from rtp timestamps and rtcp messages.\n\nIf the receiver is able to get the sender\u0027s ntp capture time in some more direct and reliable fashion, without involving any RTT estimate, why not *always* use that value to populate ntp_time_ms_?\n\nAlso consider the case that you receive a video stream on one peerconnection and pass them on to another peerconnection. Then the ntp time is the one timestamp that it makes the most sense to try to retransmit unchanged. And we can\u0027t really say that on the \"receive\" side ntp_time_ms_ and sender_ntp_time_ms_ are different, but on the send side (passing the same frames on) they\u0027re \"always equal\".",
+      "revId": "b5dd6b6558db28c7aba77077722b83aefa68b336",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

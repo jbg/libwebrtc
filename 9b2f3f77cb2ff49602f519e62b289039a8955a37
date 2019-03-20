@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7d22f75_92aeae40",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-20T14:23:24Z",
+      "side": 1,
+      "message": "Difference between these two is unclear. NTP clocks are supposed to be in sync, so I guess the difference is not really the \"timebase\", but rather how the values are derived from the on-wire metadata?",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 34
+      },
+      "revId": "9b2f3f77cb2ff49602f519e62b289039a8955a37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
