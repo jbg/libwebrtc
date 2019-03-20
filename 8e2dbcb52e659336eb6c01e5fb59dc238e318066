@@ -22,6 +22,30 @@
       "revId": "8e2dbcb52e659336eb6c01e5fb59dc238e318066",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be24177b_b08b71f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-20T14:43:32Z",
+      "side": 1,
+      "message": "It\u0027s not about moving all subtypes, so it why I chose such comment",
+      "parentUuid": "cbd8ba02_3d21e8d0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 69
+      },
+      "revId": "8e2dbcb52e659336eb6c01e5fb59dc238e318066",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
