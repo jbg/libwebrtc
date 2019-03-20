@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8f35dbf_b5454d14",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 8941
+      },
+      "writtenOn": "2019-03-20T16:29:36Z",
+      "side": 1,
+      "message": "This sink call should be moved after estimation. I did in the second version of my patch in the bug issue.",
+      "revId": "a9140ff1acf1191bb12b6746cd3ce227976db777",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f279c45_5b5f64f2",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 8941
+      },
+      "writtenOn": "2019-03-20T16:29:36Z",
+      "side": 1,
+      "message": "Look comment above: estimation must be performed before sink call.",
+      "revId": "a9140ff1acf1191bb12b6746cd3ce227976db777",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
