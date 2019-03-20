@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0180191_7052bf51",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-20T10:35:08Z",
+      "side": 1,
+      "message": "Ah! Looks nice and clean, I think.",
+      "revId": "79b97d25f09d319e1a3b926b2c13028a6c80a227",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
