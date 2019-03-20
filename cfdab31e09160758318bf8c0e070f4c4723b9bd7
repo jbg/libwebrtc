@@ -22,6 +22,30 @@
       "revId": "cfdab31e09160758318bf8c0e070f4c4723b9bd7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93ce8463_882d8900",
+        "filename": "video/end_to_end_tests/extended_target_bitrate_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-03-20T16:58:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c908116_f5ed3c27",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 4
+      },
+      "revId": "cfdab31e09160758318bf8c0e070f4c4723b9bd7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
