@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbd8ba02_3d21e8d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-20T13:42:54Z",
+      "side": 1,
+      "message": "If there is enough space I would change this to \"Move PeerConnectionE2EQualityTestFixture sub-types to webrtc::webrtc_pc_e2e.\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 69
+      },
+      "revId": "8e2dbcb52e659336eb6c01e5fb59dc238e318066",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
