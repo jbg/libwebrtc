@@ -46,6 +46,30 @@
       "revId": "2baef3509fea7790e7fbc6842bce287ee0d6f8e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d66cccae_3882d787",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-03-21T10:16:53Z",
+      "side": 0,
+      "message": "Screenshare case may require the correct buffer to be updated. But encoder might already update the correct 0-th buffer in that case. Please ensure that \"screenshare_loopback --codec\u003dVP9 --fps\u003d30 --num_spatial_layers\u003d3\" works with your patch.",
+      "parentUuid": "c73274ba_4452b7f5",
+      "range": {
+        "startLine": 1149,
+        "startChar": 13,
+        "endLine": 1149,
+        "endChar": 27
+      },
+      "revId": "2baef3509fea7790e7fbc6842bce287ee0d6f8e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
