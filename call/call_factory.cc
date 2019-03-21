@@ -17,11 +17,14 @@
 #include "absl/types/optional.h"
 #include "api/test/simulated_network.h"
 #include "call/call.h"
+#if defined(RTC_USE_FAKE_NETWORK)
 #include "call/degraded_call.h"
+#endif
 #include "rtc_base/checks.h"
 #include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
+#if defined(RTC_USE_FAKE_NETWORK)
 namespace {
 bool ParseConfigParam(std::string exp_name, int* field) {
   std::string group = field_trial::FindFullName(exp_name);
@@ -68,8 +71,10 @@ absl::optional<webrtc::BuiltInNetworkBehaviorConfig> ParseDegradationConfig(
              : absl::nullopt;
 }
 }  // namespace
+#endif
 
 Call* CallFactory::CreateCall(const Call::Config& config) {
+#if defined(RTC_USE_FAKE_NETWORK)
   absl::optional<webrtc::BuiltInNetworkBehaviorConfig> send_degradation_config =
       ParseDegradationConfig(true);
   absl::optional<webrtc::BuiltInNetworkBehaviorConfig>
@@ -80,6 +85,7 @@ Call* CallFactory::CreateCall(const Call::Config& config) {
                             send_degradation_config,
                             receive_degradation_config);
   }
+#endif
 
   return Call::Create(config);
 }
