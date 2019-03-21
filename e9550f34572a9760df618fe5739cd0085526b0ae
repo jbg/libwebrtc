@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11305f2d_50b24141",
+        "filename": "common_audio/smoothing_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-21T07:34:38Z",
+      "side": 1,
+      "message": "I added this because there are some calls to ::powf that I am not sure we need to migrate.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 17
+      },
+      "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
