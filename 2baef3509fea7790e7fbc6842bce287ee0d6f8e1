@@ -22,6 +22,30 @@
       "revId": "2baef3509fea7790e7fbc6842bce287ee0d6f8e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c73274ba_4452b7f5",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-03-21T10:01:42Z",
+      "side": 0,
+      "message": "Is this needed? Are there cases when we rely on that? In fact, when inter-layer prediction is disabled, encoder is not supposed to update all buffers on key frame.",
+      "parentUuid": "1a14672f_ce098a9a",
+      "range": {
+        "startLine": 1149,
+        "startChar": 13,
+        "endLine": 1149,
+        "endChar": 27
+      },
+      "revId": "2baef3509fea7790e7fbc6842bce287ee0d6f8e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
