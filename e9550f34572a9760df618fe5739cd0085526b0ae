@@ -261,6 +261,30 @@
       "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c86edaf3_c0b0e7ac",
+        "filename": "common_audio/smoothing_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-03-21T18:58:17Z",
+      "side": 1,
+      "message": "\u003e  I presume this will be a small number in practice, so std::expf might be more appropriate?\n\nIt doesn\u0027t really matter! The important (non floating) point is that\u0027s a negative argument (checked line 79). If it\u0027s huge, exp will return something close to 0.\nAnyway, the result will be in [0..1] range.",
+      "parentUuid": "36f4d5a4_6c6dac8c",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 59
+      },
+      "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
