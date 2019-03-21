@@ -117,6 +117,30 @@
       "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95a7f822_2eebd3f8",
+        "filename": "common_audio/smoothing_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-21T11:16:37Z",
+      "side": 1,
+      "message": "Agreed, I have done that in PS#2 but I am not an export of this code and since I am paranoid I was thinking about doing:\n\n  multiplier \u003d std::exp(rtc::dchecked_cast\u003cfloat\u003e(last_state_time_ms_ - time_ms));\n\nDoes that make sense?",
+      "parentUuid": "87254c1d_38e49502",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 59
+      },
+      "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
