@@ -22,6 +22,30 @@
       "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "745686f8_cf955184",
+        "filename": "common_audio/smoothing_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-03-21T09:12:11Z",
+      "side": 1,
+      "message": "ok. let\u0027s solve only exp() in this cl.",
+      "parentUuid": "11305f2d_50b24141",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 17
+      },
+      "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
