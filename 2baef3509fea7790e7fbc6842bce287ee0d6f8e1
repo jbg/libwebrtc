@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a14672f_ce098a9a",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-03-21T09:23:58Z",
+      "side": 0,
+      "message": "Did you confirm that encoder provides correct update_buffer_slot for keyframes (updating all the buffers)?",
+      "range": {
+        "startLine": 1149,
+        "startChar": 13,
+        "endLine": 1149,
+        "endChar": 27
+      },
+      "revId": "2baef3509fea7790e7fbc6842bce287ee0d6f8e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
