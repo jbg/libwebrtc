@@ -460,23 +460,26 @@ TEST(VideoCodecTestLibvpx, DISABLED_SvcVP9RdPerf) {
   auto config = CreateConfig();
   config.filename = "FourPeople_1280x720_30";
   config.filepath = ResourcePath(config.filename, "yuv");
-  config.num_frames = 300;
+  config.num_frames = 100;
   config.print_frame_level_stats = true;
+  config.visualization_params.save_encoded_ivf = true;
   config.SetCodecSettings(cricket::kVp9CodecName, 1, 3, 3, true, true, false,
                           1280, 720);
   const auto frame_checker = absl::make_unique<QpFrameChecker>();
   config.encoded_frame_checker = frame_checker.get();
+  config.codec_settings.VP9()->interLayerPred = InterLayerPredMode::kOff;
+  config.codec_settings.VP9()->keyFrameInterval = 30;
   auto fixture = CreateVideoCodecTestFixture(config);
 
   std::map<size_t, std::vector<VideoStatistics>> rd_stats;
-  for (size_t bitrate_kbps : kBitrateRdPerfKbps) {
+  for (size_t bitrate_kbps : {2000}) {
     std::vector<RateProfile> rate_profiles = {{bitrate_kbps, 30, 0}};
 
     fixture->RunTest(rate_profiles, nullptr, nullptr, nullptr);
 
     rd_stats[bitrate_kbps] =
         fixture->GetStats().SliceAndCalcLayerVideoStatistic(
-            kNumFirstFramesToSkipAtRdPerfAnalysis, config.num_frames - 1);
+            0, config.num_frames - 1);
   }
 
   PrintRdPerf(rd_stats);
