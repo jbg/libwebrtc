@@ -46,6 +46,53 @@
       "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08daef48_55cecb1f",
+        "filename": "common_audio/smoothing_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-21T09:28:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "745686f8_cf955184",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 17
+      },
+      "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3fcf3cd_1b59b3d7",
+        "filename": "common_audio/smoothing_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-21T09:28:40Z",
+      "side": 1,
+      "message": "After a closer inspection, I think this one is interesting because it calls std::exp with an int64_t so probably it is calling the double version of std::exp which returns a double, while multiplier is a float.",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 59
+      },
+      "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
