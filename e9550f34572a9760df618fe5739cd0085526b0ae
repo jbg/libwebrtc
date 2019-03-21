@@ -213,6 +213,30 @@
       "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5d03f47_a52c9b81",
+        "filename": "common_audio/smoothing_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-21T11:45:48Z",
+      "side": 1,
+      "message": "It looks like it checks the max an min value, but with floats you typically don\u0027t have that problem; int128 fits in float (the smallest floating-point type), and uint128 just barely doesn\u0027t. However, with integer-\u003efloating conversion you can lose precision: float can exactly represent integers in [-2^24,2^24], and double handles [-2^53,2^53]. Outside those ranges, some integers aren\u0027t exactly representable.\n\nThe useful thing for dchecked_cast to check for would be precision loss, since the range is ~always going to be a non-issue.",
+      "parentUuid": "66b3d8fb_f74cdf8b",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 59
+      },
+      "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
