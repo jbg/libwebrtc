@@ -184,6 +184,30 @@
     },
     {
       "key": {
+        "uuid": "20b905ab_f02cc36f",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-03-22T12:58:08Z",
+      "side": 1,
+      "message": "Yes, I think it will be nicer.\ndo not think you would need to move though (since in practice, due to small-string optimization copy would be as fast as move. and these particular string must be small).\n\nAlso, afaik RtpHeaderParser is only used in tools/tests these days, \nso no point in spending much effort in nano-optimizations.",
+      "parentUuid": "472047ad_5f2399ec",
+      "range": {
+        "startLine": 500,
+        "startChar": 12,
+        "endLine": 500,
+        "endChar": 73
+      },
+      "revId": "5e8ee7c833a7f9884271baf697930c32f92206be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaaaf42c_7cf29b7c",
         "filename": "modules/rtp_rtcp/source/rtp_utility.cc",
         "patchSetId": 5
