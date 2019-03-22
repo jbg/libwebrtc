@@ -39,13 +39,15 @@ BitrateEstimator::BitrateEstimator(const WebRtcKeyValueConfig* key_value_config)
                             kRateWindowMs,
                             kMinRateWindowMs,
                             kMaxRateWindowMs),
+      symmetric_uncertainty_("symmetric", false),
       current_window_ms_(0),
       prev_time_ms_(-1),
       bitrate_estimate_(-1.0f),
       bitrate_estimate_var_(50.0f) {
   // E.g WebRTC-BweThroughputWindowConfig/initial_window_ms:350,window_ms:250/
-  ParseFieldTrial({&initial_window_ms_, &noninitial_window_ms_},
-                  key_value_config->Lookup(kBweThroughputWindowConfig));
+  ParseFieldTrial(
+      {&initial_window_ms_, &noninitial_window_ms_, &symmetric_uncertainty_},
+      key_value_config->Lookup(kBweThroughputWindowConfig));
 }
 
 BitrateEstimator::~BitrateEstimator() = default;
@@ -67,7 +69,13 @@ void BitrateEstimator::Update(int64_t now_ms, int bytes) {
   // Define the sample uncertainty as a function of how far away it is from the
   // current estimate.
   float sample_uncertainty =
-      10.0f * std::abs(bitrate_estimate_ - bitrate_sample) / bitrate_estimate_;
+      10.0f * std::abs(bitrate_estimate_ - bitrate_sample);
+  if (symmetric_uncertainty_) {
+    sample_uncertainty /= 0.5 * (bitrate_sample + bitrate_estimate_);
+  } else {
+    sample_uncertainty /= bitrate_estimate_;
+  }
+
   float sample_var = sample_uncertainty * sample_uncertainty;
   // Update a bayesian estimate of the rate, weighting it lower if the sample
   // uncertainty is large.

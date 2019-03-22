@@ -40,6 +40,7 @@ class BitrateEstimator {
   int sum_;
   FieldTrialConstrained<int> initial_window_ms_;
   FieldTrialConstrained<int> noninitial_window_ms_;
+  FieldTrialParameter<bool> symmetric_uncertainty_;
   int64_t current_window_ms_;
   int64_t prev_time_ms_;
   float bitrate_estimate_;
