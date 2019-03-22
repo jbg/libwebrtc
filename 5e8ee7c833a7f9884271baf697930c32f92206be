@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "a9ee78e4_8118b3f7",
+        "filename": "call/rtcp_demuxer_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-03-22T12:17:53Z",
+      "side": 1,
+      "message": "can you include some header and use a named constant?",
+      "range": {
+        "startLine": 497,
+        "startChar": 19,
+        "endLine": 497,
+        "endChar": 21
+      },
+      "revId": "5e8ee7c833a7f9884271baf697930c32f92206be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e01838fe_dbc058a0",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-03-22T12:17:53Z",
+      "side": 1,
+      "message": "BaseRtpStringExtension has the constant kMaxValueSizeBytes",
+      "revId": "5e8ee7c833a7f9884271baf697930c32f92206be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "839ddea8_84c04a94",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
         "patchSetId": 5
@@ -34,6 +74,47 @@
       "revId": "5e8ee7c833a7f9884271baf697930c32f92206be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f7105d6_04d31a77",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-03-22T12:17:53Z",
+      "side": 1,
+      "message": "it is other way around here (copy from string into raw buffer)",
+      "parentUuid": "839ddea8_84c04a94",
+      "revId": "5e8ee7c833a7f9884271baf697930c32f92206be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ba4c193_390a27e9",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-03-22T12:17:53Z",
+      "side": 1,
+      "message": "or use conversion operator. May be it would look cleaner:\nheader-\u003eextension.stream_id \u003d static_cast\u003cstd::string\u003e(name);\n\n(personally I find setting with operator\u003d generally cleaner than using setters)",
+      "range": {
+        "startLine": 500,
+        "startChar": 12,
+        "endLine": 500,
+        "endChar": 73
+      },
+      "revId": "5e8ee7c833a7f9884271baf697930c32f92206be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
