@@ -10,20 +10,21 @@
 
 #include "rtc_base/sequenced_task_checker.h"
 
+#include <functional>
 #include <memory>
 #include <utility>
 
-#include "rtc_base/checks.h"
-#include "rtc_base/constructor_magic.h"
+#include "absl/memory/memory.h"
 #include "rtc_base/event.h"
 #include "rtc_base/platform_thread.h"
-#include "rtc_base/task_queue.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/thread_checker.h"
 #include "test/gtest.h"
 
 namespace rtc {
-
 namespace {
+
+using ::webrtc::TaskQueueForTest;
 
 // This class is dead code, but its purpose is to make sure that
 // SequencedTaskChecker is compatible with the RTC_GUARDED_BY and RTC_RUN_ON
@@ -34,6 +35,7 @@ class CompileTimeTestForGuardedBy {
 
   void CallMeFromSequence() {
     RTC_DCHECK_RUN_ON(&sequence_checker_) << "Should be called on sequence";
+    guarded_ = 41;
   }
 
  private:
@@ -41,127 +43,29 @@ class CompileTimeTestForGuardedBy {
   rtc::SequencedTaskChecker sequence_checker_;
 };
 
-// Calls SequencedTaskChecker::CalledSequentially on another thread.
-class CallCalledSequentiallyOnThread {
- public:
-  CallCalledSequentiallyOnThread(bool expect_true,
-                                 SequencedTaskChecker* sequenced_task_checker)
-      : expect_true_(expect_true),
-        thread_(&Run, this, "call_do_stuff_on_thread"),
-        sequenced_task_checker_(sequenced_task_checker) {
-    thread_.Start();
-  }
-  ~CallCalledSequentiallyOnThread() {
-    EXPECT_TRUE(thread_has_run_event_.Wait(1000));
-    thread_.Stop();
-  }
+void RunOnDifferentThread(std::function<void()> run) {
+  struct Object {
+    static bool Run(void* obj) {
+      auto* me = static_cast<Object*>(obj);
+      me->run();
+      me->thread_has_run_event.Set();
+      return false;
+    }
 
- private:
-  static void Run(void* obj) {
-    CallCalledSequentiallyOnThread* call_stuff_on_thread =
-        static_cast<CallCalledSequentiallyOnThread*>(obj);
-    EXPECT_EQ(
-        call_stuff_on_thread->expect_true_,
-        call_stuff_on_thread->sequenced_task_checker_->CalledSequentially());
-    call_stuff_on_thread->thread_has_run_event_.Set();
-  }
+    std::function<void()> run;
+    Event thread_has_run_event;
+  } object{std::move(run)};
 
-  const bool expect_true_;
-  Event thread_has_run_event_;
-  PlatformThread thread_;
-  SequencedTaskChecker* const sequenced_task_checker_;
-
-  RTC_DISALLOW_COPY_AND_ASSIGN(CallCalledSequentiallyOnThread);
-};
-
-// Deletes SequencedTaskChecker on a different thread.
-class DeleteSequencedCheckerOnThread {
- public:
-  explicit DeleteSequencedCheckerOnThread(
-      std::unique_ptr<SequencedTaskChecker> sequenced_task_checker)
-      : thread_(&Run, this, "delete_sequenced_task_checker_on_thread"),
-        sequenced_task_checker_(std::move(sequenced_task_checker)) {
-    thread_.Start();
-  }
-
-  ~DeleteSequencedCheckerOnThread() {
-    EXPECT_TRUE(thread_has_run_event_.Wait(1000));
-    thread_.Stop();
-  }
-
- private:
-  static bool Run(void* obj) {
-    DeleteSequencedCheckerOnThread* instance =
-        static_cast<DeleteSequencedCheckerOnThread*>(obj);
-    instance->sequenced_task_checker_.reset();
-    instance->thread_has_run_event_.Set();
-    return false;
-  }
-
- private:
-  PlatformThread thread_;
-  Event thread_has_run_event_;
-  std::unique_ptr<SequencedTaskChecker> sequenced_task_checker_;
-
-  RTC_DISALLOW_COPY_AND_ASSIGN(DeleteSequencedCheckerOnThread);
-};
-
-void RunMethodOnDifferentThread(bool expect_true) {
-  std::unique_ptr<SequencedTaskChecker> sequenced_task_checker(
-      new SequencedTaskChecker());
-
-  CallCalledSequentiallyOnThread call_on_thread(expect_true,
-                                                sequenced_task_checker.get());
+  PlatformThread thread(&Object::Run, &object, "thread");
+  thread.Start();
+  EXPECT_TRUE(object.thread_has_run_event.Wait(1000));
+  thread.Stop();
 }
 
-void RunMethodOnDifferentTaskQueue(bool expect_true) {
-  std::unique_ptr<SequencedTaskChecker> sequenced_task_checker(
-      new SequencedTaskChecker());
-
-  static const char kQueueName[] = "MethodNotAllowedOnDifferentTq";
-  TaskQueue queue(kQueueName);
-  Event done_event;
-  queue.PostTask([&sequenced_task_checker, &done_event, expect_true] {
-    if (expect_true)
-      EXPECT_TRUE(sequenced_task_checker->CalledSequentially());
-    else
-      EXPECT_FALSE(sequenced_task_checker->CalledSequentially());
-    done_event.Set();
-  });
-  EXPECT_TRUE(done_event.Wait(1000));
-}
-
-void DetachThenCallFromDifferentTaskQueue(bool expect_true) {
-  std::unique_ptr<SequencedTaskChecker> sequenced_task_checker(
-      new SequencedTaskChecker());
-
-  sequenced_task_checker->Detach();
-
-  Event done_event;
-  TaskQueue queue1("DetachThenCallFromDifferentTaskQueueImpl1");
-  queue1.PostTask([&sequenced_task_checker, &done_event] {
-    EXPECT_TRUE(sequenced_task_checker->CalledSequentially());
-    done_event.Set();
-  });
-  EXPECT_TRUE(done_event.Wait(1000));
-
-  // CalledSequentially should return false in debug builds after moving to
-  // another task queue.
-  TaskQueue queue2("DetachThenCallFromDifferentTaskQueueImpl2");
-  queue2.PostTask([&sequenced_task_checker, &done_event, expect_true] {
-    if (expect_true)
-      EXPECT_TRUE(sequenced_task_checker->CalledSequentially());
-    else
-      EXPECT_FALSE(sequenced_task_checker->CalledSequentially());
-    done_event.Set();
-  });
-  EXPECT_TRUE(done_event.Wait(1000));
-}
 }  // namespace
 
 TEST(SequencedTaskCheckerTest, CallsAllowedOnSameThread) {
-  std::unique_ptr<SequencedTaskChecker> sequenced_task_checker(
-      new SequencedTaskChecker());
+  auto sequenced_task_checker = absl::make_unique<SequencedTaskChecker>();
 
   EXPECT_TRUE(sequenced_task_checker->CalledSequentially());
 
@@ -170,81 +74,113 @@ TEST(SequencedTaskCheckerTest, CallsAllowedOnSameThread) {
 }
 
 TEST(SequencedTaskCheckerTest, DestructorAllowedOnDifferentThread) {
-  std::unique_ptr<SequencedTaskChecker> sequenced_task_checker(
-      new SequencedTaskChecker());
+  auto sequenced_task_checker = absl::make_unique<SequencedTaskChecker>();
 
-  // Verify that the destructor doesn't assert when called on a different
-  // thread.
-  DeleteSequencedCheckerOnThread delete_on_thread(
-      std::move(sequenced_task_checker));
+  RunOnDifferentThread([&sequenced_task_checker] {
+    // Verify that the destructor doesn't assert when called on a different
+    // thread.
+    sequenced_task_checker.reset();
+  });
 }
 
 TEST(SequencedTaskCheckerTest, DetachFromThread) {
-  std::unique_ptr<SequencedTaskChecker> sequenced_task_checker(
-      new SequencedTaskChecker());
+  SequencedTaskChecker sequenced_task_checker;
 
-  sequenced_task_checker->Detach();
-  CallCalledSequentiallyOnThread call_on_thread(true,
-                                                sequenced_task_checker.get());
+  sequenced_task_checker.Detach();
+  RunOnDifferentThread([&sequenced_task_checker] {
+    EXPECT_TRUE(sequenced_task_checker.CalledSequentially());
+  });
 }
 
 TEST(SequencedTaskCheckerTest, DetachFromThreadAndUseOnTaskQueue) {
-  std::unique_ptr<SequencedTaskChecker> sequenced_task_checker(
-      new SequencedTaskChecker());
+  SequencedTaskChecker sequenced_task_checker;
 
-  sequenced_task_checker->Detach();
-  static const char kQueueName[] = "DetachFromThreadAndUseOnTaskQueue";
-  TaskQueue queue(kQueueName);
-  Event done_event;
-  queue.PostTask([&sequenced_task_checker, &done_event] {
-    EXPECT_TRUE(sequenced_task_checker->CalledSequentially());
-    done_event.Set();
+  sequenced_task_checker.Detach();
+  TaskQueueForTest queue;
+  queue.SendTask([&sequenced_task_checker] {
+    EXPECT_TRUE(sequenced_task_checker.CalledSequentially());
   });
-  EXPECT_TRUE(done_event.Wait(1000));
 }
 
 TEST(SequencedTaskCheckerTest, DetachFromTaskQueueAndUseOnThread) {
-  TaskQueue queue("DetachFromTaskQueueAndUseOnThread");
-  Event done_event;
-  queue.PostTask([&done_event] {
-    std::unique_ptr<SequencedTaskChecker> sequenced_task_checker(
-        new SequencedTaskChecker());
+  TaskQueueForTest queue;
+  queue.SendTask([] {
+    SequencedTaskChecker sequenced_task_checker;
+    sequenced_task_checker.Detach();
 
-    sequenced_task_checker->Detach();
-    CallCalledSequentiallyOnThread call_on_thread(true,
-                                                  sequenced_task_checker.get());
-    done_event.Set();
+    RunOnDifferentThread([&sequenced_task_checker] {
+      EXPECT_TRUE(sequenced_task_checker.CalledSequentially());
+    });
   });
-  EXPECT_TRUE(done_event.Wait(1000));
 }
 
 #if RTC_DCHECK_IS_ON
 TEST(SequencedTaskCheckerTest, MethodNotAllowedOnDifferentThreadInDebug) {
-  RunMethodOnDifferentThread(false);
+  SequencedTaskChecker sequenced_task_checker;
+  RunOnDifferentThread([&sequenced_task_checker] {
+    EXPECT_FALSE(sequenced_task_checker.CalledSequentially());
+  });
 }
 #else
 TEST(SequencedTaskCheckerTest, MethodAllowedOnDifferentThreadInRelease) {
-  RunMethodOnDifferentThread(true);
+  SequencedTaskChecker sequenced_task_checker;
+  RunOnDifferentThread([&sequenced_task_checker] {
+    EXPECT_TRUE(sequenced_task_checker.CalledSequentially());
+  });
 }
 #endif
 
 #if RTC_DCHECK_IS_ON
 TEST(SequencedTaskCheckerTest, MethodNotAllowedOnDifferentTaskQueueInDebug) {
-  RunMethodOnDifferentTaskQueue(false);
+  SequencedTaskChecker sequenced_task_checker;
+
+  TaskQueueForTest queue;
+  queue.SendTask([&sequenced_task_checker] {
+    EXPECT_FALSE(sequenced_task_checker.CalledSequentially());
+  });
 }
 #else
 TEST(SequencedTaskCheckerTest, MethodAllowedOnDifferentTaskQueueInRelease) {
-  RunMethodOnDifferentTaskQueue(true);
+  SequencedTaskChecker sequenced_task_checker;
+
+  TaskQueueForTest queue;
+  queue.SendTask([&sequenced_task_checker] {
+    EXPECT_TRUE(sequenced_task_checker.CalledSequentially());
+  });
 }
 #endif
 
 #if RTC_DCHECK_IS_ON
 TEST(SequencedTaskCheckerTest, DetachFromTaskQueueInDebug) {
-  DetachThenCallFromDifferentTaskQueue(false);
+  SequencedTaskChecker sequenced_task_checker;
+  sequenced_task_checker.Detach();
+
+  TaskQueueForTest queue1;
+  queue1.SendTask([&sequenced_task_checker] {
+    EXPECT_TRUE(sequenced_task_checker.CalledSequentially());
+  });
+
+  // CalledSequentially should return false in debug builds after moving to
+  // another task queue.
+  TaskQueueForTest queue2;
+  queue2.SendTask([&sequenced_task_checker] {
+    EXPECT_FALSE(sequenced_task_checker.CalledSequentially());
+  });
 }
 #else
 TEST(SequencedTaskCheckerTest, DetachFromTaskQueueInRelease) {
-  DetachThenCallFromDifferentTaskQueue(true);
+  SequencedTaskChecker sequenced_task_checker;
+  sequenced_task_checker.Detach();
+
+  TaskQueueForTest queue1;
+  queue1.SendTask([&sequenced_task_checker] {
+    EXPECT_TRUE(sequenced_task_checker.CalledSequentially());
+  });
+
+  TaskQueueForTest queue2;
+  queue2.SendTask([&sequenced_task_checker] {
+    EXPECT_TRUE(sequenced_task_checker->CalledSequentially());
+  });
 }
 #endif
 
@@ -271,14 +207,8 @@ TEST(SequencedTaskCheckerTest, TestAnnotations) {
 
 void TestAnnotationsOnWrongQueue() {
   TestAnnotations annotations;
-  static const char kQueueName[] = "TestAnnotationsOnWrongQueueDebug";
-  TaskQueue queue(kQueueName);
-  Event done_event;
-  queue.PostTask([&annotations, &done_event] {
-    annotations.ModifyTestVar();
-    done_event.Set();
-  });
-  EXPECT_TRUE(done_event.Wait(1000));
+  TaskQueueForTest queue;
+  queue.SendTask([&annotations] { annotations.ModifyTestVar(); });
 }
 
 #if RTC_DCHECK_IS_ON
