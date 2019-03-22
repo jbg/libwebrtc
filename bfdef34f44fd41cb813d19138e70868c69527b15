@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "e12ed04f_30e46adb",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 6810
+      },
+      "writtenOn": "2019-03-22T18:20:53Z",
+      "side": 1,
+      "message": "In my upcoming patch, I fixed wrapping issues without needing the Subtract function. The picture id here is a sequence number uint16 not limited to 15 bits like VP8\u0027s picture id. So, the Subtract function wouldn\u0027t change anything here.",
+      "parentUuid": "2f0e70a2_2bdcd22b",
+      "range": {
+        "startLine": 718,
+        "startChar": 2,
+        "endLine": 721,
+        "endChar": 51
+      },
+      "revId": "bfdef34f44fd41cb813d19138e70868c69527b15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9cf74fb6_0f8b6951",
         "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
         "patchSetId": 6
