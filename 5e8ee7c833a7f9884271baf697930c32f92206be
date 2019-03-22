@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "839ddea8_84c04a94",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-03-22T11:24:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we use str.assign() here?",
+      "revId": "5e8ee7c833a7f9884271baf697930c32f92206be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaaaf42c_7cf29b7c",
+        "filename": "modules/rtp_rtcp/source/rtp_utility.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-03-22T11:24:58Z",
+      "side": 1,
+      "message": "What about moving this as a RTPHeaderExtension setter?\nIf the setter is added before hand in a preliminary CL, it would help smoothing transition for downstream projects, which may use stream_id.Set().",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 503,
+        "endChar": 11
+      },
+      "revId": "5e8ee7c833a7f9884271baf697930c32f92206be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
