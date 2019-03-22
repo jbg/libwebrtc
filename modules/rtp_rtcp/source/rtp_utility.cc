@@ -12,6 +12,7 @@
 
 #include <assert.h>
 #include <stddef.h>
+#include <string>
 
 #include "api/array_view.h"
 #include "api/video/video_content_type.h"
@@ -494,16 +495,31 @@ void RtpHeaderParser::ParseOneByteExtensionHeader(
           break;
         }
         case kRtpExtensionRtpStreamId: {
-          header->extension.stream_id.Set(rtc::MakeArrayView(ptr, len + 1));
+          absl::string_view name(reinterpret_cast<const char*>(ptr), len + 1);
+          if (IsLegalRsidName(name)) {
+            header->extension.stream_id = static_cast<std::string>(name);
+          } else {
+            RTC_LOG(LS_WARNING) << "Incorrect RtpStreamId";
+          }
           break;
         }
         case kRtpExtensionRepairedRtpStreamId: {
-          header->extension.repaired_stream_id.Set(
-              rtc::MakeArrayView(ptr, len + 1));
+          absl::string_view name(reinterpret_cast<const char*>(ptr), len + 1);
+          if (IsLegalRsidName(name)) {
+            header->extension.repaired_stream_id =
+                static_cast<std::string>(name);
+          } else {
+            RTC_LOG(LS_WARNING) << "Incorrect RepairedRtpStreamId";
+          }
           break;
         }
         case kRtpExtensionMid: {
-          header->extension.mid.Set(rtc::MakeArrayView(ptr, len + 1));
+          absl::string_view name(reinterpret_cast<const char*>(ptr), len + 1);
+          if (IsLegalMidName(name)) {
+            header->extension.mid = static_cast<std::string>(name);
+          } else {
+            RTC_LOG(LS_WARNING) << "Incorrect Mid";
+          }
           break;
         }
         case kRtpExtensionGenericFrameDescriptor00:
