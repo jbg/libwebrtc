@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f7c3987_f1dde058",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-03-23T14:13:27Z",
+      "side": 1,
+      "message": "oh, didn\u0027t know we were actually using the WRL types :-/\n\nHere, I think it would be fine to not call ErrorMessage() and just print the HRESULT value (i.e. no #ifdef UNICODE needed)",
+      "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b712bd8a_83d83441",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-03-23T14:13:27Z",
+      "side": 1,
+      "message": "these should really be\n\nstatic wchar_t kFoo[] \u003d \"...\";",
+      "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac80f8fd_c636fe50",
+        "filename": "rtc_base/win32_socket_server.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-03-23T14:13:27Z",
+      "side": 1,
+      "message": "wchar_t",
+      "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9695cfd8_afff086e",
+        "filename": "rtc_base/win32_socket_server.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-03-23T14:13:27Z",
+      "side": 1,
+      "message": "might as well change to wchar_t",
+      "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
