@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d545f5d1_c8e9e236",
+        "filename": "rtc_base/sequenced_task_checker_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-25T13:47:17Z",
+      "side": 1,
+      "message": "You can use FunctionView---if for no other reason than to signal that the call happens synchronously.",
+      "range": {
+        "startLine": 46,
+        "startChar": 26,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "977741086f58a937e820a762e2ca70696aab9c3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceb8265b_b0012f7a",
+        "filename": "rtc_base/sequenced_task_checker_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-25T13:47:17Z",
+      "side": 1,
+      "message": "This one doesn\u0027t need to be a unique_ptr, does it?",
+      "revId": "977741086f58a937e820a762e2ca70696aab9c3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0b9f429_9b6ecc77",
+        "filename": "rtc_base/sequenced_task_checker_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-25T13:47:17Z",
+      "side": 1,
+      "message": "When you run a lambda synchronously, just use [\u0026]. It\u0027s easier to read, partly because it signals that the callback must be synchronous, partly because it means that the lambda doesn\u0027t have to care what it captures.\n\n(Many more occurrences below.)",
+      "range": {
+        "startLine": 78,
+        "startChar": 23,
+        "endLine": 78,
+        "endChar": 48
+      },
+      "revId": "977741086f58a937e820a762e2ca70696aab9c3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "305df242_146a5422",
+        "filename": "rtc_base/sequenced_task_checker_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-25T13:47:17Z",
+      "side": 1,
+      "message": "Collapse these two to one with\n\n  EXPECT_EQ(!RTC_DCHECK_IS_ON,\n            sequenced_task_checker.CalledSequentially());\n\n?\n\n(More similar opportunities below.)",
+      "revId": "977741086f58a937e820a762e2ca70696aab9c3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
