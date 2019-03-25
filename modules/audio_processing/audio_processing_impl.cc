@@ -1305,8 +1305,10 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
           stream_delay_ms());
     }
 
+    // printf("A:%f\n", capture_buffer->split_bands_const_f(0)[0][100]);
     private_submodules_->echo_controller->ProcessCapture(
         capture_buffer, capture_.echo_path_gain_change);
+    // printf("B:%f\n", capture_buffer->split_bands_const_f(0)[0][100]);
   } else {
     RETURN_ON_ERR(private_submodules_->echo_cancellation->ProcessCaptureAudio(
         capture_buffer, stream_delay_ms()));
