@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffbaa819_81bca172",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-25T19:57:59Z",
+      "side": 1,
+      "message": "In the last few months we are trying to define a clear set of API targets, this is why some of them are not public.\n\nThe overall goal is to expose only what it is strictly needed to use WebRTC and keep everything else private. Potentially, in the future, only api/ targets will be public.\n\nIn order to achieve that, we cannot lightheartedly grant public visibility to this utility code, because parsing JSON is not something WebRTC wants to officially maintain as part of the API.\n\nIf you really want to use this code, do you think it is possible to copy it inside your library (by also moving it to your library\u0027s namespace)? It should be self contained.",
+      "range": {
+        "startLine": 628,
+        "startChar": 2,
+        "endLine": 628,
+        "endChar": 22
+      },
+      "revId": "e5bc178b041fdbb1bd39d2d35ce989005a0d5252",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
