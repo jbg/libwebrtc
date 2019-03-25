@@ -22,6 +22,30 @@
       "revId": "e5bc178b041fdbb1bd39d2d35ce989005a0d5252",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c739e20_c603c79a",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 9002
+      },
+      "writtenOn": "2019-03-25T20:37:04Z",
+      "side": 1,
+      "message": "Thank you so much for the fast response! I understand the maintenance implications of this, and the desire to keep things more private. That being said, there are already 13 public targets in this BUILD.gn, so I reasoned that one more ought not make a huge difference:\n\nrtc_source_set(\"protobuf_utils\") {\nrtc_source_set(\"rtc_base_approved\") {\nrtc_source_set(\"refcount\") {\nrtc_source_set(\"logging\") {\nrtc_source_set(\"timeutils\") {\nrtc_source_set(\"rtc_task_queue\") {\nrtc_source_set(\"async_resolver_interface\") {\nrtc_source_set(\"ip_address\") {\nrtc_source_set(\"socket_address\") {\nrtc_source_set(\"threading\") {\nrtc_static_library(\"rtc_base\") {\nrtc_source_set(\"gtest_prod\") {\nrtc_source_set(\"rtc_task_queue_unittests\") {\n\nI will look into your suggestion of keeping a private copy of the JSON source in my project.",
+      "parentUuid": "ffbaa819_81bca172",
+      "range": {
+        "startLine": 628,
+        "startChar": 2,
+        "endLine": 628,
+        "endChar": 22
+      },
+      "revId": "e5bc178b041fdbb1bd39d2d35ce989005a0d5252",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
