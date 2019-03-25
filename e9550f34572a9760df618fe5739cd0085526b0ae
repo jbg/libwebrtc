@@ -285,6 +285,30 @@
       "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1613c9f8_3db896a6",
+        "filename": "common_audio/smoothing_filter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-25T08:31:31Z",
+      "side": 1,
+      "message": "Thanks Yves, I didn\u0027t notice the check at line 79.",
+      "parentUuid": "c86edaf3_c0b0e7ac",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 59
+      },
+      "revId": "e9550f34572a9760df618fe5739cd0085526b0ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
