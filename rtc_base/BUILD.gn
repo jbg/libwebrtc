@@ -625,6 +625,7 @@ rtc_static_library("rtc_numerics") {
 }
 
 rtc_source_set("rtc_json") {
+  visibility = [ "*" ]
   defines = []
   sources = [
     "strings/json.cc",
