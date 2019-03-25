@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce5c70c7_c517edd2",
+        "filename": "modules/audio_device/win/core_audio_utility_win.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-25T08:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f7c3987_f1dde058",
+      "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b712bd8a_83d83441",
         "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "333544d7_7029318f",
+        "filename": "modules/desktop_capture/win/screen_capturer_win_magnifier.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-25T08:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b712bd8a_83d83441",
+      "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0db54618_b061c9ca",
+        "filename": "rtc_base/win32_socket_server.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-25T08:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac80f8fd_c636fe50",
+      "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9695cfd8_afff086e",
         "filename": "rtc_base/win32_socket_server.h",
         "patchSetId": 3
@@ -67,6 +121,24 @@
       "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "953e36f3_b88f7ff5",
+        "filename": "rtc_base/win32_socket_server.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-25T08:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9695cfd8_afff086e",
+      "revId": "9c33ade81836d20e71762bf146cb1ba38bda66b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
