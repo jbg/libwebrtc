@@ -22,6 +22,30 @@
       "revId": "0f52ece53e22fc85f38e0bc9bf126edf9f283440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4088e8fd_7961a192",
+        "filename": "modules/rtp_rtcp/source/rtp_header_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-03-26T09:44:54Z",
+      "side": 1,
+      "message": "I would write \u0027{}\u0027 [to stress it is same type]\nBut I do not have strong preference.\nspecially here where type of the *header is just 2 lines above.",
+      "parentUuid": "d1360cf1_42fdcc05",
+      "range": {
+        "startLine": 67,
+        "startChar": 10,
+        "endLine": 67,
+        "endChar": 23
+      },
+      "revId": "0f52ece53e22fc85f38e0bc9bf126edf9f283440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
