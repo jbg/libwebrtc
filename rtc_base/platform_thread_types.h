@@ -51,6 +51,8 @@ PlatformThreadId CurrentThreadId();
 // pthread_self().
 PlatformThreadRef CurrentThreadRef();
 
+constexpr PlatformThreadRef kNullThreadRef = 0;
+
 // Compares two thread identifiers for equality.
 bool IsThreadRefEqual(const PlatformThreadRef& a, const PlatformThreadRef& b);
 
