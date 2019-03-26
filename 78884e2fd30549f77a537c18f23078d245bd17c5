@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "afc1e873_255b0f6f",
+        "filename": "rtc_base/platform_thread_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-26T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3d25e91_d0e1d433",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 47
+      },
+      "revId": "78884e2fd30549f77a537c18f23078d245bd17c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08d91e31_56a70b1c",
         "filename": "rtc_base/synchronization/sequence_checker.cc",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0b6ac2d9_f242256e",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-26T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08d91e31_56a70b1c",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 11
+      },
+      "revId": "78884e2fd30549f77a537c18f23078d245bd17c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5fa122c_b660e7d1",
         "filename": "rtc_base/synchronization/sequence_checker.h",
         "patchSetId": 9
@@ -68,6 +116,30 @@
       "revId": "78884e2fd30549f77a537c18f23078d245bd17c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c3acb95_d444cb38",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-26T16:17:21Z",
+      "side": 1,
+      "message": "I think adding extra documentation is out of scope for this CL, and I\u0027m not sure I\u0027m the one who knows best how these things are implemented. Maybe good as a followup?",
+      "parentUuid": "c5fa122c_b660e7d1",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 68
+      },
+      "revId": "78884e2fd30549f77a537c18f23078d245bd17c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
