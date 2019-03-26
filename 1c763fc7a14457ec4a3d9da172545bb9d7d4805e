@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56075935_bf6b95af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "comma here",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29cc4f8b_a11a4b38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "the two latter",
+      "range": {
+        "startLine": 10,
+        "startChar": 38,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f533a572_df060fd7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "\"for backwards compatibility\"?",
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a1eb2c6_eb4f9b8d",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "Optional: Remove this symbol and its docs, and just use RTC_DCHECK_IS_ON directly. IMO it hurts more than it helps.",
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eecc268_79f6a4ea",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "Replace this comment with RTC_GUARDED_BY on the variables.",
+      "range": {
+        "startLine": 44,
+        "startChar": 5,
+        "endLine": 44,
+        "endChar": 32
+      },
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c2f0bb9_d1b71c05",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "Please use RTC_DCHECK_RUN_ON in the example; people may copy\u0026paste this code.",
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f4a4daf_6314a95e",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "sequence (fix needed everywhere this name is used)",
+      "range": {
+        "startLine": 133,
+        "startChar": 27,
+        "endLine": 133,
+        "endChar": 33
+      },
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "221d7e9c_352b024f",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "Name all three classes FooExample instead of ExampleFoo?",
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9845b1c5_222718b4",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T13:53:45Z",
+      "side": 1,
+      "message": "Move this one to sequenced_task_checker.h, to be removed later along with the rest of that file?",
+      "revId": "1c763fc7a14457ec4a3d9da172545bb9d7d4805e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
