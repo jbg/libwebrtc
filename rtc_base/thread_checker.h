@@ -32,9 +32,15 @@ namespace rtc {
 // right version for your build configuration.
 class ThreadCheckerDoNothing {
  public:
+  bool CalledSequentially() const { return true; }
   bool CalledOnValidThread() const { return true; }
 
   void DetachFromThread() {}
+  void Detach() {}
+
+ private:
+  friend class internal::AnnounceOnThread;
+  bool IsCurrent() const { return true; }
 };
 
 // ThreadChecker is a helper class used to help verify that some methods of a

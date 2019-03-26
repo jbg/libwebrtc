@@ -17,6 +17,12 @@
 #include "rtc_base/platform_thread_types.h"
 
 namespace rtc {
+namespace internal {
+// Forward declaration of the internal implementation of RTC_GUARDED_BY().
+// SequencedTaskChecker grants this class access to call its IsCurrent() method.
+// See thread_checker.h for more details.
+class AnnounceOnThread;
+}  // namespace internal
 
 // Real implementation of ThreadChecker, for use in debug mode, or
 // for temporary use in release mode (e.g. to RTC_CHECK on a threading issue
@@ -29,18 +35,25 @@ class ThreadCheckerImpl {
   ThreadCheckerImpl();
   ~ThreadCheckerImpl();
 
-  bool CalledOnValidThread() const;
+  bool CalledSequentially() const;
+  // TODO(srte): Remove this alias.
+  bool CalledOnValidThread() const { return CalledSequentially(); }
 
-  // Changes the thread that is checked for in CalledOnValidThread.  This may
-  // be useful when an object may be created on one thread and then used
-  // exclusively on another thread.
-  void DetachFromThread();
+  // Changes the task queue or thread that is checked for in IsCurrent and
+  // CalledOnValidThread.  This may be useful when an object may be created on
+  // one task queue / thread and then used exclusively on another thread.
+  void Detach();
+  // TODO(srte): Remove this alias.
+  void DetachFromThread() { Detach(); }
 
  private:
+  friend class internal::AnnounceOnThread;
+  bool IsCurrent() const { return CalledSequentially(); }
   CriticalSection lock_;
   // This is mutable so that CalledOnValidThread can set it.
   // It's guarded by |lock_|.
   mutable PlatformThreadRef valid_thread_;
+  mutable const void* valid_queue_;
 };
 
 }  // namespace rtc

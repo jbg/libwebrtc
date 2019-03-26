@@ -11,23 +11,34 @@
 // Borrowed from Chromium's src/base/threading/thread_checker_impl.cc.
 
 #include "rtc_base/thread_checker_impl.h"
+#include "api/task_queue/task_queue_base.h"
 
 namespace rtc {
 
-ThreadCheckerImpl::ThreadCheckerImpl() : valid_thread_(CurrentThreadRef()) {}
+ThreadCheckerImpl::ThreadCheckerImpl()
+    : valid_thread_(CurrentThreadRef()),
+      valid_queue_(webrtc::TaskQueueBase::Current()) {}
 
 ThreadCheckerImpl::~ThreadCheckerImpl() {}
 
-bool ThreadCheckerImpl::CalledOnValidThread() const {
+bool ThreadCheckerImpl::CalledSequentially() const {
+  const void* current_queue = webrtc::TaskQueueBase::Current();
   const PlatformThreadRef current_thread = CurrentThreadRef();
   CritScope scoped_lock(&lock_);
-  if (!valid_thread_)  // Set if previously detached.
+  if (valid_queue_) {
+    return valid_queue_ == current_queue;
+  } else if (valid_thread_) {
+    return !current_queue && IsThreadRefEqual(valid_thread_, current_thread);
+  } else {  // Previously detached.
+    valid_queue_ = current_queue;
     valid_thread_ = current_thread;
-  return IsThreadRefEqual(valid_thread_, current_thread);
+    return true;
+  }
 }
 
-void ThreadCheckerImpl::DetachFromThread() {
+void ThreadCheckerImpl::Detach() {
   CritScope scoped_lock(&lock_);
+  valid_queue_ = nullptr;
   valid_thread_ = 0;
 }
 
