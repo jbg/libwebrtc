@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "ae83b017_458e4241",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-26T15:46:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c00e5ee_2fe957f3",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "273cfc17c92f56d91debefabd4a3045570b5763a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01a75da3_b2cca884",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-26T15:46:28Z",
+      "side": 1,
+      "message": "Considering the fact that we use as two different meaning, I think having it as a void* is good documentation saying \"the meaning of this varies, be careful and don\u0027t assume stuff\". A typedef would hide some of the rough edges. So I\u0027d prefer to keep it like this. (Ideally, we\u0027d have something type safer than a void*, but for now, I\u0027m focusing on maintaining compatibility)",
+      "parentUuid": "9c30539a_3c83a7bd",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 11
+      },
+      "revId": "273cfc17c92f56d91debefabd4a3045570b5763a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ca3d404_38b60c60",
         "filename": "rtc_base/synchronization/sequence_checker.cc",
         "patchSetId": 8
@@ -68,6 +116,30 @@
       "revId": "273cfc17c92f56d91debefabd4a3045570b5763a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6be505c5_af96b25e",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-26T15:46:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ca3d404_38b60c60",
+      "range": {
+        "startLine": 63,
+        "startChar": 18,
+        "endLine": 63,
+        "endChar": 20
+      },
+      "revId": "273cfc17c92f56d91debefabd4a3045570b5763a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
