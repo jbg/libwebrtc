@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d12a5e3d_a4dd7504",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-26T14:02:50Z",
+      "side": 1,
+      "message": "I think this class deserves a comment.",
+      "range": {
+        "startLine": 85,
+        "startChar": 26,
+        "endLine": 85,
+        "endChar": 46
+      },
+      "revId": "3c8b09b74f834421e6ca88b9bffc102097471249",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
