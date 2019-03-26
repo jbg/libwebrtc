@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3d25e91_d0e1d433",
+        "filename": "rtc_base/platform_thread_types.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-26T16:02:46Z",
+      "side": 1,
+      "message": "I don\u0027t think this is portable. See https://stackoverflow.com/questions/6276939/is-there-an-invalid-pthread-t-id.\n\nYou\u0027d need a separate bool, or maybe an absl::optional\u003cPlatformThreadRef\u003e, to distinguish between an set and unset thread id.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 47
+      },
+      "revId": "78884e2fd30549f77a537c18f23078d245bd17c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08d91e31_56a70b1c",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-26T16:02:46Z",
+      "side": 1,
+      "message": "Is the attached_ flag good enough, to not need kNullThreadRef (and leave the valid_thread_ member uninitialized until attached)?",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 11
+      },
+      "revId": "78884e2fd30549f77a537c18f23078d245bd17c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5fa122c_b660e7d1",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-26T16:02:46Z",
+      "side": 1,
+      "message": "This isn\u0027t much of an explanation...\n\nThe thing is, RTC_DCHECK_RUN_ON looks like a simple runtime check, but there\u0027s additional magic at compile time, implemented by hooks on this class. Making, e.g,\n\nfoo() {\n  RTC_DCHECK_RUN_ON(...);\n  ...\n}\n \nvery different from\n\nfoo() {\n  { RTC_CHECK_RUN_ON(...); }\n  ...\n}\n\nThat magic is useful, but very unexpected for a macro that looks like a function call. I think it deserves documentation either here, where it\u0027s implemented, or close to RTC_DCHECK_RUN_ON.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 68
+      },
+      "revId": "78884e2fd30549f77a537c18f23078d245bd17c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
