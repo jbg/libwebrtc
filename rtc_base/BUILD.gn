@@ -148,10 +148,6 @@ rtc_source_set("rtc_base_approved") {
     ]
   }
 
-  if (is_nacl) {
-    deps += [ "//native_client_sdk/src/libraries/nacl_io" ]
-  }
-
   if (is_android) {
     libs = [ "log" ]
   }
@@ -1017,7 +1013,6 @@ rtc_static_library("rtc_base") {
   }
 
   if (is_nacl) {
-    deps += [ "//native_client_sdk/src/libraries/nacl_io" ]
     defines += [ "timezone=_timezone" ]
     sources -= [ "ifaddrs_converter.cc" ]
   }

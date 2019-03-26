@@ -270,6 +270,15 @@ if (is_mac || is_ios) {
   rtc_common_configs += [ "//build/config/compiler:enable_arc" ]
 }
 
+if (is_nacl) {
+  # This is needed in order to lookup some special headers that live in a
+  # special location when targeting NaCl, for example <arpa/inet.h>.
+  # These headers live at:
+  #   src/native_client_sdk/src/libraries/third_party/newlib-extras
+  rtc_common_configs +=
+      [ "//native_client_sdk/src/libraries/nacl_io:nacl_io_include_dirs" ]
+}
+
 # Global public configuration that should be applied to all WebRTC targets. You
 # normally shouldn't need to include this in your target as it's automatically
 # included when using the rtc_* templates. It set the defines, include paths and
