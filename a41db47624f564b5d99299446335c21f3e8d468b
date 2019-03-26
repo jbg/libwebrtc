@@ -25,6 +25,46 @@
     },
     {
       "key": {
+        "uuid": "e0667b08_4d8f010f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T10:45:34Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "a41db47624f564b5d99299446335c21f3e8d468b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b41d04e8_1336dd42",
+        "filename": "rtc_base/thread_checker_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T10:45:34Z",
+      "side": 1,
+      "message": "Make this one const, for symmetry with line 26?",
+      "revId": "a41db47624f564b5d99299446335c21f3e8d468b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7cadad8f_357a3886",
         "filename": "rtc_base/thread_checker_impl.h",
         "patchSetId": 1
@@ -36,6 +76,29 @@
       "writtenOn": "2019-03-26T10:34:30Z",
       "side": 1,
       "message": "sub-namespace names should still aim the be unique. Maybe webrtc_internal_thread_checker.",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "a41db47624f564b5d99299446335c21f3e8d468b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26fb5db1_97ef61f4",
+        "filename": "rtc_base/thread_checker_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T10:45:34Z",
+      "side": 1,
+      "message": "Pick a uniquer name---e.g. \"webrtc_thread_checker_impl\".",
       "range": {
         "startLine": 20,
         "startChar": 10,
