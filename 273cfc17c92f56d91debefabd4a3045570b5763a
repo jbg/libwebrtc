@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "184c8bad_4f16a24f",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-26T16:06:07Z",
+      "side": 1,
+      "message": "Not sure if our coding styles say anything on this subject, but I agree that void* is an appropriate type when the pointer is used only for comparing to other pointers, and shouldn\u0027t ever be dereferenced.",
+      "parentUuid": "01a75da3_b2cca884",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 11
+      },
+      "revId": "273cfc17c92f56d91debefabd4a3045570b5763a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ca3d404_38b60c60",
         "filename": "rtc_base/synchronization/sequence_checker.cc",
         "patchSetId": 8
