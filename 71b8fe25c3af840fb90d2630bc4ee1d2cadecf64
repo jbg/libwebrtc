@@ -39,6 +39,24 @@
       "revId": "71b8fe25c3af840fb90d2630bc4ee1d2cadecf64",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fee3aacc_dac1f823",
+        "filename": "rtc_base/fake_clock.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-26T16:26:11Z",
+      "side": 1,
+      "message": "If you manually declare a copy constructor, the compiler won\u0027t make an implicit move constructor for you. https://en.cppreference.com/w/cpp/language/move_constructor",
+      "parentUuid": "cb87a117_3f0b5d93",
+      "revId": "71b8fe25c3af840fb90d2630bc4ee1d2cadecf64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
