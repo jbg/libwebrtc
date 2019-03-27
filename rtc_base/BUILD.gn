@@ -109,6 +109,7 @@ rtc_source_set("rtc_base_approved") {
     "flags.h",
     "function_view.h",
     "ignore_wundef.h",
+    "internal/byte_order.h",
     "location.cc",
     "location.h",
     "message_buffer_reader.h",
