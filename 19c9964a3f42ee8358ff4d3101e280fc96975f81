@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25a109c6_c186c859",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-27T14:41:12Z",
+      "side": 1,
+      "message": "Generally, we don\u0027t expect these to be self documenting, since they generally are defined in a single line string it might be more pleasant with something short as the tag, and rely on the variable name for documentation. Code searching for the key will generally quickly allow you to see the tag mapping anyway.\n\nImagine the string: \"WebRTC-Bwe-ProbingConfiguration/p1:2,step_size:4,further_probe_threshold:0.92,alr_scale:3.14,first_allocation_scale:3,second_allocation_scale:2,allocation_further_probing:true\"",
+      "range": {
+        "startLine": 102,
+        "startChar": 40,
+        "endLine": 102,
+        "endChar": 66
+      },
+      "revId": "19c9964a3f42ee8358ff4d3101e280fc96975f81",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53beac56_c40187c8",
+        "filename": "modules/congestion_controller/goog_cc/probe_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-27T14:41:12Z",
+      "side": 1,
+      "message": "Optionally you can use FieldTrialFlag, it\u0027s a default-false filed that\u0027s set to true when set. Generally appropriate for new features that are expected to be always-added or removed. Less appropriate for bools that will become default-true in the future but disabled in some uses.",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "19c9964a3f42ee8358ff4d3101e280fc96975f81",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
