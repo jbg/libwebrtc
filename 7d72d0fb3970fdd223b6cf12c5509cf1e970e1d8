@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b5dd322_447a154f",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-27T13:14:56Z",
+      "side": 0,
+      "message": "Not sure why an explicit ToQueuedTask is needed; we usually have implicit conversion from lambda, but compiler didn\u0027t like that here.",
+      "range": {
+        "startLine": 297,
+        "startChar": 31,
+        "endLine": 297,
+        "endChar": 43
+      },
+      "revId": "7d72d0fb3970fdd223b6cf12c5509cf1e970e1d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

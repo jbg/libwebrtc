@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d5e663d_b40e9e42",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-27T13:14:56Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me what\u0027s the purpose if this task queue. We have an\n\n    encoder_queue_ \u003d TaskQueueBase::Current();\n\n(which I don\u0027t think is quite kosher, one shouldn\u0027t just start using someone elses TaskQueue). If I*m not missing any layer in between, this will be the encoder task queue owned by VideoStreamEncoder.\n\nI think the main effect will be that callback_-\u003eOnEncodedImage is called on the encoder task queue.\n\nQuestions:\n\n1. Why do we do that? I thought it was normal for encoders to have internal threads, and call OnEncodedImage from any thread. VideoStreamEncoder posts some work back to the encoder task queue, see VideoStreamEncoder::RunPostEncode, called from VideoStreamEncoder::OnEncodedImage.\n\n2. Should any of the members of VideoEncoderWrapper be accessed on the task queue only? In particular, the various Parse methods (ParseQp, ParseCodecSpecificInfo, ParseFragmentationHeader) access the |codec_settings_| member, which is assigned in InitEncode. Thread annotations would help.",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
