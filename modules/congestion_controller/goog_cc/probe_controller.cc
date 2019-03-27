@@ -99,11 +99,16 @@ ProbeControllerConfig::ProbeControllerConfig(
       further_exponential_probe_scale_("step_size", 2),
       further_probe_threshold("further_probe_threshold", 0.7),
       alr_probing_interval_("alr_interval", TimeDelta::seconds(5)),
-      alr_probe_scale_("alr_scale", 2) {
+      alr_probe_scale_("alr_scale", 2),
+      first_allocation_probe_scale_("first_allocation_scale", 1),
+      second_allocation_probe_scale_("second_allocation_scale", 2),
+      allocation_allow_further_probing_("allocation_further_probing", false) {
   ParseFieldTrial(
       {&first_exponential_probe_scale_, &second_exponential_probe_scale_,
        &further_exponential_probe_scale_, &further_probe_threshold,
-       &alr_probing_interval_, &alr_probe_scale_},
+       &alr_probing_interval_, &alr_probe_scale_,
+       &first_allocation_probe_scale_, &second_allocation_probe_scale_,
+       &allocation_allow_further_probing_},
       key_value_config->Lookup(kConfigurableProbingFieldTrialName));
 }
 
@@ -186,11 +191,19 @@ std::vector<ProbeClusterConfig> ProbeController::OnMaxTotalAllocatedBitrate(
       (max_bitrate_bps_ <= 0 || estimated_bitrate_bps_ < max_bitrate_bps_) &&
       estimated_bitrate_bps_ < max_total_allocated_bitrate) {
     max_total_allocated_bitrate_ = max_total_allocated_bitrate;
-    // Also probe at 2x the max bitrate, to account for the transmission max
-    // bitrate multiplier functionality of the BitrateAllocator.
-    return InitiateProbing(
-        at_time_ms,
-        {max_total_allocated_bitrate, 2 * max_total_allocated_bitrate}, false);
+
+    if (!config_.first_allocation_probe_scale_)
+      return std::vector<ProbeClusterConfig>();
+
+    std::vector<int64_t> probes = {
+        static_cast<int64_t>(config_.first_allocation_probe_scale_.Value() *
+                             max_total_allocated_bitrate)};
+    if (config_.second_allocation_probe_scale_) {
+      probes.push_back(config_.second_allocation_probe_scale_.Value() *
+                       max_total_allocated_bitrate);
+    }
+    return InitiateProbing(at_time_ms, probes,
+                           config_.allocation_allow_further_probing_);
   }
   max_total_allocated_bitrate_ = max_total_allocated_bitrate;
   return std::vector<ProbeClusterConfig>();
