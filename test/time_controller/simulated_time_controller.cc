@@ -53,12 +53,14 @@ class SimulatedSequenceRunner : public ProcessThread, public TaskQueueBase {
   void WakeUp(Module* module) override;
   void RegisterModule(Module* module, const rtc::Location& from) override;
   void DeRegisterModule(Module* module) override;
+  using CurrentTaskQueueSetter = TaskQueueBase::CurrentTaskQueueSetter;
 
  private:
   Timestamp GetCurrentTime() const { return handler_->CurrentTime(); }
   void RunReadyTasks(Timestamp at_time) RTC_LOCKS_EXCLUDED(lock_);
   void RunReadyModules(Timestamp at_time) RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
   void UpdateNextRunTime() RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
+  Timestamp GetNextTime(Module* module, Timestamp at_time);
 
   SimulatedTimeControllerImpl* const handler_;
   const std::string name_;
@@ -136,9 +138,7 @@ void SimulatedSequenceRunner::RunReadyModules(Timestamp at_time) {
     CurrentTaskQueueSetter set_current(this);
     for (auto* module : ready_modules_) {
       module->Process();
-      Timestamp next_run_time =
-          at_time + TimeDelta::ms(module->TimeUntilNextProcess());
-      delayed_modules_.emplace(next_run_time, module);
+      delayed_modules_.emplace(GetNextTime(module, at_time), module);
     }
   }
   ready_modules_.clear();
@@ -186,8 +186,7 @@ void SimulatedSequenceRunner::Start() {
   Timestamp at_time = GetCurrentTime();
   rtc::CritScope lock(&lock_);
   for (auto& module : starting)
-    delayed_modules_.insert(
-        {at_time + TimeDelta::ms(module->TimeUntilNextProcess()), module});
+    delayed_modules_.insert({GetNextTime(module, at_time), module});
   UpdateNextRunTime();
 }
 
@@ -224,8 +223,7 @@ void SimulatedSequenceRunner::WakeUp(Module* module) {
       break;
     }
   }
-  Timestamp next_time =
-      GetCurrentTime() + TimeDelta::ms(module->TimeUntilNextProcess());
+  Timestamp next_time = GetNextTime(module, GetCurrentTime());
   delayed_modules_.insert({next_time, module});
   next_run_time_ = std::min(next_run_time_, next_time);
 }
@@ -237,8 +235,7 @@ void SimulatedSequenceRunner::RegisterModule(Module* module,
   if (!process_thread_running_) {
     stopped_modules_.insert(module);
   } else {
-    Timestamp next_time =
-        GetCurrentTime() + TimeDelta::ms(module->TimeUntilNextProcess());
+    Timestamp next_time = GetNextTime(module, GetCurrentTime());
     delayed_modules_.insert({next_time, module});
     next_run_time_ = std::min(next_run_time_, next_time);
   }
@@ -264,6 +261,12 @@ void SimulatedSequenceRunner::DeRegisterModule(Module* module) {
   }
   if (modules_running)
     module->ProcessThreadAttached(nullptr);
+}
+
+Timestamp SimulatedSequenceRunner::GetNextTime(Module* module,
+                                               Timestamp at_time) {
+  CurrentTaskQueueSetter set_current(this);
+  return at_time + TimeDelta::ms(module->TimeUntilNextProcess());
 }
 
 SimulatedTimeControllerImpl::SimulatedTimeControllerImpl(Timestamp start_time)
@@ -308,12 +311,14 @@ SimulatedTimeControllerImpl::GetNextReadyRunner(Timestamp current_time) {
 
 void SimulatedTimeControllerImpl::YieldExecution() {
   if (rtc::CurrentThreadId() == thread_id_) {
+    TaskQueueBase* yielding_from = TaskQueueBase::Current();
+    SimulatedSequenceRunner::CurrentTaskQueueSetter reset_queue(nullptr);
     RTC_DCHECK_RUN_ON(&thread_checker_);
     // When we yield, we don't want to risk executing further tasks on the
     // currently executing task queue. If there's a ready task that also yields,
     // it's added to this set as well and only tasks on the remaining task
     // queues are executed.
-    auto inserted = yielded_.insert(TaskQueueBase::Current());
+    auto inserted = yielded_.insert(yielding_from);
     RTC_DCHECK(inserted.second);
     RunReadyRunners();
     yielded_.erase(inserted.first);
@@ -322,6 +327,7 @@ void SimulatedTimeControllerImpl::YieldExecution() {
 
 void SimulatedTimeControllerImpl::RunReadyRunners() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_EQ(rtc::CurrentThreadId(), thread_id_);
   Timestamp current_time = CurrentTime();
   // We repeat until we have no ready left to handle tasks posted by ready
   // runners.
