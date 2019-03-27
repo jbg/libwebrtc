@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "f6c4f22a_6bbbd7f8",
+        "filename": "modules/remote_bitrate_estimator/aimd_rate_control.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-03-27T14:50:40Z",
+      "side": 1,
+      "message": "Is it guaranteed that link_capacity will have a value? It\u0027s an optional, right?",
+      "range": {
+        "startLine": 279,
+        "startChar": 67,
+        "endLine": 279,
+        "endChar": 75
+      },
+      "revId": "072cb297e5bef332f93f9d0055367c7a7d7b39cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7c66ab02_23e8cfe1",
         "filename": "modules/remote_bitrate_estimator/aimd_rate_control.h",
         "patchSetId": 3
