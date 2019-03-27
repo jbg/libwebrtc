@@ -52,6 +52,24 @@
       "revId": "f2cdb0338927fa6ac40114d058b8f5a6ecef55c6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "daf46aba_85954a4e",
+        "filename": "rtc_base/byte_order.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-27T20:40:35Z",
+      "side": 1,
+      "message": "As discussed before, it looks like there is an assumption of little endianness when targeting Windows.\n\nI am tempted to move these inside the WEBRTC_ARCH_LITTLE_ENDIAN/WEBRTC_ARCH_BIG_ENDIAN #ifdef and provide meaningful defines for both cases (since we now build also for ARM64: https://ci.chromium.org/p/chromium/builders/luci.chromium.ci/win32-arm64-rel) but it seems this is not a problem since ARMv8-A is Bi-endian with little as default.",
+      "parentUuid": "dcedb2dc_d86ec393",
+      "revId": "f2cdb0338927fa6ac40114d058b8f5a6ecef55c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
