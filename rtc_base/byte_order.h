@@ -40,6 +40,8 @@
 #if defined(WEBRTC_WIN)
 #include <stdlib.h>
 #include <winsock2.h>
+
+#include "rtc_base/internal/byte_order.h"
 #else
 #include <netinet/in.h>
 #endif
@@ -49,8 +51,8 @@
 #define be16toh(v) ntohs(v)
 #define be32toh(v) ntohl(v)
 #if defined(WEBRTC_WIN)
-#define htobe64(v) htonll(v)
-#define be64toh(v) ntohll(v)
+#define htobe64(v) ::rtc::WinsockSwapLongLong(v)
+#define be64toh(v) ::rtc::WindowsSwapLongLong(v)
 #endif
 
 #if defined(WEBRTC_ARCH_LITTLE_ENDIAN)
