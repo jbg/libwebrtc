@@ -49,8 +49,8 @@
 #define be16toh(v) ntohs(v)
 #define be32toh(v) ntohl(v)
 #if defined(WEBRTC_WIN)
-#define htobe64(v) htonll(v)
-#define be64toh(v) ntohll(v)
+#define htobe64(v) ::rtc::WinsockSwapLongLong(v)
+#define be64toh(v) ::rtc::WindowsSwapLongLong(v)
 #endif
 
 #if defined(WEBRTC_ARCH_LITTLE_ENDIAN)
@@ -174,6 +174,19 @@ inline uint32_t NetworkToHost32(uint32_t n) {
 inline uint64_t NetworkToHost64(uint64_t n) {
   return be64toh(n);
 }
+
+#if defined(WEBRTC_WIN)
+inline uint64_t WinsockSwapLongLong(uint64_t host_int) {
+  return (((host_int & uint64_t{0xFF}) << 56) |
+          ((host_int & uint64_t{0xFF00}) << 40) |
+          ((host_int & uint64_t{0xFF0000}) << 24) |
+          ((host_int & uint64_t{0xFF000000}) << 8) |
+          ((host_int & uint64_t{0xFF00000000}) >> 8) |
+          ((host_int & uint64_t{0xFF0000000000}) >> 24) |
+          ((host_int & uint64_t{0xFF000000000000}) >> 40) |
+          ((host_int & uint64_t{0xFF00000000000000}) >> 56));
+}
+#endif  // WEBRTC_WIN
 
 }  // namespace rtc
 
