@@ -5092,7 +5092,8 @@ void PeerConnection::AllocateSctpSids(rtc::SSLRole role) {
     if (channel->id() < 0) {
       int sid;
       if (!sid_allocator_.AllocateSid(role, &sid)) {
-        RTC_LOG(LS_ERROR) << "Failed to allocate SCTP sid.";
+        RTC_LOG(LS_ERROR) << "Failed to allocate SCTP sid, closing channel.";
+        channel->CloseAbruptly();
         continue;
       }
       channel->SetSctpSid(sid);
