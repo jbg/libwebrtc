@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5706eff4_1ed05fe4",
+        "filename": "pc/data_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-03-27T16:00:14Z",
+      "side": 1,
+      "message": "specify that this is for SCTP?",
+      "range": {
+        "startLine": 154,
+        "startChar": 48,
+        "endLine": 154,
+        "endChar": 67
+      },
+      "revId": "755c80bdc3418b05aba74bb7cd0b149c8e558a78",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
