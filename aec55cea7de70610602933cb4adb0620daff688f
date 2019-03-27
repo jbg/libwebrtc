@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d43dee4c_ba1565cf",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-27T12:56:36Z",
+      "side": 1,
+      "message": "Is this in kbps? Maybe you could add the unit to the name for clarity?",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 22
+      },
+      "revId": "aec55cea7de70610602933cb4adb0620daff688f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b7c8313_a17762b6",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-27T12:56:36Z",
+      "side": 1,
+      "message": "Either keep these as one expression, or use two different variables.",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "aec55cea7de70610602933cb4adb0620daff688f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f217be7_d4fd99aa",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-27T12:56:36Z",
+      "side": 1,
+      "message": "uncertainty_symmetry_cap_-\u003ekbps\u003cfloat\u003e()",
+      "revId": "aec55cea7de70610602933cb4adb0620daff688f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5462a2df_01efc4eb",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-27T12:56:36Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 96,
+        "startChar": 25,
+        "endLine": 96,
+        "endChar": 72
+      },
+      "revId": "aec55cea7de70610602933cb4adb0620daff688f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
