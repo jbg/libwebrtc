@@ -22,6 +22,30 @@
       "revId": "fda7f42791ddab088e4d4ce813c9e18259b3eb71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8fa18ab_522df9e5",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-27T13:54:20Z",
+      "side": 1,
+      "message": "Only the meta data is copied. The storage is now held in an rtc::CopyOnWriteBuffer, which is reference counted and not copied.",
+      "parentUuid": "40ddad80_af6160aa",
+      "range": {
+        "startLine": 276,
+        "startChar": 51,
+        "endLine": 276,
+        "endChar": 56
+      },
+      "revId": "fda7f42791ddab088e4d4ce813c9e18259b3eb71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
