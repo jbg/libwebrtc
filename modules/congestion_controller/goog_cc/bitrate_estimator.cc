@@ -11,9 +11,11 @@
 #include "modules/congestion_controller/goog_cc/bitrate_estimator.h"
 
 #include <stdio.h>
+#include <algorithm>
 #include <cmath>
 #include <string>
 
+#include "api/units/data_rate.h"
 #include "modules/remote_bitrate_estimator/test/bwe_test_logging.h"
 #include "rtc_base/logging.h"
 
@@ -39,13 +41,18 @@ BitrateEstimator::BitrateEstimator(const WebRtcKeyValueConfig* key_value_config)
                             kRateWindowMs,
                             kMinRateWindowMs,
                             kMaxRateWindowMs),
+      uncertainty_scale_("scale", 10.0),
+      uncertainty_symmetry_cap_("symmetry_cap", DataRate::Zero()),
+      estimate_floor_("floor", DataRate::Zero()),
       current_window_ms_(0),
       prev_time_ms_(-1),
       bitrate_estimate_(-1.0f),
       bitrate_estimate_var_(50.0f) {
   // E.g WebRTC-BweThroughputWindowConfig/initial_window_ms:350,window_ms:250/
-  ParseFieldTrial({&initial_window_ms_, &noninitial_window_ms_},
-                  key_value_config->Lookup(kBweThroughputWindowConfig));
+  ParseFieldTrial(
+      {&initial_window_ms_, &noninitial_window_ms_, &uncertainty_scale_,
+       &uncertainty_symmetry_cap_, &estimate_floor_},
+      key_value_config->Lookup(kBweThroughputWindowConfig));
 }
 
 BitrateEstimator::~BitrateEstimator() = default;
@@ -67,7 +74,15 @@ void BitrateEstimator::Update(int64_t now_ms, int bytes) {
   // Define the sample uncertainty as a function of how far away it is from the
   // current estimate.
   float sample_uncertainty =
-      10.0f * std::abs(bitrate_estimate_ - bitrate_sample) / bitrate_estimate_;
+      uncertainty_scale_ * std::abs(bitrate_estimate_ - bitrate_sample);
+  // With low values of uncertainty_symmetry_cap_ we add more uncertainty to
+  // increases than to decreases. For higher values we approach symmetry.
+  // TODO(crodbro): use safe types across class to get rid of casts.
+  sample_uncertainty /=
+      bitrate_estimate_ +
+      std::min(bitrate_sample,
+               static_cast<float>(uncertainty_symmetry_cap_.Get().kbps()));
+
   float sample_var = sample_uncertainty * sample_uncertainty;
   // Update a bayesian estimate of the rate, weighting it lower if the sample
   // uncertainty is large.
@@ -77,6 +92,8 @@ void BitrateEstimator::Update(int64_t now_ms, int bytes) {
   bitrate_estimate_ = (sample_var * bitrate_estimate_ +
                        pred_bitrate_estimate_var * bitrate_sample) /
                       (sample_var + pred_bitrate_estimate_var);
+  bitrate_estimate_ = std::max(
+      bitrate_estimate_, static_cast<float>(estimate_floor_.Get().kbps()));
   bitrate_estimate_var_ = sample_var * pred_bitrate_estimate_var /
                           (sample_var + pred_bitrate_estimate_var);
   BWE_TEST_LOGGING_PLOT(1, "acknowledged_bitrate", now_ms,
