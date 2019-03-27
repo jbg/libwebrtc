@@ -47,6 +47,11 @@ struct ProbeControllerConfig {
   // Configures how often we send ALR probes and how big they are.
   FieldTrialParameter<TimeDelta> alr_probing_interval_;
   FieldTrialParameter<double> alr_probe_scale_;
+
+  // Configures the probes emitted by changed to the allocated bitrate.
+  FieldTrialOptional<double> first_allocation_probe_scale_;
+  FieldTrialOptional<double> second_allocation_probe_scale_;
+  FieldTrialParameter<bool> allocation_allow_further_probing_;
 };
 
 // This class controls initiation of probing to estimate initial channel
