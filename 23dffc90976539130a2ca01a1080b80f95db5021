@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "9556aa55_b1960800",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-03-28T09:05:28Z",
+      "side": 1,
+      "message": "\u003e\u003e 1. If I remember correctly, at least previously OnEncodedImage had to be called on the encoder queue. If that is not the case, it sounds fine to remove the post.\n\n\u003e Erik, do you know?\n\nVideoStreamEncoder::OnEncodedImage() does not require the call to be on a certain thread, though it is preferred.",
+      "parentUuid": "bd1c292f_a5efca5d",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41e31381_6c03379f",
         "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
         "patchSetId": 1
