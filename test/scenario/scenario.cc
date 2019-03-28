@@ -240,8 +240,8 @@ void Scenario::TriggerPacketBurst(std::vector<EmulatedNetworkNode*> over_nodes,
   EmulatedNetworkNode::CreateRoute(route_id, over_nodes, &null_receiver_);
   for (size_t i = 0; i < num_packets; ++i)
     over_nodes[0]->OnPacketReceived(EmulatedIpPacket(
-        rtc::SocketAddress() /*from*/, rtc::SocketAddress(), /*to*/
-        route_id, rtc::CopyOnWriteBuffer(packet_size), Now()));
+        /*from=*/rtc::SocketAddress(), /*to=*/rtc::SocketAddress(), route_id,
+        rtc::CopyOnWriteBuffer(packet_size), Now()));
 }
 
 void Scenario::NetworkDelayedAction(
@@ -253,7 +253,7 @@ void Scenario::NetworkDelayedAction(
   EmulatedNetworkNode::CreateRoute(route_id, over_nodes,
                                    action_receivers_.back().get());
   over_nodes[0]->OnPacketReceived(EmulatedIpPacket(
-      rtc::SocketAddress() /*from*/, rtc::SocketAddress() /*to*/, route_id,
+      /*from=*/rtc::SocketAddress(), /*to=*/rtc::SocketAddress(), route_id,
       rtc::CopyOnWriteBuffer(packet_size), Now()));
 }
 
