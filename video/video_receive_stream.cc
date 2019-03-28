@@ -195,7 +195,9 @@ VideoReceiveStream::VideoReceiveStream(
       timing_(timing),
       video_receiver_(clock_,
                       timing_.get(),
-                      this,   // NackSender
+                      this,  // NackSender
+                      // TODO(nisse): Passed to old jitter buffer,
+                      // i.e., unused.
                       this),  // KeyFrameRequestSender
       rtp_video_stream_receiver_(clock_,
                                  &transport_adapter_,
@@ -206,7 +208,6 @@ VideoReceiveStream::VideoReceiveStream(
                                  &stats_proxy_,
                                  process_thread_,
                                  this,  // NackSender
-                                 this,  // KeyFrameRequestSender
                                  this,  // OnCompleteFrameCallback
                                  config_.frame_decryptor),
       rtp_stream_sync_(this),
