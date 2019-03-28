@@ -22,6 +22,30 @@
       "revId": "71df89671520af537d606b71674fe8d015aaa321",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efdf2827_bdf0474f",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-28T08:10:24Z",
+      "side": 1,
+      "message": "Are there any required steps to change it (e.g. update other files)?",
+      "parentUuid": "3174d641_36b9e337",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 101,
+        "endChar": 21
+      },
+      "revId": "71df89671520af537d606b71674fe8d015aaa321",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
