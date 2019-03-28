@@ -22,6 +22,30 @@
       "revId": "2784b5c5cc0d1e392ce1bb5caf216f62ea578811",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53f5d6f5_f7555013",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-03-28T16:29:03Z",
+      "side": 1,
+      "message": "https://webrtc-review.googlesource.com/c/src/+/130222",
+      "parentUuid": "9bb67974_3cab1751",
+      "range": {
+        "startLine": 110,
+        "startChar": 27,
+        "endLine": 110,
+        "endChar": 35
+      },
+      "revId": "2784b5c5cc0d1e392ce1bb5caf216f62ea578811",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
