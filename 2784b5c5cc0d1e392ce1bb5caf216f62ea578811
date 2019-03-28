@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9bb67974_3cab1751",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-28T16:08:34Z",
+      "side": 1,
+      "message": "Since we are here, can we move this in front (and change it to /*from\u003d*/)?",
+      "range": {
+        "startLine": 110,
+        "startChar": 27,
+        "endLine": 110,
+        "endChar": 35
+      },
+      "revId": "2784b5c5cc0d1e392ce1bb5caf216f62ea578811",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
