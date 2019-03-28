@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "62375f22_58da9eac",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-28T10:14:53Z",
+      "side": 1,
+      "message": "That race is maybe unlikely to cause trouble in practice, but it\u0027s not valid to write a variable on one thread and read it on another, without some kind of explicit synchronization (which would include some memory barriers). And the ARM arch also has a weaker memory model than x86, making unsynchronized updates to memory appear in unexpected order to other threads. Tsan would complain.",
+      "parentUuid": "2bf78093_049fde7e",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41e31381_6c03379f",
         "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
         "patchSetId": 1
