@@ -46,6 +46,30 @@
       "revId": "71df89671520af537d606b71674fe8d015aaa321",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5dbd0150_e483710c",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-03-28T08:13:59Z",
+      "side": 1,
+      "message": "1) Only *add* the new kind of phase here\n2) Update recipe https://cs.chromium.org/search/?q\u003drtti_no_sctp+-f:expected\n3) Remove the old phase name here\n\nBut let\u0027s just do it like this and skip all that",
+      "parentUuid": "efdf2827_bdf0474f",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 101,
+        "endChar": 21
+      },
+      "revId": "71df89671520af537d606b71674fe8d015aaa321",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
