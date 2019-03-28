@@ -117,6 +117,30 @@
       "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6498335_ad9845ac",
+        "filename": "rtc_base/byte_order.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-28T16:11:44Z",
+      "side": 1,
+      "message": "Thanks for digging deeper Yves!",
+      "parentUuid": "b3d7c460_2c36d7aa",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
