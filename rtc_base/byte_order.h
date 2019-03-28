@@ -42,16 +42,12 @@
 #include <winsock2.h>
 #else
 #include <netinet/in.h>
-#endif
+#endif  // WEBRTC_WIN
 
 #define htobe16(v) htons(v)
 #define htobe32(v) htonl(v)
 #define be16toh(v) ntohs(v)
 #define be32toh(v) ntohl(v)
-#if defined(WEBRTC_WIN)
-#define htobe64(v) htonll(v)
-#define be64toh(v) ntohll(v)
-#endif
 
 #if defined(WEBRTC_ARCH_LITTLE_ENDIAN)
 #define htole16(v) (v)
@@ -60,10 +56,14 @@
 #define le16toh(v) (v)
 #define le32toh(v) (v)
 #define le64toh(v) (v)
+#if defined(WEBRTC_WIN)
+#define htobe64(v) _byteswap_uint64(v)
+#define be64toh(v) _byteswap_uint64(v)
+#endif  // defined(WEBRTC_WIN)
 #if defined(__native_client__)
 #define htobe64(v) __builtin_bswap64(v)
 #define be64toh(v) __builtin_bswap64(v)
-#endif
+#endif  // defined(__native_client__)
 #elif defined(WEBRTC_ARCH_BIG_ENDIAN)
 #define htole16(v) __builtin_bswap16(v)
 #define htole32(v) __builtin_bswap32(v)
@@ -71,10 +71,14 @@
 #define le16toh(v) __builtin_bswap16(v)
 #define le32toh(v) __builtin_bswap32(v)
 #define le64toh(v) __builtin_bswap64(v)
+#if defined(WEBRTC_WIN)
+#define htobe64(v) (v)
+#define be64toh(v) (v)
+#endif  // defined(WEBRTC_WIN)
 #if defined(__native_client__)
 #define htobe64(v) (v)
 #define be64toh(v) (v)
-#endif
+#endif  // defined(__native_client__)
 #else
 #error WEBRTC_ARCH_BIG_ENDIAN or WEBRTC_ARCH_LITTLE_ENDIAN must be defined.
 #endif  // defined(WEBRTC_ARCH_LITTLE_ENDIAN)
