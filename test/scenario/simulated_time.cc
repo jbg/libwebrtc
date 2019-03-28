@@ -230,16 +230,17 @@ void SimulatedFeedback::OnPacketReceived(EmulatedIpPacket packet) {
       }
       if (report.receive_times.size() >=
           RawFeedbackReportPacket::MAX_FEEDBACKS) {
-        return_node_->OnPacketReceived(
-            EmulatedIpPacket(packet.to, packet.from, return_receiver_id_,
-                             FeedbackToBuffer(report), packet.arrival_time));
+        return_node_->OnPacketReceived(EmulatedIpPacket(
+            packet.to,
+            rtc::SocketAddress(rtc::IPAddress(return_receiver_id_), 0),
+            FeedbackToBuffer(report), packet.arrival_time));
         report = SimpleFeedbackReportPacket();
       }
     }
     if (!report.receive_times.empty())
-      return_node_->OnPacketReceived(
-          EmulatedIpPacket(packet.to, packet.from, return_receiver_id_,
-                           FeedbackToBuffer(report), packet.arrival_time));
+      return_node_->OnPacketReceived(EmulatedIpPacket(
+          packet.to, rtc::SocketAddress(rtc::IPAddress(return_receiver_id_), 0),
+          FeedbackToBuffer(report), packet.arrival_time));
     last_feedback_time_ = packet.arrival_time;
   }
 }
@@ -270,8 +271,10 @@ SimulatedTimeClient::SimulatedTimeClient(
   congestion_controller_ = network_controller_factory_.Create(initial_config);
   for (auto& stream_config : stream_configs)
     packet_streams_.emplace_back(new PacketStream(stream_config));
-  EmulatedNetworkNode::CreateRoute(send_receiver_id, send_link, &feedback_);
-  EmulatedNetworkNode::CreateRoute(return_receiver_id, return_link, this);
+  EmulatedNetworkNode::CreateRoute(rtc::IPAddress(send_receiver_id), send_link,
+                                   &feedback_);
+  EmulatedNetworkNode::CreateRoute(rtc::IPAddress(return_receiver_id),
+                                   return_link, this);
 
   CongestionProcess(at_time);
   network_controller_factory_.LogCongestionControllerStats(at_time);
@@ -328,8 +331,9 @@ void SimulatedTimeClient::PacerProcess(Timestamp at_time) {
   ProcessFrames(at_time);
   for (const auto& to_send : sender_.PaceAndPullSendPackets(at_time)) {
     sender_.send_node_->OnPacketReceived(EmulatedIpPacket(
-        rtc::SocketAddress() /*from*/, rtc::SocketAddress() /*to*/,
-        sender_.send_receiver_id_, to_send.data, at_time));
+        rtc::SocketAddress() /*from*/,
+        rtc::SocketAddress(rtc::IPAddress(sender_.send_receiver_id_), 0) /*to*/,
+        to_send.data, at_time));
     Update(congestion_controller_->OnSentPacket(to_send.send_info));
   }
 }

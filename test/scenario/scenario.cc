@@ -177,7 +177,8 @@ void Scenario::ChangeRoute(std::pair<CallClient*, CallClient*> clients,
                            DataSize overhead) {
   uint64_t route_id = next_route_id_++;
   clients.second->route_overhead_.insert({route_id, overhead});
-  EmulatedNetworkNode::CreateRoute(route_id, over_nodes, clients.second);
+  EmulatedNetworkNode::CreateRoute(rtc::IPAddress(route_id), over_nodes,
+                                   clients.second);
   clients.first->transport_.Connect(over_nodes.front(), route_id, overhead);
 }
 
@@ -237,11 +238,13 @@ void Scenario::TriggerPacketBurst(std::vector<EmulatedNetworkNode*> over_nodes,
                                   size_t num_packets,
                                   size_t packet_size) {
   uint64_t route_id = next_route_id_++;
-  EmulatedNetworkNode::CreateRoute(route_id, over_nodes, &null_receiver_);
+  EmulatedNetworkNode::CreateRoute(rtc::IPAddress(route_id), over_nodes,
+                                   &null_receiver_);
   for (size_t i = 0; i < num_packets; ++i)
-    over_nodes[0]->OnPacketReceived(EmulatedIpPacket(
-        rtc::SocketAddress() /*from*/, rtc::SocketAddress(), /*to*/
-        route_id, rtc::CopyOnWriteBuffer(packet_size), Now()));
+    over_nodes[0]->OnPacketReceived(
+        EmulatedIpPacket(rtc::SocketAddress() /*from*/,
+                         rtc::SocketAddress(rtc::IPAddress(route_id), 0), /*to*/
+                         rtc::CopyOnWriteBuffer(packet_size), Now()));
 }
 
 void Scenario::NetworkDelayedAction(
@@ -250,11 +253,12 @@ void Scenario::NetworkDelayedAction(
     std::function<void()> action) {
   uint64_t route_id = next_route_id_++;
   action_receivers_.emplace_back(new ActionReceiver(action));
-  EmulatedNetworkNode::CreateRoute(route_id, over_nodes,
+  EmulatedNetworkNode::CreateRoute(rtc::IPAddress(route_id), over_nodes,
                                    action_receivers_.back().get());
-  over_nodes[0]->OnPacketReceived(EmulatedIpPacket(
-      rtc::SocketAddress() /*from*/, rtc::SocketAddress() /*to*/, route_id,
-      rtc::CopyOnWriteBuffer(packet_size), Now()));
+  over_nodes[0]->OnPacketReceived(
+      EmulatedIpPacket(rtc::SocketAddress() /*from*/,
+                       rtc::SocketAddress(rtc::IPAddress(route_id), 0) /*to*/,
+                       rtc::CopyOnWriteBuffer(packet_size), Now()));
 }
 
 CrossTrafficSource* Scenario::CreateCrossTraffic(
@@ -272,7 +276,8 @@ CrossTrafficSource* Scenario::CreateCrossTraffic(
   cross_traffic_sources_.emplace_back(
       new CrossTrafficSource(over_nodes.front(), route_id, config));
   CrossTrafficSource* node = cross_traffic_sources_.back().get();
-  EmulatedNetworkNode::CreateRoute(route_id, over_nodes, &null_receiver_);
+  EmulatedNetworkNode::CreateRoute(rtc::IPAddress(route_id), over_nodes,
+                                   &null_receiver_);
   Every(config.min_packet_interval,
         [this, node](TimeDelta delta) { node->Process(Now(), delta); });
   return node;

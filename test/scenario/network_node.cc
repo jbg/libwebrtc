@@ -107,8 +107,9 @@ bool NetworkNodeTransport::SendRtp(const uint8_t* packet,
                                 length + packet_overhead_.bytes());
   buffer.SetSize(length + packet_overhead_.bytes());
   send_net_->OnPacketReceived(EmulatedIpPacket(
-      rtc::SocketAddress() /*from*/, rtc::SocketAddress() /*to*/, receiver_id_,
-      buffer, send_time));
+      rtc::SocketAddress() /*from*/,
+      rtc::SocketAddress(rtc::IPAddress(receiver_id_), 0) /*to*/, buffer,
+      send_time));
   return true;
 }
 
@@ -120,8 +121,9 @@ bool NetworkNodeTransport::SendRtcp(const uint8_t* packet, size_t length) {
   if (!send_net_)
     return false;
   send_net_->OnPacketReceived(EmulatedIpPacket(
-      rtc::SocketAddress() /*from*/, rtc::SocketAddress() /*to*/, receiver_id_,
-      buffer, send_time));
+      rtc::SocketAddress() /*from*/,
+      rtc::SocketAddress(rtc::IPAddress(receiver_id_), 0) /*to*/, buffer,
+      send_time));
   return true;
 }
 
@@ -179,8 +181,9 @@ void CrossTrafficSource::Process(Timestamp at_time, TimeDelta delta) {
   pending_size_ += TrafficRate() * delta;
   if (pending_size_ > config_.min_packet_size) {
     target_->OnPacketReceived(EmulatedIpPacket(
-        rtc::SocketAddress() /*from*/, rtc::SocketAddress() /*to*/,
-        receiver_id_, rtc::CopyOnWriteBuffer(pending_size_.bytes()), at_time));
+        rtc::SocketAddress() /*from*/,
+        rtc::SocketAddress(rtc::IPAddress(receiver_id_), 0) /*to*/,
+        rtc::CopyOnWriteBuffer(pending_size_.bytes()), at_time));
     pending_size_ = DataSize::Zero();
   }
 }
