@@ -93,6 +93,30 @@
       "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3d7c460_2c36d7aa",
+        "filename": "rtc_base/byte_order.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-03-28T13:44:48Z",
+      "side": 1,
+      "message": "Insane! They also say:\n\"The ntohs function returns the value in host byte order. If the netshort parameter is already in host byte order, then this function will reverse it. It is up to the application to determine if the byte order must be reversed.\"\n\nSo you were right, moving them will work in any case.\n\nhttps://docs.microsoft.com/en-us/windows/desktop/api/winsock/nf-winsock-ntohs",
+      "parentUuid": "7d72fef1_4c9acbd8",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
