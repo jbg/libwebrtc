@@ -14,14 +14,15 @@
 #include <array>
 #include <complex>
 #include <cstddef>
+#include <memory>
 #include <vector>
 
 #include "api/array_view.h"
 #include "modules/audio_processing/agc2/rnn_vad/common.h"
-#include "modules/audio_processing/agc2/rnn_vad/fft_util.h"
 #include "modules/audio_processing/agc2/rnn_vad/ring_buffer.h"
 #include "modules/audio_processing/agc2/rnn_vad/spectral_features_internal.h"
 #include "modules/audio_processing/agc2/rnn_vad/symmetric_matrix_buffer.h"
+#include "modules/audio_processing/utility/pffft_wrapper.h"
 
 namespace webrtc {
 namespace rnn_vad {
@@ -68,17 +69,11 @@ class SpectralFeaturesExtractor {
       SpectralFeaturesView spectral_features);
 
  private:
-  void ComputeAvgAndDerivatives(
-      rtc::ArrayView<float, kNumLowerBands> average,
-      rtc::ArrayView<float, kNumLowerBands> first_derivative,
-      rtc::ArrayView<float, kNumLowerBands> second_derivative);
-  void ComputeCrossCorrelation(
-      rtc::ArrayView<float, kNumLowerBands> bands_cross_corr);
-  float ComputeVariability();
-
-  FftUtil fft_;
-  std::vector<std::complex<float>> reference_frame_fft_;
-  std::vector<std::complex<float>> lagged_frame_fft_;
+  const std::array<float, kFrameSize20ms24kHz / 2> half_window_;
+  Pffft fft_;
+  std::unique_ptr<Pffft::FloatBuffer> fft_buffer_;
+  std::unique_ptr<Pffft::FloatBuffer> reference_frame_fft_;
+  std::unique_ptr<Pffft::FloatBuffer> lagged_frame_fft_;
   BandFeaturesExtractor band_features_extractor_;
   std::array<float, kNumBands> reference_frame_bands_energy_{};
   std::array<float, kNumBands> lagged_frame_bands_energy_{};

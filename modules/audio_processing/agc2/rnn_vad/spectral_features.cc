@@ -45,6 +45,81 @@ void UpdateSpectralDifferenceStats(
   sym_matrix_buf->Push(distances);
 }
 
+// Computes the first half of the Vorbis window.
+std::array<float, kFrameSize20ms24kHz / 2> ComputeHalfVorbisWindow() {
+  constexpr size_t kHalfSize = kFrameSize20ms24kHz / 2;
+  std::array<float, kHalfSize> half_window{};
+  for (size_t i = 0; i < kHalfSize; ++i) {
+    half_window[i] =
+        std::sin(0.5 * kPi * std::sin(0.5 * kPi * (i + 0.5) / kHalfSize) *
+                 std::sin(0.5 * kPi * (i + 0.5) / kHalfSize));
+  }
+  return half_window;
+}
+
+// Computes the forward FFT on a 20 ms frame to which a given window function is
+// applied. The Fourier coefficient corresponding to the Nyquist frequency is
+// set to zero (it is never used and this allows to simplify the code).
+void ComputeWindowedForwardFft(
+    rtc::ArrayView<const float, kFrameSize20ms24kHz> frame,
+    const std::array<float, kFrameSize20ms24kHz / 2>& half_window,
+    Pffft::FloatBuffer* fft_input_buffer,
+    Pffft::FloatBuffer* fft_output_buffer,
+    Pffft* fft) {
+  RTC_DCHECK_EQ(frame.size(), 2 * half_window.size());
+  // Apply windowing.
+  rtc::ArrayView<float> v = fft_input_buffer->GetView();
+  for (size_t i = 0; i < half_window.size(); ++i) {
+    const size_t j = kFrameSize20ms24kHz - i - 1;
+    v[i] = frame[i] * half_window[i];
+    v[j] = frame[j] * half_window[i];
+  }
+  fft->ForwardTransform(*fft_input_buffer, fft_output_buffer, /*ordered=*/true);
+  // Set the Nyquist frequency coefficient to zero.
+  fft_output_buffer->GetView()[1] = 0.f;
+}
+
+void ComputeAvgAndDerivatives(
+    const RingBuffer<float, kNumBands, kSpectralCoeffsHistorySize>&
+        spectral_coeffs_ring_buf,
+    rtc::ArrayView<float, kNumLowerBands> average,
+    rtc::ArrayView<float, kNumLowerBands> first_derivative,
+    rtc::ArrayView<float, kNumLowerBands> second_derivative) {
+  auto curr = spectral_coeffs_ring_buf.GetArrayView(0);
+  auto prev1 = spectral_coeffs_ring_buf.GetArrayView(1);
+  auto prev2 = spectral_coeffs_ring_buf.GetArrayView(2);
+  RTC_DCHECK_EQ(average.size(), first_derivative.size());
+  RTC_DCHECK_EQ(first_derivative.size(), second_derivative.size());
+  RTC_DCHECK_LE(average.size(), curr.size());
+  for (size_t i = 0; i < average.size(); ++i) {
+    // Average, kernel: [1, 1, 1].
+    average[i] = curr[i] + prev1[i] + prev2[i];
+    // First derivative, kernel: [1, 0, - 1].
+    first_derivative[i] = curr[i] - prev2[i];
+    // Second derivative, Laplacian kernel: [1, -2, 1].
+    second_derivative[i] = curr[i] - 2 * prev1[i] + prev2[i];
+  }
+}
+
+float ComputeVariability(
+    const SymmetricMatrixBuffer<float, kSpectralCoeffsHistorySize>&
+        spectral_diffs_buf) {
+  // Compute spectral variability score.
+  float spec_variability = 0.f;
+  for (size_t delay1 = 0; delay1 < kSpectralCoeffsHistorySize; ++delay1) {
+    float min_dist = std::numeric_limits<float>::max();
+    for (size_t delay2 = 0; delay2 < kSpectralCoeffsHistorySize; ++delay2) {
+      if (delay1 == delay2)  // The distance would be 0.
+        continue;
+      min_dist =
+          std::min(min_dist, spectral_diffs_buf.GetValue(delay1, delay2));
+    }
+    spec_variability += min_dist;
+  }
+  // Normalize (based on training set stats).
+  return spec_variability / kSpectralCoeffsHistorySize - 2.1f;
+}
+
 }  // namespace
 
 SpectralFeaturesView::SpectralFeaturesView(
@@ -66,9 +141,11 @@ SpectralFeaturesView::SpectralFeaturesView(const SpectralFeaturesView&) =
 SpectralFeaturesView::~SpectralFeaturesView() = default;
 
 SpectralFeaturesExtractor::SpectralFeaturesExtractor()
-    : fft_(),
-      reference_frame_fft_(kFftSize20ms24kHz),
-      lagged_frame_fft_(kFftSize20ms24kHz),
+    : half_window_(ComputeHalfVorbisWindow()),
+      fft_(kFrameSize20ms24kHz, Pffft::FftType::kReal),
+      fft_buffer_(fft_.CreateBuffer()),
+      reference_frame_fft_(fft_.CreateBuffer()),
+      lagged_frame_fft_(fft_.CreateBuffer()),
       dct_table_(ComputeDctTable()) {}
 
 SpectralFeaturesExtractor::~SpectralFeaturesExtractor() = default;
@@ -83,20 +160,24 @@ bool SpectralFeaturesExtractor::CheckSilenceComputeFeatures(
     rtc::ArrayView<const float, kFrameSize20ms24kHz> lagged_frame,
     SpectralFeaturesView spectral_features) {
   // Analyze reference frame.
-  fft_.WindowedFft(reference_frame, reference_frame_fft_);
+  ComputeWindowedForwardFft(reference_frame, half_window_, fft_buffer_.get(),
+                            reference_frame_fft_.get(), &fft_);
   band_features_extractor_.ComputeSpectralCrossCorrelation(
-      reference_frame_fft_, reference_frame_fft_,
+      reference_frame_fft_->GetConstView(),
+      reference_frame_fft_->GetConstView(),
       {reference_frame_bands_energy_.data(), kOpusBands24kHz});
   // Check if the reference frame has silence.
   const float tot_energy =
       std::accumulate(reference_frame_bands_energy_.begin(),
                       reference_frame_bands_energy_.end(), 0.f);
-  if (tot_energy < kSilenceThreshold)
+  if (tot_energy < kSilenceThreshold) {
     return true;
+  }
   // Analyze lagged frame.
-  fft_.WindowedFft(lagged_frame, lagged_frame_fft_);
+  ComputeWindowedForwardFft(lagged_frame, half_window_, fft_buffer_.get(),
+                            lagged_frame_fft_.get(), &fft_);
   band_features_extractor_.ComputeSpectralCrossCorrelation(
-      lagged_frame_fft_, lagged_frame_fft_,
+      lagged_frame_fft_->GetConstView(), lagged_frame_fft_->GetConstView(),
       {lagged_frame_bands_energy_.data(), kOpusBands24kHz});
   // Log of the band energies for the reference frame.
   std::array<float, kNumBands> log_bands_energy;
@@ -120,69 +201,26 @@ bool SpectralFeaturesExtractor::CheckSilenceComputeFeatures(
   std::copy(coeffs_src.begin() + kNumLowerBands, coeffs_src.end(),
             spectral_features.coeffs.begin());
   // Compute and write remaining features.
-  ComputeAvgAndDerivatives(spectral_features.average,
+  ComputeAvgAndDerivatives(spectral_coeffs_ring_buf_, spectral_features.average,
                            spectral_features.first_derivative,
                            spectral_features.second_derivative);
-  ComputeCrossCorrelation(spectral_features.bands_cross_corr);
-  RTC_DCHECK(spectral_features.variability);
-  *(spectral_features.variability) = ComputeVariability();
-  return false;
-}
-
-void SpectralFeaturesExtractor::ComputeAvgAndDerivatives(
-    rtc::ArrayView<float, kNumLowerBands> average,
-    rtc::ArrayView<float, kNumLowerBands> first_derivative,
-    rtc::ArrayView<float, kNumLowerBands> second_derivative) {
-  auto curr = spectral_coeffs_ring_buf_.GetArrayView(0);
-  auto prev1 = spectral_coeffs_ring_buf_.GetArrayView(1);
-  auto prev2 = spectral_coeffs_ring_buf_.GetArrayView(2);
-  RTC_DCHECK_EQ(average.size(), first_derivative.size());
-  RTC_DCHECK_EQ(first_derivative.size(), second_derivative.size());
-  RTC_DCHECK_LE(average.size(), curr.size());
-  for (size_t i = 0; i < average.size(); ++i) {
-    // Average, kernel: [1, 1, 1].
-    average[i] = curr[i] + prev1[i] + prev2[i];
-    // First derivative, kernel: [1, 0, - 1].
-    first_derivative[i] = curr[i] - prev2[i];
-    // Second derivative, Laplacian kernel: [1, -2, 1].
-    second_derivative[i] = curr[i] - 2 * prev1[i] + prev2[i];
-  }
-}
-
-void SpectralFeaturesExtractor::ComputeCrossCorrelation(
-    rtc::ArrayView<float, kNumLowerBands> bands_cross_corr) {
+  // Spectral Cross-correlation.
   band_features_extractor_.ComputeSpectralCrossCorrelation(
-      reference_frame_fft_, lagged_frame_fft_,
+      reference_frame_fft_->GetConstView(), lagged_frame_fft_->GetConstView(),
       {bands_cross_corr_.data(), kOpusBands24kHz});
-  // Normalize.
   for (size_t i = 0; i < kOpusBands24kHz; ++i) {
     bands_cross_corr_[i] =
         bands_cross_corr_[i] /
         std::sqrt(0.001f + reference_frame_bands_energy_[i] *
                                lagged_frame_bands_energy_[i]);
   }
-  // Decorrelate.
-  ComputeDct(bands_cross_corr_, dct_table_, bands_cross_corr);
-  // Normalize (based on training set stats).
-  bands_cross_corr[0] -= 1.3f;
-  bands_cross_corr[1] -= 0.9f;
-}
-
-float SpectralFeaturesExtractor::ComputeVariability() {
-  // Compute spectral variability score.
-  float spec_variability = 0.f;
-  for (size_t delay1 = 0; delay1 < kSpectralCoeffsHistorySize; ++delay1) {
-    float min_dist = std::numeric_limits<float>::max();
-    for (size_t delay2 = 0; delay2 < kSpectralCoeffsHistorySize; ++delay2) {
-      if (delay1 == delay2)  // The distance would be 0.
-        continue;
-      min_dist =
-          std::min(min_dist, spectral_diffs_buf_.GetValue(delay1, delay2));
-    }
-    spec_variability += min_dist;
-  }
-  // Normalize (based on training set stats).
-  return spec_variability / kSpectralCoeffsHistorySize - 2.1f;
+  ComputeDct(bands_cross_corr_, dct_table_, spectral_features.bands_cross_corr);
+  spectral_features.bands_cross_corr[0] -= 1.3f;
+  spectral_features.bands_cross_corr[1] -= 0.9f;
+  // Spectral variability.
+  RTC_DCHECK(spectral_features.variability);
+  *(spectral_features.variability) = ComputeVariability(spectral_diffs_buf_);
+  return false;
 }
 
 }  // namespace rnn_vad
