@@ -16,6 +16,24 @@
       "revId": "afa61c94e50e2737d4d4b22d7a830845e763cf27",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dac88d4_d9b296d4",
+        "filename": "rtc_base/platform_thread.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-28T14:07:20Z",
+      "side": 0,
+      "message": "Yes, on IOS the dispatch queue comparison will return the same value for different threads. This check isn\u0027t really needed (the one below should be sufficient) so after consulting with Kari I decided to just remove it.",
+      "parentUuid": "bb4d3ffa_0425c2cc",
+      "revId": "afa61c94e50e2737d4d4b22d7a830845e763cf27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
