@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "2bf78093_049fde7e",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-03-28T09:42:36Z",
+      "side": 1,
+      "message": "There shouldn\u0027t be any calls to OnEncodedFrame before InitEncode completes and Encode is called though.",
+      "parentUuid": "9556aa55_b1960800",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41e31381_6c03379f",
         "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
         "patchSetId": 1
