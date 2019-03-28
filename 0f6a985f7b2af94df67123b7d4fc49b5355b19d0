@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69b4c394_894fc432",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-28T13:12:50Z",
+      "side": 1,
+      "message": "We could try passing null here (in a followup cl). If that works, VideoReceiveStream may not need to implement KeyFrameRequestSender.",
+      "range": {
+        "startLine": 201,
+        "startChar": 22,
+        "endLine": 201,
+        "endChar": 26
+      },
+      "revId": "0f6a985f7b2af94df67123b7d4fc49b5355b19d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
