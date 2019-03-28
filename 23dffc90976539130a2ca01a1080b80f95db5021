@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "bd1c292f_a5efca5d",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-28T08:58:51Z",
+      "side": 1,
+      "message": "\u003e 1. If I remember correctly, at least previously OnEncodedImage had to be called on the encoder queue. If that is not the case, it sounds fine to remove the post.\n\nErik, do you know?\n \n\u003e 2. The threading assumptions are:\n\u003e a. Any calls to the Java encoder must be made on the same thread. Any calls coming to this class are also assumed to be on the same thread (specifically the encoder queue).\n\u003e \n\u003e b. OnEncodedFrame maybe called from any thread but in a sequential order.\n\u003e \n\u003e ParseQp / ParseCodecSpecificInfo / ParseFragmentationHeader are called only from OnEncodedImage so they rely on it being called sequentially.\n\nThen the cl has a data race on codec_settings_, written in InitEncode, and read in the Parse functions. Moving the ParseQp call back inside the task should solve that problem (and then we can do it after the ParseFragmentationHeader.\n\nI don\u0027t quite like the use of TaskQueue::Current() in InitEncode, but I\u0027m not going to do anything about that in this cl.",
+      "parentUuid": "a33bf442_5997a4a6",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41e31381_6c03379f",
         "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
         "patchSetId": 1
