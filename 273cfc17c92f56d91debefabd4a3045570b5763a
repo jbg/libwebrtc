@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "442fdd90_ab9bc001",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-28T13:16:47Z",
+      "side": 1,
+      "message": "I agree that plain void* instead of a typedef that behaves just like void* is better. If we wanted an abstraction, we could put the void* in a class. But since the abstraction is internal to this file, I don\u0027t think we should bother.",
+      "parentUuid": "184c8bad_4f16a24f",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 11
+      },
+      "revId": "273cfc17c92f56d91debefabd4a3045570b5763a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ca3d404_38b60c60",
         "filename": "rtc_base/synchronization/sequence_checker.cc",
         "patchSetId": 8

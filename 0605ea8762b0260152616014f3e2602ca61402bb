@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "b7d791fc_6f73ffad",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-28T13:16:47Z",
+      "side": 1,
+      "message": "The comment isn\u0027t right anymore. Since this function does nothing but return the label of the current dispatch queue, just put something like\n\n  // On Mac, returns the label of the current dispatch queue; elsewhere, return null.\n\njust before the whole function.",
+      "revId": "0605ea8762b0260152616014f3e2602ca61402bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49200a27_49bfb69c",
+        "filename": "rtc_base/synchronization/sequence_checker.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-28T13:16:47Z",
+      "side": 1,
+      "message": "Add an #else, to avoid having a line of dead code on Mac?",
+      "revId": "0605ea8762b0260152616014f3e2602ca61402bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93ef19a7_10d37ba6",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-28T13:16:47Z",
+      "side": 1,
+      "message": "Also GUARDED_BY?",
+      "revId": "0605ea8762b0260152616014f3e2602ca61402bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f02ec9f_b8ae92a0",
         "filename": "rtc_base/synchronization/sequence_checker.h",
         "patchSetId": 11
@@ -43,6 +94,23 @@
         "endLine": 42,
         "endChar": 64
       },
+      "revId": "0605ea8762b0260152616014f3e2602ca61402bb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aebb86c6_eb9a8289",
+        "filename": "rtc_base/synchronization/sequence_checker.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-03-28T13:16:47Z",
+      "side": 1,
+      "message": "Nooo! You flipped this one too, so now the other two class names are right, and this one is wrong! :-)\n\n(I slightly prefer FooExample to ExampleFoo, but the important thing is to pick one style.)",
       "revId": "0605ea8762b0260152616014f3e2602ca61402bb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
