@@ -46,6 +46,53 @@
       "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a33bf442_5997a4a6",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-03-28T08:46:33Z",
+      "side": 1,
+      "message": "1. If I remember correctly, at least previously OnEncodedImage had to be called on the encoder queue. If that is not the case, it sounds fine to remove the post.\n\n2. The threading assumptions are:\na. Any calls to the Java encoder must be made on the same thread. Any calls coming to this class are also assumed to be on the same thread (specifically the encoder queue).\n\nb. OnEncodedFrame maybe called from any thread but in a sequential order.\n\nParseQp / ParseCodecSpecificInfo / ParseFragmentationHeader are called only from OnEncodedImage so they rely on it being called sequentially.",
+      "parentUuid": "b0974560_a807fbf8",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41e31381_6c03379f",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-03-28T08:46:33Z",
+      "side": 1,
+      "message": "I noticed there is a bug here: ParseFragmentationHeader must be called before ParseQp.\n\nh264_bitstream_parser_.GetLastSliceQp relies on h264_bitstream_parser_.ParseBitstream having been called before.",
+      "range": {
+        "startLine": 277,
+        "startChar": 40,
+        "endLine": 277,
+        "endChar": 64
+      },
+      "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

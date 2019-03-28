@@ -46,6 +46,30 @@
       "revId": "fda7f42791ddab088e4d4ce813c9e18259b3eb71",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa7e72d5_7e91d7c8",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-03-28T08:46:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d8fa18ab_522df9e5",
+      "range": {
+        "startLine": 276,
+        "startChar": 51,
+        "endLine": 276,
+        "endChar": 56
+      },
+      "revId": "fda7f42791ddab088e4d4ce813c9e18259b3eb71",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
