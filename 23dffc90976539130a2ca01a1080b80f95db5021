@@ -22,6 +22,30 @@
       "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0974560_a807fbf8",
+        "filename": "sdk/android/src/jni/video_encoder_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-03-28T08:07:29Z",
+      "side": 1,
+      "message": "I\u0027d really like to understand these issues before landing the cl. Sami, do you know the threading assumptions in this code? Or who should I ask?",
+      "parentUuid": "1d5e663d_b40e9e42",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "23dffc90976539130a2ca01a1080b80f95db5021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
