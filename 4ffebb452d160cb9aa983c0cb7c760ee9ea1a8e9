@@ -45,6 +45,30 @@
       "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9edadda9_80c68c24",
+        "filename": "rtc_base/byte_order.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-03-28T13:32:57Z",
+      "side": 1,
+      "message": "No I think those ones actually do the right thing (dispatch).\nIt was just the ll variants whose code didn\u0027t match the MSDN doc.",
+      "parentUuid": "6e871daa_c3c5b0b0",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
