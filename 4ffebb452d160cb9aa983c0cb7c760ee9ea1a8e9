@@ -69,6 +69,30 @@
       "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d72fef1_4c9acbd8",
+        "filename": "rtc_base/byte_order.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 7285
+      },
+      "writtenOn": "2019-03-28T13:40:37Z",
+      "side": 1,
+      "message": "Rather, they might do the right thing in the future :)\n\"Application writers are cautioned that they should use the standard conversion functions provided as part of Winsock rather than writing their own conversion code since future implementations of Winsock are likely to run on systems for which the host order is identical to the network byte order.\"\n\nhttps://docs.microsoft.com/en-us/windows/desktop/winsock/byte-ordering-2",
+      "parentUuid": "9edadda9_80c68c24",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
