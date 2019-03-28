@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "501c0aa8_fe035ee7",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-28T16:42:48Z",
+      "side": 1,
+      "message": "Could this be baked into a helper in EmulatedIpPacket?",
+      "revId": "2784b5c5cc0d1e392ce1bb5caf216f62ea578811",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c4c6e8a_633b62c1",
+        "filename": "test/scenario/network/network_emulation_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-28T16:42:48Z",
+      "side": 1,
+      "message": "What\u0027s the difference of a LocalAddress and PeerLocalAddress?",
+      "revId": "2784b5c5cc0d1e392ce1bb5caf216f62ea578811",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9bb67974_3cab1751",
         "filename": "test/scenario/network_node.cc",
         "patchSetId": 2
@@ -46,6 +80,52 @@
       "revId": "2784b5c5cc0d1e392ce1bb5caf216f62ea578811",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed4f2109_41065ab8",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-28T16:42:48Z",
+      "side": 1,
+      "message": "Make these two members instead. That way we can skip the comments as well.",
+      "range": {
+        "startLine": 124,
+        "startChar": 6,
+        "endLine": 125,
+        "endChar": 57
+      },
+      "revId": "2784b5c5cc0d1e392ce1bb5caf216f62ea578811",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a88de86_3526ef3f",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-28T16:42:48Z",
+      "side": 1,
+      "message": "rtc::IPAddresss remote_address(next_route_id_++);\n\nGoes below as well.",
+      "range": {
+        "startLine": 240,
+        "startChar": 2,
+        "endLine": 240,
+        "endChar": 38
+      },
+      "revId": "2784b5c5cc0d1e392ce1bb5caf216f62ea578811",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
