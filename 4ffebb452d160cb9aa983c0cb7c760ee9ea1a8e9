@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7422674_af7c8115",
+        "filename": "rtc_base/byte_order.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-28T13:27:13Z",
+      "side": 1,
+      "message": "TODO(mbonadei): Fix this comment.",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e871daa_c3c5b0b0",
+        "filename": "rtc_base/byte_order.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-03-28T13:27:13Z",
+      "side": 1,
+      "message": "These are still having the assumption, move them as well?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "4ffebb452d160cb9aa983c0cb7c760ee9ea1a8e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
