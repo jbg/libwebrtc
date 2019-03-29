@@ -2,6 +2,98 @@
   "comments": [
     {
       "key": {
+        "uuid": "70a2cc2f_f5fd250b",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-29T13:35:46Z",
+      "side": 1,
+      "message": "Could this have a more specific name?\n\nOveruseDetectorInterface maybe?",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6103b0c7_b7a09f0a",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-29T13:35:46Z",
+      "side": 1,
+      "message": "Is this strictly needed, or could it be done on construction? (when calling Create on factory)",
+      "range": {
+        "startLine": 31,
+        "startChar": 15,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95e9a040_72cf3a7f",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-29T13:35:46Z",
+      "side": 1,
+      "message": "Should be an enum?",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "204fd0aa_55fca976",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-29T13:35:46Z",
+      "side": 1,
+      "message": "enum?",
+      "range": {
+        "startLine": 41,
+        "startChar": 31,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d4e718e9_2dfef169",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 6
