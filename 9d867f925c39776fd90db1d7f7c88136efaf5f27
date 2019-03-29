@@ -22,6 +22,30 @@
       "revId": "9d867f925c39776fd90db1d7f7c88136efaf5f27",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a0ceb4f_79b27e87",
+        "filename": "modules/video_coding/jitter_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-03-29T11:37:13Z",
+      "side": 1,
+      "message": "This test expected the default behavior kNoNack, but now the default is kNack. From what I can tell the jitter buffer will now try to wait for the missing frames instead of skipping ahead (pid 5 --\u003e pid 9).\n\nUnfortunately I don\u0027t know the VCMJitterBuffer too well...",
+      "parentUuid": "f3c4c586_2065a2cd",
+      "range": {
+        "startLine": 887,
+        "startChar": 1,
+        "endLine": 887,
+        "endChar": 75
+      },
+      "revId": "9d867f925c39776fd90db1d7f7c88136efaf5f27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

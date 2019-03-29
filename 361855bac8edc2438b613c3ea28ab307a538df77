@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "518e41b6_48b1da74",
+        "filename": "modules/video_coding/jitter_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-03-29T11:37:13Z",
+      "side": 0,
+      "message": "Can you remove this enum as well?",
+      "range": {
+        "startLine": 181,
+        "startChar": 2,
+        "endLine": 181,
+        "endChar": 13
+      },
+      "revId": "361855bac8edc2438b613c3ea28ab307a538df77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "743a9091_063b2e19",
         "filename": "video/video_stream_decoder.cc",
         "patchSetId": 1
