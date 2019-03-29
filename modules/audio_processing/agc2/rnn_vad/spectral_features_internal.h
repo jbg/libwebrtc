@@ -13,7 +13,6 @@
 
 #include <stddef.h>
 #include <array>
-#include <complex>
 #include <vector>
 
 #include "api/array_view.h"
@@ -42,10 +41,12 @@ class BandFeaturesExtractor {
   ~BandFeaturesExtractor();
 
   // Computes the band-wise spectral cross-correlations.
-  // |x| and |y| must have size equal to |kFftSize20ms24kHz|.
+  // |x| and |y| must have size |kFrameSize20ms24kHz| and they are encoded as
+  // vectors of interleaved real-complex FFT coefficients where x[1] = y[1] = 0
+  // (the Nyquist frequency coefficient is omitted).
   void ComputeSpectralCrossCorrelation(
-      rtc::ArrayView<const std::complex<float>> x,
-      rtc::ArrayView<const std::complex<float>> y,
+      rtc::ArrayView<const float> x,
+      rtc::ArrayView<const float> y,
       rtc::ArrayView<float, kOpusBands24kHz> cross_corr) const;
 
  private:
