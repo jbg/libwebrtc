@@ -14,6 +14,7 @@
 #include <memory>
 #include <vector>
 
+#include "absl/memory/memory.h"
 #include "common_video/h264/h264_common.h"
 #include "modules/video_coding/frame_buffer.h"
 #include "modules/video_coding/jitter_buffer.h"
@@ -200,6 +201,7 @@ TEST_F(Vp9SsMapTest, UpdatePacket) {
   EXPECT_EQ(1, vp9_header.pid_diff[0]);
 }
 
+// TODO(nisse): XXX Drop NackSender and KeyFrameRequestSender inheritance
 class TestBasicJitterBuffer : public ::testing::TestWithParam<std::string>,
                               public NackSender,
                               public KeyFrameRequestSender {
@@ -219,7 +221,7 @@ class TestBasicJitterBuffer : public ::testing::TestWithParam<std::string>,
   void SetUp() override {
     clock_.reset(new SimulatedClock(0));
     jitter_buffer_.reset(new VCMJitterBuffer(
-        clock_.get(), absl::WrapUnique(EventWrapper::Create()), this, this));
+        clock_.get(), absl::WrapUnique(EventWrapper::Create())));
     jitter_buffer_->Start();
     seq_num_ = 1234;
     timestamp_ = 0;
@@ -305,6 +307,8 @@ class TestBasicJitterBuffer : public ::testing::TestWithParam<std::string>,
   std::unique_ptr<VCMJitterBuffer> jitter_buffer_;
 };
 
+// TODO(nisse): XXX Drop NackSender and KeyFrameRequestSender inheritance
+
 class TestRunningJitterBuffer : public ::testing::TestWithParam<std::string>,
                                 public NackSender,
                                 public KeyFrameRequestSender {
@@ -327,7 +331,7 @@ class TestRunningJitterBuffer : public ::testing::TestWithParam<std::string>,
     max_nack_list_size_ = 150;
     oldest_packet_to_nack_ = 250;
     jitter_buffer_ = new VCMJitterBuffer(
-        clock_.get(), absl::WrapUnique(EventWrapper::Create()), this, this);
+        clock_.get(), absl::WrapUnique(EventWrapper::Create()));
     stream_generator_ = new StreamGenerator(0, clock_->TimeInMilliseconds());
     jitter_buffer_->Start();
     jitter_buffer_->SetNackSettings(max_nack_list_size_, oldest_packet_to_nack_,
