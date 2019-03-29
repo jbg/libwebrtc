@@ -118,6 +118,7 @@ TEST(RTCStatsReport, Take) {
 }
 
 TEST(RTCStatsReport, TakeMembersFrom) {
+  EXPECT_TRUE(false);
   rtc::scoped_refptr<RTCStatsReport> a = RTCStatsReport::Create(1337);
   EXPECT_EQ(a->timestamp_us(), 1337u);
   a->AddStats(std::unique_ptr<RTCStats>(new RTCTestStats1("B", 1)));
