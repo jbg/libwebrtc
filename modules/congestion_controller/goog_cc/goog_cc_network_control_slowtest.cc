@@ -49,7 +49,7 @@ TEST(GoogCcNetworkControllerTest, MaintainsLowRateInSafeResetTrial) {
   const DataRate kStartRate = DataRate::kbps(300);
 
   ScopedFieldTrials trial("WebRTC-Bwe-SafeResetOnRouteChange/Enabled/");
-  Scenario s("googcc_unit/safe_reset_low", true);
+  Scenario s("googcc_unit/safe_reset_low");
   auto* send_net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
     c->simulation.bandwidth = kLinkCapacity;
     c->simulation.delay = TimeDelta::ms(10);
@@ -78,7 +78,7 @@ TEST(GoogCcNetworkControllerTest, CutsHighRateInSafeResetTrial) {
   const DataRate kStartRate = DataRate::kbps(300);
 
   ScopedFieldTrials trial("WebRTC-Bwe-SafeResetOnRouteChange/Enabled/");
-  Scenario s("googcc_unit/safe_reset_high_cut", true);
+  Scenario s("googcc_unit/safe_reset_high_cut");
   auto send_net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
     c->simulation.bandwidth = kLinkCapacity;
     c->simulation.delay = TimeDelta::ms(50);
@@ -110,7 +110,7 @@ TEST(GoogCcNetworkControllerTest, DetectsHighRateInSafeResetTrial) {
   const DataRate kNewLinkCapacity = DataRate::kbps(800);
   const DataRate kStartRate = DataRate::kbps(300);
 
-  Scenario s("googcc_unit/safe_reset_high_detect", true);
+  Scenario s("googcc_unit/safe_reset_high_detect");
   auto* initial_net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
     c->simulation.bandwidth = kInitialLinkCapacity;
     c->simulation.delay = TimeDelta::ms(50);
@@ -153,7 +153,7 @@ TEST(GoogCcNetworkControllerTest,
   const DataRate kLinkCapacity = DataRate::kbps(1000);
   const DataRate kStartRate = DataRate::kbps(1000);
 
-  Scenario s("googcc_unit/pacing_buffer_buildup", true);
+  Scenario s("googcc_unit/pacing_buffer_buildup");
   auto* net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
     c->simulation.bandwidth = kLinkCapacity;
     c->simulation.delay = TimeDelta::ms(50);
@@ -176,7 +176,7 @@ TEST(GoogCcNetworkControllerTest,
 
 TEST(GoogCcNetworkControllerTest, NoBandwidthTogglingInLossControlTrial) {
   ScopedFieldTrials trial("WebRTC-Bwe-LossBasedControl/Enabled/");
-  Scenario s("googcc_unit/no_toggling", true);
+  Scenario s("googcc_unit/no_toggling");
   auto* send_net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
     c->simulation.bandwidth = DataRate::kbps(2000);
     c->simulation.loss_rate = 0.2;
@@ -210,7 +210,7 @@ TEST(GoogCcNetworkControllerTest, NoBandwidthTogglingInLossControlTrial) {
 
 TEST(GoogCcNetworkControllerTest, NoRttBackoffCollapseWhenVideoStops) {
   ScopedFieldTrials trial("WebRTC-Bwe-MaxRttLimit/limit:2s/");
-  Scenario s("googcc_unit/rttbackoff_video_stop", true);
+  Scenario s("googcc_unit/rttbackoff_video_stop");
   auto* send_net = s.CreateSimulationNode([&](NetworkNodeConfig* c) {
     c->simulation.bandwidth = DataRate::kbps(2000);
     c->simulation.delay = TimeDelta::ms(100);

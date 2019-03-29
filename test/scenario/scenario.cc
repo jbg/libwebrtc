@@ -56,9 +56,9 @@ std::unique_ptr<TimeController> CreateTimeController(bool real_time) {
 }
 
 Scenario::Scenario()
-    : Scenario(std::unique_ptr<LogWriterFactoryInterface>(), true) {}
+    : Scenario(std::unique_ptr<LogWriterFactoryInterface>(), false) {}
 
-Scenario::Scenario(std::string file_name) : Scenario(file_name, true) {}
+Scenario::Scenario(std::string file_name) : Scenario(file_name, false) {}
 
 Scenario::Scenario(std::string file_name, bool real_time)
     : Scenario(GetScenarioLogManager(file_name), real_time) {}
