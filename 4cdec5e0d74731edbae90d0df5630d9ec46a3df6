@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16d53f3b_b38db23b",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "To avoid repeating yourself, what about naming the computation?\nint size \u003d packet.data.size() - route_overhead_.at(packet.to.ipaddr()).bytes());",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20a9d768_2f11a1a6",
+        "filename": "test/scenario/call_client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "This makes me nervous!\n* IPAddress::operator\u003c isn\u0027t completely trivial. Any failure to comply to `compare` requirement would cause tricky bugs.\n* std::map is pretty slow (no cache friendly).\n\nYou don\u0027t need ordering, as far as I can tell. Why not using absl::flat_hash_map?",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfdde04f_2ba6d7c2",
+        "filename": "test/scenario/network/network_emulation.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "\"Pass by value and use std::move\"",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "161f4529_3aa50d1b",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "From our friend clang-tidy: move constructors should be marked noexcept [hicpp-noexcept-move]",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 50
+      },
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78a426c5_c3e82024",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "Consider using const reference!",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed8a1219_2087f1b8",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "Why is local_address_ used here and not on line 110 and 182?",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51cf13ad_b5773e5a",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "You might indicate which component prevents to use version-agnostic IPAddress. Is it NetworkRoute?",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59e25629_fc2a2634",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "He? uint32 truncated to uint16? Why does this even compile?",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f776739_d4835042",
+        "filename": "test/scenario/network_node.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-03-29T18:56:53Z",
+      "side": 1,
+      "message": "Can you please explain here and/or the CL description why this field was added?",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
