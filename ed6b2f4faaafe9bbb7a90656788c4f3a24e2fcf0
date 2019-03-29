@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4e718e9_2dfef169",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-03-29T13:27:41Z",
+      "side": 1,
+      "message": "Is it possible to instead let the NetworkControllerFactory own/create the NetworkPredictor? Seems unnecessary to inject both through the same path?",
+      "range": {
+        "startLine": 1251,
+        "startChar": 18,
+        "endLine": 1251,
+        "endChar": 51
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
