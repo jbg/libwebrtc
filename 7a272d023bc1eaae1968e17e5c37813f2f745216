@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ae36440_0bc37040",
+        "filename": "modules/audio_processing/utility/pffft_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-03-29T10:09:40Z",
+      "side": 1,
+      "message": "Is this really thread safe? Another thread could be accessing pffft_status_ while this function call is ongoing.",
+      "range": {
+        "startLine": 131,
+        "startChar": 29,
+        "endLine": 131,
+        "endChar": 42
+      },
+      "revId": "7a272d023bc1eaae1968e17e5c37813f2f745216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
