@@ -12,6 +12,7 @@
 
 #include "api/bitrate_constraints.h"
 #include "api/fec_controller.h"
+#include "api/network_predictor.h"
 #include "api/rtc_error.h"
 #include "api/transport/network_control.h"
 #include "call/audio_state.h"
@@ -44,6 +45,9 @@ struct CallConfig {
 
   // FecController to use for this call.
   FecControllerFactoryInterface* fec_controller_factory = nullptr;
+
+  // NetworkPredictor to use for this call.
+  NetworkPredictorFactoryInterface* network_predictor_factory = nullptr;
 
   // Network controller factory to use for this call.
   NetworkControllerFactoryInterface* network_controller_factory = nullptr;
