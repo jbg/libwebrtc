@@ -2302,7 +2302,15 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::RecreateWebRtcStream() {
                            "payload type the set codec. Ignoring RTX.";
     config.rtp.rtx.ssrcs.clear();
   }
-  config.is_svc = parameters_.encoder_config.number_of_streams == 1;
+  if (parameters_.encoder_config.number_of_streams == 1) {
+    // SVC is used instead of simulcast. Remove unnecessary SSRCs.
+    if (config.rtp.ssrcs.size() > 1) {
+      config.rtp.ssrcs.resize(1);
+    }
+    if (config.rtp.rtx.ssrcs.size() > 1) {
+      config.rtp.rtx.ssrcs.resize(1);
+    }
+  }
   stream_ = call_->CreateVideoSendStream(std::move(config),
                                          parameters_.encoder_config.Copy());
 

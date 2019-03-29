@@ -3063,7 +3063,6 @@ TEST_F(Vp9SettingsTest, MultipleSsrcsEnablesSvc) {
       AddSendStream(CreateSimStreamParams("cname", ssrcs));
 
   webrtc::VideoSendStream::Config config = stream->GetConfig().Copy();
-  EXPECT_EQ(ssrcs.size(), config.rtp.ssrcs.size());
 
   webrtc::test::FrameForwarder frame_forwarder;
   EXPECT_TRUE(channel_->SetVideoSend(ssrcs[0], nullptr, &frame_forwarder));
