@@ -75,7 +75,7 @@ class NetworkNodeTransport : public Transport {
   bool SendRtcp(const uint8_t* packet, size_t length) override;
 
   void Connect(EmulatedNetworkNode* send_node,
-               uint64_t receiver_id,
+               rtc::IPAddress receiver_ip,
                DataSize packet_overhead);
 
   DataSize packet_overhead() {
@@ -88,7 +88,7 @@ class NetworkNodeTransport : public Transport {
   Clock* const sender_clock_;
   Call* const sender_call_;
   EmulatedNetworkNode* send_net_ RTC_GUARDED_BY(crit_sect_) = nullptr;
-  uint64_t receiver_id_ RTC_GUARDED_BY(crit_sect_) = 0;
+  rtc::SocketAddress receiver_address_ RTC_GUARDED_BY(crit_sect_);
   DataSize packet_overhead_ RTC_GUARDED_BY(crit_sect_) = DataSize::Zero();
 };
 
@@ -103,12 +103,12 @@ class CrossTrafficSource {
  private:
   friend class Scenario;
   CrossTrafficSource(EmulatedNetworkReceiverInterface* target,
-                     uint64_t receiver_id,
+                     rtc::IPAddress receiver_ip,
                      CrossTrafficConfig config);
   void Process(Timestamp at_time, TimeDelta delta);
 
   EmulatedNetworkReceiverInterface* const target_;
-  const uint64_t receiver_id_;
+  const rtc::SocketAddress receiver_address_;
   CrossTrafficConfig config_;
   webrtc::Random random_;
 
