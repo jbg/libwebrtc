@@ -114,6 +114,52 @@
       "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68f56fd5_40c29d67",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-03-29T14:07:28Z",
+      "side": 1,
+      "message": "Feed packet_feedback to RunInference and perform these calculations internally there?",
+      "range": {
+        "startLine": 213,
+        "startChar": 3,
+        "endLine": 221,
+        "endChar": 68
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "696e0dc7_074e9202",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-03-29T14:07:28Z",
+      "side": 1,
+      "message": "This should be done internally in the injected component. It already gets \"State()\" as input, so it can do it. Here, should just return hypothesis_predicted_.",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 3
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
