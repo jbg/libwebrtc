@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59ce72d3_9fa91e22",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-29T12:39:35Z",
+      "side": 1,
+      "message": "nit: Even though it\u0027s just an empty value now, for consistency I\u0027d prefer it to be a member:\nconst rtc::SocketAddress local_address_;",
+      "range": {
+        "startLine": 122,
+        "startChar": 6,
+        "endLine": 122,
+        "endChar": 26
+      },
+      "revId": "f71ea797a93cd6a7747aef0df8360f33909a6de5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3d7e195_800af423",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-03-29T12:39:35Z",
+      "side": 1,
+      "message": "nit: Keep this inline?",
+      "range": {
+        "startLine": 241,
+        "startChar": 1,
+        "endLine": 241,
+        "endChar": 47
+      },
+      "revId": "f71ea797a93cd6a7747aef0df8360f33909a6de5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
