@@ -16,6 +16,7 @@
 
 #include "api/array_view.h"
 #include "modules/audio_processing/agc2/rnn_vad/test_utils.h"
+#include "modules/audio_processing/utility/pffft_wrapper.h"
 // TODO(bugs.webrtc.org/8948): Add when the issue is fixed.
 // #include "test/fpe_observer.h"
 #include "test/gtest.h"
@@ -26,10 +27,17 @@ namespace test {
 
 TEST(RnnVadTest, BandFeaturesExtractorValidOutput) {
   BandFeaturesExtractor e;
-  std::array<std::complex<float>, kFftSize20ms24kHz> in;
+  // Instance the input buffer filled with 1+i1 values.
+  Pffft fft(kFrameSize20ms24kHz, Pffft::FftType::kReal);
+  auto in = fft.CreateBuffer();
+  auto in_view = in->GetView();
+  std::fill(in_view.begin(), in_view.end(), 1.f);
+  in_view[1] = 0.f;  // Nyquist frequency.
+  // Compute band features.
   std::array<float, kOpusBands24kHz> out;
-  in.fill({1.f, 1.f});
-  e.ComputeSpectralCrossCorrelation(in, in, out);
+  e.ComputeSpectralCrossCorrelation(in->GetConstView(), in->GetConstView(),
+                                    out);
+  // Check.
   for (size_t i = 0; i < kOpusBands24kHz; ++i) {
     SCOPED_TRACE(i);
     EXPECT_GT(out[i], 0.f);
