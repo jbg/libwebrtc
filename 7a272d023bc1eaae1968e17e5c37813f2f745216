@@ -22,6 +22,30 @@
       "revId": "7a272d023bc1eaae1968e17e5c37813f2f745216",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cdfc070_b5b4cd51",
+        "filename": "modules/audio_processing/utility/pffft_wrapper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-03-29T12:05:25Z",
+      "side": 1,
+      "message": "Right. PFFFT gets a non-const pointer for that member, so it\u0027s not read-only. Therefore, we can\u0027t guarantee it\u0027s thread safe even if the scratch buffer isn\u0027t used. I reverted the docstring edits on thread safety.",
+      "parentUuid": "3ae36440_0bc37040",
+      "range": {
+        "startLine": 131,
+        "startChar": 29,
+        "endLine": 131,
+        "endChar": 42
+      },
+      "revId": "7a272d023bc1eaae1968e17e5c37813f2f745216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
