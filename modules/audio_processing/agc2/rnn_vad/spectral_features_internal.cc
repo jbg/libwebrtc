@@ -81,25 +81,26 @@ BandFeaturesExtractor::BandFeaturesExtractor()
 BandFeaturesExtractor::~BandFeaturesExtractor() = default;
 
 void BandFeaturesExtractor::ComputeSpectralCrossCorrelation(
-    rtc::ArrayView<const std::complex<float>> x,
-    rtc::ArrayView<const std::complex<float>> y,
+    rtc::ArrayView<const float> x,
+    rtc::ArrayView<const float> y,
     rtc::ArrayView<float, kOpusBands24kHz> cross_corr) const {
-  RTC_DCHECK_EQ(x.size(), kFftSize20ms24kHz);
-  RTC_DCHECK_EQ(y.size(), kFftSize20ms24kHz);
+  RTC_DCHECK_EQ(x.size(), kFrameSize20ms24kHz);
+  RTC_DCHECK_EQ(y.size(), kFrameSize20ms24kHz);
+  RTC_DCHECK_EQ(x[1], 0.f) << "The Nyquist coefficient must be zeroed.";
+  RTC_DCHECK_EQ(y[1], 0.f) << "The Nyquist coefficient must be zeroed.";
   size_t k = 0;  // Next Fourier coefficient index.
   cross_corr[0] = 0.f;
   for (size_t i = 0; i < kOpusScaleNumBins24kHz20ms.size(); ++i) {
     cross_corr[i + 1] = 0.f;
     for (int j = 0; j < kOpusScaleNumBins24kHz20ms[i]; ++j) {  // Band size.
-      const float v = x[k].real() * y[k].real() + x[k].imag() * y[k].imag();
+      const float v = x[2 * k] * y[2 * k] + x[2 * k + 1] * y[2 * k + 1];
       cross_corr[i] += (1.f - weights_[k]) * v;
       cross_corr[i + 1] += weights_[k] * v;
       k++;
     }
   }
   cross_corr[0] *= 2.f;  // The first band only gets half contribution.
-  // The Nyquist coefficient is never used.
-  RTC_DCHECK_EQ(k, kFftSize20ms24kHz - 1);
+  RTC_DCHECK_EQ(k, kFftSize20ms24kHz - 1);  // Nyquist coefficient never used.
 }
 
 void ComputeLogBandEnergiesCoefficients(
