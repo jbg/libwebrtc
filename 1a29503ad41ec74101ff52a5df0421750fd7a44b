@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa9faab0_53e983d6",
+        "filename": "modules/audio_processing/agc2/rnn_vad/spectral_features.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-30T21:56:47Z",
+      "side": 1,
+      "message": "Please change to\nfor (size_t i \u003d 0, j \u003d kFrameSize20ms24kHz - 1; i \u003c half_window.size(); ++i,--j) {\n    in[i] \u003d frame[i] * half_window[i];\n    in[j] \u003d frame[j] * half_window[i];\n  }",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 3
+      },
+      "revId": "1a29503ad41ec74101ff52a5df0421750fd7a44b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a9c81f4_d5ef5a9e",
+        "filename": "modules/audio_processing/agc2/rnn_vad/spectral_features_internal.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-03-30T21:56:47Z",
+      "side": 1,
+      "message": "Change to\n const float v \u003d x[k] * y[k] + x[k + 1] * y[k + 1];\n...\n\nk+\u003d2",
+      "range": {
+        "startLine": 96,
+        "startChar": 5,
+        "endLine": 96,
+        "endChar": 72
+      },
+      "revId": "1a29503ad41ec74101ff52a5df0421750fd7a44b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
