@@ -360,9 +360,11 @@ void RtpVideoSender::SetActive(bool active) {
 
 void RtpVideoSender::SetActiveModules(const std::vector<bool> active_modules) {
   rtc::CritScope lock(&crit_);
-  RTC_DCHECK_EQ(rtp_streams_.size(), active_modules.size());
+  // In case of SVC there may be less rtp_streams_ than layers signaled by
+  // the WebrtcVideoEngine.
+  RTC_DCHECK_LE(rtp_streams_.size(), active_modules.size());
   active_ = false;
-  for (size_t i = 0; i < active_modules.size(); ++i) {
+  for (size_t i = 0; i < rtp_streams_.size(); ++i) {
     if (active_modules[i]) {
       active_ = true;
     }
