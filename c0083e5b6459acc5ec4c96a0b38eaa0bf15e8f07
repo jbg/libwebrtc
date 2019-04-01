@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ae7159d_4bb6291d",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-01T11:18:49Z",
+      "side": 1,
+      "message": "I wanted to match the audio config. But it\u0027s not really specific to the renderer itself anymore, it\u0027s about \"how to render\", it could be called \"Rendering\" not sure if that makes much of a difference, WDYT?",
+      "parentUuid": "36b342a6_c230d679",
+      "range": {
+        "startLine": 181,
+        "startChar": 9,
+        "endLine": 181,
+        "endChar": 16
+      },
+      "revId": "c0083e5b6459acc5ec4c96a0b38eaa0bf15e8f07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bfdea0a0_d2b1a39d",
         "filename": "test/scenario/scenario_config.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "c0083e5b6459acc5ec4c96a0b38eaa0bf15e8f07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36e24c11_863b86e1",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-01T11:18:49Z",
+      "side": 1,
+      "message": "Good catch, I\u0027m planning to deprecate this in an upcoming CL I\u0027ll look at it then.",
+      "parentUuid": "bfdea0a0_d2b1a39d",
+      "range": {
+        "startLine": 185,
+        "startChar": 8,
+        "endLine": 185,
+        "endChar": 17
+      },
+      "revId": "c0083e5b6459acc5ec4c96a0b38eaa0bf15e8f07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
