@@ -16,6 +16,24 @@
       "revId": "bb9e370e695aaf99040bb33c9164a30d502a9845",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3787ee0e_0c92719b",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-01T10:02:34Z",
+      "side": 1,
+      "message": "There is a check above, so this value is in range, so conversion is safe.",
+      "parentUuid": "04454f1b_f63cb351",
+      "revId": "bb9e370e695aaf99040bb33c9164a30d502a9845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
