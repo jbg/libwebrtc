@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36b342a6_c230d679",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-04-01T10:00:22Z",
+      "side": 1,
+      "message": "Isn\u0027t old name better? Renderer is a component, render is a verb.",
+      "range": {
+        "startLine": 181,
+        "startChar": 9,
+        "endLine": 181,
+        "endChar": 16
+      },
+      "revId": "c0083e5b6459acc5ec4c96a0b38eaa0bf15e8f07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfdea0a0_d2b1a39d",
+        "filename": "test/scenario/scenario_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-04-01T10:00:22Z",
+      "side": 1,
+      "message": "Capital A?",
+      "range": {
+        "startLine": 185,
+        "startChar": 8,
+        "endLine": 185,
+        "endChar": 17
+      },
+      "revId": "c0083e5b6459acc5ec4c96a0b38eaa0bf15e8f07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
