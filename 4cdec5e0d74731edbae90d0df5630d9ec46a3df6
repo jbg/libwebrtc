@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fb5ec06f_98305894",
+        "filename": "test/scenario/call_client.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-01T09:01:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16d53f3b_b38db23b",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "20a9d768_2f11a1a6",
         "filename": "test/scenario/call_client.h",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea0fade0_bd1b269d",
+        "filename": "test/scenario/call_client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-01T09:01:51Z",
+      "side": 1,
+      "message": "I\u0027m not sure, that we can use this type in webrtc... At least it failed to compile.\nrtc::IPAddress compare looks correct. Especially we are using quite simple IPs here.",
+      "parentUuid": "20a9d768_2f11a1a6",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -110,6 +146,24 @@
     },
     {
       "key": {
+        "uuid": "0dd74bab_2182df25",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-01T09:01:51Z",
+      "side": 1,
+      "message": "110 - Done\n182 - is another class",
+      "parentUuid": "ed8a1219_2087f1b8",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51cf13ad_b5773e5a",
         "filename": "test/scenario/network_node.cc",
         "patchSetId": 6
@@ -124,6 +178,24 @@
       "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d146542_0cf4fbec",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-01T09:01:51Z",
+      "side": 1,
+      "message": "Yep. We needn\u0027t full range of IP addresses and also we need simple way to convert IP into network id to signal.",
+      "parentUuid": "51cf13ad_b5773e5a",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -144,6 +216,24 @@
     },
     {
       "key": {
+        "uuid": "5d31c3f5_9b8ab3b0",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-01T09:01:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59e25629_fc2a2634",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f776739_d4835042",
         "filename": "test/scenario/network_node.h",
         "patchSetId": 6
@@ -158,6 +248,24 @@
       "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e055c899_ad1fbddb",
+        "filename": "test/scenario/network_node.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-01T09:01:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f776739_d4835042",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
