@@ -1198,18 +1198,20 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
     recv_event_log_ = RtcEventLog::CreateNull();
   }
 
-  Call::Config send_call_config(send_event_log_.get());
-  Call::Config recv_call_config(recv_event_log_.get());
-  send_call_config.bitrate_config = params.call.call_bitrate_config;
-  recv_call_config.bitrate_config = params.call.call_bitrate_config;
+  std::unique_ptr<Call::Config> send_call_config =
+      absl::make_unique<Call::Config>(send_event_log_.get());
+  std::unique_ptr<Call::Config> recv_call_config =
+      absl::make_unique<Call::Config>(recv_event_log_.get());
+  send_call_config->bitrate_config = params.call.call_bitrate_config;
+  recv_call_config->bitrate_config = params.call.call_bitrate_config;
 
   task_queue_.SendTask([this, &send_call_config, &recv_call_config,
                         &send_transport, &recv_transport]() {
     if (params_.audio.enabled)
-      InitializeAudioDevice(&send_call_config, &recv_call_config,
+      InitializeAudioDevice(send_call_config.get(), recv_call_config.get(),
                             params_.audio.use_real_adm);
 
-    CreateCalls(send_call_config, recv_call_config);
+    CreateCalls(*send_call_config, *recv_call_config);
     send_transport = CreateSendTransport();
     recv_transport = CreateReceiveTransport();
   });
@@ -1229,7 +1231,8 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
       kSendRtxSsrcs[params_.ss[0].selected_stream],
       static_cast<size_t>(params_.ss[0].selected_stream),
       params.ss[0].selected_sl, params_.video[0].selected_tl,
-      is_quick_test_enabled, clock_, params_.logging.rtp_dump_name);
+      is_quick_test_enabled, clock_, params_.logging.rtp_dump_name,
+      &task_queue_);
 
   task_queue_.SendTask([&]() {
     analyzer_->SetCall(sender_call_.get());
@@ -1292,6 +1295,10 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
     recv_transport.reset();
 
     DestroyCalls();
+
+    // Configs have to be destroyed on the same thread, where they were created.
+    send_call_config.reset();
+    recv_call_config.reset();
   });
   analyzer_ = nullptr;
 }
