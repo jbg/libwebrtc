@@ -117,6 +117,30 @@
       "revId": "0f6a985f7b2af94df67123b7d4fc49b5355b19d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74ee2120_8f72d9f6",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-01T09:24:09Z",
+      "side": 1,
+      "message": "Wiring to jitter buffer now gone. Latest patchset keeps RequestKeyFrame as a private method in this class, but it no longer inherits/implements the KeyFrameRequestSender interface.",
+      "parentUuid": "c0eae8eb_d4ae6d0a",
+      "range": {
+        "startLine": 201,
+        "startChar": 22,
+        "endLine": 201,
+        "endChar": 26
+      },
+      "revId": "0f6a985f7b2af94df67123b7d4fc49b5355b19d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
