@@ -25,12 +25,13 @@
 #include "api/video_codecs/video_encoder_factory.h"
 #include "common_types.h"  // NOLINT(build/include)
 #include "modules/video_coding/include/video_codec_interface.h"
+#include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
 
 // This class provides fallback to SimulcastEncoderAdapter if default VP8Encoder
 // doesn't support simulcast for provided settings.
-class EncoderSimulcastProxy : public VideoEncoder {
+class RTC_EXPORT EncoderSimulcastProxy : public VideoEncoder {
  public:
   EncoderSimulcastProxy(VideoEncoderFactory* factory,
                         const SdpVideoFormat& format);
