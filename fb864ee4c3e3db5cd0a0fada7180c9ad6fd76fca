@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "652a77dd_ce1c9309",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-04-01T09:57:32Z",
+      "side": 1,
+      "message": "Suggest adding inline \n/* Real-time execution */",
+      "range": {
+        "startLine": 59,
+        "startChar": 61,
+        "endLine": 59,
+        "endChar": 67
+      },
+      "revId": "fb864ee4c3e3db5cd0a0fada7180c9ad6fd76fca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5587e76_a45ac1ca",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-04-01T09:57:32Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 61,
+        "startChar": 64,
+        "endLine": 61,
+        "endChar": 69
+      },
+      "revId": "fb864ee4c3e3db5cd0a0fada7180c9ad6fd76fca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
