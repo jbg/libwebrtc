@@ -94,7 +94,6 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
     ReceiveStatisticsProxy* receive_stats_proxy,
     ProcessThread* process_thread,
     NackSender* nack_sender,
-    KeyFrameRequestSender* keyframe_request_sender,
     video_coding::OnCompleteFrameCallback* complete_frame_callback,
     rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor)
     : clock_(clock),
@@ -114,7 +113,6 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
                                     receive_stats_proxy,
                                     packet_router)),
       complete_frame_callback_(complete_frame_callback),
-      keyframe_request_sender_(keyframe_request_sender),
       has_received_frame_(false),
       frames_decryptable_(false) {
   constexpr bool remb_candidate = true;
@@ -149,11 +147,9 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
 
   if (webrtc::field_trial::IsEnabled("WebRTC-RtcpLossNotification")) {
     loss_notification_controller_ =
-        absl::make_unique<LossNotificationController>(keyframe_request_sender_,
-                                                      this);
+        absl::make_unique<LossNotificationController>(this, this);
   } else if (config_.rtp.nack.rtp_history_ms != 0) {
-    nack_module_ = absl::make_unique<NackModule>(clock_, nack_sender,
-                                                 keyframe_request_sender);
+    nack_module_ = absl::make_unique<NackModule>(clock_, nack_sender, this);
     process_thread_->RegisterModule(nack_module_.get(), RTC_FROM_HERE);
   }
 
@@ -273,7 +269,7 @@ int32_t RtpVideoStreamReceiver::OnReceivedPayloadData(
 
     switch (tracker_.CopyAndFixBitstream(&packet)) {
       case video_coding::H264SpsPpsTracker::kRequestKeyframe:
-        keyframe_request_sender_->RequestKeyFrame();
+        RequestKeyFrame();
         RTC_FALLTHROUGH();
       case video_coding::H264SpsPpsTracker::kDrop:
         return 0;
@@ -418,7 +414,7 @@ void RtpVideoStreamReceiver::OnAssembledFrame(
   } else if (!has_received_frame_) {
     // Request a key frame as soon as possible.
     if (frame->FrameType() != VideoFrameType::kVideoFrameKey) {
-      keyframe_request_sender_->RequestKeyFrame();
+      RequestKeyFrame();
     }
   }
 
