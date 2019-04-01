@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "458851a9_13f3b4c8",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2005,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-01T12:16:13Z",
+      "side": 1,
+      "message": "If you can arrange so that active_layers.size() \u003d\u003d 1 here for svc, then you shouldn\u0027t need to modify RtpVideoSender::SetActiveModules",
+      "range": {
+        "startLine": 2005,
+        "startChar": 0,
+        "endLine": 2005,
+        "endChar": 56
+      },
+      "revId": "b965e7ff158be9ed55f2802791907ce89c9accc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bfd857b_695a9050",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-01T12:16:13Z",
+      "side": 1,
+      "message": "Move this check inside the if (config.rtp.ssrcs.size() \u003e 1) block? If config.rtp.ssrcs.size() \u003d\u003d 1, then config.rtp.rtx.ssrcs.size() ought to be either 0 or 1.\n\nWe should perhaps clamp or DCHECK somewhere to ensure that \n\n  config.rtp.rtx.ssrcs.size() \u003c\u003d config.rtp.ssrcs.size()\n\n?",
+      "range": {
+        "startLine": 2310,
+        "startChar": 0,
+        "endLine": 2312,
+        "endChar": 5
+      },
+      "revId": "b965e7ff158be9ed55f2802791907ce89c9accc8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
