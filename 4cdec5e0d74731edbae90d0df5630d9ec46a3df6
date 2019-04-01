@@ -130,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "629eabf6_d422a1fa",
+        "filename": "test/scenario/network/network_emulation.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-04-01T12:17:30Z",
+      "side": 1,
+      "message": "The default move doesn\u0027t throw here, so cland-tidy suggestion is to add the noexcept qualifier.\nOtherwise, some std library containers won\u0027t be able to use the move methods at all.\n\nBy the way, if \u0027\u003d default\u0027 is used in the header, there is no such diagnostic. I guess it\u0027s because the compiler can then infer the noexcept behavior.\nSo, either add \u0027noexcept\u0027 or \u0027\u003d default\u0027. I think the second option is neater and more descriptive anyway.\n\nRef: Rule 12.5.4 https://www.perforce.com/resources/qac/high-integrity-cpp-coding-standard",
+      "parentUuid": "161f4529_3aa50d1b",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 50
+      },
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78a426c5_c3e82024",
         "filename": "test/scenario/network/network_emulation.h",
         "patchSetId": 6
