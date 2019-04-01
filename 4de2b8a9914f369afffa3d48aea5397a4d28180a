@@ -46,6 +46,30 @@
       "revId": "4de2b8a9914f369afffa3d48aea5397a4d28180a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5cd754f_0d248dd5",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-01T11:43:17Z",
+      "side": 1,
+      "message": "Right, I missed that.\nI think making |rtp_rtcp_| in RtpVideoStreamReceiver injectable sounds like a good idea to make other testing easier as well. Doesn\u0027t look like it needs to be too complex?",
+      "parentUuid": "0ce7cf7c_4630b99f",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 5
+      },
+      "revId": "4de2b8a9914f369afffa3d48aea5397a4d28180a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
