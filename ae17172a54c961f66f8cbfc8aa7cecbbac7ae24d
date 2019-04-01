@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c8051c2_a90df553",
+        "filename": "video/video_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-01T15:21:23Z",
+      "side": 1,
+      "message": "Maybe can it be moved inside task_queue call and destroyed when leaving the scope?",
+      "range": {
+        "startLine": 1201,
+        "startChar": 32,
+        "endLine": 1201,
+        "endChar": 48
+      },
+      "revId": "ae17172a54c961f66f8cbfc8aa7cecbbac7ae24d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
