@@ -22,6 +22,30 @@
       "revId": "4de2b8a9914f369afffa3d48aea5397a4d28180a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ce7cf7c_4630b99f",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-01T09:50:33Z",
+      "side": 1,
+      "message": "I commented on this in ps#1. It\u0027s not obvious how to update the test, since it mocks a level of indirection, via the KeyFrameRequestSender interface, that is deleted by this cl. Instead, key frames are sent by calling a method on the RtpRtcp object that is internal to RtpVideoStreamReceiver. \n\nAdvice appreciated. Injecting and mocking the RtpRtcp module is one possibility, but maybe there\u0027s some better or easier way?\n\nI imagine the purpose of the test is still relevant, so we can\u0027t just delete it?",
+      "parentUuid": "a85d65d8_fb57c2c6",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 5
+      },
+      "revId": "4de2b8a9914f369afffa3d48aea5397a4d28180a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
