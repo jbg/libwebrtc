@@ -25,6 +25,7 @@
 
 namespace webrtc {
 namespace videocapturemodule {
+
 rtc::scoped_refptr<VideoCaptureModule> VideoCaptureImpl::Create(
     VideoCaptureExternal*& externalCapture) {
   rtc::scoped_refptr<VideoCaptureImpl> implementation(
@@ -159,11 +160,7 @@ int32_t VideoCaptureImpl::IncomingFrame(uint8_t* videoFrame,
 
   // Setting absolute height (in case it was negative).
   // In Windows, the image starts bottom left, instead of top left.
-  // Setting a negative source height, inverts the image (within LibYuv).
-
-  // TODO(nisse): Use a pool?
-  rtc::scoped_refptr<I420Buffer> buffer = I420Buffer::Create(
-      target_width, target_height, stride_y, stride_uv, stride_uv);
+  // Setting a negative source height, inverts the image (within libyuv).
 
   libyuv::RotationMode rotation_mode = libyuv::kRotate0;
   if (apply_rotation) {
@@ -183,11 +180,16 @@ int32_t VideoCaptureImpl::IncomingFrame(uint8_t* videoFrame,
     }
   }
 
+  auto buffer = buffer_pool_.Create(target_width, target_height, stride_y,
+                                    stride_uv, stride_uv);
+  if (!buffer) {
+    RTC_LOG(LS_WARNING) << "No buffers remaining, dropping frame.";
+    return -1;
+  }
   const int conversionResult = libyuv::ConvertToI420(
-      videoFrame, videoFrameLength, buffer.get()->MutableDataY(),
-      buffer.get()->StrideY(), buffer.get()->MutableDataU(),
-      buffer.get()->StrideU(), buffer.get()->MutableDataV(),
-      buffer.get()->StrideV(), 0, 0,  // No Cropping
+      videoFrame, videoFrameLength, buffer->MutableDataY(), buffer->StrideY(),
+      buffer->MutableDataU(), buffer->StrideU(), buffer->MutableDataV(),
+      buffer->StrideV(), 0, 0,  // No Cropping
       width, height, target_width, target_height, rotation_mode,
       ConvertVideoType(frameInfo.videoType));
   if (conversionResult < 0) {
