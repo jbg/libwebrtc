@@ -30,6 +30,7 @@
 #include "api/video/video_source_interface.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
 #include "rtc_base/ref_count.h"
+#include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
 
@@ -52,8 +53,8 @@ class NotifierInterface {
 
 // Base class for sources. A MediaStreamTrack has an underlying source that
 // provides media. A source can be shared by multiple tracks.
-class MediaSourceInterface : public rtc::RefCountInterface,
-                             public NotifierInterface {
+class RTC_EXPORT MediaSourceInterface : public rtc::RefCountInterface,
+                                        public NotifierInterface {
  public:
   enum SourceState { kInitializing, kLive, kEnded, kMuted };
 
@@ -82,8 +83,8 @@ class MediaStreamTrackInterface : public rtc::RefCountInterface,
     kEnded,
   };
 
-  static const char kAudioKind[];
-  static const char kVideoKind[];
+  static RTC_EXPORT const char kAudioKind[];
+  static RTC_EXPORT const char kVideoKind[];
 
   // The kind() method must return kAudioKind only if the object is a
   // subclass of AudioTrackInterface, and kVideoKind only if the
@@ -190,7 +191,7 @@ class AudioTrackSinkInterface {
 
 // AudioSourceInterface is a reference counted source used for AudioTracks.
 // The same source can be used by multiple AudioTracks.
-class AudioSourceInterface : public MediaSourceInterface {
+class RTC_EXPORT AudioSourceInterface : public MediaSourceInterface {
  public:
   class AudioObserver {
    public:
