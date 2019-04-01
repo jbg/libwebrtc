@@ -22,6 +22,7 @@
 #include "api/video/video_frame.h"
 #include "api/video/video_rotation.h"
 #include "api/video/video_sink_interface.h"
+#include "common_video/include/i420_buffer_pool.h"
 #include "modules/video_capture/video_capture.h"
 #include "modules/video_capture/video_capture_config.h"
 #include "modules/video_capture/video_capture_defines.h"
@@ -113,6 +114,9 @@ class VideoCaptureImpl : public VideoCaptureModule,
 
   // Indicate whether rotation should be applied before delivered externally.
   bool apply_rotation_;
+
+  // A buffer pool for generating frames.
+  I420BufferPool buffer_pool_;
 };
 }  // namespace videocapturemodule
 }  // namespace webrtc
