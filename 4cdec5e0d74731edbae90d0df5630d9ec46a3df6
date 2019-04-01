@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "7abe4195_44f2d5d3",
+        "filename": "test/scenario/call_client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-04-01T09:34:04Z",
+      "side": 1,
+      "message": "Yes you must provide the hash function for compilation.\nI still think we should default to flat_hash when no ordering is needed, but that\u0027s good enough as is!",
+      "parentUuid": "ea0fade0_bd1b269d",
+      "revId": "4cdec5e0d74731edbae90d0df5630d9ec46a3df6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dfdde04f_2ba6d7c2",
         "filename": "test/scenario/network/network_emulation.cc",
         "patchSetId": 6

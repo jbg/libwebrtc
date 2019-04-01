@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04454f1b_f63cb351",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-04-01T09:34:04Z",
+      "side": 1,
+      "message": "Thanks for the explicitness, now you should mention why is it ok to simply truncate the IP address to form an ID!",
+      "revId": "bb9e370e695aaf99040bb33c9164a30d502a9845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
