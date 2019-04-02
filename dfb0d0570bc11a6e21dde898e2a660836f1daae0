@@ -16,6 +16,24 @@
       "revId": "dfb0d0570bc11a6e21dde898e2a660836f1daae0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56042da6_92f54a2f",
+        "filename": "api/media_stream_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-02T09:34:30Z",
+      "side": 1,
+      "message": "You are right, and since it is an API class I have fixed in PS#3.",
+      "parentUuid": "4ed2e6e4_cbae9461",
+      "revId": "dfb0d0570bc11a6e21dde898e2a660836f1daae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
