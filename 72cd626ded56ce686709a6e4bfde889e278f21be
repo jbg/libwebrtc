@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d0cb81ee_0a8e63c0",
+        "filename": "test/scenario/quality_info.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-02T09:52:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd723868_4c38c22a",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 11
+      },
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "439aa2ac_198ae014",
         "filename": "test/scenario/quality_stats.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "727e1798_dff864fa",
+        "filename": "test/scenario/quality_stats.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-02T09:52:19Z",
+      "side": 1,
+      "message": "It was used before I added multiple layer support, to avoid having to do the copy and allow modifying |captured| directly, but now it\u0027s not needed. Removed.",
+      "parentUuid": "439aa2ac_198ae014",
+      "range": {
+        "startLine": 46,
+        "startChar": 42,
+        "endLine": 46,
+        "endChar": 49
+      },
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e5eb85e_97b12960",
         "filename": "test/scenario/quality_stats.h",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2019-04-02T09:21:40Z",
       "side": 1,
       "message": "Style-wise, this could have been a nested struct inside VideoQualityAnalyzer.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 6
+      },
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "174392f5_b8cc2042",
+        "filename": "test/scenario/quality_stats.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-02T09:52:19Z",
+      "side": 1,
+      "message": "Since this is likely to be moved to a separate header file (for instance on a move to API), I\u0027d prefer to keep it outside.",
+      "parentUuid": "9e5eb85e_97b12960",
       "range": {
         "startLine": 139,
         "startChar": 0,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "903a0c40_36bdd0bc",
+        "filename": "test/scenario/quality_stats.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-02T09:52:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f52463ae_b102383c",
+      "range": {
+        "startLine": 140,
+        "startChar": 6,
+        "endLine": 140,
+        "endChar": 11
+      },
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab9fbd74_f549e532",
         "filename": "test/scenario/video_stream.cc",
         "patchSetId": 4
@@ -108,6 +204,24 @@
       "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d921c683_02dc0c56",
+        "filename": "test/scenario/video_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-02T09:52:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab9fbd74_f549e532",
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
