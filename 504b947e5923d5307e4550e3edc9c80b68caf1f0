@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8241e623_13a09765",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-02T11:05:29Z",
+      "side": 1,
+      "message": "Both are triggered as part of a call to VideoStreamEncoder::OnEncodedImage().\nIf asynchronous encoders are used, there may be a thread handover between the call to OnSendEncodedImage() and OnEncodedFrameTimeMeasured(), which makes this a little bit racy - but I think the difference is going to be tiny.\n\nPotentially we could increment frame encoded here as well, to make sure they are in sync. Not sure what other metrics would become out of sync though.\n\nAnother thing that worries me is that there\u0027s a code path where this method is never called in OveruseFrameDetector::FrameSent().\nI don\u0027t know what that conditions is off the top of my head. cc nisse@ to comment",
+      "parentUuid": "280d4b69_41e6a7b4",
+      "revId": "504b947e5923d5307e4550e3edc9c80b68caf1f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8c781593_7399831d",
         "filename": "video/send_statistics_proxy_unittest.cc",
         "patchSetId": 2
