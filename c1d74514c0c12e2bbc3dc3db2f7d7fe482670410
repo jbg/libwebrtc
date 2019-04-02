@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "895e5e96_53557a76",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-04-02T13:09:12Z",
+      "side": 1,
+      "message": "Convention seems to be to write this like\n/*real_time\u003d*/false",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 34
+      },
+      "revId": "c1d74514c0c12e2bbc3dc3db2f7d7fe482670410",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
