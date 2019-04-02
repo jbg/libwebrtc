@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "280d4b69_41e6a7b4",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-02T10:15:40Z",
+      "side": 1,
+      "message": "I could have added and used \"uma_container_-\u003eencode_time_counter_.Sum()\" here, but I see that other stuff in uma_container_ can get cleared such as uma_container_-\u003eencoded_frames_.clear() at SendStatisticsProxy::OnEncoderReconfigured().\n\nWe don\u0027t want frames_encoded to ever reset, luckily this counter is separate and looks to only increase, but this happens at OnSendEncodedImage(), not OnEncodedFrameTimeMeasured().",
+      "revId": "504b947e5923d5307e4550e3edc9c80b68caf1f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c781593_7399831d",
+        "filename": "video/send_statistics_proxy_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-02T10:15:40Z",
+      "side": 1,
+      "message": "Can you advise an appropriate place to put an integration test to verify that for each frame both total_encode_time_ms and the frames_encoded are increased? Assuming this is a good idea to test; it would be a bug if one of the counters increased but not the other.",
+      "revId": "504b947e5923d5307e4550e3edc9c80b68caf1f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
