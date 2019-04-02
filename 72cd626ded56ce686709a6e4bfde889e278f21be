@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd723868_4c38c22a",
+        "filename": "test/scenario/quality_info.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-04-02T09:21:40Z",
+      "side": 1,
+      "message": "Is this spatial/temporal layering? Or some other layering?",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 11
+      },
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "439aa2ac_198ae014",
+        "filename": "test/scenario/quality_stats.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-04-02T09:21:40Z",
+      "side": 1,
+      "message": "What does this do?",
+      "range": {
+        "startLine": 46,
+        "startChar": 42,
+        "endLine": 46,
+        "endChar": 49
+      },
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e5eb85e_97b12960",
+        "filename": "test/scenario/quality_stats.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-04-02T09:21:40Z",
+      "side": 1,
+      "message": "Style-wise, this could have been a nested struct inside VideoQualityAnalyzer.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 6
+      },
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f52463ae_b102383c",
+        "filename": "test/scenario/quality_stats.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-04-02T09:21:40Z",
+      "side": 1,
+      "message": "Are these counters?",
+      "range": {
+        "startLine": 140,
+        "startChar": 6,
+        "endLine": 140,
+        "endChar": 11
+      },
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab9fbd74_f549e532",
+        "filename": "test/scenario/video_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-04-02T09:21:40Z",
+      "side": 1,
+      "message": "make_unique, since that is used below for the DecodedFrameTap?",
+      "revId": "72cd626ded56ce686709a6e4bfde889e278f21be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
