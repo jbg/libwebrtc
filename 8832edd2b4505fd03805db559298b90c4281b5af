@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aac70dfc_40960fbb",
+        "filename": "video/video_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-02T11:33:56Z",
+      "side": 1,
+      "message": "I am concerned that cancelling task may not terminate the running task immediately. Thus, while analyzer continue to tear down the polling task may still execute. \n\nAlso, If canceltask is executed during the time the self-reposting task like one used here is still running, there\u0027s no scheduled task and cancel task does nothing. Meanwhile the task will repost itself and continue running indefinitely.\n\nEdit: with offline discussion we concluded that additional flag is needed to be checked inside the PollStats().",
+      "range": {
+        "startLine": 392,
+        "startChar": 17,
+        "endLine": 392,
+        "endChar": 27
+      },
+      "revId": "8832edd2b4505fd03805db559298b90c4281b5af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
