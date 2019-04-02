@@ -69,6 +69,24 @@
       "revId": "504b947e5923d5307e4550e3edc9c80b68caf1f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ed5bf64_b8a80dfa",
+        "filename": "video/send_statistics_proxy_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-02T13:06:39Z",
+      "side": 1,
+      "message": "In video_stream_encoder_unittest.cc I can control the number of frames, but not sure how to control the encode time, I ran a test locally and the encode time was zero, so I decided not do to anything here without further input.\n\nI did add total_encode_time_ms to end_to_end_tests/stats_tests.cc but this only checks that it the value is non-zero, it does not verify that each frame leads to both counters going up.",
+      "parentUuid": "5cf2cfca_e51addd7",
+      "revId": "504b947e5923d5307e4550e3edc9c80b68caf1f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
