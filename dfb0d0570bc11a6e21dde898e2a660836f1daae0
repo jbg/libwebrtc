@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ed2e6e4_cbae9461",
+        "filename": "api/media_stream_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-02T09:16:02Z",
+      "side": 1,
+      "message": "Why RTC_EXPORT on individual members, and not on the whole class?",
+      "revId": "dfb0d0570bc11a6e21dde898e2a660836f1daae0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
