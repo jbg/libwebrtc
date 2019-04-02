@@ -20,6 +20,19 @@
 #include "rtc_base/numerics/mod_ops.h"
 
 namespace webrtc {
+namespace webrtc_sequence_number_util_impl {
+template <typename T>
+inline constexpr bool AheadOrAt(T module, T max_dist, T a, T b) {
+  return (!(module & 1) && MinDiff<T>(module, a, b) == max_dist)
+             ? b < a
+             : ForwardDiff<T>(module, b, a) <= max_dist;
+}
+
+template <typename T>
+inline constexpr bool AheadOrAt(T max_dist, T a, T b) {
+  return (a - b == max_dist) ? (b < a) : (ForwardDiff(b, a) < max_dist);
+}
+}  // namespace webrtc_sequence_number_util_impl
 
 // Test if the sequence number |a| is ahead or at sequence number |b|.
 //
@@ -27,27 +40,25 @@ namespace webrtc {
 // from each other, then the sequence number with the highest value is
 // considered to be ahead.
 template <typename T, T M>
-inline typename std::enable_if<(M > 0), bool>::type AheadOrAt(T a, T b) {
+inline constexpr typename std::enable_if<(M > 0), bool>::type AheadOrAt(T a,
+                                                                        T b) {
   static_assert(std::is_unsigned<T>::value,
                 "Type must be an unsigned integer.");
-  const T maxDist = M / 2;
-  if (!(M & 1) && MinDiff<T, M>(a, b) == maxDist)
-    return b < a;
-  return ForwardDiff<T, M>(b, a) <= maxDist;
+  return webrtc_sequence_number_util_impl::AheadOrAt<T>(M, /*max_dist=*/M / 2,
+                                                        a, b);
 }
 
 template <typename T, T M>
-inline typename std::enable_if<(M == 0), bool>::type AheadOrAt(T a, T b) {
+inline constexpr typename std::enable_if<(M == 0), bool>::type AheadOrAt(T a,
+                                                                         T b) {
   static_assert(std::is_unsigned<T>::value,
                 "Type must be an unsigned integer.");
-  const T maxDist = std::numeric_limits<T>::max() / 2 + T(1);
-  if (a - b == maxDist)
-    return b < a;
-  return ForwardDiff(b, a) < maxDist;
+  return webrtc_sequence_number_util_impl::AheadOrAt<T>(
+      /*max_dist=*/std::numeric_limits<T>::max() / 2 + T(1), a, b);
 }
 
 template <typename T>
-inline bool AheadOrAt(T a, T b) {
+inline constexpr bool AheadOrAt(T a, T b) {
   return AheadOrAt<T, 0>(a, b);
 }
 
@@ -57,7 +68,7 @@ inline bool AheadOrAt(T a, T b) {
 // from each other, then the sequence number with the highest value is
 // considered to be ahead.
 template <typename T, T M = 0>
-inline bool AheadOf(T a, T b) {
+inline constexpr bool AheadOf(T a, T b) {
   static_assert(std::is_unsigned<T>::value,
                 "Type must be an unsigned integer.");
   return a != b && AheadOrAt<T, M>(a, b);

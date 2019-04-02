@@ -61,25 +61,16 @@ inline unsigned long Subtract(unsigned long a, unsigned long b) {  // NOLINT
 //
 // If M > 0 then wrapping occurs at M, if M == 0 then wrapping occurs at the
 // largest value representable by T.
-template <typename T, T M>
-inline typename std::enable_if<(M > 0), T>::type ForwardDiff(T a, T b) {
-  static_assert(std::is_unsigned<T>::value,
-                "Type must be an unsigned integer.");
-  RTC_DCHECK_LT(a, M);
-  RTC_DCHECK_LT(b, M);
-  return a <= b ? b - a : M - (a - b);
-}
-
-template <typename T, T M>
-inline typename std::enable_if<(M == 0), T>::type ForwardDiff(T a, T b) {
-  static_assert(std::is_unsigned<T>::value,
-                "Type must be an unsigned integer.");
-  return b - a;
-}
-
 template <typename T>
-inline T ForwardDiff(T a, T b) {
-  return ForwardDiff<T, 0>(a, b);
+inline constexpr T ForwardDiff(T module, T a, T b) {
+  static_assert(std::is_unsigned<T>::value,
+                "Type must be an unsigned integer.");
+  return (module == 0 || a <= b) ? b - a : module - (a - b);
+}
+
+template <typename T, T M = 0>
+inline constexpr T ForwardDiff(T a, T b) {
+  return ForwardDiff(M, a, b);
 }
 
 // Calculates the reverse difference between two wrapping numbers.
@@ -106,35 +97,31 @@ inline T ForwardDiff(T a, T b) {
 //
 // If M > 0 then wrapping occurs at M, if M == 0 then wrapping occurs at the
 // largest value representable by T.
-template <typename T, T M>
-inline typename std::enable_if<(M > 0), T>::type ReverseDiff(T a, T b) {
-  static_assert(std::is_unsigned<T>::value,
-                "Type must be an unsigned integer.");
-  RTC_DCHECK_LT(a, M);
-  RTC_DCHECK_LT(b, M);
-  return b <= a ? a - b : M - (b - a);
-}
-
-template <typename T, T M>
-inline typename std::enable_if<(M == 0), T>::type ReverseDiff(T a, T b) {
-  static_assert(std::is_unsigned<T>::value,
-                "Type must be an unsigned integer.");
-  return a - b;
-}
-
 template <typename T>
-inline T ReverseDiff(T a, T b) {
-  return ReverseDiff<T, 0>(a, b);
+inline constexpr T ReverseDiff(T module, T a, T b) {
+  static_assert(std::is_unsigned<T>::value,
+                "Type must be an unsigned integer.");
+  return (module == 0 || b <= a) ? a - b : module - (b - a);
+}
+
+template <typename T, T M = 0>
+inline constexpr T ReverseDiff(T a, T b) {
+  return ReverseDiff(M, a, b);
 }
 
 // Calculates the minimum distance between to wrapping numbers.
 //
 // The minimum distance is defined as min(ForwardDiff(a, b), ReverseDiff(a, b))
-template <typename T, T M = 0>
-inline T MinDiff(T a, T b) {
+template <typename T>
+inline constexpr T MinDiff(T module, T a, T b) {
   static_assert(std::is_unsigned<T>::value,
                 "Type must be an unsigned integer.");
-  return std::min(ForwardDiff<T, M>(a, b), ReverseDiff<T, M>(a, b));
+  return std::min(ForwardDiff(module, a, b), ReverseDiff(module, a, b));
+}
+
+template <typename T, T M = 0>
+inline constexpr T MinDiff(T a, T b) {
+  return MinDiff(M, a, b);
 }
 
 }  // namespace webrtc
