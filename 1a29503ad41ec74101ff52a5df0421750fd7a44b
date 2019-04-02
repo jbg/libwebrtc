@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f7434812_a786cb1b",
+        "filename": "modules/audio_processing/agc2/rnn_vad/spectral_features.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-04-02T08:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa9faab0_53e983d6",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 3
+      },
+      "revId": "1a29503ad41ec74101ff52a5df0421750fd7a44b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a9c81f4_d5ef5a9e",
         "filename": "modules/audio_processing/agc2/rnn_vad/spectral_features_internal.cc",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "1a29503ad41ec74101ff52a5df0421750fd7a44b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46d357b6_f8d49f40",
+        "filename": "modules/audio_processing/agc2/rnn_vad/spectral_features_internal.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-04-02T08:41:37Z",
+      "side": 1,
+      "message": "I prefer not since we also |k| for |weights_|:\nweights_[k] -\u003e (x[2*k], x[2*k+1]) and (y[2*k], y[2*k+1])",
+      "parentUuid": "2a9c81f4_d5ef5a9e",
+      "range": {
+        "startLine": 96,
+        "startChar": 5,
+        "endLine": 96,
+        "endChar": 72
+      },
+      "revId": "1a29503ad41ec74101ff52a5df0421750fd7a44b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
