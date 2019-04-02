@@ -4698,7 +4698,7 @@ absl::optional<std::string> PeerConnection::GetDataMid() const {
     case cricket::DCT_SCTP:
       return sctp_mid_;
     case cricket::DCT_MEDIA_TRANSPORT:
-      return media_transport_data_mid_;
+      return media_transport_data_mid_s_;
     default:
       return absl::nullopt;
   }
@@ -6279,6 +6279,7 @@ bool PeerConnection::CreateDataChannel(const std::string& mid) {
               RTC_FROM_HERE,
               rtc::Bind(&PeerConnection::SetupMediaTransportForDataChannels_n,
                         this, mid))) {
+        media_transport_data_mid_s_ = mid;
         for (const auto& channel : sctp_data_channels_) {
           channel->OnTransportChannelCreated();
         }
@@ -6446,7 +6447,7 @@ bool PeerConnection::SetupMediaTransportForDataChannels_n(
 
   media_transport_invoker_ = absl::make_unique<rtc::AsyncInvoker>();
   media_transport_->SetDataSink(this);
-  media_transport_data_mid_ = mid;
+  media_transport_data_mid_n_ = mid;
   transport_controller_->SignalMediaTransportStateChanged.connect(
       this, &PeerConnection::OnMediaTransportStateChanged_n);
   // Check the initial state right away, in case transport is already writable.
@@ -6459,16 +6460,16 @@ void PeerConnection::TeardownMediaTransportForDataChannels_n() {
     return;
   }
   transport_controller_->SignalMediaTransportStateChanged.disconnect(this);
-  media_transport_data_mid_.reset();
+  media_transport_data_mid_n_.reset();
   media_transport_->SetDataSink(nullptr);
   media_transport_invoker_ = nullptr;
   media_transport_ = nullptr;
 }
 
 void PeerConnection::OnMediaTransportStateChanged_n() {
-  if (!media_transport_data_mid_ ||
+  if (!media_transport_data_mid_n_ ||
       transport_controller_->GetMediaTransportState(
-          *media_transport_data_mid_) != MediaTransportState::kWritable) {
+          *media_transport_data_mid_n_) != MediaTransportState::kWritable) {
     return;
   }
   media_transport_invoker_->AsyncInvoke<void>(
@@ -7022,6 +7023,7 @@ void PeerConnection::DestroyDataChannel() {
       RTC_DCHECK_RUN_ON(network_thread());
       TeardownMediaTransportForDataChannels_n();
     });
+    media_transport_data_mid_s_.reset();
   }
 }
 

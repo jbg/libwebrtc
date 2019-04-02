@@ -1251,11 +1251,17 @@ class PeerConnection : public PeerConnectionInternal,
   // Whether this peer is the caller. Set when the local description is applied.
   absl::optional<bool> is_caller_ RTC_GUARDED_BY(signaling_thread());
 
-  // Content name (MID) for media transport data channels in SDP.
-  absl::optional<std::string> media_transport_data_mid_;
+  // Content name (MID) for media transport data channels in SDP. One copy for
+  // the signal thread and one for the network thread, kept in sync.
+  absl::optional<std::string> media_transport_data_mid_n_
+      RTC_GUARDED_BY(network_thread());
+  absl::optional<std::string> media_transport_data_mid_s_
+      RTC_GUARDED_BY(signaling_thread());
 
   // Media transport used for data channels.  Thread-safe.
-  MediaTransportInterface* media_transport_ = nullptr;
+  MediaTransportInterface* media_transport_ =
+      nullptr;  // TODO(bugs.webrtc.org/9987): Object is thread safe, but
+                // pointer accessed on both signaling and network thread.
 
   // Cached value of whether the media transport is ready to send.
   bool media_transport_ready_to_send_data_ RTC_GUARDED_BY(signaling_thread()) =
