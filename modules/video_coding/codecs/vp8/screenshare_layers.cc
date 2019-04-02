@@ -385,6 +385,12 @@ void ScreenshareLayers::OnPacketLossRateUpdate(float packet_loss_rate) {}
 
 void ScreenshareLayers::OnRttUpdate(int64_t rtt_ms) {}
 
+void ScreenshareLayers::OnLossNotification(
+    uint32_t timestamp_of_last_decodable,
+    uint32_t timestamp_of_last_received,
+    absl::optional<bool> is_last_received_dependencies_decodable,
+    absl::optional<bool> is_last_received_decodable) {}
+
 TemplateStructure ScreenshareLayers::GetTemplateStructure(
     int num_layers) const {
   RTC_CHECK_LT(num_layers, 3);

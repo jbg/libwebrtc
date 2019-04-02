@@ -59,6 +59,12 @@ class Vp8TemporalLayers final : public Vp8FrameBufferController {
 
   void OnRttUpdate(int64_t rtt_ms) override;
 
+  void OnLossNotification(
+      uint32_t timestamp_of_last_decodable,
+      uint32_t timestamp_of_last_received,
+      absl::optional<bool> is_last_received_dependencies_decodable,
+      absl::optional<bool> is_last_received_decodable) override;
+
  private:
   std::vector<std::unique_ptr<Vp8FrameBufferController>> controllers_;
 };

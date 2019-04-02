@@ -14,6 +14,7 @@
 #include <memory>
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/vp8_frame_config.h"
 
@@ -137,6 +138,31 @@ class Vp8FrameBufferController {
 
   // Called by the encoder when the round trip time changes.
   virtual void OnRttUpdate(int64_t rtt_ms) = 0;
+
+  // Called when a loss notification is received.
+  // timestamp_of_last_decodable:
+  //   The timestamp of the last decodable frame *prior* to the last received.
+  //   (The last received - described below - might itself be decodable or not.)
+  // timestamp_of_last_received:
+  //   The timestamp of the last received frame.
+  // is_last_received_dependencies_decodable:
+  //   Describes whether the dependencies of the last received frame were
+  //   all decodable.
+  //   |false| if some dependencies were undecodable, |true| if all dependencies
+  //   were decodable, and |nullopt| if the dependencies are unknown.
+  // is_last_received_decodable:
+  //   Describes whether the received frame was decodable.
+  //   |false| if some dependency was undecodable or if some packet belonging
+  //   to the last received frame was missed.
+  //   |true| if all dependencies were decodable and all packets belonging
+  //   to the last received frame were received.
+  //   |nullopt| if no packet belonging to the last frame was missed, but the
+  //   last packet in the frame was not yet received.
+  virtual void OnLossNotification(
+      uint32_t timestamp_of_last_decodable,
+      uint32_t timestamp_of_last_received,
+      absl::optional<bool> is_last_received_dependencies_decodable,
+      absl::optional<bool> is_last_received_decodable) = 0;
 };
 
 // Interface for a factory of Vp8FrameBufferController instances.
