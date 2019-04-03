@@ -93,6 +93,30 @@
       "revId": "1a29503ad41ec74101ff52a5df0421750fd7a44b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ef93f9e_69a8172f",
+        "filename": "modules/audio_processing/agc2/rnn_vad/spectral_features_internal.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-03T05:48:13Z",
+      "side": 1,
+      "message": "Ah, good point! I missed that\nLet\u0027s keep it like this then",
+      "parentUuid": "46d357b6_f8d49f40",
+      "range": {
+        "startLine": 96,
+        "startChar": 5,
+        "endLine": 96,
+        "endChar": 72
+      },
+      "revId": "1a29503ad41ec74101ff52a5df0421750fd7a44b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
