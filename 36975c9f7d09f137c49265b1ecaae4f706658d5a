@@ -22,6 +22,30 @@
       "revId": "36975c9f7d09f137c49265b1ecaae4f706658d5a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb8d9898_c0584fa8",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-04-03T15:26:03Z",
+      "side": 1,
+      "message": "These values mutate in form several times as they flow from the point of ingress (an RTCP message) to the encoder. I wouldn\u0027t want multiple similar structs. Not all CLs are up yet, so it\u0027s not yet visible, but I can describe the process in general:\n1. The RTCP message refers to sequence numbers rather than timestamps. Also, it has a single \"decodability flag\" rather than these two optionals.\n2. At a certain point in the pipeline (RTPSenderVideo according to current plan) we poll for the seq_num-\u003etimestamp mapping. We also get information about whether the packet with the given sequence number was first and/or last in the frame.\n3. Later we take the information from #2 (first and/or last, once per RTP sequence number, of which we have two). We combine that information with the decodability flag (from the RTCP message) to get these two optionals.",
+      "parentUuid": "a056b8dc_064d5996",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 53
+      },
+      "revId": "36975c9f7d09f137c49265b1ecaae4f706658d5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
