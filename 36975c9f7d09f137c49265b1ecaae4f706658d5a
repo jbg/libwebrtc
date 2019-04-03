@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a056b8dc_064d5996",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-03T15:17:34Z",
+      "side": 1,
+      "message": "I think it would make sense to collect these into a struct. Would mean less boilerplate per encoder/temporal layer implementation and simplifies updates to these parameters in the future if needed.\nwdyt?",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 53
+      },
+      "revId": "36975c9f7d09f137c49265b1ecaae4f706658d5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
