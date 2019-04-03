@@ -542,6 +542,12 @@ void DefaultTemporalLayers::OnPacketLossRateUpdate(float packet_loss_rate) {}
 
 void DefaultTemporalLayers::OnRttUpdate(int64_t rtt_ms) {}
 
+void DefaultTemporalLayers::OnLossNotification(
+    uint32_t timestamp_of_last_decodable,
+    uint32_t timestamp_of_last_received,
+    absl::optional<bool> is_last_received_dependencies_decodable,
+    absl::optional<bool> is_last_received_decodable) {}
+
 TemplateStructure DefaultTemporalLayers::GetTemplateStructure(
     int num_layers) const {
   RTC_CHECK_LT(num_layers, 5);

@@ -330,6 +330,18 @@ void LibvpxVp8Encoder::OnRttUpdate(int64_t rtt_ms) {
   }
 }
 
+void LibvpxVp8Encoder::OnLossNotification(
+    uint32_t timestamp_of_last_decodable,
+    uint32_t timestamp_of_last_received,
+    absl::optional<bool> is_last_received_dependencies_decodable,
+    absl::optional<bool> is_last_received_decodable) {
+  if (frame_buffer_controller_) {
+    frame_buffer_controller_->OnLossNotification(
+        timestamp_of_last_decodable, timestamp_of_last_received,
+        is_last_received_dependencies_decodable, is_last_received_decodable);
+  }
+}
+
 void LibvpxVp8Encoder::SetStreamState(bool send_stream, int stream_idx) {
   if (send_stream && !send_stream_[stream_idx]) {
     // Need a key frame if we have not sent this stream before.
