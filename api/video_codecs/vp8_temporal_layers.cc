@@ -82,4 +82,16 @@ void Vp8TemporalLayers::OnRttUpdate(int64_t rtt_ms) {
   }
 }
 
+void Vp8TemporalLayers::OnLossNotification(
+    uint32_t timestamp_of_last_decodable,
+    uint32_t timestamp_of_last_received,
+    absl::optional<bool> is_last_received_dependencies_decodable,
+    absl::optional<bool> is_last_received_decodable) {
+  for (auto& controller : controllers_) {
+    controller->OnLossNotification(
+        timestamp_of_last_decodable, timestamp_of_last_received,
+        is_last_received_dependencies_decodable, is_last_received_decodable);
+  }
+}
+
 }  // namespace webrtc
