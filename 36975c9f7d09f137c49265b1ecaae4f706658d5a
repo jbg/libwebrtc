@@ -46,6 +46,30 @@
       "revId": "36975c9f7d09f137c49265b1ecaae4f706658d5a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "432fb85a_6d31c354",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-04T08:17:14Z",
+      "side": 1,
+      "message": "Right, but here it has boiled down to just what the encoder is interested in, so we could create a struct within the VideoEncoder interface just like ScalingSettings above for instance.\nAny potential update to the members there would then be much easier than changing the signature of the methods in the interface, and allows just passing one variable through to each frame buffer controller.\n\nIf you disagree I\u0027ll be ok with that too.",
+      "parentUuid": "fb8d9898_c0584fa8",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 53
+      },
+      "revId": "36975c9f7d09f137c49265b1ecaae4f706658d5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
