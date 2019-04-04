@@ -257,8 +257,8 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   // Send a request for a keyframe.
   int32_t RequestKeyFrame() override;
 
-  int32_t SendLossNotification(uint16_t last_decoded_seq_num,
-                               uint16_t last_received_seq_num,
+  int32_t SendLossNotification(uint16_t seq_num_of_last_decodable,
+                               uint16_t seq_num_of_last_received,
                                bool decodability_flag) override;
 
   bool LastReceivedNTP(uint32_t* NTPsecs,
@@ -279,8 +279,14 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
 
   void OnReceivedNack(
       const std::vector<uint16_t>& nack_sequence_numbers) override;
+
   void OnReceivedRtcpReportBlocks(
       const ReportBlockList& report_blocks) override;
+
+  void OnReceivedLossNotification(uint16_t last_decoded,
+                                  uint16_t last_received,
+                                  bool decodability_flag) override;
+
   void OnRequestSendReport() override;
 
   void SetVideoBitrateAllocation(
@@ -333,6 +339,8 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   RemoteBitrateEstimator* const remote_bitrate_;
 
   RtcpAckObserver* const ack_observer_;
+
+  RtcpLossNotificationObserver* const rtcp_loss_notification_observer_;
 
   RtcpRttStats* const rtt_stats_;
 

@@ -92,6 +92,8 @@ ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
       key_frame_req_method_(kKeyFrameReqPliRtcp),
       remote_bitrate_(configuration.remote_bitrate_estimator),
       ack_observer_(configuration.ack_observer),
+      rtcp_loss_notification_observer_(
+          configuration.rtcp_loss_notification_observer),
       rtt_stats_(configuration.rtt_stats),
       rtt_ms_(0) {
   FieldTrialBasedConfig default_trials;
@@ -745,11 +747,12 @@ int32_t ModuleRtpRtcpImpl::RequestKeyFrame() {
   return -1;
 }
 
-int32_t ModuleRtpRtcpImpl::SendLossNotification(uint16_t last_decoded_seq_num,
-                                                uint16_t last_received_seq_num,
-                                                bool decodability_flag) {
+int32_t ModuleRtpRtcpImpl::SendLossNotification(
+    uint16_t seq_num_of_last_decodable,
+    uint16_t seq_num_of_last_received,
+    bool decodability_flag) {
   return rtcp_sender_.SendLossNotification(
-      GetFeedbackState(), last_decoded_seq_num, last_received_seq_num,
+      GetFeedbackState(), seq_num_of_last_decodable, seq_num_of_last_received,
       decodability_flag);
 }
 
@@ -806,6 +809,15 @@ void ModuleRtpRtcpImpl::OnReceivedRtcpReportBlocks(
             report_block.extended_highest_sequence_number);
       }
     }
+  }
+}
+
+void ModuleRtpRtcpImpl::OnReceivedLossNotification(uint16_t last_decoded,
+                                                   uint16_t last_received,
+                                                   bool decodability_flag) {
+  if (rtcp_loss_notification_observer_) {
+    rtcp_loss_notification_observer_->OnReceivedLossNotification(
+        last_decoded, last_received, decodability_flag);
   }
 }
 
