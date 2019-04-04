@@ -71,6 +71,8 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     // stream.
     RtcpBandwidthObserver* bandwidth_callback = nullptr;
 
+    RtcpLossNotificationObserver* rtcp_loss_notification_observer = nullptr;
+
     TransportFeedbackObserver* transport_feedback_callback = nullptr;
     VideoBitrateAllocationObserver* bitrate_allocation_observer = nullptr;
     RtcpRttStats* rtt_stats = nullptr;
@@ -418,6 +420,7 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // Sends a LossNotification RTCP message.
   // Returns -1 on failure else 0.
   virtual int32_t SendLossNotification(uint16_t last_decoded_seq_num,
+                                       ,
                                        uint16_t last_received_seq_num,
                                        bool decodability_flag) = 0;
 };
