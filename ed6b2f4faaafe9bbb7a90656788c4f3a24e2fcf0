@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f6669248_760413f0",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-04-04T12:50:12Z",
+      "side": 1,
+      "message": "In that case, NetworkStatePredictor is a compromise?",
+      "parentUuid": "cd90c56d_c0c47b27",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6103b0c7_b7a09f0a",
         "filename": "api/network_predictor.h",
         "patchSetId": 6
@@ -140,6 +164,30 @@
       "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40a5b4bf_6df4d90e",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-04-04T12:50:12Z",
+      "side": 1,
+      "message": "This is more about passing around magic numbers in ints, so if header cannot be included, you can define an enum here.",
+      "parentUuid": "75b778c2_4f7f8a0d",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
