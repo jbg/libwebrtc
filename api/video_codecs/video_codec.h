@@ -48,12 +48,12 @@ struct VideoCodecVP8 {
 };
 
 enum class InterLayerPredMode {
-  kOn,       // Allow inter-layer prediction for all frames.
-             // Frame of low spatial layer can be used for
-             // prediction of next spatial layer frame.
-  kOff,      // Encoder produces independent spatial layers.
-  kOnKeyPic  // Allow inter-layer prediction only for frames
-             // within key picture.
+  kOff = 0,      // Encoder produces independent spatial layers.
+  kOn = 1,       // Allow inter-layer prediction for all frames.
+                 // Frame of low spatial layer can be used for
+                 // prediction of next spatial layer frame.
+  kOnKeyPic = 2  // Allow inter-layer prediction only for frames
+                 // within key picture.
 };
 
 // VP9 specific.
