@@ -92,6 +92,8 @@ ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
       key_frame_req_method_(kKeyFrameReqPliRtcp),
       remote_bitrate_(configuration.remote_bitrate_estimator),
       ack_observer_(configuration.ack_observer),
+      rtcp_loss_notification_observer_(
+          configuration.rtcp_loss_notification_observer),
       rtt_stats_(configuration.rtt_stats),
       rtt_ms_(0) {
   FieldTrialBasedConfig default_trials;
@@ -806,6 +808,15 @@ void ModuleRtpRtcpImpl::OnReceivedRtcpReportBlocks(
             report_block.extended_highest_sequence_number);
       }
     }
+  }
+}
+
+void ModuleRtpRtcpImpl::OnReceivedLossNotification(uint16_t last_decoded,
+                                                   uint16_t last_received,
+                                                   bool decodability_flag) {
+  if (rtcp_loss_notification_observer_) {
+    rtcp_loss_notification_observer_->OnReceivedLossNotification(
+        last_decoded, last_received, decodability_flag);
   }
 }
 
