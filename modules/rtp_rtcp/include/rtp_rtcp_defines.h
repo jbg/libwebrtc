@@ -199,6 +199,16 @@ class RtcpBandwidthObserver {
   virtual ~RtcpBandwidthObserver() {}
 };
 
+class RtcpLossNotificationObserver {
+ public:
+  virtual ~RtcpLossNotificationObserver() = default;
+
+  // TODO: !!! Rename variables.
+  virtual void OnReceivedLossNotification(uint16_t last_decoded,
+                                          uint16_t last_received,
+                                          bool decodability_flag) = 0;
+};
+
 struct PacketFeedback {
   PacketFeedback(int64_t arrival_time_ms, uint16_t sequence_number);
 
