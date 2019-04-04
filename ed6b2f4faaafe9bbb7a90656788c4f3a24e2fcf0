@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cd90c56d_c0c47b27",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-04T11:40:46Z",
+      "side": 1,
+      "message": "I think this is a object that enables people inject customized network state predictor, it can be function in many different ways.",
+      "parentUuid": "70a2cc2f_f5fd250b",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6103b0c7_b7a09f0a",
         "filename": "api/network_predictor.h",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0415f89e_b60db60a",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-04T11:40:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6103b0c7_b7a09f0a",
+      "range": {
+        "startLine": 31,
+        "startChar": 15,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "75b778c2_4f7f8a0d",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-04T11:40:46Z",
+      "side": 1,
+      "message": "As enum BandwidthUsage is defined in modules/remote_bitrate_estimator/include/bwe_defines.h. I think it would be a bit messy with dependencies if include this header. Also the overhead for the conversion between enum and int is rather low.",
+      "parentUuid": "95e9a040_72cf3a7f",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "204fd0aa_55fca976",
         "filename": "api/network_predictor.h",
         "patchSetId": 6
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "3935fb4a_c8b8aef1",
+        "filename": "api/network_predictor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-04T11:40:46Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "204fd0aa_55fca976",
+      "range": {
+        "startLine": 41,
+        "startChar": 31,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d4e718e9_2dfef169",
         "filename": "api/peer_connection_interface.h",
         "patchSetId": 6
@@ -105,6 +201,30 @@
       "writtenOn": "2019-03-29T13:27:41Z",
       "side": 1,
       "message": "Is it possible to instead let the NetworkControllerFactory own/create the NetworkPredictor? Seems unnecessary to inject both through the same path?",
+      "range": {
+        "startLine": 1251,
+        "startChar": 18,
+        "endLine": 1251,
+        "endChar": 51
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47694087_15caef83",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-04T11:40:46Z",
+      "side": 1,
+      "message": "I feel warp NetworkPredictor into another component will increase the complexity in the Java/JNI side, and NetworkControllerFactory needs to be implemented. Since we are not using NetworkControllerFactory anyway, we may just remove the NetworkController.",
+      "parentUuid": "d4e718e9_2dfef169",
       "range": {
         "startLine": 1251,
         "startChar": 18,
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "d3759ace_4808c5ff",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-04T11:40:46Z",
+      "side": 1,
+      "message": "packet_feedback struct is defined in modules/rtp_rtcp/include/rtp_rtcp_defines.h, to avoid this dependency I did not pass in this. I will move in the computation inside in the patch.",
+      "parentUuid": "68f56fd5_40c29d67",
+      "range": {
+        "startLine": 213,
+        "startChar": 3,
+        "endLine": 221,
+        "endChar": 68
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "696e0dc7_074e9202",
         "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
         "patchSetId": 6
@@ -160,6 +304,30 @@
       "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d38dba8a_8635f5ed",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-04T11:40:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "696e0dc7_074e9202",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 3
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
