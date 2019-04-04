@@ -111,7 +111,6 @@ struct RTC_EXPORT EchoCanceller3Config {
   } render_levels;
 
   struct EchoRemovalControl {
-    bool has_clock_drift = false;
     bool linear_and_stable_echo_path = false;
   } echo_removal_control;
 
@@ -125,10 +124,6 @@ struct RTC_EXPORT EchoCanceller3Config {
     float noise_gate_slope = 0.3f;
     size_t render_pre_window_size = 1;
     size_t render_post_window_size = 1;
-    size_t render_pre_window_size_init = 10;
-    size_t render_post_window_size_init = 10;
-    float nonlinear_hold = 1;
-    float nonlinear_release = 0.001f;
   } echo_model;
 
   struct Suppressor {

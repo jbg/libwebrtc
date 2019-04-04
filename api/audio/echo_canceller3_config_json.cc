@@ -231,8 +231,6 @@ void Aec3ConfigFromJsonString(absl::string_view json_string,
 
   if (rtc::GetValueFromJsonObject(aec3_root, "echo_removal_control",
                                   &section)) {
-    ReadParam(section, "has_clock_drift",
-              &cfg.echo_removal_control.has_clock_drift);
     ReadParam(section, "linear_and_stable_echo_path",
               &cfg.echo_removal_control.linear_and_stable_echo_path);
   }
@@ -250,12 +248,6 @@ void Aec3ConfigFromJsonString(absl::string_view json_string,
               &cfg.echo_model.render_pre_window_size);
     ReadParam(section, "render_post_window_size",
               &cfg.echo_model.render_post_window_size);
-    ReadParam(section, "render_pre_window_size_init",
-              &cfg.echo_model.render_pre_window_size_init);
-    ReadParam(section, "render_post_window_size_init",
-              &cfg.echo_model.render_post_window_size_init);
-    ReadParam(section, "nonlinear_hold", &cfg.echo_model.nonlinear_hold);
-    ReadParam(section, "nonlinear_release", &cfg.echo_model.nonlinear_release);
   }
 
   Json::Value subsection;
@@ -443,9 +435,6 @@ std::string Aec3ConfigToJsonString(const EchoCanceller3Config& config) {
   ost << "},";
 
   ost << "\"echo_removal_control\": {";
-  ost << "\"has_clock_drift\": "
-      << (config.echo_removal_control.has_clock_drift ? "true" : "false")
-      << ",";
   ost << "\"linear_and_stable_echo_path\": "
       << (config.echo_removal_control.linear_and_stable_echo_path ? "true"
                                                                   : "false");
@@ -463,13 +452,7 @@ std::string Aec3ConfigToJsonString(const EchoCanceller3Config& config) {
   ost << "\"render_pre_window_size\": "
       << config.echo_model.render_pre_window_size << ",";
   ost << "\"render_post_window_size\": "
-      << config.echo_model.render_post_window_size << ",";
-  ost << "\"render_pre_window_size_init\": "
-      << config.echo_model.render_pre_window_size_init << ",";
-  ost << "\"render_post_window_size_init\": "
-      << config.echo_model.render_post_window_size_init << ",";
-  ost << "\"nonlinear_hold\": " << config.echo_model.nonlinear_hold << ",";
-  ost << "\"nonlinear_release\": " << config.echo_model.nonlinear_release;
+      << config.echo_model.render_post_window_size;
   ost << "},";
 
   ost << "\"suppressor\": {";
