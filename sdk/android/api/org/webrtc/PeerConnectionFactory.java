@@ -173,6 +173,8 @@ public class PeerConnectionFactory {
     @Nullable private VideoDecoderFactory videoDecoderFactory;
     @Nullable private AudioProcessingFactory audioProcessingFactory;
     @Nullable private FecControllerFactoryFactoryInterface fecControllerFactoryFactory;
+    @Nullable
+    private NetworkStatePredictorFactoryFactoryInterface NetworkStatePredictorFactoryFactory;
     @Nullable private MediaTransportFactoryFactory mediaTransportFactoryFactory;
 
     private Builder() {}
@@ -232,6 +234,12 @@ public class PeerConnectionFactory {
       return this;
     }
 
+    public Builder setNetworkStatePredictorFactoryFactoryInterface(
+        NetworkStatePredictorFactoryFactoryInterface NetworkStatePredictorFactoryFactory) {
+      this.NetworkStatePredictorFactoryFactory = NetworkStatePredictorFactoryFactory;
+      return this;
+    }
+
     /** Sets a MediaTransportFactoryFactory for a PeerConnectionFactory. */
     public Builder setMediaTransportFactoryFactory(
         MediaTransportFactoryFactory mediaTransportFactoryFactory) {
@@ -252,6 +260,9 @@ public class PeerConnectionFactory {
           videoDecoderFactory,
           audioProcessingFactory == null ? 0 : audioProcessingFactory.createNative(),
           fecControllerFactoryFactory == null ? 0 : fecControllerFactoryFactory.createNative(),
+          NetworkStatePredictorFactoryFactory == null
+              ? 0
+              : NetworkStatePredictorFactoryFactory.createNative(),
           mediaTransportFactoryFactory == null
               ? 0
               : mediaTransportFactoryFactory.createNativeMediaTransportFactory());
@@ -575,7 +586,8 @@ public class PeerConnectionFactory {
       Options options, long nativeAudioDeviceModule, long audioEncoderFactory,
       long audioDecoderFactory, VideoEncoderFactory encoderFactory,
       VideoDecoderFactory decoderFactory, long nativeAudioProcessor,
-      long nativeFecControllerFactory, long mediaTransportFactory);
+      long nativeFecControllerFactory, long nativeNetworkStatePredictorFactory,
+      long mediaTransportFactory);
 
   private static native long nativeCreatePeerConnection(long factory,
       PeerConnection.RTCConfiguration rtcConfig, MediaConstraints constraints, long nativeObserver,
