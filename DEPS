@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': '37663bcca78b1a5154560a27f7496cf408b74167',
+  'chromium_revision': '423c24bc32f07b86db77406694c92a9ca731b55f',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -86,7 +86,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    Var('chromium_git') + '/chromium/src/base' + '@' + '9ddc023f80e20d454a1eae4d71659df22e14e46f',
+    Var('chromium_git') + '/chromium/src/base' + '@' + '1d63e15e138713203ebb7c97a04ab8993e56715a',
   'src/build':
     Var('chromium_git') + '/chromium/src/build' + '@' + '23a5e22ba78f21230de3dd9c293afb438399565d',
   'src/buildtools':
@@ -98,13 +98,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + 'fe51fcc2c18eb130fb3a05b01d9c84c701796272',
+    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + 'b734f640eb6ad03a252d5094a8b5d3484cd47ccf',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    Var('chromium_git') + '/chromium/src/testing' + '@' + '8b5edd181c1b0e40b205eb2bd5b586f73ac2829e',
+    Var('chromium_git') + '/chromium/src/testing' + '@' + '9d51bad12ab8ec562aba2d6aac4b2ab994ad4c3a',
   'src/third_party':
-    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'a5a1eb9b539bfc02670203568329771d26b60458',
+    Var('chromium_git') + '/chromium/src/third_party' + '@' + '852ecc62322fe29b7e1c25c487075cde300e3d45',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -312,7 +312,7 @@ deps = {
   'src/third_party/yasm/source/patched-yasm':
     Var('chromium_git') + '/chromium/deps/yasm/patched-yasm.git' + '@' + '720b70524a4424b15fc57e82263568c8ba0496ad',
   'src/tools':
-    Var('chromium_git') + '/chromium/src/tools' + '@' + 'd6f4e3aa56d9e9357c2e0c03095b2e722a8d885e',
+    Var('chromium_git') + '/chromium/src/tools' + '@' + '30c409a0b28e2ff2548f77f8a344198bcacfde9e',
   'src/tools/swarming_client':
     Var('chromium_git') + '/infra/luci/client-py.git' + '@' +  Var('swarming_revision'),
 
@@ -1181,7 +1181,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/android_deps/libs/com_google_ar_core',
-              'version': 'version:1.6.0-cr0',
+              'version': 'version:1.8.0-cr0',
           },
       ],
       'condition': 'checkout_android',
