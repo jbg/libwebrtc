@@ -22,6 +22,30 @@
       "revId": "71d1742098a72b13e66c61d1e535109b88b73178",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df0bb1b3_6ae71a0e",
+        "filename": "luci-notify.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 7741
+      },
+      "writtenOn": "2019-04-05T13:39:28Z",
+      "side": 1,
+      "message": "Yep, looks like we should have spent a bit more time trying to compare \"before\" and \"after\" :)",
+      "parentUuid": "868ad994_666813e6",
+      "range": {
+        "startLine": 602,
+        "startChar": 0,
+        "endLine": 602,
+        "endChar": 21
+      },
+      "revId": "71d1742098a72b13e66c61d1e535109b88b73178",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
