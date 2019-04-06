@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': '58ec016f064f3b11f28a8926df65014d1716da66',
+  'chromium_revision': '04fcd862b388a6b9bc7b557e6f3236d9bb29dce9',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -24,7 +24,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling catapult
   # and whatever else without interference from each other.
-  'catapult_revision': 'bf0179e27c9fafbf52a6ec6e771d89a9d81a5f47',
+  'catapult_revision': '78cdfa01d0cbcce25a026c3a60852c03eaaa78ba',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling libFuzzer
   # and whatever else without interference from each other.
@@ -86,7 +86,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    Var('chromium_git') + '/chromium/src/base' + '@' + 'f41d59faf0db401d4abbcc22ca4f45f4a12db7f5',
+    Var('chromium_git') + '/chromium/src/base' + '@' + '42d4914759c19e037e6d7cb925143e0bbd063874',
   'src/build':
     Var('chromium_git') + '/chromium/src/build' + '@' + '25794eb5eee34d9ddad0a0a5332c8365b55af215',
   'src/buildtools':
@@ -98,13 +98,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + 'be52df3518246acbd0ecfbe8b28d5f6c3507bd9f',
+    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '1e31426c69d560727c737170317535036bcc042a',
     'condition': 'checkout_ios',
   },
   'src/testing':
     Var('chromium_git') + '/chromium/src/testing' + '@' + 'a428665e1798cc275930a4099807c47b40d0b183',
   'src/third_party':
-    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'f26e86be04057d8286b5a34bd78084cfc0c1c19f',
+    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'cb1ec3f56ab4222fe5747731ae5dfebb0be6c6a8',
 
   'src/buildtools/linux64': {
     'packages': [
