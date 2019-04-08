@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b1a11fc_727e087b",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-08T11:08:32Z",
+      "side": 1,
+      "message": "It feels to me like this lives in the wrong place. What if we moved it into the TrendlineEstimator instead and thereby got rid of the SetStatePredicted and StatePredicted methods?",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 3
+      },
+      "revId": "224bc63b5b70172cf6d73b8473e0f826b2cf2845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb296ffc_2eb90552",
+        "filename": "modules/congestion_controller/goog_cc/delay_increase_detector_interface.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-08T11:08:32Z",
+      "side": 1,
+      "message": "Never called AFAICT.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 60
+      },
+      "revId": "224bc63b5b70172cf6d73b8473e0f826b2cf2845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

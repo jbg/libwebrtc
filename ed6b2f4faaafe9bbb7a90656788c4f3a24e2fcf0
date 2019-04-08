@@ -405,6 +405,30 @@
     },
     {
       "key": {
+        "uuid": "4e3d0397_c1b47621",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-08T11:08:32Z",
+      "side": 1,
+      "message": "Ok, let\u0027s make sure that if we need to inject more components into the NetworkController later reconsider this.",
+      "parentUuid": "47694087_15caef83",
+      "range": {
+        "startLine": 1251,
+        "startChar": 18,
+        "endLine": 1251,
+        "endChar": 51
+      },
+      "revId": "ed6b2f4faaafe9bbb7a90656788c4f3a24e2fcf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68f56fd5_40c29d67",
         "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
         "patchSetId": 6
