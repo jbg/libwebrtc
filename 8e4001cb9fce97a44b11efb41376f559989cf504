@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1089bcf9_f0167242",
+        "filename": "sdk/android/api/org/webrtc/NetworkStatePredictorFactoryFactoryInterface.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-04-08T10:53:59Z",
+      "side": 1,
+      "message": "nit: Please name createNativeNetworkStatePredictorFactory",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "8e4001cb9fce97a44b11efb41376f559989cf504",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f25e76f1_e1363230",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-04-08T10:53:59Z",
+      "side": 1,
+      "message": "Small case as the first letter",
+      "range": {
+        "startLine": 177,
+        "startChar": 57,
+        "endLine": 177,
+        "endChar": 92
+      },
+      "revId": "8e4001cb9fce97a44b11efb41376f559989cf504",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
