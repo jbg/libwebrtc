@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d377973b_57fb452f",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-08T14:08:43Z",
+      "side": 1,
+      "message": "The reason I kept it was for delay_detector_.reset() at line 174.",
+      "parentUuid": "77d15dee_969dacc5",
+      "range": {
+        "startLine": 202,
+        "startChar": 6,
+        "endLine": 202,
+        "endChar": 30
+      },
+      "revId": "352faf3d1bdd9aa06b195673a4011764632e9045",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "577e808f_0ed44f6c",
         "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
         "patchSetId": 23
@@ -45,6 +69,30 @@
       "revId": "352faf3d1bdd9aa06b195673a4011764632e9045",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0d0fb22_bb9aff72",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-08T14:08:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "577e808f_0ed44f6c",
+      "range": {
+        "startLine": 203,
+        "startChar": 21,
+        "endLine": 203,
+        "endChar": 37
+      },
+      "revId": "352faf3d1bdd9aa06b195673a4011764632e9045",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
