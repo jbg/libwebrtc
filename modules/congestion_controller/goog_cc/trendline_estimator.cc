@@ -15,6 +15,8 @@
 #include <algorithm>
 
 #include "absl/types/optional.h"
+#include "modules/congestion_controller/goog_cc/trendline_estimator.h"
+#include "modules/remote_bitrate_estimator/include/bwe_defines.h"
 #include "modules/remote_bitrate_estimator/test/bwe_test_logging.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/numerics/safe_minmax.h"
@@ -53,9 +55,11 @@ constexpr int kDeltaCounterMax = 1000;
 
 }  // namespace
 
-TrendlineEstimator::TrendlineEstimator(size_t window_size,
-                                       double smoothing_coef,
-                                       double threshold_gain)
+TrendlineEstimator::TrendlineEstimator(
+    size_t window_size,
+    double smoothing_coef,
+    double threshold_gain,
+    NetworkStatePredictor* network_state_predictor)
     : window_size_(window_size),
       smoothing_coef_(smoothing_coef),
       threshold_gain_(threshold_gain),
@@ -73,7 +77,9 @@ TrendlineEstimator::TrendlineEstimator(size_t window_size,
       prev_trend_(0.0),
       time_over_using_(-1),
       overuse_counter_(0),
-      hypothesis_(BandwidthUsage::kBwNormal) {}
+      hypothesis_(BandwidthUsage::kBwNormal),
+      hypothesis_predicted_(BandwidthUsage::kBwNormal),
+      network_state_predictor_(network_state_predictor) {}
 
 TrendlineEstimator::~TrendlineEstimator() {}
 
@@ -116,8 +122,14 @@ void TrendlineEstimator::Update(double recv_delta_ms,
   Detect(trend, send_delta_ms, arrival_time_ms);
 }
 
+void TrendlineEstimator::UpdatePrediction(int64_t send_time_ms,
+                                          int64_t arrival_time_ms) {
+  hypothesis_predicted_ = network_state_predictor_->Update(
+      send_time_ms, arrival_time_ms, hypothesis_);
+}
+
 BandwidthUsage TrendlineEstimator::State() const {
-  return hypothesis_;
+  return network_state_predictor_ ? hypothesis_predicted_ : hypothesis_;
 }
 
 void TrendlineEstimator::Detect(double trend, double ts_delta, int64_t now_ms) {

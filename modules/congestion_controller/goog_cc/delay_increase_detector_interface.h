@@ -28,6 +28,11 @@ class DelayIncreaseDetectorInterface {
                       double send_delta_ms,
                       int64_t arrival_time_ms) = 0;
 
+  // Update the predictor with a new sample. The send_time_ms is packet send
+  // time arrival_time_ms is packet arrival time.
+  virtual void UpdatePrediction(int64_t send_time_ms,
+                                int64_t arrival_time_ms) = 0;
+
   virtual BandwidthUsage State() const = 0;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DelayIncreaseDetectorInterface);
