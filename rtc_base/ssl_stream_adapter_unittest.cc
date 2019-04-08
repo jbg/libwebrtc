@@ -25,10 +25,10 @@
 #include "rtc_base/ssl_stream_adapter.h"
 #include "rtc_base/stream.h"
 
-using ::testing::WithParamInterface;
-using ::testing::Values;
 using ::testing::Combine;
 using ::testing::tuple;
+using ::testing::Values;
+using ::testing::WithParamInterface;
 
 static const int kBlockSize = 4096;
 static const char kExporterLabel[] = "label";
