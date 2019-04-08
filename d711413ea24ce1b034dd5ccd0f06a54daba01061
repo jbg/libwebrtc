@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d06b2be_fa53262f",
+        "filename": "sdk/android/api/org/webrtc/NetworkPredictorFactoryFactoryInterface.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-04-08T13:33:10Z",
+      "side": 1,
+      "message": "I don\u0027t think you intended to create a new file for the changes?",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "d711413ea24ce1b034dd5ccd0f06a54daba01061",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b540acc_eb147779",
+        "filename": "sdk/android/api/org/webrtc/NetworkStatePredictorFactoryFactoryInterface.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-04-08T13:33:10Z",
+      "side": 1,
+      "message": "nit: Sorry for late comment but can you also rename this to not include the Interface at the end. We don\u0027t generally use that pattern in WebRTC and it would be nice to be consistent (FecControllerFactoryFactoryInterface is currently the only interface that ends in Interface).",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 61
+      },
+      "revId": "d711413ea24ce1b034dd5ccd0f06a54daba01061",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
