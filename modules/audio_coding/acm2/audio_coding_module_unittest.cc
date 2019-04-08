@@ -19,6 +19,7 @@
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
 #include "api/audio_codecs/opus/audio_decoder_multi_channel_opus.h"
 #include "api/audio_codecs/opus/audio_decoder_opus.h"
+#include "api/audio_codecs/opus/audio_encoder_multi_channel_opus.h"
 #include "api/audio_codecs/opus/audio_encoder_opus.h"
 #include "modules/audio_coding/acm2/acm_receive_test.h"
 #include "modules/audio_coding/acm2/acm_send_test.h"
@@ -26,8 +27,8 @@
 #include "modules/audio_coding/codecs/g711/audio_decoder_pcm.h"
 #include "modules/audio_coding/codecs/g711/audio_encoder_pcm.h"
 #include "modules/audio_coding/codecs/isac/main/include/audio_encoder_isac.h"
-#include "modules/audio_coding/codecs/opus/audio_decoder_opus.h"
-#include "modules/audio_coding/codecs/opus/audio_encoder_opus.h"
+// #include "modules/audio_coding/codecs/opus/audio_decoder_opus.h"
+// #include "modules/audio_coding/codecs/opus/audio_encoder_opus.h"
 #include "modules/audio_coding/include/audio_coding_module.h"
 #include "modules/audio_coding/include/audio_coding_module_typedefs.h"
 #include "modules/audio_coding/neteq/tools/audio_checksum.h"
@@ -1511,9 +1512,7 @@ TEST_F(AcmSenderBitExactnessNewApi, MAYBE_OpusFromFormat_stereo_20ms) {
       test::AcmReceiveTestOldApi::kStereoOutput);
 }
 
-// TODO(webrtc:8649): Disabled until the Encoder counterpart of
-// https://webrtc-review.googlesource.com/c/src/+/129768 lands.
-TEST_F(AcmSenderBitExactnessNewApi, DISABLED_OpusManyChannels) {
+TEST_F(AcmSenderBitExactnessNewApi, OpusManyChannels) {
   constexpr int kNumChannels = 4;
   constexpr int kOpusPayloadType = 120;
   constexpr int kBitrateBps = 128000;
@@ -1521,29 +1520,29 @@ TEST_F(AcmSenderBitExactnessNewApi, DISABLED_OpusManyChannels) {
   // Read a 4 channel file at 48kHz.
   ASSERT_TRUE(SetUpSender(kTestFileQuad48kHz, 48000));
 
-  // TODO(webrtc:8649): change to higher level
-  // AudioEncoderOpus::MakeAudioEncoder once a multistream encoder can be set up
-  // from SDP. - This is now done for the Decoder.
-
-  // The Encoder and Decoder are set up differently (and the test is disabled)
-  // until the changes from
-  // https://webrtc-review.googlesource.com/c/src/+/121764 land.
   AudioEncoderOpusConfig config = *AudioEncoderOpus::SdpToConfig(
       SdpAudioFormat("opus", 48000, 2, {{"stereo", "1"}}));
   config.num_channels = kNumChannels;
   config.bitrate_bps = kBitrateBps;
 
-  const auto sdp_format = SdpAudioFormat(
-      "multiopus", 48000, kNumChannels,
-      {{"channel_mapping", "0,1,2,3"}, {"coupled_streams", "2"}});
+  const auto sdp_format = SdpAudioFormat("multiopus", 48000, kNumChannels,
+                                         {{"channel_mapping", "0,1,2,3"},
+                                          {"coupled_streams", "2"},
+                                          {"num_streams", "2"}});
+  const auto encoder_config =
+      AudioEncoderMultiChannelOpus::SdpToConfig(sdp_format);
+
+  ASSERT_TRUE(encoder_config.has_value());
+
+  ASSERT_NO_FATAL_FAILURE(
+      SetUpTestExternalEncoder(AudioEncoderMultiChannelOpus::MakeAudioEncoder(
+                                   *encoder_config, kOpusPayloadType),
+                               kOpusPayloadType));
+
   const auto decoder_config =
       AudioDecoderMultiChannelOpus::SdpToConfig(sdp_format);
   const auto opus_decoder =
       AudioDecoderMultiChannelOpus::MakeAudioDecoder(*decoder_config);
-
-  ASSERT_NO_FATAL_FAILURE(SetUpTestExternalEncoder(
-      absl::make_unique<AudioEncoderOpusImpl>(config, kOpusPayloadType),
-      kOpusPayloadType));
 
   rtc::scoped_refptr<AudioDecoderFactory> decoder_factory =
       new rtc::RefCountedObject<test::AudioDecoderProxyFactory>(

@@ -8,25 +8,24 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "api/audio_codecs/opus/audio_decoder_multi_channel_opus.h"
+#include "api/audio_codecs/opus/audio_encoder_multi_channel_opus.h"
 
-#include <memory>
 #include <utility>
-#include <vector>
 
-#include "absl/memory/memory.h"
-#include "absl/strings/match.h"
-#include "modules/audio_coding/codecs/opus/audio_decoder_multi_channel_opus_impl.h"
+#include "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.h"
 
 namespace webrtc {
 
-absl::optional<AudioDecoderMultiChannelOpusConfig>
-AudioDecoderMultiChannelOpus::SdpToConfig(const SdpAudioFormat& format) {
-  return AudioDecoderMultiChannelOpusImpl::SdpToConfig(format);
+absl::optional<AudioEncoderMultiChannelOpusConfig>
+AudioEncoderMultiChannelOpus::SdpToConfig(const SdpAudioFormat& format) {
+  return AudioEncoderMultiChannelOpusImpl::SdpToConfig(format);
 }
 
-void AudioDecoderMultiChannelOpus::AppendSupportedDecoders(
+void AudioEncoderMultiChannelOpus::AppendSupportedEncoders(
     std::vector<AudioCodecSpec>* specs) {
+  // To get full utilization of the surround support of the Opus lib, we can
+  // mark which channel is the low frequency effects (LFE). But that is not done
+  // ATM.
   {
     AudioCodecInfo surround_5_1_opus_info{48000, 6,
                                           /* default_bitrate_bps= */ 128000};
@@ -59,9 +58,17 @@ void AudioDecoderMultiChannelOpus::AppendSupportedDecoders(
   }
 }
 
-std::unique_ptr<AudioDecoder> AudioDecoderMultiChannelOpus::MakeAudioDecoder(
-    AudioDecoderMultiChannelOpusConfig config,
-    absl::optional<AudioCodecPairId> /*codec_pair_id*/) {
-  return AudioDecoderMultiChannelOpusImpl::MakeAudioDecoder(config);
+AudioCodecInfo AudioEncoderMultiChannelOpus::QueryAudioEncoder(
+    const AudioEncoderMultiChannelOpusConfig& config) {
+  return AudioEncoderMultiChannelOpusImpl::QueryAudioEncoder(config);
 }
+
+std::unique_ptr<AudioEncoder> AudioEncoderMultiChannelOpus::MakeAudioEncoder(
+    const AudioEncoderMultiChannelOpusConfig& config,
+    int payload_type,
+    absl::optional<AudioCodecPairId> /*codec_pair_id*/) {
+  return AudioEncoderMultiChannelOpusImpl::MakeAudioEncoder(config,
+                                                            payload_type);
+}
+
 }  // namespace webrtc
