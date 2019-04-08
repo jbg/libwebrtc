@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a583e6f8_d0320916",
+        "filename": "sdk/android/api/org/webrtc/NetworkStatePredictorFactoryFactoryInterface.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-08T13:25:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1089bcf9_f0167242",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "8e4001cb9fce97a44b11efb41376f559989cf504",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f25e76f1_e1363230",
         "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
         "patchSetId": 21
@@ -45,6 +69,30 @@
       "revId": "8e4001cb9fce97a44b11efb41376f559989cf504",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ce5a5d3_87ec1d44",
+        "filename": "sdk/android/api/org/webrtc/PeerConnectionFactory.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-08T13:25:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f25e76f1_e1363230",
+      "range": {
+        "startLine": 177,
+        "startChar": 57,
+        "endLine": 177,
+        "endChar": 92
+      },
+      "revId": "8e4001cb9fce97a44b11efb41376f559989cf504",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
