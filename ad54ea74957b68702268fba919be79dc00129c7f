@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6e0814e_82ceebb8",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-09T12:34:19Z",
+      "side": 1,
+      "message": "asapersson: I suppose I should use GetSendStreamDataCounters instead of DataCountersRTP?",
+      "revId": "ad54ea74957b68702268fba919be79dc00129c7f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
