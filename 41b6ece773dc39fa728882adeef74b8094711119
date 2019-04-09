@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11021557_b05a6495",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-09T12:38:41Z",
+      "side": 1,
+      "message": "Can\u0027t you return an vector of optionals instead, to make it give the same result as a loop over the one-sequence-number version?",
+      "range": {
+        "startLine": 108,
+        "startChar": 48,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "41b6ece773dc39fa728882adeef74b8094711119",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
