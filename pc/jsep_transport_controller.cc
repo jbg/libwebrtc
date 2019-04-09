@@ -21,8 +21,8 @@
 #include "pc/srtp_filter.h"
 #include "rtc_base/bind.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/key_derivation.h"
 #include "rtc_base/thread.h"
+#include "rtc_crypto/hkdf.h"
 
 using webrtc::SdpType;
 

@@ -9,7 +9,7 @@ include_rules = [
   "-call",
   "-common_audio",
   "-common_video",
-  "-crypto",
+  "-rtc_crypto",
   "-data",
   "-examples",
   "-ios",
