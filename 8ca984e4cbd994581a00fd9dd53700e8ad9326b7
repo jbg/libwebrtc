@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba927ae1_81050b1c",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-09T09:07:51Z",
+      "side": 1,
+      "message": "enum class InterLayerPredMode : int {\n\nsince that\u0027s what you\u0027re casting it to",
+      "revId": "8ca984e4cbd994581a00fd9dd53700e8ad9326b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
