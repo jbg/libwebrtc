@@ -97,6 +97,7 @@ rtc_static_library("rtc_pc_base") {
     "../rtc_base:stringutils",
     "../rtc_base/third_party/base64",
     "../rtc_base/third_party/sigslot",
+    "../rtc_crypto:rtc_hkdf",
     "../system_wrappers:metrics",
     "//third_party/abseil-cpp/absl/algorithm:container",
     "//third_party/abseil-cpp/absl/memory",
