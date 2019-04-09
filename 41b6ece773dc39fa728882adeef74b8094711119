@@ -22,6 +22,30 @@
       "revId": "41b6ece773dc39fa728882adeef74b8094711119",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "942ee939_06a42182",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-04-09T12:51:25Z",
+      "side": 1,
+      "message": "I could, but it would be a waste - the code that uses this (CL not yet up; probably the next one) can handle having all or none; there\u0027s nothing for it to do with only some. If the more general behavior is required at some point, it can be introduced by the programmer who needs it. Wdys?",
+      "parentUuid": "11021557_b05a6495",
+      "range": {
+        "startLine": 108,
+        "startChar": 48,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "41b6ece773dc39fa728882adeef74b8094711119",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
