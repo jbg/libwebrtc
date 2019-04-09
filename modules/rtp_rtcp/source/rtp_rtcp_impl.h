@@ -188,7 +188,9 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
 
   // Statistics of the amount of data sent and received.
   int32_t DataCountersRTP(size_t* bytes_sent,
-                          uint32_t* packets_sent) const override;
+                          uint64_t* retransmitted_bytes_sent,
+                          uint32_t* packets_sent,
+                          uint32_t* retransmitted_packets_sent) const override;
 
   void GetSendStreamDataCounters(
       StreamDataCounters* rtp_counters,

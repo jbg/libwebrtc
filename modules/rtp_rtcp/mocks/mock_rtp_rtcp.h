@@ -118,8 +118,11 @@ class MockRtpRtcp : public RtpRtcp {
   MOCK_METHOD1(SendRTCP, int32_t(RTCPPacketType packet_type));
   MOCK_METHOD1(SendCompoundRTCP,
                int32_t(const std::set<RTCPPacketType>& packet_types));
-  MOCK_CONST_METHOD2(DataCountersRTP,
-                     int32_t(size_t* bytes_sent, uint32_t* packets_sent));
+  MOCK_CONST_METHOD4(DataCountersRTP,
+                     int32_t(size_t* bytes_sent,
+                             uint64_t* retransmitted_bytes_sent,
+                             uint32_t* packets_sent,
+                             uint32_t* retransmitted_packets_sent));
   MOCK_CONST_METHOD2(GetSendStreamDataCounters,
                      void(StreamDataCounters*, StreamDataCounters*));
   MOCK_CONST_METHOD3(GetRtpPacketLossStats,

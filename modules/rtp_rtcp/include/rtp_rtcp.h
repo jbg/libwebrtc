@@ -330,8 +330,11 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
 
   // Returns statistics of the amount of data sent.
   // Returns -1 on failure else 0.
-  virtual int32_t DataCountersRTP(size_t* bytes_sent,
-                                  uint32_t* packets_sent) const = 0;
+  virtual int32_t DataCountersRTP(
+      size_t* bytes_sent,
+      uint64_t* retransmitted_bytes_sent,
+      uint32_t* packets_sent,
+      uint32_t* retransmitted_packets_sent) const = 0;
 
   // Returns send statistics for the RTP and RTX stream.
   virtual void GetSendStreamDataCounters(

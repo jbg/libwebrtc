@@ -534,13 +534,18 @@ bool ModuleRtpRtcpImpl::RtcpXrRrtrStatus() const {
 }
 
 // TODO(asapersson): Replace this method with the one below.
-int32_t ModuleRtpRtcpImpl::DataCountersRTP(size_t* bytes_sent,
-                                           uint32_t* packets_sent) const {
+int32_t ModuleRtpRtcpImpl::DataCountersRTP(
+    size_t* bytes_sent,
+    uint64_t* retransmitted_bytes_sent,
+    uint32_t* packets_sent,
+    uint32_t* retransmitted_packets_sent) const {
   StreamDataCounters rtp_stats;
   StreamDataCounters rtx_stats;
   rtp_sender_->GetDataCounters(&rtp_stats, &rtx_stats);
 
   if (bytes_sent) {
+    // TODO(http://crbug.com/webrtc/10525): Bytes sent should only include
+    // payload bytes, not header and padding bytes.
     *bytes_sent = rtp_stats.transmitted.payload_bytes +
                   rtp_stats.transmitted.padding_bytes +
                   rtp_stats.transmitted.header_bytes +
@@ -548,9 +553,17 @@ int32_t ModuleRtpRtcpImpl::DataCountersRTP(size_t* bytes_sent,
                   rtx_stats.transmitted.padding_bytes +
                   rtx_stats.transmitted.header_bytes;
   }
+  if (retransmitted_bytes_sent) {
+    *retransmitted_bytes_sent = rtp_stats.retransmitted.payload_bytes +
+                                rtx_stats.transmitted.payload_bytes;
+  }
   if (packets_sent) {
     *packets_sent =
         rtp_stats.transmitted.packets + rtx_stats.transmitted.packets;
+  }
+  if (retransmitted_packets_sent) {
+    *retransmitted_packets_sent =
+        rtp_stats.retransmitted.packets + rtx_stats.transmitted.packets;
   }
   return 0;
 }
