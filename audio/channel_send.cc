@@ -1071,9 +1071,13 @@ CallSendStatistics ChannelSend::GetRTCPStatistics() const {
   stats.rttMs = GetRTT();
 
   size_t bytesSent(0);
+  uint64_t retransmitted_bytes_sent = 0;
   uint32_t packetsSent(0);
+  uint32_t retransmitted_packets_sent = 0;
 
-  if (_rtpRtcpModule->DataCountersRTP(&bytesSent, &packetsSent) != 0) {
+  if (_rtpRtcpModule->DataCountersRTP(&bytesSent, &retransmitted_bytes_sent,
+                                      &packetsSent,
+                                      &retransmitted_packets_sent) != 0) {
     RTC_DLOG(LS_WARNING)
         << "GetRTPStatistics() failed to retrieve RTP datacounters"
         << " => output will not be complete";
