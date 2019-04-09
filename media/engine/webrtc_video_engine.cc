@@ -343,8 +343,7 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
     codec_default_denoising = !parameters_.options.video_noise_reduction;
     denoising = parameters_.options.video_noise_reduction.value_or(false);
   }
-
-  if (absl::EqualsIgnoreCase(codec.name, kH264CodecName)) {
+  z if (absl::EqualsIgnoreCase(codec.name, kH264CodecName)) {
     webrtc::VideoCodecH264 h264_settings =
         webrtc::VideoEncoder::GetDefaultH264Settings();
     h264_settings.frameDroppingOn = frame_dropping;
@@ -387,8 +386,19 @@ WebRtcVideoChannel::WebRtcVideoSendStream::ConfigureVideoEncoderSettings(
     // Ensure frame dropping is always enabled.
     RTC_DCHECK(vp9_settings.frameDroppingOn);
     if (!is_screencast) {
-      // Limit inter-layer prediction to key pictures.
-      vp9_settings.interLayerPred = webrtc::InterLayerPredMode::kOnKeyPic;
+      const std::string group =
+          webrtc::field_trial::FindFullName("WebRTC-Vp9InterLayerPred");
+      int mode;
+      if (!group.empty() && sscanf(group.c_str(), "%d", &mode) == 1 &&
+          (mode == static_cast<int>(webrtc::InterLayerPredMode::kOn) ||
+           mode == static_cast<int>(webrtc::InterLayerPredMode::kOnKeyPic) ||
+           mode == static_cast<int>(webrtc::InterLayerPredMode::kOff))) {
+        vp9_settings.interLayerPred =
+            static_cast<webrtc::InterLayerPredMode>(mode);
+      } else {
+        // Limit inter-layer prediction to key pictures by default.
+        vp9_settings.interLayerPred = webrtc::InterLayerPredMode::kOnKeyPic;
+      }
     } else {
       // Multiple spatial layers vp9 screenshare needs flexible mode.
       vp9_settings.flexibleMode = vp9_settings.numberOfSpatialLayers > 1;
