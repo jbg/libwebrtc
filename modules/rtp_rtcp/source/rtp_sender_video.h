@@ -13,9 +13,11 @@
 
 #include <map>
 #include <memory>
+#include <vector>
 
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
+#include "api/array_view.h"
 #include "modules/rtp_rtcp/include/flexfec_sender.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/playout_delay_oracle.h"
@@ -101,6 +103,13 @@ class RTPSenderVideo {
   // too long ago).
   absl::optional<RtpSequenceNumberMap::Info> GetSentRtpPacketInfo(
       uint16_t sequence_number) const;
+
+  // Similar to other GetSentRtpPacketInfo, but for a list of sequence numbers,
+  // and taking the critical section only once. Also, if the Info for any of
+  // the sequence numbers cannot be recalled, the lookup is stopped, and
+  // an empty vector is returned.
+  std::vector<RtpSequenceNumberMap::Info> GetSentRtpPacketInfos(
+      rtc::ArrayView<const uint16_t> sequence_numbers) const;
 
  protected:
   static uint8_t GetTemporalId(const RTPVideoHeader& header);
