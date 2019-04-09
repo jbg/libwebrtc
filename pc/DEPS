@@ -1,6 +1,7 @@
 include_rules = [
   "+third_party/libsrtp",
   "+call",
+  "+crypto",
   "+common_video",
   "+logging/rtc_event_log",
   "+logging/rtc_event_log",
@@ -12,6 +13,7 @@ include_rules = [
   "+modules/video_coding",
   "+modules/video_render",
   "+p2p",
+  "+rtc_crypto",
   "+system_wrappers",
 ]
 
