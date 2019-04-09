@@ -87,6 +87,9 @@ void LossNotificationController::OnReceivedPacket(const VCMPacket& packet) {
     // Generic Frame Descriptor does not current allow us to distinguish
     // whether an intra frame is a key frame.
     // We therefore assume all intra frames are key frames.
+    // Note that key frames do not issue a loss notification on RTP sequence
+    // number gap that does not span the key frame itself, because any losses
+    // that occurred before are not relevant anymore.
     const bool key_frame = intra_frame;
     if (key_frame) {
       // Subsequent frames may not rely on frames before the key frame.
