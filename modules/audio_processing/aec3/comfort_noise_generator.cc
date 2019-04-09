@@ -139,8 +139,14 @@ void ComfortNoiseGenerator::Compute(
     }
   }
 
-  // Limit the noise to a floor of -96 dBFS.
-  constexpr float kNoiseFloor = 440.f;
+  // Limit the noise to a floor matching a WGN input of -96 dBFS.
+  // Matlab pseudocode:
+  // w = kSqrtHanning(N_FFT)
+  // w_power=sum(w_k.^2)/N_FFT
+  // wgn_power= 10^(-96/10)*32768*32768
+  // floor = wgn_power * w_power * N_FFT
+  constexpr float kNoiseFloor = 17.1267f;
+
   for (auto& n : N2_) {
     n = std::max(n, kNoiseFloor);
   }
