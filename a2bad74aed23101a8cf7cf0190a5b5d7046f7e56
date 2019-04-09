@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "008063d5_35252f4b",
+        "filename": "modules/video_capture/video_capture_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2019-04-09T08:08:32Z",
+      "side": 1,
+      "message": "Given _apiCs, this shouldn\u0027t really happen. Might still be good to keep the log, if this will be used more and the mutex will change.",
+      "range": {
+        "startLine": 186,
+        "startChar": 12,
+        "endLine": 186,
+        "endChar": 22
+      },
+      "revId": "a2bad74aed23101a8cf7cf0190a5b5d7046f7e56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
