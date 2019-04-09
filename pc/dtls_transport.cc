@@ -116,8 +116,23 @@ void DtlsTransport::UpdateInformation() {
   RTC_DCHECK_RUN_ON(owner_thread_);
   rtc::CritScope scope(&lock_);
   if (internal_dtls_transport_) {
-    info_ = DtlsTransportInformation(
-        TranslateState(internal_dtls_transport_->dtls_state()));
+    int ssl_cipher_suite;
+    if (internal_dtls_transport_->dtls_state() ==
+            cricket::DTLS_TRANSPORT_CONNECTED &&
+        internal_dtls_transport_->GetSslCipherSuite(&ssl_cipher_suite)) {
+      RTC_LOG(LS_ERROR) << "DEBUG: SSL cipher suite is " << ssl_cipher_suite;
+      info_ = DtlsTransportInformation(
+          TranslateState(internal_dtls_transport_->dtls_state()),
+          ssl_cipher_suite);
+    } else {
+      RTC_LOG(LS_ERROR) << "DEBUG: GetSslCipherSuite returned "
+                        << internal_dtls_transport_->GetSslCipherSuite(
+                               &ssl_cipher_suite)
+                        << " in state "
+                        << internal_dtls_transport_->dtls_state();
+      info_ = DtlsTransportInformation(
+          TranslateState(internal_dtls_transport_->dtls_state()));
+    }
   } else {
     info_ = DtlsTransportInformation(DtlsTransportState::kClosed);
   }

@@ -11,6 +11,7 @@
 #ifndef API_DTLS_TRANSPORT_INTERFACE_H_
 #define API_DTLS_TRANSPORT_INTERFACE_H_
 
+#include "absl/types/optional.h"
 #include "api/ice_transport_interface.h"
 #include "api/rtc_error.h"
 #include "api/scoped_refptr.h"
@@ -34,11 +35,14 @@ enum class DtlsTransportState {
 // DTLSTransport.
 class DtlsTransportInformation {
  public:
-  explicit DtlsTransportInformation(DtlsTransportState state) : state_(state) {}
+  explicit DtlsTransportInformation(DtlsTransportState state);
+  DtlsTransportInformation(DtlsTransportState state, int ssl_cipher_suite);
   DtlsTransportState state() const { return state_; }
+  absl::optional<int> ssl_cipher_suite() const { return ssl_cipher_suite_; }
   // TODO(hta): Add remote certificate access
  private:
   DtlsTransportState state_;
+  absl::optional<int> ssl_cipher_suite_;
 };
 
 class DtlsTransportObserverInterface {
