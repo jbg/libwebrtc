@@ -15,13 +15,13 @@
 
 #include "absl/algorithm/container.h"
 #include "absl/memory/memory.h"
+#include "crypto/hkdf.h"
 #include "p2p/base/ice_transport_internal.h"
 #include "p2p/base/no_op_dtls_transport.h"
 #include "p2p/base/port.h"
 #include "pc/srtp_filter.h"
 #include "rtc_base/bind.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/key_derivation.h"
 #include "rtc_base/thread.h"
 
 using webrtc::SdpType;

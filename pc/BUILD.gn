@@ -84,6 +84,7 @@ rtc_static_library("rtc_pc_base") {
     "../call:rtp_interfaces",
     "../call:rtp_receiver",
     "../common_video",
+    "../crypto:rtc_hkdf",
     "../logging:rtc_event_log_api",
     "../media:rtc_data",
     "../media:rtc_h264_profile_id",
