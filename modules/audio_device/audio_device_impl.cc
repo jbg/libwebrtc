@@ -72,13 +72,6 @@
 namespace webrtc {
 
 rtc::scoped_refptr<AudioDeviceModule> AudioDeviceModule::Create(
-    AudioLayer audio_layer) {
-  RTC_LOG(INFO) << __FUNCTION__;
-  return AudioDeviceModule::CreateForTest(audio_layer,
-                                          &GlobalTaskQueueFactory());
-}
-
-rtc::scoped_refptr<AudioDeviceModule> AudioDeviceModule::Create(
     AudioLayer audio_layer,
     TaskQueueFactory* task_queue_factory) {
   RTC_LOG(INFO) << __FUNCTION__;
