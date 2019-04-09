@@ -756,6 +756,17 @@ absl::optional<RtpSequenceNumberMap::Info> RtpVideoSender::GetSentRtpPacketInfo(
   return absl::nullopt;
 }
 
+std::vector<RtpSequenceNumberMap::Info> RtpVideoSender::GetSentRtpPacketInfos(
+    uint32_t ssrc,
+    rtc::ArrayView<const uint16_t> sequence_numbers) const {
+  for (const auto& rtp_stream : rtp_streams_) {
+    if (ssrc == rtp_stream.rtp_rtcp->SSRC()) {
+      return rtp_stream.sender_video->GetSentRtpPacketInfos(sequence_numbers);
+    }
+  }
+  return std::vector<RtpSequenceNumberMap::Info>();
+}
+
 int RtpVideoSender::ProtectionRequest(const FecProtectionParams* delta_params,
                                       const FecProtectionParams* key_params,
                                       uint32_t* sent_video_rate_bps,
