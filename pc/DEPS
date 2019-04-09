@@ -12,6 +12,7 @@ include_rules = [
   "+modules/video_coding",
   "+modules/video_render",
   "+p2p",
+  "+rtc_crypto",
   "+system_wrappers",
 ]
 
