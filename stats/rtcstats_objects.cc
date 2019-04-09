@@ -642,7 +642,9 @@ RTCInboundRTPStreamStats::~RTCInboundRTPStreamStats() {}
 WEBRTC_RTCSTATS_IMPL(
     RTCOutboundRTPStreamStats, RTCRTPStreamStats, "outbound-rtp",
     &packets_sent,
+    &retransmitted_packets_sent,
     &bytes_sent,
+    &retransmitted_bytes_sent,
     &target_bitrate,
     &frames_encoded)
 // clang-format on
@@ -655,7 +657,9 @@ RTCOutboundRTPStreamStats::RTCOutboundRTPStreamStats(std::string&& id,
                                                      int64_t timestamp_us)
     : RTCRTPStreamStats(std::move(id), timestamp_us),
       packets_sent("packetsSent"),
+      retransmitted_packets_sent("retransmittedPacketsSent"),
       bytes_sent("bytesSent"),
+      retransmitted_bytes_sent("retransmittedBytesSent"),
       target_bitrate("targetBitrate"),
       frames_encoded("framesEncoded") {}
 
@@ -663,7 +667,9 @@ RTCOutboundRTPStreamStats::RTCOutboundRTPStreamStats(
     const RTCOutboundRTPStreamStats& other)
     : RTCRTPStreamStats(other),
       packets_sent(other.packets_sent),
+      retransmitted_packets_sent(other.retransmitted_packets_sent),
       bytes_sent(other.bytes_sent),
+      retransmitted_bytes_sent(other.retransmitted_bytes_sent),
       target_bitrate(other.target_bitrate),
       frames_encoded(other.frames_encoded) {}
 
