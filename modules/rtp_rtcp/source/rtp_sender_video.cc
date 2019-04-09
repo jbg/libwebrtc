@@ -1,3 +1,4 @@
+
 /*
  *  Copyright (c) 2012 The WebRTC project authors. All Rights Reserved.
  *
@@ -17,7 +18,6 @@
 #include <memory>
 #include <string>
 #include <utility>
-#include <vector>
 
 #include "absl/memory/memory.h"
 #include "absl/strings/match.h"
@@ -765,6 +765,37 @@ absl::optional<RtpSequenceNumberMap::Info> RTPSenderVideo::GetSentRtpPacketInfo(
   }
   rtc::CritScope cs(&crit_);
   return rtp_sequence_number_map_->Get(sequence_number);
+}
+
+std::vector<RtpSequenceNumberMap::Info> RTPSenderVideo::GetSentRtpPacketInfo(
+    rtc::ArrayView<uint16_t> sequence_numbers) const {
+  RTC_DCHECK(!sequence_numbers.empty());
+
+  std::vector<RtpSequenceNumberMap::Info> results;
+  if (!rtp_sequence_number_map_) {
+    return results;
+  }
+  results.reserve(sequence_numbers.size());
+
+  {
+    rtc::CritScope cs(&crit_);
+    for (uint16_t sequence_number : sequence_numbers) {
+      const absl::optional<RtpSequenceNumberMap::Info> info =
+          rtp_sequence_number_map_->Get(sequence_number);
+      if (!info) {
+        // The empty vector will be returned. We can delay the clearing
+        // of the vector until after we exit the critical section.
+        break;
+      }
+      results.push_back(*info);
+    }
+  }
+
+  if (results.size() != sequence_numbers.size()) {
+    results.clear();  // Some sequence number was not found.
+  }
+
+  return results;
 }
 
 StorageType RTPSenderVideo::GetStorageType(
