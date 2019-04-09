@@ -93,6 +93,30 @@
       "revId": "352faf3d1bdd9aa06b195673a4011764632e9045",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b41577_60c01122",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-09T11:22:26Z",
+      "side": 1,
+      "message": "Sorry for leading you in the wrong direction, I\u0027m not sure this was an improvement... I think it might be better to completely separate delay_detector_ from network_state_predictor_ in this way:\n\nif (...ComputeDeltas(...)) {\n  ...\n  delay_detector_-\u003eUpdate(...);\n}\n\nif (network_state_predictor_ !\u003d nullptr) {\n  network_state_predictor_-\u003eUpdatePrediction(send_time_ms, arrival_time_ms, delay_detector_-\u003eState());\n  new_hypothesis \u003d network_state_predictor_-\u003eState();\n}\n\nWDYT? There doesn\u0027t seem to be any state that NetworkStatePredictor and DelayDetector needs to share.",
+      "parentUuid": "d0d0fb22_bb9aff72",
+      "range": {
+        "startLine": 203,
+        "startChar": 21,
+        "endLine": 203,
+        "endChar": 37
+      },
+      "revId": "352faf3d1bdd9aa06b195673a4011764632e9045",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
