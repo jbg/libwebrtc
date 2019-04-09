@@ -34,11 +34,14 @@ enum class DtlsTransportState {
 // DTLSTransport.
 class DtlsTransportInformation {
  public:
-  explicit DtlsTransportInformation(DtlsTransportState state) : state_(state) {}
+  explicit DtlsTransportInformation(DtlsTransportState state);
+  DtlsTransportInformation(DtlsTransportState state, int ssl_cipher_suite);
   DtlsTransportState state() const { return state_; }
+  absl::optional<int> ssl_cipher_suite() const { return ssl_cipher_suite_; }
   // TODO(hta): Add remote certificate access
  private:
   DtlsTransportState state_;
+  absl::optional<int> ssl_cipher_suite_;
 };
 
 class DtlsTransportObserverInterface {
