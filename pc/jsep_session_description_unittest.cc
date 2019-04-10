@@ -53,8 +53,10 @@ static const uint32_t kCandidateGeneration = 2;
 
 // This creates a session description with both audio and video media contents.
 // In SDP this is described by two m lines, one audio and one video.
-static cricket::SessionDescription* CreateCricketSessionDescription() {
-  cricket::SessionDescription* desc(new cricket::SessionDescription());
+static std::unique_ptr<cricket::SessionDescription>
+CreateCricketSessionDescription() {
+  std::unique_ptr<cricket::SessionDescription> desc(
+      new cricket::SessionDescription());
   // AudioContentDescription
   std::unique_ptr<cricket::AudioContentDescription> audio(
       new cricket::AudioContentDescription());
