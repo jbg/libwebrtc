@@ -17,6 +17,8 @@
 #include "api/transport/webrtc_key_value_config.h"
 
 namespace webrtc {
+// TODO(srte): Remove this forward declaration when this is in api.
+class RtcEventLog;
 
 class TargetTransferRateObserver {
  public:
@@ -44,6 +46,8 @@ struct NetworkControllerConfig {
   // Optional override of configuration of WebRTC internals. Using nullptr here
   // indicates that the field trial API will be used.
   const WebRtcKeyValueConfig* key_value_config = nullptr;
+  // Optional override of event log.
+  RtcEventLog* event_log = nullptr;
 };
 
 // NetworkControllerInterface is implemented by network controllers. A network
@@ -93,6 +97,21 @@ class NetworkControllerFactoryInterface {
   // Returns the interval by which the network controller expects
   // OnProcessInterval calls.
   virtual TimeDelta GetProcessInterval() const = 0;
+};
+
+// Under development, subject to change without notice.
+class NetworkStateEstimator {
+ public:
+  virtual absl::optional<NetworkStateEstimate> GetCurrentEstimate() = 0;
+  virtual void OnTransportPacketsFeedback(const TransportPacketsFeedback&) = 0;
+  virtual void OnRouteChange(const NetworkRouteChange&) = 0;
+  virtual ~NetworkStateEstimator() = default;
+};
+class NetworkStateEstimatorFactory {
+ public:
+  virtual std::unique_ptr<NetworkStateEstimator> Create(
+      const WebRtcKeyValueConfig* key_value_config) = 0;
+  virtual ~NetworkStateEstimatorFactory() = default;
 };
 }  // namespace webrtc
 

@@ -16,7 +16,6 @@
 #include <string>
 
 #include "absl/memory/memory.h"
-#include "api/transport/network_types.h"  // For PacedPacketInfo
 #include "logging/rtc_event_log/events/rtc_event.h"
 #include "logging/rtc_event_log/events/rtc_event_bwe_update_delay_based.h"
 #include "logging/rtc_event_log/rtc_event_log.h"
@@ -117,6 +116,7 @@ DelayBasedBwe::Result DelayBasedBwe::IncomingPacketFeedbackVector(
     const std::vector<PacketFeedback>& packet_feedback_vector,
     absl::optional<DataRate> acked_bitrate,
     absl::optional<DataRate> probe_bitrate,
+    absl::optional<NetworkStateEstimate> network_estimate,
     bool in_alr,
     Timestamp at_time) {
   RTC_DCHECK(std::is_sorted(packet_feedback_vector.begin(),
@@ -158,7 +158,8 @@ DelayBasedBwe::Result DelayBasedBwe::IncomingPacketFeedbackVector(
     // against building very large network queues.
     return Result();
   }
-  return MaybeUpdateEstimate(acked_bitrate, probe_bitrate,
+  rate_control_.SetNetworkStateEstimate(network_estimate);
+  return MaybeUpdateEstimate(acked_bitrate, probe_bitrate, network_estimate,
                              recovered_from_overuse, in_alr, at_time);
 }
 
@@ -202,6 +203,7 @@ void DelayBasedBwe::IncomingPacketFeedback(
 DelayBasedBwe::Result DelayBasedBwe::MaybeUpdateEstimate(
     absl::optional<DataRate> acked_bitrate,
     absl::optional<DataRate> probe_bitrate,
+    absl::optional<NetworkStateEstimate> state_estimate,
     bool recovered_from_overuse,
     bool in_alr,
     Timestamp at_time) {
