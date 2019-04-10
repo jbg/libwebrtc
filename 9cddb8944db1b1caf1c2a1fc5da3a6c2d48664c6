@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "80cdb31f_f0133d20",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-10T12:47:15Z",
+      "side": 1,
+      "message": "Done; see next patch set. Personally I like the lambda better, because it doesn\u0027t need to pass all those arguments explicitly, and because this function really is an internal implementation detail of Wait() that only really makes sense in the context of that function body.",
+      "parentUuid": "dfd841cd_ceefd06c",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 4
+      },
+      "revId": "9cddb8944db1b1caf1c2a1fc5da3a6c2d48664c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c684a60_84bd59cf",
         "filename": "rtc_base/event.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "9cddb8944db1b1caf1c2a1fc5da3a6c2d48664c6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e250158b_64384332",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-10T12:47:15Z",
+      "side": 1,
+      "message": "No. The _ts variables are absolute times.",
+      "parentUuid": "3c684a60_84bd59cf",
+      "range": {
+        "startLine": 186,
+        "startChar": 19,
+        "endLine": 186,
+        "endChar": 29
+      },
+      "revId": "9cddb8944db1b1caf1c2a1fc5da3a6c2d48664c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
