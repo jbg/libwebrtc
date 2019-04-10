@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dde47e18_86ba8b7f",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-10T07:43:04Z",
+      "side": 1,
+      "message": "I have a question. We have \"rtp_stats\" which includes both \"transmitted\" and \"retransmitted\".\nBut then we have \"rtx_stats\" as well. Is \"retransmitted\" ever applicable to RTX?\n\nPer-spec, if the RTX stream is a separate SSRC, this should belong to a separate RTC[In/Out]boundRtpStreamStats object. I wonder if there is follow-up work needed to properly represent RTX streams in stats?\n\nSometimes I think we make invalid assumptions in these layers. Somewhat related but a different issue: for example, if you have simulcast with 3 streams á 30 fps, this gets reported as 90 fps.",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
