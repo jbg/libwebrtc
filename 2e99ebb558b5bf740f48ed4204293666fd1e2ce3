@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3795e69_a20a2210",
+        "filename": "media/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-10T10:30:00Z",
+      "side": 1,
+      "message": "I suspect these two can be removed. Can you do it in this CL as well?",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 21
+      },
+      "revId": "2e99ebb558b5bf740f48ed4204293666fd1e2ce3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
