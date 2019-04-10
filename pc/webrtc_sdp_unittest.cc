@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <algorithm>
 #include <cstdint>
 #include <map>
 #include <memory>
@@ -2896,7 +2897,7 @@ TEST_F(WebRtcSdpTest, DeserializeSdpWithCorruptedSctpDataChannels) {
 void MutateJsepSctpPort(JsepSessionDescription* jdesc,
                         const SessionDescription& desc) {
   // take our pre-built session description and change the SCTP port.
-  cricket::SessionDescription* mutant = desc.Copy();
+  std::unique_ptr<cricket::SessionDescription> mutant = desc.Copy();
   DataContentDescription* dcdesc =
       mutant->GetContentDescriptionByName(kDataContentName)->as_data();
   std::vector<cricket::DataCodec> codecs(dcdesc->codecs());
@@ -2905,9 +2906,8 @@ void MutateJsepSctpPort(JsepSessionDescription* jdesc,
   codecs[0].SetParam(cricket::kCodecParamPort, kUnusualSctpPort);
   dcdesc->set_codecs(codecs);
 
-  // note: mutant's owned by jdesc now.
-  ASSERT_TRUE(jdesc->Initialize(mutant, kSessionId, kSessionVersion));
-  mutant = NULL;
+  ASSERT_TRUE(
+      jdesc->Initialize(std::move(mutant), kSessionId, kSessionVersion));
 }
 
 TEST_F(WebRtcSdpTest, DeserializeSdpWithSctpDataChannelAndUnusualPort) {
@@ -4421,11 +4421,12 @@ TEST_F(WebRtcSdpTest, ParseMediaTransportIgnoreNonsenseAttributeLines) {
 }
 
 TEST_F(WebRtcSdpTest, SerializeMediaTransportSettings) {
-  cricket::SessionDescription* description = new cricket::SessionDescription();
+  std::unique_ptr<cricket::SessionDescription> description(
+      new cricket::SessionDescription());
 
   JsepSessionDescription output(SdpType::kOffer);
   // JsepSessionDescription takes ownership of the description.
-  output.Initialize(description, "session_id", "session_version");
+  output.Initialize(std::move(description), "session_id", "session_version");
   output.description()->AddMediaTransportSetting("foo", "bar");
   std::string serialized_out;
   output.ToString(&serialized_out);
@@ -4435,8 +4436,7 @@ TEST_F(WebRtcSdpTest, SerializeMediaTransportSettings) {
 TEST_F(WebRtcSdpTest, SerializeMediaTransportSettingsTestCopy) {
   cricket::SessionDescription description;
   description.AddMediaTransportSetting("name", "setting");
-  std::unique_ptr<cricket::SessionDescription> copy =
-      absl::WrapUnique(description.Copy());
+  std::unique_ptr<cricket::SessionDescription> copy(description.Copy());
   ASSERT_EQ(1u, copy->MediaTransportSettings().size());
   EXPECT_EQ("name", copy->MediaTransportSettings()[0].transport_name);
   EXPECT_EQ("setting", copy->MediaTransportSettings()[0].transport_setting);

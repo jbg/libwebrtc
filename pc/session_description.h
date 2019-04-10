@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <iosfwd>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -421,7 +422,7 @@ class SessionDescription {
   SessionDescription();
   ~SessionDescription();
 
-  SessionDescription* Copy() const;
+  std::unique_ptr<SessionDescription> Copy() const;
 
   struct MediaTransportSetting;
 

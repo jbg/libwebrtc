@@ -3161,8 +3161,7 @@ TEST_P(PeerConnectionInterfaceTest,
   std::unique_ptr<SessionDescriptionInterface> modified_offer =
       webrtc::CreateSessionDescription(
           webrtc::SdpType::kOffer, offer->session_id(),
-          offer->session_version(),
-          absl::WrapUnique(offer->description()->Copy()));
+          offer->session_version(), offer->description()->Copy());
   EXPECT_TRUE(DoSetLocalDescription(std::move(offer)));
 
   auto senders = pc_->GetSenders();
