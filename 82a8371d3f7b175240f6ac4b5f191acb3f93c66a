@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "310f81ab_f7f2c1a7",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2019-04-10T13:04:35Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this check be the other way around, i.e. give_up_after_ms \u003c\u003d warn_after_ms?",
+      "range": {
+        "startLine": 168,
+        "startChar": 36,
+        "endLine": 168,
+        "endChar": 69
+      },
+      "revId": "82a8371d3f7b175240f6ac4b5f191acb3f93c66a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
