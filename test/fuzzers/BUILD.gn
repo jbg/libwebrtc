@@ -348,15 +348,45 @@ webrtc_fuzzer_test("audio_decoder_multiopus_fuzzer") {
   ]
 }
 
+rtc_static_library("audio_encoder_fuzzer") {
+  sources = [
+    "audio_encoder_fuzzer.cc",
+    "audio_encoder_fuzzer.h",
+  ]
+  deps = [
+    ":fuzz_data_helper",
+    "../../api:array_view",
+    "../../api/audio_codecs:audio_codecs_api",
+    "../../modules/rtp_rtcp:rtp_rtcp_format",
+    "../../rtc_base:checks",
+    "../../rtc_base:rtc_base_approved",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+  visibility = [ ":*" ]  # Only targets in this file can depend on this.
+}
+
+webrtc_fuzzer_test("audio_encoder_multiopus_fuzzer") {
+  sources = [
+    "audio_encoder_multiopus_fuzzer.cc",
+  ]
+  deps = [
+    ":audio_encoder_fuzzer",
+    "../../api/audio_codecs/opus:audio_encoder_multiopus",
+    "../../api/audio_codecs/opus:audio_encoder_opus_config",
+    "../../rtc_base:checks",
+    "../../rtc_base:rtc_base_approved",
+  ]
+}
+
 webrtc_fuzzer_test("audio_encoder_opus_fuzzer") {
   sources = [
     "audio_encoder_opus_fuzzer.cc",
   ]
   deps = [
+    ":audio_encoder_fuzzer",
     "../../api:array_view",
     "../../api/audio_codecs/opus:audio_encoder_opus",
     "../../rtc_base:checks",
-    "../../rtc_base:rtc_base_approved",
   ]
 }
 

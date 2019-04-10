@@ -13,6 +13,7 @@
 #include "rtc_base/checks.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 enum {
@@ -101,6 +102,12 @@ int16_t WebRtcOpus_MultistreamEncoderCreate(
   RTC_DCHECK(state);
 
   int error;
+  // int param_streams = 0;
+  // int param_coupled_streams = 0;
+  // unsigned char param_mapping[255];
+  // memset(param_mapping, 0, 255);
+
+  printf("Surround create 48k, chans=%d, 1, application=%d ", (int)channels, opus_app);
   state->multistream_encoder =
       opus_multistream_encoder_create(
           48000,
@@ -191,6 +198,7 @@ int WebRtcOpus_Encode(OpusEncInst* inst,
 
 int16_t WebRtcOpus_SetBitRate(OpusEncInst* inst, int32_t rate) {
   if (inst) {
+    printf("OPUS_SET_BITRATE(%d)\n", rate);
     return ENCODER_CTL(inst, OPUS_SET_BITRATE(rate));
   } else {
     return -1;
@@ -199,6 +207,7 @@ int16_t WebRtcOpus_SetBitRate(OpusEncInst* inst, int32_t rate) {
 
 int16_t WebRtcOpus_SetPacketLossRate(OpusEncInst* inst, int32_t loss_rate) {
   if (inst) {
+    printf("OPUS_SET_PACKET_LOSS(%d)\n", loss_rate);
     return ENCODER_CTL(inst, OPUS_SET_PACKET_LOSS_PERC(loss_rate));
   } else {
     return -1;
@@ -222,6 +231,7 @@ int16_t WebRtcOpus_SetMaxPlaybackRate(OpusEncInst* inst, int32_t frequency_hz) {
   } else {
     set_bandwidth = OPUS_BANDWIDTH_FULLBAND;
   }
+  printf("OPUS_SET_MAX_BANDWIDTH(%d)\n", set_bandwidth);
   return ENCODER_CTL(inst, OPUS_SET_MAX_BANDWIDTH(set_bandwidth));
 }
 
@@ -231,6 +241,7 @@ int16_t WebRtcOpus_GetMaxPlaybackRate(OpusEncInst* const inst,
     if (opus_encoder_ctl(
             inst->encoder,
             OPUS_GET_MAX_BANDWIDTH(result_hz)) == OPUS_OK) {
+      //printf("OPUS_SET_MAX_PLAYBACK_RATE(%d)\n", result_hz);
       return 0;
     }
     return -1;
@@ -247,6 +258,7 @@ int16_t WebRtcOpus_GetMaxPlaybackRate(OpusEncInst* const inst,
     OpusEncoder *enc;
     opus_int32 bandwidth;
 
+    //printf("OPUS_SET_MAX_PLAYBACK_RATE(%d)\n", result_hz);
     ret = ENCODER_CTL(inst, OPUS_MULTISTREAM_GET_ENCODER_STATE(s, &enc));
     if (ret == OPUS_BAD_ARG)
       break;
@@ -267,6 +279,7 @@ int16_t WebRtcOpus_GetMaxPlaybackRate(OpusEncInst* const inst,
 
 int16_t WebRtcOpus_EnableFec(OpusEncInst* inst) {
   if (inst) {
+    printf("OPUS_SET_INBAND_FEC(1)\n");
     return ENCODER_CTL(inst, OPUS_SET_INBAND_FEC(1));
   } else {
     return -1;
@@ -275,6 +288,7 @@ int16_t WebRtcOpus_EnableFec(OpusEncInst* inst) {
 
 int16_t WebRtcOpus_DisableFec(OpusEncInst* inst) {
   if (inst) {
+    printf("OPUS_SET_INBAND_FEC(0)\n");
     return ENCODER_CTL(inst, OPUS_SET_INBAND_FEC(0));
   } else {
     return -1;
@@ -291,20 +305,24 @@ int16_t WebRtcOpus_EnableDtx(OpusEncInst* inst) {
   // last long during a pure silence, if the signal type is not forced.
   // TODO(minyue): Remove the signal type forcing when Opus DTX works properly
   // without it.
+  printf("OPUS_SET_SIGNAL_VOICE\n");
   int ret = ENCODER_CTL(inst,
                         OPUS_SET_SIGNAL(OPUS_SIGNAL_VOICE));
   if (ret != OPUS_OK)
     return ret;
 
+  printf("OPUS_SET_DTX(1)\n");
   return ENCODER_CTL(inst, OPUS_SET_DTX(1));
 }
 
 int16_t WebRtcOpus_DisableDtx(OpusEncInst* inst) {
   if (inst) {
+    printf("OPUS_SET_SIGNAL_AUTO\n");
     int ret = ENCODER_CTL(inst,
                           OPUS_SET_SIGNAL(OPUS_AUTO));
     if (ret != OPUS_OK)
       return ret;
+    printf("OPUS_SET_DTX(0)\n");
     return ENCODER_CTL(inst, OPUS_SET_DTX(0));
   } else {
     return -1;
@@ -313,6 +331,7 @@ int16_t WebRtcOpus_DisableDtx(OpusEncInst* inst) {
 
 int16_t WebRtcOpus_EnableCbr(OpusEncInst* inst) {
   if (inst) {
+    printf("OPUS_SET_VBR(0)\n");
     return ENCODER_CTL(inst, OPUS_SET_VBR(0));
   } else {
     return -1;
@@ -321,6 +340,7 @@ int16_t WebRtcOpus_EnableCbr(OpusEncInst* inst) {
 
 int16_t WebRtcOpus_DisableCbr(OpusEncInst* inst) {
   if (inst) {
+    printf("OPUS_SET_VBR(1)\n");
     return ENCODER_CTL(inst, OPUS_SET_VBR(1));
   } else {
     return -1;
@@ -329,6 +349,7 @@ int16_t WebRtcOpus_DisableCbr(OpusEncInst* inst) {
 
 int16_t WebRtcOpus_SetComplexity(OpusEncInst* inst, int32_t complexity) {
   if (inst) {
+    printf("OPUS_SET_complexity(%d)\n", complexity);
     return ENCODER_CTL(inst,
                        OPUS_SET_COMPLEXITY(complexity));
   } else {
@@ -352,6 +373,7 @@ int32_t WebRtcOpus_GetBandwidth(OpusEncInst* inst) {
 
 int16_t WebRtcOpus_SetBandwidth(OpusEncInst* inst, int32_t bandwidth) {
   if (inst) {
+    printf("OPUS_SET_BANDWIDTH(%d)\n", bandwidth);
     return ENCODER_CTL(inst,
                        OPUS_SET_BANDWIDTH(bandwidth));
   } else {
