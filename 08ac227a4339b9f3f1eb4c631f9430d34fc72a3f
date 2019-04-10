@@ -16,6 +16,24 @@
       "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d893c222_8d947559",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-04-10T13:07:57Z",
+      "side": 1,
+      "message": "\"retransmitted\" is set when packets are re-sent over RTX: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender.cc?g\u003d0\u0026l\u003d479\n\nstats.retransmitted_bytes_sent should perhaps only include retransmitted payload_bytes from the rtx_stats (if the rtx stream should be included) since padding packets could be sent over rtx but are not retransmissions: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender.cc?g\u003d0\u0026l\u003d419 (as change in webrtc_video_engine.cc)?\n\n\nOnly frames with different timestamps are accounted for when calculating the fps: https://cs.chromium.org/chromium/src/third_party/webrtc/video/send_statistics_proxy.cc?g\u003d0\u0026l\u003d969. So framerate should be 30 fps in this case.",
+      "parentUuid": "dde47e18_86ba8b7f",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
