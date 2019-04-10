@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfd841cd_ceefd06c",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2019-04-10T09:30:41Z",
+      "side": 1,
+      "message": "I think it would make sense to split this out to its own function instead of a lambda.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 4
+      },
+      "revId": "9cddb8944db1b1caf1c2a1fc5da3a6c2d48664c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c684a60_84bd59cf",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5098
+      },
+      "writtenOn": "2019-04-10T09:30:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we subtract warn_ts here?",
+      "range": {
+        "startLine": 186,
+        "startChar": 19,
+        "endLine": 186,
+        "endChar": 29
+      },
+      "revId": "9cddb8944db1b1caf1c2a1fc5da3a6c2d48664c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
