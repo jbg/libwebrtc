@@ -117,6 +117,30 @@
       "revId": "352faf3d1bdd9aa06b195673a4011764632e9045",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c08b6b44_e9e91929",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2019-04-10T09:32:51Z",
+      "side": 1,
+      "message": "Discussed offline. The main benefit of this version is to hide the NetworkPredictor\u0027s state inside TrendlineEstimator, so when we need to access the state in DelayBasedBWE, we don\u0027t need to care about whether we get the original state or the modified state.",
+      "parentUuid": "45b41577_60c01122",
+      "range": {
+        "startLine": 203,
+        "startChar": 21,
+        "endLine": 203,
+        "endChar": 37
+      },
+      "revId": "352faf3d1bdd9aa06b195673a4011764632e9045",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
