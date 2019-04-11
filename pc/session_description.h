@@ -56,6 +56,7 @@ const int kAutoBandwidth = -1;
 class AudioContentDescription;
 class DataContentDescription;
 class VideoContentDescription;
+class SctpDataContentDescription;
 
 // Describes a session description media section. There are subclasses for each
 // media type (audio, video, data) that will have additional information.
@@ -80,6 +81,9 @@ class MediaContentDescription {
   // nullptr if the cast fails.
   virtual DataContentDescription* as_data() { return nullptr; }
   virtual const DataContentDescription* as_data() const { return nullptr; }
+
+  virtual SctpDataContentDescription* as_sctp() { return nullptr; }
+  virtual const SctpDataContentDescription* as_sctp() const { return nullptr; }
 
   virtual bool has_codecs() const = 0;
 
@@ -317,12 +321,33 @@ class DataContentDescription : public MediaContentDescriptionImpl<DataCodec> {
   virtual MediaType type() const { return MEDIA_TYPE_DATA; }
   virtual DataContentDescription* as_data() { return this; }
   virtual const DataContentDescription* as_data() const { return this; }
+};
+
+class SctpDataContentDescription : public MediaContentDescription {
+ public:
+  SctpDataContentDescription() {}
+  SctpDataContentDescription* Copy() const override {
+    return new SctpDataContentDescription(*this);
+  }
+  MediaType type() const override { return MEDIA_TYPE_DATA; }
+  SctpDataContentDescription* as_sctp() override { return this; }
+  const SctpDataContentDescription* as_sctp() const override { return this; }
+  bool has_codecs() const override { return false; }
 
   bool use_sctpmap() const { return use_sctpmap_; }
   void set_use_sctpmap(bool enable) { use_sctpmap_ = enable; }
+  int port() const { return port_; }
+  void set_port(int port) { port_ = port; }
+  int max_message_size() const { return max_message_size_; }
+  void set_max_message_size(int max_message_size) {
+    max_message_size_ = max_message_size;
+  }
 
  private:
-  bool use_sctpmap_ = true;
+  bool use_sctpmap_ = true;  // Note: "true" is no longer conformant.
+  // Defaults should be constants imported from SCTP. Quick hack.
+  int port_ = 5000;
+  int max_message_size_ = 256 * 1024;
 };
 
 // Protocol used for encoding media. This is the "top level" protocol that may

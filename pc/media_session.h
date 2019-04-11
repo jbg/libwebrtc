@@ -331,6 +331,8 @@ const VideoContentDescription* GetFirstVideoContentDescription(
     const SessionDescription* sdesc);
 const DataContentDescription* GetFirstDataContentDescription(
     const SessionDescription* sdesc);
+const SctpDataContentDescription* GetFirstSctpDataContentDescription(
+    const SessionDescription* sdesc);
 // Non-const versions of the above functions.
 // Useful when modifying an existing description.
 ContentInfo* GetFirstMediaContent(ContentInfos* contents, MediaType media_type);
@@ -347,6 +349,8 @@ AudioContentDescription* GetFirstAudioContentDescription(
 VideoContentDescription* GetFirstVideoContentDescription(
     SessionDescription* sdesc);
 DataContentDescription* GetFirstDataContentDescription(
+    SessionDescription* sdesc);
+SctpDataContentDescription* GetFirstSctpDataContentDescription(
     SessionDescription* sdesc);
 
 // Helper functions to return crypto suites used for SDES.

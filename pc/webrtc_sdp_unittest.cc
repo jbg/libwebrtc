@@ -64,6 +64,7 @@ using cricket::MediaProtocolType;
 using cricket::RELAY_PORT_TYPE;
 using cricket::RidDescription;
 using cricket::RidDirection;
+using cricket::SctpDataContentDescription;
 using cricket::SessionDescription;
 using cricket::SimulcastDescription;
 using cricket::SimulcastLayer;
@@ -1444,8 +1445,15 @@ class WebRtcSdpTest : public ::testing::Test {
 
   void CompareDataContentDescription(const DataContentDescription* dcd1,
                                      const DataContentDescription* dcd2) {
-    EXPECT_EQ(dcd1->use_sctpmap(), dcd2->use_sctpmap());
     CompareMediaContentDescription<DataContentDescription>(dcd1, dcd2);
+  }
+
+  void CompareSctpDataContentDescription(
+      const SctpDataContentDescription* dcd1,
+      const SctpDataContentDescription* dcd2) {
+    EXPECT_EQ(dcd1->use_sctpmap(), dcd2->use_sctpmap());
+    EXPECT_EQ(dcd1->port(), dcd2->port());
+    EXPECT_EQ(dcd1->max_message_size(), dcd2->max_message_size());
   }
 
   void CompareSessionDescription(const SessionDescription& desc1,
@@ -1483,10 +1491,21 @@ class WebRtcSdpTest : public ::testing::Test {
       }
 
       ASSERT_EQ(IsDataContent(&c1), IsDataContent(&c2));
-      if (IsDataContent(&c1)) {
-        const DataContentDescription* dcd1 = c1.media_description()->as_data();
-        const DataContentDescription* dcd2 = c2.media_description()->as_data();
-        CompareDataContentDescription(dcd1, dcd2);
+      if (c1.media_description()->as_sctp()) {
+        ASSERT_TRUE(c2.media_description()->as_sctp());
+        const SctpDataContentDescription* scd1 =
+            c1.media_description()->as_sctp();
+        const SctpDataContentDescription* scd2 =
+            c2.media_description()->as_sctp();
+        CompareSctpDataContentDescription(scd1, scd2);
+      } else {
+        if (IsDataContent(&c1)) {
+          const DataContentDescription* dcd1 =
+              c1.media_description()->as_data();
+          const DataContentDescription* dcd2 =
+              c2.media_description()->as_data();
+          CompareDataContentDescription(dcd1, dcd2);
+        }
       }
 
       CompareSimulcastDescription(
@@ -1759,14 +1778,12 @@ class WebRtcSdpTest : public ::testing::Test {
   }
 
   void AddSctpDataChannel(bool use_sctpmap) {
-    std::unique_ptr<DataContentDescription> data(new DataContentDescription());
-    data_desc_ = data.get();
-    data_desc_->set_use_sctpmap(use_sctpmap);
-    data_desc_->set_protocol(cricket::kMediaProtocolDtlsSctp);
-    DataCodec codec(cricket::kGoogleSctpDataCodecPlType,
-                    cricket::kGoogleSctpDataCodecName);
-    codec.SetParam(cricket::kCodecParamPort, kDefaultSctpPort);
-    data_desc_->AddCodec(codec);
+    std::unique_ptr<SctpDataContentDescription> data(
+        new SctpDataContentDescription());
+    sctp_desc_ = data.get();
+    sctp_desc_->set_use_sctpmap(use_sctpmap);
+    sctp_desc_->set_protocol(cricket::kMediaProtocolDtlsSctp);
+    sctp_desc_->set_port(kDefaultSctpPort);
     desc_.AddContent(kDataContentName, MediaProtocolType::kSctp,
                      data.release());
     desc_.AddTransportInfo(TransportInfo(
@@ -2043,6 +2060,7 @@ class WebRtcSdpTest : public ::testing::Test {
   AudioContentDescription* audio_desc_;
   VideoContentDescription* video_desc_;
   DataContentDescription* data_desc_;
+  SctpDataContentDescription* sctp_desc_;
   Candidates candidates_;
   std::unique_ptr<IceCandidateInterface> jcandidate_;
   JsepSessionDescription jdesc_;

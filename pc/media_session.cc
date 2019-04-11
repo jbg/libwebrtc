@@ -1145,11 +1145,30 @@ static void StripCNCodecs(AudioCodecs* audio_codecs) {
 // negotiated with the offer. If the negotiation fails, this method returns
 // false.  The created content is added to the offer.
 template <class C>
-static bool CreateMediaContentAnswer(
+static bool SetCodecsInAnswer(
     const MediaContentDescriptionImpl<C>* offer,
+    const std::vector<C>& local_codecs,
     const MediaDescriptionOptions& media_description_options,
     const MediaSessionOptions& session_options,
-    const std::vector<C>& local_codecs,
+    UniqueRandomIdGenerator* ssrc_generator,
+    StreamParamsVec* current_streams,
+    MediaContentDescriptionImpl<C>* answer) {
+  std::vector<C> negotiated_codecs;
+  NegotiateCodecs(local_codecs, offer->codecs(), &negotiated_codecs);
+  answer->AddCodecs(negotiated_codecs);
+  answer->set_protocol(offer->protocol());
+  if (!AddStreamParams(media_description_options.sender_options,
+                       session_options.rtcp_cname, ssrc_generator,
+                       current_streams, answer)) {
+    return false;  // Something went seriously wrong.
+  }
+  return true;
+}
+
+static bool CreateMediaContentAnswer(
+    const MediaContentDescription* offer,
+    const MediaDescriptionOptions& media_description_options,
+    const MediaSessionOptions& session_options,
     const SecurePolicy& sdes_policy,
     const CryptoParamsVec* current_cryptos,
     const RtpHeaderExtensions& local_rtp_extenstions,
@@ -1157,12 +1176,7 @@ static bool CreateMediaContentAnswer(
     bool enable_encrypted_rtp_header_extensions,
     StreamParamsVec* current_streams,
     bool bundle_enabled,
-    MediaContentDescriptionImpl<C>* answer) {
-  std::vector<C> negotiated_codecs;
-  NegotiateCodecs(local_codecs, offer->codecs(), &negotiated_codecs);
-  answer->AddCodecs(negotiated_codecs);
-  answer->set_protocol(offer->protocol());
-
+    MediaContentDescription* answer) {
   answer->set_extmap_allow_mixed_enum(offer->extmap_allow_mixed_enum());
   RtpHeaderExtensions negotiated_rtp_extensions;
   NegotiateRtpHeaderExtensions(
@@ -1188,12 +1202,6 @@ static bool CreateMediaContentAnswer(
 
   if (answer->cryptos().empty() && sdes_policy == SEC_REQUIRED) {
     return false;
-  }
-
-  if (!AddStreamParams(media_description_options.sender_options,
-                       session_options.rtcp_cname, ssrc_generator,
-                       current_streams, answer)) {
-    return false;  // Something went seriously wrong.
   }
 
   AddSimulcastToMediaDescription(media_description_options, answer);
@@ -2287,9 +2295,15 @@ bool MediaSessionDescriptionFactory::AddAudioContentForAnswer(
   // Do not require or create SDES cryptos if DTLS is used.
   cricket::SecurePolicy sdes_policy =
       audio_transport->secure() ? cricket::SEC_DISABLED : secure();
+  if (!SetCodecsInAnswer(offer_audio_description, filtered_codecs,
+                         media_description_options, session_options,
+                         ssrc_generator_, current_streams,
+                         audio_answer.get())) {
+    return false;
+  }
   if (!CreateMediaContentAnswer(
           offer_audio_description, media_description_options, session_options,
-          filtered_codecs, sdes_policy, GetCryptos(current_content),
+          sdes_policy, GetCryptos(current_content),
           audio_rtp_header_extensions(), ssrc_generator_,
           enable_encrypted_rtp_header_extensions_, current_streams,
           bundle_enabled, audio_answer.get())) {
@@ -2376,9 +2390,15 @@ bool MediaSessionDescriptionFactory::AddVideoContentForAnswer(
   // Do not require or create SDES cryptos if DTLS is used.
   cricket::SecurePolicy sdes_policy =
       video_transport->secure() ? cricket::SEC_DISABLED : secure();
+  if (!SetCodecsInAnswer(offer_video_description, filtered_codecs,
+                         media_description_options, session_options,
+                         ssrc_generator_, current_streams,
+                         video_answer.get())) {
+    return false;
+  }
   if (!CreateMediaContentAnswer(
           offer_video_description, media_description_options, session_options,
-          filtered_codecs, sdes_policy, GetCryptos(current_content),
+          sdes_policy, GetCryptos(current_content),
           video_rtp_header_extensions(), ssrc_generator_,
           enable_encrypted_rtp_header_extensions_, current_streams,
           bundle_enabled, video_answer.get())) {
@@ -2426,28 +2446,49 @@ bool MediaSessionDescriptionFactory::AddDataContentForAnswer(
     return false;
   }
 
-  std::unique_ptr<DataContentDescription> data_answer(
-      new DataContentDescription());
   // Do not require or create SDES cryptos if DTLS is used.
   cricket::SecurePolicy sdes_policy =
       data_transport->secure() ? cricket::SEC_DISABLED : secure();
   bool bundle_enabled = offer_description->HasGroup(GROUP_TYPE_BUNDLE) &&
                         session_options.bundle_enabled;
   RTC_CHECK(IsMediaContentOfType(offer_content, MEDIA_TYPE_DATA));
-  const DataContentDescription* offer_data_description =
-      offer_content->media_description()->as_data();
-  if (!CreateMediaContentAnswer(
-          offer_data_description, media_description_options, session_options,
-          data_codecs, sdes_policy, GetCryptos(current_content),
-          RtpHeaderExtensions(), ssrc_generator_,
-          enable_encrypted_rtp_header_extensions_, current_streams,
-          bundle_enabled, data_answer.get())) {
-    return false;  // Fails the session setup.
-  }
+  std::unique_ptr<MediaContentDescription> data_answer;
+  if (offer_content->media_description()->as_sctp()) {
+    // SCTP data content
+    data_answer.reset(new SctpDataContentDescription());
+    const SctpDataContentDescription* offer_data_description =
+        offer_content->media_description()->as_sctp();
+    if (!CreateMediaContentAnswer(
+            offer_data_description, media_description_options, session_options,
+            sdes_policy, GetCryptos(current_content), RtpHeaderExtensions(),
+            ssrc_generator_, enable_encrypted_rtp_header_extensions_,
+            current_streams, bundle_enabled, data_answer.get())) {
+      return false;  // Fails the session setup.
+    }
+    // Respond with sctpmap if the offer uses sctpmap.
+    bool offer_uses_sctpmap = offer_data_description->use_sctpmap();
+    data_answer->as_sctp()->set_use_sctpmap(offer_uses_sctpmap);
+  } else {
+    // RTP offer
+    data_answer.reset(new DataContentDescription());
 
-  // Respond with sctpmap if the offer uses sctpmap.
-  bool offer_uses_sctpmap = offer_data_description->use_sctpmap();
-  data_answer->set_use_sctpmap(offer_uses_sctpmap);
+    RTC_CHECK(offer_content->media_description()->as_data());
+    const DataContentDescription* offer_data_description =
+        offer_content->media_description()->as_data();
+    if (!SetCodecsInAnswer(offer_data_description, data_codecs,
+                           media_description_options, session_options,
+                           ssrc_generator_, current_streams,
+                           data_answer->as_data())) {
+      return false;
+    }
+    if (!CreateMediaContentAnswer(
+            offer_data_description, media_description_options, session_options,
+            sdes_policy, GetCryptos(current_content), RtpHeaderExtensions(),
+            ssrc_generator_, enable_encrypted_rtp_header_extensions_,
+            current_streams, bundle_enabled, data_answer.get())) {
+      return false;  // Fails the session setup.
+    }
+  }
 
   bool secure = bundle_transport ? bundle_transport->description.secure()
                                  : data_transport->secure();
@@ -2587,6 +2628,12 @@ const DataContentDescription* GetFirstDataContentDescription(
       GetFirstMediaContentDescription(sdesc, MEDIA_TYPE_DATA));
 }
 
+const SctpDataContentDescription* GetFirstSctpDataContentDescription(
+    const SessionDescription* sdesc) {
+  auto desc = GetFirstMediaContentDescription(sdesc, MEDIA_TYPE_DATA);
+  return desc->as_sctp();
+}
+
 //
 // Non-const versions of the above functions.
 //
@@ -2657,6 +2704,11 @@ DataContentDescription* GetFirstDataContentDescription(
     SessionDescription* sdesc) {
   return static_cast<DataContentDescription*>(
       GetFirstMediaContentDescription(sdesc, MEDIA_TYPE_DATA));
+}
+
+SctpDataContentDescription* GetFirstSctpDataContentDescription(
+    SessionDescription* sdesc) {
+  return GetFirstMediaContentDescription(sdesc, MEDIA_TYPE_DATA)->as_sctp();
 }
 
 }  // namespace cricket
