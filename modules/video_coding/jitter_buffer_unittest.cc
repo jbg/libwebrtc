@@ -395,7 +395,6 @@ class TestJitterBufferNack : public TestRunningJitterBuffer {
   TestJitterBufferNack() {}
   virtual void SetUp() {
     TestRunningJitterBuffer::SetUp();
-    jitter_buffer_->SetNackMode(kNack, -1, -1);
   }
 
   virtual void TearDown() { TestRunningJitterBuffer::TearDown(); }
@@ -1507,7 +1506,6 @@ TEST_F(TestBasicJitterBuffer, ExceedNumOfFrameWithSeqNumWrap) {
 
   // Make sure the jitter doesn't request a keyframe after too much non-
   // decodable frames.
-  jitter_buffer_->SetNackMode(kNack, -1, -1);
   jitter_buffer_->SetNackSettings(kMaxNumberOfFrames, kMaxNumberOfFrames, 0);
 
   int loop = 0;
@@ -1611,7 +1609,6 @@ TEST_F(TestBasicJitterBuffer, NextFrameWhenIncomplete) {
 TEST_F(TestRunningJitterBuffer, Full) {
   // Make sure the jitter doesn't request a keyframe after too much non-
   // decodable frames.
-  jitter_buffer_->SetNackMode(kNack, -1, -1);
   jitter_buffer_->SetNackSettings(kMaxNumberOfFrames, kMaxNumberOfFrames, 0);
   // Insert a key frame and decode it.
   EXPECT_GE(InsertFrame(VideoFrameType::kVideoFrameKey), kNoError);
@@ -1704,7 +1701,6 @@ TEST_F(TestRunningJitterBuffer, TwoPacketsNonContinuous) {
 
 TEST_F(TestJitterBufferNack, EmptyPackets) {
   // Make sure empty packets doesn't clog the jitter buffer.
-  jitter_buffer_->SetNackMode(kNack, media_optimization::kLowRttNackMs, -1);
   EXPECT_GE(InsertFrames(kMaxNumberOfFrames, VideoFrameType::kEmptyFrame),
             kNoError);
   InsertFrame(VideoFrameType::kVideoFrameKey);
@@ -1893,8 +1889,6 @@ TEST_F(TestJitterBufferNack, UseNackToRecoverFirstKeyFrameSecondInQueue) {
 }
 
 TEST_F(TestJitterBufferNack, NormalOperation) {
-  EXPECT_EQ(kNack, jitter_buffer_->nack_mode());
-
   EXPECT_GE(InsertFrame(VideoFrameType::kVideoFrameKey), kNoError);
   EXPECT_TRUE(DecodeCompleteFrame());
 
