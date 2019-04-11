@@ -63,7 +63,7 @@ namespace {
 // When false, this will compare the output data with the results stored to
 // file. This is the typical case. When the file should be updated, it can
 // be set to true with the command-line switch --write_ref_data.
-bool write_ref_data = false;
+bool write_ref_data = true;
 const int32_t kChannels[] = {1, 2};
 const int kSampleRates[] = {8000, 16000, 32000, 48000};
 
@@ -185,10 +185,7 @@ void EnableAllAPComponents(AudioProcessing* ap) {
   EXPECT_NOERR(ap->gain_control()->set_mode(GainControl::kAdaptiveDigital));
   EXPECT_NOERR(ap->gain_control()->Enable(true));
 #elif defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE)
-  // TODO(peah): Update tests to instead use AEC3.
-  apm_config.echo_canceller.use_legacy_aec = true;
   apm_config.echo_canceller.mobile_mode = false;
-  apm_config.echo_canceller.legacy_moderate_suppression_level = true;
 
   EXPECT_NOERR(ap->gain_control()->set_mode(GainControl::kAdaptiveAnalog));
   EXPECT_NOERR(ap->gain_control()->set_analog_level_limits(0, 255));
@@ -870,8 +867,6 @@ TEST_F(ApmTest, DISABLED_EchoCancellationReportsCorrectDelays) {
   // Enable AEC only.
   AudioProcessing::Config apm_config = apm_->GetConfig();
   apm_config.echo_canceller.enabled = true;
-  // TODO(peah): Update tests to instead use AEC3.
-  apm_config.echo_canceller.use_legacy_aec = true;
   apm_config.echo_canceller.mobile_mode = false;
   apm_->ApplyConfig(apm_config);
   Config config;
@@ -1429,8 +1424,6 @@ TEST_F(ApmTest, SplittingFilter) {
   // Check the test is valid. We should have distortion from the filter
   // when AEC is enabled (which won't affect the audio).
   apm_config.echo_canceller.enabled = true;
-  // TODO(peah): Update tests to instead use AEC3.
-  apm_config.echo_canceller.use_legacy_aec = true;
   apm_config.echo_canceller.mobile_mode = false;
   apm_->ApplyConfig(apm_config);
   frame_->samples_per_channel_ = 320;
@@ -1683,7 +1676,6 @@ TEST_F(ApmTest, DebugDumpFromFileHandle) {
 TEST_F(ApmTest, FloatAndIntInterfacesGiveSimilarResults) {
   audioproc::OutputData ref_data;
   OpenFileAndReadMessage(ref_filename_, &ref_data);
-
   Config config;
   config.Set<ExperimentalAgc>(new ExperimentalAgc(false));
   std::unique_ptr<AudioProcessing> fapm(
@@ -1760,6 +1752,13 @@ TEST_F(ApmTest, FloatAndIntInterfacesGiveSimilarResults) {
         // Skip frames with low energy.
         if (sqrt(variance) > kVarianceThreshold && snr < kSNRThreshold) {
           ++num_bad_chunks;
+          printf("A: %zu, %f, %f, %f, %f\n", j, variance, kVarianceThreshold,
+                 snr, kSNRThreshold);
+          for (size_t k = 0; k < samples_per_channel; ++k) {
+            printf("%d %d ", output_int16.channels()[j][k],
+                   output_cb.channels()[j][k]);
+          }
+          printf("\n");
         }
       }
 
@@ -1915,8 +1914,6 @@ TEST_F(ApmTest, Process) {
         const float echo_return_loss = stats.echo_return_loss.value_or(-1.0f);
         const float echo_return_loss_enhancement =
             stats.echo_return_loss_enhancement.value_or(-1.0f);
-        const float divergent_filter_fraction =
-            stats.divergent_filter_fraction.value_or(-1.0f);
         const float residual_echo_likelihood =
             stats.residual_echo_likelihood.value_or(-1.0f);
         const float residual_echo_likelihood_recent_max =
@@ -1934,8 +1931,6 @@ TEST_F(ApmTest, Process) {
           EXPECT_NEAR(echo_return_loss, reference.echo_return_loss(), kEpsilon);
           EXPECT_NEAR(echo_return_loss_enhancement,
                       reference.echo_return_loss_enhancement(), kEpsilon);
-          EXPECT_NEAR(divergent_filter_fraction,
-                      reference.divergent_filter_fraction(), kEpsilon);
           EXPECT_NEAR(residual_echo_likelihood,
                       reference.residual_echo_likelihood(), kEpsilon);
           EXPECT_NEAR(residual_echo_likelihood_recent_max,
@@ -1953,15 +1948,9 @@ TEST_F(ApmTest, Process) {
           message_echo->set_echo_return_loss(echo_return_loss);
           message_echo->set_echo_return_loss_enhancement(
               echo_return_loss_enhancement);
-          message_echo->set_divergent_filter_fraction(
-              divergent_filter_fraction);
           message_echo->set_residual_echo_likelihood(residual_echo_likelihood);
           message_echo->set_residual_echo_likelihood_recent_max(
               residual_echo_likelihood_recent_max);
-          audioproc::Test::DelayMetrics* message_delay =
-              test->add_delay_metrics();
-          message_delay->set_median(delay_median_ms);
-          message_delay->set_std(delay_standard_deviation_ms);
         }
       }
 #endif  // defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE).
@@ -2665,12 +2654,8 @@ TEST(ApmConfiguration, EchoControlInjection) {
   apm->ProcessStream(&audio);
 }
 
-std::unique_ptr<AudioProcessing> CreateApm(bool use_AEC2) {
+std::unique_ptr<AudioProcessing> CreateApm(bool mobile_aec) {
   Config old_config;
-  if (use_AEC2) {
-    old_config.Set<ExtendedFilter>(new ExtendedFilter(true));
-    old_config.Set<DelayAgnostic>(new DelayAgnostic(true));
-  }
   std::unique_ptr<AudioProcessing> apm(
       AudioProcessingBuilder().Create(old_config));
   if (!apm) {
@@ -2685,14 +2670,12 @@ std::unique_ptr<AudioProcessing> CreateApm(bool use_AEC2) {
   }
 
   // Disable all components except for an AEC and the residual echo detector.
-  // TODO(peah): Update this to also work on AEC3.
   AudioProcessing::Config apm_config;
   apm_config.residual_echo_detector.enabled = true;
   apm_config.high_pass_filter.enabled = false;
   apm_config.gain_controller2.enabled = false;
   apm_config.echo_canceller.enabled = true;
-  apm_config.echo_canceller.mobile_mode = !use_AEC2;
-  apm_config.echo_canceller.use_legacy_aec = use_AEC2;
+  apm_config.echo_canceller.mobile_mode = mobile_aec;
   apm->ApplyConfig(apm_config);
   EXPECT_EQ(apm->gain_control()->Enable(false), 0);
   EXPECT_EQ(apm->level_estimator()->Enable(false), 0);
@@ -2707,14 +2690,12 @@ std::unique_ptr<AudioProcessing> CreateApm(bool use_AEC2) {
 #define MAYBE_ApmStatistics ApmStatistics
 #endif
 
-TEST(MAYBE_ApmStatistics, AEC2EnabledTest) {
-  // Set up APM with AEC2 and process some audio.
-  std::unique_ptr<AudioProcessing> apm = CreateApm(true);
+TEST(MAYBE_ApmStatistics, AECEnabledTest) {
+  // Set up APM with AEC3 and process some audio.
+  std::unique_ptr<AudioProcessing> apm = CreateApm(false);
   ASSERT_TRUE(apm);
   AudioProcessing::Config apm_config;
   apm_config.echo_canceller.enabled = true;
-  // TODO(peah): Update tests to instead use AEC3.
-  apm_config.echo_canceller.use_legacy_aec = true;
   apm->ApplyConfig(apm_config);
 
   // Set up an audioframe.
@@ -2748,13 +2729,6 @@ TEST(MAYBE_ApmStatistics, AEC2EnabledTest) {
   EXPECT_NE(*stats.echo_return_loss, -100.0);
   ASSERT_TRUE(stats.echo_return_loss_enhancement);
   EXPECT_NE(*stats.echo_return_loss_enhancement, -100.0);
-  ASSERT_TRUE(stats.divergent_filter_fraction);
-  EXPECT_NE(*stats.divergent_filter_fraction, -1.0);
-  ASSERT_TRUE(stats.delay_standard_deviation_ms);
-  EXPECT_GE(*stats.delay_standard_deviation_ms, 0);
-  // We don't check stats.delay_median_ms since it takes too long to settle to a
-  // value. At least 20 seconds of data need to be processed before it will get
-  // a value, which would make this test take too much time.
 
   // If there are no receive streams, we expect the stats not to be set. The
   // 'false' argument signals to APM that no receive streams are currently
@@ -2766,14 +2740,11 @@ TEST(MAYBE_ApmStatistics, AEC2EnabledTest) {
   EXPECT_FALSE(stats.residual_echo_likelihood_recent_max);
   EXPECT_FALSE(stats.echo_return_loss);
   EXPECT_FALSE(stats.echo_return_loss_enhancement);
-  EXPECT_FALSE(stats.divergent_filter_fraction);
-  EXPECT_FALSE(stats.delay_median_ms);
-  EXPECT_FALSE(stats.delay_standard_deviation_ms);
 }
 
 TEST(MAYBE_ApmStatistics, AECMEnabledTest) {
   // Set up APM with AECM and process some audio.
-  std::unique_ptr<AudioProcessing> apm = CreateApm(false);
+  std::unique_ptr<AudioProcessing> apm = CreateApm(true);
   ASSERT_TRUE(apm);
 
   // Set up an audioframe.
@@ -2810,9 +2781,6 @@ TEST(MAYBE_ApmStatistics, AECMEnabledTest) {
   }
   EXPECT_FALSE(stats.echo_return_loss);
   EXPECT_FALSE(stats.echo_return_loss_enhancement);
-  EXPECT_FALSE(stats.divergent_filter_fraction);
-  EXPECT_FALSE(stats.delay_median_ms);
-  EXPECT_FALSE(stats.delay_standard_deviation_ms);
 
   // If there are no receive streams, we expect the stats not to be set.
   stats = apm->GetStatistics(false);
@@ -2820,9 +2788,6 @@ TEST(MAYBE_ApmStatistics, AECMEnabledTest) {
   EXPECT_FALSE(stats.residual_echo_likelihood_recent_max);
   EXPECT_FALSE(stats.echo_return_loss);
   EXPECT_FALSE(stats.echo_return_loss_enhancement);
-  EXPECT_FALSE(stats.divergent_filter_fraction);
-  EXPECT_FALSE(stats.delay_median_ms);
-  EXPECT_FALSE(stats.delay_standard_deviation_ms);
 }
 
 TEST(ApmStatistics, ReportOutputRmsDbfs) {
