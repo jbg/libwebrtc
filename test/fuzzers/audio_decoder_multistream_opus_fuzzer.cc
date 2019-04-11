@@ -28,7 +28,7 @@ AudioDecoderMultiChannelOpusConfig MakeDecoderConfig(
 }
 
 void FuzzOneInput(const uint8_t* data, size_t size) {
-  const std::vector<AudioDecoderMultiChannelOpusConfig> surround_configs = {
+  const std::vector<AudioDecoderMultiChannelOpusConfig> opus_configs = {
       MakeDecoderConfig(1, 1, 0, {0}),  // Mono
 
       MakeDecoderConfig(2, 2, 0, {0, 0}),  // Copy the first (of
@@ -43,8 +43,10 @@ void FuzzOneInput(const uint8_t* data, size_t size) {
       MakeDecoderConfig(6, 4, 2, {0, 4, 1, 2, 3, 5}),       // 5.1
       MakeDecoderConfig(8, 5, 3, {0, 6, 1, 2, 3, 4, 5, 7})  // 7.1
   };
-
-  const auto config = surround_configs[data[0] % surround_configs.size()];
+  if (size == 0) {
+    return;
+  }
+  const auto config = opus_configs[data[0] % opus_configs.size()];
   RTC_CHECK(config.IsOk());
   std::unique_ptr<AudioDecoder> dec =
       AudioDecoderMultiChannelOpus::MakeAudioDecoder(config);
