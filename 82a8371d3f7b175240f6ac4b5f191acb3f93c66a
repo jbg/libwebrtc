@@ -22,6 +22,30 @@
       "revId": "82a8371d3f7b175240f6ac4b5f191acb3f93c66a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f73ad85_b5029c83",
+        "filename": "rtc_base/event.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-11T08:34:47Z",
+      "side": 1,
+      "message": "You\u0027re right. Let\u0027s see if I can rewrite this is a less error-prone way...",
+      "parentUuid": "310f81ab_f7f2c1a7",
+      "range": {
+        "startLine": 168,
+        "startChar": 36,
+        "endLine": 168,
+        "endChar": 69
+      },
+      "revId": "82a8371d3f7b175240f6ac4b5f191acb3f93c66a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
