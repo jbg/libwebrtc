@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b6c5987_3f24ef33",
+        "filename": "pc/jsep_session_description_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-11T13:24:27Z",
+      "side": 1,
+      "message": "auto desc \u003d absl::make_unique\u003ccricket::SessionDescription\u003e();",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8db1518_b36e9702",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3194,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-11T13:24:27Z",
+      "side": 1,
+      "message": "Better to say\n\n  std::unique_ptr\u003cSessionDescription\u003e copy \u003d source.Clone();\n\nBecause this syntax disallows the explicit unique_ptr constructor that takes a raw pointer. So by using \u003d, you force the compiler to ensure that you\u0027re not accidentally converting a raw pointer to a unique_ptr.",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24f64a02_851cb60d",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-11T13:24:27Z",
+      "side": 1,
+      "message": "make_unique",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30ebb921_57eaf5c8",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4425,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-11T13:24:27Z",
+      "side": 1,
+      "message": "Use \u003d",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f707f6b2_928a1010",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4439,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-11T13:24:27Z",
+      "side": 1,
+      "message": "Use \u003d",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
