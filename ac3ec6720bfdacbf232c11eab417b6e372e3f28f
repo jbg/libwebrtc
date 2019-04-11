@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac29109b_08afa79f",
+        "filename": "api/audio_codecs/opus/audio_encoder_multi_channel_opus_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-11T08:24:13Z",
+      "side": 1,
+      "message": "Move to impl (?) so that I can use logs.\nWrite tests.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "ac3ec6720bfdacbf232c11eab417b6e372e3f28f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a53f16c8_f4a2d3d7",
+        "filename": "modules/audio_coding/acm2/audio_coding_module_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-11T08:24:13Z",
+      "side": 1,
+      "message": "Hmmm, these are totally ignored!",
+      "range": {
+        "startLine": 1525,
+        "startChar": 0,
+        "endLine": 1527,
+        "endChar": 0
+      },
+      "revId": "ac3ec6720bfdacbf232c11eab417b6e372e3f28f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35a4a0be_cb3d9760",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-11T08:24:13Z",
+      "side": 1,
+      "message": "Test IsOk()\nTest that the advertised codecs can be created.\nTest Encode/Decode on some fake data.\nMAYBE test some of the other features.",
+      "range": {
+        "startLine": 23,
+        "startChar": 17,
+        "endLine": 40,
+        "endChar": 3
+      },
+      "revId": "ac3ec6720bfdacbf232c11eab417b6e372e3f28f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

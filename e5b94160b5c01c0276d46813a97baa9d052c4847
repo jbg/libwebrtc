@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24c036cc_3e330b64",
+        "filename": "api/audio_codecs/opus/audio_decoder_multi_channel_opus.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-11T08:24:13Z",
+      "side": 0,
+      "message": "This is not relevant for the DECODER. Moved the comment to the ENCODER.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "e5b94160b5c01c0276d46813a97baa9d052c4847",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
