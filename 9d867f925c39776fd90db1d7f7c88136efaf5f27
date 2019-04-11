@@ -46,6 +46,30 @@
       "revId": "9d867f925c39776fd90db1d7f7c88136efaf5f27",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d58154b_b869891d",
+        "filename": "modules/video_coding/jitter_buffer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-11T09:18:02Z",
+      "side": 1,
+      "message": "This and two other tests failed with a log message from HandleTooLargeNackList, since max_nack_list_size_ was zero. Added a call to SetNackSettings in those tests, and they now pass.\nDo you think that\u0027s good enough?",
+      "parentUuid": "5a0ceb4f_79b27e87",
+      "range": {
+        "startLine": 887,
+        "startChar": 1,
+        "endLine": 887,
+        "endChar": 75
+      },
+      "revId": "9d867f925c39776fd90db1d7f7c88136efaf5f27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
