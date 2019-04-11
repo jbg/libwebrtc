@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "650f5612_628b8118",
+        "filename": "pc/jsep_session_description_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-04-11T14:03:22Z",
+      "side": 1,
+      "message": "could do the two below it this way too.",
+      "parentUuid": "5b6c5987_3f24ef33",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8db1518_b36e9702",
         "filename": "pc/media_session_unittest.cc",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4f27688_233f9542",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3194,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-04-11T14:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8db1518_b36e9702",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "dc2372e2_de61347f",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-04-11T14:03:22Z",
+      "side": 1,
+      "message": "In this particular instance, C++ didn\u0027t let me - the SessionDescription(SessionDescription) constructor is private, and make_unique doesn\u0027t seem to be able to use a private constructor.\nAdded a comment about what\u0027s going on.\n\n../../third_party/abseil-cpp/absl/memory/memory.h:168:33: error: calling a private constructor of class \u0027cricket::SessionDescription\u0027\n  return std::unique_ptr\u003cT\u003e(new T(std::forward\u003cArgs\u003e(args)...));\n                                ^\n../../pc/session_description.cc:99:52: note: in instantiation of function template specialization \u0027absl::make_unique\u003ccricket::SessionDescription, const cricket::SessionDescription \u0026\u003e\u0027 requested here\n  std::unique_ptr\u003cSessionDescription\u003e copy \u003d absl::make_unique\u003cSessionDescription\u003e(*this);",
+      "parentUuid": "24f64a02_851cb60d",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30ebb921_57eaf5c8",
         "filename": "pc/webrtc_sdp_unittest.cc",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "f6599655_bcff8c62",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4425,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-04-11T14:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30ebb921_57eaf5c8",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f707f6b2_928a1010",
         "filename": "pc/webrtc_sdp_unittest.cc",
         "patchSetId": 3
@@ -84,6 +156,24 @@
       "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbd4ffd0_8bb7291d",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4439,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-04-11T14:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f707f6b2_928a1010",
+      "revId": "61dd190a0507eb042cc4dcdb6e9983415ec8a0d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
