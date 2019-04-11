@@ -10,6 +10,7 @@
 
 #include "pc/session_description.h"
 
+#include <algorithm>
 #include <utility>
 
 #include "absl/algorithm/container.h"
@@ -94,14 +95,19 @@ SessionDescription::~SessionDescription() {
   }
 }
 
-SessionDescription* SessionDescription::Copy() const {
-  SessionDescription* copy = new SessionDescription(*this);
+std::unique_ptr<SessionDescription> SessionDescription::Clone() const {
+  // Copy the non-special portions using the private copy constructor.
+  std::unique_ptr<SessionDescription> copy(new SessionDescription(*this));
   // Copy all ContentDescriptions.
   for (ContentInfos::iterator content = copy->contents_.begin();
        content != copy->contents().end(); ++content) {
     content->description = content->description->Copy();
   }
   return copy;
+}
+
+SessionDescription* SessionDescription::Copy() const {
+  return Clone().release();
 }
 
 const ContentInfo* SessionDescription::GetContentByName(
