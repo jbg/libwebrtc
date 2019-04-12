@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1168626e_e0e4c42a",
+        "filename": "test/time_controller/simulated_time_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-12T13:09:02Z",
+      "side": 1,
+      "message": "Please be a bit more explicit about the call chain. Are you saying that this is going to be called from some task\u0027s Run method, invoked from RunReadyRunners?\n\nCould you check yielded_ instead, see below?",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 27
+      },
+      "revId": "e273c67f1c54e98ea2b24a362d001900ea612299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da553bfe_464c8f9c",
+        "filename": "test/time_controller/simulated_time_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-12T13:09:02Z",
+      "side": 1,
+      "message": "Would it work to instead add a check\n\nif (yielded_.find(runner) !\u003d yielded_.end())\n  continue;\n\nhere? And then maybe skip the corresponding check in the above loop?\n\nAlso, if the thing is that this function may be called recursively via\n\nRunReadyRunners -\u003e Run -\u003e Event::Wait -\u003e Yield -\u003eRunReadyRunners, please document that. And perhaps the recursive case can/should be handled in some other way, e.g., checking if |ready_runners_| is non-empty on entry.",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 33
+      },
+      "revId": "e273c67f1c54e98ea2b24a362d001900ea612299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
