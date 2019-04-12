@@ -22,6 +22,30 @@
       "revId": "deb0854e685d59957807f232b6772d2933b83a63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "203cdc3a_cfe37cf2",
+        "filename": "api/test/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-12T11:58:39Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "e6ff5ec3_7bc8ebc0",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 68
+      },
+      "revId": "deb0854e685d59957807f232b6772d2933b83a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

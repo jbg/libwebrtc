@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5bb232e2_d6eafcdf",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-12T11:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c7c5758_9141574b",
+      "range": {
+        "startLine": 549,
+        "startChar": 2,
+        "endLine": 551,
+        "endChar": 3
+      },
+      "revId": "c0ce2e34b2993482bd321194a76d342be8e3e85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "133e64e8_a612dba1",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-04-12T09:49:30Z",
       "side": 1,
       "message": "const std::string\u0026?",
+      "range": {
+        "startLine": 247,
+        "startChar": 29,
+        "endLine": 247,
+        "endChar": 40
+      },
+      "revId": "c0ce2e34b2993482bd321194a76d342be8e3e85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bf95c2d_418afaab",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-12T11:58:39Z",
+      "side": 1,
+      "message": "In the code I am passing a temporary to this method, so I prefer to keep std::string even if the temporary should live long enough (I think we are doing the same at line 249).\n\nAnyway, other ReportResult functions are `static`. Should I change this one as well?",
+      "parentUuid": "133e64e8_a612dba1",
       "range": {
         "startLine": 247,
         "startChar": 29,
@@ -68,6 +116,30 @@
       "revId": "c0ce2e34b2993482bd321194a76d342be8e3e85c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91f18668_797e2cfb",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-12T11:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cc8dca9_c35ad408",
+      "range": {
+        "startLine": 288,
+        "startChar": 2,
+        "endLine": 288,
+        "endChar": 67
+      },
+      "revId": "c0ce2e34b2993482bd321194a76d342be8e3e85c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
