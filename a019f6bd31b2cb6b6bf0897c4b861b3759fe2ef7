@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e792086d_4886a7d5",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-12T09:37:26Z",
+      "side": 1,
+      "message": "Can\u0027t we use a unique_ptr\u003cVideoBitrateAllocatorFactory\u003e? The application\u0027s VideoBitrateAllocatorFactory implementation can include shared pointers to whatever state it doesn\u0027t want the PeerConnection to own.",
+      "range": {
+        "startLine": 1222,
+        "startChar": 29,
+        "endLine": 1222,
+        "endChar": 63
+      },
+      "revId": "a019f6bd31b2cb6b6bf0897c4b861b3759fe2ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
