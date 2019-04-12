@@ -154,6 +154,7 @@ class PeerConnectionE2EQualityTest
   using RunParams = PeerConnectionE2EQualityTestFixture::RunParams;
   using VideoConfig = PeerConnectionE2EQualityTestFixture::VideoConfig;
   using PeerConfigurer = PeerConnectionE2EQualityTestFixture::PeerConfigurer;
+  using StatsReporter = PeerConnectionE2EQualityTestFixture::StatsReporter;
 
   PeerConnectionE2EQualityTest(
       std::string test_case_name,
@@ -167,6 +168,8 @@ class PeerConnectionE2EQualityTest
   void ExecuteEvery(TimeDelta initial_delay_since_start,
                     TimeDelta interval,
                     std::function<void(TimeDelta)> func) override;
+
+  void AddStatsReporter(std::unique_ptr<StatsReporter> stats_reporter) override;
 
   void AddPeer(rtc::Thread* network_thread,
                rtc::NetworkManager* network_manager,
@@ -230,6 +233,7 @@ class PeerConnectionE2EQualityTest
 
   std::unique_ptr<TestPeer> alice_;
   std::unique_ptr<TestPeer> bob_;
+  std::vector<std::unique_ptr<StatsReporter>> stats_reporters_;
 
   std::vector<rtc::scoped_refptr<FrameGeneratorCapturerVideoTrackSource>>
       alice_video_sources_;
