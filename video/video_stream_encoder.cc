@@ -1044,9 +1044,7 @@ VideoStreamEncoder::UpdateBitrateAllocationAndNotifyObserver(
 
   if (bitrate_adjuster_) {
     VideoBitrateAllocation adjusted_allocation =
-        bitrate_adjuster_->AdjustRateAllocation(
-            new_allocation,
-            static_cast<int>(rate_settings.framerate_fps + 0.5));
+        bitrate_adjuster_->AdjustRateAllocation(rate_settings);
     RTC_LOG(LS_VERBOSE) << "Adjusting allocation, fps = "
                         << rate_settings.framerate_fps << ", from "
                         << new_allocation.ToString() << ", to "
