@@ -1329,6 +1329,14 @@ class PeerConnection : public PeerConnectionInternal,
   // channel manager and the session description factory.
   rtc::UniqueRandomIdGenerator ssrc_generator_
       RTC_GUARDED_BY(signaling_thread());
+
+  // A video bitrate allocator factory.
+  // This can either be created from the PeerConnectionFactory
+  // or be injected using the PeerConnectionDependencies.
+  // The object is a scoped_refptr so that an application can inject
+  // the it and still safely access it.
+  rtc::scoped_refptr<webrtc::VideoBitrateAllocatorFactoryHandle>
+      video_bitrate_allocator_factory_;
 };
 
 }  // namespace webrtc
