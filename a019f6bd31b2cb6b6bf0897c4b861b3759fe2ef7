@@ -22,6 +22,30 @@
       "revId": "a019f6bd31b2cb6b6bf0897c4b861b3759fe2ef7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fb07ca8_ddb20b21",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-04-12T10:40:34Z",
+      "side": 1,
+      "message": "yes, that is doable. But it put the burden on the implementer of the factory.\nDo you think that is better ?",
+      "parentUuid": "e792086d_4886a7d5",
+      "range": {
+        "startLine": 1222,
+        "startChar": 29,
+        "endLine": 1222,
+        "endChar": 63
+      },
+      "revId": "a019f6bd31b2cb6b6bf0897c4b861b3759fe2ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
