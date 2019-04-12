@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5e6adece_81784897",
+        "filename": "test/time_controller/simulated_time_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-12T13:41:16Z",
+      "side": 1,
+      "message": "Removed the changes here.",
+      "parentUuid": "1168626e_e0e4c42a",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 27
+      },
+      "revId": "e273c67f1c54e98ea2b24a362d001900ea612299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da553bfe_464c8f9c",
         "filename": "test/time_controller/simulated_time_controller.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "e273c67f1c54e98ea2b24a362d001900ea612299",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d87a2351_e59e2d98",
+        "filename": "test/time_controller/simulated_time_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-12T13:41:16Z",
+      "side": 1,
+      "message": "No the check is required above since we break the loop if ready_runners_ is empty.\n\nRemoved the cheeck and replaced with a clear and a comment on the recursion pattern.",
+      "parentUuid": "da553bfe_464c8f9c",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 33
+      },
+      "revId": "e273c67f1c54e98ea2b24a362d001900ea612299",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
