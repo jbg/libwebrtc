@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6110654_80873b1f",
+        "filename": "api/transport/network_control.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-12T07:24:51Z",
+      "side": 1,
+      "message": "Let\u0027s document these methods",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 60
+      },
+      "revId": "b268f221ee547464cac4579fde726b7959a263dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "844167bf_9a6e7f3f",
+        "filename": "modules/remote_bitrate_estimator/aimd_rate_control.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-12T07:24:51Z",
+      "side": 1,
+      "message": "This deserves a comment explaining the reasoning behind it.",
+      "range": {
+        "startLine": 278,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 9
+      },
+      "revId": "b268f221ee547464cac4579fde726b7959a263dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
