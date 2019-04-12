@@ -185,10 +185,7 @@ void EnableAllAPComponents(AudioProcessing* ap) {
   EXPECT_NOERR(ap->gain_control()->set_mode(GainControl::kAdaptiveDigital));
   EXPECT_NOERR(ap->gain_control()->Enable(true));
 #elif defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE)
-  // TODO(peah): Update tests to instead use AEC3.
-  apm_config.echo_canceller.use_legacy_aec = true;
   apm_config.echo_canceller.mobile_mode = false;
-  apm_config.echo_canceller.legacy_moderate_suppression_level = true;
 
   EXPECT_NOERR(ap->gain_control()->set_mode(GainControl::kAdaptiveAnalog));
   EXPECT_NOERR(ap->gain_control()->set_analog_level_limits(0, 255));
@@ -416,15 +413,8 @@ ApmTest::ApmTest()
       ref_filename_(test::ResourcePath("audio_processing/output_data_fixed",
                                        "pb")),
 #elif defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE)
-#if defined(WEBRTC_MAC)
-      // A different file for Mac is needed because on this platform the AEC
-      // constant |kFixedDelayMs| value is 20 and not 50 as it is on the rest.
-      ref_filename_(test::ResourcePath("audio_processing/output_data_mac",
-                                       "pb")),
-#else
       ref_filename_(test::ResourcePath("audio_processing/output_data_float",
                                        "pb")),
-#endif
 #endif
       frame_(NULL),
       revframe_(NULL),
@@ -870,8 +860,6 @@ TEST_F(ApmTest, DISABLED_EchoCancellationReportsCorrectDelays) {
   // Enable AEC only.
   AudioProcessing::Config apm_config = apm_->GetConfig();
   apm_config.echo_canceller.enabled = true;
-  // TODO(peah): Update tests to instead use AEC3.
-  apm_config.echo_canceller.use_legacy_aec = true;
   apm_config.echo_canceller.mobile_mode = false;
   apm_->ApplyConfig(apm_config);
   Config config;
@@ -1429,8 +1417,6 @@ TEST_F(ApmTest, SplittingFilter) {
   // Check the test is valid. We should have distortion from the filter
   // when AEC is enabled (which won't affect the audio).
   apm_config.echo_canceller.enabled = true;
-  // TODO(peah): Update tests to instead use AEC3.
-  apm_config.echo_canceller.use_legacy_aec = true;
   apm_config.echo_canceller.mobile_mode = false;
   apm_->ApplyConfig(apm_config);
   frame_->samples_per_channel_ = 320;
@@ -1680,113 +1666,7 @@ TEST_F(ApmTest, DebugDumpFromFileHandle) {
 #endif  // WEBRTC_AUDIOPROC_DEBUG_DUMP
 }
 
-TEST_F(ApmTest, FloatAndIntInterfacesGiveSimilarResults) {
-  audioproc::OutputData ref_data;
-  OpenFileAndReadMessage(ref_filename_, &ref_data);
 
-  Config config;
-  config.Set<ExperimentalAgc>(new ExperimentalAgc(false));
-  std::unique_ptr<AudioProcessing> fapm(
-      AudioProcessingBuilder().Create(config));
-  EnableAllComponents();
-  EnableAllAPComponents(fapm.get());
-  for (int i = 0; i < ref_data.test_size(); i++) {
-    printf("Running test %d of %d...\n", i + 1, ref_data.test_size());
-
-    audioproc::Test* test = ref_data.mutable_test(i);
-    // TODO(ajm): Restore downmixing test cases.
-    if (test->num_input_channels() != test->num_output_channels())
-      continue;
-
-    const size_t num_render_channels =
-        static_cast<size_t>(test->num_reverse_channels());
-    const size_t num_input_channels =
-        static_cast<size_t>(test->num_input_channels());
-    const size_t num_output_channels =
-        static_cast<size_t>(test->num_output_channels());
-    const size_t samples_per_channel = static_cast<size_t>(
-        test->sample_rate() * AudioProcessing::kChunkSizeMs / 1000);
-
-    Init(test->sample_rate(), test->sample_rate(), test->sample_rate(),
-         num_input_channels, num_output_channels, num_render_channels, true);
-    Init(fapm.get());
-
-    ChannelBuffer<int16_t> output_cb(samples_per_channel, num_input_channels);
-    ChannelBuffer<int16_t> output_int16(samples_per_channel,
-                                        num_input_channels);
-
-    int analog_level = 127;
-    size_t num_bad_chunks = 0;
-    while (ReadFrame(far_file_, revframe_, revfloat_cb_.get()) &&
-           ReadFrame(near_file_, frame_, float_cb_.get())) {
-      frame_->vad_activity_ = AudioFrame::kVadUnknown;
-
-      EXPECT_NOERR(apm_->ProcessReverseStream(revframe_));
-      EXPECT_NOERR(fapm->AnalyzeReverseStream(
-          revfloat_cb_->channels(),
-          samples_per_channel,
-          test->sample_rate(),
-          LayoutFromChannels(num_render_channels)));
-
-      EXPECT_NOERR(apm_->set_stream_delay_ms(0));
-      EXPECT_NOERR(fapm->set_stream_delay_ms(0));
-      EXPECT_NOERR(apm_->gain_control()->set_stream_analog_level(analog_level));
-      EXPECT_NOERR(fapm->gain_control()->set_stream_analog_level(analog_level));
-
-      EXPECT_NOERR(apm_->ProcessStream(frame_));
-      Deinterleave(frame_->data(), samples_per_channel, num_output_channels,
-                   output_int16.channels());
-
-      EXPECT_NOERR(fapm->ProcessStream(
-          float_cb_->channels(),
-          samples_per_channel,
-          test->sample_rate(),
-          LayoutFromChannels(num_input_channels),
-          test->sample_rate(),
-          LayoutFromChannels(num_output_channels),
-          float_cb_->channels()));
-      for (size_t j = 0; j < num_output_channels; ++j) {
-        FloatToS16(float_cb_->channels()[j],
-                   samples_per_channel,
-                   output_cb.channels()[j]);
-        float variance = 0;
-        float snr = ComputeSNR(output_int16.channels()[j],
-                               output_cb.channels()[j],
-                               samples_per_channel, &variance);
-
-        const float kVarianceThreshold = 20;
-        const float kSNRThreshold = 20;
-
-        // Skip frames with low energy.
-        if (sqrt(variance) > kVarianceThreshold && snr < kSNRThreshold) {
-          ++num_bad_chunks;
-        }
-      }
-
-      analog_level = fapm->gain_control()->stream_analog_level();
-      EXPECT_EQ(apm_->gain_control()->stream_analog_level(),
-                fapm->gain_control()->stream_analog_level());
-      EXPECT_NEAR(apm_->noise_suppression()->speech_probability(),
-                  fapm->noise_suppression()->speech_probability(),
-                  0.01);
-
-      // Reset in case of downmixing.
-      frame_->num_channels_ = static_cast<size_t>(test->num_input_channels());
-    }
-
-#if defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE)
-    const size_t kMaxNumBadChunks = 0;
-#elif defined(WEBRTC_AUDIOPROC_FIXED_PROFILE)
-    // There are a few chunks in the fixed-point profile that give low SNR.
-    // Listening confirmed the difference is acceptable.
-    const size_t kMaxNumBadChunks = 60;
-#endif
-    EXPECT_LE(num_bad_chunks, kMaxNumBadChunks);
-
-    rewind(far_file_);
-    rewind(near_file_);
-  }
-}
 
 // TODO(andrew): Add a test to process a few frames with different combinations
 // of enabled components.
@@ -1915,8 +1795,6 @@ TEST_F(ApmTest, Process) {
         const float echo_return_loss = stats.echo_return_loss.value_or(-1.0f);
         const float echo_return_loss_enhancement =
             stats.echo_return_loss_enhancement.value_or(-1.0f);
-        const float divergent_filter_fraction =
-            stats.divergent_filter_fraction.value_or(-1.0f);
         const float residual_echo_likelihood =
             stats.residual_echo_likelihood.value_or(-1.0f);
         const float residual_echo_likelihood_recent_max =
@@ -1934,8 +1812,6 @@ TEST_F(ApmTest, Process) {
           EXPECT_NEAR(echo_return_loss, reference.echo_return_loss(), kEpsilon);
           EXPECT_NEAR(echo_return_loss_enhancement,
                       reference.echo_return_loss_enhancement(), kEpsilon);
-          EXPECT_NEAR(divergent_filter_fraction,
-                      reference.divergent_filter_fraction(), kEpsilon);
           EXPECT_NEAR(residual_echo_likelihood,
                       reference.residual_echo_likelihood(), kEpsilon);
           EXPECT_NEAR(residual_echo_likelihood_recent_max,
@@ -1953,15 +1829,9 @@ TEST_F(ApmTest, Process) {
           message_echo->set_echo_return_loss(echo_return_loss);
           message_echo->set_echo_return_loss_enhancement(
               echo_return_loss_enhancement);
-          message_echo->set_divergent_filter_fraction(
-              divergent_filter_fraction);
           message_echo->set_residual_echo_likelihood(residual_echo_likelihood);
           message_echo->set_residual_echo_likelihood_recent_max(
               residual_echo_likelihood_recent_max);
-          audioproc::Test::DelayMetrics* message_delay =
-              test->add_delay_metrics();
-          message_delay->set_median(delay_median_ms);
-          message_delay->set_std(delay_standard_deviation_ms);
         }
       }
 #endif  // defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE).
@@ -2665,12 +2535,8 @@ TEST(ApmConfiguration, EchoControlInjection) {
   apm->ProcessStream(&audio);
 }
 
-std::unique_ptr<AudioProcessing> CreateApm(bool use_AEC2) {
+std::unique_ptr<AudioProcessing> CreateApm(bool mobile_aec) {
   Config old_config;
-  if (use_AEC2) {
-    old_config.Set<ExtendedFilter>(new ExtendedFilter(true));
-    old_config.Set<DelayAgnostic>(new DelayAgnostic(true));
-  }
   std::unique_ptr<AudioProcessing> apm(
       AudioProcessingBuilder().Create(old_config));
   if (!apm) {
@@ -2685,14 +2551,12 @@ std::unique_ptr<AudioProcessing> CreateApm(bool use_AEC2) {
   }
 
   // Disable all components except for an AEC and the residual echo detector.
-  // TODO(peah): Update this to also work on AEC3.
   AudioProcessing::Config apm_config;
   apm_config.residual_echo_detector.enabled = true;
   apm_config.high_pass_filter.enabled = false;
   apm_config.gain_controller2.enabled = false;
   apm_config.echo_canceller.enabled = true;
-  apm_config.echo_canceller.mobile_mode = !use_AEC2;
-  apm_config.echo_canceller.use_legacy_aec = use_AEC2;
+  apm_config.echo_canceller.mobile_mode = mobile_aec;
   apm->ApplyConfig(apm_config);
   EXPECT_EQ(apm->gain_control()->Enable(false), 0);
   EXPECT_EQ(apm->level_estimator()->Enable(false), 0);
@@ -2707,14 +2571,12 @@ std::unique_ptr<AudioProcessing> CreateApm(bool use_AEC2) {
 #define MAYBE_ApmStatistics ApmStatistics
 #endif
 
-TEST(MAYBE_ApmStatistics, AEC2EnabledTest) {
-  // Set up APM with AEC2 and process some audio.
-  std::unique_ptr<AudioProcessing> apm = CreateApm(true);
+TEST(MAYBE_ApmStatistics, AECEnabledTest) {
+  // Set up APM with AEC3 and process some audio.
+  std::unique_ptr<AudioProcessing> apm = CreateApm(false);
   ASSERT_TRUE(apm);
   AudioProcessing::Config apm_config;
   apm_config.echo_canceller.enabled = true;
-  // TODO(peah): Update tests to instead use AEC3.
-  apm_config.echo_canceller.use_legacy_aec = true;
   apm->ApplyConfig(apm_config);
 
   // Set up an audioframe.
@@ -2748,13 +2610,6 @@ TEST(MAYBE_ApmStatistics, AEC2EnabledTest) {
   EXPECT_NE(*stats.echo_return_loss, -100.0);
   ASSERT_TRUE(stats.echo_return_loss_enhancement);
   EXPECT_NE(*stats.echo_return_loss_enhancement, -100.0);
-  ASSERT_TRUE(stats.divergent_filter_fraction);
-  EXPECT_NE(*stats.divergent_filter_fraction, -1.0);
-  ASSERT_TRUE(stats.delay_standard_deviation_ms);
-  EXPECT_GE(*stats.delay_standard_deviation_ms, 0);
-  // We don't check stats.delay_median_ms since it takes too long to settle to a
-  // value. At least 20 seconds of data need to be processed before it will get
-  // a value, which would make this test take too much time.
 
   // If there are no receive streams, we expect the stats not to be set. The
   // 'false' argument signals to APM that no receive streams are currently
@@ -2766,14 +2621,11 @@ TEST(MAYBE_ApmStatistics, AEC2EnabledTest) {
   EXPECT_FALSE(stats.residual_echo_likelihood_recent_max);
   EXPECT_FALSE(stats.echo_return_loss);
   EXPECT_FALSE(stats.echo_return_loss_enhancement);
-  EXPECT_FALSE(stats.divergent_filter_fraction);
-  EXPECT_FALSE(stats.delay_median_ms);
-  EXPECT_FALSE(stats.delay_standard_deviation_ms);
 }
 
 TEST(MAYBE_ApmStatistics, AECMEnabledTest) {
   // Set up APM with AECM and process some audio.
-  std::unique_ptr<AudioProcessing> apm = CreateApm(false);
+  std::unique_ptr<AudioProcessing> apm = CreateApm(true);
   ASSERT_TRUE(apm);
 
   // Set up an audioframe.
@@ -2810,9 +2662,6 @@ TEST(MAYBE_ApmStatistics, AECMEnabledTest) {
   }
   EXPECT_FALSE(stats.echo_return_loss);
   EXPECT_FALSE(stats.echo_return_loss_enhancement);
-  EXPECT_FALSE(stats.divergent_filter_fraction);
-  EXPECT_FALSE(stats.delay_median_ms);
-  EXPECT_FALSE(stats.delay_standard_deviation_ms);
 
   // If there are no receive streams, we expect the stats not to be set.
   stats = apm->GetStatistics(false);
@@ -2820,9 +2669,6 @@ TEST(MAYBE_ApmStatistics, AECMEnabledTest) {
   EXPECT_FALSE(stats.residual_echo_likelihood_recent_max);
   EXPECT_FALSE(stats.echo_return_loss);
   EXPECT_FALSE(stats.echo_return_loss_enhancement);
-  EXPECT_FALSE(stats.divergent_filter_fraction);
-  EXPECT_FALSE(stats.delay_median_ms);
-  EXPECT_FALSE(stats.delay_standard_deviation_ms);
 }
 
 TEST(ApmStatistics, ReportOutputRmsDbfs) {
