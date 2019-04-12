@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/container/flat_hash_map.h"
 #include "api/test/video_quality_analyzer_interface.h"
 #include "api/units/timestamp.h"
 #include "api/video/encoded_image.h"
@@ -114,6 +115,15 @@ struct AnalyzerStats {
   int64_t overloaded_comparisons_done = 0;
 };
 
+struct VideoBweStats {
+ public:
+  SamplesStatsCounter available_send_bandwidth;
+  SamplesStatsCounter transmission_bitrate;
+  SamplesStatsCounter retransmission_bitrate;
+  SamplesStatsCounter actual_encode_bitrate;
+  SamplesStatsCounter target_encode_bitrate;
+};
+
 class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
  public:
   DefaultVideoQualityAnalyzer();
@@ -148,8 +158,10 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   std::map<std::string, StreamStats> GetStats() const;
   AnalyzerStats GetAnalyzerStats() const;
 
-  // TODO(bugs.webrtc.org/10138): Provide a real implementation for
-  // OnStatsReport.
+  // Will be called everytime new stats reports are available for the
+  // Peer Connection identified by |pc_label|.
+  void OnStatsReports(absl::string_view pc_label,
+                      const StatsReports& stats_reports) override;
 
  private:
   struct FrameStats {
@@ -232,6 +244,8 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   void ProcessComparison(const FrameComparison& comparison);
   // Report results for all metrics for all streams.
   void ReportResults();
+  static void ReportVideoBweResults(std::string test_case_name,
+                                    VideoBweStats video_bwe_stats);
   static void ReportResults(std::string test_case_name,
                             StreamStats stats,
                             FrameCounters frame_counters);
@@ -270,6 +284,10 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
       RTC_GUARDED_BY(comparison_lock_);
   std::deque<FrameComparison> comparisons_ RTC_GUARDED_BY(comparison_lock_);
   AnalyzerStats analyzer_stats_ RTC_GUARDED_BY(comparison_lock_);
+
+  // Map between a peer connection label (provided by the framework) and
+  // its video BWE stats.
+  absl::flat_hash_map<std::string, VideoBweStats> video_bwe_stats_;
 
   std::vector<std::unique_ptr<rtc::PlatformThread>> thread_pool_;
   rtc::Event comparison_available_event_;
