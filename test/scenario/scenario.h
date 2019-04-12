@@ -49,11 +49,13 @@ class Scenario {
   RTC_DISALLOW_COPY_AND_ASSIGN(Scenario);
   ~Scenario();
 
-  SimulationNode* CreateSimulationNode(NetworkNodeConfig config);
-  SimulationNode* CreateSimulationNode(
-      std::function<void(NetworkNodeConfig*)> config_modifier);
-  EmulatedNetworkNode* CreateNetworkNode(
-      std::unique_ptr<NetworkBehaviorInterface> behavior);
+  EmulatedNetworkNode* CreateSimulationNode(NetworkSimulationConfig config);
+  EmulatedNetworkNode* CreateSimulationNode(
+      std::function<void(NetworkSimulationConfig*)> config_modifier);
+
+  SimulationNode* CreateMutableSimulationNode(NetworkSimulationConfig config);
+  SimulationNode* CreateMutableSimulationNode(
+      std::function<void(NetworkSimulationConfig*)> config_modifier);
 
   CallClient* CreateClient(std::string name, CallClientConfig config);
   CallClient* CreateClient(
@@ -181,6 +183,7 @@ class Scenario {
   std::vector<std::unique_ptr<SimulatedTimeClient>> simulated_time_clients_;
 
   std::vector<std::unique_ptr<ActionReceiver>> action_receivers_;
+  std::vector<std::unique_ptr<SimulationNode>> simulation_nodes_;
   std::vector<std::unique_ptr<StatesPrinter>> printers_;
 
   int64_t next_route_id_ = 40000;
