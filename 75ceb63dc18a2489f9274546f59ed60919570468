@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "213cbb9e_0cb28617",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-12T11:45:48Z",
+      "side": 1,
+      "message": "Still needed?",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 39
+      },
+      "revId": "75ceb63dc18a2489f9274546f59ed60919570468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0098551_3ca1955b",
+        "filename": "api/video/DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-12T11:45:48Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 4
+      },
+      "revId": "75ceb63dc18a2489f9274546f59ed60919570468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "020252a9_982ceeec",
+        "filename": "api/video/video_bitrate_allocator_factory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-12T11:45:48Z",
+      "side": 1,
+      "message": "Delete",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 31
+      },
+      "revId": "75ceb63dc18a2489f9274546f59ed60919570468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
