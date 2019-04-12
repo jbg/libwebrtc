@@ -16,6 +16,24 @@
       "revId": "97b66e5ef3aaafee3b7d1857a736639f6b63f64e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03357f62_92c6ce21",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4468,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-04-12T05:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "711317be_1754b835",
+      "revId": "97b66e5ef3aaafee3b7d1857a736639f6b63f64e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
