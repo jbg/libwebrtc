@@ -33,4 +33,8 @@ specific_include_rules = {
   "video_stream_encoder_create.cc": [
     "+video/video_stream_encoder.h",
   ],
+
+  "video_bitrate_allocator_factory\.h": [
+    "+rtc_base/ref_count.h",
+  ],
 }
