@@ -288,8 +288,7 @@ bool DelayBasedBwe::LatestEstimate(std::vector<uint32_t>* ssrcs,
 }
 
 void DelayBasedBwe::SetStartBitrate(DataRate start_bitrate) {
-  RTC_LOG(LS_INFO) << "BWE Setting start bitrate to: "
-                   << ToString(start_bitrate);
+  RTC_LOG(LS_INFO) << "BWE Setting start bitrate to: " << start_bitrate;
   rate_control_.SetStartBitrate(start_bitrate);
 }
 
