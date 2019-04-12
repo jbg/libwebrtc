@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6ff5ec3_7bc8ebc0",
+        "filename": "api/test/video_quality_analyzer_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-12T09:49:30Z",
+      "side": 0,
+      "message": "Keep it here, because not every analyzer want to implement this method",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 68
+      },
+      "revId": "deb0854e685d59957807f232b6772d2933b83a63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
