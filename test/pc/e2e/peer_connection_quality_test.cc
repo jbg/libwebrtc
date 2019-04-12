@@ -163,7 +163,7 @@ void PeerConnectionE2EQualityTest::PostTask(ScheduledActivity activity) {
           : activity.initial_delay_since_start - (Now() - start_time_);
   if (remaining_delay < TimeDelta::Zero()) {
     RTC_LOG(WARNING) << "Executing late task immediately, late by="
-                     << ToString(remaining_delay.Abs());
+                     << remaining_delay.Abs();
     remaining_delay = TimeDelta::Zero();
   }
 

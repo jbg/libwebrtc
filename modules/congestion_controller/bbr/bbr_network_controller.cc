@@ -692,8 +692,8 @@ void BbrNetworkController::MaybeExitStartupOrDrain(
       (is_at_full_bandwidth_ || rtt_delta > exit_threshold)) {
     if (rtt_delta > exit_threshold)
       RTC_LOG(LS_INFO) << "Exiting startup due to rtt increase from: "
-                       << ToString(min_rtt_) << " to:" << ToString(last_rtt_)
-                       << " > " << ToString(min_rtt_ + exit_threshold);
+                       << min_rtt_ << " to:" << last_rtt_ << " > "
+                       << min_rtt_ + exit_threshold;
     mode_ = DRAIN;
     pacing_gain_ = kDrainGain;
     congestion_window_gain_ = kHighGain;
@@ -938,8 +938,7 @@ void BbrNetworkController::OnApplicationLimited(DataSize bytes_in_flight) {
   sampler_->OnAppLimited();
 
   RTC_LOG(LS_INFO) << "Becoming application limited. Last sent packet: "
-                   << last_sent_packet_
-                   << ", CWND: " << ToString(GetCongestionWindow());
+                   << last_sent_packet_ << ", CWND: " << GetCongestionWindow();
 }
 }  // namespace bbr
 }  // namespace webrtc

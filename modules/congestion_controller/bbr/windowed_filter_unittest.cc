@@ -38,11 +38,11 @@ class WindowedFilterTest : public ::testing::Test {
     TimeDelta rtt_sample = TimeDelta::ms(10);
     for (int i = 0; i < 5; ++i) {
       windowed_min_rtt_.Update(rtt_sample, now_ms);
-      RTC_LOG(LS_VERBOSE) << "i: " << i << " sample: " << ToString(rtt_sample)
+      RTC_LOG(LS_VERBOSE) << "i: " << i << " sample: " << rtt_sample
                           << " mins: "
-                          << " " << ToString(windowed_min_rtt_.GetBest()) << " "
-                          << ToString(windowed_min_rtt_.GetSecondBest()) << " "
-                          << ToString(windowed_min_rtt_.GetThirdBest());
+                          << " " << windowed_min_rtt_.GetBest() << " "
+                          << windowed_min_rtt_.GetSecondBest() << " "
+                          << windowed_min_rtt_.GetThirdBest();
       now_ms += 25;
       rtt_sample = rtt_sample + TimeDelta::ms(10);
     }
@@ -60,11 +60,10 @@ class WindowedFilterTest : public ::testing::Test {
     DataRate bw_sample = DataRate::bps(1000);
     for (int i = 0; i < 5; ++i) {
       windowed_max_bw_.Update(bw_sample, now_ms);
-      RTC_LOG(LS_VERBOSE) << "i: " << i << " sample: " << ToString(bw_sample)
-                          << " maxs: "
-                          << " " << ToString(windowed_max_bw_.GetBest()) << " "
-                          << ToString(windowed_max_bw_.GetSecondBest()) << " "
-                          << ToString(windowed_max_bw_.GetThirdBest());
+      RTC_LOG(LS_VERBOSE) << "i: " << i << " sample: " << bw_sample << " maxs: "
+                          << " " << windowed_max_bw_.GetBest() << " "
+                          << windowed_max_bw_.GetSecondBest() << " "
+                          << windowed_max_bw_.GetThirdBest();
       now_ms += 25;
       bw_sample = DataRate::bps(bw_sample.bps() - 100);
     }
