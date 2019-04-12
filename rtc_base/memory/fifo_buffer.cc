@@ -150,7 +150,7 @@ const void* FifoBuffer::GetReadData(size_t* size) {
 
 void FifoBuffer::ConsumeReadData(size_t size) {
   CritScope cs(&crit_);
-  RTC_DCHECK(size <= data_length_);
+  RTC_DCHECK_LE(size, data_length_);
   const bool was_writable = data_length_ < buffer_length_;
   read_position_ = (read_position_ + size) % buffer_length_;
   data_length_ -= size;
