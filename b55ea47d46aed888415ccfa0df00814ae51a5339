@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df712d26_e9291de4",
+        "filename": "modules/remote_bitrate_estimator/aimd_rate_control_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-12T14:15:28Z",
+      "side": 1,
+      "message": "Put the default config as a member of this the instead. That way we don\u0027t need to change all call sites below.",
+      "range": {
+        "startLine": 38,
+        "startChar": 22,
+        "endLine": 38,
+        "endChar": 49
+      },
+      "revId": "b55ea47d46aed888415ccfa0df00814ae51a5339",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7814f41c_0b32cf65",
+        "filename": "modules/remote_bitrate_estimator/overuse_detector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-12T14:15:28Z",
+      "side": 1,
+      "message": "Prefer to provide the config as a pointer to constructors so it can be stored as a member. That way the interface doesn\u0027t need to change if such a thing is needed in the future.",
+      "range": {
+        "startLine": 26,
+        "startChar": 27,
+        "endLine": 26,
+        "endChar": 71
+      },
+      "revId": "b55ea47d46aed888415ccfa0df00814ae51a5339",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "804dd755_a84d4687",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-12T14:15:28Z",
+      "side": 1,
+      "message": "Make this a member instead, that way it\u0027s save to provide it as a pointer to AimdRateControl.",
+      "range": {
+        "startLine": 259,
+        "startChar": 43,
+        "endLine": 259,
+        "endChar": 64
+      },
+      "revId": "b55ea47d46aed888415ccfa0df00814ae51a5339",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
