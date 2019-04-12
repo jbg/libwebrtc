@@ -97,10 +97,6 @@ class VideoQualityAnalyzerInterface : public StatsObserverInterface {
   // All available codes are listed in
   // modules/video_coding/include/video_error_codes.h
   virtual void OnDecoderError(uint16_t frame_id, int32_t error_code) {}
-  // Will be called everytime new stats reports are available for the
-  // Peer Connection identified by |pc_label|.
-  void OnStatsReports(absl::string_view pc_label,
-                      const StatsReports& stats_reports) override {}
 
   // Tells analyzer that analysis complete and it should calculate final
   // statistics.
