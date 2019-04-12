@@ -195,6 +195,11 @@ void PeerConnectionE2EQualityTest::PostTask(ScheduledActivity activity) {
       remaining_delay.ms());
 }
 
+void PeerConnectionE2EQualityTest::AddStatsReporter(
+    std::unique_ptr<StatsReporter> stats_reporter) {
+  stats_reporters_.push_back(std::move(stats_reporter));
+}
+
 void PeerConnectionE2EQualityTest::AddPeer(
     rtc::Thread* network_thread,
     rtc::NetworkManager* network_manager,
@@ -287,6 +292,9 @@ void PeerConnectionE2EQualityTest::Run(
   video_quality_analyzer_injection_helper_->Start(test_case_name_,
                                                   video_analyzer_threads);
   audio_quality_analyzer_->Start(test_case_name_, &analyzer_helper_);
+  for (auto& stats_reporter : stats_reporters_) {
+    stats_reporter->Start(test_case_name_);
+  }
 
   // Start RTCEventLog recording if requested.
   if (alice_->params()->rtc_event_log_path) {
@@ -357,6 +365,9 @@ void PeerConnectionE2EQualityTest::Run(
 
   audio_quality_analyzer_->Stop();
   video_quality_analyzer_injection_helper_->Stop();
+  for (auto& stats_reporter : stats_reporters_) {
+    stats_reporter->Stop();
+  }
 
   // Ensuring that TestPeers have been destroyed in order to correctly close
   // Audio dumps.
