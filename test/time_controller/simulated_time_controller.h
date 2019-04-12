@@ -60,6 +60,7 @@ class SimulatedTimeControllerImpl : public TaskQueueFactory,
   void Unregister(SimulatedSequenceRunner* runner);
 
  private:
+  void RunOnYeild();
   const rtc::PlatformThreadId thread_id_;
   rtc::ThreadChecker thread_checker_;
   rtc::CriticalSection time_lock_;

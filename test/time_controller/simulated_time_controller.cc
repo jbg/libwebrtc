@@ -328,6 +328,13 @@ void SimulatedTimeControllerImpl::YieldExecution() {
     // queues are executed.
     auto inserted = yielded_.insert(yielding_from);
     RTC_DCHECK(inserted.second);
+    // We expect this to be a recursive lock, but there's no way to check for
+    // that, so just grab it to satisfy guards.
+    rtc::CritScope lock(&lock_);
+    // Clearing this to allow using it in recursive calls, this means that a
+    // potential higher level RunReadyRunners call might have to to an extra
+    // iteration, but that should be fine.
+    ready_runners_.clear();
     RunReadyRunners();
     yielded_.erase(inserted.first);
   }
@@ -335,12 +342,12 @@ void SimulatedTimeControllerImpl::YieldExecution() {
 
 void SimulatedTimeControllerImpl::RunReadyRunners() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
+  rtc::CritScope lock(&lock_);
   RTC_DCHECK_EQ(rtc::CurrentThreadId(), thread_id_);
   Timestamp current_time = CurrentTime();
   // We repeat until we have no ready left to handle tasks posted by ready
   // runners.
   while (true) {
-    rtc::CritScope lock(&lock_);
     RTC_DCHECK(ready_runners_.empty());
     for (auto* runner : runners_) {
       if (yielded_.find(runner) == yielded_.end() &&
