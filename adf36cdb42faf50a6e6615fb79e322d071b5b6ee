@@ -16,6 +16,24 @@
       "revId": "adf36cdb42faf50a6e6615fb79e322d071b5b6ee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47228342_4140cf05",
+        "filename": "p2p/base/port.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-04-12T18:51:27Z",
+      "side": 1,
+      "message": "MULTI does infact not work with that optimization.\nThe stun pings establishes sessions (so that same TURN addresses can be used with several client).\nBut that optimization is disabled...There was an experiment (2%) that I turned down.",
+      "parentUuid": "72470347_6f2fd1b9",
+      "revId": "adf36cdb42faf50a6e6615fb79e322d071b5b6ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
