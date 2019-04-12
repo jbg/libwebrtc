@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "91ae5e14_d6acec2e",
+        "filename": "modules/remote_bitrate_estimator/aimd_rate_control_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-12T15:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df712d26_e9291de4",
+      "range": {
+        "startLine": 38,
+        "startChar": 22,
+        "endLine": 38,
+        "endChar": 49
+      },
+      "revId": "b55ea47d46aed888415ccfa0df00814ae51a5339",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7814f41c_0b32cf65",
         "filename": "modules/remote_bitrate_estimator/overuse_detector.h",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e1ace4f3_74fd3c88",
+        "filename": "modules/remote_bitrate_estimator/overuse_detector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-12T15:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7814f41c_0b32cf65",
+      "range": {
+        "startLine": 26,
+        "startChar": 27,
+        "endLine": 26,
+        "endChar": 71
+      },
+      "revId": "b55ea47d46aed888415ccfa0df00814ae51a5339",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "804dd755_a84d4687",
         "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.cc",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "b55ea47d46aed888415ccfa0df00814ae51a5339",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "278e3504_8d4470d4",
+        "filename": "modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-12T15:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "804dd755_a84d4687",
+      "range": {
+        "startLine": 259,
+        "startChar": 43,
+        "endLine": 259,
+        "endChar": 64
+      },
+      "revId": "b55ea47d46aed888415ccfa0df00814ae51a5339",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
