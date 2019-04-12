@@ -841,10 +841,11 @@ int LibvpxVp8Encoder::Encode(const VideoFrame& frame,
   }
 
   vpx_enc_frame_flags_t flags[kMaxSimulcastStreams];
-  Vp8FrameConfig tl_configs[kMaxSimulcastStreams];
+  std::vector<Vp8FrameConfig> tl_configs;
+  tl_configs.reserve(encoders_.size());
   for (size_t i = 0; i < encoders_.size(); ++i) {
-    tl_configs[i] =
-        frame_buffer_controller_->UpdateLayerConfig(i, frame.timestamp());
+    tl_configs.push_back(
+        frame_buffer_controller_->UpdateLayerConfig(i, frame.timestamp()));
     if (tl_configs[i].drop_frame) {
       if (send_key_frame) {
         continue;
@@ -891,6 +892,8 @@ int LibvpxVp8Encoder::Encode(const VideoFrame& frame,
 
     libvpx_->codec_control(&encoders_[i], VP8E_SET_FRAME_FLAGS,
                            static_cast<int>(flags[stream_idx]));
+
+    RTC_DCHECK_LT(i, tl_configs.size());
     libvpx_->codec_control(&encoders_[i], VP8E_SET_TEMPORAL_LAYER_ID,
                            tl_configs[i].encoder_layer_id);
   }
@@ -921,17 +924,22 @@ int LibvpxVp8Encoder::Encode(const VideoFrame& frame,
       libvpx_->codec_control(&(encoders_[0]), VP8E_SET_MAX_INTRA_BITRATE_PCT,
                              rc_max_intra_target_);
     }
-    if (error)
+    if (error != WEBRTC_VIDEO_CODEC_OK) {
       return WEBRTC_VIDEO_CODEC_ERROR;
+    }
     // Examines frame timestamps only.
-    error = GetEncodedPartitions(frame);
+    error = GetEncodedPartitions(frame, tl_configs);
   }
+  // TODO(eladalon): What if we leave the above loop with an error?
+  // Can this happen? If not, we should probably:
+  // RTC_DCHECK_EQ(error, WEBRTC_VIDEO_CODEC_OK);
   // TODO(sprang): Shouldn't we use the frame timestamp instead?
   timestamp_ += duration;
   return error;
 }
 
-void LibvpxVp8Encoder::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
+void LibvpxVp8Encoder::PopulateCodecSpecific(const Vp8FrameConfig& frame_config,
+                                             CodecSpecificInfo* codec_specific,
                                              const vpx_codec_cx_pkt_t& pkt,
                                              int stream_idx,
                                              int encoder_idx,
@@ -945,12 +953,30 @@ void LibvpxVp8Encoder::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
 
   int qp = 0;
   vpx_codec_control(&encoders_[encoder_idx], VP8E_GET_LAST_QUANTIZER_64, &qp);
-  frame_buffer_controller_->OnEncodeDone(
-      stream_idx, timestamp, encoded_images_[encoder_idx].size(),
-      (pkt.data.frame.flags & VPX_FRAME_IS_KEY) != 0, qp, codec_specific);
+
+  const bool encoder_produced_key_frame =
+      (pkt.data.frame.flags & VPX_FRAME_IS_KEY) != 0;
+  RTC_DCHECK(!frame_config.IsKeyFrame() || encoder_produced_key_frame);
+
+  if (encoder_produced_key_frame) {
+    constexpr Vp8FrameConfig::BufferFlags kUpdate =
+        Vp8FrameConfig::BufferFlags::kUpdate;
+    const Vp8FrameConfig key_frame = Vp8FrameConfig(kUpdate, kUpdate, kUpdate);
+    frame_buffer_controller_->OnEncodeDone(stream_idx, key_frame, timestamp,
+                                           encoded_images_[encoder_idx].size(),
+                                           qp, codec_specific);
+  } else {
+    RTC_DCHECK(!frame_config.IsKeyFrame())
+        << "Key frame requested by frame buffer controller, but not produced.";
+    frame_buffer_controller_->OnEncodeDone(stream_idx, frame_config, timestamp,
+                                           encoded_images_[encoder_idx].size(),
+                                           qp, codec_specific);
+  }
 }
 
-int LibvpxVp8Encoder::GetEncodedPartitions(const VideoFrame& input_image) {
+int LibvpxVp8Encoder::GetEncodedPartitions(
+    const VideoFrame& input_image,
+    const std::vector<Vp8FrameConfig>& frame_configs) {
   int stream_idx = static_cast<int>(encoders_.size()) - 1;
   int result = WEBRTC_VIDEO_CODEC_OK;
   for (size_t encoder_idx = 0; encoder_idx < encoders_.size();
@@ -983,8 +1009,8 @@ int LibvpxVp8Encoder::GetEncodedPartitions(const VideoFrame& input_image) {
               VideoFrameType::kVideoFrameKey;
         }
         encoded_images_[encoder_idx].SetSpatialIndex(stream_idx);
-        PopulateCodecSpecific(&codec_specific, *pkt, stream_idx, encoder_idx,
-                              input_image.timestamp());
+        PopulateCodecSpecific(frame_configs[encoder_idx], &codec_specific, *pkt,
+                              stream_idx, encoder_idx, input_image.timestamp());
         break;
       }
     }

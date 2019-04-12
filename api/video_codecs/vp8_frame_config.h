@@ -47,6 +47,8 @@ struct Vp8FrameConfig {
 
   bool Updates(Buffer buffer) const;
 
+  bool IsKeyFrame() const;
+
   bool drop_frame;
   BufferFlags last_buffer_flags;
   BufferFlags golden_buffer_flags;

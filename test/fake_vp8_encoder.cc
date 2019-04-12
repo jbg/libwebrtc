@@ -80,9 +80,10 @@ void FakeVP8Encoder::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
   codec_specific->codecSpecific.VP8.keyIdx = kNoKeyIdx;
   codec_specific->codecSpecific.VP8.nonReference = false;
   if (size_bytes > 0) {
-    frame_buffer_controller_->OnEncodeDone(
-        stream_idx, timestamp, size_bytes,
-        frame_type == VideoFrameType::kVideoFrameKey, -1, codec_specific);
+    // TODO: !!!
+    // frame_buffer_controller_->OnEncodeDone(
+    //     stream_idx, timestamp, size_bytes,
+    //     frame_type == VideoFrameType::kVideoFrameKey, -1, codec_specific);
   } else {
     frame_buffer_controller_->OnFrameDropped(stream_idx, timestamp);
   }

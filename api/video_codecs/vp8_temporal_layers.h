@@ -49,9 +49,9 @@ class Vp8TemporalLayers final : public Vp8FrameBufferController {
                                    uint32_t rtp_timestamp) override;
 
   void OnEncodeDone(size_t stream_index,
+                    const Vp8FrameConfig& frame_config,
                     uint32_t rtp_timestamp,
                     size_t size_bytes,
-                    bool is_keyframe,
                     int qp,
                     CodecSpecificInfo* info) override;
 
