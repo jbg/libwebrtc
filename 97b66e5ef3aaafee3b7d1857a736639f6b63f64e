@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "711317be_1754b835",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4468,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-12T02:08:23Z",
+      "side": 1,
+      "message": "Since the type is now obvious from the rhs, consider\n\n  auto description \u003d absl::make_unique\u003ccricket::SessionDescription\u003e();",
+      "revId": "97b66e5ef3aaafee3b7d1857a736639f6b63f64e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
