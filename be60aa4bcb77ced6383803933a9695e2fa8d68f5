@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "476a9024_5c6f94b9",
+        "filename": "pc/media_protocol_names.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-04-14T22:25:43Z",
+      "side": 1,
+      "message": "if you\u0027d like: could replace the `const std::string\u0026` args with absl::string_view while you\u0027re at it. In that case, replace the find with absl::StrContains",
+      "revId": "be60aa4bcb77ced6383803933a9695e2fa8d68f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f228f6d4_3f0e68b7",
+        "filename": "pc/media_protocol_names.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-04-14T22:25:43Z",
+      "side": 1,
+      "message": "nit: newline above",
+      "revId": "be60aa4bcb77ced6383803933a9695e2fa8d68f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e186bfc_c08e053d",
+        "filename": "pc/media_protocol_names.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-04-14T22:25:43Z",
+      "side": 1,
+      "message": "Could you add a brief comment that these are the protocols strings specific to the representation within SDP?",
+      "revId": "be60aa4bcb77ced6383803933a9695e2fa8d68f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d708652_82b8735a",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-04-14T22:25:43Z",
+      "side": 1,
+      "message": "Move this comment down to CreateMediaContentAnswer ?",
+      "revId": "be60aa4bcb77ced6383803933a9695e2fa8d68f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a47e0a65_13ec1805",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2151,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-04-14T22:25:43Z",
+      "side": 1,
+      "message": "unused arg",
+      "revId": "be60aa4bcb77ced6383803933a9695e2fa8d68f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f33cb20_13c2a252",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-04-14T22:25:43Z",
+      "side": 1,
+      "message": "This is much nicer!",
+      "revId": "be60aa4bcb77ced6383803933a9695e2fa8d68f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c03fe50_0d490c9d",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2239,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-04-14T22:25:43Z",
+      "side": 1,
+      "message": "nit: capitalize first letter of these two comments",
+      "range": {
+        "startLine": 2239,
+        "startChar": 5,
+        "endLine": 2239,
+        "endChar": 6
+      },
+      "revId": "be60aa4bcb77ced6383803933a9695e2fa8d68f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
