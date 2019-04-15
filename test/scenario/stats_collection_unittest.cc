@@ -15,17 +15,18 @@ namespace webrtc {
 namespace test {
 namespace {
 void CreateAnalyzedStream(Scenario* s,
-                          NetworkNodeConfig network_config,
+                          NetworkSimulationConfig network_config,
                           VideoQualityAnalyzer* analyzer) {
   VideoStreamConfig config;
   config.encoder.codec = VideoStreamConfig::Encoder::Codec::kVideoCodecVP8;
   config.encoder.implementation =
       VideoStreamConfig::Encoder::Implementation::kSoftware;
   config.hooks.frame_pair_handlers = {analyzer->Handler()};
-  auto route = s->CreateRoutes(s->CreateClient("caller", CallClientConfig()),
-                               {s->CreateSimulationNode(network_config)},
-                               s->CreateClient("callee", CallClientConfig()),
-                               {s->CreateSimulationNode(NetworkNodeConfig())});
+  auto route =
+      s->CreateRoutes(s->CreateClient("caller", CallClientConfig()),
+                      {s->CreateSimulationNode(network_config)},
+                      s->CreateClient("callee", CallClientConfig()),
+                      {s->CreateSimulationNode(NetworkSimulationConfig())});
   s->CreateVideoStream(route->forward(), config);
 }
 }  // namespace
@@ -34,8 +35,8 @@ TEST(ScenarioAnalyzerTest, PsnrIsHighWhenNetworkIsGood) {
   VideoQualityAnalyzer analyzer;
   {
     Scenario s("", /*real_time*/ false);
-    NetworkNodeConfig good_network;
-    good_network.simulation.bandwidth = DataRate::kbps(1000);
+    NetworkSimulationConfig good_network;
+    good_network.bandwidth = DataRate::kbps(1000);
     CreateAnalyzedStream(&s, good_network, &analyzer);
     s.RunFor(TimeDelta::seconds(1));
   }
@@ -48,9 +49,9 @@ TEST(ScenarioAnalyzerTest, PsnrIsLowWhenNetworkIsBad) {
   VideoQualityAnalyzer analyzer;
   {
     Scenario s("", /*real_time*/ false);
-    NetworkNodeConfig bad_network;
-    bad_network.simulation.bandwidth = DataRate::kbps(100);
-    bad_network.simulation.loss_rate = 0.02;
+    NetworkSimulationConfig bad_network;
+    bad_network.bandwidth = DataRate::kbps(100);
+    bad_network.loss_rate = 0.02;
     CreateAnalyzedStream(&s, bad_network, &analyzer);
     s.RunFor(TimeDelta::seconds(1));
   }
