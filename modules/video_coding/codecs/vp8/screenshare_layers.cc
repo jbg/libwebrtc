@@ -272,9 +272,9 @@ void ScreenshareLayers::OnRatesUpdated(
 }
 
 void ScreenshareLayers::OnEncodeDone(size_t stream_index,
+                                     const Vp8FrameConfig& frame_config,
                                      uint32_t rtp_timestamp,
                                      size_t size_bytes,
-                                     bool is_keyframe,
                                      int qp,
                                      CodecSpecificInfo* info) {
   RTC_DCHECK_LT(stream_index, StreamCount());
@@ -292,7 +292,7 @@ void ScreenshareLayers::OnEncodeDone(size_t stream_index,
     pending_frame_configs_.erase(it);
 
     if (checker_) {
-      RTC_DCHECK(checker_->CheckTemporalConfig(is_keyframe,
+      RTC_DCHECK(checker_->CheckTemporalConfig(frame_config.IsKeyFrame(),
                                                dependency_info->frame_config));
     }
   }
@@ -314,12 +314,12 @@ void ScreenshareLayers::OnEncodeDone(size_t stream_index,
       generic_frame_info.decode_target_indications =
           dependency_info->decode_target_indications;
     } else {
-      RTC_DCHECK(is_keyframe);
+      RTC_DCHECK(frame_config.IsKeyFrame());
       generic_frame_info.decode_target_indications =
           GenericFrameInfo::DecodeTargetInfo("SS");
     }
 
-    if (is_keyframe) {
+    if (frame_config.IsKeyFrame()) {
       vp8_info.temporalIdx = 0;
       last_sync_timestamp_ = unwrapped_timestamp;
       vp8_info.layerSync = true;
@@ -337,18 +337,18 @@ void ScreenshareLayers::OnEncodeDone(size_t stream_index,
     RTC_DCHECK_EQ(vp8_info.referencedBuffersCount, 0u);
     RTC_DCHECK_EQ(vp8_info.updatedBuffersCount, 0u);
 
-    // Note that |frame_config| is not derefernced if |is_keyframe|,
+    // Note that |frame_config| is not derefernced if frame_config.IsKeyFrame(),
     // meaning it's never dereferenced if the optional may be unset.
     for (int i = 0; i < static_cast<int>(Vp8FrameConfig::Buffer::kCount); ++i) {
-      if (!is_keyframe && dependency_info->frame_config.References(
-                              static_cast<Vp8FrameConfig::Buffer>(i))) {
+      if (dependency_info->frame_config.References(
+              static_cast<Vp8FrameConfig::Buffer>(i))) {
         RTC_DCHECK_LT(vp8_info.referencedBuffersCount,
                       arraysize(CodecSpecificInfoVP8::referencedBuffers));
         vp8_info.referencedBuffers[vp8_info.referencedBuffersCount++] = i;
       }
 
-      if (is_keyframe || dependency_info->frame_config.Updates(
-                             static_cast<Vp8FrameConfig::Buffer>(i))) {
+      if (dependency_info->frame_config.Updates(
+              static_cast<Vp8FrameConfig::Buffer>(i))) {
         RTC_DCHECK_LT(vp8_info.updatedBuffersCount,
                       arraysize(CodecSpecificInfoVP8::updatedBuffers));
         vp8_info.updatedBuffers[vp8_info.updatedBuffersCount++] = i;

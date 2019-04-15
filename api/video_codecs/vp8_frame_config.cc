@@ -74,4 +74,10 @@ bool Vp8FrameConfig::Updates(Buffer buffer) const {
   return false;
 }
 
+bool Vp8FrameConfig::IsKeyFrame() const {
+  // Key frames update all buffers, but reference no buffers.
+  return last_buffer_flags == kUpdate && golden_buffer_flags == kUpdate &&
+         arf_buffer_flags == kUpdate;
+}
+
 }  // namespace webrtc
