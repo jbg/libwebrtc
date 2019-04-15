@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9b653d7_2185d6af",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-04-15T11:34:41Z",
+      "side": 1,
+      "message": "there\u0027s no lock in this function, so can you add a clarification or a sequence/thread check for runtime context?",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aed63852_8132fff9",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-04-15T11:34:41Z",
+      "side": 1,
+      "message": "const std::string\u0026\n(unless by value is intentional?)",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cf5b360_7ded0854",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-04-15T11:34:41Z",
+      "side": 1,
+      "message": "same here (const\u0026)",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29d04db1_012d66fd",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-04-15T11:34:41Z",
+      "side": 1,
+      "message": "hmm... actually, it looks like passing by value is common in this file. Is the expectation that the caller always std::moves the args?  If so, should we be using \u0026\u0026?\n\nIf this is not intentional, I\u0027d like to fix it since otherwise things can start to spread.",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c96ba4f_5d0791a5",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-04-15T11:34:41Z",
+      "side": 1,
+      "message": "missing information about threading. Above, things are clear with RTC_GUARDED_BY, but if that\u0027s absent, a comment about why guarded by is not used, would be good.",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
