@@ -146,6 +146,7 @@ H264DecoderImpl::H264DecoderImpl() : pool_(true),
                                      decoded_image_callback_(nullptr),
                                      has_reported_init_(false),
                                      has_reported_error_(false) {
+  avcodec_register_all();
 }
 
 H264DecoderImpl::~H264DecoderImpl() {
