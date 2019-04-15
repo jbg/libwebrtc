@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e2fef05d_95c13eb1",
+        "filename": "video/encoder_bitrate_adjuster.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-15T12:13:41Z",
+      "side": 1,
+      "message": "The \u003e\u003d kMinFrames... check is a mistake. Removed.\nBoth if/else blocks were kinda noops anaway in the beginning because of the check on L114.",
+      "parentUuid": "c8f61f81_9bfaa3c8",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 169,
+        "endChar": 48
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59318e5a_823d6e0a",
         "filename": "video/encoder_bitrate_adjuster.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f970e723_3ac7e7f7",
+        "filename": "video/encoder_bitrate_adjuster.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-15T12:13:41Z",
+      "side": 1,
+      "message": "That\u0027s a great suggestion, thank you!\nI assume you meant that granted_overshoot_ratio \u003d st::min(1.0, ...), not max.",
+      "parentUuid": "59318e5a_823d6e0a",
+      "range": {
+        "startLine": 202,
+        "startChar": 5,
+        "endLine": 215,
+        "endChar": 46
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0ce86b8f_be16fdc9",
+        "filename": "video/encoder_bitrate_adjuster_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-15T12:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a9b1860_a888ce3c",
+      "range": {
+        "startLine": 486,
+        "startChar": 54,
+        "endLine": 486,
+        "endChar": 58
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce2e4627_c5c2800c",
         "filename": "video/encoder_bitrate_adjuster_unittest.cc",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4eed346d_ce67699d",
+        "filename": "video/encoder_bitrate_adjuster_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-15T12:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce2e4627_c5c2800c",
+      "range": {
+        "startLine": 505,
+        "startChar": 54,
+        "endLine": 505,
+        "endChar": 56
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f8623cb_4566cec6",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 1
@@ -114,6 +210,30 @@
       "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2c29098_0d8fe1dd",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-15T12:13:41Z",
+      "side": 1,
+      "message": "Yes, good catch! Moved creation of new EncoderRateSettings to before the adjuster, so we have a mutable instance to work with.",
+      "parentUuid": "4f8623cb_4566cec6",
+      "range": {
+        "startLine": 1047,
+        "startChar": 48,
+        "endLine": 1047,
+        "endChar": 61
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
