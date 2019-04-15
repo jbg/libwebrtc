@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "29fded9d_8de13597",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-15T15:50:32Z",
+      "side": 1,
+      "message": "Other counters use \"unsigned long\" (uint32_t) for packet counters and \"unsigned long long\" (uint64_t) for byte counters. Retransmitted packets deviating from this was not intentional (I filed this the other day: https://github.com/w3c/webrtc-stats/issues/425)... however, I\u0027m not sure that this pattern was intentional in the first place. Perhaps all counters should be \"unsigned long long\" (uint64_t), just like this one?\n\nI think uint64_t makes more sense, and it is what the spec currently says for these.\n\nI updated the CL to use uint64_t. If the spec changes it we can revisit later, both types are \u0027numbers\u0027 in JavaScript.",
+      "parentUuid": "2ae2f783_aaf0bd79",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dde47e18_86ba8b7f",
         "filename": "audio/channel_send.cc",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "85b5c6c7_4edca9f5",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-15T15:50:32Z",
+      "side": 1,
+      "message": "This is my understanding of retransmissions, please correct me if I\u0027m wrong:\n1. You may have an \"RTX stream\" which has its own SSRC. The packets sent over this stream are retransmissions for other RTP streams (other SSRCs).\n2. You may otherwise handle retransmissions over the same RTP stream (same SSRC) as the original packets.\n\nThe retransmitted stats added in this CL should only reflect 2).\n\nIf packets are retransmitted due to 1), this should result in a separate \"outbound-rtp\" stats objects with its own bytesSent and packetsSent counters. Unless you retransmitt packets over the RTX stream that were already sent on the RTX stream, the retransmitted counters on the RTX stream would not be applicable. So probably the RTX stream would have its own CallSendStatistics.\n\nThis CL currently uses both \"rtp_stats.retransmitted\" and \"rtx_stats.transmitted\". Should it only use \"rtp_stats.retransmitted\"?",
+      "parentUuid": "d893c222_8d947559",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41b67840_cf81798c",
         "filename": "audio/channel_send.h",
         "patchSetId": 3
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "69f41762_d3f485be",
+        "filename": "audio/channel_send.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-15T15:50:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41b67840_cf81798c",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b2ed51e_e78389eb",
         "filename": "call/audio_send_stream.h",
         "patchSetId": 3
@@ -85,6 +139,24 @@
       "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4a7baa1_a4de9eff",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-15T15:50:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b2ed51e_e78389eb",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -108,6 +180,30 @@
       "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9f2cb52_a758cd04",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-15T15:50:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "125afb3b_a9decc46",
+      "range": {
+        "startLine": 394,
+        "startChar": 39,
+        "endLine": 394,
+        "endChar": 40
+      },
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
