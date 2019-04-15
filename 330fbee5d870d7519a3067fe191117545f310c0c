@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f07c78e3_9a55f583",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-15T06:27:59Z",
+      "side": 0,
+      "message": "Having a separate reference file is not needed for AEC3 as AEC3 has no Mac-specific tuning.",
+      "range": {
+        "startLine": 424,
+        "startChar": 9,
+        "endLine": 428,
+        "endChar": 46
+      },
+      "revId": "330fbee5d870d7519a3067fe191117545f310c0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e11242c6_ce345ed7",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-15T06:27:59Z",
+      "side": 0,
+      "message": "This test is AEC2-specific and is therefore removed.",
+      "range": {
+        "startLine": 873,
+        "startChar": 16,
+        "endLine": 873,
+        "endChar": 61
+      },
+      "revId": "330fbee5d870d7519a3067fe191117545f310c0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f6a4933_52eb507e",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1706,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-15T06:27:59Z",
+      "side": 0,
+      "message": "This test was removed as it does not work with AEC3. The issue is that the the binary differences present when integers are stored as floating point and integer data causes slightly different behavior for the float and fixed APM interfaces. The main effect was pinpointed to be in the biquad filters in AEC3.\n\nThe intention is to instead replace this test with an interface test that only ensures that the fix and float interfaces are identically hooked up (this was before this CL indirectly done via this test)",
+      "range": {
+        "startLine": 1706,
+        "startChar": 16,
+        "endLine": 1706,
+        "endChar": 55
+      },
+      "revId": "330fbee5d870d7519a3067fe191117545f310c0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
