@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb59e5f0_85b3f13e",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-15T07:16:27Z",
+      "side": 1,
+      "message": "The problem has been addressed upstream: https://github.com/google/cctz/pull/103.\n\nI am landing this and I will cleanup later in the week when the new Abseil version will be rolled.",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 40
+      },
+      "revId": "4db754df45a2ca993b26a543cf512ea172540b11",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
