@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ae2f783_aaf0bd79",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-04-15T14:33:40Z",
+      "side": 1,
+      "message": "unsigned long long in spec.",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dde47e18_86ba8b7f",
         "filename": "audio/channel_send.cc",
         "patchSetId": 3
@@ -31,6 +48,63 @@
       "side": 1,
       "message": "\"retransmitted\" is set when packets are re-sent over RTX: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender.cc?g\u003d0\u0026l\u003d479\n\nstats.retransmitted_bytes_sent should perhaps only include retransmitted payload_bytes from the rtx_stats (if the rtx stream should be included) since padding packets could be sent over rtx but are not retransmissions: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender.cc?g\u003d0\u0026l\u003d419 (as change in webrtc_video_engine.cc)?\n\n\nOnly frames with different timestamps are accounted for when calculating the fps: https://cs.chromium.org/chromium/src/third_party/webrtc/video/send_statistics_proxy.cc?g\u003d0\u0026l\u003d969. So framerate should be 30 fps in this case.",
       "parentUuid": "dde47e18_86ba8b7f",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41b67840_cf81798c",
+        "filename": "audio/channel_send.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-04-15T14:33:40Z",
+      "side": 1,
+      "message": "This is unsigned long long in spec - should it be uint64_t instead?",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b2ed51e_e78389eb",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-04-15T14:33:40Z",
+      "side": 1,
+      "message": "uint64_t",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "125afb3b_a9decc46",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-04-15T14:33:40Z",
+      "side": 1,
+      "message": "uint64_t?",
+      "range": {
+        "startLine": 394,
+        "startChar": 39,
+        "endLine": 394,
+        "endChar": 40
+      },
       "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
