@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a880fb30_e85248e4",
+        "filename": "api/video_codecs/vp8_frame_buffer_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-15T08:37:10Z",
+      "side": 1,
+      "message": "What does \"dropped\" mean here? Is it an input frame that is dropped, or one particular layer  (identified by stream index?).",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "ed2c6fbc6da9937e501a0e1556074e29acc8d1e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
