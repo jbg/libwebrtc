@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0b245a73_17ba7943",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T13:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffa6b7a5_e07c2cd4",
+      "range": {
+        "startLine": 197,
+        "startChar": 8,
+        "endLine": 197,
+        "endChar": 21
+      },
+      "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d434057_fc7f76c1",
         "filename": "api/test/peerconnection_quality_test_fixture.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "148e831b_01378d65",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T13:04:27Z",
+      "side": 1,
+      "message": "test_case_name is passed here, because implementation may want initialize some internal structures and names with correlation to test case name. I think it\u0027s better to pass configuration params before test.\n\nAlso metrics reporting is not only about saving it to file. By default WebRTC reports metrics to stdout and can be configured to report it to file, but it will be done for whole metrics report system, so the file will contain data from all reporters and analyzers at once.",
+      "parentUuid": "7d434057_fc7f76c1",
+      "range": {
+        "startLine": 203,
+        "startChar": 35,
+        "endLine": 203,
+        "endChar": 49
+      },
+      "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "67bd0af4_958c4981",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T13:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99d332b6_e5cec10c",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 4
+      },
+      "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34e12554_9b3a95b9",
         "filename": "test/pc/e2e/network_stats_reporter.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61a9bd75_a6f1d3ab",
+        "filename": "test/pc/e2e/network_stats_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T13:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34e12554_9b3a95b9",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 61
+      },
+      "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "74e3a649_fd5b8959",
+        "filename": "test/pc/e2e/network_stats_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T13:04:27Z",
+      "side": 1,
+      "message": "By default it will print result to stdout.\nIt will save results to file only if special flag will be provided.",
+      "parentUuid": "6232c889_944cb127",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 19
+      },
+      "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f6f6ef9_c368a03d",
         "filename": "test/pc/e2e/peer_connection_quality_test.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5be8d81_e9851520",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T13:04:27Z",
+      "side": 1,
+      "message": "Name updated. By default it\u0027s not about saving to file. In WebRTC perf metrics by default reported to stdout, but with special flag can be forwarded into file.",
+      "parentUuid": "0f6f6ef9_c368a03d",
+      "range": {
+        "startLine": 374,
+        "startChar": 20,
+        "endLine": 374,
+        "endChar": 24
+      },
+      "revId": "45e1f531842fd4ea42621b3c39062ed3130d8dd5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
