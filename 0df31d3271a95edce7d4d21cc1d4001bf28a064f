@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "724c6c54_4f0a6a32",
+        "filename": "test/scenario/scenario.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T09:02:36Z",
+      "side": 1,
+      "message": "Maybe use here\nNetworkSimulationConfig config;\nconfig_modifier(\u0026config);\nreturn CreateSimulationNode(config);\n\nAs you did in next CL?",
+      "range": {
+        "startLine": 197,
+        "startChar": 2,
+        "endLine": 197,
+        "endChar": 54
+      },
+      "revId": "0df31d3271a95edce7d4d21cc1d4001bf28a064f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d71d7ba_6d4bd710",
+        "filename": "test/scenario/scenario.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T09:02:36Z",
+      "side": 1,
+      "message": "Is it used?",
+      "range": {
+        "startLine": 186,
+        "startChar": 47,
+        "endLine": 186,
+        "endChar": 64
+      },
+      "revId": "0df31d3271a95edce7d4d21cc1d4001bf28a064f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
