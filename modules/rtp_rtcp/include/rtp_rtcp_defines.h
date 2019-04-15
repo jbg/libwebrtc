@@ -292,9 +292,17 @@ class TransportFeedbackObserver {
   TransportFeedbackObserver() {}
   virtual ~TransportFeedbackObserver() {}
 
-  // Note: Transport-wide sequence number as sequence number.
+  // TODO(webrtc:8975): Remove when downstream projects have been updated.
   virtual void AddPacket(uint32_t ssrc,
-                         uint16_t sequence_number,
+                         uint16_t sequence_number,  // Transport-wide.
+                         size_t length,
+                         const PacedPacketInfo& pacing_info) {
+    AddPacket(ssrc, sequence_number, absl::nullopt, length, pacing_info);
+  }
+
+  virtual void AddPacket(uint32_t ssrc,
+                         uint16_t tw_sequence_number,
+                         absl::optional<uint16_t> rtp_sequence_number,
                          size_t length,
                          const PacedPacketInfo& pacing_info) = 0;
 

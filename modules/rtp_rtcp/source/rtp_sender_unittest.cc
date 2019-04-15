@@ -162,8 +162,12 @@ class MockSendPacketObserver : public SendPacketObserver {
 
 class MockTransportFeedbackObserver : public TransportFeedbackObserver {
  public:
-  MOCK_METHOD4(AddPacket,
-               void(uint32_t, uint16_t, size_t, const PacedPacketInfo&));
+  MOCK_METHOD5(AddPacket,
+               void(uint32_t,
+                    uint16_t,
+                    absl::optional<uint16_t>,
+                    size_t,
+                    const PacedPacketInfo&));
   MOCK_METHOD1(OnTransportFeedback, void(const rtcp::TransportFeedback&));
   MOCK_CONST_METHOD0(GetTransportFeedbackVector, std::vector<PacketFeedback>());
 };
@@ -397,6 +401,7 @@ TEST_P(RtpSenderTestWithoutPacer,
 
   EXPECT_CALL(feedback_observer_,
               AddPacket(rtp_sender_->SSRC(), kTransportSequenceNumber,
+                        absl::optional<uint16_t>(rtp_sender_->SequenceNumber()),
                         expected_bytes, PacedPacketInfo()))
       .Times(1);
   EXPECT_CALL(mock_overhead_observer,
@@ -424,8 +429,9 @@ TEST_P(RtpSenderTestWithoutPacer, SendsPacketsWithTransportSequenceNumber) {
       .Times(1);
 
   EXPECT_CALL(feedback_observer_,
-              AddPacket(rtp_sender_->SSRC(), kTransportSequenceNumber, _,
-                        PacedPacketInfo()))
+              AddPacket(rtp_sender_->SSRC(), kTransportSequenceNumber,
+                        absl::optional<uint16_t>(rtp_sender_->SequenceNumber()),
+                        _, PacedPacketInfo()))
       .Times(1);
 
   SendGenericPacket();
@@ -597,8 +603,9 @@ TEST_P(RtpSenderTest, SendsPacketsWithTransportSequenceNumber) {
               OnSendPacket(kTransportSequenceNumber, _, _))
       .Times(1);
   EXPECT_CALL(feedback_observer_,
-              AddPacket(rtp_sender_->SSRC(), kTransportSequenceNumber, _,
-                        PacedPacketInfo()))
+              AddPacket(rtp_sender_->SSRC(), kTransportSequenceNumber,
+                        absl::optional<uint16_t>(rtp_sender_->SequenceNumber()),
+                        _, PacedPacketInfo()))
       .Times(1);
 
   SendGenericPacket();

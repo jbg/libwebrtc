@@ -78,7 +78,7 @@ class LegacySendSideCongestionControllerTest : public ::testing::Test {
 
   void OnSentPacket(const PacketFeedback& packet_feedback) {
     constexpr uint32_t ssrc = 0;
-    controller_->AddPacket(ssrc, packet_feedback.sequence_number,
+    controller_->AddPacket(ssrc, packet_feedback.sequence_number, absl::nullopt,
                            packet_feedback.payload_size,
                            packet_feedback.pacing_info);
     controller_->OnSentPacket(rtc::SentPacket(packet_feedback.sequence_number,
