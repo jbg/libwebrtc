@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6461b12b_9418a0bc",
+        "filename": "test/scenario/network_node.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-15T09:11:49Z",
+      "side": 1,
+      "message": "BTW, maybe it will make sense in separate CL to refactor SimulatedNetwork::Config to be the same as NetworkSimulationConfig to remove duplication?",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "0df31d3271a95edce7d4d21cc1d4001bf28a064f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "724c6c54_4f0a6a32",
         "filename": "test/scenario/scenario.cc",
         "patchSetId": 2
