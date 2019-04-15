@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8f61f81_9bfaa3c8",
+        "filename": "video/encoder_bitrate_adjuster.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-15T08:49:44Z",
+      "side": 1,
+      "message": "It\u0027s a little confusing here. The |else| branch is executed even if link_utilization_factor is more than 1.0 but frames_since_layout_change is too small. I doubt this is what you wanted to do here.",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 169,
+        "endChar": 48
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59318e5a_823d6e0a",
+        "filename": "video/encoder_bitrate_adjuster.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-15T08:49:44Z",
+      "side": 1,
+      "message": "Outside of the loop:\n// All wanted overshoots are satisfied in the same proportion based on available headroom.\ndouble granted_overshoot_ratio \u003d max(1.0, available_headroom.bps() / (wanted_overshoot_sum.bps + 1));\n\nInside the loop:\n\nDataRate allowed_overshoot \u003d granted_overshoot_ratio * layer_info.WantedOvershoot();\n// Pretend the target bitrate is higher by the allowed overshoot.\n// Since utilization_factor \u003d actual_bitrate / target_bitrate, it can be done by multiplying by old_target_bitrate / new_target_bitrate.\nutilization_factor *\u003d layer_info.target_rate.bps\u003cdouble\u003e() / (granted_overshoot.bps\u003cdouble\u003e()+layer_info.target_rate.bps\u003cdouble\u003e())",
+      "range": {
+        "startLine": 202,
+        "startChar": 5,
+        "endLine": 215,
+        "endChar": 46
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a9b1860_a888ce3c",
+        "filename": "video/encoder_bitrate_adjuster_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-15T08:49:44Z",
+      "side": 1,
+      "message": "Even",
+      "range": {
+        "startLine": 486,
+        "startChar": 54,
+        "endLine": 486,
+        "endChar": 58
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce2e4627_c5c2800c",
+        "filename": "video/encoder_bitrate_adjuster_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-15T08:49:44Z",
+      "side": 1,
+      "message": "should be 10% according to the code below.",
+      "range": {
+        "startLine": 505,
+        "startChar": 54,
+        "endLine": 505,
+        "endChar": 56
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f8623cb_4566cec6",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-15T08:49:44Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you rewrite rate_settings.bitrate\u003dnew_allocation here?\n\nOtherwise, this CL makes AjustRateAllocation to lag behind by one bitrate allocation.",
+      "range": {
+        "startLine": 1047,
+        "startChar": 48,
+        "endLine": 1047,
+        "endChar": 61
+      },
+      "revId": "27d656a8cbfaece69d588af7b555add775ffc090",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
