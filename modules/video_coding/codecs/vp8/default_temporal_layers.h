@@ -51,9 +51,9 @@ class DefaultTemporalLayers final : public Vp8FrameBufferController {
   bool UpdateConfiguration(size_t stream_index, Vp8EncoderConfig* cfg) override;
 
   void OnEncodeDone(size_t stream_index,
+                    const Vp8FrameConfig& frame_config,
                     uint32_t rtp_timestamp,
                     size_t size_bytes,
-                    bool is_keyframe,
                     int qp,
                     CodecSpecificInfo* info) override;
 

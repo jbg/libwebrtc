@@ -445,12 +445,13 @@ void DefaultTemporalLayers::UpdateSearchOrder(Vp8FrameConfig* config) {
   }
 }
 
-void DefaultTemporalLayers::OnEncodeDone(size_t stream_index,
-                                         uint32_t rtp_timestamp,
-                                         size_t size_bytes,
-                                         bool is_keyframe,
-                                         int qp,
-                                         CodecSpecificInfo* info) {
+void DefaultTemporalLayers::OnEncodeDone(
+    size_t stream_index,
+    const Vp8FrameConfig& encdoded_frame_config,
+    uint32_t rtp_timestamp,
+    size_t size_bytes,
+    int qp,
+    CodecSpecificInfo* info) {
   RTC_DCHECK_LT(stream_index, StreamCount());
   RTC_DCHECK_GT(num_layers_, 0);
 
@@ -463,6 +464,10 @@ void DefaultTemporalLayers::OnEncodeDone(size_t stream_index,
   auto pending_frame = pending_frames_.find(rtp_timestamp);
   RTC_DCHECK(pending_frame != pending_frames_.end());
 
+  const bool is_keyframe = encdoded_frame_config.IsKeyFrame();
+
+  // TODO(eladalon): It might be possible to get rid of |pending_frames_|
+  // now that |encdoded_frame_config| is fed into this method.
   PendingFrame& frame = pending_frame->second;
   const Vp8FrameConfig& frame_config = frame.dependency_info.frame_config;
 #if RTC_DCHECK_IS_ON

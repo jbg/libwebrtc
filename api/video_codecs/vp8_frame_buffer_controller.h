@@ -113,18 +113,17 @@ class Vp8FrameBufferController {
   virtual Vp8FrameConfig UpdateLayerConfig(size_t stream_index,
                                            uint32_t rtp_timestamp) = 0;
 
-  // Called after the encode step is done. |rtp_timestamp| must match the
-  // parameter use in the UpdateLayerConfig() call.
-  // |is_keyframe| must be true iff the encoder decided to encode this frame as
-  // a keyframe.
+  // Called after the encode step is done.
+  // |frame_config| holds the configuration of the encoded frame produced
+  // by the encoder (i.e. which frame buffers were referenced and/or updated).
   // If |info| is not null, the TemporalLayers instance may update |info| with
   // codec specific data such as temporal id.
   // |qp| should indicate the frame-level QP this frame was encoded at. If the
   // encoder does not support extracting this, |qp| should be set to 0.
   virtual void OnEncodeDone(size_t stream_index,
+                            const Vp8FrameConfig& frame_config,
                             uint32_t rtp_timestamp,
                             size_t size_bytes,
-                            bool is_keyframe,
                             int qp,
                             CodecSpecificInfo* info) = 0;
 

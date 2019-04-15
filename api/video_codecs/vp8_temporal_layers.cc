@@ -60,14 +60,14 @@ Vp8FrameConfig Vp8TemporalLayers::UpdateLayerConfig(size_t stream_index,
 }
 
 void Vp8TemporalLayers::OnEncodeDone(size_t stream_index,
+                                     const Vp8FrameConfig& frame_config,
                                      uint32_t rtp_timestamp,
                                      size_t size_bytes,
-                                     bool is_keyframe,
                                      int qp,
                                      CodecSpecificInfo* info) {
   RTC_DCHECK_LT(stream_index, controllers_.size());
-  return controllers_[stream_index]->OnEncodeDone(0, rtp_timestamp, size_bytes,
-                                                  is_keyframe, qp, info);
+  controllers_[stream_index]->OnEncodeDone(0, frame_config, rtp_timestamp,
+                                           size_bytes, qp, info);
 }
 
 void Vp8TemporalLayers::OnFrameDropped(size_t stream_index,

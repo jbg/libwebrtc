@@ -45,7 +45,8 @@ class FakeVP8Encoder : public FakeEncoder {
   EncoderInfo GetEncoderInfo() const override;
 
  private:
-  void PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
+  void PopulateCodecSpecific(const Vp8FrameConfig& frame_config,
+                             CodecSpecificInfo* codec_specific,
                              size_t size_bytes,
                              VideoFrameType frame_type,
                              int stream_idx,
