@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "34c4eb2d_2062020d",
+        "filename": "api/audio_codecs/opus/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-16T15:26:08Z",
+      "side": 1,
+      "message": "We have 3 targets for an encoder/decoder with these files in them:\n\napi/coder.h, codecs/coder_impl.h, api/coder_config.h.\n\nThey have dependencies:\napi/coder.h needs codecs/coder_impl.h AND api/coder_config.h to build\n\napi/coder_config.h needs nothing to build\n\ncodecs/coder_impl.h needs api/coder_config.h to build\n\nIf I would merge the API targets into one, there would be a dependency cycle. I could break the encoder config out. ALSO: it\u0027s a bit odd that \"audio_ENCODER_opus_config\" contains a DECODER config.",
+      "parentUuid": "6c6427fd_fa03d401",
+      "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2942a5f_f65ccb51",
         "filename": "api/audio_codecs/opus/audio_encoder_multi_channel_opus_config.h",
         "patchSetId": 9
@@ -30,6 +48,30 @@
       "writtenOn": "2019-04-15T12:27:27Z",
       "side": 1,
       "message": "I don\u0027t like this. :/\nI think you should just copy the bits you need into this struct instead. If that\u0027s not an option, perhaps inheritance is a better solution? Or at least choose a shorter name for the member. single_stream_config isn\u0027t strictly correct, is it. It\u0027s not a config you use for just a single stream, right?",
+      "range": {
+        "startLine": 23,
+        "startChar": 25,
+        "endLine": 23,
+        "endChar": 45
+      },
+      "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "532b3698_2a4ede75",
+        "filename": "api/audio_codecs/opus/audio_encoder_multi_channel_opus_config.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-16T15:26:08Z",
+      "side": 1,
+      "message": "I was also uncertain. Now I moved over all the settings that we use, it wasn\u0027t that many.",
+      "parentUuid": "d2942a5f_f65ccb51",
       "range": {
         "startLine": 23,
         "startChar": 25,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "b50f3f6d_667c3046",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-16T15:26:08Z",
+      "side": 1,
+      "message": "Yes, I think so. They are supposed to be used when we know the playback rate. I multiply these by the number of channels.",
+      "parentUuid": "67364201_5c8a72df",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 40
+      },
+      "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6373a685_fba7b947",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.cc",
         "patchSetId": 9
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "3d62fb42_54e95467",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-16T15:26:08Z",
+      "side": 1,
+      "message": "True, done.",
+      "parentUuid": "6373a685_fba7b947",
+      "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc1e0b9c_bcc7b0b2",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.h",
         "patchSetId": 9
@@ -96,6 +180,24 @@
       "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f67f15bf_9c2e51cf",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-16T15:26:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1e0b9c_bcc7b0b2",
+      "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +221,30 @@
       "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a63206f3_3c195a60",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-16T15:26:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03cf7056_bd88bd7b",
+      "range": {
+        "startLine": 46,
+        "startChar": 22,
+        "endLine": 46,
+        "endChar": 24
+      },
+      "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

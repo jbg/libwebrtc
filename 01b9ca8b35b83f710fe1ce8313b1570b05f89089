@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "97345fcb_5938d6ec",
+        "filename": "api/audio_codecs/opus/audio_decoder_multi_channel_opus.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-16T15:26:08Z",
+      "side": 0,
+      "message": "I moved the comment to the Encoder from the Decoder. It\u0027s not relevant for the Decoder, because the LFE setting should be applied on the Encoder.",
+      "parentUuid": "7cd084dd_dbddec96",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 9
+      },
+      "revId": "01b9ca8b35b83f710fe1ce8313b1570b05f89089",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "24922eff_70069c8c",
         "filename": "test/fuzzers/audio_decoder_multistream_opus_fuzzer.cc",
         "patchSetId": 9
@@ -36,6 +60,24 @@
       "writtenOn": "2019-04-15T12:27:27Z",
       "side": 0,
       "message": "Why are these decoder changes in this encoder CL?",
+      "revId": "01b9ca8b35b83f710fe1ce8313b1570b05f89089",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33b2d939_c5c3dd07",
+        "filename": "test/fuzzers/audio_decoder_multistream_opus_fuzzer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-16T15:26:08Z",
+      "side": 0,
+      "message": "Should I break them out to another CL? The change is very small.",
+      "parentUuid": "24922eff_70069c8c",
       "revId": "01b9ca8b35b83f710fe1ce8313b1570b05f89089",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
