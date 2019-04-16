@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "9f49be88_c30e12a8",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-04-16T08:00:18Z",
+      "side": 1,
+      "message": "I think so if the retransmit stats should only reflect 2) above.",
+      "parentUuid": "85b5c6c7_4edca9f5",
+      "revId": "08ac227a4339b9f3f1eb4c631f9430d34fc72a3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41b67840_cf81798c",
         "filename": "audio/channel_send.h",
         "patchSetId": 3
