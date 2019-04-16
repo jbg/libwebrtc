@@ -1286,11 +1286,15 @@ void EventLogAnalyzer::CreateSendSideBweSimulationGraph(Plot* plot) {
       const RtpPacketType& rtp_packet = *rtp_iterator->second;
       if (rtp_packet.rtp.header.extension.hasTransportSequenceNumber) {
         RTC_DCHECK(rtp_packet.rtp.header.extension.hasTransportSequenceNumber);
+        RtpPacketSendInfo packet_info;
+        packet_info.ssrc = rtp_packet.rtp.header.ssrc;
+        packet_info.transport_wide_sequence_number =
+            rtp_packet.rtp.header.extension.transportSequenceNumber;
+        packet_info.rtp_sequence_number = rtp_packet.rtp.header.sequenceNumber;
+        packet_info.has_rtp_sequence_number = true;
+        packet_info.length = rtp_packet.rtp.total_length;
         transport_feedback.AddPacket(
-            rtp_packet.rtp.header.ssrc,
-            rtp_packet.rtp.header.extension.transportSequenceNumber,
-            rtp_packet.rtp.total_length, PacedPacketInfo(),
-            Timestamp::us(rtp_packet.rtp.log_time_us()));
+            packet_info, 0u, Timestamp::us(rtp_packet.rtp.log_time_us()));
         rtc::SentPacket sent_packet(
             rtp_packet.rtp.header.extension.transportSequenceNumber,
             rtp_packet.rtp.log_time_us() / 1000);
