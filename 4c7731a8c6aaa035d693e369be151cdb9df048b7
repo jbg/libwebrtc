@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e8eafb65_381b285b",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-16T08:31:23Z",
+      "side": 1,
+      "message": "See the comment on `video_bwe_stats_` in the header.",
+      "parentUuid": "f9b653d7_2185d6af",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aed63852_8132fff9",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e1508d9_3bf6fdf5",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-16T08:31:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aed63852_8132fff9",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "62ebd2b7_2a26d309",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-16T08:31:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cf5b360_7ded0854",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29d04db1_012d66fd",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 8
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "d912c332_951a326a",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-16T08:31:23Z",
+      "side": 1,
+      "message": "I thought it was intentional for `test_case_name` because it is always a temporary but that should be fine. I have changed everything to `const\u0026` here as well.",
+      "parentUuid": "29d04db1_012d66fd",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c96ba4f_5d0791a5",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 8
@@ -81,6 +153,24 @@
       "writtenOn": "2019-04-15T11:34:41Z",
       "side": 1,
       "message": "missing information about threading. Above, things are clear with RTC_GUARDED_BY, but if that\u0027s absent, a comment about why guarded by is not used, would be good.",
+      "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66da7feb_39a9c4b8",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-04-16T08:31:23Z",
+      "side": 1,
+      "message": "Right, these are the implicit assumptions:\n\nThis is only written on the signaling thread (which in this framework it is shared between the 2 peer connections) [1] and it is read by the main thread only after the call is finished and the TQ used to poll stats has been destroyed [2].\n\nThis is probably assuming too much. What is the best practice in this case? Should I just document it or lower the assumptions and use a lock?\n\n[1] - https://cs.chromium.org/chromium/src/third_party/webrtc/pc/peer_connection.cc?l\u003d3884\u0026rcl\u003d668a42b84f3ad2afa704b4fc54da93105eff8197\n[2] - https://cs.chromium.org/chromium/src/third_party/webrtc/test/pc/e2e/peer_connection_quality_test.cc?l\u003d353-364\u0026rcl\u003d70f80e5962ca00c394190262928997c6cda5d603",
+      "parentUuid": "7c96ba4f_5d0791a5",
       "revId": "4c7731a8c6aaa035d693e369be151cdb9df048b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
