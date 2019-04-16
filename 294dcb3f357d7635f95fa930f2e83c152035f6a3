@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57ede2e2_af305215",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-16T11:29:13Z",
+      "side": 1,
+      "message": "Could this be simplified to avoid the wrapping code? It\u0027d be nice if it was just a struct with fields, making it easy to read and understand.",
+      "range": {
+        "startLine": 294,
+        "startChar": 7,
+        "endLine": 294,
+        "endChar": 24
+      },
+      "revId": "294dcb3f357d7635f95fa930f2e83c152035f6a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9886203f_e33be8d8",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-16T11:29:13Z",
+      "side": 1,
+      "message": "Generally I think it\u0027s good to avoid multiple contructor overloads, would it work to do:\nRtpPacketSendInfo {\nRtpPacketSendInfo() \u003d default;\n  uint32_t ssrc \u003d 0;\n  uint16_t transport_wide_sequence_number \u003d 0;\n  absl::optional\u003cuint16_t\u003e rtp_sequence_number;\n  size_t length \u003d 0;\n  PacedPacketInfo pacing_info;\n};\n\nAnd explicitely set the values where it\u0027s created (that makes it easy to search for where a value comes from compared to using constructor arguments).",
+      "range": {
+        "startLine": 297,
+        "startChar": 2,
+        "endLine": 297,
+        "endChar": 19
+      },
+      "revId": "294dcb3f357d7635f95fa930f2e83c152035f6a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
