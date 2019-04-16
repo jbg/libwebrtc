@@ -1204,8 +1204,8 @@ void RTPSender::AddPacketToTransportFeedback(
   }
 
   if (transport_feedback_observer_) {
-    transport_feedback_observer_->AddPacket(SSRC(), packet_id, packet_size,
-                                            pacing_info);
+    transport_feedback_observer_->AddPacket(RtpPacketSendInfo(
+        SSRC(), packet_id, packet.SequenceNumber(), packet_size, pacing_info));
   }
 }
 

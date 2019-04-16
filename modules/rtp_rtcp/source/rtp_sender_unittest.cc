@@ -69,9 +69,11 @@ const char kNoRid[] = "";
 const char kNoMid[] = "";
 
 using ::testing::_;
+using ::testing::AllOf;
 using ::testing::ElementsAre;
 using ::testing::ElementsAreArray;
 using ::testing::Invoke;
+using ::testing::Property;
 using ::testing::SizeIs;
 
 uint64_t ConvertMsToAbsSendTime(int64_t time_ms) {
@@ -162,8 +164,7 @@ class MockSendPacketObserver : public SendPacketObserver {
 
 class MockTransportFeedbackObserver : public TransportFeedbackObserver {
  public:
-  MOCK_METHOD4(AddPacket,
-               void(uint32_t, uint16_t, size_t, const PacedPacketInfo&));
+  MOCK_METHOD1(AddPacket, void(const RtpPacketSendInfo&));
   MOCK_METHOD1(OnTransportFeedback, void(const rtcp::TransportFeedback&));
   MOCK_CONST_METHOD0(GetTransportFeedbackVector, std::vector<PacketFeedback>());
 };
@@ -395,9 +396,16 @@ TEST_P(RtpSenderTestWithoutPacer,
       GetParam() ? sizeof(kPayloadData) + kRtpOverheadBytesPerPacket
                  : sizeof(kPayloadData);
 
-  EXPECT_CALL(feedback_observer_,
-              AddPacket(rtp_sender_->SSRC(), kTransportSequenceNumber,
-                        expected_bytes, PacedPacketInfo()))
+  EXPECT_CALL(
+      feedback_observer_,
+      AddPacket(AllOf(
+          Property(&RtpPacketSendInfo::get_ssrc, rtp_sender_->SSRC()),
+          Property(&RtpPacketSendInfo::get_transport_wide_sequence_number,
+                   kTransportSequenceNumber),
+          Property(&RtpPacketSendInfo::get_rtp_sequence_number,
+                   rtp_sender_->SequenceNumber()),
+          Property(&RtpPacketSendInfo::get_length, expected_bytes),
+          Property(&RtpPacketSendInfo::get_pacing_info, PacedPacketInfo()))))
       .Times(1);
   EXPECT_CALL(mock_overhead_observer,
               OnOverheadChanged(kRtpOverheadBytesPerPacket))
@@ -423,9 +431,15 @@ TEST_P(RtpSenderTestWithoutPacer, SendsPacketsWithTransportSequenceNumber) {
               OnSendPacket(kTransportSequenceNumber, _, _))
       .Times(1);
 
-  EXPECT_CALL(feedback_observer_,
-              AddPacket(rtp_sender_->SSRC(), kTransportSequenceNumber, _,
-                        PacedPacketInfo()))
+  EXPECT_CALL(
+      feedback_observer_,
+      AddPacket(AllOf(
+          Property(&RtpPacketSendInfo::get_ssrc, rtp_sender_->SSRC()),
+          Property(&RtpPacketSendInfo::get_transport_wide_sequence_number,
+                   kTransportSequenceNumber),
+          Property(&RtpPacketSendInfo::get_rtp_sequence_number,
+                   rtp_sender_->SequenceNumber()),
+          Property(&RtpPacketSendInfo::get_pacing_info, PacedPacketInfo()))))
       .Times(1);
 
   SendGenericPacket();
@@ -596,9 +610,15 @@ TEST_P(RtpSenderTest, SendsPacketsWithTransportSequenceNumber) {
   EXPECT_CALL(send_packet_observer_,
               OnSendPacket(kTransportSequenceNumber, _, _))
       .Times(1);
-  EXPECT_CALL(feedback_observer_,
-              AddPacket(rtp_sender_->SSRC(), kTransportSequenceNumber, _,
-                        PacedPacketInfo()))
+  EXPECT_CALL(
+      feedback_observer_,
+      AddPacket(AllOf(
+          Property(&RtpPacketSendInfo::get_ssrc, rtp_sender_->SSRC()),
+          Property(&RtpPacketSendInfo::get_transport_wide_sequence_number,
+                   kTransportSequenceNumber),
+          Property(&RtpPacketSendInfo::get_rtp_sequence_number,
+                   rtp_sender_->SequenceNumber()),
+          Property(&RtpPacketSendInfo::get_pacing_info, PacedPacketInfo()))))
       .Times(1);
 
   SendGenericPacket();
