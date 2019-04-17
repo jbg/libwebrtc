@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "dc9e0b2e_b90914ae",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-17T12:56:34Z",
+      "side": 1,
+      "message": "Oh right, of course. Yes, that should create multiple outbound-rtps too. I\u0027ll file a bug.",
+      "parentUuid": "688ec928_8ea493c4",
+      "revId": "62b6e079badc13e61bb4f4074c1d8cd9022a04db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d05415d2_fa3bd4dd",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 6
