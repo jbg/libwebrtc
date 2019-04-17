@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "ca3faa1c_6e3d68a7",
+        "filename": "call/audio_send_stream.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-17T11:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b051d5a3_1df85c39",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 12
+      },
+      "revId": "62b6e079badc13e61bb4f4074c1d8cd9022a04db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d426fc8_d3e48cea",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-17T11:52:16Z",
+      "side": 1,
+      "message": "Do we ever have more than one substream if we exclude rtx and flexfec? Do we ever have more than one ssrc?",
+      "revId": "62b6e079badc13e61bb4f4074c1d8cd9022a04db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d05415d2_fa3bd4dd",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 6
@@ -45,6 +86,30 @@
       "revId": "62b6e079badc13e61bb4f4074c1d8cd9022a04db",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c53516b_98265f48",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-17T11:52:16Z",
+      "side": 1,
+      "message": "If \"substream\" means \"different ssrc\" then yes, and these should be surfaced on different objects as per TODO. I guess to address this we need to return one stats object per webrtc::VideoSendStream::StreamStats. Not in this CL.\n\nIf guards added, done.",
+      "parentUuid": "d05415d2_fa3bd4dd",
+      "range": {
+        "startLine": 2280,
+        "startChar": 7,
+        "endLine": 2280,
+        "endChar": 20
+      },
+      "revId": "62b6e079badc13e61bb4f4074c1d8cd9022a04db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
