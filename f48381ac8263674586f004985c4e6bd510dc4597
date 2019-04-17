@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "648e07b7_08fa9356",
+        "filename": "api/audio_codecs/opus/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-04-17T12:32:20Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the weird thing. Why does the encoder config target include the decoder config header?",
+      "parentUuid": "34c4eb2d_2062020d",
+      "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2942a5f_f65ccb51",
         "filename": "api/audio_codecs/opus/audio_encoder_multi_channel_opus_config.h",
         "patchSetId": 9
@@ -81,6 +99,30 @@
       "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a8c3c4d_72702ccb",
+        "filename": "api/audio_codecs/opus/audio_encoder_multi_channel_opus_config.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-04-17T12:32:20Z",
+      "side": 1,
+      "message": "Neat!",
+      "parentUuid": "532b3698_2a4ede75",
+      "range": {
+        "startLine": 23,
+        "startChar": 25,
+        "endLine": 23,
+        "endChar": 45
+      },
+      "revId": "f48381ac8263674586f004985c4e6bd510dc4597",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {

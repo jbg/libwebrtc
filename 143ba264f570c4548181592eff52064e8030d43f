@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c3c8671_8fbde62a",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-04-17T12:32:20Z",
+      "side": 1,
+      "message": "Does it make sense to DCHECK this? Will we limit num_channels so that this can never fail? Is the bitrate supplied to Opus the total bitrate or per stream?",
+      "revId": "143ba264f570c4548181592eff52064e8030d43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -81,6 +81,24 @@
       "revId": "01b9ca8b35b83f710fe1ce8313b1570b05f89089",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9dd4e54_463d96ce",
+        "filename": "test/fuzzers/audio_decoder_multistream_opus_fuzzer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-04-17T12:32:20Z",
+      "side": 0,
+      "message": "I think this change, and removing the comment in audio_decoder_multi_channel_opus.cc ought to be in a separate CL. If this one gets reverted for some reason, those changes probably shouldn\u0027t. That said, the changes are small enough that I\u0027m not going to insist.",
+      "parentUuid": "33b2d939_c5c3dd07",
+      "revId": "01b9ca8b35b83f710fe1ce8313b1570b05f89089",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
