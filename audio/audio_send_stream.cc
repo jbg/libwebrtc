@@ -448,8 +448,7 @@ void AudioSendStream::DeliverRtcp(const uint8_t* packet, size_t length) {
 uint32_t AudioSendStream::OnBitrateUpdated(BitrateAllocationUpdate update) {
   // Pick a target bitrate between the constraints. Overrules the allocator if
   // it 1) allocated a bitrate of zero to disable the stream or 2) allocated a
-  // higher than max to allow for e.g. extra FEC. For now we ignore these the
-  // exceptions.
+  // higher than max to allow for e.g. extra FEC.
   auto constraints = GetMinMaxBitrateConstraints();
   update.target_bitrate.Clamp(constraints.min, constraints.max);
 

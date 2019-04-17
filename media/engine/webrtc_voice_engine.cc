@@ -978,7 +978,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
         absl::EqualsIgnoreCase(config_.send_codec_spec->format.name,
                                kOpusCodecName);
     if (is_opus) {
-      // The order of precedence (from lowest to highest is)
+      // The order of precedence, from lowest to highest is:
       // - a reasonable default of 32kbps min/max
       // - fixed target bitrate from codec spec
       // - bitrate configured in the rtp_parameter encodings settings
