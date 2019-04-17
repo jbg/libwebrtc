@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dba0fcd_c79be2a7",
+        "filename": "api/video_codecs/vp8_frame_buffer_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-17T10:26:31Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 44,
+        "startChar": 35,
+        "endLine": 44,
+        "endChar": 43
+      },
+      "revId": "319a11de13aa8d22082af6554db591e2f254200e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dae53767_fae98318",
+        "filename": "api/video_codecs/vp8_frame_buffer_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-17T10:26:31Z",
+      "side": 1,
+      "message": "nit: Both are true. In the screenshare layers case, the encoder is not aware of the temporal layer it is encoding and it is instead populated here, that\u0027s what it\u0027s a mutable pointer that\u0027s passed.",
+      "range": {
+        "startLine": 123,
+        "startChar": 32,
+        "endLine": 123,
+        "endChar": 39
+      },
+      "revId": "319a11de13aa8d22082af6554db591e2f254200e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
