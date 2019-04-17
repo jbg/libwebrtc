@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11ca2cc3_5745198e",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-17T14:02:16Z",
+      "side": 1,
+      "message": "Why did this change to load()?",
+      "range": {
+        "startLine": 414,
+        "startChar": 37,
+        "endLine": 414,
+        "endChar": 80
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ef619c2_6fc189e7",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1973,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-17T14:02:16Z",
+      "side": 1,
+      "message": "Can we figure this out before landing?",
+      "range": {
+        "startLine": 1973,
+        "startChar": 0,
+        "endLine": 1973,
+        "endChar": 73
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed47c1c0_54ed6e40",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-17T14:02:16Z",
+      "side": 1,
+      "message": "transport_sequence_number instead? I also saw transport_seq_no being used below... I would prefer to make them all the same.\n\nMaybe also move this to the top as it\u0027s not related to the regular rtp header, while ssrc is.",
+      "range": {
+        "startLine": 299,
+        "startChar": 11,
+        "endLine": 299,
+        "endChar": 41
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e06f4adb_c4098dd6",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1297,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-04-17T14:02:16Z",
+      "side": 1,
+      "message": "Comment on what this is",
+      "range": {
+        "startLine": 1297,
+        "startChar": 25,
+        "endLine": 1297,
+        "endChar": 27
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
