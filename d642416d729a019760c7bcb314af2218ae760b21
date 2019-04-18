@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11aeb3c7_ee33ca81",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-18T08:47:52Z",
+      "side": 1,
+      "message": "We also should add these stats into stats, returned by API of analyzer",
+      "range": {
+        "startLine": 118,
+        "startChar": 7,
+        "endLine": 118,
+        "endChar": 20
+      },
+      "revId": "d642416d729a019760c7bcb314af2218ae760b21",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
