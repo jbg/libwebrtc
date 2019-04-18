@@ -1016,8 +1016,6 @@ void VP9EncoderImpl::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
 
   vp9_info->first_frame_in_picture = first_frame_in_picture_;
   vp9_info->flexible_mode = is_flexible_mode_;
-  vp9_info->ss_data_available =
-      (pkt.data.frame.flags & VPX_FRAME_IS_KEY) ? true : false;
 
   if (pkt.data.frame.flags & VPX_FRAME_IS_KEY) {
     pics_since_key_ = 0;
@@ -1030,13 +1028,6 @@ void VP9EncoderImpl::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
 
   // Can't have keyframe with non-zero temporal layer.
   RTC_DCHECK(pics_since_key_ != 0 || layer_id.temporal_layer_id == 0);
-
-  if (ss_info_needed_ && layer_id.temporal_layer_id == 0 &&
-      layer_id.spatial_layer_id == 0) {
-    // Force SS info after the layers configuration has changed.
-    vp9_info->ss_data_available = true;
-    ss_info_needed_ = false;
-  }
 
   RTC_CHECK_GT(num_temporal_layers_, 0);
   RTC_CHECK_GT(num_active_spatial_layers_, 0);
@@ -1051,9 +1042,6 @@ void VP9EncoderImpl::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
     *spatial_idx = absl::nullopt;
   } else {
     *spatial_idx = layer_id.spatial_layer_id;
-  }
-  if (layer_id.spatial_layer_id != 0) {
-    vp9_info->ss_data_available = false;
   }
 
   // TODO(asapersson): this info has to be obtained from the encoder.
@@ -1099,6 +1087,14 @@ void VP9EncoderImpl::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
   }
 
   vp9_info->inter_pic_predicted = (!is_key_pic && vp9_info->num_ref_pics > 0);
+
+  const bool intra_frame = is_key_pic && !vp9_info->inter_layer_predicted;
+  if (intra_frame || (ss_info_needed_ && layer_id.temporal_layer_id == 0 &&
+                      layer_id.spatial_layer_id == 0)) {
+    // Force SS info after the layers configuration has changed.
+    vp9_info->ss_data_available = true;
+    ss_info_needed_ = false;
+  }
 
   if (vp9_info->ss_data_available) {
     vp9_info->spatial_layer_resolution_present = true;
