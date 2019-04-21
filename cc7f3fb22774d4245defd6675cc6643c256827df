@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d784ddb5_1168d00f",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-21T16:28:05Z",
+      "side": 1,
+      "message": "In the previous case, the implicit conversion from atomic\u003csize_t\u003e to was clear, but here it won\u0027t compile: \n\u003e conditional expression is ambiguous; \u0027std::atomic\u003csize_t\u003e\u0027 (aka \u0027atomic\u003cunsigned long\u003e\u0027) can be converted to \u0027size_t\u0027 (aka \u0027unsigned long\u0027) and vice versa\nI think an explicit load() is more explicit anyway.",
+      "parentUuid": "11ca2cc3_5745198e",
+      "range": {
+        "startLine": 414,
+        "startChar": 37,
+        "endLine": 414,
+        "endChar": 80
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ef619c2_6fc189e7",
         "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "607e3286_f2f710cc",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1973,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-21T16:28:05Z",
+      "side": 1,
+      "message": "I\u0027ll ask terelius@ when he is back, but as it is this CL does not change the logic, which is how I would like it. Let\u0027s keep that in a separate CL from the refactoring.",
+      "parentUuid": "9ef619c2_6fc189e7",
+      "range": {
+        "startLine": 1973,
+        "startChar": 0,
+        "endLine": 1973,
+        "endChar": 73
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "050fc11e_6d8a5e1c",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-21T16:28:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed47c1c0_54ed6e40",
+      "range": {
+        "startLine": 299,
+        "startChar": 11,
+        "endLine": 299,
+        "endChar": 41
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e06f4adb_c4098dd6",
         "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
         "patchSetId": 6
@@ -91,6 +163,30 @@
       "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "040c3b42_ae286b42",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1297,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-21T16:28:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e06f4adb_c4098dd6",
+      "range": {
+        "startLine": 1297,
+        "startChar": 25,
+        "endLine": 1297,
+        "endChar": 27
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
