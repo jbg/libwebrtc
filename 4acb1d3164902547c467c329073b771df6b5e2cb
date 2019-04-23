@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c5e6859_811c6cd7",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-23T22:11:17Z",
+      "side": 1,
+      "message": "nit: could bundle with the above as an array, like https://cs.chromium.org/chromium/src/third_party/webrtc/p2p/base/p2p_transport_channel_unittest.cc?l\u003d65",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "209deaaf_e3f2449b",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-23T22:11:17Z",
+      "side": 1,
+      "message": "nit: nullptr /* observer_in */",
+      "range": {
+        "startLine": 244,
+        "startChar": 44,
+        "endLine": 244,
+        "endChar": 51
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb679aae_4bc15211",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-23T22:11:17Z",
+      "side": 1,
+      "message": "Do we need this interface for the current test on mDNS?",
+      "range": {
+        "startLine": 249,
+        "startChar": 26,
+        "endLine": 249,
+        "endChar": 38
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26202cf3_13117e05",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-23T22:11:17Z",
+      "side": 1,
+      "message": "nit: could do a similar absl::make_unique",
+      "range": {
+        "startLine": 275,
+        "startChar": 49,
+        "endLine": 275,
+        "endChar": 63
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eea7933_512b23e3",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-23T22:11:17Z",
+      "side": 1,
+      "message": "How the interface is assigned is unclear from the signature of these creation methods. Some of them use 1.1.1.1, while this one uses 2.2.2.2. This could lead to subtle test-only bugs if we add more tests involving both sides, for example if we have two peers with mDNS enabled. I suggest let the test body provide the interface, like GetNextAvailableLocalAddress (a better solution could be like the integration test to provide two pcs at the same time to coordinate this, e.g. CreatePcWrapper*s*; agreed this set of tests was only focused on a single pc historically). If the pool is exhausted (currently two of them), could fail the test.",
+      "range": {
+        "startLine": 314,
+        "startChar": 41,
+        "endLine": 314,
+        "endChar": 60
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "459c4640_f2224415",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-23T22:11:17Z",
+      "side": 1,
+      "message": "nit: maybe put it in a way about the lifetime. The network manager/port allocator is supposed to outlive the peer connection.",
+      "range": {
+        "startLine": 342,
+        "startChar": 2,
+        "endLine": 342,
+        "endChar": 4
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
