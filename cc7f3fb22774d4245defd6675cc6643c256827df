@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "9ef50018_8f26693e",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1973,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-04-23T11:51:41Z",
+      "side": 1,
+      "message": "I don\u0027t think we\u0027re adding overhead here, but srte@ is changing this part of the code anyway. I\u0027ll discuss with him.",
+      "parentUuid": "8ef70cd4_8b9f37c3",
+      "range": {
+        "startLine": 1973,
+        "startChar": 0,
+        "endLine": 1973,
+        "endChar": 73
+      },
+      "revId": "cc7f3fb22774d4245defd6675cc6643c256827df",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed47c1c0_54ed6e40",
         "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
         "patchSetId": 6
