@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f7a7ac0_b395c0ea",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-04-23T13:11:49Z",
+      "side": 1,
+      "message": "this can be skipped if send_key_frame\u003d\u003dtrue.",
+      "range": {
+        "startLine": 891,
+        "startChar": 0,
+        "endLine": 902,
+        "endChar": 3
+      },
+      "revId": "38b92dd1b76669e8a1a57c212a87b2a47a29db6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
