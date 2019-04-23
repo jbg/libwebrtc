@@ -141,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "648523bd_f48bf628",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-23T22:43:21Z",
+      "side": 1,
+      "message": "Good point. AddInterface does not have to be done before creating the pc. Doing it before SLD should be sufficient IIRC.",
+      "parentUuid": "87b84b9c_cfa038c5",
+      "range": {
+        "startLine": 314,
+        "startChar": 41,
+        "endLine": 314,
+        "endChar": 60
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "459c4640_f2224415",
         "filename": "pc/peer_connection_histogram_unittest.cc",
         "patchSetId": 2
