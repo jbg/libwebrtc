@@ -16,6 +16,24 @@
       "revId": "143ba264f570c4548181592eff52064e8030d43f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "522e24a0_ffeb7f60",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5124
+      },
+      "writtenOn": "2019-04-23T11:20:36Z",
+      "side": 1,
+      "message": "Yes, it fails if we have too many channels. The bitrate passed to opus is the total; not per stream. I think the DCHECK_GE makes sense. Not sure what happens if one asks Opus to encode 254 high-quality streams.",
+      "parentUuid": "9c3c8671_8fbde62a",
+      "revId": "143ba264f570c4548181592eff52064e8030d43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
