@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7302e764_9121f246",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-23T07:55:47Z",
+      "side": 1,
+      "message": "Please set ss_data_available to false here or add an else clause to the if below. As it\u0027s now it can be uninitialized by this method.",
+      "range": {
+        "startLine": 1094,
+        "startChar": 0,
+        "endLine": 1094,
+        "endChar": 2
+      },
+      "revId": "d219e9e5e2bfc3f149b4849b7083fd6721213c0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feb631c1_b2fb6503",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-23T07:55:47Z",
+      "side": 1,
+      "message": "Since now there\u0027s only a single place where ss_data_available is set to true, you can merge these two if statements (set ss_data_avaialbe and write data in a single if).",
+      "range": {
+        "startLine": 1099,
+        "startChar": 2,
+        "endLine": 1101,
+        "endChar": 36
+      },
+      "revId": "d219e9e5e2bfc3f149b4849b7083fd6721213c0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
