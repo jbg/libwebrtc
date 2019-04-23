@@ -22,6 +22,30 @@
       "revId": "38b92dd1b76669e8a1a57c212a87b2a47a29db6d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8025e280_e3d2117e",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-04-23T13:30:14Z",
+      "side": 1,
+      "message": "I want to guarantee always calling NextFrameConfig for timestamp TS before calling OnEncodeDone for that TS.",
+      "parentUuid": "1f7a7ac0_b395c0ea",
+      "range": {
+        "startLine": 891,
+        "startChar": 0,
+        "endLine": 902,
+        "endChar": 3
+      },
+      "revId": "38b92dd1b76669e8a1a57c212a87b2a47a29db6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
