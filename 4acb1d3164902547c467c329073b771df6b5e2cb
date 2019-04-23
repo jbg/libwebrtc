@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "77a7a024_69e48466",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8393
+      },
+      "writtenOn": "2019-04-23T22:57:14Z",
+      "side": 1,
+      "message": "This should be MDNS_CANDIDATE_COLLECTED.\n\nBut I am not sure this approach is going to work - in cases where mDNS registration fails, we won\u0027t get a mDNS candidate from that peer. I think we probably need to do something like PRIVATE_REMOTE_CANDIDATE_ADDED, and use presence of private candidates to determine if mDNS is on. \n\n(I assume that PRIVATE_ only handles private IPv4 addresses, so that creates its own set of problems, but that\u0027s still probably the best option).",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6c5e6859_811c6cd7",
         "filename": "pc/peer_connection_histogram_unittest.cc",
         "patchSetId": 2
