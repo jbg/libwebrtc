@@ -22,6 +22,30 @@
       "revId": "44d2afcd32695078a4f41f32aea4c7550ee1ac91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0c41271_bab7c879",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-04-23T12:54:47Z",
+      "side": 1,
+      "message": "thank you!\n\nyep, I still want to note why I\u0027m doing it, but you\u0027re right it doesn\u0027t have to be in the title of the description",
+      "parentUuid": "c2590069_610b7f63",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 92
+      },
+      "revId": "44d2afcd32695078a4f41f32aea4c7550ee1ac91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
