@@ -176,21 +176,20 @@ void AecDumpImpl::WriteRuntimeSetting(
   audioproc::RuntimeSetting* setting = event->mutable_runtime_setting();
   switch (runtime_setting.type()) {
     case AudioProcessing::RuntimeSetting::Type::kCapturePreGain: {
-      float x;
-      runtime_setting.GetFloat(&x);
-      setting->set_capture_pre_gain(x);
+      setting->set_capture_pre_gain(runtime_setting.GetFloat());
       break;
     }
     case AudioProcessing::RuntimeSetting::Type::
         kCustomRenderProcessingRuntimeSetting: {
-      float x;
-      runtime_setting.GetFloat(&x);
-      setting->set_custom_render_processing_setting(x);
+      setting->set_custom_render_processing_setting(runtime_setting.GetFloat());
       break;
     }
     case AudioProcessing::RuntimeSetting::Type::kCaptureCompressionGain:
       // Runtime AGC1 compression gain is ignored.
       // TODO(http://bugs.webrtc.org/10432): Store compression gain in aecdumps.
+      break;
+    case AudioProcessing::RuntimeSetting::Type::kCaptureFixedPostGain:
+      setting->set_capture_fixed_post_gain(runtime_setting.GetFloat());
       break;
     case AudioProcessing::RuntimeSetting::Type::kNotSpecified:
       RTC_NOTREACHED();
