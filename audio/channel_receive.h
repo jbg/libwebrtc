@@ -27,6 +27,7 @@
 #include "call/rtp_packet_sink_interface.h"
 #include "call/syncable.h"
 #include "modules/audio_coding/include/audio_coding_module.h"
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 
 // TODO(solenberg, nisse): This file contains a few NOLINT marks, to silence
 // warnings about use of unsigned short.
@@ -63,6 +64,8 @@ struct CallReceiveStatistics {
   // local clock when it was received - not the RTP timestamp of that packet.
   // https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats-lastpacketreceivedtimestamp
   absl::optional<int64_t> last_packet_received_timestamp_ms;
+  // TODO: Comment
+  std::vector<ReportBlockWithRtt> report_blocks;
 };
 
 namespace voe {

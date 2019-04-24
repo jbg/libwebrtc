@@ -779,6 +779,10 @@ CallReceiveStatistics ChannelReceive::GetRTCPStatistics() const {
     rtc::CritScope lock(&ts_stats_lock_);
     stats.capture_start_ntp_time_ms_ = capture_start_ntp_time_ms_;
   }
+
+  // --- RTCP
+  stats.report_blocks = _rtpRtcpModule->GetReportBlocksWithRtt();
+
   return stats;
 }
 

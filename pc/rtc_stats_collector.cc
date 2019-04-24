@@ -250,6 +250,10 @@ void SetInboundRTPStreamStatsFromVoiceReceiverInfo(
             *voice_receiver_info.last_packet_received_timestamp_ms) /
         rtc::kNumMillisecsPerSec;
   }
+  // LOL
+  for (const auto& report_block : voice_receiver_info.report_blocks) {
+    printf("RTT: %ld\n", report_block.last_rtt_ms);
+  }
 }
 
 void SetInboundRTPStreamStatsFromVideoReceiverInfo(

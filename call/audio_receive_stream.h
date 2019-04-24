@@ -25,6 +25,7 @@
 #include "api/rtp_receiver_interface.h"
 #include "api/scoped_refptr.h"
 #include "call/rtp_config.h"
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 
 namespace webrtc {
 class AudioSinkInterface;
@@ -79,6 +80,8 @@ class AudioReceiveStream {
     absl::optional<int64_t> last_packet_received_timestamp_ms;
     uint64_t jitter_buffer_flushes = 0;
     double relative_packet_arrival_delay_seconds = 0.0;
+    // TODO: Comment
+    std::vector<ReportBlockWithRtt> report_blocks;
   };
 
   struct Config {

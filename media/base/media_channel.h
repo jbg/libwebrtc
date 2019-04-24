@@ -37,6 +37,7 @@
 #include "media/base/media_constants.h"
 #include "media/base/stream_params.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "rtc_base/async_packet_socket.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/copy_on_write_buffer.h"
@@ -514,6 +515,8 @@ struct VoiceReceiverInfo : public MediaReceiverInfo {
   uint64_t delayed_packet_outage_samples = 0;
   // Arrival delay of received audio packets.
   double relative_packet_arrival_delay_seconds = 0.0;
+  // TODO: Comment
+  std::vector<webrtc::ReportBlockWithRtt> report_blocks;
 };
 
 struct VideoSenderInfo : public MediaSenderInfo {

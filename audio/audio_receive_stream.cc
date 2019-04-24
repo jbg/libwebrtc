@@ -203,6 +203,7 @@ webrtc::AudioReceiveStream::Stats AudioReceiveStream::GetStats() const {
   stats.audio_level = channel_receive_->GetSpeechOutputLevelFullRange();
   stats.total_output_energy = channel_receive_->GetTotalOutputEnergy();
   stats.total_output_duration = channel_receive_->GetTotalOutputDuration();
+  stats.report_blocks = std::move(call_stats.report_blocks);
 
   // Get jitter buffer and total delay (alg + jitter + playout) stats.
   auto ns = channel_receive_->GetNetworkStatistics();

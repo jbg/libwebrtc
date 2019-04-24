@@ -2274,6 +2274,7 @@ bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
     rinfo.jitter_buffer_flushes = stats.jitter_buffer_flushes;
     rinfo.relative_packet_arrival_delay_seconds =
         stats.relative_packet_arrival_delay_seconds;
+    rinfo.report_blocks = std::move(stats.report_blocks);
 
     info->receivers.push_back(rinfo);
   }

@@ -108,16 +108,6 @@ struct RTCPReceiver::RrtrInformation {
   uint32_t local_receive_mid_ntp_time;
 };
 
-struct RTCPReceiver::ReportBlockWithRtt {
-  RTCPReportBlock report_block;
-
-  int64_t last_rtt_ms = 0;
-  int64_t min_rtt_ms = 0;
-  int64_t max_rtt_ms = 0;
-  int64_t sum_rtt_ms = 0;
-  size_t num_rtts = 0;
-};
-
 struct RTCPReceiver::LastFirStatus {
   LastFirStatus(int64_t now_ms, uint8_t sequence_number)
       : request_ms(now_ms), sequence_number(sequence_number) {}
@@ -309,6 +299,17 @@ int32_t RTCPReceiver::StatisticsReceived(
     for (const auto& report : reports_per_receiver.second)
       receive_blocks->push_back(report.second.report_block);
   return 0;
+}
+
+std::vector<ReportBlockWithRtt> RTCPReceiver::GetReportBlocksWithRtt() const {
+  std::vector<ReportBlockWithRtt> result;
+  {
+    rtc::CritScope lock(&rtcp_receiver_lock_);
+    for (const auto& reports_per_receiver : received_report_blocks_)
+      for (const auto& report : reports_per_receiver.second)
+        result.push_back(report.second);
+  }
+  return result;
 }
 
 bool RTCPReceiver::ParseCompoundPacket(const uint8_t* packet_begin,

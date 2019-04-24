@@ -595,6 +595,11 @@ int32_t ModuleRtpRtcpImpl::RemoteRTCPStat(
   return rtcp_receiver_.StatisticsReceived(receive_blocks);
 }
 
+std::vector<ReportBlockWithRtt> ModuleRtpRtcpImpl::GetReportBlocksWithRtt()
+    const {
+  return rtcp_receiver_.GetReportBlocksWithRtt();
+}
+
 // (REMB) Receiver Estimated Max Bitrate.
 void ModuleRtpRtcpImpl::SetRemb(int64_t bitrate_bps,
                                 std::vector<uint32_t> ssrcs) {

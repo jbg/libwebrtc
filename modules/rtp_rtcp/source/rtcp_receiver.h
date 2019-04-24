@@ -94,6 +94,8 @@ class RTCPReceiver {
 
   // Get statistics.
   int32_t StatisticsReceived(std::vector<RTCPReportBlock>* receiveBlocks) const;
+  // TODO: Comment
+  std::vector<ReportBlockWithRtt> GetReportBlocksWithRtt() const;
 
   // Returns true if we haven't received an RTCP RR for several RTCP
   // intervals, but only triggers true once.
@@ -119,7 +121,6 @@ class RTCPReceiver {
   struct PacketInformation;
   struct TmmbrInformation;
   struct RrtrInformation;
-  struct ReportBlockWithRtt;
   struct LastFirStatus;
   // RTCP report blocks mapped by remote SSRC.
   using ReportBlockInfoMap = std::map<uint32_t, ReportBlockWithRtt>;
