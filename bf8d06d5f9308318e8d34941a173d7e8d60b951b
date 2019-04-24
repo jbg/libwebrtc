@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "761fb1e1_3e742988",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-24T08:42:11Z",
+      "side": 1,
+      "message": "This is a no-op since test_case_name is a const reference; the assignment will be a copy anyway.\n\nEither pass the std::string by value (if you want to be able to move from it) or use absl::string_view (if you don\u0027t want the caller to have to create a std::string). I would suggest the latter if you don\u0027t have a strong opinion.",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "bf8d06d5f9308318e8d34941a173d7e8d60b951b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
