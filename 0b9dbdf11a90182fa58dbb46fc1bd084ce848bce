@@ -22,6 +22,30 @@
       "revId": "0b9dbdf11a90182fa58dbb46fc1bd084ce848bce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03ae0655_760b75ff",
+        "filename": "sdk/objc/api/peerconnection/RTCEncodedImage+Private.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2019-04-24T15:15:44Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "6c479996_90c188db",
+      "range": {
+        "startLine": 36,
+        "startChar": 26,
+        "endLine": 36,
+        "endChar": 38
+      },
+      "revId": "0b9dbdf11a90182fa58dbb46fc1bd084ce848bce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
