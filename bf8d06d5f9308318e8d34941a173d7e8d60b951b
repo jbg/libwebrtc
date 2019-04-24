@@ -22,6 +22,30 @@
       "revId": "bf8d06d5f9308318e8d34941a173d7e8d60b951b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec42b8ef_af577cd3",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-04-24T09:09:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "761fb1e1_3e742988",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "bf8d06d5f9308318e8d34941a173d7e8d60b951b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
