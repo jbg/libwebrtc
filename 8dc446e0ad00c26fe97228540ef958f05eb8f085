@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fe65a1e_792c3fc6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-24T16:30:34Z",
+      "side": 1,
+      "message": "nit: Please edit the commit message for the additional changes about RFC6598 addresses.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "8dc446e0ad00c26fe97228540ef958f05eb8f085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b11fe008_b3e8dba7",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-24T16:30:34Z",
+      "side": 1,
+      "message": "if returning a raw pointer from NewFakeNetwork(), the linter requires auto*",
+      "range": {
+        "startLine": 268,
+        "startChar": 4,
+        "endLine": 268,
+        "endChar": 8
+      },
+      "revId": "8dc446e0ad00c26fe97228540ef958f05eb8f085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b7b3eb7_f0560774",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-24T16:30:34Z",
+      "side": 1,
+      "message": "nit: \u003d make_unique",
+      "range": {
+        "startLine": 310,
+        "startChar": 21,
+        "endLine": 310,
+        "endChar": 26
+      },
+      "revId": "8dc446e0ad00c26fe97228540ef958f05eb8f085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec9bd801_0fb2da7e",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-24T16:30:34Z",
+      "side": 1,
+      "message": "Suggest we void new in the new code. Could emplace_back(make_unique()) and then return fake_networks_.back().get()",
+      "range": {
+        "startLine": 341,
+        "startChar": 25,
+        "endLine": 341,
+        "endChar": 28
+      },
+      "revId": "8dc446e0ad00c26fe97228540ef958f05eb8f085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eed0404c_be05c2bf",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-24T16:30:34Z",
+      "side": 1,
+      "message": "It\u0027s up to you: like Steve mentioned, we could do something like the ice_tests.cc, where CreatePc and AddInterface are separated and we explicitly AddInterface in the test. We are not testing if gathered candidates or the selected routes match the given interfaces in this set of tests, so being explicit there is not a must IMHO.",
+      "range": {
+        "startLine": 346,
+        "startChar": 21,
+        "endLine": 346,
+        "endChar": 37
+      },
+      "revId": "8dc446e0ad00c26fe97228540ef958f05eb8f085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f0fb95d_08aa858d",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-24T16:30:34Z",
+      "side": 1,
+      "message": "ASSERT_",
+      "range": {
+        "startLine": 347,
+        "startChar": 4,
+        "endLine": 347,
+        "endChar": 10
+      },
+      "revId": "8dc446e0ad00c26fe97228540ef958f05eb8f085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f7f53db_d930499f",
+        "filename": "rtc_base/ip_address.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-24T16:30:34Z",
+      "side": 1,
+      "message": "nit: a shared",
+      "range": {
+        "startLine": 161,
+        "startChar": 12,
+        "endLine": 161,
+        "endChar": 30
+      },
+      "revId": "8dc446e0ad00c26fe97228540ef958f05eb8f085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "646bf1da_04da9c63",
+        "filename": "rtc_base/ip_address_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-04-24T16:30:34Z",
+      "side": 1,
+      "message": "Do we want to also test IPv6? Though this case is logically trivial.",
+      "range": {
+        "startLine": 197,
+        "startChar": 5,
+        "endLine": 197,
+        "endChar": 9
+      },
+      "revId": "8dc446e0ad00c26fe97228540ef958f05eb8f085",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
