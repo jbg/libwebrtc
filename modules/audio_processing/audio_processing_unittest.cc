@@ -2339,8 +2339,21 @@ TEST(RuntimeSettingTest, TestCapturePreGain) {
   {
     auto s = AudioProcessing::RuntimeSetting::CreateCapturePreGain(1.25f);
     EXPECT_EQ(Type::kCapturePreGain, s.type());
-    float v;
-    s.GetFloat(&v);
+    float v = s.GetFloat();
+    EXPECT_EQ(1.25f, v);
+  }
+
+#if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
+  EXPECT_DEATH(AudioProcessing::RuntimeSetting::CreateCapturePreGain(0.1f), "");
+#endif
+}
+
+TEST(RuntimeSettingTest, TestCaptureFixedPostGain) {
+  using Type = AudioProcessing::RuntimeSetting::Type;
+  {
+    auto s = AudioProcessing::RuntimeSetting::CreateCaptureFixedPostGain(1.25f);
+    EXPECT_EQ(Type::kCaptureFixedPostGain, s.type());
+    float v = s.GetFloat();
     EXPECT_EQ(1.25f, v);
   }
 
