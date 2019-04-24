@@ -187,8 +187,7 @@ bool AudioProcessingImpl::ApmSubmoduleStates::Update(
   changed |= (noise_suppressor_enabled != noise_suppressor_enabled_);
   changed |=
       (adaptive_gain_controller_enabled != adaptive_gain_controller_enabled_);
-  changed |=
-      (gain_controller2_enabled != gain_controller2_enabled_);
+  changed |= (gain_controller2_enabled != gain_controller2_enabled_);
   changed |= (pre_amplifier_enabled_ != pre_amplifier_enabled);
   changed |= (echo_controller_enabled != echo_controller_enabled_);
   changed |= (level_estimator_enabled != level_estimator_enabled_);
@@ -861,6 +860,7 @@ void AudioProcessingImpl::SetRuntimeSetting(RuntimeSetting setting) {
       return;
     case RuntimeSetting::Type::kCapturePreGain:
     case RuntimeSetting::Type::kCaptureCompressionGain:
+    case RuntimeSetting::Type::kCaptureFixedDigitalGain:
       capture_runtime_settings_enqueuer_.Enqueue(setting);
       return;
   }
@@ -996,6 +996,16 @@ void AudioProcessingImpl::HandleCaptureRuntimeSettings() {
         RTC_DCHECK_EQ(kNoError, error);
         break;
       }
+      case RuntimeSetting::Type::kCaptureFixedDigitalGain: {
+        if (config_.gain_controller2.enabled) {
+          float value;
+          setting.GetFloat(&value);
+          config_.gain_controller2.fixed_digital.gain_db = value;
+          private_submodules_->gain_controller2->ApplyConfig(
+              config_.gain_controller2);
+        }
+        break;
+      }
       case RuntimeSetting::Type::kCustomRenderProcessingRuntimeSetting:
         RTC_NOTREACHED();
         break;
@@ -1018,8 +1028,9 @@ void AudioProcessingImpl::HandleRenderRuntimeSettings() {
           private_submodules_->render_pre_processor->SetRuntimeSetting(setting);
         }
         break;
-      case RuntimeSetting::Type::kCapturePreGain:          // fall-through
-      case RuntimeSetting::Type::kCaptureCompressionGain:  // fall-through
+      case RuntimeSetting::Type::kCapturePreGain:           // fall-through
+      case RuntimeSetting::Type::kCaptureCompressionGain:   // fall-through
+      case RuntimeSetting::Type::kCaptureFixedDigitalGain:  // fall-through
       case RuntimeSetting::Type::kNotSpecified:
         RTC_NOTREACHED();
         break;
@@ -1505,7 +1516,9 @@ int AudioProcessingImpl::AnalyzeReverseStream(const float* const* data,
   TRACE_EVENT0("webrtc", "AudioProcessing::AnalyzeReverseStream_ChannelLayout");
   rtc::CritScope cs(&crit_render_);
   const StreamConfig reverse_config = {
-      sample_rate_hz, ChannelsFromLayout(layout), LayoutHasKeyboard(layout),
+      sample_rate_hz,
+      ChannelsFromLayout(layout),
+      LayoutHasKeyboard(layout),
   };
   if (samples_per_channel != reverse_config.num_frames()) {
     return kBadDataLengthError;
@@ -2048,6 +2061,8 @@ void AudioProcessingImpl::WriteAecDumpConfigMessage(bool forced) {
   apm_config.agc_limiter_enabled =
       public_submodules_->gain_control->is_limiter_enabled();
   apm_config.noise_robust_agc_enabled = constants_.use_experimental_agc;
+
+  apm_config.agc2_enabled = config_.gain_controller2.enabled;
 
   apm_config.hpf_enabled = config_.high_pass_filter.enabled;
 

@@ -29,6 +29,7 @@ bool InternalAPMConfig::operator==(const InternalAPMConfig& other) {
          aecm_routing_mode == other.aecm_routing_mode &&
          agc_enabled == other.agc_enabled && agc_mode == other.agc_mode &&
          agc_limiter_enabled == other.agc_limiter_enabled &&
+         agc2_enabled == other.agc2_enabled &&
          hpf_enabled == other.hpf_enabled && ns_enabled == other.ns_enabled &&
          ns_level == other.ns_level &&
          transient_suppression_enabled == other.transient_suppression_enabled &&

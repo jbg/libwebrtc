@@ -237,6 +237,10 @@ void DebugDumpReplayer::ConfigureApm(const audioproc::Config& msg) {
       static_cast<AudioProcessing::Config::NoiseSuppression::Level>(
           msg.ns_level());
 
+  // AGC2 configs.
+  RTC_CHECK(msg.has_agc2_enabled());
+  apm_config.gain_controller2.enabled = msg.agc2_enabled();
+
   apm_->ApplyConfig(apm_config);
 
   // AGC configs.

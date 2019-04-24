@@ -6,7 +6,7 @@ package webrtc.audioproc;
 // when any of the fields are changed.
 message Init {
   optional int32 sample_rate = 1;
-  optional int32 device_sample_rate = 2 [deprecated=true];
+  optional int32 device_sample_rate = 2 [deprecated = true];
   optional int32 num_input_channels = 3;
   optional int32 num_output_channels = 4;
   optional int32 num_reverse_channels = 5;
@@ -76,13 +76,16 @@ message Config {
   // Pre amplifier.
   optional bool pre_amplifier_enabled = 19;
   optional float pre_amplifier_fixed_gain_factor = 20;
+  // AGC2 controller.
+  optional bool agc2_enabled = 21;
 
-  // Next field number 21.
+  // Next field number 22.
 }
 
 message RuntimeSetting {
   optional float capture_pre_gain = 1;
   optional float custom_render_processing_setting = 2;
+  optional float capture_fixed_digital_gain_db = 3;
 }
 
 message Event {

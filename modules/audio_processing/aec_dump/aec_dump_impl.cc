@@ -38,6 +38,8 @@ void CopyFromConfigToEvent(const webrtc::InternalAPMConfig& config,
   pb_cfg->set_agc_limiter_enabled(config.agc_limiter_enabled);
   pb_cfg->set_noise_robust_agc_enabled(config.noise_robust_agc_enabled);
 
+  pb_cfg->set_agc2_enabled(config.agc2_enabled);
+
   pb_cfg->set_hpf_enabled(config.hpf_enabled);
 
   pb_cfg->set_ns_enabled(config.ns_enabled);
@@ -191,6 +193,11 @@ void AecDumpImpl::WriteRuntimeSetting(
     case AudioProcessing::RuntimeSetting::Type::kCaptureCompressionGain:
       // Runtime AGC1 compression gain is ignored.
       // TODO(http://bugs.webrtc.org/10432): Store compression gain in aecdumps.
+      break;
+    case AudioProcessing::RuntimeSetting::Type::kCaptureFixedDigitalGain:
+      float x;
+      runtime_setting.GetFloat(&x);
+      setting->set_capture_fixed_digital_gain_db(x);
       break;
     case AudioProcessing::RuntimeSetting::Type::kNotSpecified:
       RTC_NOTREACHED();

@@ -12,6 +12,7 @@
 #define MODULES_AUDIO_PROCESSING_INCLUDE_AEC_DUMP_H_
 
 #include <stdint.h>
+
 #include <string>
 
 #include "api/audio/audio_frame.h"
@@ -44,6 +45,7 @@ struct InternalAPMConfig {
   bool agc_enabled = false;
   int agc_mode = 0;
   bool agc_limiter_enabled = false;
+  bool agc2_enabled = false;
   bool hpf_enabled = false;
   bool ns_enabled = false;
   int ns_level = 0;

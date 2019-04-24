@@ -765,6 +765,7 @@ if (rtc_include_tests) {
         ":audioproc_debug_proto",
         ":audioproc_protobuf_utils",
         "../../rtc_base:checks",
+        "../../rtc_base:logging",
       ]
     }
   }
