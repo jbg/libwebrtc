@@ -272,4 +272,95 @@ const ContentGroup* SessionDescription::GetGroupByName(
   return NULL;
 }
 
+// DataContentDescription shenanigans
+DataContentDescription* RtpDataContentDescription::as_data() {
+  if (!shim_) {
+    shim_.reset(new DataContentDescription(this));
+  }
+  return shim_.get();
+}
+
+const DataContentDescription* RtpDataContentDescription::as_data() const {
+  return const_cast<RtpDataContentDescription*>(this)->as_data();
+}
+
+DataContentDescription* SctpDataContentDescription::as_data() {
+  if (!shim_) {
+    shim_.reset(new DataContentDescription(this));
+  }
+  return shim_.get();
+}
+
+const DataContentDescription* SctpDataContentDescription::as_data() const {
+  return const_cast<SctpDataContentDescription*>(this)->as_data();
+}
+
+DataContentDescription::DataContentDescription() : is_sctp_(false) {
+  RTC_CHECK(false) << "Parameterless shim should not be created";
+}
+
+DataContentDescription::DataContentDescription(
+    SctpDataContentDescription* wrapped)
+    : owner_(wrapped), is_sctp_(true) {}
+
+DataContentDescription::DataContentDescription(
+    RtpDataContentDescription* wrapped)
+    : owner_(wrapped), is_sctp_(false) {}
+
+RtpDataContentDescription* DataContentDescription::as_rtp_data() {
+  if (is_sctp_) {
+    return nullptr;
+  }
+  return owner_->as_rtp_data();
+}
+
+void DataContentDescription::set_protocol(const std::string& protocol) {
+  owner_->set_protocol(protocol);
+}
+
+const std::vector<DataCodec>& DataContentDescription::codecs() const {
+  if (is_sctp_) {
+    return null_array_;
+  }
+  return owner_->as_rtp_data()->codecs();
+}
+
+void DataContentDescription::set_codecs(const std::vector<DataCodec>& codecs) {
+  if (!is_sctp_) {
+    owner_->as_rtp_data()->set_codecs(codecs);
+  }
+}
+
+bool DataContentDescription::has_codecs() const {
+  if (is_sctp_) {
+    return false;
+  }
+  return owner_->as_rtp_data()->has_codecs();
+}
+
+bool DataContentDescription::HasCodec(int id) {
+  if (is_sctp_) {
+    return false;
+  }
+  return owner_->as_rtp_data()->HasCodec(id);
+}
+
+void DataContentDescription::AddCodec(const DataCodec& codec) {
+  if (!is_sctp_) {
+    owner_->as_rtp_data()->AddCodec(codec);
+  }
+}
+
+void DataContentDescription::AddOrReplaceCodec(const DataCodec& codec) {
+  if (!is_sctp_) {
+    owner_->as_rtp_data()->AddOrReplaceCodec(codec);
+  }
+}
+
+void DataContentDescription::AddCodecs(const std::vector<DataCodec>& codecs) {
+  if (!is_sctp_) {
+    owner_->as_rtp_data()->AddCodecs(codecs);
+  }
+}
+
 }  // namespace cricket
