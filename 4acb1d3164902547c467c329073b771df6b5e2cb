@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fe101520_23e66de1",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2019-04-24T15:38:21Z",
+      "side": 1,
+      "message": "mDNS registrations are very unlikely to fail. I renamed this flag and added one for REMOTE_PRIVATE_CANDIDATE_ADDED.\n\nI extended the definition of a private address to include the RFC6598 (100.64/10) addresses.",
+      "parentUuid": "77a7a024_69e48466",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c5e6859_811c6cd7",
         "filename": "pc/peer_connection_histogram_unittest.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d1c29e3_e04f424d",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2019-04-24T15:38:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c5e6859_811c6cd7",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7560dffd_12d0adff",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2019-04-24T15:38:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "209deaaf_e3f2449b",
+      "range": {
+        "startLine": 244,
+        "startChar": 44,
+        "endLine": 244,
+        "endChar": 51
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb679aae_4bc15211",
         "filename": "pc/peer_connection_histogram_unittest.cc",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "b7395798_ab9170e2",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2019-04-24T15:38:21Z",
+      "side": 1,
+      "message": "removed.",
+      "parentUuid": "bb679aae_4bc15211",
+      "range": {
+        "startLine": 249,
+        "startChar": 26,
+        "endLine": 249,
+        "endChar": 38
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26202cf3_13117e05",
         "filename": "pc/peer_connection_histogram_unittest.cc",
         "patchSetId": 2
@@ -114,6 +210,30 @@
       "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59b7781d_1da3552d",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2019-04-24T15:38:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26202cf3_13117e05",
+      "range": {
+        "startLine": 275,
+        "startChar": 49,
+        "endLine": 275,
+        "endChar": 63
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -188,6 +308,30 @@
     },
     {
       "key": {
+        "uuid": "1088b05e_ab685084",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2019-04-24T15:38:21Z",
+      "side": 1,
+      "message": "Addressed",
+      "parentUuid": "648523bd_f48bf628",
+      "range": {
+        "startLine": 314,
+        "startChar": 41,
+        "endLine": 314,
+        "endChar": 60
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "459c4640_f2224415",
         "filename": "pc/peer_connection_histogram_unittest.cc",
         "patchSetId": 2
@@ -208,6 +352,30 @@
       "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1b61cb0_af32cdd6",
+        "filename": "pc/peer_connection_histogram_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 7524
+      },
+      "writtenOn": "2019-04-24T15:38:21Z",
+      "side": 1,
+      "message": "Took the comment from peer_connection_ice_unittests.cc",
+      "parentUuid": "459c4640_f2224415",
+      "range": {
+        "startLine": 342,
+        "startChar": 2,
+        "endLine": 342,
+        "endChar": 4
+      },
+      "revId": "4acb1d3164902547c467c329073b771df6b5e2cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
