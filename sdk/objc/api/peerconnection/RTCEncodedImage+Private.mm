@@ -10,9 +10,40 @@
 
 #import "RTCEncodedImage+Private.h"
 
+#import <objc/runtime.h>
+
 #include "rtc_base/numerics/safe_conversions.h"
 
+// A simple wrapper around rtc::CopyOnWriteBuffer to make it usable with
+// associated objects.
+@interface RTCWrappedCOWBuffer : NSObject
+@property(nonatomic) rtc::CopyOnWriteBuffer buffer;
+- (instancetype)initWithCOWBuffer:(rtc::CopyOnWriteBuffer)buffer;
+@end
+@implementation RTCWrappedCOWBuffer
+@synthesize buffer = _buffer;
+- (instancetype)initWithCOWBuffer:(rtc::CopyOnWriteBuffer)buffer {
+  self = [super init];
+  if (self) {
+    _buffer = buffer;
+  }
+  return self;
+}
+@end
+
 @implementation RTCEncodedImage (Private)
+
+- (rtc::CopyOnWriteBuffer)encodedImage {
+  RTCWrappedCOWBuffer *wrappedBuffer = objc_getAssociatedObject(self, @selector(encodedImage));
+  return wrappedBuffer.buffer;
+}
+
+- (void)setEncodedImage:(rtc::CopyOnWriteBuffer)buffer {
+  return objc_setAssociatedObject(self,
+                                  @selector(encodedImage),
+                                  [[RTCWrappedCOWBuffer alloc] initWithCOWBuffer:buffer],
+                                  OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 - (instancetype)initWithNativeEncodedImage:(const webrtc::EncodedImage &)encodedImage {
   if (self = [super init]) {
