@@ -46,6 +46,30 @@
       "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d49f12db_603ed1fb",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-25T14:22:19Z",
+      "side": 1,
+      "message": "\u003e Sorry, it\u0027s named WebrtcVideoFrameAdapter.\n\u003e \n\u003e It\u0027s inherited from VideoFrameBuffer, and has kNative type. It can\u0027t have kI420 type as the chrome encoder should be able to somehow distinguish resized or cropped, created by webrtc buffers from original, backed by the shared memory.\n\nI don\u0027t see why. Can\u0027t the type() method be implemented like\n\n  if (frame_-\u003ehas_texture())\n    return Type::kNative;\n  else if (frame_-\u003eformat() \u003d\u003d media::PIXEL_FORMAT_I420A)\n    return Type::I420A;\n  else\n    return Type::kI420;\n\nTo support GetI420(), when appropriate, it would need to own whatever it returns a pointer to (it could simple be |this|, with a private inherit). Not sure what\u0027s the best way, but it should be doable.\n\n\u003e Will this new comment make it clearer?\n\u003e   // Signals if the underlying pixel format is trivially convertible to I420,\n\u003e   // i.e. pixel data remains unchanged.\n\u003e   // One example of such buffer is WebrtcVideoFrameAdapter - it\u0027s essentially\n\u003e   // a I420 buffer, but backed by a chrome specific shared memory buffer and\n\u003e   // therefore marked as kNative, so in-chrome encoders could avoid extra\n\u003e   // copying if it\u0027s passed by webrtc unchanged.\n\nPlease make clear that \"convertible\" refers to the ToI420 method. And name of the class also has a capital R in WebRtc.",
+      "parentUuid": "e748e222_6ba37ac8",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
