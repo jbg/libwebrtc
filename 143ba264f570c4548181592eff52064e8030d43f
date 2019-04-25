@@ -34,6 +34,24 @@
       "revId": "143ba264f570c4548181592eff52064e8030d43f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a9198c3_db1236db",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-04-25T12:50:44Z",
+      "side": 1,
+      "message": "Looks good. Better to have Opus return an error if the bitrate\u0027s too high than to crash (albeit in debug mode).",
+      "parentUuid": "522e24a0_ffeb7f60",
+      "revId": "143ba264f570c4548181592eff52064e8030d43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
