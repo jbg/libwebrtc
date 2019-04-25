@@ -22,6 +22,30 @@
       "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e748e222_6ba37ac8",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-25T13:51:58Z",
+      "side": 1,
+      "message": "Sorry, it\u0027s named WebrtcVideoFrameAdapter.\n\nIt\u0027s inherited from VideoFrameBuffer, and has kNative type. It can\u0027t have kI420 type as the chrome encoder should be able to somehow distinguish resized or cropped, created by webrtc buffers from original, backed by the shared memory.\n\nThe trivially convertible here means that pixel data stays unchanged during conversion.\nThis is needed when we convert to I420 for software encoders. There we can leave update_rect unchanged only if the pixel data is unchanged.\n\nWill this new comment make it clearer?\n  // Signals if the underlying pixel format is trivially convertible to I420,\n  // i.e. pixel data remains unchanged.\n  // One example of such buffer is WebrtcVideoFrameAdapter - it\u0027s essentially\n  // a I420 buffer, but backed by a chrome specific shared memory buffer and\n  // therefore marked as kNative, so in-chrome encoders could avoid extra\n  // copying if it\u0027s passed by webrtc unchanged.",
+      "parentUuid": "116c71bd_0cc03cdc",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
