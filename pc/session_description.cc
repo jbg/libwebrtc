@@ -15,6 +15,7 @@
 
 #include "absl/algorithm/container.h"
 #include "absl/memory/memory.h"
+#include "pc/media_protocol_names.h"
 #include "rtc_base/checks.h"
 
 namespace cricket {
@@ -270,6 +271,102 @@ const ContentGroup* SessionDescription::GetGroupByName(
     }
   }
   return NULL;
+}
+
+// DataContentDescription shenanigans
+DataContentDescription* RtpDataContentDescription::as_data() {
+  if (!shim_) {
+    shim_.reset(new DataContentDescription(this));
+  }
+  return shim_.get();
+}
+
+const DataContentDescription* RtpDataContentDescription::as_data() const {
+  return const_cast<RtpDataContentDescription*>(this)->as_data();
+}
+
+DataContentDescription* SctpDataContentDescription::as_data() {
+  if (!shim_) {
+    shim_.reset(new DataContentDescription(this));
+  }
+  return shim_.get();
+}
+
+const DataContentDescription* SctpDataContentDescription::as_data() const {
+  return const_cast<SctpDataContentDescription*>(this)->as_data();
+}
+
+DataContentDescription::DataContentDescription() : is_sctp_(false) {
+  // In this case, we will initialize owned_description_ as soon as
+  // we are told what protocol to use.
+}
+
+DataContentDescription::DataContentDescription(
+    SctpDataContentDescription* wrapped)
+    : real_description_(wrapped), is_sctp_(true) {}
+
+DataContentDescription::DataContentDescription(
+    RtpDataContentDescription* wrapped)
+    : real_description_(wrapped), is_sctp_(false) {}
+
+void DataContentDescription::set_protocol(const std::string& protocol) {
+  if (real_description_) {
+    real_description_->set_protocol(protocol);
+  } else {
+    RTC_CHECK(!owned_description_.get());
+    // We used to not know what protocol we were going to use. Now we know.
+    if (IsSctpProtocol(protocol)) {
+      owned_description_ = absl::make_unique<SctpDataContentDescription>();
+    } else {
+      owned_description_ = absl::make_unique<RtpDataContentDescription>();
+    }
+    real_description_ = owned_description_.get();
+  }
+}
+
+const std::vector<DataCodec>& DataContentDescription::codecs() const {
+  if (is_sctp_) {
+    return null_array_;
+  }
+  return real_description_->as_rtp_data()->codecs();
+}
+
+void DataContentDescription::set_codecs(const std::vector<DataCodec>& codecs) {
+  if (!is_sctp_) {
+    real_description_->as_rtp_data()->set_codecs(codecs);
+  }
+}
+
+bool DataContentDescription::has_codecs() const {
+  if (is_sctp_) {
+    return false;
+  }
+  return real_description_->as_rtp_data()->has_codecs();
+}
+
+bool DataContentDescription::HasCodec(int id) {
+  if (is_sctp_) {
+    return false;
+  }
+  return real_description_->as_rtp_data()->HasCodec(id);
+}
+
+void DataContentDescription::AddCodec(const DataCodec& codec) {
+  if (!is_sctp_) {
+    real_description_->as_rtp_data()->AddCodec(codec);
+  }
+}
+
+void DataContentDescription::AddOrReplaceCodec(const DataCodec& codec) {
+  if (!is_sctp_) {
+    real_description_->as_rtp_data()->AddOrReplaceCodec(codec);
+  }
+}
+
+void DataContentDescription::AddCodecs(const std::vector<DataCodec>& codecs) {
+  if (!is_sctp_) {
+    real_description_->as_rtp_data()->AddCodecs(codecs);
+  }
 }
 
 }  // namespace cricket
