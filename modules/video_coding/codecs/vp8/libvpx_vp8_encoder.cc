@@ -166,6 +166,7 @@ static Vp8EncoderConfig GetEncoderConfig(vpx_codec_enc_cfg* vpx_config) {
   config.rc_target_bitrate = vpx_config->rc_target_bitrate;
   config.rc_min_quantizer = vpx_config->rc_min_quantizer;
   config.rc_max_quantizer = vpx_config->rc_max_quantizer;
+  config.error_resilient = vpx_config.g_error_resilient;
 
   return config;
 }
