@@ -187,8 +187,7 @@ bool AudioProcessingImpl::ApmSubmoduleStates::Update(
   changed |= (noise_suppressor_enabled != noise_suppressor_enabled_);
   changed |=
       (adaptive_gain_controller_enabled != adaptive_gain_controller_enabled_);
-  changed |=
-      (gain_controller2_enabled != gain_controller2_enabled_);
+  changed |= (gain_controller2_enabled != gain_controller2_enabled_);
   changed |= (pre_amplifier_enabled_ != pre_amplifier_enabled);
   changed |= (echo_controller_enabled != echo_controller_enabled_);
   changed |= (level_estimator_enabled != level_estimator_enabled_);
@@ -861,6 +860,7 @@ void AudioProcessingImpl::SetRuntimeSetting(RuntimeSetting setting) {
       return;
     case RuntimeSetting::Type::kCapturePreGain:
     case RuntimeSetting::Type::kCaptureCompressionGain:
+    case RuntimeSetting::Type::kCaptureFixedPostGain:
       capture_runtime_settings_enqueuer_.Enqueue(setting);
       return;
   }
@@ -981,19 +981,24 @@ void AudioProcessingImpl::HandleCaptureRuntimeSettings() {
     switch (setting.type()) {
       case RuntimeSetting::Type::kCapturePreGain:
         if (config_.pre_amplifier.enabled) {
-          float value;
-          setting.GetFloat(&value);
-          private_submodules_->pre_amplifier->SetGainFactor(value);
+          private_submodules_->pre_amplifier->SetGainFactor(setting.GetFloat());
         }
         // TODO(bugs.chromium.org/9138): Log setting handling by Aec Dump.
         break;
       case RuntimeSetting::Type::kCaptureCompressionGain: {
-        float value;
-        setting.GetFloat(&value);
+        float value = setting.GetFloat();
         int int_value = static_cast<int>(value + .5f);
         config_.gain_controller1.compression_gain_db = int_value;
         int error = agc1()->set_compression_gain_db(int_value);
         RTC_DCHECK_EQ(kNoError, error);
+        break;
+      }
+      case RuntimeSetting::Type::kCaptureFixedPostGain: {
+        if (config_.gain_controller2.enabled) {
+          config_.gain_controller2.fixed_digital.gain_db = setting.GetFloat();
+          private_submodules_->gain_controller2->ApplyConfig(
+              config_.gain_controller2);
+        }
         break;
       }
       case RuntimeSetting::Type::kCustomRenderProcessingRuntimeSetting:
@@ -1020,6 +1025,7 @@ void AudioProcessingImpl::HandleRenderRuntimeSettings() {
         break;
       case RuntimeSetting::Type::kCapturePreGain:          // fall-through
       case RuntimeSetting::Type::kCaptureCompressionGain:  // fall-through
+      case RuntimeSetting::Type::kCaptureFixedPostGain:    // fall-through
       case RuntimeSetting::Type::kNotSpecified:
         RTC_NOTREACHED();
         break;
