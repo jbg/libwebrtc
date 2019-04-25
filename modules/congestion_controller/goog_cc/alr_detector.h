@@ -17,6 +17,8 @@
 #include "absl/types/optional.h"
 #include "api/transport/webrtc_key_value_config.h"
 #include "modules/pacing/interval_budget.h"
+#include "rtc_base/experiments/alr_experiment.h"
+#include "rtc_base/experiments/field_trial_units.h"
 
 namespace webrtc {
 
@@ -34,6 +36,11 @@ class AlrDetector {
   explicit AlrDetector(const WebRtcKeyValueConfig* key_value_config);
   AlrDetector(const WebRtcKeyValueConfig* key_value_config,
               RtcEventLog* event_log);
+
+  AlrDetector(const WebRtcKeyValueConfig* key_value_config,
+              RtcEventLog* event_log,
+              absl::optional<AlrExperimentSettings> experiment_settings);
+
   ~AlrDetector();
 
   void OnBytesSent(size_t bytes_sent, int64_t send_time_ms);
@@ -57,11 +64,15 @@ class AlrDetector {
   void UpdateBudgetWithElapsedTime(int64_t delta_time_ms);
   void UpdateBudgetWithBytesSent(size_t bytes_sent);
 
+  int bandwidth_usage_percent() const;
+  int start_budget_level_percent() const;
+  int stop_budget_level_percent() const;
+
  private:
   friend class GoogCcStatePrinter;
-  int bandwidth_usage_percent_;
-  int alr_start_budget_level_percent_;
-  int alr_stop_budget_level_percent_;
+  FieldTrialParameter<int> bandwidth_usage_percent_;
+  FieldTrialParameter<int> alr_start_budget_level_percent_;
+  FieldTrialParameter<int> alr_stop_budget_level_percent_;
 
   absl::optional<int64_t> last_send_time_ms_;
 
