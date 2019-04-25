@@ -65,6 +65,13 @@ class VideoFrameBuffer : public rtc::RefCountInterface {
   // software encoders.
   virtual rtc::scoped_refptr<I420BufferInterface> ToI420() = 0;
 
+  // Signals if the underlying pixel format is trivially convertible to I420.
+  // One example of such buffer is WebrtcFrameBufferAdapter - it's essentially
+  // I420 buffer, but backed by a chrome specific shared memory buffer and
+  // therefore marked as kNative, so in-chrome encoders could avoid extra
+  // copying.
+  virtual bool IsTriviallyConvertibleToI420() const;
+
   // These functions should only be called if type() is of the correct type.
   // Calling with a different type will result in a crash.
   // TODO(magjed): Return raw pointers for GetI420 once deprecated interface is
@@ -120,6 +127,7 @@ class I420BufferInterface : public PlanarYuv8Buffer {
   int ChromaHeight() const final;
 
   rtc::scoped_refptr<I420BufferInterface> ToI420() final;
+  bool IsTriviallyConvertibleToI420() const final;
 
  protected:
   ~I420BufferInterface() override {}
@@ -142,6 +150,8 @@ class I444BufferInterface : public PlanarYuv8Buffer {
   int ChromaWidth() const final;
   int ChromaHeight() const final;
 
+  bool IsTriviallyConvertibleToI420() const final;
+
  protected:
   ~I444BufferInterface() override {}
 };
@@ -154,6 +164,8 @@ class PlanarYuv16BBuffer : public PlanarYuvBuffer {
   virtual const uint16_t* DataY() const = 0;
   virtual const uint16_t* DataU() const = 0;
   virtual const uint16_t* DataV() const = 0;
+
+  bool IsTriviallyConvertibleToI420() const final;
 
  protected:
   ~PlanarYuv16BBuffer() override {}

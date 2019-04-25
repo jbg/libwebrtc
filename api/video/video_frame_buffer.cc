@@ -14,6 +14,10 @@
 
 namespace webrtc {
 
+bool VideoFrameBuffer::IsTriviallyConvertibleToI420() const {
+  return false;
+}
+
 rtc::scoped_refptr<I420BufferInterface> VideoFrameBuffer::GetI420() {
   RTC_CHECK(type() == Type::kI420);
   return static_cast<I420BufferInterface*>(this);
@@ -71,6 +75,10 @@ rtc::scoped_refptr<I420BufferInterface> I420BufferInterface::ToI420() {
   return this;
 }
 
+bool I420BufferInterface::IsTriviallyConvertibleToI420() const {
+  return true;
+}
+
 VideoFrameBuffer::Type I420ABufferInterface::type() const {
   return Type::kI420A;
 }
@@ -79,12 +87,20 @@ VideoFrameBuffer::Type I444BufferInterface::type() const {
   return Type::kI444;
 }
 
+bool I444BufferInterface::IsTriviallyConvertibleToI420() const {
+  return false;
+}
+
 int I444BufferInterface::ChromaWidth() const {
   return width();
 }
 
 int I444BufferInterface::ChromaHeight() const {
   return height();
+}
+
+bool PlanarYuv16BBuffer::IsTriviallyConvertibleToI420() const {
+  return false;
 }
 
 VideoFrameBuffer::Type I010BufferInterface::type() const {
