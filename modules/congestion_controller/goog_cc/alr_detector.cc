@@ -18,22 +18,14 @@
 #include "logging/rtc_event_log/events/rtc_event_alr_state.h"
 #include "logging/rtc_event_log/rtc_event_log.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/experiments/alr_experiment.h"
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
 
-AlrDetector::AlrDetector(const WebRtcKeyValueConfig* key_value_config)
-    : AlrDetector(key_value_config, nullptr) {}
-
-AlrDetector::AlrDetector(const WebRtcKeyValueConfig* key_value_config,
-                         RtcEventLog* event_log)
-    : bandwidth_usage_percent_(kDefaultAlrBandwidthUsagePercent),
-      alr_start_budget_level_percent_(kDefaultAlrStartBudgetLevelPercent),
-      alr_stop_budget_level_percent_(kDefaultAlrStopBudgetLevelPercent),
-      alr_budget_(0, true),
-      event_log_(event_log) {
+namespace {
+absl::optional<AlrExperimentSettings> GetExperimentSettings(
+    const WebRtcKeyValueConfig* key_value_config) {
   RTC_CHECK(AlrExperimentSettings::MaxOneFieldTrialEnabled(*key_value_config));
   absl::optional<AlrExperimentSettings> experiment_settings =
       AlrExperimentSettings::CreateFromFieldTrial(
@@ -44,13 +36,44 @@ AlrDetector::AlrDetector(const WebRtcKeyValueConfig* key_value_config,
         *key_value_config,
         AlrExperimentSettings::kStrictPacingAndProbingExperimentName);
   }
-  if (experiment_settings) {
-    alr_stop_budget_level_percent_ =
-        experiment_settings->alr_stop_budget_level_percent;
-    alr_start_budget_level_percent_ =
-        experiment_settings->alr_start_budget_level_percent;
-    bandwidth_usage_percent_ = experiment_settings->alr_bandwidth_usage_percent;
-  }
+  return experiment_settings;
+}
+}  //  namespace
+
+AlrDetector::AlrDetector(const WebRtcKeyValueConfig* key_value_config)
+    : AlrDetector(key_value_config,
+                  nullptr,
+                  GetExperimentSettings(key_value_config)) {}
+
+AlrDetector::AlrDetector(const WebRtcKeyValueConfig* key_value_config,
+                         RtcEventLog* event_log)
+    : AlrDetector(key_value_config,
+                  event_log,
+                  GetExperimentSettings(key_value_config)) {}
+
+AlrDetector::AlrDetector(
+    const WebRtcKeyValueConfig* key_value_config,
+    RtcEventLog* event_log,
+    absl::optional<AlrExperimentSettings> experiment_settings)
+    : bandwidth_usage_percent_(
+          "bw_usage_percent",
+          experiment_settings ? experiment_settings->alr_bandwidth_usage_percent
+                              : kDefaultAlrBandwidthUsagePercent),
+      alr_start_budget_level_percent_(
+          "start_budget_level_percent",
+          experiment_settings
+              ? experiment_settings->alr_start_budget_level_percent
+              : kDefaultAlrStartBudgetLevelPercent),
+      alr_stop_budget_level_percent_(
+          "stop_budget_level_percent",
+          experiment_settings
+              ? experiment_settings->alr_stop_budget_level_percent
+              : kDefaultAlrStopBudgetLevelPercent),
+      alr_budget_(0, true),
+      event_log_(event_log) {
+  ParseFieldTrial({&bandwidth_usage_percent_, &alr_start_budget_level_percent_,
+                   &alr_stop_budget_level_percent_},
+                  key_value_config->Lookup("WebRTC-AlrDetectorParameters"));
 }
 
 AlrDetector::~AlrDetector() {}
@@ -95,4 +118,15 @@ absl::optional<int64_t> AlrDetector::GetApplicationLimitedRegionStartTime()
     const {
   return alr_started_time_ms_;
 }
+
+int AlrDetector::bandwidth_usage_percent() const {
+  return bandwidth_usage_percent_.Get();
+}
+int AlrDetector::start_budget_level_percent() const {
+  return alr_start_budget_level_percent_.Get();
+}
+int AlrDetector::stop_budget_level_percent() const {
+  return alr_stop_budget_level_percent_.Get();
+}
+
 }  // namespace webrtc
