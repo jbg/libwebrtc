@@ -2253,6 +2253,13 @@ bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
     rinfo.concealment_events = stats.concealment_events;
     rinfo.jitter_buffer_delay_seconds = stats.jitter_buffer_delay_seconds;
     rinfo.jitter_buffer_emitted_count = stats.jitter_buffer_emitted_count;
+    rinfo.inserted_samples_for_deceleration =
+        stats.inserted_samples_for_deceleration;
+    rinfo.removed_samples_for_acceleration =
+        stats.removed_samples_for_acceleration;
+    rinfo.silent_concealed_samples = stats.silent_concealed_samples;
+    rinfo.fec_packets_received = stats.fec_packets_received;
+    rinfo.fec_packets_discarded = stats.fec_packets_discarded;
     rinfo.expand_rate = stats.expand_rate;
     rinfo.speech_expand_rate = stats.speech_expand_rate;
     rinfo.secondary_decoded_rate = stats.secondary_decoded_rate;

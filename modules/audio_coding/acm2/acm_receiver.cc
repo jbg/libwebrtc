@@ -259,6 +259,14 @@ void AcmReceiver::GetNetworkStatistics(NetworkStatistics* acm_stat) {
       neteq_lifetime_stat.delayed_packet_outage_samples;
   acm_stat->relativePacketArrivalDelayMs =
       neteq_lifetime_stat.relative_packet_arrival_delay_ms;
+  acm_stat->insertedSamplesForDeceleration =
+      neteq_lifetime_stat.inserted_samples_for_deceleration;
+  acm_stat->removedSamplesForAcceleration =
+      neteq_lifetime_stat.removed_samples_for_acceleration;
+  acm_stat->silentConcealedSamples =
+      neteq_lifetime_stat.silent_concealed_samples;
+  acm_stat->fecPacketsReceived = neteq_lifetime_stat.fec_packets_received;
+  acm_stat->fecPacketsDiscarded = neteq_lifetime_stat.fec_packets_discarded;
 
   NetEqOperationsAndState neteq_operations_and_state =
       neteq_->GetOperationsAndState();

@@ -316,6 +316,9 @@ class RTC_EXPORT RTCMediaStreamTrackStats final : public RTCStats {
   RTCStatsMember<double> total_samples_duration;
   RTCStatsMember<uint64_t> concealed_samples;
   RTCStatsMember<uint64_t> concealment_events;
+  RTCStatsMember<uint64_t> inserted_samples_for_deceleration;
+  RTCStatsMember<uint64_t> removed_samples_for_acceleration;
+  RTCStatsMember<uint64_t> silent_concealed_samples;
   // Non-standard audio-only member
   // TODO(kuddai): Add description to standard. crbug.com/webrtc/10042
   RTCNonStandardStatsMember<uint64_t> jitter_buffer_flushes;
@@ -427,6 +430,8 @@ class RTC_EXPORT RTCInboundRTPStreamStats final : public RTCRTPStreamStats {
   RTCStatsMember<uint32_t> frames_decoded;
   // https://henbos.github.io/webrtc-provisional-stats/#dom-rtcinboundrtpstreamstats-contenttype
   RTCStatsMember<std::string> content_type;
+  RTCStatsMember<uint64_t> fec_packets_received;
+  RTCStatsMember<uint64_t> fec_packets_discarded;
 };
 
 // https://w3c.github.io/webrtc-stats/#outboundrtpstats-dict*

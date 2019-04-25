@@ -432,6 +432,9 @@ RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(std::string&& id,
       total_samples_duration("totalSamplesDuration"),
       concealed_samples("concealedSamples"),
       concealment_events("concealmentEvents"),
+      inserted_samples_for_deceleration("insertedSamplesForDeceleration"),
+      removed_samples_for_acceleration("removedSamplesForAcceleration"),
+      silent_concealed_samples("silentConcealedSamples"),
       jitter_buffer_flushes(
           "jitterBufferFlushes",
           {NonStandardGroupId::kRtcAudioJitterBufferMaxPackets}),
@@ -481,6 +484,10 @@ RTCMediaStreamTrackStats::RTCMediaStreamTrackStats(
       total_samples_duration(other.total_samples_duration),
       concealed_samples(other.concealed_samples),
       concealment_events(other.concealment_events),
+      inserted_samples_for_deceleration(
+          other.inserted_samples_for_deceleration),
+      removed_samples_for_acceleration(other.removed_samples_for_acceleration),
+      silent_concealed_samples(other.silent_concealed_samples),
       jitter_buffer_flushes(other.jitter_buffer_flushes),
       delayed_packet_outage_samples(other.delayed_packet_outage_samples),
       relative_packet_arrival_delay(other.relative_packet_arrival_delay),
@@ -621,7 +628,9 @@ RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(std::string&& id,
       gap_loss_rate("gapLossRate"),
       gap_discard_rate("gapDiscardRate"),
       frames_decoded("framesDecoded"),
-      content_type("contentType") {}
+      content_type("contentType"),
+      fec_packets_received("fecPacketsReceived"),
+      fec_packets_discarded("fecPacketsDiscarded") {}
 
 RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(
     const RTCInboundRTPStreamStats& other)
@@ -644,7 +653,9 @@ RTCInboundRTPStreamStats::RTCInboundRTPStreamStats(
       gap_loss_rate(other.gap_loss_rate),
       gap_discard_rate(other.gap_discard_rate),
       frames_decoded(other.frames_decoded),
-      content_type(other.content_type) {}
+      content_type(other.content_type),
+      fec_packets_received(other.fec_packets_received),
+      fec_packets_discarded(other.fec_packets_discarded) {}
 
 RTCInboundRTPStreamStats::~RTCInboundRTPStreamStats() {}
 

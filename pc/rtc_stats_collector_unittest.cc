@@ -1424,6 +1424,9 @@ TEST_F(RTCStatsCollectorTest,
   voice_receiver_info.total_output_duration = 0.25;
   voice_receiver_info.concealed_samples = 123;
   voice_receiver_info.concealment_events = 12;
+  voice_receiver_info.inserted_samples_for_deceleration = 987;
+  voice_receiver_info.removed_samples_for_acceleration = 876;
+  voice_receiver_info.silent_concealed_samples = 765;
   voice_receiver_info.jitter_buffer_delay_seconds = 3456;
   voice_receiver_info.jitter_buffer_emitted_count = 13;
   voice_receiver_info.jitter_buffer_flushes = 7;
@@ -1461,6 +1464,9 @@ TEST_F(RTCStatsCollectorTest,
   expected_remote_audio_track.total_samples_duration = 0.25;
   expected_remote_audio_track.concealed_samples = 123;
   expected_remote_audio_track.concealment_events = 12;
+  expected_remote_audio_track.inserted_samples_for_deceleration = 987;
+  expected_remote_audio_track.removed_samples_for_acceleration = 876;
+  expected_remote_audio_track.silent_concealed_samples = 765;
   expected_remote_audio_track.jitter_buffer_delay = 3456;
   expected_remote_audio_track.jitter_buffer_emitted_count = 13;
   expected_remote_audio_track.jitter_buffer_flushes = 7;

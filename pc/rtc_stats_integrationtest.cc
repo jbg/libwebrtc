@@ -649,6 +649,12 @@ class RTCStatsReportVerifier {
       verifier.TestMemberIsNonNegative<uint64_t>(
           media_stream_track.concealment_events);
       verifier.TestMemberIsNonNegative<uint64_t>(
+          media_stream_track.inserted_samples_for_deceleration);
+      verifier.TestMemberIsNonNegative<uint64_t>(
+          media_stream_track.removed_samples_for_acceleration);
+      verifier.TestMemberIsNonNegative<uint64_t>(
+          media_stream_track.silent_concealed_samples);
+      verifier.TestMemberIsNonNegative<uint64_t>(
           media_stream_track.jitter_buffer_flushes);
       verifier.TestMemberIsNonNegative<uint64_t>(
           media_stream_track.delayed_packet_outage_samples);
