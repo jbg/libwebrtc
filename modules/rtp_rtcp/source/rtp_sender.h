@@ -42,7 +42,7 @@ class RateLimiter;
 class RtcEventLog;
 class RtpPacketToSend;
 
-class RTPSender {
+class RTPSender : public AcknowledgedPacketsObserver {
  public:
   RTPSender(bool audio,
             Clock* clock,
@@ -173,6 +173,9 @@ class RTPSender {
 
   void SetRtt(int64_t rtt_ms);
 
+  void OnPacketsAcknowledged(
+      rtc::ArrayView<const uint16_t> sequence_numbers) override;
+
  private:
   // Maps capture time in milliseconds to send-side delay in milliseconds.
   // Send-side delay is the difference between transmission time and capture
@@ -292,6 +295,7 @@ class RTPSender {
   const bool populate_network2_timestamp_;
 
   const bool send_side_bwe_with_overhead_;
+  const bool legacy_packet_history_storage_mode_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RTPSender);
 };

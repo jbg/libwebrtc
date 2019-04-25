@@ -79,6 +79,7 @@ void RtpPacketHistory::SetRtt(int64_t rtt_ms) {
   rtc::CritScope cs(&lock_);
   RTC_DCHECK_GE(rtt_ms, 0);
   rtt_ms_ = rtt_ms;
+  CullOldPackets(clock_->TimeInMilliseconds());
 }
 
 void RtpPacketHistory::PutRtpPacket(std::unique_ptr<RtpPacketToSend> packet,
@@ -232,6 +233,19 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetBestFittingPacket(
   return absl::make_unique<RtpPacketToSend>(*best_packet);
 }
 
+void RtpPacketHistory::CullAcknowledgedPackets(
+    rtc::ArrayView<const uint16_t> sequence_numbers) {
+  rtc::CritScope cs(&lock_);
+  if (mode_ == StorageMode::kStoreAndCull) {
+    for (uint16_t sequence_number : sequence_numbers) {
+      auto stored_packet_it = packet_history_.find(sequence_number);
+      if (stored_packet_it != packet_history_.end()) {
+        RemovePacket(stored_packet_it);
+      }
+    }
+  }
+}
+
 void RtpPacketHistory::Reset() {
   packet_history_.clear();
   packet_size_.clear();
@@ -283,20 +297,27 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::RemovePacket(
   // Move the packet out from the StoredPacket container.
   std::unique_ptr<RtpPacketToSend> rtp_packet =
       std::move(packet_it->second.packet);
+
+  // Check if this is the oldest packet in the history, as this must be updated
+  // in order to cull old packets.
+  const bool is_first_packet = packet_it->first == start_seqno_;
+
   // Erase the packet from the map, and capture iterator to the next one.
   StoredPacketIterator next_it = packet_history_.erase(packet_it);
 
-  // |next_it| now points to the next element, or to the end. If the end,
-  // check if we can wrap around.
-  if (next_it == packet_history_.end()) {
-    next_it = packet_history_.begin();
-  }
+  if (is_first_packet) {
+    // |next_it| now points to the next element, or to the end. If the end,
+    // check if we can wrap around.
+    if (next_it == packet_history_.end()) {
+      next_it = packet_history_.begin();
+    }
 
-  // Update |start_seq_no| to the new oldest item.
-  if (next_it != packet_history_.end()) {
-    start_seqno_ = next_it->first;
-  } else {
-    start_seqno_.reset();
+    // Update |start_seq_no| to the new oldest item.
+    if (next_it != packet_history_.end()) {
+      start_seqno_ = next_it->first;
+    } else {
+      start_seqno_.reset();
+    }
   }
 
   auto size_iterator = packet_size_.find(rtp_packet->size());
