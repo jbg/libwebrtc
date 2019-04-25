@@ -121,7 +121,7 @@ TEST(SessionDescriptionTest, AddContentTransfersExtmapAllowMixedSetting) {
             video_desc->extmap_allow_mixed_enum());
 
   // Session level setting overrides media level when new content is added.
-  MediaContentDescription* data_desc = new DataContentDescription;
+  MediaContentDescription* data_desc = new RtpDataContentDescription;
   data_desc->set_extmap_allow_mixed_enum(MediaContentDescription::kMedia);
   session_desc.AddContent("data", MediaProtocolType::kRtp, data_desc);
   EXPECT_EQ(MediaContentDescription::kSession,
