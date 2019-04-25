@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ccebd810_678db4df",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-25T11:50:08Z",
+      "side": 1,
+      "message": "Does it make sense to drop this and fail on incorrect agc2_fixed_gain_db regardless of whether it will be used? Keeps the checks a bit simpler. I can not think of a case where it would be good to allow an incorrect value here, regardless of whether it is intended to be used or not.",
+      "range": {
+        "startLine": 460,
+        "startChar": 6,
+        "endLine": 460,
+        "endChar": 48
+      },
+      "revId": "5672a041141151ef65ec2c2c12e51a5480751c6a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
