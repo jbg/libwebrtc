@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "116c71bd_0cc03cdc",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-25T13:42:32Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand this. What does \"trivially convertible mean\"? One can call ToI420, and expect that it is cheap (no large allocation or copy)? Or can one call GetI420()?\n\nFor the chrome usecase, it sounds to me like the right way is to have an implementation of I420BufferInterface backed by shared memory, not using kNative. Any reason why that won\u0027t work? (And I don\u0027t find any class named \"WebrtcFrameBufferAdapter\" in chromium).",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
