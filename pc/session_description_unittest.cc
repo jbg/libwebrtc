@@ -9,6 +9,7 @@
  */
 #include "pc/session_description.h"
 
+#include "absl/memory/memory.h"
 #include "test/gtest.h"
 
 namespace cricket {
@@ -121,11 +122,27 @@ TEST(SessionDescriptionTest, AddContentTransfersExtmapAllowMixedSetting) {
             video_desc->extmap_allow_mixed_enum());
 
   // Session level setting overrides media level when new content is added.
-  MediaContentDescription* data_desc = new DataContentDescription;
+  MediaContentDescription* data_desc = new RtpDataContentDescription;
   data_desc->set_extmap_allow_mixed_enum(MediaContentDescription::kMedia);
   session_desc.AddContent("data", MediaProtocolType::kRtp, data_desc);
   EXPECT_EQ(MediaContentDescription::kSession,
             data_desc->extmap_allow_mixed_enum());
+}
+
+TEST(SessionDescriptionTest, DataContentDescriptionCanAddStream) {
+  auto description = absl::make_unique<DataContentDescription>();
+  EXPECT_EQ(nullptr, description->as_rtp_data());
+  // Adding a stream without setting protocol first should work,
+  // and set the resulting description to an RTP description.
+  description->AddLegacyStream(1234);
+  EXPECT_NE(nullptr, description->as_rtp_data());
+}
+
+TEST(SessionDescriptionTest, DataContentDescriptionCopyWorks) {
+  auto description = absl::make_unique<RtpDataContentDescription>();
+  auto shim_description = description->as_data();
+  auto shim_copy = shim_description->Copy();
+  delete shim_copy;
 }
 
 }  // namespace cricket
