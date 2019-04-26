@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbc17b2f_cc4cc689",
+        "filename": "modules/audio_coding/include/audio_coding_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-04-26T11:04:41Z",
+      "side": 1,
+      "message": "Isn\u0027t this the type of change that will cause breakage downstream? With warnings about shadowing and so on? I believe I tried to do something similar when changing the AudioEncoder API a while back and that I had to create a method with a new name, instead of overloading, so avoid breakage.\n\nAlso, it\u0027s a bit scary that they\u0027re calling each other, unless the subclass implements one of them. (Which, I admit, any existing subclass must, since the previous one was pure virtual.)",
+      "revId": "112b6a85a702832eb9d2bb224c85d71228b50620",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
