@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "d840a456_f1c67d60",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-26T13:21:59Z",
+      "side": 1,
+      "message": "I agree with the concerns you raise, but I am hesitant to have the code cover for that case since it (as of your latest PS) already explicitly DCHECKs for it on line 1240.\n\nStyle guide, about DCHECKs:\n`A DCHECK() means “this condition must always be true”, not “this condition is normally true, but perhaps not in exceptional cases.”`\nhttps://chromium.googlesource.com/chromium/src/+/master/styleguide/c++/c++.md#check_dcheck_and-notreached",
+      "parentUuid": "767f9ab4_1df224ab",
+      "range": {
+        "startLine": 1363,
+        "startChar": 6,
+        "endLine": 1367,
+        "endChar": 60
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a29e96da_6cafa91a",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "2746767f_b3d21784",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1827,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-26T13:21:59Z",
+      "side": 1,
+      "message": "sgtm!",
+      "parentUuid": "d2213037_704f6313",
+      "range": {
+        "startLine": 1827,
+        "startChar": 0,
+        "endLine": 1827,
+        "endChar": 53
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4301241d_0605a3ea",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -187,6 +235,30 @@
       "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa3fd9fe_401597f8",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-26T13:21:59Z",
+      "side": 1,
+      "message": "Ah, I see. Great!\n\nI think the `size_t` typing in this patch set means that this line declares a new variable within this scope, whose name hides the AudioProcessingImpl member variable aec_render_queue_element_max_size_.",
+      "parentUuid": "7209b598_2a4385c8",
+      "range": {
+        "startLine": 1880,
+        "startChar": 9,
+        "endLine": 1880,
+        "endChar": 43
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
