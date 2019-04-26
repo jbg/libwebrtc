@@ -200,11 +200,23 @@ class PeerConnectionE2EQualityTestFixture {
 
     // Invoked by framework after peer connection factory and peer connection
     // itself will be created but before offer/answer exchange will be started.
-    virtual void Start(absl::string_view test_case_name) = 0;
-
-    // Invoked by framework after call is ended and peer connection factory and
-    // peer connection are destroyed.
-    virtual void StopAndReportResults() = 0;
+    virtual void Initialize(absl::string_view test_case_name) = 0;
+    // Invoked by framework immediately after peer connection setup complete
+    // (offer/answer exchange done, ICE candidates exchanged, connection
+    // connected)
+    virtual void Start() = 0;
+    // Invoked by framework immediately after call tear down, so also after
+    // RunParams::run_duration will pass.
+    //
+    // Implementation shouldn't do any time consuming actions in this method,
+    // otherwise it can affect other metrics reporters, because all reporters
+    // will be stopped sequentially one by one.
+    //
+    // |real_test_duration| - time between connection setup complete and call
+    // tear down complete.
+    virtual void Stop(TimeDelta real_test_duration) = 0;
+    // Invoked by framework at the end of the test.
+    virtual void ReportResults() = 0;
   };
 
   virtual ~PeerConnectionE2EQualityTestFixture() = default;
