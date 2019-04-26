@@ -34,6 +34,24 @@
       "revId": "112b6a85a702832eb9d2bb224c85d71228b50620",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4e4f1f0_1ff11485",
+        "filename": "modules/audio_coding/include/audio_coding_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-04-26T12:44:48Z",
+      "side": 1,
+      "message": "I expect it\u0027s not very widely used and the change required is small, so it\u0027s probably not worth delaying making the change. Probably still worth sending out a PSA informing that the change is being made, though.\n\nSince the bots all look happy, I\u0027m satisfied there\u0027s no need to complicate this change any further.",
+      "parentUuid": "f265427f_a7c82643",
+      "revId": "112b6a85a702832eb9d2bb224c85d71228b50620",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
