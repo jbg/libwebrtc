@@ -16,6 +16,24 @@
       "revId": "112b6a85a702832eb9d2bb224c85d71228b50620",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f265427f_a7c82643",
+        "filename": "modules/audio_coding/include/audio_coding_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-26T11:20:21Z",
+      "side": 1,
+      "message": "\u003e Isn\u0027t this the type of change that will cause breakage downstream? With warnings about shadowing and so on? \n\nI\u0027m not sure exactly when you get those warnings. I\u0027ve seen them for other changes, and worked around them with using base::Method; in the child classes. But the trybots (including internal ones) look happy with this change as is.\n\n\u003e Also, it\u0027s a bit scary that they\u0027re calling each other, unless the subclass implements one of them. (Which, I admit, any existing subclass must, since the previous one was pure virtual.)\n\nI agree it looks scary. But I\u0027ve done that kind of change several times now, with little trouble, so I\u0027m getting used to it... This is intended to be very temporary.\n\nDo you think we need a PSA before deleting the old method? modules/audio_coding/include is listed as a legacy api directory in native-api.md, but I don\u0027t think we expect applications to make any direct use of the AudioPacketizationCallback interface?",
+      "parentUuid": "dbc17b2f_cc4cc689",
+      "revId": "112b6a85a702832eb9d2bb224c85d71228b50620",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
