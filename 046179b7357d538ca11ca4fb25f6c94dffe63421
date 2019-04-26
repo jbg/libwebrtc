@@ -81,6 +81,24 @@
       "revId": "046179b7357d538ca11ca4fb25f6c94dffe63421",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4fd2360_d87d11b7",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-26T12:50:37Z",
+      "side": 1,
+      "message": "Ack. `int` would a priori be a more natural choice since the style guide guarantees that it will be at least 32 bits and should be used for general integer duties, but int32_t is fine if you want to blend in here...",
+      "parentUuid": "ef2cb1d2_3d0006af",
+      "revId": "046179b7357d538ca11ca4fb25f6c94dffe63421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
