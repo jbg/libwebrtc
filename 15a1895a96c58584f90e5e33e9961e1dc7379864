@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "deac79c0_a292a589",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-26T14:34:31Z",
+      "side": 1,
+      "message": "Makes sense. \nI changed the code to instead do what I intended in the upcoming CL. That fully avoids this DCHECK. PTAL",
+      "parentUuid": "d840a456_f1c67d60",
+      "range": {
+        "startLine": 1363,
+        "startChar": 6,
+        "endLine": 1367,
+        "endChar": 60
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a29e96da_6cafa91a",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -250,6 +274,30 @@
       "side": 1,
       "message": "Ah, I see. Great!\n\nI think the `size_t` typing in this patch set means that this line declares a new variable within this scope, whose name hides the AudioProcessingImpl member variable aec_render_queue_element_max_size_.",
       "parentUuid": "7209b598_2a4385c8",
+      "range": {
+        "startLine": 1880,
+        "startChar": 9,
+        "endLine": 1880,
+        "endChar": 43
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41f6b721_fd9fbce7",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-26T14:34:31Z",
+      "side": 1,
+      "message": "Yep, you are right.",
+      "parentUuid": "aa3fd9fe_401597f8",
       "range": {
         "startLine": 1880,
         "startChar": 9,
