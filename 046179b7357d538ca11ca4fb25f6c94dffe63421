@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c44e9ea_a2eb713b",
+        "filename": "api/stats_types.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-26T12:17:29Z",
+      "side": 1,
+      "message": "typo?",
+      "range": {
+        "startLine": 569,
+        "startChar": 18,
+        "endLine": 569,
+        "endChar": 19
+      },
+      "revId": "046179b7357d538ca11ca4fb25f6c94dffe63421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5bc3d7b_8117f889",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-04-26T12:17:29Z",
+      "side": 1,
+      "message": "Do you have a good reason for using unsigned integers? Signed integers are usually better, and the style guide prefers them.\n\nAlso, plain `int` will suffice for both of these unless you need to handle interruption duration totals in excess of three weeks.",
+      "revId": "046179b7357d538ca11ca4fb25f6c94dffe63421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
