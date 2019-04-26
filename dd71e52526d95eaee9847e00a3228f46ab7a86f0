@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "405cdbc4_d9649ef8",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-26T08:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5fec80a_976084da",
+      "range": {
+        "startLine": 59,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e82d3ef8_910f6207",
         "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
         "patchSetId": 2
@@ -57,6 +81,30 @@
         "id": 5818
       },
       "writtenOn": "2019-04-26T08:23:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e82d3ef8_910f6207",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef2c9ded_fa87f5e3",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-26T08:26:29Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "e82d3ef8_910f6207",
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "71dc7b7f_abc1ead2",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-26T08:26:29Z",
+      "side": 1,
+      "message": "For better tests. They are const. Alternatively tests can be friend declared but I think that is uglier.",
+      "parentUuid": "0b6d7321_bf3262fe",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 40
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "61ecbd65_a7ce8998",
         "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
         "patchSetId": 2
@@ -153,6 +225,30 @@
       "writtenOn": "2019-04-26T08:23:59Z",
       "side": 1,
       "message": "This cl is not about changing behaviour and I would like to avoid changing that.",
+      "parentUuid": "61ecbd65_a7ce8998",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "280c3159_9b2225b4",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-26T08:26:29Z",
+      "side": 1,
+      "message": "I do not intend to change any behaviour in this cl. Names are left unchanged from previous.",
       "parentUuid": "61ecbd65_a7ce8998",
       "range": {
         "startLine": 72,
