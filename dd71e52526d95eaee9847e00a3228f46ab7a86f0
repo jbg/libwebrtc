@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "e33f8e70_f5aca50e",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-26T12:05:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ca1322bb_ce7a89a7",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 40
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61ecbd65_a7ce8998",
         "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
         "patchSetId": 2
@@ -298,6 +322,30 @@
       "side": 1,
       "message": "Yes, we shouldn\u0027t change the behavior of the old trials, but the new ones can use double without changing those, right?",
       "parentUuid": "280c3159_9b2225b4",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9828a820_b7ec0586",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2019-04-26T12:05:33Z",
+      "side": 1,
+      "message": "But they are compared to ints in the code - the IntervalBudget, use ints.",
+      "parentUuid": "f30447de_cfef9948",
       "range": {
         "startLine": 72,
         "startChar": 0,
