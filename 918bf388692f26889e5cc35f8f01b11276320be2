@@ -118,6 +118,30 @@
       "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99fe1b16_bf33e44e",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-26T09:07:34Z",
+      "side": 1,
+      "message": "\u003e Do you think it\u0027s reasonable to switch to type kI420 and GetI420() \n\nThat would be a better solution if we could add some other way to signal to the chrome encoder that the buffer is allocated by chrome. \n\nI also thought about adding a new type kNativeI420, but it\u0027s a little annoying to add it to all the places in webrtc and chrome.\n\nAnother alternative is to hardcode that kNative in chromium is trivially convertible to i420.\nThis one is a little spageti-sh.\n\nFinal alternative is to assume that all kNative frames don\u0027t affect pixel data then converted to i420 and update_rect can be left unchanged. Then we don\u0027t need to change anything in the buffer api.\nThis one risks some encoding artifacts if we are very unlucky.\n\nWDYT?",
+      "parentUuid": "1a29fe50_12e53853",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
