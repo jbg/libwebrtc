@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "78ee57be_01bec269",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5818
+      },
+      "writtenOn": "2019-04-26T08:23:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e82d3ef8_910f6207",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b6d7321_bf3262fe",
         "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
         "patchSetId": 2
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "1f11cc39_76207d46",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5818
+      },
+      "writtenOn": "2019-04-26T08:23:59Z",
+      "side": 1,
+      "message": "For better tests. But if you dont think the test is needed I can remove the changed tests. They are all const.",
+      "parentUuid": "0b6d7321_bf3262fe",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 40
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "61ecbd65_a7ce8998",
         "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
         "patchSetId": 2
@@ -82,6 +130,30 @@
       "writtenOn": "2019-04-26T07:14:38Z",
       "side": 1,
       "message": "I suggest making these double and _ratio_ instead. The parser accepts % as unit for doubles.\n\nThe alr_ prefix can be dropped in this context.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59c5fab1_9f2997b3",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5818
+      },
+      "writtenOn": "2019-04-26T08:23:59Z",
+      "side": 1,
+      "message": "This cl is not about changing behaviour and I would like to avoid changing that.",
+      "parentUuid": "61ecbd65_a7ce8998",
       "range": {
         "startLine": 72,
         "startChar": 0,
