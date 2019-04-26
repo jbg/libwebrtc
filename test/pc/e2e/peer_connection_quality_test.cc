@@ -298,7 +298,7 @@ void PeerConnectionE2EQualityTest::Run(
                                                   video_analyzer_threads);
   audio_quality_analyzer_->Start(test_case_name_, &analyzer_helper_);
   for (auto& reporter : quality_metrics_reporters_) {
-    reporter->Start(test_case_name_);
+    reporter->Initialize(test_case_name_);
   }
 
   // Start RTCEventLog recording if requested.
@@ -320,6 +320,9 @@ void PeerConnectionE2EQualityTest::Run(
       RTC_FROM_HERE,
       rtc::Bind(&PeerConnectionE2EQualityTest::SetupCallOnSignalingThread,
                 this));
+  for (auto& reporter : quality_metrics_reporters_) {
+    reporter->Start();
+  }
   {
     rtc::CritScope crit(&lock_);
     start_time_ = Now();
@@ -369,11 +372,20 @@ void PeerConnectionE2EQualityTest::Run(
       RTC_FROM_HERE,
       rtc::Bind(&PeerConnectionE2EQualityTest::TearDownCallOnSignalingThread,
                 this));
+  Timestamp end_time = Now();
+  TimeDelta real_test_duration = TimeDelta::Zero();
+  {
+    rtc::CritScope crit(&lock_);
+    real_test_duration = end_time - start_time_;
+  }
+  for (auto& reporter : quality_metrics_reporters_) {
+    reporter->Stop(real_test_duration);
+  }
 
   audio_quality_analyzer_->Stop();
   video_quality_analyzer_injection_helper_->Stop();
   for (auto& reporter : quality_metrics_reporters_) {
-    reporter->StopAndReportResults();
+    reporter->ReportResults();
   }
 
   // Ensuring that TestPeers have been destroyed in order to correctly close
