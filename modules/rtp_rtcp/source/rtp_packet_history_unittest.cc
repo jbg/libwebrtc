@@ -578,4 +578,62 @@ TEST_F(RtpPacketHistoryTest,
               ::testing::NotNull());
 }
 
+TEST_F(RtpPacketHistoryTest, CullWithAcks) {
+  const int64_t kPacketLifetime = RtpPacketHistory::kMinPacketDurationMs *
+                                  RtpPacketHistory::kPacketCullingDelayFactor;
+
+  const int64_t start_time = fake_clock_.TimeInMilliseconds();
+  hist_.SetStorePacketsStatus(StorageMode::kStoreAndCull, 10);
+
+  // Insert three packets 33ms apart, immediately mark them as sent.
+  std::unique_ptr<RtpPacketToSend> packet = CreateRtpPacket(kStartSeqNum);
+  packet->SetPayloadSize(50);
+  hist_.PutRtpPacket(std::move(packet), kAllowRetransmission,
+                     fake_clock_.TimeInMilliseconds());
+  hist_.GetPacketAndSetSendTime(kStartSeqNum);
+  fake_clock_.AdvanceTimeMilliseconds(33);
+  packet = CreateRtpPacket(kStartSeqNum + 1);
+  packet->SetPayloadSize(50);
+  hist_.PutRtpPacket(std::move(packet), kAllowRetransmission,
+                     fake_clock_.TimeInMilliseconds());
+  hist_.GetPacketAndSetSendTime(kStartSeqNum + 1);
+  fake_clock_.AdvanceTimeMilliseconds(33);
+  packet = CreateRtpPacket(To16u(kStartSeqNum + 2));
+  packet->SetPayloadSize(50);
+  hist_.PutRtpPacket(std::move(packet), kAllowRetransmission,
+                     fake_clock_.TimeInMilliseconds());
+  hist_.GetPacketAndSetSendTime(To16u(kStartSeqNum + 2));
+
+  EXPECT_TRUE(hist_.GetPacketState(kStartSeqNum).has_value());
+  EXPECT_TRUE(hist_.GetPacketState(kStartSeqNum + 1).has_value());
+  EXPECT_TRUE(hist_.GetPacketState(To16u(kStartSeqNum + 2)).has_value());
+
+  // Remove middle one using ack, check that only that one is gone.
+  std::vector<uint16_t> acked_sequence_numbers = {kStartSeqNum + 1};
+  hist_.CullAcknowledgedPackets(acked_sequence_numbers);
+
+  fake_clock_.AdvanceTimeMilliseconds(33);
+  hist_.SetRtt(1);  // Trigger culling of old packets.
+  EXPECT_TRUE(hist_.GetPacketState(kStartSeqNum).has_value());
+  EXPECT_FALSE(hist_.GetPacketState(kStartSeqNum + 1).has_value());
+  EXPECT_TRUE(hist_.GetPacketState(To16u(kStartSeqNum + 2)).has_value());
+
+  // Advance time to where second packet would have expired, verify first packet
+  // is removed.
+  int64_t second_packet_expiry_time = start_time + kPacketLifetime + 33 + 1;
+  fake_clock_.AdvanceTimeMilliseconds(second_packet_expiry_time -
+                                      fake_clock_.TimeInMilliseconds());
+  hist_.SetRtt(1);  // Trigger culling of old packets.
+  EXPECT_FALSE(hist_.GetPacketState(kStartSeqNum).has_value());
+  EXPECT_FALSE(hist_.GetPacketState(kStartSeqNum + 1).has_value());
+  EXPECT_TRUE(hist_.GetPacketState(To16u(kStartSeqNum + 2)).has_value());
+
+  // Advance to where last packet exires, verify all gone.
+  fake_clock_.AdvanceTimeMilliseconds(33);
+  hist_.SetRtt(1);  // Trigger culling of old packets.
+  EXPECT_FALSE(hist_.GetPacketState(kStartSeqNum).has_value());
+  EXPECT_FALSE(hist_.GetPacketState(kStartSeqNum + 1).has_value());
+  EXPECT_FALSE(hist_.GetPacketState(To16u(kStartSeqNum + 2)).has_value());
+}
+
 }  // namespace webrtc
