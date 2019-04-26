@@ -1960,6 +1960,8 @@ std::vector<LoggedPacketInfo> ParsedRtcEventLog::GetPacketInfos(
     LoggedPacketInfo logged(rtp, stream->media_type, stream->rtx, capture_time);
     logged.overhead = current_overhead;
     if (logged.has_transport_seq_no) {
+      logged.reported_recv_time = Timestamp::PlusInfinity();
+      logged.log_feedback_time = Timestamp::PlusInfinity();
       int64_t unwrapped_seq_num =
           seq_num_unwrapper.Unwrap(logged.transport_seq_no);
       indices[unwrapped_seq_num] = packets.size();
