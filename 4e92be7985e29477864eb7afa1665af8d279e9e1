@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "773b8e00_19a53002",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-04-26T18:04:21Z",
+      "side": 1,
+      "message": "Can you please add such comment to the code. e.g.\n// Since lifetime of a packets depends on the rtt, changing the rtt might cause some packets\n// become old.\nCullOldPackets(...);",
+      "parentUuid": "3ef24412_512ce282",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 16
+      },
+      "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b87cb885_a98e0e76",
         "filename": "modules/rtp_rtcp/source/rtp_packet_history_unittest.cc",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "kStartSeqNum is set to 2^16 - 2 so that at this point we have a wrap-around event.\nTo16u is not technically needed in the other places, but I can add it for consistency if you like.",
       "parentUuid": "b87cb885_a98e0e76",
+      "range": {
+        "startLine": 609,
+        "startChar": 35,
+        "endLine": 609,
+        "endChar": 41
+      },
+      "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a474d93_669b551e",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-04-26T18:04:21Z",
+      "side": 1,
+      "message": "Please. Either\nadd To16u everywhere \u0027+\u0027 is used, \ndo not use anywhere (relying on implicit conversion since GetPacketState takes uint16_t)\nor do not use kStartSeqNum constant, but only it\u0027s value:\nGetPacketStats(0xfffe)\nGetPacketStats(0xffff)\nGetPacketStats(0x0000)\n\n\n(Otherwise there is hidden relying on exact value of the kStartSeqNum, which is confusing)",
+      "parentUuid": "315d3f5b_9b5a0ed5",
       "range": {
         "startLine": 609,
         "startChar": 35,
