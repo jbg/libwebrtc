@@ -179,6 +179,8 @@ class PeerConnectionE2EQualityTest
                rtc::FunctionView<void(PeerConfigurer*)> configurer) override;
   void Run(RunParams run_params) override;
 
+  TimeDelta GetRealTestDuration() const override { return real_test_duration_; }
+
  private:
   struct ScheduledActivity {
     ScheduledActivity(TimeDelta initial_delay_since_start,
@@ -263,6 +265,8 @@ class PeerConnectionE2EQualityTest
       RTC_GUARDED_BY(lock_);
 
   RepeatingTaskHandle stats_polling_task_ RTC_GUARDED_BY(&task_queue_);
+
+  TimeDelta real_test_duration_ = TimeDelta::Zero();
 
   // Task queue, that is used for running activities during test call.
   // This task queue will be created before call set up and will be destroyed
