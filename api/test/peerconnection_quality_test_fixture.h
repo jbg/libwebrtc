@@ -204,7 +204,10 @@ class PeerConnectionE2EQualityTestFixture {
 
     // Invoked by framework after call is ended and peer connection factory and
     // peer connection are destroyed.
-    virtual void StopAndReportResults() = 0;
+    // |real_test_duration| - duration from call fully set up (after
+    // offer/answer exchange, ICE gathering will be done and ICE candidates
+    // will passed to remote side) to call fully shut downed.
+    virtual void StopAndReportResults(TimeDelta real_test_duration) = 0;
   };
 
   virtual ~PeerConnectionE2EQualityTestFixture() = default;
