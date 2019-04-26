@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b9da668c_0404cc8d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-26T12:34:31Z",
+      "side": 1,
+      "message": "Nice :-)\nDone.",
+      "parentUuid": "49207238_f3ba8b05",
+      "range": {
+        "startLine": 1237,
+        "startChar": 0,
+        "endLine": 1243,
+        "endChar": 74
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b45663d5_acf74661",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-04-26T09:42:58Z",
       "side": 1,
       "message": "With these AEC2/AECM CLs you\u0027ve made, there will only ever be at most one non-null of these three:\n\nprivate_submodules_-\u003eecho_controller\nprivate_submodules_-\u003eecho_cancellation\nprivate_submodules_-\u003eecho_control_mobile\n\nHence this can be simplified to just the check on AECM:\n\nif(private_submodules_-\u003eecho_control_mobile \u0026\u0026\n   private_submodules_-\u003eecho_control_mobile-\u003eis_enabled()) { ... }",
+      "range": {
+        "startLine": 1363,
+        "startChar": 6,
+        "endLine": 1367,
+        "endChar": 60
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "767f9ab4_1df224ab",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-26T12:34:31Z",
+      "side": 1,
+      "message": "I agree that with that the code work like that now, but I would want to go to lengths to avoid that AECM is running in cascade with the echo controller. For instance, without that check, a bug that causes AECM to remain activate when the echo controller is activated would silently start applying AEC is cascade, and we don\u0027t have good tests to catch that.\n\nMy suggestion is therefore to as far as possible make it impossible to run the AECM in cascade with the echo controller. Unfortunately, as the order of NS and AECM is different from how it for the echo controller a bit more code changes are needed to achieve that.\n\nI\u0027d suggest that we make a follow-up CL to make this more clean.",
+      "parentUuid": "b45663d5_acf74661",
       "range": {
         "startLine": 1363,
         "startChar": 6,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d2213037_704f6313",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1827,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-26T12:34:31Z",
+      "side": 1,
+      "message": "Good find!\nI\u0027d suggest that we go for 2 (but in a separate CL). WDYT?",
+      "parentUuid": "a29e96da_6cafa91a",
+      "range": {
+        "startLine": 1827,
+        "startChar": 0,
+        "endLine": 1827,
+        "endChar": 53
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4301241d_0605a3ea",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2019-04-26T09:42:58Z",
       "side": 1,
       "message": "Why the appended \u0027_\u0027?",
+      "range": {
+        "startLine": 1880,
+        "startChar": 9,
+        "endLine": 1880,
+        "endChar": 43
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7209b598_2a4385c8",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-04-26T12:34:31Z",
+      "side": 1,
+      "message": "It is a state variable, but that is no longer needed. I\u0027ll remove.",
+      "parentUuid": "4301241d_0605a3ea",
       "range": {
         "startLine": 1880,
         "startChar": 9,
