@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49207238_f3ba8b05",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-26T09:42:58Z",
+      "side": 1,
+      "message": "Nit: With these recent CLs, there will only ever be at most one non-null of these three:\n\nprivate_submodules_-\u003eecho_controller\nprivate_submodules_-\u003eecho_cancellation\nprivate_submodules_-\u003eecho_control_mobile\n\nSo I think this check can be moved to the end of the APM initialization, and work something like this:\n\n// Ensure that at most one echo canceler is active.\nRTC_DCHECK_LE(!!private_submodules_-\u003eecho_controller\n                  + !!private_submodules_-\u003eecho_cancellation\n                  + !!private_submodules_-\u003eecho_control_mobile,\n              1);\n\nWhat do you think?",
+      "range": {
+        "startLine": 1237,
+        "startChar": 0,
+        "endLine": 1243,
+        "endChar": 74
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b45663d5_acf74661",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-26T09:42:58Z",
+      "side": 1,
+      "message": "With these AEC2/AECM CLs you\u0027ve made, there will only ever be at most one non-null of these three:\n\nprivate_submodules_-\u003eecho_controller\nprivate_submodules_-\u003eecho_cancellation\nprivate_submodules_-\u003eecho_control_mobile\n\nHence this can be simplified to just the check on AECM:\n\nif(private_submodules_-\u003eecho_control_mobile \u0026\u0026\n   private_submodules_-\u003eecho_control_mobile-\u003eis_enabled()) { ... }",
+      "range": {
+        "startLine": 1363,
+        "startChar": 6,
+        "endLine": 1367,
+        "endChar": 60
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a29e96da_6cafa91a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1827,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-26T09:42:58Z",
+      "side": 1,
+      "message": "This is now a synonym for use_echo_controller, right? If so, then we can do at least one of these:\n1) use_echo_controller can be replaced by setting capture_nonlocked_.echo_controller_enabled\n2) all usage of capture_nonlocked_.echo_controller_enabled can be replaced by checking whether private_submodules_-\u003eecho_controller is non-null.",
+      "range": {
+        "startLine": 1827,
+        "startChar": 0,
+        "endLine": 1827,
+        "endChar": 53
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4301241d_0605a3ea",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-26T09:42:58Z",
+      "side": 1,
+      "message": "Why the appended \u0027_\u0027?",
+      "range": {
+        "startLine": 1880,
+        "startChar": 9,
+        "endLine": 1880,
+        "endChar": 43
+      },
+      "revId": "15a1895a96c58584f90e5e33e9961e1dc7379864",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
