@@ -1,3 +1,4 @@
+#if 0
 /*
  *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
  *
@@ -39,7 +40,7 @@ class MockTemporalLayers : public Vp8FrameBufferController {
  public:
   MOCK_METHOD2(NextFrameConfig, Vp8FrameConfig(size_t, uint32_t));
   MOCK_METHOD3(OnRatesUpdated, void(size_t, const std::vector<uint32_t>&, int));
-  MOCK_METHOD2(UpdateConfiguration, bool(size_t, Vp8EncoderConfig*));
+  MOCK_METHOD2(UpdateConfiguration, Vp8EncoderConfig(size_t));
   MOCK_METHOD6(OnEncodeDone,
                void(size_t, uint32_t, size_t, bool, int, CodecSpecificInfo*));
   MOCK_METHOD4(FrameEncoded, void(size_t, uint32_t, size_t, int));
@@ -674,3 +675,4 @@ TEST_F(ScreenshareRateAllocationTest, Hysteresis) {
 }
 
 }  // namespace webrtc
+#endif

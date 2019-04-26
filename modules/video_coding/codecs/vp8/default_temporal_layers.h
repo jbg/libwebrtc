@@ -48,7 +48,7 @@ class DefaultTemporalLayers final : public Vp8FrameBufferController {
                       const std::vector<uint32_t>& bitrates_bps,
                       int framerate_fps) override;
 
-  bool UpdateConfiguration(size_t stream_index, Vp8EncoderConfig* cfg) override;
+  Vp8EncoderConfig UpdateConfiguration(size_t stream_index) override;
 
   void OnEncodeDone(size_t stream_index,
                     uint32_t rtp_timestamp,
