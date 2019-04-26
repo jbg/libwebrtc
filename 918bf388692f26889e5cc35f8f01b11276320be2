@@ -94,6 +94,30 @@
       "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a29fe50_12e53853",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-26T06:47:50Z",
+      "side": 1,
+      "message": "I see. Ok for the time being, then. \n\nDo you think it\u0027s reasonable to switch to type kI420 and GetI420() (for the case that the frame actually is backed by I420 data in memory) longer term? If so, please file a bug and write a TODO item referencing it.\n\nI\u0027d like to see the updated docs before it lgtm.",
+      "parentUuid": "6544cd05_71340ab3",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
