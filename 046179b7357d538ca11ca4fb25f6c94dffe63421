@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "88924b6c_dff09056",
+        "filename": "api/stats_types.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-04-26T12:42:40Z",
+      "side": 1,
+      "message": "Yes, very much so.",
+      "parentUuid": "2c44e9ea_a2eb713b",
+      "range": {
+        "startLine": 569,
+        "startChar": 18,
+        "endLine": 569,
+        "endChar": 19
+      },
+      "revId": "046179b7357d538ca11ca4fb25f6c94dffe63421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5bc3d7b_8117f889",
         "filename": "call/audio_receive_stream.h",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "046179b7357d538ca11ca4fb25f6c94dffe63421",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef2cb1d2_3d0006af",
+        "filename": "call/audio_receive_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-04-26T12:42:40Z",
+      "side": 1,
+      "message": "I was mainly following suit (with the others in NetEqLifetimeStatistics), but I can change to int32_t.",
+      "parentUuid": "c5bc3d7b_8117f889",
+      "revId": "046179b7357d538ca11ca4fb25f6c94dffe63421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
