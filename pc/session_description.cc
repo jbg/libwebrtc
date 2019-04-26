@@ -15,6 +15,7 @@
 
 #include "absl/algorithm/container.h"
 #include "absl/memory/memory.h"
+#include "pc/media_protocol_names.h"
 #include "rtc_base/checks.h"
 
 namespace cricket {
@@ -270,6 +271,262 @@ const ContentGroup* SessionDescription::GetGroupByName(
     }
   }
   return NULL;
+}
+
+// DataContentDescription shenanigans
+DataContentDescription* RtpDataContentDescription::as_data() {
+  if (!shim_) {
+    shim_.reset(new DataContentDescription(this));
+  }
+  return shim_.get();
+}
+
+const DataContentDescription* RtpDataContentDescription::as_data() const {
+  return const_cast<RtpDataContentDescription*>(this)->as_data();
+}
+
+DataContentDescription* SctpDataContentDescription::as_data() {
+  if (!shim_) {
+    shim_.reset(new DataContentDescription(this));
+  }
+  return shim_.get();
+}
+
+const DataContentDescription* SctpDataContentDescription::as_data() const {
+  return const_cast<SctpDataContentDescription*>(this)->as_data();
+}
+
+DataContentDescription::DataContentDescription() {
+  // In this case, we will initialize owned_description_ as soon as
+  // we are told what protocol to use, either via set_protocol or
+  // via EnsureIsRtp.
+}
+
+DataContentDescription::DataContentDescription(
+    SctpDataContentDescription* wrapped)
+    : real_description_(wrapped) {}
+
+DataContentDescription::DataContentDescription(
+    RtpDataContentDescription* wrapped)
+    : real_description_(wrapped) {}
+
+DataContentDescription::DataContentDescription(
+    const DataContentDescription* o) {
+  if (o->real_description_) {
+    owned_description_ = absl::WrapUnique(o->real_description_->Copy());
+    real_description_ = owned_description_.get();
+  }
+}
+
+void DataContentDescription::set_protocol(const std::string& protocol) {
+  if (real_description_) {
+    real_description_->set_protocol(protocol);
+  } else {
+    RTC_CHECK(!owned_description_.get());
+    // We used to not know what protocol we were going to use. Now we know.
+    if (IsSctpProtocol(protocol)) {
+      owned_description_ = absl::make_unique<SctpDataContentDescription>();
+    } else {
+      owned_description_ = absl::make_unique<RtpDataContentDescription>();
+    }
+    real_description_ = owned_description_.get();
+  }
+}
+
+bool DataContentDescription::IsSctp() const {
+  return (real_description_ && real_description_->as_sctp());
+}
+
+void DataContentDescription::EnsureIsRtp() {
+  if (real_description_) {
+    RTC_CHECK(real_description_->as_rtp_data());
+    return;
+  }
+  owned_description_ = absl::make_unique<RtpDataContentDescription>();
+  real_description_ = owned_description_.get();
+}
+
+RtpDataContentDescription* DataContentDescription::as_rtp_data() {
+  if (real_description_) {
+    return real_description_->as_rtp_data();
+  }
+  return nullptr;
+}
+
+// Override all methods defined in MediaContentDescription.
+bool DataContentDescription::has_codecs() const {
+  return real_description_->has_codecs();
+}
+std::string DataContentDescription::protocol() const {
+  return real_description_->protocol();
+}
+
+webrtc::RtpTransceiverDirection DataContentDescription::direction() const {
+  return real_description_->direction();
+}
+void DataContentDescription::set_direction(
+    webrtc::RtpTransceiverDirection direction) {
+  return real_description_->set_direction(direction);
+}
+bool DataContentDescription::rtcp_mux() const {
+  return real_description_->rtcp_mux();
+}
+void DataContentDescription::set_rtcp_mux(bool mux) {
+  return real_description_->set_rtcp_mux(mux);
+}
+bool DataContentDescription::rtcp_reduced_size() const {
+  return real_description_->rtcp_reduced_size();
+}
+void DataContentDescription::set_rtcp_reduced_size(bool reduced_size) {
+  return real_description_->set_rtcp_reduced_size(reduced_size);
+}
+int DataContentDescription::bandwidth() const {
+  return real_description_->bandwidth();
+}
+void DataContentDescription::set_bandwidth(int bandwidth) {
+  return real_description_->set_bandwidth(bandwidth);
+}
+const std::vector<CryptoParams>& DataContentDescription::cryptos() const {
+  return real_description_->cryptos();
+}
+void DataContentDescription::AddCrypto(const CryptoParams& params) {
+  return real_description_->AddCrypto(params);
+}
+void DataContentDescription::set_cryptos(
+    const std::vector<CryptoParams>& cryptos) {
+  return real_description_->set_cryptos(cryptos);
+}
+const RtpHeaderExtensions& DataContentDescription::rtp_header_extensions()
+    const {
+  return real_description_->rtp_header_extensions();
+}
+void DataContentDescription::set_rtp_header_extensions(
+    const RtpHeaderExtensions& extensions) {
+  EnsureIsRtp();
+  return real_description_->set_rtp_header_extensions(extensions);
+}
+void DataContentDescription::AddRtpHeaderExtension(
+    const webrtc::RtpExtension& ext) {
+  EnsureIsRtp();
+  return real_description_->AddRtpHeaderExtension(ext);
+}
+void DataContentDescription::AddRtpHeaderExtension(
+    const cricket::RtpHeaderExtension& ext) {
+  EnsureIsRtp();
+  return real_description_->AddRtpHeaderExtension(ext);
+}
+void DataContentDescription::ClearRtpHeaderExtensions() {
+  EnsureIsRtp();
+  return real_description_->ClearRtpHeaderExtensions();
+}
+bool DataContentDescription::rtp_header_extensions_set() const {
+  return real_description_->rtp_header_extensions_set();
+}
+const StreamParamsVec& DataContentDescription::streams() const {
+  return real_description_->streams();
+}
+StreamParamsVec& DataContentDescription::mutable_streams() {
+  EnsureIsRtp();
+  return real_description_->mutable_streams();
+}
+void DataContentDescription::AddStream(const StreamParams& stream) {
+  EnsureIsRtp();
+  return real_description_->AddStream(stream);
+}
+void DataContentDescription::SetCnameIfEmpty(const std::string& cname) {
+  return real_description_->SetCnameIfEmpty(cname);
+}
+uint32_t DataContentDescription::first_ssrc() const {
+  return real_description_->first_ssrc();
+}
+bool DataContentDescription::has_ssrcs() const {
+  return real_description_->has_ssrcs();
+}
+void DataContentDescription::set_conference_mode(bool enable) {
+  return real_description_->set_conference_mode(enable);
+}
+bool DataContentDescription::conference_mode() const {
+  return real_description_->conference_mode();
+}
+void DataContentDescription::set_connection_address(
+    const rtc::SocketAddress& address) {
+  return real_description_->set_connection_address(address);
+}
+const rtc::SocketAddress& DataContentDescription::connection_address() const {
+  return real_description_->connection_address();
+}
+void DataContentDescription::set_extmap_allow_mixed_enum(
+    ExtmapAllowMixed mixed) {
+  return real_description_->set_extmap_allow_mixed_enum(mixed);
+}
+MediaContentDescription::ExtmapAllowMixed
+DataContentDescription::extmap_allow_mixed_enum() const {
+  return real_description_->extmap_allow_mixed_enum();
+}
+bool DataContentDescription::HasSimulcast() const {
+  return real_description_->HasSimulcast();
+}
+SimulcastDescription& DataContentDescription::simulcast_description() const {
+  return real_description_->simulcast_description();
+}
+void DataContentDescription::set_simulcast_description(
+    const SimulcastDescription& simulcast) {
+  return real_description_->set_simulcast_description(simulcast);
+}
+
+// Methods defined in MediaContentDescriptionImpl.
+// For SCTP, we implement codec handling.
+// For RTP, we pass the codecs.
+// In the cases where type hasn't been decided yet, we return dummies.
+
+const std::vector<DataCodec>& DataContentDescription::codecs() const {
+  if (IsSctp() || !real_description_) {
+    return MediaContentDescriptionImpl<DataCodec>::codecs();
+  }
+  return real_description_->as_rtp_data()->codecs();
+}
+
+void DataContentDescription::set_codecs(const std::vector<DataCodec>& codecs) {
+  if (IsSctp()) {
+    MediaContentDescriptionImpl<DataCodec>::set_codecs(codecs);
+  } else {
+    EnsureIsRtp();
+    real_description_->as_rtp_data()->set_codecs(codecs);
+  }
+}
+
+bool DataContentDescription::HasCodec(int id) {
+  if (IsSctp() || !real_description_) {
+    return MediaContentDescriptionImpl<DataCodec>::HasCodec(id);
+  }
+  return real_description_->as_rtp_data()->HasCodec(id);
+}
+
+void DataContentDescription::AddCodec(const DataCodec& codec) {
+  if (IsSctp()) {
+    MediaContentDescriptionImpl<DataCodec>::AddCodec(codec);
+  } else {
+    EnsureIsRtp();
+    real_description_->as_rtp_data()->AddCodec(codec);
+  }
+}
+
+void DataContentDescription::AddOrReplaceCodec(const DataCodec& codec) {
+  if (IsSctp()) {
+    MediaContentDescriptionImpl<DataCodec>::AddOrReplaceCodec(codec);
+  } else {
+    EnsureIsRtp();
+    real_description_->as_rtp_data()->AddOrReplaceCodec(codec);
+  }
+}
+
+void DataContentDescription::AddCodecs(const std::vector<DataCodec>& codecs) {
+  if (IsSctp()) {
+    MediaContentDescriptionImpl<DataCodec>::AddCodecs(codecs);
+  } else {
+    EnsureIsRtp();
+    real_description_->as_rtp_data()->AddCodecs(codecs);
+  }
 }
 
 }  // namespace cricket
