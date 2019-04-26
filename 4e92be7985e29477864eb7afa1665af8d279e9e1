@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3ef24412_512ce282",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-26T17:57:26Z",
+      "side": 1,
+      "message": "Because with kStoreAndCull mode, the lifetime of a packet is 3x max(rtt, 1000) ms\nChanging rtt may thus change liftime. Also, it\u0027s convenient for testing :)",
+      "parentUuid": "2b73d7ac_b33ed2b6",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 16
+      },
+      "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b87cb885_a98e0e76",
         "filename": "modules/rtp_rtcp/source/rtp_packet_history_unittest.cc",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-04-26T14:50:26Z",
       "side": 1,
       "message": "why need to convert to uint16_t here?\nwhy there is no same conversion one line above?",
+      "range": {
+        "startLine": 609,
+        "startChar": 35,
+        "endLine": 609,
+        "endChar": 41
+      },
+      "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "315d3f5b_9b5a0ed5",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-04-26T17:57:26Z",
+      "side": 1,
+      "message": "kStartSeqNum is set to 2^16 - 2 so that at this point we have a wrap-around event.\nTo16u is not technically needed in the other places, but I can add it for consistency if you like.",
+      "parentUuid": "b87cb885_a98e0e76",
       "range": {
         "startLine": 609,
         "startChar": 35,
