@@ -369,11 +369,17 @@ void PeerConnectionE2EQualityTest::Run(
       RTC_FROM_HERE,
       rtc::Bind(&PeerConnectionE2EQualityTest::TearDownCallOnSignalingThread,
                 this));
+  Timestamp end_time = Now();
+  TimeDelta real_test_duration = TimeDelta::Zero();
+  {
+    rtc::CritScope crit(&lock_);
+    real_test_duration = end_time - start_time_;
+  }
 
   audio_quality_analyzer_->Stop();
   video_quality_analyzer_injection_helper_->Stop();
   for (auto& reporter : quality_metrics_reporters_) {
-    reporter->StopAndReportResults();
+    reporter->StopAndReportResults(real_test_duration);
   }
 
   // Ensuring that TestPeers have been destroyed in order to correctly close

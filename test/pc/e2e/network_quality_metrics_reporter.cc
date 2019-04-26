@@ -33,7 +33,8 @@ void NetworkQualityMetricsReporter::Start(absl::string_view test_case_name) {
   RTC_CHECK_EQ(bob_stats.packets_received, 0);
 }
 
-void NetworkQualityMetricsReporter::StopAndReportResults() {
+void NetworkQualityMetricsReporter::StopAndReportResults(
+    TimeDelta real_test_duration) {
   EmulatedNetworkStats alice_stats = PopulateStats(alice_network_);
   EmulatedNetworkStats bob_stats = PopulateStats(bob_network_);
   ReportStats("alice", alice_stats,
