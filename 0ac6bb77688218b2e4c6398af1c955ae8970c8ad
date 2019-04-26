@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1948a8f0_190773fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-26T10:12:49Z",
+      "side": 1,
+      "message": "I don\u0027t think \"gracefully\" is the right word. Suggest \"immediately\" and/or \"with error message\".",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "0ac6bb77688218b2e4c6398af1c955ae8970c8ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aec6f0e6_16bcacf9",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-26T10:12:49Z",
+      "side": 1,
+      "message": "I think it\u0027s better to change AlignedMalloc to crash with an error message on allocation failure, and never return null.  \n\nI\u0027ve had a quick search for other usage of AlignedMalloc, and all call sites appear to assume return value is non-null, without checking it.",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 23
+      },
+      "revId": "0ac6bb77688218b2e4c6398af1c955ae8970c8ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
