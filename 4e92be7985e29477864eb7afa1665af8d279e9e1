@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b73d7ac_b33ed2b6",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-04-26T14:50:26Z",
+      "side": 1,
+      "message": "why Cull related to setting rtt?",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 16
+      },
+      "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b87cb885_a98e0e76",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-04-26T14:50:26Z",
+      "side": 1,
+      "message": "why need to convert to uint16_t here?\nwhy there is no same conversion one line above?",
+      "range": {
+        "startLine": 609,
+        "startChar": 35,
+        "endLine": 609,
+        "endChar": 41
+      },
+      "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
