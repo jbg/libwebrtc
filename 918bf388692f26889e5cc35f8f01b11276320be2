@@ -142,6 +142,30 @@
       "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ac98a93_97e8b0b2",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-26T13:47:13Z",
+      "side": 1,
+      "message": "\u003e I also thought about adding a new type kNativeI420, but it\u0027s a little annoying to add it to all the places in webrtc and chrome.\n\nI also thought of that. I think that\u0027s equivalent to this cl, and not really better.\n\n\u003e Another alternative is to hardcode that kNative in chromium is trivially convertible to i420.\n\u003e This one is a little spageti-sh.\n\nBut in chromium, kNative may mean a real texture, right?\n\nI guess most video frames handled by chrome are produced by either a chrome camera or a chrome decoder, in which case static_cast\u003cWebRtcVideoFrameAdapter*\u003e is safe. What\u0027s needed is to distinguish any frames from other sources, e.g., scaled by webrtc? At least the example you showed me, that static cast is the problem. And kNative is the recommended way for applications to do that sort of thing.\n\n\u003e Final alternative is to assume that all kNative frames don\u0027t affect pixel data then converted to i420 and update_rect can be left unchanged. Then we don\u0027t need to change anything in the buffer api.\n\u003e This one risks some encoding artifacts if we are very unlucky.\n\nI agree it sounds risky. If ToI420 involves a scaling, e.g., from texture to target resolution, then I imagine neighboring pixels could be affected, one could expande update_rect with a few pixels, but that sounds very brittle.\n\nYet another option is to allow calls to GetI420 on frames of any type, including kNative. And specify that it returns a non-null buffer if it can be done in a cheap and lossless fashion (not sure exactly what the requirements are to make it possible to keep update_rect unmodified, you have to spell that out), otherwise null. Might be useful also for kI420A? Allowing Get* calls on frame buffers of all types, and returning null when not applicable, was considered in the design, but at the time it seemed better to be strict and have applications use type() and no null-pointer checks. That could perhaps be done as a chrome-only change, specific to its kNative?\n\nI think change is ok as is, if properly documented. But if we can also have a plan on how to do it better, that would be nice.",
+      "parentUuid": "99fe1b16_bf33e44e",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "918bf388692f26889e5cc35f8f01b11276320be2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
