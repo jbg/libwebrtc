@@ -1960,6 +1960,7 @@ std::vector<LoggedPacketInfo> ParsedRtcEventLog::GetPacketInfos(
     LoggedPacketInfo logged(rtp, stream->media_type, stream->rtx, capture_time);
     logged.overhead = current_overhead;
     if (logged.has_transport_seq_no) {
+      logged.log_feedback_time = Timestamp::PlusInfinity();
       int64_t unwrapped_seq_num =
           seq_num_unwrapper.Unwrap(logged.transport_seq_no);
       indices[unwrapped_seq_num] = packets.size();
@@ -1987,10 +1988,9 @@ std::vector<LoggedPacketInfo> ParsedRtcEventLog::GetPacketInfos(
         last_feedback_base_time_us = feedback.GetBaseTimeUs();
 
         std::vector<LoggedPacketInfo*> packet_feedbacks;
-        packet_feedbacks.reserve(feedback.GetReceivedPackets().size());
+        packet_feedbacks.reserve(feedback.GetAllPackets().size());
         Timestamp receive_timestamp = feedback_base_time;
-        for (const auto& packet : feedback.GetReceivedPackets()) {
-          receive_timestamp += TimeDelta::us(packet.delta_us());
+        for (const auto& packet : feedback.GetAllPackets()) {
           int64_t unwrapped_seq_num =
               seq_num_unwrapper.Unwrap(packet.sequence_number());
           auto it = indices.find(unwrapped_seq_num);
@@ -2006,11 +2006,19 @@ std::vector<LoggedPacketInfo> ParsedRtcEventLog::GetPacketInfos(
                 << "Received very late feedback, possibly due to wraparound.";
             continue;
           }
-          // Ignore if we already received feedback for this packet.
-          if (sent->log_feedback_time.IsFinite())
-            continue;
-          sent->log_feedback_time = log_feedback_time;
-          sent->reported_recv_time = Timestamp::ms(receive_timestamp.ms());
+          if (packet.received()) {
+            receive_timestamp += TimeDelta::us(packet.delta_us());
+            if (sent->reported_recv_time.IsInfinite()) {
+              sent->reported_recv_time = Timestamp::ms(receive_timestamp.ms());
+              sent->log_feedback_time = log_feedback_time;
+            }
+          } else {
+            if (sent->reported_recv_time.IsInfinite() &&
+                sent->log_feedback_time.IsInfinite()) {
+              sent->reported_recv_time = Timestamp::PlusInfinity();
+              sent->log_feedback_time = log_feedback_time;
+            }
+          }
           packet_feedbacks.push_back(sent);
         }
         if (packet_feedbacks.empty())
