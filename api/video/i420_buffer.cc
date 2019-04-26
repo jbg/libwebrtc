@@ -53,6 +53,8 @@ I420Buffer::I420Buffer(int width,
   RTC_DCHECK_GE(stride_y, width);
   RTC_DCHECK_GE(stride_u, (width + 1) / 2);
   RTC_DCHECK_GE(stride_v, (width + 1) / 2);
+
+  RTC_CHECK(data_) << "Couldn't allocate memory for I420Buffer";
 }
 
 I420Buffer::~I420Buffer() {}
