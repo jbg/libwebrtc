@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2fb48c49_2ddfbf69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-26T10:38:18Z",
+      "side": 1,
+      "message": "Compared to null pointer dereferencing, this is graceful crashing.\n\nChanged the description anyway.",
+      "parentUuid": "1948a8f0_190773fd",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "0ac6bb77688218b2e4c6398af1c955ae8970c8ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aec6f0e6_16bcacf9",
         "filename": "api/video/i010_buffer.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "0ac6bb77688218b2e4c6398af1c955ae8970c8ad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfb49d4c_db08254f",
+        "filename": "api/video/i010_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-04-26T10:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aec6f0e6_16bcacf9",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 23
+      },
+      "revId": "0ac6bb77688218b2e4c6398af1c955ae8970c8ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
