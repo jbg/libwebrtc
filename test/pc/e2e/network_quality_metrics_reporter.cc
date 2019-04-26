@@ -22,7 +22,7 @@ constexpr int kStatsWaitTimeoutMs = 1000;
 
 }
 
-void NetworkQualityMetricsReporter::Start(absl::string_view test_case_name) {
+void NetworkQualityMetricsReporter::Initialize(absl::string_view test_case_name) {
   test_case_name_ = std::string(test_case_name);
   // Check that network stats are clean before test execution.
   EmulatedNetworkStats alice_stats = PopulateStats(alice_network_);
@@ -33,12 +33,18 @@ void NetworkQualityMetricsReporter::Start(absl::string_view test_case_name) {
   RTC_CHECK_EQ(bob_stats.packets_received, 0);
 }
 
-void NetworkQualityMetricsReporter::StopAndReportResults() {
-  EmulatedNetworkStats alice_stats = PopulateStats(alice_network_);
-  EmulatedNetworkStats bob_stats = PopulateStats(bob_network_);
-  ReportStats("alice", alice_stats,
+void NetworkQualityMetricsReporter::Stop(TimeDelta real_test_duration) {
+  // TODO(titovartem) make invocation here, but wait for results in
+  // ReportResults
+  alice_stats_ = PopulateStats(alice_network_);
+  bob_stats_ = PopulateStats(bob_network_);
+}
+
+void NetworkQualityMetricsReporter::ReportResults(
+    TimeDelta real_test_duration) {
+  ReportStats("alice", alice_stats_,
               alice_stats.packets_sent - bob_stats.packets_received);
-  ReportStats("bob", bob_stats,
+  ReportStats("bob", bob_stats_,
               bob_stats.packets_sent - alice_stats.packets_received);
 }
 

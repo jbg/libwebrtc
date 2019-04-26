@@ -15,6 +15,7 @@
 
 #include "api/test/network_emulation_manager.h"
 #include "api/test/peerconnection_quality_test_fixture.h"
+#include "api/units/time_delta.h"
 
 namespace webrtc {
 namespace webrtc_pc_e2e {
@@ -28,8 +29,10 @@ class NetworkQualityMetricsReporter
   ~NetworkQualityMetricsReporter() override = default;
 
   // Network stats must be empty when this method will be invoked.
-  void Start(absl::string_view test_case_name) override;
-  void StopAndReportResults() override;
+  void Initialize(absl::string_view test_case_name) override;
+  void Start() override {};
+  void Stop(TimeDelta real_test_duration) override;
+  void ReportResults() override;
 
  private:
   static EmulatedNetworkStats PopulateStats(
@@ -47,6 +50,9 @@ class NetworkQualityMetricsReporter
 
   EmulatedNetworkManagerInterface* alice_network_;
   EmulatedNetworkManagerInterface* bob_network_;
+
+  EmulatedNetworkStats alice_stats_;
+  EmulatedNetworkStats bob_stats_;
 };
 
 }  // namespace webrtc_pc_e2e
