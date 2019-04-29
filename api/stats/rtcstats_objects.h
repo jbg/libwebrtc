@@ -329,6 +329,11 @@ class RTC_EXPORT RTCMediaStreamTrackStats final : public RTCStats {
   RTCNonStandardStatsMember<double> total_pauses_duration;
   RTCNonStandardStatsMember<double> total_frames_duration;
   RTCNonStandardStatsMember<double> sum_squared_frame_durations;
+  // Non-standard audio-only members.
+  // TODO(henrik.lundin): Add description of the interruption metrics at
+  // https://github.com/henbos/webrtc-provisional-stats/issues/17
+  RTCNonStandardStatsMember<int32_t> interruption_count;
+  RTCNonStandardStatsMember<int32_t> total_interruption_duration_ms;
 };
 
 // https://w3c.github.io/webrtc-stats/#pcstats-dict*
