@@ -73,6 +73,23 @@
       "revId": "678af74770848af888d3b4006dc318f506950c57",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a7102ac_b863fdf2",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-29T14:37:26Z",
+      "side": 1,
+      "message": "nit: When you change the order in the header file, make sure to use the same order here for consistency",
+      "revId": "678af74770848af888d3b4006dc318f506950c57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
