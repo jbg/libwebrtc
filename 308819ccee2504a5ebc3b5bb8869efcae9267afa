@@ -16,6 +16,24 @@
       "revId": "308819ccee2504a5ebc3b5bb8869efcae9267afa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b184761a_18cbd42d",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-04-29T13:37:49Z",
+      "side": 1,
+      "message": "I have no idea, I don\u0027t think there is any change here, so it seems like a bug in the diff somehow? Or perhaps there are different kinds of space characters? I don\u0027t know what\u0027s going on, but I think it should be safe to ignore since it only affects comment.",
+      "parentUuid": "e454e912_ccc70b74",
+      "revId": "308819ccee2504a5ebc3b5bb8869efcae9267afa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
