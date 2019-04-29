@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29f0ee2e_9349410e",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-29T08:31:51Z",
+      "side": 1,
+      "message": "Document the I420A case too.",
+      "range": {
+        "startLine": 70,
+        "startChar": 13,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "1c67fd937a9076d946a9faead809dfc28cba35d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e34c22df_760f15ec",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-04-29T08:31:51Z",
+      "side": 1,
+      "message": "I\u0027m not sure which deprecated interface this comment refers to. Would be good if you can arrange the chromium code so that it doesn\u0027t block transition to raw pointers here.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 13
+      },
+      "revId": "1c67fd937a9076d946a9faead809dfc28cba35d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
