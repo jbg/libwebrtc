@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1915bd84_ec1482f1",
+        "filename": "test/field_trial.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 8876
+      },
+      "writtenOn": "2019-04-29T11:45:26Z",
+      "side": 1,
+      "message": "does it make sense to leave this commented out line in?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 79
+      },
+      "revId": "d9503505e6c10ba907a2028c6aff3b0de554a861",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
