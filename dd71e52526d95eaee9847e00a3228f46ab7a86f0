@@ -355,6 +355,30 @@
       "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d2f7484_15ac9d44",
+        "filename": "modules/congestion_controller/goog_cc/alr_detector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-04-29T11:03:15Z",
+      "side": 1,
+      "message": "Ah, you can use rtc::checked_cast\u003cint\u003e(value*100) to convert from a ratio to percent.",
+      "parentUuid": "9828a820_b7ec0586",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "dd71e52526d95eaee9847e00a3228f46ab7a86f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
