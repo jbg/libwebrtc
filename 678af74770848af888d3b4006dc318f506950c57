@@ -22,6 +22,57 @@
       "revId": "678af74770848af888d3b4006dc318f506950c57",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "970eaf14_6c7ef1cc",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-29T14:36:36Z",
+      "side": 1,
+      "message": "In stats, counters should be unsigned (unless negative value is possible).",
+      "revId": "678af74770848af888d3b4006dc318f506950c57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf92cdda_6b0699ed",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-29T14:36:36Z",
+      "side": 1,
+      "message": "In stats, time measurements should be \u003cdouble\u003e and expressed in seconds, and \"ms\" need not be part of the name.",
+      "revId": "678af74770848af888d3b4006dc318f506950c57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c264c6d_dc547a20",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-04-29T14:36:36Z",
+      "side": 1,
+      "message": "static_cast\u003cdouble\u003e(voice_receiver_info.total_interruption_duration_ms) / rtc::kNumMillisecsPerSec",
+      "revId": "678af74770848af888d3b4006dc318f506950c57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
