@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9605dc6f_10a802f8",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-04-29T14:29:17Z",
+      "side": 1,
+      "message": "this can be invoked only after metrics are reported?",
+      "range": {
+        "startLine": 182,
+        "startChar": 12,
+        "endLine": 182,
+        "endChar": 31
+      },
+      "revId": "b7236ddd736abccc7bec134d9172e6433888efb2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
