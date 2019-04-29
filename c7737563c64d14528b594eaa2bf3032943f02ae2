@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44fda4e9_1c94c52d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-04-29T07:58:45Z",
+      "side": 1,
+      "message": "This is a local variable, so it should not have a trailing underscore. Consider renaming it to the same thing as for AECM, for consistency. (max_element_size on line 1832)",
+      "range": {
+        "startLine": 1871,
+        "startChar": 9,
+        "endLine": 1871,
+        "endChar": 26
+      },
+      "revId": "c7737563c64d14528b594eaa2bf3032943f02ae2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
