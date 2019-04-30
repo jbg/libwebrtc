@@ -351,6 +351,11 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // Returns -1 on failure else 0.
   virtual int32_t RemoteRTCPStat(
       std::vector<RTCPReportBlock>* receive_blocks) const = 0;
+  // TODO: Comment
+  virtual std::vector<ReportBlockWithRtt> GetReportBlocksWithRtt() const {
+    // TODO: Remove default implementation.
+    return std::vector<ReportBlockWithRtt>();
+  }
 
   // (APP) Sets application specific data.
   // Returns -1 on failure else 0.

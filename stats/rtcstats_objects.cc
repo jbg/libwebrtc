@@ -698,6 +698,55 @@ RTCOutboundRTPStreamStats::RTCOutboundRTPStreamStats(
 RTCOutboundRTPStreamStats::~RTCOutboundRTPStreamStats() {}
 
 // clang-format off
+WEBRTC_RTCSTATS_IMPL(
+    RTCRemoteInboundRtpStreamStats, RTCStats, "remote-inbound-rtp",
+    &ssrc,
+    &kind,
+    &transport_id,
+    &codec_id,
+    &local_id,
+    &packets_received,
+    &packets_lost,
+    &jitter,
+    &round_trip_time,
+    &fraction_lost)
+// clang-format on
+
+RTCRemoteInboundRtpStreamStats::RTCRemoteInboundRtpStreamStats(
+    const std::string& id, int64_t timestamp_us)
+    : RTCRemoteInboundRtpStreamStats(std::string(id), timestamp_us) {}
+
+RTCRemoteInboundRtpStreamStats::RTCRemoteInboundRtpStreamStats(
+    std::string&& id, int64_t timestamp_us)
+    : RTCStats(std::move(id), timestamp_us),
+      ssrc("ssrc"),
+      kind("kind"),
+      transport_id("transportId"),
+      codec_id("codecId"),
+      local_id("localId"),
+      packets_received("packetsReceived"),
+      packets_lost("packetsLost"),
+      jitter("jitter"),
+      round_trip_time("roundTripTime"),
+      fraction_lost("fractionLost") {}
+
+RTCRemoteInboundRtpStreamStats::RTCRemoteInboundRtpStreamStats(
+    const RTCRemoteInboundRtpStreamStats& other)
+    : RTCStats(other),
+      ssrc(other.ssrc),
+      kind(other.kind),
+      transport_id(other.transport_id),
+      codec_id(other.codec_id),
+      local_id(other.local_id),
+      packets_received(other.packets_received),
+      packets_lost(other.packets_lost),
+      jitter(other.jitter),
+      round_trip_time(other.round_trip_time),
+      fraction_lost(other.fraction_lost) {}
+
+RTCRemoteInboundRtpStreamStats::~RTCRemoteInboundRtpStreamStats() {}
+
+// clang-format off
 WEBRTC_RTCSTATS_IMPL(RTCTransportStats, RTCStats, "transport",
     &bytes_sent,
     &bytes_received,

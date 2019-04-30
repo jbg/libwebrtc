@@ -37,6 +37,7 @@
 #include "media/base/media_constants.h"
 #include "media/base/stream_params.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "rtc_base/async_packet_socket.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/copy_on_write_buffer.h"
@@ -399,6 +400,8 @@ struct MediaSenderInfo {
   absl::optional<int> codec_payload_type;
   std::vector<SsrcSenderInfo> local_stats;
   std::vector<SsrcReceiverInfo> remote_stats;
+  // TODO: Comment
+  std::vector<webrtc::ReportBlockWithRtt> report_blocks;
 };
 
 struct MediaReceiverInfo {

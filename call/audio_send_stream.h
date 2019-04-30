@@ -28,6 +28,7 @@
 #include "api/scoped_refptr.h"
 #include "call/rtp_config.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 
 namespace webrtc {
 
@@ -65,6 +66,8 @@ class AudioSendStream {
     AudioProcessingStats apm_statistics;
 
     int64_t target_bitrate_bps = 0;
+    // TODO: Comment
+    std::vector<ReportBlockWithRtt> report_blocks;
   };
 
   struct Config {

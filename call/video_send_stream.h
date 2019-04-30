@@ -56,6 +56,8 @@ class VideoSendStream {
     StreamDataCounters rtp_stats;
     RtcpPacketTypeCounter rtcp_packet_type_counts;
     RtcpStatistics rtcp_stats;
+    // TODO: Comment
+    absl::optional<ReportBlockWithRtt> report_block;
   };
 
   struct Stats {
