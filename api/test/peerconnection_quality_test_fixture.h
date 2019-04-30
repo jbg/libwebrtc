@@ -237,6 +237,11 @@ class PeerConnectionE2EQualityTestFixture {
                        rtc::NetworkManager* network_manager,
                        rtc::FunctionView<void(PeerConfigurer*)> configurer) = 0;
   virtual void Run(RunParams run_params) = 0;
+
+  // Returns real test duration - the time of test execution measured during
+  // test. Client must call this method only after test is finished (after
+  // Run(...) method returned).
+  virtual TimeDelta GetRealTestDuration() const = 0;
 };
 
 }  // namespace webrtc_pc_e2e
