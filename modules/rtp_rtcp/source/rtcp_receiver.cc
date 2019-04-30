@@ -42,6 +42,7 @@
 #include "modules/rtp_rtcp/source/tmmbr_help.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/time_utils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/ntp_time.h"
 
@@ -70,6 +71,7 @@ struct RTCPReceiver::PacketInformation {
   uint32_t remote_ssrc = 0;
   std::vector<uint16_t> nack_sequence_numbers;
   ReportBlockList report_blocks;
+  std::vector<ReportBlockWithRtt> report_blocks_with_rtt;
   int64_t rtt_ms = 0;
   uint32_t receiver_estimated_max_bitrate_bps = 0;
   std::unique_ptr<rtcp::TransportFeedback> transport_feedback;
@@ -106,16 +108,6 @@ struct RTCPReceiver::RrtrInformation {
   uint32_t received_remote_mid_ntp_time;
   // NTP time when the report was received in compact representation.
   uint32_t local_receive_mid_ntp_time;
-};
-
-struct RTCPReceiver::ReportBlockWithRtt {
-  RTCPReportBlock report_block;
-
-  int64_t last_rtt_ms = 0;
-  int64_t min_rtt_ms = 0;
-  int64_t max_rtt_ms = 0;
-  int64_t sum_rtt_ms = 0;
-  size_t num_rtts = 0;
 };
 
 struct RTCPReceiver::LastFirStatus {
@@ -311,6 +303,17 @@ int32_t RTCPReceiver::StatisticsReceived(
   return 0;
 }
 
+std::vector<ReportBlockWithRtt> RTCPReceiver::GetReportBlocksWithRtt() const {
+  std::vector<ReportBlockWithRtt> result;
+  {
+    rtc::CritScope lock(&rtcp_receiver_lock_);
+    for (const auto& reports_per_receiver : received_report_blocks_)
+      for (const auto& report : reports_per_receiver.second)
+        result.push_back(report.second);
+  }
+  return result;
+}
+
 bool RTCPReceiver::ParseCompoundPacket(const uint8_t* packet_begin,
                                        const uint8_t* packet_end,
                                        PacketInformation* packet_information) {
@@ -485,6 +488,7 @@ void RTCPReceiver::HandleReportBlock(const ReportBlock& report_block,
 
   ReportBlockWithRtt* report_block_info =
       &received_report_blocks_[report_block.source_ssrc()][remote_ssrc];
+  report_block_info->report_received_timestamp_ms = rtc::TimeUTCMicros();
   report_block_info->report_block.sender_ssrc = remote_ssrc;
   report_block_info->report_block.source_ssrc = report_block.source_ssrc();
   report_block_info->report_block.fraction_lost = report_block.fraction_lost();
@@ -542,6 +546,7 @@ void RTCPReceiver::HandleReportBlock(const ReportBlock& report_block,
   }
 
   packet_information->report_blocks.push_back(report_block_info->report_block);
+  packet_information->report_blocks_with_rtt.push_back(*report_block_info);
 }
 
 RTCPReceiver::TmmbrInformation* RTCPReceiver::FindOrCreateTmmbrInfo(
@@ -1083,6 +1088,10 @@ void RTCPReceiver::TriggerCallbacksFromRtcpPacket(
         stats.jitter = report_block.jitter;
 
         stats_callback_->StatisticsUpdated(stats, report_block.source_ssrc);
+      }
+      for (auto& report_block_with_rtt :
+           packet_information.report_blocks_with_rtt) {
+        stats_callback_->ReportBlockUpdated(std::move(report_block_with_rtt));
       }
     }
   }

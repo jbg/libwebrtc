@@ -13,6 +13,8 @@
 
 #include <stdint.h>
 
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+
 namespace webrtc {
 
 // Statistics for an RTCP channel
@@ -29,6 +31,7 @@ class RtcpStatisticsCallback {
 
   virtual void StatisticsUpdated(const RtcpStatistics& statistics,
                                  uint32_t ssrc) = 0;
+  virtual void ReportBlockUpdated(ReportBlockWithRtt report_block) {}  // TODO
   virtual void CNameChanged(const char* cname, uint32_t ssrc) = 0;
 };
 

@@ -457,6 +457,29 @@ class RTC_EXPORT RTCOutboundRTPStreamStats final : public RTCRTPStreamStats {
   RTCStatsMember<std::string> content_type;
 };
 
+// TODO: Other members, refactor...
+class RTC_EXPORT RTCRemoteInboundRtpStreamStats final : public RTCStats {
+ public:
+  WEBRTC_RTCSTATS_DECL();
+
+  RTCRemoteInboundRtpStreamStats(const std::string& id, int64_t timestamp_us);
+  RTCRemoteInboundRtpStreamStats(std::string&& id, int64_t timestamp_us);
+  RTCRemoteInboundRtpStreamStats(const RTCRemoteInboundRtpStreamStats& other);
+  ~RTCRemoteInboundRtpStreamStats() override;
+
+  RTCStatsMember<uint32_t> ssrc;
+  RTCStatsMember<std::string> kind;
+  RTCStatsMember<std::string> transport_id;
+  RTCStatsMember<std::string> codec_id;
+  RTCStatsMember<std::string> local_id;
+  RTCStatsMember<uint32_t> packets_received;
+  RTCStatsMember<int32_t> packets_lost;
+  RTCStatsMember<double> jitter;
+  RTCStatsMember<double> round_trip_time;
+  // TODO: requires calculation (don't think it's very useful)
+  RTCStatsMember<double> fraction_lost;
+};
+
 // https://w3c.github.io/webrtc-stats/#transportstats-dict*
 class RTC_EXPORT RTCTransportStats final : public RTCStats {
  public:

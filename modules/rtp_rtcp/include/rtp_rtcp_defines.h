@@ -150,6 +150,18 @@ struct RTCPReportBlock {
   uint32_t delay_since_last_sender_report;
 };
 
+// TODO: RTCPReportBlockWithRtt? RTCPReportAndFriends?
+struct ReportBlockWithRtt {
+  RTCPReportBlock report_block;
+
+  int64_t report_received_timestamp_ms = 0;
+  int64_t last_rtt_ms = 0;
+  int64_t min_rtt_ms = 0;
+  int64_t max_rtt_ms = 0;
+  int64_t sum_rtt_ms = 0;
+  size_t num_rtts = 0;
+};
+
 typedef std::list<RTCPReportBlock> ReportBlockList;
 
 struct RtpState {
