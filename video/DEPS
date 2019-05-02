@@ -15,4 +15,5 @@ include_rules = [
   "+modules/video_coding",
   "+modules/video_processing",
   "+system_wrappers",
+  "+stats/data",
 ]
