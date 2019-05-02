@@ -28,6 +28,7 @@
 #include "modules/rtp_rtcp/source/rtp_sender.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/deprecation.h"
+#include "stats/data/report_block_data.h"
 
 namespace webrtc {
 
@@ -351,6 +352,11 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // Returns -1 on failure else 0.
   virtual int32_t RemoteRTCPStat(
       std::vector<RTCPReportBlock>* receive_blocks) const = 0;
+  // A snapshot of the most recent Report Block with additional data of
+  // interest to statistics. Used to implement RTCRemoteInboundRtpStreamStats.
+  // Within this list, the ReportBlockData::RTCPReportBlock::source_ssrc(),
+  // which is the SSRC of the corresponding outbound RTP stream, is unique.
+  virtual std::vector<ReportBlockData> GetLatestReportBlockData() const = 0;
 
   // (APP) Sets application specific data.
   // Returns -1 on failure else 0.
@@ -400,6 +406,8 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   virtual void RegisterRtcpStatisticsCallback(
       RtcpStatisticsCallback* callback) = 0;
   virtual RtcpStatisticsCallback* GetRtcpStatisticsCallback() = 0;
+  virtual void SetReportBlockDataObserver(
+      ReportBlockDataObserver* observer) = 0;
   // BWE feedback packets.
   bool SendFeedbackPacket(const rtcp::TransportFeedback& packet) override = 0;
 
