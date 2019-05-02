@@ -50,6 +50,7 @@ rtc_source_set("call_interfaces") {
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
     "../rtc_base/network:sent_packet",
+    "../stats/data",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
@@ -79,6 +80,7 @@ rtc_source_set("rtp_interfaces") {
     "../logging:rtc_event_log_api",
     "../modules/rtp_rtcp:rtp_rtcp_format",
     "../rtc_base:rtc_base_approved",
+    "../stats/data",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
@@ -279,6 +281,7 @@ rtc_source_set("video_stream_api") {
     "../modules/rtp_rtcp:rtp_rtcp_format",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
+    "../stats/data",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
