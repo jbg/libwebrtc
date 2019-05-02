@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "bac542b2_ae9a75ff",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-05-02T21:46:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "773b8e00_19a53002",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 16
+      },
+      "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b87cb885_a98e0e76",
         "filename": "modules/rtp_rtcp/source/rtp_packet_history_unittest.cc",
         "patchSetId": 1
@@ -141,6 +165,30 @@
       "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1588b9b_3052b874",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-05-02T21:46:47Z",
+      "side": 1,
+      "message": "\u003e Please. Either\n\u003e add To16u everywhere \u0027+\u0027 is used, \nDone.\n\n\u003e do not use anywhere (relying on implicit conversion since GetPacketState takes uint16_t)\nThis causes compilation failures on some platforms.\n\n\u003e or do not use kStartSeqNum constant, but only it\u0027s value:\n\u003e GetPacketStats(0xfffe)\n\u003e GetPacketStats(0xffff)\n\u003e GetPacketStats(0x0000)\nImo this quickly becomes unreadable, making it hard to understand what the test is trying to do.",
+      "parentUuid": "8a474d93_669b551e",
+      "range": {
+        "startLine": 609,
+        "startChar": 35,
+        "endLine": 609,
+        "endChar": 41
+      },
+      "revId": "4e92be7985e29477864eb7afa1665af8d279e9e1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
