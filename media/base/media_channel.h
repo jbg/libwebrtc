@@ -47,6 +47,7 @@
 #include "rtc_base/string_encode.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
+#include "stats/data/report_block_data.h"
 
 namespace rtc {
 class Timing;
@@ -399,6 +400,11 @@ struct MediaSenderInfo {
   absl::optional<int> codec_payload_type;
   std::vector<SsrcSenderInfo> local_stats;
   std::vector<SsrcReceiverInfo> remote_stats;
+  // A snapshot of the most recent Report Block with additional data of interest
+  // to statistics. Used to implement RTCRemoteInboundRtpStreamStats. Within
+  // this list, the ReportBlockData::RTCPReportBlock::source_ssrc(), which is
+  // the SSRC of the corresponding outbound RTP stream, is unique.
+  std::vector<webrtc::ReportBlockData> report_block_datas;
 };
 
 struct MediaReceiverInfo {
