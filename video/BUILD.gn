@@ -106,6 +106,7 @@ rtc_static_library("video") {
     "../rtc_base/task_utils:repeating_task",
     "../rtc_base/task_utils:to_queued_task",
     "../rtc_base/time:timestamp_extrapolator",
+    "../stats/data",
     "../system_wrappers",
     "../system_wrappers:field_trial",
     "../system_wrappers:metrics",
