@@ -22,6 +22,30 @@
       "revId": "e360c09c864e250fe712b17540efdcce9957e7b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8a39006_f998bd7a",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-03T12:08:44Z",
+      "side": 0,
+      "message": "rtc::CreatePlatformFile calls ::open with O_CREAT | O_TRUNC | O_RDWR, which means that it will create a new file or truncate an existing one. On posix, that is; I can only guess that the windows implementation does something similar.\n\nWhat\u0027s the desired behavior for this class?",
+      "parentUuid": "789c53a9_4bc99d4d",
+      "range": {
+        "startLine": 35,
+        "startChar": 33,
+        "endLine": 35,
+        "endChar": 51
+      },
+      "revId": "e360c09c864e250fe712b17540efdcce9957e7b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
