@@ -277,7 +277,6 @@ class AudioProcessingImpl : public AudioProcessing {
   // Capture-side exclusive methods possibly running APM in a multi-threaded
   // manner that are called with the render lock already acquired.
   int ProcessCaptureStreamLocked() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
-  void MaybeUpdateHistograms() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
 
   // Render-side exclusive methods possibly running APM in a multi-threaded
   // manner that are called with the render lock already acquired.
