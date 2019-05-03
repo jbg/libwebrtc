@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6da40b83_fbeea912",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-03T11:54:25Z",
+      "side": 1,
+      "message": "Would this be easier to read, perhaps?\n\nFileWrapper FileWrapperFromPlatformFile(rtc::PlatformFile platform_file) {\n  if (platform_file !\u003d rtc::kInvalidPlatformFileValue) {\n    return FileWrapper(frtc::FdopenPlatformFileForWriting(platform_file));\n  } else {\n    return FileWrapper();\n  }\n}",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "2366d7521739fb2b7c6a9cbaeea469dcb9218c92",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca550b8e_c074b261",
         "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
         "patchSetId": 1
@@ -19,6 +42,46 @@
         "endLine": 51,
         "endChar": 35
       },
+      "revId": "2366d7521739fb2b7c6a9cbaeea469dcb9218c92",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "698ae425_a569dd37",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-03T11:54:25Z",
+      "side": 1,
+      "message": "Could you piggy-back a substitution of s/windows/Windows here? Wouldn\u0027t hurt to also capitalize UTF, but the distinction between MS Windows and holes in walls is more important to me. :-)",
+      "range": {
+        "startLine": 51,
+        "startChar": 27,
+        "endLine": 51,
+        "endChar": 28
+      },
+      "revId": "2366d7521739fb2b7c6a9cbaeea469dcb9218c92",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1655b3c1_2a17c609",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-03T11:54:25Z",
+      "side": 1,
+      "message": "Can this be moved to the .h file, or do you get an error?",
       "revId": "2366d7521739fb2b7c6a9cbaeea469dcb9218c92",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
