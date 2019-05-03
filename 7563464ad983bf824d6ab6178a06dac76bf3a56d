@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c46d1a3_bc930639",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-05-03T13:05:38Z",
+      "side": 1,
+      "message": "I think the intention is that the caller should provide a max size, so I\u0027m not sure we want to support this. Is there a use case for it?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 45
+      },
+      "revId": "7563464ad983bf824d6ab6178a06dac76bf3a56d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
