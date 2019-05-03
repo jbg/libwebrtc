@@ -1767,10 +1767,8 @@ AudioProcessing::Config AudioProcessingImpl::GetConfig() const {
 bool AudioProcessingImpl::UpdateActiveSubmoduleStates() {
   return submodule_states_.Update(
       config_.high_pass_filter.enabled,
-      private_submodules_->echo_cancellation &&
-          private_submodules_->echo_cancellation->is_enabled(),
-      private_submodules_->echo_control_mobile &&
-          private_submodules_->echo_control_mobile->is_enabled(),
+      !!private_submodules_->echo_cancellation,
+      !!private_submodules_->echo_control_mobile,
       config_.residual_echo_detector.enabled,
       public_submodules_->noise_suppression->is_enabled(),
       public_submodules_->gain_control->is_enabled(),
@@ -1862,8 +1860,6 @@ void AudioProcessingImpl::InitializeEchoController() {
         proc_split_sample_rate_hz(), num_reverse_channels(),
         num_output_channels());
 
-    private_submodules_->echo_control_mobile->Enable(true);
-
     private_submodules_->echo_cancellation.reset();
     aec_render_signal_queue_.reset();
     return;
@@ -1898,8 +1894,6 @@ void AudioProcessingImpl::InitializeEchoController() {
   private_submodules_->echo_cancellation->Initialize(
       proc_sample_rate_hz(), num_reverse_channels(), num_output_channels(),
       num_proc_channels());
-
-  private_submodules_->echo_cancellation->Enable(true);
 
   private_submodules_->echo_cancellation->set_suppression_level(
       config_.echo_canceller.legacy_moderate_suppression_level
@@ -1954,8 +1948,7 @@ void AudioProcessingImpl::InitializePreProcessor() {
 void AudioProcessingImpl::MaybeUpdateHistograms() {
   static const int kMinDiffDelayMs = 60;
 
-  if (private_submodules_->echo_cancellation &&
-      private_submodules_->echo_cancellation->is_enabled()) {
+  if (private_submodules_->echo_cancellation) {
     // Activate delay_jumps_ counters if we know echo_cancellation is running.
     // If a stream has echo we know that the echo_cancellation is in process.
     if (capture_.stream_delay_jumps == -1 &&
@@ -2065,9 +2058,7 @@ void AudioProcessingImpl::WriteAecDumpConfigMessage(bool forced) {
                 private_submodules_->echo_cancellation->suppression_level())
           : 0;
 
-  apm_config.aecm_enabled =
-      private_submodules_->echo_control_mobile &&
-      private_submodules_->echo_control_mobile->is_enabled();
+  apm_config.aecm_enabled = !!private_submodules_->echo_control_mobile;
   apm_config.aecm_comfort_noise_enabled =
       private_submodules_->echo_control_mobile &&
       private_submodules_->echo_control_mobile->is_comfort_noise_enabled();
