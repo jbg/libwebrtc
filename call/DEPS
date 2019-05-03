@@ -12,6 +12,7 @@ include_rules = [
   "+modules/rtp_rtcp",
   "+modules/utility",
   "+system_wrappers",
+  "+stats/data",
   "+video",
 ]
 

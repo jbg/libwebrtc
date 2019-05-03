@@ -23,6 +23,7 @@
 #include "api/task_queue/task_queue_factory.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/rtp_rtcp/source/rtp_sender_audio.h"
+#include "stats/data/report_block_data.h"
 
 namespace webrtc {
 
@@ -40,6 +41,11 @@ struct CallSendStatistics {
   int packetsSent;
   // https://w3c.github.io/webrtc-stats/#dom-rtcoutboundrtpstreamstats-retransmittedpacketssent
   uint64_t retransmitted_packets_sent;
+  // A snapshot of the most recent Report Block with additional data of interest
+  // to statistics. Used to implement RTCRemoteInboundRtpStreamStats. Within
+  // this list, the ReportBlockData::RTCPReportBlock::source_ssrc(), which is
+  // the SSRC of the corresponding outbound RTP stream, is unique.
+  std::vector<ReportBlockData> report_block_datas;
 };
 
 // See section 6.4.2 in http://www.ietf.org/rfc/rfc3550.txt for details.

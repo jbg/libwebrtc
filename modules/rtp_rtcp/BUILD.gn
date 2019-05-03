@@ -230,6 +230,7 @@ rtc_static_library("rtp_rtcp") {
     "../../rtc_base/synchronization:sequence_checker",
     "../../rtc_base/system:fallthrough",
     "../../rtc_base/time:timestamp_extrapolator",
+    "../../stats/data",
     "../../system_wrappers",
     "../../system_wrappers:metrics",
     "../remote_bitrate_estimator",
