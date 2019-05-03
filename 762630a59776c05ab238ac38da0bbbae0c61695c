@@ -1,0 +1,769 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd97155a_5ff5cbbe",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "ToString seem to be mostly for printing and comparing. Can this be updated to \"RtpDataCodec\"?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5896e398_f3837f90",
+        "filename": "media/base/codec.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "TODO to remove when not relied upon?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b4ca538_22849485",
+        "filename": "pc/#channel_unittest.cc#",
+        "patchSetId": 20
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Remove this file",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6d17026_790fa8a6",
+        "filename": "pc/media_protocol_names.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: Use a consistent order of functions between .h and .cc",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31617c85_e0339524",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: const MediaContentDescriptionImpl\u003cC\u003e\u0026",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b790e3ef_998fb162",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: offer_rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a753b900_c3dfb79b",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1634,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: answer_rtp_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a55ad396_c1684e46",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f22e35a7_6e864816",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d0ef798_dd66a2b5",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "I like the comment below more contrasting with SCTP: \"RTP data. This part is inactive for SCTP data.\"",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c28b3cd_c138fda8",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "What does \"codec\" even mean in the context of data channels?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33e63c57_77054b73",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad47de08_73dc1b68",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2264,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: Maybe superflous here, but rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75e192dd_3df9912e",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2314,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Here, should we DCHECK that rtp_data_codecs is empty?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63f5ab5b_92afe22a",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2576,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Here too, should we DCHECK that rtp_data_codecs is empty? Or make it absl::optional\u003c\u003e even to reflect its applicability?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31d14aa8_4f012507",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2581,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Should we DCHECK that the offer is SCTP if we\u0027re here, and that it is RTP if we\u0027re in the other one? It wouldn\u0027t make sense if the offer and answer don\u0027t agree on type of data?\n\nMakes me wonder what happens if one side tries to negotiate SCTP and the other RTP or if we switch at the second O/A exchange",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a607e21_de0598ad",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2758,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Out of context this might not be clear. \"Returns a shim representing SctpDataContentDescription or RtpDataContentDescription\"?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e75cfeb_38bfa375",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: Can we rename this to rtp_data_codecs_? I think any RTP data-only thing should be prefixed with \"rtp_...\", just \"data\" makes it sound like something applicable to data in general (SCTP)",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a61eea38_67a766ce",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b34b7ed9_9f8339b3",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "403edf4a_396a291c",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57d33e88_fa0048b4",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Add comment saying this dispatches to Add[Sctp/Rtp]DataContentForOffer depending on type and that rtp_data_codecs is not applicable for SCTP",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "010d414b_edd84271",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d827468e_90c77ad2",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e44fe9c_da22d0f1",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_codecs",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6feee505_79354f95",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Should this not be refactored into an Add[Sctp/Rtp]DataContentForAnswer like above for Offer? Not needed because of SetCodecsInAnswer use? Just wondering why there is an apparent asymmetry here between offer and answer",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fdc5960_c70997c4",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_codecs_",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cf6125f_7049479e",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 4082,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Lots of tests updated with \"rtp\", do we have enough \"sctp\" coverage?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ea73fac_20f7e373",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: rtp_data_desc",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5a60062_14932fbd",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: |data_desc| (|rtp_data_desc|)",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a085be02_8b6b4452",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2419,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Here and elsewhere in this file: Why is \"StartsWith\" needed? Shouldn\u0027t \"as_rtp_data()\" be enough now?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d3ebd59_682d775b",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: |owned_description_|, set_protocol(), 80 char line limit, CreateShimTarget().\n\nIs this delayed initialization really needed? Could you not construct it correctly first?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14165321_af5f28b2",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "DCHECK that we don\u0027t have any codecs?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24591fe3_f1d15511",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "1. Should this be CHECK and not DCHECK?\n2. If DCHECK can we avoid debug build-only methods?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20c904fb_349f2bfe",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "With virtual methods it\u0027s often a good idea to return by value instead of const\u0026 since return by ref forces you to have something to return and for SCTP codecs is not even applicable. Does SCTP now have a stand-in vector that isn\u0027t used, only for the sake of referencing an empty list?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "693eb0c4_4d6b1cd5",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "\u003cRtpDataCodec\u003e",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83f1e020_3cb34cad",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we DCHECK-crash if you try to add codecs here? Or is this in case of not having been decided if its SCTP or RTP yet?\n\nIs it valid to add codecs and then turn it into SCTP and then we would return codecs?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78aa00d8_9f46d43e",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "Same comment as above?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2db87486_085eee6d",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "\u003cRtpDataCodec\u003e",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "146890db_1ba39322",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: Use the full name in comments, \"RtpDataContentDescription and SctpDataContentDescription classes\"",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f513570b_e1fed2c4",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "\u003cRtpDataCodec\u003e",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f9fd5e4_4d5fa607",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "\u003cRtpDataCodec\u003e",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "381447b0_758c169d",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "nit: if it was the owner",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17fc6972_88ff416a",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "\"should_delete\" is descriptive of a possible use case, not of what is happening. Might I suggest |ownership_passed|?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98fcb49e_d3253126",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 1,
+      "message": "\u003cRtpDataCodec\u003e. But I don\u0027t think this variable is used - remove?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

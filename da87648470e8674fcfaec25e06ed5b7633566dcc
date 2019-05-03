@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f216f6c_d73673d9",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2252,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-03T14:56:59Z",
+      "side": 0,
+      "message": "// Event SCTP uses a \"codec\".\nWas this statement ever true (other than in the sense that it used the same class hierarchy)?",
+      "revId": "da87648470e8674fcfaec25e06ed5b7633566dcc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
