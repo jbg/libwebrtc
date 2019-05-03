@@ -221,6 +221,7 @@ rtc_static_library("peerconnection") {
     "../rtc_base/third_party/base64",
     "../rtc_base/third_party/sigslot",
     "../stats",
+    "../stats/data",
     "../system_wrappers",
     "../system_wrappers:field_trial",
     "../system_wrappers:metrics",

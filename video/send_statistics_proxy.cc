@@ -1122,6 +1122,17 @@ void SendStatisticsProxy::StatisticsUpdated(const RtcpStatistics& statistics,
   uma_container_->report_block_stats_.Store(statistics, 0, ssrc);
 }
 
+void SendStatisticsProxy::OnReportBlockDataUpdated(
+    ReportBlockData report_block_data) {
+  rtc::CritScope lock(&crit_);
+  VideoSendStream::StreamStats* stats =
+      GetStatsEntry(report_block_data.report_block.source_ssrc);
+  if (!stats)
+    return;
+
+  stats->report_block_data = std::move(report_block_data);
+}
+
 void SendStatisticsProxy::CNameChanged(const char* cname, uint32_t ssrc) {}
 
 void SendStatisticsProxy::DataCountersUpdated(

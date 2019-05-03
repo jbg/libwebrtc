@@ -30,6 +30,7 @@
 #include "call/rtp_config.h"
 #include "modules/rtp_rtcp/include/rtcp_statistics.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "stats/data/report_block_data.h"
 
 namespace webrtc {
 
@@ -56,6 +57,9 @@ class VideoSendStream {
     StreamDataCounters rtp_stats;
     RtcpPacketTypeCounter rtcp_packet_type_counts;
     RtcpStatistics rtcp_stats;
+    // A snapshot of the most recent Report Block with additional data of
+    // interest to statistics. Used to implement RTCRemoteInboundRtpStreamStats.
+    absl::optional<ReportBlockData> report_block_data;
   };
 
   struct Stats {

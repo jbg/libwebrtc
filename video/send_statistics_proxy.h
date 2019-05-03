@@ -24,6 +24,7 @@
 #include "rtc_base/numerics/exp_filter.h"
 #include "rtc_base/rate_tracker.h"
 #include "rtc_base/thread_annotations.h"
+#include "stats/data/report_block_data.h"
 #include "system_wrappers/include/clock.h"
 #include "video/report_block_stats.h"
 #include "video/stats_counter.h"
@@ -32,6 +33,7 @@ namespace webrtc {
 
 class SendStatisticsProxy : public VideoStreamEncoderObserver,
                             public RtcpStatisticsCallback,
+                            public ReportBlockDataObserver,
                             public RtcpPacketTypeCounterObserver,
                             public StreamDataCountersCallback,
                             public BitrateStatisticsObserver,
@@ -93,6 +95,8 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
   void StatisticsUpdated(const RtcpStatistics& statistics,
                          uint32_t ssrc) override;
   void CNameChanged(const char* cname, uint32_t ssrc) override;
+  // From ReportBlockDataObserver.
+  void OnReportBlockDataUpdated(ReportBlockData report_block_data) override;
   // From RtcpPacketTypeCounterObserver.
   void RtcpPacketTypesCounterUpdated(
       uint32_t ssrc,
