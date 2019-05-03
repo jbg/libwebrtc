@@ -46,6 +46,30 @@
       "revId": "e360c09c864e250fe712b17540efdcce9957e7b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "969ce61c_920613e6",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-03T12:29:33Z",
+      "side": 0,
+      "message": "* I think we should make sure it\u0027s not possible to end up in this situation (existing file), but if we somehow do, overwriting and failing are both reasonable behaviors, but appending is not.\n* That there is no documentation, and therefore no promise of what different implementations do (or are allowed to do in the future), is what bothers me.",
+      "parentUuid": "d8a39006_f998bd7a",
+      "range": {
+        "startLine": 35,
+        "startChar": 33,
+        "endLine": 35,
+        "endChar": 51
+      },
+      "revId": "e360c09c864e250fe712b17540efdcce9957e7b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
