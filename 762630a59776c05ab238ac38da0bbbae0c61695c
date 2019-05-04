@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3938497d_4a1fbd38",
+        "filename": "media/base/codec.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd97155a_5ff5cbbe",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5896e398_f3837f90",
         "filename": "media/base/codec.h",
         "patchSetId": 20
@@ -33,6 +51,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abdd725f_cdf84f75",
+        "filename": "media/base/codec.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5896e398_f3837f90",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "035d1bc3_a8cc2324",
+        "filename": "pc/#channel_unittest.cc#",
+        "patchSetId": 20
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b4ca538_22849485",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6d17026_790fa8a6",
         "filename": "pc/media_protocol_names.cc",
         "patchSetId": 20
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "996a95dd_860fb444",
+        "filename": "pc/media_protocol_names.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6d17026_790fa8a6",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31617c85_e0339524",
         "filename": "pc/media_session.cc",
         "patchSetId": 20
@@ -81,6 +153,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "nit: const MediaContentDescriptionImpl\u003cC\u003e\u0026",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27eb7c72_49c7271b",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Not going to change this, since it\u0027s moving around stuff that is already being passed as pointer in places I\u0027m not changing. Letting the code jump back and forth between pointer and reference makes it harder to maintain.\n\nRefactoring the whole thing to use references where appropriate would be a Good Thing, but not in this refactoring.",
+      "parentUuid": "31617c85_e0339524",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "687d15c2_451f2446",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b790e3ef_998fb162",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a753b900_c3dfb79b",
         "filename": "pc/media_session.cc",
         "patchSetId": 20
@@ -118,6 +226,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "597f4db2_c306f37b",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1634,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a753b900_c3dfb79b",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "b46d6eda_c2b2a4a7",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a55ad396_c1684e46",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f22e35a7_6e864816",
         "filename": "pc/media_session.cc",
         "patchSetId": 20
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "e57bb1da_8ed57da7",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f22e35a7_6e864816",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d0ef798_dd66a2b5",
         "filename": "pc/media_session.cc",
         "patchSetId": 20
@@ -166,6 +328,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "I like the comment below more contrasting with SCTP: \"RTP data. This part is inactive for SCTP data.\"",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd0f199f_9574804f",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "I think this is good enough.",
+      "parentUuid": "0d0ef798_dd66a2b5",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "36f9a634_887a2122",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "RTP data channels are passed around using RTP packets, with a payload type, and described in the SDP as if it was a codec, using codec-like syntax. It\u0027s a handle to hang the payload type on.",
+      "parentUuid": "1c28b3cd_c138fda8",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33e63c57_77054b73",
         "filename": "pc/media_session.cc",
         "patchSetId": 20
@@ -203,6 +401,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85ff46d8_d8bcb7bc",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33e63c57_77054b73",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "782793ca_c6ebf729",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2264,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad47de08_73dc1b68",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75e192dd_3df9912e",
         "filename": "pc/media_session.cc",
         "patchSetId": 20
@@ -234,6 +468,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "Here, should we DCHECK that rtp_data_codecs is empty?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b26d5cf8_afc08e99",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2314,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "No need to bother. No effect (and may very well be untrue, given the shim).",
+      "parentUuid": "75e192dd_3df9912e",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "e3321ba6_911de537",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2576,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "No, not as long as the shim has a reason for existing.",
+      "parentUuid": "63f5ab5b_92afe22a",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31d14aa8_4f012507",
         "filename": "pc/media_session.cc",
         "patchSetId": 20
@@ -268,6 +538,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "Should we DCHECK that the offer is SCTP if we\u0027re here, and that it is RTP if we\u0027re in the other one? It wouldn\u0027t make sense if the offer and answer don\u0027t agree on type of data?\n\nMakes me wonder what happens if one side tries to negotiate SCTP and the other RTP or if we switch at the second O/A exchange",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9beb3c02_c520d0ce",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2581,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Interesting test to write. But I think there are tests for that already (it shouldn\u0027t work).\n\ndata_answer-\u003eas_sctp() will return a null pointer if it isn\u0027t SCTP, so following the null pointer will crash here; a DCHECK will add a better error, but won\u0027t detect any more errors.",
+      "parentUuid": "31d14aa8_4f012507",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "35cd94be_18e1ebef",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2758,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a607e21_de0598ad",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e75cfeb_38bfa375",
         "filename": "pc/media_session.h",
         "patchSetId": 20
@@ -305,6 +611,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bd7191b_918ef62c",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e75cfeb_38bfa375",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "e56f09fd_7e026a4c",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a61eea38_67a766ce",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b34b7ed9_9f8339b3",
         "filename": "pc/media_session.h",
         "patchSetId": 20
@@ -339,6 +681,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29ddfd31_d899e308",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b34b7ed9_9f8339b3",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -359,6 +719,24 @@
     },
     {
       "key": {
+        "uuid": "c18871e8_f21262cc",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "403edf4a_396a291c",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57d33e88_fa0048b4",
         "filename": "pc/media_session.h",
         "patchSetId": 20
@@ -373,6 +751,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51cde61f_1cc2cba0",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57d33e88_fa0048b4",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -410,6 +806,42 @@
     },
     {
       "key": {
+        "uuid": "ada6fa18_bc554ad3",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d827468e_90c77ad2",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5d56ddc_6f4e9ac0",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "010d414b_edd84271",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e44fe9c_da22d0f1",
         "filename": "pc/media_session.h",
         "patchSetId": 20
@@ -427,6 +859,24 @@
     },
     {
       "key": {
+        "uuid": "c6489036_5fedb0b4",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e44fe9c_da22d0f1",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6feee505_79354f95",
         "filename": "pc/media_session.h",
         "patchSetId": 20
@@ -438,6 +888,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "Should this not be refactored into an Add[Sctp/Rtp]DataContentForAnswer like above for Offer? Not needed because of SetCodecsInAnswer use? Just wondering why there is an apparent asymmetry here between offer and answer",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3f1e2cc_745568ec",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Because the refactoring is based on only making changes where we have to, and this didn\u0027t have to change. With SCTP, we don\u0027t bother with codecs anyway.",
+      "parentUuid": "6feee505_79354f95",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -461,6 +929,24 @@
     },
     {
       "key": {
+        "uuid": "0ada80b3_385ead78",
+        "filename": "pc/media_session.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fdc5960_c70997c4",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cf6125f_7049479e",
         "filename": "pc/media_session_unittest.cc",
         "patchSetId": 20
@@ -472,6 +958,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "Lots of tests updated with \"rtp\", do we have enough \"sctp\" coverage?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dedf398c_b8c1c70d",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 4082,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "I think we have as much SCTP coverage as before - making \"rtp\" explicit does nothing to change the underlying protocol.",
+      "parentUuid": "1cf6125f_7049479e",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -495,6 +999,24 @@
     },
     {
       "key": {
+        "uuid": "07bc8aa3_2f54f77c",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ea73fac_20f7e373",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5a60062_14932fbd",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 20
@@ -509,6 +1031,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00bf9259_786ba968",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5a60062_14932fbd",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -529,6 +1069,24 @@
     },
     {
       "key": {
+        "uuid": "e91e8a08_b45ee7c7",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 2419,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Having StartsWith around the code is bad anyway - should be using IsRtpProtocol. And no, it shouldn\u0027t be needed.\nDeleted both occurences of StartsWith.",
+      "parentUuid": "a085be02_8b6b4452",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d3ebd59_682d775b",
         "filename": "pc/session_description.cc",
         "patchSetId": 20
@@ -540,6 +1098,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "nit: |owned_description_|, set_protocol(), 80 char line limit, CreateShimTarget().\n\nIs this delayed initialization really needed? Could you not construct it correctly first?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9bdfb7c_4c307fb9",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Hangouts has a lot of cases of \"new DataContentDescription\" (no arguments, or empty arguments).\nSince the point of this shim is to be able to land it without changing Hangouts, this has to exist.",
+      "parentUuid": "2d3ebd59_682d775b",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -563,6 +1139,24 @@
     },
     {
       "key": {
+        "uuid": "f7c9f681_973a2a8d",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "We will have codecs, because Hangouts sets the codec variable on DataContentDescription.\nWe then proceed to ignore it, which is OK, but we can\u0027t check that it doesn\u0027t exist. (Neither can we check that it exists, since we can\u0027t be sure Hangouts always sets it.)",
+      "parentUuid": "14165321_af5f28b2",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "24591fe3_f1d15511",
         "filename": "pc/session_description.cc",
         "patchSetId": 20
@@ -580,6 +1174,24 @@
     },
     {
       "key": {
+        "uuid": "79646cb4_11b4de12",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "This used to be a more important function (it created RtpDataContentDescription objects, which turned out to be a bad idea). It exists to catch the case where Hangouts does things to an SctpDataContentDescription that only make sense for an RtpDataContentDescription.\nI\u0027d like to keep it CHECK because I\u0027m not sure hangouts always runs all tests in debug mode.",
+      "parentUuid": "24591fe3_f1d15511",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "20c904fb_349f2bfe",
         "filename": "pc/session_description.cc",
         "patchSetId": 20
@@ -591,6 +1203,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "With virtual methods it\u0027s often a good idea to return by value instead of const\u0026 since return by ref forces you to have something to return and for SCTP codecs is not even applicable. Does SCTP now have a stand-in vector that isn\u0027t used, only for the sake of referencing an empty list?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eba31dad_34f120c1",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Yes, it turns out that because the shim class derives from MediaDescriptionImpl, the shim class has a convenient codec vector that we can use. That\u0027s what Super:: accesses.\nI\u0027m not changing method signatures in this CL - this is a method defined in MediaDescriptionImpl.",
+      "parentUuid": "20c904fb_349f2bfe",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -631,6 +1261,24 @@
     },
     {
       "key": {
+        "uuid": "fad0bc00_e178701c",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "No, we shouldn\u0027t. This code is called by Hangouts, and is called on both SCTP and RTP data objects, and in some cases it\u0027s called before we know whether it\u0027s SCTP or RTP.\nHangouts is storing descriptions as protobuffers and translating them into this format, and has had no reason to impose a particular order on the stuff it extracts from protobuffers; it will set things before setting protocol and after setting protocol, so we have to handle both cases.\n\nIn particular, Hangouts adds the \"google-sctp-data\" codec on SCTP DataContentDescriptions.\n\nThat\u0027s why it\u0027s taken so long to get this shim right.",
+      "parentUuid": "83f1e020_3cb34cad",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78aa00d8_9f46d43e",
         "filename": "pc/session_description.cc",
         "patchSetId": 20
@@ -642,6 +1290,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "Same comment as above?",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "688982ae_d1c341db",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "same response.",
+      "parentUuid": "78aa00d8_9f46d43e",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -665,6 +1331,24 @@
     },
     {
       "key": {
+        "uuid": "b2c8d271_88aebc97",
+        "filename": "pc/session_description.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Same response.",
+      "parentUuid": "2db87486_085eee6d",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "146890db_1ba39322",
         "filename": "pc/session_description.h",
         "patchSetId": 20
@@ -679,6 +1363,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00886921_9b074b40",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "146890db_1ba39322",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -699,6 +1401,24 @@
     },
     {
       "key": {
+        "uuid": "e76715fa_2d595f58",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Somehow the template magic doesn\u0027t do its thing when it\u0027s \u003cRtpDataCodec\u003e.",
+      "parentUuid": "f513570b_e1fed2c4",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f9fd5e4_4d5fa607",
         "filename": "pc/session_description.h",
         "patchSetId": 20
@@ -710,6 +1430,24 @@
       "writtenOn": "2019-05-03T14:56:59Z",
       "side": 1,
       "message": "\u003cRtpDataCodec\u003e",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58ba24e7_09c276e2",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "As above.",
+      "parentUuid": "4f9fd5e4_4d5fa607",
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -750,6 +1488,24 @@
     },
     {
       "key": {
+        "uuid": "f0d4e33b_fc7ab801",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "It is \"should_delete\". When I tried to make the class self-deleting (\"delete this\"), it crashed on an \"illegal instruction\", so I refactored to make it \"caller can tell if it should delete\".\nUpdated comment.",
+      "parentUuid": "17fc6972_88ff416a",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "98fcb49e_d3253126",
         "filename": "pc/session_description.h",
         "patchSetId": 20
@@ -764,6 +1520,24 @@
       "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ae5e427_b33835ed",
+        "filename": "pc/session_description.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-04T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98fcb49e_d3253126",
+      "revId": "762630a59776c05ab238ac38da0bbbae0c61695c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
