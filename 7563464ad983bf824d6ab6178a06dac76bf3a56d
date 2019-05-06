@@ -46,6 +46,30 @@
       "revId": "7563464ad983bf824d6ab6178a06dac76bf3a56d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40231837_d3b2ed87",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-06T07:26:00Z",
+      "side": 1,
+      "message": "No need to have it in the new constructor, then. Deleted.\n\nWhat about the above constructor with a filename (only), should that be deleted too?",
+      "parentUuid": "e60160ec_8d3c8c94",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 45
+      },
+      "revId": "7563464ad983bf824d6ab6178a06dac76bf3a56d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
