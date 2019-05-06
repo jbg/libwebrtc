@@ -70,6 +70,30 @@
       "revId": "7563464ad983bf824d6ab6178a06dac76bf3a56d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8c402c8_b8cb4c54",
+        "filename": "logging/rtc_event_log/output/rtc_event_log_output_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-06T08:08:19Z",
+      "side": 1,
+      "message": "Yeah, I think so.",
+      "parentUuid": "40231837_d3b2ed87",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 45
+      },
+      "revId": "7563464ad983bf824d6ab6178a06dac76bf3a56d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
