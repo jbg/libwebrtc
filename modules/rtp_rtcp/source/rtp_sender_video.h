@@ -104,6 +104,9 @@ class RTPSenderVideo {
   std::vector<RtpSequenceNumberMap::Info> GetSentRtpPacketInfos(
       rtc::ArrayView<const uint16_t> sequence_numbers) const;
 
+  int SelectiveRetransmissions() const;
+  void SetSelectiveRetransmissions(uint8_t settings);
+
  protected:
   static uint8_t GetTemporalId(const RTPVideoHeader& header);
   StorageType GetStorageType(uint8_t temporal_id,
