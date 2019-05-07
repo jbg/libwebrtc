@@ -2796,8 +2796,8 @@ RTCError PeerConnection::ApplyRemoteDescription(
       }
       if (!content->rejected &&
           RtpTransceiverDirectionHasRecv(local_direction)) {
-        // Set ssrc to 0 in the case of an unsignalled ssrc.
-        uint32_t ssrc = 0;
+        // Set ssrc to nullopt in the case of an unsignalled ssrc.
+        absl::optional<uint32_t> ssrc = absl::nullopt;
         if (!media_desc->streams().empty() &&
             media_desc->streams()[0].has_ssrcs()) {
           ssrc = media_desc->streams()[0].first_ssrc();

@@ -26,7 +26,8 @@ class JitterBufferDelayInterface : public rtc::RefCountInterface {
  public:
   // OnStart allows to uniqely identify to which receiving stream playout
   // delay must correpond through |media_channel| and |ssrc| pair.
-  virtual void OnStart(cricket::Delayable* media_channel, uint32_t ssrc) = 0;
+  virtual void OnStart(cricket::Delayable* media_channel,
+                       absl::optional<uint32_t> ssrc) = 0;
 
   // Indicates that underlying receiving stream is stopped.
   virtual void OnStop() = 0;

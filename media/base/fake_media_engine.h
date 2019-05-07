@@ -126,12 +126,13 @@ class RtpHelper : public Base {
         CreateRtpParametersWithEncodings(sp);
     return true;
   }
-  virtual bool RemoveRecvStream(uint32_t ssrc) {
-    auto parameters_iterator = rtp_receive_parameters_.find(ssrc);
+  virtual bool RemoveRecvStream(absl::optional<uint32_t> ssrc) {
+    RTC_DCHECK(ssrc);
+    auto parameters_iterator = rtp_receive_parameters_.find(*ssrc);
     if (parameters_iterator != rtp_receive_parameters_.end()) {
       rtp_receive_parameters_.erase(parameters_iterator);
     }
-    return RemoveStreamBySsrc(&receive_streams_, ssrc);
+    return RemoveStreamBySsrc(&receive_streams_, *ssrc);
   }
 
   virtual webrtc::RtpParameters GetRtpSendParameters(uint32_t ssrc) const {
@@ -159,17 +160,18 @@ class RtpHelper : public Base {
     return webrtc::RTCError(webrtc::RTCErrorType::INTERNAL_ERROR);
   }
 
-  virtual webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const {
-    auto parameters_iterator = rtp_receive_parameters_.find(ssrc);
+  virtual webrtc::RtpParameters GetRtpReceiveParameters(
+      absl::optional<uint32_t> ssrc) const {
+    auto parameters_iterator = rtp_receive_parameters_.find(*ssrc);
     if (parameters_iterator != rtp_receive_parameters_.end()) {
       return parameters_iterator->second;
     }
     return webrtc::RtpParameters();
   }
   virtual bool SetRtpReceiveParameters(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       const webrtc::RtpParameters& parameters) {
-    auto parameters_iterator = rtp_receive_parameters_.find(ssrc);
+    auto parameters_iterator = rtp_receive_parameters_.find(*ssrc);
     if (parameters_iterator != rtp_receive_parameters_.end()) {
       parameters_iterator->second = parameters;
       return true;
@@ -341,22 +343,23 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
   bool HasSource(uint32_t ssrc) const;
 
   bool AddRecvStream(const StreamParams& sp) override;
-  bool RemoveRecvStream(uint32_t ssrc) override;
+  bool RemoveRecvStream(absl::optional<uint32_t> ssrc) override;
 
   bool CanInsertDtmf() override;
   bool InsertDtmf(uint32_t ssrc, int event_code, int duration) override;
 
-  bool SetOutputVolume(uint32_t ssrc, double volume) override;
+  bool SetOutputVolume(absl::optional<uint32_t> ssrc, double volume) override;
   bool GetOutputVolume(uint32_t ssrc, double* volume);
 
-  bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override;
+  bool SetBaseMinimumPlayoutDelayMs(absl::optional<uint32_t> ssrc,
+                                    int delay_ms) override;
   absl::optional<int> GetBaseMinimumPlayoutDelayMs(
-      uint32_t ssrc) const override;
+      absl::optional<uint32_t> ssrc) const override;
 
   bool GetStats(VoiceMediaInfo* info) override;
 
   void SetRawAudioSink(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override;
 
   std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const override;
@@ -434,16 +437,17 @@ class FakeVideoMediaChannel : public RtpHelper<VideoMediaChannel> {
 
   bool HasSource(uint32_t ssrc) const;
   bool AddRecvStream(const StreamParams& sp) override;
-  bool RemoveRecvStream(uint32_t ssrc) override;
+  bool RemoveRecvStream(absl::optional<uint32_t> ssrc) override;
 
   void FillBitrateInfo(BandwidthEstimationInfo* bwe_info) override;
   bool GetStats(VideoMediaInfo* info) override;
 
   std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const override;
 
-  bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override;
+  bool SetBaseMinimumPlayoutDelayMs(absl::optional<uint32_t> ssrc,
+                                    int delay_ms) override;
   absl::optional<int> GetBaseMinimumPlayoutDelayMs(
-      uint32_t ssrc) const override;
+      absl::optional<uint32_t> ssrc) const override;
 
  private:
   bool SetRecvCodecs(const std::vector<VideoCodec>& codecs);
@@ -479,7 +483,7 @@ class FakeDataMediaChannel : public RtpHelper<DataMediaChannel> {
   bool SetSend(bool send) override;
   bool SetReceive(bool receive) override;
   bool AddRecvStream(const StreamParams& sp) override;
-  bool RemoveRecvStream(uint32_t ssrc) override;
+  bool RemoveRecvStream(absl::optional<uint32_t> ssrc) override;
 
   bool SendData(const SendDataParams& params,
                 const rtc::CopyOnWriteBuffer& payload,

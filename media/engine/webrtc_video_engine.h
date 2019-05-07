@@ -125,9 +125,10 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   webrtc::RTCError SetRtpSendParameters(
       uint32_t ssrc,
       const webrtc::RtpParameters& parameters) override;
-  webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const override;
+  webrtc::RtpParameters GetRtpReceiveParameters(
+      absl::optional<uint32_t> ssrc) const override;
   bool SetRtpReceiveParameters(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       const webrtc::RtpParameters& parameters) override;
   bool GetSendCodec(VideoCodec* send_codec) override;
   bool SetSend(bool send) override;
@@ -139,7 +140,7 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   bool RemoveSendStream(uint32_t ssrc) override;
   bool AddRecvStream(const StreamParams& sp) override;
   bool AddRecvStream(const StreamParams& sp, bool default_stream);
-  bool RemoveRecvStream(uint32_t ssrc) override;
+  bool RemoveRecvStream(absl::optional<uint32_t> ssrc) override;
   bool SetSink(uint32_t ssrc,
                rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) override;
   void FillBitrateInfo(BandwidthEstimationInfo* bwe_info) override;
@@ -159,7 +160,7 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   // Set a frame decryptor to a particular ssrc that will intercept all
   // incoming video frames and attempt to decrypt them before forwarding the
   // result.
-  void SetFrameDecryptor(uint32_t ssrc,
+  void SetFrameDecryptor(absl::optional<uint32_t> ssrc,
                          rtc::scoped_refptr<webrtc::FrameDecryptorInterface>
                              frame_decryptor) override;
   // Set a frame encryptor to a particular ssrc that will intercept all
@@ -169,10 +170,11 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
                          rtc::scoped_refptr<webrtc::FrameEncryptorInterface>
                              frame_encryptor) override;
 
-  bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override;
+  bool SetBaseMinimumPlayoutDelayMs(absl::optional<uint32_t> ssrc,
+                                    int delay_ms) override;
 
   absl::optional<int> GetBaseMinimumPlayoutDelayMs(
-      uint32_t ssrc) const override;
+      absl::optional<uint32_t> ssrc) const override;
 
   // Implemented for VideoMediaChannelTest.
   bool sending() const {

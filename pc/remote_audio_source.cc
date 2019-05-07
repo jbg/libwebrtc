@@ -62,7 +62,7 @@ RemoteAudioSource::~RemoteAudioSource() {
 }
 
 void RemoteAudioSource::Start(cricket::VoiceMediaChannel* media_channel,
-                              uint32_t ssrc) {
+                              absl::optional<uint32_t> ssrc) {
   RTC_DCHECK_RUN_ON(main_thread_);
   RTC_DCHECK(media_channel);
 
@@ -76,7 +76,7 @@ void RemoteAudioSource::Start(cricket::VoiceMediaChannel* media_channel,
 }
 
 void RemoteAudioSource::Stop(cricket::VoiceMediaChannel* media_channel,
-                             uint32_t ssrc) {
+                             absl::optional<uint32_t> ssrc) {
   RTC_DCHECK_RUN_ON(main_thread_);
   RTC_DCHECK(media_channel);
 

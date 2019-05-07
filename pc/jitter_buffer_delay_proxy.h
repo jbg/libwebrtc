@@ -21,7 +21,7 @@ namespace webrtc {
 
 BEGIN_PROXY_MAP(JitterBufferDelay)
 PROXY_SIGNALING_THREAD_DESTRUCTOR()
-PROXY_METHOD2(void, OnStart, cricket::Delayable*, uint32_t)
+PROXY_METHOD2(void, OnStart, cricket::Delayable*, absl::optional<uint32_t>)
 PROXY_METHOD0(void, OnStop)
 PROXY_WORKER_METHOD1(void, Set, absl::optional<double>)
 END_PROXY_MAP()

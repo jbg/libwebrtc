@@ -42,7 +42,7 @@ void MediaChannel::SetFrameEncryptor(
 }
 
 void MediaChannel::SetFrameDecryptor(
-    uint32_t ssrc,
+    absl::optional<uint32_t> ssrc,
     rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor) {
   // Placeholder should be pure virtual once internal supports it.
 }

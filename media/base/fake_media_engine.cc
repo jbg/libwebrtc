@@ -123,11 +123,11 @@ bool FakeVoiceMediaChannel::AddRecvStream(const StreamParams& sp) {
   output_delays_[sp.first_ssrc()] = 0;
   return true;
 }
-bool FakeVoiceMediaChannel::RemoveRecvStream(uint32_t ssrc) {
+bool FakeVoiceMediaChannel::RemoveRecvStream(absl::optional<uint32_t> ssrc) {
   if (!RtpHelper<VoiceMediaChannel>::RemoveRecvStream(ssrc))
     return false;
-  output_scalings_.erase(ssrc);
-  output_delays_.erase(ssrc);
+  output_scalings_.erase(*ssrc);
+  output_delays_.erase(*ssrc);
   return true;
 }
 bool FakeVoiceMediaChannel::CanInsertDtmf() {
@@ -146,15 +146,16 @@ bool FakeVoiceMediaChannel::InsertDtmf(uint32_t ssrc,
   dtmf_info_queue_.push_back(DtmfInfo(ssrc, event_code, duration));
   return true;
 }
-bool FakeVoiceMediaChannel::SetOutputVolume(uint32_t ssrc, double volume) {
-  if (0 == ssrc) {
+bool FakeVoiceMediaChannel::SetOutputVolume(absl::optional<uint32_t> ssrc,
+                                            double volume) {
+  if (0 == *ssrc) {
     std::map<uint32_t, double>::iterator it;
     for (it = output_scalings_.begin(); it != output_scalings_.end(); ++it) {
       it->second = volume;
     }
     return true;
-  } else if (output_scalings_.find(ssrc) != output_scalings_.end()) {
-    output_scalings_[ssrc] = volume;
+  } else if (output_scalings_.find(*ssrc) != output_scalings_.end()) {
+    output_scalings_[*ssrc] = volume;
     return true;
   }
   return false;
@@ -165,18 +166,19 @@ bool FakeVoiceMediaChannel::GetOutputVolume(uint32_t ssrc, double* volume) {
   *volume = output_scalings_[ssrc];
   return true;
 }
-bool FakeVoiceMediaChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
-                                                         int delay_ms) {
-  if (output_delays_.find(ssrc) == output_delays_.end()) {
+bool FakeVoiceMediaChannel::SetBaseMinimumPlayoutDelayMs(
+    absl::optional<uint32_t> ssrc,
+    int delay_ms) {
+  if (output_delays_.find(*ssrc) == output_delays_.end()) {
     return false;
   } else {
-    output_delays_[ssrc] = delay_ms;
+    output_delays_[*ssrc] = delay_ms;
     return true;
   }
 }
 absl::optional<int> FakeVoiceMediaChannel::GetBaseMinimumPlayoutDelayMs(
-    uint32_t ssrc) const {
-  const auto it = output_delays_.find(ssrc);
+    absl::optional<uint32_t> ssrc) const {
+  const auto it = output_delays_.find(*ssrc);
   if (it != output_delays_.end()) {
     return it->second;
   }
@@ -186,7 +188,7 @@ bool FakeVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
   return false;
 }
 void FakeVoiceMediaChannel::SetRawAudioSink(
-    uint32_t ssrc,
+    absl::optional<uint32_t> ssrc,
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   sink_ = std::move(sink);
 }
@@ -344,11 +346,11 @@ bool FakeVideoMediaChannel::AddRecvStream(const StreamParams& sp) {
   output_delays_[sp.first_ssrc()] = 0;
   return true;
 }
-bool FakeVideoMediaChannel::RemoveRecvStream(uint32_t ssrc) {
+bool FakeVideoMediaChannel::RemoveRecvStream(absl::optional<uint32_t> ssrc) {
   if (!RtpHelper<VideoMediaChannel>::RemoveRecvStream(ssrc))
     return false;
-  sinks_.erase(ssrc);
-  output_delays_.erase(ssrc);
+  sinks_.erase(*ssrc);
+  output_delays_.erase(*ssrc);
   return true;
 }
 void FakeVideoMediaChannel::FillBitrateInfo(BandwidthEstimationInfo* bwe_info) {
@@ -360,18 +362,19 @@ std::vector<webrtc::RtpSource> FakeVideoMediaChannel::GetSources(
     uint32_t ssrc) const {
   return {};
 }
-bool FakeVideoMediaChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
-                                                         int delay_ms) {
-  if (output_delays_.find(ssrc) == output_delays_.end()) {
+bool FakeVideoMediaChannel::SetBaseMinimumPlayoutDelayMs(
+    absl::optional<uint32_t> ssrc,
+    int delay_ms) {
+  if (output_delays_.find(*ssrc) == output_delays_.end()) {
     return false;
   } else {
-    output_delays_[ssrc] = delay_ms;
+    output_delays_[*ssrc] = delay_ms;
     return true;
   }
 }
 absl::optional<int> FakeVideoMediaChannel::GetBaseMinimumPlayoutDelayMs(
-    uint32_t ssrc) const {
-  const auto it = output_delays_.find(ssrc);
+    absl::optional<uint32_t> ssrc) const {
+  const auto it = output_delays_.find(*ssrc);
   if (it != output_delays_.end()) {
     return it->second;
   }
@@ -442,7 +445,7 @@ bool FakeDataMediaChannel::AddRecvStream(const StreamParams& sp) {
     return false;
   return true;
 }
-bool FakeDataMediaChannel::RemoveRecvStream(uint32_t ssrc) {
+bool FakeDataMediaChannel::RemoveRecvStream(absl::optional<uint32_t> ssrc) {
   if (!RtpHelper<DataMediaChannel>::RemoveRecvStream(ssrc))
     return false;
   return true;

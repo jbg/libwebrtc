@@ -133,24 +133,24 @@ void VideoRtpReceiver::Stop() {
   stopped_ = true;
 }
 
-void VideoRtpReceiver::SetupMediaChannel(uint32_t ssrc) {
+void VideoRtpReceiver::SetupMediaChannel(absl::optional<uint32_t> ssrc) {
   if (!media_channel_) {
     RTC_LOG(LS_ERROR)
         << "VideoRtpReceiver::SetupMediaChannel: No video channel exists.";
   }
-  if (ssrc_ == ssrc) {
+  if (ssrc_ == ssrc.value_or(0)) {
     return;
   }
   if (ssrc_) {
     SetSink(nullptr);
   }
-  ssrc_ = ssrc;
+  ssrc_ = ssrc.value_or(0);
   SetSink(source_->sink());
   // Attach any existing frame decryptor to the media channel.
   MaybeAttachFrameDecryptorToMediaChannel(
       ssrc_, worker_thread_, frame_decryptor_, media_channel_, stopped_);
 
-  delay_->OnStart(media_channel_, ssrc);
+  delay_->OnStart(media_channel_, ssrc_);
 }
 
 void VideoRtpReceiver::set_stream_ids(std::vector<std::string> stream_ids) {

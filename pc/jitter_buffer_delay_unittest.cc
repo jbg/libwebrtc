@@ -22,7 +22,7 @@
 using ::testing::Return;
 
 namespace {
-constexpr int kSsrc = 1234;
+constexpr absl::optional<uint32_t> kSsrc = 1234;
 }  // namespace
 
 namespace webrtc {

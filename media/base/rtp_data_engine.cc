@@ -189,8 +189,9 @@ bool RtpDataMediaChannel::AddRecvStream(const StreamParams& stream) {
   return true;
 }
 
-bool RtpDataMediaChannel::RemoveRecvStream(uint32_t ssrc) {
-  RemoveStreamBySsrc(&recv_streams_, ssrc);
+bool RtpDataMediaChannel::RemoveRecvStream(absl::optional<uint32_t> ssrc) {
+  RTC_DCHECK(ssrc);
+  RemoveStreamBySsrc(&recv_streams_, *ssrc);
   return true;
 }
 

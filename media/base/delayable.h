@@ -26,11 +26,12 @@ class Delayable {
   // Base minimum delay sets lower bound on minimum delay value which
   // determines minimum delay until audio playout.
   // Returns false if there is no stream with given ssrc.
-  virtual bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) = 0;
+  virtual bool SetBaseMinimumPlayoutDelayMs(absl::optional<uint32_t> ssrc,
+                                            int delay_ms) = 0;
 
   // Returns current value of base minimum delay in milliseconds.
   virtual absl::optional<int> GetBaseMinimumPlayoutDelayMs(
-      uint32_t ssrc) const = 0;
+      absl::optional<uint32_t> ssrc) const = 0;
 };
 
 }  // namespace cricket

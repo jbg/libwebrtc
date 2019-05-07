@@ -21,9 +21,10 @@ namespace webrtc {
 
 class MockDelayable : public cricket::Delayable {
  public:
-  MOCK_METHOD2(SetBaseMinimumPlayoutDelayMs, bool(uint32_t ssrc, int delay_ms));
+  MOCK_METHOD2(SetBaseMinimumPlayoutDelayMs,
+               bool(absl::optional<uint32_t> ssrc, int delay_ms));
   MOCK_CONST_METHOD1(GetBaseMinimumPlayoutDelayMs,
-                     absl::optional<int>(uint32_t ssrc));
+                     absl::optional<int>(absl::optional<uint32_t> ssrc));
 };
 
 }  // namespace webrtc

@@ -159,9 +159,10 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   webrtc::RTCError SetRtpSendParameters(
       uint32_t ssrc,
       const webrtc::RtpParameters& parameters) override;
-  webrtc::RtpParameters GetRtpReceiveParameters(uint32_t ssrc) const override;
+  webrtc::RtpParameters GetRtpReceiveParameters(
+      absl::optional<uint32_t> ssrc) const override;
   bool SetRtpReceiveParameters(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       const webrtc::RtpParameters& parameters) override;
 
   void SetPlayout(bool playout) override;
@@ -173,13 +174,13 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   bool AddSendStream(const StreamParams& sp) override;
   bool RemoveSendStream(uint32_t ssrc) override;
   bool AddRecvStream(const StreamParams& sp) override;
-  bool RemoveRecvStream(uint32_t ssrc) override;
+  bool RemoveRecvStream(absl::optional<uint32_t> ssrc) override;
 
   // E2EE Frame API
   // Set a frame decryptor to a particular ssrc that will intercept all
   // incoming audio payloads and attempt to decrypt them before forwarding the
   // result.
-  void SetFrameDecryptor(uint32_t ssrc,
+  void SetFrameDecryptor(absl::optional<uint32_t> ssrc,
                          rtc::scoped_refptr<webrtc::FrameDecryptorInterface>
                              frame_decryptor) override;
   // Set a frame encryptor to a particular ssrc that will intercept all
@@ -190,11 +191,12 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
                              frame_encryptor) override;
 
   // SSRC=0 will apply the new volume to current and future unsignaled streams.
-  bool SetOutputVolume(uint32_t ssrc, double volume) override;
+  bool SetOutputVolume(absl::optional<uint32_t> ssrc, double volume) override;
 
-  bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override;
+  bool SetBaseMinimumPlayoutDelayMs(absl::optional<uint32_t> ssrc,
+                                    int delay_ms) override;
   absl::optional<int> GetBaseMinimumPlayoutDelayMs(
-      uint32_t ssrc) const override;
+      absl::optional<uint32_t> ssrc) const override;
 
   bool CanInsertDtmf() override;
   bool InsertDtmf(uint32_t ssrc, int event, int duration) override;
@@ -211,7 +213,7 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
   // SSRC=0 will set the audio sink on the latest unsignaled stream, future or
   // current. Only one stream at a time will use the sink.
   void SetRawAudioSink(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override;
 
   std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const override;

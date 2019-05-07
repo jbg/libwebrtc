@@ -31,7 +31,7 @@ JitterBufferDelay::JitterBufferDelay(rtc::Thread* worker_thread)
 }
 
 void JitterBufferDelay::OnStart(cricket::Delayable* media_channel,
-                                uint32_t ssrc) {
+                                absl::optional<uint32_t> ssrc) {
   RTC_DCHECK_RUN_ON(signaling_thread_);
 
   media_channel_ = media_channel;
@@ -59,8 +59,8 @@ void JitterBufferDelay::Set(absl::optional<double> delay_seconds) {
   delay_ms = rtc::SafeClamp(delay_ms, 0, kMaximumDelayMs);
 
   cached_delay_seconds_ = delay_seconds;
-  if (media_channel_ && ssrc_) {
-    media_channel_->SetBaseMinimumPlayoutDelayMs(ssrc_.value(), delay_ms);
+  if (media_channel_) {
+    media_channel_->SetBaseMinimumPlayoutDelayMs(ssrc_, delay_ms);
   }
 }
 

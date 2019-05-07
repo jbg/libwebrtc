@@ -835,11 +835,12 @@ webrtc::RTCError WebRtcVideoChannel::SetRtpSendParameters(
 }
 
 webrtc::RtpParameters WebRtcVideoChannel::GetRtpReceiveParameters(
-    uint32_t ssrc) const {
+    absl::optional<uint32_t> ssrc) const {
   RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK(ssrc);
   webrtc::RtpParameters rtp_params;
   // SSRC of 0 represents an unsignaled receive stream.
-  if (ssrc == 0) {
+  if (*ssrc == 0) {
     if (!default_unsignalled_ssrc_handler_.GetDefaultSink()) {
       RTC_LOG(LS_WARNING)
           << "Attempting to get RTP parameters for the default, "
@@ -849,11 +850,11 @@ webrtc::RtpParameters WebRtcVideoChannel::GetRtpReceiveParameters(
     }
     rtp_params.encodings.emplace_back();
   } else {
-    auto it = receive_streams_.find(ssrc);
+    auto it = receive_streams_.find(*ssrc);
     if (it == receive_streams_.end()) {
       RTC_LOG(LS_WARNING)
           << "Attempting to get RTP receive parameters for stream "
-          << "with SSRC " << ssrc << " which doesn't exist.";
+          << "with SSRC " << *ssrc << " which doesn't exist.";
       return webrtc::RtpParameters();
     }
     rtp_params = it->second->GetRtpParameters();
@@ -868,13 +869,13 @@ webrtc::RtpParameters WebRtcVideoChannel::GetRtpReceiveParameters(
 }
 
 bool WebRtcVideoChannel::SetRtpReceiveParameters(
-    uint32_t ssrc,
+    absl::optional<uint32_t> ssrc,
     const webrtc::RtpParameters& parameters) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   TRACE_EVENT0("webrtc", "WebRtcVideoChannel::SetRtpReceiveParameters");
 
   // SSRC of 0 represents an unsignaled receive stream.
-  if (ssrc == 0) {
+  if (*ssrc == 0) {
     if (!default_unsignalled_ssrc_handler_.GetDefaultSink()) {
       RTC_LOG(LS_WARNING)
           << "Attempting to set RTP parameters for the default, "
@@ -883,16 +884,16 @@ bool WebRtcVideoChannel::SetRtpReceiveParameters(
       return false;
     }
   } else {
-    auto it = receive_streams_.find(ssrc);
+    auto it = receive_streams_.find(*ssrc);
     if (it == receive_streams_.end()) {
       RTC_LOG(LS_WARNING)
           << "Attempting to set RTP receive parameters for stream "
-          << "with SSRC " << ssrc << " which doesn't exist.";
+          << "with SSRC " << *ssrc << " which doesn't exist.";
       return false;
     }
   }
 
-  webrtc::RtpParameters current_parameters = GetRtpReceiveParameters(ssrc);
+  webrtc::RtpParameters current_parameters = GetRtpReceiveParameters(*ssrc);
   if (current_parameters != parameters) {
     RTC_DLOG(LS_ERROR) << "Changing the RTP receive parameters is currently "
                        << "unsupported.";
@@ -1275,10 +1276,11 @@ void WebRtcVideoChannel::ConfigureReceiverRtp(
   }
 }
 
-bool WebRtcVideoChannel::RemoveRecvStream(uint32_t ssrc) {
+bool WebRtcVideoChannel::RemoveRecvStream(absl::optional<uint32_t> ssrc) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  RTC_LOG(LS_INFO) << "RemoveRecvStream: " << ssrc;
-  if (ssrc == 0) {
+  RTC_DCHECK(ssrc);
+  RTC_LOG(LS_INFO) << "RemoveRecvStream: " << *ssrc;
+  if (*ssrc == 0) {
     // This indicates that we need to remove the unsignaled stream parameters
     // that are cached.
     unsignaled_stream_params_ = StreamParams();
@@ -1286,9 +1288,9 @@ bool WebRtcVideoChannel::RemoveRecvStream(uint32_t ssrc) {
   }
 
   std::map<uint32_t, WebRtcVideoReceiveStream*>::iterator stream =
-      receive_streams_.find(ssrc);
+      receive_streams_.find(*ssrc);
   if (stream == receive_streams_.end()) {
-    RTC_LOG(LS_ERROR) << "Stream not found for ssrc: " << ssrc;
+    RTC_LOG(LS_ERROR) << "Stream not found for ssrc: " << *ssrc;
     return false;
   }
   DeleteReceiveStream(stream->second);
@@ -1566,10 +1568,11 @@ void WebRtcVideoChannel::SetInterface(
 }
 
 void WebRtcVideoChannel::SetFrameDecryptor(
-    uint32_t ssrc,
+    absl::optional<uint32_t> ssrc,
     rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  auto matching_stream = receive_streams_.find(ssrc);
+  RTC_DCHECK(ssrc);
+  auto matching_stream = receive_streams_.find(*ssrc);
   if (matching_stream != receive_streams_.end()) {
     matching_stream->second->SetFrameDecryptor(frame_decryptor);
   }
@@ -1587,25 +1590,27 @@ void WebRtcVideoChannel::SetFrameEncryptor(
   }
 }
 
-bool WebRtcVideoChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
-                                                      int delay_ms) {
+bool WebRtcVideoChannel::SetBaseMinimumPlayoutDelayMs(
+    absl::optional<uint32_t> ssrc,
+    int delay_ms) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK(ssrc);
   absl::optional<uint32_t> default_ssrc = GetDefaultReceiveStreamSsrc();
 
   // SSRC of 0 represents the default receive stream.
-  if (ssrc == 0) {
+  if (*ssrc == 0) {
     default_recv_base_minimum_delay_ms_ = delay_ms;
   }
 
-  if (ssrc == 0 && !default_ssrc) {
+  if (*ssrc == 0 && !default_ssrc) {
     return true;
   }
 
-  if (ssrc == 0 && default_ssrc) {
+  if (*ssrc == 0 && default_ssrc) {
     ssrc = default_ssrc.value();
   }
 
-  auto stream = receive_streams_.find(ssrc);
+  auto stream = receive_streams_.find(*ssrc);
   if (stream != receive_streams_.end()) {
     stream->second->SetBaseMinimumPlayoutDelayMs(delay_ms);
     return true;
@@ -1616,14 +1621,15 @@ bool WebRtcVideoChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
 }
 
 absl::optional<int> WebRtcVideoChannel::GetBaseMinimumPlayoutDelayMs(
-    uint32_t ssrc) const {
+    absl::optional<uint32_t> ssrc) const {
   RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK(ssrc);
   // SSRC of 0 represents the default receive stream.
-  if (ssrc == 0) {
+  if (*ssrc == 0) {
     return default_recv_base_minimum_delay_ms_;
   }
 
-  auto stream = receive_streams_.find(ssrc);
+  auto stream = receive_streams_.find(*ssrc);
   if (stream != receive_streams_.end()) {
     return stream->second->GetBaseMinimumPlayoutDelayMs();
   } else {

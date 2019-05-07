@@ -222,7 +222,7 @@ class MediaChannel : public sigslot::has_slots<> {
   // Removes an incoming media stream.
   // ssrc must be the first SSRC of the media stream if the stream uses
   // multiple SSRCs.
-  virtual bool RemoveRecvStream(uint32_t ssrc) = 0;
+  virtual bool RemoveRecvStream(absl::optional<uint32_t> ssrc) = 0;
   // Returns the absoulte sendtime extension id value from media channel.
   virtual int GetRtpSendTimeExtnId() const;
   // Set the frame encryptor to use on all outgoing frames. This is optional.
@@ -237,7 +237,7 @@ class MediaChannel : public sigslot::has_slots<> {
   // attached to.
   // TODO(benwright) make pure virtual once internal supports it.
   virtual void SetFrameDecryptor(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor);
 
   // Base method to send packet using NetworkInterface.
@@ -753,9 +753,9 @@ class VoiceMediaChannel : public MediaChannel, public Delayable {
   // an |ssrc| of 0 will return encoding parameters with an unset |ssrc|
   // member.
   virtual webrtc::RtpParameters GetRtpReceiveParameters(
-      uint32_t ssrc) const = 0;
+      absl::optional<uint32_t> ssrc) const = 0;
   virtual bool SetRtpReceiveParameters(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       const webrtc::RtpParameters& parameters) = 0;
   // Starts or stops playout of received audio.
   virtual void SetPlayout(bool playout) = 0;
@@ -767,7 +767,8 @@ class VoiceMediaChannel : public MediaChannel, public Delayable {
                             const AudioOptions* options,
                             AudioSource* source) = 0;
   // Set speaker output volume of the specified ssrc.
-  virtual bool SetOutputVolume(uint32_t ssrc, double volume) = 0;
+  virtual bool SetOutputVolume(absl::optional<uint32_t> ssrc,
+                               double volume) = 0;
   // Returns if the telephone-event has been negotiated.
   virtual bool CanInsertDtmf() = 0;
   // Send a DTMF |event|. The DTMF out-of-band signal will be used.
@@ -779,7 +780,7 @@ class VoiceMediaChannel : public MediaChannel, public Delayable {
   virtual bool GetStats(VoiceMediaInfo* info) = 0;
 
   virtual void SetRawAudioSink(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       std::unique_ptr<webrtc::AudioSinkInterface> sink) = 0;
 
   virtual std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const = 0;
@@ -822,9 +823,9 @@ class VideoMediaChannel : public MediaChannel, public Delayable {
   // an |ssrc| of 0 will return encoding parameters with an unset |ssrc|
   // member.
   virtual webrtc::RtpParameters GetRtpReceiveParameters(
-      uint32_t ssrc) const = 0;
+      absl::optional<uint32_t> ssrc) const = 0;
   virtual bool SetRtpReceiveParameters(
-      uint32_t ssrc,
+      absl::optional<uint32_t> ssrc,
       const webrtc::RtpParameters& parameters) = 0;
   // Gets the currently set codecs/payload types to be used for outgoing media.
   virtual bool GetSendCodec(VideoCodec* send_codec) = 0;

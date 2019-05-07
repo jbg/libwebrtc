@@ -30,7 +30,8 @@ class JitterBufferDelay : public JitterBufferDelayInterface {
   // Must be called on signaling thread.
   explicit JitterBufferDelay(rtc::Thread* worker_thread);
 
-  void OnStart(cricket::Delayable* media_channel, uint32_t ssrc) override;
+  void OnStart(cricket::Delayable* media_channel,
+               absl::optional<uint32_t> ssrc) override;
 
   void OnStop() override;
 

@@ -1418,11 +1418,11 @@ webrtc::RTCError WebRtcVoiceMediaChannel::SetRtpSendParameters(
 }
 
 webrtc::RtpParameters WebRtcVoiceMediaChannel::GetRtpReceiveParameters(
-    uint32_t ssrc) const {
+    absl::optional<uint32_t> ssrc) const {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   webrtc::RtpParameters rtp_params;
   // SSRC of 0 represents the default receive stream.
-  if (ssrc == 0) {
+  if (!ssrc) {
     if (!default_sink_) {
       RTC_LOG(LS_WARNING)
           << "Attempting to get RTP parameters for the default, "
@@ -1432,11 +1432,11 @@ webrtc::RtpParameters WebRtcVoiceMediaChannel::GetRtpReceiveParameters(
     }
     rtp_params.encodings.emplace_back();
   } else {
-    auto it = recv_streams_.find(ssrc);
+    auto it = recv_streams_.find(*ssrc);
     if (it == recv_streams_.end()) {
       RTC_LOG(LS_WARNING)
           << "Attempting to get RTP receive parameters for stream "
-          << "with ssrc " << ssrc << " which doesn't exist.";
+          << "with ssrc " << *ssrc << " which doesn't exist.";
       return webrtc::RtpParameters();
     }
     rtp_params = it->second->GetRtpParameters();
@@ -1449,11 +1449,11 @@ webrtc::RtpParameters WebRtcVoiceMediaChannel::GetRtpReceiveParameters(
 }
 
 bool WebRtcVoiceMediaChannel::SetRtpReceiveParameters(
-    uint32_t ssrc,
+    absl::optional<uint32_t> ssrc,
     const webrtc::RtpParameters& parameters) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   // SSRC of 0 represents the default receive stream.
-  if (ssrc == 0) {
+  if (!ssrc) {
     if (!default_sink_) {
       RTC_LOG(LS_WARNING)
           << "Attempting to set RTP parameters for the default, "
@@ -1462,11 +1462,11 @@ bool WebRtcVoiceMediaChannel::SetRtpReceiveParameters(
       return false;
     }
   } else {
-    auto it = recv_streams_.find(ssrc);
+    auto it = recv_streams_.find(*ssrc);
     if (it == recv_streams_.end()) {
       RTC_LOG(LS_WARNING)
           << "Attempting to set RTP receive parameters for stream "
-          << "with ssrc " << ssrc << " which doesn't exist.";
+          << "with ssrc " << *ssrc << " which doesn't exist.";
       return false;
     }
   }
@@ -1860,10 +1860,6 @@ bool WebRtcVoiceMediaChannel::AddRecvStream(const StreamParams& sp) {
   }
 
   const uint32_t ssrc = sp.first_ssrc();
-  if (ssrc == 0) {
-    RTC_DLOG(LS_WARNING) << "AddRecvStream with ssrc==0 is not supported.";
-    return false;
-  }
 
   // If this stream was previously received unsignaled, we promote it, possibly
   // recreating the AudioReceiveStream, if stream ids have changed.
@@ -1894,26 +1890,26 @@ bool WebRtcVoiceMediaChannel::AddRecvStream(const StreamParams& sp) {
   return true;
 }
 
-bool WebRtcVoiceMediaChannel::RemoveRecvStream(uint32_t ssrc) {
+bool WebRtcVoiceMediaChannel::RemoveRecvStream(absl::optional<uint32_t> ssrc) {
   TRACE_EVENT0("webrtc", "WebRtcVoiceMediaChannel::RemoveRecvStream");
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  RTC_LOG(LS_INFO) << "RemoveRecvStream: " << ssrc;
+  RTC_LOG(LS_INFO) << "RemoveRecvStream: " << ssrc.value_or(0);
 
-  if (ssrc == 0) {
+  if (!ssrc) {
     // This indicates that we need to remove the unsignaled stream parameters
     // that are cached.
     unsignaled_stream_params_ = StreamParams();
     return true;
   }
 
-  const auto it = recv_streams_.find(ssrc);
+  const auto it = recv_streams_.find(*ssrc);
   if (it == recv_streams_.end()) {
-    RTC_LOG(LS_WARNING) << "Try to remove stream with ssrc " << ssrc
+    RTC_LOG(LS_WARNING) << "Try to remove stream with ssrc " << *ssrc
                         << " which doesn't exist.";
     return false;
   }
 
-  MaybeDeregisterUnsignaledRecvStream(ssrc);
+  MaybeDeregisterUnsignaledRecvStream(*ssrc);
 
   it->second->SetRawAudioSink(nullptr);
   delete it->second;
@@ -1944,11 +1940,12 @@ bool WebRtcVoiceMediaChannel::SetLocalSource(uint32_t ssrc,
   return true;
 }
 
-bool WebRtcVoiceMediaChannel::SetOutputVolume(uint32_t ssrc, double volume) {
+bool WebRtcVoiceMediaChannel::SetOutputVolume(absl::optional<uint32_t> ssrc,
+                                              double volume) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  std::vector<uint32_t> ssrcs(1, ssrc);
+  std::vector<uint32_t> ssrcs(1, ssrc.value_or(0));
   // SSRC of 0 represents the default receive stream.
-  if (ssrc == 0) {
+  if (!ssrc) {
     default_recv_volume_ = volume;
     ssrcs = unsignaled_recv_ssrcs_;
   }
@@ -1965,12 +1962,13 @@ bool WebRtcVoiceMediaChannel::SetOutputVolume(uint32_t ssrc, double volume) {
   return true;
 }
 
-bool WebRtcVoiceMediaChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
-                                                           int delay_ms) {
+bool WebRtcVoiceMediaChannel::SetBaseMinimumPlayoutDelayMs(
+    absl::optional<uint32_t> ssrc,
+    int delay_ms) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  std::vector<uint32_t> ssrcs(1, ssrc);
+  std::vector<uint32_t> ssrcs(1, ssrc.value_or(0));
   // SSRC of 0 represents the default receive stream.
-  if (ssrc == 0) {
+  if (!ssrc) {
     default_recv_base_minimum_delay_ms_ = delay_ms;
     ssrcs = unsignaled_recv_ssrcs_;
   }
@@ -1989,13 +1987,13 @@ bool WebRtcVoiceMediaChannel::SetBaseMinimumPlayoutDelayMs(uint32_t ssrc,
 }
 
 absl::optional<int> WebRtcVoiceMediaChannel::GetBaseMinimumPlayoutDelayMs(
-    uint32_t ssrc) const {
+    absl::optional<uint32_t> ssrc) const {
   // SSRC of 0 represents the default receive stream.
-  if (ssrc == 0) {
+  if (!ssrc) {
     return default_recv_base_minimum_delay_ms_;
   }
 
-  const auto it = recv_streams_.find(ssrc);
+  const auto it = recv_streams_.find(*ssrc);
 
   if (it != recv_streams_.end()) {
     return it->second->GetBaseMinimumPlayoutDelayMs();
@@ -2008,16 +2006,17 @@ bool WebRtcVoiceMediaChannel::CanInsertDtmf() {
 }
 
 void WebRtcVoiceMediaChannel::SetFrameDecryptor(
-    uint32_t ssrc,
+    absl::optional<uint32_t> ssrc,
     rtc::scoped_refptr<webrtc::FrameDecryptorInterface> frame_decryptor) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  auto matching_stream = recv_streams_.find(ssrc);
+  // Handle unsignaled frame decryptors.
+  if (!ssrc) {
+    unsignaled_frame_decryptor_ = frame_decryptor;
+    return;
+  }
+  auto matching_stream = recv_streams_.find(*ssrc);
   if (matching_stream != recv_streams_.end()) {
     matching_stream->second->SetFrameDecryptor(frame_decryptor);
-  }
-  // Handle unsignaled frame decryptors.
-  if (ssrc == 0) {
-    unsignaled_frame_decryptor_ = frame_decryptor;
   }
 }
 
@@ -2294,12 +2293,12 @@ bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
 }
 
 void WebRtcVoiceMediaChannel::SetRawAudioSink(
-    uint32_t ssrc,
+    absl::optional<uint32_t> ssrc,
     std::unique_ptr<webrtc::AudioSinkInterface> sink) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   RTC_LOG(LS_VERBOSE) << "WebRtcVoiceMediaChannel::SetRawAudioSink: ssrc:"
-                      << ssrc << " " << (sink ? "(ptr)" : "NULL");
-  if (ssrc == 0) {
+                      << ssrc.value_or(0) << " " << (sink ? "(ptr)" : "NULL");
+  if (!ssrc) {
     if (!unsignaled_recv_ssrcs_.empty()) {
       std::unique_ptr<webrtc::AudioSinkInterface> proxy_sink(
           sink ? new ProxySink(sink.get()) : nullptr);
@@ -2308,9 +2307,9 @@ void WebRtcVoiceMediaChannel::SetRawAudioSink(
     default_sink_ = std::move(sink);
     return;
   }
-  const auto it = recv_streams_.find(ssrc);
+  const auto it = recv_streams_.find(*ssrc);
   if (it == recv_streams_.end()) {
-    RTC_LOG(LS_WARNING) << "SetRawAudioSink: no recv stream " << ssrc;
+    RTC_LOG(LS_WARNING) << "SetRawAudioSink: no recv stream " << *ssrc;
     return;
   }
   it->second->SetRawAudioSink(std::move(sink));
