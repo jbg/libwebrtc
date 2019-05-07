@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e1a9a88_acf96d44",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1571,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-07T09:58:57Z",
+      "side": 1,
+      "message": "I\u0027m fairly sure this shouldn\u0027t be optional. Just delete the RTC_DCHECK below.",
+      "range": {
+        "startLine": 1571,
+        "startChar": 4,
+        "endLine": 1571,
+        "endChar": 33
+      },
+      "revId": "262c9c3fbc9ec5e305b5cced1f8c8e39bb82ab91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5a74451_2184ef48",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1595,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-07T09:58:57Z",
+      "side": 1,
+      "message": "I\u0027d suggest creating a separate method for the unsignalled case, and deleting the ssrc \u003d\u003d 0 checks from the original method. And then track upwards to find identify the call sites that should use the new method. That can be done one or a few methods at a time, and will make the logic related to unsignalled ssrcs a lot clearer.",
+      "range": {
+        "startLine": 1593,
+        "startChar": 0,
+        "endLine": 1595,
+        "endChar": 17
+      },
+      "revId": "262c9c3fbc9ec5e305b5cced1f8c8e39bb82ab91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
