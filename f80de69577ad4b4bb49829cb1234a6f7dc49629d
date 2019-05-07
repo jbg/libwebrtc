@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f998aa21_d926207b",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-07T09:05:04Z",
+      "side": 1,
+      "message": "We use `typename` pretty much everywhere in our templates. Be consistent?",
+      "range": {
+        "startLine": 190,
+        "startChar": 10,
+        "endLine": 190,
+        "endChar": 15
+      },
+      "revId": "f80de69577ad4b4bb49829cb1234a6f7dc49629d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc2126a9_68bb6e6a",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-07T09:05:04Z",
+      "side": 1,
+      "message": "Why pass by value instead of by const ref? T could in general be expensive or impossible to copy.",
+      "range": {
+        "startLine": 191,
+        "startChar": 20,
+        "endLine": 191,
+        "endChar": 21
+      },
+      "revId": "f80de69577ad4b4bb49829cb1234a6f7dc49629d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "213749f0_3dfc5f56",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-07T09:05:04Z",
+      "side": 1,
+      "message": "Why\n\n  A \u0026\u0026 !absl::disjunction\u003cB, C, D\u003e\n\ninstead of\n\n  A \u0026\u0026 !B \u0026\u0026 !C \u0026\u0026 !D\n\nlike we had before? Is there some technical advantage, or is it about readability?",
+      "range": {
+        "startLine": 281,
+        "startChar": 9,
+        "endLine": 281,
+        "endChar": 26
+      },
+      "revId": "f80de69577ad4b4bb49829cb1234a6f7dc49629d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
