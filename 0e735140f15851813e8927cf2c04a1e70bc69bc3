@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a749f9e_3d514ff0",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 8286
+      },
+      "writtenOn": "2019-05-14T12:28:14Z",
+      "side": 1,
+      "message": "Is anything else in UpdateCumulativeSums specific to the streaming_mode?",
+      "revId": "0e735140f15851813e8927cf2c04a1e70bc69bc3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
