@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b2796e2_2732560a",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-14T15:06:13Z",
+      "side": 1,
+      "message": "What about this one?",
+      "revId": "62fcebbeab42995e2e7cded521fbbe233284c13d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "201941fb_2ef9409f",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4511,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-14T15:06:13Z",
+      "side": 1,
+      "message": "Should you verify that the output contains the correct protocol?",
+      "revId": "62fcebbeab42995e2e7cded521fbbe233284c13d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
