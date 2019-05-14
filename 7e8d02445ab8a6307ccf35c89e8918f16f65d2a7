@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c7f091a_e82e70fd",
+        "filename": "pc/peer_connection_data_channel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-14T19:26:48Z",
+      "side": 1,
+      "message": "nit: I think EXPECT_THAT(sdp, HasSubstr(...)) and EXPECT_THAT(sdp, Not(HasSubstr(...))) would be more clear",
+      "revId": "7e8d02445ab8a6307ccf35c89e8918f16f65d2a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
