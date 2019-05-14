@@ -16,6 +16,24 @@
       "revId": "ca75eaa5b78662119aa8ceba4e60144a5d47c337",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86bb842d_d5eb29c8",
+        "filename": "sdk/objc/native/src/audio/audio_device_ios.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-05-14T07:39:45Z",
+      "side": 1,
+      "message": "I thought so too but this is what `git cl format` does.",
+      "parentUuid": "5fcb97be_dabbf7f6",
+      "revId": "ca75eaa5b78662119aa8ceba4e60144a5d47c337",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
