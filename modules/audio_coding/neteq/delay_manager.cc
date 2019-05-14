@@ -31,7 +31,6 @@
 namespace {
 
 constexpr int kLimitProbability = 1020054733;           // 19/20 in Q30.
-constexpr int kLimitProbabilityStreaming = 1073204953;  // 1999/2000 in Q30.
 constexpr int kMaxStreamingPeakPeriodMs = 600000;       // 10 minutes in ms.
 constexpr int kCumulativeSumDrift = 2;  // Drift term for cumulative sum
                                         // |iat_cumulative_sum_|.
@@ -129,7 +128,6 @@ DelayManager::DelayManager(size_t max_packets_in_buffer,
       base_target_level_(4),                   // In Q0 domain.
       target_level_(base_target_level_ << 8),  // In Q8 domain.
       packet_len_ms_(0),
-      streaming_mode_(false),
       last_seq_no_(0),
       last_timestamp_(0),
       minimum_delay_ms_(0),
@@ -212,9 +210,6 @@ int DelayManager::Update(uint16_t sequence_number,
   bool reordered = false;
   if (packet_len_ms > 0) {
     // Cannot update statistics unless |packet_len_ms| is valid.
-    if (streaming_mode_) {
-      UpdateCumulativeSums(packet_len_ms, sequence_number);
-    }
 
     // Inter-arrival time (IAT) in integer "packet times" (rounding down). This
     // is the value added to the inter-arrival time histogram.
@@ -265,9 +260,6 @@ int DelayManager::Update(uint16_t sequence_number,
     }
     // Calculate new |target_level_| based on updated statistics.
     target_level_ = CalculateTargetLevel(iat_packets, reordered);
-    if (streaming_mode_) {
-      target_level_ = std::max(target_level_, max_iat_cumulative_sum_);
-    }
 
     LimitTargetLevel();
   }  // End if (packet_len_ms > 0).
@@ -363,9 +355,6 @@ void DelayManager::LimitTargetLevel() {
 
 int DelayManager::CalculateTargetLevel(int iat_packets, bool reordered) {
   int limit_probability = histogram_quantile_;
-  if (streaming_mode_) {
-    limit_probability = kLimitProbabilityStreaming;
-  }
 
   int bucket_index = histogram_->Quantile(limit_probability);
   int target_level;
@@ -415,7 +404,6 @@ int DelayManager::SetPacketAudioLength(int length_ms) {
 
 void DelayManager::Reset() {
   packet_len_ms_ = 0;  // Packet size unknown.
-  streaming_mode_ = false;
   peak_detector_.Reset();
   histogram_->Reset();
   base_target_level_ = 4;
@@ -537,9 +525,6 @@ int DelayManager::GetBaseMinimumDelay() const {
 
 int DelayManager::base_target_level() const {
   return base_target_level_;
-}
-void DelayManager::set_streaming_mode(bool value) {
-  streaming_mode_ = value;
 }
 int DelayManager::last_pack_cng_or_dtmf() const {
   return last_pack_cng_or_dtmf_;
