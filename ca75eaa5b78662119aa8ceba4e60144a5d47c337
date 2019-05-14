@@ -34,6 +34,24 @@
       "revId": "ca75eaa5b78662119aa8ceba4e60144a5d47c337",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa2f8b47_8f2aa75a",
+        "filename": "sdk/objc/native/src/audio/audio_device_ios.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-05-14T07:41:13Z",
+      "side": 1,
+      "message": "Found the relevant part of the style guide:\n\n\"Short conditional statements may be written on one line if this enhances readability. You may use this only when the line is brief and the statement does not use the else clause.\"",
+      "parentUuid": "86bb842d_d5eb29c8",
+      "revId": "ca75eaa5b78662119aa8ceba4e60144a5d47c337",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
