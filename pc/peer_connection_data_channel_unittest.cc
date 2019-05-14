@@ -411,6 +411,32 @@ TEST_P(PeerConnectionDataChannelTest, MediaTransportWithoutSdesFails) {
   EXPECT_EQ(nullptr, caller);
 }
 
+TEST_P(PeerConnectionDataChannelTest, ModernSdpSyntaxByDefault) {
+  PeerConnectionInterface::RTCOfferAnswerOptions options;
+  auto caller = CreatePeerConnectionWithDataChannel();
+  auto offer = caller->CreateOffer(options);
+  EXPECT_FALSE(cricket::GetFirstSctpDataContentDescription(offer->description())
+                   ->use_sctpmap());
+  std::string sdp;
+  offer->ToString(&sdp);
+  RTC_LOG(LS_ERROR) << sdp;
+  EXPECT_NE(std::string::npos, sdp.find(" UDP/DTLS/SCTP webrtc-datachannel"));
+  EXPECT_EQ(std::string::npos, sdp.find("a=sctpmap:"));
+}
+
+TEST_P(PeerConnectionDataChannelTest, ObsoleteSdpSyntaxIfSet) {
+  PeerConnectionInterface::RTCOfferAnswerOptions options;
+  options.use_obsolete_sctp_sdp = true;
+  auto caller = CreatePeerConnectionWithDataChannel();
+  auto offer = caller->CreateOffer(options);
+  EXPECT_TRUE(cricket::GetFirstSctpDataContentDescription(offer->description())
+                  ->use_sctpmap());
+  std::string sdp;
+  offer->ToString(&sdp);
+  EXPECT_EQ(std::string::npos, sdp.find(" UDP/DTLS/SCTP webrtc-datachannel"));
+  EXPECT_NE(std::string::npos, sdp.find("a=sctpmap:5000 webrtc-datachannel"));
+}
+
 INSTANTIATE_TEST_SUITE_P(PeerConnectionDataChannelTest,
                          PeerConnectionDataChannelTest,
                          Values(SdpSemantics::kPlanB,
