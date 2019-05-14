@@ -22,6 +22,30 @@
       "revId": "90d9feb8c88e7eacb9cd4c8c6b1a675bd1eab97e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ec26c1f_ae7fb175",
+        "filename": "rtc_tools/frame_analyzer/frame_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-14T09:45:50Z",
+      "side": 0,
+      "message": "it seems to me it is bug (or rather missed feature) in abseil:\nI didn\u0027t found a good way to SetProgramUsageMessage (that setter is in the internal namespace).\n\nProbably ok to leave as is for now and set it later, when available.",
+      "parentUuid": "1cbf1f32_f7944f21",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 19
+      },
+      "revId": "90d9feb8c88e7eacb9cd4c8c6b1a675bd1eab97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
