@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b455a867_8e76a2de",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-14T15:26:56Z",
+      "side": 1,
+      "message": "Good question. It is only used in a decode/encode/compare test, which should preserve the value of the protocol field, but there\u0027s no reason not to use the standard - that\u0027s not what the test is testing.",
+      "parentUuid": "8b2796e2_2732560a",
+      "revId": "62fcebbeab42995e2e7cded521fbbe233284c13d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "201941fb_2ef9409f",
         "filename": "pc/webrtc_sdp_unittest.cc",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-14T15:06:13Z",
       "side": 1,
       "message": "Should you verify that the output contains the correct protocol?",
+      "revId": "62fcebbeab42995e2e7cded521fbbe233284c13d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edf0a6ee_b2ed54ed",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4511,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-14T15:26:56Z",
+      "side": 1,
+      "message": "It\u0027s cheap, so why not? Done.",
+      "parentUuid": "201941fb_2ef9409f",
       "revId": "62fcebbeab42995e2e7cded521fbbe233284c13d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
