@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cbf1f32_f7944f21",
+        "filename": "rtc_tools/frame_analyzer/frame_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-14T07:35:18Z",
+      "side": 0,
+      "message": "Danil, I am not sure what to do with usage messages. At the moment this is not set and automatically generated:\n\n  $ ./out/Debug/frame_analyzer --help\n  frame_analyzer: Warning: SetProgramUsageMessage() never called\n\nBut there is a warning. Should I explicitly call something to set this message? (SetProgramUsageMessage is part of absl::absl_internal).",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 19
+      },
+      "revId": "90d9feb8c88e7eacb9cd4c8c6b1a675bd1eab97e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
