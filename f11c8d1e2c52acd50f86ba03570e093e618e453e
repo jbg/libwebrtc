@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3f08b96_e9f1d30a",
+        "filename": "modules/audio_coding/neteq/delay_manager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-05-14T15:30:03Z",
+      "side": 0,
+      "message": "I think you can remove these as well!",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 0
+      },
+      "revId": "f11c8d1e2c52acd50f86ba03570e093e618e453e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
