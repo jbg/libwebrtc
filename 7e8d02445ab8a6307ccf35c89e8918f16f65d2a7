@@ -16,6 +16,24 @@
       "revId": "7e8d02445ab8a6307ccf35c89e8918f16f65d2a7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7895ba61_f82713af",
+        "filename": "pc/peer_connection_data_channel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-14T20:01:30Z",
+      "side": 1,
+      "message": "Good idea. It gives better errors too.",
+      "parentUuid": "8c7f091a_e82e70fd",
+      "revId": "7e8d02445ab8a6307ccf35c89e8918f16f65d2a7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
