@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e61c052_46659772",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-14T14:48:34Z",
+      "side": 1,
+      "message": "I also like cats \u003d)",
+      "range": {
+        "startLine": 52,
+        "startChar": 54,
+        "endLine": 52,
+        "endChar": 61
+      },
+      "revId": "3b126475e65e6a216c7f518ff96c98d2b8e8bfbd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed596147_a86cc17a",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-14T14:48:34Z",
+      "side": 1,
+      "message": "Rephrase probably:\nIn this case |source_width| and |source_height| are the dimensions of the source frame, while |VideoConfig::width| and |Video::config::height| are the dimensions of the sliding window.",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 59,
+        "endChar": 52
+      },
+      "revId": "3b126475e65e6a216c7f518ff96c98d2b8e8bfbd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
