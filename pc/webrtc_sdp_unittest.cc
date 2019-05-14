@@ -1784,7 +1784,7 @@ class WebRtcSdpTest : public ::testing::Test {
         new SctpDataContentDescription());
     sctp_desc_ = data.get();
     sctp_desc_->set_use_sctpmap(use_sctpmap);
-    sctp_desc_->set_protocol(cricket::kMediaProtocolDtlsSctp);
+    sctp_desc_->set_protocol(cricket::kMediaProtocolUdpDtlsSctp);
     sctp_desc_->set_port(kDefaultSctpPort);
     desc_.AddContent(kDataContentName, MediaProtocolType::kSctp,
                      data.release());
@@ -4527,4 +4527,30 @@ TEST_F(WebRtcSdpTest, SerializeMediaTransportSettingsTestCopy) {
   ASSERT_EQ(1u, copy->MediaTransportSettings().size());
   EXPECT_EQ("name", copy->MediaTransportSettings()[0].transport_name);
   EXPECT_EQ("setting", copy->MediaTransportSettings()[0].transport_setting);
+}
+
+TEST_F(WebRtcSdpTest, SerializeWithDefaultSctpProtocol) {
+  AddSctpDataChannel(false);  // Don't use sctpmap
+  JsepSessionDescription jsep_desc(kDummyType);
+  MakeDescriptionWithoutCandidates(&jsep_desc);
+  std::string message = webrtc::SdpSerialize(jsep_desc);
+  RTC_LOG(LS_ERROR) << message;
+  EXPECT_NE(std::string::npos,
+            message.find(cricket::kMediaProtocolUdpDtlsSctp));
+}
+
+TEST_F(WebRtcSdpTest, DeserializeWithAllSctpProtocols) {
+  AddSctpDataChannel(false);
+  std::string protocols[] = {cricket::kMediaProtocolDtlsSctp,
+                             cricket::kMediaProtocolUdpDtlsSctp,
+                             cricket::kMediaProtocolTcpDtlsSctp};
+  for (const auto& protocol : protocols) {
+    sctp_desc_->set_protocol(protocol);
+    JsepSessionDescription jsep_desc(kDummyType);
+    MakeDescriptionWithoutCandidates(&jsep_desc);
+    std::string message = webrtc::SdpSerialize(jsep_desc);
+    JsepSessionDescription jsep_output(kDummyType);
+    SdpParseError error;
+    EXPECT_TRUE(webrtc::SdpDeserialize(message, &jsep_output, &error));
+  }
 }
