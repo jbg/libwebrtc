@@ -40,19 +40,29 @@
 namespace webrtc {
 namespace webrtc_pc_e2e {
 
+constexpr size_t kDefaultSlidesWidth = 1850;
+constexpr size_t kDefaultSlidesHeight = 1110;
+
 // API is in development. Can be changed/removed without notice.
 class PeerConnectionE2EQualityTestFixture {
  public:
   // Contains screen share video stream properties.
   struct ScreenShareConfig {
+    explicit ScreenShareConfig(TimeDelta slide_change_interval)
+        : slide_change_interval(slide_change_interval) {}
+
     // If true, slides will be generated programmatically.
     bool generate_slides;
     // Shows how long one slide should be presented on the screen during
     // slide generation.
     TimeDelta slide_change_interval;
     // If equal to 0, no scrolling will be applied.
-    TimeDelta scroll_duration;
-    // If empty, default set of slides will be used.
+    TimeDelta scroll_duration = TimeDelta::Zero();
+    // Contains list of yuv files with slides.
+    //
+    // If empty, default set of slides will be used. In such case video config
+    // |width| must be equal to |kDefaultSlidesWidth| and video config |height|
+    // must be equal to |kDefaultSlidesHeight|.
     std::vector<std::string> slides_yuv_file_names;
   };
 
