@@ -22,6 +22,30 @@
       "revId": "6544968b791d0edf2924cc0f531c4be9788d1361",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "612c9d5c_78d72420",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-15T12:49:01Z",
+      "side": 1,
+      "message": "Ilya, can you comment here? Basically new framework doesn\u0027t support such configuration options...",
+      "parentUuid": "e31ee295_abc24730",
+      "range": {
+        "startLine": 258,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 29
+      },
+      "revId": "6544968b791d0edf2924cc0f531c4be9788d1361",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
