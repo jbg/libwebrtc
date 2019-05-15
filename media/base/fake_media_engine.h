@@ -133,6 +133,7 @@ class RtpHelper : public Base {
     }
     return RemoveStreamBySsrc(&receive_streams_, ssrc);
   }
+  virtual bool ResetUnsignaledRecvStream() { return true; }
 
   virtual webrtc::RtpParameters GetRtpSendParameters(uint32_t ssrc) const {
     auto parameters_iterator = rtp_send_parameters_.find(ssrc);
@@ -177,6 +178,13 @@ class RtpHelper : public Base {
     // Replicate the behavior of the real media channel: return false
     // when setting parameters for unknown SSRCs.
     return false;
+  }
+  virtual webrtc::RtpParameters GetDefaultRtpReceiveParameters() const {
+    return webrtc::RtpParameters();
+  }
+  virtual bool SetDefaultRtpReceiveParameters(
+      const webrtc::RtpParameters& parameters) {
+    return true;
   }
 
   bool IsStreamMuted(uint32_t ssrc) const {
@@ -347,6 +355,7 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
   bool InsertDtmf(uint32_t ssrc, int event_code, int duration) override;
 
   bool SetOutputVolume(uint32_t ssrc, double volume) override;
+  bool SetDefaultOutputVolume(double volume) override;
   bool GetOutputVolume(uint32_t ssrc, double* volume);
 
   bool SetBaseMinimumPlayoutDelayMs(uint32_t ssrc, int delay_ms) override;
@@ -357,6 +366,8 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
 
   void SetRawAudioSink(
       uint32_t ssrc,
+      std::unique_ptr<webrtc::AudioSinkInterface> sink) override;
+  void SetDefaultRawAudioSink(
       std::unique_ptr<webrtc::AudioSinkInterface> sink) override;
 
   std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const override;
@@ -424,6 +435,8 @@ class FakeVideoMediaChannel : public RtpHelper<VideoMediaChannel> {
   bool GetSendCodec(VideoCodec* send_codec) override;
   bool SetSink(uint32_t ssrc,
                rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) override;
+  bool SetDefaultSink(
+      rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) override;
   bool HasSink(uint32_t ssrc) const;
 
   bool SetSend(bool send) override;
