@@ -67,7 +67,12 @@ void Plot::SetSuggestedYAxis(float min_value,
 }
 
 void Plot::SetTitle(std::string title) {
+  SetTitle(title, ChartId::kNone);
+}
+
+void Plot::SetTitle(std::string title, ChartId id) {
   title_ = title;
+  id_ = id;
 }
 
 void Plot::AppendTimeSeries(TimeSeries&& time_series) {

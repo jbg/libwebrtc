@@ -323,6 +323,7 @@ if (!build_with_chromium) {
         "../modules/rtp_rtcp",
         "../modules/rtp_rtcp:rtp_rtcp_format",
         "../rtc_base:checks",
+        "../rtc_base:deprecation",
         "../rtc_base:rtc_base_approved",
         "../rtc_base:rtc_numerics",
         "../rtc_base:stringutils",

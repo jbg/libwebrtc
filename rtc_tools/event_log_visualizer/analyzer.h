@@ -94,6 +94,7 @@ class EventLogAnalyzer {
   void CreateSenderAndReceiverReportPlot(
       PacketDirection direction,
       rtc::FunctionView<float(const rtcp::ReportBlock&)> fy,
+      ChartId id,
       std::string title,
       std::string yaxis_label,
       Plot* plot);
@@ -116,11 +117,13 @@ class EventLogAnalyzer {
   void CreateNetEqNetworkStatsGraph(
       const NetEqStatsGetterMap& neteq_stats_getters,
       rtc::FunctionView<float(const NetEqNetworkStatistics&)> stats_extractor,
+      ChartId plot_id,
       const std::string& plot_name,
       Plot* plot) const;
   void CreateNetEqLifetimeStatsGraph(
       const NetEqStatsGetterMap& neteq_stats_getters,
       rtc::FunctionView<float(const NetEqLifetimeStatistics&)> stats_extractor,
+      ChartId plot_id,
       const std::string& plot_name,
       Plot* plot) const;
 
@@ -189,6 +192,7 @@ class EventLogAnalyzer {
       rtc::FunctionView<const std::vector<std::pair<int64_t, NetEqStatsType>>*(
           const test::NetEqStatsGetter*)> data_extractor,
       rtc::FunctionView<float(const NetEqStatsType&)> stats_extractor,
+      ChartId plot_id,
       const std::string& plot_name,
       Plot* plot) const;
 
