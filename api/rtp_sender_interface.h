@@ -87,6 +87,8 @@ class RtpSenderInterface : public rtc::RefCountInterface {
   // user. This can be used to update the state of the object.
   virtual rtc::scoped_refptr<FrameEncryptorInterface> GetFrameEncryptor() const;
 
+  virtual void SetStreamIDs(const std::vector<std::string>& stream_ids) {}
+
  protected:
   ~RtpSenderInterface() override = default;
 };
@@ -112,6 +114,7 @@ PROXY_METHOD1(void,
               rtc::scoped_refptr<FrameEncryptorInterface>)
 PROXY_CONSTMETHOD0(rtc::scoped_refptr<FrameEncryptorInterface>,
                    GetFrameEncryptor)
+PROXY_METHOD1(void, SetStreamIDs, const std::vector<std::string>&)
 END_PROXY_MAP()
 
 }  // namespace webrtc

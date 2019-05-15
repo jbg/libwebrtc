@@ -32,6 +32,7 @@
 #include "pc/webrtc_session_description_factory.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/unique_id_generator.h"
+#include "rtc_base/weak_ptr.h"
 
 namespace webrtc {
 
@@ -289,6 +290,7 @@ class PeerConnection : public PeerConnectionInternal,
  private:
   class SetRemoteDescriptionObserverAdapter;
   friend class SetRemoteDescriptionObserverAdapter;
+  friend class SetStreamIDsObserver;
 
   struct RtpSenderInfo {
     RtpSenderInfo() : first_ssrc(0) {}
@@ -1345,6 +1347,10 @@ class PeerConnection : public PeerConnectionInternal,
       video_bitrate_allocator_factory_;
 
   bool is_negotiation_needed_ RTC_GUARDED_BY(signaling_thread()) = false;
+
+  // Must be declared last.
+  rtc::WeakPtrFactory<PeerConnection> weak_factory_
+      RTC_GUARDED_BY(signaling_thread());
 };
 
 }  // namespace webrtc
