@@ -69,6 +69,24 @@
       "revId": "27062501f6e27e477e395bd4d6990ffd6185e63a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0720e03_a8a4ad8a",
+        "filename": "pc/peer_connection_rtp_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1795,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2019-05-15T10:11:09Z",
+      "side": 1,
+      "message": "Also added the verification to this test (ChangeAssociatedStreamsTriggersRenegotiation).",
+      "parentUuid": "0f283ad8_c75d9424",
+      "revId": "27062501f6e27e477e395bd4d6990ffd6185e63a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
