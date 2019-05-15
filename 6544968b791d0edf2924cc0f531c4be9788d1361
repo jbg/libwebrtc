@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e31ee295_abc24730",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-15T08:23:32Z",
+      "side": 1,
+      "message": "I don\u0027t know how these were coming into play in the old test but it seems we don\u0027t take them into account in the new version. Is that ok?",
+      "range": {
+        "startLine": 258,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 29
+      },
+      "revId": "6544968b791d0edf2924cc0f531c4be9788d1361",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
