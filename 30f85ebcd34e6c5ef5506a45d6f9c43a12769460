@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "d6f79afc_4d7a519d",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-15T07:54:13Z",
+      "side": 1,
+      "message": "Yuv files don\u0027t have any metadata.",
+      "parentUuid": "1b80964d_01107bf5",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 60
+      },
+      "revId": "30f85ebcd34e6c5ef5506a45d6f9c43a12769460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1622107c_92f55f77",
         "filename": "api/test/peerconnection_quality_test_fixture.h",
         "patchSetId": 3
@@ -82,6 +106,30 @@
       "writtenOn": "2019-05-14T17:05:33Z",
       "side": 1,
       "message": "Is there a case where we\u0027d actually want different scrolling duration from slide change interval?  Would it make sense to scroll over the slide_change_interval, and not require that callers specify a |duration|? Maybe make |duration| optional and use slide_change_interval if it\u0027s absent?",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 48
+      },
+      "revId": "30f85ebcd34e6c5ef5506a45d6f9c43a12769460",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "084c9ed7_82ecccb1",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-15T07:54:13Z",
+      "side": 1,
+      "message": "It\u0027s useful, if you want to emulate both static and dynamic content during the presentation.\n\nAlso, there should be some way to distinguish between scrolling and no scrolling required. Thus, having two durations is the simplest interface flexible enough.",
+      "parentUuid": "1622107c_92f55f77",
       "range": {
         "startLine": 64,
         "startChar": 2,
