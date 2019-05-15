@@ -549,7 +549,9 @@ void EventLogAnalyzer::CreatePacketGraph(PacketDirection direction,
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Packet size (bytes)", kBottomMargin,
                           kTopMargin);
-  plot->SetTitle(GetDirectionAsString(direction) + " RTP packets");
+  plot->SetTitle(GetDirectionAsString(direction) + " RTP packets",
+                 direction == kIncomingPacket ? ChartId::kIncomingPacketSizes
+                                              : ChartId::kOutgoingPacketSizes);
 }
 
 void EventLogAnalyzer::CreateRtcpTypeGraph(PacketDirection direction,
@@ -573,7 +575,9 @@ void EventLogAnalyzer::CreateRtcpTypeGraph(PacketDirection direction,
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "RTCP type", kBottomMargin, kTopMargin);
-  plot->SetTitle(GetDirectionAsString(direction) + " RTCP packets");
+  plot->SetTitle(GetDirectionAsString(direction) + " RTCP packets",
+                 direction == kIncomingPacket ? ChartId::kIncomingRtcpTypes
+                                              : ChartId::kOutgoingRtcpTypes);
 }
 
 template <typename IterableType>
@@ -612,7 +616,10 @@ void EventLogAnalyzer::CreateAccumulatedPacketsGraph(PacketDirection direction,
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Received Packets", kBottomMargin, kTopMargin);
   plot->SetTitle(std::string("Accumulated ") + GetDirectionAsString(direction) +
-                 " RTP/RTCP packets");
+                     " RTP/RTCP packets",
+                 direction == kIncomingPacket
+                     ? ChartId::kAccumulatedIncomingPackets
+                     : ChartId::kAccumulatedOutgoingPackets);
 }
 
 // For each SSRC, plot the time between the consecutive playouts.
@@ -638,7 +645,7 @@ void EventLogAnalyzer::CreatePlayoutGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Time since last playout (ms)", kBottomMargin,
                           kTopMargin);
-  plot->SetTitle("Audio playout");
+  plot->SetTitle("Audio playout", ChartId::kAudioPlayout);
 }
 
 // For audio SSRCs, plot the audio level.
@@ -664,7 +671,9 @@ void EventLogAnalyzer::CreateAudioLevelGraph(PacketDirection direction,
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetYAxis(-127, 0, "Audio level (dBov)", kBottomMargin, kTopMargin);
-  plot->SetTitle(GetDirectionAsString(direction) + " audio level");
+  plot->SetTitle(GetDirectionAsString(direction) + " audio level",
+                 direction == kIncomingPacket ? ChartId::kIncomingAudioLevel
+                                              : ChartId::kOutgoingAudioLevel);
 }
 
 // For each SSRC, plot the sequence number difference between consecutive
@@ -698,7 +707,8 @@ void EventLogAnalyzer::CreateSequenceNumberGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Difference since last packet", kBottomMargin,
                           kTopMargin);
-  plot->SetTitle("Incoming sequence number delta");
+  plot->SetTitle("Incoming sequence number delta",
+                 ChartId::kIncomingSequenceNumberDeltas);
 }
 
 void EventLogAnalyzer::CreateIncomingPacketLossGraph(Plot* plot) {
@@ -757,7 +767,8 @@ void EventLogAnalyzer::CreateIncomingPacketLossGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Loss rate (in %)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Incoming packet loss (derived from incoming packets)");
+  plot->SetTitle("Incoming packet loss (derived from incoming packets)",
+                 ChartId::kIncomingSequenceNumberDeltas);
 }
 
 void EventLogAnalyzer::CreateIncomingDelayGraph(Plot* plot) {
@@ -817,7 +828,8 @@ void EventLogAnalyzer::CreateIncomingDelayGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Delay (ms)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Incoming network delay (relative to first packet)");
+  plot->SetTitle("Incoming network delay (relative to first packet)",
+                 ChartId::kIncomingNetworkDelay);
 }
 
 // Plot the fraction of packets lost (as perceived by the loss-based BWE).
@@ -834,7 +846,8 @@ void EventLogAnalyzer::CreateFractionLossGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 10, "Loss rate (in %)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Outgoing packet loss (as reported by BWE)");
+  plot->SetTitle("Outgoing packet loss (as reported by BWE)",
+                 ChartId::kOutgoingPacketLoss);
 }
 
 // Plot the total bandwidth used by all RTP streams.
@@ -898,7 +911,7 @@ void EventLogAnalyzer::CreateTotalIncomingBitrateGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Bitrate (kbps)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Incoming RTP bitrate");
+  plot->SetTitle("Incoming RTP bitrate", ChartId::kTotalIncomingBitrate);
 }
 
 // Plot the total bandwidth used by all RTP streams.
@@ -1088,7 +1101,7 @@ void EventLogAnalyzer::CreateTotalOutgoingBitrateGraph(Plot* plot,
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Bitrate (kbps)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Outgoing RTP bitrate");
+  plot->SetTitle("Outgoing RTP bitrate", ChartId::kTotalOutgoingBitrate);
 }
 
 // For each SSRC, plot the bandwidth used by that stream.
@@ -1113,7 +1126,10 @@ void EventLogAnalyzer::CreateStreamBitrateGraph(PacketDirection direction,
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Bitrate (kbps)", kBottomMargin, kTopMargin);
-  plot->SetTitle(GetDirectionAsString(direction) + " bitrate per stream");
+  plot->SetTitle(GetDirectionAsString(direction) + " bitrate per stream",
+                 direction == kIncomingPacket
+                     ? ChartId::kIncomingStreamBitrate
+                     : ChartId::kOutgoingStreamBitrate);
 }
 
 // Plot the bitrate allocation for each temporal and spatial layer.
@@ -1151,9 +1167,11 @@ void EventLogAnalyzer::CreateBitrateAllocationGraph(PacketDirection direction,
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Bitrate (kbps)", kBottomMargin, kTopMargin);
   if (direction == kIncomingPacket)
-    plot->SetTitle("Target bitrate per incoming layer");
+    plot->SetTitle("Target bitrate per incoming layer",
+                   ChartId::kIncomingBitrateAllocation);
   else
-    plot->SetTitle("Target bitrate per outgoing layer");
+    plot->SetTitle("Target bitrate per outgoing layer",
+                   ChartId::kOutgoingBitrateAllocation);
 }
 
 void EventLogAnalyzer::CreateGoogCcSimulationGraph(Plot* plot) {
@@ -1197,7 +1215,7 @@ void EventLogAnalyzer::CreateGoogCcSimulationGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 10, "Bitrate (kbps)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Simulated BWE behavior");
+  plot->SetTitle("Simulated BWE behavior", ChartId::kGoogCcBweSimulation);
 }
 
 void EventLogAnalyzer::CreateSendSideBweSimulationGraph(Plot* plot) {
@@ -1361,7 +1379,8 @@ void EventLogAnalyzer::CreateSendSideBweSimulationGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 10, "Bitrate (kbps)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Simulated send-side BWE behavior");
+  plot->SetTitle("Simulated send-side BWE behavior",
+                 ChartId::kSendSideBweSimulation);
 }
 
 void EventLogAnalyzer::CreateReceiveSideBweSimulationGraph(Plot* plot) {
@@ -1440,7 +1459,8 @@ void EventLogAnalyzer::CreateReceiveSideBweSimulationGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 10, "Bitrate (kbps)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Simulated receive-side BWE behavior");
+  plot->SetTitle("Simulated receive-side BWE behavior",
+                 ChartId::kReceiveSideBweSimulation);
 }
 
 void EventLogAnalyzer::CreateNetworkDelayFeedbackGraph(Plot* plot) {
@@ -1485,7 +1505,8 @@ void EventLogAnalyzer::CreateNetworkDelayFeedbackGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 10, "Delay (ms)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Outgoing network delay (based on per-packet feedback)");
+  plot->SetTitle("Outgoing network delay (based on per-packet feedback)",
+                 ChartId::kOutgoingNetworkDelay);
 }
 
 void EventLogAnalyzer::CreatePacerDelayGraph(Plot* plot) {
@@ -1545,7 +1566,8 @@ void EventLogAnalyzer::CreatePacerDelayGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 10, "Pacer delay (ms)", kBottomMargin, kTopMargin);
   plot->SetTitle(
-      "Delay from capture to send time. (First packet normalized to 0.)");
+      "Delay from capture to send time. (First packet normalized to 0.)",
+      ChartId::kCaptureToSendDelay);
 }
 
 void EventLogAnalyzer::CreateTimestampGraph(PacketDirection direction,
@@ -1579,12 +1601,15 @@ void EventLogAnalyzer::CreateTimestampGraph(PacketDirection direction,
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "RTP timestamp", kBottomMargin, kTopMargin);
-  plot->SetTitle(GetDirectionAsString(direction) + " timestamps");
+  plot->SetTitle(GetDirectionAsString(direction) + " timestamps",
+                 direction == kIncomingPacket ? ChartId::kIncomingTimestamps
+                                              : ChartId::kOutgoingTimestamps);
 }
 
 void EventLogAnalyzer::CreateSenderAndReceiverReportPlot(
     PacketDirection direction,
     rtc::FunctionView<float(const rtcp::ReportBlock&)> fy,
+    ChartId id,
     std::string title,
     std::string yaxis_label,
     Plot* plot) {
@@ -1634,7 +1659,7 @@ void EventLogAnalyzer::CreateSenderAndReceiverReportPlot(
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, yaxis_label, kBottomMargin, kTopMargin);
-  plot->SetTitle(title);
+  plot->SetTitle(title, id);
 }
 
 void EventLogAnalyzer::CreateAudioEncoderTargetBitrateGraph(Plot* plot) {
@@ -1657,7 +1682,8 @@ void EventLogAnalyzer::CreateAudioEncoderTargetBitrateGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Bitrate (bps)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Reported audio encoder target bitrate");
+  plot->SetTitle("Reported audio encoder target bitrate",
+                 ChartId::kAudioEncoderTargetBitrate);
 }
 
 void EventLogAnalyzer::CreateAudioEncoderFrameLengthGraph(Plot* plot) {
@@ -1680,7 +1706,8 @@ void EventLogAnalyzer::CreateAudioEncoderFrameLengthGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Frame length (ms)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Reported audio encoder frame length");
+  plot->SetTitle("Reported audio encoder frame length",
+                 ChartId::kAudioEncoderFrameLength);
 }
 
 void EventLogAnalyzer::CreateAudioEncoderPacketLossGraph(Plot* plot) {
@@ -1704,7 +1731,8 @@ void EventLogAnalyzer::CreateAudioEncoderPacketLossGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 10, "Percent lost packets", kBottomMargin,
                           kTopMargin);
-  plot->SetTitle("Reported audio encoder lost packets");
+  plot->SetTitle("Reported audio encoder lost packets",
+                 ChartId::kAudioEncoderLostPackets);
 }
 
 void EventLogAnalyzer::CreateAudioEncoderEnableFecGraph(Plot* plot) {
@@ -1727,7 +1755,7 @@ void EventLogAnalyzer::CreateAudioEncoderEnableFecGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "FEC (false/true)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Reported audio encoder FEC");
+  plot->SetTitle("Reported audio encoder FEC", ChartId::kAudioEncoderFec);
 }
 
 void EventLogAnalyzer::CreateAudioEncoderEnableDtxGraph(Plot* plot) {
@@ -1750,7 +1778,7 @@ void EventLogAnalyzer::CreateAudioEncoderEnableDtxGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "DTX (false/true)", kBottomMargin, kTopMargin);
-  plot->SetTitle("Reported audio encoder DTX");
+  plot->SetTitle("Reported audio encoder DTX", ChartId::kAudioEncoderDtx);
 }
 
 void EventLogAnalyzer::CreateAudioEncoderNumChannelsGraph(Plot* plot) {
@@ -1774,7 +1802,8 @@ void EventLogAnalyzer::CreateAudioEncoderNumChannelsGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Number of channels (1 (mono)/2 (stereo))",
                           kBottomMargin, kTopMargin);
-  plot->SetTitle("Reported audio encoder number of channels");
+  plot->SetTitle("Reported audio encoder number of channels",
+                 ChartId::kAudioEncoderNumChannels);
 }
 
 class NetEqStreamInput : public test::NetEqInput {
@@ -2030,7 +2059,8 @@ void EventLogAnalyzer::CreateAudioJitterBufferGraph(
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Relative delay (ms)", kBottomMargin,
                           kTopMargin);
-  plot->SetTitle("NetEq timing for " + GetStreamName(kIncomingPacket, ssrc));
+  plot->SetTitle("NetEq timing for " + GetStreamName(kIncomingPacket, ssrc),
+                 ChartId::kNetEqTiming);
 }
 
 template <typename NetEqStatsType>
@@ -2039,6 +2069,7 @@ void EventLogAnalyzer::CreateNetEqStatsGraphInternal(
     rtc::FunctionView<const std::vector<std::pair<int64_t, NetEqStatsType>>*(
         const test::NetEqStatsGetter*)> data_extractor,
     rtc::FunctionView<float(const NetEqStatsType&)> stats_extractor,
+    ChartId plot_id,
     const std::string& plot_name,
     Plot* plot) const {
   std::map<uint32_t, TimeSeries> time_series;
@@ -2064,12 +2095,13 @@ void EventLogAnalyzer::CreateNetEqStatsGraphInternal(
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, plot_name, kBottomMargin, kTopMargin);
-  plot->SetTitle(plot_name);
+  plot->SetTitle(plot_name, plot_id);
 }
 
 void EventLogAnalyzer::CreateNetEqNetworkStatsGraph(
     const NetEqStatsGetterMap& neteq_stats,
     rtc::FunctionView<float(const NetEqNetworkStatistics&)> stats_extractor,
+    ChartId plot_id,
     const std::string& plot_name,
     Plot* plot) const {
   CreateNetEqStatsGraphInternal<NetEqNetworkStatistics>(
@@ -2077,12 +2109,13 @@ void EventLogAnalyzer::CreateNetEqNetworkStatsGraph(
       [](const test::NetEqStatsGetter* stats_getter) {
         return stats_getter->stats();
       },
-      stats_extractor, plot_name, plot);
+      stats_extractor, plot_id, plot_name, plot);
 }
 
 void EventLogAnalyzer::CreateNetEqLifetimeStatsGraph(
     const NetEqStatsGetterMap& neteq_stats,
     rtc::FunctionView<float(const NetEqLifetimeStatistics&)> stats_extractor,
+    ChartId plot_id,
     const std::string& plot_name,
     Plot* plot) const {
   CreateNetEqStatsGraphInternal<NetEqLifetimeStatistics>(
@@ -2090,7 +2123,7 @@ void EventLogAnalyzer::CreateNetEqLifetimeStatsGraph(
       [](const test::NetEqStatsGetter* stats_getter) {
         return stats_getter->lifetime_stats();
       },
-      stats_extractor, plot_name, plot);
+      stats_extractor, plot_id, plot_name, plot);
 }
 
 void EventLogAnalyzer::CreateIceCandidatePairConfigGraph(Plot* plot) {
@@ -2123,7 +2156,8 @@ void EventLogAnalyzer::CreateIceCandidatePairConfigGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 3, "Numeric Config Type", kBottomMargin,
                           kTopMargin);
-  plot->SetTitle("[IceEventLog] ICE candidate pair configs");
+  plot->SetTitle("[IceEventLog] ICE candidate pair configs",
+                 ChartId::kIcePairConfigs);
 }
 
 std::string EventLogAnalyzer::GetCandidatePairLogDescriptionFromId(
@@ -2172,7 +2206,8 @@ void EventLogAnalyzer::CreateIceConnectivityCheckGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 4, "Numeric Connectivity State", kBottomMargin,
                           kTopMargin);
-  plot->SetTitle("[IceEventLog] ICE connectivity checks");
+  plot->SetTitle("[IceEventLog] ICE connectivity checks",
+                 ChartId::kIceConnectivityChecks);
 }
 
 void EventLogAnalyzer::CreateDtlsTransportStateGraph(Plot* plot) {
@@ -2188,7 +2223,7 @@ void EventLogAnalyzer::CreateDtlsTransportStateGraph(Plot* plot) {
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, static_cast<float>(DtlsTransportState::kNumValues),
                           "Numeric Transport State", kBottomMargin, kTopMargin);
-  plot->SetTitle("DTLS Transport State");
+  plot->SetTitle("DTLS Transport State", ChartId::kDtlsTransportState);
 }
 
 void EventLogAnalyzer::CreateDtlsWritableStateGraph(Plot* plot) {
@@ -2203,7 +2238,7 @@ void EventLogAnalyzer::CreateDtlsWritableStateGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "Writable", kBottomMargin, kTopMargin);
-  plot->SetTitle("DTLS Writable State");
+  plot->SetTitle("DTLS Writable State", ChartId::kDtlsWritableState);
 }
 
 void EventLogAnalyzer::PrintNotifications(FILE* file) {

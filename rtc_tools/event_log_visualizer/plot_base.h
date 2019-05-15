@@ -15,6 +15,8 @@
 #include <utility>
 #include <vector>
 
+#include "rtc_base/deprecation.h"
+
 namespace webrtc {
 
 enum class LineStyle {
@@ -87,6 +89,61 @@ struct IntervalSeries {
   std::vector<Interval> intervals;
 };
 
+enum class ChartId {
+  kNone,
+  kIncomingPacketSizes,
+  kOutgoingPacketSizes,
+  kIncomingRtcpTypes,
+  kOutgoingRtcpTypes,
+  kAccumulatedIncomingPackets,
+  kAccumulatedOutgoingPackets,
+  kAudioPlayout,
+  kIncomingAudioLevel,
+  kOutgoingAudioLevel,
+  kIncomingSequenceNumberDeltas,
+  kIncomingNetworkDelay,
+  kOutgoingPacketLoss,
+  kTotalIncomingBitrate,
+  kTotalOutgoingBitrate,
+  kIncomingStreamBitrate,
+  kOutgoingStreamBitrate,
+  kIncomingBitrateAllocation,
+  kOutgoingBitrateAllocation,
+  kGoogCcBweSimulation,
+  kSendSideBweSimulation,
+  kReceiveSideBweSimulation,
+  kOutgoingNetworkDelay,
+  kCaptureToSendDelay,
+  kIncomingTimestamps,
+  kOutgoingTimestamps,
+  kIncomingRtcpFractionLost,
+  kOutgoingRtcpFractionLost,
+  kIncomingRtcpCumulativeLost,
+  kOutgoingRtcpCumulativeLost,
+  kIncomingRtcpHighestSeqNumber,
+  kOutgoingRtcpHighestSeqNumber,
+  kIncomingRtcpDelaySinceLastSr,
+  kOutgoingRtcpDelaySinceLastSr,
+  kAudioEncoderTargetBitrate,
+  kAudioEncoderFrameLength,
+  kAudioEncoderLostPackets,
+  kAudioEncoderFec,
+  kAudioEncoderDtx,
+  kAudioEncoderNumChannels,
+  kNetEqTiming,
+  kNetEqExpandRate,
+  kNetEqSpeechExpandRate,
+  kNetEqAccelerateRate,
+  kNetEqPreemptiveRate,
+  kNetEqPacketLossRate,
+  kNetEqConcealmentEvents,
+  kNetEqPreferredBufferSize,
+  kIcePairConfigs,
+  kIceConnectivityChecks,
+  kDtlsTransportState,
+  kDtlsWritableState,
+};
+
 // A container that represents a general graph, with axes, title and one or
 // more data series. A subclass should define the output format by overriding
 // the Draw() method.
@@ -138,7 +195,8 @@ class Plot {
                          float top_margin = 0);
 
   // Sets the title of the plot.
-  void SetTitle(std::string title);
+  RTC_DEPRECATED void SetTitle(std::string title);
+  void SetTitle(std::string title, ChartId id);
 
   // Add a new TimeSeries to the plot.
   void AppendTimeSeries(TimeSeries&& time_series);
@@ -158,6 +216,7 @@ class Plot {
   float yaxis_max_;
   std::string yaxis_label_;
   std::string title_;
+  ChartId id_;
   std::vector<TimeSeries> series_list_;
   std::vector<IntervalSeries> interval_list_;
 };

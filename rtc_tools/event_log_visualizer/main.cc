@@ -396,10 +396,12 @@ int main(int argc, char* argv[]) {
     };
     analyzer.CreateSenderAndReceiverReportPlot(
         webrtc::kIncomingPacket, GetFractionLost,
+        webrtc::ChartId::kIncomingRtcpFractionLost,
         "Fraction lost (incoming RTCP)", "Loss rate (percent)",
         collection->AppendNewPlot());
     analyzer.CreateSenderAndReceiverReportPlot(
         webrtc::kOutgoingPacket, GetFractionLost,
+        webrtc::ChartId::kOutgoingRtcpFractionLost,
         "Fraction lost (outgoing RTCP)", "Loss rate (percent)",
         collection->AppendNewPlot());
 
@@ -409,10 +411,12 @@ int main(int argc, char* argv[]) {
     };
     analyzer.CreateSenderAndReceiverReportPlot(
         webrtc::kIncomingPacket, GetCumulativeLost,
+        webrtc::ChartId::kIncomingRtcpCumulativeLost,
         "Cumulative lost packets (incoming RTCP)", "Packets",
         collection->AppendNewPlot());
     analyzer.CreateSenderAndReceiverReportPlot(
         webrtc::kOutgoingPacket, GetCumulativeLost,
+        webrtc::ChartId::kOutgoingRtcpCumulativeLost,
         "Cumulative lost packets (outgoing RTCP)", "Packets",
         collection->AppendNewPlot());
 
@@ -422,10 +426,12 @@ int main(int argc, char* argv[]) {
     };
     analyzer.CreateSenderAndReceiverReportPlot(
         webrtc::kIncomingPacket, GetHighestSeqNumber,
+        webrtc::ChartId::kIncomingRtcpHighestSeqNumber,
         "Highest sequence number (incoming RTCP)", "Sequence number",
         collection->AppendNewPlot());
     analyzer.CreateSenderAndReceiverReportPlot(
         webrtc::kOutgoingPacket, GetHighestSeqNumber,
+        webrtc::ChartId::kOutgoingRtcpHighestSeqNumber,
         "Highest sequence number (outgoing RTCP)", "Sequence number",
         collection->AppendNewPlot());
 
@@ -435,10 +441,12 @@ int main(int argc, char* argv[]) {
     };
     analyzer.CreateSenderAndReceiverReportPlot(
         webrtc::kIncomingPacket, DelaySinceLastSr,
+        webrtc::ChartId::kIncomingRtcpDelaySinceLastSr,
         "Delay since last received sender report (incoming RTCP)", "Time (s)",
         collection->AppendNewPlot());
     analyzer.CreateSenderAndReceiverReportPlot(
         webrtc::kOutgoingPacket, DelaySinceLastSr,
+        webrtc::ChartId::kOutgoingRtcpDelaySinceLastSr,
         "Delay since last received sender report (outgoing RTCP)", "Time (s)",
         collection->AppendNewPlot());
   }
@@ -484,42 +492,49 @@ int main(int argc, char* argv[]) {
         [](const webrtc::NetEqNetworkStatistics& stats) {
           return stats.expand_rate / 16384.f;
         },
-        "Expand rate", collection->AppendNewPlot());
+        webrtc::ChartId::kNetEqExpandRate, "Expand rate",
+        collection->AppendNewPlot());
     analyzer.CreateNetEqNetworkStatsGraph(
         neteq_stats,
         [](const webrtc::NetEqNetworkStatistics& stats) {
           return stats.speech_expand_rate / 16384.f;
         },
-        "Speech expand rate", collection->AppendNewPlot());
+        webrtc::ChartId::kNetEqSpeechExpandRate, "Speech expand rate",
+        collection->AppendNewPlot());
     analyzer.CreateNetEqNetworkStatsGraph(
         neteq_stats,
         [](const webrtc::NetEqNetworkStatistics& stats) {
           return stats.accelerate_rate / 16384.f;
         },
-        "Accelerate rate", collection->AppendNewPlot());
+        webrtc::ChartId::kNetEqAccelerateRate, "Accelerate rate",
+        collection->AppendNewPlot());
     analyzer.CreateNetEqNetworkStatsGraph(
         neteq_stats,
         [](const webrtc::NetEqNetworkStatistics& stats) {
           return stats.preemptive_rate / 16384.f;
         },
-        "Preemptive rate", collection->AppendNewPlot());
+        webrtc::ChartId::kNetEqPreemptiveRate, "Preemptive rate",
+        collection->AppendNewPlot());
     analyzer.CreateNetEqNetworkStatsGraph(
         neteq_stats,
         [](const webrtc::NetEqNetworkStatistics& stats) {
           return stats.packet_loss_rate / 16384.f;
         },
-        "Packet loss rate", collection->AppendNewPlot());
+        webrtc::ChartId::kNetEqPacketLossRate, "Packet loss rate",
+        collection->AppendNewPlot());
     analyzer.CreateNetEqLifetimeStatsGraph(
         neteq_stats,
         [](const webrtc::NetEqLifetimeStatistics& stats) {
           return static_cast<float>(stats.concealment_events);
         },
-        "Concealment events", collection->AppendNewPlot());
+        webrtc::ChartId::kNetEqConcealmentEvents, "Concealment events",
+        collection->AppendNewPlot());
     analyzer.CreateNetEqNetworkStatsGraph(
         neteq_stats,
         [](const webrtc::NetEqNetworkStatistics& stats) {
           return stats.preferred_buffer_size_ms;
         },
+        webrtc::ChartId::kNetEqPreferredBufferSize,
         "Preferred buffer size (ms)", collection->AppendNewPlot());
   }
 
