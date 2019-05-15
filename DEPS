@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': 'eacdc75a1bc404c5102896fbf7c76dc738ab87a8',
+  'chromium_revision': '0aa647f04055677a70c3d05402a3d6e85564acb1',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -86,9 +86,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    Var('chromium_git') + '/chromium/src/base' + '@' + 'f2cb8c38b7dc72e724f10156409e89044590a40f',
+    Var('chromium_git') + '/chromium/src/base' + '@' + 'd3bc09943d27aefef29dc19ab95f9a62aa45e7ec',
   'src/build':
-    Var('chromium_git') + '/chromium/src/build' + '@' + '5cb705b0be7b7e9025965d809b15b9a0ae333186',
+    Var('chromium_git') + '/chromium/src/build' + '@' + '603171c47c9b682a50c545e338e2e3b924a91950',
   'src/buildtools':
     Var('chromium_git') + '/chromium/src/buildtools' + '@' + '1f329a6e26a366c9a6f2b970f21e10133f7ceee6',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -98,13 +98,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + 'b94d8e41114b9c4a20b38172cecf17c5ea857931',
+    'url': Var('chromium_git') + '/chromium/src/ios' + '@' + '983fe77366c8f5ba1e43b9188d76777c9d4d111d',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    Var('chromium_git') + '/chromium/src/testing' + '@' + '366ab933a16951be8dcd8507631c2b6e11c2cfce',
+    Var('chromium_git') + '/chromium/src/testing' + '@' + '73f339ebd81d4c6d49a3650502b74a86096d792c',
   'src/third_party':
-    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'e9dee5f383a77d1088a5c967976b9d86fd1e70b7',
+    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'f04243a6d7f1f13bb271bbc3c7a2a1d184427aa1',
 
   'src/buildtools/linux64': {
     'packages': [
