@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0409ff3b_58a7022a",
+        "filename": "api/video/encoded_image.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-16T12:49:17Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "381af62591816f1867455f9b42ecfe44a4f45d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10783624_f0527795",
+        "filename": "api/video/encoded_image.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-16T12:49:17Z",
+      "side": 1,
+      "message": "If spatial_index_ is 0 or nullopt, we can successfully call SetSpatialLayerFrameSize(0, foo), but a subsequent SpatialLayerFrameSize(0) will return size() and not foo. Is this useful?",
+      "revId": "381af62591816f1867455f9b42ecfe44a4f45d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "569182b5_46ed1c68",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-16T12:49:17Z",
+      "side": 1,
+      "message": "A comment explaining what these two do?",
+      "revId": "381af62591816f1867455f9b42ecfe44a4f45d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
