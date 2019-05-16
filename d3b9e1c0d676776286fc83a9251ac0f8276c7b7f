@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7d9c775d_18d46c83",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2019-05-16T10:09:32Z",
+      "side": 1,
+      "message": "I think the weak pointer approach is clearer and less fragile, but this comes from the way things are usually done in Chromium. Since this is WebRTC, I trust your criteria more than mine with regards to the recommended way to do it, so I changed the code to follow your recommendation.",
+      "parentUuid": "ad6a3540_395fb61f",
+      "revId": "d3b9e1c0d676776286fc83a9251ac0f8276c7b7f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f7d0b39e_89463ad2",
         "filename": "pc/rtp_sender.cc",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-16T00:09:07Z",
       "side": 1,
       "message": "Should it be an error if the sender is already stopped?",
+      "revId": "d3b9e1c0d676776286fc83a9251ac0f8276c7b7f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce91c035_40005bac",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2019-05-16T10:09:32Z",
+      "side": 1,
+      "message": "The W3C spec says that if the PC is closed, an exception should be raised, but that will be handled in Chromium.\nMy intent here is just to add a callback so that OnNegotiationNeeded is fired.\nI tried making SetStreamIDs() a no-op if the sender is stopped (see PS12), but it resulted in bot failures. Thus, I prefer to keep the original behavior in this CL.",
+      "parentUuid": "f7d0b39e_89463ad2",
       "revId": "d3b9e1c0d676776286fc83a9251ac0f8276c7b7f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
