@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab8e151c_8a6e1e10",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T14:53:30Z",
+      "side": 1,
+      "message": "Rename to 35. Pay attention to this test, it might just fail because available bitrate is less than default min_bitrate value.",
+      "range": {
+        "startLine": 281,
+        "startChar": 42,
+        "endLine": 281,
+        "endChar": 44
+      },
+      "revId": "a0ecdf02ce03ea9668763af0ff648b74a10145ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05c02362_c8bd6a4d",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T14:53:30Z",
+      "side": 1,
+      "message": "35",
+      "range": {
+        "startLine": 305,
+        "startChar": 17,
+        "endLine": 305,
+        "endChar": 19
+      },
+      "revId": "a0ecdf02ce03ea9668763af0ff648b74a10145ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68cfd816_e44f80c1",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T14:53:30Z",
+      "side": 1,
+      "message": "35",
+      "range": {
+        "startLine": 547,
+        "startChar": 32,
+        "endLine": 547,
+        "endChar": 34
+      },
+      "revId": "a0ecdf02ce03ea9668763af0ff648b74a10145ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60cf7233_f31ae912",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T14:53:30Z",
+      "side": 1,
+      "message": "This can be just removed, because it\u0027s just the way to configure the existing framework. Not usuable here even if you enable simulcast in the future.",
+      "range": {
+        "startLine": 1224,
+        "startChar": 0,
+        "endLine": 1275,
+        "endChar": 15
+      },
+      "revId": "a0ecdf02ce03ea9668763af0ff648b74a10145ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13b0e2a1_3e43bf36",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T14:53:30Z",
+      "side": 1,
+      "message": "/ TODO(titovartem) requires simulcast/SVC support in PC framework",
+      "range": {
+        "startLine": 1344,
+        "startChar": 0,
+        "endLine": 1344,
+        "endChar": 4
+      },
+      "revId": "a0ecdf02ce03ea9668763af0ff648b74a10145ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f91641c_87d473e6",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1553,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T14:53:30Z",
+      "side": 1,
+      "message": "// Disabled because target bitrate can\u0027t be configured yet.",
+      "revId": "a0ecdf02ce03ea9668763af0ff648b74a10145ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
