@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9473da3b_a161237c",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2493,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-16T10:43:26Z",
+      "side": 1,
+      "message": "Nice with integration tests. Can it be made more explicit how they\u0027re configured to use ssrc \u003d\u003d 0? It\u0027s not obvious to me at all, just looking at the test.",
+      "range": {
+        "startLine": 2461,
+        "startChar": 0,
+        "endLine": 2493,
+        "endChar": 1
+      },
+      "revId": "b96e5906c4a35bde66e6a08f8a637fabd60a61dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
