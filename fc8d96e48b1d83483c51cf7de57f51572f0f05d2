@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61d24310_536d7070",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Nit, please check that this, and all other non-simulcast tests, your framework is passing a single SSRC in SDP.",
+      "range": {
+        "startLine": 260,
+        "startChar": 32,
+        "endLine": 260,
+        "endChar": 59
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "018067e0_40af2896",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Can add 35kbps link capacity (slightly more 30kbps to allow for bwe inefficiency.",
+      "range": {
+        "startLine": 288,
+        "startChar": 6,
+        "endLine": 288,
+        "endChar": 25
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f9bf79e_ea76e61e",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Why is this test and one above it disabled?\n\nIf it\u0027s due to generic descriptor, consult with philipel@, it may be enough to just enable field trial, as already done in \"class PCGenericDescriptorTest\" above. Also, you have other generic descriptor tests all other the place enabled.\n\nOr is it because 30kbps bitrates?",
+      "range": {
+        "startLine": 299,
+        "startChar": 7,
+        "endLine": 299,
+        "endChar": 58
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3814523f_90fa481b",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Again, add link_capacity of 35kbps",
+      "range": {
+        "startLine": 308,
+        "startChar": 6,
+        "endLine": 308,
+        "endChar": 25
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea3e8c17_e1c127f6",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Again, why is this disabled?\n\nIf \"30000, 30000, 30000\" is the reason, add 35kbps link capacity and enable.",
+      "range": {
+        "startLine": 538,
+        "startChar": 22,
+        "endLine": 538,
+        "endChar": 59
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd32ad32_f494ae9a",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Add comment, that this test needs receive side bwe.",
+      "range": {
+        "startLine": 744,
+        "startChar": 22,
+        "endLine": 744,
+        "endChar": 63
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68245c43_3b8f5bca",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Here, and few tests below: Comment what exact feature blocks these tests (I assume, it\u0027s temporal layers configuration).",
+      "range": {
+        "startLine": 842,
+        "startChar": 32,
+        "endLine": 842,
+        "endChar": 67
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ae37bf0_a57fc825",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Again, comment that TL configuration is required.",
+      "range": {
+        "startLine": 992,
+        "startChar": 22,
+        "endLine": 992,
+        "endChar": 46
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c02b006_93072fac",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "TLs missing? Or screenshare configuration?",
+      "range": {
+        "startLine": 1014,
+        "startChar": 22,
+        "endLine": 1014,
+        "endChar": 56
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aa0d788_e4c86d2e",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "Please provide reason for each disabled test. Here it\u0027s SVC/simulcast support.",
+      "range": {
+        "startLine": 1317,
+        "startChar": 22,
+        "endLine": 1317,
+        "endChar": 38
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92c17d56_f2cdefbc",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-16T12:44:57Z",
+      "side": 1,
+      "message": "disabled due to lack of simulcast/thumbnails configuration.",
+      "range": {
+        "startLine": 1576,
+        "startChar": 22,
+        "endLine": 1576,
+        "endChar": 48
+      },
+      "revId": "fc8d96e48b1d83483c51cf7de57f51572f0f05d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
