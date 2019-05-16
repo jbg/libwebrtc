@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad6a3540_395fb61f",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-16T00:09:07Z",
+      "side": 1,
+      "message": "Not a fan of using WeakPtr in cases like this. Can we instead have RtpSenderBase take a raw pointer to an interface implemented by PeerConnection which is cleared when RtpSenderBase::Stop() is called? Stop will always be called before the PeerConnection is closed, so the raw pointer will be safe.",
+      "revId": "d3b9e1c0d676776286fc83a9251ac0f8276c7b7f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7d0b39e_89463ad2",
+        "filename": "pc/rtp_sender.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-16T00:09:07Z",
+      "side": 1,
+      "message": "Should it be an error if the sender is already stopped?",
+      "revId": "d3b9e1c0d676776286fc83a9251ac0f8276c7b7f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
