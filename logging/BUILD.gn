@@ -31,7 +31,6 @@ rtc_source_set("rtc_event_log_api") {
   sources = [
     "rtc_event_log/encoder/rtc_event_log_encoder.h",
     "rtc_event_log/events/rtc_event.h",
-    "rtc_event_log/rtc_event_log.cc",
     "rtc_event_log/rtc_event_log.h",
     "rtc_event_log/rtc_event_log_factory_interface.h",
   ]
@@ -39,6 +38,7 @@ rtc_source_set("rtc_event_log_api") {
   deps = [
     "../api:libjingle_logging_api",
     "../api:scoped_refptr",
+    "../api/rtc_event_log",
     "../api/task_queue",
     "../rtc_base:rtc_base_approved",
     "//third_party/abseil-cpp/absl/memory",
@@ -67,6 +67,7 @@ rtc_source_set("rtc_event_pacing") {
   deps = [
     ":rtc_event_log_api",
     "../api:scoped_refptr",
+    "../api/rtc_event_log",
     "//third_party/abseil-cpp/absl/memory",
   ]
 }
@@ -87,6 +88,7 @@ rtc_source_set("rtc_event_audio") {
     ":rtc_event_log_api",
     ":rtc_stream_config",
     "../api:scoped_refptr",
+    "../api/rtc_event_log",
     "../modules/audio_coding:audio_network_adaptor_config",
     "../rtc_base:checks",
     "//third_party/abseil-cpp/absl/memory",
@@ -112,6 +114,7 @@ rtc_source_set("rtc_event_bwe") {
   deps = [
     ":rtc_event_log_api",
     "../api:scoped_refptr",
+    "../api/rtc_event_log",
     "../modules/remote_bitrate_estimator",
     "//third_party/abseil-cpp/absl/memory",
   ]
@@ -129,7 +132,10 @@ rtc_source_set("rtc_event_generic_packet_events") {
   ]
   deps = [
     ":rtc_event_log_api",
+    "../api/rtc_event_log",
+    "../rtc_base:timeutils",
     "//third_party/abseil-cpp/absl/memory",
+    "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
 
@@ -149,6 +155,7 @@ rtc_source_set("rtc_event_rtp_rtcp") {
     ":rtc_event_log_api",
     "../api:array_view",
     "../api:scoped_refptr",
+    "../api/rtc_event_log",
     "../modules/rtp_rtcp:rtp_rtcp_format",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
@@ -168,6 +175,7 @@ rtc_source_set("rtc_event_video") {
     ":rtc_event_log_api",
     ":rtc_stream_config",
     "../api:scoped_refptr",
+    "../api/rtc_event_log",
     "../rtc_base:checks",
     "//third_party/abseil-cpp/absl/memory",
   ]
@@ -239,6 +247,31 @@ rtc_source_set("rtc_event_log_impl_output") {
   ]
 }
 
+rtc_source_set("rtc_event_log_impl") {
+  sources = [
+    "rtc_event_log/rtc_event_log_impl.cc",
+    "rtc_event_log/rtc_event_log_impl.h",
+  ]
+
+  visibility = [ "../../api/rtc_event_log:rtc_event_log_factory" ]
+
+  deps = [
+    ":ice_log",
+    ":rtc_event_log_api",
+    ":rtc_event_log_impl_encoder",
+    "../api:libjingle_logging_api",
+    "../api/rtc_event_log",
+    "../api/task_queue",
+    "../rtc_base:checks",
+    "../rtc_base:rtc_base_approved",
+    "../rtc_base:rtc_task_queue",
+    "../rtc_base:safe_minmax",
+    "../rtc_base/synchronization:sequence_checker",
+    "//third_party/abseil-cpp/absl/memory",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
 rtc_static_library("rtc_event_log_impl_base") {
   # TODO(terelius): Should this really be visible? Currently used to instantiate
   # the default event log factory.
@@ -246,7 +279,6 @@ rtc_static_library("rtc_event_log_impl_base") {
   sources = [
     "rtc_event_log/rtc_event_log_factory.cc",
     "rtc_event_log/rtc_event_log_factory.h",
-    "rtc_event_log/rtc_event_log_impl.cc",
   ]
 
   defines = []
@@ -255,6 +287,8 @@ rtc_static_library("rtc_event_log_impl_base") {
     ":ice_log",
     ":rtc_event_log_api",
     "../api:libjingle_logging_api",
+    "../api/rtc_event_log",
+    "../api/rtc_event_log:rtc_event_log_factory",
     "../api/task_queue",
     "../api/task_queue:global_task_queue_factory",
     "../rtc_base:checks",
@@ -265,11 +299,6 @@ rtc_static_library("rtc_event_log_impl_base") {
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
-
-  if (rtc_enable_protobuf) {
-    defines += [ "ENABLE_RTC_EVENT_LOG" ]
-    deps += [ ":rtc_event_log_impl_encoder" ]
-  }
 }
 
 rtc_source_set("fake_rtc_event_log") {
@@ -284,6 +313,7 @@ rtc_source_set("fake_rtc_event_log") {
   deps = [
     ":ice_log",
     ":rtc_event_log_api",
+    "../api/rtc_event_log",
     "../rtc_base",
     "../rtc_base:checks",
   ]
@@ -328,6 +358,7 @@ if (rtc_enable_protobuf) {
       "../api:function_view",
       "../api:libjingle_peerconnection_api",
       "../api:rtp_headers",
+      "../api/rtc_event_log",
       "../api/units:data_rate",
       "../api/units:time_delta",
       "../api/units:timestamp",
@@ -381,6 +412,8 @@ if (rtc_enable_protobuf) {
         "../api:libjingle_peerconnection_api",
         "../api:rtc_event_log_output_file",
         "../api:rtp_headers",
+        "../api/rtc_event_log",
+        "../api/rtc_event_log:rtc_event_log_factory",
         "../api/task_queue:default_task_queue_factory",
         "../call",
         "../call:call_interfaces",
@@ -441,6 +474,7 @@ rtc_source_set("ice_log") {
     ":rtc_event_log_api",
     "../api:libjingle_logging_api",
     "../api:libjingle_peerconnection_api",
+    "../api/rtc_event_log",
     "../rtc_base:rtc_base_approved",
     "//third_party/abseil-cpp/absl/memory",
   ]
