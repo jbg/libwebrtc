@@ -1385,7 +1385,7 @@ PeerConnection::AddTrackUnifiedPlan(
           RtpTransceiverDirection::kSendOnly);
     }
     transceiver->sender()->SetTrack(track);
-    transceiver->internal()->sender_internal()->set_stream_ids(stream_ids);
+    transceiver->internal()->sender_internal()->SetStreamIDs(stream_ids);
   } else {
     cricket::MediaType media_type =
         (track->kind() == MediaStreamTrackInterface::kAudioKind
@@ -1644,19 +1644,19 @@ PeerConnection::CreateSender(
                (track->kind() == MediaStreamTrackInterface::kAudioKind));
     sender = RtpSenderProxyWithInternal<RtpSenderInternal>::Create(
         signaling_thread(),
-        AudioRtpSender::Create(worker_thread(), id, stats_.get()));
+        AudioRtpSender::Create(worker_thread(), id, stats_.get(), this));
     NoteUsageEvent(UsageEvent::AUDIO_ADDED);
   } else {
     RTC_DCHECK_EQ(media_type, cricket::MEDIA_TYPE_VIDEO);
     RTC_DCHECK(!track ||
                (track->kind() == MediaStreamTrackInterface::kVideoKind));
     sender = RtpSenderProxyWithInternal<RtpSenderInternal>::Create(
-        signaling_thread(), VideoRtpSender::Create(worker_thread(), id));
+        signaling_thread(), VideoRtpSender::Create(worker_thread(), id, this));
     NoteUsageEvent(UsageEvent::VIDEO_ADDED);
   }
   bool set_track_succeeded = sender->SetTrack(track);
   RTC_DCHECK(set_track_succeeded);
-  sender->internal()->set_stream_ids(stream_ids);
+  sender->internal()->SetStreamIDs(stream_ids);
   sender->internal()->set_init_send_encodings(send_encodings);
   return sender;
 }
@@ -1734,14 +1734,14 @@ rtc::scoped_refptr<RtpSenderInterface> PeerConnection::CreateSender(
   rtc::scoped_refptr<RtpSenderProxyWithInternal<RtpSenderInternal>> new_sender;
   if (kind == MediaStreamTrackInterface::kAudioKind) {
     auto audio_sender = AudioRtpSender::Create(
-        worker_thread(), rtc::CreateRandomUuid(), stats_.get());
+        worker_thread(), rtc::CreateRandomUuid(), stats_.get(), this);
     audio_sender->SetMediaChannel(voice_media_channel());
     new_sender = RtpSenderProxyWithInternal<RtpSenderInternal>::Create(
         signaling_thread(), audio_sender);
     GetAudioTransceiver()->internal()->AddSender(new_sender);
   } else if (kind == MediaStreamTrackInterface::kVideoKind) {
     auto video_sender =
-        VideoRtpSender::Create(worker_thread(), rtc::CreateRandomUuid());
+        VideoRtpSender::Create(worker_thread(), rtc::CreateRandomUuid(), this);
     video_sender->SetMediaChannel(video_media_channel());
     new_sender = RtpSenderProxyWithInternal<RtpSenderInternal>::Create(
         signaling_thread(), video_sender);
@@ -1750,7 +1750,7 @@ rtc::scoped_refptr<RtpSenderInterface> PeerConnection::CreateSender(
     RTC_LOG(LS_ERROR) << "CreateSender called with invalid kind: " << kind;
     return nullptr;
   }
-  new_sender->internal()->set_stream_ids(stream_ids);
+  new_sender->internal()->SetStreamIDs(stream_ids);
 
   return new_sender;
 }
@@ -2373,7 +2373,7 @@ RTCError PeerConnection::ApplyLocalDescription(
       } else {
         // Get the StreamParams from the channel which could generate SSRCs.
         const std::vector<StreamParams>& streams = channel->local_streams();
-        transceiver->internal()->sender_internal()->set_stream_ids(
+        transceiver->internal()->sender_internal()->SetStreamIDs(
             streams[0].stream_ids());
         transceiver->internal()->sender_internal()->SetSsrc(
             streams[0].first_ssrc());
@@ -4016,7 +4016,7 @@ void PeerConnection::AddAudioTrack(AudioTrackInterface* track,
   if (sender) {
     // We already have a sender for this track, so just change the stream_id
     // so that it's correct in the next call to CreateOffer.
-    sender->internal()->set_stream_ids({stream->id()});
+    sender->internal()->SetStreamIDs({stream->id()});
     return;
   }
 
@@ -4061,7 +4061,7 @@ void PeerConnection::AddVideoTrack(VideoTrackInterface* track,
   if (sender) {
     // We already have a sender for this track, so just change the stream_id
     // so that it's correct in the next call to CreateOffer.
-    sender->internal()->set_stream_ids({stream->id()});
+    sender->internal()->SetStreamIDs({stream->id()});
     return;
   }
 
@@ -4988,7 +4988,7 @@ void PeerConnection::OnLocalSenderAdded(const RtpSenderInfo& sender_info,
     return;
   }
 
-  sender->internal()->set_stream_ids({sender_info.stream_id});
+  sender->internal()->SetStreamIDs({sender_info.stream_id});
   sender->internal()->SetSsrc(sender_info.first_ssrc);
 }
 
@@ -7131,6 +7131,12 @@ bool PeerConnection::OnTransportChanged(
   }
 
   return ret;
+}
+
+void PeerConnection::OnSetStreamIDs() {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  if (IsUnifiedPlan())
+    UpdateNegotiationNeeded();
 }
 
 PeerConnectionObserver* PeerConnection::Observer() const {
