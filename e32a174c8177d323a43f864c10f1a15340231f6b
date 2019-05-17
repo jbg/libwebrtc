@@ -22,6 +22,30 @@
       "revId": "e32a174c8177d323a43f864c10f1a15340231f6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27a61a1e_4cd539a9",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-17T08:55:47Z",
+      "side": 1,
+      "message": "Deleted number. Not sure where this info really belongs. It\u0027s used for h.264 packetization, so could be in EncodedImage or maybe some h.264 specific metadata.",
+      "parentUuid": "d35a0b36_3ab0fe26",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 73
+      },
+      "revId": "e32a174c8177d323a43f864c10f1a15340231f6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
