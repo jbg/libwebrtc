@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61285562_31252d72",
+        "filename": "video/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T07:40:34Z",
+      "side": 1,
+      "message": "Remove.",
+      "range": {
+        "startLine": 348,
+        "startChar": 43,
+        "endLine": 348,
+        "endChar": 50
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11053a55_d57bbaed",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T07:40:34Z",
+      "side": 1,
+      "message": "This bug is closed, is the comment outdated or should we reopen it?\nIf there is no plan to support these platforms I would just remove the \"until is solved\" part.",
+      "range": {
+        "startLine": 172,
+        "startChar": 5,
+        "endLine": 172,
+        "endChar": 59
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f16d47a5_b8bf1e15",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T07:40:34Z",
+      "side": 1,
+      "message": "Does it make sense to log something in this case?",
+      "range": {
+        "startLine": 180,
+        "startChar": 2,
+        "endLine": 181,
+        "endChar": 11
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b92a7332_88742591",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T07:40:34Z",
+      "side": 1,
+      "message": "The advice for TODO is to use bugs.webrtc.org/XXXXX so we can always refer to something.",
+      "range": {
+        "startLine": 205,
+        "startChar": 8,
+        "endLine": 205,
+        "endChar": 18
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ddbb17b_4194e809",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T07:40:34Z",
+      "side": 1,
+      "message": "Should this be removed, if we want to keep this info I suggest to remove the TODO and just add a normal comment inside the test.",
+      "range": {
+        "startLine": 257,
+        "startChar": 2,
+        "endLine": 257,
+        "endChar": 52
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa81233c_7d2afcbb",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T07:40:34Z",
+      "side": 1,
+      "message": "Does it worth the bot time? :-)\n\nI see it comes from https://cs.chromium.org/chromium/src/third_party/webrtc/video/full_stack_tests.cc?l\u003d493\u0026rcl\u003d412dc5f27e74af1bff54408921f49580e6c4f73e. I don\u0027t know, I would remove these comments if it has been enabled.",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 618,
+        "endChar": 59
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7f0d989_1eae35fa",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T07:40:34Z",
+      "side": 1,
+      "message": "Same as above, we should use bugs.webrtc.org/XXXXX.",
+      "range": {
+        "startLine": 765,
+        "startChar": 8,
+        "endLine": 765,
+        "endChar": 18
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "848239d7_bb17d1c9",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T07:40:34Z",
+      "side": 1,
+      "message": "See above and there are some instances below as well.",
+      "range": {
+        "startLine": 865,
+        "startChar": 8,
+        "endLine": 865,
+        "endChar": 18
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
