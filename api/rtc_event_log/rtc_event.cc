@@ -1,5 +1,5 @@
 /*
- *  Copyright 2017 The WebRTC project authors. All Rights Reserved.
+ *  Copyright (c) 2019 The WebRTC project authors. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -8,9 +8,12 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef LOGGING_RTC_EVENT_LOG_RTC_EVENT_LOG_FACTORY_INTERFACE_H_
-#define LOGGING_RTC_EVENT_LOG_RTC_EVENT_LOG_FACTORY_INTERFACE_H_
+#include "api/rtc_event_log/rtc_event.h"
 
-#include "api/rtc_event_log/rtc_event_log_factory_interface.h"
+#include "rtc_base/time_utils.h"
 
-#endif  // LOGGING_RTC_EVENT_LOG_RTC_EVENT_LOG_FACTORY_INTERFACE_H_
+namespace webrtc {
+
+RtcEvent::RtcEvent() : timestamp_us_(rtc::TimeMicros()) {}
+
+}  // namespace webrtc
