@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c79acb21_b7456ee4",
+        "filename": "video/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-17T08:51:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61285562_31252d72",
+      "range": {
+        "startLine": 348,
+        "startChar": 43,
+        "endLine": 348,
+        "endChar": 50
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11053a55_d57bbaed",
         "filename": "video/pc_full_stack_tests.cc",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5fb76634_29cc2b1c",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-17T08:51:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11053a55_d57bbaed",
+      "range": {
+        "startLine": 172,
+        "startChar": 5,
+        "endLine": 172,
+        "endChar": 59
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f16d47a5_b8bf1e15",
         "filename": "video/pc_full_stack_tests.cc",
         "patchSetId": 8
@@ -59,6 +107,30 @@
       "writtenOn": "2019-05-17T07:40:34Z",
       "side": 1,
       "message": "Does it make sense to log something in this case?",
+      "range": {
+        "startLine": 180,
+        "startChar": 2,
+        "endLine": 181,
+        "endChar": 11
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d2eb718_2e20bf19",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-17T08:51:09Z",
+      "side": 1,
+      "message": "Ilya, can you advice here? Because bug is closed should we just assert, that this is true?",
+      "parentUuid": "f16d47a5_b8bf1e15",
       "range": {
         "startLine": 180,
         "startChar": 2,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "31e9b183_c2ef0f2d",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-17T08:51:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b92a7332_88742591",
+      "range": {
+        "startLine": 205,
+        "startChar": 8,
+        "endLine": 205,
+        "endChar": 18
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ddbb17b_4194e809",
         "filename": "video/pc_full_stack_tests.cc",
         "patchSetId": 8
@@ -114,6 +210,30 @@
       "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0de90b6_8ff9be30",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-17T08:51:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ddbb17b_4194e809",
+      "range": {
+        "startLine": 257,
+        "startChar": 2,
+        "endLine": 257,
+        "endChar": 52
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "0d836c47_365f3313",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-17T08:51:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa81233c_7d2afcbb",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 618,
+        "endChar": 59
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7f0d989_1eae35fa",
         "filename": "video/pc_full_stack_tests.cc",
         "patchSetId": 8
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "3bc238df_743214a5",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-17T08:51:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7f0d989_1eae35fa",
+      "range": {
+        "startLine": 765,
+        "startChar": 8,
+        "endLine": 765,
+        "endChar": 18
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "848239d7_bb17d1c9",
         "filename": "video/pc_full_stack_tests.cc",
         "patchSetId": 8
@@ -183,6 +351,30 @@
       "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8aeaa7a_a02b789c",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-17T08:51:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "848239d7_bb17d1c9",
+      "range": {
+        "startLine": 865,
+        "startChar": 8,
+        "endLine": 865,
+        "endChar": 18
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
