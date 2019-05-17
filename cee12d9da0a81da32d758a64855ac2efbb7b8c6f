@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "6d1e9978_1e2064c1",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-17T17:25:08Z",
+      "side": 1,
+      "message": "I would prefer to always run it on our trybots and explicitly disable it using the preprocessor in case the test is run on a platform that doesn\u0027t support profile 2. That is more readable for future maintainers.\n\nThat said, no need to fix now (since maybe something will fail). Feel free to land and try to remove the check in another CL.",
+      "parentUuid": "3b7d25f5_91432205",
+      "range": {
+        "startLine": 180,
+        "startChar": 2,
+        "endLine": 181,
+        "endChar": 11
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b92a7332_88742591",
         "filename": "video/pc_full_stack_tests.cc",
         "patchSetId": 8
