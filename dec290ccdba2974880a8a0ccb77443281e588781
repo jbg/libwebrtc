@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54b7d600_536cda17",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-17T08:13:49Z",
+      "side": 1,
+      "message": "If it\u0027s possible to do briefly, can you describe the sequence of events leading up to the potential race?",
+      "range": {
+        "startLine": 952,
+        "startChar": 30,
+        "endLine": 955,
+        "endChar": 31
+      },
+      "revId": "dec290ccdba2974880a8a0ccb77443281e588781",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
