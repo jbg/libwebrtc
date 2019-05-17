@@ -13,23 +13,12 @@
 
 #include <memory>
 
-#include "api/task_queue/task_queue_factory.h"
-#include "logging/rtc_event_log/rtc_event_log.h"
-#include "logging/rtc_event_log/rtc_event_log_factory_interface.h"
+// TODO(bugs.webrtc.org/10206): For backwards compatibility; Delete as soon as
+// dependencies are updated.
+#include "api/rtc_event_log/rtc_event_log_factory.h"
+#include "api/rtc_event_log/rtc_event_log_factory_interface.h"
 
 namespace webrtc {
-
-class RtcEventLogFactory : public RtcEventLogFactoryInterface {
- public:
-  explicit RtcEventLogFactory(TaskQueueFactory* task_queue_factory);
-  ~RtcEventLogFactory() override {}
-
-  std::unique_ptr<RtcEventLog> CreateRtcEventLog(
-      RtcEventLog::EncodingType encoding_type) override;
-
- private:
-  TaskQueueFactory* const task_queue_factory_;
-};
 
 // TODO(bugs.webrtc.org/10284): Stop using the RtcEventLogFactory factory.
 std::unique_ptr<RtcEventLogFactoryInterface> CreateRtcEventLogFactory();
