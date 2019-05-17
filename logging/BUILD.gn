@@ -31,7 +31,6 @@ rtc_source_set("rtc_event_log_api") {
   sources = [
     "rtc_event_log/encoder/rtc_event_log_encoder.h",
     "rtc_event_log/events/rtc_event.h",
-    "rtc_event_log/rtc_event_log.cc",
     "rtc_event_log/rtc_event_log.h",
     "rtc_event_log/rtc_event_log_factory_interface.h",
   ]
@@ -39,6 +38,7 @@ rtc_source_set("rtc_event_log_api") {
   deps = [
     "../api:libjingle_logging_api",
     "../api:scoped_refptr",
+    "../api/rtc_event_log",
     "../api/task_queue",
     "../rtc_base:rtc_base_approved",
     "//third_party/abseil-cpp/absl/memory",
@@ -129,7 +129,9 @@ rtc_source_set("rtc_event_generic_packet_events") {
   ]
   deps = [
     ":rtc_event_log_api",
+    "../rtc_base:timeutils",
     "//third_party/abseil-cpp/absl/memory",
+    "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
 
@@ -239,24 +241,19 @@ rtc_source_set("rtc_event_log_impl_output") {
   ]
 }
 
-rtc_static_library("rtc_event_log_impl_base") {
-  # TODO(terelius): Should this really be visible? Currently used to instantiate
-  # the default event log factory.
-  visibility = [ "*" ]
+rtc_source_set("rtc_event_log_impl") {
+  visibility = [ "../api/rtc_event_log:rtc_event_log_factory" ]
   sources = [
-    "rtc_event_log/rtc_event_log_factory.cc",
-    "rtc_event_log/rtc_event_log_factory.h",
     "rtc_event_log/rtc_event_log_impl.cc",
+    "rtc_event_log/rtc_event_log_impl.h",
   ]
-
-  defines = []
-
   deps = [
     ":ice_log",
     ":rtc_event_log_api",
+    ":rtc_event_log_impl_encoder",
     "../api:libjingle_logging_api",
+    "../api/rtc_event_log",
     "../api/task_queue",
-    "../api/task_queue:global_task_queue_factory",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:rtc_task_queue",
@@ -265,11 +262,23 @@ rtc_static_library("rtc_event_log_impl_base") {
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
+}
 
-  if (rtc_enable_protobuf) {
-    defines += [ "ENABLE_RTC_EVENT_LOG" ]
-    deps += [ ":rtc_event_log_impl_encoder" ]
-  }
+rtc_static_library("rtc_event_log_impl_base") {
+  # TODO(bugs.webrtc.org/10206): Remove public visibility in favor of public
+  # target api/rtc_event_log:rtc_event_log_factory
+  visibility = [ "*" ]
+  sources = [
+    "rtc_event_log/rtc_event_log_factory.cc",
+    "rtc_event_log/rtc_event_log_factory.h",
+  ]
+
+  deps = [
+    "../api/rtc_event_log",
+    "../api/rtc_event_log:rtc_event_log_factory",
+    "../api/task_queue:global_task_queue_factory",
+    "//third_party/abseil-cpp/absl/memory",
+  ]
 }
 
 rtc_source_set("fake_rtc_event_log") {
