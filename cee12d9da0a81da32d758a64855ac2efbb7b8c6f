@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "cd9e5b65_d5f2b292",
+        "filename": "video/pc_full_stack_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-17T08:55:51Z",
+      "side": 1,
+      "message": "+emircan@, can you comment on that? Should we remove this check from here and full_stack_tests.cc?\n\nI would add a log message here, but it\u0027s not absolutely necessary.",
+      "parentUuid": "7d2eb718_2e20bf19",
+      "range": {
+        "startLine": 180,
+        "startChar": 2,
+        "endLine": 181,
+        "endChar": 11
+      },
+      "revId": "cee12d9da0a81da32d758a64855ac2efbb7b8c6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b92a7332_88742591",
         "filename": "video/pc_full_stack_tests.cc",
         "patchSetId": 8
