@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5e869012_e8eedae9",
+        "filename": "api/video/encoded_image.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-05-17T08:02:21Z",
+      "side": 1,
+      "message": "thanks",
+      "parentUuid": "0409ff3b_58a7022a",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "381af62591816f1867455f9b42ecfe44a4f45d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10783624_f0527795",
         "filename": "api/video/encoded_image.cc",
         "patchSetId": 4
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "6ea94197_1adae5f9",
+        "filename": "api/video/encoded_image.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-05-17T08:02:21Z",
+      "side": 1,
+      "message": "I removed processing of spatial_index_.value_or(0)\u003d0 case from SpatialLayerFrameSize().\nSize of subframe should be set explicitly. Otherwise SpatialLayerFrameSize() returns absl::nullopt.",
+      "parentUuid": "10783624_f0527795",
+      "revId": "381af62591816f1867455f9b42ecfe44a4f45d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "569182b5_46ed1c68",
         "filename": "api/video/encoded_image.h",
         "patchSetId": 4
@@ -56,6 +98,24 @@
       "revId": "381af62591816f1867455f9b42ecfe44a4f45d4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a04fe94_c4749fac",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2019-05-17T08:02:21Z",
+      "side": 1,
+      "message": "Added:\n// These methods can be used to set/get size of subframe with spatial index\n// |spatial_index| on encoded frames that consist of multiple spatial layers.",
+      "parentUuid": "569182b5_46ed1c68",
+      "revId": "381af62591816f1867455f9b42ecfe44a4f45d4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
