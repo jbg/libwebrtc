@@ -944,11 +944,16 @@ void RTCStatsCollector::ProducePartialResultsOnNetworkThread(
       timestamp_us, transport_stats_by_name, transport_cert_stats,
       network_report_.get());
 
-  // Signal that it is now safe to touch |network_report_| on the signaling
-  // thread, and post a task to merge it into the final results.
-  network_report_event_.Set();
   signaling_thread_->PostTask(
       RTC_FROM_HERE, rtc::Bind(&RTCStatsCollector::MergeNetworkReport_s, this));
+  // Signal that it is now safe to touch |network_report_| on the signaling
+  // thread. After this signal, MergeNetworkReport_s() can either happen as a
+  // result of the task we just posted, or as a result of
+  // WaitForPendingRequest(). Assuming the signaling thread is allowed to shut
+  // down after WaitForPendingRequest(), it is important that this event is
+  // signaled after posting, not before, to avoid a possible race condition with
+  // signaling thread shutdown.
+  network_report_event_.Set();
 }
 
 void RTCStatsCollector::ProducePartialResultsOnNetworkThreadImpl(
