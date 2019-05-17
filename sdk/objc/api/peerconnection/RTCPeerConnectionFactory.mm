@@ -139,13 +139,11 @@
 
 - (instancetype)initWithNoMedia {
   if (self = [self initNative]) {
-    _nativeFactory = webrtc::CreateModularPeerConnectionFactory(
-        _networkThread.get(),
-        _workerThread.get(),
-        _signalingThread.get(),
-        std::unique_ptr<cricket::MediaEngineInterface>(),
-        std::unique_ptr<webrtc::CallFactoryInterface>(),
-        std::unique_ptr<webrtc::RtcEventLogFactoryInterface>());
+    webrtc::PeerConnectionFactoryDependencies dependencies;
+    dependencies.network_thread = _networkThread.get();
+    dependencies.worker_thread = _workerThread.get();
+    dependencies.signaling_thread = _signalingThread.get();
+    _nativeFactory = webrtc::CreateModularPeerConnectionFactory(std::move(dependencies));
     NSAssert(_nativeFactory, @"Failed to initialize PeerConnectionFactory!");
   }
   return self;
@@ -213,28 +211,27 @@
   return [self initWithNoMedia];
 #else
   if (self = [self initNative]) {
-    if (!audioProcessingModule) audioProcessingModule = webrtc::AudioProcessingBuilder().Create();
-
-    std::unique_ptr<cricket::MediaEngineInterface> media_engine =
-        cricket::WebRtcMediaEngineFactory::Create(audioDeviceModule,
-                                                  audioEncoderFactory,
-                                                  audioDecoderFactory,
-                                                  std::move(videoEncoderFactory),
-                                                  std::move(videoDecoderFactory),
-                                                  nullptr,  // audio mixer
-                                                  audioProcessingModule);
-
-    std::unique_ptr<webrtc::CallFactoryInterface> call_factory = webrtc::CreateCallFactory();
-
-    std::unique_ptr<webrtc::RtcEventLogFactoryInterface> event_log_factory =
-        webrtc::CreateRtcEventLogFactory();
     webrtc::PeerConnectionFactoryDependencies dependencies;
     dependencies.network_thread = _networkThread.get();
     dependencies.worker_thread = _workerThread.get();
     dependencies.signaling_thread = _signalingThread.get();
-    dependencies.media_engine = std::move(media_engine);
-    dependencies.call_factory = std::move(call_factory);
-    dependencies.event_log_factory = std::move(event_log_factory);
+    dependencies.task_queue_factory = webrtc::CreateDefaultTaskQueueFactory();
+    cricket::MediaDependencies media_deps;
+    media_deps.adm = std::move(audioDeviceModule);
+    media_deps.task_queue_factory = dependencies.task_queue_factory.get();
+    media_deps.audio_encoder_factory = std::move(audioEncoderFactory);
+    media_deps.audio_decoder_factory = std::move(audioDecoderFactory);
+    media_deps.video_encoder_factory = std::move(videoEncoderFactory);
+    media_deps.video_decoder_factory = std::move(videoDecoderFactory) if (audioProcessingModule) {
+      media_deps.audio_processing = std::move(audioProcessingModule);
+    }
+    else {
+      media_deps.audio_processing = webrtc::AudioProcessingBuilder().Create();
+    }
+    dependencies.media_engine = cricket::CreateMediaEngine(std::move(media_deps));
+    dependencies.call_factory = webrtc::CreateCallFactory();
+    dependencies.event_log_factory =
+        absl::make_unique<RtcEventLogFactory>(dependencies.task_queue_factory.get());
     dependencies.network_controller_factory = std::move(networkControllerFactory);
     dependencies.media_transport_factory = std::move(mediaTransportFactory);
     _nativeFactory = webrtc::CreateModularPeerConnectionFactory(std::move(dependencies));
