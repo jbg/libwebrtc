@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "316f0b5f_ab0e55ce",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-05-20T13:00:50Z",
+      "side": 0,
+      "message": "Yes, intentinally as it isn\u0027t needed (the use case would be if we want to implement ToLogString for some other type with another return value and not have it match, I don\u0027t see that happening, I just didn\u0027t think it trough when I added it in the first place)",
+      "parentUuid": "1b454107_0920c58c",
+      "range": {
+        "startLine": 193,
+        "startChar": 34,
+        "endLine": 193,
+        "endChar": 46
+      },
+      "revId": "5665572f478b015795643a9f918c1604e7d34134",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6631fd39_e4f28d54",
         "filename": "rtc_base/logging.h",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "134af103_ce288275",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-05-20T13:00:50Z",
+      "side": 0,
+      "message": "Yes, it\u0027s not needed as we don\u0027t have ToLogString overloads returning other types. And if we would, for instance, return a string view, that should be fine.",
+      "parentUuid": "6631fd39_e4f28d54",
+      "range": {
+        "startLine": 273,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 20
+      },
+      "revId": "5665572f478b015795643a9f918c1604e7d34134",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6037d927_6a0ce3e6",
         "filename": "rtc_base/logging.h",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2019-05-07T09:05:04Z",
       "side": 0,
       "message": "Why is it safe to drop this?",
+      "range": {
+        "startLine": 300,
+        "startChar": 33,
+        "endLine": 300,
+        "endChar": 42
+      },
+      "revId": "5665572f478b015795643a9f918c1604e7d34134",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fa930ec_b932dbdf",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-05-20T13:00:50Z",
+      "side": 0,
+      "message": "This was originally copied from the ToString MakeVal, ToString has implementations for basic types that we explicitly want to exclude. ToLogString doesn\u0027t have such overload so it doesn\u0027t make sense to exclude them here.",
+      "parentUuid": "6037d927_6a0ce3e6",
       "range": {
         "startLine": 300,
         "startChar": 33,

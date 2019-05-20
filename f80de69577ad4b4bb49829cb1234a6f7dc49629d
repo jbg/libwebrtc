@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d8797b8e_13c0e5c7",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-05-20T13:00:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f998aa21_d926207b",
+      "range": {
+        "startLine": 190,
+        "startChar": 10,
+        "endLine": 190,
+        "endChar": 15
+      },
+      "revId": "f80de69577ad4b4bb49829cb1234a6f7dc49629d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc2126a9_68bb6e6a",
         "filename": "rtc_base/checks.h",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "24d63f20_a5195718",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-05-20T13:00:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc2126a9_68bb6e6a",
+      "range": {
+        "startLine": 191,
+        "startChar": 20,
+        "endLine": 191,
+        "endChar": 21
+      },
+      "revId": "f80de69577ad4b4bb49829cb1234a6f7dc49629d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "213749f0_3dfc5f56",
         "filename": "rtc_base/logging.h",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2019-05-07T09:05:04Z",
       "side": 1,
       "message": "Why\n\n  A \u0026\u0026 !absl::disjunction\u003cB, C, D\u003e\n\ninstead of\n\n  A \u0026\u0026 !B \u0026\u0026 !C \u0026\u0026 !D\n\nlike we had before? Is there some technical advantage, or is it about readability?",
+      "range": {
+        "startLine": 281,
+        "startChar": 9,
+        "endLine": 281,
+        "endChar": 26
+      },
+      "revId": "f80de69577ad4b4bb49829cb1234a6f7dc49629d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6eae2fde_d53b1ac2",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-05-20T13:00:50Z",
+      "side": 1,
+      "message": "Readability,\n!absl::disjunction\u003cB, C, D\u003e::value vs \n\n!B::value \u0026\u0026 !C::value \u0026\u0026 !D::value\n\nBut I agree that the improvement isn\u0027t that significant. I\u0027ll revert this part if you prefer the latter.",
+      "parentUuid": "213749f0_3dfc5f56",
       "range": {
         "startLine": 281,
         "startChar": 9,
