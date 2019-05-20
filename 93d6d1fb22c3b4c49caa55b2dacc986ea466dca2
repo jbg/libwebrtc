@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2441987_a8c994d4",
+        "filename": "api/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-20T10:13:06Z",
+      "side": 1,
+      "message": "Is it possible to move this and its definition to api/rtc_event_log/rtc_event_log_factory.cc (maybe in an anonymous namespace) and also delete api/rtc_event_log/rtc_event_log.cc?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 2
+      },
+      "revId": "93d6d1fb22c3b4c49caa55b2dacc986ea466dca2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
