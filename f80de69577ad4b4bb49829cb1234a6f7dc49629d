@@ -140,6 +140,30 @@
       "revId": "f80de69577ad4b4bb49829cb1234a6f7dc49629d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8f88a18_6269b4a0",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-20T15:45:54Z",
+      "side": 1,
+      "message": "I would argue that the new code is harder to read, because (1) the reader has to know what std::disjunction does, and (2) you introduce an asymmetry between is_class and the three negated properties. But having stated my case, I\u0027ll let you decide which form to use.",
+      "parentUuid": "6eae2fde_d53b1ac2",
+      "range": {
+        "startLine": 281,
+        "startChar": 9,
+        "endLine": 281,
+        "endChar": 26
+      },
+      "revId": "f80de69577ad4b4bb49829cb1234a6f7dc49629d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

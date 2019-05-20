@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d200159c_d8bf6bd0",
+        "filename": "rtc_base/checks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-20T15:45:54Z",
+      "side": 0,
+      "message": "I guess that check was mostly about being paranoid, so OK.",
+      "parentUuid": "316f0b5f_ab0e55ce",
+      "range": {
+        "startLine": 193,
+        "startChar": 34,
+        "endLine": 193,
+        "endChar": 46
+      },
+      "revId": "5665572f478b015795643a9f918c1604e7d34134",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6631fd39_e4f28d54",
         "filename": "rtc_base/logging.h",
         "patchSetId": 1
@@ -140,6 +164,30 @@
       "revId": "5665572f478b015795643a9f918c1604e7d34134",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60cf5d86_d3a3f504",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-20T15:45:54Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "3fa930ec_b932dbdf",
+      "range": {
+        "startLine": 300,
+        "startChar": 33,
+        "endLine": 300,
+        "endChar": 42
+      },
+      "revId": "5665572f478b015795643a9f918c1604e7d34134",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
