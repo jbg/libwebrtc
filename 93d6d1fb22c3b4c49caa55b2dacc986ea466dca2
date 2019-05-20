@@ -22,6 +22,30 @@
       "revId": "93d6d1fb22c3b4c49caa55b2dacc986ea466dca2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9f4352d_88e0a068",
+        "filename": "api/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-20T10:26:18Z",
+      "side": 1,
+      "message": "why do you prefer to move this class away?\nit is very cheap class (it doesn\u0027t pull any extra dependencies)\n\nUsers who do not need RtcEventLog should be able to create Null implementation of it (normally indirectly)\n\nmoving this class to factory would force those users to link with real implementation.\n\nalternatively I can move null implementation into own target, but I do not see much value in it: Users who depend on rtc event log interface would most likely need (cheap) null implementation any way.",
+      "parentUuid": "f2441987_a8c994d4",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 2
+      },
+      "revId": "93d6d1fb22c3b4c49caa55b2dacc986ea466dca2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
