@@ -129,6 +129,9 @@ struct _SendMessage {
   bool* ready;
 };
 
+// TODO(nisse): This class is no longer used by rtc::Thread or anything else in
+// webrtc, but there are downstream subclasses. Delete as soon as downstream has
+// migrated away.
 class Runnable {
  public:
   virtual ~Runnable() {}
@@ -193,7 +196,7 @@ class RTC_LOCKABLE Thread : public MessageQueue {
   bool SetName(const std::string& name, const void* obj);
 
   // Starts the execution of the thread.
-  bool Start(Runnable* runnable = nullptr);
+  bool Start();
 
   // Tells the thread to stop and waits until it is joined.
   // Never call Stop on the current thread.  Instead use the inherited Quit
@@ -335,11 +338,6 @@ class RTC_LOCKABLE Thread : public MessageQueue {
   friend class ScopedDisallowBlockingCalls;
 
  private:
-  struct ThreadInit {
-    Thread* thread;
-    Runnable* runnable;
-  };
-
   // Sets the per-thread allow-blocking-calls flag and returns the previous
   // value. Must be called on this thread.
   bool SetAllowBlockingCalls(bool allow);
