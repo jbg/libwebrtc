@@ -70,6 +70,30 @@
       "revId": "4de2b8a9914f369afffa3d48aea5397a4d28180a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5730d9d8_1547b94d",
+        "filename": "video/rtp_video_stream_receiver_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-20T09:50:11Z",
+      "side": 1,
+      "message": "We\u0027re starting to get some downstream usage of this class (for lack of better RtpTransport api classes). So I don\u0027t quite like exposing RtpRtcp module in the interface. Could have a separate test-only constructor with injected RtpRtcp, intended mainly for tests. Does that make sense?",
+      "parentUuid": "d5cd754f_0d248dd5",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 5
+      },
+      "revId": "4de2b8a9914f369afffa3d48aea5397a4d28180a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
