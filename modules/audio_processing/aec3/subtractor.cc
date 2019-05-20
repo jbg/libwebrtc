@@ -23,7 +23,7 @@ namespace webrtc {
 
 namespace {
 
-void PredictionError(const Aec3Fft& fft,
+void PredictionError(Aec3Fft& fft,
                      const FftData& S,
                      rtc::ArrayView<const float> y,
                      std::array<float, kBlockSize>* e,

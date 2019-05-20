@@ -17,6 +17,7 @@
 #include "modules/audio_processing/aec3/aec3_common.h"
 #include "modules/audio_processing/aec3/fft_data.h"
 #include "modules/audio_processing/utility/ooura_fft.h"
+#include "modules/audio_processing/utility/pffft_wrapper.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/constructor_magic.h"
 
@@ -28,32 +29,58 @@ class Aec3Fft {
  public:
   enum class Window { kRectangular, kHanning, kSqrtHanning };
 
-  Aec3Fft() = default;
+  Aec3Fft();
   // Computes the FFT. Note that both the input and output are modified.
-  void Fft(std::array<float, kFftLength>* x, FftData* X) const {
+  void Fft(std::array<float, kFftLength>* x, FftData* X) {
     RTC_DCHECK(x);
     RTC_DCHECK(X);
+#if 0
+    std::copy(x->begin(), x->end(), pffft_in_->GetView().begin());
+    pffft_.ForwardTransform(*pffft_in_, pffft_out_.get(), true);
+    X->CopyFromPackedArray(pffft_out_->GetConstView());
+    // for (float& X_k : X->im) {
+    //   X_k*=-1;
+    // }
+#else
+
     ooura_fft_.Fft(x->data());
     X->CopyFromPackedArray(*x);
+#endif
   }
   // Computes the inverse Fft.
-  void Ifft(const FftData& X, std::array<float, kFftLength>* x) const {
+  void Ifft(const FftData& X, std::array<float, kFftLength>* x) {
     RTC_DCHECK(x);
-    X.CopyToPackedArray(x);
+#if 0
+    FftData X_local;
+    X_local.Assign(X);
+    // for (float& X_k : X_local.im) {
+    //   X_k*=-1;
+    // }
+    X_local.CopyToPackedArray(*x);
+    std::copy(x->begin(), x->end(), pffft_in_->GetView().begin());
+    pffft_.BackwardTransform(*pffft_in_, pffft_out_.get(), true);
+    auto out = pffft_out_->GetConstView();
+    std::copy(out.begin(), out.end(), x->begin());
+     for (float& x_k : *x) {
+      x_k/=2;
+     }
+
+#else
+
+    X.CopyToPackedArray(*x);
     ooura_fft_.InverseFft(x->data());
+#endif
   }
 
   // Windows the input using a Hanning window, and then adds padding of
   // kFftLengthBy2 initial zeros before computing the Fft.
-  void ZeroPaddedFft(rtc::ArrayView<const float> x,
-                     Window window,
-                     FftData* X) const;
+  void ZeroPaddedFft(rtc::ArrayView<const float> x, Window window, FftData* X);
 
   // Concatenates the kFftLengthBy2 values long x and x_old before computing the
   // Fft. After that, x is copied to x_old.
   void PaddedFft(rtc::ArrayView<const float> x,
                  rtc::ArrayView<const float> x_old,
-                 FftData* X) const {
+                 FftData* X) {
     PaddedFft(x, x_old, Window::kRectangular, X);
   }
 
@@ -61,10 +88,13 @@ class Aec3Fft {
   void PaddedFft(rtc::ArrayView<const float> x,
                  rtc::ArrayView<const float> x_old,
                  Window window,
-                 FftData* X) const;
+                 FftData* X);
 
  private:
   const OouraFft ooura_fft_;
+  Pffft pffft_;
+  std::unique_ptr<Pffft::FloatBuffer> pffft_in_;
+  std::unique_ptr<Pffft::FloatBuffer> pffft_out_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(Aec3Fft);
 };

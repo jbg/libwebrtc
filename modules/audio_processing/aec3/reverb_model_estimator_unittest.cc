@@ -60,7 +60,7 @@ class ReverbModelEstimatorTest {
 };
 
 void ReverbModelEstimatorTest::CreateImpulseResponseWithDecay() {
-  const Aec3Fft fft;
+  Aec3Fft fft;
   RTC_DCHECK_EQ(h_.size(), aec3_config_.filter.main.length_blocks * kBlockSize);
   RTC_DCHECK_EQ(H2_.size(), aec3_config_.filter.main.length_blocks);
   RTC_DCHECK_EQ(kFilterDelayBlocks, 2);

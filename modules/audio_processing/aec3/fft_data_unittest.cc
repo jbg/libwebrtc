@@ -126,7 +126,7 @@ TEST(FftData, CopyToPackedArray) {
     x.im[k] = 2.f * (k + 1);
   }
 
-  x.CopyToPackedArray(&x_packed);
+  x.CopyToPackedArray(x_packed);
 
   EXPECT_EQ(x.re[0], x_packed[0]);
   EXPECT_EQ(x.re[x.re.size() - 1], x_packed[1]);
@@ -153,7 +153,7 @@ TEST(FftData, CopyFromPackedArray) {
     x_ref.im[k] = 2.f * (k + 1);
   }
 
-  x_ref.CopyToPackedArray(&x_packed);
+  x_ref.CopyToPackedArray(x_packed);
   x.CopyFromPackedArray(x_packed);
 
   EXPECT_EQ(x_ref.re, x.re);

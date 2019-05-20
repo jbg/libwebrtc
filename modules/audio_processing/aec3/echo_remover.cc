@@ -72,7 +72,7 @@ void SignalTransition(rtc::ArrayView<const float> from,
 
 // Computes a windowed (square root Hanning) padded FFT and updates the related
 // memory.
-void WindowedPaddedFft(const Aec3Fft& fft,
+void WindowedPaddedFft(Aec3Fft& fft,
                        rtc::ArrayView<const float> v,
                        rtc::ArrayView<float> v_old,
                        FftData* V) {
@@ -112,7 +112,7 @@ class EchoRemoverImpl final : public EchoRemover {
 
   static int instance_count_;
   const EchoCanceller3Config config_;
-  const Aec3Fft fft_;
+  Aec3Fft fft_;
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const Aec3Optimization optimization_;
   const int sample_rate_hz_;

@@ -74,7 +74,7 @@ class RenderDelayBufferImpl final : public RenderDelayBuffer {
   RenderBuffer echo_remover_buffer_;
   DownsampledRenderBuffer low_rate_;
   Decimator render_decimator_;
-  const Aec3Fft fft_;
+  Aec3Fft fft_;
   std::vector<float> render_ds_;
   const int buffer_headroom_;
   bool last_call_was_render_ = false;

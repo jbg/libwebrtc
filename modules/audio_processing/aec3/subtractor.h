@@ -103,7 +103,7 @@ class Subtractor {
     int overhang_ = 0.f;
   };
 
-  const Aec3Fft fft_;
+  Aec3Fft fft_;
   ApmDataDumper* data_dumper_;
   const Aec3Optimization optimization_;
   const EchoCanceller3Config config_;

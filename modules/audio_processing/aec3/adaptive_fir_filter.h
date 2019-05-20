@@ -164,7 +164,7 @@ class AdaptiveFirFilter {
   void UpdateSize();
 
   ApmDataDumper* const data_dumper_;
-  const Aec3Fft fft_;
+  Aec3Fft fft_;
   const Aec3Optimization optimization_;
   const size_t max_size_partitions_;
   const int size_change_duration_blocks_;

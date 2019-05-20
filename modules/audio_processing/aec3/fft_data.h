@@ -68,7 +68,8 @@ struct FftData {
   }
 
   // Copy the data from an interleaved array.
-  void CopyFromPackedArray(const std::array<float, kFftLength>& v) {
+  void CopyFromPackedArray(rtc::ArrayView<const float> v) {
+    RTC_DCHECK_EQ(kFftLength, v.size());
     re[0] = v[0];
     re[kFftLengthBy2] = v[1];
     im[0] = im[kFftLengthBy2] = 0;
@@ -79,13 +80,13 @@ struct FftData {
   }
 
   // Copies the data into an interleaved array.
-  void CopyToPackedArray(std::array<float, kFftLength>* v) const {
-    RTC_DCHECK(v);
-    (*v)[0] = re[0];
-    (*v)[1] = re[kFftLengthBy2];
+  void CopyToPackedArray(rtc::ArrayView<float> v) const {
+    RTC_DCHECK_EQ(kFftLength, v.size());
+    v[0] = re[0];
+    v[1] = re[kFftLengthBy2];
     for (size_t k = 1, j = 2; k < kFftLengthBy2; ++k) {
-      (*v)[j++] = re[k];
-      (*v)[j++] = im[k];
+      v[j++] = re[k];
+      v[j++] = im[k];
     }
   }
 

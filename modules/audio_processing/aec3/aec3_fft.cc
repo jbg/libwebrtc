@@ -72,10 +72,18 @@ const float kSqrtHanning128[kFftLength] = {
 
 }  // namespace
 
+Aec3Fft::Aec3Fft()
+    : ooura_fft_(),
+      pffft_(128, Pffft::FftType::kReal),
+      pffft_in_(pffft_.CreateBuffer()),
+      pffft_out_(pffft_.CreateBuffer()) {
+  RTC_CHECK(Pffft::IsValidFftSize(128, Pffft::FftType::kReal));
+}
+
 // TODO(peah): Change x to be std::array once the rest of the code allows this.
 void Aec3Fft::ZeroPaddedFft(rtc::ArrayView<const float> x,
                             Window window,
-                            FftData* X) const {
+                            FftData* X) {
   RTC_DCHECK(X);
   RTC_DCHECK_EQ(kFftLengthBy2, x.size());
   std::array<float, kFftLength> fft;
@@ -102,7 +110,7 @@ void Aec3Fft::ZeroPaddedFft(rtc::ArrayView<const float> x,
 void Aec3Fft::PaddedFft(rtc::ArrayView<const float> x,
                         rtc::ArrayView<const float> x_old,
                         Window window,
-                        FftData* X) const {
+                        FftData* X) {
   RTC_DCHECK(X);
   RTC_DCHECK_EQ(kFftLengthBy2, x.size());
   RTC_DCHECK_EQ(kFftLengthBy2, x_old.size());
