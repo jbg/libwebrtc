@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dba36883_f7b2cc13",
+        "filename": "p2p/base/connection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-05-20T14:03:50Z",
+      "side": 1,
+      "message": "Done.\nAnd ConnectionRequest is defined in connection.cc, I moved that too.",
+      "parentUuid": "bb37830c_f3685d66",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "783dedb505bcb72be10168b149f6da878123ad31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9a0c269_32e4e63b",
         "filename": "p2p/base/port.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "783dedb505bcb72be10168b149f6da878123ad31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae1ccbe9_94f269bc",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-05-20T14:03:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9a0c269_32e4e63b",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 476,
+        "endChar": 37
+      },
+      "revId": "783dedb505bcb72be10168b149f6da878123ad31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
