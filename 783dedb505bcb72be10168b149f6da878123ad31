@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2af4b446_51f5f41a",
+        "filename": "p2p/base/connection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-21T09:47:20Z",
+      "side": 1,
+      "message": "\u003e Done.\n\u003e And ConnectionRequest is defined in connection.cc, I moved that too.\n\nDo you have un-uploaded changes?",
+      "parentUuid": "dba36883_f7b2cc13",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "783dedb505bcb72be10168b149f6da878123ad31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9a0c269_32e4e63b",
         "filename": "p2p/base/port.h",
         "patchSetId": 2
