@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "86398fd9_583605d9",
+        "filename": "media/engine/webrtc_media_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-21T11:16:29Z",
+      "side": 1,
+      "message": "Yes, please.\nOne of the reasons I\u0027ve added this new MediaEngine factory function is to track which places need to be updated not to use global task queue factory (http://bugs.webrtc.org/10284).\n\nI would greatly appreciate if you leave it to callers to set the task queue factory.\n\nI would also appreciate if you make one more step and update test code not to use the GlobalTaskQueueFactory (do not worry about prod - prod case is a bit more complicated):\npeer_connection_factory_dependencies.task_queue_factory \u003d webrtc::CreateDefaultTaskQueueFactory();\nmedia_engine_dependencies.task_queue_factory \u003d peer_connection_factory_dependencies.task_queue_factory.get();\n(few places are already using this pattern).\nBut if not, no worries, I\u0027ll do it later myself.",
+      "parentUuid": "61444518_4c6baaca",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 3
+      },
+      "revId": "18e1f2afbd845363ad637cc973a505dc93a41ad9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15e97407_30b61041",
         "filename": "pc/peer_connection_integrationtest.cc",
         "patchSetId": 3
@@ -41,6 +65,29 @@
         "startChar": 0,
         "endLine": 601,
         "endChar": 0
+      },
+      "revId": "18e1f2afbd845363ad637cc973a505dc93a41ad9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7a9a748_f246c381",
+        "filename": "test/pc/e2e/test_peer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-21T11:16:29Z",
+      "side": 1,
+      "message": "SetMediaEngineDefaults designed to be called after non-defaults values are set.\n(sorry for not documenting that)\ne.g. here moving SetMediaEngine after \"media_deps.audio_processing \u003d audio_processing\"\ncan avoid creating default one.",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 48
       },
       "revId": "18e1f2afbd845363ad637cc973a505dc93a41ad9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
