@@ -46,6 +46,30 @@
       "revId": "b96e5906c4a35bde66e6a08f8a637fabd60a61dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93074d8f_737bddb5",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2493,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-21T07:21:03Z",
+      "side": 1,
+      "message": "I think it would be useful to make a separate cl with just a couple of integration tests, to observe in which way they fail, and see the effect of fixes landed. \n\nSenders ought to be fixed too, if for no other reason but to be able to test the ssrc \u003d\u003d 0 receive path properly.",
+      "parentUuid": "4ac6ede3_361b0fb1",
+      "range": {
+        "startLine": 2461,
+        "startChar": 0,
+        "endLine": 2493,
+        "endChar": 1
+      },
+      "revId": "b96e5906c4a35bde66e6a08f8a637fabd60a61dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

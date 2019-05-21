@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18870d94_52153e7d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-21T07:21:03Z",
+      "side": 1,
+      "message": "Maybe add a separate method for setting unsignalled stream params, and move the has_ssrcs() check up to channel.cc?",
+      "range": {
+        "startLine": 1194,
+        "startChar": 0,
+        "endLine": 1199,
+        "endChar": 3
+      },
+      "revId": "3323e1abb6b363ca57485ee4c7ecc60b77792543",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b6d4bc3_da45e3a5",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2805,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-21T07:21:03Z",
+      "side": 1,
+      "message": "This is the only place where SetupMediaChannel is called without ssrc (which makes me wonder what\u0027s the plan-B code path is). My gut feeling is that that also in this case, it would make the code clearer with a separate method for the unsignalled case.\n\nIt also a bit unclear to me if no ssrc here means the legacy case of no signalled id of any kind, or if it\u0027s the modern unified-plan case where the media description contains a mid but no ssrc.",
+      "range": {
+        "startLine": 2805,
+        "startChar": 54,
+        "endLine": 2805,
+        "endChar": 71
+      },
+      "revId": "3323e1abb6b363ca57485ee4c7ecc60b77792543",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
