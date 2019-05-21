@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b6b128ec_77d3c741",
+        "filename": "modules/rtp_rtcp/source/rtp_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 6977
+      },
+      "writtenOn": "2019-05-21T12:58:57Z",
+      "side": 1,
+      "message": "I could not find where it is set from EncodedImage to RTPVideoHeader (I suppose that should be in RtpPayloadParams::GetRtpVideoHeader)?",
+      "parentUuid": "5d2784ff_ebe7d3df",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 32
+      },
+      "revId": "3c17dd97f7841e7e97c8100108e6123b89c3687e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f3f29fa_bb4cfd16",
         "filename": "modules/rtp_rtcp/source/rtp_format.h",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-05-21T11:32:57Z",
       "side": 1,
       "message": "while at may be modernize new code:\nreturn unique_ptr\u003cRtpDepacketizer\u003e\nto clearly document pointer is returned with ownership.",
+      "range": {
+        "startLine": 104,
+        "startChar": 9,
+        "endLine": 104,
+        "endChar": 25
+      },
+      "revId": "3c17dd97f7841e7e97c8100108e6123b89c3687e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a65d255_cf83782f",
+        "filename": "modules/rtp_rtcp/source/rtp_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 6977
+      },
+      "writtenOn": "2019-05-21T12:58:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f3f29fa_bb4cfd16",
       "range": {
         "startLine": 104,
         "startChar": 9,
