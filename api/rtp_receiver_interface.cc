@@ -14,19 +14,23 @@ namespace webrtc {
 
 RtpSource::RtpSource(int64_t timestamp_ms,
                      uint32_t source_id,
-                     RtpSourceType source_type)
+                     RtpSourceType source_type,
+                     uint32_t rtp_timestamp)
     : timestamp_ms_(timestamp_ms),
       source_id_(source_id),
-      source_type_(source_type) {}
+      source_type_(source_type),
+      rtp_timestamp_(rtp_timestamp) {}
 
 RtpSource::RtpSource(int64_t timestamp_ms,
                      uint32_t source_id,
                      RtpSourceType source_type,
-                     uint8_t audio_level)
+                     uint8_t audio_level,
+                     uint32_t rtp_timestamp)
     : timestamp_ms_(timestamp_ms),
       source_id_(source_id),
       source_type_(source_type),
-      audio_level_(audio_level) {}
+      audio_level_(audio_level),
+      rtp_timestamp_(rtp_timestamp) {}
 
 RtpSource::RtpSource(const RtpSource&) = default;
 RtpSource& RtpSource::operator=(const RtpSource&) = default;
