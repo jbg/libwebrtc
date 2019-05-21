@@ -15,6 +15,7 @@
 #include <memory>
 #include <vector>
 
+#include "absl/strings/string_view.h"
 #include "api/array_view.h"
 #include "modules/include/module_common_types.h"
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
@@ -22,6 +23,18 @@
 namespace webrtc {
 
 class RtpPacketToSend;
+
+enum RtpPacketizationFormat {
+  kRtpPacketizationRaw = 0,
+  kRtpPacketizationGeneric,
+  kRtpPacketizationVP8,
+  kRtpPacketizationVP9,
+  kRtpPacketizationH264,
+};
+
+RtpPacketizationFormat VideoCodecToRtpPacketization(VideoCodecType type);
+RtpPacketizationFormat PayloadNameToRtpPacketization(
+    absl::string_view payload_name);
 
 class RtpPacketizer {
  public:
@@ -32,6 +45,15 @@ class RtpPacketizer {
     // Reduction len for packet that is first & last at the same time.
     int single_packet_reduction_len = 0;
   };
+
+  static std::unique_ptr<RtpPacketizer> Create(
+      RtpPacketizationFormat format,
+      rtc::ArrayView<const uint8_t> payload,
+      PayloadSizeLimits limits,
+      // Codec-specific details.
+      const RTPVideoHeader& rtp_video_header,
+      VideoFrameType frame_type,
+      const RTPFragmentationHeader* fragmentation);
   static std::unique_ptr<RtpPacketizer> Create(
       VideoCodecType type,
       rtc::ArrayView<const uint8_t> payload,
@@ -79,6 +101,7 @@ class RtpDepacketizer {
     size_t payload_length;
   };
 
+  static std::unique_ptr<RtpDepacketizer> Create(RtpPacketizationFormat format);
   static RtpDepacketizer* Create(VideoCodecType type);
 
   virtual ~RtpDepacketizer() {}
