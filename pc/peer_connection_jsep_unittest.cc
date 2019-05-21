@@ -13,6 +13,7 @@
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "media/engine/webrtc_media_engine.h"
+#include "media/engine/webrtc_media_engine_defaults.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "pc/media_session.h"
 #include "pc/peer_connection_factory.h"
@@ -51,14 +52,13 @@ class PeerConnectionFactoryForJsepTest : public PeerConnectionFactory {
           dependencies.worker_thread = rtc::Thread::Current();
           dependencies.network_thread = rtc::Thread::Current();
           dependencies.signaling_thread = rtc::Thread::Current();
-          dependencies.media_engine = cricket::WebRtcMediaEngineFactory::Create(
-              rtc::scoped_refptr<AudioDeviceModule>(
-                  FakeAudioCaptureModule::Create()),
-              CreateBuiltinAudioEncoderFactory(),
-              CreateBuiltinAudioDecoderFactory(),
-              CreateBuiltinVideoEncoderFactory(),
-              CreateBuiltinVideoDecoderFactory(), nullptr,
-              AudioProcessingBuilder().Create());
+
+          cricket::MediaEngineDependencies media_deps;
+          webrtc::SetMediaEngineDefaults(&media_deps);
+          media_deps.adm = FakeAudioCaptureModule::Create();
+          dependencies.media_engine =
+              cricket::CreateMediaEngine(std::move(media_deps));
+
           dependencies.call_factory = CreateCallFactory();
           return dependencies;
         }()) {}

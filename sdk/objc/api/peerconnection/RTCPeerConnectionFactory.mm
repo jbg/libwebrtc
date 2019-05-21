@@ -215,14 +215,15 @@
   if (self = [self initNative]) {
     if (!audioProcessingModule) audioProcessingModule = webrtc::AudioProcessingBuilder().Create();
 
-    std::unique_ptr<cricket::MediaEngineInterface> media_engine =
-        cricket::WebRtcMediaEngineFactory::Create(audioDeviceModule,
-                                                  audioEncoderFactory,
-                                                  audioDecoderFactory,
-                                                  std::move(videoEncoderFactory),
-                                                  std::move(videoDecoderFactory),
-                                                  nullptr,  // audio mixer
-                                                  audioProcessingModule);
+    cricket::MediaEngineDependencies media_dependencies;
+    media_dependencies.adm = audioDeviceModule;
+    media_dependencies.audio_encoder_factory = audioEncoderFactory;
+    media_dependencies.audio_decoder_factory = audioDecoderFactory;
+    media_dependencies.audio_processing = audioProcessingModule;
+    media_dependencies.video_encoder_factory = std::move(videoEncoderFactory);
+    media_dependencies.video_decoder_factory = std::move(videoDecoderFactory);
+
+    auto media_engine = cricket::CreateMediaEngine(std::move(media_dependencies));
 
     std::unique_ptr<webrtc::CallFactoryInterface> call_factory = webrtc::CreateCallFactory();
 
