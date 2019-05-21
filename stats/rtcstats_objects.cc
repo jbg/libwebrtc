@@ -712,6 +712,72 @@ RTCOutboundRTPStreamStats::RTCOutboundRTPStreamStats(
 RTCOutboundRTPStreamStats::~RTCOutboundRTPStreamStats() {}
 
 // clang-format off
+WEBRTC_RTCSTATS_IMPL(RTCMediaSourceStats, RTCStats, "media-source",
+    &track_identifier,
+    &kind)
+// clang-format on
+
+RTCMediaSourceStats::RTCMediaSourceStats(const std::string& id,
+                                     int64_t timestamp_us)
+    : RTCMediaSourceStats(std::string(id), timestamp_us) {}
+
+RTCMediaSourceStats::RTCMediaSourceStats(std::string&& id, int64_t timestamp_us)
+    : RTCStats(std::move(id), timestamp_us),
+      track_identifier("trackIdentifier"),
+      kind("kind") {}
+
+RTCMediaSourceStats::RTCMediaSourceStats(const RTCMediaSourceStats& other)
+    : RTCStats(other.id(), other.timestamp_us()),
+      track_identifier(other.track_identifier),
+      kind(other.kind) {}
+
+RTCMediaSourceStats::~RTCMediaSourceStats() {}
+
+// clang-format off
+WEBRTC_RTCSTATS_IMPL(RTCAudioSourceStats, RTCMediaSourceStats, "media-source")
+// clang-format on
+
+RTCAudioSourceStats::RTCAudioSourceStats(const std::string& id,
+                                         int64_t timestamp_us)
+    : RTCAudioSourceStats(std::string(id), timestamp_us) {}
+
+RTCAudioSourceStats::RTCAudioSourceStats(std::string&& id, int64_t timestamp_us)
+    : RTCMediaSourceStats(std::move(id), timestamp_us) {}
+
+RTCAudioSourceStats::RTCAudioSourceStats(const RTCAudioSourceStats& other)
+    : RTCMediaSourceStats(other.id(), other.timestamp_us()) {}
+
+RTCAudioSourceStats::~RTCAudioSourceStats() {}
+
+// clang-format off
+WEBRTC_RTCSTATS_IMPL(RTCVideoSourceStats, RTCMediaSourceStats, "media-source",
+    &width,
+    &height,
+    &frames,
+    &frames_per_second)
+// clang-format on
+
+RTCVideoSourceStats::RTCVideoSourceStats(const std::string& id,
+                                     int64_t timestamp_us)
+    : RTCVideoSourceStats(std::string(id), timestamp_us) {}
+
+RTCVideoSourceStats::RTCVideoSourceStats(std::string&& id, int64_t timestamp_us)
+    : RTCMediaSourceStats(std::move(id), timestamp_us),
+      width("width"),
+      height("height"),
+      frames("frames"),
+      frames_per_second("framesPerSecond") {}
+
+RTCVideoSourceStats::RTCVideoSourceStats(const RTCVideoSourceStats& other)
+    : RTCMediaSourceStats(other.id(), other.timestamp_us()),
+      width(other.width),
+      height(other.height),
+      frames(other.frames),
+      frames_per_second(other.frames_per_second) {}
+
+RTCVideoSourceStats::~RTCVideoSourceStats() {}
+
+// clang-format off
 WEBRTC_RTCSTATS_IMPL(RTCTransportStats, RTCStats, "transport",
     &bytes_sent,
     &bytes_received,

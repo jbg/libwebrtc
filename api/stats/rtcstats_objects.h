@@ -465,6 +465,49 @@ class RTC_EXPORT RTCOutboundRTPStreamStats final : public RTCRTPStreamStats {
   RTCStatsMember<std::string> content_type;
 };
 
+// https://w3c.github.io/webrtc-stats/#dom-rtcmediasourcestats
+class RTC_EXPORT RTCMediaSourceStats : public RTCStats {
+ public:
+  WEBRTC_RTCSTATS_DECL();
+
+  RTCMediaSourceStats(const RTCMediaSourceStats& other);
+  ~RTCMediaSourceStats() override;
+
+  RTCStatsMember<std::string> track_identifier;
+  RTCStatsMember<std::string> kind;
+
+ protected:
+  RTCMediaSourceStats(const std::string& id, int64_t timestamp_us);
+  RTCMediaSourceStats(std::string&& id, int64_t timestamp_us);
+};
+
+// https://w3c.github.io/webrtc-stats/#dom-rtcaudiosourcestats
+class RTC_EXPORT RTCAudioSourceStats final : public RTCMediaSourceStats {
+ public:
+  WEBRTC_RTCSTATS_DECL();
+
+  RTCAudioSourceStats(const std::string& id, int64_t timestamp_us);
+  RTCAudioSourceStats(std::string&& id, int64_t timestamp_us);
+  RTCAudioSourceStats(const RTCAudioSourceStats& other);
+  ~RTCAudioSourceStats() override;
+};
+
+// https://w3c.github.io/webrtc-stats/#dom-rtcvideosourcestats
+class RTC_EXPORT RTCVideoSourceStats final : public RTCMediaSourceStats {
+ public:
+  WEBRTC_RTCSTATS_DECL();
+
+  RTCVideoSourceStats(const std::string& id, int64_t timestamp_us);
+  RTCVideoSourceStats(std::string&& id, int64_t timestamp_us);
+  RTCVideoSourceStats(const RTCVideoSourceStats& other);
+  ~RTCVideoSourceStats() override;
+
+  RTCStatsMember<uint32_t> width;
+  RTCStatsMember<uint32_t> height;
+  RTCStatsMember<uint32_t> frames;
+  RTCStatsMember<uint32_t> frames_per_second;
+};
+
 // https://w3c.github.io/webrtc-stats/#transportstats-dict*
 class RTC_EXPORT RTCTransportStats final : public RTCStats {
  public:
