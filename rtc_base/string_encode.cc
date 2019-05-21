@@ -14,7 +14,6 @@
 
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/string_utils.h"
 
 namespace rtc {
 
@@ -96,7 +95,7 @@ std::string hex_encode_with_delimiter(const char* source,
                                       size_t srclen,
                                       char delimiter) {
   const size_t kBufferSize = srclen * 3;
-  char* buffer = STACK_ARRAY(char, kBufferSize);
+  char buffer[kBufferSize];
   size_t length =
       hex_encode_with_delimiter(buffer, kBufferSize, source, srclen, delimiter);
   RTC_DCHECK(srclen == 0 || length > 0);
