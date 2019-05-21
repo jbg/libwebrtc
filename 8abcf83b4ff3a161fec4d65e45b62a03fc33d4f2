@@ -46,6 +46,30 @@
       "revId": "8abcf83b4ff3a161fec4d65e45b62a03fc33d4f2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd4bfc56_c0e502ec",
+        "filename": "rtc_base/unittest_main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-05-21T12:29:47Z",
+      "side": 0,
+      "message": "I think it\u0027s OK to remove the CRT debug related code.\nThe winsock initializer is probably something that needs to be ensured exists in whatever we rely on instead.",
+      "parentUuid": "a108bb8a_22665389",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 6
+      },
+      "revId": "8abcf83b4ff3a161fec4d65e45b62a03fc33d4f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
