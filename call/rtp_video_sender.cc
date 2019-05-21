@@ -313,6 +313,9 @@ RtpVideoSender::RtpVideoSender(
                                                   kVideoPayloadTypeFrequency);
     stream.sender_video->RegisterPayloadType(rtp_config.payload_type,
                                              rtp_config.payload_name);
+    if (rtp_config.raw_payload) {
+      stream.sender_video->RegisterRawPayloadType(rtp_config.payload_type);
+    }
   }
   // Currently, both ULPFEC and FlexFEC use the same FEC rate calculation logic,
   // so enable that logic if either of those FEC schemes are enabled.

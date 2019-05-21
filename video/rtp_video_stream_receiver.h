@@ -31,6 +31,7 @@
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/contributing_sources.h"
+#include "modules/rtp_rtcp/source/rtp_format.h"
 #include "modules/video_coding/h264_sps_pps_tracker.h"
 #include "modules/video_coding/loss_notification_controller.h"
 #include "modules/video_coding/packet_buffer.h"
@@ -83,6 +84,7 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
 
   void AddReceiveCodec(const VideoCodec& video_codec,
                        const std::map<std::string, std::string>& codec_params);
+  void RegisterRawPayloadType(uint8_t payload_type);
 
   void StartReceive();
   void StopReceive();
@@ -214,7 +216,8 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
       RTC_GUARDED_BY(last_seq_num_cs_);
   video_coding::H264SpsPpsTracker tracker_;
 
-  std::map<uint8_t, VideoCodecType> pt_codec_type_;
+  // Maps payload type to packetization format.
+  std::map<uint8_t, RtpPacketizationFormat> payload_type_map_;
   // TODO(johan): Remove pt_codec_params_ once
   // https://bugs.chromium.org/p/webrtc/issues/detail?id=6883 is resolved.
   // Maps a payload type to a map of out-of-band supplied codec parameters.
