@@ -70,6 +70,30 @@
       "revId": "8abcf83b4ff3a161fec4d65e45b62a03fc33d4f2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8945371a_0fab591a",
+        "filename": "rtc_base/unittest_main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-21T12:39:22Z",
+      "side": 0,
+      "message": "It\u0027s in there, using the same rtc::WinsockInitializer class. See https://cs.chromium.org/chromium/src/third_party/webrtc/test/test_main_lib.cc?rcl\u003daaa114368e1bddfb406bd348e7615e781cf0b63b\u0026l\u003d120",
+      "parentUuid": "bd4bfc56_c0e502ec",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 6
+      },
+      "revId": "8abcf83b4ff3a161fec4d65e45b62a03fc33d4f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
