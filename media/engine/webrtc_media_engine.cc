@@ -31,6 +31,9 @@ namespace cricket {
 
 std::unique_ptr<MediaEngineInterface> CreateMediaEngine(
     MediaEngineDependencies dependencies) {
+  if (dependencies.task_queue_factory == nullptr) {
+    dependencies.task_queue_factory = &webrtc::GlobalTaskQueueFactory();
+  }
   auto audio_engine = absl::make_unique<WebRtcVoiceEngine>(
       dependencies.task_queue_factory, std::move(dependencies.adm),
       std::move(dependencies.audio_encoder_factory),
@@ -46,27 +49,6 @@ std::unique_ptr<MediaEngineInterface> CreateMediaEngine(
 #endif
   return absl::make_unique<CompositeMediaEngine>(std::move(audio_engine),
                                                  std::move(video_engine));
-}
-
-std::unique_ptr<MediaEngineInterface> WebRtcMediaEngineFactory::Create(
-    rtc::scoped_refptr<webrtc::AudioDeviceModule> adm,
-    rtc::scoped_refptr<webrtc::AudioEncoderFactory> audio_encoder_factory,
-    rtc::scoped_refptr<webrtc::AudioDecoderFactory> audio_decoder_factory,
-    std::unique_ptr<webrtc::VideoEncoderFactory> video_encoder_factory,
-    std::unique_ptr<webrtc::VideoDecoderFactory> video_decoder_factory,
-    rtc::scoped_refptr<webrtc::AudioMixer> audio_mixer,
-    rtc::scoped_refptr<webrtc::AudioProcessing> audio_processing) {
-#ifdef HAVE_WEBRTC_VIDEO
-  auto video_engine = absl::make_unique<WebRtcVideoEngine>(
-      std::move(video_encoder_factory), std::move(video_decoder_factory));
-#else
-  auto video_engine = absl::make_unique<NullWebRtcVideoEngine>();
-#endif
-  return std::unique_ptr<MediaEngineInterface>(new CompositeMediaEngine(
-      absl::make_unique<WebRtcVoiceEngine>(
-          &webrtc::GlobalTaskQueueFactory(), adm, audio_encoder_factory,
-          audio_decoder_factory, audio_mixer, audio_processing),
-      std::move(video_engine)));
 }
 
 namespace {

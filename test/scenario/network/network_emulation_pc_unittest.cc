@@ -22,6 +22,7 @@
 #include "call/simulated_network.h"
 #include "logging/rtc_event_log/rtc_event_log_factory.h"
 #include "media/engine/webrtc_media_engine.h"
+#include "media/engine/webrtc_media_engine_defaults.h"
 #include "modules/audio_device/include/test_audio_device.h"
 #include "p2p/client/basic_port_allocator.h"
 #include "pc/peer_connection_wrapper.h"
@@ -60,16 +61,16 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
   pcf_deps.event_log_factory = webrtc::CreateRtcEventLogFactory();
   pcf_deps.network_thread = network_thread;
   pcf_deps.signaling_thread = signaling_thread;
-  pcf_deps.media_engine = cricket::WebRtcMediaEngineFactory::Create(
-      TestAudioDeviceModule::CreateTestAudioDeviceModule(
-          TestAudioDeviceModule::CreatePulsedNoiseCapturer(kMaxAptitude,
-                                                           kSamplingFrequency),
-          TestAudioDeviceModule::CreateDiscardRenderer(kSamplingFrequency)),
-      webrtc::CreateBuiltinAudioEncoderFactory(),
-      webrtc::CreateBuiltinAudioDecoderFactory(),
-      webrtc::CreateBuiltinVideoEncoderFactory(),
-      webrtc::CreateBuiltinVideoDecoderFactory(), /*audio_mixer=*/nullptr,
-      webrtc::AudioProcessingBuilder().Create());
+
+  cricket::MediaEngineDependencies media_deps;
+  webrtc::SetMediaEngineDefaults(&media_deps);
+  media_deps.adm = TestAudioDeviceModule::CreateTestAudioDeviceModule(
+      TestAudioDeviceModule::CreatePulsedNoiseCapturer(kMaxAptitude,
+                                                       kSamplingFrequency),
+      TestAudioDeviceModule::CreateDiscardRenderer(kSamplingFrequency));
+
+  pcf_deps.media_engine = cricket::CreateMediaEngine(std::move(media_deps));
+
   return CreateModularPeerConnectionFactory(std::move(pcf_deps));
 }
 

@@ -38,11 +38,16 @@ cricket::MediaEngineInterface* CreateMediaEngine(
     std::unique_ptr<VideoDecoderFactory> video_decoder_factory,
     rtc::scoped_refptr<AudioMixer> audio_mixer,
     rtc::scoped_refptr<AudioProcessing> audio_processor) {
-  return cricket::WebRtcMediaEngineFactory::Create(
-             adm, audio_encoder_factory, audio_decoder_factory,
-             std::move(video_encoder_factory), std::move(video_decoder_factory),
-             audio_mixer, audio_processor)
-      .release();
+  cricket::MediaEngineDependencies media_dependencies;
+  media_dependencies.adm = adm;
+  media_dependencies.audio_encoder_factory = audio_encoder_factory;
+  media_dependencies.audio_decoder_factory = audio_decoder_factory;
+  media_dependencies.audio_mixer = audio_mixer;
+  media_dependencies.audio_processing = audio_processing;
+  media_dependencies.video_encoder_factory = std::move(video_encoder_factory);
+  media_dependencies.video_decoder_factory = std::move(video_decoder_factory);
+
+  return cricket::CreateMediaEngine(std::move(media_dependencies)).release();
 }
 
 }  // namespace jni

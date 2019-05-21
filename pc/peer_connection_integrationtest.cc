@@ -40,6 +40,7 @@
 #include "logging/rtc_event_log/rtc_event_log_factory_interface.h"
 #include "media/engine/fake_webrtc_video_engine.h"
 #include "media/engine/webrtc_media_engine.h"
+#include "media/engine/webrtc_media_engine_defaults.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "p2p/base/mock_async_resolver.h"
 #include "p2p/base/p2p_constants.h"
@@ -593,19 +594,17 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     }
     rtc::Thread* const signaling_thread = rtc::Thread::Current();
 
+    cricket::MediaEngineDependencies media_deps;
+    webrtc::SetMediaEngineDefaults(&media_deps);
+    media_deps.adm = rtc::scoped_refptr<webrtc::AudioDeviceModule>(
+        fake_audio_capture_module_);
+
     webrtc::PeerConnectionFactoryDependencies pc_factory_dependencies;
     pc_factory_dependencies.network_thread = network_thread;
     pc_factory_dependencies.worker_thread = worker_thread;
     pc_factory_dependencies.signaling_thread = signaling_thread;
     pc_factory_dependencies.media_engine =
-        cricket::WebRtcMediaEngineFactory::Create(
-            rtc::scoped_refptr<webrtc::AudioDeviceModule>(
-                fake_audio_capture_module_),
-            webrtc::CreateBuiltinAudioEncoderFactory(),
-            webrtc::CreateBuiltinAudioDecoderFactory(),
-            webrtc::CreateBuiltinVideoEncoderFactory(),
-            webrtc::CreateBuiltinVideoDecoderFactory(), nullptr,
-            webrtc::AudioProcessingBuilder().Create());
+        cricket::CreateMediaEngine(std::move(media_deps));
     pc_factory_dependencies.call_factory = webrtc::CreateCallFactory();
     if (event_log_factory) {
       event_log_factory_ = event_log_factory.get();

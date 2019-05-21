@@ -522,6 +522,7 @@ if (rtc_include_tests) {
       "../api/video:builtin_video_bitrate_allocator_factory",
       "../logging:fake_rtc_event_log",
       "../media:rtc_media_config",
+      "../media:rtc_media_engine_defaults",
       "../modules/audio_device:audio_device_api",
       "../modules/audio_processing:audio_processing_statistics",
       "../p2p:fake_port_allocator",
