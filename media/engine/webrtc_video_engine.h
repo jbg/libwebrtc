@@ -129,6 +129,9 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   bool SetRtpReceiveParameters(
       uint32_t ssrc,
       const webrtc::RtpParameters& parameters) override;
+  webrtc::RtpParameters GetDefaultRtpReceiveParameters() const override;
+  bool SetDefaultRtpReceiveParameters(
+      const webrtc::RtpParameters& parameters) override;
   bool GetSendCodec(VideoCodec* send_codec) override;
   bool SetSend(bool send) override;
   bool SetVideoSend(
@@ -140,8 +143,11 @@ class WebRtcVideoChannel : public VideoMediaChannel, public webrtc::Transport {
   bool AddRecvStream(const StreamParams& sp) override;
   bool AddRecvStream(const StreamParams& sp, bool default_stream);
   bool RemoveRecvStream(uint32_t ssrc) override;
+  bool ResetUnsignaledRecvStream() override;
   bool SetSink(uint32_t ssrc,
                rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) override;
+  bool SetDefaultSink(
+      rtc::VideoSinkInterface<webrtc::VideoFrame>* sink) override;
   void FillBitrateInfo(BandwidthEstimationInfo* bwe_info) override;
   bool GetStats(VideoMediaInfo* info) override;
 

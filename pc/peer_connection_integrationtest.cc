@@ -2458,6 +2458,40 @@ TEST_F(PeerConnectionIntegrationTestUnifiedPlan, NoStreamsMsidLineMissing) {
             callee_receivers[1]->streams()[0]);
 }
 
+TEST_F(PeerConnectionIntegrationTestUnifiedPlan, EndToEndAudioCallWithSsrc0) {
+  ASSERT_TRUE(CreatePeerConnectionWrappers());
+  ConnectFakeSignaling();
+  caller()->AddAudioTrack();
+  callee()->AddAudioTrack();
+
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+  ASSERT_EQ(1u, caller()->pc()->GetReceivers().size());
+  ASSERT_EQ(1u, callee()->pc()->GetReceivers().size());
+
+  // Expect audio to be received in both directions on both tracks.
+  MediaExpectations media_expectations;
+  media_expectations.ExpectBidirectionalAudio();
+  EXPECT_TRUE(ExpectNewFrames(media_expectations));
+}
+
+TEST_F(PeerConnectionIntegrationTestUnifiedPlan, EndToEndVideoCallWithSsrc0) {
+  ASSERT_TRUE(CreatePeerConnectionWrappers());
+  ConnectFakeSignaling();
+  caller()->AddVideoTrack();
+  callee()->AddVideoTrack();
+
+  caller()->CreateAndSetAndSignalOffer();
+  ASSERT_TRUE_WAIT(SignalingStateStable(), kDefaultTimeout);
+  ASSERT_EQ(1u, caller()->pc()->GetReceivers().size());
+  ASSERT_EQ(1u, callee()->pc()->GetReceivers().size());
+
+  // Expect video to be received in both directions on both tracks.
+  MediaExpectations media_expectations;
+  media_expectations.ExpectBidirectionalVideo();
+  EXPECT_TRUE(ExpectNewFrames(media_expectations));
+}
+
 // Test that if two video tracks are sent (from caller to callee, in this test),
 // they're transmitted correctly end-to-end.
 TEST_P(PeerConnectionIntegrationTest, EndToEndCallWithTwoVideoTracks) {
