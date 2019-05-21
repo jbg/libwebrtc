@@ -1132,6 +1132,29 @@ TEST_P(RtpSenderTestWithoutPacer, SendGenericVideo) {
   EXPECT_THAT(sent_payload.subview(1), ElementsAreArray(payload));
 }
 
+TEST_P(RtpSenderTestWithoutPacer, SendRawVideo) {
+  const char payload_name[] = "VP8";
+  const uint8_t payload_type = 111;
+  const uint8_t payload[] = {11, 22, 33, 44, 55};
+
+  PlayoutDelayOracle playout_delay_oracle;
+  RTPSenderVideo rtp_sender_video(&fake_clock_, rtp_sender_.get(), nullptr,
+                                  &playout_delay_oracle, nullptr, false,
+                                  FieldTrialBasedConfig());
+  rtp_sender_video.RegisterPayloadType(payload_type, payload_name);
+  rtp_sender_video.RegisterRawPayloadType(payload_type);
+
+  // Send a frame.
+  RTPVideoHeader video_header;
+  ASSERT_TRUE(rtp_sender_video.SendVideo(
+      VideoFrameType::kVideoFrameKey, payload_type, 1234, 4321, payload,
+      sizeof(payload), nullptr, &video_header,
+      kDefaultExpectedRetransmissionTimeMs));
+
+  auto sent_payload = transport_.last_sent_packet().payload();
+  EXPECT_THAT(sent_payload, ElementsAreArray(payload));
+}
+
 TEST_P(RtpSenderTest, SendFlexfecPackets) {
   constexpr uint32_t kTimestamp = 1234;
   constexpr int kMediaPayloadType = 127;
