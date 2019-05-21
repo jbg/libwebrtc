@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61444518_4c6baaca",
+        "filename": "media/engine/webrtc_media_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-21T07:37:08Z",
+      "side": 1,
+      "message": "Try to take this out, and leave it to callers or SetMediaEngineDefaults.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 3
+      },
+      "revId": "18e1f2afbd845363ad637cc973a505dc93a41ad9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15e97407_30b61041",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-21T07:37:08Z",
+      "side": 1,
+      "message": "Shouldn\u0027t these be in opposite order: First set all members that should have explicit non-default values, and then call SetMediaEngineDefaults?\n\nAnd similarly for the other calls to SetMediaEngineDefaults.",
+      "range": {
+        "startLine": 598,
+        "startChar": 0,
+        "endLine": 601,
+        "endChar": 0
+      },
+      "revId": "18e1f2afbd845363ad637cc973a505dc93a41ad9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
