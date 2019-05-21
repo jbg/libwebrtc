@@ -194,8 +194,13 @@ RtpVideoStreamReceiver::~RtpVideoStreamReceiver() {
 void RtpVideoStreamReceiver::AddReceiveCodec(
     const VideoCodec& video_codec,
     const std::map<std::string, std::string>& codec_params) {
-  pt_codec_type_.emplace(video_codec.plType, video_codec.codecType);
+  payload_type_map_.emplace(
+      video_codec.plType, VideoCodecToRtpPacketization(video_codec.codecType));
   pt_codec_params_.emplace(video_codec.plType, codec_params);
+}
+
+void RtpVideoStreamReceiver::RegisterRawPayloadType(uint8_t payload_type) {
+  payload_type_map_[payload_type] = kRtpPacketizationRaw;
 }
 
 absl::optional<Syncable::Info> RtpVideoStreamReceiver::GetSyncInfo() const {
@@ -502,12 +507,11 @@ void RtpVideoStreamReceiver::ReceivePacket(const RtpPacketReceived& packet) {
     return;
   }
 
-  const auto codec_type_it = pt_codec_type_.find(packet.PayloadType());
-  if (codec_type_it == pt_codec_type_.end()) {
+  const auto format_it = payload_type_map_.find(packet.PayloadType());
+  if (format_it == payload_type_map_.end()) {
     return;
   }
-  auto depacketizer =
-      absl::WrapUnique(RtpDepacketizer::Create(codec_type_it->second));
+  auto depacketizer = RtpDepacketizer::Create(format_it->second);
 
   if (!depacketizer) {
     RTC_LOG(LS_ERROR) << "Failed to create depacketizer.";
