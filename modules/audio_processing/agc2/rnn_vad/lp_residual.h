@@ -35,6 +35,11 @@ void ComputeLpResidual(
     rtc::ArrayView<const float> x,
     rtc::ArrayView<float> y);
 
+void ComputeLpResidual2(
+    rtc::ArrayView<const float, kNumLpcCoefficients> lpc_coeffs,
+    rtc::ArrayView<const float> x,
+    rtc::ArrayView<float> y);
+
 }  // namespace rnn_vad
 }  // namespace webrtc
 
