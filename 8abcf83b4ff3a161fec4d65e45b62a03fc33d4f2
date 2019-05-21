@@ -22,6 +22,30 @@
       "revId": "8abcf83b4ff3a161fec4d65e45b62a03fc33d4f2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a108bb8a_22665389",
+        "filename": "rtc_base/unittest_main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-21T12:20:30Z",
+      "side": 0,
+      "message": "This seems intended for interactive windows debugging. I have no idea if that is used and/or useful. The above TestCrtReportHandler is also missing. The only windows-specific in test_main_lib.cc is rtc::WinsockInitializer.\n\nTommi: Can you say if some or all of this should be copied over to the replacement code in test/test_main_lib.cc? And do general root owners review?.",
+      "parentUuid": "4605c8d4_17be1916",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 6
+      },
+      "revId": "8abcf83b4ff3a161fec4d65e45b62a03fc33d4f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
