@@ -93,6 +93,30 @@
       "revId": "93d6d1fb22c3b4c49caa55b2dacc986ea466dca2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e2c9673_f1e0e206",
+        "filename": "logging/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-21T07:59:16Z",
+      "side": 1,
+      "message": "yes, it is.\napi/...log_factory is new target that should be used instead of this one.\nThis one is old that current users of the rtc_event_log_factory are/were forced to use.\n\nOn a 2nd thought I realize comment is not accurate: This target should just be deleted, there is no good use for it even inside webrtc. [Forgot to update the todo after actual RtcEventLog implementation was moved into own target]",
+      "parentUuid": "bae55976_09381711",
+      "range": {
+        "startLine": 270,
+        "startChar": 33,
+        "endLine": 271,
+        "endChar": 50
+      },
+      "revId": "93d6d1fb22c3b4c49caa55b2dacc986ea466dca2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
