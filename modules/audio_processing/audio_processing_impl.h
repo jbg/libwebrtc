@@ -121,7 +121,6 @@ class AudioProcessingImpl : public AudioProcessing {
   // during APM creation).
   GainControl* gain_control() const override;
   LevelEstimator* level_estimator() const override;
-  NoiseSuppression* noise_suppression() const override;
   VoiceDetection* voice_detection() const override;
 
   // TODO(peah): Remove MutateConfig once the new API allows that.
@@ -249,6 +248,7 @@ class AudioProcessingImpl : public AudioProcessing {
   void InitializeEchoController()
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_, crit_capture_);
   void InitializeGainController2() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
+  void InitializeNoiseSuppressor() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializePreAmplifier() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializePostProcessor() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializeAnalyzer() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);

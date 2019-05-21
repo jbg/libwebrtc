@@ -464,6 +464,17 @@ void AudioProcessingSimulator::CreateAudioProcessor() {
     apm_config.residual_echo_detector.enabled = *settings_.use_ed;
   }
 
+  if (settings_.use_ns) {
+    apm_config.noise_suppression.enabled = *settings_.use_ns;
+  }
+  if (settings_.ns_level) {
+    const int level = *settings_.ns_level;
+    RTC_CHECK_GE(level, 0);
+    RTC_CHECK_LE(level, 3);
+    apm_config.noise_suppression.level =
+        static_cast<AudioProcessing::Config::NoiseSuppression::Level>(level);
+  }
+
   RTC_CHECK(ap_builder_);
   if (echo_control_factory) {
     ap_builder_->SetEchoControlFactory(std::move(echo_control_factory));
@@ -477,10 +488,6 @@ void AudioProcessingSimulator::CreateAudioProcessor() {
   if (settings_.use_agc) {
     RTC_CHECK_EQ(AudioProcessing::kNoError,
                  ap_->gain_control()->Enable(*settings_.use_agc));
-  }
-  if (settings_.use_ns) {
-    RTC_CHECK_EQ(AudioProcessing::kNoError,
-                 ap_->noise_suppression()->Enable(*settings_.use_ns));
   }
   if (settings_.use_le) {
     RTC_CHECK_EQ(AudioProcessing::kNoError,
@@ -516,12 +523,6 @@ void AudioProcessingSimulator::CreateAudioProcessor() {
                  ap_->voice_detection()->set_likelihood(
                      static_cast<webrtc::VoiceDetection::Likelihood>(
                          *settings_.vad_likelihood)));
-  }
-  if (settings_.ns_level) {
-    RTC_CHECK_EQ(
-        AudioProcessing::kNoError,
-        ap_->noise_suppression()->set_level(
-            static_cast<NoiseSuppression::Level>(*settings_.ns_level)));
   }
 
   if (settings_.use_ts) {

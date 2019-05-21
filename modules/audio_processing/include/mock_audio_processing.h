@@ -50,17 +50,6 @@ class MockLevelEstimator : public LevelEstimator {
   MOCK_METHOD0(RMS, int());
 };
 
-class MockNoiseSuppression : public NoiseSuppression {
- public:
-  virtual ~MockNoiseSuppression() {}
-  MOCK_METHOD1(Enable, int(bool enable));
-  MOCK_CONST_METHOD0(is_enabled, bool());
-  MOCK_METHOD1(set_level, int(Level level));
-  MOCK_CONST_METHOD0(level, Level());
-  MOCK_CONST_METHOD0(speech_probability, float());
-  MOCK_METHOD0(NoiseEstimate, std::vector<float>());
-};
-
 class MockCustomProcessing : public CustomProcessing {
  public:
   virtual ~MockCustomProcessing() {}
@@ -108,7 +97,6 @@ class MockAudioProcessing : public ::testing::NiceMock<AudioProcessing> {
   MockAudioProcessing()
       : gain_control_(new ::testing::NiceMock<MockGainControl>()),
         level_estimator_(new ::testing::NiceMock<MockLevelEstimator>()),
-        noise_suppression_(new ::testing::NiceMock<MockNoiseSuppression>()),
         voice_detection_(new ::testing::NiceMock<MockVoiceDetection>()) {}
 
   virtual ~MockAudioProcessing() {}
@@ -179,9 +167,6 @@ class MockAudioProcessing : public ::testing::NiceMock<AudioProcessing> {
   virtual MockLevelEstimator* level_estimator() const {
     return level_estimator_.get();
   }
-  virtual MockNoiseSuppression* noise_suppression() const {
-    return noise_suppression_.get();
-  }
   virtual MockVoiceDetection* voice_detection() const {
     return voice_detection_.get();
   }
@@ -191,7 +176,6 @@ class MockAudioProcessing : public ::testing::NiceMock<AudioProcessing> {
  private:
   std::unique_ptr<MockGainControl> gain_control_;
   std::unique_ptr<MockLevelEstimator> level_estimator_;
-  std::unique_ptr<MockNoiseSuppression> noise_suppression_;
   std::unique_ptr<MockVoiceDetection> voice_detection_;
 };
 
