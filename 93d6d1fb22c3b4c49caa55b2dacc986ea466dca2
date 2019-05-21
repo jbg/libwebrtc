@@ -117,6 +117,30 @@
       "revId": "93d6d1fb22c3b4c49caa55b2dacc986ea466dca2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d04e696_5b79d501",
+        "filename": "logging/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-21T08:35:06Z",
+      "side": 1,
+      "message": "Thanks for fixing the comment.",
+      "parentUuid": "5e2c9673_f1e0e206",
+      "range": {
+        "startLine": 270,
+        "startChar": 33,
+        "endLine": 271,
+        "endChar": 50
+      },
+      "revId": "93d6d1fb22c3b4c49caa55b2dacc986ea466dca2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
