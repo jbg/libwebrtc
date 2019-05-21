@@ -45,6 +45,30 @@
       "revId": "dd899e865178cc536c8998a6c84785e68ef0f2cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49db6980_4a7b1fe1",
+        "filename": "call/video_receive_stream.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-05-21T15:04:06Z",
+      "side": 1,
+      "message": "Discussed offline. I\u0027ve changed my mind, and I like this way.",
+      "parentUuid": "b4434a8e_b9c7682f",
+      "range": {
+        "startLine": 194,
+        "startChar": 6,
+        "endLine": 194,
+        "endChar": 41
+      },
+      "revId": "dd899e865178cc536c8998a6c84785e68ef0f2cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
