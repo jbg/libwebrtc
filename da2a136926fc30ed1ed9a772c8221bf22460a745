@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4f567653_61d0d6ac",
+        "filename": "api/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-22T11:04:16Z",
+      "side": 1,
+      "message": "It would make the API smaller (less stuff that break users when we change it, and less for users to read). But if we\u0027re actually making good use of this class being exposed, it can certainly be a good trade-off.\n\nBut if we\u0027re keeping it, can it be called just `RtcEventLogNull`? And can the CreateNull method be removed? (This being old code that you\u0027re just moving, I\u0027ll accept if the answer is \"yes, but it would be too much work\"...)",
+      "parentUuid": "00f54996_fda5b066",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 2
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07e2cd9a_68152de7",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
         "patchSetId": 10
