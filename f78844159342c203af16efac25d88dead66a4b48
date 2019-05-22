@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e716fb44_10de18cd",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "rtc::MakeArrayView",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 112,
+        "endChar": 35
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c3e8d13_ed059aa8",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "can also use RTC_DCHECK_EQ",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "545571e5_afedf994",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "MakeArrayView",
+      "range": {
+        "startLine": 131,
+        "startChar": 22,
+        "endLine": 131,
+        "endChar": 52
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efd89650_13f4000c",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "nit: nullptr",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fe9d5d2_e3158b9b",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "nit: nullptr",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb4f9fd_e6e001d4",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "The DtlsTransport\u0027s writable also takes into account the Dtls state. Shouldn\u0027t this take into account the media transport state?",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f2a51a3_33b77539",
+        "filename": "p2p/base/dtls_transport_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "just #include it",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe412c04_fa914fa4",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 6881,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "double !! ?",
+      "range": {
+        "startLine": 6881,
+        "startChar": 9,
+        "endLine": 6881,
+        "endChar": 11
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f8b1efc_6a95e961",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-05-22T17:28:40Z",
+      "side": 1,
+      "message": "unnecessary diff?",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
