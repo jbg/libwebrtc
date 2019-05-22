@@ -76,6 +76,30 @@
     },
     {
       "key": {
+        "uuid": "3fc48cca_2bdb963e",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T20:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e716fb44_10de18cd",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 112,
+        "endChar": 35
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c3e8d13_ed059aa8",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 3
@@ -116,6 +140,30 @@
     },
     {
       "key": {
+        "uuid": "111e3e43_6afbfe1e",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T20:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "545571e5_afedf994",
+      "range": {
+        "startLine": 131,
+        "startChar": 22,
+        "endLine": 131,
+        "endChar": 52
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "efd89650_13f4000c",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 3
@@ -133,6 +181,24 @@
     },
     {
       "key": {
+        "uuid": "ef295e90_4a0a7a08",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T20:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efd89650_13f4000c",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fe9d5d2_e3158b9b",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 3
@@ -147,6 +213,24 @@
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d2a1325_fe7d842f",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T20:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe9d5d2_e3158b9b",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -181,6 +265,24 @@
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa4d164a_0ab82c74",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T20:48:29Z",
+      "side": 1,
+      "message": "Yep, you are right, we should return writable_ instead of ice_transport_.writabe(). The bool will not be set until Datagram transport connects. I would prefer to have something more straightforward like \"ice_transport_.writabe() || DTSConnected\" but then we\u0027ll have to change firing logic. \n\nFor now let\u0027s return writable_ and keep code similar to dtls_transport.cc. If we want to refactor, we should probably refactor both.",
+      "parentUuid": "2eb4f9fd_e6e001d4",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -232,6 +334,24 @@
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98489c89_3a0e012a",
+        "filename": "p2p/base/dtls_transport_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T20:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f2a51a3_33b77539",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -350,6 +470,30 @@
     },
     {
       "key": {
+        "uuid": "e1af02f4_5eb00335",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 6881,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T20:48:29Z",
+      "side": 1,
+      "message": "Ouch! Good catch, thanks!",
+      "parentUuid": "fe412c04_fa914fa4",
+      "range": {
+        "startLine": 6881,
+        "startChar": 9,
+        "endLine": 6881,
+        "endChar": 11
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f8b1efc_6a95e961",
         "filename": "pc/peer_connection.h",
         "patchSetId": 3
@@ -364,6 +508,24 @@
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f003b9af_caf0fa0a",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T20:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f8b1efc_6a95e961",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
