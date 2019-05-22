@@ -21,6 +21,7 @@
 #include "modules/rtp_rtcp/include/flexfec_sender.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/playout_delay_oracle.h"
+#include "modules/rtp_rtcp/source/rtp_format.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
 #include "modules/rtp_rtcp/source/rtp_sender.h"
 #include "modules/rtp_rtcp/source/rtp_sequence_number_map.h"
@@ -72,6 +73,7 @@ class RTPSenderVideo {
                  int64_t expected_retransmission_time_ms);
 
   void RegisterPayloadType(int8_t payload_type, absl::string_view payload_name);
+  void RegisterRawPayloadType(int8_t payload_type);
 
   // Set RED and ULPFEC payload types. A payload type of -1 means that the
   // corresponding feature is turned off. Note that we DO NOT support enabling
@@ -159,10 +161,10 @@ class RTPSenderVideo {
   RTPSender* const rtp_sender_;
   Clock* const clock_;
 
-  // Maps payload type to codec type, for packetization.
+  // Maps payload type to packetization format.
   // TODO(nisse): Set on construction, to avoid lock.
   rtc::CriticalSection payload_type_crit_;
-  std::map<int8_t, VideoCodecType> payload_type_map_
+  std::map<int8_t, RtpPacketizationFormat> payload_type_map_
       RTC_GUARDED_BY(payload_type_crit_);
 
   // Should never be held when calling out of this class.

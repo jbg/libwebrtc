@@ -373,6 +373,10 @@ void VideoReceiveStream::Start() {
                              &codec, num_cpu_cores_, false));
   }
 
+  for (const auto& payload_type : config_.rtp.raw_payload_types) {
+    rtp_video_stream_receiver_.RegisterRawPayloadType(payload_type);
+  }
+
   RTC_DCHECK(renderer != nullptr);
   video_stream_decoder_.reset(
       new VideoStreamDecoder(&video_receiver_, &stats_proxy_, renderer));

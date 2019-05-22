@@ -824,6 +824,42 @@ TEST_F(RtpVideoStreamReceiverGenericDescriptorTest,
   rtp_video_stream_receiver_->OnRtpPacket(rtp_packet);
 }
 
+TEST_P(RtpVideoStreamReceiverGenericDescriptorTest,
+       ParseGenericDescriptorRawPayload) {
+  const int version = GetParam();
+
+  const std::vector<uint8_t> data = {0, 1, 2, 3, 4};
+  const int kPayloadType = 123;
+
+  VideoCodec codec;
+  codec.plType = kPayloadType;
+  rtp_video_stream_receiver_->AddReceiveCodec(codec, {});
+  rtp_video_stream_receiver_->RegisterRawPayloadType(kPayloadType);
+  rtp_video_stream_receiver_->StartReceive();
+
+  RtpHeaderExtensionMap extension_map;
+  RegisterRtpGenericFrameDescriptorExtension(&extension_map, version);
+  RtpPacketReceived rtp_packet(&extension_map);
+
+  RtpGenericFrameDescriptor generic_descriptor;
+  generic_descriptor.SetFirstPacketInSubFrame(true);
+  generic_descriptor.SetLastPacketInSubFrame(true);
+  ASSERT_TRUE(SetExtensionRtpGenericFrameDescriptorExtension(
+      generic_descriptor, &rtp_packet, version));
+
+  uint8_t* payload = rtp_packet.SetPayloadSize(data.size());
+  memcpy(payload, data.data(), data.size());
+  mock_on_complete_frame_callback_.AppendExpectedBitstream(data.data(),
+                                                           data.size());
+
+  rtp_packet.SetMarker(true);
+  rtp_packet.SetPayloadType(kPayloadType);
+  rtp_packet.SetSequenceNumber(1);
+
+  EXPECT_CALL(mock_on_complete_frame_callback_, DoOnCompleteFrame);
+  rtp_video_stream_receiver_->OnRtpPacket(rtp_packet);
+}
+
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
 TEST_F(RtpVideoStreamReceiverTest, RepeatedSecondarySinkDisallowed) {
   MockRtpPacketSink secondary_sink;
