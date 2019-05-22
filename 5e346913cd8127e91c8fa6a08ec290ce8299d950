@@ -70,6 +70,24 @@
       "revId": "5e346913cd8127e91c8fa6a08ec290ce8299d950",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89899ea1_79de2df8",
+        "filename": "rtc_base/string_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-22T11:58:43Z",
+      "side": 1,
+      "message": "StrCat uses s.resize(size) to resize the string, then \u0026*s.begin() to get the pointer. (It actually uses a backdoor to resize the string without filling it with zeros if possible; IIRC someone was trying to get that into C++20...)",
+      "parentUuid": "f5cd1181_e14cebcd",
+      "revId": "5e346913cd8127e91c8fa6a08ec290ce8299d950",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
