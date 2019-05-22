@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "c2a53e37_6b8a0a85",
+        "filename": "api/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-22T11:45:16Z",
+      "side": 1,
+      "message": "That way to keep api smaller loos good to me.\n\nRtcEventLogNull renamed (though I\u0027m keeping old name for now, both to keep this already large CL smaller and to avoid breaking downstream projects that rely on old name).\nand deprecated CreateNull method (again, can\u0027t remove it yet to avoid breaking downstream projects).",
+      "parentUuid": "4f567653_61d0d6ac",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 2
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07e2cd9a_68152de7",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
         "patchSetId": 10
