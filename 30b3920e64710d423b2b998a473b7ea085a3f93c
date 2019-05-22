@@ -22,6 +22,30 @@
       "revId": "30b3920e64710d423b2b998a473b7ea085a3f93c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c2f7b22_448e88b6",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T23:50:14Z",
+      "side": 1,
+      "message": "Good question, DtlsTransport::OnWritableState does not set_receiving. Added TODO with a question.",
+      "parentUuid": "c99ac1a7_e71891d8",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 12
+      },
+      "revId": "30b3920e64710d423b2b998a473b7ea085a3f93c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

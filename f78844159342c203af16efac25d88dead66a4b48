@@ -628,6 +628,30 @@
     },
     {
       "key": {
+        "uuid": "6dd30e74_c7411ffb",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T23:50:14Z",
+      "side": 1,
+      "message": "Nope, see latest upload (4+) with deleted comment.",
+      "parentUuid": "cb260e7c_f16bf878",
+      "range": {
+        "startLine": 1193,
+        "startChar": 15,
+        "endLine": 1193,
+        "endChar": 29
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c24e0e05_70d27611",
         "filename": "pc/jsep_transport_controller.h",
         "patchSetId": 3
