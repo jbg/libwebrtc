@@ -52,6 +52,24 @@
       "revId": "5e346913cd8127e91c8fa6a08ec290ce8299d950",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0c6ec02_74f98501",
+        "filename": "rtc_base/string_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-22T11:57:32Z",
+      "side": 1,
+      "message": "I just looked at absl::StrCat. It uses the following hack:\n\n  std::string s;\n  ... allocate, using another hack to skip initialization ...\n  char *out \u003d \u0026*s.begin();\n\nNot sure what\u0027s the most portable way to get a working char *, in theory and practice, but I imagine this way is reasonably well tested on the platforms we target.",
+      "parentUuid": "f5cd1181_e14cebcd",
+      "revId": "5e346913cd8127e91c8fa6a08ec290ce8299d950",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
