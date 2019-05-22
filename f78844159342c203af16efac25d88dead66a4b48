@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0d45e321_06d1407b",
+        "filename": "api/media_transport_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "Unused forward declaration?",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8c8a642_e1bd0bf3",
+        "filename": "api/media_transport_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "Should we make this private with a public ctor that just take the rtp_max_packet_size?  We already have one that just takes MediaTransportInterface.",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf1d1bd9_1895b3e4",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "crypto_options_(crypto_options)?",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e716fb44_10de18cd",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 3
@@ -99,6 +150,23 @@
     },
     {
       "key": {
+        "uuid": "ca087d38_76810cc8",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "DtlsTransport has its own writable_, which reflects the state of ICE + DTLS.  It returns that, not ice_transport_-\u003ewritable().  I think we should return writable_ as well, which reflects the state of DatagramTransport + ICE, to get equivalent behavior.",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2eb4f9fd_e6e001d4",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 3
@@ -116,6 +184,40 @@
     },
     {
       "key": {
+        "uuid": "1a898486_29769493",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "I think this should reflect the DatagramTransport state as well.  In DTLS it reflects ICE if DTLS is inactive, or ICE + DTLS if DTLS is active.  So we could reflect just ICE if the test-only flag is true, or ICE + DatagramTransport in production.",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a295415_0fef3211",
+        "filename": "p2p/base/datagram_dtls_adaptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "Do these need to be public?",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9f2a51a3_33b77539",
         "filename": "p2p/base/dtls_transport_internal.h",
         "patchSetId": 3
@@ -127,6 +229,98 @@
       "writtenOn": "2019-05-22T17:28:40Z",
       "side": 1,
       "message": "just #include it",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896bb9f8_7a65293c",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "s/Transport/Adaptor?",
+      "range": {
+        "startLine": 343,
+        "startChar": 17,
+        "endLine": 343,
+        "endChar": 26
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68f516bd_4adbc53a",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "Nit: or",
+      "range": {
+        "startLine": 1093,
+        "startChar": 13,
+        "endLine": 1093,
+        "endChar": 14
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad585ff8_7e676497",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "DatagramTransport",
+      "range": {
+        "startLine": 1193,
+        "startChar": 15,
+        "endLine": 1193,
+        "endChar": 29
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c24e0e05_70d27611",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T20:34:10Z",
+      "side": 1,
+      "message": "DatagramTransportInterface",
+      "range": {
+        "startLine": 327,
+        "startChar": 55,
+        "endLine": 327,
+        "endChar": 78
+      },
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
