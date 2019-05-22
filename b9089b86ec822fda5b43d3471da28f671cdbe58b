@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a359125e_b4e6afe3",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:13:59Z",
+      "side": 1,
+      "message": "Since this is a general concern, perhaps place it at the top of the list of the \"IDFrom\" set of functions, rather than at a random place within it?",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a1e3c93_f0cfe6ae",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:13:59Z",
+      "side": 1,
+      "message": "as a matter of style, I\u0027d prefer RTCMediaStreamTrackKind rather than boolean as the argument here. The idea of \"there are only two\" is already embedded in too many places, we don\u0027t need to add another.",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "545b7d10_ab69712a",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:13:59Z",
+      "side": 1,
+      "message": "Is this a valid reason to create separate objects when you\u0027re not dealing with frame rate yet?\nShouldn\u0027t we rather go for the structure we want to end up with, and leave it to the CL that adds frame rate to sort out how to abstract it properly?",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3484ac9_998946db",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:13:59Z",
+      "side": 1,
+      "message": "Is the +1 allocation safe enough?\n(should be if the SSRCs are randomly allocated. chances of hitting +1 are about the same as an SSRC collision.)",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae3e25ee_2cd3421a",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:13:59Z",
+      "side": 1,
+      "message": "It kind of feels like |sender_track| should be |sender_track_id|.",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "093e6618_9e612244",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:13:59Z",
+      "side": 1,
+      "message": "It seems a bit weird to generate a stats dictionary at all when there is no source. Is there a good reason to do that?",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
