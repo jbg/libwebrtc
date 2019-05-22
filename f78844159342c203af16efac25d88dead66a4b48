@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4405a77c_c7a0a40c",
+        "filename": "api/media_transport_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d45e321_06d1407b",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8c8a642_e1bd0bf3",
         "filename": "api/media_transport_config.h",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b42fd104_7a33033d",
+        "filename": "api/media_transport_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8c8a642_e1bd0bf3",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf1d1bd9_1895b3e4",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caf5b6b5_8df086fc",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf1d1bd9_1895b3e4",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -251,6 +305,24 @@
     },
     {
       "key": {
+        "uuid": "6326698a_4f6819c5",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Yep, already fixed, thanks!",
+      "parentUuid": "ca087d38_76810cc8",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb4f9fd_e6e001d4",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 3
@@ -303,6 +375,24 @@
     },
     {
       "key": {
+        "uuid": "edb7d042_f03f442a",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Done, added if (dtls_state() \u003d\u003d DTLS_TRANSPORT_CONNECTED) in OnReceivingState.",
+      "parentUuid": "1a898486_29769493",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a295415_0fef3211",
         "filename": "p2p/base/datagram_dtls_adaptor.h",
         "patchSetId": 3
@@ -317,6 +407,24 @@
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d86ef3d2_bd72b5d1",
+        "filename": "p2p/base/datagram_dtls_adaptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Good call, moved to private.",
+      "parentUuid": "4a295415_0fef3211",
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -378,6 +486,30 @@
     },
     {
       "key": {
+        "uuid": "7de0e590_03354c07",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896bb9f8_7a65293c",
+      "range": {
+        "startLine": 343,
+        "startChar": 17,
+        "endLine": 343,
+        "endChar": 26
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68f516bd_4adbc53a",
         "filename": "pc/jsep_transport_controller.cc",
         "patchSetId": 3
@@ -398,6 +530,30 @@
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69962665_dc992b6a",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Removed comment completely, logging message above says the same.",
+      "parentUuid": "68f516bd_4adbc53a",
+      "range": {
+        "startLine": 1093,
+        "startChar": 13,
+        "endLine": 1093,
+        "endChar": 14
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -424,6 +580,30 @@
     },
     {
       "key": {
+        "uuid": "fcace3a1_25b33c87",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "The comment is misplaced, removed it. We create NoOpDTLSTransport in a different place.",
+      "parentUuid": "ad585ff8_7e676497",
+      "range": {
+        "startLine": 1193,
+        "startChar": 15,
+        "endLine": 1193,
+        "endChar": 29
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c24e0e05_70d27611",
         "filename": "pc/jsep_transport_controller.h",
         "patchSetId": 3
@@ -444,6 +624,30 @@
       "revId": "f78844159342c203af16efac25d88dead66a4b48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d4c819b_cd5a51b9",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-05-22T22:36:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c24e0e05_70d27611",
+      "range": {
+        "startLine": 327,
+        "startChar": 55,
+        "endLine": 327,
+        "endChar": 78
+      },
+      "revId": "f78844159342c203af16efac25d88dead66a4b48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
