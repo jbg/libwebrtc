@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d57cf29_21767054",
+        "filename": "rtc_base/string_encode.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-22T12:11:03Z",
+      "side": 1,
+      "message": "Is it possible to calculate the exact size in advance? It looks like we do that on line 64. Then we can just DCHECK that we got it right.",
+      "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
