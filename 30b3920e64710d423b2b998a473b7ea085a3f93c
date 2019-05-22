@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c99ac1a7_e71891d8",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-05-22T22:52:44Z",
+      "side": 1,
+      "message": "Do we also need set_receiving(ice_transport_-\u003ereceiving()) here now, in case we lose that signal before \"DTLS\" connects?",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 12
+      },
+      "revId": "30b3920e64710d423b2b998a473b7ea085a3f93c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
