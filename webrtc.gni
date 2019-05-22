@@ -53,6 +53,11 @@ declare_args() {
     rtc_exclude_field_trial_default = false
   }
 
+  # Setting this to true will disable runtime fallback
+  # to the default audio processing stack in CreatePeerConnectionFactory,
+  # allowing the linker to remove the code.
+  rtc_disable_default_audio_processing = false
+
   # Setting this to true will define WEBRTC_EXCLUDE_METRICS_DEFAULT which
   # will tell the pre-processor to remove the default definition of symbols
   # needed to use metrics. In that case a new implementation needs to be
