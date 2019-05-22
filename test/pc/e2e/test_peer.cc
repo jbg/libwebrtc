@@ -20,6 +20,7 @@
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "logging/rtc_event_log/rtc_event_log_factory.h"
 #include "media/engine/webrtc_media_engine.h"
+#include "media/engine/webrtc_media_engine_defaults.h"
 #include "modules/audio_device/include/audio_device.h"
 #include "modules/audio_processing/aec_dump/aec_dump_factory.h"
 #include "modules/audio_processing/include/audio_processing.h"
@@ -201,11 +202,13 @@ struct TestPeerComponents {
     std::unique_ptr<VideoDecoderFactory> video_decoder_factory =
         CreateVideoDecoderFactory(pcf_dependencies, video_analyzer_helper);
 
-    return cricket::WebRtcMediaEngineFactory::Create(
-        adm, webrtc::CreateBuiltinAudioEncoderFactory(),
-        webrtc::CreateBuiltinAudioDecoderFactory(),
-        std::move(video_encoder_factory), std::move(video_decoder_factory),
-        /*audio_mixer=*/nullptr, audio_processing);
+    cricket::MediaEngineDependencies media_deps;
+    media_deps.adm = adm;
+    media_deps.audio_processing = audio_processing;
+    media_deps.video_encoder_factory = std::move(video_encoder_factory);
+    media_deps.video_decoder_factory = std::move(video_decoder_factory);
+    webrtc::SetMediaEngineDefaults(&media_deps);
+    return cricket::CreateMediaEngine(std::move(media_deps));
   }
 
   // Creates PeerConnectionFactoryDependencies objects, providing entities
