@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "20e0a6d6_ca5d93ba",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:54:59Z",
+      "side": 1,
+      "message": "I see - at the moment you don\u0027t have anything to deduplicate on. Accepted.",
+      "parentUuid": "3f039f22_5bdaf321",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3484ac9_998946db",
         "filename": "pc/rtc_stats_collector_unittest.cc",
         "patchSetId": 7
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "For the purpose of testing I think this is OK and it avoid more input surfaces to the function. But just in case I made it \"+ 10\" instead, collision should be unlikely. Even if we have collision it is unlikely to break these tests.",
       "parentUuid": "a3484ac9_998946db",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62e81b82_2116c214",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:54:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cf89e2aa_9100da6f",
       "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -177,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "0f9fc283_ca09f13f",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:54:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a81784d2_4a9db0c3",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "093e6618_9e612244",
         "filename": "pc/rtc_stats_collector_unittest.cc",
         "patchSetId": 7
@@ -206,6 +260,24 @@
       "side": 1,
       "message": "It can still be generated and contain framesPerSecond. I want to create the dictionary because otherwise we don\u0027t have test coverage that the dictionary gets created in rtc_stats_integrationttest.cc which unfortunately does not have a source. I don\u0027t want to add a source to it in this CL because that requires changing PeerConnectionTestWrapper and its dependencies. As-is, we get test coverage for everything in the intergrationtest except \"width\" and \"height\" and we have good coverage for those in this unittest.",
       "parentUuid": "093e6618_9e612244",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c97069cc_0ae62404",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-05-22T13:54:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "891e1654_5412370a",
       "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
