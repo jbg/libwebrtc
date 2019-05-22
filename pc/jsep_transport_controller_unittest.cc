@@ -563,8 +563,6 @@ TEST_F(JsepTransportControllerTest, GetMediaTransportInCallee) {
   EXPECT_EQ(absl::nullopt, media_transport->settings().pre_shared_key);
   EXPECT_TRUE(media_transport->is_connected());
 
-  EXPECT_EQ("fake-remote-settings",
-            media_transport->remote_transport_parameters());
   // Return nullptr for non-existing mids.
   EXPECT_EQ(nullptr, transport_controller_->GetMediaTransport(kVideoMid2));
 
