@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6bf313a2_ed09008f",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-05-22T08:15:16Z",
+      "side": 1,
+      "message": "You can call GetSources but the optional last_received_rtp_system_time_ms_ is unset, which means that the condition is not fulfilled so that this path is not entered.\n\nThis check was added to discover if someone alters the current behavior so that last_received_rtp_system_time_ms is set but not last_received_rtp_timestamp_.",
+      "parentUuid": "bd7e01e2_5fb8c383",
+      "revId": "c262b9b1a56b8e3e6e7a81c15357746d2ee7a66e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd425e80_f19bc786",
         "filename": "video/rtp_video_stream_receiver.cc",
         "patchSetId": 5
