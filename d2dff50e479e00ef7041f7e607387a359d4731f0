@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72e5f2b1_2e059954",
+        "filename": "modules/rtp_rtcp/source/rtp_format.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-22T15:00:35Z",
+      "side": 1,
+      "message": "I\u0027d prefer to not have yet another enum representing codec type. It seems needed to be able to say \"raw\" to RtpPacketizer::Create, which in it self is a somewhat questionable interface (it would be better to register some object knowing how to packetize once per payload type, and not have a Create(...) { switch (codec_type) { create appropriate objects } } once per packet.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 2
+      },
+      "revId": "d2dff50e479e00ef7041f7e607387a359d4731f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
