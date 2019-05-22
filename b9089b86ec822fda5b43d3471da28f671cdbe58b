@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "83ef276e_ab739cdc",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-22T13:50:26Z",
+      "side": 1,
+      "message": "Are you telling me to Consider making TODO comment placements more predictable?\nDone :)",
+      "parentUuid": "a359125e_b4e6afe3",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a1e3c93_f0cfe6ae",
         "filename": "pc/rtc_stats_collector.cc",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6d520d3_0bd86c33",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-22T13:50:26Z",
+      "side": 1,
+      "message": "Agreed, done. I used cricket::MediaType because that is an enum and not a string.",
+      "parentUuid": "2a1e3c93_f0cfe6ae",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "3f039f22_5bdaf321",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-22T13:50:26Z",
+      "side": 1,
+      "message": "Pushing back, I don\u0027t want perfect to stand in the way of progress.\n\nTo get this right is a larger work effort which would distract from the rest of the migration work. In order to get it right I would need to dig in to unfamiliar code. This is only incorrect in edge cases, and few applications are likely to care enough to even notice that it is incorrect if and when it is.\n\nWith this CL people can\u0027t say that these goog stats are missing.",
+      "parentUuid": "545b7d10_ab69712a",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3484ac9_998946db",
         "filename": "pc/rtc_stats_collector_unittest.cc",
         "patchSetId": 7
@@ -67,6 +121,24 @@
       "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf89e2aa_9100da6f",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-22T13:50:26Z",
+      "side": 1,
+      "message": "For the purpose of testing I think this is OK and it avoid more input surfaces to the function. But just in case I made it \"+ 10\" instead, collision should be unlikely. Even if we have collision it is unlikely to break these tests.",
+      "parentUuid": "a3484ac9_998946db",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "a81784d2_4a9db0c3",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-22T13:50:26Z",
+      "side": 1,
+      "message": "|sender_track| is the RTCMediaStreamTrackStats, not the ID?",
+      "parentUuid": "ae3e25ee_2cd3421a",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "093e6618_9e612244",
         "filename": "pc/rtc_stats_collector_unittest.cc",
         "patchSetId": 7
@@ -101,6 +191,24 @@
       "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "891e1654_5412370a",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-05-22T13:50:26Z",
+      "side": 1,
+      "message": "It can still be generated and contain framesPerSecond. I want to create the dictionary because otherwise we don\u0027t have test coverage that the dictionary gets created in rtc_stats_integrationttest.cc which unfortunately does not have a source. I don\u0027t want to add a source to it in this CL because that requires changing PeerConnectionTestWrapper and its dependencies. As-is, we get test coverage for everything in the intergrationtest except \"width\" and \"height\" and we have good coverage for those in this unittest.",
+      "parentUuid": "093e6618_9e612244",
+      "revId": "b9089b86ec822fda5b43d3471da28f671cdbe58b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
