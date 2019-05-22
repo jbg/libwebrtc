@@ -16,6 +16,24 @@
       "revId": "5e346913cd8127e91c8fa6a08ec290ce8299d950",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c7255c3_50b8439a",
+        "filename": "rtc_base/string_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-22T11:37:04Z",
+      "side": 1,
+      "message": "\u003e VLAs are in C99 but not in any standard version of C++. Could you perhaps create an empty std::wstring of length `len16` and write directly into that? That\u0027s the technique used by e.g. absl::StrCat.\n\nAccording to https://en.cppreference.com/w/cpp/string/basic_string/data, the version providing a non-const char* isn\u0027t available until C++17. How does absl::StrCat deal with that? const_cast?\n\nIf all else fails I could copy via an std::vector\u003cchar\u003e. But that\u0027s a bit silly. And there\u0027s no way to move storage between std::vector\u003cT\u003e and std::string\u003cT\u003e, right?\n\nI had no idea what kind of box I was opening here...",
+      "parentUuid": "94588fe2_08cb10ed",
+      "revId": "5e346913cd8127e91c8fa6a08ec290ce8299d950",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
