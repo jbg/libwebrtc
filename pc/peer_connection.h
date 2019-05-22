@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "api/datagram_transport_interface.h"
 #include "api/media_transport_interface.h"
 #include "api/peer_connection_interface.h"
 #include "api/turn_customizer.h"
