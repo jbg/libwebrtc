@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "00f54996_fda5b066",
+        "filename": "api/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-22T09:48:24Z",
+      "side": 1,
+      "message": "With some work it can, but why would that be better?\n\nAs it is now it is possible to have null implementation on the stack or as a member (and lot\u0027s of tests uses that).\nMoving it into .cc file would force putting it on the heap and explicit construction.",
+      "parentUuid": "850fc84f_5f26c7f9",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 2
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07e2cd9a_68152de7",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
         "patchSetId": 10
@@ -91,6 +115,78 @@
       "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa089b2b_ed8daf8c",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-22T09:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07e2cd9a_68152de7",
+      "range": {
+        "startLine": 84,
+        "startChar": 62,
+        "endLine": 84,
+        "endChar": 63
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9af10cb5_a877f199",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-22T09:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8a7332e_132011ed",
+      "range": {
+        "startLine": 84,
+        "startChar": 13,
+        "endLine": 84,
+        "endChar": 17
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0313890b_5f418404",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-22T09:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2ca291d_42dd798d",
+      "range": {
+        "startLine": 84,
+        "startChar": 34,
+        "endLine": 84,
+        "endChar": 37
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
