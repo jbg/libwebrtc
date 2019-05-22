@@ -16,6 +16,24 @@
       "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0aeb0a3_ce38a520",
+        "filename": "rtc_base/string_encode.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-22T14:03:30Z",
+      "side": 1,
+      "message": "Not trivially, I\u0027m afraid. Problem is that the hex_encode_with_delimiter function we call wants to write a NUL byte. I think exact result size is srclen \u003d\u003d 0 ? 0 : 3*srclen - 1. But we have to allocate a writable char array of size 3*srclen to accomodate that NUL.\n\nIf this analysis is right, that means that the resize call always trims a terminating NUL byte.",
+      "parentUuid": "9d57cf29_21767054",
+      "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
