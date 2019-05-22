@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd7e01e2_5fb8c383",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-05-22T08:03:29Z",
+      "side": 1,
+      "message": "Is it not possible for GetSources() to be called until an RTP packet has been received?",
+      "revId": "c262b9b1a56b8e3e6e7a81c15357746d2ee7a66e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd425e80_f19bc786",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5077
+      },
+      "writtenOn": "2019-05-22T08:03:29Z",
+      "side": 1,
+      "message": "likewise - is this really a logic error?",
+      "revId": "c262b9b1a56b8e3e6e7a81c15357746d2ee7a66e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
