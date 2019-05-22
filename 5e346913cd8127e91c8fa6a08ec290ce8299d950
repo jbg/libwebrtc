@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94588fe2_08cb10ed",
+        "filename": "rtc_base/string_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-22T11:12:59Z",
+      "side": 1,
+      "message": "VLAs are in C99 but not in any standard version of C++. Could you perhaps create an empty std::wstring of length `len16` and write directly into that? That\u0027s the technique used by e.g. absl::StrCat.\n\nIt would also be possible to create a C function that creates a VLA on the stack and calls a callback and passes it the VLA\u0027s address, but let\u0027s not get carried away...",
+      "revId": "5e346913cd8127e91c8fa6a08ec290ce8299d950",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
