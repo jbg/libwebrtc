@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "850fc84f_5f26c7f9",
+        "filename": "api/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-22T09:29:24Z",
+      "side": 1,
+      "message": "Can this class live in the .cc file instead?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 2
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07e2cd9a_68152de7",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-22T09:29:24Z",
+      "side": 1,
+      "message": "|",
+      "range": {
+        "startLine": 84,
+        "startChar": 62,
+        "endLine": 84,
+        "endChar": 63
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ca291d_42dd798d",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-22T09:29:24Z",
+      "side": 1,
+      "message": "No definite article before variable names (this goes for most names, although there are some exceptions, e.g. \"the Atlantic Ocean\").",
+      "range": {
+        "startLine": 84,
+        "startChar": 34,
+        "endLine": 84,
+        "endChar": 37
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8a7332e_132011ed",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-22T09:29:24Z",
+      "side": 1,
+      "message": "its",
+      "range": {
+        "startLine": 84,
+        "startChar": 13,
+        "endLine": 84,
+        "endChar": 17
+      },
+      "revId": "da2a136926fc30ed1ed9a772c8221bf22460a745",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
