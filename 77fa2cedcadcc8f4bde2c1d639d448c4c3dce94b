@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c2cd8b5_9531eddd",
+        "filename": "rtc_base/string_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-22T11:19:41Z",
+      "side": 1,
+      "message": "I was sure variable length arrays (a c99 feature, right? And supported by gcc since the beginning) was mainstream C and C++ these days. But the msvc build bot complains that the size isn\u0027t constant, and some downstream project seems to be built with -Wvla, essentially forbidding this language feature. So it appears I was wrong about that.\n\nEven better would be to allocate the string and pass the storage to ::MultibyteToWideChar, avoiding copying via a stack buffer. I\u0027ll try that.\n\nIf forbidding variable length arrays really is desired, should we add -Wvla to all webrtc builds?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 20
+      },
+      "revId": "77fa2cedcadcc8f4bde2c1d639d448c4c3dce94b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
