@@ -13,6 +13,7 @@
 
 #include <limits>
 #include <map>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -194,6 +195,9 @@ class VideoReceiveStream {
       // Map from rtx payload type -> media payload type.
       // For RTX to be enabled, both an SSRC and this mapping are needed.
       std::map<int, int> rtx_associated_payload_types;
+
+      // Payload types that should be depacketized using raw depacketizer.
+      std::set<int> raw_payload_types;
 
       // RTP header extensions used for the received stream.
       std::vector<RtpExtension> extensions;
