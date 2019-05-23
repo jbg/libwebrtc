@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "feddbd76_81af414a",
+        "filename": "p2p/base/connection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-23T07:40:38Z",
+      "side": 1,
+      "message": "Hi, I\u0027m still a little confused about what you intend or not intend to change here.\n\nI take it the Port forward declare needs to stay. Maybe it deserves a brief comment on the circular relationship between Connection and Port.\n\nI still find the forward declare of the ConnectionRequest class odd. Do you intend it to keep it as is, or can you move the real declaration from the .cc file to this header? I would feel better about forward declaring it if it were a private inner class of Connection. But it is used in the declaration of a protected virtual method, OnConnectionRequestResponse, and imo that\u0027s a strong reason to have the declaration somewhere in the header file.",
+      "parentUuid": "0f1180d6_488bd92c",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "783dedb505bcb72be10168b149f6da878123ad31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9a0c269_32e4e63b",
         "filename": "p2p/base/port.h",
         "patchSetId": 2
