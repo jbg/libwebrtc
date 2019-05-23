@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fd2add3_7b6ab0c8",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-23T13:14:21Z",
+      "side": 1,
+      "message": "This name isn\u0027t appropriate for a top-level function. Either add some prefix to provide context, or make it a static method of some related class.\n\nAnd move the documenting comment from the cc file to this declaration.",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 29
+      },
+      "revId": "39dca64cc2f8f3733c0c44e7f21854a4fd4fe2b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
