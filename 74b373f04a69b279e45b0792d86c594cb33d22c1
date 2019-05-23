@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7afe3ae6_b8c03a22",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-23T15:41:20Z",
+      "side": 0,
+      "message": "This should not be removed.",
+      "range": {
+        "startLine": 697,
+        "startChar": 2,
+        "endLine": 697,
+        "endChar": 22
+      },
+      "revId": "74b373f04a69b279e45b0792d86c594cb33d22c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
