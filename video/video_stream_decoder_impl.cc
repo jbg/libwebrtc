@@ -279,6 +279,7 @@ void VideoStreamDecoderImpl::Decoded(VideoFrame& decoded_image,
             .set_timestamp_us(frame_timestamps->render_time_us)
             .set_timestamp_rtp(decoded_image.timestamp())
             .set_id(decoded_image.id())
+            .set_packet_infos(decoded_image.packet_infos())
             .build(),
         casted_decode_time_ms, casted_qp);
   });

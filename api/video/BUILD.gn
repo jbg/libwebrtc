@@ -33,6 +33,7 @@ rtc_source_set("video_frame") {
 
   deps = [
     "..:array_view",
+    "..:rtp_packet_info",
     "..:scoped_refptr",
     "../../rtc_base:checks",
     "../../rtc_base:rtc_base_approved",
@@ -91,6 +92,7 @@ rtc_source_set("encoded_image") {
     ":video_codec_constants",
     ":video_frame",
     ":video_frame_type",
+    "..:rtp_packet_info",
     "../..:webrtc_common",
     "../../rtc_base:checks",
     "../../rtc_base:rtc_base_approved",

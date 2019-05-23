@@ -1247,6 +1247,7 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
                     .set_rotation(video_frame.rotation())
                     .set_id(video_frame.id())
                     .set_update_rect(update_rect)
+                    .set_packet_infos(video_frame.packet_infos())
                     .build();
     out_frame.set_ntp_time_ms(video_frame.ntp_time_ms());
     // Since accumulated_update_rect_ is constructed before cropping,
@@ -1329,6 +1330,7 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
                     .set_rotation(out_frame.rotation())
                     .set_id(out_frame.id())
                     .set_update_rect(update_rect)
+                    .set_packet_infos(out_frame.packet_infos())
                     .build();
   }
 

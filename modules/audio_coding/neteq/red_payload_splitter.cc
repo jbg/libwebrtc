@@ -117,6 +117,17 @@ bool RedPayloadSplitter::SplitRed(PacketList* packet_list) {
         new_packet.priority.red_level =
             rtc::dchecked_cast<int>((new_headers.size() - 1) - i);
         new_packet.payload.SetData(payload_ptr, payload_length);
+
+        if (red_packet.packet_info != nullptr) {
+          new_packet.packet_info = RtpPacketInfo::Create(
+              /*ssrc=*/red_packet.packet_info->ssrc(),
+              /*csrcs=*/std::vector<uint32_t>(),
+              /*sequence_number=*/new_packet.sequence_number,
+              /*rtp_timestamp=*/new_packet.timestamp,
+              /*audio_level=*/absl::nullopt,
+              /*receive_time_ms=*/red_packet.packet_info->receive_time_ms());
+        }
+
         new_packets.push_front(std::move(new_packet));
         payload_ptr += payload_length;
       }

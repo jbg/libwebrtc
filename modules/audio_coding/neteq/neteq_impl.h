@@ -127,7 +127,8 @@ class NetEqImpl : public webrtc::NetEq {
   // Returns 0 on success, -1 on failure.
   int InsertPacket(const RTPHeader& rtp_header,
                    rtc::ArrayView<const uint8_t> payload,
-                   uint32_t receive_timestamp) override;
+                   uint32_t receive_timestamp,
+                   int64_t receive_time_ms) override;
 
   void InsertEmptyPacket(const RTPHeader& rtp_header) override;
 
@@ -211,7 +212,8 @@ class NetEqImpl : public webrtc::NetEq {
   // TODO(hlundin): Merge this with InsertPacket above?
   int InsertPacketInternal(const RTPHeader& rtp_header,
                            rtc::ArrayView<const uint8_t> payload,
-                           uint32_t receive_timestamp)
+                           uint32_t receive_timestamp,
+                           int64_t receive_time_ms)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_sect_);
 
   // Delivers 10 ms of audio data. The data is written to |audio_frame|.
@@ -238,8 +240,10 @@ class NetEqImpl : public webrtc::NetEq {
   // elements. The length of the decoded data is written to |decoded_length|.
   // The speech type -- speech or (codec-internal) comfort noise -- is written
   // to |speech_type|. If |packet_list| contains any SID frames for RFC 3389
-  // comfort noise, those are not decoded.
+  // comfort noise, those are not decoded. Decoded packets are moved to
+  // |decoded_packet_list|.
   int Decode(PacketList* packet_list,
+             PacketList* decoded_packet_list,
              Operations* operation,
              int* decoded_length,
              AudioDecoder::SpeechType* speech_type)
@@ -253,6 +257,7 @@ class NetEqImpl : public webrtc::NetEq {
 
   // Sub-method to Decode(). Performs the actual decoding.
   int DecodeLoop(PacketList* packet_list,
+                 PacketList* decoded_packet_list,
                  const Operations& operation,
                  AudioDecoder* decoder,
                  int* decoded_length,

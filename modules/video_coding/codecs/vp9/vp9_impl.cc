@@ -1643,20 +1643,21 @@ int VP9DecoderImpl::Decode(const EncodedImage& input_image,
   vpx_codec_err_t vpx_ret =
       vpx_codec_control(decoder_, VPXD_GET_LAST_QUANTIZER, &qp);
   RTC_DCHECK_EQ(vpx_ret, VPX_CODEC_OK);
-  int ret = ReturnFrame(img, input_image.Timestamp(), input_image.ntp_time_ms_,
-                        qp, input_image.ColorSpace());
+  int ret =
+      ReturnFrame(img, input_image.Timestamp(), input_image.ntp_time_ms_, qp,
+                  input_image.ColorSpace(), input_image.PacketInfos());
   if (ret != 0) {
     return ret;
   }
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
-int VP9DecoderImpl::ReturnFrame(
-    const vpx_image_t* img,
-    uint32_t timestamp,
-    int64_t ntp_time_ms,
-    int qp,
-    const webrtc::ColorSpace* explicit_color_space) {
+int VP9DecoderImpl::ReturnFrame(const vpx_image_t* img,
+                                uint32_t timestamp,
+                                int64_t ntp_time_ms,
+                                int qp,
+                                const webrtc::ColorSpace* explicit_color_space,
+                                RtpPacketInfos packet_infos) {
   if (img == nullptr) {
     // Decoder OK and nullptr image => No show frame.
     return WEBRTC_VIDEO_CODEC_NO_OUTPUT;
@@ -1703,7 +1704,8 @@ int VP9DecoderImpl::ReturnFrame(
                      .set_timestamp_ms(0)
                      .set_timestamp_rtp(timestamp)
                      .set_ntp_time_ms(ntp_time_ms)
-                     .set_rotation(webrtc::kVideoRotation_0);
+                     .set_rotation(webrtc::kVideoRotation_0)
+                     .set_packet_infos(std::move(packet_infos));
   if (explicit_color_space) {
     builder.set_color_space(*explicit_color_space);
   } else {

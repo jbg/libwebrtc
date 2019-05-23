@@ -77,6 +77,7 @@ void VideoBroadcaster::OnFrame(const webrtc::VideoFrame& frame) {
               .set_rotation(frame.rotation())
               .set_timestamp_us(frame.timestamp_us())
               .set_id(frame.id())
+              .set_packet_infos(frame.packet_infos())
               .build();
       sink_pair.sink->OnFrame(black_frame);
     } else if (!previous_frame_sent_to_all_sinks_) {

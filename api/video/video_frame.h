@@ -14,6 +14,7 @@
 #include <stdint.h>
 
 #include "absl/types/optional.h"
+#include "api/rtp_packet_infos.h"
 #include "api/scoped_refptr.h"
 #include "api/video/color_space.h"
 #include "api/video/hdr_metadata.h"
@@ -62,6 +63,7 @@ class RTC_EXPORT VideoFrame {
     Builder& set_color_space(const ColorSpace* color_space);
     Builder& set_id(uint16_t id);
     Builder& set_update_rect(const UpdateRect& update_rect);
+    Builder& set_packet_infos(RtpPacketInfos packet_infos);
 
    private:
     uint16_t id_ = 0;
@@ -72,16 +74,8 @@ class RTC_EXPORT VideoFrame {
     VideoRotation rotation_ = kVideoRotation_0;
     absl::optional<ColorSpace> color_space_;
     absl::optional<UpdateRect> update_rect_;
+    RtpPacketInfos packet_infos_;
   };
-
-  // To be deprecated. Migrate all use to Builder.
-  VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-             webrtc::VideoRotation rotation,
-             int64_t timestamp_us);
-  VideoFrame(const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
-             uint32_t timestamp_rtp,
-             int64_t render_time_ms,
-             VideoRotation rotation);
 
   ~VideoFrame();
 
@@ -178,6 +172,10 @@ class RTC_EXPORT VideoFrame {
     update_rect_ = update_rect;
   }
 
+  // Get information about packets used to assemble this video frame. Might be
+  // empty if the information isn't available.
+  const RtpPacketInfos& packet_infos() const { return packet_infos_; }
+
  private:
   VideoFrame(uint16_t id,
              const rtc::scoped_refptr<VideoFrameBuffer>& buffer,
@@ -199,6 +197,7 @@ class RTC_EXPORT VideoFrame {
   // Updated since the last frame area. Unless set explicitly, will always be
   // a full frame rectangle.
   UpdateRect update_rect_;
+  RtpPacketInfos packet_infos_;
 };
 
 }  // namespace webrtc
