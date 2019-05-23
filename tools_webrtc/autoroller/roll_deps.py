@@ -56,7 +56,7 @@ CHROMIUM_LOG_TEMPLATE = CHROMIUM_SRC_URL + '/+log/%s'
 CHROMIUM_FILE_TEMPLATE = CHROMIUM_SRC_URL + '/+/%s/%s'
 
 COMMIT_POSITION_RE = re.compile('^Cr-Commit-Position: .*#([0-9]+).*$')
-CLANG_REVISION_RE = re.compile(r'^CLANG_REVISION = \'(\d+)\'$')
+CLANG_REVISION_RE = re.compile(r'^CLANG_REVISION = \'([0-9a-z]+)\'$')
 ROLL_BRANCH_NAME = 'roll_chromium_revision'
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -694,8 +694,7 @@ def main():
   logging.debug('Commit message:\n%s', commit_msg)
 
   _CreateRollBranch(opts.dry_run)
-  if not opts.dry_run:
-    UpdateDepsFile(deps_filename, rev_update, changed_deps, new_cr_content)
+  UpdateDepsFile(deps_filename, rev_update, changed_deps, new_cr_content)
   if _IsTreeClean():
     logging.info("No DEPS changes detected, skipping CL creation.")
   else:
