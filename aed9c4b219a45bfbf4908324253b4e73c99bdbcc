@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2789b17_b7366d0c",
+        "filename": "call/rtp_config.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-23T10:07:27Z",
+      "side": 1,
+      "message": "Can you add one more line of explanation, something like \"empty payload header, additional meta data expected to go into an RTP extension header instead\".",
+      "range": {
+        "startLine": 102,
+        "startChar": 2,
+        "endLine": 102,
+        "endChar": 55
+      },
+      "revId": "aed9c4b219a45bfbf4908324253b4e73c99bdbcc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd9e8f5b_6cea503b",
+        "filename": "modules/rtp_rtcp/source/rtp_format.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-23T10:07:27Z",
+      "side": 1,
+      "message": "Slightly confusing to use the same class for both raw and generic, just different number of constructor arguments. But maybe out of scope for this cl.",
+      "range": {
+        "startLine": 36,
+        "startChar": 29,
+        "endLine": 36,
+        "endChar": 49
+      },
+      "revId": "aed9c4b219a45bfbf4908324253b4e73c99bdbcc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6c39285_3740c117",
+        "filename": "modules/rtp_rtcp/source/rtp_format.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-23T10:07:27Z",
+      "side": 1,
+      "message": "Add a comment explaining what unset means.",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 42
+      },
+      "revId": "aed9c4b219a45bfbf4908324253b4e73c99bdbcc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
