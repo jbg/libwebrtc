@@ -139,8 +139,7 @@ class RtpVideoStreamReceiverTest : public ::testing::Test {
     rtp_video_stream_receiver_ = absl::make_unique<RtpVideoStreamReceiver>(
         Clock::GetRealTimeClock(), &mock_transport_, nullptr, nullptr, &config_,
         rtp_receive_statistics_.get(), nullptr, process_thread_.get(),
-        &mock_nack_sender_, &mock_key_frame_request_sender_,
-        &mock_on_complete_frame_callback_, nullptr);
+        &mock_nack_sender_, &mock_on_complete_frame_callback_, nullptr);
   }
 
   RTPVideoHeader GetDefaultH264VideoHeader() {
@@ -199,7 +198,6 @@ class RtpVideoStreamReceiverTest : public ::testing::Test {
   const webrtc::test::ScopedFieldTrials override_field_trials_;
   VideoReceiveStream::Config config_;
   MockNackSender mock_nack_sender_;
-  MockKeyFrameRequestSender mock_key_frame_request_sender_;
   MockTransport mock_transport_;
   MockOnCompleteFrameCallback mock_on_complete_frame_callback_;
   std::unique_ptr<ProcessThread> process_thread_;
@@ -542,6 +540,7 @@ TEST_F(RtpVideoStreamReceiverTest, PaddingInMediaStream) {
       nullptr, 0, rtp_header, video_header, absl::nullopt, false);
 }
 
+#if 0
 TEST_F(RtpVideoStreamReceiverTest, RequestKeyframeIfFirstFrameIsDelta) {
   RTPHeader rtp_header;
   RTPVideoHeader video_header;
@@ -555,6 +554,7 @@ TEST_F(RtpVideoStreamReceiverTest, RequestKeyframeIfFirstFrameIsDelta) {
   rtp_video_stream_receiver_->OnReceivedPayloadData(
       data.data(), data.size(), rtp_header, video_header, absl::nullopt, false);
 }
+#endif
 
 TEST_F(RtpVideoStreamReceiverTest, SecondarySinksGetRtpNotifications) {
   rtp_video_stream_receiver_->StartReceive();
