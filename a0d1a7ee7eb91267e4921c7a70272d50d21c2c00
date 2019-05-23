@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d64c776c_aba3ce2b",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-23T16:44:33Z",
+      "side": 1,
+      "message": "not sure it make sense to use same value for rtx as for regular stream (since we never nack anything on the rtx)\nmay be use kDefaultMaxReorderingThreshold (as if there is no nack)\nor do not set it at all (...to use default value)",
+      "range": {
+        "startLine": 135,
+        "startChar": 30,
+        "endLine": 135,
+        "endChar": 54
+      },
+      "revId": "a0d1a7ee7eb91267e4921c7a70272d50d21c2c00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
