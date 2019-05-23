@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f60244c3_1bd3526a",
+        "filename": "rtc_base/string_encode.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-23T08:52:00Z",
+      "side": 1,
+      "message": "This can be\n\n  delimiter \u003d\u003d \u0027\\0\u0027 ? 2 * srclen + 1 : 3 * srclen\n\nOtherwise we allocate 50% too much if there is no delimiter.",
+      "revId": "829ad7fbf0a4781dfb839e91e5135bd4ca86db9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
