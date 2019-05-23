@@ -221,7 +221,7 @@ TEST(AudioReceiveStreamTest, ConfigToString) {
       "{rtp_history_ms: 0}, extensions: [{uri: "
       "urn:ietf:params:rtp-hdrext:ssrc-audio-level, id: 3}]}, "
       "rtcp_send_transport: null, media_transport_config: {media_transport: "
-      "null}}",
+      "null, rtp_max_packet_size:nullopt}}",
       config.ToString());
 }
 
