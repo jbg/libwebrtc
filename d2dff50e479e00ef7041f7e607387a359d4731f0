@@ -46,6 +46,30 @@
       "revId": "d2dff50e479e00ef7041f7e607387a359d4731f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80330bae_cca4ec87",
+        "filename": "modules/rtp_rtcp/source/rtp_format.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-23T06:42:30Z",
+      "side": 1,
+      "message": "No, I don\u0027t think adding Raw to VideoCodecType would improve things. Some options options (besides a complete revamp of RtpPacketizer::Create) are:\n\n* Use a separate create function for the raw packetizer.\n\n* Add a bool use_raw flag to the RtpPacketizer::Create argument list.\n\n* Change the VideoCodecType type argument to absl::optional\u003cVideoCodecType\u003e, with unset meaning raw.\n\n* Define a class representing packetization method, initially with only two members VideoCodecType type and bool use_raw, and pass to RtpPacketizer::Create, with the plan to extend it with some virtual methods to do packetization, a subclass per packetization type and obsolete RtpPacketizer::Create.\n\nI can\u0027t say what\u0027s best. If you think a new enum is the best option for now, I won\u0027t block you. I\u0027m just a little grumpy because I deleted more or less the same enum a year ago, see https://webrtc-review.googlesource.com/79561 :-)",
+      "parentUuid": "22aba776_06f0acdd",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 2
+      },
+      "revId": "d2dff50e479e00ef7041f7e607387a359d4731f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
