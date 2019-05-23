@@ -22,6 +22,30 @@
       "revId": "74b373f04a69b279e45b0792d86c594cb33d22c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e219c14a_7b431209",
+        "filename": "tools_webrtc/autoroller/roll_deps.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-05-23T16:31:45Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "7afe3ae6_b8c03a22",
+      "range": {
+        "startLine": 697,
+        "startChar": 2,
+        "endLine": 697,
+        "endChar": 22
+      },
+      "revId": "74b373f04a69b279e45b0792d86c594cb33d22c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
