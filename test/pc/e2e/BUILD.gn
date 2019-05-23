@@ -204,6 +204,7 @@ if (rtc_include_tests) {
       "../../../logging:rtc_event_log_impl_base",
       "../../../media:rtc_audio_video",
       "../../../media:rtc_media_base",
+      "../../../media:rtc_media_engine_defaults",
       "../../../modules/audio_device:audio_device_api",
       "../../../modules/audio_device:audio_device_impl",
       "../../../modules/audio_processing:api",

@@ -20,6 +20,7 @@
 #include "api/fec_controller.h"
 #include "api/peer_connection_interface.h"
 #include "api/scoped_refptr.h"
+#include "api/task_queue/global_task_queue_factory.h"
 #include "api/transport/network_control.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
@@ -47,11 +48,17 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
   if (!audio_processing)
     audio_processing = AudioProcessingBuilder().Create();
 
-  std::unique_ptr<cricket::MediaEngineInterface> media_engine =
-      cricket::WebRtcMediaEngineFactory::Create(
-          default_adm, audio_encoder_factory, audio_decoder_factory,
-          std::move(video_encoder_factory), std::move(video_decoder_factory),
-          audio_mixer, audio_processing);
+  cricket::MediaEngineDependencies media_dependencies;
+  media_dependencies.adm = default_adm;
+  media_dependencies.audio_encoder_factory = audio_encoder_factory;
+  media_dependencies.audio_decoder_factory = audio_decoder_factory;
+  media_dependencies.audio_mixer = audio_mixer;
+  media_dependencies.audio_processing = audio_processing;
+  media_dependencies.video_encoder_factory = std::move(video_encoder_factory);
+  media_dependencies.video_decoder_factory = std::move(video_decoder_factory);
+  media_dependencies.task_queue_factory = &webrtc::GlobalTaskQueueFactory();
+
+  auto media_engine = cricket::CreateMediaEngine(std::move(media_dependencies));
 
   std::unique_ptr<CallFactoryInterface> call_factory = CreateCallFactory();
 
