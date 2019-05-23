@@ -70,6 +70,24 @@
       "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b1a7e32_06b643a5",
+        "filename": "rtc_base/string_encode.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-23T11:15:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9e994f9_b3ff1195",
+      "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
