@@ -34,6 +34,24 @@
       "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c43d073_5115dce9",
+        "filename": "rtc_base/string_encode.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-23T08:48:21Z",
+      "side": 1,
+      "message": "So extract a subroutine that does everything except add a null terminator; it could take a pointer to a buffer of size\n\n  delimiter \u003d\u003d \u0027\\0\u0027 ? 2 * len : 3 * len - 1",
+      "parentUuid": "a0aeb0a3_ce38a520",
+      "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
