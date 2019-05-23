@@ -52,6 +52,24 @@
       "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9e994f9_b3ff1195",
+        "filename": "rtc_base/string_encode.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-23T08:59:34Z",
+      "side": 1,
+      "message": "I don\u0027t really like adding *more* functions here...\n\nBut it seems the variants not returning an rtc::string are unused outside of this file. So I could try move them to the anonymous namespace and change them at will.",
+      "parentUuid": "9c43d073_5115dce9",
+      "revId": "b3acc06adec8eb7d2e83fbc7febeaad424010e2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
