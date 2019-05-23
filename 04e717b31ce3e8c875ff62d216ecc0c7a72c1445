@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a118ab5_75f744da",
+        "filename": "api/create_peerconnection_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-23T06:07:16Z",
+      "side": 1,
+      "message": "This CL is similar to https://webrtc-review.googlesource.com/c/src/+/128227 and there was a discussion there (https://webrtc-review.googlesource.com/c/src/+/128227/4/api/create_peerconnection_factory.cc#48) that didn\u0027t reach a consensus about the value of the CL.\n\nI suggest you continue the thread on https://webrtc-review.googlesource.com/c/src/+/128227 and try to land that one.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "04e717b31ce3e8c875ff62d216ecc0c7a72c1445",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
