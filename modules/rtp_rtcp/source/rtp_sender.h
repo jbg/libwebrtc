@@ -110,6 +110,9 @@ class RTPSender : public AcknowledgedPacketsObserver {
                                        int64_t capture_time_ms,
                                        bool retransmission,
                                        const PacedPacketInfo& pacing_info);
+  RtpPacketSendResult TimeToSendPacket(std::unique_ptr<RtpPacketToSend> packet,
+                                       bool retransmission,
+                                       const PacedPacketInfo& pacing_info);
   size_t TimeToSendPadding(size_t bytes, const PacedPacketInfo& pacing_info);
 
   // NACK.
@@ -300,6 +303,10 @@ class RTPSender : public AcknowledgedPacketsObserver {
 
   const bool send_side_bwe_with_overhead_;
   const bool legacy_packet_history_storage_mode_;
+  // If true, PacedSender should only reference packets as in legacy mode.
+  // If false, PacedSender may have direct ownership of RtpPacketToSend objects.
+  // Defaults to false.
+  const bool pacer_reference_packets_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RTPSender);
 };

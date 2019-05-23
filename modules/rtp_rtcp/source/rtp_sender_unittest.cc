@@ -144,6 +144,8 @@ class MockRtpPacketSender : public RtpPacketSender {
                     int64_t capture_time_ms,
                     size_t bytes,
                     bool retransmission));
+  MOCK_METHOD3(InsertPacket,
+               void(std::unique_ptr<RtpPacketToSend>, Priority, bool));
 };
 
 class MockTransportSequenceNumberAllocator

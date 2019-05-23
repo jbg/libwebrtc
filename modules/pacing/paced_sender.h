@@ -50,6 +50,12 @@ class PacedSender : public Pacer {
         int64_t capture_time_ms,
         bool retransmission,
         const PacedPacketInfo& cluster_info) = 0;
+
+    virtual RtpPacketSendResult TimeToSendPacket(
+        std::unique_ptr<RtpPacketToSend> packet,
+        bool retransmission,
+        const PacedPacketInfo& cluster_info) = 0;
+
     // Called when it's a good time to send a padding data.
     // Returns the number of bytes sent.
     virtual size_t TimeToSendPadding(size_t bytes,
@@ -114,6 +120,10 @@ class PacedSender : public Pacer {
                     size_t bytes,
                     bool retransmission) override;
 
+  void InsertPacket(std::unique_ptr<RtpPacketToSend> packet,
+                    Priority priority,
+                    bool retransmission) override;
+
   // Currently audio traffic is not accounted by pacer and passed through.
   // With the introduction of audio BWE audio traffic will be accounted for
   // the pacer budget calculation. The audio traffic still will be injected
@@ -162,10 +172,10 @@ class PacedSender : public Pacer {
   void UpdateBudgetWithBytesSent(size_t bytes)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);
 
-  const RoundRobinPacketQueue::Packet* GetPendingPacket(
+  RoundRobinPacketQueue::PacketInfo* GetPendingPacket(
       const PacedPacketInfo& pacing_info)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);
-  void OnPacketSent(const RoundRobinPacketQueue::Packet* packet)
+  void OnPacketSent(RoundRobinPacketQueue::PacketInfo* packet)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);
   void OnPaddingSent(size_t padding_sent)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);

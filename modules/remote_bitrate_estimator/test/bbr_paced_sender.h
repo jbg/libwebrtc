@@ -68,6 +68,12 @@ class BbrPacedSender : public Pacer {
                     int64_t capture_time_ms,
                     size_t bytes,
                     bool retransmission) override;
+  void InsertPacket(std::unique_ptr<RtpPacketToSend> packet,
+                    Priority priority,
+                    bool retransmission) {
+    // TODO(sprang): Fix this?
+    RTC_NOTREACHED();
+  }
   void SetAccountForAudioPackets(bool account_for_audio) override {}
   int64_t TimeUntilNextProcess() override;
   void OnBytesAcked(size_t bytes) override;

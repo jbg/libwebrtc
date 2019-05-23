@@ -115,6 +115,12 @@ class PacedVideoSender : public VideoSender, public PacedSender::PacketSender {
       int64_t capture_time_ms,
       bool retransmission,
       const PacedPacketInfo& pacing_info) override;
+  RtpPacketSendResult TimeToSendPacket(
+      std::unique_ptr<RtpPacketToSend> packet,
+      bool retransmission,
+      const PacedPacketInfo& pacing_info) override {
+    RTC_NOTREACHED() << "Fix this.";
+  }
   size_t TimeToSendPadding(size_t bytes,
                            const PacedPacketInfo& pacing_info) override;
 
