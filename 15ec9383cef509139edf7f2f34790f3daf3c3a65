@@ -70,6 +70,30 @@
       "revId": "15ec9383cef509139edf7f2f34790f3daf3c3a65",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87a49228_137d7cf6",
+        "filename": "system_wrappers/source/cpu_info.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T08:08:28Z",
+      "side": 1,
+      "message": "\u003e In general, sysconf can return -1 in case of error.\n\nThen we should check for that explictly and handle that error case (and possibly log a message when it happens, it indicates some problem with system config or permissions), just like we do in the mac/ios case.\n\n\u003e But the main point of this CL is to move the default to the return by enforcing it instead of assuming syscalls output is always greater than 0\n\nI think we should generally assume that syscalls work correctly. I\u0027d prefer to add correct error handling, and an RTC_CHECK_GT(number_of_cores, 0) at the end of a function. And add further workarounds only if there\u0027s some evidence that the syscalls we use are buggy on systems that we want to support.",
+      "parentUuid": "d9e0202e_216e572c",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 45
+      },
+      "revId": "15ec9383cef509139edf7f2f34790f3daf3c3a65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
