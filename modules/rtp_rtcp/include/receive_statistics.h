@@ -72,7 +72,8 @@ class ReceiveStatistics : public ReceiveStatisticsProvider,
   virtual StreamStatistician* GetStatistician(uint32_t ssrc) const = 0;
 
   // Sets the max reordering threshold in number of packets.
-  virtual void SetMaxReorderingThreshold(int max_reordering_threshold) = 0;
+  virtual void SetMaxReorderingThreshold(uint32_t ssrc,
+                                         int max_reordering_threshold) = 0;
   // Detect retransmissions, enabling updates of the retransmitted counters. The
   // default is false.
   virtual void EnableRetransmitDetection(uint32_t ssrc, bool enable) = 0;
