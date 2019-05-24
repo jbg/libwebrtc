@@ -94,6 +94,30 @@
       "revId": "15ec9383cef509139edf7f2f34790f3daf3c3a65",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c462a769_b1420cb3",
+        "filename": "system_wrappers/source/cpu_info.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-24T09:39:58Z",
+      "side": 1,
+      "message": "Ok, I agree with your idea.\n\nSo, Linux and Android have been take care in PS#5, the zircon syscall cannot fail (https://fuchsia.googlesource.com/fuchsia/+/refs/heads/master/zircon/docs/syscalls/system_get_num_cpus.md) and macOS/iOS was already done.\n\nI still need to check Windows but in the meantime I have undone my previous changes and addressed your comments.",
+      "parentUuid": "87a49228_137d7cf6",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 45
+      },
+      "revId": "15ec9383cef509139edf7f2f34790f3daf3c3a65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
