@@ -128,8 +128,12 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
   const int max_reordering_threshold = (config_.rtp.nack.rtp_history_ms > 0)
                                            ? kMaxPacketAgeToNack
                                            : kDefaultMaxReorderingThreshold;
-  rtp_receive_statistics_->SetMaxReorderingThreshold(max_reordering_threshold);
-
+  rtp_receive_statistics_->SetMaxReorderingThreshold(config_.rtp.remote_ssrc,
+                                                     max_reordering_threshold);
+  if (config_.rtp.rtx_ssrc) {
+    rtp_receive_statistics_->SetMaxReorderingThreshold(
+        config_.rtp.rtx_ssrc, max_reordering_threshold);
+  }
   if (config_.rtp.rtcp_xr.receiver_reference_time_report)
     rtp_rtcp_->SetRtcpXrRrtrStatus(true);
 
