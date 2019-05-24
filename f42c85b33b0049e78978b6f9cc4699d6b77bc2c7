@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65a86cfb_60702193",
+        "filename": "media/engine/webrtc_media_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-24T16:43:26Z",
+      "side": 1,
+      "message": "may be move these two check inside \n#ifdef HAVE_WEBRTC_VIDEO block",
+      "revId": "f42c85b33b0049e78978b6f9cc4699d6b77bc2c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
