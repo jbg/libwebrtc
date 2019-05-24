@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "29324e8e_4403d1de",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-24T09:05:49Z",
+      "side": 1,
+      "message": "Suggestion:\nsince this pattern is used more than once, may factor it out into private helper:\nStreamStatisticianImpl\u0026 GetOrCreate(uint32_t ssrc) {\n  rtc::CritScope cs(\u0026receive_statistics_lock_);\n  StreamStatisticianImpl*\u0026 impl \u003d statisticians_[ssrc];\n  if (impl \u003d\u003d nullptr) {  // new element\n    impl \u003d new StreamStatisticianImpl(ssrc, clock_, rtcp_stats_callback_,\n                                      rtp_stats_callback_);\n  }\n  return *impl;\n}\n\nthen this and next function will become one-liners:\nGetOrCreate(ssrc).SetMaxReorderingThreshold(max_reordering_thireshold);",
+      "range": {
+        "startLine": 415,
+        "startChar": 4,
+        "endLine": 416,
+        "endChar": 46
+      },
+      "revId": "a0d1a7ee7eb91267e4921c7a70272d50d21c2c00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d64c776c_aba3ce2b",
         "filename": "video/rtp_video_stream_receiver.cc",
         "patchSetId": 1
@@ -37,6 +60,30 @@
       "side": 1,
       "message": "This was only to keep behavior unchanged. I agree it\u0027s questionable if that behavior makes sense.\n\nWhat do you advice, just delete this block it and rely on the default for rtx stats? Or keep it for now with a TODO item and a followup to delete it?",
       "parentUuid": "d64c776c_aba3ce2b",
+      "range": {
+        "startLine": 135,
+        "startChar": 30,
+        "endLine": 135,
+        "endChar": 54
+      },
+      "revId": "a0d1a7ee7eb91267e4921c7a70272d50d21c2c00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4370100f_0a01a8bf",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-24T09:05:49Z",
+      "side": 1,
+      "message": "I have slight preference to \"keep it for now with a TODO\".\n[to avoid reverting full idea if that behavior change turn out to be a problem]",
+      "parentUuid": "b2844dac_fecab010",
       "range": {
         "startLine": 135,
         "startChar": 30,
