@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0adf77de_05767cdc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T10:50:17Z",
+      "side": 1,
+      "message": "Typo.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "a4976f2adf02dedb961b8d041b2a10bed23dbbbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cf28804_d6fa042c",
+        "filename": "system_wrappers/source/cpu_info.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T10:50:17Z",
+      "side": 1,
+      "message": "Delete or update comment, since we now handle errors explicitly.\n\nConsider also deleting the initialization. That way we can get compile warnings if some branch fails to assign it.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 0
+      },
+      "revId": "a4976f2adf02dedb961b8d041b2a10bed23dbbbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af598f7f_bc6bd850",
+        "filename": "system_wrappers/source/cpu_info.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T10:50:17Z",
+      "side": 1,
+      "message": "And if initialization is deleted, a number_of_cores \u003d 1; must be added here instead.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 60
+      },
+      "revId": "a4976f2adf02dedb961b8d041b2a10bed23dbbbc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
