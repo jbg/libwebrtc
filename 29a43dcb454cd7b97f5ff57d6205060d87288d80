@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bef92aae_06b83293",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T09:42:48Z",
+      "side": 1,
+      "message": "I was considering changing statisticians_ to uniwue_ptr, and delete the constructor. But fials here; we\u0027d need an operation that copies a uint32_t -\u003e unique_ptr mapping into a uint32_t -\u003e raw pointer mapping. Is there any nice and concise way to do that?",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 35
+      },
+      "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eda4c2e_99159309",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T09:42:48Z",
+      "side": 1,
+      "message": "Does the coding style allow use of covariant return types like this? Otherwise I\u0027d need a private method with a different name for this, which is slightly annoying.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 72
+      },
+      "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
