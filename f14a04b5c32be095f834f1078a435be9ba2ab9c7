@@ -105,6 +105,30 @@
       "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1b155e7_4d16dc1f",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-24T11:51:53Z",
+      "side": 1,
+      "message": "Different change made, as per offline discussion.",
+      "parentUuid": "8aaf0d5a_5f8b36b9",
+      "range": {
+        "startLine": 190,
+        "startChar": 36,
+        "endLine": 190,
+        "endChar": 48
+      },
+      "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
