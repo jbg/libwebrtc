@@ -81,6 +81,30 @@
       "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aaf0d5a_5f8b36b9",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T11:24:55Z",
+      "side": 1,
+      "message": "\u003e 1. Please suggest a better name? I cannot think of one.\n\nI also find it difficult (naming s one of the unsolved computer science problems ;-) ). Which I why I suggested something different.\n\n\u003e 2. What\u0027s the benefit of the owner of RTPSenderVideo being aware of an implementation detail such as rtp_sequence_number_map_?\n\nIf a flag is used only to control the creation of some object, I think changing to injecting that object makes the code clearer, since a flag can have a lot of other effects. The caller doesn\u0027t need not know any internals of the injected object, and the callee doesn\u0027t need to know why the object was injected.\n\nAnd I don\u0027t think of RtpSequenceNumberMap as purely an implementation detail: it\u0027s purpose is to aid coordination with other parts of the pipeline. Now we\u0027re getting a bit out of scope for this cl, but I think it would make sense to\n\na) Inject RtpSequenceNumberMap here\n\nb) Let RTPSenderVideo access that object exclusively for inserting entries.\n\nc) Move the extraction code elsewhere, and delete RTPSenderVideo::GetSentRtpPacketInfos.\n\nd) Then EncoderRtcpFeedback no longer needs access to the RTPVideoSender, it only needs the RtpSequenceNumberMap. Hopefully one could then also rearrange construction to make it a construction time argument, and delete SetRtpSender.\n\nIn that context, I think doing step a) in this cl is nice. (And maybe ownership should stay higher up, but for now I think unique_ptr is fine, that would change as part of step c)).",
+      "parentUuid": "89ca464b_9890190e",
+      "range": {
+        "startLine": 190,
+        "startChar": 36,
+        "endLine": 190,
+        "endChar": 48
+      },
+      "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
