@@ -16,6 +16,24 @@
       "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ee96e12_d52620a6",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-24T10:57:35Z",
+      "side": 1,
+      "message": "1. https://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/loss_notification_controller_unittest.cc tests that it is sent at the right time.\n2. The consumer of the messages - the VP8 encoder - should have its own unit tests for making sure the messages are handled correctly. We don\u0027t have such an encoder in open-source WebRTC atm.",
+      "parentUuid": "c928868d_0779abbd",
+      "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
