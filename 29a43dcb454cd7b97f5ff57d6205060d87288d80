@@ -45,6 +45,30 @@
       "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a9cf8b6_43914b45",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-24T09:53:14Z",
+      "side": 1,
+      "message": "I don\u0027t recall seeing any specific prohibition, and this feature has no obvious sharp corners. So assume it\u0027s allowed until you hear otherwise.",
+      "parentUuid": "0eda4c2e_99159309",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 72
+      },
+      "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
