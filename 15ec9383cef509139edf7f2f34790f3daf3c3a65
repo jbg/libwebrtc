@@ -118,6 +118,30 @@
       "revId": "15ec9383cef509139edf7f2f34790f3daf3c3a65",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49178983_7e229133",
+        "filename": "system_wrappers/source/cpu_info.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-24T09:46:19Z",
+      "side": 1,
+      "message": "I cannot find anything meaningful about the Windows case but I think the RTC_CHECK_GT we added is enough.",
+      "parentUuid": "c462a769_b1420cb3",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 45
+      },
+      "revId": "15ec9383cef509139edf7f2f34790f3daf3c3a65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
