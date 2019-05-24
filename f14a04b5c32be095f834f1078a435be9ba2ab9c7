@@ -34,6 +34,29 @@
       "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "591cb7f0_e11f3523",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T11:03:40Z",
+      "side": 1,
+      "message": "If the only use of this flag in this class is to decide whether or not to create the map, consider renaming the argument to something more specific. \n\nBut maybe even better to let the caller create the map, and instead have an argument of type\n\n  std::unique_ptr\u003cRtpSequenceNumberMap\u003e \n\n?",
+      "range": {
+        "startLine": 190,
+        "startChar": 36,
+        "endLine": 190,
+        "endChar": 48
+      },
+      "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
