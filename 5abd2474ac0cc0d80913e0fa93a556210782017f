@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6cbc4f9_c519e96c",
+        "filename": "system_wrappers/source/cpu_info.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T11:39:14Z",
+      "side": 1,
+      "message": "This should be changed to just\n\n  static uint32_t logical_cpus \u003d static_cast\u003cuint32_t\u003e(internal::DetectNumberOfCores();\n  return logical_cpus;\n\nto be thread safe (according to C++11 rules, if I remember correctly). In this cl or a separate one.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 22
+      },
+      "revId": "5abd2474ac0cc0d80913e0fa93a556210782017f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
