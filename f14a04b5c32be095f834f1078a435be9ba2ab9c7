@@ -57,6 +57,30 @@
       "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89ca464b_9890190e",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-24T11:06:17Z",
+      "side": 1,
+      "message": "1. Please suggest a better name? I cannot think of one.\n2. What\u0027s the benefit of the owner of RTPSenderVideo being aware of an implementation detail such as rtp_sequence_number_map_?",
+      "parentUuid": "591cb7f0_e11f3523",
+      "range": {
+        "startLine": 190,
+        "startChar": 36,
+        "endLine": 190,
+        "endChar": 48
+      },
+      "revId": "f14a04b5c32be095f834f1078a435be9ba2ab9c7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
