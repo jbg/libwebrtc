@@ -22,6 +22,30 @@
       "revId": "a0d1a7ee7eb91267e4921c7a70272d50d21c2c00",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2844dac_fecab010",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T08:37:34Z",
+      "side": 1,
+      "message": "This was only to keep behavior unchanged. I agree it\u0027s questionable if that behavior makes sense.\n\nWhat do you advice, just delete this block it and rely on the default for rtx stats? Or keep it for now with a TODO item and a followup to delete it?",
+      "parentUuid": "d64c776c_aba3ce2b",
+      "range": {
+        "startLine": 135,
+        "startChar": 30,
+        "endLine": 135,
+        "endChar": 54
+      },
+      "revId": "a0d1a7ee7eb91267e4921c7a70272d50d21c2c00",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
