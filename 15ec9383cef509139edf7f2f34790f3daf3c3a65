@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "752ae889_b5285a22",
+        "filename": "system_wrappers/source/cpu_info.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-24T07:38:14Z",
+      "side": 1,
+      "message": "I\u0027d like to understand which of these cases can produce a count of zero. Can you add some details either to the commit message or in a linked bug?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 45
+      },
+      "revId": "15ec9383cef509139edf7f2f34790f3daf3c3a65",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
