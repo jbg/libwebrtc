@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6b17137e_af669e2e",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-24T09:54:50Z",
+      "side": 1,
+      "message": "nothing comes to my mind.\nLet it be as is for now since it is not straight-forward to change.\n(and there are other issues with code that probably need addressing making it even less trivial)\n\nDo not let it distract you from the main change.",
+      "parentUuid": "bef92aae_06b83293",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 35
+      },
+      "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0eda4c2e_99159309",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
         "patchSetId": 4
@@ -69,6 +93,30 @@
       "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9428a60_7a89cd44",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-24T09:54:50Z",
+      "side": 1,
+      "message": "may be keep it as it was to keep interface clean from the implementation specific type. (as I can see FecPacketReceived is the only function that need Impl without creating it).",
+      "parentUuid": "0eda4c2e_99159309",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 72
+      },
+      "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
