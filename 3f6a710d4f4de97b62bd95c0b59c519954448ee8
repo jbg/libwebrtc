@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73ba7443_c1d44d68",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-24T10:03:17Z",
+      "side": 1,
+      "message": "Consider returning either const std::vector\u003cuint32_t\u003e\u0026 or rtc::ArrayView\u003cconst unit32_t\u003e. Because currently, a copy is made even if the caller just wants to look at the csrcs.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "3f6a710d4f4de97b62bd95c0b59c519954448ee8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7337ea44_02c4b5f3",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-24T10:03:17Z",
+      "side": 1,
+      "message": "Please document the member variables. (Maybe you can document them all at once by just pointing at some standards document?)",
+      "revId": "3f6a710d4f4de97b62bd95c0b59c519954448ee8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
