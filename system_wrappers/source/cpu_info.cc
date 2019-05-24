@@ -33,6 +33,10 @@ static int DetectNumberOfCores() {
   number_of_cores = static_cast<int>(si.dwNumberOfProcessors);
 #elif defined(WEBRTC_LINUX) || defined(WEBRTC_ANDROID)
   number_of_cores = static_cast<int>(sysconf(_SC_NPROCESSORS_ONLN));
+  if (number_of_cores < 0) {
+    RTC_LOG(LS_ERROR) << "Failed to get number of cores";
+    number_of_cores = 1;
+  }
 #elif defined(WEBRTC_MAC) || defined(WEBRTC_IOS)
   int name[] = {CTL_HW, HW_AVAILCPU};
   size_t size = sizeof(number_of_cores);
@@ -48,6 +52,7 @@ static int DetectNumberOfCores() {
 
   RTC_LOG(LS_INFO) << "Available number of cores: " << number_of_cores;
 
+  RTC_CHECK_GT(number_of_cores, 0);
   return number_of_cores;
 }
 }  // namespace internal
