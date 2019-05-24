@@ -33,7 +33,7 @@ struct LntfConfig {
 
   std::string ToString() const;
 
-  bool enabled;  // TODO(bugs.webrtc.org/10662): Consume this flag.
+  bool enabled;
 };
 
 // Settings for NACK, see RFC 4585 for details.

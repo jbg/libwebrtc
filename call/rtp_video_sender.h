@@ -176,6 +176,7 @@ class RtpVideoSender : public RtpVideoSenderInterface,
   // Rtp modules are assumed to be sorted in simulcast index order.
   const std::vector<webrtc_internal_rtp_video_sender::RtpStreamSender>
       rtp_streams_;
+  // TODO: !!! This needs to make it to RTPSenderVideo.
   const RtpConfig rtp_config_;
   RtpTransportControllerSendInterface* const transport_;
 
