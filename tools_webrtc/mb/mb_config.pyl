@@ -329,7 +329,7 @@
       'clang', 'openh264', 'release_bot', 'x64',
     ],
     'win_msvc_debug_bot_x86': [
-      'no_clang', 'debug_bot', 'x86', 'no_lld',
+      'no_clang', 'debug_bot', 'x86', 'no_lld', 'openh264'
     ],
     'win_msvc_release_bot_x86': [
       'no_clang', 'release_bot', 'x86', 'no_lld',
