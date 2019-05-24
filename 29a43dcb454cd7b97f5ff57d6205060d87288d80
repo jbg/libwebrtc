@@ -117,6 +117,30 @@
       "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a0f614c_6816b38b",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-05-24T09:59:50Z",
+      "side": 1,
+      "message": "nvm my comment, I misread the question.\nI noticed that this ReceeveStatsice |Impl|, i.e. not public and thus my argument doesn\u0027t apply.\n\nAs long as no bot complain, co-variant return type should be fine.",
+      "parentUuid": "c9428a60_7a89cd44",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 72
+      },
+      "revId": "29a43dcb454cd7b97f5ff57d6205060d87288d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
