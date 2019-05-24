@@ -24,8 +24,7 @@
 
 namespace internal {
 static int DetectNumberOfCores() {
-  // We fall back on assuming a single core in case of errors.
-  int number_of_cores = 1;
+  int number_of_cores = 0;
 
 #if defined(WEBRTC_WIN)
   SYSTEM_INFO si;
@@ -48,7 +47,8 @@ static int DetectNumberOfCores() {
 
   RTC_LOG(LS_INFO) << "Available number of cores: " << number_of_cores;
 
-  return number_of_cores;
+  // Fall back on single core in case of errors.
+  return number_of_cores > 0 ? number_of_cores : 1;
 }
 }  // namespace internal
 
