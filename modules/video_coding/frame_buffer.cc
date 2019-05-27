@@ -114,7 +114,9 @@ VCMFrameBufferEnum VCMFrameBuffer::InsertPacket(
                            "big.";
       return kSizeError;
     }
-    VerifyAndAllocate(newSize);
+
+    // TODO(nisse): Probably need to grow the buffer keeping old contents?
+    SetBuffer(EncodedImageBuffer::Create(newSize));
     _sessionInfo.UpdateDataPointers(prevBuffer, data());
   }
 

@@ -531,7 +531,7 @@ int LibvpxVp8Encoder::InitEncode(const VideoCodec* inst,
     // allocate memory for encoded image
     size_t frame_capacity =
         CalcBufferSize(VideoType::kI420, codec_.width, codec_.height);
-    encoded_images_[i].Allocate(frame_capacity);
+    encoded_images_[i].SetBuffer(EncodedImageBuffer::Create(frame_capacity));
     encoded_images_[i]._completeFrame = true;
   }
   // populate encoder configuration with default values
@@ -1107,7 +1107,9 @@ int LibvpxVp8Encoder::GetEncodedPartitions(const VideoFrame& input_image) {
         case VPX_CODEC_CX_FRAME_PKT: {
           const size_t size = encoded_images_[encoder_idx].size();
           const size_t new_size = pkt->data.frame.sz + size;
-          encoded_images_[encoder_idx].Allocate(new_size);
+          // TODO(nisse): XXX Needs append.
+          encoded_images_[encoder_idx].SetBuffer(
+              EncodedImageBuffer::Create(new_size));
           memcpy(&encoded_images_[encoder_idx].data()[size],
                  pkt->data.frame.buf, pkt->data.frame.sz);
           encoded_images_[encoder_idx].set_size(new_size);

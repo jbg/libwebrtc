@@ -735,7 +735,8 @@ EncodedFrame* FrameBuffer::CombineAndDeleteFrames(
   for (size_t i = 0; i < frames.size(); ++i) {
     total_length += frames[i]->size();
   }
-  first_frame->VerifyAndAllocate(total_length);
+  // TODO(nisse): Probably need to grow the buffer keeping old contents?
+  first_frame->SetBuffer(EncodedImageBuffer::Create(total_length));
 
   first_frame->SetSpatialLayerFrameSize(first_frame->id.spatial_layer,
                                         first_frame->size());

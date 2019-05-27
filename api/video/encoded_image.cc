@@ -14,6 +14,22 @@
 
 namespace webrtc {
 
+// TODO(nisse): This initializes buffer. Arrange to omit initialization.
+EncodedImageBuffer::EncodedImageBuffer(size_t size) : buffer_(size) {}
+
+EncodedImageBuffer::EncodedImageBuffer(const uint8_t* data, size_t size)
+    : buffer_(data, data + size) {}
+
+const uint8_t* EncodedImageBuffer::data() const {
+  return buffer_.data();
+}
+uint8_t* EncodedImageBuffer::data() {
+  return buffer_.data();
+}
+size_t EncodedImageBuffer::size() const {
+  return buffer_.size();
+}
+
 EncodedImage::EncodedImage() : EncodedImage(nullptr, 0, 0) {}
 
 EncodedImage::EncodedImage(EncodedImage&&) = default;
@@ -29,9 +45,14 @@ EncodedImage& EncodedImage::operator=(const EncodedImage&) = default;
 
 void EncodedImage::Retain() {
   if (buffer_) {
-    encoded_data_.SetData(buffer_, size_);
+    encoded_data_ = EncodedImageBuffer::Create(buffer_, size_);
     buffer_ = nullptr;
   }
+}
+
+void EncodedImage::Allocate(size_t capacity) {
+  encoded_data_ = EncodedImageBuffer::Create(capacity);
+  buffer_ = nullptr;
 }
 
 void EncodedImage::SetEncodeTime(int64_t encode_start_ms,

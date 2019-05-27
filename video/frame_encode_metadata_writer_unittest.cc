@@ -101,7 +101,7 @@ std::vector<std::vector<FrameType>> GetTimingFrames(
       bool dropped = i % (5 + si) == 0;
 
       EncodedImage image;
-      image.Allocate(max_frame_size);
+      image.SetBuffer(EncodedImageBuffer::Create(max_frame_size));
       image.set_size(FrameSize(min_frame_size, max_frame_size, si, i));
       image.capture_time_ms_ = current_timestamp;
       image.SetTimestamp(static_cast<uint32_t>(current_timestamp * 90));
@@ -195,8 +195,7 @@ TEST(FrameEncodeTimerTest, NoTimingFrameIfNoEncodeStartTime) {
   int64_t timestamp = 1;
   constexpr size_t kFrameSize = 500;
   EncodedImage image;
-  image.Allocate(kFrameSize);
-  image.set_size(kFrameSize);
+  image.SetBuffer(EncodedImageBuffer::Create(kFrameSize));
   image.capture_time_ms_ = timestamp;
   image.SetTimestamp(static_cast<uint32_t>(timestamp * 90));
 
@@ -235,8 +234,7 @@ TEST(FrameEncodeTimerTest, AdjustsCaptureTimeForInternalSourceEncoder) {
 
   int64_t timestamp = 1;
   EncodedImage image;
-  image.Allocate(kFrameSize);
-  image.set_size(kFrameSize);
+  image.SetBuffer(EncodedImageBuffer::Create(kFrameSize));
   image.capture_time_ms_ = timestamp;
   image.SetTimestamp(static_cast<uint32_t>(timestamp * 90));
 
