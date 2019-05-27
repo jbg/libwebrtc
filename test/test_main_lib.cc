@@ -33,6 +33,9 @@
 #if defined(WEBRTC_IOS)
 #include "test/ios/test_support.h"
 
+WEBRTC_DEFINE_string(host-app,
+                     "",
+                     "Intentionally ignored flag intended for iOS simulator.");
 WEBRTC_DEFINE_string(NSTreatUnknownArgumentsAsOpen,
                      "",
                      "Intentionally ignored flag intended for iOS simulator.");
