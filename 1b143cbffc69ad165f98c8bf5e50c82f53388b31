@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "366448e8_a374d926",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-27T15:16:03Z",
+      "side": 1,
+      "message": "To avoid regressions, this utility class needs to be extended to \n\n1. be able to allocate without initialization (how? Replace std::vector with a manually allocated uint8_t*?)\n\n2. grow allocation without destroying old contents. Is there any efficient C++ way to do that, or do we need C realloc?\n\n3. maybe a way to have a small buffer cache, to reduce allocation. Could be something like\n\n  if (HasOneRef() \u0026\u0026 size large enough) { reuse } else { allocate a new buffer }",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 63
+      },
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
