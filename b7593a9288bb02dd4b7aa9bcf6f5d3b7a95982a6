@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbc51fea_3cace45f",
+        "filename": "api/DEPS",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T09:51:26Z",
+      "side": 1,
+      "message": "Remove these changes?",
+      "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63c20f76_9c7f8dbe",
+        "filename": "api/rtp_packet_info.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T09:51:26Z",
+      "side": 1,
+      "message": "This one should probably be inline.",
+      "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32e2aa17_395d83be",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T09:51:26Z",
+      "side": 1,
+      "message": "Can this be a plain struct with public members? You\u0027re not maintaining any invariants that I can see. It looks like the only functions you need to write  are conversion from RTPHeader and the comparison operators.",
+      "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50f8ab7c_79910099",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T09:51:26Z",
+      "side": 1,
+      "message": "If you must introduce this type (and there seems to be no reasonable alternative given that we can\u0027t use shared_ptr), could you (1) implement only the type aliases and methods that we actually need, as opposed to the full set supported by the standard containers; and (2) ensure that data_ is always  non-null, so that you don\u0027t have to test for that everywhere? Ideally data_ should be const, so that you bind it to a Data on construction and then never change it.\n\n((2) might be unreasonable depending on how you plan to use RtpPacketInfos, e.g. if you\u0027ll need to default construct it and assign to it. In that case I won\u0027t insist, but I\u0027m hoping it is doable, because it\u0027ll make the code shorter and simpler.)",
+      "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
