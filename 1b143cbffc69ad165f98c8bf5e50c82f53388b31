@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe315d51_25c3dd3b",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-28T11:15:13Z",
+      "side": 1,
+      "message": "When we discussed the same thing for EncodedImage, we agreed to stick to the convention of data() and size(), and rely on implicit conversion to ArrayView when convenient. Is there a good reason to do it differently in this class?",
+      "parentUuid": "0e3f542d_6f7c16a0",
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "366448e8_a374d926",
         "filename": "api/video/encoded_image.h",
         "patchSetId": 3
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "c6fc762b_18e90759",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-28T11:15:13Z",
+      "side": 1,
+      "message": "Current uses of Allocate seems to depend on that, e.g., appending the payload of rtp packets one at a time and growing the size when needed. When I changed Allocate to discard old contents and do a fresh allocation, lots of tests fail\n\nTo ease transition, I\u0027m considering keeping the method EncodedImage::Allocate for now, implement it via some Realloc-like method in EncodedImageBufferInterface, but implement it only in the concrete class EncodedImageBuffer (the implementation wrapping a java buffer would get a default implementation crashing in RTC_NOTREACHED).",
+      "parentUuid": "998963f2_24e5449a",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 63
+      },
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dcfb6170_40f8c97c",
         "filename": "api/video/encoded_image.h",
         "patchSetId": 3
@@ -77,6 +119,24 @@
       "writtenOn": "2019-05-28T10:16:58Z",
       "side": 1,
       "message": "Use ArrayView instead of separate data and size in this class?\n\nAlso, can this class be in the .cc file?",
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc887536_a8c44de1",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-05-28T11:15:13Z",
+      "side": 1,
+      "message": "The plan is to make the data exposed by EncodedImage immutable, so the only way to produce some data is to create an object like this and give EncodedImage a reference to it. At that point all encoders as well as the receive pipeline will need this class. It doesn\u0027t have to be in api/, but I think it makes sense, for the same reasons that I420Buffer, which plays a similar role for unencoded frames, is in api/.",
+      "parentUuid": "dcfb6170_40f8c97c",
       "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
