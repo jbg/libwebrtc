@@ -87,27 +87,6 @@ TEST(SwapQueueTest, EmptyQueue) {
   EXPECT_FALSE(queue.Remove(&i));
 }
 
-TEST(SwapQueueTest, Clear) {
-  SwapQueue<int> queue(2);
-  int i = 0;
-
-  // Fill the queue.
-  EXPECT_TRUE(queue.Insert(&i));
-  EXPECT_TRUE(queue.Insert(&i));
-
-  // Ensure full queue.
-  EXPECT_FALSE(queue.Insert(&i));
-
-  // Empty the queue.
-  queue.Clear();
-
-  // Ensure that the queue is empty
-  EXPECT_FALSE(queue.Remove(&i));
-
-  // Ensure that the queue is no longer full.
-  EXPECT_TRUE(queue.Insert(&i));
-}
-
 TEST(SwapQueueTest, SuccessfulItemVerifyFunction) {
   std::vector<int> template_element(kChunkSize);
   SwapQueue<std::vector<int>,

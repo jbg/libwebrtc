@@ -1123,7 +1123,9 @@ void AudioProcessingImpl::AllocateRenderQueue() {
     agc_render_queue_buffer_.resize(agc_render_queue_element_max_size_);
     agc_capture_queue_buffer_.resize(agc_render_queue_element_max_size_);
   } else {
-    agc_render_signal_queue_->Clear();
+    std::vector<int16_t> queue_element(agc_render_queue_element_max_size_);
+    while (agc_render_signal_queue_->Remove(&queue_element)) {
+    }
   }
 
   if (red_render_queue_element_max_size_ <
@@ -1142,7 +1144,9 @@ void AudioProcessingImpl::AllocateRenderQueue() {
     red_render_queue_buffer_.resize(red_render_queue_element_max_size_);
     red_capture_queue_buffer_.resize(red_render_queue_element_max_size_);
   } else {
-    red_render_signal_queue_->Clear();
+    std::vector<float> queue_element(red_render_queue_element_max_size_);
+    while (red_render_signal_queue_->Remove(&queue_element)) {
+    }
   }
 }
 
