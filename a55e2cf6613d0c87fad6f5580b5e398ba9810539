@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef865bf3_c45a1597",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-05-28T11:59:15Z",
+      "side": 1,
+      "message": "Should not be strictly needed. But I was advised by solenberg@ to use a member size_ instead of queue_.size() for sanitizer bots etc.",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
