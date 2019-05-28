@@ -12,14 +12,11 @@
 #define RTC_BASE_SWAP_QUEUE_H_
 
 #include <stddef.h>
+#include <atomic>
 #include <utility>
 #include <vector>
 
-#include "rtc_base/checks.h"
-#include "rtc_base/constructor_magic.h"
-#include "rtc_base/critical_section.h"
 #include "rtc_base/system/unused.h"
-#include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
 
@@ -42,11 +39,11 @@ class SwapQueueItemVerifier {
   bool operator()(const T& t) const { return QueueItemVerifierFunction(t); }
 };
 
-// This class is a fixed-size queue. A producer calls Insert() to insert
-// an element of type T at the back of the queue, and a consumer calls
-// Remove() to remove an element from the front of the queue. It's safe
-// for the producer(s) and the consumer(s) to access the queue
-// concurrently, from different threads.
+// This class is a fixed-size queue. A single producer calls Insert() to insert
+// an element of type T at the back of the queue, and a single consumer calls
+// Remove() to remove an element from the front of the queue. It's safe for the
+// producer and the consumer to access the queue concurrently, from different
+// threads.
 //
 // To avoid the construction, copying, and destruction of Ts that a naive
 // queue implementation would require, for each "full" T passed from
@@ -83,18 +80,19 @@ template <typename T, typename QueueItemVerifier = SwapQueueItemVerifier<T>>
 class SwapQueue {
  public:
   // Creates a queue of size size and fills it with default constructed Ts.
-  explicit SwapQueue(size_t size) : queue_(size) {
+  explicit SwapQueue(size_t size) : size_(size), queue_(size) {
     RTC_DCHECK(VerifyQueueSlots());
   }
 
   // Same as above and accepts an item verification functor.
   SwapQueue(size_t size, const QueueItemVerifier& queue_item_verifier)
-      : queue_item_verifier_(queue_item_verifier), queue_(size) {
+      : queue_item_verifier_(queue_item_verifier), size_(size), queue_(size) {
     RTC_DCHECK(VerifyQueueSlots());
   }
 
   // Creates a queue of size size and fills it with copies of prototype.
-  SwapQueue(size_t size, const T& prototype) : queue_(size, prototype) {
+  SwapQueue(size_t size, const T& prototype)
+      : size_(size), queue_(size, prototype) {
     RTC_DCHECK(VerifyQueueSlots());
   }
 
@@ -102,16 +100,10 @@ class SwapQueue {
   SwapQueue(size_t size,
             const T& prototype,
             const QueueItemVerifier& queue_item_verifier)
-      : queue_item_verifier_(queue_item_verifier), queue_(size, prototype) {
+      : queue_item_verifier_(queue_item_verifier),
+        size_(size),
+        queue_(size, prototype) {
     RTC_DCHECK(VerifyQueueSlots());
-  }
-
-  // Resets the queue to have zero content wile maintaining the queue size.
-  void Clear() {
-    rtc::CritScope cs(&crit_queue_);
-    next_write_index_ = 0;
-    next_read_index_ = 0;
-    num_elements_ = 0;
   }
 
   // Inserts a "full" T at the back of the queue by swapping *input with an
@@ -123,26 +115,23 @@ class SwapQueue {
   bool Insert(T* input) RTC_WARN_UNUSED_RESULT {
     RTC_DCHECK(input);
 
-    rtc::CritScope cs(&crit_queue_);
-
     RTC_DCHECK(queue_item_verifier_(*input));
 
-    if (num_elements_ == queue_.size()) {
+    if (num_elements_ == size_) {
       return false;
     }
 
-    using std::swap;
-    swap(*input, queue_[next_write_index_]);
+    std::swap(*input, queue_[next_write_index_]);
 
     ++next_write_index_;
-    if (next_write_index_ == queue_.size()) {
+    if (next_write_index_ == size_) {
       next_write_index_ = 0;
     }
 
-    ++num_elements_;
+    num_elements_.fetch_add(1, std::memory_order_release);
 
-    RTC_DCHECK_LT(next_write_index_, queue_.size());
-    RTC_DCHECK_LE(num_elements_, queue_.size());
+    RTC_DCHECK_LT(next_write_index_, size_);
+    RTC_DCHECK_LE(num_elements_.load(), size_);
 
     return true;
   }
@@ -156,26 +145,23 @@ class SwapQueue {
   bool Remove(T* output) RTC_WARN_UNUSED_RESULT {
     RTC_DCHECK(output);
 
-    rtc::CritScope cs(&crit_queue_);
-
     RTC_DCHECK(queue_item_verifier_(*output));
 
-    if (num_elements_ == 0) {
+    if (num_elements_.load(std::memory_order_acquire) == 0) {
       return false;
     }
 
-    using std::swap;
-    swap(*output, queue_[next_read_index_]);
+    std::swap(*output, queue_[next_read_index_]);
 
     ++next_read_index_;
-    if (next_read_index_ == queue_.size()) {
+    if (next_read_index_ == size_) {
       next_read_index_ = 0;
     }
 
-    --num_elements_;
+    num_elements_.fetch_sub(1);
 
-    RTC_DCHECK_LT(next_read_index_, queue_.size());
-    RTC_DCHECK_LE(num_elements_, queue_.size());
+    RTC_DCHECK_LT(next_read_index_, size_);
+    RTC_DCHECK_LE(num_elements_.load(), size_);
 
     return true;
   }
@@ -183,29 +169,28 @@ class SwapQueue {
  private:
   // Verify that the queue slots complies with the ItemVerifier test.
   bool VerifyQueueSlots() {
-    rtc::CritScope cs(&crit_queue_);
     for (const auto& v : queue_) {
       RTC_DCHECK(queue_item_verifier_(v));
     }
     return true;
   }
 
-  rtc::CriticalSection crit_queue_;
-
   // TODO(peah): Change this to use std::function() once we can use C++11 std
   // lib.
-  QueueItemVerifier queue_item_verifier_ RTC_GUARDED_BY(crit_queue_);
+  QueueItemVerifier queue_item_verifier_;
 
   // (next_read_index_ + num_elements_) % queue_.size() =
   //  next_write_index_
-  size_t next_write_index_ RTC_GUARDED_BY(crit_queue_) = 0;
-  size_t next_read_index_ RTC_GUARDED_BY(crit_queue_) = 0;
-  size_t num_elements_ RTC_GUARDED_BY(crit_queue_) = 0;
+  size_t next_write_index_ = 0;
+  size_t next_read_index_ = 0;
+  size_t size_;
+  std::atomic<size_t> num_elements_{0};
 
   // queue_.size() is constant.
-  std::vector<T> queue_ RTC_GUARDED_BY(crit_queue_);
+  std::vector<T> queue_;
 
-  RTC_DISALLOW_COPY_AND_ASSIGN(SwapQueue);
+  SwapQueue(const SwapQueue&) = delete;
+  SwapQueue& operator=(const SwapQueue&) = delete;
 };
 
 }  // namespace webrtc
