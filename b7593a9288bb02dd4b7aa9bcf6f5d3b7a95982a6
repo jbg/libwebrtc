@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "52a789ec_a157892e",
+        "filename": "api/DEPS",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-28T11:07:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbc51fea_3cace45f",
+      "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63c20f76_9c7f8dbe",
         "filename": "api/rtp_packet_info.cc",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da81b665_6f4d343e",
+        "filename": "api/rtp_packet_info.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-28T11:07:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63c20f76_9c7f8dbe",
+      "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f0c3e629_37015e34",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-28T11:07:30Z",
+      "side": 1,
+      "message": "I expect there to be fields in the future that are meant to be initialized in pairs. Once we\u0027ve made this one a plain struct, we won\u0027t be able to go back, so I would rather leave it like this.",
+      "parentUuid": "32e2aa17_395d83be",
+      "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "50f8ab7c_79910099",
         "filename": "api/rtp_packet_infos.h",
         "patchSetId": 9
@@ -64,6 +118,24 @@
       "writtenOn": "2019-05-28T09:51:26Z",
       "side": 1,
       "message": "If you must introduce this type (and there seems to be no reasonable alternative given that we can\u0027t use shared_ptr), could you (1) implement only the type aliases and methods that we actually need, as opposed to the full set supported by the standard containers; and (2) ensure that data_ is always  non-null, so that you don\u0027t have to test for that everywhere? Ideally data_ should be const, so that you bind it to a Data on construction and then never change it.\n\n((2) might be unreasonable depending on how you plan to use RtpPacketInfos, e.g. if you\u0027ll need to default construct it and assign to it. In that case I won\u0027t insist, but I\u0027m hoping it is doable, because it\u0027ll make the code shorter and simpler.)",
+      "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b154bba_c2a5cda3",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-28T11:07:30Z",
+      "side": 1,
+      "message": "(1) I think that it\u0027s cleaner to just implement them all. The intent is to make the class more or less interchangeable with `using RtpPacketInfos \u003d std::vector\u003cRtpPacketInfo\u003e`. It\u0027s not that complicated to just forward the calls, and doing so means that we won\u0027t have to modify this file again in the future.\n\n(2) I agree that it would be ideal to make the class non-assignable. But the video code unfortunately requires that. For example: When we add a new `RtpPacketInfos` to `VideoFrame::Builder`. Or the way `modules/video_coding/generic_decoder.h` transfers `RtpPacketInfos` from one packet to another using `VCMFrameInformation`.\n\nOne alternative to (2) is to do:\n\n```\nconst vector_type\u0026 inner_vector() {\n  static const vector_type empty_vector;\n\n  if (data_ \u003d\u003d nullptr) {\n    return empty_vector;\n  } else {\n    return data_-\u003epacket_infos();\n  }\n}\n```\n\nAnd then change the other callers to:\n\n```\nsize_type size() const { return inner_vector().size(); }\n```\n\nI\u0027m not sure if this extra code trickery is worth it?",
+      "parentUuid": "50f8ab7c_79910099",
       "revId": "b7593a9288bb02dd4b7aa9bcf6f5d3b7a95982a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
