@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e3f542d_6f7c16a0",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T10:16:58Z",
+      "side": 1,
+      "message": "Suggestion: Remove size() and have data() return an ArrayView instead?",
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "366448e8_a374d926",
         "filename": "api/video/encoded_image.h",
         "patchSetId": 3
@@ -19,6 +36,47 @@
         "endLine": 49,
         "endChar": 63
       },
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "998963f2_24e5449a",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T10:16:58Z",
+      "side": 1,
+      "message": "I would just allocate a raw array on the heap with malloc+realloc+free. (There is no C++ equivalent of realloc.)\n\nBut where do you need to realloc? I can\u0027t see anything in the interface that would require that?",
+      "parentUuid": "366448e8_a374d926",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 63
+      },
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcfb6170_40f8c97c",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T10:16:58Z",
+      "side": 1,
+      "message": "Use ArrayView instead of separate data and size in this class?\n\nAlso, can this class be in the .cc file?",
       "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
