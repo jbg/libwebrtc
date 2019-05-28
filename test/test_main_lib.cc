@@ -33,6 +33,20 @@
 #if defined(WEBRTC_IOS)
 #include "test/ios/test_support.h"
 
+
+// Cannot use macro due to minus sign.
+// Copy pasted from rtc_base/flags.h
+
+namespace rtc {
+/* define and initialize the flag */
+const char* FLAG_host_app = ""; // Default
+/* register the flag */
+static rtc::Flag Flag_host_app(__FILE__, "host-app",
+                               "Intentionally ignored flag intended for iOS simulator.",
+                               rtc::Flag::STRING, &FLAG_host_app,
+                               rtc::FlagValue::New_STRING(""));
+}
+
 WEBRTC_DEFINE_string(NSTreatUnknownArgumentsAsOpen,
                      "",
                      "Intentionally ignored flag intended for iOS simulator.");
