@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54ff305e_edd0f043",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T10:33:56Z",
+      "side": 1,
+      "message": "if",
+      "range": {
+        "startLine": 510,
+        "startChar": 31,
+        "endLine": 510,
+        "endChar": 33
+      },
+      "revId": "25451a302f4a6f16adf274d99a9b8067fed75a0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "670c80fe_45ba87d0",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T10:33:56Z",
+      "side": 1,
+      "message": "encrypted",
+      "range": {
+        "startLine": 512,
+        "startChar": 54,
+        "endLine": 512,
+        "endChar": 63
+      },
+      "revId": "25451a302f4a6f16adf274d99a9b8067fed75a0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8392fd8_494e0bd1",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_audio.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-28T10:33:56Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 227,
+        "startChar": 27,
+        "endLine": 227,
+        "endChar": 28
+      },
+      "revId": "25451a302f4a6f16adf274d99a9b8067fed75a0c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
