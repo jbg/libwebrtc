@@ -7,7 +7,7 @@ vars = {
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
   'webrtc_git': 'https://webrtc.googlesource.com',
-  'chromium_revision': '9b60f86c1501d0de6c443819612f5a3a66177c9d',
+  'chromium_revision': 'b6836700756cc3cc6a39cf973a6eb3459f1f8f7c',
   'boringssl_git': 'https://boringssl.googlesource.com',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling swarming_client
@@ -86,7 +86,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    Var('chromium_git') + '/chromium/src/base' + '@' + '4156e5da2f390c3bcb7bb9eb6e5c16206f621276',
+    Var('chromium_git') + '/chromium/src/base' + '@' + '3c2afe6179563187c623dedf929b8e6204987d00',
   'src/build':
     Var('chromium_git') + '/chromium/src/build' + '@' + 'c93f946980efad54b91cb9a06b18a69bd2e93327',
   'src/buildtools':
@@ -102,9 +102,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    Var('chromium_git') + '/chromium/src/testing' + '@' + 'b14a9a2b64d38cef2a18c78261b50476e2f22201',
+    Var('chromium_git') + '/chromium/src/testing' + '@' + 'ccc4351d2bca840524a2c554c42b5497cb1b333e',
   'src/third_party':
-    Var('chromium_git') + '/chromium/src/third_party' + '@' + '374b68de067fe0a73ae2534964fd8ab63a5cce45',
+    Var('chromium_git') + '/chromium/src/third_party' + '@' + 'd955026495b14f8fee8f8bdf674b8c94b66c41cc',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -199,7 +199,7 @@ deps = {
   'src/third_party/colorama/src':
     Var('chromium_git') + '/external/colorama.git' + '@' + '799604a1041e9b3bc5d2789ecbd7e8db2e18e6b8',
   'src/third_party/depot_tools':
-    Var('chromium_git') + '/chromium/tools/depot_tools.git' + '@' + 'c5b8a73247c432dbdbc010997f47994e9c3fff43',
+    Var('chromium_git') + '/chromium/tools/depot_tools.git' + '@' + '10e57cf61851102f6f2e75bea96f8062ebaea0bb',
   'src/third_party/errorprone/lib': {
       'url': Var('chromium_git') + '/chromium/third_party/errorprone.git' + '@' + '980d49e839aa4984015efed34b0134d4b2c9b6d7',
       'condition': 'checkout_android',
