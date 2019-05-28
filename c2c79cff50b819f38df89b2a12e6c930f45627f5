@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90ab282a_57491325",
+        "filename": "p2p/base/connection.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-05-28T22:22:35Z",
+      "side": 1,
+      "message": "nit: contain\n\nmaybe: can contain a pointer to a Connection",
+      "range": {
+        "startLine": 36,
+        "startChar": 55,
+        "endLine": 36,
+        "endChar": 63
+      },
+      "revId": "c2c79cff50b819f38df89b2a12e6c930f45627f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27a61144_2625bacd",
+        "filename": "p2p/base/connection_info.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-05-28T22:22:35Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "c2c79cff50b819f38df89b2a12e6c930f45627f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
