@@ -55,6 +55,7 @@ class VCMEncodedFrame : protected EncodedImage {
   using EncodedImage::ColorSpace;
   using EncodedImage::data;
   using EncodedImage::set_size;
+  using EncodedImage::SetBuffer;
   using EncodedImage::SetColorSpace;
   using EncodedImage::SetSpatialIndex;
   using EncodedImage::SetSpatialLayerFrameSize;
