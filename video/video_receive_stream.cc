@@ -512,8 +512,9 @@ void VideoReceiveStream::SetFrameDecryptor(
   rtp_video_stream_receiver_.SetFrameDecryptor(std::move(frame_decryptor));
 }
 
-void VideoReceiveStream::SendNack(
-    const std::vector<uint16_t>& sequence_numbers) {
+void VideoReceiveStream::SendNack(const std::vector<uint16_t>& sequence_numbers,
+                                  bool buffering_allowed) {
+  RTC_DCHECK(buffering_allowed);
   rtp_video_stream_receiver_.RequestPacketRetransmit(sequence_numbers);
 }
 
