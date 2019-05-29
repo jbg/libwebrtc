@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a9efb08_36d19dfa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-05-29T07:23:40Z",
+      "side": 1,
+      "message": "You\u0027re not stopping anything, just replacing it",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "8d531fe81bd2f2cb4147ca22745f4192fedf2236",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "118470e6_b633ba31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-05-29T07:23:40Z",
+      "side": 1,
+      "message": "Multi-step process -\u003e specify a bug",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 9
+      },
+      "revId": "8d531fe81bd2f2cb4147ca22745f4192fedf2236",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
