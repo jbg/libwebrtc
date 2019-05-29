@@ -50,7 +50,8 @@ void AcknowledgedBitrateEstimator::IncomingPacketFeedbackVector(
       MaybeExpectFastRateChange(packet.send_time_ms);
       int acknowledged_estimate = rtc::dchecked_cast<int>(packet.payload_size);
       acknowledged_estimate += packet.unacknowledged_data;
-      bitrate_estimator_->Update(packet.arrival_time_ms, acknowledged_estimate);
+      bitrate_estimator_->Update(packet.arrival_time_ms, acknowledged_estimate,
+                                 IsInAlr(packet.send_time_ms));
     }
   }
 }
@@ -78,6 +79,12 @@ absl::optional<DataRate> AcknowledgedBitrateEstimator::PeekRate() const {
 void AcknowledgedBitrateEstimator::SetAlrEndedTimeMs(
     int64_t alr_ended_time_ms) {
   alr_ended_time_ms_.emplace(alr_ended_time_ms);
+  alr_started_time_ms_.reset();
+}
+
+void AcknowledgedBitrateEstimator::SetAlrStartedTimeMs(
+    int64_t alr_started_time_ms) {
+  alr_started_time_ms_.emplace(alr_started_time_ms);
 }
 
 void AcknowledgedBitrateEstimator::MaybeExpectFastRateChange(
@@ -86,6 +93,11 @@ void AcknowledgedBitrateEstimator::MaybeExpectFastRateChange(
     bitrate_estimator_->ExpectFastRateChange();
     alr_ended_time_ms_.reset();
   }
+}
+
+bool AcknowledgedBitrateEstimator::IsInAlr(int64_t packet_send_time_ms) const {
+  return alr_started_time_ms_.has_value() &&
+         packet_send_time_ms > *alr_started_time_ms_;
 }
 
 }  // namespace webrtc
