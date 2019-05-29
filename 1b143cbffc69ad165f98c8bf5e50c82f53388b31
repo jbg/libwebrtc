@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4dc08f29_d987b9ad",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:20:48Z",
+      "side": 1,
+      "message": "No, you\u0027re right---I had forgotten.",
+      "parentUuid": "fe315d51_25c3dd3b",
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "366448e8_a374d926",
         "filename": "api/video/encoded_image.h",
         "patchSetId": 3
@@ -108,6 +126,30 @@
     },
     {
       "key": {
+        "uuid": "239b7939_2070f5d4",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:20:48Z",
+      "side": 1,
+      "message": "Ah, you\u0027re talking about also extending the interface of this class. Got it.\n\nAnd no, doing this in pure C++ would use new and delete, and you\u0027d have to copy manually when you reallocate. The shortcut used by realloc in case it\u0027s able to actually grow the allocation in-place is available only in realloc AFAIK.",
+      "parentUuid": "c6fc762b_18e90759",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 63
+      },
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dcfb6170_40f8c97c",
         "filename": "api/video/encoded_image.h",
         "patchSetId": 3
@@ -137,6 +179,24 @@
       "side": 1,
       "message": "The plan is to make the data exposed by EncodedImage immutable, so the only way to produce some data is to create an object like this and give EncodedImage a reference to it. At that point all encoders as well as the receive pipeline will need this class. It doesn\u0027t have to be in api/, but I think it makes sense, for the same reasons that I420Buffer, which plays a similar role for unencoded frames, is in api/.",
       "parentUuid": "dcfb6170_40f8c97c",
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65a57a34_6d298302",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:20:48Z",
+      "side": 1,
+      "message": "You could expose just a Create function, and not the class itself, without loss of performance---right? Except possibly the overhead of calling a non-inlined function.",
+      "parentUuid": "cc887536_a8c44de1",
       "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
