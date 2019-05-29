@@ -207,7 +207,8 @@ void DelayBasedBweTest::IncomingFeedback(int64_t arrival_time_ms,
       packet.pacing_info.probe_cluster_id != PacedPacketInfo::kNotAProbe)
     probe_bitrate_estimator_->HandleProbeAndEstimateBitrate(packet);
 
-  acknowledged_bitrate_estimator_->IncomingPacketFeedbackVector(packets);
+  acknowledged_bitrate_estimator_->IncomingPacketFeedbackVector(
+      packets, /*in_alr*/ false);
   DelayBasedBwe::Result result =
       bitrate_estimator_->IncomingPacketFeedbackVector(
           packets, acknowledged_bitrate_estimator_->bitrate(),
@@ -249,7 +250,8 @@ bool DelayBasedBweTest::GenerateAndProcessFrame(uint32_t ssrc,
       probe_bitrate_estimator_->HandleProbeAndEstimateBitrate(packet);
   }
 
-  acknowledged_bitrate_estimator_->IncomingPacketFeedbackVector(packets);
+  acknowledged_bitrate_estimator_->IncomingPacketFeedbackVector(
+      packets, /*in_alr*/ false);
   DelayBasedBwe::Result result =
       bitrate_estimator_->IncomingPacketFeedbackVector(
           packets, acknowledged_bitrate_estimator_->bitrate(),

@@ -79,7 +79,7 @@ TEST(TestAcknowledgedBitrateEstimator, DontAddPacketsWhichAreNotInSendHistory) {
       PacketFeedback(kFirstArrivalTimeMs, kSequenceNumber));
   EXPECT_CALL(*states.mock_bitrate_estimator, Update(_, _)).Times(0);
   states.acknowledged_bitrate_estimator->IncomingPacketFeedbackVector(
-      packet_feedback_vector);
+      packet_feedback_vector, /*in_alr*/ false);
 }
 
 TEST(TestAcknowledgedBitrateEstimator, UpdateBandwith) {
@@ -99,7 +99,7 @@ TEST(TestAcknowledgedBitrateEstimator, UpdateBandwith) {
         .Times(1);
   }
   states.acknowledged_bitrate_estimator->IncomingPacketFeedbackVector(
-      packet_feedback_vector);
+      packet_feedback_vector, /*in_alr*/ false);
 }
 
 TEST(TestAcknowledgedBitrateEstimator, ExpectFastRateChangeWhenLeftAlr) {
@@ -123,7 +123,7 @@ TEST(TestAcknowledgedBitrateEstimator, ExpectFastRateChangeWhenLeftAlr) {
   states.acknowledged_bitrate_estimator->SetAlrEndedTimeMs(kFirstArrivalTimeMs +
                                                            1);
   states.acknowledged_bitrate_estimator->IncomingPacketFeedbackVector(
-      packet_feedback_vector);
+      packet_feedback_vector, /*in_alr*/ false);
 }
 
 TEST(TestAcknowledgedBitrateEstimator, ReturnBitrate) {

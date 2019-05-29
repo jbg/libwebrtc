@@ -396,7 +396,7 @@ void DEPRECATED_SendSideCongestionController::OnTransportFeedback(
   was_in_alr_ = currently_in_alr;
 
   acknowledged_bitrate_estimator_->IncomingPacketFeedbackVector(
-      feedback_vector);
+      feedback_vector, currently_in_alr);
   DelayBasedBwe::Result result;
   {
     rtc::CritScope cs(&bwe_lock_);

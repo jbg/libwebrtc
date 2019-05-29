@@ -41,7 +41,8 @@ AcknowledgedBitrateEstimator::AcknowledgedBitrateEstimator(
     : bitrate_estimator_(std::move(bitrate_estimator)) {}
 
 void AcknowledgedBitrateEstimator::IncomingPacketFeedbackVector(
-    const std::vector<PacketFeedback>& packet_feedback_vector) {
+    const std::vector<PacketFeedback>& packet_feedback_vector,
+    bool in_alr) {
   RTC_DCHECK(std::is_sorted(packet_feedback_vector.begin(),
                             packet_feedback_vector.end(),
                             PacketFeedbackComparator()));
@@ -50,7 +51,8 @@ void AcknowledgedBitrateEstimator::IncomingPacketFeedbackVector(
       MaybeExpectFastRateChange(packet.send_time_ms);
       int acknowledged_estimate = rtc::dchecked_cast<int>(packet.payload_size);
       acknowledged_estimate += packet.unacknowledged_data;
-      bitrate_estimator_->Update(packet.arrival_time_ms, acknowledged_estimate);
+      bitrate_estimator_->Update(packet.arrival_time_ms, acknowledged_estimate,
+                                 in_alr);
     }
   }
 }
