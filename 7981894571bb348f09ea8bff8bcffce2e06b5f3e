@@ -108,6 +108,24 @@
       "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2d8f6de_e5effdb3",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-29T11:37:34Z",
+      "side": 1,
+      "message": "Since it looks like KF may be requested by a Nack module also, I would just use a single critical section or all state.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/nack_module.cc?sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d236",
+      "parentUuid": "c4b0551b_ee614566",
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
