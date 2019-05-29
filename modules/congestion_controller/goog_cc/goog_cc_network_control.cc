@@ -507,14 +507,14 @@ NetworkControlUpdate GoogCcNetworkController::OnTransportPacketsFeedback(
   absl::optional<int64_t> alr_start_time =
       alr_detector_->GetApplicationLimitedRegionStartTime();
 
-  if (previously_in_alr && !alr_start_time.has_value()) {
+  if (previously_in_alr_ && !alr_start_time.has_value()) {
     int64_t now_ms = report.feedback_time.ms();
     acknowledged_bitrate_estimator_->SetAlrEndedTimeMs(now_ms);
     probe_controller_->SetAlrEndedTimeMs(now_ms);
   }
-  previously_in_alr = alr_start_time.has_value();
+  previously_in_alr_ = alr_start_time.has_value();
   acknowledged_bitrate_estimator_->IncomingPacketFeedbackVector(
-      received_feedback_vector);
+      received_feedback_vector, alr_start_time.has_value());
   auto acknowledged_bitrate = acknowledged_bitrate_estimator_->bitrate();
   for (const auto& feedback : received_feedback_vector) {
     if (feedback.pacing_info.probe_cluster_id != PacedPacketInfo::kNotAProbe) {

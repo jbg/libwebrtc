@@ -34,7 +34,8 @@ class AcknowledgedBitrateEstimator {
   ~AcknowledgedBitrateEstimator();
 
   void IncomingPacketFeedbackVector(
-      const std::vector<PacketFeedback>& packet_feedback_vector);
+      const std::vector<PacketFeedback>& packet_feedback_vector,
+      bool in_alr);
   absl::optional<uint32_t> bitrate_bps() const;
   absl::optional<uint32_t> PeekBps() const;
   absl::optional<DataRate> bitrate() const;
