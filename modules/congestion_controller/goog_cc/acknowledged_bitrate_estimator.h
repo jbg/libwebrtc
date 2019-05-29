@@ -39,11 +39,14 @@ class AcknowledgedBitrateEstimator {
   absl::optional<uint32_t> PeekBps() const;
   absl::optional<DataRate> bitrate() const;
   absl::optional<DataRate> PeekRate() const;
+  void SetAlrStartedTimeMs(int64_t alr_started_time_ms);
   void SetAlrEndedTimeMs(int64_t alr_ended_time_ms);
 
  private:
   void MaybeExpectFastRateChange(int64_t packet_arrival_time_ms);
+  bool IsInAlr(int64_t packet_arrival_time_ms) const;
   absl::optional<int64_t> alr_ended_time_ms_;
+  absl::optional<int64_t> alr_started_time_ms_;
   std::unique_ptr<BitrateEstimator> bitrate_estimator_;
 };
 
