@@ -93,6 +93,30 @@
       "revId": "903f1317e58b87dc1388c43288b5e560b1884bd5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5dec54ba_d5e98238",
+        "filename": "modules/audio_coding/neteq/tools/neteq_quality_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-05-29T10:26:08Z",
+      "side": 1,
+      "message": "On the other hand, this is what NetEq::Create looks like. See https://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_coding/neteq/include/neteq.h?type\u003dcs\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d152.",
+      "parentUuid": "d113185b_5bddb52f",
+      "range": {
+        "startLine": 103,
+        "startChar": 6,
+        "endLine": 103,
+        "endChar": 51
+      },
+      "revId": "903f1317e58b87dc1388c43288b5e560b1884bd5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
