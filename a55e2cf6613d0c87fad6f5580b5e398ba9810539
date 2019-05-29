@@ -2,6 +2,177 @@
   "comments": [
     {
       "key": {
+        "uuid": "6a2d3510_98442928",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "Better to keep calling Clear() (see comment below).",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ebc4085_368c87c0",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "You\u0027re reading with sequentially consistent memory ordering here. Use std::atomic_load_explicit with std::memory_order_acquire instead, as we discussed earlier.\n\nAlso, a comment explaining what the atomic operation does and why it uses that particular memory ordering. Otherwise this will be impossible to maintain. (We use acquire so that the memory accesses to queue_[next_write_index_] won\u0027t be reordered before the load.)",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 21
+      },
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e1ddf4_151f41e3",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "Move this after the fetch_add, since it doesn\u0027t need to be protected.",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 5
+      },
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66e6e083_776f078e",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "Suggestion: use std::atomic_fetch_add_explicit instead, to really call out the atomic instruction. Also, a doc comment (see my earlier comment).",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2498042_d96f06c0",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "Don\u0027t do a separate atomic load here; the value might change between the fetch_add and this load, so that you don\u0027t test the right thing. Instead, save the return value of fetch_add an test that.",
+      "range": {
+        "startLine": 135,
+        "startChar": 31,
+        "endLine": 135,
+        "endChar": 38
+      },
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a08fde9_eda31d81",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "Do the same things here that I asked for in Insert(). In particular, the memory orderings should be first acquire, then release here too.",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f6a65d2_5372e257",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "Document that you can no longer safely call this method except from the constructors.",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5601824f_8968f44b",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "This invariant no longer holds, or more precisely, is no longer meaningful, because you can never read all four of these simultaneously.",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0d5bcae_22196e30",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "Comment these two. In particular, that they\u0027re only accessed by the reader/the writer and therefore don\u0027t need to be atomic.",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef865bf3_c45a1597",
         "filename": "rtc_base/swap_queue.h",
         "patchSetId": 2
@@ -16,6 +187,23 @@
       "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9dbf3eb_daee70ab",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 1,
+      "message": "Consider placing the member variables in memory in such a way that cache lines don\u0027t need to move between cores needlessly. In particular, there should be one cache line for the consumer (read index, data pointer, size), one for the producer (write index, data pointer, size---yes, the last two are duplicates) and one for the shared data (num_elements_).\n\nIIRC you\u0027ll do something like this:\n\n  alignas(64) struct {\n    size_t next_write_index;\n    T* const data;\n    const size_t size;\n  } producer_;\n\n(The consts are *very* desirable when we duplicate data like this.) To manage destruction, replace one of the two raw pointers with a unique_ptr.\n\nOh, and the queue item verifier---I guess make two copies of that one too. And make it const. And document that it may be called concurrently.\n\n(You could put a single copy of all the read-only data in a separate cache line instead. I think that means you end up using four cache lines instead of three, though.)",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

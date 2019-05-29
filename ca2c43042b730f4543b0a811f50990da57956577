@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31a2da6a_30d5d16b",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T08:56:23Z",
+      "side": 0,
+      "message": "You can keep this. Atomically swap num_elements_ with 0, and use the returned value to increment next_read_index_. Don\u0027t touch next_write_index_, since you aren\u0027t the producer.\n\nRelaxed memory ordering should suffice.",
+      "revId": "ca2c43042b730f4543b0a811f50990da57956577",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
