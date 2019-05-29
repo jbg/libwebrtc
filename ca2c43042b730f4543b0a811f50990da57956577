@@ -16,6 +16,24 @@
       "revId": "ca2c43042b730f4543b0a811f50990da57956577",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34bcfdbb_11c934ce",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-05-29T13:23:25Z",
+      "side": 0,
+      "message": "Nice idea!",
+      "parentUuid": "31a2da6a_30d5d16b",
+      "revId": "ca2c43042b730f4543b0a811f50990da57956577",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
