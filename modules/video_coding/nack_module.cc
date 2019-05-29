@@ -139,7 +139,7 @@ int NackModule::OnReceivedPacket(uint16_t seq_num,
   // Are there any nacks that are waiting for this seq_num.
   std::vector<uint16_t> nack_batch = GetNackBatch(kSeqNumOnly);
   if (!nack_batch.empty())
-    nack_sender_->SendNack(nack_batch);
+    nack_sender_->SendNack(nack_batch, /*buffering_allowed=*/true);
 
   return 0;
 }
@@ -179,7 +179,7 @@ void NackModule::Process() {
     }
 
     if (!nack_batch.empty())
-      nack_sender_->SendNack(nack_batch);
+      nack_sender_->SendNack(nack_batch, /*buffering_allowed=*/false);
   }
 
   // Update the next_process_time_ms_ in intervals to achieve
