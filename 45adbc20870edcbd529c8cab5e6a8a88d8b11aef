@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ef6b60b_7c68949e",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-05-29T11:35:24Z",
+      "side": 1,
+      "message": "alr_started_time_ms_.has_value() and remove IsInAlr",
+      "range": {
+        "startLine": 54,
+        "startChar": 33,
+        "endLine": 54,
+        "endChar": 61
+      },
+      "revId": "45adbc20870edcbd529c8cab5e6a8a88d8b11aef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "585c2497_6b1c0cc7",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-05-29T11:35:24Z",
+      "side": 1,
+      "message": "Move this to OnSentPacket where the value is actually changed.",
+      "range": {
+        "startLine": 516,
+        "startChar": 2,
+        "endLine": 516,
+        "endChar": 65
+      },
+      "revId": "45adbc20870edcbd529c8cab5e6a8a88d8b11aef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
