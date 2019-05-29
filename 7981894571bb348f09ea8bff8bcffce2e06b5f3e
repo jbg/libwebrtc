@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "b460bddb_73cdfd8b",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-29T21:35:19Z",
+      "side": 1,
+      "message": "Must have been distracted while replacing these. Thanks for catching!",
+      "parentUuid": "7f85034d_c4fce3f8",
+      "range": {
+        "startLine": 245,
+        "startChar": 70,
+        "endLine": 245,
+        "endChar": 74
+      },
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3044c23_e395d692",
         "filename": "video/rtp_video_stream_receiver.cc",
         "patchSetId": 1
@@ -71,6 +95,47 @@
     },
     {
       "key": {
+        "uuid": "0c975229_a300df91",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-29T21:35:19Z",
+      "side": 1,
+      "message": "It\u0027s H264-only, so irrelevant for my case, but you\u0027re right that it looks bad, and I am unlikely to remember to change this if we ever move to using LNTF with H264, etc. I\u0027ve moved the call to SendBufferedRtcpFeedback(). Thanks.",
+      "parentUuid": "f3044c23_e395d692",
+      "range": {
+        "startLine": 378,
+        "startChar": 8,
+        "endLine": 378,
+        "endChar": 26
+      },
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf896dd4_b19a89f7",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-29T21:35:19Z",
+      "side": 1,
+      "message": "It bears mentioning that this is a public function, btw. I think synchronizing external calls to this with internal ones is out of scope for this CL.",
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e57cbfc_7aadd11e",
         "filename": "video/rtp_video_stream_receiver.cc",
         "patchSetId": 1
@@ -91,6 +156,30 @@
       "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86ebf568_7263d325",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-29T21:35:19Z",
+      "side": 1,
+      "message": "In this particular case - yes. There\u0027s nothing else in the buffer, and LossNotificationController::OnAssembledFrame does not trigger any key frame request.\n\nBut looking at this code again, I realize I had a different problem, which I have now fixed. Please have a second look at this code.",
+      "parentUuid": "3e57cbfc_7aadd11e",
+      "range": {
+        "startLine": 525,
+        "startChar": 6,
+        "endLine": 525,
+        "endChar": 24
+      },
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +211,24 @@
       "writtenOn": "2019-05-29T11:37:34Z",
       "side": 1,
       "message": "Since it looks like KF may be requested by a Nack module also, I would just use a single critical section or all state.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/nack_module.cc?sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d236",
+      "parentUuid": "c4b0551b_ee614566",
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ba6096f_f2166fac",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-29T21:35:19Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "c4b0551b_ee614566",
       "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
