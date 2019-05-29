@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64d19cb0_cb07ee99",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T12:59:45Z",
+      "side": 1,
+      "message": "This violates https://google.github.io/styleguide/cppguide.html#Static_and_Global_Variables; specifically, std::vector has a nontrivial destructor, and the compiler will attempt to execute it for this variable on program exit.\n\nYou could say\n\n  static const auto\u0026 empty_entries \u003d *new vector_type;\n\nbut that\u0027s even more expensive than your current suggestion. You could do something like this instead (and never actually call with a non-default argument):\n\n  const vector_type\u0026 entries(const vector_type\u0026 empty \u003d {}) const {\n    return data_ \u003d\u003d nullptr ? empty : data_-\u003eentries();\n  }\n\nBut I suspect we\u0027re better off with a solution like this, with no utility method:\n\n  const_reverse_iterator crbegin() const {\n    return data_ ? data_-\u003epacket_infos().crbegin()\n                 : const_reverse_iterator{};\n  }",
+      "revId": "f62a4d0db7035fa3aedb1ed5b028760d68512e07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
