@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07a37f2b_4ef709da",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-29T12:39:24Z",
+      "side": 1,
+      "message": "nit: You probably should rename it to lock or whatever, since it doesn\u0027t concern only nacks now.",
+      "range": {
+        "startLine": 230,
+        "startChar": 25,
+        "endLine": 230,
+        "endChar": 33
+      },
+      "revId": "7d0418ec436680948125c7d43e471e96caf8d6e0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
