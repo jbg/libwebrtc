@@ -22,6 +22,30 @@
       "revId": "673784153395ec210c33041aba74018efd8993dd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3543fdd4_b6b906cb",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-05-29T07:36:42Z",
+      "side": 0,
+      "message": "Yep, I was breaking everything. :-)\n\nPS#4 should introduce backwards compatibility, I will ask artit@ for help.",
+      "parentUuid": "f4b53b61_c0dc8dd8",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 12
+      },
+      "revId": "673784153395ec210c33041aba74018efd8993dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
