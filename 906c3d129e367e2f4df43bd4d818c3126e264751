@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c1c0319_2c5fa951",
+        "filename": "config.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 7796
+      },
+      "writtenOn": "2019-05-29T11:45:43Z",
+      "side": 1,
+      "message": "Change to this file is a pivotal point of the whole change. After it new builders will start building what we need. Considering this, are you sure that we need building 32 and 64 platforms at the same time? Maybe we just need to immediately switch to 64?",
+      "range": {
+        "startLine": 562,
+        "startChar": 0,
+        "endLine": 562,
+        "endChar": 27
+      },
+      "revId": "906c3d129e367e2f4df43bd4d818c3126e264751",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
