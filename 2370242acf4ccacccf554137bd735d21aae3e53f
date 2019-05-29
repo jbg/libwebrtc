@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b16cc7d2_9d7fefa3",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-05-29T15:38:48Z",
+      "side": 1,
+      "message": "this isn\u0027t responsibility of the framework, is it?",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 70
+      },
+      "revId": "2370242acf4ccacccf554137bd735d21aae3e53f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
