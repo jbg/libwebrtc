@@ -44,6 +44,10 @@ void NetEqStatsGetter::AfterGetAudio(int64_t time_now_ms,
                                      const AudioFrame& audio_frame,
                                      bool muted,
                                      NetEq* neteq) {
+  if (!neteq->LastDecodedTimestamps().empty()) {
+    last_decoded_packet_time_ms_ = time_now_ms;
+  }
+
   // TODO(minyue): Get stats should better not be called as a call back after
   // get audio. It is called independently from get audio in practice.
   const auto lifetime_stat = neteq->GetLifetimeStatistics();
@@ -52,9 +56,13 @@ void NetEqStatsGetter::AfterGetAudio(int64_t time_now_ms,
           stats_query_interval_ms_) {
     NetEqNetworkStatistics stats;
     RTC_CHECK_EQ(neteq->NetworkStatistics(&stats), 0);
-    stats_.push_back(std::make_pair(time_now_ms, stats));
-    lifetime_stats_.push_back(std::make_pair(time_now_ms, lifetime_stat));
+    if (rtc::TimeDiff(time_now_ms, last_decoded_packet_time_ms_) < 10000) {
+      // Only record stats if we have decoded packets in the last 10 seconds.
+      stats_.push_back(std::make_pair(time_now_ms, stats));
+      RecordLifetimeStats(time_now_ms, lifetime_stat);
+    }
     last_stats_query_time_ms_ = time_now_ms;
+    last_lifetime_stats_ = lifetime_stat;
   }
 
   const auto voice_concealed_samples =
@@ -137,6 +145,61 @@ NetEqStatsGetter::Stats NetEqStatsGetter::AverageStats() const {
   sum_stats.median_waiting_time_ms /= stats_.size();
 
   return sum_stats;
+}
+
+// In order to be able to stop counting the stats during periods when no packets
+// are received, we need to incrementally add the difference since the last time
+// we sampled the stats.
+void NetEqStatsGetter::RecordLifetimeStats(
+    int64_t time_now_ms,
+    const NetEqLifetimeStatistics& stats) {
+  NetEqLifetimeStatistics lifetime_stats;
+  if (!lifetime_stats_.empty()) {
+    lifetime_stats = lifetime_stats_.back().second;
+  }
+
+  lifetime_stats.total_samples_received +=
+      stats.total_samples_received -
+      last_lifetime_stats_.total_samples_received;
+  lifetime_stats.concealed_samples +=
+      stats.concealed_samples - last_lifetime_stats_.concealed_samples;
+  lifetime_stats.concealment_events +=
+      stats.concealment_events - last_lifetime_stats_.concealment_events;
+  lifetime_stats.jitter_buffer_delay_ms +=
+      stats.jitter_buffer_delay_ms -
+      last_lifetime_stats_.jitter_buffer_delay_ms;
+  lifetime_stats.jitter_buffer_emitted_count +=
+      stats.jitter_buffer_emitted_count -
+      last_lifetime_stats_.jitter_buffer_emitted_count;
+  lifetime_stats.inserted_samples_for_deceleration +=
+      stats.jitter_buffer_emitted_count -
+      last_lifetime_stats_.jitter_buffer_emitted_count;
+  lifetime_stats.removed_samples_for_acceleration +=
+      stats.removed_samples_for_acceleration -
+      last_lifetime_stats_.removed_samples_for_acceleration;
+  lifetime_stats.silent_concealed_samples +=
+      stats.silent_concealed_samples -
+      last_lifetime_stats_.silent_concealed_samples;
+  lifetime_stats.fec_packets_received +=
+      stats.fec_packets_received - last_lifetime_stats_.fec_packets_received;
+  lifetime_stats.fec_packets_discarded +=
+      stats.fec_packets_discarded - last_lifetime_stats_.fec_packets_discarded;
+  lifetime_stats.delayed_packet_outage_samples +=
+      stats.delayed_packet_outage_samples -
+      last_lifetime_stats_.delayed_packet_outage_samples;
+  lifetime_stats.relative_packet_arrival_delay_ms +=
+      stats.relative_packet_arrival_delay_ms -
+      last_lifetime_stats_.relative_packet_arrival_delay_ms;
+  lifetime_stats.jitter_buffer_packets_received +=
+      stats.jitter_buffer_packets_received -
+      last_lifetime_stats_.jitter_buffer_packets_received;
+  lifetime_stats.interruption_count +=
+      stats.interruption_count - last_lifetime_stats_.interruption_count;
+  lifetime_stats.total_interruption_duration_ms +=
+      stats.total_interruption_duration_ms -
+      last_lifetime_stats_.total_interruption_duration_ms;
+
+  lifetime_stats_.emplace_back(time_now_ms, lifetime_stats);
 }
 
 }  // namespace test

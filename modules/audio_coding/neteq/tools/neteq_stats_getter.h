@@ -89,9 +89,14 @@ class NetEqStatsGetter : public NetEqGetAudioCallback {
   Stats AverageStats() const;
 
  private:
+  void RecordLifetimeStats(int64_t time_now_ms,
+                           const NetEqLifetimeStatistics& stats);
+
   std::unique_ptr<NetEqDelayAnalyzer> delay_analyzer_;
   int64_t stats_query_interval_ms_ = 1000;
   int64_t last_stats_query_time_ms_ = 0;
+  int64_t last_decoded_packet_time_ms_ = 0;
+  NetEqLifetimeStatistics last_lifetime_stats_;
   std::vector<std::pair<int64_t, NetEqNetworkStatistics>> stats_;
   std::vector<std::pair<int64_t, NetEqLifetimeStatistics>> lifetime_stats_;
   size_t current_concealment_event_ = 1;
