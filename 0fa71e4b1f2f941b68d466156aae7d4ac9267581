@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e32786cc_65f976c3",
+        "filename": "test/pc/e2e/peer_connection_quality_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T12:19:43Z",
+      "side": 1,
+      "message": "This type isn\u0027t more efficient to move than to copy, and you don\u0027t avoid copies anywhere else in this CL.",
+      "range": {
+        "startLine": 139,
+        "startChar": 30,
+        "endLine": 139,
+        "endChar": 39
+      },
+      "revId": "0fa71e4b1f2f941b68d466156aae7d4ac9267581",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
