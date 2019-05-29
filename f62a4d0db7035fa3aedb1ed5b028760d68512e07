@@ -16,6 +16,24 @@
       "revId": "f62a4d0db7035fa3aedb1ed5b028760d68512e07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cccffae1_3cbda4a0",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-29T13:36:55Z",
+      "side": 1,
+      "message": "This is awkward to deal with without having access to the full set of our usual helper classes. I decided to add an `empty_entries()` since there\u0027s at least one prior case in the WebRTC code that does so:\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_processing/include/config.h?l\u003d100\u0026rcl\u003d98266a4af1828b99807d98f12d3a56f8a37ec5be",
+      "parentUuid": "64d19cb0_cb07ee99",
+      "revId": "f62a4d0db7035fa3aedb1ed5b028760d68512e07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
