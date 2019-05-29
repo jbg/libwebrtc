@@ -204,6 +204,24 @@
       "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a07ccfe3_06f60c66",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T09:36:24Z",
+      "side": 1,
+      "message": "Oh, and instead of `64`, it looks like you can use ABSL_CACHELINE_SIZE. Or possibly even ABSL_CACHELINE_ALIGNED.",
+      "parentUuid": "f9dbf3eb_daee70ab",
+      "revId": "a55e2cf6613d0c87fad6f5580b5e398ba9810539",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
