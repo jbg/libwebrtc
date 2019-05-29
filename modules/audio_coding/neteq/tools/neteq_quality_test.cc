@@ -412,7 +412,7 @@ void NetEqQualityTest::Simulate() {
   while (!end_of_input &&
          (FLAG_runtime_ms < 0 || decoded_time_ms_ < FLAG_runtime_ms)) {
     // Preload the buffer if needed.
-    while (decodable_time_ms_ - FLAG_preload_packets * block_duration_ms_ <
+    while (decodable_time_ms_ - FLAG_preload_packets * block_duration_ms_ <=
            decoded_time_ms_) {
       if (!in_file_->Read(in_size_samples_ * channels_, &in_data_[0])) {
         end_of_input = true;
