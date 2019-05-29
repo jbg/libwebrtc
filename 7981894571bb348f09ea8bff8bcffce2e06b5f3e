@@ -22,6 +22,92 @@
       "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f85034d_c4fce3f8",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-29T11:29:17Z",
+      "side": 1,
+      "message": "Why is key-frame sender is sent directly instead of via the buffer?",
+      "range": {
+        "startLine": 245,
+        "startChar": 70,
+        "endLine": 245,
+        "endChar": 74
+      },
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3044c23_e395d692",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-29T11:29:17Z",
+      "side": 1,
+      "message": "This will request KF directly without buffering. Is this what you want?",
+      "range": {
+        "startLine": 378,
+        "startChar": 8,
+        "endLine": 378,
+        "endChar": 26
+      },
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e57cbfc_7aadd11e",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-29T11:29:17Z",
+      "side": 1,
+      "message": "This will request KF directly without buffering. Is this what you want?",
+      "range": {
+        "startLine": 525,
+        "startChar": 6,
+        "endLine": 525,
+        "endChar": 24
+      },
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4b0551b_ee614566",
+        "filename": "video/rtp_video_stream_receiver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-29T11:29:17Z",
+      "side": 1,
+      "message": "Maybe move this comment below, or change the order of thread checker and cs.",
+      "revId": "7981894571bb348f09ea8bff8bcffce2e06b5f3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
