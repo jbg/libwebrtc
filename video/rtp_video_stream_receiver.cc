@@ -75,6 +75,72 @@ std::unique_ptr<RtpRtcp> CreateRtpRtcpModule(
 
 static const int kPacketLogIntervalMs = 10000;
 
+RtpVideoStreamReceiver::RtcpFeedbackBuffer::RtcpFeedbackBuffer(
+    KeyFrameRequestSender* key_frame_request_sender,
+    NackSender* nack_sender,
+    LossNotificationSender* loss_notification_sender)
+    : key_frame_request_sender_(key_frame_request_sender),
+      nack_sender_(nack_sender),
+      loss_notification_sender_(loss_notification_sender),
+      request_key_frame_(false) {
+  RTC_DCHECK(key_frame_request_sender_);
+  RTC_DCHECK(nack_sender_);
+  RTC_DCHECK(loss_notification_sender_);
+}
+
+void RtpVideoStreamReceiver::RtcpFeedbackBuffer::RequestKeyFrame() {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  request_key_frame_ = true;
+}
+
+void RtpVideoStreamReceiver::RtcpFeedbackBuffer::SendNack(
+    const std::vector<uint16_t>& sequence_numbers) {
+  RTC_DCHECK(!sequence_numbers.empty());
+  rtc::CritScope lock(&nack_cs_);
+  nack_sequence_numbers_.insert(nack_sequence_numbers_.end(),
+                                sequence_numbers.cbegin(),
+                                sequence_numbers.cend());
+}
+
+void RtpVideoStreamReceiver::RtcpFeedbackBuffer::SendLossNotification(
+    uint16_t last_decoded_seq_num,
+    uint16_t last_received_seq_num,
+    bool decodability_flag) {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  lntf_state_ = absl::make_optional<LossNotificationState>(
+      last_decoded_seq_num, last_received_seq_num, decodability_flag);
+}
+
+// TODO(bugs.webrtc.org/10336): Make SendBufferedRtcpFeedback() actually
+// set everything, then send it all together.
+void RtpVideoStreamReceiver::RtcpFeedbackBuffer::SendBufferedRtcpFeedback() {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+
+  // Handle key frame requests.
+  const bool key_frame_requested = request_key_frame_;
+  if (request_key_frame_) {
+    key_frame_request_sender_->RequestKeyFrame();
+    request_key_frame_ = false;
+  }
+
+  // Handle NACKs. (No need to send any if a key frame is requested, but must
+  // clear the list of NACKs in either case.)
+  {
+    rtc::CritScope lock(&nack_cs_);
+    if (!key_frame_requested && !nack_sequence_numbers_.empty()) {
+      nack_sender_->SendNack(nack_sequence_numbers_);
+    }
+    nack_sequence_numbers_.clear();
+  }
+
+  // Handle loss notifications (LNTF).
+  if (lntf_state_) {
+    loss_notification_sender_->SendLossNotification(
+        lntf_state_->last_decoded_seq_num, lntf_state_->last_received_seq_num,
+        lntf_state_->decodability_flag);
+  }
+}
+
 RtpVideoStreamReceiver::RtpVideoStreamReceiver(
     Clock* clock,
     Transport* transport,
@@ -125,6 +191,9 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
       last_packet_log_ms_(-1),
       rtp_rtcp_(std::move(rtp_rtcp)),
       complete_frame_callback_(complete_frame_callback),
+      // TODO(bugs.webrtc.org/10336): Let |rtcp_feedback_buffer_| communicate
+      // directly with |rtp_rtcp_|.
+      rtcp_feedback_buffer_(this, nack_sender, this),
       has_received_frame_(false),
       frames_decryptable_(false) {
   constexpr bool remb_candidate = true;
@@ -168,11 +237,13 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
 
   if (config_.rtp.lntf.enabled) {
     loss_notification_controller_ =
-        absl::make_unique<LossNotificationController>(this, this);
+        absl::make_unique<LossNotificationController>(&rtcp_feedback_buffer_,
+                                                      &rtcp_feedback_buffer_);
   }
 
   if (config_.rtp.nack.rtp_history_ms != 0) {
-    nack_module_ = absl::make_unique<NackModule>(clock_, nack_sender, this);
+    nack_module_ =
+        absl::make_unique<NackModule>(clock_, &rtcp_feedback_buffer_, this);
     process_thread_->RegisterModule(nack_module_.get(), RTC_FROM_HERE);
   }
 
@@ -286,6 +357,8 @@ int32_t RtpVideoStreamReceiver::OnReceivedPayloadData(
     packet.timesNacked = -1;
   }
   packet.receive_time_ms = clock_->TimeInMilliseconds();
+
+  rtcp_feedback_buffer_.SendBufferedRtcpFeedback();
 
   if (packet.sizeBytes == 0) {
     NotifyReceiverOfEmptyPacket(packet.seqNum);
