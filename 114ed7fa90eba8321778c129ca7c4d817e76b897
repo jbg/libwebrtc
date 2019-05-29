@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2a23f93_6275f86e",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "This comment only explains the obvious stuff. Say e.g.\n\n  // Drop all currently non-empty elements by setting num_elements_ to zero and incrementing next_read_index_ by the old value of num_elements_. Relaxed memory ordering is sufficient since we don\u0027t actually touch the dropped elements.",
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d4ff5c2_22589019",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "Eliminate `n` and join these two statements? Alternatively, give it a meaningful name such as `old_num_elements`.",
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39e97b95_e6683868",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "It\u0027s usually better to think of the atomic operations as fixed points in the execution stream, and the non-atomics being reordered. So something like\n\n  // Load the value of num_elements_; acquire memory ordering is required to prevent the reads and writes to queue_[next_write_index_] to be reordered before the load. (Because until the load has finished, Remove() might still be accessing that element.)",
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8722886_4b83bb3d",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "`num_elements`? And const?",
+      "range": {
+        "startLine": 133,
+        "startChar": 11,
+        "endLine": 133,
+        "endChar": 12
+      },
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f960cee5_19626a0f",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "Or\n\n  // Increment the value of num_elements_ to account for the element we just inserted; release memory ordering is required to prevent the reads and writes to queue_[next_write_index_] to be reordered after the increment. (Because once the increment has finished, Remove() might start accessing that element.)",
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1ab8ed4_e7d43e47",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "Don\u0027t reuse local variables. And use const. And call it something like `old_num_elements`, since it\u0027s not obvious that it\u0027s the previous value that\u0027s returned.",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 5
+      },
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "581f2ee6_51254bd3",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "LT?",
+      "range": {
+        "startLine": 153,
+        "startChar": 15,
+        "endLine": 153,
+        "endChar": 17
+      },
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9ce872a_4db83136",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "All my new Insert() comments apply here too.",
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a577c11_6dfdae9a",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-05-29T13:47:52Z",
+      "side": 1,
+      "message": "Note that the elements are accessed by both producer and consumer, mediated by num_elements_.",
+      "revId": "114ed7fa90eba8321778c129ca7c4d817e76b897",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
