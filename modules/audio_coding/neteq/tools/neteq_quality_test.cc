@@ -40,6 +40,8 @@ const std::string& DefaultOutFilename() {
 
 // Common validator for file names.
 static bool ValidateFilename(const std::string& value, bool write) {
+  RTC_CHECK_NE(value.substr(value.find_last_of(".") + 1), "wav")
+      << "WAV file input is not supported";
   FILE* fid = write ? fopen(value.c_str(), "wb") : fopen(value.c_str(), "rb");
   if (fid == nullptr)
     return false;
