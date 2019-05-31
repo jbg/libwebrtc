@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b3b3313c_dcf01cba",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-31T09:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66c8d549_f96ef90f",
+      "range": {
+        "startLine": 69,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 56
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0338d0dc_6f9b6d7f",
         "filename": "modules/video_coding/nack_module.cc",
         "patchSetId": 10
@@ -45,6 +69,30 @@
       "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d39ef50_03fcaf93",
+        "filename": "modules/video_coding/nack_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-31T09:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0338d0dc_6f9b6d7f",
+      "range": {
+        "startLine": 182,
+        "startChar": 63,
+        "endLine": 182,
+        "endChar": 68
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "f9665302_d2700338",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-31T09:42:19Z",
+      "side": 1,
+      "message": "Most code in WebRTC seems to use RTC_DCHECK in these cases. Have the guidelines changed since?\n(I have made the change you have requested.)",
+      "parentUuid": "efade608_390ca843",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 12
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b627644_983ea7f1",
         "filename": "video/rtp_video_stream_receiver.cc",
         "patchSetId": 10
@@ -91,6 +163,30 @@
       "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b656665_210b7382",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-31T09:42:19Z",
+      "side": 1,
+      "message": "This particular SendNack() is called from inside WebRTC (please correct me if there is a code path I had neglected to consider). It is therefore within our control to make sure that it is never called (it\u0027s an override of a deprecated method, and exists purely for technical reasons). Better to surface a potential bug than to hide it in this case, IMHO.",
+      "parentUuid": "5b627644_983ea7f1",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 19
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "730b2caa_53f73c1e",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-31T09:42:19Z",
+      "side": 1,
+      "message": "The parameter is called \"buffering_allowed\", not \"batching_allowed\". The idea is that we do not allow this particular message to be delayed further. It is permissible to batch this message with *previously buffered* messages. I have added a comment to this effect, to make things clearer.",
+      "parentUuid": "58e89769_62acc97b",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 31
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e84f0483_274e7621",
         "filename": "video/rtp_video_stream_receiver.cc",
         "patchSetId": 10
@@ -128,6 +248,30 @@
       "writtenOn": "2019-05-31T07:46:20Z",
       "side": 1,
       "message": "I am not sure, what happens if there already was some lntf_state? For nacks and key-frames new state is \"appended\" to the existing ones. Are you sure it\u0027s safe to update the state with the latest state? What if there\u0027s some race condition above? Should you take Max() instead for some fields?",
+      "range": {
+        "startLine": 119,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 15
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a02ddf7b_eca18548",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-31T09:42:19Z",
+      "side": 1,
+      "message": "Please note that the code path that sets LNTF state always ends up calling SendBufferedRtcpFeedback() on the same thread, before any additional calls to SendLossNotification() are made. An earlier revision was demonstrating that with a DCHECK showing that lntf_state_ is empty, but I ended up removing it. Let me reintroduce it.",
+      "parentUuid": "e84f0483_274e7621",
       "range": {
         "startLine": 119,
         "startChar": 2,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "d8c81708_fb18e71c",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-31T09:42:19Z",
+      "side": 1,
+      "message": "It doesn\u0027t break any unit tests, that I can tell. But unit tests are rarely perfect, so I might not want to rely on that. I suspect this method can\u0027t be called from downstream projects, but I don\u0027t remember if I had verified that, and I don\u0027t think it would make sense to verify again - let me replace by a call to the safer SendNack(..., false) here, then.",
+      "parentUuid": "c64e1782_5bea3a52",
+      "range": {
+        "startLine": 517,
+        "startChar": 2,
+        "endLine": 517,
+        "endChar": 19
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ffddd16_6df63fd2",
         "filename": "video/video_receive_stream.cc",
         "patchSetId": 10
@@ -174,6 +342,30 @@
       "writtenOn": "2019-05-31T07:46:20Z",
       "side": 1,
       "message": "Why?",
+      "range": {
+        "startLine": 522,
+        "startChar": 2,
+        "endLine": 522,
+        "endChar": 32
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "075d83cf_bb13cdfb",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-05-31T09:42:19Z",
+      "side": 1,
+      "message": "Because the value |false| makes no sense here, and would be ignored. It is an artifact of both classes implementing the same interface, which might be something we would want to refactor in the future. Wdyt about a TODO here?",
+      "parentUuid": "4ffddd16_6df63fd2",
       "range": {
         "startLine": 522,
         "startChar": 2,
