@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9ad022f5_6a58b687",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-31T11:36:58Z",
+      "side": 1,
+      "message": "They are from iwyu linters warnings:\n\ncstdint \u003d uint32_t\nutility \u003d std::move()",
+      "parentUuid": "527c6c98_67003bb4",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 18
+      },
+      "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbbee013_af186e94",
         "filename": "api/rtp_packet_info.h",
         "patchSetId": 14
@@ -45,6 +69,30 @@
       "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a23f32b_c406717f",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-31T11:36:58Z",
+      "side": 1,
+      "message": "The indentation was intended but we can make due without it.",
+      "parentUuid": "cbbee013_af186e94",
+      "range": {
+        "startLine": 62,
+        "startChar": 5,
+        "endLine": 62,
+        "endChar": 7
+      },
+      "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ebc2c430_9d9efa1b",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-31T11:36:58Z",
+      "side": 1,
+      "message": "It\u0027s plural because the comment is meant to say \"the following line(s) all come from the Audio Level header extension\". It just happens to only be one of them right now.",
+      "parentUuid": "54a11216_4b7406d7",
+      "range": {
+        "startLine": 68,
+        "startChar": 5,
+        "endLine": 68,
+        "endChar": 11
+      },
+      "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93602f4f_564bfe04",
         "filename": "api/rtp_packet_info.h",
         "patchSetId": 14
@@ -91,6 +163,30 @@
       "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee697e94_0f88f53f",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-31T11:36:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "93602f4f_564bfe04",
+      "range": {
+        "startLine": 69,
+        "startChar": 5,
+        "endLine": 69,
+        "endChar": 7
+      },
+      "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "088db19d_5a5adf63",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-31T11:36:58Z",
+      "side": 1,
+      "message": "Changed to `webrtc::Clock` to clarify that its referring to that class. This is meant as a hint. `RtpPacketInfo` doesn\u0027t actually know which precise instance of the clock that the timestamp is coming from (that\u0027s up to the caller to decide).",
+      "parentUuid": "eb3b3764_9c832e6d",
+      "range": {
+        "startLine": 72,
+        "startChar": 11,
+        "endLine": 72,
+        "endChar": 24
+      },
+      "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83d9894e_b2f468b6",
         "filename": "api/rtp_packet_info_unittest.cc",
         "patchSetId": 14
@@ -137,6 +257,30 @@
       "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "716fcaba_1eb84d68",
+        "filename": "api/rtp_packet_info_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-31T11:36:58Z",
+      "side": 1,
+      "message": "There seem to be two advantages to it:\n\n1. Consistency. The \"expected\" value all line up perfectly under each other.\n2. It better handles type mismatches like `size_t` vs `int`. `EXPECT_THAT(v.size(), 2)` works just fine while `EXPECT_EQ(v.size(), 2)` results in a build error (due to signed/unsigned mismatch).",
+      "parentUuid": "83d9894e_b2f468b6",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
