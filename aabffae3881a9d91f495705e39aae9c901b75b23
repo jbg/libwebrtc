@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c0e204f2_8b57c2d9",
+        "filename": "modules/audio_coding/neteq/tools/neteq_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 7967
+      },
+      "writtenOn": "2019-05-31T07:14:24Z",
+      "side": 1,
+      "message": "That would change the current behavior and may break other people usage of this tool. Do you know if somebody is using this tool outside our tests?",
+      "parentUuid": "1ad01aeb_0421da90",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 9
+      },
+      "revId": "aabffae3881a9d91f495705e39aae9c901b75b23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7c72d3d0_db95cb8d",
         "filename": "modules/audio_coding/neteq/tools/neteq_quality_test.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-05-29T10:31:49Z",
       "side": 1,
       "message": "Although it is technically correct, it is difficult to understand, because it relies a lot on knowing the auto-rewind mode of the and how it affects the return of Read().\n\nI think, for better readability, we can introduce a \"bool in_file_loop_\"\n\nand put\n\nwhile ((!in_file_loop_ \u0026\u0026 !in_file_ended) || (in_file_loop_ \u0026\u0026 decoded_time_ms_ \u003c FLAG_runtime_ms)) {\n  while (decodable_time_ms_ - FLAG_preload_packets * block_duration_ms_ \u003c\n           decoded_time_ms_) {\n    in_file_ended \u003d !in_file_-\u003eRead(in_size_samples_ * channels_, \u0026in_data_[0]);\n    ASSERT_FALSE(in_file_loop_ \u0026\u0026 in_file_ended);\n  }\n}",
+      "range": {
+        "startLine": 412,
+        "startChar": 9,
+        "endLine": 413,
+        "endChar": 68
+      },
+      "revId": "aabffae3881a9d91f495705e39aae9c901b75b23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f54e0271_5b296f0c",
+        "filename": "modules/audio_coding/neteq/tools/neteq_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 7967
+      },
+      "writtenOn": "2019-05-31T07:14:24Z",
+      "side": 1,
+      "message": "I am not following that code. I tried to clean the conditions a bit and ended up whit something like this:\n\n  bool end_of_input \u003d false;\n  int runtime_ms \u003d FLAG_runtime_ms \u003e\u003d 0 ? FLAG_runtime_ms : INT_MAX;\n\n  while (!end_of_input \u0026\u0026 decoded_time_ms_ \u003c runtime_ms) {\n    while (decodable_time_ms_ - FLAG_preload_packets * block_duration_ms_ \u003c\n           decoded_time_ms_) {\n      if (!in_file_-\u003eRead(in_size_samples_ * channels_, \u0026in_data_[0])) {\n        end_of_input \u003d true;\n        break;\n      }\n....\n\nI can clarify the reading part a bit more, but I don\u0027t think adding complicated boolean rules in the while will help us much.\n\nWhat do you think?",
+      "parentUuid": "7c72d3d0_db95cb8d",
       "range": {
         "startLine": 412,
         "startChar": 9,
