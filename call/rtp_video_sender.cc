@@ -33,6 +33,9 @@
 
 namespace webrtc {
 
+// TODO: !!!
+class VideoStreamEncoderInterface;
+
 namespace webrtc_internal_rtp_video_sender {
 
 RtpStreamSender::RtpStreamSender(
@@ -216,6 +219,7 @@ RtpVideoSender::RtpVideoSender(
     RtcEventLog* event_log,
     RateLimiter* retransmission_limiter,
     std::unique_ptr<FecController> fec_controller,
+    VideoStreamEncoderInterface* video_stream_encoder,
     FrameEncryptorInterface* frame_encryptor,
     const CryptoOptions& crypto_options)
     : send_side_bwe_with_overhead_(
@@ -680,6 +684,15 @@ void RtpVideoSender::OnTransportOverheadChanged(
 void RtpVideoSender::OnOverheadChanged(size_t overhead_bytes_per_packet) {
   rtc::CritScope lock(&crit_);
   overhead_bytes_per_packet_ = overhead_bytes_per_packet;
+}
+
+void RtpVideoSender::DisableRetransmission() {
+  // TODO: !!!
+  // video_stream_encoder->(stream.rtp_rtcp->RtpSender());
+}
+
+void RtpVideoSender::EnableRetransmission() {
+  // TODO: !!!
 }
 
 void RtpVideoSender::OnBitrateUpdated(uint32_t bitrate_bps,

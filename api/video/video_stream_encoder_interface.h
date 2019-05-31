@@ -23,6 +23,9 @@
 
 namespace webrtc {
 
+// TODO: !!! Move this.
+class RetransmissionController;
+
 // This interface represents a class responsible for creating and driving the
 // encoder(s) for a single video stream. It is also responsible for adaptation
 // decisions related to video quality, requesting reduced frame rate or
@@ -96,6 +99,11 @@ class VideoStreamEncoderInterface : public rtc::VideoSinkInterface<VideoFrame> {
   // and spatial layers.
   virtual void SetBitrateAllocationObserver(
       VideoBitrateAllocationObserver* bitrate_observer) = 0;
+
+  // Set a RetransmissionController, through which packet retransmission (e.g in
+  // response to NACK messages) may be enabled/disabled.
+  virtual void SetRetransmissionController(
+      RetransmissionController* retransmission_controller) = 0;
 
   // Creates and configures an encoder with the given |config|. The
   // |max_data_payload_length| is used to support single NAL unit

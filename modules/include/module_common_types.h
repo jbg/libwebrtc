@@ -83,6 +83,18 @@ class NackSender {
   virtual ~NackSender() {}
 };
 
+// Control whether retransmissions should be used for a given stream. This is
+// useful when an encoder decides to handle losses based on a different type
+// of feedback message.
+class RetransmissionController {
+ public:
+  virtual void DisableRetransmission() = 0;
+  virtual void EnableRetransmission() = 0;
+
+ protected:
+  virtual ~RetransmissionController() = default;
+};
+
 // Interface used by NackModule and JitterBuffer.
 class KeyFrameRequestSender {
  public:
