@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66c8d549_f96ef90f",
+        "filename": "modules/include/module_common_types.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T07:46:20Z",
+      "side": 1,
+      "message": "Add RTC_DEPRECATED or just write Derpecated in the comment.",
+      "range": {
+        "startLine": 69,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 56
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0338d0dc_6f9b6d7f",
+        "filename": "modules/video_coding/nack_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T07:46:20Z",
+      "side": 1,
+      "message": "Can you add comments or otherwise explain why buffering is allowed/dis-allowed in different scenarios here. I don\u0027t understand the underlying issue.",
+      "range": {
+        "startLine": 182,
+        "startChar": 63,
+        "endLine": 182,
+        "endChar": 68
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efade608_390ca843",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T07:46:20Z",
+      "side": 1,
+      "message": "These all should be RTC_CHECK, since there are no checks for null pointer de-referencing below.",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 12
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b627644_983ea7f1",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T07:46:20Z",
+      "side": 1,
+      "message": "Again, safer to call SendNack(..., false).",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 19
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58e89769_62acc97b",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T07:46:20Z",
+      "side": 1,
+      "message": "What if the buffer already had e.g. LTNF? There still would be buffering, although not as delayed as in other cases. It would be more rational, IMHO, call \n|nack_sender_-\u003eSendNack(nack_sequence_numbers_, false);| here and clear nack_sequence_numbers_.",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 31
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e84f0483_274e7621",
+        "filename": "video/rtp_video_stream_receiver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T07:46:20Z",
+      "side": 1,
+      "message": "I am not sure, what happens if there already was some lntf_state? For nacks and key-frames new state is \"appended\" to the existing ones. Are you sure it\u0027s safe to update the state with the latest state? What if there\u0027s some race condition above? Should you take Max() instead for some fields?",
+      "range": {
+        "startLine": 119,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 15
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c64e1782_5bea3a52",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T07:46:20Z",
+      "side": 1,
+      "message": "Please check that this doesn\u0027t break any downstream projects. Safer to call SendNack(..., false) instead.",
+      "range": {
+        "startLine": 517,
+        "startChar": 2,
+        "endLine": 517,
+        "endChar": 19
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ffddd16_6df63fd2",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T07:46:20Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 522,
+        "startChar": 2,
+        "endLine": 522,
+        "endChar": 32
+      },
+      "revId": "b8d82a546cbe837603b3376a2097c0377f4e9ebf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
