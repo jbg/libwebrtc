@@ -1270,4 +1270,13 @@ void RTPSender::OnPacketsAcknowledged(
     rtc::ArrayView<const uint16_t> sequence_numbers) {
   packet_history_.CullAcknowledgedPackets(sequence_numbers);
 }
+
+void RTPSender::DisableRetransmission() {
+  // TODO: !!!
+}
+
+void RTPSender::EnableRetransmission() {
+  // TODO: !!!
+}
+
 }  // namespace webrtc
