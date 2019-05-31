@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a96bd1ed_c58325e9",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T09:50:00Z",
+      "side": 1,
+      "message": "in the comment you said you would use |false| here. And it should be false, because if the caller doesn\u0027t know anything about buffering, it\u0027s safer to assume it\u0027s not allowed.",
+      "range": {
+        "startLine": 517,
+        "startChar": 29,
+        "endLine": 517,
+        "endChar": 33
+      },
+      "revId": "42d51174a3c4840c15df5b4d9ca3ea26d9d1dd13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "197291ac_a41de4d8",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-05-31T09:50:00Z",
+      "side": 1,
+      "message": "Sorry, but now it may be called with false due to SendNack(seq_numbers) call. Also, NackModule does call SendNack(..., false) sometimes. I am not sure this call doesn\u0027t trigger this method in the end.",
+      "range": {
+        "startLine": 522,
+        "startChar": 2,
+        "endLine": 522,
+        "endChar": 32
+      },
+      "revId": "42d51174a3c4840c15df5b4d9ca3ea26d9d1dd13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
