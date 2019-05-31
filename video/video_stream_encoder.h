@@ -74,6 +74,9 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   void SetBitrateAllocationObserver(
       VideoBitrateAllocationObserver* bitrate_observer) override;
 
+  void SetRetransmissionController(
+      RetransmissionControllerInterface* retransmission_controller) override;
+
   void ConfigureEncoder(VideoEncoderConfig config,
                         size_t max_data_payload_length) override;
 
