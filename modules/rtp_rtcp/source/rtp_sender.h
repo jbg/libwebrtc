@@ -110,6 +110,9 @@ class RTPSender : public AcknowledgedPacketsObserver {
                                        int64_t capture_time_ms,
                                        bool retransmission,
                                        const PacedPacketInfo& pacing_info);
+  RtpPacketSendResult TimeToSendPacket(std::unique_ptr<RtpPacketToSend> packet,
+                                       bool retransmission,
+                                       const PacedPacketInfo& pacing_info);
   size_t TimeToSendPadding(size_t bytes, const PacedPacketInfo& pacing_info);
 
   // NACK.
@@ -306,6 +309,11 @@ class RTPSender : public AcknowledgedPacketsObserver {
   // packet_history_.GetPayloadPaddingPacket() will be called instead of
   // packet_history_.GetBestFittingPacket() in TrySendRedundantPayloads().
   const bool payload_padding_prefer_useful_packets_;
+
+  // If true, PacedSender should only reference packets as in legacy mode.
+  // If false, PacedSender may have direct ownership of RtpPacketToSend objects.
+  // Defaults to false.
+  const bool pacer_reference_packets_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RTPSender);
 };

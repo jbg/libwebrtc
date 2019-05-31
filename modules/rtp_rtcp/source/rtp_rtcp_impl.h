@@ -30,6 +30,7 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/tmmb_item.h"
 #include "modules/rtp_rtcp/source/rtcp_receiver.h"
 #include "modules/rtp_rtcp/source/rtcp_sender.h"
+#include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
 #include "modules/rtp_rtcp/source/rtp_sender.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/gtest_prod_util.h"
@@ -137,6 +138,11 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
       uint32_t ssrc,
       uint16_t sequence_number,
       int64_t capture_time_ms,
+      bool retransmission,
+      const PacedPacketInfo& pacing_info) override;
+
+  RtpPacketSendResult TimeToSendPacket(
+      std::unique_ptr<RtpPacketToSend> packet,
       bool retransmission,
       const PacedPacketInfo& pacing_info) override;
 

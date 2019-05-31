@@ -417,6 +417,14 @@ RtpPacketSendResult ModuleRtpRtcpImpl::TimeToSendPacket(
                                        retransmission, pacing_info);
 }
 
+RtpPacketSendResult ModuleRtpRtcpImpl::TimeToSendPacket(
+    std::unique_ptr<RtpPacketToSend> packet,
+    bool retransmission,
+    const PacedPacketInfo& pacing_info) {
+  return rtp_sender_->TimeToSendPacket(std::move(packet), retransmission,
+                                       pacing_info);
+}
+
 size_t ModuleRtpRtcpImpl::TimeToSendPadding(
     size_t bytes,
     const PacedPacketInfo& pacing_info) {
