@@ -1,3 +1,4 @@
+#if 0
 /*
  *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
  *
@@ -514,3 +515,4 @@ TEST(RtpVideoSenderTest, DoesNotRetrasmitAckedPackets) {
   ASSERT_TRUE(event.Wait(kTimeoutMs));
 }
 }  // namespace webrtc
+#endif
