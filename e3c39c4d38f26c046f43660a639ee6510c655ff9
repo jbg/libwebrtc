@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ac9511e2_73201c06",
+        "filename": "api/rtp_packet_info.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-31T14:04:00Z",
+      "side": 1,
+      "message": "Callers may also do `std::move()` and avoid the copy altogether. I think that it just boils down to preference here.",
+      "parentUuid": "06fab6ad_502cbf66",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 18
+      },
+      "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbbee013_af186e94",
         "filename": "api/rtp_packet_info.h",
         "patchSetId": 14
@@ -368,6 +392,30 @@
       "side": 1,
       "message": "AFAIK, type matching issue on EXPECT_EQ has been resolved.\n\nAnyway, it is fine as long as it is consistent in this test.\n\nBut it would be good to put Eq(value) to avoid implying equality matching.",
       "parentUuid": "716fcaba_1eb84d68",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "e3c39c4d38f26c046f43660a639ee6510c655ff9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c75d830_e8139416",
+        "filename": "api/rtp_packet_info_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-05-31T14:04:00Z",
+      "side": 1,
+      "message": "\u003e AFAIK, type matching issue on EXPECT_EQ has been resolved.\n\nIt doesn\u0027t seem so:\n\n    error: comparison of integers of different signs: \u0027const unsigned long\u0027 and \u0027const int\u0027 [-Werror,-Wsign-compare]\n\n\u003e But it would be good to put Eq(value) to avoid implying equality matching.\n\nI don\u0027t think that doing so would improve readability. There\u0027s also the fact that `EXPECT_THAT(v.size(), 2)` and `EXPECT_THAT(v.size(), Not(2))` work best if we don\u0027t wrap them as `Eq(2)` (it causes a similar type mismatch problem for the matcher).",
+      "parentUuid": "51063ac3_e21c9e42",
       "range": {
         "startLine": 31,
         "startChar": 2,
