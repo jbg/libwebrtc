@@ -13,6 +13,7 @@
 
 #include <stddef.h>
 #include <list>
+#include <memory>
 #include <vector>
 
 #include "absl/strings/string_view.h"
@@ -30,6 +31,7 @@
 
 namespace webrtc {
 class RtpPacket;
+class RtpPacketToSend;
 namespace rtcp {
 class TransportFeedback;
 }
@@ -390,6 +392,10 @@ class RtpPacketSender {
                             uint16_t sequence_number,
                             int64_t capture_time_ms,
                             size_t bytes,
+                            bool retransmission) = 0;
+
+  virtual void InsertPacket(std::unique_ptr<RtpPacketToSend> packet,
+                            Priority priority,
                             bool retransmission) = 0;
 
   // Currently audio traffic is not accounted by pacer and passed through.
