@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27941bfa_29c33d1b",
+        "filename": "config.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-05-31T07:22:02Z",
+      "side": 1,
+      "message": "Can already remove Win32 ASan :D\nThis is the one location that *doesn\u0027t* need the two-step rename process.",
+      "range": {
+        "startLine": 559,
+        "startChar": 13,
+        "endLine": 559,
+        "endChar": 23
+      },
+      "revId": "62128377113617c3b1dda65deda6ffe825e179ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
