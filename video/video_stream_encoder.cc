@@ -536,6 +536,18 @@ void VideoStreamEncoder::SetBitrateAllocationObserver(
   });
 }
 
+void VideoStreamEncoder::SetRetransmissionController(
+    RetransmissionController* retransmission_controller) {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  // encoder_queue_.PostTask([this, retransmission_controller] {
+  //   RTC_DCHECK_RUN_ON(&encoder_queue_);
+  //   // TODO: !!! Do something with this...
+
+  //   // RTC_DCHECK(!retransmission_controller_);
+  //   // retransmission_controller_ = retransmission_controller;
+  // });
+}
+
 void VideoStreamEncoder::SetSource(
     rtc::VideoSourceInterface<VideoFrame>* source,
     const DegradationPreference& degradation_preference) {
