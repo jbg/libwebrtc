@@ -22,6 +22,30 @@
       "revId": "381a1119807a81c00afffaa51808b541a92d3302",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb036ae3_3e5b3a55",
+        "filename": "modules/audio_coding/neteq/tools/neteq_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 7967
+      },
+      "writtenOn": "2019-05-31T07:28:44Z",
+      "side": 1,
+      "message": "That\u0027s not how I see preload_packets. Maybe I am wrong :-).\n\nIf preload is 0 then I don\u0027t want to add packets to the buffer. However I don\u0027t want to start the simulation with a GetAudio because I don\u0027t have any data to play. So, in my mind, a proper simulation starts always with inserting a packet and only then asking for GetAudio. If we use preload, we can add extra packets to the buffer.\n\nThe current code always starts with a call to GetAudio and then a call to PLC unless preload is used.",
+      "parentUuid": "77afc568_74a04dfa",
+      "range": {
+        "startLine": 416,
+        "startChar": 32,
+        "endLine": 416,
+        "endChar": 52
+      },
+      "revId": "381a1119807a81c00afffaa51808b541a92d3302",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
