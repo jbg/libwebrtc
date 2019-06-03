@@ -11,6 +11,7 @@
 #ifndef MODULES_RTP_RTCP_SOURCE_RTP_SENDER_H_
 #define MODULES_RTP_RTCP_SOURCE_RTP_SENDER_H_
 
+#include <atomic>
 #include <map>
 #include <memory>
 #include <string>
@@ -298,6 +299,7 @@ class RTPSender : public RetransmissionControllerInterface {
   std::map<int8_t, int8_t> rtx_payload_type_map_ RTC_GUARDED_BY(send_critsect_);
   size_t rtp_overhead_bytes_per_packet_ RTC_GUARDED_BY(send_critsect_);
 
+  std::atomic<bool> retransmissions_enabled_;
   RateLimiter* const retransmission_rate_limiter_;
   OverheadObserver* overhead_observer_;
   const bool populate_network2_timestamp_;

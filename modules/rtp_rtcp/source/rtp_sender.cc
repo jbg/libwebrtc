@@ -143,6 +143,7 @@ RTPSender::RTPSender(
       csrcs_(),
       rtx_(kRtxOff),
       rtp_overhead_bytes_per_packet_(0),
+      retransmissions_enabled_(true),
       retransmission_rate_limiter_(retransmission_rate_limiter),
       overhead_observer_(overhead_observer),
       populate_network2_timestamp_(populate_network2_timestamp),
@@ -454,6 +455,10 @@ bool RTPSender::StorePackets() const {
 }
 
 int32_t RTPSender::ReSendPacket(uint16_t packet_id) {
+  if (!retransmissions_enabled_) {
+    return 0;
+  }
+
   // Try to find packet in RTP packet history. Also verify RTT here, so that we
   // don't retransmit too often.
   absl::optional<RtpPacketHistory::PacketState> stored_packet =
@@ -1272,11 +1277,13 @@ void RTPSender::OnPacketsAcknowledged(
 }
 
 void RTPSender::DisableRetransmission() {
-  // TODO(bugs.webrtc.org/10702): Pause retransmission.
+  // TODO(bugs.webrtc.org/10702): Eject pending retransmissions from the
+  // paced sender.
+  retransmissions_enabled_ = false;
 }
 
 void RTPSender::EnableRetransmission() {
-  // TODO(bugs.webrtc.org/10702): Resume retransmission.
+  retransmissions_enabled_ = true;
 }
 
 }  // namespace webrtc

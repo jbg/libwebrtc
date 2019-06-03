@@ -836,6 +836,75 @@ TEST_P(RtpSenderTest, TrafficSmoothingRetransmits) {
   EXPECT_EQ(expected_send_time, rtp_header.extension.absoluteSendTime);
 }
 
+TEST_P(RtpSenderTest, RetransmissionEnabledByDefault) {
+  // Setup.
+  rtp_sender_->SetStorePacketsStatus(true, 10);
+
+  // Send one packet.
+  EXPECT_CALL(mock_paced_sender_, InsertPacket(_, kSsrc, kSeqNum, _, _, _))
+      .Times(1);
+  SendGenericPacket();
+  rtp_sender_->TimeToSendPacket(kSsrc, kSeqNum,
+                                fake_clock_.TimeInMilliseconds(),
+                                /*retransmission=*/false, PacedPacketInfo());
+  ASSERT_EQ(transport_.packets_sent(), 1);
+
+  // ReSendPacket again on said packet.
+  // (Only check that the pacer gets it, since it is actually possible to
+  // retransmit without limit through calls to TimeToSendPacket).
+  EXPECT_CALL(mock_paced_sender_, InsertPacket(_, kSsrc, kSeqNum, _, _, _))
+      .Times(1);
+  rtp_sender_->ReSendPacket(kSeqNum);
+}
+
+TEST_P(RtpSenderTest, RetransmissionCanBeDisabled) {
+  // Setup.
+  rtp_sender_->SetStorePacketsStatus(true, 10);
+
+  // Send one packet.
+  EXPECT_CALL(mock_paced_sender_, InsertPacket(_, kSsrc, kSeqNum, _, _, _))
+      .Times(1);
+  SendGenericPacket();
+  rtp_sender_->TimeToSendPacket(kSsrc, kSeqNum,
+                                fake_clock_.TimeInMilliseconds(),
+                                /*retransmission=*/false, PacedPacketInfo());
+  ASSERT_EQ(transport_.packets_sent(), 1);
+
+  // Test focus - disable retransmissions.
+  rtp_sender_->DisableRetransmission();
+
+  // ReSendPacket again on said packet has no effect.
+  // (Only check that the pacer does not get it, since it is actually possible
+  // to retransmit without limit through calls to TimeToSendPacket).
+  EXPECT_CALL(mock_paced_sender_, InsertPacket).Times(0);
+  rtp_sender_->ReSendPacket(kSeqNum);
+}
+
+TEST_P(RtpSenderTest, RetransmissionCanBeReEnabled) {
+  // Setup.
+  rtp_sender_->SetStorePacketsStatus(true, 10);
+
+  // Send one packet.
+  EXPECT_CALL(mock_paced_sender_, InsertPacket(_, kSsrc, kSeqNum, _, _, _))
+      .Times(1);
+  SendGenericPacket();
+  rtp_sender_->TimeToSendPacket(kSsrc, kSeqNum,
+                                fake_clock_.TimeInMilliseconds(),
+                                /*retransmission=*/false, PacedPacketInfo());
+  ASSERT_EQ(transport_.packets_sent(), 1);
+
+  // Test focus - disable retransmissions, then re-enable.
+  rtp_sender_->DisableRetransmission();
+  rtp_sender_->EnableRetransmission();
+
+  // ReSendPacket again on said packet.
+  // (Only check that the pacer gets it, since it is actually possible to
+  // retransmit without limit through calls to TimeToSendPacket).
+  EXPECT_CALL(mock_paced_sender_, InsertPacket(_, kSsrc, kSeqNum, _, _, _))
+      .Times(1);
+  rtp_sender_->ReSendPacket(kSeqNum);
+}
+
 // This test sends 1 regular video packet, then 4 padding packets, and then
 // 1 more regular packet.
 TEST_P(RtpSenderTest, SendPadding) {
