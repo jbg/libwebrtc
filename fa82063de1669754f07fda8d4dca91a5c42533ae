@@ -16,6 +16,24 @@
       "revId": "fa82063de1669754f07fda8d4dca91a5c42533ae",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6e55c58_30e5166e",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-06-03T19:43:02Z",
+      "side": 1,
+      "message": "Yep, I remember we had a bad bug due to wrong order of media transport / ICE destruction, so I decided to make it explicit here.",
+      "parentUuid": "0aa429dd_03c8ad38",
+      "revId": "fa82063de1669754f07fda8d4dca91a5c42533ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
