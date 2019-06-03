@@ -48,6 +48,8 @@ class MockPacedSenderCallback : public PacedSender::PacketSender {
                                    int64_t capture_time_ms,
                                    bool retransmission,
                                    const PacedPacketInfo& pacing_info));
+  MOCK_METHOD2(SendPacedPacket,
+               void(std::unique_ptr<RtpPacketToSend>, const PacedPacketInfo&));
   MOCK_METHOD2(TimeToSendPadding,
                size_t(size_t bytes, const PacedPacketInfo& pacing_info));
 };
@@ -64,6 +66,9 @@ class PacedSenderPadding : public PacedSender::PacketSender {
       const PacedPacketInfo& pacing_info) override {
     return RtpPacketSendResult::kSuccess;
   }
+
+  void SendPacedPacket(std::unique_ptr<RtpPacketToSend> packet,
+                       const PacedPacketInfo& pacing_info) override {}
 
   size_t TimeToSendPadding(size_t bytes,
                            const PacedPacketInfo& pacing_info) override {
@@ -91,6 +96,11 @@ class PacedSenderProbing : public PacedSender::PacketSender {
       const PacedPacketInfo& pacing_info) override {
     packets_sent_++;
     return RtpPacketSendResult::kSuccess;
+  }
+
+  void SendPacedPacket(std::unique_ptr<RtpPacketToSend> packet,
+                       const PacedPacketInfo& pacing_info) override {
+    packets_sent_++;
   }
 
   size_t TimeToSendPadding(size_t bytes,
@@ -177,7 +187,7 @@ TEST_F(PacedSenderFieldTrialTest, DefaultNoPaddingInSilence) {
   pacer.SetPacingRates(kTargetBitrateBps, 0);
   // Video packet to reset last send time and provide padding data.
   InsertPacket(&pacer, &video);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   clock_.AdvanceTimeMilliseconds(5);
   pacer.Process();
@@ -193,7 +203,7 @@ TEST_F(PacedSenderFieldTrialTest, PaddingInSilenceWithTrial) {
   pacer.SetPacingRates(kTargetBitrateBps, 0);
   // Video packet to reset last send time and provide padding data.
   InsertPacket(&pacer, &video);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   clock_.AdvanceTimeMilliseconds(5);
   pacer.Process();
@@ -211,18 +221,18 @@ TEST_F(PacedSenderFieldTrialTest, DefaultCongestionWindowAffectsAudio) {
   pacer.UpdateOutstandingData(0);
   // Video packet fills congestion window.
   InsertPacket(&pacer, &video);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   ProcessNext(&pacer);
   // Audio packet blocked due to congestion.
   InsertPacket(&pacer, &audio);
-  EXPECT_CALL(callback_, TimeToSendPacket).Times(0);
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _)).Times(0);
   ProcessNext(&pacer);
   ProcessNext(&pacer);
   // Audio packet unblocked when congestion window clear.
   ::testing::Mock::VerifyAndClearExpectations(&callback_);
   pacer.UpdateOutstandingData(0);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   ProcessNext(&pacer);
 }
@@ -236,12 +246,12 @@ TEST_F(PacedSenderFieldTrialTest, CongestionWindowDoesNotAffectAudioInTrial) {
   pacer.UpdateOutstandingData(0);
   // Video packet fills congestion window.
   InsertPacket(&pacer, &video);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   ProcessNext(&pacer);
   // Audio not blocked due to congestion.
   InsertPacket(&pacer, &audio);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   ProcessNext(&pacer);
 }
@@ -252,17 +262,17 @@ TEST_F(PacedSenderFieldTrialTest, DefaultBudgetAffectsAudio) {
                        0);
   // Video fills budget for following process periods.
   InsertPacket(&pacer, &video);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   ProcessNext(&pacer);
   // Audio packet blocked due to budget limit.
-  EXPECT_CALL(callback_, TimeToSendPacket).Times(0);
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _)).Times(0);
   InsertPacket(&pacer, &audio);
   ProcessNext(&pacer);
   ProcessNext(&pacer);
   ::testing::Mock::VerifyAndClearExpectations(&callback_);
   // Audio packet unblocked when the budget has recovered.
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   ProcessNext(&pacer);
   ProcessNext(&pacer);
@@ -276,11 +286,11 @@ TEST_F(PacedSenderFieldTrialTest, BudgetDoesNotAffectAudioInTrial) {
                        0);
   // Video fills budget for following process periods.
   InsertPacket(&pacer, &video);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   ProcessNext(&pacer);
   // Audio packet not blocked due to budget limit.
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   InsertPacket(&pacer, &audio);
   ProcessNext(&pacer);
@@ -748,31 +758,31 @@ TEST_F(PacedSenderTest, DoesNotAllowOveruseAfterCongestion) {
   send_bucket_->UpdateOutstandingData(0);
   // Not yet budget limited or congested, packet is sent.
   send_bucket_->InsertPacket(prio, ssrc, seq_num++, now_ms(), size, false);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   clock_.AdvanceTimeMilliseconds(5);
   send_bucket_->Process();
   // Packet blocked due to congestion.
   send_bucket_->InsertPacket(prio, ssrc, seq_num++, now_ms(), size, false);
-  EXPECT_CALL(callback_, TimeToSendPacket).Times(0);
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _)).Times(0);
   clock_.AdvanceTimeMilliseconds(5);
   send_bucket_->Process();
   // Packet blocked due to congestion.
   send_bucket_->InsertPacket(prio, ssrc, seq_num++, now_ms(), size, false);
-  EXPECT_CALL(callback_, TimeToSendPacket).Times(0);
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _)).Times(0);
   clock_.AdvanceTimeMilliseconds(5);
   send_bucket_->Process();
   send_bucket_->UpdateOutstandingData(0);
   // Congestion removed and budget has recovered, packet is sent.
   send_bucket_->InsertPacket(prio, ssrc, seq_num++, now_ms(), size, false);
-  EXPECT_CALL(callback_, TimeToSendPacket)
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _))
       .WillOnce(Return(RtpPacketSendResult::kSuccess));
   clock_.AdvanceTimeMilliseconds(5);
   send_bucket_->Process();
   send_bucket_->UpdateOutstandingData(0);
   // Should be blocked due to budget limitation as congestion has be removed.
   send_bucket_->InsertPacket(prio, ssrc, seq_num++, now_ms(), size, false);
-  EXPECT_CALL(callback_, TimeToSendPacket).Times(0);
+  EXPECT_CALL(callback_, TimeToSendPacket(_, _, _, _, _)).Times(0);
   clock_.AdvanceTimeMilliseconds(5);
   send_bucket_->Process();
 }

@@ -388,6 +388,17 @@ class RtpPacketSenderProxy : public RtpPacketSender {
     }
   }
 
+  // Implements RtpPacketSender.
+  void PacePacket(std::unique_ptr<RtpPacketToSend> packet,
+                  int priority,
+                  bool retransmission) override {
+    rtc::CritScope lock(&crit_);
+    if (rtp_packet_sender_) {
+      rtp_packet_sender_->PacePacket(std::move(packet), priority,
+                                     retransmission);
+    }
+  }
+
   void SetAccountForAudioPackets(bool account_for_audio) override {
     RTC_NOTREACHED();
   }

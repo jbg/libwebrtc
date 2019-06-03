@@ -268,6 +268,9 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
       bool retransmission,
       const PacedPacketInfo& pacing_info) = 0;
 
+  virtual void SendPacedPacket(std::unique_ptr<RtpPacketToSend> packet,
+                               const PacedPacketInfo& pacing_info) = 0;
+
   virtual size_t TimeToSendPadding(size_t bytes,
                                    const PacedPacketInfo& pacing_info) = 0;
 
