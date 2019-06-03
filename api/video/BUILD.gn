@@ -202,6 +202,7 @@ rtc_source_set("video_stream_encoder") {
     ":video_bitrate_allocator",
     ":video_bitrate_allocator_factory",
     ":video_frame",
+    "../transport:retransmission_controller_interface",
     "../units:data_rate",
 
     # For rtpparameters.h
