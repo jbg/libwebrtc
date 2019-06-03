@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0aa429dd_03c8ad38",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-06-03T17:43:34Z",
+      "side": 1,
+      "message": "This happens automatically by the member ordering, but I guess it doesn\u0027t hurt to annotate it explicitly given that other transports are destructed manually.",
+      "revId": "fa82063de1669754f07fda8d4dca91a5c42533ae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
