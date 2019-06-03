@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f00e595d_7a36baaa",
+        "filename": "modules/pacing/paced_sender.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-03T15:37:05Z",
+      "side": 1,
+      "message": "Move this to a separate interface that\u0027s defined outside PacedSender (so it\u0027ll be possible to move to a separate header in the future, if not now). Remove the reference to \"Paced\" as there\u0027s not really anything about the fact that it\u0027s paced that\u0027s relevant for the interface implementation.\n\n(Maybe RtpPacketSender::SendRtpPacket?)\n\nfor the transition, make PacketSender inherit this new interface.",
+      "range": {
+        "startLine": 54,
+        "startChar": 1,
+        "endLine": 55,
+        "endChar": 74
+      },
+      "revId": "630f3ae7c511ce0014f9beff11dbb3efbe8bda6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd339100_86d1a3b2",
+        "filename": "modules/pacing/paced_sender.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-03T15:37:05Z",
+      "side": 1,
+      "message": "PacePacket doesn\u0027t really tell much of the right story. Not only is the packet paced, it will eventually be sent. Maybe EnqueuePacket or something like similar? AddPacketToPacingQueue could work as well if you like verbosity.",
+      "range": {
+        "startLine": 121,
+        "startChar": 7,
+        "endLine": 121,
+        "endChar": 17
+      },
+      "revId": "630f3ae7c511ce0014f9beff11dbb3efbe8bda6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b25057d3_c00ae005",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-03T15:37:05Z",
+      "side": 1,
+      "message": "ReferencePacketsInPacer or Pacer-ReferencePackets",
+      "range": {
+        "startLine": 159,
+        "startChar": 38,
+        "endLine": 159,
+        "endChar": 59
+      },
+      "revId": "630f3ae7c511ce0014f9beff11dbb3efbe8bda6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

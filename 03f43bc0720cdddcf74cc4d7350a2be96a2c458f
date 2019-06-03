@@ -22,6 +22,30 @@
       "revId": "03f43bc0720cdddcf74cc4d7350a2be96a2c458f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc4e82f5_1033e4ab",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-03T15:37:05Z",
+      "side": 1,
+      "message": "Not worth it, it\u0027s better to expose slightly too much than adding complexity. The compiler can\u0027t save us from everything...",
+      "parentUuid": "77328ae3_bc118ab5",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 18
+      },
+      "revId": "03f43bc0720cdddcf74cc4d7350a2be96a2c458f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
