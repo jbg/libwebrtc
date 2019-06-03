@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ed16071_641254cc",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-06-03T20:03:21Z",
+      "side": 1,
+      "message": "I will probably not have time to do this in the foreseeable future, but I don\u0027t think this is high priority.",
+      "range": {
+        "startLine": 1280,
+        "startChar": 0,
+        "endLine": 1281,
+        "endChar": 18
+      },
+      "revId": "1fb6dacab5dd528289bbd5108075cc2d893523da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca398c20_377f5b3b",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-06-03T20:03:21Z",
+      "side": 1,
+      "message": "I\u0027d expect TSAN errors otherwise.",
+      "range": {
+        "startLine": 302,
+        "startChar": 7,
+        "endLine": 302,
+        "endChar": 13
+      },
+      "revId": "1fb6dacab5dd528289bbd5108075cc2d893523da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27727c71_b91fbba2",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-06-03T20:03:21Z",
+      "side": 1,
+      "message": "Artifact of how the code is currently structured. I\u0027d love to change this, or write a more elaborate unit test, but I think it\u0027s out of scope.",
+      "range": {
+        "startLine": 853,
+        "startChar": 0,
+        "endLine": 854,
+        "endChar": 65
+      },
+      "revId": "1fb6dacab5dd528289bbd5108075cc2d893523da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
