@@ -154,7 +154,10 @@ RTPSender::RTPSender(
               .find("Enabled") == 0),
       payload_padding_prefer_useful_packets_(
           field_trials.Lookup("WebRTC-PayloadPadding-UseMostUsefulPacket")
-              .find("Enabled") == 0) {
+              .find("Enabled") == 0),
+      pacer_reference_packets_(
+          field_trials.Lookup("WebRTC-PacerReferencePackets").find("Enabled") ==
+          0) {
   // This random initialization is not intended to be cryptographic strong.
   timestamp_offset_ = random_.Rand<uint32_t>();
   // Random start, 16 bits. Can't be 0.
@@ -481,10 +484,18 @@ int32_t RTPSender::ReSendPacket(uint16_t packet_id) {
       return 0;
     }
 
-    paced_sender_->InsertPacket(
-        RtpPacketSender::kNormalPriority, stored_packet->ssrc,
-        stored_packet->rtp_sequence_number, stored_packet->capture_time_ms,
-        stored_packet->packet_size, true);
+    if (pacer_reference_packets_) {
+      paced_sender_->InsertPacket(
+          RtpPacketSender::kNormalPriority, stored_packet->ssrc,
+          stored_packet->rtp_sequence_number, stored_packet->capture_time_ms,
+          stored_packet->packet_size, true);
+    } else {
+      std::unique_ptr<RtpPacketToSend> packet =
+          packet_history_.GetPacketAndSetSendTime(packet_id);
+      RTC_CHECK(packet != nullptr);
+      paced_sender_->InsertPacket(std::move(packet),
+                                  RtpPacketSender::kNormalPriority, true);
+    }
 
     return packet_size;
   }
@@ -562,6 +573,26 @@ RtpPacketSendResult RTPSender::TimeToSendPacket(
     // Packet cannot be found or was resent too recently.
     return RtpPacketSendResult::kPacketNotFound;
   }
+
+  return PrepareAndSendPacket(
+             std::move(packet),
+             retransmission && (RtxStatus() & kRtxRetransmitted) > 0,
+             retransmission, pacing_info)
+             ? RtpPacketSendResult::kSuccess
+             : RtpPacketSendResult::kTransportUnavailable;
+}
+
+// Called from pacer when we can send the packet.
+RtpPacketSendResult RTPSender::TimeToSendPacket(
+    std::unique_ptr<RtpPacketToSend> packet,
+    bool retransmission,
+    const PacedPacketInfo& pacing_info) {
+  if (!SendingMedia()) {
+    return RtpPacketSendResult::kPacketNotFound;
+  }
+
+  RTC_DCHECK(packet);
+  packet_history_.SetSendTime(packet->SequenceNumber());
 
   return PrepareAndSendPacket(
              std::move(packet),
@@ -696,17 +727,33 @@ bool RTPSender::SendToNetwork(std::unique_ptr<RtpPacketToSend> packet,
     int64_t capture_time_ms = packet->capture_time_ms();
     size_t packet_size =
         send_side_bwe_with_overhead_ ? packet->size() : packet->payload_size();
-    if (ssrc == FlexfecSsrc()) {
-      // Store FlexFEC packets in the history here, so they can be found
-      // when the pacer calls TimeToSendPacket.
-      flexfec_packet_history_.PutRtpPacket(std::move(packet), storage,
-                                           absl::nullopt);
-    } else {
-      packet_history_.PutRtpPacket(std::move(packet), storage, absl::nullopt);
+
+    if (pacer_reference_packets_) {
+      // If |pacer_reference_packets_| then pacer needs to find the packet in
+      // the history when it is time to send, so move packet there.
+      if (ssrc == FlexfecSsrc()) {
+        // Store FlexFEC packets in a separate history since they are ont a
+        // separate SSRC.
+        flexfec_packet_history_.PutRtpPacket(std::move(packet), storage,
+                                             absl::nullopt);
+      } else {
+        packet_history_.PutRtpPacket(std::move(packet), storage, absl::nullopt);
+      }
+    } else if (storage == kAllowRetransmission) {
+      // If pacer owns the packet, only packets supporting retransmission
+      // need a copy in the history, and flexfec is never retransmitted.
+      RTC_DCHECK(ssrc != FlexfecSsrc());
+      packet_history_.PutRtpPacket(absl::make_unique<RtpPacketToSend>(*packet),
+                                   storage, absl::nullopt);
     }
 
-    paced_sender_->InsertPacket(priority, ssrc, seq_no, capture_time_ms,
-                                packet_size, false);
+    if (pacer_reference_packets_) {
+      paced_sender_->InsertPacket(priority, ssrc, seq_no, capture_time_ms,
+                                  packet_size, false);
+    } else {
+      paced_sender_->InsertPacket(std::move(packet), priority, false);
+    }
+
     return true;
   }
 
