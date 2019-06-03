@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77328ae3_bc118ab5",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-03T15:00:16Z",
+      "side": 1,
+      "message": "Made this an interface so I don\u0027t have to expose stuff like iterators into containers that\u0027s not externally accessible. Not sure if it\u0027s worth it since there\u0027s really only one call site...",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 18
+      },
+      "revId": "03f43bc0720cdddcf74cc4d7350a2be96a2c458f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
