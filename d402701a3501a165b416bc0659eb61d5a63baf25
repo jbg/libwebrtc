@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b2b32d6_c2a7e5dc",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-06-03T06:40:37Z",
+      "side": 1,
+      "message": "Why is this a requirement? For the division to work it should be sufficient that 1+xx+yy\u003e0",
+      "range": {
+        "startLine": 336,
+        "startChar": 4,
+        "endLine": 336,
+        "endChar": 32
+      },
+      "revId": "d402701a3501a165b416bc0659eb61d5a63baf25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb6fc1b1_aae0815e",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-06-03T06:40:37Z",
+      "side": 1,
+      "message": "I think you should remove the /*numerator\u003d*/ and /*denominator_square\u003d*/ comments.\n\nThey make the code less readable and the struct declaration is actually just above.\n\nMy suggestion instead is to make this a member of the GainRatio struct:  \n-The method is only used to produced GainRatio objects.\n-It is the only method that produces GainRatio objects.\n-It\u0027s implementation is quite tightly tied to the GainRatio implementation (which I assume is why the comments were added).",
+      "range": {
+        "startLine": 337,
+        "startChar": 12,
+        "endLine": 337,
+        "endChar": 26
+      },
+      "revId": "d402701a3501a165b416bc0659eb61d5a63baf25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18d71cdd_5bb57199",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-06-03T06:40:37Z",
+      "side": 1,
+      "message": "I think using this lambda complicates the code: \n-It is only used in one place.\n-The code becomes longer because of it.\n-It is defined quite far away from where it is used so the code becomes less local and less readable.\n-the name is misleading as it does more than a comparison of the gain against the threshold (also checks against 0).\n-it only abstracts an if-statement.\n\nPlease instead write the if-statement inlining this lambda.",
+      "revId": "d402701a3501a165b416bc0659eb61d5a63baf25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aa7a596_f5f01d6d",
+        "filename": "modules/audio_processing/agc2/rnn_vad/pitch_search_internal.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-06-03T06:40:37Z",
+      "side": 1,
+      "message": "This optimization only benefits the average case, while making the most complex case slightly more expensive. Since this is a CL for optimizing the code I doubt that we\u0027d like to do this optimization.",
+      "revId": "d402701a3501a165b416bc0659eb61d5a63baf25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
