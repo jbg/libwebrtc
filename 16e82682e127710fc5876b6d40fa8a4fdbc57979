@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee568c68_d65335b3",
+        "filename": "api/rtp_packet_infos.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-06-03T12:50:16Z",
+      "side": 1,
+      "message": "Suggestion:\n\n  static const vector_type\u0026 value \u003d *new vector_type();\n  return value;\n\nOr add `const` to the variable, but that\u0027s longer; a reference does what we want.",
+      "revId": "16e82682e127710fc5876b6d40fa8a4fdbc57979",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
