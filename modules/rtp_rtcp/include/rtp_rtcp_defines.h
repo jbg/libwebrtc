@@ -13,6 +13,7 @@
 
 #include <stddef.h>
 #include <list>
+#include <memory>
 #include <vector>
 
 #include "absl/strings/string_view.h"
@@ -30,6 +31,7 @@
 
 namespace webrtc {
 class RtpPacket;
+class RtpPacketToSend;
 namespace rtcp {
 class TransportFeedback;
 }
@@ -383,14 +385,21 @@ class RtpPacketSender {
   // Low priority packets are mixed with the normal priority packets
   // while we are paused.
 
-  // Returns true if we send the packet now, else it will add the packet
-  // information to the queue and call TimeToSendPacket when it's time to send.
+  // Adds the packet information to the queue and call TimeToSendPacket when
+  // it's time to send.
   virtual void InsertPacket(Priority priority,
                             uint32_t ssrc,
                             uint16_t sequence_number,
                             int64_t capture_time_ms,
                             size_t bytes,
                             bool retransmission) = 0;
+
+  // Insert packet into queue with the given priority, where lower value means
+  // higher priority and 0 is the lowest allowed prio indicating pass through.
+  // When it's time to send, the packet instance is moved to SendPacedPacket().
+  virtual void PacePacket(std::unique_ptr<RtpPacketToSend> packet,
+                          int priority,
+                          bool retransmission) = 0;
 
   // Currently audio traffic is not accounted by pacer and passed through.
   // With the introduction of audio BWE audio traffic will be accounted for
