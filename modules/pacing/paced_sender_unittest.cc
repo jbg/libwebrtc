@@ -48,6 +48,8 @@ class MockPacedSenderCallback : public PacedSender::PacketSender {
                                    int64_t capture_time_ms,
                                    bool retransmission,
                                    const PacedPacketInfo& pacing_info));
+  MOCK_METHOD2(SendPacedPacket,
+               void(std::unique_ptr<RtpPacketToSend>, const PacedPacketInfo&));
   MOCK_METHOD2(TimeToSendPadding,
                size_t(size_t bytes, const PacedPacketInfo& pacing_info));
 };
@@ -64,6 +66,9 @@ class PacedSenderPadding : public PacedSender::PacketSender {
       const PacedPacketInfo& pacing_info) override {
     return RtpPacketSendResult::kSuccess;
   }
+
+  void SendPacedPacket(std::unique_ptr<RtpPacketToSend> packet,
+                       const PacedPacketInfo& pacing_info) override {}
 
   size_t TimeToSendPadding(size_t bytes,
                            const PacedPacketInfo& pacing_info) override {
@@ -91,6 +96,11 @@ class PacedSenderProbing : public PacedSender::PacketSender {
       const PacedPacketInfo& pacing_info) override {
     packets_sent_++;
     return RtpPacketSendResult::kSuccess;
+  }
+
+  void SendPacedPacket(std::unique_ptr<RtpPacketToSend> packet,
+                       const PacedPacketInfo& pacing_info) override {
+    packets_sent_++;
   }
 
   size_t TimeToSendPadding(size_t bytes,
