@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5728cd5b_0f015308",
+        "filename": "rtc_base/swap_queue.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-06-03T10:09:04Z",
+      "side": 1,
+      "message": "DCHECK that next_read_index_ \u003c queue_.size()? It always holds here, but it\u0027s nice to document that fact.",
+      "revId": "fdb43b7139d634630daf7b8b61d4cc8f4b2c2aa4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
