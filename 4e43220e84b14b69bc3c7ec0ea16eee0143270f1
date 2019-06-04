@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5582aba_2f1a4c6d",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-06-04T08:34:46Z",
+      "side": 1,
+      "message": "0 imply success. If there are more packets in same batch, this function will be called again with a different packet_id\n\nreturn -1 instead (same as when function returns when there is no more budget for retransmits, see line 478)",
+      "range": {
+        "startLine": 459,
+        "startChar": 11,
+        "endLine": 459,
+        "endChar": 12
+      },
+      "revId": "4e43220e84b14b69bc3c7ec0ea16eee0143270f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc36c5da_1079c394",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-06-04T08:34:46Z",
+      "side": 1,
+      "message": "avoid atomics\nprefer guarding this bool with a critical section.",
+      "range": {
+        "startLine": 302,
+        "startChar": 2,
+        "endLine": 302,
+        "endChar": 13
+      },
+      "revId": "4e43220e84b14b69bc3c7ec0ea16eee0143270f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94adb5dc_b6b7cd3e",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-06-04T08:34:46Z",
+      "side": 1,
+      "message": "may be use Arrange/Act/Assert terminology\n\nhttp://go/unit-test-practices#structure",
+      "range": {
+        "startLine": 873,
+        "startChar": 5,
+        "endLine": 873,
+        "endChar": 42
+      },
+      "revId": "4e43220e84b14b69bc3c7ec0ea16eee0143270f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8acb6131_ae197929",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-06-04T08:34:46Z",
+      "side": 1,
+      "message": "Do you want to test scenario where packet was sent while retransmission disabled,\nbut resent after it was reenabled?\nor repurpose this test for that scenario (by moving DisableRetransmission right after SetStorePacketsStats)",
+      "range": {
+        "startLine": 883,
+        "startChar": 22,
+        "endLine": 883,
+        "endChar": 50
+      },
+      "revId": "4e43220e84b14b69bc3c7ec0ea16eee0143270f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
