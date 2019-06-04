@@ -364,17 +364,17 @@ class TransportSequenceNumberProxy : public TransportSequenceNumberAllocator {
   TransportSequenceNumberAllocator* seq_num_allocator_ RTC_GUARDED_BY(&crit_);
 };
 
-class RtpPacketSenderProxy : public RtpPacketSender {
+class RtpPacketSenderProxy : public RtpPacketPacer {
  public:
   RtpPacketSenderProxy() : rtp_packet_sender_(nullptr) {}
 
-  void SetPacketSender(RtpPacketSender* rtp_packet_sender) {
+  void SetPacketSender(RtpPacketPacer* rtp_packet_sender) {
     RTC_DCHECK(thread_checker_.IsCurrent());
     rtc::CritScope lock(&crit_);
     rtp_packet_sender_ = rtp_packet_sender;
   }
 
-  // Implements RtpPacketSender.
+  // Implements RtpPacketPacer.
   void InsertPacket(Priority priority,
                     uint32_t ssrc,
                     uint16_t sequence_number,
@@ -388,6 +388,15 @@ class RtpPacketSenderProxy : public RtpPacketSender {
     }
   }
 
+  // Implements RtpPacketPacer.
+  void EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet,
+                     RtpPacketPacer::PacketType type) override {
+    rtc::CritScope lock(&crit_);
+    if (rtp_packet_sender_) {
+      rtp_packet_sender_->EnqueuePacket(std::move(packet), type);
+    }
+  }
+
   void SetAccountForAudioPackets(bool account_for_audio) override {
     RTC_NOTREACHED();
   }
@@ -395,7 +404,7 @@ class RtpPacketSenderProxy : public RtpPacketSender {
  private:
   rtc::ThreadChecker thread_checker_;
   rtc::CriticalSection crit_;
-  RtpPacketSender* rtp_packet_sender_ RTC_GUARDED_BY(&crit_);
+  RtpPacketPacer* rtp_packet_sender_ RTC_GUARDED_BY(&crit_);
 };
 
 class VoERtcpObserver : public RtcpBandwidthObserver {
@@ -989,7 +998,7 @@ void ChannelSend::RegisterSenderCongestionControlObjects(
     RtpTransportControllerSendInterface* transport,
     RtcpBandwidthObserver* bandwidth_observer) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  RtpPacketSender* rtp_packet_sender = transport->packet_sender();
+  RtpPacketPacer* rtp_packet_sender = transport->packet_sender();
   TransportFeedbackObserver* transport_feedback_observer =
       transport->transport_feedback_observer();
   PacketRouter* packet_router = transport->packet_router();
