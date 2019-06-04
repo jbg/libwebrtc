@@ -125,6 +125,7 @@ void RtpPacketHistory::SetRtt(int64_t rtt_ms) {
 void RtpPacketHistory::PutRtpPacket(std::unique_ptr<RtpPacketToSend> packet,
                                     StorageType type,
                                     absl::optional<int64_t> send_time_ms) {
+  printf("PutRtpPacket(%d)\n", type);
   RTC_DCHECK(packet);
   rtc::CritScope cs(&lock_);
   int64_t now_ms = clock_->TimeInMilliseconds();

@@ -123,6 +123,89 @@ TEST_F(RetransmissionEndToEndTest, ReceivesAndRetransmitsNack) {
   RunBaseTest(&test);
 }
 
+TEST_F(RetransmissionEndToEndTest, DoesNotRetransmitNonRetransmittablePackets) {
+  static const int kNumberOfNacksToObserve = 2;
+  static const int kLossBurstSize = 2;
+  static const int kPacketsBetweenLossBursts = 9;
+  class NackObserver : public test::EndToEndTest {
+   public:
+    NackObserver()
+        : EndToEndTest(kLongTimeoutMs),
+          sent_rtp_packets_(0),
+          packets_left_to_drop_(0),
+          nacks_left_(kNumberOfNacksToObserve) {}
+
+   private:
+    Action OnSendRtp(const uint8_t* packet, size_t length) override {
+      rtc::CritScope lock(&crit_);
+      RTPHeader header;
+      EXPECT_TRUE(parser_->Parse(packet, length, &header));
+
+      // Never drop retransmitted packets.
+      if (dropped_packets_.find(header.sequenceNumber) !=
+          dropped_packets_.end()) {
+        retransmitted_packets_.insert(header.sequenceNumber);
+        return SEND_PACKET;
+      }
+
+      if (nacks_left_ <= 0 &&
+          retransmitted_packets_.size() == dropped_packets_.size()) {
+        observation_complete_.Set();
+      }
+
+      ++sent_rtp_packets_;
+
+      // Enough NACKs received, stop dropping packets.
+      if (nacks_left_ <= 0)
+        return SEND_PACKET;
+
+      // Check if it's time for a new loss burst.
+      if (sent_rtp_packets_ % kPacketsBetweenLossBursts == 0)
+        packets_left_to_drop_ = kLossBurstSize;
+
+      // Never drop padding packets as those won't be retransmitted.
+      if (packets_left_to_drop_ > 0 && header.paddingLength == 0) {
+        --packets_left_to_drop_;
+        dropped_packets_.insert(header.sequenceNumber);
+        return DROP_PACKET;
+      }
+
+      return SEND_PACKET;
+    }
+
+    Action OnReceiveRtcp(const uint8_t* packet, size_t length) override {
+      rtc::CritScope lock(&crit_);
+      test::RtcpPacketParser parser;
+      EXPECT_TRUE(parser.Parse(packet, length));
+      nacks_left_ -= parser.nack()->num_packets();
+      return SEND_PACKET;
+    }
+
+    void ModifyVideoConfigs(
+        VideoSendStream::Config* send_config,
+        std::vector<VideoReceiveStream::Config>* receive_configs,
+        VideoEncoderConfig* encoder_config) override {
+      send_config->rtp.nack.rtp_history_ms = kNackRtpHistoryMs;
+      (*receive_configs)[0].rtp.nack.rtp_history_ms = kNackRtpHistoryMs;
+    }
+
+    void PerformTest() override {
+      EXPECT_TRUE(Wait())
+          << "Timed out waiting for packets to be NACKed, retransmitted and "
+             "rendered.";
+    }
+
+    rtc::CriticalSection crit_;
+    std::set<uint16_t> dropped_packets_;
+    std::set<uint16_t> retransmitted_packets_;
+    uint64_t sent_rtp_packets_;
+    int packets_left_to_drop_;
+    int nacks_left_ RTC_GUARDED_BY(&crit_);
+  } test;
+
+  RunBaseTest(&test);
+}
+
 TEST_F(RetransmissionEndToEndTest, ReceivesNackAndRetransmitsAudio) {
   class NackObserver : public test::EndToEndTest {
    public:
