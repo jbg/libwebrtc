@@ -16,6 +16,24 @@
       "revId": "c6ce10ba937e7531b1297c1f1cfc7f2ba123c348",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f493296_44eec2ad",
+        "filename": "video/frame_encode_metadata_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-04T17:26:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90f9a7ca_edd96309",
+      "revId": "c6ce10ba937e7531b1297c1f1cfc7f2ba123c348",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
