@@ -168,6 +168,7 @@ rtc_source_set("video_stream_decoder") {
     ":video_frame",
     "../task_queue",
     "../video_codecs:video_codecs_api",
+    "//api/units:time_delta",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
