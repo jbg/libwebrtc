@@ -86,6 +86,9 @@ struct Vp8FrameConfig {
   Vp8BufferReference first_reference;
   Vp8BufferReference second_reference;
 
+  // Whether this frame is elligible for retransmission.
+  bool retransmission_allowed;
+
  private:
   Vp8FrameConfig(BufferFlags last,
                  BufferFlags golden,

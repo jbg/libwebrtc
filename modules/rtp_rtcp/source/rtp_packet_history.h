@@ -46,6 +46,7 @@ class RtpPacketHistory {
     int64_t capture_time_ms = 0;
     uint32_t ssrc = 0;
     size_t packet_size = 0;
+    bool retransmission_allowed = true;
     // Number of times RE-transmitted, ie not including the first transmission.
     size_t times_retransmitted = 0;
     bool pending_transmission = false;
