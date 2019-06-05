@@ -47,7 +47,7 @@ class RTPSender {
   RTPSender(bool audio,
             Clock* clock,
             Transport* transport,
-            RtpPacketSender* paced_sender,
+            RtpPacketPacer* paced_sender,
             absl::optional<uint32_t> flexfec_ssrc,
             TransportSequenceNumberAllocator* sequence_number_allocator,
             TransportFeedbackObserver* transport_feedback_callback,
@@ -110,6 +110,8 @@ class RTPSender {
                                        int64_t capture_time_ms,
                                        bool retransmission,
                                        const PacedPacketInfo& pacing_info);
+  void SendPacedPacket(std::unique_ptr<RtpPacketToSend> packet,
+                       const PacedPacketInfo& pacing_info);
   size_t TimeToSendPadding(size_t bytes, const PacedPacketInfo& pacing_info);
 
   // NACK.
@@ -158,7 +160,12 @@ class RTPSender {
   // Sends packet to |transport_| or to the pacer, depending on configuration.
   bool SendToNetwork(std::unique_ptr<RtpPacketToSend> packet,
                      StorageType storage,
-                     RtpPacketSender::Priority priority);
+                     RtpPacketPacer::PacketType type);
+
+  // Fallback that infers PacketType from Priority.
+  bool SendToNetwork(std::unique_ptr<RtpPacketToSend> packet,
+                     StorageType storage,
+                     RtpPacketPacer::Priority priority);
 
   // Called on update of RTP statistics.
   void RegisterRtpStatisticsCallback(StreamDataCountersCallback* callback);
@@ -230,7 +237,7 @@ class RTPSender {
 
   const absl::optional<uint32_t> flexfec_ssrc_;
 
-  RtpPacketSender* const paced_sender_;
+  RtpPacketPacer* const paced_sender_;
   TransportSequenceNumberAllocator* const transport_sequence_number_allocator_;
   TransportFeedbackObserver* const transport_feedback_observer_;
   rtc::CriticalSection send_critsect_;
@@ -305,6 +312,11 @@ class RTPSender {
   // packet_history_.GetPayloadPaddingPacket() will be called instead of
   // packet_history_.GetBestFittingPacket() in TrySendRedundantPayloads().
   const bool payload_padding_prefer_useful_packets_;
+
+  // If true, PacedSender should only reference packets as in legacy mode.
+  // If false, PacedSender may have direct ownership of RtpPacketToSend objects.
+  // Defaults to true, will be changed to default false soon.
+  const bool pacer_reference_packets_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RTPSender);
 };

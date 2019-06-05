@@ -299,6 +299,16 @@ RtpPacketSendResult PacedVideoSender::TimeToSendPacket(
     int64_t capture_time_ms,
     bool retransmission,
     const PacedPacketInfo& pacing_info) {
+  return TimeToSendPacket(sequence_number);
+}
+
+void PacedVideoSender::SendPacedPacket(std::unique_ptr<RtpPacketToSend> packet,
+                                       const PacedPacketInfo& pacing_info) {
+  TimeToSendPacket(packet->SequenceNumber());
+}
+
+RtpPacketSendResult PacedVideoSender::TimeToSendPacket(
+    uint16_t sequence_number) {
   for (Packets::iterator it = pacer_queue_.begin(); it != pacer_queue_.end();
        ++it) {
     MediaPacket* media_packet = static_cast<MediaPacket*>(*it);

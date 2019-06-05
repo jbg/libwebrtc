@@ -50,7 +50,7 @@ void BbrPacedSender::SetMinBitrate(int min_send_bitrate_bps) {
       std::max(min_send_bitrate_kbps_, estimated_bitrate_bps_ / 1000);
 }
 
-void BbrPacedSender::InsertPacket(RtpPacketSender::Priority priority,
+void BbrPacedSender::InsertPacket(RtpPacketPacer::Priority priority,
                                   uint32_t ssrc,
                                   uint16_t sequence_number,
                                   int64_t capture_time_ms,
