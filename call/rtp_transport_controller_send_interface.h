@@ -48,7 +48,7 @@ class PacketRouter;
 class RtpVideoSenderInterface;
 class RateLimiter;
 class RtcpBandwidthObserver;
-class RtpPacketSender;
+class RtpPacketPacer;
 class SendDelayStats;
 class SendStatisticsProxy;
 class TransportFeedbackObserver;
@@ -117,7 +117,7 @@ class RtpTransportControllerSendInterface {
 
   virtual TransportFeedbackObserver* transport_feedback_observer() = 0;
 
-  virtual RtpPacketSender* packet_sender() = 0;
+  virtual RtpPacketPacer* packet_sender() = 0;
 
   // SetAllocatedSendBitrateLimits sets bitrates limits imposed by send codec
   // settings.
