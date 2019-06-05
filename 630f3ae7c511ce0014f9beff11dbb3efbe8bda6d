@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bafac6a8_781e175d",
+        "filename": "modules/pacing/paced_sender.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-05T12:06:06Z",
+      "side": 1,
+      "message": "\u003e Move this to a separate interface that\u0027s defined outside PacedSender (so it\u0027ll be possible to move to a separate header in the future, if not now).\n\nSure, that was in my plan anyway.\n\n\u003e Remove the reference to \"Paced\" as there\u0027s not really anything about the fact that it\u0027s paced that\u0027s relevant for the interface implementation.\n\nWell we do pass the PacedPacketInfo as parameter I would say there is.\n \n\u003e (Maybe RtpPacketSender::SendRtpPacket?)\n\nAlright, my plan was to make it bit more clear from the name what this is used for. There are so many different interfaces/methods with \"send\" and \"rtp\" in the name.\nfwiw, I\u0027m hoping to remove the \"non-paced\" code path and use a pass-through implementation for that case instead.\n \n\u003e for the transition, make PacketSender inherit this new interface.\n\nDone.",
+      "parentUuid": "f00e595d_7a36baaa",
+      "range": {
+        "startLine": 54,
+        "startChar": 1,
+        "endLine": 55,
+        "endChar": 74
+      },
+      "revId": "630f3ae7c511ce0014f9beff11dbb3efbe8bda6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cd339100_86d1a3b2",
         "filename": "modules/pacing/paced_sender.h",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "24c59f5a_c31706ff",
+        "filename": "modules/pacing/paced_sender.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-05T12:06:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd339100_86d1a3b2",
+      "range": {
+        "startLine": 121,
+        "startChar": 7,
+        "endLine": 121,
+        "endChar": 17
+      },
+      "revId": "630f3ae7c511ce0014f9beff11dbb3efbe8bda6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b25057d3_c00ae005",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 8
@@ -68,6 +116,30 @@
       "revId": "630f3ae7c511ce0014f9beff11dbb3efbe8bda6d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f3b3616_d88d52a4",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-05T12:06:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b25057d3_c00ae005",
+      "range": {
+        "startLine": 159,
+        "startChar": 38,
+        "endLine": 159,
+        "endChar": 59
+      },
+      "revId": "630f3ae7c511ce0014f9beff11dbb3efbe8bda6d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
