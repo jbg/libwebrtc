@@ -16,6 +16,24 @@
       "revId": "28a7e1e17dc397b3e2bb07dad37c201dbcfeb8aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9969b99c_b778c4fd",
+        "filename": "video/video_stream_decoder_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-05T11:51:09Z",
+      "side": 1,
+      "message": "I agree it\u0027s ok as is, since the VCMTiming class uses its own lock for thread safety.\n\nIf we tried to eliminate that lock, we\u0027d need to confine all interaction with the VCMTiming class to some specific task queue.",
+      "parentUuid": "68b3b949_78af7173",
+      "revId": "28a7e1e17dc397b3e2bb07dad37c201dbcfeb8aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
