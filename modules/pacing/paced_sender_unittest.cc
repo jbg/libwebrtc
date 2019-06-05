@@ -48,6 +48,8 @@ class MockPacedSenderCallback : public PacedSender::PacketSender {
                                    int64_t capture_time_ms,
                                    bool retransmission,
                                    const PacedPacketInfo& pacing_info));
+  MOCK_METHOD2(SendPacket,
+               void(std::unique_ptr<RtpPacketToSend>, const PacedPacketInfo&));
   MOCK_METHOD2(TimeToSendPadding,
                size_t(size_t bytes, const PacedPacketInfo& pacing_info));
 };
@@ -64,6 +66,9 @@ class PacedSenderPadding : public PacedSender::PacketSender {
       const PacedPacketInfo& pacing_info) override {
     return RtpPacketSendResult::kSuccess;
   }
+
+  void SendPacket(std::unique_ptr<RtpPacketToSend> packet,
+                  const PacedPacketInfo& pacing_info) override {}
 
   size_t TimeToSendPadding(size_t bytes,
                            const PacedPacketInfo& pacing_info) override {
@@ -91,6 +96,11 @@ class PacedSenderProbing : public PacedSender::PacketSender {
       const PacedPacketInfo& pacing_info) override {
     packets_sent_++;
     return RtpPacketSendResult::kSuccess;
+  }
+
+  void SendPacket(std::unique_ptr<RtpPacketToSend> packet,
+                  const PacedPacketInfo& pacing_info) override {
+    packets_sent_++;
   }
 
   size_t TimeToSendPadding(size_t bytes,
@@ -146,7 +156,7 @@ class PacedSenderTest : public ::testing::TestWithParam<std::string> {
 class PacedSenderFieldTrialTest : public ::testing::Test {
  protected:
   struct MediaStream {
-    const RtpPacketSender::Priority priority;
+    const RtpPacketPacer::Priority priority;
     const uint32_t ssrc;
     const size_t packet_size;
     uint16_t seq_num;
@@ -736,7 +746,7 @@ TEST_F(PacedSenderTest, SendsOnlyPaddingWhenCongested) {
 TEST_F(PacedSenderTest, DoesNotAllowOveruseAfterCongestion) {
   uint32_t ssrc = 202020;
   uint16_t seq_num = 1000;
-  RtpPacketSender::Priority prio = PacedSender::kNormalPriority;
+  RtpPacketPacer::Priority prio = PacedSender::kNormalPriority;
   int size = 1000;
   auto now_ms = [this] { return clock_.TimeInMilliseconds(); };
   EXPECT_CALL(callback_, TimeToSendPadding).Times(0);

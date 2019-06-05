@@ -38,7 +38,10 @@ class RtcEventLog;
 
 class PacedSender : public Pacer {
  public:
-  class PacketSender {
+  // This interface will go away and be replaced by PacketSenderInterface for
+  // the SendPacket() part, and an upcoming PaddingController interface to
+  // replace the TimeToSendPadding() part.
+  class PacketSender : public PacketSenderInterface {
    public:
     // Note: packets sent as a result of a callback should not pass by this
     // module again.
@@ -50,6 +53,7 @@ class PacedSender : public Pacer {
         int64_t capture_time_ms,
         bool retransmission,
         const PacedPacketInfo& cluster_info) = 0;
+
     // Called when it's a good time to send a padding data.
     // Returns the number of bytes sent.
     virtual size_t TimeToSendPadding(size_t bytes,
@@ -107,12 +111,15 @@ class PacedSender : public Pacer {
 
   // Returns true if we send the packet now, else it will add the packet
   // information to the queue and call TimeToSendPacket when it's time to send.
-  void InsertPacket(RtpPacketSender::Priority priority,
+  void InsertPacket(RtpPacketPacer::Priority priority,
                     uint32_t ssrc,
                     uint16_t sequence_number,
                     int64_t capture_time_ms,
                     size_t bytes,
                     bool retransmission) override;
+
+  void EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet,
+                     PacketType type) override;
 
   // Currently audio traffic is not accounted by pacer and passed through.
   // With the introduction of audio BWE audio traffic will be accounted for
@@ -162,10 +169,10 @@ class PacedSender : public Pacer {
   void UpdateBudgetWithBytesSent(size_t bytes)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);
 
-  const RoundRobinPacketQueue::Packet* GetPendingPacket(
+  RoundRobinPacketQueue::PacketInfo* GetPendingPacket(
       const PacedPacketInfo& pacing_info)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);
-  void OnPacketSent(const RoundRobinPacketQueue::Packet* packet)
+  void OnPacketSent(RoundRobinPacketQueue::PacketInfo* packet)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);
   void OnPaddingSent(size_t padding_sent)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);

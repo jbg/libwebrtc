@@ -85,7 +85,7 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     RemoteBitrateEstimator* remote_bitrate_estimator = nullptr;
 
     // Spread any bursts of packets into smaller bursts to minimize packet loss.
-    RtpPacketSender* paced_sender = nullptr;
+    RtpPacketPacer* paced_sender = nullptr;
 
     // Generate FlexFEC packets.
     // TODO(brandtr): Remove when FlexfecSender is wired up to PacedSender.
@@ -267,6 +267,9 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
       int64_t capture_time_ms,
       bool retransmission,
       const PacedPacketInfo& pacing_info) = 0;
+
+  virtual void SendPacket(std::unique_ptr<RtpPacketToSend> packet,
+                          const PacedPacketInfo& pacing_info) = 0;
 
   virtual size_t TimeToSendPadding(size_t bytes,
                                    const PacedPacketInfo& pacing_info) = 0;
