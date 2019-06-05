@@ -18,36 +18,69 @@
 
 namespace webrtc {
 
-RoundRobinPacketQueue::Packet::Packet(RtpPacketSender::Priority priority,
-                                      uint32_t ssrc,
-                                      uint16_t seq_number,
-                                      int64_t capture_time_ms,
-                                      int64_t enqueue_time_ms,
-                                      size_t length_in_bytes,
-                                      bool retransmission,
-                                      uint64_t enqueue_order)
-    : priority(priority),
-      ssrc(ssrc),
-      sequence_number(seq_number),
-      capture_time_ms(capture_time_ms),
-      enqueue_time_ms(enqueue_time_ms),
-      sum_paused_ms(0),
-      bytes(length_in_bytes),
-      retransmission(retransmission),
-      enqueue_order(enqueue_order) {}
+RoundRobinPacketQueue::PacketInfo::PacketInfo() = default;
+RoundRobinPacketQueue::PacketInfo::~PacketInfo() = default;
 
-RoundRobinPacketQueue::Packet::Packet(const Packet& other) = default;
+RoundRobinPacketQueue::PacketInfoImpl::PacketInfoImpl(int priority,
+                                                      uint32_t ssrc,
+                                                      uint16_t seq_number,
+                                                      int64_t capture_time_ms,
+                                                      int64_t enqueue_time_ms,
+                                                      size_t length_in_bytes,
+                                                      bool retransmission,
+                                                      uint64_t enqueue_order)
+    : priority_(priority),
+      ssrc_(ssrc),
+      sequence_number_(seq_number),
+      capture_time_ms_(capture_time_ms),
+      enqueue_time_ms_(enqueue_time_ms),
+      bytes_(length_in_bytes),
+      retransmission_(retransmission),
+      enqueue_order_(enqueue_order),
+      sum_paused_ms_(0) {}
 
-RoundRobinPacketQueue::Packet::~Packet() {}
+RoundRobinPacketQueue::PacketInfoImpl::PacketInfoImpl(
+    const PacketInfoImpl& other) = default;
+RoundRobinPacketQueue::PacketInfoImpl::~PacketInfoImpl() = default;
 
-bool RoundRobinPacketQueue::Packet::operator<(
-    const RoundRobinPacketQueue::Packet& other) const {
-  if (priority != other.priority)
-    return priority > other.priority;
-  if (retransmission != other.retransmission)
-    return other.retransmission;
+int RoundRobinPacketQueue::PacketInfoImpl::Priority() const {
+  return priority_;
+}
+uint32_t RoundRobinPacketQueue::PacketInfoImpl::Ssrc() const {
+  return ssrc_;
+}
+uint16_t RoundRobinPacketQueue::PacketInfoImpl::SequenceNumber() const {
+  return sequence_number_;
+}
+int64_t RoundRobinPacketQueue::PacketInfoImpl::CaptureTimeMs() const {
+  return capture_time_ms_;
+}
+int64_t RoundRobinPacketQueue::PacketInfoImpl::EnqueueTimeMs() const {
+  return enqueue_time_ms_;
+}
+size_t RoundRobinPacketQueue::PacketInfoImpl::SizeInBytes() const {
+  return bytes_;
+}
+bool RoundRobinPacketQueue::PacketInfoImpl::IsRetransmission() const {
+  return retransmission_;
+}
+uint64_t RoundRobinPacketQueue::PacketInfoImpl::EnqueueOrder() const {
+  return enqueue_order_;
+}
 
-  return enqueue_order > other.enqueue_order;
+std::unique_ptr<RtpPacketToSend>
+RoundRobinPacketQueue::PacketInfoImpl::ReleasePacket() {
+  return packet_it_ ? std::move(**packet_it_) : nullptr;
+}
+
+bool RoundRobinPacketQueue::PacketInfoImpl::operator<(
+    const RoundRobinPacketQueue::PacketInfoImpl& other) const {
+  if (priority_ != other.priority_)
+    return priority_ > other.priority_;
+  if (retransmission_ != other.retransmission_)
+    return other.retransmission_;
+
+  return enqueue_order_ > other.enqueue_order_;
 }
 
 RoundRobinPacketQueue::Stream::Stream() : bytes(0), ssrc(0) {}
@@ -59,50 +92,35 @@ RoundRobinPacketQueue::RoundRobinPacketQueue(int64_t start_time_us)
 
 RoundRobinPacketQueue::~RoundRobinPacketQueue() {}
 
-void RoundRobinPacketQueue::Push(const Packet& packet_to_insert) {
-  Packet packet(packet_to_insert);
-
-  auto stream_info_it = streams_.find(packet.ssrc);
-  if (stream_info_it == streams_.end()) {
-    stream_info_it = streams_.emplace(packet.ssrc, Stream()).first;
-    stream_info_it->second.priority_it = stream_priorities_.end();
-    stream_info_it->second.ssrc = packet.ssrc;
-  }
-
-  Stream* stream = &stream_info_it->second;
-
-  if (stream->priority_it == stream_priorities_.end()) {
-    // If the SSRC is not currently scheduled, add it to |stream_priorities_|.
-    RTC_CHECK(!IsSsrcScheduled(stream->ssrc));
-    stream->priority_it = stream_priorities_.emplace(
-        StreamPrioKey(packet.priority, stream->bytes), packet.ssrc);
-  } else if (packet.priority < stream->priority_it->first.priority) {
-    // If the priority of this SSRC increased, remove the outdated StreamPrioKey
-    // and insert a new one with the new priority. Note that
-    // RtpPacketSender::Priority uses lower ordinal for higher priority.
-    stream_priorities_.erase(stream->priority_it);
-    stream->priority_it = stream_priorities_.emplace(
-        StreamPrioKey(packet.priority, stream->bytes), packet.ssrc);
-  }
-  RTC_CHECK(stream->priority_it != stream_priorities_.end());
-
-  packet.enqueue_time_it = enqueue_times_.insert(packet.enqueue_time_ms);
-
-  // In order to figure out how much time a packet has spent in the queue while
-  // not in a paused state, we subtract the total amount of time the queue has
-  // been paused so far, and when the packet is poped we subtract the total
-  // amount of time the queue has been paused at that moment. This way we
-  // subtract the total amount of time the packet has spent in the queue while
-  // in a paused state.
-  UpdateQueueTime(packet.enqueue_time_ms);
-  packet.enqueue_time_ms -= pause_time_sum_ms_;
-  stream->packet_queue.push(packet);
-
-  size_packets_ += 1;
-  size_bytes_ += packet.bytes;
+void RoundRobinPacketQueue::Push(int priority,
+                                 uint32_t ssrc,
+                                 uint16_t seq_number,
+                                 int64_t capture_time_ms,
+                                 int64_t enqueue_time_ms,
+                                 size_t length_in_bytes,
+                                 bool retransmission,
+                                 uint64_t enqueue_order) {
+  PacketInfoImpl packet_info(priority, ssrc, seq_number, capture_time_ms,
+                             enqueue_time_ms, length_in_bytes, retransmission,
+                             enqueue_order);
+  Push(packet_info);
 }
 
-const RoundRobinPacketQueue::Packet& RoundRobinPacketQueue::BeginPop() {
+void RoundRobinPacketQueue::Push(int priority,
+                                 int64_t enqueue_time_ms,
+                                 bool retransmission,
+                                 uint64_t enqueue_order,
+                                 std::unique_ptr<RtpPacketToSend> packet) {
+  PacketInfoImpl packet_info(priority, packet->Ssrc(), packet->SequenceNumber(),
+                             packet->capture_time_ms(), enqueue_time_ms,
+                             packet->payload_size(), retransmission,
+                             enqueue_order);
+  rtp_packets_.push_front(std::move(packet));
+  packet_info.packet_it_ = rtp_packets_.begin();
+  Push(packet_info);
+}
+
+RoundRobinPacketQueue::PacketInfo* RoundRobinPacketQueue::BeginPop() {
   RTC_CHECK(!pop_packet_ && !pop_stream_);
 
   Stream* stream = GetHighestPriorityStream();
@@ -110,22 +128,22 @@ const RoundRobinPacketQueue::Packet& RoundRobinPacketQueue::BeginPop() {
   pop_packet_.emplace(stream->packet_queue.top());
   stream->packet_queue.pop();
 
-  return *pop_packet_;
+  return &pop_packet_.value();
 }
 
-void RoundRobinPacketQueue::CancelPop(const Packet& packet) {
+void RoundRobinPacketQueue::CancelPop() {
   RTC_CHECK(pop_packet_ && pop_stream_);
   (*pop_stream_)->packet_queue.push(*pop_packet_);
   pop_packet_.reset();
   pop_stream_.reset();
 }
 
-void RoundRobinPacketQueue::FinalizePop(const Packet& packet) {
+void RoundRobinPacketQueue::FinalizePop() {
   if (!Empty()) {
     RTC_CHECK(pop_packet_ && pop_stream_);
     Stream* stream = *pop_stream_;
     stream_priorities_.erase(stream->priority_it);
-    const Packet& packet = *pop_packet_;
+    const PacketInfoImpl& packet = *pop_packet_;
 
     // Calculate the total amount of time spent by this packet in the queue
     // while in a non-paused state. Note that the |pause_time_sum_ms_| was
@@ -133,11 +151,15 @@ void RoundRobinPacketQueue::FinalizePop(const Packet& packet) {
     // by subtracting it now we effectively remove the time spent in in the
     // queue while in a paused state.
     int64_t time_in_non_paused_state_ms =
-        time_last_updated_ms_ - packet.enqueue_time_ms - pause_time_sum_ms_;
+        time_last_updated_ms_ - packet.enqueue_time_ms_ - pause_time_sum_ms_;
     queue_time_sum_ms_ -= time_in_non_paused_state_ms;
 
-    RTC_CHECK(packet.enqueue_time_it != enqueue_times_.end());
-    enqueue_times_.erase(packet.enqueue_time_it);
+    RTC_CHECK(packet.enqueue_time_it_ != enqueue_times_.end());
+    enqueue_times_.erase(packet.enqueue_time_it_);
+
+    if (packet.packet_it_) {
+      rtp_packets_.erase(*packet.packet_it_);
+    }
 
     // Update |bytes| of this stream. The general idea is that the stream that
     // has sent the least amount of bytes should have the highest priority.
@@ -146,10 +168,10 @@ void RoundRobinPacketQueue::FinalizePop(const Packet& packet) {
     // rate. To avoid building a too large budget we limit |bytes| to be within
     // kMaxLeading bytes of the stream that has sent the most amount of bytes.
     stream->bytes =
-        std::max(stream->bytes + packet.bytes, max_bytes_ - kMaxLeadingBytes);
+        std::max(stream->bytes + packet.bytes_, max_bytes_ - kMaxLeadingBytes);
     max_bytes_ = std::max(max_bytes_, stream->bytes);
 
-    size_bytes_ -= packet.bytes;
+    size_bytes_ -= packet.bytes_;
     size_packets_ -= 1;
     RTC_CHECK(size_packets_ > 0 || queue_time_sum_ms_ == 0);
 
@@ -158,7 +180,7 @@ void RoundRobinPacketQueue::FinalizePop(const Packet& packet) {
     if (stream->packet_queue.empty()) {
       stream->priority_it = stream_priorities_.end();
     } else {
-      RtpPacketSender::Priority priority = stream->packet_queue.top().priority;
+      int priority = stream->packet_queue.top().priority_;
       stream->priority_it = stream_priorities_.emplace(
           StreamPrioKey(priority, stream->bytes), stream->ssrc);
     }
@@ -216,6 +238,47 @@ int64_t RoundRobinPacketQueue::AverageQueueTimeMs() const {
   if (Empty())
     return 0;
   return queue_time_sum_ms_ / size_packets_;
+}
+
+void RoundRobinPacketQueue::Push(PacketInfoImpl packet) {
+  auto stream_info_it = streams_.find(packet.ssrc_);
+  if (stream_info_it == streams_.end()) {
+    stream_info_it = streams_.emplace(packet.ssrc_, Stream()).first;
+    stream_info_it->second.priority_it = stream_priorities_.end();
+    stream_info_it->second.ssrc = packet.ssrc_;
+  }
+
+  Stream* stream = &stream_info_it->second;
+
+  if (stream->priority_it == stream_priorities_.end()) {
+    // If the SSRC is not currently scheduled, add it to |stream_priorities_|.
+    RTC_CHECK(!IsSsrcScheduled(stream->ssrc));
+    stream->priority_it = stream_priorities_.emplace(
+        StreamPrioKey(packet.priority_, stream->bytes), packet.ssrc_);
+  } else if (packet.priority_ < stream->priority_it->first.priority) {
+    // If the priority of this SSRC increased, remove the outdated StreamPrioKey
+    // and insert a new one with the new priority. Note that |priority_| uses
+    // lower ordinal for higher priority.
+    stream_priorities_.erase(stream->priority_it);
+    stream->priority_it = stream_priorities_.emplace(
+        StreamPrioKey(packet.priority_, stream->bytes), packet.ssrc_);
+  }
+  RTC_CHECK(stream->priority_it != stream_priorities_.end());
+
+  packet.enqueue_time_it_ = enqueue_times_.insert(packet.enqueue_time_ms_);
+
+  // In order to figure out how much time a packet has spent in the queue while
+  // not in a paused state, we subtract the total amount of time the queue has
+  // been paused so far, and when the packet is poped we subtract the total
+  // amount of time the queue has been paused at that moment. This way we
+  // subtract the total amount of time the packet has spent in the queue while
+  // in a paused state.
+  UpdateQueueTime(packet.enqueue_time_ms_);
+  packet.enqueue_time_ms_ -= pause_time_sum_ms_;
+  stream->packet_queue.push(packet);
+
+  size_packets_ += 1;
+  size_bytes_ += packet.bytes_;
 }
 
 RoundRobinPacketQueue::Stream*
