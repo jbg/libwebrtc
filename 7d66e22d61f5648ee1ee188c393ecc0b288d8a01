@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f93a782_16607063",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-05T14:19:45Z",
+      "side": 1,
+      "message": "I\u0027d prefer just rtc::scoped_refptr\u003cVideoFrameBuffer\u003e. I can\u0027t find that in the style guide, but I think wed at some point decided to recommend passing scoped_refptr (and unique_ptr) *by value* to any functions/methods doing anything with the object\u0027s ownership, and pass raw pointer otherwise. Never const ref.\n\nBut may be ok as is, for consistency with the nearby Builder::set_video_frame_buffer.",
+      "range": {
+        "startLine": 164,
+        "startChar": 6,
+        "endLine": 164,
+        "endChar": 49
+      },
+      "revId": "7d66e22d61f5648ee1ee188c393ecc0b288d8a01",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
