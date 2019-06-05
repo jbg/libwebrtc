@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e1789cb_84ef0d00",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-06-05T09:40:47Z",
+      "side": 1,
+      "message": "Same answer.",
+      "parentUuid": "3d97bad4_af5a1627",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 62
+      },
+      "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c600e4e3_1cd70916",
         "filename": "api/video_codecs/vp8_frame_config.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4665aa5c_dc6fb65a",
+        "filename": "api/video_codecs/vp8_frame_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-06-05T09:40:47Z",
+      "side": 1,
+      "message": "Comment added.",
+      "parentUuid": "c600e4e3_1cd70916",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 22
+      },
+      "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -115,6 +163,30 @@
       "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9034834_76b31668",
+        "filename": "api/video_codecs/vp8_frame_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-06-05T09:40:47Z",
+      "side": 1,
+      "message": "* Spelling fixed in PS2, thanks.\n* I am working on FEC in a separate CL. I am not yet sure if the same approach will be taken (propagate a flag from here), but even if so, I do not think it would be good design to have one flag for both. Currently, only VP8 may toggle these flags to anything but their default values, but if other codecs ever want to, I do not feel confident that I can anticipate their motivation to do so, and I am not sure that FEC and retransmissions would always want to be toggled together. In fact, I am not even completely sure I will want to do this for VP8 (although it does seem like it).",
+      "parentUuid": "a7937a18_670a0f88",
+      "range": {
+        "startLine": 89,
+        "startChar": 27,
+        "endLine": 89,
+        "endChar": 36
+      },
+      "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
