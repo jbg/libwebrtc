@@ -25,7 +25,7 @@ class CongestionWindow;
 }  // namespace testing
 
 struct Packet {
-  Packet(RtpPacketSender::Priority priority,
+  Packet(RtpPacketPacer::Priority priority,
          uint32_t ssrc,
          uint16_t seq_number,
          int64_t capture_time_ms,
@@ -39,7 +39,7 @@ struct Packet {
         enqueue_time_ms(enqueue_time_ms),
         size_in_bytes(size_in_bytes),
         retransmission(retransmission) {}
-  RtpPacketSender::Priority priority;
+  RtpPacketPacer::Priority priority;
   uint32_t ssrc;
   uint16_t sequence_number;
   int64_t capture_time_ms;
@@ -62,12 +62,17 @@ class BbrPacedSender : public Pacer {
       bool in_probe_rtt,
       uint64_t congestion_window) override;
   void SetMinBitrate(int min_send_bitrate_bps);
-  void InsertPacket(RtpPacketSender::Priority priority,
+  void InsertPacket(RtpPacketPacer::Priority priority,
                     uint32_t ssrc,
                     uint16_t sequence_number,
                     int64_t capture_time_ms,
                     size_t bytes,
                     bool retransmission) override;
+  void EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet,
+                     PacketType type) override {
+    // TODO(sprang): Fix this?
+    RTC_NOTREACHED();
+  }
   void SetAccountForAudioPackets(bool account_for_audio) override {}
   int64_t TimeUntilNextProcess() override;
   void OnBytesAcked(size_t bytes) override;

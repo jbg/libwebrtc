@@ -15,7 +15,7 @@
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 
 namespace webrtc {
-class Pacer : public Module, public RtpPacketSender {
+class Pacer : public Module, public RtpPacketPacer {
  public:
   virtual void SetEstimatedBitrate(uint32_t bitrate_bps) {}
   virtual void SetPacingRates(uint32_t pacing_rate_bps,
@@ -25,7 +25,7 @@ class Pacer : public Module, public RtpPacketSender {
       bool in_probe_rtt,
       uint64_t congestion_window) {}
   virtual void OnBytesAcked(size_t bytes) {}
-  void InsertPacket(RtpPacketSender::Priority priority,
+  void InsertPacket(RtpPacketPacer::Priority priority,
                     uint32_t ssrc,
                     uint16_t sequence_number,
                     int64_t capture_time_ms,
