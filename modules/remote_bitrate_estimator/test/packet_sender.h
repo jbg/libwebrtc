@@ -115,6 +115,8 @@ class PacedVideoSender : public VideoSender, public PacedSender::PacketSender {
       int64_t capture_time_ms,
       bool retransmission,
       const PacedPacketInfo& pacing_info) override;
+  void SendPacket(std::unique_ptr<RtpPacketToSend> packet,
+                  const PacedPacketInfo& pacing_info) override;
   size_t TimeToSendPadding(size_t bytes,
                            const PacedPacketInfo& pacing_info) override;
 
@@ -135,6 +137,7 @@ class PacedVideoSender : public VideoSender, public PacedSender::PacketSender {
   int64_t TimeUntilNextProcess(const std::list<Module*>& modules);
   void CallProcess(const std::list<Module*>& modules);
   void QueuePackets(Packets* batch, int64_t end_of_batch_time_us);
+  RtpPacketSendResult TimeToSendPacket(uint16_t sequence_number);
 
   size_t pacer_queue_size_in_bytes_ = 0;
   std::unique_ptr<Pacer> pacer_;
