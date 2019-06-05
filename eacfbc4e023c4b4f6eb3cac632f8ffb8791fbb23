@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "3d97bad4_af5a1627",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-05T09:24:01Z",
+      "side": 1,
+      "message": "Same here, is the important thing retransmissions, or more general, effort and bits spent to make transmission reliable? Would it make sense to disable retransmission, but still generate fec packets protecting this frame?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 62
+      },
+      "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c600e4e3_1cd70916",
+        "filename": "api/video_codecs/vp8_frame_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-05T09:24:01Z",
+      "side": 1,
+      "message": "Maybe not for this cl, but this class lacks a comment explaining its overall purpose.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 22
+      },
+      "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a8f75033_16f2bf39",
         "filename": "api/video_codecs/vp8_frame_config.h",
         "patchSetId": 1
@@ -46,6 +92,29 @@
       "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7937a18_670a0f88",
+        "filename": "api/video_codecs/vp8_frame_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-05T09:24:01Z",
+      "side": 1,
+      "message": "Spelling.\n\nAlso, I wonder if it\u0027s right to restrict this to just retransmission, or if it should also apply to fec, or reliability of transport in general?\n\nEven if you don\u0027t intend to touch FEC at the moment, maybe take it into account for naming. (More important for the EncodedImage flag than this one).",
+      "range": {
+        "startLine": 89,
+        "startChar": 27,
+        "endLine": 89,
+        "endChar": 36
+      },
+      "revId": "eacfbc4e023c4b4f6eb3cac632f8ffb8791fbb23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
