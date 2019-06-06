@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fce957c_26975b9a",
+        "filename": "pc/composite_rtp_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-06-06T21:03:26Z",
+      "side": 1,
+      "message": "Should we DCHECK if transport is not found?",
+      "revId": "85b8204bace3633e9a94d8fde5a7880a71de6f20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deb5e60b_9c0401f0",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-06-06T21:03:26Z",
+      "side": 1,
+      "message": "Why ref-counted wrapping is needed here?",
+      "revId": "85b8204bace3633e9a94d8fde5a7880a71de6f20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e947270_dfaccf23",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-06-06T21:03:26Z",
+      "side": 1,
+      "message": "DCHECK that use_datagram_transport is true in config?",
+      "revId": "85b8204bace3633e9a94d8fde5a7880a71de6f20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
