@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "306c9b96_2f4eb12f",
+        "filename": "pc/jsep_transport.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 8020
+      },
+      "writtenOn": "2019-06-06T21:42:16Z",
+      "side": 1,
+      "message": "else if (unencrypted_rtp_transport_) {\n  return unencrypted_rtp_transport_.get();\n} else {\n   // Default RTP transport can be absent only in media_transport setup.\n   DCHECK(media_transport_ \u003d\u003d nullptr);\n   return nullptr;\n}",
+      "revId": "c331e035a34ea6c4924b2c05bdb5ebad41aab637",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
