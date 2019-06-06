@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "09f95317_d00991d1",
+        "filename": "pc/composite_rtp_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-06-06T21:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fce957c_26975b9a",
+      "revId": "85b8204bace3633e9a94d8fde5a7880a71de6f20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "deb5e60b_9c0401f0",
         "filename": "pc/jsep_transport.cc",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9a92feb8_1e565001",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-06-06T21:35:11Z",
+      "side": 1,
+      "message": "webrtc::DtlsTransport is not the same type as DtlsTransportInternal, but it takes ownership of one.  The other instances of webrtc::DtlsTransport are ref-counted, and JsepTransport exposes a ref-counted getter for it.",
+      "parentUuid": "deb5e60b_9c0401f0",
+      "revId": "85b8204bace3633e9a94d8fde5a7880a71de6f20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e947270_dfaccf23",
         "filename": "pc/jsep_transport.cc",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "85b8204bace3633e9a94d8fde5a7880a71de6f20",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae03a28_a0c64c09",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-06-06T21:35:11Z",
+      "side": 1,
+      "message": "JsepTransport doesn\u0027t get the config, it\u0027s only the controller that knows that.",
+      "parentUuid": "9e947270_dfaccf23",
+      "revId": "85b8204bace3633e9a94d8fde5a7880a71de6f20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
