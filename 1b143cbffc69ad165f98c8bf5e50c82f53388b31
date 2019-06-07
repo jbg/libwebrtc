@@ -200,6 +200,24 @@
       "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98b60599_685e28e1",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-07T11:25:42Z",
+      "side": 1,
+      "message": "I don\u0027t think so; when the interface class is fixed to become immutable, one would need methods on this class to be able to write at all to the buffer.",
+      "parentUuid": "65a57a34_6d298302",
+      "revId": "1b143cbffc69ad165f98c8bf5e50c82f53388b31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
