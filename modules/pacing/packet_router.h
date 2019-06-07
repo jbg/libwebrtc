@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <list>
+#include <memory>
 #include <vector>
 
 #include "api/transport/network_types.h"
@@ -58,6 +59,10 @@ class PacketRouter : public PacedSender::PacketSender,
       int64_t capture_timestamp,
       bool retransmission,
       const PacedPacketInfo& packet_info) override;
+
+  // Implements PacedSender::Callback.
+  void SendPacket(std::unique_ptr<RtpPacketToSend> packet,
+                  const PacedPacketInfo& cluster_info) override;
 
   size_t TimeToSendPadding(size_t bytes,
                            const PacedPacketInfo& packet_info) override;

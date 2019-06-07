@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <limits>
+#include <utility>
 
 #include "absl/types/optional.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
@@ -123,6 +124,22 @@ RtpPacketSendResult PacketRouter::TimeToSendPacket(
     }
   }
   return RtpPacketSendResult::kPacketNotFound;
+}
+
+void PacketRouter::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
+                              const PacedPacketInfo& cluster_info) {
+  rtc::CritScope cs(&modules_crit_);
+  for (auto* rtp_module : rtp_send_modules_) {
+    if (rtp_module->TrySendPacket(&packet, cluster_info)) {
+      if ((rtp_module->RtxSendStatus() & kRtxRedundantPayloads) &&
+          rtp_module->HasBweExtensions()) {
+        // This is now the last module to send media, and has the desired
+        // properties needed for payload based padding. Cache it for later use.
+        last_send_module_ = rtp_module;
+      }
+      return;
+    }
+  }
 }
 
 size_t PacketRouter::TimeToSendPadding(size_t bytes_to_send,
