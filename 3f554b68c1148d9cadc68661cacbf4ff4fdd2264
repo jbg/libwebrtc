@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d3f6c6d_288fdafc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-07T12:31:08Z",
+      "side": 1,
+      "message": "Would be nice with a mention of what\u0027s been fixed since the previous attempt.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "3f554b68c1148d9cadc68661cacbf4ff4fdd2264",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45a6ee0e_e56b2400",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-07T12:31:08Z",
+      "side": 1,
+      "message": "Not sure I get this reference. Can you be a bit more explicit about what should match but currently doesn\u0027t?",
+      "range": {
+        "startLine": 724,
+        "startChar": 57,
+        "endLine": 724,
+        "endChar": 75
+      },
+      "revId": "3f554b68c1148d9cadc68661cacbf4ff4fdd2264",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
