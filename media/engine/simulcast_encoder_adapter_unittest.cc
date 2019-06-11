@@ -499,7 +499,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, EncodedCallbackForDifferentEncoders) {
 
   // Set bitrates so that we send all layers.
   adapter_->SetRates(VideoEncoder::RateControlParameters(
-      rate_allocator_->GetAllocation(1200, 30), 30.0));
+      rate_allocator_->Allocate({1200, 30}), 30.0));
 
   // At this point, the simulcast encoder adapter should have 3 streams: HD,
   // quarter HD, and quarter quarter HD. We're going to mostly ignore the exact
@@ -560,7 +560,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReusesEncodersInOrder) {
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   VerifyCodecSettings();
   adapter_->SetRates(VideoEncoder::RateControlParameters(
-      rate_allocator_->GetAllocation(target_bitrate, 30), 30.0));
+      rate_allocator_->Allocate({target_bitrate, 30}), 30.0));
 
   std::vector<MockVideoEncoder*> original_encoders =
       helper_->factory()->encoders();
@@ -587,7 +587,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReusesEncodersInOrder) {
   codec_.numberOfSimulcastStreams = 2;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   adapter_->SetRates(VideoEncoder::RateControlParameters(
-      rate_allocator_->GetAllocation(target_bitrate, 30), 30.0));
+      rate_allocator_->Allocate({target_bitrate, 30}), 30.0));
   std::vector<MockVideoEncoder*> new_encoders = helper_->factory()->encoders();
   ASSERT_EQ(2u, new_encoders.size());
   ASSERT_EQ(original_encoders[0], new_encoders[0]);
@@ -610,7 +610,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReusesEncodersInOrder) {
   codec_.numberOfSimulcastStreams = 1;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   adapter_->SetRates(VideoEncoder::RateControlParameters(
-      rate_allocator_->GetAllocation(target_bitrate, 30), 30.0));
+      rate_allocator_->Allocate({target_bitrate, 30}), 30.0));
   new_encoders = helper_->factory()->encoders();
   ASSERT_EQ(1u, new_encoders.size());
   ASSERT_EQ(original_encoders[0], new_encoders[0]);
@@ -628,7 +628,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReusesEncodersInOrder) {
   codec_.numberOfSimulcastStreams = 3;
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   adapter_->SetRates(VideoEncoder::RateControlParameters(
-      rate_allocator_->GetAllocation(target_bitrate, 30), 30.0));
+      rate_allocator_->Allocate({target_bitrate, 30}), 30.0));
   new_encoders = helper_->factory()->encoders();
   ASSERT_EQ(3u, new_encoders.size());
   // The first encoder is reused.
@@ -712,7 +712,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReinitDoesNotReorderEncoderSettings) {
 TEST_F(TestSimulcastEncoderAdapterFake, ReinitDoesNotReorderFrameSimulcastIdx) {
   SetupCodec();
   adapter_->SetRates(VideoEncoder::RateControlParameters(
-      rate_allocator_->GetAllocation(1200, 30), 30.0));
+      rate_allocator_->Allocate({1200, 30}), 30.0));
   VerifyCodecSettings();
 
   // Send frames on all streams.
@@ -737,7 +737,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, ReinitDoesNotReorderFrameSimulcastIdx) {
   EXPECT_EQ(0, adapter_->Release());
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, 1, 1200));
   adapter_->SetRates(VideoEncoder::RateControlParameters(
-      rate_allocator_->GetAllocation(1200, 30), 30.0));
+      rate_allocator_->Allocate({1200, 30}), 30.0));
 
   // Verify that the same encoder sends out frames on the same simulcast index.
   encoders[0]->SendEncodedImage(1152, 704);
@@ -780,14 +780,14 @@ TEST_F(TestSimulcastEncoderAdapterFake, SetRatesUnderMinBitrate) {
 
   // Above min should be respected.
   VideoBitrateAllocation target_bitrate =
-      rate_allocator_->GetAllocation(codec_.minBitrate * 1000, 30);
+      rate_allocator_->Allocate({codec_.minBitrate * 1000, 30});
   adapter_->SetRates(VideoEncoder::RateControlParameters(target_bitrate, 30.0));
   EXPECT_EQ(target_bitrate,
             helper_->factory()->encoders()[0]->last_set_rates().bitrate);
 
   // Below min but non-zero should be replaced with the min bitrate.
   VideoBitrateAllocation too_low_bitrate =
-      rate_allocator_->GetAllocation((codec_.minBitrate - 1) * 1000, 30);
+      rate_allocator_->Allocate({(codec_.minBitrate - 1) * 1000, 30});
   adapter_->SetRates(
       VideoEncoder::RateControlParameters(too_low_bitrate, 30.0));
   EXPECT_EQ(target_bitrate,
@@ -1177,7 +1177,7 @@ TEST_F(TestSimulcastEncoderAdapterFake, SetRateDistributesBandwithAllocation) {
 
   // Set bitrates so that we send all layers.
   adapter_->SetRates(VideoEncoder::RateControlParameters(
-      rate_allocator_->GetAllocation(target_bitrate.bps(), 30), 30.0,
+      rate_allocator_->Allocate({target_bitrate, 30.}), 30.0,
       bandwidth_allocation));
 
   std::vector<MockVideoEncoder*> encoders = helper_->factory()->encoders();
