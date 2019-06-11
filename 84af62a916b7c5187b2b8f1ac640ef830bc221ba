@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e926fb6_47c82865",
+        "filename": "sdk/android/src/jni/android_media_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-11T11:19:20Z",
+      "side": 1,
+      "message": "If I\u0027ve understood this correctly, AndroidMediaDecoder is the old way of doing hardware encoding on android. The new way is VideoEncoderWrapper, and in this case, releaseOutputBuffer is called on the java side, here: https://cs.chromium.org/chromium/src/third_party/webrtc/sdk/android/src/java/org/webrtc/HardwareVideoEncoder.java?q\u003dHardwareVideoEncoder\u0026sq\u003dpackage:chromium\u0026dr\u003dCSs\u0026l\u003d537\n\nI\u0027d like to do a followup cl to delete this memcpy: https://cs.chromium.org/chromium/src/third_party/webrtc/sdk/android/src/jni/video_encoder_wrapper.cc?l\u003d230. But to do that, control of releaseOutputBuffer must be given to the C++ code, possibly as a method on the java class EncodedImage. \n\nSami, do you think that is feasible, and do you have any advice?",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 69
+      },
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
