@@ -13,6 +13,7 @@ rtc_library("rnn_vad") {
   sources = [
     "auto_correlation.cc",
     "auto_correlation.h",
+    "common.cc",
     "common.h",
     "features_extraction.cc",
     "features_extraction.h",
@@ -38,6 +39,8 @@ rtc_library("rnn_vad") {
     "../../../../api:array_view",
     "../../../../rtc_base:checks",
     "../../../../rtc_base:rtc_base_approved",
+    "../../../../rtc_base/system:arch",
+    "../../../../system_wrappers:cpu_features_api",
     "../../utility:pffft_wrapper",
     "//third_party/rnnoise:rnn_vad",
   ]
