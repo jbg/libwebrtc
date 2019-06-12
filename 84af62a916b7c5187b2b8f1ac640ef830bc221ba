@@ -118,6 +118,30 @@
       "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e188be25_61b1e31f",
+        "filename": "sdk/android/src/jni/android_media_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-06-12T12:38:55Z",
+      "side": 1,
+      "message": "I would expect the release callback to just be a runnable. And yes, I think passing the whole instance is the correct approach. Then you can simply call retain/release on this instance.",
+      "parentUuid": "1bd3ac03_7cef4858",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 69
+      },
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
