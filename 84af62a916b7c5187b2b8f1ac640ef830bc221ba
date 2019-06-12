@@ -22,6 +22,30 @@
       "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b2c0679_f4182f60",
+        "filename": "sdk/android/src/jni/android_media_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-06-12T11:20:15Z",
+      "side": 1,
+      "message": "I think we need to:\n1. Add a way to add a release callback to EncodedImage interface / add reference counting\n2. Update all encoders to allow holding the buffer while the reference is alive\n3. Update wrapper to remove the memcpy",
+      "parentUuid": "0e926fb6_47c82865",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 69
+      },
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
