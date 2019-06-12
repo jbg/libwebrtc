@@ -94,6 +94,30 @@
       "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bd3ac03_7cef4858",
+        "filename": "sdk/android/src/jni/android_media_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-12T12:22:28Z",
+      "side": 1,
+      "message": "Call to nativeOnEncodedFrame is here: https://cs.chromium.org/chromium/src/third_party/webrtc/sdk/android/src/java/org/webrtc/VideoEncoderWrapper.java?q\u003dcreateEncoderCallback\u0026sq\u003dpackage:chromium\u0026dr\u003dCSs\u0026l\u003d40, which unpacks the java EncodedImage and passes relevant attributes to C++. Should this be changed to pass the complete EncodedImage? Or should the release callback be a separate argument, and if so, of what type?\n\nIt\u0027s the border between java and C++ I find most difficult. I\u0027ll see if I can move the releaseOutputBuffer thing to a callback on the java side.",
+      "parentUuid": "ce1cb509_9ce3d3c0",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 69
+      },
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
