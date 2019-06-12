@@ -298,8 +298,8 @@ void VideoProcessor::ProcessFrame() {
 void VideoProcessor::SetRates(size_t bitrate_kbps, size_t framerate_fps) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   framerate_fps_ = static_cast<uint32_t>(framerate_fps);
-  bitrate_allocation_ = bitrate_allocator_->GetAllocation(
-      static_cast<uint32_t>(bitrate_kbps * 1000), framerate_fps_);
+  bitrate_allocation_ = bitrate_allocator_->Allocate(
+      {static_cast<uint32_t>(bitrate_kbps * 1000), framerate_fps_});
   encoder_->SetRates(VideoEncoder::RateControlParameters(
       bitrate_allocation_, static_cast<double>(framerate_fps_)));
 }

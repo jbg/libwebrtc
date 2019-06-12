@@ -2362,7 +2362,7 @@ TEST_F(VideoStreamEncoderTest, CallsBitrateObserver) {
   const int kDefaultFps = 30;
   const VideoBitrateAllocation expected_bitrate =
       DefaultVideoBitrateAllocator(fake_encoder_.codec_config())
-          .GetAllocation(kLowTargetBitrateBps, kDefaultFps);
+          .Allocate({kLowTargetBitrateBps, kDefaultFps});
 
   EXPECT_CALL(bitrate_observer, OnBitrateAllocationUpdated(expected_bitrate))
       .Times(1);
