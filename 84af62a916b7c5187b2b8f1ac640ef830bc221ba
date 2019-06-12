@@ -46,6 +46,30 @@
       "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68339696_8164c9a9",
+        "filename": "sdk/android/src/jni/android_media_encoder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-12T11:38:30Z",
+      "side": 1,
+      "message": "This cl tries to do (1). EncodedImage holds a scoped_refptr\u003cEncodedImageBufferInterface\u003e. My question is how to implement that interface to get an object representing what\u0027s passed to VideoEncoderWrapper::OnEncodedFrame from java.\n\nI\u0027d like to do something similar to the JavaEncodedImageBuffer class here, which invokes the java releaseOutputBuffer on destruction. It\u0027s just that I don\u0027t see any way to do that in VideoEncoderWrapper, without also doing some changes on the java side.\n\nWe\u0027d need some kind of release callback passed from java to C++, and invoked from the appropriate C++ destructor. Hmm, what is the |j_caller| argument to VideoEncoderWrapper::OnEncodedFrame? It\u0027s currently unused.",
+      "parentUuid": "1b2c0679_f4182f60",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 69
+      },
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
