@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "7dcc6329_6d2a974e",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-13T13:44:14Z",
+      "side": 1,
+      "message": "I like it better.",
+      "parentUuid": "62f36748_b41d5c44",
+      "range": {
+        "startLine": 311,
+        "startChar": 12,
+        "endLine": 311,
+        "endChar": 25
+      },
+      "revId": "e4a6ffc2cc38693ebec4ba076ecee2d1c05b5d16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f01f26ec_a30820c1",
         "filename": "call/rtp_payload_params.cc",
         "patchSetId": 10
@@ -234,6 +258,30 @@
       "revId": "e4a6ffc2cc38693ebec4ba076ecee2d1c05b5d16",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa9dc527_725e91eb",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-13T13:44:14Z",
+      "side": 1,
+      "message": "I was thinking, maybe one can have codec-specific code to extract dependencies, but have shared helpers to fill out the generic descriptor and do corresponding updates of |last_shared_frame_id_|. Not needed for this cl, but please consider when you get to also implement VP9; then it should be fairly clear what similarities and differences are.",
+      "parentUuid": "323fa00c_941adc81",
+      "range": {
+        "startLine": 325,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 73
+      },
+      "revId": "e4a6ffc2cc38693ebec4ba076ecee2d1c05b5d16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
