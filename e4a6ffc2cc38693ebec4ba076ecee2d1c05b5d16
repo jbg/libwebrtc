@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c916482b_29cb7665",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-13T11:51:45Z",
+      "side": 1,
+      "message": "Not sure it aids clarity to use these names rather than just \"0\".",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 287,
+        "endChar": 0
+      },
+      "revId": "e4a6ffc2cc38693ebec4ba076ecee2d1c05b5d16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72379ee1_94c2565b",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-13T11:51:45Z",
+      "side": 1,
+      "message": "Could you rely on the destructor to set these fields to zero?",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 0
+      },
+      "revId": "e4a6ffc2cc38693ebec4ba076ecee2d1c05b5d16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7767f17_0e726c03",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-13T11:51:45Z",
+      "side": 1,
+      "message": "When using the \"generic\" codec type, will you ever use any other entry than last_shared_frame_id_[0][0]? If not I think it would be clearer to explicitly access [0][0] only, and set other elements to -1 only on construction, if they have to be initialized at all.\n\nOr can you switch codec without resetting?",
+      "range": {
+        "startLine": 304,
+        "startChar": 2,
+        "endLine": 304,
+        "endChar": 54
+      },
+      "revId": "e4a6ffc2cc38693ebec4ba076ecee2d1c05b5d16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "616f091d_925bc4e1",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-13T11:51:45Z",
+      "side": 1,
+      "message": "Similarly, this name doesn\u0027t add much value. One could possibly argue that \n\n  last_shared_frame_id_[spatial_index][temporal_index]\n\nis clearer than \n\n  last_shared_frame_id_[0][temporal_index]\n\nbut in that case, if it\u0027s used only to annotate what the index means, I think I\u0027d prefer\n\n  last_shared_frame_id_[/*spatial_index*/ 0][temporal_index]",
+      "range": {
+        "startLine": 311,
+        "startChar": 12,
+        "endLine": 311,
+        "endChar": 25
+      },
+      "revId": "e4a6ffc2cc38693ebec4ba076ecee2d1c05b5d16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f01f26ec_a30820c1",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-13T11:51:45Z",
+      "side": 1,
+      "message": "This doesn\u0027t look that h264 specific. Could be moves to a helper method(s) with temporal_index and base_layer_sync flag as input (those are the only things you get from the h264_info, if I\u0027m not missing something). Not sure what you are doing differently for VP8 and VP9, but it would be nice to not have to repeat too much.",
+      "range": {
+        "startLine": 325,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 73
+      },
+      "revId": "e4a6ffc2cc38693ebec4ba076ecee2d1c05b5d16",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
