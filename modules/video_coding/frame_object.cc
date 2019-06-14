@@ -54,9 +54,11 @@ RtpFrameObject::RtpFrameObject(PacketBuffer* packet_buffer,
   // as of the first packet's.
   SetPlayoutDelay(first_packet->video_header.playout_delay);
 
-  AllocateBitstreamBuffer(frame_size);
-  bool bitstream_copied = packet_buffer_->GetBitstream(*this, data());
+  // TODO(nisse): Change GetBitstream to return the buffer?
+  auto buffer = EncodedImageBuffer::Create(frame_size);
+  bool bitstream_copied = packet_buffer_->GetBitstream(*this, buffer->data());
   RTC_DCHECK(bitstream_copied);
+  SetEncodedData(buffer);
   _encodedWidth = first_packet->width();
   _encodedHeight = first_packet->height();
 
@@ -164,14 +166,6 @@ absl::optional<FrameMarking> RtpFrameObject::GetFrameMarking() const {
   if (!packet)
     return absl::nullopt;
   return packet->video_header.frame_marking;
-}
-
-void RtpFrameObject::AllocateBitstreamBuffer(size_t frame_size) {
-  if (capacity() < frame_size) {
-    Allocate(frame_size);
-  }
-
-  set_size(frame_size);
 }
 
 }  // namespace video_coding
