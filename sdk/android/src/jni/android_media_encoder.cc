@@ -80,6 +80,44 @@ __android_log_print(ANDROID_LOG_VERBOSE, TAG_ENCODER, __VA_ARGS__)
   const int64_t kFrameDiffThresholdMs = 350;
   const int kMinKeyFrameInterval = 6;
   const char kCustomQPThresholdsFieldTrial[] = "WebRTC-CustomQPThresholds";
+
+  class JavaEncodedImageBuffer : public EncodedImageBufferInterface {
+   public:
+    JavaEncodedImageBuffer(
+        ScopedJavaGlobalRef<jobject> j_media_codec_video_encoder,
+        int output_buffer_index,
+        uint8_t* payload,
+        size_t size)
+        : j_media_codec_video_encoder_(std::move(j_media_codec_video_encoder)),
+          output_buffer_index_(output_buffer_index),
+          data_(payload),
+          size_(size) {}
+
+    ~JavaEncodedImageBuffer() {
+      // Return output buffer back to the encoder.
+      JNIEnv* jni = AttachCurrentThreadIfNeeded();
+      bool success = Java_MediaCodecVideoEncoder_releaseOutputBuffer(
+          jni, j_media_codec_video_encoder_, output_buffer_index_);
+      if (CheckException(jni)) {
+        RTC_LOG(LS_ERROR) << "Unexpected java exception";
+      } else if (!success) {
+        RTC_LOG(LS_ERROR) << "releaseOutputBuffer on java encoder failed";
+      }
+    }
+    const uint8_t* data() const override { return data_; }
+    uint8_t* data() override { return data_; }
+    size_t size() const override { return size_; }
+
+   private:
+    // The Java object owning the storage.
+    ScopedJavaGlobalRef<jobject> j_media_codec_video_encoder_;
+    int output_buffer_index_;
+
+    // TODO(bugs.webrtc.org/9378): Should be const.
+    uint8_t* data_;
+    size_t size_;
+  };
+
 }  // namespace
 
 // MediaCodecVideoEncoder is a VideoEncoder implementation that uses
@@ -991,8 +1029,10 @@ bool MediaCodecVideoEncoder::DeliverPendingOutputs(JNIEnv* jni) {
     EncodedImageCallback::Result callback_result(
         EncodedImageCallback::Result::OK);
     if (callback_) {
-      std::unique_ptr<EncodedImage> image(
-          new EncodedImage(payload, payload_size, payload_size));
+      auto image = absl::make_unique<EncodedImage>();
+      image->set_buffer(new JavaEncodedImageBuffer(
+          ScopedJavaGlobalRef<jobject>(jni, j_media_codec_video_encoder_),
+          output_buffer_index, payload, payload_size));
       image->_encodedWidth = width_;
       image->_encodedHeight = height_;
       image->SetTimestamp(output_timestamp_);
@@ -1083,14 +1123,6 @@ bool MediaCodecVideoEncoder::DeliverPendingOutputs(JNIEnv* jni) {
       }
 
       callback_result = callback_->OnEncodedImage(*image, &info, &header);
-    }
-
-    // Return output buffer back to the encoder.
-    bool success = Java_MediaCodecVideoEncoder_releaseOutputBuffer(
-        jni, j_media_codec_video_encoder_, output_buffer_index);
-    if (CheckException(jni) || !success) {
-      ProcessHWError(true /* reset_if_fallback_unavailable */);
-      return false;
     }
 
     // Print per frame statistics.
