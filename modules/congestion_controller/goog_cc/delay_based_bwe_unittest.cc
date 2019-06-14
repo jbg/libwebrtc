@@ -24,30 +24,7 @@ constexpr int kNumProbesCluster1 = 8;
 const PacedPacketInfo kPacingInfo0(0, kNumProbesCluster0, 2000);
 const PacedPacketInfo kPacingInfo1(1, kNumProbesCluster1, 4000);
 constexpr float kTargetUtilizationFraction = 0.95f;
-constexpr Timestamp kDummyTimestamp = Timestamp::Seconds<1000>();
 }  // namespace
-
-TEST_F(DelayBasedBweTest, NoCrashEmptyFeedback) {
-  std::vector<PacketFeedback> packet_feedback_vector;
-  bitrate_estimator_->IncomingPacketFeedbackVector(
-      packet_feedback_vector, /*acked_bitrate*/ absl::nullopt,
-      /*probe_bitrate*/ absl::nullopt, /*network_estimate*/ absl::nullopt,
-      /*in_alr*/ false, kDummyTimestamp);
-}
-
-TEST_F(DelayBasedBweTest, NoCrashOnlyLostFeedback) {
-  std::vector<PacketFeedback> packet_feedback_vector;
-  packet_feedback_vector.push_back(PacketFeedback(PacketFeedback::kNotReceived,
-                                                  PacketFeedback::kNoSendTime,
-                                                  0, 1500, PacedPacketInfo()));
-  packet_feedback_vector.push_back(PacketFeedback(PacketFeedback::kNotReceived,
-                                                  PacketFeedback::kNoSendTime,
-                                                  1, 1500, PacedPacketInfo()));
-  bitrate_estimator_->IncomingPacketFeedbackVector(
-      packet_feedback_vector, /*acked_bitrate*/ absl::nullopt,
-      /*probe_bitrate*/ absl::nullopt, /*network_estimate*/ absl::nullopt,
-      /*in_alr*/ false, kDummyTimestamp);
-}
 
 TEST_F(DelayBasedBweTest, ProbeDetection) {
   int64_t now_ms = clock_.TimeInMilliseconds();
@@ -222,7 +199,7 @@ TEST_F(DelayBasedBweTest, TestInitialOveruse) {
     // The purpose of this test is to ensure that we back down even if we don't
     // have any acknowledged bitrate estimate yet. Hence, if the test works
     // as expected, we should not have a measured bitrate yet.
-    EXPECT_FALSE(acknowledged_bitrate_estimator_->bitrate_bps().has_value());
+    EXPECT_FALSE(acknowledged_bitrate_estimator_->bitrate().has_value());
     if (overuse) {
       EXPECT_TRUE(bitrate_observer_.updated());
       EXPECT_NEAR(bitrate_observer_.latest_bitrate(), kStartBitrate.bps() / 2,
@@ -270,7 +247,7 @@ TEST_F(DelayBasedBweTestWithBackoffTimeoutExperiment, TestInitialOveruse) {
     // The purpose of this test is to ensure that we back down even if we don't
     // have any acknowledged bitrate estimate yet. Hence, if the test works
     // as expected, we should not have a measured bitrate yet.
-    EXPECT_FALSE(acknowledged_bitrate_estimator_->bitrate_bps().has_value());
+    EXPECT_FALSE(acknowledged_bitrate_estimator_->bitrate().has_value());
     if (overuse) {
       EXPECT_TRUE(bitrate_observer_.updated());
       EXPECT_NEAR(bitrate_observer_.latest_bitrate(), kStartBitrate.bps() / 2,
