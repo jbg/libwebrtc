@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "09b6c709_5369aa8d",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-14T12:09:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9517e84_f6eb714f",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 60
+      },
+      "revId": "cad653f4feb85b30d1d53d4f6a5cdcc7372b7720",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64d7e1e2_f7f5a5d3",
         "filename": "modules/pacing/round_robin_packet_queue.h",
         "patchSetId": 17
@@ -36,6 +60,30 @@
       "writtenOn": "2019-06-10T09:07:05Z",
       "side": 1,
       "message": "Could this be a struct instead? To make it easier to follow usage of the member fields.",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 7
+      },
+      "revId": "cad653f4feb85b30d1d53d4f6a5cdcc7372b7720",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47dc539a_50713249",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-14T12:09:37Z",
+      "side": 1,
+      "message": "You mean just had plain data members like before?\nIt added the getter methods since I wanted to protect the fields that are functionally const and shouldn\u0027t be directly used from outside.",
+      "parentUuid": "64d7e1e2_f7f5a5d3",
       "range": {
         "startLine": 36,
         "startChar": 2,
@@ -68,6 +116,30 @@
       "revId": "cad653f4feb85b30d1d53d4f6a5cdcc7372b7720",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64460906_b0738ee1",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-14T12:09:37Z",
+      "side": 1,
+      "message": "Both code paths will exists in parallel during a migration phase. But yes, most fields can be removed when the old path is gone.",
+      "parentUuid": "dec17be9_53400eb0",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 43,
+        "endChar": 38
+      },
+      "revId": "cad653f4feb85b30d1d53d4f6a5cdcc7372b7720",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
