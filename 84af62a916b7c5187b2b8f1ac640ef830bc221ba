@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "55a99e37_e83f9614",
+        "filename": "api/video/encoded_image.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-06-14T11:03:56Z",
+      "side": 1,
+      "message": "We don\u0027t generally even dcheck for OOM. It happens rarely, and we get a reasonably clean crash when trying to deref nullptr.",
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "211e4fea_09f75ced",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-06-14T11:03:56Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be RefCountedInterface? Otherwise this interface won\u0027t be pure or even stateless.",
+      "range": {
+        "startLine": 37,
+        "startChar": 43,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35258d2b_d164e1fe",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-06-14T11:03:56Z",
+      "side": 1,
+      "message": "No.",
+      "range": {
+        "startLine": 50,
+        "startChar": 56,
+        "endLine": 50,
+        "endChar": 75
+      },
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e926fb6_47c82865",
         "filename": "sdk/android/src/jni/android_media_encoder.cc",
         "patchSetId": 6
