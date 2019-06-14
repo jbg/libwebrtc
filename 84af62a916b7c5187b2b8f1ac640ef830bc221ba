@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5f7faa01_7247a390",
+        "filename": "api/video/encoded_image.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-06-14T12:33:57Z",
+      "side": 1,
+      "message": "I\u0027m actually not sure, because I can\u0027t recall ever having debugged a case of OOM in WebRTC. If you decide to find out, please let me know what you find. :-)",
+      "parentUuid": "1150e930_0a499e04",
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "211e4fea_09f75ced",
         "filename": "api/video/encoded_image.h",
         "patchSetId": 6
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "Maybe. I thought it would be simpler this way; as I\u0027ve understood it, the point of RefCountedInterface is to allow a concrete class to implement multiple refcounted interfaces and add refcount at the bottom of the inheritance tree. Which shouldn\u0027t be an issue here. \n\nBut I\u0027ve changed to RefCountInterface; that is more consistent with the VideoFrameBuffer interface.",
       "parentUuid": "211e4fea_09f75ced",
+      "range": {
+        "startLine": 37,
+        "startChar": 43,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "84af62a916b7c5187b2b8f1ac640ef830bc221ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8abb5dbf_efcb1484",
+        "filename": "api/video/encoded_image.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-06-14T12:33:57Z",
+      "side": 1,
+      "message": "Yes, to allow a concrete class to implement multiple refcounted interfaces, and just generally to enable the interfaces to be pure virtual. I can\u0027t off the top of my head think of any case where I haven\u0027t eventually regretted making a non-pure interface...",
+      "parentUuid": "e12b9438_e8bd9111",
       "range": {
         "startLine": 37,
         "startChar": 43,
