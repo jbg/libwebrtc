@@ -22,7 +22,6 @@
 #include "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.h"
 #include "modules/congestion_controller/goog_cc/delay_based_bwe.h"
 #include "modules/remote_bitrate_estimator/include/remote_bitrate_estimator.h"
-#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "rtc_base/constructor_magic.h"
 #include "system_wrappers/include/clock.h"
 #include "test/field_trial.h"
@@ -60,7 +59,7 @@ class RtpStream {
   // previous frame, no frame will be generated. The frame is split into
   // packets.
   int64_t GenerateFrame(int64_t time_now_us,
-                        std::vector<PacketFeedback>* packets);
+                        std::vector<PacketResult>* packets);
 
   // The send-side time when the next frame can be generated.
   int64_t next_rtp_time() const;
@@ -101,7 +100,7 @@ class StreamGenerator {
 
   // TODO(holmer): Break out the channel simulation part from this class to make
   // it possible to simulate different types of channels.
-  int64_t GenerateFrame(std::vector<PacketFeedback>* packets,
+  int64_t GenerateFrame(std::vector<PacketResult>* packets,
                         int64_t time_now_us);
 
  private:
