@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include "audio/audio_send_stream.h"
+
 #include <string>
 #include <utility>
 #include <vector>
@@ -15,7 +17,6 @@
 #include "absl/memory/memory.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/test/mock_frame_encryptor.h"
-#include "audio/audio_send_stream.h"
 #include "audio/audio_state.h"
 #include "audio/conversion.h"
 #include "audio/mock_voe_channel_proxy.h"
@@ -73,12 +74,15 @@ const AudioCodecSpec kCodecSpecs[] = {
     {kOpusFormat, {48000, 1, 32000, 6000, 510000}},
     {kG722Format, {16000, 1, 64000}}};
 
-// TODO(dklee): This mirrors calculation in audio_send_stream.cc, which
-// should be made more precise in the future. This can be changed when that
-// logic is more accurate.
-const DataSize kOverheadPerPacket = DataSize::bytes(20 + 8 + 10 + 12);
-const TimeDelta kMaxFrameLength = TimeDelta::ms(60);
-const DataRate kOverheadRate = kOverheadPerPacket / kMaxFrameLength;
+// Minimum and maximum audio frame sizes, in ms.
+const int kMinAudioFrameSizeMs = 20;
+const int kMaxAudioFrameSizeMs = 120;
+
+static constexpr int kIpV4OverheadBytes = 20;
+static constexpr int kIpV6OverheadBytes = 40;
+static constexpr int kUdpOverheadBytes = 8;
+static constexpr int kSrtpOverheadBytes = 10;
+static constexpr int kRtpOverheadBytes = 12;
 
 class MockLimitObserver : public BitrateAllocator::LimitObserver {
  public:
@@ -101,6 +105,8 @@ std::unique_ptr<MockAudioEncoder> SetupAudioEncoderMock(
           .WillByDefault(Return(spec.info.num_channels));
       ON_CALL(*encoder.get(), RtpTimestampRateHz())
           .WillByDefault(Return(spec.format.clockrate_hz));
+      ON_CALL(*encoder.get(), Max10MsFramesInAPacket())
+          .WillByDefault(Return(kMaxAudioFrameSizeMs / 10));
       return encoder;
     }
   }
@@ -490,94 +496,71 @@ TEST(AudioSendStreamTest, DoesNotPassHigherBitrateThanMaxBitrate) {
   send_stream->OnBitrateUpdated(update);
 }
 
-TEST(AudioSendStreamTest, SSBweTargetInRangeRespected) {
-  ScopedFieldTrials field_trials("WebRTC-Audio-SendSideBwe/Enabled/");
-  ConfigHelper helper(true, true);
+TEST(AudioSendStreamSendSideBweWithOverheadTest,
+     DoesNotPassHigherBitrateThanMaxBitrate) {
+  ScopedFieldTrials field_trials(
+      "WebRTC-Audio-SendSideBwe/Enabled/WebRTC-SendSideBwe-WithOverhead/"
+      "Enabled/");
+  ConfigHelper helper(false, true);
   auto send_stream = helper.CreateAudioSendStream();
+
+  // Legacy code with WebRTC-SendSideBwe-WithOverhead uses hardcoded overhead
+  // calculation based on Ipv4 and RTP transport without TURN.
+  constexpr int overhead_bytes = kIpV4OverheadBytes + kUdpOverheadBytes +
+                                 kSrtpOverheadBytes + kRtpOverheadBytes;
+  constexpr int min_overhead_bps =
+      overhead_bytes * 8 * 1000 / kMaxAudioFrameSizeMs;
+
+  // Something larger than overhead.
+  constexpr int excessive_bps = 15000;
+  static_assert(min_overhead_bps < excessive_bps, "");
+
   EXPECT_CALL(*helper.channel_send(),
-              OnBitrateAllocation(Field(
-                  &BitrateAllocationUpdate::target_bitrate,
-                  Eq(DataRate::bps(helper.config().max_bitrate_bps - 5000)))));
+              OnBitrateAllocation(
+                  Field(&BitrateAllocationUpdate::target_bitrate,
+                        Eq(DataRate::bps(helper.config().max_bitrate_bps +
+                                         min_overhead_bps)))));
   BitrateAllocationUpdate update;
-  update.target_bitrate = DataRate::bps(helper.config().max_bitrate_bps - 5000);
+  update.target_bitrate =
+      DataRate::bps(helper.config().max_bitrate_bps + excessive_bps);
+  update.packet_loss_ratio = 0;
+  update.round_trip_time = TimeDelta::ms(50);
+  update.bwe_period = TimeDelta::ms(6000);
+
   send_stream->OnBitrateUpdated(update);
 }
 
-TEST(AudioSendStreamTest, SSBweFieldTrialMinRespected) {
+TEST(AudioSendStreamSendSideBweWithActualOverheads,
+     DoesNotPassHigherBitrateThanMaxBitrate) {
   ScopedFieldTrials field_trials(
-      "WebRTC-Audio-SendSideBwe/Enabled/"
-      "WebRTC-Audio-Allocation/min:6kbps,max:64kbps/");
-  ConfigHelper helper(true, true);
+      "WebRTC-Audio-SendSideBwe/Enabled/WebRTC-SendSideBwe-WithOverhead/"
+      "Enabled/WebRTC-Audio-ActualPacketOverheads/Enabled/");
+  ConfigHelper helper(false, true);
   auto send_stream = helper.CreateAudioSendStream();
-  EXPECT_CALL(
-      *helper.channel_send(),
-      OnBitrateAllocation(Field(&BitrateAllocationUpdate::target_bitrate,
-                                Eq(DataRate::kbps(6)))));
-  BitrateAllocationUpdate update;
-  update.target_bitrate = DataRate::kbps(1);
-  send_stream->OnBitrateUpdated(update);
-}
 
-TEST(AudioSendStreamTest, SSBweFieldTrialMaxRespected) {
-  ScopedFieldTrials field_trials(
-      "WebRTC-Audio-SendSideBwe/Enabled/"
-      "WebRTC-Audio-Allocation/min:6kbps,max:64kbps/");
-  ConfigHelper helper(true, true);
-  auto send_stream = helper.CreateAudioSendStream();
-  EXPECT_CALL(
-      *helper.channel_send(),
-      OnBitrateAllocation(Field(&BitrateAllocationUpdate::target_bitrate,
-                                Eq(DataRate::kbps(64)))));
-  BitrateAllocationUpdate update;
-  update.target_bitrate = DataRate::kbps(128);
-  send_stream->OnBitrateUpdated(update);
-}
+  // This test does not setup overhead callback, so AudioSendStream will use
+  // default overhead calculation based on Ipv6 and RTP transport without TURN.
+  constexpr int overhead_bytes = kIpV6OverheadBytes + kUdpOverheadBytes +
+                                 kSrtpOverheadBytes + kRtpOverheadBytes;
+  constexpr int max_overhead_bps =
+      overhead_bytes * 8 * 1000 / kMinAudioFrameSizeMs;
 
-TEST(AudioSendStreamTest, SSBweWithOverhead) {
-  ScopedFieldTrials field_trials(
-      "WebRTC-Audio-SendSideBwe/Enabled/"
-      "WebRTC-SendSideBwe-WithOverhead/Enabled/");
-  ConfigHelper helper(true, true);
-  auto send_stream = helper.CreateAudioSendStream();
-  const DataRate bitrate =
-      DataRate::bps(helper.config().max_bitrate_bps) + kOverheadRate;
+  // Something larger than overhead.
+  constexpr int excessive_bps = 80000;
+  static_assert(max_overhead_bps < excessive_bps, "");
+
   EXPECT_CALL(*helper.channel_send(),
-              OnBitrateAllocation(Field(
-                  &BitrateAllocationUpdate::target_bitrate, Eq(bitrate))));
+              OnBitrateAllocation(
+                  Field(&BitrateAllocationUpdate::target_bitrate,
+                        Eq(DataRate::bps(helper.config().max_bitrate_bps +
+                                         max_overhead_bps)))));
   BitrateAllocationUpdate update;
-  update.target_bitrate = bitrate;
-  send_stream->OnBitrateUpdated(update);
-}
+  update.target_bitrate =
+      DataRate::bps(helper.config().max_bitrate_bps + excessive_bps);
+  update.packet_loss_ratio = 0;
+  update.round_trip_time = TimeDelta::ms(50);
+  update.bwe_period = TimeDelta::ms(6000);
 
-TEST(AudioSendStreamTest, SSBweWithOverheadMinRespected) {
-  ScopedFieldTrials field_trials(
-      "WebRTC-Audio-SendSideBwe/Enabled/"
-      "WebRTC-SendSideBwe-WithOverhead/Enabled/"
-      "WebRTC-Audio-Allocation/min:6kbps,max:64kbps/");
-  ConfigHelper helper(true, true);
-  auto send_stream = helper.CreateAudioSendStream();
-  const DataRate bitrate = DataRate::kbps(6) + kOverheadRate;
-  EXPECT_CALL(*helper.channel_send(),
-              OnBitrateAllocation(Field(
-                  &BitrateAllocationUpdate::target_bitrate, Eq(bitrate))));
-  BitrateAllocationUpdate update;
-  update.target_bitrate = DataRate::kbps(1);
-  send_stream->OnBitrateUpdated(update);
-}
-
-TEST(AudioSendStreamTest, SSBweWithOverheadMaxRespected) {
-  ScopedFieldTrials field_trials(
-      "WebRTC-Audio-SendSideBwe/Enabled/"
-      "WebRTC-SendSideBwe-WithOverhead/Enabled/"
-      "WebRTC-Audio-Allocation/min:6kbps,max:64kbps/");
-  ConfigHelper helper(true, true);
-  auto send_stream = helper.CreateAudioSendStream();
-  const DataRate bitrate = DataRate::kbps(64) + kOverheadRate;
-  EXPECT_CALL(*helper.channel_send(),
-              OnBitrateAllocation(Field(
-                  &BitrateAllocationUpdate::target_bitrate, Eq(bitrate))));
-  BitrateAllocationUpdate update;
-  update.target_bitrate = DataRate::kbps(128);
   send_stream->OnBitrateUpdated(update);
 }
 
@@ -637,33 +620,22 @@ TEST(AudioSendStreamTest, ReconfigureTransportCcResetsFirst) {
   send_stream->Reconfigure(new_config);
 }
 
-TEST(AudioSendStreamTest, OnTransportOverheadChanged) {
+TEST(AudioSendStreamTest, OnOverheadChanged) {
   ConfigHelper helper(false, true);
   auto send_stream = helper.CreateAudioSendStream();
   auto new_config = helper.config();
 
   // CallEncoder will be called on overhead change.
-  EXPECT_CALL(*helper.channel_send(), CallEncoder(::testing::_)).Times(1);
+  EXPECT_CALL(*helper.channel_send(), CallEncoder(testing::_)).Times(2);
 
-  const size_t transport_overhead_per_packet_bytes = 333;
-  send_stream->SetTransportOverhead(transport_overhead_per_packet_bytes);
-
-  EXPECT_EQ(transport_overhead_per_packet_bytes,
-            send_stream->TestOnlyGetPerPacketOverheadBytes());
-}
-
-TEST(AudioSendStreamTest, OnAudioOverheadChanged) {
-  ConfigHelper helper(false, true);
-  auto send_stream = helper.CreateAudioSendStream();
-  auto new_config = helper.config();
+  const size_t transport_overhead_bytes = 333;
+  const size_t audio_overhead_bytes = 555;
 
   // CallEncoder will be called on overhead change.
   EXPECT_CALL(*helper.channel_send(), CallEncoder(::testing::_)).Times(1);
 
-  const size_t audio_overhead_per_packet_bytes = 555;
-  send_stream->OnOverheadChanged(audio_overhead_per_packet_bytes);
-  EXPECT_EQ(audio_overhead_per_packet_bytes,
-            send_stream->TestOnlyGetPerPacketOverheadBytes());
+  EXPECT_EQ(transport_overhead_bytes + audio_overhead_bytes,
+            send_stream->GetPerPacketOverheadBytes());
 }
 
 TEST(AudioSendStreamTest, OnAudioAndTransportOverheadChanged) {
@@ -682,7 +654,7 @@ TEST(AudioSendStreamTest, OnAudioAndTransportOverheadChanged) {
 
   EXPECT_EQ(
       transport_overhead_per_packet_bytes + audio_overhead_per_packet_bytes,
-      send_stream->TestOnlyGetPerPacketOverheadBytes());
+      send_stream->GetPerPacketOverheadBytes());
 }
 
 // Validates that reconfiguring the AudioSendStream with a Frame encryptor
