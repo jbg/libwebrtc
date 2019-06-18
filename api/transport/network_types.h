@@ -131,6 +131,17 @@ struct TransportLossReport {
 // Packet level feedback
 
 struct PacketResult {
+  class ReceiveTimeOrder {
+   public:
+    inline bool operator()(const PacketResult& lhs, const PacketResult& rhs) {
+      if (lhs.receive_time != rhs.receive_time)
+        return lhs.receive_time < rhs.receive_time;
+      if (lhs.sent_packet.send_time != rhs.sent_packet.send_time)
+        return lhs.sent_packet.send_time < rhs.sent_packet.send_time;
+      return lhs.sent_packet.sequence_number < rhs.sent_packet.sequence_number;
+    }
+  };
+
   PacketResult();
   PacketResult(const PacketResult&);
   ~PacketResult();
