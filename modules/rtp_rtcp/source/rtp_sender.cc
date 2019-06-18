@@ -154,7 +154,7 @@ RTPSender::RTPSender(
               .find("Enabled") == 0),
       payload_padding_prefer_useful_packets_(
           field_trials.Lookup("WebRTC-PayloadPadding-UseMostUsefulPacket")
-              .find("Enabled") == 0) {
+              .find("Disabled") != 0) {
   // This random initialization is not intended to be cryptographic strong.
   timestamp_offset_ = random_.Rand<uint32_t>();
   // Random start, 16 bits. Can't be 0.
