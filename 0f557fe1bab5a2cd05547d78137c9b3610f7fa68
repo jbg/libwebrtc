@@ -175,6 +175,24 @@
       "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eb2a282_e855ebd0",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-06-18T12:12:02Z",
+      "side": 0,
+      "message": "I think it would be good to add such a GoogCC test. Iirc, we had a bug where empty feedback vectors were propagated through the delay based estimator.",
+      "parentUuid": "1ee7e05f_e809018c",
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
