@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6a88dfc_2a2bf875",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-06-18T11:39:53Z",
+      "side": 0,
+      "message": "What happens if the packets are out of order?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 59
+      },
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d486d7f_d9eacd76",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-06-18T11:39:53Z",
+      "side": 0,
+      "message": "Can the definition of the comparator be removed too?",
+      "range": {
+        "startLine": 47,
+        "startChar": 28,
+        "endLine": 47,
+        "endChar": 52
+      },
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec80e01b_8a4fe97a",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-06-18T11:39:53Z",
+      "side": 0,
+      "message": "Is the feedback vector guaranteed to have valid send times?",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 40
+      },
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce87bdcb_9cb9886e",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-06-18T11:39:53Z",
+      "side": 0,
+      "message": "Do we have these types of tests elsewhere? I.e. we get feedback, but all of the packets in the feedback have timed out or are invalid?",
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
