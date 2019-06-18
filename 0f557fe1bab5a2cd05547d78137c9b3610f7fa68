@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "24a358bf_0a3f27f0",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-18T12:02:38Z",
+      "side": 0,
+      "message": "Added this back.",
+      "parentUuid": "d6a88dfc_2a2bf875",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 59
+      },
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d486d7f_d9eacd76",
         "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a93ec10_81a6a91e",
+        "filename": "modules/congestion_controller/goog_cc/acknowledged_bitrate_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-18T12:02:38Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "7d486d7f_d9eacd76",
+      "range": {
+        "startLine": 47,
+        "startChar": 28,
+        "endLine": 47,
+        "endChar": 52
+      },
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9442eade_4aa9add1",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-18T12:02:38Z",
+      "side": 0,
+      "message": "Yes. They were optional before, but now we use sendless_arrival_times for history-less packets.",
+      "parentUuid": "ec80e01b_8a4fe97a",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 40
+      },
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce87bdcb_9cb9886e",
         "filename": "modules/congestion_controller/goog_cc/delay_based_bwe_unittest.cc",
         "patchSetId": 5
@@ -82,6 +154,24 @@
       "writtenOn": "2019-06-18T11:39:53Z",
       "side": 0,
       "message": "Do we have these types of tests elsewhere? I.e. we get feedback, but all of the packets in the feedback have timed out or are invalid?",
+      "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ee7e05f_e809018c",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-18T12:02:38Z",
+      "side": 0,
+      "message": "DelayBasedBwe wouldn\u0027t get called in that case, not sure if there are GoogCC-level tests for that.",
+      "parentUuid": "ce87bdcb_9cb9886e",
       "revId": "0f557fe1bab5a2cd05547d78137c9b3610f7fa68",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
