@@ -741,7 +741,6 @@ webrtc::AudioSendStream* Call::CreateAudioSendStream(
       }
     }
   }
-  send_stream->SignalNetworkState(audio_network_state_);
   UpdateAggregateNetworkState();
   return send_stream;
 }
@@ -799,7 +798,6 @@ webrtc::AudioReceiveStream* Call::CreateAudioReceiveStream(
       receive_stream->AssociateSendStream(it->second);
     }
   }
-  receive_stream->SignalNetworkState(audio_network_state_);
   UpdateAggregateNetworkState();
   return receive_stream;
 }
@@ -958,7 +956,6 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
     video_receive_streams_.insert(receive_stream);
     ConfigureSync(config.sync_group);
   }
-  receive_stream->SignalNetworkState(video_network_state_);
   UpdateAggregateNetworkState();
   event_log_->Log(absl::make_unique<RtcEventVideoReceiveStreamConfig>(
       CreateRtcLogStreamConfig(config)));
@@ -1117,21 +1114,6 @@ void Call::SignalChannelNetworkState(MediaType media, NetworkState state) {
   }
 
   UpdateAggregateNetworkState();
-  {
-    ReadLockScoped read_lock(*send_crit_);
-    for (auto& kv : audio_send_ssrcs_) {
-      kv.second->SignalNetworkState(audio_network_state_);
-    }
-  }
-  {
-    ReadLockScoped read_lock(*receive_crit_);
-    for (AudioReceiveStream* audio_receive_stream : audio_receive_streams_) {
-      audio_receive_stream->SignalNetworkState(audio_network_state_);
-    }
-    for (VideoReceiveStream* video_receive_stream : video_receive_streams_) {
-      video_receive_stream->SignalNetworkState(video_network_state_);
-    }
-  }
 }
 
 void Call::OnAudioTransportOverheadChanged(int transport_overhead_per_packet) {

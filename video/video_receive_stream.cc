@@ -294,11 +294,6 @@ VideoReceiveStream::~VideoReceiveStream() {
   process_thread_->DeRegisterModule(&rtp_stream_sync_);
 }
 
-void VideoReceiveStream::SignalNetworkState(NetworkState state) {
-  RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
-  rtp_video_stream_receiver_.SignalNetworkState(state);
-}
-
 bool VideoReceiveStream::DeliverRtcp(const uint8_t* packet, size_t length) {
   return rtp_video_stream_receiver_.DeliverRtcp(packet, length);
 }
