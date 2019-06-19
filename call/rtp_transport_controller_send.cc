@@ -38,7 +38,7 @@ TargetRateConstraints ConvertConstraints(int min_bitrate_bps,
                                          int start_bitrate_bps,
                                          Clock* clock) {
   TargetRateConstraints msg;
-  msg.at_time = Timestamp::ms(clock->TimeInMilliseconds());
+  msg.at_time = clock->CurrentTime();
   msg.min_data_rate =
       min_bitrate_bps >= 0 ? DataRate::bps(min_bitrate_bps) : DataRate::Zero();
   msg.max_data_rate = max_bitrate_bps > 0 ? DataRate::bps(max_bitrate_bps)
@@ -74,7 +74,7 @@ RtpTransportControllerSend::RtpTransportControllerSend(
       controller_factory_fallback_(
           absl::make_unique<GoogCcNetworkControllerFactory>(predictor_factory)),
       process_interval_(controller_factory_fallback_->GetProcessInterval()),
-      last_report_block_time_(Timestamp::ms(clock_->TimeInMilliseconds())),
+      last_report_block_time_(clock_->CurrentTime()),
       reset_feedback_on_route_change_(
           !field_trial::IsEnabled("WebRTC-Bwe-NoFeedbackReset")),
       send_side_bwe_with_overhead_(
@@ -251,7 +251,7 @@ void RtpTransportControllerSend::OnNetworkRouteChanged(
           network_route.connected, network_route.packet_overhead));
     }
     NetworkRouteChange msg;
-    msg.at_time = Timestamp::ms(clock_->TimeInMilliseconds());
+    msg.at_time = clock_->CurrentTime();
     msg.constraints = ConvertConstraints(bitrate_config, clock_);
     task_queue_.PostTask([this, msg] {
       RTC_DCHECK_RUN_ON(&task_queue_);
@@ -268,7 +268,7 @@ void RtpTransportControllerSend::OnNetworkAvailability(bool network_available) {
   RTC_LOG(LS_INFO) << "SignalNetworkState "
                    << (network_available ? "Up" : "Down");
   NetworkAvailability msg;
-  msg.at_time = Timestamp::ms(clock_->TimeInMilliseconds());
+  msg.at_time = clock_->CurrentTime();
   msg.network_available = network_available;
   task_queue_.PostTask([this, msg]() {
     RTC_DCHECK_RUN_ON(&task_queue_);
@@ -394,7 +394,7 @@ void RtpTransportControllerSend::OnTransportOverheadChanged(
 
 void RtpTransportControllerSend::OnReceivedEstimatedBitrate(uint32_t bitrate) {
   RemoteBitrateReport msg;
-  msg.receive_time = Timestamp::ms(clock_->TimeInMilliseconds());
+  msg.receive_time = clock_->CurrentTime();
   msg.bandwidth = DataRate::bps(bitrate);
   task_queue_.PostTask([this, msg]() {
     RTC_DCHECK_RUN_ON(&task_queue_);
@@ -429,7 +429,7 @@ void RtpTransportControllerSend::OnAddPacket(
       packet_info,
       send_side_bwe_with_overhead_ ? transport_overhead_bytes_per_packet_.load()
                                    : 0,
-      Timestamp::ms(clock_->TimeInMilliseconds()));
+      clock_->CurrentTime());
 }
 
 void RtpTransportControllerSend::OnTransportFeedback(
@@ -438,7 +438,7 @@ void RtpTransportControllerSend::OnTransportFeedback(
 
   absl::optional<TransportPacketsFeedback> feedback_msg =
       transport_feedback_adapter_.ProcessTransportFeedback(
-          feedback, Timestamp::ms(clock_->TimeInMilliseconds()));
+          feedback, clock_->CurrentTime());
   if (feedback_msg) {
     task_queue_.PostTask([this, feedback_msg]() {
       RTC_DCHECK_RUN_ON(&task_queue_);
@@ -458,8 +458,7 @@ void RtpTransportControllerSend::MaybeCreateControllers() {
     return;
   control_handler_ = absl::make_unique<CongestionControlHandler>();
 
-  initial_config_.constraints.at_time =
-      Timestamp::ms(clock_->TimeInMilliseconds());
+  initial_config_.constraints.at_time = clock_->CurrentTime();
   initial_config_.stream_based_config = streams_config_;
 
   // TODO(srte): Use fallback controller if no feedback is available.
@@ -510,14 +509,14 @@ void RtpTransportControllerSend::StartProcessPeriodicTasks() {
 void RtpTransportControllerSend::UpdateControllerWithTimeInterval() {
   RTC_DCHECK(controller_);
   ProcessInterval msg;
-  msg.at_time = Timestamp::ms(clock_->TimeInMilliseconds());
+  msg.at_time = clock_->CurrentTime();
   if (add_pacing_to_cwin_)
     msg.pacer_queue = DataSize::bytes(pacer_.QueueSizeBytes());
   PostUpdates(controller_->OnProcessInterval(msg));
 }
 
 void RtpTransportControllerSend::UpdateStreamsConfig() {
-  streams_config_.at_time = Timestamp::ms(clock_->TimeInMilliseconds());
+  streams_config_.at_time = clock_->CurrentTime();
   if (controller_)
     PostUpdates(controller_->OnStreamsConfig(streams_config_));
 }
