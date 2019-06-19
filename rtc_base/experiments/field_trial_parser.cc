@@ -92,7 +92,7 @@ void ParseFieldTrial(
 }
 
 template <>
-absl::optional<bool> ParseTypedParameter<bool>(std::string str) {
+absl::optional<bool> ParseTypedParameter<bool>(const std::string& str) {
   if (str == "true" || str == "1") {
     return true;
   } else if (str == "false" || str == "0") {
@@ -102,7 +102,7 @@ absl::optional<bool> ParseTypedParameter<bool>(std::string str) {
 }
 
 template <>
-absl::optional<double> ParseTypedParameter<double>(std::string str) {
+absl::optional<double> ParseTypedParameter<double>(const std::string& str) {
   double value;
   char unit[2]{0, 0};
   if (sscanf(str.c_str(), "%lf%1s", &value, unit) >= 1) {
@@ -115,7 +115,7 @@ absl::optional<double> ParseTypedParameter<double>(std::string str) {
 }
 
 template <>
-absl::optional<int> ParseTypedParameter<int>(std::string str) {
+absl::optional<int> ParseTypedParameter<int>(const std::string& str) {
   int value;
   if (sscanf(str.c_str(), "%i", &value) == 1) {
     return value;
@@ -125,7 +125,8 @@ absl::optional<int> ParseTypedParameter<int>(std::string str) {
 }
 
 template <>
-absl::optional<std::string> ParseTypedParameter<std::string>(std::string str) {
+absl::optional<std::string> ParseTypedParameter<std::string>(
+    const std::string& str) {
   return std::move(str);
 }
 
