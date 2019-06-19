@@ -173,6 +173,9 @@ config("common_inherited_config") {
   if (is_chromeos) {
     defines += [ "CHROMEOS" ]
   }
+  if (target_cpu == "wasm") {
+    defines += [ "WEBRTC_WASM" ]
+  }
 
   if (rtc_sanitize_coverage != "") {
     assert(is_clang, "sanitizer coverage requires clang")
