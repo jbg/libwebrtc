@@ -226,6 +226,8 @@ DefaultTemporalLayers::DefaultTemporalLayers(int number_of_temporal_layers)
   // temporal_ids_ are ever longer. If this is no longer correct it needs to
   // wrap at max(temporal_ids_.size(), temporal_pattern_.size()).
   RTC_DCHECK_LE(temporal_ids_.size(), temporal_pattern_.size());
+  // |kUninitializedPatternIndex| needs to be <= |temporal_pattern_.size()|,
+  RTC_DCHECK_LT(kUninitializedPatternIndex, temporal_pattern_.size());
 
 #if RTC_DCHECK_IS_ON
   checker_ = TemporalLayersChecker::CreateTemporalLayersChecker(
@@ -348,6 +350,8 @@ Vp8FrameConfig DefaultTemporalLayers::NextFrameConfig(size_t stream_index,
   RTC_DCHECK_GT(num_layers_, 0);
   RTC_DCHECK_GT(temporal_pattern_.size(), 0);
 
+  const bool first_frame = (pattern_idx_ == kUninitializedPatternIndex);
+
   pattern_idx_ = (pattern_idx_ + 1) % temporal_pattern_.size();
   DependencyInfo dependency_info = temporal_pattern_[pattern_idx_];
   Vp8FrameConfig& tl_config = dependency_info.frame_config;
@@ -363,28 +367,32 @@ Vp8FrameConfig DefaultTemporalLayers::NextFrameConfig(size_t stream_index,
     }
   }
 
-  // Last is always ok to reference as it contains the base layer. For other
-  // buffers though, we need to check if the buffer has actually been refreshed
-  // this cycle of the temporal pattern. If the encoder dropped a frame, it
-  // might not have.
-  ValidateReferences(&tl_config.golden_buffer_flags,
-                     Vp8BufferReference::kGolden);
-  ValidateReferences(&tl_config.arf_buffer_flags, Vp8BufferReference::kAltref);
-  // Update search order to let the encoder know which buffers contains the most
-  // recent data.
-  UpdateSearchOrder(&tl_config);
-  // Figure out if this a sync frame (non-base-layer frame with only base-layer
-  // references).
-  tl_config.layer_sync = IsSyncFrame(tl_config);
+  if (first_frame) {
+  } else {
+    // Last is always ok to reference as it contains the base layer. For other
+    // buffers though, we need to check if the buffer has actually been
+    // refreshed this cycle of the temporal pattern. If the encoder dropped
+    // a frame, it might not have.
+    ValidateReferences(&tl_config.golden_buffer_flags,
+                       Vp8BufferReference::kGolden);
+    ValidateReferences(&tl_config.arf_buffer_flags,
+                       Vp8BufferReference::kAltref);
+    // Update search order to let the encoder know which buffers contains the
+    // most recent data.
+    UpdateSearchOrder(&tl_config);
+    // Figure out if this a sync frame (non-base-layer frame with only
+    // base-layer references).
+    tl_config.layer_sync = IsSyncFrame(tl_config);
 
-  // Increment frame age, this needs to be in sync with |pattern_idx_|, so must
-  // update it here. Resetting age to 0 must be done when encoding is complete
-  // though, and so in the case of pipelining encoder it might lag. To prevent
-  // this data spill over into the next iteration, the |pedning_frames_| map
-  // is reset in loops. If delay is constant, the relative age should still be
-  // OK for the search order.
-  for (Vp8BufferReference buffer : kAllBuffers) {
-    ++frames_since_buffer_refresh_[buffer];
+    // Increment frame age, this needs to be in sync with |pattern_idx_|,
+    // so must update it here. Resetting age to 0 must be done when encoding is
+    // complete though, and so in the case of pipelining encoder it might lag.
+    // To prevent this data spill over into the next iteration,
+    // the |pedning_frames_| map is reset in loops. If delay is constant,
+    // the relative age should still be OK for the search order.
+    for (Vp8BufferReference buffer : kAllBuffers) {
+      ++frames_since_buffer_refresh_[buffer];
+    }
   }
 
   // Add frame to set of pending frames, awaiting completion.

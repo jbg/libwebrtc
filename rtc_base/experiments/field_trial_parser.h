@@ -70,7 +70,7 @@ void ParseFieldTrial(
 // Specialize this in code file for custom types. Should return absl::nullopt if
 // the given string cannot be properly parsed.
 template <typename T>
-absl::optional<T> ParseTypedParameter(std::string);
+absl::optional<T> ParseTypedParameter(const std::string&);
 
 // This class uses the ParseTypedParameter function to implement a parameter
 // implementation with an enforced default value.

@@ -27,7 +27,7 @@ struct ValueWithUnit {
   std::string unit;
 };
 
-absl::optional<ValueWithUnit> ParseValueWithUnit(std::string str) {
+absl::optional<ValueWithUnit> ParseValueWithUnit(const std::string& str) {
   if (str == "inf") {
     return ValueWithUnit{std::numeric_limits<double>::infinity(), ""};
   } else if (str == "-inf") {
@@ -46,7 +46,7 @@ absl::optional<ValueWithUnit> ParseValueWithUnit(std::string str) {
 }  // namespace
 
 template <>
-absl::optional<DataRate> ParseTypedParameter<DataRate>(std::string str) {
+absl::optional<DataRate> ParseTypedParameter<DataRate>(const std::string& str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit.empty() || result->unit == "kbps") {
@@ -59,7 +59,7 @@ absl::optional<DataRate> ParseTypedParameter<DataRate>(std::string str) {
 }
 
 template <>
-absl::optional<DataSize> ParseTypedParameter<DataSize>(std::string str) {
+absl::optional<DataSize> ParseTypedParameter<DataSize>(const std::string& str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit.empty() || result->unit == "bytes")
@@ -69,7 +69,8 @@ absl::optional<DataSize> ParseTypedParameter<DataSize>(std::string str) {
 }
 
 template <>
-absl::optional<TimeDelta> ParseTypedParameter<TimeDelta>(std::string str) {
+absl::optional<TimeDelta> ParseTypedParameter<TimeDelta>(
+    const std::string& str) {
   absl::optional<ValueWithUnit> result = ParseValueWithUnit(str);
   if (result) {
     if (result->unit == "s" || result->unit == "seconds") {
