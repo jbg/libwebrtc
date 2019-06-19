@@ -13,6 +13,7 @@
 #include "api/video_codecs/builtin_video_decoder_factory.h"
 #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "media/engine/webrtc_media_engine.h"
+#include "media/engine/webrtc_media_engine_defaults.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "pc/media_session.h"
 #include "pc/peer_connection_factory.h"
@@ -22,6 +23,7 @@
 #include "pc/test/android_test_initializer.h"
 #endif
 #include "absl/memory/memory.h"
+#include "api/task_queue/default_task_queue_factory.h"
 #include "pc/test/fake_audio_capture_module.h"
 #include "pc/test/fake_sctp_transport.h"
 #include "rtc_base/gunit.h"
@@ -51,14 +53,16 @@ class PeerConnectionFactoryForJsepTest : public PeerConnectionFactory {
           dependencies.worker_thread = rtc::Thread::Current();
           dependencies.network_thread = rtc::Thread::Current();
           dependencies.signaling_thread = rtc::Thread::Current();
-          dependencies.media_engine = cricket::WebRtcMediaEngineFactory::Create(
-              rtc::scoped_refptr<AudioDeviceModule>(
-                  FakeAudioCaptureModule::Create()),
-              CreateBuiltinAudioEncoderFactory(),
-              CreateBuiltinAudioDecoderFactory(),
-              CreateBuiltinVideoEncoderFactory(),
-              CreateBuiltinVideoDecoderFactory(), nullptr,
-              AudioProcessingBuilder().Create());
+          dependencies.task_queue_factory =
+              webrtc::CreateDefaultTaskQueueFactory();
+
+          cricket::MediaEngineDependencies media_deps;
+          media_deps.adm = FakeAudioCaptureModule::Create();
+          media_deps.task_queue_factory = dependencies.task_queue_factory.get();
+          webrtc::SetMediaEngineDefaults(&media_deps);
+          dependencies.media_engine =
+              cricket::CreateMediaEngine(std::move(media_deps));
+
           dependencies.call_factory = CreateCallFactory();
           return dependencies;
         }()) {}
