@@ -22,9 +22,6 @@
 
 namespace webrtc {
 namespace {
-// Min packet size for BestFittingPacket() to honor.
-constexpr size_t kMinPacketRequestBytes = 50;
-
 // Utility function to get the absolute difference in size between the provided
 // target size and the size of packet.
 size_t SizeDiff(size_t packet_size, size_t size) {
@@ -241,10 +238,14 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPacketAndMarkAsPending(
     return nullptr;
   }
 
-  packet.pending_transmission_ = true;
-
   // Copy and/or encapsulate packet.
-  return encapsulate(*packet.packet_);
+  std::unique_ptr<RtpPacketToSend> encapsulated_packet =
+      encapsulate(*packet.packet_);
+  if (encapsulated_packet) {
+    packet.pending_transmission_ = true;
+  }
+
+  return encapsulated_packet;
 }
 
 void RtpPacketHistory::MarkPacketAsSent(uint16_t sequence_number) {
@@ -308,7 +309,7 @@ bool RtpPacketHistory::VerifyRtt(const RtpPacketHistory::StoredPacket& packet,
 std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetBestFittingPacket(
     size_t packet_length) const {
   rtc::CritScope cs(&lock_);
-  if (packet_length < kMinPacketRequestBytes || packet_size_.empty()) {
+  if (packet_size_.empty()) {
     return nullptr;
   }
 
@@ -346,8 +347,7 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetBestFittingPacket(
 
 std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPayloadPaddingPacket() {
   rtc::CritScope cs(&lock_);
-  RTC_DCHECK(mode_ != StorageMode::kDisabled);
-  if (padding_priority_.empty()) {
+  if (mode_ == StorageMode::kDisabled || padding_priority_.empty()) {
     return nullptr;
   }
 
