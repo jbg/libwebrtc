@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80d0fab8_36fa0380",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-19T07:51:41Z",
+      "side": 1,
+      "message": "These abbreviations is not so good for search. Write out the relevant method names in full, and if that doesn\u0027t fit, just write something about using Clock::CurrentTime on the first line.",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "4542493f2cf57e4a567dcb6c1cdaf0f7a18478dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9065b8c5_5b2acf6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-19T07:51:41Z",
+      "side": 1,
+      "message": "Can you clarify? In the first file changed you seem to increase accuracy from ms to us. Which is fine, but not entirely consistent with the description.",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "4542493f2cf57e4a567dcb6c1cdaf0f7a18478dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
