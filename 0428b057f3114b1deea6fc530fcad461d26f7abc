@@ -16,6 +16,24 @@
       "revId": "0428b057f3114b1deea6fc530fcad461d26f7abc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f36caba8_b2d6a7ab",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-06-19T16:28:45Z",
+      "side": 1,
+      "message": "This requires a change to https://cs.chromium.org/chromium/src/build/config/BUILDCONFIG.gn?l\u003d270-296\u0026rcl\u003d38a362172f61831f5cde0c28599cc84daa30805d.\n\nWe don\u0027t own that file and it is not yet clear what WASM is from GN point of view (is it an OS? A CPU? Both?).\n\nFor now we want to keep this local to our BUILD.gn files.",
+      "parentUuid": "5b6b158d_2fc2b275",
+      "revId": "0428b057f3114b1deea6fc530fcad461d26f7abc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
