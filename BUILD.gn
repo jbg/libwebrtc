@@ -151,6 +151,9 @@ config("common_inherited_config") {
   if (is_linux) {
     defines += [ "WEBRTC_LINUX" ]
   }
+  if (target_cpu == "wasm") {
+    defines += [ "WEBRTC_WASM" ]
+  }
   if (is_mac) {
     defines += [ "WEBRTC_MAC" ]
   }
