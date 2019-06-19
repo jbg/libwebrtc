@@ -130,6 +130,8 @@ class StatisticsCalculator {
 
   NetEqOperationsAndState GetOperationsAndState() const;
 
+  bool decoded_output_played() const { return decoded_output_played_; }
+
  private:
   static const int kMaxReportPeriod = 60;  // Seconds before auto-reset.
   static const size_t kLenWaitingTimes = 100;

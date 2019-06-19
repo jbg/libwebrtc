@@ -830,7 +830,8 @@ int NetEqImpl::GetAudioInternal(AudioFrame* audio_frame,
     }
     case kExpand: {
       RTC_DCHECK_EQ(return_value, 0);
-      if (!current_rtp_payload_type_ || !DoCodecPlc()) {
+      if (!current_rtp_payload_type_ || !stats_->decoded_output_played() ||
+          !DoCodecPlc()) {
         return_value = DoExpand(play_dtmf);
       }
       RTC_DCHECK_GE(sync_buffer_->FutureLength() - expand_->overlap_length(),
