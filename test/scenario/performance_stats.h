@@ -23,6 +23,7 @@ struct VideoFramePair {
   rtc::scoped_refptr<VideoFrameBuffer> captured;
   rtc::scoped_refptr<VideoFrameBuffer> decoded;
   Timestamp capture_time = Timestamp::MinusInfinity();
+  Timestamp decoded_time = Timestamp::PlusInfinity();
   Timestamp render_time = Timestamp::PlusInfinity();
   // A unique identifier for the spatial/temporal layer the decoded frame
   // belongs to. Note that this does not reflect the id as defined by the
@@ -117,10 +118,18 @@ struct VideoQualityStats {
   int freeze_count = 0;
   VideoFramesStats capture;
   VideoFramesStats render;
+  // Time from frame was captured on device to time frame was delivered from
+  // decoder.
+  SampleStats<TimeDelta> capture_to_decoded_delay;
   // Time from frame was captured on device to time frame was displayed on
   // device.
   SampleStats<TimeDelta> end_to_end_delay;
+  // PSNR for delivered frames. Note that this might go up for a worse connction
+  // due to frame dropping.
   SampleStats<double> psnr;
+  // PSNR for all frames, dropped or lost frames are compared to the last
+  // successfully delivered frame
+  SampleStats<double> psnr_with_freeze;
   // Frames skipped between two nearest.
   SampleStats<double> skipped_between_rendered;
   // In the next 2 metrics freeze is a pause that is longer, than maximum:
