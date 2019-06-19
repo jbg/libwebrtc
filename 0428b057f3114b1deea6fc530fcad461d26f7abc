@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b6b158d_2fc2b275",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-06-19T16:06:23Z",
+      "side": 1,
+      "message": "Can we have wasm just define is_posix and not is_linux to avoid this check?",
+      "revId": "0428b057f3114b1deea6fc530fcad461d26f7abc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
