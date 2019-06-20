@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3f805794_b68ae3de",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-06-20T13:36:54Z",
+      "side": 1,
+      "message": "Added. I think the use of an enum also makes this more easily seen from the code.",
+      "parentUuid": "4598d885_bde8bc1e",
+      "revId": "c78a02b0b748c8affcdcd3f0d326be1204696d13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62b67d31_8a747e23",
         "filename": "pc/used_ids.h",
         "patchSetId": 3
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "004caba7_d4a3e10c",
+        "filename": "pc/used_ids.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-06-20T13:36:54Z",
+      "side": 1,
+      "message": "Thanks! That\u0027s a good idea.",
+      "parentUuid": "62b67d31_8a747e23",
+      "range": {
+        "startLine": 106,
+        "startChar": 37,
+        "endLine": 106,
+        "endChar": 60
+      },
+      "revId": "c78a02b0b748c8affcdcd3f0d326be1204696d13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e47b8a0_3fcbcf80",
         "filename": "pc/used_ids_unittest.cc",
         "patchSetId": 3
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "5d9ce865_9e8009f4",
+        "filename": "pc/used_ids_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-06-20T13:36:54Z",
+      "side": 1,
+      "message": "Good point, that also removes some of the duplicated code for handling the two cases.",
+      "parentUuid": "0e47b8a0_3fcbcf80",
+      "revId": "c78a02b0b748c8affcdcd3f0d326be1204696d13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07364a0e_5e747414",
         "filename": "pc/used_ids_unittest.cc",
         "patchSetId": 3
@@ -70,6 +130,24 @@
       "writtenOn": "2019-06-03T21:57:00Z",
       "side": 1,
       "message": "To be honest, I wonder if it would be better to e.g. drop the header extension with a warning rather than DCHECKing. But it\u0027s already like this so don\u0027t feel pressure to change it in this CL.",
+      "revId": "c78a02b0b748c8affcdcd3f0d326be1204696d13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d32ed90_fcd030ce",
+        "filename": "pc/used_ids_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-06-20T13:36:54Z",
+      "side": 1,
+      "message": "Yeah, there are some places in the code where errors are handled a bit too brutally. At least it\u0027s a DCHECK and not a CHECK :-)\nI leave it as is for now.",
+      "parentUuid": "07364a0e_5e747414",
       "revId": "c78a02b0b748c8affcdcd3f0d326be1204696d13",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
