@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3fb5aa2b_5c20d7fa",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "Yes, updated.",
+      "parentUuid": "81a09bfb_7daf0d7a",
+      "range": {
+        "startLine": 1022,
+        "startChar": 71,
+        "endLine": 1022,
+        "endChar": 78
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2dc0267a_5500e9c1",
         "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d8cdd882_f5ea5190",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "This is direct clone of the existing SendRedundantPayloads test, but with changed expectations to account for different order of padding packets. I\u0027d like to otherwise keep the changes as small as possible in this CL.",
+      "parentUuid": "2dc0267a_5500e9c1",
+      "range": {
+        "startLine": 1103,
+        "startChar": 22,
+        "endLine": 1103,
+        "endChar": 56
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "770d765b_a1bbf04c",
         "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2019-06-19T15:13:47Z",
       "side": 1,
       "message": "may be instead of consistency spread more modern practice:\n\nrtp_sender_ \u003d absl::make_unique\u003cRTPSender\u003e(....);",
+      "range": {
+        "startLine": 1107,
+        "startChar": 13,
+        "endLine": 1107,
+        "endChar": 34
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cf35c43_4d4729ef",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "770d765b_a1bbf04c",
       "range": {
         "startLine": 1107,
         "startChar": 13,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "01c54641_0b26ba6c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1120,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "I believe that or twcc needs to be negotiated in order for rtx padding to work.",
+      "parentUuid": "7d4eef05_9e9612cd",
+      "range": {
+        "startLine": 1120,
+        "startChar": 49,
+        "endLine": 1120,
+        "endChar": 78
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c640843_70c28964",
         "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
         "patchSetId": 4
@@ -114,6 +210,30 @@
       "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52ee3ac4_bcb67a48",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "Agree, but I don\u0027t know this test or if there\u0027s other coverage, so gonna keep that for now.",
+      "parentUuid": "8c640843_70c28964",
+      "range": {
+        "startLine": 1135,
+        "startChar": 14,
+        "endLine": 1135,
+        "endChar": 33
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +306,78 @@
     },
     {
       "key": {
+        "uuid": "ab479176_e77ce3bb",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0f88073_f26fb3d2",
+      "range": {
+        "startLine": 1142,
+        "startChar": 4,
+        "endLine": 1142,
+        "endChar": 79
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6da011be_8938f0da",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "438f6942_f81d4ade",
+      "range": {
+        "startLine": 1142,
+        "startChar": 34,
+        "endLine": 1142,
+        "endChar": 43
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5325c0d_6cd7b60f",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe905714_2a4ea280",
+      "range": {
+        "startLine": 1142,
+        "startChar": 54,
+        "endLine": 1142,
+        "endChar": 71
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11ca3c06_f05a7dcf",
         "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
         "patchSetId": 4
@@ -197,6 +389,24 @@
       "writtenOn": "2019-06-19T15:13:47Z",
       "side": 1,
       "message": "is it the only place options is used?\nthen may be instead of saving it you can validate it directly in the EXPECT_CALL:\nEXPECT_CALL(transport, SendRtp(_, \u003csize\u003e, Property(\u0026PacketOptions::is_retransmit, Eq(true))));\n\nor with a lambda:\nEXPECT_CALL(transport, SendRtp).WillOnce([\u0026](const uint8_t* packet, int size, const PacketOptions\u0026 options) {\n  EXPECT_EQ(size, ...\u003csize\u003e);\n  EXPECT_TRUE(options.is_retransmit);\n});",
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc8bb6bd_bf6bd5a4",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-20T13:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11ca3c06_f05a7dcf",
       "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
