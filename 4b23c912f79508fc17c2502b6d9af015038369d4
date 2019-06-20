@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "dcfa9ccc_d8208bfe",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1120,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-06-20T14:27:53Z",
+      "side": 1,
+      "message": "I think this or twcc are needed to send padding without rtx.\nRtx allows to send padding any time (not just between frames) and without any kind of extensions.\n\nAnyway, since it is a copy-paste from previous test, it is probably a topic for another cleanup.",
+      "parentUuid": "01c54641_0b26ba6c",
+      "range": {
+        "startLine": 1120,
+        "startChar": 49,
+        "endLine": 1120,
+        "endChar": 78
+      },
+      "revId": "4b23c912f79508fc17c2502b6d9af015038369d4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c640843_70c28964",
         "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
         "patchSetId": 4
