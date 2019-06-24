@@ -24,8 +24,8 @@
 #include "sdk/android/src/jni/audio_device/aaudio_recorder.h"
 #endif
 
-#include "sdk/android/src/jni/audio_device/audio_record_jni.h"
-#include "sdk/android/src/jni/audio_device/audio_track_jni.h"
+#include "sdk/android/src/audio_device/audio_record_jni.h"
+#include "sdk/android/src/audio_device/audio_track_jni.h"
 #include "sdk/android/src/jni/audio_device/opensles_player.h"
 #include "sdk/android/src/jni/audio_device/opensles_recorder.h"
 #include "system_wrappers/include/metrics.h"
