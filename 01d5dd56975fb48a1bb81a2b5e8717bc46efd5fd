@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fef9d170_30103306",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-24T11:09:29Z",
+      "side": 1,
+      "message": "nite: Maybe explicitly use DataRate::kbps() for clarity?\n(here and a few other places in this cl)",
+      "range": {
+        "startLine": 627,
+        "startChar": 31,
+        "endLine": 627,
+        "endChar": 49
+      },
+      "revId": "01d5dd56975fb48a1bb81a2b5e8717bc46efd5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4056f2b2_8d369e72",
+        "filename": "modules/video_coding/codecs/vp9/svc_rate_allocator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-06-24T11:09:29Z",
+      "side": 1,
+      "message": "nit: kbps(), ditch * 1000",
+      "range": {
+        "startLine": 110,
+        "startChar": 44,
+        "endLine": 110,
+        "endChar": 47
+      },
+      "revId": "01d5dd56975fb48a1bb81a2b5e8717bc46efd5fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
