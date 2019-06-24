@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be880bc7_29e336ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-06-24T20:13:25Z",
+      "side": 1,
+      "message": "Might I suggest:\n\n  sed -i -E \u0027s@(#include.+generated.+jni)/jni/(.+_jni.h)@\\1/\\2@\u0027 {} \\;",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 84
+      },
+      "revId": "266cb64bac5a3325e1b910ebe8ab60375938f5b6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
