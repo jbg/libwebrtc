@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "sdk/android/src/jni/audio_device/audio_record_jni.h"
+#include "sdk/android/src/audio_device/audio_record_jni.h"
 
 #include <string>
 #include <utility>
@@ -19,7 +19,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/time_utils.h"
-#include "sdk/android/generated_java_audio_device_module_native_jni/jni/WebRtcAudioRecord_jni.h"
+#include "sdk/android/generated_java_audio_device_module_native_jni/WebRtcAudioRecord_jni.h"
 #include "sdk/android/src/jni/audio_device/audio_common.h"
 #include "sdk/android/src/jni/jni_helpers.h"
 #include "system_wrappers/include/metrics.h"
