@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "sdk/android/src/jni/audio_device/audio_track_jni.h"
+#include "sdk/android/src/audio_device/audio_track_jni.h"
 
 #include <utility>
 
@@ -17,7 +17,7 @@
 #include "rtc_base/format_macros.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
-#include "sdk/android/generated_java_audio_device_module_native_jni/jni/WebRtcAudioTrack_jni.h"
+#include "sdk/android/generated_java_audio_device_module_native_jni/WebRtcAudioTrack_jni.h"
 #include "sdk/android/src/jni/jni_helpers.h"
 
 namespace webrtc {
