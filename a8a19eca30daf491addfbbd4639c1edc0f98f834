@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e2c2c87_78523b6d",
+        "filename": "test/scenario/performance_stats.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-24T15:11:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ce75cdc_e3f73205",
+      "range": {
+        "startLine": 131,
+        "startChar": 71,
+        "endLine": 131,
+        "endChar": 80
+      },
+      "revId": "a8a19eca30daf491addfbbd4639c1edc0f98f834",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f95bdff_34236ea8",
         "filename": "test/scenario/stats_collection.cc",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "a8a19eca30daf491addfbbd4639c1edc0f98f834",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51e8dbba_a9e123b5",
+        "filename": "test/scenario/stats_collection.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-06-24T15:11:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f95bdff_34236ea8",
+      "range": {
+        "startLine": 66,
+        "startChar": 60,
+        "endLine": 66,
+        "endChar": 69
+      },
+      "revId": "a8a19eca30daf491addfbbd4639c1edc0f98f834",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
