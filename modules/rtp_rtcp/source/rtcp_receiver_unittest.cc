@@ -1337,6 +1337,11 @@ TEST_F(RtcpReceiverTest, GetReportBlockDataAfterTwoReportBlocksOfSameSsrc) {
       report_block_datas[0].report_block().extended_highest_sequence_number);
 }
 
+MATCHER_P2(SsrcAndSequenceNumberAre, ssrc, sequence_number, "") {
+  return arg.report_block().source_ssrc == ssrc &&
+         arg.report_block().extended_highest_sequence_number == sequence_number;
+}
+
 TEST_F(RtcpReceiverTest,
        GetReportBlockDataAfterTwoReportBlocksOfDifferentSsrcs) {
   const uint16_t kSequenceNumber1 = 1234;
@@ -1366,18 +1371,11 @@ TEST_F(RtcpReceiverTest,
   InjectRtcpPacket(rtcp_report2);
 
   // Both report blocks should be returned.
-  auto report_block_datas = rtcp_receiver_.GetLatestReportBlockData();
-  ASSERT_THAT(report_block_datas, SizeIs(2));
-  EXPECT_EQ(kReceiverMainSsrc,
-            report_block_datas[0].report_block().source_ssrc);
-  EXPECT_EQ(
-      kSequenceNumber1,
-      report_block_datas[0].report_block().extended_highest_sequence_number);
-  EXPECT_EQ(kReceiverExtraSsrc,
-            report_block_datas[1].report_block().source_ssrc);
-  EXPECT_EQ(
-      kSequenceNumber2,
-      report_block_datas[1].report_block().extended_highest_sequence_number);
+  EXPECT_THAT(
+      rtcp_receiver_.GetLatestReportBlockData(),
+      UnorderedElementsAre(
+          SsrcAndSequenceNumberAre(kReceiverMainSsrc, kSequenceNumber1),
+          SsrcAndSequenceNumberAre(kReceiverExtraSsrc, kSequenceNumber2)));
 }
 
 TEST_F(RtcpReceiverTest, ReceivesTransportFeedback) {
