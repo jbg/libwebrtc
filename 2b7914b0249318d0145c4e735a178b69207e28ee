@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ff254a5_59a8810f",
+        "filename": "media/engine/webrtc_media_engine.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-06-25T11:19:07Z",
+      "side": 1,
+      "message": "can be removed thanks to this change",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 53
+      },
+      "revId": "2b7914b0249318d0145c4e735a178b69207e28ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
