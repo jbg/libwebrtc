@@ -782,6 +782,10 @@ int RtpVideoSender::ProtectionRequest(const FecProtectionParams* delta_params,
   return 0;
 }
 
+void RtpVideoSender::SetFecOverride(bool fec_on) {
+  RTC_NOTREACHED();  // TODO: !!!
+}
+
 void RtpVideoSender::OnPacketFeedbackVector(
     const std::vector<PacketFeedback>& packet_feedback_vector) {
   if (fec_controller_->UseLossVectorMask()) {
