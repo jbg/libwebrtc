@@ -472,6 +472,7 @@ rtc_source_set("fec_controller_api") {
   visibility = [ "*" ]
   sources = [
     "fec_controller.h",
+    "fec_controller_override.h",
   ]
 
   deps = [
@@ -539,6 +540,13 @@ rtc_source_set("function_view") {
   ]
   deps = [
     "../rtc_base:checks",
+  ]
+}
+
+rtc_source_set("fec_controller_override") {
+  visibility = [ "*" ]
+  sources = [
+    "fec_controller_override.h",
   ]
 }
 

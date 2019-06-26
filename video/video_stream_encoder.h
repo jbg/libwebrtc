@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "api/fec_controller_override.h"
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video/video_rotation.h"
 #include "api/video/video_sink_interface.h"
