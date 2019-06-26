@@ -20,6 +20,7 @@
 #include "api/array_view.h"
 #include "api/call/transport.h"
 #include "api/fec_controller.h"
+#include "api/media_stream_protection_allocation_controller_interface.h"
 #include "api/video_codecs/video_encoder.h"
 #include "call/rtp_config.h"
 #include "call/rtp_payload_params.h"
@@ -67,10 +68,12 @@ struct RtpStreamSender {
 
 // RtpVideoSender routes outgoing data to the correct sending RTP module, based
 // on the simulcast layer in RTPVideoHeader.
-class RtpVideoSender : public RtpVideoSenderInterface,
-                       public OverheadObserver,
-                       public VCMProtectionCallback,
-                       public PacketFeedbackObserver {
+class RtpVideoSender
+    : public RtpVideoSenderInterface,
+      public OverheadObserver,
+      public VCMProtectionCallback,
+      public MediaStreamProtectionAllocationControllerInterface,
+      public PacketFeedbackObserver {
  public:
   // Rtp modules are assumed to be sorted in simulcast index order.
   RtpVideoSender(
@@ -117,6 +120,9 @@ class RtpVideoSender : public RtpVideoSenderInterface,
                         uint32_t* sent_video_rate_bps,
                         uint32_t* sent_nack_rate_bps,
                         uint32_t* sent_fec_rate_bps) override;
+
+  // Implements MediaStreamProtectionAllocationControllerInterface.
+  void SetProtectionMethod(bool enable_fec, bool enable_nack) override;
 
   // Implements EncodedImageCallback.
   // Returns 0 if the packet was routed / sent, -1 otherwise.

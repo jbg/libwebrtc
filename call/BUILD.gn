@@ -127,6 +127,7 @@ rtc_source_set("rtp_sender") {
     ":rtp_interfaces",
     "../api:array_view",
     "../api:fec_controller_api",
+    "../api:media_stream_protection_allocation_controller_interface",
     "../api:network_state_predictor_api",
     "../api:transport_api",
     "../api/transport:field_trial_based_config",
