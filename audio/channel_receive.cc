@@ -752,8 +752,7 @@ CallReceiveStatistics ChannelReceive::GetRTCPStatistics() const {
   StreamStatistician* statistician =
       rtp_receive_statistics_->GetStatistician(remote_ssrc_);
   if (statistician) {
-    statistician->GetStatistics(&statistics,
-                                _rtpRtcpModule->RTCP() == RtcpMode::kOff);
+    statistician->GetStatistics(&statistics);
   }
 
   stats.cumulativeLost = statistics.packets_lost;
