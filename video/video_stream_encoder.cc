@@ -726,9 +726,13 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     if (pending_encoder_creation_) {
       encoder_ = settings_.encoder_factory->CreateVideoEncoder(
           encoder_config_.video_format);
+
       // TODO(nisse): What to do if creating the encoder fails? Crash,
       // or just discard incoming frames?
       RTC_CHECK(encoder_);
+
+      encoder_->SetFecControllerOverride(settings_.fec_controller_override);
+
       codec_info_ = settings_.encoder_factory->QueryVideoEncoder(
           encoder_config_.video_format);
     }
