@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd112f5d_e2876a0e",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-06-26T13:21:15Z",
+      "side": 1,
+      "message": "unfortunately downstream code still uses reset parameter.\nMaybe leave an RTC_DEPRECATED copy of the GetStatistics for it.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 67
+      },
+      "revId": "2aa0e04854a2ae5b9123ae79d554a8faf8b844ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e132bd55_b668b828",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-06-26T13:21:15Z",
+      "side": 1,
+      "message": "You can also remove these pair of {}\nsince it match full function now .",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 3
+      },
+      "revId": "2aa0e04854a2ae5b9123ae79d554a8faf8b844ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
