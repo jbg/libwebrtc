@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "28404c5b_e028e40e",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-06-27T09:41:24Z",
+      "side": 1,
+      "message": "From a standards perspective, getting stats is a read-only operation; reading a value should not reset anything or make it visible in any way to the next caller of getStats that it has already been called earlier. There is just one exception to this rule: and that is you are allowed to implement a cache for performance reasons. But caching happens several layers above, not here.",
+      "parentUuid": "14e67773_8e33fe23",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 67
+      },
+      "revId": "2aa0e04854a2ae5b9123ae79d554a8faf8b844ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e132bd55_b668b828",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
         "patchSetId": 2
