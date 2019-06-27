@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "426079be_6e4b32d9",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-06-27T08:52:54Z",
+      "side": 1,
+      "message": "So, is the problem that GetStatistics isn\u0027t const or that it has a reset parameter? Or both? If so, why? I read the bug but it didn\u0027t really shine any light on this specific issue.",
+      "parentUuid": "abb5d6c9_5b0c8e06",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 67
+      },
+      "revId": "2aa0e04854a2ae5b9123ae79d554a8faf8b844ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e132bd55_b668b828",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
         "patchSetId": 2
