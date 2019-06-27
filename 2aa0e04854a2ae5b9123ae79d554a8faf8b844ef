@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "f34c455d_36a30ee5",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-06-27T14:27:10Z",
+      "side": 1,
+      "message": "So, perhaps the way then is to update this to still allow resetting through some other (non-const) means, update downstream projects and then remove reset from here and make it const?",
+      "parentUuid": "28404c5b_e028e40e",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 67
+      },
+      "revId": "2aa0e04854a2ae5b9123ae79d554a8faf8b844ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e132bd55_b668b828",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
         "patchSetId": 2
