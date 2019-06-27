@@ -40,7 +40,7 @@ class StreamStatistician {
  public:
   virtual ~StreamStatistician();
 
-  virtual bool GetStatistics(RtcpStatistics* statistics, bool reset) = 0;
+  virtual bool GetStatistics(RtcpStatistics* statistics) const = 0;
   virtual void GetDataCounters(size_t* bytes_received,
                                uint32_t* packets_received) const = 0;
 

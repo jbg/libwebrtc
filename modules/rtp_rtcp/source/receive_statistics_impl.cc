@@ -179,29 +179,18 @@ void StreamStatisticianImpl::EnableRetransmitDetection(bool enable) {
   enable_retransmit_detection_ = enable;
 }
 
-bool StreamStatisticianImpl::GetStatistics(RtcpStatistics* statistics,
-                                           bool reset) {
-  {
-    rtc::CritScope cs(&stream_lock_);
-    if (!ReceivedRtpPacket()) {
-      return false;
-    }
-
-    if (!reset) {
-      if (last_report_inorder_packets_ == 0) {
-        // No report.
-        return false;
-      }
-      // Just get last report.
-      *statistics = last_reported_statistics_;
-      return true;
-    }
-
-    *statistics = CalculateRtcpStatistics();
+bool StreamStatisticianImpl::GetStatistics(RtcpStatistics* statistics) const {
+  rtc::CritScope cs(&stream_lock_);
+  if (!ReceivedRtpPacket()) {
+    return false;
   }
 
-  if (rtcp_callback_)
-    rtcp_callback_->StatisticsUpdated(*statistics, ssrc_);
+  if (last_report_inorder_packets_ == 0) {
+    // No report.
+    return false;
+  }
+  // Just get last report.
+  *statistics = last_reported_statistics_;
   return true;
 }
 
