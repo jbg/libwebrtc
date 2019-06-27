@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "abb5d6c9_5b0c8e06",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-27T08:33:15Z",
+      "side": 1,
+      "message": "And it looks like there actually are calls with reset \u003d\u003d true. How to deal with that? Another method to produce new stats? Or can we do like in the updated tests, and just call RtcpReportBlocks(RTCP_MAX_REPORT_BLOCKS) ?",
+      "parentUuid": "dd112f5d_e2876a0e",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 67
+      },
+      "revId": "2aa0e04854a2ae5b9123ae79d554a8faf8b844ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e132bd55_b668b828",
         "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "2aa0e04854a2ae5b9123ae79d554a8faf8b844ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7acec1_b677f407",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-06-27T08:33:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e132bd55_b668b828",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 3
+      },
+      "revId": "2aa0e04854a2ae5b9123ae79d554a8faf8b844ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
