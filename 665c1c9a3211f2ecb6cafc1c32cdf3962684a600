@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74943a9a_d6dcaa4c",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-06-27T08:59:33Z",
+      "side": 1,
+      "message": "Post a bug about removing this again, and ref it here?",
+      "revId": "665c1c9a3211f2ecb6cafc1c32cdf3962684a600",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
