@@ -485,7 +485,7 @@ TEST_F(NetEqDecodingTest, MAYBE_TestOpusBitExactness) {
 
   // Checksum depends on libopus being compiled with or without SSE.
   const std::string maybe_sse =
-      "14a63b3c7b925c82296be4bafc71bec85f2915c2|"
+      "6b602683ca7285a98118b4824d72f4257952c18f|"
       "eb0b68bddcac00fc85403df64f83126f8ea9bc93";
   const std::string output_checksum = PlatformChecksum(
       maybe_sse, "f95f2a220c9ca5d60b81c4653d46e0de2bee159f",
