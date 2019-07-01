@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7062d521_3683c63f",
+        "filename": "api/ice_transport_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-01T21:07:49Z",
+      "side": 1,
+      "message": "Ack. There is some precedence for the Init naming: RtpTransceiverInit, DataChannelInit. The getter/setter overhead is annoying, but helps make the struct forwards compatible since C++ does not have native getter/setter syntax.",
+      "parentUuid": "674805e1_2b004e1e",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "11ab46c9021ea04f0281efee43d6aadcc1346e6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5285f0b_d60145b6",
         "filename": "api/ice_transport_factory.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "11ab46c9021ea04f0281efee43d6aadcc1346e6e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "149ebf15_88ef79e7",
+        "filename": "api/ice_transport_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-01T21:07:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5285f0b_d60145b6",
+      "range": {
+        "startLine": 73,
+        "startChar": 33,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "11ab46c9021ea04f0281efee43d6aadcc1346e6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
