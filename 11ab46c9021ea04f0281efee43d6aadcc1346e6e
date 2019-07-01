@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "674805e1_2b004e1e",
+        "filename": "api/ice_transport_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-07-01T20:44:34Z",
+      "side": 1,
+      "message": "nit: the other DI structs were named *Dependencies, and also these structs just expose everything publicly without the getter/setter overhead. Up to you.",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "11ab46c9021ea04f0281efee43d6aadcc1346e6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5285f0b_d60145b6",
+        "filename": "api/ice_transport_factory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-07-01T20:44:34Z",
+      "side": 1,
+      "message": "created",
+      "range": {
+        "startLine": 73,
+        "startChar": 33,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "11ab46c9021ea04f0281efee43d6aadcc1346e6e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
