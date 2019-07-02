@@ -722,9 +722,9 @@ class RTC_EXPORT AudioProcessingBuilder {
   // The AudioProcessingBuilder takes ownership of the echo_control_factory.
   AudioProcessingBuilder& SetEchoControlFactory(
       std::unique_ptr<EchoControlFactory> echo_control_factory);
-  // The AudioProcessingBuilder takes ownership of the capture_post_processing.
+  // The AudioProcessingBuilder takes ownership of the capture_post_processing_unique_ptr.
   AudioProcessingBuilder& SetCapturePostProcessing(
-      std::unique_ptr<CustomProcessing> capture_post_processing);
+      std::unique_ptr<CustomProcessing> capture_post_processing_unique_ptr);
   // The AudioProcessingBuilder takes ownership of the render_pre_processing.
   AudioProcessingBuilder& SetRenderPreProcessing(
       std::unique_ptr<CustomProcessing> render_pre_processing);
@@ -741,7 +741,7 @@ class RTC_EXPORT AudioProcessingBuilder {
 
  private:
   std::unique_ptr<EchoControlFactory> echo_control_factory_;
-  std::unique_ptr<CustomProcessing> capture_post_processing_;
+  std::unique_ptr<CustomProcessing> capture_post_processing_unique_ptr_;
   std::unique_ptr<CustomProcessing> render_pre_processing_;
   rtc::scoped_refptr<EchoDetector> echo_detector_;
   std::unique_ptr<CustomAudioAnalyzer> capture_analyzer_;
