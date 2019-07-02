@@ -16,6 +16,24 @@
       "revId": "bd2a71752dd11e8d11e9c9e2309f9624bd3cffac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86da000b_9d00e4dd",
+        "filename": "api/rtp_parameters.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2019-07-02T09:05:40Z",
+      "side": 1,
+      "message": "I\u0027ll check with them! My gut feeling is that this is appropiate since `kAbsoluteCaptureTimeUri` only needs to be modified by RTP/RTCP-terminating middle boxes. I.e. it it cannot be encrypted then `kTransportSequenceNumberUri` shouldn\u0027t be able to be encrypted either.",
+      "parentUuid": "adbd59d1_2c88205d",
+      "revId": "bd2a71752dd11e8d11e9c9e2309f9624bd3cffac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
