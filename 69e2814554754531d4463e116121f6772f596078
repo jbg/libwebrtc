@@ -22,6 +22,30 @@
       "revId": "69e2814554754531d4463e116121f6772f596078",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a03f94f_b152b9f1",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-07-02T11:14:44Z",
+      "side": 1,
+      "message": "You can do that if you want but it\u0027s not related to this CL",
+      "parentUuid": "cef9021a_071e6cdd",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 43
+      },
+      "revId": "69e2814554754531d4463e116121f6772f596078",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
