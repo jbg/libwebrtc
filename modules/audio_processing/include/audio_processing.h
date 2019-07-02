@@ -742,7 +742,8 @@ class RTC_EXPORT AudioProcessingBuilder {
 
  private:
   std::unique_ptr<EchoControlFactory> echo_control_factory_;
-  std::unique_ptr<CustomProcessing> capture_post_processing_;
+  // Soon to be deprecated
+  std::unique_ptr<CustomProcessing> capture_post_processing_unique_ptr_;
   std::unique_ptr<CustomProcessing> render_pre_processing_;
   rtc::scoped_refptr<EchoDetector> echo_detector_;
   std::unique_ptr<CustomAudioAnalyzer> capture_analyzer_;
@@ -928,6 +929,8 @@ class CustomProcessing {
   virtual void Process(AudioBuffer* audio) = 0;
   // Returns a string representation of the module state.
   virtual std::string ToString() const = 0;
+  // Returns the name of the submodule, or "NAME_NOT_SET" if not specified.
+  virtual std::string GetName();
   // Handles RuntimeSettings. TODO(webrtc:9262): make pure virtual
   // after updating dependencies.
   virtual void SetRuntimeSetting(AudioProcessing::RuntimeSetting setting);
