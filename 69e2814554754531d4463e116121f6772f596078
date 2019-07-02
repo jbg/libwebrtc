@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cef9021a_071e6cdd",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-02T11:11:38Z",
+      "side": 1,
+      "message": "Should we also remove this?\n\nI think libevent will sty around.",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 43
+      },
+      "revId": "69e2814554754531d4463e116121f6772f596078",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
