@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "adbd59d1_2c88205d",
+        "filename": "api/rtp_parameters.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-07-02T08:28:58Z",
+      "side": 1,
+      "message": "If it\u0027s modified by middleboxes, I am not sure it can be encrypted. Cosult danilchap@ or phlipel@ please.",
+      "revId": "bd2a71752dd11e8d11e9c9e2309f9624bd3cffac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
