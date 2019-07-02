@@ -281,12 +281,14 @@ struct AudioProcessingImpl::ApmPublicSubmodules {
 };
 
 struct AudioProcessingImpl::ApmPrivateSubmodules {
-  ApmPrivateSubmodules(std::unique_ptr<CustomProcessing> capture_post_processor,
-                       std::unique_ptr<CustomProcessing> render_pre_processor,
-                       rtc::scoped_refptr<EchoDetector> echo_detector,
-                       std::unique_ptr<CustomAudioAnalyzer> capture_analyzer)
+  ApmPrivateSubmodules(
+      std::unique_ptr<CustomProcessing> capture_post_processor_unique_ptr,
+      std::unique_ptr<CustomProcessing> render_pre_processor,
+      rtc::scoped_refptr<EchoDetector> echo_detector,
+      std::unique_ptr<CustomAudioAnalyzer> capture_analyzer)
       : echo_detector(std::move(echo_detector)),
-        capture_post_processor(std::move(capture_post_processor)),
+        capture_post_processor_unique_ptr(
+            std::move(capture_post_processor_unique_ptr)),
         render_pre_processor(std::move(render_pre_processor)),
         capture_analyzer(std::move(capture_analyzer)) {}
   // Accessed internally from capture or during initialization
@@ -297,7 +299,7 @@ struct AudioProcessingImpl::ApmPrivateSubmodules {
   std::unique_ptr<EchoCancellationImpl> echo_cancellation;
   std::unique_ptr<EchoControl> echo_controller;
   std::unique_ptr<EchoControlMobileImpl> echo_control_mobile;
-  std::unique_ptr<CustomProcessing> capture_post_processor;
+  std::unique_ptr<CustomProcessing> capture_post_processor_unique_ptr;
   std::unique_ptr<CustomProcessing> render_pre_processor;
   std::unique_ptr<GainApplier> pre_amplifier;
   std::unique_ptr<CustomAudioAnalyzer> capture_analyzer;
@@ -309,8 +311,9 @@ AudioProcessingBuilder::AudioProcessingBuilder() = default;
 AudioProcessingBuilder::~AudioProcessingBuilder() = default;
 
 AudioProcessingBuilder& AudioProcessingBuilder::SetCapturePostProcessing(
-    std::unique_ptr<CustomProcessing> capture_post_processing) {
-  capture_post_processing_ = std::move(capture_post_processing);
+    std::unique_ptr<CustomProcessing> capture_post_processing_unique_ptr) {
+  capture_post_processing_unique_ptr_ =
+      std::move(capture_post_processing_unique_ptr);
   return *this;
 }
 
@@ -345,7 +348,7 @@ AudioProcessing* AudioProcessingBuilder::Create() {
 
 AudioProcessing* AudioProcessingBuilder::Create(const webrtc::Config& config) {
   AudioProcessingImpl* apm = new rtc::RefCountedObject<AudioProcessingImpl>(
-      config, std::move(capture_post_processing_),
+      config, std::move(capture_post_processing_unique_ptr_),
       std::move(render_pre_processing_), std::move(echo_control_factory_),
       std::move(echo_detector_), std::move(capture_analyzer_));
   if (apm->Initialize() != AudioProcessing::kNoError) {
@@ -363,7 +366,7 @@ int AudioProcessingImpl::instance_count_ = 0;
 
 AudioProcessingImpl::AudioProcessingImpl(
     const webrtc::Config& config,
-    std::unique_ptr<CustomProcessing> capture_post_processor,
+    std::unique_ptr<CustomProcessing> capture_post_processor_unique_ptr,
     std::unique_ptr<CustomProcessing> render_pre_processor,
     std::unique_ptr<EchoControlFactory> echo_control_factory,
     rtc::scoped_refptr<EchoDetector> echo_detector,
@@ -375,12 +378,12 @@ AudioProcessingImpl::AudioProcessingImpl(
       capture_runtime_settings_enqueuer_(&capture_runtime_settings_),
       render_runtime_settings_enqueuer_(&render_runtime_settings_),
       echo_control_factory_(std::move(echo_control_factory)),
-      submodule_states_(!!capture_post_processor,
+      submodule_states_(!!capture_post_processor_unique_ptr,
                         !!render_pre_processor,
                         !!capture_analyzer),
       public_submodules_(new ApmPublicSubmodules()),
       private_submodules_(
-          new ApmPrivateSubmodules(std::move(capture_post_processor),
+          new ApmPrivateSubmodules(std::move(capture_post_processor_unique_ptr),
                                    std::move(render_pre_processor),
                                    std::move(echo_detector),
                                    std::move(capture_analyzer))),
@@ -435,7 +438,7 @@ AudioProcessingImpl::AudioProcessingImpl(
   RTC_LOG(LS_INFO) << "Capture analyzer activated: "
                    << !!private_submodules_->capture_analyzer
                    << "\nCapture post processor activated: "
-                   << !!private_submodules_->capture_post_processor
+                   << !!private_submodules_->capture_post_processor_unique_ptr
                    << "\nRender pre processor activated: "
                    << !!private_submodules_->render_pre_processor;
 
@@ -1456,8 +1459,9 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
     private_submodules_->gain_controller2->Process(capture_buffer);
   }
 
-  if (private_submodules_->capture_post_processor) {
-    private_submodules_->capture_post_processor->Process(capture_buffer);
+  if (private_submodules_->capture_post_processor_unique_ptr) {
+    private_submodules_->capture_post_processor_unique_ptr->Process(
+        capture_buffer);
   }
 
   // The level estimator operates on the recombined data.
@@ -1951,8 +1955,8 @@ void AudioProcessingImpl::InitializeAnalyzer() {
 }
 
 void AudioProcessingImpl::InitializePostProcessor() {
-  if (private_submodules_->capture_post_processor) {
-    private_submodules_->capture_post_processor->Initialize(
+  if (private_submodules_->capture_post_processor_unique_ptr) {
+    private_submodules_->capture_post_processor_unique_ptr->Initialize(
         proc_sample_rate_hz(), num_proc_channels());
   }
 }
