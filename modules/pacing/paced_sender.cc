@@ -227,6 +227,13 @@ void PacedSender::InsertPacket(RtpPacketSender::Priority priority,
 }
 
 void PacedSender::EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet) {
+  RTC_CHECK(packet->packet_type());
+  int priority = GetPriorityForType(*packet->packet_type());
+  EnqueuePacketInternal(std::move(packet), priority);
+}
+
+void PacedSender::EnqueuePacketInternal(std::unique_ptr<RtpPacketToSend> packet,
+                                        int priority) {
   rtc::CritScope cs(&critsect_);
   RTC_DCHECK(pacing_bitrate_kbps_ > 0)
       << "SetPacingRate must be called before InsertPacket.";
@@ -238,8 +245,6 @@ void PacedSender::EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet) {
     packet->set_capture_time_ms(now_ms);
   }
 
-  RTC_CHECK(packet->packet_type());
-  int priority = GetPriorityForType(*packet->packet_type());
   packets_.Push(priority, now_ms, packet_counter_++, std::move(packet));
 }
 
@@ -379,15 +384,35 @@ void PacedSender::Process() {
   bool is_probing = prober_.IsProbing();
   PacedPacketInfo pacing_info;
   absl::optional<size_t> recommended_probe_size;
+  bool first_packet_in_probe = false;
   if (is_probing) {
     pacing_info = prober_.CurrentCluster();
     recommended_probe_size = prober_.RecommendedMinProbeSize();
+    if (current_probe_cluster_id_ != pacing_info.probe_cluster_id) {
+      first_packet_in_probe = true;
+      current_probe_cluster_id_ = pacing_info.probe_cluster_id;
+    }
+  } else {
+    current_probe_cluster_id_.reset();
   }
 
   size_t bytes_sent = 0;
   // The paused state is checked in the loop since it leaves the critical
   // section allowing the paused state to be changed from other code.
   while (!paused_) {
+    if (first_packet_in_probe && !legacy_packet_referencing_) {
+      // If first packet in probe, insert a small padding packet so we have a
+      // more reliable start window for the rate estimation.
+      critsect_.Leave();
+      std::vector<std::unique_ptr<RtpPacketToSend>> padding_packets =
+          packet_router_->GeneratePadding(1);
+      critsect_.Enter();
+      for (auto& packet : padding_packets) {
+        // Enqueue with high priority so larger media packets don't preempt it.
+        EnqueuePacketInternal(std::move(packet), 0);
+      }
+    }
+
     auto* packet = GetPendingPacket(pacing_info);
     if (packet == nullptr) {
       // No packet available to send, check if we should send padding.
