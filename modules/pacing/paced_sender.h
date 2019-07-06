@@ -125,6 +125,9 @@ class PacedSender : public Module, public RtpPacketPacer {
   void SetQueueTimeLimit(int limit_ms);
 
  private:
+  void EnqueuePacketInternal(std::unique_ptr<RtpPacketToSend> packet,
+                             int priority);
+
   int64_t UpdateTimeAndGetElapsedMs(int64_t now_us)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(critsect_);
   bool ShouldSendKeepalive(int64_t at_time_us) const
@@ -200,6 +203,8 @@ class PacedSender : public Module, public RtpPacketPacer {
 
   int64_t queue_time_limit RTC_GUARDED_BY(critsect_);
   bool account_for_audio_ RTC_GUARDED_BY(critsect_);
+
+  absl::optional<int> current_probe_cluster_id_;
 
   // If true, PacedSender should only reference packets as in legacy mode.
   // If false, PacedSender may have direct ownership of RtpPacketToSend objects.
