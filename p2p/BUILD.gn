@@ -82,7 +82,6 @@ rtc_static_library("rtc_p2p") {
     "base/turn_port.cc",
     "base/turn_port.h",
     "base/udp_port.h",
-    "../modules/rtp_rtcp/include/rtp_header_extension_map.h",
     "client/basic_port_allocator.cc",
     "client/basic_port_allocator.h",
     "client/relay_port_factory_interface.h",
