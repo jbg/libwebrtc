@@ -180,7 +180,7 @@ int DatagramDtlsAdaptor::SendPacket(const char* data,
   // when we get Ack for sent datagram, we will re-create RTCP feedback packet.
   if (!rtp_packet.RemoveExtension(webrtc::TransportSequenceNumber::kId)) {
     RTC_NOTREACHED() << "Failed to remove transport sequence number, packet="
-                      << rtp_packet.ToString();
+                     << rtp_packet.ToString();
     return -1;
   }
 
@@ -244,7 +244,7 @@ void DatagramDtlsAdaptor::OnDatagramSent(webrtc::DatagramId datagram_id) {
   const auto& it = sent_rtp_packet_map_.find(datagram_id);
   if (it == sent_rtp_packet_map_.end()) {
     RTC_NOTREACHED() << "Did not find sent packet info for acked datagram_id="
-                      << datagram_id;
+                     << datagram_id;
     return;
   }
 
