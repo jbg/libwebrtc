@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7db6f2ec_1a601dde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-07-09T23:58:30Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "e767a670_62df0f1f",
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c12fe167_35132c15",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a098f33b_d33132b2",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-07-09T23:58:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c12fe167_35132c15",
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "d1e9d332_623c8a04",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-07-09T23:58:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2e34902_e793aa38",
+      "range": {
+        "startLine": 310,
+        "startChar": 63,
+        "endLine": 310,
+        "endChar": 72
+      },
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9df72ff0_8eff9528",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 6
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "5768357a_48e4fe45",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-07-09T23:58:30Z",
+      "side": 1,
+      "message": "Getting out of array boundaries - I\u0027d prefer to crash.",
+      "parentUuid": "9df72ff0_8eff9528",
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2d27024_bc3bb8fa",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 6
@@ -90,6 +168,24 @@
       "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c0fd472_92b19aaa",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-07-09T23:58:30Z",
+      "side": 1,
+      "message": "It\u0027s not set in RTP path, so I did not try hard to set it here, but it\u0027s something we can look at later.",
+      "parentUuid": "d2d27024_bc3bb8fa",
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
