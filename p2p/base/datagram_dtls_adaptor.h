@@ -46,7 +46,7 @@ class DatagramDtlsAdaptor : public DtlsTransportInternal,
   // TODO(sukhanov): Taking crypto options, because DtlsTransportInternal
   // has a virtual getter crypto_options(). Consider removing getter and
   // removing crypto_options from DatagramDtlsAdaptor.
-  DatagramDtlsAdaptor(const RtpHeaderExtensions& rtp_header_extensions,
+  DatagramDtlsAdaptor(const std::vector<webrtc::RtpExtension>& rtp_header_extensions,
                       IceTransportInternal* ice_transport,
                       webrtc::DatagramTransportInterface* datagram_transport,
                       const webrtc::CryptoOptions& crypto_options,

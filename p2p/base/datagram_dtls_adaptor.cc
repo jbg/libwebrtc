@@ -57,7 +57,7 @@ constexpr webrtc::DatagramId kRtcpDatagramId = -1;
 constexpr size_t kMaxRtcpFeedbackPacketSize = 1250;
 
 DatagramDtlsAdaptor::DatagramDtlsAdaptor(
-    const RtpHeaderExtensions& rtp_header_extensions,
+    const std::vector<webrtc::RtpExtension>& rtp_header_extensions,
     IceTransportInternal* ice_transport,
     webrtc::DatagramTransportInterface* datagram_transport,
     const webrtc::CryptoOptions& crypto_options,
