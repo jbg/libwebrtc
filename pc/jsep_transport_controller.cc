@@ -487,8 +487,7 @@ JsepTransportController::CreateDtlsTransport(
     // Create DTLS wrapper around DatagramTransportInterface.
     dtls = absl::make_unique<cricket::DatagramDtlsAdaptor>(
         content_info.media_description()->rtp_header_extensions(), ice,
-        datagram_transport, config_.crypto_options,
-        config_.event_log);
+        datagram_transport, config_.crypto_options, config_.event_log);
   } else if (config_.media_transport_factory &&
              config_.use_media_transport_for_media &&
              config_.use_media_transport_for_data_channels) {

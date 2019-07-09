@@ -200,7 +200,6 @@ void RemoteEstimatorProxy::SendPeriodicFeedbacks() {
 void RemoteEstimatorProxy::SendFeedbackOnRequest(
     int64_t sequence_number,
     const FeedbackRequest& feedback_request) {
-
   // HACK
   return;
   if (feedback_request.sequence_count == 0) {

@@ -14,10 +14,18 @@
 #include <memory>
 #include <utility>
 
+#include "absl/memory/memory.h"
+#include "absl/strings/string_view.h"
+#include "absl/types/optional.h"
+#include "api/datagram_transport_interface.h"
 #include "api/rtc_error.h"
 #include "logging/rtc_event_log/events/rtc_event_dtls_transport_state.h"
 #include "logging/rtc_event_log/events/rtc_event_dtls_writable_state.h"
 #include "logging/rtc_event_log/rtc_event_log.h"
+#include "modules/rtp_rtcp/include/rtp_header_parser.h"
+#include "modules/rtp_rtcp/source/rtcp_packet/transport_feedback.h"
+#include "modules/rtp_rtcp/source/rtcp_receiver.h"
+#include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "p2p/base/dtls_transport_internal.h"
 #include "p2p/base/packet_transport_internal.h"
 #include "rtc_base/buffer.h"
@@ -30,29 +38,6 @@
 #include "rtc_base/ssl_stream_adapter.h"
 #include "rtc_base/stream.h"
 #include "rtc_base/thread.h"
-#include "api/rtc_error.h"
-#include "logging/rtc_event_log/events/rtc_event_dtls_transport_state.h"
-#include "logging/rtc_event_log/events/rtc_event_dtls_writable_state.h"
-#include "logging/rtc_event_log/rtc_event_log.h"
-#include "p2p/base/dtls_transport_internal.h"
-#include "p2p/base/packet_transport_internal.h"
-#include "modules/rtp_rtcp/include/rtp_header_parser.h"
-#include "modules/rtp_rtcp/source/rtcp_packet/transport_feedback.h"
-#include "modules/rtp_rtcp/source/rtcp_receiver.h"
-#include "modules/rtp_rtcp/source/rtp_packet_received.h"
-#include "rtc_base/buffer.h"
-#include "rtc_base/checks.h"
-#include "rtc_base/dscp.h"
-#include "rtc_base/logging.h"
-#include "rtc_base/message_queue.h"
-#include "rtc_base/rtc_certificate.h"
-#include "rtc_base/ssl_stream_adapter.h"
-#include "rtc_base/stream.h"
-#include "rtc_base/thread.h"
-#include "absl/memory/memory.h"
-#include "absl/strings/string_view.h"
-#include "absl/types/optional.h"
-#include "api/datagram_transport_interface.h"
 
 #ifdef BYPASS_DATAGRAM_DTLS_TEST_ONLY
 // Send unencrypted packets directly to ICE, bypassing datagtram
@@ -78,7 +63,8 @@ DatagramDtlsAdaptor::DatagramDtlsAdaptor(
     const RtpHeaderExtensions& rtp_header_extensions,
     IceTransportInternal* ice_transport,
     webrtc::DatagramTransportInterface* datagram_transport,
-    const webrtc::CryptoOptions& crypto_options, webrtc::RtcEventLog* event_log)
+    const webrtc::CryptoOptions& crypto_options,
+    webrtc::RtcEventLog* event_log)
     : crypto_options_(crypto_options),
       ice_transport_(ice_transport),
       datagram_transport_(datagram_transport),
@@ -275,7 +261,8 @@ void DatagramDtlsAdaptor::OnDatagramSent(webrtc::DatagramId datagram_id) {
 }
 
 bool DatagramDtlsAdaptor::GetAndRemoveSentPacketInfo(
-    webrtc::DatagramId datagram_id, SentPacketInfo* sent_packet_info) {
+    webrtc::DatagramId datagram_id,
+    SentPacketInfo* sent_packet_info) {
   RTC_CHECK_NE(datagram_id, kRtcpDatagramId);
   RTC_CHECK(sent_packet_info != nullptr);
 
