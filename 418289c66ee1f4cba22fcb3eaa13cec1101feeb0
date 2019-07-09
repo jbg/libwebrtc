@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dc6210c_edd77952",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "I think the DatagramTransportInterface documentation should be updated to make it clear that it must work with duplicate datagram IDs.",
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffba2dab_4fe6add5",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 69,
+        "startChar": 10,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07203c84_8a864712",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "RTC_NOTREACHED",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 21
+      },
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9eaf397_ac90ee40",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "outgoing",
+      "range": {
+        "startLine": 153,
+        "startChar": 41,
+        "endLine": 153,
+        "endChar": 42
+      },
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49392e33_c46d1a4b",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "RTC_NOTREACHED",
+      "range": {
+        "startLine": 182,
+        "startChar": 4,
+        "endLine": 182,
+        "endChar": 21
+      },
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54d58037_cf08d220",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "RTC_NOTREACHED",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 246,
+        "endChar": 21
+      },
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14afebd2_25940019",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "Return an optional\u003cSentPacketInfo\u003e instead?",
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0b69b7a_f56ceca5",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "use rtc::Buffer to avoid default-initializing the buffer contents.\n\ne.g.\n\nrtc::Buffer buffer(kMaxRtcpFeedbackPacketSize);\nsize_t index \u003d 0;\n... Create\nPropagateReadPacket(buffer, /*packet_time_us\u003d*/-1);",
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5462486c_1ae08df5",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "LE",
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00ad223a_2723175c",
+        "filename": "p2p/base/datagram_dtls_adaptor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-07-09T23:18:52Z",
+      "side": 1,
+      "message": "imo might as well just have the user assign field-wise if you provide a default constructor",
+      "revId": "418289c66ee1f4cba22fcb3eaa13cec1101feeb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
