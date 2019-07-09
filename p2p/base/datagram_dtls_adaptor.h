@@ -23,7 +23,6 @@
 #include "p2p/base/dtls_transport_internal.h"
 #include "p2p/base/ice_transport_internal.h"
 #include "p2p/base/packet_transport_internal.h"
-#include "pc/session_description.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/buffer_queue.h"
 #include "rtc_base/constructor_magic.h"
@@ -46,11 +45,12 @@ class DatagramDtlsAdaptor : public DtlsTransportInternal,
   // TODO(sukhanov): Taking crypto options, because DtlsTransportInternal
   // has a virtual getter crypto_options(). Consider removing getter and
   // removing crypto_options from DatagramDtlsAdaptor.
-  DatagramDtlsAdaptor(const std::vector<webrtc::RtpExtension>& rtp_header_extensions,
-                      IceTransportInternal* ice_transport,
-                      webrtc::DatagramTransportInterface* datagram_transport,
-                      const webrtc::CryptoOptions& crypto_options,
-                      webrtc::RtcEventLog* event_log);
+  DatagramDtlsAdaptor(
+      const std::vector<webrtc::RtpExtension>& rtp_header_extensions,
+      IceTransportInternal* ice_transport,
+      webrtc::DatagramTransportInterface* datagram_transport,
+      const webrtc::CryptoOptions& crypto_options,
+      webrtc::RtcEventLog* event_log);
 
   ~DatagramDtlsAdaptor() override;
 
