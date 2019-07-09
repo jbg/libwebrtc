@@ -11,6 +11,7 @@
 #ifndef P2P_BASE_DATAGRAM_DTLS_ADAPTOR_H_
 #define P2P_BASE_DATAGRAM_DTLS_ADAPTOR_H_
 
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
