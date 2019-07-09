@@ -16,6 +16,80 @@
       "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c12fe167_35132c15",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-09T23:36:46Z",
+      "side": 1,
+      "message": "Should this one be a DCHECK?",
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2e34902_e793aa38",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-09T23:36:46Z",
+      "side": 1,
+      "message": "nit: workaround",
+      "range": {
+        "startLine": 310,
+        "startChar": 63,
+        "endLine": 310,
+        "endChar": 72
+      },
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9df72ff0_8eff9528",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-09T23:36:46Z",
+      "side": 1,
+      "message": "DCHECK?",
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2d27024_bc3bb8fa",
+        "filename": "p2p/base/datagram_dtls_adaptor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-09T23:36:46Z",
+      "side": 1,
+      "message": "Should we propagate the packet time from the datagram transport implementation?\n\nWe\u0027d probably have to plumb it through several layers, so if it\u0027s not necessary or not used, it\u0027s simpler to leave it out.",
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
