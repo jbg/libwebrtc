@@ -176,7 +176,6 @@ void RemoteEstimatorProxy::SendPeriodicFeedbacks() {
   // reordering happens and we need to retransmit them.
   if (!periodic_window_start_seq_)
     return;
-
   for (auto begin_iterator =
            packet_arrival_times_.lower_bound(*periodic_window_start_seq_);
        begin_iterator != packet_arrival_times_.cend();
@@ -201,6 +200,7 @@ void RemoteEstimatorProxy::SendFeedbackOnRequest(
   if (feedback_request.sequence_count == 0) {
     return;
   }
+
   rtcp::TransportFeedback feedback_packet(feedback_request.include_timestamps);
 
   int64_t first_sequence_number =
