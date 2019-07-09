@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef22ac86_0ade15b7",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-09T19:33:57Z",
+      "side": 1,
+      "message": "Is there any difference between payload().size() and payload_size()?  I assume payload_size() is just a simpler accessor for the former.  Maybe call it in both places, to keep things consistent?",
+      "revId": "a836a42223fc16633d44cfe7151810234913c1ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7848dc4d_083bcc4f",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-09T19:33:57Z",
+      "side": 1,
+      "message": "Can we also add a test case where we only register one of the extensions and make sure that the other is correctly preserved by the call to RemoveExtension()?\n\nMight require registering both, serializing, and parsing into an RtpPacket that only has one extension registered, but I think it\u0027s worthwhile to cover that case.",
+      "revId": "a836a42223fc16633d44cfe7151810234913c1ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08b3bdfd_00f972ed",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-09T19:33:57Z",
+      "side": 1,
+      "message": "What about removing one that is present but not registered?  Is that worth testing?",
+      "revId": "a836a42223fc16633d44cfe7151810234913c1ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
