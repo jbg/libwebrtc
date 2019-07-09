@@ -627,4 +627,68 @@ bool RtpPacket::IsExtensionReserved(ExtensionType type) const {
   return FindExtensionInfo(id) != nullptr;
 }
 
+bool RtpPacket::RemoveExtension(ExtensionType type) {
+  uint8_t id_to_remove = extensions_.GetId(type);
+  if (id_to_remove == ExtensionManager::kInvalidId) {
+    // Extension not registered.
+    RTC_LOG(LS_ERROR) << "Extension not registered, type=" << type
+                      << ", packet=" << ToString();
+    return false;
+  }
+
+  if (FindExtensionInfo(id_to_remove) == nullptr) {
+    RTC_LOG(LS_WARNING) << "Extension not present in RTP packet, type=" << type
+                        << ", packet=" << ToString();
+    return false;
+  }
+
+  // Rebuild new packet from scratch.
+  RtpPacket new_packet;
+
+  new_packet.SetMarker(Marker());
+  new_packet.SetPayloadType(PayloadType());
+  new_packet.SetSequenceNumber(SequenceNumber());
+  new_packet.SetTimestamp(Timestamp());
+  new_packet.SetSsrc(Ssrc());
+  new_packet.IdentifyExtensions(extensions_);
+
+  for (const ExtensionInfo& ext : extension_entries_) {
+    if (ext.id != id_to_remove) {
+      auto extension_data = new_packet.AllocateRawExtension(ext.id, ext.length);
+      if (extension_data.size() != ext.length) {
+        RTC_LOG(LS_ERROR) << "Failed to allocate extension id=" << ext.id
+                          << ", length=" << ext.length
+                          << ", packet=" << ToString();
+        return false;
+      }
+
+      // Copy extension data to new packet.
+      memcpy(extension_data.data(), ReadAt(ext.offset), ext.length);
+    }
+  }
+
+  // Copy payload data to new packet.
+  memcpy(new_packet.AllocatePayload(payload_size()), payload().data(),
+         payload_size());
+
+  // Allocate padding -- must be last!
+  new_packet.SetPadding(padding_size());
+
+  // Success, replace current packet with newly built packet.
+  *this = new_packet;
+  return true;
+}
+
+std::string RtpPacket::ToString() const {
+  rtc::StringBuilder result;
+  result << "{payload_type=" << payload_type_ << "marker=" << marker_
+         << ", sequence_number=" << sequence_number_
+         << ", padding_size=" << padding_size_ << ", timestamp=" << timestamp_
+         << ", ssrc=" << ssrc_ << ", payload_offset=" << payload_offset_
+         << ", payload_size=" << payload_size_ << ", total_size=" << size()
+         << "}";
+
+  return result.Release();
+}
+
 }  // namespace webrtc
