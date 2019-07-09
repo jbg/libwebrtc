@@ -66,7 +66,7 @@ DatagramDtlsAdaptor::DatagramDtlsAdaptor(
       ice_transport_(ice_transport),
       datagram_transport_(datagram_transport),
       event_log_(event_log) {
-  // Save extrension map for parsing RTP packets (we only need transport
+  // Save extension map for parsing RTP packets (we only need transport
   // sequence numbers).
   const webrtc::RtpExtension* transport_sequence_number_extension =
       webrtc::RtpExtension::FindHeaderExtensionByUri(
@@ -150,8 +150,8 @@ int DatagramDtlsAdaptor::SendPacket(const char* data,
   // Parse RTP packet.
   webrtc::RtpPacket rtp_packet(&rtp_header_extension_map_);
   if (!rtp_packet.Parse(original_data)) {
-    RTC_DCHECK(false) << "Failed to parse RtpPacket, len=" << len
-                      << ", options.packet_id=" << options.packet_id;
+    RTC_NOTREACHED() << "Failed to parse outgoing RtpPacket, len=" << len
+                     << ", options.packet_id=" << options.packet_id;
     return -1;
   }
 
@@ -179,7 +179,7 @@ int DatagramDtlsAdaptor::SendPacket(const char* data,
   // to send transport sequence number, so we remove it from RTP packet. Later
   // when we get Ack for sent datagram, we will re-create RTCP feedback packet.
   if (!rtp_packet.RemoveExtension(webrtc::TransportSequenceNumber::kId)) {
-    RTC_DCHECK(false) << "Failed to remove transport sequence number, packet="
+    RTC_NOTREACHED() << "Failed to remove transport sequence number, packet="
                       << rtp_packet.ToString();
     return -1;
   }
@@ -243,7 +243,7 @@ void DatagramDtlsAdaptor::OnDatagramSent(webrtc::DatagramId datagram_id) {
   // Find packet_id and propagate OnPacketSent notification.
   const auto& it = sent_rtp_packet_map_.find(datagram_id);
   if (it == sent_rtp_packet_map_.end()) {
-    RTC_DCHECK(false) << "Did not find sent packet info for acked datagram_id="
+    RTC_NOTREACHED() << "Did not find sent packet info for acked datagram_id="
                       << datagram_id;
     return;
   }
@@ -260,7 +260,7 @@ void DatagramDtlsAdaptor::OnDatagramSent(webrtc::DatagramId datagram_id) {
 bool DatagramDtlsAdaptor::GetAndRemoveSentPacketInfo(
     webrtc::DatagramId datagram_id,
     SentPacketInfo* sent_packet_info) {
-  RTC_CHECK_NE(datagram_id, kRtcpDatagramId);
+  RTC_DCHECK_NE(datagram_id, kRtcpDatagramId);
   RTC_CHECK(sent_packet_info != nullptr);
 
   const auto& it = sent_rtp_packet_map_.find(datagram_id);
@@ -307,7 +307,7 @@ void DatagramDtlsAdaptor::OnDatagramAcked(const webrtc::DatagramAck& ack) {
   }
 
   // TODO(sukhanov): We noticed that datagram transport implementations can
-  // return zero timestamps in the middle of the call. This is woraround to
+  // return zero timestamps in the middle of the call. This is workaround to
   // avoid propagating zero timestamps, but we need to understand why we have
   // them in the first place.
   int64_t receive_timestamp_us = ack.receive_timestamp.us();
@@ -327,7 +327,7 @@ void DatagramDtlsAdaptor::OnDatagramAcked(const webrtc::DatagramAck& ack) {
   feedback_packet.AddReceivedPacket(transport_sequence_number,
                                     receive_timestamp_us);
 
-  std::vector<uint8_t> buffer(kMaxRtcpFeedbackPacketSize);
+  rtc::Buffer buffer(kMaxRtcpFeedbackPacketSize);
   size_t index = 0;
   if (!feedback_packet.Create(buffer.data(), &index, buffer.capacity(),
                               nullptr)) {
@@ -336,11 +336,11 @@ void DatagramDtlsAdaptor::OnDatagramAcked(const webrtc::DatagramAck& ack) {
   }
 
   RTC_CHECK_GT(index, 0);
-  RTC_CHECK_LT(index, kMaxRtcpFeedbackPacketSize);
+  RTC_CHECK_LE(index, kMaxRtcpFeedbackPacketSize);
 
   // Propagage created RTCP packet as normal incoming packet.
-  PropagateReadPacket(rtc::ArrayView<const uint8_t>(buffer.data(), index),
-                      /*packet_time_us=*/-1);
+  buffer.SetSize(index);
+  PropagateReadPacket(buffer.data(), /*packet_time_us=*/-1);
 }
 
 void DatagramDtlsAdaptor::OnDatagramLost(webrtc::DatagramId datagram_id) {
