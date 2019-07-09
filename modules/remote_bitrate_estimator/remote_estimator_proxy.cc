@@ -107,7 +107,8 @@ void RemoteEstimatorProxy::OnBitrateChanged(int bitrate_bps) {
   rtc::CritScope cs(&lock_);
   send_interval_ms_ = static_cast<int>(
       0.5 + kTwccReportSize * 8.0 * 1000.0 /
-                rtc::SafeClamp(0.05 * bitrate_bps, kMinTwccRate, kMaxTwccRate));
+                rtc::SafeClamp(send_config_.bandwidth_fraction * bitrate_bps,
+                              kMinTwccRate, kMaxTwccRate));
 }
 
 void RemoteEstimatorProxy::SetSendPeriodicFeedback(
@@ -170,15 +171,11 @@ void RemoteEstimatorProxy::OnPacketArrival(
 }
 
 void RemoteEstimatorProxy::SendPeriodicFeedbacks() {
-  // HACK
-  return;
-
   // |periodic_window_start_seq_| is the first sequence number to include in the
   // current feedback packet. Some older may still be in the map, in case a
   // reordering happens and we need to retransmit them.
   if (!periodic_window_start_seq_)
     return;
-
   for (auto begin_iterator =
            packet_arrival_times_.lower_bound(*periodic_window_start_seq_);
        begin_iterator != packet_arrival_times_.cend();
@@ -200,8 +197,6 @@ void RemoteEstimatorProxy::SendPeriodicFeedbacks() {
 void RemoteEstimatorProxy::SendFeedbackOnRequest(
     int64_t sequence_number,
     const FeedbackRequest& feedback_request) {
-  // HACK
-  return;
   if (feedback_request.sequence_count == 0) {
     return;
   }
