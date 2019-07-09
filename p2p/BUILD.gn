@@ -82,6 +82,7 @@ rtc_static_library("rtc_p2p") {
     "base/turn_port.cc",
     "base/turn_port.h",
     "base/udp_port.h",
+    "../modules/rtp_rtcp/include/rtp_header_extension_map.h",
     "client/basic_port_allocator.cc",
     "client/basic_port_allocator.h",
     "client/relay_port_factory_interface.h",
@@ -95,8 +96,8 @@ rtc_static_library("rtc_p2p") {
     "../api/transport:enums",
     "../logging:ice_log",
     "../logging:rtc_event_log_api",
-    "../../modules/rtp_rtcp",
-    "../../modules/rtp_rtcp:rtp_rtcp_format",
+    "../modules/rtp_rtcp",
+    "../modules/rtp_rtcp:rtp_rtcp_format",
     "../rtc_base",
     "../rtc_base:checks",
 
