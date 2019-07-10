@@ -35,20 +35,6 @@
 #if defined(WEBRTC_IOS)
 #include "test/ios/test_support.h"
 
-WEBRTC_DEFINE_string(NSTreatUnknownArgumentsAsOpen,
-                     "",
-                     "Intentionally ignored flag intended for iOS simulator.");
-WEBRTC_DEFINE_string(ApplePersistenceIgnoreState,
-                     "",
-                     "Intentionally ignored flag intended for iOS simulator.");
-WEBRTC_DEFINE_bool(
-    save_chartjson_result,
-    false,
-    "Store the perf results in Documents/perf_result.json in the format "
-    "described by "
-    "https://github.com/catapult-project/catapult/blob/master/dashboard/docs/"
-    "data-format.md.");
-
 #else
 
 WEBRTC_DEFINE_string(
