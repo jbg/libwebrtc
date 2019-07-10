@@ -824,7 +824,9 @@ class MetaBuildWrapper(object):
 
     must_retry = False
     if test_type == 'script':
+      timeout = isolate_map[target].get('timeout', 900)
       cmdline = ['../../' + self.ToSrcRelPath(isolate_map[target]['script'])]
+      cmdline += ['--timeout=%s' % timeout]
     elif is_android:
       cmdline = ['../../build/android/test_wrapper/logdog_wrapper.py',
                  '--target', target,
