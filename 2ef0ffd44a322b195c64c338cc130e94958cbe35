@@ -22,6 +22,30 @@
       "revId": "2ef0ffd44a322b195c64c338cc130e94958cbe35",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33dc4f1d_a7d26972",
+        "filename": "rtc_tools/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-07-10T14:05:03Z",
+      "side": 1,
+      "message": "Also, rtp_generator is not the only target, invoked by \"all\" after default build.\nI can include as you suggested, but it still leave some code not build on build bots, but potentionally breaking \"all\" target. There are some other targets from rtc_tools and probably something else. \n\nSome more investigation needs to be done here. I\u0027ll leave this for follow-up CL.",
+      "parentUuid": "471eee59_05854d69",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 35
+      },
+      "revId": "2ef0ffd44a322b195c64c338cc130e94958cbe35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
