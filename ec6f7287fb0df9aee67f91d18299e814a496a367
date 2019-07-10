@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7d598cb_20cd4d0b",
+        "filename": "modules/audio_coding/neteq/tools/neteq_rtpplay.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-07-10T13:52:19Z",
+      "side": 1,
+      "message": "nit: I would prefer deallocated or destroyed.",
+      "range": {
+        "startLine": 341,
+        "startChar": 5,
+        "endLine": 341,
+        "endChar": 17
+      },
+      "revId": "ec6f7287fb0df9aee67f91d18299e814a496a367",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
