@@ -21,7 +21,9 @@ namespace test {
 // This function implements the audio processing simulation utility.
 int AudioprocFloatImpl(std::unique_ptr<AudioProcessingBuilder> ap_builder,
                        int argc,
-                       char* argv[]);
+                       char* argv[],
+                       absl::string_view input = nullptr,
+                       std::vector<float>* output = nullptr);
 
 }  // namespace test
 }  // namespace webrtc

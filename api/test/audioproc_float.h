@@ -36,6 +36,17 @@ int AudioprocFloat(std::unique_ptr<AudioProcessingBuilder> ap_builder,
                    int argc,
                    char* argv[]);
 
+// This is an interface for the audio processing simulation utility, which is
+// similar to the one above, but which adds the option of receiving the input as
+// a string and returning the output as an array. The first three arguments
+// fulfill the same purpose as above. The |input| argument should contain the
+// input aec dump file, represented as string. After the simulation is
+// completed, |output| will contain the result.
+int AudioprocFloat(std::unique_ptr<AudioProcessingBuilder> ap_builder,
+                   int argc,
+                   char* argv[],
+                   absl::string_view input,
+                   std::vector<float>* output);
 }  // namespace test
 }  // namespace webrtc
 

@@ -68,6 +68,31 @@ void ChannelBufferWavWriter::Write(const ChannelBuffer<float>& buffer) {
   file_->WriteSamples(&interleaved_[0], interleaved_.size());
 }
 
+ChannelBufferArrayWriter::ChannelBufferArrayWriter() = default;
+
+ChannelBufferArrayWriter::~ChannelBufferArrayWriter() = default;
+
+void ChannelBufferArrayWriter::Write(const ChannelBuffer<float>& buffer) {
+  interleaved_.resize(buffer.size());
+  Interleave(buffer.channels(), buffer.num_frames(), buffer.num_channels(),
+             interleaved_.data());
+  FloatToFloatS16(interleaved_.data(), interleaved_.size(),
+                  interleaved_.data());
+
+  size_t num_samples = interleaved_.size();
+  constexpr size_t kChunksize = 4096 / sizeof(uint16_t);
+  for (size_t i = 0; i < num_samples; i += kChunksize) {
+    int16_t isamples[kChunksize];
+    const size_t chunk = std::min(kChunksize, num_samples - i);
+    FloatS16ToS16(interleaved_.data() + i, chunk, isamples);
+    output_array_.insert(output_array_.end(), isamples, isamples + chunk);
+  }
+}
+
+std::vector<float> ChannelBufferArrayWriter::GetOutputArray() {
+  return output_array_;
+}
+
 void WriteIntData(const int16_t* data,
                   size_t length,
                   WavWriter* wav_file,
