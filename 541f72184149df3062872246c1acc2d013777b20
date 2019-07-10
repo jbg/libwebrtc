@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "2fde026b_8e782a0e",
+        "filename": "tools_webrtc/mb/gn_isolate_map.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-07-10T12:15:41Z",
+      "side": 1,
+      "message": "Yeah, seems that this is not respected. Probably need to implement actually passing timeout for a \u0027script\u0027 in tools_webrtc/mb/mb.py",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 30
+      },
+      "revId": "541f72184149df3062872246c1acc2d013777b20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a26b5c6_4d0ac08f",
         "filename": "tools_webrtc/mb/gn_isolate_map.pyl",
         "patchSetId": 2
