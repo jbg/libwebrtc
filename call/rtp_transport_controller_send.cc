@@ -67,7 +67,11 @@ RtpTransportControllerSend::RtpTransportControllerSend(
     TaskQueueFactory* task_queue_factory)
     : clock_(clock),
       event_log_(event_log),
-      pacer_(clock, &packet_router_, event_log),
+      pacer_(absl::make_unique<PacedSender>(clock,
+                                            &packet_router_,
+                                            event_log,
+                                            nullptr,
+                                            process_thread.get())),
       bitrate_configurator_(bitrate_config),
       process_thread_(std::move(process_thread)),
       observer_(nullptr),
@@ -93,15 +97,14 @@ RtpTransportControllerSend::RtpTransportControllerSend(
   initial_config_.key_value_config = &trial_based_config_;
   RTC_DCHECK(bitrate_config.start_bitrate_bps > 0);
 
-  pacer_.SetPacingRates(bitrate_config.start_bitrate_bps, 0);
-
-  process_thread_->RegisterModule(&pacer_, RTC_FROM_HERE);
+  pacer_->SetPacingRates(DataRate::bps(bitrate_config.start_bitrate_bps),
+                         DataRate::Zero());
   process_thread_->Start();
 }
 
 RtpTransportControllerSend::~RtpTransportControllerSend() {
   process_thread_->Stop();
-  process_thread_->DeRegisterModule(&pacer_);
+  pacer_.reset();  // Potentially deregisters from process thread.
 }
 
 RtpVideoSenderInterface* RtpTransportControllerSend::CreateRtpVideoSender(
@@ -162,8 +165,8 @@ RtpTransportControllerSend::transport_feedback_observer() {
   return this;
 }
 
-RtpPacketPacer* RtpTransportControllerSend::packet_sender() {
-  return &pacer_;
+RtpPacketSender* RtpTransportControllerSend::packet_sender() {
+  return pacer_.get();
 }
 
 void RtpTransportControllerSend::SetAllocatedSendBitrateLimits(
@@ -184,7 +187,7 @@ void RtpTransportControllerSend::SetPacingFactor(float pacing_factor) {
   UpdateStreamsConfig();
 }
 void RtpTransportControllerSend::SetQueueTimeLimit(int limit_ms) {
-  pacer_.SetQueueTimeLimit(limit_ms);
+  pacer_->SetQueueTimeLimit(limit_ms);
 }
 void RtpTransportControllerSend::RegisterPacketFeedbackObserver(
     PacketFeedbackObserver* observer) {
@@ -261,7 +264,7 @@ void RtpTransportControllerSend::OnNetworkRouteChanged(
       } else {
         UpdateInitialConstraints(msg.constraints);
       }
-      pacer_.UpdateOutstandingData(0);
+      pacer_->UpdateOutstandingData(0);
     });
   }
 }
@@ -277,11 +280,11 @@ void RtpTransportControllerSend::OnNetworkAvailability(bool network_available) {
       return;
     network_available_ = msg.network_available;
     if (network_available_) {
-      pacer_.Resume();
+      pacer_->Resume();
     } else {
-      pacer_.Pause();
+      pacer_->Pause();
     }
-    pacer_.UpdateOutstandingData(0);
+    pacer_->UpdateOutstandingData(0);
 
     if (controller_) {
       control_handler_->SetNetworkAvailability(network_available_);
@@ -300,10 +303,11 @@ RtcpBandwidthObserver* RtpTransportControllerSend::GetBandwidthObserver() {
   return this;
 }
 int64_t RtpTransportControllerSend::GetPacerQueuingDelayMs() const {
-  return pacer_.QueueInMs();
+  return pacer_->QueueInMs();
 }
-int64_t RtpTransportControllerSend::GetFirstPacketTimeMs() const {
-  return pacer_.FirstSentPacketTimeMs();
+absl::optional<int64_t> RtpTransportControllerSend::GetFirstPacketTimeMs()
+    const {
+  return pacer_->FirstSentPacketTimeMs();
 }
 void RtpTransportControllerSend::EnablePeriodicAlrProbing(bool enable) {
   task_queue_.PostTask([this, enable]() {
@@ -323,7 +327,7 @@ void RtpTransportControllerSend::OnSentPacket(
         PostUpdates(controller_->OnSentPacket(*packet_msg));
     });
   }
-  pacer_.UpdateOutstandingData(
+  pacer_->UpdateOutstandingData(
       transport_feedback_adapter_.GetOutstandingData().bytes());
 }
 
@@ -393,6 +397,11 @@ void RtpTransportControllerSend::OnTransportOverheadChanged(
   }
 }
 
+void RtpTransportControllerSend::AcccountForAudioPacketsInPacedSender(
+    bool account_for_audio) {
+  pacer_->SetAccountForAudioPackets(account_for_audio);
+}
+
 void RtpTransportControllerSend::OnReceivedEstimatedBitrate(uint32_t bitrate) {
   RemoteBitrateReport msg;
   msg.receive_time = Timestamp::ms(clock_->TimeInMilliseconds());
@@ -447,7 +456,7 @@ void RtpTransportControllerSend::OnTransportFeedback(
         PostUpdates(controller_->OnTransportPacketsFeedback(*feedback_msg));
     });
   }
-  pacer_.UpdateOutstandingData(
+  pacer_->UpdateOutstandingData(
       transport_feedback_adapter_.GetOutstandingData().bytes());
 }
 
@@ -491,7 +500,7 @@ void RtpTransportControllerSend::StartProcessPeriodicTasks() {
         task_queue_.Get(), kPacerQueueUpdateInterval, [this]() {
           RTC_DCHECK_RUN_ON(&task_queue_);
           TimeDelta expected_queue_time =
-              TimeDelta::ms(pacer_.ExpectedQueueTimeMs());
+              TimeDelta::ms(pacer_->ExpectedQueueTimeMs());
           control_handler_->SetPacerQueue(expected_queue_time);
           UpdateControlState();
           return kPacerQueueUpdateInterval;
@@ -513,7 +522,7 @@ void RtpTransportControllerSend::UpdateControllerWithTimeInterval() {
   ProcessInterval msg;
   msg.at_time = Timestamp::ms(clock_->TimeInMilliseconds());
   if (add_pacing_to_cwin_)
-    msg.pacer_queue = DataSize::bytes(pacer_.QueueSizeBytes());
+    msg.pacer_queue = DataSize::bytes(pacer_->QueueSizeBytes());
   PostUpdates(controller_->OnProcessInterval(msg));
 }
 
@@ -525,18 +534,19 @@ void RtpTransportControllerSend::UpdateStreamsConfig() {
 
 void RtpTransportControllerSend::PostUpdates(NetworkControlUpdate update) {
   if (update.congestion_window) {
-    if (update.congestion_window->IsFinite())
-      pacer_.SetCongestionWindow(update.congestion_window->bytes());
-    else
-      pacer_.SetCongestionWindow(PacedSender::kNoCongestionWindow);
+    if (update.congestion_window->IsFinite()) {
+      pacer_->SetCongestionWindow(update.congestion_window->bytes());
+    } else {
+      pacer_->SetCongestionWindow(absl::nullopt);
+    }
   }
   if (update.pacer_config) {
-    pacer_.SetPacingRates(update.pacer_config->data_rate().bps(),
-                          update.pacer_config->pad_rate().bps());
+    pacer_->SetPacingRates(update.pacer_config->data_rate(),
+                           update.pacer_config->pad_rate());
   }
   for (const auto& probe : update.probe_cluster_configs) {
     int64_t bitrate_bps = probe.target_data_rate.bps();
-    pacer_.CreateProbeCluster(bitrate_bps, probe.id);
+    pacer_->CreateProbeCluster(bitrate_bps, probe.id);
   }
   if (update.target_rate) {
     control_handler_->SetTargetRate(*update.target_rate);

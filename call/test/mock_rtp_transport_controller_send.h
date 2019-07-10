@@ -46,7 +46,7 @@ class MockRtpTransportControllerSend
   MOCK_METHOD0(GetWorkerQueue, rtc::TaskQueue*());
   MOCK_METHOD0(packet_router, PacketRouter*());
   MOCK_METHOD0(transport_feedback_observer, TransportFeedbackObserver*());
-  MOCK_METHOD0(packet_sender, RtpPacketPacer*());
+  MOCK_METHOD0(packet_sender, RtpPacketSender*());
   MOCK_METHOD3(SetAllocatedSendBitrateLimits, void(int, int, int));
   MOCK_METHOD1(SetPacingFactor, void(float));
   MOCK_METHOD1(SetQueueTimeLimit, void(int));
@@ -59,12 +59,13 @@ class MockRtpTransportControllerSend
   MOCK_METHOD1(OnNetworkAvailability, void(bool));
   MOCK_METHOD0(GetBandwidthObserver, RtcpBandwidthObserver*());
   MOCK_CONST_METHOD0(GetPacerQueuingDelayMs, int64_t());
-  MOCK_CONST_METHOD0(GetFirstPacketTimeMs, int64_t());
+  MOCK_CONST_METHOD0(GetFirstPacketTimeMs, absl::optional<int64_t>());
   MOCK_METHOD1(EnablePeriodicAlrProbing, void(bool));
   MOCK_METHOD1(OnSentPacket, void(const rtc::SentPacket&));
   MOCK_METHOD1(SetSdpBitrateParameters, void(const BitrateConstraints&));
   MOCK_METHOD1(SetClientBitratePreferences, void(const BitrateSettings&));
   MOCK_METHOD1(OnTransportOverheadChanged, void(size_t));
+  MOCK_METHOD1(AcccountForAudioPacketsInPacedSender, void(bool));
   MOCK_METHOD1(OnReceivedPacket, void(const ReceivedPacket&));
 };
 }  // namespace webrtc

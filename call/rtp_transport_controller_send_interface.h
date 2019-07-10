@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+
 #include "api/bitrate_constraints.h"
 #include "api/crypto/crypto_options.h"
 #include "api/fec_controller.h"
@@ -27,7 +28,7 @@
 #include "logging/rtc_event_log/rtc_event_log.h"
 #include "modules/rtp_rtcp/include/report_block_data.h"
 #include "modules/rtp_rtcp/include/rtcp_statistics.h"
-#include "modules/rtp_rtcp/include/rtp_packet_pacer.h"
+#include "modules/rtp_rtcp/include/rtp_packet_sender.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 
@@ -118,7 +119,7 @@ class RtpTransportControllerSendInterface {
 
   virtual TransportFeedbackObserver* transport_feedback_observer() = 0;
 
-  virtual RtpPacketPacer* packet_sender() = 0;
+  virtual RtpPacketSender* packet_sender() = 0;
 
   // SetAllocatedSendBitrateLimits sets bitrates limits imposed by send codec
   // settings.
@@ -147,7 +148,7 @@ class RtpTransportControllerSendInterface {
   virtual void OnNetworkAvailability(bool network_available) = 0;
   virtual RtcpBandwidthObserver* GetBandwidthObserver() = 0;
   virtual int64_t GetPacerQueuingDelayMs() const = 0;
-  virtual int64_t GetFirstPacketTimeMs() const = 0;
+  virtual absl::optional<int64_t> GetFirstPacketTimeMs() const = 0;
   virtual void EnablePeriodicAlrProbing(bool enable) = 0;
   virtual void OnSentPacket(const rtc::SentPacket& sent_packet) = 0;
   virtual void OnReceivedPacket(const ReceivedPacket& received_packet) = 0;
@@ -159,6 +160,8 @@ class RtpTransportControllerSendInterface {
 
   virtual void OnTransportOverheadChanged(
       size_t transport_overhead_per_packet) = 0;
+
+  virtual void AcccountForAudioPacketsInPacedSender(bool account_for_audio) = 0;
 };
 
 }  // namespace webrtc
