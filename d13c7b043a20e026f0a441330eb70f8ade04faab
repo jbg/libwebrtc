@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46e7ad0f_37c9ff82",
+        "filename": "tools_webrtc/flags_compatibility.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-07-10T13:49:37Z",
+      "side": 1,
+      "message": "The timeout happens because the process never produces any output, and the IO timeout of 20min is hit.\nNeed to remove the stdout\u003dargs.\nAnd just replace this all with `return subprocess.call(test_command)`",
+      "range": {
+        "startLine": 31,
+        "startChar": 48,
+        "endLine": 32,
+        "endChar": 58
+      },
+      "revId": "d13c7b043a20e026f0a441330eb70f8ade04faab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
