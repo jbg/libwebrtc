@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "471eee59_05854d69",
+        "filename": "rtc_tools/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-10T13:45:00Z",
+      "side": 1,
+      "message": "Maybe add this target here: https://cs.chromium.org/chromium/src/third_party/webrtc/BUILD.gn?q\u003dwebrtc/BUIL\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d41\u0026rcl\u003db249c54209447135a58ce606b0cb9d7bbd4ab85b.\n\nSO we will build it with all.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 35
+      },
+      "revId": "2ef0ffd44a322b195c64c338cc130e94958cbe35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
