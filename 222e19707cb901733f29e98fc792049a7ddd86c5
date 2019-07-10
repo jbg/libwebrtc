@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1a0650c_c23a4a21",
+        "filename": "modules/rtp_rtcp/source/rtp_packet.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-10T08:22:28Z",
+      "side": 1,
+      "message": "Should we also remove the extension from the map?",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 654,
+        "endChar": 29
+      },
+      "revId": "222e19707cb901733f29e98fc792049a7ddd86c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
