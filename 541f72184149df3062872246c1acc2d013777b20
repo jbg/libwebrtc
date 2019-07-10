@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c885c494_253f4450",
+        "filename": "tools_webrtc/flags_compatibility.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-07-10T12:06:39Z",
+      "side": 1,
+      "message": "How about removing these positional args altogether and just relying on `test_command \u003d unrecognized_args`?\nIt\u0027s not very helpful to provide 2 arguments which are then just joined anyway",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 34
+      },
+      "revId": "541f72184149df3062872246c1acc2d013777b20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a26b5c6_4d0ac08f",
+        "filename": "tools_webrtc/mb/gn_isolate_map.pyl",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-07-10T12:06:39Z",
+      "side": 1,
+      "message": "Then I\u0027d just change this to ./webrtc_perf_tests",
+      "range": {
+        "startLine": 133,
+        "startChar": 6,
+        "endLine": 133,
+        "endChar": 29
+      },
+      "revId": "541f72184149df3062872246c1acc2d013777b20",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
