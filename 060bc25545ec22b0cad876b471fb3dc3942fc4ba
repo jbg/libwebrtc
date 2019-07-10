@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "12649f46_5873dfb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-07-10T19:35:45Z",
+      "side": 1,
+      "message": "Done in a separate change",
+      "parentUuid": "7db6f2ec_1a601dde",
+      "revId": "060bc25545ec22b0cad876b471fb3dc3942fc4ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c12fe167_35132c15",
         "filename": "p2p/base/datagram_dtls_adaptor.cc",
         "patchSetId": 6
