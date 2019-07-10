@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fc52330_cb39b0d4",
+        "filename": "audio/test/low_bandwidth_audio_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-07-10T11:42:05Z",
+      "side": 1,
+      "message": "I don\u0027t understand why this questionmark is here. And also the next one - why is this group optional?",
+      "range": {
+        "startLine": 123,
+        "startChar": 44,
+        "endLine": 123,
+        "endChar": 45
+      },
+      "revId": "1d75769da4e0218141dbc095ee5a70a45213a469",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77e324ec_051f0024",
+        "filename": "audio/test/low_bandwidth_audio_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5114
+      },
+      "writtenOn": "2019-07-10T11:42:05Z",
+      "side": 1,
+      "message": "Why is it optional?",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 25
+      },
+      "revId": "1d75769da4e0218141dbc095ee5a70a45213a469",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
