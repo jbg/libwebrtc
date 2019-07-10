@@ -113,7 +113,8 @@ AudioSendStream::AudioSendStream(
                                              config.frame_encryptor,
                                              config.crypto_options,
                                              config.rtp.extmap_allow_mixed,
-                                             config.rtcp_report_interval_ms)) {}
+                                             config.rtcp_report_interval_ms,
+                                             config.rtp.ssrc)) {}
 
 AudioSendStream::AudioSendStream(
     Clock* clock,
