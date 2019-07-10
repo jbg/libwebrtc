@@ -847,7 +847,10 @@ class MetaBuildWrapper(object):
       else:
         cmdline.append('../../testing/test_env.py')
 
-      if test_type != 'raw':
+      if test_type == 'raw':
+        cmdline.append('../../tools_webrtc/flags_compatibility.py')
+        extra_files.append('../../tools_webrtc/flags_compatibility.py')
+      else:
         extra_files += [
             '../../third_party/gtest-parallel/gtest-parallel',
             '../../third_party/gtest-parallel/gtest_parallel.py',
