@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16126504_e5118bc5",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-07-10T11:45:41Z",
+      "side": 0,
+      "message": "Remove SetLocalSSRC from first_time, then. No reason to set it twice.",
+      "range": {
+        "startLine": 242,
+        "startChar": 6,
+        "endLine": 242,
+        "endChar": 19
+      },
+      "revId": "0d90a1d039142821aa97333a760cf115e54efed4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
