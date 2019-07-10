@@ -894,6 +894,9 @@ class MetaBuildWrapper(object):
       ])
 
     cmdline += isolate_map[target].get('args', [])
+    if test_type == 'script':
+      timeout = isolate_map[target].get('timeout', 900)
+      cmdline += ['--timeout=%s' % timeout]
 
     return cmdline, extra_files
 

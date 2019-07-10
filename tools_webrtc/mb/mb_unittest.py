@@ -423,7 +423,7 @@ class UnitTest(unittest.TestCase):
         'base_unittests', 'base_unittests_script.py',
     ])
     self.assertEqual(command, [
-        '../../base/base_unittests_script.py',
+        '../../base/base_unittests_script.py', '--timeout=900'
     ])
 
   def test_gen_raw(self):
