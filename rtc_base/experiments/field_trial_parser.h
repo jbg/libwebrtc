@@ -228,6 +228,13 @@ class FieldTrialFlag : public FieldTrialParameterInterface {
   bool value_;
 };
 
+template <>
+absl::optional<bool> ParseTypedParameter<bool>(std::string str);
+template <>
+absl::optional<double> ParseTypedParameter<double>(std::string str);
+template <>
+absl::optional<std::string> ParseTypedParameter<std::string>(std::string str);
+
 // Accepts true, false, else parsed with sscanf %i, true if != 0.
 extern template class FieldTrialParameter<bool>;
 // Interpreted using sscanf %lf.
