@@ -1,0 +1,602 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc65cc8a_e3c6514c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "I would keep the title short and be more descriptive adding details.\nFor instance:\n\naudioproc_f: input AEC dump as string, output audio to vector\n\nThis CL adds the following options:\n- pass an input AEC dump as a string (currently, the tool can only accept a path to an AEC dump file)\n- write the processed capture samples to a given vector",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 110
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5745e47_01370791",
+        "filename": "api/test/audioproc_float.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "Why not adding the 2 new args here with default to nullptr? It won\u0027t break anything, not even any downstream projects.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b978680_df2e97fb",
+        "filename": "api/test/audioproc_float.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "Optionally pass |input_aecdump| to provide the content of an AEC dump file as a string; pass nullptr to use WAV or AEC dump files as input (defined via the command line arguments). Crashes if both a path to an input file and |input_aecdump| are defined.\nOptionally pass |processed_capture_samples| to write the samples processed on the capture side.",
+      "range": {
+        "startLine": 42,
+        "startChar": 26,
+        "endLine": 44,
+        "endChar": 22
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d7b4c3a_e2e6bbae",
+        "filename": "api/test/audioproc_float.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "input_aecdump",
+      "range": {
+        "startLine": 48,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbf54711_29765d33",
+        "filename": "api/test/audioproc_float.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "processed_capture_samples",
+      "range": {
+        "startLine": 49,
+        "startChar": 39,
+        "endLine": 49,
+        "endChar": 45
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fa87843_bdcaf5c9",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "buffer_array_writer_ \u003d absl::make_unique\u003cChannelBufferArrayWriter\u003e();\n\nnever use new",
+      "range": {
+        "startLine": 344,
+        "startChar": 4,
+        "endLine": 344,
+        "endChar": 63
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b6a97cb_7c0738ca",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 362,
+        "startChar": 4,
+        "endLine": 362,
+        "endChar": 71
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34eff10d_95ee676a",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "do we need both? this change only adds one output vector, which is that for the processed capture stream, so I\u0027d say you only need the 1st",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 73
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1630812_78c6ac19",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "else statement to check that the input AEC dump string is not empty",
+      "range": {
+        "startLine": 416,
+        "startChar": 2,
+        "endLine": 416,
+        "endChar": 3
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "972696dc_97f1cd26",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "Does the style guide recommend this?\nI\u0027ve never seen it and I would anyway discourage this, since a change in the .h file requires a change in the .cc (easy to forget).",
+      "range": {
+        "startLine": 558,
+        "startChar": 46,
+        "endLine": 558,
+        "endChar": 60
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fb20027_45ddbe84",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "you\u0027re making a copy; why not writing directly into the vector given by the caller?\nit requires a bit more initialization code, but then you avoid this unnecessary copy",
+      "range": {
+        "startLine": 586,
+        "startChar": 4,
+        "endLine": 586,
+        "endChar": 43
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af86777f_1ede84d2",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "- explain what the new args are in the docstring above since the context is that of a function (and not of an interface impl) hence the reader needs to read the doc string from audioproc_float.h to understand\n- adapt arg names according to the changes you\u0027ll make in audioproc_float.h\n- remove default values",
+      "range": {
+        "startLine": 25,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "848fe2ea_fe2a8439",
+        "filename": "modules/audio_processing/test/protobuf_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "use absl::make_unique (and also update line 51)",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3a2d993_98fe7419",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "I wonder if we can initialize output_vector_ by reserving the necessary space (which is known since we know the input size). That\u0027s more efficient.",
+      "range": {
+        "startLine": 71,
+        "startChar": 26,
+        "endLine": 71,
+        "endChar": 50
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8a5a4a9_60173280",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "Add a comment:\n// Account for sample rate changes throughout a simulation.",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 37
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce7d544b_ccde3f59",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "why do you need to work with 4096 bytes chunks?\n\nwhat you\u0027re doing in this function is:\n- getting an interleaved copy of the channel buffer\n- modifying it from [-1, 1] to the S16 range\n- extending output_ with the result of the last op\n\nif so, the impl can be simplified a lot:\n- no need to work with chunks of fixed size\n- no need to convert from float S16 to int_16\n- no need to convert again to float S16 (which happens when you write into output_vector_)",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 55
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4ca1b94_fd0c5abf",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "kChunkSize",
+      "range": {
+        "startLine": 83,
+        "startChar": 19,
+        "endLine": 83,
+        "endChar": 29
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f25e475f_0f9587ef",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "int16_t (not unsigned)",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 54
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ba114e0_11ad95a5",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "chunk",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 20
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae6c4414_56e484a2",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "chunk_size",
+      "range": {
+        "startLine": 86,
+        "startChar": 17,
+        "endLine": 86,
+        "endChar": 22
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15a57791_179501c3",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "I\u0027ve never benchmarked myself, but calling push_back in a for loop is more efficient",
+      "range": {
+        "startLine": 88,
+        "startChar": 19,
+        "endLine": 88,
+        "endChar": 25
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "219ed0e0_1ca66975",
+        "filename": "modules/audio_processing/test/test_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 10
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44f7ae02_77811576",
+        "filename": "modules/audio_processing/test/test_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "above this add:\nChannelBufferArrayWriter(const ChannelBufferArrayWriter\u0026) \u003d delete;\nChannelBufferArrayWriter\u0026 operator\u003d(const ChannelBufferArrayWriter\u0026) \u003d delete;\n\nthis will help detecting unwanted copies at compile time",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 30
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc929899_0ded9f3b",
+        "filename": "modules/audio_processing/test/test_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "const method",
+      "range": {
+        "startLine": 87,
+        "startChar": 21,
+        "endLine": 87,
+        "endChar": 38
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d269467_dfb263d7",
+        "filename": "modules/audio_processing/test/test_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "interleaved_buffer_",
+      "range": {
+        "startLine": 90,
+        "startChar": 21,
+        "endLine": 90,
+        "endChar": 33
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "129f4056_6a482e0e",
+        "filename": "modules/audio_processing/test/test_utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-11T09:24:29Z",
+      "side": 1,
+      "message": "output_",
+      "range": {
+        "startLine": 91,
+        "startChar": 21,
+        "endLine": 91,
+        "endChar": 35
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
