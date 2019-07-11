@@ -92,7 +92,7 @@ class TestMainImpl : public TestMain {
     if (rtc::LogMessage::GetLogToDebug() > rtc::LS_INFO)
       rtc::LogMessage::LogToDebug(rtc::LS_INFO);
 
-    if (rtc::FlagList::SetFlagsFromCommandLine(argc, argv, false)) {
+    if (rtc::FlagList::SetFlagsFromCommandLine(argc, argv, true)) {
       return 1;
     }
     if (FLAG_help) {
