@@ -22,6 +22,30 @@
       "revId": "7538c7975b85a7765f898eec8a66dac6c3a3d721",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3128c14f_f8d85fa7",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-07-11T13:20:08Z",
+      "side": 1,
+      "message": "I think so, the suspended state shouldn\u0027t be set unless we have been suspended, right?\nJust to be safe I\u0027ll add the check for this back.",
+      "parentUuid": "651f93e4_1579c942",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 35
+      },
+      "revId": "7538c7975b85a7765f898eec8a66dac6c3a3d721",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
