@@ -205,8 +205,8 @@ RTPSender::RTPSender(const RtpRtcp::Configuration& config)
           !IsDisabled("WebRTC-PayloadPadding-UseMostUsefulPacket",
                       config.field_trials)),
       pacer_legacy_packet_referencing_(
-          !IsDisabled("WebRTC-Pacer-LegacyPacketReferencing",
-                      config.field_trials)) {
+          IsEnabled("WebRTC-Pacer-LegacyPacketReferencing",
+                    config.field_trials)) {
   // This random initialization is not intended to be cryptographic strong.
   timestamp_offset_ = random_.Rand<uint32_t>();
   // Random start, 16 bits. Can't be 0.
@@ -298,7 +298,7 @@ RTPSender::RTPSender(
               .find("Disabled") != 0),
       pacer_legacy_packet_referencing_(
           field_trials.Lookup("WebRTC-Pacer-LegacyPacketReferencing")
-              .find("Disabled") != 0) {
+              .find("Enabled") == 0) {
   // This random initialization is not intended to be cryptographic strong.
   timestamp_offset_ = random_.Rand<uint32_t>();
   // Random start, 16 bits. Can't be 0.
