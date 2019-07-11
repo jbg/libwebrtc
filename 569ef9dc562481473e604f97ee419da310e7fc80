@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9632272_c7cdf81e",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-07-11T12:20:55Z",
+      "side": 1,
+      "message": "nit: For consistency it would be a bit nicer to choose either \"GetArrrayOutput\" or \"GetOutputArray\", and use it everywhere (see line below).",
+      "range": {
+        "startLine": 544,
+        "startChar": 45,
+        "endLine": 544,
+        "endChar": 59
+      },
+      "revId": "569ef9dc562481473e604f97ee419da310e7fc80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
