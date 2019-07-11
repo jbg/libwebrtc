@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "651f93e4_1579c942",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-07-11T13:11:17Z",
+      "side": 1,
+      "message": "Is this safe to set every time now?",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 35
+      },
+      "revId": "7538c7975b85a7765f898eec8a66dac6c3a3d721",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
