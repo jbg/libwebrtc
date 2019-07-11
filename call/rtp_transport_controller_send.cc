@@ -162,7 +162,7 @@ RtpTransportControllerSend::transport_feedback_observer() {
   return this;
 }
 
-RtpPacketPacer* RtpTransportControllerSend::packet_sender() {
+RtpPacketSender* RtpTransportControllerSend::packet_sender() {
   return &pacer_;
 }
 
@@ -391,6 +391,11 @@ void RtpTransportControllerSend::OnTransportOverheadChanged(
     rtp_video_sender->OnTransportOverheadChanged(
         transport_overhead_bytes_per_packet);
   }
+}
+
+void RtpTransportControllerSend::AcccountForAudioPacketsInPacedSender(
+    bool account_for_audio) {
+  pacer_.SetAccountForAudioPackets(account_for_audio);
 }
 
 void RtpTransportControllerSend::OnReceivedEstimatedBitrate(uint32_t bitrate) {
