@@ -9,6 +9,7 @@
  */
 
 #include "rtc_base/copy_on_write_buffer.h"
+#include "rtc_base/copy_on_write_buffer_view.h"
 
 #include <cstdint>
 
@@ -317,6 +318,60 @@ TEST(CopyOnWriteBufferTest, TestBacketWrite) {
   EXPECT_EQ(buf2.size(), 3u);
   EXPECT_EQ(buf2.capacity(), 10u);
   EXPECT_EQ(0, memcmp(buf2.cdata(), kTestData, 3));
+}
+
+TEST(CopyOnWriteBufferViewTest, TestCreateSlice) {
+  CopyOnWriteBuffer buf(kTestData, 10, 10);
+  CopyOnWriteBufferView slice = CopyOnWriteBufferView::GetSlice(buf, 3, 4);
+  EXPECT_EQ(slice.size(), 4u);
+  EXPECT_EQ(0, memcmp(buf.cdata() + 3, slice.cdata(), 4));
+}
+
+TEST(CopyOnWriteBufferViewTest, NoCopyDataOnSlice) {
+  CopyOnWriteBuffer buf(kTestData, 10, 10);
+  CopyOnWriteBufferView slice = CopyOnWriteBufferView::GetSlice(buf, 3, 4);
+  EXPECT_EQ(buf.cdata() + 3, slice.cdata());
+}
+
+TEST(CopyOnWriteBufferViewTest, WritingCopiesData) {
+  CopyOnWriteBuffer buf(kTestData, 10, 10);
+  CopyOnWriteBufferView slice = CopyOnWriteBufferView::GetSlice(buf, 3, 4);
+  slice[0] = 0xaa;
+  EXPECT_NE(buf.cdata() + 3, slice.cdata());
+  EXPECT_EQ(0, memcmp(buf.cdata(), kTestData, 10));
+}
+
+TEST(CopyOnWriteBufferViewTest, WritingToBufferNotAffectsSlice) {
+  CopyOnWriteBuffer buf(kTestData, 10, 10);
+  CopyOnWriteBufferView slice = CopyOnWriteBufferView::GetSlice(buf, 3, 4);
+  buf[0] = 0xaa;
+  EXPECT_NE(buf.cdata() + 3, slice.cdata());
+  EXPECT_EQ(0, memcmp(slice.cdata(), kTestData + 3, 4));
+}
+
+TEST(CopyOnWriteBufferViewTest, SliceOfASlice) {
+  CopyOnWriteBuffer buf(kTestData, 10, 10);
+  CopyOnWriteBufferView slice = CopyOnWriteBufferView::GetSlice(buf, 3, 7);
+  CopyOnWriteBufferView slice2 = slice.GetSlice(2, 3);
+  EXPECT_EQ(slice2.size(), 3u);
+  EXPECT_EQ(slice.cdata() + 2, slice2.cdata());
+  EXPECT_EQ(buf.cdata() + 5, slice2.cdata());
+}
+
+TEST(CopyOnWriteBufferViewTest, SlicesAreIndependent) {
+  CopyOnWriteBuffer buf(kTestData, 10, 10);
+  CopyOnWriteBufferView slice = CopyOnWriteBufferView::GetSlice(buf, 3, 7);
+  CopyOnWriteBufferView slice2 = CopyOnWriteBufferView::GetSlice(buf, 3, 7);
+  slice2[0] = 0xaa;
+  EXPECT_EQ(buf.cdata() + 3, slice.cdata());
+}
+
+TEST(CopyOnWriteBufferViewTest, FullSliceLikeBuffer) {
+  CopyOnWriteBuffer buf(kTestData, 10, 10);
+  CopyOnWriteBufferView slice = CopyOnWriteBufferView::GetSlice(buf, 0, 10);
+  EXPECT_EQ(buf.cdata(), slice.cdata());
+  CopyOnWriteBuffer buf2 = slice.ToBuffer();
+  EXPECT_EQ(buf.cdata(), buf2.cdata());
 }
 
 }  // namespace rtc

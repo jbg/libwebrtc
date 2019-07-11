@@ -33,7 +33,7 @@ namespace {
 constexpr size_t kTransportOverhead = 28;
 }  // namespace
 
-ForwardErrorCorrection::Packet::Packet() : data(0), ref_count_(0) {}
+ForwardErrorCorrection::Packet::Packet() : data(), ref_count_(0) {}
 ForwardErrorCorrection::Packet::~Packet() = default;
 
 int32_t ForwardErrorCorrection::Packet::AddRef() {
@@ -150,10 +150,9 @@ int ForwardErrorCorrection::EncodeFec(const PacketList& media_packets,
     return 0;
   }
   for (int i = 0; i < num_fec_packets; ++i) {
-    generated_fec_packets_[i].data.EnsureCapacity(IP_PACKET_SIZE);
+    generated_fec_packets_[i].data = rtc::CopyOnWriteBuffer(0, IP_PACKET_SIZE);
     memset(generated_fec_packets_[i].data.data(), 0, IP_PACKET_SIZE);
     // Use this as a marker for untouched packets.
-    generated_fec_packets_[i].data.SetSize(0);
     fec_packets->push_back(&generated_fec_packets_[i]);
   }
 
