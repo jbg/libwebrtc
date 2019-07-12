@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4671a613_94987a4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-07-12T08:20:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f20a0940_762d69fb",
+      "range": {
+        "startLine": 9,
+        "startChar": 50,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "a12d07c53f55adc4ef10253467308c919a343bc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7fbb0f91_4699bec7",
         "filename": "sdk/android/api/org/webrtc/VideoEncoderFactory.java",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "a12d07c53f55adc4ef10253467308c919a343bc4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f9bfdbb_39aad670",
+        "filename": "sdk/android/api/org/webrtc/VideoEncoderFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-07-12T08:20:10Z",
+      "side": 1,
+      "message": "I guess it\u0027s not a guarantee, its more of an explanation of how the function will be used. I added it because it is used the same way as getSupportedCodecs, which is documented the same way.",
+      "parentUuid": "7fbb0f91_4699bec7",
+      "range": {
+        "startLine": 28,
+        "startChar": 33,
+        "endLine": 28,
+        "endChar": 69
+      },
+      "revId": "a12d07c53f55adc4ef10253467308c919a343bc4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
