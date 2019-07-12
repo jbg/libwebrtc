@@ -16,6 +16,24 @@
       "revId": "6564366f756ab1f14f078f3923894a3103d99ffc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7a7e4f0_0b72249a",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-12T19:49:11Z",
+      "side": 1,
+      "message": "Thanks!\n\nFix CL: https://webrtc-review.googlesource.com/c/src/+/145404",
+      "parentUuid": "ed6b6117_4ca21239",
+      "revId": "6564366f756ab1f14f078f3923894a3103d99ffc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
