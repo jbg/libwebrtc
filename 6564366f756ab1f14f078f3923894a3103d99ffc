@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed6b6117_4ca21239",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 9522
+      },
+      "writtenOn": "2019-07-12T18:04:00Z",
+      "side": 1,
+      "message": "Typo in URL.",
+      "revId": "6564366f756ab1f14f078f3923894a3103d99ffc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
