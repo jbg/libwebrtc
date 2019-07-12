@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ed35fe9_9a099e54",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 7796
+      },
+      "writtenOn": "2019-07-12T11:11:48Z",
+      "side": 1,
+      "message": "Please file a separate bug for that flag.\nThis could be done separately (and probably much sooner)",
+      "range": {
+        "startLine": 604,
+        "startChar": 0,
+        "endLine": 604,
+        "endChar": 19
+      },
+      "revId": "ab3e669d7d3bbc75a2dfe1d105ff599b57a488d8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
