@@ -222,8 +222,9 @@ void AudioProcessingSimulator::ProcessStream(bool fixed_interface) {
   if (settings_.simulate_mic_gain) {
     fake_recording_device_.SetMicLevel(analog_mic_level_);
   }
-
-  if (buffer_writer_) {
+  if (buffer_array_writer_) {
+    buffer_array_writer_->Write(*out_buf_);
+  } else if (buffer_writer_) {
     buffer_writer_->Write(*out_buf_);
   }
 
@@ -337,6 +338,8 @@ void AudioProcessingSimulator::SetupOutput() {
         new WavWriter(filename, out_config_.sample_rate_hz(),
                       static_cast<size_t>(out_config_.num_channels())));
     buffer_writer_.reset(new ChannelBufferWavWriter(std::move(out_file)));
+  } else if (settings_.input_string.has_value()) {
+    buffer_array_writer_ = absl::make_unique<ChannelBufferArrayWriter>();
   }
 
   if (settings_.reverse_output_filename) {
@@ -532,6 +535,10 @@ void AudioProcessingSimulator::CreateAudioProcessor() {
     ap_->AttachAecDump(AecDumpFactory::Create(
         *settings_.aec_dump_output_filename, -1, &worker_queue_));
   }
+}
+
+std::vector<float> AudioProcessingSimulator::GetOutputVector() {
+  return buffer_array_writer_->GetOutputVector();
 }
 
 }  // namespace test

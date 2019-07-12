@@ -77,6 +77,22 @@ class ChannelBufferWavWriter final {
   RTC_DISALLOW_COPY_AND_ASSIGN(ChannelBufferWavWriter);
 };
 
+// Writes ChannelBuffers to a provided array
+class ChannelBufferArrayWriter final {
+ public:
+  ChannelBufferArrayWriter();
+  ChannelBufferArrayWriter(const ChannelBufferArrayWriter&) = delete;
+  ChannelBufferArrayWriter& operator=(const ChannelBufferArrayWriter&) = delete;
+  ~ChannelBufferArrayWriter();
+
+  void Write(const ChannelBuffer<float>& buffer);
+  std::vector<float> GetOutputVector() const;
+
+ private:
+  std::vector<float> interleaved_buffer_;
+  std::vector<float> output_;
+};
+
 void WriteIntData(const int16_t* data,
                   size_t length,
                   WavWriter* wav_file,
