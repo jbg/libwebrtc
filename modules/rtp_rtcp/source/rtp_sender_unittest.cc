@@ -1237,9 +1237,9 @@ TEST_P(RtpSenderTest, SendRedundantPayloads) {
     // will be called instead and this test makes no sense.
     return;
   }
-
   test::ScopedFieldTrials field_trials(
-      "WebRTC-PayloadPadding-UseMostUsefulPacket/Disabled/");
+      "WebRTC-PayloadPadding-UseMostUsefulPacket/Disabled/"
+      "WebRTC-Pacer-LegacyPacketReferencing/Enabled/");
   MockTransport transport;
   RtpRtcp::Configuration config;
   config.clock = &fake_clock_;
@@ -1340,7 +1340,8 @@ TEST_P(RtpSenderTest, SendRedundantPayloadsUsefulPadding) {
   }
 
   test::ScopedFieldTrials field_trials(
-      "WebRTC-PayloadPadding-UseMostUsefulPacket/Enabled/");
+      "WebRTC-PayloadPadding-UseMostUsefulPacket/Enabled/"
+      "WebRTC-Pacer-LegacyPacketReferencing/Enabled/");
   MockTransport transport;
   RtpRtcp::Configuration config;
   config.clock = &fake_clock_;
