@@ -1237,9 +1237,9 @@ TEST_P(RtpSenderTest, SendRedundantPayloads) {
     // will be called instead and this test makes no sense.
     return;
   }
-
   test::ScopedFieldTrials field_trials(
-      "WebRTC-PayloadPadding-UseMostUsefulPacket/Disabled/");
+      "WebRTC-PayloadPadding-UseMostUsefulPacket/Disabled/"
+      "WebRTC-Pacer-LegacyPacketReferencing/Enabled/");
   MockTransport transport;
   RtpRtcp::Configuration config;
   config.clock = &fake_clock_;
@@ -1340,7 +1340,8 @@ TEST_P(RtpSenderTest, SendRedundantPayloadsUsefulPadding) {
   }
 
   test::ScopedFieldTrials field_trials(
-      "WebRTC-PayloadPadding-UseMostUsefulPacket/Enabled/");
+      "WebRTC-PayloadPadding-UseMostUsefulPacket/Enabled/"
+      "WebRTC-Pacer-LegacyPacketReferencing/Enabled/");
   MockTransport transport;
   RtpRtcp::Configuration config;
   config.clock = &fake_clock_;
@@ -2552,6 +2553,11 @@ TEST_P(RtpSenderTest, GeneratePaddingResendsOldPacketsWithRtx) {
   // Min requested size in order to use RTX payload.
   const size_t kMinPaddingSize = 50;
 
+  // Register header extension needed for RTX padding.
+  ASSERT_EQ(0, rtp_sender_->RegisterRtpHeaderExtension(
+                   kRtpExtensionTransportSequenceNumber,
+                   kTransportSequenceNumberExtensionId));
+
   rtp_sender_->SetRtxStatus(kRtxRetransmitted | kRtxRedundantPayloads);
   rtp_sender_->SetRtxPayloadType(kRtxPayload, kPayload);
   rtp_sender_->SetStorePacketsStatus(true, 1);
@@ -2564,6 +2570,7 @@ TEST_P(RtpSenderTest, GeneratePaddingResendsOldPacketsWithRtx) {
   packet->set_packet_type(RtpPacketToSend::Type::kVideo);
 
   // Send a dummy video packet so it ends up in the packet history.
+  EXPECT_CALL(send_packet_observer_, OnSendPacket).Times(1);
   EXPECT_TRUE(rtp_sender_->TrySendPacket(packet.get(), PacedPacketInfo()));
 
   // Generated padding has large enough budget that the video packet should be
