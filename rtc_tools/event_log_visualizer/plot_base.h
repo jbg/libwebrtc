@@ -15,6 +15,8 @@
 #include <utility>
 #include <vector>
 
+#include "absl/types/optional.h"
+
 namespace webrtc {
 
 enum class LineStyle {
@@ -62,6 +64,7 @@ struct TimeSeries {
   LineStyle line_style = LineStyle::kLine;
   PointStyle point_style = PointStyle::kNone;
   std::vector<TimeSeriesPoint> points;
+  absl::optional<uint64_t> key;
 };
 
 struct Interval {
@@ -137,6 +140,9 @@ class Plot {
                          float bottom_margin = 0,
                          float top_margin = 0);
 
+  void SetYAxisCategoryLabels(
+      const std::vector<std::pair<int64_t, std::string>>& labels);
+
   // Sets the title of the plot.
   void SetTitle(const std::string& title);
 
@@ -162,6 +168,7 @@ class Plot {
   float yaxis_min_;
   float yaxis_max_;
   std::string yaxis_label_;
+  std::vector<std::pair<int64_t, std::string>> yaxis_category_labels_;
   std::string title_;
   std::string id_;
   std::vector<TimeSeries> series_list_;

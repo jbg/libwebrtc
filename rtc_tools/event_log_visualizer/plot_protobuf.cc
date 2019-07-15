@@ -49,6 +49,9 @@ void ProtobufPlot::ExportProtobuf(webrtc::analytics::Chart* chart) {
       data_set->set_highlight_points(true);
 
     data_set->set_label(series_list_[i].label);
+    if (series_list_[i].key.has_value()) {
+      data_set->set_key(series_list_[i].key.value());
+    }
   }
 
   chart->set_xaxis_min(xaxis_min_);
@@ -59,6 +62,10 @@ void ProtobufPlot::ExportProtobuf(webrtc::analytics::Chart* chart) {
   chart->set_yaxis_label(yaxis_label_);
   chart->set_title(title_);
   chart->set_id(id_);
+
+  for (const auto& kv : yaxis_category_labels_) {
+    chart->mutable_yaxis_category_labels()->insert({kv.first, kv.second});
+  }
 }
 
 ProtobufPlotCollection::ProtobufPlotCollection() {}
