@@ -567,6 +567,14 @@ void EventLogAnalyzer::CreateRtcpTypeGraph(PacketDirection direction,
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, 1, "RTCP type", kBottomMargin, kTopMargin);
   plot->SetTitle(GetDirectionAsString(direction) + " RTCP packets");
+  plot->SetYAxisCategoryLabels({{1, "TWCC"},
+                                {2, "RR"},
+                                {3, "SR"},
+                                {4, "XR"},
+                                {5, "NACK"},
+                                {6, "REMB"},
+                                {7, "FIR"},
+                                {8, "PLI"}});
 }
 
 template <typename IterableType>
@@ -2116,9 +2124,13 @@ void EventLogAnalyzer::CreateIceCandidatePairConfigGraph(Plot* plot) {
 
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
-  plot->SetSuggestedYAxis(0, 3, "Numeric Config Type", kBottomMargin,
-                          kTopMargin);
+  plot->SetSuggestedYAxis(0, 3, "Config Type", kBottomMargin, kTopMargin);
   plot->SetTitle("[IceEventLog] ICE candidate pair configs");
+  plot->SetYAxisCategoryLabels(
+      {{static_cast<int>(IceCandidatePairConfigType::kAdded), "Added"},
+       {static_cast<int>(IceCandidatePairConfigType::kUpdated), "Updated"},
+       {static_cast<int>(IceCandidatePairConfigType::kDestroyed), "Destroyed"},
+       {static_cast<int>(IceCandidatePairConfigType::kSelected), "Selected"}});
 }
 
 std::string EventLogAnalyzer::GetCandidatePairLogDescriptionFromId(
@@ -2142,6 +2154,8 @@ std::string EventLogAnalyzer::GetCandidatePairLogDescriptionFromId(
 }
 
 void EventLogAnalyzer::CreateIceConnectivityCheckGraph(Plot* plot) {
+  constexpr int kIceCandidatePairEventTypeOffset =
+      static_cast<int>(IceCandidatePairConfigType::kNumValues);
   std::map<uint32_t, TimeSeries> checks_by_cp_id;
   for (const auto& event : parsed_log_.ice_candidate_pair_events()) {
     if (checks_by_cp_id.find(event.candidate_pair_id) ==
@@ -2152,8 +2166,6 @@ void EventLogAnalyzer::CreateIceConnectivityCheckGraph(Plot* plot) {
           LineStyle::kNone, PointStyle::kHighlight);
     }
     float x = config_.GetCallTimeSec(event.log_time_us());
-    constexpr int kIceCandidatePairEventTypeOffset =
-        static_cast<int>(IceCandidatePairConfigType::kNumValues);
     float y = static_cast<float>(event.type) + kIceCandidatePairEventTypeOffset;
     checks_by_cp_id[event.candidate_pair_id].points.emplace_back(x, y);
   }
@@ -2165,9 +2177,23 @@ void EventLogAnalyzer::CreateIceConnectivityCheckGraph(Plot* plot) {
 
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
-  plot->SetSuggestedYAxis(0, 4, "Numeric Connectivity State", kBottomMargin,
+  plot->SetSuggestedYAxis(0, 4, "Connectivity State", kBottomMargin,
                           kTopMargin);
   plot->SetTitle("[IceEventLog] ICE connectivity checks");
+
+  plot->SetYAxisCategoryLabels(
+      {{static_cast<int>(IceCandidatePairEventType::kCheckSent) +
+            kIceCandidatePairEventTypeOffset,
+        "CheckSent"},
+       {static_cast<int>(IceCandidatePairEventType::kCheckReceived) +
+            kIceCandidatePairEventTypeOffset,
+        "CheckReceived"},
+       {static_cast<int>(IceCandidatePairEventType::kCheckResponseSent) +
+            kIceCandidatePairEventTypeOffset,
+        "CheckResponseSent"},
+       {static_cast<int>(IceCandidatePairEventType::kCheckResponseReceived) +
+            kIceCandidatePairEventTypeOffset,
+        "CheckResponseReceived"}});
 }
 
 void EventLogAnalyzer::CreateDtlsTransportStateGraph(Plot* plot) {
@@ -2182,8 +2208,14 @@ void EventLogAnalyzer::CreateDtlsTransportStateGraph(Plot* plot) {
   plot->SetXAxis(config_.CallBeginTimeSec(), config_.CallEndTimeSec(),
                  "Time (s)", kLeftMargin, kRightMargin);
   plot->SetSuggestedYAxis(0, static_cast<float>(DtlsTransportState::kNumValues),
-                          "Numeric Transport State", kBottomMargin, kTopMargin);
+                          "Transport State", kBottomMargin, kTopMargin);
   plot->SetTitle("DTLS Transport State");
+  plot->SetYAxisCategoryLabels(
+      {{static_cast<int>(DtlsTransportState::kNew), "New"},
+       {static_cast<int>(DtlsTransportState::kConnecting), "Connecting"},
+       {static_cast<int>(DtlsTransportState::kConnected), "Connected"},
+       {static_cast<int>(DtlsTransportState::kClosed), "Closed"},
+       {static_cast<int>(DtlsTransportState::kFailed), "Failed"}});
 }
 
 void EventLogAnalyzer::CreateDtlsWritableStateGraph(Plot* plot) {
