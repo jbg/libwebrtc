@@ -66,6 +66,11 @@ void Plot::SetSuggestedYAxis(float min_value,
   SetYAxis(min_value, max_value, label, bottom_margin, top_margin);
 }
 
+void Plot::SetYAxisCategoryLabels(
+    const std::vector<std::pair<int64_t, std::string>>& labels) {
+  yaxis_category_labels_ = labels;
+}
+
 void Plot::SetTitle(const std::string& title) {
   title_ = title;
 }

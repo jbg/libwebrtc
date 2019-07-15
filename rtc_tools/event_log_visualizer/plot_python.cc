@@ -10,6 +10,8 @@
 
 #include "rtc_tools/event_log_visualizer/plot_python.h"
 
+#include <inttypes.h>
+
 #include <stdio.h>
 #include <memory>
 #include <string>
@@ -149,6 +151,17 @@ void PythonPlot::Draw() {
   printf("plt.xlabel(\'%s\')\n", xaxis_label_.c_str());
   printf("plt.ylabel(\'%s\')\n", yaxis_label_.c_str());
   printf("plt.title(\'%s\')\n", title_.c_str());
+  printf("fig = plt.gcf()\n");
+  printf("fig.canvas.set_window_title(\'%s\')\n", id_.c_str());
+  if (!yaxis_category_labels_.empty()) {
+    printf("yaxis_category_labels = [");
+    for (const auto& kv : yaxis_category_labels_) {
+      printf("(%" PRId64 ",\"%s\"),", kv.first, kv.second.c_str());
+    }
+    printf("]\n");
+    printf("yaxis_category_labels = list(zip(*yaxis_category_labels))\n");
+    printf("plt.yticks(*yaxis_category_labels)\n");
+  }
   if (!series_list_.empty() || !interval_list_.empty()) {
     printf("handles, labels = plt.gca().get_legend_handles_labels()\n");
     printf("for lp in legend_patches:\n");

@@ -11,6 +11,7 @@ message DataSet {
   string label = 3;
   ChartStyle.Type style = 4;
   bool highlight_points = 5;
+  uint64 key = 6;
 }
 
 message Chart {
@@ -23,6 +24,7 @@ message Chart {
   string yaxis_label = 7;
   string title = 8;
   string id = 9;
+  map<int64, string> yaxis_category_labels = 10;
 }
 
 message ChartCollection {
