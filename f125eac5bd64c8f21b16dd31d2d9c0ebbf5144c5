@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "111c41bd_a03aefb9",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-15T16:48:39Z",
+      "side": 1,
+      "message": "\"key\" is very short and generic, could you come up with something longer? If nothing else, a longer more unique name would be easier to search for. I think a comment is warranted as well (basically the one in the CL description.)",
+      "range": {
+        "startLine": 67,
+        "startChar": 27,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61fd11d9_1456f7cb",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-15T16:48:39Z",
+      "side": 1,
+      "message": "Will the value be shown to the user? Maybe it should be a string to be a bit more future proof?",
+      "range": {
+        "startLine": 67,
+        "startChar": 17,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea468a68_15a94dd6",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-15T16:48:39Z",
+      "side": 1,
+      "message": "Was this supposed to be part of this change, looks like it belongs with the other CL?",
+      "range": {
+        "startLine": 143,
+        "startChar": 1,
+        "endLine": 144,
+        "endChar": 66
+      },
+      "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
