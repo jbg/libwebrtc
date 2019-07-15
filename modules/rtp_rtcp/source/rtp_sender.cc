@@ -205,8 +205,8 @@ RTPSender::RTPSender(const RtpRtcp::Configuration& config)
           !IsDisabled("WebRTC-PayloadPadding-UseMostUsefulPacket",
                       config.field_trials)),
       pacer_legacy_packet_referencing_(
-          !IsDisabled("WebRTC-Pacer-LegacyPacketReferencing",
-                      config.field_trials)) {
+          IsEnabled("WebRTC-Pacer-LegacyPacketReferencing",
+                    config.field_trials)) {
   // This random initialization is not intended to be cryptographic strong.
   timestamp_offset_ = random_.Rand<uint32_t>();
   // Random start, 16 bits. Can't be 0.
@@ -298,7 +298,7 @@ RTPSender::RTPSender(
               .find("Disabled") != 0),
       pacer_legacy_packet_referencing_(
           field_trials.Lookup("WebRTC-Pacer-LegacyPacketReferencing")
-              .find("Disabled") != 0) {
+              .find("Enabled") == 0) {
   // This random initialization is not intended to be cryptographic strong.
   timestamp_offset_ = random_.Rand<uint32_t>();
   // Random start, 16 bits. Can't be 0.
@@ -999,14 +999,10 @@ std::vector<std::unique_ptr<RtpPacketToSend>> RTPSender::GeneratePadding(
   // them and puts them in the pacer queue. Since this should incur
   // low overhead, keep the lock for the scope of the method in order
   // to make the code more readable.
-  rtc::CritScope lock(&send_critsect_);
-  if (!sending_media_) {
-    return {};
-  }
 
   std::vector<std::unique_ptr<RtpPacketToSend>> padding_packets;
   size_t bytes_left = target_size_bytes;
-  if ((rtx_ & kRtxRedundantPayloads) != 0) {
+  if (SupportsRtxPayloadPadding()) {
     while (bytes_left >= kMinPayloadPaddingBytes) {
       std::unique_ptr<RtpPacketToSend> packet =
           packet_history_.GetPayloadPaddingPacket(
@@ -1022,6 +1018,11 @@ std::vector<std::unique_ptr<RtpPacketToSend>> RTPSender::GeneratePadding(
       packet->set_packet_type(RtpPacketToSend::Type::kPadding);
       padding_packets.push_back(std::move(packet));
     }
+  }
+
+  rtc::CritScope lock(&send_critsect_);
+  if (!sending_media_) {
+    return {};
   }
 
   size_t padding_bytes_in_packet;

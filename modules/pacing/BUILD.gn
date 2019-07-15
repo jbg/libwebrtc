@@ -81,6 +81,7 @@ if (rtc_include_tests) {
       "../../rtc_base/experiments:alr_experiment",
       "../../system_wrappers",
       "../../system_wrappers:field_trial",
+      "../../system_wrappers:field_trial",
       "../../test:field_trial",
       "../../test:test_support",
       "../rtp_rtcp",
