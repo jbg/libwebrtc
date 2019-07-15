@@ -126,7 +126,7 @@
   },
   "webrtc_perf_tests": {
     "label": "//:webrtc_perf_tests",
-    "timeout": 3600,  # 1 hour
+    "timeout": 7200,  # 2 hours
     "type": "raw",
   },
 }
