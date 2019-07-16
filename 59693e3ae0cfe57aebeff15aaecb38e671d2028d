@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "29b405c8_a7952029",
+        "filename": "call/rtp_transport_controller_send_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-07-16T10:37:30Z",
+      "side": 1,
+      "message": "Agreed. This not only clutters the interfaces, it complicated both the paced sender and the pacer queue implementations.\n\n+crodbro do you know the status? Is there a bug we can link to?",
+      "parentUuid": "6d8016c2_13c0b711",
+      "range": {
+        "startLine": 163,
+        "startChar": 15,
+        "endLine": 163,
+        "endChar": 51
+      },
+      "revId": "59693e3ae0cfe57aebeff15aaecb38e671d2028d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b020357_aefce6ef",
         "filename": "modules/rtp_rtcp/include/rtp_packet_sender.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "59693e3ae0cfe57aebeff15aaecb38e671d2028d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a353d5f_4f34203b",
+        "filename": "modules/rtp_rtcp/include/rtp_packet_sender.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-07-16T10:37:30Z",
+      "side": 1,
+      "message": "It\u0027s on line 21 above, but I can move the comments around.",
+      "parentUuid": "9b020357_aefce6ef",
+      "range": {
+        "startLine": 36,
+        "startChar": 15,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "59693e3ae0cfe57aebeff15aaecb38e671d2028d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
