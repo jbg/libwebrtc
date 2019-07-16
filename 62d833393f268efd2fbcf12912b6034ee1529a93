@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c586af3_bc36a0dc",
+        "filename": "modules/pacing/paced_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-16T08:53:15Z",
+      "side": 1,
+      "message": "If we expect different behaviors depending on the trial. I\u0027d prefer that we make separate tests for with and without. Better to have some code duplication than to require the reader to figure those details out via levels of indirection.",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 3
+      },
+      "revId": "62d833393f268efd2fbcf12912b6034ee1529a93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e83b774_33f63b44",
+        "filename": "modules/pacing/paced_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-16T08:53:15Z",
+      "side": 1,
+      "message": "Could the trial string be used directly here instead? That would make it more clear exactly what the difference is.",
+      "range": {
+        "startLine": 496,
+        "startChar": 43,
+        "endLine": 497,
+        "endChar": 65
+      },
+      "revId": "62d833393f268efd2fbcf12912b6034ee1529a93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
