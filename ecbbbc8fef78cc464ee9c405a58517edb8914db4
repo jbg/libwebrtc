@@ -22,6 +22,30 @@
       "revId": "ecbbbc8fef78cc464ee9c405a58517edb8914db4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adddebb8_4242cab9",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-07-16T10:24:45Z",
+      "side": 1,
+      "message": "The same variable is used on the current code path where TransportSequenceNumberAllocator interface is called, so the increment happens in AllocateSequenceNumber().\nI would rather not check the field trial and have different initializations.\n\nOnce we remove the old code path it will be trivial to initialize to 1 instead. I\u0027ll save that change till then.",
+      "parentUuid": "c5941f9b_df0b2e79",
+      "range": {
+        "startLine": 153,
+        "startChar": 50,
+        "endLine": 153,
+        "endChar": 66
+      },
+      "revId": "ecbbbc8fef78cc464ee9c405a58517edb8914db4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
