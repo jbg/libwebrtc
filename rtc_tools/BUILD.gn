@@ -34,7 +34,7 @@ group("rtc_tools") {
     deps += [ ":tools_unittests" ]
     if (rtc_enable_protobuf) {
       if (!build_with_chromium) {
-        deps += [ ":event_log_visualizer" ]
+        deps += [ ":rtc_event_log_visualizer" ]
       }
       deps += [
         ":rtp_analyzer",
@@ -337,7 +337,7 @@ if (!build_with_chromium) {
 
 if (rtc_include_tests) {
   if (rtc_enable_protobuf && !build_with_chromium) {
-    rtc_executable("event_log_visualizer") {
+    rtc_executable("rtc_event_log_visualizer") {
       testonly = true
       sources = [
         "event_log_visualizer/main.cc",
