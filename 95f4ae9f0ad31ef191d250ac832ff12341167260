@@ -566,6 +566,30 @@
     },
     {
       "key": {
+        "uuid": "6abc610b_6e1943a9",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-07-16T15:36:07Z",
+      "side": 1,
+      "message": "Looks like the default values are still there. It makes sense to remove them here, since this is not a function that is intended to be used externally.",
+      "parentUuid": "25cb74ac_162693f1",
+      "range": {
+        "startLine": 25,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "848fe2ea_fe2a8439",
         "filename": "modules/audio_processing/test/protobuf_utils.cc",
         "patchSetId": 4
