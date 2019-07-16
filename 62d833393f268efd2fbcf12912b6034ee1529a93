@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "980c7fb9_f4502c75",
+        "filename": "modules/pacing/paced_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-07-16T10:29:16Z",
+      "side": 1,
+      "message": "There is only a subtle difference in that we now put the padding packets into the queue and send them using them same code path as all other packets. I don\u0027t think it\u0027s worth duplicating entire test cases just for this aspect.",
+      "parentUuid": "0c586af3_bc36a0dc",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 3
+      },
+      "revId": "62d833393f268efd2fbcf12912b6034ee1529a93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e83b774_33f63b44",
         "filename": "modules/pacing/paced_sender_unittest.cc",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-07-16T08:53:15Z",
       "side": 1,
       "message": "Could the trial string be used directly here instead? That would make it more clear exactly what the difference is.",
+      "range": {
+        "startLine": 496,
+        "startChar": 43,
+        "endLine": 497,
+        "endChar": 65
+      },
+      "revId": "62d833393f268efd2fbcf12912b6034ee1529a93",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d59ac2ca_8a239d49",
+        "filename": "modules/pacing/paced_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-07-16T10:29:16Z",
+      "side": 1,
+      "message": "The idea is that soon (fingers crossed) I can remove the old code path and then remove these values. Due to them being an enum finding all usages en eliminating them will be trivial, as opposed to searching for strings that could be part of concatenated field trial params.",
+      "parentUuid": "8e83b774_33f63b44",
       "range": {
         "startLine": 496,
         "startChar": 43,
