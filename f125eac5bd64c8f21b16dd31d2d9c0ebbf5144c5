@@ -68,6 +68,29 @@
       "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8b5b5c5_8cbfae7e",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-16T12:21:25Z",
+      "side": 1,
+      "message": "tick",
+      "range": {
+        "startLine": 171,
+        "startChar": 53,
+        "endLine": 171,
+        "endChar": 61
+      },
+      "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
