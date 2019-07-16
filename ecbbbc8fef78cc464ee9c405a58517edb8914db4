@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5941f9b_df0b2e79",
+        "filename": "modules/pacing/packet_router.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-16T08:47:52Z",
+      "side": 1,
+      "message": "Maybe change the initialization to 1 instead? Makes it clearer if one reads that first (it\u0027s somewhat uncommon to initialize a value on the first value -1)",
+      "range": {
+        "startLine": 153,
+        "startChar": 50,
+        "endLine": 153,
+        "endChar": 66
+      },
+      "revId": "ecbbbc8fef78cc464ee9c405a58517edb8914db4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
