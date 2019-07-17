@@ -36,11 +36,13 @@ namespace webrtc {
 //    std::unique_ptr<webrtc_win::ScopedCOMInitializer> com_initializer_;
 //
 rtc::scoped_refptr<AudioDeviceModule> CreateWindowsCoreAudioAudioDeviceModule(
-    TaskQueueFactory* task_queue_factory);
+    TaskQueueFactory* task_queue_factory,
+    bool automatic_restart = true);
 
 rtc::scoped_refptr<AudioDeviceModuleForTest>
 CreateWindowsCoreAudioAudioDeviceModuleForTest(
-    TaskQueueFactory* task_queue_factory);
+    TaskQueueFactory* task_queue_factory,
+    bool automatic_restart = true);
 
 }  // namespace webrtc
 
