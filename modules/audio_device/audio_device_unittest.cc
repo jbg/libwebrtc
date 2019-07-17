@@ -1086,8 +1086,7 @@ TEST_P(AudioDeviceTest, RunPlayoutAndRecordingInFullDuplex) {
 // Runs audio in full duplex until user hits Enter. Intended as a manual test
 // to ensure that the audio quality is good and that real device switches works
 // as intended.
-TEST_P(AudioDeviceTest,
-       DISABLED_RunPlayoutAndRecordingInFullDuplexAndWaitForEnterKey) {
+TEST_P(AudioDeviceTest, RunPlayoutAndRecordingInFullDuplexAndWaitForEnterKey) {
   SKIP_TEST_IF_NOT(requirements_satisfied());
   if (audio_layer() != AudioDeviceModule::kWindowsCoreAudio2) {
     return;
@@ -1152,8 +1151,9 @@ TEST_P(AudioDeviceTest, DISABLED_MeasureLoopbackLatency) {
 INSTANTIATE_TEST_SUITE_P(
     AudioLayerWin,
     AudioDeviceTest,
-    ::testing::Values(AudioDeviceModule::kPlatformDefaultAudio,
-                      AudioDeviceModule::kWindowsCoreAudio2));
+    ::testing::Values(AudioDeviceModule::kWindowsCoreAudio2));
+// ::testing::Values(AudioDeviceModule::kPlatformDefaultAudio,
+//                  AudioDeviceModule::kWindowsCoreAudio2));
 #else
 // For all platforms but Windows, only test the default audio layer.
 INSTANTIATE_TEST_SUITE_P(

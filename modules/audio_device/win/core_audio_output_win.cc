@@ -23,10 +23,12 @@ using Microsoft::WRL::ComPtr;
 namespace webrtc {
 namespace webrtc_win {
 
-CoreAudioOutput::CoreAudioOutput()
-    : CoreAudioBase(CoreAudioBase::Direction::kOutput,
-                    [this](uint64_t freq) { return OnDataCallback(freq); },
-                    [this](ErrorType err) { return OnErrorCallback(err); }) {
+CoreAudioOutput::CoreAudioOutput(bool automatic_restart)
+    : CoreAudioBase(
+          CoreAudioBase::Direction::kOutput,
+          automatic_restart,
+          [this](uint64_t freq) { return OnDataCallback(freq); },
+          [this](ErrorType err) { return OnErrorCallback(err); }) {
   RTC_DLOG(INFO) << __FUNCTION__;
   RTC_DCHECK_RUN_ON(&thread_checker_);
   thread_checker_audio_.Detach();
@@ -381,6 +383,7 @@ int CoreAudioOutput::EstimateOutputLatencyMillis(uint64_t device_frequency) {
 bool CoreAudioOutput::HandleStreamDisconnected() {
   RTC_DLOG(INFO) << "<<<--- " << __FUNCTION__;
   RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+  RTC_DCHECK(automatic_restart());
 
   if (StopPlayout() != 0) {
     return false;

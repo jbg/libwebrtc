@@ -26,10 +26,12 @@ enum AudioDeviceMessageType : uint32_t {
   kMessageInputStreamDisconnected,
 };
 
-CoreAudioInput::CoreAudioInput()
-    : CoreAudioBase(CoreAudioBase::Direction::kInput,
-                    [this](uint64_t freq) { return OnDataCallback(freq); },
-                    [this](ErrorType err) { return OnErrorCallback(err); }) {
+CoreAudioInput::CoreAudioInput(bool automatic_restart)
+    : CoreAudioBase(
+          CoreAudioBase::Direction::kInput,
+          automatic_restart,
+          [this](uint64_t freq) { return OnDataCallback(freq); },
+          [this](ErrorType err) { return OnErrorCallback(err); }) {
   RTC_DLOG(INFO) << __FUNCTION__;
   RTC_DCHECK_RUN_ON(&thread_checker_);
   thread_checker_audio_.Detach();
@@ -405,6 +407,7 @@ absl::optional<int> CoreAudioInput::EstimateLatencyMillis(
 bool CoreAudioInput::HandleStreamDisconnected() {
   RTC_DLOG(INFO) << "<<<--- " << __FUNCTION__;
   RTC_DCHECK_RUN_ON(&thread_checker_audio_);
+  RTC_DCHECK(automatic_restart());
 
   if (StopRecording() != 0) {
     return false;
