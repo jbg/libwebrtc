@@ -126,15 +126,18 @@ bool IsLowLatencySupported(IAudioClient3* client3,
 }  // namespace
 
 CoreAudioBase::CoreAudioBase(Direction direction,
+                             bool automatic_restart,
                              OnDataCallback data_callback,
                              OnErrorCallback error_callback)
     : format_(),
       direction_(direction),
+      automatic_restart_(automatic_restart),
       on_data_callback_(data_callback),
       on_error_callback_(error_callback),
       device_index_(kUndefined),
       is_restarting_(false) {
   RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction) << "]";
+  RTC_DLOG(INFO) << "Automatic restart: " << automatic_restart;
   RTC_DLOG(INFO) << "Windows version: " << rtc::rtc_win::GetVersion();
 
   // Create the event which the audio engine will signal each time a buffer
@@ -640,6 +643,9 @@ bool CoreAudioBase::IsVolumeControlAvailable(bool* available) const {
 bool CoreAudioBase::Restart() {
   RTC_DLOG(INFO) << __FUNCTION__ << "[" << DirectionToString(direction())
                  << "]";
+  if (!automatic_restart()) {
+    return false;
+  }
   is_restarting_ = true;
   SetEvent(restart_event_.Get());
   return true;
@@ -770,6 +776,20 @@ HRESULT CoreAudioBase::OnSessionDisconnected(
   RTC_DLOG(INFO) << "___" << __FUNCTION__ << "["
                  << DirectionToString(direction()) << "] reason: "
                  << SessionDisconnectReasonToString(disconnect_reason);
+  // Ignore changes in the audio session (don't try to restart) if the user
+  // has explicitly asked for this type of ADM during construction.
+  if (!automatic_restart()) {
+    RTC_DLOG(LS_WARNING) << "Automatic restart is disabled";
+    return S_OK;
+  }
+
+  if (IsRestarting()) {
+    RTC_DLOG(LS_WARNING) << "Ignoring since restart is already active";
+    return S_OK;
+  }
+
+  // By default, automatic restart is enabled and the restart event will be set
+  // below if the device was removed or the format was changed.
   if (disconnect_reason == DisconnectReasonDeviceRemoval ||
       disconnect_reason == DisconnectReasonFormatChanged) {
     is_restarting_ = true;
