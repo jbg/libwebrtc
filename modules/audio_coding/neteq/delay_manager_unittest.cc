@@ -850,4 +850,27 @@ TEST_F(DelayManagerTest, DecelerationTargetLevelOffset) {
   }
 }
 
+TEST_F(DelayManagerTest, ExtraDelay) {
+  {
+    // Default Behavior. Insert two packets so that a new target level is
+    // calculated.
+    SetPacketAudioLength(kFrameSizeMs);
+    InsertNextPacket();
+    IncreaseTime(kFrameSizeMs);
+    InsertNextPacket();
+    EXPECT_EQ(dm_->TargetLevel(), 1 << 8);
+  }
+  {
+    // Add 80 ms extra delay.
+    test::ScopedFieldTrials field_trial(
+        "WebRTC-Audio-NetEqExtraDelay/Enabled-80/");
+    RecreateDelayManager();
+    SetPacketAudioLength(kFrameSizeMs);
+    InsertNextPacket();
+    IncreaseTime(kFrameSizeMs);
+    InsertNextPacket();
+    EXPECT_EQ(dm_->TargetLevel(), 5 << 8);
+  }
+}
+
 }  // namespace webrtc
