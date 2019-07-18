@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c588ceb1_28bc874c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-18T20:35:24Z",
+      "side": 1,
+      "message": "Typo: \u0027recovered\u0027",
+      "range": {
+        "startLine": 47,
+        "startChar": 10,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "3fb1a6d6432dab1a6a96439685a0c929c342f881",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fe35440_a6525a10",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-18T20:35:24Z",
+      "side": 1,
+      "message": "Can\u0027t this also return false if the packet doesn\u0027t have a transport sequence number?  Is it guaranteed to have a transport sequence number here?",
+      "revId": "3fb1a6d6432dab1a6a96439685a0c929c342f881",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
