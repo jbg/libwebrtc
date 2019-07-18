@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "90ae98af_84508e73",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-07-18T20:41:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c588ceb1_28bc874c",
+      "range": {
+        "startLine": 47,
+        "startChar": 10,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "3fb1a6d6432dab1a6a96439685a0c929c342f881",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fe35440_a6525a10",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
         "patchSetId": 8
@@ -39,6 +63,24 @@
       "revId": "3fb1a6d6432dab1a6a96439685a0c929c342f881",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be31e2d5_ef8742d1",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 7565
+      },
+      "writtenOn": "2019-07-18T20:41:08Z",
+      "side": 1,
+      "message": "Not guaranteed, I think there are still field trials to disable transport sequence numbers in video. But if transport sequence number is present, removal should be successful.",
+      "parentUuid": "8fe35440_a6525a10",
+      "revId": "3fb1a6d6432dab1a6a96439685a0c929c342f881",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
