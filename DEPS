@@ -5,7 +5,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '59bca7b0c1012da12db2f57d705b4fc236de2944',
+  'chromium_revision': '89762a9e48dec17c6c07357c0cc7541200ecea37',
 }
 
 deps = {
@@ -14,7 +14,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@1cbedac9276d6893a8ca0f601c542d84aeffcd37',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@cd812a4233e4c6ec48299f923b5bfa8aedab8802',
+    'https://chromium.googlesource.com/chromium/src/build@37bcede6286e9eaa098bd6b33504eda83caf0f9f',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@7b7a5c0f25f11f3c5a1ed3935324c2c59fbc24a2',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -27,9 +27,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@252ecbe7710104fe86bc5a4b1e9c6e8d3d499daa',
+    'https://chromium.googlesource.com/chromium/src/testing@cca4167c09ab7069d269b2a1f929ac519e604cef',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@756f73886391fe7506d913adf608459be7c34fe5',
+    'https://chromium.googlesource.com/chromium/src/third_party@55586dfb5990b1e62c9a8e0191f3df73f43137a9',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -231,7 +231,7 @@ deps = {
   'src/third_party/yasm/source/patched-yasm':
     'https://chromium.googlesource.com/chromium/deps/yasm/patched-yasm.git@720b70524a4424b15fc57e82263568c8ba0496ad',
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@13f37b765c2be4f861f9c7c8ff319288d8b74a4f',
+    'https://chromium.googlesource.com/chromium/src/tools@80375cbbc7e0c53a9d921c4b58f9fcb0c4538173',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@96f125709acfd0b48fc1e5dae7d6ea42291726ac',
 
