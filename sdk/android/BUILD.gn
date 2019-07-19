@@ -520,7 +520,9 @@ if (is_android) {
       "//third_party/android_deps:com_android_support_support_annotations_java",
     ]
   }
+}
 
+if (current_os == "linux" || is_android) {
   ################################
   # JNI targets for Java modules #
   ################################
@@ -840,9 +842,7 @@ if (is_android) {
       ":libvpx_vp9_jni",
     ]
   }
-}
 
-if (current_os == "linux" || is_android) {
   ######################
   # Native API targets #
   ######################
@@ -879,9 +879,7 @@ if (current_os == "linux" || is_android) {
       "//third_party/abseil-cpp/absl/types:optional",
     ]
   }
-}
 
-if (is_android) {
   rtc_static_library("native_api_base") {
     visibility = [ "*" ]
     sources = [
@@ -1002,7 +1000,9 @@ if (is_android) {
       "//third_party/abseil-cpp/absl/memory",
     ]
   }
+}
 
+if (is_android) {
   ####################
   # Internal targets #
   ####################
@@ -1031,9 +1031,7 @@ if (current_os == "linux" || is_android) {
       "../../rtc_base:checks",
     ]
   }
-}
 
-if (is_android) {
   rtc_static_library("videoframe_jni") {
     sources = [
       "src/jni/video_frame.cc",
@@ -1070,7 +1068,9 @@ if (is_android) {
       "../../rtc_base",
     ]
   }
+}
 
+if (is_android) {
   rtc_source_set("audio_device_module_base") {
     visibility = [ "*" ]
 
