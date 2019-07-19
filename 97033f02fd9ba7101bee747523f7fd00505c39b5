@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22f1b6de_f24a2f10",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-19T09:11:31Z",
+      "side": 1,
+      "message": "Some examples:\n\n$ ./out/Debug/event_log_visualizer --list_plots\n(field_trial.cc:107): Setting field trial string:\n(analyzer.cc:462): No useful events in the log.\n(analyzer.cc:490): Found 0 (LOG_START, LOG_END) segments in log.\nList of registered plots (for use with the --plot flag):\n  incoming_packet_sizes\n  outgoing_packet_sizes\n  incoming_rtcp_types\n  outgoing_rtcp_types\n  incoming_packet_count\n  outgoing_packet_count\n  audio_playout\n\n\n$ ./out/Debug/event_log_visualizer\n(field_trial.cc:107): Setting field trial string:\n(analyzer.cc:462): No useful events in the log.\n(analyzer.cc:490): Found 0 (LOG_START, LOG_END) segments in log.\nA tool for visualizing WebRTC event logs.\nExample usage:\n./event_log_visualizer \u003clogfile\u003e | python\n\n$ ./out/Debug/event_log_visualizer --help\nevent_log_visualizer: A tool for visualizing WebRTC event logs.\nExample usage:\n./event_log_visualizer \u003clogfile\u003e | python\n\n\n  No modules matched: use -helpfull\n\nTry --helpfull to get a list of all flags.\n\n$ ./out/Debug/event_log_visualizer --helpfull\nevent_log_visualizer: A tool for visualizing WebRTC event logs.\nExample usage:\n./event_log_visualizer \u003clogfile\u003e | python\n\n\n  Flags from ../../rtc_tools/event_log_visualizer/main.cc:\n    -force_fieldtrials (Field trials control experimental feature code which can\n      be forced. E.g. running with\n      --force_fieldtrials\u003dWebRTC-FooFeature/Enabled/ will assign the group\n      Enabled to field trial WebRTC-FooFeature. Multiple trials are separated by\n      \"/\"); default: \"\";\n    -list_plots (List of registered plots (for use with the --plot flag));\n      default: false;\n    -normalize_time (Normalize the log timestamps so that the call starts at\n      time 0.); default: true;\n    -parse_unconfigured_header_extensions (Attempt to parse unconfigured header\n      extensions using the default WebRTC mapping. This can give very misleading\n      results if the application negotiates a different mapping.);\n      default: true;\n    -plot (A comma separated list of plot names. See below for valid options.);\n      default: \"default\";\n    -print_triage_alerts (Print triage alerts, i.e. a list of potential\n      problems.); default: false;\n    -protobuf_output (Output charts as protobuf instead of python code.);\n      default: false;\n    -shared_xaxis (Share x-axis between all plots so that zooming in one plot\n      updates all the others too. A downside is that certain operations like\n      panning become much slower.); default: false;\n    -show_alr_state (Show the state ALR state on the total bitrate graph);\n      default: false;\n    -show_detector_state (Show the state of the delay based BWE detector on the\n      total bitrate graph); default: false;\n    -wav_filename (Path to wav file used for simulation of jitter buffer);\n      default: \"\";\n\n\n  Flags from ../../third_party/abseil-cpp/absl/flags/parse.cc:\n    -flagfile (comma-separated list of files to load flags from); default: ;\n    -fromenv (comma-separated list of flags to set from the environment [use\n      \u0027export FLAGS_flag1\u003dvalue\u0027]); default: ;\n    -tryfromenv (comma-separated list of flags to try to set from the\n      environment if present); default: ;\n    -undefok (comma-separated list of flag names that it is okay to specify on\n      the command line even if the program does not define a flag with that\n      name); default: ;\n\n\n  Flags from ../../third_party/abseil-cpp/absl/flags/internal/usage.cc:\n    -help (show help on important flags for this binary [tip: all flags can have\n      two dashes]); default: false;\n    -helpfull (show help on all flags); default: false; currently: true;\n    -helpmatch (show help on modules whose name contains the specified substr);\n      default: \"\";\n    -helpon (show help on the modules named by this flag value); default: \"\";\n    -helppackage (show help on all modules in the main package); default: false;\n    -helpshort (show help on only the main module for this program);\n      default: false;\n    -only_check_args (exit after checking all flags); default: false;\n    -version (show version and build info and exit); default: false;",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
