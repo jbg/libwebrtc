@@ -46,6 +46,30 @@
       "revId": "3d67f221f67ded11398edec7f9dba5ab49b67b27",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f2c15d4_c9d73497",
+        "filename": "rtc_tools/frame_editing/frame_editing.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-19T09:46:15Z",
+      "side": 1,
+      "message": "Nice, I have updated the CL to remove it.",
+      "parentUuid": "0ae1ad49_cb9cd6b1",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "3d67f221f67ded11398edec7f9dba5ab49b67b27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
