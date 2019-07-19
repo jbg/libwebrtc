@@ -19,6 +19,8 @@ rtc_static_library("pacing") {
     "bitrate_prober.h",
     "paced_sender.cc",
     "paced_sender.h",
+    "paced_sender_base.cc",
+    "paced_sender_base.h",
     "packet_router.cc",
     "packet_router.h",
     "round_robin_packet_queue.cc",

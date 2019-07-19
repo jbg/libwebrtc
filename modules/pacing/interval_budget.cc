@@ -51,6 +51,13 @@ void IntervalBudget::UseBudget(size_t bytes) {
                               -max_bytes_in_budget_);
 }
 
+int64_t IntervalBudget::TimeMsUntilNonNegativeBudget() const {
+  if (bytes_remaining_ >= 0) {
+    return 0;
+  }
+  return (bytes_remaining_ * 8) / (target_rate_kbps_);
+}
+
 size_t IntervalBudget::bytes_remaining() const {
   return rtc::saturated_cast<size_t>(std::max<int64_t>(0, bytes_remaining_));
 }
