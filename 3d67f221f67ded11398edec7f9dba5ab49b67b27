@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "567933ed_24bd8b9f",
+        "filename": "rtc_tools/frame_editing/frame_editing.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-19T08:18:04Z",
+      "side": 1,
+      "message": "magjed: Is this accurate?",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "3d67f221f67ded11398edec7f9dba5ab49b67b27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
