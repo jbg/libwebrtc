@@ -22,6 +22,30 @@
       "revId": "38962e25fc37fb070ed3710619b55803f88e698e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b3351eb_b8b6ec30",
+        "filename": "modules/audio_coding/audio_network_adaptor/controller_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-07-19T13:01:27Z",
+      "side": 1,
+      "message": "You are right, I simply misread lower_bound documentation. Will just check first and last elements instead.",
+      "parentUuid": "dfcc2e48_1158edd7",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 78
+      },
+      "revId": "38962e25fc37fb070ed3710619b55803f88e698e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
