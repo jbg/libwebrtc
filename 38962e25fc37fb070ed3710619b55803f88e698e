@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfcc2e48_1158edd7",
+        "filename": "modules/audio_coding/audio_network_adaptor/controller_manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-07-19T11:54:22Z",
+      "side": 1,
+      "message": "What\u0027s the intended criterion here?\nMy interpretation of the code is that as long as not all frame_lengths are \u003c 40, it\u0027s in range, but that seems odd to me.",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 78
+      },
+      "revId": "38962e25fc37fb070ed3710619b55803f88e698e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
