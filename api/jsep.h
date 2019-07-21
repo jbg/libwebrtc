@@ -28,6 +28,7 @@
 
 #include "absl/types/optional.h"
 #include "api/rtc_error.h"
+#include "rtc_base/deprecation.h"
 #include "rtc_base/ref_count.h"
 #include "rtc_base/system/rtc_export.h"
 
@@ -221,8 +222,8 @@ class RTC_EXPORT CreateSessionDescriptionObserver
   // is deprecated; in order to let clients remove the old version, it has a
   // default implementation. If both versions are unimplemented, the
   // result will be a runtime error (stack overflow). This is intentional.
-  virtual void OnFailure(RTCError error);
-  virtual void OnFailure(const std::string& error);
+  virtual void OnFailure(RTCError error) = 0;
+  RTC_DEPRECATED virtual void OnFailure(const std::string& error);
 
  protected:
   ~CreateSessionDescriptionObserver() override = default;
@@ -233,9 +234,9 @@ class RTC_EXPORT SetSessionDescriptionObserver : public rtc::RefCountInterface {
  public:
   virtual void OnSuccess() = 0;
   // See description in CreateSessionDescriptionObserver for OnFailure.
-  virtual void OnFailure(RTCError error);
+  virtual void OnFailure(RTCError error) = 0;
 
-  virtual void OnFailure(const std::string& error);
+  RTC_DEPRECATED virtual void OnFailure(const std::string& error);
 
  protected:
   ~SetSessionDescriptionObserver() override = default;
