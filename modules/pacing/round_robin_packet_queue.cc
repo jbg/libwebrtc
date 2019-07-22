@@ -181,6 +181,23 @@ void RoundRobinPacketQueue::FinalizePop() {
   }
 }
 
+std::unique_ptr<RtpPacketToSend> RoundRobinPacketQueue::PopPacket(
+    rtc::FunctionView<bool(const QueuedPacket&)> criteria_function) {
+  RTC_CHECK(!pop_packet_ && !pop_stream_);
+
+  Stream* stream = GetHighestPriorityStream();
+  if (!criteria_function(stream->packet_queue.top())) {
+    return nullptr;
+  }
+
+  pop_stream_.emplace(stream);
+  pop_packet_.emplace(stream->packet_queue.top());
+  std::unique_ptr<RtpPacketToSend> packet = pop_packet_->ReleasePacket();
+  stream->packet_queue.pop();
+  FinalizePop();
+  return packet;
+}
+
 bool RoundRobinPacketQueue::Empty() const {
   RTC_CHECK((!stream_priorities_.empty() && size_packets_ > 0) ||
             (stream_priorities_.empty() && size_packets_ == 0));
