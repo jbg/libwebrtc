@@ -22,6 +22,76 @@
       "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca6b4df2_73dbf5ea",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-22T11:27:15Z",
+      "side": 1,
+      "message": "Do you know why --help doesn\u0027t print anything (or how to make main.cc the default module)?",
+      "parentUuid": "22f1b6de_f24a2f10",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a7f4902_44d065c8",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-22T11:27:15Z",
+      "side": 1,
+      "message": "It\u0027s not possible to get the program name from the command line?",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 29
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ca31f83_4e86fc40",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-22T11:27:15Z",
+      "side": 1,
+      "message": "Imo, it makes more sense to print this if --help is given, as it essentially is the documentation for the --plot flag.",
+      "range": {
+        "startLine": 528,
+        "startChar": 20,
+        "endLine": 528,
+        "endChar": 36
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
