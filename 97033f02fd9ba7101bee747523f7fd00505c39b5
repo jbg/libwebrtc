@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1795b330_e0f24073",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-22T19:09:02Z",
+      "side": 1,
+      "message": "I was actually thinking about this and that seemed to be weird actually.\n\nAfter a small investigation it seems there is some magic involved (see https://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/flags/usage_config.cc?l\u003d45-55\u0026rcl\u003d28b2e4980f947cb26fa9577cfdc8414f5ba016c6). In order for this to work (and for FLAGS_help to be accessible) we need to rename this from main.cc to event_log_visualizer_main.cc (or something else, if we land https://webrtc-review.googlesource.com/c/src/+/145820).\n\nLet me talk with Abseil but we can resolve this by ourselves by renaming the file. Is that ok with you?",
+      "parentUuid": "ca6b4df2_73dbf5ea",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a7f4902_44d065c8",
         "filename": "rtc_tools/event_log_visualizer/main.cc",
         "patchSetId": 1
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "553055f3_b1d4ffe7",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-22T19:09:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a7f4902_44d065c8",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 29
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ca31f83_4e86fc40",
         "filename": "rtc_tools/event_log_visualizer/main.cc",
         "patchSetId": 1
@@ -83,6 +131,30 @@
       "writtenOn": "2019-07-22T11:27:15Z",
       "side": 1,
       "message": "Imo, it makes more sense to print this if --help is given, as it essentially is the documentation for the --plot flag.",
+      "range": {
+        "startLine": 528,
+        "startChar": 20,
+        "endLine": 528,
+        "endChar": 36
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6918b422_fc947164",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-22T19:09:02Z",
+      "side": 1,
+      "message": "\"help\" is a reserved flag in Abseil Flags. In theory this is possible but since Abseil Flags doesn\u0027t recognize this main.cc as the main of the binary (see previous comment) we are hitting this path:\n\nhttps://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/flags/internal/usage.cc?l\u003d341\u0026rcl\u003d6eaa04678d753386f43c69a79d398da7dd675c0f --\u003e https://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/flags/parse.cc?l\u003d709\u0026rcl\u003d6eaa04678d753386f43c69a79d398da7dd675c0f\n\n\n \u003e ./out/Debug/event_log_visualizer --help\n event_log_visualizer: A tool for visualizing WebRTC event logs.\n Example usage:\n ./out/Debug/event_log_visualizer \u003clogfile\u003e | python\n\n\n   No modules matched: use -helpfull\n\n Try --helpfull to get a list of all flags.\n \u003e echo $?\n 1",
+      "parentUuid": "1ca31f83_4e86fc40",
       "range": {
         "startLine": 528,
         "startChar": 20,
