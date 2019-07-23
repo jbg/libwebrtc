@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "d0ed1124_1e917dea",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-23T14:40:13Z",
+      "side": 1,
+      "message": "No, it\u0027s based on https://tools.ietf.org/html/rfc3550#section-6.7\n\n\"The APP packet is intended for experimental use as new applications and new features are developed, without requiring packet type value registration.\"",
+      "parentUuid": "46366156_18e5f606",
+      "range": {
+        "startLine": 704,
+        "startChar": 0,
+        "endLine": 704,
+        "endChar": 66
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "333e7043_09c91a95",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 3
@@ -128,6 +152,30 @@
       "writtenOn": "2019-07-23T14:28:59Z",
       "side": 1,
       "message": "I see neither of REMB or Transport CC here, which makes me suspect we\u0027re not following the existing patterns?",
+      "range": {
+        "startLine": 3248,
+        "startChar": 0,
+        "endLine": 3248,
+        "endChar": 72
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be263ae3_a9708ef6",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3248,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-23T14:40:13Z",
+      "side": 1,
+      "message": "They are negotiated per media type, this is negotiated per peer connection rather than per media type since there\u0027s no connection to the media type itself.",
+      "parentUuid": "333e7043_09c91a95",
       "range": {
         "startLine": 3248,
         "startChar": 0,
