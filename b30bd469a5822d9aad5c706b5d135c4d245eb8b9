@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3076040_a0d9c058",
+        "filename": "audio/test/pc_low_bandwidth_audio_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2019-07-23T11:29:58Z",
+      "side": 1,
+      "message": "Why is this one 10% smaller than before?",
+      "range": {
+        "startLine": 39,
+        "startChar": 32,
+        "endLine": 39,
+        "endChar": 36
+      },
+      "revId": "b30bd469a5822d9aad5c706b5d135c4d245eb8b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
