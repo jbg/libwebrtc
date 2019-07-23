@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "api/transport/field_trial_based_config.h"
 #include "modules/rtp_rtcp/include/report_block_data.h"
 #include "modules/rtp_rtcp/include/rtcp_statistics.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
@@ -176,6 +177,10 @@ class RTCPReceiver {
                   PacketInformation* packet_information)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(rtcp_receiver_lock_);
 
+  void HandleApp(const rtcp::CommonHeader& rtcp_block,
+                 PacketInformation* packet_information)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(rtcp_receiver_lock_);
+
   void HandleBye(const rtcp::CommonHeader& rtcp_block)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(rtcp_receiver_lock_);
 
@@ -208,6 +213,7 @@ class RTCPReceiver {
       RTC_EXCLUSIVE_LOCKS_REQUIRED(rtcp_receiver_lock_);
 
   Clock* const clock_;
+  FieldTrialBasedConfig default_field_trials_;
   const bool receiver_only_;
   ModuleRtpRtcp* const rtp_rtcp_;
 
@@ -215,9 +221,11 @@ class RTCPReceiver {
   RtcpBandwidthObserver* const rtcp_bandwidth_observer_;
   RtcpIntraFrameObserver* const rtcp_intra_frame_observer_;
   RtcpLossNotificationObserver* const rtcp_loss_notification_observer_;
+  NetworkStateEstimateObserver* const network_state_estimate_observer_;
   TransportFeedbackObserver* const transport_feedback_observer_;
   VideoBitrateAllocationObserver* const bitrate_allocation_observer_;
   const int report_interval_ms_;
+  const bool handle_remote_estimates_;
 
   rtc::CriticalSection rtcp_receiver_lock_;
   uint32_t main_ssrc_ RTC_GUARDED_BY(rtcp_receiver_lock_);
