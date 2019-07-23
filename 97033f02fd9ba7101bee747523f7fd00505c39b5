@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "23d34417_b0aeb5f8",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-23T07:55:27Z",
+      "side": 1,
+      "message": "Fixed:\n\n $ ./out/Debug/event_log_visualizer --help\n event_log_visualizer: A tool for visualizing WebRTC event logs.\n Example usage:\n ./event_log_visualizer \u003clogfile\u003e | python\n\n\n   Flags from ../../rtc_tools/event_log_visualizer/main.cc:\n     -force_fieldtrials (Field trials control experimental feature code which can\n       be forced. E.g. running with\n       --force_fieldtrials\u003dWebRTC-FooFeature/Enabled/ will assign the group\n       Enabled to field trial WebRTC-FooFeature. Multiple trials are separated by\n       \"/\"); default: \"\";\n     -list_plots (List of registered plots (for use with the --plot flag));\n       default: false;\n     -normalize_time (Normalize the log timestamps so that the call starts at\n       time 0.); default: true;",
+      "parentUuid": "9b9bfa6b_01288bde",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a7f4902_44d065c8",
         "filename": "rtc_tools/event_log_visualizer/main.cc",
         "patchSetId": 1
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "\"help\" is a reserved flag in Abseil Flags. In theory this is possible but since Abseil Flags doesn\u0027t recognize this main.cc as the main of the binary (see previous comment) we are hitting this path:\n\nhttps://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/flags/internal/usage.cc?l\u003d341\u0026rcl\u003d6eaa04678d753386f43c69a79d398da7dd675c0f --\u003e https://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/flags/parse.cc?l\u003d709\u0026rcl\u003d6eaa04678d753386f43c69a79d398da7dd675c0f\n\n\n \u003e ./out/Debug/event_log_visualizer --help\n event_log_visualizer: A tool for visualizing WebRTC event logs.\n Example usage:\n ./out/Debug/event_log_visualizer \u003clogfile\u003e | python\n\n\n   No modules matched: use -helpfull\n\n Try --helpfull to get a list of all flags.\n \u003e echo $?\n 1",
       "parentUuid": "1ca31f83_4e86fc40",
+      "range": {
+        "startLine": 528,
+        "startChar": 20,
+        "endLine": 528,
+        "endChar": 36
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b36ccca3_b3c0ac61",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-23T07:55:27Z",
+      "side": 1,
+      "message": "Ok, even if I have fixed the --help problem above this is not possible because Abseil Flags calls std::exit after printing the help message.\n\nIs this a problem?",
+      "parentUuid": "6918b422_fc947164",
       "range": {
         "startLine": 528,
         "startChar": 20,
