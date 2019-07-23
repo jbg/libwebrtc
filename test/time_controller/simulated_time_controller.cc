@@ -19,6 +19,10 @@
 
 #include "absl/memory/memory.h"
 #include "absl/strings/string_view.h"
+#include "api/scoped_refptr.h"
+#include "rtc_base/event.h"
+#include "rtc_base/ref_counted_object.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 
 namespace webrtc {
 namespace {
@@ -286,7 +290,9 @@ Timestamp SimulatedSequenceRunner::GetNextTime(Module* module,
 }
 
 SimulatedTimeControllerImpl::SimulatedTimeControllerImpl(Timestamp start_time)
-    : thread_id_(rtc::CurrentThreadId()), current_time_(start_time) {}
+    : thread_id_(rtc::CurrentThreadId()),
+      current_time_(start_time),
+      event_timeout_queue_(CreateTaskQueue("EventTimeout", Priority::NORMAL)) {}
 
 SimulatedTimeControllerImpl::~SimulatedTimeControllerImpl() = default;
 
@@ -330,6 +336,76 @@ void SimulatedTimeControllerImpl::YieldExecution() {
     RunReadyRunners();
     yielded_.erase(inserted.first);
   }
+}
+
+class SimulatedEventImpl : public rtc::EventInterface {
+ public:
+  struct SimulatedEventImplPtr {
+    explicit SimulatedEventImplPtr(SimulatedEventImpl* ptr) : ptr(ptr) {}
+    SimulatedEventImpl* ptr;
+    rtc::CriticalSection lock_;
+  };
+  SimulatedEventImpl(TaskQueueBase* controller,
+                     bool manual_reset,
+                     bool initially_signaled)
+      : controller_(controller),
+        manual_reset_(manual_reset),
+        signaled_(initially_signaled),
+        native_(rtc::CreateNativeEventImpl(false, false)),
+        this_ptr_(new rtc::RefCountedObject<SimulatedEventImplPtr>(this)) {}
+  ~SimulatedEventImpl() override {
+    rtc::CritScope lock(&this_ptr_->lock_);
+    this_ptr_->ptr = nullptr;
+  }
+  void Reset() override {
+    rtc::CritScope lock(&lock_);
+    signaled_ = false;
+    native_->Reset();
+  }
+  void Set() override {
+    rtc::CritScope lock(&lock_);
+    signaled_ = true;
+    native_->Set();
+  }
+  bool Wait(int give_up_after_ms, int warn_after_ms) override {
+    {
+      rtc::CritScope lock(&lock_);
+      if (signaled_) {
+        if (!manual_reset_)
+          signaled_ = false;
+        return true;
+      }
+    }
+    auto this_ptr = this_ptr_;
+    controller_->PostDelayedTask(ToQueuedTask([this_ptr] {
+                                   rtc::CritScope lock(&this_ptr->lock_);
+                                   if (this_ptr->ptr)
+                                     this_ptr->ptr->native_->Set();
+                                 }),
+                                 give_up_after_ms);
+    native_->Wait(3000, 0);
+    rtc::CritScope lock(&lock_);
+    bool res = signaled_;
+    if (!manual_reset_)
+      signaled_ = false;
+    return res;
+  }
+  void Timeout() {}
+
+ private:
+  TaskQueueBase* const controller_;
+  rtc::CriticalSection lock_;
+  const bool manual_reset_;
+  bool signaled_ RTC_GUARDED_BY(lock_);
+  const std::unique_ptr<EventInterface> native_;
+  rtc::scoped_refptr<rtc::RefCountedObject<SimulatedEventImplPtr>> this_ptr_;
+};
+
+std::unique_ptr<rtc::EventInterface> SimulatedTimeControllerImpl::CreateEvent(
+    bool manual_reset,
+    bool initially_signaled) {
+  return absl::make_unique<SimulatedEventImpl>(
+      event_timeout_queue_.get(), manual_reset, initially_signaled);
 }
 
 void SimulatedTimeControllerImpl::RunReadyRunners() {

@@ -32,7 +32,6 @@
 #include "system_wrappers/include/field_trial.h"
 #include "test/pc/e2e/analyzer/audio/default_audio_quality_analyzer.h"
 #include "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h"
-#include "test/pc/e2e/stats_poller.h"
 #include "test/testsupport/file_utils.h"
 
 namespace webrtc {
@@ -51,7 +50,6 @@ constexpr int kFrameworkUsedThreads = 2;
 constexpr int kMaxVideoAnalyzerThreads = 8;
 
 constexpr TimeDelta kStatsUpdateInterval = TimeDelta::Seconds<1>();
-constexpr TimeDelta kStatsPollingStopTimeout = TimeDelta::Seconds<1>();
 
 constexpr TimeDelta kAliveMessageLogInterval = TimeDelta::Seconds<30>();
 
@@ -113,8 +111,22 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
     std::string test_case_name,
     std::unique_ptr<AudioQualityAnalyzerInterface> audio_quality_analyzer,
     std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer)
-    : clock_(Clock::GetRealTimeClock()),
-      task_queue_factory_(CreateDefaultTaskQueueFactory()),
+    : PeerConnectionE2EQualityTest(Clock::GetRealTimeClock(),
+                                   nullptr,
+                                   std::move(test_case_name),
+                                   std::move(audio_quality_analyzer),
+                                   std::move(video_quality_analyzer)) {}
+PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
+    Clock* clock,
+    TaskQueueFactory* task_queue_factory,
+    std::string test_case_name,
+    std::unique_ptr<AudioQualityAnalyzerInterface> audio_quality_analyzer,
+    std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer)
+    : clock_(clock),
+      default_task_queue_factory_(CreateDefaultTaskQueueFactory()),
+      task_queue_factory_(task_queue_factory
+                              ? task_queue_factory
+                              : default_task_queue_factory_.get()),
       test_case_name_(std::move(test_case_name)) {
   // Create default video quality analyzer. We will always create an analyzer,
   // even if there are no video streams, because it will be installed into video
@@ -223,6 +235,33 @@ void PeerConnectionE2EQualityTest::AddPeer(
 }
 
 void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
+  Setup(run_params);
+  // Setup call.
+  signaling_thread->Invoke<void>(
+      RTC_FROM_HERE,
+      rtc::Bind(&PeerConnectionE2EQualityTest::SetupCallOnSignalingThread, this,
+                run_params));
+  Start(run_params);
+  rtc::Event done;
+  bool is_quick_test_enabled = field_trial::IsEnabled("WebRTC-QuickPerfTest");
+  if (is_quick_test_enabled) {
+    done.Wait(kQuickTestModeRunDurationMs);
+  } else {
+    done.Wait(run_params.run_duration.ms());
+  }
+
+  Stop();
+
+  // Tear down the call.
+  signaling_thread->Invoke<void>(
+      RTC_FROM_HERE,
+      rtc::Bind(&PeerConnectionE2EQualityTest::TearDownCallOnSignalingThread,
+                this));
+  TearDown();
+}
+
+void PeerConnectionE2EQualityTest::Setup(
+    PeerConnectionE2EQualityTest::RunParams run_params) {
   RTC_CHECK_EQ(peer_configurations_.size(), 2)
       << "Only peer to peer calls are allowed, please add 2 peers";
 
@@ -248,12 +287,14 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
       << !bob_params->video_configs.empty()
       << "; audio=" << bob_params->audio_config.has_value();
 
-  const std::unique_ptr<rtc::Thread> signaling_thread = rtc::Thread::Create();
+  signaling_thread = rtc::Thread::Create();
   signaling_thread->SetName(kSignalThreadName, nullptr);
   signaling_thread->Start();
 
   // Create a |task_queue_|.
-  task_queue_ = absl::make_unique<TaskQueueForTest>("pc_e2e_quality_test");
+  task_queue_ =
+      absl::make_unique<TaskQueueForTest>(task_queue_factory_->CreateTaskQueue(
+          "pc_e2e_quality_test", TaskQueueFactory::Priority::NORMAL));
 
   // Create call participants: Alice and Bob.
   // Audio streams are intercepted in AudioDeviceModule, so if it is required to
@@ -322,7 +363,9 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
     bob_->pc()->StartRtcEventLog(std::move(bob_rtc_event_log),
                                  webrtc::RtcEventLog::kImmediateOutput);
   }
+}
 
+void PeerConnectionE2EQualityTest::Start(RunParams run_params) {
   // Setup alive logging. It is done to prevent test infra to think that test is
   // dead.
   RepeatingTaskHandle::DelayedStart(task_queue_->Get(),
@@ -330,12 +373,6 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
                                       std::printf("Test is still running...\n");
                                       return kAliveMessageLogInterval;
                                     });
-
-  // Setup call.
-  signaling_thread->Invoke<void>(
-      RTC_FROM_HERE,
-      rtc::Bind(&PeerConnectionE2EQualityTest::SetupCallOnSignalingThread, this,
-                run_params));
   {
     rtc::CritScope crit(&lock_);
     start_time_ = Now();
@@ -344,38 +381,28 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
       scheduled_activities_.pop();
     }
   }
+  stats_poller_.reset(
+      new StatsPoller({audio_quality_analyzer_.get(),
+                       video_quality_analyzer_injection_helper_.get()},
+                      {{"alice", alice_.get()}, {"bob", bob_.get()}}));
 
-  StatsPoller stats_poller({audio_quality_analyzer_.get(),
-                            video_quality_analyzer_injection_helper_.get()},
-                           {{"alice", alice_.get()}, {"bob", bob_.get()}});
-
-  task_queue_->PostTask([&stats_poller, this]() {
+  task_queue_->PostTask([this]() {
     RTC_DCHECK_RUN_ON(task_queue_.get());
     stats_polling_task_ =
-        RepeatingTaskHandle::Start(task_queue_->Get(), [this, &stats_poller]() {
+        RepeatingTaskHandle::Start(task_queue_->Get(), [this]() {
           RTC_DCHECK_RUN_ON(task_queue_.get());
-          stats_poller.PollStatsAndNotifyObservers();
+          stats_poller_->PollStatsAndNotifyObservers();
           return kStatsUpdateInterval;
         });
   });
+}
 
-  rtc::Event done;
-  bool is_quick_test_enabled = field_trial::IsEnabled("WebRTC-QuickPerfTest");
-  if (is_quick_test_enabled) {
-    done.Wait(kQuickTestModeRunDurationMs);
-  } else {
-    done.Wait(run_params.run_duration.ms());
-  }
-
-  rtc::Event stats_polling_stopped;
-  task_queue_->PostTask([&stats_polling_stopped, this]() {
+void PeerConnectionE2EQualityTest::Stop() {
+  task_queue_->SendTask([this]() {
     RTC_DCHECK_RUN_ON(task_queue_.get());
     stats_polling_task_.Stop();
-    stats_polling_stopped.Set();
   });
-  bool no_timeout = stats_polling_stopped.Wait(kStatsPollingStopTimeout.ms());
-  RTC_CHECK(no_timeout) << "Failed to stop Stats polling after "
-                        << kStatsPollingStopTimeout.seconds() << " seconds.";
+  stats_poller_.reset();
 
   // We need to detach AEC dumping from peers, because dump uses |task_queue_|
   // inside.
@@ -390,11 +417,9 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
       handle.Stop();
     }
   });
-  // Tear down the call.
-  signaling_thread->Invoke<void>(
-      RTC_FROM_HERE,
-      rtc::Bind(&PeerConnectionE2EQualityTest::TearDownCallOnSignalingThread,
-                this));
+}
+
+void PeerConnectionE2EQualityTest::TearDown() {
   Timestamp end_time = Now();
   {
     rtc::CritScope crit(&lock_);

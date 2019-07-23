@@ -13,7 +13,7 @@
 
 namespace rtc {
 namespace {
-ABSL_CONST_INIT thread_local YieldInterface* current_yield_policy = nullptr;
+static YieldInterface* current_yield_policy = nullptr;
 }
 
 ScopedYieldPolicy::ScopedYieldPolicy(YieldInterface* policy)
@@ -28,5 +28,19 @@ ScopedYieldPolicy::~ScopedYieldPolicy() {
 void ScopedYieldPolicy::YieldExecution() {
   if (current_yield_policy)
     current_yield_policy->YieldExecution();
+}
+
+bool ScopedYieldPolicy::Active() {
+  return current_yield_policy != nullptr;
+}
+
+std::unique_ptr<EventInterface> ScopedYieldPolicy::CreateEvent(
+    bool manual_reset,
+    bool initially_signaled) {
+  if (current_yield_policy)
+    return current_yield_policy->CreateEvent(manual_reset, initially_signaled);
+  else {
+    return nullptr;
+  }
 }
 }  // namespace rtc

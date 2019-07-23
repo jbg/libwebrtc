@@ -110,7 +110,8 @@ std::unique_ptr<SocketServer> SocketServer::CreateDefault() {
 #if defined(__native_client__)
   return std::unique_ptr<SocketServer>(new rtc::NullSocketServer);
 #else
-  return std::unique_ptr<SocketServer>(new rtc::PhysicalSocketServer);
+  // return std::unique_ptr<SocketServer>(new rtc::PhysicalSocketServer);
+  return std::unique_ptr<SocketServer>(new rtc::NullSocketServer);
 #endif
 }
 

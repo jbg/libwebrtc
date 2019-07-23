@@ -21,6 +21,9 @@ namespace {
 class MockYieldHandler : public YieldInterface {
  public:
   MOCK_METHOD0(YieldExecution, void());
+  MOCK_METHOD2(CreateEvent,
+               std::unique_ptr<EventInterface>(bool manual_reset,
+                                               bool initially_signaled));
 };
 }  // namespace
 TEST(YieldPolicyTest, HandlerReceivesYieldSignalWhenSet) {

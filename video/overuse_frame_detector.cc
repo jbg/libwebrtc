@@ -141,8 +141,10 @@ class SendProcessingUsage1 : public OveruseFrameDetector::ProcessingUsage {
         break;
       }
       if (timing.last_send_us != -1) {
-        encode_duration_us.emplace(
-            static_cast<int>(timing.last_send_us - timing.capture_us));
+        int delta = static_cast<int>(timing.last_send_us - timing.capture_us);
+        delta = 15000;
+        //        printf("delta: %i\n", delta);
+        encode_duration_us.emplace(delta);
 
         if (last_processed_capture_time_us_ != -1) {
           int64_t diff_us = timing.capture_us - last_processed_capture_time_us_;

@@ -16,6 +16,7 @@
 
 namespace webrtc {
 
+void OverrideDefaultTaskQueueFactory(TaskQueueFactory* factory);
 std::unique_ptr<TaskQueueFactory> CreateDefaultTaskQueueFactory();
 
 }  // namespace webrtc

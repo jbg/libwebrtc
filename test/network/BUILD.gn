@@ -12,6 +12,7 @@ rtc_source_set("emulated_network") {
   visibility = [
     "../../api:create_network_emulation_manager",
     ":*",
+    "*",
   ]
   if (rtc_include_tests) {
     visibility += [ "../scenario" ]
