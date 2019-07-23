@@ -37,6 +37,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/third_party/base64/base64.h"
 #include "rtc_base/unique_id_generator.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace {
 
@@ -648,6 +649,9 @@ static bool CreateContentOffer(
     offer->set_rtcp_reduced_size(true);
   }
   offer->set_rtp_header_extensions(rtp_extensions);
+  if (::webrtc::field_trial::IsDisabled("WebRTC-RTCP-RemoteEstimate")) {
+    offer->set_remote_estimate(false);
+  }
 
   AddSimulcastToMediaDescription(media_description_options, offer);
 
@@ -1157,6 +1161,11 @@ static bool CreateMediaContentAnswer(
   answer->set_rtcp_mux(session_options.rtcp_mux_enabled && offer->rtcp_mux());
   if (answer->type() == cricket::MEDIA_TYPE_VIDEO) {
     answer->set_rtcp_reduced_size(offer->rtcp_reduced_size());
+  }
+  if (::webrtc::field_trial::IsDisabled("WebRTC-RTCP-RemoteEstimate")) {
+    answer->set_remote_estimate(false);
+  } else {
+    answer->set_remote_estimate(offer->remote_estimate());
   }
 
   if (sdes_policy != SEC_DISABLED) {
