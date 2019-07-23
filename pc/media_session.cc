@@ -37,6 +37,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/third_party/base64/base64.h"
 #include "rtc_base/unique_id_generator.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace {
 
@@ -1158,6 +1159,8 @@ static bool CreateMediaContentAnswer(
   if (answer->type() == cricket::MEDIA_TYPE_VIDEO) {
     answer->set_rtcp_reduced_size(offer->rtcp_reduced_size());
   }
+
+  answer->set_remote_estimate(offer->remote_estimate());
 
   if (sdes_policy != SEC_DISABLED) {
     CryptoParams crypto;
