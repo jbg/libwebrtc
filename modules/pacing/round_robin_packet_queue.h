@@ -21,6 +21,7 @@
 #include <set>
 
 #include "absl/types/optional.h"
+#include "api/function_view.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
 #include "system_wrappers/include/clock.h"
@@ -106,6 +107,11 @@ class RoundRobinPacketQueue {
   QueuedPacket* BeginPop();
   void CancelPop();
   void FinalizePop();
+
+  // Get the next packet from the queue, but remove and return it only if the
+  // provided criteria function returns true for it.
+  std::unique_ptr<RtpPacketToSend> PopPacket(
+      rtc::FunctionView<bool(const QueuedPacket&)> criteria_function);
 
   bool Empty() const;
   size_t SizeInPackets() const;
