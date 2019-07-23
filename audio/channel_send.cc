@@ -681,7 +681,6 @@ ChannelSend::ChannelSend(Clock* clock,
 
   configuration.clock = clock;
   configuration.audio = true;
-  configuration.clock = Clock::GetRealTimeClock();
   configuration.outgoing_transport = rtp_transport;
 
   configuration.paced_sender = rtp_packet_pacer_proxy_.get();

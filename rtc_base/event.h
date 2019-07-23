@@ -11,15 +11,12 @@
 #ifndef RTC_BASE_EVENT_H_
 #define RTC_BASE_EVENT_H_
 
-#if defined(WEBRTC_WIN)
-#include <windows.h>
-#elif defined(WEBRTC_POSIX)
-#include <pthread.h>
-#else
-#error "Must define either WEBRTC_WIN or WEBRTC_POSIX."
-#endif
+#include "rtc_base/synchronization/yield_policy.h"
 
 namespace rtc {
+
+std::unique_ptr<EventInterface> CreateNativeEventImpl(bool manual_reset,
+                                                      bool initially_signaled);
 
 class Event {
  public:
@@ -29,7 +26,7 @@ class Event {
   Event(bool manual_reset, bool initially_signaled);
   Event(const Event&) = delete;
   Event& operator=(const Event&) = delete;
-  ~Event();
+  ~Event() = default;
 
   void Set();
   void Reset();
@@ -51,14 +48,7 @@ class Event {
   }
 
  private:
-#if defined(WEBRTC_WIN)
-  HANDLE event_handle_;
-#elif defined(WEBRTC_POSIX)
-  pthread_mutex_t event_mutex_;
-  pthread_cond_t event_cond_;
-  const bool is_manual_reset_;
-  bool event_status_;
-#endif
+  const std::unique_ptr<EventInterface> impl_;
 };
 
 // These classes are provided for compatibility with Chromium.

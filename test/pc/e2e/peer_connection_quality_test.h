@@ -33,6 +33,7 @@
 #include "test/pc/e2e/analyzer_helper.h"
 #include "test/pc/e2e/peer_connection_quality_test_params.h"
 #include "test/pc/e2e/sdp/sdp_changer.h"
+#include "test/pc/e2e/stats_poller.h"
 #include "test/pc/e2e/test_peer.h"
 #include "test/testsupport/video_frame_writer.h"
 
@@ -147,7 +148,6 @@ class PeerConfigurerImpl final
     return this;
   }
 
- protected:
   friend class PeerConnectionE2EQualityTest;
 
   std::unique_ptr<InjectableComponents> ReleaseComponents() {
@@ -176,6 +176,13 @@ class PeerConnectionE2EQualityTest
       std::unique_ptr<AudioQualityAnalyzerInterface> audio_quality_analyzer,
       std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer);
 
+  PeerConnectionE2EQualityTest(
+      Clock* clock,
+      TaskQueueFactory* task_queue_factory,
+      std::string test_case_name,
+      std::unique_ptr<AudioQualityAnalyzerInterface> audio_quality_analyzer,
+      std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer);
+
   ~PeerConnectionE2EQualityTest() override = default;
 
   void ExecuteAt(TimeDelta target_time_since_start,
@@ -191,6 +198,10 @@ class PeerConnectionE2EQualityTest
                rtc::NetworkManager* network_manager,
                rtc::FunctionView<void(PeerConfigurer*)> configurer) override;
   void Run(RunParams run_params) override;
+  void Setup(RunParams run_params);
+  void Start(RunParams run_params);
+  void Stop();
+  void TearDown();
 
   TimeDelta GetRealTestDuration() const override {
     rtc::CritScope crit(&lock_);
@@ -198,7 +209,6 @@ class PeerConnectionE2EQualityTest
     return real_test_duration_;
   }
 
- private:
   struct ScheduledActivity {
     ScheduledActivity(TimeDelta initial_delay_since_start,
                       absl::optional<TimeDelta> interval,
@@ -252,7 +262,8 @@ class PeerConnectionE2EQualityTest
   Timestamp Now() const;
 
   Clock* const clock_;
-  const std::unique_ptr<TaskQueueFactory> task_queue_factory_;
+  const std::unique_ptr<TaskQueueFactory> default_task_queue_factory_;
+  TaskQueueFactory* task_queue_factory_;
   std::string test_case_name_;
   std::unique_ptr<VideoQualityAnalyzerInjectionHelper>
       video_quality_analyzer_injection_helper_;
@@ -298,6 +309,8 @@ class PeerConnectionE2EQualityTest
   // This task queue will be created before call set up and will be destroyed
   // immediately before call tear down.
   std::unique_ptr<TaskQueueForTest> task_queue_;
+  std::unique_ptr<rtc::Thread> signaling_thread;
+  std::unique_ptr<StatsPoller> stats_poller_;
 };
 
 }  // namespace webrtc_pc_e2e

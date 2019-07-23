@@ -45,6 +45,11 @@ class SimulatedTimeControllerImpl : public TaskQueueFactory,
   // except that if this method is called from a task, the task queue running
   // that task is skipped.
   void YieldExecution() override;
+
+  std::unique_ptr<rtc::EventInterface> CreateEvent(
+      bool manual_reset,
+      bool initially_signaled) override;
+
   // Create process thread with the name |thread_name|.
   std::unique_ptr<ProcessThread> CreateProcessThread(const char* thread_name);
   // Runs all runners in |runners_| that has tasks or modules ready for
@@ -73,6 +78,7 @@ class SimulatedTimeControllerImpl : public TaskQueueFactory,
 
   // Task queues on which YieldExecution has been called.
   std::unordered_set<TaskQueueBase*> yielded_ RTC_GUARDED_BY(thread_checker_);
+  const std::unique_ptr<TaskQueueBase, TaskQueueDeleter> event_timeout_queue_;
 };
 }  // namespace sim_time_impl
 
@@ -92,6 +98,7 @@ class GlobalSimulatedTimeController : public TimeController {
       const char* thread_name) override;
   void Sleep(TimeDelta duration) override;
   void InvokeWithControlledYield(std::function<void()> closure) override;
+  rtc::YieldInterface* GetYielder() { return &impl_; }
 
  private:
   rtc::ScopedBaseFakeClock global_clock_;

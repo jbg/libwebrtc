@@ -10,11 +10,24 @@
 #ifndef RTC_BASE_SYNCHRONIZATION_YIELD_POLICY_H_
 #define RTC_BASE_SYNCHRONIZATION_YIELD_POLICY_H_
 
+#include <memory>
+
 namespace rtc {
+class EventInterface {
+ public:
+  virtual ~EventInterface() = default;
+  virtual void Reset() = 0;
+  virtual void Set() = 0;
+  virtual bool Wait(int give_up_after_ms, int warn_after_ms) = 0;
+};
+
 class YieldInterface {
  public:
   virtual ~YieldInterface() = default;
   virtual void YieldExecution() = 0;
+  virtual std::unique_ptr<EventInterface> CreateEvent(
+      bool manual_reset,
+      bool initially_signaled) = 0;
 };
 
 // Sets the current thread-local yield policy while it's in scope and reverts
@@ -28,6 +41,9 @@ class ScopedYieldPolicy final {
   // Will yield as specified by the currently active thread-local yield policy
   // (which by default is a no-op).
   static void YieldExecution();
+  static bool Active();
+  static std::unique_ptr<EventInterface> CreateEvent(bool manual_reset,
+                                                     bool initially_signaled);
 
  private:
   YieldInterface* const previous_;

@@ -222,6 +222,7 @@ class UnixRealTimeClock : public RealTimeClock {
   }
 };
 #endif  // defined(WEBRTC_POSIX)
+Clock* global_clock_overide = nullptr;
 
 Clock* Clock::GetRealTimeClock() {
 #if defined(WINUWP)
@@ -233,7 +234,13 @@ Clock* Clock::GetRealTimeClock() {
 #else
   static Clock* const clock = nullptr;
 #endif
+  if (global_clock_overide)
+    return global_clock_overide;
   return clock;
+}
+
+void Clock::SetRealTimeClock(Clock* clock) {
+  global_clock_overide = clock;
 }
 
 SimulatedClock::SimulatedClock(int64_t initial_time_us)
