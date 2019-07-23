@@ -27,6 +27,7 @@ class IntervalBudget {
   // TODO(tschumim): Unify IncreaseBudget and UseBudget to one function.
   void IncreaseBudget(int64_t delta_time_ms);
   void UseBudget(size_t bytes);
+  int64_t TimeMsUntilNonNegativeBudget() const;
 
   size_t bytes_remaining() const;
   double budget_ratio() const;
