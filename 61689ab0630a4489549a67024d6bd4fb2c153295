@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d69c978_59e59c76",
+        "filename": "test/pc/e2e/analyzer/audio/default_audio_quality_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-07-23T13:44:02Z",
+      "side": 0,
+      "message": "It can happen, that this part will be executed before we will receive any frame for this stream. In such case it will create streams stats object and in OnFrameCaptured, when we will receive 1st frame in part \"// Ensure stats for this stream exists.\" near line 106 we won\u0027t come inside \"if\", so we will never properly set up stream_last_freeze_end_time_ map. Probably we need to extract that part into separate method and invoke it here too. Sorry for missing it during review.",
+      "range": {
+        "startLine": 64,
+        "startChar": 10,
+        "endLine": 64,
+        "endChar": 55
+      },
+      "revId": "61689ab0630a4489549a67024d6bd4fb2c153295",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
