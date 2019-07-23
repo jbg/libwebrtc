@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7ccf2b4d_5ecf1b28",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-23T15:37:04Z",
+      "side": 1,
+      "message": "I removed this part of the code, it\u0027s not currently required.",
+      "parentUuid": "fdeee459_2a8c1481",
+      "range": {
+        "startLine": 469,
+        "startChar": 9,
+        "endLine": 469,
+        "endChar": 28
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "938992e1_15c8dbf1",
         "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bd30150_6a8f49d3",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-23T15:37:04Z",
+      "side": 1,
+      "message": "Doesn\u0027t really need to. I based it on existing generic code. But we can make it generic in the future if we want to. Remove the template for now.",
+      "parentUuid": "938992e1_15c8dbf1",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a734447f_1befca3e",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-23T15:37:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b73ae07_cd9fab1a",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64b9252c_b9c93b91",
         "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6302c09b_2f72de31",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-23T15:37:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64b9252c_b9c93b91",
+      "range": {
+        "startLine": 165,
+        "startChar": 26,
+        "endLine": 165,
+        "endChar": 35
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
