@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "938992e1_15c8dbf1",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-23T14:28:59Z",
+      "side": 1,
+      "message": "It\u0027s unclear to me why this needs to be a template?",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b73ae07_cd9fab1a",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-23T14:28:59Z",
+      "side": 1,
+      "message": "Seems like we really should add tests for this class.",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "64b9252c_b9c93b91",
         "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
         "patchSetId": 3
@@ -41,6 +87,52 @@
         "startChar": 26,
         "endLine": 165,
         "endChar": 35
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46366156_18e5f606",
+        "filename": "modules/rtp_rtcp/source/rtcp_receiver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-23T14:28:59Z",
+      "side": 1,
+      "message": "Is this the message type we\u0027re handling here? https://tools.ietf.org/html/rfc4585#section-6.4\n\nIn that case I think it needs to be merged with RTCPReceiver::HandlePsfbApp somehow",
+      "range": {
+        "startLine": 704,
+        "startChar": 0,
+        "endLine": 704,
+        "endChar": 66
+      },
+      "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "333e7043_09c91a95",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3248,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-23T14:28:59Z",
+      "side": 1,
+      "message": "I see neither of REMB or Transport CC here, which makes me suspect we\u0027re not following the existing patterns?",
+      "range": {
+        "startLine": 3248,
+        "startChar": 0,
+        "endLine": 3248,
+        "endChar": 72
       },
       "revId": "6f2f9f08dde64a31ab1740c3ccd014599ea2ea15",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
