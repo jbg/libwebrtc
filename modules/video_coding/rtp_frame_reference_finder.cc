@@ -286,6 +286,7 @@ RtpFrameReferenceFinder::FrameDecision RtpFrameReferenceFinder::ManageFrameVp8(
 
   if (last_picture_id_ == -1)
     last_picture_id_ = frame->id.picture_id;
+  last_picture_id_ %= kPicIdLength;
 
   // Find if there has been a gap in fully received frames and save the picture
   // id of those frames in |not_yet_received_frames_|.
