@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52487e96_ae60b625",
+        "filename": "call/rtp_transport_controller_send.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T12:37:54Z",
+      "side": 1,
+      "message": "SetAccount...()",
+      "range": {
+        "startLine": 396,
+        "startChar": 33,
+        "endLine": 396,
+        "endChar": 69
+      },
+      "revId": "d8232a89237a20ecbeac92833cc25d19216c0b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
