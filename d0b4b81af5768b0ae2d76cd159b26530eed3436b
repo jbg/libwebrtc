@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a1f0b14_8efa5a84",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T07:47:50Z",
+      "side": 1,
+      "message": "Should we warn if value is greater than kMaxEncoded?",
+      "revId": "d0b4b81af5768b0ae2d76cd159b26530eed3436b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e796a33_00799b78",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T07:47:50Z",
+      "side": 1,
+      "message": "This whole thing seems unnecessarily complicated to me from a first glance. Is it to avoid instantiating a new RemoteEStimateSerializer for each RemoteEstimate? Would probably be good to comment on in that case.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 57
+      },
+      "revId": "d0b4b81af5768b0ae2d76cd159b26530eed3436b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8445a20_b85d3daa",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate_serializer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T07:47:50Z",
+      "side": 1,
+      "message": "Is this empty file needed?",
+      "revId": "d0b4b81af5768b0ae2d76cd159b26530eed3436b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ef9c55a_7d5a7331",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T07:47:50Z",
+      "side": 1,
+      "message": "Not needed?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 48
+      },
+      "revId": "d0b4b81af5768b0ae2d76cd159b26530eed3436b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c3364ee_f0a765f1",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T07:47:50Z",
+      "side": 1,
+      "message": "This x-goog prefix doesn\u0027t seem necessary? Can\u0027t we just call this remote-net-estimate or similar? \"reme\" also seems fairly obscure?",
+      "range": {
+        "startLine": 188,
+        "startChar": 56,
+        "endLine": 188,
+        "endChar": 67
+      },
+      "revId": "d0b4b81af5768b0ae2d76cd159b26530eed3436b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
