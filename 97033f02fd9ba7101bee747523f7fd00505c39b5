@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "78b6ab87_f3ada1aa",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-24T13:23:05Z",
+      "side": 1,
+      "message": "Could you change this to \"--list_plots\" until we can add the list to the usage string?",
+      "range": {
+        "startLine": 41,
+        "startChar": 53,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22f1b6de_f24a2f10",
         "filename": "rtc_tools/event_log_visualizer/main.cc",
         "patchSetId": 1
@@ -227,6 +250,30 @@
       "side": 1,
       "message": "Ok, even if I have fixed the --help problem above this is not possible because Abseil Flags calls std::exit after printing the help message.\n\nIs this a problem?",
       "parentUuid": "6918b422_fc947164",
+      "range": {
+        "startLine": 528,
+        "startChar": 20,
+        "endLine": 528,
+        "endChar": 36
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cfe9eee_be2088b8",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-24T13:23:05Z",
+      "side": 1,
+      "message": "I suppose we could add the plot list to the usage string, but I\u0027ll have to do some refactoring so that the mapping from plot name to generating code doesn\u0027t depend on the log file.",
+      "parentUuid": "b36ccca3_b3c0ac61",
       "range": {
         "startLine": 528,
         "startChar": 20,
