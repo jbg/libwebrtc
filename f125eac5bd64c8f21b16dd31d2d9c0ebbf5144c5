@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "f8cd3d44_43736eed",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-24T09:48:04Z",
+      "side": 1,
+      "message": "Postponed for future CL.",
+      "parentUuid": "111c41bd_a03aefb9",
+      "range": {
+        "startLine": 67,
+        "startChar": 27,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "609fc2f1_a79db8a8",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-24T09:48:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "61fd11d9_1456f7cb",
+      "range": {
+        "startLine": 67,
+        "startChar": 17,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea468a68_15a94dd6",
         "filename": "rtc_tools/event_log_visualizer/plot_base.h",
         "patchSetId": 2
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "cf70cdcc_34cd800a",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-24T09:48:04Z",
+      "side": 1,
+      "message": "Yes, it was intended as part of this change.",
+      "parentUuid": "ea468a68_15a94dd6",
+      "range": {
+        "startLine": 143,
+        "startChar": 1,
+        "endLine": 144,
+        "endChar": 66
+      },
+      "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8b5b5c5_8cbfae7e",
         "filename": "rtc_tools/event_log_visualizer/plot_base.h",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0abe8383_d313b7de",
+        "filename": "rtc_tools/event_log_visualizer/plot_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-24T09:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8b5b5c5_8cbfae7e",
+      "range": {
+        "startLine": 171,
+        "startChar": 53,
+        "endLine": 171,
+        "endChar": 61
+      },
+      "revId": "f125eac5bd64c8f21b16dd31d2d9c0ebbf5144c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
