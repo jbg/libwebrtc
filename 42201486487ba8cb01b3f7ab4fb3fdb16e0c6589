@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "645241fd_1aa905dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-24T11:17:57Z",
+      "side": 1,
+      "message": "Suggestion:\nReport congestion window updates on GoogCC time updates.\n\nIn https://webrtc-review.googlesource.com/c/src/+/138275 code was\nadded to expand the congestion window in OnProcessInterval so we\ndon\u0027t push back when no traffic is received. However this was not\npropagated to the congestion window push-back controller nor,\nreturned - resulting in the old shorted window being applied.\n\nThis CL fixes this issue and add unit tests to ensure that the\nfunctionality works as expected.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "42201486487ba8cb01b3f7ab4fb3fdb16e0c6589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
