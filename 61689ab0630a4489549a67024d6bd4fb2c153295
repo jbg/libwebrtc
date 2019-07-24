@@ -22,6 +22,53 @@
       "revId": "61689ab0630a4489549a67024d6bd4fb2c153295",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c4b518b_0e24c0c5",
+        "filename": "test/pc/e2e/analyzer/audio/default_audio_quality_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-24T13:38:42Z",
+      "side": 0,
+      "message": "Did you mean to put this in the video analyzer?  I do not see OnFrameCaptured here.\n\nIs there an equivalent problem with audio?  Or only video?",
+      "parentUuid": "6d69c978_59e59c76",
+      "range": {
+        "startLine": 64,
+        "startChar": 10,
+        "endLine": 64,
+        "endChar": 55
+      },
+      "revId": "61689ab0630a4489549a67024d6bd4fb2c153295",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4077163_3d76599d",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-07-24T13:38:42Z",
+      "side": 0,
+      "message": "How is it possible that a frame is sent before it\u0027s captured?  Do we see reports for zero bytes sent prior to the first frame captured?  I suppose that must be what\u0027s happening.",
+      "range": {
+        "startLine": 394,
+        "startChar": 72,
+        "endLine": 394,
+        "endChar": 0
+      },
+      "revId": "61689ab0630a4489549a67024d6bd4fb2c153295",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
