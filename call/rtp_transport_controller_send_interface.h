@@ -148,7 +148,7 @@ class RtpTransportControllerSendInterface {
   virtual void OnNetworkAvailability(bool network_available) = 0;
   virtual RtcpBandwidthObserver* GetBandwidthObserver() = 0;
   virtual int64_t GetPacerQueuingDelayMs() const = 0;
-  virtual int64_t GetFirstPacketTimeMs() const = 0;
+  virtual absl::optional<int64_t> GetFirstPacketTimeMs() const = 0;
   virtual void EnablePeriodicAlrProbing(bool enable) = 0;
   virtual void OnSentPacket(const rtc::SentPacket& sent_packet) = 0;
   virtual void OnReceivedPacket(const ReceivedPacket& received_packet) = 0;
