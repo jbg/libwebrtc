@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9a561319_e8e5fd3b",
+        "filename": "test/pc/e2e/analyzer/audio/default_audio_quality_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-07-24T14:13:31Z",
+      "side": 0,
+      "message": "Oh, sorry, yep, this is about video quality analyzer.\nI think with audio there shouldn\u0027t be such issues, cause all audio stats are collected from PC statistic and not from audio data directly.",
+      "parentUuid": "8c4b518b_0e24c0c5",
+      "range": {
+        "startLine": 64,
+        "startChar": 10,
+        "endLine": 64,
+        "endChar": 55
+      },
+      "revId": "61689ab0630a4489549a67024d6bd4fb2c153295",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a4077163_3d76599d",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
         "patchSetId": 2
@@ -60,6 +84,30 @@
       "writtenOn": "2019-07-24T13:38:42Z",
       "side": 0,
       "message": "How is it possible that a frame is sent before it\u0027s captured?  Do we see reports for zero bytes sent prior to the first frame captured?  I suppose that must be what\u0027s happening.",
+      "range": {
+        "startLine": 394,
+        "startChar": 72,
+        "endLine": 394,
+        "endChar": 0
+      },
+      "revId": "61689ab0630a4489549a67024d6bd4fb2c153295",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "641e2196_87c0c11c",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-07-24T14:13:31Z",
+      "side": 0,
+      "message": "I think yes. We can grab first stats before capturing first frame on stream. Stats poller and video pipeline are parallel, so we can\u0027t have any assumptions on order here.",
+      "parentUuid": "a4077163_3d76599d",
       "range": {
         "startLine": 394,
         "startChar": 72,
