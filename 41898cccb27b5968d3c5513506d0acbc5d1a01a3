@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4f8c786_88ce0337",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T09:49:48Z",
+      "side": 1,
+      "message": "s/kExclude/Exclude",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "41898cccb27b5968d3c5513506d0acbc5d1a01a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fc0ed77_0165a879",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T09:49:48Z",
+      "side": 1,
+      "message": "Do we need to do the same for flexfec_sender?",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 74
+      },
+      "revId": "41898cccb27b5968d3c5513506d0acbc5d1a01a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6e27c3a_bd1ce515",
+        "filename": "pc/datagram_dtls_adaptor.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2019-07-24T09:49:48Z",
+      "side": 1,
+      "message": "s/kExclude/Exclude",
+      "range": {
+        "startLine": 66,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "41898cccb27b5968d3c5513506d0acbc5d1a01a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
