@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a21b96a7_bb0a8521",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-24T13:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78b6ab87_f3ada1aa",
+      "range": {
+        "startLine": 41,
+        "startChar": 53,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22f1b6de_f24a2f10",
         "filename": "rtc_tools/event_log_visualizer/main.cc",
         "patchSetId": 1
@@ -283,6 +307,30 @@
       "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83230f18_0e68e3d6",
+        "filename": "rtc_tools/event_log_visualizer/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-07-24T13:30:37Z",
+      "side": 1,
+      "message": "Resolving this, yep that would be perfect.",
+      "parentUuid": "6cfe9eee_be2088b8",
+      "range": {
+        "startLine": 528,
+        "startChar": 20,
+        "endLine": 528,
+        "endChar": 36
+      },
+      "revId": "97033f02fd9ba7101bee747523f7fd00505c39b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
