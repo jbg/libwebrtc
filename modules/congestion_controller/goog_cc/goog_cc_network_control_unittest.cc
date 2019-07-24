@@ -375,6 +375,69 @@ TEST_F(GoogCcNetworkControllerTest,
   EXPECT_NEAR(client->padding_rate().kbps(), client->target_rate().kbps(), 1);
 }
 
+TEST_F(GoogCcNetworkControllerTest, CongestionWindowNoDownlinkDoesNotTrigger) {
+  ScopedFieldTrials trial(
+      "WebRTC-CongestionWindow/QueueSize:800,MinBitrate:30000/"
+      "WebRTC-Bwe-CongestionWindowDownlinkDelay/Enabled/");
+  Scenario s("googcc_unit/cwnd_no_downlink", false);
+  auto send_net = s.CreateSimulationNode([=](NetworkSimulationConfig* c) {
+    c->bandwidth = DataRate::kbps(1000);
+    c->delay = TimeDelta::ms(100);
+  });
+  auto ret_net = s.CreateMutableSimulationNode(
+      [](NetworkSimulationConfig* c) { c->delay = TimeDelta::ms(100); });
+
+  auto* client = s.CreateClient("sender", CallClientConfig());
+  auto* route = s.CreateRoutes(client, {send_net},
+                               s.CreateClient("return", CallClientConfig()),
+                               {ret_net->node()});
+
+  s.CreateVideoStream(route->forward(), VideoStreamConfig());
+  s.CreateVideoStream(route->reverse(), VideoStreamConfig());
+
+  s.RunFor(TimeDelta::seconds(10));
+  ret_net->PauseTransmissionUntil(s.Now() + TimeDelta::seconds(10));
+  s.RunFor(TimeDelta::seconds(7));
+
+  // Expect that we never lost send speed because we received no packets.
+  // 500kbps is enough to demonstrate that congestion window isn't activated.
+  EXPECT_GE(client->target_rate().kbps(), 500);
+}
+
+TEST_F(GoogCcNetworkControllerTest,
+       CongestionWindowTriggeredWithDownlinkDelay) {
+  ScopedFieldTrials trial(
+      "WebRTC-CongestionWindow/QueueSize:800,MinBitrate:30000/"
+      "WebRTC-Bwe-CongestionWindowDownlinkDelay/Enabled/");
+  Scenario s("googcc_unit/cwnd_no_downlink", false);
+  auto send_net =
+      s.CreateMutableSimulationNode([=](NetworkSimulationConfig* c) {
+        c->bandwidth = DataRate::kbps(1000);
+        c->delay = TimeDelta::ms(100);
+      });
+  auto ret_net = s.CreateSimulationNode(
+      [](NetworkSimulationConfig* c) { c->delay = TimeDelta::ms(100); });
+
+  auto* client = s.CreateClient("sender", CallClientConfig());
+  auto* route =
+      s.CreateRoutes(client, {send_net->node()},
+                     s.CreateClient("return", CallClientConfig()), {ret_net});
+
+  s.CreateVideoStream(route->forward(), VideoStreamConfig());
+  s.CreateVideoStream(route->reverse(), VideoStreamConfig());
+
+  s.RunFor(TimeDelta::seconds(10));
+  send_net->PauseTransmissionUntil(s.Now() + TimeDelta::seconds(10));
+  s.RunFor(TimeDelta::seconds(3));
+
+  // Expect the target rate to be reduced rapidly due to congestion.
+  // We would expect things to be at 30kbps, the min bitrate. Note
+  // that the congestion window still gets activated since we are
+  // receiving packets upstream.
+  EXPECT_LT(client->target_rate().kbps(), 100);
+  EXPECT_GE(client->target_rate().kbps(), 30);
+}
+
 TEST_F(GoogCcNetworkControllerTest, LimitsToFloorIfRttIsHighInTrial) {
   // The field trial limits maximum RTT to 2 seconds, higher RTT means that the
   // controller backs off until it reaches the minimum configured bitrate. This
