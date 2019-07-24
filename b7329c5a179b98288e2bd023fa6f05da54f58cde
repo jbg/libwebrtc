@@ -22,6 +22,30 @@
       "revId": "b7329c5a179b98288e2bd023fa6f05da54f58cde",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12a28230_90af54ec",
+        "filename": "rtc_tools/event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-07-24T13:49:05Z",
+      "side": 1,
+      "message": "Changed to kEventTypeOffset. In principle, adding kEventTypeOffset shouldn\u0027t be needed. Iirc, but this was added as a workaround to make the \"check\" states distinguishable from the",
+      "parentUuid": "7b9373de_28f58b47",
+      "range": {
+        "startLine": 2185,
+        "startChar": 8,
+        "endLine": 2186,
+        "endChar": 44
+      },
+      "revId": "b7329c5a179b98288e2bd023fa6f05da54f58cde",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
