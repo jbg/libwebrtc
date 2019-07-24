@@ -39,6 +39,7 @@ class CongestionWindowPushbackController {
   void SetDataWindow(DataSize data_window);
 
  private:
+  friend class GoogCcStatePrinter;
   absl::optional<DataSize> current_data_window_;
   int64_t outstanding_bytes_ = 0;
   int64_t pacing_bytes_ = 0;

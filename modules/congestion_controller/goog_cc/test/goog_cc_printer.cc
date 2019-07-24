@@ -28,6 +28,9 @@ void WriteTypedValue(RtcEventLogOutput* out, int value) {
 void WriteTypedValue(RtcEventLogOutput* out, double value) {
   LogWriteFormat(out, "%.6f", value);
 }
+void WriteTypedValue(RtcEventLogOutput* out, int64_t value) {
+  LogWriteFormat(out, "%.6f", value);
+}
 void WriteTypedValue(RtcEventLogOutput* out, absl::optional<DataRate> value) {
   LogWriteFormat(out, "%.0f", value ? value->bytes_per_sec<double>() : NAN);
 }
@@ -124,6 +127,29 @@ std::deque<FieldLogger*> GoogCcStatePrinter::CreateLoggers() {
       Log("loss_based_rate", [=] { return loss_cont()->loss_based_bitrate_; }),
       Log("loss_ack_rate",
           [=] { return loss_cont()->acknowledged_bitrate_max_; }),
+      Log("pushback_target",
+          [=] { return controller_->last_pushback_target_rate_; }),
+      Log("data_window", [=] { return controller_->current_data_window_; }),
+      Log("congwin_data_window",
+          [=] {
+            return controller_->congestion_window_pushback_controller_
+                ->current_data_window_;
+          }),
+      Log("encoding_rate_ratio",
+          [=] {
+            return controller_->congestion_window_pushback_controller_
+                ->encoding_rate_ratio_;
+          }),
+      Log("congwin_outstanding_bytes",
+          [=] {
+            return controller_->congestion_window_pushback_controller_
+                ->outstanding_bytes_;
+          }),
+      Log("congwin_outstanding_pacing_bytes",
+          [=] {
+            return controller_->congestion_window_pushback_controller_
+                ->pacing_bytes_;
+          }),
   });
   return loggers;
 }
