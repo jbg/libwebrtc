@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdfbdf5f_62c3626f",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-24T11:31:53Z",
+      "side": 1,
+      "message": "NoCongestionWindowPushbackWithoutReceiveTraffic",
+      "range": {
+        "startLine": 378,
+        "startChar": 36,
+        "endLine": 378,
+        "endChar": 76
+      },
+      "revId": "d5e1287f3e15be550ed46ecf2df91fcb2546308f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaa80ea6_33be771b",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-24T11:31:53Z",
+      "side": 1,
+      "message": "Suggestion:\nNetworkSimulationConfig net_conf;\nnet_conf.delay \u003d DataRate::kbps(1000);\nnet_conf.delay \u003d TimeDelta::ms(100);\n\nauto ret_net \u003d s.CreateMutableSimulationNode(net_conf);\n...\nauto* route \u003d s.CreateRoutes(client, {s.CreateSimulationNode(net_conf)},\n                               s.CreateClient(\"return\", CallClientConfig()),\n                               {ret_net-\u003enode()});\n\n(Equivalent below)",
+      "range": {
+        "startLine": 383,
+        "startChar": 1,
+        "endLine": 389,
+        "endChar": 0
+      },
+      "revId": "d5e1287f3e15be550ed46ecf2df91fcb2546308f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d343611_d61e5837",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-24T11:31:53Z",
+      "side": 1,
+      "message": "If this is needed (I\u0027m not sure, maybe RTCP traffic is enough to preserve expected behavior?) add a comment explaining why. (Also applies to the other test. It\u0027s ok to have it in both for symmetry reasons)",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 61
+      },
+      "revId": "d5e1287f3e15be550ed46ecf2df91fcb2546308f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1922732_c9b8fcbc",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-24T11:31:53Z",
+      "side": 1,
+      "message": "Comment on why those steps are needed. Also, generally it\u0027s a good idea to keep the simulated run time close to as low as possible to accurately reflect the behavior under test as the tests are somewhat expensive to run.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 34
+      },
+      "revId": "d5e1287f3e15be550ed46ecf2df91fcb2546308f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15dac2f3_bd98e548",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-24T11:31:53Z",
+      "side": 1,
+      "message": "CongestionWindowPushBackOnSendDelaySpike",
+      "range": {
+        "startLine": 408,
+        "startChar": 7,
+        "endLine": 408,
+        "endChar": 49
+      },
+      "revId": "d5e1287f3e15be550ed46ecf2df91fcb2546308f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34a6c7ab_176e2b7d",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-24T11:31:53Z",
+      "side": 1,
+      "message": "should be different from above",
+      "range": {
+        "startLine": 412,
+        "startChar": 26,
+        "endLine": 412,
+        "endChar": 42
+      },
+      "revId": "d5e1287f3e15be550ed46ecf2df91fcb2546308f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "416e6a82_e6dab586",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-24T11:31:53Z",
+      "side": 1,
+      "message": "Note that the 30 kbps is used min in other places, so this might not trigger incorrectly. However. I\u0027d consider removing this check, as it doesn\u0027t really relate to the behavior under test AFAICT?",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 438,
+        "endChar": 46
+      },
+      "revId": "d5e1287f3e15be550ed46ecf2df91fcb2546308f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
