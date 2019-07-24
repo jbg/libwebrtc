@@ -25,6 +25,7 @@
 #include "modules/congestion_controller/rtp/control_handler.h"
 #include "modules/congestion_controller/rtp/transport_feedback_adapter.h"
 #include "modules/pacing/packet_router.h"
+#include "modules/pacing/rtp_packet_pacer.h"
 #include "modules/utility/include/process_thread.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/network_route.h"
@@ -95,7 +96,7 @@ class RtpTransportControllerSend final
   void OnNetworkAvailability(bool network_available) override;
   RtcpBandwidthObserver* GetBandwidthObserver() override;
   int64_t GetPacerQueuingDelayMs() const override;
-  int64_t GetFirstPacketTimeMs() const override;
+  absl::optional<int64_t> GetFirstPacketTimeMs() const override;
   void EnablePeriodicAlrProbing(bool enable) override;
   void OnSentPacket(const rtc::SentPacket& sent_packet) override;
   void OnReceivedPacket(const ReceivedPacket& packet_msg) override;
@@ -141,7 +142,7 @@ class RtpTransportControllerSend final
   const FieldTrialBasedConfig trial_based_config_;
   PacketRouter packet_router_;
   std::vector<std::unique_ptr<RtpVideoSenderInterface>> video_rtp_senders_;
-  PacedSender pacer_;
+  std::unique_ptr<RtpPacketPacer> pacer_;
   RtpBitrateConfigurator bitrate_configurator_;
   std::map<std::string, rtc::NetworkRoute> network_routes_;
   const std::unique_ptr<ProcessThread> process_thread_;
