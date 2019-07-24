@@ -59,6 +59,12 @@ namespace {
 const char kDisableDatagramToRtcpFeebackTranslationFieldTrial[] =
     "WebRTC-kDisableDatagramToRtcpFeebackTranslation";
 
+// This is experimental field trial to exclude transport sequence number from
+// FEC packets and it must be enabled when datagram transport is used with
+// feedback loop translation, otherwise recovered packets will be corrupt.
+const char kExcludeTransportSequenceNumberFromFecFieldTrial[] =
+    "WebRTC-ExcludeTransportSequenceNumberFromFec";
+
 }  // namespace
 
 // Maximum packet size of RTCP feedback packet for allocation. We re-create RTCP
@@ -92,6 +98,12 @@ DatagramDtlsAdaptor::DatagramDtlsAdaptor(
     RTC_LOG(LS_ERROR) << "Transport sequence numbers are not supported in "
                          "datagram transport connection";
   }
+
+  // If feedback loop is translation is enabled, FEC packets must exclude
+  // transport sequence numbers, otherwise recovered packets will be corrupt.
+  RTC_CHECK(disable_datagram_to_rtcp_feeback_translation_ ||
+            webrtc::field_trial::IsEnabled(
+                kExcludeTransportSequenceNumberFromFecFieldTrial));
 
   RTC_DCHECK(ice_transport_);
   RTC_DCHECK(datagram_transport_);
