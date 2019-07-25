@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b35ba36_6505cdf7",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-07-25T20:18:17Z",
+      "side": 1,
+      "message": "Worker thread: config_ will be written in ConfigureStream().",
+      "revId": "aa59eca89198420f73184ba7c0576b080c817684",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99b754b6_63047bd1",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-07-25T20:18:17Z",
+      "side": 1,
+      "message": "Pacer thread: config_ is read.",
+      "revId": "aa59eca89198420f73184ba7c0576b080c817684",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
