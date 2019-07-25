@@ -134,7 +134,7 @@ bool RemoteEstimate::IsNetworkEstimate(const CommonHeader& packet) {
   if (packet.fmt() != kSubType)
     return false;
   size_t kNameSize = sizeof(uint32_t);
-  if (packet.packet_size() < CommonHeader::kHeaderSizeBytes + kNameSize)
+  if (packet.payload_size_bytes() < kNameSize)
     return false;
   if (ByteReader<uint32_t>::ReadBigEndian(&packet.payload()[4]) != kName)
     return false;
