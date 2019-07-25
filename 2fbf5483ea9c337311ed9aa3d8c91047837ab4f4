@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a16cee5_c088fefe",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-25T15:07:31Z",
+      "side": 1,
+      "message": "input_aecdump",
+      "range": {
+        "startLine": 104,
+        "startChar": 36,
+        "endLine": 104,
+        "endChar": 48
+      },
+      "revId": "2fbf5483ea9c337311ed9aa3d8c91047837ab4f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd4dbc09_717a6f98",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-25T15:07:31Z",
+      "side": 1,
+      "message": "GetProcessedCaptureStream()\n\n(same rationale behind the comments in https://webrtc-review.googlesource.com/c/src/+/145208/4..6/api/test/audioproc_float.h#b35; I think it\u0027s also the case here)",
+      "range": {
+        "startLine": 135,
+        "startChar": 21,
+        "endLine": 135,
+        "endChar": 36
+      },
+      "revId": "2fbf5483ea9c337311ed9aa3d8c91047837ab4f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0301f79d_5b5e3f10",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-25T15:07:31Z",
+      "side": 1,
+      "message": "write in it",
+      "range": {
+        "startLine": 24,
+        "startChar": 64,
+        "endLine": 24,
+        "endChar": 69
+      },
+      "revId": "2fbf5483ea9c337311ed9aa3d8c91047837ab4f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c77de40_1084dcf5",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-25T15:07:31Z",
+      "side": 1,
+      "message": "optionally (typo)\n    ^",
+      "range": {
+        "startLine": 26,
+        "startChar": 31,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "2fbf5483ea9c337311ed9aa3d8c91047837ab4f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

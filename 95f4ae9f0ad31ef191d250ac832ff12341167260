@@ -401,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "70338c08_d4a0b2e3",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-25T15:07:31Z",
+      "side": 1,
+      "message": "Try harder :) What I meant was the following (to be appended):\n\n} else {\n  ReportConditionalErrorAndExit(...)  // check that settings.input_string is not empty\n}",
+      "parentUuid": "8612fa3f_59de8faa",
+      "range": {
+        "startLine": 416,
+        "startChar": 2,
+        "endLine": 416,
+        "endChar": 3
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "972696dc_97f1cd26",
         "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
         "patchSetId": 4
@@ -516,6 +540,30 @@
       "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0ff7553_138227cb",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-25T15:07:31Z",
+      "side": 1,
+      "message": "Nope, it\u0027s a copy :) Look:\n\n1. processor is a AudioProcessingSimulator and AudioProcessingSimulator::GetOutputVector() is \"return buffer_array_writer_-\u003eGetOutputVector();\"\n\n2. AudioProcessingSimulator::buffer_array_writer_ is a ChannelBufferArrayWriter and it returns ChannelBufferArrayWriter::output_, which is owned by ChannelBufferArrayWriter\n\nThe compiler is smart and there is only one copy involved (luckily), but the rvalue case mentioned by Ivo happens when for instance we return a local member of a function, not a vector owned by another object.\n\nIf it were a copy-less op, then the ownership must be transferred from ChannelBufferArrayWriter::output_ to the caller, which would invalidate ChannelBufferArrayWriter::output_ - i.e., AudioProcessingSimulator::buffer_array_writer_ can\u0027t access to output_ anymore (undefined behavior).\n\nAnyways, I won\u0027t insist since this is not realtime code and solving as I proposed in my 1st comment requires extra work. I\u0027ll leave the decision up to you.",
+      "parentUuid": "9c7a99d5_decea3e7",
+      "range": {
+        "startLine": 586,
+        "startChar": 4,
+        "endLine": 586,
+        "endChar": 43
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
