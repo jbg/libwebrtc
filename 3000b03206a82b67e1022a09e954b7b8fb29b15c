@@ -22,6 +22,30 @@
       "revId": "3000b03206a82b67e1022a09e954b7b8fb29b15c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae11801_4079ea08",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remote_estimate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-25T08:48:45Z",
+      "side": 1,
+      "message": "I agree, I refactored the code to rely on the existing mechanism for parsing the field instead.",
+      "parentUuid": "ae2885ab_c7917ffe",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 73
+      },
+      "revId": "3000b03206a82b67e1022a09e954b7b8fb29b15c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
