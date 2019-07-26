@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2d622727_1f231748",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 9579
+      },
+      "writtenOn": "2019-07-26T13:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc65cc8a_e3c6514c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 110
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5745e47_01370791",
         "filename": "api/test/audioproc_float.h",
         "patchSetId": 4
@@ -425,6 +449,30 @@
     },
     {
       "key": {
+        "uuid": "f96ee0d6_53481175",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 9579
+      },
+      "writtenOn": "2019-07-26T13:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70338c08_d4a0b2e3",
+      "range": {
+        "startLine": 416,
+        "startChar": 2,
+        "endLine": 416,
+        "endChar": 3
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "972696dc_97f1cd26",
         "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
         "patchSetId": 4
@@ -567,6 +615,30 @@
     },
     {
       "key": {
+        "uuid": "465888d7_5f9f90d4",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 9579
+      },
+      "writtenOn": "2019-07-26T13:06:15Z",
+      "side": 1,
+      "message": "Thank you very much for clarifying this, Alessio! I will be more careful next time. After the discussion we had on this topic, I decided to avoid making the copy using your first suggestion, which is writing directly into the vector given by the caller.",
+      "parentUuid": "f0ff7553_138227cb",
+      "range": {
+        "startLine": 586,
+        "startChar": 4,
+        "endLine": 586,
+        "endChar": 43
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af86777f_1ede84d2",
         "filename": "modules/audio_processing/test/audioproc_float_impl.h",
         "patchSetId": 4
@@ -635,6 +707,30 @@
       "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2722fc6_73f406f2",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 9579
+      },
+      "writtenOn": "2019-07-26T13:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6abc610b_6e1943a9",
+      "range": {
+        "startLine": 25,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "95f4ae9f0ad31ef191d250ac832ff12341167260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
