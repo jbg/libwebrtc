@@ -101,6 +101,8 @@ struct SimulationSettings {
   absl::optional<std::string> call_order_input_filename;
   absl::optional<std::string> call_order_output_filename;
   absl::optional<std::string> aec_settings_filename;
+  absl::optional<absl::string_view> input_aecdump;
+  std::vector<float>* processed_capture_samples;
 };
 
 // Copies samples present in a ChannelBuffer into an AudioFrame.
@@ -174,6 +176,7 @@ class AudioProcessingSimulator {
   size_t num_reverse_process_stream_calls_ = 0;
   std::unique_ptr<ChannelBufferWavWriter> buffer_writer_;
   std::unique_ptr<ChannelBufferWavWriter> reverse_buffer_writer_;
+  std::unique_ptr<ChannelBufferArrayWriter> buffer_array_writer_;
   ApiCallStatistics api_call_statistics_;
   std::ofstream residual_echo_likelihood_graph_writer_;
   int analog_mic_level_;
