@@ -2070,6 +2070,14 @@ TEST_F(VideoSendStreamTest, CanReconfigureToUseStartBitrateAbovePreviousMax) {
           VideoSendStreamTest::kDefaultTimeoutMs);
     }
 
+    VideoEncoder::EncoderInfo GetEncoderInfo() const override {
+      // Since this test does not use a capturer, set |internal_source| = true.
+      // Encoder configuration is otherwise updated on the next video frame.
+      VideoEncoder::EncoderInfo info;
+      info.has_internal_source = true;
+      return info;
+    }
+
    private:
     rtc::CriticalSection crit_;
     rtc::Event start_bitrate_changed_;
@@ -2089,9 +2097,6 @@ TEST_F(VideoSendStreamTest, CanReconfigureToUseStartBitrateAbovePreviousMax) {
 
   StartBitrateObserver encoder;
   test::VideoEncoderProxyFactory encoder_factory(&encoder);
-  // Since this test does not use a capturer, set |internal_source| = true.
-  // Encoder configuration is otherwise updated on the next video frame.
-  encoder_factory.SetHasInternalSource(true);
   GetVideoSendConfig()->encoder_settings.encoder_factory = &encoder_factory;
 
   CreateVideoStreams();
@@ -2154,6 +2159,14 @@ class StartStopBitrateObserver : public test::FakeEncoder {
     return false;
   }
 
+  VideoEncoder::EncoderInfo GetEncoderInfo() const override {
+    // Since this test does not use a capturer, set |internal_source| = true.
+    // Encoder configuration is otherwise updated on the next video frame.
+    VideoEncoder::EncoderInfo info;
+    info.has_internal_source = true;
+    return info;
+  }
+
  private:
   rtc::CriticalSection crit_;
   rtc::Event encoder_init_;
@@ -2169,7 +2182,6 @@ TEST_F(VideoSendStreamTest, VideoSendStreamStopSetEncoderRateToZero) {
   test::NullTransport transport;
   StartStopBitrateObserver encoder;
   test::VideoEncoderProxyFactory encoder_factory(&encoder);
-  encoder_factory.SetHasInternalSource(true);
   test::FrameForwarder forwarder;
 
   task_queue_.SendTask([this, &transport, &encoder_factory, &forwarder]() {
@@ -2212,7 +2224,6 @@ TEST_F(VideoSendStreamTest, VideoSendStreamUpdateActiveSimulcastLayers) {
   test::NullTransport transport;
   StartStopBitrateObserver encoder;
   test::VideoEncoderProxyFactory encoder_factory(&encoder);
-  encoder_factory.SetHasInternalSource(true);
   test::FrameForwarder forwarder;
 
   task_queue_.SendTask([this, &transport, &encoder_factory, &forwarder]() {

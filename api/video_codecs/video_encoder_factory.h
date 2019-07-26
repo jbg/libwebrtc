@@ -34,7 +34,11 @@ class VideoEncoderFactory {
     // require/expect frames to be delivered via webrtc::VideoEncoder::Encode.
     // This flag is used as the internal_source parameter to
     // webrtc::ViEExternalCodec::RegisterExternalSendCodec.
-    bool has_internal_source;
+    //
+    // Deprecated: to declare a custom encoder as internal source, set
+    // EncoderInfo::has_internal_source on the returned config from
+    // VideoEncoder::GetEncoderInfo().
+    bool has_internal_source = false;
   };
 
   // Returns a list of supported video formats in order of preference, to use

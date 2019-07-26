@@ -1462,6 +1462,11 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
     return;
   }
 
+  // Re-fetch EncoderInfo. Fallback encoders may change the underlying
+  // implementation in the Encode call above, which may change the internal
+  // source state of the encoder.
+  encoder_info_ = encoder_->GetEncoderInfo();
+
   for (auto& it : next_frame_types_) {
     it = VideoFrameType::kVideoFrameDelta;
   }
@@ -2028,9 +2033,7 @@ void VideoStreamEncoder::RunPostEncode(EncodedImage encoded_image,
 }
 
 bool VideoStreamEncoder::HasInternalSource() const {
-  // TODO(sprang): Checking both info from encoder and from encoder factory
-  // until we have deprecated and removed the encoder factory info.
-  return codec_info_.has_internal_source || encoder_info_.has_internal_source;
+  return encoder_info_.has_internal_source;
 }
 
 void VideoStreamEncoder::ReleaseEncoder() {

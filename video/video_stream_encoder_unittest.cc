@@ -387,6 +387,10 @@ class VideoStreamEncoderTest : public ::testing::Test {
     ConfigureEncoder(std::move(video_encoder_config));
   }
 
+  void SetHasInternalSource(bool has_internal_source) {
+    fake_encoder_.SetHasInternalSource(has_internal_source);
+  }
+
   void ConfigureEncoder(VideoEncoderConfig video_encoder_config) {
     if (video_stream_encoder_)
       video_stream_encoder_->Stop();
@@ -653,12 +657,13 @@ class VideoStreamEncoderTest : public ::testing::Test {
     VideoEncoder::EncoderInfo GetEncoderInfo() const override {
       rtc::CritScope lock(&local_crit_sect_);
       EncoderInfo info;
+      info.is_hardware_accelerated = is_hardware_accelerated_;
+      info.has_internal_source = has_internal_source_;
       if (initialized_ == EncoderState::kInitialized) {
         if (quality_scaling_) {
           info.scaling_settings =
               VideoEncoder::ScalingSettings(1, 2, kMinPixelsPerFrame);
         }
-        info.is_hardware_accelerated = is_hardware_accelerated_;
         for (int i = 0; i < kMaxSpatialLayers; ++i) {
           if (temporal_layers_supported_[i]) {
             int num_layers = temporal_layers_supported_[i].value() ? 2 : 1;
@@ -695,6 +700,11 @@ class VideoStreamEncoderTest : public ::testing::Test {
     void SetIsHardwareAccelerated(bool is_hardware_accelerated) {
       rtc::CritScope lock(&local_crit_sect_);
       is_hardware_accelerated_ = is_hardware_accelerated;
+    }
+
+    void SetHasInternalSource(bool has_internal_source) {
+      rtc::CritScope lock(&local_crit_sect_);
+      has_internal_source_ = has_internal_source;
     }
 
     void SetTemporalLayersSupported(size_t spatial_idx, bool supported) {
@@ -873,6 +883,7 @@ class VideoStreamEncoderTest : public ::testing::Test {
     int last_input_height_ RTC_GUARDED_BY(local_crit_sect_) = 0;
     bool quality_scaling_ RTC_GUARDED_BY(local_crit_sect_) = true;
     bool is_hardware_accelerated_ RTC_GUARDED_BY(local_crit_sect_) = false;
+    bool has_internal_source_ RTC_GUARDED_BY(local_crit_sect_) = false;
     std::unique_ptr<Vp8FrameBufferController> frame_buffer_controller_
         RTC_GUARDED_BY(local_crit_sect_);
     absl::optional<bool>
@@ -4100,8 +4111,8 @@ TEST_F(VideoStreamEncoderTest, SetsFrameTypesSimulcast) {
 }
 
 TEST_F(VideoStreamEncoderTest, RequestKeyframeInternalSource) {
-  // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
+  // Configure internal source encoder and setup test again.
+  SetHasInternalSource(true);
   ResetEncoder("VP8", 1, 1, 1, false);
   video_stream_encoder_->OnBitrateUpdated(
       DataRate::bps(kTargetBitrateBps), DataRate::bps(kTargetBitrateBps), 0, 0);
@@ -4138,7 +4149,7 @@ TEST_F(VideoStreamEncoderTest, RequestKeyframeInternalSource) {
 
 TEST_F(VideoStreamEncoderTest, AdjustsTimestampInternalSource) {
   // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
+  SetHasInternalSource(true);
   ResetEncoder("VP8", 1, 1, 1, false);
   video_stream_encoder_->OnBitrateUpdated(
       DataRate::bps(kTargetBitrateBps), DataRate::bps(kTargetBitrateBps), 0, 0);
@@ -4166,7 +4177,7 @@ TEST_F(VideoStreamEncoderTest, AdjustsTimestampInternalSource) {
 
 TEST_F(VideoStreamEncoderTest, DoesNotRewriteH264BitstreamWithOptimalSps) {
   // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
+  SetHasInternalSource(true);
   ResetEncoder("H264", 1, 1, 1, false);
 
   EncodedImage image(optimal_sps, sizeof(optimal_sps), sizeof(optimal_sps));
@@ -4199,7 +4210,7 @@ TEST_F(VideoStreamEncoderTest, RewritesH264BitstreamWithNonOptimalSps) {
                             0x05, 0x03, 0xC7, 0xC0};
 
   // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
+  SetHasInternalSource(true);
   ResetEncoder("H264", 1, 1, 1, false);
 
   EncodedImage image(original_sps, sizeof(original_sps), sizeof(original_sps));

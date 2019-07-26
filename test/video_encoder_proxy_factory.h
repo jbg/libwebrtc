@@ -35,7 +35,6 @@ class VideoEncoderProxyFactory final : public VideoEncoderFactory {
         num_simultaneous_encoder_instances_(0),
         max_num_simultaneous_encoder_instances_(0) {
     codec_info_.is_hardware_accelerated = false;
-    codec_info_.has_internal_source = false;
   }
 
   // Unused by tests.
@@ -60,10 +59,6 @@ class VideoEncoderProxyFactory final : public VideoEncoderFactory {
   void SetIsHardwareAccelerated(bool is_hardware_accelerated) {
     codec_info_.is_hardware_accelerated = is_hardware_accelerated;
   }
-  void SetHasInternalSource(bool has_internal_source) {
-    codec_info_.has_internal_source = has_internal_source;
-  }
-
   int GetMaxNumberOfSimultaneousEncoderInstances() {
     return max_num_simultaneous_encoder_instances_;
   }
