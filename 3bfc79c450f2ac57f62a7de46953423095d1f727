@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "62bfdfb5_b0b2cccc",
+        "filename": "modules/audio_processing/test/aec_dump_based_simulator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-07-29T13:04:57Z",
+      "side": 1,
+      "message": "[nit] the style guide also recommends to use a return value where possible",
+      "parentUuid": "5dd212c8_9132de7b",
+      "range": {
+        "startLine": 250,
+        "startChar": 9,
+        "endLine": 250,
+        "endChar": 37
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "968b1d07_6fc38dab",
         "filename": "modules/audio_processing/test/audio_processing_simulator.h",
         "patchSetId": 7
