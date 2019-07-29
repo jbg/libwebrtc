@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21ae76ff_203374b0",
+        "filename": "modules/pacing/paced_sender.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-07-29T15:00:59Z",
+      "side": 1,
+      "message": "Note that this will always return false when congestion_window_size_ is PlusInfinity. But it\u0027s fine to keep the check as a reminder for the reader that this happens.",
+      "range": {
+        "startLine": 166,
+        "startChar": 3,
+        "endLine": 166,
+        "endChar": 56
+      },
+      "revId": "ca939ed41ddd0c8b34f6f29e5fb7e2406d104091",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
