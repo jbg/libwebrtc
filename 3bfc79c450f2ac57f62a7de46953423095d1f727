@@ -25,6 +25,98 @@
     },
     {
       "key": {
+        "uuid": "5dd212c8_9132de7b",
+        "filename": "modules/audio_processing/test/aec_dump_based_simulator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-07-29T12:37:02Z",
+      "side": 1,
+      "message": "Non-const references are not allowed by the style guidelines. Please change it to a pointer instead.",
+      "range": {
+        "startLine": 250,
+        "startChar": 9,
+        "endLine": 250,
+        "endChar": 37
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "968b1d07_6fc38dab",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-07-29T12:37:02Z",
+      "side": 1,
+      "message": "Above, we have the names aec_dump_input_filename. It would be nice to have this name match the format of that.\n\nWhat about aec_dump_input_string?",
+      "range": {
+        "startLine": 104,
+        "startChar": 36,
+        "endLine": 104,
+        "endChar": 49
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06bafa35_23f7b8b3",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-07-29T12:37:02Z",
+      "side": 1,
+      "message": "Please initialize the pointer to nullptr inside the struct declaration.",
+      "range": {
+        "startLine": 105,
+        "startChar": 22,
+        "endLine": 105,
+        "endChar": 47
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99128a5b_031b8a24",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-07-29T12:37:02Z",
+      "side": 1,
+      "message": "I think some renaming is needed for this to make sense.\n\nI guess that the buffer_array_writer writes the output to a vector, in contrast to the buffer_writer which writes the output to a wav file.\n\nI\u0027d suggest changing the naming of the buffer_writer to buffer_file_writer and reverse_buffer_writer to reverse_buffer_file_writer so that those names also specify where the output is written.\n\nAlso, the name buffer_array_writer is very specific as to what the destination is (an array). Since this is in how it is used/implemented does not match that (it is always used with vectors) I don\u0027t think that name is an appropriate.\n\nWhat about buffer_memory_writer? That name is not super-specific as to what type of memory is written (it can be an arrayview, an array and a vector) but it still clearly makes the difference against the buffer_file_writer.",
+      "range": {
+        "startLine": 179,
+        "startChar": 44,
+        "endLine": 179,
+        "endChar": 64
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92a3ad68_8f31ccc3",
         "filename": "modules/audio_processing/test/test_utils.cc",
         "patchSetId": 7
@@ -64,6 +156,75 @@
         "startChar": 2,
         "endLine": 83,
         "endChar": 9
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2db90de0_af566d83",
+        "filename": "modules/audio_processing/test/test_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-07-29T12:37:02Z",
+      "side": 1,
+      "message": "Please end comment with period.\n\nAlso, the comment should be made more descriptive to what the class does. The class naming is fairly ambiguious/nondescriptive and a comment is definitely needed to tell what the purpose of the class is.",
+      "range": {
+        "startLine": 80,
+        "startChar": 39,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ef56fb2_2df4a500",
+        "filename": "modules/audio_processing/test/test_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-07-29T12:37:02Z",
+      "side": 1,
+      "message": "Why ArrayWriter and not VectorWriter? (no arrays are used in this class).",
+      "range": {
+        "startLine": 81,
+        "startChar": 6,
+        "endLine": 81,
+        "endChar": 30
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "788b0d47_542f9333",
+        "filename": "modules/audio_processing/test/test_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-07-29T12:37:02Z",
+      "side": 1,
+      "message": "I think a method comment is needed here to describe what is done in the method.",
+      "range": {
+        "startLine": 88,
+        "startChar": 7,
+        "endLine": 88,
+        "endChar": 12
       },
       "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
