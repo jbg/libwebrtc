@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e920d914_b66f9841",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-07-30T20:01:52Z",
+      "side": 1,
+      "message": "Don\u0027t need this check any more.",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 31
+      },
+      "revId": "7240319dad5a7fca20fbfb8d32306c96d104f5ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
