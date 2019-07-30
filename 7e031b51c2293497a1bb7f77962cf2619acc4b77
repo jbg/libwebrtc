@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "84a0a681_114fc3c7",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-07-30T13:20:34Z",
+      "side": 1,
+      "message": "I\u0027ve had another look, and it seems AcmReceiver has its own lock, and hence is thread safe.",
+      "parentUuid": "b8c9a027_1f246313",
+      "range": {
+        "startLine": 245,
+        "startChar": 18,
+        "endLine": 245,
+        "endChar": 58
+      },
+      "revId": "7e031b51c2293497a1bb7f77962cf2619acc4b77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb1b9f54_3b1e992f",
         "filename": "audio/channel_receive.h",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2018-11-21T08:56:34Z",
       "side": 1,
       "message": "NetEq::NetworkStatistics is not const, but is called three lines down. This raises the question: should the entire stats-getting chain be non-const?",
+      "range": {
+        "startLine": 322,
+        "startChar": 68,
+        "endLine": 322,
+        "endChar": 73
+      },
+      "revId": "7e031b51c2293497a1bb7f77962cf2619acc4b77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92c1273d_16537219",
+        "filename": "modules/audio_coding/acm2/acm_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-07-30T13:20:34Z",
+      "side": 1,
+      "message": "In my opinion (and I think web standard stats agree), they ought to be const. But that\u0027s a larger project.",
+      "parentUuid": "eb32450f_94c2dd4b",
       "range": {
         "startLine": 322,
         "startChar": 68,
