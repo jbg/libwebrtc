@@ -22,6 +22,30 @@
       "revId": "7240319dad5a7fca20fbfb8d32306c96d104f5ba",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0089a73_2d3ce240",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-07-30T22:48:13Z",
+      "side": 1,
+      "message": "Good call, removed. (Also removed enum_param, reverting to the inline cast now that it was only used once.)",
+      "parentUuid": "e920d914_b66f9841",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 31
+      },
+      "revId": "7240319dad5a7fca20fbfb8d32306c96d104f5ba",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
