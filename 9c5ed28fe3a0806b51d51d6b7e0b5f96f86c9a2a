@@ -16,6 +16,24 @@
       "revId": "9c5ed28fe3a0806b51d51d6b7e0b5f96f86c9a2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aea60dcb_3e28763f",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-07-31T10:02:08Z",
+      "side": 1,
+      "message": "I thought so (that a heads-up would be sufficient), but a downstream project wants to be able to distinguish between \"the value is different because of this change\" and \"the value is different because of a regression\". I guess the concern is what if it is different AND there is also a regression, and we don\u0027t notice because we think it\u0027s because of this change?\n\nAnyway... this is not a field trial to evaluate the feature per-se; we know we want the standard bytes and we know it will affect the reported values. There is a downside to experimenting with a field trial for the sake of a particular projects\u0027 interests: this turns all WebRTC uses in Chrome into an experiment; applications that don\u0027t know about field trials will get confused about certain clients reporting one value and other clients reporting another even when they are on the same Chrome version (depending on whether or not they belong to the field trial). A \"sometimes-regression\" is harder to debug than a version-specific regression and communicating that in this version of Chrome this value is different.\n\nSo I don\u0027t know. Another way to do that is to fix the standard getStats() API but to still report the non-standard values in the non-standard getStats() API, allowing the application to choose which version of the metric they are interested in. We can then a release later fix the non-standard one as well as to not maintain multiple values for the same thing. What does people think about that?\n\nI\u0027m not necessarily against a field trial, but for reasons above I am wondering if this is the way forward when fixing bugs in our platform. I know of at least one case where field trials have caused great confusions for third-party applications in the past.",
+      "parentUuid": "0d389089_ca10e39c",
+      "revId": "9c5ed28fe3a0806b51d51d6b7e0b5f96f86c9a2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
