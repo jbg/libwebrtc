@@ -451,6 +451,8 @@ void VideoReceiveStream::Stop() {
       video_receiver_.RegisterExternalDecoder(nullptr, decoder.payload_type);
   }
 
+  UpdateHistograms();
+
   video_stream_decoder_.reset();
   incoming_video_stream_.reset();
   transport_adapter_.Disable();
@@ -458,6 +460,16 @@ void VideoReceiveStream::Stop() {
 
 VideoReceiveStream::Stats VideoReceiveStream::GetStats() const {
   return stats_proxy_.GetStats();
+}
+
+void VideoReceiveStream::UpdateHistograms() {
+  absl::optional<int> fraction_lost;
+  StreamStatistician* statistician =
+      rtp_receive_statistics_->GetStatistician(config_.rtp.remote_ssrc);
+  if (statistician) {
+    fraction_lost = statistician->GetFractionLostInPercent();
+  }
+  stats_proxy_.UpdateHistograms(fraction_lost);
 }
 
 void VideoReceiveStream::AddSecondarySink(RtpPacketSinkInterface* sink) {
