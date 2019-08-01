@@ -52,6 +52,24 @@
       "revId": "9c5ed28fe3a0806b51d51d6b7e0b5f96f86c9a2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d6e1d8d_1e3be6a8",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-08-01T00:34:41Z",
+      "side": 1,
+      "message": "Yeah, I think I agree with everything you said, Henrik, but I also see the point that we want to separate this change from a release to avoid masking a regression.\n\nDoing a percent experiment for this seems weird to me.  The change is safe, it just means different stats.  Our goal is not to canary it on a small number of users, it\u0027s to decouple it from the chrome release cycle.  It seems to me that it would be better to let chrome roll out it\u0027s new code, verify that there aren\u0027t regressions, and then flip this flag straight to 100% of users and inform them that the stats are now different as of chrome mXX.\n\nIf there\u0027s a problem, we roll back the experiment, otherwise, we remove the field trial and keep the standards-compliant stats.",
+      "parentUuid": "a68269a1_27f6ef61",
+      "revId": "9c5ed28fe3a0806b51d51d6b7e0b5f96f86c9a2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
