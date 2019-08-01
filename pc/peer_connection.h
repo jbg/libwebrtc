@@ -18,6 +18,7 @@
 #include <utility>
 #include <vector>
 
+#include "api/data_channel_transport_interface.h"
 #include "api/media_transport_interface.h"
 #include "api/peer_connection_interface.h"
 #include "api/turn_customizer.h"
@@ -882,6 +883,7 @@ class PeerConnection : public PeerConnectionInternal,
                       const rtc::CopyOnWriteBuffer& buffer) override;
   void OnChannelClosing(int channel_id) override;
   void OnChannelClosed(int channel_id) override;
+  void OnStateChanged(DataChannelState state) override;
 
   // Called when an RTCCertificate is generated or retrieved by
   // WebRTCSessionDescriptionFactory. Should happen before setLocalDescription.
@@ -992,10 +994,10 @@ class PeerConnection : public PeerConnectionInternal,
   void OnSctpClosingProcedureStartedRemotely_n(int sid);
   void OnSctpClosingProcedureComplete_n(int sid);
 
-  bool SetupMediaTransportForDataChannels_n(const std::string& mid)
+  bool SetupDataChannelTransport_n(const std::string& mid)
       RTC_RUN_ON(network_thread());
   void OnMediaTransportStateChanged_n() RTC_RUN_ON(network_thread());
-  void TeardownMediaTransportForDataChannels_n() RTC_RUN_ON(network_thread());
+  void TeardownDataChannelTransport_n() RTC_RUN_ON(network_thread());
 
   bool ValidateBundleSettings(const cricket::SessionDescription* desc);
   bool HasRtcpMuxEnabled(const cricket::ContentInfo* content);
@@ -1297,33 +1299,34 @@ class PeerConnection : public PeerConnectionInternal,
   // Whether this peer is the caller. Set when the local description is applied.
   absl::optional<bool> is_caller_ RTC_GUARDED_BY(signaling_thread());
 
-  // Content name (MID) for media transport data channels in SDP.
+  // Content name (MID) for data channel transport data channels in SDP.
   absl::optional<std::string>
-      media_transport_data_mid_;  // TODO(bugs.webrtc.org/9987): Accessed on
-                                  // both signaling and network thread.
+      data_channel_transport_mid_;  // TODO(bugs.webrtc.org/9987): Accessed on
+                                    // both signaling and network thread.
 
-  // Media transport used for data channels.  Thread-safe.
-  MediaTransportInterface* media_transport_ =
+  // Plugin transport used for data channels.  Thread-safe.
+  DataChannelTransportInterface* data_channel_transport_ =
       nullptr;  // TODO(bugs.webrtc.org/9987): Object is thread safe, but
                 // pointer accessed on both signaling and network thread.
 
-  // Cached value of whether the media transport is ready to send.
-  bool media_transport_ready_to_send_data_ RTC_GUARDED_BY(signaling_thread()) =
-      false;
+  // Cached value of whether the data channel transport is ready to send.
+  bool data_channel_transport_ready_to_send_
+      RTC_GUARDED_BY(signaling_thread()) = false;
 
-  // Used to invoke media transport signals on the signaling thread.
-  std::unique_ptr<rtc::AsyncInvoker> media_transport_invoker_
+  // Used to invoke data channel transport signals on the signaling thread.
+  std::unique_ptr<rtc::AsyncInvoker> data_channel_transport_invoker_
       RTC_GUARDED_BY(network_thread());
 
   // Identical to the signals for SCTP, but from media transport:
-  sigslot::signal1<bool> SignalMediaTransportWritable_s
+  sigslot::signal1<bool> SignalDataChannelTransportWritable_s
       RTC_GUARDED_BY(signaling_thread());
   sigslot::signal2<const cricket::ReceiveDataParams&,
                    const rtc::CopyOnWriteBuffer&>
-      SignalMediaTransportReceivedData_s RTC_GUARDED_BY(signaling_thread());
-  sigslot::signal1<int> SignalMediaTransportChannelClosing_s
+      SignalDataChannelTransportReceivedData_s
+          RTC_GUARDED_BY(signaling_thread());
+  sigslot::signal1<int> SignalDataChannelTransportChannelClosing_s
       RTC_GUARDED_BY(signaling_thread());
-  sigslot::signal1<int> SignalMediaTransportChannelClosed_s
+  sigslot::signal1<int> SignalDataChannelTransportChannelClosed_s
       RTC_GUARDED_BY(signaling_thread());
 
   std::unique_ptr<SessionDescriptionInterface> current_local_description_
