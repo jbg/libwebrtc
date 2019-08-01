@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3621f9c9_2172f77f",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-01T16:06:16Z",
+      "side": 1,
+      "message": "This Stop() call makes me a little confused. It means that if Stop is called explicitly by the user of this class it will be called twice. Also, the implementation of stop uses the flag |decoder_running_| to exclude some but not all of what it is doing if it is called a second time.\n\nIt would be clearer to either (i) require that Stop is called exactly once, or (ii) allow multiple calls, but arrange so all but the first call do nothing at all.\n\nIn this cl, I had to put the UpdateHistograms inside the block protected by |decoder_running_|, without that, some test failed due to getting more histogram samples than expected.",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 9
+      },
+      "revId": "4fb5653bae67459ffb6509087611c72af4c1bfe7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
