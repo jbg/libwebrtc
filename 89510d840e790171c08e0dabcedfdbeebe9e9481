@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "147fc33e_79ae4dcc",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-01T10:47:03Z",
+      "side": 1,
+      "message": "I considered moving all the histograms from ReceiveStatsProxy to here, based on data from a final GetStats call. That would be closer to how they are done on the audio side. The reason I don\u0027t do that now is that some of the histograms are based on data not exposed through GetStats.",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 47
+      },
+      "revId": "89510d840e790171c08e0dabcedfdbeebe9e9481",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
