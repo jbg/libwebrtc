@@ -22,6 +22,30 @@
       "revId": "bd3f30535c333d79806c23b7a2f7dd53d71ce689",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0241861e_cd52a5c3",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-02T11:04:10Z",
+      "side": 0,
+      "message": "So we should call video_quality_observer_-\u003eUpdateHistograms() before destroying it, which is a midcall histogram output?",
+      "parentUuid": "b854a9e0_1716d403",
+      "range": {
+        "startLine": 731,
+        "startChar": 4,
+        "endLine": 731,
+        "endChar": 74
+      },
+      "revId": "bd3f30535c333d79806c23b7a2f7dd53d71ce689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
