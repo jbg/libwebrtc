@@ -22,6 +22,30 @@
       "revId": "a50b0cde95407681c850e548e5760bf4f8519fea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b25a0f6_1a16404e",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-02T09:24:46Z",
+      "side": 1,
+      "message": "GetStatistics returns fraction loss since last call to the GetStatistics(,/*reset\u003d*/true).\nThere are two calls to it. 1st one returns 1/5 \u003d 20% fraction loss,\n2nd one returns 1/2 \u003d 50% fraction loss\n\nGetFractionLost returns loss for the full duration, i.e.\nreturn 2/7 \u003d 28",
+      "parentUuid": "89a7e4a1_2e7cdf5a",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 58
+      },
+      "revId": "a50b0cde95407681c850e548e5760bf4f8519fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
