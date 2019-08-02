@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "88235d6e_95975ca9",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-02T08:57:45Z",
+      "side": 1,
+      "message": "https://google.github.io/styleguide/cppguide.html#Casting\n\n\"Do not use C-style casts.\"\n(for this case use brace initialization)",
+      "range": {
+        "startLine": 314,
+        "startChar": 15,
+        "endLine": 314,
+        "endChar": 24
+      },
+      "revId": "4fb5653bae67459ffb6509087611c72af4c1bfe7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3500114_48f028ea",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-02T08:57:45Z",
+      "side": 1,
+      "message": "though right now cumulative_loss is always positive, according to spec it might be negative too.",
+      "range": {
+        "startLine": 314,
+        "startChar": 24,
+        "endLine": 314,
+        "endChar": 40
+      },
+      "revId": "4fb5653bae67459ffb6509087611c72af4c1bfe7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3621f9c9_2172f77f",
         "filename": "video/video_receive_stream.cc",
         "patchSetId": 4
