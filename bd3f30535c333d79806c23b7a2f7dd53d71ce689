@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b854a9e0_1716d403",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-08-02T10:57:43Z",
+      "side": 0,
+      "message": "The video quality histograms are updated when content type changes.",
+      "range": {
+        "startLine": 731,
+        "startChar": 4,
+        "endLine": 731,
+        "endChar": 74
+      },
+      "revId": "bd3f30535c333d79806c23b7a2f7dd53d71ce689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
