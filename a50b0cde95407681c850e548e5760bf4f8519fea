@@ -46,6 +46,30 @@
       "revId": "a50b0cde95407681c850e548e5760bf4f8519fea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43b60dc3_1f5cbff4",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-02T09:36:33Z",
+      "side": 1,
+      "message": "Ah, that explains it. \n\nAt some point, I\u0027d like to delete the reset argument and make GetStatistics only return cumulative values. But we\u0027d then need to test RTCP fraction_lost in some other way.",
+      "parentUuid": "7b25a0f6_1a16404e",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 58
+      },
+      "revId": "a50b0cde95407681c850e548e5760bf4f8519fea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
