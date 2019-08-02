@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "db571d21_afc95ae9",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-02T09:16:47Z",
+      "side": 1,
+      "message": "Done. Just back from vacation...",
+      "parentUuid": "88235d6e_95975ca9",
+      "range": {
+        "startLine": 314,
+        "startChar": 15,
+        "endLine": 314,
+        "endChar": 24
+      },
+      "revId": "4fb5653bae67459ffb6509087611c72af4c1bfe7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "374c0062_f7b6fe33",
+        "filename": "modules/rtp_rtcp/source/receive_statistics_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-02T09:16:47Z",
+      "side": 1,
+      "message": "Added comment. The cast converts from uint32_t to int64_t, which will always be non-negative.",
+      "parentUuid": "e3500114_48f028ea",
+      "range": {
+        "startLine": 314,
+        "startChar": 24,
+        "endLine": 314,
+        "endChar": 40
+      },
+      "revId": "4fb5653bae67459ffb6509087611c72af4c1bfe7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3621f9c9_2172f77f",
         "filename": "video/video_receive_stream.cc",
         "patchSetId": 4
