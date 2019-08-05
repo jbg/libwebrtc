@@ -68,6 +68,25 @@ void ChannelBufferWavWriter::Write(const ChannelBuffer<float>& buffer) {
   file_->WriteSamples(&interleaved_[0], interleaved_.size());
 }
 
+ChannelBufferVectorWriter::ChannelBufferVectorWriter(std::vector<float>* output)
+    : output_(output) {
+  RTC_DCHECK(output_);
+}
+
+ChannelBufferVectorWriter::~ChannelBufferVectorWriter() = default;
+
+void ChannelBufferVectorWriter::Write(const ChannelBuffer<float>& buffer) {
+  // Account for sample rate changes throughout a simulation.
+  interleaved_buffer_.resize(buffer.size());
+  Interleave(buffer.channels(), buffer.num_frames(), buffer.num_channels(),
+             interleaved_buffer_.data());
+  FloatToFloatS16(interleaved_buffer_.data(), interleaved_buffer_.size(),
+                  interleaved_buffer_.data());
+  output_->insert(output_->end(), interleaved_buffer_.begin(),
+                  interleaved_buffer_.end());
+  RTC_DCHECK(output_->data());
+}
+
 void WriteIntData(const int16_t* data,
                   size_t length,
                   WavWriter* wav_file,
