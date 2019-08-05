@@ -319,6 +319,16 @@ class JsepTransportControllerTest : public JsepTransportController::Observer,
     return true;
   }
 
+  void OnDataChannelTransportNegotiated(
+      cricket::JsepTransport* transport,
+      cricket::JsepTransport::DataChannelTransportVariant
+          data_channel_transport) override {}
+
+  void OnDataChannelTransportRemoved(
+      cricket::JsepTransport* transport,
+      cricket::JsepTransport::DataChannelTransportVariant
+          data_channel_transport) override {}
+
   // Information received from signals from transport controller.
   cricket::IceConnectionState connection_state_ =
       cricket::kIceConnectionConnecting;
@@ -442,7 +452,7 @@ TEST_F(JsepTransportControllerTest,
                   .ok());
 
   FakeMediaTransport* media_transport = static_cast<FakeMediaTransport*>(
-      transport_controller_->GetMediaTransportForDataChannel(kAudioMid1));
+      transport_controller_->GetDataChannelTransport(kAudioMid1));
 
   ASSERT_NE(nullptr, media_transport);
 
@@ -452,7 +462,7 @@ TEST_F(JsepTransportControllerTest,
 
   // Return nullptr for non-existing mids.
   EXPECT_EQ(nullptr,
-            transport_controller_->GetMediaTransportForDataChannel(kVideoMid2));
+            transport_controller_->GetDataChannelTransport(kVideoMid2));
 
   EXPECT_EQ(cricket::ICE_CANDIDATE_COMPONENT_RTP,
             transport_controller_->GetDtlsTransport(kAudioMid1)->component())

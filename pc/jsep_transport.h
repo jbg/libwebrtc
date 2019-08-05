@@ -78,6 +78,15 @@ struct JsepTransportDescription {
 class JsepTransport : public sigslot::has_slots<>,
                       public webrtc::MediaTransportStateCallback {
  public:
+  // Represents an underlying transport for data channels.  Only one of the two
+  // transports will be set.
+  // TODO(mellem):  This should really be replaced by moving SCTP/DTLS to JSEP
+  // and making an SCTP/DTLS implementation of DataChannelTransportInterface.
+  struct DataChannelTransportVariant {
+    rtc::scoped_refptr<webrtc::DtlsTransport> dtls_transport;
+    webrtc::DataChannelTransportInterface* data_channel_transport = nullptr;
+  };
+
   // |mid| is just used for log statements in order to identify the Transport.
   // Note that |local_certificate| is allowed to be null since a remote
   // description may be set before a local certificate is generated.
@@ -244,6 +253,16 @@ class JsepTransport : public sigslot::has_slots<>,
   // This is signaled for changes in |media_transport_| state.
   sigslot::signal<> SignalMediaTransportStateChanged;
 
+  // Signals that a data channel transport was negotiated and may be used to
+  // send data.
+  sigslot::signal2<JsepTransport*, DataChannelTransportVariant>
+      SignalDataChannelTransportNegotiated;
+
+  // Signals that a data channel tranpsort is going to be deleted and should be
+  // removed from the application.
+  sigslot::signal2<JsepTransport*, DataChannelTransportVariant>
+      SignalDataChannelTransportRemoved;
+
   // TODO(deadbeef): The methods below are only public for testing. Should make
   // them utility functions or objects so they can be tested independently from
   // this class.
@@ -304,8 +323,9 @@ class JsepTransport : public sigslot::has_slots<>,
 
   // Deactivates, signals removal, and deletes |composite_rtp_transport_| if the
   // current state of negotiation is sufficient to determine which rtp_transport
-  // to use.
-  void NegotiateRtpTransport(webrtc::SdpType type) RTC_RUN_ON(network_thread_);
+  // and data channel transport to use.
+  void NegotiateDatagramTransport(webrtc::SdpType type)
+      RTC_RUN_ON(network_thread_);
 
   // Returns the default (non-datagram) rtp transport, if any.
   webrtc::RtpTransportInternal* default_rtp_transport() const

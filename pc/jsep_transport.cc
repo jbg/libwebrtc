@@ -257,7 +257,7 @@ webrtc::RTCError JsepTransport::SetLocalJsepTransportDescription(
   // If PRANSWER/ANSWER is set, we should decide transport protocol type.
   if (type == SdpType::kPrAnswer || type == SdpType::kAnswer) {
     error = NegotiateAndSetDtlsParameters(type);
-    NegotiateRtpTransport(type);
+    NegotiateDatagramTransport(type);
   }
   if (!error.ok()) {
     local_description_.reset();
@@ -328,7 +328,7 @@ webrtc::RTCError JsepTransport::SetRemoteJsepTransportDescription(
   // If PRANSWER/ANSWER is set, we should decide transport protocol type.
   if (type == SdpType::kPrAnswer || type == SdpType::kAnswer) {
     error = NegotiateAndSetDtlsParameters(SdpType::kOffer);
-    NegotiateRtpTransport(type);
+    NegotiateDatagramTransport(type);
   }
   if (!error.ok()) {
     remote_description_.reset();
@@ -780,7 +780,7 @@ void JsepTransport::OnStateChanged(webrtc::MediaTransportState state) {
   SignalMediaTransportStateChanged();
 }
 
-void JsepTransport::NegotiateRtpTransport(SdpType type) {
+void JsepTransport::NegotiateDatagramTransport(SdpType type) {
   RTC_DCHECK(type == SdpType::kAnswer || type == SdpType::kPrAnswer);
   rtc::CritScope lock(&accessor_lock_);
   if (!composite_rtp_transport_) {
@@ -792,13 +792,22 @@ void JsepTransport::NegotiateRtpTransport(SdpType type) {
       remote_description_->transport_desc.opaque_parameters ==
           local_description_->transport_desc.opaque_parameters;
 
+  // A provisional or full or answer lets the peer start sending on one of the
+  // transports.
+  DataChannelTransportVariant negotiated_dc_variant;
+  DataChannelTransportVariant removed_dc_variant;
   if (use_datagram_transport) {
     RTC_LOG(INFO) << "Datagram transport provisionally activated";
     composite_rtp_transport_->SetSendTransport(datagram_rtp_transport_.get());
+    negotiated_dc_variant.data_channel_transport = datagram_transport_.get();
+    removed_dc_variant.dtls_transport = rtp_dtls_transport_;
   } else {
     RTC_LOG(INFO) << "Datagram transport provisionally rejected";
     composite_rtp_transport_->SetSendTransport(default_rtp_transport());
+    negotiated_dc_variant.dtls_transport = rtp_dtls_transport_;
+    removed_dc_variant.data_channel_transport = datagram_transport_.get();
   }
+  SignalDataChannelTransportNegotiated(this, std::move(negotiated_dc_variant));
 
   if (type != SdpType::kAnswer) {
     // A provisional answer lets the peer start sending on the chosen
@@ -806,9 +815,13 @@ void JsepTransport::NegotiateRtpTransport(SdpType type) {
     return;
   }
 
-  // A full answer lets the peer send on the chosen transport and delete the
-  // rest.
+  // A full answer lets the peer delete the remaining transports.
+  // First, signal that the transports will be deleted so the application can
+  // stop using them.
+  SignalDataChannelTransportRemoved(this, std::move(removed_dc_variant));
   if (use_datagram_transport) {
+    // TODO(mellem): Signal that the datagram transport is going to be used for
+    // data channels.
     RTC_LOG(INFO) << "Datagram transport activated";
     composite_rtp_transport_->RemoveTransport(default_rtp_transport());
     if (unencrypted_rtp_transport_) {
@@ -819,6 +832,8 @@ void JsepTransport::NegotiateRtpTransport(SdpType type) {
       dtls_srtp_transport_ = nullptr;
     }
   } else {
+    // TODO(mellem): Signal that datagram transport is not used for data
+    // channels.
     RTC_LOG(INFO) << "Datagram transport rejected";
     composite_rtp_transport_->RemoveTransport(datagram_rtp_transport_.get());
     datagram_rtp_transport_ = nullptr;

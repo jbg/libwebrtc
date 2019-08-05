@@ -167,15 +167,20 @@ MediaTransportConfig JsepTransportController::GetMediaTransportConfig(
   }
 }
 
-MediaTransportInterface*
-JsepTransportController::GetMediaTransportForDataChannel(
+DataChannelTransportInterface* JsepTransportController::GetDataChannelTransport(
     const std::string& mid) const {
   auto jsep_transport = GetJsepTransportForMid(mid);
-  if (!jsep_transport || !config_.use_media_transport_for_data_channels) {
+  if (!jsep_transport) {
     return nullptr;
   }
 
-  return jsep_transport->media_transport();
+  if (config_.use_media_transport_for_data_channels) {
+    return jsep_transport->media_transport();
+  } else if (config_.use_datagram_transport_for_data_channels) {
+    return jsep_transport->datagram_transport();
+  }
+  // Not configured to use a data channel transport.
+  return nullptr;
 }
 
 MediaTransportState JsepTransportController::GetMediaTransportState(
@@ -437,7 +442,8 @@ void JsepTransportController::SetActiveResetSrtpParams(
 void JsepTransportController::SetMediaTransportSettings(
     bool use_media_transport_for_media,
     bool use_media_transport_for_data_channels,
-    bool use_datagram_transport) {
+    bool use_datagram_transport,
+    bool use_datagram_transport_for_data_channels) {
   RTC_DCHECK(use_media_transport_for_media ==
                  config_.use_media_transport_for_media ||
              jsep_transports_by_name_.empty())
@@ -454,6 +460,8 @@ void JsepTransportController::SetMediaTransportSettings(
   config_.use_media_transport_for_data_channels =
       use_media_transport_for_data_channels;
   config_.use_datagram_transport = use_datagram_transport;
+  config_.use_datagram_transport_for_data_channels =
+      use_datagram_transport_for_data_channels;
 }
 
 std::unique_ptr<cricket::IceTransportInternal>
@@ -482,7 +490,8 @@ JsepTransportController::CreateDtlsTransport(
   std::unique_ptr<cricket::DtlsTransportInternal> dtls;
 
   if (datagram_transport) {
-    RTC_DCHECK(config_.use_datagram_transport);
+    RTC_DCHECK(config_.use_datagram_transport ||
+               config_.use_datagram_transport_for_data_channels);
 
     // Create DTLS wrapper around DatagramTransportInterface.
     dtls = absl::make_unique<cricket::DatagramDtlsAdaptor>(
@@ -1079,7 +1088,8 @@ JsepTransportController::MaybeCreateDatagramTransport(
     return nullptr;
   }
 
-  if (!config_.use_datagram_transport) {
+  if (!(config_.use_datagram_transport ||
+        config_.use_datagram_transport_for_data_channels)) {
     return nullptr;
   }
 
@@ -1232,6 +1242,10 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
       this, &JsepTransportController::UpdateAggregateStates_n);
   jsep_transport->SignalMediaTransportStateChanged.connect(
       this, &JsepTransportController::OnMediaTransportStateChanged_n);
+  jsep_transport->SignalDataChannelTransportNegotiated.connect(
+      this, &JsepTransportController::OnDataChannelTransportNegotiated_n);
+  jsep_transport->SignalDataChannelTransportRemoved.connect(
+      this, &JsepTransportController::OnDataChannelTransportRemoved_n);
   SetTransportForMid(content_info.name, jsep_transport.get());
 
   jsep_transports_by_name_[content_info.name] = std::move(jsep_transport);
@@ -1431,6 +1445,22 @@ void JsepTransportController::OnTransportStateChanged_n(
 void JsepTransportController::OnMediaTransportStateChanged_n() {
   SignalMediaTransportStateChanged();
   UpdateAggregateStates_n();
+}
+
+void JsepTransportController::OnDataChannelTransportNegotiated_n(
+    cricket::JsepTransport* transport,
+    cricket::JsepTransport::DataChannelTransportVariant
+        data_channel_transport) {
+  config_.transport_observer->OnDataChannelTransportNegotiated(
+      transport, std::move(data_channel_transport));
+}
+
+void JsepTransportController::OnDataChannelTransportRemoved_n(
+    cricket::JsepTransport* transport,
+    cricket::JsepTransport::DataChannelTransportVariant
+        data_channel_transport) {
+  config_.transport_observer->OnDataChannelTransportRemoved(
+      transport, std::move(data_channel_transport));
 }
 
 void JsepTransportController::UpdateAggregateStates_n() {
@@ -1718,7 +1748,8 @@ JsepTransportController::GenerateOrGetLastMediaTransportOffer() {
 
 absl::optional<cricket::OpaqueTransportParameters>
 JsepTransportController::GetTransportParameters(const std::string& mid) {
-  if (!config_.use_datagram_transport) {
+  if (!(config_.use_datagram_transport ||
+        config_.use_datagram_transport_for_data_channels)) {
     return absl::nullopt;
   }
 

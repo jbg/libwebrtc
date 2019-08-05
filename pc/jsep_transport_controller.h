@@ -61,6 +61,16 @@ class JsepTransportController : public sigslot::has_slots<> {
         RtpTransportInternal* rtp_transport,
         rtc::scoped_refptr<DtlsTransport> dtls_transport,
         MediaTransportInterface* media_transport) = 0;
+
+    virtual void OnDataChannelTransportNegotiated(
+        cricket::JsepTransport* transport,
+        cricket::JsepTransport::DataChannelTransportVariant
+            data_channel_transport) = 0;
+
+    virtual void OnDataChannelTransportRemoved(
+        cricket::JsepTransport* transport,
+        cricket::JsepTransport::DataChannelTransportVariant
+            data_channel_transport) = 0;
   };
 
   struct Config {
@@ -96,6 +106,9 @@ class JsepTransportController : public sigslot::has_slots<> {
 
     // Use encrypted datagram transport to send packets.
     bool use_datagram_transport = false;
+
+    // Use datagram transport's implementation of data channels instead of SCTP.
+    bool use_datagram_transport_for_data_channels = false;
 
     // Optional media transport factory (experimental). If provided it will be
     // used to create media_transport (as long as either
@@ -139,7 +152,7 @@ class JsepTransportController : public sigslot::has_slots<> {
 
   MediaTransportConfig GetMediaTransportConfig(const std::string& mid) const;
 
-  MediaTransportInterface* GetMediaTransportForDataChannel(
+  DataChannelTransportInterface* GetDataChannelTransport(
       const std::string& mid) const;
 
   // TODO(sukhanov): Deprecate, return only config.
@@ -204,7 +217,8 @@ class JsepTransportController : public sigslot::has_slots<> {
   // Jsep transport is created, you can't change this setting.
   void SetMediaTransportSettings(bool use_media_transport_for_media,
                                  bool use_media_transport_for_data_channels,
-                                 bool use_datagram_transport);
+                                 bool use_datagram_transport,
+                                 bool use_datagram_transport_for_data_channels);
 
   // If media transport is present enabled and supported,
   // when this method is called, it creates a media transport and generates its
@@ -250,6 +264,8 @@ class JsepTransportController : public sigslot::has_slots<> {
 
   sigslot::signal1<rtc::SSLHandshakeError> SignalDtlsHandshakeError;
 
+  // TODO(mellem): Delete this signal once PeerConnection no longer
+  // uses it to determine data channel state.
   sigslot::signal<> SignalMediaTransportStateChanged;
 
  private:
@@ -394,6 +410,14 @@ class JsepTransportController : public sigslot::has_slots<> {
   void OnTransportRoleConflict_n(cricket::IceTransportInternal* transport);
   void OnTransportStateChanged_n(cricket::IceTransportInternal* transport);
   void OnMediaTransportStateChanged_n();
+  void OnDataChannelTransportNegotiated_n(
+      cricket::JsepTransport* transport,
+      cricket::JsepTransport::DataChannelTransportVariant
+          data_channel_transport);
+  void OnDataChannelTransportRemoved_n(
+      cricket::JsepTransport* transport,
+      cricket::JsepTransport::DataChannelTransportVariant
+          data_channel_transport);
 
   void UpdateAggregateStates_n();
 

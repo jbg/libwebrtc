@@ -352,7 +352,12 @@ void MediaTransportPair::LoopbackMediaTransport::SetDataSink(
     DataChannelSink* sink) {
   rtc::CritScope lock(&sink_lock_);
   data_sink_ = sink;
+  invoker_.AsyncInvoke<void>(RTC_FROM_HERE, thread_, [this] {
+    RTC_DCHECK_RUN_ON(thread_);
+    OnStateChanged();
+  });
 }
+
 void MediaTransportPair::LoopbackMediaTransport::SetState(
     MediaTransportState state) {
   invoker_.AsyncInvoke<void>(RTC_FROM_HERE, thread_, [this, state] {
@@ -433,6 +438,22 @@ void MediaTransportPair::LoopbackMediaTransport::OnStateChanged() {
   rtc::CritScope lock(&sink_lock_);
   if (state_callback_) {
     state_callback_->OnStateChanged(state_);
+  }
+
+  // Propagate state to data channel sink, if present.
+  if (data_sink_ == nullptr) {
+    return;
+  }
+  switch (state_) {
+    case MediaTransportState::kPending:
+      data_sink_->OnStateChanged(DataChannelState::kInitial);
+      break;
+    case MediaTransportState::kWritable:
+      data_sink_->OnStateChanged(DataChannelState::kWritable);
+      break;
+    case MediaTransportState::kClosed:
+      data_sink_->OnStateChanged(DataChannelState::kClosed);
+      break;
   }
 }
 
