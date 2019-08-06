@@ -458,6 +458,12 @@ class PeerConnection : public PeerConnectionInternal,
   void OnIceCandidatesRemoved(const std::vector<cricket::Candidate>& candidates)
       RTC_RUN_ON(signaling_thread());
 
+  void OnSelectedCandidatePairChanged(const cricket::Candidate& local,
+                                      const cricket::Candidate& remote,
+                                      int last_data_received_ms,
+                                      const std::string& reason)
+      RTC_RUN_ON(signaling_thread());
+
   // Update the state, signaling if necessary.
   void ChangeSignalingState(SignalingState signaling_state)
       RTC_RUN_ON(signaling_thread());
@@ -1040,6 +1046,9 @@ class PeerConnection : public PeerConnectionInternal,
       RTC_RUN_ON(signaling_thread());
   void OnTransportControllerCandidatesRemoved(
       const std::vector<cricket::Candidate>& candidates)
+      RTC_RUN_ON(signaling_thread());
+  void OnTransportControllerCandidateChanged(
+      const cricket::CandidatePairChangeEvent& event)
       RTC_RUN_ON(signaling_thread());
   void OnTransportControllerDtlsHandshakeError(rtc::SSLHandshakeError error);
 

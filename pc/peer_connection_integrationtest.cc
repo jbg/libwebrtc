@@ -298,6 +298,10 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
   ice_gathering_state_history() const {
     return ice_gathering_state_history_;
   }
+  std::vector<cricket::CandidatePairChangeEvent>
+  ice_candidate_pair_change_history() const {
+    return ice_candidate_pair_change_history_;
+  }
 
   void AddAudioVideoTracks() {
     AddAudioTrack();
@@ -931,6 +935,18 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     EXPECT_EQ(pc()->ice_gathering_state(), new_state);
     ice_gathering_state_history_.push_back(new_state);
   }
+
+  void OnIceSelectedCandidatePairChanged(const cricket::Candidate& local,
+                                         const cricket::Candidate& remote,
+                                         int last_data_received_ms,
+                                         const std::string& reason) {
+    cricket::CandidatePairChangeEvent event;
+    event.local_candidate = local;
+    event.remote_candidate = remote;
+    event.last_data_received_ms = last_data_received_ms;
+    event.reason = reason;
+    ice_candidate_pair_change_history_.push_back(event);
+  }
   void OnIceCandidate(const webrtc::IceCandidateInterface* candidate) override {
     RTC_LOG(LS_INFO) << debug_name_ << ": OnIceCandidate";
 
@@ -1025,6 +1041,8 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
       peer_connection_state_history_;
   std::vector<PeerConnectionInterface::IceGatheringState>
       ice_gathering_state_history_;
+  std::vector<cricket::CandidatePairChangeEvent>
+      ice_candidate_pair_change_history_;
 
   webrtc::FakeRtcEventLogFactory* event_log_factory_;
 
@@ -4208,6 +4226,7 @@ TEST_P(PeerConnectionIntegrationTest, MediaContinuesFlowingAfterIceRestart) {
   std::string callee_ufrag_pre_restart =
       desc->transport_infos()[0].description.ice_ufrag;
 
+  EXPECT_EQ(caller()->ice_candidate_pair_change_history().size(), 1u);
   // Have the caller initiate an ICE restart.
   caller()->SetOfferAnswerOptions(IceRestartOfferAnswerOptions());
   caller()->CreateAndSetAndSignalOffer();
@@ -4239,6 +4258,7 @@ TEST_P(PeerConnectionIntegrationTest, MediaContinuesFlowingAfterIceRestart) {
   ASSERT_NE(callee_candidate_pre_restart, callee_candidate_post_restart);
   ASSERT_NE(caller_ufrag_pre_restart, caller_ufrag_post_restart);
   ASSERT_NE(callee_ufrag_pre_restart, callee_ufrag_post_restart);
+  EXPECT_GT(caller()->ice_candidate_pair_change_history().size(), 1u);
 
   // Ensure that additional frames are received after the ICE restart.
   MediaExpectations media_expectations;
