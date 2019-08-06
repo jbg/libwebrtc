@@ -336,6 +336,8 @@ rtc_static_library("desktop_capture_generic") {
     "win/dxgi_texture_mapping.h",
     "win/dxgi_texture_staging.cc",
     "win/dxgi_texture_staging.h",
+    "win/owned_window_identifier.cc",
+    "win/owned_window_identifier.h",
     "win/scoped_gdi_object.h",
     "win/scoped_thread_desktop.cc",
     "win/scoped_thread_desktop.h",

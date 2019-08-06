@@ -10,11 +10,13 @@
 
 #include <assert.h>
 
+#include <cmath>
 #include <memory>
 
 #include "modules/desktop_capture/cropped_desktop_frame.h"
 #include "modules/desktop_capture/desktop_capturer.h"
 #include "modules/desktop_capture/desktop_frame_win.h"
+#include "modules/desktop_capture/win/owned_window_identifier.h"
 #include "modules/desktop_capture/win/screen_capture_utils.h"
 #include "modules/desktop_capture/win/window_capture_utils.h"
 #include "modules/desktop_capture/window_finder_win.h"
@@ -92,6 +94,135 @@ BOOL CALLBACK WindowsEnumerationHandler(HWND hwnd, LPARAM param) {
   return TRUE;
 }
 
+// Used to pass input/output data during the EnumWindows call to collect
+// owned/pop-up windows that should be captured.
+struct OwnedWindowCollectorContext : public OwnedWindowIdentifier {
+  OwnedWindowCollectorContext(HWND selected_window,
+                              DesktopRect selected_window_rect,
+                              WindowCaptureHelperWin* window_capture_helper,
+                              std::vector<HWND>* owned_windows)
+      : OwnedWindowIdentifier(selected_window,
+                              selected_window_rect,
+                              window_capture_helper),
+        owned_windows(owned_windows) {}
+
+  std::vector<HWND>* owned_windows;
+};
+
+// Called via EnumWindows for each root window; adds owned/pop-up windows that
+// should be captured to a vector it's passed.
+BOOL CALLBACK OwnedWindowCollector(HWND hwnd, LPARAM param) {
+  OwnedWindowCollectorContext* context =
+      reinterpret_cast<OwnedWindowCollectorContext*>(param);
+  if (hwnd == context->selected_window) {
+    // Windows are enumerated in top-down z-order, so we can stop enumerating
+    // upon reaching the primary/owner window.
+    return FALSE;
+  }
+
+  // Only proceed with further checks for pop-up windows that are visible.
+  if (!(GetWindowLong(hwnd, GWL_STYLE) & WS_POPUP) ||
+      !context->window_capture_helper->IsWindowVisibleOnCurrentDesktop(hwnd)) {
+    return TRUE;
+  }
+
+  // Owned windows that intersect the selected window should be captured.
+  if (context->IsWindowOwned(hwnd) && context->IsWindowOverlapping(hwnd)) {
+    // Skip windows that draw shadows around menus, since they wouldn't be
+    // captured properly.
+    if (GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_TRANSPARENT) {
+      const WCHAR kSysShadow[] = L"SysShadow";
+      const size_t kClassLength = ARRAYSIZE(kSysShadow);
+      WCHAR class_name[kClassLength];
+      const int class_name_length =
+          GetClassNameW(hwnd, class_name, kClassLength);
+      if (class_name_length == kClassLength - 1 &&
+          wcscmp(class_name, kSysShadow) == 0) {
+        return TRUE;
+      }
+    }
+
+    context->owned_windows->push_back(hwnd);
+  }
+
+  return TRUE;
+}
+
+// Used when capturing owned/pop-up windows, to copy their contents onto
+// the outer/owner frame.
+class OwnedWindowCapturerCallback : public DesktopCapturer::Callback {
+ public:
+  OwnedWindowCapturerCallback(DesktopFrame& outer_frame,
+                              double horizontal_scale,
+                              double vertical_scale);
+
+  virtual void OnCaptureResult(DesktopCapturer::Result result,
+                               std::unique_ptr<DesktopFrame> frame);
+
+ private:
+  DesktopFrame& outer_frame_;
+  double horizontal_scale_;
+  double vertical_scale_;
+};
+
+OwnedWindowCapturerCallback::OwnedWindowCapturerCallback(
+    DesktopFrame& outer_frame,
+    double horizontal_scale,
+    double vertical_scale)
+    : outer_frame_(outer_frame),
+      horizontal_scale_(horizontal_scale),
+      vertical_scale_(vertical_scale) {}
+
+void OwnedWindowCapturerCallback::OnCaptureResult(
+    DesktopCapturer::Result result,
+    std::unique_ptr<DesktopFrame> frame) {
+  if (result != DesktopCapturer::Result::SUCCESS) {
+    // Simply log any error capturing an owned/pop-up window without bubbling it
+    // up to the outer callback (an expected error here is that the owned/pop-up
+    // window was closed; any unexpected errors won't fail the outer capture).
+    RTC_LOG(LS_INFO) << "capturing owned window failed";
+    return;
+  }
+
+  // Copy / composite the captured frame into the outer frame.
+  const DesktopVector& outer_frame_origin = outer_frame_.top_left();
+  const DesktopVector& frame_origin = frame->top_left();
+
+  DesktopVector frame_offset = frame_origin.subtract(outer_frame_origin);
+
+  // Determine the intersection, first adjusting its origin to account for any
+  // DPI scaling.
+  DesktopRect intersection_rect = frame->rect();
+  if (horizontal_scale_ != 1.0 || vertical_scale_ != 1.0) {
+    DesktopVector scaled_frame_offset(
+        static_cast<int>(
+            std::round((horizontal_scale_ - 1.0) * frame_offset.x())),
+        static_cast<int>(
+            std::round((vertical_scale_ - 1.0) * frame_offset.y())));
+
+    intersection_rect.Translate(scaled_frame_offset);
+  }
+
+  intersection_rect.IntersectWith(outer_frame_.rect());
+  if (intersection_rect.is_empty()) {
+    // The owned window may have moved since scheduled for capture.
+    return;
+  }
+
+  // Translate the intersection rect to be relative to the outer rect.
+  intersection_rect.Translate(-outer_frame_origin.x(), -outer_frame_origin.y());
+
+  // Determine source position for the copy (offsets of outer frame from
+  // source origin, if positive).
+  int32_t src_pos_x = std::max(
+      0, static_cast<int>(std::round(-frame_offset.x() * horizontal_scale_)));
+  int32_t src_pos_y = std::max(
+      0, static_cast<int>(std::round(-frame_offset.y() * vertical_scale_)));
+
+  outer_frame_.CopyPixelsFrom(*frame, DesktopVector(src_pos_x, src_pos_y),
+                              intersection_rect);
+}
+
 class WindowCapturerWin : public DesktopCapturer {
  public:
   WindowCapturerWin();
@@ -106,6 +237,8 @@ class WindowCapturerWin : public DesktopCapturer {
   bool IsOccluded(const DesktopVector& pos) override;
 
  private:
+  void CaptureFrame(bool capture_owned_windows);
+
   Callback* callback_ = nullptr;
 
   // HWND and HDC for the currently selected window or nullptr if window is not
@@ -121,6 +254,9 @@ class WindowCapturerWin : public DesktopCapturer {
   std::map<HWND, DesktopSize> window_size_map_;
 
   WindowFinderWin window_finder_;
+
+  std::vector<HWND> owned_windows_;
+  std::unique_ptr<WindowCapturerWin> owned_window_capturer_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(WindowCapturerWin);
 };
@@ -179,8 +315,12 @@ bool WindowCapturerWin::FocusOnSelectedSource() {
 
 bool WindowCapturerWin::IsOccluded(const DesktopVector& pos) {
   DesktopVector sys_pos = pos.add(GetFullscreenRect().top_left());
-  return reinterpret_cast<HWND>(window_finder_.GetWindowUnderPoint(sys_pos)) !=
-         window_;
+  HWND hwnd =
+      reinterpret_cast<HWND>(window_finder_.GetWindowUnderPoint(sys_pos));
+
+  return hwnd != window_ &&
+         std::find(owned_windows_.begin(), owned_windows_.end(), hwnd) ==
+             owned_windows_.end();
 }
 
 void WindowCapturerWin::Start(Callback* callback) {
@@ -191,6 +331,10 @@ void WindowCapturerWin::Start(Callback* callback) {
 }
 
 void WindowCapturerWin::CaptureFrame() {
+  CaptureFrame(/*capture_owned_windows*/ true);
+}
+
+void WindowCapturerWin::CaptureFrame(bool capture_owned_windows) {
   TRACE_EVENT0("webrtc", "WindowCapturerWin::CaptureFrame");
 
   if (!window_) {
@@ -206,9 +350,17 @@ void WindowCapturerWin::CaptureFrame() {
     return;
   }
 
+  // Determine the window region excluding any resize border, and including
+  // any visible border if capturing an owned window / dialog. (Don't include
+  // any visible border for the selected window for consistency with
+  // CroppingWindowCapturerWin, which would expose a bit of the background
+  // through the partially-transparent border.)
+  const bool include_border = !capture_owned_windows;
   DesktopRect cropped_rect;
   DesktopRect original_rect;
-  if (!GetCroppedWindowRect(window_, &cropped_rect, &original_rect)) {
+
+  if (!GetCroppedWindowRect(window_, include_border, &cropped_rect,
+                            &original_rect)) {
     RTC_LOG(LS_WARNING) << "Failed to get drawable window area: "
                         << GetLastError();
     callback_->OnCaptureResult(Result::ERROR_TEMPORARY, nullptr);
@@ -236,6 +388,10 @@ void WindowCapturerWin::CaptureFrame() {
     return;
   }
 
+  DesktopRect unscaled_cropped_rect = cropped_rect;
+  double horizontal_scale = 1.0;
+  double vertical_scale = 1.0;
+
   DesktopSize window_dc_size;
   if (GetDcSize(window_dc, &window_dc_size)) {
     // The |window_dc_size| is used to detect the scaling of the original
@@ -251,12 +407,12 @@ void WindowCapturerWin::CaptureFrame() {
 
     // If |window_dc_size| is smaller than |window_rect|, let's resize both
     // |original_rect| and |cropped_rect| according to the scaling factor.
-    const double vertical_scale =
+    horizontal_scale =
         static_cast<double>(window_dc_size.width()) / original_rect.width();
-    const double horizontal_scale =
+    vertical_scale =
         static_cast<double>(window_dc_size.height()) / original_rect.height();
-    original_rect.Scale(vertical_scale, horizontal_scale);
-    cropped_rect.Scale(vertical_scale, horizontal_scale);
+    original_rect.Scale(horizontal_scale, vertical_scale);
+    cropped_rect.Scale(horizontal_scale, vertical_scale);
   }
 
   std::unique_ptr<DesktopFrameWin> frame(
@@ -338,6 +494,42 @@ void WindowCapturerWin::CaptureFrame() {
   std::unique_ptr<DesktopFrame> cropped_frame =
       CreateCroppedDesktopFrame(std::move(frame), cropped_rect);
   RTC_DCHECK(cropped_frame);
+
+  if (capture_owned_windows) {
+    // If any owned/pop-up windows overlap the selected window, capture them
+    // and copy/composite their contents into the frame.
+    owned_windows_.clear();
+    OwnedWindowCollectorContext context(window_, unscaled_cropped_rect,
+                                        &window_capture_helper_,
+                                        &owned_windows_);
+
+    if (context.IsSelectedWindowValid()) {
+      EnumWindows(OwnedWindowCollector, reinterpret_cast<LPARAM>(&context));
+
+      if (!owned_windows_.empty()) {
+        if (!owned_window_capturer_) {
+          owned_window_capturer_ = std::make_unique<WindowCapturerWin>();
+        }
+
+        OwnedWindowCapturerCallback callback(*cropped_frame, horizontal_scale,
+                                             vertical_scale);
+
+        // Owned windows are stored in top-down z-order, so this iterates in
+        // reverse to capture / draw them in bottom-up z-order
+        for (auto it = owned_windows_.rbegin(); it != owned_windows_.rend();
+             it++) {
+          HWND hwnd = *it;
+          if (owned_window_capturer_->SelectSource(
+                  reinterpret_cast<SourceId>(hwnd))) {
+            owned_window_capturer_->callback_ = nullptr;
+            owned_window_capturer_->Start(&callback);
+            owned_window_capturer_->CaptureFrame(
+                /*capture_owned_windows*/ false);
+          }
+        }
+      }
+    }
+  }
 
   callback_->OnCaptureResult(Result::SUCCESS, std::move(cropped_frame));
 }

@@ -8,6 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#ifndef MODULES_DESKTOP_CAPTURE_WIN_WINDOW_CAPTURE_UTILS_H_
+#define MODULES_DESKTOP_CAPTURE_WIN_WINDOW_CAPTURE_UTILS_H_
+
 #include <shlobj.h>
 #include <windows.h>
 #include <wrl/client.h>
@@ -37,6 +40,7 @@ bool GetWindowRect(HWND window, DesktopRect* result);
 // WindowCapturerWin to crop out the borders or shadow according to their
 // scenarios. But this function is too generic and easy to be misused.
 bool GetCroppedWindowRect(HWND window,
+                          bool include_border,
                           DesktopRect* cropped_rect,
                           DesktopRect* original_rect);
 
@@ -91,3 +95,5 @@ class WindowCaptureHelperWin {
 };
 
 }  // namespace webrtc
+
+#endif  // MODULES_DESKTOP_CAPTURE_WIN_WINDOW_CAPTURE_UTILS_H_
