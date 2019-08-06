@@ -233,6 +233,12 @@ void PeerConnectionDelegateAdapter::OnIceCandidatesRemoved(
                     didRemoveIceCandidates:ice_candidates];
 }
 
+void PeerConnectionDelegateAdapter::OnIceCandidatePairChange(
+    const cricket::CandidatePairChangeEvent &event) {
+  RTCPeerConnection *peer_connection = peer_connection_;
+  [peer_connection.delegate event:event];
+}
+
 void PeerConnectionDelegateAdapter::OnAddTrack(
     rtc::scoped_refptr<RtpReceiverInterface> receiver,
     const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams) {
