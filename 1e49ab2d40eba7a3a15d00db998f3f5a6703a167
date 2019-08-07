@@ -16,6 +16,24 @@
       "revId": "1e49ab2d40eba7a3a15d00db998f3f5a6703a167",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5073999d_51c0d4ca",
+        "filename": "modules/audio_coding/test/TestVADDTX.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-07T10:42:14Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "d7609677_a4a1f496",
+      "revId": "1e49ab2d40eba7a3a15d00db998f3f5a6703a167",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
