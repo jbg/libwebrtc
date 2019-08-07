@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7609677_a4a1f496",
+        "filename": "modules/audio_coding/test/TestVADDTX.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-08-07T09:11:58Z",
+      "side": 0,
+      "message": "I don\u0027t want to get rid of the test totally, although the test may not be the most appropriate.\n\nCan we replace acm_send_-\u003eDisableOpusDtx() with\n\nModifyEncoder([](std::unique_ptr\u003cAudioEncoder\u003e* encoder_ptr) {\n  encoder_ptr-\u003eSetDtx(false);\n});\n\nSimilar to EnableOpusDtx\n\nline 212~215 can be removed.",
+      "revId": "1e49ab2d40eba7a3a15d00db998f3f5a6703a167",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
