@@ -233,6 +233,28 @@ void PeerConnectionDelegateAdapter::OnIceCandidatesRemoved(
                     didRemoveIceCandidates:ice_candidates];
 }
 
+void PeerConnectionDelegateAdapter::OnIceSelectedCandidatePairChanged(
+    const cricket::Candidate &local,
+    const cricket::Candidate &remote,
+    int last_data_received_ms,
+    const std::string &reason) {
+  std::unique_ptr<JsepIceCandidate> local_candidate_wrapper(
+      new JsepIceCandidate(local.transport_name(), -1, local));
+  RTCIceCandidate *local_candidate =
+      [[RTCIceCandidate alloc] initWithNativeCandidate:local_candidate_wrapper.get()];
+  std::unique_ptr<JsepIceCandidate> remote_candidate_wrapper(
+      new JsepIceCandidate(remote.transport_name(), -1, remote));
+  RTCIceCandidate *remote_candidate =
+      [[RTCIceCandidate alloc] initWithNativeCandidate:remote_candidate_wrapper.get()];
+  RTCPeerConnection *peer_connection = peer_connection_;
+  NSString *nsstr_reason = [NSString stringForStdString:reason];
+  [peer_connection.delegate peerConnection:peer_connection
+                   didChangeLocalCandidate:local_candidate
+                  didChangeRemoteCandidate:remote_candidate
+                            lastReceivedMs:last_data_received_ms
+                             didHaveReason:nsstr_reason];
+}
+
 void PeerConnectionDelegateAdapter::OnAddTrack(
     rtc::scoped_refptr<RtpReceiverInterface> receiver,
     const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams) {

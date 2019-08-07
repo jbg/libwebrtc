@@ -117,6 +117,13 @@ RTC_OBJC_EXPORT
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didRemoveIceCandidates:(NSArray<RTCIceCandidate *> *)candidates;
 
+/** Called when the selected Ice candidate pair is changed. */
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+     didChangeLocalCandidate:(RTCIceCandidate *)local
+    didChangeRemoteCandidate:(RTCIceCandidate *)remote
+              lastReceivedMs:(int)lastDataReceivedMs
+               didHaveReason:(NSString *)reason;
+
 /** New data channel has been opened. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didOpenDataChannel:(RTCDataChannel *)dataChannel;
