@@ -325,6 +325,18 @@ void PeerConnectionObserverJni::OnIceConnectionReceivingChange(bool receiving) {
                                                receiving);
 }
 
+void PeerConnectionObserverJni::OnIceSelectedCandidatePairChanged(
+    const cricket::Candidate& local,
+    const cricket::Candidate& remote,
+    int last_data_received_ms,
+    const std::string& reason) {
+  JNIEnv* env = AttachCurrentThreadIfNeeded();
+  Java_Observer_onSelectedCandidatePairChanged(
+      env, j_observer_global_, NativeToJavaCandidate(env, local),
+      NativeToJavaCandidate(env, remote), last_data_received_ms,
+      NativeToJavaString(env, reason));
+}
+
 void PeerConnectionObserverJni::OnIceGatheringChange(
     PeerConnectionInterface::IceGatheringState new_state) {
   JNIEnv* env = AttachCurrentThreadIfNeeded();

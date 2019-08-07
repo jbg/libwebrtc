@@ -118,6 +118,11 @@ public class PeerConnection {
     /** Triggered when some ICE candidates have been removed. */
     @CalledByNative("Observer") void onIceCandidatesRemoved(IceCandidate[] candidates);
 
+    /** Triggered when the ICE candidate pair is changed. */
+    @CalledByNative("Observer")
+    void onSelectedCandidatePairChanged(
+        IceCandidate local, IceCandidate remote, int lastDataReceivedMs, String reason);
+
     /** Triggered when media is received on a new stream from remote peer. */
     @CalledByNative("Observer") void onAddStream(MediaStream stream);
 
