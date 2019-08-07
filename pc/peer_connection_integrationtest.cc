@@ -936,10 +936,18 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     ice_gathering_state_history_.push_back(new_state);
   }
 
-  void OnIceSelectedCandidatePairChanged(
-      const cricket::CandidatePairChangeEvent& event) {
+  void OnIceSelectedCandidatePairChanged(const cricket::Candidate& local,
+                                         const cricket::Candidate& remote,
+                                         int last_data_received_ms,
+                                         const std::string& reason) {
+    cricket::CandidatePairChangeEvent event;
+    event.local_candidate = local;
+    event.remote_candidate = remote;
+    event.last_data_received_ms = last_data_received_ms;
+    event.reason = reason;
     ice_candidate_pair_change_history_.push_back(event);
   }
+
   void OnIceCandidate(const webrtc::IceCandidateInterface* candidate) override {
     RTC_LOG(LS_INFO) << debug_name_ << ": OnIceCandidate";
 

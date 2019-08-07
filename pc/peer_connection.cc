@@ -4276,11 +4276,15 @@ void PeerConnection::OnIceCandidatesRemoved(
 }
 
 void PeerConnection::OnSelectedCandidatePairChanged(
-    const cricket::CandidatePairChangeEvent& event) {
+    const cricket::Candidate& local,
+    const cricket::Candidate& remote,
+    int last_data_received_ms,
+    const std::string& reason) {
   if (IsClosed()) {
     return;
   }
-  Observer()->OnIceSelectedCandidatePairChanged(event);
+  Observer()->OnIceSelectedCandidatePairChanged(local, remote,
+                                                last_data_received_ms, reason);
 }
 
 void PeerConnection::ChangeSignalingState(
@@ -6258,7 +6262,8 @@ void PeerConnection::OnTransportControllerCandidatesRemoved(
 
 void PeerConnection::OnTransportControllerCandidateChanged(
     const cricket::CandidatePairChangeEvent& event) {
-  OnSelectedCandidatePairChanged(event);
+  OnSelectedCandidatePairChanged(event.local_candidate, event.remote_candidate,
+                                 event.last_data_received_ms, event.reason);
 }
 
 void PeerConnection::OnTransportControllerDtlsHandshakeError(
