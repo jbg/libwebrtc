@@ -74,10 +74,6 @@ TEST(AudioCodingModuleTest, TestWebRtcVadDtx) {
   webrtc::TestWebRtcVadDtx().Perform();
 }
 
-TEST(AudioCodingModuleTest, TestOpusDtx) {
-  webrtc::TestOpusDtx().Perform();
-}
-
 // Disabled on ios as flaky, see https://crbug.com/webrtc/7057
 #if defined(WEBRTC_IOS)
 TEST(AudioCodingModuleTest, DISABLED_TestOpus) {

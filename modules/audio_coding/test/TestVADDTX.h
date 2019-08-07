@@ -92,12 +92,6 @@ class TestWebRtcVadDtx final : public TestVadDtx {
   int output_file_num_;
 };
 
-// TestOpusDtx is to verify that the Opus DTX performs as it should.
-class TestOpusDtx final : public TestVadDtx {
- public:
-  void Perform();
-};
-
 }  // namespace webrtc
 
 #endif  // MODULES_AUDIO_CODING_TEST_TESTVADDTX_H_
