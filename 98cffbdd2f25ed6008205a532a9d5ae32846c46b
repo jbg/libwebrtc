@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fab9529e_be26412c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-08-08T18:04:35Z",
+      "side": 1,
+      "message": "nit: candidate pair",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "98cffbdd2f25ed6008205a532a9d5ae32846c46b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "910297e2_1bf59790",
+        "filename": "sdk/android/api/org/webrtc/PeerConnection.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-08-08T18:04:35Z",
+      "side": 1,
+      "message": "Provide a default impl like onConnectionChange above, or downstream projects would not compile.",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 8
+      },
+      "revId": "98cffbdd2f25ed6008205a532a9d5ae32846c46b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61f3f7c0_0c153d00",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-08-08T18:04:35Z",
+      "side": 1,
+      "message": "IIUC, this method needs to placed in the optional section below to be backward compatible.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 1
+      },
+      "revId": "98cffbdd2f25ed6008205a532a9d5ae32846c46b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6944aaa4_02330a27",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-08-08T18:04:35Z",
+      "side": 1,
+      "message": "Because of the backward compatibility, we need to check the existence of this method with the selector like in onAddTrack below.",
+      "range": {
+        "startLine": 251,
+        "startChar": 2,
+        "endLine": 251,
+        "endChar": 3
+      },
+      "revId": "98cffbdd2f25ed6008205a532a9d5ae32846c46b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
