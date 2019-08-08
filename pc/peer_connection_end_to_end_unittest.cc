@@ -46,7 +46,7 @@ using webrtc::SdpSemantics;
 
 namespace {
 
-const int kMaxWait = 25000;
+const int kMaxWait = 3000;
 
 }  // namespace
 
@@ -160,13 +160,14 @@ class PeerConnectionEndToEndBaseTest : public sigslot::has_slots<>,
                    rtc::CopyOnWriteBuffer(dc2_observer->last_message()),
                    kMaxWait);
 
-    EXPECT_TRUE(dc2->Send(buffer));
-    EXPECT_EQ_WAIT(buffer.data,
-                   rtc::CopyOnWriteBuffer(dc1_observer->last_message()),
-                   kMaxWait);
+    // EXPECT_TRUE(dc2->Send(buffer));
+    // EXPECT_EQ_WAIT(buffer.data,
+    //                rtc::CopyOnWriteBuffer(dc1_observer->last_message()),
+    //                kMaxWait);
 
-    EXPECT_EQ(1U, dc1_observer->received_message_count());
-    EXPECT_EQ(size, dc1_observer->last_message().length());
+    // EXPECT_EQ(1U, dc1_observer->received_message_count());
+    // EXPECT_EQ(size, dc1_observer->last_message().length());
+
     EXPECT_EQ(1U, dc2_observer->received_message_count());
     EXPECT_EQ(size, dc2_observer->last_message().length());
   }
@@ -559,12 +560,20 @@ TEST_P(PeerConnectionEndToEndTest, CreateDataChannelLargeTransfer) {
   WaitForDataChannelsToOpen(caller_dc, callee_signaled_data_channels_, 1);
   WaitForDataChannelsToOpen(callee_dc, caller_signaled_data_channels_, 0);
 
+  RTC_LOG(LS_INFO) << "\n\n*****************Caller created*****************\n";
   TestDataChannelSendAndReceive(caller_dc, callee_signaled_data_channels_[1],
                                 256 * 1024);
-  TestDataChannelSendAndReceive(callee_dc, caller_signaled_data_channels_[0],
-                                256 * 1024);
 
+  // RTC_LOG(LS_INFO) << "\n\n*****************Callee
+  // created*****************\n"; TestDataChannelSendAndReceive(callee_dc,
+  // caller_signaled_data_channels_[0],
+  //                               256 * 1024);
+
+  RTC_LOG(LS_ERROR)
+      << "\n\n*****************Closing caller created*****************\n";
   CloseDataChannels(caller_dc, callee_signaled_data_channels_, 1);
+  RTC_LOG(LS_ERROR)
+      << "\n\n*****************Closing callee created*****************\n";
   CloseDataChannels(callee_dc, caller_signaled_data_channels_, 0);
 }
 
