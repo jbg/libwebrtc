@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7071a077_50843a5e",
+        "filename": "rtc_base/experiments/struct_parameters_parser.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-08-08T14:51:20Z",
+      "side": 1,
+      "message": "I see a point in being explicit in what we use for serialization vs just any output. There\u0027s not really any contract for what rtc::ToString should return, the risk is that we\u0027ll pattern match something that does the wrong this.",
+      "parentUuid": "4bbe416c_7fb65496",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 1
+      },
+      "revId": "a1218f592bab611d9d29bf1f61dae8ca5d621e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2da03846_4b8776cf",
         "filename": "rtc_base/experiments/struct_parameters_parser.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "a1218f592bab611d9d29bf1f61dae8ca5d621e7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16cfaeb8_fdb6e67a",
+        "filename": "rtc_base/experiments/struct_parameters_parser.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-08-08T14:51:20Z",
+      "side": 1,
+      "message": "Then it stops being copyable \u003d we can\u0027t use std::vector. I think looking into a way to solve this more elegantly could be a reasonable followup cl.",
+      "parentUuid": "2da03846_4b8776cf",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 143,
+        "endChar": 5
+      },
+      "revId": "a1218f592bab611d9d29bf1f61dae8ca5d621e7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
