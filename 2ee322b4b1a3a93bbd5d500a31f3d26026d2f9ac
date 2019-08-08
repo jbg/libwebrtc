@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df70486f_c56032dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "Can you split this into a separate CL? Choosing which windows to include is separate from how to composite them into one image.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56c084fc_fc43945a",
+        "filename": "modules/desktop_capture/win/owned_window_identifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "This doesn\u0027t feel like an identifier to me. I think a better name would be something like OwnerWindowContext, which also makes it more natural to have your two enumeration contexts inherit from is (having a context inherit from an identifier doesn\u0027t seem right).",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a234021_07b4e0d5",
+        "filename": "modules/desktop_capture/win/owned_window_identifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "Data members should be private:\n\nhttps://google.github.io/styleguide/cppguide.html#Access_Control\n\nI guess these need to be public because they\u0027re accessed by the enumeration callback, in which case I wonder if it would be cleaner to have a method on this class that encapsulates that logic (and is overridden/extended by base classes). That\u0027s a fairly significant change though, so I leave it to your best judgement whether you want to do it here, in a follow-up CL, or not at all.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34d3a8a7_3e56721b",
+        "filename": "modules/desktop_capture/win/owned_window_identifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "Data members should be named with a trailing underscore:\n\nhttps://google.github.io/styleguide/cppguide.html#Variable_Names",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c303411a_19e73e04",
+        "filename": "modules/desktop_capture/win/window_capture_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "Why is this conditional on (style \u0026 WS_THICKFRAME || style \u0026 DS_MODALFRAME)? Wouldn\u0027t it make sense to be able to include the border for any window?",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "995abdc8_ad9e8d31",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "I\u0027m not sure this really needs to inherit; it\u0027s essentially just a pair of (OwnedWindowIdentifier, vector). Your call though.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf975862_b5f98ed5",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "No need to pass this in, I think. It can be owned by the Context.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d023350_800775c6",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "s/Only process/Skip/ (or similar, but you\u0027ve used \"skip\" below)\n\n\"proceed\" is ambiguous in this context: does it mean proceed with this method or proceed with the enumeration? I initially thought the latter and was confused, but I think you mean the former.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "947b589c_3c79b3d6",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "I think this could use more detail. Does \"they\" refer to the windows, the shadows, or the menus? And why wouldn\u0027t they be captured correctly?",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3cb2420_6f967e0e",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "Optional: Consider not logging here. I would expect that the error was already logged by the underlying capturer (which had more context) so this will just introduce log spam.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5183c76f_945c704c",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "This is being called on every frame capture. Is it fast enough for that? Could it be optimized (perhaps not in this CL)?",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b0dbfd6_97723762",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "I think this will go out of scope before being invoked. Don\u0027t you need a refptr or similar?",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9333ce5_b8954ac5",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "Reaching inside an object to set a private member feels wrong. Why do you need to do this?",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0367648_07cada7e",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-08T00:05:56Z",
+      "side": 1,
+      "message": "Don\u0027t you need to defer calling this until all of the OwnedWindowCapturerCallback callbacks have been invoked?",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
