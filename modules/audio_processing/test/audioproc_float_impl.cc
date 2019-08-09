@@ -480,9 +480,10 @@ void PerformBasicParameterSanityChecks(const SimulationSettings& settings) {
         "Error: When operating at wav files, the reverse input wav filename "
         "must be specified if the reverse output wav filename is specified!\n");
   } else {
-    ReportConditionalErrorAndExit(!settings.aec_dump_input_filename,
-                                  "Error: Either the aec dump or the wav "
-                                  "input files must be specified!\n");
+    ReportConditionalErrorAndExit(
+        !settings.aec_dump_input_filename && !settings.aec_dump_input_string,
+        "Error: Either the aec dump input file, the wav "
+        "input file or the aec dump input string must be specified!\n");
   }
 
   ReportConditionalErrorAndExit(
@@ -624,7 +625,9 @@ void PerformBasicParameterSanityChecks(const SimulationSettings& settings) {
 
 int AudioprocFloatImpl(std::unique_ptr<AudioProcessingBuilder> ap_builder,
                        int argc,
-                       char* argv[]) {
+                       char* argv[],
+                       absl::string_view input_aecdump,
+                       std::vector<float>* processed_capture_samples) {
   std::vector<char*> args = absl::ParseCommandLine(argc, argv);
   if (args.size() != 1) {
     printf("%s", kUsageDescription);
@@ -632,10 +635,14 @@ int AudioprocFloatImpl(std::unique_ptr<AudioProcessingBuilder> ap_builder,
   }
 
   SimulationSettings settings = CreateSettings();
+  if (!input_aecdump.empty()) {
+    settings.aec_dump_input_string = input_aecdump;
+    settings.processed_capture_samples = processed_capture_samples;
+  }
   PerformBasicParameterSanityChecks(settings);
   std::unique_ptr<AudioProcessingSimulator> processor;
 
-  if (settings.aec_dump_input_filename) {
+  if (settings.aec_dump_input_filename || settings.aec_dump_input_string) {
     processor.reset(new AecDumpBasedSimulator(settings, std::move(ap_builder)));
   } else {
     processor.reset(new WavBasedSimulator(settings, std::move(ap_builder)));
