@@ -147,6 +147,13 @@ RTC_OBJC_EXPORT
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
      didRemoveReceiver:(RTCRtpReceiver *)rtpReceiver;
 
+/** Called when the selected Ice candidate pair is changed. */
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+     didChangeLocalCandidate:(RTCIceCandidate *)local
+    didChangeRemoteCandidate:(RTCIceCandidate *)remote
+              lastReceivedMs:(int)lastDataReceivedMs
+               didHaveReason:(NSString *)reason;
+
 @end
 
 RTC_OBJC_EXPORT

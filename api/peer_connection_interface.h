@@ -1186,7 +1186,10 @@ class PeerConnectionObserver {
 
   // Called when the selected candidate pair for the ICE connection changes.
   virtual void OnIceSelectedCandidatePairChanged(
-      const cricket::CandidatePairChangeEvent& event) {}
+      const cricket::Candidate& local,
+      const cricket::Candidate& remote,
+      int last_data_received_ms,
+      const std::string& reason) {}
 
   // This is called when a receiver and its track are created.
   // TODO(zhihuang): Make this pure virtual when all subclasses implement it.
