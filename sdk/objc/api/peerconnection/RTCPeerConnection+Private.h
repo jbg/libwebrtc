@@ -50,6 +50,11 @@ class PeerConnectionDelegateAdapter : public PeerConnectionObserver {
 
   void OnIceCandidatesRemoved(const std::vector<cricket::Candidate> &candidates) override;
 
+  void OnIceSelectedCandidatePairChanged(const cricket::Candidate &local,
+                                         const cricket::Candidate &remote,
+                                         int last_data_received_ms,
+                                         const std::string &reason) override;
+
   void OnAddTrack(rtc::scoped_refptr<RtpReceiverInterface> receiver,
                   const std::vector<rtc::scoped_refptr<MediaStreamInterface>> &streams) override;
 
