@@ -667,6 +667,7 @@ void ReceiveStatisticsProxy::OnCname(uint32_t ssrc, absl::string_view cname) {
   stats_.c_name = std::string(cname);
 }
 
+#if 0
 void ReceiveStatisticsProxy::DataCountersUpdated(
     const webrtc::StreamDataCounters& counters,
     uint32_t ssrc) {
@@ -682,6 +683,7 @@ void ReceiveStatisticsProxy::DataCountersUpdated(
     }
   }
 }
+#endif
 
 void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
                                             absl::optional<uint8_t> qp,

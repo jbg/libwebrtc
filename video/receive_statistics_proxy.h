@@ -39,7 +39,6 @@ struct CodecSpecificInfo;
 class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
                                public RtcpCnameCallback,
                                public RtcpPacketTypeCounterObserver,
-                               public StreamDataCountersCallback,
                                public CallStatsObserver {
  public:
   ReceiveStatisticsProxy(const VideoReceiveStream::Config* config,
@@ -84,10 +83,11 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
   void RtcpPacketTypesCounterUpdated(
       uint32_t ssrc,
       const RtcpPacketTypeCounter& packet_counter) override;
+#if 0
   // Overrides StreamDataCountersCallback.
   void DataCountersUpdated(const webrtc::StreamDataCounters& counters,
                            uint32_t ssrc) override;
-
+#endif
   // Implements CallStatsObserver.
   void OnRttUpdate(int64_t avg_rtt_ms, int64_t max_rtt_ms) override;
 
