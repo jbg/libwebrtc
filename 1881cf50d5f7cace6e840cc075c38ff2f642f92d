@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1a0410_ce38014d",
+        "filename": "api/test/audioproc_float.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-08-09T14:18:48Z",
+      "side": 1,
+      "message": "I\u0027m not a fan of these types of comments as I think they reduce readability rather than to increase it.\n\nIn this case, the declaration of the method called is 2 lines below, so I\u0027d suggest skipping the comments.\n\nIf you choose to keep the comments, please instead use consider one of the variants below instead as the within-the-code comments are makes the code quite much harder to read.\n{\n  absl::string_view input_aecdump \u003d nullptr;\n  std::vector\u003cfloat\u003e* processed_capture_samples \u003d nullptr;\n  return AudioprocFloatImpl(std::move(ap_builder), argc, argv,\n                            input_aecdump,\n                            processed_capture_samples);\n}\n\n{\n  return AudioprocFloatImpl(std::move(ap_builder), argc, argv,\n                            nullptr, // input_aecdump.\n                            nullptr); // processed_capture_samples.\n}",
+      "range": {
+        "startLine": 24,
+        "startChar": 27,
+        "endLine": 25,
+        "endChar": 60
+      },
+      "revId": "1881cf50d5f7cace6e840cc075c38ff2f642f92d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7122c94_c3fa70ec",
+        "filename": "modules/audio_processing/test/audio_processing_simulator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-08-09T14:18:48Z",
+      "side": 1,
+      "message": "Please add an RTC_CHECK(!buffer_file_writer_) so that it is clear for the reader of the code that not buffer_file_writer_ can be set when buffer_memory_writer_ is set.",
+      "revId": "1881cf50d5f7cace6e840cc075c38ff2f642f92d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd1b8d1a_23641bb9",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-08-09T14:18:48Z",
+      "side": 1,
+      "message": "I think that a similar check is needed so thta not both the aecdump input file and aecdump input string are not specified at the same time.",
+      "range": {
+        "startLine": 413,
+        "startChar": 4,
+        "endLine": 416,
+        "endChar": 72
+      },
+      "revId": "1881cf50d5f7cace6e840cc075c38ff2f642f92d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "178bab32_f4113b13",
+        "filename": "modules/audio_processing/test/audioproc_float_impl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-08-09T14:18:48Z",
+      "side": 1,
+      "message": "Please add\nRTC_CHECK(settings.processed_capture_samples);",
+      "range": {
+        "startLine": 574,
+        "startChar": 41,
+        "endLine": 574,
+        "endChar": 66
+      },
+      "revId": "1881cf50d5f7cace6e840cc075c38ff2f642f92d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59f532e9_5d695518",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-08-09T14:18:48Z",
+      "side": 1,
+      "message": "Nit\nsize_t old_size \u003d output_.size();\noutput_-\u003eresize(old_size+interleaved_buffer_.size());\nFloatToFloatS16(interleaved_buffer_.data(), interleaved_buffer_.size(),\n                output_.data()+old_size);\n\nis cheaper.",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 45
+      },
+      "revId": "1881cf50d5f7cace6e840cc075c38ff2f642f92d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
