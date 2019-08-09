@@ -355,6 +355,30 @@
     },
     {
       "key": {
+        "uuid": "378127c8_f9e6ff67",
+        "filename": "modules/audio_processing/test/test_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 9579
+      },
+      "writtenOn": "2019-08-09T11:43:37Z",
+      "side": 1,
+      "message": "After thinking more about it, I don\u0027t think this check makes sense. The vector where the output_ pointer is pointing is empty before the insert. The insert function is used to enlarge its size.",
+      "parentUuid": "0b004f37_ff2ba66b",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 9
+      },
+      "revId": "3bfc79c450f2ac57f62a7de46953423095d1f727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2db90de0_af566d83",
         "filename": "modules/audio_processing/test/test_utils.h",
         "patchSetId": 7
