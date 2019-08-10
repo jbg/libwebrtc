@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0d622c0c_230bd86a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "Sure, I split the change described in the first bullet into https://webrtc-review.googlesource.com/c/src/+/148641 . Please submit that, then I\u0027ll merge \u0026 drop it from the description here.\n\nPlease let me know if you think the change described in the second bullet (cropping the top border) should be split into its own CL as well. If so, is it necessary / preferred to file a bug to track that?",
+      "parentUuid": "df70486f_c56032dc",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "56c084fc_fc43945a",
         "filename": "modules/desktop_capture/win/owned_window_identifier.h",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "a4d00d3f_5a0a946f",
+        "filename": "modules/desktop_capture/win/owned_window_identifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "Renamed to SelectedWindowContext.\n\n(It initially had just the \u0027IsWindowOwned\u0027 method, and I was trying to choose a name at the time that reflected what it did. Didn\u0027t love \u0027Identifier\u0027 due to the ambiguity between \u0027its state identifies\u0027 vs \u0027its method identifies\u0027. Perhaps \u0027OwnedWindowIdentifierContext\u0027 would have been better at the time, at least  more consistent with the derived structs. It seems to have gotten a bit more general since then with the addition of the other methods.)",
+      "parentUuid": "56c084fc_fc43945a",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a234021_07b4e0d5",
         "filename": "modules/desktop_capture/win/owned_window_identifier.h",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2019-08-08T00:05:56Z",
       "side": 1,
       "message": "Data members should be private:\n\nhttps://google.github.io/styleguide/cppguide.html#Access_Control\n\nI guess these need to be public because they\u0027re accessed by the enumeration callback, in which case I wonder if it would be cleaner to have a method on this class that encapsulates that logic (and is overridden/extended by base classes). That\u0027s a fairly significant change though, so I leave it to your best judgement whether you want to do it here, in a follow-up CL, or not at all.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c90c5f8_72d1005f",
+        "filename": "modules/desktop_capture/win/owned_window_identifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "Made these private with new comparison \u0026 accessor methods replacing the direct access.\n\nAlso made it a class per the guidance here:\nhttps://google.github.io/styleguide/cppguide.html#Structs_vs._Classes",
+      "parentUuid": "9a234021_07b4e0d5",
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "f8336b79_fccd5cbe",
+        "filename": "modules/desktop_capture/win/owned_window_identifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34d3a8a7_3e56721b",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c303411a_19e73e04",
         "filename": "modules/desktop_capture/win/window_capture_utils.cc",
         "patchSetId": 1
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "c543bebd_eae1f007",
+        "filename": "modules/desktop_capture/win/window_capture_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "The intent of this flag is to avoid cropping the visible border when cropping any resize border. A window without a resize border would now have any visible border included (irrespective of this flag) due to the cropping being made conditional on window style.\n\nThe naming of the flag could be misleading since passing include_border\u003dfalse wouldn\u0027t crop any visible border from a non-resizeable window. I\u0027m hesitant to try to change that behavior because I don\u0027t know if there\u0027s a good way to detect that a non-resizeable window has a visible border. I\u0027ve renamed the flag to avoid_cropping_border \u0026 added some header comments to hopefully clarify its behavior.",
+      "parentUuid": "c303411a_19e73e04",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "995abdc8_ad9e8d31",
         "filename": "modules/desktop_capture/window_capturer_win.cc",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2019-08-08T00:05:56Z",
       "side": 1,
       "message": "I\u0027m not sure this really needs to inherit; it\u0027s essentially just a pair of (OwnedWindowIdentifier, vector). Your call though.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6243b6b1_e13adeb8",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "I\u0027d prefer to leave this as-is for clarity \u0026 to avoid adding extra syntax around using it.",
+      "parentUuid": "995abdc8_ad9e8d31",
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0fb2eb5e_39070762",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "I originally had it owned by the Context, but moved it to the capturer so it could be consulted from IsOccluded. (In support of capturing the mouse cursor when it\u0027s over a menu / dialog.)",
+      "parentUuid": "bf975862_b5f98ed5",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d023350_800775c6",
         "filename": "modules/desktop_capture/window_capturer_win.cc",
         "patchSetId": 1
@@ -135,6 +261,24 @@
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdb1a20e_29a85127",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d023350_800775c6",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "5963663a_b5b75897",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "947b589c_3c79b3d6",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3cb2420_6f967e0e",
         "filename": "modules/desktop_capture/window_capturer_win.cc",
         "patchSetId": 1
@@ -166,6 +328,24 @@
       "writtenOn": "2019-08-08T00:05:56Z",
       "side": 1,
       "message": "Optional: Consider not logging here. I would expect that the error was already logged by the underlying capturer (which had more context) so this will just introduce log spam.",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f17202f5_900fc4fd",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "I was thinking that this might help provide context around the preceding error that was logged. I.e. making it clearer that the error pertained to an owned window rather than the primary selected one. I adjusted the message to try to clarify that.",
+      "parentUuid": "d3cb2420_6f967e0e",
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "1836237f_25a75f04",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "I think this is fast enough to be called per-frame. I added some time-measurement code around this (from before the OwnedWindowCollectorContext constructor to after the call), and compared the time spent here to time spent in all of CaptureFrame in an optimized build. The time spent here is typically ~0.3%-1.5% of the time spent in CaptureFrame for a reasonably-sized window on the machines I measured on. That\u0027s sensitive to window size (for a tiny 132x30 window with just the system menu, maximize, and close buttons, it\u0027s ~5%-7%). It doesn\u0027t seem very sensitive to the number of top-level windows. Those are quickly skipped by checking for the pop-up style, and often not enumerated at all if you\u0027ve interacted with the selected window recently (given the enumeration order favoring recently-focused windows).\n\nI suppose this could be called only every Nth frame, reusing cached results in the interim \u0026 perhaps evicting no-longer-valid windows. That doesn\u0027t seem worth the complexity \u0026 extra latency around picking up new pop-up windows, given the low relative time cost.",
+      "parentUuid": "5183c76f_945c704c",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b0dbfd6_97723762",
         "filename": "modules/desktop_capture/window_capturer_win.cc",
         "patchSetId": 1
@@ -203,6 +401,24 @@
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb1021d5_7a4ce6db",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "No, it\u0027s invoked synchronously within the CaptureFrame call(s) below.",
+      "parentUuid": "0b0dbfd6_97723762",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "f298039e_b39ca19b",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "This avoided an assert failure in Start (asserting that it\u0027s only called once). I\u0027ve adjusted this to call a new StartOrRestart method, bypassing the assert in the interface wrapper.",
+      "parentUuid": "d9333ce5_b8954ac5",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0367648_07cada7e",
         "filename": "modules/desktop_capture/window_capturer_win.cc",
         "patchSetId": 1
@@ -237,6 +471,24 @@
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05e11fcd_7d822ad2",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-10T02:25:18Z",
+      "side": 1,
+      "message": "No, it\u0027s invoked synchronously within the CaptureFrame call(s) above.",
+      "parentUuid": "f0367648_07cada7e",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
