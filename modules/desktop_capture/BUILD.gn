@@ -347,6 +347,8 @@ rtc_static_library("desktop_capture_generic") {
     "win/screen_capturer_win_gdi.h",
     "win/screen_capturer_win_magnifier.cc",
     "win/screen_capturer_win_magnifier.h",
+    "win/selected_window_context.cc",
+    "win/selected_window_context.h",
     "win/window_capture_utils.cc",
     "win/window_capture_utils.h",
     "window_capturer_win.cc",
