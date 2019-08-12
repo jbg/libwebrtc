@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "249bc205_0bd1768c",
+        "filename": "sdk/android/src/jni/pc/peer_connection.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 9676
+      },
+      "writtenOn": "2019-08-12T23:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "187ad148_743cef77",
+      "revId": "d62f322eefa9aee847cfc229f14f96b8e25a80ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0656c84_95ebd450",
         "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
         "patchSetId": 18
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "5eb9d4e4_5ea2f52c",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 9676
+      },
+      "writtenOn": "2019-08-12T23:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0656c84_95ebd450",
+      "range": {
+        "startLine": 150,
+        "startChar": 29,
+        "endLine": 150,
+        "endChar": 32
+      },
+      "revId": "d62f322eefa9aee847cfc229f14f96b8e25a80ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "723e9c71_075b8392",
         "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
         "patchSetId": 18
@@ -53,6 +95,30 @@
       "writtenOn": "2019-08-12T21:14:44Z",
       "side": 1,
       "message": "bonus points for making this an object too",
+      "range": {
+        "startLine": 152,
+        "startChar": 28,
+        "endLine": 155,
+        "endChar": 47
+      },
+      "revId": "d62f322eefa9aee847cfc229f14f96b8e25a80ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5d511d8_69b2614a",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 9676
+      },
+      "writtenOn": "2019-08-12T23:04:37Z",
+      "side": 1,
+      "message": "I\u0027ll give it a shot :)",
+      "parentUuid": "723e9c71_075b8392",
       "range": {
         "startLine": 152,
         "startChar": 28,
