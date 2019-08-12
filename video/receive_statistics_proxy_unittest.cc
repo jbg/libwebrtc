@@ -52,13 +52,13 @@ class ReceiveStatisticsProxyTest : public ::testing::Test {
     config.rtp.remote_ssrc = kRemoteSsrc;
     return config;
   }
-
+#if 0
   void InsertFirstRtpPacket(uint32_t ssrc) {
     StreamDataCounters counters;
     counters.first_packet_time_ms = fake_clock_.TimeInMilliseconds();
     statistics_proxy_->DataCountersUpdated(counters, ssrc);
   }
-
+#endif
   VideoFrame CreateFrame(int width, int height) {
     return CreateVideoFrame(width, height, 0);
   }
@@ -541,7 +541,7 @@ TEST_F(ReceiveStatisticsProxyTest,
   EXPECT_EQ(0,
             metrics::NumSamples("WebRTC.Video.ReceiveStreamLifetimeInSeconds"));
 }
-
+#if 0
 TEST_F(ReceiveStatisticsProxyTest, BadCallHistogramsAreUpdated) {
   // Based on the tuning parameters this will produce 7 uncertain states,
   // then 10 certainly bad states. There has to be 10 certain states before
@@ -571,7 +571,7 @@ TEST_F(ReceiveStatisticsProxyTest, BadCallHistogramsAreUpdated) {
 
   EXPECT_EQ(0, metrics::NumSamples("WebRTC.Video.BadCall.Qp"));
 }
-
+#endif
 TEST_F(ReceiveStatisticsProxyTest, PacketLossHistogramIsUpdated) {
   statistics_proxy_->UpdateHistograms(10);
   EXPECT_EQ(0,
@@ -922,7 +922,7 @@ TEST_F(ReceiveStatisticsProxyTest, AverageDelayOfDelayedFramesIsReported) {
   EXPECT_EQ(1, metrics::NumEvents(
                    "WebRTC.Video.DelayedFramesToRenderer_AvgDelayInMs", 8));
 }
-
+#if 0
 TEST_F(ReceiveStatisticsProxyTest,
        RtcpHistogramsNotUpdatedIfMinRuntimeHasNotPassed) {
   InsertFirstRtpPacket(kRemoteSsrc);
@@ -966,7 +966,7 @@ TEST_F(ReceiveStatisticsProxyTest, RtcpHistogramsAreUpdated) {
       1, metrics::NumEvents("WebRTC.Video.NackPacketsSentPerMinute",
                             kNackPackets * 60 / metrics::kMinRunTimeInSeconds));
 }
-
+#endif
 class ReceiveStatisticsProxyTestWithFreezeDuration
     : public ReceiveStatisticsProxyTest,
       public ::testing::WithParamInterface<
