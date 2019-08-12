@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5dcb92f9_10a66f83",
+        "filename": "examples/androidapp/src/org/appspot/apprtc/PeerConnectionClient.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 9676
+      },
+      "writtenOn": "2019-08-12T19:31:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d6ade0_4984bced",
+      "revId": "6c4f99ec8dc5ccb75ccd4d7f4ac9603f6f848d1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3042726d_5411f045",
         "filename": "pc/peer_connection.h",
         "patchSetId": 14
@@ -30,6 +48,30 @@
       "writtenOn": "2019-08-12T19:25:47Z",
       "side": 1,
       "message": "Why not keep the CandidatePairChangeEvent struct?",
+      "range": {
+        "startLine": 461,
+        "startChar": 38,
+        "endLine": 464,
+        "endChar": 63
+      },
+      "revId": "6c4f99ec8dc5ccb75ccd4d7f4ac9603f6f848d1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "191c7cb5_4e22ab2b",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 9676
+      },
+      "writtenOn": "2019-08-12T19:31:54Z",
+      "side": 1,
+      "message": "I\u0027m trying to remember why I did this. I think it made something easier upstream with JNI or objc implementation",
+      "parentUuid": "3042726d_5411f045",
       "range": {
         "startLine": 461,
         "startChar": 38,
