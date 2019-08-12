@@ -1161,6 +1161,8 @@ public class PeerConnectionClient {
 
   // Implementation detail: observe ICE & stream changes and react accordingly.
   private class PCObserver implements PeerConnection.Observer {
+    private IceCandidate remote;
+
     @Override
     public void onIceCandidate(final IceCandidate candidate) {
       executor.execute(() -> events.onIceCandidate(candidate));
@@ -1212,6 +1214,13 @@ public class PeerConnectionClient {
     @Override
     public void onIceConnectionReceivingChange(boolean receiving) {
       Log.d(TAG, "IceConnectionReceiving changed to " + receiving);
+    }
+
+    @Override
+    public void onSelectedCandidatePairChanged(
+        IceCandidate local, IceCandidate remote, int lastDataReceivedMs, String reason) {
+      this.remote = remote;
+      Log.d(TAG, "Selected candidate pair changed because: " + reason);
     }
 
     @Override
