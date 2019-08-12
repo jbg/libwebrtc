@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6588e12b_4ed90476",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2019-08-12T11:37:36Z",
+      "side": 1,
+      "message": "I would only use the `did\u003cX\u003e` naming for the first parameter, ie `didChangeLocalCandidate:remoteCandidate:lastReceivedMs:reason:`\nThis is more idiomatic and also matches the other methods in this file.",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 155,
+        "endChar": 48
+      },
+      "revId": "080dfa10d27b9937430d0795c777684e45f8fdd1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
