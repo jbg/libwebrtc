@@ -1215,6 +1215,12 @@ public class PeerConnectionClient {
     }
 
     @Override
+    public void onSelectedCandidatePairChanged(
+        IceCandidate local, IceCandidate remote, int lastDataReceivedMs, String reason) {
+      Log.d(TAG, "Selected candidate pair changed because: " + reason);
+    }
+
+    @Override
     public void onAddStream(final MediaStream stream) {}
 
     @Override
