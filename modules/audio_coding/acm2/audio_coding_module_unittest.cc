@@ -1599,13 +1599,19 @@ TEST_F(AcmSenderBitExactnessNewApi, OpusFromFormat_stereo_20ms_voip) {
   const std::string payload_maybe_sse =
       "4eab2259b6fe24c22dd242a113e0b3d9|"
       "4fc0af0aa06c26454af09832d3ec1b4e";
+  // The neon implementation may differ.
+  const std::string maybe_neon =
+      "1c81121f5d9286a5a865d01dbab22ce8|"
+      "0dec0c452a7b39d935a39cc6065f692d";
+  const std::string payload_maybe_neon =
+      "839ea60399447268ee0f0262a50b75fd|"
+      "def9dd46f468fbc80a84ad643d8c1ef9";
   Run(AcmReceiverBitExactnessOldApi::PlatformChecksum(
-          audio_maybe_sse, audio_maybe_sse, "1c81121f5d9286a5a865d01dbab22ce8",
+          audio_maybe_sse, audio_maybe_sse, maybe_neon,
           "11d547f89142e9ef03f37d7ca7f32379",
           "11d547f89142e9ef03f37d7ca7f32379"),
       AcmReceiverBitExactnessOldApi::PlatformChecksum(
-          payload_maybe_sse, payload_maybe_sse,
-          "839ea60399447268ee0f0262a50b75fd",
+          payload_maybe_sse, payload_maybe_sse, payload_maybe_neon,
           "1815fd5589cad0c6f6cf946c76b81aeb",
           "1815fd5589cad0c6f6cf946c76b81aeb"),
       50, test::AcmReceiveTestOldApi::kStereoOutput);
