@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee0bf708_4dab59f5",
+        "filename": "sdk/android/src/jni/pc/peer_connection.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-08-12T23:10:40Z",
+      "side": 1,
+      "message": "static_cast\u003cint\u003e(...)",
+      "range": {
+        "startLine": 130,
+        "startChar": 20,
+        "endLine": 130,
+        "endChar": 27
+      },
+      "revId": "9973aa8c2beafb8bb1390002a18f6584638e21d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
