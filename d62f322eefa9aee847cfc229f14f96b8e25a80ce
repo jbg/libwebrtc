@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "187ad148_743cef77",
+        "filename": "sdk/android/src/jni/pc/peer_connection.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-08-12T21:14:44Z",
+      "side": 1,
+      "message": "need to implement",
+      "revId": "d62f322eefa9aee847cfc229f14f96b8e25a80ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0656c84_95ebd450",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-08-12T21:14:44Z",
+      "side": 1,
+      "message": "nit: ICE",
+      "range": {
+        "startLine": 150,
+        "startChar": 29,
+        "endLine": 150,
+        "endChar": 32
+      },
+      "revId": "d62f322eefa9aee847cfc229f14f96b8e25a80ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "723e9c71_075b8392",
+        "filename": "sdk/objc/api/peerconnection/RTCPeerConnection.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-08-12T21:14:44Z",
+      "side": 1,
+      "message": "bonus points for making this an object too",
+      "range": {
+        "startLine": 152,
+        "startChar": 28,
+        "endLine": 155,
+        "endChar": 47
+      },
+      "revId": "d62f322eefa9aee847cfc229f14f96b8e25a80ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
