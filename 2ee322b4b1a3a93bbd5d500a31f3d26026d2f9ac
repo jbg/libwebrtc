@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4a9c4797_b9bfa2e8",
+        "filename": "modules/desktop_capture/win/owned_window_identifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-12T21:54:09Z",
+      "side": 1,
+      "message": "I actually completely misunderstood \"identifier\" as meaning \"name\", not \"thing that performs identification\". OwnedWindowFinder would probably be a better name in that case, but what you have now is fine.",
+      "parentUuid": "a4d00d3f_5a0a946f",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a234021_07b4e0d5",
         "filename": "modules/desktop_capture/win/owned_window_identifier.h",
         "patchSetId": 1
@@ -422,6 +440,24 @@
     },
     {
       "key": {
+        "uuid": "917d66a3_cf985fe1",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-12T21:54:09Z",
+      "side": 1,
+      "message": "That feels like an implementation detail of WindowCapturerWin. The DesktopCapture API doesn\u0027t guarantee that, and in fact the reference to \"pending capture requests\" in the comment for this method implies that it might be asynchronous, so you shouldn\u0027t rely on that here.\n\nYou can probably eliminate the need for a callback altogether if you refactor WindowCapturerWin to provide a synchronous version of CaptureFrame that returns the frame (or returns the error and takes a caller-specified buffer), and which is then called by the overridden CaptureFrame method.\n\nFailing that, I think asserting that the callback was called is probably good enough, but it\u0027s probably no less work than refactoring the capturer and less safe.",
+      "parentUuid": "cb1021d5_7a4ce6db",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d9333ce5_b8954ac5",
         "filename": "modules/desktop_capture/window_capturer_win.cc",
         "patchSetId": 1
@@ -454,6 +490,24 @@
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efc0116a_8f3fcc8e",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-08-12T21:54:09Z",
+      "side": 1,
+      "message": "You might not need this at all if you implement my previous suggestion.",
+      "parentUuid": "f298039e_b39ca19b",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
