@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3de72c5_ea43c816",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-12T12:06:24Z",
+      "side": 1,
+      "message": "I\u0027m considering deleting this method, it seems redundant given that we have GetReceiveStreamDataCounters. Do you know why we have both methods?",
+      "range": {
+        "startLine": 45,
+        "startChar": 15,
+        "endLine": 45,
+        "endChar": 30
+      },
+      "revId": "f19fd3fda9e1e7c6a509a1cb924a17b0bab7d5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
