@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eae607f4_13d0eda1",
+        "filename": "api/test/audioproc_float.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-08-12T01:28:58Z",
+      "side": 1,
+      "message": "It\u0027s undefined behavior to construct std::string_view from just a null pointer; absl::string_view currently accepts it, but there are ongoing discussions about dropping that behavior in order to become standards compliant. It\u0027s probably best to not rely on it.\n\nInstead, construct an empty string view from an empty string literal (\"\").",
+      "range": {
+        "startLine": 24,
+        "startChar": 46,
+        "endLine": 24,
+        "endChar": 53
+      },
+      "revId": "7f40ceb6f2316f4e2070bf5b6b95a0a1a037323a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
