@@ -22,6 +22,30 @@
       "revId": "f19fd3fda9e1e7c6a509a1cb924a17b0bab7d5b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c10871b3_f6bccbd2",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-12T12:20:08Z",
+      "side": 1,
+      "message": "I do not see strong benefits of having both methods.\n(total_bytes_received counting might be moved as StreamDataCounters helper if that one need to be generalized)\n\nReasons for having both probably historical (my guess that this method is older. At some point there was need to return more counters, so new method was added, but calls to this method were not updated). Just a guess.",
+      "parentUuid": "f3de72c5_ea43c816",
+      "range": {
+        "startLine": 45,
+        "startChar": 15,
+        "endLine": 45,
+        "endChar": 30
+      },
+      "revId": "f19fd3fda9e1e7c6a509a1cb924a17b0bab7d5b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
