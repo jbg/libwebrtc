@@ -59,9 +59,7 @@ class ReceiveStatistics : public ReceiveStatisticsProvider,
  public:
   ~ReceiveStatistics() override = default;
 
-  static std::unique_ptr<ReceiveStatistics> Create(Clock* clock) {
-    return Create(clock, nullptr);
-  }
+  static std::unique_ptr<ReceiveStatistics> Create(Clock* clock);
 
   static std::unique_ptr<ReceiveStatistics> Create(
       Clock* clock,
