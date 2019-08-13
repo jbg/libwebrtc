@@ -22,6 +22,7 @@ class I420BufferInterface;
 class I420ABufferInterface;
 class I444BufferInterface;
 class I010BufferInterface;
+class NV12BufferInterface;
 
 // Base class for frame buffers of different types of pixel format and storage.
 // The tag in type() indicates how the data is represented, and each type is
@@ -49,6 +50,7 @@ class VideoFrameBuffer : public rtc::RefCountInterface {
     kI420A,
     kI444,
     kI010,
+    kNV12,
   };
 
   // This function specifies in what pixel format the data is stored in.
@@ -72,6 +74,8 @@ class VideoFrameBuffer : public rtc::RefCountInterface {
   // memory buffer. Therefore it must have type kNative. Yet, ToI420()
   // doesn't affect binary data at all. Another example is any I420A buffer.
   virtual const I420BufferInterface* GetI420() const;
+
+  virtual const NV12BufferInterface* GetNV12() const;
 
   // These functions should only be called if type() is of the correct type.
   // Calling with a different type will result in a crash.
@@ -172,6 +176,44 @@ class I010BufferInterface : public PlanarYuv16BBuffer {
 
  protected:
   ~I010BufferInterface() override {}
+};
+
+// This interface represents biplanar formats.
+class BiplanarYuvBuffer : public VideoFrameBuffer {
+ public:
+  virtual int ChromaWidth() const = 0;
+  virtual int ChromaHeight() const = 0;
+
+  // Returns the number of steps(in terms of Data*() return type) between
+  // successive rows for a given plane.
+  virtual int StrideY() const = 0;
+  virtual int StrideUV() const = 0;
+
+ protected:
+  ~BiplanarYuvBuffer() override {}
+};
+
+// This interface represents 8-bit color depth format(s): Type::kNV12
+class BiplanarYuv8Buffer : public BiplanarYuvBuffer {
+ public:
+  // Returns pointer to the pixel data for a given plane. The memory is owned by
+  // the VideoFrameBuffer object and must not be freed by the caller.
+  virtual const uint8_t* DataY() const = 0;
+  virtual const uint8_t* DataUV() const = 0;
+
+ protected:
+  ~BiplanarYuv8Buffer() override {}
+};
+
+class NV12BufferInterface : public BiplanarYuv8Buffer {
+ public:
+  Type type() const override;
+
+  int ChromaWidth() const final;
+  int ChromaHeight() const final;
+
+ protected:
+  ~NV12BufferInterface() override {}
 };
 
 }  // namespace webrtc

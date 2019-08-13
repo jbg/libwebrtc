@@ -20,6 +20,12 @@ const I420BufferInterface* VideoFrameBuffer::GetI420() const {
   return nullptr;
 }
 
+const NV12BufferInterface* VideoFrameBuffer::GetNV12() const {
+  // Overridden by subclasses that can return an NV12 buffer without any
+  // conversion, in particular, NV12BufferInterface.
+  return nullptr;
+}
+
 const I420ABufferInterface* VideoFrameBuffer::GetI420A() const {
   RTC_CHECK(type() == Type::kI420A);
   return static_cast<const I420ABufferInterface*>(this);
@@ -80,6 +86,18 @@ int I010BufferInterface::ChromaWidth() const {
 }
 
 int I010BufferInterface::ChromaHeight() const {
+  return (height() + 1) / 2;
+}
+
+VideoFrameBuffer::Type NV12BufferInterface::type() const {
+  return Type::kNV12;
+}
+
+int NV12BufferInterface::ChromaWidth() const {
+  return width();
+}
+
+int NV12BufferInterface::ChromaHeight() const {
   return (height() + 1) / 2;
 }
 
