@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fe6b9d9b_f32bc967",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-13T08:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "735a9da3_10935e64",
+      "range": {
+        "startLine": 64,
+        "startChar": 44,
+        "endLine": 64,
+        "endChar": 50
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef75a151_631d9b55",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a40e7ef_b23a626a",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-13T08:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef75a151_631d9b55",
+      "range": {
+        "startLine": 667,
+        "startChar": 0,
+        "endLine": 667,
+        "endChar": 5
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d2025c41_8486505c",
+        "filename": "video/receive_statistics_proxy.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-13T08:26:07Z",
+      "side": 1,
+      "message": "Done. Sorry for the left-overs.",
+      "parentUuid": "167910d1_10018b0f",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 5
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbbfc1ce_1addacdc",
         "filename": "video/receive_statistics_proxy.h",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2019-08-13T07:52:56Z",
       "side": 1,
       "message": "StreamDataCounters is not small enough and doesn\u0027t have efficient move constructor.\nCan it be better to pass it by const reference?\n\n(and similar pass rtx_stats by const pointer, for same reason)",
+      "range": {
+        "startLine": 102,
+        "startChar": 24,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "577f2732_f6ea9b20",
+        "filename": "video/receive_statistics_proxy.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-13T08:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbbfc1ce_1addacdc",
       "range": {
         "startLine": 102,
         "startChar": 24,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "73ea390c_ffeec187",
+        "filename": "video/receive_statistics_proxy.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-13T08:26:07Z",
+      "side": 1,
+      "message": "I see comment is confusing. The |stats_| member is used, but its member, |stats_.rtp_stats|, is not used here but populated elsewhere, before it is returned from VidoeReceiveStream::GetStats.\n\nIs it clear enough to change to \"The |stats_.rtp_stats| member is not ....\"\n\nI considered removing |stats_| and replacing it with separate members for the values that are used, but then realized that it\u0027s a huge struct. It would make the role of this class a bit clearer, but it would also make the cl quite a bit larger.",
+      "parentUuid": "3c789a83_4c7b3996",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 71
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "95b16b89_74a85c02",
         "filename": "video/receive_statistics_proxy_unittest.cc",
         "patchSetId": 7
@@ -128,6 +248,30 @@
       "writtenOn": "2019-08-13T07:52:56Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 5
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98599c93_505ecd5a",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-13T08:26:07Z",
+      "side": 1,
+      "message": "I think all the #if:ed out tests here need to be reenabled. Or do you think some of them can be deleted?",
+      "parentUuid": "95b16b89_74a85c02",
       "range": {
         "startLine": 55,
         "startChar": 0,

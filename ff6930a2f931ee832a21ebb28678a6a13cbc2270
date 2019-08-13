@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5fd3d7a_33da5805",
+        "filename": "video/video_receive_stream.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-13T08:26:07Z",
+      "side": 1,
+      "message": "Separate UpdateHistogram call sites seemed easier than some conditional or extra locals for passing a null or non-null pointer as the last argument.",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 74
+      },
+      "revId": "ff6930a2f931ee832a21ebb28678a6a13cbc2270",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
