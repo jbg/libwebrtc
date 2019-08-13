@@ -5,16 +5,16 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '514a543362beb90cc2d706b2cb10b6682b5c8209',
+  'chromium_revision': '8016c0d78c4463f47ca8a2ac613af217b222b240',
 }
 
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@4def23584c21f4eba61b8f9ec290aa95bb1e8d70',
+    'https://chromium.googlesource.com/chromium/src/base@08d654afee78fd6706c1ddf1a764b088724b1186',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@a2984b015ffdb73cc84bf8a0830d80094ba6f168',
+    'https://chromium.googlesource.com/chromium/src/build@a796bd87b0a6c4f7650dfbae9bc9607e499d3870',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@74cfb57006f83cfe050817526db359d5c8a11628',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -29,7 +29,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@b3a01bdf19b28cdb160899536a7ebb64ff678451',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@1d6494df55126f0bc58166b2e712f6daaa8a51d9',
+    'https://chromium.googlesource.com/chromium/src/third_party@d756f251271814ca6bffba7d1cab851eb059f8e5',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -119,7 +119,7 @@ deps = {
   'src/third_party/colorama/src':
     'https://chromium.googlesource.com/external/colorama.git@799604a1041e9b3bc5d2789ecbd7e8db2e18e6b8',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@d6186f993681ad1862236fb895dd4efb2f132bce',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@3c814957ee532260024e544bf10230348bbc4909',
   'src/third_party/errorprone/lib': {
       'url': 'https://chromium.googlesource.com/chromium/third_party/errorprone.git@980d49e839aa4984015efed34b0134d4b2c9b6d7',
       'condition': 'checkout_android',
@@ -150,7 +150,7 @@ deps = {
   'src/third_party/googletest/src':
     'https://chromium.googlesource.com/external/github.com/google/googletest.git@90a443f9c2437ca8a682a1ac625eba64e1d74a8a',
   'src/third_party/icu': {
-    'url': 'https://chromium.googlesource.com/chromium/deps/icu.git@682a230923933a7157a41b88c7804b6b7d2abdfa',
+    'url': 'https://chromium.googlesource.com/chromium/deps/icu.git@9a5af81f58a2bc2ea7a887505e38b50021496194',
   },
   'src/third_party/jsr-305/src': {
     'url': 'https://chromium.googlesource.com/external/jsr-305.git@642c508235471f7220af6d5df2d3210e3bfc0919',
@@ -231,7 +231,7 @@ deps = {
   'src/third_party/yasm/source/patched-yasm':
     'https://chromium.googlesource.com/chromium/deps/yasm/patched-yasm.git@720b70524a4424b15fc57e82263568c8ba0496ad',
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@7bb19f3198bc234e9bd64bdfb0a6a08327c76ac0',
+    'https://chromium.googlesource.com/chromium/src/tools@fd8de3ecac83a4a56dd83a54e2bf1b3d675bb39d',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@96f125709acfd0b48fc1e5dae7d6ea42291726ac',
 
