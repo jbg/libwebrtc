@@ -146,6 +146,11 @@ bool GetDataMediaType(PayloadProtocolIdentifier ppid,
 // keying material.
 void VerboseLogPacket(const void* data, size_t length, int direction) {
   if (RTC_LOG_CHECK_LEVEL(LS_VERBOSE) && length > 0) {
+    if (direction == 0) {
+      RTC_LOG(LS_VERBOSE) << "\ninbound packet";
+    } else {
+      RTC_LOG(LS_VERBOSE) << "\noutbound packet";
+    }
     char* dump_buf;
     // Some downstream project uses an older version of usrsctp that expects
     // a non-const "void*" as first parameter when dumping the packet, so we
@@ -275,6 +280,7 @@ class SctpTransport::UsrSctpWrapper {
                                  struct sctp_rcvinfo rcv,
                                  int flags,
                                  void* ulp_info) {
+    RTC_LOG(LS_INFO) << "\nreceived data from sctp lib\n";
     SctpTransport* transport = static_cast<SctpTransport*>(ulp_info);
     // Post data to the transport's receiver thread (copying it).
     // TODO(ldixon): Unclear if copy is needed as this method is responsible for
@@ -300,6 +306,7 @@ class SctpTransport::UsrSctpWrapper {
       // stack should ensure this.
       if ((transport->partial_message_.size() != 0) &&
           (rcv.rcv_sid != transport->partial_params_.sid)) {
+        RTC_LOG(LS_INFO) << "\nnew sid, delivering previous partial message\n";
         // A message with a new sid, but haven't seen the EOR for the
         // previous message. Deliver the previous partial message to avoid
         // merging messages from different sid's.
@@ -312,11 +319,17 @@ class SctpTransport::UsrSctpWrapper {
         transport->partial_message_.Clear();
       }
 
+      RTC_LOG(LS_INFO) << "\nappending partial message";
       transport->partial_message_.AppendData(reinterpret_cast<uint8_t*>(data),
                                              length);
       transport->partial_params_ = params;
       transport->partial_flags_ = flags;
 
+      bool end_of_message = flags & MSG_EOR;
+      RTC_LOG(LS_INFO) << "\nend of message? " << end_of_message;
+      RTC_LOG(LS_INFO) << "\nbuffer size: "
+                       << transport->partial_message_.size()
+                       << ", max: " << kSctpSendBufferSize;
       free(data);
 
       // Merge partial messages until they exceed the maximum send buffer size.
@@ -325,11 +338,15 @@ class SctpTransport::UsrSctpWrapper {
       // still be delivered in chunks.
       if (!(flags & MSG_EOR) &&
           (transport->partial_message_.size() < kSctpSendBufferSize)) {
+        RTC_LOG(LS_INFO) << "\nonly merging mssage\n";
         return 1;
       }
 
       // The ownership of the packet transfers to |invoker_|. Using
       // CopyOnWriteBuffer is the most convenient way to do this.
+      std::string reason =
+          flags & MSG_EOR ? "End of message" : "Max buffer size";
+      RTC_LOG(LS_INFO) << "\nhanding message off because " << reason << "\n";
       transport->invoker_.AsyncInvoke<void>(
           RTC_FROM_HERE, transport->network_thread_,
           rtc::Bind(&SctpTransport::OnInboundPacketFromSctpToTransport,
@@ -887,8 +904,8 @@ void SctpTransport::OnPacketRead(rtc::PacketTransportInternal* transport,
     return;
   }
 
-  RTC_LOG(LS_VERBOSE) << debug_name_ << "->OnPacketRead(...): "
-                      << " length=" << len << ", started: " << started_;
+  RTC_LOG(LS_INFO) << debug_name_ << "->OnPacketRead(...): "
+                   << " length=" << len << ", started: " << started_;
   // Only give receiving packets to usrsctp after if connected. This enables two
   // peers to each make a connect call, but for them not to receive an INIT
   // packet before they have called connect; least the last receiver of the INIT
@@ -949,12 +966,12 @@ void SctpTransport::OnInboundPacketFromSctpToTransport(
     ReceiveDataParams params,
     int flags) {
   RTC_DCHECK_RUN_ON(network_thread_);
-  RTC_LOG(LS_VERBOSE) << debug_name_
-                      << "->OnInboundPacketFromSctpToTransport(...): "
-                      << "Received SCTP data:"
-                      << " sid=" << params.sid
-                      << " notification: " << (flags & MSG_NOTIFICATION)
-                      << " length=" << buffer.size();
+  RTC_LOG(LS_INFO) << debug_name_
+                   << "->OnInboundPacketFromSctpToTransport(...): "
+                   << "Received SCTP data:"
+                   << " sid=" << params.sid
+                   << " notification: " << (flags & MSG_NOTIFICATION)
+                   << " length=" << buffer.size();
   // Sending a packet with data == NULL (no data) is SCTPs "close the
   // connection" message. This sets sock_ = NULL;
   if (!buffer.size() || !buffer.data()) {
