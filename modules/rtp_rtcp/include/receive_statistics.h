@@ -59,10 +59,9 @@ class ReceiveStatistics : public ReceiveStatisticsProvider,
  public:
   ~ReceiveStatistics() override = default;
 
-  static std::unique_ptr<ReceiveStatistics> Create(Clock* clock) {
-    return Create(clock, nullptr);
-  }
+  static std::unique_ptr<ReceiveStatistics> Create(Clock* clock);
 
+  RTC_DEPRECATED
   static std::unique_ptr<ReceiveStatistics> Create(
       Clock* clock,
       StreamDataCountersCallback* rtp_callback);
