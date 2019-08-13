@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "735a9da3_10935e64",
+        "filename": "modules/rtp_rtcp/include/receive_statistics.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-13T07:52:56Z",
+      "side": 1,
+      "message": "may be mark this one as deprecated too.",
+      "range": {
+        "startLine": 64,
+        "startChar": 44,
+        "endLine": 64,
+        "endChar": 50
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef75a151_631d9b55",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-13T07:52:56Z",
+      "side": 1,
+      "message": "just delete if unused",
+      "range": {
+        "startLine": 667,
+        "startChar": 0,
+        "endLine": 667,
+        "endChar": 5
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "167910d1_10018b0f",
+        "filename": "video/receive_statistics_proxy.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-13T07:52:56Z",
+      "side": 1,
+      "message": "just delete this function if it is no longer needed",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 5
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbbfc1ce_1addacdc",
+        "filename": "video/receive_statistics_proxy.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-13T07:52:56Z",
+      "side": 1,
+      "message": "StreamDataCounters is not small enough and doesn\u0027t have efficient move constructor.\nCan it be better to pass it by const reference?\n\n(and similar pass rtx_stats by const pointer, for same reason)",
+      "range": {
+        "startLine": 102,
+        "startChar": 24,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c789a83_4c7b3996",
+        "filename": "video/receive_statistics_proxy.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-13T07:52:56Z",
+      "side": 1,
+      "message": "why keep it then?\ncan you expand note explaining that",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 71
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95b16b89_74a85c02",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-13T07:52:56Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 5
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df3d72a3_cdbe2cba",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-13T07:52:56Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 548,
+        "startChar": 0,
+        "endLine": 548,
+        "endChar": 5
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85440931_6a144ce3",
+        "filename": "video/receive_statistics_proxy_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-08-13T07:52:56Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 946,
+        "startChar": 0,
+        "endLine": 946,
+        "endChar": 5
+      },
+      "revId": "b83e006fbe066fc0a28bc85dd46ecd336ec83108",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
