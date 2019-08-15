@@ -419,7 +419,10 @@ DatagramDtlsAdaptor::GetLocalCertificate() const {
 
 bool DatagramDtlsAdaptor::SetLocalCertificate(
     const rtc::scoped_refptr<rtc::RTCCertificate>& certificate) {
-  return false;
+  // Note: this may be called if datagram transport is negotiated alongside
+  // DTLS.  If datagram transport is used, it will ignore the local certificate
+  // and use its pre-shared key.
+  return true;
 }
 
 std::unique_ptr<rtc::SSLCertChain> DatagramDtlsAdaptor::GetRemoteSSLCertChain()
