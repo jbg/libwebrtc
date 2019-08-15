@@ -37,6 +37,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/rate_limiter.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/unique_id_generator.h"
 #include "system_wrappers/include/sleep.h"
@@ -1828,7 +1829,7 @@ TEST_F(VideoSendStreamTest, ChangingTransportOverhead) {
 // since you cannot change the content type of a VideoSendStream, you need to
 // recreate it. Stopping and recreating the stream can only be done on the main
 // thread and in the context of VideoSendStreamTest (not BaseTest).
-template <typename T>
+template <typename T, typename StopFunction>
 class MaxPaddingSetTest : public test::SendTest {
  public:
   static const uint32_t kMinTransmitBitrateBps = 400000;
@@ -1837,16 +1838,19 @@ class MaxPaddingSetTest : public test::SendTest {
 
   MaxPaddingSetTest(bool test_switch_content_type,
                     T* stream_reset_fun,
+                    StopFunction* stream_stop_fun,
                     test::SingleThreadedTaskQueueForTesting* task_queue)
       : SendTest(test::CallTest::kDefaultTimeoutMs),
         call_(nullptr),
         send_stream_(nullptr),
         send_stream_config_(nullptr),
-        packets_sent_(0),
         running_without_padding_(test_switch_content_type),
         stream_resetter_(stream_reset_fun),
+        stream_stopper_(stream_stop_fun),
         task_queue_(task_queue) {
     RTC_DCHECK(stream_resetter_);
+    RTC_DCHECK(stream_stopper_);
+    module_process_thread_.Detach();
   }
 
   void OnVideoStreamsCreated(
@@ -1879,35 +1883,46 @@ class MaxPaddingSetTest : public test::SendTest {
 
   // Called on the pacer thread.
   Action OnSendRtp(const uint8_t* packet, size_t length) override {
-    // GetStats() needs to be called from the construction thread of call_.
-    Call::Stats stats;
-    task_queue_->SendTask([this, &stats]() { stats = call_->GetStats(); });
+    RTC_DCHECK_RUN_ON(&module_process_thread_);
 
-    rtc::CritScope lock(&crit_);
+    RTC_DCHECK(!done_);
 
-    if (running_without_padding_)
-      EXPECT_EQ(0, stats.max_padding_bitrate_bps);
+    const bool running_without_padding = RunningWithoutPadding();
+
+    // Here we hang (we're on the module process thread!!!) because the queue is
+    // blocked...
+    task_queue_->PostTask([this, running_without_padding]() {
+      // GetStats() needs to be called from the construction thread of call_.
+      Call::Stats stats = call_->GetStats();
+      if (running_without_padding) {
+        EXPECT_EQ(0, stats.max_padding_bitrate_bps);
+      } else {
+        // Make sure the pacer has been configured with a min transmit bitrate.
+        if (stats.max_padding_bitrate_bps > 0) {
+          observation_complete_.Set();
+        }
+      }
+    });
 
     // Wait until at least kMinPacketsToSend frames have been encoded, so that
     // we have reliable data.
     if (++packets_sent_ < kMinPacketsToSend)
       return SEND_PACKET;
 
-    if (running_without_padding_) {
+    if (running_without_padding) {
       // We've sent kMinPacketsToSend packets with default configuration, switch
       // to enabling screen content and setting min transmit bitrate.
       // Note that we need to recreate the stream if changing content type.
       packets_sent_ = 0;
+
       encoder_config_.min_transmit_bitrate_bps = kMinTransmitBitrateBps;
       encoder_config_.content_type = VideoEncoderConfig::ContentType::kScreen;
-      running_without_padding_ = false;
+      {
+        rtc::CritScope lock(&crit_);
+        running_without_padding_ = false;
+      }
       content_switch_event_.Set();
-      return SEND_PACKET;
     }
-
-    // Make sure the pacer has been configured with a min transmit bitrate.
-    if (stats.max_padding_bitrate_bps > 0)
-      observation_complete_.Set();
 
     return SEND_PACKET;
   }
@@ -1920,6 +1935,8 @@ class MaxPaddingSetTest : public test::SendTest {
     }
 
     ASSERT_TRUE(Wait()) << "Timed out waiting for a valid padding bitrate.";
+    (*stream_stopper_)();
+    task_queue_->SendTask([]() {});  // Flush.
   }
 
  private:
@@ -1934,16 +1951,21 @@ class MaxPaddingSetTest : public test::SendTest {
   VideoSendStream* send_stream_ RTC_GUARDED_BY(crit_);
   VideoSendStream::Config send_stream_config_;
   VideoEncoderConfig encoder_config_;
-  uint32_t packets_sent_ RTC_GUARDED_BY(crit_);
+  webrtc::SequenceChecker module_process_thread_;
+  uint32_t packets_sent_ RTC_GUARDED_BY(module_process_thread_) = 0;
   bool running_without_padding_;
   T* const stream_resetter_;
+  StopFunction* const stream_stopper_;
   test::SingleThreadedTaskQueueForTesting* task_queue_;
+  bool done_ = false;
 };
 
 TEST_F(VideoSendStreamTest, RespectsMinTransmitBitrate) {
   auto reset_fun = [](const VideoSendStream::Config& send_stream_config,
                       const VideoEncoderConfig& encoder_config) {};
-  MaxPaddingSetTest<decltype(reset_fun)> test(false, &reset_fun, &task_queue_);
+  auto stop_fun = [this]() { task_queue_.SendTask([this]() { Stop(); }); };
+  MaxPaddingSetTest<decltype(reset_fun), decltype(stop_fun)> test(
+      false, &reset_fun, &stop_fun, &task_queue_);
   RunBaseTest(&test);
 }
 
@@ -1961,7 +1983,9 @@ TEST_F(VideoSendStreamTest, RespectsMinTransmitBitrateAfterContentSwitch) {
       Start();
     });
   };
-  MaxPaddingSetTest<decltype(reset_fun)> test(true, &reset_fun, &task_queue_);
+  auto stop_fun = [this]() { task_queue_.SendTask([this]() { Stop(); }); };
+  MaxPaddingSetTest<decltype(reset_fun), decltype(stop_fun)> test(
+      true, &reset_fun, &stop_fun, &task_queue_);
   RunBaseTest(&test);
 }
 
