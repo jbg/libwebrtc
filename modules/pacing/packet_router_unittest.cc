@@ -405,7 +405,7 @@ TEST(PacketRouterTest, AllocateSequenceNumbers) {
   const uint16_t kStartSeq = 0xFFF0;
   const size_t kNumPackets = 32;
 
-  packet_router.SetTransportWideSequenceNumber(kStartSeq - 1);
+  packet_router.SetTransportWideSequenceNumberForTesting(kStartSeq - 1);
 
   for (size_t i = 0; i < kNumPackets; ++i) {
     uint16_t seq = packet_router.AllocateSequenceNumber();

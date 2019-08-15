@@ -200,6 +200,8 @@ void VideoSendStream::StopPermanentlyAndGetRtpStates(
     send_stream_->Stop();
     *rtp_state_map = send_stream_->GetRtpStates();
     *payload_state_map = send_stream_->GetRtpPayloadStates();
+    // Here we hang because PacketRouter::RemoveSendRtpModule needs
+    // modules_crit_
     send_stream_.reset();
     thread_sync_event_.Set();
   });
