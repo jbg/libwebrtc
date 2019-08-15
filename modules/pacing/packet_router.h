@@ -25,6 +25,7 @@
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/critical_section.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
@@ -107,12 +108,17 @@ class PacketRouter : public TransportSequenceNumberAllocator,
                      RtpRtcp* rtp_module)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(modules_crit_);
 
+  webrtc::SequenceChecker sequence_checker_;
+  webrtc::SequenceChecker process_thread_checker_;
+  webrtc::SequenceChecker construction_thread_checker_;
+
   rtc::CriticalSection modules_crit_;
   // Rtp and Rtcp modules of the rtp senders.
   std::list<RtpRtcp*> rtp_send_modules_ RTC_GUARDED_BY(modules_crit_);
   // Ssrc to RtpRtcp module cache.
   std::unordered_map<uint32_t, RtpRtcp*> rtp_module_cache_map_
       RTC_GUARDED_BY(modules_crit_);
+  // RTC_GUARDED_BY(modules_crit_);
   // The last module used to send media.
   RtpRtcp* last_send_module_ RTC_GUARDED_BY(modules_crit_);
   // Rtcp modules of the rtp receivers.
