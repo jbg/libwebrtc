@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e4895c59_c240e125",
+        "filename": "modules/audio_device/include/audio_device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 8947
+      },
+      "writtenOn": "2019-08-16T10:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de3efd9e_ad65569f",
+      "revId": "75eb6e4d45dfa6fe965a2a04f5fc2117b66b85d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3ffe576_71e3af79",
         "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioTrack.java",
         "patchSetId": 8
@@ -39,6 +57,30 @@
       "revId": "75eb6e4d45dfa6fe965a2a04f5fc2117b66b85d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb5baafc_840b8626",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioTrack.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 8947
+      },
+      "writtenOn": "2019-08-16T10:04:41Z",
+      "side": 1,
+      "message": "Is there a specific concern? I\u0027m reusing the logic of logUnderrunCount. The style looks ok to Java lint and formatter but please feel free to add sakal@ to the change if you think it is worth his time.",
+      "parentUuid": "f3ffe576_71e3af79",
+      "range": {
+        "startLine": 347,
+        "startChar": 4,
+        "endLine": 347,
+        "endChar": 7
+      },
+      "revId": "75eb6e4d45dfa6fe965a2a04f5fc2117b66b85d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
