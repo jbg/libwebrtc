@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <limits>
+#include <string>
 #include <utility>
 
 #include "absl/types/optional.h"
@@ -24,12 +25,33 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/time_utils.h"
 
+#include "modules/utility/source/process_thread_impl.h"
+
 namespace webrtc {
 namespace {
 
 constexpr int kRembSendIntervalMs = 200;
 
+#if RTC_DCHECK_IS_ON
+#define EXPECT_PROCESS_THREAD(process_thread_name)                    \
+  RTC_DCHECK(webrtc::ProcessThreadImpl::Current());                   \
+  {                                                                   \
+    std::string expected(process_thread_name);                        \
+    std::string actual(webrtc::ProcessThreadImpl::Current()->name()); \
+    RTC_DCHECK_EQ(actual, expected);                                  \
+  }
+#else
+#define EXPECT_PROCESS_THREAD(name)
+#endif
+
 }  // namespace
+
+// TODO(tommi): The way this class is used, is inconsistent in tests and does
+// not reflect the runtime environment for the class in production.
+// Once we clear that up and fix the tests to be consistent, ideally not
+// using the SingleThreadedTaskQueue class but rather TaskQueueForTest, we can
+// start getting rid of locks in the class and more easily reason around the
+// design.
 
 PacketRouter::PacketRouter()
     : last_send_module_(nullptr),
@@ -38,9 +60,15 @@ PacketRouter::PacketRouter()
       bitrate_bps_(0),
       max_bitrate_bps_(std::numeric_limits<decltype(max_bitrate_bps_)>::max()),
       active_remb_module_(nullptr),
-      transport_seq_(0) {}
+      transport_seq_(0) {
+  sequence_checker_.Detach();
+  process_thread_checker_.Detach();
+  pacer_thread_checker_.Detach();
+}
 
 PacketRouter::~PacketRouter() {
+  RTC_DCHECK_RUN_ON(&construction_thread_checker_);
+
   RTC_DCHECK(rtp_send_modules_.empty());
   RTC_DCHECK(rtcp_feedback_senders_.empty());
   RTC_DCHECK(sender_remb_candidates_.empty());
@@ -49,6 +77,7 @@ PacketRouter::~PacketRouter() {
 }
 
 void PacketRouter::AddSendRtpModule(RtpRtcp* rtp_module, bool remb_candidate) {
+  // RTC_DCHECK_RUN_ON(&sequence_checker_);
   rtc::CritScope cs(&modules_crit_);
   RTC_DCHECK(std::find(rtp_send_modules_.begin(), rtp_send_modules_.end(),
                        rtp_module) == rtp_send_modules_.end());
@@ -66,6 +95,11 @@ void PacketRouter::AddSendRtpModule(RtpRtcp* rtp_module, bool remb_candidate) {
 }
 
 void PacketRouter::RemoveSendRtpModule(RtpRtcp* rtp_module) {
+  // Called on a TaskQueue. Should be OK to use a SequenceChecker.
+  // Currently disabled since some tests call this on the construction thread.
+  // Try e.g. TransportFeedbackEndToEndTest.AudioVideoReceivesTransportFeedback
+  //  RTC_DCHECK_RUN_ON(&sequence_checker_);
+
   rtc::CritScope cs(&modules_crit_);
   rtp_module_cache_map_.clear();
   MaybeRemoveRembModuleCandidate(rtp_module, /* media_sender = */ true);
@@ -80,6 +114,7 @@ void PacketRouter::RemoveSendRtpModule(RtpRtcp* rtp_module) {
 
 void PacketRouter::AddReceiveRtpModule(RtcpFeedbackSenderInterface* rtcp_sender,
                                        bool remb_candidate) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   rtc::CritScope cs(&modules_crit_);
   RTC_DCHECK(std::find(rtcp_feedback_senders_.begin(),
                        rtcp_feedback_senders_.end(),
@@ -94,6 +129,7 @@ void PacketRouter::AddReceiveRtpModule(RtcpFeedbackSenderInterface* rtcp_sender,
 
 void PacketRouter::RemoveReceiveRtpModule(
     RtcpFeedbackSenderInterface* rtcp_sender) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   rtc::CritScope cs(&modules_crit_);
   MaybeRemoveRembModuleCandidate(rtcp_sender, /* media_sender = */ false);
   auto it = std::find(rtcp_feedback_senders_.begin(),
@@ -108,6 +144,9 @@ RtpPacketSendResult PacketRouter::TimeToSendPacket(
     int64_t capture_timestamp,
     bool retransmission,
     const PacedPacketInfo& pacing_info) {
+  // Called from the PacedSender.
+  EXPECT_PROCESS_THREAD("PacerThread");
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
   rtc::CritScope cs(&modules_crit_);
   RtpRtcp* rtp_module = FindRtpModule(ssrc);
   if (rtp_module == nullptr || !rtp_module->SendingMedia()) {
@@ -126,6 +165,8 @@ RtpPacketSendResult PacketRouter::TimeToSendPacket(
 }
 
 RtpRtcp* PacketRouter::FindRtpModule(uint32_t ssrc) {
+  EXPECT_PROCESS_THREAD("PacerThread");
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
   auto it = rtp_module_cache_map_.find(ssrc);
   if (it != rtp_module_cache_map_.end()) {
     if (ssrc == it->second->SSRC() || ssrc == it->second->FlexfecSsrc()) {
@@ -146,13 +187,18 @@ RtpRtcp* PacketRouter::FindRtpModule(uint32_t ssrc) {
 
 void PacketRouter::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
                               const PacedPacketInfo& cluster_info) {
-  rtc::CritScope cs(&modules_crit_);
+  // Called by PacedSender on the process thread (not the PacerThread).
+  EXPECT_PROCESS_THREAD("PacerThread");
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
+
   // With the new pacer code path, transport sequence numbers are only set here,
   // on the pacer thread. Therefore we don't need atomics/synchronization.
   if (packet->IsExtensionReserved<TransportSequenceNumber>()) {
-    packet->SetExtension<TransportSequenceNumber>(++transport_seq_);
+    packet->SetExtension<TransportSequenceNumber>(
+        rtc::AtomicOps::Increment(&transport_seq_));
   }
 
+  rtc::CritScope cs(&modules_crit_);
   auto it = rtp_module_cache_map_.find(packet->Ssrc());
   if (it != rtp_module_cache_map_.end()) {
     if (TrySendPacket(packet.get(), cluster_info, it->second)) {
@@ -177,6 +223,7 @@ void PacketRouter::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
 
 size_t PacketRouter::TimeToSendPadding(size_t bytes_to_send,
                                        const PacedPacketInfo& pacing_info) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   size_t total_bytes_sent = 0;
   rtc::CritScope cs(&modules_crit_);
   // First try on the last rtp module to have sent media. This increases the
@@ -212,6 +259,9 @@ size_t PacketRouter::TimeToSendPadding(size_t bytes_to_send,
 
 std::vector<std::unique_ptr<RtpPacketToSend>> PacketRouter::GeneratePadding(
     size_t target_size_bytes) {
+  // Called from PacedSender::Process.
+  EXPECT_PROCESS_THREAD("PacerThread");
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
   rtc::CritScope cs(&modules_crit_);
   // First try on the last rtp module to have sent media. This increases the
   // the chance that any payload based padding will be useful as it will be
@@ -245,6 +295,8 @@ void PacketRouter::SetTransportWideSequenceNumber(uint16_t sequence_number) {
 }
 
 uint16_t PacketRouter::AllocateSequenceNumber() {
+  // Called on the paccer thread.
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   int prev_seq = rtc::AtomicOps::AcquireLoad(&transport_seq_);
   int desired_prev_seq;
   int new_seq;
@@ -264,6 +316,8 @@ uint16_t PacketRouter::AllocateSequenceNumber() {
 
 void PacketRouter::OnReceiveBitrateChanged(const std::vector<uint32_t>& ssrcs,
                                            uint32_t bitrate_bps) {
+  EXPECT_PROCESS_THREAD("PacerThread");
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
   // % threshold for if we should send a new REMB asap.
   const int64_t kSendThresholdPercent = 97;
   // TODO(danilchap): Remove receive_bitrate_bps variable and the cast
@@ -303,6 +357,7 @@ void PacketRouter::OnReceiveBitrateChanged(const std::vector<uint32_t>& ssrcs,
 }
 
 void PacketRouter::SetMaxDesiredReceiveBitrate(int64_t bitrate_bps) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK_GE(bitrate_bps, 0);
   {
     rtc::CritScope lock(&remb_crit_);
@@ -319,6 +374,8 @@ void PacketRouter::SetMaxDesiredReceiveBitrate(int64_t bitrate_bps) {
 
 bool PacketRouter::SendRemb(int64_t bitrate_bps,
                             const std::vector<uint32_t>& ssrcs) {
+  EXPECT_PROCESS_THREAD("PacerThread");
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
   rtc::CritScope lock(&modules_crit_);
 
   if (!active_remb_module_) {
@@ -333,6 +390,11 @@ bool PacketRouter::SendRemb(int64_t bitrate_bps,
 }
 
 bool PacketRouter::SendTransportFeedback(rtcp::TransportFeedback* packet) {
+  // This runs on a different process thread than the one associated with the
+  // PacedSender. Confusingly this thread is called PacerThread.
+  EXPECT_PROCESS_THREAD("ModuleProcessThread");
+  RTC_DCHECK_RUN_ON(&pacer_thread_checker_);
+
   rtc::CritScope cs(&modules_crit_);
   // Prefer send modules.
   for (auto* rtp_module : rtp_send_modules_) {
@@ -353,6 +415,8 @@ bool PacketRouter::SendTransportFeedback(rtcp::TransportFeedback* packet) {
 void PacketRouter::AddRembModuleCandidate(
     RtcpFeedbackSenderInterface* candidate_module,
     bool media_sender) {
+  // TODO(tommi): Not called consistently on the same/correct thread in tests.
+  // RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK(candidate_module);
   std::vector<RtcpFeedbackSenderInterface*>& candidates =
       media_sender ? sender_remb_candidates_ : receiver_remb_candidates_;
@@ -365,6 +429,8 @@ void PacketRouter::AddRembModuleCandidate(
 void PacketRouter::MaybeRemoveRembModuleCandidate(
     RtcpFeedbackSenderInterface* candidate_module,
     bool media_sender) {
+  // See comment in RemoveSendRtpModule.
+  // RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK(candidate_module);
   std::vector<RtcpFeedbackSenderInterface*>& candidates =
       media_sender ? sender_remb_candidates_ : receiver_remb_candidates_;
@@ -382,12 +448,18 @@ void PacketRouter::MaybeRemoveRembModuleCandidate(
 }
 
 void PacketRouter::UnsetActiveRembModule() {
+  // See comment in RemoveSendRtpModule.
+  // RTC_DCHECK_RUN_ON(&sequence_checker_);
+
   RTC_CHECK(active_remb_module_);
   active_remb_module_->UnsetRemb();
   active_remb_module_ = nullptr;
 }
 
 void PacketRouter::DetermineActiveRembModule() {
+  // See comment in RemoveSendRtpModule.
+  // RTC_DCHECK_RUN_ON(&sequence_checker_);
+
   // Sender modules take precedence over receiver modules, because SRs (sender
   // reports) are sent more frequently than RR (receiver reports).
   // When adding the first sender module, we should change the active REMB
@@ -413,6 +485,9 @@ void PacketRouter::DetermineActiveRembModule() {
 bool PacketRouter::TrySendPacket(RtpPacketToSend* packet,
                                  const PacedPacketInfo& cluster_info,
                                  RtpRtcp* rtp_module) {
+  EXPECT_PROCESS_THREAD("PacerThread");
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
+
   uint32_t ssrc = packet->Ssrc();
   if (rtp_module->TrySendPacket(packet, cluster_info)) {
     // Sending succeeded, make sure this SSRC mapping for future use.
