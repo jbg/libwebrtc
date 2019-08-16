@@ -42,6 +42,9 @@ class ProcessThreadImpl : public ProcessThread {
   void RegisterModule(Module* module, const rtc::Location& from) override;
   void DeRegisterModule(Module* module) override;
 
+  static ProcessThreadImpl* Current();
+  const char* name() const { return thread_name_; }
+
  protected:
   static void Run(void* obj);
   bool Process();
