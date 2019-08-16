@@ -25,6 +25,7 @@
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/critical_section.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
@@ -69,6 +70,7 @@ class PacketRouter : public TransportSequenceNumberAllocator,
   virtual std::vector<std::unique_ptr<RtpPacketToSend>> GeneratePadding(
       size_t target_size_bytes);
 
+  // Assumed to be called before routing starts.
   void SetTransportWideSequenceNumber(uint16_t sequence_number);
   uint16_t AllocateSequenceNumber() override;
 
@@ -106,6 +108,11 @@ class PacketRouter : public TransportSequenceNumberAllocator,
                      const PacedPacketInfo& cluster_info,
                      RtpRtcp* rtp_module)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(modules_crit_);
+
+  webrtc::SequenceChecker sequence_checker_;
+  webrtc::SequenceChecker process_thread_checker_;
+  webrtc::SequenceChecker pacer_thread_checker_;
+  webrtc::SequenceChecker construction_thread_checker_;
 
   rtc::CriticalSection modules_crit_;
   // Rtp and Rtcp modules of the rtp senders.
