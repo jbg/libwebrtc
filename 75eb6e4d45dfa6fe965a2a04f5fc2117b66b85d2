@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de3efd9e_ad65569f",
+        "filename": "modules/audio_device/include/audio_device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2019-08-16T08:11:34Z",
+      "side": 1,
+      "message": "Please call it GetPlayoutUnderrunCount() since it could also mean that we are not generating any input samples. Also add note about only being supported on Android.",
+      "revId": "75eb6e4d45dfa6fe965a2a04f5fc2117b66b85d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3ffe576_71e3af79",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioTrack.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2019-08-16T08:11:34Z",
+      "side": 1,
+      "message": "Please check style with https://moma.corp.google.com/person/sakal since he knows Java and how we deal with SDK versions really well.",
+      "range": {
+        "startLine": 347,
+        "startChar": 4,
+        "endLine": 347,
+        "endChar": 7
+      },
+      "revId": "75eb6e4d45dfa6fe965a2a04f5fc2117b66b85d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
