@@ -33,6 +33,7 @@
 #include "modules/utility/include/process_thread.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/experiments/field_trial_parser.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
@@ -203,6 +204,7 @@ class PacedSender : public Module,
   // in turn calls Pause/Resume on Pacedsender, before actually starting the
   // pacer process thread. If RtpTransportControllerSend is running on a task
   // queue separate from the thread used by Call, this causes a race.
+  webrtc::SequenceChecker construction_sequence_checker_;
   rtc::CriticalSection process_thread_lock_;
   ProcessThread* process_thread_ RTC_GUARDED_BY(process_thread_lock_);
 
