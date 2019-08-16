@@ -59,6 +59,22 @@ struct SendDataParams {
   absl::optional<int> max_rtx_ms;
 };
 
+// State of a data channel transport.
+enum class DataChannelState {
+  // Initial state when the data channel transport is first created, before it
+  // is ready to write data.  The data channel transport may become writable or
+  // closed from this state.
+  kInitial,
+
+  // Once the data channel transport is connected and able to transfer data, it
+  // becomes writable.  The transport may only become closed from this state.
+  kWritable,
+
+  // If the data channel transport fails to connect or disconnects, it becomes
+  // closed.  This state is terminal.
+  kClosed,
+};
+
 // Sink for callbacks related to a data channel.
 class DataChannelSink {
  public:
@@ -77,6 +93,12 @@ class DataChannelSink {
   // procedure.  Closing channels become closed after all pending data has been
   // transmitted.
   virtual void OnChannelClosed(int channel_id) = 0;
+
+  // Callback issued when the data channel changes states.
+  // This callback will be issued with the current state immediately when the
+  // data channel sink is registered.
+  // TODO(mellem):  Make pure virtual when downstream sinks override this.
+  virtual void OnStateChanged(DataChannelState state) {}
 };
 
 // Transport for data channels.
