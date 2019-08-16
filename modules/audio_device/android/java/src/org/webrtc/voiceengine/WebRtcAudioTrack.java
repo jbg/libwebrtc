@@ -453,7 +453,7 @@ public class WebRtcAudioTrack {
   // UMA stat if needed.
   private void logUnderrunCount() {
     if (Build.VERSION.SDK_INT >= 24) {
-      Logging.d(TAG, "underrun count: " + audioTrack.getUnderrunCount());
+      Logging.d(TAG, "underrun count: " + audioTrack.GetPlayoutUnderrunCount());
     }
   }
 
