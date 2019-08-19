@@ -145,6 +145,7 @@ std::unique_ptr<ChannelReceiveInterface> CreateChannelReceive(
     const MediaTransportConfig& media_transport_config,
     Transport* rtcp_send_transport,
     RtcEventLog* rtc_event_log,
+    uint32_t local_ssrc,
     uint32_t remote_ssrc,
     size_t jitter_buffer_max_packets,
     bool jitter_buffer_fast_playout,
