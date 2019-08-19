@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87cc9e1f_24657c27",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 7704
+      },
+      "writtenOn": "2019-08-19T13:46:07Z",
+      "side": 1,
+      "message": "What do you think about hiding it behind a flag, so that we can compare with/without this change and attribute the difference correctly?\n\nMaybe it\u0027s an overkill, but I believe that it wouldn\u0027t affect callee, but it would affect caller (media transport is automatically connected on the callee once ICE is connected, and on the caller on the first packet)",
+      "range": {
+        "startLine": 1491,
+        "startChar": 61,
+        "endLine": 1492,
+        "endChar": 80
+      },
+      "revId": "fa8f4eee40050e9875a4b8c38d99ea54a112c1ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
