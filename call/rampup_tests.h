@@ -112,7 +112,19 @@ class RampUpTester : public test::EndToEndTest {
   std::vector<uint32_t> video_rtx_ssrcs_;
   std::vector<uint32_t> audio_ssrcs_;
 
+  // Used to maintain consistent callbacks and account for jitter.
+  int64_t poll_time_base_ = 0;
+
  protected:
+  // Call from within PollStats to ensure that he base time has been set.
+  // Call from within PollStats on the task queue.
+  void EnsurePollTimeSet();
+
+  // Utility function that updates |poll_time_base_| and is used to keep
+  // callbacks to PollStats, regular.
+  // Must be called from the task queue.
+  int64_t GetIntervalForNextPoll();
+
   test::SingleThreadedTaskQueueForTesting* const task_queue_;
   test::SingleThreadedTaskQueueForTesting::TaskId pending_task_ = -1;
 };
