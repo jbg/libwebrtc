@@ -22,6 +22,30 @@
       "revId": "fa8f4eee40050e9875a4b8c38d99ea54a112c1ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a486618a_affe14e2",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-08-19T17:02:44Z",
+      "side": 1,
+      "message": "I think skipping this block for data channels is sensible regardless of stats.  We should make media-transport-based data channels behavior as close as possible to internal SCTP data channels.  This method doesn\u0027t account for SCTP state.\n\nThis does account for DTLS state, and that\u0027s why we accounted for media transport state.  However, when DTLS is used, it\u0027s used for the entire call, and the entire call is hosed without it.  When media transport is used, it\u0027s used for the entire call only if it\u0027s used for media.  If it\u0027s only used for data channels, the media part of the call can go forward without it.  So it\u0027s more of an analogue to SCTP than DTLS in the media transport for data channels configuration.",
+      "parentUuid": "87cc9e1f_24657c27",
+      "range": {
+        "startLine": 1491,
+        "startChar": 61,
+        "endLine": 1492,
+        "endChar": 80
+      },
+      "revId": "fa8f4eee40050e9875a4b8c38d99ea54a112c1ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
