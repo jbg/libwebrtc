@@ -116,9 +116,6 @@ class ChannelReceiveInterface : public RtpPacketSinkInterface {
   // Produces the transport-related timestamps; current_delay_ms is left unset.
   virtual absl::optional<Syncable::Info> GetSyncInfo() const = 0;
 
-  // RTP+RTCP
-  virtual void SetLocalSSRC(uint32_t ssrc) = 0;
-
   virtual void RegisterReceiverCongestionControlObjects(
       PacketRouter* packet_router) = 0;
   virtual void ResetReceiverCongestionControlObjects() = 0;

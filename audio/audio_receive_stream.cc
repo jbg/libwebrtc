@@ -382,9 +382,8 @@ void AudioReceiveStream::ConfigureStream(AudioReceiveStream* stream,
   RTC_DCHECK(first_time ||
              old_config.decoder_factory == new_config.decoder_factory);
 
-  if (old_config.rtp.local_ssrc != new_config.rtp.local_ssrc) {
-    channel_receive->SetLocalSSRC(new_config.rtp.local_ssrc);
-  }
+  // Local SSRC can't be changed mid stream, need to recreate objects.
+  RTC_DCHECK_EQ(old_config.rtp.local_ssrc, new_config.rtp.local_ssrc);
 
   if (!first_time) {
     // Remote ssrc can't be changed mid-stream.
