@@ -5,16 +5,16 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'afb0a631b99baa85c239d51a1a6b69603c4bd125',
+  'chromium_revision': '7a52673de57bac85e118c7e157401e77b320b01b',
 }
 
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@845cdcdcd2cc72eb510239b736eb467d92fd5cfa',
+    'https://chromium.googlesource.com/chromium/src/base@c842c33fa964776d9c33804606aa81d4b4274156',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@7539a9c4256a31ec13fd81d48c0ac3cd4d92e2df',
+    'https://chromium.googlesource.com/chromium/src/build@66d4ff51ec2affa3ffe8b12de5a2cc89b977bd0c',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@74cfb57006f83cfe050817526db359d5c8a11628',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -23,13 +23,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@17cf6dfd7e431c75aeee77e2e007077e4add771b',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@934e865daae09a6d9f86f7ce2860cc7de19e3c22',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@c96b0fc8eb0b7359872d55c12f890969db094428',
+    'https://chromium.googlesource.com/chromium/src/testing@2445c42c9ec2753fde0dd21f1dba58cff7697a14',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@d9108ec1ca918e4c0bc8b5832a93ef397fa9fa6c',
+    'https://chromium.googlesource.com/chromium/src/third_party@9149a215f527f16b8d330c1783b9143ffa5624b4',
 
   'src/buildtools/linux64': {
     'packages': [
