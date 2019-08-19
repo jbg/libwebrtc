@@ -22,6 +22,30 @@
       "revId": "3024b907babe413c7d8a05d84da50873203568ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97331feb_2fc9d44e",
+        "filename": "sdk/objc/components/renderer/metal/RTCMTLI420Renderer.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-08-19T13:18:21Z",
+      "side": 1,
+      "message": "It did extremely weird things to this code, and I tried fixing it manually. This must be an accident. Fixed.",
+      "parentUuid": "9cf49cd7_572b7952",
+      "range": {
+        "startLine": 49,
+        "startChar": 98,
+        "endLine": 49,
+        "endChar": 100
+      },
+      "revId": "3024b907babe413c7d8a05d84da50873203568ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
