@@ -103,8 +103,6 @@ class ThreadManager {
   Thread* WrapCurrentThread();
   void UnwrapCurrentThread();
 
-  bool IsMainThread();
-
  private:
   ThreadManager();
   ~ThreadManager();
@@ -116,9 +114,6 @@ class ThreadManager {
 #if defined(WEBRTC_WIN)
   const DWORD key_;
 #endif
-
-  // The thread to potentially autowrap.
-  const PlatformThreadRef main_thread_ref_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(ThreadManager);
 };
