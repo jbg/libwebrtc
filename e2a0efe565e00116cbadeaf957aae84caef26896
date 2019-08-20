@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f42ec94_f3d128b3",
+        "filename": "call/rampup_tests.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-20T07:31:51Z",
+      "side": 1,
+      "message": "Clearer to name this something like next_scheduled_poll_time_, and independently, add ms_ suffix.\n\nComments could be improved, see go/totw/138, also applies to GetIntervalForNextPoll below.",
+      "range": {
+        "startLine": 116,
+        "startChar": 10,
+        "endLine": 116,
+        "endChar": 25
+      },
+      "revId": "e2a0efe565e00116cbadeaf957aae84caef26896",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
