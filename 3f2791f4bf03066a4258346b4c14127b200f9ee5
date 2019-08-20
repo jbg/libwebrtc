@@ -16,6 +16,24 @@
       "revId": "3f2791f4bf03066a4258346b4c14127b200f9ee5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28f226e5_537d2689",
+        "filename": "test/pc/e2e/echo/echo_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-08-20T12:16:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "130051ab_ffc4d155",
+      "revId": "3f2791f4bf03066a4258346b4c14127b200f9ee5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
