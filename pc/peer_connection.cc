@@ -3451,16 +3451,6 @@ PeerConnectionInterface::RTCConfiguration PeerConnection::GetConfiguration() {
   return configuration_;
 }
 
-bool PeerConnection::SetConfiguration(const RTCConfiguration& configuration,
-                                      RTCError* error) {
-  RTCError result = SetConfiguration(configuration);
-  bool success = result.ok();
-  if (error) {
-    *error = std::move(result);
-  }
-  return success;
-}
-
 RTCError PeerConnection::SetConfiguration(
     const RTCConfiguration& configuration) {
   RTC_DCHECK_RUN_ON(signaling_thread());

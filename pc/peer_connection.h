@@ -208,9 +208,6 @@ class PeerConnection : public PeerConnectionInternal,
       rtc::scoped_refptr<SetRemoteDescriptionObserverInterface> observer)
       override;
   PeerConnectionInterface::RTCConfiguration GetConfiguration() override;
-  bool SetConfiguration(
-      const PeerConnectionInterface::RTCConfiguration& configuration,
-      RTCError* error) override;
   RTCError SetConfiguration(
       const PeerConnectionInterface::RTCConfiguration& configuration) override;
   bool AddIceCandidate(const IceCandidateInterface* candidate) override;
