@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7a3e233c_7416c74a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-20T01:03:16Z",
+      "side": 1,
+      "message": "Merged \u0026 dropped from the description.",
+      "parentUuid": "0d622c0c_230bd86a",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56c084fc_fc43945a",
         "filename": "modules/desktop_capture/win/owned_window_identifier.h",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "I actually completely misunderstood \"identifier\" as meaning \"name\", not \"thing that performs identification\". OwnedWindowFinder would probably be a better name in that case, but what you have now is fine.",
       "parentUuid": "a4d00d3f_5a0a946f",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dbf4b28_3afaa49b",
+        "filename": "modules/desktop_capture/win/owned_window_identifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-20T01:03:16Z",
+      "side": 1,
+      "message": "Yeah, that seems like a more natural interpretation \u0026 better name for its original scope/usage. Left the new name as-is now that the class is a bit more general (e.g. used for checking for overlap of non-owned windows).",
+      "parentUuid": "4a9c4797_b9bfa2e8",
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -458,6 +494,24 @@
     },
     {
       "key": {
+        "uuid": "70c5cc2b_84123120",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-20T01:03:16Z",
+      "side": 1,
+      "message": "Good idea, thanks -- I refactored away the callback.",
+      "parentUuid": "917d66a3_cf985fe1",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9333ce5_b8954ac5",
         "filename": "modules/desktop_capture/window_capturer_win.cc",
         "patchSetId": 1
@@ -508,6 +562,24 @@
       "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff5d4182_a4bfd07b",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-08-20T01:03:16Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "efc0116a_8f3fcc8e",
+      "revId": "2ee322b4b1a3a93bbd5d500a31f3d26026d2f9ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
