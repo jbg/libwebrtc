@@ -346,13 +346,8 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
     }
   }
 
-  std::vector<StatsObserverInterface*> observers = {
-      audio_quality_analyzer_.get(),
-      video_quality_analyzer_injection_helper_.get()};
-  for (auto& reporter : quality_metrics_reporters_) {
-    observers.push_back(reporter.get());
-  }
-  StatsPoller stats_poller(observers,
+  StatsPoller stats_poller({audio_quality_analyzer_.get(),
+                            video_quality_analyzer_injection_helper_.get()},
                            {{"alice", alice_.get()}, {"bob", bob_.get()}});
 
   task_queue_->PostTask([&stats_poller, this]() {
