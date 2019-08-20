@@ -375,15 +375,13 @@ void AudioReceiveStream::ConfigureStream(AudioReceiveStream* stream,
   RTC_DCHECK(first_time ||
              old_config.rtp.remote_ssrc == new_config.rtp.remote_ssrc);
   RTC_DCHECK(first_time ||
+             old_config.rtp.local_ssrc == new_config.rtp.local_ssrc);
+  RTC_DCHECK(first_time ||
              old_config.rtcp_send_transport == new_config.rtcp_send_transport);
   // Decoder factory cannot be changed because it is configured at
   // voe::Channel construction time.
   RTC_DCHECK(first_time ||
              old_config.decoder_factory == new_config.decoder_factory);
-
-  if (first_time || old_config.rtp.local_ssrc != new_config.rtp.local_ssrc) {
-    channel_receive->SetLocalSSRC(new_config.rtp.local_ssrc);
-  }
 
   if (!first_time) {
     // Remote ssrc can't be changed mid-stream.

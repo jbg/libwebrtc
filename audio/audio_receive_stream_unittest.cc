@@ -88,7 +88,6 @@ struct ConfigHelper {
     audio_state_ = AudioState::Create(config);
 
     channel_receive_ = new ::testing::StrictMock<MockChannelReceive>();
-    EXPECT_CALL(*channel_receive_, SetLocalSSRC(kLocalSsrc)).Times(1);
     EXPECT_CALL(*channel_receive_, SetNACKStatus(true, 15)).Times(1);
     EXPECT_CALL(*channel_receive_,
                 RegisterReceiverCongestionControlObjects(&packet_router_))
@@ -376,7 +375,6 @@ TEST(AudioReceiveStreamTest, ReconfigureWithUpdatedConfig) {
   new_config.decoder_map.emplace(1, SdpAudioFormat("foo", 8000, 1));
 
   MockChannelReceive& channel_receive = *helper.channel_receive();
-  EXPECT_CALL(channel_receive, SetLocalSSRC(kLocalSsrc + 1)).Times(1);
   EXPECT_CALL(channel_receive, SetNACKStatus(true, 15 + 1)).Times(1);
   EXPECT_CALL(channel_receive, SetReceiveCodecs(new_config.decoder_map));
 

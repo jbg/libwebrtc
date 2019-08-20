@@ -164,6 +164,7 @@ AudioSendStream::AudioSendStream(
   }
   rtp_rtcp_module_ = channel_send_->GetRtpRtcp();
   RTC_DCHECK(rtp_rtcp_module_);
+  config_.rtp.ssrc = rtp_rtcp_module_->SSRC();
 
   ConfigureStream(this, config, true);
 
@@ -243,12 +244,8 @@ void AudioSendStream::ConfigureStream(
   // Configuration parameters which cannot be changed.
   RTC_DCHECK(first_time ||
              old_config.send_transport == new_config.send_transport);
-
-  if (old_config.rtp.ssrc != new_config.rtp.ssrc) {
-    channel_send->SetLocalSSRC(new_config.rtp.ssrc);
-  }
-  if (stream->suspended_rtp_state_ &&
-      (first_time || old_config.rtp.ssrc != new_config.rtp.ssrc)) {
+  RTC_DCHECK_EQ(old_config.rtp.ssrc, new_config.rtp.ssrc);
+  if (stream->suspended_rtp_state_ && first_time) {
     stream->rtp_rtcp_module_->SetRtpState(*stream->suspended_rtp_state_);
   }
   if (first_time || old_config.rtp.c_name != new_config.rtp.c_name) {
