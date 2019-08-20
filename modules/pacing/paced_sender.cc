@@ -37,7 +37,9 @@ PacedSender::PacedSender(Clock* clock,
       packet_router_(packet_router),
       process_thread_(nullptr) {}
 
-PacedSender::~PacedSender() = default;
+PacedSender::~PacedSender() {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
+}
 
 void PacedSender::CreateProbeCluster(DataRate bitrate, int cluster_id) {
   rtc::CritScope cs(&critsect_);
@@ -45,6 +47,14 @@ void PacedSender::CreateProbeCluster(DataRate bitrate, int cluster_id) {
 }
 
 void PacedSender::Pause() {
+  // Called on a TQ from within
+  // RtpTransportControllerSend::OnNetworkAvailability.
+  // RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
+  {
+    rtc::CritScope cs(&process_thread_lock_);
+    RTC_DCHECK(process_thread_);  // Must have been set first.
+  }
+
   {
     rtc::CritScope cs(&critsect_);
     pacing_controller_.Pause();
@@ -57,6 +67,19 @@ void PacedSender::Pause() {
 }
 
 void PacedSender::Resume() {
+  // Called on a TQ from within
+  // RtpTransportControllerSend::OnNetworkAvailability.
+  // RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
+  {
+    // TODO(tommi): Apparently this isn't always true. See test
+    // ReferencingAndOwningPackets/PacedSenderTest.Pause/0
+    // It could be that that test never sets a process thread though.
+    // Consider requiring to set the process thread in the ctor and
+    // make the process_thread_ variable const, no lock required.
+    rtc::CritScope cs(&process_thread_lock_);
+    RTC_DCHECK(process_thread_);  // Must have been set first.
+  }
+
   {
     rtc::CritScope cs(&critsect_);
     pacing_controller_.Resume();
@@ -69,21 +92,29 @@ void PacedSender::Resume() {
 }
 
 void PacedSender::SetCongestionWindow(DataSize congestion_window_size) {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.SetCongestionWindow(congestion_window_size);
 }
 
 void PacedSender::UpdateOutstandingData(DataSize outstanding_data) {
+  // Called on a TQ from within
+  // RtpTransportControllerSend::OnNetworkAvailability.
+  // RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.UpdateOutstandingData(outstanding_data);
 }
 
 void PacedSender::SetProbingEnabled(bool enabled) {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.SetProbingEnabled(enabled);
 }
 
 void PacedSender::SetPacingRates(DataRate pacing_rate, DataRate padding_rate) {
+  // Called on a TQ from within
+  // RtpTransportControllerSend::OnNetworkAvailability.
+  // RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.SetPacingRates(pacing_rate, padding_rate);
 }
@@ -94,6 +125,7 @@ void PacedSender::InsertPacket(RtpPacketSender::Priority priority,
                                int64_t capture_time_ms,
                                size_t bytes,
                                bool retransmission) {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.InsertPacket(priority, ssrc, sequence_number,
                                   capture_time_ms, bytes, retransmission);
@@ -161,6 +193,7 @@ void PacedSender::Process() {
 }
 
 void PacedSender::ProcessThreadAttached(ProcessThread* process_thread) {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   RTC_LOG(LS_INFO) << "ProcessThreadAttached 0x" << process_thread;
   rtc::CritScope cs(&process_thread_lock_);
   process_thread_ = process_thread;
