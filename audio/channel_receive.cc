@@ -155,9 +155,6 @@ class ChannelReceive : public ChannelReceiveInterface,
   // Produces the transport-related timestamps; current_delay_ms is left unset.
   absl::optional<Syncable::Info> GetSyncInfo() const override;
 
-  // RTP+RTCP
-  void SetLocalSSRC(unsigned int ssrc) override;
-
   void RegisterReceiverCongestionControlObjects(
       PacketRouter* packet_router) override;
   void ResetReceiverCongestionControlObjects() override;
@@ -699,11 +696,6 @@ void ChannelReceive::SetChannelOutputVolumeScaling(float scaling) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   rtc::CritScope cs(&volume_settings_critsect_);
   _outputGain = scaling;
-}
-
-void ChannelReceive::SetLocalSSRC(uint32_t ssrc) {
-  RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  _rtpRtcpModule->SetSSRC(ssrc);
 }
 
 void ChannelReceive::RegisterReceiverCongestionControlObjects(

@@ -88,7 +88,6 @@ struct ConfigHelper {
     audio_state_ = AudioState::Create(config);
 
     channel_receive_ = new ::testing::StrictMock<MockChannelReceive>();
-    EXPECT_CALL(*channel_receive_, SetLocalSSRC(kLocalSsrc)).Times(1);
     EXPECT_CALL(*channel_receive_, SetNACKStatus(true, 15)).Times(1);
     EXPECT_CALL(*channel_receive_,
                 RegisterReceiverCongestionControlObjects(&packet_router_))

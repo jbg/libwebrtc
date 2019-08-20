@@ -28,7 +28,6 @@ namespace test {
 
 class MockChannelReceive : public voe::ChannelReceiveInterface {
  public:
-  MOCK_METHOD1(SetLocalSSRC, void(uint32_t ssrc));
   MOCK_METHOD2(SetNACKStatus, void(bool enable, int max_packets));
   MOCK_METHOD1(RegisterReceiverCongestionControlObjects,
                void(PacketRouter* packet_router));
