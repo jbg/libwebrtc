@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "130051ab_ffc4d155",
+        "filename": "test/pc/e2e/echo/echo_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-08-20T09:24:53Z",
+      "side": 1,
+      "message": "If you swap the if and else branches, you can remove a bunch of negations from this condition...",
+      "revId": "3f2791f4bf03066a4258346b4c14127b200f9ee5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
