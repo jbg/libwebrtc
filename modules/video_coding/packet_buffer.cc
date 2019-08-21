@@ -419,10 +419,12 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
       missing_packets_.erase(missing_packets_.begin(),
                              missing_packets_.upper_bound(seq_num));
 
-      found_frames.emplace_back(
+      RtpFrameObject* frame_object =
           new RtpFrameObject(this, start_seq_num, seq_num, frame_size,
                              max_nack_count, min_recv_time, max_recv_time,
-                             RtpPacketInfos(std::move(packet_infos))));
+                             RtpPacketInfos(std::move(packet_infos)));
+      ReturnFrame(frame_object);
+      found_frames.emplace_back(frame_object);
     }
     ++seq_num;
   }
