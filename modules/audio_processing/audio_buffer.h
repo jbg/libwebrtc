@@ -31,11 +31,18 @@ enum Band { kBand0To8kHz = 0, kBand8To16kHz = 1, kBand16To24kHz = 2 };
 
 class AudioBuffer {
  public:
-  // TODO(ajm): Switch to take ChannelLayouts.
+  AudioBuffer(size_t input_rate,
+              size_t input_num_channels,
+              size_t buffer_rate,
+              size_t buffer_num_channels,
+              size_t output_rate,
+              size_t output_num_channels);
+
+  // The constructor below will be deprecated.
   AudioBuffer(size_t input_num_frames,
-              size_t num_input_channels,
-              size_t process_num_frames,
-              size_t num_process_channels,
+              size_t input_num_channels,
+              size_t buffer_num_frames,
+              size_t buffer_num_channels,
               size_t output_num_frames);
   virtual ~AudioBuffer();
 
@@ -118,6 +125,8 @@ class AudioBuffer {
   // per channels and the current number of channels. This last one can be
   // changed at any time using set_num_channels().
   const size_t output_num_frames_;
+  const size_t output_num_channels_;
+
   size_t num_channels_;
 
   size_t num_bands_;
