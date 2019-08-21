@@ -84,22 +84,19 @@ bool SampleRateSupportsMultiBand(int sample_rate_hz) {
          sample_rate_hz == AudioProcessing::kSampleRate48kHz;
 }
 
-int FindNativeProcessRateToUse(int minimum_rate, bool band_splitting_required) {
+// Identify the native processing rate that best handles a sample rate.
+int SuitableProcessRate(int minimum_rate, bool band_splitting_required) {
 #ifdef WEBRTC_ARCH_ARM_FAMILY
-  constexpr int kMaxSplittingNativeProcessRate =
-      AudioProcessing::kSampleRate32kHz;
+  constexpr int kMaxSplittingRate = 32000;
 #else
-  constexpr int kMaxSplittingNativeProcessRate =
-      AudioProcessing::kSampleRate48kHz;
+  constexpr int kMaxSplittingRate = 48000;
 #endif
-  static_assert(
-      kMaxSplittingNativeProcessRate <= AudioProcessing::kMaxNativeSampleRateHz,
-      "");
-  const int uppermost_native_rate = band_splitting_required
-                                        ? kMaxSplittingNativeProcessRate
-                                        : AudioProcessing::kSampleRate48kHz;
+  static_assert(kMaxSplittingRate <= 48000, "");
 
-  for (auto rate : AudioProcessing::kNativeSampleRatesHz) {
+  const int uppermost_native_rate =
+      band_splitting_required ? kMaxSplittingRate : 48000;
+
+  for (auto rate : {16000, 32000, 48000}) {
     if (rate >= uppermost_native_rate) {
       return uppermost_native_rate;
     }
@@ -530,7 +527,6 @@ int AudioProcessingImpl::InitializeLocked() {
                       capture_nonlocked_.capture_processing_format.num_frames(),
                       formats_.api_format.output_stream().num_channels(),
                       formats_.api_format.output_stream().num_frames()));
-
   AllocateRenderQueue();
 
   public_submodules_->gain_control->Initialize(num_proc_channels(),
@@ -593,18 +589,19 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
 
   formats_.api_format = config;
 
-  int capture_processing_rate = FindNativeProcessRateToUse(
+  int capture_processing_rate = SuitableProcessRate(
       std::min(formats_.api_format.input_stream().sample_rate_hz(),
                formats_.api_format.output_stream().sample_rate_hz()),
       submodule_states_.CaptureMultiBandSubModulesActive() ||
           submodule_states_.RenderMultiBandSubModulesActive());
+  RTC_DCHECK_NE(8000, capture_processing_rate);
 
   capture_nonlocked_.capture_processing_format =
       StreamConfig(capture_processing_rate);
 
   int render_processing_rate;
   if (!capture_nonlocked_.echo_controller_enabled) {
-    render_processing_rate = FindNativeProcessRateToUse(
+    render_processing_rate = SuitableProcessRate(
         std::min(formats_.api_format.reverse_input_stream().sample_rate_hz(),
                  formats_.api_format.reverse_output_stream().sample_rate_hz()),
         submodule_states_.CaptureMultiBandSubModulesActive() ||
@@ -631,6 +628,7 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
     render_processing_rate =
         std::max(render_processing_rate, static_cast<int>(kSampleRate16kHz));
   }
+  RTC_DCHECK_NE(8000, render_processing_rate);
 
   // Always downmix the render stream to mono for analysis. This has been
   // demonstrated to work well for AEC in most practical scenarios.
