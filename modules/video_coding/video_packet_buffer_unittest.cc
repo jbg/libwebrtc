@@ -117,8 +117,9 @@ TEST_F(TestPacketBuffer, InsertMultiplePackets) {
 
 TEST_F(TestPacketBuffer, InsertDuplicatePacket) {
   const uint16_t seq_num = Rand();
-  EXPECT_TRUE(Insert(seq_num, kKeyFrame, kFirst, kLast));
-  EXPECT_TRUE(Insert(seq_num, kKeyFrame, kFirst, kLast));
+  EXPECT_TRUE(Insert(seq_num, kKeyFrame, kFirst, kNotLast));
+  EXPECT_TRUE(Insert(seq_num, kKeyFrame, kFirst, kNotLast));
+  EXPECT_TRUE(Insert(seq_num + 1, kKeyFrame, kNotFirst, kLast));
 }
 
 TEST_F(TestPacketBuffer, SeqNumWrapOneFrame) {
@@ -266,8 +267,10 @@ TEST_F(TestPacketBuffer, HasHistoryOfUniqueFrames) {
 TEST_F(TestPacketBuffer, ExpandBuffer) {
   const uint16_t seq_num = Rand();
 
-  for (int i = 0; i < kStartSize + 1; ++i) {
-    EXPECT_TRUE(Insert(seq_num + i, kKeyFrame, kFirst, kLast));
+  int i = 0;
+  while (i < kStartSize + 2) {
+    EXPECT_TRUE(Insert(seq_num + i, kKeyFrame, kFirst, kNotLast));
+    i += 2;
   }
 }
 
@@ -286,9 +289,12 @@ TEST_F(TestPacketBuffer, SingleFrameExpandsBuffer) {
 TEST_F(TestPacketBuffer, ExpandBufferOverflow) {
   const uint16_t seq_num = Rand();
 
-  for (int i = 0; i < kMaxSize; ++i)
-    EXPECT_TRUE(Insert(seq_num + i, kKeyFrame, kFirst, kLast));
-  EXPECT_FALSE(Insert(seq_num + kMaxSize + 1, kKeyFrame, kFirst, kLast));
+  int i = 0;
+  while (i < kMaxSize) {
+    EXPECT_TRUE(Insert(seq_num + i, kKeyFrame, kFirst, kNotLast));
+    i += 2;
+  }
+  EXPECT_FALSE(Insert(seq_num + i, kKeyFrame, kFirst, kLast));
 }
 
 TEST_F(TestPacketBuffer, OnePacketOneFrame) {
@@ -467,9 +473,9 @@ TEST_F(TestPacketBuffer, GetBitstreamOneFrameOnePacket) {
   ASSERT_EQ(1UL, frames_from_callback_.size());
   CheckFrame(0);
   EXPECT_EQ(frames_from_callback_[0]->size(), sizeof(bitstream_data));
-  EXPECT_EQ(
-      memcmp(frames_from_callback_[0]->data(), data, sizeof(bitstream_data)),
-      0);
+  EXPECT_EQ(memcmp(frames_from_callback_[0]->data(), bitstream_data,
+                   sizeof(bitstream_data)),
+            0);
 }
 
 TEST_F(TestPacketBuffer, GetBitstreamOneFrameFullBuffer) {
