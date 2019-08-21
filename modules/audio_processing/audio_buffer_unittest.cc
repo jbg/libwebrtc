@@ -27,7 +27,8 @@ void ExpectNumChannels(const AudioBuffer& ab, size_t num_channels) {
 }  // namespace
 
 TEST(AudioBufferTest, SetNumChannelsSetsChannelBuffersNumChannels) {
-  AudioBuffer ab(kSampleRateHz, kStereo, kSampleRateHz, kStereo, kSampleRateHz);
+  AudioBuffer ab(kSampleRateHz, kStereo, kSampleRateHz, kStereo, kSampleRateHz,
+                 kStereo);
   ExpectNumChannels(ab, kStereo);
   ab.set_num_channels(1);
   ExpectNumChannels(ab, kMono);
@@ -37,7 +38,8 @@ TEST(AudioBufferTest, SetNumChannelsSetsChannelBuffersNumChannels) {
 
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
 TEST(AudioBufferTest, SetNumChannelsDeathTest) {
-  AudioBuffer ab(kSampleRateHz, kMono, kSampleRateHz, kMono, kSampleRateHz);
+  AudioBuffer ab(kSampleRateHz, kMono, kSampleRateHz, kMono, kSampleRateHz,
+                 kMono);
   EXPECT_DEATH(ab.set_num_channels(kStereo), "num_channels");
 }
 #endif

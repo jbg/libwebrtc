@@ -60,7 +60,7 @@ TEST(BlockDelayBuffer, CorrectDelayApplied) {
       static constexpr size_t kNumFramesToProcess = 20;
       for (size_t frame_index = 0; frame_index < kNumFramesToProcess;
            ++frame_index) {
-        AudioBuffer audio_buffer(rate, 1, rate, 1, rate);
+        AudioBuffer audio_buffer(rate, 1, rate, 1, rate, 1);
         if (rate > 16000) {
           audio_buffer.SplitIntoFrequencyBands();
         }

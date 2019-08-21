@@ -37,7 +37,7 @@ float RunAgc2WithConstantInput(GainController2* agc2,
                                size_t num_frames,
                                int sample_rate) {
   const int num_samples = rtc::CheckedDivExact(sample_rate, 100);
-  AudioBuffer ab(sample_rate, 1, sample_rate, 1, sample_rate);
+  AudioBuffer ab(sample_rate, 1, sample_rate, 1, sample_rate, 1);
 
   // Give time to the level estimator to converge.
   for (size_t i = 0; i < num_frames + 1; ++i) {
@@ -75,7 +75,8 @@ float GainAfterProcessingFile(GainController2* gain_controller) {
                                     false);
   AudioBuffer ab(capture_config.sample_rate_hz(), capture_config.num_channels(),
                  capture_config.sample_rate_hz(), capture_config.num_channels(),
-                 capture_config.sample_rate_hz());
+                 capture_config.sample_rate_hz(),
+                 capture_config.num_channels());
   test::InputAudioFile capture_file(
       test::GetApmCaptureTestVectorFileName(AudioProcessing::kSampleRate48kHz));
   std::vector<float> capture_input(capture_config.num_frames() *
