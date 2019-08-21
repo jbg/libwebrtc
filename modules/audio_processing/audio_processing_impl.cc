@@ -598,6 +598,7 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
                formats_.api_format.output_stream().sample_rate_hz()),
       submodule_states_.CaptureMultiBandSubModulesActive() ||
           submodule_states_.RenderMultiBandSubModulesActive());
+  RTC_DCHECK_NE(kSampleRate8kHz, capture_processing_rate);
 
   capture_nonlocked_.capture_processing_format =
       StreamConfig(capture_processing_rate);
@@ -631,6 +632,7 @@ int AudioProcessingImpl::InitializeLocked(const ProcessingConfig& config) {
     render_processing_rate =
         std::max(render_processing_rate, static_cast<int>(kSampleRate16kHz));
   }
+  RTC_DCHECK_NE(kSampleRate8kHz, render_processing_rate);
 
   // Always downmix the render stream to mono for analysis. This has been
   // demonstrated to work well for AEC in most practical scenarios.
