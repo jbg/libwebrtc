@@ -56,7 +56,7 @@ void RunBitexactnessTest(int sample_rate_hz,
   AudioBuffer capture_buffer(
       capture_config.sample_rate_hz(), capture_config.num_channels(),
       capture_config.sample_rate_hz(), capture_config.num_channels(),
-      capture_config.sample_rate_hz());
+      capture_config.sample_rate_hz(), capture_config.num_channels());
   test::InputAudioFile capture_file(
       test::GetApmCaptureTestVectorFileName(sample_rate_hz));
   std::vector<float> capture_input(samples_per_channel * num_channels);

@@ -152,12 +152,14 @@ class EchoCanceller3Tester {
                         1,
                         fullband_frame_length_ * 100,
                         1,
-                        fullband_frame_length_ * 100),
+                        fullband_frame_length_ * 100,
+                        1),
         render_buffer_(fullband_frame_length_ * 100,
                        1,
                        fullband_frame_length_ * 100,
                        1,
-                       fullband_frame_length_ * 100) {}
+                       fullband_frame_length_ * 100,
+                       1) {}
 
   // Verifies that the capture data is properly received by the block processor
   // and that the processor data is properly passed to the EchoCanceller3

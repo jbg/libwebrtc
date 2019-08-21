@@ -62,7 +62,7 @@ void SimulatorBuffers::CreateConfigAndBuffer(
   buffer->reset(
       new AudioBuffer(config->sample_rate_hz(), config->num_channels(),
                       config->sample_rate_hz(), config->num_channels(),
-                      config->sample_rate_hz()));
+                      config->sample_rate_hz(), config->num_channels()));
 
   buffer_data_samples->resize(samples_per_channel * num_channels);
   for (auto& v : *buffer_data_samples) {

@@ -23,7 +23,7 @@ TEST(AudioFrameTest, ConstructFromAudioBuffer) {
   webrtc::AudioBuffer buffer(
       stream_config.sample_rate_hz(), stream_config.num_channels(),
       stream_config.sample_rate_hz(), stream_config.num_channels(),
-      stream_config.sample_rate_hz());
+      stream_config.sample_rate_hz(), stream_config.num_channels());
 
   AudioFrameView<float> non_const_view(buffer.channels(), buffer.num_channels(),
                                        buffer.num_frames());
