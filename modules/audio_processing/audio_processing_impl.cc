@@ -508,7 +508,8 @@ int AudioProcessingImpl::InitializeLocked() {
         formats_.api_format.reverse_input_stream().num_channels(),
         formats_.render_processing_format.sample_rate_hz(),
         formats_.render_processing_format.num_channels(),
-        render_audiobuffer_sample_rate_hz));
+        render_audiobuffer_sample_rate_hz,
+        formats_.render_processing_format.num_channels()));
     if (formats_.api_format.reverse_input_stream() !=
         formats_.api_format.reverse_output_stream()) {
       render_.render_converter = AudioConverter::Create(
@@ -529,7 +530,8 @@ int AudioProcessingImpl::InitializeLocked() {
       formats_.api_format.input_stream().num_channels(),
       capture_nonlocked_.capture_processing_format.sample_rate_hz(),
       formats_.api_format.output_stream().num_channels(),
-      formats_.api_format.output_stream().sample_rate_hz()));
+      formats_.api_format.output_stream().sample_rate_hz(),
+      formats_.api_format.output_stream().num_channels()));
 
   AllocateRenderQueue();
 

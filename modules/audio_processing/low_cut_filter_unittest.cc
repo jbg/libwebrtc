@@ -27,7 +27,7 @@ std::vector<float> ProcessOneFrame(const std::vector<float>& frame_input,
   AudioBuffer audio_buffer(
       stream_config.sample_rate_hz(), stream_config.num_channels(),
       stream_config.sample_rate_hz(), stream_config.num_channels(),
-      stream_config.sample_rate_hz());
+      stream_config.sample_rate_hz(), stream_config.num_channels());
 
   test::CopyVectorToAudioBuffer(stream_config, frame_input, &audio_buffer);
   low_cut_filter->Process(&audio_buffer);

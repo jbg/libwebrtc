@@ -44,15 +44,25 @@ AudioBuffer::AudioBuffer(size_t input_rate,
                          size_t input_num_channels,
                          size_t buffer_rate,
                          size_t buffer_num_channels,
-                         size_t output_rate)
-    : input_num_frames_(
-          rtc::CheckedDivExact(static_cast<int>(input_rate), 100)),
+                         size_t output_rate,
+                         size_t output_num_channels)
+    : AudioBuffer(rtc::CheckedDivExact(static_cast<int>(input_rate), 100),
+                  input_num_channels,
+                  rtc::CheckedDivExact(static_cast<int>(buffer_rate), 100),
+                  buffer_num_channels,
+                  rtc::CheckedDivExact(static_cast<int>(output_rate), 100)) {}
+
+AudioBuffer::AudioBuffer(size_t input_num_frames,
+                         size_t input_num_channels,
+                         size_t buffer_num_frames,
+                         size_t buffer_num_channels,
+                         size_t output_num_frames)
+    : input_num_frames_(input_num_frames),
       input_num_channels_(input_num_channels),
-      buffer_num_frames_(
-          rtc::CheckedDivExact(static_cast<int>(buffer_rate), 100)),
+      buffer_num_frames_(buffer_num_frames),
       buffer_num_channels_(buffer_num_channels),
-      output_num_frames_(
-          rtc::CheckedDivExact(static_cast<int>(output_rate), 100)),
+      output_num_frames_(output_num_frames),
+      output_num_channels_(0),
       num_channels_(buffer_num_channels),
       num_bands_(NumBandsFromFramesPerChannel(buffer_num_frames_)),
       num_split_frames_(rtc::CheckedDivExact(buffer_num_frames_, num_bands_)),
