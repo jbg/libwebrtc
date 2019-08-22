@@ -14,8 +14,8 @@
 #include <stdlib.h>
 #endif
 
-#include "modules/audio_coding/codecs/isac/main/source/pitch_estimator.h"
-#include "modules/audio_coding/codecs/isac/main/source/isac_vad.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/pitch_estimator.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/isac_vad.h"
 
 static void WebRtcIsac_AllPoleFilter(double* InOut,
                                      double* Coef,

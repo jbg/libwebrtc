@@ -8,13 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "common_audio/vad/include/webrtc_vad.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/vad/include/webrtc_vad.h"
 
 #include <stdlib.h>
 #include <string.h>
 
-#include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "common_audio/vad/vad_core.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/vad/vad_core.h"
 
 static const int kInitCheck = 42;
 static const int kValidRates[] = { 8000, 16000, 32000, 48000 };

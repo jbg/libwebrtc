@@ -18,10 +18,10 @@
  *
  */
 
-#include "modules/audio_coding/codecs/isac/fix/source/bandwidth_estimator.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/bandwidth_estimator.h"
 
-#include "modules/audio_coding/codecs/isac/fix/source/settings.h"
-#include "rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
 
 /* array of quantization levels for bottle neck info; Matlab code: */
 /* sprintf('%4.1ff, ', logspace(log10(5000), log10(40000), 12)) */

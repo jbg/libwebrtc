@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "rtc_base/system/arch.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/system/arch.h"
 
 #include <arm_neon.h>
 

@@ -16,7 +16,7 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
 
 /*----------------------------------------------------------------*
  * Swap bytes (to simplify operations on Little Endian machines)

@@ -8,11 +8,11 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "common_audio/vad/vad_sp.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/vad/vad_sp.h"
 
-#include "rtc_base/checks.h"
-#include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "common_audio/vad/vad_core.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/vad/vad_core.h"
 
 // Allpass filter coefficients, upper and lower, in Q13.
 // Upper: 0.64, Lower: 0.17.

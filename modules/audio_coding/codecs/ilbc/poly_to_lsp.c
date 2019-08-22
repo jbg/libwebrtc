@@ -16,9 +16,9 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/constants.h"
-#include "modules/audio_coding/codecs/ilbc/chebyshev.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/constants.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/chebyshev.h"
 
 /*----------------------------------------------------------------*
  * conversion from lpc coefficients to lsp coefficients

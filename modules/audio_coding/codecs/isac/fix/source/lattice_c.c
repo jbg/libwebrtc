@@ -14,8 +14,8 @@
  *
  */
 
-#include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "modules/audio_coding/codecs/isac/fix/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/settings.h"
 
 /* Filter ar_g_Q0[] and ar_f_Q0[] through an AR filter with coefficients
  * cth_Q15[] and sth_Q15[].

@@ -32,7 +32,7 @@
 @ Output:             r0 = INT (SQRT (r0)), precision is 16 bits
 @ Registers touched:  r1, r2
 
-#include "rtc_base/system/asm_defines.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/system/asm_defines.h"
 
 GLOBAL_FUNCTION WebRtcSpl_SqrtFloor
 .align  2

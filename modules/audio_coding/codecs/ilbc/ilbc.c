@@ -18,13 +18,13 @@
 
 #include <stdlib.h>
 
-#include "modules/audio_coding/codecs/ilbc/ilbc.h"
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/init_encode.h"
-#include "modules/audio_coding/codecs/ilbc/encode.h"
-#include "modules/audio_coding/codecs/ilbc/init_decode.h"
-#include "modules/audio_coding/codecs/ilbc/decode.h"
-#include "rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/ilbc.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/init_encode.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/encode.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/init_decode.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/decode.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
 
 int16_t WebRtcIlbcfix_EncoderAssign(IlbcEncoderInstance** iLBC_encinst,
                                     int16_t* ILBCENC_inst_Addr,

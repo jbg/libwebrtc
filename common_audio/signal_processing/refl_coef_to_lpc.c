@@ -15,7 +15,7 @@
  *
  */
 
-#include "common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
 
 void WebRtcSpl_ReflCoefToLpc(const int16_t *k, int use_order, int16_t *a)
 {

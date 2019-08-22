@@ -16,10 +16,10 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/constants.h"
-#include "modules/audio_coding/codecs/ilbc/enh_upsample.h"
-#include "modules/audio_coding/codecs/ilbc/my_corr.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/constants.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/enh_upsample.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/my_corr.h"
 
 /*----------------------------------------------------------------*
  * find segment starting near idata+estSegPos that has highest

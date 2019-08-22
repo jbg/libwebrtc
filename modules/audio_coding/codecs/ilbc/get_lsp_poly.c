@@ -16,7 +16,7 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
 
 /*----------------------------------------------------------------*
  * Construct the polynomials F1(z) and F2(z) from the LSP

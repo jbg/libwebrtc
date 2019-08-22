@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "modules/audio_coding/codecs/isac/main/source/spectrum_ar_model_tables.h"
-#include "modules/audio_coding/codecs/isac/main/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/spectrum_ar_model_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/settings.h"
 
 /********************* AR Coefficient Tables ************************/
 /* cdf for quantized reflection coefficient 1 */

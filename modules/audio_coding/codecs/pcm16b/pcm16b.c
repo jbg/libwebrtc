@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "modules/audio_coding/codecs/pcm16b/pcm16b.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/pcm16b/pcm16b.h"
 
 size_t WebRtcPcm16b_Encode(const int16_t* speech,
                            size_t len,

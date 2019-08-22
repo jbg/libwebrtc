@@ -16,8 +16,8 @@
  */
 
 
-#include "modules/audio_coding/codecs/isac/fix/source/settings.h"
-#include "modules/audio_coding/codecs/isac/fix/source/lpc_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/lpc_tables.h"
 
 /* indices of KLT coefficients used */
 const uint16_t WebRtcIsacfix_kSelIndGain[12] = {

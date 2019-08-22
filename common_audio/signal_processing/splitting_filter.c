@@ -13,8 +13,8 @@
  *
  */
 
-#include "rtc_base/checks.h"
-#include "common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
 
 // Maximum number of samples in a low/high-band frame.
 enum

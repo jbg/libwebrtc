@@ -10,8 +10,8 @@
 
 /* coding tables for the KLT coefficients */
 
-#include "modules/audio_coding/codecs/isac/main/source/lpc_tables.h"
-#include "modules/audio_coding/codecs/isac/main/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/lpc_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/settings.h"
 
 /* cdf array for model indicator */
 const uint16_t WebRtcIsac_kQKltModelCdf[4] = {

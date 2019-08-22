@@ -127,7 +127,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "modules/third_party/fft/fft.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/third_party/fft/fft.h"
 
 /* double precision routine */
 static int

@@ -17,7 +17,7 @@
  */
 
 
-#include "modules/audio_coding/codecs/isac/main/source/arith_routines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/arith_routines.h"
 
 
 

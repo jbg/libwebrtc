@@ -34,7 +34,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "modules/third_party/g722/g722_enc_dec.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/third_party/g722/g722_enc_dec.h"
 
 #if !defined(FALSE)
 #define FALSE 0

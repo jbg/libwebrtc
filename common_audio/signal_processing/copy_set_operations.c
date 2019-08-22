@@ -23,7 +23,7 @@
  */
 
 #include <string.h>
-#include "common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
 
 
 void WebRtcSpl_MemSetW16(int16_t *ptr, int16_t set_value, size_t length)

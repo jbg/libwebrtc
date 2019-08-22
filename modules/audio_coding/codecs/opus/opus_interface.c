@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "modules/audio_coding/codecs/opus/opus_interface.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/opus/opus_interface.h"
 
-#include "rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
 
 #include <stdlib.h>
 #include <string.h>

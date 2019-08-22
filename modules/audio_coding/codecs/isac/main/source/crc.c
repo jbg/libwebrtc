@@ -10,8 +10,8 @@
 
 #include <stdlib.h>
 
-#include "modules/audio_coding/codecs/isac/main/source/crc.h"
-#include "common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/crc.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
 
 #define POLYNOMIAL 0x04c11db7L
 

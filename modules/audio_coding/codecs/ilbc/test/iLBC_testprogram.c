@@ -21,13 +21,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/nit_encode.h"
-#include "modules/audio_coding/codecs/ilbc/encode.h"
-#include "modules/audio_coding/codecs/ilbc/init_decode.h"
-#include "modules/audio_coding/codecs/ilbc/decode.h"
-#include "modules/audio_coding/codecs/ilbc/constants.h"
-#include "modules/audio_coding/codecs/ilbc/ilbc.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/nit_encode.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/encode.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/init_decode.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/decode.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/constants.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/ilbc.h"
 
 #define ILBCNOOFWORDS_MAX (NO_OF_BYTES_30MS)/2
 

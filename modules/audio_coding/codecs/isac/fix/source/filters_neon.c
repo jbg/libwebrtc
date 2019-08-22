@@ -10,8 +10,8 @@
 
 #include <arm_neon.h>
 
-#include "rtc_base/checks.h"
-#include "modules/audio_coding/codecs/isac/fix/source/codec.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/codec.h"
 
 // Autocorrelation function in fixed point.
 // NOTE! Different from SPLIB-version in how it scales the signal.

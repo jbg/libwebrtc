@@ -15,24 +15,24 @@
  *
  */
 
-#include "modules/audio_coding/codecs/isac/main/include/isac.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/include/isac.h"
 
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "rtc_base/checks.h"
-#include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "modules/audio_coding/codecs/isac/main/source/bandwidth_estimator.h"
-#include "modules/audio_coding/codecs/isac/main/source/codec.h"
-#include "modules/audio_coding/codecs/isac/main/source/crc.h"
-#include "modules/audio_coding/codecs/isac/main/source/entropy_coding.h"
-#include "modules/audio_coding/codecs/isac/main/source/lpc_shape_swb16_tables.h"
-#include "modules/audio_coding/codecs/isac/main/source/os_specific_inline.h"
-#include "modules/audio_coding/codecs/isac/main/source/structs.h"
-#include "modules/audio_coding/codecs/isac/main/source/isac_vad.h"
-#include "rtc_base/system/arch.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/bandwidth_estimator.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/codec.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/crc.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/entropy_coding.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/lpc_shape_swb16_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/os_specific_inline.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/structs.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/isac_vad.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/system/arch.h"
 
 #define BIT_MASK_DEC_INIT 0x0001
 #define BIT_MASK_ENC_INIT 0x0002

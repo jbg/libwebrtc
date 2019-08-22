@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "modules/audio_coding/codecs/isac/main/source/pitch_estimator.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/pitch_estimator.h"
 
 #include <math.h>
 #include <memory.h>
@@ -17,9 +17,9 @@
 #include <stdlib.h>
 #endif
 
-#include "modules/audio_coding/codecs/isac/main/source/filter_functions.h"
-#include "modules/audio_coding/codecs/isac/main/source/pitch_filter.h"
-#include "rtc_base/system/ignore_warnings.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/filter_functions.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/pitch_filter.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/system/ignore_warnings.h"
 
 static const double kInterpolWin[8] = {-0.00067556028640,  0.02184247643159, -0.12203175715679,  0.60086484101160,
                                        0.60086484101160, -0.12203175715679,  0.02184247643159, -0.00067556028640};

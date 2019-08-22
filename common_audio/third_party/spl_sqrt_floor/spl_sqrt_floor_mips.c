@@ -29,7 +29,7 @@
 // Minor modifications in code style for WebRTC, 2012.
 // Code optimizations for MIPS, 2013.
 
-#include "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor.h"
 
 /*
  * Algorithm:

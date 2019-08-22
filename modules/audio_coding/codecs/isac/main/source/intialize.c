@@ -12,9 +12,9 @@
 
 #include <math.h>
 
-#include "modules/audio_coding/codecs/isac/main/source/structs.h"
-#include "modules/audio_coding/codecs/isac/main/source/codec.h"
-#include "modules/audio_coding/codecs/isac/main/source/pitch_estimator.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/structs.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/codec.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/pitch_estimator.h"
 
 void WebRtcIsac_InitMasking(MaskFiltstr *maskdata) {
 

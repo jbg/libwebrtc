@@ -22,8 +22,8 @@
 #include <stdlib.h>
 #endif
 
-#include "modules/audio_coding/codecs/isac/main/source/settings.h"
-#include "modules/audio_coding/codecs/isac/main/source/codec.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/codec.h"
 
 /* filter the signal using normalized lattice filter */
 /* MA filter */

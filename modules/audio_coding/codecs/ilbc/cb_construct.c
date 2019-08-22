@@ -16,12 +16,12 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/cb_construct.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/cb_construct.h"
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/gain_dequant.h"
-#include "modules/audio_coding/codecs/ilbc/get_cd_vec.h"
-#include "rtc_base/sanitizer.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/gain_dequant.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/get_cd_vec.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/sanitizer.h"
 
 // An arithmetic operation that is allowed to overflow. (It's still undefined
 // behavior, so not a good idea; this just makes UBSan ignore the violation, so

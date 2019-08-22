@@ -20,7 +20,7 @@
  * -Added option to run encoder bitexact with ITU-T reference implementation
  */
 
-#include "modules/third_party/g711/g711.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/third_party/g711/g711.h"
 
 /* Copied from the CCITT G.711 specification */
 static const uint8_t ulaw_to_alaw_table[256] = {

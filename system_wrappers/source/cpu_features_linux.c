@@ -22,8 +22,8 @@
 #include <errno.h>
 #include <link.h>
 #endif
-#include "rtc_base/system/arch.h"
-#include "system_wrappers/include/cpu_features_wrapper.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/system/arch.h"
+#include "third_party/webrtc/files/stable/webrtc/system_wrappers/include/cpu_features_wrapper.h"
 
 #if defined(WEBRTC_ARCH_ARM_FAMILY)
 #include <asm/hwcap.h>

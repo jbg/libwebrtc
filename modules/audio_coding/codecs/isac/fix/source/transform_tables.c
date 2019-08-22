@@ -15,7 +15,7 @@
 
 #include <stdint.h>
 
-#include "modules/audio_coding/codecs/isac/fix/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/settings.h"
 
 /* Cosine table 1 in Q14. */
 const int16_t WebRtcIsacfix_kCosTab1[FRAMESAMPLES/2] = {

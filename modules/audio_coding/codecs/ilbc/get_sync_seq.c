@@ -16,10 +16,10 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/constants.h"
-#include "modules/audio_coding/codecs/ilbc/refiner.h"
-#include "modules/audio_coding/codecs/ilbc/nearest_neighbor.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/constants.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/refiner.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/nearest_neighbor.h"
 
 /*----------------------------------------------------------------*
  * get the pitch-synchronous sample sequence

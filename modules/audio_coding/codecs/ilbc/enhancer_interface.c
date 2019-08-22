@@ -18,11 +18,11 @@
 
 #include <string.h>
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/constants.h"
-#include "modules/audio_coding/codecs/ilbc/xcorr_coef.h"
-#include "modules/audio_coding/codecs/ilbc/enhancer.h"
-#include "modules/audio_coding/codecs/ilbc/hp_output.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/constants.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/xcorr_coef.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/enhancer.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/hp_output.h"
 
 
 

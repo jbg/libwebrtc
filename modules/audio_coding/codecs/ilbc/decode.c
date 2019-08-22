@@ -17,23 +17,23 @@
 ******************************************************************/
 
 // Defines WEBRTC_ARCH_BIG_ENDIAN, used below.
-#include "rtc_base/system/arch.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/system/arch.h"
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/simple_lsf_dequant.h"
-#include "modules/audio_coding/codecs/ilbc/decoder_interpolate_lsf.h"
-#include "modules/audio_coding/codecs/ilbc/index_conv_dec.h"
-#include "modules/audio_coding/codecs/ilbc/do_plc.h"
-#include "modules/audio_coding/codecs/ilbc/constants.h"
-#include "modules/audio_coding/codecs/ilbc/enhancer_interface.h"
-#include "modules/audio_coding/codecs/ilbc/xcorr_coef.h"
-#include "modules/audio_coding/codecs/ilbc/lsf_check.h"
-#include "modules/audio_coding/codecs/ilbc/decode_residual.h"
-#include "modules/audio_coding/codecs/ilbc/unpack_bits.h"
-#include "modules/audio_coding/codecs/ilbc/hp_output.h"
-#include "modules/audio_coding/codecs/ilbc/init_decode.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/simple_lsf_dequant.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/decoder_interpolate_lsf.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/index_conv_dec.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/do_plc.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/constants.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/enhancer_interface.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/xcorr_coef.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/lsf_check.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/decode_residual.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/unpack_bits.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/hp_output.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/init_decode.h"
 #ifndef WEBRTC_ARCH_BIG_ENDIAN
-#include "modules/audio_coding/codecs/ilbc/swap_bytes.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/swap_bytes.h"
 #endif
 
 /*----------------------------------------------------------------*

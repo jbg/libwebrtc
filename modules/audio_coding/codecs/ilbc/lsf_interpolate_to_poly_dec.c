@@ -16,9 +16,9 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/interpolate.h"
-#include "modules/audio_coding/codecs/ilbc/lsf_to_poly.h"
-#include "modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/interpolate.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/lsf_to_poly.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
 
 /*----------------------------------------------------------------*
  *  interpolation of lsf coefficients for the decoder

@@ -16,10 +16,10 @@
  */
 
 
-#include "modules/audio_coding/codecs/isac/fix/source/bandwidth_estimator.h"
-#include "modules/audio_coding/codecs/isac/fix/source/codec.h"
-#include "modules/audio_coding/codecs/isac/fix/source/entropy_coding.h"
-#include "modules/audio_coding/codecs/isac/fix/source/structs.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/bandwidth_estimator.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/codec.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/entropy_coding.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/structs.h"
 
 
 

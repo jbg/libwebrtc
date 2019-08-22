@@ -16,8 +16,8 @@
  */
 
 #include <string.h>
-#include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "common_audio/signal_processing/resample_by_2_internal.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/resample_by_2_internal.h"
 
 ////////////////////////////
 ///// 48 kHz -> 16 kHz /////

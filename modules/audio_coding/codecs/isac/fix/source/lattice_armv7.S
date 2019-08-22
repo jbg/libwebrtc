@@ -25,8 +25,8 @@
 @ r12: constant #16384
 @ r6, r7, r8, r10, r11: scratch
 
-#include "modules/audio_coding/codecs/isac/fix/source/settings.h"
-#include "rtc_base/system/asm_defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/system/asm_defines.h"
 
 GLOBAL_FUNCTION WebRtcIsacfix_FilterArLoop
 .align  2

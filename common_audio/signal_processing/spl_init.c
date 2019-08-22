@@ -10,7 +10,7 @@
 
 // Some code came from common/rtcd.c in the WebM project.
 
-#include "common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
 
 // TODO(bugs.webrtc.org/9553): These function pointers are useless. Refactor
 // things so that we simply have a bunch of regular functions with different

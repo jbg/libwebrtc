@@ -18,12 +18,12 @@
  *
  */
 
-#include "modules/audio_coding/codecs/isac/fix/source/filterbank_internal.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/filterbank_internal.h"
 
-#include "modules/audio_coding/codecs/isac/fix/source/codec.h"
-#include "modules/audio_coding/codecs/isac/fix/source/filterbank_tables.h"
-#include "modules/audio_coding/codecs/isac/fix/source/settings.h"
-#include "rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/codec.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/filterbank_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
 
 // Declare a function pointer.
 AllpassFilter2FixDec16 WebRtcIsacfix_AllpassFilter2FixDec16;

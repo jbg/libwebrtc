@@ -9,7 +9,7 @@
  */
 
 
-#include "common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
 
 static int16_t coefTable_7[] = {
     4, 256,   8, 128,  12, 384,  16,  64,

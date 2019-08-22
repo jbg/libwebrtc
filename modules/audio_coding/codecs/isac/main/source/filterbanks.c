@@ -18,9 +18,9 @@
  *
  */
 
-#include "modules/audio_coding/codecs/isac/main/source/settings.h"
-#include "modules/audio_coding/codecs/isac/main/source/codec.h"
-#include "modules/audio_coding/codecs/isac/main/source/isac_vad.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/codec.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/isac_vad.h"
 
 /* Combining */
 

@@ -8,10 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "common_audio/vad/vad_filterbank.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/vad/vad_filterbank.h"
 
-#include "rtc_base/checks.h"
-#include "common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
 
 // Constants used in LogOfEnergy().
 static const int16_t kLogConst = 24660;  // 160*log10(2) in Q9.

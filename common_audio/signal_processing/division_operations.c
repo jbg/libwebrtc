@@ -21,8 +21,8 @@
  *
  */
 
-#include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "rtc_base/sanitizer.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/sanitizer.h"
 
 uint32_t WebRtcSpl_DivU32U16(uint32_t num, uint16_t den)
 {

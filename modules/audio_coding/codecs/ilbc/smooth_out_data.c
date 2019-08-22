@@ -16,9 +16,9 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/defines.h"
-#include "modules/audio_coding/codecs/ilbc/constants.h"
-#include "rtc_base/sanitizer.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/defines.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/constants.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/sanitizer.h"
 
 // An s32 + s32 -> s32 addition that's allowed to overflow. (It's still
 // undefined behavior, so not a good idea; this just makes UBSan ignore the

@@ -18,15 +18,15 @@
 
 #include <stddef.h>
 
-#include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "modules/audio_coding/codecs/isac/fix/source/arith_routins.h"
-#include "modules/audio_coding/codecs/isac/fix/source/entropy_coding.h"
-#include "modules/audio_coding/codecs/isac/fix/source/lpc_tables.h"
-#include "modules/audio_coding/codecs/isac/fix/source/pitch_gain_tables.h"
-#include "modules/audio_coding/codecs/isac/fix/source/pitch_lag_tables.h"
-#include "modules/audio_coding/codecs/isac/fix/source/settings.h"
-#include "modules/audio_coding/codecs/isac/fix/source/spectrum_ar_model_tables.h"
-#include "rtc_base/sanitizer.h"
+#include "third_party/webrtc/files/stable/webrtc/common_audio/signal_processing/include/signal_processing_library.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/arith_routins.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/entropy_coding.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/lpc_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/pitch_gain_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/pitch_lag_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/settings.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/spectrum_ar_model_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/sanitizer.h"
 
 /*
  * Eenumerations for arguments to functions WebRtcIsacfix_MatrixProduct1()

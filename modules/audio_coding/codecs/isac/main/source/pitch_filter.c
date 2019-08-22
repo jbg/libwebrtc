@@ -12,9 +12,9 @@
 #include <memory.h>
 #include <stdlib.h>
 
-#include "modules/audio_coding/codecs/isac/main/source/pitch_estimator.h"
-#include "modules/audio_coding/codecs/isac/main/source/os_specific_inline.h"
-#include "rtc_base/compile_assert_c.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/pitch_estimator.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/main/source/os_specific_inline.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/compile_assert_c.h"
 
 /*
  * We are implementing the following filters;

@@ -15,7 +15,7 @@
  *
  */
 
-#include "modules/audio_coding/codecs/isac/fix/source/pitch_gain_tables.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/isac/fix/source/pitch_gain_tables.h"
 
 
 /********************* Pitch Filter Gain Coefficient Tables ************************/

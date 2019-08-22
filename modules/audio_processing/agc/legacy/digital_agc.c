@@ -12,15 +12,15 @@
  *
  */
 
-#include "modules/audio_processing/agc/legacy/digital_agc.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_processing/agc/legacy/digital_agc.h"
 
 #include <string.h>
 #ifdef WEBRTC_AGC_DEBUG_DUMP
 #include <stdio.h>
 #endif
 
-#include "rtc_base/checks.h"
-#include "modules/audio_processing/agc/legacy/gain_control.h"
+#include "third_party/webrtc/files/stable/webrtc/rtc_base/checks.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_processing/agc/legacy/gain_control.h"
 
 // To generate the gaintable, copy&paste the following lines to a Matlab window:
 // MaxGain = 6; MinGain = 0; CompRatio = 3; Knee = 1;

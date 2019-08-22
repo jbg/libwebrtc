@@ -16,8 +16,8 @@
 
 ******************************************************************/
 
-#include "modules/audio_coding/codecs/ilbc/vq4.h"
-#include "modules/audio_coding/codecs/ilbc/constants.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/vq4.h"
+#include "third_party/webrtc/files/stable/webrtc/modules/audio_coding/codecs/ilbc/constants.h"
 
 /*----------------------------------------------------------------*
  *  vector quantization
