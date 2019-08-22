@@ -37,19 +37,28 @@ PacedSender::PacedSender(Clock* clock,
       packet_router_(packet_router),
       process_thread_(nullptr) {}
 
-PacedSender::~PacedSender() = default;
+PacedSender::~PacedSender() {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
+}
 
 void PacedSender::CreateProbeCluster(DataRate bitrate, int cluster_id) {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   return pacing_controller_.CreateProbeCluster(bitrate, cluster_id);
 }
 
 void PacedSender::Pause() {
+  // Called on a TQ by RtpTransportControllerSend::OnNetworkAvailability.
+  // RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
+
   {
     rtc::CritScope cs(&critsect_);
     pacing_controller_.Pause();
   }
+
   rtc::CritScope cs(&process_thread_lock_);
+  RTC_DCHECK(process_thread_);  // Must have been set first.
+
   // Tell the process thread to call our TimeUntilNextProcess() method to get
   // a new (longer) estimate for when to call Process().
   if (process_thread_)
@@ -57,6 +66,18 @@ void PacedSender::Pause() {
 }
 
 void PacedSender::Resume() {
+  // Called on a TQ by RtpTransportControllerSend::OnNetworkAvailability.
+  // RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
+  {
+    // TODO(tommi): Apparently this isn't always true. See test
+    // ReferencingAndOwningPackets/PacedSenderTest.Pause/0
+    // It could be that that test never sets a process thread though.
+    // Consider requiring to set the process thread in the ctor and
+    // make the process_thread_ variable const, no lock required.
+    rtc::CritScope cs(&process_thread_lock_);
+    RTC_DCHECK(process_thread_);  // Must have been set first.
+  }
+
   {
     rtc::CritScope cs(&critsect_);
     pacing_controller_.Resume();
@@ -69,16 +90,23 @@ void PacedSender::Resume() {
 }
 
 void PacedSender::SetCongestionWindow(DataSize congestion_window_size) {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.SetCongestionWindow(congestion_window_size);
 }
 
 void PacedSender::UpdateOutstandingData(DataSize outstanding_data) {
+  // Called on a TQ from within
+  // RtpTransportControllerSend::OnNetworkAvailability.
+  // RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.UpdateOutstandingData(outstanding_data);
 }
 
 void PacedSender::SetPacingRates(DataRate pacing_rate, DataRate padding_rate) {
+  // Called on a TQ from within
+  // RtpTransportControllerSend::OnNetworkAvailability.
+  // RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.SetPacingRates(pacing_rate, padding_rate);
 }
@@ -89,47 +117,56 @@ void PacedSender::InsertPacket(RtpPacketSender::Priority priority,
                                int64_t capture_time_ms,
                                size_t bytes,
                                bool retransmission) {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   rtc::CritScope cs(&critsect_);
   pacing_controller_.InsertPacket(priority, ssrc, sequence_number,
                                   capture_time_ms, bytes, retransmission);
 }
 
 void PacedSender::EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet) {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   pacing_controller_.EnqueuePacket(std::move(packet));
 }
 
 void PacedSender::SetAccountForAudioPackets(bool account_for_audio) {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   pacing_controller_.SetAccountForAudioPackets(account_for_audio);
 }
 
 TimeDelta PacedSender::ExpectedQueueTime() const {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   return pacing_controller_.ExpectedQueueTime();
 }
 
 size_t PacedSender::QueueSizePackets() const {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   return pacing_controller_.QueueSizePackets();
 }
 
 DataSize PacedSender::QueueSizeData() const {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   return pacing_controller_.QueueSizeData();
 }
 
 absl::optional<Timestamp> PacedSender::FirstSentPacketTime() const {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   return pacing_controller_.FirstSentPacketTime();
 }
 
 TimeDelta PacedSender::OldestPacketWaitTime() const {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   return pacing_controller_.OldestPacketWaitTime();
 }
 
 int64_t PacedSender::TimeUntilNextProcess() {
+  // TODO(tommi): DCHECK for process thread.
   rtc::CritScope cs(&critsect_);
 
   // When paused we wake up every 500 ms to send a padding packet to ensure
@@ -151,17 +188,20 @@ int64_t PacedSender::TimeUntilNextProcess() {
 }
 
 void PacedSender::Process() {
+  // TODO(tommi): DCHECK for process thread.
   rtc::CritScope cs(&critsect_);
   pacing_controller_.ProcessPackets();
 }
 
 void PacedSender::ProcessThreadAttached(ProcessThread* process_thread) {
+  RTC_DCHECK_RUN_ON(&construction_sequence_checker_);
   RTC_LOG(LS_INFO) << "ProcessThreadAttached 0x" << process_thread;
   rtc::CritScope cs(&process_thread_lock_);
   process_thread_ = process_thread;
 }
 
 void PacedSender::SetQueueTimeLimit(TimeDelta limit) {
+  // TODO(tommi): On what thread/queue does this get called?
   rtc::CritScope cs(&critsect_);
   pacing_controller_.SetQueueTimeLimit(limit);
 }

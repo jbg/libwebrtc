@@ -19,6 +19,12 @@
 
 namespace webrtc {
 namespace {
+#if defined(ABSL_HAVE_THREAD_LOCAL)
+ABSL_CONST_INIT thread_local ProcessThreadImpl* g_current_process_thread =
+    nullptr;
+#else
+#error Need ABSL_HAVE_THREAD_LOCAL.
+#endif
 
 // We use this constant internally to signal that a module has requested
 // a callback right away.  When this is set, no call to TimeUntilNextProcess
@@ -162,8 +168,14 @@ void ProcessThreadImpl::DeRegisterModule(Module* module) {
 }
 
 // static
+ProcessThreadImpl* ProcessThreadImpl::Current() {
+  return g_current_process_thread;
+}
+
+// static
 void ProcessThreadImpl::Run(void* obj) {
   ProcessThreadImpl* impl = static_cast<ProcessThreadImpl*>(obj);
+  g_current_process_thread = impl;
   while (impl->Process()) {
   }
 }
