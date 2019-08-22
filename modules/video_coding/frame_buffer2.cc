@@ -453,12 +453,7 @@ int64_t FrameBuffer::InsertFrame(std::unique_ptr<EncodedFrame> frame) {
 
   rtc::CritScope lock(&crit_);
 
-  if (stats_callback_ && IsCompleteSuperFrame(*frame)) {
-    stats_callback_->OnCompleteFrame(frame->is_keyframe(), frame->size(),
-                                     frame->contentType());
-  }
   const VideoLayerFrameId& id = frame->id;
-
   int64_t last_continuous_picture_id =
       !last_continuous_frame_ ? -1 : last_continuous_frame_->picture_id;
 
@@ -542,6 +537,10 @@ int64_t FrameBuffer::InsertFrame(std::unique_ptr<EncodedFrame> frame) {
   if (!frame->delayed_by_retransmission())
     timing_->IncomingTimestamp(frame->Timestamp(), frame->ReceivedTime());
 
+  if (stats_callback_ && IsCompleteSuperFrame(*frame)) {
+    stats_callback_->OnCompleteFrame(frame->is_keyframe(), frame->size(),
+                                     frame->contentType());
+  }
   info->second.frame = std::move(frame);
 
   if (info->second.num_missing_continuous == 0) {
