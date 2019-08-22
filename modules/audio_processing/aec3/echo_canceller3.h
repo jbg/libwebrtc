@@ -23,10 +23,10 @@
 #include "modules/audio_processing/aec3/block_delay_buffer.h"
 #include "modules/audio_processing/aec3/block_framer.h"
 #include "modules/audio_processing/aec3/block_processor.h"
-#include "modules/audio_processing/aec3/cascaded_biquad_filter.h"
 #include "modules/audio_processing/aec3/frame_blocker.h"
 #include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/logging/apm_data_dumper.h"
+#include "modules/audio_processing/utility/cascaded_biquad_filter.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/race_checker.h"
@@ -74,14 +74,18 @@ class Aec3RenderQueueItemVerifier {
 class EchoCanceller3 : public EchoControl {
  public:
   // Normal c-tor to use.
-  EchoCanceller3(const EchoCanceller3Config& config,
-                 int sample_rate_hz,
-                 bool use_highpass_filter);
+  EchoCanceller3(
+      const EchoCanceller3Config& config,
+      int sample_rate_hz,
+      const CascadedBiQuadFilter::BiQuadCoefficients& high_pass_biquad_coeffs,
+      size_t high_pass_biquad_count);
   // Testing c-tor that is used only for testing purposes.
-  EchoCanceller3(const EchoCanceller3Config& config,
-                 int sample_rate_hz,
-                 bool use_highpass_filter,
-                 std::unique_ptr<BlockProcessor> block_processor);
+  EchoCanceller3(
+      const EchoCanceller3Config& config,
+      int sample_rate_hz,
+      const CascadedBiQuadFilter::BiQuadCoefficients& high_pass_biquad_coeffs,
+      size_t high_pass_biquad_count,
+      std::unique_ptr<BlockProcessor> block_processor);
   ~EchoCanceller3() override;
   // Analyzes and stores an internal copy of the split-band domain render
   // signal.
@@ -133,8 +137,6 @@ class EchoCanceller3 : public EchoControl {
   std::unique_ptr<BlockProcessor> block_processor_
       RTC_GUARDED_BY(capture_race_checker_);
   std::vector<std::vector<float>> render_queue_output_frame_
-      RTC_GUARDED_BY(capture_race_checker_);
-  std::unique_ptr<CascadedBiQuadFilter> capture_highpass_filter_
       RTC_GUARDED_BY(capture_race_checker_);
   bool saturated_microphone_signal_ RTC_GUARDED_BY(capture_race_checker_) =
       false;

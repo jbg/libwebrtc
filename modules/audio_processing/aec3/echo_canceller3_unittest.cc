@@ -21,6 +21,8 @@
 #include "modules/audio_processing/aec3/frame_blocker.h"
 #include "modules/audio_processing/aec3/mock/mock_block_processor.h"
 #include "modules/audio_processing/audio_buffer.h"
+#include "modules/audio_processing/high_pass_filter.h"
+#include "modules/audio_processing/utility/cascaded_biquad_filter.h"
 #include "rtc_base/strings/string_builder.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
@@ -30,6 +32,11 @@ namespace {
 
 using ::testing::_;
 using ::testing::StrictMock;
+
+// Filter coeffiient for a fully transparent high-pass filter.
+constexpr CascadedBiQuadFilter::BiQuadCoefficients
+    kTransparentHighPassFilterCoefficients = {{1.f, 0.f, 0.f}, {0.f, 0.f}};
+constexpr size_t kNumberOfTransparentHighPassBiQuads = 1;
 
 // Populates the frame with linearly increasing sample values for each band,
 // with a band-specific offset, in order to allow simple bitexactness
@@ -166,7 +173,9 @@ class EchoCanceller3Tester {
   // output.
   void RunCaptureTransportVerificationTest() {
     EchoCanceller3 aec3(
-        EchoCanceller3Config(), sample_rate_hz_, false,
+        EchoCanceller3Config(), sample_rate_hz_,
+        kTransparentHighPassFilterCoefficients,
+        kNumberOfTransparentHighPassBiQuads,
         std::unique_ptr<BlockProcessor>(
             new CaptureTransportVerificationProcessor(num_bands_)));
 
@@ -191,7 +200,9 @@ class EchoCanceller3Tester {
   // block processor.
   void RunRenderTransportVerificationTest() {
     EchoCanceller3 aec3(
-        EchoCanceller3Config(), sample_rate_hz_, false,
+        EchoCanceller3Config(), sample_rate_hz_,
+        kTransparentHighPassFilterCoefficients,
+        kNumberOfTransparentHighPassBiQuads,
         std::unique_ptr<BlockProcessor>(
             new RenderTransportVerificationProcessor(num_bands_)));
 
@@ -255,7 +266,9 @@ class EchoCanceller3Tester {
         break;
     }
 
-    EchoCanceller3 aec3(EchoCanceller3Config(), sample_rate_hz_, false,
+    EchoCanceller3 aec3(EchoCanceller3Config(), sample_rate_hz_,
+                        HighPassFilter::kHighPassFilterCoefficients,
+                        HighPassFilter::kNumberOfHighPassBiQuads,
                         std::move(block_processor_mock));
 
     for (size_t frame_index = 0; frame_index < kNumFramesToProcess;
@@ -337,7 +350,9 @@ class EchoCanceller3Tester {
       } break;
     }
 
-    EchoCanceller3 aec3(EchoCanceller3Config(), sample_rate_hz_, false,
+    EchoCanceller3 aec3(EchoCanceller3Config(), sample_rate_hz_,
+                        HighPassFilter::kHighPassFilterCoefficients,
+                        HighPassFilter::kNumberOfHighPassBiQuads,
                         std::move(block_processor_mock));
 
     for (size_t frame_index = 0; frame_index < kNumFramesToProcess;
@@ -426,7 +441,9 @@ class EchoCanceller3Tester {
       } break;
     }
 
-    EchoCanceller3 aec3(EchoCanceller3Config(), sample_rate_hz_, false,
+    EchoCanceller3 aec3(EchoCanceller3Config(), sample_rate_hz_,
+                        HighPassFilter::kHighPassFilterCoefficients,
+                        HighPassFilter::kNumberOfHighPassBiQuads,
                         std::move(block_processor_mock));
     for (size_t frame_index = 0; frame_index < kNumFramesToProcess;
          ++frame_index) {
@@ -466,7 +483,8 @@ class EchoCanceller3Tester {
   void RunRenderSwapQueueVerificationTest() {
     const EchoCanceller3Config config;
     EchoCanceller3 aec3(
-        config, sample_rate_hz_, false,
+        config, sample_rate_hz_, kTransparentHighPassFilterCoefficients,
+        kNumberOfTransparentHighPassBiQuads,
         std::unique_ptr<BlockProcessor>(
             new RenderTransportVerificationProcessor(num_bands_)));
 
@@ -505,7 +523,9 @@ class EchoCanceller3Tester {
   // This test verifies that a buffer overrun in the render swapqueue is
   // properly reported.
   void RunRenderPipelineSwapQueueOverrunReturnValueTest() {
-    EchoCanceller3 aec3(EchoCanceller3Config(), sample_rate_hz_, false);
+    EchoCanceller3 aec3(EchoCanceller3Config(), sample_rate_hz_,
+                        HighPassFilter::kHighPassFilterCoefficients,
+                        HighPassFilter::kNumberOfHighPassBiQuads);
 
     constexpr size_t kRenderTransferQueueSize = 30;
     for (size_t k = 0; k < 2; ++k) {
