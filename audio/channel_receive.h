@@ -52,7 +52,6 @@ class RtpRtcp;
 
 struct CallReceiveStatistics {
   unsigned int cumulativeLost;
-  unsigned int extendedMax;
   unsigned int jitterSamples;
   int64_t rttMs;
   size_t bytesReceived;
@@ -116,9 +115,6 @@ class ChannelReceiveInterface : public RtpPacketSinkInterface {
   // Produces the transport-related timestamps; current_delay_ms is left unset.
   virtual absl::optional<Syncable::Info> GetSyncInfo() const = 0;
 
-  // RTP+RTCP
-  virtual void SetLocalSSRC(uint32_t ssrc) = 0;
-
   virtual void RegisterReceiverCongestionControlObjects(
       PacketRouter* packet_router) = 0;
   virtual void ResetReceiverCongestionControlObjects() = 0;
@@ -145,6 +141,7 @@ std::unique_ptr<ChannelReceiveInterface> CreateChannelReceive(
     const MediaTransportConfig& media_transport_config,
     Transport* rtcp_send_transport,
     RtcEventLog* rtc_event_log,
+    uint32_t local_ssrc,
     uint32_t remote_ssrc,
     size_t jitter_buffer_max_packets,
     bool jitter_buffer_fast_playout,

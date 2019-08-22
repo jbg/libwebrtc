@@ -466,7 +466,6 @@ struct MediaReceiverInfo {
 struct VoiceSenderInfo : public MediaSenderInfo {
   VoiceSenderInfo();
   ~VoiceSenderInfo();
-  int ext_seqnum = 0;
   int jitter_ms = 0;
   // Current audio level, expressed linearly [0,32767].
   int audio_level = 0;
@@ -482,7 +481,6 @@ struct VoiceSenderInfo : public MediaSenderInfo {
 struct VoiceReceiverInfo : public MediaReceiverInfo {
   VoiceReceiverInfo();
   ~VoiceReceiverInfo();
-  int ext_seqnum = 0;
   int jitter_ms = 0;
   int jitter_buffer_ms = 0;
   int jitter_buffer_preferred_ms = 0;
@@ -598,6 +596,7 @@ struct VideoReceiverInfo : public MediaReceiverInfo {
   // Framerate that the renderer reports.
   int framerate_render_output = 0;
   uint32_t frames_received = 0;
+  uint32_t frames_dropped = 0;
   uint32_t frames_decoded = 0;
   uint32_t key_frames_decoded = 0;
   uint32_t frames_rendered = 0;
