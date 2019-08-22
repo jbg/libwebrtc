@@ -9,6 +9,7 @@
  */
 
 #import <XCTest/XCTest.h>
+#import "api/task_queue/default_task_queue_factory.h"
 #import "sdk/objc/components/audio/RTCAudioSession+Private.h"
 #import "sdk/objc/native/api/audio_device_module.h"
 #import "sdk/objc/native/src/audio/audio_device_ios.h"
@@ -82,8 +83,9 @@
                 [self.audioSession.category isEqual:AVAudioSessionCategoryPlayback]);
   XCTAssertEqual(AVAudioSessionModeVoiceChat, self.audioSession.mode);
 
+  std::unique_ptr<webrtc::TaskQueueFactory> tqf = webrtc::CreateDefaultTaskQueueFactory();
   std::unique_ptr<webrtc::AudioDeviceBuffer> audio_buffer;
-  audio_buffer.reset(new webrtc::AudioDeviceBuffer());
+  audio_buffer.reset(new webrtc::AudioDeviceBuffer(tqf.get()));
   _audio_device->AttachAudioBuffer(audio_buffer.get());
   XCTAssertEqual(webrtc::AudioDeviceGeneric::InitStatus::OK, _audio_device->Init());
   XCTAssertEqual(0, _audio_device->InitPlayout());
