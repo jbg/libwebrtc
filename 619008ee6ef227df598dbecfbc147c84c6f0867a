@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6a2fe0d_c26bdce9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 7996
+      },
+      "writtenOn": "2019-08-22T08:51:29Z",
+      "side": 1,
+      "message": "s/progess/progress/",
+      "revId": "619008ee6ef227df598dbecfbc147c84c6f0867a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
