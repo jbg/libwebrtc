@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98e24ce3_9b8b96c1",
+        "filename": "sdk/objc/unittests/RTCAudioDevice_xctest.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-08-22T13:08:06Z",
+      "side": 1,
+      "message": "This technically belongs in a separate CL but I\u0027m including it here for laziness reasons.",
+      "range": {
+        "startLine": 87,
+        "startChar": 5,
+        "endLine": 89,
+        "endChar": 0
+      },
+      "revId": "ce4dc1e24c0766e585b6cb2f335904cb763a5d63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
