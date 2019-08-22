@@ -51,8 +51,8 @@
 #include <string>
 #include <utility>
 
-#include "absl/meta/type_traits.h"
 #include "absl/strings/string_view.h"
+#include "absl/meta/type_traits.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/deprecation.h"
 #include "rtc_base/strings/string_builder.h"
