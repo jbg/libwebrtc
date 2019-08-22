@@ -120,9 +120,6 @@ struct RtpCodecCapability {
   RtpCodecCapability();
   ~RtpCodecCapability();
 
-  // Build MIME "type/subtype" string from |name| and |kind|.
-  std::string mime_type() const { return MediaTypeToString(kind) + "/" + name; }
-
   // Used to identify the codec. Equivalent to MIME subtype.
   std::string name;
 
