@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d937c6d7_ab661783",
+        "filename": "modules/rtp_rtcp/source/absolute_capture_time_receiver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-08-22T07:14:11Z",
+      "side": 1,
+      "message": "nit: perhaps indicate unit? Seems this in ntp ticks?",
+      "range": {
+        "startLine": 47,
+        "startChar": 59,
+        "endLine": 47,
+        "endChar": 64
+      },
+      "revId": "b365f4467e0a941a8e36da9ef3d76cf4e4044522",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48102304_5f84fbd8",
+        "filename": "modules/rtp_rtcp/source/absolute_capture_time_receiver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-08-22T07:14:11Z",
+      "side": 1,
+      "message": "nit: I try to use the Timestamp / TimeDelta classes whenever writing new code that handles timestamps. Makes it easier to reason about code, no need for the _ms suffix, and can use Timestamp::MinusInfinity() instead of the custom magic number for unset.",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 31
+      },
+      "revId": "b365f4467e0a941a8e36da9ef3d76cf4e4044522",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "045f2274_9afa7f29",
+        "filename": "modules/rtp_rtcp/source/absolute_capture_time_sender.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-08-22T07:14:11Z",
+      "side": 1,
+      "message": "These too can use unit types, but currently requires are quirky workaround, eg\nstatic constexpr TimeDelta kInterpolationMaxInterval \u003d TimeDelta::Millis\u003c1000\u003e();",
+      "range": {
+        "startLine": 41,
+        "startChar": 27,
+        "endLine": 41,
+        "endChar": 54
+      },
+      "revId": "b365f4467e0a941a8e36da9ef3d76cf4e4044522",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
