@@ -20,6 +20,7 @@
 #include "api/array_view.h"
 #include "modules/rtp_rtcp/include/flexfec_sender.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "modules/rtp_rtcp/source/absolute_capture_time_sender.h"
 #include "modules/rtp_rtcp/source/playout_delay_oracle.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
 #include "modules/rtp_rtcp/source/rtp_sender.h"
@@ -161,6 +162,8 @@ class RTPSenderVideo {
 
   RTPSender* const rtp_sender_;
   Clock* const clock_;
+
+  AbsoluteCaptureTimeSender absolute_capture_time_sender_;
 
   // Maps payload type to codec type, for packetization.
   // TODO(nisse): Set on construction, to avoid lock.

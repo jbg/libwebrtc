@@ -311,6 +311,10 @@ TEST_F(WebRtcVideoEngineTest, SupportsAbsoluteSenderTimeHeaderExtension) {
   ExpectRtpCapabilitySupport(RtpExtension::kAbsSendTimeUri, true);
 }
 
+TEST_F(WebRtcVideoEngineTest, SupportsAbsoluteCaptureTimeHeaderExtension) {
+  ExpectRtpCapabilitySupport(RtpExtension::kAbsoluteCaptureTimeUri, true);
+}
+
 TEST_F(WebRtcVideoEngineTest, SupportsTransportSequenceNumberHeaderExtension) {
   ExpectRtpCapabilitySupport(RtpExtension::kTransportSequenceNumberUri, true);
 }

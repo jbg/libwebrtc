@@ -26,6 +26,7 @@ namespace webrtc {
 namespace {
 enum : int {  // The first valid value is 1.
   kAudioLevelExtensionId = 1,
+  kAbsoluteCaptureTimeExtensionId,
 };
 
 const uint16_t kSeqNum = 33;
@@ -41,6 +42,8 @@ class LoopbackTransportTest : public webrtc::Transport {
   LoopbackTransportTest() {
     receivers_extensions_.Register(kRtpExtensionAudioLevel,
                                    kAudioLevelExtensionId);
+    receivers_extensions_.Register(kRtpExtensionAbsoluteCaptureTime,
+                                   kAbsoluteCaptureTimeExtensionId);
   }
 
   bool SendRtp(const uint8_t* data,
@@ -119,10 +122,44 @@ TEST_F(RtpSenderAudioTest, SendAudioWithAudioLevelExtension) {
   // Verify AudioLevel extension.
   bool voice_activity;
   uint8_t audio_level;
-  EXPECT_TRUE(transport_.last_sent_packet().GetExtension<AudioLevel>(
+  ASSERT_TRUE(transport_.last_sent_packet().GetExtension<AudioLevel>(
       &voice_activity, &audio_level));
   EXPECT_EQ(kAudioLevel, audio_level);
   EXPECT_FALSE(voice_activity);
+}
+
+TEST_F(RtpSenderAudioTest, SendAudioWithAbsoluteCaptureTimeExtension) {
+  EXPECT_EQ(0, rtp_sender_.RegisterRtpHeaderExtension(
+                   kRtpExtensionAbsoluteCaptureTime,
+                   kAbsoluteCaptureTimeExtensionId));
+
+  const char payload_name[] = "PAYLOAD_NAME";
+  const uint8_t payload_type = 127;
+  ASSERT_EQ(0, rtp_sender_audio_.RegisterAudioPayload(
+                   payload_name, payload_type, 48000, 0, 1500));
+
+  uint8_t payload[] = {47, 11, 32, 93, 89};
+
+  AbsoluteCaptureTime expected;
+  expected.absolute_capture_timestamp = 1234567;
+
+  // TODO(chxg): Pass `expected.absolute_capture_timestamp`.
+  ASSERT_TRUE(rtp_sender_audio_.SendAudio(AudioFrameType::kAudioFrameCN,
+                                          payload_type, 4321, payload,
+                                          sizeof(payload)));
+
+  auto sent_payload = transport_.last_sent_packet().payload();
+  EXPECT_THAT(sent_payload, ElementsAreArray(payload));
+  // Verify AbsoluteCaptureTime extension.
+  AbsoluteCaptureTime actual;
+  ASSERT_EQ(transport_.packets_sent(), 1);
+  ASSERT_TRUE(
+      transport_.last_sent_packet().GetExtension<AbsoluteCaptureTimeExtension>(
+          &actual));
+  EXPECT_EQ(expected.absolute_capture_timestamp,
+            actual.absolute_capture_timestamp);
+  EXPECT_EQ(expected.estimated_capture_clock_offset,
+            actual.estimated_capture_clock_offset);
 }
 
 // As RFC4733, named telephone events are carried as part of the audio stream

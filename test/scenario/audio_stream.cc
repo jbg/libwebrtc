@@ -27,7 +27,8 @@ namespace test {
 namespace {
 enum : int {  // The first valid value is 1.
   kTransportSequenceNumberExtensionId = 1,
-  kAbsSendTimeExtensionId
+  kAbsSendTimeExtensionId,
+  kAbsoluteCaptureTimeExtensionId,
 };
 
 absl::optional<std::string> CreateAdaptationString(
@@ -126,7 +127,10 @@ SendAudioStream::SendAudioStream(
     send_config.rtp.extensions.push_back(
         {RtpExtension::kAbsSendTimeUri, kAbsSendTimeExtensionId});
   }
-
+  if (config.stream.absolute_capture_time) {
+    send_config.rtp.extensions.push_back({RtpExtension::kAbsoluteCaptureTimeUri,
+                                          kAbsoluteCaptureTimeExtensionId});
+  }
   sender_->SendTask([&] {
     send_stream_ = sender_->call_->CreateAudioSendStream(send_config);
     if (field_trial::IsEnabled("WebRTC-SendSideBwe-WithOverhead")) {

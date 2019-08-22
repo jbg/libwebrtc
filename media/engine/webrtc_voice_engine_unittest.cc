@@ -2046,6 +2046,14 @@ TEST_F(WebRtcVoiceEngineTestFake, RecvAudioLevelHeaderExtensions) {
   TestSetRecvRtpHeaderExtensions(webrtc::RtpExtension::kAudioLevelUri);
 }
 
+// Test support for absolute capture time extension.
+TEST_F(WebRtcVoiceEngineTestFake, SendkAbsoluteCaptureTimeHeaderExtensions) {
+  TestSetSendRtpHeaderExtensions(webrtc::RtpExtension::kAbsoluteCaptureTimeUri);
+}
+TEST_F(WebRtcVoiceEngineTestFake, RecvkAbsoluteCaptureTimeHeaderExtensions) {
+  TestSetRecvRtpHeaderExtensions(webrtc::RtpExtension::kAbsoluteCaptureTimeUri);
+}
+
 // Test support for transport sequence number header extension.
 TEST_F(WebRtcVoiceEngineTestFake, SendTransportSequenceNumberHeaderExtensions) {
   TestSetSendRtpHeaderExtensions(

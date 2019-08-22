@@ -30,6 +30,7 @@ namespace {
 enum : int {  // The first valid value is 1.
   kTransportSequenceNumberExtensionId = 1,
   kAbsSendTimeExtensionId,
+  kAbsoluteCaptureTimeExtensionId,
   kVideoContentTypeExtensionId,
   kVideoRotationRtpExtensionId,
 };
@@ -101,6 +102,10 @@ std::vector<RtpExtension> GetVideoRtpExtensions(
   if (config.stream.abs_send_time) {
     res.push_back(
         RtpExtension(RtpExtension::kAbsSendTimeUri, kAbsSendTimeExtensionId));
+  }
+  if (config.stream.absolute_capture_time) {
+    res.push_back(RtpExtension(RtpExtension::kAbsoluteCaptureTimeUri,
+                               kAbsoluteCaptureTimeExtensionId));
   }
   return res;
 }

@@ -24,6 +24,7 @@
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/rtp_rtcp/source/rtp_sender.h"
+#include "modules/rtp_rtcp/source/time_util.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/rate_limiter.h"
 #include "test/gmock.h"
@@ -37,6 +38,7 @@ using ::testing::ElementsAre;
 
 enum : int {  // The first valid value is 1.
   kAbsoluteSendTimeExtensionId = 1,
+  kAbsoluteCaptureTimeExtensionId,
   kFrameMarkingExtensionId,
   kGenericDescriptorId00,
   kGenericDescriptorId01,
@@ -61,6 +63,8 @@ class LoopbackTransportTest : public webrtc::Transport {
                                    kTransmissionTimeOffsetExtensionId);
     receivers_extensions_.Register(kRtpExtensionAbsoluteSendTime,
                                    kAbsoluteSendTimeExtensionId);
+    receivers_extensions_.Register(kRtpExtensionAbsoluteCaptureTime,
+                                   kAbsoluteCaptureTimeExtensionId);
     receivers_extensions_.Register(kRtpExtensionTransportSequenceNumber,
                                    kTransportSequenceNumberExtensionId);
     receivers_extensions_.Register(kRtpExtensionVideoRotation,
@@ -535,6 +539,38 @@ TEST_P(RtpSenderVideoTest, ConditionalRetransmitLimit) {
   vp8_header.temporalIdx = 1;
   EXPECT_EQ(StorageType::kAllowRetransmission,
             rtp_sender_video_.GetStorageType(header, kSettings, kRttMs));
+}
+
+TEST_P(RtpSenderVideoTest, SendVideoWithAbsoluteCaptureTimeExtension) {
+  constexpr int64_t kCaptureTimeMs = 1234567;
+
+  const size_t kFrameSize = 100;
+  uint8_t kFrame[kFrameSize];
+
+  EXPECT_EQ(0, rtp_sender_.RegisterRtpHeaderExtension(
+                   kRtpExtensionAbsoluteCaptureTime,
+                   kAbsoluteCaptureTimeExtensionId));
+
+  RTPVideoHeader hdr;
+  rtp_sender_video_.SendVideo(VideoFrameType::kVideoFrameKey, kPayload,
+                              kTimestamp, kCaptureTimeMs, kFrame,
+                              sizeof(kFrame), nullptr, &hdr,
+                              kDefaultExpectedRetransmissionTimeMs);
+
+  AbsoluteCaptureTime expected;
+  expected.absolute_capture_timestamp =
+      Int64MsToUQ32x32(kCaptureTimeMs + NtpOffsetMs());
+  expected.estimated_capture_clock_offset = absl::nullopt;
+
+  AbsoluteCaptureTime actual;
+  ASSERT_EQ(transport_.packets_sent(), 1);
+  ASSERT_TRUE(
+      transport_.last_sent_packet().GetExtension<AbsoluteCaptureTimeExtension>(
+          &actual));
+  EXPECT_EQ(expected.absolute_capture_timestamp,
+            actual.absolute_capture_timestamp);
+  EXPECT_EQ(expected.estimated_capture_clock_offset,
+            actual.estimated_capture_clock_offset);
 }
 
 void RtpSenderVideoTest::PopulateGenericFrameDescriptor(int version) {

@@ -516,6 +516,8 @@ RtpCapabilities WebRtcVideoEngine::GetCapabilities() const {
       webrtc::RtpExtension(webrtc::RtpExtension::kTimestampOffsetUri, id++));
   capabilities.header_extensions.push_back(
       webrtc::RtpExtension(webrtc::RtpExtension::kAbsSendTimeUri, id++));
+  capabilities.header_extensions.push_back(webrtc::RtpExtension(
+      webrtc::RtpExtension::kAbsoluteCaptureTimeUri, id++));
   capabilities.header_extensions.push_back(
       webrtc::RtpExtension(webrtc::RtpExtension::kVideoRotationUri, id++));
   capabilities.header_extensions.push_back(webrtc::RtpExtension(
