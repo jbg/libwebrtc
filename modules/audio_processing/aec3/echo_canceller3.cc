@@ -137,29 +137,19 @@ void CopyBufferIntoFrame(AudioBuffer* buffer,
   }
 }
 
-// [B,A] = butter(2,100/4000,'high')
-const CascadedBiQuadFilter::BiQuadCoefficients
-    kHighPassFilterCoefficients_8kHz = {{0.94598f, -1.89195f, 0.94598f},
-                                        {-1.88903f, 0.89487f}};
-const int kNumberOfHighPassBiQuads_8kHz = 1;
-
-// [B,A] = butter(2,100/8000,'high')
-const CascadedBiQuadFilter::BiQuadCoefficients
-    kHighPassFilterCoefficients_16kHz = {{0.97261f, -1.94523f, 0.97261f},
-                                         {-1.94448f, 0.94598f}};
-const int kNumberOfHighPassBiQuads_16kHz = 1;
-
 }  // namespace
 
 class EchoCanceller3::RenderWriter {
  public:
-  RenderWriter(ApmDataDumper* data_dumper,
-               SwapQueue<std::vector<std::vector<float>>,
-                         Aec3RenderQueueItemVerifier>* render_transfer_queue,
-               std::unique_ptr<CascadedBiQuadFilter> render_highpass_filter,
-               int sample_rate_hz,
-               int frame_length,
-               int num_bands);
+  RenderWriter(
+      ApmDataDumper* data_dumper,
+      SwapQueue<std::vector<std::vector<float>>, Aec3RenderQueueItemVerifier>*
+          render_transfer_queue,
+      const CascadedBiQuadFilter::BiQuadCoefficients& high_pass_biquad_coeffs,
+      size_t high_pass_biquad_count,
+      int sample_rate_hz,
+      int frame_length,
+      int num_bands);
   ~RenderWriter();
   void Insert(AudioBuffer* input);
 
@@ -168,7 +158,7 @@ class EchoCanceller3::RenderWriter {
   const int sample_rate_hz_;
   const size_t frame_length_;
   const int num_bands_;
-  std::unique_ptr<CascadedBiQuadFilter> render_highpass_filter_;
+  CascadedBiQuadFilter render_highpass_filter_;
   std::vector<std::vector<float>> render_queue_input_frame_;
   SwapQueue<std::vector<std::vector<float>>, Aec3RenderQueueItemVerifier>*
       render_transfer_queue_;
@@ -179,7 +169,8 @@ EchoCanceller3::RenderWriter::RenderWriter(
     ApmDataDumper* data_dumper,
     SwapQueue<std::vector<std::vector<float>>, Aec3RenderQueueItemVerifier>*
         render_transfer_queue,
-    std::unique_ptr<CascadedBiQuadFilter> render_highpass_filter,
+    const CascadedBiQuadFilter::BiQuadCoefficients& high_pass_biquad_coeffs,
+    size_t high_pass_biquad_count,
     int sample_rate_hz,
     int frame_length,
     int num_bands)
@@ -187,7 +178,7 @@ EchoCanceller3::RenderWriter::RenderWriter(
       sample_rate_hz_(sample_rate_hz),
       frame_length_(frame_length),
       num_bands_(num_bands),
-      render_highpass_filter_(std::move(render_highpass_filter)),
+      render_highpass_filter_(high_pass_biquad_coeffs, high_pass_biquad_count),
       render_queue_input_frame_(num_bands_,
                                 std::vector<float>(frame_length_, 0.f)),
       render_transfer_queue_(render_transfer_queue) {
@@ -212,28 +203,31 @@ void EchoCanceller3::RenderWriter::Insert(AudioBuffer* input) {
   CopyBufferIntoFrame(input, num_bands_, frame_length_,
                       &render_queue_input_frame_);
 
-  if (render_highpass_filter_) {
-    render_highpass_filter_->Process(render_queue_input_frame_[0]);
-  }
+  render_highpass_filter_.Process(render_queue_input_frame_[0]);
 
   static_cast<void>(render_transfer_queue_->Insert(&render_queue_input_frame_));
 }
 
 int EchoCanceller3::instance_count_ = 0;
 
-EchoCanceller3::EchoCanceller3(const EchoCanceller3Config& config,
-                               int sample_rate_hz,
-                               bool use_highpass_filter)
+EchoCanceller3::EchoCanceller3(
+    const EchoCanceller3Config& config,
+    int sample_rate_hz,
+    const CascadedBiQuadFilter::BiQuadCoefficients& high_pass_biquad_coeffs,
+    size_t high_pass_biquad_count)
     : EchoCanceller3(
           AdjustConfig(config),
           sample_rate_hz,
-          use_highpass_filter,
+          high_pass_biquad_coeffs,
+          high_pass_biquad_count,
           std::unique_ptr<BlockProcessor>(
               BlockProcessor::Create(AdjustConfig(config), sample_rate_hz))) {}
-EchoCanceller3::EchoCanceller3(const EchoCanceller3Config& config,
-                               int sample_rate_hz,
-                               bool use_highpass_filter,
-                               std::unique_ptr<BlockProcessor> block_processor)
+EchoCanceller3::EchoCanceller3(
+    const EchoCanceller3Config& config,
+    int sample_rate_hz,
+    const CascadedBiQuadFilter::BiQuadCoefficients& high_pass_biquad_coeffs,
+    size_t high_pass_biquad_count,
+    std::unique_ptr<BlockProcessor> block_processor)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
       config_(config),
@@ -259,24 +253,9 @@ EchoCanceller3::EchoCanceller3(const EchoCanceller3Config& config,
                           config_.delay.fixed_capture_delay_samples) {
   RTC_DCHECK(ValidFullBandRate(sample_rate_hz_));
 
-  std::unique_ptr<CascadedBiQuadFilter> render_highpass_filter;
-  if (use_highpass_filter) {
-    render_highpass_filter.reset(new CascadedBiQuadFilter(
-        sample_rate_hz_ == 8000 ? kHighPassFilterCoefficients_8kHz
-                                : kHighPassFilterCoefficients_16kHz,
-        sample_rate_hz_ == 8000 ? kNumberOfHighPassBiQuads_8kHz
-                                : kNumberOfHighPassBiQuads_16kHz));
-    capture_highpass_filter_.reset(new CascadedBiQuadFilter(
-        sample_rate_hz_ == 8000 ? kHighPassFilterCoefficients_8kHz
-                                : kHighPassFilterCoefficients_16kHz,
-        sample_rate_hz_ == 8000 ? kNumberOfHighPassBiQuads_8kHz
-                                : kNumberOfHighPassBiQuads_16kHz));
-  }
-
-  render_writer_.reset(
-      new RenderWriter(data_dumper_.get(), &render_transfer_queue_,
-                       std::move(render_highpass_filter), sample_rate_hz_,
-                       frame_length_, num_bands_));
+  render_writer_.reset(new RenderWriter(
+      data_dumper_.get(), &render_transfer_queue_, high_pass_biquad_coeffs,
+      high_pass_biquad_count, sample_rate_hz_, frame_length_, num_bands_));
 
   RTC_DCHECK_EQ(num_bands_, std::max(sample_rate_hz_, 16000) / 16000);
   RTC_DCHECK_GE(kMaxNumBands, num_bands_);
@@ -335,10 +314,6 @@ void EchoCanceller3::ProcessCapture(AudioBuffer* capture, bool level_change) {
                         LowestBandRate(sample_rate_hz_), 1);
 
   EmptyRenderQueue();
-
-  if (capture_highpass_filter_) {
-    capture_highpass_filter_->Process(capture_lower_band);
-  }
 
   ProcessCaptureFrameContent(
       capture, level_change, saturated_microphone_signal_, 0, &capture_blocker_,
