@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "503f06da_f6210863",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1969,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-08-23T19:15:59Z",
+      "side": 1,
+      "message": "I guess the issue is that task_queue_ outlives `test`.\n* Either we should change that by making `test` a member of VideoSendStreamTest (meh).\n* Or RunBaseTest should ensure all tasks are completed before returning. This CancelTasks teardown should finish before RunBaseTest returns.",
+      "revId": "02de233461603b75b056940e70af019f0f5672fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
