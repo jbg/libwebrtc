@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6685370_b477eae0",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-08-23T11:29:32Z",
+      "side": 1,
+      "message": "or bugs.webrtc.org/8733",
+      "range": {
+        "startLine": 259,
+        "startChar": 7,
+        "endLine": 259,
+        "endChar": 12
+      },
+      "revId": "862e7b8ead7f81b0700376db2d944eadb8a6791e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
