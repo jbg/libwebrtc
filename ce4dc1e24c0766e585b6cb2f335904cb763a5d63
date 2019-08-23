@@ -46,6 +46,30 @@
       "revId": "ce4dc1e24c0766e585b6cb2f335904cb763a5d63",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75654bad_14ea4acc",
+        "filename": "sdk/objc/unittests/RTCAudioDevice_xctest.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-08-23T11:03:44Z",
+      "side": 1,
+      "message": "Done. See https://webrtc-review.googlesource.com/c/src/+/150320",
+      "parentUuid": "dad748c6_6b38f49b",
+      "range": {
+        "startLine": 87,
+        "startChar": 5,
+        "endLine": 89,
+        "endChar": 0
+      },
+      "revId": "ce4dc1e24c0766e585b6cb2f335904cb763a5d63",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
