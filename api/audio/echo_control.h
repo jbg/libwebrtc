@@ -21,10 +21,10 @@ class AudioBuffer;
 class EchoControl {
  public:
   // Analysis (not changing) of the render signal.
-  virtual void AnalyzeRender(AudioBuffer* render) = 0;
+  virtual void AnalyzeRender(const AudioBuffer& render) = 0;
 
   // Analysis (not changing) of the capture signal.
-  virtual void AnalyzeCapture(AudioBuffer* capture) = 0;
+  virtual void AnalyzeCapture(const AudioBuffer& capture) = 0;
 
   // Processes the capture signal in order to remove the echo.
   virtual void ProcessCapture(AudioBuffer* capture, bool echo_path_change) = 0;
