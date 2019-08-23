@@ -111,6 +111,7 @@ class VCMReceiveStatisticsCallbackMock : public VCMReceiveStatisticsCallback {
                void(bool is_keyframe,
                     size_t size_bytes,
                     VideoContentType content_type));
+  MOCK_METHOD1(OnDroppedFrames, void(uint32_t frames_dropped));
   MOCK_METHOD1(OnDiscardedPacketsUpdated, void(int discarded_packets));
   MOCK_METHOD1(OnFrameCountsUpdated, void(const FrameCounts& frame_counts));
   MOCK_METHOD6(OnFrameBufferTimingsUpdated,
@@ -405,6 +406,8 @@ TEST_F(TestFrameBuffer2, DropTemporalLayerSlowDecoder) {
     InsertFrame(pid + i + 1, 0, ts_tl0 + kFps20, false, true, kFrameSize,
                 pid + i, pid + i - 1);
   }
+
+  EXPECT_CALL(stats_callback_, OnDroppedFrames(1)).Times(3);
 
   for (int i = 0; i < 10; ++i) {
     ExtractFrame();

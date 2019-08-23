@@ -83,6 +83,8 @@ class VCMReceiveStatisticsCallback {
                                size_t size_bytes,
                                VideoContentType content_type) = 0;
 
+  virtual void OnDroppedFrames(uint32_t frames_dropped) = 0;
+
   virtual void OnFrameBufferTimingsUpdated(int max_decode_ms,
                                            int current_delay_ms,
                                            int target_delay_ms,
