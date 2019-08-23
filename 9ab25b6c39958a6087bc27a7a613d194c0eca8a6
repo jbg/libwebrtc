@@ -34,6 +34,29 @@
       "revId": "9ab25b6c39958a6087bc27a7a613d194c0eca8a6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19185779_0e49d685",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1956,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-08-23T14:55:53Z",
+      "side": 1,
+      "message": "nit: Should this be marked guarded by crit_?",
+      "range": {
+        "startLine": 1956,
+        "startChar": 7,
+        "endLine": 1956,
+        "endChar": 31
+      },
+      "revId": "9ab25b6c39958a6087bc27a7a613d194c0eca8a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
