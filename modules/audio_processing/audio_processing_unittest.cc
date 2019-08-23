@@ -65,7 +65,7 @@ namespace {
 // When false, this will compare the output data with the results stored to
 // file. This is the typical case. When the file should be updated, it can
 // be set to true with the command-line switch --write_ref_data.
-bool write_ref_data = true;
+bool write_ref_data = false;
 const int32_t kChannels[] = {1, 2};
 const int kSampleRates[] = {8000, 16000, 32000, 48000};
 
@@ -2204,15 +2204,15 @@ INSTANTIATE_TEST_SUITE_P(
 INSTANTIATE_TEST_SUITE_P(
     CommonFormats,
     AudioProcessingTest,
-    ::testing::Values(std::make_tuple(48000, 48000, 48000, 48000, 20, 0),
-                      std::make_tuple(48000, 48000, 32000, 48000, 20, 30),
-                      std::make_tuple(48000, 48000, 16000, 48000, 20, 20),
+    ::testing::Values(std::make_tuple(48000, 48000, 48000, 48000, 19, 0),
+                      std::make_tuple(48000, 48000, 32000, 48000, 19, 30),
+                      std::make_tuple(48000, 48000, 16000, 48000, 19, 20),
                       std::make_tuple(48000, 44100, 48000, 44100, 15, 20),
                       std::make_tuple(48000, 44100, 32000, 44100, 15, 15),
                       std::make_tuple(48000, 44100, 16000, 44100, 15, 15),
-                      std::make_tuple(48000, 32000, 48000, 32000, 20, 35),
-                      std::make_tuple(48000, 32000, 32000, 32000, 20, 0),
-                      std::make_tuple(48000, 32000, 16000, 32000, 20, 20),
+                      std::make_tuple(48000, 32000, 48000, 32000, 19, 35),
+                      std::make_tuple(48000, 32000, 32000, 32000, 19, 0),
+                      std::make_tuple(48000, 32000, 16000, 32000, 19, 20),
                       std::make_tuple(48000, 16000, 48000, 16000, 20, 20),
                       std::make_tuple(48000, 16000, 32000, 16000, 20, 20),
                       std::make_tuple(48000, 16000, 16000, 16000, 20, 0),
@@ -2223,12 +2223,12 @@ INSTANTIATE_TEST_SUITE_P(
                       std::make_tuple(44100, 44100, 48000, 44100, 15, 20),
                       std::make_tuple(44100, 44100, 32000, 44100, 15, 15),
                       std::make_tuple(44100, 44100, 16000, 44100, 15, 15),
-                      std::make_tuple(44100, 32000, 48000, 32000, 20, 35),
-                      std::make_tuple(44100, 32000, 32000, 32000, 20, 0),
+                      std::make_tuple(44100, 32000, 48000, 32000, 18, 35),
+                      std::make_tuple(44100, 32000, 32000, 32000, 18, 0),
                       std::make_tuple(44100, 32000, 16000, 32000, 20, 20),
-                      std::make_tuple(44100, 16000, 48000, 16000, 20, 20),
-                      std::make_tuple(44100, 16000, 32000, 16000, 20, 20),
-                      std::make_tuple(44100, 16000, 16000, 16000, 20, 0),
+                      std::make_tuple(44100, 16000, 48000, 16000, 19, 20),
+                      std::make_tuple(44100, 16000, 32000, 16000, 19, 20),
+                      std::make_tuple(44100, 16000, 16000, 16000, 19, 0),
 
                       std::make_tuple(32000, 48000, 48000, 48000, 35, 0),
                       std::make_tuple(32000, 48000, 32000, 48000, 65, 30),
