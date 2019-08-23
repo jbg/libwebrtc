@@ -111,6 +111,7 @@ class VCMReceiveStatisticsCallbackMock : public VCMReceiveStatisticsCallback {
                void(bool is_keyframe,
                     size_t size_bytes,
                     VideoContentType content_type));
+  MOCK_METHOD1(OnDroppedFrames, void(uint32_t frames_dropped));
   MOCK_METHOD1(OnDiscardedPacketsUpdated, void(int discarded_packets));
   MOCK_METHOD1(OnFrameCountsUpdated, void(const FrameCounts& frame_counts));
   MOCK_METHOD6(OnFrameBufferTimingsUpdated,
