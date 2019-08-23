@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5120e34e_f88ee4a8",
+        "filename": "sdk/objc/unittests/ObjCVideoTrackSource_xctest.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-08-23T10:59:12Z",
+      "side": 1,
+      "message": "I simplified this test to deal with more common resolutions. It should hopefully be easier to understand now.",
+      "parentUuid": "29f63e57_d8502cc7",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 44
+      },
+      "revId": "fb52e300a8b782a443894cdcb56f7bc89d2883e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa473af4_c8c8a95b",
         "filename": "sdk/objc/unittests/ObjCVideoTrackSource_xctest.mm",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-08-22T17:45:00Z",
       "side": 1,
       "message": "Not super familiar with how this is tested, but it might be nice to have something that checks the common resolutions downscales work as expected.\n\nie 640x360, 480x270, 320x180\n\nUp to you.",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 43
+      },
+      "revId": "fb52e300a8b782a443894cdcb56f7bc89d2883e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b95740b5_de66927e",
+        "filename": "sdk/objc/unittests/ObjCVideoTrackSource_xctest.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-08-23T10:59:12Z",
+      "side": 1,
+      "message": "Added a test case for the common resolutions. Thanks for the suggestion!",
+      "parentUuid": "fa473af4_c8c8a95b",
       "range": {
         "startLine": 313,
         "startChar": 0,
@@ -68,6 +116,30 @@
       "revId": "fb52e300a8b782a443894cdcb56f7bc89d2883e9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73cbf630_49679cae",
+        "filename": "sdk/objc/unittests/ObjCVideoTrackSource_xctest.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-08-23T10:59:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "583c63d8_46ed9d5b",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 52
+      },
+      "revId": "fb52e300a8b782a443894cdcb56f7bc89d2883e9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
