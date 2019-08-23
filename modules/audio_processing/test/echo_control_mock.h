@@ -20,8 +20,8 @@ class AudioBuffer;
 
 class MockEchoControl : public EchoControl {
  public:
-  MOCK_METHOD1(AnalyzeRender, void(AudioBuffer* render));
-  MOCK_METHOD1(AnalyzeCapture, void(AudioBuffer* capture));
+  MOCK_METHOD1(AnalyzeRender, void(const AudioBuffer& render));
+  MOCK_METHOD1(AnalyzeCapture, void(const AudioBuffer& capture));
   MOCK_METHOD2(ProcessCapture,
                void(AudioBuffer* capture, bool echo_path_change));
   MOCK_CONST_METHOD0(GetMetrics, EchoControl::Metrics());
