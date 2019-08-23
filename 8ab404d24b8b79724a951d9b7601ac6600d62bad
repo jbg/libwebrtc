@@ -22,6 +22,30 @@
       "revId": "8ab404d24b8b79724a951d9b7601ac6600d62bad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32b76bcc_3732e4db",
+        "filename": "sdk/objc/native/src/objc_video_encoder_factory.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-08-23T12:04:54Z",
+      "side": 1,
+      "message": "Right, but we have to implement GetImplementations here in the wrapper VideoEncoderFactory, otherwise nothing will call the ObjC method. I\u0027ve made it optional in the ObjC interface, to preserve the behaviour from the C++ API.",
+      "parentUuid": "58dfedc1_68cf0dc5",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 1
+      },
+      "revId": "8ab404d24b8b79724a951d9b7601ac6600d62bad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
