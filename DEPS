@@ -29,7 +29,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@b0abe22cd1dc00e53e6b42a36663f39bf7559b00',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@a31657e992839dd8eb803cc6111b1d96faaa75f2',
+    'https://chromium.googlesource.com/chromium/src/third_party@9fa1542580111c10e90eb127f3bf9b733ceaf564',
 
   'src/buildtools/linux64': {
     'packages': [
