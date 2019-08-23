@@ -37,6 +37,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/rate_limiter.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/unique_id_generator.h"
 #include "system_wrappers/include/sleep.h"
@@ -1842,11 +1843,11 @@ class MaxPaddingSetTest : public test::SendTest {
         call_(nullptr),
         send_stream_(nullptr),
         send_stream_config_(nullptr),
-        packets_sent_(0),
         running_without_padding_(test_switch_content_type),
         stream_resetter_(stream_reset_fun),
         task_queue_(task_queue) {
     RTC_DCHECK(stream_resetter_);
+    module_process_thread_.Detach();
   }
 
   void OnVideoStreamsCreated(
@@ -1874,43 +1875,63 @@ class MaxPaddingSetTest : public test::SendTest {
   }
 
   void OnCallsCreated(Call* sender_call, Call* receiver_call) override {
+    RTC_DCHECK(!call_);
+    RTC_DCHECK(sender_call);
     call_ = sender_call;
   }
 
   // Called on the pacer thread.
   Action OnSendRtp(const uint8_t* packet, size_t length) override {
-    // GetStats() needs to be called from the construction thread of call_.
-    Call::Stats stats;
-    task_queue_->SendTask([this, &stats]() { stats = call_->GetStats(); });
+    RTC_DCHECK_RUN_ON(&module_process_thread_);
 
-    rtc::CritScope lock(&crit_);
+    const bool running_without_padding = RunningWithoutPadding();
 
-    if (running_without_padding_)
-      EXPECT_EQ(0, stats.max_padding_bitrate_bps);
+    // Check the stats on the correct thread and signal the 'complete' flag
+    // once we detect that we're done.
+    task_queue_->PostTask([this, running_without_padding]() {
+      // In case we get a callback during teardown.
+      // When this happens, OnStreamsStopped() has been called already,
+      // |call_| is null and the streams are being torn down.
+      if (!call_)
+        return;
+
+      // GetStats() needs to be called from the construction thread of call_.
+      Call::Stats stats = call_->GetStats();
+      if (running_without_padding) {
+        EXPECT_EQ(0, stats.max_padding_bitrate_bps);
+      } else {
+        // Make sure the pacer has been configured with a min transmit bitrate.
+        if (stats.max_padding_bitrate_bps > 0) {
+          observation_complete_.Set();
+        }
+      }
+    });
 
     // Wait until at least kMinPacketsToSend frames have been encoded, so that
     // we have reliable data.
     if (++packets_sent_ < kMinPacketsToSend)
       return SEND_PACKET;
 
-    if (running_without_padding_) {
+    if (running_without_padding) {
       // We've sent kMinPacketsToSend packets with default configuration, switch
       // to enabling screen content and setting min transmit bitrate.
       // Note that we need to recreate the stream if changing content type.
       packets_sent_ = 0;
+
       encoder_config_.min_transmit_bitrate_bps = kMinTransmitBitrateBps;
       encoder_config_.content_type = VideoEncoderConfig::ContentType::kScreen;
-      running_without_padding_ = false;
+      {
+        rtc::CritScope lock(&crit_);
+        running_without_padding_ = false;
+      }
       content_switch_event_.Set();
-      return SEND_PACKET;
     }
-
-    // Make sure the pacer has been configured with a min transmit bitrate.
-    if (stats.max_padding_bitrate_bps > 0)
-      observation_complete_.Set();
 
     return SEND_PACKET;
   }
+
+  // Called on |task_queue_|
+  void OnStreamsStopped() override { call_ = nullptr; }
 
   void PerformTest() override {
     if (RunningWithoutPadding()) {
@@ -1934,8 +1955,9 @@ class MaxPaddingSetTest : public test::SendTest {
   VideoSendStream* send_stream_ RTC_GUARDED_BY(crit_);
   VideoSendStream::Config send_stream_config_;
   VideoEncoderConfig encoder_config_;
-  uint32_t packets_sent_ RTC_GUARDED_BY(crit_);
-  bool running_without_padding_;
+  webrtc::SequenceChecker module_process_thread_;
+  uint32_t packets_sent_ RTC_GUARDED_BY(module_process_thread_) = 0;
+  bool running_without_padding_ RTC_GUARDED_BY(crit_);
   T* const stream_resetter_;
   test::SingleThreadedTaskQueueForTesting* task_queue_;
 };
