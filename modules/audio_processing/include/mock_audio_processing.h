@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "modules/audio_processing/audio_buffer.h"
 #include "modules/audio_processing/include/aec_dump.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
@@ -82,8 +83,8 @@ class MockCustomAudioAnalyzer : public CustomAudioAnalyzer {
 class MockEchoControl : public EchoControl {
  public:
   virtual ~MockEchoControl() {}
-  MOCK_METHOD1(AnalyzeRender, void(AudioBuffer* render));
-  MOCK_METHOD1(AnalyzeCapture, void(AudioBuffer* capture));
+  MOCK_METHOD1(AnalyzeRender, void(const AudioBuffer& render));
+  MOCK_METHOD1(AnalyzeCapture, void(const AudioBuffer& capture));
   MOCK_METHOD2(ProcessCapture,
                void(AudioBuffer* capture, bool echo_path_change));
   MOCK_CONST_METHOD0(GetMetrics, Metrics());
