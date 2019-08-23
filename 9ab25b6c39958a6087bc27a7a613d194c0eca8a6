@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfcd879c_6c48870c",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-08-23T03:27:21Z",
+      "side": 1,
+      "message": "Potential segfault here (heap-use-after-free).\nFor some reason, this task can be called **after** the DestroyCalls() task, both invoked from the thread \u0027CallTestTaskQue\u0027.",
+      "revId": "9ab25b6c39958a6087bc27a7a613d194c0eca8a6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
