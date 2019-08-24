@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5526d9c6_1a4d4628",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1899,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-08-24T00:04:48Z",
+      "side": 1,
+      "message": "`call_` can be destroyed just after the test. Not that happens often (~1/100000), but we should strive for concurrency excellence in unit tests as well.",
+      "revId": "02de233461603b75b056940e70af019f0f5672fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "503f06da_f6210863",
         "filename": "video/video_send_stream_tests.cc",
         "patchSetId": 3
