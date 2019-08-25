@@ -581,7 +581,7 @@ bool RTPSender::TrySendPacket(RtpPacketToSend* packet,
   // actual sending fails.
   if (is_media && packet->allow_retransmission()) {
     packet_history_.PutRtpPacket(absl::make_unique<RtpPacketToSend>(*packet),
-                                 StorageType::kAllowRetransmission, now_ms);
+                                 now_ms);
   } else if (packet->retransmitted_sequence_number()) {
     packet_history_.MarkPacketAsSent(*packet->retransmitted_sequence_number());
   }
@@ -843,8 +843,7 @@ std::vector<std::unique_ptr<RtpPacketToSend>> RTPSender::GeneratePadding(
   return padding_packets;
 }
 
-bool RTPSender::SendToNetwork(std::unique_ptr<RtpPacketToSend> packet,
-                              StorageType storage) {
+bool RTPSender::SendToNetwork(std::unique_ptr<RtpPacketToSend> packet) {
   RTC_DCHECK(packet);
   int64_t now_ms = clock_->TimeInMilliseconds();
 
@@ -857,8 +856,6 @@ bool RTPSender::SendToNetwork(std::unique_ptr<RtpPacketToSend> packet,
       packet->set_capture_time_ms(now_ms);
     }
 
-    packet->set_allow_retransmission(storage ==
-                                     StorageType::kAllowRetransmission);
     paced_sender_->EnqueuePacket(std::move(packet));
 
     return true;
@@ -913,9 +910,9 @@ bool RTPSender::SendToNetwork(std::unique_ptr<RtpPacketToSend> packet,
 
   // To support retransmissions, we store the media packet as sent in the
   // packet history (even if send failed).
-  if (storage == kAllowRetransmission) {
+  if (packet->allow_retransmission()) {
     RTC_DCHECK_EQ(ssrc, SSRC());
-    packet_history_.PutRtpPacket(std::move(packet), storage, now_ms);
+    packet_history_.PutRtpPacket(std::move(packet), now_ms);
   }
 
   return sent;
