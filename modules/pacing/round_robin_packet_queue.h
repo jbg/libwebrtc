@@ -37,14 +37,33 @@ class RoundRobinPacketQueue {
                         const WebRtcKeyValueConfig* field_trials);
   ~RoundRobinPacketQueue();
 
+  void Push(int priority,
+            Timestamp enqueue_time,
+            uint64_t enqueue_order,
+            DataSize size,
+            std::unique_ptr<RtpPacketToSend> packet);
+
+  // Peek at the next packet in line to be sent. Note that this method must not
+  // be called unless Empty() returns false.
+  const RtpPacketToSend& Top() const;
+
+  // Remove the highest prio element from the queue and return it.
+  std::unique_ptr<RtpPacketToSend> Pop();
+
+  bool Empty() const;
+  size_t SizeInPackets() const;
+  DataSize Size() const;
+
+  Timestamp OldestEnqueueTime() const;
+  TimeDelta AverageQueueTime() const;
+  void UpdateQueueTime(Timestamp now);
+  void SetPauseState(bool paused, Timestamp now);
+
+ private:
   struct QueuedPacket {
    public:
     QueuedPacket(
         int priority,
-        RtpPacketToSend::Type type,
-        uint32_t ssrc,
-        uint16_t seq_number,
-        int64_t capture_time_ms,
         Timestamp enqueue_time,
         DataSize size,
         bool retransmission,
@@ -58,10 +77,6 @@ class RoundRobinPacketQueue {
     bool operator<(const QueuedPacket& other) const;
 
     int priority() const { return priority_; }
-    RtpPacketToSend::Type type() const { return type_; }
-    uint32_t ssrc() const { return ssrc_; }
-    uint16_t sequence_number() const { return sequence_number_; }
-    int64_t capture_time_ms() const { return capture_time_ms_; }
     Timestamp enqueue_time() const { return enqueue_time_; }
     DataSize size() const { return size_; }
     bool is_retransmission() const { return retransmission_; }
@@ -78,13 +93,14 @@ class RoundRobinPacketQueue {
     }
     void SubtractPauseTime(TimeDelta pause_time_sum);
 
-   private:
-    RtpPacketToSend::Type type_;
+    const RtpPacketToSend& get_packet() const {
+      RTC_DCHECK(packet_it_.has_value());
+      RTC_DCHECK((*packet_it_)->get() != nullptr);
+      return ***packet_it_;
+    }
+
     int priority_;
-    uint32_t ssrc_;
-    uint16_t sequence_number_;
-    int64_t capture_time_ms_;  // Absolute time of frame capture.
-    Timestamp enqueue_time_;   // Absolute time of pacer queue entry.
+    Timestamp enqueue_time_;  // Absolute time of pacer queue entry.
     DataSize size_;
     bool retransmission_;
     uint64_t enqueue_order_;
@@ -95,33 +111,6 @@ class RoundRobinPacketQueue {
         packet_it_;
   };
 
-  void Push(int priority,
-            RtpPacketToSend::Type type,
-            uint32_t ssrc,
-            uint16_t seq_number,
-            int64_t capture_time_ms,
-            Timestamp enqueue_time,
-            DataSize size,
-            bool retransmission,
-            uint64_t enqueue_order);
-  void Push(int priority,
-            Timestamp enqueue_time,
-            uint64_t enqueue_order,
-            std::unique_ptr<RtpPacketToSend> packet);
-  QueuedPacket* BeginPop();
-  void CancelPop();
-  void FinalizePop();
-
-  bool Empty() const;
-  size_t SizeInPackets() const;
-  DataSize Size() const;
-
-  Timestamp OldestEnqueueTime() const;
-  TimeDelta AverageQueueTime() const;
-  void UpdateQueueTime(Timestamp now);
-  void SetPauseState(bool paused, Timestamp now);
-
- private:
   struct StreamPrioKey {
     StreamPrioKey(int priority, DataSize size)
         : priority(priority), size(size) {}
@@ -154,16 +143,15 @@ class RoundRobinPacketQueue {
     std::multimap<StreamPrioKey, uint32_t>::iterator priority_it;
   };
 
-  void Push(QueuedPacket packet);
+  void Push(QueuedPacket packet, uint32_t ssrc);
 
   Stream* GetHighestPriorityStream();
+  const Stream& GetHighestPriorityStream() const;
 
   // Just used to verify correctness.
   bool IsSsrcScheduled(uint32_t ssrc) const;
 
   Timestamp time_last_updated_;
-  absl::optional<QueuedPacket> pop_packet_;
-  absl::optional<Stream*> pop_stream_;
 
   bool paused_;
   size_t size_packets_;
@@ -190,8 +178,6 @@ class RoundRobinPacketQueue {
   // end iterator of this list if queue does not have direct ownership of the
   // packet.
   std::list<std::unique_ptr<RtpPacketToSend>> rtp_packets_;
-
-  const bool send_side_bwe_with_overhead_;
 };
 }  // namespace webrtc
 
