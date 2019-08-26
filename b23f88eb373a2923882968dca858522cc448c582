@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58080aa0_4a2dcaf9",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-08-26T09:31:41Z",
+      "side": 1,
+      "message": "Can you add a couple of tests specifically for the behaviors of OnDroppedFrames, that asserts as little as possible about other behaviors, and that nails the edge cases? I prefer behavioral-driven tests to tests that asserts multiple outcomes/behaviors of a single use case.\n\nTests that would be good for the added code:\n- When a single frame is dropped (basically what you\u0027re doing above but in a separate test).\n- When multiple frames are dropped simultaneously and the callback has a value greater than 1 as argument.\n- When frames are dropped because of ClearFramesAndHistory",
+      "revId": "b23f88eb373a2923882968dca858522cc448c582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
