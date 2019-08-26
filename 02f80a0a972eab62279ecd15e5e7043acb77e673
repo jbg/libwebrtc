@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "289c0e2f_8831140a",
+        "filename": "call/video_receive_stream.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-26T07:07:20Z",
+      "side": 1,
+      "message": "Please add a comment explaining what this counter means, and link to spec, if any.\n\nI\u0027d guess frames are dropped by the jitter buffer if they\u0027re not decodable on time, due to losses or delays. But I imagine there may be additional sources of dropped frames, e.g, decoding problems?",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "02f80a0a972eab62279ecd15e5e7043acb77e673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1da73ba_2d81da88",
+        "filename": "modules/video_coding/include/video_coding_defines.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-26T07:07:20Z",
+      "side": 1,
+      "message": "Do we really need the call back on both this interface and VCMReceiveStatisticsCallback below?",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 30
+      },
+      "revId": "02f80a0a972eab62279ecd15e5e7043acb77e673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6eae83ad_34498244",
+        "filename": "modules/video_coding/video_coding_defines.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-26T07:07:20Z",
+      "side": 1,
+      "message": "Are these default implementations temporary or not?\n\nI think it\u0027s fine to move the implementations to the header file, but for some other cl.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "02f80a0a972eab62279ecd15e5e7043acb77e673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db77bd22_8e445ae3",
+        "filename": "video/video_stream_decoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-08-26T07:07:20Z",
+      "side": 1,
+      "message": "It would be nice if we could get away without more indirection via this class. See bugs.webrtc.org/7408.",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 22
+      },
+      "revId": "02f80a0a972eab62279ecd15e5e7043acb77e673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
