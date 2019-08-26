@@ -34,6 +34,24 @@
       "revId": "b23f88eb373a2923882968dca858522cc448c582",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3691460a_51f55ed4",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-08-26T14:41:30Z",
+      "side": 1,
+      "message": "I don\u0027t think it hurts to have a test that does essentially the same thing. The risk with testing this behavior in a seemingly unrelated test is that if that test is modified or removed, you don\u0027t realize that we lost test coverage for this other behavior. I think repeating some code in a test file is OK. Alternatively, if you have a separate test for the dropping a single frame case, you can remove the assertion in DropTemporalLayerSlowDecoder so that that test doesn\u0027t do multiple things like it does now.\n\nThat\u0027s my suggestion, but I leave this up to you. LGTM.",
+      "parentUuid": "eab52766_d8aba1ef",
+      "revId": "b23f88eb373a2923882968dca858522cc448c582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
