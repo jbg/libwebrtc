@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "34f62a49_4c455f2e",
+        "filename": "modules/video_coding/packet_buffer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-08-26T14:31:14Z",
+      "side": 1,
+      "message": "Should have mentioned this last time, but now that we never release the lock in between creating the frame and cleaning up the packet buffer this should never be false. Please change this to an RTC_DCHECK.",
+      "range": {
+        "startLine": 195,
+        "startChar": 8,
+        "endLine": 195,
+        "endChar": 50
+      },
+      "revId": "f21bc4ae1d5559f3fb4993ca221871faf0076028",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ff6e493_82833a4c",
         "filename": "modules/video_coding/packet_buffer.cc",
         "patchSetId": 8
@@ -46,6 +69,30 @@
       "revId": "f21bc4ae1d5559f3fb4993ca221871faf0076028",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac166bfe_10c86955",
+        "filename": "modules/video_coding/packet_buffer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-08-26T14:31:14Z",
+      "side": 1,
+      "message": "I think you are right, this is clearer.",
+      "parentUuid": "7851c966_f9a1b6fc",
+      "range": {
+        "startLine": 445,
+        "startChar": 6,
+        "endLine": 445,
+        "endChar": 19
+      },
+      "revId": "f21bc4ae1d5559f3fb4993ca221871faf0076028",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
