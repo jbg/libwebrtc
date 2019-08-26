@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71a38d99_767cea5c",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-08-26T13:30:16Z",
+      "side": 1,
+      "message": "Race condition: the task can be called while ~MaxPaddingSetTest (end of scope for the unit test).",
+      "revId": "2fea9b6e7e1c0f4dd8d3940907d421cbdeb6196a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ba3d538_bfeda2ec",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1907,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-08-26T13:30:16Z",
+      "side": 1,
+      "message": "I do not understand why you can do without lock here.",
+      "revId": "2fea9b6e7e1c0f4dd8d3940907d421cbdeb6196a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
