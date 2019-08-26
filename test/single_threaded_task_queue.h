@@ -32,6 +32,7 @@ class SingleThreadedTaskQueueForTesting {
  public:
   using Task = std::function<void()>;
   using TaskId = size_t;
+  constexpr static TaskId kInvalidTaskId = static_cast<TaskId>(-1);
 
   explicit SingleThreadedTaskQueueForTesting(const char* name);
   ~SingleThreadedTaskQueueForTesting();
@@ -58,6 +59,8 @@ class SingleThreadedTaskQueueForTesting {
 
   // Returns true iff called on the thread associated with the task queue.
   bool IsCurrent();
+
+  bool HasPendingTasks() const;
 
  private:
   struct QueuedTask {

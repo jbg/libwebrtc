@@ -194,9 +194,11 @@ void CallTest::RunBaseTest(BaseTest* test) {
     DestroyStreams();
     send_transport_.reset();
     receive_transport_.reset();
+
     frame_generator_capturer_ = nullptr;
     video_sources_.clear();
     DestroyCalls();
+    RTC_DCHECK(!task_queue_.HasPendingTasks());
   });
 }
 

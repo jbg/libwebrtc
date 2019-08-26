@@ -105,6 +105,11 @@ bool SingleThreadedTaskQueueForTesting::IsCurrent() {
   return rtc::IsThreadRefEqual(thread_.GetThreadRef(), rtc::CurrentThreadRef());
 }
 
+bool SingleThreadedTaskQueueForTesting::HasPendingTasks() const {
+  rtc::CritScope lock(&cs_);
+  return !tasks_.empty();
+}
+
 void SingleThreadedTaskQueueForTesting::Run(void* obj) {
   static_cast<SingleThreadedTaskQueueForTesting*>(obj)->RunLoop();
 }
