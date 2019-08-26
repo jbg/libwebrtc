@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bdd3e95c_624dabd8",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-08-26T13:59:08Z",
+      "side": 1,
+      "message": "Yes, that race condition has to do with how the BaseTest class is currently implemented.\nThe tests inherit from that class, the class owns the task queue thread that the tests use, then the tests go out of scope with pending tasks which is hard to control with how the teardown is currently implemented.\n\nThe problem here is that there\u0027s an additional thread + harness around the transports that keeps on running after the tests are \u0027done\u0027 and they can trigger this after PerformTest runs.\n...and when they do, this triggers a new task to be posted to the TQ during teardown.\nThen it\u0027s enough that the TQ continues to run after the test class has been partially destructed (e.g. most derived class being destructed while the TQ instance is still running).",
+      "parentUuid": "71a38d99_767cea5c",
+      "revId": "2fea9b6e7e1c0f4dd8d3940907d421cbdeb6196a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ba3d538_bfeda2ec",
         "filename": "video/video_send_stream_tests.cc",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2019-08-26T13:30:16Z",
       "side": 1,
       "message": "I do not understand why you can do without lock here.",
+      "revId": "2fea9b6e7e1c0f4dd8d3940907d421cbdeb6196a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c9352d_77abf76b",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1907,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-08-26T13:59:08Z",
+      "side": 1,
+      "message": "because call_ is always used on the same sequence... or are you wondering about something else? I attempt at explaining the race condition above.",
+      "parentUuid": "7ba3d538_bfeda2ec",
       "revId": "2fea9b6e7e1c0f4dd8d3940907d421cbdeb6196a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
