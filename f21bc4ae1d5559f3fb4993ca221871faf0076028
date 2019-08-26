@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7851c966_f9a1b6fc",
+        "filename": "modules/video_coding/packet_buffer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-08-26T13:43:57Z",
+      "side": 1,
+      "message": "I tried making that change, but I don\u0027t think you gain anything because you still need the modulo operator in each iteration and the cost is that you loose readability because you cannot use ForwardDiff\u003c\u003e and it\u0027s also more difficult to see the connection between |start_index| and |index| and the RtpFrameObject that\u0027s created on the line above.\n\nIf you insist, I\u0027ll make the change though.",
+      "parentUuid": "1ff6e493_82833a4c",
+      "range": {
+        "startLine": 445,
+        "startChar": 6,
+        "endLine": 445,
+        "endChar": 19
+      },
+      "revId": "f21bc4ae1d5559f3fb4993ca221871faf0076028",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "191ac473_0e3e998c",
         "filename": "modules/video_coding/packet_buffer.h",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "f21bc4ae1d5559f3fb4993ca221871faf0076028",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3b1c761_5c36874b",
+        "filename": "modules/video_coding/packet_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-08-26T13:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "191ac473_0e3e998c",
+      "range": {
+        "startLine": 128,
+        "startChar": 7,
+        "endLine": 128,
+        "endChar": 20
+      },
+      "revId": "f21bc4ae1d5559f3fb4993ca221871faf0076028",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
