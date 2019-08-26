@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "dc083e34_5d61b5e7",
+        "filename": "modules/video_coding/include/video_coding_defines.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-08-26T08:25:01Z",
+      "side": 1,
+      "message": "See the reply in video_stream_decoder.h",
+      "parentUuid": "a1da73ba_2d81da88",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 30
+      },
+      "revId": "02f80a0a972eab62279ecd15e5e7043acb77e673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eae83ad_34498244",
         "filename": "modules/video_coding/video_coding_defines.cc",
         "patchSetId": 5
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "0a3ebd7e_a6207a9d",
+        "filename": "modules/video_coding/video_coding_defines.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-08-26T08:25:01Z",
+      "side": 1,
+      "message": "I don\u0027t know, but none of these should have any side effect on the actual stream so I think it makes sense to have en empty default implementation.\n\nI have another follow-up CL with changes to the h-file, I\u0027ll move these when I do that change.",
+      "parentUuid": "6eae83ad_34498244",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "02f80a0a972eab62279ecd15e5e7043acb77e673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db77bd22_8e445ae3",
         "filename": "video/video_stream_decoder.h",
         "patchSetId": 5
@@ -82,6 +130,30 @@
       "writtenOn": "2019-08-26T07:07:20Z",
       "side": 1,
       "message": "It would be nice if we could get away without more indirection via this class. See bugs.webrtc.org/7408.",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 22
+      },
+      "revId": "02f80a0a972eab62279ecd15e5e7043acb77e673",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff28e52e_a4db0a72",
+        "filename": "video/video_stream_decoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-08-26T08:25:01Z",
+      "side": 1,
+      "message": "I have too little background and knowledge of this code to see any better solution.\n\nA frame can be either rendered or dropped by the decoder, it looks reasonable to me that there\u0027s one method to call if the frame is rendered and another method to call if the frame should be dropped. In both cases the statistics need to be updated.",
+      "parentUuid": "db77bd22_8e445ae3",
       "range": {
         "startLine": 47,
         "startChar": 7,
