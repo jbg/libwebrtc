@@ -37,13 +37,7 @@ SingleThreadedTaskQueueForTesting::SingleThreadedTaskQueueForTesting(
 }
 
 SingleThreadedTaskQueueForTesting::~SingleThreadedTaskQueueForTesting() {
-  RTC_DCHECK_RUN_ON(&owner_thread_checker_);
-  {
-    rtc::CritScope lock(&cs_);
-    running_ = false;
-  }
-  wake_up_.Set();
-  thread_.Stop();
+  Stop();
 }
 
 SingleThreadedTaskQueueForTesting::TaskId
@@ -103,6 +97,32 @@ bool SingleThreadedTaskQueueForTesting::CancelTask(TaskId task_id) {
 
 bool SingleThreadedTaskQueueForTesting::IsCurrent() {
   return rtc::IsThreadRefEqual(thread_.GetThreadRef(), rtc::CurrentThreadRef());
+}
+
+bool SingleThreadedTaskQueueForTesting::IsRunning() {
+  RTC_DCHECK_RUN_ON(&owner_thread_checker_);
+  // We could check the |running_| flag here, but this is equivalent for the
+  // purposes of this function.
+  return thread_.IsRunning();
+}
+
+bool SingleThreadedTaskQueueForTesting::HasPendingTasks() const {
+  rtc::CritScope lock(&cs_);
+  return !tasks_.empty();
+}
+
+void SingleThreadedTaskQueueForTesting::Stop() {
+  RTC_DCHECK_RUN_ON(&owner_thread_checker_);
+  if (!thread_.IsRunning())
+    return;
+
+  {
+    rtc::CritScope lock(&cs_);
+    running_ = false;
+  }
+
+  wake_up_.Set();
+  thread_.Stop();
 }
 
 void SingleThreadedTaskQueueForTesting::Run(void* obj) {
