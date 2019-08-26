@@ -16,6 +16,24 @@
       "revId": "b23f88eb373a2923882968dca858522cc448c582",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eab52766_d8aba1ef",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-08-26T13:11:32Z",
+      "side": 1,
+      "message": "You\u0027re right a few more unit tests are needed.\n\nI\u0027ve added a test when multiple frames are dropped and a test for when the buffer is cleared.\n\nI started with a test for when a single frame is dropped but ended up with essentially the same test as DropTemporalLayerSlowDecoder so I keep this one as is.\n\nLet me know if you think it\u0027s good enough.",
+      "parentUuid": "58080aa0_4a2dcaf9",
+      "revId": "b23f88eb373a2923882968dca858522cc448c582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
