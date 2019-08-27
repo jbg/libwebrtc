@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d40e6a2f_de48392e",
+        "filename": "test/call_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-08-27T09:34:33Z",
+      "side": 1,
+      "message": "I tried to remove it but it\u0027s unfortunately needed for some tests, unrelated to this CL, don\u0027t clean up properly and also don\u0027t use the RunBaseTest() code path.\nWhen those instances go out of scope, objects such as those held by video_sources_, go out of scope and subsequently get deleted on the wrong thread.",
+      "parentUuid": "4a41bd5c_194478c2",
+      "range": {
+        "startLine": 66,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "8edc28708937ccbdf2e7c42b6240a1710c1e386e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e95a89a_4ff00623",
         "filename": "test/single_threaded_task_queue.h",
         "patchSetId": 11
@@ -63,6 +87,24 @@
       "revId": "8edc28708937ccbdf2e7c42b6240a1710c1e386e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdffff08_d987d8c8",
+        "filename": "test/single_threaded_task_queue.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-08-27T09:34:33Z",
+      "side": 1,
+      "message": "I think it\u0027s still useful for DCHECKing and debugging correctness in tests. Ideally I\u0027d like usage of this class to be reduced or go away since we have TaskQueue test classes that are truly task queues. But while doing so we\u0027ll need utilities to understand how this class is being used and what (currently implicit or unintentional) assumptions hold the tests together.",
+      "parentUuid": "3e95a89a_4ff00623",
+      "revId": "8edc28708937ccbdf2e7c42b6240a1710c1e386e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
