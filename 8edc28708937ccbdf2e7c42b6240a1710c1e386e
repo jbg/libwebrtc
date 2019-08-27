@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "924ecf41_bb5c9cda",
+        "filename": "test/call_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-08-27T09:17:06Z",
+      "side": 1,
+      "message": "I do see the point of this. In my book, if this code helps, it\u0027s just because of the synchronization (glorified join()).\nSynchronizing in not recommended in destructors. But I guess we can revisit that later!",
+      "range": {
+        "startLine": 66,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "8edc28708937ccbdf2e7c42b6240a1710c1e386e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e95a89a_4ff00623",
+        "filename": "test/single_threaded_task_queue.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-08-27T09:17:06Z",
+      "side": 1,
+      "message": "Not used any more.",
+      "revId": "8edc28708937ccbdf2e7c42b6240a1710c1e386e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
