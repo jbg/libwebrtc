@@ -52,6 +52,24 @@
       "revId": "b23f88eb373a2923882968dca858522cc448c582",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09a880be_363ed277",
+        "filename": "modules/video_coding/frame_buffer2_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-08-27T07:40:27Z",
+      "side": 1,
+      "message": "I think that they are related since one of the cases where a single frame is  dropped is if there\u0027s a temporal layer and the decoder is too slow.\nSo, I\u0027ll keep the test as is.",
+      "parentUuid": "3691460a_51f55ed4",
+      "revId": "b23f88eb373a2923882968dca858522cc448c582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
