@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "24ad9dc7_c2c51733",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-08-27T14:04:24Z",
+      "side": 1,
+      "message": "I started with the if-statement in https://webrtc-review.googlesource.com/c/src/+/150522/3/modules/pacing/pacing_controller.cc#b426 but inverted. It was just too complex to understand what it did. Felt this was more readable.\nMoved it out to a helper function though.",
+      "parentUuid": "67cd8ea2_4f279078",
+      "range": {
+        "startLine": 358,
+        "startChar": 11,
+        "endLine": 358,
+        "endChar": 21
+      },
+      "revId": "cc6de6ebb191b2d72dcce74a5bada702636101bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5119d7e_1202ba35",
         "filename": "modules/pacing/pacing_controller.h",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "aff1a015_3029e8ae",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-08-27T14:04:24Z",
+      "side": 1,
+      "message": "It\u0027s not unrelated, it\u0027s moved here from the packet queue. We need a way to determine how bytes to count for a packet, with regards to bwe with overhead experiment.\nThis used to be calculated and stored in the StoredPacket struct, but we\u0027re not exposing that anymore so we\u0027re figuring it out in the pacing controller instead.",
+      "parentUuid": "f5119d7e_1202ba35",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 157,
+        "endChar": 59
+      },
+      "revId": "cc6de6ebb191b2d72dcce74a5bada702636101bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e866ac61_477c2b75",
         "filename": "modules/pacing/round_robin_packet_queue.h",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2019-08-27T11:53:21Z",
       "side": 1,
       "message": "Three star programmer club?",
+      "range": {
+        "startLine": 99,
+        "startChar": 13,
+        "endLine": 99,
+        "endChar": 16
+      },
+      "revId": "cc6de6ebb191b2d72dcce74a5bada702636101bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "904d6f85_cb34530c",
+        "filename": "modules/pacing/round_robin_packet_queue.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-08-27T14:04:24Z",
+      "side": 1,
+      "message": "Oh, this isn\u0027t optional anymore, I can remove one start :D",
+      "parentUuid": "e866ac61_477c2b75",
       "range": {
         "startLine": 99,
         "startChar": 13,
