@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "67cd8ea2_4f279078",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-08-27T13:20:43Z",
+      "side": 1,
+      "message": "Nit: I think I would prefer if you poped the packet directly instead of setting this bool and pop it later.",
+      "range": {
+        "startLine": 358,
+        "startChar": 11,
+        "endLine": 358,
+        "endChar": 21
+      },
+      "revId": "cc6de6ebb191b2d72dcce74a5bada702636101bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5119d7e_1202ba35",
+        "filename": "modules/pacing/pacing_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-08-27T13:20:43Z",
+      "side": 1,
+      "message": "This change looks unrelated to the simplification of the pacer queue, please do that in some other CL :)",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 157,
+        "endChar": 59
+      },
+      "revId": "cc6de6ebb191b2d72dcce74a5bada702636101bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e866ac61_477c2b75",
         "filename": "modules/pacing/round_robin_packet_queue.h",
         "patchSetId": 3
