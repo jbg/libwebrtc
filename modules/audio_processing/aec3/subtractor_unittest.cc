@@ -38,7 +38,7 @@ float RunSubtractorTest(int num_blocks_to_process,
   config.filter.main.length_blocks = main_filter_length_blocks;
   config.filter.shadow.length_blocks = shadow_filter_length_blocks;
 
-  Subtractor subtractor(config, &data_dumper, DetectOptimization());
+  Subtractor subtractor(config, 1, 1, &data_dumper, DetectOptimization());
   absl::optional<DelayEstimate> delay_estimate;
   std::vector<std::vector<std::vector<float>>> x(
       kNumBands, std::vector<std::vector<float>>(

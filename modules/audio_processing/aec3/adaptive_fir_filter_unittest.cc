@@ -315,7 +315,7 @@ TEST(AdaptiveFirFilter, NullFilterOutput) {
 // are turned on.
 TEST(AdaptiveFirFilter, FilterStatisticsAccess) {
   ApmDataDumper data_dumper(42);
-  AdaptiveFirFilter filter(9, 9, 250, DetectOptimization(), &data_dumper);
+  AdaptiveFirFilter filter(9, 9, 250, 1, 1, DetectOptimization(), &data_dumper);
   filter.Erl();
   filter.FilterFrequencyResponse();
 }
@@ -324,7 +324,7 @@ TEST(AdaptiveFirFilter, FilterStatisticsAccess) {
 TEST(AdaptiveFirFilter, FilterSize) {
   ApmDataDumper data_dumper(42);
   for (size_t filter_size = 1; filter_size < 5; ++filter_size) {
-    AdaptiveFirFilter filter(filter_size, filter_size, 250,
+    AdaptiveFirFilter filter(filter_size, filter_size, 250, 1, 1,
                              DetectOptimization(), &data_dumper);
     EXPECT_EQ(filter_size, filter.SizePartitions());
   }
@@ -342,7 +342,7 @@ TEST(AdaptiveFirFilter, FilterAndAdapt) {
   EchoCanceller3Config config;
   AdaptiveFirFilter filter(config.filter.main.length_blocks,
                            config.filter.main.length_blocks,
-                           config.filter.config_change_duration_blocks,
+                           config.filter.config_change_duration_blocks, 1, 1,
                            DetectOptimization(), &data_dumper);
   Aec3Fft fft;
   config.delay.default_delay = 1;
