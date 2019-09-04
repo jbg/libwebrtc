@@ -351,7 +351,6 @@ message IceCandidatePairConfig {
   enum Protocol {
     UDP = 0;
     TCP = 1;
-    SSLTCP = 2;
     TLS = 3;
     UNKNOWN_PROTOCOL = 4;
   }

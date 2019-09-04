@@ -159,8 +159,6 @@ rtclog::IceCandidatePairConfig::Protocol ConvertIceCandidatePairProtocol(
       return rtclog::IceCandidatePairConfig::UDP;
     case IceCandidatePairProtocol::kTcp:
       return rtclog::IceCandidatePairConfig::TCP;
-    case IceCandidatePairProtocol::kSsltcp:
-      return rtclog::IceCandidatePairConfig::SSLTCP;
     case IceCandidatePairProtocol::kTls:
       return rtclog::IceCandidatePairConfig::TLS;
     case IceCandidatePairProtocol::kNumValues:

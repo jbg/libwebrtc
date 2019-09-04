@@ -559,7 +559,6 @@ message IceCandidatePairConfig {
     UNKNOWN_PROTOCOL = 0;
     UDP = 1;
     TCP = 2;
-    SSLTCP = 3;
     TLS = 4;
   }
 

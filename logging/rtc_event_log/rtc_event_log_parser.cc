@@ -179,8 +179,6 @@ IceCandidatePairProtocol GetRuntimeIceCandidatePairProtocol(
       return IceCandidatePairProtocol::kUdp;
     case rtclog::IceCandidatePairConfig::TCP:
       return IceCandidatePairProtocol::kTcp;
-    case rtclog::IceCandidatePairConfig::SSLTCP:
-      return IceCandidatePairProtocol::kSsltcp;
     case rtclog::IceCandidatePairConfig::TLS:
       return IceCandidatePairProtocol::kTls;
     case rtclog::IceCandidatePairConfig::UNKNOWN_PROTOCOL:
@@ -785,8 +783,6 @@ IceCandidatePairProtocol GetRuntimeIceCandidatePairProtocol(
       return IceCandidatePairProtocol::kUdp;
     case rtclog2::IceCandidatePairConfig::TCP:
       return IceCandidatePairProtocol::kTcp;
-    case rtclog2::IceCandidatePairConfig::SSLTCP:
-      return IceCandidatePairProtocol::kSsltcp;
     case rtclog2::IceCandidatePairConfig::TLS:
       return IceCandidatePairProtocol::kTls;
     case rtclog2::IceCandidatePairConfig::UNKNOWN_PROTOCOL:

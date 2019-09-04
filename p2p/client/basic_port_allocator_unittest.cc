@@ -80,8 +80,6 @@ static const SocketAddress kRelayUdpIntAddr("99.99.99.2", 5000);
 static const SocketAddress kRelayUdpExtAddr("99.99.99.3", 5001);
 static const SocketAddress kRelayTcpIntAddr("99.99.99.2", 5002);
 static const SocketAddress kRelayTcpExtAddr("99.99.99.3", 5003);
-static const SocketAddress kRelaySslTcpIntAddr("99.99.99.2", 5004);
-static const SocketAddress kRelaySslTcpExtAddr("99.99.99.3", 5005);
 static const SocketAddress kTurnUdpIntAddr("99.99.99.4", 3478);
 static const SocketAddress kTurnUdpIntIPv6Addr(
     "2402:fb00:4:1000:be30:5bff:fee5:c3",
@@ -164,9 +162,7 @@ class BasicPortAllocatorTestBase : public ::testing::Test,
                       kRelayUdpIntAddr,
                       kRelayUdpExtAddr,
                       kRelayTcpIntAddr,
-                      kRelayTcpExtAddr,
-                      kRelaySslTcpIntAddr,
-                      kRelaySslTcpExtAddr),
+                      kRelayTcpExtAddr),
         turn_server_(rtc::Thread::Current(), kTurnUdpIntAddr, kTurnUdpExtAddr),
         candidate_allocation_done_(false) {
     ServerAddresses stun_servers;
@@ -176,9 +172,8 @@ class BasicPortAllocatorTestBase : public ::testing::Test,
     // TODO(deadbeef): Stop using GTURN by default in this test... Either the
     // configuration should be blank by default (preferred), or it should use
     // TURN instead.
-    allocator_.reset(new BasicPortAllocator(&network_manager_, stun_servers,
-                                            kRelayUdpIntAddr, kRelayTcpIntAddr,
-                                            kRelaySslTcpIntAddr));
+    allocator_.reset(new BasicPortAllocator(
+        &network_manager_, stun_servers, kRelayUdpIntAddr, kRelayTcpIntAddr));
     allocator_->Initialize();
     allocator_->set_step_delay(kMinimumStepDelay);
     webrtc::metrics::Reset();
@@ -738,8 +733,6 @@ TEST_F(BasicPortAllocatorTest, TestBasic) {
   EXPECT_TRUE(allocator().turn_servers()[0].credentials.password.empty());
   EXPECT_TRUE(HasRelayAddress(ProtocolAddress(kRelayUdpIntAddr, PROTO_UDP)));
   EXPECT_TRUE(HasRelayAddress(ProtocolAddress(kRelayTcpIntAddr, PROTO_TCP)));
-  EXPECT_TRUE(
-      HasRelayAddress(ProtocolAddress(kRelaySslTcpIntAddr, PROTO_SSLTCP)));
   ASSERT_TRUE(CreateSession(ICE_CANDIDATE_COMPONENT_RTP));
   EXPECT_FALSE(session_->CandidatesAllocationDone());
 }
@@ -1037,8 +1030,6 @@ TEST_F(BasicPortAllocatorTest, TestGetAllPortsWithMinimumStepDelay) {
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "udp", kRelayUdpExtAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "tcp", kRelayTcpIntAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "local", "tcp", kClientAddr));
-  EXPECT_TRUE(
-      HasCandidate(candidates_, "relay", "ssltcp", kRelaySslTcpIntAddr));
 }
 
 // Test that when the same network interface is brought down and up, the
@@ -1162,8 +1153,6 @@ TEST_F(BasicPortAllocatorTest, TestGetAllPortsWithOneSecondStepDelay) {
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "udp", kRelayUdpIntAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "udp", kRelayUdpExtAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "tcp", kRelayTcpIntAddr));
-  EXPECT_TRUE(
-      HasCandidate(candidates_, "relay", "ssltcp", kRelaySslTcpIntAddr));
   ASSERT_EQ_SIMULATED_WAIT(7U, candidates_.size(), 1500, fake_clock);
   EXPECT_TRUE(HasCandidate(candidates_, "local", "tcp", kClientAddr));
   EXPECT_EQ(4U, ports_.size());
@@ -1425,8 +1414,6 @@ TEST_F(BasicPortAllocatorTest, TestGetAllPortsNoUdpSockets) {
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "udp", kRelayUdpExtAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "tcp", kRelayTcpIntAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "local", "tcp", kClientAddr));
-  EXPECT_TRUE(
-      HasCandidate(candidates_, "relay", "ssltcp", kRelaySslTcpIntAddr));
 }
 
 #endif  // if !defined(ADDRESS_SANITIZER)
@@ -1448,8 +1435,6 @@ TEST_F(BasicPortAllocatorTest, TestGetAllPortsNoUdpSocketsNoTcpListen) {
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "udp", kRelayUdpExtAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "tcp", kRelayTcpIntAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "local", "tcp", kClientAddr));
-  EXPECT_TRUE(
-      HasCandidate(candidates_, "relay", "ssltcp", kRelaySslTcpIntAddr));
 }
 
 // Test that we don't crash or malfunction if we can't create any sockets.
@@ -1483,8 +1468,6 @@ TEST_F(BasicPortAllocatorTest, TestGetAllPortsNoUdpAllowed) {
   EXPECT_EQ(3U, ports_.size());
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "udp", kRelayUdpIntAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "tcp", kRelayTcpIntAddr));
-  EXPECT_TRUE(
-      HasCandidate(candidates_, "relay", "ssltcp", kRelaySslTcpIntAddr));
   EXPECT_TRUE(HasCandidate(candidates_, "relay", "udp", kRelayUdpExtAddr));
   // We wait at least for a full STUN timeout, which
   // cricket::STUN_TOTAL_TIMEOUT seconds.  But since 3-3.5 seconds
