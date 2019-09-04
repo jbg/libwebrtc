@@ -337,7 +337,6 @@ const char kIceCandidateTypeRelay[] = "relay";
 
 const char kProtocolUdp[] = "udp";
 const char kProtocolTcp[] = "tcp";
-const char kProtocolSsltcp[] = "ssltcp";
 const char kProtocolTls[] = "tls";
 
 const char kAddressFamilyIpv4[] = "ipv4";
@@ -370,8 +369,6 @@ std::string GetProtocolAsString(webrtc::IceCandidatePairProtocol protocol) {
       return kProtocolUdp;
     case webrtc::IceCandidatePairProtocol::kTcp:
       return kProtocolTcp;
-    case webrtc::IceCandidatePairProtocol::kSsltcp:
-      return kProtocolSsltcp;
     case webrtc::IceCandidatePairProtocol::kTls:
       return kProtocolTls;
     default:
