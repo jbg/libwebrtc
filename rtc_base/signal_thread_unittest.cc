@@ -10,6 +10,7 @@
 
 #include "rtc_base/signal_thread.h"
 
+#include <atomic>
 #include <memory>
 
 #include "absl/memory/memory.h"
@@ -156,7 +157,7 @@ class OwnerThread : public Thread, public sigslot::has_slots<> {
 
  private:
   SignalThreadTest* harness_;
-  bool has_run_;
+  std::atomic<bool> has_run_;
   RTC_DISALLOW_COPY_AND_ASSIGN(OwnerThread);
 };
 
