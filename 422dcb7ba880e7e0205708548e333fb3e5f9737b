@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "145da205_f0f8e64d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-04T06:57:49Z",
+      "side": 1,
+      "message": "Spelling.",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "422dcb7ba880e7e0205708548e333fb3e5f9737b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "586a54df_6e9ffc46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-04T06:57:49Z",
+      "side": 1,
+      "message": "It\u0027s not generally required, I hope? Could you say something briefly on the circumstances that require it?",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "422dcb7ba880e7e0205708548e333fb3e5f9737b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37641fda_bb569f41",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-04T06:57:49Z",
+      "side": 1,
+      "message": "What\u0027s needed to drop visibility of this target? It seems unfortunate to have a public build target that intentionally doesn\u0027t declare sufficient link dependencies.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "422dcb7ba880e7e0205708548e333fb3e5f9737b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
