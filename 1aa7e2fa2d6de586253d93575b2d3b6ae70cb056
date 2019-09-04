@@ -22,6 +22,30 @@
       "revId": "1aa7e2fa2d6de586253d93575b2d3b6ae70cb056",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f96f777_3b1d4e4c",
+        "filename": "modules/audio_processing/aec3/echo_remover.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-04T09:29:25Z",
+      "side": 0,
+      "message": "No, I think it should be fine. The AdaptiveFilter does not yet use the input parameters at all.\n\nThe reason that these were needed was that I too early stored these parameters into the state.",
+      "parentUuid": "6da52293_c906bdbe",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 30
+      },
+      "revId": "1aa7e2fa2d6de586253d93575b2d3b6ae70cb056",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
