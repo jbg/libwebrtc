@@ -42,7 +42,6 @@ enum class IceCandidatePairProtocol {
   kUnknown,
   kUdp,
   kTcp,
-  kSsltcp,
   kTls,
   kNumValues,
 };

@@ -217,14 +217,7 @@ RelayPort::~RelayPort() {
 }
 
 void RelayPort::AddServerAddress(const ProtocolAddress& addr) {
-  // Since HTTP proxies usually only allow 443,
-  // let's up the priority on PROTO_SSLTCP
-  if (addr.proto == PROTO_SSLTCP && (proxy().type == rtc::PROXY_HTTPS ||
-                                     proxy().type == rtc::PROXY_UNKNOWN)) {
-    server_addr_.push_front(addr);
-  } else {
-    server_addr_.push_back(addr);
-  }
+  server_addr_.push_back(addr);
 }
 
 void RelayPort::AddExternalAddress(const ProtocolAddress& addr) {
@@ -515,13 +508,10 @@ void RelayEntry::Connect() {
     socket = port_->socket_factory()->CreateUdpSocket(
         rtc::SocketAddress(port_->Network()->GetBestIP(), 0), port_->min_port(),
         port_->max_port());
-  } else if (ra->proto == PROTO_TCP || ra->proto == PROTO_SSLTCP) {
-    int opts = (ra->proto == PROTO_SSLTCP)
-                   ? rtc::PacketSocketFactory::OPT_TLS_FAKE
-                   : 0;
+  } else if (ra->proto == PROTO_TCP) {
     socket = port_->socket_factory()->CreateClientTcpSocket(
         rtc::SocketAddress(port_->Network()->GetBestIP(), 0), ra->address,
-        port_->proxy(), port_->user_agent(), opts);
+        port_->proxy(), port_->user_agent(), 0);
   } else {
     RTC_LOG(LS_WARNING) << "Unknown protocol: " << ra->proto;
   }
@@ -545,7 +535,7 @@ void RelayEntry::Connect() {
 
   // If we're trying UDP, start binding requests.
   // If we're trying TCP, wait for connection with a fixed timeout.
-  if ((ra->proto == PROTO_TCP) || (ra->proto == PROTO_SSLTCP)) {
+  if (ra->proto == PROTO_TCP) {
     socket->SignalClose.connect(this, &RelayEntry::OnSocketClose);
     socket->SignalConnect.connect(this, &RelayEntry::OnSocketConnect);
     port()->thread()->PostDelayed(RTC_FROM_HERE, kSoftConnectTimeoutMs, this,

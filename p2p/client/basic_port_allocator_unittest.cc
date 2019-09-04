@@ -176,9 +176,8 @@ class BasicPortAllocatorTestBase : public ::testing::Test,
     // TODO(deadbeef): Stop using GTURN by default in this test... Either the
     // configuration should be blank by default (preferred), or it should use
     // TURN instead.
-    allocator_.reset(new BasicPortAllocator(&network_manager_, stun_servers,
-                                            kRelayUdpIntAddr, kRelayTcpIntAddr,
-                                            kRelaySslTcpIntAddr));
+    allocator_.reset(new BasicPortAllocator(
+        &network_manager_, stun_servers, kRelayUdpIntAddr, kRelayTcpIntAddr));
     allocator_->Initialize();
     allocator_->set_step_delay(kMinimumStepDelay);
     webrtc::metrics::Reset();
@@ -738,8 +737,6 @@ TEST_F(BasicPortAllocatorTest, TestBasic) {
   EXPECT_TRUE(allocator().turn_servers()[0].credentials.password.empty());
   EXPECT_TRUE(HasRelayAddress(ProtocolAddress(kRelayUdpIntAddr, PROTO_UDP)));
   EXPECT_TRUE(HasRelayAddress(ProtocolAddress(kRelayTcpIntAddr, PROTO_TCP)));
-  EXPECT_TRUE(
-      HasRelayAddress(ProtocolAddress(kRelaySslTcpIntAddr, PROTO_SSLTCP)));
   ASSERT_TRUE(CreateSession(ICE_CANDIDATE_COMPONENT_RTP));
   EXPECT_FALSE(session_->CandidatesAllocationDone());
 }

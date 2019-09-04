@@ -17,7 +17,6 @@ namespace cricket {
 
 const char UDP_PROTOCOL_NAME[] = "udp";
 const char TCP_PROTOCOL_NAME[] = "tcp";
-const char SSLTCP_PROTOCOL_NAME[] = "ssltcp";
 const char TLS_PROTOCOL_NAME[] = "tls";
 
 int GetIpOverhead(int addr_family) {
@@ -33,7 +32,7 @@ int GetIpOverhead(int addr_family) {
 }
 
 int GetProtocolOverhead(const std::string& protocol) {
-  if (protocol == TCP_PROTOCOL_NAME || protocol == SSLTCP_PROTOCOL_NAME) {
+  if (protocol == TCP_PROTOCOL_NAME) {
     return 20;
   }
   return 8;

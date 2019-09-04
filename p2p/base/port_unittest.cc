@@ -497,14 +497,6 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
     TestConnectivity("tcp", std::move(port1), RelayName(rtype, proto),
                      std::move(port2), rtype == RELAY_GTURN, false, true, true);
   }
-  void TestSslTcpToRelay(RelayType rtype, ProtocolType proto) {
-    auto port1 = CreateTcpPort(kLocalAddr1);
-    port1->SetIceRole(cricket::ICEROLE_CONTROLLING);
-    auto port2 = CreateRelayPort(kLocalAddr2, rtype, proto, PROTO_SSLTCP);
-    port2->SetIceRole(cricket::ICEROLE_CONTROLLED);
-    TestConnectivity("ssltcp", std::move(port1), RelayName(rtype, proto),
-                     std::move(port2), rtype == RELAY_GTURN, false, true, true);
-  }
 
   rtc::Network* MakeNetwork(const SocketAddress& addr) {
     networks_.emplace_back("unittest", "unittest", addr.ipaddr(), 32);
@@ -612,8 +604,6 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
           return "turn(udp)";
         case PROTO_TCP:
           return "turn(tcp)";
-        case PROTO_SSLTCP:
-          return "turn(ssltcp)";
         case PROTO_TLS:
           return "turn(tls)";
         default:
@@ -625,8 +615,6 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
           return "gturn(udp)";
         case PROTO_TCP:
           return "gturn(tcp)";
-        case PROTO_SSLTCP:
-          return "gturn(ssltcp)";
         case PROTO_TLS:
           return "gturn(tls)";
         default:
@@ -1133,10 +1121,6 @@ TEST_F(PortTest, TestLocalToTcpGturn) {
   TestLocalToRelay(RELAY_GTURN, PROTO_TCP);
 }
 
-TEST_F(PortTest, TestLocalToSslTcpGturn) {
-  TestLocalToRelay(RELAY_GTURN, PROTO_SSLTCP);
-}
-
 // Cone NAT -> XXXX
 TEST_F(PortTest, TestConeNatToLocal) {
   TestStunToLocal(NAT_OPEN_CONE);
@@ -1323,17 +1307,6 @@ TEST_F(PortTest, TestTcpToTcpRelay) {
 
 TEST_F(PortTest, TestTcpToSslTcpRelay) {
   TestTcpToRelay(PROTO_SSLTCP);
-}
-*/
-
-// Outbound SSLTCP -> XXXX
-/* TODO(?): Enable these once testrelayserver can accept external SSL.
-TEST_F(PortTest, TestSslTcpToTcpRelay) {
-  TestSslTcpToRelay(PROTO_TCP);
-}
-
-TEST_F(PortTest, TestSslTcpToSslTcpRelay) {
-  TestSslTcpToRelay(PROTO_SSLTCP);
 }
 */
 
@@ -2888,7 +2861,6 @@ TEST_F(PortTest, TestSupportsProtocol) {
 
   auto tcp_port = CreateTcpPort(kLocalAddr1);
   EXPECT_TRUE(tcp_port->SupportsProtocol(TCP_PROTOCOL_NAME));
-  EXPECT_TRUE(tcp_port->SupportsProtocol(SSLTCP_PROTOCOL_NAME));
   EXPECT_FALSE(tcp_port->SupportsProtocol(UDP_PROTOCOL_NAME));
 
   auto turn_port =
