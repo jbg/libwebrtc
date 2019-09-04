@@ -81,12 +81,6 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateServerTcpSocket(
     return NULL;
   }
 
-  // If using fake TLS, wrap the TCP socket in a pseudo-SSL socket.
-  if (opts & PacketSocketFactory::OPT_TLS_FAKE) {
-    RTC_DCHECK(!(opts & PacketSocketFactory::OPT_TLS));
-    socket = new AsyncSSLSocket(socket);
-  }
-
   // Set TCP_NODELAY (via OPT_NODELAY) for improved performance.
   // See http://go/gtalktcpnodelayexperiment
   socket->SetOption(Socket::OPT_NODELAY, 1);
@@ -135,7 +129,6 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
 
   // Assert that at most one TLS option is used.
   int tlsOpts = tcp_options.opts & (PacketSocketFactory::OPT_TLS |
-                                    PacketSocketFactory::OPT_TLS_FAKE |
                                     PacketSocketFactory::OPT_TLS_INSECURE);
   RTC_DCHECK((tlsOpts & (tlsOpts - 1)) == 0);
 
@@ -161,10 +154,6 @@ AsyncPacketSocket* BasicPacketSocketFactory::CreateClientTcpSocket(
       delete ssl_adapter;
       return NULL;
     }
-
-  } else if (tlsOpts & PacketSocketFactory::OPT_TLS_FAKE) {
-    // Using fake TLS, wrap the TCP socket in a pseudo-SSL socket.
-    socket = new AsyncSSLSocket(socket);
   }
 
   if (socket->Connect(remote_address) < 0) {
