@@ -41,7 +41,6 @@ class RtpVideoSenderInterface : public EncodedImageCallback,
   virtual void SetActiveModules(const std::vector<bool> active_modules) = 0;
   virtual bool IsActive() = 0;
 
-  virtual void OnNetworkAvailability(bool network_available) = 0;
   virtual std::map<uint32_t, RtpState> GetRtpStates() const = 0;
   virtual std::map<uint32_t, RtpPayloadState> GetRtpPayloadStates() const = 0;
 

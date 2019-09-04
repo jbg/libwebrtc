@@ -74,7 +74,6 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
 
   const Config& config() const { return config_; }
 
-  void SignalNetworkState(NetworkState state);
   bool DeliverRtcp(const uint8_t* packet, size_t length);
 
   void SetSync(Syncable* audio_syncable);

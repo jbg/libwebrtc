@@ -861,7 +861,6 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
     video_receive_streams_.insert(receive_stream);
     ConfigureSync(config.sync_group);
   }
-  receive_stream->SignalNetworkState(video_network_state_);
   UpdateAggregateNetworkState();
   event_log_->Log(absl::make_unique<RtcEventVideoReceiveStreamConfig>(
       CreateRtcLogStreamConfig(config)));
@@ -1008,12 +1007,6 @@ void Call::SignalChannelNetworkState(MediaType media, NetworkState state) {
   }
 
   UpdateAggregateNetworkState();
-  {
-    ReadLockScoped read_lock(*receive_crit_);
-    for (VideoReceiveStream* video_receive_stream : video_receive_streams_) {
-      video_receive_stream->SignalNetworkState(video_network_state_);
-    }
-  }
 }
 
 void Call::OnAudioTransportOverheadChanged(int transport_overhead_per_packet) {

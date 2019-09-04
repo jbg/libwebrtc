@@ -99,8 +99,6 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
 
   void FrameDecoded(int64_t seq_num);
 
-  void SignalNetworkState(NetworkState state);
-
   // Returns number of different frames seen in the packet buffer.
   int GetUniqueFramesSeen() const;
 

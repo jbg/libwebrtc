@@ -826,11 +826,6 @@ void RtpVideoStreamReceiver::FrameDecoded(int64_t picture_id) {
   }
 }
 
-void RtpVideoStreamReceiver::SignalNetworkState(NetworkState state) {
-  rtp_rtcp_->SetRTCPStatus(state == kNetworkUp ? config_.rtp.rtcp_mode
-                                               : RtcpMode::kOff);
-}
-
 int RtpVideoStreamReceiver::GetUniqueFramesSeen() const {
   return packet_buffer_->GetUniqueFramesSeen();
 }

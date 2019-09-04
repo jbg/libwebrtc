@@ -631,13 +631,6 @@ void RtpVideoSender::ConfigureRids() {
   }
 }
 
-void RtpVideoSender::OnNetworkAvailability(bool network_available) {
-  for (const RtpStreamSender& stream : rtp_streams_) {
-    stream.rtp_rtcp->SetRTCPStatus(network_available ? rtp_config_.rtcp_mode
-                                                     : RtcpMode::kOff);
-  }
-}
-
 std::map<uint32_t, RtpState> RtpVideoSender::GetRtpStates() const {
   std::map<uint32_t, RtpState> rtp_states;
 
