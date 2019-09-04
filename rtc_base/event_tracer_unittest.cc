@@ -10,6 +10,8 @@
 
 #include "rtc_base/event_tracer.h"
 
+#include "rtc_base/critical_section.h"
+#include "rtc_base/thread_annotations.h"
 #include "rtc_base/trace_event.h"
 #include "test/gtest.h"
 
@@ -19,11 +21,20 @@ class TestStatistics {
  public:
   TestStatistics() : events_logged_(0) {}
 
-  void Reset() { events_logged_ = 0; }
+  void Reset() {
+    rtc::CritScope cs(&crit_);
+    events_logged_ = 0;
+  }
 
-  void Increment() { ++events_logged_; }
+  void Increment() {
+    rtc::CritScope cs(&crit_);
+    ++events_logged_;
+  }
 
-  int Count() const { return events_logged_; }
+  int Count() const {
+    rtc::CritScope cs(&crit_);
+    return events_logged_;
+  }
 
   static TestStatistics* Get() {
     static TestStatistics* test_stats = nullptr;
@@ -33,7 +44,8 @@ class TestStatistics {
   }
 
  private:
-  int events_logged_;
+  rtc::CriticalSection crit_;
+  int events_logged_ RTC_GUARDED_BY(crit_);
 };
 
 static const unsigned char* GetCategoryEnabledHandler(const char* name) {
