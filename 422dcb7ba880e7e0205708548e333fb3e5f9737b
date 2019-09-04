@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "2b6ccc3e_cf9e72ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-04T07:08:06Z",
+      "side": 1,
+      "message": "The VideoCaptureFactory is publicly visible, and it defines VideoCaptureFactory::CreateDeviceInfo() [1] which in turn needs videocapturemodule::VideoCaptureImpl::CreateDeviceInfo() which is declared but not defined in the same build target (violating our style guide). It is defined here: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_capture/linux/device_info_linux.cc?g\u003d0\u0026l\u003d32-34\u0026rcl\u003da4d873786f10eedd72de25ad0d94ad7c53c1f68a.\n\n[1] - https://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_capture/video_capture_factory.cc?l\u003d26-32\u0026rcl\u003d8581877121f58435d683c2a39a73e72e5dcd558a",
+      "parentUuid": "586a54df_6e9ffc46",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "422dcb7ba880e7e0205708548e333fb3e5f9737b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "37641fda_bb569f41",
         "filename": "modules/video_capture/BUILD.gn",
         "patchSetId": 1
@@ -59,6 +83,30 @@
       "writtenOn": "2019-09-04T06:57:49Z",
       "side": 1,
       "message": "What\u0027s needed to drop visibility of this target? It seems unfortunate to have a public build target that intentionally doesn\u0027t declare sufficient link dependencies.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "422dcb7ba880e7e0205708548e333fb3e5f9737b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bae5193c_d85f610a",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-04T07:08:06Z",
+      "side": 1,
+      "message": "Let me give it a try and see what breaks.",
+      "parentUuid": "37641fda_bb569f41",
       "range": {
         "startLine": 16,
         "startChar": 0,
