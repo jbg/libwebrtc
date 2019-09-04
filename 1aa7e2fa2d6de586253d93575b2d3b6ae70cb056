@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6da52293_c906bdbe",
+        "filename": "modules/audio_processing/aec3/echo_remover.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-09-04T09:25:22Z",
+      "side": 0,
+      "message": "nit: Are there any soundness checks downstream that may break if something like this is not added in AdaptiveFirFilter?",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 30
+      },
+      "revId": "1aa7e2fa2d6de586253d93575b2d3b6ae70cb056",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
