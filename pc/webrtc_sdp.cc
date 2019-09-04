@@ -1124,7 +1124,6 @@ bool ParseCandidate(const std::string& message,
   switch (protocol) {
     case cricket::PROTO_UDP:
     case cricket::PROTO_TCP:
-    case cricket::PROTO_SSLTCP:
       // Supported protocol.
       break;
     default:

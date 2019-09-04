@@ -43,8 +43,6 @@ rtc::PacketInfoProtocolType ConvertProtocolTypeToPacketInfoProtocolType(
       return rtc::PacketInfoProtocolType::kUdp;
     case cricket::ProtocolType::PROTO_TCP:
       return rtc::PacketInfoProtocolType::kTcp;
-    case cricket::ProtocolType::PROTO_SSLTCP:
-      return rtc::PacketInfoProtocolType::kSsltcp;
     case cricket::ProtocolType::PROTO_TLS:
       return rtc::PacketInfoProtocolType::kTls;
     default:
@@ -71,7 +69,6 @@ const char PRFLX_PORT_TYPE[] = "prflx";
 const char RELAY_PORT_TYPE[] = "relay";
 
 static const char* const PROTO_NAMES[] = {UDP_PROTOCOL_NAME, TCP_PROTOCOL_NAME,
-                                          SSLTCP_PROTOCOL_NAME,
                                           TLS_PROTOCOL_NAME};
 
 const char* ProtoToString(ProtocolType proto) {

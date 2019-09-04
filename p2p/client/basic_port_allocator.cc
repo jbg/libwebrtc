@@ -50,14 +50,13 @@ const int PHASE_TCP = 2;
 
 const int kNumPhases = 3;
 
-// Gets protocol priority: UDP > TCP > SSLTCP == TLS.
+// Gets protocol priority: UDP > TCP > TLS.
 int GetProtocolPriority(cricket::ProtocolType protocol) {
   switch (protocol) {
     case cricket::PROTO_UDP:
       return 2;
     case cricket::PROTO_TCP:
       return 1;
-    case cricket::PROTO_SSLTCP:
     case cricket::PROTO_TLS:
       return 0;
     default:
@@ -189,8 +188,7 @@ BasicPortAllocator::BasicPortAllocator(
     rtc::NetworkManager* network_manager,
     const ServerAddresses& stun_servers,
     const rtc::SocketAddress& relay_address_udp,
-    const rtc::SocketAddress& relay_address_tcp,
-    const rtc::SocketAddress& relay_address_ssl)
+    const rtc::SocketAddress& relay_address_tcp)
     : network_manager_(network_manager), socket_factory_(NULL) {
   InitRelayPortFactory(nullptr);
   RTC_DCHECK(relay_port_factory_ != nullptr);
@@ -202,9 +200,6 @@ BasicPortAllocator::BasicPortAllocator(
   }
   if (!relay_address_tcp.IsNil()) {
     config.ports.push_back(ProtocolAddress(relay_address_tcp, PROTO_TCP));
-  }
-  if (!relay_address_ssl.IsNil()) {
-    config.ports.push_back(ProtocolAddress(relay_address_ssl, PROTO_SSLTCP));
   }
 
   if (!config.ports.empty()) {
