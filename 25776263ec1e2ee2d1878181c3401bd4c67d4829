@@ -16,6 +16,24 @@
       "revId": "25776263ec1e2ee2d1878181c3401bd4c67d4829",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "389198dd_e1ec66bc",
+        "filename": "rtc_base/signal_thread_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-09-05T20:09:11Z",
+      "side": 1,
+      "message": "Ok, I will address this class in another CL. I prefer atomic CLs (huhu).",
+      "parentUuid": "2519fe99_0bdbc2e7",
+      "revId": "25776263ec1e2ee2d1878181c3401bd4c67d4829",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
