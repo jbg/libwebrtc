@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ae31f9c_05f3bfb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-05T08:43:33Z",
+      "side": 1,
+      "message": "C",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "7643b5d24a59bbb402faf8e61a608baa6bd986db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db135e87_d0f4fc30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-05T08:43:33Z",
+      "side": 1,
+      "message": "Mention that we\u0027re doing this as a canary, just to see if anything breaks?",
+      "revId": "7643b5d24a59bbb402faf8e61a608baa6bd986db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
