@@ -70,6 +70,24 @@
       "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30294390_deb78bc0",
+        "filename": "rtc_base/event_tracer_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-09-06T07:57:45Z",
+      "side": 1,
+      "message": "I guess you meant -Wexit-time-destructors.\n\nIt is present in obj/rtc_base/rtc_base_approved.ninja,\nbut not in:      obj/rtc_base/rtc_base_approved_unittests.ninja",
+      "parentUuid": "7bed7526_1b8f4230",
+      "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
