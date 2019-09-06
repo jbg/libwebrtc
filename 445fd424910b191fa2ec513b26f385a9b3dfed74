@@ -34,6 +34,24 @@
       "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "888cd1ac_40425884",
+        "filename": "rtc_base/event_tracer_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-06T07:38:26Z",
+      "side": 1,
+      "message": "Shouldn\u0027t -Wno-exit-time-destructors catch this? I was expecting some red bots.",
+      "parentUuid": "a5f42f3b_f6c3fbc3",
+      "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
