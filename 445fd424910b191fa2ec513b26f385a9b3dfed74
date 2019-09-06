@@ -88,6 +88,24 @@
       "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a124a1ae_d45d158f",
+        "filename": "rtc_base/event_tracer_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-06T08:19:01Z",
+      "side": 1,
+      "message": "Yes. :)\n\nThis is why the diagnostic is not triggering: https://cs.chromium.org/chromium/src/third_party/webrtc/webrtc.gni?l\u003d467\u0026rcl\u003d2dac4e4e3577d1f61f7249df043d7ed1df7ec611.\n\nNot related to this CL, so case closed. :)\n\nShould we enable it also on test code?",
+      "parentUuid": "30294390_deb78bc0",
+      "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
