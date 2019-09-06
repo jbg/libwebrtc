@@ -16,6 +16,24 @@
       "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5f42f3b_f6c3fbc3",
+        "filename": "rtc_base/event_tracer_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-09-06T03:05:32Z",
+      "side": 1,
+      "message": "Done. Out of curiosity, why would it be an issue to destruct the object at shutdown time?",
+      "parentUuid": "d1ef6863_19477fc0",
+      "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
