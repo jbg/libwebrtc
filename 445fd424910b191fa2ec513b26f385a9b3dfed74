@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1ef6863_19477fc0",
+        "filename": "rtc_base/event_tracer_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-06T02:25:13Z",
+      "side": 1,
+      "message": "Don\u0027t do this---the runtime will try to run ~TestStatistics on program shutdown. Instead, do something like this:\n\n  static TestStatistics* const test_stats \u003d new TestStatistics();\n  return test_stats;\n\nor this:\n\n  static TestStatistics\u0026 test_stats \u003d *new TestStatistics();\n  return \u0026test_stats;",
+      "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
