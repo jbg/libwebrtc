@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "api/units/data_rate.h"
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video/video_rotation.h"
 #include "api/video/video_sink_interface.h"
@@ -33,6 +34,7 @@
 #include "rtc_base/experiments/balanced_degradation_settings.h"
 #include "rtc_base/experiments/quality_scaler_settings.h"
 #include "rtc_base/experiments/rate_control_settings.h"
+#include "rtc_base/numerics/exp_filter.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/rate_statistics.h"
 #include "rtc_base/synchronization/sequence_checker.h"
@@ -386,6 +388,24 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   // All public methods are proxied to |encoder_queue_|. It must must be
   // destroyed first to make sure no tasks are run that use other members.
   rtc::TaskQueue encoder_queue_;
+
+  struct NetworkConditionEncoderSwitchInfo {
+    webrtc::FieldTrialOptional<std::string> codec{"codec"};
+    webrtc::FieldTrialOptional<std::string> param{"param"};
+    webrtc::FieldTrialOptional<std::string> value{"value"};
+    webrtc::FieldTrialOptional<webrtc::DataRate> bitrate{"bitrate"};
+    webrtc::FieldTrialOptional<int> pixels{"pixels"};
+    webrtc::FieldTrialOptional<double> alpha{"alpha"};
+  };
+
+  absl::optional<NetworkConditionEncoderSwitchInfo>
+  ParseNetworkConditionEncoderSwitchFieldTrial() const;
+
+  absl::optional<NetworkConditionEncoderSwitchInfo>
+      network_encoder_switch_field_trial_ RTC_GUARDED_BY(&encoder_queue_);
+  std::unique_ptr<rtc::ExpFilter> target_bitrate_filter_
+      RTC_GUARDED_BY(&encoder_queue_);
+  bool encoder_switch_requested_ RTC_GUARDED_BY(&encoder_queue_);
 
   RTC_DISALLOW_COPY_AND_ASSIGN(VideoStreamEncoder);
 };
