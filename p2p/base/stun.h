@@ -508,20 +508,6 @@ std::unique_ptr<StunAttribute> CopyStunAttribute(
 // TODO(?): Move the TURN/ICE stuff below out to separate files.
 extern const char TURN_MAGIC_COOKIE_VALUE[4];
 
-// "GTURN" STUN methods.
-// TODO(?): Rename these methods to GTURN_ to make it clear they aren't
-// part of standard STUN/TURN.
-enum RelayMessageType {
-  // For now, using the same defs from TurnMessageType below.
-  // STUN_ALLOCATE_REQUEST              = 0x0003,
-  // STUN_ALLOCATE_RESPONSE             = 0x0103,
-  // STUN_ALLOCATE_ERROR_RESPONSE       = 0x0113,
-  STUN_SEND_REQUEST = 0x0004,
-  STUN_SEND_RESPONSE = 0x0104,
-  STUN_SEND_ERROR_RESPONSE = 0x0114,
-  STUN_DATA_INDICATION = 0x0115,
-};
-
 // "GTURN"-specific STUN attributes.
 // TODO(?): Rename these attributes to GTURN_ to avoid conflicts.
 enum RelayAttributeType {
@@ -532,13 +518,6 @@ enum RelayAttributeType {
   STUN_ATTR_SOURCE_ADDRESS2 = 0x0012,      // Address
   STUN_ATTR_DATA = 0x0013,                 // ByteString
   STUN_ATTR_OPTIONS = 0x8001,              // UInt32
-};
-
-// A "GTURN" STUN message.
-class RelayMessage : public StunMessage {
- protected:
-  StunAttributeValueType GetAttributeValueType(int type) const override;
-  StunMessage* CreateNew() const override;
 };
 
 // Defined in TURN RFC 5766.

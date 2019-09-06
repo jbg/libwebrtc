@@ -1284,7 +1284,6 @@ std::string TurnPort::ReconstructedServerUrl(bool use_hostname) {
   std::string scheme = "turn";
   std::string transport = "tcp";
   switch (server_address_.proto) {
-    case PROTO_SSLTCP:
     case PROTO_TLS:
       scheme = "turns";
       break;

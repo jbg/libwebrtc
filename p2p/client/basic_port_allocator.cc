@@ -20,7 +20,6 @@
 #include "absl/algorithm/container.h"
 #include "p2p/base/basic_packet_socket_factory.h"
 #include "p2p/base/port.h"
-#include "p2p/base/relay_port.h"
 #include "p2p/base/stun_port.h"
 #include "p2p/base/tcp_port.h"
 #include "p2p/base/turn_port.h"
@@ -50,14 +49,13 @@ const int PHASE_TCP = 2;
 
 const int kNumPhases = 3;
 
-// Gets protocol priority: UDP > TCP > SSLTCP == TLS.
+// Gets protocol priority: UDP > TCP > TLS.
 int GetProtocolPriority(cricket::ProtocolType protocol) {
   switch (protocol) {
     case cricket::PROTO_UDP:
       return 2;
     case cricket::PROTO_TCP:
       return 1;
-    case cricket::PROTO_SSLTCP:
     case cricket::PROTO_TLS:
       return 0;
     default:
@@ -182,36 +180,6 @@ BasicPortAllocator::BasicPortAllocator(rtc::NetworkManager* network_manager,
   RTC_DCHECK(socket_factory_ != NULL);
   SetConfiguration(stun_servers, std::vector<RelayServerConfig>(), 0, false,
                    nullptr);
-  Construct();
-}
-
-BasicPortAllocator::BasicPortAllocator(
-    rtc::NetworkManager* network_manager,
-    const ServerAddresses& stun_servers,
-    const rtc::SocketAddress& relay_address_udp,
-    const rtc::SocketAddress& relay_address_tcp,
-    const rtc::SocketAddress& relay_address_ssl)
-    : network_manager_(network_manager), socket_factory_(NULL) {
-  InitRelayPortFactory(nullptr);
-  RTC_DCHECK(relay_port_factory_ != nullptr);
-  RTC_DCHECK(network_manager_ != nullptr);
-  std::vector<RelayServerConfig> turn_servers;
-  RelayServerConfig config(RELAY_GTURN);
-  if (!relay_address_udp.IsNil()) {
-    config.ports.push_back(ProtocolAddress(relay_address_udp, PROTO_UDP));
-  }
-  if (!relay_address_tcp.IsNil()) {
-    config.ports.push_back(ProtocolAddress(relay_address_tcp, PROTO_TCP));
-  }
-  if (!relay_address_ssl.IsNil()) {
-    config.ports.push_back(ProtocolAddress(relay_address_ssl, PROTO_SSLTCP));
-  }
-
-  if (!config.ports.empty()) {
-    turn_servers.push_back(config);
-  }
-
-  SetConfiguration(stun_servers, turn_servers, 0, false, nullptr);
   Construct();
 }
 
@@ -1519,42 +1487,7 @@ void AllocationSequence::CreateRelayPorts() {
   }
 
   for (RelayServerConfig& relay : config_->relays) {
-    if (relay.type == RELAY_GTURN) {
-      CreateGturnPort(relay);
-    } else if (relay.type == RELAY_TURN) {
-      CreateTurnPort(relay);
-    } else {
-      RTC_NOTREACHED();
-    }
-  }
-}
-
-void AllocationSequence::CreateGturnPort(const RelayServerConfig& config) {
-  // TODO(mallinath) - Rename RelayPort to GTurnPort.
-  std::unique_ptr<RelayPort> port = RelayPort::Create(
-      session_->network_thread(), session_->socket_factory(), network_,
-      session_->allocator()->min_port(), session_->allocator()->max_port(),
-      config_->username, config_->password);
-  if (port) {
-    RelayPort* port_ptr = port.release();
-    // Since RelayPort is not created using shared socket, |port| will not be
-    // added to the dequeue.
-    // Note: We must add the allocated port before we add addresses because
-    //       the latter will create candidates that need name and preference
-    //       settings.  However, we also can't prepare the address (normally
-    //       done by AddAllocatedPort) until we have these addresses.  So we
-    //       wait to do that until below.
-    session_->AddAllocatedPort(port_ptr, this, false);
-
-    // Add the addresses of this protocol.
-    PortList::const_iterator relay_port;
-    for (relay_port = config.ports.begin(); relay_port != config.ports.end();
-         ++relay_port) {
-      port_ptr->AddServerAddress(*relay_port);
-      port_ptr->AddExternalAddress(*relay_port);
-    }
-    // Start fetching an address for this port.
-    port_ptr->PrepareAddress();
+    CreateTurnPort(relay);
   }
 }
 
@@ -1707,7 +1640,7 @@ ServerAddresses PortConfiguration::StunServers() {
     stun_servers.insert(stun_address);
   }
   // Every UDP TURN server should also be used as a STUN server.
-  ServerAddresses turn_servers = GetRelayServerAddresses(RELAY_TURN, PROTO_UDP);
+  ServerAddresses turn_servers = GetRelayServerAddresses(PROTO_UDP);
   for (const rtc::SocketAddress& turn_server : turn_servers) {
     if (stun_servers.find(turn_server) == stun_servers.end()) {
       stun_servers.insert(turn_server);
@@ -1731,21 +1664,11 @@ bool PortConfiguration::SupportsProtocol(const RelayServerConfig& relay,
   return false;
 }
 
-bool PortConfiguration::SupportsProtocol(RelayType turn_type,
-                                         ProtocolType type) const {
-  for (size_t i = 0; i < relays.size(); ++i) {
-    if (relays[i].type == turn_type && SupportsProtocol(relays[i], type))
-      return true;
-  }
-  return false;
-}
-
 ServerAddresses PortConfiguration::GetRelayServerAddresses(
-    RelayType turn_type,
     ProtocolType type) const {
   ServerAddresses servers;
   for (size_t i = 0; i < relays.size(); ++i) {
-    if (relays[i].type == turn_type && SupportsProtocol(relays[i], type)) {
+    if (SupportsProtocol(relays[i], type)) {
       servers.insert(relays[i].ports.front().address);
     }
   }
