@@ -547,11 +547,7 @@ void RelayServer::AcceptConnection(rtc::AsyncSocket* server_socket) {
   if (accepted_socket != NULL) {
     // We had someone trying to connect, now check which protocol to
     // use and create a packet socket.
-    RTC_DCHECK(server_sockets_[server_socket] == cricket::PROTO_TCP ||
-               server_sockets_[server_socket] == cricket::PROTO_SSLTCP);
-    if (server_sockets_[server_socket] == cricket::PROTO_SSLTCP) {
-      accepted_socket = new rtc::AsyncSSLServerSocket(accepted_socket);
-    }
+    RTC_DCHECK(server_sockets_[server_socket] == cricket::PROTO_TCP);
     rtc::AsyncTCPSocket* tcp_socket =
         new rtc::AsyncTCPSocket(accepted_socket, false);
 
