@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b679331c_e67fc2ec",
+        "filename": "rtc_base/event_tracer_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-09-06T03:12:50Z",
+      "side": 1,
+      "message": "For the record, this triggers clang-tidy:\n\nwarning: initializing non-owner \u0027(anonymous namespace)::TestStatistics *const\u0027 with a newly created \u0027gsl::owner\u003c\u003e\u0027 [cppcoreguidelines-owning-memory]",
+      "revId": "b4020b1c90e2d2d32126c6c83dd777a3c440b3ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
