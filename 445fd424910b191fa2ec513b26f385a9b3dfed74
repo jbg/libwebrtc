@@ -52,6 +52,24 @@
       "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7bed7526_1b8f4230",
+        "filename": "rtc_base/event_tracer_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-06T07:46:45Z",
+      "side": 1,
+      "message": "Yes, TestStatistics is non-trivially-destructible due to its CriticalSection member.\n\nThe style guide explains it briefly [https://google.github.io/styleguide/cppguide.html#Static_and_Global_Variables], but the tl;dr is that it\u0027s too hard to reason about when those destructors run relative to everything else, so we risk accessing the globals after they\u0027ve been destroyed.",
+      "parentUuid": "888cd1ac_40425884",
+      "revId": "445fd424910b191fa2ec513b26f385a9b3dfed74",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
