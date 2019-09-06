@@ -16,6 +16,24 @@
       "revId": "b4020b1c90e2d2d32126c6c83dd777a3c440b3ea",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33afd075_f2afc0ba",
+        "filename": "rtc_base/event_tracer_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-06T07:38:13Z",
+      "side": 1,
+      "message": "Interesting. The style guide says\n\n  \"Note that references are not objects, and thus they are not subject to the constraints on destructibility. The constraint on dynamic initialization still applies, though. In particular, a function-local static reference of the form static T\u0026 t \u003d *new T; is allowed.\"\n\nWhich was my other suggestion. So go with that instead...",
+      "parentUuid": "b679331c_e67fc2ec",
+      "revId": "b4020b1c90e2d2d32126c6c83dd777a3c440b3ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
