@@ -12,6 +12,7 @@
 #define API_TRANSPORT_NETWORK_CONTROL_H_
 #include <stdint.h>
 
+#include <cstddef>
 #include <memory>
 
 #include "api/transport/network_types.h"
@@ -110,7 +111,11 @@ class NetworkStateEstimator {
   // Gets the current best estimate according to the estimator.
   virtual absl::optional<NetworkStateEstimate> GetCurrentEstimate() = 0;
   // Called with per packet feedback regarding receive time.
+  // Used when the NetworkStateEstimator runs in the sending endpoint.
   virtual void OnTransportPacketsFeedback(const TransportPacketsFeedback&) = 0;
+  // Called with per packet feedback regarding receive time.
+  // Used when the NetworkStateEstimator runs in the receiving endpoint.
+  virtual void OnReceivedPacket(const PacketResult&) {}
   // Called when the receiving or sending endpoint changes address.
   virtual void OnRouteChange(const NetworkRouteChange&) = 0;
   virtual ~NetworkStateEstimator() = default;
