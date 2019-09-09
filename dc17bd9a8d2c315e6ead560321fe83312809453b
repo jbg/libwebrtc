@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "55b73777_2459dea5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-09-09T15:23:56Z",
+      "side": 1,
+      "message": "This was identified as problem during handellm@\u0027s benchmarking a while back, but it\u0027s probably not a very big issue now that \"the new pacer code path\" is used. Still, I had the code lying around so though I might as well use it. I plan on running some new stress tests with profile anyhow.",
+      "parentUuid": "11370da9_5f794200",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "dc17bd9a8d2c315e6ead560321fe83312809453b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d2b4392_cd55036a",
         "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2abeca81_5aaf5690",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-09-09T15:23:56Z",
+      "side": 1,
+      "message": "They are similar, except that here we return a nullopt instead of a nullptr, but mostly this is a const method and GetStoredPacket() returns a pointer to a mutable object so can\u0027t be called from here...",
+      "parentUuid": "4d2b4392_cd55036a",
+      "range": {
+        "startLine": 257,
+        "startChar": 2,
+        "endLine": 263,
+        "endChar": 34
+      },
+      "revId": "dc17bd9a8d2c315e6ead560321fe83312809453b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53d672b1_e953591a",
         "filename": "modules/rtp_rtcp/source/rtp_packet_history.h",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "dc17bd9a8d2c315e6ead560321fe83312809453b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6363307_ff32426f",
+        "filename": "modules/rtp_rtcp/source/rtp_packet_history.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-09-09T15:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53d672b1_e953591a",
+      "range": {
+        "startLine": 202,
+        "startChar": 47,
+        "endLine": 202,
+        "endChar": 54
+      },
+      "revId": "dc17bd9a8d2c315e6ead560321fe83312809453b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
