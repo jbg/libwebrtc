@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4874308f_47942535",
+        "filename": "test/peer_scenario/scenario_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-09-09T16:52:03Z",
+      "side": 1,
+      "message": "rtp_transport_-\u003eSendRtpPacket takes a mutable pointer.",
+      "parentUuid": "cf23b328_bf102bea",
+      "range": {
+        "startLine": 142,
+        "startChar": 60,
+        "endLine": 142,
+        "endChar": 67
+      },
+      "revId": "f1ce80cca366a46872f189668006bb5d84c93fda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa6aee43_e97cf238",
         "filename": "test/peer_scenario/scenario_connection.cc",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c86d56a2_9259b9b1",
+        "filename": "test/peer_scenario/scenario_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-09-09T16:52:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa6aee43_e97cf238",
+      "range": {
+        "startLine": 156,
+        "startChar": 60,
+        "endLine": 156,
+        "endChar": 67
+      },
+      "revId": "f1ce80cca366a46872f189668006bb5d84c93fda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f70cc93f_3841240e",
         "filename": "test/peer_scenario/scenario_connection.cc",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "f1ce80cca366a46872f189668006bb5d84c93fda",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01b12fe4_6d7ff2a3",
+        "filename": "test/peer_scenario/scenario_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-09-09T16:52:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f70cc93f_3841240e",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 4
+      },
+      "revId": "f1ce80cca366a46872f189668006bb5d84c93fda",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
