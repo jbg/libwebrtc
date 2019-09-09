@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69122bb3_8509f707",
+        "filename": "api/video/video_stream_encoder_settings.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-09T10:44:34Z",
+      "side": 1,
+      "message": "Are empty strings useful here? Otherwise, consider skipping optional and let the empty string mean unset.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e72e0ba_8d7260a7",
+        "filename": "api/video/video_stream_encoder_settings.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-09T10:44:34Z",
+      "side": 1,
+      "message": "Maybe name these two methods differently; it looks a bit strange with an optional config argument, if there\u0027s are no way to set the config and get the same bahavior as when omitting it.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 60
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80dc7f91_7858b3fa",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-09T10:44:34Z",
+      "side": 1,
+      "message": "Would it make sense to also handle the case param set, value unset? Whichwould match any codec where param exists in the mapping.\n\nIt\u0027s a bit unclear to me since I don\u0027t know how the string:string params map is used.",
+      "range": {
+        "startLine": 764,
+        "startChar": 8,
+        "endLine": 764,
+        "endChar": 37
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9703fcf4_ec735143",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-09T10:44:34Z",
+      "side": 1,
+      "message": "Spurious whitespace change.",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 0
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f697a42_378d1205",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-09T10:44:34Z",
+      "side": 1,
+      "message": "I think number of samples to average over (1/alpha) is a clearer tuning nob than the alpha constant.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 54
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "434b33ca_1ea24c55",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-09T10:44:34Z",
+      "side": 1,
+      "message": "The exp-filter is probably good enough, but I don\u0027t quite like its behavior. It gives the very first sample weight one, all others weight 1-alpha. It would be friendlier to use weights 1, 1/2, 1/3, ..., ..., 1/(n-1), 1/n, 1/n, 1/n, where alpha \u003d 1 - 1/n.",
+      "range": {
+        "startLine": 406,
+        "startChar": 23,
+        "endLine": 406,
+        "endChar": 32
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31eed33e_bf8ac664",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-09T10:44:34Z",
+      "side": 1,
+      "message": "Add a comment explaining that we switch only once, and how this flag controls that. So it starts out false, and when set to true, it never changes back.",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 65
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
