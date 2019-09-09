@@ -84,7 +84,7 @@ void RunFilterUpdateTest(int num_blocks_to_process,
   std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
       RenderDelayBuffer::Create(config, kSampleRateHz, kNumChannels));
   AecState aec_state(config);
-  RenderSignalAnalyzer render_signal_analyzer(config);
+  RenderSignalAnalyzer render_signal_analyzer(config, kNumChannels);
   absl::optional<DelayEstimate> delay_estimate;
   std::array<float, kFftLength> s_scratch;
   std::array<float, kBlockSize> s;
@@ -222,7 +222,7 @@ std::string ProduceDebugText(size_t delay, int filter_length_blocks) {
 TEST(MainFilterUpdateGain, NullDataOutputGain) {
   ApmDataDumper data_dumper(42);
   EchoCanceller3Config config;
-  RenderSignalAnalyzer analyzer(config);
+  RenderSignalAnalyzer analyzer(config, 1);
   SubtractorOutput output;
   MainFilterUpdateGain gain(config.filter.main,
                             config.filter.config_change_duration_blocks);
