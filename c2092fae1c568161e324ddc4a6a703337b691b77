@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "246b5a82_a0441414",
+        "filename": "modules/video_coding/video_receiver2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-09T10:36:21Z",
+      "side": 1,
+      "message": "Since we are trying to get away from the VideoCodingModule, maybe we should avoid adding new classes to this namespace?",
+      "range": {
+        "startLine": 22,
+        "startChar": 10,
+        "endLine": 22,
+        "endChar": 13
+      },
+      "revId": "c2092fae1c568161e324ddc4a6a703337b691b77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7759413_c28584e1",
+        "filename": "modules/video_coding/video_receiver2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-09T10:36:21Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 55
+      },
+      "revId": "c2092fae1c568161e324ddc4a6a703337b691b77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6511ac89_04754208",
+        "filename": "modules/video_coding/video_receiver2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-09T10:36:21Z",
+      "side": 1,
+      "message": "I understand that this is just a trimmed down version of VideoReceiver that we aim to eventually remove. Maybe it\u0027s still worth updating the style to have a trailing underscore for this class, WDYT?",
+      "range": {
+        "startLine": 66,
+        "startChar": 13,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "c2092fae1c568161e324ddc4a6a703337b691b77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
