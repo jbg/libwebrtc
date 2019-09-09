@@ -19,6 +19,7 @@
 #include "modules/video_coding/timestamp_map.h"
 #include "modules/video_coding/timing.h"
 #include "rtc_base/critical_section.h"
+#include "rtc_base/event.h"
 #include "rtc_base/thread_checker.h"
 
 namespace webrtc {
@@ -71,6 +72,8 @@ class VCMDecodedFrameCallback : public DecodedImageCallback {
   rtc::CriticalSection lock_;
   VCMTimestampMap _timestampMap RTC_GUARDED_BY(lock_);
   int64_t ntp_offset_;
+  absl::optional<int> extra_decode_time_;
+  rtc::Event slow_down_decoder_;
 };
 
 class VCMGenericDecoder {

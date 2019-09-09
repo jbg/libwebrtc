@@ -13,6 +13,7 @@
 #include <stddef.h>
 
 #include <algorithm>
+#include <string>
 
 #include "api/video/video_timing.h"
 #include "modules/video_coding/include/video_error_codes.h"
@@ -21,6 +22,7 @@
 #include "rtc_base/time_utils.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace webrtc {
 
@@ -29,6 +31,15 @@ VCMDecodedFrameCallback::VCMDecodedFrameCallback(VCMTiming* timing,
     : _clock(clock), _timing(timing), _timestampMap(kDecoderFrameMemoryLength) {
   ntp_offset_ =
       _clock->CurrentNtpInMilliseconds() - _clock->TimeInMilliseconds();
+
+  const std::string group_name =
+      webrtc::field_trial::FindFullName("WebRTC-SlowDownDecoder");
+  int extra_decode_time = 0;
+  if (!group_name.empty() &&
+      sscanf(group_name.c_str(), "%d", &extra_decode_time) == 1 &&
+      extra_decode_time >= 0) {
+    extra_decode_time_ = extra_decode_time;
+  }
 }
 
 VCMDecodedFrameCallback::~VCMDecodedFrameCallback() {}
@@ -64,6 +75,11 @@ int32_t VCMDecodedFrameCallback::Decoded(VideoFrame& decodedImage,
 void VCMDecodedFrameCallback::Decoded(VideoFrame& decodedImage,
                                       absl::optional<int32_t> decode_time_ms,
                                       absl::optional<uint8_t> qp) {
+  // Wait some extra time to simulate a slow decoder.
+  if (extra_decode_time_) {
+    slow_down_decoder_.Wait(*extra_decode_time_);
+  }
+
   RTC_DCHECK(_receiveCallback) << "Callback must not be null at this point";
   TRACE_EVENT_INSTANT1("webrtc", "VCMDecodedFrameCallback::Decoded",
                        "timestamp", decodedImage.timestamp());
