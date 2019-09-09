@@ -46,7 +46,7 @@ TEST(SuppressionGain, NullOutputGains) {
   EXPECT_DEATH(
       SuppressionGain(EchoCanceller3Config{}, DetectOptimization(), 16000)
           .GetGain(E2, S2, R2, N2,
-                   RenderSignalAnalyzer((EchoCanceller3Config{})), aec_state,
+                   RenderSignalAnalyzer((EchoCanceller3Config{}), 1), aec_state,
                    std::vector<std::vector<std::vector<float>>>(
                        3, std::vector<std::vector<float>>(
                               1, std::vector<float>(kBlockSize, 0.f))),
@@ -63,7 +63,7 @@ TEST(SuppressionGain, BasicGainComputation) {
   constexpr size_t kNumBands = NumBandsForRate(kSampleRateHz);
   SuppressionGain suppression_gain(EchoCanceller3Config(), DetectOptimization(),
                                    kSampleRateHz);
-  RenderSignalAnalyzer analyzer(EchoCanceller3Config{});
+  RenderSignalAnalyzer analyzer(EchoCanceller3Config{}, kNumChannels);
   float high_bands_gain;
   std::array<float, kFftLengthBy2Plus1> E2;
   std::array<float, kFftLengthBy2Plus1> S2;
