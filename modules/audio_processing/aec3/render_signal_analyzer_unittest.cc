@@ -23,6 +23,7 @@
 #include "modules/audio_processing/aec3/render_delay_buffer.h"
 #include "modules/audio_processing/test/echo_canceller_test_tools.h"
 #include "rtc_base/random.h"
+#include "rtc_base/strings/string_builder.h"
 #include "test/gtest.h"
 
 namespace webrtc {
@@ -31,33 +32,89 @@ namespace {
 constexpr float kPi = 3.141592f;
 
 void ProduceSinusoid(int sample_rate_hz,
+                     size_t sinusoid_channel,
                      float sinusoidal_frequency_hz,
                      size_t* sample_counter,
                      std::vector<std::vector<std::vector<float>>>* x) {
-  // Produce a sinusoid of the specified frequency.
+  // Fill x with zeros.
+  for (auto& band : *x) {
+    for (auto& channel : band) {
+      std::fill(channel.begin(), channel.end(), 0.f);
+    }
+  }
+  // Produce a sinusoid of the specified frequency in the specified channel.
   for (size_t k = *sample_counter, j = 0; k < (*sample_counter + kBlockSize);
        ++k, ++j) {
-    for (size_t channel = 0; channel < (*x)[0].size(); ++channel) {
-      (*x)[0][channel][j] =
-          32767.f *
-          std::sin(2.f * kPi * sinusoidal_frequency_hz * k / sample_rate_hz);
-    }
+    (*x)[0][sinusoid_channel][j] =
+        32767.f *
+        std::sin(2.f * kPi * sinusoidal_frequency_hz * k / sample_rate_hz);
   }
   *sample_counter = *sample_counter + kBlockSize;
-
-  for (size_t band = 1; band < x->size(); ++band) {
-    for (size_t channel = 0; channel < (*x)[band].size(); ++channel) {
-      std::fill((*x)[band][channel].begin(), (*x)[band][channel].end(), 0.f);
-    }
-  }
 }
 
+void RunNarrowBandDetectionTest(size_t num_channels) {
+  RenderSignalAnalyzer analyzer(EchoCanceller3Config{}, num_channels);
+  Random random_generator(42U);
+  constexpr int kSampleRateHz = 48000;
+  constexpr size_t kNumBands = NumBandsForRate(kSampleRateHz);
+  std::vector<std::vector<std::vector<float>>> x(
+      kNumBands, std::vector<std::vector<float>>(
+                     num_channels, std::vector<float>(kBlockSize, 0.f)));
+  std::array<float, kBlockSize> x_old;
+  Aec3Fft fft;
+  EchoCanceller3Config config;
+  std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
+      RenderDelayBuffer::Create(config, kSampleRateHz, num_channels));
+
+  std::array<float, kFftLengthBy2Plus1> mask;
+  x_old.fill(0.f);
+  constexpr int kSinusFrequencyBin = 32;
+
+  auto generate_sinusoid_test = [&](bool known_delay) {
+    size_t sample_counter = 0;
+    for (size_t k = 0; k < 100; ++k) {
+      ProduceSinusoid(16000, num_channels - 1,
+                      16000 / 2 * kSinusFrequencyBin / kFftLengthBy2,
+                      &sample_counter, &x);
+
+      render_delay_buffer->Insert(x);
+      if (k == 0) {
+        render_delay_buffer->Reset();
+      }
+      render_delay_buffer->PrepareCaptureProcessing();
+
+      analyzer.Update(*render_delay_buffer->GetRenderBuffer(),
+                      known_delay ? absl::optional<size_t>(0) : absl::nullopt);
+    }
+  };
+
+  generate_sinusoid_test(true);
+  mask.fill(1.f);
+  analyzer.MaskRegionsAroundNarrowBands(&mask);
+  for (int k = 0; k < static_cast<int>(mask.size()); ++k) {
+    EXPECT_EQ(abs(k - kSinusFrequencyBin) <= 2 ? 0.f : 1.f, mask[k]);
+  }
+  EXPECT_TRUE(analyzer.PoorSignalExcitation());
+
+  // Verify that no bands are detected as narrow when the delay is unknown.
+  generate_sinusoid_test(false);
+  mask.fill(1.f);
+  analyzer.MaskRegionsAroundNarrowBands(&mask);
+  std::for_each(mask.begin(), mask.end(), [](float a) { EXPECT_EQ(1.f, a); });
+  EXPECT_FALSE(analyzer.PoorSignalExcitation());
+}
+
+std::string ProduceDebugText(size_t num_channels) {
+  rtc::StringBuilder ss;
+  ss << "number of channels: " << num_channels;
+  return ss.Release();
+}
 }  // namespace
 
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
 // Verifies that the check for non-null output parameter works.
 TEST(RenderSignalAnalyzer, NullMaskOutput) {
-  RenderSignalAnalyzer analyzer(EchoCanceller3Config{});
+  RenderSignalAnalyzer analyzer(EchoCanceller3Config{}, 1);
   EXPECT_DEATH(analyzer.MaskRegionsAroundNarrowBands(nullptr), "");
 }
 
@@ -65,7 +122,7 @@ TEST(RenderSignalAnalyzer, NullMaskOutput) {
 
 // Verify that no narrow bands are detected in a Gaussian noise signal.
 TEST(RenderSignalAnalyzer, NoFalseDetectionOfNarrowBands) {
-  RenderSignalAnalyzer analyzer(EchoCanceller3Config{});
+  RenderSignalAnalyzer analyzer(EchoCanceller3Config{}, 1);
   Random random_generator(42U);
   std::vector<std::vector<std::vector<float>>> x(
       3,
@@ -98,55 +155,9 @@ TEST(RenderSignalAnalyzer, NoFalseDetectionOfNarrowBands) {
 
 // Verify that a sinusiod signal is detected as narrow bands.
 TEST(RenderSignalAnalyzer, NarrowBandDetection) {
-  RenderSignalAnalyzer analyzer(EchoCanceller3Config{});
-  Random random_generator(42U);
-  constexpr size_t kNumChannels = 1;
-  constexpr int kSampleRateHz = 48000;
-  constexpr size_t kNumBands = NumBandsForRate(kSampleRateHz);
-  std::vector<std::vector<std::vector<float>>> x(
-      kNumBands, std::vector<std::vector<float>>(
-                     kNumChannels, std::vector<float>(kBlockSize, 0.f)));
-  std::array<float, kBlockSize> x_old;
-  Aec3Fft fft;
-  EchoCanceller3Config config;
-  std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
-      RenderDelayBuffer::Create(config, kSampleRateHz, kNumChannels));
-
-  std::array<float, kFftLengthBy2Plus1> mask;
-  x_old.fill(0.f);
-  constexpr int kSinusFrequencyBin = 32;
-
-  auto generate_sinusoid_test = [&](bool known_delay) {
-    size_t sample_counter = 0;
-    for (size_t k = 0; k < 100; ++k) {
-      ProduceSinusoid(16000, 16000 / 2 * kSinusFrequencyBin / kFftLengthBy2,
-                      &sample_counter, &x);
-
-      render_delay_buffer->Insert(x);
-      if (k == 0) {
-        render_delay_buffer->Reset();
-      }
-      render_delay_buffer->PrepareCaptureProcessing();
-
-      analyzer.Update(*render_delay_buffer->GetRenderBuffer(),
-                      known_delay ? absl::optional<size_t>(0) : absl::nullopt);
-    }
-  };
-
-  generate_sinusoid_test(true);
-  mask.fill(1.f);
-  analyzer.MaskRegionsAroundNarrowBands(&mask);
-  for (int k = 0; k < static_cast<int>(mask.size()); ++k) {
-    EXPECT_EQ(abs(k - kSinusFrequencyBin) <= 2 ? 0.f : 1.f, mask[k]);
+  for (auto num_channels : {1, 2, 8}) {
+    SCOPED_TRACE(ProduceDebugText(num_channels));
+    RunNarrowBandDetectionTest(num_channels);
   }
-  EXPECT_TRUE(analyzer.PoorSignalExcitation());
-
-  // Verify that no bands are detected as narrow when the delay is unknown.
-  generate_sinusoid_test(false);
-  mask.fill(1.f);
-  analyzer.MaskRegionsAroundNarrowBands(&mask);
-  std::for_each(mask.begin(), mask.end(), [](float a) { EXPECT_EQ(1.f, a); });
-  EXPECT_FALSE(analyzer.PoorSignalExcitation());
 }
-
 }  // namespace webrtc
