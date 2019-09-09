@@ -258,17 +258,9 @@ int32_t VideoReceiver::Decode(uint16_t maxWaitTimeMs) {
                      << " decodable video frame";
   }
 
-  const int32_t ret = Decode(*frame);
+  const int32_t ret = Decode(frame);
   _receiver.ReleaseFrame(frame);
   return ret;
-}
-
-// Used for the new jitter buffer.
-// TODO(philipel): Clean up among the Decode functions as we replace
-//                 VCMEncodedFrame with FrameObject.
-int32_t VideoReceiver::Decode(const webrtc::VCMEncodedFrame* frame) {
-  RTC_DCHECK_RUN_ON(&decoder_thread_checker_);
-  return Decode(*frame);
 }
 
 int32_t VideoReceiver::RequestKeyFrame() {
@@ -293,16 +285,16 @@ int32_t VideoReceiver::RequestKeyFrame() {
 }
 
 // Must be called from inside the receive side critical section.
-int32_t VideoReceiver::Decode(const VCMEncodedFrame& frame) {
+int32_t VideoReceiver::Decode(const VCMEncodedFrame* frame) {
   RTC_DCHECK_RUN_ON(&decoder_thread_checker_);
   TRACE_EVENT0("webrtc", "VideoReceiver::Decode");
   // Change decoder if payload type has changed
   VCMGenericDecoder* decoder =
-      _codecDataBase.GetDecoder(frame, &_decodedFrameCallback);
+      _codecDataBase.GetDecoder(*frame, &_decodedFrameCallback);
   if (decoder == nullptr) {
     return VCM_NO_CODEC_REGISTERED;
   }
-  return decoder->Decode(frame, clock_->TimeInMilliseconds());
+  return decoder->Decode(*frame, clock_->TimeInMilliseconds());
 }
 
 // Register possible receive codecs, can be called multiple times

@@ -95,7 +95,6 @@ class VideoReceiver : public Module {
   void DecoderThreadStopped();
 
  protected:
-  int32_t Decode(const webrtc::VCMEncodedFrame& frame);
   int32_t RequestKeyFrame();
 
  private:
