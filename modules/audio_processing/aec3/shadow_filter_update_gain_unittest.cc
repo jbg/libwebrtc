@@ -65,7 +65,7 @@ void RunFilterUpdateTest(int num_blocks_to_process,
                                       std::vector<float>(kBlockSize, 0.f)));
   std::array<float, kBlockSize> y;
   AecState aec_state(config);
-  RenderSignalAnalyzer render_signal_analyzer(config);
+  RenderSignalAnalyzer render_signal_analyzer(config, num_render_channels);
   std::array<float, kFftLength> s;
   FftData S;
   FftData G;
@@ -142,7 +142,7 @@ std::string ProduceDebugText(size_t delay, int filter_length_blocks) {
 TEST(ShadowFilterUpdateGain, NullDataOutputGain) {
   ApmDataDumper data_dumper(42);
   FftBuffer fft_buffer(1, 1);
-  RenderSignalAnalyzer analyzer(EchoCanceller3Config{});
+  RenderSignalAnalyzer analyzer(EchoCanceller3Config{}, 1);
   FftData E;
   const EchoCanceller3Config::Filter::ShadowConfiguration& config = {
       12, 0.5f, 220075344.f};
