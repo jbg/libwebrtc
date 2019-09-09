@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1417461_962c0249",
+        "filename": "modules/video_coding/generic_decoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-09-09T16:11:13Z",
+      "side": 1,
+      "message": "Consider using FielTrialParser instead, if you parse the sleep time using a FieldTrialParameter\u003cTimeDelta\u003e then the user can even specify units explicitly",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "44c5168a778b6aa925db3f66b6dab6881341317e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0385dcf6_2ede8de1",
+        "filename": "modules/video_coding/generic_decoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-09-09T16:11:13Z",
+      "side": 1,
+      "message": "Maybe you can use rtc::Thread::SleepMs() in order to avoid having this member?",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 27
+      },
+      "revId": "44c5168a778b6aa925db3f66b6dab6881341317e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
