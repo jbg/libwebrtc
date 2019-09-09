@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7872e7a9_0ec2b32f",
+        "filename": "modules/video_coding/video_coding_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-09T10:59:06Z",
+      "side": 0,
+      "message": "This is somewhat unrelated, should it be taken out of the cl? I\u0027d like to generally trim down includes of headers corresponding to legacy code.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "81a08a7feb7c8752ac95e1a19e6766019127d92a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
