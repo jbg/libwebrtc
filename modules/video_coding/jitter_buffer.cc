@@ -370,7 +370,7 @@ VCMFrameBufferEnum VCMJitterBuffer::InsertPacket(const VCMPacket& packet,
 
   ++num_packets_;
   // Does this packet belong to an old frame?
-  if (last_decoded_state_.IsOldPacket(&packet)) {
+  if (last_decoded_state_.IsOldPacket(packet.timestamp)) {
     // Account only for media packets.
     if (packet.sizeBytes > 0) {
       num_consecutive_old_packets_++;
@@ -378,7 +378,7 @@ VCMFrameBufferEnum VCMJitterBuffer::InsertPacket(const VCMPacket& packet,
     // Update last decoded sequence number if the packet arrived late and
     // belongs to a frame with a timestamp equal to the last decoded
     // timestamp.
-    last_decoded_state_.UpdateOldPacket(&packet);
+    last_decoded_state_.UpdateOldPacket(packet.timestamp, packet.seqNum);
     DropPacketsFromNackList(last_decoded_state_.sequence_num());
 
     // Also see if this old packet made more incomplete frames continuous.

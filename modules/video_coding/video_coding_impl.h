@@ -17,7 +17,6 @@
 
 #include "absl/types/optional.h"
 #include "modules/video_coding/decoder_database.h"
-#include "modules/video_coding/frame_buffer.h"
 #include "modules/video_coding/generic_decoder.h"
 #include "modules/video_coding/include/video_coding.h"
 #include "modules/video_coding/jitter_buffer.h"

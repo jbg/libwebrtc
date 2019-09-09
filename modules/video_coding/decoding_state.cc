@@ -61,11 +61,10 @@ bool VCMDecodingState::IsOldFrame(const VCMFrameBuffer* frame) const {
   return !IsNewerTimestamp(frame->Timestamp(), time_stamp_);
 }
 
-bool VCMDecodingState::IsOldPacket(const VCMPacket* packet) const {
-  assert(packet != NULL);
+bool VCMDecodingState::IsOldPacket(uint32_t timestamp) const {
   if (in_initial_state_)
     return false;
-  return !IsNewerTimestamp(packet->timestamp, time_stamp_);
+  return !IsNewerTimestamp(timestamp, time_stamp_);
 }
 
 void VCMDecodingState::SetState(const VCMFrameBuffer* frame) {
@@ -149,12 +148,12 @@ bool VCMDecodingState::UpdateEmptyFrame(const VCMFrameBuffer* frame) {
   return false;
 }
 
-void VCMDecodingState::UpdateOldPacket(const VCMPacket* packet) {
-  assert(packet != NULL);
-  if (packet->timestamp == time_stamp_) {
+void VCMDecodingState::UpdateOldPacket(uint32_t timestamp,
+                                       uint16_t sequence_number) {
+  if (timestamp == time_stamp_) {
     // Late packet belonging to the last decoded frame - make sure we update the
     // last decoded sequence number.
-    sequence_num_ = LatestSequenceNumber(packet->seqNum, sequence_num_);
+    sequence_num_ = LatestSequenceNumber(sequence_number, sequence_num_);
   }
 }
 

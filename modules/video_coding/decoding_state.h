@@ -20,7 +20,6 @@ namespace webrtc {
 // Forward declarations
 struct NaluInfo;
 class VCMFrameBuffer;
-class VCMPacket;
 
 class VCMDecodingState {
  public:
@@ -34,7 +33,7 @@ class VCMDecodingState {
   // Check for old frame
   bool IsOldFrame(const VCMFrameBuffer* frame) const;
   // Check for old packet
-  bool IsOldPacket(const VCMPacket* packet) const;
+  bool IsOldPacket(uint32_t timestamp) const;
   // Check for frame continuity based on current decoded state. Use best method
   // possible, i.e. temporal info, picture ID or sequence number.
   bool ContinuousFrame(const VCMFrameBuffer* frame) const;
@@ -44,7 +43,7 @@ class VCMDecodingState {
   // Update the sequence number if the timestamp matches current state and the
   // sequence number is higher than the current one. This accounts for packets
   // arriving late.
-  void UpdateOldPacket(const VCMPacket* packet);
+  void UpdateOldPacket(uint32_t timestamp, uint16_t sequence_number);
   void SetSeqNum(uint16_t new_seq_num);
   void Reset();
   uint32_t time_stamp() const;

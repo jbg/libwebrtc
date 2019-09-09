@@ -181,21 +181,21 @@ TEST(TestDecodingState, UpdateOldPacket) {
   // Insert an empty packet that does not belong to the same frame.
   // => Sequence num should be the same.
   packet.timestamp = 2;
-  dec_state.UpdateOldPacket(&packet);
+  dec_state.UpdateOldPacket(packet.timestamp, packet.seqNum);
   EXPECT_EQ(dec_state.sequence_num(), 1);
   // Now insert empty packet belonging to the same frame.
   packet.timestamp = 1;
   packet.seqNum = 2;
   packet.video_header.frame_type = VideoFrameType::kEmptyFrame;
   packet.sizeBytes = 0;
-  dec_state.UpdateOldPacket(&packet);
+  dec_state.UpdateOldPacket(packet.timestamp, packet.seqNum);
   EXPECT_EQ(dec_state.sequence_num(), 2);
   // Now insert delta packet belonging to the same frame.
   packet.timestamp = 1;
   packet.seqNum = 3;
   packet.video_header.frame_type = VideoFrameType::kVideoFrameDelta;
   packet.sizeBytes = 1400;
-  dec_state.UpdateOldPacket(&packet);
+  dec_state.UpdateOldPacket(packet.timestamp, packet.seqNum);
   EXPECT_EQ(dec_state.sequence_num(), 3);
   // Insert a packet belonging to an older timestamp - should not update the
   // sequence number.
@@ -203,7 +203,7 @@ TEST(TestDecodingState, UpdateOldPacket) {
   packet.seqNum = 4;
   packet.video_header.frame_type = VideoFrameType::kEmptyFrame;
   packet.sizeBytes = 0;
-  dec_state.UpdateOldPacket(&packet);
+  dec_state.UpdateOldPacket(packet.timestamp, packet.seqNum);
   EXPECT_EQ(dec_state.sequence_num(), 3);
 }
 
@@ -415,7 +415,7 @@ TEST(TestDecodingState, OldInput) {
   EXPECT_LE(0, frame.InsertPacket(packet, 0, frame_data));
   dec_state.SetState(&frame);
   packet.timestamp = 9;
-  EXPECT_TRUE(dec_state.IsOldPacket(&packet));
+  EXPECT_TRUE(dec_state.IsOldPacket(packet.timestamp));
   // Check for old frame
   frame.Reset();
   frame.InsertPacket(packet, 0, frame_data);
