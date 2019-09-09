@@ -27,7 +27,8 @@ namespace webrtc {
 // Provides functionality for analyzing the properties of the render signal.
 class RenderSignalAnalyzer {
  public:
-  explicit RenderSignalAnalyzer(const EchoCanceller3Config& config);
+  explicit RenderSignalAnalyzer(const EchoCanceller3Config& config,
+                                size_t num_channels);
   ~RenderSignalAnalyzer();
 
   // Updates the render signal analysis with the most recent render signal.
@@ -35,12 +36,7 @@ class RenderSignalAnalyzer {
               const absl::optional<size_t>& delay_partitions);
 
   // Returns true if the render signal is poorly exciting.
-  bool PoorSignalExcitation() const {
-    RTC_DCHECK_LT(2, narrow_band_counters_.size());
-    return std::any_of(narrow_band_counters_.begin(),
-                       narrow_band_counters_.end(),
-                       [](size_t a) { return a > 10; });
-  }
+  bool PoorSignalExcitation() const;
 
   // Zeros the array around regions with narrow bands signal characteristics.
   void MaskRegionsAroundNarrowBands(
@@ -50,7 +46,7 @@ class RenderSignalAnalyzer {
 
  private:
   const int strong_peak_freeze_duration_;
-  std::array<size_t, kFftLengthBy2 - 1> narrow_band_counters_;
+  std::vector<std::array<size_t, kFftLengthBy2 - 1>> narrow_band_counters_;
   absl::optional<int> narrow_peak_band_;
   size_t narrow_peak_counter_;
 
