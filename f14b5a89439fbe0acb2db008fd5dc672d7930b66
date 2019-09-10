@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "fdbbe51b_45599f9d",
+        "filename": "api/video/video_stream_encoder_settings.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-10T11:29:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1aea3036_fc8af980",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e72e0ba_8d7260a7",
         "filename": "api/video/video_stream_encoder_settings.h",
         "patchSetId": 5
@@ -234,6 +258,30 @@
       "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4987d8ee_35afa208",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-10T11:29:16Z",
+      "side": 1,
+      "message": "I\u0027d prefer number of samples, parameter possibly named \"window\". In particular if we\u0027re considering replacing ExpFilter with something slightly different; the concept of a window size for averaging is less dependent on the details on how the averaging is done. But I won\u0027t insist.",
+      "parentUuid": "571e0d40_2fabfbbd",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 54
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
