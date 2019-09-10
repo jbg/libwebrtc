@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d743ff1f_b576b54c",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2019-09-10T07:06:26Z",
+      "side": 1,
+      "message": "Why did you remove the has_value()?",
+      "range": {
+        "startLine": 694,
+        "startChar": 30,
+        "endLine": 694,
+        "endChar": 61
+      },
+      "revId": "82bc805b0d340a2651e1d5d255aa303b87053698",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
