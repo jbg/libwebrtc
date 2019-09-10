@@ -285,6 +285,30 @@
     },
     {
       "key": {
+        "uuid": "b3648769_2e076460",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-10T13:22:50Z",
+      "side": 1,
+      "message": "Updated to use \"window\" instead.",
+      "parentUuid": "4987d8ee_35afa208",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 54
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "434b33ca_1ea24c55",
         "filename": "video/video_stream_encoder.h",
         "patchSetId": 5
