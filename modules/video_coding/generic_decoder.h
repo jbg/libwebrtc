@@ -13,6 +13,7 @@
 
 #include <memory>
 
+#include "absl/types/optional.h"
 #include "modules/include/module_common_types.h"
 #include "modules/video_coding/encoded_frame.h"
 #include "modules/video_coding/include/video_codec_interface.h"
@@ -71,6 +72,8 @@ class VCMDecodedFrameCallback : public DecodedImageCallback {
   rtc::CriticalSection lock_;
   VCMTimestampMap _timestampMap RTC_GUARDED_BY(lock_);
   int64_t ntp_offset_;
+  // Set by the field trial WebRTC-SlowDownDecoder to simulate a slow decoder.
+  absl::optional<int> extra_decode_time_ms_;
 };
 
 class VCMGenericDecoder {
