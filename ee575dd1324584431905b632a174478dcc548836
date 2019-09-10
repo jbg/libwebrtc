@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "051fe402_1e6ad016",
+        "filename": "p2p/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-10T09:40:17Z",
+      "side": 1,
+      "message": "Can this be dropped now, or what is blocking it?",
+      "range": {
+        "startLine": 101,
+        "startChar": 1,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "ee575dd1324584431905b632a174478dcc548836",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
