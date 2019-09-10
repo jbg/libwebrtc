@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1aea3036_fc8af980",
+        "filename": "api/video/video_stream_encoder_settings.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-10T11:10:24Z",
+      "side": 1,
+      "message": "I think using an optional shows that the value is truly optional in a more explicit way, I prefer to keep it.",
+      "parentUuid": "69122bb3_8509f707",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e72e0ba_8d7260a7",
         "filename": "api/video/video_stream_encoder_settings.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f698f50_079be6e0",
+        "filename": "api/video/video_stream_encoder_settings.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-10T11:10:24Z",
+      "side": 1,
+      "message": "Done, also added comments.",
+      "parentUuid": "8e72e0ba_8d7260a7",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 60
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e84dff3c_c5c207c5",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-10T11:10:24Z",
+      "side": 1,
+      "message": "I think all elements in param is KV, but I guess it could be used as a set in some ways (don\u0027t know for sure). Updated to allow for the value to be unset.",
+      "parentUuid": "80dc7f91_7858b3fa",
+      "range": {
+        "startLine": 764,
+        "startChar": 8,
+        "endLine": 764,
+        "endChar": 37
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9703fcf4_ec735143",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 5
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "dcaeca6f_944002a2",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-10T11:10:24Z",
+      "side": 1,
+      "message": "Oops, done.",
+      "parentUuid": "9703fcf4_ec735143",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 0
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f697a42_378d1205",
         "filename": "video/video_stream_encoder.h",
         "patchSetId": 5
@@ -105,6 +201,30 @@
       "writtenOn": "2019-09-09T10:44:34Z",
       "side": 1,
       "message": "I think number of samples to average over (1/alpha) is a clearer tuning nob than the alpha constant.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 54
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "571e0d40_2fabfbbd",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-10T11:10:24Z",
+      "side": 1,
+      "message": "I think it\u0027s easier to keep the knob consistent with the knob (API) of the ExpFilter. Less confusion about what is going on, or WDYT?",
+      "parentUuid": "5f697a42_378d1205",
       "range": {
         "startLine": 398,
         "startChar": 0,
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "bb8eaae5_8150d8f2",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-10T11:10:24Z",
+      "side": 1,
+      "message": "I agree, but that is for another CL.",
+      "parentUuid": "434b33ca_1ea24c55",
+      "range": {
+        "startLine": 406,
+        "startChar": 23,
+        "endLine": 406,
+        "endChar": 32
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31eed33e_bf8ac664",
         "filename": "video/video_stream_encoder.h",
         "patchSetId": 5
@@ -160,6 +304,30 @@
       "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a936cccd_2bd420ad",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-10T11:10:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31eed33e_bf8ac664",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 65
+      },
+      "revId": "f14b5a89439fbe0acb2db008fd5dc672d7930b66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
