@@ -518,10 +518,20 @@ VideoStreamEncoder::VideoStreamEncoder(
       next_frame_id_(0),
       encoder_queue_(task_queue_factory->CreateTaskQueue(
           "EncoderQueue",
-          TaskQueueFactory::Priority::NORMAL)) {
+          TaskQueueFactory::Priority::NORMAL)),
+      network_encoder_switch_field_trial_(
+          ParseNetworkConditionEncoderSwitchFieldTrial()),
+      encoder_switch_requested_(false) {
   RTC_DCHECK(encoder_stats_observer);
   RTC_DCHECK(overuse_detector_);
   RTC_DCHECK_GE(number_of_cores, 1);
+
+  if (network_encoder_switch_field_trial_ &&
+      network_encoder_switch_field_trial_->bitrate &&
+      network_encoder_switch_field_trial_->alpha) {
+    target_bitrate_filter_ = absl::make_unique<rtc::ExpFilter>(
+        *network_encoder_switch_field_trial_->alpha);
+  }
 
   for (auto& state : encoder_buffer_state_)
     state.fill(std::numeric_limits<int64_t>::max());
@@ -712,6 +722,22 @@ GetEncoderBitrateLimits(const VideoEncoder::EncoderInfo& encoder_info,
 // "soft" reconfiguration.
 void VideoStreamEncoder::ReconfigureEncoder() {
   RTC_DCHECK(pending_encoder_reconfiguration_);
+
+  if (network_encoder_switch_field_trial_ &&
+      network_encoder_switch_field_trial_->pixels &&
+      settings_.encoder_switch_request_callback && !encoder_switch_requested_) {
+    if (last_frame_info_->width * last_frame_info_->height <=
+        *network_encoder_switch_field_trial_->pixels) {
+      EncoderSwitchRequestCallback::Config conf;
+      conf.codec_name = *network_encoder_switch_field_trial_->codec;
+      conf.param = network_encoder_switch_field_trial_->param.GetOptional();
+      conf.value = network_encoder_switch_field_trial_->value.GetOptional();
+      settings_.encoder_switch_request_callback->RequestEncoderSwitch(conf);
+
+      encoder_switch_requested_ = true;
+    }
+  }
+
   std::vector<VideoStream> streams =
       encoder_config_.video_stream_factory->CreateEncoderStreams(
           last_frame_info_->width, last_frame_info_->height, encoder_config_);
@@ -1465,9 +1491,9 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
     if (encode_status == WEBRTC_VIDEO_CODEC_ENCODER_FAILURE) {
       RTC_LOG(LS_ERROR) << "Encoder failed, failing encoder format: "
                         << encoder_config_.video_format.ToString();
-      if (settings_.encoder_failure_callback) {
+      if (settings_.encoder_switch_request_callback) {
         encoder_failed_ = true;
-        settings_.encoder_failure_callback->OnEncoderFailure();
+        settings_.encoder_switch_request_callback->RequestEncoderFallback();
       } else {
         RTC_LOG(LS_ERROR)
             << "Encoder failed but no encoder fallback callback is registered";
@@ -1700,6 +1726,23 @@ void VideoStreamEncoder::OnBitrateUpdated(DataRate target_bitrate,
     return;
   }
   RTC_DCHECK_RUN_ON(&encoder_queue_);
+
+  if (target_bitrate_filter_ && settings_.encoder_switch_request_callback &&
+      !encoder_switch_requested_) {
+    DataRate rate = DataRate::kbps(
+        target_bitrate_filter_->Apply(1.0, target_bitrate.kbps()));
+
+    if (rate < *network_encoder_switch_field_trial_->bitrate) {
+      EncoderSwitchRequestCallback::Config conf;
+      conf.codec_name = *network_encoder_switch_field_trial_->codec;
+      conf.param = network_encoder_switch_field_trial_->param.GetOptional();
+      conf.value = network_encoder_switch_field_trial_->value.GetOptional();
+      settings_.encoder_switch_request_callback->RequestEncoderSwitch(conf);
+
+      encoder_switch_requested_ = true;
+    }
+  }
+
   RTC_DCHECK(sink_) << "sink_ must be set before the encoder is active.";
 
   RTC_LOG(LS_VERBOSE) << "OnBitrateUpdated, bitrate " << target_bitrate.bps()
@@ -2208,6 +2251,21 @@ std::string VideoStreamEncoder::AdaptCounter::ToString(
     ss << (reason ? " cpu" : "quality") << ":" << counters[reason];
   }
   return ss.Release();
+}
+
+absl::optional<VideoStreamEncoder::NetworkConditionEncoderSwitchInfo>
+VideoStreamEncoder::ParseNetworkConditionEncoderSwitchFieldTrial() const {
+  NetworkConditionEncoderSwitchInfo info;
+  webrtc::ParseFieldTrial({&info.codec, &info.param, &info.value, &info.bitrate,
+                           &info.pixels, &info.alpha},
+                          webrtc::field_trial::FindFullName(
+                              "WebRTC-NetworkCondition-EncoderSwitch"));
+
+  if (info.codec && (info.pixels || (info.bitrate && info.alpha))) {
+    return info;
+  }
+
+  return absl::nullopt;
 }
 
 }  // namespace webrtc
