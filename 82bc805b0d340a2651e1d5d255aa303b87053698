@@ -22,6 +22,30 @@
       "revId": "82bc805b0d340a2651e1d5d255aa303b87053698",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "842e2701_d2e0127f",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-09-10T07:52:01Z",
+      "side": 1,
+      "message": "By default absl::optional will act as has_value if used as bool. So I used same structure as in \"if\".",
+      "parentUuid": "d743ff1f_b576b54c",
+      "range": {
+        "startLine": 694,
+        "startChar": 30,
+        "endLine": 694,
+        "endChar": 61
+      },
+      "revId": "82bc805b0d340a2651e1d5d255aa303b87053698",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
