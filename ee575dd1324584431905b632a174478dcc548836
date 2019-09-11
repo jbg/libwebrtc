@@ -22,6 +22,30 @@
       "revId": "ee575dd1324584431905b632a174478dcc548836",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "948092ff_32f34ef5",
+        "filename": "p2p/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-11T06:42:04Z",
+      "side": 1,
+      "message": "This target still includes some headers from libjingle_peerconnection_api:\n\n#include \"api/candidate.h\"\n#include \"api/crypto/crypto_options.h\"\n#include \"api/dtls_transport_interface.h\"\n#include \"api/turn_customizer.h\"",
+      "parentUuid": "051fe402_1e6ad016",
+      "range": {
+        "startLine": 101,
+        "startChar": 1,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "ee575dd1324584431905b632a174478dcc548836",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
