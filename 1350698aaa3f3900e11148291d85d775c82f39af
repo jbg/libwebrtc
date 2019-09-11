@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5b1a5f6_3a538daf",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "Change to loop over render_buffer.Block(0)[0].size() instead.",
+      "range": {
+        "startLine": 42,
+        "startChar": 37,
+        "endLine": 42,
+        "endChar": 57
+      },
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "362d0d03_42b80a0c",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "I think you should set this to a vector\u0026 instead\nI.e.\nstd::vector\u003csize_t\u003e\u0026 counters \u003d (*narrow_band_counters)[channel];\n\nWe don\u0027t gain anything by abstracting this as an arrayview and I think the code is easier to read when the underlying datatype is known.",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 18
+      },
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54349d6b_058057c2",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "Why is this moved here? narrow_peak_band is only used at lines ~101+",
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "053936d0_a63e0742",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "I think will likely work, but I think it would be preferable to check for the strongest peak in all channels. With this construct, any peaks in the channel with the highest index will overwrite peaks found in the other channels.\n\nThe idea is to identify the band that has the most dominant peak present in any of the channnels.",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 16
+      },
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e283b57d_f7a1d1aa",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "As below",
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86a7c120_5b5bb63d",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "I think it is sufficient to have one counter for all channels. The effect will anyway be kind of a worst-case masking on the largest counters, and I have a feeling that that effect should be achievable with only one counter array for all channels.\n\nWDYT?",
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bfc716a_ac8ec38a",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "Remove explicit",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 10
+      },
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6963480f_6877d748",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to scale this over the number of channels. \nLet\u0027s keep it as one counter for all channels.",
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "493a7403_e6ab478f",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "Please change the name according to the changes in what it does. Something along ProduceSinusoidInNoise.",
+      "range": {
+        "startLine": 34,
+        "startChar": 5,
+        "endLine": 34,
+        "endChar": 20
+      },
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66350ab3_9a241405",
+        "filename": "modules/audio_processing/test/echo_canceller_test_tools.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-11T10:26:05Z",
+      "side": 1,
+      "message": "I like this change but I would suggest that you avoid using a default value for the amplitude as I think they reduce the readability.\n\nI instead suggest\na) Make the amplitude parameter non-default (mandatory) and add changes to all the using code.\nb) Make two method definitions, one with and without the amplitude, with an implementation where one calls the other.",
+      "range": {
+        "startLine": 23,
+        "startChar": 27,
+        "endLine": 23,
+        "endChar": 29
+      },
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
