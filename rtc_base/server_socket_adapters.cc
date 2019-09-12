@@ -22,39 +22,6 @@ AsyncProxyServerSocket::AsyncProxyServerSocket(AsyncSocket* socket,
 
 AsyncProxyServerSocket::~AsyncProxyServerSocket() = default;
 
-AsyncSSLServerSocket::AsyncSSLServerSocket(AsyncSocket* socket)
-    : BufferedReadAdapter(socket, 1024) {
-  BufferInput(true);
-}
-
-void AsyncSSLServerSocket::ProcessInput(char* data, size_t* len) {
-  // We only accept client hello messages.
-  const ArrayView<const uint8_t> client_hello =
-      AsyncSSLSocket::SslClientHello();
-  if (*len < client_hello.size()) {
-    return;
-  }
-
-  if (memcmp(client_hello.data(), data, client_hello.size()) != 0) {
-    Close();
-    SignalCloseEvent(this, 0);
-    return;
-  }
-
-  *len -= client_hello.size();
-
-  // Clients should not send more data until the handshake is completed.
-  RTC_DCHECK(*len == 0);
-
-  const ArrayView<const uint8_t> server_hello =
-      AsyncSSLSocket::SslServerHello();
-  // Send a server hello back to the client.
-  DirectSend(server_hello.data(), server_hello.size());
-
-  // Handshake completed for us, redirect input to our parent.
-  BufferInput(false);
-}
-
 AsyncSocksProxyServerSocket::AsyncSocksProxyServerSocket(AsyncSocket* socket)
     : AsyncProxyServerSocket(socket, kBufferSize), state_(SS_HELLO) {
   BufferInput(true);

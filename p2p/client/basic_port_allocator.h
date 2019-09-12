@@ -42,8 +42,7 @@ class RTC_EXPORT BasicPortAllocator : public PortAllocator {
   BasicPortAllocator(rtc::NetworkManager* network_manager,
                      const ServerAddresses& stun_servers,
                      const rtc::SocketAddress& relay_address_udp,
-                     const rtc::SocketAddress& relay_address_tcp,
-                     const rtc::SocketAddress& relay_address_ssl);
+                     const rtc::SocketAddress& relay_address_tcp);
   ~BasicPortAllocator() override;
 
   // Set to kDefaultNetworkIgnoreMask by default.

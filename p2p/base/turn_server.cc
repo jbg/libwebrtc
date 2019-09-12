@@ -601,7 +601,7 @@ bool TurnServerConnection::operator<(const TurnServerConnection& c) const {
 }
 
 std::string TurnServerConnection::ToString() const {
-  const char* const kProtos[] = {"unknown", "udp", "tcp", "ssltcp"};
+  const char* const kProtos[] = {"unknown", "udp", "tcp"};
   rtc::StringBuilder ost;
   ost << src_.ToString() << "-" << dst_.ToString() << ":" << kProtos[proto_];
   return ost.Release();
