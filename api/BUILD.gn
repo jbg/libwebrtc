@@ -107,10 +107,6 @@ rtc_static_library("libjingle_peerconnection_api") {
     "candidate.cc",
     "candidate.h",
     "congestion_control_interface.h",
-    "crypto/crypto_options.cc",
-    "crypto/crypto_options.h",
-    "crypto/frame_decryptor_interface.h",
-    "crypto/frame_encryptor_interface.h",
     "crypto_params.h",
     "data_channel_interface.cc",
     "data_channel_interface.h",
@@ -200,6 +196,11 @@ rtc_static_library("libjingle_peerconnection_api") {
     "../rtc_base:deprecation",
     "../rtc_base:rtc_base_approved",
     "../rtc_base/system:rtc_export",
+  ]
+  public_deps = [  # no-presubmit-check TODO(webrtc:8603)
+    "crypto:frame_decryptor_interface",
+    "crypto:frame_encryptor_interface",
+    "crypto:options",
   ]
 }
 
