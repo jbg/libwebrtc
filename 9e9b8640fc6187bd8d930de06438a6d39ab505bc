@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b29c8032_b4a8a30e",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5509
+      },
+      "writtenOn": "2019-09-12T17:37:28Z",
+      "side": 1,
+      "message": "nit: no trailing space",
+      "range": {
+        "startLine": 539,
+        "startChar": 51,
+        "endLine": 539,
+        "endChar": 52
+      },
+      "revId": "9e9b8640fc6187bd8d930de06438a6d39ab505bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
