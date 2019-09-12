@@ -65,6 +65,24 @@
     },
     {
       "key": {
+        "uuid": "cde4ac9f_68e55d89",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-12T05:49:10Z",
+      "side": 1,
+      "message": "No need to look into this, I realized the (good) reason.\nDone",
+      "parentUuid": "54349d6b_058057c2",
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "053936d0_a63e0742",
         "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
         "patchSetId": 7
@@ -116,6 +134,24 @@
       "writtenOn": "2019-09-11T10:26:05Z",
       "side": 1,
       "message": "I think it is sufficient to have one counter for all channels. The effect will anyway be kind of a worst-case masking on the largest counters, and I have a feeling that that effect should be achievable with only one counter array for all channels.\n\nWDYT?",
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cba1d3d9_7ba2a0f7",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-12T05:49:10Z",
+      "side": 1,
+      "message": "After offline discussions and looking into this a bit more, I still think we should only use one counter per band (not scale them also by channels). The reasoning is like follows:\n-The filter is mainly concerned where there is a persistent situation of poor excitation in a band. It does not really matter if that is persistent in one render signal, or whether it moves from one band to another.\n-This construct will be cheaper.\n\nMy main concerns with having one counter per band (and not per channel) is that that will actually be more liberal in reducing the adaptation speed.\n\nWDYT",
+      "parentUuid": "86a7c120_5b5bb63d",
       "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
