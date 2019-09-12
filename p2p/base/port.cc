@@ -43,8 +43,6 @@ rtc::PacketInfoProtocolType ConvertProtocolTypeToPacketInfoProtocolType(
       return rtc::PacketInfoProtocolType::kUdp;
     case cricket::ProtocolType::PROTO_TCP:
       return rtc::PacketInfoProtocolType::kTcp;
-    case cricket::ProtocolType::PROTO_SSLTCP:
-      return rtc::PacketInfoProtocolType::kSsltcp;
     case cricket::ProtocolType::PROTO_TLS:
       return rtc::PacketInfoProtocolType::kTls;
     default:

@@ -34,6 +34,8 @@ class StunStats;
 enum ProtocolType {
   PROTO_UDP,
   PROTO_TCP,
+  // TODO(bugs.webrtc.org/10947): Deprecated. Delete after updating downstream
+  // applications.
   PROTO_SSLTCP,  // Pseudo-TLS.
   PROTO_TLS,
   PROTO_LAST = PROTO_TLS
