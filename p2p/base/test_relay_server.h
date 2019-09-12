@@ -28,9 +28,7 @@ class TestRelayServer : public sigslot::has_slots<> {
                   const rtc::SocketAddress& udp_int_addr,
                   const rtc::SocketAddress& udp_ext_addr,
                   const rtc::SocketAddress& tcp_int_addr,
-                  const rtc::SocketAddress& tcp_ext_addr,
-                  const rtc::SocketAddress& ssl_int_addr,
-                  const rtc::SocketAddress& ssl_ext_addr)
+                  const rtc::SocketAddress& tcp_ext_addr)
       : server_(thread) {
     server_.AddInternalSocket(
         rtc::AsyncUDPSocket::Create(thread->socketserver(), udp_int_addr));
@@ -39,8 +37,6 @@ class TestRelayServer : public sigslot::has_slots<> {
 
     tcp_int_socket_.reset(CreateListenSocket(thread, tcp_int_addr));
     tcp_ext_socket_.reset(CreateListenSocket(thread, tcp_ext_addr));
-    ssl_int_socket_.reset(CreateListenSocket(thread, ssl_int_addr));
-    ssl_ext_socket_.reset(CreateListenSocket(thread, ssl_ext_addr));
   }
   int GetConnectionCount() const { return server_.GetConnectionCount(); }
   rtc::SocketAddressPair GetConnection(int connection) const {
@@ -61,15 +57,11 @@ class TestRelayServer : public sigslot::has_slots<> {
     return socket;
   }
   void OnAccept(rtc::AsyncSocket* socket) {
-    bool external =
-        (socket == tcp_ext_socket_.get() || socket == ssl_ext_socket_.get());
-    bool ssl =
-        (socket == ssl_int_socket_.get() || socket == ssl_ext_socket_.get());
+    bool external = (socket == tcp_ext_socket_.get());
     rtc::AsyncSocket* raw_socket = socket->Accept(NULL);
     if (raw_socket) {
-      rtc::AsyncTCPSocket* packet_socket = new rtc::AsyncTCPSocket(
-          (!ssl) ? raw_socket : new rtc::AsyncSSLServerSocket(raw_socket),
-          false);
+      rtc::AsyncTCPSocket* packet_socket =
+          new rtc::AsyncTCPSocket(raw_socket, false);
       if (!external) {
         packet_socket->SignalClose.connect(this,
                                            &TestRelayServer::OnInternalClose);
@@ -92,8 +84,6 @@ class TestRelayServer : public sigslot::has_slots<> {
   cricket::RelayServer server_;
   std::unique_ptr<rtc::AsyncSocket> tcp_int_socket_;
   std::unique_ptr<rtc::AsyncSocket> tcp_ext_socket_;
-  std::unique_ptr<rtc::AsyncSocket> ssl_int_socket_;
-  std::unique_ptr<rtc::AsyncSocket> ssl_ext_socket_;
 };
 
 }  // namespace cricket

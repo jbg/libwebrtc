@@ -119,7 +119,7 @@ class RelayPortTest : public ::testing::Test, public sigslot::has_slots<> {
     EXPECT_TRUE_WAIT(relay_port_->IsReady(), kTimeoutMs);
 
     // Make sure that we are happy with UDP, ie. not continuing with
-    // TCP, SSLTCP, etc.
+    // TCP, etc.
     WAIT(relay_server_->HasConnection(kRelayTcpAddr), kTimeoutMs);
 
     // Should have only one connection.
@@ -166,43 +166,6 @@ class RelayPortTest : public ::testing::Test, public sigslot::has_slots<> {
 
     // Should be the TCP address.
     EXPECT_TRUE(relay_server_->HasConnection(kRelayTcpAddr));
-  }
-
-  void TestConnectSslTcp() {
-    // Create a fake TCP address for relay port to simulate a failure.
-    // We skip UDP here since transition from UDP to TCP has been
-    // tested above.
-    cricket::ProtocolAddress fake_protocol_address =
-        cricket::ProtocolAddress(kRelayTcpAddr, cricket::PROTO_TCP);
-
-    // Create a ssl server socket for the RelayServer.
-    rtc::AsyncSocket* ssl_server_socket = CreateServerSocket(kRelaySslAddr);
-    relay_server_->AddInternalServerSocket(ssl_server_socket,
-                                           cricket::PROTO_SSLTCP);
-
-    // Create a tcp server socket that listens on the fake address so
-    // the relay port can attempt to connect to it.
-    std::unique_ptr<rtc::AsyncSocket> tcp_server_socket(
-        CreateServerSocket(kRelayTcpAddr));
-
-    // Add server addresses to the relay port and let it start.
-    relay_port_->AddServerAddress(fake_protocol_address);
-    relay_port_->AddServerAddress(
-        cricket::ProtocolAddress(kRelaySslAddr, cricket::PROTO_SSLTCP));
-    relay_port_->PrepareAddress();
-    EXPECT_FALSE(relay_port_->IsReady());
-
-    // Should have timed out in 3000 ms(relayport.cc, kSoftConnectTimeoutMs).
-    EXPECT_TRUE_WAIT_MARGIN(HasTimedOut(&fake_protocol_address), 3000, 100);
-
-    // Wait until relayport is ready.
-    EXPECT_TRUE_WAIT(relay_port_->IsReady(), kMaxTimeoutMs);
-
-    // Should have only one connection.
-    EXPECT_EQ(1, relay_server_->GetConnectionCount());
-
-    // Should be the SSLTCP address.
-    EXPECT_TRUE(relay_server_->HasConnection(kRelaySslAddr));
   }
 
  private:
@@ -265,8 +228,4 @@ TEST_F(RelayPortTest, ConnectUdp) {
 
 TEST_F(RelayPortTest, ConnectTcp) {
   TestConnectTcp();
-}
-
-TEST_F(RelayPortTest, ConnectSslTcp) {
-  TestConnectSslTcp();
 }
