@@ -32,6 +32,9 @@ rtc_source_set("call_interfaces") {
     ":video_stream_api",
     "../api:fec_controller_api",
     "../api:rtc_error",
+    "../api/crypto:frame_decryptor_interface",
+    "../api/crypto:frame_encryptor_interface",
+    "../api/crypto:options",
 
     # For api/media_transport_config.h
     "../api:libjingle_peerconnection_api",
@@ -79,6 +82,7 @@ rtc_source_set("rtp_interfaces") {
   deps = [
     "../api:array_view",
     "../api:fec_controller_api",
+    "../api/crypto:options",
 
     # For api/crypto/crypto_options.h
     "../api:libjingle_peerconnection_api",
@@ -286,6 +290,9 @@ rtc_source_set("video_stream_api") {
     "../api:rtp_headers",
     "../api:rtp_parameters",
     "../api:transport_api",
+    "../api/crypto:frame_decryptor_interface",
+    "../api/crypto:frame_encryptor_interface",
+    "../api/crypto:options",
     "../api/transport/rtp:rtp_source",
     "../api/video:video_frame",
     "../api/video:video_rtp_headers",
@@ -486,6 +493,8 @@ if (rtc_include_tests) {
     deps = [
       ":rtp_interfaces",
       "../api:libjingle_peerconnection_api",
+      "../api/crypto:frame_encryptor_interface",
+      "../api/crypto:options",
       "../modules/pacing",
       "../rtc_base",
       "../rtc_base:rate_limiter",
