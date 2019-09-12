@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f904c0b5_657837e3",
+        "filename": "tools_webrtc/metrics_plotter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-12T19:32:09Z",
+      "side": 1,
+      "message": "I think you should add this to rtc_tools/ instead of tools_webrtc/.",
+      "revId": "6a950b412fbf04c3d02be4ef9240acb3ea20867b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
