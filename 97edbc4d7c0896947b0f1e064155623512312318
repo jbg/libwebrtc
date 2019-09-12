@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09a04842_d992ad90",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-12T13:14:32Z",
+      "side": 1,
+      "message": "Is it possible to make this const, and assign it only in the constructor?",
+      "range": {
+        "startLine": 402,
+        "startChar": 4,
+        "endLine": 402,
+        "endChar": 58
+      },
+      "revId": "97edbc4d7c0896947b0f1e064155623512312318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b69f60dd_9ac7bb79",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-12T13:14:32Z",
+      "side": 1,
+      "message": "These too methods could be const.",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 418,
+        "endChar": 53
+      },
+      "revId": "97edbc4d7c0896947b0f1e064155623512312318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
