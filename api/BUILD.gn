@@ -772,6 +772,17 @@ if (rtc_include_tests) {
     ]
   }
 
+  rtc_source_set("dummy_peer_connection") {
+    testonly = true
+    sources = [
+      "test/dummy_peer_connection.h",
+    ]
+
+    deps = [
+      ":libjingle_peerconnection_api",
+    ]
+  }
+
   rtc_source_set("mock_peerconnectioninterface") {
     testonly = true
     sources = [
@@ -779,6 +790,7 @@ if (rtc_include_tests) {
     ]
 
     deps = [
+      ":dummy_peer_connection",
       ":libjingle_peerconnection_api",
       "../test:test_support",
     ]
