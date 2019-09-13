@@ -189,6 +189,30 @@
       "revId": "97edbc4d7c0896947b0f1e064155623512312318",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eeb408c_b4c5c329",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-13T13:53:28Z",
+      "side": 1,
+      "message": "Added comment to IsBitrateBelowThreshold and marked IsPixelCountBelowThreshold const.",
+      "parentUuid": "8238b098_c8530a7a",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 418,
+        "endChar": 53
+      },
+      "revId": "97edbc4d7c0896947b0f1e064155623512312318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
