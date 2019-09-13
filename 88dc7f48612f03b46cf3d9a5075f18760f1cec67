@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d617fb92_d32da321",
+        "filename": "call/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-09-13T11:55:24Z",
+      "side": 1,
+      "message": "btw, comment above the dependency prevents git cl format for proper reordering.\nMay be update it to the end-of-line comment:\n\"../api:libjingle_peerconnection_api\", # For api/bitrate_constraints.h",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 35
+      },
+      "revId": "88dc7f48612f03b46cf3d9a5075f18760f1cec67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

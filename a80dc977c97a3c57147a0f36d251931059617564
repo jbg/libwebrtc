@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9882ee8d_b34ff767",
+        "filename": "call/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-09-13T11:55:24Z",
+      "side": 1,
+      "message": "may be remove",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 37
+      },
+      "revId": "a80dc977c97a3c57147a0f36d251931059617564",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
