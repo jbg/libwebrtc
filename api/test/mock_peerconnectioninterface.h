@@ -18,12 +18,13 @@
 
 #include "api/peer_connection_interface.h"
 #include "api/sctp_transport_interface.h"
+#include "api/test/dummy_peer_connection.h"
 #include "test/gmock.h"
 
 namespace webrtc {
 
 class MockPeerConnectionInterface
-    : public rtc::RefCountedObject<webrtc::PeerConnectionInterface> {
+    : public rtc::RefCountedObject<webrtc::DummyPeerConnection> {
  public:
   // PeerConnectionInterface
   MOCK_METHOD0(local_streams, rtc::scoped_refptr<StreamCollectionInterface>());
