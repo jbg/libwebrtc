@@ -165,6 +165,30 @@
       "revId": "97edbc4d7c0896947b0f1e064155623512312318",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8238b098_c8530a7a",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-13T12:14:59Z",
+      "side": 1,
+      "message": "I won\u0027t insist on a reorg, bit I\u0027d like to have\n\ncomment -\u003e      // Also updates the |bitrate_filter| state.\n                bool IsBitrateBelowThreshold(const DataRate\u0026 target_bitrate);\nconst --\u003e       bool IsPixelCountBelowThreshold(int pixel_count) const;\n\n(if there\u0027s nothing else blocking use of const there).",
+      "parentUuid": "262e036a_94132956",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 418,
+        "endChar": 53
+      },
+      "revId": "97edbc4d7c0896947b0f1e064155623512312318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
