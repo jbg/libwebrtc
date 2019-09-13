@@ -141,6 +141,30 @@
       "revId": "97edbc4d7c0896947b0f1e064155623512312318",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "262e036a_94132956",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-13T11:49:49Z",
+      "side": 1,
+      "message": "As you mentioned, |stable_target_bitrate| is sensitive to BWE jitter so it can not be used in this case.\n\nI like to think that the experiment settings are fairly well contained in this struct, so I don\u0027t think it\u0027s worth it. I will update this if you insist.",
+      "parentUuid": "dc5d9b03_6fb54e11",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 418,
+        "endChar": 53
+      },
+      "revId": "97edbc4d7c0896947b0f1e064155623512312318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
