@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7270e7fe_0957dcce",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-09-13T11:31:34Z",
+      "side": 1,
+      "message": "Nice comment, and nice to have commented!",
+      "range": {
+        "startLine": 931,
+        "startChar": 2,
+        "endLine": 933,
+        "endChar": 0
+      },
+      "revId": "b2e892253785e17d61c8ed767304df6219e35a17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
