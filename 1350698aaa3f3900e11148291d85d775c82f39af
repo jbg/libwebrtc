@@ -266,6 +266,24 @@
     },
     {
       "key": {
+        "uuid": "7006b942_9d378bea",
+        "filename": "modules/audio_processing/aec3/render_signal_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-09-13T05:56:44Z",
+      "side": 1,
+      "message": "True! Good point!",
+      "parentUuid": "360864fb_8e563584",
+      "revId": "1350698aaa3f3900e11148291d85d775c82f39af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bfc716a_ac8ec38a",
         "filename": "modules/audio_processing/aec3/render_signal_analyzer.h",
         "patchSetId": 7
