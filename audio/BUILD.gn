@@ -41,6 +41,9 @@ rtc_static_library("audio") {
     "../api:array_view",
     "../api:call_api",
     "../api:function_view",
+    "../api/crypto:frame_decryptor_interface",
+    "../api/crypto:frame_encryptor_interface",
+    "../api/crypto:options",
 
     # For api/crypto/crypto_options.h
     "../api:libjingle_peerconnection_api",
