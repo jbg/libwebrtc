@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "946cb092_64e1c693",
+        "filename": "audio/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-13T11:51:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0cac5b6_d415e9fd",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "5abc7ac7448b3b13e22f8100f81a721d739baee8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dde1dcd9_021284da",
         "filename": "call/BUILD.gn",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "5abc7ac7448b3b13e22f8100f81a721d739baee8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98e91bee_5a6e5c06",
+        "filename": "call/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-13T11:51:20Z",
+      "side": 1,
+      "message": "This is now needed for api/bitrate_constraints.h (comment updated).",
+      "parentUuid": "dde1dcd9_021284da",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "5abc7ac7448b3b13e22f8100f81a721d739baee8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
