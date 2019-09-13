@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f71c01ec_6e0f19c5",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-13T06:21:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "577904db_93d7536c",
+      "range": {
+        "startLine": 402,
+        "startChar": 4,
+        "endLine": 402,
+        "endChar": 58
+      },
+      "revId": "97edbc4d7c0896947b0f1e064155623512312318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b69f60dd_9ac7bb79",
         "filename": "video/video_stream_encoder.h",
         "patchSetId": 9
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "IsBitrateBelowThreshold update the bitrate filter, I could make it mutable though. IsPixelCountBelowThreshold can be const.\n\nWDYT?",
       "parentUuid": "b69f60dd_9ac7bb79",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 418,
+        "endChar": 53
+      },
+      "revId": "97edbc4d7c0896947b0f1e064155623512312318",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc5d9b03_6fb54e11",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-13T06:21:52Z",
+      "side": 1,
+      "message": "No mutable, please. I\u0027d suggest adding const to IsPixelCountBelowThreshold, and add a comment for IsBitrateBelowThreshold, explaining that it also updates the filter. \n\nIt would make some sense to split IsBitrateBelowThreshold into one method doing the filtering, and a second const method to make the decision, but perhaps not worth the hassle.\n\nOr could you delete the filter, and use the newly added |stable_target_bitrate| instead?",
+      "parentUuid": "31bd7410_34757c12",
       "range": {
         "startLine": 417,
         "startChar": 0,
