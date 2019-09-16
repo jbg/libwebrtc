@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87cd2524_a0a58847",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-16T16:10:35Z",
+      "side": 1,
+      "message": "With less escaping:\n\n  sed -i \u0027,//third_party/abseil-cpp/absl/memory,d\u0027\n\n(At least it works for sed\u0027s s command. Try it! Any character will do, but comma is what I\u0027m used to.)",
+      "range": {
+        "startLine": 21,
+        "startChar": 10,
+        "endLine": 21,
+        "endChar": 63
+      },
+      "revId": "f92e92360580e19c067cd44d0d68d376fc5e1f0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c365386d_547ff0d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-16T16:10:35Z",
+      "side": 1,
+      "message": "This command replaces absl/memory:memory with absl/memory? Why?",
+      "revId": "f92e92360580e19c067cd44d0d68d376fc5e1f0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf462cad_bc9bb0ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-16T16:10:35Z",
+      "side": 1,
+      "message": "Move these to the top?",
+      "revId": "f92e92360580e19c067cd44d0d68d376fc5e1f0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
