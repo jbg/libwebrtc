@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "34a7bad9_c847ac67",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-09-16T13:07:28Z",
+      "side": 1,
+      "message": "Style guide explicitly tells not to introduce new names with the captures.\nIt\u0027s not just by letter reading. I remember explicit suggestion to do same with member variables that are moved into capture (though haven\u0027t seen it yet published anywhere as an example).",
+      "parentUuid": "4b58c515_58d07afd",
+      "range": {
+        "startLine": 33,
+        "startChar": 25,
+        "endLine": 33,
+        "endChar": 42
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3e77f72_85148f33",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
         "patchSetId": 1
@@ -69,6 +93,30 @@
       "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a54c022a_2b64da1f",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-09-16T13:07:28Z",
+      "side": 1,
+      "message": "yes, That\u0027s the idea here: allow to propertly stop rtcp_transciver_ on the task_queue without blocking in the destructor.",
+      "parentUuid": "c3e77f72_85148f33",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "89994c72_8df20090",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-09-16T13:07:28Z",
+      "side": 1,
+      "message": "mutable makes operator() of the lambda non-const.\nwithout it the code doesn\u0027t compile because ssrcs inside lambda is mutated.\n\nreading https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture\nI do not see a way to add mutable modifier to and individual capture.",
+      "parentUuid": "f86dc176_7b4ea5db",
+      "range": {
+        "startLine": 95,
+        "startChar": 71,
+        "endLine": 95,
+        "endChar": 78
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c9aa221_2cb2abce",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
         "patchSetId": 1
@@ -163,6 +235,30 @@
       "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "399228b7_d30d31e8",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-09-16T13:07:28Z",
+      "side": 1,
+      "message": "it is to be more explicit about the types.\n\nhttps://google.github.io/styleguide/cppguide.html#Lambda_expressions\n\n\"Do not use captures with initializers to introduce new names, or to substantially change the meaning of an existing name. Instead, declare a new variable in the conventional way and then capture it\"",
+      "parentUuid": "4c9aa221_2cb2abce",
+      "range": {
+        "startLine": 115,
+        "startChar": 25,
+        "endLine": 115,
+        "endChar": 29
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
