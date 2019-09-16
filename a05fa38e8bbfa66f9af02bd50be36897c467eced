@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6406a29c_6e4ba2b3",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-16T12:52:59Z",
+      "side": 1,
+      "message": "Yes please. (A by-the-letter reading of the style guide might suggest that you need to make a new local variable called rtcp_transceiver and then capture that, but I will not be the one to suggest it.)",
+      "parentUuid": "4b58c515_58d07afd",
+      "range": {
+        "startLine": 33,
+        "startChar": 25,
+        "endLine": 33,
+        "endChar": 42
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c3e77f72_85148f33",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
         "patchSetId": 1
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "9fe1f91c_0571a904",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-16T12:52:59Z",
+      "side": 1,
+      "message": "It means that the lambda\u0027s operator() function becomes non-const. We need that here in order to mutate (specifically, move from) the captured variables.\n\nAnd no, I don\u0027t think you can declare specific captured variables mutable.",
+      "parentUuid": "f86dc176_7b4ea5db",
+      "range": {
+        "startLine": 95,
+        "startChar": 71,
+        "endLine": 95,
+        "endChar": 78
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4c9aa221_2cb2abce",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
         "patchSetId": 1
@@ -82,6 +130,30 @@
       "writtenOn": "2019-09-16T12:35:56Z",
       "side": 1,
       "message": "Can you move initialization, |ptr \u003d rtcp_transceiver_.get()| to the capture list? And similarly, |raw_packet \u003d packet.Build()| ?",
+      "range": {
+        "startLine": 115,
+        "startChar": 25,
+        "endLine": 115,
+        "endChar": 29
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7753e30_876871c1",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-16T12:52:59Z",
+      "side": 1,
+      "message": "We could, and I\u0027d like to suggest that too, but the style guide prohibits it: https://google.github.io/styleguide/cppguide.html#Lambda_expressions",
+      "parentUuid": "4c9aa221_2cb2abce",
       "range": {
         "startLine": 115,
         "startChar": 25,
