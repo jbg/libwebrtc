@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9086d110_19d28bc3",
+        "filename": "api/video/video_stream_encoder_settings.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-16T12:55:21Z",
+      "side": 1,
+      "message": "Yes, a single value cover all use-cases.",
+      "parentUuid": "265a6d81_edb25536",
+      "range": {
+        "startLine": 26,
+        "startChar": 9,
+        "endLine": 26,
+        "endChar": 15
+      },
+      "revId": "9d70d4009f1631f615b5859cd4c06908784698c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7355346_a04de108",
         "filename": "media/engine/webrtc_video_engine_unittest.cc",
         "patchSetId": 12
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9b1d4436_60b7851b",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2142,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-16T12:55:21Z",
+      "side": 1,
+      "message": "You can\u0027t set VP8 twice with SetSendParameters (it would try to assign two different payload numbers to the same codec, which makes it fail). You can only have multiple versions of a codec injected via the VideoEncoderFactory.\n\nI implemented a test where we don\u0027t perform a codec switch instead due to incorrect param and value.",
+      "parentUuid": "b7355346_a04de108",
+      "range": {
+        "startLine": 2142,
+        "startChar": 0,
+        "endLine": 2142,
+        "endChar": 6
+      },
+      "revId": "9d70d4009f1631f615b5859cd4c06908784698c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d12de421_5d2d2b00",
         "filename": "video/video_stream_encoder.h",
         "patchSetId": 12
@@ -59,6 +107,30 @@
       "writtenOn": "2019-09-16T12:19:44Z",
       "side": 1,
       "message": "nit: This should be a class. Everything should be private except for the interface methods.",
+      "range": {
+        "startLine": 395,
+        "startChar": 2,
+        "endLine": 395,
+        "endChar": 8
+      },
+      "revId": "9d70d4009f1631f615b5859cd4c06908784698c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "443eaef5_75488712",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-09-16T12:55:21Z",
+      "side": 1,
+      "message": "I prefer not to since it would just make parsing more cumbersome. The reason I created this struct was to keep everything experiment related scoped. The alternative is to have all of these members as members of the VideoSteamEncoder instead, which I don\u0027t think is as clean.",
+      "parentUuid": "d12de421_5d2d2b00",
       "range": {
         "startLine": 395,
         "startChar": 2,
