@@ -22,6 +22,30 @@
       "revId": "ec2435763b3e21622a58b21d7f403a60bcf4f065",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d247b15_77cbcebd",
+        "filename": "api/transport/bitrate_settings.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-16T15:48:13Z",
+      "side": 1,
+      "message": "Yes. Or just duplicate it in the three places where it\u0027s used.",
+      "parentUuid": "68cd8174_26759779",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 1
+      },
+      "revId": "ec2435763b3e21622a58b21d7f403a60bcf4f065",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
