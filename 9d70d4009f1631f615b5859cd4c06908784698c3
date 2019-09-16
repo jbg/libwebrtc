@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "265a6d81_edb25536",
+        "filename": "api/video/video_stream_encoder_settings.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-16T12:19:44Z",
+      "side": 1,
+      "message": "Are you sure what having a single parameter would cover all the use-cases. Should vector of parameters we used here instead?",
+      "range": {
+        "startLine": 26,
+        "startChar": 9,
+        "endLine": 26,
+        "endChar": 15
+      },
+      "revId": "9d70d4009f1631f615b5859cd4c06908784698c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7355346_a04de108",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2142,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-16T12:19:44Z",
+      "side": 1,
+      "message": "Please add a test where there are two vp8 codecs with different params.\nAdd test where requested codec doesn\u0027t have the expected param value at all.",
+      "range": {
+        "startLine": 2142,
+        "startChar": 0,
+        "endLine": 2142,
+        "endChar": 6
+      },
+      "revId": "9d70d4009f1631f615b5859cd4c06908784698c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d12de421_5d2d2b00",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-16T12:19:44Z",
+      "side": 1,
+      "message": "nit: This should be a class. Everything should be private except for the interface methods.",
+      "range": {
+        "startLine": 395,
+        "startChar": 2,
+        "endLine": 395,
+        "endChar": 8
+      },
+      "revId": "9d70d4009f1631f615b5859cd4c06908784698c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
