@@ -17,7 +17,6 @@
 #include <limits>
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "api/scoped_refptr.h"
 #include "api/video/builtin_video_bitrate_allocator_factory.h"
 #include "api/video/i420_buffer.h"
@@ -220,7 +219,7 @@ VideoProcessor::VideoProcessor(webrtc::VideoEncoder* encoder,
 
   for (size_t i = 0; i < num_simulcast_or_spatial_layers_; ++i) {
     decode_callback_.push_back(
-        absl::make_unique<VideoProcessorDecodeCompleteCallback>(this, i));
+        std::make_unique<VideoProcessorDecodeCompleteCallback>(this, i));
     RTC_CHECK_EQ(
         decoders_->at(i)->InitDecode(&config_.codec_settings,
                                      static_cast<int>(config_.NumberOfCores())),

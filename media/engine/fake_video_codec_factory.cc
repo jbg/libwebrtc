@@ -10,7 +10,6 @@
 
 #include "media/engine/fake_video_codec_factory.h"
 
-#include "absl/memory/memory.h"
 #include "api/video_codecs/sdp_video_format.h"
 #include "api/video_codecs/video_decoder.h"
 #include "api/video_codecs/video_encoder.h"
@@ -34,7 +33,7 @@ FakeVideoEncoderFactory::FakeVideoEncoderFactory() = default;
 
 // static
 std::unique_ptr<VideoEncoder> FakeVideoEncoderFactory::CreateVideoEncoder() {
-  return absl::make_unique<test::FakeEncoder>(Clock::GetRealTimeClock());
+  return std::make_unique<test::FakeEncoder>(Clock::GetRealTimeClock());
 }
 
 std::vector<SdpVideoFormat> FakeVideoEncoderFactory::GetSupportedFormats()
@@ -50,14 +49,14 @@ VideoEncoderFactory::CodecInfo FakeVideoEncoderFactory::QueryVideoEncoder(
 
 std::unique_ptr<VideoEncoder> FakeVideoEncoderFactory::CreateVideoEncoder(
     const SdpVideoFormat& format) {
-  return absl::make_unique<test::FakeEncoder>(Clock::GetRealTimeClock());
+  return std::make_unique<test::FakeEncoder>(Clock::GetRealTimeClock());
 }
 
 FakeVideoDecoderFactory::FakeVideoDecoderFactory() = default;
 
 // static
 std::unique_ptr<VideoDecoder> FakeVideoDecoderFactory::CreateVideoDecoder() {
-  return absl::make_unique<test::FakeDecoder>();
+  return std::make_unique<test::FakeDecoder>();
 }
 
 std::vector<SdpVideoFormat> FakeVideoDecoderFactory::GetSupportedFormats()
@@ -68,7 +67,7 @@ std::vector<SdpVideoFormat> FakeVideoDecoderFactory::GetSupportedFormats()
 
 std::unique_ptr<VideoDecoder> FakeVideoDecoderFactory::CreateVideoDecoder(
     const SdpVideoFormat& format) {
-  return absl::make_unique<test::FakeDecoder>();
+  return std::make_unique<test::FakeDecoder>();
 }
 
 }  // namespace webrtc

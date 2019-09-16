@@ -11,7 +11,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 
 namespace webrtc {
 namespace test {
@@ -59,7 +58,7 @@ SimulatedNetworkNode SimulatedNetworkNode::Builder::Build() const {
 SimulatedNetworkNode SimulatedNetworkNode::Builder::Build(
     NetworkEmulationManager* net) const {
   SimulatedNetworkNode res;
-  auto behavior = absl::make_unique<SimulatedNetwork>(config_);
+  auto behavior = std::make_unique<SimulatedNetwork>(config_);
   res.simulation = behavior.get();
   res.node = net->CreateEmulatedNode(std::move(behavior));
   return res;

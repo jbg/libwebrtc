@@ -28,7 +28,6 @@
 #import "components/video_codec/RTCVideoEncoderFactoryH264.h"
 // The no-media version PeerConnectionFactory doesn't depend on these files, but the gn check tool
 // is not smart enough to take the #ifdef into account.
-#include "absl/memory/memory.h"
 #include "api/audio_codecs/builtin_audio_decoder_factory.h"     // nogncheck
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"     // nogncheck
 #include "api/rtc_event_log/rtc_event_log_factory.h"
@@ -51,7 +50,6 @@
 // C++ target.
 // TODO(zhihuang): Remove nogncheck once MediaEngineInterface is moved to C++
 // API layer.
-#include "absl/memory/memory.h"
 #include "api/transport/media/media_transport_interface.h"
 #include "media/engine/webrtc_media_engine.h"  // nogncheck
 
@@ -231,7 +229,7 @@
     dependencies.media_engine = cricket::CreateMediaEngine(std::move(media_deps));
     dependencies.call_factory = webrtc::CreateCallFactory();
     dependencies.event_log_factory =
-        absl::make_unique<webrtc::RtcEventLogFactory>(dependencies.task_queue_factory.get());
+        std::make_unique<webrtc::RtcEventLogFactory>(dependencies.task_queue_factory.get());
     dependencies.network_controller_factory = std::move(networkControllerFactory);
     dependencies.media_transport_factory = std::move(mediaTransportFactory);
 #endif

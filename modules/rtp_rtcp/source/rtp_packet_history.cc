@@ -14,7 +14,6 @@
 #include <limits>
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -190,14 +189,14 @@ std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPacketAndSetSendTime(
   packet->pending_transmission_ = false;
 
   // Return copy of packet instance since it may need to be retransmitted.
-  return absl::make_unique<RtpPacketToSend>(*packet->packet_);
+  return std::make_unique<RtpPacketToSend>(*packet->packet_);
 }
 
 std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPacketAndMarkAsPending(
     uint16_t sequence_number) {
   return GetPacketAndMarkAsPending(
       sequence_number, [](const RtpPacketToSend& packet) {
-        return absl::make_unique<RtpPacketToSend>(packet);
+        return std::make_unique<RtpPacketToSend>(packet);
       });
 }
 
@@ -298,7 +297,7 @@ bool RtpPacketHistory::VerifyRtt(const RtpPacketHistory::StoredPacket& packet,
 std::unique_ptr<RtpPacketToSend> RtpPacketHistory::GetPayloadPaddingPacket() {
   // Default implementation always just returns a copy of the packet.
   return GetPayloadPaddingPacket([](const RtpPacketToSend& packet) {
-    return absl::make_unique<RtpPacketToSend>(packet);
+    return std::make_unique<RtpPacketToSend>(packet);
   });
 }
 

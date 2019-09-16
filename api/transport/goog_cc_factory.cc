@@ -12,7 +12,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "modules/congestion_controller/goog_cc/goog_cc_network_control.h"
 
 namespace webrtc {
@@ -47,8 +46,8 @@ GoogCcNetworkControllerFactory::Create(NetworkControllerConfig config) {
         factory_config_.network_state_predictor_factory
             ->CreateNetworkStatePredictor();
   }
-  return absl::make_unique<GoogCcNetworkController>(config,
-                                                    std::move(goog_cc_config));
+  return std::make_unique<GoogCcNetworkController>(config,
+                                                   std::move(goog_cc_config));
 }
 
 TimeDelta GoogCcNetworkControllerFactory::GetProcessInterval() const {

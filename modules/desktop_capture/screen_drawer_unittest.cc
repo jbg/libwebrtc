@@ -14,7 +14,6 @@
 
 #include <atomic>
 
-#include "absl/memory/memory.h"
 #include "api/function_view.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -154,7 +153,7 @@ TEST(ScreenDrawerTest, MAYBE_TwoScreenDrawerLocks) {
   ScreenDrawerLockPosix::Unlink(semaphore_name);
 
   TestScreenDrawerLock([semaphore_name]() {
-    return absl::make_unique<ScreenDrawerLockPosix>(semaphore_name);
+    return std::make_unique<ScreenDrawerLockPosix>(semaphore_name);
   });
 #elif defined(WEBRTC_WIN)
   TestScreenDrawerLock([]() { return ScreenDrawerLock::Create(); });

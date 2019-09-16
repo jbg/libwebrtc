@@ -12,7 +12,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/utility/ivf_file_writer.h"
 
@@ -86,8 +85,8 @@ const char* FrameDumpingDecoder::ImplementationName() const {
 std::unique_ptr<VideoDecoder> CreateFrameDumpingDecoderWrapper(
     std::unique_ptr<VideoDecoder> decoder,
     FileWrapper file) {
-  return absl::make_unique<FrameDumpingDecoder>(std::move(decoder),
-                                                std::move(file));
+  return std::make_unique<FrameDumpingDecoder>(std::move(decoder),
+                                               std::move(file));
 }
 
 }  // namespace webrtc

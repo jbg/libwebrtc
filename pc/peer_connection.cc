@@ -18,7 +18,6 @@
 #include <vector>
 
 #include "absl/algorithm/container.h"
-#include "absl/memory/memory.h"
 #include "absl/strings/match.h"
 #include "api/jsep_ice_candidate.h"
 #include "api/jsep_session_description.h"
@@ -6793,7 +6792,7 @@ bool PeerConnection::SetupDataChannelTransport_n(const std::string& mid) {
   }
   RTC_LOG(LS_INFO) << "Setting up data channel transport for mid=" << mid;
 
-  data_channel_transport_invoker_ = absl::make_unique<rtc::AsyncInvoker>();
+  data_channel_transport_invoker_ = std::make_unique<rtc::AsyncInvoker>();
   data_channel_transport_->SetDataSink(this);
   sctp_mid_ = mid;
   // TODO(mellem):  Handling data channel state through media transport is

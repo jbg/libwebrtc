@@ -15,7 +15,6 @@
 #include <cmath>
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "modules/desktop_capture/desktop_capture_types.h"
 #include "modules/desktop_capture/desktop_geometry.h"
 #include "rtc_base/checks.h"
@@ -179,7 +178,7 @@ std::unique_ptr<DesktopFrame> SharedMemoryDesktopFrame::Create(
   if (!shared_memory)
     return nullptr;
 
-  return absl::make_unique<SharedMemoryDesktopFrame>(
+  return std::make_unique<SharedMemoryDesktopFrame>(
       size, size.width() * kBytesPerPixel, std::move(shared_memory));
 }
 

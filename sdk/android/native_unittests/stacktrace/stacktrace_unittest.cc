@@ -14,7 +14,6 @@
 #include <atomic>
 #include <vector>
 
-#include "absl/memory/memory.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/event.h"
 #include "rtc_base/logging.h"
@@ -117,7 +116,7 @@ class RtcEventDeadlock : public DeadlockInterface {
 class RtcCriticalSectionDeadlock : public DeadlockInterface {
  public:
   RtcCriticalSectionDeadlock()
-      : critscope_(absl::make_unique<rtc::CritScope>(&crit_)) {}
+      : critscope_(std::make_unique<rtc::CritScope>(&crit_)) {}
 
  private:
   void Deadlock() override { rtc::CritScope lock(&crit_); }
@@ -230,11 +229,11 @@ TEST(Stacktrace, TestCurrentThread) {
 }
 
 TEST(Stacktrace, TestSpinLock) {
-  TestStacktrace(absl::make_unique<SpinDeadlock>());
+  TestStacktrace(std::make_unique<SpinDeadlock>());
 }
 
 TEST(Stacktrace, TestSleep) {
-  TestStacktrace(absl::make_unique<SleepDeadlock>());
+  TestStacktrace(std::make_unique<SleepDeadlock>());
 }
 
 // Stack traces originating from kernel space does not include user space stack
@@ -242,11 +241,11 @@ TEST(Stacktrace, TestSleep) {
 #ifdef WEBRTC_ARCH_ARM64
 
 TEST(Stacktrace, TestRtcEvent) {
-  TestStacktrace(absl::make_unique<RtcEventDeadlock>());
+  TestStacktrace(std::make_unique<RtcEventDeadlock>());
 }
 
 TEST(Stacktrace, TestRtcCriticalSection) {
-  TestStacktrace(absl::make_unique<RtcCriticalSectionDeadlock>());
+  TestStacktrace(std::make_unique<RtcCriticalSectionDeadlock>());
 }
 
 #endif

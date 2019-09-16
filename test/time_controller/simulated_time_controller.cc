@@ -17,7 +17,6 @@
 #include <thread>
 #include <vector>
 
-#include "absl/memory/memory.h"
 #include "absl/strings/string_view.h"
 
 namespace webrtc {
@@ -307,7 +306,7 @@ std::unique_ptr<ProcessThread> SimulatedTimeControllerImpl::CreateProcessThread(
     const char* thread_name) {
   rtc::CritScope lock(&lock_);
   auto process_thread =
-      absl::make_unique<SimulatedSequenceRunner>(this, thread_name);
+      std::make_unique<SimulatedSequenceRunner>(this, thread_name);
   runners_.push_back(process_thread.get());
   return process_thread;
 }
