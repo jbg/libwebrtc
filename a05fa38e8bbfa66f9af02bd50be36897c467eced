@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b58c515_58d07afd",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-16T12:35:56Z",
+      "side": 1,
+      "message": "Maybe style guide has a different opinion, but I\u0027d consider not attaching _ at the end of the capture name, since it\u0027s intentionally *not* a member variable.",
+      "range": {
+        "startLine": 33,
+        "startChar": 25,
+        "endLine": 33,
+        "endChar": 42
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3e77f72_85148f33",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-16T12:35:56Z",
+      "side": 1,
+      "message": "So this task will typically run after this destructor finishes? (Not changed in this cl).",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f86dc176_7b4ea5db",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-16T12:35:56Z",
+      "side": 1,
+      "message": "I can guess what mutable means here, but to be sure, can you explain? Is it possible to declare a specific capture variable as mutable, in this case, |ssrcs|?",
+      "range": {
+        "startLine": 95,
+        "startChar": 71,
+        "endLine": 95,
+        "endChar": 78
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c9aa221_2cb2abce",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-16T12:35:56Z",
+      "side": 1,
+      "message": "Can you move initialization, |ptr \u003d rtcp_transceiver_.get()| to the capture list? And similarly, |raw_packet \u003d packet.Build()| ?",
+      "range": {
+        "startLine": 115,
+        "startChar": 25,
+        "endLine": 115,
+        "endChar": 29
+      },
+      "revId": "a05fa38e8bbfa66f9af02bd50be36897c467eced",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
