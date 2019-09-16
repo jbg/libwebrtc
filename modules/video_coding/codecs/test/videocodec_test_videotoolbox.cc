@@ -10,7 +10,6 @@
 
 #include <vector>
 
-#include "absl/memory/memory.h"
 #include "api/test/create_videocodec_test_fixture.h"
 #include "media/base/media_constants.h"
 #include "modules/video_coding/codecs/test/objc_codec_factory_helper.h"
@@ -53,7 +52,7 @@ std::unique_ptr<VideoCodecTestFixture> CreateTestFixtureWithConfig(
 // longer in use.
 MAYBE_TEST(VideoCodecTestVideoToolbox, ForemanCif500kbpsH264CBP) {
   const auto frame_checker =
-      absl::make_unique<VideoCodecTestFixtureImpl::H264KeyframeChecker>();
+      std::make_unique<VideoCodecTestFixtureImpl::H264KeyframeChecker>();
   auto config = CreateConfig();
   config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,
                           352, 288);
@@ -69,7 +68,7 @@ MAYBE_TEST(VideoCodecTestVideoToolbox, ForemanCif500kbpsH264CBP) {
 
 MAYBE_TEST(VideoCodecTestVideoToolbox, ForemanCif500kbpsH264CHP) {
   const auto frame_checker =
-      absl::make_unique<VideoCodecTestFixtureImpl::H264KeyframeChecker>();
+      std::make_unique<VideoCodecTestFixtureImpl::H264KeyframeChecker>();
   auto config = CreateConfig();
   config.h264_codec_settings.profile = H264::kProfileConstrainedHigh;
   config.SetCodecSettings(cricket::kH264CodecName, 1, 1, 1, false, false, false,

@@ -15,7 +15,6 @@
 #include <algorithm>
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/numerics/safe_conversions.h"
 
@@ -25,7 +24,7 @@ AcknowledgedBitrateEstimator::AcknowledgedBitrateEstimator(
     const WebRtcKeyValueConfig* key_value_config)
     : AcknowledgedBitrateEstimator(
           key_value_config,
-          absl::make_unique<BitrateEstimator>(key_value_config)) {}
+          std::make_unique<BitrateEstimator>(key_value_config)) {}
 
 AcknowledgedBitrateEstimator::~AcknowledgedBitrateEstimator() {}
 

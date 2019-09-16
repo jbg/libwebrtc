@@ -27,7 +27,6 @@
 #include <queue>
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "absl/strings/string_view.h"
 #include "api/task_queue/queued_task.h"
 #include "api/task_queue/task_queue_base.h"
@@ -406,7 +405,7 @@ class TaskQueueWinFactory : public TaskQueueFactory {
 }  // namespace
 
 std::unique_ptr<TaskQueueFactory> CreateTaskQueueWinFactory() {
-  return absl::make_unique<TaskQueueWinFactory>();
+  return std::make_unique<TaskQueueWinFactory>();
 }
 
 }  // namespace webrtc

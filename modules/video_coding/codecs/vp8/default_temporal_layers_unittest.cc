@@ -12,7 +12,6 @@
 
 #include <cstdint>
 
-#include "absl/memory/memory.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/vp8_frame_config.h"
@@ -114,7 +113,7 @@ class TemporalLayersTest : public ::testing::Test {
   ~TemporalLayersTest() override = default;
 
   CodecSpecificInfo* IgnoredCodecSpecificInfo() {
-    codec_specific_info_ = absl::make_unique<CodecSpecificInfo>();
+    codec_specific_info_ = std::make_unique<CodecSpecificInfo>();
     return codec_specific_info_.get();
   }
 

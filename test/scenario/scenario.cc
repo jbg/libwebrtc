@@ -13,7 +13,6 @@
 
 #include "absl/flags/flag.h"
 #include "absl/flags/parse.h"
-#include "absl/memory/memory.h"
 #include "api/audio_codecs/builtin_audio_decoder_factory.h"
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
 #include "rtc_base/socket_address.h"
@@ -43,16 +42,15 @@ std::unique_ptr<FileLogWriterFactory> GetScenarioLogManager(
 
     auto base_filename = output_root + file_name + ".";
     RTC_LOG(LS_INFO) << "Saving scenario logs to: " << base_filename;
-    return absl::make_unique<FileLogWriterFactory>(base_filename);
+    return std::make_unique<FileLogWriterFactory>(base_filename);
   }
   return nullptr;
 }
 std::unique_ptr<TimeController> CreateTimeController(bool real_time) {
   if (real_time) {
-    return absl::make_unique<RealTimeController>();
+    return std::make_unique<RealTimeController>();
   } else {
-    return absl::make_unique<GlobalSimulatedTimeController>(
-        kSimulatedStartTime);
+    return std::make_unique<GlobalSimulatedTimeController>(kSimulatedStartTime);
   }
 }
 }  // namespace

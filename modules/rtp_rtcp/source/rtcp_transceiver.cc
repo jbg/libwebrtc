@@ -12,7 +12,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/transport_feedback.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
@@ -32,7 +31,7 @@ struct Destructor {
 
 RtcpTransceiver::RtcpTransceiver(const RtcpTransceiverConfig& config)
     : task_queue_(config.task_queue),
-      rtcp_transceiver_(absl::make_unique<RtcpTransceiverImpl>(config)) {
+      rtcp_transceiver_(std::make_unique<RtcpTransceiverImpl>(config)) {
   RTC_DCHECK(task_queue_);
 }
 

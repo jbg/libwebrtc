@@ -18,7 +18,6 @@
 #ifdef WEBRTC_ANDROID
 #include "pc/test/android_test_initializer.h"
 #endif
-#include "absl/memory/memory.h"
 #include "pc/test/fake_audio_capture_module.h"
 #include "pc/test/fake_sctp_transport.h"
 #include "rtc_base/gunit.h"
@@ -61,7 +60,7 @@ class PeerConnectionFactoryForJsepTest : public PeerConnectionFactory {
 
   std::unique_ptr<cricket::SctpTransportInternalFactory>
   CreateSctpTransportInternalFactory() {
-    return absl::make_unique<FakeSctpTransportFactory>();
+    return std::make_unique<FakeSctpTransportFactory>();
   }
 };
 
@@ -86,7 +85,7 @@ class PeerConnectionJsepTest : public ::testing::Test {
     rtc::scoped_refptr<PeerConnectionFactory> pc_factory(
         new rtc::RefCountedObject<PeerConnectionFactoryForJsepTest>());
     RTC_CHECK(pc_factory->Initialize());
-    auto observer = absl::make_unique<MockPeerConnectionObserver>();
+    auto observer = std::make_unique<MockPeerConnectionObserver>();
     auto pc = pc_factory->CreatePeerConnection(config, nullptr, nullptr,
                                                observer.get());
     if (!pc) {
@@ -94,8 +93,8 @@ class PeerConnectionJsepTest : public ::testing::Test {
     }
 
     observer->SetPeerConnectionInterface(pc.get());
-    return absl::make_unique<PeerConnectionWrapper>(pc_factory, pc,
-                                                    std::move(observer));
+    return std::make_unique<PeerConnectionWrapper>(pc_factory, pc,
+                                                   std::move(observer));
   }
 
   std::unique_ptr<rtc::VirtualSocketServer> vss_;

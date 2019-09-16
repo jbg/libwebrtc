@@ -14,7 +14,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "rtc_base/gunit.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/time_utils.h"
@@ -151,7 +150,7 @@ void TestClient::OnPacket(AsyncPacketSocket* socket,
                           const int64_t& packet_time_us) {
   CritScope cs(&crit_);
   packets_.push_back(
-      absl::make_unique<Packet>(remote_addr, buf, size, packet_time_us));
+      std::make_unique<Packet>(remote_addr, buf, size, packet_time_us));
 }
 
 void TestClient::OnReadyToSend(AsyncPacketSocket* socket) {

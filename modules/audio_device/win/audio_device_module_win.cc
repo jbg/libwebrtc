@@ -12,7 +12,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "modules/audio_device/audio_device_buffer.h"
 #include "modules/audio_device/include/audio_device.h"
 #include "rtc_base/checks.h"
@@ -133,7 +132,7 @@ class WindowsAudioDeviceModule : public AudioDeviceModuleForTest {
       return 0;
     }
     audio_device_buffer_ =
-        absl::make_unique<AudioDeviceBuffer>(task_queue_factory_);
+        std::make_unique<AudioDeviceBuffer>(task_queue_factory_);
     AttachAudioBuffer();
     InitStatus status;
     if (output_->Init() != 0) {

@@ -13,7 +13,6 @@
 #include <algorithm>
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "common_video/h264/sps_vui_rewriter.h"
 #include "modules/include/module_common_types_public.h"
 #include "modules/video_coding/include/video_coding_defines.h"
@@ -217,7 +216,7 @@ FrameEncodeMetadataWriter::UpdateBitstream(
 
   rtc::Buffer modified_buffer;
   std::unique_ptr<RTPFragmentationHeader> modified_fragmentation =
-      absl::make_unique<RTPFragmentationHeader>();
+      std::make_unique<RTPFragmentationHeader>();
   modified_fragmentation->CopyFrom(*fragmentation);
 
   // Make sure that the data is not copied if owned by EncodedImage.

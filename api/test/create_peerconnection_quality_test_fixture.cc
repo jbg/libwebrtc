@@ -12,7 +12,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "test/pc/e2e/peer_connection_quality_test.h"
 
 namespace webrtc {
@@ -23,7 +22,7 @@ CreatePeerConnectionE2EQualityTestFixture(
     std::string test_case_name,
     std::unique_ptr<AudioQualityAnalyzerInterface> audio_quality_analyzer,
     std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer) {
-  return absl::make_unique<PeerConnectionE2EQualityTest>(
+  return std::make_unique<PeerConnectionE2EQualityTest>(
       std::move(test_case_name), std::move(audio_quality_analyzer),
       std::move(video_quality_analyzer));
 }

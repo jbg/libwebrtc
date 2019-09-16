@@ -947,7 +947,6 @@ if (is_ios || is_mac) {
         "../rtc_base:checks",
         "../system_wrappers:field_trial",
         "../system_wrappers:metrics",
-        "//third_party/abseil-cpp/absl/memory",
       ]
 
       if (is_ios) {
@@ -1573,7 +1572,6 @@ if (is_ios || is_mac) {
         "../api/video_codecs:video_codecs_api",
         "../common_video",
         "../rtc_base",
-        "//third_party/abseil-cpp/absl/memory",
       ]
     }
 
@@ -1616,7 +1614,6 @@ if (is_ios || is_mac) {
         "../modules/video_coding:video_codec_interface",
         "../rtc_base",
         "../rtc_base:checks",
-        "//third_party/abseil-cpp/absl/memory",
       ]
     }
 

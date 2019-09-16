@@ -15,7 +15,6 @@
 #include <algorithm>  // std::min
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "logging/rtc_event_log/events/rtc_event_rtcp_packet_outgoing.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/app.h"
@@ -82,8 +81,7 @@ class PacketContainer : public rtcp::CompoundPacket {
       if (transport_->SendRtcp(packet.data(), packet.size())) {
         bytes_sent += packet.size();
         if (event_log_) {
-          event_log_->Log(
-              absl::make_unique<RtcEventRtcpPacketOutgoing>(packet));
+          event_log_->Log(std::make_unique<RtcEventRtcpPacketOutgoing>(packet));
         }
       }
     });
@@ -606,7 +604,7 @@ std::unique_ptr<rtcp::RtcpPacket> RTCPSender::BuildAPP(const RtcpContext& ctx) {
 
 std::unique_ptr<rtcp::RtcpPacket> RTCPSender::BuildLossNotification(
     const RtcpContext& ctx) {
-  auto loss_notification = absl::make_unique<rtcp::LossNotification>(
+  auto loss_notification = std::make_unique<rtcp::LossNotification>(
       loss_notification_state_.last_decoded_seq_num,
       loss_notification_state_.last_received_seq_num,
       loss_notification_state_.decodability_flag);
@@ -989,7 +987,7 @@ bool RTCPSender::SendFeedbackPacket(const rtcp::TransportFeedback& packet) {
   auto callback = [&](rtc::ArrayView<const uint8_t> packet) {
     if (transport_->SendRtcp(packet.data(), packet.size())) {
       if (event_log_)
-        event_log_->Log(absl::make_unique<RtcEventRtcpPacketOutgoing>(packet));
+        event_log_->Log(std::make_unique<RtcEventRtcpPacketOutgoing>(packet));
     } else {
       send_failure = true;
     }

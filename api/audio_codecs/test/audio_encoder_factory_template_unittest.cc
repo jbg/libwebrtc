@@ -10,7 +10,6 @@
 
 #include "api/audio_codecs/audio_encoder_factory_template.h"
 
-#include "absl/memory/memory.h"
 #include "api/audio_codecs/L16/audio_encoder_L16.h"
 #include "api/audio_codecs/g711/audio_encoder_g711.h"
 #include "api/audio_codecs/g722/audio_encoder_g722.h"
@@ -66,7 +65,7 @@ struct AudioEncoderFakeApi {
       const Config&,
       int payload_type,
       absl::optional<AudioCodecPairId> /*codec_pair_id*/ = absl::nullopt) {
-    auto enc = absl::make_unique<testing::StrictMock<MockAudioEncoder>>();
+    auto enc = std::make_unique<testing::StrictMock<MockAudioEncoder>>();
     EXPECT_CALL(*enc, SampleRateHz())
         .WillOnce(::testing::Return(Params::CodecInfo().sample_rate_hz));
     return std::move(enc);

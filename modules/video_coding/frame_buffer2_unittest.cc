@@ -15,7 +15,6 @@
 #include <limits>
 #include <vector>
 
-#include "absl/memory/memory.h"
 #include "modules/video_coding/frame_object.h"
 #include "modules/video_coding/jitter_estimator.h"
 #include "modules/video_coding/timing.h"
@@ -162,7 +161,7 @@ class TestFrameBuffer2 : public ::testing::Test {
     std::array<uint16_t, sizeof...(refs)> references = {
         {rtc::checked_cast<uint16_t>(refs)...}};
 
-    auto frame = absl::make_unique<FrameObjectFake>();
+    auto frame = std::make_unique<FrameObjectFake>();
     frame->id.picture_id = picture_id;
     frame->id.spatial_layer = spatial_layer;
     frame->SetSpatialIndex(spatial_layer);

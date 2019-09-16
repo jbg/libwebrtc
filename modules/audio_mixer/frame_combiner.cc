@@ -16,7 +16,6 @@
 #include <iterator>
 #include <string>
 
-#include "absl/memory/memory.h"
 #include "api/array_view.h"
 #include "common_audio/include/audio_util.h"
 #include "modules/audio_mixer/audio_frame_manipulator.h"
@@ -129,8 +128,8 @@ constexpr size_t FrameCombiner::kMaximumChannelSize;
 FrameCombiner::FrameCombiner(bool use_limiter)
     : data_dumper_(new ApmDataDumper(0)),
       mixing_buffer_(
-          absl::make_unique<std::array<std::array<float, kMaximumChannelSize>,
-                                       kMaximumNumberOfChannels>>()),
+          std::make_unique<std::array<std::array<float, kMaximumChannelSize>,
+                                      kMaximumNumberOfChannels>>()),
       limiter_(static_cast<size_t>(48000), data_dumper_.get(), "AudioMixer"),
       use_limiter_(use_limiter) {
   static_assert(kMaximumChannelSize * kMaximumNumberOfChannels <=

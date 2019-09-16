@@ -10,7 +10,6 @@
 
 #include "api/audio_codecs/isac/audio_decoder_isac_fix.h"
 
-#include "absl/memory/memory.h"
 #include "absl/strings/match.h"
 #include "modules/audio_coding/codecs/isac/fix/include/audio_decoder_isacfix.h"
 
@@ -34,7 +33,7 @@ std::unique_ptr<AudioDecoder> AudioDecoderIsacFix::MakeAudioDecoder(
     absl::optional<AudioCodecPairId> /*codec_pair_id*/) {
   AudioDecoderIsacFixImpl::Config c;
   c.sample_rate_hz = 16000;
-  return absl::make_unique<AudioDecoderIsacFixImpl>(c);
+  return std::make_unique<AudioDecoderIsacFixImpl>(c);
 }
 
 }  // namespace webrtc

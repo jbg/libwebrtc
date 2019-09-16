@@ -14,7 +14,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "modules/desktop_capture/mac/desktop_configuration.h"
 #include "modules/desktop_capture/mac/desktop_configuration_monitor.h"
 #include "modules/desktop_capture/mac/window_list_utils.h"
@@ -45,7 +44,7 @@ WindowId WindowFinderMac::GetWindowUnderPoint(DesktopVector point) {
 // static
 std::unique_ptr<WindowFinder> WindowFinder::Create(
     const WindowFinder::Options& options) {
-  return absl::make_unique<WindowFinderMac>(options.configuration_monitor);
+  return std::make_unique<WindowFinderMac>(options.configuration_monitor);
 }
 
 }  // namespace webrtc

@@ -10,7 +10,6 @@
 
 #include "modules/desktop_capture/desktop_frame.h"
 
-#include "absl/memory/memory.h"
 #include "modules/desktop_capture/desktop_region.h"
 #include "modules/desktop_capture/test_utils.h"
 #include "rtc_base/arraysize.h"
@@ -23,7 +22,7 @@ namespace {
 std::unique_ptr<DesktopFrame> CreateTestFrame(DesktopRect rect,
                                               int pixels_value) {
   DesktopSize size = rect.size();
-  auto frame = absl::make_unique<BasicDesktopFrame>(size);
+  auto frame = std::make_unique<BasicDesktopFrame>(size);
   frame->set_top_left(rect.top_left());
   memset(frame->data(), pixels_value, frame->stride() * size.height());
   return frame;

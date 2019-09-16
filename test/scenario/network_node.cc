@@ -12,7 +12,6 @@
 #include <algorithm>
 #include <vector>
 
-#include "absl/memory/memory.h"
 #include "rtc_base/numerics/safe_minmax.h"
 
 namespace webrtc {
@@ -41,7 +40,7 @@ SimulationNode::SimulationNode(NetworkSimulationConfig config,
 std::unique_ptr<SimulatedNetwork> SimulationNode::CreateBehavior(
     NetworkSimulationConfig config) {
   SimulatedNetwork::Config sim_config = CreateSimulationConfig(config);
-  return absl::make_unique<SimulatedNetwork>(sim_config);
+  return std::make_unique<SimulatedNetwork>(sim_config);
 }
 
 void SimulationNode::UpdateConfig(

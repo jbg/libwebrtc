@@ -18,7 +18,6 @@
 #include <string>
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "api/transport/field_trial_based_config.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/dlrr.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
@@ -43,7 +42,7 @@ RtpRtcp::Configuration::Configuration(Configuration&& rhs) = default;
 
 std::unique_ptr<RtpRtcp> RtpRtcp::Create(const Configuration& configuration) {
   RTC_DCHECK(configuration.clock);
-  return absl::make_unique<ModuleRtpRtcpImpl>(configuration);
+  return std::make_unique<ModuleRtpRtcpImpl>(configuration);
 }
 
 ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)

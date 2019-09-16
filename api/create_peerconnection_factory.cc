@@ -12,7 +12,6 @@
 
 #include <utility>
 
-#include "absl/memory/memory.h"
 #include "api/call/call_factory_interface.h"
 #include "api/peer_connection_interface.h"
 #include "api/rtc_event_log/rtc_event_log_factory.h"
@@ -43,7 +42,7 @@ rtc::scoped_refptr<PeerConnectionFactoryInterface> CreatePeerConnectionFactory(
   dependencies.signaling_thread = signaling_thread;
   dependencies.task_queue_factory = CreateDefaultTaskQueueFactory();
   dependencies.call_factory = CreateCallFactory();
-  dependencies.event_log_factory = absl::make_unique<RtcEventLogFactory>(
+  dependencies.event_log_factory = std::make_unique<RtcEventLogFactory>(
       dependencies.task_queue_factory.get());
 
   cricket::MediaEngineDependencies media_dependencies;

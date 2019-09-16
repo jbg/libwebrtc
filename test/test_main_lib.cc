@@ -15,7 +15,6 @@
 
 #include "absl/flags/flag.h"
 #include "absl/flags/parse.h"
-#include "absl/memory/memory.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event_tracer.h"
 #include "rtc_base/logging.h"
@@ -138,7 +137,7 @@ class TestMainImpl : public TestMain {
     webrtc::metrics::Enable();
 
 #if defined(WEBRTC_WIN)
-    winsock_init_ = absl::make_unique<rtc::WinsockInitializer>();
+    winsock_init_ = std::make_unique<rtc::WinsockInitializer>();
 #endif
 
     // Initialize SSL which are used by several tests.
@@ -214,7 +213,7 @@ class TestMainImpl : public TestMain {
 }  // namespace
 
 std::unique_ptr<TestMain> TestMain::Create() {
-  return absl::make_unique<TestMainImpl>();
+  return std::make_unique<TestMainImpl>();
 }
 
 }  // namespace webrtc
