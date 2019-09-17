@@ -78,6 +78,24 @@
     },
     {
       "key": {
+        "uuid": "4fab2675_fa8f9a63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-17T08:07:46Z",
+      "side": 1,
+      "message": "Or does gn_check_autofix put back lines with :memory:memory in them?",
+      "parentUuid": "52644e0b_e5c9b2ed",
+      "revId": "f92e92360580e19c067cd44d0d68d376fc5e1f0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf462cad_bc9bb0ae",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
