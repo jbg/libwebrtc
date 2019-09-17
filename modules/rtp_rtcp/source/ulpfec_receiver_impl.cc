@@ -187,13 +187,16 @@ int32_t UlpfecReceiverImpl::ProcessReceivedFec() {
       crit_sect_.Enter();
       // Create a packet with the buffer to modify it.
       RtpPacketReceived rtp_packet;
-      rtp_packet.Parse(packet->data);
+      auto* data = packet->data.cdata();
+      rtp_packet.Parse(packet->data.ToBuffer());
       rtp_packet.IdentifyExtensions(extensions_);
       // Reset buffer reference, so zeroing would work on a buffer with a
       // single reference.
       packet->data = rtc::CopyOnWriteBuffer(0);
       rtp_packet.ZeroMutableExtensions();
       packet->data = rtp_packet.Buffer();
+      // Ensure that zeroing of extensions is done in place.
+      RTC_DCHECK_EQ(packet->data.cdata(), data);
     }
     fec_->DecodeFec(*received_packet, &recovered_packets_);
   }
