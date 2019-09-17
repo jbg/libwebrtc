@@ -5,16 +5,16 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '31d9542abc48d9e271b472293e52ea5fa4e7a595',
+  'chromium_revision': '848e5f8c91ee8b9be2a67626ab6dcb5ca3ec53e9',
 }
 
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@9d1bb9a3332c93c1eb405f0fe8f32e888df2dee5',
+    'https://chromium.googlesource.com/chromium/src/base@c563cb863fa0e9b51ffb030b3b76bdaeda656aba',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@48ea8b8e1844f641be105da75d3975c0eb58e32e',
+    'https://chromium.googlesource.com/chromium/src/build@c200826f14cd6f06e02458603dc19c03285af730',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@cf454b247c611167388742c7a31ef138a6031172',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -23,13 +23,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@fb0b52197cb65a84edd51e4be044c1fe6cd2b84f',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@3419e811eea351807246a03d84227b119ea2ec98',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@24e33d520348cafede6ff44f968ea3a356fd7cad',
+    'https://chromium.googlesource.com/chromium/src/testing@4989e2538ccfd3d03f0a005d2818d46cdc059253',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@cf41eae8a897fb9d71bd069acae962d13d9b2a61',
+    'https://chromium.googlesource.com/chromium/src/third_party@d857f7ee789fc04c30fb9e069e2300497a37a950',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -119,7 +119,7 @@ deps = {
   'src/third_party/colorama/src':
     'https://chromium.googlesource.com/external/colorama.git@799604a1041e9b3bc5d2789ecbd7e8db2e18e6b8',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@2c210a490857380a93f8308dd504aeb1ef759d38',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@6f9a0238ce40b6af186aac520c3b87ffa9a8be3b',
   'src/third_party/errorprone/lib': {
       'url': 'https://chromium.googlesource.com/chromium/third_party/errorprone.git@980d49e839aa4984015efed34b0134d4b2c9b6d7',
       'condition': 'checkout_android',
@@ -131,7 +131,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/third_party/freetype/src':
-    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@99f23d6ff2203966d210bccd49eacc62a20328f9',
+    'https://chromium.googlesource.com/chromium/src/third_party/freetype2.git@04ebb2a000ee40df2a9900198ec62d79af745b1f',
   'src/third_party/harfbuzz-ng/src':
     'https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git@170b5dd856b1ba8f26e79863fe0c64a52eb68951',
   # WebRTC-only dependency (not present in Chromium).
@@ -231,7 +231,7 @@ deps = {
   'src/third_party/yasm/source/patched-yasm':
     'https://chromium.googlesource.com/chromium/deps/yasm/patched-yasm.git@720b70524a4424b15fc57e82263568c8ba0496ad',
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@f7c3756749c6c092452a25f018d58a98f3a5884c',
+    'https://chromium.googlesource.com/chromium/src/tools@104f42604b6056e0296f233b128a51cdcd4cd34a',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@96f125709acfd0b48fc1e5dae7d6ea42291726ac',
 
