@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "52644e0b_e5c9b2ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-17T08:06:14Z",
+      "side": 1,
+      "message": "Yes, but (1) does that cleanup belong in this CL, and (2) line 21-22 already removes all the deps on absl/memory, right? So you can remove this line, and your script will generate the exact same change?",
+      "parentUuid": "51e73cda_fe3806ec",
+      "revId": "f92e92360580e19c067cd44d0d68d376fc5e1f0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf462cad_bc9bb0ae",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
