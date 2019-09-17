@@ -94,6 +94,30 @@
       "revId": "ec2435763b3e21622a58b21d7f403a60bcf4f065",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d700b4b9_78c41355",
+        "filename": "api/transport/bitrate_settings.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-09-17T06:57:13Z",
+      "side": 1,
+      "message": "nisse@, we commented in the same minute. :)\n\nI prefer to land as is and then do a quick follow-up this afternoon and follow Karl\u0027s advice.",
+      "parentUuid": "ccd9ca83_79718cce",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 1
+      },
+      "revId": "ec2435763b3e21622a58b21d7f403a60bcf4f065",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
