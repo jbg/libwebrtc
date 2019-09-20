@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eee1f137_ce6a03d1",
+        "filename": "modules/rtp_rtcp/source/forward_error_correction.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48d46e70_8bc880f5",
+      "range": {
+        "startLine": 36,
+        "startChar": 43,
+        "endLine": 36,
+        "endChar": 49
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6426b95d_b0e1fddc",
         "filename": "modules/rtp_rtcp/source/ulpfec_receiver_impl.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "10fbc403_31953ba5",
+        "filename": "modules/rtp_rtcp/source/ulpfec_receiver_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6426b95d_b0e1fddc",
+      "range": {
+        "startLine": 190,
+        "startChar": 6,
+        "endLine": 190,
+        "endChar": 11
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dec22ded_cefe37e4",
         "filename": "rtc_base/BUILD.gn",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95be01ff_d4f13d33",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Not relevant anymore.",
+      "parentUuid": "dec22ded_cefe37e4",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 34
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,54 @@
     },
     {
       "key": {
+        "uuid": "85b5ca5a_9585bc52",
+        "filename": "rtc_base/copy_on_write_buffer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "66934a81_6d4867ab",
+      "range": {
+        "startLine": 323,
+        "startChar": 5,
+        "endLine": 323,
+        "endChar": 30
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55d97485_470fa1a0",
+        "filename": "rtc_base/copy_on_write_buffer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9914227_2d40477b",
+      "range": {
+        "startLine": 323,
+        "startChar": 26,
+        "endLine": 323,
+        "endChar": 36
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "184733f4_c7343feb",
         "filename": "rtc_base/copy_on_write_buffer_unittest.cc",
         "patchSetId": 3
@@ -137,6 +257,30 @@
       "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58f7d855_c4602f99",
+        "filename": "rtc_base/copy_on_write_buffer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "184733f4_c7343feb",
+      "range": {
+        "startLine": 344,
+        "startChar": 47,
+        "endLine": 344,
+        "endChar": 50
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "22ee1a51_5ed0db03",
+        "filename": "rtc_base/copy_on_write_buffer_view.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Removed this file.",
+      "parentUuid": "86bfb4f5_175fd46a",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 9
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9894f72c_1268f961",
         "filename": "rtc_base/copy_on_write_buffer_view.cc",
         "patchSetId": 3
@@ -174,6 +342,30 @@
       "writtenOn": "2019-09-19T16:41:13Z",
       "side": 1,
       "message": "may be \noffset_ + new_size \u003e buffer_.size() ?",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 24
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "443e5304_bf0239a8",
+        "filename": "rtc_base/copy_on_write_buffer_view.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Removed this file.",
+      "parentUuid": "9894f72c_1268f961",
       "range": {
         "startLine": 53,
         "startChar": 6,
@@ -233,6 +425,30 @@
     },
     {
       "key": {
+        "uuid": "0f742a7c_6108c344",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Merged thid funcitonality into CopyOnWriteBuffer. However, having arrayView is not the best approach, since the underlying buffer_ may change due to some operations. This will make it hard to keep buffer_ and ArrayView synchronised. I\u0027ve instead added offset_ and size_ to CopyOnWriteBuffer.",
+      "parentUuid": "386673c8_a8ca28df",
+      "range": {
+        "startLine": 20,
+        "startChar": 23,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e38f944_e0e8c99c",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -256,6 +472,30 @@
     },
     {
       "key": {
+        "uuid": "8c6606b6_c2829c62",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7e38f944_e0e8c99c",
+      "range": {
+        "startLine": 25,
+        "startChar": 57,
+        "endLine": 26,
+        "endChar": 75
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6de16a0_6b7b6d5f",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -276,6 +516,30 @@
       "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b611dfa3_6a9a343c",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b6de16a0_6b7b6d5f",
+      "range": {
+        "startLine": 27,
+        "startChar": 58,
+        "endLine": 27,
+        "endChar": 61
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -319,6 +583,24 @@
     },
     {
       "key": {
+        "uuid": "9b729a80_3be91669",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c486b0d5_c6a67a3a",
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f174473_352d9397",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -342,6 +624,30 @@
     },
     {
       "key": {
+        "uuid": "e16e8bcc_40ba3a99",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Not relevant anymore, as this class is removed now.",
+      "parentUuid": "9f174473_352d9397",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19a27b0d_d6547367",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -356,6 +662,24 @@
       "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1691471d_27b0e921",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "19a27b0d_d6547367",
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -406,6 +730,30 @@
     },
     {
       "key": {
+        "uuid": "86adf42f_9c5e2416",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c132947f_f762a392",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e717b40_8cc3cb6a",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -417,6 +765,30 @@
       "writtenOn": "2019-09-19T16:41:13Z",
       "side": 1,
       "message": "\u003d default; ?\n\nalso, may be put assign operator between constructors and destructor:\nhttps://google.github.io/styleguide/cppguide.html#Declaration_Order",
+      "range": {
+        "startLine": 91,
+        "startChar": 69,
+        "endLine": 99,
+        "endChar": 3
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "439ee7f9_7e803f7b",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Removed this file.",
+      "parentUuid": "6e717b40_8cc3cb6a",
       "range": {
         "startLine": 91,
         "startChar": 69,
@@ -452,6 +824,30 @@
     },
     {
       "key": {
+        "uuid": "41eba623_4c63c8b1",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Removed this file.",
+      "parentUuid": "27ffc113_6a8c3294",
+      "range": {
+        "startLine": 101,
+        "startChar": 52,
+        "endLine": 101,
+        "endChar": 54
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "035d6f05_f40de51b",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -463,6 +859,30 @@
       "writtenOn": "2019-09-19T16:41:13Z",
       "side": 1,
       "message": "Is there plan to use the compare operators?\nmay be do not add them until there is use case for those.",
+      "range": {
+        "startLine": 120,
+        "startChar": 7,
+        "endLine": 120,
+        "endChar": 17
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e879111_27defe9d",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Removed this file.",
+      "parentUuid": "035d6f05_f40de51b",
       "range": {
         "startLine": 120,
         "startChar": 7,
@@ -522,6 +942,30 @@
     },
     {
       "key": {
+        "uuid": "5a8829a0_4589f005",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Removed this file.",
+      "parentUuid": "598bf8a7_6a269f05",
+      "range": {
+        "startLine": 134,
+        "startChar": 2,
+        "endLine": 134,
+        "endChar": 55
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9ceb8ad_43773879",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -545,6 +989,30 @@
     },
     {
       "key": {
+        "uuid": "0125544d_3f26ebaf",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Removed this file.",
+      "parentUuid": "d9ceb8ad_43773879",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 30
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e23af72a_e9faf620",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -556,6 +1024,30 @@
       "writtenOn": "2019-09-19T16:41:13Z",
       "side": 1,
       "message": "may be just \u0027Slice\u0027 (this function doesn\u0027t Get what already there, it creates the slice)",
+      "range": {
+        "startLine": 165,
+        "startChar": 24,
+        "endLine": 165,
+        "endChar": 27
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839d4660_d23b5a5e",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e23af72a_e9faf620",
       "range": {
         "startLine": 165,
         "startChar": 24,
@@ -614,6 +1106,30 @@
     },
     {
       "key": {
+        "uuid": "700cc274_ffc12f49",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Removed this file.",
+      "parentUuid": "676f1edb_306aee00",
+      "range": {
+        "startLine": 168,
+        "startChar": 30,
+        "endLine": 168,
+        "endChar": 31
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4b07d966_d13d5396",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -631,6 +1147,24 @@
     },
     {
       "key": {
+        "uuid": "759c8d28_41b283f1",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Done in COWBuffer now.\n\nDid you mean overflow as a bad state, since all of values are size_t?\nIt still can happen if size() is close to max value, offset_ is a little less and length_ is also big.",
+      "parentUuid": "4b07d966_d13d5396",
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c35131b_6052e1c7",
         "filename": "test/fuzzers/ulpfec_header_reader_fuzzer.cc",
         "patchSetId": 3
@@ -642,6 +1176,30 @@
       "writtenOn": "2019-09-19T16:41:13Z",
       "side": 1,
       "message": "may be instead add EnsureCapacity function to the Slice",
+      "range": {
+        "startLine": 28,
+        "startChar": 45,
+        "endLine": 28,
+        "endChar": 67
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "876fe5a7_3e7b1d39",
+        "filename": "test/fuzzers/ulpfec_header_reader_fuzzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-09-20T13:49:54Z",
+      "side": 1,
+      "message": "Reverted.",
+      "parentUuid": "0c35131b_6052e1c7",
       "range": {
         "startLine": 28,
         "startChar": 45,
