@@ -150,10 +150,9 @@ int ForwardErrorCorrection::EncodeFec(const PacketList& media_packets,
     return 0;
   }
   for (int i = 0; i < num_fec_packets; ++i) {
-    generated_fec_packets_[i].data.EnsureCapacity(IP_PACKET_SIZE);
+    generated_fec_packets_[i].data = rtc::CopyOnWriteBuffer(0, IP_PACKET_SIZE);
     memset(generated_fec_packets_[i].data.data(), 0, IP_PACKET_SIZE);
     // Use this as a marker for untouched packets.
-    generated_fec_packets_[i].data.SetSize(0);
     fec_packets->push_back(&generated_fec_packets_[i]);
   }
 
@@ -559,7 +558,6 @@ bool ForwardErrorCorrection::StartPacketRecovery(
     return false;
   }
   // Initialize recovered packet data.
-  recovered_packet->pkt->data.EnsureCapacity(IP_PACKET_SIZE);
   recovered_packet->pkt->data.SetSize(fec_packet.protection_length +
                                       kRtpHeaderSize);
   recovered_packet->returned = false;
@@ -631,7 +629,7 @@ void ForwardErrorCorrection::XorPayloads(const Packet& src,
                                          Packet* dst) {
   // XOR the payload.
   RTC_DCHECK_LE(kRtpHeaderSize + payload_length, src.data.size());
-  RTC_DCHECK_LE(dst_offset + payload_length, dst->data.capacity());
+  RTC_DCHECK_LE(dst_offset + payload_length, dst->data.size());
   if (dst_offset + payload_length > dst->data.size()) {
     dst->data.SetSize(dst_offset + payload_length);
   }

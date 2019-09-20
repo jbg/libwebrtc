@@ -67,8 +67,8 @@ void FuzzOneInput(const uint8_t* data, size_t size) {
   ForwardErrorCorrection::ReceivedPacket received_packet;
   received_packet.pkt = rtc::scoped_refptr<ForwardErrorCorrection::Packet>(
       new ForwardErrorCorrection::Packet());
-  received_packet.pkt->data.SetSize(kPacketSize);
   received_packet.pkt->data.EnsureCapacity(IP_PACKET_SIZE);
+  received_packet.pkt->data.SetSize(kPacketSize);
   uint8_t* packet_buffer = received_packet.pkt->data.data();
   uint8_t reordering;
   uint16_t seq_num_diff;
