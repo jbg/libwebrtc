@@ -19,6 +19,7 @@
 #include <type_traits>
 #include <utility>
 
+#include "api/array_view.h"
 #include "api/scoped_refptr.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/checks.h"
@@ -56,6 +57,8 @@ class CopyOnWriteBuffer {
       : CopyOnWriteBuffer(size, capacity) {
     if (buffer_) {
       std::memcpy(buffer_->data(), data, size);
+      offset_ = 0;
+      size_ = size;
     }
   }
 
@@ -88,8 +91,8 @@ class CopyOnWriteBuffer {
     if (!buffer_) {
       return nullptr;
     }
-    CloneDataIfReferenced(buffer_->capacity());
-    return buffer_->data<T>();
+    CloneDataIfReferenced(this->capacity());
+    return buffer_->data<T>() + offset_;
   }
 
   // Get const pointer to the data. This will not create a copy of the
@@ -102,17 +105,17 @@ class CopyOnWriteBuffer {
     if (!buffer_) {
       return nullptr;
     }
-    return buffer_->data<T>();
+    return buffer_->data<T>() + offset_;
   }
 
   size_t size() const {
     RTC_DCHECK(IsConsistent());
-    return buffer_ ? buffer_->size() : 0;
+    return size_;
   }
 
   size_t capacity() const {
     RTC_DCHECK(IsConsistent());
-    return buffer_ ? buffer_->capacity() : 0;
+    return buffer_ ? buffer_->capacity() - offset_ : 0;
   }
 
   CopyOnWriteBuffer& operator=(const CopyOnWriteBuffer& buf) {
@@ -120,6 +123,8 @@ class CopyOnWriteBuffer {
     RTC_DCHECK(buf.IsConsistent());
     if (&buf != this) {
       buffer_ = buf.buffer_;
+      offset_ = buf.offset_;
+      size_ = buf.size_;
     }
     return *this;
   }
@@ -128,6 +133,10 @@ class CopyOnWriteBuffer {
     RTC_DCHECK(IsConsistent());
     RTC_DCHECK(buf.IsConsistent());
     buffer_ = std::move(buf.buffer_);
+    offset_ = buf.offset_;
+    size_ = buf.size_;
+    buf.offset_ = 0;
+    buf.size_ = 0;
     return *this;
   }
 
@@ -138,12 +147,12 @@ class CopyOnWriteBuffer {
   }
 
   uint8_t& operator[](size_t index) {
-    RTC_DCHECK_LT(index, size());
+    RTC_DCHECK_LT(index, size_);
     return data()[index];
   }
 
   uint8_t operator[](size_t index) const {
-    RTC_DCHECK_LT(index, size());
+    RTC_DCHECK_LT(index, size_);
     return cdata()[index];
   }
 
@@ -161,6 +170,9 @@ class CopyOnWriteBuffer {
     } else {
       buffer_->SetData(data, size);
     }
+    offset_ = 0;
+    size_ = size;
+
     RTC_DCHECK(IsConsistent());
   }
 
@@ -177,6 +189,8 @@ class CopyOnWriteBuffer {
     RTC_DCHECK(buf.IsConsistent());
     if (&buf != this) {
       buffer_ = buf.buffer_;
+      offset_ = buf.offset_;
+      size_ = buf.size_;
     }
   }
 
@@ -188,13 +202,19 @@ class CopyOnWriteBuffer {
     RTC_DCHECK(IsConsistent());
     if (!buffer_) {
       buffer_ = new RefCountedObject<Buffer>(data, size);
+      offset_ = 0;
+      size_ = size;
       RTC_DCHECK(IsConsistent());
       return;
     }
 
-    CloneDataIfReferenced(
-        std::max(buffer_->capacity(), buffer_->size() + size));
+    CloneDataIfReferenced(std::max(capacity(), size_ + size));
+
+    // Remove unnecessary data to the right of the slice first.
+    buffer_->SetSize(offset_ + size_);
     buffer_->AppendData(data, size);
+    size_ += size;
+
     RTC_DCHECK(IsConsistent());
   }
 
@@ -228,6 +248,16 @@ class CopyOnWriteBuffer {
   // Swaps two buffers.
   friend void swap(CopyOnWriteBuffer& a, CopyOnWriteBuffer& b) {
     std::swap(a.buffer_, b.buffer_);
+    std::swap(a.offset_, b.offset_);
+    std::swap(a.size_, b.size_);
+  }
+
+  CopyOnWriteBuffer Slice(size_t offset, size_t length) const {
+    CopyOnWriteBuffer slice(*this);
+    RTC_DCHECK_LE(length + offset, size_);
+    slice.offset_ += offset;
+    slice.size_ = length;
+    return slice;
   }
 
  private:
@@ -236,10 +266,18 @@ class CopyOnWriteBuffer {
   void CloneDataIfReferenced(size_t new_capacity);
 
   // Pre- and postcondition of all methods.
-  bool IsConsistent() const { return (!buffer_ || buffer_->capacity() > 0); }
+  bool IsConsistent() const {
+    return (!buffer_ ||
+            (buffer_->capacity() > 0 && offset_ <= buffer_->size() &&
+             offset_ + size_ <= buffer_->size())) &&
+           (buffer_ || (size_ == 0 && offset_ == 0));
+    ;
+  }
 
   // buffer_ is either null, or points to an rtc::Buffer with capacity > 0.
   scoped_refptr<RefCountedObject<Buffer>> buffer_;
+  size_t offset_;
+  size_t size_;
 };
 
 }  // namespace rtc

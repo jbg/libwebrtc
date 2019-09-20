@@ -14,40 +14,46 @@
 
 namespace rtc {
 
-CopyOnWriteBuffer::CopyOnWriteBuffer() {
+CopyOnWriteBuffer::CopyOnWriteBuffer() : offset_(0), size_(0) {
   RTC_DCHECK(IsConsistent());
 }
 
 CopyOnWriteBuffer::CopyOnWriteBuffer(const CopyOnWriteBuffer& buf)
-    : buffer_(buf.buffer_) {}
+    : buffer_(buf.buffer_), offset_(buf.offset_), size_(buf.size_) {}
 
 CopyOnWriteBuffer::CopyOnWriteBuffer(CopyOnWriteBuffer&& buf)
-    : buffer_(std::move(buf.buffer_)) {}
+    : buffer_(std::move(buf.buffer_)), offset_(buf.offset_), size_(buf.size_) {
+  buf.offset_ = 0;
+  buf.size_ = 0;
+}
 
 CopyOnWriteBuffer::CopyOnWriteBuffer(const std::string& s)
     : CopyOnWriteBuffer(s.data(), s.length()) {}
 
 CopyOnWriteBuffer::CopyOnWriteBuffer(size_t size)
-    : buffer_(size > 0 ? new RefCountedObject<Buffer>(size) : nullptr) {
+    : buffer_(size > 0 ? new RefCountedObject<Buffer>(size) : nullptr),
+      offset_(0),
+      size_(size) {
   RTC_DCHECK(IsConsistent());
 }
 
 CopyOnWriteBuffer::CopyOnWriteBuffer(size_t size, size_t capacity)
     : buffer_(size > 0 || capacity > 0
                   ? new RefCountedObject<Buffer>(size, capacity)
-                  : nullptr) {
+                  : nullptr),
+      offset_(0),
+      size_(size) {
   RTC_DCHECK(IsConsistent());
 }
 
 CopyOnWriteBuffer::~CopyOnWriteBuffer() = default;
 
 bool CopyOnWriteBuffer::operator==(const CopyOnWriteBuffer& buf) const {
-  // Must either use the same buffer internally or have the same contents.
+  // Must either be the same view of the same buffer or have the same contents.
   RTC_DCHECK(IsConsistent());
   RTC_DCHECK(buf.IsConsistent());
-  return buffer_.get() == buf.buffer_.get() ||
-         (buffer_.get() && buf.buffer_.get() &&
-          *buffer_.get() == *buf.buffer_.get());
+  return size_ == buf.size_ && (this->cdata() == buf.cdata() ||
+                                memcmp(cdata(), buf.cdata(), size_) == 0);
 }
 
 void CopyOnWriteBuffer::SetSize(size_t size) {
@@ -55,18 +61,26 @@ void CopyOnWriteBuffer::SetSize(size_t size) {
   if (!buffer_) {
     if (size > 0) {
       buffer_ = new RefCountedObject<Buffer>(size);
+      offset_ = 0;
+      size_ = size;
     }
     RTC_DCHECK(IsConsistent());
     return;
   }
 
+  if (size <= size_) {
+    size_ = size;
+    return;
+  }
+
   // Clone data if referenced.
   if (!buffer_->HasOneRef()) {
-    buffer_ = new RefCountedObject<Buffer>(buffer_->data(),
-                                           std::min(buffer_->size(), size),
-                                           std::max(buffer_->capacity(), size));
+    buffer_ = new RefCountedObject<Buffer>(buffer_->data(), size,
+                                           std::max(capacity(), size));
+    offset_ = 0;
   }
-  buffer_->SetSize(size);
+  buffer_->SetSize(size + offset_);
+  size_ = size;
   RTC_DCHECK(IsConsistent());
 }
 
@@ -75,15 +89,17 @@ void CopyOnWriteBuffer::EnsureCapacity(size_t capacity) {
   if (!buffer_) {
     if (capacity > 0) {
       buffer_ = new RefCountedObject<Buffer>(0, capacity);
+      offset_ = 0;
+      size_ = 0;
     }
     RTC_DCHECK(IsConsistent());
     return;
-  } else if (capacity <= buffer_->capacity()) {
+  } else if (capacity <= this->capacity()) {
     return;
   }
 
-  CloneDataIfReferenced(std::max(buffer_->capacity(), capacity));
-  buffer_->EnsureCapacity(capacity);
+  CloneDataIfReferenced(std::max(this->capacity(), capacity));
+  buffer_->EnsureCapacity(capacity + offset_);
   RTC_DCHECK(IsConsistent());
 }
 
@@ -96,6 +112,8 @@ void CopyOnWriteBuffer::Clear() {
   } else {
     buffer_ = new RefCountedObject<Buffer>(0, buffer_->capacity());
   }
+  offset_ = 0;
+  size_ = 0;
   RTC_DCHECK(IsConsistent());
 }
 
@@ -104,8 +122,9 @@ void CopyOnWriteBuffer::CloneDataIfReferenced(size_t new_capacity) {
     return;
   }
 
-  buffer_ = new RefCountedObject<Buffer>(buffer_->data(), buffer_->size(),
+  buffer_ = new RefCountedObject<Buffer>(buffer_->data() + offset_, size_,
                                          new_capacity);
+  offset_ = 0;
   RTC_DCHECK(IsConsistent());
 }
 
