@@ -186,6 +186,30 @@
     },
     {
       "key": {
+        "uuid": "386673c8_a8ca28df",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-20T02:30:19Z",
+      "side": 1,
+      "message": "+1 for the naming suggestion.\n\nHowever, I\u0027d also like to raise the option of baking this facility into CopyOnWriteBuffer instead of layering a separate class on top. It would just need an ArrayView data member to keep track of the selected slice, and all its read-only methods could use the ArrayView directly instead of having to dereference the buffer pointer.",
+      "parentUuid": "3bacaec4_7d422c78",
+      "range": {
+        "startLine": 20,
+        "startChar": 23,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e38f944_e0e8c99c",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -295,6 +319,23 @@
     },
     {
       "key": {
+        "uuid": "19a27b0d_d6547367",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-20T02:30:19Z",
+      "side": 1,
+      "message": "Isn\u0027t this exactly what the compiler would do anyway?",
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "794c431c_72b9daee",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -306,6 +347,30 @@
       "writtenOn": "2019-09-19T16:41:13Z",
       "side": 1,
       "message": "may be you do not need to copy it. e.g.\n\nCowBuffer original \u003d \u003csomething\u003e\nCowBufferSlice slice(original, 1, 3);\n// destroy original.\nslice has single reference now. Can modify the data without need for copy.\n\n[but if it is complicated, do not bother. shrinking has it\u0027s value too.]",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c132947f_f762a392",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-20T02:30:19Z",
+      "side": 1,
+      "message": "Also, you do a second check + possible duplication in the data() call on line 65. It would be easier to write this efficiently if you didn\u0027t have two separate classes.",
+      "parentUuid": "794c431c_72b9daee",
       "range": {
         "startLine": 62,
         "startChar": 4,
@@ -410,6 +475,30 @@
     },
     {
       "key": {
+        "uuid": "598bf8a7_6a269f05",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-20T02:30:19Z",
+      "side": 1,
+      "message": "+1 for making comparison operators free functions---that\u0027s the prettiest way to do almost all binary operators IMO. But also +1 for not defining them unless we actually need them.",
+      "parentUuid": "60dbd5ea_4fe9ee7e",
+      "range": {
+        "startLine": 134,
+        "startChar": 2,
+        "endLine": 134,
+        "endChar": 55
+      },
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9ceb8ad_43773879",
         "filename": "rtc_base/copy_on_write_buffer_view.h",
         "patchSetId": 3
@@ -499,6 +588,23 @@
       "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b07d966_d13d5396",
+        "filename": "rtc_base/copy_on_write_buffer_view.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-20T02:30:19Z",
+      "side": 1,
+      "message": "Replace with\n\n  offset_ \u003c\u003d buffer_.size() \u0026\u0026 offset_ + length_ \u003c\u003d buffer_.size()\n\nExercise: What bad state would go undetected otherwise?\n\nAlso, do you need special casing for zero length slices? Should buffer_.size() always be 0 if length_ \u003d\u003d 0?",
+      "revId": "6acb7e3ee88fb782b4b96a8504aeafd5769ed1ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
