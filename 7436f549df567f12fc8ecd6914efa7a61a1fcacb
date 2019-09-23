@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee60e6d_bb067d3e",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-09-23T20:02:57Z",
+      "side": 1,
+      "message": "I would probably drop \"this-\u003e\" prefix.\nOther functions do not use it",
+      "range": {
+        "startLine": 94,
+        "startChar": 26,
+        "endLine": 94,
+        "endChar": 32
+      },
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

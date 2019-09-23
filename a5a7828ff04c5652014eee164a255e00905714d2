@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29eac409_a64f77a3",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-09-23T20:02:57Z",
+      "side": 1,
+      "message": "you chose not to use this dependency.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "a5a7828ff04c5652014eee164a255e00905714d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
