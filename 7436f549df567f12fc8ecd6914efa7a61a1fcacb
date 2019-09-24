@@ -2,6 +2,109 @@
   "comments": [
     {
       "key": {
+        "uuid": "f063a557_a091ba86",
+        "filename": "modules/rtp_rtcp/source/ulpfec_receiver_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "const? Also, call it \"original_data\" or something like that?",
+      "range": {
+        "startLine": 174,
+        "startChar": 21,
+        "endLine": 174,
+        "endChar": 25
+      },
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1b529e4_7ed3a99f",
+        "filename": "rtc_base/copy_on_write_buffer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "DCHECK that buf is consistent here? It\u0027s less trivial than it used to be...",
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae2d2717_4670bae0",
+        "filename": "rtc_base/copy_on_write_buffer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "This is inefficient; if buffer_ needs to reallocate and copy, we should omit the first offset_ bytes.",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a62a0116_69ffd7f1",
+        "filename": "rtc_base/copy_on_write_buffer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "This is inefficient; if buffer_ needs to reallocate and copy, we should omit the first offset_ bytes.",
+      "range": {
+        "startLine": 97,
+        "startChar": 2,
+        "endLine": 97,
+        "endChar": 46
+      },
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c753f73c_0c566e9b",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cee60e6d_bb067d3e",
         "filename": "rtc_base/copy_on_write_buffer.h",
         "patchSetId": 8
@@ -22,6 +125,115 @@
       "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8507a995_f9fd1423",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "+1. Several more cases below.",
+      "parentUuid": "cee60e6d_bb067d3e",
+      "range": {
+        "startLine": 94,
+        "startChar": 26,
+        "endLine": 94,
+        "endChar": 32
+      },
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51646960_068c8a1d",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "You don\u0027t need to change this (or the one five lines below).",
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25ff377f_8eed7927",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "This comment applies only to the statement on line 214, so put it on the same line, after the statement.",
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9df93955_f20026e9",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "Also DCHECK that the addition here doesn\u0027t overflow. An easy way to do this is\n\n  RTC_DCHECK_LE(offset, size_);",
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10a1068f_3c38b130",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "Would it be easier to read if rewritten like this?\n\n  if (buffer_) {\n    return buffer_-\u003ecapacity() \u003e 0\n        \u0026\u0026 offset_ \u003c\u003d buffer_-\u003esize()\n        \u0026\u0026 offset_ + size_ \u003c\u003d buffer_-\u003esize();\n  } else {\n    return size_ \u003d\u003d 0 \u0026\u0026 offset_ \u003d\u003d 0;\n  }",
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "067c4782_3c17cd49",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-24T09:53:11Z",
+      "side": 1,
+      "message": "Document what these mean, including the nitty-gritty details encoded in IsConsistent().",
+      "revId": "7436f549df567f12fc8ecd6914efa7a61a1fcacb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
