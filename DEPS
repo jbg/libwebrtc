@@ -5,7 +5,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'b3fb292c9b2e05ab1d1c3d456e499ae58296c9c2',
+  'chromium_revision': '08d1887f856079c7e7d30f4e418c30b46fc440aa',
 }
 
 deps = {
@@ -23,13 +23,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@6e88e80c50ad1dc39ec49bbdce8c7ee98f26df30',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@35f00ba645f736d582fbc37ceb5afd2388918ba3',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@528f5452abe01371659cb6b733391e3d41a92492',
+    'https://chromium.googlesource.com/chromium/src/testing@449381401ded89defefbe0706a677c070100fbc8',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@fd4e0097715baca5aae26c291cf63f0e0b42e061',
+    'https://chromium.googlesource.com/chromium/src/third_party@2a526ff3839b735b1fb3148e531349fbf9f43571',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -111,7 +111,7 @@ deps = {
   'src/third_party/boringssl/src':
     'https://boringssl.googlesource.com/boringssl.git@a7d9ac2af4684747c4524cbeba9737b04dce3e3e',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@b079ab860152f851bbd13ecedc759145d034e975',
+    'https://chromium.googlesource.com/catapult.git@6730faf618f825994304332395b41c934d9de512',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
     'condition': 'checkout_android',
@@ -231,7 +231,7 @@ deps = {
   'src/third_party/yasm/source/patched-yasm':
     'https://chromium.googlesource.com/chromium/deps/yasm/patched-yasm.git@720b70524a4424b15fc57e82263568c8ba0496ad',
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@8b16e3003bc59cb4213e0f7525f070afeabdf374',
+    'https://chromium.googlesource.com/chromium/src/tools@59dc03e2e98ada6922eefed5144a1a58c286e5fe',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@885b3febcc170a60f25795304e60927b77d1e92d',
 
