@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f0948e5_e4e3660d",
+        "filename": "rtc_base/copy_on_write_buffer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-25T12:15:03Z",
+      "side": 1,
+      "message": "Instead of the two Clone* methods, might it be better to have the following method:\n\n  UnshareAndEnsureCapacity(size_t new_capacity)\n\nWhich creates a new buffer unless the buffer is already unshared *and* the capacity is large enough. You\u0027d only have to also check the capacity on line 126.",
+      "revId": "591769ecd20e7c88f35c1dbfad4308f2a6777b76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2da61e82_d5485ab7",
+        "filename": "rtc_base/copy_on_write_buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-09-25T12:15:03Z",
+      "side": 1,
+      "message": "Nit: It\u0027s probably best to check these in the other order. Thhat way we\u0027ll get better info if they trigger.",
+      "revId": "591769ecd20e7c88f35c1dbfad4308f2a6777b76",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
