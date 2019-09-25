@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64a8df52_ae3efc7d",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:38:52Z",
+      "side": 1,
+      "message": "Is it useful to call this with a nullopt value? Prefer to make it non-optional, and have caller pass PlusInfinity whenever that\u0027s appropriate.",
+      "range": {
+        "startLine": 289,
+        "startChar": 4,
+        "endLine": 289,
+        "endChar": 47
+      },
+      "revId": "62c7203b134998c640a5afc6ff4eb4d4de97d6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f3c40ce_69c80fa2",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:38:52Z",
+      "side": 1,
+      "message": "Looks a bit strange to replace 0 by infinity. Maybe add a TODO item on fixing caller to pass PlusInfinity when appropriate, and delete this substitution?",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 50
+      },
+      "revId": "62c7203b134998c640a5afc6ff4eb4d4de97d6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e55d38e3_43fda271",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:38:52Z",
+      "side": 1,
+      "message": "The new name is quite non-descriptive.",
+      "range": {
+        "startLine": 90,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 24
+      },
+      "revId": "62c7203b134998c640a5afc6ff4eb4d4de97d6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9972e63e_4d7c6013",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:38:52Z",
+      "side": 1,
+      "message": "What\u0027s the default initial value for these two?",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 35
+      },
+      "revId": "62c7203b134998c640a5afc6ff4eb4d4de97d6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8353544_9e1326d2",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:38:52Z",
+      "side": 1,
+      "message": "RtcEventLog* const",
+      "range": {
+        "startLine": 179,
+        "startChar": 2,
+        "endLine": 179,
+        "endChar": 14
+      },
+      "revId": "62c7203b134998c640a5afc6ff4eb4d4de97d6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "298d7d40_0a26acc5",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:38:52Z",
+      "side": 1,
+      "message": "Ideally, these should be const too, since they\u0027re set at construction time. But may have to be packaged in a struct to make that easy.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 30
+      },
+      "revId": "62c7203b134998c640a5afc6ff4eb4d4de97d6f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

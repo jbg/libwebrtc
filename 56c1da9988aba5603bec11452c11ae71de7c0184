@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "495eb0f3_2163cb7e",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:38:52Z",
+      "side": 0,
+      "message": "Was this never needed, or has it moved elsewhere?",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 464,
+        "endChar": 54
+      },
+      "revId": "56c1da9988aba5603bec11452c11ae71de7c0184",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41bb0b34_3d833d22",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:38:52Z",
+      "side": 0,
+      "message": "Is this moved elsewhere, or just deleted? It would perhaps be easier to review if split into pieces, e.g., one cl with renaming only, one with deletions (you have one like that?) and one or more for code moved around.",
+      "range": {
+        "startLine": 590,
+        "startChar": 0,
+        "endLine": 604,
+        "endChar": 5
+      },
+      "revId": "56c1da9988aba5603bec11452c11ae71de7c0184",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
