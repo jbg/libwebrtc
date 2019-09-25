@@ -55,7 +55,7 @@ void TestProbing(bool use_delay_based) {
   } else {
     bwe.UpdateReceiverEstimate(Timestamp::ms(now_ms), DataRate::bps(kRembBps));
   }
-  bwe.UpdateEstimate(Timestamp::ms(now_ms));
+  bwe.OnProcessInterval(Timestamp::ms(now_ms));
   EXPECT_EQ(kRembBps, bwe.target_rate().bps());
 
   // Second REMB doesn't apply immediately.
@@ -67,7 +67,7 @@ void TestProbing(bool use_delay_based) {
     bwe.UpdateReceiverEstimate(Timestamp::ms(now_ms),
                                DataRate::bps(kSecondRembBps));
   }
-  bwe.UpdateEstimate(Timestamp::ms(now_ms));
+  bwe.OnProcessInterval(Timestamp::ms(now_ms));
   EXPECT_EQ(kRembBps, bwe.target_rate().bps());
 }
 
@@ -108,7 +108,7 @@ TEST(SendSideBweTest, DoesntReapplyBitrateDecreaseWithoutFollowingRemb) {
 
   // Trigger an update 2 seconds later to not be rate limited.
   now_ms += 1000;
-  bwe.UpdateEstimate(Timestamp::ms(now_ms));
+  bwe.OnProcessInterval(Timestamp::ms(now_ms));
   EXPECT_LT(bwe.target_rate().bps(), kInitialBitrateBps);
   // Verify that the obtained bitrate isn't hitting the min bitrate, or this
   // test doesn't make sense. If this ever happens, update the thresholds or
@@ -124,7 +124,7 @@ TEST(SendSideBweTest, DoesntReapplyBitrateDecreaseWithoutFollowingRemb) {
   // Trigger an update 2 seconds later to not be rate limited (but it still
   // shouldn't update).
   now_ms += 1000;
-  bwe.UpdateEstimate(Timestamp::ms(now_ms));
+  bwe.OnProcessInterval(Timestamp::ms(now_ms));
 
   EXPECT_EQ(last_bitrate_bps, bwe.target_rate().bps());
   // The old loss rate should still be applied though.
@@ -149,7 +149,7 @@ TEST(SendSideBweTest, SettingSendBitrateOverridesDelayBasedEstimate) {
 
   bwe.UpdateDelayBasedEstimate(Timestamp::ms(now_ms),
                                DataRate::bps(kDelayBasedBitrateBps));
-  bwe.UpdateEstimate(Timestamp::ms(now_ms));
+  bwe.OnProcessInterval(Timestamp::ms(now_ms));
   EXPECT_GE(bwe.target_rate().bps(), kInitialBitrateBps);
   EXPECT_LE(bwe.target_rate().bps(), kDelayBasedBitrateBps);
 
