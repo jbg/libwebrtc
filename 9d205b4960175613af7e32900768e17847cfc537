@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52ab51cf_5d97a015",
+        "filename": "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-25T13:10:08Z",
+      "side": 1,
+      "message": "Nice to get a first comment on this class ;-)",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 55
+      },
+      "revId": "9d205b4960175613af7e32900768e17847cfc537",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
