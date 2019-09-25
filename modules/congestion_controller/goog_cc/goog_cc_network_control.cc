@@ -187,7 +187,7 @@ NetworkControlUpdate GoogCcNetworkController::OnProcessInterval(
     congestion_window_pushback_controller_->UpdatePacingQueue(
         msg.pacer_queue->bytes());
   }
-  bandwidth_estimation_->UpdateEstimate(msg.at_time);
+  bandwidth_estimation_->OnProcessInterval(msg.at_time);
   absl::optional<int64_t> start_time_ms =
       alr_detector_->GetApplicationLimitedRegionStartTime();
   probe_controller_->SetAlrStartTimeMs(start_time_ms);
@@ -217,8 +217,12 @@ NetworkControlUpdate GoogCcNetworkController::OnRemoteBitrateReport(
     RTC_LOG(LS_ERROR) << "Received REMB for packet feedback only GoogCC";
     return NetworkControlUpdate();
   }
+  absl::optional<DataRate> remote_bitrate_max;
+  if (!msg.bandwidth.IsZero()) {
+    remote_bitrate_max = msg.bandwidth;
+  }
   bandwidth_estimation_->UpdateReceiverEstimate(msg.receive_time,
-                                                msg.bandwidth);
+                                                remote_bitrate_max);
   BWE_TEST_LOGGING_PLOT(1, "REMB_kbps", msg.receive_time.ms(),
                         msg.bandwidth.bps() / 1000);
   return NetworkControlUpdate();
