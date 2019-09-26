@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "627bfee2_9ff90ff8",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-09-26T09:34:49Z",
+      "side": 1,
+      "message": "I\u0027m not sure. IIRC it should be just \"alice\" and \"bob\"",
+      "parentUuid": "9ba28c56_cbaa02a5",
+      "range": {
+        "startLine": 38,
+        "startChar": 23,
+        "endLine": 38,
+        "endChar": 31
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1dcfc7d0_ada772ad",
         "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-09-26T09:19:06Z",
       "side": 1,
       "message": "Metrics above use the more verbose unit \"sizeInBytes\". Is that preferable?",
+      "range": {
+        "startLine": 109,
+        "startChar": 16,
+        "endLine": 109,
+        "endChar": 21
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eca80dac_b199eb5f",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-09-26T09:34:49Z",
+      "side": 1,
+      "message": "Yep, please use sizeInBytes. This unit is supported by dashboard.",
+      "parentUuid": "1dcfc7d0_ada772ad",
       "range": {
         "startLine": 109,
         "startChar": 16,
@@ -64,6 +112,53 @@
         "startChar": 40,
         "endLine": 39,
         "endChar": 70
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62fb1755_22f795bd",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-09-26T09:34:49Z",
+      "side": 1,
+      "message": "If it is field trial, I think, you can try to get and configure behavior basing on the value.",
+      "parentUuid": "d0bf43da_edab4d6e",
+      "range": {
+        "startLine": 39,
+        "startChar": 40,
+        "endLine": 39,
+        "endChar": 70
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8368391_2dfc913f",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-09-26T09:34:49Z",
+      "side": 1,
+      "message": "Should we ensure some thread safety here?",
+      "range": {
+        "startLine": 60,
+        "startChar": 33,
+        "endLine": 60,
+        "endChar": 42
       },
       "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
