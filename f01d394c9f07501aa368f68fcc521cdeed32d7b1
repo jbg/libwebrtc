@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ba28c56_cbaa02a5",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-26T09:19:06Z",
+      "side": 1,
+      "message": "It looks like the |pc_label| string matches the value returned by GetTestCaseName. E.g., \"pc_foreman_cif_500kbps_100ms/alice\". Can we use that to match values, and derive overhead ratios?",
+      "range": {
+        "startLine": 38,
+        "startChar": 23,
+        "endLine": 38,
+        "endChar": 31
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dcfc7d0_ada772ad",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-26T09:19:06Z",
+      "side": 1,
+      "message": "Metrics above use the more verbose unit \"sizeInBytes\". Is that preferable?",
+      "range": {
+        "startLine": 109,
+        "startChar": 16,
+        "endLine": 109,
+        "endChar": 21
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0bf43da_edab4d6e",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-26T09:19:06Z",
+      "side": 1,
+      "message": "Is there a way to ensure that this is enabled in all quality tests?",
+      "range": {
+        "startLine": 39,
+        "startChar": 40,
+        "endLine": 39,
+        "endChar": 70
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
