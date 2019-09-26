@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3847472f_dde2b63a",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-09-26T13:29:52Z",
+      "side": 1,
+      "message": "Is this field trial enabled by default? Smoke test doesn\u0027t enable it.",
+      "parentUuid": "d210c886_abc9bbab",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 75
+      },
+      "revId": "e9c806e3bcc519e46a0f6563779d2b3f899ca91f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5042a4c_885ed74a",
         "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2019-09-26T13:27:00Z",
       "side": 1,
       "message": "I considered writing this as\n\nstd::map\u003c...\u003e stats;\n{\n  rtc::CritScope cs(\u0026lock_);\n  stats \u003d std::move(pc_stats_);\n}\nfor (const auto\u0026 pair : stats) { ... }\n\nto avoid holding the lock while printing the reports. But I think it\u0027s ok to hold the lock a bit longer here.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 38
+      },
+      "revId": "e9c806e3bcc519e46a0f6563779d2b3f899ca91f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67e53009_c6afb12f",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-09-26T13:29:52Z",
+      "side": 1,
+      "message": "Report printing will be executed after test, so I think it\u0027s fine to hold a lock here. Nobody else should target this data during that time in normal execution scenario.",
+      "parentUuid": "c5042a4c_885ed74a",
       "range": {
         "startLine": 73,
         "startChar": 0,
