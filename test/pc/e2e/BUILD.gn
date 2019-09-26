@@ -486,9 +486,12 @@ rtc_source_set("network_quality_metrics_reporter") {
   ]
   deps = [
     "../..:perf_test",
+    "../../../api:libjingle_peerconnection_api",
     "../../../api:network_emulation_manager_api",
     "../../../api:peer_connection_quality_test_fixture_api",
+    "../../../rtc_base:criticalsection",
     "../../../rtc_base:rtc_event",
+    "../../../system_wrappers:field_trial",
   ]
 }
 
