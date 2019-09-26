@@ -11,6 +11,7 @@
 
 #include <utility>
 
+#include "api/stats_types.h"
 #include "rtc_base/event.h"
 #include "test/testsupport/perf_test.h"
 
@@ -33,6 +34,23 @@ void NetworkQualityMetricsReporter::Start(absl::string_view test_case_name) {
   RTC_CHECK_EQ(bob_stats.packets_received, 0);
 }
 
+void NetworkQualityMetricsReporter::OnStatsReports(
+    const std::string& pc_label,
+    const StatsReports& reports) {
+  PCStats& stats = pc_stats_[pc_label];
+  for (const StatsReport* report : reports) {
+    const auto* received =
+        report->FindValue(StatsReport::kStatsValueNameBytesReceived);
+    if (received) {
+      stats.payload_bytes_received = received->int64_val();
+    }
+    const auto* sent = report->FindValue(StatsReport::kStatsValueNameBytesSent);
+    if (sent) {
+      stats.payload_bytes_sent = sent->int64_val();
+    }
+  }
+}
+
 void NetworkQualityMetricsReporter::StopAndReportResults() {
   EmulatedNetworkStats alice_stats = PopulateStats(alice_network_);
   EmulatedNetworkStats bob_stats = PopulateStats(bob_network_);
@@ -40,6 +58,9 @@ void NetworkQualityMetricsReporter::StopAndReportResults() {
               alice_stats.packets_sent - bob_stats.packets_received);
   ReportStats("bob", bob_stats,
               bob_stats.packets_sent - alice_stats.packets_received);
+  for (const auto& pair : pc_stats_) {
+    ReportPCStats(pair.first, pair.second);
+  }
 }
 
 EmulatedNetworkStats NetworkQualityMetricsReporter::PopulateStats(
@@ -80,6 +101,14 @@ void NetworkQualityMetricsReporter::ReportStats(
                    : 0,
                "bytesPerSecond");
   ReportResult("sent_packets_loss", network_label, packet_loss, "unitless");
+}
+
+void NetworkQualityMetricsReporter::ReportPCStats(const std::string& pc_label,
+                                                  const PCStats& stats) {
+  ReportResult("payload_bytes_received", pc_label, stats.payload_bytes_received,
+               "bytes");
+  ReportResult("payload_bytes_sent", pc_label, stats.payload_bytes_sent,
+               "bytes");
 }
 
 void NetworkQualityMetricsReporter::ReportResult(
