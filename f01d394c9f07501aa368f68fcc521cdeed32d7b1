@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "2cc75883_88dec14f",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-26T13:27:00Z",
+      "side": 1,
+      "message": "Added log message.",
+      "parentUuid": "c1ee4daf_304c0aac",
+      "range": {
+        "startLine": 39,
+        "startChar": 40,
+        "endLine": 39,
+        "endChar": 70
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8368391_2dfc913f",
         "filename": "test/pc/e2e/network_quality_metrics_reporter.h",
         "patchSetId": 1
@@ -283,6 +307,30 @@
       "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f545911_bd15d687",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-26T13:27:00Z",
+      "side": 1,
+      "message": "Added a lock.",
+      "parentUuid": "19fdcd50_0c7763c4",
+      "range": {
+        "startLine": 60,
+        "startChar": 33,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "f01d394c9f07501aa368f68fcc521cdeed32d7b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

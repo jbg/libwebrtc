@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d210c886_abc9bbab",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-26T13:27:00Z",
+      "side": 1,
+      "message": "I see this log message when running the PeerConnectionE2EQualityTestSmokeTest.Smoke test.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 75
+      },
+      "revId": "e9c806e3bcc519e46a0f6563779d2b3f899ca91f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5042a4c_885ed74a",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-26T13:27:00Z",
+      "side": 1,
+      "message": "I considered writing this as\n\nstd::map\u003c...\u003e stats;\n{\n  rtc::CritScope cs(\u0026lock_);\n  stats \u003d std::move(pc_stats_);\n}\nfor (const auto\u0026 pair : stats) { ... }\n\nto avoid holding the lock while printing the reports. But I think it\u0027s ok to hold the lock a bit longer here.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 38
+      },
+      "revId": "e9c806e3bcc519e46a0f6563779d2b3f899ca91f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
