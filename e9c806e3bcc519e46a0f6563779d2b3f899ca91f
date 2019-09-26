@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "20adb180_5ad37c47",
+        "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-09-26T13:37:16Z",
+      "side": 1,
+      "message": "I\u0027m not even sure what \"default\" mean here. The production code currently enables standard counters only if explicitly enabled in the field trials. Is there any way it could be made \"default\" for quality tests, without enabling it by default in production code (i.e., without changing the production code to enable it unless explicitly disabled in the field trial config)?",
+      "parentUuid": "3847472f_dde2b63a",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 75
+      },
+      "revId": "e9c806e3bcc519e46a0f6563779d2b3f899ca91f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5042a4c_885ed74a",
         "filename": "test/pc/e2e/network_quality_metrics_reporter.cc",
         "patchSetId": 3
