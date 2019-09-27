@@ -110,6 +110,7 @@ NetworkControlUpdate PccNetworkController::CreateRateUpdate(
       monitor_interval_duration_ratio_ * rtt_tracker_.GetRtt();
 
   target_rate_msg.target_rate = sending_rate;
+  target_rate_msg.retransmission_rate = sending_rate;
   update.target_rate = target_rate_msg;
 
   // Set up pacing/padding target rate.

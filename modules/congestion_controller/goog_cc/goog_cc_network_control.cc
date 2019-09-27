@@ -575,6 +575,7 @@ NetworkControlUpdate GoogCcNetworkController::GetNetworkState(
 
   update.target_rate->at_time = at_time;
   update.target_rate->target_rate = last_pushback_target_rate_;
+  update.target_rate->retransmission_rate = last_loss_based_target_rate_;
   update.target_rate->stable_target_rate =
       bandwidth_estimation_->GetEstimatedLinkCapacity();
   update.pacer_config = GetPacingRates(at_time);
@@ -621,6 +622,7 @@ void GoogCcNetworkController::MaybeTriggerOnNetworkChanged(
     TargetTransferRate target_rate_msg;
     target_rate_msg.at_time = at_time;
     target_rate_msg.target_rate = pushback_target_rate;
+    target_rate_msg.retransmission_rate = loss_based_target_rate;
     target_rate_msg.stable_target_rate =
         std::min(bandwidth_estimation_->GetEstimatedLinkCapacity(),
                  pushback_target_rate);
