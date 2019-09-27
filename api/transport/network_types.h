@@ -215,6 +215,9 @@ struct TargetTransferRate {
   NetworkEstimate network_estimate;
   DataRate target_rate = DataRate::Zero();
   DataRate stable_target_rate = DataRate::Zero();
+  // TODO(srte): Make this non-optional when downstream projects have been
+  // fixed.
+  absl::optional<DataRate> retransmission_rate = DataRate::Zero();
 };
 
 // Contains updates of network controller comand state. Using optionals to

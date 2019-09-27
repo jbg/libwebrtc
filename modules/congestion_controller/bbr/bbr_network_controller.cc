@@ -278,6 +278,7 @@ NetworkControlUpdate BbrNetworkController::CreateRateUpdate(
       rtt * static_cast<int64_t>(kGainCycleLength);
 
   target_rate_msg.target_rate = target_rate;
+  target_rate_msg.retransmission_rate = target_rate;
   target_rate_msg.at_time = at_time;
   update.target_rate = target_rate_msg;
 
