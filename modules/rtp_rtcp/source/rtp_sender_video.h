@@ -69,6 +69,7 @@ class RTPSenderVideo {
   // expected_retransmission_time_ms.has_value() -> retransmission allowed.
   bool SendVideo(VideoFrameType frame_type,
                  int8_t payload_type,
+                 absl::optional<VideoCodecType> codec_type,
                  uint32_t capture_timestamp,
                  int64_t capture_time_ms,
                  const uint8_t* payload_data,
@@ -77,6 +78,18 @@ class RTPSenderVideo {
                  const RTPVideoHeader* video_header,
                  absl::optional<int64_t> expected_retransmission_time_ms);
 
+  // TODO(bugs.webrtc.org/10809): Remove when downstream usage is gone.
+  bool SendVideo(VideoFrameType frame_type,
+                 int8_t payload_type,
+                 uint32_t capture_timestamp,
+                 int64_t capture_time_ms,
+                 const uint8_t* payload_data,
+                 size_t payload_size,
+                 const RTPFragmentationHeader* fragmentation,
+                 const RTPVideoHeader* video_header,
+                 absl::optional<int64_t> expected_retransmission_time_ms);
+
+  // TODO(bugs.webrtc.org/10809): Remove when downstream usage is gone.
   void RegisterPayloadType(int8_t payload_type,
                            absl::string_view payload_name,
                            bool raw_payload);
@@ -163,18 +176,19 @@ class RTPSenderVideo {
   Clock* const clock_;
 
   // Maps payload type to codec type, for packetization.
-  // TODO(nisse): Set on construction, to avoid lock.
+  // TODO(bugs.webrtc.org/10809): Remove when downstream usage is gone.
   rtc::CriticalSection payload_type_crit_;
   std::map<int8_t, absl::optional<VideoCodecType>> payload_type_map_
       RTC_GUARDED_BY(payload_type_crit_);
 
   // Should never be held when calling out of this class.
   rtc::CriticalSection crit_;
+  SequenceChecker sequence_checker_;
 
-  int32_t retransmission_settings_ RTC_GUARDED_BY(crit_);
-  VideoRotation last_rotation_ RTC_GUARDED_BY(crit_);
-  absl::optional<ColorSpace> last_color_space_ RTC_GUARDED_BY(crit_);
-  bool transmit_color_space_next_frame_ RTC_GUARDED_BY(crit_);
+  const int32_t retransmission_settings_;
+  VideoRotation last_rotation_;
+  absl::optional<ColorSpace> last_color_space_;
+  bool transmit_color_space_next_frame_;
   // Tracks the current request for playout delay limits from application
   // and decides whether the current RTP frame should include the playout
   // delay extension on header.
@@ -217,7 +231,7 @@ class RTPSenderVideo {
   // If set to true will require all outgoing frames to pass through an
   // initialized frame_encryptor_ before being sent out of the network.
   // Otherwise these payloads will be dropped.
-  bool require_frame_encryption_;
+  const bool require_frame_encryption_;
   // Set to true if the generic descriptor should be authenticated.
   const bool generic_descriptor_auth_experiment_;
 
