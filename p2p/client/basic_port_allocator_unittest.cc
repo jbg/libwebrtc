@@ -217,7 +217,7 @@ class BasicPortAllocatorTestBase : public ::testing::Test,
 
   void AddTurnServers(const rtc::SocketAddress& udp_turn,
                       const rtc::SocketAddress& tcp_turn) {
-    RelayServerConfig turn_server(RELAY_TURN);
+    RelayServerConfig turn_server;
     RelayCredentials credentials(kTurnUsername, kTurnPassword);
     turn_server.credentials = credentials;
 
@@ -1732,7 +1732,7 @@ TEST_F(BasicPortAllocatorTestWithRealClock,
   AddInterface(kClientAddr);
   allocator_.reset(new BasicPortAllocator(&network_manager_));
   allocator_->Initialize();
-  RelayServerConfig turn_server(RELAY_TURN);
+  RelayServerConfig turn_server;
   RelayCredentials credentials(kTurnUsername, kTurnPassword);
   turn_server.credentials = credentials;
   turn_server.ports.push_back(

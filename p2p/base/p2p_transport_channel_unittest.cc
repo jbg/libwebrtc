@@ -156,7 +156,7 @@ cricket::BasicPortAllocator* CreateBasicPortAllocator(
     const cricket::ServerAddresses& stun_servers,
     const rtc::SocketAddress& turn_server_udp,
     const rtc::SocketAddress& turn_server_tcp) {
-  cricket::RelayServerConfig turn_server(cricket::RELAY_TURN);
+  cricket::RelayServerConfig turn_server;
   turn_server.credentials = kRelayCredentials;
   if (!turn_server_udp.IsNil()) {
     turn_server.ports.push_back(
@@ -2574,7 +2574,7 @@ TEST_F(P2PTransportChannelMultihomedTest, TestFailoverControllingSide) {
 TEST_F(P2PTransportChannelMultihomedTest, TestFailoverWithManyConnections) {
   rtc::ScopedFakeClock clock;
   test_turn_server()->AddInternalSocket(kTurnTcpIntAddr, PROTO_TCP);
-  RelayServerConfig turn_server(RELAY_TURN);
+  RelayServerConfig turn_server;
   turn_server.credentials = kRelayCredentials;
   turn_server.ports.push_back(ProtocolAddress(kTurnTcpIntAddr, PROTO_TCP));
   GetAllocator(0)->AddTurnServer(turn_server);
@@ -4710,7 +4710,7 @@ TEST_F(P2PTransportChannelMostLikelyToWorkFirstTest,
 TEST_F(P2PTransportChannelMostLikelyToWorkFirstTest, TestTcpTurn) {
   // Add a Tcp Turn server.
   turn_server()->AddInternalSocket(kTurnTcpIntAddr, PROTO_TCP);
-  RelayServerConfig config(RELAY_TURN);
+  RelayServerConfig config;
   config.credentials = kRelayCredentials;
   config.ports.push_back(ProtocolAddress(kTurnTcpIntAddr, PROTO_TCP));
   allocator()->AddTurnServer(config);

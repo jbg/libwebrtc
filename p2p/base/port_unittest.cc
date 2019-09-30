@@ -112,8 +112,6 @@ constexpr int kTiebreaker2 = 22222;
 
 const char* data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-constexpr int kGturnUserNameLength = 16;
-
 Candidate GetCandidate(Port* port) {
   RTC_DCHECK_GE(port->Candidates().size(), 1);
   return port->Candidates()[0];
@@ -441,13 +439,13 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
                      ntype == NAT_OPEN_CONE, true, ntype != NAT_SYMMETRIC,
                      true);
   }
-  void TestLocalToRelay(RelayType rtype, ProtocolType proto) {
+  void TestLocalToRelay(ProtocolType proto) {
     auto port1 = CreateUdpPort(kLocalAddr1);
     port1->SetIceRole(cricket::ICEROLE_CONTROLLING);
-    auto port2 = CreateRelayPort(kLocalAddr2, rtype, proto, PROTO_UDP);
+    auto port2 = CreateRelayPort(kLocalAddr2, proto, PROTO_UDP);
     port2->SetIceRole(cricket::ICEROLE_CONTROLLED);
-    TestConnectivity("udp", std::move(port1), RelayName(rtype, proto),
-                     std::move(port2), rtype == RELAY_GTURN, true, true, true);
+    TestConnectivity("udp", std::move(port1), RelayName(proto),
+                     std::move(port2), false, true, true, true);
   }
   void TestStunToLocal(NATType ntype) {
     nat_server1_ = CreateNatServer(kNatAddr1, ntype);
@@ -470,15 +468,15 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
                      ntype1 != NAT_SYMMETRIC, ntype2 != NAT_SYMMETRIC,
                      ntype1 + ntype2 < (NAT_PORT_RESTRICTED + NAT_SYMMETRIC));
   }
-  void TestStunToRelay(NATType ntype, RelayType rtype, ProtocolType proto) {
+  void TestStunToRelay(NATType ntype, ProtocolType proto) {
     nat_server1_ = CreateNatServer(kNatAddr1, ntype);
     auto port1 = CreateStunPort(kLocalAddr1, &nat_socket_factory1_);
     port1->SetIceRole(cricket::ICEROLE_CONTROLLING);
-    auto port2 = CreateRelayPort(kLocalAddr2, rtype, proto, PROTO_UDP);
+    auto port2 = CreateRelayPort(kLocalAddr2, proto, PROTO_UDP);
     port2->SetIceRole(cricket::ICEROLE_CONTROLLED);
-    TestConnectivity(StunName(ntype), std::move(port1), RelayName(rtype, proto),
-                     std::move(port2), rtype == RELAY_GTURN,
-                     ntype != NAT_SYMMETRIC, true, true);
+    TestConnectivity(StunName(ntype), std::move(port1), RelayName(proto),
+                     std::move(port2), false, ntype != NAT_SYMMETRIC, true,
+                     true);
   }
   void TestTcpToTcp() {
     auto port1 = CreateTcpPort(kLocalAddr1);
@@ -488,21 +486,21 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
     TestConnectivity("tcp", std::move(port1), "tcp", std::move(port2), true,
                      false, true, true);
   }
-  void TestTcpToRelay(RelayType rtype, ProtocolType proto) {
+  void TestTcpToRelay(ProtocolType proto) {
     auto port1 = CreateTcpPort(kLocalAddr1);
     port1->SetIceRole(cricket::ICEROLE_CONTROLLING);
-    auto port2 = CreateRelayPort(kLocalAddr2, rtype, proto, PROTO_TCP);
+    auto port2 = CreateRelayPort(kLocalAddr2, proto, PROTO_TCP);
     port2->SetIceRole(cricket::ICEROLE_CONTROLLED);
-    TestConnectivity("tcp", std::move(port1), RelayName(rtype, proto),
-                     std::move(port2), rtype == RELAY_GTURN, false, true, true);
+    TestConnectivity("tcp", std::move(port1), RelayName(proto),
+                     std::move(port2), false, false, true, true);
   }
-  void TestSslTcpToRelay(RelayType rtype, ProtocolType proto) {
+  void TestSslTcpToRelay(ProtocolType proto) {
     auto port1 = CreateTcpPort(kLocalAddr1);
     port1->SetIceRole(cricket::ICEROLE_CONTROLLING);
-    auto port2 = CreateRelayPort(kLocalAddr2, rtype, proto, PROTO_SSLTCP);
+    auto port2 = CreateRelayPort(kLocalAddr2, proto, PROTO_SSLTCP);
     port2->SetIceRole(cricket::ICEROLE_CONTROLLED);
-    TestConnectivity("ssltcp", std::move(port1), RelayName(rtype, proto),
-                     std::move(port2), rtype == RELAY_GTURN, false, true, true);
+    TestConnectivity("ssltcp", std::move(port1), RelayName(proto),
+                     std::move(port2), false, false, true, true);
   }
 
   rtc::Network* MakeNetwork(const SocketAddress& addr) {
@@ -538,14 +536,9 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
                             absl::nullopt);
   }
   std::unique_ptr<Port> CreateRelayPort(const SocketAddress& addr,
-                                        RelayType rtype,
                                         ProtocolType int_proto,
                                         ProtocolType ext_proto) {
-    if (rtype == RELAY_TURN) {
-      return CreateTurnPort(addr, &socket_factory_, int_proto, ext_proto);
-    } else {
-      return CreateGturnPort(addr, int_proto, ext_proto);
-    }
+    return CreateTurnPort(addr, &socket_factory_, int_proto, ext_proto);
   }
   std::unique_ptr<TurnPort> CreateTurnPort(const SocketAddress& addr,
                                            PacketSocketFactory* socket_factory,
@@ -567,24 +560,6 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
                             ProtocolAddress(server_addr, int_proto),
                             kRelayCredentials, 0, "", {}, {}, nullptr, nullptr);
   }
-  std::unique_ptr<RelayPort> CreateGturnPort(const SocketAddress& addr,
-                                             ProtocolType int_proto,
-                                             ProtocolType ext_proto) {
-    std::unique_ptr<RelayPort> port = CreateGturnPort(addr);
-    SocketAddress addrs[] = {kRelayUdpIntAddr, kRelayTcpIntAddr,
-                             kRelaySslTcpIntAddr};
-    port->AddServerAddress(ProtocolAddress(addrs[int_proto], int_proto));
-    return port;
-  }
-  std::unique_ptr<RelayPort> CreateGturnPort(const SocketAddress& addr) {
-    // TODO(pthatcher):  Remove GTURN.
-    // Generate a username with length of 16 for Gturn only.
-    std::string username = rtc::CreateRandomString(kGturnUserNameLength);
-    return RelayPort::Create(&main_, &socket_factory_, MakeNetwork(addr), 0, 0,
-                             username, password_);
-    // TODO(?): Add an external address for ext_proto, so that the
-    // other side can connect to this port using a non-UDP protocol.
-  }
   std::unique_ptr<rtc::NATServer> CreateNatServer(const SocketAddress& addr,
                                                   rtc::NATType type) {
     return std::make_unique<rtc::NATServer>(type, ss_.get(), addr, addr,
@@ -604,33 +579,18 @@ class PortTest : public ::testing::Test, public sigslot::has_slots<> {
         return "stun(?)";
     }
   }
-  static const char* RelayName(RelayType type, ProtocolType proto) {
-    if (type == RELAY_TURN) {
-      switch (proto) {
-        case PROTO_UDP:
-          return "turn(udp)";
-        case PROTO_TCP:
-          return "turn(tcp)";
-        case PROTO_SSLTCP:
-          return "turn(ssltcp)";
-        case PROTO_TLS:
-          return "turn(tls)";
-        default:
-          return "turn(?)";
-      }
-    } else {
-      switch (proto) {
-        case PROTO_UDP:
-          return "gturn(udp)";
-        case PROTO_TCP:
-          return "gturn(tcp)";
-        case PROTO_SSLTCP:
-          return "gturn(ssltcp)";
-        case PROTO_TLS:
-          return "gturn(tls)";
-        default:
-          return "gturn(?)";
-      }
+  static const char* RelayName(ProtocolType proto) {
+    switch (proto) {
+      case PROTO_UDP:
+        return "turn(udp)";
+      case PROTO_TCP:
+        return "turn(tcp)";
+      case PROTO_SSLTCP:
+        return "turn(ssltcp)";
+      case PROTO_TLS:
+        return "turn(tls)";
+      default:
+        return "turn(?)";
     }
   }
 
@@ -1120,19 +1080,7 @@ TEST_F(PortTest, TestLocalToSymNat) {
 
 // Flaky: https://code.google.com/p/webrtc/issues/detail?id=3316.
 TEST_F(PortTest, DISABLED_TestLocalToTurn) {
-  TestLocalToRelay(RELAY_TURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestLocalToGturn) {
-  TestLocalToRelay(RELAY_GTURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestLocalToTcpGturn) {
-  TestLocalToRelay(RELAY_GTURN, PROTO_TCP);
-}
-
-TEST_F(PortTest, TestLocalToSslTcpGturn) {
-  TestLocalToRelay(RELAY_GTURN, PROTO_SSLTCP);
+  TestLocalToRelay(PROTO_UDP);
 }
 
 // Cone NAT -> XXXX
@@ -1157,15 +1105,7 @@ TEST_F(PortTest, TestConeNatToSymNat) {
 }
 
 TEST_F(PortTest, TestConeNatToTurn) {
-  TestStunToRelay(NAT_OPEN_CONE, RELAY_TURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestConeNatToGturn) {
-  TestStunToRelay(NAT_OPEN_CONE, RELAY_GTURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestConeNatToTcpGturn) {
-  TestStunToRelay(NAT_OPEN_CONE, RELAY_GTURN, PROTO_TCP);
+  TestStunToRelay(NAT_OPEN_CONE, PROTO_UDP);
 }
 
 // Address-restricted NAT -> XXXX
@@ -1190,15 +1130,7 @@ TEST_F(PortTest, TestARNatToSymNat) {
 }
 
 TEST_F(PortTest, TestARNatToTurn) {
-  TestStunToRelay(NAT_ADDR_RESTRICTED, RELAY_TURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestARNatToGturn) {
-  TestStunToRelay(NAT_ADDR_RESTRICTED, RELAY_GTURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestARNATNatToTcpGturn) {
-  TestStunToRelay(NAT_ADDR_RESTRICTED, RELAY_GTURN, PROTO_TCP);
+  TestStunToRelay(NAT_ADDR_RESTRICTED, PROTO_UDP);
 }
 
 // Port-restricted NAT -> XXXX
@@ -1224,15 +1156,7 @@ TEST_F(PortTest, TestPRNatToSymNat) {
 }
 
 TEST_F(PortTest, TestPRNatToTurn) {
-  TestStunToRelay(NAT_PORT_RESTRICTED, RELAY_TURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestPRNatToGturn) {
-  TestStunToRelay(NAT_PORT_RESTRICTED, RELAY_GTURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestPRNatToTcpGturn) {
-  TestStunToRelay(NAT_PORT_RESTRICTED, RELAY_GTURN, PROTO_TCP);
+  TestStunToRelay(NAT_PORT_RESTRICTED, PROTO_UDP);
 }
 
 // Symmetric NAT -> XXXX
@@ -1259,15 +1183,7 @@ TEST_F(PortTest, TestSymNatToSymNat) {
 }
 
 TEST_F(PortTest, TestSymNatToTurn) {
-  TestStunToRelay(NAT_SYMMETRIC, RELAY_TURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestSymNatToGturn) {
-  TestStunToRelay(NAT_SYMMETRIC, RELAY_GTURN, PROTO_UDP);
-}
-
-TEST_F(PortTest, TestSymNatToTcpGturn) {
-  TestStunToRelay(NAT_SYMMETRIC, RELAY_GTURN, PROTO_TCP);
+  TestStunToRelay(NAT_SYMMETRIC, PROTO_UDP);
 }
 
 // Outbound TCP -> XXXX
@@ -2394,16 +2310,6 @@ TEST_F(PortTest, TestCandidateFoundation) {
             stunport->Candidates()[0].foundation());
   EXPECT_NE(udpport2->Candidates()[0].foundation(),
             stunport->Candidates()[0].foundation());
-  // Verify GTURN candidate foundation.
-  auto relayport = CreateGturnPort(kLocalAddr1);
-  relayport->AddServerAddress(
-      cricket::ProtocolAddress(kRelayUdpIntAddr, cricket::PROTO_UDP));
-  relayport->PrepareAddress();
-  ASSERT_EQ_WAIT(1U, relayport->Candidates().size(), kDefaultTimeout);
-  EXPECT_NE(udpport1->Candidates()[0].foundation(),
-            relayport->Candidates()[0].foundation());
-  EXPECT_NE(udpport2->Candidates()[0].foundation(),
-            relayport->Candidates()[0].foundation());
   // Verifying TURN candidate foundation.
   auto turnport1 =
       CreateTurnPort(kLocalAddr1, nat_socket_factory1(), PROTO_UDP, PROTO_UDP);
@@ -2465,16 +2371,6 @@ TEST_F(PortTest, TestCandidateRelatedAddress) {
   // Check STUN candidate related address.
   EXPECT_EQ(stunport->Candidates()[0].related_address(),
             stunport->GetLocalAddress());
-  // Verifying the related address for the GTURN candidates.
-  // NOTE: In case of GTURN related address will be equal to the mapped
-  // address, but address(mapped) will not be XOR.
-  auto relayport = CreateGturnPort(kLocalAddr1);
-  relayport->AddServerAddress(
-      cricket::ProtocolAddress(kRelayUdpIntAddr, cricket::PROTO_UDP));
-  relayport->PrepareAddress();
-  ASSERT_EQ_WAIT(1U, relayport->Candidates().size(), kDefaultTimeout);
-  // For Gturn related address is set to "0.0.0.0:0"
-  EXPECT_EQ(rtc::SocketAddress(), relayport->Candidates()[0].related_address());
   // Verifying the related address for TURN candidate.
   // For TURN related address must be equal to the mapped address.
   auto turnport =
