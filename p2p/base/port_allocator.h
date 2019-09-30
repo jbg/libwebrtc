@@ -148,7 +148,7 @@ struct RelayCredentials {
 typedef std::vector<ProtocolAddress> PortList;
 // TODO(deadbeef): Rename to TurnServerConfig.
 struct RTC_EXPORT RelayServerConfig {
-  explicit RelayServerConfig(RelayType type);
+  RelayServerConfig();
   RelayServerConfig(const rtc::SocketAddress& address,
                     const std::string& username,
                     const std::string& password,
@@ -169,12 +169,11 @@ struct RTC_EXPORT RelayServerConfig {
   ~RelayServerConfig();
 
   bool operator==(const RelayServerConfig& o) const {
-    return type == o.type && ports == o.ports && credentials == o.credentials &&
+    return ports == o.ports && credentials == o.credentials &&
            priority == o.priority;
   }
   bool operator!=(const RelayServerConfig& o) const { return !(*this == o); }
 
-  RelayType type;
   PortList ports;
   RelayCredentials credentials;
   int priority = 0;
