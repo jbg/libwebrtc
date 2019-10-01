@@ -1274,8 +1274,6 @@ if (rtc_include_tests) {
       "test/TestRedFec.h",
       "test/TestStereo.cc",
       "test/TestStereo.h",
-      "test/TestVADDTX.cc",
-      "test/TestVADDTX.h",
       "test/Tester.cc",
       "test/TwoWayCommunication.cc",
       "test/TwoWayCommunication.h",

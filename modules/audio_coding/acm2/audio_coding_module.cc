@@ -60,14 +60,6 @@ class AudioCodingModuleImpl final : public AudioCodingModule {
   int SetPacketLossRate(int loss_rate) override;
 
   /////////////////////////////////////////
-  //   (VAD) Voice Activity Detection
-  //   and
-  //   (CNG) Comfort Noise Generation
-  //
-
-  int RegisterVADCallback(ACMVADCallback* vad_callback) override;
-
-  /////////////////////////////////////////
   //   Receiver
   //
 
@@ -177,7 +169,6 @@ class AudioCodingModuleImpl final : public AudioCodingModule {
   rtc::CriticalSection callback_crit_sect_;
   AudioPacketizationCallback* packetization_callback_
       RTC_GUARDED_BY(callback_crit_sect_);
-  ACMVADCallback* vad_callback_ RTC_GUARDED_BY(callback_crit_sect_);
 
   int codec_histogram_bins_log_[static_cast<size_t>(
       AudioEncoder::CodecType::kMaxLoggedAudioCodecTypes)];
@@ -252,7 +243,6 @@ AudioCodingModuleImpl::AudioCodingModuleImpl(
       first_10ms_data_(false),
       first_frame_(true),
       packetization_callback_(NULL),
-      vad_callback_(NULL),
       codec_histogram_bins_log_(),
       number_of_consecutive_empty_packets_(0) {
   if (InitializeReceiverSafe() < 0) {
@@ -335,11 +325,6 @@ int32_t AudioCodingModuleImpl::Encode(const InputData& input_data) {
       packetization_callback_->SendData(
           frame_type, encoded_info.payload_type, encoded_info.encoded_timestamp,
           encode_buffer_.data(), encode_buffer_.size());
-    }
-
-    if (vad_callback_) {
-      // Callback with VAD decision.
-      vad_callback_->InFrameType(frame_type);
     }
   }
   previous_pltype_ = encoded_info.payload_type;
@@ -615,13 +600,6 @@ int AudioCodingModuleImpl::PlayoutData10Ms(int desired_freq_hz,
 // NetEq function.
 int AudioCodingModuleImpl::GetNetworkStatistics(NetworkStatistics* statistics) {
   receiver_.GetNetworkStatistics(statistics);
-  return 0;
-}
-
-int AudioCodingModuleImpl::RegisterVADCallback(ACMVADCallback* vad_callback) {
-  RTC_LOG(LS_VERBOSE) << "RegisterVADCallback()";
-  rtc::CritScope lock(&callback_crit_sect_);
-  vad_callback_ = vad_callback;
   return 0;
 }
 

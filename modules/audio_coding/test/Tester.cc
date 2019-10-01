@@ -19,7 +19,6 @@
 #include "modules/audio_coding/test/TestAllCodecs.h"
 #include "modules/audio_coding/test/TestRedFec.h"
 #include "modules/audio_coding/test/TestStereo.h"
-#include "modules/audio_coding/test/TestVADDTX.h"
 #include "modules/audio_coding/test/TwoWayCommunication.h"
 #include "modules/audio_coding/test/iSACTest.h"
 #include "modules/audio_coding/test/opus_test.h"
@@ -68,14 +67,6 @@ TEST(AudioCodingModuleTest, DISABLED_TestStereo) {
 TEST(AudioCodingModuleTest, TestStereo) {
 #endif
   webrtc::TestStereo().Perform();
-}
-
-TEST(AudioCodingModuleTest, TestWebRtcVadDtx) {
-  webrtc::TestWebRtcVadDtx().Perform();
-}
-
-TEST(AudioCodingModuleTest, TestOpusDtx) {
-  webrtc::TestOpusDtx().Perform();
 }
 
 // Disabled on ios as flaky, see https://crbug.com/webrtc/7057
