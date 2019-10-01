@@ -284,6 +284,28 @@ bool PacketBuffer::PotentialNewFrame(uint16_t seq_num) const {
   return false;
 }
 
+static bool HasOnlyH264NonVclData(VCMPacket* pkt) {
+  const auto* h264_header =
+      absl::get_if<RTPVideoHeaderH264>(&pkt->video_header.video_type_header);
+  if (!h264_header) {
+    return false;
+  }
+
+  if (h264_header->nalus_length == 0) {
+    return !(h264_header->nalu_type == H264::NaluType::kIdr ||
+             h264_header->nalu_type == H264::NaluType::kSlice);
+  }
+
+  for (size_t i = 0; i < h264_header->nalus_length; ++i) {
+    if (h264_header->nalus[i].type == H264::NaluType::kIdr ||
+        h264_header->nalus[i].type == H264::NaluType::kSlice) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
     uint16_t seq_num) {
   std::vector<std::unique_ptr<RtpFrameObject>> found_frames;
@@ -312,6 +334,7 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
       bool has_h264_sps = false;
       bool has_h264_pps = false;
       bool has_h264_idr = false;
+      bool has_h264_vcl_data = false;
       bool is_h264_keyframe = false;
 
       while (true) {
@@ -348,13 +371,21 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
             } else if (h264_header->nalus[j].type == H264::NaluType::kPps) {
               has_h264_pps = true;
             } else if (h264_header->nalus[j].type == H264::NaluType::kIdr) {
-              has_h264_idr = true;
+              has_h264_idr = has_h264_vcl_data = true;
+            } else if (h264_header->nalus[j].type == H264::NaluType::kSlice) {
+              has_h264_vcl_data = true;
             }
           }
           if ((sps_pps_idr_is_h264_keyframe_ && has_h264_idr && has_h264_sps &&
                has_h264_pps) ||
               (!sps_pps_idr_is_h264_keyframe_ && has_h264_idr)) {
             is_h264_keyframe = true;
+          }
+
+          if (h264_header->nalus_length == 0) {
+            has_h264_vcl_data |=
+                h264_header->nalu_type == H264::NaluType::kSlice ||
+                h264_header->nalu_type == H264::NaluType::kIdr;
           }
         }
 
@@ -371,7 +402,8 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
         // See: https://bugs.chromium.org/p/webrtc/issues/detail?id=7106
         if (is_h264 &&
             (!sequence_buffer_[start_index].used ||
-             data_buffer_[start_index].timestamp != frame_timestamp)) {
+             (data_buffer_[start_index].timestamp != frame_timestamp &&
+              !HasOnlyH264NonVclData(&data_buffer_[start_index])))) {
           break;
         }
 
@@ -419,6 +451,10 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
             start_index = (start_index + 1) % size_;
           }
 
+          return found_frames;
+        }
+
+        if (!has_h264_vcl_data) {
           return found_frames;
         }
       }
