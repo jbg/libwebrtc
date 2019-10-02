@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35ed2a17_a06246af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-02T12:34:02Z",
+      "side": 1,
+      "message": "Some word is missing...",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 32
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89ba7305_45fc292b",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-02T12:34:02Z",
+      "side": 1,
+      "message": "I find the use of an optional confusing. RtpPacketizer::Create takes an optional, and both nullopt and kVideoCodecGeneric produce a RtpPacketizerGeneric, but with using different constructors, and presumably also with different behavior.\n\nMaybe it would be best to just delete RtpPacketizer::Create, and let the caller construct the right type of packetizer directly, with one less level of indirection. But that\u0027s for a different cl.",
+      "range": {
+        "startLine": 211,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 44
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c089afb_0cc75b0d",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-02T12:34:02Z",
+      "side": 1,
+      "message": "I was sure we have a codec_type member in EncodedImage, but it seems we don\u0027t.\n\nAnd it probably makes more sense this way, to have the choice of packetizer tied to the rtp config, rather than attached to the encoded image.",
+      "range": {
+        "startLine": 450,
+        "startChar": 58,
+        "endLine": 450,
+        "endChar": 69
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "314daf23_563a6ef6",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-02T12:34:02Z",
+      "side": 1,
+      "message": "Is this still used?",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 41
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16d1698a_b27363d6",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-02T12:34:02Z",
+      "side": 1,
+      "message": "Needs doc on threading assumptions and/or some kind of guard.",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 40
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
