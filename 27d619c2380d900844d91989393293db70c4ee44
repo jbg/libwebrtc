@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "ad766bc2_5074dac8",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-02T18:56:38Z",
+      "side": 1,
+      "message": "It is, it\u0027s just set one in the constructor now. If the special case for H264 is needed we will\nuse a temporary override within SendVideo() instead.",
+      "parentUuid": "314daf23_563a6ef6",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 41
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16d1698a_b27363d6",
         "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
         "patchSetId": 4
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "Maybe RaceChecker (rtc_base/race_checker.h)?",
       "parentUuid": "e91b32f7_1630a371",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 40
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59f5343a_645713b4",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-02T18:56:38Z",
+      "side": 1,
+      "message": "Ah, didn\u0027t know of that one - that should work. Thanks!",
+      "parentUuid": "3ce7dbb3_dc469b18",
       "range": {
         "startLine": 189,
         "startChar": 0,
