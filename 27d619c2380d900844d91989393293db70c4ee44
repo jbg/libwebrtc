@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4f565624_78f0ce4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-02T14:21:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35ed2a17_a06246af",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 32
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89ba7305_45fc292b",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a6d72696_18543a3f",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-02T14:21:02Z",
+      "side": 1,
+      "message": "Agree. We could possibly also introduce a kRaw codec.\nBut that\u0027s for another cl.",
+      "parentUuid": "89ba7305_45fc292b",
+      "range": {
+        "startLine": 211,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 44
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c089afb_0cc75b0d",
         "filename": "call/rtp_video_sender.cc",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "27d619c2380d900844d91989393293db70c4ee44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "106822e3_9715ecfb",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-02T14:21:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c089afb_0cc75b0d",
+      "range": {
+        "startLine": 450,
+        "startChar": 58,
+        "endLine": 450,
+        "endChar": 69
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -114,6 +186,30 @@
       "revId": "27d619c2380d900844d91989393293db70c4ee44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e91b32f7_1630a371",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-02T14:21:02Z",
+      "side": 1,
+      "message": "I\u0027ll add a comment. Unfortunately we don\u0027t know anything about the thread and worker pool that\nthe encoder internal logic decides to use, so a SequenceChecker may incorrectly explode.\nI\u0027m not aware of a checker that can handle that condition, are you?",
+      "parentUuid": "16d1698a_b27363d6",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 40
+      },
+      "revId": "27d619c2380d900844d91989393293db70c4ee44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
