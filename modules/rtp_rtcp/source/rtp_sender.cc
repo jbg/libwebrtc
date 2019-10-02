@@ -341,6 +341,9 @@ int32_t RTPSender::ReSendPacket(uint16_t packet_id) {
     return -1;
   }
   packet->set_packet_type(RtpPacketToSend::Type::kRetransmission);
+  if (packet->capture_time_ms() <= 0) {
+    packet->set_capture_time_ms(clock_->TimeInMilliseconds());
+  }
   paced_sender_->EnqueuePacket(std::move(packet));
 
   return packet_size;
