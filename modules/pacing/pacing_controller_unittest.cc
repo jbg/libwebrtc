@@ -69,6 +69,8 @@ std::unique_ptr<RtpPacketToSend> BuildPacket(RtpPacketToSend::Type type,
 // methods that focus on core aspects.
 class MockPacingControllerCallback : public PacingController::PacketSender {
  public:
+  explicit MockPacingControllerCallback(Clock* clock) : clock_(clock) {}
+
   void SendRtpPacket(std::unique_ptr<RtpPacketToSend> packet,
                      const PacedPacketInfo& cluster_info) override {
     SendPacket(packet->Ssrc(), packet->SequenceNumber(),
@@ -85,6 +87,7 @@ class MockPacingControllerCallback : public PacingController::PacketSender {
       auto packet = std::make_unique<RtpPacketToSend>(nullptr);
       packet->SetPayloadSize(padding_size);
       packet->set_packet_type(RtpPacketToSend::Type::kPadding);
+      packet->set_capture_time_ms(clock_->TimeInMilliseconds());
       ret.emplace_back(std::move(packet));
     }
     return ret;
@@ -97,6 +100,9 @@ class MockPacingControllerCallback : public PacingController::PacketSender {
                     bool retransmission,
                     bool padding));
   MOCK_METHOD1(SendPadding, size_t(size_t target_size));
+
+ private:
+  Clock* const clock_;
 };
 
 // Mock callback implementing the raw api.
@@ -114,7 +120,8 @@ class PacingControllerPadding : public PacingController::PacketSender {
  public:
   static const size_t kPaddingPacketSize = 224;
 
-  PacingControllerPadding() : padding_sent_(0) {}
+  explicit PacingControllerPadding(Clock* clock)
+      : clock_(clock), padding_sent_(0) {}
 
   void SendRtpPacket(std::unique_ptr<RtpPacketToSend> packet,
                      const PacedPacketInfo& pacing_info) override {}
@@ -128,6 +135,7 @@ class PacingControllerPadding : public PacingController::PacketSender {
       packets.emplace_back(std::make_unique<RtpPacketToSend>(nullptr));
       packets.back()->SetPadding(kPaddingPacketSize);
       packets.back()->set_packet_type(RtpPacketToSend::Type::kPadding);
+      packets.back()->set_capture_time_ms(clock_->TimeInMilliseconds());
       padding_sent_ += kPaddingPacketSize;
     }
     return packets;
@@ -136,12 +144,14 @@ class PacingControllerPadding : public PacingController::PacketSender {
   size_t padding_sent() { return padding_sent_; }
 
  private:
+  Clock* const clock_;
   size_t padding_sent_;
 };
 
 class PacingControllerProbing : public PacingController::PacketSender {
  public:
-  PacingControllerProbing() : packets_sent_(0), padding_sent_(0) {}
+  explicit PacingControllerProbing(Clock* clock)
+      : clock_(clock), packets_sent_(0), padding_sent_(0) {}
 
   void SendRtpPacket(std::unique_ptr<RtpPacketToSend> packet,
                      const PacedPacketInfo& pacing_info) override {
@@ -156,6 +166,7 @@ class PacingControllerProbing : public PacingController::PacketSender {
     packets.emplace_back(std::make_unique<RtpPacketToSend>(nullptr));
     packets.back()->SetPadding(target_size.bytes());
     packets.back()->set_packet_type(RtpPacketToSend::Type::kPadding);
+    packets.back()->set_capture_time_ms(clock_->TimeInMilliseconds());
     padding_sent_ += target_size.bytes();
     return packets;
   }
@@ -165,13 +176,14 @@ class PacingControllerProbing : public PacingController::PacketSender {
   int padding_sent() const { return padding_sent_; }
 
  private:
+  Clock* const clock_;
   int packets_sent_;
   int padding_sent_;
 };
 
 class PacingControllerTest : public ::testing::Test {
  protected:
-  PacingControllerTest() : clock_(123456) {
+  PacingControllerTest() : clock_(123456), callback_(&clock_) {
     srand(0);
     // Need to initialize PacingController after we initialize clock.
     pacer_ = std::make_unique<PacingController>(&clock_, &callback_, nullptr,
@@ -233,6 +245,7 @@ class PacingControllerTest : public ::testing::Test {
     }
 
     packet->SetPayloadSize(234);
+    packet->set_capture_time_ms(clock_.TimeInMilliseconds());
     return packet;
   }
 
@@ -271,7 +284,7 @@ class PacingControllerFieldTrialTest : public ::testing::Test {
 
   const int kProcessIntervalsPerSecond = 1000 / 5;
 
-  PacingControllerFieldTrialTest() : clock_(123456) {}
+  PacingControllerFieldTrialTest() : clock_(123456), callback_(&clock_) {}
   void InsertPacket(PacingController* pacer, MediaStream* stream) {
     pacer->EnqueuePacket(
         BuildPacket(stream->type, stream->ssrc, stream->seq_num++,
@@ -611,7 +624,7 @@ TEST_F(PacingControllerTest, VerifyAverageBitrateVaryingMediaPayload) {
   int64_t capture_time_ms = 56789;
   const int kTimeStep = 5;
   const int64_t kBitrateWindow = 10000;
-  PacingControllerPadding callback;
+  PacingControllerPadding callback(&clock_);
   pacer_ =
       std::make_unique<PacingController>(&clock_, &callback, nullptr, nullptr);
   pacer_->SetProbingEnabled(false);
@@ -1064,7 +1077,7 @@ TEST_F(PacingControllerTest, ProbingWithInsertedPackets) {
   uint32_t ssrc = 12346;
   uint16_t sequence_number = 1234;
 
-  PacingControllerProbing packet_sender;
+  PacingControllerProbing packet_sender(&clock_);
   pacer_ = std::make_unique<PacingController>(&clock_, &packet_sender, nullptr,
                                               nullptr);
   pacer_->CreateProbeCluster(kFirstClusterRate,
@@ -1111,7 +1124,7 @@ TEST_F(PacingControllerTest, ProbingWithPaddingSupport) {
   uint32_t ssrc = 12346;
   uint16_t sequence_number = 1234;
 
-  PacingControllerProbing packet_sender;
+  PacingControllerProbing packet_sender(&clock_);
   pacer_ = std::make_unique<PacingController>(&clock_, &packet_sender, nullptr,
                                               nullptr);
   pacer_->CreateProbeCluster(kFirstClusterRate,
@@ -1264,6 +1277,48 @@ TEST_F(PacingControllerTest, OwnedPacketPrioritizedOnType) {
 
   clock_.AdvanceTimeMilliseconds(200);
   pacer_->ProcessPackets();
+}
+
+TEST_F(PacingControllerTest, SmallFirstProbePacket) {
+  ScopedFieldTrials trial("WebRTC-Pacer-SmallFirstProbePacket/Enabled/");
+  MockPacketSender callback;
+  pacer_ =
+      std::make_unique<PacingController>(&clock_, &callback, nullptr, nullptr);
+  pacer_->CreateProbeCluster(kFirstClusterRate, /*cluster_id=*/0);
+  pacer_->SetPacingRates(kTargetRate * kPaceMultiplier, DataRate::Zero());
+
+  // Add high prio media.
+  pacer_->EnqueuePacket(BuildRtpPacket(RtpPacketToSend::Type::kAudio));
+
+  // Expect small padding packet to be requested.
+  EXPECT_CALL(callback, GeneratePadding(DataSize::bytes(1)))
+      .WillOnce([&](DataSize padding_size) {
+        std::vector<std::unique_ptr<RtpPacketToSend>> padding_packets;
+        padding_packets.emplace_back(
+            BuildPacket(RtpPacketToSend::Type::kPadding, kAudioSsrc, 1,
+                        clock_.TimeInMilliseconds(), 1));
+        return padding_packets;
+      });
+
+  size_t packets_sent = 0;
+  bool media_seen = false;
+  EXPECT_CALL(callback, SendRtpPacket)
+      .Times(::testing::AnyNumber())
+      .WillRepeatedly([&](std::unique_ptr<RtpPacketToSend> packet,
+                          const PacedPacketInfo& cluster_info) {
+        if (packets_sent == 0) {
+          EXPECT_EQ(packet->packet_type(), RtpPacketToSend::Type::kPadding);
+        } else {
+          if (packet->packet_type() == RtpPacketToSend::Type::kAudio) {
+            media_seen = true;
+          }
+        }
+        packets_sent++;
+      });
+  while (!media_seen) {
+    pacer_->ProcessPackets();
+    clock_.AdvanceTimeMilliseconds(5);
+  }
 }
 }  // namespace test
 }  // namespace webrtc

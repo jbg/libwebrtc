@@ -34,6 +34,8 @@ constexpr TimeDelta kMaxElapsedTime = TimeDelta::Seconds<2>();
 // time.
 constexpr TimeDelta kMaxProcessingInterval = TimeDelta::Millis<30>();
 
+constexpr int kFirstPriority = 0;
+
 bool IsDisabled(const WebRtcKeyValueConfig& field_trials,
                 absl::string_view key) {
   return field_trials.Lookup(key).find("Disabled") == 0;
@@ -45,24 +47,24 @@ bool IsEnabled(const WebRtcKeyValueConfig& field_trials,
 }
 
 int GetPriorityForType(RtpPacketToSend::Type type) {
+  // Lower number takes priority over higher.
   switch (type) {
     case RtpPacketToSend::Type::kAudio:
       // Audio is always prioritized over other packet types.
-      return 0;
+      return kFirstPriority + 1;
     case RtpPacketToSend::Type::kRetransmission:
       // Send retransmissions before new media.
-      return 1;
+      return kFirstPriority + 2;
     case RtpPacketToSend::Type::kVideo:
-      // Video has "normal" priority, in the old speak.
-      return 2;
     case RtpPacketToSend::Type::kForwardErrorCorrection:
+      // Video has "normal" priority, in the old speak.
       // Send redundancy concurrently to video. If it is delayed it might have a
       // lower chance of being useful.
-      return 2;
+      return kFirstPriority + 3;
     case RtpPacketToSend::Type::kPadding:
       // Packets that are in themselves likely useless, only sent to keep the
       // BWE high.
-      return 3;
+      return kFirstPriority + 4;
   }
 }
 
@@ -88,6 +90,8 @@ PacingController::PacingController(Clock* clock,
       send_padding_if_silent_(
           IsEnabled(*field_trials_, "WebRTC-Pacer-PadInSilence")),
       pace_audio_(!IsDisabled(*field_trials_, "WebRTC-Pacer-BlockAudio")),
+      small_first_probe_packet_(
+          IsEnabled(*field_trials_, "WebRTC-Pacer-SmallFirstProbePacket")),
       min_packet_limit_(kDefaultMinPacketLimit),
       last_timestamp_(clock_->CurrentTime()),
       paused_(false),
@@ -187,17 +191,11 @@ void PacingController::SetPacingRates(DataRate pacing_rate,
 void PacingController::EnqueuePacket(std::unique_ptr<RtpPacketToSend> packet) {
   RTC_DCHECK(pacing_bitrate_ > DataRate::Zero())
       << "SetPacingRate must be called before InsertPacket.";
-
-  Timestamp now = CurrentTime();
-  prober_.OnIncomingPacket(packet->payload_size());
-
-  if (packet->capture_time_ms() < 0) {
-    packet->set_capture_time_ms(now.ms());
-  }
-
   RTC_CHECK(packet->packet_type());
-  int priority = GetPriorityForType(*packet->packet_type());
-  packet_queue_.Push(priority, now, packet_counter_++, std::move(packet));
+  // Get priority first and store in temporary, to avoid chance of object being
+  // moved before GetPriorityForType() being called.
+  const int priority = GetPriorityForType(*packet->packet_type());
+  EnqueuePacketInternal(std::move(packet), priority);
 }
 
 void PacingController::SetAccountForAudioPackets(bool account_for_audio) {
@@ -230,6 +228,16 @@ TimeDelta PacingController::OldestPacketWaitTime() const {
   }
 
   return CurrentTime() - oldest_packet;
+}
+
+void PacingController::EnqueuePacketInternal(
+    std::unique_ptr<RtpPacketToSend> packet,
+    int priority) {
+  prober_.OnIncomingPacket(packet->payload_size());
+
+  RTC_DCHECK_GT(packet->capture_time_ms(), 0);
+  packet_queue_.Push(priority, CurrentTime(), packet_counter_++,
+                     std::move(packet));
 }
 
 TimeDelta PacingController::UpdateTimeAndGetElapsed(Timestamp now) {
@@ -322,18 +330,40 @@ void PacingController::ProcessPackets() {
     UpdateBudgetWithElapsedTime(elapsed_time);
   }
 
+  bool first_packet_in_probe = false;
   bool is_probing = prober_.IsProbing();
   PacedPacketInfo pacing_info;
   absl::optional<DataSize> recommended_probe_size;
   if (is_probing) {
     pacing_info = prober_.CurrentCluster();
+    if (current_probe_cluster_id_ != pacing_info.probe_cluster_id) {
+      current_probe_cluster_id_ = pacing_info.probe_cluster_id;
+      first_packet_in_probe = true;
+    }
     recommended_probe_size = DataSize::bytes(prober_.RecommendedMinProbeSize());
+  } else {
+    current_probe_cluster_id_.reset();
   }
 
   DataSize data_sent = DataSize::Zero();
   // The paused state is checked in the loop since it leaves the critical
   // section allowing the paused state to be changed from other code.
   while (!paused_) {
+    if (small_first_probe_packet_ && first_packet_in_probe) {
+      // If first packet in probe, insert a small padding packet so we have a
+      // more reliable start window for the rate estimation.
+      for (auto& packet : packet_sender_->GeneratePadding(DataSize::bytes(1))) {
+        if (first_packet_in_probe) {
+          // Insert with high priority so larger media packets don't preempt it.
+          EnqueuePacketInternal(std::move(packet), kFirstPriority);
+          first_packet_in_probe = false;
+        } else {
+          EnqueuePacket(std::move(packet));
+        }
+      }
+      first_packet_in_probe = false;
+    }
+
     auto* packet = GetPendingPacket(pacing_info);
     if (packet == nullptr) {
       // No packet available to send, check if we should send padding.

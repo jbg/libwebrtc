@@ -89,7 +89,9 @@ TEST(PacedSenderTest, PacesPackets) {
   pacer.SetPacingRates(DataRate::bps(kDefaultPacketSize * 8 * kPacketsToSend),
                        DataRate::Zero());
   for (size_t i = 0; i < kPacketsToSend; ++i) {
-    pacer.EnqueuePacket(BuildRtpPacket(RtpPacketToSend::Type::kVideo));
+    auto packet = BuildRtpPacket(RtpPacketToSend::Type::kVideo);
+    packet->set_capture_time_ms(clock.TimeInMilliseconds());
+    pacer.EnqueuePacket(std::move(packet));
   }
 
   // Expect all of them to be sent.
