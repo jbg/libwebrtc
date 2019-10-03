@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dda1860_3e8bca04",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T07:19:19Z",
+      "side": 1,
+      "message": "Is this guaranteed to be true? Considering wraparounds etc.",
+      "range": {
+        "startLine": 238,
+        "startChar": 16,
+        "endLine": 238,
+        "endChar": 41
+      },
+      "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc678b8c_d5cfd9fb",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T07:19:19Z",
+      "side": 1,
+      "message": "Could this logic be moved to the prober? Seems like it belongs there more than here.",
+      "range": {
+        "startLine": 339,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 5
+      },
+      "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "080678c7_7ffcd333",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T07:19:19Z",
+      "side": 1,
+      "message": "We can\u0027t reconstruct the capture time based on per-packet timing. Consider the case where a single frame is split into several packets and there\u0027s stalls on this thread.\n\nMaybe use a DCHECK?",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 3
+      },
+      "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
