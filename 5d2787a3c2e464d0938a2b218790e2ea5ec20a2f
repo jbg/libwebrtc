@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "82177b82_bb0d2370",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T10:52:25Z",
+      "side": 1,
+      "message": "Or add new methods: FirstPacketInCluster() and IncrementPacketCounter() that\u0027s called for the first sent packet.",
+      "parentUuid": "49f24c24_1686f23b",
+      "range": {
+        "startLine": 339,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 5
+      },
+      "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "080678c7_7ffcd333",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 6
@@ -140,6 +164,30 @@
       "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1082e88e_9b024ff4",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T10:52:25Z",
+      "side": 1,
+      "message": "Well, if it\u0027s only for tests. Maybe you can check for that instead? And then set the value to some dummy value rather than the current time. This seems like it\u0027d \"kinda\" work for broken code. Maybe you can merge the followup cl with this CL?",
+      "parentUuid": "9f2a4c46_c9408933",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 3
+      },
+      "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
