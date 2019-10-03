@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "293a4d73_63226872",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T15:55:35Z",
+      "side": 1,
+      "message": "Could you add something like TODO: Only happens in tests, remove when tests have been fixed.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 38
+      },
+      "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6da311e8_affaf558",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T15:55:35Z",
+      "side": 1,
+      "message": "Seems like we expect that we might not get any padding packet, maybe we should document why that might happen. If don\u0027t expect that it will happen, we could DCHECK for it.",
+      "range": {
+        "startLine": 355,
+        "startChar": 37,
+        "endLine": 355,
+        "endChar": 52
+      },
+      "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8ea23cb_3d03e5cf",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T15:55:35Z",
+      "side": 1,
+      "message": "Nit:\nif(padding.Size()\u003e0) {\n EnqueuePacketInternal(std::move(padding[0]), kFirstPriority)\n}\nfor (size_t i \u003d 1; i \u003c padding.size(); ++i) {\n EnqueuePacket(std::move(padding[i]));\n}\n}\n\nBut consider if the second part could be dropped.",
+      "range": {
+        "startLine": 356,
+        "startChar": 4,
+        "endLine": 357,
+        "endChar": 21
+      },
+      "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2ae6a38_5f15d30d",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-03T15:55:35Z",
+      "side": 1,
+      "message": "\u003d we got more than one padding packet? In that case we could just skip sending it, right? Or could it be important for some reason? (like being actual RTX)",
+      "range": {
+        "startLine": 361,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 47
+      },
+      "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
