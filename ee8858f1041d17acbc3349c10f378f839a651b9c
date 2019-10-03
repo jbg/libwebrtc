@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1d253bd_cde48bc0",
+        "filename": "api/transport/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-10-03T21:29:06Z",
+      "side": 1,
+      "message": "This part can be removed (I know that https://cs.chromium.org/chromium/src/third_party/webrtc/tools_webrtc/gn_check_autofix.py does it wrong, we need to fix it).",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "ee8858f1041d17acbc3349c10f378f839a651b9c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
