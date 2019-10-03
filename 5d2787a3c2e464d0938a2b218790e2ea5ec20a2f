@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "6562bc52_e4562a8d",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-03T14:46:58Z",
+      "side": 1,
+      "message": "We already propagate back the number of bytes sent for a probe per call to ProcessPackets(), so I just added that to PacedPacketInfo. wdyt?",
+      "parentUuid": "82177b82_bb0d2370",
+      "range": {
+        "startLine": 339,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 5
+      },
+      "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "080678c7_7ffcd333",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 6
@@ -188,6 +212,30 @@
       "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39635495_e1c568b0",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-03T14:46:58Z",
+      "side": 1,
+      "message": "Possibly, I\u0027m not going to touch this code in this CL though.",
+      "parentUuid": "1082e88e_9b024ff4",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 3
+      },
+      "revId": "5d2787a3c2e464d0938a2b218790e2ea5ec20a2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
