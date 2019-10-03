@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "78ccf24c_9e743b56",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-03T16:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "293a4d73_63226872",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 38
+      },
+      "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6da311e8_affaf558",
         "filename": "modules/pacing/pacing_controller.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42caf93b_1a9b8236",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-03T16:48:04Z",
+      "side": 1,
+      "message": "Added comment.",
+      "parentUuid": "6da311e8_affaf558",
+      "range": {
+        "startLine": 355,
+        "startChar": 37,
+        "endLine": 355,
+        "endChar": 52
+      },
+      "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "cb0bd448_48c5f42b",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-03T16:48:04Z",
+      "side": 1,
+      "message": "Replaced second part with DCHECK.",
+      "parentUuid": "f8ea23cb_3d03e5cf",
+      "range": {
+        "startLine": 356,
+        "startChar": 4,
+        "endLine": 357,
+        "endChar": 21
+      },
+      "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2ae6a38_5f15d30d",
         "filename": "modules/pacing/pacing_controller.cc",
         "patchSetId": 8
@@ -91,6 +163,30 @@
       "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39b004d8_2fc4c35a",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-03T16:48:04Z",
+      "side": 1,
+      "message": "My thinking is that if it\u0027s payload padding the packet history will refuse to retransmit it until we have actually sent it out.\nBut with the requested size we should never get payload. Let\u0027s just DCHECK instead.",
+      "parentUuid": "d2ae6a38_5f15d30d",
+      "range": {
+        "startLine": 361,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 47
+      },
+      "revId": "73cfa7a2444e3edaf4de57891d4706c36eb1f954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
