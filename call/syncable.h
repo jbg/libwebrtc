@@ -37,6 +37,8 @@ class Syncable {
   virtual absl::optional<Info> GetInfo() const = 0;
   virtual uint32_t GetPlayoutTimestamp() const = 0;
   virtual void SetMinimumPlayoutDelay(int delay_ms) = 0;
+  virtual void SetEstimatedPlayoutNtpTimestampMs(int64_t ntp_timestamp_ms) = 0;
+  virtual absl::optional<int64_t> GetEstimatedPlayoutNtpTimestampMs() const = 0;
 };
 }  // namespace webrtc
 

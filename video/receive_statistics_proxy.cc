@@ -579,6 +579,13 @@ VideoReceiveStream::Stats ReceiveStatisticsProxy::GetStats() const {
       static_cast<double>(current_delay_counter_.Sum(1).value_or(0)) /
       rtc::kNumMillisecsPerSec;
   stats_.jitter_buffer_emitted_count = current_delay_counter_.NumSamples();
+  if (last_estimated_playout_ntp_timestamp_ms_) {
+    int64_t elasped_ms = 0;
+    if (last_estimated_playout_time_ms_)
+      elasped_ms = now_ms - last_estimated_playout_time_ms_.value();
+    stats_.estimated_playout_ntp_timestamp_ms =
+        last_estimated_playout_ntp_timestamp_ms_.value() + elasped_ms;
+  }
   return stats_;
 }
 
@@ -750,11 +757,14 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrame& frame) {
   QualitySample();
 }
 
-void ReceiveStatisticsProxy::OnSyncOffsetUpdated(int64_t sync_offset_ms,
+void ReceiveStatisticsProxy::OnSyncOffsetUpdated(int64_t video_playout_ntp_ms,
+                                                 int64_t sync_offset_ms,
                                                  double estimated_freq_khz) {
   rtc::CritScope lock(&crit_);
   sync_offset_counter_.Add(std::abs(sync_offset_ms));
   stats_.sync_offset_ms = sync_offset_ms;
+  last_estimated_playout_ntp_timestamp_ms_ = video_playout_ntp_ms;
+  last_estimated_playout_time_ms_ = clock_->TimeInMilliseconds();
 
   const double kMaxFreqKhz = 10000.0;
   int offset_khz = kMaxFreqKhz;
