@@ -14,6 +14,7 @@
 #include "api/video_codecs/video_encoder.h"
 #include "call/fake_network_pipe.h"
 #include "call/simulated_network.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "system_wrappers/include/sleep.h"
 #include "test/call_test.h"
 #include "test/fake_encoder.h"
@@ -87,8 +88,8 @@ void NetworkStateEndToEndTest::VerifyNewVideoSendStreamsRespectNetworkState(
     Transport* transport) {
   test::VideoEncoderProxyFactory encoder_factory(encoder);
 
-  task_queue_.SendTask([this, network_to_bring_up, &encoder_factory,
-                        transport]() {
+  SendTask(&task_queue_, [this, network_to_bring_up, &encoder_factory,
+                          transport]() {
     CreateSenderCall(Call::Config(send_event_log_.get()));
     sender_call_->SignalChannelNetworkState(network_to_bring_up, kNetworkUp);
 
@@ -103,7 +104,7 @@ void NetworkStateEndToEndTest::VerifyNewVideoSendStreamsRespectNetworkState(
 
   SleepMs(kSilenceTimeoutMs);
 
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     Stop();
     DestroyStreams();
     DestroyCalls();
@@ -115,8 +116,8 @@ void NetworkStateEndToEndTest::VerifyNewVideoReceiveStreamsRespectNetworkState(
     Transport* transport) {
   std::unique_ptr<test::DirectTransport> sender_transport;
 
-  task_queue_.SendTask([this, &sender_transport, network_to_bring_up,
-                        transport]() {
+  SendTask(&task_queue_, [this, &sender_transport, network_to_bring_up,
+                          transport]() {
     CreateCalls();
     receiver_call_->SignalChannelNetworkState(network_to_bring_up, kNetworkUp);
     sender_transport = std::make_unique<test::DirectTransport>(
@@ -136,7 +137,7 @@ void NetworkStateEndToEndTest::VerifyNewVideoReceiveStreamsRespectNetworkState(
 
   SleepMs(kSilenceTimeoutMs);
 
-  task_queue_.SendTask([this, &sender_transport]() {
+  SendTask(&task_queue_, [this, &sender_transport]() {
     Stop();
     DestroyStreams();
     sender_transport.reset();
@@ -217,7 +218,7 @@ TEST_F(NetworkStateEndToEndTest, RespectsNetworkState) {
       EXPECT_TRUE(encoded_frames_.Wait(kDefaultTimeoutMs))
           << "No frames received by the encoder.";
 
-      task_queue_->SendTask([this]() {
+      SendTask(task_queue_, [this]() {
         // Wait for packets from both sender/receiver.
         WaitForPacketsOrSilence(false, false);
 

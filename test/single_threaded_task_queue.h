@@ -59,10 +59,6 @@ class DEPRECATED_SingleThreadedTaskQueueForTesting : public TaskQueueBase {
     return PostDelayed(ToQueuedTask(std::move(task)), delay_ms);
   }
 
-  // Send one task to the queue. The function does not return until the task
-  // has finished executing. No support for canceling the task.
-  void SendTask(Task task);
-
   // Given an identifier to the task, attempts to eject it from the queue.
   // Returns true if the task was found and cancelled. Failure possible
   // only for invalid task IDs, or for tasks which have already been executed.

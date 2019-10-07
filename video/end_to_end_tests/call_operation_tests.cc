@@ -12,6 +12,7 @@
 #include "api/test/simulated_network.h"
 #include "call/fake_network_pipe.h"
 #include "call/simulated_network.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "system_wrappers/include/sleep.h"
 #include "test/call_test.h"
 #include "test/field_trial.h"
@@ -93,8 +94,8 @@ TEST_F(CallOperationEndToEndTest, RendersSingleDelayedFrame) {
   std::unique_ptr<test::DirectTransport> sender_transport;
   std::unique_ptr<test::DirectTransport> receiver_transport;
 
-  task_queue_.SendTask([this, &renderer, &frame_forwarder, &sender_transport,
-                        &receiver_transport]() {
+  SendTask(&task_queue_, [this, &renderer, &frame_forwarder, &sender_transport,
+                          &receiver_transport]() {
     CreateCalls();
 
     sender_transport = std::make_unique<test::DirectTransport>(
@@ -134,7 +135,7 @@ TEST_F(CallOperationEndToEndTest, RendersSingleDelayedFrame) {
   EXPECT_TRUE(renderer.Wait())
       << "Timed out while waiting for the frame to render.";
 
-  task_queue_.SendTask([this, &sender_transport, &receiver_transport]() {
+  SendTask(&task_queue_, [this, &sender_transport, &receiver_transport]() {
     Stop();
     DestroyStreams();
     sender_transport.reset();
@@ -159,8 +160,8 @@ TEST_F(CallOperationEndToEndTest, TransmitsFirstFrame) {
   std::unique_ptr<test::DirectTransport> sender_transport;
   std::unique_ptr<test::DirectTransport> receiver_transport;
 
-  task_queue_.SendTask([this, &renderer, &frame_generator, &frame_forwarder,
-                        &sender_transport, &receiver_transport]() {
+  SendTask(&task_queue_, [this, &renderer, &frame_generator, &frame_forwarder,
+                          &sender_transport, &receiver_transport]() {
     CreateCalls();
 
     sender_transport = std::make_unique<test::DirectTransport>(
@@ -195,7 +196,7 @@ TEST_F(CallOperationEndToEndTest, TransmitsFirstFrame) {
   EXPECT_TRUE(renderer.Wait())
       << "Timed out while waiting for the frame to render.";
 
-  task_queue_.SendTask([this, &sender_transport, &receiver_transport]() {
+  SendTask(&task_queue_, [this, &sender_transport, &receiver_transport]() {
     Stop();
     DestroyStreams();
     sender_transport.reset();

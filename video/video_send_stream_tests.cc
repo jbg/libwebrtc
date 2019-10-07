@@ -37,6 +37,7 @@
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/rate_limiter.h"
 #include "rtc_base/synchronization/sequence_checker.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/unique_id_generator.h"
 #include "system_wrappers/include/sleep.h"
@@ -114,7 +115,7 @@ class VideoSendStreamTest : public test::CallTest {
 };
 
 TEST_F(VideoSendStreamTest, CanStartStartedStream) {
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     CreateSenderCall();
 
     test::NullTransport transport;
@@ -128,7 +129,7 @@ TEST_F(VideoSendStreamTest, CanStartStartedStream) {
 }
 
 TEST_F(VideoSendStreamTest, CanStopStoppedStream) {
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     CreateSenderCall();
 
     test::NullTransport transport;
@@ -1754,7 +1755,7 @@ TEST_F(VideoSendStreamTest, ChangingNetworkRoute) {
       new_route.remote_network_id = 20;
       BitrateConstraints bitrate_config;
 
-      task_queue_->SendTask([this, &new_route, &bitrate_config]() {
+      SendTask(task_queue_, [this, &new_route, &bitrate_config]() {
         RTC_DCHECK_RUN_ON(&task_queue_thread_);
         call_->GetTransportControllerSend()->OnNetworkRouteChanged("transport",
                                                                    new_route);
@@ -1766,7 +1767,7 @@ TEST_F(VideoSendStreamTest, ChangingNetworkRoute) {
       EXPECT_TRUE(Wait())
           << "Timed out while waiting for start bitrate to be exceeded.";
 
-      task_queue_->SendTask([this, &new_route, &bitrate_config]() {
+      SendTask(task_queue_, [this, &new_route, &bitrate_config]() {
         RTC_DCHECK_RUN_ON(&task_queue_thread_);
         bitrate_config.start_bitrate_bps = -1;
         bitrate_config.max_bitrate_bps = kNewMaxBitrateBps;
@@ -1823,7 +1824,7 @@ TEST_F(VideoSendStreamTest, ChangingTransportOverhead) {
     }
 
     void PerformTest() override {
-      task_queue_->SendTask([this]() {
+      SendTask(task_queue_, [this]() {
         transport_overhead_ = 100;
         call_->GetTransportControllerSend()->OnTransportOverheadChanged(
             transport_overhead_);
@@ -1836,7 +1837,7 @@ TEST_F(VideoSendStreamTest, ChangingTransportOverhead) {
         packets_sent_ = 0;
       }
 
-      task_queue_->SendTask([this]() {
+      SendTask(task_queue_, [this]() {
         transport_overhead_ = 500;
         call_->GetTransportControllerSend()->OnTransportOverheadChanged(
             transport_overhead_);
@@ -2063,7 +2064,7 @@ TEST_F(VideoSendStreamTest,
   EncoderObserver encoder;
   test::VideoEncoderProxyFactory encoder_factory(&encoder);
 
-  task_queue_.SendTask([this, &transport, &encoder_factory]() {
+  SendTask(&task_queue_, [this, &transport, &encoder_factory]() {
     CreateSenderCall();
     CreateSendConfig(1, 0, 0, &transport);
     GetVideoSendConfig()->encoder_settings.encoder_factory = &encoder_factory;
@@ -2075,14 +2076,14 @@ TEST_F(VideoSendStreamTest,
 
   encoder.WaitForResolution(kDefaultWidth, kDefaultHeight);
 
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     frame_generator_capturer_->ChangeResolution(kDefaultWidth * 2,
                                                 kDefaultHeight * 2);
   });
 
   encoder.WaitForResolution(kDefaultWidth * 2, kDefaultHeight * 2);
 
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     DestroyStreams();
     DestroyCalls();
   });
@@ -2220,7 +2221,7 @@ TEST_F(VideoSendStreamTest, VideoSendStreamStopSetEncoderRateToZero) {
   encoder_factory.SetHasInternalSource(true);
   test::FrameForwarder forwarder;
 
-  task_queue_.SendTask([this, &transport, &encoder_factory, &forwarder]() {
+  SendTask(&task_queue_, [this, &transport, &encoder_factory, &forwarder]() {
     CreateSenderCall();
     CreateSendConfig(1, 0, 0, &transport);
 
@@ -2237,16 +2238,16 @@ TEST_F(VideoSendStreamTest, VideoSendStreamStopSetEncoderRateToZero) {
 
   EXPECT_TRUE(encoder.WaitForEncoderInit());
 
-  task_queue_.SendTask([this]() { GetVideoSendStream()->Start(); });
+  SendTask(&task_queue_, [this]() { GetVideoSendStream()->Start(); });
   EXPECT_TRUE(encoder.WaitBitrateChanged(true));
 
-  task_queue_.SendTask([this]() { GetVideoSendStream()->Stop(); });
+  SendTask(&task_queue_, [this]() { GetVideoSendStream()->Stop(); });
   EXPECT_TRUE(encoder.WaitBitrateChanged(false));
 
-  task_queue_.SendTask([this]() { GetVideoSendStream()->Start(); });
+  SendTask(&task_queue_, [this]() { GetVideoSendStream()->Start(); });
   EXPECT_TRUE(encoder.WaitBitrateChanged(true));
 
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     DestroyStreams();
     DestroyCalls();
   });
@@ -2263,7 +2264,7 @@ TEST_F(VideoSendStreamTest, VideoSendStreamUpdateActiveSimulcastLayers) {
   encoder_factory.SetHasInternalSource(true);
   test::FrameForwarder forwarder;
 
-  task_queue_.SendTask([this, &transport, &encoder_factory, &forwarder]() {
+  SendTask(&task_queue_, [this, &transport, &encoder_factory, &forwarder]() {
     CreateSenderCall();
     // Create two simulcast streams.
     CreateSendConfig(2, 0, 0, &transport);
@@ -2284,14 +2285,14 @@ TEST_F(VideoSendStreamTest, VideoSendStreamUpdateActiveSimulcastLayers) {
 
   // When we turn on the simulcast layers it will update the BitrateAllocator,
   // which in turn updates the VideoEncoder's bitrate.
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     GetVideoSendStream()->UpdateActiveSimulcastLayers({true, true});
   });
   EXPECT_TRUE(encoder.WaitBitrateChanged(true));
 
   GetVideoEncoderConfig()->simulcast_layers[0].active = true;
   GetVideoEncoderConfig()->simulcast_layers[1].active = false;
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     GetVideoSendStream()->ReconfigureVideoEncoder(
         GetVideoEncoderConfig()->Copy());
   });
@@ -2307,12 +2308,12 @@ TEST_F(VideoSendStreamTest, VideoSendStreamUpdateActiveSimulcastLayers) {
   // Turning off both simulcast layers should trigger a bitrate change of 0.
   GetVideoEncoderConfig()->simulcast_layers[0].active = false;
   GetVideoEncoderConfig()->simulcast_layers[1].active = false;
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     GetVideoSendStream()->UpdateActiveSimulcastLayers({false, false});
   });
   EXPECT_TRUE(encoder.WaitBitrateChanged(false));
 
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     DestroyStreams();
     DestroyCalls();
   });
@@ -2426,7 +2427,7 @@ TEST_F(VideoSendStreamTest, EncoderIsProperlyInitializedAndDestroyed) {
     void PerformTest() override {
       EXPECT_TRUE(Wait()) << "Timed out while waiting for Encode.";
 
-      task_queue_->SendTask([this]() {
+      SendTask(task_queue_, [this]() {
         EXPECT_EQ(0u, num_releases());
         stream_->ReconfigureVideoEncoder(std::move(encoder_config_));
         EXPECT_EQ(0u, num_releases());
@@ -2933,7 +2934,7 @@ TEST_F(VideoSendStreamTest, ReconfigureBitratesSetsEncoderBitratesCorrectly) {
       BitrateConstraints bitrate_config;
       bitrate_config.start_bitrate_bps = kIncreasedStartBitrateKbps * 1000;
       bitrate_config.max_bitrate_bps = kIncreasedMaxBitrateKbps * 1000;
-      task_queue_->SendTask([this, &bitrate_config]() {
+      SendTask(task_queue_, [this, &bitrate_config]() {
         call_->GetTransportControllerSend()->SetSdpBitrateParameters(
             bitrate_config);
       });
@@ -3686,7 +3687,7 @@ TEST_F(VideoSendStreamTest, RemoveOverheadFromBandwidth) {
       bitrate_config.start_bitrate_bps = kStartBitrateBps;
       bitrate_config.max_bitrate_bps = kMaxBitrateBps;
       bitrate_config.min_bitrate_bps = kMinBitrateBps;
-      task_queue_->SendTask([this, &bitrate_config]() {
+      SendTask(task_queue_, [this, &bitrate_config]() {
         call_->GetTransportControllerSend()->SetSdpBitrateParameters(
             bitrate_config);
         call_->GetTransportControllerSend()->OnTransportOverheadChanged(40);
@@ -3930,7 +3931,8 @@ TEST_F(VideoSendStreamTest, SwitchesToScreenshareAndBack) {
   auto reset_fun = [this](const VideoSendStream::Config& send_stream_config,
                           const VideoEncoderConfig& encoder_config,
                           test::BaseTest* test) {
-    task_queue_.SendTask([this, &send_stream_config, &encoder_config, &test]() {
+    SendTask(&task_queue_, [this, &send_stream_config, &encoder_config,
+                            &test]() {
       Stop();
       DestroyVideoSendStreams();
       SetVideoSendConfig(send_stream_config);

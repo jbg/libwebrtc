@@ -15,6 +15,7 @@
 #include "call/simulated_network.h"
 #include "modules/include/module_common_types_public.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "test/call_test.h"
 #include "test/gtest.h"
 #include "test/rtcp_packet_parser.h"
@@ -281,8 +282,8 @@ void RtpRtcpEndToEndTest::TestRtpStatePreservation(
 
   VideoEncoderConfig one_stream;
 
-  task_queue_.SendTask([this, &observer, &send_transport, &receive_transport,
-                        &one_stream, use_rtx]() {
+  SendTask(&task_queue_, [this, &observer, &send_transport, &receive_transport,
+                          &one_stream, use_rtx]() {
     CreateCalls();
 
     send_transport = std::make_unique<test::PacketTransport>(
@@ -330,7 +331,7 @@ void RtpRtcpEndToEndTest::TestRtpStatePreservation(
   // Test stream resetting more than once to make sure that the state doesn't
   // get set once (this could be due to using std::map::insert for instance).
   for (size_t i = 0; i < 3; ++i) {
-    task_queue_.SendTask([&]() {
+    SendTask(&task_queue_, [&]() {
       DestroyVideoSendStreams();
 
       // Re-create VideoSendStream with only one stream.
@@ -352,7 +353,7 @@ void RtpRtcpEndToEndTest::TestRtpStatePreservation(
     EXPECT_TRUE(observer.Wait()) << "Timed out waiting for single RTP packet.";
 
     // Reconfigure back to use all streams.
-    task_queue_.SendTask([this]() {
+    SendTask(&task_queue_, [this]() {
       GetVideoSendStream()->ReconfigureVideoEncoder(
           GetVideoEncoderConfig()->Copy());
     });
@@ -361,14 +362,14 @@ void RtpRtcpEndToEndTest::TestRtpStatePreservation(
         << "Timed out waiting for all SSRCs to send packets.";
 
     // Reconfigure down to one stream.
-    task_queue_.SendTask([this, &one_stream]() {
+    SendTask(&task_queue_, [this, &one_stream]() {
       GetVideoSendStream()->ReconfigureVideoEncoder(one_stream.Copy());
     });
     observer.ResetExpectedSsrcs(1);
     EXPECT_TRUE(observer.Wait()) << "Timed out waiting for single RTP packet.";
 
     // Reconfigure back to use all streams.
-    task_queue_.SendTask([this]() {
+    SendTask(&task_queue_, [this]() {
       GetVideoSendStream()->ReconfigureVideoEncoder(
           GetVideoEncoderConfig()->Copy());
     });
@@ -377,7 +378,7 @@ void RtpRtcpEndToEndTest::TestRtpStatePreservation(
         << "Timed out waiting for all SSRCs to send packets.";
   }
 
-  task_queue_.SendTask([this, &send_transport, &receive_transport]() {
+  SendTask(&task_queue_, [this, &send_transport, &receive_transport]() {
     Stop();
     DestroyStreams();
     send_transport.reset();
@@ -477,7 +478,7 @@ TEST_F(RtpRtcpEndToEndTest, DISABLED_TestFlexfecRtpStatePreservation) {
   test::FunctionVideoEncoderFactory encoder_factory(
       []() { return VP8Encoder::Create(); });
 
-  task_queue_.SendTask([&]() {
+  SendTask(&task_queue_, [&]() {
     CreateCalls();
 
     BuiltInNetworkBehaviorConfig lossy_delayed_link;
@@ -555,7 +556,7 @@ TEST_F(RtpRtcpEndToEndTest, DISABLED_TestFlexfecRtpStatePreservation) {
   // Initial test.
   EXPECT_TRUE(observer.Wait()) << "Timed out waiting for packets.";
 
-  task_queue_.SendTask([this, &observer]() {
+  SendTask(&task_queue_, [this, &observer]() {
     // Ensure monotonicity when the VideoSendStream is restarted.
     Stop();
     observer.ResetPacketCount();
@@ -564,7 +565,7 @@ TEST_F(RtpRtcpEndToEndTest, DISABLED_TestFlexfecRtpStatePreservation) {
 
   EXPECT_TRUE(observer.Wait()) << "Timed out waiting for packets.";
 
-  task_queue_.SendTask([this, &observer]() {
+  SendTask(&task_queue_, [this, &observer]() {
     // Ensure monotonicity when the VideoSendStream is recreated.
     DestroyVideoSendStreams();
     observer.ResetPacketCount();
@@ -576,7 +577,7 @@ TEST_F(RtpRtcpEndToEndTest, DISABLED_TestFlexfecRtpStatePreservation) {
   EXPECT_TRUE(observer.Wait()) << "Timed out waiting for packets.";
 
   // Cleanup.
-  task_queue_.SendTask([this, &send_transport, &receive_transport]() {
+  SendTask(&task_queue_, [this, &send_transport, &receive_transport]() {
     Stop();
     DestroyStreams();
     send_transport.reset();

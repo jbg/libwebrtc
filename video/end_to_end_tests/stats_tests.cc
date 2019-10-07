@@ -19,6 +19,7 @@
 #include "modules/rtp_rtcp/source/rtp_utility.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "rtc_base/strings/string_builder.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "system_wrappers/include/metrics.h"
 #include "system_wrappers/include/sleep.h"
 #include "test/call_test.h"
@@ -526,8 +527,8 @@ TEST_F(StatsEndToEndTest, MAYBE_ContentTypeSwitches) {
 
   VideoEncoderConfig encoder_config_with_screenshare;
 
-  task_queue_.SendTask([this, &test, &send_config, &recv_config,
-                        &encoder_config_with_screenshare]() {
+  SendTask(&task_queue_, [this, &test, &send_config, &recv_config,
+                          &encoder_config_with_screenshare]() {
     CreateSenderCall(send_config);
     CreateReceiverCall(recv_config);
 
@@ -564,7 +565,7 @@ TEST_F(StatsEndToEndTest, MAYBE_ContentTypeSwitches) {
   test.PerformTest();
 
   // Replace old send stream.
-  task_queue_.SendTask([this, &encoder_config_with_screenshare]() {
+  SendTask(&task_queue_, [this, &encoder_config_with_screenshare]() {
     DestroyVideoSendStreams();
     CreateVideoSendStream(encoder_config_with_screenshare);
     SetVideoDegradation(DegradationPreference::BALANCED);
@@ -574,7 +575,7 @@ TEST_F(StatsEndToEndTest, MAYBE_ContentTypeSwitches) {
   // Continue to run test but now with screenshare.
   test.PerformTest();
 
-  task_queue_.SendTask([this]() {
+  SendTask(&task_queue_, [this]() {
     Stop();
     DestroyStreams();
     send_transport_.reset();
@@ -717,7 +718,7 @@ TEST_F(StatsEndToEndTest, CallReportsRttForSender) {
   std::unique_ptr<test::DirectTransport> sender_transport;
   std::unique_ptr<test::DirectTransport> receiver_transport;
 
-  task_queue_.SendTask([this, &sender_transport, &receiver_transport]() {
+  SendTask(&task_queue_, [this, &sender_transport, &receiver_transport]() {
     BuiltInNetworkBehaviorConfig config;
     config.queue_delay_ms = kSendDelayMs;
     CreateCalls();
@@ -749,8 +750,8 @@ TEST_F(StatsEndToEndTest, CallReportsRttForSender) {
   int64_t start_time_ms = clock_->TimeInMilliseconds();
   while (true) {
     Call::Stats stats;
-    task_queue_.SendTask(
-        [this, &stats]() { stats = sender_call_->GetStats(); });
+    SendTask(&task_queue_,
+             [this, &stats]() { stats = sender_call_->GetStats(); });
     ASSERT_GE(start_time_ms + kDefaultTimeoutMs, clock_->TimeInMilliseconds())
         << "No RTT stats before timeout!";
     if (stats.rtt_ms != -1) {
@@ -763,7 +764,7 @@ TEST_F(StatsEndToEndTest, CallReportsRttForSender) {
     SleepMs(10);
   }
 
-  task_queue_.SendTask([this, &sender_transport, &receiver_transport]() {
+  SendTask(&task_queue_, [this, &sender_transport, &receiver_transport]() {
     Stop();
     DestroyStreams();
     sender_transport.reset();
