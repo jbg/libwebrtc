@@ -28,6 +28,7 @@
 #include "modules/audio_device/include/test_audio_device.h"
 #include "modules/audio_mixer/audio_mixer_impl.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/thread_annotations.h"
 #include "system_wrappers/include/metrics.h"
@@ -861,14 +862,13 @@ void CallPerfTest::TestMinAudioVideoBitrate(int test_bitrate_from,
 
   class MinVideoAndAudioBitrateTester : public test::EndToEndTest {
    public:
-    MinVideoAndAudioBitrateTester(
-        int test_bitrate_from,
-        int test_bitrate_to,
-        int test_bitrate_step,
-        int min_bwe,
-        int start_bwe,
-        int max_bwe,
-        test::DEPRECATED_SingleThreadedTaskQueueForTesting* task_queue)
+    MinVideoAndAudioBitrateTester(int test_bitrate_from,
+                                  int test_bitrate_to,
+                                  int test_bitrate_step,
+                                  int min_bwe,
+                                  int start_bwe,
+                                  int max_bwe,
+                                  TaskQueueBase* task_queue)
         : EndToEndTest(),
           test_bitrate_from_(test_bitrate_from),
           test_bitrate_to_(test_bitrate_to),
@@ -932,8 +932,9 @@ void CallPerfTest::TestMinAudioVideoBitrate(int test_bitrate_from,
         int64_t avg_rtt = 0;
         for (int i = 0; i < kBitrateMeasurements; i++) {
           Call::Stats call_stats;
-          task_queue_->SendTask(
-              [this, &call_stats]() { call_stats = sender_call_->GetStats(); });
+          SendTask(task_queue_, [this, &call_stats]() {
+            call_stats = sender_call_->GetStats();
+          });
           avg_rtt += call_stats.rtt_ms;
           rtc::Thread::SleepMs(quick_perf_test ? kShortDelayMs
                                                : kBitrateMeasurementMs);
@@ -982,7 +983,7 @@ void CallPerfTest::TestMinAudioVideoBitrate(int test_bitrate_from,
     SimulatedNetwork* send_simulated_network_;
     SimulatedNetwork* receive_simulated_network_;
     Call* sender_call_;
-    test::DEPRECATED_SingleThreadedTaskQueueForTesting* const task_queue_;
+    TaskQueueBase* const task_queue_;
   } test(test_bitrate_from, test_bitrate_to, test_bitrate_step, min_bwe,
          start_bwe, max_bwe, &task_queue_);
 

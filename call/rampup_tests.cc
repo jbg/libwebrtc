@@ -23,6 +23,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/string_encode.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/time_utils.h"
 #include "test/encoder_settings.h"
 #include "test/field_trial.h"
@@ -53,17 +54,16 @@ std::vector<uint32_t> GenerateSsrcs(size_t num_streams, uint32_t ssrc_offset) {
 }
 }  // namespace
 
-RampUpTester::RampUpTester(
-    size_t num_video_streams,
-    size_t num_audio_streams,
-    size_t num_flexfec_streams,
-    unsigned int start_bitrate_bps,
-    int64_t min_run_time_ms,
-    const std::string& extension_type,
-    bool rtx,
-    bool red,
-    bool report_perf_stats,
-    test::DEPRECATED_SingleThreadedTaskQueueForTesting* task_queue)
+RampUpTester::RampUpTester(size_t num_video_streams,
+                           size_t num_audio_streams,
+                           size_t num_flexfec_streams,
+                           unsigned int start_bitrate_bps,
+                           int64_t min_run_time_ms,
+                           const std::string& extension_type,
+                           bool rtx,
+                           bool red,
+                           bool report_perf_stats,
+                           TaskQueueBase* task_queue)
     : EndToEndTest(test::CallTest::kLongTimeoutMs),
       clock_(Clock::GetRealTimeClock()),
       num_video_streams_(num_video_streams),
@@ -93,14 +93,7 @@ RampUpTester::RampUpTester(
 
 RampUpTester::~RampUpTester() {
   // Special case for WebRTC-QuickPerfTest/Enabled/
-  task_queue_->SendTask([this]() {
-    if (pending_task_ !=
-        static_cast<test::DEPRECATED_SingleThreadedTaskQueueForTesting::TaskId>(
-            -1)) {
-      task_queue_->CancelTask(pending_task_);
-      pending_task_ = -1;
-    }
-  });
+  SendTask(task_queue_, [this] { poll_stats_task_.Stop(); });
 }
 
 void RampUpTester::ModifySenderBitrateConfig(
@@ -322,15 +315,15 @@ void RampUpTester::ModifyFlexfecConfigs(
 void RampUpTester::OnCallsCreated(Call* sender_call, Call* receiver_call) {
   RTC_DCHECK(sender_call);
   sender_call_ = sender_call;
-  pending_task_ = task_queue_->PostTask([this]() { PollStats(); });
+  poll_stats_task_ = RepeatingTaskHandle::Start(task_queue_, [this] {
+    PollStats();
+    return TimeDelta::ms(kPollIntervalMs);
+  });
 }
 
 void RampUpTester::PollStats() {
   RTC_DCHECK_RUN_ON(task_queue_);
 
-  EnsurePollTimeSet();
-
-  pending_task_ = -1;
   Call::Stats stats = sender_call_->GetStats();
   EXPECT_GE(expected_bitrate_bps_, 0);
 
@@ -339,9 +332,7 @@ void RampUpTester::PollStats() {
        clock_->TimeInMilliseconds() - test_start_ms_ >= min_run_time_ms_)) {
     ramp_up_finished_ms_ = clock_->TimeInMilliseconds();
     observation_complete_.Set();
-  } else {
-    pending_task_ = task_queue_->PostDelayedTask([this]() { PollStats(); },
-                                                 GetIntervalForNextPoll());
+    poll_stats_task_.Stop();
   }
 }
 
@@ -380,14 +371,7 @@ void RampUpTester::TriggerTestDone() {
 
   // Stop polling stats.
   // Corner case for field_trials=WebRTC-QuickPerfTest/Enabled/
-  task_queue_->SendTask([this]() {
-    if (pending_task_ !=
-        static_cast<test::DEPRECATED_SingleThreadedTaskQueueForTesting::TaskId>(
-            -1)) {
-      task_queue_->CancelTask(pending_task_);
-      pending_task_ = -1;
-    }
-  });
+  SendTask(task_queue_, [this] { poll_stats_task_.Stop(); });
 
   VideoSendStream::Stats send_stats = send_stream_->GetStats();
   send_stream_ = nullptr;  // To avoid dereferencing a bad pointer.
@@ -430,33 +414,16 @@ void RampUpTester::PerformTest() {
   TriggerTestDone();
 }
 
-void RampUpTester::EnsurePollTimeSet() {
-  RTC_DCHECK_RUN_ON(task_queue_);
-  if (!next_scheduled_poll_time_ms_)
-    next_scheduled_poll_time_ms_ = rtc::TimeMillis();
-}
-
-int64_t RampUpTester::GetIntervalForNextPoll() {
-  RTC_DCHECK_RUN_ON(task_queue_);
-  RTC_DCHECK_NE(next_scheduled_poll_time_ms_, 0)
-      << "No call to EnsurePollTimeSet()";
-  auto now = rtc::TimeMillis();
-  next_scheduled_poll_time_ms_ += kPollIntervalMs;
-  auto interval = next_scheduled_poll_time_ms_ - now;
-  return interval > 0 ? interval : 0;
-}
-
-RampUpDownUpTester::RampUpDownUpTester(
-    size_t num_video_streams,
-    size_t num_audio_streams,
-    size_t num_flexfec_streams,
-    unsigned int start_bitrate_bps,
-    const std::string& extension_type,
-    bool rtx,
-    bool red,
-    const std::vector<int>& loss_rates,
-    bool report_perf_stats,
-    test::DEPRECATED_SingleThreadedTaskQueueForTesting* task_queue)
+RampUpDownUpTester::RampUpDownUpTester(size_t num_video_streams,
+                                       size_t num_audio_streams,
+                                       size_t num_flexfec_streams,
+                                       unsigned int start_bitrate_bps,
+                                       const std::string& extension_type,
+                                       bool rtx,
+                                       bool red,
+                                       const std::vector<int>& loss_rates,
+                                       bool report_perf_stats,
+                                       TaskQueueBase* task_queue)
     : RampUpTester(num_video_streams,
                    num_audio_streams,
                    num_flexfec_streams,
@@ -484,10 +451,9 @@ RampUpDownUpTester::RampUpDownUpTester(
 RampUpDownUpTester::~RampUpDownUpTester() {}
 
 void RampUpDownUpTester::PollStats() {
-  EnsurePollTimeSet();
-
-  pending_task_ = -1;
-  bool last_round = (test_state_ == kTestEnd);
+  if (test_state_ == kTestEnd) {
+    poll_stats_task_.Stop();
+  }
 
   int transmit_bitrate_bps = 0;
   bool suspended = false;
@@ -505,11 +471,6 @@ void RampUpDownUpTester::PollStats() {
   }
 
   EvolveTestState(transmit_bitrate_bps, suspended);
-
-  if (!last_round) {
-    pending_task_ = task_queue_->PostDelayedTask([this]() { PollStats(); },
-                                                 GetIntervalForNextPoll());
-  }
 }
 
 void RampUpDownUpTester::ModifyReceiverBitrateConfig(

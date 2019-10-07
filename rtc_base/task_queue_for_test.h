@@ -22,6 +22,15 @@
 
 namespace webrtc {
 
+template <typename Closure>
+void SendTask(TaskQueueBase* task_queue, Closure&& task) {
+  RTC_DCHECK(!task_queue->IsCurrent());
+  rtc::Event event;
+  task_queue->PostTask(
+      ToQueuedTask(std::forward<Closure>(task), [&event] { event.Set(); }));
+  event.Wait(rtc::Event::kForever);
+}
+
 class RTC_LOCKABLE TaskQueueForTest : public rtc::TaskQueue {
  public:
   using rtc::TaskQueue::TaskQueue;
@@ -50,11 +59,7 @@ class RTC_LOCKABLE TaskQueueForTest : public rtc::TaskQueue {
   // a task executes on the task queue.
   template <class Closure>
   void SendTask(Closure&& task) {
-    RTC_DCHECK(!IsCurrent());
-    rtc::Event event;
-    PostTask(
-        ToQueuedTask(std::forward<Closure>(task), [&event] { event.Set(); }));
-    event.Wait(rtc::Event::kForever);
+    ::webrtc::SendTask(Get(), std::forward<Closure>(task));
   }
 };
 
