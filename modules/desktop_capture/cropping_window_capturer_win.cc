@@ -99,7 +99,10 @@ BOOL CALLBACK TopWindowVerifier(HWND hwnd, LPARAM param) {
 class CroppingWindowCapturerWin : public CroppingWindowCapturer {
  public:
   CroppingWindowCapturerWin(const DesktopCaptureOptions& options)
-      : CroppingWindowCapturer(options) {}
+      : CroppingWindowCapturer(options),
+        full_screen_window_detector_(options.full_screen_window_detector()) {}
+
+  void CaptureFrame() override;
 
  private:
   bool ShouldUseScreenCapturer() override;
@@ -110,7 +113,29 @@ class CroppingWindowCapturerWin : public CroppingWindowCapturer {
   DesktopRect window_region_rect_;
 
   WindowCaptureHelperWin window_capture_helper_;
+
+  rtc::scoped_refptr<FullScreenWindowDetector> full_screen_window_detector_;
 };
+
+void CroppingWindowCapturerWin::CaptureFrame() {
+  DesktopCapturer* win_capturer = window_capturer();
+  if (full_screen_window_detector_ && win_capturer) {
+    DesktopCapturer::SourceId full_screen_window =
+        full_screen_window_detector_->FindFullScreenWindow(selected_window());
+    win_capturer->SelectSource(full_screen_window ? full_screen_window
+                                                  : selected_window());
+  }
+
+  CroppingWindowCapturer::CaptureFrame();
+
+  if (full_screen_window_detector_ && win_capturer) {
+    full_screen_window_detector_->UpdateWindowListIfNeeded(
+        selected_window(),
+        [win_capturer](DesktopCapturer::SourceList* sources) {
+          return win_capturer->GetSourceList(sources);
+        });
+  }
+}
 
 bool CroppingWindowCapturerWin::ShouldUseScreenCapturer() {
   if (!rtc::IsWindows8OrLater() && window_capture_helper_.IsAeroEnabled()) {
@@ -185,6 +210,11 @@ bool CroppingWindowCapturerWin::ShouldUseScreenCapturer() {
   // maximized, only its client area is visible in the screen, the border will
   // be hidden. So we are using |content_rect| here.
   if (!GetFullscreenRect().ContainsRect(content_rect)) {
+    return false;
+  }
+
+  if (full_screen_window_detector_ &&
+      full_screen_window_detector_->FindFullScreenWindow(selected_window())) {
     return false;
   }
 
