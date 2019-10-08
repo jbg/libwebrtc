@@ -148,6 +148,8 @@ class ChannelReceive : public ChannelReceiveInterface,
   uint32_t GetDelayEstimate() const override;
   void SetMinimumPlayoutDelay(int delayMs) override;
   uint32_t GetPlayoutTimestamp() const override;
+  void SetEstimatedPlayoutNtpTimestampMs(int64_t ntp_timestamp_ms) override;
+  absl::optional<int64_t> GetEstimatedPlayoutNtpTimestampMs() const override;
 
   // Audio quality.
   bool SetBaseMinimumPlayoutDelayMs(int delay_ms) override;
@@ -249,6 +251,10 @@ class ChannelReceive : public ChannelReceiveInterface,
   rtc::CriticalSection video_sync_lock_;
   uint32_t playout_timestamp_rtp_ RTC_GUARDED_BY(video_sync_lock_);
   uint32_t playout_delay_ms_ RTC_GUARDED_BY(video_sync_lock_);
+  absl::optional<int64_t> playout_timestamp_ntp_
+      RTC_GUARDED_BY(video_sync_lock_);
+  absl::optional<int64_t> playout_timestamp_ntp_time_ms_
+      RTC_GUARDED_BY(video_sync_lock_);
 
   rtc::CriticalSection ts_stats_lock_;
 
@@ -821,6 +827,25 @@ uint32_t ChannelReceive::GetPlayoutTimestamp() const {
     rtc::CritScope lock(&video_sync_lock_);
     return playout_timestamp_rtp_;
   }
+}
+
+void ChannelReceive::SetEstimatedPlayoutNtpTimestampMs(
+    int64_t ntp_timestamp_ms) {
+  RTC_DCHECK_RUNS_SERIALIZED(&video_capture_thread_race_checker_);
+  rtc::CritScope lock(&video_sync_lock_);
+  playout_timestamp_ntp_ = ntp_timestamp_ms;
+  playout_timestamp_ntp_time_ms_ = rtc::TimeMillis();
+}
+
+absl::optional<int64_t> ChannelReceive::GetEstimatedPlayoutNtpTimestampMs()
+    const {
+  RTC_DCHECK(worker_thread_checker_.IsCurrent());
+  rtc::CritScope lock(&video_sync_lock_);
+  if (!playout_timestamp_ntp_ || !playout_timestamp_ntp_time_ms_)
+    return absl::nullopt;
+
+  int64_t elapsed_ms = rtc::TimeMillis() - *playout_timestamp_ntp_time_ms_;
+  return *playout_timestamp_ntp_ + elapsed_ms;
 }
 
 bool ChannelReceive::SetBaseMinimumPlayoutDelayMs(int delay_ms) {
