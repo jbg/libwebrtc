@@ -88,6 +88,8 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
   int id() const override;
   absl::optional<Syncable::Info> GetInfo() const override;
   uint32_t GetPlayoutTimestamp() const override;
+  void SetEstimatedPlayoutNtpTimestampMs(int64_t ntp_timestamp_ms) override;
+  absl::optional<int64_t> GetEstimatedPlayoutNtpTimestampMs() const override;
   void SetMinimumPlayoutDelay(int delay_ms) override;
 
   void AssociateSendStream(AudioSendStream* send_stream);
