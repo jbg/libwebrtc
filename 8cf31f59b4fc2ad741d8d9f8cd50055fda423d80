@@ -51,6 +51,23 @@
       "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08d3f5af_3bfde2cf",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-09T12:24:03Z",
+      "side": 1,
+      "message": "Thread annotations for these two data members?",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
