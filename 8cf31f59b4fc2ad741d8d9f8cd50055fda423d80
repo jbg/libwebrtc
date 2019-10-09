@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "0836c912_04688a93",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-09T13:16:14Z",
+      "side": 1,
+      "message": "Not needed in an abstract base class.",
+      "range": {
+        "startLine": 40,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9413f47_d1bac854",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-09T13:16:14Z",
+      "side": 1,
+      "message": "Use the actual callback type here instead? I.e., have that type too be a template argument?",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 23
+      },
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44d6196c_a20ff322",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-09T13:16:14Z",
+      "side": 1,
+      "message": "#ifdef this variable away unless RTC_DCHECK_IS_ON?",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6411d095_ede825ef",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 3
@@ -65,6 +128,24 @@
       "writtenOn": "2019-10-09T12:24:03Z",
       "side": 1,
       "message": "Thread annotations for these two data members?",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60d46dcf_38d84c68",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-09T13:16:14Z",
+      "side": 1,
+      "message": "Actually, can they be removed? The DCHECKs for execute-exactly-once in OperationWithFunctor should be enough, right?",
+      "parentUuid": "08d3f5af_3bfde2cf",
       "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
