@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6c11b123_cbf3f9ce",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-09T11:24:03Z",
+      "side": 1,
+      "message": "This might also be needed for the sake of unittests. If we have async tasks posting between threads we can\u0027t delete the thread.",
+      "parentUuid": "6411d095_ede825ef",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ab5de1c_7a3ceb11",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 3
