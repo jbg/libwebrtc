@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "145dd780_80f4b7a2",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-09T14:17:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0836c912_04688a93",
+      "range": {
+        "startLine": 40,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9413f47_d1bac854",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2019-10-09T13:16:14Z",
       "side": 1,
       "message": "Use the actual callback type here instead? I.e., have that type too be a template argument?",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 23
+      },
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f79cf6f_ddc22453",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-09T14:17:47Z",
+      "side": 1,
+      "message": "The callback is the thing returned by OperationsChain::CreateOperationCallback(), which is std::function\u003cvoid()\u003e. This requires no template magic, and in fact, since we require any operation\u0027s functor to take the callback as input, I think it is beneficial to have a known non-template type for it. I also didn\u0027t see a need to introduce a new type, from the operation\u0027s point of view, it needs to invoke a parameterless void function.\n\nIf you suggest something else, can you clarify what? I\u0027m not sure I follow if there are benefits to having even more templates.",
+      "parentUuid": "f9413f47_d1bac854",
       "range": {
         "startLine": 65,
         "startChar": 3,
@@ -62,6 +110,24 @@
       "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0608cdb9_b869f1f8",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-09T14:17:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44d6196c_a20ff322",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -149,6 +215,42 @@
       "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59fb4108_e7a29c62",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-09T14:17:47Z",
+      "side": 1,
+      "message": "I decided to keep using std::set\u003c\u003e instead of std::list\u003c\u003e, that way the DCHECKing of whether or not the callback has been invoked (which on failure says exactly that: the callback has already been invoked) is not build on assumptions that tasks are executed in-order; that is DCHECKed separately.",
+      "parentUuid": "7ab5de1c_7a3ceb11",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ccea71a_22e7a83e",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-09T14:17:47Z",
+      "side": 1,
+      "message": "OperationWithFunctor DCHECKs that the operation functor gets invoked exactly once but is unable to tell how many times the user-defined functor later causes the callback (\"operation completed\") to be invoked. This needs to be DCHECKed separately - I kept the members.\n\nBut I did add thread annotations.\n\nI also considered making these behind #ifdef RTC_DCHECK_IS_ON but found that it hurt code readability of CreateOperationCallback() so I don\u0027t think it\u0027s worth the optimization.",
+      "parentUuid": "60d46dcf_38d84c68",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
