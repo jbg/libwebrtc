@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6411d095_ede825ef",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-09T11:23:02Z",
+      "side": 1,
+      "message": "If we want to support synchronously cancelling any pending tasks I could introduce cancelling mechanisms in a follow-up CL.\n\nA possible use case for this is if we want PeerConnection::Close() to ensure that there are no async tasks keeping the PC alive through reference counting, ensuring that if the client nulls all of its references to the PC after doing Close(), it will in fact be deleted.\n\nI\u0027m not a fan of clients making assumptions about when reference counted objects are deleted but that might be the safest way forward in introducing an operations chain to PC and avoiding regressions.",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ab5de1c_7a3ceb11",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 3
