@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7348f53a_9b06aa2a",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-10-10T13:11:25Z",
+      "side": 1,
+      "message": "Should be at the top of the class according to the style guide.",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 4
+      },
+      "revId": "bb46aeb4bc9f1f78be05d23640b55075b6f2739c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
