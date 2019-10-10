@@ -2668,6 +2668,121 @@ TEST_F(VideoStreamEncoderTest,
   video_stream_encoder_->Stop();
 }
 
+TEST_F(VideoStreamEncoderTest, AdaptUpIfBwEstimateIsHigherThanMinBitrate) {
+  const VideoEncoder::ResolutionBitrateLimits encoder_bitrate_limits_540p(
+      960 * 540, 100 * 1000, 100 * 1000, 2000 * 1000);
+  const VideoEncoder::ResolutionBitrateLimits encoder_bitrate_limits_720p(
+      1280 * 720, 200 * 1000, 200 * 1000, 4000 * 1000);
+  fake_encoder_.SetResolutionBitrateLimits(
+      {encoder_bitrate_limits_540p, encoder_bitrate_limits_720p});
+
+  video_stream_encoder_->OnBitrateUpdated(
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps),
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps),
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps), 0, 0);
+
+  // Enable MAINTAIN_FRAMERATE preference, no initial limitation.
+  AdaptingFrameForwarder source;
+  source.set_adaptation_enabled(true);
+  video_stream_encoder_->SetSource(
+      &source, webrtc::DegradationPreference::MAINTAIN_FRAMERATE);
+
+  // Insert 720p frame. It should be dropped due to lack of bitrate.
+  int64_t timestamp_ms = kFrameIntervalMs;
+  source.IncomingCapturedFrame(CreateFrame(timestamp_ms, 1280, 720));
+  ExpectDroppedFrame();
+  VerifyFpsMaxResolutionLt(source.sink_wants(), 1280 * 720);
+
+  // Insert 540p frame. It should be encoded.
+  timestamp_ms += kFrameIntervalMs;
+  source.IncomingCapturedFrame(CreateFrame(timestamp_ms, 960, 540));
+  sink_.WaitForEncodedFrame(timestamp_ms);
+
+  // Increse bitrate and trigger adapt up. Higher resolution should be
+  // requested.
+  video_stream_encoder_->OnBitrateUpdated(
+      DataRate::bps(encoder_bitrate_limits_720p.min_start_bitrate_bps),
+      DataRate::bps(encoder_bitrate_limits_720p.min_start_bitrate_bps),
+      DataRate::bps(encoder_bitrate_limits_720p.min_start_bitrate_bps), 0, 0);
+  video_stream_encoder_->TriggerQualityHigh();
+  VerifyFpsMaxResolutionMax(source.sink_wants());
+
+  video_stream_encoder_->Stop();
+}
+
+TEST_F(VideoStreamEncoderTest, NoAdaptUpIfBwEstimateIsLessThanMinBitrate) {
+  const VideoEncoder::ResolutionBitrateLimits encoder_bitrate_limits_540p(
+      960 * 540, 100 * 1000, 100 * 1000, 2000 * 1000);
+  const VideoEncoder::ResolutionBitrateLimits encoder_bitrate_limits_720p(
+      1280 * 720, 200 * 1000, 200 * 1000, 4000 * 1000);
+  fake_encoder_.SetResolutionBitrateLimits(
+      {encoder_bitrate_limits_540p, encoder_bitrate_limits_720p});
+
+  video_stream_encoder_->OnBitrateUpdated(
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps),
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps),
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps), 0, 0);
+
+  // Enable MAINTAIN_FRAMERATE preference, no initial limitation.
+  AdaptingFrameForwarder source;
+  source.set_adaptation_enabled(true);
+  video_stream_encoder_->SetSource(
+      &source, webrtc::DegradationPreference::MAINTAIN_FRAMERATE);
+
+  // Insert 720p frame. It should be drop due to lack of bitrate and lower
+  // resolution should be requested.
+  int64_t timestamp_ms = kFrameIntervalMs;
+  source.IncomingCapturedFrame(CreateFrame(timestamp_ms, 1280, 720));
+  ExpectDroppedFrame();
+  VerifyFpsMaxResolutionLt(source.sink_wants(), 1280 * 720);
+
+  // Insert 540p frame. It should be encoded.
+  timestamp_ms += kFrameIntervalMs;
+  source.IncomingCapturedFrame(CreateFrame(timestamp_ms, 960, 540));
+  sink_.WaitForEncodedFrame(timestamp_ms);
+
+  // Trigger adapt up. Higher resolution should not be requested.
+  video_stream_encoder_->TriggerQualityHigh();
+  VerifyFpsMaxResolutionLt(source.sink_wants(), 1280 * 720);
+
+  video_stream_encoder_->Stop();
+}
+
+TEST_F(VideoStreamEncoderTest, DropFirstFramesIfBwEstimateIsTooLow) {
+  const VideoEncoder::ResolutionBitrateLimits encoder_bitrate_limits_540p(
+      960 * 540, 100 * 1000, 100 * 1000, 2000 * 1000);
+  const VideoEncoder::ResolutionBitrateLimits encoder_bitrate_limits_720p(
+      1280 * 720, 200 * 1000, 200 * 1000, 4000 * 1000);
+  fake_encoder_.SetResolutionBitrateLimits(
+      {encoder_bitrate_limits_540p, encoder_bitrate_limits_720p});
+
+  // Set bitrate equal to min bitrate of 540p.
+  video_stream_encoder_->OnBitrateUpdated(
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps),
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps),
+      DataRate::bps(encoder_bitrate_limits_540p.min_start_bitrate_bps), 0, 0);
+
+  // Enable MAINTAIN_FRAMERATE preference, no initial limitation.
+  AdaptingFrameForwarder source;
+  source.set_adaptation_enabled(true);
+  video_stream_encoder_->SetSource(
+      &source, webrtc::DegradationPreference::MAINTAIN_FRAMERATE);
+
+  // Insert 720p frame. It should be dropped and lower resolution should be
+  // requested.
+  int64_t timestamp_ms = kFrameIntervalMs;
+  source.IncomingCapturedFrame(CreateFrame(timestamp_ms, 1280, 720));
+  ExpectDroppedFrame();
+  VerifyFpsMaxResolutionLt(source.sink_wants(), 1280 * 720);
+
+  // Insert 540p frame. It should be encoded.
+  timestamp_ms += kFrameIntervalMs;
+  source.IncomingCapturedFrame(CreateFrame(timestamp_ms, 960, 540));
+  sink_.WaitForEncodedFrame(timestamp_ms);
+
+  video_stream_encoder_->Stop();
+}
+
 class BalancedDegradationTest : public VideoStreamEncoderTest {
  protected:
   void SetupTest() {
