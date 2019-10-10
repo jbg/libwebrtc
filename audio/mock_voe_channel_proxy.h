@@ -50,6 +50,10 @@ class MockChannelReceive : public voe::ChannelReceiveInterface {
   MOCK_METHOD1(SetAssociatedSendChannel,
                void(const voe::ChannelSendInterface* send_channel));
   MOCK_CONST_METHOD0(GetPlayoutTimestamp, uint32_t());
+  MOCK_METHOD1(SetEstimatedPlayoutNtpTimestampMs,
+               void(int64_t ntp_timestamp_ms));
+  MOCK_CONST_METHOD0(GetCurrentEstimatedPlayoutNtpTimestampMs,
+                     absl::optional<int64_t>());
   MOCK_CONST_METHOD0(GetSyncInfo, absl::optional<Syncable::Info>());
   MOCK_METHOD1(SetMinimumPlayoutDelay, void(int delay_ms));
   MOCK_METHOD1(SetBaseMinimumPlayoutDelayMs, bool(int delay_ms));

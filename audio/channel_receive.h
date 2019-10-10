@@ -105,6 +105,9 @@ class ChannelReceiveInterface : public RtpPacketSinkInterface {
   virtual uint32_t GetDelayEstimate() const = 0;
   virtual void SetMinimumPlayoutDelay(int delay_ms) = 0;
   virtual uint32_t GetPlayoutTimestamp() const = 0;
+  virtual void SetEstimatedPlayoutNtpTimestampMs(int64_t ntp_timestamp_ms) = 0;
+  virtual absl::optional<int64_t> GetCurrentEstimatedPlayoutNtpTimestampMs()
+      const = 0;
 
   // Audio quality.
   // Base minimum delay sets lower bound on minimum delay value which
