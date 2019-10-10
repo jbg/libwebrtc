@@ -119,8 +119,9 @@ void RtpStreamsSynchronizer::Process() {
 }
 
 bool RtpStreamsSynchronizer::GetStreamSyncOffsetInMs(
-    uint32_t timestamp,
+    uint32_t rtp_timestamp,
     int64_t render_time_ms,
+    int64_t* video_playout_ntp_ms,
     int64_t* stream_offset_ms,
     double* estimated_freq_khz) const {
   rtc::CritScope lock(&crit_);
@@ -136,15 +137,20 @@ bool RtpStreamsSynchronizer::GetStreamSyncOffsetInMs(
     return false;
   }
 
+  syncable_audio_->SetEstimatedPlayoutNtpTimestampMs(latest_audio_ntp);
+
   int64_t latest_video_ntp;
-  if (!video_measurement_.rtp_to_ntp.Estimate(timestamp, &latest_video_ntp)) {
+  if (!video_measurement_.rtp_to_ntp.Estimate(rtp_timestamp,
+                                              &latest_video_ntp)) {
     return false;
   }
 
   int64_t time_to_render_ms = render_time_ms - rtc::TimeMillis();
+  // Remove the playout delay.
   if (time_to_render_ms > 0)
-    latest_video_ntp += time_to_render_ms;
+    latest_video_ntp -= time_to_render_ms;
 
+  *video_playout_ntp_ms = latest_video_ntp;
   *stream_offset_ms = latest_audio_ntp - latest_video_ntp;
   *estimated_freq_khz = video_measurement_.rtp_to_ntp.params()->frequency_khz;
   return true;

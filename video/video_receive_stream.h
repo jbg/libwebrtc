@@ -94,6 +94,9 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
   bool SetBaseMinimumPlayoutDelayMs(int delay_ms) override;
   int GetBaseMinimumPlayoutDelayMs() const override;
 
+  void SetEstimatedPlayoutNtpTimestampMs(int64_t ntp_timestamp_ms) override;
+  absl::optional<int64_t> GetEstimatedPlayoutNtpTimestampMs() const override;
+
   void SetFrameDecryptor(
       rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor) override;
 
