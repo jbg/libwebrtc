@@ -94,15 +94,13 @@ class RTPSenderVideo {
 
   // expected_retransmission_time_ms.has_value() -> retransmission allowed.
   // Calls to this method is assumed to be externally serialized.
-  bool SendVideo(VideoFrameType frame_type,
-                 int8_t payload_type,
+  bool SendVideo(int payload_type,
                  absl::optional<VideoCodecType> codec_type,
-                 uint32_t capture_timestamp,
+                 uint32_t rtp_timestamp,
                  int64_t capture_time_ms,
-                 const uint8_t* payload_data,
-                 size_t payload_size,
+                 rtc::ArrayView<const uint8_t> payload,
                  const RTPFragmentationHeader* fragmentation,
-                 const RTPVideoHeader* video_header,
+                 RTPVideoHeader video_header,
                  absl::optional<int64_t> expected_retransmission_time_ms);
 
   // TODO(bugs.webrtc.org/10809): Remove when downstream usage is gone.
