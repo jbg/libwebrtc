@@ -239,9 +239,10 @@ TEST_F(RtpVideoStreamReceiverTest, CacheColorSpaceFromLastPacketOfKeyframe) {
       rtp_video_header_vp9.inter_pic_predicted =
           (video_frame_type == VideoFrameType::kVideoFrameDelta);
       rtp_video_header.video_type_header = rtp_video_header_vp9;
-      rtp_packetizer_ = RtpPacketizer::Create(
-          kVideoCodecVP9, rtc::MakeArrayView(payload.data(), payload.size()),
-          pay_load_size_limits, rtp_video_header, video_frame_type, nullptr);
+      rtp_video_header.frame_type = video_frame_type;
+      rtp_packetizer_ =
+          RtpPacketizer::Create(kVideoCodecVP9, payload, pay_load_size_limits,
+                                rtp_video_header, nullptr);
     }
 
     size_t NumPackets() { return rtp_packetizer_->NumPackets(); }
