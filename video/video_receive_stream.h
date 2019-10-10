@@ -125,6 +125,7 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
   int id() const override;
   absl::optional<Syncable::Info> GetInfo() const override;
   uint32_t GetPlayoutTimestamp() const override;
+  void SetEstimatedPlayoutNtpTimestampMs(int64_t ntp_timestamp_ms) override;
 
   // SetMinimumPlayoutDelay is only called by A/V sync.
   void SetMinimumPlayoutDelay(int delay_ms) override;
