@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "894a6620_8e15cbeb",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-10T12:03:49Z",
+      "side": 1,
+      "message": "Can you explain why this is driven by the video stream? I would have expected that the audio stream\u0027s PlayoutNtpTimestamp would be derived from timestamps and RTCP messages related to the audio ssrc, and be independent of the A/V sync machinery. So that it can be used to measure whether or not streams are in sync (under the assumption that senders\u0027 \"ntp\" clocks really are synced to ntp time).",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 1
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1046139c_287ea16d",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-10T12:03:49Z",
+      "side": 1,
+      "message": "I think this constant deserves a comment.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42579a75_61c25499",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-10T12:03:49Z",
+      "side": 1,
+      "message": "Consider making the current time in ms an input argument to these two functions, and leave rtc::TimeMillis() to the caller.",
+      "range": {
+        "startLine": 834,
+        "startChar": 0,
+        "endLine": 843,
+        "endChar": 66
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32da7095_20f6a1bf",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-10T12:03:49Z",
+      "side": 1,
+      "message": "This matches my suggestion for the corresponding audio methods.",
+      "range": {
+        "startLine": 558,
+        "startChar": 4,
+        "endLine": 558,
+        "endChar": 18
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
