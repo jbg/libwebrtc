@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1479df51_41e3d844",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-11T10:16:32Z",
+      "side": 1,
+      "message": "You don\u0027t need this line either. Sorry for not noticing before.",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "f752aa56f31aa711766483c256bf0b31a04499d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

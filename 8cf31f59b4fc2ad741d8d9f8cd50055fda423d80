@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "bf0d2e9f_cc5d1877",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-11T10:16:32Z",
+      "side": 1,
+      "message": "Oh, so it\u0027s only ever going to be the return value of OperationsChain::CreateOperationCallback()? In that case, I would suggesting making a concrete type for that, and not wrapping it in a std::function. And use that concrete type here.",
+      "parentUuid": "9f79cf6f_ddc22453",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 23
+      },
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44d6196c_a20ff322",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 3
@@ -251,6 +275,24 @@
       "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d010fe7_10b31bbd",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-11T10:16:32Z",
+      "side": 1,
+      "message": "You should be able to CHECK it in the functor returned by CreateOperationCallback()---in fact, you already do. But that check should be able to use a bool stored in that functor, instead of stored centrally here.",
+      "parentUuid": "3ccea71a_22e7a83e",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
