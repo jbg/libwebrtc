@@ -23,6 +23,7 @@
 #include "api/scoped_refptr.h"
 #include "api/video/video_frame.h"
 #include "api/video/video_frame_buffer.h"
+#include "rtc_base/deprecation.h"
 
 namespace webrtc {
 
@@ -48,6 +49,9 @@ enum class VideoType {
 // This is the max PSNR value our algorithms can return.
 const double kPerfectPSNR = 48.0f;
 
+// Needed buffer size for an I420 frame.
+size_t I420CalcBufferSize(int width, int height);
+
 // Calculate the required buffer size.
 // Input:
 //   - type         :The type of the designated video frame.
@@ -55,6 +59,7 @@ const double kPerfectPSNR = 48.0f;
 //   - height       :frame height in pixels.
 // Return value:    :The required size in bytes to accommodate the specified
 //                   video frame.
+RTC_DEPRECATED
 size_t CalcBufferSize(VideoType type, int width, int height);
 
 // TODO(mikhal): Add unit test for these two functions and determine location.

@@ -36,16 +36,14 @@ rtc::Buffer ExtractI420BufferWithSize(const VideoFrame& frame,
     rtc::scoped_refptr<I420Buffer> scaled(I420Buffer::Create(width, height));
     scaled->ScaleFrom(*frame.video_frame_buffer()->ToI420());
 
-    size_t length =
-        CalcBufferSize(VideoType::kI420, scaled->width(), scaled->height());
+    size_t length = I420CalcBufferSize(scaled->width(), scaled->height());
     rtc::Buffer buffer(length);
     RTC_CHECK_NE(ExtractBuffer(scaled, length, buffer.data()), -1);
     return buffer;
   }
 
   // No resize.
-  size_t length =
-      CalcBufferSize(VideoType::kI420, frame.width(), frame.height());
+  size_t length = I420CalcBufferSize(frame.width(), frame.height());
   rtc::Buffer buffer(length);
   RTC_CHECK_NE(ExtractBuffer(frame, length, buffer.data()), -1);
   return buffer;

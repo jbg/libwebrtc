@@ -126,13 +126,6 @@ int32_t VideoCaptureImpl::IncomingFrame(uint8_t* videoFrame,
   TRACE_EVENT1("webrtc", "VC::IncomingFrame", "capture_time", captureTime);
 
   // Not encoded, convert to I420.
-  if (frameInfo.videoType != VideoType::kMJPEG &&
-      CalcBufferSize(frameInfo.videoType, width, abs(height)) !=
-          videoFrameLength) {
-    RTC_LOG(LS_ERROR) << "Wrong incoming frame length.";
-    return -1;
-  }
-
   int stride_y = width;
   int stride_uv = (width + 1) / 2;
   int target_width = width;

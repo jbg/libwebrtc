@@ -281,9 +281,8 @@ int32_t H264EncoderImpl::InitEncode(const VideoCodec* inst,
 
     // Initialize encoded image. Default buffer size: size of unencoded data.
 
-    const size_t new_capacity =
-        CalcBufferSize(VideoType::kI420, codec_.simulcastStream[idx].width,
-                       codec_.simulcastStream[idx].height);
+    const size_t new_capacity = I420CalcBufferSize(
+        codec_.simulcastStream[idx].width, codec_.simulcastStream[idx].height);
     encoded_images_[i].SetEncodedData(EncodedImageBuffer::Create(new_capacity));
     encoded_images_[i]._completeFrame = true;
     encoded_images_[i]._encodedWidth = codec_.simulcastStream[idx].width;
