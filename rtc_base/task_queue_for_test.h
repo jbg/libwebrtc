@@ -14,13 +14,27 @@
 #include <utility>
 
 #include "absl/strings/string_view.h"
+#include "api/task_queue/task_queue_base.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
+#include "rtc_base/location.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
+
+template <typename Closure>
+void SendTask(TaskQueueBase* task_queue,
+              Closure&& task,
+              rtc::Location loc = RTC_FROM_HERE_WITH_FUNCTION("")) {
+  RTC_DCHECK(!task_queue->IsCurrent());
+  rtc::Event event;
+  task_queue->PostTask(
+      ToQueuedTask(std::forward<Closure>(task), [&event] { event.Set(); }));
+  RTC_CHECK(event.Wait(/*give_up_after_ms=*/120'000, /*warn_after_ms=*/10'000))
+      << "Waited too long at " << loc.ToString();
+}
 
 class RTC_LOCKABLE TaskQueueForTest : public rtc::TaskQueue {
  public:
@@ -49,12 +63,9 @@ class RTC_LOCKABLE TaskQueueForTest : public rtc::TaskQueue {
   // A convenience, test-only method that blocks the current thread while
   // a task executes on the task queue.
   template <class Closure>
-  void SendTask(Closure&& task) {
-    RTC_DCHECK(!IsCurrent());
-    rtc::Event event;
-    PostTask(
-        ToQueuedTask(std::forward<Closure>(task), [&event] { event.Set(); }));
-    event.Wait(rtc::Event::kForever);
+  void SendTask(Closure&& task,
+                rtc::Location loc = RTC_FROM_HERE_WITH_FUNCTION("")) {
+    ::webrtc::SendTask(Get(), std::forward<Closure>(task), loc);
   }
 };
 
