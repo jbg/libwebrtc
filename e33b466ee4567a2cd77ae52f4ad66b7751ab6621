@@ -22,6 +22,30 @@
       "revId": "e33b466ee4567a2cd77ae52f4ad66b7751ab6621",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4c15131_50919de4",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-10-11T08:57:29Z",
+      "side": 1,
+      "message": "yep, I do. both of the old versions.",
+      "parentUuid": "f3cd214c_40862861",
+      "range": {
+        "startLine": 97,
+        "startChar": 7,
+        "endLine": 97,
+        "endChar": 16
+      },
+      "revId": "e33b466ee4567a2cd77ae52f4ad66b7751ab6621",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
