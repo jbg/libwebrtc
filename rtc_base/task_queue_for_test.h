@@ -14,6 +14,7 @@
 #include <utility>
 
 #include "absl/strings/string_view.h"
+#include "api/task_queue/task_queue_base.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
 #include "rtc_base/task_queue.h"
@@ -21,6 +22,16 @@
 #include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
+
+template <typename Closure>
+void SendTask(TaskQueueBase* task_queue, Closure&& task) {
+  RTC_DCHECK(!task_queue->IsCurrent());
+  rtc::Event event;
+  task_queue->PostTask(
+      ToQueuedTask(std::forward<Closure>(task), [&event] { event.Set(); }));
+  // Give up after 30 seconds, warn after 10.
+  RTC_CHECK(event.Wait(30'000, 10'000));
+}
 
 class RTC_LOCKABLE TaskQueueForTest : public rtc::TaskQueue {
  public:
@@ -50,11 +61,7 @@ class RTC_LOCKABLE TaskQueueForTest : public rtc::TaskQueue {
   // a task executes on the task queue.
   template <class Closure>
   void SendTask(Closure&& task) {
-    RTC_DCHECK(!IsCurrent());
-    rtc::Event event;
-    PostTask(
-        ToQueuedTask(std::forward<Closure>(task), [&event] { event.Set(); }));
-    event.Wait(rtc::Event::kForever);
+    ::webrtc::SendTask(Get(), std::forward<Closure>(task));
   }
 };
 
