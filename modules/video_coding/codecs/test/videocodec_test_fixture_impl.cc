@@ -447,7 +447,8 @@ void VideoCodecTestFixtureImpl::ProcessAllFrames(
   }
 
   // Wait until we know that the last frame has been sent for encode.
-  task_queue->SendTask([] {});
+  SendTask(
+      task_queue->Get(), [] {}, RTC_FROM_HERE);
 
   // Give the VideoProcessor pipeline some time to process the last frame,
   // and then release the codecs.
