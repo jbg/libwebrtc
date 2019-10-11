@@ -361,6 +361,27 @@ void RTPSender::OnReceivedAckOnRtxSsrc(
   rtx_ssrc_has_acked_ = true;
 }
 
+size_t RTPSender::CalculateMaxRtxPacketOverhead() const {
+  rtc::CritScope lock(&send_critsect_);
+  if (!RtcStatus()) {
+    return 0;
+  }
+  size_t overhead = kRtxHeaderSize;
+  if (!rtx_ssrc_has_acked_) {
+    std::vector<size_t> header_extension_lengths;
+    if (!mid_.empty() &&
+        rtp_header_extension_map_.IsRegistered(kRtpExtensionMid)) {
+      header_extension_lengths.push_back(RtpMid::ValueSize(mid_));
+    }
+    if (!rid_.empty() && rtp_header_extension_map_.IsRegistered(
+                             kRtpExtensionRepairedRtpStreamId)) {
+      header_extension_lengths.push_back(RepairedRtpStreamId::ValueSize(rid_));
+    }
+    overhead += CalculateTwoByteHeaderExtensionSize(header_extension_lengths);
+  }
+  return overhead;
+}
+
 bool RTPSender::SendPacketToNetwork(const RtpPacketToSend& packet,
                                     const PacketOptions& options,
                                     const PacedPacketInfo& pacing_info) {

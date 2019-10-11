@@ -249,6 +249,8 @@ bool RtpPacket::ReserveExtension() {
   return true;
 }
 
+size_t CalculateTwoByteHeaderExtensionSize(rtc::ArrayView<size_t> lengths);
+
 }  // namespace webrtc
 
 #endif  // MODULES_RTP_RTCP_SOURCE_RTP_PACKET_H_

@@ -24,6 +24,7 @@ namespace webrtc {
 namespace {
 constexpr size_t kFixedHeaderSize = 12;
 constexpr uint8_t kRtpVersion = 2;
+constexpr size_t kFixedHeaderExtensionSize = 4;
 constexpr uint16_t kOneByteExtensionProfileId = 0xBEDE;
 constexpr uint16_t kTwoByteExtensionProfileId = 0x1000;
 constexpr size_t kOneByteExtensionHeaderLength = 1;
@@ -691,6 +692,17 @@ std::string RtpPacket::ToString() const {
          << "}";
 
   return result.Release();
+}
+
+size_t CalculateTwoByteHeaderExtensionSize(rtc::ArrayView<size_t> lengths) {
+  if (lengths.empty()) {
+    return 0;
+  }
+  size_t size = 0;
+  for (size_t len : lengths) {
+    size += 1 /* ID */ + 1 /* length */ + len;
+  }
+  return kFixedHeaderExtensionSize + (size + 3) / 4;
 }
 
 }  // namespace webrtc

@@ -581,10 +581,13 @@ bool RTPSenderVideo::SendVideo(
         transmit_color_space_next_frame_ ? !IsBaseLayer(video_header) : false;
   }
 
-  size_t fec_packet_overhead;
+  size_t rtx_packet_overhead, fec_packet_overhead;
   bool red_enabled;
   {
     rtc::CritScope cs(&crit_);
+
+    rtx_packet_overhead = rtp_sender_->CalculateMaxRtxPacketOverhead();
+
     // FEC settings.
     const FecProtectionParams& fec_params =
         video_header.frame_type == VideoFrameType::kVideoFrameKey
@@ -601,8 +604,8 @@ bool RTPSenderVideo::SendVideo(
 
   // Maximum size of packet including rtp headers.
   // Extra space left in case packet will be resent using fec or rtx.
-  int packet_capacity = rtp_sender_->MaxRtpPacketSize() - fec_packet_overhead -
-                        (rtp_sender_->RtxStatus() ? kRtxHeaderSize : 0);
+  int packet_capacity = rtp_sender_->MaxRtpPacketSize() - rtx_packet_overhead -
+                        fec_packet_overhead;
 
   std::unique_ptr<RtpPacketToSend> single_packet =
       rtp_sender_->AllocatePacket();

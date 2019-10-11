@@ -184,6 +184,8 @@ class RTPSenderVideo {
 
   size_t CalculateFecPacketOverhead() const RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_);
 
+  size_t CalculateRtxPacketOverhead() const RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_);
+
   void AppendAsRedMaybeWithUlpfec(
       std::unique_ptr<RtpPacketToSend> media_packet,
       bool protect_media_packet,

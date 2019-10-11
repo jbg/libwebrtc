@@ -172,6 +172,8 @@ class RTPSender {
 
   void OnPacketsAcknowledged(rtc::ArrayView<const uint16_t> sequence_numbers);
 
+  size_t CalculateMaxRtxPacketOverhead() const;
+
  private:
   // Maps capture time in milliseconds to send-side delay in milliseconds.
   // Send-side delay is the difference between transmission time and capture
