@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f09f610_1041eb6c",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T15:02:41Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 323,
+        "startChar": 46,
+        "endLine": 323,
+        "endChar": 47
+      },
+      "revId": "1d560f74e2bea2484d3a824a5579945b4fa5d737",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "374cfc28_9feeac4f",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T15:02:41Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 1880,
+        "startChar": 4,
+        "endLine": 1880,
+        "endChar": 8
+      },
+      "revId": "1d560f74e2bea2484d3a824a5579945b4fa5d737",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd0970e0_64c6d49c",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2672,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T15:02:41Z",
+      "side": 1,
+      "message": "kEncoderBitrateLimits540p and same below",
+      "range": {
+        "startLine": 2672,
+        "startChar": 46,
+        "endLine": 2672,
+        "endChar": 73
+      },
+      "revId": "1d560f74e2bea2484d3a824a5579945b4fa5d737",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ad046fa_0db782cb",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2698,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T15:02:41Z",
+      "side": 1,
+      "message": "Insert 1280, 720?\n\nThe video frame should be scaled down since it was dropped above and AdaptDown requested.",
+      "range": {
+        "startLine": 2698,
+        "startChar": 57,
+        "endLine": 2698,
+        "endChar": 65
+      },
+      "revId": "1d560f74e2bea2484d3a824a5579945b4fa5d737",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d4f280d_cf830c63",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2699,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T15:02:41Z",
+      "side": 1,
+      "message": "and check source.last_sent_width() equals 960 and height 540?",
+      "range": {
+        "startLine": 2699,
+        "startChar": 41,
+        "endLine": 2699,
+        "endChar": 42
+      },
+      "revId": "1d560f74e2bea2484d3a824a5579945b4fa5d737",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92339b7c_e3a92d52",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2781,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T15:02:41Z",
+      "side": 1,
+      "message": "tested above?",
+      "range": {
+        "startLine": 2771,
+        "startChar": 0,
+        "endLine": 2781,
+        "endChar": 42
+      },
+      "revId": "1d560f74e2bea2484d3a824a5579945b4fa5d737",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
