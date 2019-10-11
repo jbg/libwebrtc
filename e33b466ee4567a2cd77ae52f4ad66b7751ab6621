@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3cd214c_40862861",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-10-11T07:59:43Z",
+      "side": 1,
+      "message": "You\u0027ll need to provide a temporary old version of this method, since some internal tests are using it, sadly.",
+      "range": {
+        "startLine": 97,
+        "startChar": 7,
+        "endLine": 97,
+        "endChar": 16
+      },
+      "revId": "e33b466ee4567a2cd77ae52f4ad66b7751ab6621",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
