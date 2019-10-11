@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be082a42_0f05249e",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-11T22:20:02Z",
+      "side": 1,
+      "message": "I don\u0027t understand this early return. Why do you want to ignore the first call to UpdateWindowListIfNeeded for a given source id?",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5efbb0c5_c0d00cb5",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-11T22:20:02Z",
+      "side": 1,
+      "message": "Why not just use TimeMillis instead? Or express the interval in ns if you prefer. Using mixed units is a bit confusing.",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e7373c0_31bea8c1",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-11T22:20:02Z",
+      "side": 1,
+      "message": "Why do you need to clear the previous window list here? If the current call to UpdateWindowList doesn\u0027t return anything, it doesn\u0027t change what the previous results were. If you really need to clear that list for some reason, then previous_window_list_ is not a good name, because it might not be that.",
+      "range": {
+        "startLine": 62,
+        "startChar": 26,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3616430_c8956f63",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-11T22:20:02Z",
+      "side": 1,
+      "message": "No need to return anything here, I think. Callers can simply use the member variable.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 28
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "794d5c05_c6cc4a40",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-11T22:20:02Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me what the semantics of changing the source id are. It looks like the caller must pass the same value here as the most recent call to UpdateWindowListIfNeeded, otherwise it will return zero, but it\u0027s not clear why the caller might do that. Would it be a bug? A race-condition?\n\nIt feels like source id should more naturally be a property of the class, passed to the ctor, rather than being passed to each method independently. If the caller needs to change windows, it creates a new instance to do that. WDYT?",
+      "range": {
+        "startLine": 41,
+        "startChar": 32,
+        "endLine": 41,
+        "endChar": 50
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4419e683_49cdb386",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-11T22:20:02Z",
+      "side": 1,
+      "message": "Why do you need to override this method when there\u0027s already a delegate (get_sources) to do the platform-specific work?\n\nIn general, I think delegates are a much better design than overrides, for all the usual prefer-composition-over-inheritance reasons (most notably in this case that it will allow you to write tests). In fact, I\u0027m not sure this class is even needed if you express everything in terms of delegates; it doesn\u0027t seem to do anything other than rate-limiting in that case.",
+      "range": {
+        "startLine": 53,
+        "startChar": 58,
+        "endLine": 53,
+        "endChar": 72
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c12d6fa6_c968dfea",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-11T22:20:02Z",
+      "side": 1,
+      "message": "I don\u0027t think you need a separate class for this; just make TitlePredicate a parameter to the FullScreenMacApplicationHandler ctor.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 87
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
