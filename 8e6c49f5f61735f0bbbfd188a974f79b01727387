@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6691a74e_e89a8b6d",
+        "filename": "modules/congestion_controller/goog_cc/goog_cc_network_control_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-10-11T13:05:57Z",
+      "side": 1,
+      "message": "Just a comment, no action needed: It is actually not that short; say average packet size is 1000 B, then this config corresponds to a max delay of 200 ms which is by no means extreme.",
+      "range": {
+        "startLine": 564,
+        "startChar": 25,
+        "endLine": 565,
+        "endChar": 73
+      },
+      "revId": "8e6c49f5f61735f0bbbfd188a974f79b01727387",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
