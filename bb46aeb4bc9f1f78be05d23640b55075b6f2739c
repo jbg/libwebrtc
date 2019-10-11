@@ -22,6 +22,30 @@
       "revId": "bb46aeb4bc9f1f78be05d23640b55075b6f2739c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf4703a5_5fc270ba",
+        "filename": "modules/audio_coding/neteq/include/neteq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-11T07:39:01Z",
+      "side": 1,
+      "message": "I would argue that it makes more sense to declare it together with its one place of use, but it\u0027s not a strongly held opinion. Done.",
+      "parentUuid": "7348f53a_9b06aa2a",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 4
+      },
+      "revId": "bb46aeb4bc9f1f78be05d23640b55075b6f2739c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
