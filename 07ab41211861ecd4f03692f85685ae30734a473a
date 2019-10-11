@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d6939256_cfb296f0",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T12:29:55Z",
+      "side": 1,
+      "message": "For each video frame to be rendered, the sync offset is estimated in GetStreamSyncOffsetInMs using the audio and video RtpToNtpEstimator in RtpStreamsSynchronizer (used for A/V sync).\n\nThe estimated audio and video ntp timestamps are used in this CL and therefore only populated if A/V sync is enabled. Added a todo/comment about that.",
+      "parentUuid": "894a6620_8e15cbeb",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 1
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1046139c_287ea16d",
         "filename": "audio/channel_receive.cc",
         "patchSetId": 9
@@ -45,6 +69,30 @@
       "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe39621d_e95376a2",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T12:29:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1046139c_287ea16d",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "14f2d781_f2c715ba",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T12:29:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42579a75_61c25499",
+      "range": {
+        "startLine": 834,
+        "startChar": 0,
+        "endLine": 843,
+        "endChar": 66
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32da7095_20f6a1bf",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 9
@@ -91,6 +163,30 @@
       "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "261dc2ad_62c5c5a2",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-11T12:29:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "32da7095_20f6a1bf",
+      "range": {
+        "startLine": 558,
+        "startChar": 4,
+        "endLine": 558,
+        "endChar": 18
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
