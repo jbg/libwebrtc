@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a92fc451_b5799fa1",
+        "filename": "audio/audio_receive_stream.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-11T12:42:56Z",
+      "side": 1,
+      "message": "And to populate that always, one would move the RtpToNtpEstimator out of the RtpStreamsSynchronizer class and into respective receive streams? Would be good to describe the plan either in the TODO comment or a bug.",
+      "parentUuid": "d6939256_cfb296f0",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 1
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1046139c_287ea16d",
         "filename": "audio/channel_receive.cc",
         "patchSetId": 9
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "1046139c_287ea16d",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "07ab41211861ecd4f03692f85685ae30734a473a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b940094_5cb223d8",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-11T12:42:56Z",
+      "side": 1,
+      "message": "Is it some reasonable value you\u0027ve selected, or is it from the spec?",
+      "parentUuid": "fe39621d_e95376a2",
       "range": {
         "startLine": 59,
         "startChar": 0,
