@@ -328,7 +328,6 @@ class PacketFeedbackObserver {
  public:
   virtual ~PacketFeedbackObserver() = default;
 
-  virtual void OnPacketAdded(uint32_t ssrc, uint16_t seq_num) = 0;
   virtual void OnPacketFeedbackVector(
       const std::vector<PacketFeedback>& packet_feedback_vector) = 0;
 };

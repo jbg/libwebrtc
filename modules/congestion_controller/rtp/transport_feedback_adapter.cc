@@ -93,14 +93,6 @@ void TransportFeedbackAdapter::AddPacket(const RtpPacketSendInfo& packet_info,
     send_time_history_.RemoveOld(creation_time.ms());
     send_time_history_.AddNewPacket(std::move(packet_feedback));
   }
-
-  {
-    rtc::CritScope cs(&observers_lock_);
-    for (auto* observer : observers_) {
-      observer->OnPacketAdded(packet_info.ssrc,
-                              packet_info.transport_sequence_number);
-    }
-  }
 }
 absl::optional<SentPacket> TransportFeedbackAdapter::ProcessSentPacket(
     const rtc::SentPacket& sent_packet) {

@@ -168,15 +168,6 @@ class ChannelSend : public ChannelSendInterface,
   // packet.
   void ProcessAndEncodeAudio(std::unique_ptr<AudioFrame> audio_frame) override;
 
-  // The existence of this function alongside OnUplinkPacketLossRate is
-  // a compromise. We want the encoder to be agnostic of the PLR source, but
-  // we also don't want it to receive conflicting information from TWCC and
-  // from RTCP-XR.
-  void OnTwccBasedUplinkPacketLossRate(float packet_loss_rate) override;
-
-  void OnRecoverableUplinkPacketLossRate(
-      float recoverable_packet_loss_rate) override;
-
   int64_t GetRTT() const override;
 
   // E2EE Custom Audio Frame Encryption
@@ -262,7 +253,6 @@ class ChannelSend : public ChannelSendInterface,
 
   rtc::ThreadChecker construction_thread_;
 
-  const bool use_twcc_plr_for_ana_;
   const bool use_standard_bytes_stats_;
 
   bool encoder_queue_is_active_ RTC_GUARDED_BY(encoder_queue_) = false;
@@ -607,8 +597,6 @@ ChannelSend::ChannelSend(Clock* clock,
       rtp_packet_pacer_proxy_(new RtpPacketSenderProxy()),
       retransmission_rate_limiter_(
           new RateLimiter(clock, kMaxRetransmissionWindowMs)),
-      use_twcc_plr_for_ana_(
-          webrtc::field_trial::FindFullName("UseTwccPlrForAna") == "Enabled"),
       use_standard_bytes_stats_(
           webrtc::field_trial::IsEnabled(kUseStandardBytesStats)),
       media_transport_config_(media_transport_config),
@@ -798,27 +786,7 @@ int ChannelSend::GetBitrate() const {
   return configured_bitrate_bps_;
 }
 
-void ChannelSend::OnTwccBasedUplinkPacketLossRate(float packet_loss_rate) {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  if (!use_twcc_plr_for_ana_)
-    return;
-  CallEncoder([&](AudioEncoder* encoder) {
-    encoder->OnReceivedUplinkPacketLossFraction(packet_loss_rate);
-  });
-}
-
-void ChannelSend::OnRecoverableUplinkPacketLossRate(
-    float recoverable_packet_loss_rate) {
-  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
-  CallEncoder([&](AudioEncoder* encoder) {
-    encoder->OnReceivedUplinkRecoverablePacketLossFraction(
-        recoverable_packet_loss_rate);
-  });
-}
-
 void ChannelSend::OnUplinkPacketLossRate(float packet_loss_rate) {
-  if (use_twcc_plr_for_ana_)
-    return;
   CallEncoder([&](AudioEncoder* encoder) {
     encoder->OnReceivedUplinkPacketLossFraction(packet_loss_rate);
   });
