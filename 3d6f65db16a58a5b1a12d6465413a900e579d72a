@@ -22,6 +22,30 @@
       "revId": "3d6f65db16a58a5b1a12d6465413a900e579d72a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b82d6ee_5757c208",
+        "filename": "rtc_base/critical_section_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-10-11T10:43:23Z",
+      "side": 1,
+      "message": "considered, but...\nhttps://testing.googleblog.com/2014/03/testing-on-toilet-what-makes-good-test.html\n\"a test should serve as readable documentation for humans\"\n\nIt need to be trivially destructible _because_ it should be able to have static storage duration.\nIf I move it right after the class definition, that context will be lost.",
+      "parentUuid": "25c72381_3a58cd7d",
+      "range": {
+        "startLine": 287,
+        "startChar": 2,
+        "endLine": 287,
+        "endChar": 71
+      },
+      "revId": "3d6f65db16a58a5b1a12d6465413a900e579d72a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
