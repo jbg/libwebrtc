@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bd112eea_4f9f3800",
+        "filename": "rtc_base/task_queue_for_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-10-14T16:55:03Z",
+      "side": 1,
+      "message": "yes, intent that test-only code can call it with any TaskQueue implementation.\n(in particular intent is to remove calls to SendTaskQueueForTesting::SendTask in favor of using this function directly)\nadded TODO to the DEPRECATED_SingleThreadedTaskQueueForTesting",
+      "parentUuid": "57ac6753_c2ff5c8e",
+      "revId": "329e5ab13dc568d403585e6fb935bb36e33ef393",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80273ec6_7c229b2d",
         "filename": "rtc_base/task_queue_for_test.h",
         "patchSetId": 8
@@ -39,6 +57,30 @@
       "revId": "329e5ab13dc568d403585e6fb935bb36e33ef393",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc90f042_c4101d30",
+        "filename": "rtc_base/task_queue_for_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-10-14T16:55:03Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure it is good idea to always force callers to write the location.\non the other side, it is not that hard.\n\nin future, when c++20-like std::source_location is available, it can be default value and same time be accurate file/line.\nbut until then... removed. when it would be able to be able to be default value, then can update it.",
+      "parentUuid": "80273ec6_7c229b2d",
+      "range": {
+        "startLine": 30,
+        "startChar": 34,
+        "endLine": 30,
+        "endChar": 65
+      },
+      "revId": "329e5ab13dc568d403585e6fb935bb36e33ef393",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "4559754b_33510259",
+        "filename": "rtc_base/task_queue_for_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-10-14T16:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a419c69_768c51ea",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 7
+      },
+      "revId": "329e5ab13dc568d403585e6fb935bb36e33ef393",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4489be45_7bd08166",
         "filename": "rtc_base/task_queue_for_test.h",
         "patchSetId": 8
@@ -76,6 +142,30 @@
       "writtenOn": "2019-10-14T15:47:05Z",
       "side": 1,
       "message": "Again, why have a default value?",
+      "range": {
+        "startLine": 67,
+        "startChar": 36,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "329e5ab13dc568d403585e6fb935bb36e33ef393",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81313a25_aa4c1249",
+        "filename": "rtc_base/task_queue_for_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-10-14T16:55:03Z",
+      "side": 1,
+      "message": "to avoid breaking existent calls to this function.\nwant me to update all the callers?",
+      "parentUuid": "4489be45_7bd08166",
       "range": {
         "startLine": 67,
         "startChar": 36,
