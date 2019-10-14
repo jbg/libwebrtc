@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "122d182d_bce85b0a",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-14T16:36:55Z",
+      "side": 1,
+      "message": "Done. See other comment.",
+      "parentUuid": "bf0d2e9f_cc5d1877",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 23
+      },
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44d6196c_a20ff322",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 3
@@ -293,6 +317,24 @@
       "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd9a5516_19ba4717",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-14T16:36:55Z",
+      "side": 1,
+      "message": "I made it a concrete type. Very nice. I was able to do an easy \"bool has_run_\" inside of the explicit OperationsChainCallback, allowing me to remove the \"pending operation IDs\" logic. And not only could I DCHECK that callback was not invoked more than twice, I was now also able to easily DCEHCK that the callback was invoked.\n\nNote that I was forced to use a copyable type in order for the callback to be an acceptable argument to the functor (if the operation is defined by an std::functor\u003c\u003e all of its arguments - i.e. the callback - has to be copyable). To make it copyable I made it a RefCountedObject rather than have it be something move-only.",
+      "parentUuid": "7d010fe7_10b31bbd",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
