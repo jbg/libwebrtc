@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75864461_022ab824",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-14T13:49:32Z",
+      "side": 1,
+      "message": "If this value is ever defined in a normal loopback scenario such as the one that guards against exposing non-standard metrics, then this file needs to be updated in Chromium:\nhttps://cs.chromium.org/chromium/src/chrome/test/data/webrtc/peerconnection_getstats.js?q\u003dpeerconnection_getstats.js\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d367\n\nIt lists the estimatedPlayoutTimestamp in the wrong stats dictionary, it needs to be moved to RTCInboundRtpStreamStats to reflect the current state of the spec.\n\nLet me know if you want me to change it for you or if you\u0027ll do that, it\u0027s basically a one-liner.",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "659b35cf_2ed91f79",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-14T13:49:32Z",
+      "side": 1,
+      "message": "Unless you have a string preference, consider the return value absl::optional\u003cPlayoutTimestamp\u003e\n\nstruct PlayoutTimestamp {\n  uint32_t timestamp;\n  int64_t time_ms;\n};",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7aee2255_1027849e",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-14T13:49:32Z",
+      "side": 1,
+      "message": "Whether you go with struct or the current arguments, use descriptive name. Is the timestamp an RTP timestamp? Include that in the name.\n\nIn this case do we have the RTP timestamp of the played out frame and the current time that frame was played out?",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3be68df3_3f16d446",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-14T13:49:32Z",
+      "side": 1,
+      "message": "The integration test is using a PeerConnectionTestWrapper doing GetAndAddUserMedia:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/pc/test/peer_connection_test_wrapper.cc?type\u003dcs\u0026q\u003dGetAndAddUserMedia\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d278\n\nThis performs addTrack() taking a stream ID as an argument, i.e. the audio and video tracks will belong to the same MediaStream, shouldn\u0027t this imply that A/V sync is enabled?\n- Why are we expecting estimatedPlayoutTimestamp to be undefined here in that case? Have you verified this is working in an integration test or manually e.g. in Chrome?",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8270f2fe_2a227d9b",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-14T13:49:32Z",
+      "side": 1,
+      "message": "GetCurrentEstimatedPlayoutNtpTimestampMs uses kPlayoutTsTimeoutMs which is some \"arbitrary time\" that a timestamp is valid for, this is not spec-compliant. If you want to know if we\u0027ve received any packets for the last 5 seconds there may be other metrics or APIs for determining that. But is there a reason to bake in arbitrary timeouts into a metric like this? Why is nothing better than something?\n\nCan we stick to the spec and remove the timeout?",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
