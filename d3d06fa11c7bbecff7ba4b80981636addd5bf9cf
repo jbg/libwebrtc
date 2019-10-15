@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "33001257_bf14ad7c",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-15T00:31:55Z",
+      "side": 1,
+      "message": "It\u0027s an attempt to avoid redundant creating application handler in case when an instance of WindowCapturer is used to generate a thumbnail to show in picker by calling SelectSource and CaptureFrame for every available source. It\u0027s not essential part and it could be removed if needed.",
+      "parentUuid": "be082a42_0f05249e",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5efbb0c5_c0d00cb5",
         "filename": "modules/desktop_capture/full_screen_window_detector.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "845f1769_1ae47c63",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-15T00:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5efbb0c5_c0d00cb5",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "de04aa9c_89074d7b",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-15T00:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3616430_c8956f63",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 28
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "794d5c05_c6cc4a40",
         "filename": "modules/desktop_capture/full_screen_window_detector.h",
         "patchSetId": 5
@@ -114,6 +186,30 @@
       "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5840dc8_cb90d97a",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-15T00:31:55Z",
+      "side": 1,
+      "message": "It could be a case when capturer is used to generate a thumbnails for picker: SetSource and CaptureFrame will be called for every available source. So it could be changed with adding  SetSource but i\u0027m not sure that it would be better, at least FullScreenChromeWindowDetector which is a part of webrtc\u0027s source code at the moment uses that approach.",
+      "parentUuid": "794d5c05_c6cc4a40",
+      "range": {
+        "startLine": 41,
+        "startChar": 32,
+        "endLine": 41,
+        "endChar": 50
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "744151d2_4ee78513",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-15T00:31:55Z",
+      "side": 1,
+      "message": "Done: UpdateWindowList is removed and get_sources is used to do the platform-specific work.",
+      "parentUuid": "4419e683_49cdb386",
+      "range": {
+        "startLine": 53,
+        "startChar": 58,
+        "endLine": 53,
+        "endChar": 72
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c12d6fa6_c968dfea",
         "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
         "patchSetId": 5
@@ -160,6 +280,30 @@
       "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4810c105_a0dcf56f",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-15T00:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c12d6fa6_c968dfea",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 87
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
