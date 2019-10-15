@@ -21,6 +21,7 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/time_utils.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace {
 struct Fraction {
@@ -43,13 +44,47 @@ int roundUp(int value_to_round, int multiple, int max_value) {
                                     : (max_value / multiple * multiple);
 }
 
+// Alternately scale down by 2/3 and 3/4. This results in fractions which are
+// effectively scalable. For instance, starting at 1280x720 will result in
+// the series (3/4) => 960x540, (1/2) => 640x360, (3/8) => 480x270,
+// (1/4) => 320x180, (3/16) => 240x125, (1/8) => 160x90.
+void UpdateScale(Fraction* current_scale) {
+  if (current_scale->numerator % 3 == 0 &&
+      current_scale->denominator % 2 == 0) {
+    // Multiply by 2/3.
+    current_scale->numerator /= 3;
+    current_scale->denominator /= 2;
+  } else {
+    // Multiply by 3/4.
+    current_scale->numerator *= 3;
+    current_scale->denominator *= 4;
+  }
+}
+
+void UpdateScale(Fraction* current_scale, const Fraction& multiplier) {
+  current_scale->numerator *= multiplier.numerator;
+  current_scale->denominator *= multiplier.denominator;
+
+  if (current_scale->denominator % current_scale->numerator == 0) {
+    current_scale->denominator /= current_scale->numerator;
+    current_scale->numerator /= current_scale->numerator;
+  }
+}
+
 // Generates a scale factor that makes |input_pixels| close to |target_pixels|,
 // but no higher than |max_pixels|.
-Fraction FindScale(int input_pixels, int target_pixels, int max_pixels) {
+Fraction FindScale(int input_width,
+                   int input_height,
+                   int target_pixels,
+                   int max_pixels,
+                   bool variable_start_scale_factor) {
   // This function only makes sense for a positive target.
   RTC_DCHECK_GT(target_pixels, 0);
   RTC_DCHECK_GT(max_pixels, 0);
   RTC_DCHECK_GE(max_pixels, target_pixels);
+
+  const int input_pixels = input_width * input_height;
+  const bool input_mod3 = input_width % 3 == 0 && input_height % 3 == 0;
 
   // Don't scale up original.
   if (target_pixels >= input_pixels)
@@ -65,21 +100,20 @@ Fraction FindScale(int input_pixels, int target_pixels, int max_pixels) {
     min_pixel_diff = std::abs(input_pixels - target_pixels);
   }
 
-  // Alternately scale down by 2/3 and 3/4. This results in fractions which are
-  // effectively scalable. For instance, starting at 1280x720 will result in
-  // the series (3/4) => 960x540, (1/2) => 640x360, (3/8) => 480x270,
-  // (1/4) => 320x180, (3/16) => 240x125, (1/8) => 160x90.
+  int iter = 0;
   while (current_scale.scale_pixel_count(input_pixels) > target_pixels) {
-    if (current_scale.numerator % 3 == 0 &&
-        current_scale.denominator % 2 == 0) {
-      // Multiply by 2/3.
-      current_scale.numerator /= 3;
-      current_scale.denominator /= 2;
+    if (variable_start_scale_factor) {
+      // Alternate scale factor every other iteration.
+      const bool even = (iter % 2) == 0;
+      if (input_mod3) {
+        UpdateScale(&current_scale, even ? Fraction{2, 3} : Fraction{3, 4});
+      } else {
+        UpdateScale(&current_scale, even ? Fraction{3, 4} : Fraction{2, 3});
+      }
     } else {
-      // Multiply by 3/4.
-      current_scale.numerator *= 3;
-      current_scale.denominator *= 4;
+      UpdateScale(&current_scale);
     }
+    ++iter;
 
     int output_pixels = current_scale.scale_pixel_count(input_pixels);
     if (output_pixels <= max_pixels) {
@@ -104,6 +138,8 @@ VideoAdapter::VideoAdapter(int required_resolution_alignment)
       adaption_changes_(0),
       previous_width_(0),
       previous_height_(0),
+      variable_start_scale_factor_(webrtc::field_trial::IsEnabled(
+          "WebRTC-Video-VariableStartScaleFactor")),
       required_resolution_alignment_(required_resolution_alignment),
       resolution_request_target_pixel_count_(std::numeric_limits<int>::max()),
       resolution_request_max_pixel_count_(std::numeric_limits<int>::max()),
@@ -217,8 +253,9 @@ bool VideoAdapter::AdaptFrameResolution(int in_width,
     *cropped_height =
         std::min(in_height, static_cast<int>(in_width / requested_aspect));
   }
-  const Fraction scale = FindScale((*cropped_width) * (*cropped_height),
-                                   target_pixel_count, max_pixel_count);
+  const Fraction scale =
+      FindScale(*cropped_width, *cropped_height, target_pixel_count,
+                max_pixel_count, variable_start_scale_factor_);
   // Adjust cropping slightly to get even integer output size and a perfect
   // scale factor. Make sure the resulting dimensions are aligned correctly
   // to be nice to hardware encoders.
