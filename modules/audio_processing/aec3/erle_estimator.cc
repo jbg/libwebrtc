@@ -41,14 +41,11 @@ void ErleEstimator::Update(
     const RenderBuffer& render_buffer,
     const std::vector<std::array<float, kFftLengthBy2Plus1>>&
         filter_frequency_response,
-    rtc::ArrayView<const float> reverb_render_spectrum,
-    rtc::ArrayView<const float> capture_spectrum,
-    rtc::ArrayView<const float> subtractor_spectrum,
+    rtc::ArrayView<const float, kFftLengthBy2Plus1> reverb_render_spectrum,
+    rtc::ArrayView<const float, kFftLengthBy2Plus1> capture_spectrum,
+    rtc::ArrayView<const float, kFftLengthBy2Plus1> subtractor_spectrum,
     bool converged_filter,
     bool onset_detection) {
-  RTC_DCHECK_EQ(kFftLengthBy2Plus1, reverb_render_spectrum.size());
-  RTC_DCHECK_EQ(kFftLengthBy2Plus1, capture_spectrum.size());
-  RTC_DCHECK_EQ(kFftLengthBy2Plus1, subtractor_spectrum.size());
   const auto& X2_reverb = reverb_render_spectrum;
   const auto& Y2 = capture_spectrum;
   const auto& E2 = subtractor_spectrum;
