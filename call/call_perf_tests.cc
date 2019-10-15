@@ -325,27 +325,29 @@ void CallPerfTest::TestAudioVideoSync(FecMode fec,
   }
 }
 
-TEST_F(CallPerfTest, PlaysOutAudioAndVideoInSyncWithoutClockDrift) {
+TEST_F(CallPerfTest, DISABLED_PlaysOutAudioAndVideoInSyncWithoutClockDrift) {
   TestAudioVideoSync(FecMode::kOff, CreateOrder::kAudioFirst,
                      DriftingClock::kNoDrift, DriftingClock::kNoDrift,
                      DriftingClock::kNoDrift, "_video_no_drift");
 }
 
-TEST_F(CallPerfTest, PlaysOutAudioAndVideoInSyncWithVideoNtpDrift) {
+TEST_F(CallPerfTest, DISABLED_PlaysOutAudioAndVideoInSyncWithVideoNtpDrift) {
   TestAudioVideoSync(FecMode::kOff, CreateOrder::kAudioFirst,
                      DriftingClock::PercentsFaster(10.0f),
                      DriftingClock::kNoDrift, DriftingClock::kNoDrift,
                      "_video_ntp_drift");
 }
 
-TEST_F(CallPerfTest, PlaysOutAudioAndVideoInSyncWithAudioFasterThanVideoDrift) {
+TEST_F(CallPerfTest,
+       DISABLED_PlaysOutAudioAndVideoInSyncWithAudioFasterThanVideoDrift) {
   TestAudioVideoSync(FecMode::kOff, CreateOrder::kAudioFirst,
                      DriftingClock::kNoDrift,
                      DriftingClock::PercentsSlower(30.0f),
                      DriftingClock::PercentsFaster(30.0f), "_audio_faster");
 }
 
-TEST_F(CallPerfTest, PlaysOutAudioAndVideoInSyncWithVideoFasterThanAudioDrift) {
+TEST_F(CallPerfTest,
+       DISABLED_PlaysOutAudioAndVideoInSyncWithVideoFasterThanAudioDrift) {
   TestAudioVideoSync(FecMode::kOn, CreateOrder::kVideoFirst,
                      DriftingClock::kNoDrift,
                      DriftingClock::PercentsFaster(30.0f),
@@ -497,7 +499,7 @@ void CallPerfTest::TestCaptureNtpTime(
 
 // Flaky tests, disabled on Mac and Windows due to webrtc:8291.
 #if !(defined(WEBRTC_MAC) || defined(WEBRTC_WIN))
-TEST_F(CallPerfTest, CaptureNtpTimeWithNetworkDelay) {
+TEST_F(CallPerfTest, DISABLED_CaptureNtpTimeWithNetworkDelay) {
   BuiltInNetworkBehaviorConfig net_config;
   net_config.queue_delay_ms = 100;
   // TODO(wu): lower the threshold as the calculation/estimatation becomes more
@@ -508,7 +510,7 @@ TEST_F(CallPerfTest, CaptureNtpTimeWithNetworkDelay) {
   TestCaptureNtpTime(net_config, kThresholdMs, kStartTimeMs, kRunTimeMs);
 }
 
-TEST_F(CallPerfTest, CaptureNtpTimeWithNetworkJitter) {
+TEST_F(CallPerfTest, DISABLED_CaptureNtpTimeWithNetworkJitter) {
   BuiltInNetworkBehaviorConfig net_config;
   net_config.queue_delay_ms = 100;
   net_config.delay_standard_deviation_ms = 10;
@@ -521,7 +523,7 @@ TEST_F(CallPerfTest, CaptureNtpTimeWithNetworkJitter) {
 }
 #endif
 
-TEST_F(CallPerfTest, ReceivesCpuOveruseAndUnderuse) {
+TEST_F(CallPerfTest, DISABLED_ReceivesCpuOveruseAndUnderuse) {
   // Minimal normal usage at the start, then 30s overuse to allow filter to
   // settle, and then 80s underuse to allow plenty of time for rampup again.
   test::ScopedFieldTrials fake_overuse_settings(
@@ -698,11 +700,11 @@ void CallPerfTest::TestMinTransmitBitrate(bool pad_to_min_bitrate) {
   RunBaseTest(&test);
 }
 
-TEST_F(CallPerfTest, PadsToMinTransmitBitrate) {
+TEST_F(CallPerfTest, DISABLED_DISABLED_PadsToMinTransmitBitrate) {
   TestMinTransmitBitrate(true);
 }
 
-TEST_F(CallPerfTest, NoPadWithoutMinTransmitBitrate) {
+TEST_F(CallPerfTest, DISABLED_DISABLED_NoPadWithoutMinTransmitBitrate) {
   TestMinTransmitBitrate(false);
 }
 
@@ -714,7 +716,8 @@ TEST_F(CallPerfTest, NoPadWithoutMinTransmitBitrate) {
 #define MAYBE_KeepsHighBitrateWhenReconfiguringSender \
   KeepsHighBitrateWhenReconfiguringSender
 #endif
-TEST_F(CallPerfTest, MAYBE_KeepsHighBitrateWhenReconfiguringSender) {
+TEST_F(CallPerfTest,
+       DISABLED_DISABLED_MAYBE_KeepsHighBitrateWhenReconfiguringSender) {
   static const uint32_t kInitialBitrateKbps = 400;
   static const uint32_t kReconfigureThresholdKbps = 600;
 
@@ -996,7 +999,7 @@ void CallPerfTest::TestMinAudioVideoBitrate(int test_bitrate_from,
 #else
 #define MAYBE_MinVideoAndAudioBitrate MinVideoAndAudioBitrate
 #endif
-TEST_F(CallPerfTest, MAYBE_MinVideoAndAudioBitrate) {
+TEST_F(CallPerfTest, DISABLED_DISABLED_MAYBE_MinVideoAndAudioBitrate) {
   TestMinAudioVideoBitrate(110, 40, -10, 10000, 70000, 200000);
 }
 
