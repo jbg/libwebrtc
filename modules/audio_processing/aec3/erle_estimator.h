@@ -41,14 +41,15 @@ class ErleEstimator {
   void Reset(bool delay_change);
 
   // Updates the ERLE estimates.
-  void Update(const RenderBuffer& render_buffer,
-              const std::vector<std::array<float, kFftLengthBy2Plus1>>&
-                  filter_frequency_response,
-              rtc::ArrayView<const float> reverb_render_spectrum,
-              rtc::ArrayView<const float> capture_spectrum,
-              rtc::ArrayView<const float> subtractor_spectrum,
-              bool converged_filter,
-              bool onset_detection);
+  void Update(
+      const RenderBuffer& render_buffer,
+      const std::vector<std::array<float, kFftLengthBy2Plus1>>&
+          filter_frequency_response,
+      rtc::ArrayView<const float, kFftLengthBy2Plus1> reverb_render_spectrum,
+      rtc::ArrayView<const float, kFftLengthBy2Plus1> capture_spectrum,
+      rtc::ArrayView<const float, kFftLengthBy2Plus1> subtractor_spectrum,
+      bool converged_filter,
+      bool onset_detection);
 
   // Returns the most recent subband ERLE estimates.
   rtc::ArrayView<const std::array<float, kFftLengthBy2Plus1>> Erle() const {
