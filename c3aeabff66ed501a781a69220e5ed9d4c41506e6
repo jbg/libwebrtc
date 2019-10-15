@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "26556468_cc81a268",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T13:54:11Z",
+      "side": 1,
+      "message": "Oh, it\u0027s just because they need to share a single has_run_? Then wouldn\u0027t it make more sense to make just that bool reference counted, so that OperationsChainCallback can be copyable? If you then turn it into a functor again, it can be moved into the private namespace, since users can either treat it as a generic void() functor or as a std::function\u003cvoid()\u003e.",
+      "parentUuid": "0a42dbfd_a4f1898a",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "957c36bb_1e938fe3",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 7
