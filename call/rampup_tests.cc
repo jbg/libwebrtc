@@ -658,7 +658,7 @@ class RampUpTest : public test::CallTest {
 
 static const uint32_t kStartBitrateBps = 60000;
 
-TEST_F(RampUpTest, UpDownUpAbsSendTimeSimulcastRedRtx) {
+TEST_F(RampUpTest, DISABLED_UpDownUpAbsSendTimeSimulcastRedRtx) {
   std::vector<int> loss_rates = {0, 0, 0, 0};
   RampUpDownUpTester test(3, 0, 0, kStartBitrateBps,
                           RtpExtension::kAbsSendTimeUri, true, true, loss_rates,
@@ -674,7 +674,7 @@ TEST_F(RampUpTest, UpDownUpAbsSendTimeSimulcastRedRtx) {
 #define MAYBE_UpDownUpTransportSequenceNumberRtx \
   UpDownUpTransportSequenceNumberRtx
 #endif
-TEST_F(RampUpTest, MAYBE_UpDownUpTransportSequenceNumberRtx) {
+TEST_F(RampUpTest, DISABLED_MAYBE_UpDownUpTransportSequenceNumberRtx) {
   std::vector<int> loss_rates = {0, 0, 0, 0};
   RampUpDownUpTester test(3, 0, 0, kStartBitrateBps,
                           RtpExtension::kTransportSequenceNumberUri, true,
@@ -686,7 +686,8 @@ TEST_F(RampUpTest, MAYBE_UpDownUpTransportSequenceNumberRtx) {
 // different executable since they per definition are not perf tests.
 // This test is disabled because it crashes on Linux, and is flaky on other
 // platforms. See: crbug.com/webrtc/7919
-TEST_F(RampUpTest, DISABLED_UpDownUpTransportSequenceNumberPacketLoss) {
+TEST_F(RampUpTest,
+       DISABLED_DISABLED_UpDownUpTransportSequenceNumberPacketLoss) {
   std::vector<int> loss_rates = {20, 0, 0, 0};
   RampUpDownUpTester test(1, 0, 1, kStartBitrateBps,
                           RtpExtension::kTransportSequenceNumberUri, true,
@@ -702,7 +703,8 @@ TEST_F(RampUpTest, DISABLED_UpDownUpTransportSequenceNumberPacketLoss) {
 #define MAYBE_UpDownUpAudioVideoTransportSequenceNumberRtx \
   UpDownUpAudioVideoTransportSequenceNumberRtx
 #endif
-TEST_F(RampUpTest, MAYBE_UpDownUpAudioVideoTransportSequenceNumberRtx) {
+TEST_F(RampUpTest,
+       DISABLED_MAYBE_UpDownUpAudioVideoTransportSequenceNumberRtx) {
   test::ScopedFieldTrials field_trials("WebRTC-Audio-SendSideBwe/Enabled/");
   std::vector<int> loss_rates = {0, 0, 0, 0};
   RampUpDownUpTester test(3, 1, 0, kStartBitrateBps,
@@ -711,7 +713,7 @@ TEST_F(RampUpTest, MAYBE_UpDownUpAudioVideoTransportSequenceNumberRtx) {
   RunBaseTest(&test);
 }
 
-TEST_F(RampUpTest, UpDownUpAudioTransportSequenceNumberRtx) {
+TEST_F(RampUpTest, DISABLED_UpDownUpAudioTransportSequenceNumberRtx) {
   test::ScopedFieldTrials field_trials("WebRTC-Audio-SendSideBwe/Enabled/");
   std::vector<int> loss_rates = {0, 0, 0, 0};
   RampUpDownUpTester test(0, 1, 0, kStartBitrateBps,
@@ -720,43 +722,43 @@ TEST_F(RampUpTest, UpDownUpAudioTransportSequenceNumberRtx) {
   RunBaseTest(&test);
 }
 
-TEST_F(RampUpTest, TOffsetSimulcastRedRtx) {
+TEST_F(RampUpTest, DISABLED_TOffsetSimulcastRedRtx) {
   RampUpTester test(3, 0, 0, 0, 0, RtpExtension::kTimestampOffsetUri, true,
                     true, true, &task_queue_);
   RunBaseTest(&test);
 }
 
-TEST_F(RampUpTest, AbsSendTime) {
+TEST_F(RampUpTest, DISABLED_AbsSendTime) {
   RampUpTester test(1, 0, 0, 0, 0, RtpExtension::kAbsSendTimeUri, false, false,
                     false, &task_queue_);
   RunBaseTest(&test);
 }
 
-TEST_F(RampUpTest, AbsSendTimeSimulcastRedRtx) {
+TEST_F(RampUpTest, DISABLED_AbsSendTimeSimulcastRedRtx) {
   RampUpTester test(3, 0, 0, 0, 0, RtpExtension::kAbsSendTimeUri, true, true,
                     true, &task_queue_);
   RunBaseTest(&test);
 }
 
-TEST_F(RampUpTest, TransportSequenceNumber) {
+TEST_F(RampUpTest, DISABLED_TransportSequenceNumber) {
   RampUpTester test(1, 0, 0, 0, 0, RtpExtension::kTransportSequenceNumberUri,
                     false, false, false, &task_queue_);
   RunBaseTest(&test);
 }
 
-TEST_F(RampUpTest, TransportSequenceNumberSimulcast) {
+TEST_F(RampUpTest, DISABLED_TransportSequenceNumberSimulcast) {
   RampUpTester test(3, 0, 0, 0, 0, RtpExtension::kTransportSequenceNumberUri,
                     false, false, false, &task_queue_);
   RunBaseTest(&test);
 }
 
-TEST_F(RampUpTest, TransportSequenceNumberSimulcastRedRtx) {
+TEST_F(RampUpTest, DISABLED_TransportSequenceNumberSimulcastRedRtx) {
   RampUpTester test(3, 0, 0, 0, 0, RtpExtension::kTransportSequenceNumberUri,
                     true, true, true, &task_queue_);
   RunBaseTest(&test);
 }
 
-TEST_F(RampUpTest, AudioTransportSequenceNumber) {
+TEST_F(RampUpTest, DISABLED_AudioTransportSequenceNumber) {
   RampUpTester test(0, 1, 0, 300000, 10000,
                     RtpExtension::kTransportSequenceNumberUri, false, false,
                     false, &task_queue_);
