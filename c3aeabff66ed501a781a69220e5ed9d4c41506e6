@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "68defe42_4ffc153c",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-15T12:20:51Z",
+      "side": 1,
+      "message": "The callback is passed to the functor (to the user operation) to be invoked when the operation is complete, so yes they do need to deal with the callback type.\n\nThe previous patch set used an std std::functor\u003cvoid()\u003e for the callback, but with the request to use an explicit type I turned it into OperationsChainCallback.\n\nIn the current PS, this is how a user might use it:\n\noperations_chain-\u003eChainOperation(\n    [](scoped_refptr\u003cOperationsChainCallback\u003e callback) {\n      // In this example we invoke the callback inside the operation functor, but it could\n      // be invoked after jumping asynchronously between threads, i.e. outside the scope\n      // of this functor.\n      callback-\u003eOnOperationComplete();\n    });\n\nThe previous PS would have looked like this:\n\noperations_chain-\u003eChainOperation(\n    [](std::functor\u003cvoid()\u003e callback) {\n      callback();\n    });",
+      "parentUuid": "cb5c0f87_c85a6ce1",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "32b3644f_59a5df74",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 7
@@ -48,6 +66,24 @@
       "writtenOn": "2019-10-15T08:34:27Z",
       "side": 1,
       "message": "Why does this class need to be reference counted?",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a42dbfd_a4f1898a",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-15T12:20:51Z",
+      "side": 1,
+      "message": "Because the operation functor can be an std::functor\u003cvoid()\u003e, the argument to the functor (the callback) has to be copyable. I.e. if this is move-only we get compile errors when we pass lambdas to the operations chain.\n\nIn order to make it copyable without actually wanting to copy anything (i.e. all copies refer to the same callback; the \"has_run_\" is shared; the callback is shared), I turned it into a reference counted object.",
+      "parentUuid": "32b3644f_59a5df74",
       "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ed4a14a7_40763ed8",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-15T12:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "957c36bb_1e938fe3",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e06f2381_b5eb2f95",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 7
@@ -85,6 +139,24 @@
       "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be314a3a_a6516243",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-15T12:20:51Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a problem and I prefer it this way. Though if recursion becomes a problem we could include an artificial delay to require an OnMessage to occur between tasks, but that\u0027s a complexity I don\u0027t want to introduce in this CL.",
+      "parentUuid": "e06f2381_b5eb2f95",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "f019351e_78d04017",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-15T12:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ea81453_1975c358",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8cefa0ca_04da97c4",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 7
@@ -119,6 +209,24 @@
       "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "480cb1c9_88dd37a7",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-15T12:20:51Z",
+      "side": 1,
+      "message": "I forgot to update the documentation, this was true in the previous PS, in this PS the functor needs to take \"scoped_refptr\u003cOperationsChainCallback\u003e callback\", which is what the tests exercise (and you get compile error if you do \"std::functor\u003cvoid()\u003e callback\"). I updated the comment.",
+      "parentUuid": "8cefa0ca_04da97c4",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +253,30 @@
     },
     {
       "key": {
+        "uuid": "781d641c_592c6e9d",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-15T12:20:51Z",
+      "side": 1,
+      "message": "Indeed, removed it, it is documented in the appropriate places already.",
+      "parentUuid": "c3f7011a_7b1fc342",
+      "range": {
+        "startLine": 174,
+        "startChar": 2,
+        "endLine": 175,
+        "endChar": 23
+      },
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76cfbe19_c9df86b8",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 7
@@ -165,6 +297,30 @@
       "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c063d73_1b323b4c",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-15T12:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76cfbe19_c9df86b8",
+      "range": {
+        "startLine": 184,
+        "startChar": 2,
+        "endLine": 184,
+        "endChar": 11
+      },
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
