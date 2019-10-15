@@ -45,11 +45,7 @@ void RunBitexactnessTest(int sample_rate_hz,
                          float speech_probability_reference,
                          rtc::ArrayView<const float> noise_estimate_reference,
                          rtc::ArrayView<const float> output_reference) {
-  rtc::CriticalSection crit_capture;
-  NoiseSuppressionImpl noise_suppressor(&crit_capture);
-  noise_suppressor.Initialize(num_channels, sample_rate_hz);
-  noise_suppressor.Enable(true);
-  noise_suppressor.set_level(level);
+  NoiseSuppressionImpl noise_suppressor(num_channels, sample_rate_hz, level);
 
   int samples_per_channel = rtc::CheckedDivExact(sample_rate_hz, 100);
   const StreamConfig capture_config(sample_rate_hz, num_channels, false);
@@ -112,7 +108,7 @@ TEST(NoiseSuppresionBitExactnessTest, Mono8kHzLow) {
   const float kOutputReference[] = {0.003306f, 0.004442f, 0.004574f};
 #endif
 
-  RunBitexactnessTest(8000, 1, NoiseSuppression::Level::kLow,
+  RunBitexactnessTest(8000, 1, NoiseSuppressionImpl::Level::kLow,
                       kSpeechProbabilityReference, kNoiseEstimateReference,
                       kOutputReference);
 }
@@ -135,7 +131,7 @@ TEST(NoiseSuppresionBitExactnessTest, Mono16kHzLow) {
   const float kOutputReference[] = {0.003574f, 0.004494f, 0.004499f};
 #endif
 
-  RunBitexactnessTest(16000, 1, NoiseSuppression::Level::kLow,
+  RunBitexactnessTest(16000, 1, NoiseSuppressionImpl::Level::kLow,
                       kSpeechProbabilityReference, kNoiseEstimateReference,
                       kOutputReference);
 }
@@ -158,7 +154,7 @@ TEST(NoiseSuppresionBitExactnessTest, Mono32kHzLow) {
   const float kOutputReference[] = {0.001221f, 0.001984f, 0.002228f};
 #endif
 
-  RunBitexactnessTest(32000, 1, NoiseSuppression::Level::kLow,
+  RunBitexactnessTest(32000, 1, NoiseSuppressionImpl::Level::kLow,
                       kSpeechProbabilityReference, kNoiseEstimateReference,
                       kOutputReference);
 }
@@ -181,7 +177,7 @@ TEST(NoiseSuppresionBitExactnessTest, Mono48kHzLow) {
   const float kOutputReference[] = {-0.013062f, -0.012657f, -0.011934f};
 #endif
 
-  RunBitexactnessTest(48000, 1, NoiseSuppression::Level::kLow,
+  RunBitexactnessTest(48000, 1, NoiseSuppressionImpl::Level::kLow,
                       kSpeechProbabilityReference, kNoiseEstimateReference,
                       kOutputReference);
 }
@@ -207,7 +203,7 @@ TEST(NoiseSuppresionBitExactnessTest, Stereo16kHzLow) {
                                     -0.002399f, 0.001018f,  -0.003189f};
 #endif
 
-  RunBitexactnessTest(16000, 2, NoiseSuppression::Level::kLow,
+  RunBitexactnessTest(16000, 2, NoiseSuppressionImpl::Level::kLow,
                       kSpeechProbabilityReference, kNoiseEstimateReference,
                       kOutputReference);
 }
@@ -230,7 +226,7 @@ TEST(NoiseSuppresionBitExactnessTest, Mono16kHzModerate) {
   const float kOutputReference[] = {0.004513f, 0.005590f, 0.005614f};
 #endif
 
-  RunBitexactnessTest(16000, 1, NoiseSuppression::Level::kModerate,
+  RunBitexactnessTest(16000, 1, NoiseSuppressionImpl::Level::kModerate,
                       kSpeechProbabilityReference, kNoiseEstimateReference,
                       kOutputReference);
 }
@@ -253,7 +249,7 @@ TEST(NoiseSuppresionBitExactnessTest, Mono16kHzHigh) {
   const float kOutputReference[] = {0.004394f, 0.005406f, 0.005416f};
 #endif
 
-  RunBitexactnessTest(16000, 1, NoiseSuppression::Level::kHigh,
+  RunBitexactnessTest(16000, 1, NoiseSuppressionImpl::Level::kHigh,
                       kSpeechProbabilityReference, kNoiseEstimateReference,
                       kOutputReference);
 }
@@ -276,9 +272,8 @@ TEST(NoiseSuppresionBitExactnessTest, Mono16kHzVeryHigh) {
   const float kOutputReference[] = {0.004321f, 0.005247f, 0.005263f};
 #endif
 
-  RunBitexactnessTest(16000, 1, NoiseSuppression::Level::kVeryHigh,
+  RunBitexactnessTest(16000, 1, NoiseSuppressionImpl::Level::kVeryHigh,
                       kSpeechProbabilityReference, kNoiseEstimateReference,
                       kOutputReference);
 }
-
 }  // namespace webrtc
