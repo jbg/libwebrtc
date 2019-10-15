@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cb5c0f87_c85a6ce1",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:42:37Z",
+      "side": 1,
+      "message": "Also, can this class be moved into the private namespace? IIUC OperationsChain users will never have to deal with this type directly; they just need to be written to either work with any functor that takes no arguments, or with std::function\u003cvoid()\u003e.",
+      "parentUuid": "000c1122_bd1da1ef",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "32b3644f_59a5df74",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 7
