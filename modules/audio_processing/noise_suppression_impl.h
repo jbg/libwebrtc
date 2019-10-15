@@ -14,42 +14,49 @@
 #include <memory>
 #include <vector>
 
-#include "modules/audio_processing/include/audio_processing.h"
-#include "rtc_base/constructor_magic.h"
-#include "rtc_base/critical_section.h"
-
 namespace webrtc {
 
 class AudioBuffer;
 
-class NoiseSuppressionImpl : public NoiseSuppression {
+// The noise suppression (NS) component attempts to remove noise while
+// retaining speech. Recommended to be enabled on the client-side.
+class NoiseSuppressionImpl {
  public:
-  explicit NoiseSuppressionImpl(rtc::CriticalSection* crit);
-  ~NoiseSuppressionImpl() override;
+  // Determines the aggressiveness of the suppression. Increasing the level
+  // will reduce the noise level at the expense of a higher speech distortion.
+  enum Level { kLow, kModerate, kHigh, kVeryHigh };
 
-  // TODO(peah): Fold into ctor, once public API is removed.
-  void Initialize(size_t channels, int sample_rate_hz);
+  explicit NoiseSuppressionImpl(size_t channels, int sample_rate_hz);
+  ~NoiseSuppressionImpl();
+
+  NoiseSuppressionImpl(NoiseSuppressionImpl&) = delete;
+  NoiseSuppressionImpl& operator=(NoiseSuppressionImpl&) = delete;
+
   void AnalyzeCaptureAudio(AudioBuffer* audio);
   void ProcessCaptureAudio(AudioBuffer* audio);
 
-  // NoiseSuppression implementation.
-  int Enable(bool enable) override;
-  bool is_enabled() const override;
-  int set_level(Level level) override;
-  Level level() const override;
-  float speech_probability() const override;
-  std::vector<float> NoiseEstimate() override;
+  int set_level(Level level);
+  Level level() const;
+
+  // LEGACY: Returns the internally computed prior speech probability of current
+  // frame averaged over output channels. This is not supported in fixed point,
+  // for which |kUnsupportedFunctionError| is returned.
+  float speech_probability() const;
+
+  // LEGACY: Returns the size of the noise vector returned by NoiseEstimate().
   static size_t num_noise_bins();
+
+  // LEGACY: Returns the noise estimate per frequency bin averaged over all
+  // channels.
+  std::vector<float> NoiseEstimate();
 
  private:
   class Suppressor;
-  rtc::CriticalSection* const crit_;
-  bool enabled_ RTC_GUARDED_BY(crit_) = false;
-  Level level_ RTC_GUARDED_BY(crit_) = kModerate;
-  size_t channels_ RTC_GUARDED_BY(crit_) = 0;
-  int sample_rate_hz_ RTC_GUARDED_BY(crit_) = 0;
-  std::vector<std::unique_ptr<Suppressor>> suppressors_ RTC_GUARDED_BY(crit_);
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(NoiseSuppressionImpl);
+
+  Level level_ = kModerate;
+  size_t channels_;
+  int sample_rate_hz_;
+  std::vector<std::unique_ptr<Suppressor>> suppressors_;
 };
 }  // namespace webrtc
 
