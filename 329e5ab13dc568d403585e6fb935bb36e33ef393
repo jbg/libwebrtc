@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "62ccb22b_f8a2e4e6",
+        "filename": "rtc_base/task_queue_for_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T07:39:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bd112eea_4f9f3800",
+      "revId": "329e5ab13dc568d403585e6fb935bb36e33ef393",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80273ec6_7c229b2d",
         "filename": "rtc_base/task_queue_for_test.h",
         "patchSetId": 8
@@ -166,6 +184,30 @@
       "side": 1,
       "message": "to avoid breaking existent calls to this function.\nwant me to update all the callers?",
       "parentUuid": "4489be45_7bd08166",
+      "range": {
+        "startLine": 67,
+        "startChar": 36,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "329e5ab13dc568d403585e6fb935bb36e33ef393",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd695cba_fc12ff8a",
+        "filename": "rtc_base/task_queue_for_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T07:39:40Z",
+      "side": 1,
+      "message": "If the location argument has a default value, I\u0027m betting callers in general will fail to explicitly provide it, negating much of the point of passing the location around in the first place. So yes, my guess is that it\u0027s best to simply update the existing callers, provided of course that it doesn\u0027t use up too much of your time. A quick code search says that \"SendTask\" only occurs 38 times in our tree, which sounds far from unreasonable.",
+      "parentUuid": "81313a25_aa4c1249",
       "range": {
         "startLine": 67,
         "startChar": 36,
