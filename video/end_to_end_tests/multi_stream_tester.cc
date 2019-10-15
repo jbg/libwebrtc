@@ -25,6 +25,7 @@
 #include "call/simulated_network.h"
 #include "media/engine/internal_decoder_factory.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "test/call_test.h"
 #include "test/encoder_settings.h"
 
@@ -64,81 +65,89 @@ void MultiStreamTester::RunTest() {
       CreateBuiltinVideoBitrateAllocatorFactory();
   InternalDecoderFactory decoder_factory;
 
-  task_queue_->SendTask([&]() {
-    sender_call = absl::WrapUnique(Call::Create(config));
-    receiver_call = absl::WrapUnique(Call::Create(config));
-    sender_transport = CreateSendTransport(task_queue_, sender_call.get());
-    receiver_transport =
-        CreateReceiveTransport(task_queue_, receiver_call.get());
+  SendTask(
+      task_queue_,
+      [&]() {
+        sender_call = absl::WrapUnique(Call::Create(config));
+        receiver_call = absl::WrapUnique(Call::Create(config));
+        sender_transport = CreateSendTransport(task_queue_, sender_call.get());
+        receiver_transport =
+            CreateReceiveTransport(task_queue_, receiver_call.get());
 
-    sender_transport->SetReceiver(receiver_call->Receiver());
-    receiver_transport->SetReceiver(sender_call->Receiver());
+        sender_transport->SetReceiver(receiver_call->Receiver());
+        receiver_transport->SetReceiver(sender_call->Receiver());
 
-    for (size_t i = 0; i < kNumStreams; ++i) {
-      uint32_t ssrc = codec_settings[i].ssrc;
-      int width = codec_settings[i].width;
-      int height = codec_settings[i].height;
+        for (size_t i = 0; i < kNumStreams; ++i) {
+          uint32_t ssrc = codec_settings[i].ssrc;
+          int width = codec_settings[i].width;
+          int height = codec_settings[i].height;
 
-      VideoSendStream::Config send_config(sender_transport.get());
-      send_config.rtp.ssrcs.push_back(ssrc);
-      send_config.encoder_settings.encoder_factory = &encoder_factory;
-      send_config.encoder_settings.bitrate_allocator_factory =
-          bitrate_allocator_factory.get();
-      send_config.rtp.payload_name = "VP8";
-      send_config.rtp.payload_type = kVideoPayloadType;
-      VideoEncoderConfig encoder_config;
-      test::FillEncoderConfiguration(kVideoCodecVP8, 1, &encoder_config);
-      encoder_config.max_bitrate_bps = 100000;
+          VideoSendStream::Config send_config(sender_transport.get());
+          send_config.rtp.ssrcs.push_back(ssrc);
+          send_config.encoder_settings.encoder_factory = &encoder_factory;
+          send_config.encoder_settings.bitrate_allocator_factory =
+              bitrate_allocator_factory.get();
+          send_config.rtp.payload_name = "VP8";
+          send_config.rtp.payload_type = kVideoPayloadType;
+          VideoEncoderConfig encoder_config;
+          test::FillEncoderConfiguration(kVideoCodecVP8, 1, &encoder_config);
+          encoder_config.max_bitrate_bps = 100000;
 
-      UpdateSendConfig(i, &send_config, &encoder_config, &frame_generators[i]);
+          UpdateSendConfig(i, &send_config, &encoder_config,
+                           &frame_generators[i]);
 
-      send_streams[i] = sender_call->CreateVideoSendStream(
-          send_config.Copy(), encoder_config.Copy());
-      send_streams[i]->Start();
+          send_streams[i] = sender_call->CreateVideoSendStream(
+              send_config.Copy(), encoder_config.Copy());
+          send_streams[i]->Start();
 
-      VideoReceiveStream::Config receive_config(receiver_transport.get());
-      receive_config.rtp.remote_ssrc = ssrc;
-      receive_config.rtp.local_ssrc = test::CallTest::kReceiverLocalVideoSsrc;
-      VideoReceiveStream::Decoder decoder =
-          test::CreateMatchingDecoder(send_config);
-      decoder.decoder_factory = &decoder_factory;
-      receive_config.decoders.push_back(decoder);
+          VideoReceiveStream::Config receive_config(receiver_transport.get());
+          receive_config.rtp.remote_ssrc = ssrc;
+          receive_config.rtp.local_ssrc =
+              test::CallTest::kReceiverLocalVideoSsrc;
+          VideoReceiveStream::Decoder decoder =
+              test::CreateMatchingDecoder(send_config);
+          decoder.decoder_factory = &decoder_factory;
+          receive_config.decoders.push_back(decoder);
 
-      UpdateReceiveConfig(i, &receive_config);
+          UpdateReceiveConfig(i, &receive_config);
 
-      receive_streams[i] =
-          receiver_call->CreateVideoReceiveStream(std::move(receive_config));
-      receive_streams[i]->Start();
+          receive_streams[i] = receiver_call->CreateVideoReceiveStream(
+              std::move(receive_config));
+          receive_streams[i]->Start();
 
-      auto* frame_generator = new test::FrameGeneratorCapturer(
-          Clock::GetRealTimeClock(),
-          test::FrameGenerator::CreateSquareGenerator(
-              width, height, absl::nullopt, absl::nullopt),
-          30, *task_queue_factory);
-      frame_generators[i] = frame_generator;
-      send_streams[i]->SetSource(frame_generator,
-                                 DegradationPreference::MAINTAIN_FRAMERATE);
-      frame_generator->Init();
-      frame_generator->Start();
-    }
-  });
+          auto* frame_generator = new test::FrameGeneratorCapturer(
+              Clock::GetRealTimeClock(),
+              test::FrameGenerator::CreateSquareGenerator(
+                  width, height, absl::nullopt, absl::nullopt),
+              30, *task_queue_factory);
+          frame_generators[i] = frame_generator;
+          send_streams[i]->SetSource(frame_generator,
+                                     DegradationPreference::MAINTAIN_FRAMERATE);
+          frame_generator->Init();
+          frame_generator->Start();
+        }
+      },
+      RTC_FROM_HERE);
 
   Wait();
 
-  task_queue_->SendTask([&]() {
-    for (size_t i = 0; i < kNumStreams; ++i) {
-      frame_generators[i]->Stop();
-      sender_call->DestroyVideoSendStream(send_streams[i]);
-      receiver_call->DestroyVideoReceiveStream(receive_streams[i]);
-      delete frame_generators[i];
-    }
+  SendTask(
+      task_queue_,
+      [&]() {
+        for (size_t i = 0; i < kNumStreams; ++i) {
+          frame_generators[i]->Stop();
+          sender_call->DestroyVideoSendStream(send_streams[i]);
+          receiver_call->DestroyVideoReceiveStream(receive_streams[i]);
+          delete frame_generators[i];
+        }
 
-    sender_transport.reset();
-    receiver_transport.reset();
+        sender_transport.reset();
+        receiver_transport.reset();
 
-    sender_call.reset();
-    receiver_call.reset();
-  });
+        sender_call.reset();
+        receiver_call.reset();
+      },
+      RTC_FROM_HERE);
 }
 
 void MultiStreamTester::UpdateSendConfig(

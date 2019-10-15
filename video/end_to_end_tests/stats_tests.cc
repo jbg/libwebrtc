@@ -19,6 +19,7 @@
 #include "modules/rtp_rtcp/source/rtp_utility.h"
 #include "modules/video_coding/include/video_coding_defines.h"
 #include "rtc_base/strings/string_builder.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "system_wrappers/include/metrics.h"
 #include "system_wrappers/include/sleep.h"
 #include "test/call_test.h"
@@ -526,61 +527,72 @@ TEST_F(StatsEndToEndTest, MAYBE_ContentTypeSwitches) {
 
   VideoEncoderConfig encoder_config_with_screenshare;
 
-  task_queue_.SendTask([this, &test, &send_config, &recv_config,
-                        &encoder_config_with_screenshare]() {
-    CreateSenderCall(send_config);
-    CreateReceiverCall(recv_config);
+  SendTask(
+      &task_queue_,
+      [this, &test, &send_config, &recv_config,
+       &encoder_config_with_screenshare]() {
+        CreateSenderCall(send_config);
+        CreateReceiverCall(recv_config);
 
-    receive_transport_ = test.CreateReceiveTransport(&task_queue_);
-    send_transport_ =
-        test.CreateSendTransport(&task_queue_, sender_call_.get());
-    send_transport_->SetReceiver(receiver_call_->Receiver());
-    receive_transport_->SetReceiver(sender_call_->Receiver());
+        receive_transport_ = test.CreateReceiveTransport(&task_queue_);
+        send_transport_ =
+            test.CreateSendTransport(&task_queue_, sender_call_.get());
+        send_transport_->SetReceiver(receiver_call_->Receiver());
+        receive_transport_->SetReceiver(sender_call_->Receiver());
 
-    receiver_call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
-    CreateSendConfig(1, 0, 0, send_transport_.get());
-    CreateMatchingReceiveConfigs(receive_transport_.get());
+        receiver_call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
+        CreateSendConfig(1, 0, 0, send_transport_.get());
+        CreateMatchingReceiveConfigs(receive_transport_.get());
 
-    // Modify send and receive configs.
-    GetVideoSendConfig()->rtp.nack.rtp_history_ms = kNackRtpHistoryMs;
-    video_receive_configs_[0].rtp.nack.rtp_history_ms = kNackRtpHistoryMs;
-    video_receive_configs_[0].renderer = &test;
-    // RTT needed for RemoteNtpTimeEstimator for the receive stream.
-    video_receive_configs_[0].rtp.rtcp_xr.receiver_reference_time_report = true;
-    // Start with realtime video.
-    GetVideoEncoderConfig()->content_type =
-        VideoEncoderConfig::ContentType::kRealtimeVideo;
-    // Second encoder config for the second part of the test uses screenshare
-    encoder_config_with_screenshare = GetVideoEncoderConfig()->Copy();
-    encoder_config_with_screenshare.content_type =
-        VideoEncoderConfig::ContentType::kScreen;
+        // Modify send and receive configs.
+        GetVideoSendConfig()->rtp.nack.rtp_history_ms = kNackRtpHistoryMs;
+        video_receive_configs_[0].rtp.nack.rtp_history_ms = kNackRtpHistoryMs;
+        video_receive_configs_[0].renderer = &test;
+        // RTT needed for RemoteNtpTimeEstimator for the receive stream.
+        video_receive_configs_[0].rtp.rtcp_xr.receiver_reference_time_report =
+            true;
+        // Start with realtime video.
+        GetVideoEncoderConfig()->content_type =
+            VideoEncoderConfig::ContentType::kRealtimeVideo;
+        // Second encoder config for the second part of the test uses
+        // screenshare
+        encoder_config_with_screenshare = GetVideoEncoderConfig()->Copy();
+        encoder_config_with_screenshare.content_type =
+            VideoEncoderConfig::ContentType::kScreen;
 
-    CreateVideoStreams();
-    CreateFrameGeneratorCapturer(kDefaultFramerate, kDefaultWidth,
-                                 kDefaultHeight);
-    Start();
-  });
+        CreateVideoStreams();
+        CreateFrameGeneratorCapturer(kDefaultFramerate, kDefaultWidth,
+                                     kDefaultHeight);
+        Start();
+      },
+      RTC_FROM_HERE);
 
   test.PerformTest();
 
   // Replace old send stream.
-  task_queue_.SendTask([this, &encoder_config_with_screenshare]() {
-    DestroyVideoSendStreams();
-    CreateVideoSendStream(encoder_config_with_screenshare);
-    SetVideoDegradation(DegradationPreference::BALANCED);
-    GetVideoSendStream()->Start();
-  });
+  SendTask(
+      &task_queue_,
+      [this, &encoder_config_with_screenshare]() {
+        DestroyVideoSendStreams();
+        CreateVideoSendStream(encoder_config_with_screenshare);
+        SetVideoDegradation(DegradationPreference::BALANCED);
+        GetVideoSendStream()->Start();
+      },
+      RTC_FROM_HERE);
 
   // Continue to run test but now with screenshare.
   test.PerformTest();
 
-  task_queue_.SendTask([this]() {
-    Stop();
-    DestroyStreams();
-    send_transport_.reset();
-    receive_transport_.reset();
-    DestroyCalls();
-  });
+  SendTask(
+      &task_queue_,
+      [this]() {
+        Stop();
+        DestroyStreams();
+        send_transport_.reset();
+        receive_transport_.reset();
+        DestroyCalls();
+      },
+      RTC_FROM_HERE);
 
   // Verify that stats have been updated for both screenshare and video.
   EXPECT_EQ(1, metrics::NumSamples("WebRTC.Video.EndToEndDelayInMs"));
@@ -717,40 +729,44 @@ TEST_F(StatsEndToEndTest, CallReportsRttForSender) {
   std::unique_ptr<test::DirectTransport> sender_transport;
   std::unique_ptr<test::DirectTransport> receiver_transport;
 
-  task_queue_.SendTask([this, &sender_transport, &receiver_transport]() {
-    BuiltInNetworkBehaviorConfig config;
-    config.queue_delay_ms = kSendDelayMs;
-    CreateCalls();
-    sender_transport = std::make_unique<test::DirectTransport>(
-        &task_queue_,
-        std::make_unique<FakeNetworkPipe>(
-            Clock::GetRealTimeClock(),
-            std::make_unique<SimulatedNetwork>(config)),
-        sender_call_.get(), payload_type_map_);
-    config.queue_delay_ms = kReceiveDelayMs;
-    receiver_transport = std::make_unique<test::DirectTransport>(
-        &task_queue_,
-        std::make_unique<FakeNetworkPipe>(
-            Clock::GetRealTimeClock(),
-            std::make_unique<SimulatedNetwork>(config)),
-        receiver_call_.get(), payload_type_map_);
-    sender_transport->SetReceiver(receiver_call_->Receiver());
-    receiver_transport->SetReceiver(sender_call_->Receiver());
+  SendTask(
+      &task_queue_,
+      [this, &sender_transport, &receiver_transport]() {
+        BuiltInNetworkBehaviorConfig config;
+        config.queue_delay_ms = kSendDelayMs;
+        CreateCalls();
+        sender_transport = std::make_unique<test::DirectTransport>(
+            &task_queue_,
+            std::make_unique<FakeNetworkPipe>(
+                Clock::GetRealTimeClock(),
+                std::make_unique<SimulatedNetwork>(config)),
+            sender_call_.get(), payload_type_map_);
+        config.queue_delay_ms = kReceiveDelayMs;
+        receiver_transport = std::make_unique<test::DirectTransport>(
+            &task_queue_,
+            std::make_unique<FakeNetworkPipe>(
+                Clock::GetRealTimeClock(),
+                std::make_unique<SimulatedNetwork>(config)),
+            receiver_call_.get(), payload_type_map_);
+        sender_transport->SetReceiver(receiver_call_->Receiver());
+        receiver_transport->SetReceiver(sender_call_->Receiver());
 
-    CreateSendConfig(1, 0, 0, sender_transport.get());
-    CreateMatchingReceiveConfigs(receiver_transport.get());
+        CreateSendConfig(1, 0, 0, sender_transport.get());
+        CreateMatchingReceiveConfigs(receiver_transport.get());
 
-    CreateVideoStreams();
-    CreateFrameGeneratorCapturer(kDefaultFramerate, kDefaultWidth,
-                                 kDefaultHeight);
-    Start();
-  });
+        CreateVideoStreams();
+        CreateFrameGeneratorCapturer(kDefaultFramerate, kDefaultWidth,
+                                     kDefaultHeight);
+        Start();
+      },
+      RTC_FROM_HERE);
 
   int64_t start_time_ms = clock_->TimeInMilliseconds();
   while (true) {
     Call::Stats stats;
-    task_queue_.SendTask(
-        [this, &stats]() { stats = sender_call_->GetStats(); });
+    SendTask(
+        &task_queue_, [this, &stats]() { stats = sender_call_->GetStats(); },
+        RTC_FROM_HERE);
     ASSERT_GE(start_time_ms + kDefaultTimeoutMs, clock_->TimeInMilliseconds())
         << "No RTT stats before timeout!";
     if (stats.rtt_ms != -1) {
@@ -763,12 +779,15 @@ TEST_F(StatsEndToEndTest, CallReportsRttForSender) {
     SleepMs(10);
   }
 
-  task_queue_.SendTask([this, &sender_transport, &receiver_transport]() {
-    Stop();
-    DestroyStreams();
-    sender_transport.reset();
-    receiver_transport.reset();
-    DestroyCalls();
-  });
+  SendTask(
+      &task_queue_,
+      [this, &sender_transport, &receiver_transport]() {
+        Stop();
+        DestroyStreams();
+        sender_transport.reset();
+        receiver_transport.reset();
+        DestroyCalls();
+      },
+      RTC_FROM_HERE);
 }
 }  // namespace webrtc

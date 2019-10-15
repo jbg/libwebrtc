@@ -16,6 +16,7 @@
 
 #include "api/task_queue/task_queue_test.h"
 #include "rtc_base/event.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "test/gtest.h"
 
 namespace webrtc {
@@ -320,13 +321,16 @@ TEST(DEPRECATED_SingleThreadedTaskQueueForTestingTest, SendTask) {
 
   std::atomic<bool> executed(false);
 
-  task_queue.SendTask([&executed]() {
-    // Intentionally delay, so that if SendTask didn't block, the sender thread
-    // would have time to read |executed|.
-    rtc::Event delay;
-    ASSERT_FALSE(delay.Wait(1000));
-    executed.store(true);
-  });
+  SendTask(
+      &task_queue,
+      [&executed]() {
+        // Intentionally delay, so that if SendTask didn't block, the sender
+        // thread would have time to read |executed|.
+        rtc::Event delay;
+        ASSERT_FALSE(delay.Wait(1000));
+        executed.store(true);
+      },
+      RTC_FROM_HERE);
 
   EXPECT_TRUE(executed);
 }

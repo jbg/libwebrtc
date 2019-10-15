@@ -24,6 +24,7 @@
 #include "modules/audio_mixer/audio_mixer_impl.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "test/fake_encoder.h"
 #include "test/testsupport/file_utils.h"
 
@@ -63,11 +64,14 @@ CallTest::~CallTest() {
   // cleanup). However, there are some tests that don't use the class that way
   // hence we need this special handling for cleaning up.
   if (task_queue_.IsRunning()) {
-    task_queue_.SendTask([this]() {
-      fake_send_audio_device_ = nullptr;
-      fake_recv_audio_device_ = nullptr;
-      video_sources_.clear();
-    });
+    SendTask(
+        &task_queue_,
+        [this]() {
+          fake_send_audio_device_ = nullptr;
+          fake_recv_audio_device_ = nullptr;
+          video_sources_.clear();
+        },
+        RTC_FROM_HERE);
   }
 }
 
@@ -95,119 +99,132 @@ void CallTest::RegisterRtpExtension(const RtpExtension& extension) {
 }
 
 void CallTest::RunBaseTest(BaseTest* test) {
-  task_queue_.SendTask([this, test]() {
-    num_video_streams_ = test->GetNumVideoStreams();
-    num_audio_streams_ = test->GetNumAudioStreams();
-    num_flexfec_streams_ = test->GetNumFlexfecStreams();
-    RTC_DCHECK(num_video_streams_ > 0 || num_audio_streams_ > 0);
-    Call::Config send_config(send_event_log_.get());
-    test->ModifySenderBitrateConfig(&send_config.bitrate_config);
-    if (num_audio_streams_ > 0) {
-      CreateFakeAudioDevices(test->CreateCapturer(), test->CreateRenderer());
-      test->OnFakeAudioDevicesCreated(fake_send_audio_device_.get(),
-                                      fake_recv_audio_device_.get());
-      apm_send_ = AudioProcessingBuilder().Create();
-      apm_recv_ = AudioProcessingBuilder().Create();
-      EXPECT_EQ(0, fake_send_audio_device_->Init());
-      EXPECT_EQ(0, fake_recv_audio_device_->Init());
-      AudioState::Config audio_state_config;
-      audio_state_config.audio_mixer = AudioMixerImpl::Create();
-      audio_state_config.audio_processing = apm_send_;
-      audio_state_config.audio_device_module = fake_send_audio_device_;
-      send_config.audio_state = AudioState::Create(audio_state_config);
-      fake_send_audio_device_->RegisterAudioCallback(
-          send_config.audio_state->audio_transport());
-    }
-    CreateSenderCall(send_config);
-    if (test->ShouldCreateReceivers()) {
-      Call::Config recv_config(recv_event_log_.get());
-      test->ModifyReceiverBitrateConfig(&recv_config.bitrate_config);
-      if (num_audio_streams_ > 0) {
-        AudioState::Config audio_state_config;
-        audio_state_config.audio_mixer = AudioMixerImpl::Create();
-        audio_state_config.audio_processing = apm_recv_;
-        audio_state_config.audio_device_module = fake_recv_audio_device_;
-        recv_config.audio_state = AudioState::Create(audio_state_config);
-        fake_recv_audio_device_->RegisterAudioCallback(
-            recv_config.audio_state->audio_transport());
-      }
-      CreateReceiverCall(recv_config);
-    }
-    test->OnCallsCreated(sender_call_.get(), receiver_call_.get());
-    receive_transport_ = test->CreateReceiveTransport(&task_queue_);
-    send_transport_ =
-        test->CreateSendTransport(&task_queue_, sender_call_.get());
+  SendTask(
+      &task_queue_,
+      [this, test]() {
+        num_video_streams_ = test->GetNumVideoStreams();
+        num_audio_streams_ = test->GetNumAudioStreams();
+        num_flexfec_streams_ = test->GetNumFlexfecStreams();
+        RTC_DCHECK(num_video_streams_ > 0 || num_audio_streams_ > 0);
+        Call::Config send_config(send_event_log_.get());
+        test->ModifySenderBitrateConfig(&send_config.bitrate_config);
+        if (num_audio_streams_ > 0) {
+          CreateFakeAudioDevices(test->CreateCapturer(),
+                                 test->CreateRenderer());
+          test->OnFakeAudioDevicesCreated(fake_send_audio_device_.get(),
+                                          fake_recv_audio_device_.get());
+          apm_send_ = AudioProcessingBuilder().Create();
+          apm_recv_ = AudioProcessingBuilder().Create();
+          EXPECT_EQ(0, fake_send_audio_device_->Init());
+          EXPECT_EQ(0, fake_recv_audio_device_->Init());
+          AudioState::Config audio_state_config;
+          audio_state_config.audio_mixer = AudioMixerImpl::Create();
+          audio_state_config.audio_processing = apm_send_;
+          audio_state_config.audio_device_module = fake_send_audio_device_;
+          send_config.audio_state = AudioState::Create(audio_state_config);
+          fake_send_audio_device_->RegisterAudioCallback(
+              send_config.audio_state->audio_transport());
+        }
+        CreateSenderCall(send_config);
+        if (test->ShouldCreateReceivers()) {
+          Call::Config recv_config(recv_event_log_.get());
+          test->ModifyReceiverBitrateConfig(&recv_config.bitrate_config);
+          if (num_audio_streams_ > 0) {
+            AudioState::Config audio_state_config;
+            audio_state_config.audio_mixer = AudioMixerImpl::Create();
+            audio_state_config.audio_processing = apm_recv_;
+            audio_state_config.audio_device_module = fake_recv_audio_device_;
+            recv_config.audio_state = AudioState::Create(audio_state_config);
+            fake_recv_audio_device_->RegisterAudioCallback(
+                recv_config.audio_state->audio_transport());
+          }
+          CreateReceiverCall(recv_config);
+        }
+        test->OnCallsCreated(sender_call_.get(), receiver_call_.get());
+        receive_transport_ = test->CreateReceiveTransport(&task_queue_);
+        send_transport_ =
+            test->CreateSendTransport(&task_queue_, sender_call_.get());
 
-    if (test->ShouldCreateReceivers()) {
-      send_transport_->SetReceiver(receiver_call_->Receiver());
-      receive_transport_->SetReceiver(sender_call_->Receiver());
-      if (num_video_streams_ > 0)
-        receiver_call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
-      if (num_audio_streams_ > 0)
-        receiver_call_->SignalChannelNetworkState(MediaType::AUDIO, kNetworkUp);
-    } else {
-      // Sender-only call delivers to itself.
-      send_transport_->SetReceiver(sender_call_->Receiver());
-      receive_transport_->SetReceiver(nullptr);
-    }
+        if (test->ShouldCreateReceivers()) {
+          send_transport_->SetReceiver(receiver_call_->Receiver());
+          receive_transport_->SetReceiver(sender_call_->Receiver());
+          if (num_video_streams_ > 0)
+            receiver_call_->SignalChannelNetworkState(MediaType::VIDEO,
+                                                      kNetworkUp);
+          if (num_audio_streams_ > 0)
+            receiver_call_->SignalChannelNetworkState(MediaType::AUDIO,
+                                                      kNetworkUp);
+        } else {
+          // Sender-only call delivers to itself.
+          send_transport_->SetReceiver(sender_call_->Receiver());
+          receive_transport_->SetReceiver(nullptr);
+        }
 
-    CreateSendConfig(num_video_streams_, num_audio_streams_,
-                     num_flexfec_streams_, send_transport_.get());
-    if (test->ShouldCreateReceivers()) {
-      CreateMatchingReceiveConfigs(receive_transport_.get());
-    }
-    if (num_video_streams_ > 0) {
-      test->ModifyVideoConfigs(GetVideoSendConfig(), &video_receive_configs_,
-                               GetVideoEncoderConfig());
-    }
-    if (num_audio_streams_ > 0) {
-      test->ModifyAudioConfigs(&audio_send_config_, &audio_receive_configs_);
-    }
-    if (num_flexfec_streams_ > 0) {
-      test->ModifyFlexfecConfigs(&flexfec_receive_configs_);
-    }
+        CreateSendConfig(num_video_streams_, num_audio_streams_,
+                         num_flexfec_streams_, send_transport_.get());
+        if (test->ShouldCreateReceivers()) {
+          CreateMatchingReceiveConfigs(receive_transport_.get());
+        }
+        if (num_video_streams_ > 0) {
+          test->ModifyVideoConfigs(GetVideoSendConfig(),
+                                   &video_receive_configs_,
+                                   GetVideoEncoderConfig());
+        }
+        if (num_audio_streams_ > 0) {
+          test->ModifyAudioConfigs(&audio_send_config_,
+                                   &audio_receive_configs_);
+        }
+        if (num_flexfec_streams_ > 0) {
+          test->ModifyFlexfecConfigs(&flexfec_receive_configs_);
+        }
 
-    if (num_flexfec_streams_ > 0) {
-      CreateFlexfecStreams();
-      test->OnFlexfecStreamsCreated(flexfec_receive_streams_);
-    }
-    if (num_video_streams_ > 0) {
-      CreateVideoStreams();
-      test->OnVideoStreamsCreated(GetVideoSendStream(), video_receive_streams_);
-    }
-    if (num_audio_streams_ > 0) {
-      CreateAudioStreams();
-      test->OnAudioStreamsCreated(audio_send_stream_, audio_receive_streams_);
-    }
+        if (num_flexfec_streams_ > 0) {
+          CreateFlexfecStreams();
+          test->OnFlexfecStreamsCreated(flexfec_receive_streams_);
+        }
+        if (num_video_streams_ > 0) {
+          CreateVideoStreams();
+          test->OnVideoStreamsCreated(GetVideoSendStream(),
+                                      video_receive_streams_);
+        }
+        if (num_audio_streams_ > 0) {
+          CreateAudioStreams();
+          test->OnAudioStreamsCreated(audio_send_stream_,
+                                      audio_receive_streams_);
+        }
 
-    if (num_video_streams_ > 0) {
-      int width = kDefaultWidth;
-      int height = kDefaultHeight;
-      int frame_rate = kDefaultFramerate;
-      test->ModifyVideoCaptureStartResolution(&width, &height, &frame_rate);
-      test->ModifyVideoDegradationPreference(&degradation_preference_);
-      CreateFrameGeneratorCapturer(frame_rate, width, height);
-      test->OnFrameGeneratorCapturerCreated(frame_generator_capturer_);
-    }
+        if (num_video_streams_ > 0) {
+          int width = kDefaultWidth;
+          int height = kDefaultHeight;
+          int frame_rate = kDefaultFramerate;
+          test->ModifyVideoCaptureStartResolution(&width, &height, &frame_rate);
+          test->ModifyVideoDegradationPreference(&degradation_preference_);
+          CreateFrameGeneratorCapturer(frame_rate, width, height);
+          test->OnFrameGeneratorCapturerCreated(frame_generator_capturer_);
+        }
 
-    Start();
-  });
+        Start();
+      },
+      RTC_FROM_HERE);
 
   test->PerformTest();
 
-  task_queue_.SendTask([this, test]() {
-    Stop();
-    test->OnStreamsStopped();
-    DestroyStreams();
-    send_transport_.reset();
-    receive_transport_.reset();
+  SendTask(
+      &task_queue_,
+      [this, test]() {
+        Stop();
+        test->OnStreamsStopped();
+        DestroyStreams();
+        send_transport_.reset();
+        receive_transport_.reset();
 
-    frame_generator_capturer_ = nullptr;
-    DestroyCalls();
+        frame_generator_capturer_ = nullptr;
+        DestroyCalls();
 
-    fake_send_audio_device_ = nullptr;
-    fake_recv_audio_device_ = nullptr;
-  });
+        fake_send_audio_device_ = nullptr;
+        fake_recv_audio_device_ = nullptr;
+      },
+      RTC_FROM_HERE);
 
   // To avoid a race condition during destruction, which can happen while
   // a derived class is being destructed but pending tasks might still run

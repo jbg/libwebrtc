@@ -41,6 +41,7 @@
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
 #include "modules/video_coding/utility/ivf_file_writer.h"
 #include "rtc_base/strings/string_builder.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "test/platform_video_capturer.h"
 #include "test/run_loop.h"
 #include "test/testsupport/file_utils.h"
@@ -1254,19 +1255,22 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
     recv_event_log_ = std::make_unique<RtcEventLogNull>();
   }
 
-  task_queue_.SendTask([this, &params, &send_transport, &recv_transport]() {
-    Call::Config send_call_config(send_event_log_.get());
-    Call::Config recv_call_config(recv_event_log_.get());
-    send_call_config.bitrate_config = params.call.call_bitrate_config;
-    recv_call_config.bitrate_config = params.call.call_bitrate_config;
-    if (params_.audio.enabled)
-      InitializeAudioDevice(&send_call_config, &recv_call_config,
-                            params_.audio.use_real_adm);
+  SendTask(
+      &task_queue_,
+      [this, &params, &send_transport, &recv_transport]() {
+        Call::Config send_call_config(send_event_log_.get());
+        Call::Config recv_call_config(recv_event_log_.get());
+        send_call_config.bitrate_config = params.call.call_bitrate_config;
+        recv_call_config.bitrate_config = params.call.call_bitrate_config;
+        if (params_.audio.enabled)
+          InitializeAudioDevice(&send_call_config, &recv_call_config,
+                                params_.audio.use_real_adm);
 
-    CreateCalls(send_call_config, recv_call_config);
-    send_transport = CreateSendTransport();
-    recv_transport = CreateReceiveTransport();
-  });
+        CreateCalls(send_call_config, recv_call_config);
+        send_transport = CreateSendTransport();
+        recv_transport = CreateReceiveTransport();
+      },
+      RTC_FROM_HERE);
 
   std::string graph_title = params_.analyzer.graph_title;
   if (graph_title.empty())
@@ -1286,67 +1290,74 @@ void VideoQualityTest::RunWithAnalyzer(const Params& params) {
       is_quick_test_enabled, clock_, params_.logging.rtp_dump_name,
       &task_queue_);
 
-  task_queue_.SendTask([&]() {
-    analyzer_->SetCall(sender_call_.get());
-    analyzer_->SetReceiver(receiver_call_->Receiver());
-    send_transport->SetReceiver(analyzer_.get());
-    recv_transport->SetReceiver(sender_call_->Receiver());
+  SendTask(
+      &task_queue_,
+      [&]() {
+        analyzer_->SetCall(sender_call_.get());
+        analyzer_->SetReceiver(receiver_call_->Receiver());
+        send_transport->SetReceiver(analyzer_.get());
+        recv_transport->SetReceiver(sender_call_->Receiver());
 
-    SetupVideo(analyzer_.get(), recv_transport.get());
-    SetupThumbnails(analyzer_.get(), recv_transport.get());
-    video_receive_configs_[params_.ss[0].selected_stream].renderer =
-        analyzer_.get();
+        SetupVideo(analyzer_.get(), recv_transport.get());
+        SetupThumbnails(analyzer_.get(), recv_transport.get());
+        video_receive_configs_[params_.ss[0].selected_stream].renderer =
+            analyzer_.get();
 
-    CreateFlexfecStreams();
-    CreateVideoStreams();
-    analyzer_->SetSendStream(video_send_streams_[0]);
-    analyzer_->SetReceiveStream(
-        video_receive_streams_[params_.ss[0].selected_stream]);
+        CreateFlexfecStreams();
+        CreateVideoStreams();
+        analyzer_->SetSendStream(video_send_streams_[0]);
+        analyzer_->SetReceiveStream(
+            video_receive_streams_[params_.ss[0].selected_stream]);
 
-    GetVideoSendStream()->SetSource(analyzer_->OutputInterface(),
-                                    degradation_preference_);
-    SetupThumbnailCapturers(params_.call.num_thumbnails);
-    for (size_t i = 0; i < thumbnail_send_streams_.size(); ++i) {
-      thumbnail_send_streams_[i]->SetSource(thumbnail_capturers_[i].get(),
-                                            degradation_preference_);
-    }
-
-    CreateCapturers();
-
-    analyzer_->SetSource(video_sources_[0].get(), true);
-
-    for (size_t video_idx = 1; video_idx < num_video_streams_; ++video_idx) {
-      video_send_streams_[video_idx]->SetSource(video_sources_[video_idx].get(),
+        GetVideoSendStream()->SetSource(analyzer_->OutputInterface(),
+                                        degradation_preference_);
+        SetupThumbnailCapturers(params_.call.num_thumbnails);
+        for (size_t i = 0; i < thumbnail_send_streams_.size(); ++i) {
+          thumbnail_send_streams_[i]->SetSource(thumbnail_capturers_[i].get(),
                                                 degradation_preference_);
-    }
+        }
 
-    if (params_.audio.enabled) {
-      SetupAudio(send_transport.get());
-      StartAudioStreams();
-      analyzer_->SetAudioReceiveStream(audio_receive_streams_[0]);
-    }
-    StartVideoStreams();
-    StartThumbnails();
-    analyzer_->StartMeasuringCpuProcessTime();
-  });
+        CreateCapturers();
+
+        analyzer_->SetSource(video_sources_[0].get(), true);
+
+        for (size_t video_idx = 1; video_idx < num_video_streams_;
+             ++video_idx) {
+          video_send_streams_[video_idx]->SetSource(
+              video_sources_[video_idx].get(), degradation_preference_);
+        }
+
+        if (params_.audio.enabled) {
+          SetupAudio(send_transport.get());
+          StartAudioStreams();
+          analyzer_->SetAudioReceiveStream(audio_receive_streams_[0]);
+        }
+        StartVideoStreams();
+        StartThumbnails();
+        analyzer_->StartMeasuringCpuProcessTime();
+      },
+      RTC_FROM_HERE);
 
   analyzer_->Wait();
 
-  task_queue_.SendTask([&]() {
-    StopThumbnails();
-    Stop();
+  SendTask(
+      &task_queue_,
+      [&]() {
+        StopThumbnails();
+        Stop();
 
-    DestroyStreams();
-    DestroyThumbnailStreams();
+        DestroyStreams();
+        DestroyThumbnailStreams();
 
-    if (graph_data_output_file)
-      fclose(graph_data_output_file);
+        if (graph_data_output_file)
+          fclose(graph_data_output_file);
 
-    send_transport.reset();
-    recv_transport.reset();
+        send_transport.reset();
+        recv_transport.reset();
 
-    DestroyCalls();
-  });
+        DestroyCalls();
+      },
+      RTC_FROM_HERE);
   analyzer_ = nullptr;
 }
 
@@ -1475,107 +1486,117 @@ void VideoQualityTest::RunWithRenderers(const Params& params) {
     recv_event_log_ = std::make_unique<RtcEventLogNull>();
   }
 
-  task_queue_.SendTask([&]() {
-    params_ = params;
-    CheckParamsAndInjectionComponents();
+  SendTask(
+      &task_queue_,
+      [&]() {
+        params_ = params;
+        CheckParamsAndInjectionComponents();
 
-    // TODO(ivica): Remove bitrate_config and use the default Call::Config(), to
-    // match the full stack tests.
-    Call::Config send_call_config(send_event_log_.get());
-    send_call_config.bitrate_config = params_.call.call_bitrate_config;
-    Call::Config recv_call_config(recv_event_log_.get());
+        // TODO(ivica): Remove bitrate_config and use the default
+        // Call::Config(), to match the full stack tests.
+        Call::Config send_call_config(send_event_log_.get());
+        send_call_config.bitrate_config = params_.call.call_bitrate_config;
+        Call::Config recv_call_config(recv_event_log_.get());
 
-    if (params_.audio.enabled)
-      InitializeAudioDevice(&send_call_config, &recv_call_config,
-                            params_.audio.use_real_adm);
+        if (params_.audio.enabled)
+          InitializeAudioDevice(&send_call_config, &recv_call_config,
+                                params_.audio.use_real_adm);
 
-    CreateCalls(send_call_config, recv_call_config);
+        CreateCalls(send_call_config, recv_call_config);
 
-    // TODO(minyue): consider if this is a good transport even for audio only
-    // calls.
-    send_transport = CreateSendTransport();
+        // TODO(minyue): consider if this is a good transport even for audio
+        // only calls.
+        send_transport = CreateSendTransport();
 
-    recv_transport = CreateReceiveTransport();
+        recv_transport = CreateReceiveTransport();
 
-    // TODO(ivica): Use two calls to be able to merge with RunWithAnalyzer or at
-    // least share as much code as possible. That way this test would also match
-    // the full stack tests better.
-    send_transport->SetReceiver(receiver_call_->Receiver());
-    recv_transport->SetReceiver(sender_call_->Receiver());
+        // TODO(ivica): Use two calls to be able to merge with RunWithAnalyzer
+        // or at least share as much code as possible. That way this test would
+        // also match the full stack tests better.
+        send_transport->SetReceiver(receiver_call_->Receiver());
+        recv_transport->SetReceiver(sender_call_->Receiver());
 
-    if (params_.video[0].enabled) {
-      // Create video renderers.
-      SetupVideo(send_transport.get(), recv_transport.get());
-      size_t num_streams_processed = 0;
-      for (size_t video_idx = 0; video_idx < num_video_streams_; ++video_idx) {
-        const size_t selected_stream_id = params_.ss[video_idx].selected_stream;
-        const size_t num_streams = params_.ss[video_idx].streams.size();
-        if (selected_stream_id == num_streams) {
-          for (size_t stream_id = 0; stream_id < num_streams; ++stream_id) {
-            rtc::StringBuilder oss;
-            oss << "Loopback Video #" << video_idx << " - Stream #"
-                << static_cast<int>(stream_id);
-            loopback_renderers.emplace_back(test::VideoRenderer::Create(
-                oss.str().c_str(),
-                params_.ss[video_idx].streams[stream_id].width,
-                params_.ss[video_idx].streams[stream_id].height));
-            video_receive_configs_[stream_id + num_streams_processed].renderer =
-                loopback_renderers.back().get();
-            if (params_.audio.enabled && params_.audio.sync_video)
-              video_receive_configs_[stream_id + num_streams_processed]
-                  .sync_group = kSyncGroup;
+        if (params_.video[0].enabled) {
+          // Create video renderers.
+          SetupVideo(send_transport.get(), recv_transport.get());
+          size_t num_streams_processed = 0;
+          for (size_t video_idx = 0; video_idx < num_video_streams_;
+               ++video_idx) {
+            const size_t selected_stream_id =
+                params_.ss[video_idx].selected_stream;
+            const size_t num_streams = params_.ss[video_idx].streams.size();
+            if (selected_stream_id == num_streams) {
+              for (size_t stream_id = 0; stream_id < num_streams; ++stream_id) {
+                rtc::StringBuilder oss;
+                oss << "Loopback Video #" << video_idx << " - Stream #"
+                    << static_cast<int>(stream_id);
+                loopback_renderers.emplace_back(test::VideoRenderer::Create(
+                    oss.str().c_str(),
+                    params_.ss[video_idx].streams[stream_id].width,
+                    params_.ss[video_idx].streams[stream_id].height));
+                video_receive_configs_[stream_id + num_streams_processed]
+                    .renderer = loopback_renderers.back().get();
+                if (params_.audio.enabled && params_.audio.sync_video)
+                  video_receive_configs_[stream_id + num_streams_processed]
+                      .sync_group = kSyncGroup;
+              }
+            } else {
+              rtc::StringBuilder oss;
+              oss << "Loopback Video #" << video_idx;
+              loopback_renderers.emplace_back(test::VideoRenderer::Create(
+                  oss.str().c_str(),
+                  params_.ss[video_idx].streams[selected_stream_id].width,
+                  params_.ss[video_idx].streams[selected_stream_id].height));
+              video_receive_configs_[selected_stream_id + num_streams_processed]
+                  .renderer = loopback_renderers.back().get();
+              if (params_.audio.enabled && params_.audio.sync_video)
+                video_receive_configs_[num_streams_processed +
+                                       selected_stream_id]
+                    .sync_group = kSyncGroup;
+            }
+            num_streams_processed += num_streams;
           }
-        } else {
-          rtc::StringBuilder oss;
-          oss << "Loopback Video #" << video_idx;
-          loopback_renderers.emplace_back(test::VideoRenderer::Create(
-              oss.str().c_str(),
-              params_.ss[video_idx].streams[selected_stream_id].width,
-              params_.ss[video_idx].streams[selected_stream_id].height));
-          video_receive_configs_[selected_stream_id + num_streams_processed]
-              .renderer = loopback_renderers.back().get();
-          if (params_.audio.enabled && params_.audio.sync_video)
-            video_receive_configs_[num_streams_processed + selected_stream_id]
-                .sync_group = kSyncGroup;
+          CreateFlexfecStreams();
+          CreateVideoStreams();
+
+          CreateCapturers();
+          if (params_.video[0].enabled) {
+            // Create local preview
+            local_preview.reset(test::VideoRenderer::Create(
+                "Local Preview", params_.video[0].width,
+                params_.video[0].height));
+
+            video_sources_[0]->AddOrUpdateSink(local_preview.get(),
+                                               rtc::VideoSinkWants());
+          }
+          ConnectVideoSourcesToStreams();
         }
-        num_streams_processed += num_streams;
-      }
-      CreateFlexfecStreams();
-      CreateVideoStreams();
 
-      CreateCapturers();
-      if (params_.video[0].enabled) {
-        // Create local preview
-        local_preview.reset(test::VideoRenderer::Create(
-            "Local Preview", params_.video[0].width, params_.video[0].height));
+        if (params_.audio.enabled) {
+          SetupAudio(send_transport.get());
+        }
 
-        video_sources_[0]->AddOrUpdateSink(local_preview.get(),
-                                           rtc::VideoSinkWants());
-      }
-      ConnectVideoSourcesToStreams();
-    }
-
-    if (params_.audio.enabled) {
-      SetupAudio(send_transport.get());
-    }
-
-    Start();
-  });
+        Start();
+      },
+      RTC_FROM_HERE);
 
   test::PressEnterToContinue(task_queue_);
 
-  task_queue_.SendTask([&]() {
-    Stop();
-    DestroyStreams();
+  SendTask(
+      &task_queue_,
+      [&]() {
+        Stop();
+        DestroyStreams();
 
-    send_transport.reset();
-    recv_transport.reset();
+        send_transport.reset();
+        recv_transport.reset();
 
-    local_preview.reset();
-    loopback_renderers.clear();
+        local_preview.reset();
+        loopback_renderers.clear();
 
-    DestroyCalls();
-  });
+        DestroyCalls();
+      },
+      RTC_FROM_HERE);
 }
 
 }  // namespace webrtc

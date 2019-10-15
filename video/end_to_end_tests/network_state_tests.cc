@@ -14,6 +14,7 @@
 #include "api/video_codecs/video_encoder.h"
 #include "call/fake_network_pipe.h"
 #include "call/simulated_network.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "system_wrappers/include/sleep.h"
 #include "test/call_test.h"
 #include "test/fake_encoder.h"
@@ -87,27 +88,34 @@ void NetworkStateEndToEndTest::VerifyNewVideoSendStreamsRespectNetworkState(
     Transport* transport) {
   test::VideoEncoderProxyFactory encoder_factory(encoder);
 
-  task_queue_.SendTask([this, network_to_bring_up, &encoder_factory,
-                        transport]() {
-    CreateSenderCall(Call::Config(send_event_log_.get()));
-    sender_call_->SignalChannelNetworkState(network_to_bring_up, kNetworkUp);
+  SendTask(
+      &task_queue_,
+      [this, network_to_bring_up, &encoder_factory, transport]() {
+        CreateSenderCall(Call::Config(send_event_log_.get()));
+        sender_call_->SignalChannelNetworkState(network_to_bring_up,
+                                                kNetworkUp);
 
-    CreateSendConfig(1, 0, 0, transport);
-    GetVideoSendConfig()->encoder_settings.encoder_factory = &encoder_factory;
-    CreateVideoStreams();
-    CreateFrameGeneratorCapturer(kDefaultFramerate, kDefaultWidth,
-                                 kDefaultHeight);
+        CreateSendConfig(1, 0, 0, transport);
+        GetVideoSendConfig()->encoder_settings.encoder_factory =
+            &encoder_factory;
+        CreateVideoStreams();
+        CreateFrameGeneratorCapturer(kDefaultFramerate, kDefaultWidth,
+                                     kDefaultHeight);
 
-    Start();
-  });
+        Start();
+      },
+      RTC_FROM_HERE);
 
   SleepMs(kSilenceTimeoutMs);
 
-  task_queue_.SendTask([this]() {
-    Stop();
-    DestroyStreams();
-    DestroyCalls();
-  });
+  SendTask(
+      &task_queue_,
+      [this]() {
+        Stop();
+        DestroyStreams();
+        DestroyCalls();
+      },
+      RTC_FROM_HERE);
 }
 
 void NetworkStateEndToEndTest::VerifyNewVideoReceiveStreamsRespectNetworkState(
@@ -115,33 +123,39 @@ void NetworkStateEndToEndTest::VerifyNewVideoReceiveStreamsRespectNetworkState(
     Transport* transport) {
   std::unique_ptr<test::DirectTransport> sender_transport;
 
-  task_queue_.SendTask([this, &sender_transport, network_to_bring_up,
-                        transport]() {
-    CreateCalls();
-    receiver_call_->SignalChannelNetworkState(network_to_bring_up, kNetworkUp);
-    sender_transport = std::make_unique<test::DirectTransport>(
-        &task_queue_,
-        std::make_unique<FakeNetworkPipe>(
-            Clock::GetRealTimeClock(),
-            std::make_unique<SimulatedNetwork>(BuiltInNetworkBehaviorConfig())),
-        sender_call_.get(), payload_type_map_);
-    sender_transport->SetReceiver(receiver_call_->Receiver());
-    CreateSendConfig(1, 0, 0, sender_transport.get());
-    CreateMatchingReceiveConfigs(transport);
-    CreateVideoStreams();
-    CreateFrameGeneratorCapturer(kDefaultFramerate, kDefaultWidth,
-                                 kDefaultHeight);
-    Start();
-  });
+  SendTask(
+      &task_queue_,
+      [this, &sender_transport, network_to_bring_up, transport]() {
+        CreateCalls();
+        receiver_call_->SignalChannelNetworkState(network_to_bring_up,
+                                                  kNetworkUp);
+        sender_transport = std::make_unique<test::DirectTransport>(
+            &task_queue_,
+            std::make_unique<FakeNetworkPipe>(
+                Clock::GetRealTimeClock(), std::make_unique<SimulatedNetwork>(
+                                               BuiltInNetworkBehaviorConfig())),
+            sender_call_.get(), payload_type_map_);
+        sender_transport->SetReceiver(receiver_call_->Receiver());
+        CreateSendConfig(1, 0, 0, sender_transport.get());
+        CreateMatchingReceiveConfigs(transport);
+        CreateVideoStreams();
+        CreateFrameGeneratorCapturer(kDefaultFramerate, kDefaultWidth,
+                                     kDefaultHeight);
+        Start();
+      },
+      RTC_FROM_HERE);
 
   SleepMs(kSilenceTimeoutMs);
 
-  task_queue_.SendTask([this, &sender_transport]() {
-    Stop();
-    DestroyStreams();
-    sender_transport.reset();
-    DestroyCalls();
-  });
+  SendTask(
+      &task_queue_,
+      [this, &sender_transport]() {
+        Stop();
+        DestroyStreams();
+        sender_transport.reset();
+        DestroyCalls();
+      },
+      RTC_FROM_HERE);
 }
 
 TEST_F(NetworkStateEndToEndTest, RespectsNetworkState) {
@@ -217,56 +231,65 @@ TEST_F(NetworkStateEndToEndTest, RespectsNetworkState) {
       EXPECT_TRUE(encoded_frames_.Wait(kDefaultTimeoutMs))
           << "No frames received by the encoder.";
 
-      task_queue_->SendTask([this]() {
-        // Wait for packets from both sender/receiver.
-        WaitForPacketsOrSilence(false, false);
+      SendTask(
+          task_queue_,
+          [this]() {
+            // Wait for packets from both sender/receiver.
+            WaitForPacketsOrSilence(false, false);
 
-        // Sender-side network down for audio; there should be no effect on
-        // video
-        sender_call_->SignalChannelNetworkState(MediaType::AUDIO, kNetworkDown);
-        WaitForPacketsOrSilence(false, false);
+            // Sender-side network down for audio; there should be no effect on
+            // video
+            sender_call_->SignalChannelNetworkState(MediaType::AUDIO,
+                                                    kNetworkDown);
+            WaitForPacketsOrSilence(false, false);
 
-        // Receiver-side network down for audio; no change expected
-        receiver_call_->SignalChannelNetworkState(MediaType::AUDIO,
-                                                  kNetworkDown);
-        WaitForPacketsOrSilence(false, false);
+            // Receiver-side network down for audio; no change expected
+            receiver_call_->SignalChannelNetworkState(MediaType::AUDIO,
+                                                      kNetworkDown);
+            WaitForPacketsOrSilence(false, false);
 
-        // Sender-side network down.
-        sender_call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkDown);
-        {
-          rtc::CritScope lock(&test_crit_);
-          // After network goes down we shouldn't be encoding more frames.
-          sender_state_ = kNetworkDown;
-        }
-        // Wait for receiver-packets and no sender packets.
-        WaitForPacketsOrSilence(true, false);
+            // Sender-side network down.
+            sender_call_->SignalChannelNetworkState(MediaType::VIDEO,
+                                                    kNetworkDown);
+            {
+              rtc::CritScope lock(&test_crit_);
+              // After network goes down we shouldn't be encoding more frames.
+              sender_state_ = kNetworkDown;
+            }
+            // Wait for receiver-packets and no sender packets.
+            WaitForPacketsOrSilence(true, false);
 
-        // Receiver-side network down.
-        receiver_call_->SignalChannelNetworkState(MediaType::VIDEO,
-                                                  kNetworkDown);
-        WaitForPacketsOrSilence(true, true);
+            // Receiver-side network down.
+            receiver_call_->SignalChannelNetworkState(MediaType::VIDEO,
+                                                      kNetworkDown);
+            WaitForPacketsOrSilence(true, true);
 
-        // Network up for audio for both sides; video is still not expected to
-        // start
-        sender_call_->SignalChannelNetworkState(MediaType::AUDIO, kNetworkUp);
-        receiver_call_->SignalChannelNetworkState(MediaType::AUDIO, kNetworkUp);
-        WaitForPacketsOrSilence(true, true);
+            // Network up for audio for both sides; video is still not expected
+            // to start
+            sender_call_->SignalChannelNetworkState(MediaType::AUDIO,
+                                                    kNetworkUp);
+            receiver_call_->SignalChannelNetworkState(MediaType::AUDIO,
+                                                      kNetworkUp);
+            WaitForPacketsOrSilence(true, true);
 
-        // Network back up again for both.
-        {
-          rtc::CritScope lock(&test_crit_);
-          // It's OK to encode frames again, as we're about to bring up the
-          // network.
-          sender_state_ = kNetworkUp;
-        }
-        sender_call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
-        receiver_call_->SignalChannelNetworkState(MediaType::VIDEO, kNetworkUp);
-        WaitForPacketsOrSilence(false, false);
+            // Network back up again for both.
+            {
+              rtc::CritScope lock(&test_crit_);
+              // It's OK to encode frames again, as we're about to bring up the
+              // network.
+              sender_state_ = kNetworkUp;
+            }
+            sender_call_->SignalChannelNetworkState(MediaType::VIDEO,
+                                                    kNetworkUp);
+            receiver_call_->SignalChannelNetworkState(MediaType::VIDEO,
+                                                      kNetworkUp);
+            WaitForPacketsOrSilence(false, false);
 
-        // TODO(skvlad): add tests to verify that the audio streams are stopped
-        // when the network goes down for audio once the workaround in
-        // paced_sender.cc is removed.
-      });
+            // TODO(skvlad): add tests to verify that the audio streams are
+            // stopped when the network goes down for audio once the workaround
+            // in paced_sender.cc is removed.
+          },
+          RTC_FROM_HERE);
     }
 
     int32_t Encode(const VideoFrame& input_image,

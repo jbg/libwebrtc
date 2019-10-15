@@ -18,6 +18,7 @@
 #include "modules/video_coding/codecs/h264/include/h264.h"
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "test/call_test.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
@@ -127,33 +128,41 @@ class FrameObserver : public test::RtpRtcpObserver,
 class MultiCodecReceiveTest : public test::CallTest {
  public:
   MultiCodecReceiveTest() {
-    task_queue_.SendTask([this]() {
-      CreateCalls();
+    SendTask(
+        &task_queue_,
+        [this]() {
+          CreateCalls();
 
-      send_transport_.reset(new test::PacketTransport(
-          &task_queue_, sender_call_.get(), &observer_,
-          test::PacketTransport::kSender, kPayloadTypeMap,
-          std::make_unique<FakeNetworkPipe>(
-              Clock::GetRealTimeClock(), std::make_unique<SimulatedNetwork>(
-                                             BuiltInNetworkBehaviorConfig()))));
-      send_transport_->SetReceiver(receiver_call_->Receiver());
+          send_transport_.reset(new test::PacketTransport(
+              &task_queue_, sender_call_.get(), &observer_,
+              test::PacketTransport::kSender, kPayloadTypeMap,
+              std::make_unique<FakeNetworkPipe>(
+                  Clock::GetRealTimeClock(),
+                  std::make_unique<SimulatedNetwork>(
+                      BuiltInNetworkBehaviorConfig()))));
+          send_transport_->SetReceiver(receiver_call_->Receiver());
 
-      receive_transport_.reset(new test::PacketTransport(
-          &task_queue_, receiver_call_.get(), &observer_,
-          test::PacketTransport::kReceiver, kPayloadTypeMap,
-          std::make_unique<FakeNetworkPipe>(
-              Clock::GetRealTimeClock(), std::make_unique<SimulatedNetwork>(
-                                             BuiltInNetworkBehaviorConfig()))));
-      receive_transport_->SetReceiver(sender_call_->Receiver());
-    });
+          receive_transport_.reset(new test::PacketTransport(
+              &task_queue_, receiver_call_.get(), &observer_,
+              test::PacketTransport::kReceiver, kPayloadTypeMap,
+              std::make_unique<FakeNetworkPipe>(
+                  Clock::GetRealTimeClock(),
+                  std::make_unique<SimulatedNetwork>(
+                      BuiltInNetworkBehaviorConfig()))));
+          receive_transport_->SetReceiver(sender_call_->Receiver());
+        },
+        RTC_FROM_HERE);
   }
 
   virtual ~MultiCodecReceiveTest() {
-    task_queue_.SendTask([this]() {
-      send_transport_.reset();
-      receive_transport_.reset();
-      DestroyCalls();
-    });
+    SendTask(
+        &task_queue_,
+        [this]() {
+          send_transport_.reset();
+          receive_transport_.reset();
+          DestroyCalls();
+        },
+        RTC_FROM_HERE);
   }
 
   struct CodecConfig {
@@ -208,39 +217,48 @@ void MultiCodecReceiveTest::RunTestWithCodecs(
   EXPECT_TRUE(!configs.empty());
 
   // Create and start call.
-  task_queue_.SendTask([this, &configs]() {
-    CreateSendConfig(1, 0, 0, send_transport_.get());
-    ConfigureEncoder(configs[0]);
-    CreateMatchingReceiveConfigs(receive_transport_.get());
-    video_receive_configs_[0].renderer = &observer_;
-    // Disable to avoid post-decode frame dropping in VideoRenderFrames.
-    video_receive_configs_[0].enable_prerenderer_smoothing = false;
-    ConfigureDecoders(configs);
-    CreateVideoStreams();
-    CreateFrameGeneratorCapturer(kFps, kWidth, kHeight);
-    Start();
-  });
+  SendTask(
+      &task_queue_,
+      [this, &configs]() {
+        CreateSendConfig(1, 0, 0, send_transport_.get());
+        ConfigureEncoder(configs[0]);
+        CreateMatchingReceiveConfigs(receive_transport_.get());
+        video_receive_configs_[0].renderer = &observer_;
+        // Disable to avoid post-decode frame dropping in VideoRenderFrames.
+        video_receive_configs_[0].enable_prerenderer_smoothing = false;
+        ConfigureDecoders(configs);
+        CreateVideoStreams();
+        CreateFrameGeneratorCapturer(kFps, kWidth, kHeight);
+        Start();
+      },
+      RTC_FROM_HERE);
   EXPECT_TRUE(observer_.Wait()) << "Timed out waiting for frames.";
 
   for (size_t i = 1; i < configs.size(); ++i) {
     // Recreate VideoSendStream with new config (codec, temporal layers).
-    task_queue_.SendTask([this, i, &configs]() {
-      DestroyVideoSendStreams();
-      observer_.Reset(PayloadNameToPayloadType(configs[i].payload_name));
+    SendTask(
+        &task_queue_,
+        [this, i, &configs]() {
+          DestroyVideoSendStreams();
+          observer_.Reset(PayloadNameToPayloadType(configs[i].payload_name));
 
-      ConfigureEncoder(configs[i]);
-      CreateVideoSendStreams();
-      GetVideoSendStream()->Start();
-      CreateFrameGeneratorCapturer(kFps, kWidth / 2, kHeight / 2);
-      ConnectVideoSourcesToStreams();
-    });
+          ConfigureEncoder(configs[i]);
+          CreateVideoSendStreams();
+          GetVideoSendStream()->Start();
+          CreateFrameGeneratorCapturer(kFps, kWidth / 2, kHeight / 2);
+          ConnectVideoSourcesToStreams();
+        },
+        RTC_FROM_HERE);
     EXPECT_TRUE(observer_.Wait()) << "Timed out waiting for frames.";
   }
 
-  task_queue_.SendTask([this]() {
-    Stop();
-    DestroyStreams();
-  });
+  SendTask(
+      &task_queue_,
+      [this]() {
+        Stop();
+        DestroyStreams();
+      },
+      RTC_FROM_HERE);
 }
 
 TEST_F(MultiCodecReceiveTest, SingleStreamReceivesVp8Vp9) {

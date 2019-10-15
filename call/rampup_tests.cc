@@ -23,6 +23,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/string_encode.h"
+#include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/time_utils.h"
 #include "test/encoder_settings.h"
 #include "test/field_trial.h"
@@ -93,14 +94,18 @@ RampUpTester::RampUpTester(
 
 RampUpTester::~RampUpTester() {
   // Special case for WebRTC-QuickPerfTest/Enabled/
-  task_queue_->SendTask([this]() {
-    if (pending_task_ !=
-        static_cast<test::DEPRECATED_SingleThreadedTaskQueueForTesting::TaskId>(
-            -1)) {
-      task_queue_->CancelTask(pending_task_);
-      pending_task_ = -1;
-    }
-  });
+  SendTask(
+      task_queue_,
+      [this]() {
+        if (pending_task_ !=
+            static_cast<
+                test::DEPRECATED_SingleThreadedTaskQueueForTesting::TaskId>(
+                -1)) {
+          task_queue_->CancelTask(pending_task_);
+          pending_task_ = -1;
+        }
+      },
+      RTC_FROM_HERE);
 }
 
 void RampUpTester::ModifySenderBitrateConfig(
@@ -380,14 +385,18 @@ void RampUpTester::TriggerTestDone() {
 
   // Stop polling stats.
   // Corner case for field_trials=WebRTC-QuickPerfTest/Enabled/
-  task_queue_->SendTask([this]() {
-    if (pending_task_ !=
-        static_cast<test::DEPRECATED_SingleThreadedTaskQueueForTesting::TaskId>(
-            -1)) {
-      task_queue_->CancelTask(pending_task_);
-      pending_task_ = -1;
-    }
-  });
+  SendTask(
+      task_queue_,
+      [this]() {
+        if (pending_task_ !=
+            static_cast<
+                test::DEPRECATED_SingleThreadedTaskQueueForTesting::TaskId>(
+                -1)) {
+          task_queue_->CancelTask(pending_task_);
+          pending_task_ = -1;
+        }
+      },
+      RTC_FROM_HERE);
 
   VideoSendStream::Stats send_stats = send_stream_->GetStats();
   send_stream_ = nullptr;  // To avoid dereferencing a bad pointer.
