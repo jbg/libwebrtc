@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "000c1122_bd1da1ef",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "final?",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32b3644f_59a5df74",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "Why does this class need to be reference counted?",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "957c36bb_1e938fe3",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "final?",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e06f2381_b5eb2f95",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "All this together implies that the stack depth is linear in the number of back-to-back chained operations. Are you sure this will never be a problem?\n\nOn the other hand, it\u0027s very nice to not have to \"turn the crank\" in order to make things progress.",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ea81453_1975c358",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "final?",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cefa0ca_04da97c4",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "These types are no longer accurate. IIUC currently the functor is called with a scoped_refptr\u003cOperationsChainCallback\u003e (which isn\u0027t convertible to std::function), and if you take my suggestion it would be called with an OperationsChainCallback (which is convertible to std::function).\n\nBy the way, you should add a test that verifies that functors that expect a std::function callback can be used---such a test would have caught this.",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3f7011a_7b1fc342",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "This comment seems out of place.",
+      "range": {
+        "startLine": 174,
+        "startChar": 2,
+        "endLine": 175,
+        "endChar": 23
+      },
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76cfbe19_c9df86b8",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "std::deque, to reduce the number of allocations? And use it through std::queue, to make the code simpler to reason about?",
+      "range": {
+        "startLine": 184,
+        "startChar": 2,
+        "endLine": 184,
+        "endChar": 11
+      },
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

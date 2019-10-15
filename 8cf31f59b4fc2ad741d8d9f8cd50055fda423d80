@@ -335,6 +335,24 @@
       "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fcf13b7_d4bccfd6",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-15T08:34:27Z",
+      "side": 1,
+      "message": "\u003e I was able to do an easy \"bool has_run_\" inside of the explicit OperationsChainCallback, allowing me to remove the \"pending operation IDs\" logic. And not only could I DCHECK that callback was not invoked more than twice, I was now also able to easily DCEHCK that the callback was invoked.\n\nYes.\n\n\u003e Note that I was forced to use a copyable type in order for the callback to be an acceptable argument to the functor (if the operation is defined by an std::functor\u003c\u003e all of its arguments - i.e. the callback - has to be copyable). To make it copyable I made it a RefCountedObject rather than have it be something move-only.\n\nI don\u0027t understand---the only nontrivial data member in OperationsChainCallback is a scoped_refptr, so OperationsChainCallback would be copyable if you hadn\u0027t explicitly switched that off.",
+      "parentUuid": "fd9a5516_19ba4717",
+      "revId": "8cf31f59b4fc2ad741d8d9f8cd50055fda423d80",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
