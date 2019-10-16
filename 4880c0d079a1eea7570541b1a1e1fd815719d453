@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1949fbb0_e0867762",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-16T11:17:38Z",
+      "side": 1,
+      "message": "Or UpdateScale(current_scale, Fraction{3,4}), in particular if the below method is extended to handle all common factors.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 36
+      },
+      "revId": "4880c0d079a1eea7570541b1a1e1fd815719d453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c76f6d5_41d1baec",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-16T11:17:38Z",
+      "side": 1,
+      "message": "This looks a bit too special, it shouldn\u0027t be much more expensive to compute the gcd and support general multiplication?\n\nI think it would be clearer to make this a multiplication method (or even on operator overload) on the Fraction struct/class.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 3
+      },
+      "revId": "4880c0d079a1eea7570541b1a1e1fd815719d453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9804d12_81f5dc95",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-16T11:17:38Z",
+      "side": 1,
+      "message": "I don\u0027t understand the reason for this logic. If input width and height are multiples of three, we start with scaling by 2/3. But why can\u0027t we always start with 3/4 ?\n\nBut since the other case, UpdateScale(\u0026current_scale), also alternates, I take it starting with 2/3 is what this change is all about?",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 76
+      },
+      "revId": "4880c0d079a1eea7570541b1a1e1fd815719d453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
