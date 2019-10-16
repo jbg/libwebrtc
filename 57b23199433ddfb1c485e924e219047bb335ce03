@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "195d3a87_850c8186",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-16T23:34:03Z",
+      "side": 1,
+      "message": "I don\u0027t understand what\u0027s going on here (or, more specifically, I don\u0027t understand why this needs to happen after capturing the frame. Can you add a comment explaining what\u0027s going on here?",
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a3e5b77_90d50013",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-16T23:34:03Z",
+      "side": 1,
+      "message": "Can you add a comment explaining why this is important?",
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebc52b44_7866e9ef",
+        "filename": "modules/desktop_capture/full_screen_application_handler.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-16T23:34:03Z",
+      "side": 1,
+      "message": "It doesn\u0027t feel like the previous window list ought to be part of the API. Only FullScreenMacApplicationHandler uses it, so couldn\u0027t it be responsible for maintaining it internally?",
+      "range": {
+        "startLine": 39,
+        "startChar": 41,
+        "endLine": 39,
+        "endChar": 59
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9cba1f2_9b178851",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-16T23:34:03Z",
+      "side": 1,
+      "message": "FullscreenApplication Handler always returns false for CanHandleFullscreen, which makes it a no-op for this class. Why not just return null? In fact, if you do that I don\u0027t think you need CanHandleFullScreen at all--a null check will suffice.",
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0413c521_e6169b59",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-16T23:34:03Z",
+      "side": 1,
+      "message": "Consider adding bullet points for these two examples, since it\u0027s essentially a list.",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f31945d_651bbe70",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-16T23:34:03Z",
+      "side": 1,
+      "message": "Newline here, please, since you\u0027re no longer enumerating special cases.",
+      "range": {
+        "startLine": 29,
+        "startChar": 63,
+        "endLine": 29,
+        "endChar": 65
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2b08bdb_529009c3",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-16T23:34:03Z",
+      "side": 1,
+      "message": "I appreciate that this comment was present in the original code, but I don\u0027t understand it, and since you\u0027re making it core to this general-purpose implementation I think it\u0027s important to make sure it\u0027s needed in all cases.",
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "811e068d_49966fca",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-16T23:34:03Z",
+      "side": 1,
+      "message": "Why not make the test positive and return out of the loop instead of continuing in the negative case?",
+      "range": {
+        "startLine": 83,
+        "startChar": 31,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
