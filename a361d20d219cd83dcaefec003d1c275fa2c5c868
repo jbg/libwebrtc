@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc22af33_d5df365a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-10-16T09:26:25Z",
+      "side": 1,
+      "message": "I would suggest removing these, since it\u0027s already clear from the context that this is converted into a bool (same below 2 more times).",
+      "range": {
+        "startLine": 1405,
+        "startChar": 6,
+        "endLine": 1405,
+        "endChar": 8
+      },
+      "revId": "a361d20d219cd83dcaefec003d1c275fa2c5c868",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1069cf48_33136bf4",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1847,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-10-16T09:26:25Z",
+      "side": 1,
+      "message": "It makes more sense here, since it\u0027s not clear from context that we\u0027re converting to a bool.",
+      "range": {
+        "startLine": 1847,
+        "startChar": 6,
+        "endLine": 1847,
+        "endChar": 8
+      },
+      "revId": "a361d20d219cd83dcaefec003d1c275fa2c5c868",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c41373c_a5bb2509",
+        "filename": "modules/audio_processing/noise_suppression.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-10-16T09:26:25Z",
+      "side": 1,
+      "message": "You could consider an enum class here.",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "a361d20d219cd83dcaefec003d1c275fa2c5c868",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
