@@ -68,6 +68,30 @@
       "revId": "4880c0d079a1eea7570541b1a1e1fd815719d453",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14462e10_43ae3d7d",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-16T13:11:27Z",
+      "side": 1,
+      "message": "Since UpdateScale does the alternating, this could be organized something like this:\n\nif (input_pixels \u003e target_pixels) {\n  const bool input_mod3 \u003d ...;\n  if (variable_start_scale_factor \u0026\u0026 input_mod3) {\n    current_scale \u003d Fraction{2,3};\n  }\n  while (current_scale.scale_pixel_count(input_pixels) \u003e target_pixels) {\n    UpdateScale(current_scale);\n  }\n}\n\nwithout the iteration count and even/odd checks. To me, that seems a bit simpler.",
+      "parentUuid": "f9804d12_81f5dc95",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 76
+      },
+      "revId": "4880c0d079a1eea7570541b1a1e1fd815719d453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
