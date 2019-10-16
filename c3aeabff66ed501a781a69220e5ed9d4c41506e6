@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "e6265ee8_8cacf5b6",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-16T09:17:41Z",
+      "side": 1,
+      "message": "OK I turned it back into an std::function\u003cvoid()\u003e to hide the explicit type again, but using an explicit ref-counted class internally to keep track of the has_run_.\n\nThis is going a little back and forth so if you mean to do something differently then feel free to discuss alternatives face-to-face.\n\nBut for what it\u0027s worth, I like the current solution most of all.",
+      "parentUuid": "26556468_cc81a268",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "957c36bb_1e938fe3",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 7
