@@ -22,6 +22,30 @@
       "revId": "ffc84527309d73c2779ffad9b3910a83d03b5f06",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a894aead_c0f84922",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2019-10-16T07:30:08Z",
+      "side": 0,
+      "message": "Haha, no, turns out I need to reference it from main anyway or the linker will drop it downstream similar to when I tried to remove the old hack. I think referencing the flag is a lot better than referencing fileutils though - much cleaner and more limited. I think it will make a lot more sense to future maintainers (e.g: instead of \"I removed the ref to filutils and got missing flag errors vs. I removed the ref to a flag and got missing flag errors\".",
+      "parentUuid": "08079d3b_1a72072f",
+      "range": {
+        "startLine": 258,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 28
+      },
+      "revId": "ffc84527309d73c2779ffad9b3910a83d03b5f06",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
