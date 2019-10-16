@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ccf2689c_b08526e6",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-10-16T09:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc22af33_d5df365a",
+      "range": {
+        "startLine": 1405,
+        "startChar": 6,
+        "endLine": 1405,
+        "endChar": 8
+      },
+      "revId": "a361d20d219cd83dcaefec003d1c275fa2c5c868",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1069cf48_33136bf4",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 6
@@ -68,6 +92,30 @@
       "revId": "a361d20d219cd83dcaefec003d1c275fa2c5c868",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "725c77ad_6ab04160",
+        "filename": "modules/audio_processing/noise_suppression.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-10-16T09:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c41373c_a5bb2509",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "a361d20d219cd83dcaefec003d1c275fa2c5c868",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
