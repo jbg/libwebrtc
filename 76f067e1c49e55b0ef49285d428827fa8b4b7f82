@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9867dfe5_783811aa",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-17T11:58:14Z",
+      "side": 1,
+      "message": "More concise than my version, nice. \n\nPlease add DCHECKs documenting input requirements, a \u003e\u003d 0, b \u003e 0.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8919b89_63006536",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-17T11:58:14Z",
+      "side": 1,
+      "message": "Prefer to do the gcd call in this method, to always have the product in canonical form.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 3
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5311c6b5_9ca90f37",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-17T11:58:14Z",
+      "side": 1,
+      "message": "This could be written as \n\n  *current_scale *\u003d Fraction{2, 3}\n\nprovided that the multiplication operation includes gcd. But perhaps clearer as is, given the above conditions.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 36
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0135d18b_0e37fa49",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-17T11:58:14Z",
+      "side": 1,
+      "message": "Maybe prettier as \n\n  *current_scale *\u003d Fraction{3, 4};",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75f00bd1_acb71f9e",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-17T11:58:14Z",
+      "side": 1,
+      "message": "I think it\u0027s better to keep alternating, once factors of 3 are taken care of. I.e.,\n\nif (mult3) {\n  *current_scale *\u003d Fraction{2,3};\n} else {\n  UpdateScale(current_scale);\n}",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
