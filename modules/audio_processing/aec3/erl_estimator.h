@@ -31,7 +31,7 @@ class ErlEstimator {
   void Reset();
 
   // Updates the ERL estimate.
-  void Update(bool converged_filter,
+  void Update(bool any_filter_converged,
               rtc::ArrayView<const float> render_spectrum,
               rtc::ArrayView<const float> capture_spectrum);
 

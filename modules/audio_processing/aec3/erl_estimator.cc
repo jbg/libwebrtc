@@ -38,7 +38,7 @@ void ErlEstimator::Reset() {
   blocks_since_reset_ = 0;
 }
 
-void ErlEstimator::Update(bool converged_filter,
+void ErlEstimator::Update(bool any_filter_converged,
                           rtc::ArrayView<const float> render_spectrum,
                           rtc::ArrayView<const float> capture_spectrum) {
   RTC_DCHECK_EQ(kFftLengthBy2Plus1, render_spectrum.size());
@@ -50,7 +50,7 @@ void ErlEstimator::Update(bool converged_filter,
   constexpr float kX2Min = 44015068.0f;
 
   if (++blocks_since_reset_ < startup_phase_length_blocks__ ||
-      !converged_filter) {
+      !any_filter_converged) {
     return;
   }
 

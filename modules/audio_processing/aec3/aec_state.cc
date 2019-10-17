@@ -234,12 +234,27 @@ void AecState::Update(
                          subtractor_output_analyzers_[0].ConvergedFilter(),
                          config_.erle.onset_detection);
 
-  // TODO(bugs.webrtc.org/10913): Take all channels into account.
-  const auto& X2 =
-      render_buffer.Spectrum(delay_state_.MinDirectPathFilterDelay(),
-                             /*channel=*/0);
-  erl_estimator_.Update(subtractor_output_analyzers_[0].ConvergedFilter(), X2,
-                        Y2[0]);
+  const size_t num_render_channels = aligned_render_block.size();
+  std::array<float, kFftLengthBy2Plus1> min_render_spectrum;
+  min_render_spectrum.fill(100000000000.f);
+  for (size_t ch = 0; ch < num_render_channels; ++ch) {
+    const auto& X2_ch =
+        render_buffer.Spectrum(delay_state_.MinDirectPathFilterDelay(), ch);
+    for (size_t k = 0; k < kFftLengthBy2Plus1; ++k) {
+      min_render_spectrum[k] = std::min(min_render_spectrum[k], X2_ch[k]);
+    }
+  }
+  std::array<float, kFftLengthBy2Plus1> max_capture_spectrum;
+  max_capture_spectrum.fill(0.f);
+  for (size_t ch = 0; ch < num_capture_channels; ++ch) {
+    for (size_t k = 0; k < kFftLengthBy2Plus1; ++k) {
+      if (subtractor_output_analyzers_[ch].ConvergedFilter()) {
+        max_capture_spectrum[k] = std::max(max_capture_spectrum[k], Y2[ch][k]);
+      }
+    }
+  }
+  erl_estimator_.Update(any_filter_converged, min_render_spectrum,
+                        max_capture_spectrum);
 
   // Detect and flag echo saturation.
   saturation_detector_.Update(aligned_render_block, SaturatedCapture(),
