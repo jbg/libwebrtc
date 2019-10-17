@@ -21,9 +21,34 @@
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/time_utils.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace {
+int GreatestCommonDivisor(int a, int b) {
+  int c = a % b;
+  while (c != 0) {
+    a = b;
+    b = c;
+    c = a % b;
+  }
+  return b;
+}
+
 struct Fraction {
+  Fraction& operator*=(const Fraction& o) {
+    numerator *= o.numerator;
+    denominator *= o.denominator;
+    return *this;
+  }
+
+  Fraction& operator/=(int d) {
+    numerator /= d;
+    denominator /= d;
+    return *this;
+  }
+
+  int Gcd() const { return GreatestCommonDivisor(numerator, denominator); }
+
   int numerator;
   int denominator;
 
@@ -43,13 +68,51 @@ int roundUp(int value_to_round, int multiple, int max_value) {
                                     : (max_value / multiple * multiple);
 }
 
+// Alternately scale down by 2/3 and 3/4. This results in fractions which are
+// effectively scalable. For instance, starting at 1280x720 will result in
+// the series (3/4) => 960x540, (1/2) => 640x360, (3/8) => 480x270,
+// (1/4) => 320x180, (3/16) => 240x125, (1/8) => 160x90.
+void UpdateScale(Fraction* current_scale) {
+  if (current_scale->numerator % 3 == 0 &&
+      current_scale->denominator % 2 == 0) {
+    // Multiply by 2/3.
+    current_scale->numerator /= 3;
+    current_scale->denominator /= 2;
+  } else {
+    // Multiply by 3/4.
+    current_scale->numerator *= 3;
+    current_scale->denominator *= 4;
+  }
+}
+
+// Scale factor is based on resolution. If |current_width| and |current_height|
+// are a multiple of 3, scale down by 2/3 else 3/4.
+void UpdateScale(Fraction* current_scale, int input_width, int input_height) {
+  int current_width =
+      input_width * current_scale->numerator / current_scale->denominator;
+  int current_height =
+      input_height * current_scale->numerator / current_scale->denominator;
+
+  bool mult3 = current_width % 3 == 0 && current_height % 3 == 0;
+  (*current_scale) *= (mult3 ? Fraction{2, 3} : Fraction{3, 4});
+
+  int gcd = current_scale->Gcd();
+  (*current_scale) /= gcd;
+}
+
 // Generates a scale factor that makes |input_pixels| close to |target_pixels|,
 // but no higher than |max_pixels|.
-Fraction FindScale(int input_pixels, int target_pixels, int max_pixels) {
+Fraction FindScale(int input_width,
+                   int input_height,
+                   int target_pixels,
+                   int max_pixels,
+                   bool variable_scale_factor) {
   // This function only makes sense for a positive target.
   RTC_DCHECK_GT(target_pixels, 0);
   RTC_DCHECK_GT(max_pixels, 0);
   RTC_DCHECK_GE(max_pixels, target_pixels);
+
+  const int input_pixels = input_width * input_height;
 
   // Don't scale up original.
   if (target_pixels >= input_pixels)
@@ -65,20 +128,11 @@ Fraction FindScale(int input_pixels, int target_pixels, int max_pixels) {
     min_pixel_diff = std::abs(input_pixels - target_pixels);
   }
 
-  // Alternately scale down by 2/3 and 3/4. This results in fractions which are
-  // effectively scalable. For instance, starting at 1280x720 will result in
-  // the series (3/4) => 960x540, (1/2) => 640x360, (3/8) => 480x270,
-  // (1/4) => 320x180, (3/16) => 240x125, (1/8) => 160x90.
   while (current_scale.scale_pixel_count(input_pixels) > target_pixels) {
-    if (current_scale.numerator % 3 == 0 &&
-        current_scale.denominator % 2 == 0) {
-      // Multiply by 2/3.
-      current_scale.numerator /= 3;
-      current_scale.denominator /= 2;
+    if (variable_scale_factor) {
+      UpdateScale(&current_scale, input_width, input_height);
     } else {
-      // Multiply by 3/4.
-      current_scale.numerator *= 3;
-      current_scale.denominator *= 4;
+      UpdateScale(&current_scale);
     }
 
     int output_pixels = current_scale.scale_pixel_count(input_pixels);
@@ -104,6 +158,8 @@ VideoAdapter::VideoAdapter(int required_resolution_alignment)
       adaption_changes_(0),
       previous_width_(0),
       previous_height_(0),
+      variable_scale_factor_(
+          webrtc::field_trial::IsEnabled("WebRTC-Video-VariableScaleFactor")),
       required_resolution_alignment_(required_resolution_alignment),
       resolution_request_target_pixel_count_(std::numeric_limits<int>::max()),
       resolution_request_max_pixel_count_(std::numeric_limits<int>::max()),
@@ -217,8 +273,9 @@ bool VideoAdapter::AdaptFrameResolution(int in_width,
     *cropped_height =
         std::min(in_height, static_cast<int>(in_width / requested_aspect));
   }
-  const Fraction scale = FindScale((*cropped_width) * (*cropped_height),
-                                   target_pixel_count, max_pixel_count);
+  const Fraction scale =
+      FindScale(*cropped_width, *cropped_height, target_pixel_count,
+                max_pixel_count, variable_scale_factor_);
   // Adjust cropping slightly to get even integer output size and a perfect
   // scale factor. Make sure the resulting dimensions are aligned correctly
   // to be nice to hardware encoders.
