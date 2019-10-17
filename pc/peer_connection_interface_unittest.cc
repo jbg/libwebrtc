@@ -2721,12 +2721,17 @@ TEST_F(PeerConnectionInterfaceTestPlanB, CloseAndTestMethods) {
   ASSERT_TRUE(pc_->remote_description()->ToString(&sdp));
   std::unique_ptr<SessionDescriptionInterface> remote_offer(
       webrtc::CreateSessionDescription(SdpType::kOffer, sdp));
+  printf("DoSetRemoteDescription\n");
   EXPECT_FALSE(DoSetRemoteDescription(std::move(remote_offer)));
 
   ASSERT_TRUE(pc_->local_description()->ToString(&sdp));
   std::unique_ptr<SessionDescriptionInterface> local_offer(
       webrtc::CreateSessionDescription(SdpType::kOffer, sdp));
+  printf("DoSetLocalDescription\n");
   EXPECT_FALSE(DoSetLocalDescription(std::move(local_offer)));
+  printf("Null all the things %d\n", __LINE__);
+  pc_ = nullptr;
+  printf("Reached end of test\n");
 }
 
 // Test that GetStats can still be called after PeerConnection::Close.

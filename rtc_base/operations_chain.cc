@@ -17,7 +17,9 @@ namespace rtc {
 namespace rtc_operations_chain_internal {
 
 CallbackHandle::CallbackHandle(scoped_refptr<OperationsChain> operations_chain)
-    : operations_chain_(std::move(operations_chain)) {}
+    : operations_chain_(std::move(operations_chain)) {
+  RTC_DCHECK(operations_chain_);
+}
 
 CallbackHandle::~CallbackHandle() {
   RTC_DCHECK(has_run_ || has_cancelled_);
@@ -25,6 +27,7 @@ CallbackHandle::~CallbackHandle() {
 
 void CallbackHandle::OnOperationComplete() {
   RTC_DCHECK(!has_run_ && !has_cancelled_);
+  RTC_DCHECK(operations_chain_);
 #ifdef RTC_DCHECK_IS_ON
   has_run_ = true;
 #endif  // RTC_DCHECK_IS_ON
@@ -36,6 +39,7 @@ void CallbackHandle::OnOperationComplete() {
 
 void CallbackHandle::OnOperationCancelled() {
   RTC_DCHECK(!has_run_ && !has_cancelled_);
+  RTC_DCHECK(operations_chain_);
 #ifdef RTC_DCHECK_IS_ON
   has_cancelled_ = true;
 #endif  // RTC_DCHECK_IS_ON
@@ -63,11 +67,12 @@ OperationsChain::~OperationsChain() {
   // Operations keep the chain alive through reference counting so this should
   // not be possible. The fact that the chain is empty makes it safe to
   // destroy the OperationsChain on any sequence.
-  RTC_DCHECK(chained_operations_.empty());
+  RTC_CHECK(chained_operations_.empty());
 }
 
 void OperationsChain::CancelPendingOperations() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
+  shutting_down_ = true;
   // The first element on the chain, if one exists, is the operation that is
   // currently executing and thus cannot be cancelled. The first element to
   // cancel is the second in the list.
@@ -88,6 +93,7 @@ void OperationsChain::OnOperationComplete() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   // The front element is the operation that just completed, remove it.
   RTC_DCHECK(!chained_operations_.empty());
+  scoped_refptr<OperationsChain> trust_me = this;
   chained_operations_.pop_front();
   // If there are any other operations chained, execute the next one.
   if (!chained_operations_.empty()) {

@@ -153,11 +153,17 @@ struct SetSessionDescriptionMsg : public rtc::MessageData {
 
 struct CreateSessionDescriptionMsg : public rtc::MessageData {
   explicit CreateSessionDescriptionMsg(
-      webrtc::CreateSessionDescriptionObserver* observer)
-      : observer(observer) {}
+      webrtc::CreateSessionDescriptionObserver* observer,
+      std::function<void()> operations_chain_callback)
+      : observer(observer),
+        operations_chain_callback(std::move(operations_chain_callback)) {}
+
+  ~CreateSessionDescriptionMsg() override { operations_chain_callback(); }
 
   rtc::scoped_refptr<webrtc::CreateSessionDescriptionObserver> observer;
   RTCError error;
+  // This is invoked by the destructor.
+  std::function<void()> operations_chain_callback;
 };
 
 struct GetStatsMsg : public rtc::MessageData {
@@ -716,10 +722,11 @@ class PeerConnection::SetRemoteDescriptionObserverAdapter
 
   // SetRemoteDescriptionObserverInterface implementation.
   void OnSetRemoteDescriptionComplete(RTCError error) override {
-    if (error.ok())
+    if (error.ok()) {
       pc_->PostSetSessionDescriptionSuccess(wrapper_);
-    else
+    } else {
       pc_->PostSetSessionDescriptionFailure(wrapper_, std::move(error));
+    }
   }
 
  private:
@@ -888,6 +895,7 @@ PeerConnection::PeerConnection(PeerConnectionFactory* factory,
     : factory_(factory),
       event_log_(std::move(event_log)),
       event_log_ptr_(event_log_.get()),
+      operations_chain_(rtc::OperationsChain::Create()),
       datagram_transport_config_(
           field_trial::FindFullName(kDatagramTransportFieldTrial)),
       datagram_transport_data_channel_config_(
@@ -2046,6 +2054,21 @@ void PeerConnection::RestartIce() {
 void PeerConnection::CreateOffer(CreateSessionDescriptionObserver* observer,
                                  const RTCOfferAnswerOptions& options) {
   RTC_DCHECK_RUN_ON(signaling_thread());
+  rtc::scoped_refptr<CreateSessionDescriptionObserver> observer_refptr =
+      observer;
+  operations_chain_->ChainOperation(
+      [this_refptr = rtc::scoped_refptr<PeerConnection>(this), observer_refptr,
+       options](std::function<void()> operations_chain_callback) mutable {
+        this_refptr->DoCreateOffer(observer_refptr, options,
+                                   std::move(operations_chain_callback));
+      });
+}
+
+void PeerConnection::DoCreateOffer(
+    CreateSessionDescriptionObserver* observer,
+    const RTCOfferAnswerOptions& options,
+    std::function<void()> operations_chain_callback) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
   TRACE_EVENT0("webrtc", "PeerConnection::CreateOffer");
 
   if (!observer) {
@@ -2057,7 +2080,8 @@ void PeerConnection::CreateOffer(CreateSessionDescriptionObserver* observer,
     std::string error = "CreateOffer called when PeerConnection is closed.";
     RTC_LOG(LS_ERROR) << error;
     PostCreateSessionDescriptionFailure(
-        observer, RTCError(RTCErrorType::INVALID_STATE, std::move(error)));
+        observer, RTCError(RTCErrorType::INVALID_STATE, std::move(error)),
+        std::move(operations_chain_callback));
     return;
   }
 
@@ -2068,7 +2092,8 @@ void PeerConnection::CreateOffer(CreateSessionDescriptionObserver* observer,
     RTC_LOG(LS_ERROR) << "CreateOffer: " << error_message;
     PostCreateSessionDescriptionFailure(
         observer,
-        RTCError(RTCErrorType::INTERNAL_ERROR, std::move(error_message)));
+        RTCError(RTCErrorType::INTERNAL_ERROR, std::move(error_message)),
+        std::move(operations_chain_callback));
     return;
   }
 
@@ -2076,7 +2101,8 @@ void PeerConnection::CreateOffer(CreateSessionDescriptionObserver* observer,
     std::string error = "CreateOffer called with invalid options.";
     RTC_LOG(LS_ERROR) << error;
     PostCreateSessionDescriptionFailure(
-        observer, RTCError(RTCErrorType::INVALID_PARAMETER, std::move(error)));
+        observer, RTCError(RTCErrorType::INVALID_PARAMETER, std::move(error)),
+        std::move(operations_chain_callback));
     return;
   }
 
@@ -2085,14 +2111,16 @@ void PeerConnection::CreateOffer(CreateSessionDescriptionObserver* observer,
   if (IsUnifiedPlan()) {
     RTCError error = HandleLegacyOfferOptions(options);
     if (!error.ok()) {
-      PostCreateSessionDescriptionFailure(observer, std::move(error));
+      PostCreateSessionDescriptionFailure(observer, std::move(error),
+                                          std::move(operations_chain_callback));
       return;
     }
   }
 
   cricket::MediaSessionOptions session_options;
   GetOptionsForOffer(options, &session_options);
-  webrtc_session_desc_factory_->CreateOffer(observer, options, session_options);
+  webrtc_session_desc_factory_->CreateOffer(
+      observer, options, session_options, std::move(operations_chain_callback));
 }
 
 RTCError PeerConnection::HandleLegacyOfferOptions(
@@ -2172,6 +2200,21 @@ PeerConnection::GetReceivingTransceiversOfType(cricket::MediaType media_type) {
 void PeerConnection::CreateAnswer(CreateSessionDescriptionObserver* observer,
                                   const RTCOfferAnswerOptions& options) {
   RTC_DCHECK_RUN_ON(signaling_thread());
+  rtc::scoped_refptr<CreateSessionDescriptionObserver> observer_refptr =
+      observer;
+  operations_chain_->ChainOperation(
+      [this_refptr = rtc::scoped_refptr<PeerConnection>(this), observer_refptr,
+       options](std::function<void()> operations_chain_callback) mutable {
+        this_refptr->DoCreateAnswer(observer_refptr, options,
+                                    std::move(operations_chain_callback));
+      });
+}
+
+void PeerConnection::DoCreateAnswer(
+    CreateSessionDescriptionObserver* observer,
+    const RTCOfferAnswerOptions& options,
+    std::function<void()> operations_chain_callback) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
   TRACE_EVENT0("webrtc", "PeerConnection::CreateAnswer");
   if (!observer) {
     RTC_LOG(LS_ERROR) << "CreateAnswer - observer is NULL.";
@@ -2185,7 +2228,8 @@ void PeerConnection::CreateAnswer(CreateSessionDescriptionObserver* observer,
     RTC_LOG(LS_ERROR) << "CreateAnswer: " << error_message;
     PostCreateSessionDescriptionFailure(
         observer,
-        RTCError(RTCErrorType::INTERNAL_ERROR, std::move(error_message)));
+        RTCError(RTCErrorType::INTERNAL_ERROR, std::move(error_message)),
+        std::move(operations_chain_callback));
     return;
   }
 
@@ -2196,7 +2240,8 @@ void PeerConnection::CreateAnswer(CreateSessionDescriptionObserver* observer,
         "have-remote-offer or have-local-pranswer.";
     RTC_LOG(LS_ERROR) << error;
     PostCreateSessionDescriptionFailure(
-        observer, RTCError(RTCErrorType::INVALID_STATE, std::move(error)));
+        observer, RTCError(RTCErrorType::INVALID_STATE, std::move(error)),
+        std::move(operations_chain_callback));
     return;
   }
 
@@ -2219,10 +2264,26 @@ void PeerConnection::CreateAnswer(CreateSessionDescriptionObserver* observer,
   cricket::MediaSessionOptions session_options;
   GetOptionsForAnswer(options, &session_options);
 
-  webrtc_session_desc_factory_->CreateAnswer(observer, session_options);
+  webrtc_session_desc_factory_->CreateAnswer(
+      observer, session_options, std::move(operations_chain_callback));
 }
 
 void PeerConnection::SetLocalDescription(
+    SetSessionDescriptionObserver* observer,
+    SessionDescriptionInterface* desc_ptr) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  rtc::scoped_refptr<SetSessionDescriptionObserver> observer_refptr = observer;
+  operations_chain_->ChainOperation(
+      [this_refptr = rtc::scoped_refptr<PeerConnection>(this), observer_refptr,
+       desc_ptr](std::function<void()> operations_chain_callback) mutable {
+        this_refptr->DoSetLocalDescription(std::move(observer_refptr),
+                                           desc_ptr);
+        // TODO(hbos): Comment
+        operations_chain_callback();
+      });
+}
+
+void PeerConnection::DoSetLocalDescription(
     SetSessionDescriptionObserver* observer,
     SessionDescriptionInterface* desc_ptr) {
   RTC_DCHECK_RUN_ON(signaling_thread());
@@ -2596,14 +2657,38 @@ void PeerConnection::FillInMissingRemoteMids(
 
 void PeerConnection::SetRemoteDescription(
     SetSessionDescriptionObserver* observer,
-    SessionDescriptionInterface* desc) {
-  SetRemoteDescription(
-      std::unique_ptr<SessionDescriptionInterface>(desc),
-      rtc::scoped_refptr<SetRemoteDescriptionObserverInterface>(
-          new SetRemoteDescriptionObserverAdapter(this, observer)));
+    SessionDescriptionInterface* desc_ptr) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  rtc::scoped_refptr<SetSessionDescriptionObserver> observer_refptr = observer;
+  operations_chain_->ChainOperation(
+      [this_refptr = rtc::scoped_refptr<PeerConnection>(this), observer_refptr,
+       desc_ptr](std::function<void()> operations_chain_callback) mutable {
+        this_refptr->DoSetRemoteDescription(
+            std::unique_ptr<SessionDescriptionInterface>(desc_ptr),
+            rtc::scoped_refptr<SetRemoteDescriptionObserverInterface>(
+                new SetRemoteDescriptionObserverAdapter(
+                    this_refptr, std::move(observer_refptr))));
+        // TODO(hbos): Comment
+        operations_chain_callback();
+      });
 }
 
 void PeerConnection::SetRemoteDescription(
+    std::unique_ptr<SessionDescriptionInterface> desc,
+    rtc::scoped_refptr<SetRemoteDescriptionObserverInterface> observer) {
+  RTC_DCHECK_RUN_ON(signaling_thread());
+  SessionDescriptionInterface* desc_ptr = desc.release();
+  operations_chain_->ChainOperation(
+      [this_refptr = rtc::scoped_refptr<PeerConnection>(this), observer,
+       desc_ptr](std::function<void()> operations_chain_callback) mutable {
+        this_refptr->DoSetRemoteDescription(
+            std::unique_ptr<SessionDescriptionInterface>(desc_ptr),
+            std::move(observer));
+        operations_chain_callback();
+      });
+}
+
+void PeerConnection::DoSetRemoteDescription(
     std::unique_ptr<SessionDescriptionInterface> desc,
     rtc::scoped_refptr<SetRemoteDescriptionObserverInterface> observer) {
   RTC_DCHECK_RUN_ON(signaling_thread());
@@ -4016,6 +4101,12 @@ void PeerConnection::Close() {
   ChangeSignalingState(PeerConnectionInterface::kClosed);
   NoteUsageEvent(UsageEvent::CLOSE_CALLED);
 
+  // operations_chain_->CancelPendingOperations();
+  // if (executing_operation_callback_.has_value()) {
+  //   executing_operation_callback_.value()();
+  //   executing_operation_callback_ = absl::nullopt;
+  // }
+
   for (const auto& transceiver : transceivers_) {
     transceiver->Stop();
   }
@@ -4445,9 +4536,11 @@ void PeerConnection::PostSetSessionDescriptionFailure(
 
 void PeerConnection::PostCreateSessionDescriptionFailure(
     CreateSessionDescriptionObserver* observer,
-    RTCError error) {
+    RTCError error,
+    std::function<void()> operations_chain_callback) {
   RTC_DCHECK(!error.ok());
-  CreateSessionDescriptionMsg* msg = new CreateSessionDescriptionMsg(observer);
+  CreateSessionDescriptionMsg* msg = new CreateSessionDescriptionMsg(
+      observer, std::move(operations_chain_callback));
   msg->error = std::move(error);
   signaling_thread()->Post(RTC_FROM_HERE, this,
                            MSG_CREATE_SESSIONDESCRIPTION_FAILED, msg);

@@ -83,8 +83,9 @@ class OperationWithFunctor final : public Operation {
     has_run_ = true;
 #endif  // RTC_DCHECK_IS_ON
     // Pass ownership of the handle to the callback.
-    std::function<void()> callback = [handle = handle_]() {
+    std::function<void()> callback = [handle = handle_]() mutable {
       handle->OnOperationComplete();
+      handle = nullptr;
     };
     handle_ = nullptr;
     functor_(std::move(callback));
@@ -169,6 +170,7 @@ class OperationsChain final : public RefCountedObject<RefCountInterface> {
   template <typename FunctorT>
   void ChainOperation(FunctorT&& functor) {
     RTC_DCHECK_RUN_ON(&sequence_checker_);
+    RTC_DCHECK(!shutting_down_);
     auto handle =
         rtc::scoped_refptr<rtc_operations_chain_internal::CallbackHandle>(
             new rtc_operations_chain_internal::CallbackHandle(this));
@@ -202,6 +204,7 @@ class OperationsChain final : public RefCountedObject<RefCountInterface> {
   // to it.
   std::list<std::unique_ptr<rtc_operations_chain_internal::Operation>>
       chained_operations_ RTC_GUARDED_BY(sequence_checker_);
+  bool shutting_down_ = false;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(OperationsChain);
 };
