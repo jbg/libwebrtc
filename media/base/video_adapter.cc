@@ -23,6 +23,26 @@
 #include "rtc_base/time_utils.h"
 
 namespace {
+
+// TODO(nisse): Use std::gcd from C++17.
+int gcd(int a, int b) {
+  // For our use in Fraction, a may be zero, but b must be non-zero.
+  RTC_DCHECK_GE(a, 0);
+  RTC_DCHECK_GT(b, 0);
+  if (a == 0) {
+    return b;
+  }
+  // We expect small inputs, so Euclid's algorithm should be good enough.
+  while (a != b) {
+    if (a > b) {
+      a %= b;
+    } else {
+      b %= a;
+    }
+  }
+  return a;
+}
+
 struct Fraction {
   int numerator;
   int denominator;
@@ -31,6 +51,17 @@ struct Fraction {
   // |input_pixels| pixels is scaled with the fraction numerator / denominator.
   int scale_pixel_count(int input_pixels) {
     return (numerator * numerator * input_pixels) / (denominator * denominator);
+  }
+  Fraction operator*(const Fraction& other) const {
+    Fraction product{numerator * other.numerator,
+                     denominator * other.denominator};
+    int g = gcd(product.numerator, product.denominator);
+    product.numerator /= g;
+    product.denominator /= g;
+    return product;
+  }
+  Fraction& operator*=(const Fraction& other) {
+    return *this = (*this) * other;
   }
 };
 
@@ -77,8 +108,7 @@ Fraction FindScale(int input_pixels, int target_pixels, int max_pixels) {
       current_scale.denominator /= 2;
     } else {
       // Multiply by 3/4.
-      current_scale.numerator *= 3;
-      current_scale.denominator *= 4;
+      current_scale *= Fraction{3, 4};
     }
 
     int output_pixels = current_scale.scale_pixel_count(input_pixels);
