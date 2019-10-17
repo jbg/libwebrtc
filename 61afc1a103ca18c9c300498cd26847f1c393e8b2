@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e261dec_be0bfea1",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T13:30:09Z",
+      "side": 1,
+      "message": "Ok, if you don\u0027t mind changing it that would be nice.",
+      "parentUuid": "75864461_022ab824",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "659b35cf_2ed91f79",
         "filename": "audio/channel_receive.cc",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2019-10-14T13:49:32Z",
       "side": 1,
       "message": "Unless you have a string preference, consider the return value absl::optional\u003cPlayoutTimestamp\u003e\n\nstruct PlayoutTimestamp {\n  uint32_t timestamp;\n  int64_t time_ms;\n};",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "729d4aa9_62b7dae9",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T13:30:09Z",
+      "side": 1,
+      "message": "Maybe keeping as is to keep similar to SetEstimatedPlayoutNtpTimestampMs arguments.",
+      "parentUuid": "659b35cf_2ed91f79",
       "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8976d93e_d86b01cf",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T13:30:09Z",
+      "side": 1,
+      "message": "Yes, renamed to rtp_timestamp.",
+      "parentUuid": "7aee2255_1027849e",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3be68df3_3f16d446",
         "filename": "pc/rtc_stats_integrationtest.cc",
         "patchSetId": 14
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "126e27bb_e77e311b",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T13:30:09Z",
+      "side": 1,
+      "message": "A/V sync is enabled but to estimate the playout timestamp at least two RTCP sender reports needs to be received (around 5 sec). It is defined if the test runs longer. Changed to MarkMemberTested and added a comment?",
+      "parentUuid": "3be68df3_3f16d446",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8270f2fe_2a227d9b",
         "filename": "video/receive_statistics_proxy.cc",
         "patchSetId": 14
@@ -81,6 +153,24 @@
       "writtenOn": "2019-10-14T13:49:32Z",
       "side": 1,
       "message": "GetCurrentEstimatedPlayoutNtpTimestampMs uses kPlayoutTsTimeoutMs which is some \"arbitrary time\" that a timestamp is valid for, this is not spec-compliant. If you want to know if we\u0027ve received any packets for the last 5 seconds there may be other metrics or APIs for determining that. But is there a reason to bake in arbitrary timeouts into a metric like this? Why is nothing better than something?\n\nCan we stick to the spec and remove the timeout?",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5af129cf_951939cc",
+        "filename": "video/receive_statistics_proxy.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T13:30:09Z",
+      "side": 1,
+      "message": "Done, removed.",
+      "parentUuid": "8270f2fe_2a227d9b",
       "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
