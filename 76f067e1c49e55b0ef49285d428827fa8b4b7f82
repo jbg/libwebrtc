@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5addb64e_d2c8e23a",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T12:50:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9867dfe5_783811aa",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b8919b89_63006536",
         "filename": "media/base/video_adapter.cc",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "acd5c9c0_a8506bee",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T12:50:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8919b89_63006536",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 3
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5311c6b5_9ca90f37",
         "filename": "media/base/video_adapter.cc",
         "patchSetId": 5
@@ -59,6 +107,30 @@
       "writtenOn": "2019-10-17T11:58:14Z",
       "side": 1,
       "message": "This could be written as \n\n  *current_scale *\u003d Fraction{2, 3}\n\nprovided that the multiplication operation includes gcd. But perhaps clearer as is, given the above conditions.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 36
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4b1e7a5_2bf6596e",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T12:50:32Z",
+      "side": 1,
+      "message": "yes maybe clearer as is given the above",
+      "parentUuid": "5311c6b5_9ca90f37",
       "range": {
         "startLine": 79,
         "startChar": 0,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "1fecb56d_bbabc28e",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T12:50:32Z",
+      "side": 1,
+      "message": "maybe good as is if not changed above",
+      "parentUuid": "0135d18b_0e37fa49",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "75f00bd1_acb71f9e",
         "filename": "media/base/video_adapter.cc",
         "patchSetId": 5
@@ -105,6 +201,30 @@
       "writtenOn": "2019-10-17T11:58:14Z",
       "side": 1,
       "message": "I think it\u0027s better to keep alternating, once factors of 3 are taken care of. I.e.,\n\nif (mult3) {\n  *current_scale *\u003d Fraction{2,3};\n} else {\n  UpdateScale(current_scale);\n}",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "985603ac_5954e855",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T12:50:32Z",
+      "side": 1,
+      "message": "Typically will be mult3 every other time and UpdateScale will multiply by 3/4. So alternation not kept?",
+      "parentUuid": "75f00bd1_acb71f9e",
       "range": {
         "startLine": 96,
         "startChar": 0,
