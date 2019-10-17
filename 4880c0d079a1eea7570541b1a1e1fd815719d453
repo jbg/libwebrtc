@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "09b0cc73_c149c47f",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T11:40:48Z",
+      "side": 1,
+      "message": "Changed this, ptal.",
+      "parentUuid": "5c76f6d5_41d1baec",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 3
+      },
+      "revId": "4880c0d079a1eea7570541b1a1e1fd815719d453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f9804d12_81f5dc95",
         "filename": "media/base/video_adapter.cc",
         "patchSetId": 3
@@ -83,6 +107,30 @@
       "side": 1,
       "message": "Since UpdateScale does the alternating, this could be organized something like this:\n\nif (input_pixels \u003e target_pixels) {\n  const bool input_mod3 \u003d ...;\n  if (variable_start_scale_factor \u0026\u0026 input_mod3) {\n    current_scale \u003d Fraction{2,3};\n  }\n  while (current_scale.scale_pixel_count(input_pixels) \u003e target_pixels) {\n    UpdateScale(current_scale);\n  }\n}\n\nwithout the iteration count and even/odd checks. To me, that seems a bit simpler.",
       "parentUuid": "f9804d12_81f5dc95",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 76
+      },
+      "revId": "4880c0d079a1eea7570541b1a1e1fd815719d453",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2cb3443_c68b3ff4",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-17T11:40:48Z",
+      "side": 1,
+      "message": "Changed after offline discussion. Now the scale factor (2/3 or 3/4) is based on resolution.",
+      "parentUuid": "14462e10_43ae3d7d",
       "range": {
         "startLine": 108,
         "startChar": 0,
