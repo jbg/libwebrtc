@@ -5,7 +5,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '60f3e975da0e3fc649f5987034b5573b96503458',
+  'chromium_revision': 'c3479ba2ae95b7a2ea1198b50b8c63a384c72686',
 }
 
 deps = {
@@ -14,7 +14,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@c9e40450438ed36bd1d77d90b4e26aea7f2617db',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@e81a0c9676982f142f090c2778e70e5a4ce35586',
+    'https://chromium.googlesource.com/chromium/src/build@348635186d8d1fe38be135ddde843b7796099f7a',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@cf454b247c611167388742c7a31ef138a6031172',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -29,7 +29,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@e598f3c5f41445ad6221c81012b5d4939ad3fa8f',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@b49284bea016654547679670b0833432cb2cc327',
+    'https://chromium.googlesource.com/chromium/src/third_party@0150d9b3cd00406e94cb77e730fec52d1d741c27',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -111,7 +111,7 @@ deps = {
   'src/third_party/boringssl/src':
     'https://boringssl.googlesource.com/boringssl.git@bc4c09df6416a3a0d0cf321c6c13023c77e2fec4',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@572eb8c70fdcc6e7a6ae0961841fea7661c51fa2',
+    'https://chromium.googlesource.com/catapult.git@e62dfe9064db86632b711c5a4d05b35e5b108a2a',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
     'condition': 'checkout_android',
@@ -241,7 +241,7 @@ deps = {
   'src/third_party/yasm/source/patched-yasm':
     'https://chromium.googlesource.com/chromium/deps/yasm/patched-yasm.git@720b70524a4424b15fc57e82263568c8ba0496ad',
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@8f58bab28f3cb14af9f693a0e1b993a21d0cc11d',
+    'https://chromium.googlesource.com/chromium/src/tools@037cf0c23abf9395d4b69033b172b2b9189e5991',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@885b3febcc170a60f25795304e60927b77d1e92d',
 
