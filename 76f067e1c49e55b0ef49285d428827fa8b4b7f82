@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "c0d7e6b2_f3ffbb60",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-17T13:19:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f4b1e7a5_2bf6596e",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 36
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0135d18b_0e37fa49",
         "filename": "media/base/video_adapter.cc",
         "patchSetId": 5
@@ -190,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "ad8668c3_c52fbf5d",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-17T13:19:54Z",
+      "side": 1,
+      "message": "One advantage of using the *\u003d operation is that any common factors will be divided out. That\u0027s not an issue for the /\u003d 3, /\u003d 2 case further above.",
+      "parentUuid": "1fecb56d_bbabc28e",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "75f00bd1_acb71f9e",
         "filename": "media/base/video_adapter.cc",
         "patchSetId": 5
@@ -225,6 +273,30 @@
       "side": 1,
       "message": "Typically will be mult3 every other time and UpdateScale will multiply by 3/4. So alternation not kept?",
       "parentUuid": "75f00bd1_acb71f9e",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3936e74a_62d4cde2",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-17T13:19:54Z",
+      "side": 1,
+      "message": "Maybe, but it seems a bit subtle to me. When scaling with 3/4, it looks like we will get a factor of 3 in current_width and current_height in the next iteration. But we may have rounding errors in the computation of current_width and current_height, and then it\u0027s unclear to me what sequence of scaling factors we\u0027ll get.\n\nI think I would like logic to use 2/3 if current_width and height are multiples of 3 *and* there were no rounding errors. Otherwise, apply the old condition, 2/3 if current_scale-\u003enumerator is a multiple of 3 (not sure if the other half of the other check, current_scale-\u003edenominator even, is important). So something like\n\nbool mult3 \u003d (input_width * current_scale-\u003enumerator) % (3 * current_scale-\u003edenominator) \u003d\u003d 0\n    \u0026\u0026 corresponding height expression\n\nif (mult3 || current_scale-\u003enumerator % 3 \u003d\u003d 0)\n  current_scale *\u003d Fraction{2,3};\nelse\n  current_scale *\u003d Fraction{3,4};",
+      "parentUuid": "985603ac_5954e855",
       "range": {
         "startLine": 96,
         "startChar": 0,
