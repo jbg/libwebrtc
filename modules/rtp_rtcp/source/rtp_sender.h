@@ -164,6 +164,8 @@ class RTPSender {
 
   void OnPacketsAcknowledged(rtc::ArrayView<const uint16_t> sequence_numbers);
 
+  size_t CalculateRtxPacketOverhead(const RtpPacketToSend& packet);
+
  private:
   // Helper class that redirects packets directly to the send part of this class
   // without passing through an actual paced sender.
@@ -180,6 +182,8 @@ class RTPSender {
     RTPSender* const rtp_sender_;
   };
 
+  std::unique_ptr<RtpPacketToSend> BuildRtxPacketHeader(
+      const RtpPacketToSend& packet);
   std::unique_ptr<RtpPacketToSend> BuildRtxPacket(
       const RtpPacketToSend& packet);
 

@@ -710,54 +710,67 @@ static void CopyHeaderAndExtensionsToRtxPacket(const RtpPacketToSend& packet,
   }
 }
 
-std::unique_ptr<RtpPacketToSend> RTPSender::BuildRtxPacket(
+std::unique_ptr<RtpPacketToSend> RTPSender::BuildRtxPacketHeader(
     const RtpPacketToSend& packet) {
-  std::unique_ptr<RtpPacketToSend> rtx_packet;
+  rtc::CritScope lock(&send_critsect_);
 
-  // Add original RTP header.
-  {
-    rtc::CritScope lock(&send_critsect_);
-    if (!sending_media_)
-      return nullptr;
+  if (!sending_media_)
+    return nullptr;
 
-    RTC_DCHECK(rtx_ssrc_);
+  auto kv = rtx_payload_type_map_.find(packet.PayloadType());
+  if (kv == rtx_payload_type_map_.end())
+    return nullptr;
 
-    // Replace payload type.
-    auto kv = rtx_payload_type_map_.find(packet.PayloadType());
-    if (kv == rtx_payload_type_map_.end())
-      return nullptr;
+  auto rtx_packet = std::make_unique<RtpPacketToSend>(
+      &rtp_header_extension_map_, max_packet_size_);
 
-    rtx_packet = std::make_unique<RtpPacketToSend>(&rtp_header_extension_map_,
-                                                   max_packet_size_);
+  // Replace payload type.
+  rtx_packet->SetPayloadType(kv->second);
 
-    rtx_packet->SetPayloadType(kv->second);
+  // Replace sequence number.
+  rtx_packet->SetSequenceNumber(sequence_number_rtx_++);
 
-    // Replace sequence number.
-    rtx_packet->SetSequenceNumber(sequence_number_rtx_++);
+  // Replace SSRC.
+  rtx_packet->SetSsrc(*rtx_ssrc_);
 
-    // Replace SSRC.
-    rtx_packet->SetSsrc(*rtx_ssrc_);
+  CopyHeaderAndExtensionsToRtxPacket(packet, rtx_packet.get());
 
-    CopyHeaderAndExtensionsToRtxPacket(packet, rtx_packet.get());
-
-    // RTX packets are sent on an SSRC different from the main media, so the
-    // decision to attach MID and/or RRID header extensions is completely
-    // separate from that of the main media SSRC.
-    //
-    // Note that RTX packets must used the RepairedRtpStreamId (RRID) header
-    // extension instead of the RtpStreamId (RID) header extension even though
-    // the payload is identical.
-    if (!rtx_ssrc_has_acked_) {
-      // These are no-ops if the corresponding header extension is not
-      // registered.
-      if (!mid_.empty()) {
-        rtx_packet->SetExtension<RtpMid>(mid_);
-      }
-      if (!rid_.empty()) {
-        rtx_packet->SetExtension<RepairedRtpStreamId>(rid_);
-      }
+  // RTX packets are sent on an SSRC different from the main media, so the
+  // decision to attach MID and/or RRID header extensions is completely
+  // separate from that of the main media SSRC.
+  //
+  // Note that RTX packets must used the RepairedRtpStreamId (RRID) header
+  // extension instead of the RtpStreamId (RID) header extension even though
+  // the payload is identical.
+  if (!rtx_ssrc_has_acked_) {
+    // These are no-ops if the corresponding header extension is not
+    // registered.
+    if (!mid_.empty()) {
+      rtx_packet->SetExtension<RtpMid>(mid_);
+    }
+    if (!rid_.empty()) {
+      rtx_packet->SetExtension<RepairedRtpStreamId>(rid_);
     }
   }
+
+  return rtx_packet;
+}
+
+size_t RTPSender::CalculateRtxPacketOverhead(const RtpPacketToSend& packet) {
+  std::unique_ptr<RtpPacketToSend> rtx_packet = BuildRtxPacketHeader(packet);
+  if (!rtx_packet) {
+    return 0;
+  }
+  size_t total_headers_size = rtx_packet->headers_size() + kRtxHeaderSize;
+  if (total_headers_size < packet.headers_size()) {
+    return 0;
+  }
+  return total_headers_size - packet.headers_size();
+}
+
+std::unique_ptr<RtpPacketToSend> RTPSender::BuildRtxPacket(
+    const RtpPacketToSend& packet) {
+  std::unique_ptr<RtpPacketToSend> rtx_packet = BuildRtxPacketHeader(packet);
   RTC_DCHECK(rtx_packet);
 
   uint8_t* rtx_payload =

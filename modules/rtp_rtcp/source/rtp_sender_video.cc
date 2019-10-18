@@ -494,9 +494,9 @@ bool RTPSenderVideo::SendVideo(
   }
 
   // Maximum size of packet including rtp headers.
-  // Extra space left in case packet will be resent using fec or rtx.
-  int packet_capacity = rtp_sender_->MaxRtpPacketSize() - FecPacketOverhead() -
-                        (rtp_sender_->RtxStatus() ? kRtxHeaderSize : 0);
+  // Extra space left in case packet will be resent using fec. Rtx overhead is
+  // calculated below.
+  int packet_capacity = rtp_sender_->MaxRtpPacketSize() - FecPacketOverhead();
 
   std::unique_ptr<RtpPacketToSend> single_packet =
       rtp_sender_->AllocatePacket();
@@ -526,20 +526,45 @@ bool RTPSenderVideo::SendVideo(
   RTC_DCHECK_GT(packet_capacity, first_packet->headers_size());
   RTC_DCHECK_GT(packet_capacity, middle_packet->headers_size());
   RTC_DCHECK_GT(packet_capacity, last_packet->headers_size());
+
+  size_t single_packet_headers_size = single_packet->headers_size();
+  size_t first_packet_headers_size = first_packet->headers_size();
+  size_t middle_packet_headers_size = middle_packet->headers_size();
+  size_t last_packet_headers_size = last_packet->headers_size();
+
+  if (rtp_sender_->RtxStatus()) {
+    single_packet_headers_size +=
+        rtp_sender_->CalculateRtxPacketOverhead(*single_packet);
+    first_packet_headers_size +=
+        rtp_sender_->CalculateRtxPacketOverhead(*single_packet);
+    last_packet_headers_size +=
+        rtp_sender_->CalculateRtxPacketOverhead(*single_packet);
+    // Deliberately do the middle last since the below code assumes middle is
+    // the smallest. There's a small chance that an RTCP feedback could get
+    // processed concurrently which would make the RTX overhead decrease.
+    middle_packet_headers_size +=
+        rtp_sender_->CalculateRtxPacketOverhead(*single_packet);
+
+    RTC_DCHECK_GT(packet_capacity, single_packet_headers_size);
+    RTC_DCHECK_GT(packet_capacity, first_packet_headers_size);
+    RTC_DCHECK_GT(packet_capacity, middle_packet_headers_size);
+    RTC_DCHECK_GT(packet_capacity, last_packet_headers_size);
+  }
+
   RtpPacketizer::PayloadSizeLimits limits;
-  limits.max_payload_len = packet_capacity - middle_packet->headers_size();
+  limits.max_payload_len = packet_capacity - middle_packet_headers_size;
 
-  RTC_DCHECK_GE(single_packet->headers_size(), middle_packet->headers_size());
+  RTC_DCHECK_GE(single_packet_headers_size, middle_packet_headers_size);
   limits.single_packet_reduction_len =
-      single_packet->headers_size() - middle_packet->headers_size();
+      single_packet_headers_size - middle_packet_headers_size;
 
-  RTC_DCHECK_GE(first_packet->headers_size(), middle_packet->headers_size());
+  RTC_DCHECK_GE(first_packet_headers_size, middle_packet_headers_size);
   limits.first_packet_reduction_len =
-      first_packet->headers_size() - middle_packet->headers_size();
+      first_packet_headers_size - middle_packet_headers_size;
 
-  RTC_DCHECK_GE(last_packet->headers_size(), middle_packet->headers_size());
+  RTC_DCHECK_GE(last_packet_headers_size, middle_packet_headers_size);
   limits.last_packet_reduction_len =
-      last_packet->headers_size() - middle_packet->headers_size();
+      last_packet_headers_size - middle_packet_headers_size;
 
   rtc::ArrayView<const uint8_t> generic_descriptor_raw_00 =
       first_packet->GetRawExtension<RtpGenericFrameDescriptorExtension00>();
