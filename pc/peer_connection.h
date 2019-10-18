@@ -34,6 +34,7 @@
 #include "pc/stream_collection.h"
 #include "pc/webrtc_session_description_factory.h"
 #include "rtc_base/experiments/field_trial_parser.h"
+#include "rtc_base/operations_chain.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/unique_id_generator.h"
 
@@ -204,16 +205,27 @@ class PeerConnection : public PeerConnectionInternal,
   // JSEP01
   void CreateOffer(CreateSessionDescriptionObserver* observer,
                    const RTCOfferAnswerOptions& options) override;
+  void DoCreateOffer(CreateSessionDescriptionObserver* observer,
+                     const RTCOfferAnswerOptions& options,
+                     std::function<void()> operations_chain_callback);
   void CreateAnswer(CreateSessionDescriptionObserver* observer,
                     const RTCOfferAnswerOptions& options) override;
+  void DoCreateAnswer(CreateSessionDescriptionObserver* observer,
+                      const RTCOfferAnswerOptions& options,
+                      std::function<void()> operations_chain_callback);
   void SetLocalDescription(SetSessionDescriptionObserver* observer,
                            SessionDescriptionInterface* desc) override;
+  void DoSetLocalDescription(SetSessionDescriptionObserver* observer,
+                             SessionDescriptionInterface* desc);
   void SetRemoteDescription(SetSessionDescriptionObserver* observer,
-                            SessionDescriptionInterface* desc) override;
+                            SessionDescriptionInterface* desc_ptr) override;
   void SetRemoteDescription(
       std::unique_ptr<SessionDescriptionInterface> desc,
       rtc::scoped_refptr<SetRemoteDescriptionObserverInterface> observer)
       override;
+  void DoSetRemoteDescription(
+      std::unique_ptr<SessionDescriptionInterface> desc,
+      rtc::scoped_refptr<SetRemoteDescriptionObserverInterface> observer);
   PeerConnectionInterface::RTCConfiguration GetConfiguration() override;
   RTCError SetConfiguration(
       const PeerConnectionInterface::RTCConfiguration& configuration) override;
@@ -567,7 +579,8 @@ class PeerConnection : public PeerConnectionInternal,
                                         RTCError&& error);
   void PostCreateSessionDescriptionFailure(
       CreateSessionDescriptionObserver* observer,
-      RTCError error);
+      RTCError error,
+      std::function<void()> operations_chain_callback);
 
   // Synchronous implementations of SetLocalDescription/SetRemoteDescription
   // that return an RTCError instead of invoking a callback.
@@ -1214,6 +1227,9 @@ class PeerConnection : public PeerConnectionInternal,
   // Points to the same thing as `event_log_`. Since it's const, we may read the
   // pointer (but not touch the object) from any thread.
   RtcEventLog* const event_log_ptr_ RTC_PT_GUARDED_BY(worker_thread());
+
+  rtc::scoped_refptr<rtc::OperationsChain> operations_chain_
+      RTC_GUARDED_BY(signaling_thread());
 
   SignalingState signaling_state_ RTC_GUARDED_BY(signaling_thread()) = kStable;
   IceConnectionState ice_connection_state_ RTC_GUARDED_BY(signaling_thread()) =

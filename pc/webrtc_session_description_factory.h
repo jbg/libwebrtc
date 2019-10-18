@@ -13,9 +13,11 @@
 
 #include <stdint.h>
 
+#include <functional>
 #include <memory>
 #include <queue>
 #include <string>
+#include <utility>
 
 #include "api/jsep.h"
 #include "api/peer_connection_interface.h"
@@ -56,14 +58,20 @@ struct CreateSessionDescriptionRequest {
     kAnswer,
   };
 
-  CreateSessionDescriptionRequest(Type type,
-                                  CreateSessionDescriptionObserver* observer,
-                                  const cricket::MediaSessionOptions& options)
-      : type(type), observer(observer), options(options) {}
+  CreateSessionDescriptionRequest(
+      Type type,
+      CreateSessionDescriptionObserver* observer,
+      const cricket::MediaSessionOptions& options,
+      std::function<void()> operation_completed_callback)
+      : type(type),
+        observer(observer),
+        options(options),
+        operation_completed_callback(std::move(operation_completed_callback)) {}
 
   Type type;
   rtc::scoped_refptr<CreateSessionDescriptionObserver> observer;
   cricket::MediaSessionOptions options;
+  std::function<void()> operation_completed_callback;
 };
 
 // This class is used to create offer/answer session description. Certificates
@@ -96,9 +104,11 @@ class WebRtcSessionDescriptionFactory : public rtc::MessageHandler,
   void CreateOffer(
       CreateSessionDescriptionObserver* observer,
       const PeerConnectionInterface::RTCOfferAnswerOptions& options,
-      const cricket::MediaSessionOptions& session_options);
+      const cricket::MediaSessionOptions& session_options,
+      std::function<void()> operation_completed_callback);
   void CreateAnswer(CreateSessionDescriptionObserver* observer,
-                    const cricket::MediaSessionOptions& session_options);
+                    const cricket::MediaSessionOptions& session_options,
+                    std::function<void()> operation_completed_callback);
 
   void SetSdesPolicy(cricket::SecurePolicy secure_policy);
   cricket::SecurePolicy SdesPolicy() const;
@@ -136,10 +146,12 @@ class WebRtcSessionDescriptionFactory : public rtc::MessageHandler,
   void FailPendingRequests(const std::string& reason);
   void PostCreateSessionDescriptionFailed(
       CreateSessionDescriptionObserver* observer,
-      const std::string& error);
+      const std::string& error,
+      std::function<void()> operation_complete_callback);
   void PostCreateSessionDescriptionSucceeded(
       CreateSessionDescriptionObserver* observer,
-      std::unique_ptr<SessionDescriptionInterface> description);
+      std::unique_ptr<SessionDescriptionInterface> description,
+      std::function<void()> operation_complete_callback);
 
   void OnCertificateRequestFailed();
   void SetCertificate(
