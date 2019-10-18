@@ -306,6 +306,30 @@
       "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d79e3e86_dfa350d2",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2019-10-18T11:20:27Z",
+      "side": 1,
+      "message": "Have updated so current_scale is set initially to possibly start at 2/3 or 2x 2/3 and then alternating. Common factors are divided out at the end. If done per iteration, the alternation may change (e.g. (2/3)2/3, (3/4)6/12, (2/3)2/6 -\u003e (2/3)2/3, (3/4)1/2, (3/4)3/8).",
+      "parentUuid": "3936e74a_62d4cde2",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "76f067e1c49e55b0ef49285d428827fa8b4b7f82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
