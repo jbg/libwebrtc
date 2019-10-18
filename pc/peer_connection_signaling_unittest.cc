@@ -41,6 +41,10 @@ using ::testing::Bool;
 using ::testing::Combine;
 using ::testing::Values;
 
+namespace {
+const int64_t kWaitTimeout = 10000;
+}  // namespace
+
 class PeerConnectionWrapperForSignalingTest : public PeerConnectionWrapper {
  public:
   using PeerConnectionWrapper::PeerConnectionWrapper;
@@ -493,9 +497,9 @@ TEST_P(PeerConnectionSignalingTest, InitiatorFlagSetOnCallerAndNotOnCallee) {
   EXPECT_FALSE(callee->initial_offerer());
 }
 
-// Test creating a PeerConnection, request multiple offers, destroy the
-// PeerConnection and make sure we get success/failure callbacks for all of the
-// requests.
+// Test creating a PeerConnection, request multiple offers, releases all
+// external references to the PeerConnection and make sure we get
+// success/failure callbacks for all of the requests.
 // Background: crbug.com/507307
 TEST_P(PeerConnectionSignalingTest, CreateOffersAndShutdown) {
   auto caller = CreatePeerConnection();
@@ -511,15 +515,60 @@ TEST_P(PeerConnectionSignalingTest, CreateOffersAndShutdown) {
     caller->pc()->CreateOffer(observer, options);
   }
 
-  // Destroy the PeerConnection.
+  // Free any external references to the PeerConnection. This triggers its
+  // eventual destruction.
   caller.reset(nullptr);
 
   for (auto& observer : observers) {
     // We expect to have received a notification now even if the PeerConnection
     // was terminated. The offer creation may or may not have succeeded, but we
     // must have received a notification.
-    EXPECT_TRUE(observer->called());
+    EXPECT_TRUE_WAIT(observer->called(), kWaitTimeout);
   }
+}
+
+TEST_P(PeerConnectionSignalingTest, SetRemoteDescriptionExecutesImmediately) {
+  auto caller = CreatePeerConnectionWithAudioVideo();
+  auto callee = CreatePeerConnection();
+
+  // This offer will cause receivers to be created.
+  auto offer = caller->CreateOffer(RTCOfferAnswerOptions());
+
+  EXPECT_EQ(0u, callee->pc()->GetReceivers().size());
+  // By not waiting for the observer's callback we can verify that the operation
+  // executed immediately.
+  callee->pc()->SetRemoteDescription(std::move(offer),
+                                     new MockSetRemoteDescriptionObserver());
+  EXPECT_EQ(2u, callee->pc()->GetReceivers().size());
+}
+
+TEST_P(PeerConnectionSignalingTest, CreateOfferBlocksSetRemoteDescription) {
+  auto caller = CreatePeerConnectionWithAudioVideo();
+  auto callee = CreatePeerConnection();
+
+  // This offer will cause receivers to be created.
+  auto offer = caller->CreateOffer(RTCOfferAnswerOptions());
+
+  EXPECT_EQ(0u, callee->pc()->GetReceivers().size());
+  rtc::scoped_refptr<MockCreateSessionDescriptionObserver> offer_observer(
+      new rtc::RefCountedObject<MockCreateSessionDescriptionObserver>());
+  // Synchronously invoke CreateOffer() and SetRemoteDescription(). The
+  // SetRemoteDescription() operation should be chained to be executed
+  // asynchronously, when CreateOffer() completes.
+  callee->pc()->CreateOffer(offer_observer, RTCOfferAnswerOptions());
+  callee->pc()->SetRemoteDescription(std::move(offer),
+                                     new MockSetRemoteDescriptionObserver());
+  // CreateOffer() is asynchronous; without message processing this operation
+  // should not have completed.
+  EXPECT_FALSE(offer_observer->called());
+  // Due to chaining, the receivers should not have been created by the offer
+  // yet.
+  EXPECT_EQ(0u, callee->pc()->GetReceivers().size());
+  // EXPECT_EQ_WAIT causes messages to be processed...
+  EXPECT_EQ_WAIT(true, offer_observer->called(), kWaitTimeout);
+  // Now that the offer has been completed, SetRemoteDescription() will have
+  // been executed next in the chain.
+  EXPECT_EQ(2u, callee->pc()->GetReceivers().size());
 }
 
 INSTANTIATE_TEST_SUITE_P(PeerConnectionSignalingTest,
