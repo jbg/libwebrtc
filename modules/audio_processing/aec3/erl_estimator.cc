@@ -39,19 +39,64 @@ void ErlEstimator::Reset() {
 }
 
 void ErlEstimator::Update(
-    bool converged_filter,
-    rtc::ArrayView<const float, kFftLengthBy2Plus1> render_spectrum,
-    rtc::ArrayView<const float, kFftLengthBy2Plus1> capture_spectrum) {
-  const auto& X2 = render_spectrum;
-  const auto& Y2 = capture_spectrum;
+    const std::vector<bool>& converged_filters,
+    rtc::ArrayView<const std::array<float, kFftLengthBy2Plus1>> render_spectra,
+    rtc::ArrayView<const std::array<float, kFftLengthBy2Plus1>>
+        capture_spectra) {
+  const size_t num_capture_channels = converged_filters.size();
+  RTC_DCHECK_EQ(capture_spectra.size(), num_capture_channels);
 
   // Corresponds to WGN of power -46 dBFS.
   constexpr float kX2Min = 44015068.0f;
 
+  size_t first_converged = 0;
+  while (first_converged < num_capture_channels &&
+         !converged_filters[first_converged]) {
+    ++first_converged;
+  }
+
   if (++blocks_since_reset_ < startup_phase_length_blocks__ ||
-      !converged_filter) {
+      first_converged >= num_capture_channels) {
     return;
   }
+
+  // Use the minimum spectrum across capture and the maximum across render, to
+  // get an upper bound on ERL for all capture / render combinations.
+  const size_t num_render_channels = render_spectra.size();
+  std::array<float, kFftLengthBy2Plus1> min_render_spectrum_data;
+  rtc::ArrayView<const float, kFftLengthBy2Plus1> min_render_spectrum =
+      render_spectra[/*channel=*/0];
+  if (num_render_channels > 1) {
+    std::copy(render_spectra[0].begin(), render_spectra[0].end(),
+              min_render_spectrum_data.begin());
+    for (size_t ch = 1; ch < num_render_channels; ++ch) {
+      for (size_t k = 0; k < kFftLengthBy2Plus1; ++k) {
+        min_render_spectrum_data[k] =
+            std::min(min_render_spectrum_data[k], render_spectra[ch][k]);
+      }
+    }
+    min_render_spectrum = min_render_spectrum_data;
+  }
+
+  std::array<float, kFftLengthBy2Plus1> max_capture_spectrum_data;
+  std::array<float, kFftLengthBy2Plus1> max_capture_spectrum =
+      capture_spectra[/*channel=*/0];
+  if (num_capture_channels > 1) {
+    max_capture_spectrum_data = capture_spectra[first_converged];
+    for (size_t ch = first_converged + 1; ch < num_capture_channels; ++ch) {
+      if (!converged_filters[ch]) {
+        continue;
+      }
+      for (size_t k = 0; k < kFftLengthBy2Plus1; ++k) {
+        max_capture_spectrum_data[k] =
+            std::max(max_capture_spectrum_data[k], capture_spectra[ch][k]);
+      }
+    }
+    max_capture_spectrum = max_capture_spectrum_data;
+  }
+
+  const auto& X2 = min_render_spectrum;
+  const auto& Y2 = max_capture_spectrum;
 
   // Update the estimates in a maximum statistics manner.
   for (size_t k = 1; k < kFftLengthBy2; ++k) {
