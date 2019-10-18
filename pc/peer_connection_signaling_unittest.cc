@@ -41,6 +41,10 @@ using ::testing::Bool;
 using ::testing::Combine;
 using ::testing::Values;
 
+namespace {
+const int64_t kWaitTimeout = 10000;
+}  // namespace
+
 class PeerConnectionWrapperForSignalingTest : public PeerConnectionWrapper {
  public:
   using PeerConnectionWrapper::PeerConnectionWrapper;
@@ -493,9 +497,9 @@ TEST_P(PeerConnectionSignalingTest, InitiatorFlagSetOnCallerAndNotOnCallee) {
   EXPECT_FALSE(callee->initial_offerer());
 }
 
-// Test creating a PeerConnection, request multiple offers, destroy the
-// PeerConnection and make sure we get success/failure callbacks for all of the
-// requests.
+// Test creating a PeerConnection, request multiple offers, releases all
+// external references to the PeerConnection and make sure we get
+// success/failure callbacks for all of the requests.
 // Background: crbug.com/507307
 TEST_P(PeerConnectionSignalingTest, CreateOffersAndShutdown) {
   auto caller = CreatePeerConnection();
@@ -511,14 +515,15 @@ TEST_P(PeerConnectionSignalingTest, CreateOffersAndShutdown) {
     caller->pc()->CreateOffer(observer, options);
   }
 
-  // Destroy the PeerConnection.
+  // Free any external references to the PeerConnection. This triggers its
+  // eventual destruction.
   caller.reset(nullptr);
 
   for (auto& observer : observers) {
     // We expect to have received a notification now even if the PeerConnection
     // was terminated. The offer creation may or may not have succeeded, but we
     // must have received a notification.
-    EXPECT_TRUE(observer->called());
+    EXPECT_TRUE_WAIT(observer->called(), kWaitTimeout);
   }
 }
 
