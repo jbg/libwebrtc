@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "cab85af9_63e10eac",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-18T14:15:21Z",
+      "side": 1,
+      "message": "Sorry, my bad. After reading the code further during the last review round I realized this as well. However, I clearly failed to remove this comment.\n\nI think it is good as it is.",
+      "parentUuid": "0e1e7824_e2cfd41b",
+      "range": {
+        "startLine": 53,
+        "startChar": 25,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "caff9142_1bcca93d",
         "filename": "modules/audio_processing/aec3/erl_estimator.cc",
         "patchSetId": 6
