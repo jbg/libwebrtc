@@ -22,6 +22,30 @@
       "revId": "91a1e1c563eba8dc35da206d963baa848a865561",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "289b32aa_157f60a8",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-18T07:53:32Z",
+      "side": 1,
+      "message": "I think it\u0027s good practice to have a CHECK close to the memcpy, to have size-related bugs result in a controlled crash rather than having the memcpy overwrite some random memory. But the |new_size| variable is a bit pointless, I\u0027ll delete that.",
+      "parentUuid": "b9bcbe1c_4ed979b3",
+      "range": {
+        "startLine": 1152,
+        "startChar": 0,
+        "endLine": 1153,
+        "endChar": 49
+      },
+      "revId": "91a1e1c563eba8dc35da206d963baa848a865561",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
