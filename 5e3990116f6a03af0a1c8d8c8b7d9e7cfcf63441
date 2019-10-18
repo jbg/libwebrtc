@@ -93,6 +93,30 @@
       "revId": "5e3990116f6a03af0a1c8d8c8b7d9e7cfcf63441",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "334228ad_25cf20b5",
+        "filename": "media/base/video_adapter_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-18T13:07:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "51bfb337_ca31d6b6",
+      "range": {
+        "startLine": 1211,
+        "startChar": 0,
+        "endLine": 1214,
+        "endChar": 63
+      },
+      "revId": "5e3990116f6a03af0a1c8d8c8b7d9e7cfcf63441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
