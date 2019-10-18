@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1e7824_e2cfd41b",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-10-18T13:40:07Z",
+      "side": 1,
+      "message": "The main drawback is that we do not produce first_converged to use to index capture_spectra further down the code. I\u0027ve updated the code to clarify the any_filter_converged part, what do you think?",
+      "parentUuid": "5c2b05c7_489f0843",
+      "range": {
+        "startLine": 53,
+        "startChar": 25,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "caff9142_1bcca93d",
         "filename": "modules/audio_processing/aec3/erl_estimator.cc",
         "patchSetId": 6
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "e9a20400_150d79d8",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-10-18T13:40:07Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "caff9142_1bcca93d",
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7890a83_24e4ee08",
         "filename": "modules/audio_processing/aec3/erl_estimator.cc",
         "patchSetId": 6
@@ -56,6 +98,24 @@
       "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dce3abe_d6edf146",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-10-18T13:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7890a83_24e4ee08",
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "444f92bb_34ed97f2",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-10-18T13:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9da0604_241be42a",
+      "range": {
+        "startLine": 85,
+        "startChar": 48,
+        "endLine": 85,
+        "endChar": 63
+      },
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04f576bc_fc981e22",
         "filename": "modules/audio_processing/aec3/erl_estimator.h",
         "patchSetId": 6
@@ -96,6 +180,24 @@
       "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7e58ebd_417c6f8d",
+        "filename": "modules/audio_processing/aec3/erl_estimator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-10-18T13:40:07Z",
+      "side": 1,
+      "message": "Deleted it, since it no longer computes the worst estimate.",
+      "parentUuid": "04f576bc_fc981e22",
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
