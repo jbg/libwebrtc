@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40135d73_5af01024",
+        "filename": "media/base/video_adapter.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-18T11:43:32Z",
+      "side": 1,
+      "message": "I\u0027m not that fond of selecting different representation of scale factor 1, and then treat them differently below. That\u0027s unexpected if one expects the Fraction class to represent a mathematical fraction, where 1/1 and 6/6 mean the same thing. But if that\u0027s the simplest way to get the desired behavior, I guess it\u0027s fine for now.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 3
+      },
+      "revId": "5e3990116f6a03af0a1c8d8c8b7d9e7cfcf63441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55f486de_65b83e56",
+        "filename": "media/base/video_adapter_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-18T11:43:32Z",
+      "side": 1,
+      "message": "I was confused at first by this test having identical expectations as the one above. But I see that they use different field trials, which shouldn\u0027t make a difference for this resolution. Not sure if a comment would make it less confusing.",
+      "range": {
+        "startLine": 1211,
+        "startChar": 0,
+        "endLine": 1214,
+        "endChar": 63
+      },
+      "revId": "5e3990116f6a03af0a1c8d8c8b7d9e7cfcf63441",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
