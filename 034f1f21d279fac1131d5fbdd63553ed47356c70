@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c2b05c7_489f0843",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-18T10:34:19Z",
+      "side": 1,
+      "message": "What about instead either doing it as\n1) using std::any_of\n2) Producing a bool as\nbool any_converged \u003d false;\nfor (auto converged_filter : converged_filters) {\n  any_converged \u003d any_converged || converged_filter;\n}\n\nWhat I like with these is that they produce a clear standalone bool that can go into the if-statement below without knowing the details of how it was computed (first_converged_ requires information on how it was computed).\n\nThe drawback is that one cannot do an early return but that will only affect average complexity and since the array is so small anyway, and the loop body so cheap, I think that is fine.",
+      "range": {
+        "startLine": 53,
+        "startChar": 25,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caff9142_1bcca93d",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-18T10:34:19Z",
+      "side": 1,
+      "message": "I don\u0027t think we can do a min here. That would mean that if only one channel is zero, the ERL would be infinite, which is not true. I think it is better to do a max here.",
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7890a83_24e4ee08",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-18T10:34:19Z",
+      "side": 1,
+      "message": "What about changing position between this block and the one above? That will make the use of first_converged be closer to where it is computed.",
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9da0604_241be42a",
+        "filename": "modules/audio_processing/aec3/erl_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-18T10:34:19Z",
+      "side": 1,
+      "message": "Please add a DCHECK to ensure that first_converged is within the array limits (from the code it is clear that it is so now, but since the computation of that is away from this in the code it is good to have it regardless I think.",
+      "range": {
+        "startLine": 85,
+        "startChar": 48,
+        "endLine": 85,
+        "endChar": 63
+      },
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04f576bc_fc981e22",
+        "filename": "modules/audio_processing/aec3/erl_estimator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-18T10:34:19Z",
+      "side": 1,
+      "message": "Nit: Maybe tie the two sentences together more? As of now, they sounds like independent, or like either-or.",
+      "revId": "034f1f21d279fac1131d5fbdd63553ed47356c70",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
