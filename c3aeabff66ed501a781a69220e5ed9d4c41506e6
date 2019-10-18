@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "9a003eb2_cc556304",
+        "filename": "rtc_base/operations_chain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-10-18T12:28:19Z",
+      "side": 1,
+      "message": "No, this is close enough---we could bikeshed forever, but at some point it stops being a good use of time.",
+      "parentUuid": "e6265ee8_8cacf5b6",
+      "revId": "c3aeabff66ed501a781a69220e5ed9d4c41506e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "957c36bb_1e938fe3",
         "filename": "rtc_base/operations_chain.h",
         "patchSetId": 7
