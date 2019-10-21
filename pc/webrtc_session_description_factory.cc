@@ -73,12 +73,21 @@ enum {
 struct CreateSessionDescriptionMsg : public rtc::MessageData {
   explicit CreateSessionDescriptionMsg(
       webrtc::CreateSessionDescriptionObserver* observer,
-      RTCError error_in)
-      : observer(observer), error(std::move(error_in)) {}
+      RTCError error_in,
+      std::function<void()> operation_completed_callback_in)
+      : observer(observer),
+        error(std::move(error_in)),
+        operation_completed_callback(
+            std::move(operation_completed_callback_in)) {}
+
+  ~CreateSessionDescriptionMsg() override { operation_completed_callback(); }
 
   rtc::scoped_refptr<webrtc::CreateSessionDescriptionObserver> observer;
   RTCError error;
   std::unique_ptr<webrtc::SessionDescriptionInterface> description;
+  // This is invoked by the destructor. This ensures that the callback is
+  // invoked whether OnMessage() happened or not.
+  std::function<void()> operation_completed_callback;
 };
 }  // namespace
 
@@ -215,24 +224,28 @@ WebRtcSessionDescriptionFactory::~WebRtcSessionDescriptionFactory() {
 void WebRtcSessionDescriptionFactory::CreateOffer(
     CreateSessionDescriptionObserver* observer,
     const PeerConnectionInterface::RTCOfferAnswerOptions& options,
-    const cricket::MediaSessionOptions& session_options) {
+    const cricket::MediaSessionOptions& session_options,
+    std::function<void()> operation_completed_callback) {
   std::string error = "CreateOffer";
   if (certificate_request_state_ == CERTIFICATE_FAILED) {
     error += kFailedDueToIdentityFailed;
     RTC_LOG(LS_ERROR) << error;
-    PostCreateSessionDescriptionFailed(observer, error);
+    PostCreateSessionDescriptionFailed(observer, error,
+                                       std::move(operation_completed_callback));
     return;
   }
 
   if (!ValidMediaSessionOptions(session_options)) {
     error += " called with invalid session options";
     RTC_LOG(LS_ERROR) << error;
-    PostCreateSessionDescriptionFailed(observer, error);
+    PostCreateSessionDescriptionFailed(observer, error,
+                                       std::move(operation_completed_callback));
     return;
   }
 
   CreateSessionDescriptionRequest request(
-      CreateSessionDescriptionRequest::kOffer, observer, session_options);
+      CreateSessionDescriptionRequest::kOffer, observer, session_options,
+      std::move(operation_completed_callback));
   if (certificate_request_state_ == CERTIFICATE_WAITING) {
     create_session_description_requests_.push(request);
   } else {
@@ -244,36 +257,42 @@ void WebRtcSessionDescriptionFactory::CreateOffer(
 
 void WebRtcSessionDescriptionFactory::CreateAnswer(
     CreateSessionDescriptionObserver* observer,
-    const cricket::MediaSessionOptions& session_options) {
+    const cricket::MediaSessionOptions& session_options,
+    std::function<void()> operation_completed_callback) {
   std::string error = "CreateAnswer";
   if (certificate_request_state_ == CERTIFICATE_FAILED) {
     error += kFailedDueToIdentityFailed;
     RTC_LOG(LS_ERROR) << error;
-    PostCreateSessionDescriptionFailed(observer, error);
+    PostCreateSessionDescriptionFailed(observer, error,
+                                       std::move(operation_completed_callback));
     return;
   }
   if (!pc_->remote_description()) {
     error += " can't be called before SetRemoteDescription.";
     RTC_LOG(LS_ERROR) << error;
-    PostCreateSessionDescriptionFailed(observer, error);
+    PostCreateSessionDescriptionFailed(observer, error,
+                                       std::move(operation_completed_callback));
     return;
   }
   if (pc_->remote_description()->GetType() != SdpType::kOffer) {
     error += " failed because remote_description is not an offer.";
     RTC_LOG(LS_ERROR) << error;
-    PostCreateSessionDescriptionFailed(observer, error);
+    PostCreateSessionDescriptionFailed(observer, error,
+                                       std::move(operation_completed_callback));
     return;
   }
 
   if (!ValidMediaSessionOptions(session_options)) {
     error += " called with invalid session options.";
     RTC_LOG(LS_ERROR) << error;
-    PostCreateSessionDescriptionFailed(observer, error);
+    PostCreateSessionDescriptionFailed(observer, error,
+                                       std::move(operation_completed_callback));
     return;
   }
 
   CreateSessionDescriptionRequest request(
-      CreateSessionDescriptionRequest::kAnswer, observer, session_options);
+      CreateSessionDescriptionRequest::kAnswer, observer, session_options,
+      std::move(operation_completed_callback));
   if (certificate_request_state_ == CERTIFICATE_WAITING) {
     create_session_description_requests_.push(request);
   } else {
@@ -342,8 +361,9 @@ void WebRtcSessionDescriptionFactory::InternalCreateOffer(
                                ? pc_->local_description()->description()
                                : nullptr);
   if (!desc) {
-    PostCreateSessionDescriptionFailed(request.observer,
-                                       "Failed to initialize the offer.");
+    PostCreateSessionDescriptionFailed(
+        request.observer, "Failed to initialize the offer.",
+        std::move(request.operation_completed_callback));
     return;
   }
 
@@ -369,7 +389,9 @@ void WebRtcSessionDescriptionFactory::InternalCreateOffer(
       }
     }
   }
-  PostCreateSessionDescriptionSucceeded(request.observer, std::move(offer));
+  PostCreateSessionDescriptionSucceeded(
+      request.observer, std::move(offer),
+      std::move(request.operation_completed_callback));
 }
 
 void WebRtcSessionDescriptionFactory::InternalCreateAnswer(
@@ -400,8 +422,9 @@ void WebRtcSessionDescriptionFactory::InternalCreateAnswer(
           pc_->local_description() ? pc_->local_description()->description()
                                    : nullptr);
   if (!desc) {
-    PostCreateSessionDescriptionFailed(request.observer,
-                                       "Failed to initialize the answer.");
+    PostCreateSessionDescriptionFailed(
+        request.observer, "Failed to initialize the answer.",
+        std::move(request.operation_completed_callback));
     return;
   }
 
@@ -427,7 +450,9 @@ void WebRtcSessionDescriptionFactory::InternalCreateAnswer(
       }
     }
   }
-  PostCreateSessionDescriptionSucceeded(request.observer, std::move(answer));
+  PostCreateSessionDescriptionSucceeded(
+      request.observer, std::move(answer),
+      std::move(request.operation_completed_callback));
 }
 
 void WebRtcSessionDescriptionFactory::FailPendingRequests(
@@ -441,16 +466,19 @@ void WebRtcSessionDescriptionFactory::FailPendingRequests(
         ((request.type == CreateSessionDescriptionRequest::kOffer)
              ? "CreateOffer"
              : "CreateAnswer") +
-            reason);
+            reason,
+        std::move(request.operation_completed_callback));
     create_session_description_requests_.pop();
   }
 }
 
 void WebRtcSessionDescriptionFactory::PostCreateSessionDescriptionFailed(
     CreateSessionDescriptionObserver* observer,
-    const std::string& error) {
+    const std::string& error,
+    std::function<void()> operation_completed_callback) {
   CreateSessionDescriptionMsg* msg = new CreateSessionDescriptionMsg(
-      observer, RTCError(RTCErrorType::INTERNAL_ERROR, std::string(error)));
+      observer, RTCError(RTCErrorType::INTERNAL_ERROR, std::string(error)),
+      std::move(operation_completed_callback));
   signaling_thread_->Post(RTC_FROM_HERE, this,
                           MSG_CREATE_SESSIONDESCRIPTION_FAILED, msg);
   RTC_LOG(LS_ERROR) << "Create SDP failed: " << error;
@@ -458,9 +486,10 @@ void WebRtcSessionDescriptionFactory::PostCreateSessionDescriptionFailed(
 
 void WebRtcSessionDescriptionFactory::PostCreateSessionDescriptionSucceeded(
     CreateSessionDescriptionObserver* observer,
-    std::unique_ptr<SessionDescriptionInterface> description) {
-  CreateSessionDescriptionMsg* msg =
-      new CreateSessionDescriptionMsg(observer, RTCError::OK());
+    std::unique_ptr<SessionDescriptionInterface> description,
+    std::function<void()> operation_completed_callback) {
+  CreateSessionDescriptionMsg* msg = new CreateSessionDescriptionMsg(
+      observer, RTCError::OK(), std::move(operation_completed_callback));
   msg->description = std::move(description);
   signaling_thread_->Post(RTC_FROM_HERE, this,
                           MSG_CREATE_SESSIONDESCRIPTION_SUCCESS, msg);
