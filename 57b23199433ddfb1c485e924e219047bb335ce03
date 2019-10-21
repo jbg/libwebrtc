@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "72618688_fd1ce239",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:16:00Z",
+      "side": 1,
+      "message": "- We need to update the list of available sources for full_screen_window_detector_ twice per second and as we\u0027re not using any timers here is a good place to do it.\n- Order of calling for UpdateWindowListIfNeeded and FindFullScreenWindow is not important, that\u0027s ok to start capturing full screen one frame later.",
+      "parentUuid": "195d3a87_850c8186",
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a3e5b77_90d50013",
         "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42d1ca2e_7c704a0c",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:16:00Z",
+      "side": 1,
+      "message": "Done: these lines are removed as now full screen application detector could be used with capturing full screen and cropping frame afterwards.",
+      "parentUuid": "3a3e5b77_90d50013",
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "e550ff3b_44af952c",
+        "filename": "modules/desktop_capture/full_screen_application_handler.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:16:00Z",
+      "side": 1,
+      "message": "Changed to having single list of sources",
+      "parentUuid": "ebc52b44_7866e9ef",
+      "range": {
+        "startLine": 39,
+        "startChar": 41,
+        "endLine": 39,
+        "endChar": 59
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9cba1f2_9b178851",
         "filename": "modules/desktop_capture/full_screen_window_detector.cc",
         "patchSetId": 7
@@ -73,6 +133,24 @@
       "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16c167cf_d7cb9147",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:16:00Z",
+      "side": 1,
+      "message": "Done: CanHandleFullscreen is removed. As we don\u0027t have a handler for regular application now in order to avoid any attempts to create this handler again no_handler_source_id_ field has been added into FullScreenWindowDetector.",
+      "parentUuid": "d9cba1f2_9b178851",
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "ac4a119e_a46ccdec",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:16:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0413c521_e6169b59",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f31945d_651bbe70",
         "filename": "modules/desktop_capture/full_screen_window_detector.h",
         "patchSetId": 7
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "cb158a82_08e93cf5",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:16:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f31945d_651bbe70",
+      "range": {
+        "startLine": 29,
+        "startChar": 63,
+        "endLine": 29,
+        "endChar": 65
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2b08bdb_529009c3",
         "filename": "modules/desktop_capture/full_screen_window_detector.h",
         "patchSetId": 7
@@ -136,6 +262,24 @@
       "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e20fe5e2_7e5202c5",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:16:00Z",
+      "side": 1,
+      "message": "Done: only single list is used now",
+      "parentUuid": "e2b08bdb_529009c3",
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -159,6 +303,30 @@
       "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4729fb36_ff620465",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:16:00Z",
+      "side": 1,
+      "message": "Not sure that it\u0027s possible to use early return in case when we need to go through all elements to examine each of them: changed to std::none_of to make this intent more explicit.",
+      "parentUuid": "811e068d_49966fca",
+      "range": {
+        "startLine": 83,
+        "startChar": 31,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
