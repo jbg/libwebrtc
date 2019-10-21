@@ -327,6 +327,30 @@
       "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3d530c_9abf317b",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:22:39Z",
+      "side": 1,
+      "message": "Pls ignore my previous comment, it\u0027s not actual anymore.",
+      "parentUuid": "4729fb36_ff620465",
+      "range": {
+        "startLine": 83,
+        "startChar": 31,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "57b23199433ddfb1c485e924e219047bb335ce03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
