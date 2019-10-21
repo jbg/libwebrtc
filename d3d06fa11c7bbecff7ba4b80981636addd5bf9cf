@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "38eede2d_0ebd13e8",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-21T19:49:13Z",
+      "side": 1,
+      "message": "Done: that\u0027s not actual anymore",
+      "parentUuid": "0e7373c0_31bea8c1",
+      "range": {
+        "startLine": 62,
+        "startChar": 26,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "revId": "d3d06fa11c7bbecff7ba4b80981636addd5bf9cf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3616430_c8956f63",
         "filename": "modules/desktop_capture/full_screen_window_detector.cc",
         "patchSetId": 5
