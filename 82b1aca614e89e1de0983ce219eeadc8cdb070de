@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b329b56_2f537d82",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-21T08:37:39Z",
+      "side": 1,
+      "message": ")",
+      "revId": "82b1aca614e89e1de0983ce219eeadc8cdb070de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

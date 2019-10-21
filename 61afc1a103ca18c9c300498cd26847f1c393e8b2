@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4a3fbe55_f69f8638",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-21T08:37:39Z",
+      "side": 1,
+      "message": "Done: https://chromium-review.googlesource.com/c/chromium/src/+/1871430",
+      "parentUuid": "4e261dec_be0bfea1",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "659b35cf_2ed91f79",
         "filename": "audio/channel_receive.cc",
         "patchSetId": 14
@@ -69,6 +87,24 @@
       "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e74c4d8e_adb5e4ca",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-21T08:37:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "729d4aa9_62b7dae9",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +175,24 @@
       "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07c2cbef_acac86d0",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-21T08:37:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "126e27bb_e77e311b",
+      "revId": "61afc1a103ca18c9c300498cd26847f1c393e8b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
