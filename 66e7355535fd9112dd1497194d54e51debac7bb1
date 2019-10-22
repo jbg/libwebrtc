@@ -558,6 +558,30 @@
     },
     {
       "key": {
+        "uuid": "31ae3a4e_848f4752",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T22:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8a62758_497529d8",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c78d5b99_144c0315",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
@@ -770,6 +794,30 @@
     },
     {
       "key": {
+        "uuid": "f102c46d_27b96712",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T22:56:45Z",
+      "side": 1,
+      "message": "As we\u0027re using it as a buffer i changed it to vector\u003cwchar_t\u003e, let me know if you insist on using wstring.",
+      "parentUuid": "8b812062_245cad37",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 55
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30afd78c_617a2a55",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
@@ -813,6 +861,30 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8141aa4_f07ae255",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T22:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac2cdfd5_46d75530",
+      "range": {
+        "startLine": 255,
+        "startChar": 4,
+        "endLine": 255,
+        "endChar": 51
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
