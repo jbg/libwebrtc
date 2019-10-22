@@ -1,0 +1,324 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88eda1eb_335f5944",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "Is this guaranteed to be fast? You\u0027re calling it twice every time a frame is captured; once directly in CroppingWindowCapturerWin::CaptureFrame, and once indirectly via CroppingWindowCapturer::CaptureFrame -\u003e ShouldUseScreenCapturer.\n\nIt looks like the current implementations are all O(#windows), which is probably OK, but some of them also make API calls the cost of which I\u0027m unsure of. It might be better to cache the fullscreen window every time you update the window list. You\u0027d probably want to implement my other suggestion about splitting UpdateWindowListIfNeeded into two methods to do that.",
+      "range": {
+        "startLine": 256,
+        "startChar": 42,
+        "endLine": 256,
+        "endChar": 62
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06a663f6_d6d41717",
+        "filename": "modules/desktop_capture/desktop_capture_options.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "I\u0027m not a big fan of static factory methods defined in per-platform object files, although I appreciate they\u0027re used elsewhere. In this case, I think this would be cleaner:\n\n#if defined(WEBRTC_MAC) \u0026\u0026 !defined(WEBRTC_IOS)\n  ...\n  result.set_full_screen_window_detector(\n      new FullscreenWindowDetectorMac());\n  ...\n#endif\n\nOr in combination with my other recommendation of replacing subclassing with a factory delegate, something like:\n\n#if defined(WEBRTC_MAC) \u0026\u0026 !defined(WEBRTC_IOS)\n  ...\n  result.set_full_screen_window_detector(\n      new FullscreenWindowDetector(new FullscreenApplicationHandlerFactoryMac()));\n  ...\n#endif\n\n\nAnd similarly for Windows. Then you can get rid of FullScreenWindowDetector::CreateFullScreenWindowDetector entirely.",
+      "range": {
+        "startLine": 36,
+        "startChar": 32,
+        "endLine": 36,
+        "endChar": 62
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d18d8e20_95662024",
+        "filename": "modules/desktop_capture/full_screen_application_handler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "This is only ever called by the platform-specific CreateFullScreen*ApplicationHandler methods, so AFAICT it never changes during the lifetime of the object. If that\u0027s true then it should be a ctor parameter to eliminate that possibility.",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a43bdd16_94ad7120",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "How can this condition arise, and would it be better to guard against it rather than returning 0 if it happens? One scenario I can imagine is if this is called within 500ms of the selected window changing, before UpdateWindowList has been called. However, I think that would be better handled by calling UpdateWindowList immediately in that situation. If that\u0027s the only possibility, and it can be worked around, then a DCHECK would be more appropriate here.\n\nIf that\u0027s hard to do with the current architecture, then I you can leave this as-is, but please add a comment explaining what\u0027s going on.",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9212dae_3bc157d7",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "I understand the rationale behind this, and I think it\u0027s okay for this CL, but I think the underlying problem is that the thumbnail generator should not be using this code. If I\u0027m understanding the code correctly, having this check in place means adding ~500ms latency to the full-screen detection logic, which is not ideal.\n\nI think it\u0027s at least worth considering whether the cost of creating a application handler for each thumbnail is actually worse than this added latency.",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbc29897_e465cbc3",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "I don\u0027t think this is overridden any more, so it shouldn\u0027t be virtual.",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 9
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfde6511_20cc48f1",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "Passing in a function here seems a bit over-engineered. You could do the same thing with a pair of NeedsNewWindowList() and UpdateWindowList() methods, which would eliminate any questions about when get_sources is called (synchronously vs. asynchronously, etc).\n\nThat said, if you feel strongly that this design is better then I\u0027m not going to insist, so feel free to ignore if you don\u0027t like my suggestion.",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "139822aa_b03f7a55",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "s/istance/instance/",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 22
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ab29198_7a0a5ddd",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "Optional: The only reason for subclassing this class now is to override this method, which I don\u0027t think ever needs access to any of the protected members of this class. I think a factory delegate interface would be a cleaner design in that case.\n\nSee also my comment in desktop_capture_options.cc.",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b726185_9a160d45",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "There\u0027s no Objective-C++ in this file, so it can just be .cc, I think.",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20ff5dd8_fb4d9847",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "Why do you need this method?",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0274be69_a0fed04b",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "It\u0027s not obvious to me why windows without a title should be excluded from this. Shouldn\u0027t |title_predicate| is responsible for enforcing that? If you do want to keep this check (perhaps as an optimization?) please add a comment explaining why title-less windows are ineligible.",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30c5c6d8_484cbf43",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "This seems to be checking for UNIX-style path separators in a Windows-specific file. Can you add a comment explaining why that\u0027s necessary?",
+      "range": {
+        "startLine": 49,
+        "startChar": 28,
+        "endLine": 49,
+        "endChar": 29
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c78d5b99_144c0315",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "Line break after \u0026\u0026, please (it\u0027s more readable than breaking in the middle of the second half of the conditional.",
+      "range": {
+        "startLine": 69,
+        "startChar": 60,
+        "endLine": 69,
+        "endChar": 73
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "771a0b06_711c4e97",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "I don\u0027t know enough about Win32 APIs to say whether or not this is the best way of finding a process\u0027s path. Even if it is, I\u0027m not sure if reading another process\u0027s memory is standard practise on Windows, or if it\u0027s something worthy of special attention. I think it\u0027s at least worth asking whether or not it would be better to simply run this algorithm regardless of whether or not we think it\u0027s Powerpoint; do you expect false positives to be a big problem if you did that?\n\n+wez@, can you take a look at this file?",
+      "range": {
+        "startLine": 169,
+        "startChar": 27,
+        "endLine": 169,
+        "endChar": 28
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7354d0e5_f0719e13",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T00:36:39Z",
+      "side": 1,
+      "message": "s/WindowsId/WindowId/\n\nor\n\ns/WindowsId/HWND/",
+      "range": {
+        "startLine": 191,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 31
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
