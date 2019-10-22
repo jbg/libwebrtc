@@ -283,6 +283,24 @@
     },
     {
       "key": {
+        "uuid": "ae1cb35f_f2671b55",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T17:22:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "38b183b4_b604ad19",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "139822aa_b03f7a55",
         "filename": "modules/desktop_capture/full_screen_window_detector.h",
         "patchSetId": 8
@@ -552,6 +570,30 @@
       "side": 1,
       "message": "Done: changed but \u003cgit cl format\u003e doesn\u0027t agree with that...",
       "parentUuid": "c78d5b99_144c0315",
+      "range": {
+        "startLine": 69,
+        "startChar": 60,
+        "endLine": 69,
+        "endChar": 73
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3f37c55_39015682",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5166
+      },
+      "writtenOn": "2019-10-22T17:22:35Z",
+      "side": 1,
+      "message": "Fair enough, I didn\u0027t realize this was the work of an auto-formatter. Feel free to revert if you prefer.",
+      "parentUuid": "7c959185_188e5e3e",
       "range": {
         "startLine": 69,
         "startChar": 60,
