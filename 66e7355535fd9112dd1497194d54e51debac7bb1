@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ada88d3_686647e2",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Going to get back with some numbers...",
+      "parentUuid": "88eda1eb_335f5944",
+      "range": {
+        "startLine": 256,
+        "startChar": 42,
+        "endLine": 256,
+        "endChar": 62
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06a663f6_d6d41717",
         "filename": "modules/desktop_capture/desktop_capture_options.cc",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6ed2b506_4e4359d0",
+        "filename": "modules/desktop_capture/desktop_capture_options.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06a663f6_d6d41717",
+      "range": {
+        "startLine": 36,
+        "startChar": 32,
+        "endLine": 36,
+        "endChar": 62
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d18d8e20_95662024",
         "filename": "modules/desktop_capture/full_screen_application_handler.h",
         "patchSetId": 8
@@ -62,6 +110,24 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "342d8041_df7dbe62",
+        "filename": "modules/desktop_capture/full_screen_application_handler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d18d8e20_95662024",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "57fe5ce2_66143330",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "The idea behind UpdateWindowListIfNeeded and FindFullScreenWindow was a little bit different:\n- UpdateWindowListIfNeeded could be called from time to time with throttling but without obligation to call it before or after FindFullScreenWindow, it could be called by special timer or within CaptureFrame, it could be called with different source identifiers (skip in thumbnail generation scenario is fully optional).\n- FindFullScreenWindow could be also called with different source id in such scheme.\n\nHaving DCHECK here means that application handler could be created only once, it could make this approach more fragile, to maintain this invariant we need to change capturer interface (to make sure that we\u0027re not generating thumbnails) and benefits from getting this done are not obvious for me.",
+      "parentUuid": "a43bdd16_94ad7120",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9212dae_3bc157d7",
         "filename": "modules/desktop_capture/full_screen_window_detector.cc",
         "patchSetId": 8
@@ -96,6 +180,24 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d977290c_90b9b73c",
+        "filename": "modules/desktop_capture/full_screen_window_detector.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "There is no 500ms latency here:\n\nThumbnails generation phase:\n1 UpdateWindowListIfNeeded(source1) -\u003e skip\n2 UpdateWindowListIfNeeded(source2) -\u003e skip\n3 UpdateWindowListIfNeeded(power_point) -\u003e skip\n4 UpdateWindowListIfNeeded(source3) -\u003e skip\nCapturing source phase:\n5 UpdateWindowListIfNeeded(power_point) -\u003e skip (1st frame captured)\n6 UpdateWindowListIfNeeded(power_point) -\u003e get_sources is called (2nd frame captured)\n\nSo the delay must be not longer then interval between capturing frames or 33 ms in case of 30fps.\n\nIt would be great to avoid using this code by thumbnails generator but capturer interface doesn\u0027t allow us to check current phase (thumbnails/capturing) and it doesn\u0027t seem reasonable to change that.",
+      "parentUuid": "b9212dae_3bc157d7",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "bfea8d3d_ac4af8f1",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbc29897_e465cbc3",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 9
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfde6511_20cc48f1",
         "filename": "modules/desktop_capture/full_screen_window_detector.h",
         "patchSetId": 8
@@ -136,6 +262,24 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38b183b4_b604ad19",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "We can split it in many ways but as long as we want to delegate getting the list of sources (and we want to do it because this function is not straightforward all the time, check WindowCapturerWin::GetSourceList and using window_capture_helper_ which should be reused somehow) we will end up with either adding callback or delegate object.\nI can add more comments with details about synchronously / asynchronously but it\u0027d be better to keep this part as it is.",
+      "parentUuid": "cfde6511_20cc48f1",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -162,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "e08fc9c5_34aa74fc",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "139822aa_b03f7a55",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 22
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ab29198_7a0a5ddd",
         "filename": "modules/desktop_capture/full_screen_window_detector.h",
         "patchSetId": 8
@@ -176,6 +344,24 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feaf6954_2356c443",
+        "filename": "modules/desktop_capture/full_screen_window_detector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ab29198_7a0a5ddd",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -196,6 +382,24 @@
     },
     {
       "key": {
+        "uuid": "dcb1c716_dfaab0cf",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b726185_9a160d45",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "20ff5dd8_fb4d9847",
         "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
         "patchSetId": 8
@@ -213,6 +417,24 @@
     },
     {
       "key": {
+        "uuid": "35dd93e4_a8f977ad",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done: removed",
+      "parentUuid": "20ff5dd8_fb4d9847",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0274be69_a0fed04b",
         "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
         "patchSetId": 8
@@ -227,6 +449,24 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a15d101d_ca8f7ffb",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done: added comments",
+      "parentUuid": "0274be69_a0fed04b",
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -253,6 +493,30 @@
     },
     {
       "key": {
+        "uuid": "cb76cd26_a927a80a",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done: removed (not necessary but more universal, though don\u0027t see how it could be used here)",
+      "parentUuid": "30c5c6d8_484cbf43",
+      "range": {
+        "startLine": 49,
+        "startChar": 28,
+        "endLine": 49,
+        "endChar": 29
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c78d5b99_144c0315",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
@@ -273,6 +537,30 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c959185_188e5e3e",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done: changed but \u003cgit cl format\u003e doesn\u0027t agree with that...",
+      "parentUuid": "c78d5b99_144c0315",
+      "range": {
+        "startLine": 69,
+        "startChar": 60,
+        "endLine": 69,
+        "endChar": 73
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -319,6 +607,30 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0faebc8f_b4f53e23",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T06:17:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7354d0e5_f0719e13",
+      "range": {
+        "startLine": 191,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 31
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
