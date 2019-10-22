@@ -535,6 +535,29 @@
     },
     {
       "key": {
+        "uuid": "a8a62758_497529d8",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-10-22T20:58:57Z",
+      "side": 1,
+      "message": "Why are you wrapping towupper() in a lambda? It already has the signature you want.",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c78d5b99_144c0315",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
@@ -653,6 +676,30 @@
     },
     {
       "key": {
+        "uuid": "432c59a6_908fcd53",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-10-22T20:58:57Z",
+      "side": 1,
+      "message": "You\u0027re relying both on having access to the address-space of the target process, and on it being laid out in a particular way, both of which are fragile assumptions.\n\nYou can query for the \"class\" name for a window handle without any special permissions - I\u0027d recommend checking whether the Powerpoint full-screen window has a particular class name that you can look for.\n\nHowever, I\u0027d also recommend establishing whether this can be made both simpler and more general-purpose, by watching for transitions where the window being remoted becomes minimized, and there is around the same time a full-screen window shown by the same process.",
+      "parentUuid": "978d6f1f_b7da0ae7",
+      "range": {
+        "startLine": 169,
+        "startChar": 27,
+        "endLine": 169,
+        "endChar": 28
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7354d0e5_f0719e13",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
@@ -697,6 +744,75 @@
       "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b812062_245cad37",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-10-22T20:58:57Z",
+      "side": 1,
+      "message": "Why are you using a unique_ptr\u003cwchar_t[]\u003e rather than a std::wstring here?",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 55
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30afd78c_617a2a55",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-10-22T20:58:57Z",
+      "side": 1,
+      "message": "Relying on the filename matching this seems a fragile approach - you actually only care whether the full-screen window belongs to the same process as the window that just got minimized, I think?",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 37
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac2cdfd5_46d75530",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-10-22T20:58:57Z",
+      "side": 1,
+      "message": "result \u003d std::make_unique\u003c...\u003e()",
+      "range": {
+        "startLine": 255,
+        "startChar": 4,
+        "endLine": 255,
+        "endChar": 51
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
