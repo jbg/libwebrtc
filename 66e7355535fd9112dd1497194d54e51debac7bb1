@@ -629,6 +629,30 @@
     },
     {
       "key": {
+        "uuid": "978d6f1f_b7da0ae7",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T19:44:08Z",
+      "side": 1,
+      "message": "wez@google.com could you please help us to check if it\u0027s ok to use this approach",
+      "parentUuid": "771a0b06_711c4e97",
+      "range": {
+        "startLine": 169,
+        "startChar": 27,
+        "endLine": 169,
+        "endChar": 28
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7354d0e5_f0719e13",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
