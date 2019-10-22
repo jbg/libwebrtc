@@ -841,6 +841,30 @@
     },
     {
       "key": {
+        "uuid": "c2c019a9_2ec8e84f",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-22T22:57:19Z",
+      "side": 1,
+      "message": "In order to detect a type of application we can check not only path but some properties as well (if it\u0027s really required).\n\nSwitch window to share based on windows behaviour only regardless type of application seems  dangerous to me.",
+      "parentUuid": "30afd78c_617a2a55",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 37
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac2cdfd5_46d75530",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
