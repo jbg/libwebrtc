@@ -139,10 +139,7 @@ class FieldTrials : public WebRtcKeyValueConfig {
 class RtpSenderVideoTest : public ::testing::TestWithParam<bool> {
  public:
   RtpSenderVideoTest()
-      : field_trials_(GetParam()),
-        fake_clock_(kStartTime),
-        retransmission_rate_limiter_(&fake_clock_, 1000),
-        rtp_sender_([&] {
+      : config_([&] {
           RtpRtcp::Configuration config;
           config.clock = &fake_clock_;
           config.outgoing_transport = &transport_;
@@ -151,6 +148,13 @@ class RtpSenderVideoTest : public ::testing::TestWithParam<bool> {
           config.local_media_ssrc = kSsrc;
           return config;
         }()),
+        field_trials_(GetParam()),
+        fake_clock_(kStartTime),
+        retransmission_rate_limiter_(&fake_clock_, 1000),
+        packet_history_(&fake_clock_),
+        rtp_sender_egress_(config_, &packet_history_),
+        packet_sender_(&rtp_sender_egress_),
+        rtp_sender_(config_, &packet_history_, &packet_sender_),
         rtp_sender_video_(&fake_clock_, &rtp_sender_, nullptr, field_trials_) {
     rtp_sender_.SetSequenceNumber(kSeqNum);
     rtp_sender_.SetTimestampOffset(0);
@@ -162,11 +166,14 @@ class RtpSenderVideoTest : public ::testing::TestWithParam<bool> {
       int version);
 
  protected:
+  const RtpRtcp::Configuration config_;
   FieldTrials field_trials_;
   SimulatedClock fake_clock_;
   LoopbackTransportTest transport_;
   RateLimiter retransmission_rate_limiter_;
-
+  RtpPacketHistory packet_history_;
+  RtpSenderEgress rtp_sender_egress_;
+  RtpSenderEgress::NonPacedPacketSender packet_sender_;
   RTPSender rtp_sender_;
   TestRtpSenderVideo rtp_sender_video_;
 };
