@@ -33,9 +33,26 @@ bool IsEnabled(absl::string_view name,
 }
 }  // namespace
 
+RtpSenderEgress::NonPacedPacketSender::NonPacedPacketSender(
+    RtpSenderEgress* sender)
+    : transport_sequence_number_(0), sender_(sender) {}
+RtpSenderEgress::NonPacedPacketSender::~NonPacedPacketSender() = default;
+
+void RtpSenderEgress::NonPacedPacketSender::EnqueuePackets(
+    std::vector<std::unique_ptr<RtpPacketToSend>> packets) {
+  for (auto& packet : packets) {
+    if (!packet->SetExtension<TransportSequenceNumber>(
+            ++transport_sequence_number_)) {
+      --transport_sequence_number_;
+    }
+    packet->ReserveExtension<TransmissionOffset>();
+    packet->ReserveExtension<AbsoluteSendTime>();
+    sender_->SendPacket(packet.get(), PacedPacketInfo());
+  }
+}
+
 RtpSenderEgress::RtpSenderEgress(const RtpRtcp::Configuration& config,
-                                 RtpPacketHistory* packet_history,
-                                 Clock* clock)
+                                 RtpPacketHistory* packet_history)
     : ssrc_(config.local_media_ssrc),
       rtx_ssrc_(config.rtx_send_ssrc),
       flexfec_ssrc_(config.flexfec_sender
@@ -44,7 +61,7 @@ RtpSenderEgress::RtpSenderEgress(const RtpRtcp::Configuration& config,
       populate_network2_timestamp_(config.populate_network2_timestamp),
       send_side_bwe_with_overhead_(
           IsEnabled("WebRTC-SendSideBwe-WithOverhead", config.field_trials)),
-      clock_(clock),
+      clock_(config.clock),
       packet_history_(packet_history),
       transport_(config.outgoing_transport),
       event_log_(config.event_log),

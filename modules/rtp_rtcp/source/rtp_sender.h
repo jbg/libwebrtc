@@ -47,23 +47,15 @@ class RtpPacketToSend;
 
 class RTPSender {
  public:
+  RTPSender(const RtpRtcp::Configuration& config,
+            RtpPacketHistory* packet_history,
+            RtpPacketSender* packet_sender);
   explicit RTPSender(const RtpRtcp::Configuration& config);
 
   ~RTPSender();
 
-  void ProcessBitrate();
-
-  uint16_t ActualSendBitrateKbit() const;
-
-  uint32_t NackOverheadRate() const;
-
   void SetSendingMediaStatus(bool enabled);
   bool SendingMedia() const;
-
-  void SetAsPartOfAllocation(bool part_of_allocation);
-
-  void GetDataCounters(StreamDataCounters* rtp_stats,
-                       StreamDataCounters* rtx_stats) const;
 
   uint32_t TimestampOffset() const;
   void SetTimestampOffset(uint32_t timestamp);
@@ -88,15 +80,11 @@ class RTPSender {
   int32_t DeregisterRtpHeaderExtension(RTPExtensionType type);
   void DeregisterRtpHeaderExtension(absl::string_view uri);
 
-  // Tries to send packet to transport. Also updates any timing extensions,
-  // calls observers waiting for packet send events, and updates stats.
-  // Returns true if packet belongs to this RTP module, false otherwise.
-  bool TrySendPacket(RtpPacketToSend* packet,
-                     const PacedPacketInfo& pacing_info);
   bool SupportsPadding() const;
   bool SupportsRtxPayloadPadding() const;
   std::vector<std::unique_ptr<RtpPacketToSend>> GeneratePadding(
-      size_t target_size_bytes);
+      size_t target_size_bytes,
+      bool media_has_been_sent);
 
   // NACK.
   void OnReceivedNack(const std::vector<uint16_t>& nack_sequence_numbers,
@@ -151,8 +139,6 @@ class RTPSender {
   // sending to the network.
   void EnqueuePackets(std::vector<std::unique_ptr<RtpPacketToSend>> packets);
 
-  uint32_t BitrateSent() const;
-
   void SetRtpState(const RtpState& rtp_state);
   RtpState GetRtpState() const;
   void SetRtxRtpState(const RtpState& rtp_state);
@@ -160,26 +146,7 @@ class RTPSender {
 
   int64_t LastTimestampTimeMs() const;
 
-  void SetRtt(int64_t rtt_ms);
-
-  void OnPacketsAcknowledged(rtc::ArrayView<const uint16_t> sequence_numbers);
-
  private:
-  // Helper class that redirects packets directly to the send part of this class
-  // without passing through an actual paced sender.
-  class NonPacedPacketSender : public RtpPacketSender {
-   public:
-    explicit NonPacedPacketSender(RTPSender* rtp_sender);
-    virtual ~NonPacedPacketSender();
-
-    void EnqueuePackets(
-        std::vector<std::unique_ptr<RtpPacketToSend>> packets) override;
-
-   private:
-    uint16_t transport_sequence_number_;
-    RTPSender* const rtp_sender_;
-  };
-
   std::unique_ptr<RtpPacketToSend> BuildRtxPacket(
       const RtpPacketToSend& packet);
 
@@ -194,7 +161,8 @@ class RTPSender {
   const absl::optional<uint32_t> rtx_ssrc_;
   const absl::optional<uint32_t> flexfec_ssrc_;
 
-  const std::unique_ptr<NonPacedPacketSender> non_paced_packet_sender_;
+  // const std::unique_ptr<RtpSenderEgress::NonPacedPacketSender>
+  // non_paced_packet_sender_;
   RtpPacketSender* const paced_sender_;
   rtc::CriticalSection send_critsect_;
 
@@ -206,7 +174,9 @@ class RTPSender {
   RtpHeaderExtensionMap rtp_header_extension_map_
       RTC_GUARDED_BY(send_critsect_);
 
-  RtpPacketHistory packet_history_;
+  // TODO(sprang): Remove when legacy ctor is gone.
+  std::unique_ptr<RtpPacketHistory> owned_history_;
+  RtpPacketHistory* const packet_history_;
 
   // RTP variables
   uint32_t timestamp_offset_ RTC_GUARDED_BY(send_critsect_);
@@ -232,8 +202,6 @@ class RTPSender {
   bool supports_bwe_extension_ RTC_GUARDED_BY(send_critsect_);
 
   RateLimiter* const retransmission_rate_limiter_;
-
-  RtpSenderEgress egress_;
 
   RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RTPSender);
 };
