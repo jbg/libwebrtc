@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40a64ce4_61a4f80f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-22T22:03:23Z",
+      "side": 1,
+      "message": "This seems dangerous since now there\u0027s no way to know when the PeerConnection is destroyed. For example, a lot of tests need to know when they can shut down the threads that the PeerConnection uses.",
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4172c8c4_f3ac8a04",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-22T22:03:23Z",
+      "side": 1,
+      "message": "How does the PeerConnection stay alive once DoCreateOffer returns?",
+      "range": {
+        "startLine": 2070,
+        "startChar": 42,
+        "endLine": 2070,
+        "endChar": 64
+      },
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "704a4a7f_d5db98dc",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-22T22:03:23Z",
+      "side": 1,
+      "message": "How about wrapping the observer in a class that executes the observer and the operations chain callback at the same time?",
+      "range": {
+        "startLine": 2073,
+        "startChar": 35,
+        "endLine": 2073,
+        "endChar": 71
+      },
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd332fe5_2def7b81",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2742,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-22T22:03:23Z",
+      "side": 1,
+      "message": "Can just do `desc \u003d std::move(desc)` instead of capturing the pointer.",
+      "range": {
+        "startLine": 2742,
+        "startChar": 7,
+        "endLine": 2742,
+        "endChar": 15
+      },
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe74200b_04d68a9f",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-22T22:03:23Z",
+      "side": 1,
+      "message": "Can we make the other signatures look like this one?",
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db1de1bc_293d57df",
+        "filename": "pc/webrtc_session_description_factory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-22T22:03:23Z",
+      "side": 1,
+      "message": "This seems kind of obscure. Could we have the function call happen explicitly?",
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
