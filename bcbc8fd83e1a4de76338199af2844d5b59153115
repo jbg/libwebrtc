@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aaea26e1_c2db605d",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2019-10-22T06:39:38Z",
+      "side": 1,
+      "message": "Having EXPECT_TRUE called in a thread makes the test prone to races, and there\u0027s the risk the test exits before this gets called. I think you\u0027re probably covering this with WaitForCompletion. Not sure here, I think it might be better to keep a list of strings, protected by a mutex, that you retrieve from the test thread later.\n\nWe should also follow the arrange-act-assert rule, i.e.\n\nsetup sctp transport etc\ntest.start()\nassert on stuff\n\nHaving assertions sprinkled throughout the code makes tests brittle and harder to read.",
+      "range": {
+        "startLine": 375,
+        "startChar": 8,
+        "endLine": 376,
+        "endChar": 71
+      },
+      "revId": "bcbc8fd83e1a4de76338199af2844d5b59153115",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77ebfae3_df74064c",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2019-10-22T06:39:38Z",
+      "side": 1,
+      "message": "Nit: lossy",
+      "range": {
+        "startLine": 533,
+        "startChar": 34,
+        "endLine": 533,
+        "endChar": 39
+      },
+      "revId": "bcbc8fd83e1a4de76338199af2844d5b59153115",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2e8f951_a3528e16",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2019-10-22T06:39:38Z",
+      "side": 1,
+      "message": "This kind of complexity would be unacceptable in a unit test. Normally my advice here would be to unroll the loop, but having a 16k line test is bad, so let\u0027s go with this. This is wayyyyyy more complex than a test normally should be, but this is more of a load test than a unit test.",
+      "range": {
+        "startLine": 555,
+        "startChar": 2,
+        "endLine": 555,
+        "endChar": 56
+      },
+      "revId": "bcbc8fd83e1a4de76338199af2844d5b59153115",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
