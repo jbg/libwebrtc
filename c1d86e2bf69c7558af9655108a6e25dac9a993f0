@@ -1,0 +1,256 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37031cac_76638450",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "why is this necessary?",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f9df01d_b6b9659a",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "nit: Comment describing class. The name sort of indicates that it\u0027s always lossy, but it\u0027s actually configurable (can be set to 0 even). This would be nice to have in a class comment.",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d871920d_9cb15424",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "Should this just be set in the constructor?",
+      "range": {
+        "startLine": 102,
+        "startChar": 7,
+        "endLine": 102,
+        "endChar": 24
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7307f09_899382a8",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "Is this necessary to drain all the outgoing messages? Since the AsyncInvoker is owned by this object, wouldn\u0027t it just drop all remaining calls?",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 5
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ebd25fc_bad04a25",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "I\u0027m curious - what\u0027s the reason for rotating the stream ID? Is this necessary to repro the deadlock issue?",
+      "range": {
+        "startLine": 185,
+        "startChar": 6,
+        "endLine": 185,
+        "endChar": 16
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79954ff4_9c37a9dd",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "nit: you could rename this to be consistent with the receiver:\nsent_target_messages_count_",
+      "range": {
+        "startLine": 223,
+        "startChar": 13,
+        "endLine": 223,
+        "endChar": 23
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ae57185_3d592d11",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "Do you really need all of these public getter functions? They aren\u0027t used outside of this class, so you could just use the member variables directly.",
+      "range": {
+        "startLine": 528,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 65
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43ec2051_a16a524c",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "Could you add some more context here? Explaining why these are disabled and when it\u0027s an appropriate time to use these tests (rolling in new version of usrsctp) would be useful.",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 28
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "189191f5_c13b15ab",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "Could you please add a comment, also specifying the time it takes to run?",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5d2215f_0ab0699a",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "ReliableAndInOrder?",
+      "range": {
+        "startLine": 612,
+        "startChar": 49,
+        "endLine": 612,
+        "endChar": 56
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26e7780e_5dd98741",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "comment",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eba513fc_9ae761fe",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-23T19:42:59Z",
+      "side": 1,
+      "message": "Could you add time to run here too?",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
