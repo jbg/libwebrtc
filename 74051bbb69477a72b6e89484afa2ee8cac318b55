@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e76761d_8e8ada56",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-23T17:55:50Z",
+      "side": 1,
+      "message": "nit: do this in the lambda capture",
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6d471ec_30c7320d",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-23T17:55:50Z",
+      "side": 1,
+      "message": "Just |this|, or if you use WeakPtrs then you can get the pointer out of the WeakPtr.",
+      "range": {
+        "startLine": 2136,
+        "startChar": 7,
+        "endLine": 2136,
+        "endChar": 18
+      },
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f8c3c39_73a9ca22",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2302,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-23T17:55:50Z",
+      "side": 1,
+      "message": "suggestion: \"PeerConnection was closed.\"",
+      "range": {
+        "startLine": 2302,
+        "startChar": 47,
+        "endLine": 2302,
+        "endChar": 68
+      },
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66804087_e64ae9dc",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-23T17:55:50Z",
+      "side": 1,
+      "message": "You can use an rtc::WeakPtrFactory instead (this is a common pattern in Chrome).\n\nrtc::WeakPtrFactory\u003cPeerConnection\u003e",
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f73725a_87167f91",
+        "filename": "pc/peer_connection_signaling_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-23T17:55:50Z",
+      "side": 1,
+      "message": "This line seems unnecessary to me. An empty CreatePeerConnection() can be assumed to not add any receivers.",
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5ff488a3_48412415",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-23T17:55:50Z",
+      "side": 1,
+      "message": "Thanks, I think this will help avoid surprises down the road.",
+      "parentUuid": "8269dcbb_ea770b01",
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4172c8c4_f3ac8a04",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 7
@@ -81,6 +99,30 @@
       "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29df4845_e451d5e3",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-23T17:55:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "23bacc2b_07c8b482",
+      "range": {
+        "startLine": 2070,
+        "startChar": 42,
+        "endLine": 2070,
+        "endChar": 64
+      },
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -242,6 +284,24 @@
       "side": 1,
       "message": "Done.\n\n-- Actually, now that I updated this to have an observer wrapper handling the callback, there\u0027s no need to change anything in webrtc_session_description_factory.[h/cc]",
       "parentUuid": "db1de1bc_293d57df",
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc5f2862_a89435d9",
+        "filename": "pc/webrtc_session_description_factory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-23T17:55:50Z",
+      "side": 1,
+      "message": "Nice! :)",
+      "parentUuid": "c8fbf890_ac450667",
       "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
