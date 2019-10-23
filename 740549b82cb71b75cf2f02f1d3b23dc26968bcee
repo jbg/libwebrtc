@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95beb537_55809019",
+        "filename": "pc/peer_connection_signaling_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-23T12:50:18Z",
+      "side": 1,
+      "message": "I reverted the changes to CreateOffersAndShutdown. It is no longer doing EXPECT_TRUE_WAIT; it can continue to do EXPECT_TRUE.",
+      "revId": "740549b82cb71b75cf2f02f1d3b23dc26968bcee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
