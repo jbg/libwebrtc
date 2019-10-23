@@ -34,6 +34,7 @@
 #include "pc/stream_collection.h"
 #include "pc/webrtc_session_description_factory.h"
 #include "rtc_base/experiments/field_trial_parser.h"
+#include "rtc_base/operations_chain.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/unique_id_generator.h"
 
@@ -312,6 +313,7 @@ class PeerConnection : public PeerConnectionInternal,
   ~PeerConnection() override;
 
  private:
+  class IsAlive;
   class SetRemoteDescriptionObserverAdapter;
   friend class SetRemoteDescriptionObserverAdapter;
   // Represents the [[LocalIceCredentialsToReplace]] internal slot in the spec.
@@ -442,6 +444,22 @@ class PeerConnection : public PeerConnectionInternal,
 
   rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
   GetFirstAudioTransceiver() const RTC_RUN_ON(signaling_thread());
+
+  // Implementation of the offer/answer exchange operations. These are chained
+  // onto the |operations_chain_| when the public CreateOffer(), CreateAnswer(),
+  // SetLocalDescription() and SetRemoteDescription() methods are invoked.
+  void DoCreateOffer(
+      const RTCOfferAnswerOptions& options,
+      rtc::scoped_refptr<CreateSessionDescriptionObserver> observer);
+  void DoCreateAnswer(
+      const RTCOfferAnswerOptions& options,
+      rtc::scoped_refptr<CreateSessionDescriptionObserver> observer);
+  void DoSetLocalDescription(
+      std::unique_ptr<SessionDescriptionInterface> desc,
+      rtc::scoped_refptr<SetSessionDescriptionObserver> observer);
+  void DoSetRemoteDescription(
+      std::unique_ptr<SessionDescriptionInterface> desc,
+      rtc::scoped_refptr<SetRemoteDescriptionObserverInterface> observer);
 
   void CreateAudioReceiver(MediaStreamInterface* stream,
                            const RtpSenderInfo& remote_sender_info)
@@ -1214,6 +1232,17 @@ class PeerConnection : public PeerConnectionInternal,
   // Points to the same thing as `event_log_`. Since it's const, we may read the
   // pointer (but not touch the object) from any thread.
   RtcEventLog* const event_log_ptr_ RTC_PT_GUARDED_BY(worker_thread());
+
+  // The operations chain is used by the offer/answer exchange methods to ensure
+  // they are executed in the right order. For example, if
+  // SetRemoteDescription() is invoked while CreateOffer() is still pending, the
+  // SRD operation will not start until CreateOffer() has completed. See
+  // https://w3c.github.io/webrtc-pc/#dfn-operations-chain.
+  rtc::scoped_refptr<rtc::OperationsChain> operations_chain_
+      RTC_GUARDED_BY(signaling_thread());
+  // Keeps track of whether or not the PeerConnection has been destroyed. Used
+  // by chained operations to avoid use-after-free.
+  rtc::scoped_refptr<IsAlive> is_alive_;
 
   SignalingState signaling_state_ RTC_GUARDED_BY(signaling_thread()) = kStable;
   IceConnectionState ice_connection_state_ RTC_GUARDED_BY(signaling_thread()) =
