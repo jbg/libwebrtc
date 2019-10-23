@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8269dcbb_ea770b01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-23T12:49:04Z",
+      "side": 1,
+      "message": "OK. While tests can ensure this by awaiting any pending operations to complete before quitting, it\u0027s nice to be able to tear down abruptly and I think the safest thing to do not to break downstream projects is not to keep the PC alive through references from internal operations. The tearing down threads in tests thing is a real problem that I\u0027ve experienced in a different project.\n\nI updated the design. Now all operations chained take a raw pointer to the PC. A reference counted \"IsAlive\" object is used by the operation to check if the raw pointer is still valid. If not, the operation aborts.\n\nThe CL should now make no difference to the lifetime of the PC :)",
+      "parentUuid": "40a64ce4_61a4f80f",
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4172c8c4_f3ac8a04",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 7
@@ -30,6 +48,30 @@
       "writtenOn": "2019-10-22T22:03:23Z",
       "side": 1,
       "message": "How does the PeerConnection stay alive once DoCreateOffer returns?",
+      "range": {
+        "startLine": 2070,
+        "startChar": 42,
+        "endLine": 2070,
+        "endChar": 64
+      },
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23bacc2b_07c8b482",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-23T12:49:04Z",
+      "side": 1,
+      "message": "The lambda expression captures a reference to the PC keeping it alive (this_refptr). Basically the lambda expression turns into an object constructed here; imagine it as an std::function\u003c\u003e object, though I think it\u0027s compiler-specific what the type of the lambda expression is (it is SOMETHING which std::function\u003c\u003e can be assigned to). This functor object is the \"T\" of the OperationWithFunctor\u003cT\u003e that is in the OperationsChain\u0027s queue.\n\nThe functor is constructed here (including constructing rtc::scoped_refptr\u003cPeerConnection\u003e this_refptr) and the destructor (which invokes ~rtc::scoped_refptr\u003cPeerConnection\u003e on this_refptr) is invoked at OperationsChain::OnOperationComplete()\u0027s \"chained_operations_.pop();. In other words, the lambda functor - including its captured variables - are kept-alive until the operation has completed (operations_chain_callback is invoked); not merely until the lambda expression has been executed.\n\nAn alternative way of implementing the OperationsChain would be to \"pop\" immediately when the functor has been invoked, destroying the OperationWithFunctor\u003cT\u003e, since after this functor has been executed, the only thing that is needed is the operations_chain_callback whose ownership has already been passed here. The lambda functor doesn\u0027t need to exist after it has been executed.\n\nNow that the CL has been updated not to keep the PC alive, this matters less, but it would be possible to patch the OperationsChain to destroy functors earlier.",
+      "parentUuid": "4172c8c4_f3ac8a04",
       "range": {
         "startLine": 2070,
         "startChar": 42,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "838a67f4_e1673912",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-23T12:49:04Z",
+      "side": 1,
+      "message": "Yes. Done.\n\nIn fixing this, I realized that the PeerConnectionSignalingTest.CreateOffersAndShutdown test did not cover the case where the PeerConnection performs PostCreateSessionDescriptionFailure. If the PC failed for \"early\" reasons such as the PC being closed, the observers would not be invoked. I had to fix this bug in order to guarantee that the operations_chain_callback was invoked in all cases.\n\nI fixed this the same way that WebRtcSessionDescriptionFactory fixed it: By manually processing OnMessage inside of the destructor. To minimize side-effects, I only do this for MSG_CREATE_SESSIONDESCRIPTION_FAILED messages, not other messages. Let me know if you want me to break this fix out into a separate CL though since this was an existing problem and message processing is scary.",
+      "parentUuid": "704a4a7f_d5db98dc",
+      "range": {
+        "startLine": 2073,
+        "startChar": 35,
+        "endLine": 2073,
+        "endChar": 71
+      },
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd332fe5_2def7b81",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 7
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "bb1d61b0_56af99c6",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2742,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-23T12:49:04Z",
+      "side": 1,
+      "message": "Done. This was possible after making the lambda \"mutable\" allowing desc to be moved.",
+      "parentUuid": "bd332fe5_2def7b81",
+      "range": {
+        "startLine": 2742,
+        "startChar": 7,
+        "endLine": 2742,
+        "endChar": 15
+      },
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe74200b_04d68a9f",
         "filename": "pc/peer_connection.h",
         "patchSetId": 7
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "21347f53_e8a2af01",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-23T12:49:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe74200b_04d68a9f",
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db1de1bc_293d57df",
         "filename": "pc/webrtc_session_description_factory.cc",
         "patchSetId": 7
@@ -119,6 +227,24 @@
       "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8fbf890_ac450667",
+        "filename": "pc/webrtc_session_description_factory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-23T12:49:04Z",
+      "side": 1,
+      "message": "Done.\n\n-- Actually, now that I updated this to have an observer wrapper handling the callback, there\u0027s no need to change anything in webrtc_session_description_factory.[h/cc]",
+      "parentUuid": "db1de1bc_293d57df",
+      "revId": "53f164575e8577b0e27f1572c4c09305ad2e2a51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
