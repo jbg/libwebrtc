@@ -3263,6 +3263,7 @@ class P2PTransportChannelPingTest : public ::testing::Test,
   Connection* FindNextPingableConnectionAndPingIt(P2PTransportChannel* ch) {
     Connection* conn = ch->FindNextPingableConnection();
     if (conn) {
+      conn->Ping(rtc::TimeMillis());
       ch->MarkConnectionPinged(conn);
     }
     return conn;
@@ -3603,6 +3604,40 @@ TEST_F(P2PTransportChannelPingTest, TestNoTriggeredChecksWhenWritable) {
   conn1->ReceivedPingResponse(LOW_RTT, "id");
   ASSERT_TRUE(conn1->writable());
   conn1->ReceivedPing();
+
+  // Ping received, but the connection is already writable, so no
+  // "triggered check" and conn2 is pinged before conn1 because it has
+  // a higher priority.
+  EXPECT_EQ(conn2, FindNextPingableConnectionAndPingIt(&ch));
+}
+
+TEST_F(P2PTransportChannelPingTest,
+       TestNoTriggeredChecksWhenWritableSortIfNeeded) {
+  webrtc::test::ScopedFieldTrials field_trials(
+      "WebRTC-IceFieldTrials/sort_if_needed:true/");
+  rtc::ScopedFakeClock clock;
+  FakePortAllocator pa(rtc::Thread::Current(), nullptr);
+  P2PTransportChannel ch("trigger checks", 1, &pa);
+  ch.SetIceConfig(ch.config());
+  PrepareChannel(&ch);
+  ch.MaybeStartGathering();
+  ch.AddRemoteCandidate(CreateUdpCandidate(LOCAL_PORT_TYPE, "1.1.1.1", 1, 1));
+  ch.AddRemoteCandidate(CreateUdpCandidate(LOCAL_PORT_TYPE, "2.2.2.2", 2, 2));
+
+  Connection* conn1 = WaitForConnectionTo(&ch, "1.1.1.1", 1, &clock);
+  Connection* conn2 = WaitForConnectionTo(&ch, "2.2.2.2", 2, &clock);
+  ASSERT_TRUE(conn1 != nullptr);
+  ASSERT_TRUE(conn2 != nullptr);
+
+  EXPECT_EQ(conn2, FindNextPingableConnectionAndPingIt(&ch));
+  clock.AdvanceTime(webrtc::TimeDelta::ms(1));
+  EXPECT_EQ(conn1, FindNextPingableConnectionAndPingIt(&ch));
+  clock.AdvanceTime(webrtc::TimeDelta::ms(1));
+  conn1->ReceivedPingResponse(LOW_RTT, "id");
+  ASSERT_TRUE(conn1->writable());
+  clock.AdvanceTime(webrtc::TimeDelta::ms(1));
+  conn1->ReceivedPing();
+  clock.AdvanceTime(webrtc::TimeDelta::ms(1));
 
   // Ping received, but the connection is already writable, so no
   // "triggered check" and conn2 is pinged before conn1 because it has
