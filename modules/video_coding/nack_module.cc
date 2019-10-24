@@ -30,6 +30,12 @@ const int kProcessIntervalMs = 1000 / kProcessFrequency;
 const int kMaxReorderedPackets = 128;
 const int kNumReorderingBuckets = 10;
 const int kDefaultSendNackDelayMs = 0;
+// Min time between nacks, matching magic number in RTPSender::OnReceivedNack().
+const int64_t kMinRetryIntervalMs = 5;
+// Max time to delay before allowing another nack attempt.
+const int64_t kMaxRetryIntervalMs = 1500;
+// Upper bound on link-delay considered for exponential backoff.
+const int64_t kMaxExpBackoffFactorMs = 50;
 
 int64_t GetSendNackDelay() {
   int64_t delay_ms = strtol(
@@ -262,9 +268,19 @@ std::vector<uint16_t> NackModule::GetNackBatch(NackFilterOptions options) {
   std::vector<uint16_t> nack_batch;
   auto it = nack_list_.begin();
   while (it != nack_list_.end()) {
+    int64_t resend_delay_ms = std::max(rtt_ms_, kMinRetryIntervalMs);
+    if (it->second.retries > 1) {
+      int64_t exponential_backoff_ms =
+          std::min(rtt_ms_, kMaxExpBackoffFactorMs) *
+          (1 << (it->second.retries - 1));
+      resend_delay_ms = std::max(resend_delay_ms, exponential_backoff_ms);
+    }
+    resend_delay_ms = std::min(kMaxRetryIntervalMs, resend_delay_ms);
+
     bool delay_timed_out =
         now_ms - it->second.created_at_time >= send_nack_delay_ms_;
-    bool nack_on_rtt_passed = now_ms - it->second.sent_at_time >= rtt_ms_;
+    bool nack_on_rtt_passed =
+        now_ms - it->second.sent_at_time >= resend_delay_ms;
     bool nack_on_seq_num_passed =
         it->second.sent_at_time == -1 &&
         AheadOrAt(newest_seq_num_, it->second.send_at_seq_num);
