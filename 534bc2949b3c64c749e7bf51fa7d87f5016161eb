@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31288c0b_334ebf7a",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-10-24T14:14:20Z",
+      "side": 1,
+      "message": "This is very confusing. \n\n1) Using packet_history as a flag to creating RtpSenderEgress. It\u0027s way to implicit.\n2) non_paced_packet_sender is created if we don\u0027t have paced sender in config and we down\u0027t own the history.\n3) config.paced_sender is checked for non_paced_packet_sender, but packetSender is checked for paced_sender_. Why in this way and not packetSender in both cases?\n\nIt\u0027s very hard to understand what is created in what case here.\n\nIt currently might also happen that paced_sender_ is nullptr, if packetSender is null and packet_history is also null (and egress as a result of that), is it expected behavior?\n\nI would instead move that logic to the body of the constructor, where all the cases are explicitly stated with if/switch. The same for the owned history.",
+      "range": {
+        "startLine": 113,
+        "startChar": 6,
+        "endLine": 121,
+        "endChar": 67
+      },
+      "revId": "534bc2949b3c64c749e7bf51fa7d87f5016161eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
