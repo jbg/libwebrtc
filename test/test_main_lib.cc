@@ -175,7 +175,7 @@ class TestMainImpl : public TestMain {
       webrtc::test::WritePerfResults(chartjson_result_file);
     }
     std::vector<std::string> metrics_to_plot = absl::GetFlag(FLAGS_plot);
-    if (!metrics_to_plot.empty()) {
+    if (!metrics_to_plot.empty() || true) {
       if (metrics_to_plot.size() == 1 &&
           metrics_to_plot[0] == kPlotAllMetrics) {
         metrics_to_plot.clear();
