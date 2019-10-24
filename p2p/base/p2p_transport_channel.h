@@ -33,6 +33,7 @@
 #include "logging/rtc_event_log/events/rtc_event_ice_candidate_pair_config.h"
 #include "logging/rtc_event_log/ice_logger.h"
 #include "p2p/base/candidate_pair_interface.h"
+#include "p2p/base/ice_controller_interface.h"
 #include "p2p/base/ice_transport_internal.h"
 #include "p2p/base/p2p_constants.h"
 #include "p2p/base/port_allocator.h"
@@ -216,22 +217,6 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
     return allocator_session()->IsGettingPorts();
   }
 
-  // A transport channel is weak if the current best connection is either
-  // not receiving or not writable, or if there is no best connection at all.
-  bool weak() const;
-
-  int weak_ping_interval() const {
-    RTC_DCHECK_RUN_ON(network_thread_);
-    return std::max(config_.ice_check_interval_weak_connectivity_or_default(),
-                    config_.ice_check_min_interval_or_default());
-  }
-
-  int strong_ping_interval() const {
-    RTC_DCHECK_RUN_ON(network_thread_);
-    return std::max(config_.ice_check_interval_strong_connectivity_or_default(),
-                    config_.ice_check_min_interval_or_default());
-  }
-
   // Returns true if it's possible to send packets on |connection|.
   bool ReadyToSend(Connection* connection) const;
   void UpdateConnectionStates();
@@ -272,6 +257,8 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   bool PresumedWritable(const cricket::Connection* conn) const;
 
   void SortConnectionsAndUpdateState(const std::string& reason_to_sort);
+  void SortConnections();
+  void SortConnectionsIfNeeded();
   void SwitchSelectedConnection(Connection* conn, const std::string& reason);
   void UpdateState();
   void HandleAllTimedOut();
@@ -296,13 +283,6 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   bool IsDuplicateRemoteCandidate(const Candidate& candidate);
   void RememberRemoteCandidate(const Candidate& remote_candidate,
                                PortInterface* origin_port);
-  bool IsPingable(const Connection* conn, int64_t now) const;
-  // Whether a writable connection is past its ping interval and needs to be
-  // pinged again.
-  bool WritableConnectionPastPingInterval(const Connection* conn,
-                                          int64_t now) const;
-  int CalculateActiveWritablePingInterval(const Connection* conn,
-                                          int64_t now) const;
   void PingConnection(Connection* conn);
   void AddAllocatorSession(std::unique_ptr<PortAllocatorSession> session);
   void AddConnection(Connection* connection);
@@ -364,19 +344,7 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
                                      const std::string& reason);
   // Gets the best connection for each network.
   std::map<rtc::Network*, Connection*> GetBestConnectionByNetwork() const;
-  std::vector<Connection*> GetBestWritableConnectionPerNetwork() const;
   void PruneConnections();
-  bool IsBackupConnection(const Connection* conn) const;
-
-  Connection* FindOldestConnectionNeedingTriggeredCheck(int64_t now);
-  // Between |conn1| and |conn2|, this function returns the one which should
-  // be pinged first.
-  Connection* MorePingable(Connection* conn1, Connection* conn2);
-  // Select the connection which is Relay/Relay. If both of them are,
-  // UDP relay protocol takes precedence.
-  Connection* MostLikelyToWork(Connection* conn1, Connection* conn2);
-  // Compare the last_ping_sent time and return the one least recently pinged.
-  Connection* LeastRecentlyPinged(Connection* conn1, Connection* conn2);
 
   // Returns the latest remote ICE parameters or nullptr if there are no remote
   // ICE parameters yet.
@@ -438,13 +406,8 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   std::vector<PortInterface*> pruned_ports_ RTC_GUARDED_BY(network_thread_);
 
   // |connections_| is a sorted list with the first one always be the
-  // |selected_connection_| when it's not nullptr. The combination of
-  // |pinged_connections_| and |unpinged_connections_| has the same
-  // connections as |connections_|. These 2 sets maintain whether a
-  // connection should be pinged next or not.
+  // |selected_connection_| when it's not nullptr.
   std::vector<Connection*> connections_ RTC_GUARDED_BY(network_thread_);
-  std::set<Connection*> pinged_connections_ RTC_GUARDED_BY(network_thread_);
-  std::set<Connection*> unpinged_connections_ RTC_GUARDED_BY(network_thread_);
 
   Connection* selected_connection_ RTC_GUARDED_BY(network_thread_) = nullptr;
 
@@ -489,6 +452,9 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   absl::optional<rtc::NetworkRoute> network_route_
       RTC_GUARDED_BY(network_thread_);
   webrtc::IceEventLog ice_event_log_ RTC_GUARDED_BY(network_thread_);
+
+  std::unique_ptr<IceControllerInterface> ice_controller_
+      RTC_GUARDED_BY(network_thread_);
 
   struct CandidateAndResolver final {
     CandidateAndResolver(const Candidate& candidate,
