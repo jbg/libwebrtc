@@ -88,6 +88,12 @@ class PacketBuffer {
   std::vector<std::unique_ptr<RtpFrameObject>> FindFrames(uint16_t seq_num)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_);
 
+  // Creates frame object from packets in range [first_seq_num, last_seq_num]
+  // inclusive.
+  std::unique_ptr<RtpFrameObject> AssembleFrame(uint16_t first_seq_num,
+                                                uint16_t last_seq_num)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_);
+
   rtc::scoped_refptr<EncodedImageBuffer> GetEncodedImageBuffer(
       size_t frame_size,
       uint16_t first_seq_num,
