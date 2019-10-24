@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "93c9a37a_074ae378",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-24T19:56:04Z",
+      "side": 1,
+      "message": "Thanks for the context. Could you add a comment giving the context in the destructor as well?",
+      "parentUuid": "6c6b6f85_c1edb4fd",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f9df01d_b6b9659a",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "I\u0027ve added comment and as well added functionality to randomly delay and reorder packets to make usrsctp life even harder during test. But I don\u0027t have ideas about better names for the class, maybe SimulatedPacketTransport or DirectPacketTransport? What do you think?",
       "parentUuid": "4f9df01d_b6b9659a",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b28b7e3e_4decaa53",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-24T19:56:04Z",
+      "side": 1,
+      "message": "SimulatedPacketTransport sounds good to me. Another idea is ConfigurablePacketTransport. You can keep the original name too if you\u0027d like, now that there\u0027s a class comment.",
+      "parentUuid": "77df7457_5bb00205",
       "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -225,6 +267,30 @@
     },
     {
       "key": {
+        "uuid": "cd92cd05_cac5b00f",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-24T19:56:04Z",
+      "side": 1,
+      "message": "Sounds good. Could you comment on this in the class comment so that someone using this test understands that this is on purpose?",
+      "parentUuid": "50475aee_0a86e78c",
+      "range": {
+        "startLine": 185,
+        "startChar": 6,
+        "endLine": 185,
+        "endChar": 16
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79954ff4_9c37a9dd",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -339,6 +405,30 @@
       "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cc63294_abe6242e",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 5800
+      },
+      "writtenOn": "2019-10-24T19:56:04Z",
+      "side": 1,
+      "message": "Thanks a lot for adding this!",
+      "parentUuid": "43ec2051_a16a524c",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 28
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
