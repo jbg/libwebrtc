@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a70c6a11_82247902",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-24T10:35:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e76761d_8e8ada56",
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6d471ec_30c7320d",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 12
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "cc2ed9d2_782e0869",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-24T10:35:57Z",
+      "side": 1,
+      "message": "Done (using WeakPtr).",
+      "parentUuid": "c6d471ec_30c7320d",
+      "range": {
+        "startLine": 2136,
+        "startChar": 7,
+        "endLine": 2136,
+        "endChar": 18
+      },
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f8c3c39_73a9ca22",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 12
@@ -53,6 +95,30 @@
       "writtenOn": "2019-10-23T17:55:50Z",
       "side": 1,
       "message": "suggestion: \"PeerConnection was closed.\"",
+      "range": {
+        "startLine": 2302,
+        "startChar": 47,
+        "endLine": 2302,
+        "endChar": 68
+      },
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a31db0b8_337de886",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 2302,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-24T10:35:57Z",
+      "side": 1,
+      "message": "I didn\u0027t change this. Note that the PC can be destroyed without being closed. This is not true in Chrome due to ref counting and requiring it to be kept-alive until closed, but this is true in C++, so saying that it\u0027s closed might be a lie in some cases.\n\nThe other reason I didn\u0027t change it is that in the case where the PC is deleted after DoCreateOffer or DoCreateAnswer but before the OP has finished is exactly this. This is the string in webrtc_session_description_factory.cc\u0027s kFailedDueToSessionShutdown.\n\nTo have a different error message for \"deleted while pending\" and \"deleted after chaining but before pending\" would be confusing, i.e. you\u0027d get a different error message for the same cause of failure but depending on whether or not an operation was already pending or not.\n\nI\u0027d like to keep this error message because it is the same error message that existing applications are already expecting (I even didn\u0027t add a period at the end, which some of our messages do but not others). However if you still think it should be changed I will change it.",
+      "parentUuid": "8f8c3c39_73a9ca22",
       "range": {
         "startLine": 2302,
         "startChar": 47,
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "7cb2352d_186a0207",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-24T10:35:57Z",
+      "side": 1,
+      "message": "Oh, of course, why re-invent the wheel. Done.",
+      "parentUuid": "66804087_e64ae9dc",
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f73725a_87167f91",
         "filename": "pc/peer_connection_signaling_unittest.cc",
         "patchSetId": 12
@@ -96,6 +180,24 @@
       "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e041b1_5e2e5e88",
+        "filename": "pc/peer_connection_signaling_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-24T10:35:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f73725a_87167f91",
+      "revId": "74051bbb69477a72b6e89484afa2ee8cac318b55",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
