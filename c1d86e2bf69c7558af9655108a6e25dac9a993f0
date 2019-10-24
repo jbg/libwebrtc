@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6c6b6f85_c1edb4fd",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "It\u0027s not strictly necessary... But during execution of my tests on top of latest usrsctp I\u0027ve discovered use-after-free bug when usrsctp invokes callback for already disposed SctpTransport, so usrsctp invoked send callback after usrsctp_close(sock_) (more details in this comment on github https://github.com/sctplab/usrsctp/pull/397#issuecomment-544484758). That\u0027s a bug in usrsctp I\u0027m currently bisecting, but having this variables set to nullptr made it easier to understand that SctpTransport was disposed. This is only useful on non-ASAN enabled builds. If you wish I could undo this changes, but I thought since ASAN is not enabled by default it might be useful to reset this fields to nullptr to get easier to interpret null pointer de-reference error rather than generic memory access error.",
+      "parentUuid": "37031cac_76638450",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f9df01d_b6b9659a",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -36,6 +60,24 @@
       "writtenOn": "2019-10-23T19:42:59Z",
       "side": 1,
       "message": "nit: Comment describing class. The name sort of indicates that it\u0027s always lossy, but it\u0027s actually configurable (can be set to 0 even). This would be nice to have in a class comment.",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77df7457_5bb00205",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "I\u0027ve added comment and as well added functionality to randomly delay and reorder packets to make usrsctp life even harder during test. But I don\u0027t have ideas about better names for the class, maybe SimulatedPacketTransport or DirectPacketTransport? What do you think?",
+      "parentUuid": "4f9df01d_b6b9659a",
       "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "8b17059e_0c50ce11",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d871920d_9cb15424",
+      "range": {
+        "startLine": 102,
+        "startChar": 7,
+        "endLine": 102,
+        "endChar": 24
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7307f09_899382a8",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "29723054_a2ae8302",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "No, it is occurred it\u0027s not necessary. It\u0027s just me unaware of proper usage of AsyncInvoker. Thanks for clarification!",
+      "parentUuid": "b7307f09_899382a8",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 5
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ebd25fc_bad04a25",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -99,6 +189,30 @@
       "writtenOn": "2019-10-23T19:42:59Z",
       "side": 1,
       "message": "I\u0027m curious - what\u0027s the reason for rotating the stream ID? Is this necessary to repro the deadlock issue?",
+      "range": {
+        "startLine": 185,
+        "startChar": 6,
+        "endLine": 185,
+        "endChar": 16
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50475aee_0a86e78c",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "I think it\u0027s not strictly necessary to reproduce current deadlock, but I wanted to abuse usrsctp as much as possible, so that\u0027s why here different sids are assigned to different messages, so probably more code execution paths are covered by test (not sure about that, just an assumption).",
+      "parentUuid": "3ebd25fc_bad04a25",
       "range": {
         "startLine": 185,
         "startChar": 6,
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "961332b9_955914c8",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79954ff4_9c37a9dd",
+      "range": {
+        "startLine": 223,
+        "startChar": 13,
+        "endLine": 223,
+        "endChar": 23
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ae57185_3d592d11",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -154,6 +292,30 @@
       "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de73b1fa_8c71e575",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "No, hey are not necessary, I\u0027ll remove them. I\u0027ve initially tried to write test in a different way, but at current moment these getters no longer necessary.",
+      "parentUuid": "2ae57185_3d592d11",
+      "range": {
+        "startLine": 528,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 65
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -197,6 +359,24 @@
     },
     {
       "key": {
+        "uuid": "1856c8cf_e36f20da",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "189191f5_c13b15ab",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5d2215f_0ab0699a",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -220,6 +400,30 @@
     },
     {
       "key": {
+        "uuid": "fdf960a7_0e34643b",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5d2215f_0ab0699a",
+      "range": {
+        "startLine": 612,
+        "startChar": 49,
+        "endLine": 612,
+        "endChar": 56
+      },
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26e7780e_5dd98741",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -237,6 +441,24 @@
     },
     {
       "key": {
+        "uuid": "5ed68067_85a486fe",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26e7780e_5dd98741",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eba513fc_9ae761fe",
         "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
         "patchSetId": 8
@@ -251,6 +473,24 @@
       "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96352d7f_72240874",
+        "filename": "media/sctp/sctp_transport_reliability_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2019-10-24T18:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eba513fc_9ae761fe",
+      "revId": "c1d86e2bf69c7558af9655108a6e25dac9a993f0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
