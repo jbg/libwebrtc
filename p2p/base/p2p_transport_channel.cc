@@ -699,7 +699,8 @@ void P2PTransportChannel::SetIceConfig(const IceConfig& config) {
   webrtc::StructParametersParser::Create(
       "skip_relay_to_non_relay_connections",
       &field_trials_.skip_relay_to_non_relay_connections,
-      "max_outstanding_pings", &field_trials_.max_outstanding_pings)
+      "max_outstanding_pings", &field_trials_.max_outstanding_pings,
+      "sort_if_needed", &field_trials_.sort_if_needed)
       ->Parse(webrtc::field_trial::FindFullName("WebRTC-IceFieldTrials"));
 
   if (field_trials_.skip_relay_to_non_relay_connections) {
@@ -709,6 +710,10 @@ void P2PTransportChannel::SetIceConfig(const IceConfig& config) {
   if (field_trials_.max_outstanding_pings.has_value()) {
     RTC_LOG(LS_INFO) << "Set max_outstanding_pings: "
                      << *field_trials_.max_outstanding_pings;
+  }
+
+  if (field_trials_.sort_if_needed) {
+    RTC_LOG(LS_INFO) << "Set sort_if_needed";
   }
 
   webrtc::BasicRegatheringController::Config regathering_config(
@@ -1818,15 +1823,27 @@ bool P2PTransportChannel::PresumedWritable(const Connection* conn) const {
            conn->remote_candidate().type() == PRFLX_PORT_TYPE));
 }
 
-// Sort the available connections to find the best one.  We also monitor
-// the number of available connections and the current state.
-void P2PTransportChannel::SortConnectionsAndUpdateState(
-    const std::string& reason_to_sort) {
+void P2PTransportChannel::SortConnectionsIfNeeded() const {
   RTC_DCHECK_RUN_ON(network_thread_);
+  if (sort_dirty_ == false)
+    return;
 
-  // Make sure the connection states are up-to-date since this affects how they
-  // will be sorted.
-  UpdateConnectionStates();
+  if (!field_trials_.sort_if_needed) {
+    return;
+  }
+
+  /**
+   * This method is called from the Ping()-stack,
+   * and that is marked as const :(.
+   * Make an ugly const-cast rather than changing them.
+   * TODO(jonaso): If this is removed and the code is enabled
+   * then change the Ping()-stack to remove this.
+   */
+  const_cast<P2PTransportChannel*>(this)->SortConnections();
+}
+
+void P2PTransportChannel::SortConnections() {
+  RTC_DCHECK_RUN_ON(network_thread_);
 
   // Any changes after this point will require a re-sort.
   sort_dirty_ = false;
@@ -1845,7 +1862,19 @@ void P2PTransportChannel::SortConnectionsAndUpdateState(
         // Otherwise, sort based on latency estimate.
         return a->rtt() < b->rtt();
       });
+}
 
+// Sort the available connections to find the best one.  We also monitor
+// the number of available connections and the current state.
+void P2PTransportChannel::SortConnectionsAndUpdateState(
+    const std::string& reason_to_sort) {
+  RTC_DCHECK_RUN_ON(network_thread_);
+
+  // Make sure the connection states are up-to-date since this affects how they
+  // will be sorted.
+  UpdateConnectionStates();
+
+  SortConnections();
   RTC_LOG(LS_VERBOSE) << "Sorting " << connections_.size()
                       << " available connections";
   for (size_t i = 0; i < connections_.size(); ++i) {
@@ -1908,6 +1937,9 @@ P2PTransportChannel::GetBestConnectionByNetwork() const {
     best_connection_by_network[selected_connection_->port()->Network()] =
         selected_connection_;
   }
+
+  SortConnectionsIfNeeded();
+
   // TODO(honghaiz): Need to update this if |connections_| are not sorted.
   for (Connection* conn : connections_) {
     rtc::Network* network = conn->port()->Network();
@@ -2307,6 +2339,7 @@ Connection* P2PTransportChannel::FindNextPingableConnection() {
                                     });
     if (iter != pingable_selectable_connections.end()) {
       return *iter;
+    } else {
     }
   }
 
@@ -2660,6 +2693,8 @@ Connection* P2PTransportChannel::MorePingable(Connection* conn1,
   if (least_recently_pinged_conn) {
     return least_recently_pinged_conn;
   }
+
+  SortConnectionsIfNeeded();
 
   // During the initial state when nothing has been pinged yet, return the first
   // one in the ordered |connections_|.
