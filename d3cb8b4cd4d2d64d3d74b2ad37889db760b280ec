@@ -16,6 +16,75 @@
       "revId": "d3cb8b4cd4d2d64d3d74b2ad37889db760b280ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d82aa31b_b9e7e5ce",
+        "filename": "api/crypto/crypto_options.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2019-10-25T14:04:12Z",
+      "side": 1,
+      "message": "or actually assert. Is RTC_DCHECK_GT(crypto_suites.size(), 0); the right thing here?",
+      "parentUuid": "55ac3ed5_4c60ed5c",
+      "revId": "d3cb8b4cd4d2d64d3d74b2ad37889db760b280ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "257dd3a2_f6190747",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3126,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2019-10-25T14:04:12Z",
+      "side": 1,
+      "message": "maybe rename to CgmCipherUsedWhenOnlyGcmSupported?",
+      "revId": "d3cb8b4cd4d2d64d3d74b2ad37889db760b280ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "026c64ae_9827a047",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3135,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2019-10-25T14:04:12Z",
+      "side": 1,
+      "message": "this test and the next one do no work anymore I think since we would always prefer non-gcm. OTOH I would assume that these tests only sanity-check that openssl/boringssl behave the right way?",
+      "revId": "d3cb8b4cd4d2d64d3d74b2ad37889db760b280ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ec474a4_2ca3142c",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3173,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2019-10-25T14:04:12Z",
+      "side": 1,
+      "message": "should this test also assert that gcm is used? It wasn\u0027t broken initially when gcm was not preferred.",
+      "revId": "d3cb8b4cd4d2d64d3d74b2ad37889db760b280ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
