@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "617bb9be_2397fca3",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1743,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-25T14:06:18Z",
+      "side": 1,
+      "message": "Can you add an rtc_stats_collector_unittest.cc that verifies that bytes are turned into strings correctly and the other plumbing on this layer?",
+      "revId": "b715767d83d4862993cc4622e2be0ab48dc751b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cd58d8f_70473ace",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-25T14:06:18Z",
+      "side": 1,
+      "message": "Does it make sense to make it hardcoded which version to expect here? Changing what the expectation is when you update the version seems like a easy thing to do? That would guard against getting some unexpected version or weird characters.",
+      "revId": "b715767d83d4862993cc4622e2be0ab48dc751b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c051d058_db44c811",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-10-25T14:06:18Z",
+      "side": 1,
+      "message": "Format!",
+      "revId": "b715767d83d4862993cc4622e2be0ab48dc751b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
