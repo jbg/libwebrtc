@@ -16,8 +16,10 @@
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
+#include "modules/rtp_rtcp/source/rtp_packet_history.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/rtp_rtcp/source/rtp_sender.h"
+#include "modules/rtp_rtcp/source/rtp_sender_egress.h"
 #include "test/gmock.h"
 #include "test/gtest.h"
 
@@ -62,8 +64,7 @@ class LoopbackTransportTest : public webrtc::Transport {
 class RtpSenderAudioTest : public ::testing::Test {
  public:
   RtpSenderAudioTest()
-      : fake_clock_(kStartTime),
-        rtp_sender_([&] {
+      : config_([&] {
           RtpRtcp::Configuration config;
           config.audio = true;
           config.clock = &fake_clock_;
@@ -71,12 +72,21 @@ class RtpSenderAudioTest : public ::testing::Test {
           config.local_media_ssrc = kSsrc;
           return config;
         }()),
+        fake_clock_(kStartTime),
+        packet_history_(&fake_clock_),
+        rtp_sender_egress_(config_, &packet_history_),
+        packet_sender_(&rtp_sender_egress_),
+        rtp_sender_(config_, &packet_history_, &packet_sender_),
         rtp_sender_audio_(&fake_clock_, &rtp_sender_) {
     rtp_sender_.SetSequenceNumber(kSeqNum);
   }
 
+  const RtpRtcp::Configuration config_;
   SimulatedClock fake_clock_;
   LoopbackTransportTest transport_;
+  RtpPacketHistory packet_history_;
+  RtpSenderEgress rtp_sender_egress_;
+  RtpSenderEgress::NonPacedPacketSender packet_sender_;
   RTPSender rtp_sender_;
   RTPSenderAudio rtp_sender_audio_;
 };
