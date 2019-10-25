@@ -29,8 +29,10 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/tmmb_item.h"
 #include "modules/rtp_rtcp/source/rtcp_receiver.h"
 #include "modules/rtp_rtcp/source/rtcp_sender.h"
+#include "modules/rtp_rtcp/source/rtp_packet_history.h"
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
 #include "modules/rtp_rtcp/source/rtp_sender.h"
+#include "modules/rtp_rtcp/source/rtp_sender_egress.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/gtest_prod_util.h"
 
@@ -133,6 +135,8 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   bool TrySendPacket(RtpPacketToSend* packet,
                      const PacedPacketInfo& pacing_info) override;
 
+  void OnPacketsAcknowledged(
+      rtc::ArrayView<const uint16_t> sequence_numbers) override;
 
   std::vector<std::unique_ptr<RtpPacketToSend>> GeneratePadding(
       size_t target_size_bytes) override;
@@ -276,8 +280,12 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
  protected:
   bool UpdateRTCPReceiveInformationTimers();
 
-  RTPSender* rtp_sender() { return rtp_sender_.get(); }
-  const RTPSender* rtp_sender() const { return rtp_sender_.get(); }
+  RTPSender* rtp_sender() {
+    return rtp_sender_ ? &rtp_sender_->packet_creator_ : nullptr;
+  }
+  const RTPSender* rtp_sender() const {
+    return rtp_sender_ ? &rtp_sender_->packet_creator_ : nullptr;
+  }
 
   RTCPSender* rtcp_sender() { return &rtcp_sender_; }
   const RTCPSender* rtcp_sender() const { return &rtcp_sender_; }
@@ -291,12 +299,21 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   FRIEND_TEST_ALL_PREFIXES(RtpRtcpImplTest, Rtt);
   FRIEND_TEST_ALL_PREFIXES(RtpRtcpImplTest, RttForReceiverOnly);
 
+  struct RtpSenderContext {
+    explicit RtpSenderContext(const RtpRtcp::Configuration& config);
+    RtpPacketHistory packet_history_;
+    RtpSenderEgress packet_sender_;
+    RtpSenderEgress::NonPacedPacketSender non_paced_sender_;
+    RTPSender packet_creator_;
+  };
+
   void set_rtt_ms(int64_t rtt_ms);
   int64_t rtt_ms() const;
 
   bool TimeToSendFullNackList(int64_t now) const;
 
-  std::unique_ptr<RTPSender> rtp_sender_;
+  std::unique_ptr<RtpSenderContext> rtp_sender_;
+
   RTCPSender rtcp_sender_;
   RTCPReceiver rtcp_receiver_;
 
