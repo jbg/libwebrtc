@@ -724,6 +724,30 @@
     },
     {
       "key": {
+        "uuid": "e52a4cf3_51ccb1c2",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 8393
+      },
+      "writtenOn": "2019-10-25T21:11:00Z",
+      "side": 1,
+      "message": "Yeah, I tend to agree reading process memory is kind of dodgy. Is there no other mechanism that we can use here?\n\nAt a minimum the strategy here needs to be clearly explained in a detailed comment,",
+      "parentUuid": "432c59a6_908fcd53",
+      "range": {
+        "startLine": 169,
+        "startChar": 27,
+        "endLine": 169,
+        "endChar": 28
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7354d0e5_f0719e13",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
@@ -853,6 +877,30 @@
       "side": 1,
       "message": "In order to detect a type of application we can check not only path but some properties as well (if it\u0027s really required).\n\nSwitch window to share based on windows behaviour only regardless type of application seems  dangerous to me.",
       "parentUuid": "30afd78c_617a2a55",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 37
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9eaa2e4_874a82f8",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 8393
+      },
+      "writtenOn": "2019-10-25T21:11:00Z",
+      "side": 1,
+      "message": "I think it\u0027s reasonable to take a safe, low-tech approach initially (i.e., whitelist of apps), and we can generalize if we find this approach doesn\u0027t scale.",
+      "parentUuid": "c2c019a9_2ec8e84f",
       "range": {
         "startLine": 251,
         "startChar": 0,
