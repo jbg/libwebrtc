@@ -22,6 +22,30 @@
       "revId": "534bc2949b3c64c749e7bf51fa7d87f5016161eb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0da73b91_5d50af74",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-25T11:25:23Z",
+      "side": 1,
+      "message": "Fair enough, I temporarily made members non-const and moved logic to constructor body instead.",
+      "parentUuid": "31288c0b_334ebf7a",
+      "range": {
+        "startLine": 113,
+        "startChar": 6,
+        "endLine": 121,
+        "endChar": 67
+      },
+      "revId": "534bc2949b3c64c749e7bf51fa7d87f5016161eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
