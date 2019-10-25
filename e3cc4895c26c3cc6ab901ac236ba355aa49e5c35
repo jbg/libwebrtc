@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23ce980c_1cee2e45",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-10-25T22:02:28Z",
+      "side": 1,
+      "message": "This non-trivial function call happens excessively often. Please call once in the ctor and cache the value.",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 55
+      },
+      "revId": "e3cc4895c26c3cc6ab901ac236ba355aa49e5c35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af2f4bcb_238a94a1",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2019-10-25T22:02:28Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 565,
+        "startChar": 0,
+        "endLine": 566,
+        "endChar": 55
+      },
+      "revId": "e3cc4895c26c3cc6ab901ac236ba355aa49e5c35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
