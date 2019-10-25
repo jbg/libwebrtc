@@ -344,6 +344,7 @@ void DefaultVideoQualityAnalyzer::Stop() {
     }
   }
   ReportResults();
+
 }
 
 std::string DefaultVideoQualityAnalyzer::GetStreamLabel(uint16_t frame_id) {
@@ -606,6 +607,8 @@ void DefaultVideoQualityAnalyzer::ReportResults() {
   RTC_LOG(INFO) << "comparisons_done=" << analyzer_stats_.comparisons_done;
   RTC_LOG(INFO) << "overloaded_comparisons_done="
                 << analyzer_stats_.overloaded_comparisons_done;
+
+  test::PrintPlottableResults({});
 }
 
 void DefaultVideoQualityAnalyzer::ReportVideoBweResults(
