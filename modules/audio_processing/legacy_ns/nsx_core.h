@@ -8,15 +8,15 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_AUDIO_PROCESSING_NS_MAIN_SOURCE_NSX_CORE_H_
-#define MODULES_AUDIO_PROCESSING_NS_MAIN_SOURCE_NSX_CORE_H_
+#ifndef MODULES_AUDIO_PROCESSING_LEGACY_NS_NSX_CORE_H_
+#define MODULES_AUDIO_PROCESSING_LEGACY_NS_NSX_CORE_H_
 
 #ifdef NS_FILEDEBUG
 #include <stdio.h>
 #endif
 
 #include "common_audio/signal_processing/include/signal_processing_library.h"
-#include "modules/audio_processing/ns/nsx_defines.h"
+#include "modules/audio_processing/legacy_ns/nsx_defines.h"
 
 typedef struct NoiseSuppressionFixedC_ {
   uint32_t fs;
@@ -258,4 +258,4 @@ void WebRtcNsx_Denormalize_mips(NoiseSuppressionFixedC* inst,
 }
 #endif
 
-#endif  // MODULES_AUDIO_PROCESSING_NS_MAIN_SOURCE_NSX_CORE_H_
+#endif  // MODULES_AUDIO_PROCESSING_LEGACY_NS_NSX_CORE_H_
