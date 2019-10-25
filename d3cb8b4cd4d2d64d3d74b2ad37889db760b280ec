@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "bbd03799_6f67a246",
+        "filename": "api/crypto/crypto_options.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-10-25T15:03:36Z",
+      "side": 1,
+      "message": "RTC_CHECK(!crypto_suites.empty()), I think.\n\nIt WILL be empty if you set all the flags, and in this case, DTLS won\u0027t work.\n(We don\u0027t want success here - someone could take it to mean \"unencrypted\").",
+      "parentUuid": "55ac3ed5_4c60ed5c",
+      "revId": "d3cb8b4cd4d2d64d3d74b2ad37889db760b280ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "257dd3a2_f6190747",
         "filename": "pc/peer_connection_integrationtest.cc",
         "patchSetId": 2
