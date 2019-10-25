@@ -973,6 +973,10 @@ class RTCStatsReportVerifier {
                                      RTCCertificateStats::kType);
     verifier.TestMemberIsIDReference(transport.remote_certificate_id,
                                      RTCCertificateStats::kType);
+    // Not supported in this CL yet.
+    verifier.TestMemberIsUndefined(transport.tls_version);
+    verifier.TestMemberIsDefined(transport.dtls_cipher);
+    verifier.TestMemberIsDefined(transport.srtp_cipher);
     verifier.TestMemberIsPositive<uint32_t>(
         transport.selected_candidate_pair_changes);
     return verifier.ExpectAllMembersSuccessfullyTested();
