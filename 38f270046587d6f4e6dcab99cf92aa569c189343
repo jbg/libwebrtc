@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56f9207f_6da7cea3",
+        "filename": "api/crypto/crypto_options.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2019-10-25T09:19:14Z",
+      "side": 1,
+      "message": "other side",
+      "revId": "38f270046587d6f4e6dcab99cf92aa569c189343",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
