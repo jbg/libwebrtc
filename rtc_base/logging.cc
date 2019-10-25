@@ -429,9 +429,9 @@ void LogMessage::OutputToDebug(const std::string& str,
     }
   }
 #endif  // WEBRTC_ANDROID
-  if (log_to_stderr) {
-    fprintf(stderr, "%s", str.c_str());
-    fflush(stderr);
+  if (log_to_stderr || true) {
+    fprintf(stdout, "%s", str.c_str());
+    fflush(stdout);
   }
 }
 
