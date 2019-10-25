@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "79e1d78b_a9c6f111",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-25T12:44:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4ef8684_abc94f12",
+      "range": {
+        "startLine": 134,
+        "startChar": 55,
+        "endLine": 134,
+        "endChar": 58
+      },
+      "revId": "54d71db69d673f5971f77f7ef81f94a75ca54167",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca115fb4_6214fbca",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 6
@@ -36,6 +60,24 @@
       "writtenOn": "2019-10-25T12:25:05Z",
       "side": 1,
       "message": "nit: \nDCHECK(packet_sender);",
+      "revId": "54d71db69d673f5971f77f7ef81f94a75ca54167",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa135a93_b9e9e44b",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-10-25T12:44:57Z",
+      "side": 1,
+      "message": "We already indirectly check that at L154.\nWould rather not duplicate checks here and above.",
+      "parentUuid": "ca115fb4_6214fbca",
       "revId": "54d71db69d673f5971f77f7ef81f94a75ca54167",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
