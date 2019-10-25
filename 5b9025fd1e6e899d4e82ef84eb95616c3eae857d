@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9c161ce_91268ee5",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1638,
+      "author": {
+        "id": 8393
+      },
+      "writtenOn": "2019-10-25T21:48:36Z",
+      "side": 1,
+      "message": "This variable name doesn\u0027t really make sense because even GCM is based on AES (i.e., AES-GCM).\n\nI would call this something like aes_ctr_enabled.",
+      "revId": "5b9025fd1e6e899d4e82ef84eb95616c3eae857d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
