@@ -278,6 +278,7 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
       int start_index = index;
       size_t tested_packets = 0;
       int64_t frame_timestamp = buffer_[start_index].data.timestamp;
+      int frame_payload_id = buffer_[start_index].data.payloadType;
 
       // Identify H.264 keyframes by means of SPS, PPS, and IDR.
       bool is_h264 = buffer_[start_index].data.codec() == kVideoCodecH264;
@@ -309,17 +310,16 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
           break;
 
         if (is_h264) {
-          const auto* h264_header = absl::get_if<RTPVideoHeaderH264>(
-              &buffer_[start_index].data.video_header.video_type_header);
-          if (!h264_header || h264_header->nalus_length >= kMaxNalusPerPacket)
-            return found_frames;
+          const auto& h264_header = absl::get<RTPVideoHeaderH264>(
+              buffer_[start_index].data.video_header.video_type_header);
+          RTC_DCHECK_LE(h264_header.nalus_length, kMaxNalusPerPacket);
 
-          for (size_t j = 0; j < h264_header->nalus_length; ++j) {
-            if (h264_header->nalus[j].type == H264::NaluType::kSps) {
+          for (size_t j = 0; j < h264_header.nalus_length; ++j) {
+            if (h264_header.nalus[j].type == H264::NaluType::kSps) {
               has_h264_sps = true;
-            } else if (h264_header->nalus[j].type == H264::NaluType::kPps) {
+            } else if (h264_header.nalus[j].type == H264::NaluType::kPps) {
               has_h264_pps = true;
-            } else if (h264_header->nalus[j].type == H264::NaluType::kIdr) {
+            } else if (h264_header.nalus[j].type == H264::NaluType::kIdr) {
               has_h264_idr = true;
             }
           }
@@ -352,7 +352,8 @@ std::vector<std::unique_ptr<RtpFrameObject>> PacketBuffer::FindFrames(
         // See: https://bugs.chromium.org/p/webrtc/issues/detail?id=7106
         if (is_h264 &&
             (!buffer_[start_index].used ||
-             buffer_[start_index].data.timestamp != frame_timestamp)) {
+             buffer_[start_index].data.timestamp != frame_timestamp ||
+             buffer_[start_index].data.payloadType != frame_payload_id)) {
           break;
         }
 

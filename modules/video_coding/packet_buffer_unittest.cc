@@ -865,22 +865,6 @@ TEST_F(PacketBufferTest, IncomingCodecChange) {
   EXPECT_THAT(packet_buffer_.InsertPacket(&packet).frames, SizeIs(2));
 }
 
-TEST_F(PacketBufferTest, TooManyNalusInPacket) {
-  VCMPacket packet;
-  packet.video_header.codec = kVideoCodecH264;
-  packet.timestamp = 1;
-  packet.seqNum = 1;
-  packet.video_header.frame_type = VideoFrameType::kVideoFrameKey;
-  packet.video_header.is_first_packet_in_frame = true;
-  packet.video_header.is_last_packet_in_frame = true;
-  auto& h264_header =
-      packet.video_header.video_type_header.emplace<RTPVideoHeaderH264>();
-  h264_header.nalus_length = kMaxNalusPerPacket;
-  packet.sizeBytes = 0;
-  packet.dataPtr = nullptr;
-  EXPECT_THAT(packet_buffer_.InsertPacket(&packet).frames, IsEmpty());
-}
-
 TEST_P(PacketBufferH264ParameterizedTest, OneFrameFillBuffer) {
   InsertH264(0, kKeyFrame, kFirst, kNotLast, 1000);
   for (int i = 1; i < kStartSize - 1; ++i)
