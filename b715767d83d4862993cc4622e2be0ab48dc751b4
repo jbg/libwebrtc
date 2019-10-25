@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "8e01b1c7_775b75a5",
+        "filename": "rtc_base/ssl_stream_adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-25T17:32:58Z",
+      "side": 1,
+      "message": "Maybe worth calling out that these are negotiated so only available once the connection is established.",
+      "revId": "b715767d83d4862993cc4622e2be0ab48dc751b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c051d058_db44c811",
         "filename": "stats/rtcstats_objects.cc",
         "patchSetId": 3
