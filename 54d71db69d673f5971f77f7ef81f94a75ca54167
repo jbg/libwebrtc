@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4ef8684_abc94f12",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-10-25T12:25:05Z",
+      "side": 1,
+      "message": "typo typo",
+      "range": {
+        "startLine": 134,
+        "startChar": 55,
+        "endLine": 134,
+        "endChar": 58
+      },
+      "revId": "54d71db69d673f5971f77f7ef81f94a75ca54167",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca115fb4_6214fbca",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-10-25T12:25:05Z",
+      "side": 1,
+      "message": "nit: \nDCHECK(packet_sender);",
+      "revId": "54d71db69d673f5971f77f7ef81f94a75ca54167",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
