@@ -43,7 +43,8 @@ class RTPSenderAudio {
                  int8_t payload_type,
                  uint32_t capture_timestamp,
                  const uint8_t* payload_data,
-                 size_t payload_size);
+                 size_t payload_size,
+                 int64_t absolute_capture_time_us);
 
   // Store the audio level in dBov for
   // header-extension-for-audio-level-indication.

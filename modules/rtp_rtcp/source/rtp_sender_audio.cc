@@ -133,7 +133,8 @@ bool RTPSenderAudio::SendAudio(AudioFrameType frame_type,
                                int8_t payload_type,
                                uint32_t rtp_timestamp,
                                const uint8_t* payload_data,
-                               size_t payload_size) {
+                               size_t payload_size,
+                               int64_t absolute_capture_time_us) {
   TRACE_EVENT_ASYNC_STEP1("webrtc", "Audio", rtp_timestamp, "Send", "type",
                           FrameTypeToString(frame_type));
 

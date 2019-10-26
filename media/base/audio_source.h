@@ -27,7 +27,8 @@ class AudioSource {
                         int bits_per_sample,
                         int sample_rate,
                         size_t number_of_channels,
-                        size_t number_of_frames) = 0;
+                        size_t number_of_frames,
+                        int64_t absolute_capture_time_us) = 0;
 
     // Called when the AudioSource is going away.
     virtual void OnClose() = 0;

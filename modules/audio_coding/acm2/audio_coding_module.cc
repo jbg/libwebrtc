@@ -109,6 +109,7 @@ class AudioCodingModuleImpl final : public AudioCodingModule {
     // If a re-mix is required (up or down), this buffer will store a re-mixed
     // version of the input.
     std::vector<int16_t> buffer;
+    int64_t absolute_capture_time_us;
   };
 
   InputData input_data_ RTC_GUARDED_BY(acm_crit_sect_);
@@ -336,6 +337,10 @@ int32_t AudioCodingModuleImpl::Encode(const InputData& input_data) {
                     int64_t{input_data.input_timestamp - last_timestamp_} *
                         encoder_stack_->RtpTimestampRateHz(),
                     int64_t{encoder_stack_->SampleRateHz()}));
+
+  const int64_t absolute_capture_time_us = input_data.absolute_capture_time_us;
+
+  RTC_LOG(LS_ERROR) << "kuddai most likely timestamp place " << rtp_timestamp;
   last_timestamp_ = input_data.input_timestamp;
   last_rtp_timestamp_ = rtp_timestamp;
   first_frame_ = false;
@@ -475,6 +480,7 @@ int AudioCodingModuleImpl::Add10MsDataInternal(const AudioFrame& audio_frame,
   input_data->input_timestamp = ptr_frame->timestamp_;
   input_data->length_per_channel = ptr_frame->samples_per_channel_;
   input_data->audio_channel = current_num_channels;
+  input_data->absolute_capture_time_us = audio_frame.absolute_capture_time_us;
 
   if (!same_num_channels) {
     // Remixes the input frame to the output data and in the process resize the

@@ -530,6 +530,8 @@ RtpCapabilities WebRtcVoiceEngine::GetCapabilities() const {
   capabilities.header_extensions.push_back(
       webrtc::RtpExtension(webrtc::RtpExtension::kAbsSendTimeUri, id++));
   capabilities.header_extensions.push_back(webrtc::RtpExtension(
+      webrtc::RtpExtension::kAbsoluteCaptureTimeUri, id++));
+  capabilities.header_extensions.push_back(webrtc::RtpExtension(
       webrtc::RtpExtension::kTransportSequenceNumberUri, id++));
   return capabilities;
 }
@@ -847,15 +849,19 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
               int bits_per_sample,
               int sample_rate,
               size_t number_of_channels,
-              size_t number_of_frames) override {
+              size_t number_of_frames,
+              int64_t absolute_capture_time_us) override {
     RTC_DCHECK_EQ(16, bits_per_sample);
     RTC_CHECK_RUNS_SERIALIZED(&audio_capture_race_checker_);
     RTC_DCHECK(stream_);
     std::unique_ptr<webrtc::AudioFrame> audio_frame(new webrtc::AudioFrame());
+    RTC_LOG(LS_ERROR) << " kuddai send audio frame"
+                      << ", timestamp " << audio_frame->timestamp_;
     audio_frame->UpdateFrame(
         audio_frame->timestamp_, static_cast<const int16_t*>(audio_data),
         number_of_frames, sample_rate, audio_frame->speech_type_,
         audio_frame->vad_activity_, number_of_channels);
+    audio_frame->absolute_capture_time_us = absolute_capture_time_us;
     stream_->SendAudioData(std::move(audio_frame));
   }
 
@@ -863,6 +869,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
   // never been called, this callback won't be triggered.
   void OnClose() override {
     RTC_DCHECK(worker_thread_checker_.IsCurrent());
+    RTC_LOG(LS_ERROR) << "kuddai OnClose defintely worker thread";
     // Set |source_| to nullptr to make sure no more callback will get into
     // the source.
     source_ = nullptr;

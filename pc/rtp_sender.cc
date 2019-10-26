@@ -393,8 +393,10 @@ void LocalAudioSinkAdapter::OnData(const void* audio_data,
                                    int bits_per_sample,
                                    int sample_rate,
                                    size_t number_of_channels,
-                                   size_t number_of_frames) {
+                                   size_t number_of_frames,
+                                   int64_t absolute_capture_time_us) {
   rtc::CritScope lock(&lock_);
+  RTC_LOG(LS_ERROR) << "kuddai webrtc deliver audio to voice engine";
   if (sink_) {
     sink_->OnData(audio_data, bits_per_sample, sample_rate, number_of_channels,
                   number_of_frames);

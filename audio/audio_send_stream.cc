@@ -231,6 +231,8 @@ AudioSendStream::ExtensionIds AudioSendStream::FindExtensionIds(
       ids.audio_level = extension.id;
     } else if (extension.uri == RtpExtension::kAbsSendTimeUri) {
       ids.abs_send_time = extension.id;
+    } else if (extension.uri == RtpExtension::kAbsoluteCaptureTimeUri) {
+      ids.absolute_capture_time = extension.id;
     } else if (extension.uri == RtpExtension::kTransportSequenceNumberUri) {
       ids.transport_sequence_number = extension.id;
     } else if (extension.uri == RtpExtension::kMidUri) {
