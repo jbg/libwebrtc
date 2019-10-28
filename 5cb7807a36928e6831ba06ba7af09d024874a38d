@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34c9b216_a2e43ced",
+        "filename": "rtc_base/ssl_stream_adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 8393
+      },
+      "writtenOn": "2019-10-28T17:07:57Z",
+      "side": 1,
+      "message": "This feels kind of hacky. Perhaps we should simply convert the existing enum to bytes (or separate major/minor version fields) in the stats collector?",
+      "revId": "5cb7807a36928e6831ba06ba7af09d024874a38d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
