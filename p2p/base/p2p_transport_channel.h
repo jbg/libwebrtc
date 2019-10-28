@@ -78,6 +78,7 @@ class RemoteCandidate : public Candidate {
 struct IceFieldTrials {
   bool skip_relay_to_non_relay_connections = false;
   absl::optional<int> max_outstanding_pings;
+  bool sort_if_needed = false;
 
   // Wait X ms before selecting a connection when having none.
   // This will make media slower, but will give us chance to find
@@ -282,6 +283,8 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   bool PresumedWritable(const cricket::Connection* conn) const;
 
   void SortConnectionsAndUpdateState(const std::string& reason_to_sort);
+  void SortConnections();
+  void SortConnectionsIfNeeded() const;
   void SwitchSelectedConnection(Connection* conn, const std::string& reason);
   void UpdateState();
   void HandleAllTimedOut();
