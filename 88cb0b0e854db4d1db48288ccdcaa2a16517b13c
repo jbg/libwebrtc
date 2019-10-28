@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0f0d82c_36667704",
+        "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2019-10-28T09:04:53Z",
+      "side": 1,
+      "message": "Maybe we should add an early return here if `isRunning \u003d\u003d NO`, to prevent weird races.",
+      "range": {
+        "startLine": 217,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 34
+      },
+      "revId": "88cb0b0e854db4d1db48288ccdcaa2a16517b13c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
