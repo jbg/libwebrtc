@@ -16,6 +16,24 @@
       "revId": "5cb7807a36928e6831ba06ba7af09d024874a38d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acea9de3_6fd1b714",
+        "filename": "rtc_base/ssl_stream_adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-10-28T17:17:46Z",
+      "side": 1,
+      "message": "I went over this with EKR when we defined the stats format in the webrtc-stats spec. There is no common string format for these values, there is no guarantee what future values will be, and the 2-byte format is quite fixed in the protocol.\n\nThe enum form is only internal to the webrtc SSL adapter - the open/boringssl API uses the 2-bytes-represented-as-integer form.",
+      "parentUuid": "34c9b216_a2e43ced",
+      "revId": "5cb7807a36928e6831ba06ba7af09d024874a38d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
