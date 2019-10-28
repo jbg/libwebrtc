@@ -1,0 +1,284 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13a456d2_5c6aec61",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "d2d\nThis check is already performed on line 1346.",
+      "range": {
+        "startLine": 1361,
+        "startChar": 4,
+        "endLine": 1362,
+        "endChar": 80
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d9a3ed8_9aac625f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1394,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 1393,
+        "startChar": 4,
+        "endLine": 1394,
+        "endChar": 80
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f98d61d8_d44884bd",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1973,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "Reset submodules_.noise_suppressor as well?",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2aea736_302c6e64",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "Why changing this file?",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d868acb5_a48e39b4",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "Why do we need this? Kill-switch not enough?",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a16a0ac9_ef880da4",
+        "filename": "modules/audio_processing/ns/fast_math.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "I think we should remove these functions and add them when/if we implement the approximations.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 1
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bd7008f_876145b6",
+        "filename": "modules/audio_processing/ns/fast_math.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "A comment explaining the constant would be nice.",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaa2af4f_a2b1f555",
+        "filename": "modules/audio_processing/ns/fast_math.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "A comment explaining the constant would be nice.",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dff30305_487f0edf",
+        "filename": "modules/audio_processing/ns/histograms.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it either be GetLrt() or lrt()?\nSame for get_spectral_flatness() and get_spectral_diff().",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46f07529_ba9436bc",
+        "filename": "modules/audio_processing/ns/noise_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "Would be nice to have more meaningful names.",
+      "range": {
+        "startLine": 78,
+        "startChar": 28,
+        "endLine": 78,
+        "endChar": 39
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6820117_7fef50ae",
+        "filename": "modules/audio_processing/ns/noise_suppressor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "The SecondHalf window seems a bit wasteful. Maybe you can index the first window in the second loop as well?",
+      "range": {
+        "startLine": 99,
+        "startChar": 11,
+        "endLine": 99,
+        "endChar": 35
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e7f9d95_d088b50c",
+        "filename": "modules/audio_processing/ns/noise_suppressor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "This will not work as zero_frame will always be false, it has to be initialized to true.\n\nAlso, one could exit early (after one channel) for most signals:\nif(energy \u003e\u003d 0.f) {\n  zero_frame \u003d false;\n  break;\n}",
+      "range": {
+        "startLine": 321,
+        "startChar": 4,
+        "endLine": 321,
+        "endChar": 45
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab6a751a_45c2b14d",
+        "filename": "modules/audio_processing/ns/noise_suppressor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "0 channels? Did you mean 1?",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6796da03_1eabb771",
+        "filename": "modules/audio_processing/ns/ns_common.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-28T15:20:17Z",
+      "side": 1,
+      "message": "What does Nr mean?",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
