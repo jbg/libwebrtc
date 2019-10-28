@@ -70,6 +70,11 @@ bool SampleRateSupportsMultiBand(int sample_rate_hz) {
          sample_rate_hz == AudioProcessing::kSampleRate48kHz;
 }
 
+// Checks whether the legacy ns functionality should be enforced.
+bool DetectLegacyNsEnforcement() {
+  return field_trial::IsEnabled("WebRTC-NewNoiseSuppressionKillSwitch");
+}
+
 // Identify the native processing rate that best handles a sample rate.
 int SuitableProcessRate(int minimum_rate,
                         int max_splitting_rate,
@@ -306,6 +311,7 @@ AudioProcessingImpl::AudioProcessingImpl(
     std::unique_ptr<CustomAudioAnalyzer> capture_analyzer)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
+      enforced_usage_of_legacy_ns_(DetectLegacyNsEnforcement()),
       capture_runtime_settings_(kRuntimeSettingQueueSize),
       render_runtime_settings_(kRuntimeSettingQueueSize),
       capture_runtime_settings_enqueuer_(&capture_runtime_settings_),
@@ -1335,9 +1341,14 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   if (submodules_.high_pass_filter) {
     submodules_.high_pass_filter->Process(capture_buffer);
   }
+
   RETURN_ON_ERR(submodules_.gain_control->AnalyzeCaptureAudio(capture_buffer));
+  RTC_DCHECK(
+      !(submodules_.legacy_noise_suppressor && submodules_.noise_suppressor));
   if (submodules_.noise_suppressor) {
-    submodules_.noise_suppressor->AnalyzeCaptureAudio(capture_buffer);
+    submodules_.noise_suppressor->Analyze(*capture_buffer);
+  } else if (submodules_.legacy_noise_suppressor) {
+    submodules_.legacy_noise_suppressor->AnalyzeCaptureAudio(capture_buffer);
   }
 
   if (submodules_.echo_control_mobile) {
@@ -1347,9 +1358,13 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
       return AudioProcessing::kStreamParameterNotSetError;
     }
 
+    RTC_DCHECK(
+        !(submodules_.legacy_noise_suppressor && submodules_.noise_suppressor));
     if (submodules_.noise_suppressor) {
+      submodules_.noise_suppressor->Process(capture_buffer);
+    } else if (submodules_.legacy_noise_suppressor) {
       submodules_.echo_control_mobile->CopyLowPassReference(capture_buffer);
-      submodules_.noise_suppressor->ProcessCaptureAudio(capture_buffer);
+      submodules_.legacy_noise_suppressor->ProcessCaptureAudio(capture_buffer);
     }
 
     RETURN_ON_ERR(submodules_.echo_control_mobile->ProcessCaptureAudio(
@@ -1375,8 +1390,12 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
           capture_buffer, stream_delay_ms()));
     }
 
+    RTC_DCHECK(
+        !(submodules_.legacy_noise_suppressor && submodules_.noise_suppressor));
     if (submodules_.noise_suppressor) {
-      submodules_.noise_suppressor->ProcessCaptureAudio(capture_buffer);
+      submodules_.noise_suppressor->Process(capture_buffer);
+    } else if (submodules_.legacy_noise_suppressor) {
+      submodules_.legacy_noise_suppressor->ProcessCaptureAudio(capture_buffer);
     }
   }
 
@@ -1775,9 +1794,9 @@ bool AudioProcessingImpl::UpdateActiveSubmoduleStates() {
   return submodule_states_.Update(
       config_.high_pass_filter.enabled, !!submodules_.echo_cancellation,
       !!submodules_.echo_control_mobile, config_.residual_echo_detector.enabled,
-      !!submodules_.noise_suppressor, submodules_.gain_control->is_enabled(),
-      config_.gain_controller2.enabled, config_.pre_amplifier.enabled,
-      capture_nonlocked_.echo_controller_enabled,
+      !!submodules_.legacy_noise_suppressor || !!submodules_.noise_suppressor,
+      submodules_.gain_control->is_enabled(), config_.gain_controller2.enabled,
+      config_.pre_amplifier.enabled, capture_nonlocked_.echo_controller_enabled,
       config_.voice_detection.enabled, capture_.transient_suppressor_enabled);
 }
 
@@ -1918,12 +1937,40 @@ void AudioProcessingImpl::InitializeGainController2() {
 
 void AudioProcessingImpl::InitializeNoiseSuppressor() {
   if (config_.noise_suppression.enabled) {
-    auto ns_level =
-        NsConfigLevelToInterfaceLevel(config_.noise_suppression.level);
-    submodules_.noise_suppressor = std::make_unique<NoiseSuppression>(
-        num_proc_channels(), proc_sample_rate_hz(), ns_level);
+    const bool use_legacy_ns =
+        config_.noise_suppression.use_legacy_ns || enforced_usage_of_legacy_ns_;
+
+    if (!use_legacy_ns) {
+      auto map_level =
+          [](AudioProcessing::Config::NoiseSuppression::Level level) {
+            using NoiseSuppresionConfig =
+                AudioProcessing::Config::NoiseSuppression;
+            switch (level) {
+              case NoiseSuppresionConfig::kLow:
+                return NsConfig::SuppressionLevel::k6dB;
+              case NoiseSuppresionConfig::kModerate:
+                return NsConfig::SuppressionLevel::k12dB;
+              case NoiseSuppresionConfig::kHigh:
+                return NsConfig::SuppressionLevel::k18dB;
+              case NoiseSuppresionConfig::kVeryHigh:
+                return NsConfig::SuppressionLevel::k21dB;
+              default:
+                RTC_NOTREACHED();
+            }
+          };
+
+      NsConfig cfg;
+      cfg.target_level = map_level(config_.noise_suppression.level);
+      submodules_.noise_suppressor = std::make_unique<NoiseSuppressor>(
+          cfg, proc_sample_rate_hz(), num_proc_channels());
+    } else {
+      auto ns_level =
+          NsConfigLevelToInterfaceLevel(config_.noise_suppression.level);
+      submodules_.legacy_noise_suppressor = std::make_unique<NoiseSuppression>(
+          num_proc_channels(), proc_sample_rate_hz(), ns_level);
+    }
   } else {
-    submodules_.noise_suppressor.reset();
+    submodules_.legacy_noise_suppressor.reset();
   }
 }
 

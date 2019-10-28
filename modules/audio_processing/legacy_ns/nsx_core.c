@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "modules/audio_processing/ns/noise_suppression_x.h"
+#include "modules/audio_processing/legacy_ns/noise_suppression_x.h"
 
 #include <math.h>
 #include <stdlib.h>
@@ -16,7 +16,7 @@
 
 #include "rtc_base/checks.h"
 #include "common_audio/signal_processing/include/real_fft.h"
-#include "modules/audio_processing/ns/nsx_core.h"
+#include "modules/audio_processing/legacy_ns/nsx_core.h"
 #include "system_wrappers/include/cpu_features_wrapper.h"
 
 #if defined(WEBRTC_HAS_NEON)
