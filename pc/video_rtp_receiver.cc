@@ -79,8 +79,8 @@ bool VideoRtpReceiver::SetSink(rtc::VideoSinkInterface<VideoFrame>* sink) {
   RTC_DCHECK(media_channel_);
   RTC_DCHECK(!stopped_);
   return worker_thread_->Invoke<bool>(RTC_FROM_HERE, [&] {
-    // TODO(bugs.webrtc.org/8694): Stop using 0 to mean unsignalled SSRC
-    return media_channel_->SetSink(ssrc_.value_or(0), sink);
+    return ssrc_ ? media_channel_->SetSink(*ssrc_, sink)
+                 : media_channel_->SetDefaultSink(sink);
   });
 }
 
@@ -89,8 +89,8 @@ RtpParameters VideoRtpReceiver::GetParameters() const {
     return RtpParameters();
   }
   return worker_thread_->Invoke<RtpParameters>(RTC_FROM_HERE, [&] {
-    // TODO(bugs.webrtc.org/8694): Stop using 0 to mean unsignalled SSRC
-    return media_channel_->GetRtpReceiveParameters(ssrc_.value_or(0));
+    return ssrc_ ? media_channel_->GetRtpReceiveParameters(*ssrc_)
+                 : media_channel_->GetDefaultRtpReceiveParameters();
   });
 }
 
@@ -100,9 +100,8 @@ bool VideoRtpReceiver::SetParameters(const RtpParameters& parameters) {
     return false;
   }
   return worker_thread_->Invoke<bool>(RTC_FROM_HERE, [&] {
-    // TODO(bugs.webrtc.org/8694): Stop using 0 to mean unsignalled SSRC
-    return media_channel_->SetRtpReceiveParameters(ssrc_.value_or(0),
-                                                   parameters);
+    return ssrc_ ? media_channel_->SetRtpReceiveParameters(*ssrc_, parameters)
+                 : media_channel_->SetDefaultRtpReceiveParameters(parameters);
   });
 }
 
