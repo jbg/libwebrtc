@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "74f6daa0_d631666c",
+        "filename": "modules/desktop_capture/cropping_window_capturer_win.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-29T17:46:20Z",
+      "side": 1,
+      "message": "Done: Measurements result posted, it\u0027s pretty fast on windows, so even if we have to call it up to 3 times per frame it should not be an issue.",
+      "parentUuid": "2ada88d3_686647e2",
+      "range": {
+        "startLine": 256,
+        "startChar": 42,
+        "endLine": 256,
+        "endChar": 62
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06a663f6_d6d41717",
         "filename": "modules/desktop_capture/desktop_capture_options.cc",
         "patchSetId": 8
