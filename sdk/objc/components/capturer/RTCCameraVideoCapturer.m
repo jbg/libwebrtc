@@ -192,19 +192,26 @@ const int64_t kNanosecondsPerSecond = 1000000000;
   [RTCDispatcher
       dispatchAsyncOnType:RTCDispatcherTypeCaptureSession
                     block:^{
-                      RTCLogInfo("Stop");
-                      self.currentDevice = nil;
-                      for (AVCaptureDeviceInput *oldInput in [self.captureSession.inputs copy]) {
-                        [self.captureSession removeInput:oldInput];
-                      }
-                      [self.captureSession stopRunning];
+                      if (self.isRunning == NO) {
+                        RTCLogInfo("Already stopped");
+                        return;
+                      } else {
+                        RTCLogInfo("Stop");
+                        self.currentDevice = nil;
+                        for (AVCaptureDeviceInput *oldInput in [self.captureSession.inputs copy]) {
+                          [self.captureSession removeInput:oldInput];
+                        }
+                        [self.captureSession stopRunning];
 
 #if TARGET_OS_IPHONE
-                      [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                          [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+                        });
 #endif
-                      self.isRunning = NO;
-                      if (completionHandler) {
-                        completionHandler();
+                        self.isRunning = NO;
+                        if (completionHandler) {
+                          completionHandler();
+                        }
                       }
                     }];
 }
