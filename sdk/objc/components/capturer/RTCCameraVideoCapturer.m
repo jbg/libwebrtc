@@ -200,7 +200,9 @@ const int64_t kNanosecondsPerSecond = 1000000000;
                       [self.captureSession stopRunning];
 
 #if TARGET_OS_IPHONE
-                      [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                        [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+                      });
 #endif
                       self.isRunning = NO;
                       if (completionHandler) {
@@ -213,6 +215,9 @@ const int64_t kNanosecondsPerSecond = 1000000000;
 
 #if TARGET_OS_IPHONE
 - (void)deviceOrientationDidChange:(NSNotification *)notification {
+  if (self.isRunning == NO) {
+    return;
+  }
   [RTCDispatcher dispatchAsyncOnType:RTCDispatcherTypeCaptureSession
                                block:^{
                                  [self updateOrientation];
