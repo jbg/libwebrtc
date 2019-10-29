@@ -119,6 +119,30 @@
       "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79d51989_3d4144bf",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-10-29T18:04:30Z",
+      "side": 1,
+      "message": "RTCRtpReceiver.setParameters appears to have been removed from the standard (or maybe it wasn\u0027t there in the first place?), so I doubt it had much future.",
+      "parentUuid": "577aef3e_fb3e2d57",
+      "range": {
+        "startLine": 997,
+        "startChar": 0,
+        "endLine": 1016,
+        "endChar": 0
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
