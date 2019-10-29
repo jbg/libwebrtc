@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39c9adc6_90ede3d6",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1961,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-29T12:19:35Z",
+      "side": 1,
+      "message": "I just realized that we need to add \"submodules_.legacy_noise_suppressor.reset();\" here..",
+      "revId": "9fa17a707896328c20faa7a8551635de4b41e344",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e900e01e_6f55b08e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1966,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-29T12:19:35Z",
+      "side": 1,
+      "message": "..and \"submodules_.noise_suppressor.reset();\" here.\n\nProbably even better to remove the final \"else\" and move the\nsubmodules_.legacy_noise_suppressor.reset();\nsubmodules_.noise_suppressor.reset();\nto the top of the function.",
+      "revId": "9fa17a707896328c20faa7a8551635de4b41e344",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "75d0b2aa_9a44935f",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-29T12:19:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3f9057a1_7c2fa1a2",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d868acb5_a48e39b4",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 5
@@ -198,6 +216,24 @@
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc69296e_370cda6f",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-29T12:19:35Z",
+      "side": 1,
+      "message": "Sounds good to me. Let\u0027s keep this config for a release or two before removing the legacy noise suppression.",
+      "parentUuid": "89403c3d_e32f0188",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -245,6 +281,30 @@
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36ebb00c_49b6b53b",
+        "filename": "modules/audio_processing/ns/fast_math.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-29T12:19:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f1787fff_142d34c2",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 1
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -362,6 +422,30 @@
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "488cbadf_8842dc2a",
+        "filename": "modules/audio_processing/ns/histograms.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-29T12:19:35Z",
+      "side": 1,
+      "message": "Ok, let\u0027s keep.",
+      "parentUuid": "26db4114_e89cba1f",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -538,6 +622,24 @@
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cdb542c_60129bf1",
+        "filename": "modules/audio_processing/ns/noise_suppressor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2019-10-29T12:19:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b7004ac_088ac88b",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
