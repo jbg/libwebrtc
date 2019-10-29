@@ -748,6 +748,30 @@
     },
     {
       "key": {
+        "uuid": "ca766fb9_6b4f0f56",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-10-29T17:42:50Z",
+      "side": 1,
+      "message": "Done: got rid of reading process memory",
+      "parentUuid": "e52a4cf3_51ccb1c2",
+      "range": {
+        "startLine": 169,
+        "startChar": 27,
+        "endLine": 169,
+        "endChar": 28
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7354d0e5_f0719e13",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
