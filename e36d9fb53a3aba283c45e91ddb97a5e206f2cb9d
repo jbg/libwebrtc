@@ -50,6 +50,75 @@
       "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "209f0959_33d3795f",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-29T09:40:03Z",
+      "side": 1,
+      "message": "If it can\u0027t fail, let it return void.",
+      "range": {
+        "startLine": 824,
+        "startChar": 10,
+        "endLine": 824,
+        "endChar": 14
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92ccf960_e1ac86b1",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-29T09:40:03Z",
+      "side": 1,
+      "message": "Similarly, return void if it can\u0027t fail.",
+      "range": {
+        "startLine": 900,
+        "startChar": 10,
+        "endLine": 900,
+        "endChar": 14
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "577aef3e_fb3e2d57",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-10-29T09:40:03Z",
+      "side": 1,
+      "message": "Both setter methods for RtpReceiveParameters look a bit pointless, if setting isn\u0027t implemented.\n\nWill RtpReceiverInterface::SetParameters (see https://cs.chromium.org/chromium/src/third_party/webrtc/api/rtp_receiver_interface.h?type\u003dcs\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d79) be implemented anytime soon? If not, maybe best to just delete the partial implementation.",
+      "range": {
+        "startLine": 997,
+        "startChar": 0,
+        "endLine": 1016,
+        "endChar": 0
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
