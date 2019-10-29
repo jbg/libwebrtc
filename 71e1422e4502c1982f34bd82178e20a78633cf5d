@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bd133a6c_f106ba00",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13a456d2_5c6aec61",
+      "range": {
+        "startLine": 1361,
+        "startChar": 4,
+        "endLine": 1362,
+        "endChar": 80
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d9a3ed8_9aac625f",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "50dd44f3_18b20c9b",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1394,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d9a3ed8_9aac625f",
+      "range": {
+        "startLine": 1393,
+        "startChar": 4,
+        "endLine": 1394,
+        "endChar": 80
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f98d61d8_d44884bd",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 5
@@ -62,6 +110,24 @@
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae6c708b_2d4c78e3",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1973,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Good find!\nDone.",
+      "parentUuid": "f98d61d8_d44884bd",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "3f9057a1_7c2fa1a2",
+        "filename": "modules/audio_processing/audio_processing_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "This is basically a huge bitexactness test that check metrics against thresholds. The changed values are threshold changes required for passing those checks.",
+      "parentUuid": "b2aea736_302c6e64",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d868acb5_a48e39b4",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 5
@@ -93,6 +177,24 @@
       "writtenOn": "2019-10-28T15:20:17Z",
       "side": 1,
       "message": "Why do we need this? Kill-switch not enough?",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89403c3d_e32f0188",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Without this there is no way to run the legacy noise suppressor using audioproc_f. The only purpose of this code is to retain that ability to simplify any offline analysis.\n\nWe could remove it, but it then becomes more tricky (a special build is needed) to activate the old NS code.\n\nWDYT?",
+      "parentUuid": "d868acb5_a48e39b4",
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "f1787fff_142d34c2",
+        "filename": "modules/audio_processing/ns/fast_math.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Keeping this for future changes after offline discussions.",
+      "parentUuid": "a16a0ac9_ef880da4",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 1
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5bd7008f_876145b6",
         "filename": "modules/audio_processing/ns/fast_math.cc",
         "patchSetId": 5
@@ -136,6 +262,24 @@
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a56751a1_c9c7c780",
+        "filename": "modules/audio_processing/ns/fast_math.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bd7008f_876145b6",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "ad43092b_2935b50e",
+        "filename": "modules/audio_processing/ns/fast_math.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaa2af4f_a2b1f555",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dff30305_487f0edf",
         "filename": "modules/audio_processing/ns/histograms.h",
         "patchSetId": 5
@@ -167,6 +329,30 @@
       "writtenOn": "2019-10-28T15:20:17Z",
       "side": 1,
       "message": "Shouldn\u0027t it either be GetLrt() or lrt()?\nSame for get_spectral_flatness() and get_spectral_diff().",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26db4114_e89cba1f",
+        "filename": "modules/audio_processing/ns/histograms.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "This is along the guidelines for naming of accessors and mutators  (https://google.github.io/styleguide/cppguide.html#Function_Names)\n\nI know I have not been consistent in the past with this but I nowadays think that naming style works better in the code.\n\nWDYT? Ok to keep?",
+      "parentUuid": "dff30305_487f0edf",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -202,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "54a479fe_dd04e767",
+        "filename": "modules/audio_processing/ns/noise_estimator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46f07529_ba9436bc",
+      "range": {
+        "startLine": 78,
+        "startChar": 28,
+        "endLine": 78,
+        "endChar": 39
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6820117_7fef50ae",
         "filename": "modules/audio_processing/ns/noise_suppressor.cc",
         "patchSetId": 5
@@ -222,6 +432,30 @@
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da25273c_8887c8e6",
+        "filename": "modules/audio_processing/ns/noise_suppressor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Agree. Good point!\nDone.",
+      "parentUuid": "e6820117_7fef50ae",
+      "range": {
+        "startLine": 99,
+        "startChar": 11,
+        "endLine": 99,
+        "endChar": 35
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -248,6 +482,30 @@
     },
     {
       "key": {
+        "uuid": "69cc7942_460f2a4c",
+        "filename": "modules/audio_processing/ns/noise_suppressor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Oups!\n\nGood suggestion as well with the early exit!\nDone.",
+      "parentUuid": "3e7f9d95_d088b50c",
+      "range": {
+        "startLine": 321,
+        "startChar": 4,
+        "endLine": 321,
+        "endChar": 45
+      },
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab6a751a_45c2b14d",
         "filename": "modules/audio_processing/ns/noise_suppressor.cc",
         "patchSetId": 5
@@ -259,6 +517,24 @@
       "writtenOn": "2019-10-28T15:20:17Z",
       "side": 1,
       "message": "0 channels? Did you mean 1?",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b7004ac_088ac88b",
+        "filename": "modules/audio_processing/ns/noise_suppressor.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Great find! Thanks!!!",
+      "parentUuid": "ab6a751a_45c2b14d",
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -279,6 +555,24 @@
       "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d8f7d0a_7bdf2f7f",
+        "filename": "modules/audio_processing/ns/ns_common.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-10-29T11:31:58Z",
+      "side": 1,
+      "message": "Thanks, that should now be ns",
+      "parentUuid": "6796da03_1eabb771",
+      "revId": "71e1422e4502c1982f34bd82178e20a78633cf5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
