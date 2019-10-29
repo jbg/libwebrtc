@@ -39,6 +39,7 @@ std::unique_ptr<RtpFrameObject> CreateFrame(
                                      : VideoFrameType::kVideoFrameDelta;
   video_header.video_type_header = video_type_header;
   video_header.frame_marking = frame_markings;
+  video_header.codec = codec;
 
   // clang-format off
   return std::make_unique<RtpFrameObject>(
@@ -50,13 +51,8 @@ std::unique_ptr<RtpFrameObject> CreateFrame(
       /*last_packet_received_time=*/0,
       /*rtp_timestamp=*/0,
       /*ntp_time_ms=*/0,
-      VideoSendTiming(),
       /*payload_type=*/0,
-      codec,
-      kVideoRotation_0,
-      VideoContentType::UNSPECIFIED,
       video_header,
-      /*color_space=*/absl::nullopt,
       /*generic_descriptor=*/absl::nullopt,
       RtpPacketInfos(),
       EncodedImageBuffer::Create(/*size=*/0));

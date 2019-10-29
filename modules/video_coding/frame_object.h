@@ -29,13 +29,8 @@ class RtpFrameObject : public EncodedFrame {
       int64_t last_packet_received_time,
       uint32_t rtp_timestamp,
       int64_t ntp_time_ms,
-      const VideoSendTiming& timing,
       uint8_t payload_type,
-      VideoCodecType codec,
-      VideoRotation rotation,
-      VideoContentType content_type,
       const RTPVideoHeader& video_header,
-      const absl::optional<webrtc::ColorSpace>& color_space,
       const absl::optional<RtpGenericFrameDescriptor>& generic_descriptor,
       RtpPacketInfos packet_infos,
       rtc::scoped_refptr<EncodedImageBuffer> image_buffer);
@@ -57,7 +52,6 @@ class RtpFrameObject : public EncodedFrame {
  private:
   RTPVideoHeader rtp_video_header_;
   absl::optional<RtpGenericFrameDescriptor> rtp_generic_frame_descriptor_;
-  VideoCodecType codec_type_;
   uint16_t first_seq_num_;
   uint16_t last_seq_num_;
   int64_t last_packet_received_time_;

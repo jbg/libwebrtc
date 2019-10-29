@@ -30,13 +30,8 @@ RtpFrameObject::RtpFrameObject(
     int64_t last_packet_received_time,
     uint32_t rtp_timestamp,
     int64_t ntp_time_ms,
-    const VideoSendTiming& timing,
     uint8_t payload_type,
-    VideoCodecType codec,
-    VideoRotation rotation,
-    VideoContentType content_type,
     const RTPVideoHeader& video_header,
-    const absl::optional<webrtc::ColorSpace>& color_space,
     const absl::optional<RtpGenericFrameDescriptor>& generic_descriptor,
     RtpPacketInfos packet_infos,
     rtc::scoped_refptr<EncodedImageBuffer> image_buffer)
@@ -46,9 +41,6 @@ RtpFrameObject::RtpFrameObject(
       times_nacked_(times_nacked) {
   rtp_video_header_ = video_header;
   rtp_generic_frame_descriptor_ = generic_descriptor;
-
-  // EncodedFrame members
-  codec_type_ = codec;
 
   // TODO(philipel): Remove when encoded image is replaced by EncodedFrame.
   // VCMEncodedFrame members
@@ -70,9 +62,10 @@ RtpFrameObject::RtpFrameObject(
   // EncodedFrame members
   SetPacketInfos(std::move(packet_infos));
 
-  rotation_ = rotation;
-  SetColorSpace(color_space);
-  content_type_ = content_type;
+  rotation_ = rtp_video_header_.rotation;
+  SetColorSpace(rtp_video_header_.color_space);
+  content_type_ = rtp_video_header_.content_type;
+  const VideoSendTiming& timing = rtp_video_header_.video_timing;
   if (timing.flags != VideoSendTiming::kInvalid) {
     // ntp_time_ms_ may be -1 if not estimated yet. This is not a problem,
     // as this will be dealt with at the time of reporting.
@@ -112,7 +105,7 @@ VideoFrameType RtpFrameObject::frame_type() const {
 }
 
 VideoCodecType RtpFrameObject::codec_type() const {
-  return codec_type_;
+  return rtp_video_header_.codec;
 }
 
 int64_t RtpFrameObject::ReceivedTime() const {
