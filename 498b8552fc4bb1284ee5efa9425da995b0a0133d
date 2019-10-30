@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebeef138_2491f1f2",
+        "filename": "modules/audio_coding/audio_network_adaptor/controller_manager.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-10-30T16:29:10Z",
+      "side": 1,
+      "message": "I think it makes sense to add a DCHECK here.",
+      "range": {
+        "startLine": 257,
+        "startChar": 8,
+        "endLine": 257,
+        "endChar": 25
+      },
+      "revId": "498b8552fc4bb1284ee5efa9425da995b0a0133d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a25db052_95f88155",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2019-10-30T16:29:10Z",
+      "side": 1,
+      "message": "nit: I would prefer no empty line here.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "498b8552fc4bb1284ee5efa9425da995b0a0133d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
