@@ -11,9 +11,12 @@
 #include "api/video/video_frame.h"
 
 #include <algorithm>
+#include <memory>
 #include <utility>
 
+#include "api/video/encoded_frame.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/ref_counted_object.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
@@ -212,8 +215,28 @@ void VideoFrame::set_video_frame_buffer(
   video_frame_buffer_ = buffer;
 }
 
+void VideoFrame::set_encoded_frame_source(
+    std::unique_ptr<video_coding::EncodedFrame> encoded_frame) {
+  encoded_frame_source_ =
+      new rtc::RefCountedObject<EncodedFrameHolder>(std::move(encoded_frame));
+}
+
+rtc::scoped_refptr<VideoFrame::EncodedFrameHolder>
+VideoFrame::get_encoded_frame_source() const {
+  return encoded_frame_source_;
+}
+
 int64_t VideoFrame::render_time_ms() const {
   return timestamp_us() / rtc::kNumMicrosecsPerMillisec;
+}
+
+VideoFrame::EncodedFrameHolder::EncodedFrameHolder(
+    std::unique_ptr<video_coding::EncodedFrame> encoded_frame)
+    : encoded_frame_(std::move(encoded_frame)) {}
+
+const video_coding::EncodedFrame& VideoFrame::EncodedFrameHolder::get() const {
+  RTC_DCHECK(encoded_frame_.get());
+  return *encoded_frame_;
 }
 
 }  // namespace webrtc
