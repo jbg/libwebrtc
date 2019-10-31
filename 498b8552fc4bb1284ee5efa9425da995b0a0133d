@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4258e82e_78998d75",
+        "filename": "modules/audio_coding/audio_network_adaptor/controller_manager.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-31T12:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb25876b_6c7e07cd",
+      "range": {
+        "startLine": 257,
+        "startChar": 8,
+        "endLine": 257,
+        "endChar": 25
+      },
+      "revId": "498b8552fc4bb1284ee5efa9425da995b0a0133d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a25db052_95f88155",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
         "patchSetId": 8
@@ -69,6 +93,30 @@
       "revId": "498b8552fc4bb1284ee5efa9425da995b0a0133d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "754c18f8_bfdc6697",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-10-31T12:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a25db052_95f88155",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "498b8552fc4bb1284ee5efa9425da995b0a0133d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
