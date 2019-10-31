@@ -77,7 +77,6 @@ static const int kDefaultQpMax = 56;
 static const uint8_t kRedRtxPayloadType = 125;
 
 static const uint32_t kTimeout = 5000U;
-static const uint32_t kDefaultReceiveSsrc = 0;
 static const uint32_t kSsrc = 1234u;
 static const uint32_t kSsrcs4[] = {1, 2, 3, 4};
 static const int kVideoWidth = 640;
@@ -89,7 +88,6 @@ static const uint32_t kSsrcs3[] = {1, 2, 3};
 static const uint32_t kRtxSsrcs1[] = {4};
 static const uint32_t kFlexfecSsrc = 5;
 static const uint32_t kIncomingUnsignalledSsrc = 0xC0FFEE;
-static const uint32_t kDefaultRecvSsrc = 0;
 
 constexpr uint32_t kRtpHeaderSize = 12;
 
@@ -1429,7 +1427,7 @@ class WebRtcVideoChannelBaseTest : public ::testing::Test {
   void SendAndReceive(const cricket::VideoCodec& codec) {
     EXPECT_TRUE(SetOneCodec(codec));
     EXPECT_TRUE(SetSend(true));
-    EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
+    channel_->SetDefaultSink(&renderer_);
     EXPECT_EQ(0, renderer_.num_rendered_frames());
     SendFrame();
     EXPECT_FRAME_WAIT(1, kVideoWidth, kVideoHeight, kTimeout);
@@ -1442,7 +1440,7 @@ class WebRtcVideoChannelBaseTest : public ::testing::Test {
                                   int fps) {
     EXPECT_TRUE(SetOneCodec(codec));
     EXPECT_TRUE(SetSend(true));
-    EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
+    channel_->SetDefaultSink(&renderer_);
     EXPECT_EQ(0, renderer_.num_rendered_frames());
     for (int i = 0; i < duration_sec; ++i) {
       for (int frame = 1; frame <= fps; ++frame) {
@@ -1833,12 +1831,12 @@ TEST_F(WebRtcVideoChannelBaseTest, SetSink) {
 
   rtc::CopyOnWriteBuffer packet1(data1, sizeof(data1));
   rtc::SetBE32(packet1.data() + 8, kSsrc);
-  channel_->SetSink(kDefaultReceiveSsrc, NULL);
+  channel_->SetDefaultSink(NULL);
   EXPECT_TRUE(SetDefaultCodec());
   EXPECT_TRUE(SetSend(true));
   EXPECT_EQ(0, renderer_.num_rendered_frames());
   channel_->OnPacketReceived(packet1, /* packet_time_us */ -1);
-  EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
+  channel_->SetDefaultSink(&renderer_);
   SendFrame();
   EXPECT_FRAME_WAIT(1, kVideoWidth, kVideoHeight, kTimeout);
 }
@@ -1847,7 +1845,7 @@ TEST_F(WebRtcVideoChannelBaseTest, SetSink) {
 TEST_F(WebRtcVideoChannelBaseTest, AddRemoveSendStreams) {
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   EXPECT_TRUE(SetSend(true));
-  EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
+  channel_->SetDefaultSink(&renderer_);
   SendFrame();
   EXPECT_FRAME_WAIT(1, kVideoWidth, kVideoHeight, kTimeout);
   EXPECT_GT(NumRtpPackets(), 0);
@@ -1922,7 +1920,7 @@ TEST_F(WebRtcVideoChannelBaseTest, DISABLED_AddRemoveCapturer) {
   const int time_between_send_ms = VideoFormat::FpsToInterval(kFramerate);
   EXPECT_TRUE(SetOneCodec(codec));
   EXPECT_TRUE(SetSend(true));
-  EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
+  channel_->SetDefaultSink(&renderer_);
   EXPECT_EQ(0, renderer_.num_rendered_frames());
   SendFrame();
   EXPECT_FRAME_WAIT(1, kVideoWidth, kVideoHeight, kTimeout);
@@ -1982,7 +1980,7 @@ TEST_F(WebRtcVideoChannelBaseTest, DISABLED_AddRemoveCapturer) {
 TEST_F(WebRtcVideoChannelBaseTest, RemoveCapturerWithoutAdd) {
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   EXPECT_TRUE(SetSend(true));
-  EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
+  channel_->SetDefaultSink(&renderer_);
   EXPECT_EQ(0, renderer_.num_rendered_frames());
   SendFrame();
   EXPECT_FRAME_WAIT(1, kVideoWidth, kVideoHeight, kTimeout);
@@ -5686,7 +5684,7 @@ TEST_F(WebRtcVideoChannelTest, ReceiveDifferentUnsignaledSsrc) {
   // No receive streams yet.
   ASSERT_EQ(0u, fake_call_->GetVideoReceiveStreams().size());
   cricket::FakeVideoRenderer renderer;
-  EXPECT_TRUE(channel_->SetSink(kDefaultRecvSsrc, &renderer));
+  channel_->SetDefaultSink(&renderer);
 
   // Receive VP8 packet on first SSRC.
   uint8_t data[kMinRtpPacketLen];
@@ -7386,10 +7384,12 @@ TEST_F(WebRtcVideoChannelTest, SetAndGetRtpReceiveParameters) {
   EXPECT_EQ(initial_params, channel_->GetRtpReceiveParameters(last_ssrc_));
 }
 
-// Test that GetRtpReceiveParameters returns parameters correctly when SSRCs
-// aren't signaled. It should always return an empty "RtpEncodingParameters",
-// even after a packet is received and the unsignaled SSRC is known.
-TEST_F(WebRtcVideoChannelTest, GetRtpReceiveParametersWithUnsignaledSsrc) {
+// Test that GetDefaultRtpReceiveParameters returns parameters correctly when
+// SSRCs aren't signaled. It should always return an empty
+// "RtpEncodingParameters", even after a packet is received and the unsignaled
+// SSRC is known.
+TEST_F(WebRtcVideoChannelTest,
+       GetDefaultRtpReceiveParametersWithUnsignaledSsrc) {
   // Call necessary methods to configure receiving a default stream as
   // soon as it arrives.
   cricket::VideoRecvParameters parameters;
@@ -7399,16 +7399,16 @@ TEST_F(WebRtcVideoChannelTest, GetRtpReceiveParametersWithUnsignaledSsrc) {
 
   // Call GetRtpReceiveParameters before configured to receive an unsignaled
   // stream. Should return nothing.
-  EXPECT_EQ(webrtc::RtpParameters(), channel_->GetRtpReceiveParameters(0));
+  EXPECT_EQ(webrtc::RtpParameters(),
+            channel_->GetDefaultRtpReceiveParameters());
 
   // Set a sink for an unsignaled stream.
   cricket::FakeVideoRenderer renderer;
-  // Value of "0" means "unsignaled stream".
-  EXPECT_TRUE(channel_->SetSink(0, &renderer));
+  channel_->SetDefaultSink(&renderer);
 
-  // Call GetRtpReceiveParameters before the SSRC is known. Value of "0"
-  // in this method means "unsignaled stream".
-  webrtc::RtpParameters rtp_parameters = channel_->GetRtpReceiveParameters(0);
+  // Call GetDefaultRtpReceiveParameters before the SSRC is known.
+  webrtc::RtpParameters rtp_parameters =
+      channel_->GetDefaultRtpReceiveParameters();
   ASSERT_EQ(1u, rtp_parameters.encodings.size());
   EXPECT_FALSE(rtp_parameters.encodings[0].ssrc);
 
@@ -7423,7 +7423,7 @@ TEST_F(WebRtcVideoChannelTest, GetRtpReceiveParametersWithUnsignaledSsrc) {
   channel_->OnPacketReceived(packet, /* packet_time_us */ -1);
 
   // The |ssrc| member should still be unset.
-  rtp_parameters = channel_->GetRtpReceiveParameters(0);
+  rtp_parameters = channel_->GetDefaultRtpReceiveParameters();
   ASSERT_EQ(1u, rtp_parameters.encodings.size());
   EXPECT_FALSE(rtp_parameters.encodings[0].ssrc);
 }
@@ -7688,7 +7688,7 @@ TEST_F(WebRtcVideoChannelSimulcastTest, SimulcastScreenshareWithoutConference) {
 TEST_F(WebRtcVideoChannelBaseTest, GetSources) {
   EXPECT_THAT(channel_->GetSources(kSsrc), IsEmpty());
 
-  EXPECT_TRUE(channel_->SetSink(kDefaultReceiveSsrc, &renderer_));
+  channel_->SetDefaultSink(&renderer_);
   EXPECT_TRUE(SetDefaultCodec());
   EXPECT_TRUE(SetSend(true));
   EXPECT_EQ(renderer_.num_rendered_frames(), 0);
