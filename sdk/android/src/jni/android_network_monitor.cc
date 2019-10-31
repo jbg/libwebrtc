@@ -207,7 +207,6 @@ void AndroidNetworkMonitor::Stop() {
   Java_NetworkMonitor_stopMonitoring(env, j_network_monitor_,
                                      jlongFromPointer(this));
 
-  network_handle_by_address_.clear();
   network_info_by_handle_.clear();
 }
 
@@ -219,7 +218,8 @@ rtc::NetworkBindingResult AndroidNetworkMonitor::BindSocketToNetwork(
   RTC_CHECK(thread_checker_.IsCurrent());
 
   // Android prior to Lollipop didn't have support for binding sockets to
-  // networks. This may also occur if there is no connectivity manager service.
+  // networks. This may also occur if there is no connectivity manager
+  // service.
   JNIEnv* env = AttachCurrentThreadIfNeeded();
   const bool network_binding_supported =
       Java_NetworkMonitor_networkBindingSupported(env, j_network_monitor_);
@@ -230,13 +230,13 @@ rtc::NetworkBindingResult AndroidNetworkMonitor::BindSocketToNetwork(
     return rtc::NetworkBindingResult::NOT_IMPLEMENTED;
   }
 
-  auto iter = network_handle_by_address_.find(address);
-  if (iter == network_handle_by_address_.end()) {
+  absl::optional<NetworkHandle> network_handle =
+      FindNetworkHandleFromAddress(address);
+  if (!network_handle.has_value()) {
     return rtc::NetworkBindingResult::ADDRESS_NOT_FOUND;
   }
-  NetworkHandle network_handle = iter->second;
 
-  if (network_handle == 0 /* NETWORK_UNSPECIFIED */) {
+  if (*network_handle == 0 /* NETWORK_UNSPECIFIED */) {
     return rtc::NetworkBindingResult::NOT_IMPLEMENTED;
   }
 
@@ -267,10 +267,10 @@ rtc::NetworkBindingResult AndroidNetworkMonitor::BindSocketToNetwork(
       RTC_LOG(LS_ERROR) << "Symbol marshmallowSetNetworkForSocket is not found";
       return rtc::NetworkBindingResult::NOT_IMPLEMENTED;
     }
-    rv = marshmallowSetNetworkForSocket(network_handle, socket_fd);
+    rv = marshmallowSetNetworkForSocket(*network_handle, socket_fd);
   } else {
-    // NOTE: This relies on Android implementation details, but it won't change
-    // because Lollipop is already released.
+    // NOTE: This relies on Android implementation details, but it won't
+    // change because Lollipop is already released.
     typedef int (*LollipopSetNetworkForSocket)(unsigned net, int socket);
     static LollipopSetNetworkForSocket lollipopSetNetworkForSocket;
     // This is not threadsafe, but we are running this only on the worker
@@ -296,12 +296,12 @@ rtc::NetworkBindingResult AndroidNetworkMonitor::BindSocketToNetwork(
       RTC_LOG(LS_ERROR) << "Symbol lollipopSetNetworkForSocket is not found ";
       return rtc::NetworkBindingResult::NOT_IMPLEMENTED;
     }
-    rv = lollipopSetNetworkForSocket(network_handle, socket_fd);
+    rv = lollipopSetNetworkForSocket(*network_handle, socket_fd);
   }
 
-  // If |network| has since disconnected, |rv| will be ENONET.  Surface this as
-  // ERR_NETWORK_CHANGED, rather than MapSystemError(ENONET) which gives back
-  // the less descriptive ERR_FAILED.
+  // If |network| has since disconnected, |rv| will be ENONET.  Surface this
+  // as ERR_NETWORK_CHANGED, rather than MapSystemError(ENONET) which gives
+  // back the less descriptive ERR_FAILED.
   if (rv == 0) {
     return rtc::NetworkBindingResult::SUCCESS;
   }
@@ -330,9 +330,39 @@ void AndroidNetworkMonitor::OnNetworkConnected_w(
         AdapterTypeFromNetworkType(network_info.underlying_type_for_vpn);
   }
   network_info_by_handle_[network_info.handle] = network_info;
-  for (const rtc::IPAddress& address : network_info.ip_addresses) {
-    network_handle_by_address_[address] = network_info.handle;
+}
+
+absl::optional<NetworkHandle>
+AndroidNetworkMonitor::FindNetworkHandleFromAddress(
+    const rtc::IPAddress& ip_address) const {
+  for (auto const& it : network_info_by_handle_) {
+    const std::vector<rtc::IPAddress>& addresses = it.second.ip_addresses;
+    auto address_it = std::find_if(addresses.begin(), addresses.end(),
+                                   [this, ip_address](rtc::IPAddress address) {
+                                     return AddressMatch(ip_address, address);
+                                   });
+    if (address_it != addresses.end()) {
+      return absl::make_optional(it.first);
+    }
   }
+  return absl::nullopt;
+}
+
+bool AndroidNetworkMonitor::AddressMatch(const rtc::IPAddress& ip1,
+                                         const rtc::IPAddress& ip2) const {
+  if (ip1.family() != ip2.family()) {
+    return false;
+  }
+  if (ip1.family() == AF_INET) {
+    return ip1.ipv4_address().s_addr == ip2.ipv4_address().s_addr;
+  }
+  if (ip1.family() == AF_INET6) {
+    // The last 64-bits of an ipv6 address are temporary address and it could
+    // change over time. So we only compare the first 64-bits.
+    return memcmp(ip1.ipv6_address().s6_addr, ip2.ipv6_address().s6_addr,
+                  sizeof(in6_addr) / 2) == 0;
+  }
+  return false;
 }
 
 void AndroidNetworkMonitor::OnNetworkDisconnected(NetworkHandle handle) {
@@ -345,9 +375,6 @@ void AndroidNetworkMonitor::OnNetworkDisconnected(NetworkHandle handle) {
 void AndroidNetworkMonitor::OnNetworkDisconnected_w(NetworkHandle handle) {
   auto iter = network_info_by_handle_.find(handle);
   if (iter != network_info_by_handle_.end()) {
-    for (const rtc::IPAddress& address : iter->second.ip_addresses) {
-      network_handle_by_address_.erase(address);
-    }
     network_info_by_handle_.erase(iter);
   }
 }
@@ -355,7 +382,6 @@ void AndroidNetworkMonitor::OnNetworkDisconnected_w(NetworkHandle handle) {
 void AndroidNetworkMonitor::SetNetworkInfos(
     const std::vector<NetworkInformation>& network_infos) {
   RTC_CHECK(thread_checker_.IsCurrent());
-  network_handle_by_address_.clear();
   network_info_by_handle_.clear();
   RTC_LOG(LS_INFO) << "Android network monitor found " << network_infos.size()
                    << " networks";

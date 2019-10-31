@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/types/optional.h"
 #include "rtc_base/network_monitor.h"
 #include "rtc_base/thread_checker.h"
 #include "sdk/android/src/jni/jni_helpers.h"
@@ -97,6 +98,9 @@ class AndroidNetworkMonitor : public rtc::NetworkMonitorBase,
  private:
   void OnNetworkConnected_w(const NetworkInformation& network_info);
   void OnNetworkDisconnected_w(NetworkHandle network_handle);
+  absl::optional<NetworkHandle> FindNetworkHandleFromAddress(
+      const rtc::IPAddress& address) const;
+  bool AddressMatch(const rtc::IPAddress& ip1, const rtc::IPAddress& ip2) const;
 
   const int android_sdk_int_;
   ScopedJavaGlobalRef<jobject> j_application_context_;
@@ -105,7 +109,6 @@ class AndroidNetworkMonitor : public rtc::NetworkMonitorBase,
   bool started_ = false;
   std::map<std::string, rtc::AdapterType> adapter_type_by_name_;
   std::map<std::string, rtc::AdapterType> vpn_underlying_adapter_type_by_name_;
-  std::map<rtc::IPAddress, NetworkHandle> network_handle_by_address_;
   std::map<NetworkHandle, NetworkInformation> network_info_by_handle_;
 };
 
