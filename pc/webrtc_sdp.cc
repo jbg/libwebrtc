@@ -1592,6 +1592,13 @@ void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
   // a=extmap:<value>["/"<direction>] <URI> <extensionattributes>
   // The definitions MUST be either all session level or all media level. This
   // implementation uses all media level.
+  if (media_type == cricket::MEDIA_TYPE_AUDIO) {
+    RTC_LOG(LS_ERROR) << "audio";
+  } else if (media_type == cricket::MEDIA_TYPE_VIDEO) {
+    RTC_LOG(LS_ERROR) << "video";
+  } else {
+    RTC_LOG(LS_ERROR) << "data";
+  }
   for (size_t i = 0; i < media_desc->rtp_header_extensions().size(); ++i) {
     const RtpExtension& extension = media_desc->rtp_header_extensions()[i];
     InitAttrLine(kAttributeExtmap, &os);

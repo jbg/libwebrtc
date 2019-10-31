@@ -20,6 +20,10 @@
 
 namespace webrtc {
 
+namespace {
+constexpr int kRtpTimestampRateHz = 48000;
+}
+
 AudioDecoderOpusImpl::AudioDecoderOpusImpl(size_t num_channels,
                                            int sample_rate_hz)
     : channels_{num_channels}, sample_rate_hz_{sample_rate_hz} {
@@ -119,6 +123,10 @@ bool AudioDecoderOpusImpl::PacketHasFec(const uint8_t* encoded,
 
 int AudioDecoderOpusImpl::SampleRateHz() const {
   return sample_rate_hz_;
+}
+
+int AudioDecoderOpusImpl::RtpTimestampRateHz() const {
+  return kRtpTimestampRateHz;
 }
 
 size_t AudioDecoderOpusImpl::Channels() const {

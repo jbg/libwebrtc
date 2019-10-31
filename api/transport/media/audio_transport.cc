@@ -18,6 +18,7 @@
 #include "api/transport/media/audio_transport.h"
 
 #include <utility>
+#include "api/rtp_headers.h"
 
 namespace webrtc {
 
@@ -30,6 +31,7 @@ MediaTransportEncodedAudioFrame::MediaTransportEncodedAudioFrame(
     int sequence_number,
     FrameType frame_type,
     int payload_type,
+    absl::optional<AbsoluteCaptureTime> absolute_capture_time,
     std::vector<uint8_t> encoded_data)
     : sampling_rate_hz_(sampling_rate_hz),
       starting_sample_index_(starting_sample_index),
@@ -37,6 +39,7 @@ MediaTransportEncodedAudioFrame::MediaTransportEncodedAudioFrame(
       sequence_number_(sequence_number),
       frame_type_(frame_type),
       payload_type_(payload_type),
+      absolute_capture_time_(std::move(absolute_capture_time)),
       encoded_data_(std::move(encoded_data)) {}
 
 MediaTransportEncodedAudioFrame& MediaTransportEncodedAudioFrame::operator=(

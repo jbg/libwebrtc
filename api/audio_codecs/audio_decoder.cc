@@ -16,6 +16,7 @@
 #include <utility>
 
 #include "api/array_view.h"
+#include "api/audio_codecs/audio_encoder.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/sanitizer.h"
 #include "rtc_base/trace_event.h"
@@ -152,6 +153,10 @@ int AudioDecoder::PacketDurationRedundant(const uint8_t* encoded,
 bool AudioDecoder::PacketHasFec(const uint8_t* encoded,
                                 size_t encoded_len) const {
   return false;
+}
+
+int AudioDecoder::RtpTimestampRateHz() const {
+  return SampleRateHz();
 }
 
 AudioDecoder::SpeechType AudioDecoder::ConvertSpeechType(int16_t type) {

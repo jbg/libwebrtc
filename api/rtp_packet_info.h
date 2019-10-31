@@ -45,7 +45,9 @@ class RtpPacketInfo {
                 absl::optional<uint8_t> audio_level,
                 int64_t receive_time_ms);
 
-  RtpPacketInfo(const RTPHeader& rtp_header, int64_t receive_time_ms);
+  RtpPacketInfo(const RTPHeader& rtp_header,
+                absl::optional<AbsoluteCaptureTime> absolute_capture_time,
+                int64_t receive_time_ms);
 
   RtpPacketInfo(const RtpPacketInfo& other) = default;
   RtpPacketInfo(RtpPacketInfo&& other) = default;

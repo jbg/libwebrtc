@@ -44,10 +44,13 @@ RtpPacketInfo::RtpPacketInfo(uint32_t ssrc,
                     /*absolute_capture_time=*/absl::nullopt,
                     receive_time_ms) {}
 
-RtpPacketInfo::RtpPacketInfo(const RTPHeader& rtp_header,
-                             int64_t receive_time_ms)
+RtpPacketInfo::RtpPacketInfo(
+    const RTPHeader& rtp_header,
+    absl::optional<AbsoluteCaptureTime> absolute_capture_time,
+    int64_t receive_time_ms)
     : ssrc_(rtp_header.ssrc),
       rtp_timestamp_(rtp_header.timestamp),
+      absolute_capture_time_(absolute_capture_time),
       receive_time_ms_(receive_time_ms) {
   const auto& extension = rtp_header.extension;
   const auto csrcs_count = std::min<size_t>(rtp_header.numCSRCs, kRtpCsrcSize);
@@ -57,8 +60,6 @@ RtpPacketInfo::RtpPacketInfo(const RTPHeader& rtp_header,
   if (extension.hasAudioLevel) {
     audio_level_ = extension.audioLevel;
   }
-
-  absolute_capture_time_ = extension.absolute_capture_time;
 }
 
 bool operator==(const RtpPacketInfo& lhs, const RtpPacketInfo& rhs) {

@@ -170,6 +170,10 @@ class AudioDecoder {
   // during the lifetime of the decoder.
   virtual size_t Channels() const = 0;
 
+  // Returns the rate at which the RTP timestamps are updated. The default
+  // implementation returns SampleRateHz().
+  virtual int RtpTimestampRateHz() const;
+
  protected:
   static SpeechType ConvertSpeechType(int16_t type);
 

@@ -16,7 +16,10 @@
 #include <utility>
 
 #include "absl/strings/match.h"
+#include "absl/types/optional.h"
 #include "api/audio_codecs/audio_format.h"
+#include "api/rtp_headers.h"
+#include "modules/audio_coding/include/audio_coding_module_typedefs.h"
 #include "modules/remote_bitrate_estimator/test/bwe_test_logging.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
@@ -129,11 +132,13 @@ bool RTPSenderAudio::MarkerBit(AudioFrameType frame_type, int8_t payload_type) {
   return marker_bit;
 }
 
-bool RTPSenderAudio::SendAudio(AudioFrameType frame_type,
-                               int8_t payload_type,
-                               uint32_t rtp_timestamp,
-                               const uint8_t* payload_data,
-                               size_t payload_size) {
+bool RTPSenderAudio::SendAudio(
+    AudioFrameType frame_type,
+    int8_t payload_type,
+    uint32_t rtp_timestamp,
+    const uint8_t* payload_data,
+    size_t payload_size,
+    const absl::optional<AbsoluteCaptureTime>& absolute_capture_time) {
   TRACE_EVENT_ASYNC_STEP1("webrtc", "Audio", rtp_timestamp, "Send", "type",
                           FrameTypeToString(frame_type));
 
@@ -240,6 +245,10 @@ bool RTPSenderAudio::SendAudio(AudioFrameType frame_type,
   // Update audio level extension, if included.
   packet->SetExtension<AudioLevel>(
       frame_type == AudioFrameType::kAudioFrameSpeech, audio_level_dbov);
+  // Update absolute capture time extension, if included.
+  if (absolute_capture_time) {
+    packet->SetExtension<AbsoluteCaptureTimeExtension>(*absolute_capture_time);
+  }
 
   uint8_t* payload = packet->AllocatePayload(payload_size);
   if (!payload)  // Too large payload buffer.

@@ -39,11 +39,13 @@ class RTPSenderAudio {
                                size_t channels,
                                uint32_t rate);
 
-  bool SendAudio(AudioFrameType frame_type,
-                 int8_t payload_type,
-                 uint32_t capture_timestamp,
-                 const uint8_t* payload_data,
-                 size_t payload_size);
+  bool SendAudio(
+      AudioFrameType frame_type,
+      int8_t payload_type,
+      uint32_t capture_timestamp,
+      const uint8_t* payload_data,
+      size_t payload_size,
+      const absl::optional<AbsoluteCaptureTime>& absolute_capture_time);
 
   // Store the audio level in dBov for
   // header-extension-for-audio-level-indication.

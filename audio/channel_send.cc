@@ -21,6 +21,7 @@
 #include "api/call/transport.h"
 #include "api/crypto/frame_encryptor_interface.h"
 #include "api/rtc_event_log/rtc_event_log.h"
+#include "api/rtp_headers.h"
 #include "audio/utility/audio_frame_operations.h"
 #include "call/rtp_transport_controller_send_interface.h"
 #include "logging/rtc_event_log/events/rtc_event_audio_playout.h"
@@ -28,6 +29,7 @@
 #include "modules/audio_coding/include/audio_coding_module.h"
 #include "modules/audio_processing/rms_level.h"
 #include "modules/pacing/packet_router.h"
+#include "modules/rtp_rtcp/source/absolute_capture_time_sender.h"
 #include "modules/utility/include/process_thread.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
@@ -43,6 +45,7 @@
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/field_trial.h"
 #include "system_wrappers/include/metrics.h"
+#include "system_wrappers/include/ntp_time.h"
 
 namespace webrtc {
 namespace voe {
@@ -147,6 +150,7 @@ class ChannelSend : public ChannelSendInterface,
   void SetMid(const std::string& mid, int extension_id) override;
   void SetExtmapAllowMixed(bool extmap_allow_mixed) override;
   void SetSendAudioLevelIndicationStatus(bool enable, int id) override;
+  void SetAbsoluteCaptureTimeExtension(bool enable, int id) override;
   void EnableSendTransportSequenceNumber(int id) override;
 
   void RegisterSenderCongestionControlObjects(
@@ -188,6 +192,8 @@ class ChannelSend : public ChannelSendInterface,
   int32_t SendData(AudioFrameType frameType,
                    uint8_t payloadType,
                    uint32_t timeStamp,
+                   int64_t absolute_capture_timestamp_ms,
+                   uint32_t rtp_clock_frequency,
                    const uint8_t* payloadData,
                    size_t payloadSize) override;
 
@@ -196,16 +202,20 @@ class ChannelSend : public ChannelSendInterface,
 
   int SetSendRtpHeaderExtension(bool enable, RTPExtensionType type, int id);
 
-  int32_t SendRtpAudio(AudioFrameType frameType,
-                       uint8_t payloadType,
-                       uint32_t timeStamp,
-                       rtc::ArrayView<const uint8_t> payload)
+  int32_t SendRtpAudio(
+      AudioFrameType frameType,
+      uint8_t payloadType,
+      uint32_t timeStamp,
+      rtc::ArrayView<const uint8_t> payload,
+      const absl::optional<AbsoluteCaptureTime>& absolute_capture_time)
       RTC_RUN_ON(encoder_queue_);
 
-  int32_t SendMediaTransportAudio(AudioFrameType frameType,
-                                  uint8_t payloadType,
-                                  uint32_t timeStamp,
-                                  rtc::ArrayView<const uint8_t> payload)
+  int32_t SendMediaTransportAudio(
+      AudioFrameType frameType,
+      uint8_t payloadType,
+      uint32_t timeStamp,
+      rtc::ArrayView<const uint8_t> payload,
+      const absl::optional<AbsoluteCaptureTime>& absolute_capture_time)
       RTC_RUN_ON(encoder_queue_);
 
   // Return media transport or nullptr if using RTP.
@@ -293,6 +303,8 @@ class ChannelSend : public ChannelSendInterface,
   // Defined last to ensure that there are no running tasks when the other
   // members are destroyed.
   rtc::TaskQueue encoder_queue_;
+
+  AbsoluteCaptureTimeSender absolute_capture_time_sender_;
 };
 
 const int kTelephoneEventAttenuationdB = 10;
@@ -433,10 +445,25 @@ class VoERtcpObserver : public RtcpBandwidthObserver {
 int32_t ChannelSend::SendData(AudioFrameType frameType,
                               uint8_t payloadType,
                               uint32_t timeStamp,
+                              int64_t absolute_capture_timestamp_ms,
+                              uint32_t rtp_clock_frequency,
                               const uint8_t* payloadData,
                               size_t payloadSize) {
   RTC_DCHECK_RUN_ON(&encoder_queue_);
   rtc::ArrayView<const uint8_t> payload(payloadData, payloadSize);
+
+  // Can use |timeStamp| here as |absolute_capture_time_sender_| cares only
+  // about relative rtp_timestamps values.
+  const auto absolute_capture_time = absolute_capture_time_sender_.OnSendPacket(
+      _rtpRtcpModule->SSRC(), timeStamp, rtp_clock_frequency,
+      Int64MsToUQ32x32(absolute_capture_timestamp_ms), absl::nullopt);
+
+  if (absolute_capture_time) {
+    RTC_LOG(LS_ERROR) << "kuddai  absolute_capture_timestamp_ms "
+                      << absolute_capture_timestamp_ms << ", "
+                      << " time "
+                      << absolute_capture_time->absolute_capture_timestamp;
+  }
 
   if (media_transport() != nullptr) {
     if (frameType == AudioFrameType::kEmptyFrame) {
@@ -445,16 +472,20 @@ int32_t ChannelSend::SendData(AudioFrameType frameType,
       return 0;
     }
 
-    return SendMediaTransportAudio(frameType, payloadType, timeStamp, payload);
+    return SendMediaTransportAudio(frameType, payloadType, timeStamp, payload,
+                                   absolute_capture_time);
   } else {
-    return SendRtpAudio(frameType, payloadType, timeStamp, payload);
+    return SendRtpAudio(frameType, payloadType, timeStamp, payload,
+                        absolute_capture_time);
   }
 }
 
-int32_t ChannelSend::SendRtpAudio(AudioFrameType frameType,
-                                  uint8_t payloadType,
-                                  uint32_t timeStamp,
-                                  rtc::ArrayView<const uint8_t> payload) {
+int32_t ChannelSend::SendRtpAudio(
+    AudioFrameType frameType,
+    uint8_t payloadType,
+    uint32_t timeStamp,
+    rtc::ArrayView<const uint8_t> payload,
+    const absl::optional<AbsoluteCaptureTime>& absolute_capture_time) {
   if (_includeAudioLevelIndication) {
     // Store current audio level in the RTP sender.
     // The level will be used in combination with voice-activity state
@@ -519,7 +550,8 @@ int32_t ChannelSend::SendRtpAudio(AudioFrameType frameType,
   const uint32_t rtp_timestamp = timeStamp + _rtpRtcpModule->StartTimestamp();
   // This call will trigger Transport::SendPacket() from the RTP/RTCP module.
   if (!rtp_sender_audio_->SendAudio(frameType, payloadType, rtp_timestamp,
-                                    payload.data(), payload.size())) {
+                                    payload.data(), payload.size(),
+                                    absolute_capture_time)) {
     RTC_DLOG(LS_ERROR)
         << "ChannelSend::SendData() failed to send data to RTP/RTCP module";
     return -1;
@@ -532,7 +564,8 @@ int32_t ChannelSend::SendMediaTransportAudio(
     AudioFrameType frameType,
     uint8_t payloadType,
     uint32_t timeStamp,
-    rtc::ArrayView<const uint8_t> payload) {
+    rtc::ArrayView<const uint8_t> payload,
+    const absl::optional<AbsoluteCaptureTime>& absolute_capture_time) {
   // TODO(nisse): Use null _transportPtr for MediaTransport.
   // RTC_DCHECK(_transportPtr == nullptr);
   uint64_t channel_id;
@@ -563,6 +596,7 @@ int32_t ChannelSend::SendMediaTransportAudio(
 
       /*sequence_number=*/media_transport_sequence_number_,
       MediaTransportFrameTypeForWebrtcFrameType(frameType), payloadType,
+      absolute_capture_time,
       std::vector<uint8_t>(payload.begin(), payload.end()));
 
   // TODO(nisse): Introduce a MediaTransportSender object bound to a specific
@@ -616,7 +650,8 @@ ChannelSend::ChannelSend(Clock* clock,
       crypto_options_(crypto_options),
       encoder_queue_(task_queue_factory->CreateTaskQueue(
           "AudioEncoder",
-          TaskQueueFactory::Priority::NORMAL)) {
+          TaskQueueFactory::Priority::NORMAL)),
+      absolute_capture_time_sender_(clock) {
   RTC_DCHECK(module_process_thread);
   module_process_thread_checker_.Detach();
 
@@ -930,6 +965,13 @@ void ChannelSend::SetSendAudioLevelIndicationStatus(bool enable, int id) {
   RTC_DCHECK_RUN_ON(&worker_thread_checker_);
   _includeAudioLevelIndication = enable;
   int ret = SetSendRtpHeaderExtension(enable, kRtpExtensionAudioLevel, id);
+  RTC_DCHECK_EQ(0, ret);
+}
+
+void ChannelSend::SetAbsoluteCaptureTimeExtension(bool enable, int id) {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+  int ret =
+      SetSendRtpHeaderExtension(enable, kRtpExtensionAbsoluteCaptureTime, id);
   RTC_DCHECK_EQ(0, ret);
 }
 

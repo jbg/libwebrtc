@@ -125,7 +125,8 @@ NetEqImpl::NetEqImpl(const NetEq::Config& config,
                                 10,  // Report once every 10 s.
                                 tick_timer_.get()),
       no_time_stretching_(config.for_test_no_time_stretching),
-      enable_rtx_handling_(config.enable_rtx_handling) {
+      enable_rtx_handling_(config.enable_rtx_handling),
+      absolute_capture_time_receiver_(deps.clock) {
   RTC_LOG(LS_INFO) << "NetEq config: " << config.ToString();
   int fs = config.sample_rate_hz;
   if (fs != 8000 && fs != 16000 && fs != 32000 && fs != 48000) {
@@ -483,20 +484,32 @@ int NetEqImpl::InsertPacketInternal(const RTPHeader& rtp_header,
   int64_t receive_time_ms = clock_->TimeInMilliseconds();
   stats_->ReceivedPacket();
 
+  auto absolute_capture_time = rtp_header.extension.absolute_capture_time;
+  const auto* decoder = decoder_database_->GetDecoder(rtp_header.payloadType);
+  if (decoder) {
+    decoder->RtpTimestampRateHz();
+    absolute_capture_time = absolute_capture_time_receiver_.OnReceivePacket(
+        rtp_header.ssrc, rtp_header.timestamp,
+        rtc::saturated_cast<uint32_t>(decoder->RtpTimestampRateHz()),
+        absolute_capture_time);
+  }
+
   PacketList packet_list;
   // Insert packet in a packet list.
-  packet_list.push_back([&rtp_header, &payload, &receive_time_ms] {
-    // Convert to Packet.
-    Packet packet;
-    packet.payload_type = rtp_header.payloadType;
-    packet.sequence_number = rtp_header.sequenceNumber;
-    packet.timestamp = rtp_header.timestamp;
-    packet.payload.SetData(payload.data(), payload.size());
-    packet.packet_info = RtpPacketInfo(rtp_header, receive_time_ms);
-    // Waiting time will be set upon inserting the packet in the buffer.
-    RTC_DCHECK(!packet.waiting_time);
-    return packet;
-  }());
+  packet_list.push_back(
+      [&rtp_header, &payload, &absolute_capture_time, &receive_time_ms] {
+        // Convert to Packet.
+        Packet packet;
+        packet.payload_type = rtp_header.payloadType;
+        packet.sequence_number = rtp_header.sequenceNumber;
+        packet.timestamp = rtp_header.timestamp;
+        packet.payload.SetData(payload.data(), payload.size());
+        packet.packet_info =
+            RtpPacketInfo(rtp_header, absolute_capture_time, receive_time_ms);
+        // Waiting time will be set upon inserting the packet in the buffer.
+        RTC_DCHECK(!packet.waiting_time);
+        return packet;
+      }());
 
   bool update_sample_rate_and_channels = first_packet_;
 

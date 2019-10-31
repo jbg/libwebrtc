@@ -20,6 +20,12 @@
 
 namespace webrtc {
 
+namespace {
+
+constexpr int kSampleRateHz = 16000;
+
+}  // namespace
+
 AudioDecoderG722Impl::AudioDecoderG722Impl() {
   WebRtcG722_CreateDecoder(&dec_state_);
   WebRtcG722_DecoderInit(dec_state_);
@@ -64,7 +70,11 @@ int AudioDecoderG722Impl::PacketDuration(const uint8_t* encoded,
 }
 
 int AudioDecoderG722Impl::SampleRateHz() const {
-  return 16000;
+  return kSampleRateHz;
+}
+
+int AudioDecoderG722Impl::RtpTimestampRateHz() const {
+  return kSampleRateHz / 2;
 }
 
 size_t AudioDecoderG722Impl::Channels() const {
@@ -115,7 +125,11 @@ int AudioDecoderG722StereoImpl::DecodeInternal(const uint8_t* encoded,
 }
 
 int AudioDecoderG722StereoImpl::SampleRateHz() const {
-  return 16000;
+  return kSampleRateHz;
+}
+
+int AudioDecoderG722StereoImpl::RtpTimestampRateHz() const {
+  return kSampleRateHz / 2;
 }
 
 size_t AudioDecoderG722StereoImpl::Channels() const {

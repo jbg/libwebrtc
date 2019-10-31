@@ -10,6 +10,7 @@
 
 #include "modules/video_coding/packet.h"
 
+#include "absl/types/optional.h"
 #include "api/rtp_headers.h"
 
 namespace webrtc {
@@ -47,7 +48,7 @@ VCMPacket::VCMPacket(const uint8_t* ptr,
       insertStartCode(videoHeader.codec == kVideoCodecH264 &&
                       videoHeader.is_first_packet_in_frame),
       video_header(videoHeader),
-      packet_info(rtp_header, receive_time_ms) {
+      packet_info(rtp_header, absl::nullopt, receive_time_ms) {
   if (is_first_packet_in_frame() && markerBit) {
     completeNALU = kNaluComplete;
   } else if (is_first_packet_in_frame()) {

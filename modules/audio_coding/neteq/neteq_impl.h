@@ -28,6 +28,7 @@
 #include "modules/audio_coding/neteq/random_vector.h"
 #include "modules/audio_coding/neteq/statistics_calculator.h"
 #include "modules/audio_coding/neteq/tick_timer.h"
+#include "modules/rtp_rtcp/source/absolute_capture_time_receiver.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/thread_annotations.h"
@@ -415,6 +416,8 @@ class NetEqImpl : public webrtc::NetEq {
   bool no_time_stretching_ RTC_GUARDED_BY(crit_sect_);  // Only used for test.
   rtc::BufferT<int16_t> concealment_audio_ RTC_GUARDED_BY(crit_sect_);
   const bool enable_rtx_handling_ RTC_GUARDED_BY(crit_sect_);
+  AbsoluteCaptureTimeReceiver absolute_capture_time_receiver_
+      RTC_GUARDED_BY(crit_sect_);
 
  private:
   RTC_DISALLOW_COPY_AND_ASSIGN(NetEqImpl);
