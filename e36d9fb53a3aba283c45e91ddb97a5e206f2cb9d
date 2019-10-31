@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "55881d79_3c02334e",
+        "filename": "media/base/fake_media_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 9262
+      },
+      "writtenOn": "2019-10-31T22:59:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d4638b4_7e611ec0",
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52d45a54_99f18c5a",
         "filename": "media/base/fake_media_engine.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "954cd18a_811d5d1b",
+        "filename": "media/base/fake_media_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 9262
+      },
+      "writtenOn": "2019-10-31T22:59:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52d45a54_99f18c5a",
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "043e6021_2957f9a5",
+        "filename": "media/base/fake_media_engine.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 9262
+      },
+      "writtenOn": "2019-10-31T22:59:52Z",
+      "side": 1,
+      "message": "I agree, it\u0027s not really supported, except in a trivial case.",
+      "parentUuid": "2ca25ca6_48b6b152",
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "209f0959_33d3795f",
         "filename": "media/base/media_channel.h",
         "patchSetId": 2
@@ -64,6 +118,30 @@
       "writtenOn": "2019-10-29T09:40:03Z",
       "side": 1,
       "message": "If it can\u0027t fail, let it return void.",
+      "range": {
+        "startLine": 824,
+        "startChar": 10,
+        "endLine": 824,
+        "endChar": 14
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70a4e693_4518d6cc",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 9262
+      },
+      "writtenOn": "2019-10-31T22:59:52Z",
+      "side": 1,
+      "message": "With the copied logic, SetDefaultOutputVolume can fail, since SetDefaultOutputVolume attempts to SetOutputVolume on all members of |unsignaled_recv_ssrcs_|. LMK if you think this behavior is not acceptable, or doesn\u0027t really make sense.",
+      "parentUuid": "209f0959_33d3795f",
       "range": {
         "startLine": 824,
         "startChar": 10,
@@ -96,6 +174,30 @@
       "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19b14953_29641288",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 9262
+      },
+      "writtenOn": "2019-10-31T22:59:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92ccf960_e1ac86b1",
+      "range": {
+        "startLine": 900,
+        "startChar": 10,
+        "endLine": 900,
+        "endChar": 14
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +269,30 @@
       "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27c26212_44d8c8d9",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 9262
+      },
+      "writtenOn": "2019-10-31T22:59:52Z",
+      "side": 1,
+      "message": "I think it would definitely be nice to remove the unimplemented, unused methods in a different CL.",
+      "parentUuid": "30e37f06_f505da1d",
+      "range": {
+        "startLine": 997,
+        "startChar": 0,
+        "endLine": 1016,
+        "endChar": 0
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
