@@ -154,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "b2fae082_38d5b2c1",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-01T08:03:07Z",
+      "side": 1,
+      "message": "Ok to leave logic and return value unchanged, then. I can\u0027t say if the failure case makes sense; I\u0027m not familiar with audio use of unsignalled ssrcs. To find out, solenberg@ or ossu@ are probably the right persons to ask.",
+      "parentUuid": "70a4e693_4518d6cc",
+      "range": {
+        "startLine": 824,
+        "startChar": 10,
+        "endLine": 824,
+        "endChar": 14
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92ccf960_e1ac86b1",
         "filename": "media/base/media_channel.h",
         "patchSetId": 2
@@ -284,6 +308,30 @@
       "side": 1,
       "message": "I think it would definitely be nice to remove the unimplemented, unused methods in a different CL.",
       "parentUuid": "30e37f06_f505da1d",
+      "range": {
+        "startLine": 997,
+        "startChar": 0,
+        "endLine": 1016,
+        "endChar": 0
+      },
+      "revId": "e36d9fb53a3aba283c45e91ddb97a5e206f2cb9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b065c63_cd67b22e",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-01T08:03:07Z",
+      "side": 1,
+      "message": "Please do. Either before this cl, or as a followup.",
+      "parentUuid": "27c26212_44d8c8d9",
       "range": {
         "startLine": 997,
         "startChar": 0,
