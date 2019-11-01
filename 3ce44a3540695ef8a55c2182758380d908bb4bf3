@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "824ad4fc_535c9f6e",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-01T18:00:46Z",
+      "side": 0,
+      "message": "In case we rely on the old way of finding a network, we still need to find it via network_handle_by_address_. I am curious why this update is removed.",
+      "range": {
+        "startLine": 333,
+        "startChar": 2,
+        "endLine": 333,
+        "endChar": 5
+      },
+      "revId": "3ce44a3540695ef8a55c2182758380d908bb4bf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
