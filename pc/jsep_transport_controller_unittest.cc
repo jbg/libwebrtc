@@ -59,6 +59,19 @@ void AddCryptoSettings(cricket::SessionDescription* description) {
 
 }  // namespace
 
+class FakeIceTransportFactory : public webrtc::IceTransportFactory {
+ public:
+  ~FakeIceTransportFactory() override = default;
+  rtc::scoped_refptr<IceTransportInterface> CreateIceTransport(
+      const std::string& transport_name,
+      int component,
+      const IceTransportInit& init) override {
+    auto ice_internal =
+        std::make_unique<cricket::FakeIceTransport>(transport_name, component);
+    return webrtc::CreateIceTransport(std::move(ice_internal));
+  }
+};
+
 class FakeTransportFactory : public cricket::TransportFactoryInterface {
  public:
   std::unique_ptr<cricket::IceTransportInternal> CreateIceTransport(
@@ -81,6 +94,7 @@ class JsepTransportControllerTest : public JsepTransportController::Observer,
                                     public sigslot::has_slots<> {
  public:
   JsepTransportControllerTest() : signaling_thread_(rtc::Thread::Current()) {
+    fake_ice_transport_factory_ = std::make_unique<FakeIceTransportFactory>();
     fake_transport_factory_ = std::make_unique<FakeTransportFactory>();
   }
 
@@ -93,6 +107,7 @@ class JsepTransportControllerTest : public JsepTransportController::Observer,
     config.rtcp_handler = [](const rtc::CopyOnWriteBuffer& packet,
                              int64_t packet_time_us) { RTC_NOTREACHED(); };
     // The tests only works with |fake_transport_factory|;
+    config.ice_transport_factory = fake_ice_transport_factory_.get();
     config.external_transport_factory = fake_transport_factory_.get();
     // TODO(zstein): Provide an AsyncResolverFactory once it is required.
     transport_controller_ = std::make_unique<JsepTransportController>(
@@ -358,6 +373,7 @@ class JsepTransportControllerTest : public JsepTransportController::Observer,
 
   // |network_thread_| should be destroyed after |transport_controller_|
   std::unique_ptr<rtc::Thread> network_thread_;
+  std::unique_ptr<FakeIceTransportFactory> fake_ice_transport_factory_;
   std::unique_ptr<FakeTransportFactory> fake_transport_factory_;
   rtc::Thread* const signaling_thread_ = nullptr;
   bool signaled_on_non_signaling_thread_ = false;

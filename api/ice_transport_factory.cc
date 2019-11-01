@@ -63,4 +63,13 @@ rtc::scoped_refptr<IceTransportInterface> CreateIceTransport(
           init.event_log()));
 }
 
+rtc::scoped_refptr<webrtc::IceTransportInterface> CreateIceTransport(
+    std::unique_ptr<cricket::IceTransportInternal> internal) {
+  if (!internal)
+    return nullptr;
+
+  return new rtc::RefCountedObject<IceTransportWithTransportChannel>(
+      std::move(internal));
+}
+
 }  // namespace webrtc
