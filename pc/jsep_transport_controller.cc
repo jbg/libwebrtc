@@ -14,6 +14,7 @@
 #include <utility>
 
 #include "absl/algorithm/container.h"
+#include "api/ice_transport_factory.h"
 #include "api/transport/datagram_transport_interface.h"
 #include "api/transport/media/media_transport_interface.h"
 #include "p2p/base/ice_transport_internal.h"
@@ -481,19 +482,24 @@ void JsepTransportController::RollbackTransportForMid(const std::string& mid) {
   MaybeDestroyJsepTransport(mid);
 }
 
-std::unique_ptr<cricket::IceTransportInternal>
+rtc::scoped_refptr<webrtc::IceTransportInterface>
 JsepTransportController::CreateIceTransport(const std::string transport_name,
                                             bool rtcp) {
   int component = rtcp ? cricket::ICE_CANDIDATE_COMPONENT_RTCP
                        : cricket::ICE_CANDIDATE_COMPONENT_RTP;
 
-  if (config_.external_transport_factory) {
-    return config_.external_transport_factory->CreateIceTransport(
-        transport_name, component);
+  IceTransportInit init;
+  init.set_port_allocator(port_allocator_);
+  init.set_async_resolver_factory(async_resolver_factory_);
+  init.set_event_log(config_.event_log);
+  if (config_.ice_transport_factory) {
+    return config_.ice_transport_factory->CreateIceTransport(transport_name,
+                                                             component, init);
   } else {
-    return std::make_unique<cricket::P2PTransportChannel>(
+    auto ice_internal = std::make_unique<cricket::P2PTransportChannel>(
         transport_name, component, port_allocator_, async_resolver_factory_,
         config_.event_log);
+    return webrtc::CreateIceTransport(std::move(ice_internal));
   }
 }
 
@@ -1250,24 +1256,24 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
                     "SDES and DTLS-SRTP cannot be enabled at the same time.");
   }
 
-  std::unique_ptr<cricket::IceTransportInternal> ice =
+  rtc::scoped_refptr<webrtc::IceTransportInterface> ice =
       CreateIceTransport(content_info.name, /*rtcp=*/false);
 
   std::unique_ptr<MediaTransportInterface> media_transport =
       MaybeCreateMediaTransport(content_info, description, local);
   if (media_transport) {
     media_transport_created_once_ = true;
-    media_transport->Connect(ice.get());
+    media_transport->Connect(ice->internal());
   }
 
   std::unique_ptr<DatagramTransportInterface> datagram_transport =
       MaybeCreateDatagramTransport(content_info, description, local);
   if (datagram_transport) {
-    datagram_transport->Connect(ice.get());
+    datagram_transport->Connect(ice->internal());
   }
 
   std::unique_ptr<cricket::DtlsTransportInternal> rtp_dtls_transport =
-      CreateDtlsTransport(content_info, ice.get(), nullptr);
+      CreateDtlsTransport(content_info, ice->internal(), nullptr);
 
   std::unique_ptr<cricket::DtlsTransportInternal> rtcp_dtls_transport;
   std::unique_ptr<RtpTransport> unencrypted_rtp_transport;
@@ -1275,15 +1281,16 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
   std::unique_ptr<DtlsSrtpTransport> dtls_srtp_transport;
   std::unique_ptr<RtpTransportInternal> datagram_rtp_transport;
 
-  std::unique_ptr<cricket::IceTransportInternal> rtcp_ice;
+  rtc::scoped_refptr<webrtc::IceTransportInterface> rtcp_ice;
   if (config_.rtcp_mux_policy !=
           PeerConnectionInterface::kRtcpMuxPolicyRequire &&
       content_info.type == cricket::MediaProtocolType::kRtp) {
     RTC_DCHECK(media_transport == nullptr);
     RTC_DCHECK(datagram_transport == nullptr);
     rtcp_ice = CreateIceTransport(content_info.name, /*rtcp=*/true);
-    rtcp_dtls_transport = CreateDtlsTransport(content_info, rtcp_ice.get(),
-                                              /*datagram_transport=*/nullptr);
+    rtcp_dtls_transport =
+        CreateDtlsTransport(content_info, rtcp_ice->internal(),
+                            /*datagram_transport=*/nullptr);
   }
 
   // Only create a datagram RTP transport if the datagram transport should be
@@ -1300,8 +1307,8 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
                         "transport is used.";
     RTC_DCHECK(!rtcp_dtls_transport);
     datagram_rtp_transport = std::make_unique<DatagramRtpTransport>(
-        content_info.media_description()->rtp_header_extensions(), ice.get(),
-        datagram_transport.get());
+        content_info.media_description()->rtp_header_extensions(),
+        ice->internal(), datagram_transport.get());
   }
 
   if (config_.disable_encryption) {

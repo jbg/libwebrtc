@@ -19,6 +19,7 @@
 
 #include "api/candidate.h"
 #include "api/crypto/crypto_options.h"
+#include "api/ice_transport_factory.h"
 #include "api/peer_connection_interface.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/transport/media/media_transport_config.h"
@@ -91,6 +92,7 @@ class JsepTransportController : public sigslot::has_slots<> {
     bool disable_encryption = false;
     bool enable_external_auth = false;
     // Used to inject the ICE/DTLS transports created externally.
+    webrtc::IceTransportFactory* ice_transport_factory = nullptr;
     cricket::TransportFactoryInterface* external_transport_factory = nullptr;
     Observer* transport_observer = nullptr;
     // Must be provided and valid for the lifetime of the
@@ -404,7 +406,7 @@ class JsepTransportController : public sigslot::has_slots<> {
       const cricket::ContentInfo& content_info,
       cricket::IceTransportInternal* ice,
       DatagramTransportInterface* datagram_transport);
-  std::unique_ptr<cricket::IceTransportInternal> CreateIceTransport(
+  rtc::scoped_refptr<webrtc::IceTransportInterface> CreateIceTransport(
       const std::string transport_name,
       bool rtcp);
 
