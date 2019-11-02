@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2da86fe3_0cd1c82f",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-02T00:42:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a895a206_970d99b8",
+      "range": {
+        "startLine": 240,
+        "startChar": 22,
+        "endLine": 240,
+        "endChar": 33
+      },
+      "revId": "4900427d232c9052cc50fcb69e7897c637f2c439",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6784779f_8a6a6900",
         "filename": "sdk/android/src/jni/android_network_monitor.h",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2019-11-01T18:00:46Z",
       "side": 1,
       "message": "Do you expect this to be used somewhere else? Could be defined in an anonymous namespace in the .cc.",
+      "range": {
+        "startLine": 103,
+        "startChar": 7,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "4900427d232c9052cc50fcb69e7897c637f2c439",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36dad7e8_6de97fc1",
+        "filename": "sdk/android/src/jni/android_network_monitor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-02T00:42:31Z",
+      "side": 1,
+      "message": "Moved to cc and marked as static to be consistent with other similar functions.",
+      "parentUuid": "6784779f_8a6a6900",
       "range": {
         "startLine": 103,
         "startChar": 7,

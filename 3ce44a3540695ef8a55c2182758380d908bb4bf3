@@ -22,6 +22,30 @@
       "revId": "3ce44a3540695ef8a55c2182758380d908bb4bf3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca2e162f_4c5538dd",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-02T00:42:31Z",
+      "side": 0,
+      "message": "Ah. That was a mistake.",
+      "parentUuid": "824ad4fc_535c9f6e",
+      "range": {
+        "startLine": 333,
+        "startChar": 2,
+        "endLine": 333,
+        "endChar": 5
+      },
+      "revId": "3ce44a3540695ef8a55c2182758380d908bb4bf3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
