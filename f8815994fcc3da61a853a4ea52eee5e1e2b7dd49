@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edd22232_5a343974",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-02T01:12:44Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "f8815994fcc3da61a853a4ea52eee5e1e2b7dd49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54b41a2b_48e6b0c5",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-02T01:12:44Z",
+      "side": 1,
+      "message": "nit: \u003d std::make_unique",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "revId": "f8815994fcc3da61a853a4ea52eee5e1e2b7dd49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f4fc7bf_f4932c2f",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-02T01:12:44Z",
+      "side": 1,
+      "message": "nit: const \u0026 and below for IPAddress",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 15
+      },
+      "revId": "f8815994fcc3da61a853a4ea52eee5e1e2b7dd49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "722002b2_0571319d",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-02T01:12:44Z",
+      "side": 1,
+      "message": "Maybe check it\u0027s true.",
+      "range": {
+        "startLine": 53,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 19
+      },
+      "revId": "f8815994fcc3da61a853a4ea52eee5e1e2b7dd49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dddc0a66_65ded222",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-02T01:12:44Z",
+      "side": 1,
+      "message": "nit: maybe assert network_handle nonempty before. Similarly below.",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 11
+      },
+      "revId": "f8815994fcc3da61a853a4ea52eee5e1e2b7dd49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e23ef83f_33908f96",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-02T01:12:44Z",
+      "side": 1,
+      "message": "maybe add a comment for why Start(). My understanding is it refreshes the setup. Please lmk if I misunderstand.",
+      "range": {
+        "startLine": 93,
+        "startChar": 20,
+        "endLine": 93,
+        "endChar": 25
+      },
+      "revId": "f8815994fcc3da61a853a4ea52eee5e1e2b7dd49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73e0901f_7aa2407a",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-02T01:12:44Z",
+      "side": 1,
+      "message": "nit: could be factored into a method to save some lines and prevent the setup to diverge in future.",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 47
+      },
+      "revId": "f8815994fcc3da61a853a4ea52eee5e1e2b7dd49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

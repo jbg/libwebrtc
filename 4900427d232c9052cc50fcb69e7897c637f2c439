@@ -93,6 +93,30 @@
       "revId": "4900427d232c9052cc50fcb69e7897c637f2c439",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "604c6704_448abd48",
+        "filename": "sdk/android/src/jni/android_network_monitor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-02T01:12:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "36dad7e8_6de97fc1",
+      "range": {
+        "startLine": 103,
+        "startChar": 7,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "4900427d232c9052cc50fcb69e7897c637f2c439",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
