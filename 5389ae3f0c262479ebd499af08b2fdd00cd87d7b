@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd38857c_15614318",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2246,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-04T23:51:19Z",
+      "side": 1,
+      "message": "Remove this comment.",
+      "range": {
+        "startLine": 2246,
+        "startChar": 19,
+        "endLine": 2246,
+        "endChar": 29
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
