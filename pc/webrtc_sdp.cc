@@ -1134,8 +1134,11 @@ bool ParseCandidate(const std::string& message,
   switch (protocol) {
     case cricket::PROTO_UDP:
     case cricket::PROTO_TCP:
-    case cricket::PROTO_SSLTCP:
       // Supported protocol.
+      break;
+    case cricket::PROTO_SSLTCP:
+      // Not supported, but accepted in SDP, to not break apps still signalling
+      // it.
       break;
     default:
       return ParseFailed(first_line, "Unsupported transport type.", error);
@@ -3175,13 +3178,17 @@ bool ParseContent(const std::string& message,
       if (!ParseCandidate(line, &candidate, error, false)) {
         return false;
       }
-      // ParseCandidate will parse non-standard ufrag and password attributes,
-      // since it's used for candidate trickling, but we only want to process
-      // the "a=ice-ufrag"/"a=ice-pwd" values in a session description, so
-      // strip them off at this point.
-      candidate.set_username(std::string());
-      candidate.set_password(std::string());
-      candidates_orig.push_back(candidate);
+      if (candidate.protocol() == cricket::SSLTCP_PROTOCOL_NAME) {
+        // Silently ignore.
+      } else {
+        // ParseCandidate will parse non-standard ufrag and password attributes,
+        // since it's used for candidate trickling, but we only want to process
+        // the "a=ice-ufrag"/"a=ice-pwd" values in a session description, so
+        // strip them off at this point.
+        candidate.set_username(std::string());
+        candidate.set_password(std::string());
+        candidates_orig.push_back(candidate);
+      }
     } else if (HasAttribute(line, kAttributeIceUfrag)) {
       if (!GetValue(line, kAttributeIceUfrag, &transport->ice_ufrag, error)) {
         return false;

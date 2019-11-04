@@ -32,7 +32,6 @@ enum class PacketInfoProtocolType {
   kUnknown,
   kUdp,
   kTcp,
-  kSsltcp,
   kTls,
 };
 

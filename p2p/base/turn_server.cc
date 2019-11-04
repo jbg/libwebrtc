@@ -17,6 +17,7 @@
 #include "absl/algorithm/container.h"
 #include "api/packet_socket_factory.h"
 #include "p2p/base/async_stun_tcp_socket.h"
+#include "p2p/base/port.h"
 #include "p2p/base/stun.h"
 #include "rtc_base/bind.h"
 #include "rtc_base/byte_buffer.h"
@@ -601,10 +602,9 @@ bool TurnServerConnection::operator<(const TurnServerConnection& c) const {
 }
 
 std::string TurnServerConnection::ToString() const {
-  const char* const kProtos[] = {"unknown", "udp", "tcp", "ssltcp"};
   rtc::StringBuilder ost;
   ost << src_.ToSensitiveString() << "-" << dst_.ToSensitiveString() << ":"
-      << kProtos[proto_];
+      << ProtoToString(proto_);
   return ost.Release();
 }
 

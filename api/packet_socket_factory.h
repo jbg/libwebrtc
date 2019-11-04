@@ -43,11 +43,11 @@ class RTC_EXPORT PacketSocketFactory {
 
     // The TLS options below are mutually exclusive.
     OPT_TLS = 0x02,           // Real and secure TLS.
-    OPT_TLS_FAKE = 0x01,      // Fake TLS with a dummy SSL handshake.
     OPT_TLS_INSECURE = 0x08,  // Insecure TLS without certificate validation.
 
-    // Deprecated, use OPT_TLS_FAKE.
-    OPT_SSLTCP = OPT_TLS_FAKE,
+    // TODO(bugs.webrtc.org/10947): Deprecated. Update chromium's
+    // IpcPacketSocketFactory, then delete.
+    OPT_SSLTCP = 0x01,
   };
 
   PacketSocketFactory() = default;
