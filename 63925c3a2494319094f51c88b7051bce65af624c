@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "032f8f15_a1f8217c",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-04T19:46:33Z",
+      "side": 1,
+      "message": "gn check out/XXX helps verify if the dep rule is good.",
+      "range": {
+        "startLine": 1457,
+        "startChar": 7,
+        "endLine": 1457,
+        "endChar": 23
+      },
+      "revId": "63925c3a2494319094f51c88b7051bce65af624c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b009111_af4f6b05",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-04T19:46:33Z",
+      "side": 1,
+      "message": "Assert network_handle.has_value() or *network_handle would crash first. Similarly for same asserts below.",
+      "range": {
+        "startLine": 87,
+        "startChar": 2,
+        "endLine": 87,
+        "endChar": 13
+      },
+      "revId": "63925c3a2494319094f51c88b7051bce65af624c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
