@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "046eabaf_c4509125",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2019-11-05T07:16:58Z",
+      "side": 1,
+      "message": "Put this in Setup since it needs to happen before each test.",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 26
+      },
+      "revId": "5d47400923f50d3ec3eb2d7e5ebfff46e2ca9b52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cce64c59_82cb8f4c",
+        "filename": "sdk/android/native_unittests/android_network_monitor_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2019-11-05T07:16:58Z",
+      "side": 1,
+      "message": "Split this up into smaller tests. You should follow the arrange-act-assert structure. e.g.\n\nTEST_F(AndroidNetworkMonitorTest, TestFindNetworkHandleUsingIpv4Address) {\n  rtc::IPAddress ipv4_address(kTestIpv4Address);\n  jni::NetworkHandle ipv4_handle \u003d 100;\n  jni::NetworkInformation net_info1 \u003d\n        CreateNetworkInformation(\"wlan0\", ipv4_handle, ipv4_address);\n  network_monitor_-\u003eSetNetworkInfos(std::vector\u003cjni::NetworkInformation\u003e(net_infos));\n\n  auto network_handle \u003d\n      network_monitor_-\u003eFindNetworkHandleFromAddress(ipv4_address);\n\n  ASSERT_TRUE(network_handle.has_value());\n  EXPECT_EQ(ipv4_handle, *network_handle);\n}\n\nTEST_F(AndroidNetworkMonitorTest, TestFindNetworkHandleUsingFullIpv6Address) {\n  rtc::IPAddress ipv6_address \u003d GetIpAddressFromIpv6String(kTestIpv6Address1);\n  jni::NetworkHandle ipv6_handle \u003d 200;\n  jni::NetworkInformation net_info \u003d\n        CreateNetworkInformation(\"wlan0\", ipv6_handle, ipv6_address);\n  network_monitor_-\u003eSetNetworkInfos(std::vector\u003cjni::NetworkInformation\u003e({net_info}));\n\n  auto network_handle \u003d\n      network_monitor_-\u003eFindNetworkHandleFromAddress(ipv6_address);\n\n  ASSERT_TRUE(network_handle.has_value());\n  EXPECT_EQ(ipv6_handle, *network_handle);\n}\n\n...\n\nAvoid helper methods unless you really, really need them. Simplicity is more important than avoiding duplication in tests.\n\nIf you think it\u0027s important to mix addresses, just create more net_infos in one of your tests, but in that case make it clear they\u0027re not being asserted on later, e.g.\n\n  jni::NetworkInformation net_info2 \u003d\n        CreateNetworkInformation(\"wlan0\", 1234, \"0.0.0.0\" /* Doesn\u0027t matter. */);\n  network_monitor_-\u003eSetNetworkInfos(std::vector\u003cjni::NetworkInformation\u003e({net_info, net_info2}));",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 1
+      },
+      "revId": "5d47400923f50d3ec3eb2d7e5ebfff46e2ca9b52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
