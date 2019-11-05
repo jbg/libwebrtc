@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "8269fd5d_a3b10122",
+        "filename": "p2p/base/basic_ice_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-05T17:47:28Z",
+      "side": 1,
+      "message": "If I understand correctly, the logic of sorting will be moved to this file in a subsequent cl.",
+      "parentUuid": "30d65beb_375ac9d5",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 38
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3c749a8_be52e2db",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 2
@@ -151,6 +175,30 @@
       "writtenOn": "2019-11-05T00:10:14Z",
       "side": 1,
       "message": "I feel we may need to pin down the API design for the controller interface, specifically what belongs here and what should be left in the transport. For example, if AddConnection is part of the controller, how about CreateConnection? SetIceConfig vs SetIceRole? We have a broad range of methods that can mutate the transport state, and the current selection feels a bit unclear in the rationale. If SelectConnectionToPing and FindNextPingableConnection are main targets we are trying to factor out, the scope of this could be a bit smaller to focus that.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 71
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad9ccd2b_fa5d42c9",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-05T17:47:28Z",
+      "side": 1,
+      "message": "Agree on this. \nI understand this is a kind of intermediate CL and the final api could change.\nSo I suggest we put a list of apis as the \"final api\" and the rest as \"temporary api\" for current implementation. \nFor example, I think eventually we won\u0027t need SetSelectedConnection here. We should choose the selected connection in this class and signal the result to the p2ptransportchannel. \nWDYT?",
+      "parentUuid": "5a60e371_8c6d1646",
       "range": {
         "startLine": 31,
         "startChar": 0,
