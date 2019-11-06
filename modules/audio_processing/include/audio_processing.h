@@ -407,6 +407,12 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
   // Specifies the properties of a setting to be passed to AudioProcessing at
   // runtime.
   class RuntimeSetting {
+   private:
+    struct IntPair {
+      int first;
+      int second;
+    };
+
    public:
     enum class Type {
       kNotSpecified,
@@ -414,7 +420,8 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       kCaptureCompressionGain,
       kCaptureFixedPostGain,
       kPlayoutVolumeChange,
-      kCustomRenderProcessingRuntimeSetting
+      kCustomRenderProcessingRuntimeSetting,
+      kPlayOutAudioDeviceChange
     };
 
     RuntimeSetting() : type_(Type::kNotSpecified), value_(0.f) {}
@@ -441,6 +448,17 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       return {Type::kCaptureFixedPostGain, gain_db};
     }
 
+    // Creates a runtime setting to notify play-out (aka render) audio device
+    // changes. |device_type| identifies the device and |max_volume| is the
+    // maximum play-out volume associated to that device.
+    static RuntimeSetting CreatePlayoutAudioDeviceChange(int device_type,
+                                                         int max_volume) {
+      IntPair payload{device_type, max_volume};
+      return {Type::kPlayOutAudioDeviceChange, payload};
+    }
+
+    // Creates a runtime setting to notify play-out (aka render) volume changes.
+    // |volume| is the unnormalized volume, the maximum of which
     static RuntimeSetting CreatePlayoutVolumeChange(int volume) {
       return {Type::kPlayoutVolumeChange, volume};
     }
@@ -458,17 +476,26 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       RTC_DCHECK(value);
       *value = value_.int_value;
     }
+    void GetIntPair(int* first, int* second) const {
+      RTC_DCHECK(first);
+      RTC_DCHECK(second);
+      *first = value_.int_pair.first;
+      *second = value_.int_pair.second;
+    }
 
    private:
     RuntimeSetting(Type id, float value) : type_(id), value_(value) {}
     RuntimeSetting(Type id, int value) : type_(id), value_(value) {}
+    RuntimeSetting(Type id, IntPair value) : type_(id), value_(value) {}
     Type type_;
     union U {
       U() {}
       U(int value) : int_value(value) {}
       U(float value) : float_value(value) {}
+      U(IntPair value) : int_pair(value) {}
       float float_value;
       int int_value;
+      IntPair int_pair;
     } value_;
   };
 
