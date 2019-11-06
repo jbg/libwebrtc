@@ -204,6 +204,16 @@ void AecDumpImpl::WriteRuntimeSetting(
       setting->set_playout_volume_change(x);
       break;
     }
+    case AudioProcessing::RuntimeSetting::Type::kPlayOutAudioDeviceChange: {
+      int device_type;
+      int max_volume;
+      runtime_setting.GetIntPair(&device_type, &max_volume);
+      auto* device_and_max_volume =
+          setting->mutable_playout_audio_device_change();
+      device_and_max_volume->set_first(device_type);
+      device_and_max_volume->set_second(max_volume);
+      break;
+    }
     case AudioProcessing::RuntimeSetting::Type::kNotSpecified:
       RTC_NOTREACHED();
       break;

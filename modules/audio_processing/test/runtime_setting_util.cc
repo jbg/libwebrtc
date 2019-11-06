@@ -36,6 +36,11 @@ void ReplayRuntimeSetting(AudioProcessing* apm,
     apm->SetRuntimeSetting(
         AudioProcessing::RuntimeSetting::CreatePlayoutVolumeChange(
             setting.playout_volume_change()));
+  } else if (setting.has_playout_audio_device_change()) {
+    apm->SetRuntimeSetting(
+        AudioProcessing::RuntimeSetting::CreatePlayoutAudioDeviceChange(
+            /*device_type=*/setting.playout_audio_device_change().first(),
+            /*max_volume=*/setting.playout_audio_device_change().second()));
   }
 }
 }  // namespace webrtc
