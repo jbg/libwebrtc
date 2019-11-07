@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9be6c7c9_20fb3a1e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-11-07T08:42:25Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "d3747e6e_5d33ec08",
+      "range": {
+        "startLine": 814,
+        "startChar": 39,
+        "endLine": 814,
+        "endChar": 40
+      },
+      "revId": "f8c64e5a079c3aa08ead99b834c0d5ef7e7e3fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fef633b_7614bd4d",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "df50ca23_15cde513",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-11-07T08:42:25Z",
+      "side": 1,
+      "message": "As discussed offline, that was my first choice. However, there are some restrictions for union members (see https://en.cppreference.com/w/cpp/language/union) due to which I decided to switch to a trivial type since it\u0027s easier to use correctly.",
+      "parentUuid": "0fef633b_7614bd4d",
+      "range": {
+        "startLine": 411,
+        "startChar": 4,
+        "endLine": 411,
+        "endChar": 10
+      },
+      "revId": "f8c64e5a079c3aa08ead99b834c0d5ef7e7e3fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dac85739_8c063ccc",
         "filename": "modules/audio_processing/include/audio_processing.h",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "f8c64e5a079c3aa08ead99b834c0d5ef7e7e3fd6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a02ae39c_7d005746",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-11-07T08:42:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dac85739_8c063ccc",
+      "range": {
+        "startLine": 479,
+        "startChar": 8,
+        "endLine": 479,
+        "endChar": 52
+      },
+      "revId": "f8c64e5a079c3aa08ead99b834c0d5ef7e7e3fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
