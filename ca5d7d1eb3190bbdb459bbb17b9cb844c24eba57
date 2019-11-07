@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e41b38b_085d99cf",
+        "filename": "modules/audio_processing/agc/agc_manager_direct_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-11-07T13:11:07Z",
+      "side": 1,
+      "message": "nit: You can fill only one channel (say 0, or std::max(0, kNumChannels - 1)) and the test should still pass.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 0
+      },
+      "revId": "ca5d7d1eb3190bbdb459bbb17b9cb844c24eba57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
