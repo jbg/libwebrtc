@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0945200e_834a1f29",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "Have you considered just converting the UTF-16 to UTF8 at the few sites where you read things from the OS, and using the UTF-8-based routines internally?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b88e8e4_d6e07120",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "Where does this number come from?",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83ad4878_c38e83da",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "No need for brace initialization here - std::wstring(buffer, len) should work just as well.",
+      "range": {
+        "startLine": 38,
+        "startChar": 31,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26618260_56ad652d",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "WindowProcessId - it returns a process-Id rather than a process handle.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd539695_389d0325",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "If there is no \"\\\" in the path then why do we return an empty filename?",
+      "range": {
+        "startLine": 49,
+        "startChar": 38,
+        "endLine": 49,
+        "endChar": 41
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc53071d_b34ef6fa",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "Document what |window_to_exclude| and |process| are used for.",
+      "range": {
+        "startLine": 59,
+        "startChar": 28,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "966d6e74_5bed25ed",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "process_id, here and below.",
+      "range": {
+        "startLine": 61,
+        "startChar": 10,
+        "endLine": 61,
+        "endChar": 17
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a3eca73_0cf4b9ad",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "You\u0027ll need to explicitly provide a virtual destructor override, otherwise this handler won\u0027t be deleted correctly.",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 49
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46ea0774_4ea95b48",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "What sources does |current| refer to?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 49
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0fc0a71_95ab4f18",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "Invalid HWNDs should be NULL.",
+      "range": {
+        "startLine": 82,
+        "startChar": 13,
+        "endLine": 82,
+        "endChar": 14
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2654ed0_62c43290",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "Please use a more descriptive name, e.g. I assume that this is intended to be powerpoint_windows?",
+      "range": {
+        "startLine": 87,
+        "startChar": 32,
+        "endLine": 87,
+        "endChar": 42
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5774e3d_d392ad9e",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "It seems strange that the original window type could be Slideshow here?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 74
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f96465a4_e3ea0bee",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "As noted below, you can call a GetSlideshowTitle() directly here - the |type| is always slideshow at this point.",
+      "range": {
+        "startLine": 102,
+        "startChar": 25,
+        "endLine": 102,
+        "endChar": 67
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17c99203_1d050bee",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "Recommend splitting this into GetSlideshowTitle() and GetEditorTitle() helpers, and then using a switch() statement at the one call-site that actually needs to handle the three types.",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 3
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d540a5d_80af57e5",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 150,
+        "startChar": 7,
+        "endLine": 150,
+        "endChar": 22
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f28a661_c0fce7da",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "This can follow the window_id() style, for simple getters, I think?",
+      "range": {
+        "startLine": 168,
+        "startChar": 7,
+        "endLine": 168,
+        "endChar": 18
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3448feb6_7200c7de",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T01:38:21Z",
+      "side": 1,
+      "message": "Remove const.",
+      "range": {
+        "startLine": 173,
+        "startChar": 2,
+        "endLine": 173,
+        "endChar": 8
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
