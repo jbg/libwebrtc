@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d37fcf7_dab2e365",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-11-07T12:07:44Z",
+      "side": 1,
+      "message": "add play-out audio device change runtime setting\n-\u003e\nadd play-out audio device runtime information\n?\n\n(reason is that the CL now adds the volume change event as well)",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 73
+      },
+      "revId": "87147ce94f93bbc95620f4d005c0d65ae03c057c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6afa2f5e_4d5519f3",
+        "filename": "modules/audio_processing/debug.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-11-07T12:07:44Z",
+      "side": 1,
+      "message": "What about ID? In practice don\u0027t really care about the type right? We more care whether a new device was set?",
+      "range": {
+        "startLine": 84,
+        "startChar": 17,
+        "endLine": 84,
+        "endChar": 21
+      },
+      "revId": "87147ce94f93bbc95620f4d005c0d65ae03c057c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b25a96a6_b173e09e",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-11-07T12:07:44Z",
+      "side": 1,
+      "message": "PlayOut\n-\u003e\nPlayout\n\nIs playout one or two words?",
+      "range": {
+        "startLine": 422,
+        "startChar": 11,
+        "endLine": 422,
+        "endChar": 18
+      },
+      "revId": "87147ce94f93bbc95620f4d005c0d65ae03c057c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
