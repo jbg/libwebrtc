@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3747e6e_5d33ec08",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-11-07T07:31:01Z",
+      "side": 1,
+      "message": "Isn\u0027t this doing more than what is specified in the CL description (i.e., it in addition passes the volume changed settings to the render, right)? \n\nPlease update the CL description accordingly.",
+      "range": {
+        "startLine": 814,
+        "startChar": 39,
+        "endLine": 814,
+        "endChar": 40
+      },
+      "revId": "f8c64e5a079c3aa08ead99b834c0d5ef7e7e3fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fef633b_7614bd4d",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-11-07T07:31:01Z",
+      "side": 1,
+      "message": "Can\u0027t we use std::pair\u003cT,T\u003e instead? That would avoid us having to specify another new type for this.\n\nAlso, instead of having several private and public sections, or having the private section before the private section, I think it is better to have a forward declaration of IntPair. This ordering of the private vs public sections is also encouraged by the style guide.",
+      "range": {
+        "startLine": 411,
+        "startChar": 4,
+        "endLine": 411,
+        "endChar": 10
+      },
+      "revId": "f8c64e5a079c3aa08ead99b834c0d5ef7e7e3fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dac85739_8c063ccc",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-11-07T07:31:01Z",
+      "side": 1,
+      "message": "Maybe not something to change now, but looking at other code using thi would likely be easier if we had this as \nIntPair GetIntPair() {\n   IntPair p;\n   p.first \u003d value_.int_pair.first;\n   p.second \u003d value_.int_pair.second;\n   return;\n}",
+      "range": {
+        "startLine": 479,
+        "startChar": 8,
+        "endLine": 479,
+        "endChar": 52
+      },
+      "revId": "f8c64e5a079c3aa08ead99b834c0d5ef7e7e3fd6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
