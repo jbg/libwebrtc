@@ -414,7 +414,14 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       kCaptureCompressionGain,
       kCaptureFixedPostGain,
       kPlayoutVolumeChange,
-      kCustomRenderProcessingRuntimeSetting
+      kCustomRenderProcessingRuntimeSetting,
+      kPlayOutAudioDeviceChange
+    };
+
+    // Play-out audio device properties.
+    struct PlayOutAudioDeviceInfo {
+      int type;        // Identifies the audio device type.
+      int max_volume;  // Maximum play-out volume.
     };
 
     RuntimeSetting() : type_(Type::kNotSpecified), value_(0.f) {}
@@ -441,6 +448,15 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       return {Type::kCaptureFixedPostGain, gain_db};
     }
 
+    // Creates a runtime setting to notify play-out (aka render) audio device
+    // changes.
+    static RuntimeSetting CreatePlayoutAudioDeviceChange(
+        PlayOutAudioDeviceInfo audio_device) {
+      return {Type::kPlayOutAudioDeviceChange, audio_device};
+    }
+
+    // Creates a runtime setting to notify play-out (aka render) volume changes.
+    // |volume| is the unnormalized volume, the maximum of which
     static RuntimeSetting CreatePlayoutVolumeChange(int volume) {
       return {Type::kPlayoutVolumeChange, volume};
     }
@@ -450,6 +466,8 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
     }
 
     Type type() const { return type_; }
+    // Getters do not return a value but instead modify the argument to protect
+    // from implicit casting.
     void GetFloat(float* value) const {
       RTC_DCHECK(value);
       *value = value_.float_value;
@@ -458,17 +476,25 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       RTC_DCHECK(value);
       *value = value_.int_value;
     }
+    void GetPlayOutAudioDeviceInfo(PlayOutAudioDeviceInfo* value) const {
+      RTC_DCHECK(value);
+      *value = value_.playout_audio_device_info;
+    }
 
    private:
     RuntimeSetting(Type id, float value) : type_(id), value_(value) {}
     RuntimeSetting(Type id, int value) : type_(id), value_(value) {}
+    RuntimeSetting(Type id, PlayOutAudioDeviceInfo value)
+        : type_(id), value_(value) {}
     Type type_;
     union U {
       U() {}
       U(int value) : int_value(value) {}
       U(float value) : float_value(value) {}
+      U(PlayOutAudioDeviceInfo value) : playout_audio_device_info(value) {}
       float float_value;
       int int_value;
+      PlayOutAudioDeviceInfo playout_audio_device_info;
     } value_;
   };
 
