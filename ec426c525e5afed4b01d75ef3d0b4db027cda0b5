@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc60fcc8_062854bb",
+        "filename": "modules/rtp_rtcp/source/rtp_dependency_descriptor_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-07T10:48:55Z",
+      "side": 1,
+      "message": "ShouldWriteActiveDecodeTargetBitmask?",
+      "range": {
+        "startLine": 176,
+        "startChar": 36,
+        "endLine": 176,
+        "endChar": 58
+      },
+      "revId": "ec426c525e5afed4b01d75ef3d0b4db027cda0b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
