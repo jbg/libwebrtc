@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "dd68d2b6_ebe0e357",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T20:55:20Z",
+      "side": 1,
+      "message": "These shouldn\u0027t be required.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0945200e_834a1f29",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -294,6 +317,75 @@
         "startChar": 25,
         "endLine": 102,
         "endChar": 67
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da2975e7_223234ab",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T20:55:20Z",
+      "side": 1,
+      "message": "Remove const.",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 9
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16bee96_8612bdb7",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T20:55:20Z",
+      "side": 1,
+      "message": "constexpr wchar_t kSeparator[]",
+      "range": {
+        "startLine": 126,
+        "startChar": 23,
+        "endLine": 126,
+        "endChar": 32
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "976cdeb6_eb252e18",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-07T20:55:20Z",
+      "side": 1,
+      "message": "What if the |serparator| isn\u0027t found?",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 76
       },
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
