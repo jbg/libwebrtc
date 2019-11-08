@@ -194,6 +194,10 @@ class DtlsTransport : public DtlsTransportInternal {
     return sb.Release();
   }
 
+  webrtc::ReadableStream<DtlsTransportState>* DtlsStateReadable() override {
+    return &dtls_state_readable_;
+  }
+
  private:
   void ConnectToIceTransport();
 
@@ -248,6 +252,9 @@ class DtlsTransport : public DtlsTransportInternal {
   bool writable_ = false;
 
   webrtc::RtcEventLog* const event_log_;
+
+  webrtc::ReadableStream<DtlsTransportState> dtls_state_readable_;
+  webrtc::ReadableStreamController<DtlsTransportState>* dtls_state_controller_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DtlsTransport);
 };

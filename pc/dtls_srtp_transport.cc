@@ -15,6 +15,7 @@
 #include <string>
 #include <utility>
 
+#include "rtc_base/bind.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/ssl_stream_adapter.h"
@@ -27,7 +28,12 @@ static const char kDtlsSrtpExporterLabel[] = "EXTRACTOR-dtls_srtp";
 namespace webrtc {
 
 DtlsSrtpTransport::DtlsSrtpTransport(bool rtcp_mux_enabled)
-    : SrtpTransport(rtcp_mux_enabled) {}
+    : SrtpTransport(rtcp_mux_enabled),
+      dtls_state_writable_(
+          std::make_unique<CallbackUnderlyingSink<cricket::DtlsTransportState>>(
+              [this](cricket::DtlsTransportState state) {
+                OnDtlsState(nullptr, state);
+              })) {}
 
 void DtlsSrtpTransport::SetDtlsTransports(
     cricket::DtlsTransportInternal* rtp_dtls_transport,
@@ -276,15 +282,13 @@ void DtlsSrtpTransport::SetDtlsTransport(
     return;
   }
 
-  if (*old_dtls_transport) {
-    (*old_dtls_transport)->SignalDtlsState.disconnect(this);
-  }
+  dtls_state_pipe_.Release();
 
   *old_dtls_transport = new_dtls_transport;
 
   if (new_dtls_transport) {
-    new_dtls_transport->SignalDtlsState.connect(
-        this, &DtlsSrtpTransport::OnDtlsState);
+    dtls_state_pipe_ =
+        new_dtls_transport->DtlsStateReadable()->PipeTo(&dtls_state_writable_);
   }
 }
 
@@ -300,8 +304,8 @@ void DtlsSrtpTransport::SetRtcpDtlsTransport(
 
 void DtlsSrtpTransport::OnDtlsState(cricket::DtlsTransportInternal* transport,
                                     cricket::DtlsTransportState state) {
-  RTC_DCHECK(transport == rtp_dtls_transport_ ||
-             transport == rtcp_dtls_transport_);
+  // RTC_DCHECK(transport == rtp_dtls_transport_ ||
+  //            transport == rtcp_dtls_transport_);
 
   SignalDtlsStateChange();
 

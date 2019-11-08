@@ -127,7 +127,11 @@ DtlsTransport::DtlsTransport(IceTransportInternal* ice_transport,
       srtp_ciphers_(crypto_options.GetSupportedDtlsSrtpCryptoSuites()),
       ssl_max_version_(rtc::SSL_PROTOCOL_DTLS_12),
       crypto_options_(crypto_options),
-      event_log_(event_log) {
+      event_log_(event_log),
+      dtls_state_readable_(
+          std::make_unique<
+              webrtc::CallbackUnderlyingSource<DtlsTransportState>>(
+              &dtls_state_controller_)) {
   RTC_DCHECK(ice_transport_);
   ConnectToIceTransport();
 }
@@ -783,6 +787,7 @@ void DtlsTransport::set_dtls_state(DtlsTransportState state) {
                       << " to " << state;
   dtls_state_ = state;
   SignalDtlsState(this, state);
+  dtls_state_controller_->Enqueue(state);
 }
 
 void DtlsTransport::OnDtlsHandshakeError(rtc::SSLHandshakeError error) {
