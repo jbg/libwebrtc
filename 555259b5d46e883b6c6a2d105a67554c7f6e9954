@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "17fc8085_d0cb2c25",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd68d2b6_ebe0e357",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0945200e_834a1f29",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -45,6 +69,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2278e1d_47c4c0eb",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done: WindowText returns UTF8 string, wstring_trim is replaced with rtc::string_trim",
+      "parentUuid": "0945200e_834a1f29",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b783323a_711a79d9",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done: Fixed size buffer removed",
+      "parentUuid": "2b88e8e4_d6e07120",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83ad4878_c38e83da",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -91,6 +163,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d5599b0_9c345fc4",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83ad4878_c38e83da",
+      "range": {
+        "startLine": 38,
+        "startChar": 31,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "1374c81c_eaebe396",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26618260_56ad652d",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd539695_389d0325",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -137,6 +257,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e760aad_e7d0f472",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done: returns path arguments in case if back slash is not found",
+      "parentUuid": "bd539695_389d0325",
+      "range": {
+        "startLine": 49,
+        "startChar": 38,
+        "endLine": 49,
+        "endChar": 41
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "c9eff8f2_96d60c7e",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc53071d_b34ef6fa",
+      "range": {
+        "startLine": 59,
+        "startChar": 28,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "966d6e74_5bed25ed",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "905ede79_fe06a286",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "966d6e74_5bed25ed",
+      "range": {
+        "startLine": 61,
+        "startChar": 10,
+        "endLine": 61,
+        "endChar": 17
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a3eca73_0cf4b9ad",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -197,6 +389,30 @@
       "writtenOn": "2019-11-07T01:38:21Z",
       "side": 1,
       "message": "You\u0027ll need to explicitly provide a virtual destructor override, otherwise this handler won\u0027t be deleted correctly.",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 49
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d512ecaa_ca0d4d63",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "@Wez could you please give an example: usually it\u0027s enough to have virtual dctor in base class and in our case we have it in FullScreenApplicationHandler.",
+      "parentUuid": "0a3eca73_0cf4b9ad",
       "range": {
         "startLine": 75,
         "startChar": 0,
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "eea16514_0ac149e5",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46ea0774_4ea95b48",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 49
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0fc0a71_95ab4f18",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -252,6 +492,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4257ca6_6c0a7da8",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "DesktopCapturer::SourceId is not Windows specific, this is why in interface specification for  FullScreenApplicationHandler::FindFullScreenWindow there is a requirement to return 0 in this case.",
+      "parentUuid": "e0fc0a71_95ab4f18",
+      "range": {
+        "startLine": 82,
+        "startChar": 13,
+        "endLine": 82,
+        "endChar": 14
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -278,6 +542,30 @@
     },
     {
       "key": {
+        "uuid": "1f687261_2268dc1b",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2654ed0_62c43290",
+      "range": {
+        "startLine": 87,
+        "startChar": 32,
+        "endLine": 87,
+        "endChar": 42
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5774e3d_d392ad9e",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -298,6 +586,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "161d0d99_6a097f6e",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5774e3d_d392ad9e",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 74
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -324,6 +636,30 @@
     },
     {
       "key": {
+        "uuid": "e84667ba_83054b91",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f96465a4_e3ea0bee",
+      "range": {
+        "startLine": 102,
+        "startChar": 25,
+        "endLine": 102,
+        "endChar": 67
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2975e7_223234ab",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -344,6 +680,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbb78579_d997bf27",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2975e7_223234ab",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 9
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -370,6 +730,30 @@
     },
     {
       "key": {
+        "uuid": "9a65c6dc_7107d683",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b16bee96_8612bdb7",
+      "range": {
+        "startLine": 126,
+        "startChar": 23,
+        "endLine": 126,
+        "endChar": 32
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "976cdeb6_eb252e18",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -390,6 +774,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44a522c1_5007a078",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "976cdeb6_eb252e18",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 76
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -416,6 +824,30 @@
     },
     {
       "key": {
+        "uuid": "9702f171_98539bac",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c99203_1d050bee",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 3
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d540a5d_80af57e5",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -436,6 +868,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fcdd479_7b9ca508",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d540a5d_80af57e5",
+      "range": {
+        "startLine": 150,
+        "startChar": 7,
+        "endLine": 150,
+        "endChar": 22
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -462,6 +918,30 @@
     },
     {
       "key": {
+        "uuid": "5e7e2782_7f5f8c60",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done: removed because it was used only once",
+      "parentUuid": "8f28a661_c0fce7da",
+      "range": {
+        "startLine": 168,
+        "startChar": 7,
+        "endLine": 168,
+        "endChar": 18
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3448feb6_7200c7de",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -482,6 +962,30 @@
       "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3472602f_32cb3d72",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-08T20:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3448feb6_7200c7de",
+      "range": {
+        "startLine": 173,
+        "startChar": 2,
+        "endLine": 173,
+        "endChar": 8
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
