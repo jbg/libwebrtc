@@ -961,6 +961,30 @@
     },
     {
       "key": {
+        "uuid": "d0a4cc77_1ef8bbbc",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-11T18:19:59Z",
+      "side": 1,
+      "message": "@juberti Does it look good enough now (with having whitelist of apps)?",
+      "parentUuid": "d9eaa2e4_874a82f8",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 37
+      },
+      "revId": "66e7355535fd9112dd1497194d54e51debac7bb1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac2cdfd5_46d75530",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 8
