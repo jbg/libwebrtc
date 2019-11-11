@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6461096d_2133953c",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-11T22:44:47Z",
+      "side": 1,
+      "message": "I see and thanks for the explanation. If this is the motivation of adding this method, we can instead add an ID in calls to schedule the async RequestSortAndStateUpdate (please see AsyncInvoker::AsyncInvoke), and do invoker_.Flush() here for the same message ID to clear any pending sorting. This way we could have follow the same convention using AsyncInvoker without adding redundant sorting.",
+      "range": {
+        "startLine": 1912,
+        "startChar": 5,
+        "endLine": 1913,
+        "endChar": 49
+      },
+      "revId": "dc80b4f1a44f39caf39d76d1341aa23baad01f3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
