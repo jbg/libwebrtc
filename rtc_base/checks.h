@@ -327,7 +327,7 @@ class FatalLogCall final {
 // We make sure RTC_CHECK et al. always evaluates |condition|, as
 // doing RTC_CHECK(FunctionWithSideEffect()) is a common idiom.
 #define RTC_CHECK(condition)                                       \
-  while (!(condition))                                             \
+  if (!(condition))                                                \
   rtc::webrtc_checks_impl::FatalLogCall<false>(__FILE__, __LINE__, \
                                                #condition) &       \
       rtc::webrtc_checks_impl::LogStreamer<>()
@@ -335,7 +335,7 @@ class FatalLogCall final {
 // Helper macro for binary operators.
 // Don't use this macro directly in your code, use RTC_CHECK_EQ et al below.
 #define RTC_CHECK_OP(name, op, val1, val2)                               \
-  while (!rtc::Safe##name((val1), (val2)))                               \
+  if (!rtc::Safe##name((val1), (val2)))                                  \
   rtc::webrtc_checks_impl::FatalLogCall<true>(__FILE__, __LINE__,        \
                                               #val1 " " #op " " #val2) & \
       rtc::webrtc_checks_impl::LogStreamer<>() << (val1) << (val2)
