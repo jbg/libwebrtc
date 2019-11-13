@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "35b1e89c_2044dcd3",
+        "filename": "api/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T15:44:06Z",
+      "side": 1,
+      "message": "I tried, but it fails on the fallback below.",
+      "parentUuid": "c95525e9_a5a066aa",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "7ed6876d78e52c67da254e1878c6e5dab8f41038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6f28ff3_75ea76cd",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "7ed6876d78e52c67da254e1878c6e5dab8f41038",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6918c0f9_b6becc4d",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T15:44:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6f28ff3_75ea76cd",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 53
+      },
+      "revId": "7ed6876d78e52c67da254e1878c6e5dab8f41038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
