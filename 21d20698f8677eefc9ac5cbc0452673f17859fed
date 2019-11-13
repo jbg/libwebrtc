@@ -22,6 +22,30 @@
       "revId": "21d20698f8677eefc9ac5cbc0452673f17859fed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "599dd4fa_595b6f14",
+        "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T14:10:05Z",
+      "side": 1,
+      "message": "No, guards are ignored in the destructor so we never call the checker here directly, only indirectly via StopLogging.",
+      "parentUuid": "2765f3b9_4991fb44",
+      "range": {
+        "startLine": 71,
+        "startChar": 6,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "21d20698f8677eefc9ac5cbc0452673f17859fed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
