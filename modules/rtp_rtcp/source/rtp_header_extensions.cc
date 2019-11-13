@@ -855,4 +855,45 @@ constexpr const char RepairedRtpStreamId::kUri[];
 constexpr RTPExtensionType RtpMid::kId;
 constexpr const char RtpMid::kUri[];
 
+// An RTP Header Extension for Inband Comfort Noise
+//
+// The form of the audio level extension block:
+//
+//  0                   1
+//  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// |  ID   | len=0 |N| level       |
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// Sample Audio Level Encoding Using the One-Byte Header Format
+//
+//  0                   1                   2
+//  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// |      ID       |     len=1     |N|    level    |
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// Sample Audio Level Encoding Using the Two-Byte Header Format
+
+constexpr RTPExtensionType InbandComfortNoiseExtension::kId;
+constexpr uint8_t InbandComfortNoiseExtension::kValueSizeBytes;
+constexpr const char InbandComfortNoiseExtension::kUri[];
+
+bool InbandComfortNoiseExtension::Parse(rtc::ArrayView<const uint8_t> data,
+                                        value_type* level) {
+  // One-byte and two-byte format share the same data definition.
+  if (data.size() != kValueSizeBytes)
+    return false;
+  *level = (data[0] & 0x80) != 0 ? absl::nullopt
+                                 : absl::make_optional(data[0] & 0x7F);
+  return true;
+}
+
+bool InbandComfortNoiseExtension::Write(rtc::ArrayView<uint8_t> data,
+                                        const value_type& level) {
+  // One-byte and two-byte format share the same data definition.
+  RTC_DCHECK_EQ(data.size(), kValueSizeBytes);
+  RTC_CHECK(!level || *level <= 0x7f);
+  data[0] = level ? (0x80 | *level) : 0x00;
+  return true;
+}
+
 }  // namespace webrtc
