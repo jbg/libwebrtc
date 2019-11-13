@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "952973b0_6d4abfb1",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "nit: Slightly more efficient to use std::string() explicitly here.",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc6cc966_4d1fd985",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "nit: I\u0027d generally recommend the form:\n\n  if (copied \u003d\u003d 0)\n    return std::string();\n  return rtc::ToUtf8(...);\n\nas being easier to read and a little clearer in exactly what is going on, in particular the fact that we have a branch, etc.",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 62
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "703a70b8_e3af0520",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "As noted above, suggest rewriting this as:\n\n  if (found \u003d\u003d ...)\n    return path\n  return ...",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 68
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f450ff5_d8cc09e8",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "These are only used with GetPathByWindowId, so I\u0027d suggest moving them to sit next to that.",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 0
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63bd2b2a_c35f932c",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "nit: Please put {} around the statement if the if conditional ends up being multi-line, for readability, i.e:\n\n  if (... ||\n      ...) {\n    ...\n  }\n\nIt\u0027s also helpful to put brackets around the sub-conditions, explicitly.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 17
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fc7f6d4_890a87d6",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "nit: Suggest kDocumentTitleSeparator, to make it clear that this isn\u0027t e.g. the file separator!",
+      "range": {
+        "startLine": 119,
+        "startChar": 24,
+        "endLine": 119,
+        "endChar": 34
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f1be208_e749cda8",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "std::string - otherwise the reader has to know what WindowText() returns.",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 8
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "591ffe61_bc633296",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "auto is OK here, if |title|\u0027s type is explicit, since find() is a standard library routine, so folks can be expected to understand that it returns an iterator.",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 8
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "727c4aa4_ee9fe2f4",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "kSeparatorLength or kSeparatorSize",
+      "range": {
+        "startLine": 131,
+        "startChar": 21,
+        "endLine": 131,
+        "endChar": 34
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9bec45d_d15bd51c",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "kScreenClassName",
+      "range": {
+        "startLine": 147,
+        "startChar": 20,
+        "endLine": 147,
+        "endChar": 32
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "566737f2_bc20a9db",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "kScreenClassNameSize",
+      "range": {
+        "startLine": 148,
+        "startChar": 18,
+        "endLine": 148,
+        "endChar": 37
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "884cb4b5_45880b5a",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "arraysize() returns a size_t, I think, not an int",
+      "range": {
+        "startLine": 148,
+        "startChar": 14,
+        "endLine": 148,
+        "endChar": 17
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff472142_f4b3e3ec",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "nit: This statement is hard to understand - can you rephrase it to be clearer?",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 49
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa407caa_a52ecac6",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "Why do we need both this and kScreenClassLength?  Why does it have a +1 at the end?",
+      "range": {
+        "startLine": 152,
+        "startChar": 4,
+        "endLine": 152,
+        "endChar": 65
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb4ec5b9_6367bc88",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "It would be simpler here to do:\n\n  WCHAR buffer[arraysize(kScreenClassName)+1];\n  ... \u003d ::GetClassNameW(..., arraysize(buffer));\n  ...\n\nand more readable, since it\u0027d be clear that we\u0027re passing a pointer to buffer, and the number of characters in the buffer.",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 19
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "b85e1c5d_f235d593",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "f2278e1d_47c4c0eb",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b88e8e4_d6e07120",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -425,6 +449,30 @@
     },
     {
       "key": {
+        "uuid": "6a7d3da3_5f307bb1",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "Technically you don\u0027t need one on this specialization, because it has no member variables to tear-down, but if someone were to add one then this class would then need its own destructor.",
+      "parentUuid": "d512ecaa_ca0d4d63",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 49
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46ea0774_4ea95b48",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
@@ -507,6 +555,30 @@
       "side": 1,
       "message": "DesktopCapturer::SourceId is not Windows specific, this is why in interface specification for  FullScreenApplicationHandler::FindFullScreenWindow there is a requirement to return 0 in this case.",
       "parentUuid": "e0fc0a71_95ab4f18",
+      "range": {
+        "startLine": 82,
+        "startChar": 13,
+        "endLine": 82,
+        "endChar": 14
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d982429f_fcbebb48",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-13T18:25:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a4257ca6_6c0a7da8",
       "range": {
         "startLine": 82,
         "startChar": 13,
