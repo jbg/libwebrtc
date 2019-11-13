@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "287ad71a_00c7aaf9",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-13T18:58:45Z",
+      "side": 1,
+      "message": "Re Flush: IIUC, Flush uses Thread::Clear, which matches tasks against the given ID (a wildcard ID if not provided). If RequestSortAndStateUpdate is AsyncInvoke\u0027d with the same ID (but no ID is provided in the current code), Flush would only execute all pending RequestSortAndStateUpdate. Let me know if I\u0027m missing anything.",
+      "parentUuid": "6bafee9f_fcc81eb8",
+      "range": {
+        "startLine": 1912,
+        "startChar": 5,
+        "endLine": 1913,
+        "endChar": 49
+      },
+      "revId": "dc80b4f1a44f39caf39d76d1341aa23baad01f3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "baac3800_0ac4b67b",
         "filename": "p2p/base/p2p_transport_channel.cc",
         "patchSetId": 6
