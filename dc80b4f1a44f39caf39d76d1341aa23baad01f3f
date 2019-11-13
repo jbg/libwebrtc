@@ -46,6 +46,76 @@
       "revId": "dc80b4f1a44f39caf39d76d1341aa23baad01f3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bafee9f_fcc81eb8",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-13T18:35:58Z",
+      "side": 1,
+      "message": "Perhaps I do not understand your intention. \nIsn\u0027t the issue of a pending sort request protected by sort_dirty_?\nWhen the first come in, it set sort_dirty_ to true. \nWhen sort starts, it set sort_dirty_ to false.",
+      "parentUuid": "0512617f_1ef2b9bf",
+      "range": {
+        "startLine": 1912,
+        "startChar": 5,
+        "endLine": 1913,
+        "endChar": 49
+      },
+      "revId": "dc80b4f1a44f39caf39d76d1341aa23baad01f3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baac3800_0ac4b67b",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2032,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-13T18:35:58Z",
+      "side": 1,
+      "message": "Can you explain why a sorting is needed here.",
+      "range": {
+        "startLine": 2032,
+        "startChar": 2,
+        "endLine": 2032,
+        "endChar": 25
+      },
+      "revId": "dc80b4f1a44f39caf39d76d1341aa23baad01f3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cebb6b9_02f88473",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2787,
+      "author": {
+        "id": 6252
+      },
+      "writtenOn": "2019-11-13T18:35:58Z",
+      "side": 1,
+      "message": "MorePingable is called pretty often. Can you explain why it is needed here?",
+      "range": {
+        "startLine": 2787,
+        "startChar": 2,
+        "endLine": 2787,
+        "endChar": 25
+      },
+      "revId": "dc80b4f1a44f39caf39d76d1341aa23baad01f3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
