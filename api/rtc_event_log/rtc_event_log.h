@@ -19,6 +19,7 @@
 #include "api/rtc_event_log/rtc_event.h"
 #include "api/rtc_event_log_output.h"
 #include "api/task_queue/task_queue_factory.h"
+#include "rtc_base/deprecation.h"
 
 namespace webrtc {
 
@@ -38,9 +39,8 @@ class RtcEventLog {
   virtual bool StartLogging(std::unique_ptr<RtcEventLogOutput> output,
                             int64_t output_period_ms) = 0;
 
-  // Stops logging to file and waits until the file has been closed, after
-  // which it would be permissible to read and/or modify it.
-  virtual void StopLogging() = 0;
+  // Deprecated
+  virtual void StopLogging() {}
 
   // Stops logging to file and calls |callback| when the file has been closed.
   // Note that it is not safe to call any other members, including the

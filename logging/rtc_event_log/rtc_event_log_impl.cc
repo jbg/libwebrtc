@@ -67,10 +67,15 @@ RtcEventLogImpl::RtcEventLogImpl(RtcEventLog::EncodingType encoding_type,
               TaskQueueFactory::Priority::NORMAL))) {}
 
 RtcEventLogImpl::~RtcEventLogImpl() {
-  // If we're logging to the output, this will stop that. Blocking function.
+  // If we're logging to the output, this will stop that.
   if (logging_state_started_) {
-    logging_state_checker_.Detach();
-    StopLogging();
+    // By making sure this is not executed on a task queue, we ensure it's not
+    // running on a thread that is shared with |task_queue_|, meaning the
+    // following Wait() will not block forever.
+    RTC_DCHECK(TaskQueueBase::Current() == nullptr);
+    rtc::Event output_stopped;
+    StopLogging([&output_stopped]() { output_stopped.Set(); });
+    output_stopped.Wait(rtc::Event::kForever);
   }
 
   // We want to block on any executing task by invoking ~TaskQueue() before
@@ -112,23 +117,8 @@ bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
   return true;
 }
 
-void RtcEventLogImpl::StopLogging() {
-  RTC_LOG(LS_INFO) << "Stopping WebRTC event log.";
-
-  rtc::Event output_stopped;
-  StopLogging([&output_stopped]() { output_stopped.Set(); });
-
-  // By making sure StopLogging() is not executed on a task queue,
-  // we ensure it's not running on a thread that is shared with |task_queue_|,
-  // meaning the following Wait() will not block forever.
-  RTC_DCHECK(TaskQueueBase::Current() == nullptr);
-
-  output_stopped.Wait(rtc::Event::kForever);
-
-  RTC_LOG(LS_INFO) << "WebRTC event log successfully stopped.";
-}
-
 void RtcEventLogImpl::StopLogging(std::function<void()> callback) {
+  RTC_LOG(LS_INFO) << "Stopping WebRTC event log.";
   RTC_DCHECK_RUN_ON(&logging_state_checker_);
   logging_state_started_ = false;
   task_queue_->PostTask([this, callback] {
@@ -136,8 +126,14 @@ void RtcEventLogImpl::StopLogging(std::function<void()> callback) {
     if (event_output_) {
       RTC_DCHECK(event_output_->IsActive());
       LogEventsFromMemoryToOutput();
+      if (event_output_) {
+        RTC_DCHECK(event_output_->IsActive());
+        const int64_t timestamp_us = rtc::TimeMicros();
+        event_output_->Write(event_encoder_->EncodeLogEnd(timestamp_us));
+        event_output_.reset();
+      }
     }
-    StopLoggingInternal();
+    RTC_LOG(LS_INFO) << "WebRTC event log successfully stopped.";
     callback();
   });
 }
@@ -249,26 +245,13 @@ void RtcEventLogImpl::WriteConfigsAndHistoryToOutput(
   }
 }
 
-void RtcEventLogImpl::StopOutput() {
-  event_output_.reset();
-}
-
-void RtcEventLogImpl::StopLoggingInternal() {
-  if (event_output_) {
-    RTC_DCHECK(event_output_->IsActive());
-    const int64_t timestamp_us = rtc::TimeMicros();
-    event_output_->Write(event_encoder_->EncodeLogEnd(timestamp_us));
-  }
-  StopOutput();
-}
-
 void RtcEventLogImpl::WriteToOutput(const std::string& output_string) {
   RTC_DCHECK(event_output_ && event_output_->IsActive());
   if (!event_output_->Write(output_string)) {
     RTC_LOG(LS_ERROR) << "Failed to write RTC event to output.";
     // The first failure closes the output.
     RTC_DCHECK(!event_output_->IsActive());
-    StopOutput();  // Clean-up.
+    event_output_.reset();  // Clean-up.
     return;
   }
 }

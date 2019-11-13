@@ -533,8 +533,7 @@ void RtcEventLogSession::WriteLog(EventCounts count,
 
     RTC_NOTREACHED();
   }
-
-  event_log->StopLogging();
+  event_log.reset();
   stop_time_us_ = rtc::TimeMicros();
 
   ASSERT_EQ(count.total_nonconfig_events(), static_cast<size_t>(0));
@@ -871,7 +870,7 @@ TEST_P(RtcEventLogCircularBufferTest, KeepsMostRecentEvents) {
       RtcEventLog::kImmediateOutput);
   fake_clock->AdvanceTime(TimeDelta::ms(10));
   int64_t stop_time_us = rtc::TimeMicros();
-  log_dumper->StopLogging();
+  log_dumper.reset();
 
   // Read the generated file from disk.
   ParsedRtcEventLog parsed_log;

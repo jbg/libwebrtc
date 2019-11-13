@@ -4394,8 +4394,14 @@ bool PeerConnection::StartRtcEventLog(
 }
 
 void PeerConnection::StopRtcEventLog() {
-  worker_thread()->Invoke<void>(
-      RTC_FROM_HERE, rtc::Bind(&PeerConnection::StopRtcEventLog_w, this));
+  rtc::Event stopped;
+  worker_thread()->PostTask(RTC_FROM_HERE, [this, &stopped] {
+    RTC_DCHECK_RUN_ON(worker_thread());
+    if (event_log_) {
+      event_log_->StopLogging([&stopped] { stopped.Set(); });
+    }
+  });
+  stopped.Wait(rtc::Event::kForever);
 }
 
 rtc::scoped_refptr<DtlsTransportInterface>
@@ -6182,13 +6188,6 @@ bool PeerConnection::StartRtcEventLog_w(
     return false;
   }
   return event_log_->StartLogging(std::move(output), output_period_ms);
-}
-
-void PeerConnection::StopRtcEventLog_w() {
-  RTC_DCHECK_RUN_ON(worker_thread());
-  if (event_log_) {
-    event_log_->StopLogging();
-  }
 }
 
 cricket::ChannelInterface* PeerConnection::GetChannel(
