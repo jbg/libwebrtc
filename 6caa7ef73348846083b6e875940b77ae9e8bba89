@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7f09054_268040ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-13T13:35:50Z",
+      "side": 1,
+      "message": "Please rephrase, to make the message self contained. \n\nIn particular \"allow\" is vague, and it\u0027s unclear what exactly is being functionally equivalent. \n\nFocus on the actual change, which if I get it right is argument types for the CreateTcpRoute factory method.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "6caa7ef73348846083b6e875940b77ae9e8bba89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
