@@ -42,7 +42,6 @@ class RtcEventLogImpl final : public RtcEventLog {
   // actually starting/stopping is the output of the log, not the log itself.
   bool StartLogging(std::unique_ptr<RtcEventLogOutput> output,
                     int64_t output_period_ms) override;
-  void StopLogging() override;
   void StopLogging(std::function<void()> callback) override;
 
   void Log(std::unique_ptr<RtcEvent> event) override;

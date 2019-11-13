@@ -67,10 +67,17 @@ RtcEventLogImpl::RtcEventLogImpl(RtcEventLog::EncodingType encoding_type,
               TaskQueueFactory::Priority::NORMAL))) {}
 
 RtcEventLogImpl::~RtcEventLogImpl() {
-  // If we're logging to the output, this will stop that. Blocking function.
+  // If we're logging to the output, this will stop that.
   if (logging_state_started_) {
-    logging_state_checker_.Detach();
-    StopLogging();
+    RTC_LOG(LS_INFO) << "Stopping WebRTC event log.";
+    // By making sure this is not executed on a task queue, we ensure it's not
+    // running on a thread that is shared with |task_queue_|, meaning the
+    // following Wait() will not block forever.
+    RTC_DCHECK(TaskQueueBase::Current() == nullptr);
+    rtc::Event output_stopped;
+    StopLogging([&output_stopped]() { output_stopped.Set(); });
+    output_stopped.Wait(rtc::Event::kForever);
+    RTC_LOG(LS_INFO) << "WebRTC event log successfully stopped.";
   }
 
   // We want to block on any executing task by invoking ~TaskQueue() before
@@ -110,22 +117,6 @@ bool RtcEventLogImpl::StartLogging(std::unique_ptr<RtcEventLogOutput> output,
   });
 
   return true;
-}
-
-void RtcEventLogImpl::StopLogging() {
-  RTC_LOG(LS_INFO) << "Stopping WebRTC event log.";
-
-  rtc::Event output_stopped;
-  StopLogging([&output_stopped]() { output_stopped.Set(); });
-
-  // By making sure StopLogging() is not executed on a task queue,
-  // we ensure it's not running on a thread that is shared with |task_queue_|,
-  // meaning the following Wait() will not block forever.
-  RTC_DCHECK(TaskQueueBase::Current() == nullptr);
-
-  output_stopped.Wait(rtc::Event::kForever);
-
-  RTC_LOG(LS_INFO) << "WebRTC event log successfully stopped.";
 }
 
 void RtcEventLogImpl::StopLogging(std::function<void()> callback) {

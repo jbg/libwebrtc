@@ -940,10 +940,6 @@ class PeerConnection : public PeerConnectionInternal,
   bool StartRtcEventLog_w(std::unique_ptr<RtcEventLogOutput> output,
                           int64_t output_period_ms);
 
-  // Stops recording an RTC event log.
-  // This function should only be called from the worker thread.
-  void StopRtcEventLog_w();
-
   // Ensures the configuration doesn't have any parameters with invalid values,
   // or values that conflict with other parameters.
   //
