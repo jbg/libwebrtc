@@ -26,7 +26,7 @@
 #include "modules/utility/include/process_thread.h"
 #include "modules/video_coding/frame_object.h"
 #include "modules/video_coding/include/video_coding_defines.h"
-#include "modules/video_coding/packet.h"
+#include "modules/video_coding/packet_buffer.h"
 #include "modules/video_coding/rtp_frame_reference_finder.h"
 #include "rtc_base/byte_buffer.h"
 #include "rtc_base/logging.h"
