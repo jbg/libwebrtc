@@ -59,24 +59,9 @@ PacketBuffer::InsertResult PacketBuffer::InsertPacket(VCMPacket* packet) {
   uint16_t seq_num = packet->seqNum;
   size_t index = seq_num % buffer_.size();
 
-  if (!first_packet_received_) {
-    first_seq_num_ = seq_num;
-    first_packet_received_ = true;
-  } else if (AheadOf(first_seq_num_, seq_num)) {
-    // If we have explicitly cleared past this packet then it's old,
-    // don't insert it, just silently ignore it.
-    if (is_cleared_to_first_seq_num_) {
-      delete[] packet->dataPtr;
-      packet->dataPtr = nullptr;
-      return result;
-    }
-
-    first_seq_num_ = seq_num;
-  }
-
   if (buffer_[index].used) {
     // Duplicate packet, just delete the payload.
-    if (buffer_[index].seq_num() == packet->seqNum) {
+    if (buffer_[index].seq_num() == seq_num) {
       delete[] packet->dataPtr;
       packet->dataPtr = nullptr;
       return result;
@@ -98,6 +83,21 @@ PacketBuffer::InsertResult PacketBuffer::InsertPacket(VCMPacket* packet) {
       result.buffer_cleared = true;
       return result;
     }
+  }
+
+  if (!first_packet_received_) {
+    first_seq_num_ = seq_num;
+    first_packet_received_ = true;
+  } else if (AheadOf(first_seq_num_, seq_num)) {
+    // If we have explicitly cleared past this packet then it's old,
+    // don't insert it, just silently ignore it.
+    if (is_cleared_to_first_seq_num_) {
+      delete[] packet->dataPtr;
+      packet->dataPtr = nullptr;
+      return result;
+    }
+
+    first_seq_num_ = seq_num;
   }
 
   StoredPacket& new_entry = buffer_[index];
