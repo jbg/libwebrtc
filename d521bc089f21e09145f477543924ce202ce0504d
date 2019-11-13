@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34ec8cfc_a587ac6c",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T17:43:28Z",
+      "side": 1,
+      "message": "Could we have shorter names? (it\u0027s nice when the trial plus values fits into one line)\nIf you want full word, we could do:\n\"smoothing\", \"min_fraction\", \"large\", \"small\"",
+      "range": {
+        "startLine": 55,
+        "startChar": 33,
+        "endLine": 55,
+        "endChar": 39
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5a67b22_aaacf3eb",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T17:43:28Z",
+      "side": 1,
+      "message": "!x.IsZero()",
+      "range": {
+        "startLine": 179,
+        "startChar": 40,
+        "endLine": 179,
+        "endChar": 61
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ddf3239_cbca708b",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T17:43:28Z",
+      "side": 1,
+      "message": "ignore_small_ maybe? I think this would be more readable that way, sure the name is slightly more ambiguous, but not by much, but since it\u0027s repeated so much we benefit in readability.",
+      "range": {
+        "startLine": 186,
+        "startChar": 13,
+        "endLine": 186,
+        "endChar": 34
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d64488c1_160172ed",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T17:43:28Z",
+      "side": 1,
+      "message": "Nit: Zero() (also below)",
+      "range": {
+        "startLine": 45,
+        "startChar": 41,
+        "endLine": 45,
+        "endChar": 49
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49288ac6_16b97351",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T17:43:28Z",
+      "side": 1,
+      "message": "_threshold?",
+      "range": {
+        "startLine": 45,
+        "startChar": 24,
+        "endLine": 45,
+        "endChar": 28
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e48ee543_cf90a889",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T17:43:28Z",
+      "side": 1,
+      "message": "small_packet_size? (or _threshold) Considering the fact that they are ignored is part of the struct/trial name, and we don\u0027t actually always ignore them.",
+      "range": {
+        "startLine": 46,
+        "startChar": 11,
+        "endLine": 46,
+        "endChar": 23
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ba786f4_8c4e45ba",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-13T17:43:28Z",
+      "side": 1,
+      "message": "Nit, skip parenthesis.",
+      "range": {
+        "startLine": 106,
+        "startChar": 34,
+        "endLine": 106,
+        "endChar": 35
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
