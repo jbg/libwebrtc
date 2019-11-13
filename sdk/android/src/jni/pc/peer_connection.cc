@@ -577,13 +577,6 @@ static void JNI_PeerConnection_SetRemoteDescription(
       observer, JavaToNativeSessionDescription(jni, j_sdp).release());
 }
 
-static void JNI_PeerConnection_SetAudioPlayout(
-    JNIEnv* jni,
-    const JavaParamRef<jobject>& j_pc,
-    jboolean playout) {
-  ExtractNativePC(jni, j_pc)->SetAudioPlayout(playout);
-}
-
 static void JNI_PeerConnection_SetAudioRecording(
     JNIEnv* jni,
     const JavaParamRef<jobject>& j_pc,

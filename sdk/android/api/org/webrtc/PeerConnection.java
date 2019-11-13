@@ -915,17 +915,6 @@ public class PeerConnection {
   }
 
   /**
-   * Enables/disables playout of received audio streams. Enabled by default.
-   *
-   * Note that even if playout is enabled, streams will only be played out if
-   * the appropriate SDP is also applied. The main purpose of this API is to
-   * be able to control the exact time when audio playout starts.
-   */
-  public void setAudioPlayout(boolean playout) {
-    nativeSetAudioPlayout(playout);
-  }
-
-  /**
    * Enables/disables recording of transmitted audio streams. Enabled by default.
    *
    * Note that even if recording is enabled, streams will only be recorded if
@@ -1290,7 +1279,6 @@ public class PeerConnection {
   private native void nativeCreateAnswer(SdpObserver observer, MediaConstraints constraints);
   private native void nativeSetLocalDescription(SdpObserver observer, SessionDescription sdp);
   private native void nativeSetRemoteDescription(SdpObserver observer, SessionDescription sdp);
-  private native void nativeSetAudioPlayout(boolean playout);
   private native void nativeSetAudioRecording(boolean recording);
   private native boolean nativeSetBitrate(Integer min, Integer current, Integer max);
   private native SignalingState nativeSignalingState();

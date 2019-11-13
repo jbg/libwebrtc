@@ -228,7 +228,6 @@ class PeerConnection : public PeerConnectionInternal,
 
   RTCError SetBitrate(const BitrateSettings& bitrate) override;
 
-  void SetAudioPlayout(bool playout) override;
   void SetAudioRecording(bool recording) override;
 
   rtc::scoped_refptr<DtlsTransportInterface> LookupDtlsTransportByMid(
