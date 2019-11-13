@@ -4321,18 +4321,6 @@ RTCError PeerConnection::SetBitrate(const BitrateSettings& bitrate) {
   return RTCError::OK();
 }
 
-void PeerConnection::SetAudioPlayout(bool playout) {
-  if (!worker_thread()->IsCurrent()) {
-    worker_thread()->Invoke<void>(
-        RTC_FROM_HERE,
-        rtc::Bind(&PeerConnection::SetAudioPlayout, this, playout));
-    return;
-  }
-  auto audio_state =
-      factory_->channel_manager()->media_engine()->voice().GetAudioState();
-  audio_state->SetPlayout(playout);
-}
-
 void PeerConnection::SetAudioRecording(bool recording) {
   if (!worker_thread()->IsCurrent()) {
     worker_thread()->Invoke<void>(
