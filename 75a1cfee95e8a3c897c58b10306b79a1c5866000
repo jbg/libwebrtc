@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c71c635e_489aebb2",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-11-13T14:11:41Z",
+      "side": 1,
+      "message": "Optional: is there any point in adding a DCHECK just before the return statement to make sure that we have incremented in_index and out_index to the end of their respective arrays?",
+      "range": {
+        "startLine": 260,
+        "startChar": 4,
+        "endLine": 260,
+        "endChar": 10
+      },
+      "revId": "75a1cfee95e8a3c897c58b10306b79a1c5866000",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
