@@ -22,6 +22,30 @@
       "revId": "dc80b4f1a44f39caf39d76d1341aa23baad01f3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0512617f_1ef2b9bf",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-13T06:44:46Z",
+      "side": 1,
+      "message": "the Flush has the side-effect of also running all invocations *before* the specified ID,\nright ? I.e it can execute arbitrary amount of work...",
+      "parentUuid": "6461096d_2133953c",
+      "range": {
+        "startLine": 1912,
+        "startChar": 5,
+        "endLine": 1913,
+        "endChar": 49
+      },
+      "revId": "dc80b4f1a44f39caf39d76d1341aa23baad01f3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
