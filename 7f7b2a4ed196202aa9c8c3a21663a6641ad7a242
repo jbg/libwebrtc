@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9367507c_71a03141",
+        "filename": "sdk/android/src/jni/android_video_track_source.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-11-13T13:05:50Z",
+      "side": 1,
+      "message": "Is there some benefit to exchange over store if we ignore the return value?",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 25
+      },
+      "revId": "7f7b2a4ed196202aa9c8c3a21663a6641ad7a242",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
