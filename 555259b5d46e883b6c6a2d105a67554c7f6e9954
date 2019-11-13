@@ -473,6 +473,30 @@
     },
     {
       "key": {
+        "uuid": "e8691b46_3868c70a",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-13T23:56:23Z",
+      "side": 1,
+      "message": "Here is an example you are talking about: https://www.onlinegdb.com/ByvTX8Qor and dctor is called properly without having it in derived class.",
+      "parentUuid": "6a7d3da3_5f307bb1",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 49
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46ea0774_4ea95b48",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
