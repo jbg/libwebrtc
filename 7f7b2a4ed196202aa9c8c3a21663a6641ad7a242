@@ -22,6 +22,30 @@
       "revId": "7f7b2a4ed196202aa9c8c3a21663a6641ad7a242",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4db0ea68_b112ea87",
+        "filename": "sdk/android/src/jni/android_video_track_source.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2019-11-13T13:08:25Z",
+      "side": 1,
+      "message": "No you are right, should be store.",
+      "parentUuid": "9367507c_71a03141",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 25
+      },
+      "revId": "7f7b2a4ed196202aa9c8c3a21663a6641ad7a242",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
