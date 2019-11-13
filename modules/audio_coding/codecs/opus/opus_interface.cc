@@ -375,7 +375,8 @@ int16_t WebRtcOpus_GetInDtx(OpusEncInst* inst) {
     return -1;
   }
   int32_t in_dtx;
-  if (ENCODER_CTL(inst, OPUS_GET_IN_DTX(&in_dtx)) == 0) {
+  if (ENCODER_CTL(inst,
+                  OPUS_GET_IN_DTX(&in_dtx)) == 0) {
     return in_dtx;
   } else {
     return -1;
