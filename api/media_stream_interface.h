@@ -175,7 +175,8 @@ class AudioTrackSinkInterface {
                       int bits_per_sample,
                       int sample_rate,
                       size_t number_of_channels,
-                      size_t number_of_frames) = 0;
+                      size_t number_of_frames,
+                      int64_t absolute_capture_timestamp_ms = -1) = 0;
 
  protected:
   virtual ~AudioTrackSinkInterface() {}

@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "api/array_view.h"
+#include "api/rtp_headers.h"
 
 namespace webrtc {
 
@@ -86,6 +87,9 @@ class MediaTransportEncodedAudioFrame final {
 
   int payload_type() const { return payload_type_; }
   FrameType frame_type() const { return frame_type_; }
+  const absl::optional<AbsoluteCaptureTime>& absolute_capture_time() const {
+    return absolute_capture_time_;
+  }
 
   rtc::ArrayView<const uint8_t> encoded_data() const { return encoded_data_; }
 
@@ -101,6 +105,8 @@ class MediaTransportEncodedAudioFrame final {
   FrameType frame_type_;
 
   int payload_type_;
+
+  absl::optional<AbsoluteCaptureTime> absolute_capture_time_;
 
   std::vector<uint8_t> encoded_data_;
 };
