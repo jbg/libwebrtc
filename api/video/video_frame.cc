@@ -60,6 +60,80 @@ bool VideoFrame::UpdateRect::IsEmpty() const {
   return width == 0 && height == 0;
 }
 
+void VideoFrame::UpdateRect::ScaleWithFrame(int frame_width,
+                                            int frame_height,
+                                            int crop_width,
+                                            int crop_height,
+                                            int scaled_width,
+                                            int scaled_height) {
+  RTC_DCHECK_GT(frame_width, 0);
+  RTC_DCHECK_GT(frame_height, 0);
+  offset_x -= (frame_width - crop_width) / 2;
+  if (offset_x < 0) {
+    width += offset_x;
+    offset_x = 0;
+  }
+  offset_y -= (frame_height - crop_height) / 2;
+  if (offset_y < 0) {
+    height += offset_y;
+    offset_y = 0;
+  }
+
+  // Lower corner is rounded down.
+  offset_x = offset_x * scaled_width / crop_width;
+  offset_y = offset_y * scaled_height / crop_height;
+  // Upper corner is rounded up.
+  width = (width * scaled_width + crop_width - 1) / crop_width;
+  height = (height * scaled_height + crop_height - 1) / crop_height;
+
+  // Round to full 2x2 blocks.
+  if (offset_x % 2) {
+    --offset_x;
+    ++width;
+  }
+  if (offset_y % 2) {
+    --offset_y;
+    ++height;
+  }
+  if (width % 2) {
+    ++width;
+  }
+  if (height % 2) {
+    ++height;
+  }
+
+  // Blow the update rect by 2 pixels in each direction to include any
+  // possible scaling artifacts.
+  if (scaled_width != crop_width || scaled_height != crop_height) {
+    if (offset_x > 0) {
+      offset_x -= 2;
+      width += 2;
+    }
+    if (offset_y > 0) {
+      offset_y -= 2;
+      height += 2;
+    }
+    width += 2;
+    height += 2;
+  }
+
+  // Ensure update rect is inside frame dimensions.
+
+  if (width < 0 || height < 0) {
+    width = 0;
+    height = 0;
+    offset_x = 0;
+    offset_y = 0;
+  }
+
+  if (offset_x + width > scaled_width) {
+    width = scaled_width - offset_x;
+  }
+  if (offset_y + height > scaled_height) {
+    height = scaled_height - offset_y;
+  }
+}
+
 VideoFrame::Builder::Builder() = default;
 
 VideoFrame::Builder::~Builder() = default;
