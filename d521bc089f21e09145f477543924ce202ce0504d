@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "71964eaf_62de69b6",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-14T09:04:23Z",
+      "side": 1,
+      "message": "Should these be there?",
+      "range": {
+        "startLine": 56,
+        "startChar": 66,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5a67b22_aaacf3eb",
         "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
         "patchSetId": 1
@@ -64,6 +87,29 @@
         "startChar": 13,
         "endLine": 186,
         "endChar": 34
+      },
+      "revId": "d521bc089f21e09145f477543924ce202ce0504d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa0d76b3_585efb50",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-14T09:04:23Z",
+      "side": 1,
+      "message": "This is equivalent to the typical and more compact: \nfloat is_packet_large \u003d packet_size \u003e\u003d ignore_small_packets_.large_packet_size;\nfraction_large_packets_ +\u003d ignore_small_packets_.smoothing_factor * (is_packet_large - fraction_large_packets_);",
+      "range": {
+        "startLine": 185,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 69
       },
       "revId": "d521bc089f21e09145f477543924ce202ce0504d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
