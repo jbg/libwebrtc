@@ -33,7 +33,11 @@ class FakeDtlsTransport : public DtlsTransportInternal {
       : ice_transport_(ice_transport),
         transport_name_(ice_transport->transport_name()),
         component_(ice_transport->component()),
-        dtls_fingerprint_("", nullptr) {
+        dtls_fingerprint_("", nullptr),
+        dtls_state_readable_(
+            std::make_unique<
+                webrtc::CallbackUnderlyingSource<DtlsTransportState>>(
+                &dtls_state_controller_)) {
     RTC_DCHECK(ice_transport_);
     ice_transport_->SignalReadPacket.connect(
         this, &FakeDtlsTransport::OnIceTransportReadPacket);
@@ -45,7 +49,11 @@ class FakeDtlsTransport : public DtlsTransportInternal {
       : owned_ice_transport_(std::move(ice)),
         transport_name_(owned_ice_transport_->transport_name()),
         component_(owned_ice_transport_->component()),
-        dtls_fingerprint_("", rtc::ArrayView<const uint8_t>()) {
+        dtls_fingerprint_("", rtc::ArrayView<const uint8_t>()),
+        dtls_state_readable_(
+            std::make_unique<
+                webrtc::CallbackUnderlyingSource<DtlsTransportState>>(
+                &dtls_state_controller_)) {
     ice_transport_ = owned_ice_transport_.get();
     ice_transport_->SignalReadPacket.connect(
         this, &FakeDtlsTransport::OnIceTransportReadPacket);
@@ -114,6 +122,7 @@ class FakeDtlsTransport : public DtlsTransportInternal {
         dtls_role_ = std::move(rtc::SSL_CLIENT);
       }
       SignalDtlsState(this, dtls_state_);
+      dtls_state_controller_->Enqueue(dtls_state_);
       ice_transport_->SetDestination(
           static_cast<FakeIceTransport*>(dest->ice_transport()), asymmetric);
     } else {
@@ -250,6 +259,10 @@ class FakeDtlsTransport : public DtlsTransportInternal {
     return ice_transport_->network_route();
   }
 
+  webrtc::ReadableStream<DtlsTransportState>* DtlsStateReadable() override {
+    return &dtls_state_readable_;
+  }
+
  private:
   void OnIceTransportReadPacket(PacketTransportInternal* ice_,
                                 const char* data,
@@ -301,6 +314,9 @@ class FakeDtlsTransport : public DtlsTransportInternal {
 
   bool receiving_ = false;
   bool writable_ = false;
+
+  webrtc::ReadableStream<DtlsTransportState> dtls_state_readable_;
+  webrtc::ReadableStreamController<DtlsTransportState>* dtls_state_controller_;
 };
 
 }  // namespace cricket

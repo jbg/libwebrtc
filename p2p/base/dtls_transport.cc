@@ -783,6 +783,7 @@ void DtlsTransport::set_dtls_state(DtlsTransportState state) {
                       << " to " << state;
   dtls_state_ = state;
   SignalDtlsState(this, state);
+  dtls_state_readable_.Enqueue(state);
 }
 
 void DtlsTransport::OnDtlsHandshakeError(rtc::SSLHandshakeError error) {
