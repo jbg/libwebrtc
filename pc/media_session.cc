@@ -1923,7 +1923,6 @@ void MediaSessionDescriptionFactory::GetRtpHdrExtsToOffer(
   MergeRtpHdrExts(video_rtp_header_extensions(), offer_video_extensions,
                   &all_regular_extensions, &all_encrypted_extensions,
                   &used_ids);
-
   // TODO(jbauch): Support adding encrypted header extensions to existing
   // sessions.
   if (enable_encrypted_rtp_header_extensions_ &&

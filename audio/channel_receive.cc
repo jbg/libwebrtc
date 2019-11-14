@@ -30,6 +30,7 @@
 #include "modules/rtp_rtcp/include/receive_statistics.h"
 #include "modules/rtp_rtcp/include/remote_ntp_time_estimator.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
+#include "modules/rtp_rtcp/source/absolute_capture_time_receiver.h"
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
@@ -280,6 +281,8 @@ class ChannelReceive : public ChannelReceiveInterface,
   webrtc::CryptoOptions crypto_options_;
 
   const bool use_standard_bytes_stats_;
+
+  webrtc::AbsoluteCaptureTimeReceiver absolute_capture_time_receiver_;
 };
 
 void ChannelReceive::OnReceivedPayloadData(
@@ -486,7 +489,8 @@ ChannelReceive::ChannelReceive(
       frame_decryptor_(frame_decryptor),
       crypto_options_(crypto_options),
       use_standard_bytes_stats_(
-          webrtc::field_trial::IsEnabled(kUseStandardBytesStats)) {
+          webrtc::field_trial::IsEnabled(kUseStandardBytesStats)),
+      absolute_capture_time_receiver_(clock) {
   // TODO(nisse): Use _moduleProcessThreadPtr instead?
   module_process_thread_checker_.Detach();
 
@@ -596,6 +600,22 @@ void ChannelReceive::OnRtpPacket(const RtpPacketReceived& packet) {
 
   RTPHeader header;
   packet_copy.GetHeader(&header);
+
+  // Interpolate absolute capture time rtp header extension.
+  header.extension
+      .absolute_capture_time = absolute_capture_time_receiver_.OnReceivePacket(
+      AbsoluteCaptureTimeReceiver::GetSource(header.ssrc, header.arrOfCSRCs),
+      header.timestamp,
+      // Here GetRtpTimestampRateHz mae produce incorrect results depending
+      // on the codec, as sample rate is not always equal rtp clock rate.
+      // For opus with 48000 it is fine, but GetRtpTimestampRateHz must be
+      // fixed. Otherwise sender/receiver interpolation might be not in sync
+      // and we will suffer from very subtle interpolation errors.
+      // For e.g. when sample rate is different from rtp clock rate look into
+      // G722 encoder:
+      // https://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_coding/codecs/g722/audio_encoder_g722.cc?l=57&rcl=60bd1aea3d6dc650264ddaeaa0b1f5bce19bb05a
+      rtc::saturated_cast<uint32_t>(GetRtpTimestampRateHz()),
+      header.extension.absolute_capture_time);
 
   ReceivePacket(packet_copy.data(), packet_copy.size(), header);
 }

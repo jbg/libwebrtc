@@ -85,6 +85,7 @@ class ChannelSendInterface {
   virtual void SetRTCP_CNAME(absl::string_view c_name) = 0;
   virtual void SetExtmapAllowMixed(bool extmap_allow_mixed) = 0;
   virtual void SetSendAudioLevelIndicationStatus(bool enable, int id) = 0;
+  virtual void SetAbsoluteCaptureTimeExtension(bool enable, int id) = 0;
   virtual void EnableSendTransportSequenceNumber(int id) = 0;
   virtual void RegisterSenderCongestionControlObjects(
       RtpTransportControllerSendInterface* transport,
