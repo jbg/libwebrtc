@@ -39,6 +39,30 @@
       "revId": "14f6902ee6277a41c45c96224b30152c97c06072",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "933bcd06_91b6ea29",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-14T01:08:04Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "c067ce0a_0c4ec86b",
+      "range": {
+        "startLine": 1296,
+        "startChar": 47,
+        "endLine": 1296,
+        "endChar": 69
+      },
+      "revId": "14f6902ee6277a41c45c96224b30152c97c06072",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
