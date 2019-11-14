@@ -141,6 +141,8 @@ class AudioFrame {
   // concealment, comfort noise generation, etc.
   RtpPacketInfos packet_infos_;
 
+  int64_t absolute_capture_timestamp_ms = 0;
+
  private:
   // A permanently zeroed out buffer to represent muted frames. This is a
   // header-only class, so the only way to avoid creating a separate empty

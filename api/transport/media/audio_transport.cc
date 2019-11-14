@@ -18,6 +18,7 @@
 #include "api/transport/media/audio_transport.h"
 
 #include <utility>
+#include "api/rtp_headers.h"
 
 namespace webrtc {
 

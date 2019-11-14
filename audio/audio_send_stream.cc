@@ -231,6 +231,8 @@ AudioSendStream::ExtensionIds AudioSendStream::FindExtensionIds(
       ids.audio_level = extension.id;
     } else if (extension.uri == RtpExtension::kAbsSendTimeUri) {
       ids.abs_send_time = extension.id;
+    } else if (extension.uri == RtpExtension::kAbsoluteCaptureTimeUri) {
+      ids.absolute_capture_time = extension.id;
     } else if (extension.uri == RtpExtension::kTransportSequenceNumberUri) {
       ids.transport_sequence_number = extension.id;
     } else if (extension.uri == RtpExtension::kMidUri) {
@@ -299,6 +301,12 @@ void AudioSendStream::ConfigureStream(
       channel_send_->GetRtpRtcp()->RegisterSendRtpHeaderExtension(
           kRtpExtensionAbsoluteSendTime, new_ids.abs_send_time);
     }
+  }
+
+  if (first_time ||
+      new_ids.absolute_capture_time != old_ids.absolute_capture_time) {
+    channel_send_->SetAbsoluteCaptureTimeExtension(
+        new_ids.absolute_capture_time != 0, new_ids.absolute_capture_time);
   }
 
   bool transport_seq_num_id_changed =

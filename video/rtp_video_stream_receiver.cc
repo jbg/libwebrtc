@@ -23,6 +23,7 @@
 #include "modules/rtp_rtcp/include/receive_statistics.h"
 #include "modules/rtp_rtcp/include/rtp_cvo.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/include/ulpfec_receiver.h"
 #include "modules/rtp_rtcp/source/rtp_format.h"
 #include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor_extension.h"
@@ -217,7 +218,8 @@ RtpVideoStreamReceiver::RtpVideoStreamReceiver(
                      PacketBufferMaxSize(),
                      this),
       has_received_frame_(false),
-      frames_decryptable_(false) {
+      frames_decryptable_(false),
+      absolute_capture_time_receiver_(clock) {
   constexpr bool remb_candidate = true;
   if (packet_router_)
     packet_router_->AddReceiveRtpModule(rtp_rtcp_.get(), remb_candidate);
@@ -683,6 +685,19 @@ void RtpVideoStreamReceiver::ReceivePacket(const RtpPacketReceived& packet) {
 
   RTPHeader rtp_header;
   packet.GetHeader(&rtp_header);
+
+  rtp_header.extension
+      .absolute_capture_time = absolute_capture_time_receiver_.OnReceivePacket(
+      AbsoluteCaptureTimeReceiver::GetSource(rtp_header.ssrc,
+                                             rtp_header.arrOfCSRCs),
+      rtp_header.timestamp,
+      // Here GetRtpTimestampRateHz maybe produce incorrect results depending
+      // on the codec, as sample rate is not always equal rtp clock rate.
+      // For opus with 48000 it is fine, but GetRtpTimestampRateHz must be
+      // fixed. Otherwise sender/receiver interpolation might be not in sync
+      // and we will suffer from very subtle interpolation errors.
+      kVideoPayloadTypeFrequency, rtp_header.extension.absolute_capture_time);
+
   RTPVideoHeader video_header = parsed_payload.video_header();
   video_header.rotation = kVideoRotation_0;
   video_header.content_type = VideoContentType::UNSPECIFIED;
