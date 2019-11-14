@@ -30,6 +30,7 @@
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "modules/rtp_rtcp/source/absolute_capture_time_receiver.h"
 #include "modules/video_coding/h264_sps_pps_tracker.h"
 #include "modules/video_coding/loss_notification_controller.h"
 #include "modules/video_coding/packet_buffer.h"
@@ -317,6 +318,8 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
       RTC_PT_GUARDED_BY(network_tc_);
   std::atomic<bool> frames_decryptable_;
   absl::optional<ColorSpace> last_color_space_;
+
+  AbsoluteCaptureTimeReceiver absolute_capture_time_receiver_;
 
   int64_t last_completed_picture_id_ = 0;
 };

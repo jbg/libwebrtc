@@ -20,6 +20,7 @@
 #include "api/audio_codecs/audio_decoder_factory.h"
 #include "api/audio_codecs/audio_encoder.h"
 #include "api/function_view.h"
+#include "api/rtp_headers.h"
 #include "modules/audio_coding/include/audio_coding_module_typedefs.h"
 #include "modules/audio_coding/neteq/include/neteq.h"
 #include "system_wrappers/include/clock.h"
@@ -42,6 +43,8 @@ class AudioPacketizationCallback {
   virtual int32_t SendData(AudioFrameType frame_type,
                            uint8_t payload_type,
                            uint32_t timestamp,
+                           int64_t absolute_capture_timestamp_ms,
+                           uint32_t rtp_clock_frequency,
                            const uint8_t* payload_data,
                            size_t payload_len_bytes) = 0;
 };
