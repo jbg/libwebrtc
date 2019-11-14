@@ -566,6 +566,30 @@
     },
     {
       "key": {
+        "uuid": "a070175d_2d716f7b",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-14T17:56:10Z",
+      "side": 1,
+      "message": "Perfect - thanks!",
+      "parentUuid": "b5c04cdd_ccc25460",
+      "range": {
+        "startLine": 148,
+        "startChar": 18,
+        "endLine": 148,
+        "endChar": 37
+      },
+      "revId": "4b8e0c8f69194f9641d7f3da35ff04c4691da50b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff472142_f4b3e3ec",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 14

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "777baf81_a883d99d",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-14T17:56:10Z",
+      "side": 1,
+      "message": "symbol, though we should say \"character\" here - Windows uses UTF-16 so a single symbol (or \"code point\") may be expressed by _two_ 16-bit _characters_.",
+      "range": {
+        "startLine": 150,
+        "startChar": 18,
+        "endLine": 150,
+        "endChar": 25
+      },
+      "revId": "6ca3ff95e9facf74b2e59e4d16ba7fb086d4a25c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "244edac4_ade31a43",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-14T17:56:10Z",
+      "side": 1,
+      "message": "This explanation is great - thanks for adding it.  I\u0027d recommend writing the buffer-sizing as:\n\n  buffer[kScreenClassNameLength + 2];\n\nto make it clear that we\u0027re taking the length of the name, and adding space for two characters, otherwise it is easy for the +1 to look like it\u0027s just \"space for null\".\n\nThat said, I think this may need to be kScreenClassNameLength + 3, to be safe, since the next code-point in the name may actually be the first character of a two-character code-point - I\u0027m not sure what the API will do if you only give it space for half of a two-character code-point!",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 66
+      },
+      "revId": "6ca3ff95e9facf74b2e59e4d16ba7fb086d4a25c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

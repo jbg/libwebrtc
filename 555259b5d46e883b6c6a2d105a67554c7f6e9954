@@ -497,6 +497,30 @@
     },
     {
       "key": {
+        "uuid": "56015022_75bd8b52",
+        "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-11-14T17:56:10Z",
+      "side": 1,
+      "message": "Agreed, but we define the default destructor as an override/final in derived classes, so that we don\u0027t rely on it being implicitly virtual because of a base class.",
+      "parentUuid": "e8691b46_3868c70a",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 49
+      },
+      "revId": "555259b5d46e883b6c6a2d105a67554c7f6e9954",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46ea0774_4ea95b48",
         "filename": "modules/desktop_capture/win/full_screen_win_application_handler.cc",
         "patchSetId": 13
