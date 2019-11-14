@@ -86,6 +86,9 @@ class NoOpDtlsTransport : public DtlsTransportInternal {
   const std::string& transport_name() const override;
   bool writable() const override;
   bool receiving() const override;
+  webrtc::ReadableStream<DtlsTransportState>* DtlsStateReadable() override {
+    return nullptr;
+  }
 
  private:
   void OnReadyToSend(rtc::PacketTransportInternal* transport);
