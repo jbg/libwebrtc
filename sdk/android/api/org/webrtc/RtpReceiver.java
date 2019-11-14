@@ -39,11 +39,6 @@ public class RtpReceiver {
     return cachedTrack;
   }
 
-  public boolean setParameters(@Nullable RtpParameters parameters) {
-    checkRtpReceiverExists();
-    return parameters == null ? false : nativeSetParameters(nativeRtpReceiver, parameters);
-  }
-
   public RtpParameters getParameters() {
     checkRtpReceiverExists();
     return nativeGetParameters(nativeRtpReceiver);
