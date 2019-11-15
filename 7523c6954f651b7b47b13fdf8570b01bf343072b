@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c01620e6_a080dd88",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-15T13:08:02Z",
+      "side": 1,
+      "message": "nit: double called is large depending on implicit cast from bool, IMO it\u0027s more readable to do explicit conversion from bool (is it even guaranteed to be \u003d\u003d 1?):\ndouble is_large \u003d packet_size \u003e\u003d ignore_small_.large_threshold ? 1:0;\n\nor better:\n\nbool is_large \u003d ...;\n\n    fraction_large_packets_ +\u003d\n        ignore_small_.smoothing_factor * ((is_large?1:0) - fraction_large_packets_);",
+      "range": {
+        "startLine": 183,
+        "startChar": 11,
+        "endLine": 183,
+        "endChar": 19
+      },
+      "revId": "7523c6954f651b7b47b13fdf8570b01bf343072b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3471cf89_41fdb952",
+        "filename": "modules/congestion_controller/goog_cc/delay_based_bwe.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-15T13:08:02Z",
+      "side": 1,
+      "message": "nit: redundant ()",
+      "range": {
+        "startLine": 183,
+        "startChar": 67,
+        "endLine": 183,
+        "endChar": 68
+      },
+      "revId": "7523c6954f651b7b47b13fdf8570b01bf343072b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
