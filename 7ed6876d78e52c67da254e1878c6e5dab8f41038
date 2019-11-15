@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "9f48487a_ea325729",
+        "filename": "api/rtc_event_log/rtc_event_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2019-11-15T11:47:57Z",
+      "side": 1,
+      "message": "That would break any existing code that does not implement this.",
+      "parentUuid": "124c1513_d2a2c984",
+      "range": {
+        "startLine": 49,
+        "startChar": 15,
+        "endLine": 49,
+        "endChar": 26
+      },
+      "revId": "7ed6876d78e52c67da254e1878c6e5dab8f41038",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6f28ff3_75ea76cd",
         "filename": "logging/rtc_event_log/rtc_event_log_impl.cc",
         "patchSetId": 1
