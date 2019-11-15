@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d88c14f6_5cfaabfc",
+        "filename": "p2p/base/default_ice_transport_factory.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-11-15T19:20:55Z",
+      "side": 1,
+      "message": "Just use an rtc::ThreadChecker which will capture the network thread automatically.",
+      "revId": "f09e80aebf6563f7743bef2ac0144b9cbe4a0444",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
