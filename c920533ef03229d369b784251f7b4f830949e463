@@ -141,6 +141,30 @@
       "revId": "c920533ef03229d369b784251f7b4f830949e463",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e23696dd_c8bf5518",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-11-18T16:16:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c9175d1_22a0abc5",
+      "range": {
+        "startLine": 319,
+        "startChar": 24,
+        "endLine": 319,
+        "endChar": 73
+      },
+      "revId": "c920533ef03229d369b784251f7b4f830949e463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
