@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7e7450c_c3979aa8",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "DCHECK |crop_width| and |crop_height| too?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 33
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff4125d8_a6958fba",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "width \u003c 0 and height \u003c 0 can\u0027t happen, right?",
+      "range": {
+        "startLine": 121,
+        "startChar": 6,
+        "endLine": 121,
+        "endChar": 31
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eab59dc_15acc129",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "This considers two empty rectangles (zero width or height) different of offset is different.\n\nDon\u0027t know if that matters, but if it does, probably worth a comment.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e1663e4_684a122a",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "Prefer \"expanded\".\n\nAnd 2 pixels seem to depend on the scaling mode. Is it really true for all scaling modes we use?",
+      "range": {
+        "startLine": 62,
+        "startChar": 59,
+        "endLine": 62,
+        "endChar": 66
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d18e59aa_54caa752",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "I don\u0027t get this, clarify?",
+      "range": {
+        "startLine": 62,
+        "startChar": 22,
+        "endLine": 62,
+        "endChar": 35
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e8db685_2facdbe9",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "Spelling",
+      "range": {
+        "startLine": 63,
+        "startChar": 37,
+        "endLine": 63,
+        "endChar": 47
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f59fe6ce_44484e1b",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "Maybe delete; if I\u0027m not missing something, it just says that identical inputs give identical outputs.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 25
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37b765de_2ee1dae1",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "Can you make it more functional-style, with a const method returning the new UpdateRect?\n\nWould it make sense with separate methods for crop and scale?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 23
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00915533_b29ca91d",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T11:18:52Z",
+      "side": 1,
+      "message": "I don\u0027t get this. Update name?",
+      "range": {
+        "startLine": 652,
+        "startChar": 26,
+        "endLine": 652,
+        "endChar": 39
+      },
+      "revId": "0563d0b087f94038c2cb7916408c5ef8c1074aab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
