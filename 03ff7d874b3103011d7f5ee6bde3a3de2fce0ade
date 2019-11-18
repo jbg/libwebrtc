@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6b9d0506_ee643133",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T13:00:06Z",
+      "side": 1,
+      "message": "\u003e \u003eShould the function have the crop offsets as inputs? Now we seem to assume a center crop.\n\u003e \n\u003e This is the same as AdaptFrame, which produces dimensions for scaling:\n\u003e https://cs.chromium.org/chromium/src/third_party/webrtc/media/base/adapted_video_track_source.h?rcl\u003dfd0e32a87a4e6a9a6cfeb02fbdcddd6edf4ac9c8\u0026l\u003d52\n\u003e \n\u003e There\u0027re no offsets, just the cropped dimensions.\n\nI was thinking that the crop_x, crop_y outputs from AdaptFrame could/should be passed as inputs to this function.",
+      "parentUuid": "c84749be_5b3b7609",
+      "range": {
+        "startLine": 82,
+        "startChar": 10,
+        "endLine": 82,
+        "endChar": 18
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816bd95_01df4c55",
         "filename": "api/video/video_frame.cc",
         "patchSetId": 5
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "But it can happen during calculation above. Then this check takes care of it.\nDo you mean to add DCHECKS right after the if()? Seems too redundant.",
       "parentUuid": "d816bd95_01df4c55",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 25
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed01d5f2_5992ac12",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T13:00:06Z",
+      "side": 1,
+      "message": "Where can w or h be assigned \u003c 0 for valid inputs? On line 85? That\u0027s a bit subtle, maybe better to check at that point and return an empty rectangle early.\n\nThe rounding logic on lines 99-100 will not do correct rounding for negative values (although probably not causing any real breakage).\n\nAnd I was thinking the DCHECKs should go just before the if statement.",
+      "parentUuid": "cea7df40_e5685e02",
       "range": {
         "startLine": 140,
         "startChar": 0,
