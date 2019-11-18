@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39726560_682f8bfd",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T12:17:26Z",
+      "side": 1,
+      "message": "Should the function have the crop offsets as inputs? Now we seem to assume a center crop.\n\nAlso, an I420 center-crop would have to round the crop offsets to even. Should we do that here too? \n\nTo get 100% consistency between the UpdateRect and the cropped and scaled frame, one would need to pass UpdateRect to the function implementing the scaling, but I take it that\u0027s impractical?",
+      "range": {
+        "startLine": 82,
+        "startChar": 10,
+        "endLine": 82,
+        "endChar": 18
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d816bd95_01df4c55",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T12:17:26Z",
+      "side": 1,
+      "message": "If possible, I think it would be nice to enforce\n\nRTC_DCHECK_GE(w, 0);\nRTC_DCHECK_GE(h, 0);",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 25
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
