@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9d06b039_cf42cf3d",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-11-18T15:56:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f92036b8_b975cc68",
+      "range": {
+        "startLine": 379,
+        "startChar": 11,
+        "endLine": 379,
+        "endChar": 17
+      },
+      "revId": "c920533ef03229d369b784251f7b4f830949e463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92833791_62e32efa",
         "filename": "modules/audio_coding/codecs/opus/opus_interface.h",
         "patchSetId": 4
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Hmm, I did not think but copied from https://mf4.xiph.org/jenkins/view/opus/job/opus/ws/doc/html/group__opus__genericctls.html\n\n\"Returns whether the last encoded frame was either a comfort noise update during DTX or not encoded because of DTX.\"\n\nBut I am happy to rephrase it.",
       "parentUuid": "92833791_62e32efa",
+      "range": {
+        "startLine": 319,
+        "startChar": 24,
+        "endLine": 319,
+        "endChar": 73
+      },
+      "revId": "c920533ef03229d369b784251f7b4f830949e463",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c9175d1_22a0abc5",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2019-11-18T15:56:55Z",
+      "side": 1,
+      "message": "Suggest \"Last encoded frame was encoded with encoder not in DTX.\"",
+      "parentUuid": "220c7e81_aa5418a5",
       "range": {
         "startLine": 319,
         "startChar": 24,
