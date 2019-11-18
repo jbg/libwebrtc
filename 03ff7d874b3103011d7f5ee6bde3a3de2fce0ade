@@ -141,6 +141,30 @@
       "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcebc466_e3dc2bb5",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-18T13:28:49Z",
+      "side": 1,
+      "message": "Yes, lines 85, 91, 135 and 138 all can make w or h \u003c\u003d 0. I think having too many return points from the function will be more confusing.",
+      "parentUuid": "ed01d5f2_5992ac12",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 25
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
