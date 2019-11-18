@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "6d6e7b12_87a346f5",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T14:13:23Z",
+      "side": 1,
+      "message": "Sorry, intended this as an unresolved question. What do you think?",
+      "parentUuid": "6b9d0506_ee643133",
+      "range": {
+        "startLine": 82,
+        "startChar": 10,
+        "endLine": 82,
+        "endChar": 18
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d816bd95_01df4c55",
         "filename": "api/video/video_frame.cc",
         "patchSetId": 5
@@ -165,6 +189,30 @@
       "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bd9da95_a942317b",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-18T14:13:23Z",
+      "side": 1,
+      "message": "Ok, question of taste, I\u0027d guess. I\u0027d prefer to maintain w an h non-negative, and have early return empty; or goto empty; ... empty: return {0,0,0,0}. But I won\u0027t insist.\n\nMaybe add a comment somewhere making it clear that it\u0027s intentional that w or h become negative when the crop rectangle don\u0027t intersect the updated area?",
+      "parentUuid": "bcebc466_e3dc2bb5",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 25
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
