@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c84749be_5b3b7609",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-18T12:34:21Z",
+      "side": 1,
+      "message": "\u003eShould the function have the crop offsets as inputs? Now we seem to assume a center crop.\n\nThis is the same as AdaptFrame, which produces dimensions for scaling:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/media/base/adapted_video_track_source.h?rcl\u003dfd0e32a87a4e6a9a6cfeb02fbdcddd6edf4ac9c8\u0026l\u003d52\n\nThere\u0027re no offsets, just the cropped dimensions.\n\n\u003e Also, an I420 center-crop would have to round the crop offsets to even. Should we do that here too? \n\nThis is done right after scaling.\n\n\u003e To get 100% consistency between the UpdateRect and the cropped and scaled frame, one would need to pass UpdateRect to the function implementing the scaling, but I take it that\u0027s impractical?\n\nYes. Unfortunately we will need to keep that updated if we change scaling functions for frames.",
+      "parentUuid": "39726560_682f8bfd",
+      "range": {
+        "startLine": 82,
+        "startChar": 10,
+        "endLine": 82,
+        "endChar": 18
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d816bd95_01df4c55",
         "filename": "api/video/video_frame.cc",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2019-11-18T12:17:26Z",
       "side": 1,
       "message": "If possible, I think it would be nice to enforce\n\nRTC_DCHECK_GE(w, 0);\nRTC_DCHECK_GE(h, 0);",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 25
+      },
+      "revId": "03ff7d874b3103011d7f5ee6bde3a3de2fce0ade",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cea7df40_e5685e02",
+        "filename": "api/video/video_frame.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-18T12:34:21Z",
+      "side": 1,
+      "message": "But it can happen during calculation above. Then this check takes care of it.\nDo you mean to add DCHECKS right after the if()? Seems too redundant.",
+      "parentUuid": "d816bd95_01df4c55",
       "range": {
         "startLine": 140,
         "startChar": 0,
