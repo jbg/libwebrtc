@@ -33,6 +33,7 @@ constexpr double kDefaultTrendlineSmoothingCoeff = 0.9;
 constexpr double kDefaultTrendlineThresholdGain = 4.0;
 const char kBweWindowSizeInPacketsExperiment[] =
     "WebRTC-BweWindowSizeInPackets";
+const char kBweTrendlineCap[] = "WebRTC-Bwe-TrendlineCap";
 
 size_t ReadTrendlineFilterWindowSize(
     const WebRtcKeyValueConfig* key_value_config) {
@@ -77,6 +78,27 @@ absl::optional<double> LinearFitSlope(
   return numerator / denominator;
 }
 
+absl::optional<double> ComputeSlopeCap(
+    const std::deque<TrendlineEstimator::PacketTiming>& packets) {
+  RTC_DCHECK(packets.size() >= 15);
+  TrendlineEstimator::PacketTiming early = packets[0];
+  for (size_t i = 1; i < packets.size() / 3; i++) {
+    if (packets[i].raw_delay_ms < early.raw_delay_ms)
+      early = packets[i];
+  }
+  size_t last_third = 2 * packets.size() / 3;
+  TrendlineEstimator::PacketTiming late = packets[0];
+  for (size_t i = last_third; i < packets.size(); i++) {
+    if (packets[i].raw_delay_ms < late.raw_delay_ms)
+      late = packets[i];
+  }
+  if (late.arrival_time_ms - early.raw_delay_ms < 1) {
+    return absl::nullopt;
+  }
+  return (late.raw_delay_ms - early.raw_delay_ms) /
+         (late.arrival_time_ms - early.arrival_time_ms);
+}
+
 constexpr double kMaxAdaptOffsetMs = 15.0;
 constexpr double kOverUsingTimeThreshold = 10;
 constexpr int kMinNumDeltas = 60;
@@ -93,6 +115,8 @@ TrendlineEstimator::TrendlineEstimator(
                        : kDefaultTrendlineWindowSize),
       smoothing_coef_(kDefaultTrendlineSmoothingCoeff),
       threshold_gain_(kDefaultTrendlineThresholdGain),
+      enable_trendline_cap_(
+          key_value_config->Lookup(kBweTrendlineCap).find("Enabled") == 0),
       num_of_deltas_(0),
       first_arrival_time_ms_(-1),
       accumulated_delay_(0),
@@ -140,9 +164,10 @@ void TrendlineEstimator::UpdateTrendline(double recv_delta_ms,
                         smoothed_delay_);
 
   // Simple linear regression.
+
   delay_hist_.emplace_back(
       static_cast<double>(arrival_time_ms - first_arrival_time_ms_),
-      smoothed_delay_);
+      smoothed_delay_, accumulated_delay_);
   if (delay_hist_.size() > window_size_)
     delay_hist_.pop_front();
   double trend = prev_trend_;
@@ -153,6 +178,14 @@ void TrendlineEstimator::UpdateTrendline(double recv_delta_ms,
     //   trend == 0    ->  the delay does not change
     //   trend < 0     ->  the delay decreases, queues are being emptied
     trend = LinearFitSlope(delay_hist_).value_or(trend);
+    if (enable_trendline_cap_) {
+      absl::optional<double> cap = ComputeSlopeCap(delay_hist_);
+      // We only use the cap to filter out overuse detections, not
+      // to detect additional underuses.
+      if (trend >= 0 && cap.has_value() && trend > cap.value()) {
+        trend = cap.value();
+      }
+    }
   }
   BWE_TEST_LOGGING_PLOT(1, "trendline_slope", arrival_time_ms, trend);
 

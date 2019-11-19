@@ -50,11 +50,15 @@ class TrendlineEstimator : public DelayIncreaseDetectorInterface {
   BandwidthUsage State() const override;
 
   struct PacketTiming {
-    PacketTiming(double arrival_time_ms, double smoothed_delay_ms)
+    PacketTiming(double arrival_time_ms,
+                 double smoothed_delay_ms,
+                 double raw_delay_ms)
         : arrival_time_ms(arrival_time_ms),
-          smoothed_delay_ms(smoothed_delay_ms) {}
+          smoothed_delay_ms(smoothed_delay_ms),
+          raw_delay_ms(raw_delay_ms) {}
     double arrival_time_ms;
     double smoothed_delay_ms;
+    double raw_delay_ms;
   };
 
  private:
@@ -67,6 +71,7 @@ class TrendlineEstimator : public DelayIncreaseDetectorInterface {
   const size_t window_size_;
   const double smoothing_coef_;
   const double threshold_gain_;
+  const bool enable_trendline_cap_;
   // Used by the existing threshold.
   int num_of_deltas_;
   // Keep the arrival times small by using the change from the first packet.
