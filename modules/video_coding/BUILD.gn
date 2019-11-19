@@ -263,6 +263,8 @@ rtc_library("video_coding_utility") {
     "utility/frame_dropper.h",
     "utility/framerate_controller.cc",
     "utility/framerate_controller.h",
+    "utility/ivf_file_reader.cc",
+    "utility/ivf_file_reader.h",
     "utility/ivf_file_writer.cc",
     "utility/ivf_file_writer.h",
     "utility/quality_scaler.cc",
