@@ -45,16 +45,19 @@ BitrateEstimator::BitrateEstimator(const WebRtcKeyValueConfig* key_value_config)
       uncertainty_scale_("scale", 10.0),
       uncertainty_scale_in_alr_("scale_alr", 10.0),
       uncertainty_symmetry_cap_("symmetry_cap", DataRate::Zero()),
+      small_sample_threshold_("small_size", DataSize::Zero()),
+      small_sample_noise_scale_("small_scale", 1.0),
       estimate_floor_("floor", DataRate::Zero()),
       current_window_ms_(0),
       prev_time_ms_(-1),
       bitrate_estimate_kbps_(-1.0f),
       bitrate_estimate_var_(50.0f) {
   // E.g WebRTC-BweThroughputWindowConfig/initial_window_ms:350,window_ms:250/
-  ParseFieldTrial({&initial_window_ms_, &noninitial_window_ms_,
-                   &uncertainty_scale_, &uncertainty_scale_in_alr_,
-                   &uncertainty_symmetry_cap_, &estimate_floor_},
-                  key_value_config->Lookup(kBweThroughputWindowConfig));
+  ParseFieldTrial(
+      {&initial_window_ms_, &noninitial_window_ms_, &uncertainty_scale_,
+       &uncertainty_scale_in_alr_, &uncertainty_symmetry_cap_,
+       &small_sample_threshold_, &small_sample_noise_scale_, &estimate_floor_},
+      key_value_config->Lookup(kBweThroughputWindowConfig));
 }
 
 BitrateEstimator::~BitrateEstimator() = default;
@@ -88,6 +91,8 @@ void BitrateEstimator::Update(Timestamp at_time, DataSize amount, bool in_alr) {
       (bitrate_estimate_kbps_ +
        std::min(bitrate_sample_kbps,
                 uncertainty_symmetry_cap_.Get().kbps<float>()));
+  if (amount < small_sample_threshold_)
+    sample_uncertainty *= small_sample_noise_scale_;
 
   float sample_var = sample_uncertainty * sample_uncertainty;
   // Update a bayesian estimate of the rate, weighting it lower if the sample
