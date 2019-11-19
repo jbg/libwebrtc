@@ -36,10 +36,12 @@ LIB_TO_LICENSES_DICT = {
     'abseil-cpp': ['third_party/abseil-cpp/LICENSE'],
     'android_ndk': ['third_party/android_ndk/NOTICE'],
     'android_sdk': ['third_party/android_sdk/LICENSE'],
-    'auto': ['third_party/auto/src/LICENSE.txt'],
+    'auto': ['third_party/android_deps/libs/'
+             'com_google_auto_service_auto_service/LICENSE'],
     'bazel': ['third_party/bazel/LICENSE'],
     'boringssl': ['third_party/boringssl/src/LICENSE'],
-    'errorprone': ['third_party/errorprone/LICENSE'],
+    'errorprone': ['third_party/android_deps/libs/'
+                   'com_google_errorprone_error_prone_core/LICENSE'],
     'fiat': ['third_party/boringssl/src/third_party/fiat/LICENSE'],
     'guava': ['third_party/guava/LICENSE'],
     'ijar': ['third_party/ijar/LICENSE'],
