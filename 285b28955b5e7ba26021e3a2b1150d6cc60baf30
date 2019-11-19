@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89a5abf7_f576455d",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-19T15:51:17Z",
+      "side": 1,
+      "message": "I would add here initialization of RTP timestamp. All frames should have one:\n\nimage.SetTimestamp(static_cast\u003cuint32_t\u003e(90 * current_timestamp));",
+      "revId": "285b28955b5e7ba26021e3a2b1150d6cc60baf30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c10abba_62c702b3",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-19T15:51:17Z",
+      "side": 1,
+      "message": "It\u0027s safe to always set it. And currently you miss the case with vp9 screenshare, where some superframes can have only a single sl2 frame.",
+      "range": {
+        "startLine": 150,
+        "startChar": 2,
+        "endLine": 150,
+        "endChar": 31
+      },
+      "revId": "285b28955b5e7ba26021e3a2b1150d6cc60baf30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcccaa79_bd55c87e",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-19T15:51:17Z",
+      "side": 1,
+      "message": "This should be done for each layer.\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/video_coding/utility/ivf_file_writer.cc?q\u003divf_file_writer.cc\u0026sq\u003dpackage:chromium\u0026dr\u0026l\u003d207",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 157,
+        "endChar": 18
+      },
+      "revId": "285b28955b5e7ba26021e3a2b1150d6cc60baf30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1618baea_36956feb",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-19T15:51:17Z",
+      "side": 1,
+      "message": "+3",
+      "range": {
+        "startLine": 164,
+        "startChar": 54,
+        "endLine": 164,
+        "endChar": 55
+      },
+      "revId": "285b28955b5e7ba26021e3a2b1150d6cc60baf30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd09439e_25e4609e",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-19T15:51:17Z",
+      "side": 1,
+      "message": "+3",
+      "range": {
+        "startLine": 168,
+        "startChar": 54,
+        "endLine": 168,
+        "endChar": 55
+      },
+      "revId": "285b28955b5e7ba26021e3a2b1150d6cc60baf30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42823f62_164dc2dd",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-19T15:51:17Z",
+      "side": 1,
+      "message": "+3",
+      "range": {
+        "startLine": 172,
+        "startChar": 54,
+        "endLine": 172,
+        "endChar": 55
+      },
+      "revId": "285b28955b5e7ba26021e3a2b1150d6cc60baf30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
