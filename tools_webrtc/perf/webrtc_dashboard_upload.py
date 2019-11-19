@@ -29,34 +29,27 @@ import argparse
 import httplib2
 import json
 import sys
-import subprocess
 import zlib
 
 import histogram_util
 
 
-def _GenerateOauthToken():
-  args = ['luci-auth', 'token']
-  p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-  if p.wait() == 0:
-    output = p.stdout.read()
-    return output.strip()
-  else:
-    raise RuntimeError(
-        'Error generating authentication token.\nStdout: %s\nStderr:%s' %
-        (p.stdout.read(), p.stderr.read()))
-
-
-def _SendHistogramSetJson(url, histogram_json, oauth_token):
+def _SendHistogramSetJson(url, histogram_json, oauth_token_file):
   """Make a HTTP POST with the given JSON to the Performance Dashboard.
 
   Args:
     url: URL of Performance Dashboard instance, e.g.
         "https://chromeperf.appspot.com".
     histogram_json: a JSON object that contains the data to be sent.
-    oauth_token: An oauth token to use for authorization.
+    oauth_token_file: Optional path to file with OAuth token string to pass
+        to server. If specified, the request will be sent as authorised thus
+        not requiring sender IP to be whitelisted.
   """
-  headers = {'Authorization': 'Bearer %s' % oauth_token}
+  headers = {}
+  if oauth_token_file:
+    with open(oauth_token_file) as oauth_token_fd:
+      headers['Authorization'] = 'Bearer %s' % oauth_token_fd.read()
+
   serialized = json.dumps(histogram_json.AsDicts(), indent=4)
   data = zlib.compress(serialized)
 
@@ -85,6 +78,8 @@ def _LoadHistogramSetJson(options):
 
 def _CreateParser():
   parser = argparse.ArgumentParser()
+  parser.add_argument('--oauth-token-file',
+                      help='File with oauth token string to pass to server')
   parser.add_argument('--perf-dashboard-machine-group', required=True,
                       help='The "master" the bots are grouped under. This '
                            'string is the group in the the perf dashboard path '
@@ -122,9 +117,8 @@ def main(args):
     with options.output_json_file as output_file:
       json.dump(histogram_json.AsDicts(), output_file, indent=4)
 
-  oauth_token = _GenerateOauthToken()
   response, content = _SendHistogramSetJson(
-      options.dashboard_url, histogram_json, oauth_token)
+      options.dashboard_url, histogram_json, options.oauth_token_file)
 
   if response.status == 200:
     return 0
