@@ -41,6 +41,10 @@
 #include <dispatch/dispatch.h>
 #endif
 
+#if defined(WEBRTC_IOS)
+#include <mutex>
+#endif
+
 namespace rtc {
 
 // Locking methods (Enter, TryEnter, Leave)are const to permit protecting
@@ -98,13 +102,15 @@ class RTC_SCOPED_LOCKABLE CritScope {
 // A lock used to protect global variables. Do NOT use for other purposes.
 class RTC_LOCKABLE GlobalLock {
  public:
-  constexpr GlobalLock() : lock_acquired_(0) {}
-
   void Lock() RTC_EXCLUSIVE_LOCK_FUNCTION();
   void Unlock() RTC_UNLOCK_FUNCTION();
 
  private:
-  volatile int lock_acquired_;
+#ifdef WEBRTC_IOS
+  std::mutex mutex_;
+#else
+  volatile int lock_acquired_ = 0;
+#endif
 };
 
 // GlobalLockScope, for serializing execution through a scope.

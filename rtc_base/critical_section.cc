@@ -217,25 +217,31 @@ CritScope::~CritScope() {
 }
 
 void GlobalLock::Lock() {
-#if !defined(WEBRTC_WIN) && \
-    (!defined(WEBRTC_MAC) || RTC_USE_NATIVE_MUTEX_ON_MAC)
-  const struct timespec ts_null = {0};
-#endif
-
+#if defined(WEBRTC_IOS)
+  mutex_.lock();
+#elif defined(WEBRTC_WIN)
   while (AtomicOps::CompareAndSwap(&lock_acquired_, 0, 1)) {
-#if defined(WEBRTC_WIN)
     ::Sleep(0);
-#elif defined(WEBRTC_MAC) && !RTC_USE_NATIVE_MUTEX_ON_MAC
-    sched_yield();
-#else
-    nanosleep(&ts_null, nullptr);
-#endif
   }
+#elif defined(WEBRTC_MAC)
+  while (AtomicOps::CompareAndSwap(&lock_acquired_, 0, 1)) {
+    sched_yield();
+  }
+#else
+  while (AtomicOps::CompareAndSwap(&lock_acquired_, 0, 1)) {
+    constexpr struct timespec ts_null = {0};
+    nanosleep(&ts_null, nullptr);
+  }
+#endif
 }
 
 void GlobalLock::Unlock() {
+#if defined(WEBRTC_IOS)
+  mutex_.unlock();
+#else
   int old_value = AtomicOps::CompareAndSwap(&lock_acquired_, 1, 0);
   RTC_DCHECK_EQ(1, old_value) << "Unlock called without calling Lock first";
+#endif
 }
 
 GlobalLockScope::GlobalLockScope(GlobalLock* lock) : lock_(lock) {
