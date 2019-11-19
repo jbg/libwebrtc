@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "10958bfe_40cfca2b",
+        "filename": "p2p/base/basic_ice_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-19T08:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad61ab89_309aeef0",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3854cec2_8169641e",
         "filename": "p2p/base/basic_ice_controller.h",
         "patchSetId": 2
@@ -95,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7a5be655_23aa90d4",
+        "filename": "p2p/base/basic_ice_controller.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-19T08:17:40Z",
+      "side": 1,
+      "message": "Honghai is correct,\nthis is only a step...with the next patch\nthe \"IceController\" will have it\u0027s own copy of connections...\n\nHowever, I still have 3 functions.\nI think keeping them for now is by far the most simple solution...",
+      "parentUuid": "8269fd5d_a3b10122",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 38
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3c749a8_be52e2db",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 2
@@ -115,6 +163,30 @@
       "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad68b4b0_acef431c",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-19T08:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3c749a8_be52e2db",
+      "range": {
+        "startLine": 26,
+        "startChar": 36,
+        "endLine": 26,
+        "endChar": 38
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "fef03b44_8c1cd304",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-19T08:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb2a63f2_bc02248c",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 5
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a378c14_6ab6fd39",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 2
@@ -161,6 +257,30 @@
       "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b1a324b_523ab326",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-19T08:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a378c14_6ab6fd39",
+      "range": {
+        "startLine": 29,
+        "startChar": 71,
+        "endLine": 29,
+        "endChar": 77
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -211,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "32412be7_097b42a9",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-19T08:17:40Z",
+      "side": 1,
+      "message": "PTAL",
+      "parentUuid": "ad9ccd2b_fa5d42c9",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 71
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd38857c_15614318",
         "filename": "p2p/base/p2p_transport_channel.cc",
         "patchSetId": 2
@@ -231,6 +375,30 @@
       "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f25af686_c4eda28a",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2246,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-19T08:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd38857c_15614318",
+      "range": {
+        "startLine": 2246,
+        "startChar": 19,
+        "endLine": 2246,
+        "endChar": 29
+      },
+      "revId": "5389ae3f0c262479ebd499af08b2fdd00cd87d7b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
