@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "27b4c170_0c2fa380",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-20T11:28:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "427c11a6_befa600f",
+      "range": {
+        "startLine": 63,
+        "startChar": 37,
+        "endLine": 63,
+        "endChar": 78
+      },
+      "revId": "4238e5b4a25fa93e557151ea162de4f0a024ebb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95cea29f_b79d2158",
         "filename": "modules/video_coding/utility/ivf_file_reader.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-11-20T11:14:02Z",
       "side": 1,
       "message": "nit: maybe combine these with || for readability.",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 122,
+        "endChar": 3
+      },
+      "revId": "4238e5b4a25fa93e557151ea162de4f0a024ebb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6921e78_b52fb746",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-20T11:28:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95cea29f_b79d2158",
       "range": {
         "startLine": 117,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ddfbd1f3_138242d3",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-20T11:28:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83bebb75_98b7a8f0",
+      "range": {
+        "startLine": 126,
+        "startChar": 30,
+        "endLine": 126,
+        "endChar": 48
+      },
+      "revId": "4238e5b4a25fa93e557151ea162de4f0a024ebb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7bd86cfb_fc89f646",
         "filename": "modules/video_coding/utility/ivf_file_reader.cc",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "238bc81c_7e3ab07d",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-20T11:28:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bd86cfb_fc89f646",
+      "range": {
+        "startLine": 131,
+        "startChar": 11,
+        "endLine": 131,
+        "endChar": 60
+      },
+      "revId": "4238e5b4a25fa93e557151ea162de4f0a024ebb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d173e205_c241f692",
         "filename": "modules/video_coding/utility/ivf_file_reader.cc",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2019-11-20T11:14:02Z",
       "side": 1,
       "message": "nit: may output unreadable characters to the log.",
+      "range": {
+        "startLine": 196,
+        "startChar": 27,
+        "endLine": 196,
+        "endChar": 76
+      },
+      "revId": "4238e5b4a25fa93e557151ea162de4f0a024ebb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39c4371a_6ab5ad42",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-20T11:28:49Z",
+      "side": 1,
+      "message": "Can, but at least it will give some insight on what is there....",
+      "parentUuid": "d173e205_c241f692",
       "range": {
         "startLine": 196,
         "startChar": 27,
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "eee704d8_c25b10ab",
+        "filename": "modules/video_coding/utility/ivf_file_reader.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-20T11:28:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b91474d_1d2640cf",
+      "range": {
+        "startLine": 219,
+        "startChar": 24,
+        "endLine": 219,
+        "endChar": 25
+      },
+      "revId": "4238e5b4a25fa93e557151ea162de4f0a024ebb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65448330_e1a3f7e3",
         "filename": "modules/video_coding/utility/ivf_file_reader_unittest.cc",
         "patchSetId": 2
@@ -151,6 +295,30 @@
       "writtenOn": "2019-11-20T11:14:02Z",
       "side": 1,
       "message": "Nit:\nThis could be EXPECT here and below in a lot of places.\n\nGenerally speaking, ASSERT_* is used if wrong value means that further checks are impossible.\nEXPECT_* is preferred.",
+      "range": {
+        "startLine": 89,
+        "startChar": 6,
+        "endLine": 89,
+        "endChar": 15
+      },
+      "revId": "4238e5b4a25fa93e557151ea162de4f0a024ebb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfca3872_51f82200",
+        "filename": "modules/video_coding/utility/ivf_file_reader_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-20T11:28:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65448330_e1a3f7e3",
       "range": {
         "startLine": 89,
         "startChar": 6,
