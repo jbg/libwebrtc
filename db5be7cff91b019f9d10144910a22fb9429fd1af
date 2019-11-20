@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "100e81b7_f755bbe0",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "no, it also includes obu_size field.\nlet me do other way around and include header into the std::array below.",
+      "parentUuid": "b438b503_94cfe3ab",
+      "range": {
+        "startLine": 139,
+        "startChar": 9,
+        "endLine": 139,
+        "endChar": 20
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8376f1b_e670f442",
         "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c2943e60_ea2f8cf1",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8376f1b_e670f442",
+      "range": {
+        "startLine": 143,
+        "startChar": 2,
+        "endLine": 143,
+        "endChar": 9
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c7ab6d9_1413b06f",
         "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2019-11-20T16:30:03Z",
       "side": 1,
       "message": "kObuSizePresentBit",
+      "range": {
+        "startLine": 155,
+        "startChar": 18,
+        "endLine": 155,
+        "endChar": 32
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4a23665_d55ce0d0",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "in av1 spec this bit is read into \u0027obu_has_size_field\u0027 variable.\nI think it is better to keep name closer to one in spec.",
+      "parentUuid": "5c7ab6d9_1413b06f",
       "range": {
         "startLine": 155,
         "startChar": 18,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4a22134b_6c9abae6",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f68cca34_5e4474f5",
+      "range": {
+        "startLine": 191,
+        "startChar": 69,
+        "endLine": 191,
+        "endChar": 75
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "373fd895_93dc97e8",
         "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
         "patchSetId": 3
@@ -114,6 +210,30 @@
       "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae9f8dd8_faa88154",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "|continues_obu| doesn\u0027t imply presence of a fragment_size, these two properties are independent.\nsimplest example is Test.AssembleFrameFromTwoPacketsWithOneObu:\n2nd payload continues previous OBU, but since W\u003d1, fragment_size is not signaled explicitly.\n\nThere are also corner cases (discovered by fuzzer) when packet has just the aggregation header.\nThose are technically valid (as long as W\u003d1) and depending on Z and Y flags are not noop.\nI can also imagine a packetizer that has semi-valid reason to send such a packet.\n\nI\u0027ve instead rewrite the code and pull out payload.Length() \u003d\u003d 0 as special case.\nas well as added two unit tests to cover the scenario. (in addition to future fuzzer that can only check we do not crash in such cases, but can\u0027t check correctness)",
+      "parentUuid": "373fd895_93dc97e8",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 64
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "add65ee3_0c0892f3",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7676066_6eefc684",
+      "range": {
+        "startLine": 214,
+        "startChar": 42,
+        "endLine": 214,
+        "endChar": 48
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8964a192_b04aa8c3",
         "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
         "patchSetId": 3
@@ -160,6 +304,30 @@
       "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fd2fb18_aaa65e16",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8964a192_b04aa8c3",
+      "range": {
+        "startLine": 262,
+        "startChar": 32,
+        "endLine": 262,
+        "endChar": 35
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "e6df8645_b614a0e1",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cc279cf_075351cf",
+      "range": {
+        "startLine": 283,
+        "startChar": 13,
+        "endLine": 283,
+        "endChar": 26
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65191084_2eb64645",
         "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
         "patchSetId": 3
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "cdd25e32_3435d404",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "size_of_obu_size_bytes?",
+      "parentUuid": "65191084_2eb64645",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 284,
+        "endChar": 17
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cca12b3_afc81235",
         "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
         "patchSetId": 3
@@ -220,6 +436,30 @@
       "writtenOn": "2019-11-20T16:30:03Z",
       "side": 1,
       "message": "I don\u0027t get this comment...",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 13
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e45ee94_647af3ac",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "rewrote it. Is it better? is it needed?",
+      "parentUuid": "5cca12b3_afc81235",
       "range": {
         "startLine": 306,
         "startChar": 0,
@@ -252,6 +492,30 @@
       "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67b14069_75a51951",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T17:34:35Z",
+      "side": 1,
+      "message": "I merge obu_header and obu_size during preprocessing now, so this variable is gone and this function become much simpler.",
+      "parentUuid": "aec5fd79_13043dfb",
+      "range": {
+        "startLine": 319,
+        "startChar": 6,
+        "endLine": 319,
+        "endChar": 15
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
