@@ -178,6 +178,7 @@ int WebRtcOpus_Encode(OpusEncInst* inst,
     // Indicates DTX since the packet has nothing but a header. In principle,
     // there is no need to send this packet. However, we do transmit the first
     // occurrence to let the decoder know that the encoder enters DTX mode.
+    RTC_CHECK(WebRtcOpus_GetInDtx(inst) == 1) << inst->channels;
     if (inst->in_dtx_mode) {
       return 0;
     } else {
@@ -375,7 +376,8 @@ int32_t WebRtcOpus_GetInDtx(OpusEncInst* inst) {
     return -1;
   }
   int32_t in_dtx;
-  if (ENCODER_CTL(inst, OPUS_GET_IN_DTX(&in_dtx)) == 0) {
+  if (ENCODER_CTL(inst,
+                  OPUS_GET_IN_DTX(&in_dtx)) == 0) {
     return in_dtx;
   } else {
     return -1;
