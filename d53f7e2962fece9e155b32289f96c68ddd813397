@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dd874ec_6aff3066",
+        "filename": "modules/pacing/round_robin_packet_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-20T10:52:14Z",
+      "side": 1,
+      "message": "Slightly weird, but I get that you don\u0027t want to call IsEnabled for every packet that is enqueued.",
+      "range": {
+        "startLine": 76,
+        "startChar": 51,
+        "endLine": 76,
+        "endChar": 70
+      },
+      "revId": "d53f7e2962fece9e155b32289f96c68ddd813397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2e7dc06_79b44671",
+        "filename": "modules/pacing/round_robin_packet_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-20T10:52:14Z",
+      "side": 1,
+      "message": "Some minor opt would be to take the |queued_packet| by reference, save the raw RtpPacketToSend pointer to a local variable and then pop the packet just before returning.",
+      "range": {
+        "startLine": 181,
+        "startChar": 2,
+        "endLine": 181,
+        "endChar": 8
+      },
+      "revId": "d53f7e2962fece9e155b32289f96c68ddd813397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
