@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dacf5fd5_2d3c3848",
+        "filename": "p2p/base/basic_ice_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-20T08:47:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdd9a229_d33c2674",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8d0d2b4_4a2d556a",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbec3a80_5e84041f",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-20T08:47:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8d0d2b4_4a2d556a",
+      "range": {
+        "startLine": 59,
+        "startChar": 71,
+        "endLine": 59,
+        "endChar": 77
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "908fcba9_4749d7e0",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-20T08:47:17Z",
+      "side": 1,
+      "message": "I added a class comment about current ownership model.",
+      "parentUuid": "5ac9faf3_c0adf172",
+      "range": {
+        "startLine": 64,
+        "startChar": 25,
+        "endLine": 64,
+        "endChar": 30
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13c7d8fb_3693530d",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 5
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "c1bc0bb3_b322fccb",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-20T08:47:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13c7d8fb_3693530d",
+      "range": {
+        "startLine": 67,
+        "startChar": 61,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5bba90b_52646310",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 5
@@ -114,6 +210,30 @@
       "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "595db4b4_80f3e6c2",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-20T08:47:17Z",
+      "side": 1,
+      "message": "BasicIceController can\u0027t call Prune...since it only have a const pointer to a Connection.\ncomment added to interface.",
+      "parentUuid": "b5bba90b_52646310",
+      "range": {
+        "startLine": 95,
+        "startChar": 22,
+        "endLine": 95,
+        "endChar": 27
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
