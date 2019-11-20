@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97f1b45c_d5c8897f",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-20T12:59:29Z",
+      "side": 1,
+      "message": "In release, the DCHECK above will not fire and this will crash if called on empty vector.\nSuggest early nullopt return if packets.empty().",
+      "range": {
+        "startLine": 84,
+        "startChar": 42,
+        "endLine": 84,
+        "endChar": 54
+      },
+      "revId": "b67979e10c8211d8f694adf5bbdb9be893a5dfa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1bed462_861a0a6d",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-20T12:59:29Z",
+      "side": 1,
+      "message": "++i",
+      "range": {
+        "startLine": 85,
+        "startChar": 45,
+        "endLine": 85,
+        "endChar": 48
+      },
+      "revId": "b67979e10c8211d8f694adf5bbdb9be893a5dfa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f19974c0_d2ec256f",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-20T12:59:29Z",
+      "side": 1,
+      "message": "packets.back() or packets[last_third]?",
+      "range": {
+        "startLine": 90,
+        "startChar": 42,
+        "endLine": 90,
+        "endChar": 53
+      },
+      "revId": "b67979e10c8211d8f694adf5bbdb9be893a5dfa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "710f5a98_0c8a5f43",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-20T12:59:29Z",
+      "side": 1,
+      "message": "++i",
+      "range": {
+        "startLine": 91,
+        "startChar": 50,
+        "endLine": 91,
+        "endChar": 53
+      },
+      "revId": "b67979e10c8211d8f694adf5bbdb9be893a5dfa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26f231ee_a5fd8ecd",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-20T12:59:29Z",
+      "side": 1,
+      "message": "This looks wrong, comparing absolute time to a delay. You mean \nlate.arrival_time_ms \u003c\u003d early.arrival_time_ms\nto avoid div 0 below?",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 51
+      },
+      "revId": "b67979e10c8211d8f694adf5bbdb9be893a5dfa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48530672_dfd6ce55",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-20T12:59:29Z",
+      "side": 1,
+      "message": "Could simply scale this by some double parameter, to have a handle on sensitivity.",
+      "range": {
+        "startLine": 98,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 56
+      },
+      "revId": "b67979e10c8211d8f694adf5bbdb9be893a5dfa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2f07490_27bbbc52",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-20T12:59:29Z",
+      "side": 1,
+      "message": "nit: delete blank line",
+      "revId": "b67979e10c8211d8f694adf5bbdb9be893a5dfa0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
