@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "993ba3a4_d82d9f0d",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T09:27:44Z",
+      "side": 1,
+      "message": "may be insert it next to AudioLevel rather than at the bottom.",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 34
+      },
+      "revId": "1cf5ae69e96b7671689e777ae49b8ac1c4cb9b42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "705a7f86_e27ed26c",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T09:27:44Z",
+      "side": 1,
+      "message": "with c++14 you can now write in binary:\n0b10000000 (or 0b1000\u00270000)\nto align with format description above.\n\nBut keeping it hex (it much shorter and single bit is obvious enough) is fine too.",
+      "range": {
+        "startLine": 885,
+        "startChar": 22,
+        "endLine": 885,
+        "endChar": 26
+      },
+      "revId": "1cf5ae69e96b7671689e777ae49b8ac1c4cb9b42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4da906c5_bb368da3",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T09:27:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure this comment belong in the fixture:\nfixture is responsible for the extension payload,\nit\u0027s RtpPacket class responsibility to choose between one-byte or two-byte extension header.",
+      "range": {
+        "startLine": 892,
+        "startChar": 2,
+        "endLine": 892,
+        "endChar": 65
+      },
+      "revId": "1cf5ae69e96b7671689e777ae49b8ac1c4cb9b42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "24ff297f_2a4efd09",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
         "patchSetId": 3
@@ -18,6 +87,29 @@
         "startChar": 0,
         "endLine": 307,
         "endChar": 63
+      },
+      "revId": "1cf5ae69e96b7671689e777ae49b8ac1c4cb9b42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8da03e32_c8466885",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-20T09:27:44Z",
+      "side": 1,
+      "message": "nit: the optional\u003cbyte\u003e type is so small, it would be a bit better to pass it by value",
+      "range": {
+        "startLine": 311,
+        "startChar": 50,
+        "endLine": 311,
+        "endChar": 67
       },
       "revId": "1cf5ae69e96b7671689e777ae49b8ac1c4cb9b42",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
