@@ -105,6 +105,7 @@ rtc_library("rtc_p2p") {
     "../rtc_base",
     "../rtc_base:checks",
     "../rtc_base/experiments:field_trial_parser",
+    "../rtc_base/streams",
     "//third_party/abseil-cpp/absl/memory",
 
     # Needed by pseudo_tcp, which should move to a separate target.
