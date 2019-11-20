@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdd9a229_d33c2674",
+        "filename": "p2p/base/basic_ice_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-20T06:47:09Z",
+      "side": 1,
+      "message": "nit: are",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8d0d2b4_4a2d556a",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-20T06:47:09Z",
+      "side": 1,
+      "message": "nit: mutated",
+      "range": {
+        "startLine": 59,
+        "startChar": 71,
+        "endLine": 59,
+        "endChar": 77
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ac9faf3_c0adf172",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-20T06:47:09Z",
+      "side": 1,
+      "message": "Please see my other comment on PruneConnections. It\u0027s not clear in the documentation of this interface what the ownership model is expected.",
+      "range": {
+        "startLine": 64,
+        "startChar": 25,
+        "endLine": 64,
+        "endChar": 30
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13c7d8fb_3693530d",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-20T06:47:09Z",
+      "side": 1,
+      "message": "nit: returns",
+      "range": {
+        "startLine": 67,
+        "startChar": 61,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5bba90b_52646310",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-20T06:47:09Z",
+      "side": 1,
+      "message": "A class comment on whether the transport or the controller own the connections may help. The current implementation (BasicIceController) takes the ownership, and if the interface has the same assumption, this method can actually prune the connections. Please see also my other comment that P2PTransportChannel::PruneConnections is probably redundant.",
+      "range": {
+        "startLine": 95,
+        "startChar": 22,
+        "endLine": 95,
+        "endChar": 27
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "443a418c_b0dc6870",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1633,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2019-11-20T06:47:09Z",
+      "side": 1,
+      "message": "We probably won\u0027t need this method any more given that the connections are owned by the controller and the controller can call Prune on connections to remove in its own PruneConnections.",
+      "range": {
+        "startLine": 1633,
+        "startChar": 26,
+        "endLine": 1633,
+        "endChar": 42
+      },
+      "revId": "cd5a2200f55a1e76501e795ef8de70c6d5743f18",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
