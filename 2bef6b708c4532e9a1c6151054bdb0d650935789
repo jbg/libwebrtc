@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b90132a_c3f49ca0",
+        "filename": "modules/audio_coding/codecs/opus/opus_interface.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-11-20T13:49:28Z",
+      "side": 1,
+      "message": "+gustaf\n\nIt is fine if this check fails some time. But it should not fail too often.\n\nCurrently, it seems that this never fails for mono, but can fail on stereo.\n\nFor stereo, this fails constantly on Android, but not constantly on other platforms.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 64
+      },
+      "revId": "2bef6b708c4532e9a1c6151054bdb0d650935789",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
