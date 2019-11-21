@@ -61,7 +61,7 @@ def _SendHistogramSetJson(url, histogram_json, oauth_token):
   data = zlib.compress(serialized)
 
   http = httplib2.Http()
-  response, content = http.request(url + '/add_histograms', method='POST',
+  response, content = http.request(url + '/add_point', method='POST',
                                    body=data, headers=headers)
   return response, content
 
