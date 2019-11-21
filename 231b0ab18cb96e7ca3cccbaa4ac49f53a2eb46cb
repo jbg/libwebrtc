@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83d5c261_0b3cfac9",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-21T12:28:25Z",
+      "side": 1,
+      "message": "Still a confusing comment I think. Before you call this function you have to call ParseObus, so I don\u0027t understand why we need to care about this?",
+      "range": {
+        "startLine": 328,
+        "startChar": 5,
+        "endLine": 328,
+        "endChar": 8
+      },
+      "revId": "231b0ab18cb96e7ca3cccbaa4ac49f53a2eb46cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55e8c9ce_a680b4dd",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-21T12:28:25Z",
+      "side": 1,
+      "message": "invalidate",
+      "range": {
+        "startLine": 328,
+        "startChar": 25,
+        "endLine": 328,
+        "endChar": 33
+      },
+      "revId": "231b0ab18cb96e7ca3cccbaa4ac49f53a2eb46cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

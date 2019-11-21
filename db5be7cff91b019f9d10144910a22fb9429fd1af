@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "c9595141_197e7c7a",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-21T12:28:25Z",
+      "side": 1,
+      "message": "I think kObuSizePresentBit is clearer, maybe rename it and add a comment saying it corresponds to the obu_has_size_field in the spec? I don\u0027t care strongly about it...",
+      "parentUuid": "c4a23665_d55ce0d0",
+      "range": {
+        "startLine": 155,
+        "startChar": 18,
+        "endLine": 155,
+        "endChar": 32
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f68cca34_5e4474f5",
         "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
         "patchSetId": 3
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "|continues_obu| doesn\u0027t imply presence of a fragment_size, these two properties are independent.\nsimplest example is Test.AssembleFrameFromTwoPacketsWithOneObu:\n2nd payload continues previous OBU, but since W\u003d1, fragment_size is not signaled explicitly.\n\nThere are also corner cases (discovered by fuzzer) when packet has just the aggregation header.\nThose are technically valid (as long as W\u003d1) and depending on Z and Y flags are not noop.\nI can also imagine a packetizer that has semi-valid reason to send such a packet.\n\nI\u0027ve instead rewrite the code and pull out payload.Length() \u003d\u003d 0 as special case.\nas well as added two unit tests to cover the scenario. (in addition to future fuzzer that can only check we do not crash in such cases, but can\u0027t check correctness)",
       "parentUuid": "373fd895_93dc97e8",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 64
+      },
+      "revId": "db5be7cff91b019f9d10144910a22fb9429fd1af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63033b7d_1ab72993",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-21T12:28:25Z",
+      "side": 1,
+      "message": "You are right, the spec had me confused for a while.",
+      "parentUuid": "ae9f8dd8_faa88154",
       "range": {
         "startLine": 201,
         "startChar": 0,
