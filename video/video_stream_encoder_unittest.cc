@@ -4866,7 +4866,9 @@ TEST_F(VideoStreamEncoderTest, DoesNotRewriteH264BitstreamWithOptimalSps) {
   encoder_factory_.SetHasInternalSource(true);
   ResetEncoder("H264", 1, 1, 1, false);
 
-  EncodedImage image(optimal_sps, sizeof(optimal_sps), sizeof(optimal_sps));
+  EncodedImage image;
+  image.SetEncodedData(
+      EncodedImageBuffer::Create(optimal_sps, sizeof(optimal_sps)));
   image._frameType = VideoFrameType::kVideoFrameKey;
 
   CodecSpecificInfo codec_specific_info;
@@ -4899,7 +4901,9 @@ TEST_F(VideoStreamEncoderTest, RewritesH264BitstreamWithNonOptimalSps) {
   encoder_factory_.SetHasInternalSource(true);
   ResetEncoder("H264", 1, 1, 1, false);
 
-  EncodedImage image(original_sps, sizeof(original_sps), sizeof(original_sps));
+  EncodedImage image;
+  image.SetEncodedData(
+      EncodedImageBuffer::Create(original_sps, sizeof(original_sps)));
   image._frameType = VideoFrameType::kVideoFrameKey;
 
   CodecSpecificInfo codec_specific_info;
