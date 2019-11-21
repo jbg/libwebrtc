@@ -21,6 +21,10 @@ RtpReceiverInterface::streams() const {
   return {};
 }
 
+bool SetParameters(const RtpParameters& parameters) {
+  return false;
+}
+
 std::vector<RtpSource> RtpReceiverInterface::GetSources() const {
   return {};
 }
