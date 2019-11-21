@@ -35,7 +35,8 @@ TEST(DefaultEncodedImageDataInjector, InjectExtractDiscardFalse) {
 
   rtc::Buffer buffer = CreateBufferOfSizeNFilledWithValuesFromX(10, 1);
 
-  EncodedImage source(buffer.data(), 10, 10);
+  EncodedImage source;
+  source.SetEncodedData(EncodedImageBuffer::Create(buffer.data(), 10));
   source.SetTimestamp(123456789);
 
   EncodedImageExtractionResult out =
@@ -53,7 +54,8 @@ TEST(DefaultEncodedImageDataInjector, InjectExtractDiscardTrue) {
 
   rtc::Buffer buffer = CreateBufferOfSizeNFilledWithValuesFromX(10, 1);
 
-  EncodedImage source(buffer.data(), 10, 10);
+  EncodedImage source;
+  source.SetEncodedData(EncodedImageBuffer::Create(buffer.data(), 10));
   source.SetTimestamp(123456789);
 
   EncodedImageExtractionResult out =
@@ -71,13 +73,16 @@ TEST(DefaultEncodedImageDataInjector, Inject3Extract3) {
   rtc::Buffer buffer3 = CreateBufferOfSizeNFilledWithValuesFromX(10, 21);
 
   // 1st frame
-  EncodedImage source1(buffer1.data(), 10, 10);
+  EncodedImage source1;
+  source1.SetEncodedData(EncodedImageBuffer::Create(buffer1.data(), 10));
   source1.SetTimestamp(123456710);
   // 2nd frame 1st spatial layer
-  EncodedImage source2(buffer2.data(), 10, 10);
+  EncodedImage source2;
+  source2.SetEncodedData(EncodedImageBuffer::Create(buffer2.data(), 10));
   source2.SetTimestamp(123456720);
   // 2nd frame 2nd spatial layer
-  EncodedImage source3(buffer3.data(), 10, 10);
+  EncodedImage source3;
+  source3.SetEncodedData(EncodedImageBuffer::Create(buffer3.data(), 10));
   source3.SetTimestamp(123456720);
 
   EncodedImage intermediate1 = injector.InjectData(510, false, source1, 1);
@@ -113,11 +118,14 @@ TEST(DefaultEncodedImageDataInjector, InjectExtractFromConcatenated) {
   rtc::Buffer buffer2 = CreateBufferOfSizeNFilledWithValuesFromX(10, 11);
   rtc::Buffer buffer3 = CreateBufferOfSizeNFilledWithValuesFromX(10, 21);
 
-  EncodedImage source1(buffer1.data(), 10, 10);
+  EncodedImage source1;
+  source1.SetEncodedData(EncodedImageBuffer::Create(buffer1.data(), 10));
   source1.SetTimestamp(123456710);
-  EncodedImage source2(buffer2.data(), 10, 10);
+  EncodedImage source2;
+  source2.SetEncodedData(EncodedImageBuffer::Create(buffer2.data(), 10));
   source2.SetTimestamp(123456710);
-  EncodedImage source3(buffer3.data(), 10, 10);
+  EncodedImage source3;
+  source3.SetEncodedData(EncodedImageBuffer::Create(buffer3.data(), 10));
   source3.SetTimestamp(123456710);
 
   // Inject id into 3 images with same frame id.
@@ -133,8 +141,9 @@ TEST(DefaultEncodedImageDataInjector, InjectExtractFromConcatenated) {
   concatenated_buffer.AppendData(intermediate1.data(), intermediate1.size());
   concatenated_buffer.AppendData(intermediate2.data(), intermediate2.size());
   concatenated_buffer.AppendData(intermediate3.data(), intermediate3.size());
-  EncodedImage concatenated(concatenated_buffer.data(), concatenated_length,
-                            concatenated_length);
+  EncodedImage concatenated;
+  concatenated.SetEncodedData(EncodedImageBuffer::Create(
+      concatenated_buffer.data(), concatenated_length));
 
   // Extract frame id from concatenated image
   EncodedImageExtractionResult out = injector.ExtractData(concatenated, 2);
@@ -156,11 +165,14 @@ TEST(DefaultEncodedImageDataInjector,
   rtc::Buffer buffer2 = CreateBufferOfSizeNFilledWithValuesFromX(10, 11);
   rtc::Buffer buffer3 = CreateBufferOfSizeNFilledWithValuesFromX(10, 21);
 
-  EncodedImage source1(buffer1.data(), 10, 10);
+  EncodedImage source1;
+  source1.SetEncodedData(EncodedImageBuffer::Create(buffer1.data(), 10));
   source1.SetTimestamp(123456710);
-  EncodedImage source2(buffer2.data(), 10, 10);
+  EncodedImage source2;
+  source2.SetEncodedData(EncodedImageBuffer::Create(buffer2.data(), 10));
   source2.SetTimestamp(123456710);
-  EncodedImage source3(buffer3.data(), 10, 10);
+  EncodedImage source3;
+  source3.SetEncodedData(EncodedImageBuffer::Create(buffer3.data(), 10));
   source3.SetTimestamp(123456710);
 
   // Inject id into 3 images with same frame id.
@@ -176,8 +188,9 @@ TEST(DefaultEncodedImageDataInjector,
   concatenated_buffer.AppendData(intermediate1.data(), intermediate1.size());
   concatenated_buffer.AppendData(intermediate2.data(), intermediate2.size());
   concatenated_buffer.AppendData(intermediate3.data(), intermediate3.size());
-  EncodedImage concatenated(concatenated_buffer.data(), concatenated_length,
-                            concatenated_length);
+  EncodedImage concatenated;
+  concatenated.SetEncodedData(EncodedImageBuffer::Create(
+      concatenated_buffer.data(), concatenated_length));
 
   // Extract frame id from concatenated image
   EncodedImageExtractionResult out = injector.ExtractData(concatenated, 2);

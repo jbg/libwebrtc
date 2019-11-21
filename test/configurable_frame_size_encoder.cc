@@ -51,8 +51,9 @@ int32_t ConfigurableFrameSizeEncoder::InitEncode(
 int32_t ConfigurableFrameSizeEncoder::Encode(
     const VideoFrame& inputImage,
     const std::vector<VideoFrameType>* frame_types) {
-  EncodedImage encodedImage(buffer_.get(), current_frame_size_,
-                            max_frame_size_);
+  EncodedImage encodedImage;
+  encodedImage.SetEncodedData(
+      EncodedImageBuffer::Create(buffer_.get(), current_frame_size_));
   encodedImage._completeFrame = true;
   encodedImage._encodedHeight = inputImage.height();
   encodedImage._encodedWidth = inputImage.width();
