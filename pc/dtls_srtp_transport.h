@@ -20,6 +20,7 @@
 #include "p2p/base/packet_transport_internal.h"
 #include "pc/srtp_transport.h"
 #include "rtc_base/buffer.h"
+#include "rtc_base/streams/stream.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 
 namespace webrtc {
@@ -96,6 +97,9 @@ class DtlsSrtpTransport : public SrtpTransport {
   absl::optional<std::vector<int>> recv_extension_ids_;
 
   bool active_reset_srtp_params_ = false;
+
+  WritableStream<cricket::DtlsTransportState> dtls_state_writable_;
+  PipeToHandle dtls_state_pipe_;
 };
 
 }  // namespace webrtc

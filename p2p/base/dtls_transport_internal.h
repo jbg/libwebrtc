@@ -26,6 +26,7 @@
 #include "rtc_base/ssl_certificate.h"
 #include "rtc_base/ssl_fingerprint.h"
 #include "rtc_base/ssl_stream_adapter.h"
+#include "rtc_base/streams/stream.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 
 namespace cricket {
@@ -113,6 +114,7 @@ class DtlsTransportInternal : public rtc::PacketTransportInternal {
   virtual IceTransportInternal* ice_transport() = 0;
 
   sigslot::signal2<DtlsTransportInternal*, DtlsTransportState> SignalDtlsState;
+  virtual webrtc::ReadableStream<DtlsTransportState>* DtlsStateReadable() = 0;
 
   // Emitted whenever the Dtls handshake failed on some transport channel.
   sigslot::signal1<rtc::SSLHandshakeError> SignalDtlsHandshakeError;
