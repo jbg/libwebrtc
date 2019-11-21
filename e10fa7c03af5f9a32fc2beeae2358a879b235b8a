@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5c65a042_5b735efe",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-21T14:22:22Z",
+      "side": 1,
+      "message": "Good idea, will apply it to drops only.",
+      "parentUuid": "56c3074e_e8fc4861",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "e10fa7c03af5f9a32fc2beeae2358a879b235b8a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74e8f335_e4317721",
         "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "e10fa7c03af5f9a32fc2beeae2358a879b235b8a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7c38aa7_f8bb51fb",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-21T14:22:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74e8f335_e4317721",
+      "range": {
+        "startLine": 118,
+        "startChar": 37,
+        "endLine": 118,
+        "endChar": 58
+      },
+      "revId": "e10fa7c03af5f9a32fc2beeae2358a879b235b8a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
