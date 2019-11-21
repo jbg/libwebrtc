@@ -22,6 +22,30 @@
       "revId": "27cf000c2a4961a85f9ff53fc5dbd2bfab642ad4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c6d5a17_de48239c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2019-11-21T22:37:32Z",
+      "side": 1,
+      "message": "Added, thx a lot!",
+      "parentUuid": "d72807aa_ca2a2557",
+      "range": {
+        "startLine": 13,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "27cf000c2a4961a85f9ff53fc5dbd2bfab642ad4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
