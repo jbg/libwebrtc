@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c399d9b7_8329e9b5",
+        "filename": "modules/desktop_capture/full_screen_application_handler.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2019-11-21T21:47:54Z",
+      "side": 1,
+      "message": "style: source_id_",
+      "revId": "880093d1363e8fa49304ccbd513cd3218c175f3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0c6d1d9_3e1aecf5",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5603
+      },
+      "writtenOn": "2019-11-21T21:47:54Z",
+      "side": 1,
+      "message": "Suggest this be pulled out into a table at the top of the file so it can be updated separate from the rest of the code",
+      "revId": "880093d1363e8fa49304ccbd513cd3218c175f3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
