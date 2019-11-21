@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56c3074e_e8fc4861",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-11-21T10:44:37Z",
+      "side": 1,
+      "message": "Do you want this to only apply to drops or also increases from one low bitrate to another?",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "e10fa7c03af5f9a32fc2beeae2358a879b235b8a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74e8f335_e4317721",
+        "filename": "modules/congestion_controller/goog_cc/bitrate_estimator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2019-11-21T10:44:37Z",
+      "side": 1,
+      "message": "Optionally, DCHECK that the pointer is non-null?",
+      "range": {
+        "startLine": 118,
+        "startChar": 37,
+        "endLine": 118,
+        "endChar": 58
+      },
+      "revId": "e10fa7c03af5f9a32fc2beeae2358a879b235b8a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
