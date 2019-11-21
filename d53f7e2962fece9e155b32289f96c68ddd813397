@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e378dd67_0fff9625",
+        "filename": "modules/pacing/round_robin_packet_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-11-21T17:37:58Z",
+      "side": 1,
+      "message": "Right, and I also don\u0027t want every QueuedPacket to have a cache bool all with the same value.\nSuggest working on making this trial default-on so we can remove this code.",
+      "parentUuid": "2dd874ec_6aff3066",
+      "range": {
+        "startLine": 76,
+        "startChar": 51,
+        "endLine": 76,
+        "endChar": 70
+      },
+      "revId": "d53f7e2962fece9e155b32289f96c68ddd813397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2e7dc06_79b44671",
         "filename": "modules/pacing/round_robin_packet_queue.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "d53f7e2962fece9e155b32289f96c68ddd813397",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52a92359_d6e66ac4",
+        "filename": "modules/pacing/round_robin_packet_queue.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-11-21T17:37:58Z",
+      "side": 1,
+      "message": "Done, thought I had to do the pop slightly earlier - otherwise the check on L173:\n  if (stream-\u003epacket_queue.empty()) {   \n...would crash on a DCHECK.",
+      "parentUuid": "c2e7dc06_79b44671",
+      "range": {
+        "startLine": 181,
+        "startChar": 2,
+        "endLine": 181,
+        "endChar": 8
+      },
+      "revId": "d53f7e2962fece9e155b32289f96c68ddd813397",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
