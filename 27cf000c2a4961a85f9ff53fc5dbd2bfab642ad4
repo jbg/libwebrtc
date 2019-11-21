@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d72807aa_ca2a2557",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 9572
+      },
+      "writtenOn": "2019-11-21T20:25:00Z",
+      "side": 1,
+      "message": "FWIW, I think these \u0027ghost windows\u0027 are prelaunched UWP apps whose windows are created in a hidden/cloaked state to improve perceived performance of launching these apps later: https://docs.microsoft.com/en-us/windows/uwp/launch-resume/handle-app-prelaunch\n\nMight want to mention this in the change description for clarity.",
+      "range": {
+        "startLine": 13,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "27cf000c2a4961a85f9ff53fc5dbd2bfab642ad4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
