@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5298e1cb_cca218f1",
+        "filename": "api/rtp_receiver_interface.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-21T07:51:37Z",
+      "side": 1,
+      "message": "Say \"delete\"?",
+      "range": {
+        "startLine": 79,
+        "startChar": 23,
+        "endLine": 79,
+        "endChar": 32
+      },
+      "revId": "f8e417f63399bc0790defc8ac12ab103e1120b46",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
