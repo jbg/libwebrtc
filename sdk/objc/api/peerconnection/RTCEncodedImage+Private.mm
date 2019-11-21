@@ -77,8 +77,9 @@
 
 - (webrtc::EncodedImage)nativeEncodedImage {
   // Return the pointer without copying.
-  webrtc::EncodedImage encodedImage(
-      (uint8_t *)self.buffer.bytes, (size_t)self.buffer.length, (size_t)self.buffer.length);
+  webrtc::EncodedImage encodedImage;
+  encodedImage.SetEncodedData(
+      webrtc::EncodedImageBuffer::Create((uint8_t *)self.buffer.bytes, (size_t)self.buffer.length));
   encodedImage._encodedWidth = rtc::dchecked_cast<uint32_t>(self.encodedWidth);
   encodedImage._encodedHeight = rtc::dchecked_cast<uint32_t>(self.encodedHeight);
   encodedImage.SetTimestamp(self.timeStamp);

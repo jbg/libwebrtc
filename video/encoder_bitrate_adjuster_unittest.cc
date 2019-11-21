@@ -168,8 +168,9 @@ class EncoderBitrateAdjusterTest : public ::testing::Test {
                 ? media_frame_size - network_frame_size_diff_bytes
                 : media_frame_size + network_frame_size_diff_bytes;
 
-        EncodedImage image(buffer, 0, kMaxFrameSize);
-        image.set_size(frame_size_bytes);
+        EncodedImage image;
+        image.SetEncodedData(
+            EncodedImageBuffer::Create(buffer, frame_size_bytes));
         image.SetSpatialIndex(si);
         adjuster_->OnEncodedFrame(image, ti);
         sequence_idx = ++sequence_idx % kSequenceLength;

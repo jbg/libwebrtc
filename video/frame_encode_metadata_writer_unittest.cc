@@ -23,6 +23,8 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 
+using testing::ElementsAreArray;
+
 namespace webrtc {
 namespace test {
 namespace {
@@ -462,7 +464,8 @@ TEST(FrameEncodeMetadataWriterTest, CopiesPacketInfos) {
 
 TEST(FrameEncodeMetadataWriterTest, DoesNotRewriteBitstreamWithoutCodecInfo) {
   uint8_t buffer[] = {1, 2, 3};
-  EncodedImage image(buffer, sizeof(buffer), sizeof(buffer));
+  EncodedImage image;
+  image.SetEncodedData(EncodedImageBuffer::Create(buffer, sizeof(buffer)));
   const RTPFragmentationHeader fragmentation;
 
   FakeEncodedImageCallback sink;
@@ -470,13 +473,14 @@ TEST(FrameEncodeMetadataWriterTest, DoesNotRewriteBitstreamWithoutCodecInfo) {
   EXPECT_EQ(
       encode_metadata_writer.UpdateBitstream(nullptr, &fragmentation, &image),
       nullptr);
-  EXPECT_EQ(image.data(), buffer);
-  EXPECT_EQ(image.size(), sizeof(buffer));
+  EXPECT_THAT(rtc::MakeArrayView(image.data(), image.size()),
+              ElementsAreArray(buffer));
 }
 
 TEST(FrameEncodeMetadataWriterTest, DoesNotRewriteVp8Bitstream) {
   uint8_t buffer[] = {1, 2, 3};
-  EncodedImage image(buffer, sizeof(buffer), sizeof(buffer));
+  EncodedImage image;
+  image.SetEncodedData(EncodedImageBuffer::Create(buffer, sizeof(buffer)));
   CodecSpecificInfo codec_specific_info;
   codec_specific_info.codecType = kVideoCodecVP8;
   const RTPFragmentationHeader fragmentation;
@@ -486,14 +490,16 @@ TEST(FrameEncodeMetadataWriterTest, DoesNotRewriteVp8Bitstream) {
   EXPECT_EQ(encode_metadata_writer.UpdateBitstream(&codec_specific_info,
                                                    &fragmentation, &image),
             nullptr);
-  EXPECT_EQ(image.data(), buffer);
-  EXPECT_EQ(image.size(), sizeof(buffer));
+
+  EXPECT_THAT(rtc::MakeArrayView(image.data(), image.size()),
+              ElementsAreArray(buffer));
 }
 
 TEST(FrameEncodeMetadataWriterTest,
      DoesNotRewriteH264BitstreamWithoutFragmentation) {
   uint8_t buffer[] = {1, 2, 3};
-  EncodedImage image(buffer, sizeof(buffer), sizeof(buffer));
+  EncodedImage image;
+  image.SetEncodedData(EncodedImageBuffer::Create(buffer, sizeof(buffer)));
   CodecSpecificInfo codec_specific_info;
   codec_specific_info.codecType = kVideoCodecH264;
 
@@ -502,8 +508,8 @@ TEST(FrameEncodeMetadataWriterTest,
   EXPECT_EQ(encode_metadata_writer.UpdateBitstream(&codec_specific_info,
                                                    nullptr, &image),
             nullptr);
-  EXPECT_EQ(image.data(), buffer);
-  EXPECT_EQ(image.size(), sizeof(buffer));
+  EXPECT_THAT(rtc::MakeArrayView(image.data(), image.size()),
+              ElementsAreArray(buffer));
 }
 
 TEST(FrameEncodeMetadataWriterTest, RewritesH264BitstreamWithNonOptimalSps) {
@@ -515,7 +521,9 @@ TEST(FrameEncodeMetadataWriterTest, RewritesH264BitstreamWithNonOptimalSps) {
                                    0x05, 0x03, 0xC7, 0xE0, 0x1B,
                                    0x41, 0x10, 0x8D, 0x00};
 
-  EncodedImage image(original_sps, sizeof(original_sps), sizeof(original_sps));
+  EncodedImage image;
+  image.SetEncodedData(
+      EncodedImageBuffer::Create(original_sps, sizeof(original_sps)));
   image._frameType = VideoFrameType::kVideoFrameKey;
 
   CodecSpecificInfo codec_specific_info;
@@ -534,7 +542,7 @@ TEST(FrameEncodeMetadataWriterTest, RewritesH264BitstreamWithNonOptimalSps) {
 
   ASSERT_NE(modified_fragmentation, nullptr);
   EXPECT_THAT(std::vector<uint8_t>(image.data(), image.data() + image.size()),
-              testing::ElementsAreArray(kRewrittenSps));
+              ElementsAreArray(kRewrittenSps));
   ASSERT_THAT(modified_fragmentation->fragmentationVectorSize, 1U);
   EXPECT_EQ(modified_fragmentation->fragmentationOffset[0], 4U);
   EXPECT_EQ(modified_fragmentation->fragmentationLength[0],

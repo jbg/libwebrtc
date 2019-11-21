@@ -3017,7 +3017,9 @@ TEST_F(VideoSendStreamTest, ReportsSentResolution) {
       specifics.codecType = kVideoCodecGeneric;
 
       uint8_t buffer[16] = {0};
-      EncodedImage encoded(buffer, sizeof(buffer), sizeof(buffer));
+      EncodedImage encoded;
+      encoded.SetEncodedData(
+          EncodedImageBuffer::Create(buffer, sizeof(buffer)));
       encoded.SetTimestamp(input_image.timestamp());
       encoded.capture_time_ms_ = input_image.render_time_ms();
 
