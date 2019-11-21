@@ -37,6 +37,11 @@ wheel: <
   version: "version:0.10.3"
 >
 
+wheel: <
+  name: "infra/python/wheels/urllib3-py2_py3"
+  version: "version:1.24.3"
+>
+
 # Used by:
 #   build/toolchain/win
 wheel: <
