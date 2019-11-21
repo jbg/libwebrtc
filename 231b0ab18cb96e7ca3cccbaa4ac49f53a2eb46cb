@@ -45,6 +45,54 @@
       "revId": "231b0ab18cb96e7ca3cccbaa4ac49f53a2eb46cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2715835e_a0105775",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-21T12:49:34Z",
+      "side": 1,
+      "message": "I\u0027ve just removed the comment.\nlet fuzzer/asan catch mistakes if code refactored so that iterator will be used after invalidated.",
+      "parentUuid": "83d5c261_0b3cfac9",
+      "range": {
+        "startLine": 328,
+        "startChar": 5,
+        "endLine": 328,
+        "endChar": 8
+      },
+      "revId": "231b0ab18cb96e7ca3cccbaa4ac49f53a2eb46cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b80684b_5ee073f1",
+        "filename": "modules/rtp_rtcp/source/rtp_depacketizer_av1.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-21T12:49:34Z",
+      "side": 1,
+      "message": "removed with the comment.",
+      "parentUuid": "55e8c9ce_a680b4dd",
+      "range": {
+        "startLine": 328,
+        "startChar": 25,
+        "endLine": 328,
+        "endChar": 33
+      },
+      "revId": "231b0ab18cb96e7ca3cccbaa4ac49f53a2eb46cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
