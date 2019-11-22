@@ -579,6 +579,8 @@ rtc_library("rtc_numerics") {
   sources = [
     "numerics/exp_filter.cc",
     "numerics/exp_filter.h",
+    "numerics/exponential_moving_average.cc",
+    "numerics/exponential_moving_average.h",
     "numerics/math_utils.h",
     "numerics/moving_average.cc",
     "numerics/moving_average.h",
@@ -1288,6 +1290,7 @@ if (rtc_include_tests) {
 
     sources = [
       "numerics/exp_filter_unittest.cc",
+      "numerics/exponential_moving_average_unittest.cc",
       "numerics/moving_average_unittest.cc",
       "numerics/moving_median_filter_unittest.cc",
       "numerics/percentile_filter_unittest.cc",
