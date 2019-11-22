@@ -10,7 +10,6 @@
 
 package org.webrtc;
 
-import org.webrtc.VideoFrame;
 
 /**
  * Used from native api and implements a simple VideoCapturer.CapturerObserver that feeds frames to
@@ -47,7 +46,7 @@ class NativeCapturerObserver implements CapturerObserver {
         frame.getBuffer().cropAndScale(parameters.cropX, parameters.cropY, parameters.cropWidth,
             parameters.cropHeight, parameters.scaleWidth, parameters.scaleHeight);
     nativeAndroidVideoTrackSource.onFrameCaptured(
-        new VideoFrame(adaptedBuffer, frame.getRotation(), parameters.timestampNs));
+        new VideoFrame(frame.getId(), adaptedBuffer, frame.getRotation(), parameters.timestampNs));
     adaptedBuffer.release();
   }
 }

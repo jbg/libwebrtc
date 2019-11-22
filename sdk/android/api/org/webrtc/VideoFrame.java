@@ -13,7 +13,6 @@ package org.webrtc;
 import android.graphics.Matrix;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
-import android.support.annotation.Nullable;
 import java.nio.ByteBuffer;
 
 /**
@@ -121,9 +120,14 @@ public class VideoFrame implements RefCounted {
     Matrix getTransformMatrix();
   }
 
+  private final int id;
   private final Buffer buffer;
   private final int rotation;
   private final long timestampNs;
+
+  public VideoFrame(Buffer buffer, int rotation, long timestampNs) {
+    this(0, buffer, rotation, timestampNs);
+  }
 
   /**
    * Constructs a new VideoFrame backed by the given {@code buffer}.
@@ -131,16 +135,25 @@ public class VideoFrame implements RefCounted {
    * @note Ownership of the buffer object is tranferred to the new VideoFrame.
    */
   @CalledByNative
-  public VideoFrame(Buffer buffer, int rotation, long timestampNs) {
+  public VideoFrame(int id, Buffer buffer, int rotation, long timestampNs) {
+    if (id < 0 || id >= 1 << 16) {
+      throw new IllegalArgumentException("id must be between 0 and 2^16-1");
+    }
     if (buffer == null) {
       throw new IllegalArgumentException("buffer not allowed to be null");
     }
     if (rotation % 90 != 0) {
       throw new IllegalArgumentException("rotation must be a multiple of 90");
     }
+    this.id = id;
     this.buffer = buffer;
     this.rotation = rotation;
     this.timestampNs = timestampNs;
+  }
+
+  @CalledByNative
+  public int getId() {
+    return id;
   }
 
   @CalledByNative
