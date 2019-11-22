@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bb048b9_f8dc27dd",
+        "filename": "rtc_base/numerics/exponential_moving_average.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-22T14:01:38Z",
+      "side": 1,
+      "message": "Not needed, since they\u0027re set at  construction time.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28c42ea5_e2abfd84",
+        "filename": "rtc_base/numerics/exponential_moving_average.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-22T14:01:38Z",
+      "side": 1,
+      "message": "You could consider rearranging this to avoid the extra variables. Not sure if it gets clearer, but, e.g., the value update could be done as\n\n  double sample_diff \u003d sample - value_;\n  value_ +\u003d one_minus_alpha * sample_diff;\n\nI\u0027m also a bit confused by alpha vs one_minus_alpha, if age is large, then you have alpha close to 1, and you will keep history and ignore the new sample. Which seems like the opposite of the desired behavior?\n\nAlso consider what happens if you get several values within a short interval, then it seems reasonable to me to give them all roughly equal weight, and I don\u0027t think you do that.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 72
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d66dabb_ed90e4e8",
+        "filename": "rtc_base/numerics/exponential_moving_average.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-22T14:01:38Z",
+      "side": 1,
+      "message": "Not really needed.",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff366d06_c55b4ca5",
+        "filename": "rtc_base/numerics/exponential_moving_average.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-22T14:01:38Z",
+      "side": 1,
+      "message": "I\u0027d name this |time_constant_| or |tau_|, since that\u0027s a standard parameter of a first-order filter. And maybe used that rather than half-time as the external parameter.",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 22
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a44e4f6_f859b361",
+        "filename": "rtc_base/numerics/exponential_moving_average.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-22T14:01:38Z",
+      "side": 1,
+      "message": "Make this an optional, for the initialization logic.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
