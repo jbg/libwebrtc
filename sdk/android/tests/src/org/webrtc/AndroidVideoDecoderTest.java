@@ -389,7 +389,7 @@ public class AndroidVideoDecoderTest {
             /* transformMatrix= */ new Matrix(),
             /* toI420Handler= */ new Handler(), new YuvConverter(), releaseCallback);
     VideoFrame outputVideoFrame =
-        new VideoFrame(outputTextureBuffer, /* rotation= */ 0, /* timestampNs= */ 0);
+        new VideoFrame(/* id= */ 21, outputTextureBuffer, /* rotation= */ 0, /* timestampNs= */ 0);
     videoSinkCaptor.getValue().onFrame(outputVideoFrame);
     outputVideoFrame.release();
 
@@ -397,6 +397,7 @@ public class AndroidVideoDecoderTest {
     assertThat(fakeDecoderCallback.decodedFrames).hasSize(1);
     VideoFrame videoFrame = fakeDecoderCallback.decodedFrames.get(0);
     assertThat(videoFrame).isNotNull();
+    assertThat(videoFrame.getId()).isEqualTo(21);
     assertThat(videoFrame.getBuffer()).isEqualTo(outputTextureBuffer);
 
     fakeDecoderCallback.release();
