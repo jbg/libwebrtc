@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "527a0299_e2a1ea6a",
+        "filename": "modules/audio_coding/neteq/merge_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-22T12:26:32Z",
+      "side": 1,
+      "message": "Remove?",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 62
+      },
+      "revId": "50d6119d263fa504a4c38119b7f86a17a7fdf8ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d46067ac_b5c76868",
+        "filename": "modules/audio_coding/neteq/merge_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-22T12:26:32Z",
+      "side": 1,
+      "message": "Would it be useful to explain why these values are interesting?",
+      "revId": "50d6119d263fa504a4c38119b7f86a17a7fdf8ca",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
