@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "720a4fd8_0bcf5e50",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-11-22T18:32:32Z",
+      "side": 1,
+      "message": "I guess that 5 and 7 are not in there for a reason, but it looks strange without a comment.\nAlso, move the array 1 line up before its used (before line 113); as constexpr it\u0027ll be fine even if within a loop.",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 74,
+        "endChar": 48
+      },
+      "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a57c81f4_c4ca413f",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-11-22T18:32:32Z",
+      "side": 1,
+      "message": "[nit] constexpr int kChannelCounts[]",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 7
+      },
+      "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f9df85f_8a9b8a6a",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-11-22T18:32:32Z",
+      "side": 1,
+      "message": "[marked as solved since I wrote a similar comment in another review, but agreed on leaving as it is]\n\nlooks like float_frame_ptrs[0] is the only one you need\nso no need to assign all the channel pointers\nwhat is the reason for having this code?",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
