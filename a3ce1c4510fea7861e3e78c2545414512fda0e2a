@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c7896333_9a8c8e91",
+        "filename": "rtc_base/numerics/exponential_moving_average.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-22T14:53:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bb048b9_f8dc27dd",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28c42ea5_e2abfd84",
         "filename": "rtc_base/numerics/exponential_moving_average.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8269ec3_aec63170",
+        "filename": "rtc_base/numerics/exponential_moving_average.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-22T14:53:18Z",
+      "side": 1,
+      "message": "I kept the separate variables...cause i think it maps more easily\nto algorithm on wikipendia.\n\nI updated alpha as we discussed, seems to work fine!\n\nDone",
+      "parentUuid": "28c42ea5_e2abfd84",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 72
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "6b8f9184_d194a899",
+        "filename": "rtc_base/numerics/exponential_moving_average.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-22T14:53:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d66dabb_ed90e4e8",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff366d06_c55b4ca5",
         "filename": "rtc_base/numerics/exponential_moving_average.h",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "117ac7a3_dd400c1e",
+        "filename": "rtc_base/numerics/exponential_moving_average.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-22T14:53:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff366d06_c55b4ca5",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 22
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a44e4f6_f859b361",
         "filename": "rtc_base/numerics/exponential_moving_average.h",
         "patchSetId": 1
@@ -114,6 +210,30 @@
       "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5480e6a9_8d950a41",
+        "filename": "rtc_base/numerics/exponential_moving_average.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-22T14:53:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a44e4f6_f859b361",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "a3ce1c4510fea7861e3e78c2545414512fda0e2a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
