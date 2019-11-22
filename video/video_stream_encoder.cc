@@ -1737,7 +1737,7 @@ EncodedImageCallback::Result VideoStreamEncoder::OnEncodedImage(
   // We are only interested in propagating the meta-data about the image, not
   // encoded data itself, to the post encode function. Since we cannot be sure
   // the pointer will still be valid when run on the task queue, set it to null.
-  image_copy.set_buffer(nullptr, 0);
+  image_copy.ClearEncodedData();
 
   int temporal_index = 0;
   if (codec_specific_info) {
