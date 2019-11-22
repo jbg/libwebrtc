@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "395b28ab_c1c2ec9a",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2019-11-22T08:38:13Z",
+      "side": 1,
+      "message": "Add checks on beginning_packets and end_packets individually as their sum may wrap.",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 85,
+        "endChar": 25
+      },
+      "revId": "c037e7cf0b29765f0f3cdb2c9210d8d08d85df30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
