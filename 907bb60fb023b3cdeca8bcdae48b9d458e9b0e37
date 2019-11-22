@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0af28ac6_bca4ccc5",
+        "filename": "sdk/android/api/org/webrtc/VideoFrame.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-22T12:08:48Z",
+      "side": 1,
+      "message": "2^16 - 1?",
+      "range": {
+        "startLine": 140,
+        "startChar": 67,
+        "endLine": 140,
+        "endChar": 71
+      },
+      "revId": "907bb60fb023b3cdeca8bcdae48b9d458e9b0e37",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
