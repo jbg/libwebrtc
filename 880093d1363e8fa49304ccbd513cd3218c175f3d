@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f58eb7d4_47abb2ff",
+        "filename": "modules/desktop_capture/full_screen_application_handler.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-22T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c399d9b7_8329e9b5",
+      "revId": "880093d1363e8fa49304ccbd513cd3218c175f3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0c6d1d9_3e1aecf5",
         "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.cc",
         "patchSetId": 16
@@ -33,6 +51,24 @@
       "revId": "880093d1363e8fa49304ccbd513cd3218c175f3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78208306_a5444671",
+        "filename": "modules/desktop_capture/mac/full_screen_mac_application_handler.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-22T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0c6d1d9_3e1aecf5",
+      "revId": "880093d1363e8fa49304ccbd513cd3218c175f3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
