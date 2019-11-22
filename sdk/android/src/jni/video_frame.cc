@@ -190,6 +190,8 @@ rtc::scoped_refptr<I420BufferInterface> AndroidVideoBuffer::ToI420() {
 VideoFrame JavaToNativeFrame(JNIEnv* jni,
                              const JavaRef<jobject>& j_video_frame,
                              uint32_t timestamp_rtp) {
+  uint16_t id =
+      static_cast<uint16_t>(Java_VideoFrame_getId(jni, j_video_frame));
   ScopedJavaLocalRef<jobject> j_video_frame_buffer =
       Java_VideoFrame_getBuffer(jni, j_video_frame);
   int rotation = Java_VideoFrame_getRotation(jni, j_video_frame);
@@ -197,6 +199,7 @@ VideoFrame JavaToNativeFrame(JNIEnv* jni,
   rtc::scoped_refptr<AndroidVideoBuffer> buffer =
       AndroidVideoBuffer::Create(jni, j_video_frame_buffer);
   return VideoFrame::Builder()
+      .set_id(id)
       .set_video_frame_buffer(buffer)
       .set_timestamp_rtp(timestamp_rtp)
       .set_timestamp_ms(timestamp_ns / rtc::kNumNanosecsPerMillisec)
@@ -215,12 +218,14 @@ ScopedJavaLocalRef<jobject> NativeToJavaVideoFrame(JNIEnv* jni,
         jni, android_buffer->video_frame_buffer());
     Java_Buffer_retain(jni, j_video_frame_buffer);
     return Java_VideoFrame_Constructor(
-        jni, j_video_frame_buffer, static_cast<jint>(frame.rotation()),
+        jni, static_cast<jint>(frame.id()), j_video_frame_buffer,
+        static_cast<jint>(frame.rotation()),
         static_cast<jlong>(frame.timestamp_us() *
                            rtc::kNumNanosecsPerMicrosec));
   } else {
     return Java_VideoFrame_Constructor(
-        jni, WrapI420Buffer(jni, buffer->ToI420()),
+        jni, static_cast<jint>(frame.id()),
+        WrapI420Buffer(jni, buffer->ToI420()),
         static_cast<jint>(frame.rotation()),
         static_cast<jlong>(frame.timestamp_us() *
                            rtc::kNumNanosecsPerMicrosec));

@@ -12,8 +12,6 @@ package org.webrtc;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Matrix;
-import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -200,12 +198,12 @@ class Camera2Session implements CameraSession {
         // Undo the mirror that the OS "helps" us with.
         // http://developer.android.com/reference/android/hardware/Camera.html#setDisplayOrientation(int)
         // Also, undo camera orientation, we report it as rotation instead.
-        final VideoFrame modifiedFrame =
-            new VideoFrame(CameraSession.createTextureBufferWithModifiedTransformMatrix(
-                               (TextureBufferImpl) frame.getBuffer(),
-                               /* mirror= */ isCameraFrontFacing,
-                               /* rotation= */ -cameraOrientation),
-                /* rotation= */ getFrameOrientation(), frame.getTimestampNs());
+        final VideoFrame modifiedFrame = new VideoFrame(frame.getId(),
+            CameraSession.createTextureBufferWithModifiedTransformMatrix(
+                (TextureBufferImpl) frame.getBuffer(),
+                /* mirror= */ isCameraFrontFacing,
+                /* rotation= */ -cameraOrientation),
+            /* rotation= */ getFrameOrientation(), frame.getTimestampNs());
         events.onFrameCaptured(Camera2Session.this, modifiedFrame);
         modifiedFrame.release();
       });

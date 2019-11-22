@@ -10,7 +10,6 @@
 
 package org.webrtc;
 
-import android.annotation.TargetApi;
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo.CodecCapabilities;
 import android.media.MediaFormat;
@@ -443,7 +442,6 @@ class AndroidVideoDecoder implements VideoDecoder, VideoSink {
 
   @Override
   public void onFrame(VideoFrame frame) {
-    final VideoFrame newFrame;
     final Integer decodeTimeMs;
     final long timestampNs;
     synchronized (renderedTextureMetadataLock) {
@@ -457,7 +455,7 @@ class AndroidVideoDecoder implements VideoDecoder, VideoSink {
     }
     // Change timestamp of frame.
     final VideoFrame frameWithModifiedTimeStamp =
-        new VideoFrame(frame.getBuffer(), frame.getRotation(), timestampNs);
+        new VideoFrame(frame.getId(), frame.getBuffer(), frame.getRotation(), timestampNs);
     callback.onDecodedFrame(frameWithModifiedTimeStamp, decodeTimeMs, null /* qp */);
   }
 
