@@ -71,12 +71,13 @@ void GenerateFixedFrame(test::FuzzDataHelper* fuzz_data,
 void FuzzAudioProcessing(test::FuzzDataHelper* fuzz_data,
                          std::unique_ptr<AudioProcessing> apm) {
   AudioFrame fixed_frame;
-  std::array<float, 480> float_frame1;
-  std::array<float, 480> float_frame2;
-  std::array<float* const, 2> float_frame_ptrs = {
-      &float_frame1[0],
-      &float_frame2[0],
-  };
+  const int channel_counts[] = {1, 2, 3, 4, 6, 8};
+  constexpr int kMaxNumChannels = 8;
+  std::array<std::array<float, 480>, kMaxNumChannels> float_frames;
+  std::array<float*, kMaxNumChannels> float_frame_ptrs;
+  for (int i = 0; i < kMaxNumChannels; ++i) {
+    float_frame_ptrs[i] = float_frames[i].data();
+  }
   float* const* ptr_to_float_frames = &float_frame_ptrs[0];
 
   using Rate = AudioProcessing::NativeRate;
@@ -94,7 +95,6 @@ void FuzzAudioProcessing(test::FuzzDataHelper* fuzz_data,
     const auto output_rate =
         static_cast<size_t>(fuzz_data->SelectOneOf(rate_kinds));
 
-    const int num_channels = fuzz_data->ReadOrDefaultValue(true) ? 2 : 1;
     const uint8_t stream_delay = fuzz_data->ReadOrDefaultValue<uint8_t>(0);
 
     // API call needed for AEC-2 and AEC-m to run.
@@ -110,6 +110,9 @@ void FuzzAudioProcessing(test::FuzzDataHelper* fuzz_data,
     // Fill the arrays with audio samples from the data.
     int apm_return_code = AudioProcessing::Error::kNoError;
     if (is_float) {
+      const int num_channels =
+          static_cast<size_t>(fuzz_data->SelectOneOf(channel_counts));
+
       GenerateFloatFrame(fuzz_data, input_rate, num_channels,
                          ptr_to_float_frames);
       if (is_capture) {
@@ -122,6 +125,7 @@ void FuzzAudioProcessing(test::FuzzDataHelper* fuzz_data,
             StreamConfig(output_rate, 1), ptr_to_float_frames);
       }
     } else {
+      const int num_channels = fuzz_data->ReadOrDefaultValue(true) ? 2 : 1;
       GenerateFixedFrame(fuzz_data, input_rate, num_channels, &fixed_frame);
 
       if (is_capture) {
