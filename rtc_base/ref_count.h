@@ -15,7 +15,7 @@ namespace rtc {
 // Refcounted objects should implement the following informal interface:
 //
 // void AddRef() const ;
-// RefCountReleaseStatus Release() const;
+// void Release() const;
 //
 // You may access members of a reference-counted object, including the AddRef()
 // and Release() methods, only if you already own a reference to it, or if
@@ -27,25 +27,18 @@ namespace rtc {
 // AddRef() creates a new reference to the object.
 //
 // Release() releases a reference to the object; the caller now has one less
-// reference than before the call. Returns kDroppedLastRef if the number of
-// references dropped to zero because of this (in which case the object destroys
-// itself). Otherwise, returns kOtherRefsRemained, to signal that at the precise
-// time the caller's reference was dropped, other references still remained (but
-// if other threads own references, this may of course have changed by the time
-// Release() returns).
+// reference than before the call. If the number of references dropped to zero
+// because of this the object must destroy itself.
 //
 // The caller of Release() must treat it in the same way as a delete operation:
-// Regardless of the return value from Release(), the caller mustn't access the
-// object. The object might still be alive, due to references held by other
-// users of the object, but the object can go away at any time, e.g., as the
-// result of another thread calling Release().
+// The caller mustn't access the object. The object might still be alive, due to
+// references held by other users of the object, but the object can go away at
+// any time, e.g., as the result of another thread calling Release().
 //
 // Calling AddRef() and Release() manually is discouraged. It's recommended to
 // use rtc::scoped_refptr to manage all pointers to reference counted objects.
 // Note that rtc::scoped_refptr depends on compile-time duck-typing; formally
 // implementing the below RefCountInterface is not required.
-
-enum class RefCountReleaseStatus { kDroppedLastRef, kOtherRefsRemained };
 
 // Interfaces where refcounting is part of the public api should
 // inherit this abstract interface. The implementation of these
@@ -54,12 +47,12 @@ enum class RefCountReleaseStatus { kDroppedLastRef, kOtherRefsRemained };
 class RefCountInterface {
  public:
   virtual void AddRef() const = 0;
-  virtual RefCountReleaseStatus Release() const = 0;
+  virtual void Release() const = 0;
 
+ protected:
   // Non-public destructor, because Release() has exclusive responsibility for
   // destroying the object.
- protected:
-  virtual ~RefCountInterface() {}
+  virtual ~RefCountInterface() = default;
 };
 
 }  // namespace rtc

@@ -13,6 +13,10 @@
 #include "rtc_base/atomic_ops.h"
 #include "rtc_base/ref_count.h"
 
+namespace rtc {
+enum class RefCountReleaseStatus { kDroppedLastRef, kOtherRefsRemained };
+}  // namespace rtc
+
 namespace webrtc {
 namespace webrtc_impl {
 
