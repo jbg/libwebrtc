@@ -16,6 +16,24 @@
       "revId": "11714e9986266b61306bac7ec7518649091910e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acf966d4_85d8b37e",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 5599
+      },
+      "writtenOn": "2019-11-25T23:53:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbe6acdb_f814e027",
+      "revId": "11714e9986266b61306bac7ec7518649091910e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
