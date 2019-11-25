@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e12958f8_7ea696a0",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-25T09:33:26Z",
+      "side": 1,
+      "message": "It looks like tests confirm that infinite sample_variance_ results in an infinite confidence interval. Nice.",
+      "range": {
+        "startLine": 64,
+        "startChar": 14,
+        "endLine": 64,
+        "endChar": 30
+      },
+      "revId": "9c7b8e651d6c08168cba8fd9aa581649d477e238",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fc918ae_75247d65",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-25T09:33:26Z",
+      "side": 1,
+      "message": "Could we have either stdint.h, math.h, or cstdint, cmath?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 16
+      },
+      "revId": "9c7b8e651d6c08168cba8fd9aa581649d477e238",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
