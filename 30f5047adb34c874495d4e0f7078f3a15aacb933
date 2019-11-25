@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efd5d345_0c0905d3",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-25T08:55:32Z",
+      "side": 1,
+      "message": "Could use M_LN2. Not sure what\u0027s clearer.",
+      "range": {
+        "startLine": 29,
+        "startChar": 42,
+        "endLine": 29,
+        "endChar": 48
+      },
+      "revId": "30f5047adb34c874495d4e0f7078f3a15aacb933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d626b2aa_ec12fed1",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-25T08:55:32Z",
+      "side": 1,
+      "message": "I think you need something more to transition from infinite to finite variance when you get the second sample. Should it be just sample_diff*sample_diff in this case, regardless of time between the first two samples?",
+      "range": {
+        "startLine": 49,
+        "startChar": 26,
+        "endLine": 49,
+        "endChar": 41
+      },
+      "revId": "30f5047adb34c874495d4e0f7078f3a15aacb933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d538a3af_0ea1da37",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-25T08:55:32Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 14
+      },
+      "revId": "30f5047adb34c874495d4e0f7078f3a15aacb933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94a79dd1_55c70d23",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-25T08:55:32Z",
+      "side": 1,
+      "message": "Initialize to zero or NaN?",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 15
+      },
+      "revId": "30f5047adb34c874495d4e0f7078f3a15aacb933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f7b1619_ae8bf614",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-25T08:55:32Z",
+      "side": 1,
+      "message": "This is really the ratio (\u003c\u003d 1.0) between variance of the estimate and variance of samples. Add a comment making this clear (unless you can come up with a more self-documenting name).",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 33
+      },
+      "revId": "30f5047adb34c874495d4e0f7078f3a15aacb933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ce17f8d_5546bcfd",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-25T08:55:32Z",
+      "side": 1,
+      "message": "I think you should either say in the docs that time unit is arbitrary (as long as |now| and |half_time| are in the same unit) and strike |ms_| here, or document some specific time unit everywhere, or appropriate time classes from api/units.",
+      "range": {
+        "startLine": 49,
+        "startChar": 53,
+        "endLine": 49,
+        "endChar": 56
+      },
+      "revId": "30f5047adb34c874495d4e0f7078f3a15aacb933",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
