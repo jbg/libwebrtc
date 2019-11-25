@@ -76,8 +76,8 @@ void FuzzGainControllerConfig(test::FuzzDataHelper* fuzz_data,
 
 void FuzzGainController(test::FuzzDataHelper* fuzz_data, GainControlImpl* gci) {
   using Rate = ::webrtc::AudioProcessing::NativeRate;
-  const Rate rate_kinds[] = {Rate::kSampleRate8kHz, Rate::kSampleRate16kHz,
-                             Rate::kSampleRate32kHz, Rate::kSampleRate48kHz};
+  const Rate rate_kinds[] = {Rate::kSampleRate16kHz, Rate::kSampleRate32kHz,
+                             Rate::kSampleRate48kHz};
 
   const auto sample_rate_hz =
       static_cast<size_t>(fuzz_data->SelectOneOf(rate_kinds));
@@ -95,12 +95,18 @@ void FuzzGainController(test::FuzzDataHelper* fuzz_data, GainControlImpl* gci) {
 
   while (fuzz_data->CanReadBytes(1)) {
     FillAudioBuffer(fuzz_data, &audio);
+    if (sample_rate_hz != 16000) {
+      audio.SplitIntoFrequencyBands();
+    }
 
     const bool stream_has_echo = fuzz_data->ReadOrDefaultValue(true);
     gci->AnalyzeCaptureAudio(audio);
     gci->ProcessCaptureAudio(&audio, stream_has_echo);
 
     FillAudioBuffer(fuzz_data, &audio);
+    if (sample_rate_hz != 16000) {
+      audio.SplitIntoFrequencyBands();
+    }
 
     gci->PackRenderAudioBuffer(audio, &packed_render_audio);
     gci->ProcessRenderAudio(packed_render_audio);
