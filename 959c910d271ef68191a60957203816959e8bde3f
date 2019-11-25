@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e72d7ee_00c907d0",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T12:43:07Z",
+      "side": 1,
+      "message": "OK, so the weight of the zero-time sample is halved, and the weight of the current sample is full, the total weight is 1.5, and the average is then 2/3. Now it makes sense :-)",
+      "revId": "959c910d271ef68191a60957203816959e8bde3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38b3b273_ff95d363",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T12:43:07Z",
+      "side": 1,
+      "message": "Thank you!\n\nThe interesting \"fun\" part here is that there\u0027s no way to tell from the samples that there\u0027s a difference between the two last distributions - yet their averages are strikingly different; the confidence interval width gives a hint of which one gives better data for the area \"near\" you.\n\nMakes the point that estimating where you don\u0027t have data is really hard :-)",
+      "revId": "959c910d271ef68191a60957203816959e8bde3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
