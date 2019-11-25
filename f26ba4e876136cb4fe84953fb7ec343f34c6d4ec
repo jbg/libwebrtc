@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2917a15_ad9d0df9",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2237,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-11-25T13:56:38Z",
+      "side": 1,
+      "message": "nit: Can also do !frame_size.IsZero()",
+      "range": {
+        "startLine": 2237,
+        "startChar": 6,
+        "endLine": 2237,
+        "endChar": 35
+      },
+      "revId": "f26ba4e876136cb4fe84953fb7ec343f34c6d4ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
