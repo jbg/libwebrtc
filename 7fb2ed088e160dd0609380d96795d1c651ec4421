@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7031bb18_9eef4b56",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "ninety!",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cb9f807_598e2aee",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "Add a comment about what half_time means.",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3723327_9d6b9325",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "I find 6-line ?: statements hard to read. What about an \"if\" statement instead?",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "731917cb_0b504893",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "You actually don\u0027t use either value_ or new_value in the intervening computation, so assigning value_ in line 42 is safe (simpler is good).",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e41693f_f0f9451e",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "and surprise ... the same thing applies to these variables too!",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a397259a_31534e6f",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "you\u0027ll regret not typing \"ninety\" correctly later, so please fix now :-)",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4a772f3_fef5cf20",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "Add a comment explaining what half_time is?",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eebbd953_2b2cdbb5",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "Add a commment about whether this is the width of the confidence interval (100+/-10 \u003d 20) or the distance between the limit of the confidence interval and the center (100 +/- 10 \u003d 10).",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1f11861_88b9b8a1",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "These are regression tests, right? There\u0027s no particular reason for the user to expect that the correct value of the moving average after \"half\" time is 2/3?\n(from the name of the argument, I would expect the result to be 500....)",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2c0be94_ed9bc71c",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-25T11:20:11Z",
+      "side": 1,
+      "message": "Since you support non-even time distributions, I\u0027d like to see some odd cases here:\n\n- t\u003d0: 100; t\u003d100: 100; t\u003d101: 0 (expected: around 80)\n- t\u003d0: 100; t\u003d1: 100; t\u003d101: 0 (expected: around 60)\n- t\u003d0....10: 100, t\u003d101: 0 (expected: only slightly above the previous one)\n- t\u003d0: 100; t\u003d90..101: 0 (expected: well below the previous one)\n\nI\u0027d like to see the tests give a \"feel\" for how this estimator works.",
+      "revId": "7fb2ed088e160dd0609380d96795d1c651ec4421",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
