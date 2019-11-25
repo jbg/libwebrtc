@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "a1600ab7_b59b47e0",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-11-25T07:15:33Z",
+      "side": 1,
+      "message": "These are common channel counts. We have often used {1, 2, 8} or {1,2, 6, 8} in AEC3 unittests. I don\u0027t mind picking an arbitrary number, other than keeping it not-too-high to avoid having to process too much data per fuzzer iteration.\n\nBy defining channel_counts here, it is clear that kMaxNumChannels and max(channel_counts) is equal.\n\nI changed the code to pick an arbitrary channel count in [1, kMaxNumChannels], ptal!",
+      "parentUuid": "720a4fd8_0bcf5e50",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 74,
+        "endChar": 48
+      },
+      "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17e929c1_5e4c4758",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-11-25T07:15:33Z",
+      "side": 1,
+      "message": "Good point!\nResolving because channel_counts is gone.",
+      "parentUuid": "a57c81f4_c4ca413f",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 7
+      },
+      "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f9df85f_8a9b8a6a",
         "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
         "patchSetId": 5
@@ -68,6 +116,30 @@
       "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bcf14f8_b651cce0",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-11-25T07:15:33Z",
+      "side": 1,
+      "message": "I don\u0027t follow, can you elaborate?\nAPM requires a pointer to each channel, formulated as a float** (i.e. an array of float*).\nWe give p \u003d \u0026float_frame_ptrs[0] to APM, and APM will iterate through p[0], p[1], ..., p[num_capture_channels].",
+      "parentUuid": "3f9df85f_8a9b8a6a",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
