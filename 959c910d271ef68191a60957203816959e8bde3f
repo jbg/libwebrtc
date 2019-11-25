@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f1b4dba3_551e6251",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-25T12:50:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e72d7ee_00c907d0",
+      "revId": "959c910d271ef68191a60957203816959e8bde3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38b3b273_ff95d363",
         "filename": "rtc_base/numerics/event_based_exponential_moving_average_unittest.cc",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "959c910d271ef68191a60957203816959e8bde3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "853ceb09_8d29bf4f",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2019-11-25T12:50:20Z",
+      "side": 1,
+      "message": "Ack,\nit also \"proves the point\" the I got when reading the existing rtt estimation code in\nConnection.cc that it _really really_ misses an important factor when not considering\nwhen the samples arrive.",
+      "parentUuid": "38b3b273_ff95d363",
+      "revId": "959c910d271ef68191a60957203816959e8bde3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
