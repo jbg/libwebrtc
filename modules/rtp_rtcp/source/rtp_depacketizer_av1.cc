@@ -13,6 +13,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <algorithm>
+
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
 #include "rtc_base/byte_buffer.h"
 #include "rtc_base/checks.h"
