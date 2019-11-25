@@ -204,7 +204,6 @@ WebRtcVoiceEngine::WebRtcVoiceEngine(
   worker_thread_checker_.Detach();
   signal_thread_checker_.Detach();
   RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::WebRtcVoiceEngine";
-  RTC_DCHECK(decoder_factory);
   RTC_DCHECK(encoder_factory);
   RTC_DCHECK(audio_processing);
   // The rest of our initialization will happen in Init.
@@ -241,9 +240,11 @@ void WebRtcVoiceEngine::Init() {
   }
 
   RTC_LOG(LS_INFO) << "Supported recv codecs in order of preference:";
-  recv_codecs_ = CollectCodecs(decoder_factory_->GetSupportedDecoders());
-  for (const AudioCodec& codec : recv_codecs_) {
-    RTC_LOG(LS_INFO) << ToString(codec);
+  if (decoder_factory_) {
+    recv_codecs_ = CollectCodecs(decoder_factory_->GetSupportedDecoders());
+    for (const AudioCodec& codec : recv_codecs_) {
+      RTC_LOG(LS_INFO) << ToString(codec);
+    }
   }
 
 #if defined(WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE)
@@ -1538,6 +1539,7 @@ bool WebRtcVoiceMediaChannel::SetRecvCodecs(
     }
     auto format = AudioCodecToSdpAudioFormat(codec);
     if (!IsCodec(codec, "cn") && !IsCodec(codec, "telephone-event") &&
+        engine()->decoder_factory_ &&
         !engine()->decoder_factory_->IsSupportedDecoder(format)) {
       RTC_LOG(LS_ERROR) << "Unsupported codec: " << rtc::ToString(format);
       return false;
