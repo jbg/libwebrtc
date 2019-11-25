@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "148659a2_abf22056",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-25T15:21:10Z",
+      "side": 1,
+      "message": "Could you please explain, why this is needed?",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 7
+      },
+      "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db570619_49c65bae",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-25T15:21:10Z",
+      "side": 1,
+      "message": "this?",
+      "range": {
+        "startLine": 374,
+        "startChar": 23,
+        "endLine": 374,
+        "endChar": 27
+      },
+      "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "230d1c3c_bb5da10a",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-25T15:21:10Z",
+      "side": 1,
+      "message": "than",
+      "range": {
+        "startLine": 374,
+        "startChar": 9,
+        "endLine": 374,
+        "endChar": 13
+      },
+      "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f15862b1_136671c2",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2019-11-25T15:21:10Z",
+      "side": 1,
+      "message": "\"in that case\" is repeated in that sentence.",
+      "range": {
+        "startLine": 375,
+        "startChar": 25,
+        "endLine": 375,
+        "endChar": 37
+      },
+      "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
