@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c2d4310f_a8917caf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-11-25T17:24:12Z",
+      "side": 1,
+      "message": "If we send a keep-alive padding packet every 500ms, and the last packet we sent was at time X, we should wake up at X+500ms to send a new packet.\n\nIf we _don\u0027t_ send these keep-alive messages and the last packet we sent was at time X, we don\u0027t want to \"sleep until time X+500ms\" because at any time past that timestamp we\u0027re gonna end up in a spin-loop until something is actually sent. Instead we just wait until the last process time (i.e. the last time we woke up to check the status) + 500ms. \nWe could conceivably increase this latter sleep time to something way higher, but prefer to not change the behavior too much in one go.",
+      "parentUuid": "148659a2_abf22056",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 7
+      },
+      "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db570619_49c65bae",
         "filename": "modules/pacing/pacing_controller.cc",
         "patchSetId": 1
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "08d7c987_2c1956e9",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-11-25T17:24:12Z",
+      "side": 1,
+      "message": "I rephrased this whole comment.",
+      "parentUuid": "230d1c3c_bb5da10a",
+      "range": {
+        "startLine": 374,
+        "startChar": 9,
+        "endLine": 374,
+        "endChar": 13
+      },
+      "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9226b4a6_4d856434",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-11-25T17:24:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "db570619_49c65bae",
+      "range": {
+        "startLine": 374,
+        "startChar": 23,
+        "endLine": 374,
+        "endChar": 27
+      },
+      "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f15862b1_136671c2",
         "filename": "modules/pacing/pacing_controller.cc",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9730366_9cffa197",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2019-11-25T17:24:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f15862b1_136671c2",
+      "range": {
+        "startLine": 375,
+        "startChar": 25,
+        "endLine": 375,
+        "endChar": 37
+      },
+      "revId": "3b7558a499d0a566848bd8a6f4bb9197b65848bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
