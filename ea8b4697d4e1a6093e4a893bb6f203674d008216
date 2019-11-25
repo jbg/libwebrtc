@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "e3ebe45f_68a77098",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-11-25T08:46:58Z",
+      "side": 1,
+      "message": "Perfect!",
+      "parentUuid": "a1600ab7_b59b47e0",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 74,
+        "endChar": 48
+      },
+      "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f9df85f_8a9b8a6a",
         "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
         "patchSetId": 5
@@ -140,6 +164,30 @@
       "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82eeda6d_afe899ab",
+        "filename": "test/fuzzers/audio_processing_fuzzer_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2019-11-25T08:46:58Z",
+      "side": 1,
+      "message": "bogus, sorry ;)",
+      "parentUuid": "3bcf14f8_b651cce0",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "ea8b4697d4e1a6093e4a893bb6f203674d008216",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
