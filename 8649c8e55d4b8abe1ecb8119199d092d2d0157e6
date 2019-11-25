@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ff5e50d_2aa37a13",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-25T17:42:33Z",
+      "side": 1,
+      "message": "Can you follow the example of DCHECK_ALWAYS_ON? I.e., also provide a GN variable? (Does Chromium already have a GN variable that we can use?)",
+      "revId": "8649c8e55d4b8abe1ecb8119199d092d2d0157e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed81e9db_3bd8b7d2",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-25T17:42:33Z",
+      "side": 1,
+      "message": "This will remove the code at the call sites. Could you also remove the code in logging.cc?",
+      "revId": "8649c8e55d4b8abe1ecb8119199d092d2d0157e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
