@@ -60,7 +60,7 @@
 #include "rtc_base/event.h"
 #include "rtc_base/message_handler.h"
 #include "rtc_base/message_queue.h"
-#include "rtc_base/ref_counted_object.h"
+#include "rtc_base/ref_counter.h"
 #include "rtc_base/system/rtc_export.h"
 #include "rtc_base/thread.h"
 
@@ -409,16 +409,27 @@ class MethodCall5 : public rtc::Message, public rtc::MessageHandler {
 
 // Note that the destructor is protected so that the proxy can only be
 // destroyed via RefCountInterface.
-#define REFCOUNTED_PROXY_MAP_BOILERPLATE(c)            \
- protected:                                            \
-  ~c##ProxyWithInternal() {                            \
-    MethodCall0<c##ProxyWithInternal, void> call(      \
-        this, &c##ProxyWithInternal::DestroyInternal); \
-    call.Marshal(RTC_FROM_HERE, destructor_thread());  \
-  }                                                    \
-                                                       \
- private:                                              \
-  void DestroyInternal() { c_ = nullptr; }             \
+#define REFCOUNTED_PROXY_MAP_BOILERPLATE(c)                    \
+ public:                                                       \
+  void AddRef() const override { ref_count_.IncRef(); }        \
+  rtc::RefCountReleaseStatus Release() const override {        \
+    rtc::RefCountReleaseStatus status = ref_count_.DecRef();   \
+    if (status == rtc::RefCountReleaseStatus::kDroppedLastRef) \
+      delete this;                                             \
+    return status;                                             \
+  }                                                            \
+                                                               \
+ protected:                                                    \
+  ~c##ProxyWithInternal() {                                    \
+    MethodCall0<c##ProxyWithInternal, void> call(              \
+        this, &c##ProxyWithInternal::DestroyInternal);         \
+    call.Marshal(RTC_FROM_HERE, destructor_thread());          \
+  }                                                            \
+                                                               \
+ private:                                                      \
+  void DestroyInternal() { c_ = nullptr; }                     \
+                                                               \
+  mutable webrtc::webrtc_impl::RefCounter ref_count_{0};       \
   rtc::scoped_refptr<INTERNAL_CLASS> c_;
 
 // Note: This doesn't use a unique_ptr, because it intends to handle a corner
@@ -438,27 +449,25 @@ class MethodCall5 : public rtc::Message, public rtc::MessageHandler {
   void DestroyInternal() { delete c_; }                \
   INTERNAL_CLASS* c_;
 
-#define BEGIN_SIGNALING_PROXY_MAP(c)                                         \
-  PROXY_MAP_BOILERPLATE(c)                                                   \
-  SIGNALING_PROXY_MAP_BOILERPLATE(c)                                         \
-  REFCOUNTED_PROXY_MAP_BOILERPLATE(c)                                        \
- public:                                                                     \
-  static rtc::scoped_refptr<c##ProxyWithInternal> Create(                    \
-      rtc::Thread* signaling_thread, INTERNAL_CLASS* c) {                    \
-    return new rtc::RefCountedObject<c##ProxyWithInternal>(signaling_thread, \
-                                                           c);               \
+#define BEGIN_SIGNALING_PROXY_MAP(c)                      \
+  PROXY_MAP_BOILERPLATE(c)                                \
+  SIGNALING_PROXY_MAP_BOILERPLATE(c)                      \
+  REFCOUNTED_PROXY_MAP_BOILERPLATE(c)                     \
+ public:                                                  \
+  static rtc::scoped_refptr<c##ProxyWithInternal> Create( \
+      rtc::Thread* signaling_thread, INTERNAL_CLASS* c) { \
+    return new c##ProxyWithInternal(signaling_thread, c); \
   }
 
-#define BEGIN_PROXY_MAP(c)                                                    \
-  PROXY_MAP_BOILERPLATE(c)                                                    \
-  WORKER_PROXY_MAP_BOILERPLATE(c)                                             \
-  REFCOUNTED_PROXY_MAP_BOILERPLATE(c)                                         \
- public:                                                                      \
-  static rtc::scoped_refptr<c##ProxyWithInternal> Create(                     \
-      rtc::Thread* signaling_thread, rtc::Thread* worker_thread,              \
-      INTERNAL_CLASS* c) {                                                    \
-    return new rtc::RefCountedObject<c##ProxyWithInternal>(signaling_thread,  \
-                                                           worker_thread, c); \
+#define BEGIN_PROXY_MAP(c)                                               \
+  PROXY_MAP_BOILERPLATE(c)                                               \
+  WORKER_PROXY_MAP_BOILERPLATE(c)                                        \
+  REFCOUNTED_PROXY_MAP_BOILERPLATE(c)                                    \
+ public:                                                                 \
+  static rtc::scoped_refptr<c##ProxyWithInternal> Create(                \
+      rtc::Thread* signaling_thread, rtc::Thread* worker_thread,         \
+      INTERNAL_CLASS* c) {                                               \
+    return new c##ProxyWithInternal(signaling_thread, worker_thread, c); \
   }
 
 #define BEGIN_OWNED_PROXY_MAP(c)                                   \
