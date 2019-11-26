@@ -104,6 +104,10 @@ class PeerConnectionFactory : public PeerConnectionFactoryInterface {
   virtual ~PeerConnectionFactory();
 
  private:
+  friend rtc::scoped_refptr<PeerConnectionFactoryInterface>
+  CreateModularPeerConnectionFactory(
+      PeerConnectionFactoryDependencies dependencies);
+
   bool IsTrialEnabled(absl::string_view key) const;
 
   std::unique_ptr<RtcEventLog> CreateRtcEventLog_w();

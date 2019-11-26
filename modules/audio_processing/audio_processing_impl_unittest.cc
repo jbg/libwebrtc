@@ -36,9 +36,6 @@ class MockInitialize : public AudioProcessingImpl {
   int RealInitializeLocked() RTC_NO_THREAD_SAFETY_ANALYSIS {
     return AudioProcessingImpl::InitializeLocked();
   }
-
-  MOCK_CONST_METHOD0(AddRef, void());
-  MOCK_CONST_METHOD0(Release, rtc::RefCountReleaseStatus());
 };
 
 // Creates MockEchoControl instances and provides a raw pointer access to
