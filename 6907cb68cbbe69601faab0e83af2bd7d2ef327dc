@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a519139c_d9e886cb",
+        "filename": "test/fuzzers/agc_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-11-26T08:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b239dd73_023f2c8a",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 5
+      },
+      "revId": "6907cb68cbbe69601faab0e83af2bd7d2ef327dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad99d0e6_bda506c0",
         "filename": "test/fuzzers/agc_fuzzer.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "6907cb68cbbe69601faab0e83af2bd7d2ef327dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf73c6d0_e451c161",
+        "filename": "test/fuzzers/agc_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-11-26T08:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad99d0e6_bda506c0",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 5
+      },
+      "revId": "6907cb68cbbe69601faab0e83af2bd7d2ef327dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
