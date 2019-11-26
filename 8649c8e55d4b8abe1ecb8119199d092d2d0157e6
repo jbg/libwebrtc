@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "79d5a6e0_588f1c1d",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-26T09:30:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d08fde9_2bdd941b",
+      "revId": "8649c8e55d4b8abe1ecb8119199d092d2d0157e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed81e9db_3bd8b7d2",
         "filename": "rtc_base/logging.h",
         "patchSetId": 3
@@ -51,6 +69,24 @@
       "revId": "8649c8e55d4b8abe1ecb8119199d092d2d0157e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09affad5_2a43a576",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-26T09:30:05Z",
+      "side": 1,
+      "message": "I didn\u0027t fully understand how code will be removed on calling site, Because as I understand here the code will be in place and will be optimized out during compilation time. But if we will remove code from .cc file, will compilation be broken?",
+      "parentUuid": "ed81e9db_3bd8b7d2",
+      "revId": "8649c8e55d4b8abe1ecb8119199d092d2d0157e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
