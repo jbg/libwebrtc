@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1d08fde9_2bdd941b",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-11-26T09:20:37Z",
+      "side": 1,
+      "message": "\u003e Does Chromium already have a GN variable that we can use?\n\nI am not aware of anything like this in Chromium but maybe let\u0027s double check https://cs.chromium.org/chromium/src/base/logging.h. I would say it is ok to define a new WebRTC only variable + macro.",
+      "parentUuid": "1ff5e50d_2aa37a13",
+      "revId": "8649c8e55d4b8abe1ecb8119199d092d2d0157e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ed81e9db_3bd8b7d2",
         "filename": "rtc_base/logging.h",
         "patchSetId": 3
