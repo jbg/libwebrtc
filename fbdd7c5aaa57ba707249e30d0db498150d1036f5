@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a93be886_eecbc1b9",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-26T11:29:29Z",
+      "side": 1,
+      "message": "Done.\n(except that I strictly dislike pronoun \u0027we\u0027 as it may refer both to implementer and to the user of the function)",
+      "parentUuid": "861f50ff_47e101bb",
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5b9f922_9d6679b1",
         "filename": "rtc_base/ref_counter.h",
         "patchSetId": 4
@@ -36,6 +54,47 @@
     },
     {
       "key": {
+        "uuid": "f492ff45_79f7660f",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-26T11:29:29Z",
+      "side": 1,
+      "message": "I tried to talk about both, since acquire and release are two parts of the same synchronization.\n(tbh, I took this comment from chromium code almost unchanged).\n\nit just happen that this function participates in both parts of that synchronization.",
+      "parentUuid": "a5b9f922_9d6679b1",
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "370c16f3_b865d986",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-26T11:29:29Z",
+      "side": 1,
+      "message": "I also rephrased the comments to be consistent with this phrase.",
+      "range": {
+        "startLine": 54,
+        "startChar": 37,
+        "endLine": 55,
+        "endChar": 22
+      },
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62eb05a1_987f655d",
         "filename": "rtc_base/ref_counter.h",
         "patchSetId": 4
@@ -47,6 +106,24 @@
       "writtenOn": "2019-11-26T10:47:17Z",
       "side": 1,
       "message": "The current text is not correct---we do not release. Suggestion:\n\n  // We need acquire memory order because in case the atomic op returns 1, we\u0027re allowed to access the refcounted object without caring about concurrent accesses from other threads from then on; such accesses must not be reordered before the atomic op.\n  // In short, we release no permissions, and conditionally acquire the permission to exclusive-use the refcounted object.",
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8946a5ee_7a392c98",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-26T11:29:29Z",
+      "side": 1,
+      "message": "we do release part in DecRef.\n\nAs I understand release and acquire must come in pair:\nhttps://en.cppreference.com/w/cpp/atomic/memory_order#Release-Acquire_ordering\n\ncomment rephrased, does it look correct now?",
+      "parentUuid": "62eb05a1_987f655d",
       "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
