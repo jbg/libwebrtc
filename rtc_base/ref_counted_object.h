@@ -20,27 +20,16 @@
 namespace rtc {
 
 template <class T>
-class RefCountedObject : public T {
+class RefCountedObject final : public T {
  public:
-  RefCountedObject() {}
+  template <typename... Args>
+  explicit RefCountedObject(Args&&... args) : T(std::forward<Args>(args)...) {}
 
-  template <class P0>
-  explicit RefCountedObject(P0&& p0) : T(std::forward<P0>(p0)) {}
-
-  template <class P0, class P1, class... Args>
-  RefCountedObject(P0&& p0, P1&& p1, Args&&... args)
-      : T(std::forward<P0>(p0),
-          std::forward<P1>(p1),
-          std::forward<Args>(args)...) {}
-
-  virtual void AddRef() const { ref_count_.IncRef(); }
-
-  virtual RefCountReleaseStatus Release() const {
-    const auto status = ref_count_.DecRef();
-    if (status == RefCountReleaseStatus::kDroppedLastRef) {
+  void AddRef() const { ref_count_.IncRef(); }
+  void Release() const {
+    if (ref_count_.DecRef()) {
       delete this;
     }
-    return status;
   }
 
   // Return whether the reference count is one. If the reference count is used
@@ -49,14 +38,12 @@ class RefCountedObject : public T {
   // performs the test for a reference count of one, and performs the memory
   // barrier needed for the owning thread to act on the object, knowing that it
   // has exclusive access to the object.
-  virtual bool HasOneRef() const { return ref_count_.HasOneRef(); }
+  bool HasOneRef() const { return ref_count_.HasOneRef(); }
 
  protected:
-  virtual ~RefCountedObject() {}
+  ~RefCountedObject() {}
 
   mutable webrtc::webrtc_impl::RefCounter ref_count_{0};
-
-  RTC_DISALLOW_COPY_AND_ASSIGN(RefCountedObject);
 };
 
 }  // namespace rtc

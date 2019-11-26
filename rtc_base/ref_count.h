@@ -10,6 +10,8 @@
 #ifndef RTC_BASE_REF_COUNT_H_
 #define RTC_BASE_REF_COUNT_H_
 
+#include "rtc_base/ref_counter.h"
+
 namespace rtc {
 
 // Refcounted objects should implement the following informal interface:
@@ -45,21 +47,26 @@ namespace rtc {
 // Note that rtc::scoped_refptr depends on compile-time duck-typing; formally
 // implementing the below RefCountInterface is not required.
 
-enum class RefCountReleaseStatus { kDroppedLastRef, kOtherRefsRemained };
-
 // Interfaces where refcounting is part of the public api should
 // inherit this abstract interface. The implementation of these
 // methods is usually provided by the RefCountedObject template class,
 // applied as a leaf in the inheritance tree.
 class RefCountInterface {
  public:
-  virtual void AddRef() const = 0;
-  virtual RefCountReleaseStatus Release() const = 0;
+  virtual void AddRef() const { ref_count_.IncRef(); }
+  virtual void Release() const {
+    if (ref_count_.DecRef())
+      delete this;
+  }
+  bool HasOneRef() const { return ref_count_.HasOneRef(); }
 
+ protected:
   // Non-public destructor, because Release() has exclusive responsibility for
   // destroying the object.
- protected:
-  virtual ~RefCountInterface() {}
+  virtual ~RefCountInterface() = default;
+
+ private:
+  mutable webrtc::webrtc_impl::RefCounter ref_count_{0};
 };
 
 }  // namespace rtc

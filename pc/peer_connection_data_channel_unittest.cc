@@ -80,18 +80,16 @@ PeerConnectionFactoryDependencies CreatePeerConnectionFactoryDependencies(
 
 }  // namespace
 
-class PeerConnectionFactoryForDataChannelTest
-    : public rtc::RefCountedObject<PeerConnectionFactory> {
+class PeerConnectionFactoryForDataChannelTest : public PeerConnectionFactory {
  public:
   PeerConnectionFactoryForDataChannelTest()
-      : rtc::RefCountedObject<PeerConnectionFactory>(
-            CreatePeerConnectionFactoryDependencies(
-                rtc::Thread::Current(),
-                rtc::Thread::Current(),
-                rtc::Thread::Current(),
-                std::make_unique<cricket::FakeMediaEngine>(),
-                CreateCallFactory(),
-                std::make_unique<FakeMediaTransportFactory>())) {}
+      : PeerConnectionFactory(CreatePeerConnectionFactoryDependencies(
+            rtc::Thread::Current(),
+            rtc::Thread::Current(),
+            rtc::Thread::Current(),
+            std::make_unique<cricket::FakeMediaEngine>(),
+            CreateCallFactory(),
+            std::make_unique<FakeMediaTransportFactory>())) {}
 
   std::unique_ptr<cricket::SctpTransportInternalFactory>
   CreateSctpTransportInternalFactory() {
