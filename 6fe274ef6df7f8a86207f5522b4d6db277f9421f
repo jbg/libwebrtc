@@ -16,6 +16,24 @@
       "revId": "6fe274ef6df7f8a86207f5522b4d6db277f9421f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc0bc4c8_f5b3d756",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-26T14:34:30Z",
+      "side": 1,
+      "message": "Finally I left only implementation of public API of logging.",
+      "parentUuid": "e72b56de_eda21047",
+      "revId": "6fe274ef6df7f8a86207f5522b4d6db277f9421f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
