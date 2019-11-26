@@ -368,9 +368,12 @@ class LogStreamer<T, Ts...> final {
 class LogCall final {
  public:
   // This can be any binary operator with precedence lower than <<.
+  // We return bool here to be able properly remove logging if
+  // RTC_DISABLE_LOGGING is defined.
   template <typename... Ts>
-  RTC_FORCE_INLINE void operator&(const LogStreamer<Ts...>& streamer) {
+  RTC_FORCE_INLINE bool operator&(const LogStreamer<Ts...>& streamer) {
     streamer.Call();
+    return true;
   }
 };
 
@@ -517,10 +520,17 @@ class LogMessage {
 // Logging Helpers
 //////////////////////////////////////////////////////////////////////
 
-#define RTC_LOG_FILE_LINE(sev, file, line)      \
-  rtc::webrtc_logging_impl::LogCall() &         \
-      rtc::webrtc_logging_impl::LogStreamer<>() \
-          << rtc::webrtc_logging_impl::LogMetadata(file, line, sev)
+#if defined(RTC_DISABLE_LOGGING)
+#define RTC_LOG_ENABLED() 0
+#else
+#define RTC_LOG_ENABLED() 1
+#endif
+
+#define RTC_LOG_FILE_LINE(sev, file, line)          \
+  RTC_LOG_ENABLED() &&                              \
+      rtc::webrtc_logging_impl::LogCall() &         \
+          rtc::webrtc_logging_impl::LogStreamer<>() \
+              << rtc::webrtc_logging_impl::LogMetadata(file, line, sev)
 
 #define RTC_LOG(sev) RTC_LOG_FILE_LINE(rtc::sev, __FILE__, __LINE__)
 
@@ -544,11 +554,11 @@ inline bool LogCheckLevel(LoggingSeverity sev) {
   return (LogMessage::GetMinLogSeverity() <= sev);
 }
 
-#define RTC_LOG_E(sev, ctx, err)                             \
-  rtc::webrtc_logging_impl::LogCall() &                      \
-      rtc::webrtc_logging_impl::LogStreamer<>()              \
-          << rtc::webrtc_logging_impl::LogMetadataErr {      \
-    {__FILE__, __LINE__, rtc::sev}, rtc::ERRCTX_##ctx, (err) \
+#define RTC_LOG_E(sev, ctx, err)                                             \
+  RTC_LOG_ENABLED() && rtc::webrtc_logging_impl::LogCall() &                 \
+                           rtc::webrtc_logging_impl::LogStreamer<>()         \
+                               << rtc::webrtc_logging_impl::LogMetadataErr { \
+    {__FILE__, __LINE__, rtc::sev}, rtc::ERRCTX_##ctx, (err)                 \
   }
 
 #define RTC_LOG_T(sev) RTC_LOG(sev) << this << ": "
@@ -581,11 +591,11 @@ inline const char* AdaptString(const std::string& str) {
 }
 }  // namespace webrtc_logging_impl
 
-#define RTC_LOG_TAG(sev, tag)                           \
-  rtc::webrtc_logging_impl::LogCall() &                 \
-      rtc::webrtc_logging_impl::LogStreamer<>()         \
-          << rtc::webrtc_logging_impl::LogMetadataTag { \
-    sev, rtc::webrtc_logging_impl::AdaptString(tag)     \
+#define RTC_LOG_TAG(sev, tag)                                                \
+  RTC_LOG_ENABLED() && rtc::webrtc_logging_impl::LogCall() &                 \
+                           rtc::webrtc_logging_impl::LogStreamer<>()         \
+                               << rtc::webrtc_logging_impl::LogMetadataTag { \
+    sev, rtc::webrtc_logging_impl::AdaptString(tag)                          \
   }
 
 #else
