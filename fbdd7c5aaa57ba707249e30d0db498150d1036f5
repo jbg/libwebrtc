@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "861f50ff_47e101bb",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-26T10:47:17Z",
+      "side": 1,
+      "message": "Suggestion with less extraneous details:\n\n  // Relaxed memory order: The current thread is allowed to access the reference counted object both before and after the atomic op, so we don\u0027t need to prevent memory access reordering past the atomic op.",
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5b9f922_9d6679b1",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-26T10:47:17Z",
+      "side": 1,
+      "message": "Also talk about the acquire half? Suggestion:\n\n  // We need release memory order because after the atomic op, the current thread is no longer allowed to touch the refcounted object, so all memory accesses to it must finish before that. We also need acquire memory order because in case we are the ones removing the last reference, we\u0027ll be destroying the refcounted object, and memory accesses related to that must not be reordered before the atomic op.\n  // In short, we release the permission to use the refcounted object, and conditionally acquire the permission to destroy it.",
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62eb05a1_987f655d",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-26T10:47:17Z",
+      "side": 1,
+      "message": "The current text is not correct---we do not release. Suggestion:\n\n  // We need acquire memory order because in case the atomic op returns 1, we\u0027re allowed to access the refcounted object without caring about concurrent accesses from other threads from then on; such accesses must not be reordered before the atomic op.\n  // In short, we release no permissions, and conditionally acquire the permission to exclusive-use the refcounted object.",
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
