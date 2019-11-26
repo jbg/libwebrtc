@@ -87,6 +87,24 @@
       "revId": "8649c8e55d4b8abe1ecb8119199d092d2d0157e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5465527c_f2fabc21",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-26T09:47:08Z",
+      "side": 1,
+      "message": "\u003e I didn\u0027t fully understand how code will be removed on calling site, Because as I understand here the code will be in place and will be optimized out during compilation time.\n\nYes, that\u0027s exactly right---the code will be here but dead, and the compiler will end up not emitting any instructions for it (presumably).\n\n\u003e But if we will remove code from .cc file, will compilation be broken?\n\nIf a function is declared in .h and defined in .cc, the compiler will emit code for it even if no one calls it. The linker will in some cases omit it, but often not. What you can do is something like this:\n\n  #if RTC_LOG_ENABLED()\n  // .h; declare\n  // void Foo();\n  // .cc: define\n  // void Foo() { /* implementation goes here */ }\n  #else\n  // .h; declare + define\n  // inline void Foo() { /* do nothing; no one will call this function */ }\n  #endif",
+      "parentUuid": "09affad5_2a43a576",
+      "revId": "8649c8e55d4b8abe1ecb8119199d092d2d0157e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
