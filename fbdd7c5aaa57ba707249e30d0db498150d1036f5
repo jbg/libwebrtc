@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "fedab67c_61a9adf1",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-26T12:37:34Z",
+      "side": 1,
+      "message": "We think your dislike is unfounded, but very well. :-)",
+      "parentUuid": "a93be886_eecbc1b9",
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5b9f922_9d6679b1",
         "filename": "rtc_base/ref_counter.h",
         "patchSetId": 4
@@ -124,6 +142,24 @@
       "side": 1,
       "message": "we do release part in DecRef.\n\nAs I understand release and acquire must come in pair:\nhttps://en.cppreference.com/w/cpp/atomic/memory_order#Release-Acquire_ordering\n\ncomment rephrased, does it look correct now?",
       "parentUuid": "62eb05a1_987f655d",
+      "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73937837_5ca7f056",
+        "filename": "rtc_base/ref_counter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-26T12:37:34Z",
+      "side": 1,
+      "message": "\u003e we do release part in DecRef.\n\nYes, but not here, which is what I thought the comment was talking about when it said \"insert acquire-release barrier\".\n\n\u003e As I understand release and acquire must come in pair:\n\u003e https://en.cppreference.com/w/cpp/atomic/memory_order#Release-Acquire_ordering\n\nThey don\u0027t have to, but if they don\u0027t, the don\u0027t *do* anything.\n\nI find it useful to think of it in terms of acquiring and releasing some permission. For example, in HasOneRef, we acquire the exclusive-use permission; in IncRef, we just keep the share-use permission; and in DecRef, we release any permission we had and acquire the delete permission.\n\n(We initially acquire the share-use *and* exclusive-use permissions when creating the counter---or, equivalently, we always had them---and we lose the exclusive-use permission when we transfer ownership of a refcount to another thread; the inter-thread communication primitive will contain the proper release barrier.)\n\n\u003e comment rephrased, does it look correct now?\n\nYes.",
+      "parentUuid": "8946a5ee_7a392c98",
       "revId": "fbdd7c5aaa57ba707249e30d0db498150d1036f5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
