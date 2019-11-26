@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e72b56de_eda21047",
+        "filename": "rtc_base/logging.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-26T13:28:54Z",
+      "side": 1,
+      "message": "What prevents you from having this entire file #ifdeffed on RTC_LOG_ENABLED()?",
+      "revId": "6fe274ef6df7f8a86207f5522b4d6db277f9421f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
