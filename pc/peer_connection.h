@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "api/peer_connection_interface.h"
+#include "api/ref_counted_base.h"
 #include "api/transport/data_channel_transport_interface.h"
 #include "api/transport/media/media_transport_interface.h"
 #include "api/turn_customizer.h"
@@ -65,6 +66,7 @@ class PeerConnection : public PeerConnectionInternal,
                        public JsepTransportController::Observer,
                        public RtpSenderBase::SetStreamsObserver,
                        public rtc::MessageHandler,
+                       public rtc::RefCountedBase,
                        public sigslot::has_slots<> {
  public:
   // A bit in the usage pattern is registered when its defining event occurs at
@@ -121,6 +123,11 @@ class PeerConnection : public PeerConnectionInternal,
   bool Initialize(
       const PeerConnectionInterface::RTCConfiguration& configuration,
       PeerConnectionDependencies dependencies);
+
+  void AddRef() const override { RefCountedBase::AddRef(); }
+  rtc::RefCountReleaseStatus Release() const override {
+    return RefCountedBase::Release();
+  }
 
   rtc::scoped_refptr<StreamCollectionInterface> local_streams() override;
   rtc::scoped_refptr<StreamCollectionInterface> remote_streams() override;

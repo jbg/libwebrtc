@@ -294,8 +294,7 @@ PeerConnectionFactory::CreatePeerConnection(
       rtc::Bind(&PeerConnectionFactory::CreateCall_w, this, event_log.get()));
 
   rtc::scoped_refptr<PeerConnection> pc(
-      new rtc::RefCountedObject<PeerConnection>(this, std::move(event_log),
-                                                std::move(call)));
+      new PeerConnection(this, std::move(event_log), std::move(call)));
   ActionsBeforeInitializeForTesting(pc);
   if (!pc->Initialize(configuration, std::move(dependencies))) {
     return nullptr;
