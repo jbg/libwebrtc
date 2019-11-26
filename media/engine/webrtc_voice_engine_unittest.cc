@@ -135,9 +135,7 @@ void AdmSetupExpectations(webrtc::test::MockAudioDeviceModule* adm) {
   EXPECT_CALL(*adm, StopRecording()).WillOnce(Return(0));
   EXPECT_CALL(*adm, RegisterAudioCallback(nullptr)).WillOnce(Return(0));
   EXPECT_CALL(*adm, Terminate()).WillOnce(Return(0));
-  EXPECT_CALL(*adm, Release())
-      .Times(3)
-      .WillRepeatedly(Return(rtc::RefCountReleaseStatus::kDroppedLastRef));
+  EXPECT_CALL(*adm, Release()).Times(3);
 }
 }  // namespace
 
@@ -3481,9 +3479,7 @@ TEST(WebRtcVoiceEngineTest, StartupShutdownWithExternalADM) {
       webrtc::CreateDefaultTaskQueueFactory();
   ::testing::NiceMock<webrtc::test::MockAudioDeviceModule> adm;
   EXPECT_CALL(adm, AddRef()).Times(3);
-  EXPECT_CALL(adm, Release())
-      .Times(3)
-      .WillRepeatedly(Return(rtc::RefCountReleaseStatus::kDroppedLastRef));
+  EXPECT_CALL(adm, Release()).Times(3);
   {
     rtc::scoped_refptr<webrtc::AudioProcessing> apm =
         webrtc::AudioProcessingBuilder().Create();
