@@ -30,32 +30,32 @@ class A {
   RTC_DISALLOW_COPY_AND_ASSIGN(A);
 };
 
-class RefClass : public RefCountInterface {
+class RefClass {
  public:
   RefClass() {}
 
  protected:
-  ~RefClass() override {}
+  ~RefClass() {}
 };
 
-class RefClassWithRvalue : public RefCountInterface {
+class RefClassWithRvalue {
  public:
   explicit RefClassWithRvalue(std::unique_ptr<A> a) : a_(std::move(a)) {}
 
  protected:
-  ~RefClassWithRvalue() override {}
+  ~RefClassWithRvalue() {}
 
  public:
   std::unique_ptr<A> a_;
 };
 
-class RefClassWithMixedValues : public RefCountInterface {
+class RefClassWithMixedValues {
  public:
   RefClassWithMixedValues(std::unique_ptr<A> a, int b, const std::string& c)
       : a_(std::move(a)), b_(b), c_(c) {}
 
  protected:
-  ~RefClassWithMixedValues() override {}
+  ~RefClassWithMixedValues() {}
 
  public:
   std::unique_ptr<A> a_;
@@ -71,13 +71,13 @@ TEST(RefCountedObject, HasOneRef) {
   EXPECT_TRUE(aref->HasOneRef());
   aref->AddRef();
   EXPECT_FALSE(aref->HasOneRef());
-  EXPECT_EQ(aref->Release(), RefCountReleaseStatus::kOtherRefsRemained);
+  aref->Release();
   EXPECT_TRUE(aref->HasOneRef());
 }
 
 TEST(RefCountedObject, SupportRValuesInCtor) {
   std::unique_ptr<A> a(new A());
-  scoped_refptr<RefClassWithRvalue> ref(
+  scoped_refptr<RefCountedObject<RefClassWithRvalue>> ref(
       new RefCountedObject<RefClassWithRvalue>(std::move(a)));
   EXPECT_TRUE(ref->a_.get() != nullptr);
   EXPECT_TRUE(a.get() == nullptr);
@@ -87,7 +87,7 @@ TEST(RefCountedObject, SupportMixedTypesInCtor) {
   std::unique_ptr<A> a(new A());
   int b = 9;
   std::string c = "hello";
-  scoped_refptr<RefClassWithMixedValues> ref(
+  scoped_refptr<RefCountedObject<RefClassWithMixedValues>> ref(
       new RefCountedObject<RefClassWithMixedValues>(std::move(a), b, c));
   EXPECT_TRUE(ref->a_.get() != nullptr);
   EXPECT_TRUE(a.get() == nullptr);

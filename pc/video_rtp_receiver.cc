@@ -42,7 +42,7 @@ VideoRtpReceiver::VideoRtpReceiver(
     const std::vector<rtc::scoped_refptr<MediaStreamInterface>>& streams)
     : worker_thread_(worker_thread),
       id_(receiver_id),
-      source_(new RefCountedObject<VideoRtpTrackSource>(this)),
+      source_(new VideoRtpTrackSource(this)),
       track_(VideoTrackProxy::Create(
           rtc::Thread::Current(),
           worker_thread,
