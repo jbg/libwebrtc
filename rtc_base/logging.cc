@@ -7,7 +7,6 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-
 #if defined(WEBRTC_WIN)
 #include <windows.h>
 #if _MSC_VER < 1900
@@ -50,10 +49,14 @@ namespace rtc {
 namespace {
 // By default, release builds don't log, debug builds at info level
 #if !defined(NDEBUG)
+#if RTC_LOG_ENABLED()
 static LoggingSeverity g_min_sev = LS_INFO;
+#endif  // RTC_LOG_ENABLED()
 static LoggingSeverity g_dbg_sev = LS_INFO;
 #else
+#if RTC_LOG_ENABLED()
 static LoggingSeverity g_min_sev = LS_NONE;
+#endif  // RTC_LOG_ENABLED()
 static LoggingSeverity g_dbg_sev = LS_NONE;
 #endif
 
@@ -213,6 +216,7 @@ LogMessage::~LogMessage() {
   }
 }
 
+#if RTC_LOG_ENABLED()
 void LogMessage::AddTag(const char* tag) {
 #ifdef WEBRTC_ANDROID
   tag_ = tag;
@@ -552,4 +556,7 @@ void Log(const LogArgType* fmt, ...) {
 }
 
 }  // namespace webrtc_logging_impl
+
+#endif  // RTC_LOG_ENABLED()
+
 }  // namespace rtc
