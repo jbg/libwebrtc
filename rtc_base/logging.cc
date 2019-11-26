@@ -8,6 +8,12 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include "rtc_base/logging.h"
+
+#include <string.h>
+
+#if RTC_LOG_ENABLED()
+
 #if defined(WEBRTC_WIN)
 #include <windows.h>
 #if _MSC_VER < 1900
@@ -28,7 +34,6 @@ static const int kMaxLogLineSize = 1024 - 60;
 #endif  // WEBRTC_MAC && !defined(WEBRTC_IOS) || WEBRTC_ANDROID
 
 #include <stdio.h>
-#include <string.h>
 #include <time.h>
 
 #include <algorithm>
@@ -38,7 +43,6 @@ static const int kMaxLogLineSize = 1024 - 60;
 #include "absl/base/attributes.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/critical_section.h"
-#include "rtc_base/logging.h"
 #include "rtc_base/platform_thread_types.h"
 #include "rtc_base/string_encode.h"
 #include "rtc_base/string_utils.h"
@@ -70,7 +74,10 @@ const char* FilenameFromPath(const char* file) {
 // Global lock for log subsystem, only needed to serialize access to streams_.
 CriticalSection g_log_crit;
 }  // namespace
+}  // namespace rtc
+#endif  // RTC_LOG_ENABLED()
 
+namespace rtc {
 // Inefficient default implementation, override is recommended.
 void LogSink::OnLogMessage(const std::string& msg,
                            LoggingSeverity severity,
@@ -82,7 +89,10 @@ void LogSink::OnLogMessage(const std::string& msg,
                            LoggingSeverity /* severity */) {
   OnLogMessage(msg);
 }
+}  // namespace rtc
 
+#if RTC_LOG_ENABLED()
+namespace rtc {
 /////////////////////////////////////////////////////////////////////////////
 // LogMessage
 /////////////////////////////////////////////////////////////////////////////
@@ -553,3 +563,4 @@ void Log(const LogArgType* fmt, ...) {
 
 }  // namespace webrtc_logging_impl
 }  // namespace rtc
+#endif
