@@ -10,7 +10,6 @@
 #ifndef API_REF_COUNTED_BASE_H_
 #define API_REF_COUNTED_BASE_H_
 
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/ref_count.h"
 #include "rtc_base/ref_counter.h"
 
@@ -19,14 +18,14 @@ namespace rtc {
 class RefCountedBase {
  public:
   RefCountedBase() = default;
+  RefCountedBase(const RefCountedBase&) = delete;
+  RefCountedBase& operator=(const RefCountedBase&) = delete;
 
   void AddRef() const { ref_count_.IncRef(); }
-  RefCountReleaseStatus Release() const {
-    const auto status = ref_count_.DecRef();
-    if (status == RefCountReleaseStatus::kDroppedLastRef) {
+  void Release() const {
+    if (ref_count_.DecRef() == RefCountReleaseStatus::kDroppedLastRef) {
       delete this;
     }
-    return status;
   }
 
  protected:
@@ -34,8 +33,6 @@ class RefCountedBase {
 
  private:
   mutable webrtc::webrtc_impl::RefCounter ref_count_{0};
-
-  RTC_DISALLOW_COPY_AND_ASSIGN(RefCountedBase);
 };
 
 }  // namespace rtc

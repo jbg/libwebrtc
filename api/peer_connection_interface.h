@@ -89,6 +89,7 @@
 #include "api/neteq/neteq_factory.h"
 #include "api/network_state_predictor.h"
 #include "api/packet_socket_factory.h"
+#include "api/ref_counted_base.h"
 #include "api/rtc_error.h"
 #include "api/rtc_event_log/rtc_event_log_factory_interface.h"
 #include "api/rtc_event_log_output.h"
@@ -151,7 +152,7 @@ class StatsObserver : public rtc::RefCountInterface {
 
 enum class SdpSemantics { kPlanB, kUnifiedPlan };
 
-class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
+class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountedBase {
  public:
   // See https://w3c.github.io/webrtc-pc/#dom-rtcsignalingstate
   enum SignalingState {
