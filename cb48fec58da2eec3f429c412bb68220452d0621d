@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0c77b7e_b7aa80fe",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-11-27T08:11:49Z",
+      "side": 1,
+      "message": "This is not accurate. We already essentially support multi channel capture. This only affects injected echo cancellers and AEC3. Please clarify this in the comment.",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 41
+      },
+      "revId": "cb48fec58da2eec3f429c412bb68220452d0621d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
