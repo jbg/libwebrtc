@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e23c8c6e_7c8ad602",
+        "filename": "common_video/h264/h264_common.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2019-11-28T11:46:59Z",
+      "side": 1,
+      "message": "can we add a static assert somewhere in this loop that guarantees that kNaluShortStartSequenceSize is \u003e\u003d 2? Just want to make sure we never attempt to read beyond buffer boundaries.",
+      "revId": "a9834b24bf555a7aca0e713f243aa9aabd6a1ce6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
