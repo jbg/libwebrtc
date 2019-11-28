@@ -22,6 +22,30 @@
       "revId": "a8ae4f1e1d388ffb6b4f336dd75aaf95363b799b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e58833ec_b1ced2cf",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 24
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 10010
+      },
+      "writtenOn": "2019-11-28T19:36:37Z",
+      "side": 1,
+      "message": "Done: sorry about that, committed by accident after local check",
+      "parentUuid": "e00fbeb1_335f2230",
+      "range": {
+        "startLine": 1013,
+        "startChar": 2,
+        "endLine": 1015,
+        "endChar": 31
+      },
+      "revId": "a8ae4f1e1d388ffb6b4f336dd75aaf95363b799b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
