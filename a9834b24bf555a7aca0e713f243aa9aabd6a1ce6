@@ -16,6 +16,24 @@
       "revId": "a9834b24bf555a7aca0e713f243aa9aabd6a1ce6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d666b2e5_54020cd1",
+        "filename": "common_video/h264/h264_common.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7223
+      },
+      "writtenOn": "2019-11-28T23:38:02Z",
+      "side": 1,
+      "message": "Sure, would checking before the for loop appropriate?",
+      "parentUuid": "e23c8c6e_7c8ad602",
+      "revId": "a9834b24bf555a7aca0e713f243aa9aabd6a1ce6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
