@@ -226,6 +226,12 @@ VideoFrame::Builder& VideoFrame::Builder::set_update_rect(
   return *this;
 }
 
+VideoFrame::Builder& VideoFrame::Builder::set_update_rect(
+    const absl::optional<VideoFrame::UpdateRect>& update_rect) {
+  update_rect_ = update_rect;
+  return *this;
+}
+
 VideoFrame::Builder& VideoFrame::Builder::set_packet_infos(
     RtpPacketInfos packet_infos) {
   packet_infos_ = std::move(packet_infos);
