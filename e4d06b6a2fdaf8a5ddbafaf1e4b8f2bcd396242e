@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "776b31e3_eff42fb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-28T07:43:16Z",
+      "side": 1,
+      "message": "The result of the measurement isn\u0027t used anywhere - no stats, no actions, not even a log that I can see. Is that for a future CL?\n\nIf so, add \"This will be used for..\" to the description.",
+      "revId": "e4d06b6a2fdaf8a5ddbafaf1e4b8f2bcd396242e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2b6e113_e89ebad0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-28T07:43:16Z",
+      "side": 1,
+      "message": "English nit: \"This patch creates a field trial for estmiating the RTT using ....\"",
+      "revId": "e4d06b6a2fdaf8a5ddbafaf1e4b8f2bcd396242e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "909fcc0c_863c1c24",
+        "filename": "p2p/base/p2p_transport_channel_ice_field_trials.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-28T07:43:16Z",
+      "side": 1,
+      "message": "A very short comment :-) care to say more?",
+      "revId": "e4d06b6a2fdaf8a5ddbafaf1e4b8f2bcd396242e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6211a12a_73d6b5e4",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-28T07:43:16Z",
+      "side": 1,
+      "message": "Just for convenience in understanding initialization, I\u0027d move this together with the SetHalfTime method.",
+      "revId": "e4d06b6a2fdaf8a5ddbafaf1e4b8f2bcd396242e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e40b2d_ed40e893",
+        "filename": "rtc_base/numerics/event_based_exponential_moving_average_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-28T07:43:16Z",
+      "side": 1,
+      "message": "With kError being 0.1, a returned value of constant 50.1 would actually pass the test.\n\nI suggest removing the sample at t+101 to get a larger spread of the results.",
+      "revId": "e4d06b6a2fdaf8a5ddbafaf1e4b8f2bcd396242e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
