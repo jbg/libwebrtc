@@ -28,8 +28,14 @@ namespace rtc {
 // a sample gets exponentially less weight so that it's 50%
 // after |half_time| time units has passed.
 EventBasedExponentialMovingAverage::EventBasedExponentialMovingAverage(
-    int half_time)
-    : tau_(static_cast<double>(half_time) / log(2)) {}
+    int half_time) {
+  SetHalfTime(half_time);
+}
+
+void EventBasedExponentialMovingAverage::SetHalfTime(int half_time) {
+  tau_ = static_cast<double>(half_time) / log(2);
+  Reset();
+}
 
 void EventBasedExponentialMovingAverage::AddSample(int64_t now, int sample) {
   if (!last_observation_timestamp_.has_value()) {
@@ -61,6 +67,13 @@ void EventBasedExponentialMovingAverage::AddSample(int64_t now, int sample) {
 double EventBasedExponentialMovingAverage::GetConfidenceInterval() const {
   return ninetyfive_percent_confidence *
          sqrt(sample_variance_ * estimator_variance_);
+}
+
+void EventBasedExponentialMovingAverage::Reset() {
+  value_ = std::nan("uninit");
+  sample_variance_ = std::numeric_limits<double>::infinity();
+  estimator_variance_ = 1;
+  last_observation_timestamp_.reset();
 }
 
 }  // namespace rtc
