@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24b1e6e8_3276727b",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "Doing all of this work in the ctor initialier list feels a bit weird...",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 40
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10d82d16_f9ceb97b",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "|payload_reader| or |payload_buffer_reader|?",
+      "range": {
+        "startLine": 97,
+        "startChar": 24,
+        "endLine": 97,
+        "endChar": 33
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18d1095f_a6434395",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "If you should be able to pipe encoder output to a decoder directly, then this should never happen (since the decoder needs it)?",
+      "range": {
+        "startLine": 113,
+        "startChar": 9,
+        "endLine": 113,
+        "endChar": 19
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ed67fbc_15b01bc6",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "size.\"",
+      "range": {
+        "startLine": 122,
+        "startChar": 64,
+        "endLine": 122,
+        "endChar": 68
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e71c0afe_9d15473b",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "max_size_first_fragment",
+      "range": {
+        "startLine": 223,
+        "startChar": 8,
+        "endLine": 223,
+        "endChar": 34
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66c0e270_e3b70f11",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "|packet_remaining_bytes - Leb128Size(packet_remaining_bytes)|, right?",
+      "range": {
+        "startLine": 224,
+        "startChar": 38,
+        "endLine": 224,
+        "endChar": 77
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33ac47e7_fcca48d4",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "size_first_fragment",
+      "range": {
+        "startLine": 230,
+        "startChar": 4,
+        "endLine": 230,
+        "endChar": 30
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7465d02_bcb4eba2",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "{}",
+      "range": {
+        "startLine": 327,
+        "startChar": 4,
+        "endLine": 327,
+        "endChar": 35
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cec706ea_8b06cb21",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "Possible to replace with |num_obus_in_packet|?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 17
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50b391c7_ac06c417",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "I don\u0027t get this comment, maybe something like:\n\n  // Returns the number of additional bytes needed to store the previous OBU\n  // element if an additonal OBU element was added to the packet.\n\n\nMaybe AdditionalBytesForPreviousObuElement?\n\n:)",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 55
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b556bab_fe8cf267",
+        "filename": "modules/rtp_rtcp/source/rtp_packetizer_av1_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2019-11-28T10:16:36Z",
+      "side": 1,
+      "message": "WDYT about creating a builder to make the frames more understandable?",
+      "range": {
+        "startLine": 114,
+        "startChar": 16,
+        "endLine": 114,
+        "endChar": 22
+      },
+      "revId": "521f2de88911d8e373b78d14383a11ea3a7ab0e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
