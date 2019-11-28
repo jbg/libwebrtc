@@ -60,7 +60,6 @@ class RtcEventLog;
 // - The ICE state machine.
 // - Generating stats.
 class PeerConnection : public PeerConnectionInternal,
-                       public DataChannelProviderInterface,
                        public DataChannelSink,
                        public JsepTransportController::Observer,
                        public RtpSenderBase::SetStreamsObserver,
@@ -396,6 +395,25 @@ class PeerConnection : public PeerConnectionInternal,
     // and if the datagram transport is enabled, it will only be used when
     // receiving incoming calls, not when placing outgoing calls.
     FieldTrialFlag receive_only;
+  };
+
+  // Controller for datachannels. Intended to be separated out; placed here as a
+  // first stage in refactoring.
+  class DataChannelController : public DataChannelProviderInterface {
+   public:
+    explicit DataChannelController(PeerConnection* pc) : pc_(pc) {}
+    // Implements DataChannelProviderInterface.
+    bool SendData(const cricket::SendDataParams& params,
+                  const rtc::CopyOnWriteBuffer& payload,
+                  cricket::SendDataResult* result) override;
+    bool ConnectDataChannel(DataChannel* webrtc_data_channel) override;
+    void DisconnectDataChannel(DataChannel* webrtc_data_channel) override;
+    void AddSctpDataStream(int sid) override;
+    void RemoveSctpDataStream(int sid) override;
+    bool ReadyToSendData() const override;
+
+   private:
+    PeerConnection* pc_;
   };
 
   // Captures partial state to be used for rollback. Applicable only in
@@ -973,16 +991,6 @@ class PeerConnection : public PeerConnectionInternal,
   cricket::IceConfig ParseIceConfig(
       const PeerConnectionInterface::RTCConfiguration& config) const;
 
-  // Implements DataChannelProviderInterface.
-  bool SendData(const cricket::SendDataParams& params,
-                const rtc::CopyOnWriteBuffer& payload,
-                cricket::SendDataResult* result) override;
-  bool ConnectDataChannel(DataChannel* webrtc_data_channel) override;
-  void DisconnectDataChannel(DataChannel* webrtc_data_channel) override;
-  void AddSctpDataStream(int sid) override;
-  void RemoveSctpDataStream(int sid) override;
-  bool ReadyToSendData() const override;
-
   cricket::DataChannelType data_channel_type() const;
 
   // Implements DataChannelSink.
@@ -1490,6 +1498,7 @@ class PeerConnection : public PeerConnectionInternal,
       local_ice_credentials_to_replace_ RTC_GUARDED_BY(signaling_thread());
   bool is_negotiation_needed_ RTC_GUARDED_BY(signaling_thread()) = false;
 
+  DataChannelController data_channel_controller_;
   rtc::WeakPtrFactory<PeerConnection> weak_ptr_factory_
       RTC_GUARDED_BY(signaling_thread());
 };

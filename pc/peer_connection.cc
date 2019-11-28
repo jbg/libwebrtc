@@ -1030,6 +1030,7 @@ PeerConnection::PeerConnection(PeerConnectionFactory* factory,
       call_ptr_(call_.get()),
       data_channel_transport_(nullptr),
       local_ice_credentials_to_replace_(new LocalIceCredentialsToReplace()),
+      data_channel_controller_(this),
       weak_ptr_factory_(this) {}
 
 PeerConnection::~PeerConnection() {
@@ -5837,8 +5838,8 @@ rtc::scoped_refptr<DataChannel> PeerConnection::InternalCreateDataChannel(
     }
   }
 
-  rtc::scoped_refptr<DataChannel> channel(
-      DataChannel::Create(this, data_channel_type(), label, new_config));
+  rtc::scoped_refptr<DataChannel> channel(DataChannel::Create(
+      &data_channel_controller_, data_channel_type(), label, new_config));
   if (!channel) {
     sid_allocator_.ReleaseSid(new_config.id);
     return nullptr;
@@ -6461,11 +6462,12 @@ cricket::IceConfig PeerConnection::ParseIceConfig(
   return ice_config;
 }
 
-bool PeerConnection::SendData(const cricket::SendDataParams& params,
-                              const rtc::CopyOnWriteBuffer& payload,
-                              cricket::SendDataResult* result) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  if (data_channel_transport_) {
+bool PeerConnection::DataChannelController::SendData(
+    const cricket::SendDataParams& params,
+    const rtc::CopyOnWriteBuffer& payload,
+    cricket::SendDataResult* result) {
+  // RTC_DCHECK_RUN_ON(signaling_thread());
+  if (pc_->data_channel_transport_) {
     SendDataParams send_params;
     send_params.type = ToWebrtcDataMessageType(params.type);
     send_params.ordered = params.ordered;
@@ -6475,10 +6477,10 @@ bool PeerConnection::SendData(const cricket::SendDataParams& params,
       send_params.max_rtx_ms = params.max_rtx_ms;
     }
 
-    RTCError error = network_thread()->Invoke<RTCError>(
+    RTCError error = pc_->network_thread()->Invoke<RTCError>(
         RTC_FROM_HERE, [this, params, send_params, payload] {
-          return data_channel_transport_->SendData(params.sid, send_params,
-                                                   payload);
+          return pc_->data_channel_transport_->SendData(params.sid, send_params,
+                                                        payload);
         });
 
     if (error.ok()) {
@@ -6492,84 +6494,92 @@ bool PeerConnection::SendData(const cricket::SendDataParams& params,
     }
     *result = cricket::SendDataResult::SDR_ERROR;
     return false;
-  } else if (rtp_data_channel_) {
-    return rtp_data_channel_->SendData(params, payload, result);
+  } else if (pc_->rtp_data_channel_) {
+    return pc_->rtp_data_channel_->SendData(params, payload, result);
   }
   RTC_LOG(LS_ERROR) << "SendData called before transport is ready";
   return false;
 }
 
-bool PeerConnection::ConnectDataChannel(DataChannel* webrtc_data_channel) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  if (!rtp_data_channel_ && !data_channel_transport_) {
+bool PeerConnection::DataChannelController::ConnectDataChannel(
+    DataChannel* webrtc_data_channel) {
+  RTC_DCHECK_RUN_ON(pc_->signaling_thread());
+  if (!pc_->rtp_data_channel_ && !pc_->data_channel_transport_) {
     // Don't log an error here, because DataChannels are expected to call
     // ConnectDataChannel in this state. It's the only way to initially tell
     // whether or not the underlying transport is ready.
     return false;
   }
-  if (data_channel_transport_) {
-    SignalDataChannelTransportWritable_s.connect(webrtc_data_channel,
-                                                 &DataChannel::OnChannelReady);
-    SignalDataChannelTransportReceivedData_s.connect(
+  if (pc_->data_channel_transport_) {
+    pc_->SignalDataChannelTransportWritable_s.connect(
+        webrtc_data_channel, &DataChannel::OnChannelReady);
+    pc_->SignalDataChannelTransportReceivedData_s.connect(
         webrtc_data_channel, &DataChannel::OnDataReceived);
-    SignalDataChannelTransportChannelClosing_s.connect(
+    pc_->SignalDataChannelTransportChannelClosing_s.connect(
         webrtc_data_channel, &DataChannel::OnClosingProcedureStartedRemotely);
-    SignalDataChannelTransportChannelClosed_s.connect(
+    pc_->SignalDataChannelTransportChannelClosed_s.connect(
         webrtc_data_channel, &DataChannel::OnClosingProcedureComplete);
   }
-  if (rtp_data_channel_) {
-    rtp_data_channel_->SignalReadyToSendData.connect(
+  if (pc_->rtp_data_channel_) {
+    pc_->rtp_data_channel_->SignalReadyToSendData.connect(
         webrtc_data_channel, &DataChannel::OnChannelReady);
-    rtp_data_channel_->SignalDataReceived.connect(webrtc_data_channel,
-                                                  &DataChannel::OnDataReceived);
+    pc_->rtp_data_channel_->SignalDataReceived.connect(
+        webrtc_data_channel, &DataChannel::OnDataReceived);
   }
   return true;
 }
 
-void PeerConnection::DisconnectDataChannel(DataChannel* webrtc_data_channel) {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  if (!rtp_data_channel_ && !data_channel_transport_) {
+void PeerConnection::DataChannelController::DisconnectDataChannel(
+    DataChannel* webrtc_data_channel) {
+  RTC_DCHECK_RUN_ON(pc_->signaling_thread());
+  if (!pc_->rtp_data_channel_ && !pc_->data_channel_transport_) {
     RTC_LOG(LS_ERROR)
         << "DisconnectDataChannel called when rtp_data_channel_ and "
            "sctp_transport_ are NULL.";
     return;
   }
-  if (data_channel_transport_) {
-    SignalDataChannelTransportWritable_s.disconnect(webrtc_data_channel);
-    SignalDataChannelTransportReceivedData_s.disconnect(webrtc_data_channel);
-    SignalDataChannelTransportChannelClosing_s.disconnect(webrtc_data_channel);
-    SignalDataChannelTransportChannelClosed_s.disconnect(webrtc_data_channel);
+  if (pc_->data_channel_transport_) {
+    pc_->SignalDataChannelTransportWritable_s.disconnect(webrtc_data_channel);
+    pc_->SignalDataChannelTransportReceivedData_s.disconnect(
+        webrtc_data_channel);
+    pc_->SignalDataChannelTransportChannelClosing_s.disconnect(
+        webrtc_data_channel);
+    pc_->SignalDataChannelTransportChannelClosed_s.disconnect(
+        webrtc_data_channel);
   }
-  if (rtp_data_channel_) {
-    rtp_data_channel_->SignalReadyToSendData.disconnect(webrtc_data_channel);
-    rtp_data_channel_->SignalDataReceived.disconnect(webrtc_data_channel);
+  if (pc_->rtp_data_channel_) {
+    pc_->rtp_data_channel_->SignalReadyToSendData.disconnect(
+        webrtc_data_channel);
+    pc_->rtp_data_channel_->SignalDataReceived.disconnect(webrtc_data_channel);
   }
 }
 
-void PeerConnection::AddSctpDataStream(int sid) {
-  if (data_channel_transport_) {
-    network_thread()->Invoke<void>(RTC_FROM_HERE, [this, sid] {
-      if (data_channel_transport_) {
-        data_channel_transport_->OpenChannel(sid);
+void PeerConnection::DataChannelController::AddSctpDataStream(int sid) {
+  if (pc_->data_channel_transport_) {
+    pc_->network_thread()->Invoke<void>(RTC_FROM_HERE, [this, sid] {
+      if (pc_->data_channel_transport_) {
+        pc_->data_channel_transport_->OpenChannel(sid);
       }
     });
   }
 }
 
-void PeerConnection::RemoveSctpDataStream(int sid) {
-  if (data_channel_transport_) {
-    network_thread()->Invoke<void>(RTC_FROM_HERE, [this, sid] {
-      if (data_channel_transport_) {
-        data_channel_transport_->CloseChannel(sid);
+void PeerConnection::DataChannelController::RemoveSctpDataStream(int sid) {
+  if (pc_->data_channel_transport_) {
+    pc_->network_thread()->Invoke<void>(RTC_FROM_HERE, [this, sid] {
+      if (pc_->data_channel_transport_) {
+        pc_->data_channel_transport_->CloseChannel(sid);
       }
     });
   }
 }
 
-bool PeerConnection::ReadyToSendData() const {
-  RTC_DCHECK_RUN_ON(signaling_thread());
-  return (rtp_data_channel_ && rtp_data_channel_->ready_to_send_data()) ||
-         (data_channel_transport_ && data_channel_transport_ready_to_send_);
+bool PeerConnection::DataChannelController::ReadyToSendData() const {
+  RTC_DCHECK_RUN_ON(pc_->signaling_thread());
+  return (pc_->rtp_data_channel_ &&
+          pc_->rtp_data_channel_->ready_to_send_data()) ||
+         (pc_->data_channel_transport_ &&
+          pc_->data_channel_transport_ready_to_send_);
 }
 
 void PeerConnection::OnDataReceived(int channel_id,
