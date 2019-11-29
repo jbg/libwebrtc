@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a90e6cdf_99fe82fe",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-11-29T12:53:09Z",
+      "side": 1,
+      "message": "You could consider deleting the first of these two methods, and rely on implicit conversion to optional.\n\nIn principle, could use argument type const UpdateRect* instead of optional (as discussed before), but I take it optional is more convenient, and that\u0027s where we ended up with set_color_space?",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 76
+      },
+      "revId": "7a2ededee4611a1500de690fd9ed0b33378c115c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
