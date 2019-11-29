@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7991ec9_4dfa8529",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-11-29T12:05:20Z",
+      "side": 1,
+      "message": "Do we have a bug for this? Since it is a multiple step process it may make sense to create one.",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "29e8723a25356ffa2140bf14b9d35a3bec9de2d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8a3a028_2ac19aec",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-11-29T12:05:20Z",
+      "side": 1,
+      "message": "The refactoring step SGTM (keeping the inner class and then extract).\n\nThe thing I am a bit concerned is that both PeerConnection and DataChannelController need each other. It would be nice if at the end of the refactoring we could have only PC delegating to the DataChannelController or have a different interface in order to break the cycle.\n\nThis is good for more than on reason, the longer term one is that if we will ever be able to have optional data channels, it will be easier to exclude if there is no dependency cycle between PC and DC.",
+      "range": {
+        "startLine": 509,
+        "startChar": 4,
+        "endLine": 509,
+        "endChar": 23
+      },
+      "revId": "29e8723a25356ffa2140bf14b9d35a3bec9de2d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
