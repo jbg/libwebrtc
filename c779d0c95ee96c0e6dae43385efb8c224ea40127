@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "48b6cb53_f9d49d70",
+        "filename": "test/fuzzers/rtp_packetizer_av1_fuzzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-29T09:10:21Z",
+      "side": 1,
+      "message": "that\u0027s cut done with the subview function.\nLet me reorganize code differently to make it visible \u003cparams\u003e are independant from the main buffer.",
+      "parentUuid": "86d51eb3_4daaa7fa",
+      "range": {
+        "startLine": 36,
+        "startChar": 25,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "c779d0c95ee96c0e6dae43385efb8c224ea40127",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d4873b4_df85eae2",
         "filename": "test/fuzzers/rtp_packetizer_av1_fuzzer.cc",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "c779d0c95ee96c0e6dae43385efb8c224ea40127",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9aaa3cf_28162404",
+        "filename": "test/fuzzers/rtp_packetizer_av1_fuzzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-11-29T09:10:21Z",
+      "side": 1,
+      "message": "no, it doesn\u0027t.\nI do not remember what were my reasons for this hack, but they do not look valid.\n(Added \u003c\u003c \"Packet #\" \u003c\u003c i  and checked that error message includes both original error and appends that line)",
+      "parentUuid": "1d4873b4_df85eae2",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 19
+      },
+      "revId": "c779d0c95ee96c0e6dae43385efb8c224ea40127",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
