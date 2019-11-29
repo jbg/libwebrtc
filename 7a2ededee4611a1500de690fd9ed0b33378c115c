@@ -22,6 +22,30 @@
       "revId": "7a2ededee4611a1500de690fd9ed0b33378c115c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72c66bd1_ecfe0bd0",
+        "filename": "api/video/video_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-11-29T15:54:11Z",
+      "side": 1,
+      "message": "Actually form without optional was used in 1 place except generators.",
+      "parentUuid": "a90e6cdf_99fe82fe",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 76
+      },
+      "revId": "7a2ededee4611a1500de690fd9ed0b33378c115c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
