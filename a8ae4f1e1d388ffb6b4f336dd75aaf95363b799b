@@ -46,6 +46,30 @@
       "revId": "a8ae4f1e1d388ffb6b4f336dd75aaf95363b799b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d5c37e5_d293b105",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 24
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-11-29T07:45:11Z",
+      "side": 1,
+      "message": "Thanks, I am triggering another CQ dry run, but I will leave the +2 to jamiewalch@.",
+      "parentUuid": "e58833ec_b1ced2cf",
+      "range": {
+        "startLine": 1013,
+        "startChar": 2,
+        "endLine": 1015,
+        "endChar": 31
+      },
+      "revId": "a8ae4f1e1d388ffb6b4f336dd75aaf95363b799b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
