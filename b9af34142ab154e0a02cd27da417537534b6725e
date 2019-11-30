@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c6fb08f6_0a9dc846",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-30T17:11:50Z",
+      "side": 1,
+      "message": "Yes, it makes step 6 in the refactoring process easier (move the class out).\nI tried a couple of ways to have an inner class with a need to look at the innards of the outer class declared in a separate .h file, but none worked - the dependency is circular.\n\nOnce step 6 arrives, that will be fixed.",
+      "parentUuid": "65245685_bd1facda",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d725b35_0e880714",
         "filename": "pc/data_channel_controller.cc",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2019-11-30T15:11:36Z",
       "side": 1,
       "message": "Why commented out?",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0159fe6a_8e52dcc9",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-30T17:11:50Z",
+      "side": 1,
+      "message": "It turned out that having a single function refer to guarded variables in two different classes was complex - you can\u0027t have two RTC_DCHEKC_RUN_ON that are syntactically different in the same scope, even when they refer to the same underlying thread. So rather than make the intermediate stage more complex, I commented out the guards.\n\nI left the comments in so that I\u0027ll remember to put them back again.",
+      "parentUuid": "5d725b35_0e880714",
       "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "9780064a_b57eff0f",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-30T17:11:50Z",
+      "side": 1,
+      "message": "Same as the other commented-out guard.",
+      "parentUuid": "6fd3e87d_cc696383",
+      "range": {
+        "startLine": 489,
+        "startChar": 36,
+        "endLine": 489,
+        "endChar": 77
+      },
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3ade52ff_4cbb77fb",
         "filename": "pc/peer_connection.h",
         "patchSetId": 6
@@ -70,6 +130,24 @@
       "writtenOn": "2019-11-30T15:11:36Z",
       "side": 1,
       "message": "const?",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "219955d6_7c0cc559",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-11-30T17:11:50Z",
+      "side": 1,
+      "message": "where does the const belong?\nat the beginning is not proper (the PeerConnection isn\u0027t const), at the end is a syntax error.\n\nPeerConnection const * pc_;\nPeerConnection* const pc_;\n\nI decided to skip the experimentation and ask someone who already knows.",
+      "parentUuid": "3ade52ff_4cbb77fb",
       "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
