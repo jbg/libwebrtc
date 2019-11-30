@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65245685_bd1facda",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-30T15:11:36Z",
+      "side": 1,
+      "message": "This technically violates the style guide [https://webrtc.googlesource.com/src/+/master/style-guide.md#h-cc-pairs], but I can see how it\u0027s desirable to put the inner class\u0027 implementation in a separate .cc file. So let\u0027s do it like this,",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d725b35_0e880714",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-30T15:11:36Z",
+      "side": 1,
+      "message": "Why commented out?",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fd3e87d_cc696383",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-30T15:11:36Z",
+      "side": 1,
+      "message": "Why commented out?",
+      "range": {
+        "startLine": 489,
+        "startChar": 36,
+        "endLine": 489,
+        "endChar": 77
+      },
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ade52ff_4cbb77fb",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-11-30T15:11:36Z",
+      "side": 1,
+      "message": "const?",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
