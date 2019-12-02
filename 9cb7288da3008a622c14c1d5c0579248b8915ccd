@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95cddb5c_581c8fd7",
+        "filename": "test/frame_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-02T00:28:35Z",
+      "side": 1,
+      "message": "std::move here, to avoid one copy (the cost is one atomic increment fo the copy constructor, and one atomic decrement for the destructor).",
+      "range": {
+        "startLine": 53,
+        "startChar": 17,
+        "endLine": 53,
+        "endChar": 23
+      },
+      "revId": "9cb7288da3008a622c14c1d5c0579248b8915ccd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
