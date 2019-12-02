@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc505b1c_e6a19fe6",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-12-02T09:08:23Z",
+      "side": 1,
+      "message": "nit: may be use binary too.\n\nalso you may write this check differently to explain why level need to be that way:\nif ((*level \u0026 0b0111\u00271111) !\u003d *level) \n(but using \u0027\u003e\u0027 has it\u0027s advantages too)",
+      "range": {
+        "startLine": 895,
+        "startChar": 17,
+        "endLine": 895,
+        "endChar": 21
+      },
+      "revId": "004501a4ab7101712c10aa6b300fb30034354a54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c704ab95_4f2f9d5e",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2019-12-02T09:08:23Z",
+      "side": 1,
+      "message": "this expression looks simple enough, so may be no need to wrap it in ()",
+      "range": {
+        "startLine": 898,
+        "startChar": 14,
+        "endLine": 898,
+        "endChar": 15
+      },
+      "revId": "004501a4ab7101712c10aa6b300fb30034354a54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
