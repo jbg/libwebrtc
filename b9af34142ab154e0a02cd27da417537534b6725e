@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "17430d98_7aed99cc",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-02T00:08:54Z",
+      "side": 1,
+      "message": "Yes---it appears my reply was cut off, but yes, since this is a temporary state of affairs, it\u0027s OK.\n\n(By the way, I think the way to do this is to define the classes in their respective .h files, as mutual friends if necessary, and then have any code that actually touches the innards of the other class in method bodies in the .h files. But as agreed, don\u0027t do this.)",
+      "parentUuid": "c6fb08f6_0a9dc846",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d725b35_0e880714",
         "filename": "pc/data_channel_controller.cc",
         "patchSetId": 6
@@ -69,6 +87,24 @@
       "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc3e8c02_4c1c15be",
+        "filename": "pc/data_channel_controller.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-02T00:08:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0159fe6a_8e52dcc9",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "87d03d69_861c9e1d",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-02T00:08:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9780064a_b57eff0f",
+      "range": {
+        "startLine": 489,
+        "startChar": 36,
+        "endLine": 489,
+        "endChar": 77
+      },
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ade52ff_4cbb77fb",
         "filename": "pc/peer_connection.h",
         "patchSetId": 6
@@ -148,6 +208,24 @@
       "side": 1,
       "message": "where does the const belong?\nat the beginning is not proper (the PeerConnection isn\u0027t const), at the end is a syntax error.\n\nPeerConnection const * pc_;\nPeerConnection* const pc_;\n\nI decided to skip the experimentation and ask someone who already knows.",
       "parentUuid": "3ade52ff_4cbb77fb",
+      "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42c15736_a95f7d8d",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-02T00:08:54Z",
+      "side": 1,
+      "message": "\u003e where does the const belong?\n\u003e at the beginning is not proper (the PeerConnection isn\u0027t const), at the end is a syntax error.\n\u003e \n\u003e PeerConnection const * pc_;\n\nThis is equivalent to `const PeerConnection* pc_;`, which is not what we want.\n\n\u003e PeerConnection* const pc_;\n\nYes, this is what I meant. This is a const pointer to a mutable object---you can change the object, but not the pointer. Making things const greatly improves readability when they have a large scope.\n\n\u003e \n\u003e I decided to skip the experimentation and ask someone who already knows.",
+      "parentUuid": "219955d6_7c0cc559",
       "revId": "b9af34142ab154e0a02cd27da417537534b6725e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
