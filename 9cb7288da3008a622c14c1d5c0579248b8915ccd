@@ -22,6 +22,30 @@
       "revId": "9cb7288da3008a622c14c1d5c0579248b8915ccd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "644df164_fcb488cf",
+        "filename": "test/frame_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2019-12-02T09:34:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95cddb5c_581c8fd7",
+      "range": {
+        "startLine": 53,
+        "startChar": 17,
+        "endLine": 53,
+        "endChar": 23
+      },
+      "revId": "9cb7288da3008a622c14c1d5c0579248b8915ccd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
