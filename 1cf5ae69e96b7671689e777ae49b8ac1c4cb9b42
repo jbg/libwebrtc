@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "8ffda9d7_cfe38e83",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-12-02T16:12:00Z",
+      "side": 1,
+      "message": "Ah, I see your point.\n\nColorSpaceExtension can judge what version it should use not because it is told to use one or two bytes, but the because the data size encodes it.",
+      "parentUuid": "d13dede8_36c57131",
+      "range": {
+        "startLine": 892,
+        "startChar": 2,
+        "endLine": 892,
+        "endChar": 65
+      },
+      "revId": "1cf5ae69e96b7671689e777ae49b8ac1c4cb9b42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24ff297f_2a4efd09",
         "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
         "patchSetId": 3
@@ -249,6 +273,30 @@
       "side": 1,
       "message": "it is a bit worse (e.g would probably cause few bytes larger binary)\nbut why use an alias here? no extensions above does that.\n\nFor reader that would require an extra hop to understand how this function should be used.\n(value_type alias really exists for certain template function, not for human reader)",
       "parentUuid": "56ef61ca_a22ce233",
+      "range": {
+        "startLine": 311,
+        "startChar": 50,
+        "endLine": 311,
+        "endChar": 67
+      },
+      "revId": "1cf5ae69e96b7671689e777ae49b8ac1c4cb9b42",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "493f9f46_c327fbc6",
+        "filename": "modules/rtp_rtcp/source/rtp_header_extensions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2019-12-02T16:12:00Z",
+      "side": 1,
+      "message": "agreed, and changed",
+      "parentUuid": "120d0995_2fb6998e",
       "range": {
         "startLine": 311,
         "startChar": 50,
