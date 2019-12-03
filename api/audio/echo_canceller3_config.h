@@ -25,6 +25,7 @@ struct RTC_EXPORT EchoCanceller3Config {
 
   EchoCanceller3Config();
   EchoCanceller3Config(const EchoCanceller3Config& e);
+  EchoCanceller3Config& operator=(const EchoCanceller3Config& other);
 
   struct Buffering {
     size_t excess_render_detection_interval_blocks = 250;
@@ -34,6 +35,7 @@ struct RTC_EXPORT EchoCanceller3Config {
   struct Delay {
     Delay();
     Delay(const Delay& e);
+    Delay& operator=(const Delay& e);
     size_t default_delay = 5;
     size_t down_sampling_factor = 4;
     size_t num_filters = 5;
@@ -125,6 +127,7 @@ struct RTC_EXPORT EchoCanceller3Config {
   struct EchoModel {
     EchoModel();
     EchoModel(const EchoModel& e);
+    EchoModel& operator=(const EchoModel& e);
     size_t noise_floor_hold = 50;
     float min_noise_floor_power = 1638400.f;
     float stationary_gate_slope = 10.f;
@@ -137,6 +140,7 @@ struct RTC_EXPORT EchoCanceller3Config {
   struct Suppressor {
     Suppressor();
     Suppressor(const Suppressor& e);
+    Suppressor& operator=(const Suppressor& e);
 
     size_t nearend_average_blocks = 4;
 
@@ -145,6 +149,7 @@ struct RTC_EXPORT EchoCanceller3Config {
                         float enr_suppress,
                         float emr_transparent);
       MaskingThresholds(const MaskingThresholds& e);
+      MaskingThresholds& operator=(const MaskingThresholds& e);
       float enr_transparent;
       float enr_suppress;
       float emr_transparent;
@@ -156,6 +161,7 @@ struct RTC_EXPORT EchoCanceller3Config {
              float max_inc_factor,
              float max_dec_factor_lf);
       Tuning(const Tuning& e);
+      Tuning& operator=(const Tuning& e);
       MaskingThresholds mask_lf;
       MaskingThresholds mask_hf;
       float max_inc_factor;
