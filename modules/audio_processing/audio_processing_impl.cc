@@ -247,7 +247,8 @@ bool AudioProcessingImpl::SubmoduleStates::RenderMultiBandProcessingActive()
 
 bool AudioProcessingImpl::SubmoduleStates::HighPassFilteringRequired() const {
   return high_pass_filter_enabled_ || echo_canceller_enabled_ ||
-         mobile_echo_controller_enabled_ || noise_suppressor_enabled_;
+         mobile_echo_controller_enabled_ || noise_suppressor_enabled_ ||
+         echo_controller_enabled_;
 }
 
 AudioProcessingBuilder::AudioProcessingBuilder() = default;
@@ -676,6 +677,7 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
     InitializeNoiseSuppressor();
   }
 
+  UpdateActiveSubmoduleStates();
   InitializeHighPassFilter();
 
   if (agc1_config_changed) {
@@ -1788,7 +1790,7 @@ AudioProcessing::Config AudioProcessingImpl::GetConfig() const {
 
 bool AudioProcessingImpl::UpdateActiveSubmoduleStates() {
   return submodule_states_.Update(
-      config_.high_pass_filter.enabled, !!submodules_.echo_cancellation,
+      config_.high_pass_filter.enabled, config_.echo_canceller.enabled,
       !!submodules_.echo_control_mobile, config_.residual_echo_detector.enabled,
       !!submodules_.legacy_noise_suppressor || !!submodules_.noise_suppressor,
       submodules_.gain_control->is_enabled(), config_.gain_controller2.enabled,
