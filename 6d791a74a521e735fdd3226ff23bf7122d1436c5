@@ -22,6 +22,30 @@
       "revId": "6d791a74a521e735fdd3226ff23bf7122d1436c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f92472e_309655ee",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-12-03T10:16:38Z",
+      "side": 1,
+      "message": "I think you are right in that this is a very fragile behavior. This is also now clear from the bots which pinpointed that the tests fail for DEBUG mode.\n\nI\u0027m not that happy to modify the config struct but I found another way to accomplish the desired effect.\n\nPTAL",
+      "parentUuid": "09333fbb_0d492be1",
+      "range": {
+        "startLine": 680,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 29
+      },
+      "revId": "6d791a74a521e735fdd3226ff23bf7122d1436c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
