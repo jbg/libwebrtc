@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09333fbb_0d492be1",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-12-03T09:51:32Z",
+      "side": 1,
+      "message": "I think it is problematic that the reinitialization depends on other submodules. This only works because \"InitializeEchoController\" is called before UpdateActiveSubmoduleStates. What if InitializeNoiseSuppressor (for example) depends on (for example) the gain controller, which is not reconfigured until further down in ApplyAgc1Config? This could be error prone, and the \"safe\" solution is to call UpdateActiveSubmoduleStates after every InitializeX call.\n\nI suggest trying to decouple the SubmoduleStates update and the reinit of submodules, maybe adjusting the config here to something like (much as I dislike modifying the config):\n\n// Ensure high pass filtering is always applied when the AEC requires it.\nconfig_.high_pass_filter.enabled \u003d config_.high_pass_filter.enabled ||\n    (aec3_used || echo_controller_enabled_ || blabla);",
+      "range": {
+        "startLine": 680,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 29
+      },
+      "revId": "6d791a74a521e735fdd3226ff23bf7122d1436c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
