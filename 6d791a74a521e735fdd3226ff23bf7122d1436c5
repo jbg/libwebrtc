@@ -46,6 +46,30 @@
       "revId": "6d791a74a521e735fdd3226ff23bf7122d1436c5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56ee20fa_c3b7bee8",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2019-12-03T10:46:31Z",
+      "side": 1,
+      "message": "The new approach looks alright.\n\nAn alternative might be to update the submodule states struct at the top of ApplyConfig (based on the config, not the modules directly). Then it will be in sync with config_ throughout APM. Although that might have issues with if we cannot apply the config (for example, AGC2 validates its config and potentially changes how it initializes the AGC. The approach I suggest would still work, but if some other similar validation in the future toggles some behavior that submodulestates depends on, we would have to find a way to update submodulestates.)\n\nPerhaps the solution is to drop SubmoduleStates, and only query based on config_ (and some other pieces of APM state)? Since a lot of its purpose - tracking what modules are active - is now covered by config_.",
+      "parentUuid": "0f92472e_309655ee",
+      "range": {
+        "startLine": 680,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 29
+      },
+      "revId": "6d791a74a521e735fdd3226ff23bf7122d1436c5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
