@@ -146,6 +146,7 @@ class DataChannel : public DataChannelInterface, public sigslot::has_slots<> {
   virtual uint64_t buffered_amount() const;
   virtual void Close();
   virtual DataState state() const { return state_; }
+  virtual RTCError error() const;
   virtual uint32_t messages_sent() const { return messages_sent_; }
   virtual uint64_t bytes_sent() const { return bytes_sent_; }
   virtual uint32_t messages_received() const { return messages_received_; }
@@ -158,6 +159,10 @@ class DataChannel : public DataChannelInterface, public sigslot::has_slots<> {
   // being destroyed.
   // It is also called by the PeerConnection if SCTP ID assignment fails.
   void CloseAbruptly();
+  void CloseAbruptlyWithError(RTCError error);
+  void CloseAbruptlyWithDataChannelFailure(const std::string& message);
+  void CloseAbruptlyWithSctpCauseCode(const std::string& message,
+                                      uint16_t cause_code);
 
   // Called when the channel's ready to use.  That can happen when the
   // underlying DataMediaChannel becomes ready, or when this channel is a new
@@ -277,6 +282,7 @@ class DataChannel : public DataChannelInterface, public sigslot::has_slots<> {
   InternalDataChannelInit config_;
   DataChannelObserver* observer_;
   DataState state_;
+  RTCError error_;
   uint32_t messages_sent_;
   uint64_t bytes_sent_;
   uint32_t messages_received_;
