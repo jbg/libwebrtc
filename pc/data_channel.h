@@ -146,6 +146,7 @@ class DataChannel : public DataChannelInterface, public sigslot::has_slots<> {
   virtual uint64_t buffered_amount() const;
   virtual void Close();
   virtual DataState state() const { return state_; }
+  virtual RTCError error() const;
   virtual uint32_t messages_sent() const { return messages_sent_; }
   virtual uint64_t bytes_sent() const { return bytes_sent_; }
   virtual uint32_t messages_received() const { return messages_received_; }
@@ -277,6 +278,7 @@ class DataChannel : public DataChannelInterface, public sigslot::has_slots<> {
   InternalDataChannelInit config_;
   DataChannelObserver* observer_;
   DataState state_;
+  RTCError error_;
   uint32_t messages_sent_;
   uint64_t bytes_sent_;
   uint32_t messages_received_;

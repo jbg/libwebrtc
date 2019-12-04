@@ -261,6 +261,12 @@ void DataChannel::Close() {
   UpdateState();
 }
 
+RTCError DataChannel::error() const {
+  // Work around the fact that RTCError isn't copyable.
+  RTCError error_copy(error_.type(), error_.message());
+  return error_copy;
+}
+
 bool DataChannel::Send(const DataBuffer& buffer) {
   buffered_amount_ += buffer.size();
   if (state_ != kOpen) {
@@ -475,6 +481,8 @@ void DataChannel::CloseAbruptly() {
   // Still go to "kClosing" before "kClosed", since observers may be expecting
   // that.
   SetState(kClosing);
+  error_ = RTCError(RTCErrorType::NETWORK_ERROR,
+                    "Datachannel transport closed abruptly");
   SetState(kClosed);
 }
 
