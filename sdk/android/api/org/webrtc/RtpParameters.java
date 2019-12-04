@@ -27,6 +27,18 @@ import org.webrtc.MediaStreamTrack;
  * default value".
  */
 public class RtpParameters {
+  public enum DegradationPreference {
+    DISABLED,
+    MAINTAIN_FRAMERATE,
+    MAINTAIN_RESOLUTION,
+    BALANCED;
+
+    @CalledByNative("DegradationPreference")
+    static DegradationPreference fromNativeIndex(int nativeIndex) {
+      return values()[nativeIndex];
+    }
+  }
+
   public static class Encoding {
     // If non-null, this represents the RID that identifies this encoding layer.
     // RIDs are used to identify layers in simulcast.
@@ -240,10 +252,13 @@ public class RtpParameters {
   // remove them.
   public final List<Codec> codecs;
 
+  public final DegradationPreference degradationPreference;
+
   @CalledByNative
-  RtpParameters(String transactionId, Rtcp rtcp, List<HeaderExtension> headerExtensions,
-      List<Encoding> encodings, List<Codec> codecs) {
+  RtpParameters(String transactionId, DegradationPreference degradationPreference, Rtcp rtcp,
+      List<HeaderExtension> headerExtensions, List<Encoding> encodings, List<Codec> codecs) {
     this.transactionId = transactionId;
+    this.degradationPreference = degradationPreference;
     this.rtcp = rtcp;
     this.headerExtensions = headerExtensions;
     this.encodings = encodings;
@@ -253,6 +268,11 @@ public class RtpParameters {
   @CalledByNative
   String getTransactionId() {
     return transactionId;
+  }
+
+  @CalledByNative
+  DegradationPreference getDegradationPreference() {
+    return degradationPreference;
   }
 
   @CalledByNative
