@@ -21,10 +21,15 @@ TEST(FieldTrialValidationTest, AcceptsValidInputs) {
   InitFieldTrialsFromString("");
   InitFieldTrialsFromString("Audio/Enabled/");
   InitFieldTrialsFromString("Audio/Enabled/Video/Disabled/");
+  EXPECT_TRUE(FieldTrialsStringIsValid(""));
+  EXPECT_TRUE(FieldTrialsStringIsValid("Audio/Enabled/"));
+  EXPECT_TRUE(FieldTrialsStringIsValid("Audio/Enabled/Video/Disabled/"));
 
   // Duplicate trials with the same value is fine
   InitFieldTrialsFromString("Audio/Enabled/Audio/Enabled/");
   InitFieldTrialsFromString("Audio/Enabled/B/C/Audio/Enabled/");
+  EXPECT_TRUE(FieldTrialsStringIsValid("Audio/Enabled/Audio/Enabled/"));
+  EXPECT_TRUE(FieldTrialsStringIsValid("Audio/Enabled/B/C/Audio/Enabled/"));
 }
 
 TEST(FieldTrialValidationTest, RejectsBadInputs) {
@@ -40,6 +45,23 @@ TEST(FieldTrialValidationTest, RejectsBadInputs) {
   RTC_EXPECT_DEATH(
       InitFieldTrialsFromString("Audio/Enabled/Video/Disabled/garbage"),
       "Invalid field trials string:");
+  EXPECT_FALSE(FieldTrialsStringIsValid("Audio/EnabledVideo/Disabled/"));
+  EXPECT_FALSE(FieldTrialsStringIsValid("Audio/Enabled//Video/Disabled/"));
+  EXPECT_FALSE(FieldTrialsStringIsValid("/Audio/Enabled/Video/Disabled/"));
+  EXPECT_FALSE(FieldTrialsStringIsValid("Audio/Enabled/Video/Disabled"));
+  EXPECT_FALSE(
+      FieldTrialsStringIsValid("Audio/Enabled/Video/Disabled/garbage"));
+
+  // Empty trial or group
+  RTC_EXPECT_DEATH(InitFieldTrialsFromString("Audio//"),
+                   "Invalid field trials string:");
+  RTC_EXPECT_DEATH(InitFieldTrialsFromString("/Enabled/"),
+                   "Invalid field trials string:");
+  RTC_EXPECT_DEATH(InitFieldTrialsFromString("//"),
+                   "Invalid field trials string:");
+  EXPECT_FALSE(FieldTrialsStringIsValid("Audio//"));
+  EXPECT_FALSE(FieldTrialsStringIsValid("/Enabled/"));
+  EXPECT_FALSE(FieldTrialsStringIsValid("//"));
 
   // Duplicate trials with different values is not fine
   RTC_EXPECT_DEATH(InitFieldTrialsFromString("Audio/Enabled/Audio/Disabled/"),
@@ -47,6 +69,34 @@ TEST(FieldTrialValidationTest, RejectsBadInputs) {
   RTC_EXPECT_DEATH(
       InitFieldTrialsFromString("Audio/Enabled/B/C/Audio/Disabled/"),
       "Invalid field trials string:");
+  EXPECT_FALSE(FieldTrialsStringIsValid("Audio/Enabled/Audio/Disabled/"));
+  EXPECT_FALSE(FieldTrialsStringIsValid("Audio/Enabled/B/C/Audio/Disabled/"));
+}
+
+TEST(FieldTrialMergingTest, MergesValidInput) {
+  EXPECT_EQ(
+      MergeFieldTrialStringsWithOverwrite("Video/Enabled/", "Audio/Enabled/"),
+      "Audio/Enabled/Video/Enabled/");
+  EXPECT_EQ(MergeFieldTrialStringsWithOverwrite("Audio/Disabled/Video/Enabled/",
+                                                "Audio/Enabled/"),
+            "Audio/Enabled/Video/Enabled/");
+  EXPECT_EQ(MergeFieldTrialStringsWithOverwrite("Audio/Enabled/Video/Enabled/",
+                                                "Audio/Enabled/"),
+            "Audio/Enabled/Video/Enabled/");
+  EXPECT_EQ(MergeFieldTrialStringsWithOverwrite("Audio/Enabled/Audio/Enabled/",
+                                                "Video/Enabled/"),
+            "Audio/Enabled/Video/Enabled/");
+}
+
+TEST(FieldTrialMergingTest, DiscardsBadInput) {
+  EXPECT_EQ(MergeFieldTrialStringsWithOverwrite("garbage", "Audio/Enabled/"),
+            "Audio/Enabled/");
+  EXPECT_EQ(MergeFieldTrialStringsWithOverwrite("Audio/Enabled/", "garbage"),
+            "Audio/Enabled/");
+  EXPECT_EQ(MergeFieldTrialStringsWithOverwrite("garbage", "garbage"), "");
+  EXPECT_EQ(MergeFieldTrialStringsWithOverwrite("Audio/Enabled/Audio/Disabled/",
+                                                "Video/Enabled/"),
+            "Video/Enabled/");  // First key is not a valid key by itself.
 }
 #endif  // GTEST_HAS_DEATH_TEST && RTC_DCHECK_IS_ON && !defined(WEBRTC_ANDROID)
         // && !defined(WEBRTC_EXCLUDE_FIELD_TRIAL_DEFAULT)
