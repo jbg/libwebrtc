@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3df9e7f2_1660a005",
+        "filename": "system_wrappers/include/field_trial.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-12-04T16:54:43Z",
+      "side": 1,
+      "message": "Will these 2 be used from Chromium?\n\nIf yes, then they should be tagged with RTC_EXPORT (see for example: https://cs.chromium.org/chromium/src/third_party/webrtc/api/jsep.h?l\u003d77\u0026rcl\u003d3ac6375bb31f188baf50d1cbf2bd8748f9dd8360).\n\nIt is also possible this code is generic (clients should never override it) so in that case it should be defined all the times.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
