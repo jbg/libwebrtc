@@ -22,6 +22,30 @@
       "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2fbe921_8f8ded02",
+        "filename": "system_wrappers/include/field_trial.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 8385
+      },
+      "writtenOn": "2019-12-04T18:59:40Z",
+      "side": 1,
+      "message": "No, not to be used by Chromium - Chromium doesn\u0027t use any of this (it injects FindFullName to plug it directly into Chromium\u0027s FieldTrial system). \n\nTo be used by the Meet Mobile native apps. \n\nI don\u0027t think it\u0027s generic since it ties to the specific /-separated FieldTrial format used by the default implementation. Clients that don\u0027t use the default implementation but override FindFullName can use whatever format and structure they want.",
+      "parentUuid": "3df9e7f2_1660a005",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
