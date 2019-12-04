@@ -17,6 +17,7 @@
 #include <string>
 #include <utility>  // For std::move.
 
+#include "absl/types/optional.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/system/rtc_export.h"
@@ -73,6 +74,33 @@ enum class RTCErrorType {
   // The operation failed due to an internal error.
   // Maps to OperationError DOMException.
   INTERNAL_ERROR,
+
+  // An error occured that has additional data.
+  // The additional data is specified in
+  // https://w3c.github.io/webrtc-pc/#rtcerror-interface
+  // Maps to RTCError DOMException.
+  OPERATION_ERROR_WITH_DATA,
+};
+
+// Detail information, showing what further information should be present.
+// https://w3c.github.io/webrtc-pc/#rtcerrordetailtype-enum
+enum class RTCErrorDetailType {
+  NONE,
+  DATA_CHANNEL_FAILURE,
+  DTLS_FAILURE,
+  FINGERPRINT_FAILURE,
+  IDP_BAD_SCRIPT_FAILURE,
+  IDP_EXECUTION_FAILURE,
+  IDP_LOAD_FAILURE,
+  IDP_NEED_LOGIN,
+  IDP_TIMEOUT,
+  IDP_TLS_FAILURE,
+  IDP_TOKEN_EXPIRED,
+  IDP_TOKEN_INVALID,
+  SCTP_FAILURE,
+  SDP_SYNTAX_ERROR,
+  HARDWARE_ENCODER_NOT_AVAILABLE,
+  HARDWARE_ENCODER_ERROR,
 };
 
 // Roughly corresponds to RTCError in the web api. Holds an error type, a
@@ -117,6 +145,13 @@ class RTC_EXPORT RTCError {
 
   void set_message(std::string message);
 
+  RTCErrorDetailType error_detail() const { return error_detail_; }
+  void set_error_detail(RTCErrorDetailType detail) { error_detail_ = detail; }
+  absl::optional<uint16_t> sctp_cause_code() { return sctp_cause_code_; }
+  void set_sctp_cause_code(uint16_t cause_code) {
+    sctp_cause_code_ = cause_code;
+  }
+
   // Convenience method for situations where you only care whether or not an
   // error occurred.
   bool ok() const { return type_ == RTCErrorType::NONE; }
@@ -124,6 +159,8 @@ class RTC_EXPORT RTCError {
  private:
   RTCErrorType type_ = RTCErrorType::NONE;
   std::string message_;
+  RTCErrorDetailType error_detail_ = RTCErrorDetailType::NONE;
+  absl::optional<uint16_t> sctp_cause_code_;
 };
 
 // Outputs the error as a friendly string. Update this method when adding a new
