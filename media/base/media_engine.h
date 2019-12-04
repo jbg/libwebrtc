@@ -99,7 +99,12 @@ class VideoEngineInterface {
       webrtc::VideoBitrateAllocatorFactory*
           video_bitrate_allocator_factory) = 0;
 
-  virtual std::vector<VideoCodec> codecs() const = 0;
+  virtual std::vector<VideoCodec> send_codecs() const = 0;
+  virtual std::vector<VideoCodec> recv_codecs() const = 0;
+  // TODO(kron) Deprectated, to be removed once external usage is removed.
+  // codecs() is mapped to send_codecs() to maintain consistent behavior.
+  // std::vector<VideoCodec> codecs() const { return send_codecs(); }
+
   virtual RtpCapabilities GetCapabilities() const = 0;
 };
 
