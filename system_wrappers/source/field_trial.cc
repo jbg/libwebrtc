@@ -17,6 +17,7 @@
 #include "absl/strings/string_view.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/string_encode.h"
 
 // Simple field trial implementation, which allows client to
 // specify desired flags in InitFieldTrialsFromString.
@@ -36,7 +37,7 @@ constexpr char kPersistentStringSeparator = '/';
 //
 //  E.g. invalid config:
 //    "WebRTC-experiment1/Enabled"  (note missing / separator at the end).
-bool FieldTrialsStringIsValid(const absl::string_view trials) {
+bool FieldTrialsStringIsValidInternal(const absl::string_view trials) {
   if (trials.empty())
     return true;
 
@@ -68,6 +69,47 @@ bool FieldTrialsStringIsValid(const absl::string_view trials) {
   return true;
 }
 }  // namespace
+
+bool FieldTrialsStringIsValid(const char* trials_string) {
+  return FieldTrialsStringIsValidInternal(trials_string);
+}
+
+std::string MergeFieldTrialStringsWithOverwrite(const char* first,
+                                                const char* second) {
+  std::string concatenated;
+  if (FieldTrialsStringIsValid(first)) {
+    concatenated += std::string(first);
+  }
+  if (FieldTrialsStringIsValid(second)) {
+    concatenated += std::string(second);
+  }
+  if (concatenated.empty())
+    return std::string();
+
+  // Convert to map and back to eliminate duplicates
+  //   Does the following without using the banned absl methods.
+  //   std::map<std::string, std::string> m = absl::StrSplit(concatenated, '/');
+  //   std::string merged = absl::StrJoin(m, "/", absl::PairFormatter("/"));
+
+  // Split into tokens
+  concatenated.pop_back();  // Remove trailing slash
+  std::vector<std::string> tokens;
+  rtc::split(concatenated, '/', &tokens);
+  if (tokens.size() % 2) {
+    return std::string();  // unexpected odd-numbered size - give up.
+  }
+  // Build map
+  std::map<std::string, std::string> fieldtrial_map;
+  for (size_t idx = 0; idx < tokens.size(); idx += 2) {
+    fieldtrial_map[tokens[idx]] = tokens[idx + 1];
+  }
+  // Merge into fieldtrial string.
+  std::string merged;
+  for (auto const& fieldtrial : fieldtrial_map) {
+    merged += fieldtrial.first + '/' + fieldtrial.second + '/';
+  }
+  return merged;
+}
 
 std::string FindFullName(const std::string& name) {
   if (trials_init_string == NULL)
@@ -107,7 +149,7 @@ void InitFieldTrialsFromString(const char* trials_string) {
   RTC_LOG(LS_INFO) << "Setting field trial string:" << trials_string;
 #ifndef WEBRTC_EXCLUDE_FIELD_TRIAL_DEFAULT
   if (trials_string) {
-    RTC_DCHECK(FieldTrialsStringIsValid(trials_string))
+    RTC_DCHECK(FieldTrialsStringIsValidInternal(trials_string))
         << "Invalid field trials string:" << trials_string;
   };
 #endif  // WEBRTC_EXCLUDE_FIELD_TRIAL_DEFAULT
