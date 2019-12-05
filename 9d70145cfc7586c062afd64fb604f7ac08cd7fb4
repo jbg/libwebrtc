@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "680a88bc_7f54b08c",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-12-05T20:39:07Z",
+      "side": 1,
+      "message": "imo it would be clearer to just inline this function into the getter",
+      "revId": "9d70145cfc7586c062afd64fb604f7ac08cd7fb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6723597_180f5255",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 5
