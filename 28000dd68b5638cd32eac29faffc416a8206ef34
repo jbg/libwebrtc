@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd8bfa97_7ab5c2d4",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-12-05T12:31:53Z",
+      "side": 1,
+      "message": "Any good reason to not have an unconditional\n\nRTC_DCHECK(FieldTrialsStringIsValidInternal(trials_string)) \n\n?",
+      "range": {
+        "startLine": 90,
+        "startChar": 6,
+        "endLine": 90,
+        "endChar": 16
+      },
+      "revId": "28000dd68b5638cd32eac29faffc416a8206ef34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

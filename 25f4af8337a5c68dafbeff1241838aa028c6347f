@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "11a71307_9edaa5d4",
+        "filename": "system_wrappers/include/field_trial.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-12-05T12:31:53Z",
+      "side": 1,
+      "message": "\u003e As to \"I\u0027d prefer absl::string_view for the input arguments.\" - agree, but I kept const-char* for consistency with the all the other methods exposed in the header file, which are all const-char* based. \n\nI\u0027d still prefer string_view, but it\u0027s not a very strong opinion. Let\u0027s ask Mirko for a second opinion.\n\n(And it would be good to refactor all of this to not use char *)",
+      "parentUuid": "0f1f91bd_97b78710",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74f9d6d2_92e45f21",
         "filename": "system_wrappers/source/field_trial.cc",
         "patchSetId": 3
