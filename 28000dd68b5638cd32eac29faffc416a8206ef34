@@ -22,6 +22,30 @@
       "revId": "28000dd68b5638cd32eac29faffc416a8206ef34",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e08e4cf1_3e174a8d",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 8385
+      },
+      "writtenOn": "2019-12-05T12:53:36Z",
+      "side": 1,
+      "message": "Yes. The reason is I still want to have the tests under\nTEST(FieldTrialMergingTest, DiscardsBadInput) {...}\ntesting the output, and not just RTC_EXPECT_DEATH",
+      "parentUuid": "bd8bfa97_7ab5c2d4",
+      "range": {
+        "startLine": 90,
+        "startChar": 6,
+        "endLine": 90,
+        "endChar": 16
+      },
+      "revId": "28000dd68b5638cd32eac29faffc416a8206ef34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
