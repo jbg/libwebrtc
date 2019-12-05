@@ -560,6 +560,7 @@ TEST_F(SctpDataChannelTest, ClosedOnTransportError) {
 
   EXPECT_EQ(webrtc::DataChannelInterface::kClosed,
             webrtc_data_channel_->state());
+  EXPECT_FALSE(webrtc_data_channel_->error().ok());
 }
 
 // Tests that the DataChannel is closed if the received buffer is full.
