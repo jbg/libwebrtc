@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "0f1f91bd_97b78710",
+        "filename": "system_wrappers/include/field_trial.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 8385
+      },
+      "writtenOn": "2019-12-05T12:03:58Z",
+      "side": 1,
+      "message": "Removed \u0027WithOverwrite\u0027. As to what takes precedence, it\u0027s clarified in the docstring.\n\nAs to \"I\u0027d prefer absl::string_view for the input arguments.\" - agree, but I kept const-char* for consistency with the all the other methods exposed in the header file, which are all const-char* based. \n\nIf you think it should still be string_view please reopen the comment and I\u0027ll change it.",
+      "parentUuid": "55dc323e_61219185",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74f9d6d2_92e45f21",
         "filename": "system_wrappers/source/field_trial.cc",
         "patchSetId": 3
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "77f6ea6b_02a60339",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8385
+      },
+      "writtenOn": "2019-12-05T12:03:58Z",
+      "side": 1,
+      "message": "Good point, thanks, done. Added the DCHECK, default-enabled, but needed to make it optional for testability.",
+      "parentUuid": "74f9d6d2_92e45f21",
+      "range": {
+        "startLine": 80,
+        "startChar": 1,
+        "endLine": 82,
+        "endChar": 3
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6a64022_47bcaf59",
         "filename": "system_wrappers/source/field_trial.cc",
         "patchSetId": 3
@@ -116,6 +164,30 @@
       "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78ff6655_6e550ad8",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 8385
+      },
+      "writtenOn": "2019-12-05T12:03:58Z",
+      "side": 1,
+      "message": "Done, much nicer indeed, thanks!!",
+      "parentUuid": "f6a64022_47bcaf59",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 25
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
