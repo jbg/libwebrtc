@@ -46,6 +46,30 @@
       "revId": "28000dd68b5638cd32eac29faffc416a8206ef34",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f34df10f_13e086b8",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-12-05T13:03:11Z",
+      "side": 1,
+      "message": "Hmm. If that is behavior that is important in production, then it shouldn\u0027t trigger a DCHECK. One reason for that, is precisely to make it straightforward to write tests for the behavior.\n\nMy preference would be to have an unconditional DCHECK here, in effect requiring applications to only ever call MergeFieldTrialStrings with valid input strings.\n\nApplications that want some more sophisticated error handling for invalid strings can then call FieldTrialsStringIsValidInternal themselves and do something other than calling MergeFieldTrialStrings if one of the inputs are invalid.",
+      "parentUuid": "e08e4cf1_3e174a8d",
+      "range": {
+        "startLine": 90,
+        "startChar": 6,
+        "endLine": 90,
+        "endChar": 16
+      },
+      "revId": "28000dd68b5638cd32eac29faffc416a8206ef34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
