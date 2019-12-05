@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef0726d9_d2a66907",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-05T09:45:47Z",
+      "side": 1,
+      "message": "nit: Please add Java doc with explanation",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "6ad17ae9532d10a168782c63af599466d181f81d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f35325a_00c3f378",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-05T09:45:47Z",
+      "side": 1,
+      "message": "Also for enum values (can be copied from C++)",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "6ad17ae9532d10a168782c63af599466d181f81d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b4bbfd2_09140370",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-05T09:45:47Z",
+      "side": 1,
+      "message": "Can we add a comment on the C++ class as a reminder to change this class if any enums are added or the order is changed?",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 34
+      },
+      "revId": "6ad17ae9532d10a168782c63af599466d181f81d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
