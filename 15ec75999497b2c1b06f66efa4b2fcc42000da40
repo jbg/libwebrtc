@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72feecef_8b608261",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-12-05T10:55:23Z",
+      "side": 1,
+      "message": "nit: For new enum classes, I think we usually prefer kDataChannelFailure over DATA_CHANNEL_FAILURE?",
+      "revId": "15ec75999497b2c1b06f66efa4b2fcc42000da40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbcb0036_4d6c2ebc",
+        "filename": "pc/data_channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-12-05T10:55:23Z",
+      "side": 1,
+      "message": "I would be happy to make it copyable, there has been several times where I\u0027ve had to do this because it isn\u0027t copyable. The comment that there is no legitimate reason to copy it is wrong.",
+      "revId": "15ec75999497b2c1b06f66efa4b2fcc42000da40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "133ddbd4_a1db9f53",
+        "filename": "pc/data_channel_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2019-12-05T10:55:23Z",
+      "side": 1,
+      "message": "Should we update tests to assert the error details we support?",
+      "revId": "15ec75999497b2c1b06f66efa4b2fcc42000da40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
