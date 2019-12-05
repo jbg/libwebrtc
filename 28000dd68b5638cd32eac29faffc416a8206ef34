@@ -70,6 +70,30 @@
       "revId": "28000dd68b5638cd32eac29faffc416a8206ef34",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d8bba4_6fc88543",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 8385
+      },
+      "writtenOn": "2019-12-05T13:37:14Z",
+      "side": 1,
+      "message": "OK, removed the TEST(FieldTrialMergingTest, DiscardsBadInput) and added into doctstring that inputs must be valid. Simply for the purpose of defensive programming I will keep discarding bad input though.",
+      "parentUuid": "f34df10f_13e086b8",
+      "range": {
+        "startLine": 90,
+        "startChar": 6,
+        "endLine": 90,
+        "endChar": 16
+      },
+      "revId": "28000dd68b5638cd32eac29faffc416a8206ef34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
