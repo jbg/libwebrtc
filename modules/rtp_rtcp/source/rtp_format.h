@@ -20,6 +20,7 @@
 #include "api/array_view.h"
 #include "modules/include/module_common_types.h"
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
+#include "rtc_base/deprecation.h"
 
 namespace webrtc {
 
@@ -77,7 +78,11 @@ class RtpDepacketizer {
   };
 
   // If type is not set, returns a raw depacketizer.
-  static RtpDepacketizer* Create(absl::optional<VideoCodecType> type);
+  RTC_DEPRECATED
+  static RtpDepacketizer* Create(absl::optional<VideoCodecType> type) {
+    return DeprecatedCreate(type);
+  }
+  static RtpDepacketizer* DeprecatedCreate(absl::optional<VideoCodecType> type);
 
   virtual ~RtpDepacketizer() {}
 

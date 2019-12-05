@@ -173,9 +173,7 @@ class VideoAnalyzer : public PacketReceiver,
     VideoFrame frame;
   };
 
-  bool IsInSelectedSpatialAndTemporalLayer(const uint8_t* packet,
-                                           size_t length,
-                                           const RTPHeader& header);
+  bool IsInSelectedSpatialAndTemporalLayer(const RtpPacket& rtp_packet);
 
   void AddFrameComparison(const VideoFrame& reference,
                           const VideoFrame& render,

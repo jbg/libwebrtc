@@ -70,6 +70,9 @@ class RtpPacket {
 
   // Buffer.
   rtc::CopyOnWriteBuffer Buffer() const { return buffer_; }
+  rtc::CopyOnWriteBuffer RtpPayload() const {
+    return buffer_.Slice(payload_offset_, payload_size_);
+  }
   size_t capacity() const { return buffer_.capacity(); }
   size_t size() const {
     return payload_offset_ + payload_size_ + padding_size_;
