@@ -46,6 +46,76 @@
       "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55dc323e_61219185",
+        "filename": "system_wrappers/include/field_trial.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-12-05T09:56:40Z",
+      "side": 1,
+      "message": "I\u0027d prefer absl::string_view for the input arguments.\n\nFor naming, I don\u0027t think \"WithOverwrite\" is that helpful. The question is which argument takes precedence, as explained in the comment, and \"WithOverwrite\" doesn\u0027t answer that question.",
+      "parentUuid": "a2fbe921_8f8ded02",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74f9d6d2_92e45f21",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-12-05T09:56:40Z",
+      "side": 1,
+      "message": "Maybe simpler with\n\nif (!FieldsTrialsStringIsValid(first)) {\n  return second;\n}\n\nand similarly below. Is the behavior for invalid inputs important? \n\nI think it\u0027s important that errors resulting in invalid field trial strings don\u0027t go unnoticed. InitFieldTrialsFromString includes a DCHECK, and I think calls like\n\n  InitFieldTrialsFromString(MergeFieldTrialStringsWithOverwrite(s1, s2));\n\nshould likewise hit some DCHECK on invalid inputs. While with your change as is, errors would be silently ignored by this combination.",
+      "range": {
+        "startLine": 80,
+        "startChar": 1,
+        "endLine": 82,
+        "endChar": 3
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6a64022_47bcaf59",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-12-05T09:56:40Z",
+      "side": 1,
+      "message": "Instead of concatenating the input strings, I\u0027d consider a structure like\n\nstd::map\u003cstd::string, std::string\u003e;\n\nInsertOrReplaceStringsInMap(\u0026m, first);\nInsertOrReplaceStringsInMap(\u0026m, second);\n\n// Merge into fieldtrial string.\n...\n\nThe helper function would do the rtc::split and insertions. You could also move the FieldTrialStringIsValid check in there.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 25
+      },
+      "revId": "25f4af8337a5c68dafbeff1241838aa028c6347f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
