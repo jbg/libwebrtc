@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "179a62e6_c148ebf3",
+        "filename": "system_wrappers/source/field_trial.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2019-12-05T13:42:39Z",
+      "side": 1,
+      "message": "This should be a pointer, not a reference. See https://google.github.io/styleguide/cppguide.html#Reference_Arguments.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 39
+      },
+      "revId": "e3c5ddddfa2aa1d1e5aa735779536d45d9d5c5d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
