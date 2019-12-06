@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "f7c65e2f_775ed43f",
+        "filename": "pc/data_channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-06T11:41:43Z",
+      "side": 1,
+      "message": "I agree---just make it copyable and assignable.",
+      "parentUuid": "dbcb0036_4d6c2ebc",
+      "revId": "15ec75999497b2c1b06f66efa4b2fcc42000da40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "133ddbd4_a1db9f53",
         "filename": "pc/data_channel_unittest.cc",
         "patchSetId": 5
