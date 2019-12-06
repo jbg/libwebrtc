@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61a010da_a7c8a429",
+        "filename": "sdk/objc/components/video_codec/RTCDefaultVideoDecoderFactory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2019-12-06T13:54:14Z",
+      "side": 1,
+      "message": "Not sure if preferredCodec is needed for the decoder factory? In the AppRTCMobile app, there is a setting for selecting the preferred codec, and that just moves the selected codec first in the list, which puts it first in the SDP string. Does the order of the decoder factory\u0027s supported format list matter in a similar way?",
+      "range": {
+        "startLine": 24,
+        "startChar": 48,
+        "endLine": 24,
+        "endChar": 62
+      },
+      "revId": "3312e23b807abb0ef5ecc9e9aecae3b559f4ca59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
