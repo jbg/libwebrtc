@@ -20,6 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 RTC_OBJC_EXPORT
 @interface RTCDefaultVideoDecoderFactory : NSObject <RTCVideoDecoderFactory>
+
+@property(nonatomic, retain) RTCVideoCodecInfo *preferredCodec;
+
++ (NSArray<RTCVideoCodecInfo *> *)supportedCodecs;
+
 @end
 
 NS_ASSUME_NONNULL_END
