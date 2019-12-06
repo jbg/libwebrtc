@@ -32,7 +32,8 @@ class LegacyRtpDepacketizer : public VideoRtpDepacketizer {
 
   absl::optional<ParsedRtpPayload> Parse(
       rtc::CopyOnWriteBuffer rtp_payload) override {
-    auto depacketizer = absl::WrapUnique(RtpDepacketizer::Create(codec_));
+    auto depacketizer =
+        absl::WrapUnique(RtpDepacketizer::DeprecatedCreate(codec_));
     RTC_CHECK(depacketizer);
     RtpDepacketizer::ParsedPayload parsed_payload;
     if (!depacketizer->Parse(&parsed_payload, rtp_payload.cdata(),

@@ -16,6 +16,7 @@
 #include "absl/flags/flag.h"
 #include "absl/flags/parse.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
+#include "modules/rtp_rtcp/source/create_video_rtp_depacketizer.h"
 #include "modules/rtp_rtcp/source/rtp_format.h"
 #include "modules/rtp_rtcp/source/rtp_utility.h"
 #include "rtc_base/cpu_time.h"
@@ -262,32 +263,31 @@ void VideoAnalyzer::PostEncodeOnFrame(size_t stream_id, uint32_t timestamp) {
 bool VideoAnalyzer::SendRtp(const uint8_t* packet,
                             size_t length,
                             const PacketOptions& options) {
-  RtpUtility::RtpHeaderParser parser(packet, length);
-  RTPHeader header;
-  parser.Parse(&header);
+  RtpPacket rtp_packet;
+  rtp_packet.Parse(packet, length);
 
   int64_t current_time = clock_->CurrentNtpInMilliseconds();
 
   bool result = transport_->SendRtp(packet, length, options);
   {
     rtc::CritScope lock(&crit_);
-    if (rtp_timestamp_delta_ == 0 && header.ssrc == ssrc_to_analyze_) {
+    if (rtp_timestamp_delta_ == 0 && rtp_packet.Ssrc() == ssrc_to_analyze_) {
       RTC_CHECK(static_cast<bool>(first_sent_timestamp_));
-      rtp_timestamp_delta_ = header.timestamp - *first_sent_timestamp_;
+      rtp_timestamp_delta_ = rtp_packet.Timestamp() - *first_sent_timestamp_;
     }
 
-    if (!IsFlexfec(header.payloadType) && header.ssrc == ssrc_to_analyze_) {
+    if (!IsFlexfec(rtp_packet.PayloadType()) &&
+        rtp_packet.Ssrc() == ssrc_to_analyze_) {
       // Ignore FlexFEC timestamps, to avoid collisions with media timestamps.
       // (FlexFEC and media are sent on different SSRCs, which have different
       // timestamps spaces.)
       // Also ignore packets from wrong SSRC and retransmits.
       int64_t timestamp =
-          wrap_handler_.Unwrap(header.timestamp - rtp_timestamp_delta_);
+          wrap_handler_.Unwrap(rtp_packet.Timestamp() - rtp_timestamp_delta_);
       send_times_[timestamp] = current_time;
 
-      if (IsInSelectedSpatialAndTemporalLayer(packet, length, header)) {
-        encoded_frame_sizes_[timestamp] +=
-            length - (header.headerLength + header.paddingLength);
+      if (IsInSelectedSpatialAndTemporalLayer(rtp_packet)) {
+        encoded_frame_sizes_[timestamp] += rtp_packet.payload_size();
       }
     }
   }
@@ -428,35 +428,29 @@ double VideoAnalyzer::GetCpuUsagePercent() {
 }
 
 bool VideoAnalyzer::IsInSelectedSpatialAndTemporalLayer(
-    const uint8_t* packet,
-    size_t length,
-    const RTPHeader& header) {
-  if (header.payloadType != test::CallTest::kPayloadTypeVP9 &&
-      header.payloadType != test::CallTest::kPayloadTypeVP8) {
+    const RtpPacket& rtp_packet) {
+  if (rtp_packet.PayloadType() != test::CallTest::kPayloadTypeVP9 &&
+      rtp_packet.PayloadType() != test::CallTest::kPayloadTypeVP8) {
     return true;
   } else {
     // Get VP8 and VP9 specific header to check layers indexes.
-    const uint8_t* payload = packet + header.headerLength;
-    const size_t payload_length = length - header.headerLength;
-    const size_t payload_data_length = payload_length - header.paddingLength;
-    const bool is_vp8 = header.payloadType == test::CallTest::kPayloadTypeVP8;
-    std::unique_ptr<RtpDepacketizer> depacketizer(
-        RtpDepacketizer::Create(is_vp8 ? kVideoCodecVP8 : kVideoCodecVP9));
-    RtpDepacketizer::ParsedPayload parsed_payload;
-    bool result =
-        depacketizer->Parse(&parsed_payload, payload, payload_data_length);
-    RTC_DCHECK(result);
+    const bool is_vp8 =
+        rtp_packet.PayloadType() == test::CallTest::kPayloadTypeVP8;
+    std::unique_ptr<VideoRtpDepacketizer> depacketizer =
+        CreateVideoRtpDepacketizer(is_vp8 ? kVideoCodecVP8 : kVideoCodecVP9);
+    auto parsed_payload = depacketizer->Parse(rtp_packet.RtpPayload());
+    RTC_DCHECK(parsed_payload);
 
     int temporal_idx;
     int spatial_idx;
     if (is_vp8) {
       temporal_idx = absl::get<RTPVideoHeaderVP8>(
-                         parsed_payload.video_header().video_type_header)
+                         parsed_payload->video_header.video_type_header)
                          .temporalIdx;
       spatial_idx = kNoTemporalIdx;
     } else {
       const auto& vp9_header = absl::get<RTPVideoHeaderVP9>(
-          parsed_payload.video_header().video_type_header);
+          parsed_payload->video_header.video_type_header);
       temporal_idx = vp9_header.temporal_idx;
       spatial_idx = vp9_header.spatial_idx;
     }

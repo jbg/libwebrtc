@@ -514,7 +514,7 @@ struct H264ParsedPayload : public RtpDepacketizer::ParsedPayload {
 class RtpDepacketizerH264Test : public ::testing::Test {
  protected:
   RtpDepacketizerH264Test()
-      : depacketizer_(RtpDepacketizer::Create(kVideoCodecH264)) {}
+      : depacketizer_(RtpDepacketizer::DeprecatedCreate(kVideoCodecH264)) {}
 
   void ExpectPacket(H264ParsedPayload* parsed_payload,
                     const uint8_t* data,
