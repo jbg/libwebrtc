@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5561485_7829db50",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-06T13:52:06Z",
+      "side": 1,
+      "message": "nit: JavaDoc has form /** This is a comment. */\n\nhttps://google.github.io/styleguide/javaguide.html#s7.1-javadoc-formatting",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 48
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b25eb3a2_e6b193aa",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-06T13:52:06Z",
+      "side": 1,
+      "message": "nit: JavaDoc\n\nAlso can you place this after transactionId to keep the order consistent.",
+      "range": {
+        "startLine": 257,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 77
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a147f6f0_5c31624d",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-06T13:52:06Z",
+      "side": 1,
+      "message": "Seems to me this should instead be in RtpSenderTest rather than PeerConnectionTest?",
+      "range": {
+        "startLine": 873,
+        "startChar": 14,
+        "endLine": 873,
+        "endChar": 42
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41a0dc78_ea4ebc5f",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-06T13:52:06Z",
+      "side": 1,
+      "message": "Is this related to the test?",
+      "range": {
+        "startLine": 876,
+        "startChar": 54,
+        "endLine": 876,
+        "endChar": 66
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "543d85cf_d21051e9",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-06T13:52:06Z",
+      "side": 1,
+      "message": "These expectations don\u0027t seem related to what is being tested",
+      "range": {
+        "startLine": 877,
+        "startChar": 4,
+        "endLine": 878,
+        "endChar": 45
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
