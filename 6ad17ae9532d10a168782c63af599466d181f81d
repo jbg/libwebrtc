@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "223c60af_87b81e29",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2019-12-06T13:19:56Z",
+      "side": 1,
+      "message": "Added doc on the RtpParameter member.",
+      "parentUuid": "ef0726d9_d2a66907",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "6ad17ae9532d10a168782c63af599466d181f81d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f35325a_00c3f378",
         "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8f7ae7f2_116eadca",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2019-12-06T13:19:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f35325a_00c3f378",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "6ad17ae9532d10a168782c63af599466d181f81d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b4bbfd2_09140370",
         "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "6ad17ae9532d10a168782c63af599466d181f81d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44e60097_70eb5021",
+        "filename": "sdk/android/api/org/webrtc/RtpParameters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2019-12-06T13:19:56Z",
+      "side": 1,
+      "message": "Added a test instead which will check the round trip from java to native and back to java works correctly.",
+      "parentUuid": "0b4bbfd2_09140370",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 34
+      },
+      "revId": "6ad17ae9532d10a168782c63af599466d181f81d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
