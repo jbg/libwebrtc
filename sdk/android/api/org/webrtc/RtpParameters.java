@@ -27,6 +27,22 @@ import org.webrtc.MediaStreamTrack;
  * default value".
  */
 public class RtpParameters {
+  public enum DegradationPreference {
+    // Does not degrade resolution or framerate.
+    DISABLED,
+    // Degrade resolution in order to maintain framerate.
+    MAINTAIN_FRAMERATE,
+    // Degrade framerate in order to maintain resolution.
+    MAINTAIN_RESOLUTION,
+    // Degrade a balance of framerate and resolution.
+    BALANCED;
+
+    @CalledByNative("DegradationPreference")
+    static DegradationPreference fromNativeIndex(int nativeIndex) {
+      return values()[nativeIndex];
+    }
+  }
+
   public static class Encoding {
     // If non-null, this represents the RID that identifies this encoding layer.
     // RIDs are used to identify layers in simulcast.
@@ -235,15 +251,18 @@ public class RtpParameters {
   private final List<HeaderExtension> headerExtensions;
 
   public final List<Encoding> encodings;
-  // Codec parameters can't currently be changed between getParameters and
-  // setParameters. Though in the future it will be possible to reorder them or
-  // remove them.
+
   public final List<Codec> codecs;
 
+  // When bandwidth is constrained and the RtpSender needs to choose between degrading resolution or
+  // degrading framerate, degradationPreference indicates which is preferred.
+  public DegradationPreference degradationPreference;
+
   @CalledByNative
-  RtpParameters(String transactionId, Rtcp rtcp, List<HeaderExtension> headerExtensions,
-      List<Encoding> encodings, List<Codec> codecs) {
+  RtpParameters(String transactionId, DegradationPreference degradationPreference, Rtcp rtcp,
+      List<HeaderExtension> headerExtensions, List<Encoding> encodings, List<Codec> codecs) {
     this.transactionId = transactionId;
+    this.degradationPreference = degradationPreference;
     this.rtcp = rtcp;
     this.headerExtensions = headerExtensions;
     this.encodings = encodings;
@@ -253,6 +272,11 @@ public class RtpParameters {
   @CalledByNative
   String getTransactionId() {
     return transactionId;
+  }
+
+  @CalledByNative
+  DegradationPreference getDegradationPreference() {
+    return degradationPreference;
   }
 
   @CalledByNative
