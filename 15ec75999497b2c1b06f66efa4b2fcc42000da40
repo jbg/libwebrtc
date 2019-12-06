@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8174732c_27d38409",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-12-06T15:30:58Z",
+      "side": 1,
+      "message": "I did this to be consistent with RTCErrorType; \"be consistent with the code around you\" is also a general principle.",
+      "parentUuid": "72feecef_8b608261",
+      "revId": "15ec75999497b2c1b06f66efa4b2fcc42000da40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dbcb0036_4d6c2ebc",
         "filename": "pc/data_channel.cc",
         "patchSetId": 5
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8dc7c861_fc92676f",
+        "filename": "pc/data_channel.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-12-06T15:30:58Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f7c65e2f_775ed43f",
+      "revId": "15ec75999497b2c1b06f66efa4b2fcc42000da40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "133ddbd4_a1db9f53",
         "filename": "pc/data_channel_unittest.cc",
         "patchSetId": 5
@@ -65,6 +101,24 @@
       "writtenOn": "2019-12-05T10:55:23Z",
       "side": 1,
       "message": "Should we update tests to assert the error details we support?",
+      "revId": "15ec75999497b2c1b06f66efa4b2fcc42000da40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "524b8274_e0760d04",
+        "filename": "pc/data_channel_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2019-12-06T15:30:58Z",
+      "side": 1,
+      "message": "Added testing of error to all cases where we check for state kClosed.\nNot sure if the error codes are right in all cases, but we can work from there.",
+      "parentUuid": "133ddbd4_a1db9f53",
       "revId": "15ec75999497b2c1b06f66efa4b2fcc42000da40",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
