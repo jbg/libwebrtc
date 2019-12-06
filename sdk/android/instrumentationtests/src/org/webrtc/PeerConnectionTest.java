@@ -51,6 +51,7 @@ import org.webrtc.PeerConnection.PeerConnectionState;
 import org.webrtc.PeerConnection.SignalingState;
 import org.webrtc.PeerConnection.TlsCertPolicy;
 import org.webrtc.RtpParameters;
+import org.webrtc.RtpParameters.DegradationPreference;
 import org.webrtc.RtpParameters.Encoding;
 import org.webrtc.RtpTransceiver;
 import org.webrtc.RtpTransceiver.RtpTransceiverInit;
@@ -867,6 +868,42 @@ public class PeerConnectionTest {
     assertNotNull(offeringPC);
   }
 
+  @Test
+  @SmallTest
+  public void testSetDegradationPreference() throws Exception {
+    PeerConnectionFactory factory = PeerConnectionFactory.builder().createPeerConnectionFactory();
+    PeerConnection.RTCConfiguration config = new PeerConnection.RTCConfiguration(Arrays.asList());
+    config.sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN;
+    ObserverExpectations expectations = new ObserverExpectations("PCTest:degradation_preference");
+    expectations.expectRenegotiationNeeded();
+    PeerConnection pc = factory.createPeerConnection(config, expectations);
+    RtpTransceiver transceiver = pc.addTransceiver(MediaStreamTrack.MediaType.MEDIA_TYPE_VIDEO);
+    RtpSender sender = transceiver.getSender();
+    RtpParameters parameters = sender.getParameters();
+    assertNotNull(parameters);
+    assertEquals(DegradationPreference.BALANCED, parameters.degradationPreference);
+
+    parameters.degradationPreference = DegradationPreference.MAINTAIN_FRAMERATE;
+    assertTrue(sender.setParameters(parameters));
+    parameters = sender.getParameters();
+    assertEquals(DegradationPreference.MAINTAIN_FRAMERATE, parameters.degradationPreference);
+
+    parameters.degradationPreference = DegradationPreference.MAINTAIN_RESOLUTION;
+    assertTrue(sender.setParameters(parameters));
+    parameters = sender.getParameters();
+    assertEquals(DegradationPreference.MAINTAIN_RESOLUTION, parameters.degradationPreference);
+
+    parameters.degradationPreference = DegradationPreference.BALANCED;
+    assertTrue(sender.setParameters(parameters));
+    parameters = sender.getParameters();
+    assertEquals(DegradationPreference.BALANCED, parameters.degradationPreference);
+
+    parameters.degradationPreference = DegradationPreference.DISABLED;
+    assertTrue(sender.setParameters(parameters));
+    parameters = sender.getParameters();
+    assertEquals(DegradationPreference.DISABLED, parameters.degradationPreference);
+  }
+
   // Test that RIDs get set in the RTP sender when passed in through an RtpTransceiverInit.
   @Test
   @SmallTest
@@ -1090,6 +1127,7 @@ public class PeerConnectionTest {
     // Set a bitrate limit for the outgoing video stream for the offerer.
     RtpParameters rtpParameters = videoSender.getParameters();
     assertNotNull(rtpParameters);
+    assertEquals(DegradationPreference.BALANCED, rtpParameters.degradationPreference);
     assertEquals(1, rtpParameters.encodings.size());
     assertNull(rtpParameters.encodings.get(0).maxBitrateBps);
     assertNull(rtpParameters.encodings.get(0).minBitrateBps);
@@ -1098,6 +1136,7 @@ public class PeerConnectionTest {
     assertNull(rtpParameters.encodings.get(0).scaleResolutionDownBy);
     assertTrue(rtpParameters.encodings.get(0).rid.isEmpty());
 
+    rtpParameters.degradationPreference = DegradationPreference.MAINTAIN_FRAMERATE;
     rtpParameters.encodings.get(0).maxBitrateBps = 300000;
     rtpParameters.encodings.get(0).minBitrateBps = 100000;
     rtpParameters.encodings.get(0).maxFramerate = 20;
@@ -1113,6 +1152,7 @@ public class PeerConnectionTest {
 
     // Verify that we can read back the updated value.
     rtpParameters = videoSender.getParameters();
+    assertEquals(DegradationPreference.MAINTAIN_FRAMERATE, rtpParameters.degradationPreference);
     assertEquals(300000, (int) rtpParameters.encodings.get(0).maxBitrateBps);
     assertEquals(100000, (int) rtpParameters.encodings.get(0).minBitrateBps);
     assertEquals(20, (int) rtpParameters.encodings.get(0).maxFramerate);
