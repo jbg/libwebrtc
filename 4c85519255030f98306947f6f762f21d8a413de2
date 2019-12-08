@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71269ea2_a966cf7c",
+        "filename": "api/rtc_error.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-08T02:45:57Z",
+      "side": 1,
+      "message": "It makes little sense to have inline copy construct+assignment but non-inline move construct+assignment. I suggest you make them the same.\n\n(And in case you decide to make them all inline, \u003ddefault the copy operations and omit the move operations, since the compiler will infer them. It\u0027s technically possible to omit the copy operations too, but the style guide prohibits is: https://google.github.io/styleguide/cppguide.html#Copyable_Movable_Types)",
+      "revId": "4c85519255030f98306947f6f762f21d8a413de2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
