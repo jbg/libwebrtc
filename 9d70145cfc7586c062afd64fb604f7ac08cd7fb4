@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "930c78d8_d18e20d8",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-12-09T10:55:34Z",
+      "side": 1,
+      "message": "I ended up keeping the structure as it is, but renaming the templated function GetPayloadTypesAndDefaultCodecs.",
+      "parentUuid": "3c4f9ef2_b12f50bb",
+      "revId": "9d70145cfc7586c062afd64fb604f7ac08cd7fb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6723597_180f5255",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 5
@@ -57,6 +75,30 @@
       "revId": "9d70145cfc7586c062afd64fb604f7ac08cd7fb4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b385d2ca_0e582247",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-12-09T10:55:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6723597_180f5255",
+      "range": {
+        "startLine": 145,
+        "startChar": 23,
+        "endLine": 145,
+        "endChar": 53
+      },
+      "revId": "9d70145cfc7586c062afd64fb604f7ac08cd7fb4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {

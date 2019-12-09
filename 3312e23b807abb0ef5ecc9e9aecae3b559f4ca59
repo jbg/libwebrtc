@@ -22,6 +22,53 @@
       "revId": "3312e23b807abb0ef5ecc9e9aecae3b559f4ca59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4036783b_ee7ca226",
+        "filename": "sdk/objc/components/video_codec/RTCDefaultVideoDecoderFactory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-12-09T10:55:34Z",
+      "side": 1,
+      "message": "It\u0027s probably not needed. I have removed it.",
+      "parentUuid": "61a010da_a7c8a429",
+      "range": {
+        "startLine": 24,
+        "startChar": 48,
+        "endLine": 24,
+        "endChar": 62
+      },
+      "revId": "3312e23b807abb0ef5ecc9e9aecae3b559f4ca59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4355a28b_1472a4e4",
+        "filename": "sdk/objc/components/video_codec/RTCDefaultVideoDecoderFactory.m",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2019-12-09T10:55:34Z",
+      "side": 1,
+      "message": "I asked a colleague to help me out with understanding this code. A question that was raised is if codecs should be released?",
+      "range": {
+        "startLine": 76,
+        "startChar": 39,
+        "endLine": 76,
+        "endChar": 45
+      },
+      "revId": "3312e23b807abb0ef5ecc9e9aecae3b559f4ca59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
