@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "7e1dff68_d14b8922",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-09T10:01:43Z",
+      "side": 1,
+      "message": "As commented in the file, this is an end-to-end test. Placing all unit tests around the main API in a single file doesn\u0027t seem sustainable to me. The test is already 2000 lines long and it is hard to understand what is related to what.\n\nWhat I would see as an ideal solution here is RtpSenderTest.java with @Before setUp function that has the necessary logic for instantiating a RtpSender. Then we can have focused test methods that focus on testing the functionality.\n\nIf there is anything blocking placing these tests in a separate file, let me know and we can look for solutions.",
+      "parentUuid": "40cc3a1b_521b2159",
+      "range": {
+        "startLine": 873,
+        "startChar": 14,
+        "endLine": 873,
+        "endChar": 42
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41a0dc78_ea4ebc5f",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
         "patchSetId": 3
@@ -190,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "65cd16e5_06d4130f",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-09T10:01:43Z",
+      "side": 1,
+      "message": "Could you please add a comment to the test why?",
+      "parentUuid": "55e367ac_ede7b914",
+      "range": {
+        "startLine": 876,
+        "startChar": 54,
+        "endLine": 876,
+        "endChar": 66
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "543d85cf_d21051e9",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
         "patchSetId": 3
@@ -234,6 +282,30 @@
       "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f2bdad3_9b265f99",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-09T10:01:43Z",
+      "side": 1,
+      "message": "I understand observer is needed, but is it necessary for it to implement anything? Can it just be a mock object not doing anything?",
+      "parentUuid": "30ab920e_12f6442b",
+      "range": {
+        "startLine": 877,
+        "startChar": 4,
+        "endLine": 878,
+        "endChar": 45
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
