@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "3e1f7af8_3e98c0fa",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2019-12-09T15:06:03Z",
+      "side": 1,
+      "message": "That\u0027s all the extent of the RtpSender API being tested, there\u0027s nothing more planned.\nIf you want to refactor all the tests, do so as an owner, but please don\u0027t ask someone making a minor addition to an API to do it for you.",
+      "parentUuid": "7e1dff68_d14b8922",
+      "range": {
+        "startLine": 873,
+        "startChar": 14,
+        "endLine": 873,
+        "endChar": 42
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41a0dc78_ea4ebc5f",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
         "patchSetId": 3
@@ -238,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "1fdb983e_3a27940c",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2019-12-09T15:06:03Z",
+      "side": 1,
+      "message": "It\u0027s already part of the documentation of the RtpTransceiver API, it requires unified plan to work.\nIt\u0027s also the default mode of operation in the WebRTC spec, so it should be the default for any new test.",
+      "parentUuid": "65cd16e5_06d4130f",
+      "range": {
+        "startLine": 876,
+        "startChar": 54,
+        "endLine": 876,
+        "endChar": 66
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "543d85cf_d21051e9",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
         "patchSetId": 3
@@ -306,6 +354,30 @@
       "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c15caba6_25d501bf",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2019-12-09T15:06:03Z",
+      "side": 1,
+      "message": "It could probably, but for the sake of consistency with all the other tests, unless a major refactoring happens, it should stay consistent with the rest.",
+      "parentUuid": "7f2bdad3_9b265f99",
+      "range": {
+        "startLine": 877,
+        "startChar": 4,
+        "endLine": 878,
+        "endChar": 45
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
