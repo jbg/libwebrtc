@@ -19,6 +19,10 @@
 #endif
 #endif
 
+#if defined(WINUWP)
+#include "rtc_base/numerics/safe_conversions.h"
+#endif
+
 #if defined(WEBRTC_WIN)
 // clang-format off
 // clang formatting would put <windows.h> last,
