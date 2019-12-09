@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "ca725998_e96b0aeb",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-09T17:10:25Z",
+      "side": 1,
+      "message": "That there is already bad examples in a codebase is a very poor argument for now following best practices. I was not asking you to refactor the existing test, just not add any new ones here. To try to move forward with this, I made a CL to move all the existing non end-to-end tests out of this class.\n\nhttps://webrtc-review.googlesource.com/c/src/+/161680\n\nSee RtpTranceiverTest for an example how to create a separate test class.",
+      "parentUuid": "3e1f7af8_3e98c0fa",
+      "range": {
+        "startLine": 873,
+        "startChar": 14,
+        "endLine": 873,
+        "endChar": 42
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41a0dc78_ea4ebc5f",
         "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
         "patchSetId": 3
@@ -378,6 +402,30 @@
       "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b3aa65_d2b50fdd",
+        "filename": "sdk/android/instrumentationtests/src/org/webrtc/PeerConnectionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2019-12-09T17:10:25Z",
+      "side": 1,
+      "message": "It can probably be replaced with mock(PeerConnection.Observer) as in the CL I created (in RtpTranceiverTest). Could you please try that?",
+      "parentUuid": "c15caba6_25d501bf",
+      "range": {
+        "startLine": 877,
+        "startChar": 4,
+        "endLine": 878,
+        "endChar": 45
+      },
+      "revId": "c5ea8a5571e8051edefdfd6bdd5c6c2c761851a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
