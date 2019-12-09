@@ -72,12 +72,13 @@ class RtpPayloadParams final {
       int spatial_index,
       int temporal_index,
       bool layer_sync,
-      RTPVideoHeader::GenericDescriptorInfo* generic);
-  void SetDependenciesVp8New(const CodecSpecificInfoVP8& vp8_info,
-                             int64_t shared_frame_id,
-                             bool is_keyframe,
-                             bool layer_sync,
-                             RTPVideoHeader::GenericDescriptorInfo* generic);
+      RTPVideoHeader::GenericDescriptorInfo* generic_desc_info);
+  void SetDependenciesVp8New(
+      const CodecSpecificInfoVP8& vp8_info,
+      int64_t shared_frame_id,
+      bool is_keyframe,
+      bool layer_sync,
+      RTPVideoHeader::GenericDescriptorInfo* generic_desc_info);
 
   // TODO(bugs.webrtc.org/10242): Remove once all encoder-wrappers are updated.
   // Holds the last shared frame id for a given (spatial, temporal) layer.

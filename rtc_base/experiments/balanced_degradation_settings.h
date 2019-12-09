@@ -52,12 +52,12 @@ class BalancedDegradationSettings {
            CodecTypeSpecific vp8,
            CodecTypeSpecific vp9,
            CodecTypeSpecific h264,
-           CodecTypeSpecific generic);
+           CodecTypeSpecific generic_codec);
 
     bool operator==(const Config& o) const {
       return pixels == o.pixels && fps == o.fps && kbps == o.kbps &&
              kbps_res == o.kbps_res && fps_diff == o.fps_diff && vp8 == o.vp8 &&
-             vp9 == o.vp9 && h264 == o.h264 && generic == o.generic;
+             vp9 == o.vp9 && h264 == o.h264 && generic_codec == o.generic_codec;
     }
 
     int pixels = 0;  // Video frame size.
@@ -71,7 +71,7 @@ class BalancedDegradationSettings {
     CodecTypeSpecific vp8;
     CodecTypeSpecific vp9;
     CodecTypeSpecific h264;
-    CodecTypeSpecific generic;
+    CodecTypeSpecific generic_codec;
   };
 
   // Returns configurations from field trial on success (default on failure).
