@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0598c4b1_bae90768",
+        "filename": "rtc_base/time_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-12-10T07:03:26Z",
+      "side": 1,
+      "message": "Thanks, since rtc::dchecked_cast is used also outside of UWP specific code, I think it is better to move it outside of the preprocessor conditional (around lines 36-37).",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 6
+      },
+      "revId": "d480a261ed7eacf7e9c70fe8b29650ddbc76a3d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
