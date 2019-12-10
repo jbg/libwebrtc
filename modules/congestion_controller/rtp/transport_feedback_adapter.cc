@@ -197,7 +197,14 @@ std::vector<PacketFeedback> TransportFeedbackAdapter::GetPacketFeedbackVector(
   if (last_timestamp_us_ == kNoTimestamp) {
     current_offset_ms_ = feedback_time.ms();
   } else {
-    current_offset_ms_ += feedback.GetBaseDeltaUs(last_timestamp_us_) / 1000;
+    const int64_t delta_ms = feedback.GetBaseDeltaUs(last_timestamp_us_) / 1000;
+    // Protect against assigning current_offset_ms_ negative value.
+    if (delta_ms < -current_offset_ms_) {
+      RTC_LOG(LS_WARNING) << "Unexpected feedback timestamp received.";
+      current_offset_ms_ = feedback_time.ms();
+    } else {
+      current_offset_ms_ += delta_ms;
+    }
   }
   last_timestamp_us_ = feedback.GetBaseTimeUs();
 
