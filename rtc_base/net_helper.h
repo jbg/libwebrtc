@@ -18,6 +18,8 @@ namespace cricket {
 
 extern const char UDP_PROTOCOL_NAME[];
 extern const char TCP_PROTOCOL_NAME[];
+// TODO(bugs.webrtc.org/10947): Deprecated. Delete after updating downstream
+// applications.
 extern const char SSLTCP_PROTOCOL_NAME[];
 extern const char TLS_PROTOCOL_NAME[];
 

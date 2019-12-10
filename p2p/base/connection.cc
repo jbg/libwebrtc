@@ -86,8 +86,6 @@ webrtc::IceCandidatePairProtocol GetProtocolByString(
     return webrtc::IceCandidatePairProtocol::kUdp;
   } else if (protocol == cricket::TCP_PROTOCOL_NAME) {
     return webrtc::IceCandidatePairProtocol::kTcp;
-  } else if (protocol == cricket::SSLTCP_PROTOCOL_NAME) {
-    return webrtc::IceCandidatePairProtocol::kSsltcp;
   } else if (protocol == cricket::TLS_PROTOCOL_NAME) {
     return webrtc::IceCandidatePairProtocol::kTls;
   }

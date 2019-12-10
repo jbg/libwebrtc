@@ -50,14 +50,13 @@ const int PHASE_TCP = 2;
 
 const int kNumPhases = 3;
 
-// Gets protocol priority: UDP > TCP > SSLTCP == TLS.
+// Gets protocol priority: UDP > TCP > TLS.
 int GetProtocolPriority(cricket::ProtocolType protocol) {
   switch (protocol) {
     case cricket::PROTO_UDP:
       return 2;
     case cricket::PROTO_TCP:
       return 1;
-    case cricket::PROTO_SSLTCP:
     case cricket::PROTO_TLS:
       return 0;
     default:

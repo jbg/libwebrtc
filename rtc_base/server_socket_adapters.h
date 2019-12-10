@@ -25,17 +25,6 @@ class AsyncProxyServerSocket : public BufferedReadAdapter {
   virtual void SendConnectResult(int err, const SocketAddress& addr) = 0;
 };
 
-// Implements a socket adapter that performs the server side of a
-// fake SSL handshake. Used when implementing a relay server that does "ssltcp".
-class AsyncSSLServerSocket : public BufferedReadAdapter {
- public:
-  explicit AsyncSSLServerSocket(AsyncSocket* socket);
-
- protected:
-  void ProcessInput(char* data, size_t* len) override;
-  RTC_DISALLOW_COPY_AND_ASSIGN(AsyncSSLServerSocket);
-};
-
 // Implements a proxy server socket for the SOCKS protocol.
 class AsyncSocksProxyServerSocket : public AsyncProxyServerSocket {
  public:

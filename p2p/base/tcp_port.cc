@@ -133,12 +133,6 @@ Connection* TCPPort::CreateConnection(const Candidate& address,
   if (origin == ORIGIN_OTHER_PORT)
     return NULL;
 
-  // We don't know how to act as an ssl server yet
-  if ((address.protocol() == SSLTCP_PROTOCOL_NAME) &&
-      (origin == ORIGIN_THIS_PORT)) {
-    return NULL;
-  }
-
   if (!IsCompatibleAddress(address.address())) {
     return NULL;
   }
@@ -255,7 +249,7 @@ int TCPPort::GetError() {
 }
 
 bool TCPPort::SupportsProtocol(const std::string& protocol) const {
-  return protocol == TCP_PROTOCOL_NAME || protocol == SSLTCP_PROTOCOL_NAME;
+  return protocol == TCP_PROTOCOL_NAME;
 }
 
 ProtocolType TCPPort::GetProtocol() const {
@@ -547,15 +541,10 @@ void TCPConnection::OnReadyToSend(rtc::AsyncPacketSocket* socket) {
 void TCPConnection::CreateOutgoingTcpSocket() {
   RTC_DCHECK(outgoing_);
   // TODO(guoweis): Handle failures here (unlikely since TCP).
-  int opts = (remote_candidate().protocol() == SSLTCP_PROTOCOL_NAME)
-                 ? rtc::PacketSocketFactory::OPT_TLS_FAKE
-                 : 0;
-  rtc::PacketSocketTcpOptions tcp_opts;
-  tcp_opts.opts = opts;
   socket_.reset(port()->socket_factory()->CreateClientTcpSocket(
       rtc::SocketAddress(port()->Network()->GetBestIP(), 0),
       remote_candidate().address(), port()->proxy(), port()->user_agent(),
-      tcp_opts));
+      rtc::PacketSocketTcpOptions()));
   if (socket_) {
     RTC_LOG(LS_VERBOSE) << ToString() << ": Connecting from "
                         << socket_->GetLocalAddress().ToSensitiveString()
