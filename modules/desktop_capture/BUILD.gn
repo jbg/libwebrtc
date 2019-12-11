@@ -390,6 +390,7 @@ rtc_library("desktop_capture_generic") {
       "Xfixes",
       "Xrender",
     ]
+    defines = [ "USE_X11" ]
   }
 
   if (!is_win && !is_mac && !rtc_use_x11_extensions && !rtc_use_pipewire) {
