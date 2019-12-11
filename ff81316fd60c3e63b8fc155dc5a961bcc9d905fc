@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a7f95bd_c6805af0",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-12-11T13:52:04Z",
+      "side": 1,
+      "message": "It seems like this comes from https://cs.chromium.org/chromium/src/build/config/BUILD.gn?l\u003d79\u0026rcl\u003d56b9e93391c7ec467532f4e94a4bf7e1746db161.\n\nOk, I have the suspect there is something to clean here. We define WEBRTC_USE_X11 (https://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_device/BUILD.gn?l\u003d281\u0026rcl\u003d3663ed3ad67893746efd86267a936a7295031ab1) so we have both WEBRTC_USE_X11 and USE_X11 in the codebase. I suspect we should only use WEBRTC_USE_X11 and stop relying on the Chromium toolchain defining USE_X11 (and avoid to define it here to fix the issue you are getting).\n\nI am ok if we do that in another CL, but it should be quite easy to replace all the USE_X11 in WebRTC with our macro.",
+      "range": {
+        "startLine": 393,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 27
+      },
+      "revId": "ff81316fd60c3e63b8fc155dc5a961bcc9d905fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
