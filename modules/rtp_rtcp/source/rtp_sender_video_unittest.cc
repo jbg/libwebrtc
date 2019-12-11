@@ -527,13 +527,13 @@ void RtpSenderVideoTest::PopulateGenericFrameDescriptor(int version) {
   rtp_module_->RegisterRtpHeaderExtension(ext_uri, ext_id);
 
   RTPVideoHeader hdr;
-  RTPVideoHeader::GenericDescriptorInfo& generic = hdr.generic.emplace();
-  generic.frame_id = kFrameId;
-  generic.temporal_index = 3;
-  generic.spatial_index = 2;
-  generic.higher_spatial_layers.push_back(4);
-  generic.dependencies.push_back(kFrameId - 1);
-  generic.dependencies.push_back(kFrameId - 500);
+  RTPVideoHeader::GenericDescriptorInfo& gen = hdr.generic_desc_info.emplace();
+  gen.frame_id = kFrameId;
+  gen.temporal_index = 3;
+  gen.spatial_index = 2;
+  gen.higher_spatial_layers.push_back(4);
+  gen.dependencies.push_back(kFrameId - 1);
+  gen.dependencies.push_back(kFrameId - 500);
   hdr.frame_type = VideoFrameType::kVideoFrameDelta;
   rtp_sender_video_.SendVideo(kPayload, kType, kTimestamp, 0, kFrame, nullptr,
                               hdr, kDefaultExpectedRetransmissionTimeMs);
@@ -549,8 +549,8 @@ void RtpSenderVideoTest::PopulateGenericFrameDescriptor(int version) {
                     .GetExtension<RtpGenericFrameDescriptorExtension01>(
                         &descriptor_wire));
   }
-  EXPECT_EQ(static_cast<uint16_t>(generic.frame_id), descriptor_wire.FrameId());
-  EXPECT_EQ(generic.temporal_index, descriptor_wire.TemporalLayer());
+  EXPECT_EQ(static_cast<uint16_t>(gen.frame_id), descriptor_wire.FrameId());
+  EXPECT_EQ(gen.temporal_index, descriptor_wire.TemporalLayer());
   EXPECT_THAT(descriptor_wire.FrameDependenciesDiffs(), ElementsAre(1, 500));
   uint8_t spatial_bitmask = 0x14;
   EXPECT_EQ(spatial_bitmask, descriptor_wire.SpatialLayersBitmask());
@@ -586,8 +586,8 @@ void RtpSenderVideoTest::
   vp8.tl0PicIdx = 13;
   vp8.temporalIdx = 1;
   vp8.keyIdx = 2;
-  RTPVideoHeader::GenericDescriptorInfo& generic = hdr.generic.emplace();
-  generic.frame_id = kFrameId;
+  RTPVideoHeader::GenericDescriptorInfo& gen = hdr.generic_desc_info.emplace();
+  gen.frame_id = kFrameId;
   hdr.frame_type = VideoFrameType::kVideoFrameDelta;
   rtp_sender_video_.SendVideo(kPayload, VideoCodecType::kVideoCodecVP8,
                               kTimestamp, 0, kFrame, nullptr, hdr,

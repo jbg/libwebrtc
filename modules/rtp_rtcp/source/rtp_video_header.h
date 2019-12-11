@@ -52,7 +52,7 @@ struct RTPVideoHeader {
 
   ~RTPVideoHeader();
 
-  absl::optional<GenericDescriptorInfo> generic;
+  absl::optional<GenericDescriptorInfo> generic_desc_info;
 
   VideoFrameType frame_type = VideoFrameType::kEmptyFrame;
   uint16_t width = 0;

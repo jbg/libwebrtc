@@ -43,7 +43,7 @@ TEST(VideoRtpDepacketizerRaw, UsesDefaultValuesForVideoHeader) {
       depacketizer.Parse(rtp_payload);
 
   ASSERT_TRUE(parsed);
-  EXPECT_FALSE(parsed->video_header.generic);
+  EXPECT_FALSE(parsed->video_header.generic_desc_info);
   EXPECT_EQ(parsed->video_header.codec, kVideoCodecGeneric);
 }
 

@@ -333,12 +333,12 @@ TEST(RtpPayloadParamsTest, PictureIdForOldGenericFormat) {
       params.GetRtpVideoHeader(encoded_image, &codec_info, kDontCare);
 
   EXPECT_EQ(kVideoCodecGeneric, header.codec);
-  ASSERT_TRUE(header.generic);
-  EXPECT_EQ(0, header.generic->frame_id);
+  ASSERT_TRUE(header.generic_desc_info);
+  EXPECT_EQ(0, header.generic_desc_info->frame_id);
 
   header = params.GetRtpVideoHeader(encoded_image, &codec_info, kDontCare);
-  ASSERT_TRUE(header.generic);
-  EXPECT_EQ(1, header.generic->frame_id);
+  ASSERT_TRUE(header.generic_desc_info);
+  EXPECT_EQ(1, header.generic_desc_info->frame_id);
 }
 
 TEST(RtpPayloadParamsTest, GenericDescriptorForGenericCodec) {
@@ -356,15 +356,15 @@ TEST(RtpPayloadParamsTest, GenericDescriptorForGenericCodec) {
       params.GetRtpVideoHeader(encoded_image, &codec_info, 0);
 
   EXPECT_EQ(kVideoCodecGeneric, header.codec);
-  ASSERT_TRUE(header.generic);
-  EXPECT_EQ(0, header.generic->frame_id);
-  EXPECT_THAT(header.generic->dependencies, IsEmpty());
+  ASSERT_TRUE(header.generic_desc_info);
+  EXPECT_EQ(0, header.generic_desc_info->frame_id);
+  EXPECT_THAT(header.generic_desc_info->dependencies, IsEmpty());
 
   encoded_image._frameType = VideoFrameType::kVideoFrameDelta;
   header = params.GetRtpVideoHeader(encoded_image, &codec_info, 1);
-  ASSERT_TRUE(header.generic);
-  EXPECT_EQ(1, header.generic->frame_id);
-  EXPECT_THAT(header.generic->dependencies, ElementsAre(0));
+  ASSERT_TRUE(header.generic_desc_info);
+  EXPECT_EQ(1, header.generic_desc_info->frame_id);
+  EXPECT_THAT(header.generic_desc_info->dependencies, ElementsAre(0));
 }
 
 class RtpPayloadParamsVp8ToGenericTest : public ::testing::Test {
@@ -396,14 +396,15 @@ class RtpPayloadParamsVp8ToGenericTest : public ::testing::Test {
     RTPVideoHeader header =
         params_.GetRtpVideoHeader(encoded_image, &codec_info, shared_frame_id);
 
-    ASSERT_TRUE(header.generic);
-    EXPECT_TRUE(header.generic->higher_spatial_layers.empty());
-    EXPECT_EQ(header.generic->spatial_index, 0);
+    ASSERT_TRUE(header.generic_desc_info);
+    EXPECT_TRUE(header.generic_desc_info->higher_spatial_layers.empty());
+    EXPECT_EQ(header.generic_desc_info->spatial_index, 0);
 
-    EXPECT_EQ(header.generic->frame_id, shared_frame_id);
-    EXPECT_EQ(header.generic->temporal_index, temporal_index);
-    std::set<int64_t> actual_deps(header.generic->dependencies.begin(),
-                                  header.generic->dependencies.end());
+    EXPECT_EQ(header.generic_desc_info->frame_id, shared_frame_id);
+    EXPECT_EQ(header.generic_desc_info->temporal_index, temporal_index);
+    std::set<int64_t> actual_deps(
+        header.generic_desc_info->dependencies.begin(),
+        header.generic_desc_info->dependencies.end());
     EXPECT_EQ(expected_deps, actual_deps);
 
     EXPECT_EQ(header.width, width);
@@ -435,7 +436,7 @@ TEST_F(RtpPayloadParamsVp8ToGenericTest, TooHighTemporalIndex) {
 
   RTPVideoHeader header =
       params_.GetRtpVideoHeader(encoded_image, &codec_info, 1);
-  EXPECT_FALSE(header.generic);
+  EXPECT_FALSE(header.generic_desc_info);
 }
 
 TEST_F(RtpPayloadParamsVp8ToGenericTest, LayerSync) {
@@ -493,14 +494,15 @@ class RtpPayloadParamsH264ToGenericTest : public ::testing::Test {
     RTPVideoHeader header =
         params_.GetRtpVideoHeader(encoded_image, &codec_info, shared_frame_id);
 
-    ASSERT_TRUE(header.generic);
-    EXPECT_TRUE(header.generic->higher_spatial_layers.empty());
-    EXPECT_EQ(header.generic->spatial_index, 0);
+    ASSERT_TRUE(header.generic_desc_info);
+    EXPECT_TRUE(header.generic_desc_info->higher_spatial_layers.empty());
+    EXPECT_EQ(header.generic_desc_info->spatial_index, 0);
 
-    EXPECT_EQ(header.generic->frame_id, shared_frame_id);
-    EXPECT_EQ(header.generic->temporal_index, temporal_index);
-    std::set<int64_t> actual_deps(header.generic->dependencies.begin(),
-                                  header.generic->dependencies.end());
+    EXPECT_EQ(header.generic_desc_info->frame_id, shared_frame_id);
+    EXPECT_EQ(header.generic_desc_info->temporal_index, temporal_index);
+    std::set<int64_t> actual_deps(
+        header.generic_desc_info->dependencies.begin(),
+        header.generic_desc_info->dependencies.end());
     EXPECT_EQ(expected_deps, actual_deps);
 
     EXPECT_EQ(header.width, width);
@@ -532,7 +534,7 @@ TEST_F(RtpPayloadParamsH264ToGenericTest, TooHighTemporalIndex) {
 
   RTPVideoHeader header =
       params_.GetRtpVideoHeader(encoded_image, &codec_info, 1);
-  EXPECT_FALSE(header.generic);
+  EXPECT_FALSE(header.generic_desc_info);
 }
 
 TEST_F(RtpPayloadParamsH264ToGenericTest, LayerSync) {

@@ -118,13 +118,13 @@ bool IsValid(const std::vector<BalancedDegradationSettings::Config>& configs) {
     if (!IsValid(configs[i].vp8, configs[i - 1].vp8) ||
         !IsValid(configs[i].vp9, configs[i - 1].vp9) ||
         !IsValid(configs[i].h264, configs[i - 1].h264) ||
-        !IsValid(configs[i].generic, configs[i - 1].generic)) {
+        !IsValid(configs[i].generic_codec, configs[i - 1].generic_codec)) {
       return false;
     }
   }
   for (const auto& config : configs) {
     if (!IsValidConfig(config.vp8) || !IsValidConfig(config.vp9) ||
-        !IsValidConfig(config.h264) || !IsValidConfig(config.generic)) {
+        !IsValidConfig(config.h264) || !IsValidConfig(config.generic_codec)) {
       return false;
     }
   }
@@ -159,8 +159,8 @@ absl::optional<VideoEncoder::QpThresholds> GetThresholds(
       high = config.h264.GetQpHigh();
       break;
     case kVideoCodecGeneric:
-      low = config.generic.GetQpLow();
-      high = config.generic.GetQpHigh();
+      low = config.generic_codec.GetQpLow();
+      high = config.generic_codec.GetQpHigh();
       break;
     default:
       break;
@@ -192,7 +192,7 @@ int GetFps(VideoCodecType type,
       fps = config->h264.GetFps();
       break;
     case kVideoCodecGeneric:
-      fps = config->generic.GetFps();
+      fps = config->generic_codec.GetFps();
       break;
     default:
       break;
@@ -229,7 +229,7 @@ BalancedDegradationSettings::Config::Config(int pixels,
                                             CodecTypeSpecific vp8,
                                             CodecTypeSpecific vp9,
                                             CodecTypeSpecific h264,
-                                            CodecTypeSpecific generic)
+                                            CodecTypeSpecific generic_codec)
     : pixels(pixels),
       fps(fps),
       kbps(kbps),
@@ -238,7 +238,7 @@ BalancedDegradationSettings::Config::Config(int pixels,
       vp8(vp8),
       vp9(vp9),
       h264(h264),
-      generic(generic) {}
+      generic_codec(generic_codec) {}
 
 BalancedDegradationSettings::BalancedDegradationSettings() {
   FieldTrialStructList<Config> configs(
@@ -265,12 +265,14 @@ BalancedDegradationSettings::BalancedDegradationSettings() {
                               [](Config* c) { return &c->h264.qp_high; }),
        FieldTrialStructMember("h264_fps",
                               [](Config* c) { return &c->h264.fps; }),
-       FieldTrialStructMember("generic_qp_low",
-                              [](Config* c) { return &c->generic.qp_low; }),
-       FieldTrialStructMember("generic_qp_high",
-                              [](Config* c) { return &c->generic.qp_high; }),
+       FieldTrialStructMember(
+           "generic_qp_low",
+           [](Config* c) { return &c->generic_codec.qp_low; }),
+       FieldTrialStructMember(
+           "generic_qp_high",
+           [](Config* c) { return &c->generic_codec.qp_high; }),
        FieldTrialStructMember("generic_fps",
-                              [](Config* c) { return &c->generic.fps; })},
+                              [](Config* c) { return &c->generic_codec.fps; })},
       {});
 
   ParseFieldTrial({&configs}, field_trial::FindFullName(kFieldTrial));

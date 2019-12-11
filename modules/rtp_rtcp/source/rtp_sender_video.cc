@@ -106,29 +106,32 @@ void AddRtpHeaderExtensions(const RTPVideoHeader& video_header,
     packet->SetExtension<FrameMarkingExtension>(frame_marking);
   }
 
-  if (video_header.generic) {
+  if (video_header.generic_desc_info) {
     RtpGenericFrameDescriptor generic_descriptor;
     generic_descriptor.SetFirstPacketInSubFrame(first_packet);
     generic_descriptor.SetLastPacketInSubFrame(last_packet);
-    generic_descriptor.SetDiscardable(video_header.generic->discardable);
+    generic_descriptor.SetDiscardable(
+        video_header.generic_desc_info->discardable);
 
     if (first_packet) {
       generic_descriptor.SetFrameId(
-          static_cast<uint16_t>(video_header.generic->frame_id));
-      for (int64_t dep : video_header.generic->dependencies) {
+          static_cast<uint16_t>(video_header.generic_desc_info->frame_id));
+      for (int64_t dep : video_header.generic_desc_info->dependencies) {
         generic_descriptor.AddFrameDependencyDiff(
-            video_header.generic->frame_id - dep);
+            video_header.generic_desc_info->frame_id - dep);
       }
 
-      uint8_t spatial_bimask = 1 << video_header.generic->spatial_index;
-      for (int layer : video_header.generic->higher_spatial_layers) {
-        RTC_DCHECK_GT(layer, video_header.generic->spatial_index);
+      uint8_t spatial_bimask = 1
+                               << video_header.generic_desc_info->spatial_index;
+      for (int layer : video_header.generic_desc_info->higher_spatial_layers) {
+        RTC_DCHECK_GT(layer, video_header.generic_desc_info->spatial_index);
         RTC_DCHECK_LT(layer, 8);
         spatial_bimask |= 1 << layer;
       }
       generic_descriptor.SetSpatialLayersBitmask(spatial_bimask);
 
-      generic_descriptor.SetTemporalLayer(video_header.generic->temporal_index);
+      generic_descriptor.SetTemporalLayer(
+          video_header.generic_desc_info->temporal_index);
 
       if (video_header.frame_type == VideoFrameType::kVideoFrameKey) {
         generic_descriptor.SetResolution(video_header.width,
