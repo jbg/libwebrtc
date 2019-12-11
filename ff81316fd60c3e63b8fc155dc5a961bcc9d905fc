@@ -46,6 +46,30 @@
       "revId": "ff81316fd60c3e63b8fc155dc5a961bcc9d905fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "423375b9_e3585a7e",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2019-12-11T14:36:41Z",
+      "side": 1,
+      "message": "Yes, if I understand correctly that is the right thing to do since it looks like we were assuming USE_X11 but that it actually only set in Chromium and we should set it when WebRTC is configured for X11.\n\nIt is possible that we will have to move the define in a config and use public_configs to propagate. Not sure if this will turn out into a complex thing (in that case just land and open a bug, we can follow up).",
+      "parentUuid": "81496811_74abb775",
+      "range": {
+        "startLine": 393,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 27
+      },
+      "revId": "ff81316fd60c3e63b8fc155dc5a961bcc9d905fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
