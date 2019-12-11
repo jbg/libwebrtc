@@ -22,6 +22,30 @@
       "revId": "ff81316fd60c3e63b8fc155dc5a961bcc9d905fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81496811_74abb775",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2019-12-11T14:32:35Z",
+      "side": 1,
+      "message": "Yeah, I can give that a shot. So, USE_X11 -\u003e WEBRTC_USE_X11, and set WEBRTC_USE_X11 explicitly here, right?",
+      "parentUuid": "6a7f95bd_c6805af0",
+      "range": {
+        "startLine": 393,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 27
+      },
+      "revId": "ff81316fd60c3e63b8fc155dc5a961bcc9d905fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
