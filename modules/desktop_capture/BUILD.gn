@@ -44,6 +44,7 @@ if (rtc_include_tests) {
   rtc_library("desktop_capture_modules_tests") {
     testonly = true
 
+    defines = []
     sources = []
     deps = [
       "../../api:function_view",
@@ -67,12 +68,16 @@ if (rtc_include_tests) {
         "screen_drawer_unittest.cc",
         "window_finder_unittest.cc",
       ]
+      if (rtc_use_x11_extensions) {
+        defines += [ "WEBRTC_USE_X11" ]
+      }
     }
   }
 
   rtc_library("desktop_capture_unittests") {
     testonly = true
 
+    defines = []
     sources = [
       "blank_detector_desktop_capturer_wrapper_unittest.cc",
       "cropped_desktop_frame_unittest.cc",
@@ -116,6 +121,10 @@ if (rtc_include_tests) {
         "window_capturer_unittest.cc",
       ]
       deps += [ ":desktop_capture_mock" ]
+
+      if (rtc_use_x11_extensions) {
+        defines += [ "WEBRTC_USE_X11" ]
+      }
     }
   }
 
@@ -267,6 +276,7 @@ if (is_mac) {
 }
 
 rtc_library("desktop_capture_generic") {
+  defines = []
   visibility = [
     ":desktop_capture",
     ":desktop_capture_objc",
@@ -357,6 +367,7 @@ rtc_library("desktop_capture_generic") {
         "linux/shared_x_util.h",
       ]
     }
+    defines += [ "WEBRTC_USE_X11" ]
   }
 
   if (rtc_use_x11_extensions) {
@@ -390,6 +401,7 @@ rtc_library("desktop_capture_generic") {
       "Xfixes",
       "Xrender",
     ]
+    defines += [ "WEBRTC_USE_X11" ]
   }
 
   if (!is_win && !is_mac && !rtc_use_x11_extensions && !rtc_use_pipewire) {
