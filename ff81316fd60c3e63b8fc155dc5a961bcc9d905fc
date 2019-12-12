@@ -70,6 +70,30 @@
       "revId": "ff81316fd60c3e63b8fc155dc5a961bcc9d905fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ee7f45e_27d3cd09",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2019-12-12T09:47:06Z",
+      "side": 1,
+      "message": "I don\u0027t think we need a public config. I can only see the _generic and unittest targets have files that use that define, so I\u0027ll set them there.",
+      "parentUuid": "423375b9_e3585a7e",
+      "range": {
+        "startLine": 393,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 27
+      },
+      "revId": "ff81316fd60c3e63b8fc155dc5a961bcc9d905fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
