@@ -41,6 +41,7 @@ const int64_t kNanosecondsPerSecond = 1000000000;
   RTCVideoRotation _rotation;
 #if TARGET_OS_IPHONE
   UIDeviceOrientation _orientation;
+  BOOL _orientationNotificationsWasAlreadyBegin;
 #endif
 }
 
@@ -158,7 +159,13 @@ const int64_t kNanosecondsPerSecond = 1000000000;
                       RTCLogInfo("startCaptureWithDevice %@ @ %ld fps", format, (long)fps);
 
 #if TARGET_OS_IPHONE
-                      [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+                      __weak __typeof(self) weakSelf = self;
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                        __strong __typeof(weakSelf) strongSelf = weakSelf;
+                        if (strongSelf && !strongSelf->_orientationNotificationsWasAlreadyBegin) {
+                          [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+                        }
+                      });
 #endif
 
                       self.currentDevice = device;
@@ -200,7 +207,13 @@ const int64_t kNanosecondsPerSecond = 1000000000;
                       [self.captureSession stopRunning];
 
 #if TARGET_OS_IPHONE
-                      [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+                      __weak __typeof(self) weakSelf = self;
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                        __strong __typeof(weakSelf) strongSelf = weakSelf;
+                        if (strongSelf && strongSelf->_orientationNotificationsWasAlreadyBegin) {
+                          [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+                        }
+                      });
 #endif
                       self.isRunning = NO;
                       if (completionHandler) {
