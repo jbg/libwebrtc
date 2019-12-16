@@ -89,14 +89,14 @@ class RtpPacketizerH264 : public RtpPacketizer {
 };
 
 // Depacketizer for H264.
-class RtpDepacketizerH264 : public RtpDepacketizer {
+class RtpDepacketizerH264 {
  public:
   RtpDepacketizerH264();
-  ~RtpDepacketizerH264() override;
+  ~RtpDepacketizerH264();
 
-  bool Parse(ParsedPayload* parsed_payload,
+  bool Parse(RtpDepacketizer::ParsedPayload* parsed_payload,
              const uint8_t* payload_data,
-             size_t payload_data_length) override;
+             size_t payload_data_length);
 
  private:
   bool ParseFuaNalu(RtpDepacketizer::ParsedPayload* parsed_payload,

@@ -20,6 +20,7 @@
 #include "api/array_view.h"
 #include "modules/include/module_common_types.h"
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
+#include "rtc_base/deprecation.h"
 
 namespace webrtc {
 
@@ -75,16 +76,6 @@ class RtpDepacketizer {
     const uint8_t* payload;
     size_t payload_length;
   };
-
-  // If type is not set, returns a raw depacketizer.
-  static RtpDepacketizer* Create(absl::optional<VideoCodecType> type);
-
-  virtual ~RtpDepacketizer() {}
-
-  // Parses the RTP payload, parsed result will be saved in |parsed_payload|.
-  virtual bool Parse(ParsedPayload* parsed_payload,
-                     const uint8_t* payload_data,
-                     size_t payload_data_length) = 0;
 };
 }  // namespace webrtc
 #endif  // MODULES_RTP_RTCP_SOURCE_RTP_FORMAT_H_

@@ -363,7 +363,7 @@ rtc::scoped_refptr<EncodedImageBuffer> RtpDepacketizerAv1::AssembleFrame(
   return bitstream;
 }
 
-bool RtpDepacketizerAv1::Parse(ParsedPayload* parsed_payload,
+bool RtpDepacketizerAv1::Parse(RtpDepacketizer::ParsedPayload* parsed_payload,
                                const uint8_t* payload_data,
                                size_t payload_data_length) {
   RTC_DCHECK(parsed_payload);

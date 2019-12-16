@@ -80,9 +80,9 @@ void ParseAndCheckPacket(const uint8_t* packet,
                          const RTPVideoHeaderVP9& expected,
                          size_t expected_hdr_length,
                          size_t expected_length) {
-  std::unique_ptr<RtpDepacketizer> depacketizer(new RtpDepacketizerVp9());
+  RtpDepacketizerVp9 depacketizer;
   RtpDepacketizer::ParsedPayload parsed;
-  ASSERT_TRUE(depacketizer->Parse(&parsed, packet, expected_length));
+  ASSERT_TRUE(depacketizer.Parse(&parsed, packet, expected_length));
   EXPECT_EQ(kVideoCodecVP9, parsed.video_header().codec);
   auto& vp9_header =
       absl::get<RTPVideoHeaderVP9>(parsed.video_header().video_type_header);
@@ -564,7 +564,7 @@ class RtpDepacketizerVp9Test : public ::testing::Test {
   void SetUp() override { expected_.InitRTPVideoHeaderVP9(); }
 
   RTPVideoHeaderVP9 expected_;
-  std::unique_ptr<RtpDepacketizer> depacketizer_;
+  std::unique_ptr<RtpDepacketizerVp9> depacketizer_;
 };
 
 TEST_F(RtpDepacketizerVp9Test, ParseBasicHeader) {

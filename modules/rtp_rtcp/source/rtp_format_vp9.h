@@ -68,13 +68,13 @@ class RtpPacketizerVp9 : public RtpPacketizer {
   RTC_DISALLOW_COPY_AND_ASSIGN(RtpPacketizerVp9);
 };
 
-class RtpDepacketizerVp9 : public RtpDepacketizer {
+class RtpDepacketizerVp9 {
  public:
-  ~RtpDepacketizerVp9() override = default;
+  ~RtpDepacketizerVp9() = default;
 
-  bool Parse(ParsedPayload* parsed_payload,
+  bool Parse(RtpDepacketizer::ParsedPayload* parsed_payload,
              const uint8_t* payload,
-             size_t payload_length) override;
+             size_t payload_length);
 };
 
 }  // namespace webrtc

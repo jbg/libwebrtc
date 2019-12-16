@@ -21,19 +21,19 @@
 
 namespace webrtc {
 
-class RtpDepacketizerAv1 : public RtpDepacketizer {
+class RtpDepacketizerAv1 {
  public:
   RtpDepacketizerAv1() = default;
   RtpDepacketizerAv1(const RtpDepacketizerAv1&) = delete;
   RtpDepacketizerAv1& operator=(const RtpDepacketizerAv1&) = delete;
-  ~RtpDepacketizerAv1() override = default;
+  ~RtpDepacketizerAv1() = default;
 
   static rtc::scoped_refptr<EncodedImageBuffer> AssembleFrame(
       rtc::ArrayView<const rtc::ArrayView<const uint8_t>> rtp_payloads);
 
-  bool Parse(ParsedPayload* parsed_payload,
+  bool Parse(RtpDepacketizer::ParsedPayload* parsed_payload,
              const uint8_t* payload_data,
-             size_t payload_data_length) override;
+             size_t payload_data_length);
 };
 
 }  // namespace webrtc

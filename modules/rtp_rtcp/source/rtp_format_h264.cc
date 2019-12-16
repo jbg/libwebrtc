@@ -345,7 +345,7 @@ void RtpPacketizerH264::NextFragmentPacket(RtpPacketToSend* rtp_packet) {
 RtpDepacketizerH264::RtpDepacketizerH264() : offset_(0), length_(0) {}
 RtpDepacketizerH264::~RtpDepacketizerH264() {}
 
-bool RtpDepacketizerH264::Parse(ParsedPayload* parsed_payload,
+bool RtpDepacketizerH264::Parse(RtpDepacketizer::ParsedPayload* parsed_payload,
                                 const uint8_t* payload_data,
                                 size_t payload_data_length) {
   RTC_CHECK(parsed_payload != nullptr);
@@ -382,7 +382,7 @@ bool RtpDepacketizerH264::Parse(ParsedPayload* parsed_payload,
 }
 
 bool RtpDepacketizerH264::ProcessStapAOrSingleNalu(
-    ParsedPayload* parsed_payload,
+    RtpDepacketizer::ParsedPayload* parsed_payload,
     const uint8_t* payload_data) {
   parsed_payload->video_header().width = 0;
   parsed_payload->video_header().height = 0;

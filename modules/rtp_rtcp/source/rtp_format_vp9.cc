@@ -583,7 +583,7 @@ bool RtpPacketizerVp9::WriteHeader(bool layer_begin,
   return true;
 }
 
-bool RtpDepacketizerVp9::Parse(ParsedPayload* parsed_payload,
+bool RtpDepacketizerVp9::Parse(RtpDepacketizer::ParsedPayload* parsed_payload,
                                const uint8_t* payload,
                                size_t payload_length) {
   RTC_DCHECK(parsed_payload != nullptr);
