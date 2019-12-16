@@ -153,7 +153,8 @@ RtpDepacketizer* RtpDepacketizer::Create(absl::optional<VideoCodecType> type) {
     case kVideoCodecH264:
       return new RtpDepacketizerH264();
     case kVideoCodecVP8:
-      return new RtpDepacketizerVp8();
+      RTC_CHECK(false) << "VP8 converted to RtpVideoDepacketizer interface";
+      return nullptr;
     case kVideoCodecVP9:
       return new RtpDepacketizerVp9();
     case kVideoCodecAV1:
