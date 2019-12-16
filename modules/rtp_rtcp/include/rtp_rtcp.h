@@ -34,6 +34,7 @@
 namespace webrtc {
 
 // Forward declarations.
+class EncodedFrameTransformInterface;
 class FrameEncryptorInterface;
 class OverheadObserver;
 class RateLimiter;
@@ -108,6 +109,8 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
 
     // Update network2 instead of pacer_exit field of video timing extension.
     bool populate_network2_timestamp = false;
+
+    EncodedFrameTransformInterface* encoded_frame_transformer = nullptr;
 
     // E2EE Custom Video Frame Encryption
     FrameEncryptorInterface* frame_encryptor = nullptr;

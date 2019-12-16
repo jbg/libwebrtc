@@ -130,6 +130,9 @@ class RtpSenderBase : public RtpSenderInternal, public ObserverInterface {
     return dtls_transport_;
   }
 
+  void RegisterEncodedFrameTransformer(
+      EncodedFrameTransformInterface* transform_callback) override;
+
   void SetFrameEncryptor(
       rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor) override;
 
@@ -187,6 +190,7 @@ class RtpSenderBase : public RtpSenderInternal, public ObserverInterface {
   rtc::scoped_refptr<MediaStreamTrackInterface> track_;
 
   rtc::scoped_refptr<DtlsTransportInterface> dtls_transport_;
+  EncodedFrameTransformInterface* encoded_frame_transformer_;
   rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor_;
   // |last_transaction_id_| is used to verify that |SetParameters| is receiving
   // the parameters object that was last returned from |GetParameters|.

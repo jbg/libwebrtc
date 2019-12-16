@@ -12,6 +12,9 @@
 
 namespace webrtc {
 
+void RtpSenderInterface::RegisterEncodedFrameTransformer(
+    EncodedFrameTransformInterface* transform_callback) {}
+
 void RtpSenderInterface::SetFrameEncryptor(
     rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor) {}
 

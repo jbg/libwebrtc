@@ -158,9 +158,13 @@ class WebRtcVideoChannel : public VideoMediaChannel,
       NetworkInterface* iface,
       const webrtc::MediaTransportConfig& media_transport_config) override;
 
+  void RegisterEncodedFrameTransformer(uint32_t ssrc,
+                                       webrtc::EncodedFrameTransformInterface*
+                                           encoded_frame_transformer) override;
   void RegisterReceivedFrameTransformer(
       uint32_t ssrc,
       webrtc::ReceivedFrameTransformInterface* frame_transformer) override;
+
   // E2E Encrypted Video Frame API
   // Set a frame decryptor to a particular ssrc that will intercept all
   // incoming video frames and attempt to decrypt them before forwarding the
@@ -315,6 +319,9 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     void SetSendParameters(const ChangedSendParameters& send_params);
     webrtc::RTCError SetRtpParameters(const webrtc::RtpParameters& parameters);
     webrtc::RtpParameters GetRtpParameters() const;
+
+    void RegisterEncodedFrameTransformer(
+        webrtc::EncodedFrameTransformInterface* encoded_frame_transformer);
 
     void SetFrameEncryptor(
         rtc::scoped_refptr<webrtc::FrameEncryptorInterface> frame_encryptor);

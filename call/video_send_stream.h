@@ -35,6 +35,7 @@
 
 namespace webrtc {
 
+class EncodedFrameTransformInterface;
 class FrameEncryptorInterface;
 
 class VideoSendStream {
@@ -153,6 +154,8 @@ class VideoSendStream {
 
     // Enables periodic bandwidth probing in application-limited region.
     bool periodic_alr_bandwidth_probing = false;
+
+    webrtc::EncodedFrameTransformInterface* encoded_frame_transformer;
 
     // An optional custom frame encryptor that allows the entire frame to be
     // encrypted in whatever way the caller chooses. This is not required by

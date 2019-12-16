@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/encoded_frame_transform_interface.h"
 #include "api/fec_controller.h"
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/video/encoded_image.h"
@@ -109,6 +110,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   std::map<uint32_t, RtpPayloadState> GetRtpPayloadStates() const;
 
   absl::optional<float> configured_pacing_factor_;
+  void HandleTransformedFrame(std::unique_ptr<EncodedTransformableFrame> frame);
 
  private:
   // Implements BitrateAllocatorObserver.
@@ -126,6 +128,10 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
       const EncodedImage& encoded_image,
       const CodecSpecificInfo* codec_specific_info,
       const RTPFragmentationHeader* fragmentation) override;
+  EncodedImageCallback::Result HandleEncodedImage(
+      const EncodedImage& encoded_image,
+      const CodecSpecificInfo* codec_specific_info,
+      const RTPFragmentationHeader* fragmentation);
 
   // Implements EncodedImageCallback.
   void OnDroppedFrame(EncodedImageCallback::DropReason reason) override;
@@ -178,6 +184,28 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   VideoStreamEncoderInterface* const video_stream_encoder_;
   EncoderRtcpFeedback encoder_feedback_;
 
+  EncodedFrameTransformInterface* encoded_frame_transformer_ = nullptr;
+  class TransformedFrameVideoSender : public TransformedFrameCallback {
+   public:
+    struct FrameState {
+      CodecSpecificInfo codec_specific_info;
+      RTPFragmentationHeader fragmentation;
+    };
+
+    explicit TransformedFrameVideoSender(VideoSendStreamImpl* sender);
+
+    void SaveFrameState(const CodecSpecificInfo* codec_specific_info,
+                        const RTPFragmentationHeader* fragmentation);
+
+    void OnTransformedFrame(
+        std::unique_ptr<EncodedTransformableFrame> frame) override;
+
+   private:
+    VideoSendStreamImpl* sender_;
+    FrameState frame_state_;
+  };
+  std::unique_ptr<TransformedFrameVideoSender> transformed_frame_callback_ =
+      nullptr;
   RtcpBandwidthObserver* const bandwidth_observer_;
   RtpVideoSenderInterface* const rtp_video_sender_;
 

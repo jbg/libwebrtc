@@ -69,6 +69,7 @@ class RTPSenderVideo {
     RTPSender* rtp_sender = nullptr;
     FlexfecSender* flexfec_sender = nullptr;
     PlayoutDelayOracle* playout_delay_oracle = nullptr;
+    EncodedFrameTransformInterface* encoded_frame_transformer = nullptr;
     FrameEncryptorInterface* frame_encryptor = nullptr;
     bool require_frame_encryption = false;
     bool need_rtp_packet_infos = false;

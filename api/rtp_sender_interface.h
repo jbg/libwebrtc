@@ -20,6 +20,7 @@
 #include "api/crypto/frame_encryptor_interface.h"
 #include "api/dtls_transport_interface.h"
 #include "api/dtmf_sender_interface.h"
+#include "api/encoded_frame_transform_interface.h"
 #include "api/media_stream_interface.h"
 #include "api/media_types.h"
 #include "api/proxy.h"
@@ -82,6 +83,9 @@ class RTC_EXPORT RtpSenderInterface : public rtc::RefCountInterface {
   // Returns null for a video sender.
   virtual rtc::scoped_refptr<DtmfSenderInterface> GetDtmfSender() const = 0;
 
+  virtual void RegisterEncodedFrameTransformer(
+      EncodedFrameTransformInterface* encoded_frame_transformer);
+
   // Sets a user defined frame encryptor that will encrypt the entire frame
   // before it is sent across the network. This will encrypt the entire frame
   // using the user provided encryption mechanism regardless of whether SRTP is
@@ -113,6 +117,9 @@ PROXY_CONSTMETHOD0(std::vector<RtpEncodingParameters>, init_send_encodings)
 PROXY_CONSTMETHOD0(RtpParameters, GetParameters)
 PROXY_METHOD1(RTCError, SetParameters, const RtpParameters&)
 PROXY_CONSTMETHOD0(rtc::scoped_refptr<DtmfSenderInterface>, GetDtmfSender)
+PROXY_METHOD1(void,
+              RegisterEncodedFrameTransformer,
+              EncodedFrameTransformInterface*)
 PROXY_METHOD1(void,
               SetFrameEncryptor,
               rtc::scoped_refptr<FrameEncryptorInterface>)

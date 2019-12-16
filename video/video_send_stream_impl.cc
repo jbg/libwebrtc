@@ -13,6 +13,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <memory>
 #include <string>
 #include <utility>
 
@@ -165,6 +166,24 @@ PacingConfig::PacingConfig()
 PacingConfig::PacingConfig(const PacingConfig&) = default;
 PacingConfig::~PacingConfig() = default;
 
+VideoSendStreamImpl::TransformedFrameVideoSender::TransformedFrameVideoSender(
+    VideoSendStreamImpl* sender)
+    : sender_(sender) {}
+
+void VideoSendStreamImpl::TransformedFrameVideoSender::SaveFrameState(
+    const CodecSpecificInfo* codec_specific_info,
+    const RTPFragmentationHeader* fragmentation) {
+  frame_state_.codec_specific_info = *codec_specific_info;
+  if (fragmentation)
+    frame_state_.fragmentation.CopyFrom(*fragmentation);
+}
+
+void VideoSendStreamImpl::TransformedFrameVideoSender::OnTransformedFrame(
+    std::unique_ptr<EncodedTransformableFrame> frame) {
+  RTC_LOG(LS_ERROR) << "[webrtc sender] on transformed frame.";
+  sender_->HandleTransformedFrame(std::move(frame));
+}
+
 VideoSendStreamImpl::VideoSendStreamImpl(
     Clock* clock,
     SendStatisticsProxy* stats_proxy,
@@ -201,6 +220,9 @@ VideoSendStreamImpl::VideoSendStreamImpl(
       has_packet_feedback_(false),
       video_stream_encoder_(video_stream_encoder),
       encoder_feedback_(clock, config_->rtp.ssrcs, video_stream_encoder),
+      encoded_frame_transformer_(config_->encoded_frame_transformer),
+      transformed_frame_callback_(
+          std::make_unique<TransformedFrameVideoSender>(this)),
       bandwidth_observer_(transport->GetBandwidthObserver()),
       rtp_video_sender_(transport_->CreateRtpVideoSender(
           suspended_ssrcs,
@@ -282,6 +304,12 @@ VideoSendStreamImpl::VideoSendStreamImpl(
 
   video_stream_encoder_->SetStartBitrate(
       bitrate_allocator_->GetStartBitrate(this));
+
+  if (encoded_frame_transformer_) {
+    RTC_LOG(LS_ERROR) << "[webrtc sender] register callback.";
+    encoded_frame_transformer_->RegisterTransformedFrameCallback(
+        transformed_frame_callback_.get());
+  }
 
   // Only request rotation at the source when we positively know that the remote
   // side doesn't support the rotation extension. This allows us to prepare the
@@ -543,10 +571,41 @@ void VideoSendStreamImpl::OnEncoderConfigurationChanged(
   }
 }
 
+void VideoSendStreamImpl::HandleTransformedFrame(
+    std::unique_ptr<EncodedTransformableFrame> frame) {
+  RTC_LOG(LS_ERROR)
+      << "[webrtc sender] handle transformed frame - post on worker queue.";
+  worker_queue_->PostTask([this, frame = std::move(frame)]() mutable {
+    HandleEncodedImage(frame->encoded_image(), frame->codec_specific_info(),
+                       frame->fragmentation());
+  });
+}
+
 EncodedImageCallback::Result VideoSendStreamImpl::OnEncodedImage(
     const EncodedImage& encoded_image,
     const CodecSpecificInfo* codec_specific_info,
     const RTPFragmentationHeader* fragmentation) {
+  if (encoded_frame_transformer_) {
+    std::unique_ptr<RTPFragmentationHeader> fragmentation_copy;
+    if (fragmentation)
+      fragmentation_copy->CopyFrom(*fragmentation);
+    RTC_LOG(LS_ERROR) << "[webrtc sender] transform image.";
+    encoded_frame_transformer_->TransformFrame(
+        std::make_unique<EncodedTransformableFrame>(
+            std::make_unique<EncodedImage>(encoded_image),
+            std::make_unique<CodecSpecificInfo>(*codec_specific_info),
+            std::move(fragmentation_copy)));
+    return EncodedImageCallback::Result(EncodedImageCallback::Result::OK);
+  }
+
+  return HandleEncodedImage(encoded_image, codec_specific_info, fragmentation);
+}
+
+EncodedImageCallback::Result VideoSendStreamImpl::HandleEncodedImage(
+    const EncodedImage& encoded_image,
+    const CodecSpecificInfo* codec_specific_info,
+    const RTPFragmentationHeader* fragmentation) {
+  RTC_LOG(LS_ERROR) << "[webrtc sender] handle posted transformed image.";
   // Encoded is called on whatever thread the real encoder implementation run
   // on. In the case of hardware encoders, there might be several encoders
   // running in parallel on different threads.
