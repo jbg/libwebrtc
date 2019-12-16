@@ -22,6 +22,7 @@
 #include "api/audio_options.h"
 #include "api/crypto/frame_decryptor_interface.h"
 #include "api/crypto/frame_encryptor_interface.h"
+#include "api/encoded_frame_transform_interface.h"
 #include "api/rtc_error.h"
 #include "api/rtp_parameters.h"
 #include "api/transport/media/media_transport_config.h"
@@ -230,6 +231,9 @@ class MediaChannel : public sigslot::has_slots<> {
   virtual void ResetUnsignaledRecvStream() = 0;
   // Returns the absoulte sendtime extension id value from media channel.
   virtual int GetRtpSendTimeExtnId() const;
+  virtual void RegisterEncodedFrameTransformer(
+      uint32_t ssrc,
+      webrtc::EncodedFrameTransformInterface* encoded_frame_transformer);
   virtual void RegisterReceivedFrameTransformer(
       uint32_t ssrc,
       webrtc::ReceivedFrameTransformInterface* frame_transformer);

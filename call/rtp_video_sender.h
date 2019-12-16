@@ -86,6 +86,7 @@ class RtpVideoSender : public RtpVideoSenderInterface,
       RtcEventLog* event_log,
       RateLimiter* retransmission_limiter,  // move inside RtpTransport
       std::unique_ptr<FecController> fec_controller,
+      EncodedFrameTransformInterface* encoded_frame_transformer,
       FrameEncryptorInterface* frame_encryptor,
       const CryptoOptions& crypto_options);  // move inside RtpTransport
   ~RtpVideoSender() override;

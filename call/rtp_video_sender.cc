@@ -130,6 +130,7 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
     RtcEventLog* event_log,
     RateLimiter* retransmission_rate_limiter,
     OverheadObserver* overhead_observer,
+    EncodedFrameTransformInterface* encoded_frame_transformer,
     FrameEncryptorInterface* frame_encryptor,
     const CryptoOptions& crypto_options) {
   RTC_DCHECK_GT(rtp_config.ssrcs.size(), 0);
@@ -197,6 +198,7 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
     video_config.rtp_sender = rtp_rtcp->RtpSender();
     video_config.flexfec_sender = configuration.flexfec_sender;
     video_config.playout_delay_oracle = playout_delay_oracle.get();
+    video_config.encoded_frame_transformer = encoded_frame_transformer;
     video_config.frame_encryptor = frame_encryptor;
     video_config.require_frame_encryption =
         crypto_options.sframe.require_frame_encryption;
@@ -293,6 +295,7 @@ RtpVideoSender::RtpVideoSender(
     RtcEventLog* event_log,
     RateLimiter* retransmission_limiter,
     std::unique_ptr<FecController> fec_controller,
+    EncodedFrameTransformInterface* encoded_frame_transformer,
     FrameEncryptorInterface* frame_encryptor,
     const CryptoOptions& crypto_options)
     : send_side_bwe_with_overhead_(
@@ -319,6 +322,7 @@ RtpVideoSender::RtpVideoSender(
                                           event_log,
                                           retransmission_limiter,
                                           this,
+                                          encoded_frame_transformer,
                                           frame_encryptor,
                                           crypto_options)),
       rtp_config_(rtp_config),

@@ -198,21 +198,56 @@ const char* FrameTypeToString(VideoFrameType frame_type) {
 
 }  // namespace
 
-RTPSenderVideo::RTPSenderVideo(Clock* clock,
-                               RTPSender* rtp_sender,
-                               FlexfecSender* flexfec_sender,
-                               PlayoutDelayOracle* playout_delay_oracle,
-                               FrameEncryptorInterface* frame_encryptor,
-                               bool require_frame_encryption,
-                               bool need_rtp_packet_infos,
-                               bool enable_retransmit_all_layers,
-                               const WebRtcKeyValueConfig& field_trials)
+RTPSenderVideo::TransformedFrameVideoSender::TransformedFrameVideoSender(
+    RTPSenderVideo* sender)
+    : sender_(sender) {}
+
+void RTPSenderVideo::TransformedFrameVideoSender::SaveFrameState(
+    int payload_type,
+    absl::optional<VideoCodecType> codec_type,
+    uint32_t rtp_timestamp,
+    int64_t capture_time_ms,
+    const RTPFragmentationHeader* fragmentation,
+    RTPVideoHeader video_header,
+    absl::optional<int64_t> expected_retransmission_time_ms) {
+  frame_state_.payload_type = payload_type;
+  frame_state_.codec_type = codec_type;
+  frame_state_.rtp_timestamp = rtp_timestamp;
+  frame_state_.capture_time_ms = capture_time_ms;
+  frame_state_.fragmentation = fragmentation;
+  frame_state_.video_header = video_header;
+  frame_state_.expected_retransmission_time_ms =
+      expected_retransmission_time_ms;
+}
+
+void RTPSenderVideo::TransformedFrameVideoSender::OnTransformedFrame(
+    rtc::ArrayView<const uint8_t> transformed_frame) {
+  RTC_LOG(LS_ERROR) << "[webrtc sender] on transformed frame.";
+  sender_->DoSendVideo(frame_state_.payload_type, frame_state_.codec_type,
+                       frame_state_.rtp_timestamp, frame_state_.capture_time_ms,
+                       transformed_frame, frame_state_.fragmentation,
+                       frame_state_.video_header,
+                       frame_state_.expected_retransmission_time_ms);
+}
+
+RTPSenderVideo::RTPSenderVideo(
+    Clock* clock,
+    RTPSender* rtp_sender,
+    FlexfecSender* flexfec_sender,
+    PlayoutDelayOracle* playout_delay_oracle,
+    EncodedFrameTransformInterface* encoded_frame_transformer,
+    FrameEncryptorInterface* frame_encryptor,
+    bool require_frame_encryption,
+    bool need_rtp_packet_infos,
+    bool enable_retransmit_all_layers,
+    const WebRtcKeyValueConfig& field_trials)
     : RTPSenderVideo([&] {
         Config config;
         config.clock = clock;
         config.rtp_sender = rtp_sender;
         config.flexfec_sender = flexfec_sender;
         config.playout_delay_oracle = playout_delay_oracle;
+        config.encoded_frame_transformer = encoded_frame_transformer;
         config.frame_encryptor = frame_encryptor;
         config.require_frame_encryption = require_frame_encryption;
         config.need_rtp_packet_infos = need_rtp_packet_infos;
@@ -243,6 +278,9 @@ RTPSenderVideo::RTPSenderVideo(const Config& config)
       fec_bitrate_(1000, RateStatistics::kBpsScale),
       video_bitrate_(1000, RateStatistics::kBpsScale),
       packetization_overhead_bitrate_(1000, RateStatistics::kBpsScale),
+      encoded_frame_transformer_(config.encoded_frame_transformer),
+      transformed_frame_callback_(
+          std::make_unique<TransformedFrameVideoSender>(this)),
       frame_encryptor_(config.frame_encryptor),
       require_frame_encryption_(config.require_frame_encryption),
       generic_descriptor_auth_experiment_(
@@ -253,6 +291,11 @@ RTPSenderVideo::RTPSenderVideo(const Config& config)
               ->Lookup(kExcludeTransportSequenceNumberFromFecFieldTrial)
               .find("Enabled") == 0) {
   RTC_DCHECK(playout_delay_oracle_);
+  if (encoded_frame_transformer_) {
+    encoded_frame_transformer_->RegisterTransformedFrameCallback(
+        transformed_frame_callback_.get());
+    RTC_LOG(LS_ERROR) << "[webrtc sender] register frame transformer.";
+  }
 }
 
 RTPSenderVideo::~RTPSenderVideo() {}
@@ -433,6 +476,32 @@ bool RTPSenderVideo::SendVideo(
 
   if (payload.empty())
     return false;
+
+  if (encoded_frame_transformer_) {
+    transformed_frame_callback_->SaveFrameState(
+        payload_type, codec_type, rtp_timestamp, capture_time_ms, fragmentation,
+        video_header, expected_retransmission_time_ms);
+    RTC_LOG(LS_ERROR) << "[webrtc sender] transform frame.";
+    encoded_frame_transformer_->TransformFrame(payload);
+    return true;
+  }
+
+  return DoSendVideo(payload_type, codec_type, rtp_timestamp, capture_time_ms,
+                     payload, fragmentation, video_header,
+                     expected_retransmission_time_ms);
+}
+
+bool RTPSenderVideo::DoSendVideo(
+    int payload_type,
+    absl::optional<VideoCodecType> codec_type,
+    uint32_t rtp_timestamp,
+    int64_t capture_time_ms,
+    rtc::ArrayView<const uint8_t> payload,
+    const RTPFragmentationHeader* fragmentation,
+    RTPVideoHeader video_header,
+    absl::optional<int64_t> expected_retransmission_time_ms) {
+  RTC_CHECK_RUNS_SERIALIZED(&send_checker_);
+  RTC_LOG(LS_ERROR) << "[webrtc sender] do send video.";
 
   int32_t retransmission_settings = retransmission_settings_;
   if (codec_type == VideoCodecType::kVideoCodecH264) {

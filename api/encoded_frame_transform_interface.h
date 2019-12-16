@@ -17,6 +17,23 @@
 
 namespace webrtc {
 
+class TransformedFrameCallback {
+ public:
+  virtual void OnTransformedFrame(
+      rtc::ArrayView<const uint8_t> transformed_frame) = 0;
+
+ protected:
+  virtual ~TransformedFrameCallback() = default;
+};
+
+class EncodedFrameTransformInterface {
+ public:
+  virtual ~EncodedFrameTransformInterface() = default;
+
+  virtual void RegisterTransformedFrameCallback(TransformedFrameCallback*) = 0;
+  virtual void TransformFrame(rtc::ArrayView<const uint8_t> frame) = 0;
+};
+
 class TransformedReceivedFrameCallback {
  public:
   virtual void OnTransformedFrame(

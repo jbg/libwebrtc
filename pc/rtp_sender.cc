@@ -115,6 +115,18 @@ RtpSenderBase::RtpSenderBase(rtc::Thread* worker_thread,
   init_parameters_.encodings.emplace_back();
 }
 
+void RtpSenderBase::RegisterEncodedFrameTransformer(
+    EncodedFrameTransformInterface* encoded_frame_transformer) {
+  encoded_frame_transformer_ = std::move(encoded_frame_transformer);
+  // Special Case: Set the frame encryptor to any value on any existing channel.
+  if (media_channel_ && ssrc_ && !stopped_) {
+    worker_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+      media_channel_->RegisterEncodedFrameTransformer(
+          ssrc_, encoded_frame_transformer_);
+    });
+  }
+}
+
 void RtpSenderBase::SetFrameEncryptor(
     rtc::scoped_refptr<FrameEncryptorInterface> frame_encryptor) {
   frame_encryptor_ = std::move(frame_encryptor);
@@ -294,6 +306,9 @@ void RtpSenderBase::SetSsrc(uint32_t ssrc) {
     });
   }
   // Attempt to attach the frame decryptor to the current media channel.
+  if (encoded_frame_transformer_) {
+    RegisterEncodedFrameTransformer(encoded_frame_transformer_);
+  }
   if (frame_encryptor_) {
     SetFrameEncryptor(frame_encryptor_);
   }

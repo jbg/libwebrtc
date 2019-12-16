@@ -18,6 +18,7 @@
 #include "absl/strings/string_view.h"
 #include "absl/types/optional.h"
 #include "api/array_view.h"
+#include "api/encoded_frame_transform_interface.h"
 #include "api/video/video_codec_type.h"
 #include "api/video/video_frame_type.h"
 #include "modules/include/module_common_types.h"
@@ -69,6 +70,7 @@ class RTPSenderVideo {
     RTPSender* rtp_sender = nullptr;
     FlexfecSender* flexfec_sender = nullptr;
     PlayoutDelayOracle* playout_delay_oracle = nullptr;
+    EncodedFrameTransformInterface* encoded_frame_transformer = nullptr;
     FrameEncryptorInterface* frame_encryptor = nullptr;
     bool require_frame_encryption = false;
     bool need_rtp_packet_infos = false;
@@ -78,6 +80,37 @@ class RTPSenderVideo {
     const WebRtcKeyValueConfig* field_trials = nullptr;
   };
 
+  class TransformedFrameVideoSender : public TransformedFrameCallback {
+   public:
+    struct FrameState {
+      int payload_type;
+      absl::optional<VideoCodecType> codec_type;
+      uint32_t rtp_timestamp;
+      int64_t capture_time_ms;
+      const RTPFragmentationHeader* fragmentation;
+      RTPVideoHeader video_header;
+      absl::optional<int64_t> expected_retransmission_time_ms;
+    };
+
+    explicit TransformedFrameVideoSender(RTPSenderVideo* sender);
+
+    void SaveFrameState(
+        int payload_type,
+        absl::optional<VideoCodecType> codec_type,
+        uint32_t rtp_timestamp,
+        int64_t capture_time_ms,
+        const RTPFragmentationHeader* fragmentation,
+        RTPVideoHeader video_header,
+        absl::optional<int64_t> expected_retransmission_time_ms);
+
+    void OnTransformedFrame(
+        rtc::ArrayView<const uint8_t> transformed_frame) override;
+
+   private:
+    RTPSenderVideo* sender_;
+    FrameState frame_state_;
+  };
+
   explicit RTPSenderVideo(const Config& config);
 
   // TODO(bugs.webrtc.org/10809): Remove when downstream usage is gone.
@@ -85,6 +118,7 @@ class RTPSenderVideo {
                  RTPSender* rtpSender,
                  FlexfecSender* flexfec_sender,
                  PlayoutDelayOracle* playout_delay_oracle,
+                 EncodedFrameTransformInterface* encoded_frame_transformer,
                  FrameEncryptorInterface* frame_encryptor,
                  bool require_frame_encryption,
                  bool need_rtp_packet_infos,
@@ -102,6 +136,14 @@ class RTPSenderVideo {
                  const RTPFragmentationHeader* fragmentation,
                  RTPVideoHeader video_header,
                  absl::optional<int64_t> expected_retransmission_time_ms);
+  bool DoSendVideo(int payload_type,
+                   absl::optional<VideoCodecType> codec_type,
+                   uint32_t rtp_timestamp,
+                   int64_t capture_time_ms,
+                   rtc::ArrayView<const uint8_t> payload,
+                   const RTPFragmentationHeader* fragmentation,
+                   RTPVideoHeader video_header,
+                   absl::optional<int64_t> expected_retransmission_time_ms);
   // FlexFEC/ULPFEC.
   // Set FEC rates, max frames before FEC is sent, and type of FEC masks.
   // Returns false on failure.
@@ -223,6 +265,10 @@ class RTPSenderVideo {
       RTC_GUARDED_BY(stats_crit_);
 
   OneTimeEvent first_frame_sent_;
+
+  EncodedFrameTransformInterface* encoded_frame_transformer_ = nullptr;
+  std::unique_ptr<TransformedFrameVideoSender> transformed_frame_callback_ =
+      nullptr;
 
   // E2EE Custom Video Frame Encryptor (optional)
   FrameEncryptorInterface* const frame_encryptor_ = nullptr;

@@ -214,6 +214,7 @@ VideoSendStreamImpl::VideoSendStreamImpl(
                           send_delay_stats),
           event_log,
           std::move(fec_controller),
+          config_->encoded_frame_transformer,
           CreateFrameEncryptionConfig(config_))),
       weak_ptr_factory_(this) {
   video_stream_encoder->SetFecControllerOverride(rtp_video_sender_);
