@@ -16,6 +16,24 @@
       "revId": "bc550ab6b2ee18c50bbcbe9ad12eef46aa6ec520",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2c67726_b843a82e",
+        "filename": "rtc_base/thread_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2019-12-16T08:57:13Z",
+      "side": 1,
+      "message": "Oof -- good catch again :) Done.",
+      "parentUuid": "c0abc6c2_006bb78b",
+      "revId": "bc550ab6b2ee18c50bbcbe9ad12eef46aa6ec520",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
