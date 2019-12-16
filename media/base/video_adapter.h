@@ -31,9 +31,9 @@ namespace cricket {
 class VideoAdapter {
  public:
   VideoAdapter();
-  // The output frames will have height and width that is divisible by
-  // |required_resolution_alignment|.
-  explicit VideoAdapter(int required_resolution_alignment);
+  // The source requests output frames whose width and height are divisible
+  // by |source_resolution_alignment|.
+  explicit VideoAdapter(int source_resolution_alignment);
   virtual ~VideoAdapter();
 
   // Return the adapted resolution and cropping parameters given the
@@ -105,7 +105,8 @@ class VideoAdapter {
   int previous_height_;   // Previous adapter output height.
   const bool variable_start_scale_factor_;
   // Resolution must be divisible by this factor.
-  const int required_resolution_alignment_;
+  const int source_resolution_alignment_;
+  int resolution_alignment_ RTC_GUARDED_BY(critical_section_);
   // The target timestamp for the next frame based on requested format.
   absl::optional<int64_t> next_frame_timestamp_ns_
       RTC_GUARDED_BY(critical_section_);
