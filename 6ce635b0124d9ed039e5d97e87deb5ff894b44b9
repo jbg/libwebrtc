@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c999f35_2164627d",
+        "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2019-12-16T09:20:46Z",
+      "side": 1,
+      "message": "Maybe a less awkward name would be `_generatingOrientationNotifications`.",
+      "range": {
+        "startLine": 44,
+        "startChar": 7,
+        "endLine": 44,
+        "endChar": 47
+      },
+      "revId": "6ce635b0124d9ed039e5d97e87deb5ff894b44b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e11fa00_1e6243b1",
+        "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2019-12-16T09:20:46Z",
+      "side": 1,
+      "message": "Is there some case where this block may be retained and there is a problem capturing self in it? \n\nIt seems like it could be safer to capture self for the lifetime of this block as it\u0027s always immediately dispatched, then we don\u0027t have to worry about what happens to the internal counter if self is released in the meantime.",
+      "range": {
+        "startLine": 162,
+        "startChar": 44,
+        "endLine": 162,
+        "endChar": 52
+      },
+      "revId": "6ce635b0124d9ed039e5d97e87deb5ff894b44b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ce1063d_ded8b4df",
+        "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2019-12-16T09:20:46Z",
+      "side": 1,
+      "message": "I don\u0027t see this variable being changed. Should it be set to YES in this block and NO in the end block?",
+      "range": {
+        "startLine": 165,
+        "startChar": 55,
+        "endLine": 165,
+        "endChar": 95
+      },
+      "revId": "6ce635b0124d9ed039e5d97e87deb5ff894b44b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
