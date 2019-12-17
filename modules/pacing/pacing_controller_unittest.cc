@@ -1737,6 +1737,35 @@ TEST_P(PacingControllerTest, TaskLate) {
   pacer_->ProcessPackets();
 }
 
+TEST_P(PacingControllerTest, NoProbingWhilePaused) {
+  uint32_t ssrc = 12345;
+  uint16_t sequence_number = 1234;
+
+  pacer_->SetProbingEnabled(true);
+
+  // Send at least one packet so probing can initate.
+  SendAndExpectPacket(RtpPacketToSend::Type::kVideo, ssrc, sequence_number,
+                      clock_.TimeInMilliseconds(), 250);
+  while (pacer_->QueueSizePackets() > 0) {
+    AdvanceTimeAndProcess();
+  }
+
+  // Trigger probing.
+  pacer_->CreateProbeCluster(DataRate::kbps(10000),  // 10 Mbps.
+                             /*cluster_id=*/3);
+
+  // Time to next send time should be fairly small.
+  TimeDelta time_to_next = pacer_->NextSendTime() - clock_.CurrentTime();
+
+  // Pause pacer, time to next send time should now be close to pause process
+  // interval.
+  pacer_->Pause();
+  TimeDelta time_to_next_after_pause =
+      pacer_->NextSendTime() - clock_.CurrentTime();
+
+  EXPECT_GT(time_to_next_after_pause, time_to_next);
+}
+
 INSTANTIATE_TEST_SUITE_P(
     WithAndWithoutIntervalBudget,
     PacingControllerTest,
