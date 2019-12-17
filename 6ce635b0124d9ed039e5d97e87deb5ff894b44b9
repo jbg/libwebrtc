@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aa0ecc8d_72948d29",
+        "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 10450
+      },
+      "writtenOn": "2019-12-17T20:37:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c999f35_2164627d",
+      "range": {
+        "startLine": 44,
+        "startChar": 7,
+        "endLine": 44,
+        "endChar": 47
+      },
+      "revId": "6ce635b0124d9ed039e5d97e87deb5ff894b44b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e11fa00_1e6243b1",
         "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "01e49adb_fb3936f1",
+        "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 10450
+      },
+      "writtenOn": "2019-12-17T20:37:48Z",
+      "side": 1,
+      "message": "You are absolutely right, we don\u0027t need to worry about retain cycle in such context: this block belongs to the Main Queue which is not part of the `self`. The only reason by I used `weakSelf` is confusing by similar scenarios in ARDVideoCallViewController.m:95 ([ARDVideoCallViewController appClient:didChangeConnectionState:]) or RTCEAGLVideoView.m:225 ([RTCEAGLVideoView setSize:]), for example. Well, if there is no internal (double safety) rule, I\u0027ll upload next CL.",
+      "parentUuid": "8e11fa00_1e6243b1",
+      "range": {
+        "startLine": 162,
+        "startChar": 44,
+        "endLine": 162,
+        "endChar": 52
+      },
+      "revId": "6ce635b0124d9ed039e5d97e87deb5ff894b44b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ce1063d_ded8b4df",
         "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "6ce635b0124d9ed039e5d97e87deb5ff894b44b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7269e36e_6691fc58",
+        "filename": "sdk/objc/components/capturer/RTCCameraVideoCapturer.m",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 10450
+      },
+      "writtenOn": "2019-12-17T20:37:48Z",
+      "side": 1,
+      "message": "Sure, my bad.",
+      "parentUuid": "3ce1063d_ded8b4df",
+      "range": {
+        "startLine": 165,
+        "startChar": 55,
+        "endLine": 165,
+        "endChar": 95
+      },
+      "revId": "6ce635b0124d9ed039e5d97e87deb5ff894b44b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
