@@ -323,7 +323,8 @@ VideoStreamEncoder::VideoStreamEncoder(
               /*video_stream_encoder=*/this,
               /*sink=*/this,
               std::move(overuse_detector),
-              encoder_stats_observer)),
+              encoder_stats_observer,
+              /*adaptation_listener=*/this)),
       encoder_queue_(task_queue_factory->CreateTaskQueue(
           "EncoderQueue",
           TaskQueueFactory::Priority::NORMAL)) {
@@ -683,7 +684,7 @@ void VideoStreamEncoder::ReconfigureEncoder() {
 
   if (pending_encoder_creation_) {
     resource_adaptation_module_->StopCheckForOveruse();
-    resource_adaptation_module_->StartCheckForOveruse();
+    resource_adaptation_module_->StartCheckForOveruse(this);
     pending_encoder_creation_ = false;
   }
 
@@ -1724,6 +1725,11 @@ bool VideoStreamEncoder::TriggerAdaptDown(
 void VideoStreamEncoder::TriggerAdaptUp(
     AdaptationObserverInterface::AdaptReason reason) {
   resource_adaptation_module_->AdaptUp(reason);
+}
+
+void VideoStreamEncoder::OnVideoSourceRestrictionsUpdated(
+    VideoSourceRestrictions restrictions) {
+  // TODO(hbos): Apply all the things!
 }
 
 void VideoStreamEncoder::RunPostEncode(EncodedImage encoded_image,

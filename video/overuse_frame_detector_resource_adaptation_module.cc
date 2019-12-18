@@ -19,6 +19,7 @@
 #include "absl/algorithm/container.h"
 #include "api/video/video_source_interface.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/strings/string_builder.h"
 #include "rtc_base/system/fallthrough.h"
 #include "video/video_stream_encoder.h"
@@ -39,6 +40,46 @@ bool IsFramerateScalingEnabled(DegradationPreference degradation_preference) {
          degradation_preference == DegradationPreference::BALANCED;
 }
 
+// Constructs VideoSourceRestrictions from |target_pixel_count| and
+// |max_framerate_fps|. Other rtc::VideoSinkWants information, such as
+// |max_pixel_count| or |rotation_applied| is lost in the conversion. Note that
+// OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy uses
+// |max_pixel_count| values to be four times |target_pixel_count|.
+VideoSourceRestrictions VideoSinkWantsToVideoSourceRestrictions(
+    rtc::VideoSinkWants active_sink_wants) {
+  return VideoSourceRestrictions(
+      active_sink_wants.target_pixel_count.has_value()
+          ? absl::optional<size_t>(rtc::dchecked_cast<size_t, int>(
+                active_sink_wants.target_pixel_count.value()))
+          : absl::nullopt,
+      active_sink_wants.max_framerate_fps != std::numeric_limits<int>::max()
+          ? absl::optional<double>(active_sink_wants.max_framerate_fps)
+          : absl::nullopt);
+}
+
+// Constructs rtc::VideoSinkWants from max_pixels_per_frame() and
+// max_frame_rate(). |max_pixel_count| is set to four times the
+// max_pixels_per_frame(). The rest of the members, such as |rotation_applied|,
+// are obtained from the |baseline_sink_wants|.
+rtc::VideoSinkWants VideoSourceRestrictionsToVideoSinkWants(
+    const rtc::VideoSinkWants& baseline_sink_wants,
+    VideoSourceRestrictions restrictions) {
+  rtc::VideoSinkWants sink_wants = baseline_sink_wants;
+  if (restrictions.max_pixels_per_frame().has_value()) {
+    sink_wants.target_pixel_count = rtc::dchecked_cast<int, size_t>(
+        restrictions.max_pixels_per_frame().value());
+    sink_wants.max_pixel_count = sink_wants.target_pixel_count.value() * 4;
+  } else {
+    sink_wants.target_pixel_count = absl::nullopt;
+    sink_wants.max_pixel_count = std::numeric_limits<int>::max();
+  }
+  sink_wants.max_framerate_fps =
+      restrictions.max_frame_rate().has_value()
+          ? static_cast<int>(restrictions.max_frame_rate().value())
+          : std::numeric_limits<int>::max();
+  return sink_wants;
+}
+
 }  // namespace
 
 // VideoSourceProxy is responsible ensuring thread safety between calls to
@@ -54,6 +95,25 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
         source_(nullptr),
         max_framerate_(std::numeric_limits<int>::max()),
         max_pixels_(std::numeric_limits<int>::max()) {}
+
+  VideoSourceRestrictions ToVideoSourceRestrictions() {
+    return VideoSinkWantsToVideoSourceRestrictions(GetActiveSinkWants());
+  }
+
+  void ApplyVideoSourceRestrictions(VideoSourceRestrictions restrictions) {
+    rtc::VideoSourceInterface<VideoFrame>* source;
+    rtc::VideoSinkWants wants;
+    {
+      rtc::CritScope lock(&crit_);
+      sink_wants_ = VideoSourceRestrictionsToVideoSinkWants(
+          sink_wants_, std::move(restrictions));
+      source = source_;
+      wants = sink_wants_;
+    }
+    if (!source)
+      return;
+    source->AddOrUpdateSink(sink_, wants);
+  }
 
   void SetSource(rtc::VideoSourceInterface<VideoFrame>* source,
                  const DegradationPreference& degradation_preference) {
@@ -418,8 +478,10 @@ OveruseFrameDetectorResourceAdaptationModule::
         VideoStreamEncoder* video_stream_encoder,
         rtc::VideoSinkInterface<VideoFrame>* sink,
         std::unique_ptr<OveruseFrameDetector> overuse_detector,
-        VideoStreamEncoderObserver* encoder_stats_observer)
+        VideoStreamEncoderObserver* encoder_stats_observer,
+        ResourceAdaptationModuleListener* adaptation_listener)
     : encoder_queue_(nullptr),
+      adaptation_listener_(adaptation_listener),
       video_stream_encoder_(video_stream_encoder),
       degradation_preference_(DegradationPreference::DISABLED),
       adapt_counters_(),
@@ -434,6 +496,7 @@ OveruseFrameDetectorResourceAdaptationModule::
       encoder_config_(),
       encoder_(nullptr),
       encoder_stats_observer_(encoder_stats_observer) {
+  RTC_DCHECK(adaptation_listener_);
   RTC_DCHECK(video_stream_encoder_);
   RTC_DCHECK(overuse_detector_);
   RTC_DCHECK(encoder_stats_observer_);
@@ -456,10 +519,18 @@ void OveruseFrameDetectorResourceAdaptationModule::SetEncoder(
   encoder_ = encoder;
 }
 
-void OveruseFrameDetectorResourceAdaptationModule::StartCheckForOveruse() {
+void OveruseFrameDetectorResourceAdaptationModule::StartCheckForOveruse(
+    ResourceAdaptationModuleListener* adaptation_listener) {
   RTC_DCHECK(encoder_queue_);
   RTC_DCHECK_RUN_ON(encoder_queue_);
   RTC_DCHECK(encoder_);
+  // TODO(hbos): When AdaptUp() and AdaptDown() are no longer invoked outside
+  // the interval between StartCheckForOveruse() and StopCheckForOveruse(),
+  // support configuring which |adaptation_listener_| to use on the fly. It is
+  // currently hardcoded for the entire lifetime of the module in order to
+  // support adaptation caused by VideoStreamEncoder or QualityScaler invoking
+  // AdaptUp() and AdaptDown() even when the OveruseDetector is inactive.
+  RTC_DCHECK_EQ(adaptation_listener, adaptation_listener_);
   overuse_detector_->StartCheckForOveruse(
       encoder_queue_, video_stream_encoder_->GetCpuOveruseOptions(), this);
 }
@@ -693,6 +764,9 @@ void OveruseFrameDetectorResourceAdaptationModule::AdaptUp(AdaptReason reason) {
   UpdateAdaptationStats(reason);
 
   RTC_LOG(LS_INFO) << adapt_counter.ToString();
+
+  // If this is invoked manually, maybe this isn't true? :O
+  RTC_DCHECK(adaptation_listener_);
 }
 
 bool OveruseFrameDetectorResourceAdaptationModule::AdaptDown(
@@ -794,6 +868,9 @@ bool OveruseFrameDetectorResourceAdaptationModule::AdaptDown(
   UpdateAdaptationStats(reason);
 
   RTC_LOG(LS_INFO) << GetConstAdaptCounter().ToString();
+
+  // If this is invoked manually, maybe this isn't true? :O
+  RTC_DCHECK(adaptation_listener_);
   return did_adapt;
 }
 
