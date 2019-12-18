@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de53e854_5ee97a4e",
+        "filename": "api/video/video_source_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-18T13:37:19Z",
+      "side": 1,
+      "message": "Copy the nice text from EncoderInfo instead? Specifically, this doesn\u0027t explicitly say that width and height must be divisible by resolution_alignment.\n\nAlso, it\u0027s not obvious whether this is a hard or soft requirement (but this whole struct has that problem).",
+      "revId": "5436ad3ac941e6b25554f6db8b02fc102ca7dc99",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6116f115_7a0e871d",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2019-12-18T13:37:19Z",
+      "side": 1,
+      "message": "Prefix by \"For example;\"?\n\nReally a multiple of 2? Not just 2?",
+      "range": {
+        "startLine": 171,
+        "startChar": 32,
+        "endLine": 171,
+        "endChar": 78
+      },
+      "revId": "5436ad3ac941e6b25554f6db8b02fc102ca7dc99",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
