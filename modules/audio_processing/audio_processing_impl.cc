@@ -1287,10 +1287,10 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
       return AudioProcessing::kStreamParameterNotSetError;
     }
 
+    submodules_.echo_control_mobile->CopyLowPassReference(capture_buffer);
     if (submodules_.noise_suppressor) {
       submodules_.noise_suppressor->Process(capture_buffer);
     } else if (submodules_.legacy_noise_suppressor) {
-      submodules_.echo_control_mobile->CopyLowPassReference(capture_buffer);
       submodules_.legacy_noise_suppressor->ProcessCaptureAudio(capture_buffer);
     }
 
