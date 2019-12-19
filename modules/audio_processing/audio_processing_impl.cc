@@ -1198,6 +1198,7 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
                 1);
 
   AudioBuffer* capture_buffer = capture_.capture_audio.get();  // For brevity.
+  AudioBuffer* linear_aec_buffer = capture_.linear_aec_output.get();
 
   if (submodules_.pre_amplifier) {
     submodules_.pre_amplifier->ApplyGain(AudioFrameView<float>(
@@ -1274,10 +1275,14 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
   RETURN_ON_ERR(submodules_.gain_control->AnalyzeCaptureAudio(*capture_buffer));
   RTC_DCHECK(
       !(submodules_.legacy_noise_suppressor && submodules_.noise_suppressor));
-  if (submodules_.noise_suppressor) {
-    submodules_.noise_suppressor->Analyze(*capture_buffer);
-  } else if (submodules_.legacy_noise_suppressor) {
-    submodules_.legacy_noise_suppressor->AnalyzeCaptureAudio(capture_buffer);
+
+  if (!config_.noise_suppression.analyze_linear_aec_output_when_available ||
+      !linear_aec_buffer || submodules_.echo_control_mobile) {
+    if (submodules_.noise_suppressor) {
+      submodules_.noise_suppressor->Analyze(*capture_buffer);
+    } else if (submodules_.legacy_noise_suppressor) {
+      submodules_.legacy_noise_suppressor->AnalyzeCaptureAudio(capture_buffer);
+    }
   }
 
   if (submodules_.echo_control_mobile) {
@@ -1304,9 +1309,18 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
         submodules_.echo_controller->SetAudioBufferDelay(stream_delay_ms());
       }
 
-      AudioBuffer* linear_aec_buffer = capture_.linear_aec_output.get();
       submodules_.echo_controller->ProcessCapture(
           capture_buffer, linear_aec_buffer, capture_.echo_path_gain_change);
+    }
+
+    if (config_.noise_suppression.analyze_linear_aec_output_when_available &&
+        linear_aec_buffer) {
+      if (submodules_.noise_suppressor) {
+        submodules_.noise_suppressor->Analyze(*linear_aec_buffer);
+      } else if (submodules_.legacy_noise_suppressor) {
+        submodules_.legacy_noise_suppressor->AnalyzeCaptureAudio(
+            linear_aec_buffer);
+      }
     }
 
     if (submodules_.noise_suppressor) {
