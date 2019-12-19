@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7f919889_a1acc282",
+        "filename": "api/video/video_source_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-12-19T08:50:27Z",
+      "side": 1,
+      "message": "Done. I rephrased the text a bit, to fit in with the comments above.\n\nI think these \u0027wants\u0027 are supposed to be soft requirements. In this particular case, a robust encoder should handle most inputs -- i.e., it is a soft requirement.",
+      "parentUuid": "de53e854_5ee97a4e",
+      "revId": "5436ad3ac941e6b25554f6db8b02fc102ca7dc99",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6116f115_7a0e871d",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 9
@@ -39,6 +57,30 @@
       "revId": "5436ad3ac941e6b25554f6db8b02fc102ca7dc99",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f09d2945_33c48422",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2019-12-19T08:50:27Z",
+      "side": 1,
+      "message": "Done.\n\nYes, this can be any multiple of 2 for I420 -- the purpose of the field is to allow that. The particular case of alignment\u003d2 is often already the case, due to conventions in the code.",
+      "parentUuid": "6116f115_7a0e871d",
+      "range": {
+        "startLine": 171,
+        "startChar": 32,
+        "endLine": 171,
+        "endChar": 78
+      },
+      "revId": "5436ad3ac941e6b25554f6db8b02fc102ca7dc99",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
