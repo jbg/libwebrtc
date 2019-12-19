@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c80592e_3f3a82e5",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2019-12-19T23:48:46Z",
+      "side": 1,
+      "message": "Hi Trevor, I wonder if we should also do dlopen on Xrandr in order to remove Xrandr deps there ^",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 6
+      },
+      "revId": "af51be7869994a299451e22e6382ae641767b26d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6932041_5885b5d4",
+        "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2019-12-19T23:48:46Z",
+      "side": 1,
+      "message": "Here we should xrandr_handle \u003d dlopen(\"Xrandr\")",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 6
+      },
+      "revId": "af51be7869994a299451e22e6382ae641767b26d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b33718b_21b1d2bd",
+        "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2019-12-19T23:48:46Z",
+      "side": 1,
+      "message": "We should do dlsym(xrandr_handle, \"XRRGetMonitors\") instead of RTLD_DEFAULT",
+      "revId": "af51be7869994a299451e22e6382ae641767b26d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
