@@ -18,7 +18,6 @@
 #include <utility>
 
 #include "common_audio/include/audio_util.h"
-#include "common_audio/wav_header.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/system/arch.h"
@@ -26,10 +25,22 @@
 namespace webrtc {
 namespace {
 
-// We write 16-bit PCM WAV files.
-constexpr WavFormat kWavFormat = kWavFormatPcm;
 static_assert(std::is_trivially_destructible<WavFormat>::value, "");
-constexpr size_t kBytesPerSample = 2;
+
+size_t GetFormatBytesPerSample(WavFormat format) {
+  // Only PCM and IEEE Float formats are supported.
+  switch (format) {
+    case kWavFormatPcm:
+      return 2;
+    case kWavFormatIeeeFloat:
+      return 4;
+    case kWavFormatALaw:
+    case kWavFormatMuLaw:
+  }
+  RTC_NOTREACHED();
+  return 2;
+};
+
 
 // Doesn't take ownership of the file handle and won't close it.
 class ReadableWavFile : public ReadableWav {
@@ -66,13 +77,12 @@ WavReader::WavReader(FileWrapper file) : file_(std::move(file)) {
       << "Invalid file. Could not create file handle for wav file.";
 
   ReadableWavFile readable(&file_);
-  WavFormat format;
   size_t bytes_per_sample;
-  RTC_CHECK(ReadWavHeader(&readable, &num_channels_, &sample_rate_, &format,
+  RTC_CHECK(ReadWavHeader(&readable, &num_channels_, &sample_rate_, &format_,
                           &bytes_per_sample, &num_samples_));
   num_samples_remaining_ = num_samples_;
   RTC_CHECK_EQ(kWavFormat, format);
-  RTC_CHECK_EQ(kBytesPerSample, bytes_per_sample);
+  RTC_CHECK_EQ(GetFormatBytesPerSample(format_), bytes_per_sample);
   data_start_pos_ = readable.GetPosition();
 }
 
@@ -96,6 +106,9 @@ size_t WavReader::num_channels() const {
 
 size_t WavReader::num_samples() const {
   return num_samples_;
+}
+WavFormat WavReader::format() const {
+  return format_;
 }
 
 size_t WavReader::ReadSamples(size_t num_samples, int16_t* samples) {
@@ -176,29 +189,67 @@ size_t WavWriter::num_samples() const {
   return num_samples_;
 }
 
+WavFormat WavWriter::format() const {
+  return format_;
+}
+
 void WavWriter::WriteSamples(const int16_t* samples, size_t num_samples) {
 #ifndef WEBRTC_ARCH_LITTLE_ENDIAN
 #error "Need to convert samples to little-endian when writing to WAV file"
 #endif
-  RTC_CHECK(file_.Write(samples, sizeof(*samples) * num_samples));
-  num_samples_ += num_samples;
-  RTC_CHECK(num_samples_ >= num_samples);  // detect size_t overflow
+  if (format_ == kWavFormatPcm) {
+    // Write S16 directly.
+    RTC_CHECK(file_.Write(samples, sizeof(*samples) * num_samples));
+    num_samples_ += num_samples;
+    RTC_CHECK(num_samples_ >= num_samples);  // detect size_t overflow
+    return;
+  }
+
+  RTC_CHECK_EQ(format_, kWavFormatIeeeFloat);
+  static const size_t kChunksize = 4096 / sizeof(uint16_t);
+  for (size_t i = 0; i < num_samples; i += kChunksize) {
+    // Convert S16 to Float directly.
+    float isamples[kChunksize];
+    const size_t chunk = std::min(kChunksize, num_samples - i);
+    S16ToFloat(samples + i, chunk, isamples);
+
+    RTC_CHECK(file_.Write(isamples, sizeof(*isamples) * chunk));
+    num_samples_ += chunk;
+    RTC_CHECK(num_samples_ >= chunk);  // detect size_t overflow
+  }
+
 }
 
 void WavWriter::WriteSamples(const float* samples, size_t num_samples) {
   static const size_t kChunksize = 4096 / sizeof(uint16_t);
-  for (size_t i = 0; i < num_samples; i += kChunksize) {
-    int16_t isamples[kChunksize];
-    const size_t chunk = std::min(kChunksize, num_samples - i);
-    FloatS16ToS16(samples + i, chunk, isamples);
-    WriteSamples(isamples, chunk);
+  if (format_ == kWavFormatPcm) {
+    for (size_t i = 0; i < num_samples; i += kChunksize) {
+      int16_t isamples[kChunksize];
+      const size_t chunk = std::min(kChunksize, num_samples - i);
+      FloatS16ToS16(samples + i, chunk, isamples);
+      WriteSamples(isamples, chunk);
+    }
+    return;
   }
+
+  RTC_CHECK_EQ(format_, kWavFormatIeeeFloat);
+  for (size_t i = 0; i < num_samples; i += kChunksize) {
+    float isamples[kChunksize];
+    const size_t chunk = std::min(kChunksize, num_samples - i);
+    FloatS16ToFloat(samples + i, chunk, isamples);
+
+    RTC_CHECK(file_.Write(isamples, sizeof(*isamples) * chunk));
+    num_samples_ += chunk;
+    RTC_CHECK(num_samples_ >= chunk);  // detect size_t overflow
+  }
+
+
 }
 
 void WavWriter::Close() {
   RTC_CHECK(file_.Rewind());
   uint8_t header[kWavHeaderSize];
-  WriteWavHeader(header, num_channels_, sample_rate_, kWavFormat,
+  WriteWavHeader(header, num_channels_, sample_rate_, format_,
                  kBytesPerSample, num_samples_);
   RTC_CHECK(file_.Write(header, kWavHeaderSize));
   RTC_CHECK(file_.Close());

@@ -16,7 +16,8 @@
 
 namespace webrtc {
 
-static const size_t kWavHeaderSize = 44;
+static const size_t kPcmWavHeaderSize = 44;
+static const size_t kNonPcmWavHeaderSize = 58;
 
 class ReadableWav {
  public:
@@ -49,6 +50,19 @@ void WriteWavHeader(uint8_t* buf,
                     WavFormat format,
                     size_t bytes_per_sample,
                     size_t num_samples);
+
+void WritePcmWavHeader(uint8_t* buf,
+                       size_t num_channels,
+                       int sample_rate,
+                       size_t bytes_per_sample,
+                       size_t num_samples);
+
+void WriteNonPcmWavHeader(uint8_t* buf,
+                          size_t num_channels,
+                          int sample_rate,
+                          WavFormat format,
+                          size_t bytes_per_sample,
+                          size_t num_samples);
 
 // Read a WAV header from an implemented ReadableWav and parse the values into
 // the provided output parameters. ReadableWav is used because the header can

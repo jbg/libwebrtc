@@ -16,6 +16,7 @@
 #include <cstddef>
 #include <string>
 
+#include "rtc_base/wav_header.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/system/file_wrapper.h"
 
@@ -29,6 +30,7 @@ class WavFile {
   virtual int sample_rate() const = 0;
   virtual size_t num_channels() const = 0;
   virtual size_t num_samples() const = 0;
+  virtual WavFormat format() const = 0;
 };
 
 // Simple C++ class for writing 16-bit PCM WAV files. All error handling is
@@ -36,10 +38,12 @@ class WavFile {
 class WavWriter final : public WavFile {
  public:
   // Open a new WAV file for writing.
-  WavWriter(const std::string& filename, int sample_rate, size_t num_channels);
+  // Supported formats: kWavFormatPcm and kWavFormatIeeeFloat.
+  WavWriter(const std::string& filename, int sample_rate, size_t num_channels, WavFormat format);
 
   // Open a new WAV file for writing.
-  WavWriter(FileWrapper file, int sample_rate, size_t num_channels);
+  // Supported formats: kWavFormatPcm and kWavFormatIeeeFloat.
+  WavWriter(FileWrapper file, int sample_rate, size_t num_channels, WavFormat format);
 
   // Close the WAV file, after writing its header.
   ~WavWriter() override;
@@ -53,12 +57,14 @@ class WavWriter final : public WavFile {
   int sample_rate() const override;
   size_t num_channels() const override;
   size_t num_samples() const override;
+  WavFormat format() const override;
 
  private:
   void Close();
   const int sample_rate_;
   const size_t num_channels_;
   size_t num_samples_;  // Total number of samples written to file.
+  WavFormat format_;    // The WAV file format used.
   FileWrapper file_;    // Output file, owned by this class
 
   RTC_DISALLOW_COPY_AND_ASSIGN(WavWriter);
@@ -87,12 +93,14 @@ class WavReader final : public WavFile {
   int sample_rate() const override;
   size_t num_channels() const override;
   size_t num_samples() const override;
+  WavFormat format() const override;
 
  private:
   void Close();
   int sample_rate_;
   size_t num_channels_;
   size_t num_samples_;  // Total number of samples in the file.
+  WavFormat format_;    // The WAV file format used.
   size_t num_samples_remaining_;
   FileWrapper file_;  // Input file, owned by this class.
   int64_t
