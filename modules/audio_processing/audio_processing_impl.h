@@ -215,6 +215,13 @@ class AudioProcessingImpl : public AudioProcessing {
   int MaybeInitializeRender(const ProcessingConfig& processing_config)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_);
 
+  // Method for performing the preprocessing common between the ProcessStream
+  // functions. Will acquire the capture lock, and will take the render lock if
+  // reinitialization is required.
+  int EmptyRenderQueueAndConditionallyReinitialize(
+      const StreamConfig& input_config,
+      const StreamConfig& output_config);
+
   // Method for updating the state keeping track of the active submodules.
   // Returns a bool indicating whether the state has changed.
   bool UpdateActiveSubmoduleStates()
