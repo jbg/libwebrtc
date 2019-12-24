@@ -191,13 +191,6 @@ class Port : public PortInterface,
   const std::string& Type() const override;
   rtc::Network* Network() const override;
 
-  // Methods to set/get ICE role and tiebreaker values.
-  IceRole GetIceRole() const override;
-  void SetIceRole(IceRole role) override;
-
-  void SetIceTiebreaker(uint64_t tiebreaker) override;
-  uint64_t IceTiebreaker() const override;
-
   bool SharedSocket() const override;
   void ResetSharedSocket() { shared_socket_ = false; }
 
@@ -468,8 +461,7 @@ class Port : public PortInterface,
   AddressMap connections_;
   int timeout_delay_;
   bool enable_port_packets_;
-  IceRole ice_role_;
-  uint64_t tiebreaker_;
+
   bool shared_socket_;
   // Information to use when going through a proxy.
   std::string user_agent_;

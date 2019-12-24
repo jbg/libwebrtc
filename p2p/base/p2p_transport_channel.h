@@ -279,7 +279,7 @@ class RTC_EXPORT P2PTransportChannel : public IceTransportInternal {
   // When pruning a port, move it from |ports_| to |pruned_ports_|.
   // Returns true if the port is found and removed from |ports_|.
   bool PrunePort(PortInterface* port);
-  void OnRoleConflict(PortInterface* port);
+  void OnIceRoleConflictLocalSwitch(Connection* conn);
 
   void OnConnectionStateChange(Connection* connection);
   void OnReadPacket(Connection* connection,

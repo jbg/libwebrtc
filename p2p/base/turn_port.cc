@@ -539,7 +539,9 @@ void TurnPort::OnAllocateMismatch() {
 }
 
 Connection* TurnPort::CreateConnection(const Candidate& remote_candidate,
-                                       CandidateOrigin origin) {
+                                       CandidateOrigin origin,
+                                       IceRole local_ice_role,
+                                       uint64_t local_ice_tiebreaker) {
   // TURN-UDP can only connect to UDP candidates.
   if (!SupportsProtocol(remote_candidate.protocol())) {
     return nullptr;
@@ -571,8 +573,8 @@ Connection* TurnPort::CreateConnection(const Candidate& remote_candidate,
         // An entry was created.
         next_channel_number_++;
       }
-      ProxyConnection* conn =
-          new ProxyConnection(this, index, remote_candidate);
+      ProxyConnection* conn = new ProxyConnection(
+          this, index, remote_candidate, local_ice_role, local_ice_tiebreaker);
       AddOrReplaceConnection(conn);
       return conn;
     }
