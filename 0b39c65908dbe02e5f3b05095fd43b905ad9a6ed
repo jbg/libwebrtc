@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64f72e58_de0c2278",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-12-30T08:29:08Z",
+      "side": 1,
+      "message": "I think it would be better to only let this do the reinitialization instead of bundling the emptying of the queue since\n-these are logically unrelated and independent.\n-there is no requirement that the emptying of the render audio must be done here (see other comment).\n\nHowever, it is important that the reinitialization also empties the render queue, so that code will need to be there still. I don\u0027t think it warrants explicitly mentioning in the method name though so I think naming this\nConditionallyReinitialize() would be better.",
+      "range": {
+        "startLine": 841,
+        "startChar": 25,
+        "endLine": 841,
+        "endChar": 69
+      },
+      "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a423f070_e76129ac",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-12-30T08:29:08Z",
+      "side": 1,
+      "message": "We should be able to have another call to this in ProcessStreamLocked.\n\nAlso, let\u0027s only empty the queue in this place if the reinitialization is required. It may, however, be so that the queue anyway is recreated each time there is a reinitialization so it may be that it is not needed to empty the queue here.",
+      "range": {
+        "startLine": 855,
+        "startChar": 4,
+        "endLine": 855,
+        "endChar": 26
+      },
+      "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "520640cc_f7f257b3",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-12-30T08:29:08Z",
+      "side": 1,
+      "message": "Do we need to keep this requirement? There is nothing else in APM that requires this, right?",
+      "range": {
+        "startLine": 1119,
+        "startChar": 1,
+        "endLine": 1125,
+        "endChar": 3
+      },
+      "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d31b657_755ecf62",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2019-12-30T08:29:08Z",
+      "side": 1,
+      "message": "I think we can remove this TODO.",
+      "range": {
+        "startLine": 1127,
+        "startChar": 2,
+        "endLine": 1128,
+        "endChar": 56
+      },
+      "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
