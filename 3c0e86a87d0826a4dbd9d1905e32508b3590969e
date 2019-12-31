@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e699596_ce8ea4bd",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 7332
+      },
+      "writtenOn": "2019-12-31T15:39:38Z",
+      "side": 1,
+      "message": "Wait, are the temporary bits the least significant one?\nHow is stored the v6 address here? Big Endian, Little Endian, platform dependent?\nIt should be indicated, or better yet, use an ipv6 unambiguous function, e.g.: \n\nreturn ipv6_higher_64_bits(ip1.ipv6_address()) \u003d\u003d ipv6_higher_64_bits(ip2.ipv6_address());",
+      "revId": "3c0e86a87d0826a4dbd9d1905e32508b3590969e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
