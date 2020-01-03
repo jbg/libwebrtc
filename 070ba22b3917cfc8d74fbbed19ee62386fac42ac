@@ -39,6 +39,30 @@
       "revId": "070ba22b3917cfc8d74fbbed19ee62386fac42ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03bd96fe_7b88cfb6",
+        "filename": "test/time_controller/simulated_time_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-01-03T13:43:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c351b54d_d785bbd5",
+      "range": {
+        "startLine": 428,
+        "startChar": 4,
+        "endLine": 428,
+        "endChar": 28
+      },
+      "revId": "070ba22b3917cfc8d74fbbed19ee62386fac42ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
