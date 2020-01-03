@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "624dd6c9_d0cf7d85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-03T15:55:47Z",
+      "side": 1,
+      "message": "Something explaining why the new behavior is an improvement over the old behavior. (inversely, if someone would revert the change, what negative effects would it cause)\n\nAlso it\u0027d be nice to elaborate on the change itself, the title isn\u0027t self explanatory for someone not well versed in the code.\n\nSomething like: \"This changes the behavior when running the simulation from excluding the tasks scheduled at the target end time to including them.\"\n\nIt might be worth mentioning the somewhat nonintuitive fact that this means that we might end up running task scheduled exactly one duration apart (such as the tasks producing the first and last frame in the test you had to update)",
+      "parentUuid": "79aaae93_6ca5fa75",
+      "revId": "070ba22b3917cfc8d74fbbed19ee62386fac42ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c351b54d_d785bbd5",
         "filename": "test/time_controller/simulated_time_controller.cc",
         "patchSetId": 2
