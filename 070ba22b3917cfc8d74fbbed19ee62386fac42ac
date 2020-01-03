@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6d90edfe_378cf9d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-01-03T16:14:33Z",
+      "side": 1,
+      "message": "\u003e Something explaining why the new behavior is an improvement over the old behavior. (inversely, if someone would revert the change, what negative effects would it cause)\n\u003e \n\u003e Also it\u0027d be nice to elaborate on the change itself, the title isn\u0027t self explanatory for someone not well versed in the code.\n\u003e \n\u003e Something like: \"This changes the behavior when running the simulation from excluding the tasks scheduled at the target end time to including them.\"\n\nAh, yes, a descriptive commit message is a good idea :)\n\n\u003e It might be worth mentioning the somewhat nonintuitive fact that this means that we might end up running task scheduled exactly one duration apart (such as the tasks producing the first and last frame in the test you had to update)\n\nI think the behavior with this change is more intuitive (schedule something in X milliseconds, advance time by X and the task is executed).",
+      "parentUuid": "624dd6c9_d0cf7d85",
+      "revId": "070ba22b3917cfc8d74fbbed19ee62386fac42ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c351b54d_d785bbd5",
         "filename": "test/time_controller/simulated_time_controller.cc",
         "patchSetId": 2
