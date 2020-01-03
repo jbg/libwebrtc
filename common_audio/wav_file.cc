@@ -18,7 +18,6 @@
 #include <utility>
 
 #include "common_audio/include/audio_util.h"
-#include "common_audio/wav_header.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/system/arch.h"
@@ -26,10 +25,23 @@
 namespace webrtc {
 namespace {
 
-// We write 16-bit PCM WAV files.
-constexpr WavFormat kWavFormat = kWavFormatPcm;
 static_assert(std::is_trivially_destructible<WavFormat>::value, "");
-constexpr size_t kBytesPerSample = 2;
+
+size_t GetFormatBytesPerSample(WavFormat format) {
+  // Only PCM and IEEE Float formats are supported.
+  switch (format) {
+    case WavFormat::kWavFormatPcm:
+      return 2;
+    case WavFormat::kWavFormatIeeeFloat:
+      return 4;
+    case WavFormat::kWavFormatALaw:
+    case WavFormat::kWavFormatMuLaw:
+    default:
+     RTC_CHECK(false) << "Non-implemented wav-format";
+  return 2;
+  }
+};
+
 
 // Doesn't take ownership of the file handle and won't close it.
 class ReadableWavFile : public ReadableWav {
@@ -58,6 +70,7 @@ class ReadableWavFile : public ReadableWav {
 
 }  // namespace
 
+
 WavReader::WavReader(const std::string& filename)
     : WavReader(FileWrapper::OpenReadOnly(filename)) {}
 
@@ -66,18 +79,13 @@ WavReader::WavReader(FileWrapper file) : file_(std::move(file)) {
       << "Invalid file. Could not create file handle for wav file.";
 
   ReadableWavFile readable(&file_);
-  WavFormat format;
   size_t bytes_per_sample;
-  RTC_CHECK(ReadWavHeader(&readable, &num_channels_, &sample_rate_, &format,
+  RTC_CHECK(ReadWavHeader(&readable, &num_channels_, &sample_rate_, &format_,
                           &bytes_per_sample, &num_samples_));
   num_samples_remaining_ = num_samples_;
-  RTC_CHECK_EQ(kWavFormat, format);
-  RTC_CHECK_EQ(kBytesPerSample, bytes_per_sample);
+  RTC_CHECK(format_ == WavFormat::kWavFormat || format_ == WavFormat::kWavFormatIeeeFloat)  << "Non-implemented wav-format";
+  RTC_CHECK_EQ(GetFormatBytesPerSample(format_), bytes_per_sample) << "Unexpected format mismatch in header";
   data_start_pos_ = readable.GetPosition();
-}
-
-WavReader::~WavReader() {
-  Close();
 }
 
 void WavReader::Reset() {
@@ -86,72 +94,118 @@ void WavReader::Reset() {
   num_samples_remaining_ = num_samples_;
 }
 
-int WavReader::sample_rate() const {
-  return sample_rate_;
-}
-
-size_t WavReader::num_channels() const {
-  return num_channels_;
-}
-
-size_t WavReader::num_samples() const {
-  return num_samples_;
-}
-
 size_t WavReader::ReadSamples(size_t num_samples, int16_t* samples) {
 #ifndef WEBRTC_ARCH_LITTLE_ENDIAN
 #error "Need to convert samples to big-endian when reading from WAV file"
 #endif
-  // There could be metadata after the audio; ensure we don't read it.
-  num_samples = std::min(num_samples, num_samples_remaining_);
-  const size_t num_bytes = num_samples * sizeof(*samples);
-  const size_t read_bytes = file_.Read(samples, num_bytes);
-  // If we didn't read what was requested, ensure we've reached the EOF.
-  RTC_CHECK(read_bytes == num_bytes || file_.ReadEof());
-  RTC_CHECK_EQ(read_bytes % 2, 0)
-      << "End of file in the middle of a 16-bit sample";
-  const size_t read_samples = read_bytes / 2;
-  RTC_CHECK_LE(read_samples, num_samples_remaining_);
-  num_samples_remaining_ -= read_samples;
-  return read_samples;
+
+  constexpr size_t kChunksize = 4096;
+  size_t total_num_samples_read = 0;
+  size_t num_samples_to_read = 0;
+  size_t num_bytes_read = 0;
+  size_t num_samples_read = 0;
+
+  while (total_num_samples_read < num_samples && num_samples_to_read == num_samples_read) {
+    const size_t num_remaining_samples = num_samples - total_num_samples_read;
+    num_samples_to_read = std::min(kChunksize, num_remaining_samples);
+
+    if (format_ == WavFormat::kWavFormatIeeeFloat) {
+      std::array<float, kChunksize> samples_to_convert;
+      num_bytes_read = file_.Read(samples_to_convert.data(), num_samples_to_read * sizeof(samples_to_convert[0]));
+      num_samples_read = num_bytes_read / sizeof(samples_to_convert[0]);
+
+      for (size_t j = 0; j < num_samples_read; ++j) {
+        samples[total_num_samples_read + j] = FloatToS16(samples_to_convert[j]);
+      }
+    }
+    else {
+      RTC_CHECK_EQ(format_, WavFormat::kWavFormatPcm);
+      num_bytes_read = file_.Read(&samples[total_num_samples_read], num_samples_to_read * sizeof(samples[0]));
+      num_samples_read = num_bytes_read / sizeof(samples[0]);
+
+      for (size_t j = 0; j < num_samples_read; ++j) {
+        samples[total_num_samples_read + j] = samples[total_num_samples_read + j];
+      }
+    }
+
+    total_num_samples_read += num_samples_read;
+  }
+
+
+  if (num_samples_read != num_samples_to_read) {
+    RTC_CHECK(file_.ReadEof()) << "File read error.";
+    RTC_CHECK_EQ(num_bytes_read % num_samples_read, 0) << "Corrupt file: file ended in the middle of a sample.";
+  }
+
+  return total_num_samples_read;
 }
 
 size_t WavReader::ReadSamples(size_t num_samples, float* samples) {
-  static const size_t kChunksize = 4096 / sizeof(uint16_t);
-  size_t read = 0;
-  for (size_t i = 0; i < num_samples; i += kChunksize) {
-    int16_t isamples[kChunksize];
-    size_t chunk = std::min(kChunksize, num_samples - i);
-    chunk = ReadSamples(chunk, isamples);
-    for (size_t j = 0; j < chunk; ++j)
-      samples[i + j] = isamples[j];
-    read += chunk;
+#ifndef WEBRTC_ARCH_LITTLE_ENDIAN
+#error "Need to convert samples to big-endian when reading from WAV file"
+#endif
+
+  constexpr size_t kChunksize = 4096;
+  size_t total_num_samples_read = 0;
+  size_t num_samples_to_read = 0;
+  size_t num_bytes_read = 0;
+  size_t num_samples_read = 0;
+
+  while (total_num_samples_read < num_samples && num_samples_to_read == num_samples_read) {
+    const size_t num_remaining_samples = num_samples - total_num_samples_read;
+    num_samples_to_read = std::min(kChunksize, num_remaining_samples);
+
+    if (format_ == WavFormat::kWavFormatPcm) {
+      std::array<int16_t, kChunksize> samples_to_convert;
+      num_bytes_read = file_.Read(samples_to_convert.data(), num_samples_to_read * sizeof(samples_to_convert[0]));
+      num_samples_read = num_bytes_read / sizeof(samples_to_convert[0]);
+
+      for (size_t j = 0; j < num_samples_read; ++j) {
+        samples[total_num_samples_read + j] = samples_to_convert[j];
+      }
+    }
+    else {
+      RTC_CHECK_EQ(format_, WavFormat::kWavFormatIeeeFloat);
+      num_bytes_read = file_.Read(&samples[total_num_samples_read], num_samples_to_read * sizeof(samples[0]));
+      num_samples_read = num_bytes_read / sizeof(samples[0]);
+
+      for (size_t j = 0; j < num_samples_read; ++j) {
+        samples[total_num_samples_read + j] = FloatToFloatS16(samples[total_num_samples_read + j]);
+      }
+    }
+
+    total_num_samples_read += num_samples_read;
   }
-  return read;
+
+
+  if (num_samples_read != num_samples_to_read) {
+    RTC_CHECK(file_.ReadEof()) << "File read error.";
+    RTC_CHECK_EQ(num_bytes_read % num_samples_read, 0) << "Corrupt file: file ended in the middle of a sample.";
+  }
+
+  return total_num_samples_read;
 }
 
-void WavReader::Close() {
-  file_.Close();
-}
 
 WavWriter::WavWriter(const std::string& filename,
                      int sample_rate,
-                     size_t num_channels)
+                     size_t num_channels, SampleFormats sample_format)
     // Unlike plain fopen, OpenWriteOnly takes care of filename utf8 ->
     // wchar conversion on windows.
     : WavWriter(FileWrapper::OpenWriteOnly(filename),
                 sample_rate,
-                num_channels) {}
+                num_channels, sample_format) {}
 
-WavWriter::WavWriter(FileWrapper file, int sample_rate, size_t num_channels)
+WavWriter::WavWriter(FileWrapper file, int sample_rate, size_t num_channels, SampleFormats sample_format)
     : sample_rate_(sample_rate),
       num_channels_(num_channels),
       num_samples_(0),
+      format_(GetWavFormat(sample_format)),
       file_(std::move(file)) {
   // Handle errors from the OpenWriteOnly call in above constructor.
   RTC_CHECK(file_.is_open()) << "Invalid file. Could not create wav file.";
 
-  RTC_CHECK(CheckWavParameters(num_channels_, sample_rate_, kWavFormat,
+  RTC_CHECK(CheckWavParameters(num_channels_, sample_rate_, format_,
                                kBytesPerSample, num_samples_));
 
   // Write a blank placeholder header, since we need to know the total number
@@ -160,45 +214,68 @@ WavWriter::WavWriter(FileWrapper file, int sample_rate, size_t num_channels)
   RTC_CHECK(file_.Write(blank_header, kWavHeaderSize));
 }
 
-WavWriter::~WavWriter() {
-  Close();
-}
-
-int WavWriter::sample_rate() const {
-  return sample_rate_;
-}
-
-size_t WavWriter::num_channels() const {
-  return num_channels_;
-}
-
-size_t WavWriter::num_samples() const {
-  return num_samples_;
-}
 
 void WavWriter::WriteSamples(const int16_t* samples, size_t num_samples) {
 #ifndef WEBRTC_ARCH_LITTLE_ENDIAN
 #error "Need to convert samples to little-endian when writing to WAV file"
 #endif
-  RTC_CHECK(file_.Write(samples, sizeof(*samples) * num_samples));
-  num_samples_ += num_samples;
-  RTC_CHECK(num_samples_ >= num_samples);  // detect size_t overflow
+
+  constexpr size_t kChunksize = 4096;
+  for (size_t i = 0; i < num_samples; i += kChunksize) {
+    const size_t num_remaining_samples = num_samples - i;
+    const size_t num_samples_to_write = std::min(kChunksize, num_remaining_samples);
+
+    if (format_ == WavFormat::kWavFormatPcm) {
+      RTC_CHECK(file_.Write(&samples[i], sizeof(samples[0]) * num_samples_to_write));
+    }
+    else {
+      RTC_CHECK_EQ(format_, WavFormat::kWavFormatIeeeFloat);
+      float converted_samples[kChunksize];
+      for (size_t j = 0; j < num_samples_write; ++j) {
+        converted_samples[j] = S16ToFloat(samples[i + j]);
+      }
+      RTC_CHECK(file_.Write(converted_samples, sizeof(converted_samples[0]) * num_samples_to_write));
+    }
+
+    num_samples_ += num_samples_to_write;
+    RTC_CHECK(num_samples_ >= num_samples_to_write);  // detect size_t overflow
+  }
 }
 
 void WavWriter::WriteSamples(const float* samples, size_t num_samples) {
-  static const size_t kChunksize = 4096 / sizeof(uint16_t);
+#ifndef WEBRTC_ARCH_LITTLE_ENDIAN
+#error "Need to convert samples to little-endian when writing to WAV file"
+#endif
+  constexpr size_t kChunksize = 4096;
   for (size_t i = 0; i < num_samples; i += kChunksize) {
-    int16_t isamples[kChunksize];
-    const size_t chunk = std::min(kChunksize, num_samples - i);
-    FloatS16ToS16(samples + i, chunk, isamples);
-    WriteSamples(isamples, chunk);
+    const size_t num_remaining_samples = num_samples - i;
+    const size_t num_samples_to_write = std::min(kChunksize, num_remaining_samples);
+
+    if (format_ == WavFormat::kWavFormatPcm) {
+      int16_t converted_samples[kChunksize];
+      for (size_t j = 0; j < num_samples_write; ++j) {
+        converted_samples[j] = FloatS16ToS16(samples[i+j]);
+      }
+      RTC_CHECK(file_.Write(converted_samples, sizeof(converted_samples[0]) * num_samples_to_write));
+    }
+    else {
+      RTC_CHECK_EQ(format_, WavFormat::kWavFormatIeeeFloat);
+      float converted_samples[kChunksize];
+      for (size_t j = 0; j < num_samples_write; ++j) {
+        converted_samples[j] = FloatS16ToFloat(samples[i+j]);
+      }
+      RTC_CHECK(file_.Write(converted_samples, sizeof(converted_samples[0]) * num_samples_to_write));
+    }
+
+    num_samples_ += num_samples_to_write;
+    RTC_CHECK(num_samples_ >= num_samples_to_write);  // detect size_t overflow
   }
 }
 
 void WavWriter::Close() {
   RTC_CHECK(file_.Rewind());
   uint8_t header[kWavHeaderSize];
-  WriteWavHeader(header, num_channels_, sample_rate_, kWavFormat,
+  WriteWavHeader(header, num_channels_, sample_rate_, format_,
                  kBytesPerSample, num_samples_);
   RTC_CHECK(file_.Write(header, kWavHeaderSize));
   RTC_CHECK(file_.Close());
