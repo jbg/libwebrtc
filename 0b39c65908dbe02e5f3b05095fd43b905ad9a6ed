@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "69562d98_8695bc6a",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-01-03T12:49:08Z",
+      "side": 1,
+      "message": "Good points!\n\nI have moved the queue emptying back into the ProcessStream functions. It appears to be a bitexact change.",
+      "parentUuid": "64f72e58_de0c2278",
+      "range": {
+        "startLine": 841,
+        "startChar": 25,
+        "endLine": 841,
+        "endChar": 69
+      },
+      "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a423f070_e76129ac",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f50c1d9_bdb44bb9",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-01-03T12:49:08Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "a423f070_e76129ac",
+      "range": {
+        "startLine": 855,
+        "startChar": 4,
+        "endLine": 855,
+        "endChar": 26
+      },
+      "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a7f60b86_297419e7",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-01-03T12:49:08Z",
+      "side": 1,
+      "message": "Good point! Removed, and updated unit tests.",
+      "parentUuid": "520640cc_f7f257b3",
+      "range": {
+        "startLine": 1119,
+        "startChar": 1,
+        "endLine": 1125,
+        "endChar": 3
+      },
+      "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d31b657_755ecf62",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d58e49d7_0347625e",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-01-03T12:49:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d31b657_755ecf62",
+      "range": {
+        "startLine": 1127,
+        "startChar": 2,
+        "endLine": 1128,
+        "endChar": 56
+      },
+      "revId": "0b39c65908dbe02e5f3b05095fd43b905ad9a6ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
