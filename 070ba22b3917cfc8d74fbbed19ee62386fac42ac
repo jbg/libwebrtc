@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44547ba2_5a51a62a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-03T13:30:14Z",
+      "side": 1,
+      "message": "Could you add some context on why this is needed here?",
+      "revId": "070ba22b3917cfc8d74fbbed19ee62386fac42ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c351b54d_d785bbd5",
+        "filename": "test/time_controller/simulated_time_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-03T13:30:14Z",
+      "side": 1,
+      "message": "If I understand it correctly, it should be sufficient to simply add another call to RunReadyRunners when the loop is finished. If it is, I\u0027d prefer that as it\u0027s easier to analyze the implications.",
+      "range": {
+        "startLine": 428,
+        "startChar": 4,
+        "endLine": 428,
+        "endChar": 28
+      },
+      "revId": "070ba22b3917cfc8d74fbbed19ee62386fac42ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
