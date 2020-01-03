@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cff31f4e_b1710ef5",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-03T13:04:34Z",
+      "side": 1,
+      "message": "Would it be possible to also merge this into the MaybeInitialize method?\nOr to omit it fully?\n\nIt seems like it is doublechecking that MaybeInitialize did things correctly, which should not be necessary, or at least should be replaced with a DCHECK inside MaybeInitialize together with a proper test coverage.",
+      "range": {
+        "startLine": 1116,
+        "startChar": 0,
+        "endLine": 1119,
+        "endChar": 3
+      },
+      "revId": "29a5f40f1fa3783b7e0fbf8dfcdf0a64678a85b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
