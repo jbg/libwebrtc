@@ -22,6 +22,30 @@
       "revId": "29a5f40f1fa3783b7e0fbf8dfcdf0a64678a85b5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c400a0d_6d845144",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-01-03T13:57:04Z",
+      "side": 1,
+      "message": "The other ProcessStream API does not provide an explicit sample count, so it is not meaningful to merge.\n\nI changed it to a DCHECK and moved it up, to clarify that it is intended to verify the input AudioFrame format.",
+      "parentUuid": "cff31f4e_b1710ef5",
+      "range": {
+        "startLine": 1116,
+        "startChar": 0,
+        "endLine": 1119,
+        "endChar": 3
+      },
+      "revId": "29a5f40f1fa3783b7e0fbf8dfcdf0a64678a85b5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
