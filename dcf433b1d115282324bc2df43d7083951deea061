@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5024b22f_38f035a9",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2020-01-06T21:10:49Z",
+      "side": 1,
+      "message": "I think we need the STUN_ERROR_ROLE_CONFLICT (487) error response.",
+      "range": {
+        "startLine": 634,
+        "startChar": 40,
+        "endLine": 634,
+        "endChar": 63
+      },
+      "revId": "dcf433b1d115282324bc2df43d7083951deea061",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
