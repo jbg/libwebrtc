@@ -117,7 +117,9 @@ TCPPort::~TCPPort() {
 }
 
 Connection* TCPPort::CreateConnection(const Candidate& address,
-                                      CandidateOrigin origin) {
+                                      CandidateOrigin origin,
+                                      IceRole local_ice_role,
+                                      uint64_t local_ice_tiebreaker) {
   if (!SupportsProtocol(address.protocol())) {
     return NULL;
   }
@@ -149,11 +151,13 @@ Connection* TCPPort::CreateConnection(const Candidate& address,
     // so we need to hand off the "read packet" responsibility to
     // TCPConnection.
     socket->SignalReadPacket.disconnect(this);
-    conn = new TCPConnection(this, address, socket);
+    conn = new TCPConnection(this, address, local_ice_role,
+                             local_ice_tiebreaker, socket);
   } else {
     // Outgoing connection, which will create a new socket for which we still
     // need to connect SignalReadyToSend and SignalSentPacket.
-    conn = new TCPConnection(this, address);
+    conn =
+        new TCPConnection(this, address, local_ice_role, local_ice_tiebreaker);
     if (conn->socket()) {
       conn->socket()->SignalReadyToSend.connect(this, &TCPPort::OnReadyToSend);
       conn->socket()->SignalSentPacket.connect(this, &TCPPort::OnSentPacket);
@@ -337,8 +341,10 @@ void TCPPort::OnAddressReady(rtc::AsyncPacketSocket* socket,
 // we decide it is also applicable here.
 TCPConnection::TCPConnection(TCPPort* port,
                              const Candidate& candidate,
+                             IceRole local_ice_role,
+                             uint64_t local_ice_tiebreaker,
                              rtc::AsyncPacketSocket* socket)
-    : Connection(port, 0, candidate),
+    : Connection(port, 0, candidate, local_ice_role, local_ice_tiebreaker),
       socket_(socket),
       error_(0),
       outgoing_(socket == NULL),

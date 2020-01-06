@@ -151,6 +151,66 @@ constexpr int kSupportGoogPingVersionIndex =
 
 namespace cricket {
 
+bool GetIceRoleAndTiebreaker(IceMessage* msg,
+                             IceRole* role,
+                             uint64_t* tiebreaker) {
+  const StunUInt64Attribute* stun_attr =
+      msg->GetUInt64(STUN_ATTR_ICE_CONTROLLING);
+  if (stun_attr) {
+    *role = ICEROLE_CONTROLLING;
+    *tiebreaker = stun_attr->value();
+    return true;
+  }
+
+  stun_attr = msg->GetUInt64(STUN_ATTR_ICE_CONTROLLED);
+  if (stun_attr) {
+    *role = ICEROLE_CONTROLLED;
+    *tiebreaker = stun_attr->value();
+    return true;
+  }
+  return false;
+}
+
+enum class IceRoleConflict {
+  kNoConflict,
+  kLocalSwitch,
+  kRemoteSwitch,
+  kUnknown
+};
+
+IceRoleConflict CalculateIceRoleConflict(IceMessage* msg,
+                                         IceRole local_role,
+                                         uint64_t local_tiebreaker,
+                                         const std::string& local_ufrag,
+                                         const std::string& remote_ufrag) {
+  IceRole remote_role = ICEROLE_UNKNOWN;
+  uint64_t remote_tiebreaker = 0;
+  if (!GetIceRoleAndTiebreaker(msg, &remote_role, &remote_tiebreaker) ||
+      local_role == ICEROLE_UNKNOWN) {
+    return IceRoleConflict::kUnknown;
+  }
+
+  if (local_role != remote_role) {
+    return IceRoleConflict::kNoConflict;
+  }
+
+  // If the remote ufrag is the same as the local ufrag and
+  // the tie breaker value received in the ping message matches
+  // the local tiebreaker value this must be a loopback call.
+  // We will treat this as valid scenario.
+  if (remote_role == ICEROLE_CONTROLLING && local_ufrag == remote_ufrag &&
+      local_tiebreaker == remote_tiebreaker) {
+    return IceRoleConflict::kNoConflict;
+  }
+
+  if ((local_role == ICEROLE_CONTROLLING &&
+       remote_tiebreaker >= local_tiebreaker) ||
+      (local_role == ICEROLE_CONTROLLED &&
+       remote_tiebreaker < local_tiebreaker)) {
+    return IceRoleConflict::kLocalSwitch;
+  }
+  return IceRoleConflict::kRemoteSwitch;
+}
 // A ConnectionRequest is a STUN binding used to determine writability.
 ConnectionRequest::ConnectionRequest(Connection* connection)
     : StunRequest(new IceMessage()), connection_(connection) {}
@@ -187,9 +247,9 @@ void ConnectionRequest::Prepare(StunMessage* request) {
   }
 
   // Adding ICE_CONTROLLED or ICE_CONTROLLING attribute based on the role.
-  if (connection_->port()->GetIceRole() == ICEROLE_CONTROLLING) {
+  if (connection_->ice_role() == ICEROLE_CONTROLLING) {
     request->AddAttribute(std::make_unique<StunUInt64Attribute>(
-        STUN_ATTR_ICE_CONTROLLING, connection_->port()->IceTiebreaker()));
+        STUN_ATTR_ICE_CONTROLLING, connection_->ice_tiebreaker()));
     // We should have either USE_CANDIDATE attribute or ICE_NOMINATION
     // attribute but not both. That was enforced in p2ptransportchannel.
     if (connection_->use_candidate_attr()) {
@@ -201,9 +261,9 @@ void ConnectionRequest::Prepare(StunMessage* request) {
       request->AddAttribute(std::make_unique<StunUInt32Attribute>(
           STUN_ATTR_NOMINATION, connection_->nomination()));
     }
-  } else if (connection_->port()->GetIceRole() == ICEROLE_CONTROLLED) {
+  } else if (connection_->ice_role() == ICEROLE_CONTROLLED) {
     request->AddAttribute(std::make_unique<StunUInt64Attribute>(
-        STUN_ATTR_ICE_CONTROLLED, connection_->port()->IceTiebreaker()));
+        STUN_ATTR_ICE_CONTROLLED, connection_->ice_tiebreaker()));
   } else {
     RTC_NOTREACHED();
   }
@@ -259,13 +319,17 @@ int ConnectionRequest::resend_delay() {
 
 Connection::Connection(Port* port,
                        size_t index,
-                       const Candidate& remote_candidate)
+                       const Candidate& remote_candidate,
+                       IceRole ice_role,
+                       uint64_t ice_tiebreaker)
     : id_(rtc::CreateRandomId()),
       port_(port),
       local_candidate_index_(index),
       remote_candidate_(remote_candidate),
       recv_rate_tracker_(100, 10u),
       send_rate_tracker_(100, 10u),
+      ice_role_(ice_role),
+      ice_tiebreaker_(ice_tiebreaker),
       write_state_(STATE_WRITE_INIT),
       receiving_(false),
       connected_(true),
@@ -292,6 +356,21 @@ Connection::Connection(Port* port,
 
 Connection::~Connection() {}
 
+IceRole Connection::ice_role() const {
+  return ice_role_;
+}
+
+void Connection::set_ice_role(IceRole ice_role) {
+  ice_role_ = ice_role;
+}
+
+uint64_t Connection::ice_tiebreaker() const {
+  return ice_tiebreaker_;
+}
+void Connection::set_ice_tiebreaker(uint64_t ice_tiebreaker) {
+  ice_tiebreaker_ = ice_tiebreaker;
+}
+
 const Candidate& Connection::local_candidate() const {
   RTC_DCHECK(local_candidate_index_ < port_->Candidates().size());
   return port_->Candidates()[local_candidate_index_];
@@ -316,7 +395,7 @@ uint64_t Connection::priority() const {
   // agent.  Let D be the priority for the candidate provided by the
   // controlled agent.
   // pair priority = 2^32*MIN(G,D) + 2*MAX(G,D) + (G>D?1:0)
-  IceRole role = port_->GetIceRole();
+  IceRole role = ice_role_;
   if (role != ICEROLE_UNKNOWN) {
     uint32_t g = 0;
     uint32_t d = 0;
@@ -539,14 +618,24 @@ void Connection::HandleStunBindingOrGoogPingRequest(IceMessage* msg) {
     }
   }
 
-  const rtc::SocketAddress& remote_addr = remote_candidate_.address();
   if (msg->type() == STUN_BINDING_REQUEST) {
-    // Check for role conflicts.
-    const std::string& remote_ufrag = remote_candidate_.username();
-    if (!port_->MaybeIceRoleConflict(remote_addr, msg, remote_ufrag)) {
-      // Received conflicting role from the peer.
-      RTC_LOG(LS_INFO) << "Received conflicting role from the peer.";
-      return;
+    IceRoleConflict conflict = CalculateIceRoleConflict(
+        msg, ice_role_, ice_tiebreaker_, local_candidate().username(),
+        remote_candidate().username());
+    switch (conflict) {
+      case IceRoleConflict::kNoConflict:
+        break;
+      case IceRoleConflict::kLocalSwitch:
+        SignalIceRoleConflictLocalSwitch(this);
+        break;
+      case IceRoleConflict::kRemoteSwitch:
+        RTC_LOG(LS_INFO) << "Received conflicting role from the peer.";
+        port_->SendBindingErrorResponse(msg, remote_candidate_.address(),
+                                        STUN_ERROR_ROLE_CONFLICT,
+                                        STUN_ERROR_REASON_ROLE_CONFLICT);
+        return;
+      case IceRoleConflict::kUnknown:
+        break;
     }
   }
 
@@ -567,7 +656,7 @@ void Connection::HandleStunBindingOrGoogPingRequest(IceMessage* msg) {
     set_write_state(STATE_WRITE_INIT);
   }
 
-  if (port_->GetIceRole() == ICEROLE_CONTROLLED) {
+  if (ice_role_ == ICEROLE_CONTROLLED) {
     const StunUInt32Attribute* nomination_attr =
         msg->GetUInt32(STUN_ATTR_NOMINATION);
     uint32_t nomination = 0;
@@ -1086,7 +1175,7 @@ void Connection::OnConnectionRequestErrorResponse(ConnectionRequest* request,
   } else if (error_code == STUN_ERROR_STALE_CREDENTIALS) {
     // Race failure, retry
   } else if (error_code == STUN_ERROR_ROLE_CONFLICT) {
-    HandleRoleConflictFromPeer();
+    SignalIceRoleConflictLocalSwitch(this);
   } else if (request->msg()->type() == GOOG_PING_REQUEST) {
     // Race, retry.
   } else {
@@ -1120,10 +1209,6 @@ void Connection::OnConnectionRequestSent(ConnectionRequest* request) {
   if (stats_.recv_ping_responses == 0) {
     stats_.sent_ping_requests_before_first_response++;
   }
-}
-
-void Connection::HandleRoleConflictFromPeer() {
-  port_->SignalRoleConflict(port_);
 }
 
 void Connection::MaybeSetRemoteIceParametersAndGeneration(
@@ -1303,8 +1388,10 @@ bool Connection::ShouldSendGoogPing(const StunMessage* message) {
 
 ProxyConnection::ProxyConnection(Port* port,
                                  size_t index,
-                                 const Candidate& remote_candidate)
-    : Connection(port, index, remote_candidate) {}
+                                 const Candidate& remote_candidate,
+                                 IceRole ice_role,
+                                 uint64_t ice_tiebreaker)
+    : Connection(port, index, remote_candidate, ice_role, ice_tiebreaker) {}
 
 int ProxyConnection::Send(const void* data,
                           size_t size,

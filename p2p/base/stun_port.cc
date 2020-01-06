@@ -254,7 +254,9 @@ void UDPPort::MaybePrepareStunCandidate() {
 }
 
 Connection* UDPPort::CreateConnection(const Candidate& address,
-                                      CandidateOrigin origin) {
+                                      CandidateOrigin origin,
+                                      IceRole local_ice_role,
+                                      uint64_t local_ice_tiebreaker) {
   if (!SupportsProtocol(address.protocol())) {
     return nullptr;
   }
@@ -286,7 +288,8 @@ Connection* UDPPort::CreateConnection(const Candidate& address,
              mdns_name_registration_status() !=
                  MdnsNameRegistrationStatus::kNotStarted);
 
-  Connection* conn = new ProxyConnection(this, 0, address);
+  Connection* conn = new ProxyConnection(this, 0, address, local_ice_role,
+                                         local_ice_tiebreaker);
   AddOrReplaceConnection(conn);
   return conn;
 }
