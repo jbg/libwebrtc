@@ -189,6 +189,8 @@ void P2PTransportChannel::AddAllocatorSession(
 
 void P2PTransportChannel::AddConnection(Connection* connection) {
   RTC_DCHECK_RUN_ON(network_thread_);
+  connection->set_ice_role(ice_role_);
+  connection->set_ice_tiebreaker(tiebreaker_);
   connection->set_remote_ice_mode(remote_ice_mode_);
   connection->set_receiving_timeout(config_.receiving_timeout);
   connection->set_unwritable_timeout(config_.ice_unwritable_timeout);
@@ -203,6 +205,8 @@ void P2PTransportChannel::AddConnection(Connection* connection) {
   connection->SignalDestroyed.connect(
       this, &P2PTransportChannel::OnConnectionDestroyed);
   connection->SignalNominated.connect(this, &P2PTransportChannel::OnNominated);
+  connection->SignalIceRoleConflictLocalSwitch.connect(
+      this, &P2PTransportChannel::OnIceRoleConflictLocalSwitch);
 
   had_connection_ = true;
 
@@ -253,13 +257,8 @@ void P2PTransportChannel::SetIceRole(IceRole ice_role) {
   RTC_DCHECK_RUN_ON(network_thread_);
   if (ice_role_ != ice_role) {
     ice_role_ = ice_role;
-    for (PortInterface* port : ports_) {
-      port->SetIceRole(ice_role);
-    }
-    // Update role on pruned ports as well, because they may still have
-    // connections alive that should be using the correct role.
-    for (PortInterface* port : pruned_ports_) {
-      port->SetIceRole(ice_role);
+    for (Connection* connection : connections()) {
+      connection->set_ice_role(ice_role);
     }
   }
 }
@@ -271,13 +270,12 @@ IceRole P2PTransportChannel::GetIceRole() const {
 
 void P2PTransportChannel::SetIceTiebreaker(uint64_t tiebreaker) {
   RTC_DCHECK_RUN_ON(network_thread_);
-  if (!ports_.empty() || !pruned_ports_.empty()) {
-    RTC_LOG(LS_ERROR)
-        << "Attempt to change tiebreaker after Port has been allocated.";
-    return;
+  if (tiebreaker_ != tiebreaker) {
+    tiebreaker_ = tiebreaker;
+    for (Connection* connection : connections()) {
+      connection->set_ice_tiebreaker(tiebreaker);
+    }
   }
-
-  tiebreaker_ = tiebreaker;
 }
 
 IceTransportState P2PTransportChannel::GetState() const {
@@ -846,14 +844,11 @@ void P2PTransportChannel::OnPortReady(PortAllocatorSession* session,
   // The session will handle this, and send an initiate/accept/modify message
   // if one is pending.
 
-  port->SetIceRole(ice_role_);
-  port->SetIceTiebreaker(tiebreaker_);
   ports_.push_back(port);
   port->SignalUnknownAddress.connect(this,
                                      &P2PTransportChannel::OnUnknownAddress);
   port->SignalDestroyed.connect(this, &P2PTransportChannel::OnPortDestroyed);
 
-  port->SignalRoleConflict.connect(this, &P2PTransportChannel::OnRoleConflict);
   port->SignalSentPacket.connect(this, &P2PTransportChannel::OnSentPacket);
 
   // Attempt to create a connection from this new port to all of the remote
@@ -1023,7 +1018,8 @@ void P2PTransportChannel::OnUnknownAddress(PortInterface* port,
   }
 
   Connection* connection =
-      port->CreateConnection(remote_candidate, PortInterface::ORIGIN_THIS_PORT);
+      port->CreateConnection(remote_candidate, PortInterface::ORIGIN_THIS_PORT,
+                             ice_role_, tiebreaker_);
   if (!connection) {
     // This could happen in some scenarios. For example, a TurnPort may have
     // had a refresh request timeout, so it won't create connections.
@@ -1057,7 +1053,7 @@ void P2PTransportChannel::OnCandidateFilterChanged(uint32_t prev_filter,
   }
 }
 
-void P2PTransportChannel::OnRoleConflict(PortInterface* port) {
+void P2PTransportChannel::OnIceRoleConflictLocalSwitch(Connection* conn) {
   SignalRoleConflict(this);  // STUN ping will be sent when SetRole is called
                              // from Transport.
 }
@@ -1333,7 +1329,8 @@ bool P2PTransportChannel::CreateConnection(PortInterface* port,
     if (origin == PortInterface::ORIGIN_MESSAGE && incoming_only_) {
       return false;
     }
-    Connection* connection = port->CreateConnection(remote_candidate, origin);
+    Connection* connection = port->CreateConnection(remote_candidate, origin,
+                                                    ice_role_, tiebreaker_);
     if (!connection) {
       return false;
     }

@@ -160,7 +160,9 @@ class TurnPort : public Port {
 
   void PrepareAddress() override;
   Connection* CreateConnection(const Candidate& c,
-                               PortInterface::CandidateOrigin origin) override;
+                               PortInterface::CandidateOrigin origin,
+                               IceRole local_ice_role,
+                               uint64_t local_ice_tiebreaker) override;
   int SendTo(const void* data,
              size_t size,
              const rtc::SocketAddress& addr,
