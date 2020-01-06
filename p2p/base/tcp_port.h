@@ -48,7 +48,9 @@ class TCPPort : public Port {
   ~TCPPort() override;
 
   Connection* CreateConnection(const Candidate& address,
-                               CandidateOrigin origin) override;
+                               CandidateOrigin origin,
+                               IceRole local_ice_role,
+                               uint64_t local_ice_tiebreaker) override;
 
   void PrepareAddress() override;
 
@@ -118,6 +120,8 @@ class TCPConnection : public Connection {
   // Connection is outgoing unless socket is specified
   TCPConnection(TCPPort* port,
                 const Candidate& candidate,
+                IceRole local_ice_role,
+                uint64_t local_ice_tiebreaker,
                 rtc::AsyncPacketSocket* socket = 0);
   ~TCPConnection() override;
 

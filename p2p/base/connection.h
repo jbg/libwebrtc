@@ -85,6 +85,13 @@ class Connection : public CandidatePairInterface,
 
   ~Connection() override;
 
+  // Methods to set/get ICE role and tiebreaker values.
+  IceRole ice_role() const;
+  void set_ice_role(IceRole role);
+
+  uint64_t ice_tiebreaker() const;
+  void set_ice_tiebreaker(uint64_t tiebreaker);
+
   // A unique ID assigned when the connection is created.
   uint32_t id() { return id_; }
 
@@ -143,6 +150,10 @@ class Connection : public CandidatePairInterface,
   ConnectionInfo stats();
 
   sigslot::signal1<Connection*> SignalStateChange;
+
+  // An ICE role conflict with the remote peer has been detected and the
+  // local peer should switch roles.
+  sigslot::signal1<Connection*> SignalIceRoleConflictLocalSwitch;
 
   // Sent when the connection has decided that it is no longer of value.  It
   // will delete itself immediately after this call.
@@ -263,9 +274,6 @@ class Connection : public CandidatePairInterface,
   // controlling side.
   sigslot::signal1<Connection*> SignalNominated;
 
-  // Invoked when Connection receives STUN error response with 487 code.
-  void HandleRoleConflictFromPeer();
-
   IceCandidatePairState state() const { return state_; }
 
   int num_pings_sent() const { return num_pings_sent_; }
@@ -323,7 +331,11 @@ class Connection : public CandidatePairInterface,
   enum { MSG_DELETE = 0, MSG_FIRST_AVAILABLE };
 
   // Constructs a new connection to the given remote port.
-  Connection(Port* port, size_t index, const Candidate& candidate);
+  Connection(Port* port,
+             size_t index,
+             const Candidate& candidate,
+             IceRole ice_role,
+             uint64_t ice_tiebreaker);
 
   // Called back when StunRequestManager has a stun packet to send
   void OnSendStunPacket(const void* data, size_t size, StunRequest* req);
@@ -378,6 +390,9 @@ class Connection : public CandidatePairInterface,
   // Check if this IceMessage is identical
   // to last message ack:ed STUN_BINDING_REQUEST.
   bool ShouldSendGoogPing(const StunMessage* message);
+
+  IceRole ice_role_ = ICEROLE_UNKNOWN;
+  uint64_t ice_tiebreaker_ = 0;
 
   WriteState write_state_;
   bool receiving_;
@@ -453,7 +468,11 @@ class Connection : public CandidatePairInterface,
 // ProxyConnection defers all the interesting work to the port.
 class ProxyConnection : public Connection {
  public:
-  ProxyConnection(Port* port, size_t index, const Candidate& remote_candidate);
+  ProxyConnection(Port* port,
+                  size_t index,
+                  const Candidate& remote_candidate,
+                  IceRole ice_role,
+                  uint64_t ice_tiebreaker);
 
   int Send(const void* data,
            size_t size,

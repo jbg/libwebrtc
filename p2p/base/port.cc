@@ -132,8 +132,6 @@ Port::Port(rtc::Thread* thread,
       password_(password),
       timeout_delay_(kPortTimeoutDelay),
       enable_port_packets_(false),
-      ice_role_(ICEROLE_UNKNOWN),
-      tiebreaker_(0),
       shared_socket_(true),
       weak_factory_(this) {
   Construct();
@@ -160,8 +158,6 @@ Port::Port(rtc::Thread* thread,
       password_(password),
       timeout_delay_(kPortTimeoutDelay),
       enable_port_packets_(false),
-      ice_role_(ICEROLE_UNKNOWN),
-      tiebreaker_(0),
       shared_socket_(false),
       weak_factory_(this) {
   RTC_DCHECK(factory_ != NULL);
@@ -207,21 +203,6 @@ const std::string& Port::Type() const {
 }
 rtc::Network* Port::Network() const {
   return network_;
-}
-
-IceRole Port::GetIceRole() const {
-  return ice_role_;
-}
-
-void Port::SetIceRole(IceRole role) {
-  ice_role_ = role;
-}
-
-void Port::SetIceTiebreaker(uint64_t tiebreaker) {
-  tiebreaker_ = tiebreaker;
-}
-uint64_t Port::IceTiebreaker() const {
-  return tiebreaker_;
 }
 
 bool Port::SharedSocket() const {
@@ -395,15 +376,7 @@ void Port::OnReadPacket(const char* data,
     RTC_LOG(LS_INFO) << "Received " << StunMethodToString(msg->type())
                      << " id=" << rtc::hex_encode(msg->transaction_id())
                      << " from unknown address " << addr.ToSensitiveString();
-    // We need to signal an unknown address before we handle any role conflict
-    // below. Otherwise there would be no candidate pair and TURN entry created
-    // to send the error response in case of a role conflict.
     SignalUnknownAddress(this, addr, proto, msg.get(), remote_username, false);
-    // Check for role conflicts.
-    if (!MaybeIceRoleConflict(addr, msg.get(), remote_username)) {
-      RTC_LOG(LS_INFO) << "Received conflicting role from the peer.";
-      return;
-    }
   } else if (msg->type() == GOOG_PING_REQUEST) {
     // This is a PING sent to a connection that was destroyed.
     // Send back that this is the case and a authenticated BINDING
@@ -612,67 +585,6 @@ bool Port::ParseStunUsername(const StunMessage* stun_msg,
   *local_ufrag = username.substr(0, colon_pos);
   *remote_ufrag = username.substr(colon_pos + 1, username.size());
   return true;
-}
-
-bool Port::MaybeIceRoleConflict(const rtc::SocketAddress& addr,
-                                IceMessage* stun_msg,
-                                const std::string& remote_ufrag) {
-  // Validate ICE_CONTROLLING or ICE_CONTROLLED attributes.
-  bool ret = true;
-  IceRole remote_ice_role = ICEROLE_UNKNOWN;
-  uint64_t remote_tiebreaker = 0;
-  const StunUInt64Attribute* stun_attr =
-      stun_msg->GetUInt64(STUN_ATTR_ICE_CONTROLLING);
-  if (stun_attr) {
-    remote_ice_role = ICEROLE_CONTROLLING;
-    remote_tiebreaker = stun_attr->value();
-  }
-
-  // If |remote_ufrag| is same as port local username fragment and
-  // tie breaker value received in the ping message matches port
-  // tiebreaker value this must be a loopback call.
-  // We will treat this as valid scenario.
-  if (remote_ice_role == ICEROLE_CONTROLLING &&
-      username_fragment() == remote_ufrag &&
-      remote_tiebreaker == IceTiebreaker()) {
-    return true;
-  }
-
-  stun_attr = stun_msg->GetUInt64(STUN_ATTR_ICE_CONTROLLED);
-  if (stun_attr) {
-    remote_ice_role = ICEROLE_CONTROLLED;
-    remote_tiebreaker = stun_attr->value();
-  }
-
-  switch (ice_role_) {
-    case ICEROLE_CONTROLLING:
-      if (ICEROLE_CONTROLLING == remote_ice_role) {
-        if (remote_tiebreaker >= tiebreaker_) {
-          SignalRoleConflict(this);
-        } else {
-          // Send Role Conflict (487) error response.
-          SendBindingErrorResponse(stun_msg, addr, STUN_ERROR_ROLE_CONFLICT,
-                                   STUN_ERROR_REASON_ROLE_CONFLICT);
-          ret = false;
-        }
-      }
-      break;
-    case ICEROLE_CONTROLLED:
-      if (ICEROLE_CONTROLLED == remote_ice_role) {
-        if (remote_tiebreaker < tiebreaker_) {
-          SignalRoleConflict(this);
-        } else {
-          // Send Role Conflict (487) error response.
-          SendBindingErrorResponse(stun_msg, addr, STUN_ERROR_ROLE_CONFLICT,
-                                   STUN_ERROR_REASON_ROLE_CONFLICT);
-          ret = false;
-        }
-      }
-      break;
-    default:
-      RTC_NOTREACHED();
-  }
-  return ret;
 }
 
 void Port::CreateStunUsername(const std::string& remote_username,

@@ -103,8 +103,9 @@ TEST_F(TCPPortTest, TestTCPPortWithLocalhostAddress) {
   auto remote_port = CreateTCPPort(kRemoteAddr);
   local_port->PrepareAddress();
   remote_port->PrepareAddress();
-  Connection* conn = local_port->CreateConnection(remote_port->Candidates()[0],
-                                                  Port::ORIGIN_MESSAGE);
+  Connection* conn = local_port->CreateConnection(
+      remote_port->Candidates()[0], Port::ORIGIN_MESSAGE,
+      cricket::ICEROLE_CONTROLLING, 1);
   EXPECT_TRUE_WAIT(conn->connected(), kTimeout);
   // Verify that the socket actually used localhost, otherwise this test isn't
   // doing what it meant to.
@@ -131,8 +132,9 @@ TEST_F(TCPPortTest, TCPPortDiscardedIfBoundAddressDoesNotMatchNetwork) {
 
   // Tell port to create a connection; it should be destroyed when it's
   // realized that it's using an unexpected address.
-  Connection* conn = local_port->CreateConnection(remote_port->Candidates()[0],
-                                                  Port::ORIGIN_MESSAGE);
+  Connection* conn = local_port->CreateConnection(
+      remote_port->Candidates()[0], Port::ORIGIN_MESSAGE,
+      cricket::ICEROLE_CONTROLLING, 1);
   ConnectionObserver observer(conn);
   EXPECT_TRUE_WAIT(observer.connection_destroyed(), kTimeout);
 }
@@ -157,8 +159,9 @@ TEST_F(TCPPortTest, TCPPortNotDiscardedIfNotBoundToBestIP) {
   remote_port->PrepareAddress();
 
   // Expect connection to succeed.
-  Connection* conn = local_port->CreateConnection(remote_port->Candidates()[0],
-                                                  Port::ORIGIN_MESSAGE);
+  Connection* conn = local_port->CreateConnection(
+      remote_port->Candidates()[0], Port::ORIGIN_MESSAGE,
+      cricket::ICEROLE_CONTROLLING, 1);
   EXPECT_TRUE_WAIT(conn->connected(), kTimeout);
 
   // Verify that the socket actually used the alternate address, otherwise this
@@ -180,8 +183,9 @@ TEST_F(TCPPortTest, TCPPortNotDiscardedIfBoundToTemporaryIP) {
   remote_port->PrepareAddress();
 
   // Connection should succeed if the port isn't discarded.
-  Connection* conn = local_port->CreateConnection(remote_port->Candidates()[0],
-                                                  Port::ORIGIN_MESSAGE);
+  Connection* conn = local_port->CreateConnection(
+      remote_port->Candidates()[0], Port::ORIGIN_MESSAGE,
+      cricket::ICEROLE_CONTROLLING, 1);
   ASSERT_NE(nullptr, conn);
   EXPECT_TRUE_WAIT(conn->connected(), kTimeout);
 }
@@ -205,13 +209,12 @@ class SentPacketCounter : public sigslot::has_slots<> {
 TEST_F(TCPPortTest, SignalSentPacket) {
   std::unique_ptr<TCPPort> client(CreateTCPPort(kLocalAddr));
   std::unique_ptr<TCPPort> server(CreateTCPPort(kRemoteAddr));
-  client->SetIceRole(cricket::ICEROLE_CONTROLLING);
-  server->SetIceRole(cricket::ICEROLE_CONTROLLED);
   client->PrepareAddress();
   server->PrepareAddress();
 
   Connection* client_conn =
-      client->CreateConnection(server->Candidates()[0], Port::ORIGIN_MESSAGE);
+      client->CreateConnection(server->Candidates()[0], Port::ORIGIN_MESSAGE,
+                               cricket::ICEROLE_CONTROLLING, 1);
   ASSERT_NE(nullptr, client_conn);
   ASSERT_TRUE_WAIT(client_conn->connected(), kTimeout);
 
@@ -220,8 +223,8 @@ TEST_F(TCPPortTest, SignalSentPacket) {
   client_candidate.set_address(static_cast<cricket::TCPConnection*>(client_conn)
                                    ->socket()
                                    ->GetLocalAddress());
-  Connection* server_conn =
-      server->CreateConnection(client_candidate, Port::ORIGIN_THIS_PORT);
+  Connection* server_conn = server->CreateConnection(
+      client_candidate, Port::ORIGIN_THIS_PORT, cricket::ICEROLE_CONTROLLED, 2);
   ASSERT_NE(nullptr, server_conn);
   ASSERT_TRUE_WAIT(server_conn->connected(), kTimeout);
 
