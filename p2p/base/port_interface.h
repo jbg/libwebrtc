@@ -49,13 +49,6 @@ class PortInterface {
   virtual const std::string& Type() const = 0;
   virtual rtc::Network* Network() const = 0;
 
-  // Methods to set/get ICE role and tiebreaker values.
-  virtual void SetIceRole(IceRole role) = 0;
-  virtual IceRole GetIceRole() const = 0;
-
-  virtual void SetIceTiebreaker(uint64_t tiebreaker) = 0;
-  virtual uint64_t IceTiebreaker() const = 0;
-
   virtual bool SharedSocket() const = 0;
 
   virtual bool SupportsProtocol(const std::string& protocol) const = 0;
@@ -72,8 +65,21 @@ class PortInterface {
 
   // Creates a new connection to the given address.
   enum CandidateOrigin { ORIGIN_THIS_PORT, ORIGIN_OTHER_PORT, ORIGIN_MESSAGE };
+
+  // We keep around two variants with default implementations so that all
+  // downstream implementations can update to using the new one.
+  // After some period, we sould remove the old one (the first) and remove
+  // the default impl of the new one (the second).
   virtual Connection* CreateConnection(const Candidate& remote_candidate,
-                                       CandidateOrigin origin) = 0;
+                                       CandidateOrigin origin) {
+    return nullptr;
+  }
+  virtual Connection* CreateConnection(const Candidate& remote_candidate,
+                                       CandidateOrigin origin,
+                                       IceRole local_ice_role,
+                                       uint64_t local_ice_tiebreaker) {
+    return nullptr;
+  }
 
   // Functions on the underlying socket(s).
   virtual int SetOption(rtc::Socket::Option opt, int value) = 0;
@@ -113,9 +119,6 @@ class PortInterface {
   // Signaled when this port decides to delete itself because it no longer has
   // any usefulness.
   sigslot::signal1<PortInterface*> SignalDestroyed;
-
-  // Signaled when Port discovers ice role conflict with the peer.
-  sigslot::signal1<PortInterface*> SignalRoleConflict;
 
   // Normally, packets arrive through a connection (or they result signaling of
   // unknown address).  Calling this method turns off delivery of packets

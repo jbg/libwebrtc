@@ -1900,51 +1900,6 @@ TEST_F(P2PTransportChannelTest, TestIceRoleConflict) {
   TestSignalRoleConflict();
 }
 
-// Tests that the ice configs (protocol, tiebreaker and role) can be passed
-// down to ports.
-TEST_F(P2PTransportChannelTest, TestIceConfigWillPassDownToPort) {
-  rtc::ScopedFakeClock clock;
-  AddAddress(0, kPublicAddrs[0]);
-  AddAddress(1, kPublicAddrs[1]);
-
-  // Give the first connection the higher tiebreaker so its role won't
-  // change unless we tell it to.
-  SetIceRole(0, ICEROLE_CONTROLLING);
-  SetIceTiebreaker(0, kHighTiebreaker);
-  SetIceRole(1, ICEROLE_CONTROLLING);
-  SetIceTiebreaker(1, kLowTiebreaker);
-
-  CreateChannels();
-
-  EXPECT_EQ_SIMULATED_WAIT(2u, ep1_ch1()->ports().size(), kShortTimeout, clock);
-
-  const std::vector<PortInterface*> ports_before = ep1_ch1()->ports();
-  for (size_t i = 0; i < ports_before.size(); ++i) {
-    EXPECT_EQ(ICEROLE_CONTROLLING, ports_before[i]->GetIceRole());
-    EXPECT_EQ(kHighTiebreaker, ports_before[i]->IceTiebreaker());
-  }
-
-  ep1_ch1()->SetIceRole(ICEROLE_CONTROLLED);
-  ep1_ch1()->SetIceTiebreaker(kLowTiebreaker);
-
-  const std::vector<PortInterface*> ports_after = ep1_ch1()->ports();
-  for (size_t i = 0; i < ports_after.size(); ++i) {
-    EXPECT_EQ(ICEROLE_CONTROLLED, ports_before[i]->GetIceRole());
-    // SetIceTiebreaker after ports have been created will fail. So expect the
-    // original value.
-    EXPECT_EQ(kHighTiebreaker, ports_before[i]->IceTiebreaker());
-  }
-
-  EXPECT_TRUE_SIMULATED_WAIT(CheckConnected(ep1_ch1(), ep2_ch1()),
-                             kShortTimeout, clock);
-
-  EXPECT_TRUE(ep1_ch1()->selected_connection() &&
-              ep2_ch1()->selected_connection());
-
-  TestSendRecv(&clock);
-  DestroyChannels();
-}
-
 // Verify that we can set DSCP value and retrieve properly from P2PTC.
 TEST_F(P2PTransportChannelTest, TestDefaultDscpValue) {
   AddAddress(0, kPublicAddrs[0]);
@@ -4385,53 +4340,6 @@ TEST_F(P2PTransportChannelPingTest, TestStopPortAllocatorSessions) {
   ASSERT_TRUE(conn2 != nullptr);
   conn2->ReceivedPingResponse(LOW_RTT, "id");  // Becomes writable and receiving
   EXPECT_TRUE(!ch.allocator_session()->IsGettingPorts());
-}
-
-// Test that the ICE role is updated even on ports that has been removed.
-// These ports may still have connections that need a correct role, in case that
-// the connections on it may still receive stun pings.
-TEST_F(P2PTransportChannelPingTest, TestIceRoleUpdatedOnRemovedPort) {
-  FakePortAllocator pa(rtc::Thread::Current(), nullptr);
-  P2PTransportChannel ch("test channel", ICE_CANDIDATE_COMPONENT_DEFAULT, &pa);
-  // Starts with ICEROLE_CONTROLLING.
-  PrepareChannel(&ch);
-  IceConfig config = CreateIceConfig(1000, GATHER_CONTINUALLY);
-  ch.SetIceConfig(config);
-  ch.MaybeStartGathering();
-  ch.AddRemoteCandidate(CreateUdpCandidate(LOCAL_PORT_TYPE, "1.1.1.1", 1, 1));
-
-  Connection* conn = WaitForConnectionTo(&ch, "1.1.1.1", 1);
-  ASSERT_TRUE(conn != nullptr);
-
-  // Make a fake signal to remove the ports in the p2ptransportchannel. then
-  // change the ICE role and expect it to be updated.
-  std::vector<PortInterface*> ports(1, conn->PortForTest());
-  ch.allocator_session()->SignalPortsPruned(ch.allocator_session(), ports);
-  ch.SetIceRole(ICEROLE_CONTROLLED);
-  EXPECT_EQ(ICEROLE_CONTROLLED, conn->PortForTest()->GetIceRole());
-}
-
-// Test that the ICE role is updated even on ports with inactive networks.
-// These ports may still have connections that need a correct role, for the
-// pings sent by those connections until they're replaced by newer-generation
-// connections.
-TEST_F(P2PTransportChannelPingTest, TestIceRoleUpdatedOnPortAfterIceRestart) {
-  FakePortAllocator pa(rtc::Thread::Current(), nullptr);
-  P2PTransportChannel ch("test channel", ICE_CANDIDATE_COMPONENT_DEFAULT, &pa);
-  // Starts with ICEROLE_CONTROLLING.
-  PrepareChannel(&ch);
-  ch.MaybeStartGathering();
-  ch.AddRemoteCandidate(CreateUdpCandidate(LOCAL_PORT_TYPE, "1.1.1.1", 1, 1));
-
-  Connection* conn = WaitForConnectionTo(&ch, "1.1.1.1", 1);
-  ASSERT_TRUE(conn != nullptr);
-
-  // Do an ICE restart, change the role, and expect the old port to have its
-  // role updated.
-  ch.SetIceParameters(kIceParams[1]);
-  ch.MaybeStartGathering();
-  ch.SetIceRole(ICEROLE_CONTROLLED);
-  EXPECT_EQ(ICEROLE_CONTROLLED, conn->PortForTest()->GetIceRole());
 }
 
 // Test that after some amount of time without receiving data, the connection
