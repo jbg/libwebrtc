@@ -90,13 +90,17 @@ rtc::VideoSinkWants VideoSourceRestrictionsToVideoSinkWants(
 // VideoSinkWants.
 class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
  public:
-  explicit VideoSourceProxy(rtc::VideoSinkInterface<VideoFrame>* sink)
+  explicit VideoSourceProxy(rtc::VideoSinkInterface<VideoFrame>* sink,
+                            VideoSourceController* video_source_controller)
       : sink_(sink),
+        video_source_controller_(video_source_controller),
         degradation_preference_(DegradationPreference::DISABLED),
         source_(nullptr),
         max_framerate_(std::numeric_limits<int>::max()),
         max_pixels_(std::numeric_limits<int>::max()),
-        resolution_alignment_(1) {}
+        resolution_alignment_(1) {
+    RTC_DCHECK(video_source_controller_);
+  }
 
   VideoSourceRestrictions ToVideoSourceRestrictions() {
     return VideoSinkWantsToVideoSourceRestrictions(GetActiveSinkWants());
@@ -374,6 +378,7 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
   rtc::CriticalSection crit_;
   SequenceChecker main_checker_;
   rtc::VideoSinkInterface<VideoFrame>* const sink_;
+  VideoSourceController* const video_source_controller_;
   rtc::VideoSinkWants sink_wants_ RTC_GUARDED_BY(&crit_);
   DegradationPreference degradation_preference_ RTC_GUARDED_BY(&crit_);
   rtc::VideoSourceInterface<VideoFrame>* source_ RTC_GUARDED_BY(&crit_);
@@ -513,7 +518,8 @@ OveruseFrameDetectorResourceAdaptationModule::
         rtc::VideoSinkInterface<VideoFrame>* sink,
         std::unique_ptr<OveruseFrameDetector> overuse_detector,
         VideoStreamEncoderObserver* encoder_stats_observer,
-        ResourceAdaptationModuleListener* adaptation_listener)
+        ResourceAdaptationModuleListener* adaptation_listener,
+        VideoSourceController* video_source_controller)
     : encoder_queue_(nullptr),
       adaptation_listener_(adaptation_listener),
       video_stream_encoder_(video_stream_encoder),
@@ -522,7 +528,8 @@ OveruseFrameDetectorResourceAdaptationModule::
       balanced_settings_(),
       last_adaptation_request_(absl::nullopt),
       last_frame_pixel_count_(absl::nullopt),
-      source_proxy_(std::make_unique<VideoSourceProxy>(sink)),
+      source_proxy_(
+          std::make_unique<VideoSourceProxy>(sink, video_source_controller)),
       overuse_detector_(std::move(overuse_detector)),
       codec_max_framerate_(-1),
       encoder_start_bitrate_bps_(0),

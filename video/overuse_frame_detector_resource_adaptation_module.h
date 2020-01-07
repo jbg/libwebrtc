@@ -28,6 +28,7 @@
 #include "call/adaptation/resource_adaptation_module_interface.h"
 #include "rtc_base/experiments/balanced_degradation_settings.h"
 #include "video/overuse_frame_detector.h"
+#include "video/video_source_controller.h"
 
 namespace webrtc {
 
@@ -54,7 +55,8 @@ class OveruseFrameDetectorResourceAdaptationModule
       rtc::VideoSinkInterface<VideoFrame>* sink,
       std::unique_ptr<OveruseFrameDetector> overuse_detector,
       VideoStreamEncoderObserver* encoder_stats_observer,
-      ResourceAdaptationModuleListener* adaptation_listener);
+      ResourceAdaptationModuleListener* adaptation_listener,
+      VideoSourceController* video_source_controller);
   ~OveruseFrameDetectorResourceAdaptationModule() override;
 
   void Initialize(rtc::TaskQueue* encoder_queue);

@@ -14,6 +14,11 @@
 
 namespace webrtc {
 
+VideoSourceRestrictions::VideoSourceRestrictions()
+    : max_pixels_per_frame_(absl::nullopt),
+      target_pixels_per_frame_(absl::nullopt),
+      max_frame_rate_(absl::nullopt) {}
+
 VideoSourceRestrictions::VideoSourceRestrictions(
     absl::optional<size_t> max_pixels_per_frame,
     absl::optional<size_t> target_pixels_per_frame,
