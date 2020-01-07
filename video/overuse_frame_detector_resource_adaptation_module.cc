@@ -43,43 +43,43 @@ bool IsFramerateScalingEnabled(DegradationPreference degradation_preference) {
 // Constructs VideoSourceRestrictions from |target_pixel_count|,
 // |max_pixel_count| and |max_framerate_fps|. Other rtc::VideoSinkWants
 // information such as |rotation_applied| is lost in the conversion.
-VideoSourceRestrictions VideoSinkWantsToVideoSourceRestrictions(
-    rtc::VideoSinkWants active_sink_wants) {
-  return VideoSourceRestrictions(
-      active_sink_wants.max_pixel_count != std::numeric_limits<int>::max()
-          ? absl::optional<size_t>(active_sink_wants.max_pixel_count)
-          : absl::nullopt,
-      active_sink_wants.target_pixel_count.has_value()
-          ? absl::optional<size_t>(rtc::dchecked_cast<size_t, int>(
-                active_sink_wants.target_pixel_count.value()))
-          : absl::nullopt,
-      active_sink_wants.max_framerate_fps != std::numeric_limits<int>::max()
-          ? absl::optional<double>(active_sink_wants.max_framerate_fps)
-          : absl::nullopt);
-}
+// VideoSourceRestrictions VideoSinkWantsToVideoSourceRestrictions(
+//     rtc::VideoSinkWants active_sink_wants) {
+//   return VideoSourceRestrictions(
+//       active_sink_wants.max_pixel_count != std::numeric_limits<int>::max()
+//           ? absl::optional<size_t>(active_sink_wants.max_pixel_count)
+//           : absl::nullopt,
+//       active_sink_wants.target_pixel_count.has_value()
+//           ? absl::optional<size_t>(rtc::dchecked_cast<size_t, int>(
+//                 active_sink_wants.target_pixel_count.value()))
+//           : absl::nullopt,
+//       active_sink_wants.max_framerate_fps != std::numeric_limits<int>::max()
+//           ? absl::optional<double>(active_sink_wants.max_framerate_fps)
+//           : absl::nullopt);
+// }
 
 // Constructs rtc::VideoSinkWants from max_pixels_per_frame(),
 // target_pixels_per_frame() and max_frame_rate(). The rest of the members, such
 // as |rotation_applied|, are obtained from the |baseline_sink_wants|.
-rtc::VideoSinkWants VideoSourceRestrictionsToVideoSinkWants(
-    const rtc::VideoSinkWants& baseline_sink_wants,
-    VideoSourceRestrictions restrictions) {
-  rtc::VideoSinkWants sink_wants = baseline_sink_wants;
-  sink_wants.max_pixel_count =
-      restrictions.max_pixels_per_frame().has_value()
-          ? static_cast<int>(restrictions.max_pixels_per_frame().value())
-          : std::numeric_limits<int>::max();
-  sink_wants.target_pixel_count =
-      restrictions.target_pixels_per_frame().has_value()
-          ? absl::optional<int>(rtc::dchecked_cast<int, size_t>(
-                restrictions.target_pixels_per_frame().value()))
-          : absl::nullopt;
-  sink_wants.max_framerate_fps =
-      restrictions.max_frame_rate().has_value()
-          ? static_cast<int>(restrictions.max_frame_rate().value())
-          : std::numeric_limits<int>::max();
-  return sink_wants;
-}
+// rtc::VideoSinkWants VideoSourceRestrictionsToVideoSinkWants(
+//     const rtc::VideoSinkWants& baseline_sink_wants,
+//     VideoSourceRestrictions restrictions) {
+//   rtc::VideoSinkWants sink_wants = baseline_sink_wants;
+//   sink_wants.max_pixel_count =
+//       restrictions.max_pixels_per_frame().has_value()
+//           ? static_cast<int>(restrictions.max_pixels_per_frame().value())
+//           : std::numeric_limits<int>::max();
+//   sink_wants.target_pixel_count =
+//       restrictions.target_pixels_per_frame().has_value()
+//           ? absl::optional<int>(rtc::dchecked_cast<int, size_t>(
+//                 restrictions.target_pixels_per_frame().value()))
+//           : absl::nullopt;
+//   sink_wants.max_framerate_fps =
+//       restrictions.max_frame_rate().has_value()
+//           ? static_cast<int>(restrictions.max_frame_rate().value())
+//           : std::numeric_limits<int>::max();
+//   return sink_wants;
+// }
 
 }  // namespace
 
@@ -90,25 +90,32 @@ rtc::VideoSinkWants VideoSourceRestrictionsToVideoSinkWants(
 // VideoSinkWants.
 class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
  public:
-  explicit VideoSourceProxy(rtc::VideoSinkInterface<VideoFrame>* sink)
+  explicit VideoSourceProxy(rtc::VideoSinkInterface<VideoFrame>* sink,
+                            VideoSourceController* video_source_controller)
       : sink_(sink),
+        video_source_controller_(video_source_controller),
         degradation_preference_(DegradationPreference::DISABLED),
         source_(nullptr),
         max_framerate_(std::numeric_limits<int>::max()),
         max_pixels_(std::numeric_limits<int>::max()),
-        resolution_alignment_(1) {}
+        resolution_alignment_(1) {
+    RTC_DCHECK(sink_);
+    RTC_DCHECK(video_source_controller_);
+  }
 
   VideoSourceRestrictions ToVideoSourceRestrictions() {
-    return VideoSinkWantsToVideoSourceRestrictions(GetActiveSinkWants());
+    return video_source_controller_->restrictions();
   }
 
   void ApplyVideoSourceRestrictions(VideoSourceRestrictions restrictions) {
     rtc::CritScope lock(&crit_);
-    rtc::VideoSinkWants wants = VideoSourceRestrictionsToVideoSinkWants(
-        GetActiveSinkWantsInternal(), std::move(restrictions));
-    if (!source_)
-      return;
-    source_->AddOrUpdateSink(sink_, wants);
+    // rtc::VideoSinkWants wants = VideoSourceRestrictionsToVideoSinkWants(
+    //     GetActiveSinkWantsInternal(), std::move(restrictions));
+    // if (!source_)
+    //   return;
+    // source_->AddOrUpdateSink(sink_, wants);
+    video_source_controller_->SetRestrictions(std::move(restrictions));
+    video_source_controller_->PushSourceSinkSettings(degradation_preference_);
   }
 
   // Informs the sink of the new source settings.
@@ -117,25 +124,26 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
                  const DegradationPreference& degradation_preference) {
     // Called on libjingle's worker thread.
     RTC_DCHECK_RUN_ON(&main_checker_);
-    rtc::VideoSourceInterface<VideoFrame>* old_source = nullptr;
-    rtc::VideoSinkWants wants;
+    // rtc::VideoSourceInterface<VideoFrame>* old_source = nullptr;
+    // rtc::VideoSinkWants wants;
     {
       rtc::CritScope lock(&crit_);
       degradation_preference_ = degradation_preference;
-      old_source = source_;
+      video_source_controller_->SetSource(source, degradation_preference_);
+      // old_source = source_;
       source_ = source;
-      wants = GetActiveSinkWantsInternal();
+      // wants = GetActiveSinkWantsInternal();
     }
 
-    if (old_source != source && old_source != nullptr) {
-      old_source->RemoveSink(sink_);
-    }
+    // if (old_source != source && old_source != nullptr) {
+    //   old_source->RemoveSink(sink_);
+    // }
 
-    if (!source) {
-      return;
-    }
+    // if (!source) {
+    //   return;
+    // }
 
-    source->AddOrUpdateSink(sink_, wants);
+    // source->AddOrUpdateSink(sink_, wants);
   }
 
   // Informs the sink of the new source settings.
@@ -153,9 +161,12 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
                      << " and resolution alignment: " << resolution_alignment;
     max_framerate_ = max_framerate;
     resolution_alignment_ = resolution_alignment;
-    if (source_) {
-      source_->AddOrUpdateSink(sink_, GetActiveSinkWantsInternal());
-    }
+    video_source_controller_->SetFrameRateUpperLimit(max_framerate_);
+    video_source_controller_->SetResolutionAlignment(resolution_alignment_);
+    video_source_controller_->PushSourceSinkSettings(degradation_preference_);
+    // if (source_) {
+    //   source_->AddOrUpdateSink(sink_, GetActiveSinkWantsInternal());
+    // }
   }
 
   // Informs the sink of the new source settings.
@@ -163,9 +174,11 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
   void SetWantsRotationApplied(bool rotation_applied) {
     rtc::CritScope lock(&crit_);
     sink_wants_.rotation_applied = rotation_applied;
-    if (source_) {
-      source_->AddOrUpdateSink(sink_, GetActiveSinkWantsInternal());
-    }
+    // if (source_) {
+    //   source_->AddOrUpdateSink(sink_, GetActiveSinkWantsInternal());
+    // }
+    video_source_controller_->SetRotationApplied(rotation_applied);
+    video_source_controller_->PushSourceSinkSettings(degradation_preference_);
   }
 
   rtc::VideoSinkWants GetActiveSinkWants() {
@@ -180,8 +193,13 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
     sink_wants_.max_pixel_count = std::numeric_limits<int>::max();
     sink_wants_.target_pixel_count.reset();
     sink_wants_.max_framerate_fps = std::numeric_limits<int>::max();
-    if (source_)
-      source_->AddOrUpdateSink(sink_, GetActiveSinkWantsInternal());
+    // if (source_)
+    //   source_->AddOrUpdateSink(sink_, GetActiveSinkWantsInternal());
+    video_source_controller_->SetRestrictions(
+        VideoSourceRestrictions(absl::nullopt,
+                                absl::nullopt,
+                                absl::nullopt));
+    video_source_controller_->PushSourceSinkSettings(degradation_preference_);
   }
 
   // Updates the sink settings, but DOES NOT inform the sink of the new
@@ -213,6 +231,10 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
                      << pixels_wanted;
     sink_wants_.max_pixel_count = pixels_wanted;
     sink_wants_.target_pixel_count = absl::nullopt;
+    video_source_controller_->SetRestrictions(
+        VideoSourceRestrictions(sink_wants_.max_pixel_count != std::numeric_limits<int>::max() ? absl::optional<size_t>(sink_wants_.max_pixel_count) : absl::nullopt,
+                                sink_wants_.target_pixel_count,
+                                video_source_controller_->restrictions().max_frame_rate()));
     return true;
   }
 
@@ -267,6 +289,10 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
     }
     RTC_LOG(LS_INFO) << "Scaling up resolution, max pixels: "
                      << max_pixels_wanted;
+    video_source_controller_->SetRestrictions(
+        VideoSourceRestrictions(sink_wants_.max_pixel_count != std::numeric_limits<int>::max() ? absl::optional<size_t>(sink_wants_.max_pixel_count) : absl::nullopt,
+                                sink_wants_.target_pixel_count,
+                                video_source_controller_->restrictions().max_frame_rate()));
     return true;
   }
 
@@ -301,6 +327,10 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
 
     RTC_LOG(LS_INFO) << "Scaling down framerate: " << fps_wanted;
     sink_wants_.max_framerate_fps = fps_wanted;
+    video_source_controller_->SetRestrictions(
+        VideoSourceRestrictions(video_source_controller_->restrictions().max_pixels_per_frame(),
+                                video_source_controller_->restrictions().target_pixels_per_frame(),
+                                sink_wants_.max_framerate_fps != std::numeric_limits<int>::max() ? absl::optional<double>(sink_wants_.max_framerate_fps) : absl::nullopt));
     return true;
   }
 
@@ -321,6 +351,10 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
 
     RTC_LOG(LS_INFO) << "Scaling up framerate: " << fps_wanted;
     sink_wants_.max_framerate_fps = fps_wanted;
+    video_source_controller_->SetRestrictions(
+        VideoSourceRestrictions(video_source_controller_->restrictions().max_pixels_per_frame(),
+                                video_source_controller_->restrictions().target_pixels_per_frame(),
+                                sink_wants_.max_framerate_fps != std::numeric_limits<int>::max() ? absl::optional<double>(sink_wants_.max_framerate_fps) : absl::nullopt));
     return true;
   }
 
@@ -337,7 +371,9 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
     }
     max_pixels_ = max_pixels;
     RTC_LOG(LS_INFO) << "Applying max pixel restriction: " << max_pixels;
-    source_->AddOrUpdateSink(sink_, GetActiveSinkWantsInternal());
+    // source_->AddOrUpdateSink(sink_, GetActiveSinkWantsInternal());
+    video_source_controller_->SetPixelsPerFrameUpperLimit(max_pixels_);
+    video_source_controller_->PushSourceSinkSettings(degradation_preference_);
     return true;
   }
 
@@ -374,6 +410,7 @@ class OveruseFrameDetectorResourceAdaptationModule::VideoSourceProxy {
   rtc::CriticalSection crit_;
   SequenceChecker main_checker_;
   rtc::VideoSinkInterface<VideoFrame>* const sink_;
+  VideoSourceController* const video_source_controller_;
   rtc::VideoSinkWants sink_wants_ RTC_GUARDED_BY(&crit_);
   DegradationPreference degradation_preference_ RTC_GUARDED_BY(&crit_);
   rtc::VideoSourceInterface<VideoFrame>* source_ RTC_GUARDED_BY(&crit_);
@@ -513,7 +550,8 @@ OveruseFrameDetectorResourceAdaptationModule::
         rtc::VideoSinkInterface<VideoFrame>* sink,
         std::unique_ptr<OveruseFrameDetector> overuse_detector,
         VideoStreamEncoderObserver* encoder_stats_observer,
-        ResourceAdaptationModuleListener* adaptation_listener)
+        ResourceAdaptationModuleListener* adaptation_listener,
+        VideoSourceController* video_source_controller)
     : encoder_queue_(nullptr),
       adaptation_listener_(adaptation_listener),
       video_stream_encoder_(video_stream_encoder),
@@ -522,7 +560,8 @@ OveruseFrameDetectorResourceAdaptationModule::
       balanced_settings_(),
       last_adaptation_request_(absl::nullopt),
       last_frame_pixel_count_(absl::nullopt),
-      source_proxy_(std::make_unique<VideoSourceProxy>(sink)),
+      source_proxy_(
+          std::make_unique<VideoSourceProxy>(sink, video_source_controller)),
       overuse_detector_(std::move(overuse_detector)),
       codec_max_framerate_(-1),
       encoder_start_bitrate_bps_(0),

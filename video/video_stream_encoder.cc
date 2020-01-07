@@ -318,13 +318,17 @@ VideoStreamEncoder::VideoStreamEncoder(
       automatic_animation_detection_experiment_(
           ParseAutomatincAnimationDetectionFieldTrial()),
       encoder_switch_requested_(false),
+      video_source_controller_(std::make_unique<VideoSourceController>(
+          /*sink=*/this,
+          /*source=*/nullptr)),
       resource_adaptation_module_(
           std::make_unique<OveruseFrameDetectorResourceAdaptationModule>(
               /*video_stream_encoder=*/this,
               /*sink=*/this,
               std::move(overuse_detector),
               encoder_stats_observer,
-              /*adaptation_listener=*/this)),
+              /*adaptation_listener=*/this,
+              video_source_controller_.get())),
       encoder_queue_(task_queue_factory->CreateTaskQueue(
           "EncoderQueue",
           TaskQueueFactory::Priority::NORMAL)) {
