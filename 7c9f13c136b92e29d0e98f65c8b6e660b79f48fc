@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed282b65_20f04412",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-08T12:55:06Z",
+      "side": 1,
+      "message": "Should I move this class to a separate file?",
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4032e5d_70080637",
+        "filename": "video/video_source_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-08T12:55:06Z",
+      "side": 1,
+      "message": "This degradation preference logic touching up the \"sink wants\" is the same as in VideoSourceProxy::GetActiveSinkWantsInternal() prior to this CL.\n\nIn the next CL I want to move this back to overuse_frame_detector_resource_adaptation_module.cc and make the module output the final VideoSourceRestrictions, no need to later tweak it. How to handle degradation preference should be part of the resource adaptation logic.",
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94b5dc26_8c8ef1c8",
+        "filename": "video/video_source_controller.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-08T12:55:06Z",
+      "side": 1,
+      "message": "I should add some tests to this new class (video_source_controller_unittest.cc), but wanted to unblock reviewing before I do that.",
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ca24000_44106df3",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-08T12:55:06Z",
+      "side": 1,
+      "message": "This if-statement means to mirror this part of VideoSourceProxy::SetMaxFramerateAndAlignment prior to this CL which aborted if there were no changes:\n\n    if (max_framerate \u003d\u003d max_framerate_ \u0026\u0026\n        resolution_alignment \u003d\u003d resolution_alignment_) {\n      return;\n    }\n\nIt prevents unnecessary AddOrUpdateSink() calls, necessary to pass all tests.",
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
