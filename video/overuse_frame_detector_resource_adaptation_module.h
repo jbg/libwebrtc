@@ -28,6 +28,7 @@
 #include "call/adaptation/resource_adaptation_module_interface.h"
 #include "rtc_base/experiments/balanced_degradation_settings.h"
 #include "video/overuse_frame_detector.h"
+#include "video/video_source_controller.h"
 
 namespace webrtc {
 
@@ -54,7 +55,8 @@ class OveruseFrameDetectorResourceAdaptationModule
       rtc::VideoSinkInterface<VideoFrame>* sink,
       std::unique_ptr<OveruseFrameDetector> overuse_detector,
       VideoStreamEncoderObserver* encoder_stats_observer,
-      ResourceAdaptationModuleListener* adaptation_listener);
+      ResourceAdaptationModuleListener* adaptation_listener,
+      VideoSourceController* video_source_controller);
   ~OveruseFrameDetectorResourceAdaptationModule() override;
 
   void Initialize(rtc::TaskQueue* encoder_queue);
@@ -74,10 +76,6 @@ class OveruseFrameDetectorResourceAdaptationModule
   void StartCheckForOveruse(
       ResourceAdaptationModuleListener* adaptation_listener) override;
   void StopCheckForOveruse() override;
-
-  // TODO(hbos): When VideoSourceProxy is refactored and reconfiguration logic
-  // is entirely moved to video_stream_encoder.cc, remove this method.
-  void ApplyVideoSourceRestrictions(VideoSourceRestrictions restrictions);
 
   // Input to the OveruseFrameDetector, which are required for this module to
   // function. These map to OveruseFrameDetector methods.
@@ -105,16 +103,13 @@ class OveruseFrameDetectorResourceAdaptationModule
   // method is called incorrectly.
   void SetIsQualityScalerEnabled(bool is_quality_scaler_enabled);
 
-  void SetSource(rtc::VideoSourceInterface<VideoFrame>* source,
-                 const DegradationPreference& degradation_preference);
-  void SetSourceWantsRotationApplied(bool rotation_applied);
-  void SetSourceMaxFramerateAndAlignment(int max_framerate,
-                                         int resolution_alignment);
-  void SetSourceMaxPixels(int max_pixels);
+  void SetSourceDegradationPreference(
+      bool has_source,
+      DegradationPreference degradation_preference);
 
   // TODO(hbos): Can we get rid of this? Seems we should know whether the frame
   // rate has updated.
-  void RefreshTargetFramerate();
+  void RefreshTargetFramerate(VideoSourceController* video_source_controller);
   void ResetAdaptationCounters();
 
   class AdaptCounter final {

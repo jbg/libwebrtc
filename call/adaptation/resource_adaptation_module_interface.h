@@ -22,6 +22,8 @@ namespace webrtc {
 // source.
 class VideoSourceRestrictions {
  public:
+  // Constructs without any restrictions.
+  VideoSourceRestrictions();
   // All values must be positive or nullopt.
   // TODO(hbos): Support expressing "disable this stream"?
   VideoSourceRestrictions(absl::optional<size_t> max_pixels_per_frame,
