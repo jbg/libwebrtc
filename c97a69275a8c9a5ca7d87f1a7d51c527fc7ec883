@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad76960c_68b331ad",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-08T10:51:44Z",
+      "side": 1,
+      "message": "Does 0 make sense for any of these? If not, perhaps dropping the optional to avoid having 2 ways to express \"off\"",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "c97a69275a8c9a5ca7d87f1a7d51c527fc7ec883",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
