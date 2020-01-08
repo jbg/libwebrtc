@@ -318,13 +318,16 @@ VideoStreamEncoder::VideoStreamEncoder(
       automatic_animation_detection_experiment_(
           ParseAutomatincAnimationDetectionFieldTrial()),
       encoder_switch_requested_(false),
+      video_source_controller_(std::make_unique<VideoSourceController>(
+          /*sink=*/this,
+          /*source=*/nullptr)),
       resource_adaptation_module_(
           std::make_unique<OveruseFrameDetectorResourceAdaptationModule>(
               /*video_stream_encoder=*/this,
-              /*sink=*/this,
               std::move(overuse_detector),
               encoder_stats_observer,
-              /*adaptation_listener=*/this)),
+              /*adaptation_listener=*/this,
+              video_source_controller_.get())),
       encoder_queue_(task_queue_factory->CreateTaskQueue(
           "EncoderQueue",
           TaskQueueFactory::Priority::NORMAL)) {
@@ -344,7 +347,7 @@ VideoStreamEncoder::~VideoStreamEncoder() {
 
 void VideoStreamEncoder::Stop() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  resource_adaptation_module_->SetSource(nullptr, DegradationPreference());
+  video_source_controller_->SetSource(nullptr, DegradationPreference());
   encoder_queue_.PostTask([this] {
     RTC_DCHECK_RUN_ON(&encoder_queue_);
     resource_adaptation_module_->StopCheckForOveruse();
@@ -385,7 +388,9 @@ void VideoStreamEncoder::SetSource(
     rtc::VideoSourceInterface<VideoFrame>* source,
     const DegradationPreference& degradation_preference) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
-  resource_adaptation_module_->SetSource(source, degradation_preference);
+  video_source_controller_->SetSource(source, degradation_preference);
+  resource_adaptation_module_->SetSourceDegradationPreference(
+      source, degradation_preference);
   encoder_queue_.PostTask([this, degradation_preference] {
     RTC_DCHECK_RUN_ON(&encoder_queue_);
     if (encoder_)
@@ -395,13 +400,15 @@ void VideoStreamEncoder::SetSource(
         max_framerate_ != -1) {
       // If frame rate scaling is no longer allowed, remove any potential
       // allowance for longer frame intervals.
-      resource_adaptation_module_->RefreshTargetFramerate();
+      resource_adaptation_module_->RefreshTargetFramerate(
+          video_source_controller_.get());
     }
   });
 }
 
 void VideoStreamEncoder::SetSink(EncoderSink* sink, bool rotation_applied) {
-  resource_adaptation_module_->SetSourceWantsRotationApplied(rotation_applied);
+  video_source_controller_->SetRotationApplied(rotation_applied);
+  video_source_controller_->PushSourceSinkSettings();
   encoder_queue_.PostTask([this, sink] {
     RTC_DCHECK_RUN_ON(&encoder_queue_);
     sink_ = sink;
@@ -602,8 +609,13 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   for (const auto& stream : streams) {
     max_framerate = std::max(stream.max_framerate, max_framerate);
   }
-  resource_adaptation_module_->SetSourceMaxFramerateAndAlignment(
-      max_framerate, encoder_->GetEncoderInfo().requested_resolution_alignment);
+  int alignment = encoder_->GetEncoderInfo().requested_resolution_alignment;
+  if (max_framerate != video_source_controller_->frame_rate_upper_limit() ||
+      alignment != video_source_controller_->resolution_alignment()) {
+    video_source_controller_->SetFrameRateUpperLimit(max_framerate);
+    video_source_controller_->SetResolutionAlignment(alignment);
+    video_source_controller_->PushSourceSinkSettings();
+  }
 
   if (codec.maxBitrate == 0) {
     // max is one bit per pixel
@@ -740,7 +752,8 @@ void VideoStreamEncoder::ReconfigureEncoder() {
       std::move(streams), encoder_config_.content_type,
       encoder_config_.min_transmit_bitrate_bps);
 
-  resource_adaptation_module_->RefreshTargetFramerate();
+  resource_adaptation_module_->RefreshTargetFramerate(
+      video_source_controller_.get());
 
   ConfigureQualityScaler(info);
 }
@@ -1731,10 +1744,8 @@ void VideoStreamEncoder::TriggerAdaptUp(
 void VideoStreamEncoder::OnVideoSourceRestrictionsUpdated(
     VideoSourceRestrictions restrictions) {
   RTC_DCHECK_RUN_ON(&encoder_queue_);
-  // TODO(hbos): Move logic for reconfiguring the video source from the resource
-  // adaptation module to here.
-  resource_adaptation_module_->ApplyVideoSourceRestrictions(
-      std::move(restrictions));
+  video_source_controller_->SetRestrictions(std::move(restrictions));
+  video_source_controller_->PushSourceSinkSettings();
 }
 
 void VideoStreamEncoder::RunPostEncode(EncodedImage encoded_image,
@@ -1995,9 +2006,10 @@ void VideoStreamEncoder::CheckForAnimatedContent(
       RTC_LOG(LS_INFO) << "Removing resolution cap due to no consistent "
                           "animation detection.";
     }
-    resource_adaptation_module_->SetSourceMaxPixels(
-        should_cap_resolution ? kMaxAnimationPixels
-                              : std::numeric_limits<int>::max());
+    video_source_controller_->SetPixelsPerFrameUpperLimit(
+        should_cap_resolution ? absl::optional<size_t>(kMaxAnimationPixels)
+                              : absl::nullopt);
+    video_source_controller_->PushSourceSinkSettings();
   }
 }
 

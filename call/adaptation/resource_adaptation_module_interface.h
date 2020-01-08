@@ -22,6 +22,8 @@ namespace webrtc {
 // source.
 class VideoSourceRestrictions {
  public:
+  // Constructs without any restrictions.
+  VideoSourceRestrictions();
   // All values must be positive or nullopt.
   // TODO(hbos): Support expressing "disable this stream"?
   VideoSourceRestrictions(absl::optional<size_t> max_pixels_per_frame,
@@ -31,6 +33,11 @@ class VideoSourceRestrictions {
   const absl::optional<size_t>& max_pixels_per_frame() const;
   const absl::optional<size_t>& target_pixels_per_frame() const;
   const absl::optional<double>& max_frame_rate() const;
+
+  void set_max_pixels_per_frame(absl::optional<size_t> max_pixels_per_frame);
+  void set_target_pixels_per_frame(
+      absl::optional<size_t> target_pixels_per_frame);
+  void set_max_frame_rate(absl::optional<double> max_frame_rate);
 
  private:
   // These map to rtc::VideoSinkWants's |max_pixel_count| and
