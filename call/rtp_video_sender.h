@@ -106,7 +106,6 @@ class RtpVideoSender : public RtpVideoSenderInterface,
   void SetActiveModules(const std::vector<bool> active_modules) override;
   bool IsActive() override;
 
-  void OnNetworkAvailability(bool network_available) override;
   std::map<uint32_t, RtpState> GetRtpStates() const override;
   std::map<uint32_t, RtpPayloadState> GetRtpPayloadStates() const override;
 

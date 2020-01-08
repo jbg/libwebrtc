@@ -879,11 +879,6 @@ void RtpVideoStreamReceiver::FrameDecoded(int64_t picture_id) {
   }
 }
 
-void RtpVideoStreamReceiver::SignalNetworkState(NetworkState state) {
-  rtp_rtcp_->SetRTCPStatus(state == kNetworkUp ? config_.rtp.rtcp_mode
-                                               : RtcpMode::kOff);
-}
-
 void RtpVideoStreamReceiver::StartReceive() {
   RTC_DCHECK_RUN_ON(&worker_task_checker_);
   receiving_ = true;

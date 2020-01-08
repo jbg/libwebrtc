@@ -327,10 +327,6 @@ void RtpTransportControllerSend::OnNetworkAvailability(bool network_available) {
       MaybeCreateControllers();
     }
   });
-
-  for (auto& rtp_sender : video_rtp_senders_) {
-    rtp_sender->OnNetworkAvailability(network_available);
-  }
 }
 RtcpBandwidthObserver* RtpTransportControllerSend::GetBandwidthObserver() {
   return this;
