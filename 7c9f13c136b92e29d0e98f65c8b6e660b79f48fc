@@ -19,6 +19,75 @@
     },
     {
       "key": {
+        "uuid": "e6c5e141_6d858499",
+        "filename": "video/overuse_frame_detector_resource_adaptation_module.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-08T13:24:58Z",
+      "side": 1,
+      "message": "Not obvious to me what has_source means. Perhaps clarify or rename?",
+      "range": {
+        "startLine": 105,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 22
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf0669f2_344fd4ad",
+        "filename": "video/video_source_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-08T13:24:58Z",
+      "side": 1,
+      "message": "It\u0027s 2020",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20abfc8b_b4526dbe",
+        "filename": "video/video_source_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-08T13:24:58Z",
+      "side": 1,
+      "message": "Copied code from above. Worth extracting somewhere?",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 22
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f4032e5d_70080637",
         "filename": "video/video_source_controller.cc",
         "patchSetId": 16
@@ -30,6 +99,52 @@
       "writtenOn": "2020-01-08T12:55:06Z",
       "side": 1,
       "message": "This degradation preference logic touching up the \"sink wants\" is the same as in VideoSourceProxy::GetActiveSinkWantsInternal() prior to this CL.\n\nIn the next CL I want to move this back to overuse_frame_detector_resource_adaptation_module.cc and make the module output the final VideoSourceRestrictions, no need to later tweak it. How to handle degradation preference should be part of the resource adaptation logic.",
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81bda1e7_d723de03",
+        "filename": "video/video_source_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-08T13:24:58Z",
+      "side": 1,
+      "message": "Why convert, and not just use .value() here?",
+      "range": {
+        "startLine": 175,
+        "startChar": 17,
+        "endLine": 175,
+        "endChar": 35
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18a35a4a_9354545e",
+        "filename": "video/video_source_controller.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-08T13:24:58Z",
+      "side": 1,
+      "message": "Should this perhaps be called SinkSourceController? Or VideoSinkSourceController?",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 27
+      },
       "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
