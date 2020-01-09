@@ -70,6 +70,53 @@
       "revId": "c97a69275a8c9a5ca7d87f1a7d51c527fc7ec883",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1acbb3be_16774113",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-09T13:16:04Z",
+      "side": 1,
+      "message": "👊",
+      "parentUuid": "3fec95a9_47acc1a4",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "c97a69275a8c9a5ca7d87f1a7d51c527fc7ec883",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ee2dd4d_a68b6196",
+        "filename": "video/overuse_frame_detector_resource_adaptation_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-09T13:16:04Z",
+      "side": 1,
+      "message": "Why the DCHECK here as well as the constructor? Looks redundant to me",
+      "range": {
+        "startLine": 807,
+        "startChar": 2,
+        "endLine": 807,
+        "endChar": 35
+      },
+      "revId": "c97a69275a8c9a5ca7d87f1a7d51c527fc7ec883",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
