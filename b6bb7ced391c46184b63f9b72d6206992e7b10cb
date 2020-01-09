@@ -16,6 +16,24 @@
       "revId": "b6bb7ced391c46184b63f9b72d6206992e7b10cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18c8626f_2d2d5edd",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2020-01-09T18:34:25Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s a great point -- thanks for pointing it out. Changed to an absl::InlinedVector to also avoid a memory allocation for the expected case of small numbers of pending tasks.",
+      "parentUuid": "12d8b6a5_a7fb2018",
+      "revId": "b6bb7ced391c46184b63f9b72d6206992e7b10cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
