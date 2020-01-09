@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12d8b6a5_a7fb2018",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 10610
+      },
+      "writtenOn": "2020-01-09T06:31:44Z",
+      "side": 1,
+      "message": "Out of curiosity: Now that you process all the tasks in a batch why do we need a std::queue at all rather than a simple std::vector? You essentially never utilize the `pop_front()` anymore",
+      "revId": "b6bb7ced391c46184b63f9b72d6206992e7b10cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
