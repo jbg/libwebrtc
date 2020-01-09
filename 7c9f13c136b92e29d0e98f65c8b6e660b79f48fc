@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d9ac7c51_73a405a3",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-09T14:09:54Z",
+      "side": 1,
+      "message": "I ended up moving it in this CL anyway. Done.",
+      "parentUuid": "98310e1e_e260f0ba",
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6c5e141_6d858499",
         "filename": "video/overuse_frame_detector_resource_adaptation_module.h",
         "patchSetId": 16
