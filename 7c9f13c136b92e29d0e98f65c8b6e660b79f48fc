@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "98310e1e_e260f0ba",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-09T11:16:17Z",
+      "side": 1,
+      "message": "I can do this in a separate CL",
+      "parentUuid": "ed282b65_20f04412",
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6c5e141_6d858499",
         "filename": "video/overuse_frame_detector_resource_adaptation_module.h",
         "patchSetId": 16
@@ -39,6 +57,30 @@
       "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "854c04f0_5a252b1f",
+        "filename": "video/overuse_frame_detector_resource_adaptation_module.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-09T11:16:17Z",
+      "side": 1,
+      "message": "I think the source is whether or not you have an input stream (e.g. camera feed).\n\nOkay so this may sting your eyes, but for the sake of explaining what it is actually doing, how about SetHasInputVideoAndDegradationPreference()?\n\nI want to clean up degradation preference in a follow-up CL, so maybe I can get rid of the \"And\", but for now this takes a lock and sets two variables and I don\u0027t want to introduce changes in this refactoring. (E.g. doing this as two separate operations may introduce a race)",
+      "parentUuid": "e6c5e141_6d858499",
+      "range": {
+        "startLine": 105,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 22
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "23df337f_aa974368",
+        "filename": "video/video_source_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-09T11:16:17Z",
+      "side": 1,
+      "message": "Soooooooooooooooooooooooooooooooooooooooooooo last year. Done.",
+      "parentUuid": "bf0669f2_344fd4ad",
+      "range": {
+        "startLine": 2,
+        "startChar": 14,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "20abfc8b_b4526dbe",
         "filename": "video/video_source_controller.cc",
         "patchSetId": 16
@@ -85,6 +151,30 @@
       "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4946a07_a5d599c1",
+        "filename": "video/video_source_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-09T11:16:17Z",
+      "side": 1,
+      "message": "Done. Added rtc_base/numerics/optional_conversions.h",
+      "parentUuid": "20abfc8b_b4526dbe",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 22
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -128,6 +218,30 @@
     },
     {
       "key": {
+        "uuid": "b2b02e96_c0c0cc5a",
+        "filename": "video/video_source_controller.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-09T11:16:17Z",
+      "side": 1,
+      "message": "Due to std::min() I have to perform a cast regardless. But you know what, I can get rid of the \"has_value()\" above since if it doesn\u0027t have a value, the conversions returns std::numeric_limits\u003cint\u003e::max() and the std::min() will be a NO-OP anyway. I did this, not sure what is more readable.",
+      "parentUuid": "81bda1e7_d723de03",
+      "range": {
+        "startLine": 175,
+        "startChar": 17,
+        "endLine": 175,
+        "endChar": 35
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18a35a4a_9354545e",
         "filename": "video/video_source_controller.h",
         "patchSetId": 16
@@ -148,6 +262,30 @@
       "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15f1bdbf_ac95fc38",
+        "filename": "video/video_source_controller.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-09T11:16:17Z",
+      "side": 1,
+      "message": "Done. Let\u0027s do VideoSourceSinkController",
+      "parentUuid": "18a35a4a_9354545e",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 27
+      },
+      "revId": "7c9f13c136b92e29d0e98f65c8b6e660b79f48fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
