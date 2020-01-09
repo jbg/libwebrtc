@@ -387,6 +387,18 @@ rtc_source_set("safe_conversions") {
   ]
 }
 
+rtc_library("optional_conversions") {
+  sources = [
+    "numerics/optional_conversions.cc",
+    "numerics/optional_conversions.h",
+  ]
+  deps = [
+    ":checks",
+    ":safe_conversions",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
 rtc_library("timeutils") {
   visibility = [ "*" ]
   sources = [
