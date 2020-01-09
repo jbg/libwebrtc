@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "637aad41_d1bdae71",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-01-09T18:56:41Z",
+      "side": 1,
+      "message": "it is also possible to formulate same with early return:\n{\n  lock;\n  bool had_pending_tasks \u003d !pending_.empty();\n  push_back(task);\n  if (had_pending_tasks) return;\n}\n\nwrite(wakeup)\n\n[chose approach you like more]",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 42
+      },
+      "revId": "a44fb064a5afeb93ad4c00e6e88244fe0c892613",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3689b767_87268758",
+        "filename": "rtc_base/task_queue_libevent.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-01-09T18:56:41Z",
+      "side": 1,
+      "message": "may be RTC_DCHECK(!tasks.empty())",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 7
+      },
+      "revId": "a44fb064a5afeb93ad4c00e6e88244fe0c892613",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
