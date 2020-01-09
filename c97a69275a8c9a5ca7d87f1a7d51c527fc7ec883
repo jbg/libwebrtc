@@ -22,6 +22,30 @@
       "revId": "c97a69275a8c9a5ca7d87f1a7d51c527fc7ec883",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31af59b4_a887d0be",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-09T10:20:02Z",
+      "side": 1,
+      "message": "I would like to avoid magical values, the concept of \"no restriction\" is different than any numerical value. Previously std::numeric_limits\u003cint\u003e::max() represented \"no limit\", and sure, 0 could also mean no limit, but it makes it more implicit and makes it easier to mess things up. If you do .value() on something that has no value, you crash. I like crashing on mistakes.\n\nAs for what should happen if you request for less pixels than is possible, like 0, if that is invalid I prefer to DCHECK that it\u0027s positive than to have a magic value. But this raises the question: What about other nonsense values? What happens if max pixels per frame is 1? That probably doesn\u0027t make a lot of sense either.\n\nFor now, I don\u0027t want to introduce more restrictions than existed prior to this CL without first understanding what a source/sink does in rtc::VideoSinkWants asks for something unreasonable.",
+      "parentUuid": "ad76960c_68b331ad",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "c97a69275a8c9a5ca7d87f1a7d51c527fc7ec883",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
