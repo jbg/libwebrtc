@@ -186,6 +186,8 @@ rtc_library("video_stream_encoder_impl") {
     "overuse_frame_detector.h",
     "overuse_frame_detector_resource_adaptation_module.cc",
     "overuse_frame_detector_resource_adaptation_module.h",
+    "video_source_sink_controller.cc",
+    "video_source_sink_controller.h",
     "video_stream_encoder.cc",
     "video_stream_encoder.h",
   ]
@@ -214,6 +216,7 @@ rtc_library("video_stream_encoder_impl") {
     "../rtc_base:criticalsection",
     "../rtc_base:logging",
     "../rtc_base:macromagic",
+    "../rtc_base:optional_conversions",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:rtc_event",
     "../rtc_base:rtc_numerics",
