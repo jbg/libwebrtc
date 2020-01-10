@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06c8ebc2_a1a07a51",
+        "filename": "call/adaptation/video_source_restrictions.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-01-10T12:25:07Z",
+      "side": 1,
+      "message": "Should you add DCHECKS for all values?",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 32
+      },
+      "revId": "48da18710a477be401971feb0cc08cdf3a0bd65f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
