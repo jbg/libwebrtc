@@ -124,6 +124,12 @@ declare_args() {
   # NDK r16 or above.
   rtc_enable_android_aaudio = false
 
+  # Configure the DTMF code delay value in milliseconds. By default, this value
+  # complies with the WebRTC spec "," value of 2 seconds. This
+  # parameter allows consumers to modify the DTMF delay to comply
+  # with legacy clients.
+  rtc_dtmf_delay_ms = "2000"
+
   # Set to "func", "block", "edge" for coverage generation.
   # At unit test runtime set UBSAN_OPTIONS="coverage=1".
   # It is recommend to set include_examples=0.

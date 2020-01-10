@@ -147,7 +147,7 @@ class DtmfSenderTest : public ::testing::Test {
       int code = 0;
       webrtc::GetDtmfCode(tone, &code);
       if (tone == ',') {
-        extra_delay = 2000;  // 2 seconds
+        extra_delay = DTMF_DELAY_MS;  // 2 seconds
       } else {
         dtmfs->push_back(FakeDtmfProvider::DtmfInfo(
             code, duration, duration + inter_tone_gap + extra_delay));

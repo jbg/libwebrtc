@@ -33,8 +33,11 @@ namespace webrtc {
 //  +-------+--------+------+---------+
 // The "," is a special event defined by the WebRTC spec. It means to delay for
 // 2 seconds before processing the next tone. We use -1 as its code.
-static const int kDtmfCodeTwoSecondDelay = -1;
-static const int kDtmfTwoSecondInMs = 2000;
+static const int kDtmfCodeDelay = -1;
+// This value is consumed from a macro that by default is set to 2 seconds.
+// The macro is configurable at build time for consumers who need to comply
+// with legacy clients.
+static const int kDtmfDelayInMs = DTMF_DELAY_MS;
 static const char kDtmfValidTones[] = ",0123456789*#ABCDabcd";
 static const char kDtmfTonesTable[] = ",0123456789*#ABCD";
 // The duration cannot be more than 6000ms or less than 40ms. The gap between
@@ -180,10 +183,10 @@ void DtmfSender::DoInsertDtmf() {
   }
 
   int tone_gap = inter_tone_gap_;
-  if (code == kDtmfCodeTwoSecondDelay) {
+  if (code == kDtmfCodeDelay) {
     // Special case defined by WebRTC - The character',' indicates a delay of 2
     // seconds before processing the next character in the tones parameter.
-    tone_gap = kDtmfTwoSecondInMs;
+    tone_gap = kDtmfDelayInMs;
   } else {
     if (!provider_) {
       RTC_LOG(LS_ERROR) << "The DtmfProvider has been destroyed.";

@@ -158,7 +158,7 @@ rtc_library("media_protocol_names") {
 
 rtc_library("peerconnection") {
   visibility = [ "*" ]
-  cflags = []
+  cflags = [ "-DDTMF_DELAY_MS=$rtc_dtmf_delay_ms" ]
   sources = [
     "audio_rtp_receiver.cc",
     "audio_rtp_receiver.h",
@@ -510,6 +510,7 @@ if (rtc_include_tests) {
 
   rtc_test("peerconnection_unittests") {
     testonly = true
+    cflags = [ "-DDTMF_DELAY_MS=$rtc_dtmf_delay_ms" ]
     sources = [
       "data_channel_unittest.cc",
       "dtmf_sender_unittest.cc",
