@@ -22,6 +22,57 @@
       "revId": "48da18710a477be401971feb0cc08cdf3a0bd65f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ef610ad_61cd74f3",
+        "filename": "rtc_base/numerics/optional_conversions.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-10T15:19:02Z",
+      "side": 1,
+      "message": "Is this pulling its weight?\n\n  dchecked_cast\u003cint\u003e(x.value_or(std::numeric_limits\u003cint\u003e::max()))\n\ndoes the same thing, right?",
+      "revId": "48da18710a477be401971feb0cc08cdf3a0bd65f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02673f48_2395a9c2",
+        "filename": "rtc_base/numerics/optional_conversions.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-10T15:19:02Z",
+      "side": 1,
+      "message": "Better to have something like this?\n\n  template \u003ctypename T, typename F\u003e\n  auto Map(const absl::optional\u003cT\u003e\u0026 x, F\u0026\u0026 f) {\n    return x.has_value() ? absl::make_optional(f(*x)) : absl::nullopt;\n  }\n\nand then call it:\n\n  Map(x, [](size_t y){ return dchecked_cast\u003cint\u003e(y); })",
+      "revId": "48da18710a477be401971feb0cc08cdf3a0bd65f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d644478_1883fca7",
+        "filename": "rtc_base/numerics/optional_conversions.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-10T15:19:02Z",
+      "side": 1,
+      "message": "Same objection as the first one.",
+      "revId": "48da18710a477be401971feb0cc08cdf3a0bd65f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
