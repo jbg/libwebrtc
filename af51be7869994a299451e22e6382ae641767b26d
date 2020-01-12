@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3133e64f_8dda835e",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 9600
+      },
+      "writtenOn": "2020-01-12T06:34:42Z",
+      "side": 1,
+      "message": "I\u0027m still using other Xrandr functions without dlsym. Would removing this cause any new problems?",
+      "parentUuid": "8c80592e_3f3a82e5",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 6
+      },
+      "revId": "af51be7869994a299451e22e6382ae641767b26d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6932041_5885b5d4",
         "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
         "patchSetId": 3
