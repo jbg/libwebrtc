@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c3a90d82_817e45e0",
+        "filename": "video/video_source_sink_controller.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-13T10:27:55Z",
+      "side": 1,
+      "message": "Done - grabbing lock for entire method.",
+      "parentUuid": "de793600_ee8cabc7",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 32
+      },
+      "revId": "c3fd911f0b41a5a000c6465556f452a47fc21ed1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c216b49_ad368f1a",
         "filename": "video/video_source_sink_controller.cc",
         "patchSetId": 23
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "f4526e2e_90f3d723",
+        "filename": "video/video_source_sink_controller.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-13T10:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c216b49_ad368f1a",
+      "revId": "c3fd911f0b41a5a000c6465556f452a47fc21ed1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75979fb3_123f4b72",
         "filename": "video/video_source_sink_controller.h",
         "patchSetId": 23
@@ -53,6 +95,30 @@
       "writtenOn": "2020-01-13T09:35:18Z",
       "side": 1,
       "message": "Nit: Can you elaborate, why this method is a public?\n\nFrom the use-cases in video_stream_encoder.cc it makes sense to make this one private and call it from all the corresponding Set* methods.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 32
+      },
+      "revId": "c3fd911f0b41a5a000c6465556f452a47fc21ed1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb5d4a48_1e1792a2",
+        "filename": "video/video_source_sink_controller.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-13T10:27:55Z",
+      "side": 1,
+      "message": "This allows you to modify multiple properties in a single push to the sink (comment added).\n\nFor example, prior to this CL there was the method SetMaxFramerateAndAlignment(). After this CL, there is SetFrameRateUpperLimit() and SetResolutionAlignment(). In order to have the same effect as before and modify both things in a single \"push\", the push is a separate step. There are a couple of unittests that make assumptions about how many times sink wants are updated, whether or not these assumptions are valid.\n\nI\u0027m not sure if reconfiguring the sink unnecessarily multiple times is a real concern or a premature optimization because I don\u0027t know how heavy UpdateSourceSinkWants() is, but if we want to get rid of PushSourceSinkSettings() I suggest doing that in a separate CL.",
+      "parentUuid": "75979fb3_123f4b72",
       "range": {
         "startLine": 40,
         "startChar": 2,
