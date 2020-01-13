@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1df1100_3c35998a",
+        "filename": "pc/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-01-13T07:50:47Z",
+      "side": 1,
+      "message": "In general we avoid to configure WebRTC at compile time by defining macros with specific values (we do for other reasons, e.g. exclude things).\n\n+hta@ for a second opinion but it would be nice to override this in another way.",
+      "range": {
+        "startLine": 161,
+        "startChar": 2,
+        "endLine": 161,
+        "endChar": 51
+      },
+      "revId": "aa61b99f808122233d71975d1ddc8c0c2362ae5b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
