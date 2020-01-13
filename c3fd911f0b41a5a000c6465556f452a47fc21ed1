@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de793600_ee8cabc7",
+        "filename": "video/video_source_sink_controller.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-01-13T09:35:18Z",
+      "side": 1,
+      "message": "I think here the whole method must be protected by the critical section.\n\nWhat if two threads try to SetSource and PushSourceSinkSettings at the same time? One removes the sink, and the others updates the source. If PushSourceSinkSettings grabs the crit_ first, reads the source_, and SetSource then rewrites source_ and calls old_source-\u003eRemoveSink(), then \nPushSourceSinkSettings would re-add the sink back with new settings.\n\nSimilar code before this CL has whole similar method protected by crit_:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/video/overuse_frame_detector_resource_adaptation_module.cc?l\u003d87\u0026rcl\u003db42aeaa3fb21d78e59c47d2a9916acb380494496\n\nIt\u0027s fine to contain crit_ in a sub-scope in SetSource, because it rewrites the source_ and does unprotected things with it\u0027s local copy of a source. PushSourceSettings, on the other hand copies protected memeber and does write-like stuff with it outside of a critical section.",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 32
+      },
+      "revId": "c3fd911f0b41a5a000c6465556f452a47fc21ed1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c216b49_ad368f1a",
+        "filename": "video/video_source_sink_controller.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-01-13T09:35:18Z",
+      "side": 1,
+      "message": "// RTC_EXCLUSIVE_LOCKS_REQUIRED(\u0026crit_)",
+      "revId": "c3fd911f0b41a5a000c6465556f452a47fc21ed1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75979fb3_123f4b72",
+        "filename": "video/video_source_sink_controller.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-01-13T09:35:18Z",
+      "side": 1,
+      "message": "Nit: Can you elaborate, why this method is a public?\n\nFrom the use-cases in video_stream_encoder.cc it makes sense to make this one private and call it from all the corresponding Set* methods.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 32
+      },
+      "revId": "c3fd911f0b41a5a000c6465556f452a47fc21ed1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
