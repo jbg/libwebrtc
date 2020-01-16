@@ -47,7 +47,7 @@ class WebRtcAudioTrack {
 
   // By default, WebRTC creates audio tracks with a usage attribute
   // corresponding to voice communications, such as telephony or VoIP.
-  private static final int DEFAULT_USAGE = getDefaultUsageAttribute();
+  public static final int DEFAULT_USAGE = getDefaultUsageAttribute();
 
   private static int getDefaultUsageAttribute() {
     if (Build.VERSION.SDK_INT >= 21) {
@@ -79,6 +79,9 @@ class WebRtcAudioTrack {
   // Can be used to ensure that the speaker is fully muted.
   private volatile boolean speakerMute;
   private byte[] emptyBytes;
+  private int usageAttribute;
+  private int streamType;
+  private int contentType;
 
   private final @Nullable AudioTrackErrorCallback errorCallback;
   private final @Nullable AudioTrackStateCallback stateCallback;
@@ -162,18 +165,26 @@ class WebRtcAudioTrack {
 
   @CalledByNative
   WebRtcAudioTrack(Context context, AudioManager audioManager) {
-    this(context, audioManager, null /* errorCallback */, null /* stateCallback */);
+    this(context, audioManager, null /* errorCallback */, null /* stateCallback */, DEFAULT_USAGE);
   }
 
   WebRtcAudioTrack(Context context, AudioManager audioManager,
       @Nullable AudioTrackErrorCallback errorCallback,
       @Nullable AudioTrackStateCallback stateCallback) {
+    this(context, audioManager, errorCallback, stateCallback, DEFAULT_USAGE);
+  }
+
+  WebRtcAudioTrack(Context context, AudioManager audioManager,
+      @Nullable AudioTrackErrorCallback errorCallback,
+      @Nullable AudioTrackStateCallback stateCallback,
+      int usageAttribute) {
     threadChecker.detachThread();
     this.context = context;
     this.audioManager = audioManager;
     this.errorCallback = errorCallback;
     this.stateCallback = stateCallback;
     this.volumeLogger = new VolumeLogger(audioManager);
+    this.usageAttribute = validateUsageAttribute(usageAttribute);
     Logging.d(TAG, "ctor" + WebRtcAudioUtils.getThreadInfo());
   }
 
@@ -320,15 +331,15 @@ class WebRtcAudioTrack {
     return true;
   }
 
-  // Get max possible volume index for a phone call audio stream.
+  // Get max possible volume index for a audio stream.
   @CalledByNative
   private int getStreamMaxVolume() {
     threadChecker.checkIsOnValidThread();
     Logging.d(TAG, "getStreamMaxVolume");
-    return audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL);
+    return audioManager.getStreamMaxVolume(streamType);
   }
 
-  // Set current volume level for a phone call audio stream.
+  // Set current volume level for a audio stream.
   @CalledByNative
   private boolean setStreamVolume(int volume) {
     threadChecker.checkIsOnValidThread();
@@ -337,7 +348,7 @@ class WebRtcAudioTrack {
       Logging.e(TAG, "The device implements a fixed volume policy.");
       return false;
     }
-    audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, volume, 0);
+    audioManager.setStreamVolume(streamType, volume, 0);
     return true;
   }
 
@@ -352,7 +363,7 @@ class WebRtcAudioTrack {
   private int getStreamVolume() {
     threadChecker.checkIsOnValidThread();
     Logging.d(TAG, "getStreamVolume");
-    return audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
+    return audioManager.getStreamVolume(streamType);
   }
 
   @CalledByNative
@@ -383,21 +394,21 @@ class WebRtcAudioTrack {
   // It allows certain platforms or routing policies to use this information for more
   // refined volume or routing decisions.
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  private static AudioTrack createAudioTrackOnLollipopOrHigher(
+  private AudioTrack createAudioTrackOnLollipopOrHigher(
       int sampleRateInHz, int channelConfig, int bufferSizeInBytes) {
     Logging.d(TAG, "createAudioTrackOnLollipopOrHigher");
     // TODO(henrika): use setPerformanceMode(int) with PERFORMANCE_MODE_LOW_LATENCY to control
     // performance when Android O is supported. Add some logging in the mean time.
     final int nativeOutputSampleRate =
-        AudioTrack.getNativeOutputSampleRate(AudioManager.STREAM_VOICE_CALL);
+        AudioTrack.getNativeOutputSampleRate(streamType);
     Logging.d(TAG, "nativeOutputSampleRate: " + nativeOutputSampleRate);
     if (sampleRateInHz != nativeOutputSampleRate) {
       Logging.w(TAG, "Unable to use fast mode since requested sample rate is not native");
     }
     // Create an audio track where the audio usage is for VoIP and the content type is speech.
     return new AudioTrack(new AudioAttributes.Builder()
-                              .setUsage(DEFAULT_USAGE)
-                              .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                              .setUsage(usageAttribute)
+                              .setContentType(contentType)
                               .build(),
         new AudioFormat.Builder()
             .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
@@ -408,9 +419,9 @@ class WebRtcAudioTrack {
   }
 
   @SuppressWarnings("deprecation") // Deprecated in API level 25.
-  private static AudioTrack createAudioTrackOnLowerThanLollipop(
+  private AudioTrack createAudioTrackOnLowerThanLollipop(
       int sampleRateInHz, int channelConfig, int bufferSizeInBytes) {
-    return new AudioTrack(AudioManager.STREAM_VOICE_CALL, sampleRateInHz, channelConfig,
+    return new AudioTrack(streamType, sampleRateInHz, channelConfig,
         AudioFormat.ENCODING_PCM_16BIT, bufferSizeInBytes, AudioTrack.MODE_STREAM);
   }
 
@@ -515,6 +526,25 @@ class WebRtcAudioTrack {
       } else {
         Logging.e(TAG, "Invalid audio state");
       }
+    }
+  }
+
+  private int validateUsageAttribute(int usage) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      switch (usage) {
+        case AudioAttributes.USAGE_GAME:
+        case AudioAttributes.USAGE_MEDIA:
+          streamType = AudioManager.STREAM_MUSIC;
+          contentType = AudioAttributes.CONTENT_TYPE_MOVIE;
+          return usage;
+        default:
+          streamType = AudioManager.STREAM_VOICE_CALL;
+          contentType = AudioAttributes.CONTENT_TYPE_SPEECH;
+          return AudioAttributes.USAGE_VOICE_COMMUNICATION;
+      }
+    } else {
+      streamType = AudioManager.STREAM_VOICE_CALL;
+      return 0;
     }
   }
 }
