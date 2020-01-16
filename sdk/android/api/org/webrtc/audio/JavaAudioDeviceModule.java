@@ -33,6 +33,7 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
     private int outputSampleRate;
     private int audioSource = WebRtcAudioRecord.DEFAULT_AUDIO_SOURCE;
     private int audioFormat = WebRtcAudioRecord.DEFAULT_AUDIO_FORMAT;
+    private int outputUsageAttribute = WebRtcAudioTrack.DEFAULT_USAGE;
     private AudioTrackErrorCallback audioTrackErrorCallback;
     private AudioRecordErrorCallback audioRecordErrorCallback;
     private SamplesReadyCallback samplesReadyCallback;
@@ -184,6 +185,17 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
     }
 
     /**
+     * Set a usage attribute for audio output. The argument should be one of the values from
+     * android.media.AudioAttributes USAGE_VOICE_COMMUNICATION, USAGE_GAME or USAGE_MEDIA.
+     * The default is AudioAttributes.USAGE_VOICE_COMMUNICATION.
+     * It decides output volume stream.
+     */
+    public Builder setOutputUsageAttribute(int usageAttribute) {
+      this.outputUsageAttribute = usageAttribute;
+      return this;
+    }
+
+    /**
      * Construct an AudioDeviceModule based on the supplied arguments. The caller takes ownership
      * and is responsible for calling release().
      */
@@ -209,7 +221,8 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
           audioFormat, audioRecordErrorCallback, audioRecordStateCallback, samplesReadyCallback,
           useHardwareAcousticEchoCanceler, useHardwareNoiseSuppressor);
       final WebRtcAudioTrack audioOutput = new WebRtcAudioTrack(
-          context, audioManager, audioTrackErrorCallback, audioTrackStateCallback);
+          context, audioManager, audioTrackErrorCallback, audioTrackStateCallback,
+          outputUsageAttribute);
       return new JavaAudioDeviceModule(context, audioManager, audioInput, audioOutput,
           inputSampleRate, outputSampleRate, useStereoInput, useStereoOutput);
     }

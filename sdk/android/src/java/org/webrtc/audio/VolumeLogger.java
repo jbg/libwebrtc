@@ -44,17 +44,20 @@ class VolumeLogger {
 
     timer = new Timer(THREAD_NAME);
     timer.schedule(new LogVolumeTask(audioManager.getStreamMaxVolume(AudioManager.STREAM_RING),
-                       audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL)),
+                       audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL),
+                       audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)),
         0, TIMER_PERIOD_IN_SECONDS * 1000);
   }
 
   private class LogVolumeTask extends TimerTask {
     private final int maxRingVolume;
     private final int maxVoiceCallVolume;
+    private final int maxMusicVolume;
 
-    LogVolumeTask(int maxRingVolume, int maxVoiceCallVolume) {
+    LogVolumeTask(int maxRingVolume, int maxVoiceCallVolume, int maxMusicVolume) {
       this.maxRingVolume = maxRingVolume;
       this.maxVoiceCallVolume = maxVoiceCallVolume;
+      this.maxMusicVolume = maxMusicVolume;
     }
 
     @Override
@@ -69,6 +72,11 @@ class VolumeLogger {
             "VOICE_CALL stream volume: "
                 + audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL)
                 + " (max=" + maxVoiceCallVolume + ")");
+      } else if (mode == AudioManager.MODE_NORMAL) {
+        Logging.d(TAG,
+            "NORMAL stream volume: "
+                + audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+                + " (max=" + maxMusicVolume + ")");
       }
     }
   }
