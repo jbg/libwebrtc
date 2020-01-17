@@ -44,6 +44,9 @@ class DtmfSenderObserverInterface {
 // See: https://www.w3.org/TR/webrtc/#peer-to-peer-dtmf
 class DtmfSenderInterface : public rtc::RefCountInterface {
  public:
+  // Provides the spec compliant default 2 second delay for the ',' character.
+  static const int kDtmfDefaultCommaGapMs = 2000;
+
   // Used to receive events from the DTMF sender. Only one observer can be
   // registered at a time. UnregisterObserver should be called before the
   // observer object is destroyed.
@@ -71,12 +74,19 @@ class DtmfSenderInterface : public rtc::RefCountInterface {
   // |inter_tone_gap| must be at least 50 ms but should be as short as
   // possible.
   //
+  // The |comma_tone_gap| parameter indicates the gap after the ','
+  // character. InsertDtmf specifies |comma_tone_gap| as an argument
+  // with a default value of 2 seconds as per the WebRTC spec. This parameter
+  // allows users to comply with legacy WebRTC clients. The |comma_tone_gap|
+  // must be at least 50 ms.
+  //
   // If InsertDtmf is called on the same object while an existing task for this
   // object to generate DTMF is still running, the previous task is canceled.
   // Returns true on success and false on failure.
   virtual bool InsertDtmf(const std::string& tones,
                           int duration,
-                          int inter_tone_gap) = 0;
+                          int inter_tone_gap,
+                          int comma_tone_gap = kDtmfDefaultCommaGapMs) = 0;
 
   // Returns the tones remaining to be played out.
   virtual std::string tones() const = 0;
@@ -90,6 +100,11 @@ class DtmfSenderInterface : public rtc::RefCountInterface {
   // This value will be the value last set via the InsertDtmf() method, or the
   // default value of 50 ms if InsertDtmf() was never called.
   virtual int inter_tone_gap() const = 0;
+
+  // Returns the current value of the "," character gap in ms.
+  // This value will be the value last set via the InsertDtmf() method, or the
+  // default value of 2000 ms if InsertDtmf() was never called.
+  virtual int comma_tone_gap() const = 0;
 
  protected:
   ~DtmfSenderInterface() override = default;
