@@ -18,6 +18,7 @@
 #include "p2p/base/transport_description.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/ssl_fingerprint.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace cricket {
 
@@ -44,6 +45,10 @@ std::unique_ptr<TransportDescription> TransportDescriptionFactory::CreateOffer(
   desc->AddOption(ICE_OPTION_TRICKLE);
   if (options.enable_ice_renomination) {
     desc->AddOption(ICE_OPTION_RENOMINATION);
+  }
+  if (webrtc::field_trial::FindFullName("WebRTC-GoogPing").find("Enabled") ==
+      0) {
+    desc->AddOption(ICE_OPTION_GOOG_PING);
   }
 
   // If we are trying to establish a secure transport, add a fingerprint.
@@ -87,6 +92,10 @@ std::unique_ptr<TransportDescription> TransportDescriptionFactory::CreateAnswer(
   desc->AddOption(ICE_OPTION_TRICKLE);
   if (options.enable_ice_renomination) {
     desc->AddOption(ICE_OPTION_RENOMINATION);
+  }
+  if (webrtc::field_trial::FindFullName("WebRTC-GoogPing").find("Enabled") ==
+      0) {
+    desc->AddOption(ICE_OPTION_GOOG_PING);
   }
 
   // Negotiate security params.

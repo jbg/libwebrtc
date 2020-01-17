@@ -229,7 +229,7 @@ std::unique_ptr<PortAllocatorSession> PortAllocator::TakePooledSession(
     return nullptr;
   }
 
-  IceParameters credentials(ice_ufrag, ice_pwd, false);
+  IceParameters credentials(ice_ufrag, ice_pwd, false, false);
   // If restrict_ice_credentials_change_ is TRUE, then call FindPooledSession
   // with ice credentials. Otherwise call it with nullptr which means
   // "find any" pooled session.
@@ -307,7 +307,7 @@ std::vector<IceParameters> PortAllocator::GetPooledIceCredentials() {
   std::vector<IceParameters> list;
   for (const auto& session : pooled_sessions_) {
     list.push_back(
-        IceParameters(session->ice_ufrag(), session->ice_pwd(), false));
+        IceParameters(session->ice_ufrag(), session->ice_pwd(), false, false));
   }
   return list;
 }

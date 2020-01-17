@@ -23,7 +23,7 @@ IceCredentialsIterator::~IceCredentialsIterator() = default;
 
 IceParameters IceCredentialsIterator::CreateRandomIceCredentials() {
   return IceParameters(rtc::CreateRandomString(ICE_UFRAG_LENGTH),
-                       rtc::CreateRandomString(ICE_PWD_LENGTH), false);
+                       rtc::CreateRandomString(ICE_PWD_LENGTH), false, false);
 }
 
 IceParameters IceCredentialsIterator::GetIceCredentials() {

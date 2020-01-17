@@ -208,6 +208,10 @@ void P2PTransportChannel::AddConnection(Connection* connection) {
 
   connection->set_ice_event_log(&ice_event_log_);
   connection->SetIceFieldTrials(&field_trials_);
+  if (remote_ice()) {
+    connection->SetUseGoogPing(remote_ice()->enable_goog_ping &&
+                               ice_parameters_.enable_goog_ping);
+  }
   LogCandidatePairConfig(connection,
                          webrtc::IceCandidatePairConfigType::kAdded);
 
@@ -417,6 +421,12 @@ void P2PTransportChannel::SetIceParameters(const IceParameters& ice_params) {
                    << " pwd: " << ice_params.pwd << " on transport "
                    << transport_name();
   ice_parameters_ = ice_params;
+  if (remote_ice()) {
+    for (Connection* conn : connections()) {
+      conn->SetUseGoogPing(remote_ice()->enable_goog_ping &&
+                           ice_parameters_.enable_goog_ping);
+    }
+  }
   // Note: Candidate gathering will restart when MaybeStartGathering is next
   // called.
 }
@@ -446,6 +456,8 @@ void P2PTransportChannel::SetRemoteIceParameters(
   for (Connection* conn : connections()) {
     conn->MaybeSetRemoteIceParametersAndGeneration(
         ice_params, static_cast<int>(remote_ice_parameters_.size() - 1));
+    conn->SetUseGoogPing(ice_params.enable_goog_ping &&
+                         ice_parameters_.enable_goog_ping);
   }
   // Updating the remote ICE candidate generation could change the sort order.
   RequestSortAndStateUpdate(
@@ -651,10 +663,6 @@ void P2PTransportChannel::SetIceConfig(const IceConfig& config) {
       // Delay initial selection of connections, that are receiving.
       "initial_select_dampening_ping_received",
       &field_trials_.initial_select_dampening_ping_received,
-      // Reply that we support goog ping.
-      "announce_goog_ping", &field_trials_.announce_goog_ping,
-      // Use goog ping if remote support it.
-      "enable_goog_ping", &field_trials_.enable_goog_ping,
       // How fast does a RTT sample decay.
       "rtt_estimate_halftime_ms", &field_trials_.rtt_estimate_halftime_ms)
       ->Parse(webrtc::field_trial::FindFullName("WebRTC-IceFieldTrials"));

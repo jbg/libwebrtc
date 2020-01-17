@@ -84,12 +84,12 @@ IceTransportInternal::~IceTransportInternal() = default;
 
 void IceTransportInternal::SetIceCredentials(const std::string& ice_ufrag,
                                              const std::string& ice_pwd) {
-  SetIceParameters(IceParameters(ice_ufrag, ice_pwd, false));
+  SetIceParameters(IceParameters(ice_ufrag, ice_pwd, false, false));
 }
 
 void IceTransportInternal::SetRemoteIceCredentials(const std::string& ice_ufrag,
                                                    const std::string& ice_pwd) {
-  SetRemoteIceParameters(IceParameters(ice_ufrag, ice_pwd, false));
+  SetRemoteIceParameters(IceParameters(ice_ufrag, ice_pwd, false, false));
 }
 
 }  // namespace cricket

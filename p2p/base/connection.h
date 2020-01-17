@@ -32,10 +32,6 @@
 
 namespace cricket {
 
-// Version number for GOOG_PING, this is added to have the option of
-// adding other flavors in the future.
-constexpr int kGoogPingVersion = 1;
-
 // Connection and Port has circular dependencies.
 // So we use forward declaration rather than include.
 class Port;
@@ -190,6 +186,8 @@ class Connection : public CandidatePairInterface,
   // when receiving a response to a nominating ping.
   bool nominated() const { return acked_nomination_ || remote_nomination_; }
   void set_remote_ice_mode(IceMode mode) { remote_ice_mode_ = mode; }
+
+  void SetUseGoogPing(bool enable) { use_goog_ping_ = enable; }
 
   int receiving_timeout() const;
   void set_receiving_timeout(absl::optional<int> receiving_timeout_ms) {
@@ -439,7 +437,7 @@ class Connection : public CandidatePairInterface,
   // if configured via field trial, the remote peer supports it (signaled
   // in STUN_BINDING) and if the last STUN BINDING is identical to the one
   // that is about to be sent.
-  absl::optional<bool> remote_support_goog_ping_;
+  bool use_goog_ping_ = false;
   std::unique_ptr<StunMessage> cached_stun_binding_;
 
   const IceFieldTrials* field_trials_;

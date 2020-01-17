@@ -62,15 +62,21 @@ struct IceParameters {
   std::string ufrag;
   std::string pwd;
   bool renomination = false;
+  bool enable_goog_ping = false;
   IceParameters() = default;
   IceParameters(const std::string& ice_ufrag,
                 const std::string& ice_pwd,
-                bool ice_renomination)
-      : ufrag(ice_ufrag), pwd(ice_pwd), renomination(ice_renomination) {}
+                bool ice_renomination,
+                bool enable_goog_ping)
+      : ufrag(ice_ufrag),
+        pwd(ice_pwd),
+        renomination(ice_renomination),
+        enable_goog_ping(enable_goog_ping) {}
 
   bool operator==(const IceParameters& other) const {
     return ufrag == other.ufrag && pwd == other.pwd &&
-           renomination == other.renomination;
+           renomination == other.renomination &&
+           enable_goog_ping == other.enable_goog_ping;
   }
   bool operator!=(const IceParameters& other) const {
     return !(*this == other);
@@ -84,6 +90,7 @@ extern const char CONNECTIONROLE_HOLDCONN_STR[];
 
 constexpr auto* ICE_OPTION_TRICKLE = "trickle";
 constexpr auto* ICE_OPTION_RENOMINATION = "renomination";
+constexpr auto* ICE_OPTION_GOOG_PING = "goog-ping";
 
 bool StringToConnectionRole(const std::string& role_str, ConnectionRole* role);
 bool ConnectionRoleToString(const ConnectionRole& role, std::string* role_str);
@@ -135,8 +142,8 @@ struct TransportDescription {
   bool secure() const { return identity_fingerprint != nullptr; }
 
   IceParameters GetIceParameters() {
-    return IceParameters(ice_ufrag, ice_pwd,
-                         HasOption(ICE_OPTION_RENOMINATION));
+    return IceParameters(ice_ufrag, ice_pwd, HasOption(ICE_OPTION_RENOMINATION),
+                         HasOption(ICE_OPTION_GOOG_PING));
   }
 
   static rtc::SSLFingerprint* CopyFingerprint(const rtc::SSLFingerprint* from) {

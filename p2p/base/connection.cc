@@ -143,10 +143,6 @@ constexpr int64_t kMinExtraPingDelayMs = 100;
 // Default field trials.
 const cricket::IceFieldTrials kDefaultFieldTrials;
 
-constexpr int kSupportGoogPingVersionIndex =
-    static_cast<int>(cricket::IceGoogMiscInfoBindingResponseAttributeIndex::
-                         SUPPORT_GOOG_PING_VERSION);
-
 }  // namespace
 
 namespace cricket {
@@ -646,13 +642,6 @@ void Connection::SendStunBindingResponse(const StunMessage* request) {
   response.AddAttribute(std::make_unique<StunXorAddressAttribute>(
       STUN_ATTR_XOR_MAPPED_ADDRESS, remote_candidate_.address()));
 
-  if (field_trials_->announce_goog_ping) {
-    auto list =
-        StunAttribute::CreateUInt16ListAttribute(STUN_ATTR_GOOG_MISC_INFO);
-    list->AddTypeAtIndex(kSupportGoogPingVersionIndex, kGoogPingVersion);
-    response.AddAttribute(std::move(list));
-  }
-
   response.AddMessageIntegrity(local_candidate().password());
   response.AddFingerprint();
 
@@ -1053,17 +1042,9 @@ void Connection::OnConnectionRequestResponse(ConnectionRequest* request,
       response->reduced_transaction_id());
 
   if (request->msg()->type() == STUN_BINDING_REQUEST) {
-    auto goog_misc = response->GetUInt16List(STUN_ATTR_GOOG_MISC_INFO);
-    if (goog_misc != nullptr &&
-        goog_misc->Size() >= kSupportGoogPingVersionIndex &&
-        goog_misc->GetType(kSupportGoogPingVersionIndex) >= kGoogPingVersion) {
-      // The remote peer has indicated that it supports GOOG_PING.
-      remote_support_goog_ping_ = true;
-    }
-
     MaybeUpdateLocalCandidate(request, response);
 
-    if (field_trials_->enable_goog_ping && remote_support_goog_ping_) {
+    if (use_goog_ping_) {
       cached_stun_binding_ = request->msg()->Clone();
     }
   }
@@ -1289,7 +1270,7 @@ bool Connection::TooManyOutstandingPings(
 }
 
 bool Connection::ShouldSendGoogPing(const StunMessage* message) {
-  if (remote_support_goog_ping_ && cached_stun_binding_ &&
+  if (use_goog_ping_ && cached_stun_binding_ &&
       cached_stun_binding_->EqualAttributes(message, [](int type) {
         // Ignore these attributes.
         return type != STUN_ATTR_FINGERPRINT &&
