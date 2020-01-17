@@ -77,6 +77,7 @@ class OveruseFrameDetectorResourceAdaptationModule
   void SetHasInputVideo(bool has_input_video) override;
   void SetDegradationPreference(
       DegradationPreference degradation_preference) override;
+  void ResetVideoSourceRestrictions() override;
 
   // Input to the OveruseFrameDetector, which are required for this module to
   // function. These map to OveruseFrameDetector methods.
@@ -103,11 +104,6 @@ class OveruseFrameDetectorResourceAdaptationModule
   // this boolean? It would be really easy to report the wrong thing if this
   // method is called incorrectly.
   void SetIsQualityScalerEnabled(bool is_quality_scaler_enabled);
-
-  // TODO(hbos): Can we get rid of this? Seems we should know whether the frame
-  // rate has updated.
-  void RefreshTargetFramerate();
-  void ResetAdaptationCounters();
 
   class AdaptCounter final {
    public:
@@ -185,6 +181,8 @@ class OveruseFrameDetectorResourceAdaptationModule
     enum class Mode { kAdaptUp, kAdaptDown } mode_;
   };
 
+  // 
+  void MaybeUpdateTargetFrameRate();
   // Makes |video_source_restrictions_| up-to-date and informs the
   // |adaptation_listener_| if restrictions are changed, allowing the listener
   // to reconfigure the source accordingly.
@@ -217,6 +215,7 @@ class OveruseFrameDetectorResourceAdaptationModule
   const std::unique_ptr<VideoSourceRestrictor> source_restrictor_;
   const std::unique_ptr<OveruseFrameDetector> overuse_detector_;
   int codec_max_framerate_;
+  int target_frame_rate_;
   uint32_t encoder_start_bitrate_bps_;
   bool is_quality_scaler_enabled_;
   VideoEncoderConfig encoder_config_;
