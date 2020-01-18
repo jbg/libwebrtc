@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cc26c98_81c84c3f",
+        "filename": "pc/dtmf_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-01-18T04:42:20Z",
+      "side": 1,
+      "message": "Please be consistent in using CommaDelay or CommaToneGap. I prefer CommaDelay - it\u0027s not a tone.",
+      "revId": "fd6a35cda387eb0f6eaab055ff7963f1384d3a7f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8af288f9_5e2016a1",
+        "filename": "pc/dtmf_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-01-18T04:42:20Z",
+      "side": 1,
+      "message": "Update comment to indicate that comma_tone_gap is variable, not 2 seconds.",
+      "revId": "fd6a35cda387eb0f6eaab055ff7963f1384d3a7f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
