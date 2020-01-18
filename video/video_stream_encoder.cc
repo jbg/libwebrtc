@@ -527,16 +527,40 @@ void VideoStreamEncoder::ReconfigureEncoder() {
       last_frame_info_->width * last_frame_info_->height);
 
   if (streams.size() == 1 && encoder_bitrate_limits_) {
-    // Use bitrate limits recommended by encoder only if app didn't set any of
-    // them.
-    if (encoder_config_.max_bitrate_bps <= 0 &&
-        (encoder_config_.simulcast_layers.empty() ||
-         encoder_config_.simulcast_layers[0].min_bitrate_bps <= 0)) {
-      streams.back().min_bitrate_bps = encoder_bitrate_limits_->min_bitrate_bps;
-      streams.back().max_bitrate_bps = encoder_bitrate_limits_->max_bitrate_bps;
+    // Bitrate limits can be set by app or/and provided by encoder. When both
+    // sets of limits present, the final set is derived as their intersection.
+    int min_bitrate_bps;
+    if (encoder_config_.simulcast_layers.empty() ||
+        encoder_config_.simulcast_layers[0].min_bitrate_bps <= 0) {
+      min_bitrate_bps = encoder_bitrate_limits_->min_bitrate_bps;
+    } else {
+      min_bitrate_bps = std::max(encoder_bitrate_limits_->min_bitrate_bps,
+                                 streams.back().min_bitrate_bps);
+    }
+
+    int max_bitrate_bps;
+    if (encoder_config_.max_bitrate_bps <= 0) {
+      max_bitrate_bps = encoder_bitrate_limits_->max_bitrate_bps;
+    } else {
+      max_bitrate_bps = std::min(encoder_bitrate_limits_->max_bitrate_bps,
+                                 streams.back().max_bitrate_bps);
+    }
+
+    if (min_bitrate_bps < max_bitrate_bps) {
+      streams.back().min_bitrate_bps = min_bitrate_bps;
+      streams.back().max_bitrate_bps = max_bitrate_bps;
       streams.back().target_bitrate_bps =
           std::min(streams.back().target_bitrate_bps,
                    encoder_bitrate_limits_->max_bitrate_bps);
+    } else {
+      RTC_LOG(LS_WARNING)
+          << "Bitrate limits provided by encoder"
+          << " (min " << encoder_bitrate_limits_->min_bitrate_bps << " ,max "
+          << encoder_bitrate_limits_->min_bitrate_bps
+          << ") has no intersection with bitrate limits set by app"
+          << " (min " << streams.back().min_bitrate_bps << " , max "
+          << encoder_config_.max_bitrate_bps
+          << "). The app's bitrate limits will be used.";
     }
   }
 
