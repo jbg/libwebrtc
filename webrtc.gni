@@ -190,6 +190,15 @@ declare_args() {
   # doesn't assume /DUNICODE and /D_UNICODE but that it explicitly uses
   # wide character functions.
   rtc_win_undef_unicode = false
+
+  # Defines which API should be used by the video capture module on Windows.
+  # The following are the current options:
+  # False: It uses DirectShow APIs. DirectShow should be used on builds
+  #        that need to be compatible with old versions of Windows (Vista/7).
+  # True:  It uses the Windows::Media APIs. This option is recommended for
+  #        Windows 10. It is ok to use this option with any API family 
+  #        (desktop (Win32), app (Store), ...).
+  rtc_win_video_capture_winrt = false
 }
 
 if (!build_with_mozilla) {
