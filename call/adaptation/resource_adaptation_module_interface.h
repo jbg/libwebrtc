@@ -61,6 +61,7 @@ class ResourceAdaptationModuleInterface {
   virtual void SetHasInputVideo(bool has_input_video) = 0;
   virtual void SetDegradationPreference(
       DegradationPreference degradation_preference) = 0;
+  virtual void ResetVideoSourceRestrictions() = 0;
 };
 
 }  // namespace webrtc
