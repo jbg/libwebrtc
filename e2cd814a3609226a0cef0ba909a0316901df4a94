@@ -22,6 +22,30 @@
       "revId": "e2cd814a3609226a0cef0ba909a0316901df4a94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4dad2624_a56d2f17",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-20T16:09:49Z",
+      "side": 1,
+      "message": "sprang@ can you comment? 😊",
+      "parentUuid": "bb4a98ef_464bcccd",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 26
+      },
+      "revId": "e2cd814a3609226a0cef0ba909a0316901df4a94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
