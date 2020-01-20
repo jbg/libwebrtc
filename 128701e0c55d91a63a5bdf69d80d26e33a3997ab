@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f82cd67_b888c0d3",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-01-20T09:27:24Z",
+      "side": 1,
+      "message": "AFAICT, this value comes from some function of \u0027b\u003dAS\u0027, \u0027x-google-codec-max-bitrate\u0027, and the max bitrate in RtpEncodingParameters: https://cs.chromium.org/chromium/src/third_party/webrtc/media/engine/webrtc_video_engine.cc?g\u003d0\u0026l\u003d2178.\n\nShould we check encoder_config_.simulcast_layers[0].max_bitrate_bps as well here? If not, maybe we should add a comment describing why we are checking simulcast_layers[0].min_bitrate_bps above, but not simulcast_layers[0].max_bitrate_bps here.\n\n(Ideally, we should probably get rid of the \u0027x-google-...\u0027 params completely, now that we have RtpEncodingParameters. That would require a PSA and a waiting period though...)",
+      "range": {
+        "startLine": 542,
+        "startChar": 24,
+        "endLine": 542,
+        "endChar": 39
+      },
+      "revId": "128701e0c55d91a63a5bdf69d80d26e33a3997ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
