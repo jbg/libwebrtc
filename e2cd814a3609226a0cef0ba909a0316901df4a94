@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb4a98ef_464bcccd",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-01-20T15:50:26Z",
+      "side": 1,
+      "message": "Some comments on where these come from and/or what do they represent should really make this struct more readable.\n\nNow it\u0027s just full of synonymous-sounding members.",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 26
+      },
+      "revId": "e2cd814a3609226a0cef0ba909a0316901df4a94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
