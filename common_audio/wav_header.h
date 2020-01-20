@@ -13,10 +13,10 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include "rtc_base/checks.h"
 
 namespace webrtc {
 
-static const size_t kWavHeaderSize = 44;
 
 class ReadableWav {
  public:
@@ -26,11 +26,27 @@ class ReadableWav {
   virtual ~ReadableWav() = default;
 };
 
-enum WavFormat {
-  kWavFormatPcm = 1,    // PCM, each sample of size bytes_per_sample
-  kWavFormatALaw = 6,   // 8-bit ITU-T G.711 A-law
-  kWavFormatMuLaw = 7,  // 8-bit ITU-T G.711 mu-law
+enum class WavFormat {
+  kWavFormatPcm = 1,        // PCM, each sample of size bytes_per_sample
+  kWavFormatIeeeFloat = 3,  // IEEE float
+  kWavFormatALaw = 6,       // 8-bit ITU-T G.711 A-law
+  kWavFormatMuLaw = 7,      // 8-bit ITU-T G.711 mu-law
 };
+
+constexpr size_t kPcmWavHeaderSize = 44;
+constexpr size_t kIeeeFloatWavHeaderSize = 58;
+
+constexpr size_t WavHeaderSize(WavFormat format) {
+  if (format == WavFormat::kWavFormatPcm) {
+    return kPcmWavHeaderSize;
+  }
+  return kIeeeFloatWavHeaderSize;
+}
+
+constexpr size_t MaxWavHeaderSize() {
+  return std::max(WavHeaderSize(WavFormat::kWavFormatPcm),
+                  WavHeaderSize(WavFormat::kWavFormatIeeeFloat));
+}
 
 // Return true if the given parameters will make a well-formed WAV header.
 bool CheckWavParameters(size_t num_channels,

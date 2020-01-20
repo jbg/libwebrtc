@@ -17,7 +17,7 @@
 #include "test/gtest.h"
 
 namespace webrtc {
-
+#if 1
 // Doesn't take ownership of the buffer.
 class ReadableWavBuffer : public ReadableWav {
  public:
@@ -52,7 +52,7 @@ class ReadableWavBuffer : public ReadableWav {
 
   bool SeekForward(uint32_t num_bytes) override {
     // Verify we don't try to read outside of a properly sized header.
-    if (size_ >= kWavHeaderSize)
+    if (size_ >= kPcmWavHeaderSize)
       EXPECT_GE(size_, pos_ + num_bytes);
     EXPECT_FALSE(buf_exhausted_);
 
@@ -81,32 +81,34 @@ class ReadableWavBuffer : public ReadableWav {
 // ones are accepted and the bad ones rejected.
 TEST(WavHeaderTest, CheckWavParameters) {
   // Try some really stupid values for one parameter at a time.
-  EXPECT_TRUE(CheckWavParameters(1, 8000, kWavFormatPcm, 1, 0));
-  EXPECT_FALSE(CheckWavParameters(0, 8000, kWavFormatPcm, 1, 0));
-  EXPECT_FALSE(CheckWavParameters(0x10000, 8000, kWavFormatPcm, 1, 0));
-  EXPECT_FALSE(CheckWavParameters(1, 0, kWavFormatPcm, 1, 0));
+  EXPECT_TRUE(CheckWavParameters(1, 8000, WavFormat::kWavFormatPcm, 1, 0));
+  EXPECT_FALSE(CheckWavParameters(0, 8000, WavFormat::kWavFormatPcm, 1, 0));
+  EXPECT_FALSE(
+      CheckWavParameters(0x10000, 8000, WavFormat::kWavFormatPcm, 1, 0));
+  EXPECT_FALSE(CheckWavParameters(1, 0, WavFormat::kWavFormatPcm, 1, 0));
   EXPECT_FALSE(CheckWavParameters(1, 8000, WavFormat(0), 1, 0));
-  EXPECT_FALSE(CheckWavParameters(1, 8000, kWavFormatPcm, 0, 0));
+  EXPECT_FALSE(CheckWavParameters(1, 8000, WavFormat::kWavFormatPcm, 0, 0));
 
   // Try invalid format/bytes-per-sample combinations.
-  EXPECT_TRUE(CheckWavParameters(1, 8000, kWavFormatPcm, 2, 0));
-  EXPECT_FALSE(CheckWavParameters(1, 8000, kWavFormatPcm, 4, 0));
-  EXPECT_FALSE(CheckWavParameters(1, 8000, kWavFormatALaw, 2, 0));
-  EXPECT_FALSE(CheckWavParameters(1, 8000, kWavFormatMuLaw, 2, 0));
+  EXPECT_TRUE(CheckWavParameters(1, 8000, WavFormat::kWavFormatPcm, 2, 0));
+  EXPECT_FALSE(CheckWavParameters(1, 8000, WavFormat::kWavFormatPcm, 4, 0));
+  EXPECT_FALSE(CheckWavParameters(1, 8000, WavFormat::kWavFormatALaw, 2, 0));
+  EXPECT_FALSE(CheckWavParameters(1, 8000, WavFormat::kWavFormatMuLaw, 2, 0));
 
   // Too large values.
-  EXPECT_FALSE(CheckWavParameters(1 << 20, 1 << 20, kWavFormatPcm, 1, 0));
-  EXPECT_FALSE(CheckWavParameters(1, 8000, kWavFormatPcm, 1,
+  EXPECT_FALSE(
+      CheckWavParameters(1 << 20, 1 << 20, WavFormat::kWavFormatPcm, 1, 0));
+  EXPECT_FALSE(CheckWavParameters(1, 8000, WavFormat::kWavFormatPcm, 1,
                                   std::numeric_limits<uint32_t>::max()));
 
   // Not the same number of samples for each channel.
-  EXPECT_FALSE(CheckWavParameters(3, 8000, kWavFormatPcm, 1, 5));
+  EXPECT_FALSE(CheckWavParameters(3, 8000, WavFormat::kWavFormatPcm, 1, 5));
 }
 
 TEST(WavHeaderTest, ReadWavHeaderWithErrors) {
   size_t num_channels = 0;
   int sample_rate = 0;
-  WavFormat format = kWavFormatPcm;
+  WavFormat format = WavFormat::kWavFormatPcm;
   size_t bytes_per_sample = 0;
   size_t num_samples = 0;
 
@@ -123,7 +125,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithErrors) {
       'W', 'A', 'V', 'E',
       'f', 'm', 't', ' ',
       16, 0, 0, 0,  // size of fmt block - 8: 24 - 8
-      6, 0,  // format: A-law (6)
+      1, 0,  // format: PCM (1)
       17, 0,  // channels: 17
       0x39, 0x30, 0, 0,  // sample rate: 12345
       0xc9, 0x33, 0x03, 0,  // byte rate: 1 * 17 * 12345
@@ -147,7 +149,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithErrors) {
       'W', 'A', 'V', 'E',
       'f', 'm', 't', ' ',
       16, 0, 0, 0,  // size of fmt block - 8: 24 - 8
-      6, 0,  // format: A-law (6)
+      1, 0,  // format: PCM (1)
       17, 0,  // channels: 17
       0x39, 0x30, 0, 0,  // sample rate: 12345
       0xc9, 0x33, 0x03, 0,  // byte rate: 1 * 17 * 12345
@@ -171,7 +173,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithErrors) {
       'W', 'A', 'V', 'E',
       'f', 'm', 't', ' ',
       16, 0, 0, 0,  // size of fmt block - 8: 24 - 8
-      6, 0,  // format: A-law (6)
+      1, 0,  // format: PCM (1)
       17, 0,  // channels: 17
       0x39, 0x30, 0, 0,  // sample rate: 12345
       0x00, 0x33, 0x03, 0,  // byte rate: *BAD*
@@ -195,7 +197,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithErrors) {
       'W', 'A', 'V', 'E',
       'f', 'm', 't', ' ',
       17, 0, 0, 0,  // size of fmt block *BAD*. Only 16 and 18 permitted.
-      6, 0,  // format: A-law (6)
+      1, 0,  // format: PCM (1)
       17, 0,  // channels: 17
       0x39, 0x30, 0, 0,  // sample rate: 12345
       0xc9, 0x33, 0x03, 0,  // byte rate: 1 * 17 * 12345
@@ -220,7 +222,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithErrors) {
       'W', 'A', 'V', 'E',
       'f', 'm', 't', ' ',
       18, 0, 0, 0,  // size of fmt block - 8: 24 - 8
-      6, 0,  // format: A-law (6)
+      1, 0,  // format: PCM (1)
       17, 0,  // channels: 17
       0x39, 0x30, 0, 0,  // sample rate: 12345
       0xc9, 0x33, 0x03, 0,  // byte rate: 1 * 17 * 12345
@@ -245,7 +247,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithErrors) {
       'W', 'A', 'V', 'E',
       'f', 'm', 't', ' ',
       16, 0, 0, 0,  // size of fmt block - 8: 24 - 8
-      6, 0,  // format: A-law (6)
+      1, 0,  // format: PCM (1)
       17, 0,  // channels: 17
       0x39, 0x30, 0, 0,  // sample rate: 12345
       0xc9, 0x33, 0x03, 0,  // byte rate: 1 * 17 * 12345
@@ -277,10 +279,10 @@ TEST(WavHeaderTest, ReadWavHeaderWithErrors) {
 
 // Try writing and reading a valid WAV header and make sure it looks OK.
 TEST(WavHeaderTest, WriteAndReadWavHeader) {
-  constexpr int kSize = 4 + kWavHeaderSize + 4;
+  constexpr int kSize = 4 + kPcmWavHeaderSize + 4;
   uint8_t buf[kSize];
   memset(buf, 0xa4, sizeof(buf));
-  WriteWavHeader(buf + 4, 17, 12345, kWavFormatALaw, 1, 123457689);
+  WriteWavHeader(buf + 4, 17, 12345, WavFormat::kWavFormatPcm, 1, 123457689);
   constexpr uint8_t kExpectedBuf[] = {
       // clang-format off
       // clang formatting doesn't respect inline comments.
@@ -290,7 +292,7 @@ TEST(WavHeaderTest, WriteAndReadWavHeader) {
     'W', 'A', 'V', 'E',
     'f', 'm', 't', ' ',
     16, 0, 0, 0,  // size of fmt block - 8: 24 - 8
-    6, 0,  // format: A-law (6)
+    1, 0,  // format: PCM (1)
     17, 0,  // channels: 17
     0x39, 0x30, 0, 0,  // sample rate: 12345
     0xc9, 0x33, 0x03, 0,  // byte rate: 1 * 17 * 12345
@@ -306,7 +308,7 @@ TEST(WavHeaderTest, WriteAndReadWavHeader) {
 
   size_t num_channels = 0;
   int sample_rate = 0;
-  WavFormat format = kWavFormatPcm;
+  WavFormat format = WavFormat::kWavFormatPcm;
   size_t bytes_per_sample = 0;
   size_t num_samples = 0;
   ReadableWavBuffer r(buf + 4, sizeof(buf) - 8,
@@ -315,7 +317,7 @@ TEST(WavHeaderTest, WriteAndReadWavHeader) {
                             &bytes_per_sample, &num_samples));
   EXPECT_EQ(17u, num_channels);
   EXPECT_EQ(12345, sample_rate);
-  EXPECT_EQ(kWavFormatALaw, format);
+  EXPECT_EQ(WavFormat::kWavFormatPcm, format);
   EXPECT_EQ(1u, bytes_per_sample);
   EXPECT_EQ(123457689u, num_samples);
 }
@@ -332,7 +334,7 @@ TEST(WavHeaderTest, ReadAtypicalWavHeader) {
     'f', 'm', 't', ' ',
     18, 0, 0, 0,             // Size of fmt block (with an atypical extension
                              // size field).
-    6, 0,                    // Format: A-law (6).
+    1, 0,                    // Format: PCM (1).
     17, 0,                   // Channels: 17.
     0x39, 0x30, 0, 0,        // Sample rate: 12345.
     0xc9, 0x33, 0x03, 0,     // Byte rate: 1 * 17 * 12345.
@@ -346,7 +348,7 @@ TEST(WavHeaderTest, ReadAtypicalWavHeader) {
 
   size_t num_channels = 0;
   int sample_rate = 0;
-  WavFormat format = kWavFormatPcm;
+  WavFormat format = WavFormat::kWavFormatPcm;
   size_t bytes_per_sample = 0;
   size_t num_samples = 0;
   ReadableWavBuffer r(kBuf, sizeof(kBuf), /*check_read_size=*/true);
@@ -354,7 +356,7 @@ TEST(WavHeaderTest, ReadAtypicalWavHeader) {
                             &bytes_per_sample, &num_samples));
   EXPECT_EQ(17u, num_channels);
   EXPECT_EQ(12345, sample_rate);
-  EXPECT_EQ(kWavFormatALaw, format);
+  EXPECT_EQ(WavFormat::kWavFormatPcm, format);
   EXPECT_EQ(1u, bytes_per_sample);
   EXPECT_EQ(123457689u, num_samples);
 }
@@ -372,7 +374,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithOptionalChunk) {
     'W', 'A', 'V', 'E',
     'f', 'm', 't', ' ',
     16, 0, 0, 0,             // Size of fmt block.
-    6, 0,                    // Format: A-law (6).
+    1, 0,                    // Format: PCM (1).
     17, 0,                   // Channels: 17.
     0x39, 0x30, 0, 0,        // Sample rate: 12345.
     0xc9, 0x33, 0x03, 0,     // Byte rate: 1 * 17 * 12345.
@@ -388,7 +390,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithOptionalChunk) {
 
   size_t num_channels = 0;
   int sample_rate = 0;
-  WavFormat format = kWavFormatPcm;
+  WavFormat format = WavFormat::kWavFormatPcm;
   size_t bytes_per_sample = 0;
   size_t num_samples = 0;
   ReadableWavBuffer r(kBuf, sizeof(kBuf), /*check_read_size=*/true);
@@ -396,7 +398,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithOptionalChunk) {
                             &bytes_per_sample, &num_samples));
   EXPECT_EQ(17u, num_channels);
   EXPECT_EQ(12345, sample_rate);
-  EXPECT_EQ(kWavFormatALaw, format);
+  EXPECT_EQ(WavFormat::kWavFormatPcm, format);
   EXPECT_EQ(1u, bytes_per_sample);
   EXPECT_EQ(123457689u, num_samples);
 }
@@ -415,7 +417,7 @@ TEST(WavHeaderTest, ReadWavHeaderWithDataBeforeFormat) {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Data 16 bytes.
     'f', 'm', 't', ' ',
     16,  0,   0,   0,    // Size of fmt block.
-    6,   0,              // Format: A-law (6).
+    1,   0,              // Format: Pcm (1).
     1,   0,              // Channels: 1.
     60,  0,   0,   0,    // Sample rate: 60.
     60,  0,   0,   0,    // Byte rate: 1 * 1 * 60.
@@ -426,12 +428,13 @@ TEST(WavHeaderTest, ReadWavHeaderWithDataBeforeFormat) {
 
   size_t num_channels = 0;
   int sample_rate = 0;
-  WavFormat format = kWavFormatPcm;
+  WavFormat format = WavFormat::kWavFormatPcm;
   size_t bytes_per_sample = 0;
   size_t num_samples = 0;
   ReadableWavBuffer r(kBuf, sizeof(kBuf), /*check_read_size=*/false);
   EXPECT_FALSE(ReadWavHeader(&r, &num_channels, &sample_rate, &format,
                              &bytes_per_sample, &num_samples));
 }
+#endif
 
 }  // namespace webrtc
