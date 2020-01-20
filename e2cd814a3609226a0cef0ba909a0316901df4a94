@@ -46,6 +46,30 @@
       "revId": "e2cd814a3609226a0cef0ba909a0316901df4a94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5d673e1_d15989a4",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-01-20T16:18:50Z",
+      "side": 1,
+      "message": "My 5 cents:\n\nEncoderInfo represents actual used encoder capabilities/properties, comes from the encoder instance.\n\nVideoEncoderConfig represents configuration parameters, ultimately coming from the webrtc user and negotiation with the receiver.\n\nVideoCodec is more low level config, which is based on VideoEncoderConfig, and probably something else. \n\nActually, VideoCodec could maybe replace VideoCodec? But it\u0027s the work for the future CLs.",
+      "parentUuid": "4dad2624_a56d2f17",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 26
+      },
+      "revId": "e2cd814a3609226a0cef0ba909a0316901df4a94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
