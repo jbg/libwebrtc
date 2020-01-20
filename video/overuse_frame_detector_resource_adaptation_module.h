@@ -22,8 +22,9 @@
 #include "api/video/video_frame.h"
 #include "api/video/video_source_interface.h"
 #include "api/video/video_stream_encoder_observer.h"
-#include "api/video_codecs/video_encoder.h"
+#include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder_config.h"
+#include "api/video_codecs/video_encoder.h"
 #include "call/adaptation/resource_adaptation_module_interface.h"
 #include "rtc_base/experiments/balanced_degradation_settings.h"
 #include "video/overuse_frame_detector.h"
@@ -79,6 +80,11 @@ class OveruseFrameDetectorResourceAdaptationModule
       DegradationPreference degradation_preference) override;
   void ResetVideoSourceRestrictions() override;
 
+  void SetEncoderConfig(VideoEncoderConfig encoder_config,
+                        VideoCodec video_codec) override;
+  // TODO: REMOVE!
+  void SetCodecMaxFrameRate(absl::optional<double> codec_max_frame_rate);
+
   // Input to the OveruseFrameDetector, which are required for this module to
   // function. These map to OveruseFrameDetector methods.
   // TODO(hbos): Define virtual methods in ResourceAdaptationModuleInterface
@@ -95,8 +101,6 @@ class OveruseFrameDetectorResourceAdaptationModule
   // resource adaptation module. Unify code paths where possible. Do we really
   // need this many public methods?
   void SetLastFramePixelCount(absl::optional<int> last_frame_pixel_count);
-  void SetEncoderConfig(VideoEncoderConfig encoder_config);
-  void SetCodecMaxFrameRate(absl::optional<double> codec_max_frame_rate);
   void SetEncoderStartBitrateBps(uint32_t encoder_start_bitrate_bps);
   // Inform the detector whether or not the quality scaler is enabled. This
   // helps GetActiveCounts() return absl::nullopt when appropriate.

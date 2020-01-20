@@ -12,6 +12,8 @@
 #define CALL_ADAPTATION_RESOURCE_ADAPTATION_MODULE_INTERFACE_H_
 
 #include "api/rtp_parameters.h"
+#include "api/video_codecs/video_encoder_config.h"
+#include "api/video_codecs/video_encoder.h"
 #include "call/adaptation/video_source_restrictions.h"
 
 namespace webrtc {
@@ -65,6 +67,9 @@ class ResourceAdaptationModuleInterface {
   // TODO(hbos): It's not clear why anybody should be able to tell the module to
   // reset like this; can we get rid of this method?
   virtual void ResetVideoSourceRestrictions() = 0;
+
+  virtual void SetEncoderConfig(VideoEncoderConfig encoder_config,
+                                VideoCodec video_codec) = 0;
 };
 
 }  // namespace webrtc

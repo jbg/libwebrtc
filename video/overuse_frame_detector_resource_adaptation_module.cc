@@ -435,6 +435,21 @@ void OveruseFrameDetectorResourceAdaptationModule::
   MaybeUpdateVideoSourceRestrictions();
 }
 
+void OveruseFrameDetectorResourceAdaptationModule::SetEncoderConfig(
+    VideoEncoderConfig encoder_config,
+    VideoCodec video_codec) {
+  encoder_config_ = std::move(encoder_config);
+  SetCodecMaxFrameRate(video_codec.maxFramerate);
+}
+
+void OveruseFrameDetectorResourceAdaptationModule::SetCodecMaxFrameRate(
+    absl::optional<double> codec_max_frame_rate) {
+  RTC_DCHECK(!codec_max_frame_rate.has_value() ||
+             codec_max_frame_rate.value() > 0.0);
+  codec_max_frame_rate_ = codec_max_frame_rate;
+  MaybeUpdateTargetFrameRate();
+}
+
 void OveruseFrameDetectorResourceAdaptationModule::FrameCaptured(
     const VideoFrame& frame,
     int64_t time_when_first_seen_us) {
@@ -453,19 +468,6 @@ void OveruseFrameDetectorResourceAdaptationModule::FrameSent(
 void OveruseFrameDetectorResourceAdaptationModule::SetLastFramePixelCount(
     absl::optional<int> last_frame_pixel_count) {
   last_frame_pixel_count_ = last_frame_pixel_count;
-}
-
-void OveruseFrameDetectorResourceAdaptationModule::SetEncoderConfig(
-    VideoEncoderConfig encoder_config) {
-  encoder_config_ = std::move(encoder_config);
-}
-
-void OveruseFrameDetectorResourceAdaptationModule::SetCodecMaxFrameRate(
-    absl::optional<double> codec_max_frame_rate) {
-  RTC_DCHECK(!codec_max_frame_rate.has_value() ||
-             codec_max_frame_rate.value() > 0.0);
-  codec_max_frame_rate_ = codec_max_frame_rate;
-  MaybeUpdateTargetFrameRate();
 }
 
 void OveruseFrameDetectorResourceAdaptationModule::SetEncoderStartBitrateBps(

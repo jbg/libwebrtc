@@ -423,7 +423,7 @@ void VideoStreamEncoder::ConfigureEncoder(VideoEncoderConfig config,
             (!encoder_ || encoder_config_.video_format != config.video_format ||
              max_data_payload_length_ != max_data_payload_length);
         encoder_config_ = std::move(config);
-        resource_adaptation_module_->SetEncoderConfig(encoder_config_.Copy());
+//        resource_adaptation_module_->SetEncoderConfig(encoder_config_.Copy());
         max_data_payload_length_ = max_data_payload_length;
         pending_encoder_reconfiguration_ = true;
 
@@ -587,7 +587,8 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   // Make sure the start bit rate is sane...
   RTC_DCHECK_LE(codec.startBitrate, 1000000);
   max_framerate_ = codec.maxFramerate;
-  resource_adaptation_module_->SetCodecMaxFrameRate(max_framerate_);
+  resource_adaptation_module_->SetEncoderConfig(encoder_config_.Copy(),
+                                                codec);
 
   // Inform source about max configured framerate.
   int max_framerate = 0;
