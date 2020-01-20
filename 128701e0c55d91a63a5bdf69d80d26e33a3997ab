@@ -22,6 +22,30 @@
       "revId": "128701e0c55d91a63a5bdf69d80d26e33a3997ab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "159b4bfb_af10b69d",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-01-20T13:33:08Z",
+      "side": 1,
+      "message": "Added comment:\n// We don\u0027t check encoder_config_.simulcast_layers[0].min_bitrate_bps\n// here since encoder_config_.max_bitrate_bps is derived from it (as\n// well as from other inputs).",
+      "parentUuid": "9f82cd67_b888c0d3",
+      "range": {
+        "startLine": 542,
+        "startChar": 24,
+        "endLine": 542,
+        "endChar": 39
+      },
+      "revId": "128701e0c55d91a63a5bdf69d80d26e33a3997ab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
