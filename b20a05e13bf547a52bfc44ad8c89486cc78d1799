@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d04649c0_d8a8359c",
+        "filename": "tools_webrtc/perf/webrtc_dashboard_upload.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-01-21T14:07:29Z",
+      "side": 1,
+      "message": "Should it be BinaryProto now?",
+      "range": {
+        "startLine": 88,
+        "startChar": 25,
+        "endLine": 88,
+        "endChar": 29
+      },
+      "revId": "b20a05e13bf547a52bfc44ad8c89486cc78d1799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
