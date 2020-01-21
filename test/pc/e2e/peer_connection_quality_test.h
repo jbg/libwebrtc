@@ -160,6 +160,12 @@ class PeerConfigurerImpl final
     return this;
   }
 
+  PeerConfigurer* SetIceTransportFactory(
+      std::unique_ptr<IceTransportFactory> factory) override {
+    components_->pc_dependencies->ice_transport_factory = std::move(factory);
+    return this;
+  }
+
  protected:
   friend class PeerConnectionE2EQualityTest;
 
@@ -264,7 +270,9 @@ class PeerConnectionE2EQualityTest
   //  * Generate video stream labels if some of them missed
   //  * Generate audio stream labels if some of them missed
   //  * Set video source generation mode if it is not specified
+  //  * Video codecs under test
   void SetDefaultValuesForMissingParams(
+      RunParams* run_params,
       std::vector<Params*> params,
       std::vector<std::vector<std::unique_ptr<test::FrameGeneratorInterface>>*>
           video_sources);

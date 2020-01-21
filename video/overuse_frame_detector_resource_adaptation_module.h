@@ -22,6 +22,7 @@
 #include "api/video/video_frame.h"
 #include "api/video/video_source_interface.h"
 #include "api/video/video_stream_encoder_observer.h"
+#include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/video_encoder_config.h"
 #include "call/adaptation/resource_adaptation_module_interface.h"
@@ -60,20 +61,19 @@ class OveruseFrameDetectorResourceAdaptationModule
       ResourceAdaptationModuleListener* adaptation_listener);
   ~OveruseFrameDetectorResourceAdaptationModule() override;
 
-  // Sets the encoder to reconfigure based on overuse.
-  // TODO(hbos): Don't reconfigure the encoder directly. Instead, define the
-  // output of a resource adaptation module as a struct and let the
-  // VideoStreamEncoder handle the interaction with the actual encoder.
-  void SetEncoder(VideoEncoder* encoder);
-
   DegradationPreference degradation_preference() const {
     return degradation_preference_;
   }
 
   // ResourceAdaptationModuleInterface implementation.
-  void StartCheckForOveruse(
+  void StartResourceAdaptation(
       ResourceAdaptationModuleListener* adaptation_listener) override;
-  void StopCheckForOveruse() override;
+  void StopResourceAdaptation() override;
+  void SetHasInputVideo(bool has_input_video) override;
+  void SetDegradationPreference(
+      DegradationPreference degradation_preference) override;
+  void SetEncoderSettings(EncoderSettings encoder_settings) override;
+  void ResetVideoSourceRestrictions() override;
 
   // Input to the OveruseFrameDetector, which are required for this module to
   // function. These map to OveruseFrameDetector methods.
@@ -85,14 +85,13 @@ class OveruseFrameDetectorResourceAdaptationModule
                  int64_t time_sent_in_us,
                  int64_t capture_time_us,
                  absl::optional<int> encode_duration_us);
+  void FrameDroppedDueToSize();
 
   // Various other settings and feedback mechanisms.
   // TODO(hbos): Find a common interface that would make sense for a generic
   // resource adaptation module. Unify code paths where possible. Do we really
   // need this many public methods?
   void SetLastFramePixelCount(absl::optional<int> last_frame_pixel_count);
-  void SetEncoderConfig(VideoEncoderConfig encoder_config);
-  void SetCodecMaxFramerate(int codec_max_framerate);
   void SetEncoderStartBitrateBps(uint32_t encoder_start_bitrate_bps);
   // Inform the detector whether or not the quality scaler is enabled. This
   // helps GetActiveCounts() return absl::nullopt when appropriate.
@@ -100,15 +99,6 @@ class OveruseFrameDetectorResourceAdaptationModule
   // this boolean? It would be really easy to report the wrong thing if this
   // method is called incorrectly.
   void SetIsQualityScalerEnabled(bool is_quality_scaler_enabled);
-
-  void SetHasInputVideoAndDegradationPreference(
-      bool has_input_video,
-      DegradationPreference degradation_preference);
-
-  // TODO(hbos): Can we get rid of this? Seems we should know whether the frame
-  // rate has updated.
-  void RefreshTargetFramerate();
-  void ResetAdaptationCounters();
 
   class AdaptCounter final {
    public:
@@ -186,10 +176,16 @@ class OveruseFrameDetectorResourceAdaptationModule
     enum class Mode { kAdaptUp, kAdaptDown } mode_;
   };
 
+  VideoCodecType GetVideoCodecTypeOrGeneric() const;
+
   // Makes |video_source_restrictions_| up-to-date and informs the
   // |adaptation_listener_| if restrictions are changed, allowing the listener
   // to reconfigure the source accordingly.
   void MaybeUpdateVideoSourceRestrictions();
+  // Calculates an up-to-date value of |target_frame_rate_| and informs the
+  // |overuse_detector_| of the new value if it changed and the detector is
+  // started.
+  void MaybeUpdateTargetFrameRate();
 
   void UpdateAdaptationStats(AdaptReason reason);
   DegradationPreference EffectiveDegradataionPreference();
@@ -201,6 +197,7 @@ class OveruseFrameDetectorResourceAdaptationModule
   VideoSourceRestrictions video_source_restrictions_;
   // Used to query CpuOveruseOptions at StartCheckForOveruse().
   VideoStreamEncoder* video_stream_encoder_;
+  bool has_input_video_;
   DegradationPreference degradation_preference_;
   // Counters used for deciding if the video resolution or framerate is
   // currently restricted, and if so, why, on a per degradation preference
@@ -216,11 +213,11 @@ class OveruseFrameDetectorResourceAdaptationModule
   // Keeps track of source restrictions that this adaptation module outputs.
   const std::unique_ptr<VideoSourceRestrictor> source_restrictor_;
   const std::unique_ptr<OveruseFrameDetector> overuse_detector_;
-  int codec_max_framerate_;
+  bool overuse_detector_is_started_;
+  absl::optional<double> target_frame_rate_;
   uint32_t encoder_start_bitrate_bps_;
   bool is_quality_scaler_enabled_;
-  VideoEncoderConfig encoder_config_;
-  VideoEncoder* encoder_;
+  absl::optional<EncoderSettings> encoder_settings_;
   VideoStreamEncoderObserver* const encoder_stats_observer_;
 };
 

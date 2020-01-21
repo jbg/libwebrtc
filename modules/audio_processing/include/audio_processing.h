@@ -60,6 +60,10 @@ static const int kAgcStartupMinVolume = 85;
 static const int kAgcStartupMinVolume = 0;
 #endif  // defined(WEBRTC_CHROMIUM_BUILD)
 static constexpr int kClippedLevelMin = 70;
+
+// To be deprecated: Please instead use the flag in the
+// AudioProcessing::Config::AnalogGainController.
+// TODO(webrtc:5298): Remove.
 struct ExperimentalAgc {
   ExperimentalAgc() = default;
   explicit ExperimentalAgc(bool enabled) : enabled(enabled) {}
@@ -314,6 +318,17 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
       // Must be set if an analog mode is used. Limited to [0, 65535].
       int analog_level_minimum = 0;
       int analog_level_maximum = 255;
+
+      // Enables the analog gain controller functionality.
+      struct AnalogGainController {
+        bool enabled = true;
+        int startup_min_volume = kAgcStartupMinVolume;
+        // Lowest analog microphone level that will be applied in response to
+        // clipping.
+        int clipped_level_min = kClippedLevelMin;
+        bool enable_agc2_level_estimator = false;
+        bool enable_digital_adaptive = true;
+      } analog_gain_controller;
     } gain_controller1;
 
     // Enables the next generation AGC functionality. This feature replaces the
@@ -596,19 +611,10 @@ class RTC_EXPORT AudioProcessing : public rtc::RefCountInterface {
   //     ProcessStream().
   virtual int set_stream_delay_ms(int delay) = 0;
   virtual int stream_delay_ms() const = 0;
-  virtual bool was_stream_delay_set() const = 0;
 
   // Call to signal that a key press occurred (true) or did not occur (false)
   // with this chunk of audio.
   virtual void set_stream_key_pressed(bool key_pressed) = 0;
-
-  // Sets a delay |offset| in ms to add to the values passed in through
-  // set_stream_delay_ms(). May be positive or negative.
-  //
-  // Note that this could cause an otherwise valid value passed to
-  // set_stream_delay_ms() to return an error.
-  virtual void set_delay_offset_ms(int offset) = 0;
-  virtual int delay_offset_ms() const = 0;
 
   // Attaches provided webrtc::AecDump for recording debugging
   // information. Log file and maximum file size logic is supposed to

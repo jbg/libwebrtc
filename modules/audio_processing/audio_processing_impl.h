@@ -89,8 +89,6 @@ class AudioProcessingImpl : public AudioProcessing {
       rtc::ArrayView<std::array<float, 160>> linear_output) const override;
   void set_output_will_be_muted(bool muted) override;
   int set_stream_delay_ms(int delay) override;
-  void set_delay_offset_ms(int offset) override;
-  int delay_offset_ms() const override;
   void set_stream_key_pressed(bool key_pressed) override;
   void set_stream_analog_level(int level) override;
   int recommended_stream_analog_level() const override;
@@ -115,8 +113,6 @@ class AudioProcessingImpl : public AudioProcessing {
   size_t num_output_channels() const override;
   size_t num_reverse_channels() const override;
   int stream_delay_ms() const override;
-  bool was_stream_delay_set() const override
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
 
   AudioProcessingStats GetStatistics(bool has_remote_tracks) override {
     return GetStatistics();
@@ -243,6 +239,7 @@ class AudioProcessingImpl : public AudioProcessing {
   void InitializeHighPassFilter(bool forced_reset)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializeVoiceDetector() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
+  void InitializeGainController1() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializeTransientSuppressor()
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void InitializeGainController2() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
@@ -263,8 +260,6 @@ class AudioProcessingImpl : public AudioProcessing {
   void HandleCaptureRuntimeSettings()
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void HandleRenderRuntimeSettings() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_);
-  void ApplyAgc1Config(const Config::GainController1& agc_config)
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
 
   void EmptyQueuedRenderAudio();
   void AllocateRenderQueue()
@@ -381,29 +376,12 @@ class AudioProcessingImpl : public AudioProcessing {
 
   // APM constants.
   const struct ApmConstants {
-    ApmConstants(int agc_startup_min_volume,
-                 int agc_clipped_level_min,
-                 bool use_experimental_agc,
-                 bool use_experimental_agc_agc2_level_estimation,
-                 bool use_experimental_agc_agc2_digital_adaptive,
-                 bool multi_channel_render_support,
+    ApmConstants(bool multi_channel_render_support,
                  bool multi_channel_capture_support,
                  bool enforce_split_band_hpf)
-        : agc_startup_min_volume(agc_startup_min_volume),
-          agc_clipped_level_min(agc_clipped_level_min),
-          use_experimental_agc(use_experimental_agc),
-          use_experimental_agc_agc2_level_estimation(
-              use_experimental_agc_agc2_level_estimation),
-          use_experimental_agc_agc2_digital_adaptive(
-              use_experimental_agc_agc2_digital_adaptive),
-          multi_channel_render_support(multi_channel_render_support),
+        : multi_channel_render_support(multi_channel_render_support),
           multi_channel_capture_support(multi_channel_capture_support),
           enforce_split_band_hpf(enforce_split_band_hpf) {}
-    int agc_startup_min_volume;
-    int agc_clipped_level_min;
-    bool use_experimental_agc;
-    bool use_experimental_agc_agc2_level_estimation;
-    bool use_experimental_agc_agc2_digital_adaptive;
     bool multi_channel_render_support;
     bool multi_channel_capture_support;
     bool enforce_split_band_hpf;
@@ -412,7 +390,6 @@ class AudioProcessingImpl : public AudioProcessing {
   struct ApmCaptureState {
     ApmCaptureState();
     ~ApmCaptureState();
-    int delay_offset_ms;
     bool was_stream_delay_set;
     bool output_will_be_muted;
     bool key_pressed;
@@ -435,6 +412,7 @@ class AudioProcessingImpl : public AudioProcessing {
       size_t num_keyboard_frames = 0;
       const float* keyboard_data = nullptr;
     } keyboard_info;
+    int cached_stream_analog_level_ = 0;
   } capture_ RTC_GUARDED_BY(crit_capture_);
 
   struct ApmCaptureNonLockedState {
