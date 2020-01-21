@@ -16,6 +16,24 @@
       "revId": "d4149d71a72a12b98796ec7fbd639a17fad4c553",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acb175ec_eba9c592",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-01-21T09:58:49Z",
+      "side": 1,
+      "message": "Yes, this can unfortunately change on the fly, eg at software fallback - which may very well trigger a change in scaling settings.\n\nI think the easiest way forward is probably to call SetEncoderSettings on both encoder reconfiguration and on detection of EncoderInfo change, eg at\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/video/video_stream_encoder.cc?g\u003d0\u0026l\u003d1199",
+      "parentUuid": "84266e7f_3e59a827",
+      "revId": "d4149d71a72a12b98796ec7fbd639a17fad4c553",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
