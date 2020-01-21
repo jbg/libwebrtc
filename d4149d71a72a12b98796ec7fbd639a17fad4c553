@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84266e7f_3e59a827",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-21T09:43:31Z",
+      "side": 1,
+      "message": "If this can be changed on the fly it needs to be set separately - sprang@ can you comment?",
+      "revId": "d4149d71a72a12b98796ec7fbd639a17fad4c553",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

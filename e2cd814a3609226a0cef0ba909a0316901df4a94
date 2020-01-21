@@ -70,6 +70,30 @@
       "revId": "e2cd814a3609226a0cef0ba909a0316901df4a94",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72151f7e_58dc660c",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-21T09:43:31Z",
+      "side": 1,
+      "message": "Yeah I got a feeling they are very similar... OK thanks, I added a few comments based on your 5 cents.",
+      "parentUuid": "b5d673e1_d15989a4",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 26
+      },
+      "revId": "e2cd814a3609226a0cef0ba909a0316901df4a94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
