@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd0c0c83_0ff8b3ce",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-01-21T08:06:09Z",
+      "side": 1,
+      "message": "This will acquire the pacer\u0027s critsect_ twice in succession. Is that a problem?\nIf so, does it make sense to bundle AccountForAudioPacketsInPacedSender and IncludeOverheadInPacedSender in a void(bool, bool), to avoid the lock? They seem to only be used from this class.",
+      "range": {
+        "startLine": 769,
+        "startChar": 0,
+        "endLine": 771,
+        "endChar": 53
+      },
+      "revId": "a605fdc484e9579bed9e12d3f7d69ea72feb3845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cd7bd57_a25749a7",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-01-21T08:06:09Z",
+      "side": 1,
+      "message": "I don\u0027t think this is ever false? It is initialized to `true` and only modified (to `true`) in SetIncludeOverhead().",
+      "range": {
+        "startLine": 122,
+        "startChar": 6,
+        "endLine": 122,
+        "endChar": 23
+      },
+      "revId": "a605fdc484e9579bed9e12d3f7d69ea72feb3845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
