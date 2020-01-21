@@ -124,7 +124,6 @@ class AudioManager {
   // webrtc::kHighLatencyModeDelayEstimateInMilliseconds.
   int GetDelayEstimateInMilliseconds() const;
 
- private:
   // Called from Java side so we can cache the native audio parameters.
   // This method will be called by the WebRtcAudioManager constructor, i.e.
   // on the same thread that this object is created on.
@@ -157,6 +156,7 @@ class AudioManager {
                               jint output_buffer_size,
                               jint input_buffer_size);
 
+ private:
   // Stores thread ID in the constructor.
   // We can then use ThreadChecker::IsCurrent() to ensure that
   // other methods are called from the same thread.

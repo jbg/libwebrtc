@@ -85,7 +85,6 @@ class AudioTrackJni {
 
   void AttachAudioBuffer(AudioDeviceBuffer* audioBuffer);
 
- private:
   // Called from Java side so we can cache the address of the Java-manged
   // |byte_buffer| in |direct_buffer_address_|. The size of the buffer
   // is also stored in |direct_buffer_capacity_in_bytes_|.
@@ -107,6 +106,7 @@ class AudioTrackJni {
                                      jlong nativeAudioTrack);
   void OnGetPlayoutData(size_t length);
 
+ private:
   // Stores thread ID in constructor.
   rtc::ThreadChecker thread_checker_;
 

@@ -85,7 +85,6 @@ class AudioRecordJni {
   int32_t EnableBuiltInAGC(bool enable);
   int32_t EnableBuiltInNS(bool enable);
 
- private:
   // Called from Java side so we can cache the address of the Java-manged
   // |byte_buffer| in |direct_buffer_address_|. The size of the buffer
   // is also stored in |direct_buffer_capacity_in_bytes_|.
@@ -109,6 +108,7 @@ class AudioRecordJni {
                                      jlong nativeAudioRecord);
   void OnDataIsRecorded(int length);
 
+ private:
   // Stores thread ID in constructor.
   rtc::ThreadChecker thread_checker_;
 

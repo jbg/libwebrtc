@@ -9,6 +9,9 @@
  */
 
 #include "modules/utility/include/jvm_android.h"
+#include "modules/audio_device/android/audio_manager.h"
+#include "modules/audio_device/android/audio_record_jni.h"
+#include "modules/audio_device/android/audio_track_jni.h"
 
 #include <android/log.h>
 
@@ -22,15 +25,41 @@ namespace webrtc {
 
 JVM* g_jvm;
 
+// These JNI methods are registered and unregistered as part of LoadClasses and
+// FreeClassReferences so they are available across multiple instances of an
+// audio device module (ADM). Generally, multiple ADMs is discouraged and
+// results in undefined behavior. However, registering these JNI methods after
+// the class is loaded enables one ADM to be created immediately after another
+// is destroyed.
+const JNINativeMethod audio_manager_jni_native_methods[] = {
+    {"nativeCacheAudioParameters", "(IIIZZZZZZZIIJ)V",
+     reinterpret_cast<void*>(&webrtc::AudioManager::CacheAudioParameters)}};
+const JNINativeMethod audio_record_jni_native_methods[] = {
+    {"nativeCacheDirectBufferAddress", "(Ljava/nio/ByteBuffer;J)V",
+     reinterpret_cast<void*>(
+         &webrtc::AudioRecordJni::CacheDirectBufferAddress)},
+    {"nativeDataIsRecorded", "(IJ)V",
+     reinterpret_cast<void*>(&webrtc::AudioRecordJni::DataIsRecorded)}};
+const JNINativeMethod audio_track_jni_native_methods[] = {
+    {"nativeCacheDirectBufferAddress", "(Ljava/nio/ByteBuffer;J)V",
+     reinterpret_cast<void*>(&webrtc::AudioTrackJni::CacheDirectBufferAddress)},
+    {"nativeGetPlayoutData", "(IJ)V",
+     reinterpret_cast<void*>(&webrtc::AudioTrackJni::GetPlayoutData)}};
+
 // TODO(henrika): add more clases here if needed.
 struct {
   const char* name;
   jclass clazz;
+  const JNINativeMethod* native_methods;
+  const int num_native_methods;
 } loaded_classes[] = {
-    {"org/webrtc/voiceengine/BuildInfo", nullptr},
-    {"org/webrtc/voiceengine/WebRtcAudioManager", nullptr},
-    {"org/webrtc/voiceengine/WebRtcAudioRecord", nullptr},
-    {"org/webrtc/voiceengine/WebRtcAudioTrack", nullptr},
+    {"org/webrtc/voiceengine/BuildInfo", nullptr, nullptr},
+    {"org/webrtc/voiceengine/WebRtcAudioManager", nullptr,
+     &audio_manager_jni_native_methods[0], 1},
+    {"org/webrtc/voiceengine/WebRtcAudioRecord", nullptr,
+     &audio_record_jni_native_methods[0], 2},
+    {"org/webrtc/voiceengine/WebRtcAudioTrack", nullptr,
+     &audio_track_jni_native_methods[0], 2},
 };
 
 // Android's FindClass() is trickier than usual because the app-specific
@@ -48,11 +77,20 @@ void LoadClasses(JNIEnv* jni) {
     CHECK_EXCEPTION(jni) << "Error during NewGlobalRef: " << c.name;
     RTC_CHECK(globalRef) << c.name;
     c.clazz = globalRef;
+
+    if (c.native_methods) {
+      jni->RegisterNatives(globalRef, c.native_methods, c.num_native_methods);
+      CHECK_EXCEPTION(jni) << "Error registering native methods for  "
+                           << c.name;
+    }
   }
 }
 
 void FreeClassReferences(JNIEnv* jni) {
   for (auto& c : loaded_classes) {
+    jni->UnregisterNatives(c.clazz);
+    CHECK_EXCEPTION(jni) << "Error unregistering native methods for  "
+                         << c.name;
     jni->DeleteGlobalRef(c.clazz);
     c.clazz = nullptr;
   }
@@ -136,8 +174,6 @@ NativeRegistration::NativeRegistration(JNIEnv* jni, jclass clazz)
 
 NativeRegistration::~NativeRegistration() {
   RTC_LOG(INFO) << "NativeRegistration::dtor";
-  jni_->UnregisterNatives(j_class_);
-  CHECK_EXCEPTION(jni_) << "Error during UnregisterNatives";
 }
 
 std::unique_ptr<GlobalRef> NativeRegistration::NewObject(const char* name,
@@ -196,8 +232,6 @@ std::unique_ptr<NativeRegistration> JNIEnvironment::RegisterNatives(
   RTC_LOG(INFO) << "JNIEnvironment::RegisterNatives: " << name;
   RTC_DCHECK(thread_checker_.IsCurrent());
   jclass clazz = LookUpClass(name);
-  jni_->RegisterNatives(clazz, methods, num_methods);
-  CHECK_EXCEPTION(jni_) << "Error during RegisterNatives";
   return std::unique_ptr<NativeRegistration>(
       new NativeRegistration(jni_, clazz));
 }
