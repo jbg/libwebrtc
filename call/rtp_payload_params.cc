@@ -13,7 +13,9 @@
 #include <stddef.h>
 
 #include <algorithm>
+#include <set>
 
+#include "absl/algorithm/container.h"
 #include "absl/container/inlined_vector.h"
 #include "absl/types/variant.h"
 #include "api/video/video_timing.h"
@@ -141,8 +143,6 @@ RtpPayloadParams::RtpPayloadParams(const uint32_t ssrc,
   for (auto& spatial_layer : last_shared_frame_id_)
     spatial_layer.fill(-1);
 
-  buffer_id_to_frame_id_.fill(-1);
-
   Random random(rtc::TimeMicros());
   state_.picture_id =
       state ? state->picture_id : (random.Rand<int16_t>() & 0x7FFF);
@@ -181,9 +181,16 @@ RTPVideoHeader RtpPayloadParams::GetRtpVideoHeader(
 
   SetCodecSpecific(&rtp_video_header, first_frame_in_picture);
 
-  if (generic_descriptor_experiment_)
-    SetGeneric(codec_specific_info, shared_frame_id, is_keyframe,
-               &rtp_video_header);
+  if (generic_descriptor_experiment_) {
+    if (codec_specific_info && codec_specific_info->generic_frame_info &&
+        !codec_specific_info->generic_frame_info->encoder_buffers.empty()) {
+      SetGenericFromEncoderBuffers(*codec_specific_info->generic_frame_info,
+                                   shared_frame_id, &rtp_video_header);
+    } else {
+      SetGeneric(codec_specific_info, shared_frame_id, is_keyframe,
+                 &rtp_video_header);
+    }
+  }
 
   return rtp_video_header;
 }
@@ -250,6 +257,62 @@ void RtpPayloadParams::SetCodecSpecific(RTPVideoHeader* rtp_video_header,
       rtp_video_header->codec == kVideoCodecGeneric) {
     rtp_video_header->generic.emplace().frame_id = state_.picture_id;
   }
+}
+
+void RtpPayloadParams::SetGenericFromEncoderBuffers(
+    const GenericFrameInfo& frame_info,
+    int64_t frame_id,
+    RTPVideoHeader* rtp_video_header) {
+  RTPVideoHeader::GenericDescriptorInfo& generic =
+      rtp_video_header->generic.emplace();
+
+  generic.frame_id = frame_id;
+  generic.spatial_index = frame_info.spatial_id;
+  generic.temporal_index = frame_info.temporal_id;
+  // TODO(bugs.webrtc.org/10342): Copy decode_target_indications.
+  generic.discardable =
+      absl::c_linear_search(frame_info.decode_target_indications,
+                            DecodeTargetIndication::kDiscardable);
+
+  // Calculate generic.depenendencies based on buffer usage.
+  RTC_DCHECK_GT(frame_info.encoder_buffers.size(), 0);
+  RTC_DCHECK_LE(frame_info.encoder_buffers.size(),
+                buffer_id_to_frame_id_.size());
+
+  std::set<int64_t> direct_references;
+  std::set<int64_t> indirect_references;
+  for (size_t i = 0; i < frame_info.encoder_buffers.size(); ++i) {
+    if (rtp_video_header->frame_type == VideoFrameType::kVideoFrameKey ||
+        !frame_info.encoder_buffers[i].referenced) {
+      continue;
+    }
+    const BufferUsage& buffer = buffer_id_to_frame_id_[i];
+    if (buffer.frame_id == -1) {
+      // Shouldn't reference frame that is not there.
+      RTC_LOG(LS_WARNING) << "Odd configuration: frame references buffer # "
+                          << i << " that was never updated.";
+      continue;
+    }
+    RTC_DCHECK_NE(buffer.frame_id, -1);
+    direct_references.insert(buffer.frame_id);
+    indirect_references.insert(buffer.dependencies.begin(),
+                               buffer.dependencies.end());
+  }
+  for (size_t i = 0; i < frame_info.encoder_buffers.size(); ++i) {
+    if (!frame_info.encoder_buffers[i].updated) {
+      continue;
+    }
+    BufferUsage& buffer = buffer_id_to_frame_id_[i];
+    buffer.frame_id = frame_id;
+    buffer.dependencies.assign(direct_references.begin(),
+                               direct_references.end());
+  }
+  // Reduce references: if frame #3 depends on frame #2 and #1 and frame #2
+  // depends on frame #1, then frame #3 needs to depend just on frame #2.
+  // Though this set diff removes only 1 level of indirection, it seems
+  // enough for all currently used structures.
+  absl::c_set_difference(direct_references, indirect_references,
+                         std::back_inserter(generic.dependencies));
 }
 
 void RtpPayloadParams::SetGeneric(const CodecSpecificInfo* codec_specific_info,
@@ -446,7 +509,7 @@ void RtpPayloadParams::SetDependenciesVp8New(
 
   if (is_keyframe) {
     RTC_DCHECK_EQ(vp8_info.referencedBuffersCount, 0u);
-    buffer_id_to_frame_id_.fill(shared_frame_id);
+    buffer_id_to_frame_id_.fill(BufferUsage{shared_frame_id, {}});
     return;
   }
 
@@ -462,7 +525,7 @@ void RtpPayloadParams::SetDependenciesVp8New(
     RTC_DCHECK_LT(referenced_buffer, buffer_id_to_frame_id_.size());
 
     const int64_t dependency_frame_id =
-        buffer_id_to_frame_id_[referenced_buffer];
+        buffer_id_to_frame_id_[referenced_buffer].frame_id;
     RTC_DCHECK_GE(dependency_frame_id, 0);
     RTC_DCHECK_LT(dependency_frame_id, shared_frame_id);
 
@@ -477,7 +540,7 @@ void RtpPayloadParams::SetDependenciesVp8New(
   RTC_DCHECK_LE(vp8_info.updatedBuffersCount, kBuffersCountVp8);
   for (size_t i = 0; i < vp8_info.updatedBuffersCount; ++i) {
     const size_t updated_id = vp8_info.updatedBuffers[i];
-    buffer_id_to_frame_id_[updated_id] = shared_frame_id;
+    buffer_id_to_frame_id_[updated_id].frame_id = shared_frame_id;
   }
 
   RTC_DCHECK_LE(buffer_id_to_frame_id_.size(), kBuffersCountVp8);
