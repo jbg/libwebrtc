@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6de87b0_b894eaad",
+        "filename": "tools_webrtc/perf/webrtc_dashboard_upload.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-01-21T13:58:57Z",
+      "side": 1,
+      "message": "I don\u0027t like this import hack, but like I said in the CL desc, it is temporary and will go away shortly.",
+      "range": {
+        "startLine": 95,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 68
+      },
+      "revId": "f053d43d2e4bb2e79b846393bda32829fcc50b60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
