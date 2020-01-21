@@ -267,6 +267,7 @@ class RtpReplayer final {
     webrtc::RtcEventLogNull event_log;
     Call::Config call_config(&event_log);
     call_config.task_queue_factory = task_queue_factory.get();
+    call_config.trials = new FieldTrialBasedConfig();
     std::unique_ptr<Call> call(Call::Create(call_config));
     std::unique_ptr<StreamState> stream_state;
     // Attempt to load the configuration
