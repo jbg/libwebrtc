@@ -59,6 +59,7 @@ if (!build_with_chromium) {
         "stats:rtc_stats_unittests",
         "system_wrappers:system_wrappers_unittests",
         "test",
+        "tools_webrtc/perf:webrtc_dashboard_upload",
         "video:screenshare_loopback",
         "video:sv_loopback",
         "video:video_loopback",
