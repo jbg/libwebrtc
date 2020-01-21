@@ -43,6 +43,9 @@ class RtpPayloadParams final {
  private:
   void SetCodecSpecific(RTPVideoHeader* rtp_video_header,
                         bool first_frame_in_picture);
+  void SetGenericFromEncoderBuffers(const GenericFrameInfo& frame_info,
+                                    int64_t frame_id,
+                                    RTPVideoHeader* rtp_video_header);
   void SetGeneric(const CodecSpecificInfo* codec_specific_info,
                   int64_t frame_id,
                   bool is_keyframe,
@@ -89,9 +92,13 @@ class RtpPayloadParams final {
   // set kMaxCodecBuffersCount to the max() of these codecs' buffer count.
   static constexpr size_t kMaxCodecBuffersCount =
       CodecSpecificInfoVP8::kBuffersCount;
+  struct BufferUsage {
+    int64_t frame_id = -1;
+    absl::InlinedVector<int64_t, kMaxCodecBuffersCount> dependencies;
+  };
 
   // Maps buffer IDs to the frame-ID stored in them.
-  std::array<int64_t, kMaxCodecBuffersCount> buffer_id_to_frame_id_;
+  std::array<BufferUsage, kMaxCodecBuffersCount> buffer_id_to_frame_id_;
 
   // Until we remove SetDependenciesVp8Deprecated(), we should make sure
   // that, for a given object, we either always use

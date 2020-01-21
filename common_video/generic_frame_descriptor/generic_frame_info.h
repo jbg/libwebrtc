@@ -54,6 +54,7 @@ class GenericFrameInfo::Builder {
   Builder& S(int spatial_id);
   Builder& Dtis(absl::string_view indication_symbols);
   Builder& Fdiffs(std::initializer_list<int> frame_diffs);
+  Builder& Buffers(std::initializer_list<CodecBufferUsage> buffers);
 
  private:
   GenericFrameInfo info_;
