@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5a135752_db84eace",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-21T16:40:41Z",
+      "side": 1,
+      "message": "Since this is only called on reconfiguration that happens reasonably rarely AFAIK. (Essentially on SDP changes) I don\u0027t think it\u0027s a problem, and the loss of readability likely outweigh the performance benefit of combining those two unrelated concepts into one call.\n\nWhen we default enable inclusion of overhead it might make sense to reevaluate the design somewhat though.",
+      "parentUuid": "fd0c0c83_0ff8b3ce",
+      "range": {
+        "startLine": 769,
+        "startChar": 0,
+        "endLine": 771,
+        "endChar": 53
+      },
+      "revId": "a605fdc484e9579bed9e12d3f7d69ea72feb3845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0cd7bd57_a25749a7",
         "filename": "modules/pacing/pacing_controller.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "a605fdc484e9579bed9e12d3f7d69ea72feb3845",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2208c574_00381107",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-21T16:40:41Z",
+      "side": 1,
+      "message": "Thanks! \nYes, this is a mistake, I intended to set it to false initially like in the packet queue. (this also solved why some tests were failing, saved me some time debugging)",
+      "parentUuid": "0cd7bd57_a25749a7",
+      "range": {
+        "startLine": 122,
+        "startChar": 6,
+        "endLine": 122,
+        "endChar": 23
+      },
+      "revId": "a605fdc484e9579bed9e12d3f7d69ea72feb3845",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
