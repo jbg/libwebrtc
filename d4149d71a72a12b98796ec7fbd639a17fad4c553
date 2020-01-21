@@ -34,6 +34,24 @@
       "revId": "d4149d71a72a12b98796ec7fbd639a17fad4c553",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "100b0c82_f9d7b0eb",
+        "filename": "call/adaptation/resource_adaptation_module_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-01-21T10:18:44Z",
+      "side": 1,
+      "message": "OK I did this!",
+      "parentUuid": "acb175ec_eba9c592",
+      "revId": "d4149d71a72a12b98796ec7fbd639a17fad4c553",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
