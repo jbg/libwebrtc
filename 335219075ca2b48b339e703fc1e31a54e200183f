@@ -45,6 +45,210 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4947945a_d1ba3e90",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "What happens if this is called from the main UI thread? Doesn\u0027t the call to this method deadlocks, waiting for the UI thread to fetch the DeviceInformation collection? As far as I know this call is not proxied to the signalling thread. Same question for all other uses of blocking_suspend().",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9f26c66_88b3d273",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "Can\u0027t we use rtc::ToUtf8() instead of explicit calls to Windows API?",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "632d97a6_f44053ce",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "Maybe reword or remove the log message?",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e2a2640_a994e6e6",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "Style: Use // instead of /**/ ?",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a1d02b9_5c35796e",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "These comments can probably be removed, they do not provide much more information than the name of the method doesn\u0027t already provide.",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0683b1b_910b285b",
+        "filename": "modules/video_capture/windows/video_capture_factory_windows.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "It seems those 2 options are incompatible. Shouldn\u0027t #elif be used then instead of two separate #if ?",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38349af1_615ff8f8",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "I _think_ the coding convention is more to put the private variables at the end, and to use a suffix underscore instead of a prefix one.",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf552ded_c0ff4ce5",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "is_capturing_ (snake_case)?",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5404c6f_0c590e0e",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "{nullptr}? Or better, why not use a std::unique_ptr here, and change the signature of the constructor to show it owns the instance?",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9129cdc_86a2456d",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "Ok for now but this should really be revisited to keep frames in GPU and pass them around to the encoder as handles if the encoder is hardware-based, because currently frames are captured in GPU memory, copied to CPU, then re-uploaded by the hardware encoder, and re-copied to CPU again, and this is a performance concern on some devices.",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1ca81a2_02f79ca7",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "Is there any implication about e.g. a webcam\u0027s microphone here? Is the webcam microphone still available for the audio module to capture from it, even if this video module also captures video frames from the same device?",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c04f7577_93eacc5d",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-22T10:38:40Z",
+      "side": 1,
+      "message": "I am a bit surprised by this implementation. This seems overly complex, and quite different from the one currently used in the WebRTC UWP project. Also the only documentation of IMemoryBufferByteAccess I found [1] is marked as deprecated. Was this validated with the Media Foundation team to ensure we use the most performant path, and not some legacy/wrapper one? We had many issues like this in the WebRTC UWP implementation where seemingly equivalent code paths where yielding different results in terms of performance.\n\n[1] https://docs.microsoft.com/en-us/previous-versions/mt297505(v\u003dvs.85)",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
