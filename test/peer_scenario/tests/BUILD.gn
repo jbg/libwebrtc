@@ -13,13 +13,17 @@ if (rtc_include_tests) {
     testonly = true
     sources = [
       "peer_scenario_quality_test.cc",
+      "receive_side_bwe_test.cc",
       "remote_estimate_test.cc",
     ]
     deps = [
       "..:peer_scenario",
       "../../:field_trial",
       "../../:test_support",
+      "../../..//rtc_base:gunit_helpers",
+      "../../../api:rtc_stats_api",
       "../../../modules/rtp_rtcp:rtp_rtcp",
+      "../../../pc:pc_test_utils",
       "../../../pc:rtc_pc_base",
     ]
   }
