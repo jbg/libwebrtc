@@ -46,6 +46,30 @@
       "revId": "7d839bbfc9afdf1d7aadd7e06147545fa3493628",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f03f2aca_f28cce39",
+        "filename": "api/test/time_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-01-22T09:40:10Z",
+      "side": 1,
+      "message": "I just feel some confusion when I see GetTaskQueueFactory() and GetTaskQueueFactory(). The question is how they correlate, which one and when should be use. I think it will be good to explain in API doc. Why both methods exists, what is the contract between these factories etc.",
+      "parentUuid": "2abb1d7a_4a9c1772",
+      "range": {
+        "startLine": 41,
+        "startChar": 36,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "7d839bbfc9afdf1d7aadd7e06147545fa3493628",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
