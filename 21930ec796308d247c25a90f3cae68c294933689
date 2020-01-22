@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fe75a2e_dc2cf746",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-22T13:40:30Z",
+      "side": 1,
+      "message": "This was previously implicit.",
+      "range": {
+        "startLine": 596,
+        "startChar": 6,
+        "endLine": 597,
+        "endChar": 40
+      },
+      "revId": "21930ec796308d247c25a90f3cae68c294933689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49670b16_b41e7df1",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-22T13:40:30Z",
+      "side": 1,
+      "message": "target_audio_bitrate_bps excludes overhead",
+      "range": {
+        "startLine": 598,
+        "startChar": 0,
+        "endLine": 598,
+        "endChar": 45
+      },
+      "revId": "21930ec796308d247c25a90f3cae68c294933689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
