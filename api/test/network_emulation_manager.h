@@ -70,8 +70,6 @@ class EmulatedNetworkManagerInterface {
       std::function<void(EmulatedNetworkStats)> stats_callback) const = 0;
 };
 
-enum class TimeMode { kRealTime, kSimulated };
-
 // Provides an API for creating and configuring emulated network layer.
 // All objects returned by this API are owned by NetworkEmulationManager itself
 // and will be deleted when manager will be deleted.
