@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "afcb7191_956ad84c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-01-22T07:36:04Z",
+      "side": 1,
+      "message": "Please CC me on this CL.",
+      "range": {
+        "startLine": 24,
+        "startChar": 82,
+        "endLine": 24,
+        "endChar": 173
+      },
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "241bde2d_1be07eee",
         "filename": "modules/video_capture/BUILD.gn",
         "patchSetId": 2
