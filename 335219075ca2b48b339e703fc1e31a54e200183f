@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "040ea5bb_c9ef2cb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-22T12:52:13Z",
+      "side": 1,
+      "message": "The style guide prescribes C++14: https://webrtc.googlesource.com/src/+/master/style-guide.md#c_version\nWhy does this CL require C++17?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "241bde2d_1be07eee",
         "filename": "modules/video_capture/BUILD.gn",
         "patchSetId": 2
