@@ -70,6 +70,30 @@
       "revId": "7d839bbfc9afdf1d7aadd7e06147545fa3493628",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afdfbe27_df04fc86",
+        "filename": "api/test/time_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-22T12:21:43Z",
+      "side": 1,
+      "message": "There\u0027s no contract between them, the only contract is that Get will return a pointer that lives for the life time of the controller (this is implicit, a borrowed pointer typically does not outlive the source) and Create will create a factory that fulfills the interface of an owned factory but with the additional constraint that it also must not outlive the source.\n\nThis distinction is only needed due to the somewhat odd design that peer connection must have an owning pointer to it\u0027s factory.\n\nI added a comment explaining the gotcha about life times for Create.",
+      "parentUuid": "f03f2aca_f28cce39",
+      "range": {
+        "startLine": 41,
+        "startChar": 36,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "7d839bbfc9afdf1d7aadd7e06147545fa3493628",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
