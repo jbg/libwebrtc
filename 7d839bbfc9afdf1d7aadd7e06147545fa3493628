@@ -22,6 +22,30 @@
       "revId": "7d839bbfc9afdf1d7aadd7e06147545fa3493628",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2abb1d7a_4a9c1772",
+        "filename": "api/test/time_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-01-22T08:08:03Z",
+      "side": 1,
+      "message": "I think that the fact that it\u0027s a wrapped factory isn\u0027t that relevant for the caller. For instance, we could potentially change the behavior for the real time controller to create a new one with the underlying APIs and it wouldn\u0027t break the interface.",
+      "parentUuid": "0bccb5b1_e0061454",
+      "range": {
+        "startLine": 41,
+        "startChar": 36,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "7d839bbfc9afdf1d7aadd7e06147545fa3493628",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
