@@ -141,6 +141,10 @@ class AudioFrame {
   // concealment, comfort noise generation, etc.
   RtpPacketInfos packet_infos_;
 
+  // Absolute capture timestamp when this audio frame was originally captured.
+  // This timestamp MUST be based on the same clock as rtc::TimeMicros().
+  int64_t absolute_capture_timestamp_ms_ = 0;
+
  private:
   // A permanently zeroed out buffer to represent muted frames. This is a
   // header-only class, so the only way to avoid creating a separate empty
