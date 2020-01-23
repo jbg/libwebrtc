@@ -396,7 +396,8 @@ int AudioCodingModuleImpl::Add10MsDataInternal(const AudioFrame& audio_frame,
   input_data->audio_channel = current_num_channels;
   // TODO(bugs.webrtc.org/10739): Assign from a corresponding field in
   // audio_frame when it is added in AudioFrame.
-  input_data->absolute_capture_timestamp_ms = 0;
+  input_data->absolute_capture_timestamp_ms =
+      audio_frame.absolute_capture_timestamp_ms_;
 
   if (!same_num_channels) {
     // Remixes the input frame to the output data and in the process resize the
