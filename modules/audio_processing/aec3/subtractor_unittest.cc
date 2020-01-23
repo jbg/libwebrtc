@@ -19,6 +19,7 @@
 #include "modules/audio_processing/aec3/render_delay_buffer.h"
 #include "modules/audio_processing/test/echo_canceller_test_tools.h"
 #include "modules/audio_processing/utility/cascaded_biquad_filter.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/random.h"
 #include "rtc_base/strings/string_builder.h"
 #include "test/gtest.h"
@@ -172,16 +173,16 @@ std::vector<float> RunSubtractorTest(
   return results;
 }
 
-std::string ProduceDebugText(size_t num_render_channels,
-                             size_t num_capture_channels,
-                             size_t delay,
-                             int filter_length_blocks) {
+void ProduceDebugText(size_t num_render_channels,
+                      size_t num_capture_channels,
+                      size_t delay,
+                      int filter_length_blocks) {
   rtc::StringBuilder ss;
   ss << "delay: " << delay << ", ";
   ss << "filter_length_blocks:" << filter_length_blocks << ", ";
   ss << "num_render_channels:" << num_render_channels << ", ";
   ss << "num_capture_channels:" << num_capture_channels;
-  return ss.Release();
+  RTC_LOG(LS_INFO) << ss.Release();
 }
 
 }  // namespace
@@ -219,7 +220,7 @@ TEST(Subtractor, Convergence) {
   std::vector<int> blocks_with_echo_path_changes;
   for (size_t filter_length_blocks : {12, 20, 30}) {
     for (size_t delay_samples : {0, 64, 150, 200, 301}) {
-      SCOPED_TRACE(ProduceDebugText(1, 1, delay_samples, filter_length_blocks));
+      ProduceDebugText(1, 1, delay_samples, filter_length_blocks);
       std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
           1, 1, 2500, delay_samples, filter_length_blocks, filter_length_blocks,
           false, blocks_with_echo_path_changes);
@@ -244,8 +245,7 @@ TEST(Subtractor, ConvergenceMultiChannel) {
   std::vector<int> blocks_with_echo_path_changes;
   for (size_t num_render_channels : kNumRenderChannelsToTest) {
     for (size_t num_capture_channels : kNumCaptureChannelsToTest) {
-      SCOPED_TRACE(
-          ProduceDebugText(num_render_channels, num_render_channels, 64, 20));
+      ProduceDebugText(num_render_channels, num_render_channels, 64, 20);
       size_t num_blocks_to_process = 2500 * num_render_channels;
       std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
           num_render_channels, num_capture_channels, num_blocks_to_process, 64,
@@ -285,7 +285,7 @@ TEST(Subtractor, NonConvergenceOnUncorrelatedSignals) {
   std::vector<int> blocks_with_echo_path_changes;
   for (size_t filter_length_blocks : {12, 20, 30}) {
     for (size_t delay_samples : {0, 64, 150, 200, 301}) {
-      SCOPED_TRACE(ProduceDebugText(1, 1, delay_samples, filter_length_blocks));
+      ProduceDebugText(1, 1, delay_samples, filter_length_blocks);
 
       std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
           1, 1, 3000, delay_samples, filter_length_blocks, filter_length_blocks,
@@ -302,8 +302,7 @@ TEST(Subtractor, NonConvergenceOnUncorrelatedSignalsMultiChannel) {
   std::vector<int> blocks_with_echo_path_changes;
   for (size_t num_render_channels : {1, 2, 4}) {
     for (size_t num_capture_channels : {1, 2, 4}) {
-      SCOPED_TRACE(
-          ProduceDebugText(num_render_channels, num_render_channels, 64, 20));
+      ProduceDebugText(num_render_channels, num_render_channels, 64, 20);
       size_t num_blocks_to_process = 5000 * num_render_channels;
       std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
           num_render_channels, num_capture_channels, num_blocks_to_process, 64,
