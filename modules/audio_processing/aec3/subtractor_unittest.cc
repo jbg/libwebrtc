@@ -298,22 +298,63 @@ TEST(Subtractor, NonConvergenceOnUncorrelatedSignals) {
 }
 
 // Verifies that the subtractor does not converge on uncorrelated signals.
-TEST(Subtractor, NonConvergenceOnUncorrelatedSignalsMultiChannel) {
+void TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(
+    size_t num_render_channels,
+    size_t num_capture_channels) {
   std::vector<int> blocks_with_echo_path_changes;
-  for (size_t num_render_channels : {1, 2, 4}) {
-    for (size_t num_capture_channels : {1, 2, 4}) {
-      SCOPED_TRACE(
-          ProduceDebugText(num_render_channels, num_render_channels, 64, 20));
-      size_t num_blocks_to_process = 5000 * num_render_channels;
-      std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
-          num_render_channels, num_capture_channels, num_blocks_to_process, 64,
-          20, 20, true, blocks_with_echo_path_changes);
-      for (float echo_to_nearend_power : echo_to_nearend_powers) {
-        EXPECT_LT(.8f, echo_to_nearend_power);
-        EXPECT_NEAR(1.f, echo_to_nearend_power, 0.25f);
-      }
-    }
+  size_t num_blocks_to_process = 5000 * num_render_channels;
+  std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
+      num_render_channels, num_capture_channels, num_blocks_to_process, 64, 20,
+      20, true, blocks_with_echo_path_changes);
+  for (float echo_to_nearend_power : echo_to_nearend_powers) {
+    EXPECT_LT(.8f, echo_to_nearend_power);
+    EXPECT_NEAR(1.f, echo_to_nearend_power, 0.25f);
   }
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender1Capture1) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(1, 1);
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender1Capture2) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(1, 2);
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender1Capture4) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(1, 4);
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender2Capture1) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(2, 1);
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender2Capture2) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(2, 2);
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender2Capture4) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(2, 4);
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender4Capture1) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(4, 1);
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender4Capture2) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(4, 2);
+}
+
+TEST(Subtractor,
+     NonConvergenceOnUncorrelatedSignalsMultiChannelRender4Capture4) {
+  TestSubtractorNonConvergenceOnUncorrelatedSignalsMultiChannel(4, 4);
 }
 
 }  // namespace webrtc
