@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "a505c11a_189c2aca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "Sure thing.",
+      "parentUuid": "afcb7191_956ad84c",
+      "range": {
+        "startLine": 24,
+        "startChar": 82,
+        "endLine": 24,
+        "endChar": 173
+      },
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d425f8c7_0fd66804",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "This change uses the C++/WinRT projection which requires C++17. \n\n\u003e\u003e \"Because C++/WinRT uses features from the C++17 standard, the NuGet package sets project property C/C++ \u003e Language \u003e C++ Language Standard \u003e ISO C++17 Standard (/std:c++17) in Visual Studio.\"\n(https://docs.microsoft.com/en-us/windows/uwp/cpp-and-winrt-apis/intro-to-using-cpp-with-winrt)\n\nUsing the C++/CX projection or raw ABI+WRL would end up with a much messier code. Additionally, C++/CX would require build flags that impact other parts of the code base.\n\nAre there expectations for having this code running on Chrome? Is there a reason for keeping WebRTC parked on C++14? Is there a process for requesting exception?",
+      "parentUuid": "040ea5bb_c9ef2cb1",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "241bde2d_1be07eee",
         "filename": "modules/video_capture/BUILD.gn",
         "patchSetId": 2
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "24154544_93f200fb",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "241bde2d_1be07eee",
+      "range": {
+        "startLine": 68,
+        "startChar": 21,
+        "endLine": 68,
+        "endChar": 44
+      },
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4947945a_d1ba3e90",
         "filename": "modules/video_capture/windows/device_info_winrt.cc",
         "patchSetId": 2
@@ -85,6 +157,24 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01a9bdc0_ab09b475",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "This implementation mimics the behavior of the DShow implementation. This interface, and the others using blocking_suspend, expect returning with a result. Besides that, they hold locks as soon as they begins. I don\u0027t think there is a way to keep the interface as is and not block UI thread when the calling code has been structured to block the UI thread. I\u0027m happy to add an assert alerting developers about miss use of the API.",
+      "parentUuid": "4947945a_d1ba3e90",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "eda21fa1_da756937",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e9f26c66_88b3d273",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "632d97a6_f44053ce",
         "filename": "modules/video_capture/windows/device_info_winrt.cc",
         "patchSetId": 2
@@ -119,6 +227,24 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3fcb83f_da1454d8",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "These log messages mimic the ones emitted by the DShow implementation. I\u0027m keeping as is because it might have tests or other kind of tools checking for messages with formatted like this one.",
+      "parentUuid": "632d97a6_f44053ce",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "1094d250_6f0e49e7",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "This was copied-and-pasted from device_info_ds.h. Google Style Guide allows both ways of comments (https://google.github.io/styleguide/cppguide.html#Comment_Style) and encourages consistence. I looked at the other header files in this folder and it seems that consistence is not a consensus. So, for this change, I\u0027m going to be consistent with // .",
+      "parentUuid": "3e2a2640_a994e6e6",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1d02b9_5c35796e",
         "filename": "modules/video_capture/windows/device_info_winrt.h",
         "patchSetId": 2
@@ -153,6 +297,24 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff93f21_4642c803",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "This was copied-and-pasted from device_info_ds.h. Arguably the comment says that the dialog box should be provided by the OS instead of a custom one. Keeping the comment as is.",
+      "parentUuid": "7a1d02b9_5c35796e",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -173,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "40562f0c_80b51e76",
+        "filename": "modules/video_capture/windows/video_capture_factory_windows.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "Media Foundation could also be used for implementing a video capture module. AFAIK, that was one option explored in the past (https://bugs.chromium.org/p/chromium/issues/detail?id\u003d735576). \nIt\u0027s not clear to me why the implementation with Media Foundation is not here, but I\u0027d like to keep the option available.",
+      "parentUuid": "e0683b1b_910b285b",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38349af1_615ff8f8",
         "filename": "modules/video_capture/windows/video_capture_winrt.cc",
         "patchSetId": 2
@@ -187,6 +367,24 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d93d36c1_2aef16fa",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "38349af1_615ff8f8",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -207,6 +405,24 @@
     },
     {
       "key": {
+        "uuid": "7ed92fa8_8ca5e41f",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "bf552ded_c0ff4ce5",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5404c6f_0c590e0e",
         "filename": "modules/video_capture/windows/video_capture_winrt.cc",
         "patchSetId": 2
@@ -221,6 +437,24 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41f7822e_d16f5b1b",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "The ownership is the other way around. It is VideoCaptureWinRT who owns VideoCaptureWinRTInternal.",
+      "parentUuid": "a5404c6f_0c590e0e",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -241,6 +475,24 @@
     },
     {
       "key": {
+        "uuid": "9b67b6db_dd6368d7",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "It is by design. VideoCaptureImpl::IncomingFrame requires a pointer to a buffer in RAM.\n\nKeep in mind that MediaCaptureMemoryPreference does not give guarantees about where the frames will be kept.\nAuto\t0\tThe system dynamically chooses between CPU and GPU memory.\nCpu\t1\tCPU memory is used.\nhttps://docs.microsoft.com/en-us/uwp/api/windows.media.capture.mediacapturememorypreference\n\nThe current CL aims to mimic the DShow implementation as much as possible. That said, it is in my backlog to improve the performance of this VCM. However, the initial goal is to make the WebRTC code base build for UWP.",
+      "parentUuid": "a9129cdc_86a2456d",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1ca81a2_02f79ca7",
         "filename": "modules/video_capture/windows/video_capture_winrt.cc",
         "patchSetId": 2
@@ -258,6 +510,24 @@
     },
     {
       "key": {
+        "uuid": "46e9df09_92fd4016",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "An audio capture module using WinRT APIs is in currently in development. My guess is that it should work because using this VCM with the legacy ACM works.",
+      "parentUuid": "f1ca81a2_02f79ca7",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c04f7577_93eacc5d",
         "filename": "modules/video_capture/windows/video_capture_winrt.cc",
         "patchSetId": 2
@@ -272,6 +542,24 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9de4fa1_d64e81fd",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-23T01:23:32Z",
+      "side": 1,
+      "message": "IMemoryBufferByteAccess is not deprecated. The [1] link is from a deprecated documentation set (vs.85).\n\nIMemoryBufferByteAccess is alive and well as shown in https://docs.microsoft.com/en-us/uwp/api/Windows.Foundation.IMemoryBufferReference .\n\nI agree that using MemoryBufferReference+MemoryBufferByteAccess is overly complex, but it is how the WinRT APIs were designed to be used for accessing memory buffers. Remember that WinRT APIs have to work on managed languages like C#. All these calls are needed to provide VideoCaptureImpl::IncomingFrame with the pointer to a buffer in RAM. \n\nYou\u0027ll find this pattern applied throughout internal and external code bases. Case in point, this code was based on the examples from the UWP documentation https://docs.microsoft.com/en-us/windows/uwp/audio-video-camera/imaging#create-or-edit-a-softwarebitmap-programmatically .",
+      "parentUuid": "c04f7577_93eacc5d",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
