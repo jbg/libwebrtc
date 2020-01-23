@@ -231,33 +231,6 @@ TEST(Subtractor, Convergence) {
   }
 }
 
-// Verifies that the subtractor is able to converge on correlated data.
-TEST(Subtractor, ConvergenceMultiChannel) {
-#if defined(NDEBUG)
-  const size_t kNumRenderChannelsToTest[] = {1, 2, 8};
-  const size_t kNumCaptureChannelsToTest[] = {1, 2, 4};
-#else
-  const size_t kNumRenderChannelsToTest[] = {1, 2};
-  const size_t kNumCaptureChannelsToTest[] = {1, 2};
-#endif
-
-  std::vector<int> blocks_with_echo_path_changes;
-  for (size_t num_render_channels : kNumRenderChannelsToTest) {
-    for (size_t num_capture_channels : kNumCaptureChannelsToTest) {
-      SCOPED_TRACE(
-          ProduceDebugText(num_render_channels, num_render_channels, 64, 20));
-      size_t num_blocks_to_process = 2500 * num_render_channels;
-      std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
-          num_render_channels, num_capture_channels, num_blocks_to_process, 64,
-          20, 20, false, blocks_with_echo_path_changes);
-
-      for (float echo_to_nearend_power : echo_to_nearend_powers) {
-        EXPECT_GT(0.1f, echo_to_nearend_power);
-      }
-    }
-  }
-}
-
 // Verifies that the subtractor is able to handle the case when the main filter
 // is longer than the shadow filter.
 TEST(Subtractor, MainFilterLongerThanShadowFilter) {
@@ -297,23 +270,66 @@ TEST(Subtractor, NonConvergenceOnUncorrelatedSignals) {
   }
 }
 
-// Verifies that the subtractor does not converge on uncorrelated signals.
-TEST(Subtractor, NonConvergenceOnUncorrelatedSignalsMultiChannel) {
+class SubtractorMultiChannel
+    : public ::testing::Test,
+      public ::testing::WithParamInterface<std::tuple<size_t, size_t>> {};
+
+// Verifies that the subtractor is able to converge on correlated data.
+TEST_P(SubtractorMultiChannel, Convergence) {
+  const size_t num_render_channels = std::get<0>(GetParam());
+  const size_t num_capture_channels = std::get<1>(GetParam());
+
   std::vector<int> blocks_with_echo_path_changes;
-  for (size_t num_render_channels : {1, 2, 4}) {
-    for (size_t num_capture_channels : {1, 2, 4}) {
-      SCOPED_TRACE(
-          ProduceDebugText(num_render_channels, num_render_channels, 64, 20));
-      size_t num_blocks_to_process = 5000 * num_render_channels;
-      std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
-          num_render_channels, num_capture_channels, num_blocks_to_process, 64,
-          20, 20, true, blocks_with_echo_path_changes);
-      for (float echo_to_nearend_power : echo_to_nearend_powers) {
-        EXPECT_LT(.8f, echo_to_nearend_power);
-        EXPECT_NEAR(1.f, echo_to_nearend_power, 0.25f);
-      }
-    }
+  size_t num_blocks_to_process = 2500 * num_render_channels;
+  std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
+      num_render_channels, num_capture_channels, num_blocks_to_process, 64, 20,
+      20, false, blocks_with_echo_path_changes);
+
+  for (float echo_to_nearend_power : echo_to_nearend_powers) {
+    EXPECT_GT(0.1f, echo_to_nearend_power);
   }
 }
 
+// Verifies that the subtractor does not converge on uncorrelated signals.
+TEST_P(SubtractorMultiChannel, NonConvergenceOnUncorrelatedSignals) {
+  const size_t num_render_channels = std::get<0>(GetParam());
+  const size_t num_capture_channels = std::get<1>(GetParam());
+
+  std::vector<int> blocks_with_echo_path_changes;
+  size_t num_blocks_to_process = 5000 * num_render_channels;
+  std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
+      num_render_channels, num_capture_channels, num_blocks_to_process, 64, 20,
+      20, true, blocks_with_echo_path_changes);
+  for (float echo_to_nearend_power : echo_to_nearend_powers) {
+    EXPECT_LT(.8f, echo_to_nearend_power);
+    EXPECT_NEAR(1.f, echo_to_nearend_power, 0.25f);
+  }
+}
+
+// Function to print user-friendly multi channel unit test names.
+const auto PrintMultiChannelParamNames =
+    [](const ::testing::TestParamInfo<SubtractorMultiChannel::ParamType>&
+           info) {
+      return (rtc::StringBuilder() << "Render" << std::get<0>(info.param)
+                                   << "Capture" << std::get<1>(info.param))
+          .str();
+      rtc::StringBuilder name;
+      name << "Render" << std::get<0>(info.param) << "Capture"
+           << std::get<1>(info.param);
+      return name.str();
+    };
+
+#if defined(NDEBUG)
+INSTANTIATE_TEST_SUITE_P(NonDebugMultiChannel,
+                         SubtractorMultiChannel,
+                         ::testing::Combine(::testing::Values(1, 2, 8),
+                                            ::testing::Values(1, 2, 4)),
+                         PrintMultiChannelParamNames);
+#else
+INSTANTIATE_TEST_SUITE_P(DebugMultiChannel,
+                         SubtractorMultiChannel,
+                         ::testing::Combine(::testing::Values(1, 2),
+                                            ::testing::Values(1, 2)),
+                         PrintMultiChannelParamNames);
+#endif
 }  // namespace webrtc
