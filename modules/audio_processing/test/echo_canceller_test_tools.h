@@ -16,8 +16,24 @@
 
 #include "api/array_view.h"
 #include "rtc_base/random.h"
+#include "rtc_base/strings/string_builder.h"
+#include "test/gtest.h"
 
 namespace webrtc {
+
+// Class to inherit for parameterized multi channel unit tests.
+class Aec3MultiChannelTest
+    : public ::testing::Test,
+      public ::testing::WithParamInterface<std::tuple<size_t, size_t>> {};
+
+// Function to print user-friendly multi channel unit test names.
+const auto PrintAec3MultiChannelTestParamNames =
+    [](const ::testing::TestParamInfo<Aec3MultiChannelTest::ParamType>& info) {
+      rtc::StringBuilder name;
+      name << "Render" << std::get<0>(info.param) << "Capture"
+           << std::get<1>(info.param);
+      return name.str();
+    };
 
 // Randomizes the elements in a vector with values -32767.f:32767.f.
 void RandomizeSampleVector(Random* random_generator, rtc::ArrayView<float> v);

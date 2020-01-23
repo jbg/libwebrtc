@@ -26,6 +26,8 @@
 namespace webrtc {
 namespace {
 
+class SubtractorTest : public Aec3MultiChannelTest {};
+
 std::vector<float> RunSubtractorTest(
     size_t num_render_channels,
     size_t num_capture_channels,
@@ -189,14 +191,14 @@ std::string ProduceDebugText(size_t num_render_channels,
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
 
 // Verifies that the check for non data dumper works.
-TEST(Subtractor, NullDataDumper) {
+TEST(SubtractorTest, NullDataDumper) {
   EXPECT_DEATH(
       Subtractor(EchoCanceller3Config(), 1, 1, nullptr, DetectOptimization()),
       "");
 }
 
 // Verifies the check for the capture signal size.
-TEST(Subtractor, WrongCaptureSize) {
+TEST(SubtractorTest, WrongCaptureSize) {
   ApmDataDumper data_dumper(42);
   EchoCanceller3Config config;
   Subtractor subtractor(config, 1, 1, &data_dumper, DetectOptimization());
@@ -215,7 +217,7 @@ TEST(Subtractor, WrongCaptureSize) {
 #endif
 
 // Verifies that the subtractor is able to converge on correlated data.
-TEST(Subtractor, Convergence) {
+TEST(SubtractorTest, Convergence) {
   std::vector<int> blocks_with_echo_path_changes;
   for (size_t filter_length_blocks : {12, 20, 30}) {
     for (size_t delay_samples : {0, 64, 150, 200, 301}) {
@@ -232,35 +234,24 @@ TEST(Subtractor, Convergence) {
 }
 
 // Verifies that the subtractor is able to converge on correlated data.
-TEST(Subtractor, ConvergenceMultiChannel) {
-#if defined(NDEBUG)
-  const size_t kNumRenderChannelsToTest[] = {1, 2, 8};
-  const size_t kNumCaptureChannelsToTest[] = {1, 2, 4};
-#else
-  const size_t kNumRenderChannelsToTest[] = {1, 2};
-  const size_t kNumCaptureChannelsToTest[] = {1, 2};
-#endif
+TEST_P(SubtractorTest, ConvergenceMultiChannel) {
+  const size_t num_render_channels = std::get<0>(GetParam());
+  const size_t num_capture_channels = std::get<1>(GetParam());
 
   std::vector<int> blocks_with_echo_path_changes;
-  for (size_t num_render_channels : kNumRenderChannelsToTest) {
-    for (size_t num_capture_channels : kNumCaptureChannelsToTest) {
-      SCOPED_TRACE(
-          ProduceDebugText(num_render_channels, num_render_channels, 64, 20));
-      size_t num_blocks_to_process = 2500 * num_render_channels;
-      std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
-          num_render_channels, num_capture_channels, num_blocks_to_process, 64,
-          20, 20, false, blocks_with_echo_path_changes);
+  size_t num_blocks_to_process = 2500 * num_render_channels;
+  std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
+      num_render_channels, num_capture_channels, num_blocks_to_process, 64, 20,
+      20, false, blocks_with_echo_path_changes);
 
-      for (float echo_to_nearend_power : echo_to_nearend_powers) {
-        EXPECT_GT(0.1f, echo_to_nearend_power);
-      }
-    }
+  for (float echo_to_nearend_power : echo_to_nearend_powers) {
+    EXPECT_GT(0.1f, echo_to_nearend_power);
   }
 }
 
 // Verifies that the subtractor is able to handle the case when the main filter
 // is longer than the shadow filter.
-TEST(Subtractor, MainFilterLongerThanShadowFilter) {
+TEST(SubtractorTest, MainFilterLongerThanShadowFilter) {
   std::vector<int> blocks_with_echo_path_changes;
   std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
       1, 1, 400, 64, 20, 15, false, blocks_with_echo_path_changes);
@@ -271,7 +262,7 @@ TEST(Subtractor, MainFilterLongerThanShadowFilter) {
 
 // Verifies that the subtractor is able to handle the case when the shadow
 // filter is longer than the main filter.
-TEST(Subtractor, ShadowFilterLongerThanMainFilter) {
+TEST(SubtractorTest, ShadowFilterLongerThanMainFilter) {
   std::vector<int> blocks_with_echo_path_changes;
   std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
       1, 1, 400, 64, 15, 20, false, blocks_with_echo_path_changes);
@@ -281,7 +272,7 @@ TEST(Subtractor, ShadowFilterLongerThanMainFilter) {
 }
 
 // Verifies that the subtractor does not converge on uncorrelated signals.
-TEST(Subtractor, NonConvergenceOnUncorrelatedSignals) {
+TEST(SubtractorTest, NonConvergenceOnUncorrelatedSignals) {
   std::vector<int> blocks_with_echo_path_changes;
   for (size_t filter_length_blocks : {12, 20, 30}) {
     for (size_t delay_samples : {0, 64, 150, 200, 301}) {
@@ -298,22 +289,32 @@ TEST(Subtractor, NonConvergenceOnUncorrelatedSignals) {
 }
 
 // Verifies that the subtractor does not converge on uncorrelated signals.
-TEST(Subtractor, NonConvergenceOnUncorrelatedSignalsMultiChannel) {
+TEST_P(SubtractorTest, NonConvergenceOnUncorrelatedSignalsMultiChannel) {
+  const size_t num_render_channels = std::get<0>(GetParam());
+  const size_t num_capture_channels = std::get<1>(GetParam());
+
   std::vector<int> blocks_with_echo_path_changes;
-  for (size_t num_render_channels : {1, 2, 4}) {
-    for (size_t num_capture_channels : {1, 2, 4}) {
-      SCOPED_TRACE(
-          ProduceDebugText(num_render_channels, num_render_channels, 64, 20));
-      size_t num_blocks_to_process = 5000 * num_render_channels;
-      std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
-          num_render_channels, num_capture_channels, num_blocks_to_process, 64,
-          20, 20, true, blocks_with_echo_path_changes);
-      for (float echo_to_nearend_power : echo_to_nearend_powers) {
-        EXPECT_LT(.8f, echo_to_nearend_power);
-        EXPECT_NEAR(1.f, echo_to_nearend_power, 0.25f);
-      }
-    }
+  size_t num_blocks_to_process = 5000 * num_render_channels;
+  std::vector<float> echo_to_nearend_powers = RunSubtractorTest(
+      num_render_channels, num_capture_channels, num_blocks_to_process, 64, 20,
+      20, true, blocks_with_echo_path_changes);
+  for (float echo_to_nearend_power : echo_to_nearend_powers) {
+    EXPECT_LT(.8f, echo_to_nearend_power);
+    EXPECT_NEAR(1.f, echo_to_nearend_power, 0.25f);
   }
 }
+
+INSTANTIATE_TEST_SUITE_P(MultiChannel,
+                         SubtractorTest,
+                         ::testing::Combine(
+#if defined(NDEBUG)
+                             ::testing::Values(1, 2, 8),
+                             ::testing::Values(1, 2, 4)
+#else
+                             ::testing::Values(1, 2),
+                             ::testing::Values(1, 2)
+#endif
+                                 ),
+                         PrintAec3MultiChannelTestParamNames);
 
 }  // namespace webrtc
