@@ -13,7 +13,9 @@
 
 namespace webrtc {
 
-// Video codec types
+// GENERATED_JAVA_ENUM_PACKAGE: org.webrtc
+// GENERATED_JAVA_CLASS_NAME_OVERRIDE: VideoCodecTypeCppEnum
+// GENERATED_JAVA_PREFIX_TO_STRIP: kVideoCodec
 enum VideoCodecType {
   // There are various memset(..., 0, ...) calls in the code that rely on
   // kVideoCodecGeneric being zero.

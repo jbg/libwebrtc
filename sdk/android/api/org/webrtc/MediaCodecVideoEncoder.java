@@ -145,7 +145,18 @@ public class MediaCodecVideoEncoder {
 
     @CalledByNative("VideoCodecType")
     static VideoCodecType fromNativeIndex(int nativeIndex) {
-      return values()[nativeIndex];
+      switch (nativeIndex) {
+        case VideoCodecTypeCppEnum.VP8:
+          return VIDEO_CODEC_VP8;
+        case VideoCodecTypeCppEnum.VP9:
+          return VIDEO_CODEC_VP9;
+        case VideoCodecTypeCppEnum.AV1:
+          return VIDEO_CODEC_AV1;
+        case VideoCodecTypeCppEnum.H264:
+          return VIDEO_CODEC_H264;
+        default:
+          return VIDEO_CODEC_UNKNOWN;
+      }
     }
   }
 
