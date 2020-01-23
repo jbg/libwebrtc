@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ce3739f_5ab8f98c",
+        "filename": "modules/audio_coding/include/audio_coding_module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-01-23T16:43:59Z",
+      "side": 1,
+      "message": "Apparently, I was so stupid to have placed the check at the new API.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 71
+      },
+      "revId": "ba0ae5172cdb4f93972f9b7b3b6c39b0726350d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
