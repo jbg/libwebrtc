@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "48f014bf_f8ae77de",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-23T11:55:32Z",
+      "side": 1,
+      "message": "As discussed offline I don\u0027t think it does:\n- The DShow implementation is a synchronous single-threaded implementation. It \"blocks\" in the sense that it may take some time to finish, so could impact some user experience, but is single-threaded and always makes progress.\n- This implementation dispatches some work to the main UWP thread (FindAllAsync) then blocks the current thread and wait for the main UI thread to process the async request. If the current thread is the UI thread, then I believe this will deadlock.\n\nSince this call is a static method which is *not* proxy\u0027d to the signaling thread, we have no guarantee about the caller thread. I saw many occurrences of this blocking pattern in the WebRTC UWP code, due to the UWP threading requirements, and most of them deadlock for the same reason. So I strongly suggest (on UWP only) to check if the caller thread is the UI thread and return an error, to avoid a deadlock. I don\u0027t think there is any way we can make this call synchronous from the UI thread unfortunately; this is a limitation of UWP by design.",
+      "parentUuid": "01a9bdc0_ab09b475",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e9f26c66_88b3d273",
         "filename": "modules/video_capture/windows/device_info_winrt.cc",
         "patchSetId": 2
@@ -283,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "87e03052_47628f40",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-23T11:55:32Z",
+      "side": 1,
+      "message": "I based my comment on the various headers I looked at, mainly in api/, which all use //. I didn\u0027t realize /**/ was also used. I _think_ // is more common. But if the style guide allows I don\u0027t mind.\nAlso this DShow implementation is 8 years old, with no significant changes in the past years, so I wouldn\u0027t look at those files for style guidance.",
+      "parentUuid": "1094d250_6f0e49e7",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1d02b9_5c35796e",
         "filename": "modules/video_capture/windows/device_info_winrt.h",
         "patchSetId": 2
@@ -312,6 +348,24 @@
       "side": 1,
       "message": "This was copied-and-pasted from device_info_ds.h. Arguably the comment says that the dialog box should be provided by the OS instead of a custom one. Keeping the comment as is.",
       "parentUuid": "7a1d02b9_5c35796e",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df189e3e_30e08bca",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-23T11:55:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0ff93f21_4642c803",
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -350,6 +404,24 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdcea0eb_4a93d2ca",
+        "filename": "modules/video_capture/windows/video_capture_factory_windows.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-23T11:55:32Z",
+      "side": 1,
+      "message": "I meant that both implementations (DShow \u0026 WinRT) cannot be used at the same time, as the code won\u0027t even compile here (unreachable return here, duplicate symbols below). So having 2 separate #if that can both resolve to true at the same time seems surprising to me. Of course in practice you\u0027d expect only one of the #define is set. It\u0027s a minor comment, you can ignore if you feel like it.",
+      "parentUuid": "40562f0c_80b51e76",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
@@ -560,6 +632,41 @@
       "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca5a373c_9f3bf050",
+        "filename": "modules/video_capture/windows/video_capture_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-23T11:55:32Z",
+      "side": 1,
+      "message": "If that was validated with the Media Foundation team and/or is the recommended approach then I have no objection. I am just pointing that there are multiple ways to achieve the same thing with Media Foundation, and the documentation is not always clear on the performance implication of each, so I would not be confident myself judging them just looking at the code.",
+      "parentUuid": "c9de4fa1_d64e81fd",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "086d1461_16198679",
+        "filename": "webrtc.gni",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-01-23T11:55:32Z",
+      "side": 1,
+      "message": "Shall we add some comment about the fact some (older) video capture devices are listed only with DSHow, and some (newer) ones only with MF/WinRT?",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
