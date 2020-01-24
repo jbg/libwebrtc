@@ -196,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "885eb882_510fc449",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-01-24T00:53:26Z",
+      "side": 1,
+      "message": "The goal of this change is to:\n. help fixing the build for UWP\n. have an out-of-the-box replacement for Win32 using modern APIs\n\nCurrently, the code base does not build for UWP. It means that the UWP dispatcher is not even available for creating the dead lock conditions. It is in backlog to figure out how to deal with task queuing on UWP. WebRTC has a task queue using standard C++ features and a task queue using Win32 APIs (PeekMessage and PostThreadMessage). AFAIR, WebRTC-UWP uses the task queue using standard C++ features + some custom code. I\u0027ll figure out the right messaging system to use as soon as the library builds for UWP with audio and video capabilities. As it stands, I can\u0027t even exercise UWP code checking if it is running on UI thread. Additionally, the Win32 APIs for checking if it is running on Desktop/main thread are not available on UWPs.\n  \nI\u0027ll be happy to look at this potential issue as soon as it starts happening.",
+      "parentUuid": "48f014bf_f8ae77de",
+      "revId": "335219075ca2b48b339e703fc1e31a54e200183f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9f26c66_88b3d273",
         "filename": "modules/video_capture/windows/device_info_winrt.cc",
         "patchSetId": 2
