@@ -473,10 +473,9 @@ int32_t MediaCodecVideoEncoder::InitEncodeInternal(int width,
   JNIEnv* jni = AttachCurrentThreadIfNeeded();
   ScopedLocalRefFrame local_ref_frame(jni);
 
-  const VideoCodecType codec_type = GetCodecType();
-  ALOGD << "InitEncodeInternal Type: " << static_cast<int>(codec_type) << ", "
-        << width << " x " << height << ". Bitrate: " << kbps
-        << " kbps. Fps: " << fps << ". Profile: " << profile_ << ".";
+  ALOGD << "InitEncodeInternal Codec: " << format_.name << ", " << width
+        << " x " << height << ". Bitrate: " << kbps << " kbps. Fps: " << fps
+        << ". Profile: " << profile_ << ".";
   if (kbps == 0) {
     kbps = last_set_bitrate_kbps_;
   }
@@ -512,11 +511,9 @@ int32_t MediaCodecVideoEncoder::InitEncodeInternal(int width,
   frames_received_since_last_key_ = kMinKeyFrameInterval;
 
   // We enforce no extra stride/padding in the format creation step.
-  ScopedJavaLocalRef<jobject> j_video_codec_enum =
-      Java_VideoCodecType_fromNativeIndex(jni, codec_type);
   const bool encode_status = Java_MediaCodecVideoEncoder_initEncode(
-      jni, j_media_codec_video_encoder_, j_video_codec_enum, profile_, width,
-      height, kbps, fps, use_surface);
+      jni, j_media_codec_video_encoder_, NativeToJavaString(jni, format_.name),
+      profile_, width, height, kbps, fps, use_surface);
 
   if (!encode_status) {
     ALOGE << "Failed to configure encoder.";
