@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62692b68_10685ae7",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "Make this const, to clarify that it isn\u0027t mutated? (And maybe the other arg too?)",
+      "range": {
+        "startLine": 90,
+        "startChar": 30,
+        "endLine": 90,
+        "endChar": 48
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22e3341a_a57b974c",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "Can you eliminate num_samples_left_to_read? It seems to always be equal to num_samples - num_samples_read?",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d8666c5_a63b4667",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "const?",
+      "range": {
+        "startLine": 130,
+        "startChar": 30,
+        "endLine": 130,
+        "endChar": 64
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abf07db0_c7616470",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "Can you eliminate num_samples_left_to_read? It seems to always be equal to num_samples - num_samples_read?",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f083e221_3c97e110",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "MaxWavHeaderSize() is constexpr, so no need to remove the `static`.",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43a65ecb_cf75ca43",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "RTC_CHECK_GE?",
+      "range": {
+        "startLine": 239,
+        "startChar": 4,
+        "endLine": 239,
+        "endChar": 13
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "740b5587_a4ba6c80",
+        "filename": "common_audio/wav_file.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "Drop the plural?",
+      "range": {
+        "startLine": 27,
+        "startChar": 25,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09bd5b72_b05603fc",
+        "filename": "common_audio/wav_file.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "\"16-bit integer and 32-bit floating point PCM WAV files\"? They\u0027re both PCM...",
+      "range": {
+        "startLine": 36,
+        "startChar": 32,
+        "endLine": 36,
+        "endChar": 78
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f4fedf6_cd5f0fb0",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "Can you omit this line? It\u0027s unreachable, but historically MSVC has complained...",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84bbc56a_252e5bcb",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T10:26:50Z",
+      "side": 1,
+      "message": "Same.",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
