@@ -135,20 +135,6 @@ public class MediaCodecVideoEncoder {
     }
   }
 
-  // Tracks webrtc::VideoCodecType.
-  public enum VideoCodecType {
-    VIDEO_CODEC_UNKNOWN,
-    VIDEO_CODEC_VP8,
-    VIDEO_CODEC_VP9,
-    VIDEO_CODEC_AV1,
-    VIDEO_CODEC_H264;
-
-    @CalledByNative("VideoCodecType")
-    static VideoCodecType fromNativeIndex(int nativeIndex) {
-      return values()[nativeIndex];
-    }
-  }
-
   private static final int MEDIA_CODEC_RELEASE_TIMEOUT_MS = 5000; // Timeout for codec releasing.
   private static final int DEQUEUE_TIMEOUT = 0; // Non-blocking, no wait.
   private static final int BITRATE_ADJUSTMENT_FPS = 30;
@@ -331,7 +317,7 @@ public class MediaCodecVideoEncoder {
       CodecCapabilities.COLOR_QCOM_FormatYUV420SemiPlanar,
       COLOR_QCOM_FORMATYUV420PackedSemiPlanar32m};
   private static final int[] supportedSurfaceColorList = {CodecCapabilities.COLOR_FormatSurface};
-  private VideoCodecType type;
+  private int videoCodecType;
   private int colorFormat;
 
   // Variables used for dynamic bitrate adjustment.
@@ -559,11 +545,12 @@ public class MediaCodecVideoEncoder {
   }
 
   @CalledByNativeUnchecked
-  boolean initEncode(VideoCodecType type, int profile, int width, int height, int kbps, int fps,
+  boolean initEncode(int videoCodecType, int profile, int width, int height, int kbps, int fps,
       boolean useSurface) {
     Logging.d(TAG,
-        "Java initEncode: " + type + ". Profile: " + profile + " : " + width + " x " + height
-            + ". @ " + kbps + " kbps. Fps: " + fps + ". Encode from texture : " + useSurface);
+        "Java initEncode: " + videoCodecType + ". Profile: " + profile + " : " + width + " x "
+            + height + ". @ " + kbps + " kbps. Fps: " + fps
+            + ". Encode from texture : " + useSurface);
 
     this.profile = profile;
     this.width = width;
@@ -575,17 +562,17 @@ public class MediaCodecVideoEncoder {
     String mime = null;
     int keyFrameIntervalSec = 0;
     boolean configureH264HighProfile = false;
-    if (type == VideoCodecType.VIDEO_CODEC_VP8) {
+    if (videoCodecType == VideoCodecTypeInt.VP8) {
       mime = VP8_MIME_TYPE;
       properties = findHwEncoder(
           VP8_MIME_TYPE, vp8HwList(), useSurface ? supportedSurfaceColorList : supportedColorList);
       keyFrameIntervalSec = 100;
-    } else if (type == VideoCodecType.VIDEO_CODEC_VP9) {
+    } else if (videoCodecType == VideoCodecTypeInt.VP9) {
       mime = VP9_MIME_TYPE;
       properties = findHwEncoder(
           VP9_MIME_TYPE, vp9HwList, useSurface ? supportedSurfaceColorList : supportedColorList);
       keyFrameIntervalSec = 100;
-    } else if (type == VideoCodecType.VIDEO_CODEC_H264) {
+    } else if (videoCodecType == VideoCodecTypeInt.H264) {
       mime = H264_MIME_TYPE;
       properties = findHwEncoder(H264_MIME_TYPE, h264HwList(),
           useSurface ? supportedSurfaceColorList : supportedColorList);
@@ -601,10 +588,10 @@ public class MediaCodecVideoEncoder {
       }
       keyFrameIntervalSec = 20;
     } else {
-      throw new RuntimeException("initEncode: Non-supported codec " + type);
+      throw new RuntimeException("initEncode: Non-supported codec " + videoCodecType);
     }
     if (properties == null) {
-      throw new RuntimeException("Can not find HW encoder for " + type);
+      throw new RuntimeException("Can not find HW encoder for " + videoCodecType);
     }
     runningInstance = this; // Encoder is now running and can be queried for stack traces.
     colorFormat = properties.colorFormat;
@@ -617,7 +604,7 @@ public class MediaCodecVideoEncoder {
 
     forcedKeyFrameMs = 0;
     lastKeyFrameMs = -1;
-    if (type == VideoCodecType.VIDEO_CODEC_VP8
+    if (videoCodecType == VideoCodecTypeInt.VP8
         && properties.codecName.startsWith(qcomVp8HwProperties.codecPrefix)) {
       if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP
           || Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -652,7 +639,7 @@ public class MediaCodecVideoEncoder {
       }
       Logging.d(TAG, "  Format: " + format);
       mediaCodec = createByCodecName(properties.codecName);
-      this.type = type;
+      this.videoCodecType = videoCodecType;
       if (mediaCodec == null) {
         Logging.e(TAG, "Can not create media encoder");
         release();
@@ -997,7 +984,7 @@ public class MediaCodecVideoEncoder {
         if (isKeyFrame) {
           Logging.d(TAG, "Sync frame generated");
         }
-        if (isKeyFrame && type == VideoCodecType.VIDEO_CODEC_H264) {
+        if (isKeyFrame && videoCodecType == VideoCodecTypeInt.H264) {
           Logging.d(TAG, "Appending config frame of size " + configData.capacity()
                   + " to output buffer with offset " + info.offset + ", size " + info.size);
           // For H.264 key frame append SPS and PPS NALs at the start
