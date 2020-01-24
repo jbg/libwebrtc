@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41959cf1_c21f1917",
+        "filename": "api/neteq/neteq_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-01-24T09:48:03Z",
+      "side": 1,
+      "message": "Add default value here? Or have you updated all the places that create this struct?",
+      "revId": "342ac8c3aad56a56b43c4bfc2c812215b79eece5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
