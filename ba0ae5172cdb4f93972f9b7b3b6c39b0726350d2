@@ -46,6 +46,30 @@
       "revId": "ba0ae5172cdb4f93972f9b7b3b6c39b0726350d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04e40ccd_39383268",
+        "filename": "modules/audio_coding/include/audio_coding_module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-01-27T09:23:27Z",
+      "side": 1,
+      "message": "This should work. since the legacy SendData() was pure virtual and should always be overriden.\nAnd I have tested this.",
+      "parentUuid": "e2c4d917_ceb4b409",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 71
+      },
+      "revId": "ba0ae5172cdb4f93972f9b7b3b6c39b0726350d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
