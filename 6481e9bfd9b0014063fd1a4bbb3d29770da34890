@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6440fba6_94e7bf72",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-01-27T15:56:50Z",
+      "side": 1,
+      "message": "Given the way next_client_tcp_socket_ is used, why is this extra logic preferable to calling the existing function set_next_client_tcp_socket(null)?",
+      "revId": "6481e9bfd9b0014063fd1a4bbb3d29770da34890",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d215a643_de7085fc",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-01-27T15:56:50Z",
+      "side": 1,
+      "message": "Nit: disconnection -\u003e disconnect",
+      "revId": "6481e9bfd9b0014063fd1a4bbb3d29770da34890",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9868756_84e0b593",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-01-27T15:56:50Z",
+      "side": 1,
+      "message": "Is this a generic issue, where we should guard against it by setting an \"in use\" flag in the requests_-map and having FailAndPrune DCHECK on it, or something like this?\nIf we\u0027ve made this mistake once, we might have made it multiple times.\n\nNit: cause -\u003e because",
+      "revId": "6481e9bfd9b0014063fd1a4bbb3d29770da34890",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8b3be64_61ccbf96",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-01-27T15:56:50Z",
+      "side": 1,
+      "message": "Nit: inuse -\u003e in use",
+      "revId": "6481e9bfd9b0014063fd1a4bbb3d29770da34890",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8264695e_b959abe4",
+        "filename": "p2p/base/tcp_port.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-01-27T15:56:50Z",
+      "side": 1,
+      "message": "Nit: Unwinding -\u003e Unwind (use same verb tense in unwind and in defer)",
+      "revId": "6481e9bfd9b0014063fd1a4bbb3d29770da34890",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
