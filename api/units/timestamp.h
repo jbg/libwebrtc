@@ -28,8 +28,18 @@ namespace webrtc {
 // difference of two Timestamps results in a TimeDelta.
 class Timestamp final : public rtc_units_impl::UnitBase<Timestamp> {
  public:
+  static constexpr Timestamp Seconds(int64_t value) {
+    return FromFraction(1'000'000, value);
+  }
+  static constexpr Timestamp Millis(int64_t value) {
+    return FromFraction(1'000, value);
+  }
+  static constexpr Timestamp Micros(int64_t value) { return FromValue(value); }
+
   Timestamp() = delete;
 
+  // TODO(danilchap): Migrate all code to the 3 factories above and delete the
+  // 6 factories below.
   template <int64_t seconds>
   static constexpr Timestamp Seconds() {
     return FromFraction(1'000'000, seconds);
