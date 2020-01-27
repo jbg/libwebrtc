@@ -22,6 +22,30 @@
       "revId": "c99afa06287f60e1b0499d534228c26c58beed1e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "704c7797_875d8aa1",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-01-27T09:05:06Z",
+      "side": 0,
+      "message": "Right, it is. It\u0027s just not exposed as a config option on most platforms since https://chromium-review.googlesource.com/c/chromium/src/+/1898778. I updated the CL desc.",
+      "parentUuid": "11637cc2_97e2e8a4",
+      "range": {
+        "startLine": 539,
+        "startChar": 33,
+        "endLine": 539,
+        "endChar": 77
+      },
+      "revId": "c99afa06287f60e1b0499d534228c26c58beed1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
