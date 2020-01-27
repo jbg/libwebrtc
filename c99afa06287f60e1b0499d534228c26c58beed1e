@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11637cc2_97e2e8a4",
+        "filename": "tools_webrtc/mb/mb_config.pyl",
+        "patchSetId": 1
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-01-27T08:51:37Z",
+      "side": 0,
+      "message": "Isn\u0027t it set here: https://cs.chromium.org/chromium/src/build/config/compiler/compiler.gni?l\u003d225-233\u0026rcl\u003d14b686f408617c9953d665171f550ea0a9fb06b7 ?",
+      "range": {
+        "startLine": 539,
+        "startChar": 33,
+        "endLine": 539,
+        "endChar": 77
+      },
+      "revId": "c99afa06287f60e1b0499d534228c26c58beed1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
