@@ -105,11 +105,11 @@ class PacketizationCallbackStubOldApi : public AudioPacketizationCallback {
       : num_calls_(0),
         last_frame_type_(AudioFrameType::kEmptyFrame),
         last_payload_type_(-1),
-        last_timestamp_(0) {}
+        last_rtp_timestamp_(0) {}
 
   int32_t SendData(AudioFrameType frame_type,
                    uint8_t payload_type,
-                   uint32_t timestamp,
+                   uint32_t rtp_timestamp,
                    const uint8_t* payload_data,
                    size_t payload_len_bytes,
                    int64_t absolute_capture_timestamp_ms) override {
@@ -117,8 +117,9 @@ class PacketizationCallbackStubOldApi : public AudioPacketizationCallback {
     ++num_calls_;
     last_frame_type_ = frame_type;
     last_payload_type_ = payload_type;
-    last_timestamp_ = timestamp;
+    last_rtp_timestamp_ = rtp_timestamp;
     last_payload_vec_.assign(payload_data, payload_data + payload_len_bytes);
+    last_absolute_capture_timestamp_ms_ = absolute_capture_timestamp_ms;
     return 0;
   }
 
@@ -142,9 +143,14 @@ class PacketizationCallbackStubOldApi : public AudioPacketizationCallback {
     return last_payload_type_;
   }
 
-  uint32_t last_timestamp() const {
+  uint32_t last_rtp_timestamp() const {
     rtc::CritScope lock(&crit_sect_);
-    return last_timestamp_;
+    return last_rtp_timestamp_;
+  }
+
+  int64_t last_absolute_capture_timestamp_ms() const {
+    rtc::CritScope lock(&crit_sect_);
+    return last_absolute_capture_timestamp_ms_;
   }
 
   void SwapBuffers(std::vector<uint8_t>* payload) {
@@ -156,8 +162,9 @@ class PacketizationCallbackStubOldApi : public AudioPacketizationCallback {
   int num_calls_ RTC_GUARDED_BY(crit_sect_);
   AudioFrameType last_frame_type_ RTC_GUARDED_BY(crit_sect_);
   int last_payload_type_ RTC_GUARDED_BY(crit_sect_);
-  uint32_t last_timestamp_ RTC_GUARDED_BY(crit_sect_);
+  uint32_t last_rtp_timestamp_ RTC_GUARDED_BY(crit_sect_);
   std::vector<uint8_t> last_payload_vec_ RTC_GUARDED_BY(crit_sect_);
+  int64_t last_absolute_capture_timestamp_ms_ RTC_GUARDED_BY(crit_sect_);
   rtc::CriticalSection crit_sect_;
 };
 
@@ -313,7 +320,7 @@ TEST_F(AudioCodingModuleTestOldApi, TimestampSeriesContinuesWhenCodecChanges) {
       InsertAudio();
     }
     EXPECT_EQ(j + 1, packet_cb_.num_calls());
-    EXPECT_EQ(expected_ts, packet_cb_.last_timestamp());
+    EXPECT_EQ(expected_ts, packet_cb_.last_rtp_timestamp());
     expected_ts += pac_size_;
   }
 
@@ -330,11 +337,27 @@ TEST_F(AudioCodingModuleTestOldApi, TimestampSeriesContinuesWhenCodecChanges) {
       InsertAudio();
     }
     EXPECT_EQ(kNumPackets1 + j + 1, packet_cb_.num_calls());
-    EXPECT_EQ(expected_ts, packet_cb_.last_timestamp());
+    EXPECT_EQ(expected_ts, packet_cb_.last_rtp_timestamp());
     expected_ts += pac_size_;
   }
 }
 #endif
+
+TEST_F(AudioCodingModuleTestOldApi, AbsoluteCaptureTimestamp) {
+  RegisterCodec();
+
+  constexpr int64_t kAbsoluteCaptureTimestampMs1 = 12345678;
+  input_frame_.absolute_capture_timestamp_ms_ = kAbsoluteCaptureTimestampMs1;
+  InsertAudio();
+  EXPECT_EQ(kAbsoluteCaptureTimestampMs1,
+            packet_cb_.last_absolute_capture_timestamp_ms());
+
+  constexpr int64_t kAbsoluteCaptureTimestampMs2 = 87654321;
+  input_frame_.absolute_capture_timestamp_ms_ = kAbsoluteCaptureTimestampMs2;
+  InsertAudio();
+  EXPECT_EQ(kAbsoluteCaptureTimestampMs2,
+            packet_cb_.last_absolute_capture_timestamp_ms());
+}
 
 // Introduce this class to set different expectations on the number of encoded
 // bytes. This class expects all encoded packets to be 9 bytes (matching one
