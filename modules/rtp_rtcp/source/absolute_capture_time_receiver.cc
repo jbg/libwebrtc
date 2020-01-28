@@ -33,8 +33,14 @@ uint32_t AbsoluteCaptureTimeReceiver::GetSource(
   if (csrcs.empty()) {
     return ssrc;
   }
-
-  return csrcs[0];
+  // TODO(bugs.webrtc.org/10739): eliminate CSRC filtering by always picking
+  // csrcs[0].
+  constexpr uint32_t kExcludedCsrc = 42;
+  for (uint32_t csrc : csrcs) {
+    if (csrc != kExcludedCsrc)
+      return csrc;
+  }
+  return kExcludedCsrc;
 }
 
 void AbsoluteCaptureTimeReceiver::SetRemoteToLocalClockOffset(
