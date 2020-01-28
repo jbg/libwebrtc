@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e25bcbf5_9b055c58",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62692b68_10685ae7",
+      "range": {
+        "startLine": 90,
+        "startChar": 30,
+        "endLine": 90,
+        "endChar": 48
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22e3341a_a57b974c",
         "filename": "common_audio/wav_file.cc",
         "patchSetId": 10
@@ -36,6 +60,24 @@
       "writtenOn": "2020-01-24T10:26:50Z",
       "side": 1,
       "message": "Can you eliminate num_samples_left_to_read? It seems to always be equal to num_samples - num_samples_read?",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8db99a4c_7c858092",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "num_samples_read cannot be used to eliminate that since that variable only stores the number samples read in the last while loop iteration (scope is only inside that).\n\nI don\u0027t see a simple way of removing that variable. It is the only counter for the number of samples that can be used for that.",
+      "parentUuid": "22e3341a_a57b974c",
       "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "fdf0e76a_0327b5c1",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d8666c5_a63b4667",
+      "range": {
+        "startLine": 130,
+        "startChar": 30,
+        "endLine": 130,
+        "endChar": 64
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abf07db0_c7616470",
         "filename": "common_audio/wav_file.cc",
         "patchSetId": 10
@@ -76,6 +142,24 @@
       "writtenOn": "2020-01-24T10:26:50Z",
       "side": 1,
       "message": "Can you eliminate num_samples_left_to_read? It seems to always be equal to num_samples - num_samples_read?",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc339353_e592617b",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Same answer as above.",
+      "parentUuid": "abf07db0_c7616470",
       "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -96,6 +180,24 @@
       "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b4aabe9_c19a1259",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f083e221_3c97e110",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "68c470e0_5dbd6fca",
+        "filename": "common_audio/wav_file.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a65ecb_cf75ca43",
+      "range": {
+        "startLine": 239,
+        "startChar": 4,
+        "endLine": 239,
+        "endChar": 13
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "740b5587_a4ba6c80",
         "filename": "common_audio/wav_file.h",
         "patchSetId": 10
@@ -142,6 +268,30 @@
       "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81cdb934_7288fa41",
+        "filename": "common_audio/wav_file.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "740b5587_a4ba6c80",
+      "range": {
+        "startLine": 27,
+        "startChar": 25,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -168,6 +318,30 @@
     },
     {
       "key": {
+        "uuid": "5fb11f62_4e49996e",
+        "filename": "common_audio/wav_file.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09bd5b72_b05603fc",
+      "range": {
+        "startLine": 36,
+        "startChar": 32,
+        "endLine": 36,
+        "endChar": 78
+      },
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f4fedf6_cd5f0fb0",
         "filename": "common_audio/wav_header.cc",
         "patchSetId": 10
@@ -185,6 +359,24 @@
     },
     {
       "key": {
+        "uuid": "b2a24a80_9759cc4e",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f4fedf6_cd5f0fb0",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84bbc56a_252e5bcb",
         "filename": "common_audio/wav_header.cc",
         "patchSetId": 10
@@ -199,6 +391,24 @@
       "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb2133a3_2b748a63",
+        "filename": "common_audio/wav_header.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-28T08:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84bbc56a_252e5bcb",
+      "revId": "4d158bd655585fd108d17ef7fcc2f67f947eb203",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
