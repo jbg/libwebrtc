@@ -122,13 +122,6 @@ class TestMainImpl : public TestMain {
     rtc::LogMessage::SetLogToStderr(absl::GetFlag(FLAGS_logs) ||
                                     absl::GetFlag(FLAGS_verbose));
 
-    std::string trace_event_path = absl::GetFlag(FLAGS_trace_event);
-    const bool capture_events = !trace_event_path.empty();
-    if (capture_events) {
-      rtc::tracing::SetupInternalTracer();
-      rtc::tracing::StartInternalCapture(trace_event_path.c_str());
-    }
-
     // InitFieldTrialsFromString stores the char*, so the char array must
     // outlive the application.
     field_trials_ = absl::GetFlag(FLAGS_force_fieldtrials);
@@ -152,9 +145,6 @@ class TestMainImpl : public TestMain {
     rtc::ThreadManager::Instance()->WrapCurrentThread();
     RTC_CHECK(rtc::Thread::Current());
 
-    if (capture_events) {
-      rtc::tracing::StopInternalCapture();
-    }
     return 0;
   }
 
@@ -165,6 +155,13 @@ class TestMainImpl : public TestMain {
     rtc::test::RunTestsFromIOSApp();
     return 0;
 #else
+    std::string trace_event_path = absl::GetFlag(FLAGS_trace_event);
+    const bool capture_events = !trace_event_path.empty();
+    if (capture_events) {
+      rtc::tracing::SetupInternalTracer();
+      rtc::tracing::StartInternalCapture(trace_event_path.c_str());
+    }
+
     int exit_code = RUN_ALL_TESTS();
 
     std::string chartjson_result_file =
@@ -187,6 +184,10 @@ class TestMainImpl : public TestMain {
       std::ofstream result_file(result_filename);
       result_file << "{\"version\": 3}";
       result_file.close();
+    }
+
+    if (capture_events) {
+      rtc::tracing::StopInternalCapture();
     }
 
 #if defined(ADDRESS_SANITIZER) || defined(LEAK_SANITIZER) ||  \
