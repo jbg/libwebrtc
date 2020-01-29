@@ -72,6 +72,7 @@ class AudioFrame {
                    int sample_rate_hz,
                    SpeechType speech_type,
                    VADActivity vad_activity,
+                   int64_t absolute_capture_timestamp_ms,
                    size_t num_channels = 1);
 
   void CopyFrom(const AudioFrame& src);
@@ -103,6 +104,9 @@ class AudioFrame {
   size_t num_channels() const { return num_channels_; }
   ChannelLayout channel_layout() const { return channel_layout_; }
   int sample_rate_hz() const { return sample_rate_hz_; }
+  int64_t absolute_capture_timestamp_ms() const {
+    return absolute_capture_timestamp_ms_;
+  }
 
   // RTP timestamp of the first sample in the AudioFrame.
   uint32_t timestamp_ = 0;
@@ -149,6 +153,8 @@ class AudioFrame {
 
   int16_t data_[kMaxDataSizeSamples];
   bool muted_ = true;
+
+  int64_t absolute_capture_timestamp_ms_ = -1;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(AudioFrame);
 };

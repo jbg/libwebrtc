@@ -109,7 +109,6 @@ class AudioCodingModuleImpl final : public AudioCodingModule {
     // If a re-mix is required (up or down), this buffer will store a re-mixed
     // version of the input.
     std::vector<int16_t> buffer;
-    int64_t absolute_capture_timestamp_ms;
   };
 
   InputData input_data_ RTC_GUARDED_BY(acm_crit_sect_);
@@ -132,7 +131,7 @@ class AudioCodingModuleImpl final : public AudioCodingModule {
 
   int Add10MsDataInternal(const AudioFrame& audio_frame, InputData* input_data)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(acm_crit_sect_);
-  int Encode(const InputData& input_data)
+  int Encode(const InputData& input_data, int64_t absolute_capture_timestamp_ms)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(acm_crit_sect_);
 
   int InitializeReceiverSafe() RTC_EXCLUSIVE_LOCKS_REQUIRED(acm_crit_sect_);
@@ -231,7 +230,8 @@ AudioCodingModuleImpl::AudioCodingModuleImpl(
 
 AudioCodingModuleImpl::~AudioCodingModuleImpl() = default;
 
-int32_t AudioCodingModuleImpl::Encode(const InputData& input_data) {
+int32_t AudioCodingModuleImpl::Encode(const InputData& input_data,
+                                      int64_t absolute_capture_timestamp_ms) {
   AudioEncoder::EncodedInfo encoded_info;
   uint8_t previous_pltype;
 
@@ -304,7 +304,7 @@ int32_t AudioCodingModuleImpl::Encode(const InputData& input_data) {
       packetization_callback_->SendData(
           frame_type, encoded_info.payload_type, encoded_info.encoded_timestamp,
           encode_buffer_.data(), encode_buffer_.size(),
-          input_data.absolute_capture_timestamp_ms);
+          absolute_capture_timestamp_ms);
     }
 
     if (vad_callback_) {
@@ -339,7 +339,9 @@ int AudioCodingModuleImpl::RegisterTransportCallback(
 int AudioCodingModuleImpl::Add10MsData(const AudioFrame& audio_frame) {
   rtc::CritScope lock(&acm_crit_sect_);
   int r = Add10MsDataInternal(audio_frame, &input_data_);
-  return r < 0 ? r : Encode(input_data_);
+  return r < 0
+             ? r
+             : Encode(input_data_, audio_frame.absolute_capture_timestamp_ms());
 }
 
 int AudioCodingModuleImpl::Add10MsDataInternal(const AudioFrame& audio_frame,
@@ -394,9 +396,6 @@ int AudioCodingModuleImpl::Add10MsDataInternal(const AudioFrame& audio_frame,
   input_data->input_timestamp = ptr_frame->timestamp_;
   input_data->length_per_channel = ptr_frame->samples_per_channel_;
   input_data->audio_channel = current_num_channels;
-  // TODO(bugs.webrtc.org/10739): Assign from a corresponding field in
-  // audio_frame when it is added in AudioFrame.
-  input_data->absolute_capture_timestamp_ms = 0;
 
   if (!same_num_channels) {
     // Remixes the input frame to the output data and in the process resize the
