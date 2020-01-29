@@ -68,21 +68,21 @@ class UnitBase {
   constexpr bool operator<(const Unit_T& other) const {
     return value_ < other.value_;
   }
-  Unit_T RoundTo(const Unit_T& resolution) const {
+  constexpr Unit_T RoundTo(const Unit_T& resolution) const {
     RTC_DCHECK(IsFinite());
     RTC_DCHECK(resolution.IsFinite());
     RTC_DCHECK_GT(resolution.value_, 0);
     return Unit_T((value_ + resolution.value_ / 2) / resolution.value_) *
            resolution.value_;
   }
-  Unit_T RoundUpTo(const Unit_T& resolution) const {
+  constexpr Unit_T RoundUpTo(const Unit_T& resolution) const {
     RTC_DCHECK(IsFinite());
     RTC_DCHECK(resolution.IsFinite());
     RTC_DCHECK_GT(resolution.value_, 0);
     return Unit_T((value_ + resolution.value_ - 1) / resolution.value_) *
            resolution.value_;
   }
-  Unit_T RoundDownTo(const Unit_T& resolution) const {
+  constexpr Unit_T RoundDownTo(const Unit_T& resolution) const {
     RTC_DCHECK(IsFinite());
     RTC_DCHECK(resolution.IsFinite());
     RTC_DCHECK_GT(resolution.value_, 0);
@@ -132,7 +132,8 @@ class UnitBase {
   }
 
   template <typename T = int64_t>
-  typename std::enable_if<std::is_integral<T>::value, T>::type ToValue() const {
+  constexpr typename std::enable_if<std::is_integral<T>::value, T>::type
+  ToValue() const {
     RTC_DCHECK(IsFinite());
     return rtc::dchecked_cast<T>(value_);
   }
@@ -150,8 +151,8 @@ class UnitBase {
   }
 
   template <int64_t Denominator, typename T = int64_t>
-  typename std::enable_if<std::is_integral<T>::value, T>::type ToFraction()
-      const {
+  constexpr typename std::enable_if<std::is_integral<T>::value, T>::type
+  ToFraction() const {
     RTC_DCHECK(IsFinite());
     if (Unit_T::one_sided) {
       return rtc::dchecked_cast<T>(
@@ -175,8 +176,8 @@ class UnitBase {
   }
 
   template <int64_t Factor, typename T = int64_t>
-  typename std::enable_if<std::is_integral<T>::value, T>::type ToMultiple()
-      const {
+  constexpr typename std::enable_if<std::is_integral<T>::value, T>::type
+  ToMultiple() const {
     RTC_DCHECK_GE(ToValue(), std::numeric_limits<T>::min() / Factor);
     RTC_DCHECK_LE(ToValue(), std::numeric_limits<T>::max() / Factor);
     return rtc::dchecked_cast<T>(ToValue() * Factor);
