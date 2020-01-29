@@ -53,44 +53,45 @@ std::string ProduceDebugText(size_t num_render_channels, size_t delay) {
 
 class AdaptiveFirFilterOneTwoFourEightRenderChannels
     : public ::testing::Test,
-      public ::testing::WithParamInterface<size_t> {};
+      public ::testing::WithParamInterface<std::tuple<size_t, size_t>> {};
 
-INSTANTIATE_TEST_SUITE_P(MultiChannel,
-                         AdaptiveFirFilterOneTwoFourEightRenderChannels,
-                         ::testing::Values(1, 2, 4, 8));
+INSTANTIATE_TEST_SUITE_P(
+    MultiChannel,
+    AdaptiveFirFilterOneTwoFourEightRenderChannels,
+    ::testing::Combine(::testing::Values(1, 2, 4, 8),
+                       ::testing::Values(2, 5, 12, 30, 50)));
 
 #if defined(WEBRTC_HAS_NEON)
 // Verifies that the optimized methods for filter adaptation are similar to
 // their reference counterparts.
 TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
        FilterAdaptationNeonOptimizations) {
-  const size_t num_render_channels = GetParam();
-  for (size_t num_partitions : {2, 5, 12, 30, 50}) {
-    constexpr int kSampleRateHz = 48000;
-    constexpr size_t kNumBands = NumBandsForRate(kSampleRateHz);
+  const size_t num_render_channels = std::get<0>(GetParam());
+  const size_t num_partitions = std::get<1>(GetParam());
+  constexpr int kSampleRateHz = 48000;
+  constexpr size_t kNumBands = NumBandsForRate(kSampleRateHz);
 
-    std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
-        RenderDelayBuffer::Create(EchoCanceller3Config(), kSampleRateHz,
-                                  num_render_channels));
-    Random random_generator(42U);
-    std::vector<std::vector<std::vector<float>>> x(
-        kNumBands,
-        std::vector<std::vector<float>>(num_render_channels,
-                                        std::vector<float>(kBlockSize, 0.f)));
-    FftData S_C;
-    FftData S_Neon;
-    FftData G;
-    Aec3Fft fft;
-    std::vector<std::vector<FftData>> H_C(
-        num_partitions, std::vector<FftData>(num_render_channels));
-    std::vector<std::vector<FftData>> H_Neon(
-        num_partitions, std::vector<FftData>(num_render_channels));
-    for (size_t p = 0; p < num_partitions; ++p) {
-      for (size_t ch = 0; ch < num_render_channels; ++ch) {
-        H_C[p][ch].Clear();
-        H_Neon[p][ch].Clear();
-      }
+  std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
+      RenderDelayBuffer::Create(EchoCanceller3Config(), kSampleRateHz,
+                                num_render_channels));
+  Random random_generator(42U);
+  std::vector<std::vector<std::vector<float>>> x(
+      kNumBands, std::vector<std::vector<float>>(
+                     num_render_channels, std::vector<float>(kBlockSize, 0.f)));
+  FftData S_C;
+  FftData S_Neon;
+  FftData G;
+  Aec3Fft fft;
+  std::vector<std::vector<FftData>> H_C(
+      num_partitions, std::vector<FftData>(num_render_channels));
+  std::vector<std::vector<FftData>> H_Neon(
+      num_partitions, std::vector<FftData>(num_render_channels));
+  for (size_t p = 0; p < num_partitions; ++p) {
+    for (size_t ch = 0; ch < num_render_channels; ++ch) {
+      H_C[p][ch].Clear();
+      H_Neon[p][ch].Clear();
     }
+  }
 
     for (size_t k = 0; k < 30; ++k) {
       for (size_t band = 0; band < x.size(); ++band) {
@@ -135,28 +136,28 @@ TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
       EXPECT_NEAR(S_C.re[j], S_Neon.re[j], fabs(S_C.re[j] * 0.00001f));
       EXPECT_NEAR(S_C.im[j], S_Neon.im[j], fabs(S_C.re[j] * 0.00001f));
     }
-  }
 }
 
 // Verifies that the optimized method for frequency response computation is
 // bitexact to the reference counterpart.
 TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
        ComputeFrequencyResponseNeonOptimization) {
-  const size_t num_render_channels = GetParam();
-  for (size_t num_partitions : {2, 5, 12, 30, 50}) {
-    std::vector<std::vector<FftData>> H(
-        num_partitions, std::vector<FftData>(num_render_channels));
-    std::vector<std::array<float, kFftLengthBy2Plus1>> H2(num_partitions);
-    std::vector<std::array<float, kFftLengthBy2Plus1>> H2_Neon(num_partitions);
+  const size_t num_render_channels = std::get<0>(GetParam());
+  const size_t num_partitions = std::get<1>(GetParam());
 
-    for (size_t p = 0; p < num_partitions; ++p) {
-      for (size_t ch = 0; ch < num_render_channels; ++ch) {
-        for (size_t k = 0; k < H[p][ch].re.size(); ++k) {
-          H[p][ch].re[k] = k + p / 3.f + ch;
-          H[p][ch].im[k] = p + k / 7.f - ch;
-        }
+  std::vector<std::vector<FftData>> H(
+      num_partitions, std::vector<FftData>(num_render_channels));
+  std::vector<std::array<float, kFftLengthBy2Plus1>> H2(num_partitions);
+  std::vector<std::array<float, kFftLengthBy2Plus1>> H2_Neon(num_partitions);
+
+  for (size_t p = 0; p < num_partitions; ++p) {
+    for (size_t ch = 0; ch < num_render_channels; ++ch) {
+      for (size_t k = 0; k < H[p][ch].re.size(); ++k) {
+        H[p][ch].re[k] = k + p / 3.f + ch;
+        H[p][ch].im[k] = p + k / 7.f - ch;
       }
     }
+  }
 
     ComputeFrequencyResponse(num_partitions, H, &H2);
     ComputeFrequencyResponse_Neon(num_partitions, H, &H2_Neon);
@@ -166,7 +167,6 @@ TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
         EXPECT_FLOAT_EQ(H2[p][k], H2_Neon[p][k]);
       }
     }
-  }
 }
 #endif
 
@@ -175,13 +175,14 @@ TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
 // their reference counterparts.
 TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
        FilterAdaptationSse2Optimizations) {
-  const size_t num_render_channels = GetParam();
+  const size_t num_render_channels = std::get<0>(GetParam());
+  const size_t num_partitions = std::get<1>(GetParam());
+
   constexpr int kSampleRateHz = 48000;
   constexpr size_t kNumBands = NumBandsForRate(kSampleRateHz);
 
   bool use_sse2 = (WebRtc_GetCPUInfo(kSSE2) != 0);
   if (use_sse2) {
-    for (size_t num_partitions : {2, 5, 12, 30, 50}) {
       std::unique_ptr<RenderDelayBuffer> render_delay_buffer(
           RenderDelayBuffer::Create(EchoCanceller3Config(), kSampleRateHz,
                                     num_render_channels));
@@ -243,17 +244,17 @@ TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
         }
       }
     }
-  }
 }
 
 // Verifies that the optimized method for frequency response computation is
 // bitexact to the reference counterpart.
 TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
        ComputeFrequencyResponseSse2Optimization) {
-  const size_t num_render_channels = GetParam();
+  const size_t num_render_channels = std::get<0>(GetParam());
+  const size_t num_partitions = std::get<1>(GetParam());
+
   bool use_sse2 = (WebRtc_GetCPUInfo(kSSE2) != 0);
   if (use_sse2) {
-    for (size_t num_partitions : {2, 5, 12, 30, 50}) {
       std::vector<std::vector<FftData>> H(
           num_partitions, std::vector<FftData>(num_render_channels));
       std::vector<std::array<float, kFftLengthBy2Plus1>> H2(num_partitions);
@@ -279,7 +280,6 @@ TEST_P(AdaptiveFirFilterOneTwoFourEightRenderChannels,
       }
     }
   }
-}
 
 #endif
 

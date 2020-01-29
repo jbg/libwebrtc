@@ -15,24 +15,30 @@
 
 namespace webrtc {
 
+class ApiCallJitterMetricsTest : public ::testing::Test,
+                                 public ::testing::WithParamInterface<int> {};
+
+INSTANTIATE_TEST_SUITE_P(ParameterCombinations,
+                         ApiCallJitterMetricsTest,
+                         ::testing::Range(1, 20));
+
 // Verify constant jitter.
-TEST(ApiCallJitterMetrics, ConstantJitter) {
-  for (int jitter = 1; jitter < 20; ++jitter) {
-    ApiCallJitterMetrics metrics;
-    for (size_t k = 0; k < 30 * kNumBlocksPerSecond; ++k) {
-      for (int j = 0; j < jitter; ++j) {
-        metrics.ReportRenderCall();
-      }
+TEST_P(ApiCallJitterMetricsTest, ConstantJitter) {
+  const int jitter = GetParam();
+  ApiCallJitterMetrics metrics;
+  for (size_t k = 0; k < 30 * kNumBlocksPerSecond; ++k) {
+    for (int j = 0; j < jitter; ++j) {
+      metrics.ReportRenderCall();
+    }
 
-      for (int j = 0; j < jitter; ++j) {
-        metrics.ReportCaptureCall();
+    for (int j = 0; j < jitter; ++j) {
+      metrics.ReportCaptureCall();
 
-        if (metrics.WillReportMetricsAtNextCapture()) {
-          EXPECT_EQ(jitter, metrics.render_jitter().min());
-          EXPECT_EQ(jitter, metrics.render_jitter().max());
-          EXPECT_EQ(jitter, metrics.capture_jitter().min());
-          EXPECT_EQ(jitter, metrics.capture_jitter().max());
-        }
+      if (metrics.WillReportMetricsAtNextCapture()) {
+        EXPECT_EQ(jitter, metrics.render_jitter().min());
+        EXPECT_EQ(jitter, metrics.render_jitter().max());
+        EXPECT_EQ(jitter, metrics.capture_jitter().min());
+        EXPECT_EQ(jitter, metrics.capture_jitter().max());
       }
     }
   }
