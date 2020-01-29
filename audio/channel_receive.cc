@@ -32,6 +32,7 @@
 #include "modules/rtp_rtcp/include/receive_statistics.h"
 #include "modules/rtp_rtcp/include/remote_ntp_time_estimator.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp.h"
+#include "modules/rtp_rtcp/source/absolute_capture_time_receiver.h"
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
@@ -259,6 +260,8 @@ class ChannelReceive : public ChannelReceiveInterface {
   // E2EE Audio Frame Decryption
   rtc::scoped_refptr<FrameDecryptorInterface> frame_decryptor_;
   webrtc::CryptoOptions crypto_options_;
+
+  webrtc::AbsoluteCaptureTimeReceiver absolute_capture_time_receiver_;
 };
 
 void ChannelReceive::OnReceivedPayloadData(
@@ -440,7 +443,8 @@ ChannelReceive::ChannelReceive(
       _outputGain(1.0f),
       associated_send_channel_(nullptr),
       frame_decryptor_(frame_decryptor),
-      crypto_options_(crypto_options) {
+      crypto_options_(crypto_options),
+      absolute_capture_time_receiver_(clock) {
   // TODO(nisse): Use _moduleProcessThreadPtr instead?
   module_process_thread_checker_.Detach();
 
@@ -542,6 +546,22 @@ void ChannelReceive::OnRtpPacket(const RtpPacketReceived& packet) {
 
   RTPHeader header;
   packet_copy.GetHeader(&header);
+
+  // Interpolates absolute capture timestamp RTP header extension.
+  header.extension.absolute_capture_time =
+      absolute_capture_time_receiver_.OnReceivePacket(
+          AbsoluteCaptureTimeReceiver::GetSource(header.ssrc,
+                                                 header.arrOfCSRCs),
+          header.timestamp,
+          // Note that GetRtpTimestampRateHz may produce incorrect results, as
+          // the sample rate may not always equals RTP clock rate. For example,
+          // the sample rate of G722 encoder is different from its RTP clock
+          // rate. GetRtpTimestampRateHz must be fixed, otherwise
+          // sender/receiver interpolation might be not in sync, and we will
+          // suffer from interpolation errors. As Opus 48000 Hz is used, there
+          // shouldn't be any problem.
+          rtc::saturated_cast<uint32_t>(GetRtpTimestampRateHz()),
+          header.extension.absolute_capture_time);
 
   ReceivePacket(packet_copy.data(), packet_copy.size(), header);
 }
