@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7da5e15_b2d1ea92",
+        "filename": "modules/rtp_rtcp/source/absolute_capture_time_receiver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-01-29T09:03:37Z",
+      "side": 1,
+      "message": "When this filtering can be removed?\nwhy this filtering is desired? (what is special about this value that it is marked for exclusion?)\n\ncode, cl description, and linked bug all do not give an explanation.",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 39
+      },
+      "revId": "f0c929d3859e59b0567494a87a767853e03bd6dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
