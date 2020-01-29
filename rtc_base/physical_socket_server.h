@@ -194,6 +194,8 @@ class PhysicalSocket : public AsyncSocket, public sigslot::has_slots<> {
   void UpdateLastError();
   void MaybeRemapSendError();
 
+  int SetDiffServCodePoint(int dscp_value);
+
   uint8_t enabled_events() const { return enabled_events_; }
   virtual void SetEnabledEvents(uint8_t events);
   virtual void EnableEvents(uint8_t events);
@@ -203,6 +205,7 @@ class PhysicalSocket : public AsyncSocket, public sigslot::has_slots<> {
 
   PhysicalSocketServer* ss_;
   SOCKET s_;
+  int addr_family_;
   bool udp_;
   CriticalSection crit_;
   int error_ RTC_GUARDED_BY(crit_);

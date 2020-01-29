@@ -138,6 +138,7 @@ PhysicalSocket::~PhysicalSocket() {
 
 bool PhysicalSocket::Create(int family, int type) {
   Close();
+  addr_family_ = family;
   s_ = ::socket(family, type, 0);
   udp_ = (SOCK_DGRAM == type);
   UpdateLastError();
@@ -293,6 +294,9 @@ int PhysicalSocket::GetOption(Option opt, int* value) {
 #if defined(WEBRTC_LINUX) && !defined(WEBRTC_ANDROID)
     *value = (*value != IP_PMTUDISC_DONT) ? 1 : 0;
 #endif
+  } else if (opt == OPT_DSCP) {
+    // unshift DSCP value to get six most significant bits of IP DiffServ field
+    *value >>= 2;
   }
   return ret;
 }
@@ -306,6 +310,9 @@ int PhysicalSocket::SetOption(Option opt, int value) {
 #if defined(WEBRTC_LINUX) && !defined(WEBRTC_ANDROID)
     value = (value) ? IP_PMTUDISC_DO : IP_PMTUDISC_DONT;
 #endif
+  }
+  if (opt == OPT_DSCP) {
+    return SetDiffServCodePoint(value);
   }
   return ::setsockopt(s_, slevel, sopt, (SockOptArg)&value, sizeof(value));
 }
@@ -514,6 +521,27 @@ void PhysicalSocket::MaybeRemapSendError() {
 #endif
 }
 
+// Sets the DSCP value. This implementation is similar to the Chromium
+// implementation.
+// https://github.com/chromium/chromium/blob/5ace5a1ed17244ef74142532f78b5e125b719d99/net/socket/udp_socket_posix.cc#L1125
+int PhysicalSocket::SetDiffServCodePoint(int dscp_value) {
+  // Shift DSCP value to fit six most significant bits of IP DiffServ field
+  dscp_value = dscp_value << 2;
+
+  // Set the IPv4 option in all cases to support dual-stack sockets.
+  int ret = ::setsockopt(s_, IPPROTO_IP, IP_TOS, (SockOptArg)&dscp_value,
+                         sizeof(dscp_value));
+
+  if (addr_family_ == AF_INET6) {
+    // In the IPv6 case, the previous socksetopt may fail because of a lack of
+    // dual-stack support. Therefore ignore the previous return value.
+    ret = ::setsockopt(s_, IPPROTO_IPV6, IPV6_TCLASS, (SockOptArg)&dscp_value,
+                       sizeof(dscp_value));
+  }
+
+  return ret;
+}
+
 void PhysicalSocket::SetEnabledEvents(uint8_t events) {
   enabled_events_ = events;
 }
@@ -554,8 +582,9 @@ int PhysicalSocket::TranslateOption(Option opt, int* slevel, int* sopt) {
       *sopt = TCP_NODELAY;
       break;
     case OPT_DSCP:
-      RTC_LOG(LS_WARNING) << "Socket::OPT_DSCP not supported.";
-      return -1;
+      *slevel = IPPROTO_IP;
+      *sopt = IP_TOS;
+      break;
     case OPT_RTP_SENDTIME_EXTN_ID:
       return -1;  // No logging is necessary as this not a OS socket option.
     default:
