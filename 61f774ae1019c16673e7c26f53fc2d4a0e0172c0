@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f33fb1a5_17ea89e5",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2020-01-30T09:55:10Z",
+      "side": 1,
+      "message": "How does the absolute capture time depend on sample rate? If it does, shouldn\u0027t the decoder be involved somehow, to say what sample rate is being used?",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 556,
+        "endChar": 78
+      },
+      "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
