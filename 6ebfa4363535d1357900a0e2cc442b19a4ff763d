@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "53e6e42b_aacca03e",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-01-30T09:36:43Z",
+      "side": 1,
+      "message": "+1\nI think removing the default value is a must as the consequences of the number of channels becoming wrong due to this can be quite severe.",
+      "parentUuid": "859161b9_a64ba0db",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "6ebfa4363535d1357900a0e2cc442b19a4ff763d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de826171_19c18955",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 5
