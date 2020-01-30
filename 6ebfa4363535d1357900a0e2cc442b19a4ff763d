@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "eb0aced8_4707fc77",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-01-30T16:30:00Z",
+      "side": 1,
+      "message": "I figured that it might be good to avoid changes in this method.\n\nsince as AudioFrame is used both for audio capturing and receiving, absolute_capture_timestamp_ms is essentially an optional field. And therefore, a dedicated method for setting it would be the best.\n\nremoving the default value on num_channels is still a good thing, but we can take it separately.",
+      "parentUuid": "a46d00b7_96561018",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "6ebfa4363535d1357900a0e2cc442b19a4ff763d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de826171_19c18955",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 5
