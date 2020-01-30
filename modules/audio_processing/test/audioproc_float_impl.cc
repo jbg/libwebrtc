@@ -119,10 +119,6 @@ ABSL_FLAG(bool,
           "Activate all of the default components (will be overridden by any "
           "other settings)");
 ABSL_FLAG(int,
-          use_legacy_ns,
-          kParameterNotSpecifiedValue,
-          "Activate (1) or deactivate(0) the legacy NS");
-ABSL_FLAG(int,
           analog_agc_disable_digital_adaptive,
           kParameterNotSpecifiedValue,
           "Force-deactivate (1) digital adaptation in "
