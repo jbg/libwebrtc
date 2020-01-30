@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a46d00b7_96561018",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-01-30T12:17:12Z",
+      "side": 1,
+      "message": "Good point. I would really try to remove the default on num_channels.",
+      "parentUuid": "53e6e42b_aacca03e",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "6ebfa4363535d1357900a0e2cc442b19a4ff763d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de826171_19c18955",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 5
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "de4472d9_5f4fa3f6",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-01-30T12:17:12Z",
+      "side": 1,
+      "message": "On the top level, absolute_capture_timestamp_ms has to be optional\u003c\u003e because\n\nOnData as a method of AudioTrackSinkInterface is used for both AudioSource::Sink and RemoteAudioSource \nhttps://cs.chromium.org/chromium/src/third_party/webrtc/pc/remote_audio_source.cc?q\u003dremote_audio_source\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d143\n\nFor the latter, absolute_capture_timestamp_ms should be nullopt.\n\nA further API change might be good to eliminate this dilemma. But so far, it might be good enough.",
+      "parentUuid": "3141661d_d277453e",
+      "range": {
+        "startLine": 879,
+        "startChar": 36,
+        "endLine": 880,
+        "endChar": 38
+      },
+      "revId": "6ebfa4363535d1357900a0e2cc442b19a4ff763d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f97dc73_55130ce4",
         "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
         "patchSetId": 5
@@ -107,6 +155,30 @@
       "writtenOn": "2020-01-30T09:08:05Z",
       "side": 1,
       "message": "to me it seems absolute_capture_timestamp_ms would be easier to maintain inside the InputData struct (what is so special about this field it deserve own parameter? )\n\nBut I\u0027m not maintainer/owner of this code, so it is up to you to decide which one is better.",
+      "range": {
+        "startLine": 134,
+        "startChar": 50,
+        "endLine": 134,
+        "endChar": 79
+      },
+      "revId": "6ebfa4363535d1357900a0e2cc442b19a4ff763d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0866775_2c5ec1e1",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-01-30T12:17:12Z",
+      "side": 1,
+      "message": "First, I think InputData is fairly redundant by itself. Practically, input_data are all needed for encoding, where absolute_capture_timestamp is needed only for packetization.",
+      "parentUuid": "4f97dc73_55130ce4",
       "range": {
         "startLine": 134,
         "startChar": 50,
