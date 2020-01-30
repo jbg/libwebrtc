@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3141661d_d277453e",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2020-01-30T10:16:20Z",
+      "side": 1,
+      "message": "+1 on this. I think that `int64_t` -\u003e `absl::optional\u003cint64_t\u003e` is fine but `absl::optional\u003cint64_t\u003e` -\u003e `int64_t` should almost never be done.\n\nThe best thing to do here should be to change `UpdateFrame()` to also accept an `absl::optional\u003cint64_t\u003e`.",
+      "parentUuid": "de826171_19c18955",
+      "range": {
+        "startLine": 879,
+        "startChar": 36,
+        "endLine": 880,
+        "endChar": 38
+      },
+      "revId": "6ebfa4363535d1357900a0e2cc442b19a4ff763d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f97dc73_55130ce4",
         "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
         "patchSetId": 5
