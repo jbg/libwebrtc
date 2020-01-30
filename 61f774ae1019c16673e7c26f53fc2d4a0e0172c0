@@ -22,6 +22,30 @@
       "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c45f685_3b5a115e",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2020-01-30T11:12:00Z",
+      "side": 1,
+      "message": "I believe that `GetRtpTimestampRateHz()` be replaced with `*it`.",
+      "parentUuid": "f33fb1a5_17ea89e5",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 556,
+        "endChar": 78
+      },
+      "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
