@@ -104,6 +104,15 @@ class AudioFrame {
   ChannelLayout channel_layout() const { return channel_layout_; }
   int sample_rate_hz() const { return sample_rate_hz_; }
 
+  void set_absolute_capture_timestamp_ms(
+      absl::optional<int64_t> absolute_capture_time_stamp_ms) {
+    absolute_capture_timestamp_ms_ = absolute_capture_time_stamp_ms;
+  }
+
+  absl::optional<int64_t> absolute_capture_timestamp_ms() const {
+    return absolute_capture_timestamp_ms_;
+  }
+
   // RTP timestamp of the first sample in the AudioFrame.
   uint32_t timestamp_ = 0;
   // Time since the first frame in milliseconds.
@@ -149,6 +158,10 @@ class AudioFrame {
 
   int16_t data_[kMaxDataSizeSamples];
   bool muted_ = true;
+
+  // Absolute capture timestamp when this audio frame was originally captured.
+  // This timestamp MUST be based on the same clock as rtc::TimeMillis().
+  absl::optional<int64_t> absolute_capture_timestamp_ms_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(AudioFrame);
 };
