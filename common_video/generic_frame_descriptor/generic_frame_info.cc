@@ -71,8 +71,16 @@ GenericFrameInfo::Builder& GenericFrameInfo::Builder::Dtis(
 
 GenericFrameInfo::Builder& GenericFrameInfo::Builder::Fdiffs(
     std::initializer_list<int> frame_diffs) {
-  info_.frame_diffs.insert(info_.frame_diffs.end(), frame_diffs.begin(),
-                           frame_diffs.end());
+  info_.frame_diffs.assign(frame_diffs.begin(), frame_diffs.end());
+  return *this;
+}
+
+GenericFrameInfo::Builder& GenericFrameInfo::Builder::Buffers(
+    std::initializer_list<CodecBufferUsage> buffers) {
+  info_.encoder_buffers.assign(buffers.begin(), buffers.end());
+  for (size_t i = 0; i < info_.encoder_buffers.size(); ++i) {
+    info_.encoder_buffers[i].id = i;
+  }
   return *this;
 }
 

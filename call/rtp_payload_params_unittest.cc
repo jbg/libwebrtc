@@ -29,11 +29,12 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 
-using ::testing::ElementsAre;
-using ::testing::IsEmpty;
-
 namespace webrtc {
 namespace {
+using ::testing::ElementsAre;
+using ::testing::IsEmpty;
+using ::testing::UnorderedElementsAre;
+
 const uint32_t kSsrc1 = 12345;
 const uint32_t kSsrc2 = 23456;
 const int16_t kPictureId = 123;
@@ -369,6 +370,168 @@ TEST(RtpPayloadParamsTest, GenericDescriptorForGenericCodec) {
   ASSERT_TRUE(header.generic);
   EXPECT_EQ(1, header.generic->frame_id);
   EXPECT_THAT(header.generic->dependencies, ElementsAre(0));
+}
+
+class RtpPayloadParamsSetDependenciesFromEncoderBuffersTest
+    : public ::testing::Test {
+ public:
+  const CodecBufferUsage kReferenceAndUpdate =
+      CodecBufferUsage(0, /*referenced=*/true, /*updated=*/true);
+  const CodecBufferUsage kReference =
+      CodecBufferUsage(0, /*referenced=*/true, /*updated=*/false);
+  const CodecBufferUsage kUpdate =
+      CodecBufferUsage(0, /*referenced=*/false, /*updated=*/true);
+  const CodecBufferUsage kNone =
+      CodecBufferUsage(0, /*referenced=*/false, /*updated=*/false);
+
+  RtpPayloadParamsSetDependenciesFromEncoderBuffersTest()
+      : field_trials_("WebRTC-GenericDescriptor/Enabled/") {}
+
+  absl::InlinedVector<int64_t, 5> ToFrameDependencies(
+      VideoFrameType frame_type,
+      int64_t frame_id,
+      const GenericFrameInfo& frame_pattern,
+      RtpPayloadParams* converter) {
+    EncodedImage encoded_image;
+    encoded_image._frameType = frame_type;
+    CodecSpecificInfo codec_info;
+    codec_info.generic_frame_info = frame_pattern;
+    RTPVideoHeader header =
+        converter->GetRtpVideoHeader(encoded_image, &codec_info, frame_id);
+    EXPECT_TRUE(header.generic);
+    if (header.generic == absl::nullopt) {
+      // Avoid crashing the test if conversion failed.
+      return {};
+    }
+    return header.generic->dependencies;
+  }
+
+ private:
+  test::ScopedFieldTrials field_trials_;
+};
+
+TEST_F(RtpPayloadParamsSetDependenciesFromEncoderBuffersTest,
+       ConvertsBufferReferencesIntoFrameDependenciesWithOneLayer) {
+  using Builder = GenericFrameInfo::Builder;
+  GenericFrameInfo pattern = Builder().Buffers({kReferenceAndUpdate}).Build();
+  RtpPayloadState state;
+  RtpPayloadParams params(kSsrc1, &state);
+
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameKey,
+                                  /*frame_id=*/1, pattern, &params),
+              IsEmpty());
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/3, pattern, &params),
+              ElementsAre(1));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/6, pattern, &params),
+              ElementsAre(3));
+}
+
+TEST_F(RtpPayloadParamsSetDependenciesFromEncoderBuffersTest,
+       ConvertsBufferReferencesIntoFrameDependenciesWithTwoTemporalLayers) {
+  using Builder = GenericFrameInfo::Builder;
+  // Shortened 4-frame pattern:
+  // T1:  2---4   6---8 ...
+  //      /   /   /   /
+  // T0: 1---3---5---7 ...
+  GenericFrameInfo pattern[] = {
+      Builder().T(0).Buffers({kReferenceAndUpdate, kNone, kNone}).Build(),
+      Builder().T(1).Buffers({kReference, kUpdate, kNone}).Build(),
+      Builder().T(0).Buffers({kReferenceAndUpdate, kNone, kNone}).Build(),
+      Builder().T(1).Buffers({kReference, kReference, kNone}).Build()};
+  RtpPayloadState state;
+  RtpPayloadParams params(kSsrc1, &state);
+
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameKey,
+                                  /*frame_id=*/1, pattern[0], &params),
+              IsEmpty());
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/2, pattern[1], &params),
+              ElementsAre(1));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/3, pattern[2], &params),
+              ElementsAre(1));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/4, pattern[3], &params),
+              UnorderedElementsAre(2, 3));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/5, pattern[0], &params),
+              ElementsAre(3));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/6, pattern[1], &params),
+              ElementsAre(5));
+}
+
+TEST_F(RtpPayloadParamsSetDependenciesFromEncoderBuffersTest,
+       ConvertsBufferReferencesIntoFrameDependenciesWith3Layers4FramePattern) {
+  using Builder = GenericFrameInfo::Builder;
+  // T2:   2---4   6---8 ...
+  //      /   /   /   /
+  // T1:  |  3    |  7   ...
+  //      /_/     /_/
+  // T0: 1-------5-----  ...
+  GenericFrameInfo pattern[] = {
+      Builder().T(0).Buffers({kReferenceAndUpdate, kNone, kNone}).Build(),
+      Builder().T(2).Buffers({kReference, kNone, kUpdate}).Build(),
+      Builder().T(1).Buffers({kReference, kUpdate, kNone}).Build(),
+      Builder().T(2).Buffers({kReference, kReference, kReference}).Build(),
+  };
+  RtpPayloadState state;
+  RtpPayloadParams params(kSsrc1, &state);
+
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameKey,
+                                  /*frame_id=*/1, pattern[0], &params),
+              IsEmpty());
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/2, pattern[1], &params),
+              ElementsAre(1));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/3, pattern[2], &params),
+              ElementsAre(1));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/4, pattern[3], &params),
+              UnorderedElementsAre(2, 3));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/5, pattern[0], &params),
+              ElementsAre(1));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/6, pattern[1], &params),
+              ElementsAre(5));
+}
+
+TEST_F(RtpPayloadParamsSetDependenciesFromEncoderBuffersTest,
+       ConvertsBufferReferencesIntoFrameDependenciesSimulcastWith2Layers) {
+  using Builder = GenericFrameInfo::Builder;
+  // S1: 2---4---6-  ...
+  //
+  // S0: 1---3---5-  ...
+  GenericFrameInfo pattern[] = {
+      Builder().S(0).Buffers({kReferenceAndUpdate}).Build(),
+      Builder().S(1).Buffers({kReferenceAndUpdate}).Build(),
+  };
+  RtpPayloadState state;
+  RtpPayloadParams params0(kSsrc1, &state);
+  RtpPayloadParams params1(kSsrc2, &state);
+
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameKey,
+                                  /*frame_id=*/1, pattern[0], &params0),
+              IsEmpty());
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameKey,
+                                  /*frame_id=*/2, pattern[1], &params1),
+              IsEmpty());
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/3, pattern[0], &params0),
+              ElementsAre(1));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/4, pattern[1], &params1),
+              ElementsAre(2));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/5, pattern[0], &params0),
+              ElementsAre(3));
+  EXPECT_THAT(ToFrameDependencies(VideoFrameType::kVideoFrameDelta,
+                                  /*frame_id=*/6, pattern[1], &params1),
+              ElementsAre(4));
 }
 
 class RtpPayloadParamsVp8ToGenericTest : public ::testing::Test {
