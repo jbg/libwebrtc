@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edb4af6_2b966826",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2020-01-31T09:26:13Z",
+      "side": 1,
+      "message": "Would it make sense to expand the comment to mention that this value is only valid for frames captured on the system running the code? I.e. it will not be filled if the frame received over the wire?\n\nIf the value is also valid for frames received over the wire, then \"This timestamp MUST be based on the same clock as rtc::TimeMillis().\" can\u0027t possibly be true.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 57
+      },
+      "revId": "aa770b7764354d953d676c148039ec1900e60493",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
