@@ -253,7 +253,8 @@ class SendStatisticsProxy : public VideoStreamEncoderObserver,
   QualityLimitationReasonTracker quality_limitation_reason_tracker_
       RTC_GUARDED_BY(crit_);
   rtc::RateTracker media_byte_rate_tracker_ RTC_GUARDED_BY(crit_);
-  rtc::RateTracker encoded_frame_rate_tracker_ RTC_GUARDED_BY(crit_);
+  std::map<uint32_t, std::unique_ptr<rtc::RateTracker>>
+      encoded_frame_rate_tracker_ RTC_GUARDED_BY(crit_);
 
   absl::optional<int64_t> last_outlier_timestamp_ RTC_GUARDED_BY(crit_);
 

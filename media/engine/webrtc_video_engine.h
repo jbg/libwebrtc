@@ -331,7 +331,7 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     void SetSend(bool send);
 
     const std::vector<uint32_t>& GetSsrcs() const;
-    VideoSenderInfo GetVideoSenderInfo(bool log_stats);
+    std::vector<VideoSenderInfo> GetVideoSenderInfos(bool log_stats);
     void FillBitrateInfo(BandwidthEstimationInfo* bwe_info);
 
    private:
@@ -356,6 +356,7 @@ class WebRtcVideoChannel : public VideoMediaChannel,
       webrtc::VideoEncoderConfig encoder_config;
     };
 
+    VideoSenderInfo GetVideoSenderInfo(bool log_stats);
     rtc::scoped_refptr<webrtc::VideoEncoderConfig::EncoderSpecificSettings>
     ConfigureVideoEncoderSettings(const VideoCodec& codec);
     void SetCodec(const VideoCodecSettings& codec);

@@ -583,6 +583,7 @@ struct VideoSenderInfo : public MediaSenderInfo {
   webrtc::VideoContentType content_type = webrtc::VideoContentType::UNSPECIFIED;
   // https://w3c.github.io/webrtc-stats/#dom-rtcvideosenderstats-hugeframessent
   uint32_t huge_frames_sent = 0;
+  std::string rid;
 };
 
 struct VideoReceiverInfo : public MediaReceiverInfo {

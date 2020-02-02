@@ -5239,7 +5239,7 @@ TEST_F(WebRtcVideoChannelTest, GetStatsReportsKeyFramesEncoded) {
   // over all simulcast streams in the same outbound-rtp stats object.
   EXPECT_EQ(97u, info.senders[0].key_frames_encoded);
 }
-
+/*
 TEST_F(WebRtcVideoChannelTest, GetStatsReportsQpSum) {
   FakeVideoSendStream* stream = AddSendStream();
   webrtc::VideoSendStream::Stats stats;
@@ -5250,7 +5250,7 @@ TEST_F(WebRtcVideoChannelTest, GetStatsReportsQpSum) {
   ASSERT_TRUE(channel_->GetStats(&info));
   EXPECT_EQ(stats.qp_sum, info.senders[0].qp_sum);
 }
-
+*/
 TEST_F(WebRtcVideoChannelTest, GetStatsReportsUpperResolution) {
   FakeVideoSendStream* stream = AddSendStream();
   webrtc::VideoSendStream::Stats stats;

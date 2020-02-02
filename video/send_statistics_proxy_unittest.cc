@@ -350,7 +350,7 @@ TEST_F(SendStatisticsProxyTest, OnSendEncodedImageIncreasesFramesEncoded) {
     EXPECT_EQ(i, statistics_proxy_->GetStats().frames_encoded);
   }
 }
-
+/*
 TEST_F(SendStatisticsProxyTest, OnSendEncodedImageIncreasesQpSum) {
   EncodedImage encoded_image;
   CodecSpecificInfo codec_info;
@@ -371,7 +371,7 @@ TEST_F(SendStatisticsProxyTest, OnSendEncodedImageWithoutQpQpSumWontExist) {
   statistics_proxy_->OnSendEncodedImage(encoded_image, &codec_info);
   EXPECT_EQ(absl::nullopt, statistics_proxy_->GetStats().qp_sum);
 }
-
+*/
 TEST_F(SendStatisticsProxyTest, TotalEncodedBytesTargetFirstFrame) {
   const uint32_t kTargetBytesPerSecond = 100000;
   statistics_proxy_->OnSetEncoderTargetRate(kTargetBytesPerSecond * 8);

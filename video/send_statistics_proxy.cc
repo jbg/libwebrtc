@@ -143,13 +143,14 @@ SendStatisticsProxy::SendStatisticsProxy(
       cpu_downscales_(-1),
       quality_limitation_reason_tracker_(clock_),
       media_byte_rate_tracker_(kBucketSizeMs, kBucketCount),
-      encoded_frame_rate_tracker_(kBucketSizeMs, kBucketCount),
       last_num_spatial_layers_(0),
       last_num_simulcast_streams_(0),
       last_spatial_layer_use_{},
       bw_limited_layers_(false),
       uma_container_(
           new UmaSamplesContainer(GetUmaPrefix(content_type_), stats_, clock)) {
+  encoded_frame_rate_tracker_[0] =
+      std::make_unique<rtc::RateTracker>(kBucketSizeMs, kBucketCount);
 }
 
 SendStatisticsProxy::~SendStatisticsProxy() {
@@ -731,7 +732,8 @@ VideoSendStream::Stats SendStatisticsProxy::GetStats() {
       content_type_ == VideoEncoderConfig::ContentType::kRealtimeVideo
           ? VideoContentType::UNSPECIFIED
           : VideoContentType::SCREENSHARE;
-  stats_.encode_frame_rate = round(encoded_frame_rate_tracker_.ComputeRate());
+  stats_.encode_frame_rate =
+      round(encoded_frame_rate_tracker_[0]->ComputeRate());
   stats_.media_bitrate_bps = media_byte_rate_tracker_.ComputeRate() * 8;
   stats_.quality_limitation_durations_ms =
       quality_limitation_reason_tracker_.DurationsMs();
@@ -902,8 +904,13 @@ void SendStatisticsProxy::OnSendEncodedImage(
 
   rtc::CritScope lock(&crit_);
   ++stats_.frames_encoded;
+  if (encoded_frame_rate_tracker_.count(simulcast_idx) == 0) {
+    encoded_frame_rate_tracker_[simulcast_idx] =
+        std::make_unique<rtc::RateTracker>(kBucketSizeMs, kBucketCount);
+  }
   // The current encode frame rate is based on previously encoded frames.
-  double encode_frame_rate = encoded_frame_rate_tracker_.ComputeRate();
+  double encode_frame_rate =
+      encoded_frame_rate_tracker_[simulcast_idx]->ComputeRate();
   // We assume that less than 1 FPS is not a trustworthy estimate - perhaps we
   // just started encoding for the first time or after a pause. Assuming frame
   // rate is at least 1 FPS is conservative to avoid too large increments.
@@ -931,7 +938,10 @@ void SendStatisticsProxy::OnSendEncodedImage(
   VideoSendStream::StreamStats* stats = GetStatsEntry(ssrc);
   if (!stats)
     return;
-
+  stats->encode_frame_rate = encode_frame_rate;
+  stats->frames_encoded++;
+  stats->total_encode_time_ms += encoded_image.timing_.encode_finish_ms -
+                                 encoded_image.timing_.encode_start_ms;
   // Report resolution of top spatial layer in case of VP9 SVC.
   bool is_svc_low_spatial_layer =
       (codec_info && codec_info->codecType == kVideoCodecVP9)
@@ -948,9 +958,9 @@ void SendStatisticsProxy::OnSendEncodedImage(
                                          VideoFrameType::kVideoFrameKey);
 
   if (encoded_image.qp_ != -1) {
-    if (!stats_.qp_sum)
-      stats_.qp_sum = 0;
-    *stats_.qp_sum += encoded_image.qp_;
+    if (!stats->qp_sum)
+      stats->qp_sum = 0;
+    *stats->qp_sum += encoded_image.qp_;
 
     if (codec_info) {
       if (codec_info->codecType == kVideoCodecVP8) {
@@ -980,7 +990,7 @@ void SendStatisticsProxy::OnSendEncodedImage(
   media_byte_rate_tracker_.AddSamples(encoded_image.size());
 
   if (uma_container_->InsertEncodedFrame(encoded_image, simulcast_idx)) {
-    encoded_frame_rate_tracker_.AddSamples(1);
+    encoded_frame_rate_tracker_[simulcast_idx]->AddSamples(1);
   }
 
   stats_.bw_limited_resolution |= quality_downscales_ > 0;
@@ -1007,7 +1017,7 @@ int SendStatisticsProxy::GetInputFrameRate() const {
 
 int SendStatisticsProxy::GetSendFrameRate() const {
   rtc::CritScope lock(&crit_);
-  return round(encoded_frame_rate_tracker_.ComputeRate());
+  return round(encoded_frame_rate_tracker_.at(0)->ComputeRate());
 }
 
 void SendStatisticsProxy::OnIncomingFrame(int width, int height) {
@@ -1020,10 +1030,10 @@ void SendStatisticsProxy::OnIncomingFrame(int width, int height) {
     uma_container_->cpu_limited_frame_counter_.Add(
         stats_.cpu_limited_resolution);
   }
-  if (encoded_frame_rate_tracker_.TotalSampleCount() == 0) {
+  if (encoded_frame_rate_tracker_.at(0)->TotalSampleCount() == 0) {
     // Set start time now instead of when first key frame is encoded to avoid a
     // too high initial estimate.
-    encoded_frame_rate_tracker_.AddSamples(0);
+    encoded_frame_rate_tracker_.at(0)->AddSamples(0);
   }
 }
 
