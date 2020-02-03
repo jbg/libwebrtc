@@ -5128,11 +5128,11 @@ void PeerConnection::GetOptionsForUnifiedPlanOffer(
       }
     } else {
       RTC_CHECK_EQ(cricket::MEDIA_TYPE_DATA, media_type);
-      RTC_CHECK(GetDataMid());
       if (had_been_rejected || mid != *GetDataMid()) {
         session_options->media_description_options.push_back(
             GetMediaDescriptionOptionsForRejectedData(mid));
       } else {
+        RTC_CHECK(GetDataMid());
         session_options->media_description_options.push_back(
             GetMediaDescriptionOptionsForActiveData(mid));
       }
@@ -6706,9 +6706,6 @@ void PeerConnection::TeardownDataChannelTransport_n() {
   RTC_LOG(LS_INFO) << "Tearing down data channel transport for mid="
                    << *sctp_mid_;
 
-  // |sctp_mid_| may still be active through an SCTP transport.  If not, unset
-  // it.
-  sctp_mid_.reset();
   data_channel_controller_.TeardownDataChannelTransport_n();
 }
 

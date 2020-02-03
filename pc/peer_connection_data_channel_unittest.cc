@@ -212,6 +212,18 @@ class PeerConnectionDataChannelTest
       : PeerConnectionDataChannelBaseTest(GetParam()) {}
 };
 
+INSTANTIATE_TEST_SUITE_P(PeerConnectionDataChannelTest,
+                         PeerConnectionDataChannelTest,
+                         Values(SdpSemantics::kPlanB,
+                                SdpSemantics::kUnifiedPlan));
+
+class PeerConnectionDataChannelUnifiedPlanTest
+    : public PeerConnectionDataChannelBaseTest {
+ protected:
+  PeerConnectionDataChannelUnifiedPlanTest()
+      : PeerConnectionDataChannelBaseTest(SdpSemantics::kUnifiedPlan) {}
+};
+
 TEST_P(PeerConnectionDataChannelTest,
        NoSctpTransportCreatedIfRtpDataChannelEnabled) {
   RTCConfiguration config;
@@ -406,9 +418,28 @@ TEST_P(PeerConnectionDataChannelTest, ObsoleteSdpSyntaxIfSet) {
   EXPECT_THAT(sdp, HasSubstr("a=sctpmap:"));
 }
 
-INSTANTIATE_TEST_SUITE_P(PeerConnectionDataChannelTest,
-                         PeerConnectionDataChannelTest,
-                         Values(SdpSemantics::kPlanB,
-                                SdpSemantics::kUnifiedPlan));
+TEST_F(PeerConnectionDataChannelUnifiedPlanTest,
+       ReOfferAfterPeerRejectsDataChannel) {
+  auto caller = CreatePeerConnectionWithDataChannel();
+  PeerConnectionFactoryInterface::Options options;
+  options.disable_sctp_data_channels = true;
+  auto callee = CreatePeerConnection(RTCConfiguration(), options);
+
+  ASSERT_TRUE(caller->ExchangeOfferAnswerWith(callee.get()));
+
+  auto offer = caller->CreateOffer();
+  ASSERT_TRUE(offer);
+  const auto& contents = offer->description()->contents();
+  ASSERT_EQ(1u, contents.size());
+  EXPECT_TRUE(contents[0].rejected);
+
+  ASSERT_TRUE(
+      caller->SetLocalDescription(CloneSessionDescription(offer.get())));
+  ASSERT_TRUE(callee->SetRemoteDescription(std::move(offer)));
+
+  auto answer = callee->CreateAnswerAndSetAsLocal();
+  ASSERT_TRUE(answer);
+  EXPECT_TRUE(caller->SetRemoteDescription(std::move(answer)));
+}
 
 }  // namespace webrtc
