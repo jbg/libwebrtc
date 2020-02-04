@@ -18,6 +18,7 @@
 #include "call/rtp_config.h"
 #include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h"
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
+#include "modules/video_coding/encoder_buffers_converter.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 
 namespace webrtc {
@@ -28,9 +29,9 @@ class RtpRtcp;
 // TODO(nisse): Make these properties not codec specific.
 class RtpPayloadParams final {
  public:
-  RtpPayloadParams(const uint32_t ssrc, const RtpPayloadState* state);
-  RtpPayloadParams(const RtpPayloadParams& other);
-  ~RtpPayloadParams();
+  RtpPayloadParams(uint32_t ssrc, const RtpPayloadState* state);
+  RtpPayloadParams(RtpPayloadParams&& other) = default;
+  ~RtpPayloadParams() = default;
 
   RTPVideoHeader GetRtpVideoHeader(const EncodedImage& image,
                                    const CodecSpecificInfo* codec_specific_info,
@@ -43,6 +44,9 @@ class RtpPayloadParams final {
  private:
   void SetCodecSpecific(RTPVideoHeader* rtp_video_header,
                         bool first_frame_in_picture);
+  void SetGenericFromEncoderBuffers(const GenericFrameInfo& frame_info,
+                                    int64_t frame_id,
+                                    RTPVideoHeader* rtp_video_header);
   void SetGeneric(const CodecSpecificInfo* codec_specific_info,
                   int64_t frame_id,
                   bool is_keyframe,
@@ -98,6 +102,8 @@ class RtpPayloadParams final {
   // SetDependenciesVp8Deprecated(), or always use SetDependenciesVp8New().
   // TODO(bugs.webrtc.org/10242): Remove.
   absl::optional<bool> new_version_used_;
+
+  EncoderBuffersConverter encoder_buffers_converter_;
 
   const uint32_t ssrc_;
   RtpPayloadState state_;
