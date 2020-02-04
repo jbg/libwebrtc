@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae5f7329_7528bab1",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6711,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-02-04T15:59:00Z",
+      "side": 0,
+      "message": "If you remove the clearing here, can you also update the comment next to its declaration in peer_connection.h? There are quite a few places that switch on sctp_mid_ being present or not.\n(I think the comment was wrong already, but never removing sctp_mid_ makes it wronger.)",
+      "revId": "3fa2b80e14fa8b9e05ca8efaf539e43a2cc46921",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
