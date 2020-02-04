@@ -16,6 +16,24 @@
       "revId": "3fa2b80e14fa8b9e05ca8efaf539e43a2cc46921",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1255f26b_bd8e9cd8",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6711,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2020-02-04T19:09:28Z",
+      "side": 0,
+      "message": "Took a different approach that no longer requires changing the contract around sctp_mid_.",
+      "parentUuid": "ae5f7329_7528bab1",
+      "revId": "3fa2b80e14fa8b9e05ca8efaf539e43a2cc46921",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
