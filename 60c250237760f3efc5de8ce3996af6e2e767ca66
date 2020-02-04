@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f9e3758_17588cde",
+        "filename": "sdk/android/api/org/webrtc/MediaCodecVideoDecoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-02-04T12:38:32Z",
+      "side": 1,
+      "message": "We should add an annotation like @VideoCodecTypeInt to enable some compiler checks (same for other places where applicable)",
+      "range": {
+        "startLine": 412,
+        "startChar": 29,
+        "endLine": 412,
+        "endChar": 32
+      },
+      "revId": "60c250237760f3efc5de8ce3996af6e2e767ca66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fad52ff9_09b49fcb",
+        "filename": "sdk/android/api/org/webrtc/MediaCodecVideoDecoder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-02-04T12:38:32Z",
+      "side": 1,
+      "message": "camelCase for variable names",
+      "range": {
+        "startLine": 412,
+        "startChar": 33,
+        "endLine": 412,
+        "endChar": 49
+      },
+      "revId": "60c250237760f3efc5de8ce3996af6e2e767ca66",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
