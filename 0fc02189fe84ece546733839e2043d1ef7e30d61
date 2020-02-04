@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c68d2946_6eae1224",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2020-02-04T09:23:40Z",
+      "side": 1,
+      "message": "\u0027Unshift\u0027. End comment with \u0027.\u0027",
+      "revId": "0fc02189fe84ece546733839e2043d1ef7e30d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16df0fcd_cb74d880",
+        "filename": "rtc_base/physical_socket_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2020-02-04T09:23:40Z",
+      "side": 1,
+      "message": "\u0027.\u0027 at the end",
+      "range": {
+        "startLine": 528,
+        "startChar": 5,
+        "endLine": 528,
+        "endChar": 10
+      },
+      "revId": "0fc02189fe84ece546733839e2043d1ef7e30d61",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
