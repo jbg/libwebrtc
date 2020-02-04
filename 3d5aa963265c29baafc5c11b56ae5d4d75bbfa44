@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "73bd257c_e20e5d30",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-04T18:05:48Z",
+      "side": 1,
+      "message": "I wouldn\u0027t oppose splitting (or starting to) large class into several simpler classes.\nDone. \nAnd that new class naturally split this change into 2 changes.\n( https://webrtc-review.googlesource.com/c/src/+/168194/ )",
+      "parentUuid": "7db6625e_d27fa43e",
+      "range": {
+        "startLine": 258,
+        "startChar": 23,
+        "endLine": 258,
+        "endChar": 51
+      },
+      "revId": "3d5aa963265c29baafc5c11b56ae5d4d75bbfa44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13180d0c_1127f358",
         "filename": "call/rtp_payload_params.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-02-04T12:14:42Z",
       "side": 1,
       "message": "Would be nice if this function could fail somehow, but I get that it would most likely require refactoring of many functions in this class.",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 19
+      },
+      "revId": "3d5aa963265c29baafc5c11b56ae5d4d75bbfa44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e91d85a2_2b1e50db",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-04T18:05:48Z",
+      "side": 1,
+      "message": "returning error is easy.\nhandling it... I\u0027m not sure what to do in such case (it would indicate that buffers are misconfigured).",
+      "parentUuid": "13180d0c_1127f358",
       "range": {
         "startLine": 284,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "20a84023_d6ae78ce",
+        "filename": "call/rtp_payload_params.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-04T18:05:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33de674c_0e1a5b82",
+      "range": {
+        "startLine": 96,
+        "startChar": 12,
+        "endLine": 96,
+        "endChar": 20
+      },
+      "revId": "3d5aa963265c29baafc5c11b56ae5d4d75bbfa44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd9e5b95_82a69e93",
         "filename": "call/rtp_payload_params_unittest.cc",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2020-02-04T12:14:42Z",
       "side": 1,
       "message": "Can\u0027t see a test where number of references are reduced, (A \u003c-- B, B \u003c-- C, A \u003c--C) should result in C only depending on B.",
+      "range": {
+        "startLine": 375,
+        "startChar": 6,
+        "endLine": 375,
+        "endChar": 59
+      },
+      "revId": "3d5aa963265c29baafc5c11b56ae5d4d75bbfa44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81fc53a5_e6ed63c1",
+        "filename": "call/rtp_payload_params_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-04T18:05:48Z",
+      "side": 1,
+      "message": "one of the tests covers it:\nin 3 temporal layers case frame#4 reference 1st buffer that is last updated by frame#1, but direct frame reference is removed.\n\nDo you think it would make sense to add an explicit test for that feature?\nor would comment in that test be enough?",
+      "parentUuid": "dd9e5b95_82a69e93",
       "range": {
         "startLine": 375,
         "startChar": 6,
