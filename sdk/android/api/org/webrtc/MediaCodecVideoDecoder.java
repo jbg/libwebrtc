@@ -134,20 +134,6 @@ public class MediaCodecVideoDecoder {
   private static final String FORMAT_KEY_CROP_TOP = "crop-top";
   private static final String FORMAT_KEY_CROP_BOTTOM = "crop-bottom";
 
-  // Tracks webrtc::VideoCodecType.
-  public enum VideoCodecType {
-    VIDEO_CODEC_UNKNOWN,
-    VIDEO_CODEC_VP8,
-    VIDEO_CODEC_VP9,
-    VIDEO_CODEC_AV1,
-    VIDEO_CODEC_H264;
-
-    @CalledByNative("VideoCodecType")
-    static VideoCodecType fromNativeIndex(int nativeIndex) {
-      return values()[nativeIndex];
-    }
-  }
-
   // Timeout for input buffer dequeue.
   private static final int DEQUEUE_INPUT_TIMEOUT = 500000;
   // Timeout for codec releasing.
@@ -423,32 +409,32 @@ public class MediaCodecVideoDecoder {
   }
 
   @CalledByNativeUnchecked
-  private boolean initDecode(VideoCodecType type, int width, int height) {
+  private boolean initDecode(@VideoCodecTypeInt int videoCodecType, int width, int height) {
     if (mediaCodecThread != null) {
       throw new RuntimeException("initDecode: Forgot to release()?");
     }
 
     String mime = null;
     String[] supportedCodecPrefixes = null;
-    if (type == VideoCodecType.VIDEO_CODEC_VP8) {
+    if (videoCodecType == VideoCodecTypeInt.VP8) {
       mime = VP8_MIME_TYPE;
       supportedCodecPrefixes = supportedVp8HwCodecPrefixes();
-    } else if (type == VideoCodecType.VIDEO_CODEC_VP9) {
+    } else if (videoCodecType == VideoCodecTypeInt.VP9) {
       mime = VP9_MIME_TYPE;
       supportedCodecPrefixes = supportedVp9HwCodecPrefixes;
-    } else if (type == VideoCodecType.VIDEO_CODEC_H264) {
+    } else if (videoCodecType == VideoCodecTypeInt.H264) {
       mime = H264_MIME_TYPE;
       supportedCodecPrefixes = supportedH264HwCodecPrefixes();
     } else {
-      throw new RuntimeException("initDecode: Non-supported codec " + type);
+      throw new RuntimeException("initDecode: Non-supported codec " + videoCodecType);
     }
     DecoderProperties properties = findDecoder(mime, supportedCodecPrefixes);
     if (properties == null) {
-      throw new RuntimeException("Cannot find HW decoder for " + type);
+      throw new RuntimeException("Cannot find HW decoder for " + videoCodecType);
     }
 
     Logging.d(TAG,
-        "Java initDecode: " + type + " : " + width + " x " + height + ". Color: 0x"
+        "Java initDecode: " + videoCodecType + " : " + width + " x " + height + ". Color: 0x"
             + Integer.toHexString(properties.colorFormat) + ". Use Surface: " + useSurface());
 
     runningInstance = this; // Decoder is now running and can be queried for stack traces.
