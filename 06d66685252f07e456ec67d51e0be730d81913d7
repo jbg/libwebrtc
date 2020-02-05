@@ -16,6 +16,24 @@
       "revId": "06d66685252f07e456ec67d51e0be730d81913d7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c388791e_2cf5cfc1",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 6715,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2020-02-05T21:53:55Z",
+      "side": 1,
+      "message": "I suspect it\u0027s referring to the if statement above, but I\u0027m not totally sure.",
+      "parentUuid": "ab66e63f_732d4c56",
+      "revId": "06d66685252f07e456ec67d51e0be730d81913d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
