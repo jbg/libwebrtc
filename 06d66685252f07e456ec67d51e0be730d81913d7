@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab66e63f_732d4c56",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 6715,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-02-05T10:27:10Z",
+      "side": 1,
+      "message": "This comment still seems to indicate that there should be an \"if\" around here, and there is none. Should it just be \"unset |sctp_mid_| since it is no longer in use\"?",
+      "revId": "06d66685252f07e456ec67d51e0be730d81913d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
