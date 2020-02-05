@@ -121,7 +121,6 @@ class TestRtpSenderVideo : public RTPSenderVideo {
           config.clock = clock;
           config.rtp_sender = rtp_sender;
           config.flexfec_sender = flexfec_sender;
-          config.playout_delay_oracle = &playout_delay_oracle_;
           config.field_trials = &field_trials;
           return config;
         }()) {}
@@ -134,7 +133,6 @@ class TestRtpSenderVideo : public RTPSenderVideo {
                                                retransmission_settings,
                                                expected_retransmission_time_ms);
   }
-  PlayoutDelayOracle playout_delay_oracle_;
 };
 
 class FieldTrials : public WebRtcKeyValueConfig {
