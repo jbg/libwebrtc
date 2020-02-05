@@ -86,21 +86,22 @@ class PacedSenderTest
   }
 
  protected:
-  std::unique_ptr<RtpPacketToSend> BuildRtpPacket(RtpPacketToSend::Type type) {
+  std::unique_ptr<RtpPacketToSend> BuildRtpPacket(
+      RtpPacketSendInfo::Type type) {
     auto packet = std::make_unique<RtpPacketToSend>(nullptr);
     packet->set_packet_type(type);
     switch (type) {
-      case RtpPacketToSend::Type::kAudio:
+      case RtpPacketSendInfo::Type::kAudio:
         packet->SetSsrc(kAudioSsrc);
         break;
-      case RtpPacketToSend::Type::kVideo:
+      case RtpPacketSendInfo::Type::kVideo:
         packet->SetSsrc(kVideoSsrc);
         break;
-      case RtpPacketToSend::Type::kRetransmission:
-      case RtpPacketToSend::Type::kPadding:
+      case RtpPacketSendInfo::Type::kRetransmission:
+      case RtpPacketSendInfo::Type::kPadding:
         packet->SetSsrc(kVideoRtxSsrc);
         break;
-      case RtpPacketToSend::Type::kForwardErrorCorrection:
+      case RtpPacketSendInfo::Type::kForwardErrorCorrection:
         packet->SetSsrc(kFlexFecSsrc);
         break;
     }
@@ -124,7 +125,7 @@ TEST_P(PacedSenderTest, PacesPackets) {
                          DataRate::Zero());
   std::vector<std::unique_ptr<RtpPacketToSend>> packets;
   for (size_t i = 0; i < kPacketsToSend; ++i) {
-    packets.emplace_back(BuildRtpPacket(RtpPacketToSend::Type::kVideo));
+    packets.emplace_back(BuildRtpPacket(RtpPacketSendInfo::Type::kVideo));
   }
   pacer_->EnqueuePackets(std::move(packets));
 
