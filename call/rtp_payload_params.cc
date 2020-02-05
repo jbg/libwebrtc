@@ -14,6 +14,7 @@
 
 #include <algorithm>
 
+#include "absl/algorithm/container.h"
 #include "absl/container/inlined_vector.h"
 #include "absl/types/variant.h"
 #include "api/video/video_timing.h"
@@ -21,6 +22,7 @@
 #include "modules/video_coding/codecs/interface/common_constants.h"
 #include "modules/video_coding/codecs/vp8/include/vp8_globals.h"
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
+#include "modules/video_coding/frame_dependencies_calculator.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -150,10 +152,6 @@ RtpPayloadParams::RtpPayloadParams(const uint32_t ssrc,
   state_.tl0_pic_idx = state ? state->tl0_pic_idx : (random.Rand<uint8_t>());
 }
 
-RtpPayloadParams::RtpPayloadParams(const RtpPayloadParams& other) = default;
-
-RtpPayloadParams::~RtpPayloadParams() {}
-
 RTPVideoHeader RtpPayloadParams::GetRtpVideoHeader(
     const EncodedImage& image,
     const CodecSpecificInfo* codec_specific_info,
@@ -182,9 +180,16 @@ RTPVideoHeader RtpPayloadParams::GetRtpVideoHeader(
 
   SetCodecSpecific(&rtp_video_header, first_frame_in_picture);
 
-  if (generic_descriptor_experiment_)
-    SetGeneric(codec_specific_info, shared_frame_id, is_keyframe,
-               &rtp_video_header);
+  if (generic_descriptor_experiment_) {
+    if (codec_specific_info && codec_specific_info->generic_frame_info &&
+        !codec_specific_info->generic_frame_info->encoder_buffers.empty()) {
+      SetGenericFromEncoderBuffers(*codec_specific_info->generic_frame_info,
+                                   shared_frame_id, &rtp_video_header);
+    } else {
+      SetGeneric(codec_specific_info, shared_frame_id, is_keyframe,
+                 &rtp_video_header);
+    }
+  }
 
   return rtp_video_header;
 }
@@ -246,6 +251,24 @@ void RtpPayloadParams::SetCodecSpecific(RTPVideoHeader* rtp_video_header,
     rtp_video_header->video_type_header.emplace<RTPVideoHeaderLegacyGeneric>()
         .picture_id = state_.picture_id;
   }
+}
+
+void RtpPayloadParams::SetGenericFromEncoderBuffers(
+    const GenericFrameInfo& frame_info,
+    int64_t frame_id,
+    RTPVideoHeader* rtp_video_header) {
+  RTPVideoHeader::GenericDescriptorInfo& generic =
+      rtp_video_header->generic.emplace();
+
+  generic.frame_id = frame_id;
+  generic.dependencies = dependencies_calculator_.FromBuffersUsage(
+      rtp_video_header->frame_type, frame_id, frame_info.encoder_buffers);
+  generic.spatial_index = frame_info.spatial_id;
+  generic.temporal_index = frame_info.temporal_id;
+  generic.decode_target_indications = frame_info.decode_target_indications;
+  generic.discardable =
+      absl::c_linear_search(frame_info.decode_target_indications,
+                            DecodeTargetIndication::kDiscardable);
 }
 
 void RtpPayloadParams::SetGeneric(const CodecSpecificInfo* codec_specific_info,
