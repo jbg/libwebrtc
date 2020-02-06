@@ -13,6 +13,7 @@
 #include <string>
 
 #include "absl/algorithm/container.h"
+#include "api/rtp_parameters.h"
 #include "pc/channel_manager.h"
 #include "pc/rtp_media_utils.h"
 #include "pc/rtp_parameters_conversion.h"
@@ -98,6 +99,21 @@ RTCError VerifyCodecPreferences(const std::vector<RtpCodecCapability>& codecs,
 
 }  // namespace
 
+std::vector<RtpHeaderExtensionCapabilityWithDirection>
+GetDefaultHdrExtsWithDirection(
+    cricket::ChannelManager* manager,
+    void (cricket::ChannelManager::*get_extensions_fun)(
+        cricket::RtpHeaderExtensions*) const) {
+  std::vector<RtpHeaderExtensionCapabilityWithDirection> capabilities;
+  std::vector<RtpExtension> extensions;
+  (manager->*get_extensions_fun)(&extensions);
+  for (const auto& extension : extensions) {
+    capabilities.push_back(RtpHeaderExtensionCapabilityWithDirection(
+        extension.uri, extension.id, RtpTransceiverDirection::kSendRecv));
+  }
+  return capabilities;
+}
+
 RtpTransceiver::RtpTransceiver(cricket::MediaType media_type)
     : unified_plan_(false), media_type_(media_type) {
   RTC_DCHECK(media_type == cricket::MEDIA_TYPE_AUDIO ||
@@ -111,7 +127,13 @@ RtpTransceiver::RtpTransceiver(
     cricket::ChannelManager* channel_manager)
     : unified_plan_(true),
       media_type_(sender->media_type()),
-      channel_manager_(channel_manager) {
+      channel_manager_(channel_manager),
+      header_extensions_offered_(GetDefaultHdrExtsWithDirection(
+          channel_manager,
+          media_type_ == cricket::MEDIA_TYPE_AUDIO
+              ? &cricket::ChannelManager::GetSupportedAudioRtpHeaderExtensions
+              : &cricket::ChannelManager::
+                    GetSupportedVideoRtpHeaderExtensions)) {
   RTC_DCHECK(media_type_ == cricket::MEDIA_TYPE_AUDIO ||
              media_type_ == cricket::MEDIA_TYPE_VIDEO);
   RTC_DCHECK_EQ(sender->media_type(), receiver->media_type());
@@ -348,6 +370,36 @@ RTCError RtpTransceiver::SetCodecPreferences(
   }
 
   return result;
+}
+
+webrtc::RTCError RtpTransceiver::SetOfferedRtpHeaderExtensions(
+    rtc::ArrayView<RtpHeaderExtensionCapabilityWithOptionalDirection>
+        header_extensions_to_offer) {
+  for (const auto& entry : header_extensions_to_offer) {
+    auto it = std::find_if(
+        header_extensions_offered_.begin(), header_extensions_offered_.end(),
+        [&entry](const auto& offered) { return entry.uri == offered.uri; });
+    if (it == header_extensions_offered_.end()) {
+      return RTCError{RTCErrorType::INVALID_PARAMETER};
+    }
+    if (entry.direction) {
+      it->direction = *entry.direction;
+    } else {
+      header_extensions_offered_.erase(it);
+    }
+  }
+  return RTCError::OK();
+}
+
+std::vector<RtpHeaderExtensionCapabilityWithDirection>
+RtpTransceiver::header_extensions_accepted() const {
+  // ???
+  return {};
+}
+
+std::vector<RtpHeaderExtensionCapabilityWithDirection>
+RtpTransceiver::header_extensions_offered() const {
+  return header_extensions_offered_;
 }
 
 }  // namespace webrtc
