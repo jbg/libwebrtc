@@ -46,6 +46,30 @@
       "revId": "1d02a310a4623c5716adad41c4ff7688b3348824",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7214a371_962863ca",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-02-06T15:06:47Z",
+      "side": 1,
+      "message": "Resolved according to comment.",
+      "parentUuid": "d058f97e_9a3311df",
+      "range": {
+        "startLine": 665,
+        "startChar": 49,
+        "endLine": 665,
+        "endChar": 63
+      },
+      "revId": "1d02a310a4623c5716adad41c4ff7688b3348824",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
