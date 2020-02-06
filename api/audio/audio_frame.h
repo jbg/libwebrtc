@@ -72,7 +72,7 @@ class AudioFrame {
                    int sample_rate_hz,
                    SpeechType speech_type,
                    VADActivity vad_activity,
-                   size_t num_channels = 1);
+                   size_t num_channels);
 
   void CopyFrom(const AudioFrame& src);
 
@@ -103,6 +103,15 @@ class AudioFrame {
   size_t num_channels() const { return num_channels_; }
   ChannelLayout channel_layout() const { return channel_layout_; }
   int sample_rate_hz() const { return sample_rate_hz_; }
+
+  void set_absolute_capture_timestamp_ms(
+      absl::optional<int64_t> absolute_capture_time_stamp_ms) {
+    absolute_capture_timestamp_ms_ = absolute_capture_time_stamp_ms;
+  }
+
+  absl::optional<int64_t> absolute_capture_timestamp_ms() const {
+    return absolute_capture_timestamp_ms_;
+  }
 
   // RTP timestamp of the first sample in the AudioFrame.
   uint32_t timestamp_ = 0;
@@ -149,6 +158,12 @@ class AudioFrame {
 
   int16_t data_[kMaxDataSizeSamples];
   bool muted_ = true;
+
+  // Absolute capture timestamp when this audio frame was originally captured.
+  // This is only valid for audio frames captured on this machine. The absolute
+  // capture timestamp of a received frame is found in |packet_infos_|.
+  // This timestamp MUST be based on the same clock as rtc::TimeMillis().
+  absl::optional<int64_t> absolute_capture_timestamp_ms_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(AudioFrame);
 };
