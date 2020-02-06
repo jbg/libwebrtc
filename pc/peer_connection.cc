@@ -4884,6 +4884,8 @@ void PeerConnection::GetOptionsForOffer(
           RTC_FROM_HERE,
           rtc::Bind(&cricket::PortAllocator::GetPooledIceCredentials,
                     port_allocator_.get()));
+  // ??? Set this depending on if more than 14 extensions offered, or 2-byte
+  // extension present???
   session_options->offer_extmap_allow_mixed =
       configuration_.offer_extmap_allow_mixed;
 
@@ -5005,6 +5007,8 @@ GetMediaDescriptionOptionsForTransceiver(
       transceiver->stopped());
   media_description_options.codec_preferences =
       transceiver->codec_preferences();
+  media_description_options.header_extensions =
+      transceiver->header_extensions_offered();
   // This behavior is specified in JSEP. The gist is that:
   // 1. The MSID is included if the RtpTransceiver's direction is sendonly or
   //    sendrecv.
@@ -5050,6 +5054,8 @@ GetMediaDescriptionOptionsForTransceiver(
   // simulcast, or simulcast is acheived by munging the SDP.
   sender_options.num_sim_layers = has_rids ? 0 : 1;
   media_description_options.sender_options.push_back(sender_options);
+  media_description_options.header_extensions =
+      transceiver->header_extensions_offered();
 
   return media_description_options;
 }

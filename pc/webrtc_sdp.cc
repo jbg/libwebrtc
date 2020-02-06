@@ -1294,6 +1294,25 @@ bool ParseExtmap(const std::string& line,
   if (!GetValueFromString(line, sub_fields[0], &value, error)) {
     return false;
   }
+  bool send_enabled = true;
+  bool receive_enabled = true;
+  // RFC8285, chapter 5 "SDP Signaling Design"
+  if (sub_fields.size() >= 2) {
+    const std::string& direction = sub_fields[1];
+    if (direction == "sendonly") {
+      receive_enabled = false;
+    } else if (direction == "recvonly") {
+      send_enabled = false;
+    } else if (direction == "inactive") {
+      receive_enabled = false;
+      send_enabled = false;
+    } else if (direction != "sendrecv") {
+      return ParseFailed(line,
+                         "Specified extmap direction is not in [\"sendonly\", "
+                         "\"recvonly\", \"sendrecv\", \"inactive\"].",
+                         error);
+    }
+  }
 
   bool encrypted = false;
   if (uri == RtpExtension::kEncryptHeaderExtensionsUri) {
@@ -1314,6 +1333,8 @@ bool ParseExtmap(const std::string& line,
   }
 
   *extmap = RtpExtension(uri, value, encrypted);
+  extmap->send_enabled = send_enabled;
+  extmap->receive_enabled = receive_enabled;
   return true;
 }
 
