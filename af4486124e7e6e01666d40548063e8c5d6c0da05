@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d92842d4_ae65fb76",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-02-06T08:00:51Z",
+      "side": 1,
+      "message": "Suggestion:\nMake a static member function: PayoutDelay::NoopDelay() -\u003e PayoutDelay{-1, -1}\nand a member PayoutDelay::IsNoopDelay() (or implement \u003d\u003d for the struct)\n\nThat way we hide the magic -1s",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 1
+      },
+      "revId": "af4486124e7e6e01666d40548063e8c5d6c0da05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
