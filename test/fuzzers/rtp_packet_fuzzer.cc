@@ -100,7 +100,7 @@ void FuzzOneInput(const uint8_t* data, size_t size) {
         break;
       }
       case kRtpExtensionPlayoutDelay:
-        PlayoutDelay playout;
+        PlayoutDelay playout = PlayoutDelay::Noop();
         packet.GetExtension<PlayoutDelayLimits>(&playout);
         break;
       case kRtpExtensionVideoContentType:
