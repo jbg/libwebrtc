@@ -22,6 +22,30 @@
       "revId": "1d02a310a4623c5716adad41c4ff7688b3348824",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d058f97e_9a3311df",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-02-06T14:28:43Z",
+      "side": 1,
+      "message": "You mean if a key-frame and 0..1 delta frames are dropped, then followed by a new key-frame?\nIn that case, we will still populate that new keyframe with the current delay, see L531 above.\nThat case is the only reason we have a PlayoutDelat + boolean flag, rather than an optional\u003cPlayoutDelay\u003e\nAlso note that the previous (current) implementation would likely be broken in the above case.",
+      "parentUuid": "d8971836_82dc3d3a",
+      "range": {
+        "startLine": 665,
+        "startChar": 49,
+        "endLine": 665,
+        "endChar": 63
+      },
+      "revId": "1d02a310a4623c5716adad41c4ff7688b3348824",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
