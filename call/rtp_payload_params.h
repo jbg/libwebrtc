@@ -18,6 +18,7 @@
 #include "call/rtp_config.h"
 #include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor.h"
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
+#include "modules/video_coding/frame_dependencies_calculator.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 
 namespace webrtc {
@@ -43,6 +44,9 @@ class RtpPayloadParams final {
  private:
   void SetCodecSpecific(RTPVideoHeader* rtp_video_header,
                         bool first_frame_in_picture);
+  void SetGenericFromEncoderBuffers(const GenericFrameInfo& frame_info,
+                                    int64_t frame_id,
+                                    RTPVideoHeader* rtp_video_header);
   void SetGeneric(const CodecSpecificInfo* codec_specific_info,
                   int64_t frame_id,
                   bool is_keyframe,
@@ -98,6 +102,8 @@ class RtpPayloadParams final {
   // SetDependenciesVp8Deprecated(), or always use SetDependenciesVp8New().
   // TODO(bugs.webrtc.org/10242): Remove.
   absl::optional<bool> new_version_used_;
+
+  FrameDependenciesCalculator dependencies_calculator_;
 
   const uint32_t ssrc_;
   RtpPayloadState state_;
