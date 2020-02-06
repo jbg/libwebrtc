@@ -19,6 +19,13 @@ namespace webrtc {
 
 class DelayIncreaseDetectorInterface {
  public:
+  struct DebugState {
+    double accumulated_delay;
+    double slope;
+    double detection_signal;
+    double threshold;
+  };
+
   DelayIncreaseDetectorInterface() {}
   virtual ~DelayIncreaseDetectorInterface() {}
 
@@ -32,6 +39,10 @@ class DelayIncreaseDetectorInterface {
                       bool calculated_deltas) = 0;
 
   virtual BandwidthUsage State() const = 0;
+
+ private:
+  friend class GoogCcStatePrinter;
+  virtual DebugState debug_state() const = 0;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(DelayIncreaseDetectorInterface);
 };

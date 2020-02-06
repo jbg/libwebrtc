@@ -328,4 +328,10 @@ void TrendlineEstimator::UpdateThreshold(double modified_trend,
   last_update_ms_ = now_ms;
 }
 
+DelayIncreaseDetectorInterface::DebugState TrendlineEstimator::debug_state()
+    const {
+  return DelayIncreaseDetectorInterface::DebugState{
+      accumulated_delay_, prev_trend_, prev_modified_trend_, threshold_};
+}
+
 }  // namespace webrtc

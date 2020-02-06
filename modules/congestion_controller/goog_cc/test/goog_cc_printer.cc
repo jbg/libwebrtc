@@ -79,8 +79,7 @@ std::deque<FieldLogger*> GoogCcStatePrinter::CreateLoggers() {
         controller_->delay_based_bwe_->rate_control_.rate_control_state_);
   };
   auto trend = [this] {
-    return reinterpret_cast<TrendlineEstimator*>(
-        controller_->delay_based_bwe_->delay_detector_.get());
+    return controller_->delay_based_bwe_->delay_detector_->debug_state();
   };
   auto acknowledged_rate = [this] {
     return controller_->acknowledged_bitrate_estimator_->bitrate();
@@ -98,10 +97,11 @@ std::deque<FieldLogger*> GoogCcStatePrinter::CreateLoggers() {
       Log("window", [=] { return congestion_window_; }),
       Log("rate_control_state", [=] { return rate_control_state(); }),
       Log("stable_estimate", [=] { return stable_estimate(); }),
-      Log("trendline", [=] { return trend()->prev_trend_; }),
-      Log("trendline_modified_offset",
-          [=] { return trend()->prev_modified_trend_; }),
-      Log("trendline_offset_threshold", [=] { return trend()->threshold_; }),
+      Log("accumulated_delay", [=] { return trend().accumulated_delay; }),
+      Log("trendline", [=] { return trend().slope; }),
+      Log("trendline_detection_signal",
+          [=] { return trend().detection_signal; }),
+      Log("trendline_detection_threshold", [=] { return trend().threshold; }),
       Log("acknowledged_rate", [=] { return acknowledged_rate(); }),
       Log("est_capacity", [=] { return est_.link_capacity; }),
       Log("est_capacity_dev", [=] { return est_.link_capacity_std_dev; }),

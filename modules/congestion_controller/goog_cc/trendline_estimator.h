@@ -93,6 +93,8 @@ class TrendlineEstimator : public DelayIncreaseDetectorInterface {
 
   void UpdateThreshold(double modified_offset, int64_t now_ms);
 
+  DelayIncreaseDetectorInterface::DebugState debug_state() const override;
+
   // Parameters.
   TrendlineEstimatorSettings settings_;
   const double smoothing_coef_;
