@@ -430,7 +430,8 @@ class JsepTransportController : public sigslot::has_slots<> {
   // This keeps track of the mapping between media section
   // (BaseChannel/SctpTransport) and the JsepTransport underneath.
   std::map<std::string, cricket::JsepTransport*> mid_to_transport_;
-
+  // Keep track of created transports for rollback.
+  std::vector<std::string> pending_transports_by_name_;
   // Aggregate states for Transports.
   // standardized_ice_connection_state_ is intended to replace
   // ice_connection_state, see bugs.webrtc.org/9308

@@ -450,12 +450,15 @@ void JsepTransportController::RollbackTransportForMids(
                                   [=] { RollbackTransportForMids(mids); });
     return;
   }
-  for (auto&& mid : mids) {
+  pending_transports_by_name_.insert(pending_transports_by_name_.end(),
+                                     mids.begin(), mids.end());
+  for (auto&& mid : pending_transports_by_name_) {
     RemoveTransportForMid(mid);
   }
-  for (auto&& mid : mids) {
+  for (auto&& mid : pending_transports_by_name_) {
     MaybeDestroyJsepTransport(mid);
   }
+  pending_transports_by_name_.clear();
 }
 
 rtc::scoped_refptr<webrtc::IceTransportInterface>
@@ -717,6 +720,9 @@ RTCError JsepTransportController::ApplyDescription_n(
                            "Failed to apply the description for " +
                                content_info.name + ": " + error.message());
     }
+  }
+  if (type == SdpType::kAnswer) {
+    pending_transports_by_name_.clear();
   }
   return RTCError::OK();
 }
@@ -1250,6 +1256,7 @@ RTCError JsepTransportController::MaybeCreateJsepTransport(
   SetTransportForMid(content_info.name, jsep_transport.get());
 
   jsep_transports_by_name_[content_info.name] = std::move(jsep_transport);
+  pending_transports_by_name_.push_back(content_info.name);
   UpdateAggregateStates_n();
   return RTCError::OK();
 }
