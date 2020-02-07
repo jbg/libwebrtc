@@ -25,6 +25,7 @@
 
 @interface RTCPeerConnectionTest : NSObject
 - (void)testConfigurationGetter;
+- (void)testWithDependencies;
 @end
 
 @implementation RTCPeerConnectionTest
@@ -104,11 +105,40 @@
             newConfig.cryptoOptions.sframeRequireFrameEncryption);
 }
 
+- (void)testWithDependencies {
+  NSArray *urlStrings = @[ @"stun:stun1.example.net" ];
+  RTCIceServer *server = [[RTCIceServer alloc] initWithURLStrings:urlStrings];
+
+  RTCConfiguration *config = [[RTCConfiguration alloc] init];
+  config.iceServers = @[ server ];
+  RTCMediaConstraints *contraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{}
+                                                                          optionalConstraints:nil];
+  RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+
+  RTCConfiguration *newConfig;
+  webrtc::PeerConnectionDependencies pc_dependencies;
+  @autoreleasepool {
+    RTCPeerConnection *peerConnection =
+        [factory peerConnectionWithDependencies:config
+                                    constraints:contraints
+                                   dependencies:std::move(pc_dependencies)
+                                       delegate:nil];
+    newConfig = peerConnection.configuration;
+  }
+}
+
 @end
 
 TEST(RTCPeerConnectionTest, ConfigurationGetterTest) {
   @autoreleasepool {
     RTCPeerConnectionTest *test = [[RTCPeerConnectionTest alloc] init];
     [test testConfigurationGetter];
+  }
+}
+
+TEST(RTCPeerConnectionTest, TestWithDependencies) {
+  @autoreleasepool {
+    RTCPeerConnectionTest *test = [[RTCPeerConnectionTest alloc] init];
+    [test testWithDependencies];
   }
 }
