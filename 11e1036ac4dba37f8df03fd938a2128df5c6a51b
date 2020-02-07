@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2c79398_7b698764",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-07T12:02:36Z",
+      "side": 1,
+      "message": "If we keep track of pending transports in JsepTransportController now, doesn\u0027t that make the |mids| superflous? I.e. if JsepTransportController knows which transports should be rolled back, why would you need to tell it about which mids are being rolled back?\n\nCan we make this simply JsepTransportController::RollbackTransports() ?\n\nAlternatively, if PeerConnection needs to tell the controller what is being rolled back, why isn\u0027t PeerConnection telling it about which data channel transports are being rolled back?",
+      "revId": "11e1036ac4dba37f8df03fd938a2128df5c6a51b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06f18afd_cd598155",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2155,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-07T12:02:36Z",
+      "side": 1,
+      "message": "Can we add the following tests?\n\n1\nRemote offer with data channel\nRollback\nLocal offer with transceiver\n\n2\nRemote offer with data channel\nRollback\nLocal offer with transceiver and data channel\n\n3\nRemote offer with data channel\nRollback\nLocal offer with data channel\n\n4\nRemote offer with transceiver\nRollback\nLocal offer with data channel\n\n5\nRemote offer with transceiver\nRollback\nLocal offer with transceiver and data channel\n\nI want to make sure we can still mix media and data after rollback, test coverage in case transports are handled differently for transceivers and data channels",
+      "revId": "11e1036ac4dba37f8df03fd938a2128df5c6a51b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
