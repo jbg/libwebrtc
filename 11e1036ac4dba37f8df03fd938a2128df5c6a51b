@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "67a5d5a2_ff8e543d",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-07T13:35:12Z",
+      "side": 1,
+      "message": "\u003eRollbackTransports() ?\nThat was my first thought too, but it didn\u0027t work and some of the rollback tests started to fail. I will have a deeper look then.\n\n\u003ewhy isn\u0027t PeerConnection telling it\nIt looked like in PeerConnection there is no info about created transports. Transports are created in PeerConnection::PushdownTransportDescription, which already jumps into transport controller.",
+      "parentUuid": "a2c79398_7b698764",
+      "revId": "11e1036ac4dba37f8df03fd938a2128df5c6a51b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06f18afd_cd598155",
         "filename": "pc/peer_connection_jsep_unittest.cc",
         "patchSetId": 1
