@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c826073_2e8eb0e1",
+        "filename": "call/video_send_stream.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-07T16:06:27Z",
+      "side": 1,
+      "message": "There are lots of counters here that I don\u0027t know what they are when simulcast is used... ideally all of these would be available on a per-substream basis.",
+      "revId": "1e4e06a1a3e226a2e1ec31a6a7e4763282df83b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "137204d9_ee155c50",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2306,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-07T16:06:27Z",
+      "side": 1,
+      "message": "VideoSenderInfo is basically the stats for on RTP stream, so instead of aggregating them into a single VideoSenderInfo we create multiple ones, one for each RTCOutboundRtpStreamStats.\n\nI think you are on the right track here, but we need to take a closer look at all the metrics that are not available on a per-substream basis before we sign this off. I won\u0027t have time today to look at them but we should go through each one. We need to look at them and see if they make sense for all substreams or if some of them have already been aggregated and are broken...\n\nIn terms of direction: I think we should create multiple VideoSendStreams in the modern getStats() (rtc_stats_collector.cc). However for legacy getStats() (stats_collector.cc) I would like a method for obtaining the stats as they were prior to this CL (a single VideoSendStream). This is primarily to avoid breakages for applications relying on legacy stats, it\u0027s meant to be on \"feature freeze\". This also incentivizes developers to switch to the modern getStats.\n\nWhile iterating on this CL though I think we can look only at the modern getStats() case for now.",
+      "revId": "1e4e06a1a3e226a2e1ec31a6a7e4763282df83b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
