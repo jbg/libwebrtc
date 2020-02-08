@@ -443,19 +443,19 @@ void JsepTransportController::SetMediaTransportSettings(
       use_datagram_transport_for_data_channels_receive_only;
 }
 
-void JsepTransportController::RollbackTransportForMids(
-    const std::vector<std::string>& mids) {
+void JsepTransportController::RollbackTransportForMids() {
   if (!network_thread_->IsCurrent()) {
     network_thread_->Invoke<void>(RTC_FROM_HERE,
-                                  [=] { RollbackTransportForMids(mids); });
+                                  [=] { RollbackTransportForMids(); });
     return;
   }
-  for (auto&& mid : mids) {
+  for (auto&& mid : pending_mids_) {
     RemoveTransportForMid(mid);
   }
-  for (auto&& mid : mids) {
+  for (auto&& mid : pending_mids_) {
     MaybeDestroyJsepTransport(mid);
   }
+  pending_mids_.clear();
 }
 
 rtc::scoped_refptr<webrtc::IceTransportInterface>
@@ -718,6 +718,9 @@ RTCError JsepTransportController::ApplyDescription_n(
                                content_info.name + ": " + error.message());
     }
   }
+  if (type == SdpType::kAnswer) {
+    pending_mids_.clear();
+  }
   return RTCError::OK();
 }
 
@@ -874,7 +877,7 @@ bool JsepTransportController::SetTransportForMid(
   if (mid_to_transport_[mid] == jsep_transport) {
     return true;
   }
-
+  pending_mids_.push_back(mid);
   mid_to_transport_[mid] = jsep_transport;
   return config_.transport_observer->OnTransportChanged(
       mid, jsep_transport->rtp_transport(), jsep_transport->RtpDtlsTransport(),
