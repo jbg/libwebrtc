@@ -8,13 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_H_
-#define MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_H_
+#ifndef TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_H_
+#define TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_H_
 
 #include "api/video/video_rotation.h"
 #include "api/video/video_sink_interface.h"
 #include "modules/include/module.h"
-#include "modules/video_capture/video_capture_defines.h"
+#include "test/video_capture/video_capture_defines.h"
 
 namespace webrtc {
 
@@ -113,4 +113,4 @@ class VideoCaptureModule : public rtc::RefCountInterface {
 };
 
 }  // namespace webrtc
-#endif  // MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_H_
+#endif  // TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_H_

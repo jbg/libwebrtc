@@ -8,13 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "modules/video_capture/windows/video_capture_ds.h"
+#include "test/video_capture/windows/video_capture_ds.h"
 
 #include <dvdmedia.h>  // VIDEOINFOHEADER2
 
-#include "modules/video_capture/video_capture_config.h"
-#include "modules/video_capture/windows/help_functions_ds.h"
-#include "modules/video_capture/windows/sink_filter_ds.h"
+#include "test/video_capture/video_capture_config.h"
+#include "test/video_capture/windows/help_functions_ds.h"
+#include "test/video_capture/windows/sink_filter_ds.h"
 #include "rtc_base/logging.h"
 
 namespace webrtc {

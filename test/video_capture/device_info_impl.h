@@ -8,16 +8,16 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CAPTURE_MAIN_SOURCE_DEVICE_INFO_IMPL_H_
-#define MODULES_VIDEO_CAPTURE_MAIN_SOURCE_DEVICE_INFO_IMPL_H_
+#ifndef TEST_VIDEO_CAPTURE_MAIN_SOURCE_DEVICE_INFO_IMPL_H_
+#define TEST_VIDEO_CAPTURE_MAIN_SOURCE_DEVICE_INFO_IMPL_H_
 
 #include <stdint.h>
 
 #include <vector>
 
 #include "api/video/video_rotation.h"
-#include "modules/video_capture/video_capture.h"
-#include "modules/video_capture/video_capture_defines.h"
+#include "test/video_capture/video_capture.h"
+#include "test/video_capture/video_capture_defines.h"
 #include "rtc_base/synchronization/rw_lock_wrapper.h"
 
 namespace webrtc {
@@ -57,4 +57,4 @@ class DeviceInfoImpl : public VideoCaptureModule::DeviceInfo {
 };
 }  // namespace videocapturemodule
 }  // namespace webrtc
-#endif  // MODULES_VIDEO_CAPTURE_MAIN_SOURCE_DEVICE_INFO_IMPL_H_
+#endif  // TEST_VIDEO_CAPTURE_MAIN_SOURCE_DEVICE_INFO_IMPL_H_

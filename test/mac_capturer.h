@@ -15,7 +15,7 @@
 
 #include "api/media_stream_interface.h"
 #include "api/scoped_refptr.h"
-#include "modules/video_capture/video_capture.h"
+#include "test/video_capture/video_capture.h"
 #include "rtc_base/thread.h"
 #include "test/test_video_capturer.h"
 

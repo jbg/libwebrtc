@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_DEFINES_H_
-#define MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_DEFINES_H_
+#ifndef TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_DEFINES_H_
+#define TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_DEFINES_H_
 
 #include "api/video/video_frame.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
@@ -56,4 +56,4 @@ struct VideoCaptureCapability {
 
 }  // namespace webrtc
 
-#endif  // MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_DEFINES_H_
+#endif  // TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_DEFINES_H_

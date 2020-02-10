@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CAPTURE_MAIN_SOURCE_WINDOWS_HELP_FUNCTIONS_DS_H_
-#define MODULES_VIDEO_CAPTURE_MAIN_SOURCE_WINDOWS_HELP_FUNCTIONS_DS_H_
+#ifndef TEST_VIDEO_CAPTURE_WINDOWS_HELP_FUNCTIONS_DS_H_
+#define TEST_VIDEO_CAPTURE_WINDOWS_HELP_FUNCTIONS_DS_H_
 
 #include <dshow.h>
 
@@ -115,4 +115,4 @@ class ComRefCount : public T {
 
 }  // namespace videocapturemodule
 }  // namespace webrtc
-#endif  // MODULES_VIDEO_CAPTURE_MAIN_SOURCE_WINDOWS_HELP_FUNCTIONS_DS_H_
+#endif  // TEST_VIDEO_CAPTURE_WINDOWS_HELP_FUNCTIONS_DS_H_
