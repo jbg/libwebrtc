@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bb49e252_254c545b",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-10T15:04:42Z",
+      "side": 1,
+      "message": "removed output parameter. (and renamed, because function doesn\u0027t really \u0027Set\u0027 anything now)\n\nIt does need access to the member dependencies_calculator_\nmoreover, it is a non-const access (in particular it stores current frame_id in some of the buffers for future frames to reference)",
+      "parentUuid": "2254bd2c_ebf4971d",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 0
+      },
+      "revId": "fda78cd886c755975f10f6f3387bb9dd37b8d260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b5c679c_3df0cd1c",
         "filename": "call/rtp_payload_params.cc",
         "patchSetId": 10
@@ -130,6 +154,30 @@
       "writtenOn": "2020-02-10T13:44:18Z",
       "side": 1,
       "message": "If we go for some minor cleanup of this class in this CL we could remove the frame_type argument and skip this check. Or maybe in some other CL...",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 55
+      },
+      "revId": "fda78cd886c755975f10f6f3387bb9dd37b8d260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9da6f3d2_41fa542f",
+        "filename": "modules/video_coding/frame_dependencies_calculator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-10T15:04:42Z",
+      "side": 1,
+      "message": "I failed to guess your idea: I do not see how to avoid frame_type (without requiring caller to generate a dedicated buffers_usage array for key frames)\ncan you elaborate? (or we can leave it for some other CL)",
+      "parentUuid": "6f122909_c51da6f8",
       "range": {
         "startLine": 40,
         "startChar": 2,
