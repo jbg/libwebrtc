@@ -16,6 +16,24 @@
       "revId": "ad9c0b260e97d1f1fa6fb1b4dd8fd267bb5c160c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6154784e_bf727826",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-10T10:00:18Z",
+      "side": 1,
+      "message": "There are chances that something will pop up like it was with the data channel, but I agree that the todo comment makes more sense when more specific action item has been already identified. For now I guess the todo means purely investigation work to find out what else the method is supposed to do.\nHow about removing todo part and keep rest of the comment?",
+      "parentUuid": "54ad86a4_4f5b9f8f",
+      "revId": "ad9c0b260e97d1f1fa6fb1b4dd8fd267bb5c160c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
