@@ -52,7 +52,6 @@ if (!build_with_chromium) {
         "modules/audio_processing:audio_processing_tests",
         "modules/remote_bitrate_estimator:rtp_to_text",
         "modules/rtp_rtcp:test_packet_masks_metrics",
-        "modules/video_capture:video_capture_internal_impl",
         "pc:peerconnection_unittests",
         "pc:rtc_pc_unittests",
         "rtc_tools:rtp_generator",
@@ -60,6 +59,7 @@ if (!build_with_chromium) {
         "stats:rtc_stats_unittests",
         "system_wrappers:system_wrappers_unittests",
         "test",
+        "test/video_capture:video_capture_internal_impl",
         "video:screenshare_loopback",
         "video:sv_loopback",
         "video:video_loopback",
@@ -77,7 +77,7 @@ if (!build_with_chromium) {
           "sdk/android:android_sdk_junit_tests",
         ]
       } else {
-        deps += [ "modules/video_capture:video_capture_tests" ]
+        deps += [ "test/video_capture:video_capture_tests" ]
       }
       if (rtc_enable_protobuf) {
         deps += [
@@ -439,7 +439,6 @@ if (!build_with_chromium) {
       "logging:rtc_event_log_api",
       "media",
       "modules",
-      "modules/video_capture:video_capture_internal_impl",
       "p2p:rtc_p2p",
       "pc:libjingle_peerconnection",
       "pc:peerconnection",

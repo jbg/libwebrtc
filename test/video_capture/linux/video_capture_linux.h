@@ -8,16 +8,16 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CAPTURE_MAIN_SOURCE_LINUX_VIDEO_CAPTURE_LINUX_H_
-#define MODULES_VIDEO_CAPTURE_MAIN_SOURCE_LINUX_VIDEO_CAPTURE_LINUX_H_
+#ifndef TEST_VIDEO_CAPTURE_LINUX_VIDEO_CAPTURE_LINUX_H_
+#define TEST_VIDEO_CAPTURE_LINUX_VIDEO_CAPTURE_LINUX_H_
 
 #include <stddef.h>
 #include <stdint.h>
 
 #include <memory>
 
-#include "modules/video_capture/video_capture_defines.h"
-#include "modules/video_capture/video_capture_impl.h"
+#include "test/video_capture/video_capture_defines.h"
+#include "test/video_capture/video_capture_impl.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/platform_thread.h"
 
@@ -63,4 +63,4 @@ class VideoCaptureModuleV4L2 : public VideoCaptureImpl {
 }  // namespace videocapturemodule
 }  // namespace webrtc
 
-#endif  // MODULES_VIDEO_CAPTURE_MAIN_SOURCE_LINUX_VIDEO_CAPTURE_LINUX_H_
+#endif  // TEST_VIDEO_CAPTURE_LINUX_VIDEO_CAPTURE_LINUX_H_

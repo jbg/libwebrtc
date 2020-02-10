@@ -144,12 +144,12 @@ if (!build_with_chromium) {
         "../api:libjingle_peerconnection_api",
         "../api:media_stream_interface",
         "../api:scoped_refptr",
-        "../modules/video_capture:video_capture_module",
         "../rtc_base",
         "../sdk:base_objc",
         "../sdk:native_api",
         "../sdk:native_video",
         "../sdk:videocapture_objc",
+        "../test/video_capture:video_capture_module",
       ]
     }
   }
@@ -173,9 +173,9 @@ if (!build_with_chromium) {
       ]
       deps += [
         "../api:scoped_refptr",
-        "../modules/video_capture:video_capture_module",
         "../rtc_base:checks",
         "../rtc_base:logging",
+        "../test/video_capture:video_capture_module",
       ]
     }
   }
@@ -529,7 +529,7 @@ if (rtc_include_tests) {
     if (!is_android && !build_with_chromium) {
       # This is needed in order to avoid:
       # undefined symbol: webrtc::videocapturemodule::VideoCaptureImpl::Create
-      deps += [ "../modules/video_capture:video_capture_internal_impl" ]
+      deps += [ "./video_capture:video_capture_internal_impl" ]
     }
   }
 }
@@ -844,7 +844,7 @@ rtc_library("test_common") {
     "//third_party/abseil-cpp/absl/types:optional",
   ]
   if (!is_android && !build_with_chromium) {
-    deps += [ "../modules/video_capture:video_capture_internal_impl" ]
+    deps += [ "./video_capture:video_capture_internal_impl" ]
   }
 }
 

@@ -11,12 +11,12 @@
 // This file contains interfaces used for creating the VideoCaptureModule
 // and DeviceInfo.
 
-#ifndef MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_FACTORY_H_
-#define MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_FACTORY_H_
+#ifndef TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_FACTORY_H_
+#define TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_FACTORY_H_
 
 #include "api/scoped_refptr.h"
-#include "modules/video_capture/video_capture.h"
-#include "modules/video_capture/video_capture_defines.h"
+#include "test/video_capture/video_capture.h"
+#include "test/video_capture/video_capture_defines.h"
 
 namespace webrtc {
 
@@ -37,4 +37,4 @@ class VideoCaptureFactory {
 
 }  // namespace webrtc
 
-#endif  // MODULES_VIDEO_CAPTURE_VIDEO_CAPTURE_FACTORY_H_
+#endif  // TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_FACTORY_H_

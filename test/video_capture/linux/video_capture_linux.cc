@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "modules/video_capture/linux/video_capture_linux.h"
+#include "test/video_capture/linux/video_capture_linux.h"
 
 #include <errno.h>
 #include <fcntl.h>

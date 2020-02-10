@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_VIDEO_CAPTURE_MAIN_SOURCE_VIDEO_CAPTURE_IMPL_H_
-#define MODULES_VIDEO_CAPTURE_MAIN_SOURCE_VIDEO_CAPTURE_IMPL_H_
+#ifndef TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_IMPL_H_
+#define TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_IMPL_H_
 
 /*
  * video_capture_impl.h
@@ -22,9 +22,9 @@
 #include "api/video/video_frame.h"
 #include "api/video/video_rotation.h"
 #include "api/video/video_sink_interface.h"
-#include "modules/video_capture/video_capture.h"
-#include "modules/video_capture/video_capture_config.h"
-#include "modules/video_capture/video_capture_defines.h"
+#include "test/video_capture/video_capture.h"
+#include "test/video_capture/video_capture_config.h"
+#include "test/video_capture/video_capture_defines.h"
 #include "rtc_base/critical_section.h"
 
 namespace webrtc {
@@ -105,4 +105,4 @@ class VideoCaptureImpl : public VideoCaptureModule {
 };
 }  // namespace videocapturemodule
 }  // namespace webrtc
-#endif  // MODULES_VIDEO_CAPTURE_MAIN_SOURCE_VIDEO_CAPTURE_IMPL_H_
+#endif  // TEST_VIDEO_CAPTURE_VIDEO_CAPTURE_IMPL_H_
