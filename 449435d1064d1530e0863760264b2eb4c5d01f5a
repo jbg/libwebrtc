@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "632e7374_1690616f",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-02-10T09:39:08Z",
+      "side": 1,
+      "message": "Why not a double?",
+      "range": {
+        "startLine": 648,
+        "startChar": 2,
+        "endLine": 648,
+        "endChar": 33
+      },
+      "revId": "449435d1064d1530e0863760264b2eb4c5d01f5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb4d1439_1e190b0b",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-02-10T09:39:08Z",
+      "side": 1,
+      "message": ".sec(), then no need to scale denom by 1000.",
+      "range": {
+        "startLine": 652,
+        "startChar": 8,
+        "endLine": 652,
+        "endChar": 28
+      },
+      "revId": "449435d1064d1530e0863760264b2eb4c5d01f5a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
