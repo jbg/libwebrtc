@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "8e91ee62_c73b645e",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-10T14:42:40Z",
+      "side": 1,
+      "message": "Hi Per, absolute_capture_timestamp_ms is supposed to always receive a value only on this call. \n\nIt won\u0027t have any value during, e.g. mixing, see https://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_mixer/frame_combiner.cc?type\u003dcs\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d42\n\nAnd that is the reason why the member variable is made an optional",
+      "parentUuid": "58be9b7d_49bdb07a",
+      "range": {
+        "startLine": 885,
+        "startChar": 4,
+        "endLine": 886,
+        "endChar": 39
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2cfa5e89_cbb46b49",
         "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
         "patchSetId": 10
