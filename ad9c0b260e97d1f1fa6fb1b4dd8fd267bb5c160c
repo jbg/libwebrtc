@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54ad86a4_4f5b9f8f",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-10T09:29:11Z",
+      "side": 1,
+      "message": "Is there anything more that RollbackTransports() needs should support now or are we good? I.e. does this TODO comment still make sense or should it be removed or modified?",
+      "revId": "ad9c0b260e97d1f1fa6fb1b4dd8fd267bb5c160c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
