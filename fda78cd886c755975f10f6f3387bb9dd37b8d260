@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b5c679c_3df0cd1c",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-02-10T12:31:15Z",
+      "side": 1,
+      "message": "Maybe not for this CL, but maybe we could remove GenericDescriptorInfo::discardable and just move this logic to AddRtpHeaderExtensions in rtp_sender_video.cc?",
+      "range": {
+        "startLine": 266,
+        "startChar": 2,
+        "endLine": 266,
+        "endChar": 21
+      },
+      "revId": "fda78cd886c755975f10f6f3387bb9dd37b8d260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
