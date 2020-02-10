@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2254bd2c_ebf4971d",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-02-10T13:31:05Z",
+      "side": 1,
+      "message": "This is (almost, there\u0027s also a -\u003eframe_type reference below) the only use of rtp_video_header in this function. I think it would be nicer to have it create and return a GenericDescriptorInfo, or if it really needs an output parameter for efficiency, pass a GenericDescriptorInfo*.\n\nAnd in either case, leave to the caller to put it into the right place in the RTPVideoHeader. \n\nAlso, if it doesn\u0027t need to access any member variables, can you move it to the anonymous namespace as a utility function?",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 0
+      },
+      "revId": "fda78cd886c755975f10f6f3387bb9dd37b8d260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8b5c679c_3df0cd1c",
         "filename": "call/rtp_payload_params.cc",
         "patchSetId": 10
@@ -46,6 +69,29 @@
       "revId": "fda78cd886c755975f10f6f3387bb9dd37b8d260",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2faaf07f_2776485a",
+        "filename": "call/rtp_payload_params.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-02-10T13:31:05Z",
+      "side": 1,
+      "message": "This one also looks more like a utility function than a method, but no need to change in this cl.",
+      "range": {
+        "startLine": 271,
+        "startChar": 5,
+        "endLine": 271,
+        "endChar": 34
+      },
+      "revId": "fda78cd886c755975f10f6f3387bb9dd37b8d260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
