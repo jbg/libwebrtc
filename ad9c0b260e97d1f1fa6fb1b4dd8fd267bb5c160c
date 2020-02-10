@@ -34,6 +34,24 @@
       "revId": "ad9c0b260e97d1f1fa6fb1b4dd8fd267bb5c160c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66b75246_992e4b3a",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-10T10:26:53Z",
+      "side": 1,
+      "message": "If we don\u0027t know of any action items, remove the TODO.",
+      "parentUuid": "6154784e_bf727826",
+      "revId": "ad9c0b260e97d1f1fa6fb1b4dd8fd267bb5c160c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
