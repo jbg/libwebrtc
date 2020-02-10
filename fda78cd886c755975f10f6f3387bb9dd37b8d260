@@ -187,6 +187,30 @@
       "revId": "fda78cd886c755975f10f6f3387bb9dd37b8d260",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f96421a5_adddb94d",
+        "filename": "modules/video_coding/frame_dependencies_calculator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-02-10T16:48:08Z",
+      "side": 1,
+      "message": "AFAICT if you remove this check everything will still work correctly, not important for this CL though.",
+      "parentUuid": "9da6f3d2_41fa542f",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 55
+      },
+      "revId": "fda78cd886c755975f10f6f3387bb9dd37b8d260",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
