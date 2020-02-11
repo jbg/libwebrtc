@@ -115,6 +115,30 @@
       "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d9a24af_c9728ac8",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2020-02-11T10:05:38Z",
+      "side": 1,
+      "message": "I agree with Per on that using -1 (or any other sentinel value) is quite iffy. The value will end up being transformed to gibberish before being sent over the wire:\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender_audio.cc?l\u003d282\u0026rcl\u003dd4c3c3a454215b21f02d2a772a729b4c87d6b33e\n\nI think it\u0027s better to either:\n\n1) Replace all `absl::optional\u003cint64_t\u003e` with `int64_t` and then explicitly add the hack to set it to 0 at the origins that truly cannot provide a proper value for it.\n\n2) Plumb `absl::optional\u003cint64_t\u003e` all the way down. `AbsoluteCaptureTimeSender` and `AbsoluteCaptureTimeReceiver` are unfortunately not designed to properly handle the transition from \"absolute_capture_timestamp_ms is provided\" to \"absolute_capture_timestamp_ms is no longer provided\".",
+      "parentUuid": "2cfa5e89_cbb46b49",
+      "range": {
+        "startLine": 234,
+        "startChar": 46,
+        "endLine": 234,
+        "endChar": 75
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
