@@ -46,6 +46,30 @@
       "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a8c7357_8aaadd88",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-11T12:04:33Z",
+      "side": 1,
+      "message": "The absolute_capture_time_receiver_ should not rely on the decoded sample rate. It should only depend on rtp_frequency. Basically, rtp_timestamp_diff / rtp_frequency should tell time diff.\n\nI think replacing it-\u003esecond (I will use packet_copy.payload_type_frequency() for better readibility) is right, and comment should not be relevant anymore.",
+      "parentUuid": "4c45f685_3b5a115e",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 556,
+        "endChar": 78
+      },
+      "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
