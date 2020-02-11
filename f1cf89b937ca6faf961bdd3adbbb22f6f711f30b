@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94e4a46c_87aba012",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-02-11T08:04:54Z",
+      "side": 1,
+      "message": "Can likely be deleted.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 23
+      },
+      "revId": "f1cf89b937ca6faf961bdd3adbbb22f6f711f30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9ac732a_f6627541",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-02-11T08:04:54Z",
+      "side": 1,
+      "message": "Can maybe be deleted.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 18
+      },
+      "revId": "f1cf89b937ca6faf961bdd3adbbb22f6f711f30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30f9f0c5_7ff138e7",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-02-11T08:04:54Z",
+      "side": 1,
+      "message": "Delete.",
+      "range": {
+        "startLine": 767,
+        "startChar": 0,
+        "endLine": 792,
+        "endChar": 6
+      },
+      "revId": "f1cf89b937ca6faf961bdd3adbbb22f6f711f30b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
