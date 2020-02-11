@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff656b5a_fbe59ef0",
+        "filename": "modules/audio_processing/agc/agc_manager_direct.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-11T14:50:24Z",
+      "side": 1,
+      "message": "are we leaving ch\u003d\u003d0 out of the decision?",
+      "range": {
+        "startLine": 590,
+        "startChar": 21,
+        "endLine": 590,
+        "endChar": 22
+      },
+      "revId": "26cc5e650f15071ca200525e7a91285c48f81163",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
