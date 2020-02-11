@@ -139,6 +139,30 @@
       "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0369f0c7_edf11be7",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-11T10:30:38Z",
+      "side": 1,
+      "message": "I don\u0027t think plumbing absl::optional\u003cint64_t\u003e all the way is needed.\n\nWhen the whole chain is finished (in blink etc.) the absolute capture time should always contain a valid value.\n\nThe reason that optional\u003c\u003e is need only because some struct and APIs are designed for both capture and render, then we have to allow it nullopt if the struct or API is used for rendering.\n\nThe value_or(-1) on line 347 is only to handle the transition period, before the whole chain gets finished.",
+      "parentUuid": "4d9a24af_c9728ac8",
+      "range": {
+        "startLine": 234,
+        "startChar": 46,
+        "endLine": 234,
+        "endChar": 75
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
