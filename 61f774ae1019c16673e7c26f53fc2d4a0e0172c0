@@ -94,6 +94,30 @@
       "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20805e43_8e2f1017",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5399
+      },
+      "writtenOn": "2020-02-11T12:46:49Z",
+      "side": 1,
+      "message": "Great! Makes sense that the signalling rate is the one to track, not the actual audio samplerate.",
+      "parentUuid": "5f4c836e_a6297d87",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 556,
+        "endChar": 78
+      },
+      "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
