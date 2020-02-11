@@ -19,6 +19,7 @@
 #include <string>
 #include <type_traits>
 
+#include "rtc_base/deprecation.h"
 #include "rtc_base/units/unit_base.h"
 
 namespace webrtc {
@@ -50,32 +51,31 @@ class TimeDelta final : public rtc_units_impl::RelativeUnit<TimeDelta> {
 
   TimeDelta() = delete;
 
-  // TODO(danilchap): Migrate all code to the 3 factories above and delete the
-  // 6 factories below.
+  // TODO(danilchap): Delete the 6 factories below by end of Februrary 2020.
   template <int64_t seconds>
-  static constexpr TimeDelta Seconds() {
+  static RTC_DEPRECATED constexpr TimeDelta Seconds() {
     return FromFraction(1'000'000, seconds);
   }
   template <int64_t ms>
-  static constexpr TimeDelta Millis() {
+  static RTC_DEPRECATED constexpr TimeDelta Millis() {
     return FromFraction(1000, ms);
   }
   template <int64_t us>
-  static constexpr TimeDelta Micros() {
+  static RTC_DEPRECATED constexpr TimeDelta Micros() {
     return FromValue(us);
   }
   template <typename T>
-  static constexpr TimeDelta seconds(T seconds) {
+  static RTC_DEPRECATED constexpr TimeDelta seconds(T seconds) {
     static_assert(std::is_arithmetic<T>::value, "");
     return FromFraction(1'000'000, seconds);
   }
   template <typename T>
-  static constexpr TimeDelta ms(T milliseconds) {
+  static RTC_DEPRECATED constexpr TimeDelta ms(T milliseconds) {
     static_assert(std::is_arithmetic<T>::value, "");
     return FromFraction(1000, milliseconds);
   }
   template <typename T>
-  static constexpr TimeDelta us(T microseconds) {
+  static RTC_DEPRECATED constexpr TimeDelta us(T microseconds) {
     static_assert(std::is_arithmetic<T>::value, "");
     return FromValue(microseconds);
   }
