@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d0068fa_65d0eef7",
+        "filename": "modules/congestion_controller/goog_cc/delay_increase_detector_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-02-11T16:01:58Z",
+      "side": 1,
+      "message": "Nit: This should be protected.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "49508143093e65693748fec6cc667ca5acdae5ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53969534_6f5e258e",
+        "filename": "modules/congestion_controller/goog_cc/delay_increase_detector_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-02-11T16:01:58Z",
+      "side": 1,
+      "message": "Maybe this should be protected? Seems fine for the child class to call it, even though it doesn\u0027t have to...",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "49508143093e65693748fec6cc667ca5acdae5ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c12c22ce_30761dc1",
+        "filename": "modules/congestion_controller/goog_cc/trendline_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-02-11T16:01:58Z",
+      "side": 1,
+      "message": "nit: I\u0027d skip this part, the function is short enough that the signature is pretty obvious.",
+      "range": {
+        "startLine": 333,
+        "startChar": 9,
+        "endLine": 333,
+        "endChar": 51
+      },
+      "revId": "49508143093e65693748fec6cc667ca5acdae5ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
