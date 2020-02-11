@@ -70,6 +70,30 @@
       "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f4c836e_a6297d87",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 8392
+      },
+      "writtenOn": "2020-02-11T12:43:36Z",
+      "side": 1,
+      "message": "Aha! Thanks for the clarification on that difference. The most important thing is that both the sender and receiver sides agree with each other. The sender side can be traced to:\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_coding/acm2/audio_coding_module.cc?l\u003d254\u0026rcl\u003dd4c3c3a454215b21f02d2a772a729b4c87d6b33e\n\nSo you are right that `GetRtpTimestampRateHz()` is more appropiate.",
+      "parentUuid": "9a8c7357_8aaadd88",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 556,
+        "endChar": 78
+      },
+      "revId": "61f774ae1019c16673e7c26f53fc2d4a0e0172c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
