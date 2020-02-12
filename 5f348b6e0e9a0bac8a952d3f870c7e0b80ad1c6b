@@ -211,6 +211,30 @@
       "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f63ae805_46f4a508",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-12T13:45:51Z",
+      "side": 1,
+      "message": "We do not use -1 to signal that a value is not set, it will be treated as any other valid value. And -1 does no harm. As line 342 suggests, eventually, the optional\u003c\u003e should always contain a value when it reaches there.",
+      "parentUuid": "6377569b_e4820074",
+      "range": {
+        "startLine": 234,
+        "startChar": 46,
+        "endLine": 234,
+        "endChar": 75
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
