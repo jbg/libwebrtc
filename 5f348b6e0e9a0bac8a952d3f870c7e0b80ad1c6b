@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "052c9a27_99339cee",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-02-12T11:33:09Z",
+      "side": 1,
+      "message": "Thanks! I see.\nHowever, in that case the comment on the line 879 should be changed since it is misleading.",
+      "parentUuid": "8e91ee62_c73b645e",
+      "range": {
+        "startLine": 885,
+        "startChar": 4,
+        "endLine": 886,
+        "endChar": 39
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2cfa5e89_cbb46b49",
         "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
         "patchSetId": 10
@@ -154,6 +178,30 @@
       "side": 1,
       "message": "I don\u0027t think plumbing absl::optional\u003cint64_t\u003e all the way is needed.\n\nWhen the whole chain is finished (in blink etc.) the absolute capture time should always contain a valid value.\n\nThe reason that optional\u003c\u003e is need only because some struct and APIs are designed for both capture and render, then we have to allow it nullopt if the struct or API is used for rendering.\n\nThe value_or(-1) on line 347 is only to handle the transition period, before the whole chain gets finished.",
       "parentUuid": "4d9a24af_c9728ac8",
+      "range": {
+        "startLine": 234,
+        "startChar": 46,
+        "endLine": 234,
+        "endChar": 75
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6377569b_e4820074",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-02-12T11:33:09Z",
+      "side": 1,
+      "message": "I don\u0027t really understand that argument.\nUsing -1 during the transition period is basically acting as a replacement for an optional.\n\nThere are some good arguments for not using magic values (-1) to signal that a value is not set, but I definitely agree that all such cases can be discussed.\n\nHowever, I don\u0027t see any reason for in one place using an optional, and then converting it to using a magic value instead. I think that is misleading affects the readability.\n\nWhat is the reason for not using an optional here as well?",
+      "parentUuid": "0369f0c7_edf11be7",
       "range": {
         "startLine": 234,
         "startChar": 46,
