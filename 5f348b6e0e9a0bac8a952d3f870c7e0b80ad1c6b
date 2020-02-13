@@ -235,6 +235,30 @@
       "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79b375c9_734960f9",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-02-13T12:30:48Z",
+      "side": 1,
+      "message": "I don\u0027t really see the reason for not using an optional one step further, and use the construct  absolute_capture_timestamp_ms.value_or(-1) on line 307. \n\nAre there any drawbacks with that?\n\nRegarding -1 not doing any harm, I think it adds confusion and makes the code harder to read as it makes the code inconsistent. \n\n\nFurthermore, the same arguments for in the first place using an optional as return value for absolute_capture_timestamp_ms() (instead of using a -1) hold for this code as well.",
+      "parentUuid": "f63ae805_46f4a508",
+      "range": {
+        "startLine": 234,
+        "startChar": 46,
+        "endLine": 234,
+        "endChar": 75
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
