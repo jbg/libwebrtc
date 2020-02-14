@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8099e3b0_1fb66f78",
+        "filename": "tools_webrtc/perf/webrtc_dashboard_upload.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-02-14T13:18:49Z",
+      "side": 1,
+      "message": "I think it is better to add \"response code\" to be explicit, also below.",
+      "range": {
+        "startLine": 185,
+        "startChar": 19,
+        "endLine": 185,
+        "endChar": 20
+      },
+      "revId": "346d92d0e6060a6036ea35f5a32b90e133ffde8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
