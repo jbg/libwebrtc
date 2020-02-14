@@ -101,11 +101,6 @@ class OveruseFrameDetectorResourceAdaptationModule
   // initial frames.
   bool DropInitialFrames() const;
 
-  // TODO(eshr): This can be made private if we configure on
-  // SetDegredationPreference and SetEncoderSettings.
-  // (https://crbug.com/webrtc/11338)
-  void ConfigureQualityScaler(const VideoEncoder::EncoderInfo& encoder_info);
-
   // ResourceUsageListener implementation.
   ResourceListenerResponse OnResourceUsageStateMeasured(
       const Resource& resource) override;
@@ -148,6 +143,7 @@ class OveruseFrameDetectorResourceAdaptationModule
   VideoStreamEncoderObserver::AdaptationSteps GetActiveCounts(
       AdaptationObserverInterface::AdaptReason reason);
   const AdaptCounter& GetConstAdaptCounter();
+  void ConfigureQualityScaler();
 
   // Makes |video_source_restrictions_| up-to-date and informs the
   // |adaptation_listener_| if restrictions are changed, allowing the listener
