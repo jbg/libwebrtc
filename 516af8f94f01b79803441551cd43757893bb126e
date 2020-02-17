@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8e55b86_be655625",
+        "filename": "api/units/data_rate.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-02-17T13:40:35Z",
+      "side": 1,
+      "message": "NIT: It\u0027s KilobitsPerSec, a bit confusing since it abbreviated as kbps. but \"kilobit\" is a single word and should therefore only have a leading capital letter. (See: https://en.wikipedia.org/wiki/Kilobit )",
+      "range": {
+        "startLine": 45,
+        "startChar": 28,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "516af8f94f01b79803441551cd43757893bb126e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
