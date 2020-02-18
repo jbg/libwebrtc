@@ -48,6 +48,7 @@ namespace {
 
 const int kMinLayerSize = 16;
 
+// This is a test CL.
 // If this field trial is enabled, we will enable sending FlexFEC and disable
 // sending ULPFEC whenever the former has been negotiated in the SDPs.
 bool IsFlexfecFieldTrialEnabled() {
