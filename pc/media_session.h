@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "api/media_types.h"
+#include "api/rtp_transceiver_interface.h"
 #include "media/base/media_constants.h"
 #include "media/base/media_engine.h"  // For DataChannelType
 #include "p2p/base/ice_credentials_iterator.h"
@@ -79,6 +80,8 @@ struct MediaDescriptionOptions {
   std::vector<SenderOptions> sender_options;
   std::vector<webrtc::RtpCodecCapability> codec_preferences;
   absl::optional<std::string> alt_protocol;
+  std::vector<webrtc::RtpHeaderExtensionCapabilityWithDirection>
+      header_extensions;
 
  private:
   // Doesn't DCHECK on |type|.

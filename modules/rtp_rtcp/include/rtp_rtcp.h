@@ -175,6 +175,7 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
 
   virtual int32_t DeregisterSendRtpHeaderExtension(RTPExtensionType type) = 0;
   virtual void DeregisterSendRtpHeaderExtension(absl::string_view uri) = 0;
+  virtual bool IsRtpHeaderExtensionRegistered(absl::string_view uri) const = 0;
 
   // Returns true if RTP module is send media, and any of the extensions
   // required for bandwidth estimation is registered.

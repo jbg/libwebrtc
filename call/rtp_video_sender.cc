@@ -357,12 +357,18 @@ RtpVideoSender::RtpVideoSender(
                                                  remb_candidate);
   }
 
+  RTC_LOG(LS_ERROR) << "RtpVideoSender: extensions:";
   for (size_t i = 0; i < rtp_config_.extensions.size(); ++i) {
     const std::string& extension = rtp_config_.extensions[i].uri;
+    const bool send_enabled = rtp_config_.extensions[i].send_enabled;
     int id = rtp_config_.extensions[i].id;
     RTC_DCHECK(RtpExtension::IsSupportedForVideo(extension));
     for (const RtpStreamSender& stream : rtp_streams_) {
-      stream.rtp_rtcp->RegisterRtpHeaderExtension(extension, id);
+      if (send_enabled)
+        stream.rtp_rtcp->RegisterRtpHeaderExtension(extension, id);
+      else
+        stream.rtp_rtcp->DeregisterSendRtpHeaderExtension(extension);
+      RTC_LOG(LS_ERROR) << (send_enabled ? "+" : "-") << extension;
     }
   }
 
@@ -573,6 +579,26 @@ void RtpVideoSender::DeliverRtcp(const uint8_t* packet, size_t length) {
   // Runs on a network thread.
   for (const RtpStreamSender& stream : rtp_streams_)
     stream.rtp_rtcp->IncomingRtcpPacket(packet, length);
+}
+
+void RtpVideoSender::SetRtpHeaderExtensions(
+    const std::vector<RtpExtension>& extensions) {
+  for (const RtpStreamSender& stream : rtp_streams_) {
+    for (const auto& ext : extensions) {
+      const bool registered =
+          stream.rtp_rtcp->IsRtpHeaderExtensionRegistered(ext.uri);
+      RTC_LOG(LS_ERROR) << (ext.send_enabled ? "Registering "
+                                             : "Deregistering ")
+                        << ext.uri << "(" << ext.id << "), ext is "
+                        << (registered ? "" : "not ") << "registered.";
+      if (ext.send_enabled) {
+        if (!registered)
+          stream.rtp_rtcp->RegisterRtpHeaderExtension(ext.uri, ext.id);
+      } else if (registered) {
+        stream.rtp_rtcp->DeregisterSendRtpHeaderExtension(ext.uri);
+      }
+    }
+  }
 }
 
 void RtpVideoSender::ConfigureSsrcs() {

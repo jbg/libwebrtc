@@ -108,6 +108,9 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
 
   std::map<uint32_t, RtpPayloadState> GetRtpPayloadStates() const;
 
+  void SetRtpHeaderExtensions(
+      const std::vector<RtpExtension>& extensions);
+
   absl::optional<float> configured_pacing_factor_;
 
  private:

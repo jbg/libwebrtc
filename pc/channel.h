@@ -129,6 +129,8 @@ class BaseChannel : public ChannelInterface,
   bool SetRemoteContent(const MediaContentDescription* content,
                         webrtc::SdpType type,
                         std::string* error_desc) override;
+  absl::optional<RtpHeaderExtensions> GetNegotiatedRtpHeaderExtensions()
+      const override;
 
   bool Enable(bool enable) override;
 
@@ -250,6 +252,8 @@ class BaseChannel : public ChannelInterface,
   virtual bool SetRemoteContent_w(const MediaContentDescription* content,
                                   webrtc::SdpType type,
                                   std::string* error_desc) = 0;
+  virtual absl::optional<RtpHeaderExtensions>
+  GetNegotiatedRtpHeaderExtensions_w() const;
   // Return a list of RTP header extensions with the non-encrypted extensions
   // removed depending on the current crypto_options_ and only if both the
   // non-encrypted and encrypted extension is present for the same URI.
@@ -259,10 +263,15 @@ class BaseChannel : public ChannelInterface,
   // From MessageHandler
   void OnMessage(rtc::Message* pmsg) override;
 
-  // Helper function template for invoking methods on the worker thread.
+  // Helper function templates for invoking methods on the worker thread.
   template <class T>
   T InvokeOnWorker(const rtc::Location& posted_from,
                    rtc::FunctionView<T()> functor) {
+    return worker_thread_->Invoke<T>(posted_from, functor);
+  }
+  template <class T>
+  T InvokeOnWorker(const rtc::Location& posted_from,
+                   rtc::FunctionView<T()> functor) const {
     return worker_thread_->Invoke<T>(posted_from, functor);
   }
 
@@ -328,9 +337,27 @@ class BaseChannel : public ChannelInterface,
   rtc::UniqueRandomIdGenerator* const ssrc_generator_;
 };
 
+// MediaBaseChannel is a specialization that adds support for picking out
+// negotiated header extensions. It's meant to be a mixin for VoiceChannel
+// and VideoChannel.
+class MediaBaseChannel : public BaseChannel {
+ public:
+  using BaseChannel::BaseChannel;
+
+ protected:
+  void SetNegotiatedHeaderExtensions(const RtpHeaderExtensions& extensions);
+
+  // BaseChannel overrides
+  absl::optional<RtpHeaderExtensions> GetNegotiatedRtpHeaderExtensions_w()
+      const override;
+
+ private:
+  absl::optional<RtpHeaderExtensions> negotiated_header_extensions_;
+};
+
 // VoiceChannel is a specialization that adds support for early media, DTMF,
 // and input/output level monitoring.
-class VoiceChannel : public BaseChannel {
+class VoiceChannel : public MediaBaseChannel {
  public:
   VoiceChannel(rtc::Thread* worker_thread,
                rtc::Thread* network_thread,
@@ -370,10 +397,12 @@ class VoiceChannel : public BaseChannel {
   // Last AudioRecvParameters sent down to the media_channel() via
   // SetRecvParameters.
   AudioRecvParameters last_recv_params_;
+  // Last negotiated RTP header extensions
+  absl::optional<RtpHeaderExtensions> last_negotiated_extensions_;
 };
 
 // VideoChannel is a specialization for video.
-class VideoChannel : public BaseChannel {
+class VideoChannel : public MediaBaseChannel {
  public:
   VideoChannel(rtc::Thread* worker_thread,
                rtc::Thread* network_thread,
@@ -412,6 +441,8 @@ class VideoChannel : public BaseChannel {
   // Last VideoRecvParameters sent down to the media_channel() via
   // SetRecvParameters.
   VideoRecvParameters last_recv_params_;
+  // Last negotiated RTP header extensions
+  absl::optional<RtpHeaderExtensions> last_negotiated_extensions_;
 };
 
 // RtpDataChannel is a specialization for data.

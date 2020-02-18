@@ -2095,15 +2095,23 @@ webrtc::RTCError WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
       new_send_state = true;
     }
   }
+  const bool header_extensions_changed =
+      new_parameters.header_extensions != rtp_parameters_.header_extensions;
   rtp_parameters_ = new_parameters;
   // Codecs are currently handled at the WebRtcVideoChannel level.
   rtp_parameters_.codecs.clear();
+  RTC_LOG(LS_ERROR) << "WebRtcVideoSendStream::SetRtpParameters: reconfig_enc: "
+                    << reconfigure_encoder
+                    << " new_send_state: " << new_send_state;
   if (reconfigure_encoder || new_send_state) {
     ReconfigureEncoder();
   }
   if (new_send_state) {
     UpdateSendState();
   }
+  if (header_extensions_changed)
+    stream_->SetRtpHeaderExtensions(rtp_parameters_.header_extensions);
+
   if (new_degradation_preference) {
     if (source_ && stream_) {
       stream_->SetSource(this, GetDegradationPreference());

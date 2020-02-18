@@ -63,6 +63,14 @@ static_assert(arraysize(kExtensions) ==
 constexpr RTPExtensionType RtpHeaderExtensionMap::kInvalidType;
 constexpr int RtpHeaderExtensionMap::kInvalidId;
 
+RTPExtensionType RtpHeaderExtensionMap::RtpExtensionTypeFromUri(
+    absl::string_view uri) {
+  for (const ExtensionInfo& extension : kExtensions)
+    if (uri == extension.uri)
+      return extension.type;
+  return RTPExtensionType::kRtpExtensionNone;
+}
+
 RtpHeaderExtensionMap::RtpHeaderExtensionMap() : RtpHeaderExtensionMap(false) {}
 
 RtpHeaderExtensionMap::RtpHeaderExtensionMap(bool extmap_allow_mixed)
@@ -128,6 +136,9 @@ bool RtpHeaderExtensionMap::Register(int id,
                                      const char* uri) {
   RTC_DCHECK_GT(type, kRtpExtensionNone);
   RTC_DCHECK_LT(type, kRtpExtensionNumberOfExtensions);
+
+  RTC_LOG(LS_ERROR) << "RtpHeaderExtensionMap::Register: id=" << id
+                    << ", type=" << type << ", uri=" << uri;
 
   if (id < RtpExtension::kMinId || id > RtpExtension::kMaxId) {
     RTC_LOG(LS_WARNING) << "Failed to register extension uri:'" << uri

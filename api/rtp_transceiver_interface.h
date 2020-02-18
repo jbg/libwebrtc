@@ -34,6 +34,28 @@ enum class RtpTransceiverDirection {
   kInactive
 };
 
+RtpTransceiverDirection RtpTransceiverDirectionFromRtpExtension(
+    const RtpExtension& extension);
+
+// ??? FIXME docs
+struct RtpHeaderExtensionCapabilityWithOptionalDirection
+    : public RtpHeaderExtensionCapability {
+  // A nullopt value means a disabled header extension.
+  absl::optional<RtpTransceiverDirection> direction;
+};
+
+// ??? FIXME docs
+struct RtpHeaderExtensionCapabilityWithDirection
+    : public RtpHeaderExtensionCapability {
+  RtpHeaderExtensionCapabilityWithDirection(std::string uri,
+                                            int preferred_id,
+                                            RtpTransceiverDirection direction)
+      : RtpHeaderExtensionCapability(uri, preferred_id), direction(direction) {}
+
+  // ??? docs
+  RtpTransceiverDirection direction;
+};
+
 // Structure for initializing an RtpTransceiver in a call to
 // PeerConnectionInterface::AddTransceiver.
 // https://w3c.github.io/webrtc-pc/#dom-rtcrtptransceiverinit
@@ -132,6 +154,32 @@ class RTC_EXPORT RtpTransceiverInterface : public rtc::RefCountInterface {
   virtual RTCError SetCodecPreferences(
       rtc::ArrayView<RtpCodecCapability> codecs);
   virtual std::vector<RtpCodecCapability> codec_preferences() const;
+
+  // FIXME: implement in all subclasses.
+  // The SetOfferedRtpHeaderExtensions method modifies the next SDP negotiation
+  // so that it negotiates use only of not stopped header extensions.
+  // ???? FIXME: ref
+  // https://w3c.github.io/webrtc-pc/#dom-rtcrtptransceiver-SetOfferedRtpHeaderExtensions
+  virtual webrtc::RTCError SetOfferedRtpHeaderExtensions(
+      rtc::ArrayView<RtpHeaderExtensionCapabilityWithOptionalDirection>
+          header_extensions_to_offer);
+
+  // FIXME: implement in all subclasses.
+  // Readonly attribute which is either empty if negotation has not yet
+  // happened, or a vector of the negotiated header extensions.
+  // ???? FIXME: ref
+  // https://w3c.github.io/webrtc-pc/#dom-rtcrtptransceiver-SetOfferedRtpHeaderExtensions
+  virtual std::vector<RtpHeaderExtensionCapabilityWithDirection>
+  header_extensions_accepted() const;
+
+  // FIXME: implement in all subclasses.
+  // Readonly attribute which contains the set of header extensions that was set
+  // with SetOfferedRtpHeaderExtensions, or a default set if it has not been
+  // called.
+  // ???? FIXME: ref
+  // https://w3c.github.io/webrtc-pc/#dom-rtcrtptransceiver-SetOfferedRtpHeaderExtensions
+  virtual std::vector<RtpHeaderExtensionCapabilityWithDirection>
+  header_extensions_offered() const;
 
  protected:
   ~RtpTransceiverInterface() override = default;

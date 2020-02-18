@@ -124,12 +124,15 @@ webrtc::RTCError CheckRtpParametersInvalidModificationAndValues(
         RTCErrorType::INVALID_MODIFICATION,
         "Attempted to set RtpParameters with modified RTCP parameters");
   }
-  if (rtp_parameters.header_extensions !=
+
+  // xxx follow spec semantics.
+  if (0 && rtp_parameters.header_extensions !=
       old_rtp_parameters.header_extensions) {
     LOG_AND_RETURN_ERROR(
         RTCErrorType::INVALID_MODIFICATION,
         "Attempted to set RtpParameters with modified header extensions");
   }
+
   if (!absl::c_equal(old_rtp_parameters.encodings, rtp_parameters.encodings,
                      [](const webrtc::RtpEncodingParameters& encoding1,
                         const webrtc::RtpEncodingParameters& encoding2) {

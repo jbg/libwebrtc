@@ -283,6 +283,14 @@ bool BaseChannel::SetRemoteContent(const MediaContentDescription* content,
       Bind(&BaseChannel::SetRemoteContent_w, this, content, type, error_desc));
 }
 
+absl::optional<RtpHeaderExtensions>
+BaseChannel::GetNegotiatedRtpHeaderExtensions() const {
+  TRACE_EVENT0("webrtc", "BaseChannel::GetNegotiatedRtpHeaderExtensions");
+  return InvokeOnWorker<absl::optional<RtpHeaderExtensions>>(
+      RTC_FROM_HERE,
+      Bind(&BaseChannel::GetNegotiatedRtpHeaderExtensions_w, this));
+}
+
 bool BaseChannel::IsReadyToReceiveMedia_w() const {
   // Receive data if we are enabled and have local content,
   return enabled() &&
@@ -703,6 +711,11 @@ bool BaseChannel::UpdateRemoteStreams_w(
   return ret;
 }
 
+absl::optional<RtpHeaderExtensions>
+BaseChannel::GetNegotiatedRtpHeaderExtensions_w() const {
+  return absl::nullopt;
+}
+
 RtpHeaderExtensions BaseChannel::GetFilteredRtpHeaderExtensions(
     const RtpHeaderExtensions& extensions) {
   RTC_DCHECK(rtp_transport_);
@@ -767,6 +780,16 @@ void BaseChannel::SignalSentPacket_n(const rtc::SentPacket& sent_packet) {
                              });
 }
 
+void MediaBaseChannel::SetNegotiatedHeaderExtensions(
+    const RtpHeaderExtensions& extensions) {
+  negotiated_header_extensions_ = extensions;
+}
+
+absl::optional<RtpHeaderExtensions>
+MediaBaseChannel::GetNegotiatedRtpHeaderExtensions_w() const {
+  return negotiated_header_extensions_;
+}
+
 VoiceChannel::VoiceChannel(rtc::Thread* worker_thread,
                            rtc::Thread* network_thread,
                            rtc::Thread* signaling_thread,
@@ -775,14 +798,14 @@ VoiceChannel::VoiceChannel(rtc::Thread* worker_thread,
                            bool srtp_required,
                            webrtc::CryptoOptions crypto_options,
                            UniqueRandomIdGenerator* ssrc_generator)
-    : BaseChannel(worker_thread,
-                  network_thread,
-                  signaling_thread,
-                  std::move(media_channel),
-                  content_name,
-                  srtp_required,
-                  crypto_options,
-                  ssrc_generator) {}
+    : MediaBaseChannel(worker_thread,
+                       network_thread,
+                       signaling_thread,
+                       std::move(media_channel),
+                       content_name,
+                       srtp_required,
+                       crypto_options,
+                       ssrc_generator) {}
 
 VoiceChannel::~VoiceChannel() {
   TRACE_EVENT0("webrtc", "VoiceChannel::~VoiceChannel");
@@ -831,6 +854,9 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
   }
 
   const AudioContentDescription* audio = content->as_audio();
+
+  if (type == SdpType::kAnswer)
+    SetNegotiatedHeaderExtensions(audio->rtp_header_extensions());
 
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(audio->rtp_header_extensions());
@@ -887,6 +913,9 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
 
   const AudioContentDescription* audio = content->as_audio();
 
+  if (type == SdpType::kAnswer)
+    SetNegotiatedHeaderExtensions(audio->rtp_header_extensions());
+
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(audio->rtp_header_extensions());
 
@@ -935,14 +964,14 @@ VideoChannel::VideoChannel(rtc::Thread* worker_thread,
                            bool srtp_required,
                            webrtc::CryptoOptions crypto_options,
                            UniqueRandomIdGenerator* ssrc_generator)
-    : BaseChannel(worker_thread,
-                  network_thread,
-                  signaling_thread,
-                  std::move(media_channel),
-                  content_name,
-                  srtp_required,
-                  crypto_options,
-                  ssrc_generator) {}
+    : MediaBaseChannel(worker_thread,
+                       network_thread,
+                       signaling_thread,
+                       std::move(media_channel),
+                       content_name,
+                       srtp_required,
+                       crypto_options,
+                       ssrc_generator) {}
 
 VideoChannel::~VideoChannel() {
   TRACE_EVENT0("webrtc", "VideoChannel::~VideoChannel");
@@ -982,6 +1011,9 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
   }
 
   const VideoContentDescription* video = content->as_video();
+
+  if (type == SdpType::kAnswer)
+    SetNegotiatedHeaderExtensions(video->rtp_header_extensions());
 
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(video->rtp_header_extensions());
@@ -1065,6 +1097,9 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
   }
 
   const VideoContentDescription* video = content->as_video();
+
+  if (type == SdpType::kAnswer)
+    SetNegotiatedHeaderExtensions(video->rtp_header_extensions());
 
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(video->rtp_header_extensions());

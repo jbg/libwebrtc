@@ -14,6 +14,19 @@
 
 namespace webrtc {
 
+RtpTransceiverDirection RtpTransceiverDirectionFromRtpExtension(
+    const RtpExtension& extension) {
+  if (extension.send_enabled) {
+    if (extension.receive_enabled)
+      return RtpTransceiverDirection::kSendRecv;
+    else
+      return RtpTransceiverDirection::kSendOnly;
+  } else if (extension.receive_enabled) {
+    return RtpTransceiverDirection::kRecvOnly;
+  }
+  return RtpTransceiverDirection::kInactive;
+}
+
 RtpTransceiverInit::RtpTransceiverInit() = default;
 
 RtpTransceiverInit::RtpTransceiverInit(const RtpTransceiverInit& rhs) = default;
@@ -33,6 +46,22 @@ RTCError RtpTransceiverInterface::SetCodecPreferences(
 
 std::vector<RtpCodecCapability> RtpTransceiverInterface::codec_preferences()
     const {
+  return {};
+}
+
+webrtc::RTCError RtpTransceiverInterface::SetOfferedRtpHeaderExtensions(
+    rtc::ArrayView<RtpHeaderExtensionCapabilityWithOptionalDirection>
+        header_extensions_to_offer) {
+  return {};
+}
+
+std::vector<RtpHeaderExtensionCapabilityWithDirection>
+RtpTransceiverInterface::header_extensions_accepted() const {
+  return {};
+}
+
+std::vector<RtpHeaderExtensionCapabilityWithDirection>
+RtpTransceiverInterface::header_extensions_offered() const {
   return {};
 }
 

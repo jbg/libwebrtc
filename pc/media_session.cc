@@ -646,7 +646,25 @@ static bool CreateContentOffer(
   if (offer->type() == cricket::MEDIA_TYPE_VIDEO) {
     offer->set_rtcp_reduced_size(true);
   }
-  offer->set_rtp_header_extensions(rtp_extensions);
+
+  // Build the vector of header extensions with directions for this
+  // media_description's options.
+  RtpHeaderExtensions extensions;
+  for (const auto& extension : media_description_options.header_extensions) {
+    const webrtc::RtpExtension* found_extension =
+        webrtc::RtpExtension::FindHeaderExtensionByUri(rtp_extensions,
+                                                       extension.uri);
+    RTC_DCHECK(found_extension);
+    webrtc::RtpExtension extension_with_direction = *found_extension;
+    extension_with_direction.send_enabled =
+        extension.direction == RtpTransceiverDirection::kSendOnly ||
+        extension.direction == RtpTransceiverDirection::kSendRecv;
+    extension_with_direction.receive_enabled =
+        extension.direction == RtpTransceiverDirection::kRecvOnly ||
+        extension.direction == RtpTransceiverDirection::kSendRecv;
+    extensions.push_back(extension_with_direction);
+  }
+  offer->set_rtp_header_extensions(extensions);
 
   AddSimulcastToMediaDescription(media_description_options, offer);
 
@@ -1075,21 +1093,32 @@ static void NegotiateRtpHeaderExtensions(
 
   for (const webrtc::RtpExtension& ours : local_extensions) {
     webrtc::RtpExtension theirs;
-    if (FindByUriWithEncryptionPreference(
+    if (!FindByUriWithEncryptionPreference(
             offered_extensions, ours, enable_encrypted_rtp_header_extensions,
-            &theirs)) {
-      if (transport_sequence_number_v2_offer &&
-          ours.uri == webrtc::RtpExtension::kTransportSequenceNumberUri) {
-        // Don't respond to
-        // http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01
-        // if we get an offer including
-        // http://www.webrtc.org/experiments/rtp-hdrext/transport-wide-cc-02
-        continue;
-      } else {
-        // We respond with their RTP header extension id.
-        negotiated_extensions->push_back(theirs);
-      }
+            &theirs))
+      continue;
+
+    if (transport_sequence_number_v2_offer &&
+        ours.uri == webrtc::RtpExtension::kTransportSequenceNumberUri) {
+      // Don't respond to
+      // http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01
+      // if we get an offer including
+      // http://www.webrtc.org/experiments/rtp-hdrext/transport-wide-cc-02
+      continue;
     }
+
+    // We respond with their RTP header extension id, and modify our
+    // negotiated direction according to the direction in their extension.
+    //
+    // See https://tools.ietf.org/html/rfc8285#page-13.
+    webrtc::RtpExtension negotiated = theirs;
+    negotiated.send_enabled = false;
+    negotiated.receive_enabled = false;
+    if (theirs.send_enabled)
+      negotiated.receive_enabled = true;
+    if (theirs.receive_enabled)
+      negotiated.send_enabled = true;
+    negotiated_extensions->push_back(negotiated);
   }
 
   if (transport_sequence_number_v2_offer) {
@@ -1427,6 +1456,9 @@ std::unique_ptr<SessionDescription> MediaSessionDescriptionFactory::CreateOffer(
 
   RtpHeaderExtensions audio_rtp_extensions;
   RtpHeaderExtensions video_rtp_extensions;
+
+  // xxx
+
   GetRtpHdrExtsToOffer(current_active_contents,
                        session_options.offer_extmap_allow_mixed,
                        &audio_rtp_extensions, &video_rtp_extensions);
@@ -1520,6 +1552,8 @@ std::unique_ptr<SessionDescription> MediaSessionDescriptionFactory::CreateOffer(
     // Plan B always signals MSID using a=ssrc lines.
     offer->set_msid_signaling(cricket::kMsidSignalingSsrcAttribute);
   }
+
+  // xxx
 
   offer->set_extmap_allow_mixed(session_options.offer_extmap_allow_mixed);
 

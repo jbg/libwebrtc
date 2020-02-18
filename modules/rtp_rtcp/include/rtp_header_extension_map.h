@@ -28,6 +28,9 @@ class RtpHeaderExtensionMap {
   static constexpr RTPExtensionType kInvalidType = kRtpExtensionNone;
   static constexpr int kInvalidId = 0;
 
+  // Returns RTPExtensionType::kRtpExtensionNone if uri is not found.
+  static RTPExtensionType RtpExtensionTypeFromUri(absl::string_view uri);
+
   RtpHeaderExtensionMap();
   explicit RtpHeaderExtensionMap(bool extmap_allow_mixed);
   explicit RtpHeaderExtensionMap(rtc::ArrayView<const RtpExtension> extensions);

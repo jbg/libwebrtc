@@ -195,6 +195,10 @@ class VideoSendStream {
   // with the VideoStream settings.
   virtual void ReconfigureVideoEncoder(VideoEncoderConfig config) = 0;
 
+  // Sets the header extensions to use.
+  virtual void SetRtpHeaderExtensions(
+      const std::vector<RtpExtension>& extensions) = 0;
+
   virtual Stats GetStats() = 0;
 
  protected:
