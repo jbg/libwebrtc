@@ -33,6 +33,24 @@
       "revId": "1e4e06a1a3e226a2e1ec31a6a7e4763282df83b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d280076_0a217c0d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2306,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-18T13:00:49Z",
+      "side": 1,
+      "message": "\u003ecreate multiple VideoSendStreams in the modern getStats()\n\nI can see VideoSendStreams are only created in Call::CreateVideoSendStream and not exactly in stats related code.",
+      "parentUuid": "137204d9_ee155c50",
+      "revId": "1e4e06a1a3e226a2e1ec31a6a7e4763282df83b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
