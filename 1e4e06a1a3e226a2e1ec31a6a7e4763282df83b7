@@ -51,6 +51,24 @@
       "revId": "1e4e06a1a3e226a2e1ec31a6a7e4763282df83b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1d3b5e3_a22ffbe6",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2306,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-18T13:04:31Z",
+      "side": 1,
+      "message": "\u003emake sense for all substreams\n\nSome of the stats are not easy to get as many methods of VideoStreamEncoderObserver have no reference to layer.\n\n\u003estats as they were prior to this CL\n\nThat I tried to address by adding \u0027legacy\u0027 flag to FillSenderStats()",
+      "parentUuid": "8d280076_0a217c0d",
+      "revId": "1e4e06a1a3e226a2e1ec31a6a7e4763282df83b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
