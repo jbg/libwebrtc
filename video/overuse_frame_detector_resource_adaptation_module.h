@@ -138,6 +138,18 @@ class OveruseFrameDetectorResourceAdaptationModule
     enum class Mode { kAdaptUp, kAdaptDown } mode_;
   };
 
+  // enum class AdaptationQuality {
+  //   kFrameRate,
+  //   kResolution,
+  // };
+
+  // Preconditions for OnResourceUnderuse() to adapt up.
+  bool ExistsHigherSetting(AdaptationObserverInterface::AdaptReason reason);
+  bool HasIncreasedQualitySinceLastUnderuse(
+      const AdaptationRequest& adaptation_request);
+  bool BalancedSettingsAllowsAdaptingFrameRateOrResolution(
+      AdaptationObserverInterface::AdaptReason reason);
+  // Adapts up or down if preconditions allow.
   void OnResourceUnderuse(AdaptationObserverInterface::AdaptReason reason);
   ResourceListenerResponse OnResourceOveruse(
       AdaptationObserverInterface::AdaptReason reason);
