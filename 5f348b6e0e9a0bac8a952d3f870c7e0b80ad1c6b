@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6fc5d48e_f59a9409",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-18T14:54:39Z",
+      "side": 1,
+      "message": "I am fine with changing this to int64_t. Just a drawback, we cannot make it null after setting.",
+      "parentUuid": "31161b1e_b7bd1236",
+      "range": {
+        "startLine": 107,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 3
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6f0e835_bf56cbeb",
         "filename": "api/audio/audio_frame.h",
         "patchSetId": 10
@@ -60,6 +84,30 @@
       "writtenOn": "2020-02-10T10:33:40Z",
       "side": 1,
       "message": "On line 133 in this file there is a comment saying that \"Also, absl::optional is not used since it will cause a \"complex\n  // class/struct needs an explicit out-of-line destructor\" build error.\"\n\nDoes that apply here? If not, is that comment outdated (and if it is, please remove that comment as well in this CL)?",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 57
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69e84655_e91ef014",
+        "filename": "api/audio/audio_frame.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-18T14:54:39Z",
+      "side": 1,
+      "message": "changed comment on line 133.",
+      "parentUuid": "d6f0e835_bf56cbeb",
       "range": {
         "startLine": 166,
         "startChar": 2,
@@ -274,6 +322,30 @@
       "side": 1,
       "message": "I don\u0027t really see the reason for not using an optional one step further, and use the construct  absolute_capture_timestamp_ms.value_or(-1) on line 307. \n\nAre there any drawbacks with that?\n\nRegarding -1 not doing any harm, I think it adds confusion and makes the code harder to read as it makes the code inconsistent. \n\n\nFurthermore, the same arguments for in the first place using an optional as return value for absolute_capture_timestamp_ms() (instead of using a -1) hold for this code as well.",
       "parentUuid": "f63ae805_46f4a508",
+      "range": {
+        "startLine": 234,
+        "startChar": 46,
+        "endLine": 234,
+        "endChar": 75
+      },
+      "revId": "5f348b6e0e9a0bac8a952d3f870c7e0b80ad1c6b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7a20a55_8f39e2f8",
+        "filename": "modules/audio_coding/acm2/audio_coding_module.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-18T14:54:39Z",
+      "side": 1,
+      "message": "use optional\u003c\u003e consistently in audio_coding_module.cc and only value_or(-1) when passing out of audio_coding_module.cc.",
+      "parentUuid": "79b375c9_734960f9",
       "range": {
         "startLine": 234,
         "startChar": 46,
