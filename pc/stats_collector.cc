@@ -1019,7 +1019,7 @@ class VideoMediaChannelStatsGatherer final : public MediaChannelStatsGatherer {
   }
 
   bool GetStatsOnWorkerThread() override {
-    return video_media_channel_->GetStats(&video_media_info);
+    return video_media_channel_->GetStats(&video_media_info, /*legacy*/ true);
   }
 
   void ExtractStats(StatsCollector* collector) const override {
