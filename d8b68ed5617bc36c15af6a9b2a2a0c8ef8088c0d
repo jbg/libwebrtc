@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c754d75_b5db686c",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-02-19T13:44:23Z",
+      "side": 1,
+      "message": "If you do RTC_GUARDED_BY up above, you have to do RTC_DCHECK_RUN_ON(network_thread_) here.",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "471e0433_8f14b3b0",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-02-19T13:44:23Z",
+      "side": 1,
+      "message": "As far as I can tell, what you\u0027re doing is to switch from gathering the MIDs to be rolled back by looping over transceiver_stable_states_by_transceiver_ to listing the MIDs that have been explicitly added to the mapping in this cycle.\n\nIntuitively, the latter seems to make more sense to me; can you assure me that the two are intended to be equivalent apart from the datachannel case that we\u0027re repairing here?",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b807ff86_6d22df11",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-02-19T13:44:23Z",
+      "side": 1,
+      "message": "Nit, English: \"Keep track of mids that have been mapped to transports\".",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "752d6d00_d8254c19",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-02-19T13:44:23Z",
+      "side": 1,
+      "message": "can you make this RTC_GUARDED_BY(network_thread_);\nThis class isn\u0027t a shining example of documenting its thread expectations, but there\u0027s no place better to start than the present.",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9fb480b_11178775",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2199,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-02-19T13:44:23Z",
+      "side": 1,
+      "message": "Nice tests!",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
