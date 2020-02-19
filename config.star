@@ -458,7 +458,7 @@ mac_builder, mac_try_job = normal_builder_factory(
 )
 
 ios_builder, ios_try_job = normal_builder_factory(
-    dimensions = {"os": "Mac-10.13"},
+    dimensions = {"os": "Mac-10.14"},
     recipe = "ios",
     properties = {"$depot_tools/osx_sdk": {"sdk_version": "10b61"}},
     caches = [swarming.cache("osx_sdk")],
@@ -503,7 +503,7 @@ ios_try_job("ios_compile_arm64_dbg")
 ios_builder("iOS64 Release", "iOS|arm64|rel")
 ios_try_job("ios_compile_arm64_rel")
 ios_builder("iOS64 Sim Debug (iOS 10.0)", "iOS|x64|10")
-ios_try_job("ios_sim_x64_dbg_ios10")
+ios_try_job("ios_sim_x64_dbg_ios10", cq = None)
 ios_builder("iOS64 Sim Debug (iOS 11)", "iOS|x64|11")
 ios_try_job("ios_sim_x64_dbg_ios11")
 ios_builder("iOS64 Sim Debug (iOS 12)", "iOS|x64|12")
