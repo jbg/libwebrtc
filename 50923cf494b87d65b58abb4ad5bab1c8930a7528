@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ee91d75_cb566534",
+        "filename": "p2p/base/transport_description.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-02-19T20:25:07Z",
+      "side": 1,
+      "message": "can you add \"if !(absl::ascii_isalnum(c) || c \u003d\u003d \u0027+\u0027 || c \u003d\u003d \u0027/\u0027) LOG(WARN) \u003c\u003c \"Protocol violation. Permitted for now, but will be disallowed in the future\"; ?",
+      "revId": "50923cf494b87d65b58abb4ad5bab1c8930a7528",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
