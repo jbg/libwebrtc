@@ -1,0 +1,46 @@
+//
+//  Copyright (c) 2020 The WebRTC project authors. All Rights Reserved.
+//
+//  Use of this source code is governed by a BSD-style license
+//  that can be found in the LICENSE file in the root of the source
+//  tree. An additional intellectual property rights grant can be found
+//  in the file PATENTS.  All contributing project authors may
+//  be found in the AUTHORS file in the root of the source tree.
+//
+
+#ifndef API_VOIP_VOIP_NETWORK_H_
+#define API_VOIP_VOIP_NETWORK_H_
+
+#include "api/call/transport.h"
+
+namespace webrtc {
+
+class VoipNetwork {
+ public:
+  // Installs and enables a network transport on given |channel| id.
+  virtual bool RegisterTransport(int channel, Transport* transport) = 0;
+
+  // Removes and disables a network transport on given |channel| id.
+  virtual bool DeRegisterTransport(int channel) = 0;
+
+  // The packets received from the network should be passed to this
+  // function. Note that the data including the RTP-header must also be
+  // given to the VoipEngine.
+  virtual bool ReceivedRTPPacket(int channel,
+                                 const uint8_t* data,
+                                 size_t length) = 0;
+
+  // The packets received from the network should be passed to this
+  // function. Note that the data including the RTCP-header must also be
+  // given to the VoipEngine.
+  virtual bool ReceivedRTCPPacket(int channel,
+                                  const uint8_t* data,
+                                  size_t length) = 0;
+
+ protected:
+  virtual ~VoipNetwork() = default;
+};
+
+}  // namespace webrtc
+
+#endif  // API_VOIP_VOIP_NETWORK_H_
