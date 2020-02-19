@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6c05c9c_790a4902",
+        "filename": "p2p/base/transport_description.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5039
+      },
+      "writtenOn": "2020-02-19T20:51:56Z",
+      "side": 1,
+      "message": "Can you add a reference to crbug.com/1053756 for context?",
+      "revId": "9dcaabaed10e3a21c987004e5fb7d936d33bbbc6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
