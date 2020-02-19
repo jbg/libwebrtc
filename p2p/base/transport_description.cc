@@ -24,7 +24,9 @@ namespace cricket {
 namespace {
 
 bool IsIceChar(char c) {
-  return absl::ascii_isalnum(c) || c == '+' || c == '/';
+  // Note: '-' and '=' are *not* valid ice-chars but temporarily permitted
+  // in order to allow external software to upgrade.
+  return absl::ascii_isalnum(c) || c == '+' || c == '/' || c == '-' || c == '=';
 }
 
 RTCErrorOr<std::string> ParseIceUfrag(absl::string_view raw_ufrag) {
