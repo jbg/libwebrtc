@@ -454,7 +454,9 @@ void OveruseFrameDetectorResourceAdaptationModule::SetHasInputVideo(
 
 void OveruseFrameDetectorResourceAdaptationModule::SetDegradationPreference(
     DegradationPreference degradation_preference) {
-  if (degradation_preference_ != degradation_preference) {
+  const bool degradation_preference_changed =
+      degradation_preference_ != degradation_preference;
+  if (degradation_preference_changed) {
     // Reset adaptation state, so that we're not tricked into thinking there's
     // an already pending request of the same type.
     last_adaptation_request_.reset();
@@ -467,6 +469,8 @@ void OveruseFrameDetectorResourceAdaptationModule::SetDegradationPreference(
     }
   }
   degradation_preference_ = degradation_preference;
+  if (degradation_preference_changed)
+    ConfigureQualityScaler();
   MaybeUpdateVideoSourceRestrictions();
 }
 
@@ -478,6 +482,7 @@ void OveruseFrameDetectorResourceAdaptationModule::SetEncoderSettings(
       LastInputFrameSizeOrDefault(),
       encoder_settings_->video_codec().maxBitrate);
   MaybeUpdateTargetFrameRate();
+  ConfigureQualityScaler();
 }
 
 void OveruseFrameDetectorResourceAdaptationModule::SetStartBitrate(
@@ -576,8 +581,11 @@ void OveruseFrameDetectorResourceAdaptationModule::UpdateQualityScalerSettings(
   initial_frame_dropper_->OnQualityScalerSettingsUpdated();
 }
 
-void OveruseFrameDetectorResourceAdaptationModule::ConfigureQualityScaler(
-    const VideoEncoder::EncoderInfo& encoder_info) {
+void OveruseFrameDetectorResourceAdaptationModule::ConfigureQualityScaler() {
+  if (!encoder_settings_.has_value())
+    return;
+  const VideoEncoder::EncoderInfo& encoder_info =
+      encoder_settings_->encoder_info();
   const auto scaling_settings = encoder_info.scaling_settings;
   const bool quality_scaling_allowed =
       IsResolutionScalingEnabled(degradation_preference_) &&
