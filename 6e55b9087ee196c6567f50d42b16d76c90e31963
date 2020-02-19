@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04a531f0_df34139b",
+        "filename": "video/overuse_frame_detector_resource_adaptation_module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-19T13:31:43Z",
+      "side": 1,
+      "message": "Probably won\u0027t make much of a practical difference, but can we...?\n\nif (did_change_degradation_preference)",
+      "revId": "6e55b9087ee196c6567f50d42b16d76c90e31963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d77055b_f6ba33ba",
+        "filename": "video/overuse_frame_detector_resource_adaptation_module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-19T13:31:43Z",
+      "side": 1,
+      "message": "In this case it\u0027s probably fine to always do it!",
+      "revId": "6e55b9087ee196c6567f50d42b16d76c90e31963",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
