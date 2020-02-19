@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65a81a64_611b8465",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-02-19T14:15:53Z",
+      "side": 0,
+      "message": "We will now configure quality scaler in this code path. Is this a problem?",
+      "range": {
+        "startLine": 1153,
+        "startChar": 0,
+        "endLine": 1155,
+        "endChar": 0
+      },
+      "revId": "f84cf9edfff8af2e9fb348763dcb4d5706244bfd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
