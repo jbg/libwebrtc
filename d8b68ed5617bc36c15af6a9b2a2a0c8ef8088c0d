@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ff6ea18_7b0a196d",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-19T18:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c754d75_b5db686c",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "471e0433_8f14b3b0",
         "filename": "pc/jsep_transport_controller.cc",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a99cd02_26ace40d",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-19T18:44:23Z",
+      "side": 1,
+      "message": "Right, it should be equivalent for transceivers as long as SetTransportForMid gets called for every newly created transport. Hopefully tests will catch it, when this assumption stops holding.",
+      "parentUuid": "471e0433_8f14b3b0",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ecf1cdf1_80c8d9ca",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-19T18:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b807ff86_6d22df11",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "752d6d00_d8254c19",
         "filename": "pc/jsep_transport_controller.h",
         "patchSetId": 5
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "28c0eb68_bb3177db",
+        "filename": "pc/jsep_transport_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-19T18:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "752d6d00_d8254c19",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9fb480b_11178775",
         "filename": "pc/peer_connection_jsep_unittest.cc",
         "patchSetId": 5
@@ -84,6 +156,24 @@
       "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5360c98_a3a9e59c",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2199,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-02-19T18:44:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e9fb480b_11178775",
+      "revId": "d8b68ed5617bc36c15af6a9b2a2a0c8ef8088c0d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
