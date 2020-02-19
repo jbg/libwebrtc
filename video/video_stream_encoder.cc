@@ -366,9 +366,6 @@ void VideoStreamEncoder::SetSource(
     resource_adaptation_module_->SetHasInputVideo(source);
     resource_adaptation_module_->SetDegradationPreference(
         degradation_preference);
-    if (encoder_)
-      resource_adaptation_module_->ConfigureQualityScaler(
-          encoder_->GetEncoderInfo());
   });
 }
 
@@ -759,8 +756,6 @@ void VideoStreamEncoder::ReconfigureEncoder() {
   sink_->OnEncoderConfigurationChanged(
       std::move(streams), encoder_config_.content_type,
       encoder_config_.min_transmit_bitrate_bps);
-
-  resource_adaptation_module_->ConfigureQualityScaler(info);
 }
 
 void VideoStreamEncoder::OnFrame(const VideoFrame& video_frame) {

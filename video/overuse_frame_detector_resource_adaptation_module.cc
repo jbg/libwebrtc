@@ -467,6 +467,7 @@ void OveruseFrameDetectorResourceAdaptationModule::SetDegradationPreference(
     }
   }
   degradation_preference_ = degradation_preference;
+  ConfigureQualityScaler();
   MaybeUpdateVideoSourceRestrictions();
 }
 
@@ -478,6 +479,7 @@ void OveruseFrameDetectorResourceAdaptationModule::SetEncoderSettings(
       LastInputFrameSizeOrDefault(),
       encoder_settings_->video_codec().maxBitrate);
   MaybeUpdateTargetFrameRate();
+  ConfigureQualityScaler();
 }
 
 void OveruseFrameDetectorResourceAdaptationModule::SetStartBitrate(
@@ -576,8 +578,11 @@ void OveruseFrameDetectorResourceAdaptationModule::UpdateQualityScalerSettings(
   initial_frame_dropper_->OnQualityScalerSettingsUpdated();
 }
 
-void OveruseFrameDetectorResourceAdaptationModule::ConfigureQualityScaler(
-    const VideoEncoder::EncoderInfo& encoder_info) {
+void OveruseFrameDetectorResourceAdaptationModule::ConfigureQualityScaler() {
+  if (!encoder_settings_.has_value())
+    return;
+  const VideoEncoder::EncoderInfo& encoder_info =
+      encoder_settings_->encoder_info();
   const auto scaling_settings = encoder_info.scaling_settings;
   const bool quality_scaling_allowed =
       IsResolutionScalingEnabled(degradation_preference_) &&
