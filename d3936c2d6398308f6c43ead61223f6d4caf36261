@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63cd897c_73d5809b",
+        "filename": "api/voip/audio_channel.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-02-20T13:28:39Z",
+      "side": 1,
+      "message": "These includes are OK since they\u0027re from legacy API dirs, so this makes a stronger case for moving these guys to api/. No action required from you.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "d3936c2d6398308f6c43ead61223f6d4caf36261",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
