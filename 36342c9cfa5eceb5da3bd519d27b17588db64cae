@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0d6c17e9_da300f2c",
+        "filename": "modules/video_capture/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-02-20T09:07:29Z",
+      "side": 1,
+      "message": "Will there be more API to support than \"dshow\" and \"winrt\"?\n\nIf not, I suggest we simplify the build config and use a gn arg like rtc_win_video_capture_winrt and default back to dshow if that is set to false.",
+      "range": {
+        "startLine": 67,
+        "startChar": 10,
+        "endLine": 67,
+        "endChar": 46
+      },
+      "revId": "36342c9cfa5eceb5da3bd519d27b17588db64cae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac494228_4b8150c0",
         "filename": "webrtc.gni",
         "patchSetId": 7
