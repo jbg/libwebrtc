@@ -48,7 +48,28 @@ struct RtpCapabilities {
   std::vector<webrtc::RtpExtension> header_extensions;
 };
 
-class VoiceEngineInterface {
+class CapabilityQueryMixin {
+ public:
+  enum class RtpExtensionEnabled { kEnabled, kStopped };
+
+  virtual ~CapabilityQueryMixin() = default;
+
+  RtpCapabilities GetCapabilities() const;
+
+  // Returns a vector of RTP extensions as visible by RtpSender/Receiver
+  // GetCapabilities(). The returned vector only shows what will definitely be
+  // offered, i.e. the list of extensions returned from
+  // GetRtpHeaderExtensions() that are kEnabled.
+  std::vector<webrtc::RtpExtension> LegacyGetRtpHeaderExtensions() const;
+
+  // Returns a vector of tuples of RtpExtension and RtpExtensionEnabled, where
+  // the latter is kStopped if the extension is stopped (not used) by default,
+  // and kEnabled otherwise.
+  virtual std::vector<std::pair<webrtc::RtpExtension, RtpExtensionEnabled>>
+  GetRtpHeaderExtensions() const = 0;
+};
+
+class VoiceEngineInterface : public CapabilityQueryMixin {
  public:
   VoiceEngineInterface() = default;
   virtual ~VoiceEngineInterface() = default;
@@ -71,7 +92,6 @@ class VoiceEngineInterface {
 
   virtual const std::vector<AudioCodec>& send_codecs() const = 0;
   virtual const std::vector<AudioCodec>& recv_codecs() const = 0;
-  virtual RtpCapabilities GetCapabilities() const = 0;
 
   // Starts AEC dump using existing file, a maximum file size in bytes can be
   // specified. Logging is stopped just before the size limit is exceeded.
@@ -83,7 +103,7 @@ class VoiceEngineInterface {
   virtual void StopAecDump() = 0;
 };
 
-class VideoEngineInterface {
+class VideoEngineInterface : public CapabilityQueryMixin {
  public:
   VideoEngineInterface() = default;
   virtual ~VideoEngineInterface() = default;
@@ -100,7 +120,6 @@ class VideoEngineInterface {
           video_bitrate_allocator_factory) = 0;
 
   virtual std::vector<VideoCodec> codecs() const = 0;
-  virtual RtpCapabilities GetCapabilities() const = 0;
 };
 
 // MediaEngineInterface is an abstraction of a media engine which can be

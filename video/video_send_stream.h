@@ -83,6 +83,8 @@ class VideoSendStream : public webrtc::VideoSendStream {
                  const DegradationPreference& degradation_preference) override;
 
   void ReconfigureVideoEncoder(VideoEncoderConfig) override;
+  void SetRtpHeaderExtensions(
+      const std::vector<RtpExtension>& extensions) override;
   Stats GetStats() override;
 
   void StopPermanentlyAndGetRtpStates(RtpStateMap* rtp_state_map,

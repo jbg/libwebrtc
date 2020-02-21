@@ -645,6 +645,31 @@ const ContentInfo* FindTransceiverMSection(
              : nullptr;
 }
 
+static std::vector<RtpHeaderExtensionCapabilityWithDirection>
+HeaderExtensionsToCapabilitiesWithDirection(
+    cricket::RtpHeaderExtensions extensions) {
+  std::vector<RtpHeaderExtensionCapabilityWithDirection> result;
+  for (const auto& extension : extensions) {
+    result.emplace_back(extension.uri, extension.id,
+                        RtpTransceiverDirectionFromRtpExtension(extension));
+  }
+  return result;
+}
+
+static std::vector<RtpHeaderExtensionCapabilityWithDirection>
+ConvertOptionalDirectionHeaderExtensionCapabilities(
+    std::vector<RtpHeaderExtensionCapabilityWithOptionalDirection>
+        optional_direction_extensions) {
+  std::vector<RtpHeaderExtensionCapabilityWithDirection> result;
+  for (const auto& optional : optional_direction_extensions) {
+    if (!optional.direction)
+      continue;
+    result.emplace_back(optional.uri, optional.preferred_id,
+                        *optional.direction);
+  }
+  return result;
+}
+
 // Wraps a CreateSessionDescriptionObserver and an OperationsChain operation
 // complete callback. When the observer is invoked, the wrapped observer is
 // invoked followed by invoking the completion callback.
@@ -4884,6 +4909,8 @@ void PeerConnection::GetOptionsForOffer(
           RTC_FROM_HERE,
           rtc::Bind(&cricket::PortAllocator::GetPooledIceCredentials,
                     port_allocator_.get()));
+  // ??? Set this depending on if more than 14 extensions offered, or 2-byte
+  // extension present???
   session_options->offer_extmap_allow_mixed =
       configuration_.offer_extmap_allow_mixed;
 
@@ -4961,19 +4988,21 @@ void PeerConnection::GetOptionsForPlanBOffer(
 
   // Add audio/video/data m= sections to the end if needed.
   if (!audio_index && offer_new_audio_description) {
-    session_options->media_description_options.push_back(
-        cricket::MediaDescriptionOptions(
-            cricket::MEDIA_TYPE_AUDIO, cricket::CN_AUDIO,
-            RtpTransceiverDirectionFromSendRecv(send_audio, recv_audio),
-            false));
+    cricket::MediaDescriptionOptions options(
+        cricket::MEDIA_TYPE_AUDIO, cricket::CN_AUDIO,
+        RtpTransceiverDirectionFromSendRecv(send_audio, recv_audio), false);
+    options.header_extensions = HeaderExtensionsToCapabilitiesWithDirection(
+        channel_manager()->LegacyGetSupportedAudioRtpHeaderExtensions());
+    session_options->media_description_options.push_back(options);
     audio_index = session_options->media_description_options.size() - 1;
   }
   if (!video_index && offer_new_video_description) {
-    session_options->media_description_options.push_back(
-        cricket::MediaDescriptionOptions(
-            cricket::MEDIA_TYPE_VIDEO, cricket::CN_VIDEO,
-            RtpTransceiverDirectionFromSendRecv(send_video, recv_video),
-            false));
+    cricket::MediaDescriptionOptions options(
+        cricket::MEDIA_TYPE_VIDEO, cricket::CN_VIDEO,
+        RtpTransceiverDirectionFromSendRecv(send_video, recv_video), false);
+    options.header_extensions = HeaderExtensionsToCapabilitiesWithDirection(
+        channel_manager()->LegacyGetSupportedVideoRtpHeaderExtensions());
+    session_options->media_description_options.push_back(options);
     video_index = session_options->media_description_options.size() - 1;
   }
   if (!data_index && offer_new_data_description) {
@@ -5005,6 +5034,9 @@ GetMediaDescriptionOptionsForTransceiver(
       transceiver->stopped());
   media_description_options.codec_preferences =
       transceiver->codec_preferences();
+  media_description_options.header_extensions =
+      ConvertOptionalDirectionHeaderExtensionCapabilities(
+          transceiver->header_extensions_to_offer());
   // This behavior is specified in JSEP. The gist is that:
   // 1. The MSID is included if the RtpTransceiver's direction is sendonly or
   //    sendrecv.

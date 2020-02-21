@@ -179,6 +179,12 @@ void VideoSendStream::ReconfigureVideoEncoder(VideoEncoderConfig config) {
       config_.rtp.max_packet_size - CalculateMaxHeaderSize(config_.rtp));
 }
 
+void VideoSendStream::SetRtpHeaderExtensions(
+    const std::vector<RtpExtension>& extensions) {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  send_stream_->SetRtpHeaderExtensions(extensions);
+}
+
 VideoSendStream::Stats VideoSendStream::GetStats() {
   // TODO(perkj, solenberg): Some test cases in EndToEndTest call GetStats from
   // a network thread. See comment in Call::GetStats().

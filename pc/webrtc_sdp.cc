@@ -191,6 +191,7 @@ static const char kSdpDelimiterColon[] = ":";
 static const char kSdpDelimiterColonChar = ':';
 static const char kSdpDelimiterSemicolon[] = ";";
 static const char kSdpDelimiterSemicolonChar = ';';
+static const char kSdpDelimiterSlash[] = "/";
 static const char kSdpDelimiterSlashChar = '/';
 static const char kNewLine[] = "\n";
 static const char kNewLineChar = '\n';
@@ -265,6 +266,8 @@ static void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
                                       const cricket::MediaType media_type,
                                       int msid_signaling,
                                       std::string* message);
+static std::string GetRtpHeaderExtensionDirection(
+    const RtpExtension& extension);
 static void BuildRtpMap(const MediaContentDescription* media_desc,
                         const cricket::MediaType media_type,
                         std::string* message);
@@ -1294,6 +1297,25 @@ bool ParseExtmap(const std::string& line,
   if (!GetValueFromString(line, sub_fields[0], &value, error)) {
     return false;
   }
+  bool send_enabled = true;
+  bool receive_enabled = true;
+  // RFC8285, chapter 5 "SDP Signaling Design"
+  if (sub_fields.size() >= 2) {
+    const std::string& direction = sub_fields[1];
+    if (direction == "sendonly") {
+      receive_enabled = false;
+    } else if (direction == "recvonly") {
+      send_enabled = false;
+    } else if (direction == "inactive") {
+      receive_enabled = false;
+      send_enabled = false;
+    } else if (direction != "sendrecv") {
+      return ParseFailed(line,
+                         "Specified extmap direction is not in [\"sendonly\", "
+                         "\"recvonly\", \"sendrecv\", \"inactive\"].",
+                         error);
+    }
+  }
 
   bool encrypted = false;
   if (uri == RtpExtension::kEncryptHeaderExtensionsUri) {
@@ -1314,6 +1336,8 @@ bool ParseExtmap(const std::string& line,
   }
 
   *extmap = RtpExtension(uri, value, encrypted);
+  extmap->send_enabled = send_enabled;
+  extmap->receive_enabled = receive_enabled;
   return true;
 }
 
@@ -1574,6 +1598,8 @@ void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
     const RtpExtension& extension = media_desc->rtp_header_extensions()[i];
     InitAttrLine(kAttributeExtmap, &os);
     os << kSdpDelimiterColon << extension.id;
+    if (!(extension.send_enabled && extension.receive_enabled))
+      os << kSdpDelimiterSlash << GetRtpHeaderExtensionDirection(extension);
     if (extension.encrypt) {
       os << kSdpDelimiterSpace << RtpExtension::kEncryptHeaderExtensionsUri;
     }
@@ -1745,6 +1771,21 @@ void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
     os << kSdpDelimiterColon
        << serializer.SerializeSimulcastDescription(simulcast);
     AddLine(os.str(), message);
+  }
+}
+
+std::string GetRtpHeaderExtensionDirection(
+    const webrtc::RtpExtension& extension) {
+  if (extension.send_enabled) {
+    if (extension.receive_enabled)
+      return "sendrecv";
+    else
+      return "sendonly";
+  } else {
+    if (extension.receive_enabled)
+      return "recvonly";
+    else
+      return "inactive";
   }
 }
 

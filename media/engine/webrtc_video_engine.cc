@@ -491,39 +491,36 @@ std::vector<VideoCodec> WebRtcVideoEngine::codecs() const {
   return AssignPayloadTypesAndDefaultCodecs(encoder_factory_.get());
 }
 
-RtpCapabilities WebRtcVideoEngine::GetCapabilities() const {
-  RtpCapabilities capabilities;
+std::vector<
+    std::pair<webrtc::RtpExtension, CapabilityQueryMixin::RtpExtensionEnabled>>
+WebRtcVideoEngine::GetRtpHeaderExtensions() const {
+  std::vector<std::pair<webrtc::RtpExtension,
+                        CapabilityQueryMixin::RtpExtensionEnabled>>
+      result;
   int id = 1;
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kTimestampOffsetUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kAbsSendTimeUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kVideoRotationUri, id++));
-  capabilities.header_extensions.push_back(webrtc::RtpExtension(
-      webrtc::RtpExtension::kTransportSequenceNumberUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kPlayoutDelayUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kVideoContentTypeUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kVideoTimingUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kFrameMarkingUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kColorSpaceUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kMidUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kRidUri, id++));
-  capabilities.header_extensions.push_back(
-      webrtc::RtpExtension(webrtc::RtpExtension::kRepairedRidUri, id++));
-  if (webrtc::field_trial::IsEnabled("WebRTC-GenericDescriptorAdvertised")) {
-    capabilities.header_extensions.push_back(webrtc::RtpExtension(
-        webrtc::RtpExtension::kGenericFrameDescriptorUri00, id++));
+  for (const auto& uri :
+       {webrtc::RtpExtension::kTimestampOffsetUri,
+        webrtc::RtpExtension::kAbsSendTimeUri,
+        webrtc::RtpExtension::kVideoRotationUri,
+        webrtc::RtpExtension::kTransportSequenceNumberUri,
+        webrtc::RtpExtension::kPlayoutDelayUri,
+        webrtc::RtpExtension::kVideoContentTypeUri,
+        webrtc::RtpExtension::kVideoTimingUri,
+        webrtc::RtpExtension::kFrameMarkingUri,
+        webrtc::RtpExtension::kColorSpaceUri, webrtc::RtpExtension::kMidUri,
+        webrtc::RtpExtension::kRidUri, webrtc::RtpExtension::kRepairedRidUri}) {
+    result.push_back(
+        {webrtc::RtpExtension(uri, id++), RtpExtensionEnabled::kEnabled});
   }
-
-  return capabilities;
+  const RtpExtensionEnabled enabled =
+      webrtc::field_trial::IsEnabled("WebRTC-GenericDescriptorAdvertised")
+          ? RtpExtensionEnabled::kEnabled
+          : RtpExtensionEnabled::kStopped;
+  result.push_back(
+      {webrtc::RtpExtension(webrtc::RtpExtension::kGenericFrameDescriptorUri00,
+                            id++),
+       enabled});
+  return result;
 }
 
 WebRtcVideoChannel::WebRtcVideoChannel(
@@ -2095,15 +2092,23 @@ webrtc::RTCError WebRtcVideoChannel::WebRtcVideoSendStream::SetRtpParameters(
       new_send_state = true;
     }
   }
+  const bool header_extensions_changed =
+      new_parameters.header_extensions != rtp_parameters_.header_extensions;
   rtp_parameters_ = new_parameters;
   // Codecs are currently handled at the WebRtcVideoChannel level.
   rtp_parameters_.codecs.clear();
+  RTC_LOG(LS_ERROR) << "WebRtcVideoSendStream::SetRtpParameters: reconfig_enc: "
+                    << reconfigure_encoder
+                    << " new_send_state: " << new_send_state;
   if (reconfigure_encoder || new_send_state) {
     ReconfigureEncoder();
   }
   if (new_send_state) {
     UpdateSendState();
   }
+  if (header_extensions_changed)
+    stream_->SetRtpHeaderExtensions(rtp_parameters_.header_extensions);
+
   if (new_degradation_preference) {
     if (source_ && stream_) {
       stream_->SetSource(this, GetDegradationPreference());

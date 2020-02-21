@@ -124,12 +124,15 @@ webrtc::RTCError CheckRtpParametersInvalidModificationAndValues(
         RTCErrorType::INVALID_MODIFICATION,
         "Attempted to set RtpParameters with modified RTCP parameters");
   }
-  if (rtp_parameters.header_extensions !=
-      old_rtp_parameters.header_extensions) {
+
+  // xxx follow spec semantics.
+  if (0 && rtp_parameters.header_extensions !=
+               old_rtp_parameters.header_extensions) {
     LOG_AND_RETURN_ERROR(
         RTCErrorType::INVALID_MODIFICATION,
         "Attempted to set RtpParameters with modified header extensions");
   }
+
   if (!absl::c_equal(old_rtp_parameters.encodings, rtp_parameters.encodings,
                      [](const webrtc::RtpEncodingParameters& encoding1,
                         const webrtc::RtpEncodingParameters& encoding2) {
@@ -177,6 +180,22 @@ const VoiceEngineInterface& CompositeMediaEngine::voice() const {
 
 const VideoEngineInterface& CompositeMediaEngine::video() const {
   return *video_engine_.get();
+}
+
+RtpCapabilities CapabilityQueryMixin::GetCapabilities() const {
+  RtpCapabilities capabilities;
+  capabilities.header_extensions = LegacyGetRtpHeaderExtensions();
+  return capabilities;
+}
+
+std::vector<webrtc::RtpExtension>
+CapabilityQueryMixin::LegacyGetRtpHeaderExtensions() const {
+  std::vector<webrtc::RtpExtension> extensions;
+  for (const auto& extension_and_stopped : GetRtpHeaderExtensions()) {
+    if (extension_and_stopped.second == RtpExtensionEnabled::kEnabled)
+      extensions.push_back(extension_and_stopped.first);
+  }
+  return extensions;
 }
 
 }  // namespace cricket

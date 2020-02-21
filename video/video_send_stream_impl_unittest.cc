@@ -82,6 +82,8 @@ class MockRtpVideoSender : public RtpVideoSenderInterface {
                      std::vector<RtpSequenceNumberMap::Info>(
                          uint32_t ssrc,
                          rtc::ArrayView<const uint16_t> sequence_numbers));
+  MOCK_METHOD1(SetRtpHeaderExtensions,
+               void(const std::vector<RtpExtension>& extensions));
 
   MOCK_METHOD1(SetFecAllowed, void(bool fec_allowed));
 };

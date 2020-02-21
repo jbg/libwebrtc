@@ -585,6 +585,12 @@ void ModuleRtpRtcpImpl::DeregisterSendRtpHeaderExtension(
   rtp_sender_->packet_generator.DeregisterRtpHeaderExtension(uri);
 }
 
+bool ModuleRtpRtcpImpl::IsRtpHeaderExtensionRegistered(
+    absl::string_view uri) const {
+  RTPExtensionType type = RtpHeaderExtensionMap::RtpExtensionTypeFromUri(uri);
+  return rtp_sender_->packet_generator.IsRtpHeaderExtensionRegistered(type);
+}
+
 // (TMMBR) Temporary Max Media Bit Rate.
 bool ModuleRtpRtcpImpl::TMMBR() const {
   return rtcp_sender_.TMMBR();
