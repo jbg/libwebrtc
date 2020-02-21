@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4ea97da8_543fc0e9",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-21T18:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c849624_6d6e4b37",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d9289a5_89a47a63",
         "filename": "api/voip/voip_channel.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "078ce95f_fa2960c4",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-21T18:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d9289a5_89a47a63",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 12
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "815fb6de_5d8f2ffc",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-21T18:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d536393d_2838f9ae",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f22f8915_610bbea4",
         "filename": "api/voip/voip_channel.h",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb6cd431_189a2a73",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-21T18:39:55Z",
+      "side": 1,
+      "message": "Agreed that it\u0027s confusing to use that name. Changed the name of interface to VoipBase as the old voe api was before.",
+      "parentUuid": "f22f8915_610bbea4",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 27
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9196e7c5_1407eae3",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-21T18:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cdf6aba_b7eac003",
+      "range": {
+        "startLine": 36,
+        "startChar": 10,
+        "endLine": 36,
+        "endChar": 14
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7478d2f_4a389b25",
         "filename": "api/voip/voip_codec.h",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "68798ab5_3c404a10",
+        "filename": "api/voip/voip_codec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-21T18:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7478d2f_4a389b25",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 28,
+        "endChar": 61
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c627e28_8d11bdb0",
         "filename": "api/voip/voip_network.h",
         "patchSetId": 2
@@ -160,6 +304,30 @@
       "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5329b665_9f23a453",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-21T18:39:55Z",
+      "side": 1,
+      "message": "I will document it in each interface header.",
+      "parentUuid": "5c627e28_8d11bdb0",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 29
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
