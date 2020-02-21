@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03e86892_5bb748c5",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-02-21T11:34:16Z",
+      "side": 1,
+      "message": "This should probably just be:\n\n  visibility \u003d [ \"*\" ]\n\nIf it is used outside of WebRTC itself it becomes public even if we limit it so I would just go with \"*\".\n\nDo you have a CL that uses WebRTC fake clock in Chromium?",
+      "range": {
+        "startLine": 1006,
+        "startChar": 0,
+        "endLine": 1009,
+        "endChar": 3
+      },
+      "revId": "bf63459ec48f32b061a63d3becfca224f4ebe857",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a88333b9_47cfe0b6",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-02-21T11:34:16Z",
+      "side": 1,
+      "message": "Instead of public_deps we should consider rtc_fake_clock_for_test to be a different target and update all the targets to depend on rtc_fake_clock_for_test if they include fake_clock.h.",
+      "range": {
+        "startLine": 1067,
+        "startChar": 2,
+        "endLine": 1067,
+        "endChar": 13
+      },
+      "revId": "bf63459ec48f32b061a63d3becfca224f4ebe857",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
