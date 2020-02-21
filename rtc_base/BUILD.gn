@@ -1001,13 +1001,29 @@ rtc_library("testclient") {
   ]
 }
 
+rtc_library("rtc_fake_clock_for_test") {
+  testonly = true
+  visibility = [
+    ":*",
+    "//third_party/blink/renderer/platform:blink_platform_unittests_sources",
+  ]
+  sources = [
+    "fake_clock.cc",
+    "fake_clock.h",
+  ]
+  deps = [
+    ":checks",
+    ":rtc_base",
+    "../api/units:time_delta",
+    "../api/units:timestamp",
+  ]
+}
+
 rtc_library("rtc_base_tests_utils") {
   testonly = true
   sources = [
     "cpu_time.cc",
     "cpu_time.h",
-    "fake_clock.cc",
-    "fake_clock.h",
     "fake_mdns_responder.h",
     "fake_network.h",
     "fake_ssl_identity.cc",
@@ -1043,13 +1059,12 @@ rtc_library("rtc_base_tests_utils") {
   deps = [
     ":checks",
     ":rtc_base",
-    "../api/units:time_delta",
-    "../api/units:timestamp",
     "memory:fifo_buffer",
     "third_party/sigslot",
     "//third_party/abseil-cpp/absl/algorithm:container",
     "//third_party/abseil-cpp/absl/memory",
   ]
+  public_deps = [ ":rtc_fake_clock_for_test" ]  # no-presubmit-check TODO(webrtc:8603)
 }
 
 rtc_library("task_queue_for_test") {
