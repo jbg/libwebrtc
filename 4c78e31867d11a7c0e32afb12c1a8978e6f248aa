@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c849624_6d6e4b37",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-02-21T07:54:20Z",
+      "side": 1,
+      "message": "Briefly describe what this this interface represents.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d536393d_2838f9ae",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-02-21T07:54:20Z",
+      "side": 1,
+      "message": "|argument| is used for arguments to the method, so remove them here.",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f22f8915_610bbea4",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-02-21T07:54:20Z",
+      "side": 1,
+      "message": "It is kind of confusing with a VoipChannel that creates a channel. What\u0027s that, a VoipChannelChild? What happens if you call this method multiple times? What does this method really, do, does it create a (sub)channel or does it just initialize the channel?",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 27
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cdf6aba_b7eac003",
+        "filename": "api/voip/voip_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-02-21T07:54:20Z",
+      "side": 1,
+      "message": "I\u0027m going to guess these return true on success, but I think you should document that somewhere.",
+      "range": {
+        "startLine": 36,
+        "startChar": 10,
+        "endLine": 36,
+        "endChar": 14
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7478d2f_4a389b25",
+        "filename": "api/voip/voip_codec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-02-21T07:54:20Z",
+      "side": 1,
+      "message": "Nit: punctuation",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 28,
+        "endChar": 61
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c627e28_8d11bdb0",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-02-21T07:54:20Z",
+      "side": 1,
+      "message": "Document what |channel| is (data and length are pretty obvious). I guess it\u0027s a number returned from VoipChannel::CreateChannel?",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 29
+      },
+      "revId": "4c78e31867d11a7c0e32afb12c1a8978e6f248aa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
