@@ -979,6 +979,7 @@ rtc_library("gunit_helpers") {
     ":logging",
     ":rtc_base",
     ":rtc_base_tests_utils",
+    ":rtc_fake_clock_for_test",
     ":stringutils",
     "../test:test_support",
     "//third_party/abseil-cpp/absl/strings",
@@ -997,7 +998,23 @@ rtc_library("testclient") {
     ":macromagic",
     ":rtc_base",
     ":rtc_base_tests_utils",
+    ":rtc_fake_clock_for_test",
     ":timeutils",
+  ]
+}
+
+rtc_library("rtc_fake_clock_for_test") {
+  testonly = true
+  visibility = [ "*" ]
+  sources = [
+    "fake_clock.cc",
+    "fake_clock.h",
+  ]
+  deps = [
+    ":checks",
+    ":rtc_base",
+    "../api/units:time_delta",
+    "../api/units:timestamp",
   ]
 }
 
@@ -1006,8 +1023,6 @@ rtc_library("rtc_base_tests_utils") {
   sources = [
     "cpu_time.cc",
     "cpu_time.h",
-    "fake_clock.cc",
-    "fake_clock.h",
     "fake_mdns_responder.h",
     "fake_network.h",
     "fake_ssl_identity.cc",
@@ -1043,8 +1058,7 @@ rtc_library("rtc_base_tests_utils") {
   deps = [
     ":checks",
     ":rtc_base",
-    "../api/units:time_delta",
-    "../api/units:timestamp",
+    ":rtc_fake_clock_for_test",
     "memory:fifo_buffer",
     "third_party/sigslot",
     "//third_party/abseil-cpp/absl/algorithm:container",
@@ -1172,6 +1186,7 @@ if (rtc_include_tests) {
       ":rtc_base",
       ":rtc_base_approved",
       ":rtc_base_tests_utils",
+      ":rtc_fake_clock_for_test",
       ":rtc_task_queue",
       ":safe_compare",
       ":safe_minmax",
@@ -1319,6 +1334,7 @@ if (rtc_include_tests) {
       ":checks",
       ":gunit_helpers",
       ":rtc_base_tests_utils",
+      ":rtc_fake_clock_for_test",
       ":stringutils",
       ":testclient",
       "../api:array_view",
