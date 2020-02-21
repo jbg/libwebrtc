@@ -45,6 +45,30 @@
       "revId": "bf63459ec48f32b061a63d3becfca224f4ebe857",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8e7eb06_9ee61ea7",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-02-21T12:02:40Z",
+      "side": 1,
+      "message": "if we do visibility \u003d [ \"*\" ] on rtc_fake_clock_for_test, then update all dependent targets makes sense.",
+      "parentUuid": "a88333b9_47cfe0b6",
+      "range": {
+        "startLine": 1067,
+        "startChar": 2,
+        "endLine": 1067,
+        "endChar": 13
+      },
+      "revId": "bf63459ec48f32b061a63d3becfca224f4ebe857",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
