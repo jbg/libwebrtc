@@ -138,7 +138,18 @@ class OveruseFrameDetectorResourceAdaptationModule
     enum class Mode { kAdaptUp, kAdaptDown } mode_;
   };
 
+  // TODO(hbos): Can these be const?
+  // Preconditions for OnResourceUnderuse() to adapt up.
+  bool ExistsHigherSetting(AdaptationObserverInterface::AdaptReason reason);
+  bool WaitingForPreviousAdaptationToGoUp(int input_pixel_count);
+  bool BalancedSettingsAllowsAdaptingUp(
+      AdaptationObserverInterface::AdaptReason reason);
+  // Adapts up if preconditions apply and VideoSourceRestrictor allows it.
   void OnResourceUnderuse(AdaptationObserverInterface::AdaptReason reason);
+  // Preconditions for OnResourceOveruse() to adapt down.
+  bool ExistsLowerSetting(int input_frame_rate);
+  bool WaitingForPreviousAdaptationToGoDown(int input_pixel_count);
+  // Adapts down if preconditions apply and VideoSourceRestrictor allows it.
   ResourceListenerResponse OnResourceOveruse(
       AdaptationObserverInterface::AdaptReason reason);
 
