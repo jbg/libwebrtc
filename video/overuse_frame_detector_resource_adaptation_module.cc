@@ -650,45 +650,63 @@ bool OveruseFrameDetectorResourceAdaptationModule::OnResourceOveruseForTesting(
          ResourceListenerResponse::kQualityScalerShouldIncreaseFrequency;
 }
 
+bool OveruseFrameDetectorResourceAdaptationModule::ExistsHigherSetting(
+    AdaptationObserverInterface::AdaptReason reason) {
+  const AdaptCounter& adapt_counter = GetConstAdaptCounter();
+  int num_downgrades = adapt_counter.TotalCount(reason);
+  RTC_DCHECK_GE(num_downgrades, 0);
+  return num_downgrades != 0;
+}
+
+bool OveruseFrameDetectorResourceAdaptationModule::
+    HasIncreasedQualitySinceLastUnderuse(
+        const AdaptationRequest& adaptation_request) {
+  bool last_adaptation_was_up =
+      last_adaptation_request_ &&
+      last_adaptation_request_->mode_ == AdaptationRequest::Mode::kAdaptUp;
+  // TODO(hbos): What about other degradation preferences?
+  if (EffectiveDegradataionPreference() ==
+      DegradationPreference::MAINTAIN_FRAMERATE) {
+    if (last_adaptation_was_up &&
+        adaptation_request.input_pixel_count_ <=
+            last_adaptation_request_->input_pixel_count_) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool OveruseFrameDetectorResourceAdaptationModule::
+    BalancedSettingsAllowsAdaptingFrameRateOrResolution(
+        AdaptationObserverInterface::AdaptReason reason) {
+  // This constraint is only applicable if reason is kQuality and preference is
+  // BALANCED.
+  if (reason != AdaptationObserverInterface::AdaptReason::kQuality ||
+      EffectiveDegradataionPreference() != DegradationPreference::BALANCED) {
+    return true;
+  }
+  return balanced_settings_.CanAdaptUp(GetVideoCodecTypeOrGeneric(),
+                                       LastInputFrameSizeOrDefault(),
+                                       encoder_target_bitrate_bps_.value_or(0));
+}
+
 void OveruseFrameDetectorResourceAdaptationModule::OnResourceUnderuse(
     AdaptationObserverInterface::AdaptReason reason) {
   if (!has_input_video_)
     return;
-  const AdaptCounter& adapt_counter = GetConstAdaptCounter();
-  int num_downgrades = adapt_counter.TotalCount(reason);
-  if (num_downgrades == 0)
+  if (!ExistsHigherSetting(reason))
     return;
-  RTC_DCHECK_GT(num_downgrades, 0);
-
   AdaptationRequest adaptation_request = {
       LastInputFrameSizeOrDefault(),
       encoder_stats_observer_->GetInputFrameRate(),
       AdaptationRequest::Mode::kAdaptUp};
-
-  bool adapt_up_requested =
-      last_adaptation_request_ &&
-      last_adaptation_request_->mode_ == AdaptationRequest::Mode::kAdaptUp;
-
-  if (EffectiveDegradataionPreference() ==
-      DegradationPreference::MAINTAIN_FRAMERATE) {
-    if (adapt_up_requested &&
-        adaptation_request.input_pixel_count_ <=
-            last_adaptation_request_->input_pixel_count_) {
-      // Don't request higher resolution if the current resolution is not
-      // higher than the last time we asked for the resolution to be higher.
-      return;
-    }
-  }
+  if (!HasIncreasedQualitySinceLastUnderuse(adaptation_request))
+    return;
+  if (!BalancedSettingsAllowsAdaptingFrameRateOrResolution(reason))
+    return;
 
   switch (EffectiveDegradataionPreference()) {
     case DegradationPreference::BALANCED: {
-      // Check if quality should be increased based on bitrate.
-      if (reason == AdaptationObserverInterface::AdaptReason::kQuality &&
-          !balanced_settings_.CanAdaptUp(
-              GetVideoCodecTypeOrGeneric(), LastInputFrameSizeOrDefault(),
-              encoder_target_bitrate_bps_.value_or(0))) {
-        return;
-      }
       // Try scale up framerate, if higher.
       int fps = balanced_settings_.MaxFps(GetVideoCodecTypeOrGeneric(),
                                           LastInputFrameSizeOrDefault());
@@ -696,7 +714,7 @@ void OveruseFrameDetectorResourceAdaptationModule::OnResourceUnderuse(
         source_restrictor_->IncreaseFrameRateTo(fps);
         GetAdaptCounter().DecrementFramerate(reason, fps);
         // Reset framerate in case of fewer fps steps down than up.
-        if (adapt_counter.FramerateCount() == 0 &&
+        if (GetConstAdaptCounter().FramerateCount() == 0 &&
             fps != std::numeric_limits<int>::max()) {
           RTC_LOG(LS_INFO) << "Removing framerate down-scaling setting.";
           source_restrictor_->IncreaseFrameRateTo(
@@ -725,7 +743,7 @@ void OveruseFrameDetectorResourceAdaptationModule::OnResourceUnderuse(
 
       // Scale up resolution.
       int pixel_count = adaptation_request.input_pixel_count_;
-      if (adapt_counter.ResolutionCount() == 1) {
+      if (GetConstAdaptCounter().ResolutionCount() == 1) {
         RTC_LOG(LS_INFO) << "Removing resolution down-scaling setting.";
         pixel_count = std::numeric_limits<int>::max();
       }
@@ -740,7 +758,7 @@ void OveruseFrameDetectorResourceAdaptationModule::OnResourceUnderuse(
     case DegradationPreference::MAINTAIN_RESOLUTION: {
       // Scale up framerate.
       int fps = adaptation_request.framerate_fps_;
-      if (adapt_counter.FramerateCount() == 1) {
+      if (GetConstAdaptCounter().FramerateCount() == 1) {
         RTC_LOG(LS_INFO) << "Removing framerate down-scaling setting.";
         fps = std::numeric_limits<int>::max();
       }
@@ -764,7 +782,7 @@ void OveruseFrameDetectorResourceAdaptationModule::OnResourceUnderuse(
 
   UpdateAdaptationStats(reason);
 
-  RTC_LOG(LS_INFO) << adapt_counter.ToString();
+  RTC_LOG(LS_INFO) << GetConstAdaptCounter().ToString();
 }
 
 ResourceListenerResponse
