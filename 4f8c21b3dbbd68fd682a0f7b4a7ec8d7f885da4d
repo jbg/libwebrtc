@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "483731c8_41e4600b",
+        "filename": "video/overuse_frame_detector_resource_adaptation_module.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-02-25T09:42:02Z",
+      "side": 1,
+      "message": "Why did you remove the local?",
+      "range": {
+        "startLine": 757,
+        "startChar": 10,
+        "endLine": 757,
+        "endChar": 32
+      },
+      "revId": "4f8c21b3dbbd68fd682a0f7b4a7ec8d7f885da4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
