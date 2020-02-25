@@ -327,6 +327,10 @@ class RTC_EXPORT RTCMediaStreamTrackStats final : public RTCStats {
   RTCNonStandardStatsMember<uint64_t> jitter_buffer_flushes;
   RTCNonStandardStatsMember<uint64_t> delayed_packet_outage_samples;
   RTCNonStandardStatsMember<double> relative_packet_arrival_delay;
+  // Preferred size of NetEq jitter buffer. This metric is implementation
+  // specific, so it can't be added into standard, but still is very important
+  // to analyze correctness of NetEq behavior.
+  RTCNonStandardStatsMember<double> preferred_jitter_buffer_size_ms;
   // TODO(henrik.lundin): Add description of the interruption metrics at
   // https://github.com/henbos/webrtc-provisional-stats/issues/17
   RTCNonStandardStatsMember<uint32_t> interruption_count;
