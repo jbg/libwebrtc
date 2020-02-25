@@ -22,6 +22,30 @@
       "revId": "4f8c21b3dbbd68fd682a0f7b4a7ec8d7f885da4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4938b3f7_c9e92170",
+        "filename": "video/overuse_frame_detector_resource_adaptation_module.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-25T09:58:52Z",
+      "side": 1,
+      "message": "It was used for evaluating preconditions before, but now it\u0027s only ever called once per enum value, i.e. it will only do one of the paths. That said I don\u0027t have a strong preference, I can re-introduce the local variable if you want.",
+      "parentUuid": "483731c8_41e4600b",
+      "range": {
+        "startLine": 757,
+        "startChar": 10,
+        "endLine": 757,
+        "endChar": 32
+      },
+      "revId": "4f8c21b3dbbd68fd682a0f7b4a7ec8d7f885da4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
