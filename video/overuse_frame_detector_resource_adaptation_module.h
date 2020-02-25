@@ -138,7 +138,17 @@ class OveruseFrameDetectorResourceAdaptationModule
     enum class Mode { kAdaptUp, kAdaptDown } mode_;
   };
 
+  // TODO(hbos): Make CanAdaptUp/CanAdaptDown const. This requires making other
+  // private methods const like GetConstAdaptCounter() and
+  // EffectiveDegradataionPreference().
+  // Preconditions for OnResourceUnderuse() to adapt up.
+  bool CanAdaptUp(AdaptationObserverInterface::AdaptReason reason,
+                  const AdaptationRequest& adaptation_request);
+  // Adapts up if preconditions apply and VideoSourceRestrictor allows it.
   void OnResourceUnderuse(AdaptationObserverInterface::AdaptReason reason);
+  // Preconditions for OnResourceOveruse() to adapt down.
+  bool CanAdaptDown(const AdaptationRequest& adaptation_request);
+  // Adapts down if preconditions apply and VideoSourceRestrictor allows it.
   ResourceListenerResponse OnResourceOveruse(
       AdaptationObserverInterface::AdaptReason reason);
 
