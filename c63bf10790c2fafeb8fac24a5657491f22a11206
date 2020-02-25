@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "cc9e1b16_5fa9d7f6",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T22:22:19Z",
+      "side": 1,
+      "message": "Yes, exactly. That will weaken the coupling between the headers, and between the build targets. Do it if you agree, skip it if you don\u0027t.",
+      "parentUuid": "2a34ff88_5befe6d0",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "426bf5b7_cd196626",
         "filename": "api/voip/voip_base.h",
         "patchSetId": 7
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Ok, let me turn local_ssrc as optional\u003cuint32_t\u003e so that when not set, it will be set as random as I think that\u0027s behavior on previous voice engine.",
       "parentUuid": "426bf5b7_cd196626",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4da2869_a9b702fc",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T22:22:19Z",
+      "side": 1,
+      "message": "And is having a null Transport OK? I guess if it isn\u0027t, the implementation could DCHECK it...",
+      "parentUuid": "a5a60865_e54a3304",
       "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -154,6 +190,30 @@
       "side": 1,
       "message": "I added more detail comments. \nAll methods can fail due to invalid channel id (eg. app using released channel id). Except for release channel, operations can fail here due to some system issue which is exposed by audio device module APIs where application should know there is an issue with audio device.",
       "parentUuid": "584b43e7_dc614dc2",
+      "range": {
+        "startLine": 58,
+        "startChar": 10,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3fa7b93_52e4c1a0",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T22:22:19Z",
+      "side": 1,
+      "message": "A released or otherwise invalid channel ID feels like something we should handle with DCHECK, not return values; the careless clients that use bad IDs can\u0027t be relied upon to handle return values either...\n\nDevice errors are a legitimate reason for returning a status code, *if* the caller could reasonably act on the information. For example, knowing that we failed to start sending seems useful, but knowing that we failed to stop sending, less so---what would we do?\n\n(Background: WebRTC has a long history of excessive use of error return codes; we\u0027d pass the errors up the stack a half dozen levels, only to finally ignore them because there was nothing we could do about it. But all the intervening levels looked like they were doing nice and professional error handling...)",
+      "parentUuid": "1053cd71_064dec83",
       "range": {
         "startLine": 58,
         "startChar": 10,
@@ -330,6 +390,30 @@
       "side": 1,
       "message": "Thanks. I actually thought it would be good for application to hold on to them as long as they\u0027re keeping proper scope.  Would it be a concern for API here?",
       "parentUuid": "aa261d7b_81cf9bb9",
+      "range": {
+        "startLine": 64,
+        "startChar": 18,
+        "endLine": 64,
+        "endChar": 19
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7f2c845_66c23780",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T22:22:19Z",
+      "side": 1,
+      "message": "Holding on to the pointers is more dangerous than retrieving them each time, but probably safe enough. I\u0027d still recommend returning references here because they\u0027re never null, though; callers that want pointers because they don\u0027t want to hold references can just employ the ampersand operator.",
+      "parentUuid": "d8e1179c_be85baa1",
       "range": {
         "startLine": 64,
         "startChar": 18,
