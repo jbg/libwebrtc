@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2a34ff88_5befe6d0",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Would you please elaborate on your approach?  Are you suggesting to use forward declaration?",
+      "parentUuid": "79b91790_9a22eccd",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "426bf5b7_cd196626",
         "filename": "api/voip/voip_base.h",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5a60865_e54a3304",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Ok, let me turn local_ssrc as optional\u003cuint32_t\u003e so that when not set, it will be set as random as I think that\u0027s behavior on previous voice engine.",
+      "parentUuid": "426bf5b7_cd196626",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "6e94e394_dd65387b",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Thanks. That\u0027s good suggestion. I will follow thru.",
+      "parentUuid": "39ee6a1c_b267cd83",
+      "range": {
+        "startLine": 50,
+        "startChar": 10,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "584b43e7_dc614dc2",
         "filename": "api/voip/voip_base.h",
         "patchSetId": 7
@@ -79,6 +139,30 @@
       "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1053cd71_064dec83",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "I added more detail comments. \nAll methods can fail due to invalid channel id (eg. app using released channel id). Except for release channel, operations can fail here due to some system issue which is exposed by audio device module APIs where application should know there is an issue with audio device.",
+      "parentUuid": "584b43e7_dc614dc2",
+      "range": {
+        "startLine": 58,
+        "startChar": 10,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "50abd927_86dca809",
+        "filename": "api/voip/voip_codec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb4949dd_5dd85c91",
+      "range": {
+        "startLine": 31,
+        "startChar": 10,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26ffb7bd_d245f6b9",
         "filename": "api/voip/voip_codec.h",
         "patchSetId": 7
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "64a34029_3bb4b64b",
+        "filename": "api/voip/voip_codec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26ffb7bd_d245f6b9",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66e39195_1389dca5",
         "filename": "api/voip/voip_engine.h",
         "patchSetId": 7
@@ -145,6 +277,24 @@
     },
     {
       "key": {
+        "uuid": "f31234d4_9149ec71",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66e39195_1389dca5",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa261d7b_81cf9bb9",
         "filename": "api/voip/voip_engine.h",
         "patchSetId": 7
@@ -156,6 +306,30 @@
       "writtenOn": "2020-02-25T10:47:56Z",
       "side": 1,
       "message": "Consider having these three methods return references instead of pointers, since (1) they are guaranteed to never be null, and (2) that makes it slightly harder to accidentally hold on to them.",
+      "range": {
+        "startLine": 64,
+        "startChar": 18,
+        "endLine": 64,
+        "endChar": 19
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8e1179c_be85baa1",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Thanks. I actually thought it would be good for application to hold on to them as long as they\u0027re keeping proper scope.  Would it be a concern for API here?",
+      "parentUuid": "aa261d7b_81cf9bb9",
       "range": {
         "startLine": 64,
         "startChar": 18,
@@ -185,6 +359,24 @@
     },
     {
       "key": {
+        "uuid": "433b397a_755e8bee",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c911a3f3_5c2daee9",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a790ae34_959983de",
         "filename": "api/voip/voip_network.h",
         "patchSetId": 7
@@ -205,6 +397,30 @@
       "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57fbf278_89942f26",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "I will remove also.  It does seems confusing. Thanks for catching that.",
+      "parentUuid": "a790ae34_959983de",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -231,6 +447,30 @@
     },
     {
       "key": {
+        "uuid": "f1352a22_56638ca2",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78b75fb3_3b02b846",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 28,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac3dcebf_c35f6a1c",
         "filename": "api/voip/voip_network.h",
         "patchSetId": 7
@@ -254,6 +494,30 @@
     },
     {
       "key": {
+        "uuid": "13911210_41e83278",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac3dcebf_c35f6a1c",
+      "range": {
+        "startLine": 29,
+        "startChar": 33,
+        "endLine": 30,
+        "endChar": 46
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4119097c_06350f66",
         "filename": "api/voip/voip_network.h",
         "patchSetId": 7
@@ -274,6 +538,30 @@
       "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "636839fe_734f38d9",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-25T21:03:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4119097c_06350f66",
+      "range": {
+        "startLine": 36,
+        "startChar": 34,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
