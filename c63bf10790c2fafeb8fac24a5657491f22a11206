@@ -1,0 +1,279 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79b91790_9a22eccd",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Consider not including this, letting callers do it themselves if they need it.",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "426bf5b7_cd196626",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Are these values reasonable defaults? I would have guessed that no reasonable defaults existed, in which case it\u0027s probably better to leave these uninitialized so that MSan can find errors.\n\nOr, skip the struct and have these two be regular arguments to CreateChannel. That way callers can\u0027t forget.",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39ee6a1c_b267cd83",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "In order to make the API harder to misuse, consider using a less general type than `int` for IDs. If you don\u0027t want to go the whole way and make a Channel interface that has all the operations you can perform on a channel (and have CreateChannel return unique_ptr\u003cChannel\u003e), consider at least making an opaque identifier type. https://godbolt.org/z/ozdLXY sketches out how to do that with an empty enum class.\n\nOh, and please use absl::optional instead of magic values to indicate errors. Also because it makes it harder to misuse things. That way you can return optional\u003cChannelId\u003e here, but have the other methods accept a non-optional ChannelId.",
+      "range": {
+        "startLine": 50,
+        "startChar": 10,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "584b43e7_dc614dc2",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Document the return value, or change to void. (More cases of this below.) Please use void unless the operation can actually fail and the caller can actually handle it somehow.",
+      "range": {
+        "startLine": 58,
+        "startChar": 10,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb4949dd_5dd85c91",
+        "filename": "api/voip/voip_codec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Document the return value, or change to void.",
+      "range": {
+        "startLine": 31,
+        "startChar": 10,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26ffb7bd_d245f6b9",
+        "filename": "api/voip/voip_codec.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Document the return value, or change to void.",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66e39195_1389dca5",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Consider not including these three. That way, users of VoipEngine get to include them themselves, and can skip doing so if they don\u0027t use them.",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa261d7b_81cf9bb9",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Consider having these three methods return references instead of pointers, since (1) they are guaranteed to never be null, and (2) that makes it slightly harder to accidentally hold on to them.",
+      "range": {
+        "startLine": 64,
+        "startChar": 18,
+        "endLine": 64,
+        "endChar": 19
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c911a3f3_5c2daee9",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Put this one before the other methods. https://google.github.io/styleguide/cppguide.html#Declaration_Order",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a790ae34_959983de",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Does this means the whole packet including the RTP header? \"also\" suggests that this info is passed some other way, but I suspect not?",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78b75fb3_3b02b846",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Please document the return value. Or change to void if it\u0027s not needed.",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 28,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac3dcebf_c35f6a1c",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Please use ArrayView instead. It\u0027s much safer and pleasant to use.",
+      "range": {
+        "startLine": 29,
+        "startChar": 33,
+        "endLine": 30,
+        "endChar": 46
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4119097c_06350f66",
+        "filename": "api/voip/voip_network.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-25T10:47:56Z",
+      "side": 1,
+      "message": "Here too.",
+      "range": {
+        "startLine": 36,
+        "startChar": 34,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
