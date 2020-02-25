@@ -130,9 +130,28 @@ class OveruseFrameDetectorResourceAdaptationModule
     enum class Mode { kAdaptUp, kAdaptDown } mode_;
   };
 
+ public:
+  enum class AdaptationAction {
+    kIncreaseResolution,
+    kDecreaseResolution,
+    kIncreaseFrameRate,
+    kDecreaseFrameRate,
+  };
+
+  struct AdaptationTarget {
+    AdaptationTarget(AdaptationAction action, int value);
+    // Which action the VideoSourceRestrictor needs to take.
+    const AdaptationAction action;
+    // Target pixel count or frame rate depending on |action|.
+    const int value;
+  };
+ private:
+
   // Preconditions for OnResourceUnderuse() to adapt up.
   bool CanAdaptUp(AdaptationObserverInterface::AdaptReason reason,
                   const AdaptationRequest& adaptation_request) const;
+  absl::optional<AdaptationTarget> GetAdaptUpTarget(
+      AdaptationObserverInterface::AdaptReason reason) const;
   // Adapts up if preconditions apply and VideoSourceRestrictor allows it.
   // TODO(https://crbug.com/webrtc/11222): This method is still a "Maybe" method
   // due to the remaining VideoSourceRestrictor logic and it implicitly
