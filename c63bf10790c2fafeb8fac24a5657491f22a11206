@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "5a3cc220_84e73ce4",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-26T17:17:29Z",
+      "side": 1,
+      "message": "I made the change accordingly in new code review.",
+      "parentUuid": "cc9e1b16_5fa9d7f6",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "426bf5b7_cd196626",
         "filename": "api/voip/voip_base.h",
         "patchSetId": 7
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "And is having a null Transport OK? I guess if it isn\u0027t, the implementation could DCHECK it...",
       "parentUuid": "a5a60865_e54a3304",
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edcced91_881151b6",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-26T17:17:29Z",
+      "side": 1,
+      "message": "Yes, RtpRtcp instance won\u0027t start using null transport.  But I will check DCHECK in voip engine layer as well.",
+      "parentUuid": "a4da2869_a9b702fc",
       "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -214,6 +250,30 @@
       "side": 1,
       "message": "A released or otherwise invalid channel ID feels like something we should handle with DCHECK, not return values; the careless clients that use bad IDs can\u0027t be relied upon to handle return values either...\n\nDevice errors are a legitimate reason for returning a status code, *if* the caller could reasonably act on the information. For example, knowing that we failed to start sending seems useful, but knowing that we failed to stop sending, less so---what would we do?\n\n(Background: WebRTC has a long history of excessive use of error return codes; we\u0027d pass the errors up the stack a half dozen levels, only to finally ignore them because there was nothing we could do about it. But all the intervening levels looked like they were doing nice and professional error handling...)",
       "parentUuid": "1053cd71_064dec83",
+      "range": {
+        "startLine": 58,
+        "startChar": 10,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "896c39e7_866d4791",
+        "filename": "api/voip/voip_base.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-26T17:17:29Z",
+      "side": 1,
+      "message": "I totally agree with you on this as long time voice engine user myself.  I actually only cared about VoEBase::StartSend() and VoEBase::StartPlayout() failure because then I had some other logic to handle this.  (It\u0027s strange but some customer we had in previous company actually wanted to run VoIP without microphone which then I had to check StartSend failure and no microphone presence to allow VoIP to continue.)\n\nAs I mentioned in the comment, it will be great to come up with cleaner way to indicate the error user is experiencing. \n\nRegarding StopSend failure, I agree with your thought. From my (application user) perspective, it was important to track every single detail on what\u0027s happening underneath voice engine to troubleshoot any customer issue.  If call dropped or wasn\u0027t working properly, I had to find any clue to understand customer\u0027s issue that I added log for any possible failure to these interfaces. Perhaps I can emit some RTC_LOG(ERROR) and hope that will be caught by application?",
+      "parentUuid": "a3fa7b93_52e4c1a0",
       "range": {
         "startLine": 58,
         "startChar": 10,
@@ -423,6 +483,30 @@
       "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "973447e0_f6b8da74",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-02-26T17:17:29Z",
+      "side": 1,
+      "message": "oh that\u0027s true.  I will change to reference then. Then I will need to include all the headers here as well.",
+      "parentUuid": "c7f2c845_66c23780",
+      "range": {
+        "startLine": 64,
+        "startChar": 18,
+        "endLine": 64,
+        "endChar": 19
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
