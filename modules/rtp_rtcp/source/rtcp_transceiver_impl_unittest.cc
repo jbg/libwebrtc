@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "api/rtp_headers.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "modules/rtp_rtcp/include/receive_statistics.h"
 #include "modules/rtp_rtcp/mocks/mock_rtcp_rtt_stats.h"
@@ -422,6 +423,50 @@ TEST(RtcpTransceiverImplTest, SetRembUpdatesValuesToSend) {
   EXPECT_EQ(rtcp_parser.remb()->num_packets(), 2);
   EXPECT_EQ(rtcp_parser.remb()->bitrate_bps(), 70000u);
   EXPECT_THAT(rtcp_parser.remb()->ssrcs(), ElementsAre(67321));
+}
+
+TEST(RtcpTransceiverImplTest, SetRembSendsImmediatelyIfSendRembOnChange) {
+  const uint32_t kSenderSsrc = 12345;
+  RtcpTransceiverConfig config;
+  config.send_remb_on_change = true;
+  config.feedback_ssrc = kSenderSsrc;
+  RtcpPacketParser rtcp_parser;
+  RtcpParserTransport transport(&rtcp_parser);
+  config.outgoing_transport = &transport;
+  config.schedule_periodic_compound_packets = false;
+  RtcpTransceiverImpl rtcp_transceiver(config);
+
+  rtcp_transceiver.SetRemb(/*bitrate_bps=*/10000, /*ssrcs=*/{});
+  EXPECT_EQ(rtcp_parser.remb()->num_packets(), 1);
+  EXPECT_EQ(rtcp_parser.remb()->sender_ssrc(), kSenderSsrc);
+  EXPECT_EQ(rtcp_parser.remb()->bitrate_bps(), 10000u);
+
+  // If there is no change, the packet is not sent immediately.
+  rtcp_transceiver.SetRemb(/*bitrate_bps=*/10000, /*ssrcs=*/{});
+  EXPECT_EQ(rtcp_parser.remb()->num_packets(), 1);
+
+  rtcp_transceiver.SetRemb(/*bitrate_bps=*/20000, /*ssrcs=*/{});
+  EXPECT_EQ(rtcp_parser.remb()->num_packets(), 2);
+  EXPECT_EQ(rtcp_parser.remb()->bitrate_bps(), 20000u);
+}
+
+TEST(RtcpTransceiverImplTest,
+     SetRembSendsImmediatelyIfSendRembOnChangeReducedSize) {
+  const uint32_t kSenderSsrc = 12345;
+  RtcpTransceiverConfig config;
+  config.send_remb_on_change = true;
+  config.rtcp_mode = webrtc::RtcpMode::kReducedSize;
+  config.feedback_ssrc = kSenderSsrc;
+  RtcpPacketParser rtcp_parser;
+  RtcpParserTransport transport(&rtcp_parser);
+  config.outgoing_transport = &transport;
+  config.schedule_periodic_compound_packets = false;
+  RtcpTransceiverImpl rtcp_transceiver(config);
+
+  rtcp_transceiver.SetRemb(/*bitrate_bps=*/10000, /*ssrcs=*/{});
+  EXPECT_EQ(rtcp_parser.remb()->num_packets(), 1);
+  EXPECT_EQ(rtcp_parser.remb()->sender_ssrc(), kSenderSsrc);
+  EXPECT_EQ(rtcp_parser.remb()->bitrate_bps(), 10000u);
 }
 
 TEST(RtcpTransceiverImplTest, SetRembIncludesRembInAllCompoundPackets) {
