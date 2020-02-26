@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97a2d7c0_551f9b84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-26T17:45:15Z",
+      "side": 1,
+      "message": "add an empty line after the CL title\nhttps://google.github.io/eng-practices/review/developer/cl-descriptions.html",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17940b8f_fc4a601a",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remb_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-26T17:45:15Z",
+      "side": 1,
+      "message": "since bitrate is signed now, make the constant singed too.\n(I think it is recommended to write \"int64_t{0x3fb93} \u003c\u003c 30\" instead of using suffix \u0027LL\u0027)",
+      "range": {
+        "startLine": 27,
+        "startChar": 33,
+        "endLine": 27,
+        "endChar": 43
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaf71502_73a9d396",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-26T17:45:15Z",
+      "side": 1,
+      "message": "add space",
+      "range": {
+        "startLine": 101,
+        "startChar": 25,
+        "endLine": 101,
+        "endChar": 27
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca6bf023_850d2b47",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-26T17:45:15Z",
+      "side": 1,
+      "message": "may be instead call\nSendImmediateFeedback(*remb_);\n(e.g. it also reschedules next compound packet in kCompound mode).\n\nif you are worried about attaching remb message twice, this code might work:\nrtcp::Remb remb;\nremb.Set(...);\nif (send_now) {\n  remb_ \u003d absl::nullopt;\n  SendImmediateFeedback(remb);\n}\nremb_ \u003d std::move(remb); // hm.... except remb doesn\u0027t have a move constructor. it probably should. So this will be just remb_ \u003d remb;",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 179,
+        "endChar": 18
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7be32b24_d1aafba3",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-02-26T17:45:15Z",
+      "side": 1,
+      "message": "you\u0027ve changed bitrate_bps to be signed",
+      "range": {
+        "startLine": 442,
+        "startChar": 47,
+        "endLine": 442,
+        "endChar": 53
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
