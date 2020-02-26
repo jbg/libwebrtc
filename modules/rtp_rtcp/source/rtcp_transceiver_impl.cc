@@ -156,12 +156,28 @@ void RtcpTransceiverImpl::SendCompoundPacket() {
 void RtcpTransceiverImpl::SetRemb(int64_t bitrate_bps,
                                   std::vector<uint32_t> ssrcs) {
   RTC_DCHECK_GE(bitrate_bps, 0);
+  bool send_now = config_.send_remb_on_change &&
+                  (!remb_.has_value() || bitrate_bps != remb_->bitrate_bps());
   remb_.emplace();
   remb_->SetSsrcs(std::move(ssrcs));
   remb_->SetBitrateBps(bitrate_bps);
+  remb_->SetSenderSsrc(config_.feedback_ssrc);
   // TODO(bugs.webrtc.org/8239): Move logic from PacketRouter for sending remb
   // immideately on large bitrate change when there is one RtcpTransceiver per
   // rtp transport.
+  if (send_now) {
+    auto send_packet = [this](rtc::ArrayView<const uint8_t> packet) {
+      config_.outgoing_transport->SendRtcp(packet.data(), packet.size());
+    };
+    PacketSender sender(send_packet, config_.max_packet_size);
+    // Compound mode requires every sent rtcp packet to be compound, i.e. start
+    // with a sender or receiver report. It will contain a REMB block.
+    if (config_.rtcp_mode == RtcpMode::kCompound)
+      CreateCompoundPacket(&sender);
+    else
+      sender.AppendPacket(*remb_);
+    sender.Send();
+  }
 }
 
 void RtcpTransceiverImpl::UnsetRemb() {
