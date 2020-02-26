@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34bd9a83_b99cd9d1",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "ratio_no_ref (please fix naming throughout the cl to follow the style guide)",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf438259_8b83750a",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "denominator isn\u0027t initialised and the return value from get_Denominator isn\u0027t checked - so this could be evaluating uninitialised data.",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e4c1910_aa207661",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd7e50c7_b4ffd981",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "suggest doing something like this instead:\n\nstruct {\n  const wchar_t* format;\n  const VideoType type;\n} format_to_type[] \u003d {\n  { L\"I420\", VideoType::kI420 },\n  ...\n};\n\nfor (const auto\u0026 entry : format_to_type) {\n  if (wcsncmp(entry.format, video_type, count) \u003d\u003d 0)\n    return entry.type;\n}\n\nreturn VideoType::kUnknown;",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "002c689a_fccfbe2b",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "would like to avoid this (blocking and waiting) pattern if possible",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70c327be_cb816fa7",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "the THR macro hides a lot of code. Also, if \"THR\" indicates \u0027throw\u0027 then we don\u0027t use exceptions, but hiding a return statement in a macro is also something to be avoided.",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e18cd07d_70d1d2fc",
+        "filename": "modules/video_capture/windows/help_functions_winrt.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "we try to not use macros, when we do there\u0027s a preference for putting them in .cc files",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6aa01abb_2bc4cd1d",
+        "filename": "modules/video_capture/windows/help_functions_winrt.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "and we avoid gotos :)",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08411de3_1776336f",
+        "filename": "modules/video_capture/windows/help_functions_winrt.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "is there a way to avoid this pattern? Looks to me like this takes something that\u0027s async and makes it synchronous, whereas we\u0027d actually in general prefer async.",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d89a2cb_1c5aabce",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "Why do we need to grab this lock?\n\nAlso - do we know on what thread or sequence we\u0027re running when this call is made?\n(would be nice to have thread/sequence checks in place so that the design and runtime behavior is more easily understood and harder to break)",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d655828_bf820837",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "use unique_ptr",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e0e4d2b_2674f4dd",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "make protected/private? (I assume the Create method should always be used)",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34e355e8_8a53522f",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "for this implementation, I\u0027d prefer to not have the constructor or Init method public. I realize they\u0027re inherited but the design of the interface allows for multiple states during construction whereas ideally a caller should just call Create() and have a fully constructed object or nullptr.",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12b2a0fd_9fcba251",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-02-26T00:10:25Z",
+      "side": 1,
+      "message": "please fix naming (device_number in this case).",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
