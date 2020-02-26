@@ -591,54 +591,13 @@ void OveruseFrameDetectorResourceAdaptationModule::OnMaybeEncodeFrame() {
   MaybePerformQualityRampupExperiment();
 }
 
-void OveruseFrameDetectorResourceAdaptationModule::UpdateQualityScalerSettings(
-    absl::optional<VideoEncoder::QpThresholds> qp_thresholds) {
-  if (qp_thresholds.has_value()) {
-    quality_scaler_resource_->StopCheckForOveruse();
-    quality_scaler_resource_->StartCheckForOveruse(qp_thresholds.value());
-  } else {
-    quality_scaler_resource_->StopCheckForOveruse();
-  }
-  initial_frame_dropper_->OnQualityScalerSettingsUpdated();
-}
-
 void OveruseFrameDetectorResourceAdaptationModule::ConfigureQualityScaler(
     const VideoEncoder::EncoderInfo& encoder_info) {
-  const auto scaling_settings = encoder_info.scaling_settings;
-  const bool quality_scaling_allowed =
-      IsResolutionScalingEnabled(degradation_preference_) &&
-      scaling_settings.thresholds;
+  quality_scaler_resource_->Configure(encoder_info, degradation_preference_,
+                                      GetVideoCodecTypeOrGeneric(),
+                                      LastInputFrameSizeOrDefault());
 
-  // TODO(https://crbug.com/webrtc/11222): Should this move to
-  // QualityScalerResource?
-  if (quality_scaling_allowed) {
-    if (!quality_scaler_resource_->is_started()) {
-      // Quality scaler has not already been configured.
-
-      // Use experimental thresholds if available.
-      absl::optional<VideoEncoder::QpThresholds> experimental_thresholds;
-      if (quality_scaling_experiment_enabled_) {
-        experimental_thresholds = QualityScalingExperiment::GetQpThresholds(
-            GetVideoCodecTypeOrGeneric());
-      }
-      UpdateQualityScalerSettings(experimental_thresholds
-                                      ? *experimental_thresholds
-                                      : *(scaling_settings.thresholds));
-    }
-  } else {
-    UpdateQualityScalerSettings(absl::nullopt);
-  }
-
-  // Set the qp-thresholds to the balanced settings if balanced mode.
-  if (degradation_preference_ == DegradationPreference::BALANCED &&
-      quality_scaler_resource_->is_started()) {
-    absl::optional<VideoEncoder::QpThresholds> thresholds =
-        balanced_settings_.GetQpThresholds(GetVideoCodecTypeOrGeneric(),
-                                           LastInputFrameSizeOrDefault());
-    if (thresholds) {
-      quality_scaler_resource_->SetQpThresholds(*thresholds);
-    }
-  }
+  initial_frame_dropper_->OnQualityScalerSettingsUpdated();
 
   encoder_stats_observer_->OnAdaptationChanged(
       VideoStreamEncoderObserver::AdaptationReason::kNone,

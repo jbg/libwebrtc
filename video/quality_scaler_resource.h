@@ -14,9 +14,11 @@
 #include <memory>
 #include <string>
 
+#include "api/rtp_parameters.h"
 #include "api/video_codecs/video_encoder.h"
 #include "call/adaptation/resource.h"
 #include "modules/video_coding/utility/quality_scaler.h"
+#include "rtc_base/experiments/balanced_degradation_settings.h"
 
 namespace webrtc {
 
@@ -29,13 +31,17 @@ class QualityScalerResource : public Resource,
                               public AdaptationObserverInterface {
  public:
   QualityScalerResource();
+  virtual ~QualityScalerResource();
+
+  void Configure(const VideoEncoder::EncoderInfo& encoder_info,
+                 DegradationPreference degradation_preference,
+                 VideoCodecType codec_type,
+                 int pixels);
+  void StopCheckForOveruse();
 
   bool is_started() const;
 
-  void StartCheckForOveruse(VideoEncoder::QpThresholds qp_thresholds);
-  void StopCheckForOveruse();
 
-  void SetQpThresholds(VideoEncoder::QpThresholds qp_thresholds);
   bool QpFastFilterLow();
   void OnEncodeCompleted(const EncodedImage& encoded_image,
                          int64_t time_sent_in_us);
@@ -51,6 +57,8 @@ class QualityScalerResource : public Resource,
 
  private:
   std::unique_ptr<QualityScaler> quality_scaler_;
+  const bool quality_scaling_experiment_enabled_;
+  const BalancedDegradationSettings balanced_settings_;
 };
 
 }  // namespace webrtc

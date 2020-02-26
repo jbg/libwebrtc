@@ -165,10 +165,6 @@ class OveruseFrameDetectorResourceAdaptationModule
   // |encode_usage_resource_| of the new value.
   void MaybeUpdateTargetFrameRate();
 
-  // Use nullopt to disable quality scaling.
-  void UpdateQualityScalerSettings(
-      absl::optional<VideoEncoder::QpThresholds> qp_thresholds);
-
   void UpdateAdaptationStats(AdaptationObserverInterface::AdaptReason reason);
   DegradationPreference EffectiveDegradataionPreference();
   AdaptCounter& GetAdaptCounter();
