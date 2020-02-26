@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ad4354_3c6af783",
+        "filename": "video/quality_scaler_resource.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-26T14:59:25Z",
+      "side": 1,
+      "message": "Prior to this CL, if qp_thresholds were missing at UpdateQualityScalerSettings(), quality_scaler_ would be reset (a.k.a. stopped).\n\nIs not stopping the quality scaler here a change in behavior?\n\nI assume it would continue to run with whatever the old qp_thresholds were rather than stop",
+      "revId": "288ba4920749bf32731f3d3bdfaca6fee3a58d3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a170eba_57aa3977",
+        "filename": "video/quality_scaler_resource.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-02-26T14:59:25Z",
+      "side": 1,
+      "message": "It feels a bit odd to have a \"Stop\" without a \"Start\". Should \"Stop\" be a special case of Configure()? I\u0027m not sure this makes sense or not, but see other comment about qp_thresholds",
+      "revId": "288ba4920749bf32731f3d3bdfaca6fee3a58d3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
