@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "f5e7a8ed_918d5b44",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 10216
+      },
+      "writtenOn": "2020-02-26T12:45:26Z",
+      "side": 1,
+      "message": "There are 2 separate issues here:\n\n1. When the WebRTC API exposes a synchronous method but the implementation for it is inherently async (common in UWP), I don\u0027t see how we can avoid waiting. This is the case for things like enumerating media devices or their capture format; this cannot be done synchronously on UWP, yet the DeviceInfo API is synchronous. Ideally we\u0027d refactor the API to be asynchronous to accommodate for the cases where the implementation is too, but that is a much larger change.\n\n2. When the current CL is used on UWP, which Augusto says is out of scope for now, as I already commented I am reasonably confident that calling this helper on the UI thread will result in a deadlock when it is used to wait on a UWP API call which requires delegating work to the UI thread (fairly common in UWP since the message pump is there). I experienced this several times with WebRTC and UWP, and there is no simple workaround other than ensuring the caller itself is not on the UI thread, but rather on the WebRTC signaling thread for example, which can only be done from the caller. So at best the implementation can assert instead of deadlocking, to make it easier for users to fix their caller.\n\nTo be honest I think both issues would greatly benefit from an async API where needed (e.g. DeviceInfo), which avoids waiting and prevents any deadlock.",
+      "parentUuid": "002c689a_fccfbe2b",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "70c327be_cb816fa7",
         "filename": "modules/video_capture/windows/help_functions_winrt.cc",
         "patchSetId": 12
