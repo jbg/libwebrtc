@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4f988793_49146856",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-02-27T12:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97a2d7c0_551f9b84",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17940b8f_fc4a601a",
         "filename": "modules/rtp_rtcp/source/rtcp_packet/remb_unittest.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "161357843a0413722bc608bb1d126ae42403b206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfbd0605_b8b3cc9f",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/remb_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-02-27T12:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17940b8f_fc4a601a",
+      "range": {
+        "startLine": 27,
+        "startChar": 33,
+        "endLine": 27,
+        "endChar": 43
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "75b8d005_52b33b88",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-02-27T12:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaf71502_73a9d396",
+      "range": {
+        "startLine": 101,
+        "startChar": 25,
+        "endLine": 101,
+        "endChar": 27
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca6bf023_850d2b47",
         "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2020-02-26T17:45:15Z",
       "side": 1,
       "message": "may be instead call\nSendImmediateFeedback(*remb_);\n(e.g. it also reschedules next compound packet in kCompound mode).\n\nif you are worried about attaching remb message twice, this code might work:\nrtcp::Remb remb;\nremb.Set(...);\nif (send_now) {\n  remb_ \u003d absl::nullopt;\n  SendImmediateFeedback(remb);\n}\nremb_ \u003d std::move(remb); // hm.... except remb doesn\u0027t have a move constructor. it probably should. So this will be just remb_ \u003d remb;",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 179,
+        "endChar": 18
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2157d601_a9a3b3a8",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-02-27T12:23:34Z",
+      "side": 1,
+      "message": "right, I forgot to call ReSchedule....  The duplicate REMB packet was the reason why I did not use SendImmediateFeedback- but I will try your suggestion. Thanks.",
+      "parentUuid": "ca6bf023_850d2b47",
       "range": {
         "startLine": 169,
         "startChar": 4,
@@ -114,6 +210,30 @@
       "revId": "161357843a0413722bc608bb1d126ae42403b206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1b18786_31989100",
+        "filename": "modules/rtp_rtcp/source/rtcp_transceiver_impl_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-02-27T12:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7be32b24_d1aafba3",
+      "range": {
+        "startLine": 442,
+        "startChar": 47,
+        "endLine": 442,
+        "endChar": 53
+      },
+      "revId": "161357843a0413722bc608bb1d126ae42403b206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
