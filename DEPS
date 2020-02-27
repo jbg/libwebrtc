@@ -5,7 +5,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '4f8e062e9cfff4d035eccf696aa8f368881e22e4',
+  'chromium_revision': '3a6bd7c7c9fcf7e9c63a0a80c131924e42476e70',
 }
 
 deps = {
@@ -27,9 +27,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@679c15290de5e942e32c455177f0396156276a06',
+    'https://chromium.googlesource.com/chromium/src/testing@c57cb0339a3a249add447f1634bf4c7c795aea12',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@923473234fab2d576feb447b1ae10eaee3644b60',
+    'https://chromium.googlesource.com/chromium/src/third_party@8565c75c3adaf07c6ed21e1b0deb91c1f01e36cf',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -107,7 +107,7 @@ deps = {
   'src/third_party/boringssl/src':
     'https://boringssl.googlesource.com/boringssl.git@6432bb46ab44731567ec923e6c8fc182f13d0070',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@50148dbfcb7ba1b7040cf85a438ebad8cbc1b93c',
+    'https://chromium.googlesource.com/catapult.git@65dd8440ec78b0bf77c3aefd7eae7398c2fe0802',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
     'condition': 'checkout_android',
