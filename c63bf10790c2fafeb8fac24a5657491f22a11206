@@ -510,6 +510,30 @@
     },
     {
       "key": {
+        "uuid": "7725d33b_e70ad72f",
+        "filename": "api/voip/voip_engine.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-02-27T18:54:31Z",
+      "side": 1,
+      "message": "No, you can have references to forward-declared classes.",
+      "parentUuid": "973447e0_f6b8da74",
+      "range": {
+        "startLine": 64,
+        "startChar": 18,
+        "endLine": 64,
+        "endChar": 19
+      },
+      "revId": "c63bf10790c2fafeb8fac24a5657491f22a11206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c911a3f3_5c2daee9",
         "filename": "api/voip/voip_engine.h",
         "patchSetId": 7
