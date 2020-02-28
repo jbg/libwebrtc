@@ -438,7 +438,7 @@ class FakeVideoMediaChannel : public RtpHelper<VideoMediaChannel> {
   bool RemoveRecvStream(uint32_t ssrc) override;
 
   void FillBitrateInfo(BandwidthEstimationInfo* bwe_info) override;
-  bool GetStats(VideoMediaInfo* info) override;
+  bool GetStats(VideoMediaInfo* info, bool legacy = false) override;
 
   std::vector<webrtc::RtpSource> GetSources(uint32_t ssrc) const override;
 

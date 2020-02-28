@@ -359,7 +359,7 @@ bool FakeVideoMediaChannel::RemoveRecvStream(uint32_t ssrc) {
 }
 void FakeVideoMediaChannel::FillBitrateInfo(BandwidthEstimationInfo* bwe_info) {
 }
-bool FakeVideoMediaChannel::GetStats(VideoMediaInfo* info) {
+bool FakeVideoMediaChannel::GetStats(VideoMediaInfo* info, bool legacy) {
   return false;
 }
 std::vector<webrtc::RtpSource> FakeVideoMediaChannel::GetSources(

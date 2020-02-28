@@ -5234,10 +5234,13 @@ TEST_F(WebRtcVideoChannelTest, GetStatsReportsKeyFramesEncoded) {
 
   cricket::VideoMediaInfo info;
   ASSERT_TRUE(channel_->GetStats(&info));
-  // TODO(bugs.webrtc.org/9547): Populate individual outbound-rtp stats objects
-  // for each simulcast stream, instead of accumulating all keyframes encoded
-  // over all simulcast streams in the same outbound-rtp stats object.
-  EXPECT_EQ(97u, info.senders[0].key_frames_encoded);
+  EXPECT_EQ(info.senders.size(), 2u);
+  EXPECT_EQ(10u, info.senders[0].key_frames_encoded);
+  EXPECT_EQ(87u, info.senders[1].key_frames_encoded);
+
+  cricket::VideoMediaInfo info_legacy;
+  ASSERT_TRUE(channel_->GetStats(&info_legacy, /*legacy*/ true));
+  EXPECT_EQ(97u, info_legacy.senders[0].key_frames_encoded);
 }
 
 TEST_F(WebRtcVideoChannelTest, GetStatsReportsQpSum) {
@@ -5247,7 +5250,7 @@ TEST_F(WebRtcVideoChannelTest, GetStatsReportsQpSum) {
   stream->SetStats(stats);
 
   cricket::VideoMediaInfo info;
-  ASSERT_TRUE(channel_->GetStats(&info));
+  ASSERT_TRUE(channel_->GetStats(&info, /*legacy*/ true));
   EXPECT_EQ(stats.qp_sum, info.senders[0].qp_sum);
 }
 
@@ -5263,7 +5266,7 @@ TEST_F(WebRtcVideoChannelTest, GetStatsReportsUpperResolution) {
   stream->SetStats(stats);
 
   cricket::VideoMediaInfo info;
-  ASSERT_TRUE(channel_->GetStats(&info));
+  ASSERT_TRUE(channel_->GetStats(&info, /*legacy*/ true));
   ASSERT_EQ(1u, info.senders.size());
   EXPECT_EQ(123, info.senders[0].send_frame_width);
   EXPECT_EQ(90, info.senders[0].send_frame_height);
@@ -5328,7 +5331,7 @@ TEST_F(WebRtcVideoChannelTest, GetStatsTranslatesSendRtcpPacketTypesCorrectly) {
   stream->SetStats(stats);
 
   cricket::VideoMediaInfo info;
-  ASSERT_TRUE(channel_->GetStats(&info));
+  ASSERT_TRUE(channel_->GetStats(&info, /*legacy*/ true));
   EXPECT_EQ(7, info.senders[0].firs_rcvd);
   EXPECT_EQ(10, info.senders[0].nacks_rcvd);
   EXPECT_EQ(13, info.senders[0].plis_rcvd);
@@ -5475,7 +5478,7 @@ TEST_F(WebRtcVideoChannelTest, TranslatesSenderBitrateStatsCorrectly) {
   stream2->SetStats(stats2);
 
   cricket::VideoMediaInfo info;
-  ASSERT_TRUE(channel_->GetStats(&info));
+  ASSERT_TRUE(channel_->GetStats(&info, /*legacy*/ true));
   ASSERT_EQ(2u, info.senders.size());
   BandwidthEstimationInfo bwe_info;
   channel_->FillBitrateInfo(&bwe_info);

@@ -407,6 +407,11 @@ void SetOutboundRTPStreamStatsFromVideoSenderInfo(
       rtc::kNumMillisecsPerSec;
   outbound_video->total_encoded_bytes_target =
       video_sender_info.total_encoded_bytes_target;
+  outbound_video->frame_width =
+      static_cast<uint32_t>(video_sender_info.send_frame_width);
+  outbound_video->frame_height =
+      static_cast<uint32_t>(video_sender_info.send_frame_height);
+  outbound_video->frames_per_second = video_sender_info.framerate_sent;
   outbound_video->total_packet_send_delay =
       static_cast<double>(video_sender_info.total_packet_send_delay_ms) /
       rtc::kNumMillisecsPerSec;
@@ -422,6 +427,9 @@ void SetOutboundRTPStreamStatsFromVideoSenderInfo(
   if (!video_sender_info.encoder_implementation_name.empty()) {
     outbound_video->encoder_implementation =
         video_sender_info.encoder_implementation_name;
+  }
+  if (!video_sender_info.rid.empty()) {
+    outbound_video->rid = video_sender_info.rid;
   }
 }
 
@@ -1846,7 +1854,7 @@ RTCStatsCollector::PrepareTransceiverStatsInfos_s() const {
       }
     }
     for (const auto& entry : video_stats) {
-      if (!entry.first->GetStats(entry.second.get())) {
+      if (!entry.first->GetStats(entry.second.get(), /*legacy*/ false)) {
         RTC_LOG(LS_WARNING) << "Failed to get video stats.";
       }
     }

@@ -59,7 +59,7 @@ class FakeVideoMediaChannelForStats : public cricket::FakeVideoMediaChannel {
   }
 
   // VideoMediaChannel overrides.
-  bool GetStats(cricket::VideoMediaInfo* info) override {
+  bool GetStats(cricket::VideoMediaInfo* info, bool legacy = false) override {
     if (stats_) {
       *info = *stats_;
       return true;

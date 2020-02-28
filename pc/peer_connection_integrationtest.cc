@@ -3048,9 +3048,13 @@ TEST_P(PeerConnectionIntegrationTest, NewGetStatsManyAudioAndManyVideoStreams) {
   ASSERT_TRUE(caller_report);
   auto outbound_stream_stats =
       caller_report->GetStatsOfType<webrtc::RTCOutboundRTPStreamStats>();
-  ASSERT_EQ(4u, outbound_stream_stats.size());
+  // ASSERT_GE as rtx stats are not always there. Otherwise can go up to 6.
+  ASSERT_GE(outbound_stream_stats.size(), 4u);
   std::vector<std::string> outbound_track_ids;
   for (const auto& stat : outbound_stream_stats) {
+    if (stat->codec_id.ValueToString().find("_97") != std::string::npos) {
+      continue;  // For rtx following checks don't apply.
+    }
     ASSERT_TRUE(stat->bytes_sent.is_defined());
     EXPECT_LT(0u, *stat->bytes_sent);
     if (*stat->kind == "video") {
