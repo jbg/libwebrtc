@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c9c97b55_4c391a8d",
+        "filename": "modules/video_capture/windows/device_info_winrt.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "I don\u0027t know why this lock is needed. DeviceInfoDS::NumberOfDevices has this lock and I\u0027ve tried to mimic the current implementation as much as possible.\nPeerconnection_Client calls it from the main thread, but Peerconnection_Client doesn\u0027t always use the best practices.\nMy test app doesn\u0027t need to call this API, but the APIs calling GetDeviceName run from a worker thread from the OS thread pool.\n\nHow do I use thread/sequence checks?",
+      "parentUuid": "8d89a2cb_1c5aabce",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d655828_bf820837",
         "filename": "modules/video_capture/windows/device_info_winrt.h",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea4317bb_ec1d6cb6",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "I\u0027ve focused on replacing old Windows APIs with new APIs without changing WebRTC\u0027s current interfaces or coding protocols. DeviceInfoWinRT interface is similar to its counterpart DeviceInfoDS which is the current default implementation.\nWrapping the return type of Create in a std::unique_ptr would would require change:\n. DeviceInfoDS* DeviceInfoDS::Create() {\n. VideoCaptureModule::DeviceInfo* VideoCaptureImpl::CreateDeviceInfo()\n. VideoCaptureModule::DeviceInfo* VideoCaptureFactory::CreateDeviceInfo()\n\nThis pointer will be wrapped by a std::unique_ptr in\n. rtc::scoped_refptr\u003cCapturerTrackSource\u003e CapturerTrackSource::Create()\n\nI\u0027m fine doing this change, but I think it would pollute an already large CL.\n@Tommi: What do you think? Should I leave as is and file a bug/issue or should I change these other layers?",
+      "parentUuid": "3d655828_bf820837",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "24cca0f1_9842a94f",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9e0e4d2b_2674f4dd",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34e355e8_8a53522f",
         "filename": "modules/video_capture/windows/device_info_winrt.h",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "21e0b0b0_86c40be8",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "I\u0027ve gotten bitten by callers not calling ::Init and had to put protections in place in order to mimic the APIs of DeviceInfoDS.\nI\u0027m glad to make it private.",
+      "parentUuid": "34e355e8_8a53522f",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12b2a0fd_9fcba251",
         "filename": "modules/video_capture/windows/device_info_winrt.h",
         "patchSetId": 3
@@ -84,6 +156,24 @@
       "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9be7b0d5_7af3de4c",
+        "filename": "modules/video_capture/windows/device_info_winrt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "Copied-and-pasted from DeviceInfoDS. Fixed.",
+      "parentUuid": "12b2a0fd_9fcba251",
+      "revId": "a48ab23f22519f2487572b74a95b14fcfe009dd3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

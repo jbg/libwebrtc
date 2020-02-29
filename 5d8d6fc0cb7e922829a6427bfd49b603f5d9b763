@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7496aab0_be4db80f",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "34bd9a83_b99cd9d1",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf438259_8b83750a",
         "filename": "modules/video_capture/windows/help_functions_winrt.cc",
         "patchSetId": 12
@@ -33,6 +51,24 @@
       "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecb9872d_fc474871",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf438259_8b83750a",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "bf0e4977_aa3ae84b",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e4c1910_aa207661",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd7e50c7_b4ffd981",
         "filename": "modules/video_capture/windows/help_functions_winrt.cc",
         "patchSetId": 12
@@ -67,6 +121,24 @@
       "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ea88473_617425a8",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd7e50c7_b4ffd981",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "b111590a_7b27fbe5",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "I\u0027ve added comments about synchronicity in WaitForAsycOperation (header file).\nMy comments are in line with Jerome\u0027s first point that this part WebRTC API is synchronous by design and require manual synchronization because UWP APIs are not synchronous for Media.\nTo Jerome\u0027s second point, I\u0027m aware of his concerns and asserts have been added to the code letting devs know the right apartment type to call these APIs.",
+      "parentUuid": "f5e7a8ed_918d5b44",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70c327be_cb816fa7",
         "filename": "modules/video_capture/windows/help_functions_winrt.cc",
         "patchSetId": 12
@@ -119,6 +209,24 @@
       "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e5e8b02_8964c50a",
+        "filename": "modules/video_capture/windows/help_functions_winrt.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "THR never throws.\nAs discussed in the header file, wrap Jump on Fail inside a macro is a well established pattern when coding with COM.",
+      "parentUuid": "70c327be_cb816fa7",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "3059ccf4_21f0c3d2",
+        "filename": "modules/video_capture/windows/help_functions_winrt.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "This macro simplifies the use of an error handling in COM. This pattern is called Jump on Fail.\n\nAccording to https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com#jump-on-fail, this pattern has the following advantages and disadvantage:\n\nAdvantages\n\n. The overall control flow is easy to see.\n. At every point in the code after a FAILED check, if you have not jumped to the label, it is guaranteed that all the previous calls have succeeded.\n. Resources are released at one place in the code.\n\nDisadvantages\n\n. All variables must be declared and initialized at the top of the function.\n. Some programmers do not like to use goto in their code. (However, it should be noted that this use of goto is highly structured; the code never jumps outside the current function call.)\n. goto statements skip initializers. \u003c- The compiler doesn\u0027t allow this to happen anymore.\n\nTo be honest, I don\u0027t think that WebRTC code base would be better served with Nested ifs, Cascading ifs or Throw on Fail.\nThis macro is used by the template function bellow (WaitForAsyncOperation) and the three *_winrt.cc files. I understand the inclination about avoiding macros and the preference for its location, but is it ok to replicate this macro in help_functions_winrt.cc, device_info_winrt.cc, video_capture_winrt.cc and make the WaitForAsyncOperation harder to read?",
+      "parentUuid": "e18cd07d_70d1d2fc",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6aa01abb_2bc4cd1d",
         "filename": "modules/video_capture/windows/help_functions_winrt.h",
         "patchSetId": 12
@@ -156,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "ba0e4ceb_a39b6bb1",
+        "filename": "modules/video_capture/windows/help_functions_winrt.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "6aa01abb_2bc4cd1d",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08411de3_1776336f",
         "filename": "modules/video_capture/windows/help_functions_winrt.h",
         "patchSetId": 12
@@ -170,6 +314,24 @@
       "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eea3e6b_25c0f950",
+        "filename": "modules/video_capture/windows/help_functions_winrt.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 10733
+      },
+      "writtenOn": "2020-02-29T02:24:20Z",
+      "side": 1,
+      "message": "Making sync something async is exactly what WaitForAsyncOperation and WaitForAsyncAction are doing.\nThe Windows::Media APIs for starting, stopping and gathering camera info are asynchronous, but the design of the following WebRTC interfaces require synchronous APIs:\n. webrtc::videocapturemodule::DeviceInfoImpl::CreateCapabilityMap\n. webrtc::videocapturemodule::VideoCaptureImpl::StartCapture\n. webrtc::videocapturemodule::VideoCaptureImpl::StopCapture\nIt would be possible to change WebRTC interfaces, but it would break backward compatibility.",
+      "parentUuid": "08411de3_1776336f",
+      "revId": "5d8d6fc0cb7e922829a6427bfd49b603f5d9b763",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
