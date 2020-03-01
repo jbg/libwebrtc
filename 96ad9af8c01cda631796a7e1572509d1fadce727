@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "89086a16_c25e8fcf",
+        "filename": "rtc_base/bounded_inline_vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-01T21:31:34Z",
+      "side": 1,
+      "message": "There are two parts:\n\nWhy 32 bits and not the size of a pointer? This one should be obvious---32 bits is already more than enough. I originally used an 8-bit type, but it turns out that the compiler generates better code when the size is a full int. 64 bits is just larger without being more efficient, though.\n\nWhy signed and not unsigned? Because arithmetic with signed numbers just works better than arithmetic with unsigned numbers in C++, unless you actually *want* modulo 2^n semantics (see e.g. https://google.github.io/styleguide/cppguide.html#Integer_Types). The standard library containers all use unsigned sizes, but many regard this as an historical mistake, to the point where std::span was originally accepted into C++20 with a signed size type (since changed to unsigned for conformity with other containers). I decided to go with signed here because there aren\u0027t any real downsides to nonconformity with the std:: containers that I can see---and if it turns out I\u0027m wrong, it will be straightforward to go back and change it.",
+      "parentUuid": "af7d04b0_98e810fc",
+      "range": {
+        "startLine": 114,
+        "startChar": 14,
+        "endLine": 114,
+        "endChar": 17
+      },
+      "revId": "96ad9af8c01cda631796a7e1572509d1fadce727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50aaf8ce_0e212687",
         "filename": "rtc_base/bounded_inline_vector_unittest.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "96ad9af8c01cda631796a7e1572509d1fadce727",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7760b8a_a039231d",
+        "filename": "rtc_base/bounded_inline_vector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-01T21:31:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50aaf8ce_0e212687",
+      "range": {
+        "startLine": 123,
+        "startChar": 28,
+        "endLine": 123,
+        "endChar": 35
+      },
+      "revId": "96ad9af8c01cda631796a7e1572509d1fadce727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
