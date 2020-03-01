@@ -108,6 +108,22 @@ class BoundedInlineVector {
   int size() const { return storage_.size; }
   constexpr int capacity() const { return fixed_capacity; }
 
+  // Resizes the BoundedInlineVector to the given size, which must not exceed
+  // its constant capacity. If the size is increased, the added elements are
+  // default constructed.
+  void resize(int new_size) {
+    RTC_DCHECK_GE(new_size, 0);
+    RTC_DCHECK_LE(new_size, fixed_capacity);
+    if (new_size > storage_.size) {
+      bounded_inline_vector_impl::DefaultInitializeElements(
+          storage_.data + storage_.size, new_size - storage_.size);
+    } else if (new_size < storage_.size) {
+      bounded_inline_vector_impl::DestroyElements(storage_.data + new_size,
+                                                  storage_.size - new_size);
+    }
+    storage_.size = new_size;
+  }
+
   const T* data() const { return storage_.data; }
   T* data() { return storage_.data; }
 
