@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af7d04b0_98e810fc",
+        "filename": "rtc_base/bounded_inline_vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-01T16:20:26Z",
+      "side": 1,
+      "message": "I forgot to ask on the previous review, why not size_t (given that capacity and size have to be \u003e 0)?",
+      "range": {
+        "startLine": 114,
+        "startChar": 14,
+        "endLine": 114,
+        "endChar": 17
+      },
+      "revId": "96ad9af8c01cda631796a7e1572509d1fadce727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50aaf8ce_0e212687",
+        "filename": "rtc_base/bounded_inline_vector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-01T16:20:26Z",
+      "side": 1,
+      "message": "default",
+      "range": {
+        "startLine": 123,
+        "startChar": 28,
+        "endLine": 123,
+        "endChar": 35
+      },
+      "revId": "96ad9af8c01cda631796a7e1572509d1fadce727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
