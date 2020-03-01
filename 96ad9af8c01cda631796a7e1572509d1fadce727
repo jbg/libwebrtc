@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "06c89d0b_68f9e8a9",
+        "filename": "rtc_base/bounded_inline_vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-01T22:29:45Z",
+      "side": 1,
+      "message": "Thanks! Yes, I was more interested about the signed vs unsigned. Really interesting, I was not aware of std::span. I have found this follow-up: http://wg21.link/p1227r1.",
+      "parentUuid": "89086a16_c25e8fcf",
+      "range": {
+        "startLine": 114,
+        "startChar": 14,
+        "endLine": 114,
+        "endChar": 17
+      },
+      "revId": "96ad9af8c01cda631796a7e1572509d1fadce727",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50aaf8ce_0e212687",
         "filename": "rtc_base/bounded_inline_vector_unittest.cc",
         "patchSetId": 1
