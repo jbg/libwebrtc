@@ -606,6 +606,11 @@ std::map<uint32_t, RtpPayloadState> VideoSendStreamImpl::GetRtpPayloadStates()
   return rtp_video_sender_->GetRtpPayloadStates();
 }
 
+void VideoSendStreamImpl::SetRtpHeaderExtensions(
+    const std::vector<RtpExtension>& extensions) {
+  rtp_video_sender_->SetRtpHeaderExtensions(extensions);
+}
+
 uint32_t VideoSendStreamImpl::OnBitrateUpdated(BitrateAllocationUpdate update) {
   RTC_DCHECK_RUN_ON(worker_queue_);
   RTC_DCHECK(rtp_video_sender_->IsActive())

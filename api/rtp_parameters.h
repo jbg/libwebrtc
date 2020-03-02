@@ -211,7 +211,7 @@ struct RTC_EXPORT RtpCodecCapability {
 // Note that ORTC includes a "kind" field, but we omit this because it's
 // redundant; if you call "RtpReceiver::GetCapabilities(MEDIA_TYPE_AUDIO)",
 // you know you're getting audio capabilities.
-struct RtpHeaderExtensionCapability {
+struct RTC_EXPORT RtpHeaderExtensionCapability {
   // URI of this extension, as defined in RFC8285.
   std::string uri;
 
@@ -245,7 +245,9 @@ struct RTC_EXPORT RtpExtension {
   ~RtpExtension();
   std::string ToString() const;
   bool operator==(const RtpExtension& rhs) const {
-    return uri == rhs.uri && id == rhs.id && encrypt == rhs.encrypt;
+    return uri == rhs.uri && id == rhs.id && encrypt == rhs.encrypt &&
+           send_enabled == rhs.send_enabled &&
+           receive_enabled == rhs.receive_enabled;
   }
   static bool IsSupportedForAudio(const std::string& uri);
   static bool IsSupportedForVideo(const std::string& uri);
@@ -336,6 +338,19 @@ struct RTC_EXPORT RtpExtension {
   std::string uri;
   int id = 0;
   bool encrypt = false;
+
+  // The following two attributes denote the direction of the extension, see
+  // section 5 of https://tools.ietf.org/html/rfc8285#page-10 on page 11.
+  //
+  // RFC 'direction'  send_enabled  receive_enabled
+  // -----------------------------------------------
+  // recvonly         false         true
+  // sendonly         true          false
+  // sendrecv         true          true
+  // inactive         false         false
+  //
+  bool send_enabled = true;
+  bool receive_enabled = true;
 };
 
 struct RTC_EXPORT RtpFecParameters {

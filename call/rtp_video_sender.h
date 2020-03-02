@@ -111,6 +111,9 @@ class RtpVideoSender : public RtpVideoSenderInterface,
 
   void DeliverRtcp(const uint8_t* packet, size_t length) override;
 
+  void SetRtpHeaderExtensions(
+      const std::vector<RtpExtension>& extensions) override;
+
   // Implements webrtc::VCMProtectionCallback.
   int ProtectionRequest(const FecProtectionParams* delta_params,
                         const FecProtectionParams* key_params,

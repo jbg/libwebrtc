@@ -190,6 +190,13 @@ class RtpTransceiver final
   std::vector<RtpCodecCapability> codec_preferences() const override {
     return codec_preferences_;
   }
+  webrtc::RTCError SetOfferedRtpHeaderExtensions(
+      rtc::ArrayView<RtpHeaderExtensionCapabilityWithOptionalDirection>
+          header_extensions_to_offer) override;
+  std::vector<RtpHeaderExtensionCapabilityWithDirection>
+  header_extensions_negotiated() const override;
+  std::vector<RtpHeaderExtensionCapabilityWithOptionalDirection>
+  header_extensions_to_offer() const override;
 
  private:
   void OnFirstPacketReceived(cricket::ChannelInterface* channel);
@@ -215,6 +222,8 @@ class RtpTransceiver final
   cricket::ChannelInterface* channel_ = nullptr;
   cricket::ChannelManager* channel_manager_ = nullptr;
   std::vector<RtpCodecCapability> codec_preferences_;
+  std::vector<RtpHeaderExtensionCapabilityWithOptionalDirection>
+      header_extensions_to_offer_;
 };
 
 BEGIN_SIGNALING_PROXY_MAP(RtpTransceiver)
@@ -233,6 +242,14 @@ PROXY_METHOD1(webrtc::RTCError,
               SetCodecPreferences,
               rtc::ArrayView<RtpCodecCapability>)
 PROXY_CONSTMETHOD0(std::vector<RtpCodecCapability>, codec_preferences)
+PROXY_METHOD1(webrtc::RTCError,
+              SetOfferedRtpHeaderExtensions,
+              rtc::ArrayView<RtpHeaderExtensionCapabilityWithOptionalDirection>)
+PROXY_CONSTMETHOD0(std::vector<RtpHeaderExtensionCapabilityWithDirection>,
+                   header_extensions_negotiated)
+PROXY_CONSTMETHOD0(
+    std::vector<RtpHeaderExtensionCapabilityWithOptionalDirection>,
+    header_extensions_to_offer)
 END_PROXY_MAP()
 
 }  // namespace webrtc

@@ -178,6 +178,8 @@ class FakeVideoSendStream final
       const webrtc::DegradationPreference& degradation_preference) override;
   webrtc::VideoSendStream::Stats GetStats() override;
   void ReconfigureVideoEncoder(webrtc::VideoEncoderConfig config) override;
+  void SetRtpHeaderExtensions(
+      const std::vector<webrtc::RtpExtension>& extensions) override {}
 
   bool sending_;
   webrtc::VideoSendStream::Config config_;

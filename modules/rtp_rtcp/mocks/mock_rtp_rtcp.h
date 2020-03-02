@@ -49,6 +49,8 @@ class MockRtpRtcp : public RtpRtcp {
   MOCK_METHOD1(DeregisterSendRtpHeaderExtension,
                int32_t(RTPExtensionType type));
   MOCK_METHOD1(DeregisterSendRtpHeaderExtension, void(absl::string_view uri));
+  MOCK_CONST_METHOD1(IsRtpHeaderExtensionRegistered,
+                     bool(absl::string_view uri));
   MOCK_CONST_METHOD0(SupportsPadding, bool());
   MOCK_CONST_METHOD0(SupportsRtxPayloadPadding, bool());
   MOCK_CONST_METHOD0(StartTimestamp, uint32_t());

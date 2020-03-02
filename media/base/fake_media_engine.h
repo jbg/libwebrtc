@@ -514,7 +514,10 @@ class FakeDataMediaChannel : public RtpHelper<DataMediaChannel> {
 class FakeVoiceEngine : public VoiceEngineInterface {
  public:
   FakeVoiceEngine();
-  RtpCapabilities GetCapabilities() const override;
+  std::vector<std::pair<webrtc::RtpExtension, RtpExtensionEnabled>>
+  GetRtpHeaderExtensions() const override {
+    return {};
+  }
   void Init() override;
   rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const override;
 
@@ -549,7 +552,10 @@ class FakeVoiceEngine : public VoiceEngineInterface {
 class FakeVideoEngine : public VideoEngineInterface {
  public:
   FakeVideoEngine();
-  RtpCapabilities GetCapabilities() const override;
+  std::vector<std::pair<webrtc::RtpExtension, RtpExtensionEnabled>>
+  GetRtpHeaderExtensions() const override {
+    return {};
+  }
   bool SetOptions(const VideoOptions& options);
   VideoMediaChannel* CreateMediaChannel(
       webrtc::Call* call,

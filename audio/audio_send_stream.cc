@@ -200,6 +200,8 @@ AudioSendStream::ExtensionIds AudioSendStream::FindExtensionIds(
     const std::vector<RtpExtension>& extensions) {
   ExtensionIds ids;
   for (const auto& extension : extensions) {
+    if (!extension.send_enabled)
+      continue;
     if (extension.uri == RtpExtension::kAudioLevelUri) {
       ids.audio_level = extension.id;
     } else if (extension.uri == RtpExtension::kAbsSendTimeUri) {
