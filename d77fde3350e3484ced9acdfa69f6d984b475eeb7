@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8325d2e7_fd9cfe1d",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-03-02T15:36:51Z",
+      "side": 1,
+      "message": "LGTM, I agree with the suggestion.",
+      "parentUuid": "a85002fb_c4ff62fd",
+      "revId": "d77fde3350e3484ced9acdfa69f6d984b475eeb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7b1694a_6e552921",
         "filename": "api/stats/rtcstats_objects.h",
         "patchSetId": 3
