@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "102f9920_e4296173",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T16:22:41Z",
+      "side": 1,
+      "message": "We should make sure that we have test coverage for the legacy and modern portions of the metrics.",
+      "parentUuid": "e328f39a_445ba05a",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "286a496a_216ea00f",
         "filename": "api/stats/rtcstats_objects.h",
         "patchSetId": 4
@@ -30,6 +48,23 @@
       "writtenOn": "2020-03-02T16:06:09Z",
       "side": 1,
       "message": "[In \"track\" but not \"outbound-rtp\"] What about framesSent and hugeFramesSent?",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96cee39e_7f52bf3a",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T16:22:41Z",
+      "side": 1,
+      "message": "I\u0027m happy to take a closer reviewing look, but for now:\n\nIt seems very error prone to have several methods all processing all the same stats. It would be easy, if a metric is modified or added, to forget to do it in all places.\n\nWould it be possible to...\n1) Report the metrics on a per-layer basis, e.g. GetPerLayerVideoSenderInfos().\n2) Aggregate the result of 1) as a separate method, e.g. GetAggregateVideoSenderInfos(), that takes the per-layer infos as input - ensuring that all metrics are snapshot of the exact same point in time. Lower layers need not be collected from twice to get both 1) and 2) type of infos.\n\nFor legacy getStats(), we simply report the aggregate and this should be no difference from before this CL.\n\nFor modern getStats(), for backwards-compatibility reasons, we still create \"track\" stats based on the aggregate infos. But for the simulcast stats, the \"outbound-rtp\" stats are created from the per-layer infos.",
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
