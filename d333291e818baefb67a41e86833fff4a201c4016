@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76c0129e_67d73529",
+        "filename": "rtc_base/bounded_inline_vector_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-02T11:49:05Z",
+      "side": 1,
+      "message": "may be instead\nTODO(bugs.webrtc.org/11391): Replace with std::uninitialized_default_construct_n() when webrtc (drop support for c++14|change minimum c++ version to 17|...)\n\nor create P4 bug for upgrading webrtc to c++17 and assign to that one",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "d333291e818baefb67a41e86833fff4a201c4016",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
