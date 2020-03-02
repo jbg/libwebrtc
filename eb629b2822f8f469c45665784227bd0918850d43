@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e328f39a_445ba05a",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T16:06:09Z",
+      "side": 1,
+      "message": "Notes for each \"track\" stats that was implemented prior to this CL...\n\ntrackIdentifier: Not in spec\u0027s outbound-rtp. Already available through \"outbound-rtp.mediaSourceId-\u003etrackIdentifier\"\n\nmediaSourceId: NOW IMPLEMENTED FOR SIMULCAST\n\nremoteSource: Not in spec\u0027s outbound-rtp and not needed because if it existed it would always be false.\n\nended: Not in spec\u0027s outbound-rtp. Reflects the ended state of the track, not sure we need that, but if we did we should add it to \"media-source\".\n\ndetached: Not in the spec\u0027s outbound-rtp and N/A.\n\njitterBufferDelay: N/A to sending, only receiving\njitterBufferDelayEmitted: N/A to sending, only receiving\n\nframeWidth: NOW IMPLEMENTED FOR SIMULCAST\nframeHeight: NOW IMPLEMENTED FOR SIMULCAST\n\nframesPerSecond: NOW IMPLEMENTED FOR SIMULCAST (but see other comment)\n\nframesSent: MISSING (see other comment)\nhugeFramesSent: MISSING (see other comment)\n\nframesReceived: N/A to sending, only receiving\nframesDecoded: N/A to sending, only receiving\nframesDropped: N/A to sending, only receiving\naudioLevel: N/A to sending, only receiving\ntotalAudioEnergy: N/A to sending, only receiving\nechoReturnLoss: N/A to sending, only receiving\nechoReturnLossEnhancement: N/A to sending, only receiving\ntotalSamplesReceived: N/A to sending, only receiving\ntotalSamplesDuration: N/A to sending, only receiving\nconcealedSamples: N/A to sending, only receiving\nsilentConcealedSamples: N/A to sending, only receiving\nconcealmentEvents: N/A to sending, only receiving\ninsertedSamplesForDeceleration: N/A to sending, only receiving\nremovedSamplesForAcceleration: N/A to sending, only receiving\njitterBufferFlushes: N/A to sending, only receiving\ndelayedPacketOutageSamples: N/A to sending, only receiving\nrelativePacketArrivalDelay: N/A to sending, only receiving\ninterruptionCount: N/A to sending, only receiving\ntotalInterruptionDuration: N/A to sending, only receiving\nfreezeCount: N/A to sending, only receiving\npauseCount: N/A to sending, only receiving\ntotalFreezesDuration: N/A to sending, only receiving\ntotalPausesDuration: N/A to sending, only receiving\ntotalFramesDuration: N/A to sending, only receiving\nsumSquaredFrameDurations: N/A to sending, only receiving",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "286a496a_216ea00f",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T16:06:09Z",
+      "side": 1,
+      "message": "[In \"track\" but not \"outbound-rtp\"] What about framesSent and hugeFramesSent?",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d79078a5_1604ceac",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T16:06:09Z",
+      "side": 1,
+      "message": "\"track.framesPerSecond\" was never implemented...\n\n1. What we had was \"track.framesSent\". To get the same metrics but moved, we need to add \"outbound-rtp.framesSent\". Can we add that? My hope is that if \"outbound-rtp\" has everything that \"track\" did then we can encourage deprecation.\n\n2. But \"outbound-rtp.framesPerSecond\" is indeed in the spec! Implementing that is nice but it is a new feature. Also, since this is defined as \"number of encoded frames during the last second\" and we already have \"outbound-rtp.framesEncoded\", we should be able to cover this with existing metrics. So for the sake of reviewing and landing, can you move framesPerSecond to a separate CL?",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
