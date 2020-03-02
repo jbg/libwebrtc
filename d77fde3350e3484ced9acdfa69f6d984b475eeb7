@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a85002fb_c4ff62fd",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T14:48:11Z",
+      "side": 1,
+      "message": "Can we rephrase this sentence? On initial reading it sounds like you should multiple the target by number of samples. But we just add to it for each sample. (Implementation-wise we end up processing multiple samples at a time, but that is a detail)\n\nSuggestion:\n\nThis value is increased by the target jitter buffer delay every time a sample is emitted by the jitter buffer. The added target is the target delay, in seconds, at the time that the sample was emitted from the jitter buffer.\n\nAssumptions with the above definition:\n\n1. I\u0027m assuming we take a snapshot of the target when the sample exits the jitter buffer rather than what the target was for that sample when it entered the jitter buffer, since if we do that we\u0027d have to remember each target between entering and exiting.\n\n2. I\u0027m assuming the target length is measured in time units. And time should be seconds. In other words, if the target was achieved, the following is true:\n\ndelta jitterBufferTargetDelay \u003d\u003d delta jitterBufferDelay\n\nCorrect?",
+      "revId": "d77fde3350e3484ced9acdfa69f6d984b475eeb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7b1694a_6e552921",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T14:48:11Z",
+      "side": 1,
+      "message": "The exact mechanism might not be standardizable (how we obtain the target is implementation-specific) and indeed an implementation might not even have a \"target\". Still it\u0027s not necessarily true that this can\u0027t be standardized - there are other targets in the spec e.g. availableOutgoingBitrate or totalEncodedBytesTarget. If we wanted to prioritize this we could do another attempt to convincing the working group.\n\nFor the comment, I would just say that this is a non-standard metric.\n\nOr, before landing this CL, we could perhaps add it to the \"provisional stats spec\" - a document that permits more experimental metrics:\n\nhttps://w3c.github.io/webrtc-provisional-stats/\nhttps://github.com/w3c/webrtc-provisional-stats\n\nThen we could link to that definition.",
+      "revId": "d77fde3350e3484ced9acdfa69f6d984b475eeb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba046f5d_0c2bc206",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T14:48:11Z",
+      "side": 1,
+      "message": "This is only available for audio, not video. This should be clear in the comment.\n\nI see no reason why this couldn\u0027t be implemented for video as well (unless video doesn\u0027t have a \"target\"?). Should there be a TODO comment to implement it for video as well if priority/need allows? Otherwise explain why this is not available for video, such as video not having a target.",
+      "revId": "d77fde3350e3484ced9acdfa69f6d984b475eeb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b42c603_34bcc7a9",
+        "filename": "modules/audio_coding/neteq/statistics_calculator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T14:48:11Z",
+      "side": 1,
+      "message": "Should there be a statistics_calculator_unittest.cc test?\n\nCan we have a test somewhere that ensures that this is an aggregate target value?",
+      "revId": "d77fde3350e3484ced9acdfa69f6d984b475eeb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2ef4df_57e8e0cb",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T14:48:11Z",
+      "side": 1,
+      "message": "jitterBufferDelay is measured in seconds, but jitterBufferTargetDelay is measured in milliseconds. This makes them not directly comparable, and also \"seconds\" is the standard unit of measurement.\n\nPlease change this to seconds (e.g. divide by rtc::kNumMillisecsPerSec like below). It\u0027s ok if lower layers uses ms but we should be consistent with what we expose in getStats().",
+      "revId": "d77fde3350e3484ced9acdfa69f6d984b475eeb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deda0638_b76e114d",
+        "filename": "pc/rtc_stats_collector_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1595,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-02T14:48:11Z",
+      "side": 1,
+      "message": "seconds: 7.894",
+      "revId": "d77fde3350e3484ced9acdfa69f6d984b475eeb7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
