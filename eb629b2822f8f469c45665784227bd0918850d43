@@ -103,6 +103,24 @@
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40b8ebf4_cf92a1e2",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-04T12:13:38Z",
+      "side": 1,
+      "message": "If you add framesSent and hugeFrameSent in this CL then we\u0027re good.\nIf you want to add framesPerSecond as well in the CL that\u0027s fine by me, my thought was just that this is an additional new feature that could be reviewed and landed as a follow-up (and if we had to revert it we could revert it separately). But you can decide.",
+      "parentUuid": "2b25e23a_2759d496",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
