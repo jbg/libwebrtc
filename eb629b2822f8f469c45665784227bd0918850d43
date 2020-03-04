@@ -54,6 +54,41 @@
     },
     {
       "key": {
+        "uuid": "d365f8dd_bace1bf4",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-04T15:39:50Z",
+      "side": 1,
+      "message": "frames_sent seems essential to any sensible statistics app.",
+      "parentUuid": "286a496a_216ea00f",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c01f6ec_22e8c117",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-04T15:39:50Z",
+      "side": 1,
+      "message": "This is a new meaning of \"legacy\". Can we call it something else?\nIs the point of \"legacy\" to avoid generating new stats that confuse old consumers?\nIf so call it \"limit_stats_for_old_consumers\"?",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "96cee39e_7f52bf3a",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 4
@@ -83,6 +118,57 @@
       "side": 1,
       "message": "Let me know when you\u0027ve taken a look at this comment. I\u0027ll do a deeper review then.",
       "parentUuid": "96cee39e_7f52bf3a",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41f73bdc_1d443d9f",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-04T15:39:50Z",
+      "side": 1,
+      "message": "Similarly GetVideoSenderInfoWithoutNewFancyStuff?",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f6b9765_733a46f0",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3055,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-04T15:39:50Z",
+      "side": 1,
+      "message": "hardcoded PT numbers are dangerous. Can we look at the actual codec?",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf8a03d0_e3cf0725",
+        "filename": "pc/track_media_info_map.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-04T15:39:50Z",
+      "side": 1,
+      "message": "Why not for (auto ssrc : ssrc_group.ssrcs)?\nBecause sender_info.ssrc() may or may not be a member of ssrc_group?",
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -136,6 +222,23 @@
       "side": 1,
       "message": "If you add framesSent and hugeFrameSent in this CL then we\u0027re good.\nIf you want to add framesPerSecond as well in the CL that\u0027s fine by me, my thought was just that this is an additional new feature that could be reviewed and landed as a follow-up (and if we had to revert it we could revert it separately). But you can decide.",
       "parentUuid": "2b25e23a_2759d496",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89c4a14a_98ab955c",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-04T15:39:50Z",
+      "side": 1,
+      "message": "Nit: You don\u0027t have to do this twice.",
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
