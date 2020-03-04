@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7737b8e9_39de3e26",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-03-04T12:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ded0fedd_3e9cf6a0",
+      "range": {
+        "startLine": 785,
+        "startChar": 39,
+        "endLine": 785,
+        "endChar": 65
+      },
+      "revId": "00b178e69f31de3e0f4a3f0e4eeb43a0b62cf5f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43edfa03_305482ec",
         "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
         "patchSetId": 3
@@ -69,6 +93,30 @@
       "revId": "00b178e69f31de3e0f4a3f0e4eeb43a0b62cf5f4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e1d9e41_43c99d5d",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-03-04T12:46:02Z",
+      "side": 1,
+      "message": "Agree that this last suggestion seems clearest. Thanks!",
+      "parentUuid": "4d9f88d9_b9e04a9e",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 803,
+        "endChar": 65
+      },
+      "revId": "00b178e69f31de3e0f4a3f0e4eeb43a0b62cf5f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
