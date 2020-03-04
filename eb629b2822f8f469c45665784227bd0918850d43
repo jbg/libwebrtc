@@ -85,6 +85,24 @@
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b25e23a_2759d496",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-04T08:25:47Z",
+      "side": 1,
+      "message": "Ok, I can add framesSent and hugeFramesSent, but when we already add new stats fields what problem does it create adding also framesPerSecond in one go? Would it be enough to remove just exposing it in RTCOutboundRTPStreamStats or better to revert all related changes?",
+      "parentUuid": "d79078a5_1604ceac",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
