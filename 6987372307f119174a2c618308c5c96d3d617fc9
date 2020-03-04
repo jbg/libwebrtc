@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3235628d_2ca5d587",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-04T10:15:54Z",
+      "side": 1,
+      "message": "Needs a\n\n  delete buffer; \n\nto not leak on failure.",
+      "range": {
+        "startLine": 793,
+        "startChar": 6,
+        "endLine": 793,
+        "endChar": 13
+      },
+      "revId": "6987372307f119174a2c618308c5c96d3d617fc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7e8b209_7f96c13a",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-04T10:15:54Z",
+      "side": 1,
+      "message": "I take it this captures a copy of the pointer, like a non-ref capture in a C++ lambda?",
+      "range": {
+        "startLine": 802,
+        "startChar": 50,
+        "endLine": 802,
+        "endChar": 56
+      },
+      "revId": "6987372307f119174a2c618308c5c96d3d617fc9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
