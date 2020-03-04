@@ -117,6 +117,30 @@
       "revId": "00b178e69f31de3e0f4a3f0e4eeb43a0b62cf5f4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f51b96c_fac9b3a0",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-04T12:51:37Z",
+      "side": 1,
+      "message": "Looks nice now.",
+      "parentUuid": "1e1d9e41_43c99d5d",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 803,
+        "endChar": 65
+      },
+      "revId": "00b178e69f31de3e0f4a3f0e4eeb43a0b62cf5f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
