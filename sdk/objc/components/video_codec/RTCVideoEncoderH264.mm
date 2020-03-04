@@ -782,9 +782,7 @@ NSUInteger GetMaxSampleRate(const webrtc::H264::ProfileLevelId &profile_level_id
     RTC_LOG(LS_INFO) << "Generated keyframe";
   }
 
-  // Convert the sample buffer into a buffer suitable for RTP packetization.
-  // TODO(tkchin): Allocate buffers through a pool.
-  std::unique_ptr<rtc::Buffer> buffer(new rtc::Buffer());
+  __block std::unique_ptr<rtc::Buffer> buffer(new rtc::Buffer());
   RTCRtpFragmentationHeader *header;
   {
     std::unique_ptr<webrtc::RTPFragmentationHeader> header_cpp;
@@ -797,7 +795,13 @@ NSUInteger GetMaxSampleRate(const webrtc::H264::ProfileLevelId &profile_level_id
   }
 
   RTCEncodedImage *frame = [[RTCEncodedImage alloc] init];
-  frame.buffer = [NSData dataWithBytesNoCopy:buffer->data() length:buffer->size() freeWhenDone:NO];
+  // This assumes ownership of `buffer` and is responsible for freeing it when done.
+  frame.buffer = [[NSData alloc] initWithBytesNoCopy:buffer->data()
+                                              length:buffer->size()
+                                         deallocator:^(void *bytes, NSUInteger size) {
+                                           std::unique_ptr<rtc::Buffer> owned_data =
+                                               std::move(buffer);
+                                         }];
   frame.encodedWidth = width;
   frame.encodedHeight = height;
   frame.completeFrame = YES;
