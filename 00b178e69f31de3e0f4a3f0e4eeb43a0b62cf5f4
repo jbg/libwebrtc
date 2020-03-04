@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ded0fedd_3e9cf6a0",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-04T12:24:01Z",
+      "side": 1,
+      "message": "nit: buffer \u003d std::make_unique\u003crtc::Buffer\u003e();",
+      "range": {
+        "startLine": 785,
+        "startChar": 39,
+        "endLine": 785,
+        "endChar": 65
+      },
+      "revId": "00b178e69f31de3e0f4a3f0e4eeb43a0b62cf5f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43edfa03_305482ec",
+        "filename": "sdk/objc/components/video_codec/RTCVideoEncoderH264.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-04T12:24:01Z",
+      "side": 1,
+      "message": "This is a bit odd; the move assignment happens not when the block is constructed, but when it is called, so a bit redundant. If I understand https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Blocks/Articles/bxVariables.html#//apple_ref/doc/uid/TP40007502-CH6-SW6 right, the magic comes from the block referencing the \"__block buffer\" variable at all.\n\nIt might work just as fine to have something like\n\n  (void) buffer.get();\n\nAnother alternative might be to go back to raw pointer late, like\n\n  auto buffer \u003d std::make_unique\u003crtc::Buffer\u003e();\n  ... code including early return on failure ...\n\n  rtc::Buffer *buffer_ptr \u003d buffer.release();  // For passing ownership to NSData\n  frame.buffer \u003d [[NSData alloc] ... deallocator:^(...){ delete buffer_ptr;}];\n\nIf you want to, you could even write a helper with a unique_ptr\u003crtc::Buffer\u003e as input, returning an NSData owning the buffer.\n\nI\u0027ll leave to you to write it in the way you find least obscure.",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 803,
+        "endChar": 65
+      },
+      "revId": "00b178e69f31de3e0f4a3f0e4eeb43a0b62cf5f4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
