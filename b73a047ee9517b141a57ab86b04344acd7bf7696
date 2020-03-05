@@ -46,6 +46,30 @@
       "revId": "b73a047ee9517b141a57ab86b04344acd7bf7696",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "838a670d_76cc16a9",
+        "filename": "rtc_base/timestamp_aligner.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-05T11:57:29Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "f4a7ec61_7abd2541",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 43
+      },
+      "revId": "b73a047ee9517b141a57ab86b04344acd7bf7696",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
