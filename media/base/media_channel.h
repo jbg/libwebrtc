@@ -581,8 +581,10 @@ struct VideoSenderInfo : public MediaSenderInfo {
   bool has_entered_low_resolution = false;
   absl::optional<uint64_t> qp_sum;
   webrtc::VideoContentType content_type = webrtc::VideoContentType::UNSPECIFIED;
+  uint32_t frames_sent = 0;
   // https://w3c.github.io/webrtc-stats/#dom-rtcvideosenderstats-hugeframessent
   uint32_t huge_frames_sent = 0;
+  std::string rid;
 };
 
 struct VideoReceiverInfo : public MediaReceiverInfo {
@@ -906,7 +908,8 @@ class VideoMediaChannel : public MediaChannel, public Delayable {
   // GetStats(), and merges with BandwidthEstimationInfo by itself.
   virtual void FillBitrateInfo(BandwidthEstimationInfo* bwe_info) = 0;
   // Gets quality stats for the channel.
-  virtual bool GetStats(VideoMediaInfo* info) = 0;
+  // The |legacy| disables some new stats like ssrc split for simulcast.
+  virtual bool GetStats(VideoMediaInfo* inf, bool legacy = false) = 0;
   // Set recordable encoded frame callback for |ssrc|
   virtual void SetRecordableEncodedFrameCallback(
       uint32_t ssrc,
