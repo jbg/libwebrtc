@@ -56,25 +56,6 @@ class BufferedReadAdapter : public AsyncSocketAdapter {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-// Implements a socket adapter that performs the client side of a
-// fake SSL handshake. Used for "ssltcp" P2P functionality.
-class AsyncSSLSocket : public BufferedReadAdapter {
- public:
-  static ArrayView<const uint8_t> SslClientHello();
-  static ArrayView<const uint8_t> SslServerHello();
-
-  explicit AsyncSSLSocket(AsyncSocket* socket);
-
-  int Connect(const SocketAddress& addr) override;
-
- protected:
-  void OnConnectEvent(AsyncSocket* socket) override;
-  void ProcessInput(char* data, size_t* len) override;
-  RTC_DISALLOW_COPY_AND_ASSIGN(AsyncSSLSocket);
-};
-
-///////////////////////////////////////////////////////////////////////////////
-
 // Implements a socket adapter that speaks the HTTP/S proxy protocol.
 class AsyncHttpsProxySocket : public BufferedReadAdapter {
  public:
