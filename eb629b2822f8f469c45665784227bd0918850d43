@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "7f2ac8ba_e214fa9e",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-05T08:50:34Z",
+      "side": 1,
+      "message": "OK, so it is the old stats. Carry on then.\nPerhaps add \", and is used when this function is called from the legacy stats API\".",
+      "parentUuid": "8f5d52b9_2f76f3b0",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "96cee39e_7f52bf3a",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 4
@@ -242,6 +260,24 @@
       "side": 1,
       "message": "I didn\u0027t like it either, but didn\u0027t find a better way how to detect rtx.",
       "parentUuid": "3f6b9765_733a46f0",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "248048d3_940b016e",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3055,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-05T08:50:34Z",
+      "side": 1,
+      "message": "Looking at this again, it\u0027s even worse because it parses the id field, which is supposed to be implementation-defined.\nWhat you should be doing is to find the stat with id \u003d\u003d codec_id and look at the mimeType field in that stat record. It\u0027s supposed to be a https://w3c.github.io/webrtc-stats/#codec-dict* and always be present if codec is in use.",
+      "parentUuid": "871ec738_54ac3aff",
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -383,6 +419,24 @@
       "side": 1,
       "message": "Hmm, I don\u0027t quite see where the redundancy is here. Can you add more detail about what exactly is done multiple times?",
       "parentUuid": "89c4a14a_98ab955c",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeeecf40_7cfcc58c",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-05T08:50:34Z",
+      "side": 1,
+      "message": "After line 959-960, you\u0027re guaranteed that stats-\u003eqp_sum is not absl::nullopt.\nSo you can remove the check on lines 963-964.",
+      "parentUuid": "0e172e12_42e73c30",
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
