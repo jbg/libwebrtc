@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a7697926_07d3f5ea",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-05T08:29:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "102f9920_e4296173",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "286a496a_216ea00f",
         "filename": "api/stats/rtcstats_objects.h",
         "patchSetId": 4
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "c61383ad_9d0c9b1c",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-05T08:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d365f8dd_bace1bf4",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c01f6ec_22e8c117",
         "filename": "media/base/media_channel.h",
         "patchSetId": 4
@@ -83,6 +119,24 @@
       "writtenOn": "2020-03-04T15:39:50Z",
       "side": 1,
       "message": "This is a new meaning of \"legacy\". Can we call it something else?\nIs the point of \"legacy\" to avoid generating new stats that confuse old consumers?\nIf so call it \"limit_stats_for_old_consumers\"?",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f5d52b9_2f76f3b0",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-05T08:29:59Z",
+      "side": 1,
+      "message": "By legacy I was thinking about supporting the old GetStats API, which according to hbos, we don\u0027t want to improve, so that users had more reasons to migrate to new promise based stats API. At the moment the flag only controls if to split stats by ssrc or not.",
+      "parentUuid": "6c01f6ec_22e8c117",
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -124,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "575dc382_6ba6870b",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-05T08:29:59Z",
+      "side": 1,
+      "message": "\u003e It would be easy, if a metric is modified or added, to forget to do it in all places.\n\nGenerally agree that copy-pasting code is evil, but here I made the copy (GetVideoSenderInfoLegacy) exactly to make it easier to keep legacy version frozen as was the wish, while making changes to the modern version. I think both the olds Stats API and track stats can be considered in frozen mode after this CL lands and on the way to get deprecated.",
+      "parentUuid": "13262362_4a3b58bb",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41f73bdc_1d443d9f",
         "filename": "media/engine/webrtc_video_engine.h",
         "patchSetId": 4
@@ -158,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "871ec738_54ac3aff",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3055,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-05T08:29:59Z",
+      "side": 1,
+      "message": "I didn\u0027t like it either, but didn\u0027t find a better way how to detect rtx.",
+      "parentUuid": "3f6b9765_733a46f0",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cf8a03d0_e3cf0725",
         "filename": "pc/track_media_info_map.cc",
         "patchSetId": 4
@@ -172,6 +262,24 @@
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae1a4c60_a47401de",
+        "filename": "pc/track_media_info_map.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-05T08:29:59Z",
+      "side": 1,
+      "message": "Yes, I guess ssrc_group is optional as for example rtx can be negotiated off in which case there is no ssrc group.",
+      "parentUuid": "cf8a03d0_e3cf0725",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -228,6 +336,24 @@
     },
     {
       "key": {
+        "uuid": "72157603_5b73e6f9",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-05T08:29:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "40b8ebf4_cf92a1e2",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89c4a14a_98ab955c",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 4
@@ -239,6 +365,24 @@
       "writtenOn": "2020-03-04T15:39:50Z",
       "side": 1,
       "message": "Nit: You don\u0027t have to do this twice.",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e172e12_42e73c30",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-05T08:29:59Z",
+      "side": 1,
+      "message": "Hmm, I don\u0027t quite see where the redundancy is here. Can you add more detail about what exactly is done multiple times?",
+      "parentUuid": "89c4a14a_98ab955c",
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
