@@ -599,7 +599,8 @@ bool AudioSendStream::SetupSendCodec(const Config& new_config) {
       RTC_DLOG(LS_INFO) << "Audio network adaptor enabled on SSRC "
                         << new_config.rtp.ssrc;
     } else {
-      RTC_NOTREACHED();
+      RTC_DLOG(LS_INFO) << "Failed to enable Audio network adaptor on SSRC "
+                        << new_config.rtp.ssrc;
     }
   }
 
@@ -699,7 +700,8 @@ void AudioSendStream::ReconfigureANA(const Config& new_config) {
         RTC_DLOG(LS_INFO) << "Audio network adaptor enabled on SSRC "
                           << new_config.rtp.ssrc;
       } else {
-        RTC_NOTREACHED();
+        RTC_DLOG(LS_INFO) << "Failed to enable Audio network adaptor on SSRC "
+                          << new_config.rtp.ssrc;
       }
     });
   } else {
