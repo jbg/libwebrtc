@@ -22,6 +22,30 @@
       "revId": "b73a047ee9517b141a57ab86b04344acd7bf7696",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4a7ec61_7abd2541",
+        "filename": "rtc_base/timestamp_aligner.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-03-05T10:25:03Z",
+      "side": 1,
+      "message": "I updated the wording a bit. PTAL.",
+      "parentUuid": "301a1457_c41e1fcd",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 43
+      },
+      "revId": "b73a047ee9517b141a57ab86b04344acd7bf7696",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
