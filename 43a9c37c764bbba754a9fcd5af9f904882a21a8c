@@ -22,6 +22,76 @@
       "revId": "43a9c37c764bbba754a9fcd5af9f904882a21a8c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd891d16_8f47298a",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-06T14:43:08Z",
+      "side": 1,
+      "message": "yes, proper api on its way.",
+      "parentUuid": "e0cf4028_f77e8d48",
+      "range": {
+        "startLine": 1075,
+        "startChar": 0,
+        "endLine": 1078,
+        "endChar": 41
+      },
+      "revId": "43a9c37c764bbba754a9fcd5af9f904882a21a8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ddb8e0e_dd2ac192",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1764,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-06T14:43:08Z",
+      "side": 1,
+      "message": "dd means \u0027dependency descriptor\u0027\nyou might want to name your variable differently.",
+      "range": {
+        "startLine": 1764,
+        "startChar": 21,
+        "endLine": 1764,
+        "endChar": 23
+      },
+      "revId": "43a9c37c764bbba754a9fcd5af9f904882a21a8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abcb16eb_e9c643dc",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-06T14:43:08Z",
+      "side": 1,
+      "message": "because Absolute capture time suppose to be used both for audio and video, you might want to test it for audio too.\n(e.g. take a look at TestNegotiateFrameDescriptorWhenExposedLocally )",
+      "range": {
+        "startLine": 1772,
+        "startChar": 6,
+        "endLine": 1772,
+        "endChar": 37
+      },
+      "revId": "43a9c37c764bbba754a9fcd5af9f904882a21a8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
