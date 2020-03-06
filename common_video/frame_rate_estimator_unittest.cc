@@ -14,6 +14,8 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 
+// Recompile this file.
+
 namespace webrtc {
 namespace {
 constexpr TimeDelta kDefaultWindow = TimeDelta::Millis(1000);
