@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2177759d_f66f209a",
+        "filename": "rtc_base/timestamp_aligner.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-06T07:38:55Z",
+      "side": 1,
+      "message": "Where is this used? It will not be able to provide any of the constraints enforced by ClipTimestamp below.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 61
+      },
+      "revId": "4e4e1efc489f6a5f00189aae328d1a9c7deaf111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
