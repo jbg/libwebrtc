@@ -29,13 +29,20 @@
 
 namespace webrtc {
 
-ActivityMonitor::ActivityMonitor() {
+ActivityMonitor::ActivityMonitor(AudioPacketizationCallback* next)
+    : next_(next) {
   ResetStatistics();
 }
 
-int32_t ActivityMonitor::InFrameType(AudioFrameType frame_type) {
+int32_t ActivityMonitor::SendData(AudioFrameType frame_type,
+                                  uint8_t payload_type,
+                                  uint32_t timestamp,
+                                  const uint8_t* payload_data,
+                                  size_t payload_len_bytes,
+                                  int64_t absolute_capture_timestamp_ms) {
   counter_[static_cast<int>(frame_type)]++;
-  return 0;
+  return next_->SendData(frame_type, payload_type, timestamp, payload_data,
+                         payload_len_bytes, absolute_capture_timestamp_ms);
 }
 
 void ActivityMonitor::PrintStatistics() {
@@ -68,11 +75,10 @@ TestVadDtx::TestVadDtx()
           AudioCodingModule::Config(decoder_factory_))),
       acm_receive_(AudioCodingModule::Create(
           AudioCodingModule::Config(decoder_factory_))),
-      channel_(new Channel),
-      monitor_(new ActivityMonitor) {
-  EXPECT_EQ(0, acm_send_->RegisterTransportCallback(channel_.get()));
+      channel_(std::make_unique<Channel>()),
+      monitor_(std::make_unique<ActivityMonitor>(channel_.get())) {
+  EXPECT_EQ(0, acm_send_->RegisterTransportCallback(monitor_.get()));
   channel_->RegisterReceiverACM(acm_receive_.get());
-  EXPECT_EQ(0, acm_send_->RegisterVADCallback(monitor_.get()));
 }
 
 bool TestVadDtx::RegisterCodec(const SdpAudioFormat& codec_format,
