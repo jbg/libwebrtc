@@ -1757,6 +1757,40 @@ TEST_F(MediaSessionDescriptionFactoryTest,
 }
 
 TEST_F(MediaSessionDescriptionFactoryTest,
+       NegotiateAbsoluteCaptureTimeWhenUnexposedLocally) {
+  MediaSessionOptions opts;
+  AddAudioVideoSections(RtpTransceiverDirection::kRecvOnly, &opts);
+
+  RtpExtension offer_dd(RtpExtension::kAbsoluteCaptureTimeUri, 7);
+  RtpExtension local_tsn(RtpExtension::kTransportSequenceNumberUri, 5);
+  f1_.set_video_rtp_header_extensions({offer_dd});
+  f2_.set_video_rtp_header_extensions({local_tsn});
+  std::unique_ptr<SessionDescription> offer = f1_.CreateOffer(opts, nullptr);
+  std::unique_ptr<SessionDescription> answer =
+      f2_.CreateAnswer(offer.get(), opts, nullptr);
+  EXPECT_THAT(
+      GetFirstVideoContentDescription(answer.get())->rtp_header_extensions(),
+      ElementsAre(offer_dd));
+}
+
+TEST_F(MediaSessionDescriptionFactoryTest,
+       NegotiateAbsoluteCaptureTimeWhenExposedLocally) {
+  MediaSessionOptions opts;
+  AddAudioVideoSections(RtpTransceiverDirection::kRecvOnly, &opts);
+
+  RtpExtension offer_dd(RtpExtension::kAbsoluteCaptureTimeUri, 7);
+  RtpExtension local_dd(RtpExtension::kAbsoluteCaptureTimeUri, 5);
+  f1_.set_video_rtp_header_extensions({offer_dd});
+  f2_.set_video_rtp_header_extensions({local_dd});
+  std::unique_ptr<SessionDescription> offer = f1_.CreateOffer(opts, nullptr);
+  std::unique_ptr<SessionDescription> answer =
+      f2_.CreateAnswer(offer.get(), opts, nullptr);
+  EXPECT_THAT(
+      GetFirstVideoContentDescription(answer.get())->rtp_header_extensions(),
+      ElementsAre(offer_dd));
+}
+
+TEST_F(MediaSessionDescriptionFactoryTest,
        TestOfferAnswerWithEncryptedRtpExtensionsBoth) {
   MediaSessionOptions opts;
   AddAudioVideoSections(RtpTransceiverDirection::kRecvOnly, &opts);
