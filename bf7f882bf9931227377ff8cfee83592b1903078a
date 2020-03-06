@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6c1b9944_e466fe50",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-03-06T20:09:33Z",
+      "side": 1,
+      "message": "Bad quality (i.e. insufficient bandwidth) is the only known to me scaling reason in the encoder. It\u0027s essentially the QP scaler, but implemented internally by libvpx vp9 encoder.",
+      "parentUuid": "f5a29067_903e291f",
+      "revId": "bf7f882bf9931227377ff8cfee83592b1903078a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6744ac19_b4dac0d3",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-03-06T16:42:08Z",
       "side": 1,
       "message": "In simulcast if we turn of layers, is it true that we don\u0027t report being quality limited neither in the spec-compliant getStats() API or if you look at legacy adapt counters?\n\nShould we file a bug and add a TODO? |bw_limited_resolution| is just one of the pieces.",
+      "revId": "bf7f882bf9931227377ff8cfee83592b1903078a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4812aa10_0d0fdede",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-03-06T20:09:33Z",
+      "side": 1,
+      "message": "No, we report it as bandwidth limited if we turn off layers. The |bw_limited_layers_| is made explicitly for that. It\u0027s wired for both legacy and standard APIs",
+      "parentUuid": "6744ac19_b4dac0d3",
       "revId": "bf7f882bf9931227377ff8cfee83592b1903078a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
