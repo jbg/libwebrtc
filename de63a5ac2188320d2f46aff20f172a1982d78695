@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa84245a_ed912cc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-06T13:44:22Z",
+      "side": 1,
+      "message": "Please mention that you only change comments and local variable names!",
+      "revId": "de63a5ac2188320d2f46aff20f172a1982d78695",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
