@@ -22,6 +22,30 @@
       "revId": "4e4e1efc489f6a5f00189aae328d1a9c7deaf111",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec07f313_6a8ed90d",
+        "filename": "rtc_base/timestamp_aligner.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-03-06T10:54:39Z",
+      "side": 1,
+      "message": "Since audio frame has a timespan. This is needed to calculate \"timestamp\" for a splitting of a time.\n\nSay I can map the two clocks for the last sample in a frame, but I still need to know the timestamp for one particular sample inside the frame.",
+      "parentUuid": "2177759d_f66f209a",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 61
+      },
+      "revId": "4e4e1efc489f6a5f00189aae328d1a9c7deaf111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
