@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0cf4028_f77e8d48",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-03-06T14:12:51Z",
+      "side": 1,
+      "message": "maybe good time to refactor this a bit. But I think since these are special treatment and will eventually go away, we do not need to put too much effort.",
+      "range": {
+        "startLine": 1075,
+        "startChar": 0,
+        "endLine": 1078,
+        "endChar": 41
+      },
+      "revId": "43a9c37c764bbba754a9fcd5af9f904882a21a8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
