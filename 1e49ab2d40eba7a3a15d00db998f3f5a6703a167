@@ -46,6 +46,30 @@
       "revId": "1e49ab2d40eba7a3a15d00db998f3f5a6703a167",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "576a65db_bafeb787",
+        "filename": "modules/audio_coding/test/TestVADDTX.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-06T11:38:06Z",
+      "side": 0,
+      "message": "That turned out to be straightforward. PTAL.",
+      "parentUuid": "76602b17_8734934a",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "1e49ab2d40eba7a3a15d00db998f3f5a6703a167",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
