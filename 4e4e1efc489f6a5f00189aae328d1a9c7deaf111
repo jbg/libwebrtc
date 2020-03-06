@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "81f802b4_6bad1e32",
+        "filename": "rtc_base/timestamp_aligner.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-06T12:17:38Z",
+      "side": 1,
+      "message": "\"if\"",
+      "range": {
+        "startLine": 86,
+        "startChar": 32,
+        "endLine": 86,
+        "endChar": 37
+      },
+      "revId": "4e4e1efc489f6a5f00189aae328d1a9c7deaf111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2177759d_f66f209a",
         "filename": "rtc_base/timestamp_aligner.h",
         "patchSetId": 2
@@ -70,6 +93,23 @@
       "revId": "4e4e1efc489f6a5f00189aae328d1a9c7deaf111",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb80e845_024c626b",
+        "filename": "rtc_base/timestamp_aligner.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-06T12:17:38Z",
+      "side": 1,
+      "message": "Strongly consider putting the added method in a separate CL, since (1) it\u0027s a separate change, and CLs should not bundle unrelated changes; and (2) that will enable you to state in the commit message that this CL only changes comments and local variable names.\n\nAlso, unit tests for the new method?",
+      "revId": "4e4e1efc489f6a5f00189aae328d1a9c7deaf111",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
