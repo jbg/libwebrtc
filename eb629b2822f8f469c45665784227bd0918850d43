@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "4d558506_4ef13ca3",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-08T14:24:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7f2ac8ba_e214fa9e",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96cee39e_7f52bf3a",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 4
@@ -214,6 +232,24 @@
     },
     {
       "key": {
+        "uuid": "1fe1cdcf_98b0af84",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-08T14:24:15Z",
+      "side": 1,
+      "message": "\u003eGetAggregateVideoSenderInfos()\n\nrenamed the method, but it doesn\u0027t aggregate based on input vector yet. That can be done too if that is the final wish. Personally I don\u0027t see great value doing this as it just adds a risk of making a bug during the rewrite while it is a throw away method anyway in long term.",
+      "parentUuid": "575dc382_6ba6870b",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41f73bdc_1d443d9f",
         "filename": "media/engine/webrtc_video_engine.h",
         "patchSetId": 4
@@ -228,6 +264,24 @@
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d263651_8649960c",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-08T14:24:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "41f73bdc_1d443d9f",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -281,6 +335,24 @@
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea1d8579_1517b5ab",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3055,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-08T14:24:15Z",
+      "side": 1,
+      "message": "Thanks for the hint.",
+      "parentUuid": "248048d3_940b016e",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -440,6 +512,24 @@
       "revId": "eb629b2822f8f469c45665784227bd0918850d43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa48b877_6040154f",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-08T14:24:15Z",
+      "side": 1,
+      "message": "Any chances that you missed the underscore at the end of \u0027stats_\u0027? The second part 963-964 operates with aggregated stats, while 959-960 does it for sub frame.",
+      "parentUuid": "aeeecf40_7cfcc58c",
+      "revId": "eb629b2822f8f469c45665784227bd0918850d43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
