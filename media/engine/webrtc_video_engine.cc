@@ -1430,8 +1430,12 @@ void WebRtcVideoChannel::FillSenderStats(VideoMediaInfo* video_media_info,
   for (std::map<uint32_t, WebRtcVideoSendStream*>::iterator it =
            send_streams_.begin();
        it != send_streams_.end(); ++it) {
-    video_media_info->senders.push_back(
-        it->second->GetVideoSenderInfo(log_stats));
+    auto infos = it->second->GetPerLayerVideoSenderInfos(log_stats);
+    video_media_info->aggregated_senders.push_back(
+        it->second->GetAggregatedVideoSenderInfo(infos));
+    for (auto&& info : infos) {
+      video_media_info->senders.push_back(info);
+    }
   }
 }
 
@@ -2300,9 +2304,145 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::AddOrUpdateSink(
         });
   }
 }
-
+std::vector<VideoSenderInfo>
+WebRtcVideoChannel::WebRtcVideoSendStream::GetPerLayerVideoSenderInfos(
+    bool log_stats) {
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  std::vector<VideoSenderInfo> infos;
+  auto info = GetVideoSenderInfo(log_stats);
+  for (uint32_t ssrc : parameters_.config.rtp.ssrcs) {
+    info.add_ssrc(ssrc);
+  }
+  if (stream_ == nullptr) {
+    infos.push_back(info);
+    return infos;
+  }
+  auto stats = stream_->GetStats();
+  if (stats.substreams.empty()) {
+    infos.push_back(info);
+    return infos;
+  }
+  for (auto&& sub_stream : stats.substreams) {
+    auto info = GetVideoSenderInfo(log_stats);
+    info.add_ssrc(sub_stream.first);
+    auto& ssrcs = parameters_.config.rtp.ssrcs;
+    auto it = std::find(ssrcs.begin(), ssrcs.end(), sub_stream.first);
+    if (it != parameters_.config.rtp.ssrcs.end()) {
+      size_t ssrc_index = std::distance(ssrcs.begin(), it);
+      if (ssrc_index < parameters_.config.rtp.rids.size()) {
+        info.rid = parameters_.config.rtp.rids[ssrc_index];
+      }
+    }
+    auto stream_stats = sub_stream.second;
+    info.send_frame_width = stream_stats.width;
+    info.send_frame_height = stream_stats.height;
+    info.framerate_sent = stream_stats.encode_frame_rate;
+    info.frames_encoded = stream_stats.frames_encoded;
+    info.key_frames_encoded = stream_stats.frame_counts.key_frames;
+    // TODO(pbos): Wire up additional stats, such as padding bytes.
+    info.payload_bytes_sent = stream_stats.rtp_stats.transmitted.payload_bytes;
+    info.header_and_padding_bytes_sent =
+        stream_stats.rtp_stats.transmitted.header_bytes +
+        stream_stats.rtp_stats.transmitted.padding_bytes;
+    info.packets_sent = stream_stats.rtp_stats.transmitted.packets;
+    info.total_packet_send_delay_ms = stream_stats.total_packet_send_delay_ms;
+    if (!stream_stats.is_rtx && !stream_stats.is_flexfec) {
+      info.retransmitted_bytes_sent =
+          stream_stats.rtp_stats.retransmitted.payload_bytes;
+      info.retransmitted_packets_sent =
+          stream_stats.rtp_stats.retransmitted.packets;
+    }
+    info.packets_lost = stream_stats.rtcp_stats.packets_lost;
+    if (stream_stats.width > info.send_frame_width)
+      info.send_frame_width = stream_stats.width;
+    if (stream_stats.height > info.send_frame_height)
+      info.send_frame_height = stream_stats.height;
+    info.firs_rcvd = stream_stats.rtcp_packet_type_counts.fir_packets;
+    info.nacks_rcvd = stream_stats.rtcp_packet_type_counts.nack_packets;
+    info.plis_rcvd = stream_stats.rtcp_packet_type_counts.pli_packets;
+    if (stream_stats.report_block_data.has_value() && !stream_stats.is_rtx &&
+        !stream_stats.is_flexfec) {
+      info.report_block_datas.push_back(stream_stats.report_block_data.value());
+    }
+    if (stream_stats.is_rtx) {
+      info.codec_name = "rtx";
+      if (parameters_.codec_settings) {
+        info.codec_payload_type = parameters_.codec_settings->rtx_payload_type;
+      }
+    }
+    info.fraction_lost =
+        static_cast<float>(stream_stats.rtcp_stats.fraction_lost) / (1 << 8);
+    if (stream_stats.qp_sum.has_value()) {
+      info.qp_sum = stream_stats.qp_sum;
+    }
+    info.total_encode_time_ms = stream_stats.total_encode_time_ms;
+    info.total_encoded_bytes_target = stream_stats.total_encoded_bytes_target;
+    infos.push_back(info);
+  }
+  return infos;
+}
 VideoSenderInfo WebRtcVideoChannel::WebRtcVideoSendStream::GetVideoSenderInfo(
     bool log_stats) {
+  VideoSenderInfo info;
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+
+  if (parameters_.codec_settings) {
+    info.codec_name = parameters_.codec_settings->codec.name;
+    info.codec_payload_type = parameters_.codec_settings->codec.id;
+  }
+
+  if (stream_ == NULL)
+    return info;
+
+  webrtc::VideoSendStream::Stats stats = stream_->GetStats();
+
+  if (log_stats)
+    RTC_LOG(LS_INFO) << stats.ToString(rtc::TimeMillis());
+
+  info.adapt_changes = stats.number_of_cpu_adapt_changes;
+  info.adapt_reason =
+      stats.cpu_limited_resolution ? ADAPTREASON_CPU : ADAPTREASON_NONE;
+  info.has_entered_low_resolution = stats.has_entered_low_resolution;
+
+  // Get bandwidth limitation info from stream_->GetStats().
+  // Input resolution (output from video_adapter) can be further scaled down or
+  // higher video layer(s) can be dropped due to bitrate constraints.
+  // Note, adapt_changes only include changes from the video_adapter.
+  if (stats.bw_limited_resolution)
+    info.adapt_reason |= ADAPTREASON_BANDWIDTH;
+
+  info.quality_limitation_reason = stats.quality_limitation_reason;
+  info.quality_limitation_durations_ms = stats.quality_limitation_durations_ms;
+  info.quality_limitation_resolution_changes =
+      stats.quality_limitation_resolution_changes;
+  info.encoder_implementation_name = stats.encoder_implementation_name;
+  info.ssrc_groups = ssrc_groups_;
+  info.framerate_input = stats.input_frame_rate;
+  info.framerate_sent = stats.encode_frame_rate;
+  info.avg_encode_ms = stats.avg_encode_time_ms;
+  info.encode_usage_percent = stats.encode_usage_percent;
+  info.frames_encoded = stats.frames_encoded;
+
+  info.total_encode_time_ms = stats.total_encode_time_ms;
+  info.total_encoded_bytes_target = stats.total_encoded_bytes_target;
+  info.qp_sum = stats.qp_sum;
+  info.nominal_bitrate = stats.media_bitrate_bps;
+
+  info.content_type = stats.content_type;
+  info.frames_sent = stats.frames_encoded;
+  info.huge_frames_sent = stats.huge_frames_sent;
+
+  info.send_frame_width = 0;
+  info.send_frame_height = 0;
+  info.total_packet_send_delay_ms = 0;
+  info.key_frames_encoded = 0;
+
+  return info;
+}
+
+VideoSenderInfo
+WebRtcVideoChannel::WebRtcVideoSendStream::GetAggregatedVideoSenderInfo(
+    const std::vector<VideoSenderInfo>& infos) {
   VideoSenderInfo info;
   RTC_DCHECK_RUN_ON(&thread_checker_);
   for (uint32_t ssrc : parameters_.config.rtp.ssrcs)
@@ -2317,9 +2457,6 @@ VideoSenderInfo WebRtcVideoChannel::WebRtcVideoSendStream::GetVideoSenderInfo(
     return info;
 
   webrtc::VideoSendStream::Stats stats = stream_->GetStats();
-
-  if (log_stats)
-    RTC_LOG(LS_INFO) << stats.ToString(rtc::TimeMillis());
 
   info.adapt_changes = stats.number_of_cpu_adapt_changes;
   info.adapt_reason =
@@ -2358,6 +2495,7 @@ VideoSenderInfo WebRtcVideoChannel::WebRtcVideoSendStream::GetVideoSenderInfo(
   info.nominal_bitrate = stats.media_bitrate_bps;
 
   info.content_type = stats.content_type;
+  info.frames_sent = stats.frames_sent;
   info.huge_frames_sent = stats.huge_frames_sent;
 
   info.send_frame_width = 0;
