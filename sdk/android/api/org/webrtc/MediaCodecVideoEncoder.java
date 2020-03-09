@@ -135,20 +135,6 @@ public class MediaCodecVideoEncoder {
     }
   }
 
-  // Tracks webrtc::VideoCodecType.
-  public enum VideoCodecType {
-    VIDEO_CODEC_UNKNOWN,
-    VIDEO_CODEC_VP8,
-    VIDEO_CODEC_VP9,
-    VIDEO_CODEC_AV1,
-    VIDEO_CODEC_H264;
-
-    @CalledByNative("VideoCodecType")
-    static VideoCodecType fromNativeIndex(int nativeIndex) {
-      return values()[nativeIndex];
-    }
-  }
-
   private static final int MEDIA_CODEC_RELEASE_TIMEOUT_MS = 5000; // Timeout for codec releasing.
   private static final int DEQUEUE_TIMEOUT = 0; // Non-blocking, no wait.
   private static final int BITRATE_ADJUSTMENT_FPS = 30;
@@ -331,7 +317,7 @@ public class MediaCodecVideoEncoder {
       CodecCapabilities.COLOR_QCOM_FormatYUV420SemiPlanar,
       COLOR_QCOM_FORMATYUV420PackedSemiPlanar32m};
   private static final int[] supportedSurfaceColorList = {CodecCapabilities.COLOR_FormatSurface};
-  private VideoCodecType type;
+  @VideoCodecType private int type;
   private int colorFormat;
 
   // Variables used for dynamic bitrate adjustment.
@@ -559,8 +545,8 @@ public class MediaCodecVideoEncoder {
   }
 
   @CalledByNativeUnchecked
-  boolean initEncode(VideoCodecType type, int profile, int width, int height, int kbps, int fps,
-      boolean useSurface) {
+  boolean initEncode(@VideoCodecType int type, int profile, int width, int height, int kbps,
+      int fps, boolean useSurface) {
     Logging.d(TAG,
         "Java initEncode: " + type + ". Profile: " + profile + " : " + width + " x " + height
             + ". @ " + kbps + " kbps. Fps: " + fps + ". Encode from texture : " + useSurface);
@@ -575,17 +561,17 @@ public class MediaCodecVideoEncoder {
     String mime = null;
     int keyFrameIntervalSec = 0;
     boolean configureH264HighProfile = false;
-    if (type == VideoCodecType.VIDEO_CODEC_VP8) {
+    if (type == VideoCodecType.VP8) {
       mime = VP8_MIME_TYPE;
       properties = findHwEncoder(
           VP8_MIME_TYPE, vp8HwList(), useSurface ? supportedSurfaceColorList : supportedColorList);
       keyFrameIntervalSec = 100;
-    } else if (type == VideoCodecType.VIDEO_CODEC_VP9) {
+    } else if (type == VideoCodecType.VP9) {
       mime = VP9_MIME_TYPE;
       properties = findHwEncoder(
           VP9_MIME_TYPE, vp9HwList, useSurface ? supportedSurfaceColorList : supportedColorList);
       keyFrameIntervalSec = 100;
-    } else if (type == VideoCodecType.VIDEO_CODEC_H264) {
+    } else if (type == VideoCodecType.H264) {
       mime = H264_MIME_TYPE;
       properties = findHwEncoder(H264_MIME_TYPE, h264HwList(),
           useSurface ? supportedSurfaceColorList : supportedColorList);
@@ -617,7 +603,7 @@ public class MediaCodecVideoEncoder {
 
     forcedKeyFrameMs = 0;
     lastKeyFrameMs = -1;
-    if (type == VideoCodecType.VIDEO_CODEC_VP8
+    if (type == VideoCodecType.VP8
         && properties.codecName.startsWith(qcomVp8HwProperties.codecPrefix)) {
       if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP
           || Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
