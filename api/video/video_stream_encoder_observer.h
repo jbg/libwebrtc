@@ -95,6 +95,8 @@ class VideoStreamEncoderObserver : public CpuOveruseMetricsObserver {
       const VideoCodec& codec,
       const VideoBitrateAllocation& allocation) {}
 
+  virtual void OnEncoderInternalScalerUpdate(bool scaled) {}
+
   // TODO(nisse): VideoStreamEncoder wants to query the stats, which makes this
   // not a pure observer. GetInputFrameRate is needed for the cpu adaptation, so
   // can be deleted if that responsibility is moved out to a VideoStreamAdaptor
