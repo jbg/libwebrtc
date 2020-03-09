@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff1fd690_53e3609e",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Can we make this absl::optional\u003cstd::string\u003e documenting the fact that it is not always present? I prefer explicit absl::nullopt for missing value rather than magical values like empty strings to mean missing.",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0849050a_5d2ec9b3",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Each of the methods GetPerLayerVideoSenderInfos(), GetAggreatedVideoSenderInfo() and GetVideoSenderInfo() seem to be invoking VideoSendStream::GetStats().\n\nThis could affect performance by grabbing locks several times, but also it could return different values at different times such that the substream counters don\u0027t add up to the total counters.\n\nCan we call GetStats() in one place, and then \"scavange\" the one return value for the metrics we want?",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2db8155e_46165f1b",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2384,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Is this meant to give an incomplete stats struct that is applicable for all layers, but is not designed to fill in everything?\n\n1. GetVideoSenderInfo() is not descriptive when there are other similarly named methods. Clarify by renaming it to indicate that this is a helper that fills in some of the stuff that are in common to all layers but it does not get you a complete info. I suppose this is the \"layer-agnostic\" version? Suggestion: FillInLayerAgnosticSenderInfo().\n2. The fact that this returns an object might give the false impression that it has been fully initialized, which is not the case. If you take VideoSenderInfo* as input and modify then it is more clear that it fills in some stuff, rather than giving you a complete object, and it\u0027s up to the caller of this method to make sure the rest has sensible values.",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92aac03a_5a36eb4f",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2421,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "framerate_sent \u003d encode_frame_rate?\n\n1. Encode rate and sent rate are not the same thing. Existing bug?\n\n2. Why do we set this here? The per-layer metrics should provide the per-layer value, and the aggregate metrics should be the aggregate of that. Shouldn\u0027t this be left undefined?",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5458e222_ce2f7203",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2424,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Frames encoded should be per-layer, shouldn\u0027t it? Why is it set?",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e66b4510_edc438f4",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2428,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Per-layer?",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db7b0259_b02843f6",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2432,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Encoded vs sent?\nPer-layer?",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e002771_3bfe476c",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2438,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Is this needed?",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e33c1330_7dc86167",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2445,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Why isn\u0027t GetAggregateVideoSenderInfo() adding all the infos together? Why is it performing its own GetStats()?\n\nCan this method be made a non-member function? Takes all the input and calculated the output, no \"this\" state needed or access to any other objects than the input stats that is being aggregated.",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52d9fa74_f60c606a",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-09T15:57:40Z",
+      "side": 1,
+      "message": "Can you add comments for GetPerLayerVideoSenderInfos() and GetAggregatedVideoSenderInfo() documenting what it is and why it exists?",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
