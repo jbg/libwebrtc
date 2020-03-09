@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f408948b_e6062c3b",
+        "filename": "modules/audio_coding/test/TestVADDTX.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-03-09T15:36:10Z",
+      "side": 1,
+      "message": "it is better not called an ActivityMonitor any longer. \n\nHow about Transport?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 15
+      },
+      "revId": "9420524f328809cdc9c12ce0080e7d3f4774ea77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
