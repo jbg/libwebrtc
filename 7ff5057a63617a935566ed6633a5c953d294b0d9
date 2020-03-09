@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7e637d5_4901e870",
+        "filename": "video/send_statistics_proxy.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-03-09T11:24:01Z",
+      "side": 1,
+      "message": "Thanks, but I think it better to attach this comment on the api/video interface.\n\nAnd the flag says if it\u0027s currently scaled down, right? \"was scaled down\" reads to me that maybe it will be set based on historic scaling of the stream.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 10
+      },
+      "revId": "7ff5057a63617a935566ed6633a5c953d294b0d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
