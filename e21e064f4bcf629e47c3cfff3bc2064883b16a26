@@ -16,6 +16,24 @@
       "revId": "e21e064f4bcf629e47c3cfff3bc2064883b16a26",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90b94205_592dab99",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-03-10T10:00:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b760af_6c7ca95c",
+      "revId": "e21e064f4bcf629e47c3cfff3bc2064883b16a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
