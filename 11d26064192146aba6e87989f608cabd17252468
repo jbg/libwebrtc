@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ea275a01_2f2c338b",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "I started with a folder directly under modules/ which I moved here.\nI\u0027ll add a few more files before I\u0027m done, so I guess the reason is to make it clear that these files belong together.",
+      "parentUuid": "b36fd94f_652a2980",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3e69af91_9234d776",
         "filename": "modules/rtp_rtcp/source/playback_timing_processor/OWNERS",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "84714515_9a7e8365",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3e69af91_9234d776",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 16
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c5a1b63_70be67db",
         "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.cc",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2020-03-10T17:25:00Z",
       "side": 1,
       "message": "is it ok to send this message every 1s-5s?\n\nthen instead of introducing new periodic timer you can attach this message to sender/receiver report.\n\nPlaybackTimingProcessor could be just part of (member) of RtcpSender that is used when RtcpSender decides to produce a new report.",
+      "range": {
+        "startLine": 31,
+        "startChar": 35,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c12e2c7_388b9e06",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "I will probably change to send every 100 ms. Every 1s-5s seems to seldom.",
+      "parentUuid": "7c5a1b63_70be67db",
       "range": {
         "startLine": 31,
         "startChar": 35,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "d9b58b1f_1639cd18",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Yes, this is just a placeholder for the actual code that will create RTCP packets.",
+      "parentUuid": "c266db62_e2852f4f",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 11
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35a2698f_d35d8c80",
         "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.cc",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2020-03-10T17:25:00Z",
       "side": 1,
       "message": "common practice for such cases is to use swap:\ninfo_to_send.swap(timing_infos_);",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 26
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a599dec8_c7d33d86",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35a2698f_d35d8c80",
       "range": {
         "startLine": 47,
         "startChar": 0,
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "e7f3e833_80e47792",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a907549_2d242d88",
+      "range": {
+        "startLine": 24,
+        "startChar": 19,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67d124a3_8d5c987f",
         "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
         "patchSetId": 1
@@ -160,6 +304,30 @@
       "revId": "11d26064192146aba6e87989f608cabd17252468",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c5bfc3f_4e13fe68",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67d124a3_8d5c987f",
+      "range": {
+        "startLine": 32,
+        "startChar": 43,
+        "endLine": 36,
+        "endChar": 61
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "b00efc75_7b7d37b9",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c442d343_5d6237cc",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "827663be_e978be27",
         "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
         "patchSetId": 1
@@ -197,6 +389,30 @@
       "writtenOn": "2020-03-10T17:25:00Z",
       "side": 1,
       "message": "please avoid introducing new Modules,\nrely on TaskQueue and RepeatingTask instead for periodic processing, if you need it to be periodic.\n\nProcessThread should be eventually replaced with TaskQueue when all Modules are removed.\n(bugs.webrtc.org/6289)",
+      "range": {
+        "startLine": 41,
+        "startChar": 39,
+        "endLine": 41,
+        "endChar": 45
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9149a686_d6026408",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Thanks, I didn\u0027t know that.\nThere\u0027s a 50% chance that this CL will be reverted within the next weeks. Due to the short time, I add this as a TODO for now that I will fix given that the CL is not reverted.\nIs that okay with you? Or are there any potential issues with having a Module?",
+      "parentUuid": "827663be_e978be27",
       "range": {
         "startLine": 41,
         "startChar": 39,
@@ -229,6 +445,30 @@
       "revId": "11d26064192146aba6e87989f608cabd17252468",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72199e4d_c0bb09c9",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48a30630_bd160621",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 33
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -278,6 +518,30 @@
     },
     {
       "key": {
+        "uuid": "a39d0fc3_c0e5c89c",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5d65bcf_c8b74536",
+      "range": {
+        "startLine": 68,
+        "startChar": 9,
+        "endLine": 68,
+        "endChar": 14
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49ee804e_60f91549",
         "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
         "patchSetId": 1
@@ -301,6 +565,30 @@
     },
     {
       "key": {
+        "uuid": "849fa735_5c706517",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49ee804e_60f91549",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8164b9_845a828f",
         "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
         "patchSetId": 1
@@ -312,6 +600,30 @@
       "writtenOn": "2020-03-10T17:25:00Z",
       "side": 1,
       "message": "std::multimap\u003cuint32_t, TimingInfo\u003e ?",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 45
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b4f8d79_f3e4e3ed",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "What would the benefit be of using a multimap?",
+      "parentUuid": "ce8164b9_845a828f",
       "range": {
         "startLine": 74,
         "startChar": 2,
@@ -344,6 +656,30 @@
       "revId": "11d26064192146aba6e87989f608cabd17252468",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90994194_0e258abd",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-10T22:43:33Z",
+      "side": 1,
+      "message": "Added RTC_GUARDED_BY(\u0026timing_infos_crit_)",
+      "parentUuid": "18c07552_cc4453fa",
+      "range": {
+        "startLine": 76,
+        "startChar": 11,
+        "endLine": 76,
+        "endChar": 38
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
