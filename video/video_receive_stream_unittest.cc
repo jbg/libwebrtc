@@ -120,7 +120,8 @@ class VideoReceiveStreamTest : public ::testing::Test {
         std::make_unique<webrtc::internal::VideoReceiveStream>(
             task_queue_factory_.get(), &rtp_stream_receiver_controller_,
             kDefaultNumCpuCores, &packet_router_, config_.Copy(),
-            process_thread_.get(), &call_stats_, clock_, timing_);
+            process_thread_.get(), &call_stats_, clock_,
+            /*playback_timing_callback=*/nullptr, timing_);
   }
 
  protected:
@@ -260,7 +261,8 @@ class VideoReceiveStreamTestWithFakeDecoder : public ::testing::Test {
     video_receive_stream_.reset(new webrtc::internal::VideoReceiveStream(
         task_queue_factory_.get(), &rtp_stream_receiver_controller_,
         kDefaultNumCpuCores, &packet_router_, config_.Copy(),
-        process_thread_.get(), &call_stats_, clock_, timing_));
+        process_thread_.get(), &call_stats_, clock_,
+        /*playback_timing_callback=*/nullptr, timing_));
     video_receive_stream_->SetAndGetRecordingState(std::move(state), false);
   }
 
@@ -492,6 +494,7 @@ class VideoReceiveStreamTestWithSimulatedClock : public ::testing::Test {
                               process_thread_.get(),
                               &call_stats_,
                               time_controller_.GetClock(),
+                              /*playback_timing_callback=*/nullptr,
                               new VCMTiming(time_controller_.GetClock())) {
     video_receive_stream_.Start();
   }

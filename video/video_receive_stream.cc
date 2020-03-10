@@ -32,6 +32,7 @@
 #include "call/rtx_receive_stream.h"
 #include "common_video/include/incoming_video_stream.h"
 #include "media/base/h264_profile_level_id.h"
+#include "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h"
 #include "modules/utility/include/process_thread.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_coding_defines.h"
@@ -191,6 +192,7 @@ VideoReceiveStream::VideoReceiveStream(
     ProcessThread* process_thread,
     CallStats* call_stats,
     Clock* clock,
+    PlaybackTimingCallback* playback_timing_callback,
     VCMTiming* timing)
     : task_queue_factory_(task_queue_factory),
       transport_adapter_(config.rtcp_send_transport),
@@ -198,6 +200,7 @@ VideoReceiveStream::VideoReceiveStream(
       num_cpu_cores_(num_cpu_cores),
       process_thread_(process_thread),
       clock_(clock),
+      playback_timing_callback_(playback_timing_callback),
       call_stats_(call_stats),
       source_tracker_(clock_),
       stats_proxy_(&config_, clock_),
@@ -276,7 +279,8 @@ VideoReceiveStream::VideoReceiveStream(
     VideoReceiveStream::Config config,
     ProcessThread* process_thread,
     CallStats* call_stats,
-    Clock* clock)
+    Clock* clock,
+    PlaybackTimingCallback* playback_timing_callback)
     : VideoReceiveStream(task_queue_factory,
                          receiver_controller,
                          num_cpu_cores,
@@ -285,6 +289,7 @@ VideoReceiveStream::VideoReceiveStream(
                          process_thread,
                          call_stats,
                          clock,
+                         playback_timing_callback,
                          new VCMTiming(clock)) {}
 
 VideoReceiveStream::~VideoReceiveStream() {
@@ -523,6 +528,31 @@ void VideoReceiveStream::OnFrame(const VideoFrame& video_frame) {
                                      estimated_freq_khz);
   }
   source_tracker_.OnFrameDelivered(video_frame.packet_infos());
+  if (config_.rtp.playback_timing && playback_timing_callback_ &&
+      video_frame.processing_time()) {
+    // TODO(kron): Move first/last packet receive time to RtpPacketInfos.
+    Timestamp first_packet_received = Timestamp::Millis(
+        std::min_element(
+            video_frame.packet_infos().cbegin(),
+            video_frame.packet_infos().cend(),
+            [](const webrtc::RtpPacketInfo& a, const webrtc::RtpPacketInfo& b) {
+              return a.receive_time_ms() < b.receive_time_ms();
+            })
+            ->receive_time_ms());
+    Timestamp last_packet_received = Timestamp::Millis(
+        std::max_element(
+            video_frame.packet_infos().cbegin(),
+            video_frame.packet_infos().cend(),
+            [](const webrtc::RtpPacketInfo& a, const webrtc::RtpPacketInfo& b) {
+              return a.receive_time_ms() < b.receive_time_ms();
+            })
+            ->receive_time_ms());
+    playback_timing_callback_->UpdatePacketAndDecodeTiming(
+        config_.rtp.local_ssrc,
+        {video_frame.timestamp(), first_packet_received, last_packet_received,
+         video_frame.processing_time()->start,
+         video_frame.processing_time()->finish});
+  }
 
   config_.renderer->OnFrame(video_frame);
 
