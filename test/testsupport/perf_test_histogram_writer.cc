@@ -120,6 +120,12 @@ class PerfTestHistogramWriter : public PerfTestResultWriter {
       generic_set->add_values(AsJsonString(trace_name));
       histograms_[measurement_and_story]->AddDiagnostic(
           catapult::kStoriesDiagnostic, stories);
+
+      // Turn off all summary options - just display the values.
+      proto::SummaryOptions options;
+      options.set_std(false);
+      options.set_count(true);
+      histograms_[measurement_and_story]->SetSummaryOptions(options);
     }
 
     if (units == "bps") {
