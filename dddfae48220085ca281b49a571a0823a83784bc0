@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "238fd438_a64fe280",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-03-10T12:47:11Z",
+      "side": 1,
+      "message": "nit: Might be good to establish a pattern here, i.e. always have one of these java_cpp_enum targets per rtc_library target if necessary and name it consistently i.e. video_frame_java_enums or something similar",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 3
+      },
+      "revId": "dddfae48220085ca281b49a571a0823a83784bc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0103979_65d82f82",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-03-10T12:47:11Z",
+      "side": 1,
+      "message": "It is a bit annoying that we have to add this dependency even though as I understand it is really needed by //api/video:video_codec_type_enum. Is it possible to have it there instead?",
+      "range": {
+        "startLine": 328,
+        "startChar": 6,
+        "endLine": 328,
+        "endChar": 71
+      },
+      "revId": "dddfae48220085ca281b49a571a0823a83784bc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
