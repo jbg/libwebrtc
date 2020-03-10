@@ -140,6 +140,29 @@
     },
     {
       "key": {
+        "uuid": "67d124a3_8d5c987f",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-10T17:27:35Z",
+      "side": 1,
+      "message": "may be take PlaybackTimingProcessor::TimingInfo instead of 5 individual parameters.",
+      "range": {
+        "startLine": 32,
+        "startChar": 43,
+        "endLine": 36,
+        "endChar": 61
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c442d343_5d6237cc",
         "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
         "patchSetId": 1
@@ -179,6 +202,29 @@
         "startChar": 39,
         "endLine": 41,
         "endChar": 45
+      },
+      "revId": "11d26064192146aba6e87989f608cabd17252468",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48a30630_bd160621",
+        "filename": "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-10T17:27:35Z",
+      "side": 1,
+      "message": "(webrtc::)Timestamp first_packet_received;\nor\nint64_t first_packet_received(_ms|_us|_ns)\n\nFirst option probably better.",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 33
       },
       "revId": "11d26064192146aba6e87989f608cabd17252468",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
