@@ -398,7 +398,7 @@
       'ios', 'release_bot', 'arm', 'no_ios_code_signing'
     ],
     'ios_debug_bot_arm64': [
-      'ios', 'debug_bot', 'arm64', 'no_ios_code_signing'
+      'ios', 'debug_bot', 'arm64', 'no_ios_code_signing', 'ios_use_goma_rbe'
     ],
     'ios_release_bot_arm64': [
       'ios', 'release_bot', 'arm64', 'no_ios_code_signing'
@@ -504,6 +504,10 @@
 
     'goma': {
       'gn_args': 'use_goma=true',
+    },
+
+    'ios_use_goma_rbe': {
+      'gn_args': 'ios_use_goma_rbe=true',
     },
 
     'ios': {
