@@ -14,9 +14,15 @@
 #include <string.h>
 #include <time.h>
 
+#include "absl/flags/parse.h"
 #include "modules/audio_coding/codecs/isac/fix/include/isacfix.h"
 #include "test/gtest.h"
 #include "test/testsupport/perf_test.h"
+
+ABSL_FLAG(std::string,
+          isolated_script_test_perf_output,
+          "",
+          "Path where the perf results should be stored.");
 
 // TODO(kma): Clean up the code and change benchmarking the whole codec to
 // separate encoder and decoder.
@@ -105,8 +111,6 @@ TEST(IsacFixTest, Kenny) {
   FILE *inp, *outp, *f_bn, *outbits;
   int endfile;
 
-  const char* chartjson_result_file = NULL;
-
   int i;
   int errtype, h = 0, k, packetLossPercent = 0;
   int16_t CodingMode;
@@ -163,7 +167,7 @@ TEST(IsacFixTest, Kenny) {
   packetLossPercent = 0;
 
   /* Handling wrong input arguments in the command line */
-  if ((argc < 3) || (argc > 22)) {
+  if ((argc < 3) || (argc > 23)) {
     printf("\n\nWrong number of arguments or flag values.\n\n");
 
     printf("\n");
@@ -246,11 +250,17 @@ TEST(IsacFixTest, Kenny) {
     printf("[--isolated_script_test_perf_output=file]\n");
     printf(
         "                 :If this option is specified, perf values will be"
-        " written to this file in a JSON format.\n\n");
+        " written to this file (in a JSON format by default).\n\n");
+    printf("[--write_histogram_proto_json]\n");
+    printf(
+        "                 :If this option is specified, perf values will be"
+        " written in the proto format instead.\n\n");
     printf("Example usage    :\n\n");
     printf("%s -I bottleneck.txt speechIn.pcm speechOut.pcm\n\n", argv[0]);
     exit(1);
   }
+
+  absl::ParseCommandLine(argc, argv);
 
   /* Print version number */
   WebRtcIsacfix_version(version_number);
@@ -452,14 +462,12 @@ TEST(IsacFixTest, Kenny) {
       }
       i++;
     }
-
     if (strstr(argv[i], "--isolated_script_test_perf_output") == argv[i]) {
-      const char* filename_start = strstr(argv[i], "=");
-      if (!filename_start || strlen(filename_start) < 2) {
-        printf("Expected --isolated_script_test_perf_output=/some/filename\n");
-        exit(1);
-      }
-      chartjson_result_file = filename_start + 1;
+      // This flag is handled by abseil.
+      i++;
+    }
+    if (strstr(argv[i], "--write_histogram_proto_json") == argv[i]) {
+      // This flag is handled by abseil.
     }
   }
 
@@ -860,8 +868,10 @@ TEST(IsacFixTest, Kenny) {
   webrtc::test::PrintResult("isac", "", "time_per_10ms_frame",
                             (runtime * 10000) / length_file, "us", false);
 
-  if (chartjson_result_file) {
-    webrtc::test::WritePerfResults(chartjson_result_file);
+  std::string perf_output_file =
+      absl::GetFlag(FLAGS_isolated_script_test_perf_output);
+  if (!perf_output_file.empty()) {
+    webrtc::test::WritePerfResults(perf_output_file);
   }
 
   fclose(inp);
