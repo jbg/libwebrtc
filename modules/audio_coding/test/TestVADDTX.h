@@ -22,10 +22,18 @@
 
 namespace webrtc {
 
-class ActivityMonitor : public ACMVADCallback {
+class MonitoringAudioPacketizationCallback : public AudioPacketizationCallback {
  public:
-  ActivityMonitor();
-  int32_t InFrameType(AudioFrameType frame_type);
+  explicit MonitoringAudioPacketizationCallback(
+      AudioPacketizationCallback* next);
+
+  int32_t SendData(AudioFrameType frame_type,
+                   uint8_t payload_type,
+                   uint32_t timestamp,
+                   const uint8_t* payload_data,
+                   size_t payload_len_bytes,
+                   int64_t absolute_capture_timestamp_ms) override;
+
   void PrintStatistics();
   void ResetStatistics();
   void GetStatistics(uint32_t* stats);
@@ -35,6 +43,7 @@ class ActivityMonitor : public ACMVADCallback {
   // 1 - kAudioFrameSpeech
   // 2 - kAudioFrameCN
   uint32_t counter_[3];
+  AudioPacketizationCallback* const next_;
 };
 
 // TestVadDtx is to verify that VAD/DTX perform as they should. It runs through
@@ -74,7 +83,7 @@ class TestVadDtx {
   std::unique_ptr<AudioCodingModule> acm_send_;
   std::unique_ptr<AudioCodingModule> acm_receive_;
   std::unique_ptr<Channel> channel_;
-  std::unique_ptr<ActivityMonitor> monitor_;
+  std::unique_ptr<MonitoringAudioPacketizationCallback> packetization_callback_;
   uint32_t time_stamp_ = 0x12345678;
 };
 
