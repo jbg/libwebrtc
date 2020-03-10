@@ -201,6 +201,26 @@ uint32_t RTCPReceiver::RemoteSSRC() const {
   return remote_ssrc_;
 }
 
+TimeDelta RTCPReceiver::LatestRtt(absl::optional<uint32_t> remote_ssrc) const {
+  rtc::CritScope lock(&rtcp_receiver_lock_);
+
+  auto it = received_report_blocks_.find(main_ssrc_);
+  if (it == received_report_blocks_.end())
+    return TimeDelta::MinusInfinity();
+
+  auto it_info =
+      remote_ssrc ? it->second.find(*remote_ssrc) : it->second.begin();
+  if (it_info == it->second.end())
+    return TimeDelta::MinusInfinity();
+
+  const ReportBlockData* report_block_data = &it_info->second;
+
+  if (report_block_data->num_rtts() == 0)
+    return TimeDelta::MinusInfinity();
+
+  return TimeDelta::Millis(report_block_data->last_rtt_ms());
+}
+
 int32_t RTCPReceiver::RTT(uint32_t remote_ssrc,
                           int64_t* last_rtt_ms,
                           int64_t* avg_rtt_ms,

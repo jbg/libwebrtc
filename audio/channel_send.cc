@@ -869,24 +869,10 @@ RtpRtcp* ChannelSend::GetRtpRtcp() const {
 }
 
 int64_t ChannelSend::GetRTT() const {
-  std::vector<RTCPReportBlock> report_blocks;
-  _rtpRtcpModule->RemoteRTCPStat(&report_blocks);
-
-  if (report_blocks.empty()) {
-    return 0;
-  }
-
-  int64_t rtt = 0;
-  int64_t avg_rtt = 0;
-  int64_t max_rtt = 0;
-  int64_t min_rtt = 0;
   // We don't know in advance the remote ssrc used by the other end's receiver
-  // reports, so use the SSRC of the first report block for calculating the RTT.
-  if (_rtpRtcpModule->RTT(report_blocks[0].sender_ssrc, &rtt, &avg_rtt,
-                          &min_rtt, &max_rtt) != 0) {
-    return 0;
-  }
-  return rtt;
+  // reports, so ask rtp_rtcp module to use SSRC of the first report block for
+  // calculating the RTT.
+  return _rtpRtcpModule->LatestRtt(absl::nullopt).ms_or(0);
 }
 
 void ChannelSend::SetFrameEncryptor(

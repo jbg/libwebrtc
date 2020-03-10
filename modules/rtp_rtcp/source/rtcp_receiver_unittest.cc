@@ -51,9 +51,12 @@ using ::testing::_;
 using ::testing::AllOf;
 using ::testing::ElementsAreArray;
 using ::testing::Field;
+using ::testing::Ge;
 using ::testing::InSequence;
 using ::testing::IsEmpty;
+using ::testing::Le;
 using ::testing::NiceMock;
+using ::testing::Optional;
 using ::testing::Property;
 using ::testing::SizeIs;
 using ::testing::StrEq;
@@ -237,9 +240,7 @@ TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesRTT) {
   const uint32_t kDelayNtp = r.Rand(0, 0x7fffffff);
   const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
 
-  int64_t rtt_ms = 0;
-  EXPECT_EQ(
-      -1, rtcp_receiver_.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
+  EXPECT_FALSE(rtcp_receiver_.LatestRtt(kSenderSsrc).IsFinite());
 
   uint32_t sent_ntp =
       CompactNtp(TimeMicrosToNtp(system_clock_.TimeInMicroseconds()));
@@ -257,9 +258,9 @@ TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesRTT) {
   EXPECT_CALL(bandwidth_observer_, OnReceivedRtcpReceiverReport(_, _, _));
   InjectRtcpPacket(sr);
 
-  EXPECT_EQ(
-      0, rtcp_receiver_.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
-  EXPECT_NEAR(kRttMs, rtt_ms, 1);
+  EXPECT_THAT(rtcp_receiver_.LatestRtt(kSenderSsrc),
+              AllOf(Ge(TimeDelta::Millis(kRttMs - 1)),
+                    Le(TimeDelta::Millis(kRttMs + 1))));
 }
 
 TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesNegativeRTTAsOne) {
@@ -268,9 +269,7 @@ TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesNegativeRTTAsOne) {
   const uint32_t kDelayNtp = r.Rand(0, 0x7fffffff);
   const int64_t kDelayMs = CompactNtpRttToMs(kDelayNtp);
 
-  int64_t rtt_ms = 0;
-  EXPECT_EQ(
-      -1, rtcp_receiver_.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
+  EXPECT_FALSE(rtcp_receiver_.LatestRtt(kSenderSsrc).IsFinite());
 
   uint32_t sent_ntp =
       CompactNtp(TimeMicrosToNtp(system_clock_.TimeInMicroseconds()));
@@ -289,9 +288,7 @@ TEST_F(RtcpReceiverTest, InjectSrPacketCalculatesNegativeRTTAsOne) {
               OnReceivedRtcpReceiverReport(SizeIs(1), _, _));
   InjectRtcpPacket(sr);
 
-  EXPECT_EQ(
-      0, rtcp_receiver_.RTT(kSenderSsrc, &rtt_ms, nullptr, nullptr, nullptr));
-  EXPECT_EQ(1, rtt_ms);
+  EXPECT_EQ(rtcp_receiver_.LatestRtt(kSenderSsrc), TimeDelta::Millis(1));
 }
 
 TEST_F(
@@ -546,8 +543,7 @@ TEST_F(RtcpReceiverTest, GetRtt) {
   const uint32_t kSentCompactNtp = 0x1234;
   const uint32_t kDelayCompactNtp = 0x222;
   // No report block received.
-  EXPECT_EQ(
-      -1, rtcp_receiver_.RTT(kSenderSsrc, nullptr, nullptr, nullptr, nullptr));
+  EXPECT_FALSE(rtcp_receiver_.LatestRtt(kSenderSsrc).IsFinite());
 
   rtcp::ReportBlock rb;
   rb.SetMediaSsrc(kReceiverMainSsrc);
@@ -564,8 +560,7 @@ TEST_F(RtcpReceiverTest, GetRtt) {
   InjectRtcpPacket(rr);
 
   EXPECT_EQ(now, rtcp_receiver_.LastReceivedReportBlockMs());
-  EXPECT_EQ(
-      0, rtcp_receiver_.RTT(kSenderSsrc, nullptr, nullptr, nullptr, nullptr));
+  EXPECT_TRUE(rtcp_receiver_.LatestRtt(kSenderSsrc).IsFinite());
 }
 
 // Ij packets are ignored.
