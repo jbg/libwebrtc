@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af827905_58bc0163",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-10T12:38:52Z",
+      "side": 1,
+      "message": "may be you can merged these two into one:\nEXPECT_EQ(packet.GetExtension\u003cRtpMid\u003e(), kMid);\n\n(GetExtension variant without parameters returns absl::optional\u003cExtensionTrait::value_type\u003e which should be absl::optional\u003cstd::string\u003e in this case.\nno sure if you can compare optional\u003cstring\u003e and char[]. but if you change kMid to be an std::string, then you can compare optional\u003cstring\u003e and string)",
+      "range": {
+        "startLine": 1463,
+        "startChar": 4,
+        "endLine": 1464,
+        "endChar": 25
+      },
+      "revId": "70ef95ee2df481c9baaea1ac3bad1cf1aefaaf52",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
