@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fa5c8ac_56ef5d60",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-10T10:43:21Z",
+      "side": 1,
+      "message": "Just a nit, we should try to avoid to leak call/ types through this API.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 37
+      },
+      "revId": "ada9e05be990d247f559e70fce8d034b121dd0f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
