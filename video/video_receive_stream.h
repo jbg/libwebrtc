@@ -36,6 +36,7 @@
 namespace webrtc {
 
 class CallStats;
+class PlaybackTimingCallback;
 class ProcessThread;
 class RTPFragmentationHeader;
 class RtpStreamReceiverInterface;
@@ -64,6 +65,7 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
                      ProcessThread* process_thread,
                      CallStats* call_stats,
                      Clock* clock,
+                     PlaybackTimingCallback* playback_timing_callback,
                      VCMTiming* timing);
   VideoReceiveStream(TaskQueueFactory* task_queue_factory,
                      RtpStreamReceiverControllerInterface* receiver_controller,
@@ -72,7 +74,8 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
                      VideoReceiveStream::Config config,
                      ProcessThread* process_thread,
                      CallStats* call_stats,
-                     Clock* clock);
+                     Clock* clock,
+                     PlaybackTimingCallback* playback_timing_callback);
   ~VideoReceiveStream() override;
 
   const Config& config() const { return config_; }
@@ -160,6 +163,7 @@ class VideoReceiveStream : public webrtc::VideoReceiveStream,
   const int num_cpu_cores_;
   ProcessThread* const process_thread_;
   Clock* const clock_;
+  PlaybackTimingCallback* const playback_timing_callback_;
 
   CallStats* const call_stats_;
 

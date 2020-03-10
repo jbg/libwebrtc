@@ -40,6 +40,7 @@
 #include "modules/rtp_rtcp/include/flexfec_receiver.h"
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
+#include "modules/rtp_rtcp/source/playback_timing_processor/playback_timing_processor.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/rtp_rtcp/source/rtp_utility.h"
 #include "modules/utility/include/process_thread.h"
@@ -364,7 +365,7 @@ class Call final : public webrtc::Call,
   AvgCounter pacer_bitrate_kbps_counter_ RTC_GUARDED_BY(&bitrate_crit_);
 
   ReceiveSideCongestionController receive_side_cc_;
-
+  PlaybackTimingProcessor playback_timing_processor_;
   const std::unique_ptr<ReceiveTimeCalculator> receive_time_calculator_;
 
   const std::unique_ptr<SendDelayStats> video_send_delay_stats_;
@@ -459,6 +460,7 @@ Call::Call(Clock* clock,
       estimated_send_bitrate_kbps_counter_(clock_, nullptr, true),
       pacer_bitrate_kbps_counter_(clock_, nullptr, true),
       receive_side_cc_(clock_, transport_send->packet_router()),
+      playback_timing_processor_(clock_, transport_send->packet_router()),
       receive_time_calculator_(ReceiveTimeCalculator::CreateFromFieldTrial()),
       video_send_delay_stats_(new SendDelayStats(clock_)),
       start_ms_(clock_->TimeInMilliseconds()),
@@ -474,6 +476,8 @@ Call::Call(Clock* clock,
       receive_side_cc_.GetRemoteBitrateEstimator(true), RTC_FROM_HERE);
   module_process_thread_->RegisterModule(call_stats_.get(), RTC_FROM_HERE);
   module_process_thread_->RegisterModule(&receive_side_cc_, RTC_FROM_HERE);
+  module_process_thread_->RegisterModule(&playback_timing_processor_,
+                                         RTC_FROM_HERE);
 }
 
 Call::~Call() {
@@ -840,7 +844,8 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
   VideoReceiveStream* receive_stream = new VideoReceiveStream(
       task_queue_factory_, &video_receiver_controller_, num_cpu_cores_,
       transport_send_ptr_->packet_router(), std::move(configuration),
-      module_process_thread_.get(), call_stats_.get(), clock_);
+      module_process_thread_.get(), call_stats_.get(), clock_,
+      &playback_timing_processor_);
 
   const webrtc::VideoReceiveStream::Config& config = receive_stream->config();
   {

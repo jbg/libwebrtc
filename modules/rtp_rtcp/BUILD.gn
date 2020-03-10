@@ -156,6 +156,8 @@ rtc_library("rtp_rtcp") {
     "source/forward_error_correction_internal.h",
     "source/packet_loss_stats.cc",
     "source/packet_loss_stats.h",
+    "source/playback_timing_processor/playback_timing_processor.cc",
+    "source/playback_timing_processor/playback_timing_processor.h",
     "source/receive_statistics_impl.cc",
     "source/receive_statistics_impl.h",
     "source/remote_ntp_time_estimator.cc",
