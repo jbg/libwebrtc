@@ -467,16 +467,14 @@ void OveruseFrameDetectorResourceAdaptationModule::OnResourceUnderuse(
   const int input_pixels = LastInputFrameSizeOrDefault();
   const int input_fps = encoder_stats_observer_->GetInputFrameRate();
   // Should we adapt, if so to what target?
-  VideoStreamAdapter::AdaptationTargetOrReason target_or_reason =
-      stream_adapter_->GetAdaptUpTarget(encoder_settings_,
-                                        encoder_target_bitrate_bps_, input_mode,
-                                        input_pixels, input_fps, reason);
-  if (!target_or_reason.has_target())
+  Adaptation adaptation = stream_adapter_->GetAdaptUpTarget(
+      encoder_settings_, encoder_target_bitrate_bps_, input_mode, input_pixels,
+      input_fps, reason);
+  if (adaptation.status() != Adaptation::Status::kCanAdapt)
     return;
   // Apply target.
-  stream_adapter_->ApplyAdaptationTarget(target_or_reason.target(),
-                                         encoder_settings_, input_mode,
-                                         input_pixels, input_fps);
+  stream_adapter_->ApplyAdaptationTarget(adaptation, encoder_settings_,
+                                         input_mode, input_pixels, input_fps);
   // Update VideoSourceRestrictions based on adaptation. This also informs the
   // |adaptation_listener_|.
   MaybeUpdateVideoSourceRestrictions();
@@ -495,17 +493,15 @@ OveruseFrameDetectorResourceAdaptationModule::OnResourceOveruse(
   const int input_pixels = LastInputFrameSizeOrDefault();
   const int input_fps = encoder_stats_observer_->GetInputFrameRate();
   // Should we adapt, if so to what target?
-  VideoStreamAdapter::AdaptationTargetOrReason target_or_reason =
-      stream_adapter_->GetAdaptDownTarget(encoder_settings_, input_mode,
-                                          input_pixels, input_fps);
-  if (target_or_reason.min_pixel_limit_reached())
+  Adaptation adaptation = stream_adapter_->GetAdaptDownTarget(
+      encoder_settings_, input_mode, input_pixels, input_fps);
+  if (adaptation.min_pixel_limit_reached())
     encoder_stats_observer_->OnMinPixelLimitReached();
-  if (!target_or_reason.has_target())
+  if (adaptation.status() != Adaptation::Status::kCanAdapt)
     return ResourceListenerResponse::kNothing;
   // Apply target.
   ResourceListenerResponse response = stream_adapter_->ApplyAdaptationTarget(
-      target_or_reason.target(), encoder_settings_, input_mode, input_pixels,
-      input_fps);
+      adaptation, encoder_settings_, input_mode, input_pixels, input_fps);
   // Update VideoSourceRestrictions based on adaptation. This also informs the
   // |adaptation_listener_|.
   MaybeUpdateVideoSourceRestrictions();

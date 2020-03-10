@@ -25,52 +25,11 @@
 
 namespace webrtc {
 
-// Owns the VideoSourceRestriction for a single stream and is responsible for
-// adapting it up or down when told to do so. This class serves the following
-// purposes:
-// 1. Keep track of a stream's restrictions.
-// 2. Provide valid ways to adapt up or down the stream's restrictions.
-// 3. Modify the stream's restrictions in one of the valid ways.
-class VideoStreamAdapter {
+class Adaptation final {
  public:
-  enum class SetDegradationPreferenceResult {
-    kRestrictionsNotCleared,
-    kRestrictionsCleared,
-  };
-
-  enum class VideoInputMode {
-    kNoVideo,
-    kNormalVideo,
-    kScreenshareVideo,
-  };
-
-  enum class AdaptationAction {
-    kIncreaseResolution,
-    kDecreaseResolution,
-    kIncreaseFrameRate,
-    kDecreaseFrameRate,
-  };
-
-  // Describes an adaptation step: increasing or decreasing resolution or frame
-  // rate to a given value.
-  // TODO(https://crbug.com/webrtc/11393): Make these private implementation
-  // details, and expose something that allows you to inspect the
-  // VideoSourceRestrictions instead. The adaptation steps could be expressed as
-  // a graph, for instance.
-  struct AdaptationTarget {
-    AdaptationTarget(AdaptationAction action, int value);
-    // Which action the VideoSourceRestrictor needs to take.
-    const AdaptationAction action;
-    // Target pixel count or frame rate depending on |action|.
-    const int value;
-
-    // Allow this struct to be instantiated as an optional, even though it's in
-    // a private namespace.
-    friend class absl::optional<AdaptationTarget>;
-  };
-
   // Reasons for not being able to get an AdaptationTarget that can be applied.
-  enum class CannotAdaptReason {
+  enum class Status {
+    kCanAdapt,
     // DegradationPreference is DISABLED.
     // TODO(hbos): Don't support DISABLED, it doesn't exist in the spec and it
     // causes all adaptation to be ignored, even QP-scaling.
@@ -103,42 +62,61 @@ class VideoStreamAdapter {
     kIsBitrateConstrained,
   };
 
-  // Describes the next adaptation target that can be applied, or a reason
-  // explaining why there is no next adaptation step to take.
-  // TODO(hbos): Make "AdaptationTarget" a private implementation detail and
-  // expose the resulting VideoSourceRestrictions as the publically accessible
-  // "target" instead.
-  class AdaptationTargetOrReason {
-   public:
-    AdaptationTargetOrReason(AdaptationTarget target,
-                             bool min_pixel_limit_reached);
-    AdaptationTargetOrReason(CannotAdaptReason reason,
-                             bool min_pixel_limit_reached);
-    // Not explicit - we want to use AdaptationTarget and CannotAdaptReason as
-    // return values.
-    AdaptationTargetOrReason(AdaptationTarget target);   // NOLINT
-    AdaptationTargetOrReason(CannotAdaptReason reason);  // NOLINT
+  // If this adaptation is applied, these are the resulting restrictions.
+  const VideoSourceRestrictions& target() const;
 
-    bool has_target() const;
-    const AdaptationTarget& target() const;
-    CannotAdaptReason reason() const;
-    // This is true if the next step down would have exceeded the minimum
-    // resolution limit. Used for stats reporting. This is similar to
-    // kLimitReached but only applies to resolution adaptations. It is also
-    // currently implemented as "the next step would have exceeded", which is
-    // subtly diffrent than "we are currently reaching the limit" - we could
-    // stay above the limit forever, not taking any steps because the steps
-    // would have been too big. (This is unlike how we adapt frame rate, where
-    // we adapt to kMinFramerateFps before reporting kLimitReached.)
-    // TODO(hbos): Adapt to the limit and indicate if the limit was reached
-    // independently of degradation preference. If stats reporting wants to
-    // filter this out by degradation preference it can take on that
-    // responsibility; the adapter should not inherit this detail.
-    bool min_pixel_limit_reached() const;
+  Status status() const;
+  bool min_pixel_limit_reached() const;
 
-   private:
-    const absl::variant<AdaptationTarget, CannotAdaptReason> target_or_reason_;
-    const bool min_pixel_limit_reached_;
+ private:
+  // The adapter needs to know about step type and step target in order to
+  // construct and perform an Adaptation, which is a detail we do not want to
+  // expose to the public interface.
+  friend class VideoStreamAdapter;
+
+  enum class StepType {
+    kIncreaseResolution,
+    kDecreaseResolution,
+    kIncreaseFrameRate,
+    kDecreaseFrameRate,
+  };
+
+  Adaptation(StepType step_type,
+             int step_target,
+             Status status,
+             bool min_pixel_limit_reached);
+  Adaptation(StepType step_type,
+             int step_target,
+             bool min_pixel_limit_reached = false);
+  explicit Adaptation(Status status, bool min_pixel_limit_reached = false);
+
+  StepType step_type() const;
+  // Pixels or frame rate depending on step().
+  int step_target() const;
+
+  const StepType step_type_;
+  const int step_target_;
+  const Status status_;
+  const bool min_pixel_limit_reached_;
+};
+
+// Owns the VideoSourceRestriction for a single stream and is responsible for
+// adapting it up or down when told to do so. This class serves the following
+// purposes:
+// 1. Keep track of a stream's restrictions.
+// 2. Provide valid ways to adapt up or down the stream's restrictions.
+// 3. Modify the stream's restrictions in one of the valid ways.
+class VideoStreamAdapter {
+ public:
+  enum class SetDegradationPreferenceResult {
+    kRestrictionsNotCleared,
+    kRestrictionsCleared,
+  };
+
+  enum class VideoInputMode {
+    kNoVideo,
+    kNormalVideo,
+    kScreenshareVideo,
   };
 
   VideoStreamAdapter();
@@ -161,14 +139,14 @@ class VideoStreamAdapter {
 
   // Returns a target that we are guaranteed to be able to adapt to, or the
   // reason why there is no such target.
-  AdaptationTargetOrReason GetAdaptUpTarget(
+  Adaptation GetAdaptUpTarget(
       const absl::optional<EncoderSettings>& encoder_settings,
       absl::optional<uint32_t> encoder_target_bitrate_bps,
       VideoInputMode input_mode,
       int input_pixels,
       int input_fps,
       AdaptationObserverInterface::AdaptReason reason) const;
-  AdaptationTargetOrReason GetAdaptDownTarget(
+  Adaptation GetAdaptDownTarget(
       const absl::optional<EncoderSettings>& encoder_settings,
       VideoInputMode input_mode,
       int input_pixels,
@@ -176,7 +154,7 @@ class VideoStreamAdapter {
   // Applies the |target| to |source_restrictor_|.
   // TODO(hbos): Delete ResourceListenerResponse!
   ResourceListenerResponse ApplyAdaptationTarget(
-      const AdaptationTarget& target,
+      const Adaptation& target,
       const absl::optional<EncoderSettings>& encoder_settings,
       VideoInputMode input_mode,
       int input_pixels,
@@ -199,7 +177,7 @@ class VideoStreamAdapter {
 
     // This is a static method rather than an anonymous namespace function due
     // to namespace visiblity.
-    static Mode GetModeFromAdaptationAction(AdaptationAction action);
+    static Mode GetModeFromAdaptationAction(Adaptation::StepType step_type);
   };
 
   // Reinterprets "balanced + screenshare" as "maintain-resolution".
