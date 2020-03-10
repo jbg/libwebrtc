@@ -22,6 +22,30 @@
       "revId": "ada9e05be990d247f559e70fce8d034b121dd0f5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6a49776_47cb591d",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-10T10:49:06Z",
+      "side": 1,
+      "message": "We should probably move some of call/adaptation to an api/adaptation folder.\n\n(This CL is just sharing a WIP demo though)",
+      "parentUuid": "2fa5c8ac_56ef5d60",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 37
+      },
+      "revId": "ada9e05be990d247f559e70fce8d034b121dd0f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
