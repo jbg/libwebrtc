@@ -46,6 +46,23 @@
       "revId": "ada9e05be990d247f559e70fce8d034b121dd0f5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7a7dc6a_887a3098",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-10T10:50:44Z",
+      "side": 1,
+      "message": "I envision a ResourceAdaptationProcessor thread/queue, and for VideoStreamAdapter to do PostTask to the relevant encoder queue - but that all signal processing and decision-making happening on a encoder-agnostic queue.",
+      "revId": "ada9e05be990d247f559e70fce8d034b121dd0f5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
