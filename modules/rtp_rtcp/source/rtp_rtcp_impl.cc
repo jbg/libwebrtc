@@ -57,7 +57,8 @@ std::unique_ptr<RtpRtcp> RtpRtcp::Create(const Configuration& configuration) {
 }
 
 ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
-    : rtcp_sender_(configuration),
+    : local_ssrc_(configuration.local_media_ssrc),
+      rtcp_sender_(configuration),
       rtcp_receiver_(configuration, this),
       clock_(configuration.clock),
       last_bitrate_process_time_(clock_->TimeInMilliseconds()),
@@ -113,13 +114,15 @@ void ModuleRtpRtcpImpl::Process() {
     // processed RTT for at least |kRtpRtcpRttProcessTimeMs| milliseconds.
     if (rtcp_receiver_.LastReceivedReportBlockMs() > last_rtt_process_time_ &&
         process_rtt) {
-      std::vector<RTCPReportBlock> receive_blocks;
-      rtcp_receiver_.StatisticsReceived(&receive_blocks);
+      std::vector<ReportBlockData> report_blocks =
+          rtcp_receiver_.GetLatestReportBlockData();
       int64_t max_rtt = 0;
-      for (std::vector<RTCPReportBlock>::iterator it = receive_blocks.begin();
-           it != receive_blocks.end(); ++it) {
-        int64_t rtt = 0;
-        rtcp_receiver_.RTT(it->sender_ssrc, &rtt, NULL, NULL, NULL);
+      for (const auto& report_block_data : report_blocks) {
+        if (report_block_data.report_block().source_ssrc != local_ssrc_) {
+          // Skip report blocks not for us.
+          continue;
+        }
+        int64_t rtt = report_block_data.last_rtt_ms();
         max_rtt = (rtt > max_rtt) ? rtt : max_rtt;
       }
       // Report the rtt.
@@ -536,12 +539,6 @@ void ModuleRtpRtcpImpl::GetSendStreamDataCounters(
     StreamDataCounters* rtp_counters,
     StreamDataCounters* rtx_counters) const {
   rtp_sender_->packet_sender.GetDataCounters(rtp_counters, rtx_counters);
-}
-
-// Received RTCP report.
-int32_t ModuleRtpRtcpImpl::RemoteRTCPStat(
-    std::vector<RTCPReportBlock>* receive_blocks) const {
-  return rtcp_receiver_.StatisticsReceived(receive_blocks);
 }
 
 std::vector<ReportBlockData> ModuleRtpRtcpImpl::GetLatestReportBlockData()

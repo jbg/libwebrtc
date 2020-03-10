@@ -193,9 +193,6 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
       StreamDataCounters* rtp_counters,
       StreamDataCounters* rtx_counters) const override;
 
-  // Get received RTCP report, report block.
-  int32_t RemoteRTCPStat(
-      std::vector<RTCPReportBlock>* receive_blocks) const override;
   // A snapshot of the most recent Report Block with additional data of
   // interest to statistics. Used to implement RTCRemoteInboundRtpStreamStats.
   // Within this list, the ReportBlockData::RTCPReportBlock::source_ssrc(),
@@ -327,6 +324,7 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
 
   std::unique_ptr<RtpSenderContext> rtp_sender_;
 
+  const uint32_t local_ssrc_;
   RTCPSender rtcp_sender_;
   RTCPReceiver rtcp_receiver_;
 

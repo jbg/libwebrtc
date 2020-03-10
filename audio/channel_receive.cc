@@ -882,12 +882,9 @@ int ChannelReceive::GetRtpTimestampRateHz() const {
 }
 
 int64_t ChannelReceive::GetRTT() const {
-  std::vector<RTCPReportBlock> report_blocks;
-  _rtpRtcpModule->RemoteRTCPStat(&report_blocks);
-
   // TODO(nisse): Could we check the return value from the ->RTT() call below,
   // instead of checking if we have any report blocks?
-  if (report_blocks.empty()) {
+  if (_rtpRtcpModule->GetLatestReportBlockData().empty()) {
     rtc::CritScope lock(&assoc_send_channel_lock_);
     // Tries to get RTT from an associated channel.
     if (!associated_send_channel_) {
