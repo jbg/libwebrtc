@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5dfebcd5_df1dd8d9",
+        "filename": "modules/audio_coding/neteq/neteq_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1990,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-10T18:47:31Z",
+      "side": 1,
+      "message": "RTC_DCHECK(controller_);\n\nAlthough since you dereference it immediately after this, maybe don\u0027t assert at all?",
+      "range": {
+        "startLine": 1990,
+        "startChar": 4,
+        "endLine": 1990,
+        "endChar": 10
+      },
+      "revId": "6ddeb296238663a81a48899613c11c05681e2f14",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7213e8a2_05abf105",
+        "filename": "modules/audio_coding/neteq/neteq_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-10T18:47:31Z",
+      "side": 1,
+      "message": "Casting from uint64_t to int? Can expected_target_delay be uint64_t instead? Or, if you do need to cast, use checked_cast. (More cases of this below.)",
+      "range": {
+        "startLine": 1032,
+        "startChar": 12,
+        "endLine": 1032,
+        "endChar": 28
+      },
+      "revId": "6ddeb296238663a81a48899613c11c05681e2f14",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
