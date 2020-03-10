@@ -28,6 +28,7 @@
 #include "modules/audio_coding/include/audio_coding_module.h"
 #include "modules/audio_processing/rms_level.h"
 #include "modules/pacing/packet_router.h"
+#include "modules/rtp_rtcp/include/report_block_data.h"
 #include "modules/utility/include/process_thread.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/event.h"
@@ -754,25 +755,26 @@ std::vector<ReportBlock> ChannelSend::GetRemoteRTCPReportBlocks() const {
   // Get the report blocks from the latest received RTCP Sender or Receiver
   // Report. Each element in the vector contains the sender's SSRC and a
   // report block according to RFC 3550.
-  std::vector<RTCPReportBlock> rtcp_report_blocks;
-
-  int ret = _rtpRtcpModule->RemoteRTCPStat(&rtcp_report_blocks);
-  RTC_DCHECK_EQ(0, ret);
-
   std::vector<ReportBlock> report_blocks;
 
-  std::vector<RTCPReportBlock>::const_iterator it = rtcp_report_blocks.begin();
-  for (; it != rtcp_report_blocks.end(); ++it) {
+  const std::vector<ReportBlockData>& report_block_datas =
+      _rtpRtcpModule->GetLatestReportBlockData();
+  report_blocks.reserve(report_block_datas.size());
+
+  for (const auto& report_block_data : report_block_datas) {
+    const RTCPReportBlock& rtcp_report_block = report_block_data.report_block();
     ReportBlock report_block;
-    report_block.sender_SSRC = it->sender_ssrc;
-    report_block.source_SSRC = it->source_ssrc;
-    report_block.fraction_lost = it->fraction_lost;
-    report_block.cumulative_num_packets_lost = it->packets_lost;
+    report_block.sender_SSRC = rtcp_report_block.sender_ssrc;
+    report_block.source_SSRC = rtcp_report_block.source_ssrc;
+    report_block.fraction_lost = rtcp_report_block.fraction_lost;
+    report_block.cumulative_num_packets_lost = rtcp_report_block.packets_lost;
     report_block.extended_highest_sequence_number =
-        it->extended_highest_sequence_number;
-    report_block.interarrival_jitter = it->jitter;
-    report_block.last_SR_timestamp = it->last_sender_report_timestamp;
-    report_block.delay_since_last_SR = it->delay_since_last_sender_report;
+        rtcp_report_block.extended_highest_sequence_number;
+    report_block.interarrival_jitter = rtcp_report_block.jitter;
+    report_block.last_SR_timestamp =
+        rtcp_report_block.last_sender_report_timestamp;
+    report_block.delay_since_last_SR =
+        rtcp_report_block.delay_since_last_sender_report;
     report_blocks.push_back(report_block);
   }
   return report_blocks;
@@ -869,24 +871,16 @@ RtpRtcp* ChannelSend::GetRtpRtcp() const {
 }
 
 int64_t ChannelSend::GetRTT() const {
-  std::vector<RTCPReportBlock> report_blocks;
-  _rtpRtcpModule->RemoteRTCPStat(&report_blocks);
-
-  if (report_blocks.empty()) {
-    return 0;
+  uint32_t local_ssrc = _rtpRtcpModule->SSRC();
+  for (const ReportBlockData& report_block_data :
+       _rtpRtcpModule->GetLatestReportBlockData()) {
+    // We don't know in advance the remote ssrc used by the other end's receiver
+    // reports, so use the first report block for our local_ssrc to get rtt.
+    if (report_block_data.report_block().source_ssrc == local_ssrc) {
+      return report_block_data.last_rtt_ms();
+    }
   }
-
-  int64_t rtt = 0;
-  int64_t avg_rtt = 0;
-  int64_t max_rtt = 0;
-  int64_t min_rtt = 0;
-  // We don't know in advance the remote ssrc used by the other end's receiver
-  // reports, so use the SSRC of the first report block for calculating the RTT.
-  if (_rtpRtcpModule->RTT(report_blocks[0].sender_ssrc, &rtt, &avg_rtt,
-                          &min_rtt, &max_rtt) != 0) {
-    return 0;
-  }
-  return rtt;
+  return 0;
 }
 
 void ChannelSend::SetFrameEncryptor(

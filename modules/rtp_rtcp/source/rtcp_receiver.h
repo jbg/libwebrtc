@@ -84,8 +84,6 @@ class RTCPReceiver {
   void SetRtcpXrRrtrStatus(bool enable);
   bool GetAndResetXrRrRtt(int64_t* rtt_ms);
 
-  // Get statistics.
-  int32_t StatisticsReceived(std::vector<RTCPReportBlock>* receiveBlocks) const;
   // A snapshot of Report Blocks with additional data of interest to statistics.
   // Within this list, the sender-source SSRC pair is unique and per-pair the
   // ReportBlockData represents the latest Report Block that was received for
