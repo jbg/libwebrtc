@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aefa3db9_a51efa07",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-10T13:02:08Z",
+      "side": 1,
+      "message": "One pattern can be \u0027target per header file named like header file\u0027\nAnother pattern can be \u0027target per c++ target named like that target\u0027\nI do not have preferences, so using yours.\n\nsince there is already word \u0027java\u0027 in the rule name, I named it just \u0027video_frame_enums\u0027 and put next to \u0027video_frame\u0027 rules.",
+      "parentUuid": "238fd438_a64fe280",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 3
+      },
+      "revId": "dddfae48220085ca281b49a571a0823a83784bc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0103979_65d82f82",
         "filename": "sdk/android/BUILD.gn",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "dddfae48220085ca281b49a571a0823a83784bc0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e226d09f_44bdd88d",
+        "filename": "sdk/android/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-03-10T13:02:08Z",
+      "side": 1,
+      "message": "can\u0027t put it into the java_cpp_enum target (deps attribute just ignored there),\nbut it seems can still remove it from here: it does compile locally.\nLets see now if any bots would complain.",
+      "parentUuid": "f0103979_65d82f82",
+      "range": {
+        "startLine": 328,
+        "startChar": 6,
+        "endLine": 328,
+        "endChar": 71
+      },
+      "revId": "dddfae48220085ca281b49a571a0823a83784bc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
