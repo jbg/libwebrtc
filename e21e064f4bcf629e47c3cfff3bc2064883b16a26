@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29b760af_6c7ca95c",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-10T09:01:18Z",
+      "side": 1,
+      "message": "Can you add a test that does NOT offer abs-capture-time and reply with an answer that DOES contain abs-capture-time and make sure that the offer is rejected?",
+      "revId": "e21e064f4bcf629e47c3cfff3bc2064883b16a26",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
