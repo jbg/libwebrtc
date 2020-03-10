@@ -554,6 +554,7 @@ if (current_os == "linux" || is_android) {
       "../../rtc_base",
       "../../rtc_base:checks",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base/synchronization:sequence_checker",
       "../../system_wrappers:field_trial",
       "../../system_wrappers:metrics",
       "//third_party/abseil-cpp/absl/types:optional",
@@ -687,6 +688,7 @@ if (current_os == "linux" || is_android) {
       "../../rtc_base",
       "../../rtc_base:checks",
       "../../rtc_base:rtc_task_queue",
+      "../../rtc_base/synchronization:sequence_checker",
       "../../rtc_base/task_utils:to_queued_task",
       "//third_party/abseil-cpp/absl/types:optional",
       "//third_party/libyuv",
@@ -870,6 +872,7 @@ if (current_os == "linux" || is_android) {
       "//api:array_view",
       "//rtc_base:checks",
       "//rtc_base:rtc_base_approved",
+      "//rtc_base/synchronization:sequence_checker",
       "//third_party/abseil-cpp/absl/types:optional",
     ]
   }
@@ -1074,6 +1077,7 @@ if (current_os == "linux" || is_android) {
       "../../modules/audio_device:audio_device_buffer",
       "../../rtc_base:checks",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base/synchronization:sequence_checker",
       "../../system_wrappers:metrics",
       "//third_party/abseil-cpp/absl/types:optional",
     ]
@@ -1096,6 +1100,7 @@ if (current_os == "linux" || is_android) {
       "../../modules/audio_device:audio_device_buffer",
       "../../rtc_base:checks",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base/synchronization:sequence_checker",
       "../../system_wrappers:field_trial",
       "../../system_wrappers:metrics",
       "//third_party/abseil-cpp/absl/types:optional",
@@ -1151,6 +1156,7 @@ if (current_os == "linux" || is_android) {
       "../../modules/audio_device:audio_device_buffer",
       "../../rtc_base:checks",
       "../../rtc_base:rtc_base_approved",
+      "../../rtc_base/synchronization:sequence_checker",
       "//third_party/abseil-cpp/absl/types:optional",
     ]
   }

@@ -16,6 +16,7 @@
 
 #include "api/ice_transport_interface.h"
 #include "p2p/base/p2p_transport_channel.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/thread.h"
 
 namespace webrtc {
@@ -36,7 +37,7 @@ class DefaultIceTransport : public IceTransportInterface {
   }
 
  private:
-  const rtc::ThreadChecker thread_checker_{};
+  const SequenceChecker thread_checker_{};
   std::unique_ptr<cricket::P2PTransportChannel> internal_
       RTC_GUARDED_BY(thread_checker_);
 };

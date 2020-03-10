@@ -106,6 +106,7 @@ rtc_library("rtc_p2p") {
     "../rtc_base:weak_ptr",
     "../rtc_base/memory:fifo_buffer",
     "../rtc_base/network:sent_packet",
+    "../rtc_base/synchronization:sequence_checker",
     "../rtc_base/system:rtc_export",
     "../rtc_base/third_party/base64",
     "../rtc_base/third_party/sigslot",
@@ -167,6 +168,7 @@ if (rtc_include_tests) {
       "../rtc_base:gunit_helpers",
       "../rtc_base:rtc_base_approved",
       "../rtc_base:rtc_base_tests_utils",
+      "../rtc_base/synchronization:sequence_checker",
       "../rtc_base/third_party/sigslot",
       "../test:test_support",
       "//third_party/abseil-cpp/absl/algorithm:container",
@@ -242,6 +244,7 @@ rtc_library("p2p_server_utils") {
     "../rtc_base",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_tests_utils",
+    "../rtc_base/synchronization:sequence_checker",
     "../rtc_base/third_party/sigslot",
     "//third_party/abseil-cpp/absl/algorithm:container",
   ]
@@ -260,6 +263,7 @@ rtc_library("libstunprober") {
     "../api/transport:stun_types",
     "../rtc_base",
     "../rtc_base:checks",
+    "../rtc_base/synchronization:sequence_checker",
     "../rtc_base/system:rtc_export",
   ]
 }

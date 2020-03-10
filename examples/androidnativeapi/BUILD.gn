@@ -57,6 +57,7 @@ if (is_android) {
       "//pc:libjingle_peerconnection",
       "//rtc_base",
       "//rtc_base:rtc_base_approved",
+      "//rtc_base/synchronization:sequence_checker",
       "//sdk/android:native_api_base",
       "//sdk/android:native_api_jni",
       "//sdk/android:native_api_video",

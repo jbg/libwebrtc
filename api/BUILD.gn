@@ -210,6 +210,7 @@ rtc_library("libjingle_peerconnection_api") {
     "../rtc_base:checks",
     "../rtc_base:deprecation",
     "../rtc_base:rtc_base_approved",
+    "../rtc_base/synchronization:sequence_checker",
     "../rtc_base/system:rtc_export",
   ]
 }
@@ -391,7 +392,7 @@ rtc_library("test_dependency_factory") {
   deps = [
     ":video_quality_test_fixture_api",
     "../rtc_base:checks",
-    "../rtc_base:thread_checker",
+    "../rtc_base/synchronization:sequence_checker",
   ]
 }
 
@@ -623,6 +624,7 @@ rtc_library("ice_transport_factory") {
     ":scoped_refptr",
     "../p2p:rtc_p2p",
     "../rtc_base",
+    "../rtc_base/synchronization:sequence_checker",
     "../rtc_base/system:rtc_export",
     "rtc_event_log:rtc_event_log",
   ]
@@ -938,6 +940,7 @@ if (rtc_include_tests) {
     deps = [
       "../rtc_base",
       "../rtc_base:checks",
+      "../rtc_base/synchronization:sequence_checker",
       "transport:datagram_transport_interface",
       "transport/media:media_transport_interface",
       "//third_party/abseil-cpp/absl/algorithm:container",

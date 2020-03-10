@@ -10,8 +10,6 @@
 
 // Borrowed from Chromium's src/base/threading/thread_checker_unittest.cc.
 
-#include "rtc_base/thread_checker.h"
-
 #include <memory>
 #include <utility>
 
@@ -19,6 +17,7 @@
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/null_socket_server.h"
 #include "rtc_base/socket_server.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/thread.h"
 #include "test/gtest.h"
@@ -27,21 +26,19 @@
 // good citizens there and undef the macro.
 #define ENABLE_THREAD_CHECKER RTC_DCHECK_IS_ON
 
-namespace rtc {
+namespace webrtc {
 
 namespace {
 
 // Simple class to exercise the basics of ThreadChecker.
 // Both the destructor and DoStuff should verify that they were
 // called on the same thread as the constructor.
-class ThreadCheckerClass : public ThreadChecker {
+class ThreadCheckerClass : public SequenceChecker {
  public:
   ThreadCheckerClass() {}
 
   // Verifies that it was called on the same thread as the constructor.
   void DoStuff() { RTC_DCHECK(IsCurrent()); }
-
-  void Detach() { ThreadChecker::Detach(); }
 
   static void MethodOnDifferentThreadImpl();
   static void DetachThenCallFromDifferentThreadImpl();
@@ -51,10 +48,10 @@ class ThreadCheckerClass : public ThreadChecker {
 };
 
 // Calls ThreadCheckerClass::DoStuff on another thread.
-class CallDoStuffOnThread : public Thread {
+class CallDoStuffOnThread : public rtc::Thread {
  public:
   explicit CallDoStuffOnThread(ThreadCheckerClass* thread_checker_class)
-      : Thread(std::unique_ptr<SocketServer>(new rtc::NullSocketServer())),
+      : Thread(std::make_unique<rtc::NullSocketServer>()),
         thread_checker_class_(thread_checker_class) {
     SetName("call_do_stuff_on_thread", nullptr);
   }
@@ -72,11 +69,11 @@ class CallDoStuffOnThread : public Thread {
 };
 
 // Deletes ThreadCheckerClass on a different thread.
-class DeleteThreadCheckerClassOnThread : public Thread {
+class DeleteThreadCheckerClassOnThread : public rtc::Thread {
  public:
   explicit DeleteThreadCheckerClassOnThread(
       std::unique_ptr<ThreadCheckerClass> thread_checker_class)
-      : Thread(std::unique_ptr<SocketServer>(new rtc::NullSocketServer())),
+      : Thread(std::make_unique<rtc::NullSocketServer>()),
         thread_checker_class_(std::move(thread_checker_class)) {
     SetName("delete_thread_checker_class_on_thread", nullptr);
   }
@@ -239,7 +236,7 @@ class ThreadAnnotateTest {
   void fun_acccess_var() RTC_RUN_ON(thread_) { var_thread_ = 13; }
 
   rtc::Thread* thread_;
-  rtc::ThreadChecker checker_;
+  webrtc::SequenceChecker checker_;
   rtc::TaskQueue* queue_;
 
   int var_thread_ RTC_GUARDED_BY(thread_);
@@ -250,4 +247,4 @@ class ThreadAnnotateTest {
 // Just in case we ever get lumped together with other compilation units.
 #undef ENABLE_THREAD_CHECKER
 
-}  // namespace rtc
+}  // namespace webrtc

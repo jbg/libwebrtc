@@ -25,6 +25,7 @@
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/helpers.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/time_utils.h"
 
@@ -104,7 +105,7 @@ class StunProber::Requester : public sigslot::has_slots<> {
   int16_t num_request_sent_ = 0;
   int16_t num_response_received_ = 0;
 
-  rtc::ThreadChecker& thread_checker_;
+  webrtc::SequenceChecker& thread_checker_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(Requester);
 };

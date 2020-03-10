@@ -21,7 +21,6 @@
 #include "rtc_base/network.h"
 #include "rtc_base/socket_server.h"
 #include "rtc_base/thread.h"
-#include "rtc_base/thread_checker.h"
 #include "test/network/network_emulation.h"
 
 namespace webrtc {

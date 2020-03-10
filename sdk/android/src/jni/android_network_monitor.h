@@ -18,7 +18,7 @@
 
 #include "absl/types/optional.h"
 #include "rtc_base/network_monitor.h"
-#include "rtc_base/thread_checker.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "sdk/android/src/jni/jni_helpers.h"
 
 namespace webrtc {
@@ -106,7 +106,7 @@ class AndroidNetworkMonitor : public rtc::NetworkMonitorBase,
   const int android_sdk_int_;
   ScopedJavaGlobalRef<jobject> j_application_context_;
   ScopedJavaGlobalRef<jobject> j_network_monitor_;
-  rtc::ThreadChecker thread_checker_;
+  SequenceChecker thread_checker_;
   bool started_ = false;
   std::map<std::string, rtc::AdapterType> adapter_type_by_name_;
   std::map<std::string, rtc::AdapterType> vpn_underlying_adapter_type_by_name_;

@@ -17,7 +17,6 @@
 #include "media/base/video_source_base.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/thread_annotations.h"
-#include "rtc_base/thread_checker.h"
 
 namespace rtc {
 

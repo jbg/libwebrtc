@@ -17,7 +17,7 @@
 #include "api/peer_connection_interface.h"
 #include "api/scoped_refptr.h"
 #include "rtc_base/critical_section.h"
-#include "rtc_base/thread_checker.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 
 @class RTCVideoCapturer;
 @protocol RTCVideoRenderer;
@@ -53,7 +53,7 @@ class ObjCCallClient {
   void CreatePeerConnection() RTC_RUN_ON(thread_checker_);
   void Connect() RTC_RUN_ON(thread_checker_);
 
-  rtc::ThreadChecker thread_checker_;
+  SequenceChecker thread_checker_;
 
   bool call_started_ RTC_GUARDED_BY(thread_checker_);
 

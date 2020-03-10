@@ -16,6 +16,7 @@
 #include "api/video/video_source_interface.h"
 #include "media/base/fake_frame_source.h"
 #include "media/base/video_broadcaster.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/task_utils/repeating_task.h"
 
@@ -76,7 +77,7 @@ class FakePeriodicVideoSource final
   }
 
  private:
-  rtc::ThreadChecker thread_checker_;
+  SequenceChecker thread_checker_;
 
   rtc::VideoBroadcaster broadcaster_;
   cricket::FakeFrameSource frame_source_;

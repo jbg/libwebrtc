@@ -41,6 +41,7 @@
 #include "rtc_base/race_checker.h"
 #include "rtc_base/strings/audio_format_to_string.h"
 #include "rtc_base/strings/string_builder.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/third_party/base64/base64.h"
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/field_trial.h"
@@ -1019,7 +1020,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioSendStream
     stream_->Reconfigure(config_);
   }
 
-  rtc::ThreadChecker worker_thread_checker_;
+  webrtc::SequenceChecker worker_thread_checker_;
   rtc::RaceChecker audio_capture_race_checker_;
   webrtc::Call* call_ = nullptr;
   webrtc::AudioSendStream::Config config_;
@@ -1230,7 +1231,7 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     stream_->Reconfigure(config_);
   }
 
-  rtc::ThreadChecker worker_thread_checker_;
+  webrtc::SequenceChecker worker_thread_checker_;
   webrtc::Call* call_ = nullptr;
   webrtc::AudioReceiveStream::Config config_;
   // The stream is owned by WebRtcAudioReceiveStream and may be reallocated if
