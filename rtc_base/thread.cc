@@ -256,6 +256,9 @@ Thread* Thread::Current() {
     thread->WrapCurrentWithThreadManager(manager, true);
   }
 #endif
+  if (thread) {
+    RTC_DCHECK_EQ(thread, TaskQueueBase::Current());
+  }
 
   return thread;
 }
@@ -1027,6 +1030,8 @@ bool Thread::WrapCurrentWithThreadManager(ThreadManager* thread_manager,
 #endif
   owned_ = false;
   thread_manager->SetCurrentThread(this);
+  RTC_DCHECK(TaskQueueBase::Current() == nullptr);
+  TaskQueueBase::SetCurrent(this);
   return true;
 }
 

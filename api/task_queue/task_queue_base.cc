@@ -26,15 +26,10 @@ TaskQueueBase* TaskQueueBase::Current() {
   return current;
 }
 
-TaskQueueBase::CurrentTaskQueueSetter::CurrentTaskQueueSetter(
-    TaskQueueBase* task_queue)
-    : previous_(current) {
+void TaskQueueBase::SetCurrent(TaskQueueBase* task_queue) {
   current = task_queue;
 }
 
-TaskQueueBase::CurrentTaskQueueSetter::~CurrentTaskQueueSetter() {
-  current = previous_;
-}
 }  // namespace webrtc
 
 #elif defined(WEBRTC_POSIX)
@@ -62,14 +57,8 @@ TaskQueueBase* TaskQueueBase::Current() {
   return static_cast<TaskQueueBase*>(pthread_getspecific(GetQueuePtrTls()));
 }
 
-TaskQueueBase::CurrentTaskQueueSetter::CurrentTaskQueueSetter(
-    TaskQueueBase* task_queue)
-    : previous_(TaskQueueBase::Current()) {
+TaskQueueBase::SetCurrent(TaskQueueBase* task_queue) {
   pthread_setspecific(GetQueuePtrTls(), task_queue);
-}
-
-TaskQueueBase::CurrentTaskQueueSetter::~CurrentTaskQueueSetter() {
-  pthread_setspecific(GetQueuePtrTls(), previous_);
 }
 
 }  // namespace webrtc
