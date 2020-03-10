@@ -60,14 +60,20 @@ class RTC_LOCKABLE RTC_EXPORT TaskQueueBase {
  protected:
   class CurrentTaskQueueSetter {
    public:
-    explicit CurrentTaskQueueSetter(TaskQueueBase* task_queue);
+    explicit CurrentTaskQueueSetter(TaskQueueBase* task_queue)
+        : previous_(TaskQueueBase::Current()) {
+      TaskQueueBase::SetCurrent(task_queue);
+    }
     CurrentTaskQueueSetter(const CurrentTaskQueueSetter&) = delete;
     CurrentTaskQueueSetter& operator=(const CurrentTaskQueueSetter&) = delete;
-    ~CurrentTaskQueueSetter();
+    ~CurrentTaskQueueSetter() { TaskQueueBase::SetCurrent(previous_); }
 
    private:
     TaskQueueBase* const previous_;
   };
+  // Direct usage of this function is discouraged, prefer to use RAII class
+  // CurrentTaskQueueSetter.
+  static void SetCurrent(TaskQueueBase* task_queue);
 
   // Users of the TaskQueue should call Delete instead of directly deleting
   // this object.
