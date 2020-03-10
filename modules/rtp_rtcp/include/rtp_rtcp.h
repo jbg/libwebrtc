@@ -22,6 +22,7 @@
 #include "api/frame_transformer_interface.h"
 #include "api/scoped_refptr.h"
 #include "api/transport/webrtc_key_value_config.h"
+#include "api/units/time_delta.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "modules/include/module.h"
 #include "modules/rtp_rtcp/include/receive_statistics.h"
@@ -335,8 +336,14 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // Returns -1 on failure else 0.
   virtual int32_t RemoveMixedCNAME(uint32_t ssrc) = 0;
 
+  // Returns latest round trip time to `remote_ssrc` or any ssrc if
+  // `remote_ssrc` == absl::nullopt. Returns infinite TimeDelta if rtt is not
+  // available.
+  virtual TimeDelta LatestRtt(absl::optional<uint32_t> remote_ssrc) const = 0;
+
   // Returns current RTT (round-trip time) estimate.
   // Returns -1 on failure else 0.
+  RTC_DEPRECATED
   virtual int32_t RTT(uint32_t remote_ssrc,
                       int64_t* rtt,
                       int64_t* avg_rtt,

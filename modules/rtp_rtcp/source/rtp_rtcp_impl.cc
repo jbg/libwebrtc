@@ -456,6 +456,19 @@ int32_t ModuleRtpRtcpImpl::RemoteNTP(uint32_t* received_ntpsecs,
              : -1;
 }
 
+TimeDelta ModuleRtpRtcpImpl::LatestRtt(
+    absl::optional<uint32_t> remote_ssrc) const {
+  TimeDelta latest_rtt = rtcp_receiver_.LatestRtt(remote_ssrc);
+  if (latest_rtt.IsFinite()) {
+    // Try to get RTT from RtcpRttStats class.
+    rtc::CritScope cs(&critical_section_rtt_);
+    if (rtt_ms_ > 0) {
+      return TimeDelta::Millis(rtt_ms_);
+    }
+  }
+  return latest_rtt;
+}
+
 // Get RoundTripTime.
 int32_t ModuleRtpRtcpImpl::RTT(const uint32_t remote_ssrc,
                                int64_t* rtt,

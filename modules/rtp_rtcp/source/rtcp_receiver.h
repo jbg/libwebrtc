@@ -75,6 +75,7 @@ class RTCPReceiver {
   std::vector<rtcp::ReceiveTimeInfo> ConsumeReceivedXrReferenceTimeInfo();
 
   // Get rtt.
+  TimeDelta LatestRtt(absl::optional<uint32_t> remote_ssrc) const;
   int32_t RTT(uint32_t remote_ssrc,
               int64_t* last_rtt_ms,
               int64_t* avg_rtt_ms,

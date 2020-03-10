@@ -280,8 +280,7 @@ void ChannelReceive::OnReceivedPayloadData(
     return;
   }
 
-  int64_t round_trip_time = 0;
-  _rtpRtcpModule->RTT(remote_ssrc_, &round_trip_time, NULL, NULL, NULL);
+  int64_t round_trip_time = _rtpRtcpModule->LatestRtt(remote_ssrc_).ms_or(0);
 
   std::vector<uint16_t> nack_list = acm_receiver_.GetNackList(round_trip_time);
   if (!nack_list.empty()) {
@@ -882,31 +881,17 @@ int ChannelReceive::GetRtpTimestampRateHz() const {
 }
 
 int64_t ChannelReceive::GetRTT() const {
-  std::vector<RTCPReportBlock> report_blocks;
-  _rtpRtcpModule->RemoteRTCPStat(&report_blocks);
-
-  // TODO(nisse): Could we check the return value from the ->RTT() call below,
-  // instead of checking if we have any report blocks?
-  if (report_blocks.empty()) {
-    rtc::CritScope lock(&assoc_send_channel_lock_);
-    // Tries to get RTT from an associated channel.
-    if (!associated_send_channel_) {
-      return 0;
-    }
+  TimeDelta rtt = _rtpRtcpModule->LatestRtt(remote_ssrc_);
+  if (rtt.IsFinite()) {
+    return rtt.ms();
+  }
+  rtc::CritScope lock(&assoc_send_channel_lock_);
+  // Trt to get RTT from an associated channel.
+  if (associated_send_channel_) {
     return associated_send_channel_->GetRTT();
   }
 
-  int64_t rtt = 0;
-  int64_t avg_rtt = 0;
-  int64_t max_rtt = 0;
-  int64_t min_rtt = 0;
-  // TODO(nisse): This method computes RTT based on sender reports, even though
-  // a receive stream is not supposed to do that.
-  if (_rtpRtcpModule->RTT(remote_ssrc_, &rtt, &avg_rtt, &min_rtt, &max_rtt) !=
-      0) {
-    return 0;
-  }
-  return rtt;
+  return 0;
 }
 
 }  // namespace
