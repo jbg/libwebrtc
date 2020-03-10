@@ -110,6 +110,8 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
                         int64_t round_trip_time_ms,
                         double cwnd_reduce_ratio) override;
 
+  void AddCpuResource(Resource* resource) override;
+
   DataRate UpdateTargetBitrate(DataRate target_bitrate,
                                double cwnd_reduce_ratio);
 
@@ -424,6 +426,8 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   // destroyed first to make sure no tasks are run that use other members.
   rtc::TaskQueue encoder_queue_;
 
+
+  std::vector<std::unique_ptr<Resource>> resource_proxies_;
   RTC_DISALLOW_COPY_AND_ASSIGN(VideoStreamEncoder);
 };
 

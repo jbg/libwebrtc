@@ -106,6 +106,7 @@
 #include "api/transport/network_control.h"
 #include "api/transport/webrtc_key_value_config.h"
 #include "api/turn_customizer.h"
+#include "call/adaptation/resource.h"
 #include "media/base/media_config.h"
 #include "media/base/media_engine.h"
 // TODO(bugs.webrtc.org/7447): We plan to provide a way to let applications
@@ -1297,6 +1298,7 @@ struct RTC_EXPORT PeerConnectionDependencies final {
   std::unique_ptr<rtc::SSLCertificateVerifier> tls_cert_verifier;
   std::unique_ptr<webrtc::VideoBitrateAllocatorFactory>
       video_bitrate_allocator_factory;
+  std::vector<std::unique_ptr<Resource>> resources;
 };
 
 // PeerConnectionFactoryDependencies holds all of the PeerConnectionFactory
@@ -1333,6 +1335,7 @@ struct RTC_EXPORT PeerConnectionFactoryDependencies final {
   std::unique_ptr<MediaTransportFactory> media_transport_factory;
   std::unique_ptr<NetEqFactory> neteq_factory;
   std::unique_ptr<WebRtcKeyValueConfig> trials;
+  std::vector<std::unique_ptr<Resource>> resources;
 };
 
 // PeerConnectionFactoryInterface is the factory interface used for creating

@@ -131,6 +131,7 @@ class PeerConnectionFactory : public PeerConnectionFactoryInterface {
   std::unique_ptr<MediaTransportFactory> media_transport_factory_;
   std::unique_ptr<NetEqFactory> neteq_factory_;
   const std::unique_ptr<WebRtcKeyValueConfig> trials_;
+  std::vector<std::unique_ptr<Resource>> resources_;
 };
 
 }  // namespace webrtc

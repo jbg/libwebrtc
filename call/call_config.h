@@ -19,6 +19,7 @@
 #include "api/transport/network_control.h"
 #include "api/transport/webrtc_key_value_config.h"
 #include "call/audio_state.h"
+#include "call/adaptation/resource.h"
 
 namespace webrtc {
 
@@ -65,6 +66,9 @@ struct CallConfig {
   // Key-value mapping of internal configurations to apply,
   // e.g. field trials.
   const WebRtcKeyValueConfig* trials = nullptr;
+
+  // HACKING
+  std::vector<Resource*> cpu_resources;
 };
 
 }  // namespace webrtc

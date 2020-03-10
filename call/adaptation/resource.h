@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
 
@@ -73,14 +74,14 @@ class ResourceListener {
 //
 // Implementations of this interface are responsible for performing resource
 // usage measurements and invoking OnResourceUsageStateMeasured().
-class Resource {
+class RTC_EXPORT Resource {
  public:
   // By default, usage_state() is kStable until a measurement is made.
   Resource();
   virtual ~Resource();
 
-  void RegisterListener(ResourceListener* listener);
-  void UnregisterListener(ResourceListener* listener);
+  virtual void RegisterListener(ResourceListener* listener);
+  virtual void UnregisterListener(ResourceListener* listener);
 
   ResourceUsageState usage_state() const;
 

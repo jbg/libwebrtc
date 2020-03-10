@@ -760,7 +760,8 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
       call_stats_.get(), transport_send_ptr_, bitrate_allocator_.get(),
       video_send_delay_stats_.get(), event_log_, std::move(config),
       std::move(encoder_config), suspended_video_send_ssrcs_,
-      suspended_video_payload_states_, std::move(fec_controller));
+      suspended_video_payload_states_, std::move(fec_controller),
+      config_.cpu_resources);
 
   {
     WriteLockScoped write_lock(*send_crit_);

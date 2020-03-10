@@ -1921,4 +1921,60 @@ void VideoStreamEncoder::InjectAdaptationResource(
   resource_adaptation_module_->AddResource(resource, reason);
 }
 
+namespace {
+
+class TaskQueueResourceProxy : public Resource, public ResourceListener {
+ public:
+  TaskQueueResourceProxy(Resource* delegate,
+                         rtc::TaskQueue* task_queue)
+      : delegate_(delegate), task_queue_(task_queue) {
+  }
+
+  void RegisterListener(ResourceListener* listener) override {
+    RTC_DCHECK_RUN_ON(task_queue_);
+    delegate_->RegisterListener(this);
+    Resource::RegisterListener(listener);
+  }
+  void UnregisterListener(ResourceListener* listener) override {
+    RTC_DCHECK_RUN_ON(task_queue_);
+    delegate_->UnregisterListener(this);
+    Resource::UnregisterListener(listener);
+  }
+
+  ResourceListenerResponse OnResourceUsageStateMeasured(const Resource& resource) override {
+    RTC_DCHECK_EQ(&resource, delegate_);
+    ResourceUsageState state = resource.usage_state();
+    task_queue_->PostTask([this, state]() {
+      RTC_LOG(WARNING) << "OnResourceUsageStateMeasured "
+      << name() << " "
+      << (state == ResourceUsageState::kOveruse ? "Overuse" : "Underuse");
+      Resource::OnResourceUsageStateMeasured(state);
+    });
+    // TODO: How to handle the return value with multithread?
+    return ResourceListenerResponse::kNothing;
+  }
+
+  std::string name() const override {
+    rtc::StringBuilder ss;
+    ss << delegate_->name() << "+encoder_queue";
+    return ss.Release();
+  }
+
+ private:
+  Resource* const delegate_;
+  rtc::TaskQueue* const task_queue_;
+};
+
+} // namespace
+
+void VideoStreamEncoder::AddCpuResource(Resource* resource) {
+  encoder_queue_.PostTask([this, resource]() {
+    RTC_DCHECK_RUN_ON(&encoder_queue_);
+    RTC_LOG(WARNING) << "Add resource " << resource->name();
+    resource_proxies_.emplace_back(
+        std::make_unique<TaskQueueResourceProxy>(resource, &encoder_queue_));
+    resource_adaptation_module_->AddResource(resource_proxies_.back().get());
+  });
+}
+
 }  // namespace webrtc

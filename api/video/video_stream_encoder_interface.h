@@ -21,6 +21,7 @@
 #include "api/video/video_source_interface.h"
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/video_encoder_config.h"
+#include "call/adaptation/resource.h"
 
 namespace webrtc {
 
@@ -117,6 +118,9 @@ class VideoStreamEncoderInterface : public rtc::VideoSinkInterface<VideoFrame> {
   // Permanently stop encoding. After this method has returned, it is
   // guaranteed that no encoded frames will be delivered to the sink.
   virtual void Stop() = 0;
+
+  // HACK!
+  virtual void AddCpuResource(Resource* resource) = 0;
 };
 
 }  // namespace webrtc

@@ -84,7 +84,8 @@ PeerConnectionFactory::PeerConnectionFactory(
       media_transport_factory_(std::move(dependencies.media_transport_factory)),
       neteq_factory_(std::move(dependencies.neteq_factory)),
       trials_(dependencies.trials ? std::move(dependencies.trials)
-                                  : std::make_unique<FieldTrialBasedConfig>()) {
+                                  : std::make_unique<FieldTrialBasedConfig>()),
+      resources_(std::move(dependencies.resources)) {
   if (!network_thread_) {
     owned_network_thread_ = rtc::Thread::CreateWithSocketServer();
     owned_network_thread_->SetName("pc_network_thread", nullptr);
@@ -395,6 +396,9 @@ std::unique_ptr<Call> PeerConnectionFactory::CreateCall_w(
   }
 
   call_config.trials = trials_.get();
+  for (auto& resource : resources_) {
+    call_config.cpu_resources.push_back(resource.get());
+  }
 
   return std::unique_ptr<Call>(call_factory_->CreateCall(call_config));
 }

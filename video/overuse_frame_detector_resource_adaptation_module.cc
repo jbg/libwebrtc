@@ -665,6 +665,7 @@ OveruseFrameDetectorResourceAdaptationModule::OnResourceUsageStateMeasured(
       registered_resource->reason;
   switch (resource.usage_state()) {
     case ResourceUsageState::kOveruse:
+      RTC_LOG(INFO) << "Overuse for " << resource.name();
       return OnResourceOveruse(reason);
     case ResourceUsageState::kStable:
       // Do nothing.
@@ -676,6 +677,7 @@ OveruseFrameDetectorResourceAdaptationModule::OnResourceUsageStateMeasured(
       // taking the current usage of any other resource into account.
       return ResourceListenerResponse::kNothing;
     case ResourceUsageState::kUnderuse:
+      RTC_LOG(INFO) << "Underuse for " << resource.name();
       OnResourceUnderuse(reason);
       return ResourceListenerResponse::kNothing;
   }

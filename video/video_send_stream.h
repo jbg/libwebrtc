@@ -11,6 +11,7 @@
 #ifndef VIDEO_VIDEO_SEND_STREAM_H_
 #define VIDEO_VIDEO_SEND_STREAM_H_
 
+#include <third_party/webrtc/call/adaptation/resource.h>
 #include <map>
 #include <memory>
 #include <vector>
@@ -67,7 +68,8 @@ class VideoSendStream : public webrtc::VideoSendStream {
       VideoEncoderConfig encoder_config,
       const std::map<uint32_t, RtpState>& suspended_ssrcs,
       const std::map<uint32_t, RtpPayloadState>& suspended_payload_states,
-      std::unique_ptr<FecController> fec_controller);
+      std::unique_ptr<FecController> fec_controller,
+      rtc::ArrayView<Resource*> cpu_resources);
 
   ~VideoSendStream() override;
 
@@ -87,6 +89,8 @@ class VideoSendStream : public webrtc::VideoSendStream {
 
   void StopPermanentlyAndGetRtpStates(RtpStateMap* rtp_state_map,
                                       RtpPayloadStateMap* payload_state_map);
+
+  void AttachCpuResource(Resource* resource);
 
  private:
   friend class test::VideoSendStreamPeer;

@@ -80,7 +80,8 @@ VideoSendStream::VideoSendStream(
     VideoEncoderConfig encoder_config,
     const std::map<uint32_t, RtpState>& suspended_ssrcs,
     const std::map<uint32_t, RtpPayloadState>& suspended_payload_states,
-    std::unique_ptr<FecController> fec_controller)
+    std::unique_ptr<FecController> fec_controller,
+    rtc::ArrayView<Resource*> resources)
     : worker_queue_(transport->GetWorkerQueue()),
       stats_proxy_(clock, config, encoder_config.content_type),
       config_(std::move(config)),
@@ -119,6 +120,12 @@ VideoSendStream::VideoSendStream(
       field_trial::IsEnabled(kTargetBitrateRtcpFieldTrial)) {
     video_stream_encoder_->SetBitrateAllocationObserver(send_stream_.get());
   }
+
+  RTC_LOG(WARNING) << "hello world " << resources.size();
+  std::for_each(resources.begin(), resources.end(), [this](Resource* r) {
+    RTC_LOG(WARNING) << "Adding resource to vse: " << r->name();
+    video_stream_encoder_->AddCpuResource(r);
+  });
 
   ReconfigureVideoEncoder(std::move(encoder_config));
 }
