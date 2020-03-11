@@ -93,6 +93,30 @@
       "revId": "6ddeb296238663a81a48899613c11c05681e2f14",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b0fb12d_e2cdbbdd",
+        "filename": "modules/audio_coding/neteq/neteq_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-11T10:37:22Z",
+      "side": 1,
+      "message": "What I meant is that we want two things: (1) verify that the two numbers are indeed equal, and (2) get nice error messages in case they aren\u0027t. A good way to accomplish that is to use large enough types that no narrowing conversion is necessary, because that way EXPECT_EQ will succeed if and only if the numbers are indeed equal, and i they aren\u0027t equal, it\u0027ll be relatively easy to debug.\n\nUsing checked_cast like you did is almost as good.",
+      "parentUuid": "7904c783_59de430b",
+      "range": {
+        "startLine": 1032,
+        "startChar": 12,
+        "endLine": 1032,
+        "endChar": 28
+      },
+      "revId": "6ddeb296238663a81a48899613c11c05681e2f14",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
