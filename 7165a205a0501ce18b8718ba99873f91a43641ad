@@ -45,6 +45,30 @@
       "revId": "7165a205a0501ce18b8718ba99873f91a43641ad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8a3c420_a58bdfc7",
+        "filename": "test/testsupport/perf_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5027
+      },
+      "writtenOn": "2020-03-12T07:58:56Z",
+      "side": 1,
+      "message": "Good catch, thanks!",
+      "parentUuid": "0df0f4cd_d920333b",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 0
+      },
+      "revId": "7165a205a0501ce18b8718ba99873f91a43641ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
