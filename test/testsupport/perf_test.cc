@@ -220,11 +220,22 @@ void PrintPlottableResults(const std::vector<std::string>& desired_graphs) {
   GetPlottableCounterPrinter().Print(desired_graphs);
 }
 
-void WritePerfResults(const std::string& output_path) {
+bool WritePerfResults(const std::string& output_path) {
   std::string results = GetPerfResults();
-  std::fstream output(output_path, std::fstream::out);
-  output << results;
-  output.close();
+  FILE* output = fopen(output_path.c_str(), "wb");
+  if (output == NULL) {
+    printf("Failed to write to %s.\n", output_path.c_str());
+    return false;
+  }
+  size_t written =
+      fwrite(results.c_str(), sizeof(char), results.size(), output);
+  if (written != results.size()) {
+    long expected = results.size();
+    printf("Wrote %zu, tried to write %lu\n", written, expected);
+    return false;
+  }
+
+  return true;
 }
 
 void PrintResult(const std::string& measurement,
