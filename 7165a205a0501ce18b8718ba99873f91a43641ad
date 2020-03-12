@@ -22,6 +22,29 @@
       "revId": "7165a205a0501ce18b8718ba99873f91a43641ad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0df0f4cd_d920333b",
+        "filename": "test/testsupport/perf_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-12T07:44:29Z",
+      "side": 1,
+      "message": "Missing fclose(output).",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 0
+      },
+      "revId": "7165a205a0501ce18b8718ba99873f91a43641ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
