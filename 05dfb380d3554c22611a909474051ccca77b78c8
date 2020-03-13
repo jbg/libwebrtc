@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "58a9613c_b1959702",
+        "filename": "video/adaptation/video_stream_adapter.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-13T14:18:55Z",
+      "side": 1,
+      "message": "They looked like they were stateless, but the assumption was that they were same at Get and Set, else we might DCHECK crash if Get() determines adaptation is possible due to one set of inputs and Apply() fails because the input state is suddenly different.\n\nWhether expressed as input parameters or an input setter method the problem is this: if they change between getting an adaptation and applying things, we\u0027re playing Russian roulette as to whether or not it will work. The adaptation has been invalidated, but this is not expressed explicitly.\n\nRe: 1) If we pass in different inputs at Get vs Apply we run into the same problem. We could remember them though. But that makes Get() a setter, then it can\u0027t be const.\n\nRe: 2) I like the immutable struct idea (kind of like the graph we talked about earlier). But if I undersand this proposal correctly, this would mean to merge Adaptation and VideoStreamAdapter into a single immutable object that can transform itself (or something to that effect). If that is where we want to go I think that is better done in iterative steps and not in this CL.\n\n---\n\nIf SetDegradationPreference() or SetInput() is called, all previously returned Adaptations are invalidated. Two counter-proposals to resolve the problem:\n\na) We can DCHECK this by having a next_adaptation_id_ that is given to Adaptation in its constructor. next_adaptation_id_ is incremented each time you modify the VideoStreamAdapter\u0027s states. An Adaptation is invalidated if Adaptation::id_ !\u003d next_adaptation_id_. I believe this is both explicit and bullet-proof (if you make a mistake you will know about it.)\n\nb) Get() sets all input parameters and we remember them until we do Set(). (Does not prevent Adaptations from being invalidated before use, but makes it harder to make a mistake.)\n\nc) Get() stores the input parameters inside Adaptation and we read them at Apply(). (Safer than option b but does not protect against applying really old Adaptations.)\n\n---\n\nHow about we do a) for now? And maybe revisit your proposal 2) in the future.",
+      "parentUuid": "4d989c28_c97a433a",
+      "range": {
+        "startLine": 355,
+        "startChar": 25,
+        "endLine": 355,
+        "endChar": 33
+      },
+      "revId": "05dfb380d3554c22611a909474051ccca77b78c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ded0d1a_b9e73557",
         "filename": "video/adaptation/video_stream_adapter.h",
         "patchSetId": 9
