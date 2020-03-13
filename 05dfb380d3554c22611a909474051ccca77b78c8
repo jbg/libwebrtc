@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e9df6c91_8acf1c75",
+        "filename": "video/adaptation/video_stream_adapter.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-03-13T15:08:55Z",
+      "side": 1,
+      "message": "I understand the issues now, thanks for the explanation. I think the plan sounds good - add DCHECKs and then we can do this in a cleaner way with a command object later.",
+      "parentUuid": "58a9613c_b1959702",
+      "range": {
+        "startLine": 355,
+        "startChar": 25,
+        "endLine": 355,
+        "endChar": 33
+      },
+      "revId": "05dfb380d3554c22611a909474051ccca77b78c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ded0d1a_b9e73557",
         "filename": "video/adaptation/video_stream_adapter.h",
         "patchSetId": 9
