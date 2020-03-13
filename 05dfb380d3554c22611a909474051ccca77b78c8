@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d989c28_c97a433a",
+        "filename": "video/adaptation/video_stream_adapter.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-03-13T13:36:16Z",
+      "side": 1,
+      "message": "Is there any reason one would call SetInput without calling GetAdaptation*? Or visa versa?\n\nMy concern is that this could be more error prone than before - one was forced to give input parameters in the function call so the calls were effectively stateless.\n\n2 ideas.\n1. Use input parameters as before\n2. Have the return type of \"SetInput\" to be an immutable struct that has methods \"GetAdaptationUp/Down\".",
+      "range": {
+        "startLine": 355,
+        "startChar": 25,
+        "endLine": 355,
+        "endChar": 33
+      },
+      "revId": "05dfb380d3554c22611a909474051ccca77b78c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
