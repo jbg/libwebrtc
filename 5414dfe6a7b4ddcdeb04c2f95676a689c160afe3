@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4479fd4e_0cb393bc",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-13T15:54:47Z",
+      "side": 1,
+      "message": "Can we make these a separate build target? That way, one can depend on the APM API without depending on AudioFrame.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "5414dfe6a7b4ddcdeb04c2f95676a689c160afe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
