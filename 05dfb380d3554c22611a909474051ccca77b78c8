@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "d138cc44_b0ae5c9e",
+        "filename": "video/adaptation/video_stream_adapter.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-14T09:56:34Z",
+      "side": 1,
+      "message": "Done. When implementing what I ended up calling the \"Adaptation validation ID\" I realized that another way to invalidate adaptation is to ClearRestrictions(). Now this is explicitly guarded against!",
+      "parentUuid": "e9df6c91_8acf1c75",
+      "range": {
+        "startLine": 355,
+        "startChar": 25,
+        "endLine": 355,
+        "endChar": 33
+      },
+      "revId": "05dfb380d3554c22611a909474051ccca77b78c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ded0d1a_b9e73557",
         "filename": "video/adaptation/video_stream_adapter.h",
         "patchSetId": 9
@@ -93,6 +117,30 @@
       "revId": "05dfb380d3554c22611a909474051ccca77b78c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27ca36a2_b2fe7c4c",
+        "filename": "video/adaptation/video_stream_adapter.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-14T09:56:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ded0d1a_b9e73557",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "05dfb380d3554c22611a909474051ccca77b78c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
