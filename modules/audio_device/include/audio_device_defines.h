@@ -97,7 +97,7 @@ class AudioParameters {
   size_t bits_per_sample() const { return kBitsPerSample; }
   void reset(int sample_rate, size_t channels, double ms_per_buffer) {
     reset(sample_rate, channels,
-          static_cast<size_t>(sample_rate * ms_per_buffer + 0.5));
+          static_cast<size_t>(sample_rate * ms_per_buffer / 1000 + 0.5));
   }
   void reset(int sample_rate, size_t channels) {
     reset(sample_rate, channels, static_cast<size_t>(0));
