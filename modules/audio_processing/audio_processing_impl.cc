@@ -1054,46 +1054,46 @@ void AudioProcessingImpl::EmptyQueuedRenderAudio() {
   }
 }
 
-int AudioProcessingImpl::ProcessStream(AudioFrame* frame) {
+int AudioProcessingImpl::ProcessStream(const int16_t* const src,
+                                       const StreamConfig& input_config,
+                                       const StreamConfig& output_config,
+                                       int16_t* const dest,
+                                       VoiceDetectionResult* vad_result) {
   TRACE_EVENT0("webrtc", "AudioProcessing::ProcessStream_AudioFrame");
-  if (!frame) {
-    return kNullPointerError;
-  }
-
-  StreamConfig input_config(frame->sample_rate_hz_, frame->num_channels_,
-                            /*has_keyboard=*/false);
-  StreamConfig output_config(frame->sample_rate_hz_, frame->num_channels_,
-                             /*has_keyboard=*/false);
-  RTC_DCHECK_EQ(frame->samples_per_channel(), input_config.num_frames());
   RETURN_ON_ERR(MaybeInitializeCapture(input_config, output_config));
 
   rtc::CritScope cs_capture(&crit_capture_);
 
   if (aec_dump_) {
-    RecordUnprocessedCaptureStream(*frame);
+    RecordUnprocessedCaptureStream(src, input_config);
   }
 
-  capture_.capture_audio->CopyFrom(frame);
+  capture_.capture_audio->CopyFrom(src, input_config);
   if (capture_.capture_fullband_audio) {
-    capture_.capture_fullband_audio->CopyFrom(frame);
+    capture_.capture_fullband_audio->CopyFrom(src, input_config);
   }
   RETURN_ON_ERR(ProcessCaptureStreamLocked());
   if (submodule_states_.CaptureMultiBandProcessingPresent() ||
       submodule_states_.CaptureFullBandProcessingActive()) {
     if (capture_.capture_fullband_audio) {
-      capture_.capture_fullband_audio->CopyTo(frame);
+      capture_.capture_fullband_audio->CopyTo(output_config, dest);
     } else {
-      capture_.capture_audio->CopyTo(frame);
+      capture_.capture_audio->CopyTo(output_config, dest);
     }
   }
-  if (capture_.stats.voice_detected) {
-    frame->vad_activity_ = *capture_.stats.voice_detected
-                               ? AudioFrame::kVadActive
-                               : AudioFrame::kVadPassive;
+
+  if (vad_result) {
+    if (capture_.stats.voice_detected) {
+      *vad_result = *capture_.stats.voice_detected
+                        ? VoiceDetectionResult::kDetected
+                        : VoiceDetectionResult::kNotDetected;
+    } else {
+      *vad_result = VoiceDetectionResult::kNotAvailable;
+    }
   }
 
   if (aec_dump_) {
-    RecordProcessedCaptureStream(*frame);
+    RecordProcessedCaptureStream(dest, output_config);
   }
 
   return kNoError;
@@ -1429,49 +1429,38 @@ int AudioProcessingImpl::AnalyzeReverseStreamLocked(
   return ProcessRenderStreamLocked();
 }
 
-int AudioProcessingImpl::ProcessReverseStream(AudioFrame* frame) {
+int AudioProcessingImpl::ProcessReverseStream(const int16_t* const src,
+                                              const StreamConfig& input_config,
+                                              const StreamConfig& output_config,
+                                              int16_t* const dest) {
   TRACE_EVENT0("webrtc", "AudioProcessing::ProcessReverseStream_AudioFrame");
   rtc::CritScope cs(&crit_render_);
-  if (frame == nullptr) {
-    return kNullPointerError;
-  }
-  // Must be a native rate.
-  if (frame->sample_rate_hz_ != kSampleRate8kHz &&
-      frame->sample_rate_hz_ != kSampleRate16kHz &&
-      frame->sample_rate_hz_ != kSampleRate32kHz &&
-      frame->sample_rate_hz_ != kSampleRate48kHz) {
-    return kBadSampleRateError;
-  }
-
-  if (frame->num_channels_ <= 0) {
-    return kBadNumberChannelsError;
-  }
-
   ProcessingConfig processing_config = formats_.api_format;
   processing_config.reverse_input_stream().set_sample_rate_hz(
-      frame->sample_rate_hz_);
+      input_config.sample_rate_hz());
   processing_config.reverse_input_stream().set_num_channels(
-      frame->num_channels_);
+      input_config.num_channels());
   processing_config.reverse_output_stream().set_sample_rate_hz(
-      frame->sample_rate_hz_);
+      output_config.sample_rate_hz());
   processing_config.reverse_output_stream().set_num_channels(
-      frame->num_channels_);
+      output_config.num_channels());
 
   RETURN_ON_ERR(MaybeInitializeRender(processing_config));
-  if (frame->samples_per_channel_ !=
+  if (input_config.num_frames() !=
       formats_.api_format.reverse_input_stream().num_frames()) {
     return kBadDataLengthError;
   }
 
   if (aec_dump_) {
-    aec_dump_->WriteRenderStreamMessage(*frame);
+    aec_dump_->WriteRenderStreamMessage(src, input_config.num_frames(),
+                                        input_config.num_channels());
   }
 
-  render_.render_audio->CopyFrom(frame);
+  render_.render_audio->CopyFrom(src, input_config);
   RETURN_ON_ERR(ProcessRenderStreamLocked());
   if (submodule_states_.RenderMultiBandProcessingActive() ||
       submodule_states_.RenderFullBandProcessingActive()) {
-    render_.render_audio->CopyTo(frame);
+    render_.render_audio->CopyTo(output_config, dest);
   }
   return kNoError;
 }
@@ -2008,11 +1997,13 @@ void AudioProcessingImpl::RecordUnprocessedCaptureStream(
 }
 
 void AudioProcessingImpl::RecordUnprocessedCaptureStream(
-    const AudioFrame& capture_frame) {
+    const int16_t* const data,
+    const StreamConfig& config) {
   RTC_DCHECK(aec_dump_);
   WriteAecDumpConfigMessage(false);
 
-  aec_dump_->AddCaptureStreamInput(capture_frame);
+  aec_dump_->AddCaptureStreamInput(data, config.num_channels(),
+                                   config.num_frames());
   RecordAudioProcessingState();
 }
 
@@ -2029,10 +2020,12 @@ void AudioProcessingImpl::RecordProcessedCaptureStream(
 }
 
 void AudioProcessingImpl::RecordProcessedCaptureStream(
-    const AudioFrame& processed_capture_frame) {
+    const int16_t* const data,
+    const StreamConfig& config) {
   RTC_DCHECK(aec_dump_);
 
-  aec_dump_->AddCaptureStreamOutput(processed_capture_frame);
+  aec_dump_->AddCaptureStreamOutput(data, config.num_channels(),
+                                    config.num_channels());
   aec_dump_->WriteCaptureStreamMessage();
 }
 
