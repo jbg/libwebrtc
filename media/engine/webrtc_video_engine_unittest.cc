@@ -5234,10 +5234,10 @@ TEST_F(WebRtcVideoChannelTest, GetStatsReportsKeyFramesEncoded) {
 
   cricket::VideoMediaInfo info;
   ASSERT_TRUE(channel_->GetStats(&info));
-  // TODO(bugs.webrtc.org/9547): Populate individual outbound-rtp stats objects
-  // for each simulcast stream, instead of accumulating all keyframes encoded
-  // over all simulcast streams in the same outbound-rtp stats object.
-  EXPECT_EQ(97u, info.senders[0].key_frames_encoded);
+  EXPECT_EQ(info.senders.size(), 2u);
+  EXPECT_EQ(10u, info.senders[0].key_frames_encoded);
+  EXPECT_EQ(87u, info.senders[1].key_frames_encoded);
+  EXPECT_EQ(97u, info.aggregated_senders[0].key_frames_encoded);
 }
 
 TEST_F(WebRtcVideoChannelTest, GetStatsReportsQpSum) {
@@ -5249,6 +5249,21 @@ TEST_F(WebRtcVideoChannelTest, GetStatsReportsQpSum) {
   cricket::VideoMediaInfo info;
   ASSERT_TRUE(channel_->GetStats(&info));
   EXPECT_EQ(stats.qp_sum, info.senders[0].qp_sum);
+  EXPECT_EQ(stats.qp_sum, info.aggregated_senders[0].qp_sum);
+}
+
+TEST_F(WebRtcVideoChannelTest, GetStatsReportsPerLayerQpSum) {
+  FakeVideoSendStream* stream = AddSendStream();
+  webrtc::VideoSendStream::Stats stats;
+  stats.substreams[123].qp_sum = 15;
+  stats.substreams[456].qp_sum = 11;
+  stream->SetStats(stats);
+
+  cricket::VideoMediaInfo info;
+  ASSERT_TRUE(channel_->GetStats(&info));
+  EXPECT_EQ(info.senders.size(), 2u);
+  EXPECT_EQ(stats.substreams[123].qp_sum, info.senders[0].qp_sum);
+  EXPECT_EQ(stats.substreams[456].qp_sum, info.senders[1].qp_sum);
 }
 
 TEST_F(WebRtcVideoChannelTest, GetStatsReportsUpperResolution) {
@@ -5264,9 +5279,16 @@ TEST_F(WebRtcVideoChannelTest, GetStatsReportsUpperResolution) {
 
   cricket::VideoMediaInfo info;
   ASSERT_TRUE(channel_->GetStats(&info));
-  ASSERT_EQ(1u, info.senders.size());
-  EXPECT_EQ(123, info.senders[0].send_frame_width);
+  ASSERT_EQ(1u, info.aggregated_senders.size());
+  ASSERT_EQ(3u, info.senders.size());
+  EXPECT_EQ(123, info.senders[1].send_frame_width);
+  EXPECT_EQ(40, info.senders[1].send_frame_height);
+  EXPECT_EQ(80, info.senders[2].send_frame_width);
+  EXPECT_EQ(31, info.senders[2].send_frame_height);
+  EXPECT_EQ(20, info.senders[0].send_frame_width);
   EXPECT_EQ(90, info.senders[0].send_frame_height);
+  EXPECT_EQ(123, info.aggregated_senders[0].send_frame_width);
+  EXPECT_EQ(90, info.aggregated_senders[0].send_frame_height);
 }
 
 TEST_F(WebRtcVideoChannelTest, GetStatsReportsCpuAdaptationStats) {
@@ -5329,9 +5351,17 @@ TEST_F(WebRtcVideoChannelTest, GetStatsTranslatesSendRtcpPacketTypesCorrectly) {
 
   cricket::VideoMediaInfo info;
   ASSERT_TRUE(channel_->GetStats(&info));
-  EXPECT_EQ(7, info.senders[0].firs_rcvd);
-  EXPECT_EQ(10, info.senders[0].nacks_rcvd);
-  EXPECT_EQ(13, info.senders[0].plis_rcvd);
+  EXPECT_EQ(2, info.senders[0].firs_rcvd);
+  EXPECT_EQ(3, info.senders[0].nacks_rcvd);
+  EXPECT_EQ(4, info.senders[0].plis_rcvd);
+
+  EXPECT_EQ(5, info.senders[1].firs_rcvd);
+  EXPECT_EQ(7, info.senders[1].nacks_rcvd);
+  EXPECT_EQ(9, info.senders[1].plis_rcvd);
+
+  EXPECT_EQ(7, info.aggregated_senders[0].firs_rcvd);
+  EXPECT_EQ(10, info.aggregated_senders[0].nacks_rcvd);
+  EXPECT_EQ(13, info.aggregated_senders[0].plis_rcvd);
 }
 
 TEST_F(WebRtcVideoChannelTest,
@@ -5476,13 +5506,16 @@ TEST_F(WebRtcVideoChannelTest, TranslatesSenderBitrateStatsCorrectly) {
 
   cricket::VideoMediaInfo info;
   ASSERT_TRUE(channel_->GetStats(&info));
-  ASSERT_EQ(2u, info.senders.size());
+  ASSERT_EQ(2u, info.aggregated_senders.size());
+  ASSERT_EQ(4u, info.senders.size());
   BandwidthEstimationInfo bwe_info;
   channel_->FillBitrateInfo(&bwe_info);
   // Assuming stream and stream2 corresponds to senders[0] and [1] respectively
   // is OK as std::maps are sorted and AddSendStream() gives increasing SSRCs.
-  EXPECT_EQ(stats.media_bitrate_bps, info.senders[0].nominal_bitrate);
-  EXPECT_EQ(stats2.media_bitrate_bps, info.senders[1].nominal_bitrate);
+  EXPECT_EQ(stats.media_bitrate_bps,
+            info.aggregated_senders[0].nominal_bitrate);
+  EXPECT_EQ(stats2.media_bitrate_bps,
+            info.aggregated_senders[1].nominal_bitrate);
   EXPECT_EQ(stats.target_media_bitrate_bps + stats2.target_media_bitrate_bps,
             bwe_info.target_enc_bitrate);
   EXPECT_EQ(stats.media_bitrate_bps + stats2.media_bitrate_bps,

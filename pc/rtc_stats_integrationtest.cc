@@ -894,6 +894,14 @@ class RTCStatsReportVerifier {
       // this to be present.
       verifier.MarkMemberTested(outbound_stream.content_type, true);
       verifier.TestMemberIsDefined(outbound_stream.encoder_implementation);
+      verifier.TestMemberIsUndefined(outbound_stream.rid);
+      verifier.TestMemberIsNonNegative<double>(
+          outbound_stream.frames_per_second);
+      verifier.TestMemberIsNonNegative<uint32_t>(outbound_stream.frame_height);
+      verifier.TestMemberIsNonNegative<uint32_t>(outbound_stream.frame_width);
+      verifier.TestMemberIsNonNegative<uint32_t>(outbound_stream.frames_sent);
+      verifier.TestMemberIsNonNegative<uint32_t>(
+          outbound_stream.huge_frames_sent);
     } else {
       verifier.TestMemberIsUndefined(outbound_stream.frames_encoded);
       verifier.TestMemberIsUndefined(outbound_stream.key_frames_encoded);
@@ -908,6 +916,12 @@ class RTCStatsReportVerifier {
       verifier.TestMemberIsUndefined(outbound_stream.content_type);
       // TODO(hbos): Implement for audio as well.
       verifier.TestMemberIsUndefined(outbound_stream.encoder_implementation);
+      verifier.TestMemberIsUndefined(outbound_stream.rid);
+      verifier.TestMemberIsUndefined(outbound_stream.frames_per_second);
+      verifier.TestMemberIsUndefined(outbound_stream.frame_height);
+      verifier.TestMemberIsUndefined(outbound_stream.frame_width);
+      verifier.TestMemberIsUndefined(outbound_stream.frames_sent);
+      verifier.TestMemberIsUndefined(outbound_stream.huge_frames_sent);
     }
     return verifier.ExpectAllMembersSuccessfullyTested();
   }

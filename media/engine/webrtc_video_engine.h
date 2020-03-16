@@ -331,7 +331,8 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     void SetSend(bool send);
 
     const std::vector<uint32_t>& GetSsrcs() const;
-    VideoSenderInfo GetVideoSenderInfo(bool log_stats);
+    // Returns per ssrc VideoSenderInfos. Useful for simulcast scenario.
+    std::vector<VideoSenderInfo> GetPerLayerVideoSenderInfos(bool log_stats);
     void FillBitrateInfo(BandwidthEstimationInfo* bwe_info);
 
    private:
