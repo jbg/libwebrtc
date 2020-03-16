@@ -22,6 +22,30 @@
       "revId": "5414dfe6a7b4ddcdeb04c2f95676a689c160afe3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d707ec0_feb98b70",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-16T14:17:58Z",
+      "side": 1,
+      "message": "Yes, we should do that eventually.\nHowever, I don\u0027t think it is yet possible as it would cause a circular dependency graph.\n\nThe audio frame proxies needs details from audio_processing.* and currently audio_processing.h needs the functionality in audio_frame_proxies.*\n\nLet\u0027s instead wait with that until the AudioProcessing is independent of the AudioFrame class.",
+      "parentUuid": "4479fd4e_0cb393bc",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "5414dfe6a7b4ddcdeb04c2f95676a689c160afe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
