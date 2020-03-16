@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "0775ad9f_a7b4fe0c",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2421,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T17:50:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c3d0c559_4b41a503",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5458e222_ce2f7203",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 6
@@ -311,6 +329,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "e33c1330_7dc86167",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b63e1d1f_114c3d8f",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2445,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T17:50:15Z",
+      "side": 1,
+      "message": "Put GetAggregatedVideoSenderInfo back as member since it still needs parameters_.config.rtp.ssrcs. Appears aggregating ssrcs from sub layer doesn\u0027t give same result and caused flakiness in UTs. Didn\u0027t dig to the bottom of it though, where the differences come from or maybe only the order of ssrcs is different, which influences the final stats report",
+      "parentUuid": "425ddf54_e247903d",
       "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
