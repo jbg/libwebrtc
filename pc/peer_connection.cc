@@ -6017,6 +6017,7 @@ RTCError PeerConnection::UpdateSessionState(
     RTC_DCHECK(type == SdpType::kAnswer);
     ChangeSignalingState(PeerConnectionInterface::kStable);
     transceiver_stable_states_by_transceivers_.clear();
+    have_pending_rtp_data_channel_ = false;
   }
 
   // Update internal objects according to the session description's media
@@ -6678,6 +6679,7 @@ bool PeerConnection::CreateDataChannel(const std::string& mid) {
           channel_manager()->CreateRtpDataChannel(
               configuration_.media_config, rtp_transport, signaling_thread(),
               mid, SrtpRequired(), GetCryptoOptions(), &ssrc_generator_));
+      have_pending_rtp_data_channel_ = true;
       if (!data_channel_controller_.rtp_data_channel()) {
         return false;
       }
@@ -7610,6 +7612,10 @@ RTCError PeerConnection::Rollback(SdpType sdp_type) {
     transceiver->internal()->set_mline_index(state.mline_index());
   }
   transport_controller_->RollbackTransports();
+  if (have_pending_rtp_data_channel_) {
+    DestroyDataChannelTransport();
+    have_pending_rtp_data_channel_ = false;
+  }
   transceiver_stable_states_by_transceivers_.clear();
   pending_local_description_.reset();
   pending_remote_description_.reset();
