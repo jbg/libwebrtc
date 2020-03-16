@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c227420b_5766097a",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff1fd690_53e3609e",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0849050a_5d2ec9b3",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d899371_47052898",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0849050a_5d2ec9b3",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "be2c7bcc_9dfb27f1",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2384,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2db8155e_46165f1b",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92aac03a_5a36eb4f",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2020-03-09T15:57:40Z",
       "side": 1,
       "message": "framerate_sent \u003d encode_frame_rate?\n\n1. Encode rate and sent rate are not the same thing. Existing bug?\n\n2. Why do we set this here? The per-layer metrics should provide the per-layer value, and the aggregate metrics should be the aggregate of that. Shouldn\u0027t this be left undefined?",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3d0c559_4b41a503",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2421,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "\u003eframerate_sent \u003d encode_frame_rate\n\nThat is how it was.\nTo answer all the per layer questions, as far as I can see it is not quaranteed that sub layers even exist. That is why some of the stats like qp_sum are duplicated now in both VideoSendStream::StreamStats and VideoSendStream::Stats.",
+      "parentUuid": "92aac03a_5a36eb4f",
       "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "d39a0f6f_8b4d8d88",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2424,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5458e222_ce2f7203",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e66b4510_edc438f4",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 6
@@ -101,6 +191,24 @@
       "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63872fe5_3b48a912",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2428,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e66b4510_edc438f4",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "e9fd4e02_5df8c6c6",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2432,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "frames_sent is not collected separately yet as far as I can see.",
+      "parentUuid": "db7b0259_b02843f6",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e002771_3bfe476c",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 6
@@ -135,6 +261,24 @@
       "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dad07dd_ff5c7c9f",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2438,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e002771_3bfe476c",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "425ddf54_e247903d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2445,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33c1330_7dc86167",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52d9fa74_f60c606a",
         "filename": "media/engine/webrtc_video_engine.h",
         "patchSetId": 6
@@ -169,6 +331,24 @@
       "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "680a8610_d1b9d2ce",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-16T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52d9fa74_f60c606a",
+      "revId": "6bc88f781cdee88df8e78e95a91e0e97657825bf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
