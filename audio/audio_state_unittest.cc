@@ -120,7 +120,8 @@ TEST(AudioStateTest, RecordedAudioArrivesAtSingleStream) {
       static_cast<MockAudioProcessing*>(audio_state->audio_processing());
   EXPECT_CALL(*ap, set_stream_delay_ms(0));
   EXPECT_CALL(*ap, set_stream_key_pressed(false));
-  EXPECT_CALL(*ap, ProcessStream(::testing::_));
+  EXPECT_CALL(*ap, ProcessStream(::testing::_, ::testing::_, ::testing::_,
+                                 ::testing::_, ::testing::_));
 
   constexpr int kSampleRate = 16000;
   constexpr size_t kNumChannels = 2;
@@ -170,7 +171,8 @@ TEST(AudioStateTest, RecordedAudioArrivesAtMultipleStreams) {
       static_cast<MockAudioProcessing*>(audio_state->audio_processing());
   EXPECT_CALL(*ap, set_stream_delay_ms(5));
   EXPECT_CALL(*ap, set_stream_key_pressed(true));
-  EXPECT_CALL(*ap, ProcessStream(::testing::_));
+  EXPECT_CALL(*ap, ProcessStream(::testing::_, ::testing::_, ::testing::_,
+                                 ::testing::_, ::testing::_));
 
   constexpr int kSampleRate = 16000;
   constexpr size_t kNumChannels = 1;

@@ -34,6 +34,8 @@ rtc_library("config") {
 rtc_library("api") {
   visibility = [ "*" ]
   sources = [
+    "include/audio_frame_proxies.cc",
+    "include/audio_frame_proxies.h",
     "include/audio_processing.cc",
     "include/audio_processing.h",
   ]
@@ -44,6 +46,7 @@ rtc_library("api") {
     ":config",
     "../../api:scoped_refptr",
     "../../api/audio:aec3_config",
+    "../../api/audio:audio_frame_api",
     "../../api/audio:echo_control",
     "../../rtc_base:deprecation",
     "../../rtc_base:macromagic",
@@ -74,7 +77,6 @@ rtc_library("audio_buffer") {
   deps = [
     ":api",
     "../../api:array_view",
-    "../../api/audio:audio_frame_api",
     "../../common_audio",
     "../../common_audio:common_audio_c",
     "../../rtc_base:checks",
