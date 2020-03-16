@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c011059a_90a6bcdc",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6682,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-16T22:17:05Z",
+      "side": 1,
+      "message": "I think failure of the set_rtp_data_channel is signalled by rtp_data_channel() \u003d null, which would leave the state inconsistent. Should you move setting have_pending_ to ust before the \"return true\"?",
+      "revId": "0e7dd99b72e96bb601a077ae94037044230af16f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4c607e9_25bab7d0",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 7615,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-16T22:17:05Z",
+      "side": 1,
+      "message": "It \"feels\" to me that a better architecture would lump in the RTP data channel transport with the other transports and let transport_controller_ deal with it, but the refactoring needed to do that sensibly is probably larger than RTP datachannels is worth.",
+      "revId": "0e7dd99b72e96bb601a077ae94037044230af16f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66257df9_3f52ab57",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-16T22:17:05Z",
+      "side": 1,
+      "message": "Please spell out \"Used when rolling back RTP data channels\". It\u0027s reasonably obvious from the name, but sentences need to be complete.",
+      "revId": "0e7dd99b72e96bb601a077ae94037044230af16f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
