@@ -2197,5 +2197,15 @@ TEST_F(PeerConnectionJsepTest,
   callee->AddTransceiver(cricket::MEDIA_TYPE_VIDEO);
   EXPECT_TRUE(callee->CreateOfferAndSetAsLocal());
 }
-
+TEST_F(PeerConnectionJsepTest, RollbackRtpDataChannel) {
+  RTCConfiguration config;
+  config.sdp_semantics = SdpSemantics::kUnifiedPlan;
+  config.enable_rtp_data_channel = true;
+  auto pc = CreatePeerConnection(config);
+  pc->CreateDataChannel("dummy");
+  auto offer = pc->CreateOffer();
+  EXPECT_TRUE(pc->CreateOfferAndSetAsLocal());
+  EXPECT_TRUE(pc->SetRemoteDescription(pc->CreateRollback()));
+  EXPECT_TRUE(pc->SetLocalDescription(std::move(offer)));
+}
 }  // namespace webrtc
