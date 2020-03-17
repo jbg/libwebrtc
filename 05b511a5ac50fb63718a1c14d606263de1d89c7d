@@ -16,6 +16,24 @@
       "revId": "05b511a5ac50fb63718a1c14d606263de1d89c7d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33a21e4c_9defca96",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-17T14:46:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5b22772_4b6b7814",
+      "revId": "05b511a5ac50fb63718a1c14d606263de1d89c7d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
