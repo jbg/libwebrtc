@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8406a892_630bd9be",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6682,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-17T14:05:26Z",
+      "side": 1,
+      "message": "That\u0027s not what I meant. What I meant is that in the very next line, you check if rtp_data_channel is null, and return false in that case (failure).\nWhen you return false from this function, have_pending_rtp_data_channel_ should not be set.\nThe right change is to move have_pending_rtp_data_channel_ \u003d true to after the following IF statement and the return inside it. Possibly to the bottom of the case block, since there are no more returns.",
+      "parentUuid": "40d33c97_2cd6d2f7",
+      "revId": "0e7dd99b72e96bb601a077ae94037044230af16f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4c607e9_25bab7d0",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 1
