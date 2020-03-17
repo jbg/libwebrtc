@@ -46,6 +46,30 @@
       "revId": "5414dfe6a7b4ddcdeb04c2f95676a689c160afe3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25eedf47_936a392c",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-17T09:30:57Z",
+      "side": 1,
+      "message": "We should take a look at how that transition would work. Changing the build targets may require a second round of changes for downstream clients.\n\nWon\u0027t it work like this? (arrow means \"depends on\")\n\naudio_processing --\u003e proxies --\u003e api\n\n\nThere is nothing in the _api_ (audio_processing.*) that requires the proxies, right?",
+      "parentUuid": "4d707ec0_feb98b70",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "5414dfe6a7b4ddcdeb04c2f95676a689c160afe3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
