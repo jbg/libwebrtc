@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "801c9f5f_ef3585c2",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2411,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-03-18T13:46:41Z",
+      "side": 1,
+      "message": "It looks like it\u0027s impossible to do at the moment.\n\nStreamStats doesn\u0027t have necessary members:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/call/video_send_stream.h?l\u003d43\u0026rcl\u003de5c9f6d106896e870141c3e391e09cbfb593d49f\n\nI suggest to add ssrc there and populate it here:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/video/send_statistics_proxy.cc?l\u003d759\u0026rcl\u003de5c9f6d106896e870141c3e391e09cbfb593d49f\n\nThen 1-to-1 correspondence between substreams with known SSRCs can be found via ssrc_groups_:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/media/engine/webrtc_video_engine.h?l\u003d393\u0026rcl\u003de5c9f6d106896e870141c3e391e09cbfb593d49f\n\nBut I\u0027m not sure how to do it from these groups.\nI guess, the easiest way to figure out which corresponds to which is to do it here:\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/video/send_statistics_proxy.cc?l\u003d764\u0026rcl\u003de5c9f6d106896e870141c3e391e09cbfb593d49f\n\nAt this point we know all the media ssrcs and all rtx/fec ssrcs in rtp_config_.\nThe correspondence is in that order: first rtx ssrc goes to first media ssrc and so on, until one list is exhaused (see https://cs.chromium.org/chromium/src/third_party/webrtc/call/rtp_video_sender.cc?l\u003d245\u0026rcl\u003de5c9f6d106896e870141c3e391e09cbfb593d49f )\n\nThus, we should also add media_ssrc member to the StreamStats.\n\nAlso, I think only one flexfec stream may exist per video sender and it can\u0027t protect multiple ssrcs. So it\u0027s either never is created or it\u0027s assigned to the first media ssrc only.",
+      "parentUuid": "9cb9f3dc_cee2a8c6",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12c5ffb8_8f7373bd",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 8
