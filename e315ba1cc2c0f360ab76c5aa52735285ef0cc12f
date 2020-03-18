@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e3754a6_c7c90445",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 7618,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-18T18:47:25Z",
+      "side": 1,
+      "message": "Added test for it.",
+      "parentUuid": "cf496c2a_30029e68",
+      "revId": "e315ba1cc2c0f360ab76c5aa52735285ef0cc12f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91b3ab4e_c29f8d8c",
         "filename": "pc/peer_connection_jsep_unittest.cc",
         "patchSetId": 3
@@ -51,6 +69,24 @@
       "revId": "e315ba1cc2c0f360ab76c5aa52735285ef0cc12f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c179b437_0503da1f",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2210,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-18T18:47:25Z",
+      "side": 1,
+      "message": "Maybe I missed something and there was easier way to verify that rollback doesn\u0027t destroy original data channel, but for now I added the test under peer connection integration, where it was possible to actually send something over data channel.",
+      "parentUuid": "91b3ab4e_c29f8d8c",
+      "revId": "e315ba1cc2c0f360ab76c5aa52735285ef0cc12f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
