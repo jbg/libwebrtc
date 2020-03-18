@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "absl/functional/function_ref.h"
 #include "api/array_view.h"
 #include "api/function_view.h"
 #include "rtc_base/buffer.h"
@@ -54,7 +55,7 @@ class RtcpPacket {
   // max_length bytes, it will be fragmented and multiple calls to this
   // callback will be made.
   using PacketReadyCallback =
-      rtc::FunctionView<void(rtc::ArrayView<const uint8_t> packet)>;
+      absl::FunctionRef<void(rtc::ArrayView<const uint8_t> packet)>;
 
   virtual ~RtcpPacket() = default;
 

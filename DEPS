@@ -2698,6 +2698,7 @@ include_rules = [
   "+absl/base/config.h",
   "+absl/base/macros.h",
   "+absl/container/inlined_vector.h",
+  "+absl/functional/function_ref.h",
   "+absl/memory/memory.h",
   "+absl/meta/type_traits.h",
   "+absl/strings/ascii.h",

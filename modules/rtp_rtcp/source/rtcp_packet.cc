@@ -21,7 +21,7 @@ rtc::Buffer RtcpPacket::Build() const {
   rtc::Buffer packet(BlockLength());
 
   size_t length = 0;
-  bool created = Create(packet.data(), &length, packet.capacity(), nullptr);
+  bool created = Create(packet.data(), &length, packet.capacity(), [](auto) {});
   RTC_DCHECK(created) << "Invalid packet is not supported.";
   RTC_DCHECK_EQ(length, packet.size())
       << "BlockLength mispredicted size used by Create";
@@ -43,7 +43,6 @@ bool RtcpPacket::OnBufferFull(uint8_t* packet,
                               PacketReadyCallback callback) const {
   if (*index == 0)
     return false;
-  RTC_DCHECK(callback) << "Fragmentation not supported.";
   callback(rtc::ArrayView<const uint8_t>(packet, *index));
   *index = 0;
   return true;

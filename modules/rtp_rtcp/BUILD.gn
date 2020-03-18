@@ -119,6 +119,7 @@ rtc_library("rtp_rtcp_format") {
     "../../system_wrappers",
     "../video_coding:codec_globals_headers",
     "//third_party/abseil-cpp/absl/algorithm:container",
+    "//third_party/abseil-cpp/absl/functional:function_ref",
     "//third_party/abseil-cpp/absl/strings",
     "//third_party/abseil-cpp/absl/types:optional",
     "//third_party/abseil-cpp/absl/types:variant",
