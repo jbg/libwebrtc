@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "436a5fd5_3df69c38",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "Add:\n\n// Each sender info represents one \"outbound-rtp\" stream. In non-simulcast,\n// this means one info per RtpSender but if simulcast is used this means\n// one info per simulcast layer.",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe1bb175_ef18bc83",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "Add:\n\n// Used for legacy getStats() API\u0027s \"ssrc\" stats and modern getStats() API\u0027s\n// \"track\" stats. If simulcast is used, instead of having one sender info per\n// simulcast layer, the metrics of all layers of an RtpSender are aggregated\n// into a single sender info per RtpSender.",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04ccfa34_48966725",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2345,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "For some of these, like framerate_sent, we will use the metric if we don\u0027t have any substreams, but if we do have substreams it will get overwritten by stream_stats.encode_frame_rate, meaning this value is not used.\n\nFor code clarity, and to prevent accidentally exposing the \"common_info\" value of the metric in a substream (say if we forgot to overwrite it later), can we update the code only to set the value if we\u0027re going to use it? I think this will make it easier to tell what parts of simulcast stats need to be fixed in follow-up work and what parts are fine as-is. With the current code I have to look both here and later to be able to figure out which metrics are supported on a per-layer basis and which metrics rely on a per-sender value.\n\nIn other words, can you make it something like this (including the code comments):\n\n  // Metrics that are in common for all substreams.\n  common_info.quality_limitation_reason \u003d stats.quality_limitation_reason;\n  ...\n  common_info.ssrc_groups \u003d ssrc_groups_;\n  // Metrics that are currently in common for all substreams, but that should\n  // have per-substream metrics equivalents in the future.\n  common_info.qp_sum \u003d stats.qp_sum;\n  ...\n  // If we don\u0027t have any substreams, get the remaining metrics from |stats|.\n  // Otherwise, these values are obtained from |sub_stream| below.\n  if (stats.substreams.empty()) {\n    common_info.framerate_sent \u003d stats.encode_frame_rate;\n    ...\n    infos.push_back(common_info);\n  }",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad84b8d4_a88fc65d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2364,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "// We don\u0027t have any substreams. Add all ssrcs to the info and return it.\nRTC_DCHECK_EQ(1, infos.size());\n\nAlternatively, would the code be more clear if the \"infos.push_back(common_info)\" code paths above handled adding the ssrc and return early? Now we have multiple code paths effectively returning early but they both continue to this separate if-statement to decide whether to return.",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cb9f3dc_cee2a8c6",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2411,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "There is a recent development with how \"is_rtx\" streams are handled!\nhttps://github.com/w3c/webrtc-stats/pull/554/files\n\nMy understanding is this:\n\nUnlike my previous statements, the \"is_rtx\" stream should NOT appear as a separate \"outbound-rtp\" object (separate VideoSenderInfo).\n\nRather, the RTP stream that uses the RTX stream should increment its packets_sent, bytes_sent, retransmitted_packets_sent and retransmitted_bytes_sent to include the \"is_rtx\"\u0027s packet counters. What you end up with is a single VideoSenderInfo whose counters account for both the \"normal ssrc\" and its \"RTX ssrc\" counters.\n\n+ilnik@ in this part of the code, how do we know which \"is_rtx\" stream correspond to which \"!is_rtx\" stream?\n\nFor the sake of fixing the desired behavior in both non-simulcast and simulcast-cases, I will look into a CL to merge RTX and non-RTX substreams here for the sake of stats reporting, so that this code doesn\u0027t have to worry about that detail and can just loop through substream stats.",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12c5ffb8_8f7373bd",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2420,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "If we have per-substream stats, then we should use the substream\u0027s QP value. If it doesn\u0027t have one, it\u0027s better to not report any QP value than to fall back on reporting a \"common_info qp value\". I.e. remove the if-statement, just overwrite it regardless. This goes into my earlier comment about accidentally exposing per-sender metrics on the per-layer.",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "105d5711_52f8b17d",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2432,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "RTC_DCHECK(!infos.empty());",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24b767cf_f6d0c674",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2433,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "nit: if (infos.size() \u003d\u003d 1)",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cb0aa5c_bfc3b5ce",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2439,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "Add {} for the for-loop.\n\nWait, doesn\u0027t all the infos have the ssrcs already?\nThat is, doing info.add_ssrc(info[i].ssrcs()) should give us all ssrcs?",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2251b81c_695401f6",
+        "filename": "media/engine/webrtc_video_engine.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "This now aggregating the input, can we make it const?",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bedb550c_33e5b27a",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 5241,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T12:28:32Z",
+      "side": 1,
+      "message": "Can we make unittests for GetAggregatedVideoSenderInfo(), e.g.\n1. If I have no stream_, I get a single info with such and such values.\n2. If I have a stream_, but no substreams, I get a single info, with such and such values.\n3. If I have substreams, I get metrics and I can expect such and such to come from the per-sender struct and such and such metrics to come from the individual substream structs.",
+      "revId": "8e2f1e9da9a0ec6ce706736a2b98da1f8857b26a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
