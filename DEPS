@@ -196,7 +196,7 @@ deps = {
   'src/third_party/libsrtp':
     'https://chromium.googlesource.com/chromium/deps/libsrtp.git@650611720ecc23e0e6b32b0e3100f8b4df91696c',
   'src/third_party/libaom/source/libaom':
-    'https://aomedia.googlesource.com/aom.git@f83d681765cd2aefa9a70ce771af48edd1dbf416',
+    'https://aomedia.googlesource.com/aom.git@c25910f6d213ec5ec45ae53caa5e40bd7ebd218f',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@5532775efe808cb0942e7b99bf2f232c6ce99fee',
   'src/third_party/libyuv':
