@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d8f8f8b_0140ddb2",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 7618,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T09:30:35Z",
+      "side": 1,
+      "message": "Is this something that you need to do even in follow-up O/A exchanges?\n\nExample:\ncreateDataChannel(); // needs to be negotiated\nO/A exchange...      // it\u0027s now negotiated!\ncreateDataChannel(); // does this one need negotiation?\n\nI\u0027m guessing that the second one doesn\u0027t need to negotiate because at this point we already have an SCTP data channel.\n\nBut I want to make sure that if we do a follow-up O/A that is rolled back that we don\u0027t end up destroying the data channel that was currently in use.",
+      "revId": "e315ba1cc2c0f360ab76c5aa52735285ef0cc12f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91b3ab4e_c29f8d8c",
+        "filename": "pc/peer_connection_jsep_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2210,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-18T09:30:35Z",
+      "side": 1,
+      "message": "See my previous comment. Can you add a test that successfully performs O/A first with a data channel. Then create another data channel and do an offer that is rolled back and make sure that the original data channel is not destroyed in the process of rolling back.\n\nIf this test passes, then LGTM and land it. If not, let me have another look.",
+      "revId": "e315ba1cc2c0f360ab76c5aa52735285ef0cc12f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
