@@ -286,7 +286,10 @@ Appendix :
     w[] and ip[] are compatible with all routines.
 */
 
+#include <math.h>
 #include <stddef.h>
+
+namespace webrtc {
 
 static void makewt(size_t nw, size_t *ip, float *w);
 static void makect(size_t nc, size_t *ip, float *c);
@@ -642,8 +645,6 @@ static void dfst(int n, float *a, float *t, int *ip, float *w)
 
 /* -------- initializing routines -------- */
 
-
-#include <math.h>
 
 static void makewt(size_t nw, size_t *ip, float *w)
 {
@@ -1330,3 +1331,5 @@ static void dstsub(int n, float *a, int nc, float *c)
     a[m] *= c[0];
 }
 #endif  // Not used.
+
+}  // namespace webrtc
