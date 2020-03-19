@@ -29,6 +29,7 @@ if (rtc_include_tests) {
     deps = [
       "../../../../../common_audio",
       "../../../../../common_audio:common_audio_c",
+      "../../../../../common_audio:ring_buffer",
       "../../../../../rtc_base:checks",
       "../../../../../rtc_base/memory:aligned_malloc",
     ]
