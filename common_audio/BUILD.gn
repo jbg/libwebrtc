@@ -98,11 +98,21 @@ rtc_source_set("common_audio_c_arm_asm") {
   }
 }
 
+rtc_library("ring_buffer") {
+  visibility += webrtc_default_visibility
+  sources = [
+    "ring_buffer.cc",
+    "ring_buffer.h",
+  ]
+
+  deps = [
+  ]
+}
+
+
 rtc_library("common_audio_c") {
   visibility += webrtc_default_visibility
   sources = [
-    "ring_buffer.c",
-    "ring_buffer.h",
     "signal_processing/auto_corr_to_refl_coef.c",
     "signal_processing/auto_correlation.c",
     "signal_processing/complex_fft_tables.h",
@@ -351,6 +361,7 @@ if (rtc_include_tests) {
       ":common_audio_c",
       ":fir_filter",
       ":fir_filter_factory",
+      ":ring_buffer",
       ":sinc_resampler",
       "../rtc_base:checks",
       "../rtc_base:rtc_base_approved",

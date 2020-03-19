@@ -18,6 +18,7 @@ rtc_library("aecm_core") {
   ]
   deps = [
     "../../../common_audio:common_audio_c",
+    "../../../common_audio:ring_buffer",
     "../../../rtc_base:checks",
     "../../../rtc_base:rtc_base_approved",
     "../../../rtc_base:sanitizer",
