@@ -57,12 +57,12 @@ RingBuffer* WebRtc_CreateBuffer(size_t element_count, size_t element_size) {
     return NULL;
   }
 
-  self = malloc(sizeof(RingBuffer));
+  self = static_cast<RingBuffer*>(malloc(sizeof(RingBuffer)));
   if (!self) {
     return NULL;
   }
 
-  self->data = malloc(element_count * element_size);
+  self->data = static_cast<char*>(malloc(element_count * element_size));
   if (!self->data) {
     free(self);
     self = NULL;
