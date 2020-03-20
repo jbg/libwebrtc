@@ -14,6 +14,7 @@
 
 #include <cstdio>
 
+#include "absl/container/flat_hash_map.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/bye.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/extended_jitter_report.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/extended_reports.h"
@@ -23,7 +24,10 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/sender_report.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/buffer.h"
-#include "test/gtest.h"
+#include "test/gmock.h"
+
+using ::testing::Pair;
+using ::testing::UnorderedElementsAre;
 
 namespace webrtc {
 
@@ -115,6 +119,31 @@ TEST(RtpRtcpDemuxerHelperTest, ParseRtcpPacketSenderSsrc_TruncatedRtcpMessage) {
   absl::optional<uint32_t> ssrc = ParseRtcpPacketSenderSsrc(
       rtc::ArrayView<const uint8_t>(raw_packet.data(), rtcp_length_bytes - 1));
   EXPECT_FALSE(ssrc);
+}
+
+TEST(RtpRtcpDemuxerHelperTest, RemoveFromAbslHashMapByValue_Empty) {
+  absl::flat_hash_map<int, int> map;
+  EXPECT_EQ(RemoveFromAbslHashMapByValue(&map, 1), size_t{0});
+  EXPECT_THAT(map, UnorderedElementsAre());
+}
+
+TEST(RtpRtcpDemuxerHelperTest, RemoveFromAbslHashMapByValue_NonExisting) {
+  absl::flat_hash_map<int, int> map = {{1, 0}, {0, 1}};
+  EXPECT_EQ(RemoveFromAbslHashMapByValue(&map, 2), size_t{0});
+  EXPECT_THAT(map, UnorderedElementsAre(Pair(1, 0), Pair(0, 1)));
+}
+
+TEST(RtpRtcpDemuxerHelperTest, RemoveFromAbslHashMapByValue_ExistingOnce) {
+  absl::flat_hash_map<int, int> map = {{1, 0}, {2, 1}, {3, 0}};
+  EXPECT_EQ(RemoveFromAbslHashMapByValue(&map, 1), size_t{1});
+  EXPECT_THAT(map, UnorderedElementsAre(Pair(1, 0), Pair(3, 0)));
+}
+
+TEST(RtpRtcpDemuxerHelperTest, RemoveFromAbslHashMapByValue_ExistingThrice) {
+  absl::flat_hash_map<int, int> map = {{1, 0}, {2, 1}, {3, 0},
+                                       {4, 1}, {5, 0}, {6, 1}};
+  EXPECT_EQ(RemoveFromAbslHashMapByValue(&map, 1), size_t{3});
+  EXPECT_THAT(map, UnorderedElementsAre(Pair(1, 0), Pair(3, 0), Pair(5, 0)));
 }
 
 }  // namespace webrtc
