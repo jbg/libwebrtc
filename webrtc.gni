@@ -387,6 +387,9 @@ all_poison_types = [
 
   # Software video codecs (VP8 and VP9 through libvpx).
   "software_video_codecs",
+
+  # Transient suppression implementation for the audio processing module.
+  "transient_suppression",
 ]
 
 absl_include_config = "//third_party/abseil-cpp:absl_include_config"
