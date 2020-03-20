@@ -196,8 +196,8 @@ class RtpDemuxer {
   // received.
   // This is stored separately from the sink mappings because if a sink is
   // removed we want to still remember these associations.
-  std::map<uint32_t, std::string> mid_by_ssrc_;
-  std::map<uint32_t, std::string> rsid_by_ssrc_;
+  absl::flat_hash_map<uint32_t, std::string> mid_by_ssrc_;
+  absl::flat_hash_map<uint32_t, std::string> rsid_by_ssrc_;
 
   // Adds a binding from the SSRC to the given sink. Returns true if there was
   // not already a sink bound to the SSRC or if the sink replaced a different
