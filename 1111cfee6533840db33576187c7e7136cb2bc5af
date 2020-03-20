@@ -52,6 +52,24 @@
       "revId": "1111cfee6533840db33576187c7e7136cb2bc5af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a141d6c_ff8cb709",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-03-20T14:12:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cf5d82e8_37e284a8",
+      "revId": "1111cfee6533840db33576187c7e7136cb2bc5af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
