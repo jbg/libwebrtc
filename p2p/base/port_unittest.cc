@@ -2221,6 +2221,46 @@ TEST_F(PortTest, TestHandleStunMessageBadFingerprint) {
   EXPECT_EQ(0, port->last_stun_error_code());
 }
 
+// Test handling a STUN message with unknown attributes in the
+// "comprehension-required" range. Should respond with an error with the
+// unknown attributes' IDs.
+TEST_F(PortTest,
+       TestHandleStunMessageWithUnknownComprehensionRequiredAttribute) {
+  // Our port will act as the "remote" port.
+  std::unique_ptr<TestPort> port(CreateTestPort(kLocalAddr2, "rfrag", "rpass"));
+
+  std::unique_ptr<IceMessage> in_msg, out_msg;
+  std::unique_ptr<ByteBufferWriter> buf(new ByteBufferWriter());
+  rtc::SocketAddress addr(kLocalAddr1);
+  std::string username;
+
+  // Build ordinary message with valid ufrag/pass.
+  in_msg = CreateStunMessageWithUsername(STUN_BINDING_REQUEST, "rfrag:lfrag");
+  in_msg->AddMessageIntegrity("rpass");
+  // Add a couple attributes with ID in comprehension-required range.
+  in_msg->AddAttribute(StunAttribute::CreateUInt32(0x7777));
+  in_msg->AddAttribute(StunAttribute::CreateUInt32(0x4567));
+  // ... And one outside the range.
+  in_msg->AddAttribute(StunAttribute::CreateUInt32(0xdead));
+  in_msg->AddFingerprint();
+  WriteStunMessage(*in_msg, buf.get());
+  ASSERT_TRUE(port->GetStunMessage(buf->Data(), buf->Length(), addr, &out_msg,
+                                   &username));
+  IceMessage* error_response = port->last_stun_msg();
+  ASSERT_NE(nullptr, error_response);
+
+  // Verify that the "unknown attribute" error response has the right error
+  // code, and includes an attribute th.at lists out the unrecognized attribute
+  // types.
+  EXPECT_EQ(STUN_ERROR_UNKNOWN_ATTRIBUTE, error_response->GetErrorCodeValue());
+  const StunUInt16ListAttribute* unknown_attributes =
+      error_response->GetUnknownAttributes();
+  ASSERT_NE(nullptr, unknown_attributes);
+  ASSERT_EQ(2u, unknown_attributes->Size());
+  EXPECT_EQ(0x7777, unknown_attributes->GetType(0));
+  EXPECT_EQ(0x4567, unknown_attributes->GetType(1));
+}
+
 // Test handling of STUN binding indication messages . STUN binding
 // indications are allowed only to the connection which is in read mode.
 TEST_F(PortTest, TestHandleStunBindingIndication) {
