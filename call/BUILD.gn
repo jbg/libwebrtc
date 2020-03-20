@@ -125,6 +125,7 @@ rtc_library("rtp_receiver") {
     "../modules/rtp_rtcp:rtp_rtcp_format",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
+    "//third_party/abseil-cpp/absl/container:flat_hash_map",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
@@ -434,6 +435,7 @@ if (rtc_include_tests) {
       "//test/scenario:scenario",
       "//testing/gmock",
       "//testing/gtest",
+      "//third_party/abseil-cpp/absl/container:flat_hash_map",
       "//third_party/abseil-cpp/absl/container:inlined_vector",
       "//third_party/abseil-cpp/absl/memory",
       "//third_party/abseil-cpp/absl/types:optional",

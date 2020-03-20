@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "absl/container/flat_hash_map.h"
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 
@@ -50,6 +51,36 @@ size_t RemoveFromMapByValue(Map* map, const Value& value) {
   for (auto it = map->begin(); it != map->end();) {
     if (it->second == value) {
       it = map->erase(it);
+      ++count;
+    } else {
+      ++it;
+    }
+  }
+  return count;
+}
+
+template <typename Key, typename Value, typename ComparisonValue>
+size_t RemoveFromAbslHashMapByValue(absl::flat_hash_map<Key, Value>* map,
+                                    const ComparisonValue& value) {
+  size_t count = 0;
+  for (auto it = map->begin(); it != map->end();) {
+    if (it->second == value) {
+      // https://abseil.io/docs/cpp/guides/container#abslflat_hash_map-and-abslflat_hash_set
+      //
+      // absl::flat_hash_map and absl::flat_hash_set: Iterators, references, and
+      // pointers to elements are invalidated on rehash. absl::node_hash_map and
+      // absl::node_hash_set: Iterators are invalidated on rehash.
+      //
+      // "Erasing does not trigger a rehash."
+      // https://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/container/flat_hash_map.h?l=215
+      //
+      // "If that iterator is needed, simply post increment the iterator"
+      // https://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/container/flat_hash_map.h?g=0&l=226
+      //
+      // "The iterator is invalidated, so any increment should be done before
+      // calling erase."
+      // https://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/container/internal/raw_hash_set.h?type=cs&q=raw_hash_set&g=0&l=1157
+      map->erase(it++);
       ++count;
     } else {
       ++it;
