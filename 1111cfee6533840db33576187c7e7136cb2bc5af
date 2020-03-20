@@ -34,6 +34,24 @@
       "revId": "1111cfee6533840db33576187c7e7136cb2bc5af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf5d82e8_37e284a8",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-03-20T13:58:46Z",
+      "side": 1,
+      "message": "it\u0027s covered by pauses duration. The idea is that with arbitrary small video duration we can get VERY noisy frame-rate. To avoid triggering alerts in these uninteresting cases, it\u0027s better to remove this noise.",
+      "parentUuid": "6c51a352_6f997cfd",
+      "revId": "1111cfee6533840db33576187c7e7136cb2bc5af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
