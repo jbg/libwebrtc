@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b760dabf_e8493c8e",
+        "filename": "modules/audio_processing/aecm/aecm_core_c.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-20T14:50:08Z",
+      "side": 1,
+      "message": "Can these and InverseFFTAndWindow be put in the anonymous namespace?",
+      "range": {
+        "startLine": 61,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 52
+      },
+      "revId": "0e7d6fbd22a80411aa88b6216e02f6d4e8da5ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33410f8b_ac253496",
+        "filename": "modules/audio_processing/aecm/aecm_core_mips.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-20T14:50:08Z",
+      "side": 1,
+      "message": "Can these and InverseFFTAndWindow be put in the anonymous namespace?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "0e7d6fbd22a80411aa88b6216e02f6d4e8da5ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
