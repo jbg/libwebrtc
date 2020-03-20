@@ -8,14 +8,15 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef MODULES_AUDIO_PROCESSING_TRANSIENT_TRANSIENT_SUPPRESSOR_H_
-#define MODULES_AUDIO_PROCESSING_TRANSIENT_TRANSIENT_SUPPRESSOR_H_
+#ifndef MODULES_AUDIO_PROCESSING_TRANSIENT_TRANSIENT_SUPPRESSOR_IMPL_H_
+#define MODULES_AUDIO_PROCESSING_TRANSIENT_TRANSIENT_SUPPRESSOR_IMPL_H_
 
 #include <stddef.h>
 #include <stdint.h>
 
 #include <memory>
 
+#include "api/audio/transient_suppressor.h"
 #include "rtc_base/gtest_prod_util.h"
 
 namespace webrtc {
@@ -24,12 +25,14 @@ class TransientDetector;
 
 // Detects transients in an audio stream and suppress them using a simple
 // restoration algorithm that attenuates unexpected spikes in the spectrum.
-class TransientSuppressor {
+class TransientSuppressorImpl : public TransientSuppressor {
  public:
-  TransientSuppressor();
-  ~TransientSuppressor();
+  TransientSuppressorImpl();
+  ~TransientSuppressorImpl() override;
 
-  int Initialize(int sample_rate_hz, int detector_rate_hz, int num_channels);
+  int Initialize(int sample_rate_hz,
+                 int detector_rate_hz,
+                 int num_channels) override;
 
   // Processes a |data| chunk, and returns it with keystrokes suppressed from
   // it. The float format is assumed to be int16 ranged. If there are more than
@@ -56,10 +59,10 @@ class TransientSuppressor {
                const float* reference_data,
                size_t reference_length,
                float voice_probability,
-               bool key_pressed);
+               bool key_pressed) override;
 
  private:
-  FRIEND_TEST_ALL_PREFIXES(TransientSuppressorTest,
+  FRIEND_TEST_ALL_PREFIXES(TransientSuppressorImplTest,
                            TypingDetectionLogicWorksAsExpectedForMono);
   void Suppress(float* in_ptr, float* spectral_mean, float* out_ptr);
 
@@ -117,4 +120,4 @@ class TransientSuppressor {
 
 }  // namespace webrtc
 
-#endif  // MODULES_AUDIO_PROCESSING_TRANSIENT_TRANSIENT_SUPPRESSOR_H_
+#endif  // MODULES_AUDIO_PROCESSING_TRANSIENT_TRANSIENT_SUPPRESSOR_IMPL_H_
