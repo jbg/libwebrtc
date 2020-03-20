@@ -261,6 +261,12 @@ AudioProcessingBuilder& AudioProcessingBuilder::SetEchoDetector(
   return *this;
 }
 
+AudioProcessingBuilder& AudioProcessingBuilder::SetTransientSuppressor(
+    std::unique_ptr<TransientSuppressor> transient_suppressor) {
+  transient_suppressor_ = std::move(transient_suppressor);
+  return *this;
+}
+
 AudioProcessing* AudioProcessingBuilder::Create() {
   webrtc::Config config;
   return Create(config);
@@ -270,7 +276,8 @@ AudioProcessing* AudioProcessingBuilder::Create(const webrtc::Config& config) {
   AudioProcessingImpl* apm = new rtc::RefCountedObject<AudioProcessingImpl>(
       config, std::move(capture_post_processing_),
       std::move(render_pre_processing_), std::move(echo_control_factory_),
-      std::move(echo_detector_), std::move(capture_analyzer_));
+      std::move(echo_detector_), std::move(transient_suppressor_),
+      std::move(capture_analyzer_));
   if (apm->Initialize() != AudioProcessing::kNoError) {
     delete apm;
     apm = nullptr;
@@ -284,6 +291,7 @@ AudioProcessingImpl::AudioProcessingImpl(const webrtc::Config& config)
                           /*render_pre_processor=*/nullptr,
                           /*echo_control_factory=*/nullptr,
                           /*echo_detector=*/nullptr,
+                          /*transient_suppressor=*/nullptr,
                           /*capture_analyzer=*/nullptr) {}
 
 int AudioProcessingImpl::instance_count_ = 0;
@@ -294,6 +302,7 @@ AudioProcessingImpl::AudioProcessingImpl(
     std::unique_ptr<CustomProcessing> render_pre_processor,
     std::unique_ptr<EchoControlFactory> echo_control_factory,
     rtc::scoped_refptr<EchoDetector> echo_detector,
+    std::unique_ptr<TransientSuppressor> transient_suppressor,
     std::unique_ptr<CustomAudioAnalyzer> capture_analyzer)
     : data_dumper_(
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
@@ -310,6 +319,7 @@ AudioProcessingImpl::AudioProcessingImpl(
       submodules_(std::move(capture_post_processor),
                   std::move(render_pre_processor),
                   std::move(echo_detector),
+                  std::move(transient_suppressor),
                   std::move(capture_analyzer)),
       constants_(!field_trial::IsEnabled(
                      "WebRTC-ApmExperimentalMultiChannelRenderKillSwitch"),
@@ -321,6 +331,8 @@ AudioProcessingImpl::AudioProcessingImpl(
                       "\nEcho control factory: "
                    << !!echo_control_factory_
                    << "\nEcho detector: " << !!submodules_.echo_detector
+                   << "\nTransient suppressor: "
+                   << !!submodules_.transient_suppressor
                    << "\nCapture analyzer: " << !!submodules_.capture_analyzer
                    << "\nCapture post processor: "
                    << !!submodules_.capture_post_processor
@@ -1634,15 +1646,11 @@ bool AudioProcessingImpl::UpdateActiveSubmoduleStates() {
 }
 
 void AudioProcessingImpl::InitializeTransientSuppressor() {
-  if (config_.transient_suppression.enabled) {
-    if (!submodules_.transient_suppressor) {
-      submodules_.transient_suppressor.reset(new TransientSuppressor());
-    }
+  if (submodules_.transient_suppressor &&
+      config_.transient_suppression.enabled) {
     submodules_.transient_suppressor->Initialize(proc_fullband_sample_rate_hz(),
                                                  capture_nonlocked_.split_rate,
                                                  num_proc_channels());
-  } else {
-    submodules_.transient_suppressor.reset();
   }
 }
 
@@ -1843,28 +1851,28 @@ void AudioProcessingImpl::InitializeNoiseSuppressor() {
   submodules_.noise_suppressor.reset();
 
   if (config_.noise_suppression.enabled) {
-      auto map_level =
-          [](AudioProcessing::Config::NoiseSuppression::Level level) {
-            using NoiseSuppresionConfig =
-                AudioProcessing::Config::NoiseSuppression;
-            switch (level) {
-              case NoiseSuppresionConfig::kLow:
-                return NsConfig::SuppressionLevel::k6dB;
-              case NoiseSuppresionConfig::kModerate:
-                return NsConfig::SuppressionLevel::k12dB;
-              case NoiseSuppresionConfig::kHigh:
-                return NsConfig::SuppressionLevel::k18dB;
-              case NoiseSuppresionConfig::kVeryHigh:
-                return NsConfig::SuppressionLevel::k21dB;
-              default:
-                RTC_NOTREACHED();
-            }
-          };
+    auto map_level =
+        [](AudioProcessing::Config::NoiseSuppression::Level level) {
+          using NoiseSuppresionConfig =
+              AudioProcessing::Config::NoiseSuppression;
+          switch (level) {
+            case NoiseSuppresionConfig::kLow:
+              return NsConfig::SuppressionLevel::k6dB;
+            case NoiseSuppresionConfig::kModerate:
+              return NsConfig::SuppressionLevel::k12dB;
+            case NoiseSuppresionConfig::kHigh:
+              return NsConfig::SuppressionLevel::k18dB;
+            case NoiseSuppresionConfig::kVeryHigh:
+              return NsConfig::SuppressionLevel::k21dB;
+            default:
+              RTC_NOTREACHED();
+          }
+        };
 
-      NsConfig cfg;
-      cfg.target_level = map_level(config_.noise_suppression.level);
-      submodules_.noise_suppressor = std::make_unique<NoiseSuppressor>(
-          cfg, proc_sample_rate_hz(), num_proc_channels());
+    NsConfig cfg;
+    cfg.target_level = map_level(config_.noise_suppression.level);
+    submodules_.noise_suppressor = std::make_unique<NoiseSuppressor>(
+        cfg, proc_sample_rate_hz(), num_proc_channels());
   }
 }
 

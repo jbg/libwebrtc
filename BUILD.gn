@@ -695,3 +695,6 @@ group("poison_rtc_json") {
 
 group("poison_software_video_codecs") {
 }
+
+group("poison_transient_suppression") {
+}
