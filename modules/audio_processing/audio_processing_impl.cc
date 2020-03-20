@@ -20,6 +20,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/audio/audio_frame.h"
+#include "api/audio/transient_suppressor_factory.h"
 #include "common_audio/audio_converter.h"
 #include "common_audio/include/audio_util.h"
 #include "modules/audio_processing/agc2/gain_applier.h"
@@ -1636,7 +1637,7 @@ bool AudioProcessingImpl::UpdateActiveSubmoduleStates() {
 void AudioProcessingImpl::InitializeTransientSuppressor() {
   if (config_.transient_suppression.enabled) {
     if (!submodules_.transient_suppressor) {
-      submodules_.transient_suppressor.reset(new TransientSuppressor());
+      submodules_.transient_suppressor = CreateTransientSuppressor();
     }
     submodules_.transient_suppressor->Initialize(proc_fullband_sample_rate_hz(),
                                                  capture_nonlocked_.split_rate,

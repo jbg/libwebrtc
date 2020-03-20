@@ -163,6 +163,8 @@ rtc_library("audio_processing") {
     "../../api/audio:aec3_config",
     "../../api/audio:audio_frame_api",
     "../../api/audio:echo_control",
+    "../../api/audio:transient_suppressor",
+    "../../api/audio:transient_suppressor_factory",
     "../../audio/utility:audio_frame_operations",
     "../../common_audio:common_audio_c",
     "../../common_audio/third_party/fft4g",
@@ -185,7 +187,6 @@ rtc_library("audio_processing") {
     "agc2:fixed_digital",
     "agc2:gain_applier",
     "ns",
-    "transient:transient_suppressor",
     "vad",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
