@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06433c93_2a9a0879",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-03-20T12:17:14Z",
+      "side": 1,
+      "message": "Could you also in this CL add a safety measure against very short video duration?\nIf video_duration is e.g. less than 0.25s, it doesn\u0027t matter what actual frame-rate\nwas there. You can report 0 as harmonic_framerate.",
+      "revId": "1111cfee6533840db33576187c7e7136cb2bc5af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
