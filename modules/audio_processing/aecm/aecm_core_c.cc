@@ -27,6 +27,10 @@ extern "C" {
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/sanitizer.h"
 
+namespace webrtc {
+
+namespace {
+
 // Square root of Hanning window in Q14.
 static const ALIGN8_BEG int16_t WebRtcAecm_kSqrtHanning[] ALIGN8_END = {
     0,     399,   798,   1196,  1594,  1990,  2386,  2780,  3172,  3562,  3951,
@@ -53,6 +57,8 @@ static const uint16_t kBeta3 = 18927;
 
 static const int16_t kNoiseEstQDomain = 15;
 static const int16_t kNoiseEstIncCount = 5;
+
+}  // namespace
 
 static void ComfortNoise(AecmCore* aecm,
                          const uint16_t* dfa,
@@ -666,3 +672,5 @@ static void ComfortNoise(AecmCore* aecm,
     out[i].imag = WebRtcSpl_AddSatW16(out[i].imag, uImag[i]);
   }
 }
+
+}  // namespace webrtc
