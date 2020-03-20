@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72ba1fba_5112f819",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-20T09:55:47Z",
+      "side": 1,
+      "message": "Please add a paragraph explaining that error paths are freeing pointers that are not null, and that this CL fixes them by zeroing the whole block of memory on allocation.",
+      "revId": "ffe1997c59c38aa8ec1bb5af24796959ee40d966",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3747a60b_4d9aa52f",
+        "filename": "modules/audio_processing/aecm/aecm_core.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-20T09:55:47Z",
+      "side": 1,
+      "message": "Suggestion: Add\n\n  // Allocate zero-filled memory.\n\nor some such at the end of this line, since not everyone will remember that calloc, unlike malloc, zeros the new heap allocation.",
+      "revId": "ffe1997c59c38aa8ec1bb5af24796959ee40d966",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfc09c81_f2a369bb",
+        "filename": "modules/audio_processing/aecm/echo_control_mobile.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-20T09:55:47Z",
+      "side": 1,
+      "message": "Here too.",
+      "revId": "ffe1997c59c38aa8ec1bb5af24796959ee40d966",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
