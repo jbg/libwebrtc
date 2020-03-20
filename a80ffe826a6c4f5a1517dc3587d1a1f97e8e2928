@@ -22,6 +22,30 @@
       "revId": "a80ffe826a6c4f5a1517dc3587d1a1f97e8e2928",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac84e95d_09327905",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-03-20T14:23:18Z",
+      "side": 1,
+      "message": "Analyzer os invoked only for interesting streams/layers, so it should be correct.",
+      "parentUuid": "af3db675_e55953cf",
+      "range": {
+        "startLine": 519,
+        "startChar": 11,
+        "endLine": 519,
+        "endChar": 39
+      },
+      "revId": "a80ffe826a6c4f5a1517dc3587d1a1f97e8e2928",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
