@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af3db675_e55953cf",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-03-20T14:02:28Z",
+      "side": 1,
+      "message": "it\u0027s only counting the interesting layer/simulcast stream, right?",
+      "range": {
+        "startLine": 519,
+        "startChar": 11,
+        "endLine": 519,
+        "endChar": 39
+      },
+      "revId": "a80ffe826a6c4f5a1517dc3587d1a1f97e8e2928",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
