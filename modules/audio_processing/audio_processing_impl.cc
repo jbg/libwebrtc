@@ -1636,7 +1636,7 @@ bool AudioProcessingImpl::UpdateActiveSubmoduleStates() {
 void AudioProcessingImpl::InitializeTransientSuppressor() {
   if (config_.transient_suppression.enabled) {
     if (!submodules_.transient_suppressor) {
-      submodules_.transient_suppressor.reset(new TransientSuppressor());
+      submodules_.transient_suppressor = TransientSuppressor::Create();
     }
     submodules_.transient_suppressor->Initialize(proc_fullband_sample_rate_hz(),
                                                  capture_nonlocked_.split_rate,
