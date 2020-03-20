@@ -16,6 +16,24 @@
       "revId": "1111cfee6533840db33576187c7e7136cb2bc5af",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c51a352_6f997cfd",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-03-20T12:31:50Z",
+      "side": 1,
+      "message": "Maybe it will be better to actually report video duration? WDYT",
+      "parentUuid": "06433c93_2a9a0879",
+      "revId": "1111cfee6533840db33576187c7e7136cb2bc5af",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
