@@ -180,7 +180,7 @@ class RtpDemuxer {
   // Note: Mappings are only modified by AddSink/RemoveSink (except for
   // SSRC mapping which receives all MID, payload type, or RSID to SSRC bindings
   // discovered when demuxing packets).
-  std::map<std::string, RtpPacketSinkInterface*> sink_by_mid_;
+  absl::flat_hash_map<std::string, RtpPacketSinkInterface*> sink_by_mid_;
   absl::flat_hash_map<uint32_t, RtpPacketSinkInterface*> sink_by_ssrc_;
   std::multimap<uint8_t, RtpPacketSinkInterface*> sinks_by_pt_;
   std::map<std::pair<std::string, std::string>, RtpPacketSinkInterface*>
