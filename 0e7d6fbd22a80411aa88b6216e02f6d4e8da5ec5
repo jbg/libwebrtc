@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "889a896a_0006e9cd",
+        "filename": "modules/audio_processing/aecm/aecm_core_c.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-20T15:47:01Z",
+      "side": 1,
+      "message": "Yes, that should work. I did that in a new patchset.",
+      "parentUuid": "b760dabf_e8493c8e",
+      "range": {
+        "startLine": 61,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 52
+      },
+      "revId": "0e7d6fbd22a80411aa88b6216e02f6d4e8da5ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33410f8b_ac253496",
         "filename": "modules/audio_processing/aecm/aecm_core_mips.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "0e7d6fbd22a80411aa88b6216e02f6d4e8da5ec5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adacde61_0a509be8",
+        "filename": "modules/audio_processing/aecm/aecm_core_mips.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-20T15:47:01Z",
+      "side": 1,
+      "message": "Yes,\nBut since this is MIPS code that is hard for me to build/test I prefer not to do that.",
+      "parentUuid": "33410f8b_ac253496",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "0e7d6fbd22a80411aa88b6216e02f6d4e8da5ec5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
