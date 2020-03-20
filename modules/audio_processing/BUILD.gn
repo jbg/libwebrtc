@@ -159,6 +159,7 @@ rtc_library("audio_processing") {
     ":audio_processing_statistics",
     ":config",
     ":high_pass_filter",
+    ":rms_level",
     "../../api:array_view",
     "../../api:function_view",
     "../../api/audio:aec3_config",
@@ -197,6 +198,11 @@ rtc_library("audio_processing") {
     "../../rtc_base:rtc_base_approved",
     "../../system_wrappers",
   ]
+}
+
+rtc_library("rms_level") {
+  visibility = [ "*" ]
+  # TODO(webrtc:11226): Move rms_level.* to here.
 }
 
 rtc_library("audio_processing_statistics") {
