@@ -15,6 +15,7 @@
 #include <memory>
 #include <vector>
 
+#include "api/audio/transient_suppressor.h"
 #include "api/function_view.h"
 #include "modules/audio_processing/aec3/echo_canceller3.h"
 #include "modules/audio_processing/agc/agc_manager_direct.h"
@@ -33,7 +34,6 @@
 #include "modules/audio_processing/render_queue_item_verifier.h"
 #include "modules/audio_processing/residual_echo_detector.h"
 #include "modules/audio_processing/rms_level.h"
-#include "modules/audio_processing/transient/transient_suppressor.h"
 #include "modules/audio_processing/voice_detection.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/gtest_prod_util.h"
