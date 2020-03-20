@@ -26,6 +26,7 @@
 #include "absl/types/optional.h"
 #include "api/audio/echo_canceller3_config.h"
 #include "api/audio/echo_control.h"
+#include "api/audio/transient_suppressor.h"
 #include "api/scoped_refptr.h"
 #include "modules/audio_processing/include/audio_generator.h"
 #include "modules/audio_processing/include/audio_processing_statistics.h"
@@ -728,6 +729,9 @@ class RTC_EXPORT AudioProcessingBuilder {
   // The AudioProcessingBuilder takes ownership of the echo_detector.
   AudioProcessingBuilder& SetEchoDetector(
       rtc::scoped_refptr<EchoDetector> echo_detector);
+  // The AudioProcessingBuilder takes ownership of the transient_suppressor.
+  AudioProcessingBuilder& SetTransientSuppressor(
+      std::unique_ptr<TransientSuppressor> transient_suppressor);
   // The AudioProcessingBuilder takes ownership of the capture_analyzer.
   AudioProcessingBuilder& SetCaptureAnalyzer(
       std::unique_ptr<CustomAudioAnalyzer> capture_analyzer);
@@ -741,6 +745,7 @@ class RTC_EXPORT AudioProcessingBuilder {
   std::unique_ptr<CustomProcessing> capture_post_processing_;
   std::unique_ptr<CustomProcessing> render_pre_processing_;
   rtc::scoped_refptr<EchoDetector> echo_detector_;
+  std::unique_ptr<TransientSuppressor> transient_suppressor_;
   std::unique_ptr<CustomAudioAnalyzer> capture_analyzer_;
   RTC_DISALLOW_COPY_AND_ASSIGN(AudioProcessingBuilder);
 };
