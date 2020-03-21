@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e478d7ab_ff3f58de",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2020-03-21T21:45:53Z",
+      "side": 1,
+      "message": "nit: const ref",
+      "range": {
+        "startLine": 301,
+        "startChar": 6,
+        "endLine": 301,
+        "endChar": 33
+      },
+      "revId": "6237f98ef76bd3ab6244fa5fbdef8d7e77b7ba3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40ea7c8b_2a662f1f",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2233,
+      "author": {
+        "id": 6646
+      },
+      "writtenOn": "2020-03-21T21:45:53Z",
+      "side": 1,
+      "message": "nit: absl::make_unique",
+      "range": {
+        "startLine": 2233,
+        "startChar": 40,
+        "endLine": 2233,
+        "endChar": 43
+      },
+      "revId": "6237f98ef76bd3ab6244fa5fbdef8d7e77b7ba3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
