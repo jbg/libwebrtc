@@ -15,6 +15,7 @@
 #include <memory>
 #include <vector>
 
+#include "api/audio/transient_suppressor.h"
 #include "api/function_view.h"
 #include "modules/audio_processing/aec3/echo_canceller3.h"
 #include "modules/audio_processing/agc/agc_manager_direct.h"
@@ -33,7 +34,6 @@
 #include "modules/audio_processing/render_queue_item_verifier.h"
 #include "modules/audio_processing/residual_echo_detector.h"
 #include "modules/audio_processing/rms_level.h"
-#include "modules/audio_processing/transient/transient_suppressor.h"
 #include "modules/audio_processing/voice_detection.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/gtest_prod_util.h"
@@ -58,6 +58,7 @@ class AudioProcessingImpl : public AudioProcessing {
                       std::unique_ptr<CustomProcessing> render_pre_processor,
                       std::unique_ptr<EchoControlFactory> echo_control_factory,
                       rtc::scoped_refptr<EchoDetector> echo_detector,
+                      std::unique_ptr<TransientSuppressor> transient_suppressor,
                       std::unique_ptr<CustomAudioAnalyzer> capture_analyzer);
   ~AudioProcessingImpl() override;
   int Initialize() override;
@@ -347,8 +348,10 @@ class AudioProcessingImpl : public AudioProcessing {
     Submodules(std::unique_ptr<CustomProcessing> capture_post_processor,
                std::unique_ptr<CustomProcessing> render_pre_processor,
                rtc::scoped_refptr<EchoDetector> echo_detector,
+               std::unique_ptr<TransientSuppressor> transient_suppressor,
                std::unique_ptr<CustomAudioAnalyzer> capture_analyzer)
         : echo_detector(std::move(echo_detector)),
+          transient_suppressor(std::move(transient_suppressor)),
           capture_post_processor(std::move(capture_post_processor)),
           render_pre_processor(std::move(render_pre_processor)),
           capture_analyzer(std::move(capture_analyzer)) {}
