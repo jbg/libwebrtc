@@ -22,6 +22,30 @@
       "revId": "e1931ad3197272b70de5d8746c6fc14196da5e2d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34978910_a7b1dbe9",
+        "filename": "modules/video_coding/codecs/vp8/include/vp8.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-03-23T15:52:45Z",
+      "side": 1,
+      "message": "Yeah, I think you are right. Without the optional, we won\u0027t be able to have the encoder overwrite a non-empty default (not currently the case) with an empty override, but I don\u0027t really see that ever being necessary. So let\u0027s just remove the optional here and have the empty vector mean \"no override\".",
+      "parentUuid": "10e13725_3fbe032a",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 30
+      },
+      "revId": "e1931ad3197272b70de5d8746c6fc14196da5e2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
