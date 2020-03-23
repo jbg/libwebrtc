@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10e13725_3fbe032a",
+        "filename": "modules/video_coding/codecs/vp8/include/vp8.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-03-23T09:30:46Z",
+      "side": 1,
+      "message": "Nit: optional of vector seems too complex.\nNullopt can be replaces with an empty vector.\n\nIt\u0027s just a nit, though, only do it if you also think that it will simplify \nthe codebase.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 30
+      },
+      "revId": "e1931ad3197272b70de5d8746c6fc14196da5e2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
