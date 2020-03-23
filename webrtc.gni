@@ -96,6 +96,9 @@ declare_args() {
   # should be generated.
   apm_debug_dump = false
 
+  # Set this to include transient suppression in the audio processing module.
+  rtc_include_transient_noise_suppression = true
+
   # Set this to true to enable BWE test logging.
   rtc_enable_bwe_test_logging = false
 
