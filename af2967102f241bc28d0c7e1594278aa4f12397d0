@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea56a2c_74977dee",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-23T12:44:11Z",
+      "side": 1,
+      "message": "nit: This part of the comment belongs above for \"senders\". The rest of it belongs here for \"aggregated_senders\"",
+      "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b07428a7_89493ed1",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 5241,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-23T12:44:11Z",
+      "side": 1,
+      "message": "I don\u0027t understand this test scenario. You are performing AddSendStream() but you\u0027ve turned Call\u0027s CreateVideoSendStream() into a NO-OP. This makes WebRtcVideoChannel::WebRtcVideoSendStream::RecreateWebRtcStream() leave stream_ as nullptr. I think that is a bug?\n\nWhat are we trying to test? Are there other ways to achieve this, like adding and then removing the stream or passing in the right parameters to make it set up the test this way?",
+      "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be424cb4_8ee3c308",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 5249,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-23T12:44:11Z",
+      "side": 1,
+      "message": "Sorry for being tedious, but for both the sub-stream and non-substream cases, can we make the tests assert all metrics?\nI.e. one section of expecting everything that is \"in common\" and one section expecting everything that is aggregated. EXPECT_EQ(foo, foo_ssrc1 + foo_ssrc2);\n\nI think it would be very easy to forget a metric or get something wrong and for no test to catch it, so the best way to avoid bugs is to make it explicit what we expect each metric to be.",
+      "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ded6736_29d4a117",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 5291,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-23T12:44:11Z",
+      "side": 1,
+      "message": "In webrtc_video_engine.cc it looks like there are per-substream total_encoded_bytes_target, yet here we expect the aggregate of 10 and 10 to be 10. Shouldn\u0027t it be 20? framesEncoded is aggregated so this should as well I would think? The totalEncodedBytesTarget is incremented each frame encoded so we need to be able to divide target with frames encoded.\n\nIf there is a split between \"what should be reported\" and \"what is currently reported\" I would like to see that documented with comments. But here can we fix that?",
+      "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
