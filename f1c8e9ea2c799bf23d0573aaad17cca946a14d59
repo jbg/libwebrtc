@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "94951161_9345f904",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-23T23:19:22Z",
+      "side": 1,
+      "message": "Good point, thanks!\n\nI remember a previous colleague stressing the good thing with Gerrit (compared to some other tool) that you can review the commit message as well as the code.",
+      "parentUuid": "92de3e20_2d923773",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 61
+      },
+      "revId": "f1c8e9ea2c799bf23d0573aaad17cca946a14d59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffe5eb19_1e695021",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "f1c8e9ea2c799bf23d0573aaad17cca946a14d59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b14fa610_f944d855",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-23T23:19:22Z",
+      "side": 1,
+      "message": "Thanks! Fixed.",
+      "parentUuid": "ffe5eb19_1e695021",
+      "range": {
+        "startLine": 149,
+        "startChar": 61,
+        "endLine": 149,
+        "endChar": 77
+      },
+      "revId": "f1c8e9ea2c799bf23d0573aaad17cca946a14d59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e445b6df_4031b83b",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-23T23:19:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdb3f520_bf44b0b6",
+      "range": {
+        "startLine": 154,
+        "startChar": 38,
+        "endLine": 154,
+        "endChar": 54
+      },
+      "revId": "f1c8e9ea2c799bf23d0573aaad17cca946a14d59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d979a12_3b1b4bc2",
         "filename": "pc/rtp_transceiver.cc",
         "patchSetId": 8
@@ -91,6 +163,30 @@
       "revId": "f1c8e9ea2c799bf23d0573aaad17cca946a14d59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08cad33e_6cc682e0",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-23T23:19:22Z",
+      "side": 1,
+      "message": "Yes, that\u0027s correct. I\u0027ve updated the CL according to your suggestion.",
+      "parentUuid": "5d979a12_3b1b4bc2",
+      "range": {
+        "startLine": 63,
+        "startChar": 5,
+        "endLine": 63,
+        "endChar": 7
+      },
+      "revId": "f1c8e9ea2c799bf23d0573aaad17cca946a14d59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
