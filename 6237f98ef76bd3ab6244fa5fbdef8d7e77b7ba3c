@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c8fcfa71_6f00c770",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-03-23T23:01:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e478d7ab_ff3f58de",
+      "range": {
+        "startLine": 301,
+        "startChar": 6,
+        "endLine": 301,
+        "endChar": 33
+      },
+      "revId": "6237f98ef76bd3ab6244fa5fbdef8d7e77b7ba3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40ea7c8b_2a662f1f",
         "filename": "p2p/base/port_unittest.cc",
         "patchSetId": 3
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "933360c0_87ba1ad0",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2233,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-03-23T23:01:42Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "d3a99614_3776fe68",
+      "range": {
+        "startLine": 2233,
+        "startChar": 40,
+        "endLine": 2233,
+        "endChar": 43
+      },
+      "revId": "6237f98ef76bd3ab6244fa5fbdef8d7e77b7ba3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d513148_8e12a9a3",
         "filename": "p2p/base/port_unittest.cc",
         "patchSetId": 3
@@ -89,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "74d81bee_739b0b42",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2253,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-03-23T23:01:42Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "9d513148_8e12a9a3",
+      "revId": "6237f98ef76bd3ab6244fa5fbdef8d7e77b7ba3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08ad4b49_6e5b3080",
         "filename": "p2p/base/stun_request.cc",
         "patchSetId": 3
@@ -103,6 +169,24 @@
       "revId": "6237f98ef76bd3ab6244fa5fbdef8d7e77b7ba3c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4f1cc67_3c35f77a",
+        "filename": "p2p/base/stun_request.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-03-23T23:01:42Z",
+      "side": 1,
+      "message": "The destructor of `request` removes itself from the list; same thing happens when it\u0027s deleted below. Surprised me when I learned that\u0027s what\u0027s going on, but not going to bother changing it in this CL.\n\nI believe removing the request *is* the correct behavior though, since the spec says to treat the transaction as failed, not just ignore the response.\n\nI added a test for this at the StunRequestManager level; I think that should be sufficient.",
+      "parentUuid": "08ad4b49_6e5b3080",
+      "revId": "6237f98ef76bd3ab6244fa5fbdef8d7e77b7ba3c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
