@@ -30,6 +30,7 @@
 #include "modules/audio_processing/include/mock_audio_processing.h"
 #include "modules/audio_processing/test/protobuf_utils.h"
 #include "modules/audio_processing/test/test_utils.h"
+#include "modules/audio_processing/transient/mock_transient_suppressor.h"
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/fake_clock.h"
@@ -2580,6 +2581,77 @@ TEST(ApmConfiguration, EchoControlInjection) {
       audio.data.data(), StreamConfig(audio.sample_rate_hz, audio.num_channels),
       StreamConfig(audio.sample_rate_hz, audio.num_channels),
       audio.data.data());
+  apm->ProcessStream(audio.data.data(),
+                     StreamConfig(audio.sample_rate_hz, audio.num_channels),
+                     StreamConfig(audio.sample_rate_hz, audio.num_channels),
+                     audio.data.data());
+}
+
+TEST(ApmConfiguration, TransientSuppressorInjection) {
+  // Verify that apm uses an injected transient suppressor if one is provided.
+  // Toggles transient suppression on/off between processing calls.
+
+  std::unique_ptr<test::MockTransientSuppressor> mock =
+      std::make_unique<test::MockTransientSuppressor>();
+  test::MockTransientSuppressor* mock_pointer = mock.get();
+  ON_CALL(*mock_pointer, Initialize(::testing::_, ::testing::_, ::testing::_))
+      .WillByDefault(::testing::Return(0));
+  ON_CALL(*mock_pointer, Suppress(::testing::_, ::testing::_, ::testing::_,
+                                  ::testing::_, ::testing::_, ::testing::_,
+                                  ::testing::_, ::testing::_, ::testing::_))
+      .WillByDefault(::testing::Return(0));
+
+  webrtc::Config webrtc_config;
+  webrtc_config.Set<ExperimentalNs>(new ExperimentalNs(/*enabled=*/false));
+  rtc::scoped_refptr<AudioProcessing> apm =
+      AudioProcessingBuilder()
+          .SetTransientSuppressor(std::move(mock))
+          .Create(webrtc_config);
+  Int16FrameData audio;
+  audio.num_channels = 1;
+  SetFrameSampleRate(&audio, AudioProcessing::NativeRate::kSampleRate16kHz);
+
+  // Before enabling: no calls.
+  EXPECT_CALL(*mock_pointer,
+              Initialize(::testing::_, ::testing::_, ::testing::_))
+      .Times(0);
+  EXPECT_CALL(*mock_pointer, Suppress(::testing::_, ::testing::_, ::testing::_,
+                                      ::testing::_, ::testing::_, ::testing::_,
+                                      ::testing::_, ::testing::_, ::testing::_))
+      .Times(0);
+  AudioProcessing::Config config = apm->GetConfig();
+  config.transient_suppression.enabled = false;
+  apm->ApplyConfig(config);
+  apm->ProcessStream(audio.data.data(),
+                     StreamConfig(audio.sample_rate_hz, audio.num_channels),
+                     StreamConfig(audio.sample_rate_hz, audio.num_channels),
+                     audio.data.data());
+
+  // After enabling: One call per ProcessStream.
+  EXPECT_CALL(*mock_pointer,
+              Initialize(::testing::_, ::testing::_, ::testing::_))
+      .Times(::testing::AtLeast(1));
+  EXPECT_CALL(*mock_pointer, Suppress(::testing::_, ::testing::_, ::testing::_,
+                                      ::testing::_, ::testing::_, ::testing::_,
+                                      ::testing::_, ::testing::_, ::testing::_))
+      .Times(1);
+  config.transient_suppression.enabled = true;
+  apm->ApplyConfig(config);
+  apm->ProcessStream(audio.data.data(),
+                     StreamConfig(audio.sample_rate_hz, audio.num_channels),
+                     StreamConfig(audio.sample_rate_hz, audio.num_channels),
+                     audio.data.data());
+
+  // After disabling: No calls.
+  EXPECT_CALL(*mock_pointer,
+              Initialize(::testing::_, ::testing::_, ::testing::_))
+      .Times(0);
+  EXPECT_CALL(*mock_pointer, Suppress(::testing::_, ::testing::_, ::testing::_,
+                                      ::testing::_, ::testing::_, ::testing::_,
+                                      ::testing::_, ::testing::_, ::testing::_))
+      .Times(0);
+  config.transient_suppression.enabled = false;
+  apm->ApplyConfig(config);
   apm->ProcessStream(audio.data.data(),
                      StreamConfig(audio.sample_rate_hz, audio.num_channels),
                      StreamConfig(audio.sample_rate_hz, audio.num_channels),
