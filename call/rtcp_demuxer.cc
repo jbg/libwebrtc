@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <utility>
 
+#include "absl/algorithm/container.h"
 #include "absl/types/optional.h"
 #include "api/rtp_headers.h"
 #include "call/rtcp_packet_sink_interface.h"
@@ -34,7 +35,7 @@ RtcpDemuxer::~RtcpDemuxer() {
 
 void RtcpDemuxer::AddSink(uint32_t sender_ssrc, RtcpPacketSinkInterface* sink) {
   RTC_DCHECK(sink);
-  RTC_DCHECK(!ContainerHasKey(broadcast_sinks_, sink));
+  RTC_DCHECK(!absl::c_linear_search(broadcast_sinks_, sink));
   RTC_DCHECK(!MultimapAssociationExists(ssrc_sinks_, sender_ssrc, sink));
   ssrc_sinks_.emplace(sender_ssrc, sink);
 }
@@ -43,23 +44,23 @@ void RtcpDemuxer::AddSink(const std::string& rsid,
                           RtcpPacketSinkInterface* sink) {
   RTC_DCHECK(IsLegalRsidName(rsid));
   RTC_DCHECK(sink);
-  RTC_DCHECK(!ContainerHasKey(broadcast_sinks_, sink));
+  RTC_DCHECK(!absl::c_linear_search(broadcast_sinks_, sink));
   RTC_DCHECK(!MultimapAssociationExists(rsid_sinks_, rsid, sink));
   rsid_sinks_.emplace(rsid, sink);
 }
 
 void RtcpDemuxer::AddBroadcastSink(RtcpPacketSinkInterface* sink) {
   RTC_DCHECK(sink);
-  RTC_DCHECK(!MultimapHasValue(ssrc_sinks_, sink));
-  RTC_DCHECK(!MultimapHasValue(rsid_sinks_, sink));
-  RTC_DCHECK(!ContainerHasKey(broadcast_sinks_, sink));
+  RTC_DCHECK(!MapHasValue(ssrc_sinks_, sink));
+  RTC_DCHECK(!MapHasValue(rsid_sinks_, sink));
+  RTC_DCHECK(!absl::c_linear_search(broadcast_sinks_, sink));
   broadcast_sinks_.push_back(sink);
 }
 
 void RtcpDemuxer::RemoveSink(const RtcpPacketSinkInterface* sink) {
   RTC_DCHECK(sink);
-  size_t removal_count = RemoveFromMultimapByValue(&ssrc_sinks_, sink) +
-                         RemoveFromMultimapByValue(&rsid_sinks_, sink);
+  size_t removal_count = RemoveFromMapByValue(&ssrc_sinks_, sink) +
+                         RemoveFromMapByValue(&rsid_sinks_, sink);
   RTC_DCHECK_GT(removal_count, 0);
 }
 

@@ -10,6 +10,7 @@
 
 #include "call/rtp_demuxer.h"
 
+#include "absl/algorithm/container.h"
 #include "call/rtp_packet_sink_interface.h"
 #include "call/rtp_rtcp_demuxer_helper.h"
 #include "call/ssrc_binding_observer.h"
@@ -164,7 +165,7 @@ bool RtpDemuxer::RemoveSink(const RtpPacketSinkInterface* sink) {
   RTC_DCHECK(sink);
   size_t num_removed = RemoveFromMapByValue(&sink_by_mid_, sink) +
                        RemoveFromMapByValue(&sink_by_ssrc_, sink) +
-                       RemoveFromMultimapByValue(&sinks_by_pt_, sink) +
+                       RemoveFromMapByValue(&sinks_by_pt_, sink) +
                        RemoveFromMapByValue(&sink_by_mid_and_rsid_, sink) +
                        RemoveFromMapByValue(&sink_by_rsid_, sink);
   RefreshKnownMids();
@@ -381,7 +382,7 @@ bool RtpDemuxer::AddSsrcSinkBinding(uint32_t ssrc,
 
 void RtpDemuxer::RegisterSsrcBindingObserver(SsrcBindingObserver* observer) {
   RTC_DCHECK(observer);
-  RTC_DCHECK(!ContainerHasKey(ssrc_binding_observers_, observer));
+  RTC_DCHECK(!absl::c_linear_search(ssrc_binding_observers_, observer));
 
   ssrc_binding_observers_.push_back(observer);
 }
