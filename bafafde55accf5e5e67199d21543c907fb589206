@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c2b72e03_5a93e7b4",
+        "filename": "api/test/video_quality_analyzer_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-03-24T11:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce0b767d_ecee2255",
+      "revId": "bafafde55accf5e5e67199d21543c907fb589206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6370d918_aa6774b8",
         "filename": "api/test/video_quality_analyzer_interface.h",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "bafafde55accf5e5e67199d21543c907fb589206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96665bfa_26855964",
+        "filename": "api/test/video_quality_analyzer_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-03-24T11:59:21Z",
+      "side": 1,
+      "message": "Discussed offline. Value is removed in favor of value from GetStats API.",
+      "parentUuid": "6370d918_aa6774b8",
+      "revId": "bafafde55accf5e5e67199d21543c907fb589206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "bafafde55accf5e5e67199d21543c907fb589206",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e260b37a_2aae4af4",
+        "filename": "test/pc/e2e/analyzer/video/quality_analyzing_video_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-03-24T11:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffe0921a_2d9d6ca2",
+      "range": {
+        "startLine": 209,
+        "startChar": 26,
+        "endLine": 209,
+        "endChar": 36
+      },
+      "revId": "bafafde55accf5e5e67199d21543c907fb589206",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
