@@ -77,9 +77,9 @@ if (rtc_include_tests) {
 
     deps = [
       ":ns",
+      "..:api",
       "..:apm_logging",
       "..:audio_buffer",
-      "..:audio_processing",
       "..:audio_processing_unittests",
       "..:high_pass_filter",
       "../../../api:array_view",
