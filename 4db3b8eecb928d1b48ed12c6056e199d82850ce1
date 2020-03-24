@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d71cef40_c43fddbb",
+        "filename": "modules/audio_coding/codecs/isac/audio_encoder_isac_t_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-03-24T12:24:16Z",
+      "side": 1,
+      "message": "Don\u0027t use Num10MsFramesInNextPacket",
+      "range": {
+        "startLine": 125,
+        "startChar": 29,
+        "endLine": 125,
+        "endChar": 54
+      },
+      "revId": "4db3b8eecb928d1b48ed12c6056e199d82850ce1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66150dc3_0d9e7736",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_multi_channel_opus_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-03-24T12:24:16Z",
+      "side": 1,
+      "message": "config_.frame_size_ms or Num10msFramesPerPacket()\n\nDon\u0027t use Num10msFramesPerPacket since it implies a dynamic nature, instead use something that clearly is meant to be constant.",
+      "range": {
+        "startLine": 169,
+        "startChar": 29,
+        "endLine": 169,
+        "endChar": 54
+      },
+      "revId": "4db3b8eecb928d1b48ed12c6056e199d82850ce1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
