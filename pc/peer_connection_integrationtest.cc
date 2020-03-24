@@ -155,6 +155,103 @@ int FindFirstMediaStatsIndexByKind(
   return -1;
 }
 
+// AudioProcessing implementation that solely applies a factor of 10 gain to the
+// signal to the int16 interface. The purpose of this is to use instead of the
+// standard AudioProcessingImpl implementation in the case that that is not
+// available.
+class AgcOnlyAudioProcessing : public AudioProcessing {
+ public:
+  // Methods forcing APM to run in a single-threaded manner.
+  // Acquires both the render and capture locks.
+  AgcOnlyAudioProcessing() {}
+  ~AgcOnlyAudioProcessing() override {}
+  int Initialize() override { return 0; }
+  int Initialize(int capture_input_sample_rate_hz,
+                 int capture_output_sample_rate_hz,
+                 int render_sample_rate_hz,
+                 ChannelLayout capture_input_layout,
+                 ChannelLayout capture_output_layout,
+                 ChannelLayout render_input_layout) override {
+    return 0;
+  }
+  int Initialize(const ProcessingConfig& processing_config) override {
+    return 0;
+  }
+  void ApplyConfig(const AudioProcessing::Config& config) override {}
+  void SetExtraOptions(const webrtc::Config& config) override {}
+  void UpdateHistogramsOnCallEnd() override {}
+  void AttachAecDump(std::unique_ptr<AecDump> aec_dump) override {}
+  void DetachAecDump() override {}
+  void AttachPlayoutAudioGenerator(
+      std::unique_ptr<AudioGenerator> audio_generator) override {}
+  void DetachPlayoutAudioGenerator() override {}
+
+  void SetRuntimeSetting(RuntimeSetting setting) override {}
+
+  int ProcessStream(AudioFrame* frame) override { return 0; }
+  int ProcessStream(const int16_t* const src,
+                    const StreamConfig& input_config,
+                    const StreamConfig& output_config,
+                    int16_t* const dest) override {
+    RTC_DCHECK_EQ(input_config.num_samples(), output_config.num_samples());
+    for (size_t k = 0; k < input_config.num_samples(); ++k) {
+      dest[k] = 10 * src[k];
+    }
+    return 0;
+  }
+  int ProcessStream(const float* const* src,
+                    const StreamConfig& input_config,
+                    const StreamConfig& output_config,
+                    float* const* dest) override {
+    return 0;
+  }
+  bool GetLinearAecOutput(
+      rtc::ArrayView<std::array<float, 160>> linear_output) const override {
+    return true;
+  }
+  void set_output_will_be_muted(bool muted) override {}
+  int set_stream_delay_ms(int delay) override { return 0; }
+  void set_stream_key_pressed(bool key_pressed) override {}
+  void set_stream_analog_level(int level) override {}
+  int recommended_stream_analog_level() const override { return 0; }
+  int ProcessReverseStream(AudioFrame* frame) override { return 0; }
+  int ProcessReverseStream(const int16_t* const src,
+                           const StreamConfig& input_config,
+                           const StreamConfig& output_config,
+                           int16_t* const dest) override {
+    return 0;
+  }
+  int AnalyzeReverseStream(const float* const* data,
+                           const StreamConfig& reverse_config) override {
+    return 0;
+  }
+  int ProcessReverseStream(const float* const* src,
+                           const StreamConfig& input_config,
+                           const StreamConfig& output_config,
+                           float* const* dest) override {
+    return 0;
+  }
+
+  int proc_sample_rate_hz() const override { return 48000; }
+  int proc_split_sample_rate_hz() const override { return 16000; }
+  size_t num_input_channels() const override { return 1; }
+  size_t num_proc_channels() const override { return 1; }
+  size_t num_output_channels() const override { return 1; }
+  size_t num_reverse_channels() const override { return 1; }
+  int stream_delay_ms() const override { return 0; }
+
+  AudioProcessingStats GetStatistics(bool has_remote_tracks) override {
+    return AudioProcessingStats();
+  }
+  AudioProcessingStats GetStatistics() override {
+    return AudioProcessingStats();
+  }
+
+  AudioProcessing::Config GetConfig() const override {
+    return AudioProcessing::Config();
+  }
+};
+
 class SignalingMessageReceiver {
  public:
   virtual void ReceiveSdpMessage(SdpType type, const std::string& msg) = 0;
@@ -619,10 +716,14 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     std::unique_ptr<cricket::PortAllocator> port_allocator(
         new cricket::BasicPortAllocator(fake_network_manager_.get()));
     port_allocator_ = port_allocator.get();
+
+    cricket::MediaEngineDependencies media_deps;
+    webrtc::SetMediaEngineDefaults(&media_deps);
     fake_audio_capture_module_ = FakeAudioCaptureModule::Create();
     if (!fake_audio_capture_module_) {
       return false;
     }
+
     rtc::Thread* const signaling_thread = rtc::Thread::Current();
 
     webrtc::PeerConnectionFactoryDependencies pc_factory_dependencies;
@@ -631,11 +732,17 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
     pc_factory_dependencies.signaling_thread = signaling_thread;
     pc_factory_dependencies.task_queue_factory =
         webrtc::CreateDefaultTaskQueueFactory();
-    cricket::MediaEngineDependencies media_deps;
+
+    webrtc::SetMediaEngineDefaults(&media_deps);
     media_deps.task_queue_factory =
         pc_factory_dependencies.task_queue_factory.get();
     media_deps.adm = fake_audio_capture_module_;
     webrtc::SetMediaEngineDefaults(&media_deps);
+    if (!media_deps.audio_processing) {
+      media_deps.audio_processing =
+          new rtc::RefCountedObject<AgcOnlyAudioProcessing>();
+    }
+
     pc_factory_dependencies.media_engine =
         cricket::CreateMediaEngine(std::move(media_deps));
     pc_factory_dependencies.call_factory = webrtc::CreateCallFactory();
