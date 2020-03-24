@@ -237,6 +237,7 @@ rtc_library("perf_test") {
     "../rtc_base:criticalsection",
     "../rtc_base:logging",
     "../rtc_base:rtc_numerics",
+    "//third_party/abseil-cpp/absl/container:flat_hash_map",
     "//third_party/abseil-cpp/absl/flags:flag",
     "//third_party/abseil-cpp/absl/types:optional",
   ]

@@ -12,8 +12,8 @@
 #define TEST_TESTSUPPORT_PERF_RESULT_REPORTER_H_
 
 #include <string>
-#include <unordered_map>
 
+#include "absl/container/flat_hash_map.h"
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "test/testsupport/perf_test.h"
@@ -92,7 +92,7 @@ class PerfResultReporter {
 
   std::string metric_basename_;
   std::string story_name_;
-  std::unordered_map<std::string, MetricInfo> metric_map_;
+  absl::flat_hash_map<std::string, MetricInfo> metric_map_;
 };
 
 }  // namespace test
