@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33b2ed7f_c5d78d13",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-24T08:51:06Z",
+      "side": 1,
+      "message": "It is possible we can avoid this #ifndef, we will compile a bit more stuff but we will throw it away later at link time (if we want to limit the locations of macro usage even more).",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 6
+      },
+      "revId": "5bdc65fa42ddef8cae1564722b0603a5cb54f482",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6ab3c64_3f99e1cd",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-24T08:51:06Z",
+      "side": 1,
+      "message": "Nice!\n\nTo easily set this with GN see what we have done for other macros:\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/webrtc.gni?l\u003d250\u0026rcl\u003dccbe95fd8a9e12dc519904b9d16c41590c2a16b6 (define a GN arg to toggle the define).\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/BUILD.gn?l\u003d271-273\u0026rcl\u003dc69fd592707ad9fd982425b67308718dbe20ac2e (define the macro if the GN arg is true).\n\nNow, we have been using both macros with RTC_ and WEBRTC_ (https://cs.chromium.org/chromium/src/third_party/webrtc/BUILD.gn?rcl\u003dc69fd592707ad9fd982425b67308718dbe20ac2e\u0026l\u003d241-249) and I prefer WEBRTC_ but I don\u0027t remember the reason to use RTC_. Let\u0027s ask kwiberg@ if we have some previous context here.",
+      "range": {
+        "startLine": 22,
+        "startChar": 8,
+        "endLine": 22,
+        "endChar": 43
+      },
+      "revId": "5bdc65fa42ddef8cae1564722b0603a5cb54f482",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
