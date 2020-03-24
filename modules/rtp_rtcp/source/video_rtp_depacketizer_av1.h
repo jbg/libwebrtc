@@ -30,7 +30,7 @@ class VideoRtpDepacketizerAv1 : public VideoRtpDepacketizer {
   VideoRtpDepacketizerAv1& operator=(const VideoRtpDepacketizerAv1&) = delete;
   ~VideoRtpDepacketizerAv1() override = default;
 
-  static rtc::scoped_refptr<EncodedImageBuffer> AssembleFrame(
+  rtc::scoped_refptr<EncodedImageBuffer> AssembleFrame(
       rtc::ArrayView<const rtc::ArrayView<const uint8_t>> rtp_payloads);
 
   absl::optional<ParsedRtpPayload> Parse(

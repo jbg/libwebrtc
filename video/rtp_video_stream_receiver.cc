@@ -745,7 +745,7 @@ void RtpVideoStreamReceiver::OnInsertedPacket(
       rtc::scoped_refptr<EncodedImageBuffer> bitstream;
       // TODO(danilchap): Hide codec-specific code paths behind an interface.
       if (first_packet->codec() == VideoCodecType::kVideoCodecAV1) {
-        bitstream = VideoRtpDepacketizerAv1::AssembleFrame(payloads);
+        bitstream = VideoRtpDepacketizerAv1().AssembleFrame(payloads);
         if (!bitstream) {
           // Failed to assemble a frame. Discard and continue.
           continue;
