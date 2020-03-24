@@ -1404,6 +1404,42 @@ TEST_F(TestVp9Impl, EncoderInfoFpsAllocationFlexibleMode) {
               ::testing::ElementsAreArray(expected_fps_allocation));
 }
 
+TEST_F(TestVp9Impl, EncoderInfoFpsAllocationLowGlobalMaxFps) {
+  const uint8_t kNumSpatialLayers = 3;
+  const uint8_t kNumTemporalLayers = 3;
+
+  codec_settings_.maxFramerate = 30;
+  codec_settings_.VP9()->numberOfSpatialLayers = kNumSpatialLayers;
+  codec_settings_.VP9()->numberOfTemporalLayers = kNumTemporalLayers;
+
+  for (uint8_t sl_idx = 0; sl_idx < kNumSpatialLayers; ++sl_idx) {
+    codec_settings_.spatialLayers[sl_idx].width = codec_settings_.width;
+    codec_settings_.spatialLayers[sl_idx].height = codec_settings_.height;
+    codec_settings_.spatialLayers[sl_idx].minBitrate =
+        codec_settings_.startBitrate;
+    codec_settings_.spatialLayers[sl_idx].maxBitrate =
+        codec_settings_.startBitrate;
+    codec_settings_.spatialLayers[sl_idx].targetBitrate =
+        codec_settings_.startBitrate;
+    codec_settings_.spatialLayers[sl_idx].active = true;
+    // Set the framerate higher than the VideoCodec level setting.
+    codec_settings_.spatialLayers[sl_idx].maxFramerate =
+        codec_settings_.maxFramerate * 2;
+  }
+
+  EXPECT_EQ(WEBRTC_VIDEO_CODEC_OK,
+            encoder_->InitEncode(&codec_settings_, kSettings));
+
+  FramerateFractions expected_fps_allocation[kMaxSpatialLayers];
+  expected_fps_allocation[0].push_back(EncoderInfo::kMaxFramerateFraction / 4);
+  expected_fps_allocation[0].push_back(EncoderInfo::kMaxFramerateFraction / 2);
+  expected_fps_allocation[0].push_back(EncoderInfo::kMaxFramerateFraction);
+  expected_fps_allocation[1] = expected_fps_allocation[0];
+  expected_fps_allocation[2] = expected_fps_allocation[0];
+  EXPECT_THAT(encoder_->GetEncoderInfo().fps_allocation,
+              ::testing::ElementsAreArray(expected_fps_allocation));
+}
+
 class TestVp9ImplWithLayering
     : public TestVp9Impl,
       public ::testing::WithParamInterface<::testing::tuple<uint8_t, uint8_t>> {
