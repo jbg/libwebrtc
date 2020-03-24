@@ -79,6 +79,12 @@ void AudioEncoderG722Impl::Reset() {
     RTC_CHECK_EQ(0, WebRtcG722_EncoderInit(encoders_[i].encoder));
 }
 
+absl::optional<std::pair<TimeDelta, TimeDelta>>
+AudioEncoderG722Impl::GetFrameLengthRange() const {
+  return {{TimeDelta::Millis(Num10MsFramesInNextPacket() * 10),
+           TimeDelta::Millis(Num10MsFramesInNextPacket() * 10)}};
+}
+
 AudioEncoder::EncodedInfo AudioEncoderG722Impl::EncodeImpl(
     uint32_t rtp_timestamp,
     rtc::ArrayView<const int16_t> audio,

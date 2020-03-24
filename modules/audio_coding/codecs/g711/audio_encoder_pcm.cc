@@ -89,6 +89,12 @@ void AudioEncoderPcm::Reset() {
   speech_buffer_.clear();
 }
 
+absl::optional<std::pair<TimeDelta, TimeDelta>>
+AudioEncoderPcm::GetFrameLengthRange() const {
+  return {{TimeDelta::Millis(Num10MsFramesInNextPacket() * 10),
+           TimeDelta::Millis(Num10MsFramesInNextPacket() * 10)}};
+}
+
 size_t AudioEncoderPcmA::EncodeCall(const int16_t* audio,
                                     size_t input_len,
                                     uint8_t* encoded) {
