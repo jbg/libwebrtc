@@ -22,6 +22,30 @@
       "revId": "a7debc6bcdfbc8f0550e80e6a26b9b4736d2610c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ddf7d4f_1a49f50b",
+        "filename": "modules/audio_coding/codecs/g711/audio_encoder_pcm.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2020-03-24T11:25:17Z",
+      "side": 1,
+      "message": "Done. Made the requested change for the cases that I thought made sense.",
+      "parentUuid": "a862efa8_af8c76ad",
+      "range": {
+        "startLine": 95,
+        "startChar": 29,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "revId": "a7debc6bcdfbc8f0550e80e6a26b9b4736d2610c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
