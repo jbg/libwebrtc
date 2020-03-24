@@ -164,6 +164,12 @@ void AudioEncoderMultiChannelOpusImpl::Reset() {
   RTC_CHECK(RecreateEncoderInstance(config_));
 }
 
+absl::optional<std::pair<TimeDelta, TimeDelta>>
+AudioEncoderMultiChannelOpusImpl::GetFrameLengthRange() const {
+  return {{TimeDelta::Millis(Num10MsFramesInNextPacket() * 10),
+           TimeDelta::Millis(Num10MsFramesInNextPacket() * 10)}};
+}
+
 // If the given config is OK, recreate the Opus encoder instance with those
 // settings, save the config, and return true. Otherwise, do nothing and return
 // false.
