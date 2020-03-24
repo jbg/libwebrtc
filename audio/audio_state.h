@@ -13,8 +13,8 @@
 
 #include <map>
 #include <memory>
-#include <unordered_set>
 
+#include "absl/container/flat_hash_set.h"
 #include "audio/audio_transport_impl.h"
 #include "audio/null_audio_poller.h"
 #include "call/audio_state.h"
@@ -77,7 +77,7 @@ class AudioState : public webrtc::AudioState {
   // stats are still updated.
   std::unique_ptr<NullAudioPoller> null_audio_poller_;
 
-  std::unordered_set<webrtc::AudioReceiveStream*> receiving_streams_;
+  absl::flat_hash_set<webrtc::AudioReceiveStream*> receiving_streams_;
   struct StreamProperties {
     int sample_rate_hz = 0;
     size_t num_channels = 0;

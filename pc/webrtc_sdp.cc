@@ -19,11 +19,11 @@
 #include <memory>
 #include <set>
 #include <string>
-#include <unordered_map>
 #include <utility>
 #include <vector>
 
 #include "absl/algorithm/container.h"
+#include "absl/container/flat_hash_map.h"
 #include "absl/strings/match.h"
 #include "api/candidate.h"
 #include "api/crypto_params.h"
@@ -2616,7 +2616,7 @@ static std::unique_ptr<C> ParseContentDescription(
     return nullptr;
   }
   // Sort the codecs according to the m-line fmt list.
-  std::unordered_map<int, int> payload_type_preferences;
+  absl::flat_hash_map<int, int> payload_type_preferences;
   // "size + 1" so that the lowest preference payload type has a preference of
   // 1, which is greater than the default (0) for payload types not in the fmt
   // list.

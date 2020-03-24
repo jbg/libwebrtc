@@ -12,10 +12,10 @@
 
 #include <list>
 #include <memory>
-#include <unordered_set>
 #include <utility>
 #include <vector>
 
+#include "absl/container/flat_hash_set.h"
 #include "absl/strings/string_view.h"
 #include "api/test/time_controller.h"
 #include "api/units/timestamp.h"
@@ -97,7 +97,7 @@ class SimulatedTimeControllerImpl : public TaskQueueFactory,
   std::list<SimulatedSequenceRunner*> ready_runners_ RTC_GUARDED_BY(lock_);
 
   // Runners on which YieldExecution has been called.
-  std::unordered_set<TaskQueueBase*> yielded_;
+  absl::flat_hash_set<TaskQueueBase*> yielded_;
 };
 }  // namespace sim_time_impl
 
