@@ -102,7 +102,7 @@ class TestPeerComponents {
     // Create audio processing, that will be used to create media engine that
     // then will be added into peer connection. See CreateMediaEngine(...).
     audio_processing_ = webrtc::AudioProcessingBuilder().Create();
-    if (params.aec_dump_path) {
+    if (params.aec_dump_path && audio_processing_) {
       audio_processing_->AttachAecDump(
           AecDumpFactory::Create(*params.aec_dump_path, -1, task_queue));
     }
@@ -391,7 +391,7 @@ TestPeer::TestPeer(
                                                    std::move(observer)),
       params_(std::move(params)),
       video_generators_(std::move(video_generators)),
-      audio_processing_(audio_processing) {}
+      audio_processinga_(audio_processing) {}
 
 }  // namespace webrtc_pc_e2e
 }  // namespace webrtc

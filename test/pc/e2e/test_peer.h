@@ -79,7 +79,11 @@ class TestPeer final : public PeerConnectionWrapper {
     return std::move(video_generators_[i]);
   }
 
-  void DetachAecDump() { audio_processing_->DetachAecDump(); }
+  void DetachAecDump() {
+    if (audio_processinga_) {
+      audio_processinga_->DetachAecDump();
+    }
+  }
 
   // Adds provided |candidates| to the owned peer connection.
   bool AddIceCandidates(
@@ -96,7 +100,7 @@ class TestPeer final : public PeerConnectionWrapper {
 
   std::unique_ptr<Params> params_;
   std::vector<std::unique_ptr<test::FrameGeneratorInterface>> video_generators_;
-  rtc::scoped_refptr<AudioProcessing> audio_processing_;
+  rtc::scoped_refptr<AudioProcessing> audio_processinga_;
 
   std::vector<std::unique_ptr<IceCandidateInterface>> remote_ice_candidates_;
 };

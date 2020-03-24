@@ -22,6 +22,9 @@
 #include "system_wrappers/include/sleep.h"
 #include "test/gtest.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 namespace webrtc {
 
 namespace {
@@ -1045,3 +1048,5 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::ValuesIn(TestConfig::GenerateBriefTestConfigs()));
 
 }  // namespace webrtc
+
+#endif

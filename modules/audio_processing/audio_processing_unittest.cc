@@ -47,6 +47,9 @@
 #include "test/gtest.h"
 #include "test/testsupport/file_utils.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 RTC_PUSH_IGNORING_WUNDEF()
 #ifdef WEBRTC_ANDROID_PLATFORM_BUILD
 #include "external/webrtc/webrtc/modules/audio_processing/test/unittest.pb.h"
@@ -427,6 +430,7 @@ ApmTest::ApmTest()
       near_file_(NULL),
       out_file_(NULL) {
   apm_.reset(AudioProcessingBuilder().Create());
+  RTC_CHECK(apm_);
   AudioProcessing::Config apm_config = apm_->GetConfig();
   apm_config.gain_controller1.analog_gain_controller.enabled = false;
   apm_config.pipeline.maximum_internal_processing_rate = 48000;
@@ -2864,3 +2868,5 @@ TEST(ApmConfiguration, SelfAssignment) {
 }
 
 }  // namespace webrtc
+
+#endif

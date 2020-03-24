@@ -199,14 +199,13 @@ WebRtcVoiceEngine::WebRtcVoiceEngine(
       encoder_factory_(encoder_factory),
       decoder_factory_(decoder_factory),
       audio_mixer_(audio_mixer),
-      apm_(audio_processing) {
+      apma_(audio_processing) {
   // This may be called from any thread, so detach thread checkers.
   worker_thread_checker_.Detach();
   signal_thread_checker_.Detach();
   RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::WebRtcVoiceEngine";
   RTC_DCHECK(decoder_factory);
   RTC_DCHECK(encoder_factory);
-  RTC_DCHECK(audio_processing);
   // The rest of our initialization will happen in Init.
 }
 
@@ -264,7 +263,7 @@ void WebRtcVoiceEngine::Init() {
     } else {
       config.audio_mixer = webrtc::AudioMixerImpl::Create();
     }
-    config.audio_processing = apm_;
+    config.audio_processing = apma_;
     config.audio_device_module = adm_;
     audio_state_ = webrtc::AudioState::Create(config);
   }
@@ -469,16 +468,18 @@ bool WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
         new webrtc::ExperimentalNs(*experimental_ns_));
   }
 
-  webrtc::AudioProcessing::Config apm_config = apm()->GetConfig();
+  webrtc::AudioProcessing* ap = apma();
+  if (ap) {
+    webrtc::AudioProcessing::Config apm_config = ap->GetConfig();
 
-  if (options.echo_cancellation) {
-    apm_config.echo_canceller.enabled = *options.echo_cancellation;
-    apm_config.echo_canceller.mobile_mode = use_mobile_software_aec;
-  }
+    if (options.echo_cancellation) {
+      apm_config.echo_canceller.enabled = *options.echo_cancellation;
+      apm_config.echo_canceller.mobile_mode = use_mobile_software_aec;
+    }
 
-  if (options.auto_gain_control) {
-    const bool enabled = *options.auto_gain_control;
-    apm_config.gain_controller1.enabled = enabled;
+    if (options.auto_gain_control) {
+      const bool enabled = *options.auto_gain_control;
+      apm_config.gain_controller1.enabled = enabled;
 #if defined(WEBRTC_IOS) || defined(WEBRTC_ANDROID)
     apm_config.gain_controller1.mode =
         apm_config.gain_controller1.kFixedDigital;
@@ -490,7 +491,7 @@ bool WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
     constexpr int kMaxVolumeLevel = 255;
     apm_config.gain_controller1.analog_level_minimum = kMinVolumeLevel;
     apm_config.gain_controller1.analog_level_maximum = kMaxVolumeLevel;
-  }
+    }
   if (options.tx_agc_target_dbov) {
     apm_config.gain_controller1.target_level_dbfs = *options.tx_agc_target_dbov;
   }
@@ -524,8 +525,9 @@ bool WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
     apm_config.voice_detection.enabled = *options.typing_detection;
   }
 
-  apm()->SetExtraOptions(config);
-  apm()->ApplyConfig(apm_config);
+  ap->SetExtraOptions(config);
+  ap->ApplyConfig(apm_config);
+  }
   return true;
 }
 
@@ -571,18 +573,28 @@ void WebRtcVoiceEngine::UnregisterChannel(WebRtcVoiceMediaChannel* channel) {
 bool WebRtcVoiceEngine::StartAecDump(webrtc::FileWrapper file,
                                      int64_t max_size_bytes) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
+
+  webrtc::AudioProcessing* ap = apma();
+  if (!ap) {
+    return false;
+  }
+
   auto aec_dump = webrtc::AecDumpFactory::Create(
       std::move(file), max_size_bytes, low_priority_worker_queue_.get());
   if (!aec_dump) {
     return false;
   }
-  apm()->AttachAecDump(std::move(aec_dump));
+
+  ap->AttachAecDump(std::move(aec_dump));
   return true;
 }
 
 void WebRtcVoiceEngine::StopAecDump() {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  apm()->DetachAecDump();
+  webrtc::AudioProcessing* ap = apma();
+  if (ap) {
+    ap->DetachAecDump();
+  }
 }
 
 webrtc::AudioDeviceModule* WebRtcVoiceEngine::adm() {
@@ -591,10 +603,9 @@ webrtc::AudioDeviceModule* WebRtcVoiceEngine::adm() {
   return adm_.get();
 }
 
-webrtc::AudioProcessing* WebRtcVoiceEngine::apm() const {
+webrtc::AudioProcessing* WebRtcVoiceEngine::apma() const {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  RTC_DCHECK(apm_);
-  return apm_.get();
+  return apma_.get();
 }
 
 webrtc::AudioState* WebRtcVoiceEngine::audio_state() {
@@ -2125,7 +2136,10 @@ bool WebRtcVoiceMediaChannel::MuteStream(uint32_t ssrc, bool muted) {
   for (const auto& kv : send_streams_) {
     all_muted = all_muted && kv.second->muted();
   }
-  engine()->apm()->set_output_will_be_muted(all_muted);
+  webrtc::AudioProcessing* ap = engine()->apma();
+  if (ap) {
+    ap->set_output_will_be_muted(all_muted);
+  }
 
   return true;
 }

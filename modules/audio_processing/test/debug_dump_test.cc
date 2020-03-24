@@ -23,6 +23,9 @@
 #include "test/gtest.h"
 #include "test/testsupport/file_utils.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 namespace webrtc {
 namespace test {
 
@@ -550,3 +553,5 @@ TEST_F(DebugDumpTest, PreAmplifierIsOn) {
 
 }  // namespace test
 }  // namespace webrtc
+
+#endif

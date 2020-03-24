@@ -94,7 +94,7 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
   std::unique_ptr<rtc::TaskQueue> low_priority_worker_queue_;
 
   webrtc::AudioDeviceModule* adm();
-  webrtc::AudioProcessing* apm() const;
+  webrtc::AudioProcessing* apma() const;
   webrtc::AudioState* audio_state();
 
   std::vector<AudioCodec> CollectCodecs(
@@ -109,7 +109,7 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
   rtc::scoped_refptr<webrtc::AudioDecoderFactory> decoder_factory_;
   rtc::scoped_refptr<webrtc::AudioMixer> audio_mixer_;
   // The audio processing module.
-  rtc::scoped_refptr<webrtc::AudioProcessing> apm_;
+  rtc::scoped_refptr<webrtc::AudioProcessing> apma_;
   // The primary instance of WebRtc VoiceEngine.
   rtc::scoped_refptr<webrtc::AudioState> audio_state_;
   std::vector<AudioCodec> send_codecs_;
