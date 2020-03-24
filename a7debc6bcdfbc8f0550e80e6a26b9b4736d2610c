@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a862efa8_af8c76ad",
+        "filename": "modules/audio_coding/codecs/g711/audio_encoder_pcm.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-03-24T10:40:50Z",
+      "side": 1,
+      "message": "Use num_10ms_frames_per_packet_ directly instead, to make it clear that we are accessing a const value here. (also for other places)",
+      "range": {
+        "startLine": 95,
+        "startChar": 29,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "revId": "a7debc6bcdfbc8f0550e80e6a26b9b4736d2610c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
