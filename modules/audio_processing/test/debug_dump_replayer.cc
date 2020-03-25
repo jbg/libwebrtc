@@ -14,6 +14,9 @@
 #include "modules/audio_processing/test/runtime_setting_util.h"
 #include "rtc_base/checks.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 namespace webrtc {
 namespace test {
 
@@ -244,3 +247,5 @@ void DebugDumpReplayer::LoadNextMessage() {
 
 }  // namespace test
 }  // namespace webrtc
+
+#endif

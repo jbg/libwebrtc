@@ -303,9 +303,10 @@ struct ConfigHelper {
     audio_processing_stats_.residual_echo_likelihood = kResidualEchoLikelihood;
     audio_processing_stats_.residual_echo_likelihood_recent_max =
         kResidualEchoLikelihoodMax;
-
-    EXPECT_CALL(*audio_processing_, GetStatistics(true))
-        .WillRepeatedly(Return(audio_processing_stats_));
+    if (audio_processing_) {
+      EXPECT_CALL(*audio_processing_, GetStatistics(true))
+          .WillRepeatedly(Return(audio_processing_stats_));
+    }
   }
   TaskQueueForTest* worker() { return &worker_queue_; }
 
