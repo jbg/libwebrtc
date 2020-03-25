@@ -41,6 +41,7 @@ rtc_library("mock_aec_dump_unittests") {
   deps = [
     ":mock_aec_dump",
     "..:api",
+    "..:audioproc_test_utils",
     "../",
     "../../../rtc_base:rtc_base_approved",
     "//testing/gtest",

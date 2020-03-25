@@ -14,6 +14,7 @@
 #include <fstream>
 #include <string>
 
+#include "modules/audio_processing/test/audio_processing_builder_for_testing.h"
 #include "modules/audio_processing/test/audio_processing_simulator.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/ignore_wundef.h"
@@ -32,8 +33,9 @@ namespace test {
 // Used to perform an audio processing simulation from an aec dump.
 class AecDumpBasedSimulator final : public AudioProcessingSimulator {
  public:
-  AecDumpBasedSimulator(const SimulationSettings& settings,
-                        std::unique_ptr<AudioProcessingBuilder> ap_builder);
+  AecDumpBasedSimulator(
+      const SimulationSettings& settings,
+      std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder);
   ~AecDumpBasedSimulator() override;
 
   // Processes the messages in the aecdump file.
