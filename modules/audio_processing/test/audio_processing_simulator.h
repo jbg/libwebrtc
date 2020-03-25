@@ -22,6 +22,7 @@
 #include "common_audio/include/audio_util.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/audio_processing/test/api_call_statistics.h"
+#include "modules/audio_processing/test/audio_processing_builder_for_testing.h"
 #include "modules/audio_processing/test/fake_recording_device.h"
 #include "modules/audio_processing/test/test_utils.h"
 #include "rtc_base/constructor_magic.h"
@@ -149,9 +150,9 @@ struct SimulationSettings {
 // Provides common functionality for performing audioprocessing simulations.
 class AudioProcessingSimulator {
  public:
-
-  AudioProcessingSimulator(const SimulationSettings& settings,
-                           std::unique_ptr<AudioProcessingBuilder> ap_builder);
+  AudioProcessingSimulator(
+      const SimulationSettings& settings,
+      std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder);
   virtual ~AudioProcessingSimulator();
 
   // Processes the data in the input.
@@ -186,7 +187,7 @@ class AudioProcessingSimulator {
 
   const SimulationSettings settings_;
   std::unique_ptr<AudioProcessing> ap_;
-  std::unique_ptr<AudioProcessingBuilder> ap_builder_;
+  std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder_;
 
   std::unique_ptr<ChannelBuffer<float>> in_buf_;
   std::unique_ptr<ChannelBuffer<float>> out_buf_;

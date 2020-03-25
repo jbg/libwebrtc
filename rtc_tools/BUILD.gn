@@ -369,9 +369,7 @@ if (rtc_include_tests) {
   rtc_executable("yuv_to_ivf_converter") {
     visibility = [ "*" ]
     testonly = true
-    sources = [
-      "converter/yuv_to_ivf_converter.cc",
-    ]
+    sources = [ "converter/yuv_to_ivf_converter.cc" ]
     deps = [
       "../api:create_frame_generator",
       "../api:frame_generator_api",
@@ -508,8 +506,9 @@ if (rtc_include_tests) {
       sources = [ "audioproc_f/audioproc_float_main.cc" ]
       deps = [
         "../api:audioproc_f_api",
-        "../modules/audio_processing",
         "../modules/audio_processing:api",
+        "../modules/audio_processing:audio_processing_builder",
+        "../modules/audio_processing:audioproc_test_utils",
         "../rtc_base:rtc_base_approved",
       ]
     }

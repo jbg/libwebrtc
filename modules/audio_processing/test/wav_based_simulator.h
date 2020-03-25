@@ -13,6 +13,7 @@
 
 #include <vector>
 
+#include "modules/audio_processing/test/audio_processing_builder_for_testing.h"
 #include "modules/audio_processing/test/audio_processing_simulator.h"
 #include "rtc_base/constructor_magic.h"
 
@@ -22,8 +23,9 @@ namespace test {
 // Used to perform an audio processing simulation from wav files.
 class WavBasedSimulator final : public AudioProcessingSimulator {
  public:
-  WavBasedSimulator(const SimulationSettings& settings,
-                    std::unique_ptr<AudioProcessingBuilder> ap_builder);
+  WavBasedSimulator(
+      const SimulationSettings& settings,
+      std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder);
   ~WavBasedSimulator() override;
 
   // Processes the WAV input.
