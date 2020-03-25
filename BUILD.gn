@@ -276,6 +276,10 @@ config("common_config") {
     defines += [ "RTC_DISABLE_METRICS" ]
   }
 
+  if (exclude_audio_processing_module) {
+    defines += [ "EXCLUDE_AUDIO_PROCESSING_MODULE=1" ]
+  }
+
   cflags = []
 
   if (build_with_chromium) {
