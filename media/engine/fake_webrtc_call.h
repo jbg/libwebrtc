@@ -312,6 +312,8 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
   void SetClientBitratePreferences(
       const webrtc::BitrateSettings& preferences) override {}
 
+  void DisableVideoSendStreamCreation();
+
  private:
   webrtc::AudioSendStream* CreateAudioSendStream(
       const webrtc::AudioSendStream::Config& config) override;
@@ -373,6 +375,7 @@ class FakeCall final : public webrtc::Call, public webrtc::PacketReceiver {
 
   int num_created_send_streams_;
   int num_created_receive_streams_;
+  bool disable_video_send_stream_creation_ = false;
 };
 
 }  // namespace cricket
