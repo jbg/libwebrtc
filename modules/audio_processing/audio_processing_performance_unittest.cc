@@ -25,6 +25,9 @@
 #include "test/gtest.h"
 #include "test/testsupport/perf_test.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 namespace webrtc {
 
 namespace {
@@ -612,3 +615,5 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::ValuesIn(SimulationConfig::GenerateSimulationConfigs()));
 
 }  // namespace webrtc
+
+#endif

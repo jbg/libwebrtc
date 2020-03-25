@@ -571,8 +571,8 @@ if (current_os == "linux" || is_android) {
       ":builtin_audio_codecs_jni",
       "../../api/audio_codecs:builtin_audio_decoder_factory",
       "../../api/audio_codecs:builtin_audio_encoder_factory",
-      "../../modules/audio_processing",
       "../../modules/audio_processing:api",
+      "../../modules/audio_processing:audio_processing_builder",
       "../../rtc_base:rtc_base_approved",
     ]
   }

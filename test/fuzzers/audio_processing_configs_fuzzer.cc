@@ -23,6 +23,9 @@
 #include "test/fuzzers/audio_processing_fuzzer_helper.h"
 #include "test/fuzzers/fuzz_data_helper.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 namespace webrtc {
 namespace {
 
@@ -171,3 +174,5 @@ void FuzzOneInput(const uint8_t* data, size_t size) {
   }
 }
 }  // namespace webrtc
+
+#endif
