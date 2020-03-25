@@ -510,6 +510,9 @@ void FakeCall::DestroyAudioReceiveStream(
 webrtc::VideoSendStream* FakeCall::CreateVideoSendStream(
     webrtc::VideoSendStream::Config config,
     webrtc::VideoEncoderConfig encoder_config) {
+  if (disable_video_send_stream_creation_) {
+    return nullptr;
+  }
   FakeVideoSendStream* fake_stream =
       new FakeVideoSendStream(std::move(config), std::move(encoder_config));
   video_send_streams_.push_back(fake_stream);
@@ -604,6 +607,10 @@ FakeCall::DeliveryStatus FakeCall::DeliverPacket(webrtc::MediaType media_type,
 
 void FakeCall::SetStats(const webrtc::Call::Stats& stats) {
   stats_ = stats;
+}
+
+void FakeCall::DisableVideoSendStreamCreation() {
+  disable_video_send_stream_creation_ = true;
 }
 
 int FakeCall::GetNumCreatedSendStreams() const {
