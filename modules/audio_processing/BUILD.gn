@@ -112,6 +112,21 @@ rtc_library("high_pass_filter") {
   ]
 }
 
+rtc_library("audio_processing_builder") {
+  visibility = [ "*" ]
+  configs += [ ":apm_debug_dump" ]
+  sources = [ "audio_processing_builder_impl.cc" ]
+
+  defines = []
+  deps = [
+    ":api",
+    ":audio_processing",
+    ":config",
+    "../../api/audio:echo_control",
+    "../../rtc_base:refcount",
+  ]
+}
+
 rtc_library("audio_processing") {
   visibility = [ "*" ]
   configs += [ ":apm_debug_dump" ]
@@ -560,6 +575,8 @@ if (rtc_include_tests) {
     sources = [
       "test/audio_buffer_tools.cc",
       "test/audio_buffer_tools.h",
+      "test/audio_processing_builder_for_testing.cc",
+      "test/audio_processing_builder_for_testing.h",
       "test/bitexactness_tools.cc",
       "test/bitexactness_tools.h",
       "test/performance_timer.cc",
@@ -570,10 +587,17 @@ if (rtc_include_tests) {
       "test/test_utils.h",
     ]
 
+    if (apm_debug_dump) {
+      defines = [ "WEBRTC_APM_DEBUG_DUMP=1" ]
+    } else {
+      defines = [ "WEBRTC_APM_DEBUG_DUMP=0" ]
+    }
+
     deps = [
       ":api",
       ":audio_buffer",
       ":audio_processing",
+      ":audio_processing_builder",
       "../../api:array_view",
       "../../api/audio:audio_frame_api",
       "../../common_audio",
