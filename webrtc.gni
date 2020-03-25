@@ -75,7 +75,7 @@ declare_args() {
   rtc_opus_support_120ms_ptime = true
 
   # Enable this to let the Opus audio codec change complexity on the fly.
-  rtc_opus_variable_complexity = false
+  rtc_opus_variable_complexity = true
 
   # Used to specify an external Jsoncpp include path when not compiling the
   # library that comes with WebRTC (i.e. rtc_build_json == 0).
@@ -95,6 +95,9 @@ declare_args() {
   # Selects whether debug dumps for the audio processing module
   # should be generated.
   apm_debug_dump = false
+
+  # Selects whether the audio processing module should be excluded.
+  exclude_audio_processing_module = false
 
   # Set this to true to enable BWE test logging.
   rtc_enable_bwe_test_logging = false

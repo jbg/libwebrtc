@@ -16,6 +16,9 @@
 #include "modules/audio_processing/audio_processing_impl.h"
 #include "modules/audio_processing/include/audio_processing.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Exactly;
@@ -93,3 +96,5 @@ TEST(AecDumpIntegration, CaptureStreamShouldBeLoggedOnceEveryProcessStream) {
   apm->AttachAecDump(std::move(mock_aec_dump));
   apm->ProcessStream(frame.data(), stream_config, stream_config, frame.data());
 }
+
+#endif
