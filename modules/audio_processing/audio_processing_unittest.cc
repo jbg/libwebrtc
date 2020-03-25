@@ -47,6 +47,9 @@
 #include "test/gtest.h"
 #include "test/testsupport/file_utils.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 RTC_PUSH_IGNORING_WUNDEF()
 #ifdef WEBRTC_ANDROID_PLATFORM_BUILD
 #include "external/webrtc/webrtc/modules/audio_processing/test/unittest.pb.h"
@@ -2864,3 +2867,5 @@ TEST(ApmConfiguration, SelfAssignment) {
 }
 
 }  // namespace webrtc
+
+#endif
