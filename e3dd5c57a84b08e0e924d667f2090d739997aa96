@@ -22,6 +22,30 @@
       "revId": "e3dd5c57a84b08e0e924d667f2090d739997aa96",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df1c43c4_22191d65",
+        "filename": "api/test/video_quality_analyzer_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-03-25T10:53:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57d0e334_7bf34693",
+      "range": {
+        "startLine": 59,
+        "startChar": 37,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "e3dd5c57a84b08e0e924d667f2090d739997aa96",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
