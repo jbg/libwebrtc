@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e4b4f618_63886ee5",
+        "filename": "media/base/media_channel.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-25T08:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea56a2c_74977dee",
+      "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b07428a7_89493ed1",
         "filename": "media/engine/webrtc_video_engine_unittest.cc",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2020-03-23T12:44:11Z",
       "side": 1,
       "message": "I don\u0027t understand this test scenario. You are performing AddSendStream() but you\u0027ve turned Call\u0027s CreateVideoSendStream() into a NO-OP. This makes WebRtcVideoChannel::WebRtcVideoSendStream::RecreateWebRtcStream() leave stream_ as nullptr. I think that is a bug?\n\nWhat are we trying to test? Are there other ways to achieve this, like adding and then removing the stream or passing in the right parameters to make it set up the test this way?",
+      "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74012aa4_0e55fa5e",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 5241,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-25T08:03:13Z",
+      "side": 1,
+      "message": "\"1. If I have no stream_, I get a single info with such and such values.\"\nI understood we want to test scenario where stream_ is nullptr and I added DisableVideoSendStreamCreation for achieving exactly that. Didn\u0027t find another way but there is always a chance that I just missed something.",
+      "parentUuid": "b07428a7_89493ed1",
       "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
