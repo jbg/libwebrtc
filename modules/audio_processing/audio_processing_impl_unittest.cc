@@ -22,6 +22,9 @@
 #include "test/gmock.h"
 #include "test/gtest.h"
 
+#if !defined(EXCLUDE_AUDIO_PROCESSING_MODULE) || \
+    EXCLUDE_AUDIO_PROCESSING_MODULE != 1
+
 namespace webrtc {
 namespace {
 
@@ -405,3 +408,5 @@ TEST(AudioProcessingImplTest, RenderPreProcessorBeforeEchoDetector) {
 }
 
 }  // namespace webrtc
+
+#endif
