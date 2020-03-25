@@ -206,7 +206,6 @@ WebRtcVoiceEngine::WebRtcVoiceEngine(
   RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::WebRtcVoiceEngine";
   RTC_DCHECK(decoder_factory);
   RTC_DCHECK(encoder_factory);
-  RTC_DCHECK(audio_processing);
   // The rest of our initialization will happen in Init.
 }
 
@@ -469,63 +468,68 @@ bool WebRtcVoiceEngine::ApplyOptions(const AudioOptions& options_in) {
         new webrtc::ExperimentalNs(*experimental_ns_));
   }
 
-  webrtc::AudioProcessing::Config apm_config = apm()->GetConfig();
+  webrtc::AudioProcessing* ap = apm();
+  if (ap) {
+    webrtc::AudioProcessing::Config apm_config = ap->GetConfig();
 
-  if (options.echo_cancellation) {
-    apm_config.echo_canceller.enabled = *options.echo_cancellation;
-    apm_config.echo_canceller.mobile_mode = use_mobile_software_aec;
-  }
+    if (options.echo_cancellation) {
+      apm_config.echo_canceller.enabled = *options.echo_cancellation;
+      apm_config.echo_canceller.mobile_mode = use_mobile_software_aec;
+    }
 
-  if (options.auto_gain_control) {
-    const bool enabled = *options.auto_gain_control;
-    apm_config.gain_controller1.enabled = enabled;
+    if (options.auto_gain_control) {
+      const bool enabled = *options.auto_gain_control;
+      apm_config.gain_controller1.enabled = enabled;
 #if defined(WEBRTC_IOS) || defined(WEBRTC_ANDROID)
-    apm_config.gain_controller1.mode =
-        apm_config.gain_controller1.kFixedDigital;
+      apm_config.gain_controller1.mode =
+          apm_config.gain_controller1.kFixedDigital;
 #else
-    apm_config.gain_controller1.mode =
-        apm_config.gain_controller1.kAdaptiveAnalog;
+      apm_config.gain_controller1.mode =
+          apm_config.gain_controller1.kAdaptiveAnalog;
 #endif
-    constexpr int kMinVolumeLevel = 0;
-    constexpr int kMaxVolumeLevel = 255;
-    apm_config.gain_controller1.analog_level_minimum = kMinVolumeLevel;
-    apm_config.gain_controller1.analog_level_maximum = kMaxVolumeLevel;
-  }
-  if (options.tx_agc_target_dbov) {
-    apm_config.gain_controller1.target_level_dbfs = *options.tx_agc_target_dbov;
-  }
-  if (options.tx_agc_digital_compression_gain) {
-    apm_config.gain_controller1.compression_gain_db =
-        *options.tx_agc_digital_compression_gain;
-  }
-  if (options.tx_agc_limiter) {
-    apm_config.gain_controller1.enable_limiter = *options.tx_agc_limiter;
-  }
+      constexpr int kMinVolumeLevel = 0;
+      constexpr int kMaxVolumeLevel = 255;
+      apm_config.gain_controller1.analog_level_minimum = kMinVolumeLevel;
+      apm_config.gain_controller1.analog_level_maximum = kMaxVolumeLevel;
+    }
+    if (options.tx_agc_target_dbov) {
+      apm_config.gain_controller1.target_level_dbfs =
+          *options.tx_agc_target_dbov;
+    }
+    if (options.tx_agc_digital_compression_gain) {
+      apm_config.gain_controller1.compression_gain_db =
+          *options.tx_agc_digital_compression_gain;
+    }
+    if (options.tx_agc_limiter) {
+      apm_config.gain_controller1.enable_limiter = *options.tx_agc_limiter;
+    }
 
-  if (options.highpass_filter) {
-    apm_config.high_pass_filter.enabled = *options.highpass_filter;
-  }
+    if (options.highpass_filter) {
+      apm_config.high_pass_filter.enabled = *options.highpass_filter;
+    }
 
-  if (options.residual_echo_detector) {
-    apm_config.residual_echo_detector.enabled = *options.residual_echo_detector;
-  }
+    if (options.residual_echo_detector) {
+      apm_config.residual_echo_detector.enabled =
+          *options.residual_echo_detector;
+    }
 
-  if (options.noise_suppression) {
-    const bool enabled = *options.noise_suppression;
-    apm_config.noise_suppression.enabled = enabled;
-    apm_config.noise_suppression.level =
-        webrtc::AudioProcessing::Config::NoiseSuppression::Level::kHigh;
-    RTC_LOG(LS_INFO) << "NS set to " << enabled;
-  }
+    if (options.noise_suppression) {
+      const bool enabled = *options.noise_suppression;
+      apm_config.noise_suppression.enabled = enabled;
+      apm_config.noise_suppression.level =
+          webrtc::AudioProcessing::Config::NoiseSuppression::Level::kHigh;
+      RTC_LOG(LS_INFO) << "NS set to " << enabled;
+    }
 
-  if (options.typing_detection) {
-    RTC_LOG(LS_INFO) << "Typing detection is enabled? "
-                     << *options.typing_detection;
-    apm_config.voice_detection.enabled = *options.typing_detection;
-  }
+    if (options.typing_detection) {
+      RTC_LOG(LS_INFO) << "Typing detection is enabled? "
+                       << *options.typing_detection;
+      apm_config.voice_detection.enabled = *options.typing_detection;
+    }
 
-  apm()->SetExtraOptions(config);
-  apm()->ApplyConfig(apm_config);
+    ap->SetExtraOptions(config);
+    ap->ApplyConfig(apm_config);
+  }
   return true;
 }
 
@@ -571,18 +575,28 @@ void WebRtcVoiceEngine::UnregisterChannel(WebRtcVoiceMediaChannel* channel) {
 bool WebRtcVoiceEngine::StartAecDump(webrtc::FileWrapper file,
                                      int64_t max_size_bytes) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
+
+  webrtc::AudioProcessing* ap = apm();
+  if (!ap) {
+    return false;
+  }
+
   auto aec_dump = webrtc::AecDumpFactory::Create(
       std::move(file), max_size_bytes, low_priority_worker_queue_.get());
   if (!aec_dump) {
     return false;
   }
-  apm()->AttachAecDump(std::move(aec_dump));
+
+  ap->AttachAecDump(std::move(aec_dump));
   return true;
 }
 
 void WebRtcVoiceEngine::StopAecDump() {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  apm()->DetachAecDump();
+  webrtc::AudioProcessing* ap = apm();
+  if (ap) {
+    ap->DetachAecDump();
+  }
 }
 
 webrtc::AudioDeviceModule* WebRtcVoiceEngine::adm() {
@@ -593,7 +607,6 @@ webrtc::AudioDeviceModule* WebRtcVoiceEngine::adm() {
 
 webrtc::AudioProcessing* WebRtcVoiceEngine::apm() const {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  RTC_DCHECK(apm_);
   return apm_.get();
 }
 
@@ -2125,7 +2138,10 @@ bool WebRtcVoiceMediaChannel::MuteStream(uint32_t ssrc, bool muted) {
   for (const auto& kv : send_streams_) {
     all_muted = all_muted && kv.second->muted();
   }
-  engine()->apm()->set_output_will_be_muted(all_muted);
+  webrtc::AudioProcessing* ap = engine()->apm();
+  if (ap) {
+    ap->set_output_will_be_muted(all_muted);
+  }
 
   return true;
 }

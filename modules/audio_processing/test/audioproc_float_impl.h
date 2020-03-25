@@ -14,6 +14,7 @@
 #include <memory>
 
 #include "modules/audio_processing/include/audio_processing.h"
+#include "modules/audio_processing/test/audio_processing_builder_for_testing.h"
 
 namespace webrtc {
 namespace test {
@@ -24,11 +25,12 @@ namespace test {
 // via the |argv| argument. Pass |processed_capture_samples| to write in it the
 // samples processed on the capture side; if |processed_capture_samples| is not
 // passed, the output file can optionally be specified via the |argv| argument.
-int AudioprocFloatImpl(std::unique_ptr<AudioProcessingBuilder> ap_builder,
-                       int argc,
-                       char* argv[],
-                       absl::string_view input_aecdump,
-                       std::vector<float>* processed_capture_samples);
+int AudioprocFloatImpl(
+    std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder,
+    int argc,
+    char* argv[],
+    absl::string_view input_aecdump,
+    std::vector<float>* processed_capture_samples);
 
 }  // namespace test
 }  // namespace webrtc

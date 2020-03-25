@@ -23,6 +23,7 @@
 #include "absl/strings/string_view.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/audio_processing/test/aec_dump_based_simulator.h"
+#include "modules/audio_processing/test/audio_processing_builder_for_testing.h"
 #include "modules/audio_processing/test/audio_processing_simulator.h"
 #include "modules/audio_processing/test/wav_based_simulator.h"
 #include "rtc_base/checks.h"
@@ -620,11 +621,12 @@ void PerformBasicParameterSanityChecks(const SimulationSettings& settings) {
 
 }  // namespace
 
-int AudioprocFloatImpl(std::unique_ptr<AudioProcessingBuilder> ap_builder,
-                       int argc,
-                       char* argv[],
-                       absl::string_view input_aecdump,
-                       std::vector<float>* processed_capture_samples) {
+int AudioprocFloatImpl(
+    std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder,
+    int argc,
+    char* argv[],
+    absl::string_view input_aecdump,
+    std::vector<float>* processed_capture_samples) {
   std::vector<char*> args = absl::ParseCommandLine(argc, argv);
   if (args.size() != 1) {
     printf("%s", kUsageDescription);
