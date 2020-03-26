@@ -203,6 +203,7 @@ void EnableAllAPComponents(AudioProcessing* ap) {
 #endif
 
   apm_config.noise_suppression.enabled = true;
+  apm_config.transient_suppression.enabled = true;
 
   apm_config.high_pass_filter.enabled = true;
   apm_config.level_estimation.enabled = true;
