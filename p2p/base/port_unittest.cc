@@ -13,6 +13,7 @@
 #include <string.h>
 
 #include <cstdint>
+#include <limits>
 #include <list>
 #include <memory>
 #include <string>
@@ -1873,6 +1874,157 @@ TEST_F(PortTest, TestRoundTripTime) {
   EXPECT_EQ(60u, lconn->stats().total_round_trip_time_ms);
   ASSERT_TRUE(lconn->stats().current_round_trip_time_ms);
   EXPECT_EQ(30u, *lconn->stats().current_round_trip_time_ms);
+}
+
+class ConnectionTest : public PortTest {
+ public:
+  ConnectionTest() {
+    lport_ = CreateTestPort(kLocalAddr1, "lfrag", "lpass");
+    rport_ = CreateTestPort(kLocalAddr2, "rfrag", "rpass");
+    lport_->SetIceRole(cricket::ICEROLE_CONTROLLING);
+    lport_->SetIceTiebreaker(kTiebreaker1);
+    rport_->SetIceRole(cricket::ICEROLE_CONTROLLED);
+    rport_->SetIceTiebreaker(kTiebreaker2);
+
+    lport_->PrepareAddress();
+    rport_->PrepareAddress();
+  }
+
+  rtc::ScopedFakeClock clock_;
+  int num_state_changes_ = 0;
+
+  Connection* CreateConnectionL() {
+    Connection* conn =
+        lport_->CreateConnection(rport_->Candidates()[0], Port::ORIGIN_MESSAGE);
+    conn->SignalStateChange.connect(this,
+                                    &ConnectionTest::OnConnectionStateChange);
+    return conn;
+  }
+  Connection* CreateConnectionR() {
+    Connection* conn =
+        rport_->CreateConnection(lport_->Candidates()[0], Port::ORIGIN_MESSAGE);
+    conn->SignalStateChange.connect(this,
+                                    &ConnectionTest::OnConnectionStateChange);
+    return conn;
+  }
+
+  void SendPingAndCaptureReply(Connection* lconn,
+                               Connection* rconn,
+                               int64_t ms,
+                               rtc::BufferT<uint8_t>* reply) {
+    TestPort* lport =
+        lconn->PortForTest() == lport_.get() ? lport_.get() : rport_.get();
+    TestPort* rport =
+        rconn->PortForTest() == rport_.get() ? rport_.get() : lport_.get();
+    lconn->Ping(rtc::TimeMillis());
+    ASSERT_TRUE_WAIT(lport->last_stun_msg(), kDefaultTimeout);
+    ASSERT_TRUE(lport->last_stun_buf());
+    rconn->OnReadPacket(lport->last_stun_buf()->data<char>(),
+                        lport->last_stun_buf()->size(),
+                        /* packet_time_us */ -1);
+    clock_.AdvanceTime(webrtc::TimeDelta::Millis(ms));
+    ASSERT_TRUE_WAIT(rport->last_stun_msg(), kDefaultTimeout);
+    ASSERT_TRUE(rport->last_stun_buf());
+    *reply = std::move(*rport->last_stun_buf());
+  }
+
+  void SendPingAndReceiveResponse(Connection* lconn,
+                                  Connection* rconn,
+                                  int64_t ms) {
+    rtc::BufferT<uint8_t> reply;
+    SendPingAndCaptureReply(lconn, rconn, ms, &reply);
+    lconn->OnReadPacket(reply.data<char>(), reply.size(),
+                        /* packet_time_us */ -1);
+  }
+
+  void OnConnectionStateChange(Connection* connection) { num_state_changes_++; }
+
+ private:
+  std::unique_ptr<TestPort> lport_;
+  std::unique_ptr<TestPort> rport_;
+};
+
+TEST_F(ConnectionTest, ConnectionResetState) {
+  Connection* lconn = CreateConnectionL();
+  Connection* rconn = CreateConnectionR();
+
+  EXPECT_FALSE(lconn->writable());
+  EXPECT_FALSE(lconn->receiving());
+  EXPECT_TRUE(std::isnan(lconn->GetRttEstimate().GetAverage()));
+  EXPECT_EQ(lconn->GetRttEstimate().GetVariance(),
+            std::numeric_limits<double>::infinity());
+
+  SendPingAndReceiveResponse(lconn, rconn, 10);
+
+  EXPECT_TRUE(lconn->writable());
+  EXPECT_TRUE(lconn->receiving());
+  EXPECT_EQ(lconn->GetRttEstimate().GetAverage(), 10);
+  EXPECT_EQ(lconn->GetRttEstimate().GetVariance(),
+            std::numeric_limits<double>::infinity());
+
+  SendPingAndReceiveResponse(lconn, rconn, 11);
+
+  EXPECT_TRUE(lconn->writable());
+  EXPECT_TRUE(lconn->receiving());
+  EXPECT_NEAR(lconn->GetRttEstimate().GetAverage(), 10, 0.5);
+  EXPECT_LT(lconn->GetRttEstimate().GetVariance(),
+            std::numeric_limits<double>::infinity());
+
+  lconn->Reset();
+
+  EXPECT_FALSE(lconn->writable());
+  EXPECT_FALSE(lconn->receiving());
+  EXPECT_TRUE(std::isnan(lconn->GetRttEstimate().GetAverage()));
+  EXPECT_EQ(lconn->GetRttEstimate().GetVariance(),
+            std::numeric_limits<double>::infinity());
+}
+
+TEST_F(ConnectionTest, ConnectionResetDiscardsPendingPings) {
+  Connection* lconn = CreateConnectionL();
+  Connection* rconn = CreateConnectionR();
+
+  SendPingAndReceiveResponse(lconn, rconn, 10);
+
+  EXPECT_TRUE(lconn->writable());
+  EXPECT_TRUE(lconn->receiving());
+
+  rtc::BufferT<uint8_t> reply;
+  SendPingAndCaptureReply(lconn, rconn, 10, &reply);
+
+  lconn->Reset();
+
+  EXPECT_FALSE(lconn->writable());
+  EXPECT_FALSE(lconn->receiving());
+
+  lconn->OnReadPacket(reply.data<char>(), reply.size(),
+                      /* packet_time_us */ -1);
+
+  // That reply was discarded due to the Reset() while it was outstanding.
+  EXPECT_FALSE(lconn->writable());
+  EXPECT_FALSE(lconn->receiving());
+
+  // But sending a new ping and getting a reply works.
+  SendPingAndReceiveResponse(lconn, rconn, 11);
+  EXPECT_TRUE(lconn->writable());
+  EXPECT_TRUE(lconn->receiving());
+}
+
+TEST_F(ConnectionTest, ConnectionResetDoesNotTriggerStateChange) {
+  Connection* lconn = CreateConnectionL();
+  Connection* rconn = CreateConnectionR();
+
+  EXPECT_EQ(num_state_changes_, 0);
+  SendPingAndReceiveResponse(lconn, rconn, 10);
+
+  EXPECT_TRUE(lconn->writable());
+  EXPECT_TRUE(lconn->receiving());
+  EXPECT_EQ(num_state_changes_, 2);
+
+  lconn->Reset();
+
+  EXPECT_FALSE(lconn->writable());
+  EXPECT_FALSE(lconn->receiving());
+  EXPECT_EQ(num_state_changes_, 2);
 }
 
 TEST_F(PortTest, TestUseCandidateAttribute) {
