@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf7a47f4_0a33adc8",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-26T16:15:52Z",
+      "side": 1,
+      "message": "If the user of this method in p2p_transport_channel.cc has to const_cast the result, it shouldn\u0027t be a const pointer inside this struct.\n\nMy usual gripe about struct: Can we give it a constructor and make the members const?\n(note that a pointer that is const doesn\u0027t make the pointed-to object const)",
+      "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea7655a0_8dc82605",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-26T16:15:52Z",
+      "side": 1,
+      "message": "English: The recommended delay before calling SelectConnectionToPing() again.\n(is it recommended, required, suggested or something else? Also, it\u0027s an interval, not a time, right?)",
+      "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
