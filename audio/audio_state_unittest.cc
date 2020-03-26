@@ -121,6 +121,7 @@ TEST(AudioStateTest, RecordedAudioArrivesAtSingleStream) {
           }));
   MockAudioProcessing* ap =
       static_cast<MockAudioProcessing*>(audio_state->audio_processing());
+  RTC_DCHECK(ap);
   EXPECT_CALL(*ap, set_stream_delay_ms(0));
   EXPECT_CALL(*ap, set_stream_key_pressed(false));
   EXPECT_CALL(*ap, ProcessStream(_, _, _, Matcher<int16_t*>(_)));
@@ -171,6 +172,7 @@ TEST(AudioStateTest, RecordedAudioArrivesAtMultipleStreams) {
           }));
   MockAudioProcessing* ap =
       static_cast<MockAudioProcessing*>(audio_state->audio_processing());
+  RTC_DCHECK(ap);
   EXPECT_CALL(*ap, set_stream_delay_ms(5));
   EXPECT_CALL(*ap, set_stream_key_pressed(true));
   EXPECT_CALL(*ap, ProcessStream(_, _, _, Matcher<int16_t*>(_)));

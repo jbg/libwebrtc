@@ -12,8 +12,9 @@
 
 #include "api/test/audioproc_float.h"
 #include "modules/audio_processing/include/audio_processing.h"
+#include "modules/audio_processing/test/audio_processing_builder_for_testing.h"
 
 int main(int argc, char* argv[]) {
   return webrtc::test::AudioprocFloat(
-      std::make_unique<webrtc::AudioProcessingBuilder>(), argc, argv);
+      std::make_unique<webrtc::AudioProcessingBuilderForTesting>(), argc, argv);
 }
