@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aae93fa9_b2fe9597",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 24
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-26T15:42:05Z",
+      "side": 1,
+      "message": "Ok, so I don\u0027t know yet why fuzzer bots set rtc_include_tests \u003d false.\n\nThe easiest thing to fix this is to move //modules/audio_processing:audioproc_test_utils out of the if (rtc_include_tests). Since it is a testonly target we are not going to pull it into prod code anyway.",
+      "range": {
+        "startLine": 439,
+        "startChar": 4,
+        "endLine": 439,
+        "endChar": 58
+      },
+      "revId": "50ed3524f49544083b76991d1b55c00b19f942f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
