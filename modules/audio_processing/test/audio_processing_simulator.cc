@@ -24,6 +24,7 @@
 #include "modules/audio_processing/echo_control_mobile_impl.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/audio_processing/logging/apm_data_dumper.h"
+#include "modules/audio_processing/test/audio_processing_builder_for_testing.h"
 #include "modules/audio_processing/test/fake_recording_device.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
@@ -113,10 +114,11 @@ SimulationSettings::~SimulationSettings() = default;
 
 AudioProcessingSimulator::AudioProcessingSimulator(
     const SimulationSettings& settings,
-    std::unique_ptr<AudioProcessingBuilder> ap_builder)
+    std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder)
     : settings_(settings),
-      ap_builder_(ap_builder ? std::move(ap_builder)
-                             : std::make_unique<AudioProcessingBuilder>()),
+      ap_builder_(ap_builder
+                      ? std::move(ap_builder)
+                      : std::make_unique<AudioProcessingBuilderForTesting>()),
       analog_mic_level_(settings.initial_mic_level),
       fake_recording_device_(
           settings.initial_mic_level,

@@ -66,7 +66,7 @@ bool VerifyFloatBitExactness(const webrtc::audioproc::Stream& msg,
 
 AecDumpBasedSimulator::AecDumpBasedSimulator(
     const SimulationSettings& settings,
-    std::unique_ptr<AudioProcessingBuilder> ap_builder)
+    std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder)
     : AudioProcessingSimulator(settings, std::move(ap_builder)) {
   MaybeOpenCallOrderFile();
 }

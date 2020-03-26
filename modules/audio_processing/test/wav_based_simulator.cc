@@ -56,7 +56,7 @@ WavBasedSimulator::GetCustomEventChain(const std::string& filename) {
 
 WavBasedSimulator::WavBasedSimulator(
     const SimulationSettings& settings,
-    std::unique_ptr<AudioProcessingBuilder> ap_builder)
+    std::unique_ptr<AudioProcessingBuilderForTesting> ap_builder)
     : AudioProcessingSimulator(settings, std::move(ap_builder)) {}
 
 WavBasedSimulator::~WavBasedSimulator() = default;
