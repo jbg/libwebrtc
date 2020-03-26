@@ -370,7 +370,7 @@ if (rtc_include_tests) {
     visibility = [ "*" ]
     testonly = true
     sources = [
-      "converter/yuv_to_ivf_converter.cc",
+      "converter/yuv_to_ivf_converter.cc"
     ]
     deps = [
       "../api:create_frame_generator",

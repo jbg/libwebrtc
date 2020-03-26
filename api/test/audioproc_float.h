@@ -17,6 +17,7 @@
 #include "modules/audio_processing/include/audio_processing.h"
 
 namespace webrtc {
+
 namespace test {
 
 // This is an interface for the audio processing simulation utility. This
@@ -27,12 +28,17 @@ namespace test {
 // injectable components, which will be passed on to the created AudioProcessing
 // instance. It is needed to pass the command line flags as |argc| and |argv|,
 // so these can be interpreted properly by the utility.
-// To get a fully-working audioproc_f utility, all that is needed is to write a
 // main function, create an AudioProcessingBuilder, optionally set custom
 // processing components on it, and pass the builder together with the command
 // line arguments into this function.
 // To see a list of all supported command line flags, run the executable with
 // the '--help' flag.
+
+// To get a fully-working audioproc_f utility, all that is needed is to write a
+// main function, create an AudioProcessingBuilderForTesting, optionally set
+// custom processing components on it, and pass the builder together with the
+// command line arguments into this function. To see a list of all supported
+// command line flags, run the executable with the '--help' flag.
 int AudioprocFloat(std::unique_ptr<AudioProcessingBuilder> ap_builder,
                    int argc,
                    char* argv[]);
