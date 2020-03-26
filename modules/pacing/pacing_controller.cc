@@ -285,7 +285,8 @@ void PacingController::EnqueuePacketInternal(
 
   if (mode_ == ProcessMode::kDynamic && packet_queue_.Empty() &&
       media_debt_ == DataSize::Zero()) {
-    last_process_time_ = CurrentTime();
+    TimeDelta elapsed_time = UpdateTimeAndGetElapsed(CurrentTime());
+    UpdateBudgetWithElapsedTime(elapsed_time);
   }
   packet_queue_.Push(priority, now, packet_counter_++, std::move(packet));
 }
@@ -343,13 +344,11 @@ Timestamp PacingController::NextSendTime() const {
   // In dynamic mode, figure out when the next packet should be sent,
   // given the current conditions.
 
-  if (Congested() || packet_counter_ == 0) {
-    // If congested, we only send keep-alive or audio (if audio is
-    // configured in pass-through mode).
-    if (!pace_audio_ && packet_queue_.NextPacketIsAudio()) {
-      return now;
-    }
+  if (!pace_audio_ && packet_queue_.NextPacketIsAudio()) {
+    return now;
+  }
 
+  if (Congested() || packet_counter_ == 0) {
     // We need to at least send keep-alive packets with some interval.
     return last_send_time_ + kCongestedPacketInterval;
   }
