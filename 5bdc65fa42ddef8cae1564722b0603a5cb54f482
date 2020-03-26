@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "42e10078_bdf37983",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-26T15:36:47Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "33b2ed7f_c5d78d13",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 6
+      },
+      "revId": "5bdc65fa42ddef8cae1564722b0603a5cb54f482",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6ab3c64_3f99e1cd",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-03-24T08:51:06Z",
       "side": 1,
       "message": "Nice!\n\nTo easily set this with GN see what we have done for other macros:\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/webrtc.gni?l\u003d250\u0026rcl\u003dccbe95fd8a9e12dc519904b9d16c41590c2a16b6 (define a GN arg to toggle the define).\n\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/BUILD.gn?l\u003d271-273\u0026rcl\u003dc69fd592707ad9fd982425b67308718dbe20ac2e (define the macro if the GN arg is true).\n\nNow, we have been using both macros with RTC_ and WEBRTC_ (https://cs.chromium.org/chromium/src/third_party/webrtc/BUILD.gn?rcl\u003dc69fd592707ad9fd982425b67308718dbe20ac2e\u0026l\u003d241-249) and I prefer WEBRTC_ but I don\u0027t remember the reason to use RTC_. Let\u0027s ask kwiberg@ if we have some previous context here.",
+      "range": {
+        "startLine": 22,
+        "startChar": 8,
+        "endLine": 22,
+        "endChar": 43
+      },
+      "revId": "5bdc65fa42ddef8cae1564722b0603a5cb54f482",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb02d335_40aece54",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-26T15:36:47Z",
+      "side": 1,
+      "message": "Discussed elsewhere: WEBRTC_ seems fine, at least for externally facing macros.\nThank you for bringing it up!\n\nI updated the CL to make it easy for GN, but I have a question about how to define the macro in a good way:\n- WEBRTC_ENABLE_PROTOBUF is always defined, to either 0 or 1.\n- RTC_DISABLE_TRACE_EVENTS that you link is only optionally defined, and without any specific value.\nIs there any preference here? Excluding by simply defining the macro seems the cleanest (otherwise all clients who do want transient suppression must ensure it is defined, etc), at the small risk of a client - by force of habit - defining `WEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR\u003d0` and accidentally lose the effect.",
+      "parentUuid": "b6ab3c64_3f99e1cd",
       "range": {
         "startLine": 22,
         "startChar": 8,
