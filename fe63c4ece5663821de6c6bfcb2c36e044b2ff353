@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "258a5427_10b10b53",
+        "filename": "p2p/base/connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-26T13:31:42Z",
+      "side": 1,
+      "message": "Two quibbles:\n- Methods called Reset() usually take state all the way back to newly created state.\n- This makes no sense in any state but connected.\n\nSuggest naming it ForgetLearnedState instead.",
+      "revId": "fe63c4ece5663821de6c6bfcb2c36e044b2ff353",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "954e29b0_fb62ab75",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1879,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-26T13:31:42Z",
+      "side": 1,
+      "message": "I don\u0027t like the placement of this one. It\u0027s approximately smack in the middle of the port_unittest.h file - anyone looking for something that\u0027s not a port test will be looking at the end of the file, not in the middle.\n\nIdeally, I\u0027d want to make it a separate file; the next-preferred alternative would be to put it at the bottom of the file with a TODO to separate it into its own unittest (and export shared infrastructure into the \"test\" subdirectory).",
+      "revId": "fe63c4ece5663821de6c6bfcb2c36e044b2ff353",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "837f65e2_08557947",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1896,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-26T13:31:42Z",
+      "side": 1,
+      "message": "L and R are 1) abbreviations and 2) unusual. I see that ConnectionTest() assumes that L is controller and R is controlled; can you use Master/Slave or some such terminology instead? (Controlling and Controlled are bad names because they\u0027re far too similar)",
+      "revId": "fe63c4ece5663821de6c6bfcb2c36e044b2ff353",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
