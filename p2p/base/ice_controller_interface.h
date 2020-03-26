@@ -73,9 +73,20 @@ class IceControllerInterface {
     absl::optional<IceControllerEvent> recheck_event;
   };
 
-  // A temporary typedef, so that we can migrate downstream
-  // to a new return value for SelectConnectionToPing.
-  typedef std::pair<Connection*, int> PingResult;
+  // This represents the result of a call to SelectConnectionToPing.
+  struct PingResult {
+    PingResult() {}
+    // A temporary constructor while merging.
+    // Will be removed once downstream has been updated.
+    PingResult(const std::pair<Connection*, int>& pair)  // NOLINT
+        : connection(pair.first), recheck_delay_ms(pair.second) {}
+
+    // Connection that we should (optionally) ping.
+    absl::optional<const Connection*> connection;
+
+    // When should SelectConnectionToPing() be called again.
+    int recheck_delay_ms = 0;
+  };
 
   virtual ~IceControllerInterface() = default;
 

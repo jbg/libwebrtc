@@ -110,8 +110,10 @@ IceControllerInterface::PingResult BasicIceController::SelectConnectionToPing(
   if (rtc::TimeMillis() >= last_ping_sent_ms + ping_interval) {
     conn = FindNextPingableConnection();
   }
-  return std::make_pair(const_cast<Connection*>(conn),
-                        std::min(ping_interval, check_receiving_interval()));
+  PingResult res;
+  res.connection = conn;
+  res.recheck_delay_ms = std::min(ping_interval, check_receiving_interval());
+  return res;
 }
 
 void BasicIceController::MarkConnectionPinged(const Connection* conn) {
