@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c83203d_cb7c480b",
+        "filename": "tools_webrtc/flags_compatibility.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-26T20:29:47Z",
+      "side": 1,
+      "message": "Given the current issue with absl flags I wonder if this should be:\n\n  test_command +\u003d [\u0027--isolated_script_test_perf_output\u003d\u0027,\n                     args.isolated_script_test_perf_output]",
+      "range": {
+        "startLine": 24,
+        "startChar": 20,
+        "endLine": 25,
+        "endChar": 59
+      },
+      "revId": "28b8a0b2bc87bd0d6e850ed924f9c8678728bc02",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
