@@ -149,7 +149,6 @@ struct SimulationSettings {
 // Provides common functionality for performing audioprocessing simulations.
 class AudioProcessingSimulator {
  public:
-
   AudioProcessingSimulator(const SimulationSettings& settings,
                            std::unique_ptr<AudioProcessingBuilder> ap_builder);
   virtual ~AudioProcessingSimulator();
