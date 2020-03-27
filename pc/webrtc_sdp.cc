@@ -1159,7 +1159,9 @@ bool ParseCandidate(const std::string& message,
   }
 
   // If this is a TCP candidate, it has additional extension as defined in
-  // RFC 6544.
+  // RFC 6544. Note that we allow the tcptype to be missing, for backwards
+  // compatibility; the implementation treats this as a passive candidate.
+  // TODO(bugs.webrtc.org/11466): Treat a missing tcptype as an error?
   std::string tcptype;
   if (fields.size() >= (current_position + 2) &&
       fields[current_position] == kTcpCandidateType) {
@@ -2007,7 +2009,11 @@ void BuildCandidate(const std::vector<Candidate>& candidates,
          << candidate.related_address().PortAsString() << " ";
     }
 
-    if (candidate.protocol() == cricket::TCP_PROTOCOL_NAME) {
+    // Note that we allow the tcptype to be missing, for backwards
+    // compatibility; the implementation treats this as a passive candidate.
+    // TODO(bugs.webrtc.org/11466): Treat a missing tcptype as an error?
+    if (candidate.protocol() == cricket::TCP_PROTOCOL_NAME &&
+        !candidate.tcptype().empty()) {
       os << kTcpCandidateType << " " << candidate.tcptype() << " ";
     }
 
