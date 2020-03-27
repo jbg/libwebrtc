@@ -69,6 +69,24 @@
       "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9845c652_bc1095e4",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-27T07:53:14Z",
+      "side": 1,
+      "message": "Just reading this code, this delay is puzzling, because there seems to be no enforcement of the delay. Is the caller supposed to send another ping no earlier than this, no later than this, or exactly at this time?\n\nKnowing something about context, this might be computed from the global rate limiter T0 for ICE pings - needed to keep the overall rate of pings to a reasonable limit (I think it\u0027s around 64 Kbis/second), in which case it\u0027s \"please don\u0027t call me again before at least this much time has passed, but I\u0027m not asking you to call me if you don\u0027t need to\". Value in the 5-20 ms range.\n\nAnother interpretation might be \"this is my estimate of the time at which you need to ping this connection again to make sure the NAT bindings stay alive\" - value in the 60 second range - in which case it is \"please call me again before this, or consider the connection dead\". but the API is odd for that usage, so I suspect the previous theory looks better.\n\nBut just from the comment, I can\u0027t tell which it is, and that bothers me.",
+      "parentUuid": "74bf8203_5431284d",
+      "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
