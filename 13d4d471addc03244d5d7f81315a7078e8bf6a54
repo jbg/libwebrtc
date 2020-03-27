@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4647d2f5_234cb4cc",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-27T13:04:01Z",
+      "side": 1,
+      "message": "I have just remembered we have some docs about similar macros. Can you add this to https://cs.chromium.org/chromium/src/third_party/webrtc/native-api.md?l\u003d68-108\u0026rcl\u003d0fcf4b1dbd561df64e9aa2cd3ac89dfe4a8d24a3 with some explanations?\n\n(I will add docs for other macros as well).",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 280,
+        "endChar": 53
+      },
+      "revId": "13d4d471addc03244d5d7f81315a7078e8bf6a54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71771d28_19d96024",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-27T13:04:01Z",
+      "side": 1,
+      "message": "This might happen by design if the macro is defined. Maybe we should change the message to reflect that?\n\nMaybe something like \"Transient suppressor not created (probably disabled)\"?",
+      "range": {
+        "startLine": 1648,
+        "startChar": 30,
+        "endLine": 1648,
+        "endChar": 67
+      },
+      "revId": "13d4d471addc03244d5d7f81315a7078e8bf6a54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
