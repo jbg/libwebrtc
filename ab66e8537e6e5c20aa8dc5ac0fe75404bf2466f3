@@ -87,6 +87,24 @@
       "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "343d7a09_363373c2",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-03-27T08:00:12Z",
+      "side": 1,
+      "message": "I need to do step 3 in this series too,\ni\u0027ll improve the comment on the field.",
+      "parentUuid": "9845c652_bc1095e4",
+      "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
