@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "99a3f9ef_668f532b",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-27T08:19:32Z",
+      "side": 1,
+      "message": "Then the contract is bad, because the caller is breaking it :-)\n\nWhat I\u0027d prefer here is two accessors, one returning a const pointer and the other returning a non-const pointer. That way, the codesearch tools can pinpoint exactly the places that are asking for a non-const pointer, and you can get away with casting away constness in a single place.\n\nThe constructor (the one that you want to end up with) should take a non-const pointer, because the struct isn\u0027t enforcing the contract of constness. The one that constructs the PingResult should just be forced to live with that. (But you can do that later, as part of cleaning up after the change.)",
+      "parentUuid": "51218486_7f19f918",
+      "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea7655a0_8dc82605",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 2
