@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "51218486_7f19f918",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-03-27T06:50:00Z",
+      "side": 1,
+      "message": "1) const,\nthe \"contract\" between P2PTransportChannel and IceController is that\nP2PTransportChhannel gives \"const Connection*\"-pointer for IceController to use,\nbut not mutate. Hence, the IceController returns a const pointer, that P2P will const_cast\u003c\u003e\nand do stuff on. \"By misstake\" I pushed the const_cast\u003c\u003e into BasicIceController and Nicer,\nand I thought I\u0027ll undo that misstake when I anyway change the interface.\nWDYT ?\n\n2) constructor: done",
+      "parentUuid": "cf7a47f4_0a33adc8",
+      "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea7655a0_8dc82605",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74bf8203_5431284d",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-03-27T06:50:00Z",
+      "side": 1,
+      "message": "Done.\nI skipped using any of the \"recommended, required, suggested\"\nWDYT ?",
+      "parentUuid": "ea7655a0_8dc82605",
+      "revId": "ab66e8537e6e5c20aa8dc5ac0fe75404bf2466f3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
