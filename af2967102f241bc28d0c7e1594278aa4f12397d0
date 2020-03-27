@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a483588d_db9f6046",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 5249,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-27T11:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be424cb4_8ee3c308",
+      "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ded6736_29d4a117",
         "filename": "media/engine/webrtc_video_engine_unittest.cc",
         "patchSetId": 10
@@ -103,6 +121,24 @@
       "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dc9f632_2116b54c",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 5291,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-03-27T11:22:34Z",
+      "side": 1,
+      "message": "Fixed now, this test bypasses accumulation that normally happens in stats proxy. Otherwise it gave correct value I think, but also agree that total_encoded_bytes_target should be implemented the same way as frames_encoded",
+      "parentUuid": "1ded6736_29d4a117",
+      "revId": "af2967102f241bc28d0c7e1594278aa4f12397d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
