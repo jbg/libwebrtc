@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba34e0c4_27f59cd2",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-27T16:01:18Z",
+      "side": 1,
+      "message": "Oh, thanks! Done!",
+      "parentUuid": "4647d2f5_234cb4cc",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 280,
+        "endChar": 53
+      },
+      "revId": "13d4d471addc03244d5d7f81315a7078e8bf6a54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71771d28_19d96024",
         "filename": "modules/audio_processing/audio_processing_impl.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "13d4d471addc03244d5d7f81315a7078e8bf6a54",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea272e70_1060663d",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-27T16:01:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71771d28_19d96024",
+      "range": {
+        "startLine": 1648,
+        "startChar": 30,
+        "endLine": 1648,
+        "endChar": 67
+      },
+      "revId": "13d4d471addc03244d5d7f81315a7078e8bf6a54",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
