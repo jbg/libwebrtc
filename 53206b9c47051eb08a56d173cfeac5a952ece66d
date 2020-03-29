@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0f58aba9_66b2b939",
+        "filename": "api/test/video/function_video_decoder_factory.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-29T20:18:22Z",
+      "side": 1,
+      "message": "Thanks, that\u0027s something I haven\u0027t seen before. I also updated function_video_encoder_factory.h to use the same structure.",
+      "parentUuid": "d34fca83_e483bd35",
+      "range": {
+        "startLine": 39,
+        "startChar": 16,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "53206b9c47051eb08a56d173cfeac5a952ece66d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0caf4630_fe7a4964",
         "filename": "api/test/video/function_video_decoder_factory.h",
         "patchSetId": 11
@@ -45,6 +69,30 @@
       "revId": "53206b9c47051eb08a56d173cfeac5a952ece66d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "209c82aa_293ef20b",
+        "filename": "api/test/video/function_video_decoder_factory.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7641
+      },
+      "writtenOn": "2020-03-29T20:18:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0caf4630_fe7a4964",
+      "range": {
+        "startLine": 40,
+        "startChar": 27,
+        "endLine": 40,
+        "endChar": 44
+      },
+      "revId": "53206b9c47051eb08a56d173cfeac5a952ece66d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
