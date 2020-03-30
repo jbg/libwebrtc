@@ -2487,6 +2487,8 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::
             frame_transformer) {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   parameters_.config.frame_transformer = std::move(frame_transformer);
+  if (stream_)
+    RecreateWebRtcStream();
 }
 
 void WebRtcVideoChannel::WebRtcVideoSendStream::RecreateWebRtcStream() {
@@ -2963,6 +2965,8 @@ void WebRtcVideoChannel::WebRtcVideoReceiveStream::
         rtc::scoped_refptr<webrtc::FrameTransformerInterface>
             frame_transformer) {
   config_.frame_transformer = frame_transformer;
+  if (stream_)
+    stream_->SetDepacketizerToDecoderFrameTransformer(frame_transformer);
 }
 
 WebRtcVideoChannel::VideoCodecSettings::VideoCodecSettings()
