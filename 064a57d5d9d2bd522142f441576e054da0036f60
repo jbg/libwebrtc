@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "529dbe28_f490a83c",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-30T10:41:07Z",
+      "side": 1,
+      "message": "I\u0027d add a LOG(ERROR) for the case.\n\nNote that this will still parse \"tcptype  generation\" as an error, because the next token is \"\".",
+      "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6897a0b4_562fb1c5",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2016,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-30T10:41:07Z",
+      "side": 1,
+      "message": "This changes behavior on missing tcptype from \"tcptype  \" to \"\", so we\u0027re changing existing behavior. If we want to say \"treat it as passive\", shouldn\u0027t we emit \"tcptype passive\" when serializing the candidate?",
+      "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47731399_976d3e53",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2473,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-30T10:41:07Z",
+      "side": 1,
+      "message": "can you add /* */ comments so that it\u0027s obvious which empty string is the critical one here (the one that goes into tcptype)?",
+      "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9049508a_1356a831",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2479,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-03-30T10:41:07Z",
+      "side": 1,
+      "message": "It\u0027s better to test explicitly whether \u0027tcptype passive\u0027 is found in the serialized candidate or not. Testing only the round trip runs the risk of missing symmetrical bugs.",
+      "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
