@@ -36,6 +36,7 @@
 #include "media/engine/fake_webrtc_video_engine.h"
 #include "media/engine/webrtc_media_engine.h"
 #include "media/engine/webrtc_media_engine_defaults.h"
+#include "modules/audio_processing/test/audio_processing_builder_for_testing.h"
 #include "p2p/base/fake_ice_transport.h"
 #include "p2p/base/mock_async_resolver.h"
 #include "p2p/base/p2p_constants.h"
@@ -636,6 +637,12 @@ class PeerConnectionWrapper : public webrtc::PeerConnectionObserver,
         pc_factory_dependencies.task_queue_factory.get();
     media_deps.adm = fake_audio_capture_module_;
     webrtc::SetMediaEngineDefaults(&media_deps);
+    if (!media_deps.audio_processing) {
+      // If the standard Creation method for APM returns a null pointer, instead
+      // use the builder for testing to create an APM object.
+      media_deps.audio_processing = AudioProcessingBuilderForTesting().Create();
+    }
+
     pc_factory_dependencies.media_engine =
         cricket::CreateMediaEngine(std::move(media_deps));
     pc_factory_dependencies.call_factory = webrtc::CreateCallFactory();
