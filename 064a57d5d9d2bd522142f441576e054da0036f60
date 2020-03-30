@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "92dc433b_fb1af88c",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-03-30T21:01:22Z",
+      "side": 1,
+      "message": "It will be impossible to get \"tcptype  generation\" anymore, so that\u0027s okay.",
+      "parentUuid": "529dbe28_f490a83c",
+      "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6897a0b4_562fb1c5",
         "filename": "pc/webrtc_sdp.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0145c92e_9e3df3e0",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2016,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-03-30T21:01:22Z",
+      "side": 1,
+      "message": "One could make the argument that the decision to treated as passive should be made by the ICE implementation, and this code should only concern itself with converting stuff to and from SDP.\n\nBut I\u0027ll go ahead with your suggestion.",
+      "parentUuid": "6897a0b4_562fb1c5",
+      "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "95eefd32_4e955aa2",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2473,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-03-30T21:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47731399_976d3e53",
+      "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9049508a_1356a831",
         "filename": "pc/webrtc_sdp_unittest.cc",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65b0f909_6fe773a1",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2479,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-03-30T21:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9049508a_1356a831",
+      "revId": "064a57d5d9d2bd522142f441576e054da0036f60",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
