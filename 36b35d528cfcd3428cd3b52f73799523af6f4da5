@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57947df5_8eef9f6a",
+        "filename": "modules/audio_processing/transient/transient_suppressor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-30T16:01:22Z",
+      "side": 0,
+      "message": "Is this file now empty? \n\nIn that case it should be deleted.",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "36b35d528cfcd3428cd3b52f73799523af6f4da5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

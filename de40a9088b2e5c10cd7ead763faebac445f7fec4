@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4a98c79_e900467d",
+        "filename": "BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-30T16:01:22Z",
+      "side": 1,
+      "message": "Would it be possible to define this as for the rtc_enable_protobuf, i.e. as either 0 or 1.\n\nAlso, would it make sense to enforce it to be defined, so that transient suppressor throws a build error if it is not?",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 280,
+        "endChar": 56
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcb7712d_7191ca6d",
+        "filename": "modules/audio_processing/transient/transient_suppressor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-30T16:01:22Z",
+      "side": 1,
+      "message": "What is the main purpose of making this an interface?\nIt is possible to make the transient suppression optionally excludable without that approach.\n\nMy concerns with this approach are that this adds overhead: \n-in terms of CPU since all function calls now needs a v-table lookup.\n-in terms of code complexity since\n--There is much more boilerplate code to add the interface, implement the interface, and implement the factory.\n--There are a fair amount of more files to handle this.\n\n\nSince the intention is for this to scale for more submodules, I\u0027d suggest instead:\n1. Keep the TransientDetector class as it is.\n2. Add a ApmSubmoduleCreate file where a CreateTransientDetector Method is placed.\n3. Use the build flag inside the ApmSubmoduleCreate file to optionally return a null pointer for the TransientSuppressor.\n\nThe advantages I see with the above suggestion are that\nA) When adding more build flags, all of those can be put into one single file, instead of being spread out in several different files in different places beneath the audio_processing folder.\nB) There is no need for v-table lookups.\nC) It requires less amount of code, fewer files and a minimum of changes to the submodules that are effected.\n\nWDYT?",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d06b126_decaacf3",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-30T16:01:22Z",
+      "side": 1,
+      "message": "I think this check needs to be\n#if defined(WEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR) \u0026\u0026 WEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR\u003d\u003d1\n\nA quite easy error would be to assume that this build flag is a bool but WEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR\u003d\u003d0 will deactivate the building.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0f867e0_dcc8175e",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-30T16:01:22Z",
+      "side": 1,
+      "message": "I think this should be placed together with the rest of the TransientSuppressor code.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "557f18f9_5dfa4027",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-30T16:01:22Z",
+      "side": 1,
+      "message": "I don\u0027t think this really is a factory. And I don\u0027t think that this needs to be in a separate file. It is sufficient to use a simple create method for this,\n\nI understand the idea with this approach but I think it becomes more complex than needed when making this a factory. Also, with the current approach taken an interface needs to be used (and I don\u0027t think that is necessary).",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 74
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0292fcbb_c76982f2",
+        "filename": "modules/audio_processing/transient/transient_suppressor_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-30T16:01:22Z",
+      "side": 1,
+      "message": "Is this a copy from the former transient_suppressor.cc or has something been changed?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1841b112_c18a2499",
+        "filename": "modules/audio_processing/transient/transient_suppressor_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-30T16:01:22Z",
+      "side": 1,
+      "message": "Is this a copy from the former transient_suppressor.h or has something been changed?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
