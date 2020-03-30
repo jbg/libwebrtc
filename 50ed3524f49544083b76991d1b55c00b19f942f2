@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "86495e5e_c8a2a160",
+        "filename": "modules/audio_processing/BUILD.gn",
+        "patchSetId": 24
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-30T07:46:02Z",
+      "side": 1,
+      "message": "Downstream clients that already use the builder might break from this. It may be necessary to introduce an empty stub target \"audio_processing_builder\" (like [1]), update downstream to depend on it, and then have this CL fill \":audio_processing_builder\" with content.\n\n[1] https://webrtc-review.googlesource.com/c/src/+/171102",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 0
+      },
+      "revId": "50ed3524f49544083b76991d1b55c00b19f942f2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aae93fa9_b2fe9597",
         "filename": "test/fuzzers/BUILD.gn",
         "patchSetId": 24
