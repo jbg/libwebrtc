@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "2d7d9a80_480ddbc1",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-03-31T09:40:18Z",
+      "side": 1,
+      "message": "Yes, this is another thing we need to discuss.\n\nIn general I prefer to use the \u003d1/\u003d0 pattern and rely on -Wundef (in that case you don\u0027t need to have the `defined(WEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR)` part. That said, with multiple build systems in the mix, I think #ifdef is more flexible (and never check the value of the macro) because if a default build config is WEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR\u003d0, to override we will have to undef the macro and redefine it, while if we only check if it is defined we can completely sidestep every build system with -DWEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR or -UWEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR.\n\nI think this should also be done on the APM CL.\n\n+kwiberg@ for a second opinion.",
+      "parentUuid": "7d06b126_decaacf3",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e0f867e0_dcc8175e",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 6
