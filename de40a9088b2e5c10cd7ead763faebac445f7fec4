@@ -202,6 +202,24 @@
     },
     {
       "key": {
+        "uuid": "a4c33712_ee185acb",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T14:54:39Z",
+      "side": 1,
+      "message": "OK, exposing the class makes sense then---especially since you\u0027ve made the build target suitably private.\n\n+1 for transient_suppressor_creator.h/.cc. Or _create. Adding _function makes a long name longer without making it better.",
+      "parentUuid": "bb0f6a75_b7f06cfc",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d06b126_decaacf3",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 6
