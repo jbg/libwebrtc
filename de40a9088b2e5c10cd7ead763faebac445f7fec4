@@ -184,6 +184,24 @@
     },
     {
       "key": {
+        "uuid": "bb0f6a75_b7f06cfc",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-31T14:40:03Z",
+      "side": 1,
+      "message": "\"_function\" is quite redundant and the name is already fairly long so it could make sense to avoid that.\n\nWhat about \ntransient_suppressor_creator.h\n?",
+      "parentUuid": "8c3884d6_653f45a2",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d06b126_decaacf3",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 6
