@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65fb433d_52efc9bb",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T15:25:30Z",
+      "side": 1,
+      "message": "Early return instead of indenting 50 lines?",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "098ce17d_ce54a0e2",
+        "filename": "modules/audio_processing/audio_processing_builder_impl.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T15:25:30Z",
+      "side": 1,
+      "message": "Everything in this file above this point looks trivial enough that it should be inline.",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "878ef240_c68c3f90",
+        "filename": "modules/audio_processing/audio_processing_builder_impl.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T15:25:30Z",
+      "side": 1,
+      "message": "#ifdef only the body of this function?\n\nAnd would it be possible to have it return unique_ptr? Or would that be too large a change here?",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f285209_017f1136",
+        "filename": "modules/audio_processing/test/audio_processing_builder_for_testing.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T15:25:30Z",
+      "side": 1,
+      "message": "Inline things above this point?",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bb32c1b_4fbcab70",
+        "filename": "modules/audio_processing/test/audio_processing_builder_for_testing.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T15:25:30Z",
+      "side": 1,
+      "message": "What is done differently depending on WEBRTC_EXCLUDE_AUDIO_PROCESSING_MODULE? And *why* does the test code need to behave differently depending in this flag?",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8756d584_f0a5b94b",
+        "filename": "modules/audio_processing/test/audio_processing_builder_for_testing.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T15:25:30Z",
+      "side": 1,
+      "message": "Can these return unique_ptr instead, or will that be a too large change?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
