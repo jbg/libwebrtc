@@ -131,6 +131,23 @@
     },
     {
       "key": {
+        "uuid": "9fa2a133_27d30c0e",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-31T12:41:07Z",
+      "side": 1,
+      "message": "kwiberg@: Could you please chip in on your opinion on whether this is a factory or should be called something different.",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d06b126_decaacf3",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 6
