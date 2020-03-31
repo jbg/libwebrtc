@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "edc50397_1b503894",
+        "filename": "modules/audio_processing/transient/transient_suppressor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T12:03:46Z",
+      "side": 1,
+      "message": "It\u0027s an unfortunate consequence of me and git messing up the diff.\nThe files transient_suppressor.* were renamed to transient_suppressor_impl.*, and the suppressor interface was added as transient_suppressor.h. This is a new file, or rather, it is forked from transient_suppressor.h but happens to share the name...",
+      "parentUuid": "226f6ffa_705a3f94",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dcb7712d_7191ca6d",
         "filename": "modules/audio_processing/transient/transient_suppressor.h",
         "patchSetId": 6
@@ -172,6 +190,30 @@
       "side": 1,
       "message": "If we can rely on -Wundef -Werror, doing just\n\n  #if FOO \u003d\u003d 1\n\nis probably best, since it forces the caller to define FOO to *something* or else get an error.\n\nIf we can\u0027t rely on that,\n\n  #ifdef FOO\n\nis probably best, since that will make it impossible for the user to confuse themself by setting FOO but to the wrong value.",
       "parentUuid": "2d7d9a80_480ddbc1",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd522740_0a445d1a",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T12:03:46Z",
+      "side": 1,
+      "message": "Could one argue that\n\n  #ifdef FOO\n\nis equally open for the user to confuse, by setting FOO \u003d 0 and expecting this to disable the macro?\n\nAdditionally, would we avoid relying on -Wundef -Werror, if we explicitly add a check ourselves, like here?\nhttps://cs.chromium.org/chromium/src/third_party/webrtc/modules/audio_processing/logging/apm_data_dumper.h?l\u003d31-35\u0026rcl\u003dfa068336f9e04dacb80eee6f19a77e60a5f32398",
+      "parentUuid": "bc041f07_e7c92d24",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -329,6 +371,30 @@
       "writtenOn": "2020-03-30T16:01:22Z",
       "side": 1,
       "message": "Is this a copy from the former transient_suppressor.h or has something been changed?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec577bda_8a689db6",
+        "filename": "modules/audio_processing/transient/transient_suppressor_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T12:03:46Z",
+      "side": 1,
+      "message": "A copy, with minimal changes (to implement TransientSuppressor). I / Git / diff messed up the diff.",
+      "parentUuid": "1841b112_c18a2499",
       "range": {
         "startLine": 26,
         "startChar": 0,
