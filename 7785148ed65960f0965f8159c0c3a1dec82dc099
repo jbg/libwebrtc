@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9bfbdef0_eab08ab8",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "\u003d false when landing this CL. \u003d true in a separate CL.",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14714926_423e9f3a",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "FYI the whitelist in the chromium repo need to be updated to allow this CL to be imported into chromium without breakage:\nhttps://source.chromium.org/chromium/chromium/src/+/master:chrome/test/data/webrtc/peerconnection_getstats.js?q\u003dpeerconnection_getstats.js\u0026originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e6c0454_49b0b974",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2468,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "Can you file an issue and reference it in a TODO? You don\u0027t have to fix it I just want it documented in the issue tracker.",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7c941d2_b6af48cb",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2469,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "In SendStatisticsProxy::OnSendEncodedImage you are able to do per-layer encode frame rate, and it\u0027s the same method that does ++huge_frames_sent... shouldn\u0027t this be available per-layer then?",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c970a4ed_c050d346",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2488,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "nit: Use \"const auto\u0026\" instead. Also call it \"pair\" or \"ssrc_and_stream_stats\" or something that doesn\u0027t sound like its the substream stats (the \".second\").",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3df85488_64f9157f",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2493,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "nit:\n\nThe RtpConfig (parametes_.config.rtp) now has helper methods like GetRtxSsrcAssociatedWithMediaSsrc:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/call/rtp_config.cc;l\u003d158?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F\n\nLooks like basically the same logic of as for rtx - assuming the index of ssrcs[i] maps to rids[i]. Should there be a RtpConfig::GetRidForSsrc() helper for this?\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/call/rtp_config.h;l\u003d83?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "779d73b6_89c20b41",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "Is there a difference between framerate_sent \u003d stats.encode_frame_rate (before this CL) and SUM(infos[i].framerate_sent) / infos.size() (after this CL)?\n\nDoes reporting the old value for the sake of not regressing make sense?\nOr does reporting the max of all framerate_sent values make sense?",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac8ec3e3_5787f69c",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 5251,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "I would rather remove the test than have DisableVideoSendStreamCreation() because I believe it triggers things happening that should never happen. The risk then is that code is updated in the future and some assumption this test is making no longer holds and it crashes because stream_ is null, even though it shouldn\u0027t have been in this case.\n\nIf I\u0027m reading the code correctly, the only way to have the stream_ be null in a real call is if we never configure the send stream... so maybe it can be triggered by invalid SDP?\n\nBut feel free to just remove it if you don\u0027t know how to trigger it with a valid use case.",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5d3df3d_f41f0cc0",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "If width and height are 0 we should leave the outbound_video.frame_* metrics undefined because they are only 0 if we haven\u0027t encoded anything yet, so there is no encoded resolution",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f574517c_849870e3",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "Likewise, what if framerate_sent is 0?",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "602053e8_18016072",
+        "filename": "pc/stats_collector_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "Whether to look at aggregated_senders or senders depends on if simulcast stats flag is enabled or not.\n\nWe should have test coverage for both.\n\nCan you turn the TEST_Fs into TEST_Ps? That way the tests run in both modes, and you can update the correct senders list depending on the test setup.",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a47ea78_772e85f8",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "Can you add a unittest?",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e610e86_5f611c98",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "Not asking you to change anything in this CL but I\u0027m wondering: If this is method saves both aggregate values and the substream values, might we in a future clean up get rid of having the value in two places? I mean, we are already aggregating infos in WebRtcVideoEngine, so why report two different qp_sum values and then have two code paths in WebRtcVideoEngine depending on number of substreams? It seems it would make more sense to always report a single substream.",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "852e2d6c_fd5dd0d8",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-03-31T11:56:04Z",
+      "side": 1,
+      "message": "If encoded_frame_rate_tracker was just able to do per-layer encode framerate and this is the same method... is huge frames available per-layer? WebRtcVideoEngine code says otherwise",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
