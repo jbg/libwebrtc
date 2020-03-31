@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "8c3884d6_653f45a2",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T14:17:43Z",
+      "side": 1,
+      "message": "I reasoned that TransientSuppressor::Create() is a factory method ( / member function), and taking it out of the class namespace doesn\u0027t change its job in any way.\n\nI am trying not to change the transient suppressor implementation itself.\nTransientSuppressorImplTest is a friend of TransientSuppressorImpl, some testing is based on accessing those methods. In order to move TransientSuppressorImpl to the .cc file, either the transient suppressor itself would need to be refactored to extract the functionality as a testable subcomponent, or the functions under test would need to be lifted to TransientSuppressor::FooForTesting().\n\nI have renamed it to `transient_suppressor_create_function.h`. PTAL",
+      "parentUuid": "3cb97f4a_03627676",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d06b126_decaacf3",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 6
@@ -261,6 +279,30 @@
     },
     {
       "key": {
+        "uuid": "903c2b47_d1cf9b6c",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T14:17:43Z",
+      "side": 1,
+      "message": "I will use #ifdef, to minimize burden on users.",
+      "parentUuid": "dd522740_0a445d1a",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0f867e0_dcc8175e",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 6
@@ -305,6 +347,30 @@
       "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2e71590_a8b07a65",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T14:17:43Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "c9a282ed_5aa6b2da",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -355,6 +421,30 @@
     },
     {
       "key": {
+        "uuid": "0373a49b_a9bce66c",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T14:17:43Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "4ab6cf36_2cfcb78e",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 74
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0292fcbb_c76982f2",
         "filename": "modules/audio_processing/transient/transient_suppressor_impl.cc",
         "patchSetId": 6
@@ -375,6 +465,30 @@
       "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "608f8681_a2efafc6",
+        "filename": "modules/audio_processing/transient/transient_suppressor_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T14:17:43Z",
+      "side": 1,
+      "message": "Copy. I don\u0027t know how to make Gerrit reflect this, short of compromising on file naming for the benefit of git history.",
+      "parentUuid": "0292fcbb_c76982f2",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -442,6 +556,30 @@
     },
     {
       "key": {
+        "uuid": "f650e48b_e364ae14",
+        "filename": "modules/audio_processing/transient/transient_suppressor_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T14:17:43Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "ec577bda_8a689db6",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "959c8de7_2f722403",
         "filename": "native-api.md",
         "patchSetId": 6
@@ -462,6 +600,30 @@
       "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6915c161_1240389e",
+        "filename": "native-api.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-03-31T14:17:43Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "959c8de7_2f722403",
+      "range": {
+        "startLine": 112,
+        "startChar": 53,
+        "endLine": 112,
+        "endChar": 54
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
