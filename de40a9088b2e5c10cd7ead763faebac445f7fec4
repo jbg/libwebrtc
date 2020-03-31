@@ -148,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "3cb97f4a_03627676",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T13:20:22Z",
+      "side": 1,
+      "message": "In my experience, a FooFactory is an object that can create objects of type Foo. What we have here is just a create function, not an object.\n\nIf \"transient_suppressor.h/.cc\" are free, I would choose that name for this file. If that name is already taken (e.g. by the interface definition), I would choose \"transient_suppressor_impl.h/.cc\". (In this CL, that name is also taken, by the declaration + definition of TransientSuppressorImpl. I would move all of that to transient_suppressor_impl.cc, and expose just the create function in transient_suppressor_impl.h.)",
+      "parentUuid": "9fa2a133_27d30c0e",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d06b126_decaacf3",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 6
