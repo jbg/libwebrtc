@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "a760655b_a16c6123",
+        "filename": "modules/audio_processing/transient/transient_suppressor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-31T09:33:51Z",
+      "side": 1,
+      "message": "From the offline discussion I\u0027m now convinced that the approach taken in the CL using an interface is the correct one.\nSo the comment above can be disregarded.",
+      "parentUuid": "dcb7712d_7191ca6d",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d06b126_decaacf3",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
         "patchSetId": 6
@@ -94,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "c9a282ed_5aa6b2da",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-31T09:33:51Z",
+      "side": 1,
+      "message": "From the offline discussion I\u0027m now convinced that the approach taken in the CL regarding the placement of this is the correct one.\nSo the comment above can be disregarded.",
+      "parentUuid": "e0f867e0_dcc8175e",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "557f18f9_5dfa4027",
         "filename": "modules/audio_processing/transient/transient_suppressor_factory.h",
         "patchSetId": 6
@@ -105,6 +153,30 @@
       "writtenOn": "2020-03-30T16:01:22Z",
       "side": 1,
       "message": "I don\u0027t think this really is a factory. And I don\u0027t think that this needs to be in a separate file. It is sufficient to use a simple create method for this,\n\nI understand the idea with this approach but I think it becomes more complex than needed when making this a factory. Also, with the current approach taken an interface needs to be used (and I don\u0027t think that is necessary).",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 74
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ab6cf36_2cfcb78e",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-03-31T09:33:51Z",
+      "side": 1,
+      "message": "From the offline discussion I\u0027m now convinced that using a factory for this is a fully valid approach.\nSo the comment above can be disregarded.",
+      "parentUuid": "557f18f9_5dfa4027",
       "range": {
         "startLine": 11,
         "startChar": 0,
