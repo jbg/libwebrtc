@@ -46,6 +46,30 @@
       "revId": "465988638c2c70efc3cbbd7a09884e901765fc03",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e41bd7c_5a8ae9af",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2491,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-03-31T13:04:41Z",
+      "side": 1,
+      "message": "Yes, this should be fine. We won\u0027t lose RTP state by doing this (that is cached), but there will be a short hiccup when the encoder threads restart.",
+      "parentUuid": "5f309a99_5ec7122b",
+      "range": {
+        "startLine": 2491,
+        "startChar": 4,
+        "endLine": 2491,
+        "endChar": 24
+      },
+      "revId": "465988638c2c70efc3cbbd7a09884e901765fc03",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
