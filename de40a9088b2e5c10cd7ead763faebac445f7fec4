@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "56ba84d0_2bb47697",
+        "filename": "BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T09:59:37Z",
+      "side": 1,
+      "message": "\u003e Also, would it make sense to enforce it to be defined, so that transient suppressor throws a build error if it is not?\n\nIf we can rely on -Wundef -Werror being used, then yes. See https://webrtc.googlesource.com/src/+/master/style-guide.md#conditional-compilation-with-the-c-preprocessor\n\nIf we can not rely on -Wundef -Werror being used, then the current way is likely safer.",
+      "parentUuid": "c4a98c79_e900467d",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 280,
+        "endChar": 56
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "226f6ffa_705a3f94",
+        "filename": "modules/audio_processing/transient/transient_suppressor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T09:59:37Z",
+      "side": 1,
+      "message": "IIRC we don\u0027t usually update these.",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dcb7712d_7191ca6d",
         "filename": "modules/audio_processing/transient/transient_suppressor.h",
         "patchSetId": 6
@@ -107,6 +148,30 @@
       "side": 1,
       "message": "Yes, this is another thing we need to discuss.\n\nIn general I prefer to use the \u003d1/\u003d0 pattern and rely on -Wundef (in that case you don\u0027t need to have the `defined(WEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR)` part. That said, with multiple build systems in the mix, I think #ifdef is more flexible (and never check the value of the macro) because if a default build config is WEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR\u003d0, to override we will have to undef the macro and redefine it, while if we only check if it is defined we can completely sidestep every build system with -DWEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR or -UWEBRTC_EXCLUDE_TRANSIENT_SUPPRESSOR.\n\nI think this should also be done on the APM CL.\n\n+kwiberg@ for a second opinion.",
       "parentUuid": "7d06b126_decaacf3",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc041f07_e7c92d24",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T09:59:37Z",
+      "side": 1,
+      "message": "If we can rely on -Wundef -Werror, doing just\n\n  #if FOO \u003d\u003d 1\n\nis probably best, since it forces the caller to define FOO to *something* or else get an error.\n\nIf we can\u0027t rely on that,\n\n  #ifdef FOO\n\nis probably best, since that will make it impossible for the user to confuse themself by setting FOO but to the wrong value.",
+      "parentUuid": "2d7d9a80_480ddbc1",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -236,6 +301,23 @@
     },
     {
       "key": {
+        "uuid": "39ae77cc_5224f7aa",
+        "filename": "modules/audio_processing/transient/transient_suppressor_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T09:59:37Z",
+      "side": 1,
+      "message": "Consider moving this class to the .cc file and just exposing a create function in the .h file.",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1841b112_c18a2499",
         "filename": "modules/audio_processing/transient/transient_suppressor_impl.h",
         "patchSetId": 6
@@ -256,6 +338,46 @@
       "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "959c8de7_2f722403",
+        "filename": "native-api.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T09:59:37Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 112,
+        "startChar": 53,
+        "endLine": 112,
+        "endChar": 54
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dc44709_d8173fe4",
+        "filename": "native-api.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-03-31T09:59:37Z",
+      "side": 1,
+      "message": "This SGTM, and it\u0027s the same as we do in other cases.",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
