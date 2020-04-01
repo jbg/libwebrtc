@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ec1ee34_31d826ff",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1649,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T13:18:05Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an error? If the transient suppressor has explicitly been disabled in the build, the corresponding setting should be de-activated?\n\nOr will that cause issues?",
+      "range": {
+        "startLine": 1648,
+        "startChar": 5,
+        "endLine": 1649,
+        "endChar": 67
+      },
+      "revId": "870af9d02d95904475877ab316a5c5b20269fa3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
