@@ -89,7 +89,6 @@ class UnitBase {
     return Unit_T(value_ / resolution.value_) * resolution.value_;
   }
 
- protected:
   template <
       typename T,
       typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
