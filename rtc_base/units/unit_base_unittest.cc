@@ -38,7 +38,6 @@ class TestUnit final : public rtc_units_impl::RelativeUnit<TestUnit> {
     return UnitBase::ToMultiple<1000, T>();
   }
 
- private:
   friend class UnitBase<TestUnit>;
   static constexpr bool one_sided = false;
   using RelativeUnit<TestUnit>::RelativeUnit;
@@ -48,6 +47,7 @@ constexpr TestUnit TestUnitAddKilo(TestUnit value, int add_kilo) {
   return value;
 }
 }  // namespace
+
 namespace test {
 TEST(UnitBaseTest, ConstExpr) {
   constexpr int64_t kValue = -12345;
