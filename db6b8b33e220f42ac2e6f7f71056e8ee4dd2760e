@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec695c95_fc24d1f9",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2470,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-04-01T09:08:09Z",
+      "side": 1,
+      "message": "kSdpTcpPassiveCandidate has \"tcptype passive\". Is the line missing where you take the tcptype out?",
+      "revId": "db6b8b33e220f42ac2e6f7f71056e8ee4dd2760e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
