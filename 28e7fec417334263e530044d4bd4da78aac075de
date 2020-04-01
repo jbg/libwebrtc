@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "75332605_ad3ed1a1",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Yes, but I definitely see that the naming could be improved there.\nI changed the naming so that this is less unclear.\nPTAL",
+      "parentUuid": "c6fcf96e_af6dc77d",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 5
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "75b8360f_bd7861a8",
         "filename": "modules/audio_processing/aec3/aec_state.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "28e7fec417334263e530044d4bd4da78aac075de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd43ac13_9ae35930",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75b8360f_bd7861a8",
+      "range": {
+        "startLine": 175,
+        "startChar": 6,
+        "endLine": 177,
+        "endChar": 37
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "63fa32e8_646edbcf",
+        "filename": "modules/audio_processing/aec3/aec_state.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f8414f1_4ab78f01",
+      "range": {
+        "startLine": 111,
+        "startChar": 11,
+        "endLine": 111,
+        "endChar": 41
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05198b18_f8f24ec6",
         "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "28e7fec417334263e530044d4bd4da78aac075de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcc7ea2c_57e1ff7e",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05198b18_f8f24ec6",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "bb1ea38a_f1a6ad57",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65e8b8d6_8746d6b1",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 0
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "160879f3_a16d7cc3",
         "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "28e7fec417334263e530044d4bd4da78aac075de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "783d9b78_5a8f3925",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "160879f3_a16d7cc3",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "c8c06c2d_b5d8fc8d",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51a63951_ec99a886",
+      "range": {
+        "startLine": 173,
+        "startChar": 45,
+        "endLine": 173,
+        "endChar": 53
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ac9d213_6e235166",
         "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
         "patchSetId": 2
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "8dda159d_588e569e",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ac9d213_6e235166",
+      "range": {
+        "startLine": 183,
+        "startChar": 44,
+        "endLine": 183,
+        "endChar": 52
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1094f750_fce01869",
         "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
         "patchSetId": 2
@@ -197,6 +389,30 @@
       "writtenOn": "2020-04-01T13:40:45Z",
       "side": 1,
       "message": "nit: All of these are referring to gain _amplitudes_ and not gains. It had me confused for a while. WDYT about being explicit about amplitudes vs energies?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 1
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdc35b33_2ab9a299",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "It would definitely make sense. I would like to delay that though, since the ambiguity is already built-in into the rest of the AEC code (not only in this file) as well as the config struct.\n\nI would claim that it is a valid gain, but I definitely think it would make sense to use amplitude_gain and power_gain to make it more clear.",
+      "parentUuid": "1094f750_fce01869",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "5fc9c8f2_ae218ff4",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21c51d1a_ce5ff9bc",
+      "range": {
+        "startLine": 251,
+        "startChar": 60,
+        "endLine": 251,
+        "endChar": 64
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c330b3f_a945d55b",
         "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
         "patchSetId": 2
@@ -243,6 +483,30 @@
       "writtenOn": "2020-04-01T13:40:45Z",
       "side": 1,
       "message": "nit: Swap to be consistent, see comments above:\n\nif (flag_enabled_ \u0026\u0026 condition_for_feature) { .. }",
+      "range": {
+        "startLine": 279,
+        "startChar": 8,
+        "endLine": 279,
+        "endChar": 71
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "871954f6_1cf46e41",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "I made the change.\nHowever, this is actually slightly slower than the other way around.\nFor an if -statement with an \u0026\u0026 clause, where the one of the variables is normally expected to be true, it is always faster to put it last.",
+      "parentUuid": "5c330b3f_a945d55b",
       "range": {
         "startLine": 279,
         "startChar": 8,
@@ -275,6 +539,30 @@
       "revId": "28e7fec417334263e530044d4bd4da78aac075de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbcee16b_b130e19a",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-01T14:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a15e01b2_236f542d",
+      "range": {
+        "startLine": 376,
+        "startChar": 60,
+        "endLine": 376,
+        "endChar": 65
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
