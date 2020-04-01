@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6fcf96e_af6dc77d",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:17:34Z",
+      "side": 1,
+      "message": "Double-checking:\n\nIf |initial_state_reset_at_echo_path_change_| is true, I would expect initial_state_ to be reset on echo path changes.\nHowever, this is not true if |full_reset_at_echo_path_change_| is false: Then, initial_state_ will not be reset on echo path changes.\n\nIs this the intended behavior?",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 5
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75b8360f_bd7861a8",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:17:34Z",
+      "side": 1,
+      "message": "nit: I think we usually formulate conditions like this:\n\nif (feature_enabled \u0026\u0026 condition_used_in_feature) { .. }\n\nSee for example the transparent mode check that is added by this CL.\nTo be consistent, I suggest swapping these to:\n\n  if (full_reset_at_echo_path_change_ \u0026\u0026\n          echo_path_variability.delay_change !\u003d\n          EchoPathVariability::DelayAdjustment::kNone) {",
+      "range": {
+        "startLine": 175,
+        "startChar": 6,
+        "endLine": 177,
+        "endChar": 37
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f8414f1_4ab78f01",
+        "filename": "modules/audio_processing/aec3/aec_state.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:17:34Z",
+      "side": 1,
+      "message": "This is a double negation. How about having a transparent_mode_enabled_ flag (default: true) instead?",
+      "range": {
+        "startLine": 111,
+        "startChar": 11,
+        "endLine": 111,
+        "endChar": 41
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05198b18_f8f24ec6",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:17:34Z",
+      "side": 1,
+      "message": "Field trials support passing a specific value, see for example [1] and [2].\nThis code should probably do the same.\n\n\"rtc_base/experiments/field_trial_parser.h\" has utilities for it.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/pacing/pacing_controller.cc;l\u003d131;drc\u003d22387b44ff173d263b434889d394cea90368ab06;bpv\u003d1;bpt\u003d1?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F\n[2] https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_coding/neteq/decision_logic.cc;l\u003d52;drc\u003d22387b44ff173d263b434889d394cea90368ab06;bpv\u003d1;bpt\u003d1?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65e8b8d6_8746d6b1",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:17:34Z",
+      "side": 1,
+      "message": "See comment above.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 0
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "160879f3_a16d7cc3",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:17:34Z",
+      "side": 1,
+      "message": "Similar question for these (and below), but not as clear-cut answer: Does it make sense to parse the values directly from the field trial, instead of having multiple field trials with set values?",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51a63951_ec99a886",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:17:34Z",
+      "side": 1,
+      "message": "nit: \"Nearendl\"",
+      "range": {
+        "startLine": 173,
+        "startChar": 45,
+        "endLine": 173,
+        "endChar": 53
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ac9d213_6e235166",
+        "filename": "modules/audio_processing/aec3/echo_canceller3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:17:34Z",
+      "side": 1,
+      "message": "nit: \"Nearendl\"",
+      "range": {
+        "startLine": 183,
+        "startChar": 44,
+        "endLine": 183,
+        "endChar": 52
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
