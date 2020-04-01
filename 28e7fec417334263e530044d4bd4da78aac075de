@@ -183,6 +183,98 @@
       "revId": "28e7fec417334263e530044d4bd4da78aac075de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1094f750_fce01869",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:40:45Z",
+      "side": 1,
+      "message": "nit: All of these are referring to gain _amplitudes_ and not gains. It had me confused for a while. WDYT about being explicit about amplitudes vs energies?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 1
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21c51d1a_ce5ff9bc",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:40:45Z",
+      "side": 1,
+      "message": "/*gain_for_early_reflections\u003d*/true",
+      "range": {
+        "startLine": 251,
+        "startChar": 60,
+        "endLine": 251,
+        "endChar": 64
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c330b3f_a945d55b",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:40:45Z",
+      "side": 1,
+      "message": "nit: Swap to be consistent, see comments above:\n\nif (flag_enabled_ \u0026\u0026 condition_for_feature) { .. }",
+      "range": {
+        "startLine": 279,
+        "startChar": 8,
+        "endLine": 279,
+        "endChar": 71
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a15e01b2_236f542d",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T13:40:45Z",
+      "side": 1,
+      "message": "/*gain_for_early_reflections\u003d*/false",
+      "range": {
+        "startLine": 376,
+        "startChar": 60,
+        "endLine": 376,
+        "endChar": 65
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
