@@ -22,6 +22,30 @@
       "revId": "36b35d528cfcd3428cd3b52f73799523af6f4da5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b3d893f_5ed3892b",
+        "filename": "modules/audio_processing/transient/transient_suppressor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T11:33:00Z",
+      "side": 0,
+      "message": "It now contains the interface.",
+      "parentUuid": "57947df5_8eef9f6a",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "36b35d528cfcd3428cd3b52f73799523af6f4da5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

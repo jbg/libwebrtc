@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "472e951f_fe5623e6",
+        "filename": "BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T11:33:00Z",
+      "side": 1,
+      "message": "(Discussed in another comment.)",
+      "parentUuid": "56ba84d0_2bb47697",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 280,
+        "endChar": 56
+      },
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "226f6ffa_705a3f94",
         "filename": "modules/audio_processing/transient/transient_suppressor.h",
         "patchSetId": 6
@@ -81,6 +105,24 @@
       "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dac8782_61c55391",
+        "filename": "modules/audio_processing/transient/transient_suppressor.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T11:33:00Z",
+      "side": 1,
+      "message": "I will leave this as-is. I can\u0027t find an approach that updates the files correctly, short of making a brand new CL.",
+      "parentUuid": "edc50397_1b503894",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -217,6 +259,24 @@
       "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b6d826e_fa99abb6",
+        "filename": "modules/audio_processing/transient/transient_suppressor_factory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T11:33:00Z",
+      "side": 1,
+      "message": "Changed to \"transient_suppressor_creator.\"",
+      "parentUuid": "a4c33712_ee185acb",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -542,6 +602,24 @@
       "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e3471b5_b66849d2",
+        "filename": "modules/audio_processing/transient/transient_suppressor_impl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T11:33:00Z",
+      "side": 1,
+      "message": "(Discussed in another comment: leaving it as is due to the befriended unit test.)",
+      "parentUuid": "39ae77cc_5224f7aa",
+      "revId": "de40a9088b2e5c10cd7ead763faebac445f7fec4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
