@@ -16,6 +16,24 @@
       "revId": "7a8cbcb2df980a37002aa7efc93140865edfbb34",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd233719_132e1ce8",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 5868,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-04-01T16:10:37Z",
+      "side": 1,
+      "message": "No, that case is already handled correctly here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/media/engine/webrtc_video_engine.cc;l\u003d1386;drc\u003d22387b44ff173d263b434889d394cea90368ab06?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F\n\nThe problem is when we have a lingering default stream with an \"old\" SSRC laying around. In this case, the old SSRC is |kIncomingUnsignalledSsrc|, and the \"real\" SSRC is |kIncomingSignalledSsrc|, which should be !\u003d |kIncomingUnsignalledSsrc|.",
+      "parentUuid": "55680de2_3bcb5e22",
+      "revId": "7a8cbcb2df980a37002aa7efc93140865edfbb34",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
