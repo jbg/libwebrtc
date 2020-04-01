@@ -13,7 +13,7 @@
 #include "test/gtest.h"
 
 namespace webrtc {
-namespace {
+//namespace {
 class TestUnit final : public rtc_units_impl::RelativeUnit<TestUnit> {
  public:
   TestUnit() = delete;
@@ -47,7 +47,8 @@ constexpr TestUnit TestUnitAddKilo(TestUnit value, int add_kilo) {
   value += TestUnit::FromKilo(add_kilo);
   return value;
 }
-}  // namespace
+//}  // namespace
+
 namespace test {
 TEST(UnitBaseTest, ConstExpr) {
   constexpr int64_t kValue = -12345;
