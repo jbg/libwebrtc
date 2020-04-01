@@ -22,6 +22,30 @@
       "revId": "870af9d02d95904475877ab316a5c5b20269fa3a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7209e158_ca87256f",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1649,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T16:10:02Z",
+      "side": 1,
+      "message": "Good question. It seems safer to fail graciously and log an error.\n\nIf there was a DCHECK instead, it would signal that \"this is a programming error and should not happen\", and it would not be as clear (to us, the maintainers changing this code) that APM is expected to handle a nullptr transient suppressor.\n\nThis approach of not dchecking also makes it possible (on other build systems) to write a test that APM does not crash if transient suppression is disabled from the build but still accidentally enabled from the config.",
+      "parentUuid": "9ec1ee34_31d826ff",
+      "range": {
+        "startLine": 1648,
+        "startChar": 5,
+        "endLine": 1649,
+        "endChar": 67
+      },
+      "revId": "870af9d02d95904475877ab316a5c5b20269fa3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
