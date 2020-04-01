@@ -425,6 +425,30 @@
     },
     {
       "key": {
+        "uuid": "b8510f6a_af422ac2",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T15:35:09Z",
+      "side": 1,
+      "message": "Ok!",
+      "parentUuid": "fdc35b33_2ab9a299",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 1
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21c51d1a_ce5ff9bc",
         "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
         "patchSetId": 2
@@ -507,6 +531,30 @@
       "side": 1,
       "message": "I made the change.\nHowever, this is actually slightly slower than the other way around.\nFor an if -statement with an \u0026\u0026 clause, where the one of the variables is normally expected to be true, it is always faster to put it last.",
       "parentUuid": "5c330b3f_a945d55b",
+      "range": {
+        "startLine": 279,
+        "startChar": 8,
+        "endLine": 279,
+        "endChar": 71
+      },
+      "revId": "28e7fec417334263e530044d4bd4da78aac075de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dd89995_24a521a3",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-01T15:35:09Z",
+      "side": 1,
+      "message": "Good point! If you think it has a non-negligible performance impact, I\u0027m fine with either version.",
+      "parentUuid": "871954f6_1cf46e41",
       "range": {
         "startLine": 279,
         "startChar": 8,
