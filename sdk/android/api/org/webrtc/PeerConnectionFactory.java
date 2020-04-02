@@ -15,7 +15,6 @@ import android.os.Process;
 import android.support.annotation.Nullable;
 import java.util.List;
 import org.webrtc.Logging.Severity;
-import org.webrtc.PeerConnection;
 import org.webrtc.audio.AudioDeviceModule;
 import org.webrtc.audio.JavaAudioDeviceModule;
 
@@ -501,8 +500,6 @@ public class PeerConnectionFactory {
     networkThread = null;
     workerThread = null;
     signalingThread = null;
-    MediaCodecVideoEncoder.disposeEglContext();
-    MediaCodecVideoDecoder.disposeEglContext();
     nativeFactory = 0;
   }
 
