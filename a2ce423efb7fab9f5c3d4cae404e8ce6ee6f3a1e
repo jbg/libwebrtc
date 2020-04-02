@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "914469d1_b4960f12",
+        "filename": "rtc_base/units/unit_base.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-04-02T07:35:19Z",
+      "side": 0,
+      "message": "Is it necessary to remove this one now that the friend declaration is fixed?",
+      "revId": "a2ce423efb7fab9f5c3d4cae404e8ce6ee6f3a1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

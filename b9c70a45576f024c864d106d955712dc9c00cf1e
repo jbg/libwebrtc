@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "037a0c30_d9583152",
+        "filename": "rtc_base/units/unit_base_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-04-02T07:35:19Z",
+      "side": 1,
+      "message": "Makes sense---this is the actual name of the class. Previously, this must have been a forward declaration of a new class...",
+      "revId": "b9c70a45576f024c864d106d955712dc9c00cf1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
