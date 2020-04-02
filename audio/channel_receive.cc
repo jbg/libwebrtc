@@ -317,7 +317,7 @@ void ChannelReceive::InitFrameTransformerDelegate(
   ChannelReceiveFrameTransformerDelegate::ReceiveFrameCallback
       receive_audio_callback = [this](rtc::ArrayView<const uint8_t> packet,
                                       const RTPHeader& header) {
-        ReceivePacket(packet.data(), packet.size(), header);
+        OnReceivedPayloadData(packet, header);
       };
   frame_transformer_delegate_ =
       new rtc::RefCountedObject<ChannelReceiveFrameTransformerDelegate>(
@@ -595,13 +595,7 @@ void ChannelReceive::OnRtpPacket(const RtpPacketReceived& packet) {
           rtc::saturated_cast<uint32_t>(packet_copy.payload_type_frequency()),
           header.extension.absolute_capture_time);
 
-  if (frame_transformer_delegate_) {
-    // Asynchronously transform the received payload. After the payload is
-    // transformed, the delegate will call ReceivePacket to handle it.
-    frame_transformer_delegate_->Transform(packet_copy, header, remote_ssrc_);
-  } else {
-    ReceivePacket(packet_copy.data(), packet_copy.size(), header);
-  }
+  ReceivePacket(packet_copy.data(), packet_copy.size(), header);
 }
 
 void ChannelReceive::ReceivePacket(const uint8_t* packet,
@@ -645,8 +639,14 @@ void ChannelReceive::ReceivePacket(const uint8_t* packet,
     payload_data_length = 0;
   }
 
-  OnReceivedPayloadData(
-      rtc::ArrayView<const uint8_t>(payload, payload_data_length), header);
+  rtc::ArrayView<const uint8_t> payload_data(payload, payload_data_length);
+  if (frame_transformer_delegate_) {
+    // Asynchronously transform the received payload. After the payload is
+    // transformed, the delegate will call ReceivePacket to handle it.
+    frame_transformer_delegate_->Transform(payload_data, header, remote_ssrc_);
+  } else {
+    OnReceivedPayloadData(payload_data, header);
+  }
 }
 
 // May be called on either worker thread or network thread.
