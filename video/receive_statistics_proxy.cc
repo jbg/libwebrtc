@@ -135,9 +135,15 @@ void ReceiveStatisticsProxy::UpdateHistograms(
 
   rtc::CritScope lock(&crit_);
 
+  // TODO(tommi): Many of these variables don't need to be inside the scope
+  // of a lock. Also consider grabbing the lock only to copy the state that
+  // histograms need to be reported for, then report histograms while not
+  // holding the lock.
   char log_stream_buf[8 * 1024];
   rtc::SimpleStringBuilder log_stream(log_stream_buf);
+
   int stream_duration_sec = (clock_->TimeInMilliseconds() - start_ms_) / 1000;
+
   if (stats_.frame_counts.key_frames > 0 ||
       stats_.frame_counts.delta_frames > 0) {
     RTC_HISTOGRAM_COUNTS_100000("WebRTC.Video.ReceiveStreamLifetimeInSeconds",
@@ -560,6 +566,7 @@ void ReceiveStatisticsProxy::UpdateDecodeTimeHistograms(
     int width,
     int height,
     int decode_time_ms) const {
+  // TODO(tommi): What thread? (Called from OnDecodedFrame)
   bool is_4k = (width == 3840 || width == 4096) && height == 2160;
   bool is_hd = width == 1920 && height == 1080;
   // Only update histograms for 4k/HD and VP9/H264.
@@ -623,6 +630,9 @@ ReceiveStatisticsProxy::GetCurrentEstimatedPlayoutNtpTimestampMs(
 }
 
 VideoReceiveStream::Stats ReceiveStatisticsProxy::GetStats() const {
+  // TODO(tommi): What thread? (same as VideoReceiveStream::GetStats)
+  // Looks to be the worker thread, from StatsCollector::ExtractMediaInfo.
+
   rtc::CritScope lock(&crit_);
   // Get current frame rates here, as only updating them on new frames prevents
   // us from ever correctly displaying frame rate of 0.
@@ -660,6 +670,7 @@ void ReceiveStatisticsProxy::OnIncomingPayloadType(int payload_type) {
 
 void ReceiveStatisticsProxy::OnDecoderImplementationName(
     const char* implementation_name) {
+  // TODO(tommi): What thread? (a lock needed for this variable?)
   rtc::CritScope lock(&crit_);
   stats_.decoder_implementation_name = implementation_name;
 }
@@ -733,9 +744,13 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
                                             absl::optional<uint8_t> qp,
                                             int32_t decode_time_ms,
                                             VideoContentType content_type) {
+  // TODO(tommi): What thread?
+  // - Same as OnRenderedFrame. Both called from within
+  // VideoStreamDecoder::FrameToRender
+
   rtc::CritScope lock(&crit_);
 
-  uint64_t now_ms = clock_->TimeInMilliseconds();
+  const uint64_t now_ms = clock_->TimeInMilliseconds();
 
   if (videocontenttypehelpers::IsScreenshare(content_type) !=
       videocontenttypehelpers::IsScreenshare(last_content_type_)) {
@@ -794,6 +809,8 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
 }
 
 void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrame& frame) {
+  // TODO(tommi): What thread?
+  // - Looks like the decoder thread. Called from VideoReceiveStream::OnFrame.
   int width = frame.width();
   int height = frame.height();
   RTC_DCHECK_GT(width, 0);
@@ -833,7 +850,12 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrame& frame) {
 void ReceiveStatisticsProxy::OnSyncOffsetUpdated(int64_t video_playout_ntp_ms,
                                                  int64_t sync_offset_ms,
                                                  double estimated_freq_khz) {
+  // TODO(tommi): What thread?
+  // -- looks like it's the decoder thread, called from
+  // VideoReceiveStream::OnFrame
   rtc::CritScope lock(&crit_);
+  // TODO(tommi): Lock possibly not needed for sync_offset_counter_ if it's only
+  // touched on the decoder thread.
   sync_offset_counter_.Add(std::abs(sync_offset_ms));
   stats_.sync_offset_ms = sync_offset_ms;
   last_estimated_playout_ntp_timestamp_ms_ = video_playout_ntp_ms;
@@ -896,6 +918,9 @@ void ReceiveStatisticsProxy::OnPreDecode(VideoCodecType codec_type, int qp) {
 }
 
 void ReceiveStatisticsProxy::OnStreamInactive() {
+  // TODO(tommi): What thread?
+  // (seems to be decode queue - video_receive_stream.cc)
+
   // TODO(sprang): Figure out any other state that should be reset.
 
   rtc::CritScope lock(&crit_);
@@ -906,6 +931,8 @@ void ReceiveStatisticsProxy::OnStreamInactive() {
 
 void ReceiveStatisticsProxy::OnRttUpdate(int64_t avg_rtt_ms,
                                          int64_t max_rtt_ms) {
+  // TODO(tommi): Is this a duplicate of VideoReceiveStream::OnRttUpdate?
+  // - looks like that runs on a/the module process thread.
   rtc::CritScope lock(&crit_);
   avg_rtt_ms_ = avg_rtt_ms;
 }

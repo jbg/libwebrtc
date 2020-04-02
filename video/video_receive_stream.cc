@@ -439,6 +439,7 @@ void VideoReceiveStream::Stop() {
 }
 
 VideoReceiveStream::Stats VideoReceiveStream::GetStats() const {
+  // TODO(tommi): What thread? Likely construction thread (based on call.cc)
   VideoReceiveStream::Stats stats = stats_proxy_.GetStats();
   stats.total_bitrate_bps = 0;
   StreamStatistician* statistician =
@@ -652,6 +653,7 @@ void VideoReceiveStream::StartNextDecode() {
 
 void VideoReceiveStream::HandleEncodedFrame(
     std::unique_ptr<EncodedFrame> frame) {
+  RTC_DCHECK_RUN_ON(&decode_queue_);
   int64_t now_ms = clock_->TimeInMilliseconds();
 
   // Current OnPreDecode only cares about QP for VP8.
@@ -706,6 +708,7 @@ void VideoReceiveStream::HandleKeyFrameGeneration(
 }
 
 void VideoReceiveStream::HandleFrameBufferTimeout() {
+  RTC_DCHECK_RUN_ON(&decode_queue_);
   int64_t now_ms = clock_->TimeInMilliseconds();
   absl::optional<int64_t> last_packet_ms =
       rtp_video_stream_receiver_.LastReceivedPacketMs();
