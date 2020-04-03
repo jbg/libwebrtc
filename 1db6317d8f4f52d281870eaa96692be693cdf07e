@@ -46,6 +46,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be886a14_55fe3355",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-03T16:27:48Z",
+      "side": 1,
+      "message": "Thanks, Mirko.",
+      "parentUuid": "4f31e956_afad1af7",
+      "range": {
+        "startLine": 678,
+        "startChar": 2,
+        "endLine": 685,
+        "endChar": 3
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
