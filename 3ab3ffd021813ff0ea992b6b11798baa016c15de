@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73da42ab_504050ca",
+        "filename": "rtc_base/network.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-04-03T07:55:21Z",
+      "side": 1,
+      "message": "I like the fact that this is a well-isolated function, but wonder if it should take Network* pointers instead. My sneaking suspicion is that this function will grow more complex over time.\n\nAlso, we might want to compare IP addresses - when I cross from Norway to Sweden, will my IP address change? If so, should this trigger a network change, even though the adapter type is 4G on both sides?\n\nI don\u0027t think you want to address this in this CL, but it\u0027s an argument for passing const Network\u0026 to this function rather than rtc::AdapterType.",
+      "revId": "3ab3ffd021813ff0ea992b6b11798baa016c15de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c7c2456_a5043992",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-04-03T07:55:21Z",
+      "side": 1,
+      "message": "English nit: Either delete the comment (it should be obvious from the test name), or say \"Test that....\"",
+      "revId": "3ab3ffd021813ff0ea992b6b11798baa016c15de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2b93f3d_a67af556",
+        "filename": "rtc_base/network_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-04-03T07:55:21Z",
+      "side": 1,
+      "message": "Suggest TestWhenNetworkListChangeReturnsChangedFlag as a name.",
+      "revId": "3ab3ffd021813ff0ea992b6b11798baa016c15de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
