@@ -913,7 +913,7 @@ TEST_P(StatsCollectorTrackTest, BytesCounterHandles64Bits) {
   video_sender_info.payload_bytes_sent = kBytesSent;
   video_sender_info.header_and_padding_bytes_sent = 0;
   VideoMediaInfo video_info;
-  video_info.senders.push_back(video_sender_info);
+  video_info.aggregated_senders.push_back(video_sender_info);
 
   auto* video_media_channel = pc->AddVideoChannel("video", "transport");
   video_media_channel->SetStats(video_info);
@@ -996,7 +996,7 @@ TEST_P(StatsCollectorTrackTest, VideoBandwidthEstimationInfoIsReported) {
   video_sender_info.header_and_padding_bytes_sent = 12;
 
   VideoMediaInfo video_info;
-  video_info.senders.push_back(video_sender_info);
+  video_info.aggregated_senders.push_back(video_sender_info);
 
   auto* video_media_channel = pc->AddVideoChannel("video", "transport");
   video_media_channel->SetStats(video_info);
@@ -1094,7 +1094,7 @@ TEST_P(StatsCollectorTrackTest, TrackAndSsrcObjectExistAfterUpdateSsrcStats) {
   video_sender_info.payload_bytes_sent = kBytesSent - 12;
   video_sender_info.header_and_padding_bytes_sent = 12;
   VideoMediaInfo video_info;
-  video_info.senders.push_back(video_sender_info);
+  video_info.aggregated_senders.push_back(video_sender_info);
 
   auto* video_media_channel = pc->AddVideoChannel("video", "transport");
   video_media_channel->SetStats(video_info);
@@ -1149,7 +1149,7 @@ TEST_P(StatsCollectorTrackTest, TransportObjectLinkedFromSsrcObject) {
   video_sender_info.payload_bytes_sent = kBytesSent - 12;
   video_sender_info.header_and_padding_bytes_sent = 12;
   VideoMediaInfo video_info;
-  video_info.senders.push_back(video_sender_info);
+  video_info.aggregated_senders.push_back(video_sender_info);
 
   auto* video_media_channel = pc->AddVideoChannel("video", "transport");
   video_media_channel->SetStats(video_info);
@@ -1212,7 +1212,7 @@ TEST_P(StatsCollectorTrackTest, RemoteSsrcInfoIsPresent) {
   video_sender_info.add_ssrc(kSsrcOfTrack);
   video_sender_info.remote_stats.push_back(remote_ssrc_stats);
   VideoMediaInfo video_info;
-  video_info.senders.push_back(video_sender_info);
+  video_info.aggregated_senders.push_back(video_sender_info);
 
   auto* video_media_channel = pc->AddVideoChannel("video", "transport");
   video_media_channel->SetStats(video_info);
@@ -1854,7 +1854,7 @@ TEST_P(StatsCollectorTrackTest, VerifyVideoSendSsrcStats) {
   video_sender_info.frames_encoded = 10;
   video_sender_info.qp_sum = 11;
   VideoMediaInfo video_info;
-  video_info.senders.push_back(video_sender_info);
+  video_info.aggregated_senders.push_back(video_sender_info);
 
   auto* video_media_channel = pc->AddVideoChannel("video", "transport");
   video_media_channel->SetStats(video_info);
