@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "85d29c36_9266b427",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bfbdef0_eab08ab8",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14714926_423e9f3a",
         "filename": "api/stats/rtcstats_objects.h",
         "patchSetId": 13
@@ -33,6 +51,24 @@
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b45bfc7d_57f6cfba",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Is there a way to add \u0027rid\u0027 in whitelist as optional? It looked like all new fields became mandatory and the test started to fail if some of the new fields were missing. I guarded the added fields with enable_simulcast_stats flag for now.",
+      "parentUuid": "14714926_423e9f3a",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "3fb4e213_457b53da",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2468,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "I am fine with doing it in this CL too.",
+      "parentUuid": "7e6c0454_49b0b974",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7c941d2_b6af48cb",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 13
@@ -67,6 +121,24 @@
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0643a31b_e25b8840",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2469,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "There is interesting comment: \"If any of the simulcast streams have a huge frame, it should be counted as a single difficult input frame.\" So I was unsure if the per-layer separation makes sense at all, as then there would be question for which layer the count should be incremented.\nFrom the spec it is not obvious how the huge frames have to be counted in case of simulcast layers.",
+      "parentUuid": "e7c941d2_b6af48cb",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "b3f6dfc6_03e5754c",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2488,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c970a4ed_c050d346",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3df85488_64f9157f",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 13
@@ -101,6 +191,24 @@
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2812afa_373d0430",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2493,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3df85488_64f9157f",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "e6dd2168_be6f855b",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Added aggregated_framerate_sent to be on safe side.",
+      "parentUuid": "779d73b6_89c20b41",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac8ec3e3_5787f69c",
         "filename": "media/engine/webrtc_video_engine_unittest.cc",
         "patchSetId": 13
@@ -135,6 +261,24 @@
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7b0d690_2232c6b3",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 5251,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Right, I didn\u0027t exactly understand when the stream_ can be null (maybe it is just a paranoia check there) and didn\u0027t see great value of such test either, given that there is no goal of having 100% branch coverage in unit-tests, which I believe is not the case.",
+      "parentUuid": "ac8ec3e3_5787f69c",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "8449f15b_7821f8a2",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5d3df3d_f41f0cc0",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f574517c_849870e3",
         "filename": "pc/rtc_stats_collector.cc",
         "patchSetId": 13
@@ -169,6 +331,24 @@
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fe87e25_c1db53d0",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f574517c_849870e3",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "89f1ab2b_b1bfc95d",
+        "filename": "pc/stats_collector_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Legacy stats do not depend on the flag. But I see you probably meant to use TEST_Ps in rtc_stats_collector_unittests",
+      "parentUuid": "602053e8_18016072",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a47ea78_772e85f8",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 13
@@ -203,6 +401,24 @@
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "817d18fe_a107c395",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Added \u0027EncodeFrameRateInSubStream\u0027",
+      "parentUuid": "0a47ea78_772e85f8",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "8dc68de1_cb636e90",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Yes, it was possible to get rid of the duplicated qp_sum.",
+      "parentUuid": "7e610e86_5f611c98",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "852e2d6c_fd5dd0d8",
         "filename": "video/send_statistics_proxy.cc",
         "patchSetId": 13
@@ -237,6 +471,24 @@
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "823d4b01_b76e5765",
+        "filename": "video/send_statistics_proxy.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-04-03T07:39:30Z",
+      "side": 1,
+      "message": "Yes, should be available.",
+      "parentUuid": "852e2d6c_fd5dd0d8",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
