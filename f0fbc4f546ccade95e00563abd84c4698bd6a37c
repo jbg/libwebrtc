@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d6cd799_708df912",
+        "filename": "sdk/objc/native/src/objc_video_encoder_factory.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2020-04-03T09:32:40Z",
+      "side": 1,
+      "message": "Old school.",
+      "range": {
+        "startLine": 197,
+        "startChar": 43,
+        "endLine": 197,
+        "endChar": 65
+      },
+      "revId": "f0fbc4f546ccade95e00563abd84c4698bd6a37c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
