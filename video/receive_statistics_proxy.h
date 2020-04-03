@@ -26,6 +26,7 @@
 #include "rtc_base/numerics/sample_counter.h"
 #include "rtc_base/rate_statistics.h"
 #include "rtc_base/rate_tracker.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/thread_checker.h"
 #include "video/quality_threshold.h"
@@ -177,7 +178,7 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
   std::map<VideoContentType, ContentSpecificStats> content_specific_stats_
       RTC_GUARDED_BY(crit_);
   MaxCounter freq_offset_counter_ RTC_GUARDED_BY(crit_);
-  QpCounters qp_counters_ RTC_GUARDED_BY(decode_thread_);
+  QpCounters qp_counters_ RTC_GUARDED_BY(decode_queue_);
   int64_t avg_rtt_ms_ RTC_GUARDED_BY(crit_);
   mutable std::map<int64_t, size_t> frame_window_ RTC_GUARDED_BY(&crit_);
   VideoContentType last_content_type_ RTC_GUARDED_BY(&crit_);
@@ -196,9 +197,11 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
       RTC_GUARDED_BY(&crit_);
   absl::optional<int64_t> last_estimated_playout_time_ms_
       RTC_GUARDED_BY(&crit_);
-  rtc::ThreadChecker decode_thread_;
-  rtc::ThreadChecker network_thread_;
+
+  webrtc::SequenceChecker decode_queue_;
+  rtc::ThreadChecker network_thread_;  // TODO(tommi): Delete variable.
   rtc::ThreadChecker main_thread_;
+  webrtc::SequenceChecker incoming_render_queue_;
 };
 
 }  // namespace webrtc

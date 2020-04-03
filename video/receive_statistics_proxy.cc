@@ -14,10 +14,12 @@
 #include <cmath>
 #include <utility>
 
+#include "api/task_queue/task_queue_base.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/strings/string_builder.h"
+#include "rtc_base/thread.h"
 #include "rtc_base/time_utils.h"
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/field_trial.h"
@@ -118,26 +120,51 @@ ReceiveStatisticsProxy::ReceiveStatisticsProxy(
       num_delayed_frames_rendered_(0),
       sum_missed_render_deadline_ms_(0),
       timing_frame_info_counter_(kMovingMaxWindowMs) {
-  decode_thread_.Detach();
+  decode_queue_.Detach();
   network_thread_.Detach();
+  incoming_render_queue_.Detach();
   stats_.ssrc = config_.rtp.remote_ssrc;
+
+  // Should be running on _the_ worker thread.
+  auto* tq = webrtc::TaskQueueBase::Current();
+  RTC_CHECK(tq);
+
+  if (tq) {
+    rtc::Thread* t = static_cast<rtc::Thread*>(tq);
+    RTC_LOG(LS_WARNING) << "************************* TQ: '" << t->name()
+                        << "'";
+  }
 }
 
 void ReceiveStatisticsProxy::UpdateHistograms(
     absl::optional<int> fraction_lost,
     const StreamDataCounters& rtp_stats,
     const StreamDataCounters* rtx_stats) {
-  // Not actually running on the decoder thread, but must be called after
+  {
+    // TODO(tommi): Delete this scope after refactoring.
+    // We're actually on the main thread here, below is the explanation for
+    // why we use another thread checker. Once refactored, we can clean this
+    // up and not use the decode_queue_ checker here.
+    RTC_DCHECK_RUN_ON(&main_thread_);
+  }
+
+  // We're not actually running on the decoder thread, but must be called after
   // DecoderThreadStopped, which detaches the thread checker. It is therefore
   // safe to access |qp_counters_|, which were updated on the decode thread
   // earlier.
-  RTC_DCHECK_RUN_ON(&decode_thread_);
+  RTC_DCHECK_RUN_ON(&decode_queue_);
 
   rtc::CritScope lock(&crit_);
 
+  // TODO(tommi): Many of these variables don't need to be inside the scope
+  // of a lock. Also consider grabbing the lock only to copy the state that
+  // histograms need to be reported for, then report histograms while not
+  // holding the lock.
   char log_stream_buf[8 * 1024];
   rtc::SimpleStringBuilder log_stream(log_stream_buf);
+
   int stream_duration_sec = (clock_->TimeInMilliseconds() - start_ms_) / 1000;
+
   if (stats_.frame_counts.key_frames > 0 ||
       stats_.frame_counts.delta_frames > 0) {
     RTC_HISTOGRAM_COUNTS_100000("WebRTC.Video.ReceiveStreamLifetimeInSeconds",
@@ -476,6 +503,8 @@ void ReceiveStatisticsProxy::UpdateHistograms(
 }
 
 void ReceiveStatisticsProxy::QualitySample() {
+  RTC_DCHECK_RUN_ON(&incoming_render_queue_);
+
   int64_t now = clock_->TimeInMilliseconds();
   if (last_sample_time_ + kMinSampleLengthMs > now)
     return;
@@ -545,6 +574,8 @@ void ReceiveStatisticsProxy::QualitySample() {
 }
 
 void ReceiveStatisticsProxy::UpdateFramerate(int64_t now_ms) const {
+  // TODO(tommi): Currently seems to be called from two threads,
+  // main and decode. Consider moving both to main.
   int64_t old_frames_ms = now_ms - kRateStatisticsWindowSizeMs;
   while (!frame_window_.empty() &&
          frame_window_.begin()->first < old_frames_ms) {
@@ -560,6 +591,9 @@ void ReceiveStatisticsProxy::UpdateDecodeTimeHistograms(
     int width,
     int height,
     int decode_time_ms) const {
+  RTC_DCHECK_RUN_ON(&decode_queue_);
+  // TODO(tommi): Consider posting the work to the worker thread.
+
   bool is_4k = (width == 3840 || width == 4096) && height == 2160;
   bool is_hd = width == 1920 && height == 1080;
   // Only update histograms for 4k/HD and VP9/H264.
@@ -614,6 +648,7 @@ void ReceiveStatisticsProxy::UpdateDecodeTimeHistograms(
 absl::optional<int64_t>
 ReceiveStatisticsProxy::GetCurrentEstimatedPlayoutNtpTimestampMs(
     int64_t now_ms) const {
+  RTC_DCHECK_RUN_ON(&main_thread_);
   if (!last_estimated_playout_ntp_timestamp_ms_ ||
       !last_estimated_playout_time_ms_) {
     return absl::nullopt;
@@ -623,6 +658,19 @@ ReceiveStatisticsProxy::GetCurrentEstimatedPlayoutNtpTimestampMs(
 }
 
 VideoReceiveStream::Stats ReceiveStatisticsProxy::GetStats() const {
+  RTC_DCHECK_RUN_ON(&main_thread_);
+  // Like VideoReceiveStream::GetStats, called on the worker thread from
+  // StatsCollector::ExtractMediaInfo via worker_thread()->Invoke().
+  // WebRtcVideoChannel::GetStats(), GetVideoReceiverInfo.
+
+  auto* tq = webrtc::TaskQueueBase::Current();
+
+  if (tq) {
+    rtc::Thread* t = static_cast<rtc::Thread*>(tq);
+    RTC_LOG(LS_WARNING) << "************************* TQ: '" << t->name()
+                        << "'";
+  }
+
   rtc::CritScope lock(&crit_);
   // Get current frame rates here, as only updating them on new frames prevents
   // us from ever correctly displaying frame rate of 0.
@@ -654,12 +702,15 @@ VideoReceiveStream::Stats ReceiveStatisticsProxy::GetStats() const {
 }
 
 void ReceiveStatisticsProxy::OnIncomingPayloadType(int payload_type) {
+  RTC_DCHECK_RUN_ON(&decode_queue_);
   rtc::CritScope lock(&crit_);
   stats_.current_payload_type = payload_type;
 }
 
 void ReceiveStatisticsProxy::OnDecoderImplementationName(
     const char* implementation_name) {
+  RTC_DCHECK_RUN_ON(&decode_queue_);
+  // TODO(tommi): a lock needed for this variable?
   rtc::CritScope lock(&crit_);
   stats_.decoder_implementation_name = implementation_name;
 }
@@ -671,6 +722,7 @@ void ReceiveStatisticsProxy::OnFrameBufferTimingsUpdated(
     int jitter_buffer_ms,
     int min_playout_delay_ms,
     int render_delay_ms) {
+  RTC_DCHECK_RUN_ON(&decode_queue_);
   rtc::CritScope lock(&crit_);
   stats_.max_decode_ms = max_decode_ms;
   stats_.current_delay_ms = current_delay_ms;
@@ -687,12 +739,14 @@ void ReceiveStatisticsProxy::OnFrameBufferTimingsUpdated(
 }
 
 void ReceiveStatisticsProxy::OnUniqueFramesCounted(int num_unique_frames) {
+  RTC_DCHECK_RUN_ON(&main_thread_);
   rtc::CritScope lock(&crit_);
   num_unique_frames_.emplace(num_unique_frames);
 }
 
 void ReceiveStatisticsProxy::OnTimingFrameInfoUpdated(
     const TimingFrameInfo& info) {
+  RTC_DCHECK_RUN_ON(&decode_queue_);
   rtc::CritScope lock(&crit_);
   if (info.flags != VideoSendTiming::kInvalid) {
     int64_t now_ms = clock_->TimeInMilliseconds();
@@ -714,6 +768,7 @@ void ReceiveStatisticsProxy::OnTimingFrameInfoUpdated(
 void ReceiveStatisticsProxy::RtcpPacketTypesCounterUpdated(
     uint32_t ssrc,
     const RtcpPacketTypeCounter& packet_counter) {
+  RTC_DCHECK_RUN_ON(&main_thread_);
   rtc::CritScope lock(&crit_);
   if (stats_.ssrc != ssrc)
     return;
@@ -721,6 +776,7 @@ void ReceiveStatisticsProxy::RtcpPacketTypesCounterUpdated(
 }
 
 void ReceiveStatisticsProxy::OnCname(uint32_t ssrc, absl::string_view cname) {
+  RTC_DCHECK_RUN_ON(&main_thread_);
   rtc::CritScope lock(&crit_);
   // TODO(pbos): Handle both local and remote ssrcs here and RTC_DCHECK that we
   // receive stats from one of them.
@@ -733,9 +789,13 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
                                             absl::optional<uint8_t> qp,
                                             int32_t decode_time_ms,
                                             VideoContentType content_type) {
+  RTC_DCHECK_RUN_ON(&decode_queue_);
+  // TODO(tommi): - Same as OnRenderedFrame. Both called from within
+  // VideoStreamDecoder::FrameToRender
+
   rtc::CritScope lock(&crit_);
 
-  uint64_t now_ms = clock_->TimeInMilliseconds();
+  const uint64_t now_ms = clock_->TimeInMilliseconds();
 
   if (videocontenttypehelpers::IsScreenshare(content_type) !=
       videocontenttypehelpers::IsScreenshare(last_content_type_)) {
@@ -794,6 +854,10 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
 }
 
 void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrame& frame) {
+  RTC_DCHECK_RUN_ON(&incoming_render_queue_);
+  // TODO(tommi): Consider posting the work to the worker thread.
+  // - Called from VideoReceiveStream::OnFrame.
+
   int width = frame.width();
   int height = frame.height();
   RTC_DCHECK_GT(width, 0);
@@ -833,7 +897,12 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrame& frame) {
 void ReceiveStatisticsProxy::OnSyncOffsetUpdated(int64_t video_playout_ntp_ms,
                                                  int64_t sync_offset_ms,
                                                  double estimated_freq_khz) {
+  // TODO(tommi): What thread?
+  // -- looks like it's the decoder thread, called from
+  // VideoReceiveStream::OnFrame
   rtc::CritScope lock(&crit_);
+  // TODO(tommi): Lock possibly not needed for sync_offset_counter_ if it's only
+  // touched on the decoder thread.
   sync_offset_counter_.Add(std::abs(sync_offset_ms));
   stats_.sync_offset_ms = sync_offset_ms;
   last_estimated_playout_ntp_timestamp_ms_ = video_playout_ntp_ms;
@@ -886,7 +955,7 @@ void ReceiveStatisticsProxy::OnDroppedFrames(uint32_t frames_dropped) {
 }
 
 void ReceiveStatisticsProxy::OnPreDecode(VideoCodecType codec_type, int qp) {
-  RTC_DCHECK_RUN_ON(&decode_thread_);
+  RTC_DCHECK_RUN_ON(&decode_queue_);
   rtc::CritScope lock(&crit_);
   last_codec_type_ = codec_type;
   if (last_codec_type_ == kVideoCodecVP8 && qp != -1) {
@@ -896,6 +965,9 @@ void ReceiveStatisticsProxy::OnPreDecode(VideoCodecType codec_type, int qp) {
 }
 
 void ReceiveStatisticsProxy::OnStreamInactive() {
+  // TODO(tommi): What thread?
+  // (seems to be decode queue - video_receive_stream.cc)
+
   // TODO(sprang): Figure out any other state that should be reset.
 
   rtc::CritScope lock(&crit_);
@@ -906,6 +978,8 @@ void ReceiveStatisticsProxy::OnStreamInactive() {
 
 void ReceiveStatisticsProxy::OnRttUpdate(int64_t avg_rtt_ms,
                                          int64_t max_rtt_ms) {
+  // TODO(tommi): Is this a duplicate of VideoReceiveStream::OnRttUpdate?
+  // - looks like that runs on a/the module process thread.
   rtc::CritScope lock(&crit_);
   avg_rtt_ms_ = avg_rtt_ms;
 }
@@ -916,7 +990,7 @@ void ReceiveStatisticsProxy::DecoderThreadStarting() {
 
 void ReceiveStatisticsProxy::DecoderThreadStopped() {
   RTC_DCHECK_RUN_ON(&main_thread_);
-  decode_thread_.Detach();
+  decode_queue_.Detach();
 }
 
 ReceiveStatisticsProxy::ContentSpecificStats::ContentSpecificStats()
