@@ -56,6 +56,37 @@ namespace {
 enum : int {  // The first valid value is 1.
   kTransportSequenceNumberExtensionId = 1,
 };
+
+// TODO(tommi): Move to rtc_base/task_utils.
+class PendingTaskSafetyFlag : public rtc::RefCountInterface {
+ public:
+  PendingTaskSafetyFlag() = default;
+
+  static rtc::scoped_refptr<PendingTaskSafetyFlag> Create();
+
+  void SetNotAlive();
+  bool alive() const;
+
+ private:
+  bool alive_ = true;
+  rtc::ThreadChecker main_thread_;
+};
+
+// static
+rtc::scoped_refptr<PendingTaskSafetyFlag> PendingTaskSafetyFlag::Create() {
+  return new rtc::RefCountedObject<PendingTaskSafetyFlag>();
+}
+
+void PendingTaskSafetyFlag::SetNotAlive() {
+  RTC_DCHECK_RUN_ON(&main_thread_);
+  alive_ = false;
+}
+
+bool PendingTaskSafetyFlag::alive() const {
+  RTC_DCHECK_RUN_ON(&main_thread_);
+  return alive_;
+}
+
 }  // namespace
 
 class CallPerfTest : public test::CallTest {
@@ -96,21 +127,28 @@ class VideoRtcpAndSyncObserver : public test::RtpRtcpObserver,
   static const int kMinRunTimeMs = 30000;
 
  public:
-  explicit VideoRtcpAndSyncObserver(Clock* clock, const std::string& test_label)
+  explicit VideoRtcpAndSyncObserver(TaskQueueBase* task_queue,
+                                    Clock* clock,
+                                    const std::string& test_label)
       : test::RtpRtcpObserver(CallPerfTest::kLongTimeoutMs),
         clock_(clock),
         test_label_(test_label),
         creation_time_ms_(clock_->TimeInMilliseconds()),
         first_time_in_sync_(-1),
-        receive_stream_(nullptr) {}
+        receive_stream_(nullptr),
+        task_queue_(task_queue) {}
+
+  ~VideoRtcpAndSyncObserver() override { safety_flag_->SetNotAlive(); }
 
   void OnFrame(const VideoFrame& video_frame) override {
-    VideoReceiveStream::Stats stats;
-    {
-      rtc::CritScope lock(&crit_);
-      if (receive_stream_)
-        stats = receive_stream_->GetStats();
-    }
+    task_queue_->PostTask(ToQueuedTask([this, safe = safety_flag_]() {
+      if (safe->alive())
+        CheckStats();
+    }));
+  }
+
+  void CheckStats() {
+    VideoReceiveStream::Stats stats = receive_stream_->GetStats();
     if (stats.sync_offset_ms == std::numeric_limits<int>::max())
       return;
 
@@ -135,8 +173,8 @@ class VideoRtcpAndSyncObserver : public test::RtpRtcpObserver,
   }
 
   void set_receive_stream(VideoReceiveStream* receive_stream) {
-    rtc::CritScope lock(&crit_);
     receive_stream_ = receive_stream;
+    RTC_DCHECK_EQ(task_queue_, TaskQueueBase::Current());
   }
 
   void PrintResults() {
@@ -149,9 +187,11 @@ class VideoRtcpAndSyncObserver : public test::RtpRtcpObserver,
   std::string test_label_;
   const int64_t creation_time_ms_;
   int64_t first_time_in_sync_;
-  rtc::CriticalSection crit_;
-  VideoReceiveStream* receive_stream_ RTC_GUARDED_BY(crit_);
+  VideoReceiveStream* receive_stream_;
   std::vector<double> sync_offset_ms_list_;
+  TaskQueueBase* const task_queue_;
+  rtc::scoped_refptr<PendingTaskSafetyFlag> safety_flag_{
+      PendingTaskSafetyFlag::Create()};
 };
 
 void CallPerfTest::TestAudioVideoSync(FecMode fec,
@@ -168,7 +208,8 @@ void CallPerfTest::TestAudioVideoSync(FecMode fec,
   audio_net_config.queue_delay_ms = 500;
   audio_net_config.loss_percent = 5;
 
-  VideoRtcpAndSyncObserver observer(Clock::GetRealTimeClock(), test_label);
+  VideoRtcpAndSyncObserver observer(task_queue(), Clock::GetRealTimeClock(),
+                                    test_label);
 
   std::map<uint8_t, MediaType> audio_pt_map;
   std::map<uint8_t, MediaType> video_pt_map;
