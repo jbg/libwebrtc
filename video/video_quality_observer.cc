@@ -49,10 +49,14 @@ VideoQualityObserver::VideoQualityObserver(VideoContentType content_type)
       current_resolution_(Resolution::Low),
       num_resolution_downgrades_(0),
       time_in_blocky_video_ms_(0),
+      // TODO(tommi): content_type_ variable isn't necessary.
       content_type_(content_type),
       is_paused_(false) {}
 
 void VideoQualityObserver::UpdateHistograms() {
+  // TODO(tommi): Called on the decoder thread - which _might_ be
+  // the same as the construction thread.
+
   // Don't report anything on an empty video stream.
   if (num_frames_rendered_ == 0) {
     return;
