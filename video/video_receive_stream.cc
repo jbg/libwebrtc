@@ -439,6 +439,7 @@ void VideoReceiveStream::Stop() {
 }
 
 VideoReceiveStream::Stats VideoReceiveStream::GetStats() const {
+  RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
   VideoReceiveStream::Stats stats = stats_proxy_.GetStats();
   stats.total_bitrate_bps = 0;
   StreamStatistician* statistician =
@@ -506,19 +507,19 @@ int VideoReceiveStream::GetBaseMinimumPlayoutDelayMs() const {
   return base_minimum_playout_delay_ms_;
 }
 
-// TODO(tommi): This method grabs a lock 6 times.
+// TODO(webrtc:11489): This method grabs a lock 6 times.
 void VideoReceiveStream::OnFrame(const VideoFrame& video_frame) {
   int64_t video_playout_ntp_ms;
   int64_t sync_offset_ms;
   double estimated_freq_khz;
-  // TODO(tommi): GetStreamSyncOffsetInMs grabs three locks.  One inside the
-  // function itself, another in GetChannel() and a third in
+  // TODO(webrtc:11489): GetStreamSyncOffsetInMs grabs three locks.  One inside
+  // the function itself, another in GetChannel() and a third in
   // GetPlayoutTimestamp.  Seems excessive.  Anyhow, I'm assuming the function
   // succeeds most of the time, which leads to grabbing a fourth lock.
   if (rtp_stream_sync_.GetStreamSyncOffsetInMs(
           video_frame.timestamp(), video_frame.render_time_ms(),
           &video_playout_ntp_ms, &sync_offset_ms, &estimated_freq_khz)) {
-    // TODO(tommi): OnSyncOffsetUpdated grabs a lock.
+    // TODO(webrtc:11489): OnSyncOffsetUpdated grabs a lock.
     stats_proxy_.OnSyncOffsetUpdated(video_playout_ntp_ms, sync_offset_ms,
                                      estimated_freq_khz);
   }
@@ -526,7 +527,7 @@ void VideoReceiveStream::OnFrame(const VideoFrame& video_frame) {
 
   config_.renderer->OnFrame(video_frame);
 
-  // TODO(tommi): OnRenderFrame grabs a lock too.
+  // TODO(webrtc:11489): OnRenderFrame grabs a lock too.
   stats_proxy_.OnRenderedFrame(video_frame);
 }
 
@@ -652,6 +653,7 @@ void VideoReceiveStream::StartNextDecode() {
 
 void VideoReceiveStream::HandleEncodedFrame(
     std::unique_ptr<EncodedFrame> frame) {
+  // Running on |decode_queue_|.
   int64_t now_ms = clock_->TimeInMilliseconds();
 
   // Current OnPreDecode only cares about QP for VP8.
@@ -706,6 +708,7 @@ void VideoReceiveStream::HandleKeyFrameGeneration(
 }
 
 void VideoReceiveStream::HandleFrameBufferTimeout() {
+  // Running on |decode_queue_|.
   int64_t now_ms = clock_->TimeInMilliseconds();
   absl::optional<int64_t> last_packet_ms =
       rtp_video_stream_receiver_.LastReceivedPacketMs();
