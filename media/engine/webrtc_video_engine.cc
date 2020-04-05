@@ -830,7 +830,7 @@ void WebRtcVideoChannel::RequestEncoderSwitch(
       return;
     }
 
-    for (VideoCodecSettings codec_setting : negotiated_codecs_) {
+    for (const VideoCodecSettings& codec_setting : negotiated_codecs_) {
       if (codec_setting.codec.name == conf.codec_name) {
         if (conf.param) {
           auto it = codec_setting.codec.params.find(*conf.param);
@@ -1482,6 +1482,21 @@ void WebRtcVideoChannel::ResetUnsignaledRecvStream() {
   RTC_DCHECK_RUN_ON(&thread_checker_);
   RTC_LOG(LS_INFO) << "ResetUnsignaledRecvStream.";
   unsignaled_stream_params_ = StreamParams();
+
+  // Delete any created default streams.
+  auto it = receive_streams_.begin();
+  while (it != receive_streams_.end()) {
+    auto delete_it = receive_streams_.end();
+    if (it->second->IsDefaultStream()) {
+      delete_it = it;
+    }
+    ++it;
+    if (delete_it != receive_streams_.end()) {
+      DeleteReceiveStream(delete_it->second);
+      // |it| is not invalidated by this erase.
+      receive_streams_.erase(delete_it->first);
+    }
+  }
 }
 
 bool WebRtcVideoChannel::SetSink(
