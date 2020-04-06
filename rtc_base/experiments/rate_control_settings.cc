@@ -24,7 +24,7 @@ namespace webrtc {
 
 namespace {
 
-const int kDefaultAcceptedQueueMs = 250;
+const int kDefaultAcceptedQueueMs = 800;
 
 const int kDefaultMinPushbackTargetBitrateBps = 30000;
 
