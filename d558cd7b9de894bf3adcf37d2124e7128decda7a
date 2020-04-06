@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae128b21_be199a2a",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 2555,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "send_frame_width and height have already been set for this layer a couple of lines above. Delete lines 2552-2555 they don\u0027t do anything anymore and the \"if higher then use that\" logic doesn\u0027t make sense in a non-aggregated scenario.",
+      "revId": "d558cd7b9de894bf3adcf37d2124e7128decda7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d600f34_96f61123",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 5250,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "nit: EXPECT_EQ aggregated_senders[0].qp_sum, 26",
+      "revId": "d558cd7b9de894bf3adcf37d2124e7128decda7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc9b8c40_aff9f98c",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 5361,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "The per-layer stats are a bit spread out and I\u0027m not sure it has the same completeness as the new tests you added which go through all of the metrics (good job!).\n\nAs my last request, how about copy-pasting the test GetAggregatedStatsReportForSubStreams but asserting the non-aggregated substreams having the correct value instead in the copied test? \"GetPerLayerStatsReportForSubStreams\"\nBasically the same test but EXPECTing with a value that has not been multiplied by two.",
+      "revId": "d558cd7b9de894bf3adcf37d2124e7128decda7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25b9eb09_566c4859",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "nit: If enable_simulcast_stats were true you wouldn\u0027t want to assert rid is undefined, maybe assert that it is optional if the integrationtest is not set up to do simulcast",
+      "revId": "d558cd7b9de894bf3adcf37d2124e7128decda7a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

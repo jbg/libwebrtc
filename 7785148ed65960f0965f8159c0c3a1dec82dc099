@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "fad24e3a_f2d5fd90",
+        "filename": "api/stats/rtcstats_objects.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "In the whitelist test, the presence of a dictionary, i.e. stats object, can be optional or mandatory. E.g. was there ANY type\u003d\u003d\"outbound-rtp\" object present in the stats report? But for individual metrics of a dictionary, like hugeFramesSent, they are all optional as far as the test is concerned. The test is: for each metric that does show up, it must have a presence in the whitelist. But if a metric is whitelisted but it doesn\u0027t show up, the test still passes.",
+      "parentUuid": "b45bfc7d_57f6cfba",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e6c0454_49b0b974",
         "filename": "media/engine/webrtc_video_engine.cc",
         "patchSetId": 13
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "I am fine with doing it in this CL too.",
       "parentUuid": "7e6c0454_49b0b974",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c7bd7081_6936fb43",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2468,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3fb4e213_457b53da",
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -154,6 +190,24 @@
       "side": 1,
       "message": "I thought I deleted this comment, but somehow it surfaced again. I think I sorted it out with the huge frame count and fixed accordingly. So no open question here for me.",
       "parentUuid": "0643a31b_e25b8840",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14adfe94_ea2586a3",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2469,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "(\"Huge frames, by definition, are frames that have an encoded size at least 2.5 times the average size of the frames.\"\n\nThe hugeness refers to the the size of the encoded frames, and in simulcast frames are encoded per-layer with per-layer counters. So per-layer hugeFramesSent makes, the \"hugeness\" would be determined based on the size of other encoded frames on that layer.)\n\nAck!",
+      "parentUuid": "8318f0a8_00da30da",
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -265,6 +319,24 @@
     },
     {
       "key": {
+        "uuid": "38c44e87_b5ae8f08",
+        "filename": "media/engine/webrtc_video_engine.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e6dd2168_be6f855b",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac8ec3e3_5787f69c",
         "filename": "media/engine/webrtc_video_engine_unittest.cc",
         "patchSetId": 13
@@ -294,6 +366,24 @@
       "side": 1,
       "message": "Right, I didn\u0027t exactly understand when the stream_ can be null (maybe it is just a paranoia check there) and didn\u0027t see great value of such test either, given that there is no goal of having 100% branch coverage in unit-tests, which I believe is not the case.",
       "parentUuid": "ac8ec3e3_5787f69c",
+      "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf3c0851_6f2a6319",
+        "filename": "media/engine/webrtc_video_engine_unittest.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 5251,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-06T08:36:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b7b0d690_2232c6b3",
       "revId": "7785148ed65960f0965f8159c0c3a1dec82dc099",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
