@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebe78fd0_f630c898",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-04-06T09:55:20Z",
+      "side": 1,
+      "message": "Since it\u0027s not a pure move, can you summarize the changes? If I get it right, the class is renamed to VideoAdaptationCounters, and the operator- method is deleted.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "0ee9da054a9eba3fccb61f5564842c85cf084f77",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
