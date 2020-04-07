@@ -70,6 +70,397 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfd5fc91_7fee6227",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "This is less of a getter and more of a creator.\n\nHow about changing to \nCreateAcmConfig, or FormAcmConfig?",
+      "range": {
+        "startLine": 28,
+        "startChar": 26,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45a0b404_3daf674c",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Is there anything preventing clock_rate being non-zero? \n\nI think it would be good with a DCHECK for that.",
+      "range": {
+        "startLine": 110,
+        "startChar": 53,
+        "endLine": 110,
+        "endChar": 63
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7499df2_7a660578",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Please use RTC_DCHECK or RTC_CHECK instead of assert",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 8
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d6bbd0e_33285f80",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Is there anything that could go wrong here?\nThere is an assert on line 176 that ensures that this is valid. However, I don\u0027t think it is ok to crash if this is not the case. Is it possible to fail more gracefully here? E.g., via a DCHECK which is guaranteed to catch this in Debug builds in a way that also maps to Release builds, or via a safe fallback mechanism?",
+      "range": {
+        "startLine": 177,
+        "startChar": 2,
+        "endLine": 177,
+        "endChar": 62
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9d9f4c0_ebbe5afc",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Is payload_length - header.paddingLength guaranteed to be positive?",
+      "range": {
+        "startLine": 178,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 68
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd3f872f_fe86fc1a",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Please end comment with a period.",
+      "range": {
+        "startLine": 180,
+        "startChar": 72,
+        "endLine": 180,
+        "endChar": 75
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "542e429c_e59f46a1",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Please add a comment describing why RTT is 0 in this case.",
+      "range": {
+        "startLine": 220,
+        "startChar": 2,
+        "endLine": 222,
+        "endChar": 3
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3da17d4_e78396f8",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "One extra space",
+      "range": {
+        "startLine": 37,
+        "startChar": 18,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13fc2349_b54c6632",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "This is good, but in order to be actionable I think that each method needs to have comments that state whether it can be called in a single-threaded or a multi-threaded manner.\nI think the comment in its current form does not at all help the user in how the class can be used.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 58
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3f28f2d_5831adfe",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "This name is very descriptive, but still unclear what it means.\nCan it be rephrased so that it specifies what it means. Also, I think a comment describing what is returned would be good.",
+      "range": {
+        "startLine": 74,
+        "startChar": 6,
+        "endLine": 74,
+        "endChar": 38
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ca11083_daf466cb",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Please add a comment to describe this. Also, I think it would be good to not use an acronym here. The meaning of RTT is likely not obvious to most users.",
+      "range": {
+        "startLine": 75,
+        "startChar": 9,
+        "endLine": 75,
+        "endChar": 19
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1adcdc89_d29ee2f8",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "This name becomes weird.\nI assume it is a getter for retrieving AudiodecodingCallStats? But reading the name I get a different impression. Would it be possible to change it somehow?",
+      "range": {
+        "startLine": 77,
+        "startChar": 25,
+        "endLine": 77,
+        "endChar": 50
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cca1e4bb_17d500fe",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "These checkers are good, but they only work if there are tests running in Debug mode triggering them. The unittests added in this CL will partly do that, but since this is an API layer, those do not really test the API usage.\n\nWhat would the implication be if these checkers are not followed in a client using them in Release mode? Would it be possible to create the API such that it works regardless of the threading scheme not being followed?",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 40
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e44d38fe_f5fe1bf7",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "This class uses two locks which opens up the possibility of deadlocks.\n\nI definitely think some steps needs to be taken to eliminate the risk of deadlocks. \n\nOne variant could be to split the class in two parts, each of which only uses a single lock. Another thing would be to add a multi-threaded test that hammers the API to trigger any deadlock behaviors.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 42
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79a7f8d6_e326a524",
+        "filename": "audio/voip/test/audio_ingress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Please start with capital letter and end with a period.",
+      "range": {
+        "startLine": 31,
+        "startChar": 42,
+        "endLine": 31,
+        "endChar": 66
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3736289f_130db365",
+        "filename": "audio/voip/test/audio_ingress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Please start with capital letter and end with a period.",
+      "range": {
+        "startLine": 96,
+        "startChar": 2,
+        "endLine": 96,
+        "endChar": 47
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b42b8600_5cbcb747",
+        "filename": "audio/voip/test/audio_ingress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-07T10:38:45Z",
+      "side": 1,
+      "message": "Capital letters for acronym.",
+      "range": {
+        "startLine": 135,
+        "startChar": 52,
+        "endLine": 135,
+        "endChar": 55
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
