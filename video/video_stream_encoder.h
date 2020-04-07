@@ -410,10 +410,13 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   // VideoSourceSinkController can be made single-threaded, and its lock can be
   // replaced with a sequence checker.
   std::unique_ptr<VideoSourceSinkController> video_source_sink_controller_;
+  // TODO(hbos): Why are any of these unique_ptrs?
   std::unique_ptr<VideoStreamInputStateProvider> input_state_provider_
       RTC_GUARDED_BY(&encoder_queue_);
+  std::unique_ptr<ResourceAdaptationProcessor> resource_adaptation_processor_
+      RTC_GUARDED_BY(&encoder_queue_);
   std::unique_ptr<VideoStreamEncoderResourceManager> stream_resource_manager_
-      RTC_GUARDED_BY(&encoder_queue_);  // asdada why is this unique_ptr?
+      RTC_GUARDED_BY(&encoder_queue_);
 
   // All public methods are proxied to |encoder_queue_|. It must must be
   // destroyed first to make sure no tasks are run that use other members.
