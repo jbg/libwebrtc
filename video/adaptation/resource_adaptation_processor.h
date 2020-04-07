@@ -118,6 +118,14 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   ResourceListenerResponse OnResourceUsageStateMeasured(
       const Resource& resource) override;
 
+  // TODO(hbos): Implement listener resource and listen directly to the
+  // processor. Having a dependency on the VideoStreamEncoder doesn't make much
+  // sense.
+  void OnVideoSourceRestrictionsUpdated(
+      VideoSourceRestrictions restrictions,
+      const VideoAdaptationCounters& adaptation_counters,
+      const Resource* reason);
+
   // For reasons of adaptation and statistics, we not only count the total
   // number of adaptations, but we also count the number of adaptations per
   // reason.
@@ -158,7 +166,7 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   // Makes |video_source_restrictions_| up-to-date and informs the
   // |adaptation_listener_| if restrictions are changed, allowing the listener
   // to reconfigure the source accordingly.
-  void MaybeUpdateVideoSourceRestrictions();
+  void MaybeUpdateVideoSourceRestrictions(const Resource* reason_resource);
   // Calculates an up-to-date value of the target frame rate and informs the
   // |encode_usage_resource_| of the new value.
   void MaybeUpdateTargetFrameRate();
@@ -167,7 +175,8 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   void UpdateQualityScalerSettings(
       absl::optional<VideoEncoder::QpThresholds> qp_thresholds);
 
-  void UpdateAdaptationStats(AdaptationObserverInterface::AdaptReason reason);
+  void UpdateAdaptationStats(const VideoAdaptationCounters& total_counts,
+                             AdaptationObserverInterface::AdaptReason reason);
 
   // Checks to see if we should execute the quality rampup experiment. The
   // experiment resets all video restrictions at the start of the call in the
