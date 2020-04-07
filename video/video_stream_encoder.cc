@@ -656,7 +656,7 @@ void VideoStreamEncoder::ReconfigureEncoder() {
 
   if (pending_encoder_creation_) {
     stream_resource_manager_->StopResourceAdaptation();
-    stream_resource_manager_->StartResourceAdaptation(this);
+    stream_resource_manager_->StartResourceAdaptation();
     pending_encoder_creation_ = false;
   }
 

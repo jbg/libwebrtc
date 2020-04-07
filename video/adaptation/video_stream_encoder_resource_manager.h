@@ -57,8 +57,7 @@ extern const int kDefaultInputPixelsHeight;
 // indirectly in video_stream_encoder_unittest.cc and other tests exercising
 // VideoStreamEncoder.
 class VideoStreamEncoderResourceManager
-    : public ResourceAdaptationProcessorInterface,
-      public ResourceListener,
+    : public ResourceListener,
       public ResourceAdaptationProcessorListener {
  public:
   // The processor can be constructed on any sequence, but must be initialized
@@ -80,15 +79,13 @@ class VideoStreamEncoderResourceManager
   }
 
   // ResourceAdaptationProcessorInterface implementation.
-  void StartResourceAdaptation(
-      ResourceAdaptationProcessorListener* adaptation_listener) override;
-  void StopResourceAdaptation() override;
+  void StartResourceAdaptation();
+  void StopResourceAdaptation();
   // Uses a default AdaptReason of kCpu.
-  void AddResource(Resource* resource) override;
+  void AddResource(Resource* resource);
   void AddResource(Resource* resource,
                    AdaptationObserverInterface::AdaptReason reason);
-  void SetDegradationPreference(
-      DegradationPreference degradation_preference) override;
+  void SetDegradationPreference(DegradationPreference degradation_preference);
   void SetEncoderSettings(EncoderSettings encoder_settings);
   void SetStartBitrate(DataRate start_bitrate);
   void SetTargetBitrate(DataRate target_bitrate);

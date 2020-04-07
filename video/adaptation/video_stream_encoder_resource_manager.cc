@@ -266,14 +266,9 @@ VideoStreamEncoderResourceManager::~VideoStreamEncoderResourceManager() {
   RTC_DCHECK_EQ(state_, State::kStopped);
 }
 
-void VideoStreamEncoderResourceManager::StartResourceAdaptation(
-    ResourceAdaptationProcessorListener* adaptation_listener) {
+void VideoStreamEncoderResourceManager::StartResourceAdaptation() {
   RTC_DCHECK_EQ(state_, State::kStopped);
   RTC_DCHECK(encoder_settings_.has_value());
-  // TODO(https://crbug.com/webrtc/11222): Rethink when the adaptation listener
-  // should be passed in and why. If resources are separated from modules then
-  // those resources may be started or stopped separately from the module.
-  RTC_DCHECK_EQ(adaptation_listener, adaptation_listener_);
   encode_usage_resource_.StartCheckForOveruse(GetCpuOveruseOptions());
   for (auto& resource_and_reason : resources_) {
     resource_and_reason.resource->RegisterListener(this);
