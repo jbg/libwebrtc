@@ -40,13 +40,17 @@ class ResourceAdaptationProcessorInterface {
  public:
   virtual ~ResourceAdaptationProcessorInterface();
 
-  virtual void StartResourceAdaptation(
-      ResourceAdaptationProcessorListener* adaptation_listener) = 0;
+  virtual DegradationPreference degradation_preference() const = 0;
+  virtual DegradationPreference effective_degradation_preference() const = 0;
+
+  virtual void StartResourceAdaptation() = 0;
   virtual void StopResourceAdaptation() = 0;
-  // The resource must out-live the module.
   virtual void AddResource(Resource* resource) = 0;
+
   virtual void SetDegradationPreference(
       DegradationPreference degradation_preference) = 0;
+  virtual void SetIsScreenshare(bool is_screenshare) = 0;
+  virtual void ResetVideoSourceRestrictions() = 0;
 };
 
 }  // namespace webrtc
