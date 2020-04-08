@@ -57,7 +57,8 @@ extern const int kDefaultInputPixelsHeight;
 // indirectly in video_stream_encoder_unittest.cc and other tests exercising
 // VideoStreamEncoder.
 class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
-                                    public ResourceListener {
+                                    public ResourceListener,
+                                    public ResourceAdaptationProcessorListener {
  public:
   // The processor can be constructed on any sequence, but must be initialized
   // and used on a single sequence, e.g. the encoder queue.
@@ -115,6 +116,11 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   ResourceListenerResponse OnResourceUsageStateMeasured(
       const Resource& resource) override;
 
+  void OnVideoSourceRestrictionsUpdated(
+      VideoSourceRestrictions restrictions,
+      const VideoAdaptationCounters& adaptation_counters,
+      const Resource* reason) override;
+
   // For reasons of adaptation and statistics, we not only count the total
   // number of adaptations, but we also count the number of adaptations per
   // reason.
@@ -155,7 +161,7 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   // Makes |video_source_restrictions_| up-to-date and informs the
   // |adaptation_listener_| if restrictions are changed, allowing the listener
   // to reconfigure the source accordingly.
-  void MaybeUpdateVideoSourceRestrictions();
+  void MaybeUpdateVideoSourceRestrictions(const Resource* reason_resource);
   // Calculates an up-to-date value of the target frame rate and informs the
   // |encode_usage_resource_| of the new value.
   void MaybeUpdateTargetFrameRate();
@@ -164,7 +170,8 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   void UpdateQualityScalerSettings(
       absl::optional<VideoEncoder::QpThresholds> qp_thresholds);
 
-  void UpdateAdaptationStats(AdaptationObserverInterface::AdaptReason reason);
+  void UpdateAdaptationStats(const VideoAdaptationCounters& total_counts,
+                             AdaptationObserverInterface::AdaptReason reason);
 
   // Checks to see if we should execute the quality rampup experiment. The
   // experiment resets all video restrictions at the start of the call in the
