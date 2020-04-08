@@ -16,12 +16,21 @@ rtc_library("resource_adaptation") {
     "resource.h",
     "resource_adaptation_processor_interface.cc",
     "resource_adaptation_processor_interface.h",
+    "resource_consumer.cc",
+    "resource_consumer.h",
+    "resource_consumer_configuration.cc",
+    "resource_consumer_configuration.h",
     "video_source_restrictions.cc",
     "video_source_restrictions.h",
+    "video_stream_input_state.cc",
+    "video_stream_input_state.h",
+    "video_stream_input_state_provider.cc",
+    "video_stream_input_state_provider.h",
   ]
   deps = [
     "../../api:rtp_parameters",
     "../../api/video:video_frame",
+    "../../api/video:video_stream_encoder",
     "../../api/video_codecs:video_codecs_api",
     "../../rtc_base:checks",
     "../../rtc_base:rtc_base_approved",
@@ -51,6 +60,8 @@ if (rtc_include_tests) {
     sources = [
       "test/fake_resource.cc",
       "test/fake_resource.h",
+      "test/fake_resource_consumer_configuration.cc",
+      "test/fake_resource_consumer_configuration.h",
     ]
     deps = [
       ":resource_adaptation",
