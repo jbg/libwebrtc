@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a4ec29f_0f747009",
+        "filename": "call/adaptation/resource_adaptation_processor.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-08T12:32:54Z",
+      "side": 1,
+      "message": "Self-review: Add resource_adaptation_processor_unittest.cc\n\nWe may want to move a large number of tests from video_stream_encoder_unittest.cc to resource_adaptation_processor_unittest.cc, or test VideoStreamEncoder things based on a fake processor? Unit test vs integration test...\n\nThen again, a large change in test may be more suitable for a separate CL...",
+      "revId": "d526aab730629459b4ce15289c666efd33e47b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
