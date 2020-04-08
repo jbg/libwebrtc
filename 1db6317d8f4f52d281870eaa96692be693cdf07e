@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "eeb30bf2_4f475fa3",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd5fc91_7fee6227",
+      "range": {
+        "startLine": 28,
+        "startChar": 26,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45a0b404_3daf674c",
         "filename": "audio/voip/audio_ingress.cc",
         "patchSetId": 1
@@ -116,6 +140,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cd1b6af_4dea766b",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45a0b404_3daf674c",
+      "range": {
+        "startLine": 110,
+        "startChar": 53,
+        "endLine": 110,
+        "endChar": 63
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -142,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "f646771b_3f7cf335",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "yeah, thanks. I missed it from original code.",
+      "parentUuid": "d7499df2_7a660578",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 8
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d6bbd0e_33285f80",
         "filename": "audio/voip/audio_ingress.cc",
         "patchSetId": 1
@@ -162,6 +234,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8db8c8c_4cb4f82a",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Makes sense. I added condition to fail gracefully instead of DCHECK.",
+      "parentUuid": "9d6bbd0e_33285f80",
+      "range": {
+        "startLine": 177,
+        "startChar": 2,
+        "endLine": 177,
+        "endChar": 62
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -188,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "e2eb3a26_a255c556",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "also included in condition added above.",
+      "parentUuid": "a9d9f4c0_ebbe5afc",
+      "range": {
+        "startLine": 178,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 68
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd3f872f_fe86fc1a",
         "filename": "audio/voip/audio_ingress.cc",
         "patchSetId": 1
@@ -208,6 +328,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47caa47e_f8194806",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd3f872f_fe86fc1a",
+      "range": {
+        "startLine": 180,
+        "startChar": 72,
+        "endLine": 180,
+        "endChar": 75
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -234,6 +378,30 @@
     },
     {
       "key": {
+        "uuid": "1910af5e_4635b337",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "542e429c_e59f46a1",
+      "range": {
+        "startLine": 220,
+        "startChar": 2,
+        "endLine": 222,
+        "endChar": 3
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3da17d4_e78396f8",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 1
@@ -254,6 +422,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e42f58e_f1d0d108",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3da17d4_e78396f8",
+      "range": {
+        "startLine": 37,
+        "startChar": 18,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -280,6 +472,30 @@
     },
     {
       "key": {
+        "uuid": "c562c1f9_3d12221a",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "ok, thanks. I changed the comment to be more detail and explicit on the usage.",
+      "parentUuid": "13fc2349_b54c6632",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 58
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3f28f2d_5831adfe",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 1
@@ -300,6 +516,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7976765_b5354381",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3f28f2d_5831adfe",
+      "range": {
+        "startLine": 74,
+        "startChar": 6,
+        "endLine": 74,
+        "endChar": 38
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -326,6 +566,30 @@
     },
     {
       "key": {
+        "uuid": "f932994f_a2bfa29f",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ca11083_daf466cb",
+      "range": {
+        "startLine": 75,
+        "startChar": 9,
+        "endLine": 75,
+        "endChar": 19
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1adcdc89_d29ee2f8",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 1
@@ -346,6 +610,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5455bbc_b61112b1",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Agreed.  I changed to GetDecodingStatistics().",
+      "parentUuid": "1adcdc89_d29ee2f8",
+      "range": {
+        "startLine": 77,
+        "startChar": 25,
+        "endLine": 77,
+        "endChar": 50
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -372,6 +660,30 @@
     },
     {
       "key": {
+        "uuid": "7cb67a5e_ff021767",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Thanks for the comment. This is actual implementation of APIs and we have another API level class called AudioChannel which will incorporate both audio egress and ingress as its member. I can add API testings in AudioChannel unit tests.\n\nHowever, I am not super sure about impose audio thread checker as I know caller can directly reset audio device module and that may trigger OS to switch currently active audio thread.  In release mode, these checks are gone but it won\u0027t be a problem but I decided use the checker here to clearly inform other devs on intended thread usage.",
+      "parentUuid": "cca1e4bb_17d500fe",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 40
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e44d38fe_f5fe1bf7",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 1
@@ -392,6 +704,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "080c316a_c16e6029",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Thanks. I understand yours concern. These locks are limited on its locking scope that there is not a code path that requires both locks to be acquired at the same time.  However, API level unit testing should solidify the usage.",
+      "parentUuid": "e44d38fe_f5fe1bf7",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 42
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -418,6 +754,30 @@
     },
     {
       "key": {
+        "uuid": "4b80b5e1_18a69849",
+        "filename": "audio/voip/test/audio_ingress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Thanks for catching it.",
+      "parentUuid": "79a7f8d6_e326a524",
+      "range": {
+        "startLine": 31,
+        "startChar": 42,
+        "endLine": 31,
+        "endChar": 66
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3736289f_130db365",
         "filename": "audio/voip/test/audio_ingress_unittest.cc",
         "patchSetId": 1
@@ -441,6 +801,30 @@
     },
     {
       "key": {
+        "uuid": "d1da2181_b4bf40cd",
+        "filename": "audio/voip/test/audio_ingress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3736289f_130db365",
+      "range": {
+        "startLine": 96,
+        "startChar": 2,
+        "endLine": 96,
+        "endChar": 47
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b42b8600_5cbcb747",
         "filename": "audio/voip/test/audio_ingress_unittest.cc",
         "patchSetId": 1
@@ -461,6 +845,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74bd59c1_1be50682",
+        "filename": "audio/voip/test/audio_ingress_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-08T21:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b42b8600_5cbcb747",
+      "range": {
+        "startLine": 135,
+        "startChar": 52,
+        "endLine": 135,
+        "endChar": 55
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
