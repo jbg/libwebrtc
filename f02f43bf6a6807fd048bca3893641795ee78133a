@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4090f3b_8d8e4f12",
+        "filename": "call/adaptation/resource_adaptation_processor_interface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-08T10:23:34Z",
+      "side": 1,
+      "message": "Self-review: Need to add a comment explaining what these are. At the moment, \"restrictions\" are the filtered one (after applying the degradation preference) but the adaptation_counters non-filtered counters...\n\nSee if we can report both as \"unfiltered\" and still pass all the tests?",
+      "revId": "f02f43bf6a6807fd048bca3893641795ee78133a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
