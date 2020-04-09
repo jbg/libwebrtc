@@ -317,6 +317,12 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   // Stop all client started tasks to prevent their access to any call related
   // objects after these objects will be destroyed during call tear down.
   executor_->Stop();
+  task_queue_->SendTask(
+      [&stats_poller]() {
+        // Get final end-of-call stats.
+        stats_poller.PollStatsAndNotifyObservers();
+      },
+      RTC_FROM_HERE);
   // We need to detach AEC dumping from peers, because dump uses |task_queue_|
   // inside.
   alice_->DetachAecDump();
