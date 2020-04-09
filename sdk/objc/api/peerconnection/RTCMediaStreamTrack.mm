@@ -19,8 +19,8 @@ NSString * const kRTCMediaStreamTrackKindAudio =
 NSString * const kRTCMediaStreamTrackKindVideo =
     @(webrtc::MediaStreamTrackInterface::kVideoKind);
 
-@implementation RTCMediaStreamTrack {
-  RTCPeerConnectionFactory *_factory;
+@implementation WebRTCMediaStreamTrack {
+  WebRTCPeerConnectionFactory *_factory;
   rtc::scoped_refptr<webrtc::MediaStreamTrackInterface> _nativeTrack;
   RTCMediaStreamTrackType _type;
 }
@@ -47,7 +47,7 @@ NSString * const kRTCMediaStreamTrackKindVideo =
 
 - (NSString *)description {
   NSString *readyState = [[self class] stringForState:self.readyState];
-  return [NSString stringWithFormat:@"RTCMediaStreamTrack:\n%@\n%@\n%@\n%@",
+  return [NSString stringWithFormat:@"WebRTCMediaStreamTrack:\n%@\n%@\n%@\n%@",
                                     self.kind,
                                     self.trackId,
                                     self.isEnabled ? @"enabled" : @"disabled",
@@ -61,7 +61,7 @@ NSString * const kRTCMediaStreamTrackKindVideo =
   if (![object isMemberOfClass:[self class]]) {
     return NO;
   }
-  return [self isEqualToTrack:(RTCMediaStreamTrack *)object];
+  return [self isEqualToTrack:(WebRTCMediaStreamTrack *)object];
 }
 
 - (NSUInteger)hash {
@@ -76,7 +76,7 @@ NSString * const kRTCMediaStreamTrackKindVideo =
 
 @synthesize factory = _factory;
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
                     nativeTrack:(rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeTrack
                            type:(RTCMediaStreamTrackType)type {
   NSParameterAssert(nativeTrack);
@@ -89,7 +89,7 @@ NSString * const kRTCMediaStreamTrackKindVideo =
   return self;
 }
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
                     nativeTrack:(rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeTrack {
   NSParameterAssert(nativeTrack);
   if (nativeTrack->kind() ==
@@ -103,7 +103,7 @@ NSString * const kRTCMediaStreamTrackKindVideo =
   return nil;
 }
 
-- (BOOL)isEqualToTrack:(RTCMediaStreamTrack *)track {
+- (BOOL)isEqualToTrack:(WebRTCMediaStreamTrack *)track {
   if (!track) {
     return NO;
   }
@@ -139,21 +139,21 @@ NSString * const kRTCMediaStreamTrackKindVideo =
   }
 }
 
-+ (RTCMediaStreamTrack *)mediaTrackForNativeTrack:
++ (WebRTCMediaStreamTrack *)mediaTrackForNativeTrack:
                              (rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeTrack
-                                          factory:(RTCPeerConnectionFactory *)factory {
+                                          factory:(WebRTCPeerConnectionFactory *)factory {
   NSParameterAssert(nativeTrack);
   NSParameterAssert(factory);
   if (nativeTrack->kind() == webrtc::MediaStreamTrackInterface::kAudioKind) {
-    return [[RTCAudioTrack alloc] initWithFactory:factory
+    return [[WebRTCAudioTrack alloc] initWithFactory:factory
                                       nativeTrack:nativeTrack
                                              type:RTCMediaStreamTrackTypeAudio];
   } else if (nativeTrack->kind() == webrtc::MediaStreamTrackInterface::kVideoKind) {
-    return [[RTCVideoTrack alloc] initWithFactory:factory
+    return [[WebRTCVideoTrack alloc] initWithFactory:factory
                                       nativeTrack:nativeTrack
                                              type:RTCMediaStreamTrackTypeVideo];
   } else {
-    return [[RTCMediaStreamTrack alloc] initWithFactory:factory nativeTrack:nativeTrack];
+    return [[WebRTCMediaStreamTrack alloc] initWithFactory:factory nativeTrack:nativeTrack];
   }
 }
 

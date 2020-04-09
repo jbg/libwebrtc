@@ -16,10 +16,10 @@ namespace webrtc {
 class AudioSessionObserver;
 }
 
-/** Adapter that forwards RTCAudioSessionDelegate calls to the appropriate
+/** Adapter that forwards WebRTCAudioSessionDelegate calls to the appropriate
  *  methods on the AudioSessionObserver.
  */
-@interface RTCNativeAudioSessionDelegateAdapter : NSObject <RTCAudioSessionDelegate>
+@interface RTCNativeAudioSessionDelegateAdapter : NSObject <WebRTCAudioSessionDelegate>
 
 - (instancetype)init NS_UNAVAILABLE;
 

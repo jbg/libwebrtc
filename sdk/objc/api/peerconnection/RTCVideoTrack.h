@@ -14,23 +14,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol RTCVideoRenderer;
-@class RTCPeerConnectionFactory;
-@class RTCVideoSource;
+@protocol WebRTCVideoRenderer;
+@class WebRTCPeerConnectionFactory;
+@class WebRTCVideoSource;
 
 RTC_OBJC_EXPORT
-@interface RTCVideoTrack : RTCMediaStreamTrack
+@interface WebRTCVideoTrack : WebRTCMediaStreamTrack
 
 /** The video source for this video track. */
-@property(nonatomic, readonly) RTCVideoSource *source;
+@property(nonatomic, readonly) WebRTCVideoSource *source;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /** Register a renderer that will render all frames received on this track. */
-- (void)addRenderer:(id<RTCVideoRenderer>)renderer;
+- (void)addRenderer:(id<WebRTCVideoRenderer>)renderer;
 
 /** Deregister a renderer. */
-- (void)removeRenderer:(id<RTCVideoRenderer>)renderer;
+- (void)removeRenderer:(id<WebRTCVideoRenderer>)renderer;
 
 @end
 

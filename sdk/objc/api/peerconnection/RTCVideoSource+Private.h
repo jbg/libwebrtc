@@ -17,26 +17,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RTCVideoSource ()
+@interface WebRTCVideoSource ()
 
 /**
- * The VideoTrackSourceInterface object passed to this RTCVideoSource during
+ * The VideoTrackSourceInterface object passed to this WebRTCVideoSource during
  * construction.
  */
 @property(nonatomic, readonly) rtc::scoped_refptr<webrtc::VideoTrackSourceInterface>
     nativeVideoSource;
 
-/** Initialize an RTCVideoSource from a native VideoTrackSourceInterface. */
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+/** Initialize an WebRTCVideoSource from a native VideoTrackSourceInterface. */
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
               nativeVideoSource:
                   (rtc::scoped_refptr<webrtc::VideoTrackSourceInterface>)nativeVideoSource
     NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
               nativeMediaSource:(rtc::scoped_refptr<webrtc::MediaSourceInterface>)nativeMediaSource
                            type:(RTCMediaSourceType)type NS_UNAVAILABLE;
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
                 signalingThread:(rtc::Thread *)signalingThread
                    workerThread:(rtc::Thread *)workerThread;
 

@@ -17,13 +17,13 @@
 
 #import "RTCMTLI420Renderer.h"
 
-@interface RTCMTLNSVideoView ()<MTKViewDelegate>
+@interface WebRTCMTLNSVideoView ()<MTKViewDelegate>
 @property(nonatomic) id<RTCMTLRenderer> renderer;
 @property(nonatomic, strong) MTKView *metalView;
-@property(atomic, strong) RTCVideoFrame *videoFrame;
+@property(atomic, strong) WebRTCVideoFrame *videoFrame;
 @end
 
-@implementation RTCMTLNSVideoView {
+@implementation WebRTCMTLNSVideoView {
   id<RTCMTLRenderer> _renderer;
 }
 
@@ -102,7 +102,7 @@
 - (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
 }
 
-#pragma mark - RTCVideoRenderer
+#pragma mark - WebRTCVideoRenderer
 
 - (void)setSize:(CGSize)size {
   _metalView.drawableSize = size;
@@ -112,7 +112,7 @@
   [_metalView draw];
 }
 
-- (void)renderFrame:(nullable RTCVideoFrame *)frame {
+- (void)renderFrame:(nullable WebRTCVideoFrame *)frame {
   if (frame == nil) {
     return;
   }

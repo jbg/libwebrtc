@@ -21,20 +21,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /** Callback block for encoder. */
-typedef BOOL (^RTCVideoEncoderCallback)(RTCEncodedImage *frame,
-                                        id<RTCCodecSpecificInfo> info,
-                                        RTCRtpFragmentationHeader *header);
+typedef BOOL (^RTCVideoEncoderCallback)(WebRTCEncodedImage *frame,
+                                        id<WebRTCCodecSpecificInfo> info,
+                                        WebRTCRtpFragmentationHeader *header);
 
 /** Protocol for encoder implementations. */
 RTC_OBJC_EXPORT
-@protocol RTCVideoEncoder <NSObject>
+@protocol WebRTCVideoEncoder <NSObject>
 
 - (void)setCallback:(RTCVideoEncoderCallback)callback;
-- (NSInteger)startEncodeWithSettings:(RTCVideoEncoderSettings *)settings
+- (NSInteger)startEncodeWithSettings:(WebRTCVideoEncoderSettings *)settings
                        numberOfCores:(int)numberOfCores;
 - (NSInteger)releaseEncoder;
-- (NSInteger)encode:(RTCVideoFrame *)frame
-    codecSpecificInfo:(nullable id<RTCCodecSpecificInfo>)info
+- (NSInteger)encode:(WebRTCVideoFrame *)frame
+    codecSpecificInfo:(nullable id<WebRTCCodecSpecificInfo>)info
            frameTypes:(NSArray<NSNumber *> *)frameTypes;
 - (int)setBitrate:(uint32_t)bitrateKbit framerate:(uint32_t)framerate;
 - (NSString *)implementationName;
@@ -42,7 +42,7 @@ RTC_OBJC_EXPORT
 /** Returns QP scaling settings for encoder. The quality scaler adjusts the resolution in order to
  *  keep the QP from the encoded images within the given range. Returning nil from this function
  *  disables quality scaling. */
-- (nullable RTCVideoEncoderQpThresholds *)scalingSettings;
+- (nullable WebRTCVideoEncoderQpThresholds *)scalingSettings;
 
 @end
 

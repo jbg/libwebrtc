@@ -20,14 +20,14 @@
 
 @implementation ARDBroadcastSampleHandler {
   ARDAppClient *_client;
-  RTCCallbackLogger *_callbackLogger;
+  WebRTCCallbackLogger *_callbackLogger;
 }
 
 @synthesize capturer = _capturer;
 
 - (instancetype)init {
   if (self = [super init]) {
-    _callbackLogger = [[RTCCallbackLogger alloc] init];
+    _callbackLogger = [[WebRTCCallbackLogger alloc] init];
     os_log_t rtc_os_log = os_log_create("com.google.AppRTCMobile", "RTCLog");
     [_callbackLogger start:^(NSString *logMessage) {
       os_log(rtc_os_log, "%{public}s", [logMessage cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -104,7 +104,7 @@
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didCreateLocalCapturer:(RTCCameraVideoCapturer *)localCapturer {
+    didCreateLocalCapturer:(WebRTCCameraVideoCapturer *)localCapturer {
 }
 
 - (void)appClient:(ARDAppClient *)client
@@ -113,11 +113,11 @@
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
+    didReceiveLocalVideoTrack:(WebRTCVideoTrack *)localVideoTrack {
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
+    didReceiveRemoteVideoTrack:(WebRTCVideoTrack *)remoteVideoTrack {
 }
 
 - (void)appClient:(ARDAppClient *)client didGetStats:(NSArray *)stats {

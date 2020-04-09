@@ -16,7 +16,7 @@
 #import "RTCRtpHeaderExtension+Private.h"
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCRtpParameters
+@implementation WebRTCRtpParameters
 
 @synthesize transactionId = _transactionId;
 @synthesize rtcp = _rtcp;
@@ -33,30 +33,30 @@
     (const webrtc::RtpParameters &)nativeParameters {
   if (self = [self init]) {
     _transactionId = [NSString stringForStdString:nativeParameters.transaction_id];
-    _rtcp = [[RTCRtcpParameters alloc] initWithNativeParameters:nativeParameters.rtcp];
+    _rtcp = [[WebRTCRtcpParameters alloc] initWithNativeParameters:nativeParameters.rtcp];
 
     NSMutableArray *headerExtensions = [[NSMutableArray alloc] init];
     for (const auto &headerExtension : nativeParameters.header_extensions) {
       [headerExtensions
-          addObject:[[RTCRtpHeaderExtension alloc] initWithNativeParameters:headerExtension]];
+          addObject:[[WebRTCRtpHeaderExtension alloc] initWithNativeParameters:headerExtension]];
     }
     _headerExtensions = headerExtensions;
 
     NSMutableArray *encodings = [[NSMutableArray alloc] init];
     for (const auto &encoding : nativeParameters.encodings) {
-      [encodings addObject:[[RTCRtpEncodingParameters alloc]
+      [encodings addObject:[[WebRTCRtpEncodingParameters alloc]
                                initWithNativeParameters:encoding]];
     }
     _encodings = encodings;
 
     NSMutableArray *codecs = [[NSMutableArray alloc] init];
     for (const auto &codec : nativeParameters.codecs) {
-      [codecs addObject:[[RTCRtpCodecParameters alloc]
+      [codecs addObject:[[WebRTCRtpCodecParameters alloc]
                             initWithNativeParameters:codec]];
     }
     _codecs = codecs;
 
-    _degradationPreference = [RTCRtpParameters
+    _degradationPreference = [WebRTCRtpParameters
         degradationPreferenceFromNativeDegradationPreference:nativeParameters
                                                                  .degradation_preference];
   }
@@ -67,17 +67,17 @@
   webrtc::RtpParameters parameters;
   parameters.transaction_id = [NSString stdStringForString:_transactionId];
   parameters.rtcp = [_rtcp nativeParameters];
-  for (RTCRtpHeaderExtension *headerExtension in _headerExtensions) {
+  for (WebRTCRtpHeaderExtension *headerExtension in _headerExtensions) {
     parameters.header_extensions.push_back(headerExtension.nativeParameters);
   }
-  for (RTCRtpEncodingParameters *encoding in _encodings) {
+  for (WebRTCRtpEncodingParameters *encoding in _encodings) {
     parameters.encodings.push_back(encoding.nativeParameters);
   }
-  for (RTCRtpCodecParameters *codec in _codecs) {
+  for (WebRTCRtpCodecParameters *codec in _codecs) {
     parameters.codecs.push_back(codec.nativeParameters);
   }
   if (_degradationPreference) {
-    parameters.degradation_preference = [RTCRtpParameters
+    parameters.degradation_preference = [WebRTCRtpParameters
         nativeDegradationPreferenceFromDegradationPreference:(RTCDegradationPreference)
                                                                  _degradationPreference.intValue];
   }

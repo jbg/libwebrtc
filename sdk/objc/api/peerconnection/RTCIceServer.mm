@@ -12,7 +12,7 @@
 
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCIceServer
+@implementation WebRTCIceServer
 
 @synthesize urlStrings = _urlStrings;
 @synthesize username = _username;
@@ -97,7 +97,7 @@
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"RTCIceServer:\n%@\n%@\n%@\n%@\n%@\n%@\n%@",
+  return [NSString stringWithFormat:@"WebRTCIceServer:\n%@\n%@\n%@\n%@\n%@\n%@\n%@",
                                     _urlStrings,
                                     _username,
                                     _credential,

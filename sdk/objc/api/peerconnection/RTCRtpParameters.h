@@ -27,22 +27,22 @@ typedef NS_ENUM(NSInteger, RTCDegradationPreference) {
 };
 
 RTC_OBJC_EXPORT
-@interface RTCRtpParameters : NSObject
+@interface WebRTCRtpParameters : NSObject
 
 /** A unique identifier for the last set of parameters applied. */
 @property(nonatomic, copy) NSString *transactionId;
 
 /** Parameters used for RTCP. */
-@property(nonatomic, readonly, copy) RTCRtcpParameters *rtcp;
+@property(nonatomic, readonly, copy) WebRTCRtcpParameters *rtcp;
 
 /** An array containing parameters for RTP header extensions. */
-@property(nonatomic, readonly, copy) NSArray<RTCRtpHeaderExtension *> *headerExtensions;
+@property(nonatomic, readonly, copy) NSArray<WebRTCRtpHeaderExtension *> *headerExtensions;
 
 /** The currently active encodings in the order of preference. */
-@property(nonatomic, copy) NSArray<RTCRtpEncodingParameters *> *encodings;
+@property(nonatomic, copy) NSArray<WebRTCRtpEncodingParameters *> *encodings;
 
 /** The negotiated set of send codecs in order of preference. */
-@property(nonatomic, copy) NSArray<RTCRtpCodecParameters *> *codecs;
+@property(nonatomic, copy) NSArray<WebRTCRtpCodecParameters *> *codecs;
 
 /**
  * Degradation preference in case of CPU adaptation or constrained bandwidth.

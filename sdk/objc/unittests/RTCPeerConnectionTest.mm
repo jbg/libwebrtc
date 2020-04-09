@@ -34,9 +34,9 @@
 
 - (void)testConfigurationGetter {
   NSArray *urlStrings = @[ @"stun:stun1.example.net" ];
-  RTCIceServer *server = [[RTCIceServer alloc] initWithURLStrings:urlStrings];
+  WebRTCIceServer *server = [[WebRTCIceServer alloc] initWithURLStrings:urlStrings];
 
-  RTCConfiguration *config = [[RTCConfiguration alloc] init];
+  WebRTCConfiguration *config = [[WebRTCConfiguration alloc] init];
   config.iceServers = @[ server ];
   config.iceTransportPolicy = RTCIceTransportPolicyRelay;
   config.bundlePolicy = RTCBundlePolicyMaxBundle;
@@ -54,18 +54,18 @@
       RTCContinualGatheringPolicyGatherContinually;
   config.shouldPruneTurnPorts = YES;
   config.activeResetSrtpParams = YES;
-  config.cryptoOptions = [[RTCCryptoOptions alloc] initWithSrtpEnableGcmCryptoSuites:YES
+  config.cryptoOptions = [[WebRTCCryptoOptions alloc] initWithSrtpEnableGcmCryptoSuites:YES
                                                  srtpEnableAes128Sha1_32CryptoCipher:YES
                                               srtpEnableEncryptedRtpHeaderExtensions:NO
                                                         sframeRequireFrameEncryption:NO];
 
-  RTCMediaConstraints *contraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{}
+  WebRTCMediaConstraints *contraints = [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{}
       optionalConstraints:nil];
-  RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+  WebRTCPeerConnectionFactory *factory = [[WebRTCPeerConnectionFactory alloc] init];
 
-  RTCConfiguration *newConfig;
+  WebRTCConfiguration *newConfig;
   @autoreleasepool {
-    RTCPeerConnection *peerConnection =
+    WebRTCPeerConnection *peerConnection =
         [factory peerConnectionWithConfiguration:config constraints:contraints delegate:nil];
     newConfig = peerConnection.configuration;
 
@@ -78,8 +78,8 @@
   }
 
   EXPECT_EQ([config.iceServers count], [newConfig.iceServers count]);
-  RTCIceServer *newServer = newConfig.iceServers[0];
-  RTCIceServer *origServer = config.iceServers[0];
+  WebRTCIceServer *newServer = newConfig.iceServers[0];
+  WebRTCIceServer *origServer = config.iceServers[0];
   std::string origUrl = origServer.urlStrings.firstObject.UTF8String;
   std::string url = newServer.urlStrings.firstObject.UTF8String;
   EXPECT_EQ(origUrl, url);
@@ -109,19 +109,19 @@
 
 - (void)testWithDependencies {
   NSArray *urlStrings = @[ @"stun:stun1.example.net" ];
-  RTCIceServer *server = [[RTCIceServer alloc] initWithURLStrings:urlStrings];
+  WebRTCIceServer *server = [[WebRTCIceServer alloc] initWithURLStrings:urlStrings];
 
-  RTCConfiguration *config = [[RTCConfiguration alloc] init];
+  WebRTCConfiguration *config = [[WebRTCConfiguration alloc] init];
   config.iceServers = @[ server ];
-  RTCMediaConstraints *contraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{}
+  WebRTCMediaConstraints *contraints = [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{}
                                                                           optionalConstraints:nil];
-  RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+  WebRTCPeerConnectionFactory *factory = [[WebRTCPeerConnectionFactory alloc] init];
 
-  RTCConfiguration *newConfig;
+  WebRTCConfiguration *newConfig;
   std::unique_ptr<webrtc::PeerConnectionDependencies> pc_dependencies =
       std::make_unique<webrtc::PeerConnectionDependencies>(nullptr);
   @autoreleasepool {
-    RTCPeerConnection *peerConnection =
+    WebRTCPeerConnection *peerConnection =
         [factory peerConnectionWithDependencies:config
                                     constraints:contraints
                                    dependencies:std::move(pc_dependencies)

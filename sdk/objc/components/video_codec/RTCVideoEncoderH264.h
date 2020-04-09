@@ -15,8 +15,8 @@
 #import "RTCVideoEncoder.h"
 
 RTC_OBJC_EXPORT
-@interface RTCVideoEncoderH264 : NSObject <RTCVideoEncoder>
+@interface WebRTCVideoEncoderH264 : NSObject <WebRTCVideoEncoder>
 
-- (instancetype)initWithCodecInfo:(RTCVideoCodecInfo *)codecInfo;
+- (instancetype)initWithCodecInfo:(WebRTCVideoCodecInfo *)codecInfo;
 
 @end

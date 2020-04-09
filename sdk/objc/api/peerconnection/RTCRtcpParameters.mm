@@ -12,7 +12,7 @@
 
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCRtcpParameters
+@implementation WebRTCRtcpParameters
 
 @synthesize cname = _cname;
 @synthesize isReducedSize = _isReducedSize;

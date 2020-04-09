@@ -25,7 +25,7 @@
 
 @synthesize objCVideoTrackSource = _objCVideoTrackSource;
 
-- (void)capturer:(RTCVideoCapturer *)capturer didCaptureVideoFrame:(RTCVideoFrame *)frame {
+- (void)capturer:(WebRTCVideoCapturer *)capturer didCaptureVideoFrame:(WebRTCVideoFrame *)frame {
   _objCVideoTrackSource->OnCapturedFrame(frame);
 }
 
@@ -61,7 +61,7 @@ void ObjCVideoTrackSource::OnOutputFormatRequest(int width, int height, int fps)
   video_adapter()->OnOutputFormatRequest(format);
 }
 
-void ObjCVideoTrackSource::OnCapturedFrame(RTCVideoFrame *frame) {
+void ObjCVideoTrackSource::OnCapturedFrame(WebRTCVideoFrame *frame) {
   const int64_t timestamp_us = frame.timeStampNs / rtc::kNumNanosecsPerMicrosec;
   const int64_t translated_timestamp_us =
       timestamp_aligner_.TranslateTimestamp(timestamp_us, rtc::TimeMicros());
@@ -88,10 +88,10 @@ void ObjCVideoTrackSource::OnCapturedFrame(RTCVideoFrame *frame) {
   if (adapted_width == frame.width && adapted_height == frame.height) {
     // No adaption - optimized path.
     buffer = new rtc::RefCountedObject<ObjCFrameBuffer>(frame.buffer);
-  } else if ([frame.buffer isKindOfClass:[RTCCVPixelBuffer class]]) {
+  } else if ([frame.buffer isKindOfClass:[WebRTCCVPixelBuffer class]]) {
     // Adapted CVPixelBuffer frame.
-    RTCCVPixelBuffer *rtcPixelBuffer = (RTCCVPixelBuffer *)frame.buffer;
-    buffer = new rtc::RefCountedObject<ObjCFrameBuffer>([[RTCCVPixelBuffer alloc]
+    WebRTCCVPixelBuffer *rtcPixelBuffer = (WebRTCCVPixelBuffer *)frame.buffer;
+    buffer = new rtc::RefCountedObject<ObjCFrameBuffer>([[WebRTCCVPixelBuffer alloc]
         initWithPixelBuffer:rtcPixelBuffer.pixelBuffer
                adaptedWidth:adapted_width
               adaptedHeight:adapted_height

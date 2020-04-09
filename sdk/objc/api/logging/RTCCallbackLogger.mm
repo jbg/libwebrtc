@@ -64,7 +64,7 @@ class CallbackWithSeverityLogSink : public rtc::LogSink {
   RTCCallbackLoggerMessageAndSeverityHandler callback_handler_;
 };
 
-@implementation RTCCallbackLogger {
+@implementation WebRTCCallbackLogger {
   BOOL _hasStarted;
   std::unique_ptr<rtc::LogSink> _logSink;
 }

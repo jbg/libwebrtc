@@ -15,7 +15,7 @@
 #import "components/video_frame_buffer/RTCCVPixelBuffer.h"
 #include "rtc_base/system/gcd_helpers.h"
 
-NSString *const kRTCFileVideoCapturerErrorDomain = @"org.webrtc.RTCFileVideoCapturer";
+NSString *const kRTCFileVideoCapturerErrorDomain = @"org.webrtc.WebRTCFileVideoCapturer";
 
 typedef NS_ENUM(NSInteger, RTCFileVideoCapturerErrorCode) {
   RTCFileVideoCapturerErrorCode_CapturerRunning = 2000,
@@ -28,12 +28,12 @@ typedef NS_ENUM(NSInteger, RTCFileVideoCapturerStatus) {
   RTCFileVideoCapturerStatusStopped
 };
 
-@interface RTCFileVideoCapturer ()
+@interface WebRTCFileVideoCapturer ()
 @property(nonatomic, assign) CMTime lastPresentationTime;
 @property(nonatomic, strong) NSURL *fileURL;
 @end
 
-@implementation RTCFileVideoCapturer {
+@implementation WebRTCFileVideoCapturer {
   AVAssetReader *_reader;
   AVAssetReaderTrackOutput *_outTrack;
   RTCFileVideoCapturerStatus _status;
@@ -182,11 +182,11 @@ typedef NS_ENUM(NSInteger, RTCFileVideoCapturerStatus) {
       return;
     }
 
-    RTCCVPixelBuffer *rtcPixelBuffer = [[RTCCVPixelBuffer alloc] initWithPixelBuffer:pixelBuffer];
+    WebRTCCVPixelBuffer *rtcPixelBuffer = [[WebRTCCVPixelBuffer alloc] initWithPixelBuffer:pixelBuffer];
     NSTimeInterval timeStampSeconds = CACurrentMediaTime();
     int64_t timeStampNs = lroundf(timeStampSeconds * NSEC_PER_SEC);
-    RTCVideoFrame *videoFrame =
-        [[RTCVideoFrame alloc] initWithBuffer:rtcPixelBuffer rotation:0 timeStampNs:timeStampNs];
+    WebRTCVideoFrame *videoFrame =
+        [[WebRTCVideoFrame alloc] initWithBuffer:rtcPixelBuffer rotation:0 timeStampNs:timeStampNs];
     CFRelease(sampleBuffer);
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

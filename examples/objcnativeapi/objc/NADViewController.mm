@@ -24,9 +24,9 @@
 
 @interface NADViewController ()
 
-@property(nonatomic) RTCCameraVideoCapturer *capturer;
-@property(nonatomic) RTCCameraPreviewView *localVideoView;
-@property(nonatomic) __kindof UIView<RTCVideoRenderer> *remoteVideoView;
+@property(nonatomic) WebRTCCameraVideoCapturer *capturer;
+@property(nonatomic) WebRTCCameraPreviewView *localVideoView;
+@property(nonatomic) __kindof UIView<WebRTCVideoRenderer> *remoteVideoView;
 @property(nonatomic) UIButton *callButton;
 @property(nonatomic) UIButton *hangUpButton;
 
@@ -50,14 +50,14 @@
   _view = [[UIView alloc] initWithFrame:CGRectZero];
 
 #if defined(RTC_SUPPORTS_METAL)
-  _remoteVideoView = [[RTCMTLVideoView alloc] initWithFrame:CGRectZero];
+  _remoteVideoView = [[WebRTCMTLVideoView alloc] initWithFrame:CGRectZero];
 #else
-  _remoteVideoView = [[RTCEAGLVideoView alloc] initWithFrame:CGRectZero];
+  _remoteVideoView = [[WebRTCEAGLVideoView alloc] initWithFrame:CGRectZero];
 #endif
   _remoteVideoView.translatesAutoresizingMaskIntoConstraints = NO;
   [_view addSubview:_remoteVideoView];
 
-  _localVideoView = [[RTCCameraPreviewView alloc] initWithFrame:CGRectZero];
+  _localVideoView = [[WebRTCCameraPreviewView alloc] initWithFrame:CGRectZero];
   _localVideoView.translatesAutoresizingMaskIntoConstraints = NO;
   [_view addSubview:_localVideoView];
 
@@ -106,14 +106,14 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.capturer = [[RTCCameraVideoCapturer alloc] init];
+  self.capturer = [[WebRTCCameraVideoCapturer alloc] init];
   self.localVideoView.captureSession = self.capturer.captureSession;
 
   _call_client.reset(new webrtc_examples::ObjCCallClient());
 
   // Start capturer.
   AVCaptureDevice *selectedDevice = nil;
-  NSArray<AVCaptureDevice *> *captureDevices = [RTCCameraVideoCapturer captureDevices];
+  NSArray<AVCaptureDevice *> *captureDevices = [WebRTCCameraVideoCapturer captureDevices];
   for (AVCaptureDevice *device in captureDevices) {
     if (device.position == AVCaptureDevicePositionFront) {
       selectedDevice = device;
@@ -126,7 +126,7 @@
   int targetHeight = 480;
   int currentDiff = INT_MAX;
   NSArray<AVCaptureDeviceFormat *> *formats =
-      [RTCCameraVideoCapturer supportedFormatsForDevice:selectedDevice];
+      [WebRTCCameraVideoCapturer supportedFormatsForDevice:selectedDevice];
   for (AVCaptureDeviceFormat *format in formats) {
     CMVideoDimensions dimension = CMVideoFormatDescriptionGetDimensions(format.formatDescription);
     FourCharCode pixelFormat = CMFormatDescriptionGetMediaSubType(format.formatDescription);

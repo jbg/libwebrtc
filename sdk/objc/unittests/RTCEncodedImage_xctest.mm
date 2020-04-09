@@ -22,15 +22,15 @@
   webrtc::EncodedImage encoded_image;
   encoded_image.SetEncodedData(encoded_data);
 
-  RTCEncodedImage *encodedImage =
-      [[RTCEncodedImage alloc] initWithNativeEncodedImage:encoded_image];
+  WebRTCEncodedImage *encodedImage =
+      [[WebRTCEncodedImage alloc] initWithNativeEncodedImage:encoded_image];
 
   XCTAssertEqual([encodedImage nativeEncodedImage].GetEncodedData(), encoded_data);
 }
 
 - (void)testInitWithNSData {
   NSData *bufferData = [NSData data];
-  RTCEncodedImage *encodedImage = [[RTCEncodedImage alloc] init];
+  WebRTCEncodedImage *encodedImage = [[WebRTCEncodedImage alloc] init];
   encodedImage.buffer = bufferData;
 
   webrtc::EncodedImage result_encoded_image = [encodedImage nativeEncodedImage];
@@ -39,12 +39,12 @@
 }
 
 - (void)testRetainsNativeEncodedImage {
-  RTCEncodedImage *encodedImage;
+  WebRTCEncodedImage *encodedImage;
   {
     const auto encoded_data = webrtc::EncodedImageBuffer::Create();
     webrtc::EncodedImage encoded_image;
     encoded_image.SetEncodedData(encoded_data);
-    encodedImage = [[RTCEncodedImage alloc] initWithNativeEncodedImage:encoded_image];
+    encodedImage = [[WebRTCEncodedImage alloc] initWithNativeEncodedImage:encoded_image];
   }
   webrtc::EncodedImage result_encoded_image = [encodedImage nativeEncodedImage];
   XCTAssertTrue(result_encoded_image.GetEncodedData() != nullptr);

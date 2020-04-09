@@ -123,10 +123,10 @@ static const GLsizei kNumTextures = kNumTexturesPerSet * kNumTextureSets;
                uploadPlane);
 }
 
-- (void)uploadFrameToTextures:(RTCVideoFrame *)frame {
+- (void)uploadFrameToTextures:(WebRTCVideoFrame *)frame {
   _currentTextureSet = (_currentTextureSet + 1) % kNumTextureSets;
 
-  id<RTCI420Buffer> buffer = [frame.buffer toI420];
+  id<WebRTCI420Buffer> buffer = [frame.buffer toI420];
 
   const int chromaWidth = buffer.chromaWidth;
   const int chromaHeight = buffer.chromaHeight;

@@ -29,7 +29,7 @@
   return std::move(_wrappedDecoder);
 }
 
-#pragma mark - RTCVideoDecoder
+#pragma mark - WebRTCVideoDecoder
 
 - (void)setCallback:(RTCVideoDecoderCallback)callback {
   RTC_NOTREACHED();
@@ -45,9 +45,9 @@
   return 0;
 }
 
-- (NSInteger)decode:(RTCEncodedImage *)encodedImage
+- (NSInteger)decode:(WebRTCEncodedImage *)encodedImage
         missingFrames:(BOOL)missingFrames
-    codecSpecificInfo:(nullable id<RTCCodecSpecificInfo>)info
+    codecSpecificInfo:(nullable id<WebRTCCodecSpecificInfo>)info
          renderTimeMs:(int64_t)renderTimeMs {
   RTC_NOTREACHED();
   return 0;

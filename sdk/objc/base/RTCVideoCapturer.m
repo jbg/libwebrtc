@@ -10,11 +10,11 @@
 
 #import "RTCVideoCapturer.h"
 
-@implementation RTCVideoCapturer
+@implementation WebRTCVideoCapturer
 
 @synthesize delegate = _delegate;
 
-- (instancetype)initWithDelegate:(id<RTCVideoCapturerDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<WebRTCVideoCapturerDelegate>)delegate {
   if (self = [super init]) {
     _delegate = delegate;
   }

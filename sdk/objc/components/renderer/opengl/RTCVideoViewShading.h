@@ -15,11 +15,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * RTCVideoViewShading provides a way for apps to customize the OpenGL(ES) shaders used in
- * rendering for the RTCEAGLVideoView/RTCNSGLVideoView.
+ * WebRTCVideoViewShading provides a way for apps to customize the OpenGL(ES) shaders used in
+ * rendering for the WebRTCEAGLVideoView/WebRTCNSGLVideoView.
  */
 RTC_OBJC_EXPORT
-@protocol RTCVideoViewShading <NSObject>
+@protocol WebRTCVideoViewShading <NSObject>
 
 /** Callback for I420 frames. Each plane is given as a texture. */
 - (void)applyShadingForFrameWithWidth:(int)width

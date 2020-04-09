@@ -14,19 +14,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCVideoCapturer;
+@class WebRTCVideoCapturer;
 
 RTC_OBJC_EXPORT
-@protocol RTCVideoCapturerDelegate <NSObject>
-- (void)capturer:(RTCVideoCapturer *)capturer didCaptureVideoFrame:(RTCVideoFrame *)frame;
+@protocol WebRTCVideoCapturerDelegate <NSObject>
+- (void)capturer:(WebRTCVideoCapturer *)capturer didCaptureVideoFrame:(WebRTCVideoFrame *)frame;
 @end
 
 RTC_OBJC_EXPORT
-@interface RTCVideoCapturer : NSObject
+@interface WebRTCVideoCapturer : NSObject
 
-@property(nonatomic, weak) id<RTCVideoCapturerDelegate> delegate;
+@property(nonatomic, weak) id<WebRTCVideoCapturerDelegate> delegate;
 
-- (instancetype)initWithDelegate:(id<RTCVideoCapturerDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<WebRTCVideoCapturerDelegate>)delegate;
 
 @end
 

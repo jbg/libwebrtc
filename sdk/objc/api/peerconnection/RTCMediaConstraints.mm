@@ -28,7 +28,7 @@ NSString *const kRTCMediaConstraintsVoiceActivityDetection =
 NSString *const kRTCMediaConstraintsValueTrue = @(webrtc::MediaConstraints::kValueTrue);
 NSString *const kRTCMediaConstraintsValueFalse = @(webrtc::MediaConstraints::kValueFalse);
 
-@implementation RTCMediaConstraints {
+@implementation WebRTCMediaConstraints {
   NSDictionary<NSString *, NSString *> *_mandatory;
   NSDictionary<NSString *, NSString *> *_optional;
 }
@@ -47,7 +47,7 @@ NSString *const kRTCMediaConstraintsValueFalse = @(webrtc::MediaConstraints::kVa
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"RTCMediaConstraints:\n%@\n%@",
+  return [NSString stringWithFormat:@"WebRTCMediaConstraints:\n%@\n%@",
                                     _mandatory,
                                     _optional];
 }

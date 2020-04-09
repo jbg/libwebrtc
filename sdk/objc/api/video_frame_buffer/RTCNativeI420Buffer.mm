@@ -17,7 +17,7 @@
 #include "third_party/libyuv/include/libyuv.h"
 #endif
 
-@implementation RTCI420Buffer
+@implementation WebRTCI420Buffer
 
 - (instancetype)initWithWidth:(int)width height:(int)height {
   if (self = [super init]) {
@@ -99,7 +99,7 @@
   return _i420Buffer->DataV();
 }
 
-- (id<RTCI420Buffer>)toI420 {
+- (id<WebRTCI420Buffer>)toI420 {
   return self;
 }
 

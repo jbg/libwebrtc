@@ -25,7 +25,7 @@ static CGFloat const kLocalVideoViewSize = 120;
 static CGFloat const kLocalVideoViewPadding = 8;
 static CGFloat const kStatusBarHeight = 20;
 
-@interface ARDVideoCallView () <RTCVideoViewDelegate>
+@interface ARDVideoCallView () <WebRTCVideoViewDelegate>
 @end
 
 @implementation ARDVideoCallView {
@@ -45,16 +45,16 @@ static CGFloat const kStatusBarHeight = 20;
   if (self = [super initWithFrame:frame]) {
 
 #if defined(RTC_SUPPORTS_METAL)
-    _remoteVideoView = [[RTCMTLVideoView alloc] initWithFrame:CGRectZero];
+    _remoteVideoView = [[WebRTCMTLVideoView alloc] initWithFrame:CGRectZero];
 #else
-    RTCEAGLVideoView *remoteView = [[RTCEAGLVideoView alloc] initWithFrame:CGRectZero];
+    WebRTCEAGLVideoView *remoteView = [[WebRTCEAGLVideoView alloc] initWithFrame:CGRectZero];
     remoteView.delegate = self;
     _remoteVideoView = remoteView;
 #endif
 
     [self addSubview:_remoteVideoView];
 
-    _localVideoView = [[RTCCameraPreviewView alloc] initWithFrame:CGRectZero];
+    _localVideoView = [[WebRTCCameraPreviewView alloc] initWithFrame:CGRectZero];
     [self addSubview:_localVideoView];
 
     _statsView = [[ARDStatsView alloc] initWithFrame:CGRectZero];
@@ -175,9 +175,9 @@ static CGFloat const kStatusBarHeight = 20;
       CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
 }
 
-#pragma mark - RTCVideoViewDelegate
+#pragma mark - WebRTCVideoViewDelegate
 
-- (void)videoView:(id<RTCVideoRenderer>)videoView didChangeVideoSize:(CGSize)size {
+- (void)videoView:(id<WebRTCVideoRenderer>)videoView didChangeVideoSize:(CGSize)size {
   if (videoView == _remoteVideoView) {
     _remoteVideoSize = size;
   }

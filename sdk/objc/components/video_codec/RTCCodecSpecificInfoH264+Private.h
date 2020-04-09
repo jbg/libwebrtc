@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /* Interfaces for converting to/from internal C++ formats. */
-@interface RTCCodecSpecificInfoH264 ()
+@interface WebRTCCodecSpecificInfoH264 ()
 
 - (webrtc::CodecSpecificInfo)nativeCodecSpecificInfo;
 

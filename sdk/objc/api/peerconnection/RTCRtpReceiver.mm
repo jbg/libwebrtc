@@ -21,7 +21,7 @@
 namespace webrtc {
 
 RtpReceiverDelegateAdapter::RtpReceiverDelegateAdapter(
-    RTCRtpReceiver *receiver) {
+    WebRTCRtpReceiver *receiver) {
   RTC_CHECK(receiver);
   receiver_ = receiver;
 }
@@ -29,15 +29,15 @@ RtpReceiverDelegateAdapter::RtpReceiverDelegateAdapter(
 void RtpReceiverDelegateAdapter::OnFirstPacketReceived(
     cricket::MediaType media_type) {
   RTCRtpMediaType packet_media_type =
-      [RTCRtpReceiver mediaTypeForNativeMediaType:media_type];
-  RTCRtpReceiver *receiver = receiver_;
+      [WebRTCRtpReceiver mediaTypeForNativeMediaType:media_type];
+  WebRTCRtpReceiver *receiver = receiver_;
   [receiver.delegate rtpReceiver:receiver didReceiveFirstPacketForMediaType:packet_media_type];
 }
 
 }  // namespace webrtc
 
-@implementation RTCRtpReceiver {
-  RTCPeerConnectionFactory *_factory;
+@implementation WebRTCRtpReceiver {
+  WebRTCPeerConnectionFactory *_factory;
   rtc::scoped_refptr<webrtc::RtpReceiverInterface> _nativeRtpReceiver;
   std::unique_ptr<webrtc::RtpReceiverDelegateAdapter> _observer;
 }
@@ -48,22 +48,22 @@ void RtpReceiverDelegateAdapter::OnFirstPacketReceived(
   return [NSString stringForStdString:_nativeRtpReceiver->id()];
 }
 
-- (RTCRtpParameters *)parameters {
-  return [[RTCRtpParameters alloc]
+- (WebRTCRtpParameters *)parameters {
+  return [[WebRTCRtpParameters alloc]
       initWithNativeParameters:_nativeRtpReceiver->GetParameters()];
 }
 
-- (nullable RTCMediaStreamTrack *)track {
+- (nullable WebRTCMediaStreamTrack *)track {
   rtc::scoped_refptr<webrtc::MediaStreamTrackInterface> nativeTrack(
     _nativeRtpReceiver->track());
   if (nativeTrack) {
-    return [RTCMediaStreamTrack mediaTrackForNativeTrack:nativeTrack factory:_factory];
+    return [WebRTCMediaStreamTrack mediaTrackForNativeTrack:nativeTrack factory:_factory];
   }
   return nil;
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"RTCRtpReceiver {\n  receiverId: %@\n}",
+  return [NSString stringWithFormat:@"WebRTCRtpReceiver {\n  receiverId: %@\n}",
       self.receiverId];
 }
 
@@ -83,7 +83,7 @@ void RtpReceiverDelegateAdapter::OnFirstPacketReceived(
   if (![object isMemberOfClass:[self class]]) {
     return NO;
   }
-  RTCRtpReceiver *receiver = (RTCRtpReceiver *)object;
+  WebRTCRtpReceiver *receiver = (WebRTCRtpReceiver *)object;
   return _nativeRtpReceiver == receiver.nativeRtpReceiver;
 }
 
@@ -103,14 +103,14 @@ void RtpReceiverDelegateAdapter::OnFirstPacketReceived(
   return _nativeRtpReceiver;
 }
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
               nativeRtpReceiver:
                   (rtc::scoped_refptr<webrtc::RtpReceiverInterface>)nativeRtpReceiver {
   if (self = [super init]) {
     _factory = factory;
     _nativeRtpReceiver = nativeRtpReceiver;
     RTCLogInfo(
-        @"RTCRtpReceiver(%p): created receiver: %@", self, self.description);
+        @"WebRTCRtpReceiver(%p): created receiver: %@", self, self.description);
     _observer.reset(new webrtc::RtpReceiverDelegateAdapter(self));
     _nativeRtpReceiver->SetObserver(_observer.get());
   }

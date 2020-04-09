@@ -22,9 +22,9 @@ typedef NS_ENUM(NSInteger, RTCSourceState) {
 NS_ASSUME_NONNULL_BEGIN
 
 RTC_OBJC_EXPORT
-@interface RTCMediaSource : NSObject
+@interface WebRTCMediaSource : NSObject
 
-/** The current state of the RTCMediaSource. */
+/** The current state of the WebRTCMediaSource. */
 @property(nonatomic, readonly) RTCSourceState state;
 
 - (instancetype)init NS_UNAVAILABLE;

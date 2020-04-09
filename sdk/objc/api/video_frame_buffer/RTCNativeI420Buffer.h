@@ -15,9 +15,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** RTCI420Buffer implements the RTCI420Buffer protocol */
+/** WebRTCI420Buffer implements the WebRTCI420Buffer protocol */
 RTC_OBJC_EXPORT
-@interface RTCI420Buffer : NSObject<RTCI420Buffer>
+@interface WebRTCI420Buffer : NSObject<WebRTCI420Buffer>
 @end
 
 NS_ASSUME_NONNULL_END

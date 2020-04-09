@@ -17,12 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 namespace webrtc {
 
 /**
- * These objects are created by RTCPeerConnectionFactory to wrap an
- * id<RTCPeerConnectionDelegate> and call methods on that interface.
+ * These objects are created by WebRTCPeerConnectionFactory to wrap an
+ * id<WebRTCPeerConnectionDelegate> and call methods on that interface.
  */
 class PeerConnectionDelegateAdapter : public PeerConnectionObserver {
  public:
-  PeerConnectionDelegateAdapter(RTCPeerConnection *peerConnection);
+  PeerConnectionDelegateAdapter(WebRTCPeerConnection *peerConnection);
   ~PeerConnectionDelegateAdapter() override;
 
   void OnSignalingChange(PeerConnectionInterface::SignalingState new_state) override;
@@ -58,37 +58,37 @@ class PeerConnectionDelegateAdapter : public PeerConnectionObserver {
   void OnRemoveTrack(rtc::scoped_refptr<RtpReceiverInterface> receiver) override;
 
  private:
-  __weak RTCPeerConnection *peer_connection_;
+  __weak WebRTCPeerConnection *peer_connection_;
 };
 
 }  // namespace webrtc
 
-@interface RTCPeerConnection ()
+@interface WebRTCPeerConnection ()
 
-/** The factory used to create this RTCPeerConnection */
-@property(nonatomic, readonly) RTCPeerConnectionFactory *factory;
+/** The factory used to create this WebRTCPeerConnection */
+@property(nonatomic, readonly) WebRTCPeerConnectionFactory *factory;
 
 /** The native PeerConnectionInterface created during construction. */
 @property(nonatomic, readonly) rtc::scoped_refptr<webrtc::PeerConnectionInterface>
     nativePeerConnection;
 
-/** Initialize an RTCPeerConnection with a configuration, constraints, and
+/** Initialize an WebRTCPeerConnection with a configuration, constraints, and
  *  delegate.
  */
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
-                  configuration:(RTCConfiguration *)configuration
-                    constraints:(RTCMediaConstraints *)constraints
-                       delegate:(nullable id<RTCPeerConnectionDelegate>)delegate;
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
+                  configuration:(WebRTCConfiguration *)configuration
+                    constraints:(WebRTCMediaConstraints *)constraints
+                       delegate:(nullable id<WebRTCPeerConnectionDelegate>)delegate;
 
-/** Initialize an RTCPeerConnection with a configuration, constraints,
+/** Initialize an WebRTCPeerConnection with a configuration, constraints,
  *  delegate and PeerConnectionDependencies.
  */
-- (instancetype)initWithDependencies:(RTCPeerConnectionFactory *)factory
-                       configuration:(RTCConfiguration *)configuration
-                         constraints:(RTCMediaConstraints *)constraints
+- (instancetype)initWithDependencies:(WebRTCPeerConnectionFactory *)factory
+                       configuration:(WebRTCConfiguration *)configuration
+                         constraints:(WebRTCMediaConstraints *)constraints
                         dependencies:
                             (std::unique_ptr<webrtc::PeerConnectionDependencies>)dependencies
-                            delegate:(nullable id<RTCPeerConnectionDelegate>)delegate
+                            delegate:(nullable id<WebRTCPeerConnectionDelegate>)delegate
     NS_DESIGNATED_INITIALIZER;
 
 + (webrtc::PeerConnectionInterface::SignalingState)nativeSignalingStateForState:

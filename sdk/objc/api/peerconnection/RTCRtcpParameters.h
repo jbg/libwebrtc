@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 RTC_OBJC_EXPORT
-@interface RTCRtcpParameters : NSObject
+@interface WebRTCRtcpParameters : NSObject
 
 /** The Canonical Name used by RTCP. */
 @property(nonatomic, readonly, copy) NSString *cname;
