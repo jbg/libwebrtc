@@ -12,7 +12,7 @@
 
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCDataChannelConfiguration
+@implementation WebRTCDataChannelConfiguration
 
 @synthesize nativeDataChannelInit = _nativeDataChannelInit;
 

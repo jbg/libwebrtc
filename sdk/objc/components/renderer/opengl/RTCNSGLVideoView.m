@@ -23,10 +23,10 @@
 #import "base/RTCLogging.h"
 #import "base/RTCVideoFrame.h"
 
-@interface RTCNSGLVideoView ()
+@interface WebRTCNSGLVideoView ()
 // |videoFrame| is set when we receive a frame from a worker thread and is read
 // from the display link callback so atomicity is required.
-@property(atomic, strong) RTCVideoFrame *videoFrame;
+@property(atomic, strong) WebRTCVideoFrame *videoFrame;
 @property(atomic, strong) RTCI420TextureCache *i420TextureCache;
 
 - (void)drawFrame;
@@ -38,15 +38,15 @@ static CVReturn OnDisplayLinkFired(CVDisplayLinkRef displayLink,
                                    CVOptionFlags flagsIn,
                                    CVOptionFlags *flagsOut,
                                    void *displayLinkContext) {
-  RTCNSGLVideoView *view = (__bridge RTCNSGLVideoView *)displayLinkContext;
+  WebRTCNSGLVideoView *view = (__bridge WebRTCNSGLVideoView *)displayLinkContext;
   [view drawFrame];
   return kCVReturnSuccess;
 }
 
-@implementation RTCNSGLVideoView {
+@implementation WebRTCNSGLVideoView {
   CVDisplayLinkRef _displayLink;
-  RTCVideoFrame *_lastDrawnFrame;
-  id<RTCVideoViewShading> _shader;
+  WebRTCVideoFrame *_lastDrawnFrame;
+  id<WebRTCVideoViewShading> _shader;
 }
 
 @synthesize delegate = _delegate;
@@ -59,7 +59,7 @@ static CVReturn OnDisplayLinkFired(CVDisplayLinkRef displayLink,
 
 - (instancetype)initWithFrame:(NSRect)frame
                   pixelFormat:(NSOpenGLPixelFormat *)format
-                       shader:(id<RTCVideoViewShading>)shader {
+                       shader:(id<WebRTCVideoViewShading>)shader {
   if (self = [super initWithFrame:frame pixelFormat:format]) {
     _shader = shader;
   }
@@ -105,7 +105,7 @@ static CVReturn OnDisplayLinkFired(CVDisplayLinkRef displayLink,
   [super clearGLContext];
 }
 
-#pragma mark - RTCVideoRenderer
+#pragma mark - WebRTCVideoRenderer
 
 // These methods may be called on non-main thread.
 - (void)setSize:(CGSize)size {
@@ -114,14 +114,14 @@ static CVReturn OnDisplayLinkFired(CVDisplayLinkRef displayLink,
   });
 }
 
-- (void)renderFrame:(RTCVideoFrame *)frame {
+- (void)renderFrame:(WebRTCVideoFrame *)frame {
   self.videoFrame = frame;
 }
 
 #pragma mark - Private
 
 - (void)drawFrame {
-  RTCVideoFrame *frame = self.videoFrame;
+  WebRTCVideoFrame *frame = self.videoFrame;
   if (!frame || frame == _lastDrawnFrame) {
     return;
   }

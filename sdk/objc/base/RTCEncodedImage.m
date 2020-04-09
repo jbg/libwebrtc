@@ -10,7 +10,7 @@
 
 #import "RTCEncodedImage.h"
 
-@implementation RTCEncodedImage
+@implementation WebRTCEncodedImage
 
 @synthesize buffer = _buffer;
 @synthesize encodedWidth = _encodedWidth;

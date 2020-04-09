@@ -16,9 +16,9 @@
 
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
 
-@implementation RTCVideoDecoderVP9
+@implementation WebRTCVideoDecoderVP9
 
-+ (id<RTCVideoDecoder>)vp9Decoder {
++ (id<WebRTCVideoDecoder>)vp9Decoder {
   return [[RTCWrappedNativeVideoDecoder alloc]
       initWithNativeDecoder:std::unique_ptr<webrtc::VideoDecoder>(webrtc::VP9Decoder::Create())];
 }

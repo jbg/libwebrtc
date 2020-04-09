@@ -14,12 +14,12 @@
 #import "RTCVideoEncoder.h"
 
 RTC_OBJC_EXPORT
-@interface RTCVideoEncoderVP8 : NSObject
+@interface WebRTCVideoEncoderVP8 : NSObject
 
-/* This returns a VP8 encoder that can be returned from a RTCVideoEncoderFactory injected into
- * RTCPeerConnectionFactory. Even though it implements the RTCVideoEncoder protocol, it can not be
- * used independently from the RTCPeerConnectionFactory.
+/* This returns a VP8 encoder that can be returned from a WebRTCVideoEncoderFactory injected into
+ * WebRTCPeerConnectionFactory. Even though it implements the WebRTCVideoEncoder protocol, it can not be
+ * used independently from the WebRTCPeerConnectionFactory.
  */
-+ (id<RTCVideoEncoder>)vp8Encoder;
++ (id<WebRTCVideoEncoder>)vp8Encoder;
 
 @end

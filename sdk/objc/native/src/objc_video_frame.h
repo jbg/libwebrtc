@@ -17,7 +17,7 @@
 
 namespace webrtc {
 
-RTCVideoFrame* ToObjCVideoFrame(const VideoFrame& frame);
+WebRTCVideoFrame* ToObjCVideoFrame(const VideoFrame& frame);
 
 }  // namespace webrtc
 

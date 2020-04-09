@@ -14,17 +14,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RTCSessionDescription ()
+@interface WebRTCSessionDescription ()
 
 /**
  * The native SessionDescriptionInterface representation of this
- * RTCSessionDescription object. This is needed to pass to the underlying C++
+ * WebRTCSessionDescription object. This is needed to pass to the underlying C++
  * APIs.
  */
 @property(nonatomic, readonly, nullable) webrtc::SessionDescriptionInterface *nativeDescription;
 
 /**
- * Initialize an RTCSessionDescription from a native
+ * Initialize an WebRTCSessionDescription from a native
  * SessionDescriptionInterface. No ownership is taken of the native session
  * description.
  */

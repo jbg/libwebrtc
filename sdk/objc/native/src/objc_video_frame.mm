@@ -15,9 +15,9 @@
 
 namespace webrtc {
 
-RTCVideoFrame *ToObjCVideoFrame(const VideoFrame &frame) {
-  RTCVideoFrame *videoFrame =
-      [[RTCVideoFrame alloc] initWithBuffer:ToObjCVideoFrameBuffer(frame.video_frame_buffer())
+WebRTCVideoFrame *ToObjCVideoFrame(const VideoFrame &frame) {
+  WebRTCVideoFrame *videoFrame =
+      [[WebRTCVideoFrame alloc] initWithBuffer:ToObjCVideoFrameBuffer(frame.video_frame_buffer())
                                    rotation:RTCVideoRotation(frame.rotation())
                                 timeStampNs:frame.timestamp_us() * rtc::kNumNanosecsPerMicrosec];
   videoFrame.timeStamp = frame.timestamp();

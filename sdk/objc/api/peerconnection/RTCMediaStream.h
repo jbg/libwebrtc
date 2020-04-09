@@ -14,18 +14,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCAudioTrack;
-@class RTCPeerConnectionFactory;
-@class RTCVideoTrack;
+@class WebRTCAudioTrack;
+@class WebRTCPeerConnectionFactory;
+@class WebRTCVideoTrack;
 
 RTC_OBJC_EXPORT
-@interface RTCMediaStream : NSObject
+@interface WebRTCMediaStream : NSObject
 
 /** The audio tracks in this stream. */
-@property(nonatomic, strong, readonly) NSArray<RTCAudioTrack *> *audioTracks;
+@property(nonatomic, strong, readonly) NSArray<WebRTCAudioTrack *> *audioTracks;
 
 /** The video tracks in this stream. */
-@property(nonatomic, strong, readonly) NSArray<RTCVideoTrack *> *videoTracks;
+@property(nonatomic, strong, readonly) NSArray<WebRTCVideoTrack *> *videoTracks;
 
 /** An identifier for this media stream. */
 @property(nonatomic, readonly) NSString *streamId;
@@ -33,16 +33,16 @@ RTC_OBJC_EXPORT
 - (instancetype)init NS_UNAVAILABLE;
 
 /** Adds the given audio track to this media stream. */
-- (void)addAudioTrack:(RTCAudioTrack *)audioTrack;
+- (void)addAudioTrack:(WebRTCAudioTrack *)audioTrack;
 
 /** Adds the given video track to this media stream. */
-- (void)addVideoTrack:(RTCVideoTrack *)videoTrack;
+- (void)addVideoTrack:(WebRTCVideoTrack *)videoTrack;
 
 /** Removes the given audio track to this media stream. */
-- (void)removeAudioTrack:(RTCAudioTrack *)audioTrack;
+- (void)removeAudioTrack:(WebRTCAudioTrack *)audioTrack;
 
 /** Removes the given video track to this media stream. */
-- (void)removeVideoTrack:(RTCVideoTrack *)videoTrack;
+- (void)removeVideoTrack:(WebRTCVideoTrack *)videoTrack;
 
 @end
 

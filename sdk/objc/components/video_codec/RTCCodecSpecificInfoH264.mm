@@ -13,7 +13,7 @@
 #import "RTCH264ProfileLevelId.h"
 
 // H264 specific settings.
-@implementation RTCCodecSpecificInfoH264
+@implementation WebRTCCodecSpecificInfoH264
 
 @synthesize packetizationMode = _packetizationMode;
 

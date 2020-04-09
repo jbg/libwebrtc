@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, RTCH264PacketizationMode) {
 };
 
 RTC_OBJC_EXPORT
-@interface RTCCodecSpecificInfoH264 : NSObject <RTCCodecSpecificInfo>
+@interface WebRTCCodecSpecificInfoH264 : NSObject <WebRTCCodecSpecificInfo>
 
 @property(nonatomic, assign) RTCH264PacketizationMode packetizationMode;
 

@@ -22,12 +22,12 @@ typedef void (^RTCFileVideoCapturerErrorBlock)(NSError *error);
 /**
  * Captures buffers from bundled video file.
  *
- * See @c RTCVideoCapturer for more info on capturers.
+ * See @c WebRTCVideoCapturer for more info on capturers.
  */
 RTC_OBJC_EXPORT
 
 NS_CLASS_AVAILABLE_IOS(10)
-@interface RTCFileVideoCapturer : RTCVideoCapturer
+@interface WebRTCFileVideoCapturer : WebRTCVideoCapturer
 
 /**
  * Starts asynchronous capture of frames from video file.

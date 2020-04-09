@@ -15,7 +15,7 @@
 
 #import "RTCDispatcher+Private.h"
 
-@implementation RTCCameraPreviewView
+@implementation WebRTCCameraPreviewView
 
 @synthesize captureSession = _captureSession;
 
@@ -48,15 +48,15 @@
     return;
   }
   _captureSession = captureSession;
-  [RTCDispatcher
+  [WebRTCDispatcher
       dispatchAsyncOnType:RTCDispatcherTypeMain
                     block:^{
                       AVCaptureVideoPreviewLayer *previewLayer = [self previewLayer];
-                      [RTCDispatcher
+                      [WebRTCDispatcher
                           dispatchAsyncOnType:RTCDispatcherTypeCaptureSession
                                         block:^{
                                           previewLayer.session = captureSession;
-                                          [RTCDispatcher
+                                          [WebRTCDispatcher
                                               dispatchAsyncOnType:RTCDispatcherTypeMain
                                                             block:^{
                                                               [self setCorrectVideoOrientation];

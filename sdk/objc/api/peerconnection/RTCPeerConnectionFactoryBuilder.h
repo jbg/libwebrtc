@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (RTCPeerConnectionFactoryBuilder *)builder;
 
-- (RTCPeerConnectionFactory *)createPeerConnectionFactory;
+- (WebRTCPeerConnectionFactory *)createPeerConnectionFactory;
 
 - (void)setVideoEncoderFactory:(std::unique_ptr<webrtc::VideoEncoderFactory>)videoEncoderFactory;
 

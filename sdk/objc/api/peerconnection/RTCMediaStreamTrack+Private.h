@@ -19,11 +19,11 @@ typedef NS_ENUM(NSInteger, RTCMediaStreamTrackType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCPeerConnectionFactory;
+@class WebRTCPeerConnectionFactory;
 
-@interface RTCMediaStreamTrack ()
+@interface WebRTCMediaStreamTrack ()
 
-@property(nonatomic, readonly) RTCPeerConnectionFactory *factory;
+@property(nonatomic, readonly) WebRTCPeerConnectionFactory *factory;
 
 /**
  * The native MediaStreamTrackInterface passed in or created during
@@ -32,16 +32,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) rtc::scoped_refptr<webrtc::MediaStreamTrackInterface> nativeTrack;
 
 /**
- * Initialize an RTCMediaStreamTrack from a native MediaStreamTrackInterface.
+ * Initialize an WebRTCMediaStreamTrack from a native MediaStreamTrackInterface.
  */
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
                     nativeTrack:(rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeTrack
                            type:(RTCMediaStreamTrackType)type NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
                     nativeTrack:(rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeTrack;
 
-- (BOOL)isEqualToTrack:(RTCMediaStreamTrack *)track;
+- (BOOL)isEqualToTrack:(WebRTCMediaStreamTrack *)track;
 
 + (webrtc::MediaStreamTrackInterface::TrackState)nativeTrackStateForState:
         (RTCMediaStreamTrackState)state;
@@ -51,9 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)stringForState:(RTCMediaStreamTrackState)state;
 
-+ (RTCMediaStreamTrack *)mediaTrackForNativeTrack:
++ (WebRTCMediaStreamTrack *)mediaTrackForNativeTrack:
                              (rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeTrack
-                                          factory:(RTCPeerConnectionFactory *)factory;
+                                          factory:(WebRTCPeerConnectionFactory *)factory;
 
 @end
 

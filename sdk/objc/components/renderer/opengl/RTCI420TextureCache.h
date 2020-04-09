@@ -20,6 +20,6 @@
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithContext:(GlContextType *)context NS_DESIGNATED_INITIALIZER;
 
-- (void)uploadFrameToTextures:(RTCVideoFrame *)frame;
+- (void)uploadFrameToTextures:(WebRTCVideoFrame *)frame;
 
 @end

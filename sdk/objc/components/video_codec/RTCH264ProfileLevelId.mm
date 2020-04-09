@@ -75,7 +75,7 @@ NSString *MaxSupportedProfileLevelConstrainedHigh() {
 
 }  // namespace
 
-@interface RTCH264ProfileLevelId ()
+@interface WebRTCH264ProfileLevelId ()
 
 @property(nonatomic, assign) RTCH264Profile profile;
 @property(nonatomic, assign) RTCH264Level level;
@@ -83,7 +83,7 @@ NSString *MaxSupportedProfileLevelConstrainedHigh() {
 
 @end
 
-@implementation RTCH264ProfileLevelId
+@implementation WebRTCH264ProfileLevelId
 
 @synthesize profile = _profile;
 @synthesize level = _level;

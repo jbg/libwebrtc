@@ -12,7 +12,7 @@
 
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCMetricsSampleInfo
+@implementation WebRTCMetricsSampleInfo
 
 @synthesize name = _name;
 @synthesize min = _min;

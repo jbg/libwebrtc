@@ -15,9 +15,9 @@
 NS_AVAILABLE_MAC(10.11)
 
 RTC_OBJC_EXPORT
-@interface RTCMTLNSVideoView : NSView <RTCVideoRenderer>
+@interface WebRTCMTLNSVideoView : NSView <WebRTCVideoRenderer>
 
-@property(nonatomic, weak) id<RTCVideoViewDelegate> delegate;
+@property(nonatomic, weak) id<WebRTCVideoViewDelegate> delegate;
 
 + (BOOL)isMetalAvailable;
 

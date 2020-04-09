@@ -16,9 +16,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** Mutable version of RTCI420Buffer */
+/** Mutable version of WebRTCI420Buffer */
 RTC_OBJC_EXPORT
-@interface RTCMutableI420Buffer : RTCI420Buffer<RTCMutableI420Buffer>
+@interface WebRTCMutableI420Buffer : WebRTCI420Buffer<WebRTCMutableI420Buffer>
 @end
 
 NS_ASSUME_NONNULL_END

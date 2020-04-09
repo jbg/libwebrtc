@@ -30,8 +30,8 @@
   int channelId = 4;
   NSString *protocol = @"protocol";
 
-  RTCDataChannelConfiguration *dataChannelConfig =
-      [[RTCDataChannelConfiguration alloc] init];
+  WebRTCDataChannelConfiguration *dataChannelConfig =
+      [[WebRTCDataChannelConfiguration alloc] init];
   dataChannelConfig.isOrdered = isOrdered;
   dataChannelConfig.maxPacketLifeTime = maxPacketLifeTime;
   dataChannelConfig.maxRetransmits = maxRetransmits;
@@ -50,7 +50,7 @@
 
 @end
 
-TEST(RTCDataChannelConfiguration, NativeDataChannelInitConversionTest) {
+TEST(WebRTCDataChannelConfiguration, NativeDataChannelInitConversionTest) {
   @autoreleasepool {
     RTCDataChannelConfigurationTest *test =
         [[RTCDataChannelConfigurationTest alloc] init];

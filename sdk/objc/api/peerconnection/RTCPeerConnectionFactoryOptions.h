@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 RTC_OBJC_EXPORT
-@interface RTCPeerConnectionFactoryOptions : NSObject
+@interface WebRTCPeerConnectionFactoryOptions : NSObject
 
 @property(nonatomic, assign) BOOL disableEncryption;
 

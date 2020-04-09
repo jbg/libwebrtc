@@ -93,8 +93,8 @@ static NSString *const shaderSource = MTL_STRINGIFY(
       cropHeight:(nonnull int *)cropHeight
            cropX:(nonnull int *)cropX
            cropY:(nonnull int *)cropY
-         ofFrame:(nonnull RTCVideoFrame *)frame {
-  RTCCVPixelBuffer *pixelBuffer = (RTCCVPixelBuffer *)frame.buffer;
+         ofFrame:(nonnull WebRTCVideoFrame *)frame {
+  WebRTCCVPixelBuffer *pixelBuffer = (WebRTCCVPixelBuffer *)frame.buffer;
   *width = CVPixelBufferGetWidth(pixelBuffer.pixelBuffer);
   *height = CVPixelBufferGetHeight(pixelBuffer.pixelBuffer);
   *cropWidth = pixelBuffer.cropWidth;
@@ -103,12 +103,12 @@ static NSString *const shaderSource = MTL_STRINGIFY(
   *cropY = pixelBuffer.cropY;
 }
 
-- (BOOL)setupTexturesForFrame:(nonnull RTCVideoFrame *)frame {
-  RTC_DCHECK([frame.buffer isKindOfClass:[RTCCVPixelBuffer class]]);
+- (BOOL)setupTexturesForFrame:(nonnull WebRTCVideoFrame *)frame {
+  RTC_DCHECK([frame.buffer isKindOfClass:[WebRTCCVPixelBuffer class]]);
   if (![super setupTexturesForFrame:frame]) {
     return NO;
   }
-  CVPixelBufferRef pixelBuffer = ((RTCCVPixelBuffer *)frame.buffer).pixelBuffer;
+  CVPixelBufferRef pixelBuffer = ((WebRTCCVPixelBuffer *)frame.buffer).pixelBuffer;
 
   id<MTLTexture> gpuTexture = nil;
   CVMetalTextureRef textureOut = nullptr;
