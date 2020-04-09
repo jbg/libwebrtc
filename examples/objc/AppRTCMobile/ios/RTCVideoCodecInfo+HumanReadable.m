@@ -12,13 +12,13 @@
 
 #import <WebRTC/RTCH264ProfileLevelId.h>
 
-@implementation RTCVideoCodecInfo (HumanReadable)
+@implementation WebRTCVideoCodecInfo (HumanReadable)
 
 - (NSString *)humanReadableDescription {
   if ([self.name isEqualToString:@"H264"]) {
     NSString *profileId = self.parameters[@"profile-level-id"];
-    RTCH264ProfileLevelId *profileLevelId =
-        [[RTCH264ProfileLevelId alloc] initWithHexString:profileId];
+    WebRTCH264ProfileLevelId *profileLevelId =
+        [[WebRTCH264ProfileLevelId alloc] initWithHexString:profileId];
     if (profileLevelId.profile == RTCH264ProfileConstrainedHigh ||
         profileLevelId.profile == RTCH264ProfileHigh) {
       return @"H264 (High)";

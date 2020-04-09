@@ -21,7 +21,7 @@ NSString *const kDefaultLogDirName = @"webrtc_logs";
 NSUInteger const kDefaultMaxFileSize = 10 * 1024 * 1024; // 10MB.
 const char *kRTCFileLoggerRotatingLogPrefix = "rotating_log";
 
-@implementation RTCFileLogger {
+@implementation WebRTCFileLogger {
   BOOL _hasStarted;
   NSString *_dirPath;
   NSUInteger _maxFileSize;

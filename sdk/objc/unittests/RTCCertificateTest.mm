@@ -29,14 +29,14 @@
 @implementation RTCCertificateTest
 
 - (void)testCertificateIsUsedInConfig {
-  RTCConfiguration *originalConfig = [[RTCConfiguration alloc] init];
+  WebRTCConfiguration *originalConfig = [[WebRTCConfiguration alloc] init];
 
   NSArray *urlStrings = @[ @"stun:stun1.example.net" ];
-  RTCIceServer *server = [[RTCIceServer alloc] initWithURLStrings:urlStrings];
+  WebRTCIceServer *server = [[WebRTCIceServer alloc] initWithURLStrings:urlStrings];
   originalConfig.iceServers = @[ server ];
 
   // Generate a new certificate.
-  RTCCertificate *originalCertificate = [RTCCertificate generateCertificateWithParams:@{
+  WebRTCCertificate *originalCertificate = [WebRTCCertificate generateCertificateWithParams:@{
     @"expires" : @100000,
     @"name" : @"RSASSA-PKCS1-v1_5"
   }];
@@ -44,23 +44,23 @@
   // Store certificate in configuration.
   originalConfig.certificate = originalCertificate;
 
-  RTCMediaConstraints *contraints =
-      [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
-  RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
+  WebRTCMediaConstraints *contraints =
+      [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
+  WebRTCPeerConnectionFactory *factory = [[WebRTCPeerConnectionFactory alloc] init];
 
   // Create PeerConnection with this certificate.
-  RTCPeerConnection *peerConnection =
+  WebRTCPeerConnection *peerConnection =
       [factory peerConnectionWithConfiguration:originalConfig constraints:contraints delegate:nil];
 
   // Retrieve certificate from the configuration.
-  RTCConfiguration *retrievedConfig = peerConnection.configuration;
+  WebRTCConfiguration *retrievedConfig = peerConnection.configuration;
 
   // Extract PEM strings from original certificate.
   std::string originalPrivateKeyField = [[originalCertificate private_key] UTF8String];
   std::string originalCertificateField = [[originalCertificate certificate] UTF8String];
 
   // Extract PEM strings from certificate retrieved from configuration.
-  RTCCertificate *retrievedCertificate = retrievedConfig.certificate;
+  WebRTCCertificate *retrievedCertificate = retrievedConfig.certificate;
   std::string retrievedPrivateKeyField = [[retrievedCertificate private_key] UTF8String];
   std::string retrievedCertificateField = [[retrievedCertificate certificate] UTF8String];
 

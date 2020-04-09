@@ -17,10 +17,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 RTC_OBJC_EXPORT
-// Camera capture that implements RTCVideoCapturer. Delivers frames to a RTCVideoCapturerDelegate
-// (usually RTCVideoSource).
+// Camera capture that implements WebRTCVideoCapturer. Delivers frames to a WebRTCVideoCapturerDelegate
+// (usually WebRTCVideoSource).
 NS_EXTENSION_UNAVAILABLE_IOS("Camera not available in app extensions.")
-@interface RTCCameraVideoCapturer : RTCVideoCapturer
+@interface WebRTCCameraVideoCapturer : WebRTCVideoCapturer
 
 // Capture session that is used for capturing. Valid from initialization to dealloc.
 @property(readonly, nonatomic) AVCaptureSession *captureSession;

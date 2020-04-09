@@ -38,26 +38,26 @@ namespace {
 
 class ObjCVideoEncoder : public VideoEncoder {
  public:
-  ObjCVideoEncoder(id<RTCVideoEncoder> encoder)
+  ObjCVideoEncoder(id<WebRTCVideoEncoder> encoder)
       : encoder_(encoder), implementation_name_([encoder implementationName].stdString) {}
 
   int32_t InitEncode(const VideoCodec *codec_settings, const Settings &encoder_settings) override {
-    RTCVideoEncoderSettings *settings =
-        [[RTCVideoEncoderSettings alloc] initWithNativeVideoCodec:codec_settings];
+    WebRTCVideoEncoderSettings *settings =
+        [[WebRTCVideoEncoderSettings alloc] initWithNativeVideoCodec:codec_settings];
     return [encoder_ startEncodeWithSettings:settings
                                numberOfCores:encoder_settings.number_of_cores];
   }
 
   int32_t RegisterEncodeCompleteCallback(EncodedImageCallback *callback) override {
-    [encoder_ setCallback:^BOOL(RTCEncodedImage *_Nonnull frame,
-                                id<RTCCodecSpecificInfo> _Nonnull info,
-                                RTCRtpFragmentationHeader *_Nonnull header) {
+    [encoder_ setCallback:^BOOL(WebRTCEncodedImage *_Nonnull frame,
+                                id<WebRTCCodecSpecificInfo> _Nonnull info,
+                                WebRTCRtpFragmentationHeader *_Nonnull header) {
       EncodedImage encodedImage = [frame nativeEncodedImage];
 
       // Handle types that can be converted into one of CodecSpecificInfo's hard coded cases.
       CodecSpecificInfo codecSpecificInfo;
-      if ([info isKindOfClass:[RTCCodecSpecificInfoH264 class]]) {
-        codecSpecificInfo = [(RTCCodecSpecificInfoH264 *)info nativeCodecSpecificInfo];
+      if ([info isKindOfClass:[WebRTCCodecSpecificInfoH264 class]]) {
+        codecSpecificInfo = [(WebRTCCodecSpecificInfoH264 *)info nativeCodecSpecificInfo];
       }
 
       std::unique_ptr<RTPFragmentationHeader> fragmentationHeader =
@@ -95,7 +95,7 @@ class ObjCVideoEncoder : public VideoEncoder {
     info.supports_native_handle = true;
     info.implementation_name = implementation_name_;
 
-    RTCVideoEncoderQpThresholds *qp_thresholds = [encoder_ scalingSettings];
+    WebRTCVideoEncoderQpThresholds *qp_thresholds = [encoder_ scalingSettings];
     info.scaling_settings = qp_thresholds ? ScalingSettings(qp_thresholds.low, qp_thresholds.high) :
                                             ScalingSettings::kOff;
 
@@ -105,26 +105,26 @@ class ObjCVideoEncoder : public VideoEncoder {
   }
 
  private:
-  id<RTCVideoEncoder> encoder_;
+  id<WebRTCVideoEncoder> encoder_;
   const std::string implementation_name_;
 };
 
 class ObjcVideoEncoderSelector : public VideoEncoderFactory::EncoderSelectorInterface {
  public:
-  ObjcVideoEncoderSelector(id<RTCVideoEncoderSelector> selector) { selector_ = selector; }
+  ObjcVideoEncoderSelector(id<WebRTCVideoEncoderSelector> selector) { selector_ = selector; }
   void OnCurrentEncoder(const SdpVideoFormat &format) override {
-    RTCVideoCodecInfo *info = [[RTCVideoCodecInfo alloc] initWithNativeSdpVideoFormat:format];
+    WebRTCVideoCodecInfo *info = [[WebRTCVideoCodecInfo alloc] initWithNativeSdpVideoFormat:format];
     [selector_ registerCurrentEncoderInfo:info];
   }
   absl::optional<SdpVideoFormat> OnEncoderBroken() override {
-    RTCVideoCodecInfo *info = [selector_ encoderForBrokenEncoder];
+    WebRTCVideoCodecInfo *info = [selector_ encoderForBrokenEncoder];
     if (info) {
       return [info nativeSdpVideoFormat];
     }
     return absl::nullopt;
   }
   absl::optional<SdpVideoFormat> OnAvailableBitrate(const DataRate &rate) override {
-    RTCVideoCodecInfo *info = [selector_ encoderForBitrate:rate.kbps<NSInteger>()];
+    WebRTCVideoCodecInfo *info = [selector_ encoderForBitrate:rate.kbps<NSInteger>()];
     if (info) {
       return [info nativeSdpVideoFormat];
     }
@@ -132,23 +132,23 @@ class ObjcVideoEncoderSelector : public VideoEncoderFactory::EncoderSelectorInte
   }
 
  private:
-  id<RTCVideoEncoderSelector> selector_;
+  id<WebRTCVideoEncoderSelector> selector_;
 };
 
 }  // namespace
 
-ObjCVideoEncoderFactory::ObjCVideoEncoderFactory(id<RTCVideoEncoderFactory> encoder_factory)
+ObjCVideoEncoderFactory::ObjCVideoEncoderFactory(id<WebRTCVideoEncoderFactory> encoder_factory)
     : encoder_factory_(encoder_factory) {}
 
 ObjCVideoEncoderFactory::~ObjCVideoEncoderFactory() {}
 
-id<RTCVideoEncoderFactory> ObjCVideoEncoderFactory::wrapped_encoder_factory() const {
+id<WebRTCVideoEncoderFactory> ObjCVideoEncoderFactory::wrapped_encoder_factory() const {
   return encoder_factory_;
 }
 
 std::vector<SdpVideoFormat> ObjCVideoEncoderFactory::GetSupportedFormats() const {
   std::vector<SdpVideoFormat> supported_formats;
-  for (RTCVideoCodecInfo *supportedCodec in [encoder_factory_ supportedCodecs]) {
+  for (WebRTCVideoCodecInfo *supportedCodec in [encoder_factory_ supportedCodecs]) {
     SdpVideoFormat format = [supportedCodec nativeSdpVideoFormat];
     supported_formats.push_back(format);
   }
@@ -159,7 +159,7 @@ std::vector<SdpVideoFormat> ObjCVideoEncoderFactory::GetSupportedFormats() const
 std::vector<SdpVideoFormat> ObjCVideoEncoderFactory::GetImplementations() const {
   if ([encoder_factory_ respondsToSelector:@selector(implementations)]) {
     std::vector<SdpVideoFormat> supported_formats;
-    for (RTCVideoCodecInfo *supportedCodec in [encoder_factory_ implementations]) {
+    for (WebRTCVideoCodecInfo *supportedCodec in [encoder_factory_ implementations]) {
       SdpVideoFormat format = [supportedCodec nativeSdpVideoFormat];
       supported_formats.push_back(format);
     }
@@ -183,8 +183,8 @@ VideoEncoderFactory::CodecInfo ObjCVideoEncoderFactory::QueryVideoEncoder(
 
 std::unique_ptr<VideoEncoder> ObjCVideoEncoderFactory::CreateVideoEncoder(
     const SdpVideoFormat &format) {
-  RTCVideoCodecInfo *info = [[RTCVideoCodecInfo alloc] initWithNativeSdpVideoFormat:format];
-  id<RTCVideoEncoder> encoder = [encoder_factory_ createEncoder:info];
+  WebRTCVideoCodecInfo *info = [[WebRTCVideoCodecInfo alloc] initWithNativeSdpVideoFormat:format];
+  id<WebRTCVideoEncoder> encoder = [encoder_factory_ createEncoder:info];
   if ([encoder isKindOfClass:[RTCWrappedNativeVideoEncoder class]]) {
     return [(RTCWrappedNativeVideoEncoder *)encoder releaseWrappedEncoder];
   } else {

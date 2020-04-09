@@ -37,7 +37,7 @@ struct RTCFrameDecodeParams {
   int64_t timestamp;
 };
 
-@interface RTCVideoDecoderH264 ()
+@interface WebRTCVideoDecoderH264 ()
 - (void)setError:(OSStatus)error;
 @end
 
@@ -53,15 +53,15 @@ void decompressionOutputCallback(void *decoderRef,
   std::unique_ptr<RTCFrameDecodeParams> decodeParams(
       reinterpret_cast<RTCFrameDecodeParams *>(params));
   if (status != noErr) {
-    RTCVideoDecoderH264 *decoder = (__bridge RTCVideoDecoderH264 *)decoderRef;
+    WebRTCVideoDecoderH264 *decoder = (__bridge WebRTCVideoDecoderH264 *)decoderRef;
     [decoder setError:status];
     RTC_LOG(LS_ERROR) << "Failed to decode frame. Status: " << status;
     return;
   }
   // TODO(tkchin): Handle CVO properly.
-  RTCCVPixelBuffer *frameBuffer = [[RTCCVPixelBuffer alloc] initWithPixelBuffer:imageBuffer];
-  RTCVideoFrame *decodedFrame =
-      [[RTCVideoFrame alloc] initWithBuffer:frameBuffer
+  WebRTCCVPixelBuffer *frameBuffer = [[WebRTCCVPixelBuffer alloc] initWithPixelBuffer:imageBuffer];
+  WebRTCVideoFrame *decodedFrame =
+      [[WebRTCVideoFrame alloc] initWithBuffer:frameBuffer
                                    rotation:RTCVideoRotation_0
                                 timeStampNs:CMTimeGetSeconds(timestamp) * rtc::kNumNanosecsPerSec];
   decodedFrame.timeStamp = decodeParams->timestamp;
@@ -69,7 +69,7 @@ void decompressionOutputCallback(void *decoderRef,
 }
 
 // Decoder.
-@implementation RTCVideoDecoderH264 {
+@implementation WebRTCVideoDecoderH264 {
   CMVideoFormatDescriptionRef _videoFormat;
   CMMemoryPoolRef _memoryPool;
   VTDecompressionSessionRef _decompressionSession;
@@ -96,9 +96,9 @@ void decompressionOutputCallback(void *decoderRef,
   return WEBRTC_VIDEO_CODEC_OK;
 }
 
-- (NSInteger)decode:(RTCEncodedImage *)inputImage
+- (NSInteger)decode:(WebRTCEncodedImage *)inputImage
         missingFrames:(BOOL)missingFrames
-    codecSpecificInfo:(nullable id<RTCCodecSpecificInfo>)info
+    codecSpecificInfo:(nullable id<WebRTCCodecSpecificInfo>)info
          renderTimeMs:(int64_t)renderTimeMs {
   RTC_DCHECK(inputImage.buffer);
 

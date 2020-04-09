@@ -13,14 +13,14 @@
 static NSString const *kRTCSessionDescriptionTypeKey = @"type";
 static NSString const *kRTCSessionDescriptionSdpKey = @"sdp";
 
-@implementation RTCSessionDescription (JSON)
+@implementation WebRTCSessionDescription (JSON)
 
-+ (RTCSessionDescription *)descriptionFromJSONDictionary:
++ (WebRTCSessionDescription *)descriptionFromJSONDictionary:
     (NSDictionary *)dictionary {
   NSString *typeString = dictionary[kRTCSessionDescriptionTypeKey];
   RTCSdpType type = [[self class] typeForString:typeString];
   NSString *sdp = dictionary[kRTCSessionDescriptionSdpKey];
-  return [[RTCSessionDescription alloc] initWithType:type sdp:sdp];
+  return [[WebRTCSessionDescription alloc] initWithType:type sdp:sdp];
 }
 
 - (NSData *)JSONData {

@@ -19,20 +19,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCNSGLVideoView;
+@class WebRTCNSGLVideoView;
 
 RTC_OBJC_EXPORT
-@protocol RTCNSGLVideoViewDelegate <RTCVideoViewDelegate>
+@protocol WebRTCNSGLVideoViewDelegate <WebRTCVideoViewDelegate>
 @end
 
 RTC_OBJC_EXPORT
-@interface RTCNSGLVideoView : NSOpenGLView <RTCVideoRenderer>
+@interface WebRTCNSGLVideoView : NSOpenGLView <WebRTCVideoRenderer>
 
-@property(nonatomic, weak) id<RTCVideoViewDelegate> delegate;
+@property(nonatomic, weak) id<WebRTCVideoViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(NSRect)frameRect
                   pixelFormat:(NSOpenGLPixelFormat *)format
-                       shader:(id<RTCVideoViewShading>)shader NS_DESIGNATED_INITIALIZER;
+                       shader:(id<WebRTCVideoViewShading>)shader NS_DESIGNATED_INITIALIZER;
 
 @end
 

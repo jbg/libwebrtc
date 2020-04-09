@@ -14,61 +14,61 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCAudioSource;
-@class RTCAudioTrack;
-@class RTCConfiguration;
-@class RTCMediaConstraints;
-@class RTCMediaStream;
-@class RTCPeerConnection;
-@class RTCVideoSource;
-@class RTCVideoTrack;
-@class RTCPeerConnectionFactoryOptions;
-@protocol RTCPeerConnectionDelegate;
-@protocol RTCVideoDecoderFactory;
-@protocol RTCVideoEncoderFactory;
+@class WebRTCAudioSource;
+@class WebRTCAudioTrack;
+@class WebRTCConfiguration;
+@class WebRTCMediaConstraints;
+@class WebRTCMediaStream;
+@class WebRTCPeerConnection;
+@class WebRTCVideoSource;
+@class WebRTCVideoTrack;
+@class WebRTCPeerConnectionFactoryOptions;
+@protocol WebRTCPeerConnectionDelegate;
+@protocol WebRTCVideoDecoderFactory;
+@protocol WebRTCVideoEncoderFactory;
 
 RTC_OBJC_EXPORT
-@interface RTCPeerConnectionFactory : NSObject
+@interface WebRTCPeerConnectionFactory : NSObject
 
 /* Initialize object with default H264 video encoder/decoder factories */
 - (instancetype)init;
 
 /* Initialize object with injectable video encoder/decoder factories */
-- (instancetype)initWithEncoderFactory:(nullable id<RTCVideoEncoderFactory>)encoderFactory
-                        decoderFactory:(nullable id<RTCVideoDecoderFactory>)decoderFactory;
+- (instancetype)initWithEncoderFactory:(nullable id<WebRTCVideoEncoderFactory>)encoderFactory
+                        decoderFactory:(nullable id<WebRTCVideoDecoderFactory>)decoderFactory;
 
-/** Initialize an RTCAudioSource with constraints. */
-- (RTCAudioSource *)audioSourceWithConstraints:(nullable RTCMediaConstraints *)constraints;
+/** Initialize an WebRTCAudioSource with constraints. */
+- (WebRTCAudioSource *)audioSourceWithConstraints:(nullable WebRTCMediaConstraints *)constraints;
 
-/** Initialize an RTCAudioTrack with an id. Convenience ctor to use an audio source with no
+/** Initialize an WebRTCAudioTrack with an id. Convenience ctor to use an audio source with no
  *  constraints.
  */
-- (RTCAudioTrack *)audioTrackWithTrackId:(NSString *)trackId;
+- (WebRTCAudioTrack *)audioTrackWithTrackId:(NSString *)trackId;
 
-/** Initialize an RTCAudioTrack with a source and an id. */
-- (RTCAudioTrack *)audioTrackWithSource:(RTCAudioSource *)source trackId:(NSString *)trackId;
+/** Initialize an WebRTCAudioTrack with a source and an id. */
+- (WebRTCAudioTrack *)audioTrackWithSource:(WebRTCAudioSource *)source trackId:(NSString *)trackId;
 
-/** Initialize a generic RTCVideoSource. The RTCVideoSource should be passed to a RTCVideoCapturer
- *  implementation, e.g. RTCCameraVideoCapturer, in order to produce frames.
+/** Initialize a generic WebRTCVideoSource. The WebRTCVideoSource should be passed to a WebRTCVideoCapturer
+ *  implementation, e.g. WebRTCCameraVideoCapturer, in order to produce frames.
  */
-- (RTCVideoSource *)videoSource;
+- (WebRTCVideoSource *)videoSource;
 
-/** Initialize an RTCVideoTrack with a source and an id. */
-- (RTCVideoTrack *)videoTrackWithSource:(RTCVideoSource *)source trackId:(NSString *)trackId;
+/** Initialize an WebRTCVideoTrack with a source and an id. */
+- (WebRTCVideoTrack *)videoTrackWithSource:(WebRTCVideoSource *)source trackId:(NSString *)trackId;
 
-/** Initialize an RTCMediaStream with an id. */
-- (RTCMediaStream *)mediaStreamWithStreamId:(NSString *)streamId;
+/** Initialize an WebRTCMediaStream with an id. */
+- (WebRTCMediaStream *)mediaStreamWithStreamId:(NSString *)streamId;
 
-/** Initialize an RTCPeerConnection with a configuration, constraints, and
+/** Initialize an WebRTCPeerConnection with a configuration, constraints, and
  *  delegate.
  */
-- (RTCPeerConnection *)peerConnectionWithConfiguration:(RTCConfiguration *)configuration
-                                           constraints:(RTCMediaConstraints *)constraints
+- (WebRTCPeerConnection *)peerConnectionWithConfiguration:(WebRTCConfiguration *)configuration
+                                           constraints:(WebRTCMediaConstraints *)constraints
                                               delegate:
-                                                  (nullable id<RTCPeerConnectionDelegate>)delegate;
+                                                  (nullable id<WebRTCPeerConnectionDelegate>)delegate;
 
 /** Set the options to be used for subsequently created RTCPeerConnections */
-- (void)setOptions:(nonnull RTCPeerConnectionFactoryOptions *)options;
+- (void)setOptions:(nonnull WebRTCPeerConnectionFactoryOptions *)options;
 
 /** Start an AecDump recording. This API call will likely change in the future. */
 - (BOOL)startAecDumpWithFilePath:(NSString *)filePath maxSizeInBytes:(int64_t)maxSizeInBytes;

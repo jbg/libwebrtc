@@ -23,10 +23,10 @@ typedef NS_ENUM(NSInteger, RTCRtpMediaType) {
   RTCRtpMediaTypeData,
 };
 
-@class RTCRtpReceiver;
+@class WebRTCRtpReceiver;
 
 RTC_OBJC_EXPORT
-@protocol RTCRtpReceiverDelegate <NSObject>
+@protocol WebRTCRtpReceiverDelegate <NSObject>
 
 /** Called when the first RTP packet is received.
  *
@@ -40,40 +40,40 @@ RTC_OBJC_EXPORT
  *
  *  The process is the same for video receivers.
  */
-- (void)rtpReceiver:(RTCRtpReceiver *)rtpReceiver
+- (void)rtpReceiver:(WebRTCRtpReceiver *)rtpReceiver
     didReceiveFirstPacketForMediaType:(RTCRtpMediaType)mediaType;
 
 @end
 
 RTC_OBJC_EXPORT
-@protocol RTCRtpReceiver <NSObject>
+@protocol WebRTCRtpReceiver <NSObject>
 
 /** A unique identifier for this receiver. */
 @property(nonatomic, readonly) NSString *receiverId;
 
-/** The currently active RTCRtpParameters, as defined in
- *  https://www.w3.org/TR/webrtc/#idl-def-RTCRtpParameters.
+/** The currently active WebRTCRtpParameters, as defined in
+ *  https://www.w3.org/TR/webrtc/#idl-def-WebRTCRtpParameters.
  *
- *  The WebRTC specification only defines RTCRtpParameters in terms of senders,
+ *  The WebRTC specification only defines WebRTCRtpParameters in terms of senders,
  *  but this API also applies them to receivers, similar to ORTC:
  *  http://ortc.org/wp-content/uploads/2016/03/ortc.html#rtcrtpparameters*.
  */
-@property(nonatomic, readonly) RTCRtpParameters *parameters;
+@property(nonatomic, readonly) WebRTCRtpParameters *parameters;
 
-/** The RTCMediaStreamTrack associated with the receiver.
+/** The WebRTCMediaStreamTrack associated with the receiver.
  *  Note: reading this property returns a new instance of
- *  RTCMediaStreamTrack. Use isEqual: instead of == to compare
- *  RTCMediaStreamTrack instances.
+ *  WebRTCMediaStreamTrack. Use isEqual: instead of == to compare
+ *  WebRTCMediaStreamTrack instances.
  */
-@property(nonatomic, readonly, nullable) RTCMediaStreamTrack *track;
+@property(nonatomic, readonly, nullable) WebRTCMediaStreamTrack *track;
 
 /** The delegate for this RtpReceiver. */
-@property(nonatomic, weak) id<RTCRtpReceiverDelegate> delegate;
+@property(nonatomic, weak) id<WebRTCRtpReceiverDelegate> delegate;
 
 @end
 
 RTC_OBJC_EXPORT
-@interface RTCRtpReceiver : NSObject <RTCRtpReceiver>
+@interface WebRTCRtpReceiver : NSObject <WebRTCRtpReceiver>
 
 - (instancetype)init NS_UNAVAILABLE;
 

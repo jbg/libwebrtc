@@ -16,14 +16,14 @@
 #import "api/RTCVideoRendererAdapter+Private.h"
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCVideoTrack {
+@implementation WebRTCVideoTrack {
   NSMutableArray *_adapters;
 }
 
 @synthesize source = _source;
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
-                         source:(RTCVideoSource *)source
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
+                         source:(WebRTCVideoSource *)source
                         trackId:(NSString *)trackId {
   NSParameterAssert(factory);
   NSParameterAssert(source);
@@ -38,7 +38,7 @@
   return self;
 }
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
                     nativeTrack:
                         (rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeMediaTrack
                            type:(RTCMediaStreamTrackType)type {
@@ -57,19 +57,19 @@
   }
 }
 
-- (RTCVideoSource *)source {
+- (WebRTCVideoSource *)source {
   if (!_source) {
     rtc::scoped_refptr<webrtc::VideoTrackSourceInterface> source =
         self.nativeVideoTrack->GetSource();
     if (source) {
       _source =
-          [[RTCVideoSource alloc] initWithFactory:self.factory nativeVideoSource:source.get()];
+          [[WebRTCVideoSource alloc] initWithFactory:self.factory nativeVideoSource:source.get()];
     }
   }
   return _source;
 }
 
-- (void)addRenderer:(id<RTCVideoRenderer>)renderer {
+- (void)addRenderer:(id<WebRTCVideoRenderer>)renderer {
   // Make sure we don't have this renderer yet.
   for (RTCVideoRendererAdapter *adapter in _adapters) {
     if (adapter.videoRenderer == renderer) {
@@ -85,7 +85,7 @@
                                          rtc::VideoSinkWants());
 }
 
-- (void)removeRenderer:(id<RTCVideoRenderer>)renderer {
+- (void)removeRenderer:(id<WebRTCVideoRenderer>)renderer {
   __block NSUInteger indexToRemove = NSNotFound;
   [_adapters enumerateObjectsUsingBlock:^(RTCVideoRendererAdapter *adapter,
                                           NSUInteger idx,

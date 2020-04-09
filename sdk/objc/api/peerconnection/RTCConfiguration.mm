@@ -20,7 +20,7 @@
 #include "rtc_base/rtc_certificate_generator.h"
 #include "rtc_base/ssl_identity.h"
 
-@implementation RTCConfiguration
+@implementation WebRTCConfiguration
 
 @synthesize enableDscp = _enableDscp;
 @synthesize iceServers = _iceServers;
@@ -70,7 +70,7 @@
     _enableDscp = config.dscp();
     NSMutableArray *iceServers = [NSMutableArray array];
     for (const webrtc::PeerConnectionInterface::IceServer& server : config.servers) {
-      RTCIceServer *iceServer = [[RTCIceServer alloc] initWithNativeServer:server];
+      WebRTCIceServer *iceServer = [[WebRTCIceServer alloc] initWithNativeServer:server];
       [iceServers addObject:iceServer];
     }
     _iceServers = iceServers;
@@ -79,7 +79,7 @@
       native_cert = config.certificates[0];
       rtc::RTCCertificatePEM native_pem = native_cert->ToPEM();
       _certificate =
-          [[RTCCertificate alloc] initWithPrivateKey:@(native_pem.private_key().c_str())
+          [[WebRTCCertificate alloc] initWithPrivateKey:@(native_pem.private_key().c_str())
                                          certificate:@(native_pem.certificate().c_str())];
     }
     _iceTransportPolicy =
@@ -122,7 +122,7 @@
     _turnCustomizer = config.turn_customizer;
     _activeResetSrtpParams = config.active_reset_srtp_params;
     if (config.crypto_options) {
-      _cryptoOptions = [[RTCCryptoOptions alloc]
+      _cryptoOptions = [[WebRTCCryptoOptions alloc]
                initWithSrtpEnableGcmCryptoSuites:config.crypto_options->srtp
                                                      .enable_gcm_crypto_suites
              srtpEnableAes128Sha1_32CryptoCipher:config.crypto_options->srtp
@@ -140,7 +140,7 @@
 }
 
 - (NSString *)description {
-  static NSString *formatString = @"RTCConfiguration: "
+  static NSString *formatString = @"WebRTCConfiguration: "
                                   @"{\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%d\n%d\n%d\n%d\n%d\n%d\n"
                                   @"%d\n%@\n%d\n%d\n%d\n%d\n%d\n%@\n%d\n}\n";
 
@@ -181,7 +181,7 @@
           webrtc::PeerConnectionInterface::RTCConfigurationType::kAggressive));
 
   nativeConfig->set_dscp(_enableDscp);
-  for (RTCIceServer *iceServer in _iceServers) {
+  for (WebRTCIceServer *iceServer in _iceServers) {
     nativeConfig->servers.push_back(iceServer.nativeServer);
   }
   nativeConfig->type =

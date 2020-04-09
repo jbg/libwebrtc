@@ -16,10 +16,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /** This decoder factory include support for all codecs bundled with WebRTC. If using custom
- *  codecs, create custom implementations of RTCVideoEncoderFactory and RTCVideoDecoderFactory.
+ *  codecs, create custom implementations of WebRTCVideoEncoderFactory and WebRTCVideoDecoderFactory.
  */
 RTC_OBJC_EXPORT
-@interface RTCDefaultVideoDecoderFactory : NSObject <RTCVideoDecoderFactory>
+@interface WebRTCDefaultVideoDecoderFactory : NSObject <WebRTCVideoDecoderFactory>
 @end
 
 NS_ASSUME_NONNULL_END

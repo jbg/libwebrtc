@@ -10,7 +10,7 @@
 
 #import "RTCDispatcher.h"
 
-@interface RTCDispatcher ()
+@interface WebRTCDispatcher ()
 
 + (dispatch_queue_t)dispatchQueueForType:(RTCDispatcherQueueType)dispatchType;
 

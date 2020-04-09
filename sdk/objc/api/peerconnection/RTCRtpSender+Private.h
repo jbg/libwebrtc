@@ -14,14 +14,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCPeerConnectionFactory;
+@class WebRTCPeerConnectionFactory;
 
-@interface RTCRtpSender ()
+@interface WebRTCRtpSender ()
 
 @property(nonatomic, readonly) rtc::scoped_refptr<webrtc::RtpSenderInterface> nativeRtpSender;
 
-/** Initialize an RTCRtpSender with a native RtpSenderInterface. */
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory*)factory
+/** Initialize an WebRTCRtpSender with a native RtpSenderInterface. */
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory*)factory
                 nativeRtpSender:(rtc::scoped_refptr<webrtc::RtpSenderInterface>)nativeRtpSender
     NS_DESIGNATED_INITIALIZER;
 

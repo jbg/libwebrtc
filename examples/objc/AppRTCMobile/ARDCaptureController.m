@@ -17,12 +17,12 @@
 const Float64 kFramerateLimit = 30.0;
 
 @implementation ARDCaptureController {
-  RTCCameraVideoCapturer *_capturer;
+  WebRTCCameraVideoCapturer *_capturer;
   ARDSettingsModel *_settings;
   BOOL _usingFrontCamera;
 }
 
-- (instancetype)initWithCapturer:(RTCCameraVideoCapturer *)capturer
+- (instancetype)initWithCapturer:(WebRTCCameraVideoCapturer *)capturer
                         settings:(ARDSettingsModel *)settings {
   if (self = [super init]) {
     _capturer = capturer;
@@ -63,7 +63,7 @@ const Float64 kFramerateLimit = 30.0;
 #pragma mark - Private
 
 - (AVCaptureDevice *)findDeviceForPosition:(AVCaptureDevicePosition)position {
-  NSArray<AVCaptureDevice *> *captureDevices = [RTCCameraVideoCapturer captureDevices];
+  NSArray<AVCaptureDevice *> *captureDevices = [WebRTCCameraVideoCapturer captureDevices];
   for (AVCaptureDevice *device in captureDevices) {
     if (device.position == position) {
       return device;
@@ -74,7 +74,7 @@ const Float64 kFramerateLimit = 30.0;
 
 - (AVCaptureDeviceFormat *)selectFormatForDevice:(AVCaptureDevice *)device {
   NSArray<AVCaptureDeviceFormat *> *formats =
-      [RTCCameraVideoCapturer supportedFormatsForDevice:device];
+      [WebRTCCameraVideoCapturer supportedFormatsForDevice:device];
   int targetWidth = [_settings currentVideoResolutionWidthFromStore];
   int targetHeight = [_settings currentVideoResolutionHeightFromStore];
   AVCaptureDeviceFormat *selectedFormat = nil;

@@ -14,23 +14,23 @@
 #include "api/video_codecs/video_decoder_factory.h"
 #include "media/base/codec.h"
 
-@protocol RTCVideoDecoderFactory;
+@protocol WebRTCVideoDecoderFactory;
 
 namespace webrtc {
 
 class ObjCVideoDecoderFactory : public VideoDecoderFactory {
  public:
-  explicit ObjCVideoDecoderFactory(id<RTCVideoDecoderFactory>);
+  explicit ObjCVideoDecoderFactory(id<WebRTCVideoDecoderFactory>);
   ~ObjCVideoDecoderFactory() override;
 
-  id<RTCVideoDecoderFactory> wrapped_decoder_factory() const;
+  id<WebRTCVideoDecoderFactory> wrapped_decoder_factory() const;
 
   std::vector<SdpVideoFormat> GetSupportedFormats() const override;
   std::unique_ptr<VideoDecoder> CreateVideoDecoder(
       const SdpVideoFormat& format) override;
 
  private:
-  id<RTCVideoDecoderFactory> decoder_factory_;
+  id<WebRTCVideoDecoderFactory> decoder_factory_;
 };
 
 }  // namespace webrtc

@@ -217,12 +217,12 @@ static NSString const *kARDWSSMessagePayloadKey = @"msg";
       // Change message to answer, send back to server.
       ARDSessionDescriptionMessage *sdpMessage =
           (ARDSessionDescriptionMessage *)message;
-      RTCSessionDescription *description = sdpMessage.sessionDescription;
+      WebRTCSessionDescription *description = sdpMessage.sessionDescription;
       NSString *dsc = description.sdp;
       dsc = [dsc stringByReplacingOccurrencesOfString:@"offer"
                                            withString:@"answer"];
-      RTCSessionDescription *answerDescription =
-          [[RTCSessionDescription alloc] initWithType:RTCSdpTypeAnswer sdp:dsc];
+      WebRTCSessionDescription *answerDescription =
+          [[WebRTCSessionDescription alloc] initWithType:RTCSdpTypeAnswer sdp:dsc];
       ARDSignalingMessage *answer =
           [[ARDSessionDescriptionMessage alloc]
                initWithDescription:answerDescription];

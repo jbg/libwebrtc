@@ -24,15 +24,15 @@
 
 @interface ARDVideoCallViewController () <ARDAppClientDelegate,
                                           ARDVideoCallViewDelegate,
-                                          RTCAudioSessionDelegate>
-@property(nonatomic, strong) RTCVideoTrack *remoteVideoTrack;
+                                          WebRTCAudioSessionDelegate>
+@property(nonatomic, strong) WebRTCVideoTrack *remoteVideoTrack;
 @property(nonatomic, readonly) ARDVideoCallView *videoCallView;
 @property(nonatomic, assign) AVAudioSessionPortOverride portOverride;
 @end
 
 @implementation ARDVideoCallViewController {
   ARDAppClient *_client;
-  RTCVideoTrack *_remoteVideoTrack;
+  WebRTCVideoTrack *_remoteVideoTrack;
   ARDCaptureController *_captureController;
   ARDFileCaptureController *_fileCaptureController NS_AVAILABLE_IOS(10);
 }
@@ -62,7 +62,7 @@
       [self statusTextForState:RTCIceConnectionStateNew];
   self.view = _videoCallView;
 
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
   [session addDelegate:self];
 }
 
@@ -100,7 +100,7 @@
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didCreateLocalCapturer:(RTCCameraVideoCapturer *)localCapturer {
+    didCreateLocalCapturer:(WebRTCCameraVideoCapturer *)localCapturer {
   _videoCallView.localVideoView.captureSession = localCapturer.captureSession;
   ARDSettingsModel *settingsModel = [[ARDSettingsModel alloc] init];
   _captureController =
@@ -109,7 +109,7 @@
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didCreateLocalFileCapturer:(RTCFileVideoCapturer *)fileCapturer {
+    didCreateLocalFileCapturer:(WebRTCFileVideoCapturer *)fileCapturer {
 #if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
   if (@available(iOS 10, *)) {
     _fileCaptureController = [[ARDFileCaptureController alloc] initWithCapturer:fileCapturer];
@@ -119,11 +119,11 @@
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
+    didReceiveLocalVideoTrack:(WebRTCVideoTrack *)localVideoTrack {
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
+    didReceiveRemoteVideoTrack:(WebRTCVideoTrack *)remoteVideoTrack {
   self.remoteVideoTrack = remoteVideoTrack;
   __weak ARDVideoCallViewController *weakSelf = self;
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -163,9 +163,9 @@
   if (_portOverride == AVAudioSessionPortOverrideNone) {
     override = AVAudioSessionPortOverrideSpeaker;
   }
-  [RTCDispatcher dispatchAsyncOnType:RTCDispatcherTypeAudioSession
+  [WebRTCDispatcher dispatchAsyncOnType:RTCDispatcherTypeAudioSession
                                block:^{
-    RTCAudioSession *session = [RTCAudioSession sharedInstance];
+    WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
     [session lockForConfiguration];
     NSError *error = nil;
     if ([session overrideOutputAudioPort:override error:&error]) {
@@ -183,16 +183,16 @@
   _videoCallView.statsView.hidden = NO;
 }
 
-#pragma mark - RTCAudioSessionDelegate
+#pragma mark - WebRTCAudioSessionDelegate
 
-- (void)audioSession:(RTCAudioSession *)audioSession
+- (void)audioSession:(WebRTCAudioSession *)audioSession
     didDetectPlayoutGlitch:(int64_t)totalNumberOfGlitches {
   RTCLog(@"Audio session detected glitch, total: %lld", totalNumberOfGlitches);
 }
 
 #pragma mark - Private
 
-- (void)setRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
+- (void)setRemoteVideoTrack:(WebRTCVideoTrack *)remoteVideoTrack {
   if (_remoteVideoTrack == remoteVideoTrack) {
     return;
   }

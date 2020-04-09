@@ -17,7 +17,7 @@
 #import "base/RTCLogging.h"
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCRtpTransceiverInit
+@implementation WebRTCRtpTransceiverInit
 
 @synthesize direction = _direction;
 @synthesize streamIds = _streamIds;
@@ -32,11 +32,11 @@
 
 - (webrtc::RtpTransceiverInit)nativeInit {
   webrtc::RtpTransceiverInit init;
-  init.direction = [RTCRtpTransceiver nativeRtpTransceiverDirectionFromDirection:_direction];
+  init.direction = [WebRTCRtpTransceiver nativeRtpTransceiverDirectionFromDirection:_direction];
   for (NSString *streamId in _streamIds) {
     init.stream_ids.push_back([streamId UTF8String]);
   }
-  for (RTCRtpEncodingParameters *sendEncoding in _sendEncodings) {
+  for (WebRTCRtpEncodingParameters *sendEncoding in _sendEncodings) {
     init.send_encodings.push_back(sendEncoding.nativeParameters);
   }
   return init;
@@ -44,13 +44,13 @@
 
 @end
 
-@implementation RTCRtpTransceiver {
-  RTCPeerConnectionFactory *_factory;
+@implementation WebRTCRtpTransceiver {
+  WebRTCPeerConnectionFactory *_factory;
   rtc::scoped_refptr<webrtc::RtpTransceiverInterface> _nativeRtpTransceiver;
 }
 
 - (RTCRtpMediaType)mediaType {
-  return [RTCRtpReceiver mediaTypeForNativeMediaType:_nativeRtpTransceiver->media_type()];
+  return [WebRTCRtpReceiver mediaTypeForNativeMediaType:_nativeRtpTransceiver->media_type()];
 }
 
 - (NSString *)mid {
@@ -69,18 +69,18 @@
 }
 
 - (RTCRtpTransceiverDirection)direction {
-  return [RTCRtpTransceiver
+  return [WebRTCRtpTransceiver
       rtpTransceiverDirectionFromNativeDirection:_nativeRtpTransceiver->direction()];
 }
 
 - (void)setDirection:(RTCRtpTransceiverDirection)direction {
   _nativeRtpTransceiver->SetDirection(
-      [RTCRtpTransceiver nativeRtpTransceiverDirectionFromDirection:direction]);
+      [WebRTCRtpTransceiver nativeRtpTransceiverDirectionFromDirection:direction]);
 }
 
 - (BOOL)currentDirection:(RTCRtpTransceiverDirection *)currentDirectionOut {
   if (_nativeRtpTransceiver->current_direction()) {
-    *currentDirectionOut = [RTCRtpTransceiver
+    *currentDirectionOut = [WebRTCRtpTransceiver
         rtpTransceiverDirectionFromNativeDirection:*_nativeRtpTransceiver->current_direction()];
     return YES;
   } else {
@@ -94,7 +94,7 @@
 
 - (NSString *)description {
   return [NSString
-      stringWithFormat:@"RTCRtpTransceiver {\n  sender: %@\n  receiver: %@\n}", _sender, _receiver];
+      stringWithFormat:@"WebRTCRtpTransceiver {\n  sender: %@\n  receiver: %@\n}", _sender, _receiver];
 }
 
 - (BOOL)isEqual:(id)object {
@@ -107,7 +107,7 @@
   if (![object isMemberOfClass:[self class]]) {
     return NO;
   }
-  RTCRtpTransceiver *transceiver = (RTCRtpTransceiver *)object;
+  WebRTCRtpTransceiver *transceiver = (WebRTCRtpTransceiver *)object;
   return _nativeRtpTransceiver == transceiver.nativeRtpTransceiver;
 }
 
@@ -121,7 +121,7 @@
   return _nativeRtpTransceiver;
 }
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
            nativeRtpTransceiver:
                (rtc::scoped_refptr<webrtc::RtpTransceiverInterface>)nativeRtpTransceiver {
   NSParameterAssert(factory);
@@ -129,11 +129,11 @@
   if (self = [super init]) {
     _factory = factory;
     _nativeRtpTransceiver = nativeRtpTransceiver;
-    _sender = [[RTCRtpSender alloc] initWithFactory:_factory
+    _sender = [[WebRTCRtpSender alloc] initWithFactory:_factory
                                     nativeRtpSender:nativeRtpTransceiver->sender()];
-    _receiver = [[RTCRtpReceiver alloc] initWithFactory:_factory
+    _receiver = [[WebRTCRtpReceiver alloc] initWithFactory:_factory
                                       nativeRtpReceiver:nativeRtpTransceiver->receiver()];
-    RTCLogInfo(@"RTCRtpTransceiver(%p): created transceiver: %@", self, self.description);
+    RTCLogInfo(@"WebRTCRtpTransceiver(%p): created transceiver: %@", self, self.description);
   }
   return self;
 }

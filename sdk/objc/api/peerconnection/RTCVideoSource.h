@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 RTC_OBJC_EXPORT
 
-@interface RTCVideoSource : RTCMediaSource <RTCVideoCapturerDelegate>
+@interface WebRTCVideoSource : WebRTCMediaSource <WebRTCVideoCapturerDelegate>
 
 - (instancetype)init NS_UNAVAILABLE;
 

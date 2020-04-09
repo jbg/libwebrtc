@@ -31,7 +31,7 @@ RTC_EXTERN NSString *const kRTCMediaConstraintsValueTrue;
 RTC_EXTERN NSString *const kRTCMediaConstraintsValueFalse;
 
 RTC_OBJC_EXPORT
-@interface RTCMediaConstraints : NSObject
+@interface WebRTCMediaConstraints : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 

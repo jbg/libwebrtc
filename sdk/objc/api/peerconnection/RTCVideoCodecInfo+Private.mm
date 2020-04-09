@@ -12,7 +12,7 @@
 
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCVideoCodecInfo (Private)
+@implementation WebRTCVideoCodecInfo (Private)
 
 - (instancetype)initWithNativeSdpVideoFormat:(webrtc::SdpVideoFormat)format {
   NSMutableDictionary *params = [NSMutableDictionary dictionary];

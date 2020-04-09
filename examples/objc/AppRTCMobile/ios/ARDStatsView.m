@@ -35,7 +35,7 @@
 }
 
 - (void)setStats:(NSArray *)stats {
-  for (RTCLegacyStatsReport *report in stats) {
+  for (WebRTCLegacyStatsReport *report in stats) {
     [_statsBuilder parseStatsReport:report];
   }
   _statsLabel.text = _statsBuilder.statsString;

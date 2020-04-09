@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RTCRtcpParameters ()
+@interface WebRTCRtcpParameters ()
 
 /** Returns the equivalent native RtcpParameters structure. */
 @property(nonatomic, readonly) webrtc::RtcpParameters nativeParameters;

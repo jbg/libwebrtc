@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RTCConfiguration ()
+@interface WebRTCConfiguration ()
 
 /** Optional TurnCustomizer.
  *  With this class one can modify outgoing TURN messages.
