@@ -20,9 +20,9 @@
 #import "components/audio/RTCAudioSession.h"
 #import "components/audio/RTCAudioSessionConfiguration.h"
 
-@interface RTCAudioSession (UnitTesting)
+@interface WebRTCAudioSession (UnitTesting)
 
-@property(nonatomic, readonly) std::vector<__weak id<RTCAudioSessionDelegate> > delegates;
+@property(nonatomic, readonly) std::vector<__weak id<WebRTCAudioSessionDelegate> > delegates;
 
 - (instancetype)initWithAudioSession:(id)audioSession;
 
@@ -38,7 +38,7 @@
 @synthesize outputVolume = _outputVolume;
 @end
 
-@interface RTCAudioSessionTestDelegate : NSObject <RTCAudioSessionDelegate>
+@interface RTCAudioSessionTestDelegate : NSObject <WebRTCAudioSessionDelegate>
 
 @property (nonatomic, readonly) float outputVolume;
 
@@ -55,31 +55,31 @@
   return self;
 }
 
-- (void)audioSessionDidBeginInterruption:(RTCAudioSession *)session {
+- (void)audioSessionDidBeginInterruption:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSessionDidEndInterruption:(RTCAudioSession *)session
+- (void)audioSessionDidEndInterruption:(WebRTCAudioSession *)session
                    shouldResumeSession:(BOOL)shouldResumeSession {
 }
 
-- (void)audioSessionDidChangeRoute:(RTCAudioSession *)session
+- (void)audioSessionDidChangeRoute:(WebRTCAudioSession *)session
            reason:(AVAudioSessionRouteChangeReason)reason
     previousRoute:(AVAudioSessionRouteDescription *)previousRoute {
 }
 
-- (void)audioSessionMediaServerTerminated:(RTCAudioSession *)session {
+- (void)audioSessionMediaServerTerminated:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSessionMediaServerReset:(RTCAudioSession *)session {
+- (void)audioSessionMediaServerReset:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSessionShouldConfigure:(RTCAudioSession *)session {
+- (void)audioSessionShouldConfigure:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSessionShouldUnconfigure:(RTCAudioSession *)session {
+- (void)audioSessionShouldUnconfigure:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSession:(RTCAudioSession *)audioSession
+- (void)audioSession:(WebRTCAudioSession *)audioSession
     didChangeOutputVolume:(float)outputVolume {
   _outputVolume = outputVolume;
 }
@@ -95,14 +95,14 @@
 
 - (instancetype)init {
   if (self = [super init]) {
-    RTCAudioSession *session = [RTCAudioSession sharedInstance];
+    WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
     [session addDelegate:self];
   }
   return self;
 }
 
 - (void)dealloc {
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
   [session removeDelegate:self];
 }
 
@@ -118,7 +118,7 @@
 @implementation RTCAudioSessionTest
 
 - (void)testLockForConfiguration {
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
 
   for (size_t i = 0; i < 2; i++) {
     [session lockForConfiguration];
@@ -132,7 +132,7 @@
 }
 
 - (void)testAddAndRemoveDelegates {
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
   NSMutableArray *delegates = [NSMutableArray array];
   const size_t count = 5;
   for (size_t i = 0; i < count; ++i) {
@@ -151,7 +151,7 @@
 }
 
 - (void)testPushDelegate {
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
   NSMutableArray *delegates = [NSMutableArray array];
   const size_t count = 2;
   for (size_t i = 0; i < count; ++i) {
@@ -184,7 +184,7 @@
 // Tests that delegates added to the audio session properly zero out. This is
 // checking an implementation detail (that vectors of __weak work as expected).
 - (void)testZeroingWeakDelegate {
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
   @autoreleasepool {
     // Add a delegate to the session. There should be one delegate at this
     // point.
@@ -212,12 +212,12 @@
         [[RTCTestRemoveOnDeallocDelegate alloc] init];
     EXPECT_TRUE(delegate);
   }
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
   EXPECT_EQ(0u, session.delegates.size());
 }
 
 - (void)testAudioSessionActivation {
-  RTCAudioSession *audioSession = [RTCAudioSession sharedInstance];
+  WebRTCAudioSession *audioSession = [WebRTCAudioSession sharedInstance];
   EXPECT_EQ(0, audioSession.activationCount);
   [audioSession audioSessionDidActivate:[AVAudioSession sharedInstance]];
   EXPECT_EQ(1, audioSession.activationCount);
@@ -255,10 +255,10 @@ OCMLocation *OCMMakeLocation(id testCase, const char *fileCString, int line){
       setActive:YES withOptions:0 error:((NSError __autoreleasing **)[OCMArg anyPointer])]).
       andDo(setActiveBlock);
 
-  id mockAudioSession = OCMPartialMock([RTCAudioSession sharedInstance]);
+  id mockAudioSession = OCMPartialMock([WebRTCAudioSession sharedInstance]);
   OCMStub([mockAudioSession session]).andReturn(mockAVAudioSession);
 
-  RTCAudioSession *audioSession = mockAudioSession;
+  WebRTCAudioSession *audioSession = mockAudioSession;
   EXPECT_EQ(0, audioSession.activationCount);
   [audioSession lockForConfiguration];
   EXPECT_TRUE([audioSession checkLock:nil]);
@@ -286,7 +286,7 @@ OCMLocation *OCMMakeLocation(id testCase, const char *fileCString, int line){
 
 - (void)testAudioVolumeDidNotify {
   MockAVAudioSession *mockAVAudioSession = [[MockAVAudioSession alloc] init];
-  RTCAudioSession *session = [[RTCAudioSession alloc] initWithAudioSession:mockAVAudioSession];
+  WebRTCAudioSession *session = [[WebRTCAudioSession alloc] initWithAudioSession:mockAVAudioSession];
   RTCAudioSessionTestDelegate *delegate =
       [[RTCAudioSessionTestDelegate alloc] init];
   [session addDelegate:delegate];
@@ -304,8 +304,8 @@ namespace webrtc {
 class AudioSessionTest : public ::testing::Test {
  protected:
   void TearDown() override {
-    RTCAudioSession *session = [RTCAudioSession sharedInstance];
-    for (id<RTCAudioSessionDelegate> delegate : session.delegates) {
+    WebRTCAudioSession *session = [WebRTCAudioSession sharedInstance];
+    for (id<WebRTCAudioSessionDelegate> delegate : session.delegates) {
       [session removeDelegate:delegate];
     }
   }

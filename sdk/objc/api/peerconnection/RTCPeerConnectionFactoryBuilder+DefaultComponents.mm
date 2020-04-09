@@ -33,11 +33,11 @@
   [builder setAudioDecoderFactory:audioDecoderFactory];
 
   auto videoEncoderFactory =
-      webrtc::ObjCToNativeVideoEncoderFactory([[RTCVideoEncoderFactoryH264 alloc] init]);
+      webrtc::ObjCToNativeVideoEncoderFactory([[WebRTCVideoEncoderFactoryH264 alloc] init]);
   [builder setVideoEncoderFactory:std::move(videoEncoderFactory)];
 
   auto videoDecoderFactory =
-      webrtc::ObjCToNativeVideoDecoderFactory([[RTCVideoDecoderFactoryH264 alloc] init]);
+      webrtc::ObjCToNativeVideoDecoderFactory([[WebRTCVideoDecoderFactoryH264 alloc] init]);
   [builder setVideoDecoderFactory:std::move(videoDecoderFactory)];
 
 #if defined(WEBRTC_IOS)

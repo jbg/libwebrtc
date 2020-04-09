@@ -10,7 +10,7 @@
 
 #import <WebRTC/RTCVideoCodecInfo.h>
 
-@interface RTCVideoCodecInfo (HumanReadable)
+@interface WebRTCVideoCodecInfo (HumanReadable)
 
 - (NSString *)humanReadableDescription;
 

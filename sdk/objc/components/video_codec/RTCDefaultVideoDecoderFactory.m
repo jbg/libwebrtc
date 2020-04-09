@@ -19,16 +19,16 @@
 #import "api/video_codec/RTCVideoDecoderVP9.h"
 #endif
 
-@implementation RTCDefaultVideoDecoderFactory
+@implementation WebRTCDefaultVideoDecoderFactory
 
-- (NSArray<RTCVideoCodecInfo *> *)supportedCodecs {
+- (NSArray<WebRTCVideoCodecInfo *> *)supportedCodecs {
   NSDictionary<NSString *, NSString *> *constrainedHighParams = @{
     @"profile-level-id" : kRTCMaxSupportedH264ProfileLevelConstrainedHigh,
     @"level-asymmetry-allowed" : @"1",
     @"packetization-mode" : @"1",
   };
-  RTCVideoCodecInfo *constrainedHighInfo =
-      [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name
+  WebRTCVideoCodecInfo *constrainedHighInfo =
+      [[WebRTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name
                                    parameters:constrainedHighParams];
 
   NSDictionary<NSString *, NSString *> *constrainedBaselineParams = @{
@@ -36,14 +36,14 @@
     @"level-asymmetry-allowed" : @"1",
     @"packetization-mode" : @"1",
   };
-  RTCVideoCodecInfo *constrainedBaselineInfo =
-      [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name
+  WebRTCVideoCodecInfo *constrainedBaselineInfo =
+      [[WebRTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name
                                    parameters:constrainedBaselineParams];
 
-  RTCVideoCodecInfo *vp8Info = [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp8Name];
+  WebRTCVideoCodecInfo *vp8Info = [[WebRTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp8Name];
 
 #if defined(RTC_ENABLE_VP9)
-  RTCVideoCodecInfo *vp9Info = [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp9Name];
+  WebRTCVideoCodecInfo *vp9Info = [[WebRTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp9Name];
 #endif
 
   return @[
@@ -56,14 +56,14 @@
   ];
 }
 
-- (id<RTCVideoDecoder>)createDecoder:(RTCVideoCodecInfo *)info {
+- (id<WebRTCVideoDecoder>)createDecoder:(WebRTCVideoCodecInfo *)info {
   if ([info.name isEqualToString:kRTCVideoCodecH264Name]) {
-    return [[RTCVideoDecoderH264 alloc] init];
+    return [[WebRTCVideoDecoderH264 alloc] init];
   } else if ([info.name isEqualToString:kRTCVideoCodecVp8Name]) {
-    return [RTCVideoDecoderVP8 vp8Decoder];
+    return [WebRTCVideoDecoderVP8 vp8Decoder];
 #if defined(RTC_ENABLE_VP9)
   } else if ([info.name isEqualToString:kRTCVideoCodecVp9Name]) {
-    return [RTCVideoDecoderVP9 vp9Decoder];
+    return [WebRTCVideoDecoderVP9 vp9Decoder];
 #endif
   }
 

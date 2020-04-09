@@ -13,15 +13,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCAudioSource;
+@class WebRTCAudioSource;
 
 RTC_OBJC_EXPORT
-@interface RTCAudioTrack : RTCMediaStreamTrack
+@interface WebRTCAudioTrack : WebRTCMediaStreamTrack
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /** The audio source for this audio track. */
-@property(nonatomic, readonly) RTCAudioSource *source;
+@property(nonatomic, readonly) WebRTCAudioSource *source;
 
 @end
 

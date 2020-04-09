@@ -43,8 +43,8 @@
 
 - (void)testNV12TextureCacheDoesNotCrashOnEmptyFrame {
   CVPixelBufferRef nullPixelBuffer = NULL;
-  RTCCVPixelBuffer *badFrameBuffer = [[RTCCVPixelBuffer alloc] initWithPixelBuffer:nullPixelBuffer];
-  RTCVideoFrame *badFrame = [[RTCVideoFrame alloc] initWithBuffer:badFrameBuffer
+  WebRTCCVPixelBuffer *badFrameBuffer = [[WebRTCCVPixelBuffer alloc] initWithPixelBuffer:nullPixelBuffer];
+  WebRTCVideoFrame *badFrame = [[WebRTCVideoFrame alloc] initWithBuffer:badFrameBuffer
                                                          rotation:RTCVideoRotation_0
                                                       timeStampNs:0];
   [_nv12TextureCache uploadFrameToTextures:badFrame];

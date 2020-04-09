@@ -10,7 +10,7 @@
 
 #import "RTCRtpFragmentationHeader.h"
 
-@implementation RTCRtpFragmentationHeader
+@implementation WebRTCRtpFragmentationHeader
 
 @synthesize fragmentationOffset = _fragmentationOffset;
 @synthesize fragmentationLength = _fragmentationLength;

@@ -14,28 +14,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCPeerConnectionFactory;
+@class WebRTCPeerConnectionFactory;
 
 namespace webrtc {
 
 class RtpReceiverDelegateAdapter : public RtpReceiverObserverInterface {
  public:
-  RtpReceiverDelegateAdapter(RTCRtpReceiver* receiver);
+  RtpReceiverDelegateAdapter(WebRTCRtpReceiver* receiver);
 
   void OnFirstPacketReceived(cricket::MediaType media_type) override;
 
  private:
-  __weak RTCRtpReceiver* receiver_;
+  __weak WebRTCRtpReceiver* receiver_;
 };
 
 }  // namespace webrtc
 
-@interface RTCRtpReceiver ()
+@interface WebRTCRtpReceiver ()
 
 @property(nonatomic, readonly) rtc::scoped_refptr<webrtc::RtpReceiverInterface> nativeRtpReceiver;
 
-/** Initialize an RTCRtpReceiver with a native RtpReceiverInterface. */
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory*)factory
+/** Initialize an WebRTCRtpReceiver with a native RtpReceiverInterface. */
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory*)factory
               nativeRtpReceiver:(rtc::scoped_refptr<webrtc::RtpReceiverInterface>)nativeRtpReceiver
     NS_DESIGNATED_INITIALIZER;
 

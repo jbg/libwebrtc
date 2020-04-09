@@ -15,9 +15,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCPeerConnectionFactory;
+@class WebRTCPeerConnectionFactory;
 
-@interface RTCDataBuffer ()
+@interface WebRTCDataBuffer ()
 
 /**
  * The native DataBuffer representation of this RTCDatabuffer object. This is
@@ -25,15 +25,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readonly) const webrtc::DataBuffer *nativeDataBuffer;
 
-/** Initialize an RTCDataBuffer from a native DataBuffer. */
+/** Initialize an WebRTCDataBuffer from a native DataBuffer. */
 - (instancetype)initWithNativeBuffer:(const webrtc::DataBuffer &)nativeBuffer;
 
 @end
 
-@interface RTCDataChannel ()
+@interface WebRTCDataChannel ()
 
-/** Initialize an RTCDataChannel from a native DataChannelInterface. */
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+/** Initialize an WebRTCDataChannel from a native DataChannelInterface. */
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
               nativeDataChannel:(rtc::scoped_refptr<webrtc::DataChannelInterface>)nativeDataChannel
     NS_DESIGNATED_INITIALIZER;
 

@@ -16,7 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 RTC_OBJC_EXPORT
-@interface RTCDataBuffer : NSObject
+@interface WebRTCDataBuffer : NSObject
 
 /** NSData representation of the underlying buffer. */
 @property(nonatomic, readonly) NSData *data;
@@ -27,27 +27,27 @@ RTC_OBJC_EXPORT
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Initialize an RTCDataBuffer from NSData. |isBinary| indicates whether |data|
+ * Initialize an WebRTCDataBuffer from NSData. |isBinary| indicates whether |data|
  * contains UTF-8 or binary data.
  */
 - (instancetype)initWithData:(NSData *)data isBinary:(BOOL)isBinary;
 
 @end
 
-@class RTCDataChannel;
+@class WebRTCDataChannel;
 RTC_OBJC_EXPORT
-@protocol RTCDataChannelDelegate <NSObject>
+@protocol WebRTCDataChannelDelegate <NSObject>
 
 /** The data channel state changed. */
-- (void)dataChannelDidChangeState:(RTCDataChannel *)dataChannel;
+- (void)dataChannelDidChangeState:(WebRTCDataChannel *)dataChannel;
 
 /** The data channel successfully received a data buffer. */
-- (void)dataChannel:(RTCDataChannel *)dataChannel
-    didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer;
+- (void)dataChannel:(WebRTCDataChannel *)dataChannel
+    didReceiveMessageWithBuffer:(WebRTCDataBuffer *)buffer;
 
 @optional
 /** The data channel's |bufferedAmount| changed. */
-- (void)dataChannel:(RTCDataChannel *)dataChannel didChangeBufferedAmount:(uint64_t)amount;
+- (void)dataChannel:(WebRTCDataChannel *)dataChannel didChangeBufferedAmount:(uint64_t)amount;
 
 @end
 
@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, RTCDataChannelState) {
 };
 
 RTC_OBJC_EXPORT
-@interface RTCDataChannel : NSObject
+@interface WebRTCDataChannel : NSObject
 
 /**
  * A label that can be used to distinguish this data channel from other data
@@ -115,7 +115,7 @@ RTC_OBJC_EXPORT
 @property(nonatomic, readonly) uint64_t bufferedAmount;
 
 /** The delegate for this data channel. */
-@property(nonatomic, weak) id<RTCDataChannelDelegate> delegate;
+@property(nonatomic, weak) id<WebRTCDataChannelDelegate> delegate;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -123,7 +123,7 @@ RTC_OBJC_EXPORT
 - (void)close;
 
 /** Attempt to send |data| on this data channel's underlying data transport. */
-- (BOOL)sendData:(RTCDataBuffer *)data;
+- (BOOL)sendData:(WebRTCDataBuffer *)data;
 
 @end
 

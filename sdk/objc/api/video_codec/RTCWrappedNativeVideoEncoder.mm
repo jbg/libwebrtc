@@ -29,13 +29,13 @@
   return std::move(_wrappedEncoder);
 }
 
-#pragma mark - RTCVideoEncoder
+#pragma mark - WebRTCVideoEncoder
 
 - (void)setCallback:(RTCVideoEncoderCallback)callback {
   RTC_NOTREACHED();
 }
 
-- (NSInteger)startEncodeWithSettings:(RTCVideoEncoderSettings *)settings
+- (NSInteger)startEncodeWithSettings:(WebRTCVideoEncoderSettings *)settings
                        numberOfCores:(int)numberOfCores {
   RTC_NOTREACHED();
   return 0;
@@ -46,8 +46,8 @@
   return 0;
 }
 
-- (NSInteger)encode:(RTCVideoFrame *)frame
-    codecSpecificInfo:(nullable id<RTCCodecSpecificInfo>)info
+- (NSInteger)encode:(WebRTCVideoFrame *)frame
+    codecSpecificInfo:(nullable id<WebRTCCodecSpecificInfo>)info
            frameTypes:(NSArray<NSNumber *> *)frameTypes {
   RTC_NOTREACHED();
   return 0;
@@ -63,7 +63,7 @@
   return nil;
 }
 
-- (nullable RTCVideoEncoderQpThresholds *)scalingSettings {
+- (nullable WebRTCVideoEncoderQpThresholds *)scalingSettings {
   RTC_NOTREACHED();
   return nil;
 }

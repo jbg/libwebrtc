@@ -18,14 +18,14 @@
 #import "RTCVideoTrack+Private.h"
 #import "helpers/NSString+StdString.h"
 
-@implementation RTCMediaStream {
-  RTCPeerConnectionFactory *_factory;
+@implementation WebRTCMediaStream {
+  WebRTCPeerConnectionFactory *_factory;
   NSMutableArray *_audioTracks;
   NSMutableArray *_videoTracks;
   rtc::scoped_refptr<webrtc::MediaStreamInterface> _nativeMediaStream;
 }
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
                        streamId:(NSString *)streamId {
   NSParameterAssert(factory);
   NSParameterAssert(streamId.length);
@@ -35,11 +35,11 @@
   return [self initWithFactory:factory nativeMediaStream:stream];
 }
 
-- (NSArray<RTCAudioTrack *> *)audioTracks {
+- (NSArray<WebRTCAudioTrack *> *)audioTracks {
   return [_audioTracks copy];
 }
 
-- (NSArray<RTCVideoTrack *> *)videoTracks {
+- (NSArray<WebRTCVideoTrack *> *)videoTracks {
   return [_videoTracks copy];
 }
 
@@ -47,32 +47,32 @@
   return [NSString stringForStdString:_nativeMediaStream->id()];
 }
 
-- (void)addAudioTrack:(RTCAudioTrack *)audioTrack {
+- (void)addAudioTrack:(WebRTCAudioTrack *)audioTrack {
   if (_nativeMediaStream->AddTrack(audioTrack.nativeAudioTrack)) {
     [_audioTracks addObject:audioTrack];
   }
 }
 
-- (void)addVideoTrack:(RTCVideoTrack *)videoTrack {
+- (void)addVideoTrack:(WebRTCVideoTrack *)videoTrack {
   if (_nativeMediaStream->AddTrack(videoTrack.nativeVideoTrack)) {
     [_videoTracks addObject:videoTrack];
   }
 }
 
-- (void)removeAudioTrack:(RTCAudioTrack *)audioTrack {
+- (void)removeAudioTrack:(WebRTCAudioTrack *)audioTrack {
   NSUInteger index = [_audioTracks indexOfObjectIdenticalTo:audioTrack];
   NSAssert(index != NSNotFound,
-           @"|removeAudioTrack| called on unexpected RTCAudioTrack");
+           @"|removeAudioTrack| called on unexpected WebRTCAudioTrack");
   if (index != NSNotFound &&
       _nativeMediaStream->RemoveTrack(audioTrack.nativeAudioTrack)) {
     [_audioTracks removeObjectAtIndex:index];
   }
 }
 
-- (void)removeVideoTrack:(RTCVideoTrack *)videoTrack {
+- (void)removeVideoTrack:(WebRTCVideoTrack *)videoTrack {
   NSUInteger index = [_videoTracks indexOfObjectIdenticalTo:videoTrack];
   NSAssert(index != NSNotFound,
-           @"|removeVideoTrack| called on unexpected RTCVideoTrack");
+           @"|removeVideoTrack| called on unexpected WebRTCVideoTrack");
   if (index != NSNotFound &&
       _nativeMediaStream->RemoveTrack(videoTrack.nativeVideoTrack)) {
     [_videoTracks removeObjectAtIndex:index];
@@ -80,7 +80,7 @@
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"RTCMediaStream:\n%@\nA=%lu\nV=%lu",
+  return [NSString stringWithFormat:@"WebRTCMediaStream:\n%@\nA=%lu\nV=%lu",
                                     self.streamId,
                                     (unsigned long)self.audioTracks.count,
                                     (unsigned long)self.videoTracks.count];
@@ -92,7 +92,7 @@
   return _nativeMediaStream;
 }
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
               nativeMediaStream:
                   (rtc::scoped_refptr<webrtc::MediaStreamInterface>)nativeMediaStream {
   NSParameterAssert(nativeMediaStream);
@@ -108,15 +108,15 @@
 
     for (auto &track : audioTracks) {
       RTCMediaStreamTrackType type = RTCMediaStreamTrackTypeAudio;
-      RTCAudioTrack *audioTrack =
-          [[RTCAudioTrack alloc] initWithFactory:_factory nativeTrack:track type:type];
+      WebRTCAudioTrack *audioTrack =
+          [[WebRTCAudioTrack alloc] initWithFactory:_factory nativeTrack:track type:type];
       [_audioTracks addObject:audioTrack];
     }
 
     for (auto &track : videoTracks) {
       RTCMediaStreamTrackType type = RTCMediaStreamTrackTypeVideo;
-      RTCVideoTrack *videoTrack =
-          [[RTCVideoTrack alloc] initWithFactory:_factory nativeTrack:track type:type];
+      WebRTCVideoTrack *videoTrack =
+          [[WebRTCVideoTrack alloc] initWithFactory:_factory nativeTrack:track type:type];
       [_videoTracks addObject:videoTrack];
     }
   }

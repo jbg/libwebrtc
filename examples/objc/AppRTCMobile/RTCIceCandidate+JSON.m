@@ -20,23 +20,23 @@ static NSString const *kRTCICECandidateSdpKey = @"candidate";
 static NSString const *kRTCICECandidatesTypeKey = @"candidates";
 
 
-@implementation RTCIceCandidate (JSON)
+@implementation WebRTCIceCandidate (JSON)
 
-+ (RTCIceCandidate *)candidateFromJSONDictionary:(NSDictionary *)dictionary {
++ (WebRTCIceCandidate *)candidateFromJSONDictionary:(NSDictionary *)dictionary {
   NSString *mid = dictionary[kRTCICECandidateMidKey];
   NSString *sdp = dictionary[kRTCICECandidateSdpKey];
   NSNumber *num = dictionary[kRTCICECandidateMLineIndexKey];
   NSInteger mLineIndex = [num integerValue];
-  return [[RTCIceCandidate alloc] initWithSdp:sdp
+  return [[WebRTCIceCandidate alloc] initWithSdp:sdp
                                 sdpMLineIndex:mLineIndex
                                        sdpMid:mid];
 }
 
-+ (NSData *)JSONDataForIceCandidates:(NSArray<RTCIceCandidate *> *)candidates
++ (NSData *)JSONDataForIceCandidates:(NSArray<WebRTCIceCandidate *> *)candidates
                             withType:(NSString *)typeValue {
   NSMutableArray *jsonCandidates =
       [NSMutableArray arrayWithCapacity:candidates.count];
-  for (RTCIceCandidate *candidate in candidates) {
+  for (WebRTCIceCandidate *candidate in candidates) {
     NSDictionary *jsonCandidate = [candidate JSONDictionary];
     [jsonCandidates addObject:jsonCandidate];
   }
@@ -56,14 +56,14 @@ static NSString const *kRTCICECandidatesTypeKey = @"candidates";
   return data;
 }
 
-+ (NSArray<RTCIceCandidate *> *)candidatesFromJSONDictionary:
++ (NSArray<WebRTCIceCandidate *> *)candidatesFromJSONDictionary:
     (NSDictionary *)dictionary {
   NSArray *jsonCandidates = dictionary[kRTCICECandidatesTypeKey];
-  NSMutableArray<RTCIceCandidate *> *candidates =
+  NSMutableArray<WebRTCIceCandidate *> *candidates =
       [NSMutableArray arrayWithCapacity:jsonCandidates.count];
   for (NSDictionary *jsonCandidate in jsonCandidates) {
-    RTCIceCandidate *candidate =
-        [RTCIceCandidate candidateFromJSONDictionary:jsonCandidate];
+    WebRTCIceCandidate *candidate =
+        [WebRTCIceCandidate candidateFromJSONDictionary:jsonCandidate];
     [candidates addObject:candidate];
   }
   return candidates;

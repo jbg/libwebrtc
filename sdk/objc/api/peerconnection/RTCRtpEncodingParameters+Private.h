@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RTCRtpEncodingParameters ()
+@interface WebRTCRtpEncodingParameters ()
 
 /** Returns the equivalent native RtpEncodingParameters structure. */
 @property(nonatomic, readonly) webrtc::RtpEncodingParameters nativeParameters;

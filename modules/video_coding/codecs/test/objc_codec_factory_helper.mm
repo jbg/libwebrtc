@@ -19,11 +19,11 @@ namespace webrtc {
 namespace test {
 
 std::unique_ptr<VideoEncoderFactory> CreateObjCEncoderFactory() {
-  return ObjCToNativeVideoEncoderFactory([[RTCVideoEncoderFactoryH264 alloc] init]);
+  return ObjCToNativeVideoEncoderFactory([[WebRTCVideoEncoderFactoryH264 alloc] init]);
 }
 
 std::unique_ptr<VideoDecoderFactory> CreateObjCDecoderFactory() {
-  return ObjCToNativeVideoDecoderFactory([[RTCVideoDecoderFactoryH264 alloc] init]);
+  return ObjCToNativeVideoDecoderFactory([[WebRTCVideoDecoderFactoryH264 alloc] init]);
 }
 
 }  // namespace test

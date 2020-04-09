@@ -18,21 +18,21 @@ namespace webrtc {
 
 class DataChannelDelegateAdapter : public DataChannelObserver {
  public:
-  DataChannelDelegateAdapter(RTCDataChannel *channel) { channel_ = channel; }
+  DataChannelDelegateAdapter(WebRTCDataChannel *channel) { channel_ = channel; }
 
   void OnStateChange() override {
     [channel_.delegate dataChannelDidChangeState:channel_];
   }
 
   void OnMessage(const DataBuffer& buffer) override {
-    RTCDataBuffer *data_buffer =
-        [[RTCDataBuffer alloc] initWithNativeBuffer:buffer];
+    WebRTCDataBuffer *data_buffer =
+        [[WebRTCDataBuffer alloc] initWithNativeBuffer:buffer];
     [channel_.delegate dataChannel:channel_
        didReceiveMessageWithBuffer:data_buffer];
   }
 
   void OnBufferedAmountChange(uint64_t previousAmount) override {
-    id<RTCDataChannelDelegate> delegate = channel_.delegate;
+    id<WebRTCDataChannelDelegate> delegate = channel_.delegate;
     SEL sel = @selector(dataChannel:didChangeBufferedAmount:);
     if ([delegate respondsToSelector:sel]) {
       [delegate dataChannel:channel_ didChangeBufferedAmount:previousAmount];
@@ -40,12 +40,12 @@ class DataChannelDelegateAdapter : public DataChannelObserver {
   }
 
  private:
-  __weak RTCDataChannel *channel_;
+  __weak WebRTCDataChannel *channel_;
 };
 }
 
 
-@implementation RTCDataBuffer {
+@implementation WebRTCDataBuffer {
   std::unique_ptr<webrtc::DataBuffer> _dataBuffer;
 }
 
@@ -84,8 +84,8 @@ class DataChannelDelegateAdapter : public DataChannelObserver {
 @end
 
 
-@implementation RTCDataChannel {
-  RTCPeerConnectionFactory *_factory;
+@implementation WebRTCDataChannel {
+  WebRTCPeerConnectionFactory *_factory;
   rtc::scoped_refptr<webrtc::DataChannelInterface> _nativeDataChannel;
   std::unique_ptr<webrtc::DataChannelDelegateAdapter> _observer;
   BOOL _isObserverRegistered;
@@ -152,12 +152,12 @@ class DataChannelDelegateAdapter : public DataChannelObserver {
   _nativeDataChannel->Close();
 }
 
-- (BOOL)sendData:(RTCDataBuffer *)data {
+- (BOOL)sendData:(WebRTCDataBuffer *)data {
   return _nativeDataChannel->Send(*data.nativeDataBuffer);
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"RTCDataChannel:\n%ld\n%@\n%@",
+  return [NSString stringWithFormat:@"WebRTCDataChannel:\n%ld\n%@\n%@",
                                     (long)self.channelId,
                                     self.label,
                                     [[self class]
@@ -166,7 +166,7 @@ class DataChannelDelegateAdapter : public DataChannelObserver {
 
 #pragma mark - Private
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
               nativeDataChannel:
                   (rtc::scoped_refptr<webrtc::DataChannelInterface>)nativeDataChannel {
   NSParameterAssert(nativeDataChannel);

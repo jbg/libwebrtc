@@ -16,9 +16,9 @@
 #import "ARDSignalingChannel.h"
 #import "ARDTURNClient.h"
 
-@class RTCPeerConnectionFactory;
+@class WebRTCPeerConnectionFactory;
 
-@interface ARDAppClient () <ARDSignalingChannelDelegate, RTCPeerConnectionDelegate>
+@interface ARDAppClient () <ARDSignalingChannelDelegate, WebRTCPeerConnectionDelegate>
 
 // All properties should only be mutated from the main queue.
 @property(nonatomic, strong) id<ARDRoomServerClient> roomServerClient;
@@ -26,8 +26,8 @@
 @property(nonatomic, strong) id<ARDSignalingChannel> loopbackChannel;
 @property(nonatomic, strong) id<ARDTURNClient> turnClient;
 
-@property(nonatomic, strong) RTCPeerConnection *peerConnection;
-@property(nonatomic, strong) RTCPeerConnectionFactory *factory;
+@property(nonatomic, strong) WebRTCPeerConnection *peerConnection;
+@property(nonatomic, strong) WebRTCPeerConnectionFactory *factory;
 @property(nonatomic, strong) NSMutableArray *messageQueue;
 
 @property(nonatomic, assign) BOOL isTurnComplete;
@@ -42,7 +42,7 @@
 @property(nonatomic, strong) NSURL *webSocketRestURL;
 @property(nonatomic, readonly) BOOL isLoopback;
 
-@property(nonatomic, strong) RTCMediaConstraints *defaultPeerConnectionConstraints;
+@property(nonatomic, strong) WebRTCMediaConstraints *defaultPeerConnectionConstraints;
 
 - (instancetype)initWithRoomServerClient:(id<ARDRoomServerClient>)rsClient
                         signalingChannel:(id<ARDSignalingChannel>)channel

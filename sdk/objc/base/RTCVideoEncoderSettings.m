@@ -10,7 +10,7 @@
 
 #import "RTCVideoEncoderSettings.h"
 
-@implementation RTCVideoEncoderSettings
+@implementation WebRTCVideoEncoderSettings
 
 @synthesize name = _name;
 @synthesize width = _width;

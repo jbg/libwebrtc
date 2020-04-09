@@ -26,18 +26,18 @@
   return self;
 }
 
-#pragma mark - RTCAudioSessionDelegate
+#pragma mark - WebRTCAudioSessionDelegate
 
-- (void)audioSessionDidBeginInterruption:(RTCAudioSession *)session {
+- (void)audioSessionDidBeginInterruption:(WebRTCAudioSession *)session {
   _observer->OnInterruptionBegin();
 }
 
-- (void)audioSessionDidEndInterruption:(RTCAudioSession *)session
+- (void)audioSessionDidEndInterruption:(WebRTCAudioSession *)session
                    shouldResumeSession:(BOOL)shouldResumeSession {
   _observer->OnInterruptionEnd();
 }
 
-- (void)audioSessionDidChangeRoute:(RTCAudioSession *)session
+- (void)audioSessionDidChangeRoute:(WebRTCAudioSession *)session
            reason:(AVAudioSessionRouteChangeReason)reason
     previousRoute:(AVAudioSessionRouteDescription *)previousRoute {
   switch (reason) {
@@ -64,24 +64,24 @@
   }
 }
 
-- (void)audioSessionMediaServerTerminated:(RTCAudioSession *)session {
+- (void)audioSessionMediaServerTerminated:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSessionMediaServerReset:(RTCAudioSession *)session {
+- (void)audioSessionMediaServerReset:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSession:(RTCAudioSession *)session
+- (void)audioSession:(WebRTCAudioSession *)session
     didChangeCanPlayOrRecord:(BOOL)canPlayOrRecord {
   _observer->OnCanPlayOrRecordChange(canPlayOrRecord);
 }
 
-- (void)audioSessionDidStartPlayOrRecord:(RTCAudioSession *)session {
+- (void)audioSessionDidStartPlayOrRecord:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSessionDidStopPlayOrRecord:(RTCAudioSession *)session {
+- (void)audioSessionDidStopPlayOrRecord:(WebRTCAudioSession *)session {
 }
 
-- (void)audioSession:(RTCAudioSession *)audioSession
+- (void)audioSession:(WebRTCAudioSession *)audioSession
     didChangeOutputVolume:(float)outputVolume {
   _observer->OnChangedOutputVolume();
 }

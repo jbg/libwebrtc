@@ -14,14 +14,14 @@
 
 @interface ARDFileCaptureController ()
 
-@property(nonatomic, strong) RTCFileVideoCapturer *fileCapturer;
+@property(nonatomic, strong) WebRTCFileVideoCapturer *fileCapturer;
 
 @end
 
 @implementation ARDFileCaptureController
 @synthesize fileCapturer = _fileCapturer;
 
-- (instancetype)initWithCapturer:(RTCFileVideoCapturer *)capturer {
+- (instancetype)initWithCapturer:(WebRTCFileVideoCapturer *)capturer {
   if (self = [super init]) {
     _fileCapturer = capturer;
   }

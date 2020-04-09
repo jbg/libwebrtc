@@ -105,10 +105,10 @@ static int const kKbpsMultiplier = 1000;
 @end
 
 @implementation ARDAppClient {
-  RTCFileLogger *_fileLogger;
+  WebRTCFileLogger *_fileLogger;
   ARDTimerProxy *_statsTimer;
   ARDSettingsModel *_settings;
-  RTCVideoTrack *_localVideoTrack;
+  WebRTCVideoTrack *_localVideoTrack;
 }
 
 @synthesize shouldGetStats = _shouldGetStats;
@@ -172,7 +172,7 @@ static int const kKbpsMultiplier = 1000;
 - (void)configure {
   _messageQueue = [NSMutableArray array];
   _iceServers = [NSMutableArray array];
-  _fileLogger = [[RTCFileLogger alloc] init];
+  _fileLogger = [[WebRTCFileLogger alloc] init];
   [_fileLogger start];
 }
 
@@ -224,10 +224,10 @@ static int const kKbpsMultiplier = 1000;
   _isLoopback = isLoopback;
   self.state = kARDAppClientStateConnecting;
 
-  RTCDefaultVideoDecoderFactory *decoderFactory = [[RTCDefaultVideoDecoderFactory alloc] init];
-  RTCDefaultVideoEncoderFactory *encoderFactory = [[RTCDefaultVideoEncoderFactory alloc] init];
+  WebRTCDefaultVideoDecoderFactory *decoderFactory = [[WebRTCDefaultVideoDecoderFactory alloc] init];
+  WebRTCDefaultVideoEncoderFactory *encoderFactory = [[WebRTCDefaultVideoEncoderFactory alloc] init];
   encoderFactory.preferredCodec = [settings currentVideoCodecSettingFromStore];
-  _factory = [[RTCPeerConnectionFactory alloc] initWithEncoderFactory:encoderFactory
+  _factory = [[WebRTCPeerConnectionFactory alloc] initWithEncoderFactory:encoderFactory
                                                        decoderFactory:decoderFactory];
 
 #if defined(WEBRTC_IOS)
@@ -365,38 +365,38 @@ static int const kKbpsMultiplier = 1000;
   }
 }
 
-#pragma mark - RTCPeerConnectionDelegate
+#pragma mark - WebRTCPeerConnectionDelegate
 // Callbacks for this delegate occur on non-main thread and need to be
 // dispatched back to main queue as needed.
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
     didChangeSignalingState:(RTCSignalingState)stateChanged {
   RTCLog(@"Signaling state changed: %ld", (long)stateChanged);
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-          didAddStream:(RTCMediaStream *)stream {
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
+          didAddStream:(WebRTCMediaStream *)stream {
   RTCLog(@"Stream with %lu video tracks and %lu audio tracks was added.",
          (unsigned long)stream.videoTracks.count,
          (unsigned long)stream.audioTracks.count);
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didStartReceivingOnTransceiver:(RTCRtpTransceiver *)transceiver {
-  RTCMediaStreamTrack *track = transceiver.receiver.track;
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
+    didStartReceivingOnTransceiver:(WebRTCRtpTransceiver *)transceiver {
+  WebRTCMediaStreamTrack *track = transceiver.receiver.track;
   RTCLog(@"Now receiving %@ on track %@.", track.kind, track.trackId);
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-       didRemoveStream:(RTCMediaStream *)stream {
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
+       didRemoveStream:(WebRTCMediaStream *)stream {
   RTCLog(@"Stream was removed.");
 }
 
-- (void)peerConnectionShouldNegotiate:(RTCPeerConnection *)peerConnection {
+- (void)peerConnectionShouldNegotiate:(WebRTCPeerConnection *)peerConnection {
   RTCLog(@"WARNING: Renegotiation needed but unimplemented.");
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
     didChangeIceConnectionState:(RTCIceConnectionState)newState {
   RTCLog(@"ICE state changed: %ld", (long)newState);
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -404,18 +404,18 @@ static int const kKbpsMultiplier = 1000;
   });
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
     didChangeConnectionState:(RTCPeerConnectionState)newState {
   RTCLog(@"ICE+DTLS state changed: %ld", (long)newState);
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
     didChangeIceGatheringState:(RTCIceGatheringState)newState {
   RTCLog(@"ICE gathering state changed: %ld", (long)newState);
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didGenerateIceCandidate:(RTCIceCandidate *)candidate {
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
+    didGenerateIceCandidate:(WebRTCIceCandidate *)candidate {
   dispatch_async(dispatch_get_main_queue(), ^{
     ARDICECandidateMessage *message =
         [[ARDICECandidateMessage alloc] initWithCandidate:candidate];
@@ -423,8 +423,8 @@ static int const kKbpsMultiplier = 1000;
   });
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didRemoveIceCandidates:(NSArray<RTCIceCandidate *> *)candidates {
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
+    didRemoveIceCandidates:(NSArray<WebRTCIceCandidate *> *)candidates {
   dispatch_async(dispatch_get_main_queue(), ^{
     ARDICECandidateRemovalMessage *message =
         [[ARDICECandidateRemovalMessage alloc]
@@ -433,24 +433,24 @@ static int const kKbpsMultiplier = 1000;
   });
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-     didChangeLocalCandidate:(RTCIceCandidate *)local
-    didChangeRemoteCandidate:(RTCIceCandidate *)remote
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
+     didChangeLocalCandidate:(WebRTCIceCandidate *)local
+    didChangeRemoteCandidate:(WebRTCIceCandidate *)remote
               lastReceivedMs:(int)lastDataReceivedMs
                didHaveReason:(NSString *)reason {
   RTCLog(@"ICE candidate pair changed because: %@", reason);
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didOpenDataChannel:(RTCDataChannel *)dataChannel {
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
+    didOpenDataChannel:(WebRTCDataChannel *)dataChannel {
 }
 
 #pragma mark - RTCSessionDescriptionDelegate
 // Callbacks for this delegate occur on non-main thread and need to be
 // dispatched back to main queue as needed.
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didCreateSessionDescription:(RTCSessionDescription *)sdp
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
+    didCreateSessionDescription:(WebRTCSessionDescription *)sdp
                           error:(NSError *)error {
   dispatch_async(dispatch_get_main_queue(), ^{
     if (error) {
@@ -480,7 +480,7 @@ static int const kKbpsMultiplier = 1000;
   });
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
+- (void)peerConnection:(WebRTCPeerConnection *)peerConnection
     didSetSessionDescriptionWithError:(NSError *)error {
   dispatch_async(dispatch_get_main_queue(), ^{
     if (error) {
@@ -499,10 +499,10 @@ static int const kKbpsMultiplier = 1000;
     // If we're answering and we've just set the remote offer we need to create
     // an answer and set the local description.
     if (!self.isInitiator && !self.peerConnection.localDescription) {
-      RTCMediaConstraints *constraints = [self defaultAnswerConstraints];
+      WebRTCMediaConstraints *constraints = [self defaultAnswerConstraints];
       __weak ARDAppClient *weakSelf = self;
       [self.peerConnection answerForConstraints:constraints
-                              completionHandler:^(RTCSessionDescription *sdp, NSError *error) {
+                              completionHandler:^(WebRTCSessionDescription *sdp, NSError *error) {
                                 ARDAppClient *strongSelf = weakSelf;
                                 [strongSelf peerConnection:strongSelf.peerConnection
                                     didCreateSessionDescription:sdp
@@ -544,9 +544,9 @@ static int const kKbpsMultiplier = 1000;
   self.state = kARDAppClientStateConnected;
 
   // Create peer connection.
-  RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
-  RTCConfiguration *config = [[RTCConfiguration alloc] init];
-  RTCCertificate *pcert = [RTCCertificate generateCertificateWithParams:@{
+  WebRTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
+  WebRTCConfiguration *config = [[WebRTCConfiguration alloc] init];
+  WebRTCCertificate *pcert = [WebRTCCertificate generateCertificateWithParams:@{
     @"expires" : @100000,
     @"name" : @"RSASSA-PKCS1-v1_5"
   }];
@@ -563,7 +563,7 @@ static int const kKbpsMultiplier = 1000;
     // Send offer.
     __weak ARDAppClient *weakSelf = self;
     [_peerConnection offerForConstraints:[self defaultOfferConstraints]
-                       completionHandler:^(RTCSessionDescription *sdp,
+                       completionHandler:^(WebRTCSessionDescription *sdp,
                                            NSError *error) {
       ARDAppClient *strongSelf = weakSelf;
       [strongSelf peerConnection:strongSelf.peerConnection
@@ -619,7 +619,7 @@ static int const kKbpsMultiplier = 1000;
     case kARDSignalingMessageTypeAnswer: {
       ARDSessionDescriptionMessage *sdpMessage =
           (ARDSessionDescriptionMessage *)message;
-      RTCSessionDescription *description = sdpMessage.sessionDescription;
+      WebRTCSessionDescription *description = sdpMessage.sessionDescription;
       __weak ARDAppClient *weakSelf = self;
       [_peerConnection setRemoteDescription:description
                           completionHandler:^(NSError *error) {
@@ -679,7 +679,7 @@ static int const kKbpsMultiplier = 1000;
 }
 
 - (void)setMaxBitrateForPeerConnectionVideoSender {
-  for (RTCRtpSender *sender in _peerConnection.senders) {
+  for (WebRTCRtpSender *sender in _peerConnection.senders) {
     if (sender.track != nil) {
       if ([sender.track.kind isEqualToString:kARDVideoTrackKind]) {
         [self setMaxBitrate:[_settings currentMaxBitrateSettingFromStore] forVideoSender:sender];
@@ -688,20 +688,20 @@ static int const kKbpsMultiplier = 1000;
   }
 }
 
-- (void)setMaxBitrate:(NSNumber *)maxBitrate forVideoSender:(RTCRtpSender *)sender {
+- (void)setMaxBitrate:(NSNumber *)maxBitrate forVideoSender:(WebRTCRtpSender *)sender {
   if (maxBitrate.intValue <= 0) {
     return;
   }
 
-  RTCRtpParameters *parametersToModify = sender.parameters;
-  for (RTCRtpEncodingParameters *encoding in parametersToModify.encodings) {
+  WebRTCRtpParameters *parametersToModify = sender.parameters;
+  for (WebRTCRtpEncodingParameters *encoding in parametersToModify.encodings) {
     encoding.maxBitrateBps = @(maxBitrate.intValue * kKbpsMultiplier);
   }
   [sender setParameters:parametersToModify];
 }
 
-- (RTCRtpTransceiver *)videoTransceiver {
-  for (RTCRtpTransceiver *transceiver in _peerConnection.transceivers) {
+- (WebRTCRtpTransceiver *)videoTransceiver {
+  for (WebRTCRtpTransceiver *transceiver in _peerConnection.transceivers) {
     if (transceiver.mediaType == RTCRtpMediaTypeVideo) {
       return transceiver;
     }
@@ -710,9 +710,9 @@ static int const kKbpsMultiplier = 1000;
 }
 
 - (void)createMediaSenders {
-  RTCMediaConstraints *constraints = [self defaultMediaAudioConstraints];
-  RTCAudioSource *source = [_factory audioSourceWithConstraints:constraints];
-  RTCAudioTrack *track = [_factory audioTrackWithSource:source
+  WebRTCMediaConstraints *constraints = [self defaultMediaAudioConstraints];
+  WebRTCAudioSource *source = [_factory audioSourceWithConstraints:constraints];
+  WebRTCAudioTrack *track = [_factory audioTrackWithSource:source
                                                 trackId:kARDAudioTrackId];
   [_peerConnection addTrack:track streamIds:@[ kARDMediaStreamId ]];
   _localVideoTrack = [self createLocalVideoTrack];
@@ -720,19 +720,19 @@ static int const kKbpsMultiplier = 1000;
     [_peerConnection addTrack:_localVideoTrack streamIds:@[ kARDMediaStreamId ]];
     [_delegate appClient:self didReceiveLocalVideoTrack:_localVideoTrack];
     // We can set up rendering for the remote track right away since the transceiver already has an
-    // RTCRtpReceiver with a track. The track will automatically get unmuted and produce frames
+    // WebRTCRtpReceiver with a track. The track will automatically get unmuted and produce frames
     // once RTP is received.
-    RTCVideoTrack *track = (RTCVideoTrack *)([self videoTransceiver].receiver.track);
+    WebRTCVideoTrack *track = (WebRTCVideoTrack *)([self videoTransceiver].receiver.track);
     [_delegate appClient:self didReceiveRemoteVideoTrack:track];
   }
 }
 
-- (RTCVideoTrack *)createLocalVideoTrack {
+- (WebRTCVideoTrack *)createLocalVideoTrack {
   if ([_settings currentAudioOnlySettingFromStore]) {
     return nil;
   }
 
-  RTCVideoSource *source = [_factory videoSource];
+  WebRTCVideoSource *source = [_factory videoSource];
 
 #if !TARGET_IPHONE_SIMULATOR
   if (self.isBroadcast) {
@@ -740,13 +740,13 @@ static int const kKbpsMultiplier = 1000;
         [[ARDExternalSampleCapturer alloc] initWithDelegate:source];
     [_delegate appClient:self didCreateLocalExternalSampleCapturer:capturer];
   } else {
-    RTCCameraVideoCapturer *capturer = [[RTCCameraVideoCapturer alloc] initWithDelegate:source];
+    WebRTCCameraVideoCapturer *capturer = [[WebRTCCameraVideoCapturer alloc] initWithDelegate:source];
     [_delegate appClient:self didCreateLocalCapturer:capturer];
   }
 #else
 #if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
   if (@available(iOS 10, *)) {
-    RTCFileVideoCapturer *fileCapturer = [[RTCFileVideoCapturer alloc] initWithDelegate:source];
+    WebRTCFileVideoCapturer *fileCapturer = [[WebRTCFileVideoCapturer alloc] initWithDelegate:source];
     [_delegate appClient:self didCreateLocalFileCapturer:fileCapturer];
   }
 #endif
@@ -781,38 +781,38 @@ static int const kKbpsMultiplier = 1000;
 
 #pragma mark - Defaults
 
- - (RTCMediaConstraints *)defaultMediaAudioConstraints {
+ - (WebRTCMediaConstraints *)defaultMediaAudioConstraints {
    NSDictionary *mandatoryConstraints = @{};
-   RTCMediaConstraints *constraints =
-       [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatoryConstraints
+   WebRTCMediaConstraints *constraints =
+       [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:mandatoryConstraints
                                              optionalConstraints:nil];
    return constraints;
 }
 
-- (RTCMediaConstraints *)defaultAnswerConstraints {
+- (WebRTCMediaConstraints *)defaultAnswerConstraints {
   return [self defaultOfferConstraints];
 }
 
-- (RTCMediaConstraints *)defaultOfferConstraints {
+- (WebRTCMediaConstraints *)defaultOfferConstraints {
   NSDictionary *mandatoryConstraints = @{
     @"OfferToReceiveAudio" : @"true",
     @"OfferToReceiveVideo" : @"true"
   };
-  RTCMediaConstraints* constraints =
-      [[RTCMediaConstraints alloc]
+  WebRTCMediaConstraints* constraints =
+      [[WebRTCMediaConstraints alloc]
           initWithMandatoryConstraints:mandatoryConstraints
                    optionalConstraints:nil];
   return constraints;
 }
 
-- (RTCMediaConstraints *)defaultPeerConnectionConstraints {
+- (WebRTCMediaConstraints *)defaultPeerConnectionConstraints {
   if (_defaultPeerConnectionConstraints) {
     return _defaultPeerConnectionConstraints;
   }
   NSString *value = _isLoopback ? @"false" : @"true";
   NSDictionary *optionalConstraints = @{ @"DtlsSrtpKeyAgreement" : value };
-  RTCMediaConstraints* constraints =
-      [[RTCMediaConstraints alloc]
+  WebRTCMediaConstraints* constraints =
+      [[WebRTCMediaConstraints alloc]
           initWithMandatoryConstraints:nil
                    optionalConstraints:optionalConstraints];
   return constraints;

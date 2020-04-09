@@ -55,7 +55,7 @@
 #include "api/transport/media/media_transport_interface.h"
 #include "media/engine/webrtc_media_engine.h"  // nogncheck
 
-@implementation RTCPeerConnectionFactory {
+@implementation WebRTCPeerConnectionFactory {
   std::unique_ptr<rtc::Thread> _networkThread;
   std::unique_ptr<rtc::Thread> _workerThread;
   std::unique_ptr<rtc::Thread> _signalingThread;
@@ -79,17 +79,17 @@
   return [self initWithNativeAudioEncoderFactory:webrtc::CreateBuiltinAudioEncoderFactory()
                        nativeAudioDecoderFactory:webrtc::CreateBuiltinAudioDecoderFactory()
                        nativeVideoEncoderFactory:webrtc::ObjCToNativeVideoEncoderFactory(
-                                                     [[RTCVideoEncoderFactoryH264 alloc] init])
+                                                     [[WebRTCVideoEncoderFactoryH264 alloc] init])
                        nativeVideoDecoderFactory:webrtc::ObjCToNativeVideoDecoderFactory(
-                                                     [[RTCVideoDecoderFactoryH264 alloc] init])
+                                                     [[WebRTCVideoDecoderFactoryH264 alloc] init])
                                audioDeviceModule:[self audioDeviceModule]
                            audioProcessingModule:nullptr
                            mediaTransportFactory:nullptr];
 #endif
 }
 
-- (instancetype)initWithEncoderFactory:(nullable id<RTCVideoEncoderFactory>)encoderFactory
-                        decoderFactory:(nullable id<RTCVideoDecoderFactory>)decoderFactory
+- (instancetype)initWithEncoderFactory:(nullable id<WebRTCVideoEncoderFactory>)encoderFactory
+                        decoderFactory:(nullable id<WebRTCVideoDecoderFactory>)decoderFactory
                  mediaTransportFactory:
                      (std::unique_ptr<webrtc::MediaTransportFactory>)mediaTransportFactory {
 #ifdef HAVE_NO_MEDIA
@@ -112,8 +112,8 @@
                            mediaTransportFactory:std::move(mediaTransportFactory)];
 #endif
 }
-- (instancetype)initWithEncoderFactory:(nullable id<RTCVideoEncoderFactory>)encoderFactory
-                        decoderFactory:(nullable id<RTCVideoDecoderFactory>)decoderFactory {
+- (instancetype)initWithEncoderFactory:(nullable id<WebRTCVideoEncoderFactory>)encoderFactory
+                        decoderFactory:(nullable id<WebRTCVideoDecoderFactory>)decoderFactory {
   return [self initWithEncoderFactory:encoderFactory
                        decoderFactory:decoderFactory
                 mediaTransportFactory:nullptr];
@@ -241,7 +241,7 @@
   return self;
 }
 
-- (RTCAudioSource *)audioSourceWithConstraints:(nullable RTCMediaConstraints *)constraints {
+- (WebRTCAudioSource *)audioSourceWithConstraints:(nullable WebRTCMediaConstraints *)constraints {
   std::unique_ptr<webrtc::MediaConstraints> nativeConstraints;
   if (constraints) {
     nativeConstraints = constraints.nativeConstraints;
@@ -251,64 +251,64 @@
 
   rtc::scoped_refptr<webrtc::AudioSourceInterface> source =
       _nativeFactory->CreateAudioSource(options);
-  return [[RTCAudioSource alloc] initWithFactory:self nativeAudioSource:source];
+  return [[WebRTCAudioSource alloc] initWithFactory:self nativeAudioSource:source];
 }
 
-- (RTCAudioTrack *)audioTrackWithTrackId:(NSString *)trackId {
-  RTCAudioSource *audioSource = [self audioSourceWithConstraints:nil];
+- (WebRTCAudioTrack *)audioTrackWithTrackId:(NSString *)trackId {
+  WebRTCAudioSource *audioSource = [self audioSourceWithConstraints:nil];
   return [self audioTrackWithSource:audioSource trackId:trackId];
 }
 
-- (RTCAudioTrack *)audioTrackWithSource:(RTCAudioSource *)source
+- (WebRTCAudioTrack *)audioTrackWithSource:(WebRTCAudioSource *)source
                                 trackId:(NSString *)trackId {
-  return [[RTCAudioTrack alloc] initWithFactory:self
+  return [[WebRTCAudioTrack alloc] initWithFactory:self
                                          source:source
                                         trackId:trackId];
 }
 
-- (RTCVideoSource *)videoSource {
-  return [[RTCVideoSource alloc] initWithFactory:self
+- (WebRTCVideoSource *)videoSource {
+  return [[WebRTCVideoSource alloc] initWithFactory:self
                                  signalingThread:_signalingThread.get()
                                     workerThread:_workerThread.get()];
 }
 
-- (RTCVideoTrack *)videoTrackWithSource:(RTCVideoSource *)source
+- (WebRTCVideoTrack *)videoTrackWithSource:(WebRTCVideoSource *)source
                                 trackId:(NSString *)trackId {
-  return [[RTCVideoTrack alloc] initWithFactory:self
+  return [[WebRTCVideoTrack alloc] initWithFactory:self
                                          source:source
                                         trackId:trackId];
 }
 
-- (RTCMediaStream *)mediaStreamWithStreamId:(NSString *)streamId {
-  return [[RTCMediaStream alloc] initWithFactory:self
+- (WebRTCMediaStream *)mediaStreamWithStreamId:(NSString *)streamId {
+  return [[WebRTCMediaStream alloc] initWithFactory:self
                                         streamId:streamId];
 }
 
-- (RTCPeerConnection *)peerConnectionWithConfiguration:
-    (RTCConfiguration *)configuration
+- (WebRTCPeerConnection *)peerConnectionWithConfiguration:
+    (WebRTCConfiguration *)configuration
                                            constraints:
-    (RTCMediaConstraints *)constraints
+    (WebRTCMediaConstraints *)constraints
                                               delegate:
-    (nullable id<RTCPeerConnectionDelegate>)delegate {
-  return [[RTCPeerConnection alloc] initWithFactory:self
+    (nullable id<WebRTCPeerConnectionDelegate>)delegate {
+  return [[WebRTCPeerConnection alloc] initWithFactory:self
                                       configuration:configuration
                                         constraints:constraints
                                            delegate:delegate];
 }
 
-- (RTCPeerConnection *)
-    peerConnectionWithDependencies:(RTCConfiguration *)configuration
-                       constraints:(RTCMediaConstraints *)constraints
+- (WebRTCPeerConnection *)
+    peerConnectionWithDependencies:(WebRTCConfiguration *)configuration
+                       constraints:(WebRTCMediaConstraints *)constraints
                       dependencies:(std::unique_ptr<webrtc::PeerConnectionDependencies>)dependencies
-                          delegate:(id<RTCPeerConnectionDelegate>)delegate {
-  return [[RTCPeerConnection alloc] initWithDependencies:self
+                          delegate:(id<WebRTCPeerConnectionDelegate>)delegate {
+  return [[WebRTCPeerConnection alloc] initWithDependencies:self
                                            configuration:configuration
                                              constraints:constraints
                                             dependencies:std::move(dependencies)
                                                 delegate:delegate];
 }
 
-- (void)setOptions:(nonnull RTCPeerConnectionFactoryOptions *)options {
+- (void)setOptions:(nonnull WebRTCPeerConnectionFactoryOptions *)options {
   RTC_DCHECK(options != nil);
   _nativeFactory->SetOptions(options.nativeOptions);
 }

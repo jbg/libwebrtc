@@ -17,9 +17,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * RTCMTLVideoView is thin wrapper around MTKView.
+ * WebRTCMTLVideoView is thin wrapper around MTKView.
  *
- * It has id<RTCVideoRenderer> property that renders video frames in the view's
+ * It has id<WebRTCVideoRenderer> property that renders video frames in the view's
  * bounds using Metal.
  * NOTE: always check if metal is available on the running device via
  * RTC_SUPPORTS_METAL macro before initializing this class.
@@ -27,9 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_IOS(9)
 
 RTC_OBJC_EXPORT
-@interface RTCMTLVideoView : UIView<RTCVideoRenderer>
+@interface WebRTCMTLVideoView : UIView<WebRTCVideoRenderer>
 
-@property(nonatomic, weak) id<RTCVideoViewDelegate> delegate;
+@property(nonatomic, weak) id<WebRTCVideoViewDelegate> delegate;
 
 @property(nonatomic) UIViewContentMode videoContentMode;
 

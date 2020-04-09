@@ -16,12 +16,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** RTCVideoDecoderFactory is an Objective-C version of webrtc::VideoDecoderFactory. */
+/** WebRTCVideoDecoderFactory is an Objective-C version of webrtc::VideoDecoderFactory. */
 RTC_OBJC_EXPORT
-@protocol RTCVideoDecoderFactory <NSObject>
+@protocol WebRTCVideoDecoderFactory <NSObject>
 
-- (nullable id<RTCVideoDecoder>)createDecoder:(RTCVideoCodecInfo *)info;
-- (NSArray<RTCVideoCodecInfo *> *)supportedCodecs;  // TODO(andersc): "supportedFormats" instead?
+- (nullable id<WebRTCVideoDecoder>)createDecoder:(WebRTCVideoCodecInfo *)info;
+- (NSArray<WebRTCVideoCodecInfo *> *)supportedCodecs;  // TODO(andersc): "supportedFormats" instead?
 
 @end
 

@@ -14,5 +14,5 @@
 #import "RTCVideoDecoder.h"
 
 RTC_OBJC_EXPORT
-@interface RTCVideoDecoderH264 : NSObject <RTCVideoDecoder>
+@interface WebRTCVideoDecoderH264 : NSObject <WebRTCVideoDecoder>
 @end

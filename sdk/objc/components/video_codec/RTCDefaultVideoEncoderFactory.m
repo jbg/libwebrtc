@@ -19,18 +19,18 @@
 #import "api/video_codec/RTCVideoEncoderVP9.h"
 #endif
 
-@implementation RTCDefaultVideoEncoderFactory
+@implementation WebRTCDefaultVideoEncoderFactory
 
 @synthesize preferredCodec;
 
-+ (NSArray<RTCVideoCodecInfo *> *)supportedCodecs {
++ (NSArray<WebRTCVideoCodecInfo *> *)supportedCodecs {
   NSDictionary<NSString *, NSString *> *constrainedHighParams = @{
     @"profile-level-id" : kRTCMaxSupportedH264ProfileLevelConstrainedHigh,
     @"level-asymmetry-allowed" : @"1",
     @"packetization-mode" : @"1",
   };
-  RTCVideoCodecInfo *constrainedHighInfo =
-      [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name
+  WebRTCVideoCodecInfo *constrainedHighInfo =
+      [[WebRTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name
                                    parameters:constrainedHighParams];
 
   NSDictionary<NSString *, NSString *> *constrainedBaselineParams = @{
@@ -38,14 +38,14 @@
     @"level-asymmetry-allowed" : @"1",
     @"packetization-mode" : @"1",
   };
-  RTCVideoCodecInfo *constrainedBaselineInfo =
-      [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name
+  WebRTCVideoCodecInfo *constrainedBaselineInfo =
+      [[WebRTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecH264Name
                                    parameters:constrainedBaselineParams];
 
-  RTCVideoCodecInfo *vp8Info = [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp8Name];
+  WebRTCVideoCodecInfo *vp8Info = [[WebRTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp8Name];
 
 #if defined(RTC_ENABLE_VP9)
-  RTCVideoCodecInfo *vp9Info = [[RTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp9Name];
+  WebRTCVideoCodecInfo *vp9Info = [[WebRTCVideoCodecInfo alloc] initWithName:kRTCVideoCodecVp9Name];
 #endif
 
   return @[
@@ -58,24 +58,24 @@
   ];
 }
 
-- (id<RTCVideoEncoder>)createEncoder:(RTCVideoCodecInfo *)info {
+- (id<WebRTCVideoEncoder>)createEncoder:(WebRTCVideoCodecInfo *)info {
   if ([info.name isEqualToString:kRTCVideoCodecH264Name]) {
-    return [[RTCVideoEncoderH264 alloc] initWithCodecInfo:info];
+    return [[WebRTCVideoEncoderH264 alloc] initWithCodecInfo:info];
   } else if ([info.name isEqualToString:kRTCVideoCodecVp8Name]) {
-    return [RTCVideoEncoderVP8 vp8Encoder];
+    return [WebRTCVideoEncoderVP8 vp8Encoder];
 #if defined(RTC_ENABLE_VP9)
   } else if ([info.name isEqualToString:kRTCVideoCodecVp9Name]) {
-    return [RTCVideoEncoderVP9 vp9Encoder];
+    return [WebRTCVideoEncoderVP9 vp9Encoder];
 #endif
   }
 
   return nil;
 }
 
-- (NSArray<RTCVideoCodecInfo *> *)supportedCodecs {
-  NSMutableArray<RTCVideoCodecInfo *> *codecs = [[[self class] supportedCodecs] mutableCopy];
+- (NSArray<WebRTCVideoCodecInfo *> *)supportedCodecs {
+  NSMutableArray<WebRTCVideoCodecInfo *> *codecs = [[[self class] supportedCodecs] mutableCopy];
 
-  NSMutableArray<RTCVideoCodecInfo *> *orderedCodecs = [NSMutableArray array];
+  NSMutableArray<WebRTCVideoCodecInfo *> *orderedCodecs = [NSMutableArray array];
   NSUInteger index = [codecs indexOfObject:self.preferredCodec];
   if (index != NSNotFound) {
     [orderedCodecs addObject:[codecs objectAtIndex:index]];

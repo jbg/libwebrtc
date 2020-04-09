@@ -14,5 +14,5 @@
 - (void)didCaptureSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 @end
 
-@interface ARDExternalSampleCapturer : RTCVideoCapturer <ARDExternalSampleDelegate>
+@interface ARDExternalSampleCapturer : WebRTCVideoCapturer <ARDExternalSampleDelegate>
 @end

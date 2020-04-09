@@ -53,12 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns array of available video codecs.
  */
-- (NSArray<RTCVideoCodecInfo *> *)availableVideoCodecs;
+- (NSArray<WebRTCVideoCodecInfo *> *)availableVideoCodecs;
 
 /**
  * Returns current video codec setting from store if present or default (H264) otherwise.
  */
-- (RTCVideoCodecInfo *)currentVideoCodecSettingFromStore;
+- (WebRTCVideoCodecInfo *)currentVideoCodecSettingFromStore;
 
 /**
  * Stores the provided video codec setting into the store.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param video codec settings the string to be stored.
  * @return YES/NO depending on success.
  */
-- (BOOL)storeVideoCodecSetting:(RTCVideoCodecInfo *)videoCodec;
+- (BOOL)storeVideoCodecSetting:(WebRTCVideoCodecInfo *)videoCodec;
 
 /**
  * Returns current max bitrate setting from store if present.

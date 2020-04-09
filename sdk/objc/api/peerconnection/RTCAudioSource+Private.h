@@ -12,20 +12,20 @@
 
 #import "RTCMediaSource+Private.h"
 
-@interface RTCAudioSource ()
+@interface WebRTCAudioSource ()
 
 /**
- * The AudioSourceInterface object passed to this RTCAudioSource during
+ * The AudioSourceInterface object passed to this WebRTCAudioSource during
  * construction.
  */
 @property(nonatomic, readonly) rtc::scoped_refptr<webrtc::AudioSourceInterface> nativeAudioSource;
 
-/** Initialize an RTCAudioSource from a native AudioSourceInterface. */
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory*)factory
+/** Initialize an WebRTCAudioSource from a native AudioSourceInterface. */
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory*)factory
               nativeAudioSource:(rtc::scoped_refptr<webrtc::AudioSourceInterface>)nativeAudioSource
     NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory*)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory*)factory
               nativeMediaSource:(rtc::scoped_refptr<webrtc::MediaSourceInterface>)nativeMediaSource
                            type:(RTCMediaSourceType)type NS_UNAVAILABLE;
 

@@ -37,15 +37,15 @@ static NSUInteger const kBottomViewHeight = 200;
 @interface APPRTCMainView : NSView
 
 @property(nonatomic, weak) id<APPRTCMainViewDelegate> delegate;
-@property(nonatomic, readonly) NSView<RTCVideoRenderer>* localVideoView;
-@property(nonatomic, readonly) NSView<RTCVideoRenderer>* remoteVideoView;
+@property(nonatomic, readonly) NSView<WebRTCVideoRenderer>* localVideoView;
+@property(nonatomic, readonly) NSView<WebRTCVideoRenderer>* remoteVideoView;
 @property(nonatomic, readonly) NSTextView* logView;
 
 - (void)displayLogMessage:(NSString*)message;
 
 @end
 
-@interface APPRTCMainView () <NSTextFieldDelegate, RTCNSGLVideoViewDelegate>
+@interface APPRTCMainView () <NSTextFieldDelegate, WebRTCNSGLVideoViewDelegate>
 @end
 @implementation APPRTCMainView  {
   NSScrollView* _scrollView;
@@ -178,9 +178,9 @@ static NSUInteger const kBottomViewHeight = 200;
   [self setNeedsUpdateConstraints:YES];
 }
 
-#pragma mark - RTCNSGLVideoViewDelegate
+#pragma mark - WebRTCNSGLVideoViewDelegate
 
-- (void)videoView:(RTCNSGLVideoView*)videoView
+- (void)videoView:(WebRTCNSGLVideoView*)videoView
     didChangeVideoSize:(NSSize)size {
   if (videoView == _remoteVideoView) {
     _remoteVideoSize = size;
@@ -222,9 +222,9 @@ static NSUInteger const kBottomViewHeight = 200;
 // If not we're providing sensible default.
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpartial-availability"
-  if ([RTCMTLNSVideoView class] && [RTCMTLNSVideoView isMetalAvailable]) {
-    _remoteVideoView = [[RTCMTLNSVideoView alloc] initWithFrame:NSZeroRect];
-    _localVideoView = [[RTCMTLNSVideoView alloc] initWithFrame:NSZeroRect];
+  if ([WebRTCMTLNSVideoView class] && [WebRTCMTLNSVideoView isMetalAvailable]) {
+    _remoteVideoView = [[WebRTCMTLNSVideoView alloc] initWithFrame:NSZeroRect];
+    _localVideoView = [[WebRTCMTLNSVideoView alloc] initWithFrame:NSZeroRect];
   }
 #pragma clang diagnostic pop
   if (_remoteVideoView == nil) {
@@ -238,13 +238,13 @@ static NSUInteger const kBottomViewHeight = 200;
     NSOpenGLPixelFormat* pixelFormat =
     [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
 
-    RTCNSGLVideoView* remote =
-        [[RTCNSGLVideoView alloc] initWithFrame:NSZeroRect pixelFormat:pixelFormat];
+    WebRTCNSGLVideoView* remote =
+        [[WebRTCNSGLVideoView alloc] initWithFrame:NSZeroRect pixelFormat:pixelFormat];
     remote.delegate = self;
     _remoteVideoView = remote;
 
-    RTCNSGLVideoView* local =
-        [[RTCNSGLVideoView alloc] initWithFrame:NSZeroRect pixelFormat:pixelFormat];
+    WebRTCNSGLVideoView* local =
+        [[WebRTCNSGLVideoView alloc] initWithFrame:NSZeroRect pixelFormat:pixelFormat];
     local.delegate = self;
     _localVideoView = local;
   }
@@ -299,8 +299,8 @@ static NSUInteger const kBottomViewHeight = 200;
 
 @implementation APPRTCViewController {
   ARDAppClient* _client;
-  RTCVideoTrack* _localVideoTrack;
-  RTCVideoTrack* _remoteVideoTrack;
+  WebRTCVideoTrack* _localVideoTrack;
+  WebRTCVideoTrack* _remoteVideoTrack;
   ARDCaptureController* _captureController;
 }
 
@@ -357,7 +357,7 @@ static NSUInteger const kBottomViewHeight = 200;
 }
 
 - (void)appClient:(ARDAppClient*)client
-    didCreateLocalCapturer:(RTCCameraVideoCapturer*)localCapturer {
+    didCreateLocalCapturer:(WebRTCCameraVideoCapturer*)localCapturer {
   _captureController =
       [[ARDCaptureController alloc] initWithCapturer:localCapturer
                                             settings:[[ARDSettingsModel alloc] init]];
@@ -365,13 +365,13 @@ static NSUInteger const kBottomViewHeight = 200;
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
+    didReceiveLocalVideoTrack:(WebRTCVideoTrack *)localVideoTrack {
   _localVideoTrack = localVideoTrack;
   [_localVideoTrack addRenderer:self.mainView.localVideoView];
 }
 
 - (void)appClient:(ARDAppClient *)client
-    didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
+    didReceiveRemoteVideoTrack:(WebRTCVideoTrack *)remoteVideoTrack {
   _remoteVideoTrack = remoteVideoTrack;
   [_remoteVideoTrack addRenderer:self.mainView.remoteVideoView];
 }

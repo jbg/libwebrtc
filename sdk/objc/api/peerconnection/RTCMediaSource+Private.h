@@ -14,18 +14,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTCPeerConnectionFactory;
+@class WebRTCPeerConnectionFactory;
 
 typedef NS_ENUM(NSInteger, RTCMediaSourceType) {
   RTCMediaSourceTypeAudio,
   RTCMediaSourceTypeVideo,
 };
 
-@interface RTCMediaSource ()
+@interface WebRTCMediaSource ()
 
 @property(nonatomic, readonly) rtc::scoped_refptr<webrtc::MediaSourceInterface> nativeMediaSource;
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
               nativeMediaSource:(rtc::scoped_refptr<webrtc::MediaSourceInterface>)nativeMediaSource
                            type:(RTCMediaSourceType)type NS_DESIGNATED_INITIALIZER;
 

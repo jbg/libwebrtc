@@ -10,8 +10,8 @@
 
 #import <WebRTC/RTCIceServer.h>
 
-@interface RTCIceServer (JSON)
+@interface WebRTCIceServer (JSON)
 
-+ (RTCIceServer *)serverFromJSONDictionary:(NSDictionary *)dictionary;
++ (WebRTCIceServer *)serverFromJSONDictionary:(NSDictionary *)dictionary;
 
 @end

@@ -24,9 +24,9 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
 @class ARDAppClient;
 @class ARDSettingsModel;
 @class ARDExternalSampleCapturer;
-@class RTCMediaConstraints;
-@class RTCCameraVideoCapturer;
-@class RTCFileVideoCapturer;
+@class WebRTCMediaConstraints;
+@class WebRTCCameraVideoCapturer;
+@class WebRTCFileVideoCapturer;
 
 // The delegate is informed of pertinent events and will be called on the
 // main queue.
@@ -37,12 +37,12 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
 - (void)appClient:(ARDAppClient *)client didChangeConnectionState:(RTCIceConnectionState)state;
 
 - (void)appClient:(ARDAppClient *)client
-    didCreateLocalCapturer:(RTCCameraVideoCapturer *)localCapturer;
+    didCreateLocalCapturer:(WebRTCCameraVideoCapturer *)localCapturer;
 
-- (void)appClient:(ARDAppClient *)client didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
+- (void)appClient:(ARDAppClient *)client didReceiveLocalVideoTrack:(WebRTCVideoTrack *)localVideoTrack;
 
 - (void)appClient:(ARDAppClient *)client
-    didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
+    didReceiveRemoteVideoTrack:(WebRTCVideoTrack *)remoteVideoTrack;
 
 - (void)appClient:(ARDAppClient *)client didError:(NSError *)error;
 
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
 
 @optional
 - (void)appClient:(ARDAppClient *)client
-    didCreateLocalFileCapturer:(RTCFileVideoCapturer *)fileCapturer;
+    didCreateLocalFileCapturer:(WebRTCFileVideoCapturer *)fileCapturer;
 
 - (void)appClient:(ARDAppClient *)client
     didCreateLocalExternalSampleCapturer:(ARDExternalSampleCapturer *)externalSampleCapturer;

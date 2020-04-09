@@ -15,7 +15,7 @@
 
 #include "rtc_base/checks.h"
 
-@implementation RTCSessionDescription
+@implementation WebRTCSessionDescription
 
 @synthesize type = _type;
 @synthesize sdp = _sdp;
@@ -40,7 +40,7 @@
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"RTCSessionDescription:\n%@\n%@",
+  return [NSString stringWithFormat:@"WebRTCSessionDescription:\n%@\n%@",
                                     [[self class] stringForType:_type],
                                     _sdp];
 }

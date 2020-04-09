@@ -30,16 +30,16 @@
 
 - (void)testPeerConnectionLifetime {
   @autoreleasepool {
-    RTCConfiguration *config = [[RTCConfiguration alloc] init];
+    WebRTCConfiguration *config = [[WebRTCConfiguration alloc] init];
 
-    RTCMediaConstraints *constraints =
-        [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
+    WebRTCMediaConstraints *constraints =
+        [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
 
-    RTCPeerConnectionFactory *factory;
-    RTCPeerConnection *peerConnection;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCPeerConnection *peerConnection;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       peerConnection =
           [factory peerConnectionWithConfiguration:config constraints:constraints delegate:nil];
       [peerConnection close];
@@ -53,11 +53,11 @@
 
 - (void)testMediaStreamLifetime {
   @autoreleasepool {
-    RTCPeerConnectionFactory *factory;
-    RTCMediaStream *mediaStream;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCMediaStream *mediaStream;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       mediaStream = [factory mediaStreamWithStreamId:@"mediaStream"];
       factory = nil;
     }
@@ -69,17 +69,17 @@
 
 - (void)testDataChannelLifetime {
   @autoreleasepool {
-    RTCConfiguration *config = [[RTCConfiguration alloc] init];
-    RTCMediaConstraints *constraints =
-        [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
-    RTCDataChannelConfiguration *dataChannelConfig = [[RTCDataChannelConfiguration alloc] init];
+    WebRTCConfiguration *config = [[WebRTCConfiguration alloc] init];
+    WebRTCMediaConstraints *constraints =
+        [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
+    WebRTCDataChannelConfiguration *dataChannelConfig = [[WebRTCDataChannelConfiguration alloc] init];
 
-    RTCPeerConnectionFactory *factory;
-    RTCPeerConnection *peerConnection;
-    RTCDataChannel *dataChannel;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCPeerConnection *peerConnection;
+    WebRTCDataChannel *dataChannel;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       peerConnection =
           [factory peerConnectionWithConfiguration:config constraints:constraints delegate:nil];
       dataChannel =
@@ -97,18 +97,18 @@
 
 - (void)testRTCRtpTransceiverLifetime {
   @autoreleasepool {
-    RTCConfiguration *config = [[RTCConfiguration alloc] init];
+    WebRTCConfiguration *config = [[WebRTCConfiguration alloc] init];
     config.sdpSemantics = RTCSdpSemanticsUnifiedPlan;
-    RTCMediaConstraints *contraints =
-        [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
-    RTCRtpTransceiverInit *init = [[RTCRtpTransceiverInit alloc] init];
+    WebRTCMediaConstraints *contraints =
+        [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
+    WebRTCRtpTransceiverInit *init = [[WebRTCRtpTransceiverInit alloc] init];
 
-    RTCPeerConnectionFactory *factory;
-    RTCPeerConnection *peerConnection;
-    RTCRtpTransceiver *tranceiver;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCPeerConnection *peerConnection;
+    WebRTCRtpTransceiver *tranceiver;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       peerConnection =
           [factory peerConnectionWithConfiguration:config constraints:contraints delegate:nil];
       tranceiver = [peerConnection addTransceiverOfType:RTCRtpMediaTypeAudio init:init];
@@ -125,16 +125,16 @@
 
 - (void)testRTCRtpSenderLifetime {
   @autoreleasepool {
-    RTCConfiguration *config = [[RTCConfiguration alloc] init];
-    RTCMediaConstraints *constraints =
-        [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
+    WebRTCConfiguration *config = [[WebRTCConfiguration alloc] init];
+    WebRTCMediaConstraints *constraints =
+        [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
 
-    RTCPeerConnectionFactory *factory;
-    RTCPeerConnection *peerConnection;
-    RTCRtpSender *sender;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCPeerConnection *peerConnection;
+    WebRTCRtpSender *sender;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       peerConnection =
           [factory peerConnectionWithConfiguration:config constraints:constraints delegate:nil];
       sender = [peerConnection senderWithKind:kRTCMediaStreamTrackKindVideo streamId:@"stream"];
@@ -151,19 +151,19 @@
 
 - (void)testRTCRtpReceiverLifetime {
   @autoreleasepool {
-    RTCConfiguration *config = [[RTCConfiguration alloc] init];
-    RTCMediaConstraints *constraints =
-        [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
+    WebRTCConfiguration *config = [[WebRTCConfiguration alloc] init];
+    WebRTCMediaConstraints *constraints =
+        [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{} optionalConstraints:nil];
 
-    RTCPeerConnectionFactory *factory;
-    RTCPeerConnection *pc1;
-    RTCPeerConnection *pc2;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCPeerConnection *pc1;
+    WebRTCPeerConnection *pc2;
 
-    NSArray<RTCRtpReceiver *> *receivers1;
-    NSArray<RTCRtpReceiver *> *receivers2;
+    NSArray<WebRTCRtpReceiver *> *receivers1;
+    NSArray<WebRTCRtpReceiver *> *receivers2;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       pc1 = [factory peerConnectionWithConfiguration:config constraints:constraints delegate:nil];
       [pc1 senderWithKind:kRTCMediaStreamTrackKindAudio streamId:@"stream"];
 
@@ -197,11 +197,11 @@
 
 - (void)testAudioSourceLifetime {
   @autoreleasepool {
-    RTCPeerConnectionFactory *factory;
-    RTCAudioSource *audioSource;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCAudioSource *audioSource;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       audioSource = [factory audioSourceWithConstraints:nil];
       XCTAssertNotNil(audioSource);
       factory = nil;
@@ -214,11 +214,11 @@
 
 - (void)testVideoSourceLifetime {
   @autoreleasepool {
-    RTCPeerConnectionFactory *factory;
-    RTCVideoSource *videoSource;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCVideoSource *videoSource;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       videoSource = [factory videoSource];
       XCTAssertNotNil(videoSource);
       factory = nil;
@@ -231,11 +231,11 @@
 
 - (void)testAudioTrackLifetime {
   @autoreleasepool {
-    RTCPeerConnectionFactory *factory;
-    RTCAudioTrack *audioTrack;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCAudioTrack *audioTrack;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       audioTrack = [factory audioTrackWithTrackId:@"audioTrack"];
       XCTAssertNotNil(audioTrack);
       factory = nil;
@@ -248,11 +248,11 @@
 
 - (void)testVideoTrackLifetime {
   @autoreleasepool {
-    RTCPeerConnectionFactory *factory;
-    RTCVideoTrack *videoTrack;
+    WebRTCPeerConnectionFactory *factory;
+    WebRTCVideoTrack *videoTrack;
 
     @autoreleasepool {
-      factory = [[RTCPeerConnectionFactory alloc] init];
+      factory = [[WebRTCPeerConnectionFactory alloc] init];
       videoTrack = [factory videoTrackWithSource:[factory videoSource] trackId:@"videoTrack"];
       XCTAssertNotNil(videoTrack);
       factory = nil;
@@ -263,20 +263,20 @@
   XCTAssertTrue(true, "Expect test does not crash");
 }
 
-- (bool)negotiatePeerConnection:(RTCPeerConnection *)pc1
-             withPeerConnection:(RTCPeerConnection *)pc2
+- (bool)negotiatePeerConnection:(WebRTCPeerConnection *)pc1
+             withPeerConnection:(WebRTCPeerConnection *)pc2
              negotiationTimeout:(NSTimeInterval)timeout {
-  __weak RTCPeerConnection *weakPC1 = pc1;
-  __weak RTCPeerConnection *weakPC2 = pc2;
-  RTCMediaConstraints *sdpConstraints =
-      [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@{
+  __weak WebRTCPeerConnection *weakPC1 = pc1;
+  __weak WebRTCPeerConnection *weakPC2 = pc2;
+  WebRTCMediaConstraints *sdpConstraints =
+      [[WebRTCMediaConstraints alloc] initWithMandatoryConstraints:@{
         kRTCMediaConstraintsOfferToReceiveAudio : kRTCMediaConstraintsValueTrue
       }
                                             optionalConstraints:nil];
 
   dispatch_semaphore_t negotiatedSem = dispatch_semaphore_create(0);
   [weakPC1 offerForConstraints:sdpConstraints
-             completionHandler:^(RTCSessionDescription *offer, NSError *error) {
+             completionHandler:^(WebRTCSessionDescription *offer, NSError *error) {
                XCTAssertNil(error);
                XCTAssertNotNil(offer);
                [weakPC1
@@ -289,7 +289,7 @@
                                 XCTAssertNil(error);
                                 [weakPC2
                                     answerForConstraints:sdpConstraints
-                                       completionHandler:^(RTCSessionDescription *answer,
+                                       completionHandler:^(WebRTCSessionDescription *answer,
                                                            NSError *error) {
                                          XCTAssertNil(error);
                                          XCTAssertNotNil(answer);

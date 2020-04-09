@@ -17,12 +17,12 @@
 
 #include "rtc_base/checks.h"
 
-@implementation RTCAudioTrack
+@implementation WebRTCAudioTrack
 
 @synthesize source = _source;
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
-                         source:(RTCAudioSource *)source
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
+                         source:(WebRTCAudioSource *)source
                         trackId:(NSString *)trackId {
   RTC_DCHECK(factory);
   RTC_DCHECK(source);
@@ -37,7 +37,7 @@
   return self;
 }
 
-- (instancetype)initWithFactory:(RTCPeerConnectionFactory *)factory
+- (instancetype)initWithFactory:(WebRTCPeerConnectionFactory *)factory
                     nativeTrack:(rtc::scoped_refptr<webrtc::MediaStreamTrackInterface>)nativeTrack
                            type:(RTCMediaStreamTrackType)type {
   NSParameterAssert(factory);
@@ -47,13 +47,13 @@
 }
 
 
-- (RTCAudioSource *)source {
+- (WebRTCAudioSource *)source {
   if (!_source) {
     rtc::scoped_refptr<webrtc::AudioSourceInterface> source =
         self.nativeAudioTrack->GetSource();
     if (source) {
       _source =
-          [[RTCAudioSource alloc] initWithFactory:self.factory nativeAudioSource:source.get()];
+          [[WebRTCAudioSource alloc] initWithFactory:self.factory nativeAudioSource:source.get()];
     }
   }
   return _source;
