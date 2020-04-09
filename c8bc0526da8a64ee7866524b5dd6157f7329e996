@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24f3526b_bbec2925",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-04-09T10:12:06Z",
+      "side": 1,
+      "message": "Add a comment about why this happens out of the executor.",
+      "range": {
+        "startLine": 320,
+        "startChar": 2,
+        "endLine": 325,
+        "endChar": 21
+      },
+      "revId": "c8bc0526da8a64ee7866524b5dd6157f7329e996",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
