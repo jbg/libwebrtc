@@ -40,6 +40,8 @@
 #include "rtc_base/task_queue.h"
 #include "system_wrappers/include/field_trial.h"
 
+// This class needs to be rewritten completely
+
 namespace webrtc {
 namespace {
 
