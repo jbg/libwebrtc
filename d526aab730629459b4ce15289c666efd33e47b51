@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "39412870_c78966b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-04-14T13:59:22Z",
+      "side": 1,
+      "message": "nit: I don\u0027t quite understand that equation.\n\nCould you please instead use literal description, even if it\u0027s longer?",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 70
+      },
+      "revId": "d526aab730629459b4ce15289c666efd33e47b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a4ec29f_0f747009",
         "filename": "call/adaptation/resource_adaptation_processor.h",
         "patchSetId": 7
