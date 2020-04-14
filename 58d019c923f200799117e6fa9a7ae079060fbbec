@@ -22,6 +22,30 @@
       "revId": "58d019c923f200799117e6fa9a7ae079060fbbec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e499bad_d68492e3",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-14T14:00:13Z",
+      "side": 1,
+      "message": "Haha forgotten note to myself, ignore it. In one of the CLs I changed from unique_ptr\u003cFoo\u003e to Foo since lifetime was same as VideoStreamEncoder.",
+      "parentUuid": "36a84ace_8209d4c6",
+      "range": {
+        "startLine": 416,
+        "startChar": 43,
+        "endLine": 416,
+        "endChar": 49
+      },
+      "revId": "58d019c923f200799117e6fa9a7ae079060fbbec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
