@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6926397f_56c60011",
+        "filename": "video/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-04-14T13:53:08Z",
+      "side": 1,
+      "message": "Did you, perhaps mean to fill counters if Total() !\u003d 0?\n\nEven still it\u0027s a new logic. Previously |active_counts_| would be filled on each ResetVideoSourceRestrictions() call. Now they are routed here and there\u0027s an additional condition here. Is it guaranteed that if |adaptation_counters.Total() \u003d\u003d(!\u003d) 0|, then active_counts_ would be \"empty\"?",
+      "range": {
+        "startLine": 633,
+        "startChar": 9,
+        "endLine": 633,
+        "endChar": 48
+      },
+      "revId": "3ba79bf3f8fdd9d3541c9e5ad5acc1800bc16e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
