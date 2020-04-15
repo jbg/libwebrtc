@@ -75,8 +75,11 @@ const char kNoMid[] = "";
 using ::testing::_;
 using ::testing::AllOf;
 using ::testing::Contains;
+using ::testing::Each;
 using ::testing::ElementsAreArray;
+using ::testing::Eq;
 using ::testing::Field;
+using ::testing::Gt;
 using ::testing::NiceMock;
 using ::testing::Pointee;
 using ::testing::Property;
@@ -2243,7 +2246,7 @@ TEST_P(RtpSenderTest, SendPacketUpdatesStats) {
   EXPECT_EQ(rtx_stats.retransmitted.packets, 1u);
 }
 
-TEST_P(RtpSenderTest, GeneratePaddingResendsOldPacketsWithRtx) {
+TEST_P(RtpSenderTest, GeneratedPaddingHasBweExtensions) {
   // Min requested size in order to use RTX payload.
   const size_t kMinPaddingSize = 50;
 
@@ -2262,7 +2265,65 @@ TEST_P(RtpSenderTest, GeneratePaddingResendsOldPacketsWithRtx) {
                    kRtpExtensionTransportSequenceNumber,
                    kTransportSequenceNumberExtensionId));
 
-  const size_t kPayloadPacketSize = 1234;
+  // Send a payload packet first, to enable padding and populate the packet
+  // history.
+  std::unique_ptr<RtpPacketToSend> packet =
+      BuildRtpPacket(kPayload, true, 0, fake_clock_.TimeInMilliseconds());
+  packet->set_allow_retransmission(true);
+  packet->SetPayloadSize(kMinPaddingSize);
+  packet->set_packet_type(RtpPacketMediaType::kVideo);
+  EXPECT_CALL(send_packet_observer_, OnSendPacket).Times(1);
+  rtp_egress()->SendPacket(packet.get(), PacedPacketInfo());
+
+  // Generate a plain padding packet, check that extensions are registered.
+  std::vector<std::unique_ptr<RtpPacketToSend>> generated_packets =
+      rtp_sender()->GeneratePadding(/*target_size_bytes=*/1, true);
+  ASSERT_EQ(generated_packets.size(), 1u);
+  auto& plain_padding = generated_packets.front();
+  EXPECT_GT(plain_padding->padding_size(), 0u);
+  EXPECT_TRUE(plain_padding->HasExtension<TransportSequenceNumber>());
+  EXPECT_TRUE(plain_padding->HasExtension<AbsoluteSendTime>());
+  EXPECT_TRUE(plain_padding->HasExtension<TransmissionOffset>());
+
+  // Verify all header extensions have been written.
+  rtp_egress()->SendPacket(plain_padding.get(), PacedPacketInfo());
+  webrtc::RTPHeader rtp_header;
+  transport_.last_sent_packet().GetHeader(&rtp_header);
+  EXPECT_TRUE(rtp_header.extension.hasAbsoluteSendTime);
+  EXPECT_TRUE(rtp_header.extension.hasTransmissionTimeOffset);
+  EXPECT_TRUE(rtp_header.extension.hasTransportSequenceNumber);
+
+  // Generate a payload padding packets, check that extensions are registered.
+  generated_packets = rtp_sender()->GeneratePadding(kMinPaddingSize, true);
+  ASSERT_EQ(generated_packets.size(), 1u);
+  auto& payload_padding = generated_packets.front();
+  EXPECT_EQ(payload_padding->padding_size(), 0u);
+  EXPECT_TRUE(payload_padding->HasExtension<TransportSequenceNumber>());
+  EXPECT_TRUE(payload_padding->HasExtension<AbsoluteSendTime>());
+  EXPECT_TRUE(payload_padding->HasExtension<TransmissionOffset>());
+
+  // Verify all header extensions have been written.
+  rtp_egress()->SendPacket(payload_padding.get(), PacedPacketInfo());
+  transport_.last_sent_packet().GetHeader(&rtp_header);
+  EXPECT_TRUE(rtp_header.extension.hasAbsoluteSendTime);
+  EXPECT_TRUE(rtp_header.extension.hasTransmissionTimeOffset);
+  EXPECT_TRUE(rtp_header.extension.hasTransportSequenceNumber);
+}
+
+TEST_P(RtpSenderTest, GeneratePaddingResendsOldPacketsWithRtx) {
+  // Min requested size in order to use RTX payload.
+  const size_t kMinPaddingSize = 50;
+
+  rtp_sender()->SetRtxStatus(kRtxRetransmitted | kRtxRedundantPayloads);
+  rtp_sender()->SetRtxPayloadType(kRtxPayload, kPayload);
+  rtp_sender_context_->packet_history_.SetStorePacketsStatus(
+      RtpPacketHistory::StorageMode::kStoreAndCull, 1);
+
+  ASSERT_EQ(0, rtp_sender()->RegisterRtpHeaderExtension(
+                   kRtpExtensionTransportSequenceNumber,
+                   kTransportSequenceNumberExtensionId));
+
+  const size_t kPayloadPacketSize = kMinPaddingSize * 2;
   std::unique_ptr<RtpPacketToSend> packet =
       BuildRtpPacket(kPayload, true, 0, fake_clock_.TimeInMilliseconds());
   packet->set_allow_retransmission(true);
@@ -2283,17 +2344,6 @@ TEST_P(RtpSenderTest, GeneratePaddingResendsOldPacketsWithRtx) {
   EXPECT_EQ(padding_packet->Ssrc(), kRtxSsrc);
   EXPECT_EQ(padding_packet->payload_size(),
             kPayloadPacketSize + kRtxHeaderSize);
-  EXPECT_TRUE(padding_packet->HasExtension<TransportSequenceNumber>());
-  EXPECT_TRUE(padding_packet->HasExtension<AbsoluteSendTime>());
-  EXPECT_TRUE(padding_packet->HasExtension<TransmissionOffset>());
-
-  // Verify all header extensions are received.
-  rtp_egress()->SendPacket(padding_packet.get(), PacedPacketInfo());
-  webrtc::RTPHeader rtp_header;
-  transport_.last_sent_packet().GetHeader(&rtp_header);
-  EXPECT_TRUE(rtp_header.extension.hasAbsoluteSendTime);
-  EXPECT_TRUE(rtp_header.extension.hasTransmissionTimeOffset);
-  EXPECT_TRUE(rtp_header.extension.hasTransportSequenceNumber);
 
   // Not enough budged for payload padding, use plain padding instead.
   const size_t kPaddingBytesRequested = kMinPaddingSize - 1;
@@ -2308,21 +2358,46 @@ TEST_P(RtpSenderTest, GeneratePaddingResendsOldPacketsWithRtx) {
     EXPECT_EQ(packet->payload_size(), 0u);
     EXPECT_GT(packet->padding_size(), 0u);
     padding_bytes_generated += packet->padding_size();
-
-    EXPECT_TRUE(packet->HasExtension<TransportSequenceNumber>());
-    EXPECT_TRUE(packet->HasExtension<AbsoluteSendTime>());
-    EXPECT_TRUE(packet->HasExtension<TransmissionOffset>());
-
-    // Verify all header extensions are received.
-    rtp_egress()->SendPacket(packet.get(), PacedPacketInfo());
-    webrtc::RTPHeader rtp_header;
-    transport_.last_sent_packet().GetHeader(&rtp_header);
-    EXPECT_TRUE(rtp_header.extension.hasAbsoluteSendTime);
-    EXPECT_TRUE(rtp_header.extension.hasTransmissionTimeOffset);
-    EXPECT_TRUE(rtp_header.extension.hasTransportSequenceNumber);
   }
 
   EXPECT_EQ(padding_bytes_generated, kMaxPaddingSize);
+}
+
+TEST_P(RtpSenderTest, LimitsPayloadPaddingSize) {
+  rtp_sender()->SetRtxStatus(kRtxRetransmitted | kRtxRedundantPayloads);
+  rtp_sender()->SetRtxPayloadType(kRtxPayload, kPayload);
+  rtp_sender_context_->packet_history_.SetStorePacketsStatus(
+      RtpPacketHistory::StorageMode::kStoreAndCull, 1);
+
+  ASSERT_EQ(0, rtp_sender()->RegisterRtpHeaderExtension(
+                   kRtpExtensionTransportSequenceNumber,
+                   kTransportSequenceNumberExtensionId));
+
+  // Send a dummy video packet so it ends up in the packet history.
+  const size_t kPayloadPacketSize = 1234u;
+  std::unique_ptr<RtpPacketToSend> packet =
+      BuildRtpPacket(kPayload, true, 0, fake_clock_.TimeInMilliseconds());
+  packet->set_allow_retransmission(true);
+  packet->SetPayloadSize(kPayloadPacketSize);
+  packet->set_packet_type(RtpPacketMediaType::kVideo);
+  EXPECT_CALL(send_packet_observer_, OnSendPacket).Times(1);
+  rtp_egress()->SendPacket(packet.get(), PacedPacketInfo());
+
+  // Generated padding has large enough budget that the video packet should be
+  // retransmitted as padding.
+  std::vector<std::unique_ptr<RtpPacketToSend>> generated_packets =
+      rtp_sender()->GeneratePadding(kPayloadPacketSize / 2, true);
+  ASSERT_FALSE(generated_packets.empty());
+  EXPECT_THAT(generated_packets,
+              Each(Pointee(Property(&RtpPacketToSend::padding_size, Eq(0u)))));
+
+  // If payload padding is > 2x requested size, plain padding is returned
+  // instead.
+  generated_packets =
+      rtp_sender()->GeneratePadding((kPayloadPacketSize / 2) - 1, true);
+  ASSERT_FALSE(generated_packets.empty());
+  EXPECT_THAT(generated_packets,
+              Each(Pointee(Property(&RtpPacketToSend::padding_size, Gt(0u)))));
 }
 
 TEST_P(RtpSenderTest, GeneratePaddingCreatesPurePaddingWithoutRtx) {

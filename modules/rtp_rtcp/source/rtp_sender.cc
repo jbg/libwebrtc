@@ -327,6 +327,10 @@ std::vector<std::unique_ptr<RtpPacketToSend>> RTPSender::GeneratePadding(
           packet_history_->GetPayloadPaddingPacket(
               [&](const RtpPacketToSend& packet)
                   -> std::unique_ptr<RtpPacketToSend> {
+                if (packet.payload_size() > bytes_left + target_size_bytes) {
+                  // Limit overshoot, generate <= 2x target_size_bytes.
+                  return nullptr;
+                }
                 return BuildRtxPacket(packet);
               });
       if (!packet) {
