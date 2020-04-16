@@ -684,6 +684,30 @@
     },
     {
       "key": {
+        "uuid": "72049e44_45e2fab3",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-16T14:52:29Z",
+      "side": 1,
+      "message": "I was also thinking along the lines that thread-checkers give limited test coverage, in particular in Release mode, as you too mention.\n\n\nWhat I therefore would like to have testing that ensures that the API works with the current intended/possible thread scheme. \n\nIt does, however, definitely make sense to add that kind of test in the AudioChannel class (and any other classes that uses this class).",
+      "parentUuid": "7cb67a5e_ff021767",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 40
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e44d38fe_f5fe1bf7",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 1
@@ -728,6 +752,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4d20633_b71cb730",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-16T14:52:29Z",
+      "side": 1,
+      "message": "That is good.\nHowever, if the locking scope is not overlapping it should make sense to separate the locks more in the code.\n\nIt may work with the current implementation, but there will always be future code changes and at that point it would be even better to have a code that eliminates the risk for this.\n\nAlso, it would make sense to simplify the reading of the code to see that there is zero chance of deadlocks.\n\nIf separating the code for the locks is not possible, I definitely think that a test to ensure that there is no risk of deadlocks is needed.\nEven though the intention is to add it for the using class, I think it makes sense to as well add one more for this class in this CL.\nIt is often much easier to ensure proper test coverage when the testing is done closer to the code.\nFurthermore, for a reader of the code it is much easier to see that such a test ensures lock safety if the testing is directly done on the class, rather than if the testing is done on another class using this class.",
+      "parentUuid": "080c316a_c16e6029",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 42
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
