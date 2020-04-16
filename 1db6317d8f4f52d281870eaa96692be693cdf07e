@@ -708,6 +708,30 @@
     },
     {
       "key": {
+        "uuid": "03324eeb_434a7167",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-16T23:53:18Z",
+      "side": 1,
+      "message": "Agreed. Thanks for pointing it out again.  As you suggested, I think it makes more sense to have members to be thread safe.  I have considered unexpected thread race condition on each method here and concluded those are safe now.",
+      "parentUuid": "72049e44_45e2fab3",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 40
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e44d38fe_f5fe1bf7",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 1
@@ -776,6 +800,30 @@
       "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53089792_0c47c406",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-16T23:53:18Z",
+      "side": 1,
+      "message": "Agreed. Thanks for thoughtful comment. I separated those variable into internal class to avoid any future mistakes.",
+      "parentUuid": "e4d20633_b71cb730",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 42
+      },
+      "revId": "1db6317d8f4f52d281870eaa96692be693cdf07e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
