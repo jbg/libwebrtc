@@ -42,6 +42,47 @@
     },
     {
       "key": {
+        "uuid": "48cb784d_18aaa42a",
+        "filename": "call/adaptation/resource_adaptation_processor.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-04-16T09:17:14Z",
+      "side": 1,
+      "message": "Moving the tests should be done in a separate CL I think. Having these integration tests are fine for now.",
+      "parentUuid": "9a4ec29f_0f747009",
+      "revId": "d526aab730629459b4ce15289c666efd33e47b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f330ed45_58e2695f",
+        "filename": "call/adaptation/resource_adaptation_processor.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-04-16T09:17:14Z",
+      "side": 1,
+      "message": "Some video encoding features still in this class but I think that is okay for now. Long term when there are other features (decoding, audio pipeline, who knows what else) we can figure out how those fit in.",
+      "range": {
+        "startLine": 48,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 31
+      },
+      "revId": "d526aab730629459b4ce15289c666efd33e47b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b7f17be_ccce319b",
         "filename": "call/adaptation/resource_adaptation_processor.h",
         "patchSetId": 7
