@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1a35c9f1_6308901c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T14:00:03Z",
+      "side": 1,
+      "message": "Sure I\u0027m all for not introducing own parsing code.\n\nI\u0027m just surprised that you need to use wrapper class and pass list of trials even if you want to parse just one.\nboolean trials are much simpler.... \nbool result \u003d IsEnabled(field_trials, \"NameOfTheTrial\");\n\nI expected there is a simpler helper, something like\ndouble result \u003d ParseFieldTrial\u003cdouble\u003e(field_trials, \"NameOfTheTrial\", kDefaultValue);\nor\ndouble result \u003d ParseFieldTrial\u003cdouble\u003e(field_trials-\u003eLookup(\"NameOfTheTrial\"), kDefaultValue);\nor\nabsl::optional\u003cdouble\u003e result \u003d ParseFieldTrial\u003cdouble\u003e(field_trials-\u003eLookup(\"NameOfTheTrial\"));\nso that one can write\ndouble result \u003d ParseFieldTrial\u003cdouble\u003e(field_trials-\u003eLookup(\"NameOfTheTrial\")).value_or(kDefaultValue);\n\nanyway, that is not related to this CL.",
+      "parentUuid": "ac3b5527_4130de5a",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa2597_40781a27",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 2
@@ -272,6 +296,30 @@
       "side": 1,
       "message": "Yes, the reduced padding seems to have made a difference here but I thinks there\u0027s a large element of fluke involved too. The psnr here went from 17 to 27 or something like that.",
       "parentUuid": "4a4d19de_40d5ea83",
+      "range": {
+        "startLine": 86,
+        "startChar": 56,
+        "endLine": 86,
+        "endChar": 58
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08336cd6_7e9173a9",
+        "filename": "test/scenario/stats_collection_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T14:00:03Z",
+      "side": 1,
+      "message": "can be used as hint that infinite ratio by default is actually a good idea.",
+      "parentUuid": "a0059733_007d61b2",
       "range": {
         "startLine": 86,
         "startChar": 56,

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63e171c8_2f9540b2",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T14:00:03Z",
+      "side": 1,
+      "message": "why packet size in bytes should be related to the multiplier?\noh... it is so that 1 byte of overhead would still allow to create packet of size 1200...\nmay be explain that relation in the comment.",
+      "range": {
+        "startLine": 98,
+        "startChar": 36,
+        "endLine": 98,
+        "endChar": 50
+      },
+      "revId": "ce51f2bb78ebf1eedb13394d936701eee248936d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
