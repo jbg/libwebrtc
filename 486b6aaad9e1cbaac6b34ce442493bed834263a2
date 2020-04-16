@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ac3b5527_4130de5a",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-16T13:14:04Z",
+      "side": 1,
+      "message": "Well it actually has test coverage and I think it\u0027s more clear what code is intended to do.\nI avoid adding my own parsing code whenever possible :)",
+      "parentUuid": "5b9db1ca_cd4a7583",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa2597_40781a27",
         "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-04-16T10:08:30Z",
       "side": 1,
       "message": "if you care about half a byte of the rounding, may be also need to care about 2 extra bytes of an rtx packet\n(BuildRtxPacket(packet)-\u003epayload_size() \u003d\u003d packet.payload_size() + 2)",
+      "range": {
+        "startLine": 348,
+        "startChar": 20,
+        "endLine": 348,
+        "endChar": 23
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e20e1d4_8969bf78",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-16T13:14:04Z",
+      "side": 1,
+      "message": "Maybe not important, but nice to be correct. Added check for rtx head size.\nI think we should really consider not using payload size, but total size. At least if the overhead thingy is enabled. But not in this CL...",
+      "parentUuid": "6eaa2597_40781a27",
       "range": {
         "startLine": 348,
         "startChar": 20,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a0fa9b06_bf4ae37b",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2281,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-16T13:14:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cdd0f2a_b777e06b",
+      "range": {
+        "startLine": 2281,
+        "startChar": 2,
+        "endLine": 2281,
+        "endChar": 42
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5eebe43_99f9f515",
         "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2020-04-16T10:08:30Z",
       "side": 1,
       "message": "may be also update this code and check presence of the extensions same way it is checked above:\nauto\u0026 last_packet \u003d transport_.last_sent_packet();\nEXPECT_TRUE(last_packet.HasExtension\u003cAbsoluteSendTime\u003e());",
+      "range": {
+        "startLine": 2290,
+        "startChar": 0,
+        "endLine": 2291,
+        "endChar": 55
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8cc7673f_4b4a836b",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2291,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-16T13:14:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5eebe43_99f9f515",
       "range": {
         "startLine": 2290,
         "startChar": 0,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "13509c1f_5b64a926",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2400,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-16T13:14:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "874e32d6_7cc87d66",
+      "range": {
+        "startLine": 2396,
+        "startChar": 2,
+        "endLine": 2400,
+        "endChar": 79
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a4d19de_40d5ea83",
         "filename": "test/scenario/stats_collection_unittest.cc",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0059733_007d61b2",
+        "filename": "test/scenario/stats_collection_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-16T13:14:04Z",
+      "side": 1,
+      "message": "Yes, the reduced padding seems to have made a difference here but I thinks there\u0027s a large element of fluke involved too. The psnr here went from 17 to 27 or something like that.",
+      "parentUuid": "4a4d19de_40d5ea83",
+      "range": {
+        "startLine": 86,
+        "startChar": 56,
+        "endLine": 86,
+        "endChar": 58
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
