@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b9db1ca_cd4a7583",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T10:08:30Z",
+      "side": 1,
+      "message": "just curious.... is it simplest way to parse string into double?",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa2597_40781a27",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T10:08:30Z",
+      "side": 1,
+      "message": "if you care about half a byte of the rounding, may be also need to care about 2 extra bytes of an rtx packet\n(BuildRtxPacket(packet)-\u003epayload_size() \u003d\u003d packet.payload_size() + 2)",
+      "range": {
+        "startLine": 348,
+        "startChar": 20,
+        "endLine": 348,
+        "endChar": 23
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6cdd0f2a_b777e06b",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2281,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T10:08:30Z",
+      "side": 1,
+      "message": "ASSERT_THAT(generated_packets, SizeIs(1));\n\nhttp://go/c-readability-advice#expect-that-vs-other-expect-",
+      "range": {
+        "startLine": 2281,
+        "startChar": 2,
+        "endLine": 2281,
+        "endChar": 42
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5eebe43_99f9f515",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2291,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T10:08:30Z",
+      "side": 1,
+      "message": "may be also update this code and check presence of the extensions same way it is checked above:\nauto\u0026 last_packet \u003d transport_.last_sent_packet();\nEXPECT_TRUE(last_packet.HasExtension\u003cAbsoluteSendTime\u003e());",
+      "range": {
+        "startLine": 2290,
+        "startChar": 0,
+        "endLine": 2291,
+        "endChar": 55
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "874e32d6_7cc87d66",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2400,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T10:08:30Z",
+      "side": 1,
+      "message": "you might as well join these 3 statements into single expectation. (Though I\u0027m not sure it would be nicer):\nEXPECT_THAT(rtp_sender()-\u003eGeneratePadding((kPayloadPacketSize / 2) - 1, true),\n  AllOf(Not(IsEmpty()),\n        Each(Pointee(...))))))))));",
+      "range": {
+        "startLine": 2396,
+        "startChar": 2,
+        "endLine": 2400,
+        "endChar": 79
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a4d19de_40d5ea83",
+        "filename": "test/scenario/stats_collection_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-16T10:08:30Z",
+      "side": 1,
+      "message": "is it related?",
+      "range": {
+        "startLine": 86,
+        "startChar": 56,
+        "endLine": 86,
+        "endChar": 58
+      },
+      "revId": "486b6aaad9e1cbaac6b34ce442493bed834263a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
