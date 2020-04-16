@@ -193,7 +193,11 @@ void TaskQueuePacedSender::MaybeProcessPackets(
       (now >= next_process_time && (next_process_time_.IsInfinite() ||
                                     next_process_time < next_process_time_))) {
     pacing_controller_.ProcessPackets();
-    next_process_time_ = Timestamp::MinusInfinity();
+    if (scheduled_process_time == next_process_time_) {
+      // This was the (hopefully only) scheduled call, reset field
+      // inficating next expected scheduled call.
+      next_process_time_ = Timestamp::MinusInfinity();
+    }
     next_process_time = pacing_controller_.NextSendTime();
   }
 
