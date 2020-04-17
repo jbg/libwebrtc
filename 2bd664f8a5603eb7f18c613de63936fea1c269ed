@@ -22,6 +22,30 @@
       "revId": "2bd664f8a5603eb7f18c613de63936fea1c269ed",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c134d636_01359716",
+        "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-17T12:15:47Z",
+      "side": 1,
+      "message": "and to the RtpSenderVideo where it is also (mis)used.\ni.e. go back to patchset#1 ?\nok.",
+      "parentUuid": "585844cd_b489117f",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 73
+      },
+      "revId": "2bd664f8a5603eb7f18c613de63936fea1c269ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
