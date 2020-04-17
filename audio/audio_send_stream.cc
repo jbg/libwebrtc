@@ -119,7 +119,6 @@ AudioSendStream::AudioSendStream(
                       voe::CreateChannelSend(clock,
                                              task_queue_factory,
                                              module_process_thread,
-                                             /*overhead_observer=*/this,
                                              config.send_transport,
                                              rtcp_rtt_stats,
                                              event_log,
@@ -518,6 +517,10 @@ uint32_t AudioSendStream::OnBitrateUpdated(BitrateAllocationUpdate update) {
 
   channel_send_->OnBitrateAllocation(update);
 
+  rtc::CritScope cs(&overhead_per_packet_lock_);
+  audio_overhead_per_packet_bytes_ = rtp_rtcp_module_->GetPerPacketOverhead();
+  UpdateOverheadForEncoder();
+
   // The amount of audio protection is not exposed by the encoder, hence
   // always returning 0.
   return 0;
@@ -528,13 +531,7 @@ void AudioSendStream::SetTransportOverhead(
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   rtc::CritScope cs(&overhead_per_packet_lock_);
   transport_overhead_per_packet_bytes_ = transport_overhead_per_packet_bytes;
-  UpdateOverheadForEncoder();
-}
-
-void AudioSendStream::OnOverheadChanged(
-    size_t overhead_bytes_per_packet_bytes) {
-  rtc::CritScope cs(&overhead_per_packet_lock_);
-  audio_overhead_per_packet_bytes_ = overhead_bytes_per_packet_bytes;
+  audio_overhead_per_packet_bytes_ = rtp_rtcp_module_->GetPerPacketOverhead();
   UpdateOverheadForEncoder();
 }
 
