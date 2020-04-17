@@ -22,6 +22,30 @@
       "revId": "3ba79bf3f8fdd9d3541c9e5ad5acc1800bc16e3e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16b0569_50b0ccc2",
+        "filename": "video/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-17T13:27:34Z",
+      "side": 1,
+      "message": "These are the cases when restrictions are updated:\n\n1. We adapt due to a resource (a reason). When this happens one of the adaptation_counters will increase or decrease by one. UpdateAdaptationStats() handles this correctly.\n\nIn all other cases the |reason| is null. The \"reason\" is that an API caused the change:\n\n2. ResetVideoSourceRestrictions() clears the restrictions. The new Total() is 0 and we need to clear the active counts to reflect this.\n\n3. EffectiveDegradationPreference changes to or from \"balanced\": Restrictions are cleared and Total() \u003d\u003d 0. Active counts are cleared to reflect this.\n\n4. Degradation preference changes between other states, e.g. \"maintain-resolution\" to \"maintain-framerate\". While this may change the resulting restrictions (e.g. we exclude previously applied fps restrictions since we want to \"maintain-framerate\"), this does NOT modify |adaptation_counters|. The adaptation counters here are the total ones, not filtered by degradation preference. From UpdateAdaptationStats()\u0027s perspective, this is a NO-OP.\n\nUpdateStatsAdaptationSettings() performs its own filtering on the counters according to degradation preference, which is tangental to restrictions updating. Thus if this happens, Total() may not be 0, but there is nothing we need to do because these counters are the same as previously handled ones.\n\n---\n\nBased on the above, we know that there are three cases we need to be able to handle:\nA) adaptation_counters.Total() increasing or decreasing by one due to 1), causing UpdateAdaptationStats().\nB) adaptation_counters.Total() resetting to 0 due to 2) or 3), causing ResetActiveCounts().\nC) adaptation_counters.Total() staying the same as before, causing nothing to happen.\n\nI added some DCHECKs to ensure that these are the only things that can happen. We don\u0027t really care what triggered the change, we only care that Total() can only change by +/- 1 with a reason, reset to 0, or stay the same and do nothing.\n\nThe latest patch set introduces local variable \"int adaptation_counters_total_abs_diff\" used for DCHECKs.",
+      "parentUuid": "6926397f_56c60011",
+      "range": {
+        "startLine": 633,
+        "startChar": 9,
+        "endLine": 633,
+        "endChar": 48
+      },
+      "revId": "3ba79bf3f8fdd9d3541c9e5ad5acc1800bc16e3e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
