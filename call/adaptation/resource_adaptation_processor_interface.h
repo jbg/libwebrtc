@@ -13,6 +13,7 @@
 
 #include "absl/types/optional.h"
 #include "api/rtp_parameters.h"
+#include "api/video/video_adaptation_counters.h"
 #include "api/video/video_frame.h"
 #include "call/adaptation/encoder_settings.h"
 #include "call/adaptation/resource.h"
@@ -27,7 +28,9 @@ class ResourceAdaptationProcessorListener {
   virtual ~ResourceAdaptationProcessorListener();
 
   virtual void OnVideoSourceRestrictionsUpdated(
-      VideoSourceRestrictions restrictions) = 0;
+      VideoSourceRestrictions restrictions,
+      const VideoAdaptationCounters& adaptation_counters,
+      const Resource* reason) = 0;
 };
 
 // Responsible for reconfiguring encoded streams based on resource consumption,
