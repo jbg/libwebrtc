@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c8d362a_73e05787",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-04-17T11:16:08Z",
+      "side": 1,
+      "message": "Are there scnearios where both are the same infinity value and we still don\u0027t want to enter? Otherwise you could skip the isfinite check.",
+      "range": {
+        "startLine": 191,
+        "startChar": 7,
+        "endLine": 192,
+        "endChar": 51
+      },
+      "revId": "9eba0640612ed44623f4346d28a14977530aeed6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16567bf_c9e4bc69",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-04-17T11:16:08Z",
+      "side": 1,
+      "message": "This repeats a condition that is in one branch of the outer if, would it be possible to restructure the code so we avoid checking the same thing twice? For readability.",
+      "range": {
+        "startLine": 196,
+        "startChar": 4,
+        "endLine": 196,
+        "endChar": 55
+      },
+      "revId": "9eba0640612ed44623f4346d28a14977530aeed6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
