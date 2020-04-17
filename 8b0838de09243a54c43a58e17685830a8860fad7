@@ -22,6 +22,30 @@
       "revId": "8b0838de09243a54c43a58e17685830a8860fad7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b448434_d58ae6a6",
+        "filename": "modules/video_coding/rtp_frame_reference_finder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-04-17T13:08:58Z",
+      "side": 1,
+      "message": "Simplified the code according to your suggestion.",
+      "parentUuid": "03918a31_13fe0f31",
+      "range": {
+        "startLine": 178,
+        "startChar": 30,
+        "endLine": 178,
+        "endChar": 55
+      },
+      "revId": "8b0838de09243a54c43a58e17685830a8860fad7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
