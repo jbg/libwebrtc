@@ -12,6 +12,7 @@
 
 #include <cstdint>
 
+#include "absl/algorithm/container.h"
 #include "absl/container/inlined_vector.h"
 #include "absl/types/optional.h"
 #include "absl/types/variant.h"
@@ -48,12 +49,16 @@ struct RTPVideoHeader {
     GenericDescriptorInfo(const GenericDescriptorInfo& other);
     ~GenericDescriptorInfo();
 
+    bool Discardable() const {
+      return absl::c_linear_search(decode_target_indications,
+                                   DecodeTargetIndication::kDiscardable);
+    }
+
     int64_t frame_id = 0;
     int spatial_index = 0;
     int temporal_index = 0;
     absl::InlinedVector<DecodeTargetIndication, 10> decode_target_indications;
     absl::InlinedVector<int64_t, 5> dependencies;
-    bool discardable = false;
   };
 
   RTPVideoHeader();
