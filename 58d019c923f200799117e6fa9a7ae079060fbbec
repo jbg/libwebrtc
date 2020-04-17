@@ -46,6 +46,30 @@
       "revId": "58d019c923f200799117e6fa9a7ae079060fbbec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "902be944_34ef7205",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-17T13:45:51Z",
+      "side": 1,
+      "message": "Removed the comment. Removing unique_ptr is done in a separate CL.",
+      "parentUuid": "1e499bad_d68492e3",
+      "range": {
+        "startLine": 416,
+        "startChar": 43,
+        "endLine": 416,
+        "endChar": 49
+      },
+      "revId": "58d019c923f200799117e6fa9a7ae079060fbbec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
