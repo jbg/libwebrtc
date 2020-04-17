@@ -1,0 +1,418 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "081f5091_41c7139f",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Please end comment with a period",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af5cc4a9_eda2b7ad",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Nit: \nNot sure it matters but since this is integer division, the result would be more accurate if computed as\n(1000* (unwrap_timestamp - first_rtp_timestamp_)) / clock_rate;",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 72
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01b35460_a8f5c532",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Nit \nI think the naming of this method in the AudioMixer is a bit less explicit than is needed.\nSince the returned rate actually states that any sample rate above the returned rate is acceptable without quality loss (which is not really at all indicated by the method name, I think it would be good with a comment explaining why returning a preffered sample rate of 0 Hz in the absence of a sample rate achieves is the right choice (which indeed it is).",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 1
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49230c15_d60e1893",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "I\u0027m slightly concerned with this return. Is a sampling_rate if -1 and expected or normal case?\nIf it is not expected, what are the consequences of doing an early return? Could we end up in a situation with silent audio?\n\nIf this is not a normal/expected case I think it would make sense to somehow surface this to the user. Either via a DCHECK or via a log-line.\n\nAt the least, I definitely think a comment is needed here to explain why this return is ok.",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 143,
+        "endChar": 3
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb215c19_b87c7292",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Nit\nI\u0027m not sure there is a good way around this but this is doing local heap allocations in a real-time thread (which is something to avoid if possible).\n\nIf you want, a way to reduce these is to put report_blocks as a member of AudioIngress. That would re-use the vector and only reallocate the vector data content when more space is needed.\n\n(this is a just a suggestion, but that is what I would have done).",
+      "range": {
+        "startLine": 194,
+        "startChar": 2,
+        "endLine": 194,
+        "endChar": 45
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aadb2704_0762b850",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "As commented elsewhere, would it be possible to return -1 instead?",
+      "range": {
+        "startLine": 200,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 13
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52db18bb_af505801",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "ssrc -\u003e SSRC",
+      "range": {
+        "startLine": 203,
+        "startChar": 41,
+        "endLine": 203,
+        "endChar": 45
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47053fd5_3b3f00d9",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "ssrc -\u003e SSRC",
+      "range": {
+        "startLine": 204,
+        "startChar": 66,
+        "endLine": 204,
+        "endChar": 70
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bc509cd_3c5977be",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Please make this\nconst uint32_t sender_ssrc \u003d report_blocks[0].sender_ssrc;",
+      "range": {
+        "startLine": 207,
+        "startChar": 2,
+        "endLine": 207,
+        "endChar": 10
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b7f57d4_9c15f232",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Please put these implementations in the class declaration instead. That will allow inlining and in turn speed up the code.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 1
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cf6bb33_5f32ec53",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Here as well, since these are close to pure getters, please consider putting the implementations in the class declaration.",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 1
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03651ad6_ef06d5f1",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "-\u003e Retrieve",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 14
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dbe93c8_99df4ade",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Return -\u003e Returns",
+      "range": {
+        "startLine": 73,
+        "startChar": 5,
+        "endLine": 73,
+        "endChar": 11
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9ac2faa_99378d2a",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Is it possible to change this or is it enforced by the other code?\n\n0 seems like a valid (but for sure unrealistic) RTT delay and I\u0027m a bit hesitant about having valid return values indication things like this (I have seen it go very wrong in other places).\n\nI would therefore suggest either returning -1 instead for this case, or alternatively returning an optional.",
+      "range": {
+        "startLine": 74,
+        "startChar": 28,
+        "endLine": 74,
+        "endChar": 76
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "612daac7_31318a15",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Nit:\nReturn -\u003e Returns",
+      "range": {
+        "startLine": 112,
+        "startChar": 7,
+        "endLine": 112,
+        "endChar": 13
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8480f0d1_07819b1b",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Nit \nit doesn\u0027t exist. -\u003e the codec has not yet been assigned.",
+      "range": {
+        "startLine": 112,
+        "startChar": 20,
+        "endLine": 112,
+        "endChar": 22
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dd11958_cfd852bb",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Hmm, even though it is typically accessed by a single thread, that still means that protection of the variable is needed.\n\nIf this is accessed by multiple threads it needs to be properly protected. I don\u0027t think we can assume atomic assignments and reads on all platforms and without that there could be unforeseen side-effects.\n\nFor instance, looking at the .cc file it seems that the elapsed_time_ms_ in AudioFrame maybe could become negative, and for that I have no idea what the side effects could be.\n\nApart from that though, any concurrent access would be caught by the sanitizer bots and could cause flaky test behaviors (it is probably possible to flag this as something not to look at, but I don\u0027t think that is something to do here).\n\nMy suggestion is to make this atomic.",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 135,
+        "endChar": 27
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "709d5ffc_e098cd16",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-17T09:44:54Z",
+      "side": 1,
+      "message": "Same comment as above. Even if this is very rarely accessed by multiple threads, that still counts.\n\nLooking at the TimestampWrapAroundHandler I\u0027m not all convinced that that is thread-safe.\n\nMy guess is that a locking functionality is needed to protect this. WDYT?",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 142,
+        "endChar": 61
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
