@@ -652,7 +652,7 @@ bool RTPSenderVideo::SendVideo(
 
   if (video_header.frame_type == VideoFrameType::kVideoFrameKey ||
       (IsBaseLayer(video_header) &&
-       !(video_header.generic.has_value() ? video_header.generic->discardable
+       !(video_header.generic.has_value() ? video_header.generic->Discardable()
                                           : false))) {
     // This frame has guaranteed delivery, no need to populate playout
     // delay extensions until it changes again.

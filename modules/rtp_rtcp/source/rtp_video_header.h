@@ -48,12 +48,13 @@ struct RTPVideoHeader {
     GenericDescriptorInfo(const GenericDescriptorInfo& other);
     ~GenericDescriptorInfo();
 
+    bool Discardable() const;
+
     int64_t frame_id = 0;
     int spatial_index = 0;
     int temporal_index = 0;
     absl::InlinedVector<DecodeTargetIndication, 10> decode_target_indications;
     absl::InlinedVector<int64_t, 5> dependencies;
-    bool discardable = false;
   };
 
   RTPVideoHeader();

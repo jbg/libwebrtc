@@ -10,6 +10,8 @@
 
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
 
+#include "absl/algorithm/container.h"
+
 namespace webrtc {
 
 RTPVideoHeader::RTPVideoHeader() : video_timing() {}
@@ -20,5 +22,10 @@ RTPVideoHeader::GenericDescriptorInfo::GenericDescriptorInfo() = default;
 RTPVideoHeader::GenericDescriptorInfo::GenericDescriptorInfo(
     const GenericDescriptorInfo& other) = default;
 RTPVideoHeader::GenericDescriptorInfo::~GenericDescriptorInfo() = default;
+
+bool RTPVideoHeader::GenericDescriptorInfo::Discardable() const {
+  return absl::c_linear_search(decode_target_indications,
+                               DecodeTargetIndication::kDiscardable);
+}
 
 }  // namespace webrtc
