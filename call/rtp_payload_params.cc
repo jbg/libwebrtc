@@ -262,9 +262,6 @@ RtpPayloadParams::GenericDescriptorFromFrameInfo(
   generic.spatial_index = frame_info.spatial_id;
   generic.temporal_index = frame_info.temporal_id;
   generic.decode_target_indications = frame_info.decode_target_indications;
-  generic.discardable =
-      absl::c_linear_search(frame_info.decode_target_indications,
-                            DecodeTargetIndication::kDiscardable);
   return generic;
 }
 
