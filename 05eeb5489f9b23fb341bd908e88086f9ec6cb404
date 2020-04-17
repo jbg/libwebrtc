@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "412c82b7_b7b4725e",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "081f5091_41c7139f",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af5cc4a9_eda2b7ad",
         "filename": "audio/voip/audio_ingress.cc",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c23f0c71_65507df1",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "I think for me it\u0027s more clear to understand (clock_rate / 1000).  Also since clock rate is one of 8000, 16000, 32000, 48000, it shouldn\u0027t matter on accuracy.",
+      "parentUuid": "af5cc4a9_eda2b7ad",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 72
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "60a5c94c_c01092ca",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01b35460_a8f5c532",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 1
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49230c15_d60e1893",
         "filename": "audio/voip/audio_ingress.cc",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "773e9633_1feea869",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "It would mean that we have received un-negotiated RTP payload type id from remote.  I think it would be safe to ignore such packets as remote endpoint is expected to use correct payload type id to map with correct decoder type.  If not dropped here, then I would expect it be dropped elsewhere down the pipe especially when dynamic range is used for payload type id.  I will add comment on this to clarify.",
+      "parentUuid": "49230c15_d60e1893",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 143,
+        "endChar": 3
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "26b375b6_662a122f",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "I just realized that this is deprecating API. I will use the new API.",
+      "parentUuid": "bb215c19_b87c7292",
+      "range": {
+        "startLine": 194,
+        "startChar": 2,
+        "endLine": 194,
+        "endChar": 45
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aadb2704_0762b850",
         "filename": "audio/voip/audio_ingress.cc",
         "patchSetId": 4
@@ -137,6 +257,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cce72c64_1ebe31f1",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aadb2704_0762b850",
+      "range": {
+        "startLine": 200,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 13
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "11c55764_a97717e8",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52db18bb_af505801",
+      "range": {
+        "startLine": 203,
+        "startChar": 41,
+        "endLine": 203,
+        "endChar": 45
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47053fd5_3b3f00d9",
         "filename": "audio/voip/audio_ingress.cc",
         "patchSetId": 4
@@ -183,6 +351,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e1a3b59_e003288f",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47053fd5_3b3f00d9",
+      "range": {
+        "startLine": 204,
+        "startChar": 66,
+        "endLine": 204,
+        "endChar": 70
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "dd17e0b5_8288823a",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bc509cd_3c5977be",
+      "range": {
+        "startLine": 207,
+        "startChar": 2,
+        "endLine": 207,
+        "endChar": 10
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b7f57d4_9c15f232",
         "filename": "audio/voip/audio_ingress.cc",
         "patchSetId": 4
@@ -229,6 +445,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0017e939_06a930bd",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b7f57d4_9c15f232",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 1
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "edb63854_3208f532",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cf6bb33_5f32ec53",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 1
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03651ad6_ef06d5f1",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 4
@@ -275,6 +539,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "469a31c2_54913561",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03651ad6_ef06d5f1",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 14
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -301,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "3369aaf1_5324ba70",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dbe93c8_99df4ade",
+      "range": {
+        "startLine": 73,
+        "startChar": 5,
+        "endLine": 73,
+        "endChar": 11
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9ac2faa_99378d2a",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 4
@@ -321,6 +633,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ede059cd_0a651469",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "I initially attempted to use -1 before but currently 0 is used for uninitialized value in rtp stack and I can\u0027t seem to know if 0 would be real value there.\n\nhttps://chromium.googlesource.com/external/webrtc/+/HEAD/modules/rtp_rtcp/include/report_block_data.cc#18\n\nEDIT:\nI found a new method that has API to query the valid value.  It still uses 0 as uninitialized value but I think it\u0027s still good indicator to use -1 from audio ingress layer then on.",
+      "parentUuid": "e9ac2faa_99378d2a",
+      "range": {
+        "startLine": 74,
+        "startChar": 28,
+        "endLine": 74,
+        "endChar": 76
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -370,6 +706,54 @@
     },
     {
       "key": {
+        "uuid": "faae5ee6_a26ae1fc",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "612daac7_31318a15",
+      "range": {
+        "startLine": 112,
+        "startChar": 7,
+        "endLine": 112,
+        "endChar": 13
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae7e8437_d9b2c171",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8480f0d1_07819b1b",
+      "range": {
+        "startLine": 112,
+        "startChar": 20,
+        "endLine": 112,
+        "endChar": 22
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6dd11958_cfd852bb",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 4
@@ -393,6 +777,30 @@
     },
     {
       "key": {
+        "uuid": "e0d43e73_a89be067",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Done.  However, what do you mean by single threaded code still needing protection of variable?  Would you elaborate?",
+      "parentUuid": "6dd11958_cfd852bb",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 135,
+        "endChar": 27
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "709d5ffc_e098cd16",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 4
@@ -413,6 +821,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8435f428_896fc5bb",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-17T21:20:35Z",
+      "side": 1,
+      "message": "Agreed. However, I wonder if there is a way to force thread model here that we don\u0027t have to add lock to cover the erroneous use case. SequenceChecker is good but it won\u0027t protect in release and also we don\u0027t need to insist on same thread being used here as long as at most one  thread entrance rule is obeyed.\n\nSince the cost of lock shouldn\u0027t be causing thread context switch, the cpu load will be minimum that I think it\u0027s fine to add lock in case here.",
+      "parentUuid": "709d5ffc_e098cd16",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 142,
+        "endChar": 61
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
