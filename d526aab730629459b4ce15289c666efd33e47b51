@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c8fa6f2d_4f0eb656",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-17T14:49:58Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "39412870_c78966b5",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 70
+      },
+      "revId": "d526aab730629459b4ce15289c666efd33e47b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a4ec29f_0f747009",
         "filename": "call/adaptation/resource_adaptation_processor.h",
         "patchSetId": 7
@@ -57,6 +81,24 @@
       "revId": "d526aab730629459b4ce15289c666efd33e47b51",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d39d14c2_63c951c9",
+        "filename": "call/adaptation/resource_adaptation_processor.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-17T14:49:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "48cb784d_18aaa42a",
+      "revId": "d526aab730629459b4ce15289c666efd33e47b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +148,30 @@
     },
     {
       "key": {
+        "uuid": "38549a01_c875dc49",
+        "filename": "call/adaptation/resource_adaptation_processor.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-17T14:49:58Z",
+      "side": 1,
+      "message": "I would love that :) there are several minor changes I would like to do to address random things I see that I don\u0027t think makes sense, or all-out code removals like here, but where I am worried that removing some old hack may yield some unintentional regression but it seems not cost-effective to run an experiment for all of them. If we can land some changes like simply deleting this and just monitor perf-bots that would be great. I\u0027ll follow up with you on this later to find out more about perf-bots.",
+      "parentUuid": "9b7f17be_ccce319b",
+      "range": {
+        "startLine": 62,
+        "startChar": 17,
+        "endLine": 63,
+        "endChar": 56
+      },
+      "revId": "d526aab730629459b4ce15289c666efd33e47b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c22a73a_f751981c",
         "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
         "patchSetId": 7
@@ -117,6 +183,30 @@
       "writtenOn": "2020-04-15T09:38:22Z",
       "side": 1,
       "message": "nit: this is a fake resource which doesn\u0027t really triggers any adaptations at all. is it a good idea to add some kFake reason or kNone?",
+      "range": {
+        "startLine": 261,
+        "startChar": 51,
+        "endLine": 261,
+        "endChar": 72
+      },
+      "revId": "d526aab730629459b4ce15289c666efd33e47b51",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26ded3f0_37aa7e6f",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-17T14:49:58Z",
+      "side": 1,
+      "message": "Now that we have a unified VideoAdaptationReason I don\u0027t want to touch the enum if it\u0027s just for this special-case, but covering \"none\" by using an absl::optional\u003cVideoAdaptationReason\u003e in the map makes perfect sense, that would allow mapping to absl::nullopt.\n\nHowever, while it makes sense, it also adds a tiny amount of complexity and it doesn\u0027t really hurt to say that all of these are \"quality\". So for the sake of CL-landing-velocity, I\u0027d like to keep this as-is for now if that\u0027s OK with you, even though I think it\u0027s a perfectly valid suggestion.",
+      "parentUuid": "6c22a73a_f751981c",
       "range": {
         "startLine": 261,
         "startChar": 51,
