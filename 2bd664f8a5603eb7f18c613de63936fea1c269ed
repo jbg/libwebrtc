@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "585844cd_b489117f",
+        "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-04-17T11:31:26Z",
+      "side": 1,
+      "message": "The idea of a frame being \"generally discardable\" does not really match the concept of the DD, I suggest that you move this check to the RtpVideoStreamReceiver.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 73
+      },
+      "revId": "2bd664f8a5603eb7f18c613de63936fea1c269ed",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
