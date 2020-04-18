@@ -119,7 +119,6 @@ AudioSendStream::AudioSendStream(
                       voe::CreateChannelSend(clock,
                                              task_queue_factory,
                                              module_process_thread,
-                                             /*overhead_observer=*/this,
                                              config.send_transport,
                                              rtcp_rtt_stats,
                                              event_log,
@@ -509,6 +508,12 @@ void AudioSendStream::DeliverRtcp(const uint8_t* packet, size_t length) {
 
 uint32_t AudioSendStream::OnBitrateUpdated(BitrateAllocationUpdate update) {
   RTC_DCHECK_RUN_ON(worker_queue_);
+  {
+    rtc::CritScope cs(&overhead_per_packet_lock_);
+    audio_overhead_per_packet_bytes_ = rtp_rtcp_module_->GetPerPacketOverhead();
+    UpdateOverheadForEncoder();
+  }
+
   // Pick a target bitrate between the constraints. Overrules the allocator if
   // it 1) allocated a bitrate of zero to disable the stream or 2) allocated a
   // higher than max to allow for e.g. extra FEC.
@@ -528,13 +533,7 @@ void AudioSendStream::SetTransportOverhead(
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   rtc::CritScope cs(&overhead_per_packet_lock_);
   transport_overhead_per_packet_bytes_ = transport_overhead_per_packet_bytes;
-  UpdateOverheadForEncoder();
-}
-
-void AudioSendStream::OnOverheadChanged(
-    size_t overhead_bytes_per_packet_bytes) {
-  rtc::CritScope cs(&overhead_per_packet_lock_);
-  audio_overhead_per_packet_bytes_ = overhead_bytes_per_packet_bytes;
+  audio_overhead_per_packet_bytes_ = rtp_rtcp_module_->GetPerPacketOverhead();
   UpdateOverheadForEncoder();
 }
 
@@ -546,7 +545,7 @@ void AudioSendStream::UpdateOverheadForEncoder() {
   channel_send_->CallEncoder([&](AudioEncoder* encoder) {
     encoder->OnReceivedOverhead(overhead_per_packet_bytes);
   });
-  worker_queue_->PostTask([this, overhead_per_packet_bytes] {
+  auto update_task = [this, overhead_per_packet_bytes] {
     RTC_DCHECK_RUN_ON(worker_queue_);
     if (total_packet_overhead_bytes_ != overhead_per_packet_bytes) {
       total_packet_overhead_bytes_ = overhead_per_packet_bytes;
@@ -554,7 +553,12 @@ void AudioSendStream::UpdateOverheadForEncoder() {
         ConfigureBitrateObserver();
       }
     }
-  });
+  };
+  if (worker_queue_->IsCurrent()) {
+    update_task();
+  } else {
+    worker_queue_->PostTask(update_task);
+  }
 }
 
 size_t AudioSendStream::TestOnlyGetPerPacketOverheadBytes() const {
@@ -836,9 +840,9 @@ void AudioSendStream::ConfigureBitrateObserver() {
       priority_bitrate += max_overhead;
     } else {
       RTC_DCHECK(frame_length_range_);
-      const DataSize kOverheadPerPacket =
+      const DataSize overhead_per_packet =
           DataSize::Bytes(total_packet_overhead_bytes_);
-      DataRate min_overhead = kOverheadPerPacket / frame_length_range_->second;
+      DataRate min_overhead = overhead_per_packet / frame_length_range_->second;
       priority_bitrate += min_overhead;
     }
   }
