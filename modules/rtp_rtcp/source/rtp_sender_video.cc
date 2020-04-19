@@ -128,6 +128,8 @@ RTPSenderVideo::RTPSenderVideo(const Config& config)
       playout_delay_pending_(false),
       red_payload_type_(config.red_payload_type),
       fec_generator_(config.fec_generator),
+      fec_type_(config.fec_type),
+      fec_overhead_bytes_(config.fec_overhead_bytes),
       video_bitrate_(1000, RateStatistics::kBpsScale),
       packetization_overhead_bitrate_(1000, RateStatistics::kBpsScale),
       frame_encryptor_(config.frame_encryptor),
@@ -188,14 +190,12 @@ void RTPSenderVideo::LogAndSendToNetwork(
 }
 
 size_t RTPSenderVideo::FecPacketOverhead() const {
-  size_t overhead = fec_generator_ ? fec_generator_->MaxPacketOverhead() : 0u;
+  size_t overhead = fec_overhead_bytes_;
   if (red_enabled()) {
     // The RED overhead is due to a small header.
     overhead += kRedForFecHeaderLength;
 
-    // TODO(bugs.webrtc.org/11340): Move this into UlpfecGenerator.
-    if (fec_generator_ &&
-        fec_generator_->GetFecType() == VideoFecGenerator::FecType::kUlpFec) {
+    if (fec_type_ == VideoFecGenerator::FecType::kUlpFec) {
       // For ULPFEC, the overhead is the FEC headers plus RED for FEC header
       // (see above) plus anything in RTP header beyond the 12 bytes base header
       // (CSRC list, extensions...)
@@ -206,13 +206,6 @@ size_t RTPSenderVideo::FecPacketOverhead() const {
     }
   }
   return overhead;
-}
-
-void RTPSenderVideo::SetFecParameters(const FecProtectionParams& delta_params,
-                                      const FecProtectionParams& key_params) {
-  if (fec_generator_) {
-    fec_generator_->SetProtectionParameters(delta_params, key_params);
-  }
 }
 
 void RTPSenderVideo::SetVideoStructure(
@@ -686,10 +679,6 @@ bool RTPSenderVideo::SendEncodedImage(
 uint32_t RTPSenderVideo::VideoBitrateSent() const {
   rtc::CritScope cs(&stats_crit_);
   return video_bitrate_.Rate(clock_->TimeInMilliseconds()).value_or(0);
-}
-
-uint32_t RTPSenderVideo::FecOverheadRate() const {
-  return fec_generator_ ? fec_generator_->CurrentFecRate().bps<uint32_t>() : 0u;
 }
 
 uint32_t RTPSenderVideo::PacketizationOverheadBps() const {

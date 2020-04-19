@@ -11,6 +11,7 @@
 #ifndef MODULES_RTP_RTCP_MOCKS_MOCK_RTP_RTCP_H_
 #define MODULES_RTP_RTCP_MOCKS_MOCK_RTP_RTCP_H_
 
+#include <map>
 #include <memory>
 #include <set>
 #include <string>
@@ -84,6 +85,7 @@ class MockRtpRtcp : public RtpRtcp {
                           uint32_t* video_rate,
                           uint32_t* fec_rate,
                           uint32_t* nack_rate));
+  MOCK_CONST_METHOD0(GetBitrateSent, std::map<RtpPacketMediaType, DataRate>());
   MOCK_CONST_METHOD1(EstimatedReceiveBandwidth,
                      int(uint32_t* available_bandwidth));
   MOCK_METHOD4(OnSendingRtpFrame, bool(uint32_t, int64_t, int, bool));
