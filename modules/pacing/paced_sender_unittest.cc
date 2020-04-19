@@ -39,9 +39,10 @@ constexpr size_t kDefaultPacketSize = 234;
 // Mock callback implementing the raw api.
 class MockCallback : public PacketRouter {
  public:
-  MOCK_METHOD2(SendPacket,
-               void(std::unique_ptr<RtpPacketToSend> packet,
-                    const PacedPacketInfo& cluster_info));
+  MOCK_METHOD2(SendPacketAndFetchFec,
+               std::vector<std::unique_ptr<RtpPacketToSend>>(
+                   std::unique_ptr<RtpPacketToSend> packet,
+                   const PacedPacketInfo& cluster_info));
   MOCK_METHOD1(
       GeneratePadding,
       std::vector<std::unique_ptr<RtpPacketToSend>>(size_t target_size_bytes));
@@ -131,10 +132,12 @@ TEST_P(PacedSenderTest, PacesPackets) {
 
   // Expect all of them to be sent.
   size_t packets_sent = 0;
-  EXPECT_CALL(callback_, SendPacket)
-      .WillRepeatedly(
-          [&](std::unique_ptr<RtpPacketToSend> packet,
-              const PacedPacketInfo& cluster_info) { ++packets_sent; });
+  EXPECT_CALL(callback_, SendPacketAndFetchFec)
+      .WillRepeatedly([&](std::unique_ptr<RtpPacketToSend> packet,
+                          const PacedPacketInfo& cluster_info) {
+        ++packets_sent;
+        return std::vector<std::unique_ptr<RtpPacketToSend>>();
+      });
 
   const Timestamp start_time = clock_.CurrentTime();
 

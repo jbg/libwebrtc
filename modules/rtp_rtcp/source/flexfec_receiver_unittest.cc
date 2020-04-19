@@ -52,6 +52,7 @@ class FlexfecReceiverForTest : public FlexfecReceiver {
       : FlexfecReceiver(Clock::GetRealTimeClock(),
                         ssrc,
                         protected_media_ssrc,
+                        false,
                         recovered_packet_receiver) {}
   // Expose methods for tests.
   using FlexfecReceiver::AddReceivedPacket;
@@ -469,7 +470,7 @@ TEST_F(FlexfecReceiverTest, SurvivesOldRecoveredPacketBeingReinserted) {
 
   // Feed recovered packets back into |receiver|.
   FlexfecReceiver receiver(Clock::GetRealTimeClock(), kFlexfecSsrc, kMediaSsrc,
-                           &loopback_recovered_packet_receiver);
+                           false, &loopback_recovered_packet_receiver);
   loopback_recovered_packet_receiver.SetReceiver(&receiver);
 
   // Receive first set of packets.
@@ -593,7 +594,7 @@ TEST_F(FlexfecReceiverTest, RecoveryCallbackDoesNotLoopInfinitely) {
 
   // Feed recovered packets back into |receiver|.
   FlexfecReceiver receiver(Clock::GetRealTimeClock(), kFlexfecSsrc, kMediaSsrc,
-                           &loopback_recovered_packet_receiver);
+                           false, &loopback_recovered_packet_receiver);
   loopback_recovered_packet_receiver.SetReceiver(&receiver);
 
   const size_t kNumMediaPackets = 2;
