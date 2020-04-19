@@ -222,7 +222,11 @@ TaskQueuePacedSender::GeneratePadding(DataSize size) {
 void TaskQueuePacedSender::SendRtpPacket(
     std::unique_ptr<RtpPacketToSend> packet,
     const PacedPacketInfo& cluster_info) {
-  packet_router_->SendPacket(std::move(packet), cluster_info);
+  auto fec_packets =
+      packet_router_->SendPacketAndFetchFec(std::move(packet), cluster_info);
+  if (!fec_packets.empty()) {
+    EnqueuePackets(std::move(fec_packets));
+  }
 }
 
 void TaskQueuePacedSender::MaybeUpdateStats(bool is_scheduled_call) {
