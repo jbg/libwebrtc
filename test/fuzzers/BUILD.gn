@@ -437,6 +437,7 @@ rtc_library("audio_processing_fuzzer_helper") {
     "../../modules/audio_processing",
     "../../modules/audio_processing:api",
     "../../modules/audio_processing:audio_frame_proxies",
+    "../../modules/audio_processing:audioproc_test_utils",
     "../../rtc_base:checks",
     "../../rtc_base:rtc_base_approved",
     "//third_party/abseil-cpp/absl/types:optional",
@@ -453,6 +454,7 @@ webrtc_fuzzer_test("audio_processing_fuzzer") {
     "../../modules/audio_processing",
     "../../modules/audio_processing:api",
     "../../modules/audio_processing:audio_buffer",
+    "../../modules/audio_processing:audioproc_test_utils",
     "../../modules/audio_processing/aec3",
     "../../modules/audio_processing/aec_dump",
     "../../modules/audio_processing/aec_dump:aec_dump_impl",
@@ -472,6 +474,7 @@ webrtc_fuzzer_test("agc_fuzzer") {
     "../../modules/audio_processing",
     "../../modules/audio_processing:api",
     "../../modules/audio_processing:audio_buffer",
+    "../../modules/audio_processing:audioproc_test_utils",
     "../../rtc_base:rtc_base_approved",
     "../../rtc_base:safe_minmax",
   ]
