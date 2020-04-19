@@ -128,6 +128,7 @@ RTPSenderVideo::RTPSenderVideo(const Config& config)
       playout_delay_pending_(false),
       red_payload_type_(config.red_payload_type),
       fec_generator_(config.fec_generator),
+      fec_overhead_bytes_(FecPacketOverhead()),
       video_bitrate_(1000, RateStatistics::kBpsScale),
       packetization_overhead_bitrate_(1000, RateStatistics::kBpsScale),
       frame_encryptor_(config.frame_encryptor),
@@ -206,13 +207,6 @@ size_t RTPSenderVideo::FecPacketOverhead() const {
     }
   }
   return overhead;
-}
-
-void RTPSenderVideo::SetFecParameters(const FecProtectionParams& delta_params,
-                                      const FecProtectionParams& key_params) {
-  if (fec_generator_) {
-    fec_generator_->SetProtectionParameters(delta_params, key_params);
-  }
 }
 
 void RTPSenderVideo::SetVideoStructure(
@@ -426,7 +420,7 @@ bool RTPSenderVideo::SendVideo(
 
   // Maximum size of packet including rtp headers.
   // Extra space left in case packet will be resent using fec or rtx.
-  int packet_capacity = rtp_sender_->MaxRtpPacketSize() - FecPacketOverhead() -
+  int packet_capacity = rtp_sender_->MaxRtpPacketSize() - fec_overhead_bytes_ -
                         (rtp_sender_->RtxStatus() ? kRtxHeaderSize : 0);
 
   std::unique_ptr<RtpPacketToSend> single_packet =
@@ -686,10 +680,6 @@ bool RTPSenderVideo::SendEncodedImage(
 uint32_t RTPSenderVideo::VideoBitrateSent() const {
   rtc::CritScope cs(&stats_crit_);
   return video_bitrate_.Rate(clock_->TimeInMilliseconds()).value_or(0);
-}
-
-uint32_t RTPSenderVideo::FecOverheadRate() const {
-  return fec_generator_ ? fec_generator_->CurrentFecRate().bps<uint32_t>() : 0u;
 }
 
 uint32_t RTPSenderVideo::PacketizationOverheadBps() const {

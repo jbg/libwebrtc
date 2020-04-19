@@ -1276,7 +1276,7 @@ TEST_P(RtpSenderTest, SendFlexfecPackets) {
   params.fec_rate = 15;
   params.max_fec_frames = 1;
   params.fec_mask_type = kFecMaskRandom;
-  rtp_sender_video.SetFecParameters(params, params);
+  flexfec_sender.SetProtectionParameters(params, params);
 
   uint16_t flexfec_seq_num;
   RTPVideoHeader video_header;
@@ -1360,7 +1360,7 @@ TEST_P(RtpSenderTestWithoutPacer, SendFlexfecPackets) {
   params.fec_rate = 15;
   params.max_fec_frames = 1;
   params.fec_mask_type = kFecMaskRandom;
-  rtp_sender_video.SetFecParameters(params, params);
+  flexfec_sender.SetProtectionParameters(params, params);
 
   EXPECT_CALL(mock_rtc_event_log_,
               LogProxy(SameRtcEventTypeAs(RtcEvent::Type::RtpPacketOutgoing)))
@@ -1691,7 +1691,7 @@ TEST_P(RtpSenderTest, FecOverheadRate) {
   params.fec_rate = 15;
   params.max_fec_frames = 1;
   params.fec_mask_type = kFecMaskRandom;
-  rtp_sender_video.SetFecParameters(params, params);
+  flexfec_sender.SetProtectionParameters(params, params);
 
   constexpr size_t kNumMediaPackets = 10;
   constexpr size_t kNumFecPackets = kNumMediaPackets;
@@ -1716,7 +1716,7 @@ TEST_P(RtpSenderTest, FecOverheadRate) {
                                    kGenericCodecHeaderLength + kPayloadLength;
   EXPECT_NEAR(kNumFecPackets * kPacketLength * 8 /
                   (kNumFecPackets * kTimeBetweenPacketsMs / 1000.0f),
-              rtp_sender_video.FecOverheadRate(), 500);
+              flexfec_sender.CurrentFecRate().bps<double>(), 500);
 }
 
 TEST_P(RtpSenderTest, BitrateCallbacks) {
@@ -1887,7 +1887,7 @@ TEST_P(RtpSenderTestWithoutPacer, StreamDataCountersCallbacksUlpfec) {
   fec_params.fec_mask_type = kFecMaskRandom;
   fec_params.fec_rate = 1;
   fec_params.max_fec_frames = 1;
-  rtp_sender_video.SetFecParameters(fec_params, fec_params);
+  ulpfec_generator.SetProtectionParameters(fec_params, fec_params);
   video_header.frame_type = VideoFrameType::kVideoFrameDelta;
   ASSERT_TRUE(rtp_sender_video.SendVideo(kPayloadType, kCodecType, 1234, 4321,
                                          payload, nullptr, video_header,
