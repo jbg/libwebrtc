@@ -68,6 +68,7 @@ RtpSenderEgress::RtpSenderEgress(const RtpRtcp::Configuration& config,
       event_log_(config.event_log),
       is_audio_(config.audio),
       need_rtp_packet_infos_(config.need_rtp_packet_infos),
+      fec_generator_(config.use_deferred_fec ? config.fec_generator : nullptr),
       transport_feedback_observer_(config.transport_feedback_callback),
       send_side_delay_observer_(config.send_side_delay_observer),
       send_packet_observer_(config.send_packet_observer),
@@ -81,9 +82,16 @@ RtpSenderEgress::RtpSenderEgress(const RtpRtcp::Configuration& config,
       sum_delays_ms_(0),
       total_packet_send_delay_ms_(0),
       rtp_overhead_bytes_per_packet_(0),
-      total_bitrate_sent_(kBitrateStatisticsWindowMs,
-                          RateStatistics::kBpsScale),
-      nack_bitrate_sent_(kBitrateStatisticsWindowMs, RateStatistics::kBpsScale),
+      send_rates_({{RtpPacketMediaType::kAudio,
+                    {kBitrateStatisticsWindowMs, RateStatistics::kBpsScale}},
+                   {RtpPacketMediaType::kVideo,
+                    {kBitrateStatisticsWindowMs, RateStatistics::kBpsScale}},
+                   {RtpPacketMediaType::kPadding,
+                    {kBitrateStatisticsWindowMs, RateStatistics::kBpsScale}},
+                   {RtpPacketMediaType::kRetransmission,
+                    {kBitrateStatisticsWindowMs, RateStatistics::kBpsScale}},
+                   {RtpPacketMediaType::kForwardErrorCorrection,
+                    {kBitrateStatisticsWindowMs, RateStatistics::kBpsScale}}}),
       rtp_sequence_number_map_(need_rtp_packet_infos_
                                    ? std::make_unique<RtpSequenceNumberMap>(
                                          kRtpSequenceNumberMapMaxEntries)
@@ -194,6 +202,26 @@ void RtpSenderEgress::SendPacket(RtpPacketToSend* packet,
   }
 
   if (send_success) {
+    if (packet->fec_protect_packet()) {
+      RTC_DCHECK(fec_generator_);
+      RTC_DCHECK(packet->packet_type() == RtpPacketMediaType::kVideo);
+      if (packet->is_red()) {
+        // Fetch mutable handle to payload data.
+        uint8_t* payload_data = packet->SetPayloadSize(packet->payload_size());
+
+        // Grab payload type from RED header and update main payload type.
+        uint8_t payload_type = payload_data[0];
+        packet->SetPayloadType(payload_type);
+
+        // Move payload data back one byte.
+        // TODO(sprang): Consider if we can move header forward instead since
+        // it's likely less data to shuffle.
+        memmove(payload_data, payload_data + 1, packet->payload_size() - 1);
+        packet->SetPayloadSize(packet->payload_size() - 1);
+      }
+      fec_generator_->AddPacketAndGenerateFec(*packet);
+    }
+
     rtc::CritScope lock(&lock_);
     UpdateRtpStats(*packet);
     media_has_been_sent_ = true;
@@ -205,21 +233,28 @@ void RtpSenderEgress::ProcessBitrateAndNotifyObservers() {
     return;
 
   rtc::CritScope lock(&lock_);
-  int64_t now_ms = clock_->TimeInMilliseconds();
-  bitrate_callback_->Notify(total_bitrate_sent_.Rate(now_ms).value_or(0),
-                            nack_bitrate_sent_.Rate(now_ms).value_or(0), ssrc_);
+  std::map<RtpPacketMediaType, DataRate> send_rates = GetBitrateSent();
+  DataRate total_rate = DataRate::Zero();
+  DataRate nack_rate = DataRate::Zero();
+  for (const auto& kv : send_rates) {
+    total_rate += kv.second;
+    if (kv.first == RtpPacketMediaType::kRetransmission) {
+      nack_rate = kv.second;
+    }
+  }
+
+  bitrate_callback_->Notify(total_rate.bps(), nack_rate.bps(), ssrc_);
 }
 
-DataRate RtpSenderEgress::SendBitrate() const {
-  rtc::CritScope cs(&lock_);
-  return DataRate::BitsPerSec(
-      total_bitrate_sent_.Rate(clock_->TimeInMilliseconds()).value_or(0));
-}
-
-DataRate RtpSenderEgress::NackOverheadRate() const {
-  rtc::CritScope cs(&lock_);
-  return DataRate::BitsPerSec(
-      nack_bitrate_sent_.Rate(clock_->TimeInMilliseconds()).value_or(0));
+std::map<RtpPacketMediaType, DataRate> RtpSenderEgress::GetBitrateSent() const {
+  rtc::CritScope lock(&lock_);
+  const int64_t now_ms = clock_->TimeInMilliseconds();
+  std::map<RtpPacketMediaType, DataRate> current_rates;
+  for (const auto& rate : send_rates_) {
+    current_rates.emplace(
+        rate.first, DataRate::BitsPerSec(rate.second.Rate(now_ms).value_or(0)));
+  }
+  return current_rates;
 }
 
 void RtpSenderEgress::GetDataCounters(StreamDataCounters* rtp_stats,
@@ -450,8 +485,6 @@ void RtpSenderEgress::UpdateRtpStats(const RtpPacketToSend& packet) {
   StreamDataCounters* counters =
       packet.Ssrc() == rtx_ssrc_ ? &rtx_rtp_stats_ : &rtp_stats_;
 
-  total_bitrate_sent_.Update(packet.size(), now_ms);
-
   if (counters->first_packet_time_ms == -1) {
     counters->first_packet_time_ms = now_ms;
   }
@@ -462,9 +495,13 @@ void RtpSenderEgress::UpdateRtpStats(const RtpPacketToSend& packet) {
 
   if (packet.packet_type() == RtpPacketMediaType::kRetransmission) {
     counters->retransmitted.AddPacket(packet);
-    nack_bitrate_sent_.Update(packet.size(), now_ms);
   }
   counters->transmitted.AddPacket(packet);
+
+  RTC_DCHECK(packet.packet_type().has_value());
+  auto send_rate_kv = send_rates_.find(*packet.packet_type());
+  RTC_DCHECK(send_rate_kv != send_rates_.end());
+  send_rate_kv->second.Update(packet.size(), now_ms);
 
   if (rtp_stats_callback_) {
     rtp_stats_callback_->DataCountersUpdated(*counters, packet.Ssrc());

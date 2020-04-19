@@ -134,8 +134,9 @@ void PacketRouter::RemoveReceiveRtpModule(
   rtcp_feedback_senders_.erase(it);
 }
 
-void PacketRouter::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
-                              const PacedPacketInfo& cluster_info) {
+std::vector<std::unique_ptr<RtpPacketToSend>>
+PacketRouter::SendPacketAndFetchFec(std::unique_ptr<RtpPacketToSend> packet,
+                                    const PacedPacketInfo& cluster_info) {
   rtc::CritScope cs(&modules_crit_);
   // With the new pacer code path, transport sequence numbers are only set here,
   // on the pacer thread. Therefore we don't need atomics/synchronization.
@@ -150,13 +151,13 @@ void PacketRouter::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
         << "Failed to send packet, matching RTP module not found "
            "or transport error. SSRC = "
         << packet->Ssrc() << ", sequence number " << packet->SequenceNumber();
-    return;
+    return {};
   }
 
   RtpRtcp* rtp_module = kv->second;
   if (!rtp_module->TrySendPacket(packet.get(), cluster_info)) {
     RTC_LOG(LS_WARNING) << "Failed to send packet, rejected by RTP module.";
-    return;
+    return {};
   }
 
   if (rtp_module->SupportsRtxPayloadPadding()) {
@@ -164,6 +165,8 @@ void PacketRouter::SendPacket(std::unique_ptr<RtpPacketToSend> packet,
     // properties needed for payload based padding. Cache it for later use.
     last_send_module_ = rtp_module;
   }
+
+  return rtp_module->FetchFecPackets();
 }
 
 std::vector<std::unique_ptr<RtpPacketToSend>> PacketRouter::GeneratePadding(

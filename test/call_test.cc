@@ -447,6 +447,7 @@ void CallTest::CreateMatchingFecConfig(
   config.remote_ssrc = send_config.rtp.flexfec.ssrc;
   config.protected_media_ssrcs = send_config.rtp.flexfec.protected_media_ssrcs;
   config.local_ssrc = kReceiverLocalVideoSsrc;
+  config.rtp_header_extensions = send_config.rtp.extensions;
   if (!video_receive_configs_.empty())
     video_receive_configs_[0].rtp.protected_by_flexfec = true;
   flexfec_receive_configs_.push_back(config);

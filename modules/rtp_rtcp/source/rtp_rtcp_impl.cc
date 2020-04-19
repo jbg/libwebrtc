@@ -46,7 +46,8 @@ ModuleRtpRtcpImpl::RtpSenderContext::RtpSenderContext(
       packet_generator(
           config,
           &packet_history,
-          config.paced_sender ? config.paced_sender : &non_paced_sender) {}
+          config.paced_sender ? config.paced_sender : &non_paced_sender),
+      fec_generator(config.use_deferred_fec ? config.fec_generator : nullptr) {}
 
 RtpRtcp::Configuration::Configuration() = default;
 RtpRtcp::Configuration::Configuration(Configuration&& rhs) = default;
@@ -289,8 +290,7 @@ RTCPSender::FeedbackState ModuleRtpRtcpImpl::GetFeedbackState() {
         rtp_stats.transmitted.packets + rtx_stats.transmitted.packets;
     state.media_bytes_sent = rtp_stats.transmitted.payload_bytes +
                              rtx_stats.transmitted.payload_bytes;
-    state.send_bitrate =
-        rtp_sender_->packet_sender.SendBitrate().bps<uint32_t>();
+    state.send_bitrate = SendRate().bps<uint32_t>();
   }
   state.module = this;
 
@@ -369,6 +369,25 @@ bool ModuleRtpRtcpImpl::TrySendPacket(RtpPacketToSend* packet,
   }
   rtp_sender_->packet_sender.SendPacket(packet, pacing_info);
   return true;
+}
+
+std::vector<std::unique_ptr<RtpPacketToSend>>
+ModuleRtpRtcpImpl::FetchFecPackets() {
+  RTC_DCHECK(rtp_sender_);
+  if (rtp_sender_->fec_generator) {
+    auto fec_packets = rtp_sender_->fec_generator->GetFecPackets();
+    // TODO(sprang): Assign sequence number for both in RTPSender.
+    const bool generate_sequence_numbers =
+        rtp_sender_->fec_generator->GetFecType() !=
+        VideoFecGenerator::FecType::kFlexFec;
+    for (auto& fec_packet : fec_packets) {
+      if (generate_sequence_numbers) {
+        rtp_sender_->packet_generator.AssignSequenceNumber(fec_packet.get());
+      }
+    }
+    return fec_packets;
+  }
+  return {};
 }
 
 void ModuleRtpRtcpImpl::OnPacketsAcknowledged(
@@ -695,12 +714,17 @@ void ModuleRtpRtcpImpl::BitrateSent(uint32_t* total_rate,
                                     uint32_t* video_rate,
                                     uint32_t* fec_rate,
                                     uint32_t* nack_rate) const {
-  *total_rate = rtp_sender_->packet_sender.SendBitrate().bps<uint32_t>();
+  *total_rate = SendRate().bps();
   if (video_rate)
     *video_rate = 0;
   if (fec_rate)
     *fec_rate = 0;
-  *nack_rate = rtp_sender_->packet_sender.NackOverheadRate().bps<uint32_t>();
+  *nack_rate = NackOverheadRate().bps();
+}
+
+std::map<RtpPacketMediaType, DataRate> ModuleRtpRtcpImpl::GetBitrateSent()
+    const {
+  return rtp_sender_->packet_sender.GetBitrateSent();
 }
 
 void ModuleRtpRtcpImpl::OnRequestSendReport() {
@@ -794,12 +818,21 @@ const RTPSender* ModuleRtpRtcpImpl::RtpSender() const {
 
 DataRate ModuleRtpRtcpImpl::SendRate() const {
   RTC_DCHECK(rtp_sender_);
-  return rtp_sender_->packet_sender.SendBitrate();
+  DataRate send_rate = DataRate::Zero();
+  std::map<RtpPacketMediaType, DataRate> send_rates = GetBitrateSent();
+  for (const auto& rate : send_rates) {
+    send_rate += rate.second;
+  }
+  return send_rate;
 }
 
 DataRate ModuleRtpRtcpImpl::NackOverheadRate() const {
   RTC_DCHECK(rtp_sender_);
-  return rtp_sender_->packet_sender.NackOverheadRate();
+  const auto send_rates = rtp_sender_->packet_sender.GetBitrateSent();
+  const auto& nack_rate_it =
+      send_rates.find(RtpPacketMediaType::kRetransmission);
+  RTC_DCHECK(nack_rate_it != send_rates.end());
+  return nack_rate_it->second;
 }
 
 }  // namespace webrtc
