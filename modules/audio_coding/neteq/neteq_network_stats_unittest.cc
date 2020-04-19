@@ -46,7 +46,7 @@ class MockAudioDecoder final : public AudioDecoder {
   // methods don't use any override declarations, and we want to avoid
   // warnings from -Winconsistent-missing-override. See
   // http://crbug.com/428099.
-  static const int kPacketDuration = 960;  // 48 kHz * 20 ms
+  static constexpr int kPacketDuration = 960;  // 48 kHz * 20 ms
 
   MockAudioDecoder(int sample_rate_hz, size_t num_channels)
       : sample_rate_hz_(sample_rate_hz),
@@ -137,10 +137,10 @@ class MockAudioDecoder final : public AudioDecoder {
 
 class NetEqNetworkStatsTest {
  public:
-  static const int kPayloadSizeByte = 30;
-  static const int kFrameSizeMs = 20;
-  static const uint8_t kPayloadType = 95;
-  static const int kOutputLengthMs = 10;
+  static constexpr int kPayloadSizeByte = 30;
+  static constexpr int kFrameSizeMs = 20;
+  static constexpr uint8_t kPayloadType = 95;
+  static constexpr int kOutputLengthMs = 10;
 
   enum logic {
     kIgnore,

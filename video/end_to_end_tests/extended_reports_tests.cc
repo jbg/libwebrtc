@@ -196,7 +196,7 @@ class RtcpXrObserver : public test::EndToEndTest {
         << "Timed out while waiting for RTCP SR/RR packets to be sent.";
   }
 
-  static const int kNumRtcpReportPacketsToObserve = 5;
+  static constexpr int kNumRtcpReportPacketsToObserve = 5;
 
   rtc::CriticalSection crit_;
   const bool enable_rrtr_;

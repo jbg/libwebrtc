@@ -21,7 +21,7 @@
 
 class FakeAdmTest : public ::testing::Test, public webrtc::AudioTransport {
  protected:
-  static const int kMsInSecond = 1000;
+  static constexpr int kMsInSecond = 1000;
 
   FakeAdmTest()
       : push_iterations_(0), pull_iterations_(0), rec_buffer_bytes_(0) {

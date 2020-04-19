@@ -1996,9 +1996,9 @@ TEST_F(VideoSendStreamTest, ChangingTransportOverhead) {
 template <typename T>
 class MaxPaddingSetTest : public test::SendTest {
  public:
-  static const uint32_t kMinTransmitBitrateBps = 400000;
-  static const uint32_t kActualEncodeBitrateBps = 40000;
-  static const uint32_t kMinPacketsToSend = 50;
+  static constexpr uint32_t kMinTransmitBitrateBps = 400000;
+  static constexpr uint32_t kActualEncodeBitrateBps = 40000;
+  static constexpr uint32_t kMinPacketsToSend = 50;
 
   MaxPaddingSetTest(bool test_switch_content_type,
                     T* stream_reset_fun,
@@ -3964,7 +3964,7 @@ class ContentSwitchTest : public test::SendTest {
     kInScreenshare = 1,
     kAfterSwitchBack = 2,
   };
-  static const uint32_t kMinPacketsToSend = 50;
+  static constexpr uint32_t kMinPacketsToSend = 50;
 
   explicit ContentSwitchTest(T* stream_reset_fun)
       : SendTest(test::CallTest::kDefaultTimeoutMs),

@@ -433,7 +433,7 @@ class MockEncoderSelector
 
 class VideoStreamEncoderTest : public ::testing::Test {
  public:
-  static const int kDefaultTimeoutMs = 30 * 1000;
+  static constexpr int kDefaultTimeoutMs = 30 * 1000;
 
   VideoStreamEncoderTest()
       : video_send_config_(VideoSendStream::Config(nullptr)),

@@ -20,8 +20,8 @@ static const float kTolerance = 0.0001f;
 
 class MovingMomentsTest : public ::testing::Test {
  protected:
-  static const size_t kMovingMomentsBufferLength = 5;
-  static const size_t kMaxOutputLength = 20;  // Valid for this tests only.
+  static constexpr size_t kMovingMomentsBufferLength = 5;
+  static constexpr size_t kMaxOutputLength = 20;  // Valid for this tests only.
 
   virtual void SetUp();
   // Calls CalculateMoments and verifies that it produces the expected
@@ -35,8 +35,6 @@ class MovingMomentsTest : public ::testing::Test {
   float output_mean_[kMaxOutputLength];
   float output_mean_squares_[kMaxOutputLength];
 };
-
-const size_t MovingMomentsTest::kMaxOutputLength;
 
 void MovingMomentsTest::SetUp() {
   moving_moments_.reset(new MovingMoments(kMovingMomentsBufferLength));

@@ -595,14 +595,13 @@ TEST(AudioMixer, MultipleChannelsManyParticipants) {
 
 class HighOutputRateCalculator : public OutputRateCalculator {
  public:
-  static const int kDefaultFrequency = 76000;
+  static constexpr int kDefaultFrequency = 76000;
   int CalculateOutputRate(
       const std::vector<int>& preferred_sample_rates) override {
     return kDefaultFrequency;
   }
   ~HighOutputRateCalculator() override {}
 };
-const int HighOutputRateCalculator::kDefaultFrequency;
 
 TEST(AudioMixer, MultipleChannelsAndHighRate) {
   constexpr size_t kSamplesPerChannel =

@@ -15,7 +15,8 @@ namespace webrtc {
 namespace {
 
 struct MyExperiment {
-  static const ConfigOptionID identifier = ConfigOptionID::kMyExperimentForTest;
+  static constexpr ConfigOptionID identifier =
+      ConfigOptionID::kMyExperimentForTest;
   static const int kDefaultFactor;
   static const int kDefaultOffset;
 
@@ -55,7 +56,7 @@ TEST(Config, SetNullSetsTheOptionBackToDefault) {
 }
 
 struct Algo1_CostFunction {
-  static const ConfigOptionID identifier =
+  static constexpr ConfigOptionID identifier =
       ConfigOptionID::kAlgo1CostFunctionForTest;
   Algo1_CostFunction() {}
 

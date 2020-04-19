@@ -309,9 +309,9 @@ class CaptureProcessor {
   void Process();
 
  private:
-  static const int kMaxCallDifference = 10;
+  static constexpr int kMaxCallDifference = 10;
   static const float kCaptureInputFloatLevel;
-  static const int kCaptureInputFixLevel = 1024;
+  static constexpr int kCaptureInputFixLevel = 1024;
 
   void PrepareFrame();
   void CallApmCaptureSide();
@@ -353,8 +353,8 @@ class RenderProcessor {
   void Process();
 
  private:
-  static const int kMaxCallDifference = 10;
-  static const int kRenderInputFixLevel = 16384;
+  static constexpr int kMaxCallDifference = 10;
+  static constexpr int kRenderInputFixLevel = 16384;
   static const float kRenderInputFloatLevel;
 
   void PrepareFrame();
@@ -379,8 +379,8 @@ class AudioProcessingImplLockTest
   bool MaybeEndTest();
 
  private:
-  static const int kTestTimeOutLimit = 10 * 60 * 1000;
-  static const int kMaxFrameSize = 480;
+  static constexpr int kTestTimeOutLimit = 10 * 60 * 1000;
+  static constexpr int kMaxFrameSize = 480;
 
   // ::testing::TestWithParam<> implementation
   void SetUp() override;

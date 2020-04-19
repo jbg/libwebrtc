@@ -80,7 +80,7 @@ class TestNalUnits : public TestSessionInfo {
 
 class TestNackList : public TestSessionInfo {
  protected:
-  static const size_t kMaxSeqNumListLength = 30;
+  static constexpr size_t kMaxSeqNumListLength = 30;
 
   virtual void SetUp() {
     TestSessionInfo::SetUp();

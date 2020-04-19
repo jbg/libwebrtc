@@ -232,9 +232,9 @@ class TimedThreadApiProcessor {
   }
 
  private:
-  static const int kMaxCallDifference = 10;
-  static const int kMaxFrameSize = 480;
-  static const int kNumInitializationFrames = 5;
+  static constexpr int kMaxCallDifference = 10;
+  static constexpr int kMaxFrameSize = 480;
+  static constexpr int kNumInitializationFrames = 5;
 
   int64_t GetDurationStandardDeviation() const {
     double variance = 0;
@@ -430,8 +430,8 @@ class CallSimulator : public ::testing::TestWithParam<SimulationConfig> {
  private:
   static const float kCaptureInputFloatLevel;
   static const float kRenderInputFloatLevel;
-  static const int kMinNumFramesToProcess = 150;
-  static const int32_t kTestTimeout = 3 * 10 * kMinNumFramesToProcess;
+  static constexpr int kMinNumFramesToProcess = 150;
+  static constexpr int32_t kTestTimeout = 3 * 10 * kMinNumFramesToProcess;
 
   // ::testing::TestWithParam<> implementation.
   void TearDown() override { StopThreads(); }

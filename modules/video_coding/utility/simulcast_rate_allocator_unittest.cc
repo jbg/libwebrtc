@@ -158,7 +158,7 @@ class SimulcastRateAllocatorTest : public ::testing::TestWithParam<bool> {
   }
 
  protected:
-  static const int kDefaultFrameRate = 30;
+  static constexpr int kDefaultFrameRate = 30;
   VideoCodec codec_;
   std::unique_ptr<SimulcastRateAllocator> allocator_;
 };

@@ -697,7 +697,7 @@ class TemporalLayersReferenceTest : public TemporalLayersTest,
   virtual ~TemporalLayersReferenceTest() {}
 
  protected:
-  static const int kMaxPatternLength = 32;
+  static constexpr int kMaxPatternLength = 32;
 
   struct BufferState {
     BufferState() : BufferState(-1, 0, false) {}

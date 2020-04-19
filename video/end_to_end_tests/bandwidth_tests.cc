@@ -166,7 +166,7 @@ class BandwidthStatsTest : public test::EndToEndTest {
   }
 
  private:
-  static const int kMaxBitrateBps = 3000000;
+  static constexpr int kMaxBitrateBps = 3000000;
   Call* sender_call_;
   Call* receiver_call_;
   bool has_seen_pacer_delay_;

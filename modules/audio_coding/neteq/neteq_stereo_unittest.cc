@@ -46,10 +46,10 @@ struct TestParameters {
 // mono output.
 class NetEqStereoTest : public ::testing::TestWithParam<TestParameters> {
  protected:
-  static const int kTimeStepMs = 10;
-  static const size_t kMaxBlockSize = 480;  // 10 ms @ 48 kHz.
-  static const uint8_t kPayloadTypeMono = 95;
-  static const uint8_t kPayloadTypeMulti = 96;
+  static constexpr int kTimeStepMs = 10;
+  static constexpr size_t kMaxBlockSize = 480;  // 10 ms @ 48 kHz.
+  static constexpr uint8_t kPayloadTypeMono = 95;
+  static constexpr uint8_t kPayloadTypeMulti = 96;
 
   NetEqStereoTest()
       : num_channels_(GetParam().num_channels),
@@ -279,8 +279,8 @@ TEST_P(NetEqStereoTestNegativeDrift, RunTest) {
 
 class NetEqStereoTestDelays : public NetEqStereoTest {
  protected:
-  static const int kDelayInterval = 10;
-  static const int kDelay = 1000;
+  static constexpr int kDelayInterval = 10;
+  static constexpr int kDelay = 1000;
   NetEqStereoTestDelays() : NetEqStereoTest(), frame_index_(0) {}
 
   virtual int GetArrivalTime(int send_time) {
@@ -304,7 +304,7 @@ TEST_P(NetEqStereoTestDelays, RunTest) {
 
 class NetEqStereoTestLosses : public NetEqStereoTest {
  protected:
-  static const int kLossInterval = 10;
+  static constexpr int kLossInterval = 10;
   NetEqStereoTestLosses() : NetEqStereoTest(), frame_index_(0) {}
 
   virtual bool Lost() { return (++frame_index_) % kLossInterval == 0; }

@@ -71,14 +71,14 @@ class TargetDelayTest : public ::testing::Test {
   }
 
  private:
-  static const int kSampleRateHz = 16000;
-  static const int kNum10msPerFrame = 2;
-  static const size_t kFrameSizeSamples = 320;  // 20 ms @ 16 kHz.
+  static constexpr int kSampleRateHz = 16000;
+  static constexpr int kNum10msPerFrame = 2;
+  static constexpr size_t kFrameSizeSamples = 320;  // 20 ms @ 16 kHz.
   // payload-len = frame-samples * 2 bytes/sample.
-  static const int kPayloadLenBytes = 320 * 2;
+  static constexpr int kPayloadLenBytes = 320 * 2;
   // Inter-arrival time in number of packets in a jittery channel. One is no
   // jitter.
-  static const int kInterarrivalJitterPacket = 2;
+  static constexpr int kInterarrivalJitterPacket = 2;
 
   void Push() {
     rtp_header_.timestamp += kFrameSizeSamples;

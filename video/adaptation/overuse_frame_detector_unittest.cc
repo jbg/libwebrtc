@@ -236,7 +236,7 @@ class OveruseFrameDetectorTest : public ::testing::Test,
   std::unique_ptr<OveruseFrameDetectorUnderTest> overuse_detector_;
   int encode_usage_percent_ = -1;
 
-  static const auto reason_ = VideoAdaptationReason::kCpu;
+  static constexpr auto reason_ = VideoAdaptationReason::kCpu;
 };
 
 // UsagePercent() > high_encode_usage_threshold_percent => overuse.

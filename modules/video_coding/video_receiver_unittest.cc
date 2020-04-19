@@ -44,8 +44,8 @@ class MockVCMReceiveCallback : public VCMReceiveCallback {
 
 class TestVideoReceiver : public ::testing::Test {
  protected:
-  static const int kUnusedPayloadType = 10;
-  static const uint16_t kMaxWaitTimeMs = 100;
+  static constexpr int kUnusedPayloadType = 10;
+  static constexpr uint16_t kMaxWaitTimeMs = 100;
 
   TestVideoReceiver()
       : clock_(0), timing_(&clock_), receiver_(&clock_, &timing_) {}

@@ -112,7 +112,7 @@ class MockPacketSender : public PacingController::PacketSender {
 
 class PacingControllerPadding : public PacingController::PacketSender {
  public:
-  static const size_t kPaddingPacketSize = 224;
+  static constexpr size_t kPaddingPacketSize = 224;
 
   PacingControllerPadding() : padding_sent_(0), total_bytes_sent_(0) {}
 

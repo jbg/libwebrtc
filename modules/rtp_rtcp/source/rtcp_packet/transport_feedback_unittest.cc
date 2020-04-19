@@ -90,7 +90,7 @@ class FeedbackTester {
     VerifyInternal();
   }
 
-  static const size_t kAnySize = static_cast<size_t>(0) - 1;
+  static constexpr size_t kAnySize = static_cast<size_t>(0) - 1;
 
  private:
   void VerifyInternal() {

@@ -91,9 +91,9 @@ class CallPerfTest : public test::CallTest {
 
 class VideoRtcpAndSyncObserver : public test::RtpRtcpObserver,
                                  public rtc::VideoSinkInterface<VideoFrame> {
-  static const int kInSyncThresholdMs = 50;
-  static const int kStartupTimeMs = 2000;
-  static const int kMinRunTimeMs = 30000;
+  static constexpr int kInSyncThresholdMs = 50;
+  static constexpr int kStartupTimeMs = 2000;
+  static constexpr int kMinRunTimeMs = 30000;
 
  public:
   explicit VideoRtcpAndSyncObserver(TaskQueueBase* task_queue,
