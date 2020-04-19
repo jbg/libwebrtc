@@ -595,10 +595,14 @@ WebRtcVideoEngine::GetRtpHeaderExtensions() const {
     result.emplace_back(uri, id++, webrtc::RtpTransceiverDirection::kSendRecv);
   }
   result.emplace_back(
-      webrtc::RtpExtension::kGenericFrameDescriptorUri00, id,
+      webrtc::RtpExtension::kGenericFrameDescriptorUri00, id++,
       webrtc::field_trial::IsEnabled("WebRTC-GenericDescriptorAdvertised")
           ? webrtc::RtpTransceiverDirection::kSendRecv
           : webrtc::RtpTransceiverDirection::kStopped);
+  result.emplace_back(webrtc::RtpExtension::kFecProtectExtensionHeaders, id++,
+                      webrtc::field_trial::IsEnabled("WebRTC-Deferred-FEC")
+                          ? webrtc::RtpTransceiverDirection::kSendRecv
+                          : webrtc::RtpTransceiverDirection::kStopped);
   return result;
 }
 

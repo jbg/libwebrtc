@@ -192,7 +192,8 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
     OverheadObserver* overhead_observer,
     FrameEncryptorInterface* frame_encryptor,
     const CryptoOptions& crypto_options,
-    rtc::scoped_refptr<FrameTransformerInterface> frame_transformer) {
+    rtc::scoped_refptr<FrameTransformerInterface> frame_transformer,
+    bool use_deferred_fec) {
   RTC_DCHECK_GT(rtp_config.ssrcs.size(), 0);
 
   RtpRtcp::Configuration configuration;
@@ -227,6 +228,7 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
       crypto_options.sframe.require_frame_encryption;
   configuration.extmap_allow_mixed = rtp_config.extmap_allow_mixed;
   configuration.rtcp_report_interval_ms = rtcp_report_interval_ms;
+  configuration.use_deferred_fec = use_deferred_fec;
 
   std::vector<RtpStreamSender> rtp_streams;
 
@@ -239,7 +241,9 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
     std::unique_ptr<VideoFecGenerator> fec_generator =
         MaybeCreateFecGenerator(clock, rtp_config, suspended_ssrcs, i);
     configuration.fec_generator = fec_generator.get();
-    video_config.fec_generator = fec_generator.get();
+    if (!use_deferred_fec) {
+      video_config.fec_generator = fec_generator.get();
+    }
 
     configuration.rtx_send_ssrc =
         rtp_config.GetRtxSsrcAssociatedWithMediaSsrc(rtp_config.ssrcs[i]);
@@ -273,6 +277,10 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
         rtp_config.ulpfec.red_payload_type != -1) {
       video_config.red_payload_type = rtp_config.ulpfec.red_payload_type;
     }
+    if (fec_generator) {
+      video_config.fec_type = fec_generator->GetFecType();
+      video_config.fec_overhead_bytes = fec_generator->MaxPacketOverhead();
+    }
     video_config.frame_transformer = frame_transformer;
     auto sender_video = std::make_unique<RTPSenderVideo>(video_config);
     rtp_streams.emplace_back(std::move(rtp_rtcp), std::move(sender_video),
@@ -296,9 +304,15 @@ absl::optional<VideoCodecType> GetVideoCodecType(const RtpConfig& config) {
   }
   return PayloadStringToCodecType(config.payload_name);
 }
-bool TransportSeqNumExtensionConfigured(const RtpConfig& config_config) {
-  return absl::c_any_of(config_config.extensions, [](const RtpExtension& ext) {
+bool TransportSeqNumExtensionConfigured(const RtpConfig& config) {
+  return absl::c_any_of(config.extensions, [](const RtpExtension& ext) {
     return ext.uri == RtpExtension::kTransportSequenceNumberUri;
+  });
+}
+
+bool DeferredFecExtensionConfigured(const RtpConfig& config) {
+  return absl::c_any_of(config.extensions, [](const RtpExtension& ext) {
+    return ext.uri == RtpExtension::kFecProtectExtensionHeaders;
   });
 }
 }  // namespace
@@ -325,6 +339,7 @@ RtpVideoSender::RtpVideoSender(
       use_early_loss_detection_(
           !webrtc::field_trial::IsDisabled("WebRTC-UseEarlyLossDetection")),
       has_packet_feedback_(TransportSeqNumExtensionConfigured(rtp_config)),
+      use_deferred_fec_(DeferredFecExtensionConfigured(rtp_config)),
       active_(false),
       module_process_thread_(nullptr),
       suspended_ssrcs_(std::move(suspended_ssrcs)),
@@ -343,7 +358,8 @@ RtpVideoSender::RtpVideoSender(
                                           this,
                                           frame_encryptor,
                                           crypto_options,
-                                          std::move(frame_transformer))),
+                                          std::move(frame_transformer),
+                                          use_deferred_fec_)),
       rtp_config_(rtp_config),
       codec_type_(GetVideoCodecType(rtp_config)),
       transport_(transport),
@@ -419,6 +435,10 @@ RtpVideoSender::RtpVideoSender(
   // Signal congestion controller this object is ready for OnPacket* callbacks.
   transport_->GetStreamFeedbackProvider()->RegisterStreamFeedbackObserver(
       rtp_config_.ssrcs, this);
+
+  if (fec_enabled && use_deferred_fec_) {
+    RTC_LOG(LS_WARNING) << "Sender configured with deferred FEC generation.";
+  }
 }
 
 RtpVideoSender::~RtpVideoSender() {
@@ -817,14 +837,14 @@ int RtpVideoSender::ProtectionRequest(const FecProtectionParams* delta_params,
   *sent_nack_rate_bps = 0;
   *sent_fec_rate_bps = 0;
   for (const RtpStreamSender& stream : rtp_streams_) {
-    uint32_t not_used = 0;
-    uint32_t module_nack_rate = 0;
-    stream.sender_video->SetFecParameters(*delta_params, *key_params);
+    if (stream.fec_generator) {
+      stream.fec_generator->SetProtectionParameters(*delta_params, *key_params);
+      *sent_fec_rate_bps += stream.fec_generator->CurrentFecRate().bps();
+    }
     *sent_video_rate_bps += stream.sender_video->VideoBitrateSent();
-    *sent_fec_rate_bps += stream.sender_video->FecOverheadRate();
-    stream.rtp_rtcp->BitrateSent(&not_used, /*video_rate=*/nullptr,
-                                 /*fec_rate=*/nullptr, &module_nack_rate);
-    *sent_nack_rate_bps += module_nack_rate;
+    *sent_nack_rate_bps += stream.rtp_rtcp->GetBitrateSent()
+                               .find(RtpPacketMediaType::kRetransmission)
+                               ->second.bps();
   }
   return 0;
 }
