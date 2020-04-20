@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "63d90a62_101af430",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-20T17:01:39Z",
+      "side": 1,
+      "message": "Good point!\nDone.",
+      "parentUuid": "65fb433d_52efc9bb",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "098ce17d_ce54a0e2",
         "filename": "modules/audio_processing/audio_processing_builder_impl.cc",
         "patchSetId": 32
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "892b754a_17f76b96",
+        "filename": "modules/audio_processing/audio_processing_builder_impl.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-20T17:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "098ce17d_ce54a0e2",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "878ef240_c68c3f90",
         "filename": "modules/audio_processing/audio_processing_builder_impl.cc",
         "patchSetId": 32
@@ -47,6 +83,24 @@
       "writtenOn": "2020-03-31T15:25:30Z",
       "side": 1,
       "message": "#ifdef only the body of this function?\n\nAnd would it be possible to have it return unique_ptr? Or would that be too large a change here?",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47fafca1_d7076e16",
+        "filename": "modules/audio_processing/audio_processing_builder_impl.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-20T17:01:39Z",
+      "side": 1,
+      "message": "I added the #ifdef inside the function body.\n\nRegarding returning a unique_ptr I don\u0027t think we can do that.\nAPM implements the RefCountInterface interface since it in some usages is used in a scoped_refptr. However, Chromium uses APM in a unique ptr.\n\nIf this create method returns an unique_ptr, I don\u0027t think there is a nice way to move it into a scoped_refptr.\nCurrently it is done as \naudio_processing \u003d AudioProcessingBuilder().Create();\nwould it be possible to do it as.\naudio_processing \u003d AudioProcessingBuilder().Create().release();\n?\n\nAnother drawback is that changing the return type would break downstream dependencies.\n\nI would prefer to keep this as it is, but I definitely agree that it would be better to return a unique_ptr.",
+      "parentUuid": "878ef240_c68c3f90",
       "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "118478c1_135710a9",
+        "filename": "modules/audio_processing/test/audio_processing_builder_for_testing.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-20T17:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f285209_017f1136",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6bb32c1b_4fbcab70",
         "filename": "modules/audio_processing/test/audio_processing_builder_for_testing.cc",
         "patchSetId": 32
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "fbefa4d7_793392d3",
+        "filename": "modules/audio_processing/test/audio_processing_builder_for_testing.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-20T17:01:39Z",
+      "side": 1,
+      "message": "The reason for this being done differently depending on the build flag is that I would like the test code to use the normal (non-test) builder if possible, since that ensures that that is tested. Without that, most(no?) tests would test that.\n\nThe reason why the test code needs to react on that flag is that if it is set the normal (non-test) builder will return a nullpointer. The nullpointer would in turn deactivate all tests that rely on the Create method for producing an APM for testing.\n\nOne alternative would be to refrain from running/building those tests if the flag is set but that has the drawbacks that\n1) It will require usage of the flag in lots of places in the code.\n2) It will be harder to see what and when tests are run.\n\nWDYT?",
+      "parentUuid": "6bb32c1b_4fbcab70",
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8756d584_f0a5b94b",
         "filename": "modules/audio_processing/test/audio_processing_builder_for_testing.h",
         "patchSetId": 32
@@ -98,6 +188,30 @@
       "writtenOn": "2020-03-31T15:25:30Z",
       "side": 1,
       "message": "Can these return unique_ptr instead, or will that be a too large change?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "5d82db517600bed7bf1932029c166f7ac3a6b24f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1ac1988_6a613041",
+        "filename": "modules/audio_processing/test/audio_processing_builder_for_testing.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-20T17:01:39Z",
+      "side": 1,
+      "message": "See comment in the .cc file.\nI would prefer to keep this, at least for now, since it will break down-stream dependencies and is an API-breaking change.",
+      "parentUuid": "8756d584_f0a5b94b",
       "range": {
         "startLine": 49,
         "startChar": 2,
