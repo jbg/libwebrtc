@@ -61,6 +61,7 @@ enum : int {  // The first valid value is 1.
   kTransportSequenceNumberExtensionId,
   kVideoContentTypeExtensionId,
   kVideoTimingExtensionId,
+  kFecProtectHeadersExtensionId,
 };
 
 constexpr char kSyncGroup[] = "av_sync";
@@ -802,6 +803,12 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
         RtpExtension::kVideoContentTypeUri, kVideoContentTypeExtensionId);
     video_send_configs_[video_idx].rtp.extensions.emplace_back(
         RtpExtension::kVideoTimingUri, kVideoTimingExtensionId);
+    //  if (field_trial::IsEnabled("WebRTC-Deferred-FEC")) {
+    if (!field_trial::IsDisabled("WebRTC-Deferred-FEC")) {
+      video_send_configs_[video_idx].rtp.extensions.emplace_back(
+          RtpExtension::kFecProtectExtensionHeaders,
+          kFecProtectHeadersExtensionId);
+    }
 
     video_encoder_configs_[video_idx].video_format.name =
         params_.video[video_idx].codec;
