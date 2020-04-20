@@ -24,7 +24,7 @@ class DummyCallback : public RecoveredPacketReceiver {
 }  // namespace
 
 void FuzzOneInput(const uint8_t* data, size_t size) {
-  constexpr size_t kMinDataNeeded = 12;
+  constexpr size_t kMinDataNeeded = 13;
   if (size < kMinDataNeeded || size > 2000) {
     return;
   }
@@ -37,9 +37,11 @@ void FuzzOneInput(const uint8_t* data, size_t size) {
   memcpy(&media_ssrc, data + 6, 4);
   uint16_t media_seq_num;
   memcpy(&media_seq_num, data + 10, 2);
+  bool protect_header_extensions = data[12] & 1;
 
   DummyCallback callback;
-  FlexfecReceiver receiver(flexfec_ssrc, media_ssrc, &callback);
+  FlexfecReceiver receiver(flexfec_ssrc, media_ssrc, protect_header_extensions,
+                           &callback);
 
   std::unique_ptr<uint8_t[]> packet;
   size_t packet_length;
