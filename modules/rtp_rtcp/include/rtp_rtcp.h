@@ -11,6 +11,7 @@
 #ifndef MODULES_RTP_RTCP_INCLUDE_RTP_RTCP_H_
 #define MODULES_RTP_RTCP_INCLUDE_RTP_RTCP_H_
 
+#include <map>
 #include <memory>
 #include <set>
 #include <string>
@@ -156,6 +157,13 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     // overhead.
     bool enable_rtx_padding_prioritization = true;
 
+    // If true, FEC generation is deferred until after source packets have been
+    // sent, ensuring any header extensions updated during the send stage can be
+    // fully protected. The RTP module will update |fec_generator| after a
+    // TrySendPacket() call. Any generated packets can then be polled via
+    // FetchFecPackets();
+    bool use_deferred_fec = false;
+
    private:
     RTC_DISALLOW_COPY_AND_ASSIGN(Configuration);
   };
@@ -287,11 +295,15 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // bitrate estimate since the stream participates in the bitrate allocation.
   virtual void SetAsPartOfAllocation(bool part_of_allocation) = 0;
 
-  // Fetches the current send bitrates in bits/s.
+  // TODO(sprang): Remove when all call sites have been moved to
+  // GetBitrateSent(). Fetches the current send bitrates in bits/s.
   virtual void BitrateSent(uint32_t* total_rate,
                            uint32_t* video_rate,
                            uint32_t* fec_rate,
                            uint32_t* nack_rate) const = 0;
+
+  // Returns bitrate sent (post-pacing) per packet type.
+  virtual std::map<RtpPacketMediaType, DataRate> GetBitrateSent() const = 0;
 
   virtual RTPSender* RtpSender() = 0;
   virtual const RTPSender* RtpSender() const = 0;
@@ -308,6 +320,17 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   // transport.
   virtual bool TrySendPacket(RtpPacketToSend* packet,
                              const PacedPacketInfo& pacing_info) = 0;
+
+  // Update the FEC protection parameters to use for delta- and key-frames.
+  // Only used when deferred FEC is active.
+  virtual void SetFecProtectionParams(
+      const FecProtectionParams& delta_params,
+      const FecProtectionParams& key_params) = 0;
+
+  // If deferred FEC generation is enabled, this method should be called after
+  // calling TrySendPacket(). Any generated FEC packets will be removed and
+  // returned from the FEC generator.
+  virtual std::vector<std::unique_ptr<RtpPacketToSend>> FetchFecPackets() = 0;
 
   virtual void OnPacketsAcknowledged(
       rtc::ArrayView<const uint16_t> sequence_numbers) = 0;

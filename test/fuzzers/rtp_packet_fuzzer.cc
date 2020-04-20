@@ -150,6 +150,8 @@ void FuzzOneInput(const uint8_t* data, size_t size) {
         // This extension requires state to read and so complicated that
         // deserves own fuzzer.
         break;
+      case kRtpExtensionFecProtectHeaderExtensions:
+        break;
     }
   }
 

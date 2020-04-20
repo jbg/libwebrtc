@@ -360,6 +360,14 @@ struct RTC_EXPORT RtpExtension {
   static constexpr char kRepairedRidUri[] =
       "urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id";
 
+  // Header used as a signal to indicate that all RTP header extenions are
+  // protected by FEC packets. Without this, mutable extensions (e.g.
+  // kVideoTimingUri, kTransportSequenceNumberUri) need to be treated as zeroes
+  // in recovery mechanism.
+  static constexpr char kFecProtectExtensionHeaders[] =
+      "http://www.webrtc.org/experiments/rtp-hdrext/"
+      "fec-protect-extension-headers";
+
   // Inclusive min and max IDs for two-byte header extensions and one-byte
   // header extensions, per RFC8285 Section 4.2-4.3.
   static constexpr int kMinId = 1;

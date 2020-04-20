@@ -198,7 +198,8 @@ void RtpPacket::ZeroMutableExtensions() {
       case RTPExtensionType::kRtpExtensionRtpStreamId:
       case RTPExtensionType::kRtpExtensionVideoContentType:
       case RTPExtensionType::kRtpExtensionVideoRotation:
-      case RTPExtensionType::kRtpExtensionInbandComfortNoise: {
+      case RTPExtensionType::kRtpExtensionInbandComfortNoise:
+      case RTPExtensionType::kRtpExtensionFecProtectHeaderExtensions: {
         // Non-mutable extension. Don't change it.
         break;
       }
