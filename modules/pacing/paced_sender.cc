@@ -197,8 +197,12 @@ void PacedSender::SetQueueTimeLimit(TimeDelta limit) {
 void PacedSender::SendRtpPacket(std::unique_ptr<RtpPacketToSend> packet,
                                 const PacedPacketInfo& cluster_info) {
   critsect_.Leave();
-  packet_router_->SendPacket(std::move(packet), cluster_info);
+  auto fec_packets =
+      packet_router_->SendPacketAndFetchFec(std::move(packet), cluster_info);
   critsect_.Enter();
+  if (!fec_packets.empty()) {
+    EnqueuePackets(std::move(fec_packets));
+  }
 }
 
 std::vector<std::unique_ptr<RtpPacketToSend>> PacedSender::GeneratePadding(

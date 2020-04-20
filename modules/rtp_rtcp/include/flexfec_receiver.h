@@ -30,10 +30,12 @@ class FlexfecReceiver {
  public:
   FlexfecReceiver(uint32_t ssrc,
                   uint32_t protected_media_ssrc,
+                  bool protect_header_extensions,
                   RecoveredPacketReceiver* recovered_packet_receiver);
   FlexfecReceiver(Clock* clock,
                   uint32_t ssrc,
                   uint32_t protected_media_ssrc,
+                  bool protect_header_extensions,
                   RecoveredPacketReceiver* recovered_packet_receiver);
   ~FlexfecReceiver();
 
@@ -56,6 +58,7 @@ class FlexfecReceiver {
   // Config.
   const uint32_t ssrc_;
   const uint32_t protected_media_ssrc_;
+  const bool protect_header_extensions_;
 
   // Erasure code interfacing and callback.
   std::unique_ptr<ForwardErrorCorrection> erasure_code_

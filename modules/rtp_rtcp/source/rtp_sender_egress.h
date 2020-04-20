@@ -37,14 +37,19 @@ class RtpSenderEgress {
   class NonPacedPacketSender : public RtpPacketSender {
    public:
     explicit NonPacedPacketSender(RtpSenderEgress* sender);
+    NonPacedPacketSender(
+        RtpSenderEgress* sender,
+        std::function<void(RtpPacketToSend*)> sequence_number_allocator);
     virtual ~NonPacedPacketSender();
 
     void EnqueuePackets(
         std::vector<std::unique_ptr<RtpPacketToSend>> packets) override;
 
    private:
+    void PrepareForSend(RtpPacketToSend* packet);
     uint16_t transport_sequence_number_;
     RtpSenderEgress* const sender_;
+    std::function<void(RtpPacketToSend*)> const assign_sequence_number_;
   };
 
   RtpSenderEgress(const RtpRtcp::Configuration& config,
@@ -57,8 +62,7 @@ class RtpSenderEgress {
   absl::optional<uint32_t> FlexFecSsrc() const { return flexfec_ssrc_; }
 
   void ProcessBitrateAndNotifyObservers();
-  DataRate SendBitrate() const;
-  DataRate NackOverheadRate() const;
+  std::map<RtpPacketMediaType, DataRate> GetBitrateSent() const;
   void GetDataCounters(StreamDataCounters* rtp_stats,
                        StreamDataCounters* rtx_stats) const;
 
@@ -74,6 +78,10 @@ class RtpSenderEgress {
   // If any could not be recalled, return an empty vector.
   std::vector<RtpSequenceNumberMap::Info> GetSentRtpPacketInfos(
       rtc::ArrayView<const uint16_t> sequence_numbers) const;
+
+  void SetFecProtectionParameters(const FecProtectionParams& delta_params,
+                                  const FecProtectionParams& key_params);
+  std::vector<std::unique_ptr<RtpPacketToSend>> FetchFecPackets();
 
  private:
   // Maps capture time in milliseconds to send-side delay in milliseconds.
@@ -109,8 +117,8 @@ class RtpSenderEgress {
   RtpPacketHistory* const packet_history_;
   Transport* const transport_;
   RtcEventLog* const event_log_;
-  const bool is_audio_;
   const bool need_rtp_packet_infos_;
+  VideoFecGenerator* const fec_generator_ RTC_GUARDED_BY(lock_);
 
   TransportFeedbackObserver* const transport_feedback_observer_;
   SendSideDelayObserver* const send_side_delay_observer_;
@@ -132,8 +140,8 @@ class RtpSenderEgress {
   size_t rtp_overhead_bytes_per_packet_ RTC_GUARDED_BY(lock_);
   StreamDataCounters rtp_stats_ RTC_GUARDED_BY(lock_);
   StreamDataCounters rtx_rtp_stats_ RTC_GUARDED_BY(lock_);
-  RateStatistics total_bitrate_sent_ RTC_GUARDED_BY(lock_);
-  RateStatistics nack_bitrate_sent_ RTC_GUARDED_BY(lock_);
+  std::map<RtpPacketMediaType, RateStatistics> send_rates_
+      RTC_GUARDED_BY(lock_);
 
   // Maps sent packets' sequence numbers to a tuple consisting of:
   // 1. The timestamp, without the randomizing offset mandated by the RFC.
