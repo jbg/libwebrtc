@@ -37,9 +37,10 @@ constexpr size_t kDefaultPacketSize = 1234;
 
 class MockPacketRouter : public PacketRouter {
  public:
-  MOCK_METHOD2(SendPacket,
-               void(std::unique_ptr<RtpPacketToSend> packet,
-                    const PacedPacketInfo& cluster_info));
+  MOCK_METHOD2(SendPacketAndFetchFec,
+               std::vector<std::unique_ptr<RtpPacketToSend>>(
+                   std::unique_ptr<RtpPacketToSend> packet,
+                   const PacedPacketInfo& cluster_info));
   MOCK_METHOD1(
       GeneratePadding,
       std::vector<std::unique_ptr<RtpPacketToSend>>(size_t target_size_bytes));
@@ -97,6 +98,13 @@ class TaskQueuePacedSenderTest : public ::testing::Test {
   GlobalSimulatedTimeController time_controller_;
   MockPacketRouter packet_router_;
   TaskQueuePacedSender pacer_;
+  std::function<std::vector<std::unique_ptr<RtpPacketToSend>>(
+      std::unique_ptr<RtpPacketToSend>,
+      const PacedPacketInfo&)>
+      return_empty_packet_list = [](std::unique_ptr<RtpPacketToSend> packet,
+                                    const PacedPacketInfo& cluster_info) {
+        return std::vector<std::unique_ptr<RtpPacketToSend>>();
+      };
 };
 
 TEST_F(TaskQueuePacedSenderTest, PacesPackets) {
@@ -111,13 +119,14 @@ TEST_F(TaskQueuePacedSenderTest, PacesPackets) {
   // Expect all of them to be sent.
   size_t packets_sent = 0;
   Timestamp end_time = Timestamp::PlusInfinity();
-  EXPECT_CALL(packet_router_, SendPacket)
+  EXPECT_CALL(packet_router_, SendPacketAndFetchFec)
       .WillRepeatedly([&](std::unique_ptr<RtpPacketToSend> packet,
                           const PacedPacketInfo& cluster_info) {
         ++packets_sent;
         if (packets_sent == kPacketsToSend) {
           end_time = time_controller_.GetClock()->CurrentTime();
         }
+        return std::vector<std::unique_ptr<RtpPacketToSend>>();
       });
 
   const Timestamp start_time = time_controller_.GetClock()->CurrentTime();
@@ -138,7 +147,9 @@ TEST_F(TaskQueuePacedSenderTest, ReschedulesProcessOnRateChange) {
   pacer_.SetPacingRates(kPacingRate, DataRate::Zero());
 
   // Send some initial packets to be rid of any probes.
-  EXPECT_CALL(packet_router_, SendPacket).Times(kPacketsPerSecond);
+  EXPECT_CALL(packet_router_, SendPacketAndFetchFec)
+      .Times(kPacketsPerSecond)
+      .WillRepeatedly(return_empty_packet_list);
   pacer_.EnqueuePackets(
       GeneratePackets(RtpPacketMediaType::kVideo, kPacketsPerSecond));
   time_controller_.AdvanceTime(TimeDelta::Seconds(1));
@@ -150,7 +161,7 @@ TEST_F(TaskQueuePacedSenderTest, ReschedulesProcessOnRateChange) {
   Timestamp second_packet_time = Timestamp::MinusInfinity();
   Timestamp third_packet_time = Timestamp::MinusInfinity();
 
-  EXPECT_CALL(packet_router_, SendPacket)
+  EXPECT_CALL(packet_router_, SendPacketAndFetchFec)
       .Times(3)
       .WillRepeatedly([&](std::unique_ptr<RtpPacketToSend> packet,
                           const PacedPacketInfo& cluster_info) {
@@ -162,6 +173,7 @@ TEST_F(TaskQueuePacedSenderTest, ReschedulesProcessOnRateChange) {
         } else {
           third_packet_time = CurrentTime();
         }
+        return std::vector<std::unique_ptr<RtpPacketToSend>>();
       });
 
   pacer_.EnqueuePackets(GeneratePackets(RtpPacketMediaType::kVideo, 3));
@@ -181,7 +193,8 @@ TEST_F(TaskQueuePacedSenderTest, SendsAudioImmediately) {
   pacer_.SetPacingRates(kPacingDataRate, DataRate::Zero());
 
   // Add some initial video packets, only one should be sent.
-  EXPECT_CALL(packet_router_, SendPacket);
+  EXPECT_CALL(packet_router_, SendPacketAndFetchFec)
+      .WillOnce(return_empty_packet_list);
   pacer_.EnqueuePackets(GeneratePackets(RtpPacketMediaType::kVideo, 10));
   time_controller_.AdvanceTime(TimeDelta::Zero());
   ::testing::Mock::VerifyAndClearExpectations(&packet_router_);
@@ -190,7 +203,8 @@ TEST_F(TaskQueuePacedSenderTest, SendsAudioImmediately) {
   time_controller_.AdvanceTime(kPacketPacingTime / 2);
 
   // Insert an audio packet, it should be sent immediately.
-  EXPECT_CALL(packet_router_, SendPacket);
+  EXPECT_CALL(packet_router_, SendPacketAndFetchFec)
+      .WillOnce(return_empty_packet_list);
   pacer_.EnqueuePackets(GeneratePackets(RtpPacketMediaType::kAudio, 1));
   time_controller_.AdvanceTime(TimeDelta::Zero());
   ::testing::Mock::VerifyAndClearExpectations(&packet_router_);
