@@ -825,6 +825,30 @@
     },
     {
       "key": {
+        "uuid": "f282afe3_db1f054f",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-20T20:59:32Z",
+      "side": 1,
+      "message": "Thanks for your explanation. You are right.  I naively relied on atomicity of plain int variable on usual platform.  Even yet, timestamp unwrap handler had int64_t which will likely have an issue.",
+      "parentUuid": "40ae307d_0083f0e1",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 135,
+        "endChar": 27
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "709d5ffc_e098cd16",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 4
@@ -893,6 +917,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86d600c9_30f27a1f",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-04-20T20:59:32Z",
+      "side": 1,
+      "message": "Thanks, I think you comments led to rethink of locks in this class.\n\nIt does seem to be an overkill to use three locks as two of them won\u0027t see any thread race condition happening (only rarely or in erroneous use case).  It\u0027s only the RemoteRtpTimeEstimator where we want the lock usage between audio and caller thread. \n\nI have reduced the lock into one in updated review.",
+      "parentUuid": "3c50bc52_80698a6c",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 142,
+        "endChar": 61
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
