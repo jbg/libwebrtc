@@ -32,19 +32,23 @@ constexpr int kPacketLogIntervalMs = 10000;
 FlexfecReceiver::FlexfecReceiver(
     uint32_t ssrc,
     uint32_t protected_media_ssrc,
+    bool protect_header_extensions,
     RecoveredPacketReceiver* recovered_packet_receiver)
     : FlexfecReceiver(Clock::GetRealTimeClock(),
                       ssrc,
                       protected_media_ssrc,
+                      protect_header_extensions,
                       recovered_packet_receiver) {}
 
 FlexfecReceiver::FlexfecReceiver(
     Clock* clock,
     uint32_t ssrc,
     uint32_t protected_media_ssrc,
+    bool protect_header_extensions,
     RecoveredPacketReceiver* recovered_packet_receiver)
     : ssrc_(ssrc),
       protected_media_ssrc_(protected_media_ssrc),
+      protect_header_extensions_(protect_header_extensions),
       erasure_code_(
           ForwardErrorCorrection::CreateFlexfec(ssrc, protected_media_ssrc)),
       recovered_packet_receiver_(recovered_packet_receiver),
@@ -53,6 +57,10 @@ FlexfecReceiver::FlexfecReceiver(
   // It's OK to create this object on a different thread/task queue than
   // the one used during main operation.
   sequence_checker_.Detach();
+  if (protect_header_extensions) {
+    RTC_LOG(LS_WARNING)
+        << "FEC protection of header extensions enabled on receive side";
+  }
 }
 
 FlexfecReceiver::~FlexfecReceiver() = default;
@@ -120,12 +128,16 @@ FlexfecReceiver::AddReceivedPacket(const RtpPacketReceived& packet) {
     received_packet->is_fec = false;
 
     // Insert entire packet into erasure code.
-    // Create a copy and fill with zeros all mutable extensions.
     received_packet->pkt = rtc::scoped_refptr<ForwardErrorCorrection::Packet>(
         new ForwardErrorCorrection::Packet());
-    RtpPacketReceived packet_copy(packet);
-    packet_copy.ZeroMutableExtensions();
-    received_packet->pkt->data = packet_copy.Buffer();
+    if (protect_header_extensions_) {
+      received_packet->pkt->data = packet.Buffer();
+    } else {
+      // Create a copy and fill with zeros all mutable extensions.
+      RtpPacketReceived packet_copy(packet);
+      packet_copy.ZeroMutableExtensions();
+      received_packet->pkt->data = packet_copy.Buffer();
+    }
   }
 
   ++packet_counter_.num_packets;

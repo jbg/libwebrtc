@@ -285,6 +285,7 @@ rtc_library("call") {
     "../system_wrappers:field_trial",
     "../system_wrappers:metrics",
     "../video",
+    "//third_party/abseil-cpp/absl/algorithm:container",
     "//third_party/abseil-cpp/absl/types:optional",
   ]
 }
