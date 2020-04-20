@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/algorithm/container.h"
 #include "api/array_view.h"
 #include "api/call/transport.h"
 #include "api/rtp_parameters.h"
@@ -42,7 +43,7 @@ std::string FlexfecReceiveStream::Stats::ToString(int64_t time_ms) const {
 }
 
 std::string FlexfecReceiveStream::Config::ToString() const {
-  char buf[1024];
+  char buf[2048];
   rtc::SimpleStringBuilder ss(buf);
   ss << "{payload_type: " << payload_type;
   ss << ", remote_ssrc: " << remote_ssrc;
@@ -79,6 +80,14 @@ bool FlexfecReceiveStream::Config::IsCompleteAndEnabled() const {
 
 namespace {
 
+bool DeferredFecExtensionConfigured(
+    const FlexfecReceiveStream::Config& config) {
+  return absl::c_any_of(
+      config.rtp_header_extensions, [](const RtpExtension& ext) {
+        return ext.uri == RtpExtension::kFecProtectExtensionHeaders;
+      });
+}
+
 // TODO(brandtr): Update this function when we support multistream protection.
 std::unique_ptr<FlexfecReceiver> MaybeCreateFlexfecReceiver(
     Clock* clock,
@@ -113,10 +122,15 @@ std::unique_ptr<FlexfecReceiver> MaybeCreateFlexfecReceiver(
            "To avoid confusion, disabling FlexFEC completely.";
     return nullptr;
   }
+  bool protect_header_extensions = DeferredFecExtensionConfigured(config);
+  if (protect_header_extensions) {
+    RTC_LOG(LS_WARNING)
+        << "Protection of header extensions negotiated on receive side.";
+  }
   RTC_DCHECK_EQ(1U, config.protected_media_ssrcs.size());
   return std::unique_ptr<FlexfecReceiver>(new FlexfecReceiver(
       clock, config.remote_ssrc, config.protected_media_ssrcs[0],
-      recovered_packet_receiver));
+      protect_header_extensions, recovered_packet_receiver));
 }
 
 std::unique_ptr<RtpRtcp> CreateRtpRtcpModule(

@@ -28,9 +28,9 @@ namespace webrtc {
 
 class UlpfecReceiverImpl : public UlpfecReceiver {
  public:
-  explicit UlpfecReceiverImpl(uint32_t ssrc,
-                              RecoveredPacketReceiver* callback,
-                              rtc::ArrayView<const RtpExtension> extensions);
+  UlpfecReceiverImpl(uint32_t ssrc,
+                     RecoveredPacketReceiver* callback,
+                     rtc::ArrayView<const RtpExtension> extensions);
   ~UlpfecReceiverImpl() override;
 
   bool AddReceivedRedPacket(const RtpPacketReceived& rtp_packet,
@@ -43,6 +43,7 @@ class UlpfecReceiverImpl : public UlpfecReceiver {
  private:
   const uint32_t ssrc_;
   const RtpHeaderExtensionMap extensions_;
+  const bool protect_header_extensions_;
 
   rtc::CriticalSection crit_sect_;
   RecoveredPacketReceiver* recovered_packet_callback_;

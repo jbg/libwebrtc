@@ -13,12 +13,21 @@
 #include <memory>
 #include <utility>
 
+#include "absl/algorithm/container.h"
 #include "api/scoped_refptr.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/time_utils.h"
 
 namespace webrtc {
+namespace {
+bool DeferredFecExtensionConfigured(
+    rtc::ArrayView<const RtpExtension> extensions) {
+  return absl::c_any_of(extensions, [](const RtpExtension& ext) {
+    return ext.uri == RtpExtension::kFecProtectExtensionHeaders;
+  });
+}
+}  // namespace
 
 std::unique_ptr<UlpfecReceiver> UlpfecReceiver::Create(
     uint32_t ssrc,
@@ -33,8 +42,14 @@ UlpfecReceiverImpl::UlpfecReceiverImpl(
     rtc::ArrayView<const RtpExtension> extensions)
     : ssrc_(ssrc),
       extensions_(extensions),
+      protect_header_extensions_(DeferredFecExtensionConfigured(extensions)),
       recovered_packet_callback_(callback),
-      fec_(ForwardErrorCorrection::CreateUlpfec(ssrc_)) {}
+      fec_(ForwardErrorCorrection::CreateUlpfec(ssrc_)) {
+  if (protect_header_extensions_) {
+    RTC_LOG(LS_WARNING)
+        << "FEC protection of header extensions negotiated on receive side.";
+  }
+}
 
 UlpfecReceiverImpl::~UlpfecReceiverImpl() {
   received_packets_.clear();
@@ -181,7 +196,9 @@ int32_t UlpfecReceiverImpl::ProcessReceivedFec() {
         // Reset buffer reference, so zeroing would work on a buffer with a
         // single reference.
         packet->data = rtc::CopyOnWriteBuffer(0);
-        rtp_packet.ZeroMutableExtensions();
+        if (!protect_header_extensions_) {
+          rtp_packet.ZeroMutableExtensions();
+        }
         packet->data = rtp_packet.Buffer();
         // Ensure that zeroing of extensions was done in place.
         RTC_DCHECK_EQ(packet->data.cdata(), original_data);
