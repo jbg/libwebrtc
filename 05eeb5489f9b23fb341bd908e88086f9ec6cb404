@@ -801,6 +801,30 @@
     },
     {
       "key": {
+        "uuid": "40ae307d_0083f0e1",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-20T14:11:22Z",
+      "side": 1,
+      "message": "Sorry, I mixed up the comments here, and on line 138 since they are a bit similar, and I kind of had the same comments about that.\n\nThe part \" typically accessed by a single thread, that still means that protection of the variable is needed.\" refers to the code at 138.\n\nHowever, this comment explicitly states that \"However, it has no side effect even with multiple threads entering GetAudioFrameWithInfo.\"\nI don\u0027t think that is correct since this variable then is not properly protected.\n\nI.e., what I mean is that the comment states that the variable could be accessed concurrently be several threads, but from what I can see in the code that is not correct.",
+      "parentUuid": "e0d43e73_a89be067",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 135,
+        "endChar": 27
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "709d5ffc_e098cd16",
         "filename": "audio/voip/audio_ingress.h",
         "patchSetId": 4
@@ -845,6 +869,30 @@
       "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c50bc52_80698a6c",
+        "filename": "audio/voip/audio_ingress.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-20T14:11:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure of the right solution here. It kind of depends on how the class will be used.\n\nHaving 3 locks in one class seems not at all right, but that fully depends on how this class is to be used.",
+      "parentUuid": "8435f428_896fc5bb",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 142,
+        "endChar": 61
+      },
+      "revId": "05eeb5489f9b23fb341bd908e88086f9ec6cb404",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
