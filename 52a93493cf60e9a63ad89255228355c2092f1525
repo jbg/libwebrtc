@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b739e15_243ff20e",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2020-04-21T22:26:59Z",
+      "side": 1,
+      "message": "Could this be just \n\nreturn sum_header_sizes_ / header_sizes_.size();\n\n?",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 79
+      },
+      "revId": "52a93493cf60e9a63ad89255228355c2092f1525",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

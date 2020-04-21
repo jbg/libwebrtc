@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "619d0c7e_bd445915",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2020-04-21T22:26:59Z",
+      "side": 0,
+      "message": "My reading of the code is that with the callback implementation, every time an overhead change is detected, we end up calling ConfigureBitrateObserver() (via UpdateOverheadForEncoder()). This in turn calls bitrate_allocator_-\u003eAddObserver(...) which updates the bitrate allocation and calls OnBitrateUpdated().\n\nWith the proposed change, we only poll the overhead when OnBitrateUpdated is called. So if overhead changes, bitrate is not necessarily reallocated. This seems like a big change to me. Is this desired/intentional?",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 539,
+        "endChar": 1
+      },
+      "revId": "efdff53176d621ca075f9e9547b248752ff414f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
