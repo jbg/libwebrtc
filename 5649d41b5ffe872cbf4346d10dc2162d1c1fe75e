@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5475a54e_1ac71a25",
+        "filename": "audio/voip/audio_ingress.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-21T09:37:46Z",
+      "side": 1,
+      "message": "Would it be possible to do this after line 97? In that way, the lock would only need to be acquired once.\n\n(From what I see it should be possible since neither audio_frame-\u003entp_time_ms_,  ntp_estimator_ or audio_frame-\u003etimestamp_ are modified between lines 97 and 109.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 5
+      },
+      "revId": "5649d41b5ffe872cbf4346d10dc2162d1c1fe75e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
