@@ -46,6 +46,30 @@
       "revId": "efdff53176d621ca075f9e9547b248752ff414f9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9be0c974_8e519042",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-22T09:58:02Z",
+      "side": 0,
+      "message": "Actually, header extensions are set in AudioSendStream::ConfigureStream(), and that already\ncalls AudioSendStream::ReconfigureSendCodec() which tries to update the overhead. All that I needed was another poll call to the RTP module.",
+      "parentUuid": "c9536349_4850c95e",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 539,
+        "endChar": 1
+      },
+      "revId": "efdff53176d621ca075f9e9547b248752ff414f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
