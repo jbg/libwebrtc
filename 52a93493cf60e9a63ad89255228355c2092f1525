@@ -22,6 +22,30 @@
       "revId": "52a93493cf60e9a63ad89255228355c2092f1525",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1de555bf_5319ba2f",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-22T08:07:37Z",
+      "side": 1,
+      "message": "No, maybe I should rephrase it to make the issue more obvious such as\n  return header_sizes_.empty() ? 0 : sum_header_sizes_ / header_sizes_.size();",
+      "parentUuid": "2b739e15_243ff20e",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 79
+      },
+      "revId": "52a93493cf60e9a63ad89255228355c2092f1525",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
