@@ -71,7 +71,6 @@ RtpSenderEgress::RtpSenderEgress(const RtpRtcp::Configuration& config,
       transport_feedback_observer_(config.transport_feedback_callback),
       send_side_delay_observer_(config.send_side_delay_observer),
       send_packet_observer_(config.send_packet_observer),
-      overhead_observer_(config.overhead_observer),
       rtp_stats_callback_(config.rtp_stats_callback),
       bitrate_callback_(config.send_bitrate_observer),
       media_has_been_sent_(false),
@@ -80,10 +79,10 @@ RtpSenderEgress::RtpSenderEgress(const RtpRtcp::Configuration& config,
       max_delay_it_(send_delays_.end()),
       sum_delays_ms_(0),
       total_packet_send_delay_ms_(0),
-      rtp_overhead_bytes_per_packet_(0),
       total_bitrate_sent_(kBitrateStatisticsWindowMs,
                           RateStatistics::kBpsScale),
       nack_bitrate_sent_(kBitrateStatisticsWindowMs, RateStatistics::kBpsScale),
+      sum_header_sizes_(0),
       rtp_sequence_number_map_(need_rtp_packet_infos_
                                    ? std::make_unique<RtpSequenceNumberMap>(
                                          kRtpSequenceNumberMapMaxEntries)
@@ -274,6 +273,11 @@ std::vector<RtpSequenceNumberMap::Info> RtpSenderEgress::GetSentRtpPacketInfos(
   return results;
 }
 
+size_t RtpSenderEgress::GetPerPacketOverhead() const {
+  rtc::CritScope cs(&lock_);
+  return header_sizes_.empty() ? 0 : sum_header_sizes_ / header_sizes_.size();
+}
+
 bool RtpSenderEgress::HasCorrectSsrc(const RtpPacketToSend& packet) const {
   switch (*packet.packet_type()) {
     case RtpPacketMediaType::kAudio:
@@ -412,7 +416,7 @@ bool RtpSenderEgress::SendPacketToNetwork(const RtpPacketToSend& packet,
                                           const PacedPacketInfo& pacing_info) {
   int bytes_sent = -1;
   if (transport_) {
-    UpdateRtpOverhead(packet);
+    size_t header_size = packet.headers_size();
     bytes_sent = transport_->SendRtp(packet.data(), packet.size(), options)
                      ? static_cast<int>(packet.size())
                      : -1;
@@ -420,6 +424,7 @@ bool RtpSenderEgress::SendPacketToNetwork(const RtpPacketToSend& packet,
       event_log_->Log(std::make_unique<RtcEventRtpPacketOutgoing>(
           packet, pacing_info.probe_cluster_id));
     }
+    UpdateRtpOverhead(header_size);
   }
 
   if (bytes_sent <= 0) {
@@ -429,19 +434,14 @@ bool RtpSenderEgress::SendPacketToNetwork(const RtpPacketToSend& packet,
   return true;
 }
 
-void RtpSenderEgress::UpdateRtpOverhead(const RtpPacketToSend& packet) {
-  if (!overhead_observer_)
-    return;
-  size_t overhead_bytes_per_packet;
-  {
-    rtc::CritScope lock(&lock_);
-    if (rtp_overhead_bytes_per_packet_ == packet.headers_size()) {
-      return;
-    }
-    rtp_overhead_bytes_per_packet_ = packet.headers_size();
-    overhead_bytes_per_packet = rtp_overhead_bytes_per_packet_;
+void RtpSenderEgress::UpdateRtpOverhead(size_t header_size_bytes) {
+  rtc::CritScope lock(&lock_);
+  if (header_sizes_.size() >= kMaxHeaderSizeHistory) {
+    sum_header_sizes_ -= header_sizes_.front();
+    header_sizes_.pop_front();
   }
-  overhead_observer_->OnOverheadChanged(overhead_bytes_per_packet);
+  header_sizes_.push_back(header_size_bytes);
+  sum_header_sizes_ += header_size_bytes;
 }
 
 void RtpSenderEgress::UpdateRtpStats(const RtpPacketToSend& packet) {

@@ -11,6 +11,7 @@
 #ifndef MODULES_RTP_RTCP_SOURCE_RTP_SENDER_EGRESS_H_
 #define MODULES_RTP_RTCP_SOURCE_RTP_SENDER_EGRESS_H_
 
+#include <deque>
 #include <map>
 #include <memory>
 #include <vector>
@@ -32,6 +33,10 @@ namespace webrtc {
 
 class RtpSenderEgress {
  public:
+  // Per packet overhead (head size) is calculated as an averaging sliding
+  // window over the past |kMaxHeaderSizeHistory| packets.
+  static constexpr size_t kMaxHeaderSizeHistory = 16;
+
   // Helper class that redirects packets directly to the send part of this class
   // without passing through an actual paced sender.
   class NonPacedPacketSender : public RtpPacketSender {
@@ -75,6 +80,8 @@ class RtpSenderEgress {
   std::vector<RtpSequenceNumberMap::Info> GetSentRtpPacketInfos(
       rtc::ArrayView<const uint16_t> sequence_numbers) const;
 
+  size_t GetPerPacketOverhead() const;
+
  private:
   // Maps capture time in milliseconds to send-side delay in milliseconds.
   // Send-side delay is the difference between transmission time and capture
@@ -96,7 +103,7 @@ class RtpSenderEgress {
   bool SendPacketToNetwork(const RtpPacketToSend& packet,
                            const PacketOptions& options,
                            const PacedPacketInfo& pacing_info);
-  void UpdateRtpOverhead(const RtpPacketToSend& packet);
+  void UpdateRtpOverhead(size_t header_size_bytes);
   void UpdateRtpStats(const RtpPacketToSend& packet)
       RTC_EXCLUSIVE_LOCKS_REQUIRED(lock_);
 
@@ -115,7 +122,6 @@ class RtpSenderEgress {
   TransportFeedbackObserver* const transport_feedback_observer_;
   SendSideDelayObserver* const send_side_delay_observer_;
   SendPacketObserver* const send_packet_observer_;
-  OverheadObserver* const overhead_observer_;
   StreamDataCountersCallback* const rtp_stats_callback_;
   BitrateStatisticsObserver* const bitrate_callback_;
 
@@ -129,11 +135,15 @@ class RtpSenderEgress {
   // The sum of delays over a kSendSideDelayWindowMs sliding window.
   int64_t sum_delays_ms_ RTC_GUARDED_BY(lock_);
   uint64_t total_packet_send_delay_ms_ RTC_GUARDED_BY(lock_);
-  size_t rtp_overhead_bytes_per_packet_ RTC_GUARDED_BY(lock_);
   StreamDataCounters rtp_stats_ RTC_GUARDED_BY(lock_);
   StreamDataCounters rtx_rtp_stats_ RTC_GUARDED_BY(lock_);
   RateStatistics total_bitrate_sent_ RTC_GUARDED_BY(lock_);
   RateStatistics nack_bitrate_sent_ RTC_GUARDED_BY(lock_);
+  // Ring buffer containing header sizes for up to thast last
+  // |kMaxHeaderSizeHistory| packets sent.
+  std::deque<size_t> header_sizes_ RTC_GUARDED_BY(lock_);
+  // Sum of the elements in |header_sizes_|.
+  size_t sum_header_sizes_ RTC_GUARDED_BY(lock_);
 
   // Maps sent packets' sequence numbers to a tuple consisting of:
   // 1. The timestamp, without the randomizing offset mandated by the RFC.
