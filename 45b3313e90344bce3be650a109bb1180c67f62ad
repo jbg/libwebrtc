@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c37867a_54ada71c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-04-23T21:07:56Z",
+      "side": 1,
+      "message": "Can you add a README file that gives the URL you are fetching the roots.pem file from and the command line to generate the ssl_roots.h file from it?\n\nIt\u0027s much easier to spot if instructions are right or wrong if they\u0027re written down :-)",
+      "revId": "45b3313e90344bce3be650a109bb1180c67f62ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
