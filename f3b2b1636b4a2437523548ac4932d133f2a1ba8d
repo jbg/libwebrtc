@@ -104,6 +104,24 @@
       "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0da367bc_e94b38fd",
+        "filename": "webrtc.gni",
+        "patchSetId": 41
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-04-23T10:29:13Z",
+      "side": 1,
+      "message": "I also like the idea of using \"exclude\" since this highlights the fact that we are changing the default.",
+      "parentUuid": "187cf31c_3200add0",
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
