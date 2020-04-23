@@ -28,6 +28,7 @@
 #include "test/pc/e2e/analyzer/video/single_process_encoded_image_data_injector.h"
 #include "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.h"
 #include "test/pc/e2e/analyzer_helper.h"
+#include "test/pc/e2e/media/media_dump_manager.h"
 #include "test/pc/e2e/media/media_helper.h"
 #include "test/pc/e2e/peer_configurer.h"
 #include "test/pc/e2e/peer_connection_quality_test_params.h"
@@ -100,6 +101,7 @@ class PeerConnectionE2EQualityTest
   Clock* const clock_;
   const std::unique_ptr<TaskQueueFactory> task_queue_factory_;
   std::string test_case_name_;
+  std::unique_ptr<MediaDumpManager> media_dump_manager_;
   std::unique_ptr<VideoQualityAnalyzerInjectionHelper>
       video_quality_analyzer_injection_helper_;
   std::unique_ptr<MediaHelper> media_helper_;

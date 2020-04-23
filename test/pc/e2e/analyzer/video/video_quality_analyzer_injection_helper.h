@@ -22,8 +22,10 @@
 #include "api/video/video_sink_interface.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_factory.h"
+#include "rtc_base/critical_section.h"
 #include "test/pc/e2e/analyzer/video/encoded_image_data_injector.h"
 #include "test/pc/e2e/analyzer/video/id_generator.h"
+#include "test/pc/e2e/media/media_dump_manager.h"
 #include "test/test_video_capturer.h"
 #include "test/testsupport/video_frame_writer.h"
 
@@ -39,7 +41,8 @@ class VideoQualityAnalyzerInjectionHelper : public StatsObserverInterface {
   VideoQualityAnalyzerInjectionHelper(
       std::unique_ptr<VideoQualityAnalyzerInterface> analyzer,
       EncodedImageDataInjector* injector,
-      EncodedImageDataExtractor* extractor);
+      EncodedImageDataExtractor* extractor,
+      MediaDumpManager* media_dump_manager);
   ~VideoQualityAnalyzerInjectionHelper() override;
 
   // Wraps video encoder factory to give video quality analyzer access to frames
@@ -59,13 +62,14 @@ class VideoQualityAnalyzerInjectionHelper : public StatsObserverInterface {
   // captured frames with provided writer.
   std::unique_ptr<test::TestVideoCapturer::FramePreprocessor>
   CreateFramePreprocessor(const VideoConfig& config,
-                          test::VideoFrameWriter* writer) const;
+                          test::VideoFrameWriter* writer);
   // Creates sink, that will allow video quality analyzer to get access to
   // the rendered frames. If |writer| in not nullptr, will dump rendered
   // frames with provided writer.
   std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>> CreateVideoSink(
       const VideoConfig& config,
-      test::VideoFrameWriter* writer) const;
+      test::VideoFrameWriter* writer);
+  std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>> CreateVideoSink();
 
   void Start(std::string test_case_name, int max_threads_count);
 
@@ -78,9 +82,32 @@ class VideoQualityAnalyzerInjectionHelper : public StatsObserverInterface {
   void Stop();
 
  private:
+  class AnalyzingVideoSink final : public rtc::VideoSinkInterface<VideoFrame> {
+   public:
+    explicit AnalyzingVideoSink(VideoQualityAnalyzerInjectionHelper* helper)
+        : helper_(helper) {}
+    ~AnalyzingVideoSink() override = default;
+
+    void OnFrame(const VideoFrame& frame) override { helper_->OnFrame(frame); }
+
+   private:
+    VideoQualityAnalyzerInjectionHelper* const helper_;
+  };
+
+  void OnFrame(const VideoFrame& frame);
+  std::vector<std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>>* GetSinks(
+      const std::string& stream_label);
+
   std::unique_ptr<VideoQualityAnalyzerInterface> analyzer_;
   EncodedImageDataInjector* injector_;
   EncodedImageDataExtractor* extractor_;
+  MediaDumpManager* const media_dump_manager_;
+
+  rtc::CriticalSection lock_;
+  std::map<std::string, VideoConfig> known_video_configs_ RTC_GUARDED_BY(lock_);
+  std::map<std::string,
+           std::vector<std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>>>
+      sinks_ RTC_GUARDED_BY(lock_);
 
   std::unique_ptr<IdGenerator<int>> encoding_entities_id_generator_;
 };
