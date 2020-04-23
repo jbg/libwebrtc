@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "475de80f_1fb62d68",
+        "filename": "modules/audio_processing/audio_processing_builder_impl.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-23T11:00:16Z",
+      "side": 1,
+      "message": "It implicitly does since it calls the AudioProcessingBuilder::Create(const webrtc::Config\u0026 config) method, which in turn reacts on that build flag.",
+      "parentUuid": "dd577868_90cb3e64",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2a6ba786_01554c1c",
         "filename": "pc/peer_connection_integrationtest.cc",
         "patchSetId": 41
