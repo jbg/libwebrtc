@@ -115,10 +115,11 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
   }
   encoded_image_id_controller_ =
       std::make_unique<SingleProcessEncodedImageDataInjector>();
+  media_dump_manager_ = std::make_unique<MediaDumpManager>();
   video_quality_analyzer_injection_helper_ =
       std::make_unique<VideoQualityAnalyzerInjectionHelper>(
           std::move(video_quality_analyzer), encoded_image_id_controller_.get(),
-          encoded_image_id_controller_.get());
+          encoded_image_id_controller_.get(), media_dump_manager_.get());
 
   if (audio_quality_analyzer == nullptr) {
     audio_quality_analyzer = std::make_unique<DefaultAudioQualityAnalyzer>();
@@ -194,7 +195,7 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   signaling_thread->SetName(kSignalThreadName, nullptr);
   signaling_thread->Start();
   media_helper_ = std::make_unique<MediaHelper>(
-      video_quality_analyzer_injection_helper_.get(),
+      media_dump_manager_.get(), video_quality_analyzer_injection_helper_.get(),
       task_queue_factory_.get());
 
   // Create a |task_queue_|.
@@ -386,22 +387,11 @@ void PeerConnectionE2EQualityTest::OnTrackCallback(
     return;
   }
 
-  VideoConfig* video_config = nullptr;
-  for (auto& config : remote_video_configs) {
-    if (config.stream_label == stream_label) {
-      video_config = &config;
-      break;
-    }
-  }
-  RTC_CHECK(video_config);
-  test::VideoFrameWriter* writer = media_helper_->MaybeCreateVideoWriter(
-      video_config->output_dump_file_name, *video_config);
   // It is safe to cast here, because it is checked above that
   // track->kind() is kVideoKind.
   auto* video_track = static_cast<VideoTrackInterface*>(track.get());
   std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>> video_sink =
-      video_quality_analyzer_injection_helper_->CreateVideoSink(*video_config,
-                                                                writer);
+      video_quality_analyzer_injection_helper_->CreateVideoSink();
   video_track->AddOrUpdateSink(video_sink.get(), rtc::VideoSinkWants());
   output_video_sinks_.push_back(std::move(video_sink));
 }

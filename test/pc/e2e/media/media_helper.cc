@@ -9,10 +9,12 @@
  */
 #include "test/pc/e2e/media/media_helper.h"
 
+#include <string>
 #include <utility>
 
 #include "api/test/create_frame_generator.h"
 #include "test/frame_generator_capturer.h"
+#include "test/pc/e2e/media/media_dump_manager.h"
 #include "test/platform_video_capturer.h"
 #include "test/testsupport/file_utils.h"
 
@@ -28,13 +30,6 @@ using VideoGeneratorType = ::webrtc::webrtc_pc_e2e::
     PeerConnectionE2EQualityTestFixture::VideoGeneratorType;
 
 }  // namespace
-
-MediaHelper::~MediaHelper() {
-  for (const auto& video_writer : video_writers_) {
-    video_writer->Close();
-  }
-  video_writers_.clear();
-}
 
 void MediaHelper::MaybeAddAudio(TestPeer* peer) {
   if (!peer->params()->audio_config) {
@@ -60,7 +55,8 @@ MediaHelper::MaybeAddVideo(TestPeer* peer) {
     auto video_config = params->video_configs[i];
     // Setup input video source into peer connection.
     test::VideoFrameWriter* writer =
-        MaybeCreateVideoWriter(video_config.input_dump_file_name, video_config);
+        media_dump_manager_->MaybeCreateVideoWriter(
+            video_config.input_dump_file_name, video_config);
     std::unique_ptr<test::TestVideoCapturer> capturer = CreateVideoCapturer(
         video_config, peer->ReleaseVideoGenerator(i),
         video_quality_analyzer_injection_helper_->CreateFramePreprocessor(
@@ -96,22 +92,6 @@ MediaHelper::MaybeAddVideo(TestPeer* peer) {
       RTC_CHECK(res.ok()) << "Failed to set RTP parameters";
     }
   }
-  return out;
-}
-
-test::VideoFrameWriter* MediaHelper::MaybeCreateVideoWriter(
-    absl::optional<std::string> file_name,
-    const VideoConfig& config) {
-  if (!file_name) {
-    return nullptr;
-  }
-  // TODO(titovartem) create only one file writer for simulcast video track.
-  // For now this code will be invoked for each simulcast stream separately, but
-  // only one file will be used.
-  auto video_writer = std::make_unique<test::Y4mVideoFrameWriterImpl>(
-      file_name.value(), config.width, config.height, config.fps);
-  test::VideoFrameWriter* out = video_writer.get();
-  video_writers_.push_back(std::move(video_writer));
   return out;
 }
 
