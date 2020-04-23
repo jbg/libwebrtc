@@ -70,6 +70,30 @@
       "revId": "efdff53176d621ca075f9e9547b248752ff414f9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9414495_d33fa261",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2020-04-23T11:54:49Z",
+      "side": 0,
+      "message": "I\u0027m not sure polling for the overhead size right after header extensions have been set in AudioSendStream::ConfigureStream() will give you the new size. Doesn\u0027t a new packet need to be sent first containing the header extensions before the overhead size in RtpSenderEgress is updated? And ReconfigureSendCodec() returns early if certain parts of the new config hasn\u0027t been changed, so I don\u0027t think it will always get to update the overhead if only the headers have changed.\n\nI also looked at the bitrate allocator. From my understanding, AudioSendStream::OnBitrateUpdated() is called by the bitrate allocator only when the target bitrate is changed or if AudioSendStream calls bitrate allocator\u0027s AddObserver().\n\nIn other words, I don\u0027t see how we can be sure that the overhead size does get updated by polling from AudioSendStream, at least not just from reading the code.",
+      "parentUuid": "9be0c974_8e519042",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 539,
+        "endChar": 1
+      },
+      "revId": "efdff53176d621ca075f9e9547b248752ff414f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
