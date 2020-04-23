@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "edf192a8_550b422b",
+        "filename": "media/engine/webrtc_voice_engine_unittest.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-23T10:15:19Z",
+      "side": 1,
+      "message": "Yes, my first approach was to do this here as well.\n\nHowever, since this is a fixture TEST_F, that failed with the simple loop approach. The problem was that the initial setup at the test-setup time should be different if a null APM should be used or not.\n\nI think that one maybe can workaround that even with the fixture approach by tweaking the setup procedure (it is definitely possible to do it without the fixture-approach) but I did not want to change the existing test-code too much.\n\nWDYT? Does that make sense? If not, what is best to do?: Move to non-fixture tests or try to tweak the setup process to work with this?",
+      "parentUuid": "8e3c40c6_46201b85",
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2a6ba786_01554c1c",
         "filename": "pc/peer_connection_integrationtest.cc",
         "patchSetId": 41
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0a8558e9_5ca32322",
+        "filename": "pc/peer_connection_integrationtest.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-23T10:15:19Z",
+      "side": 1,
+      "message": "It could. However, I\u0027m slightly concerned that that would reduce the test coverage/value of the test for the case where APM is actually not forced to not be built. \n\nThe media_deps.audio_processing field is populated by the\nwebrtc::SetMediaEngineDefaults method in\nthird_party/webrtc/media/engine/webrtc_media_engine_defaults.h\n\nFrom what I can see, it is only used for testing, so a variant could be to move this conditional into that. However, there is nothing stating the the method must only be used for tests, so my concern with that approach is therefore that it may at some point be used for non-tests, which in turn would cause AudioProcessingBuilderForTesting to be used for production (non-test) code, and thereby sneak in a the APM binary code regardless of the build flag.\n\nMy concern with using AudioProcessingBuilderForTesting() regardless of whether media_deps.audio_processing is already assigned is that it would remove the test coverage of the corresponding functionality in webrtc::SetMediaEngineDefaults.\nThis is not that nice, since that is the normal way that audio_processing would be created (since the build flag for this is default off).\n\nWDYT?",
+      "parentUuid": "2a6ba786_01554c1c",
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b2fb5e5d_ac035889",
         "filename": "webrtc.gni",
         "patchSetId": 41
@@ -47,6 +83,24 @@
       "writtenOn": "2020-04-23T09:25:37Z",
       "side": 1,
       "message": "Call it \"rtc_include_audio_processing_module\" instead, to avoid double negatives?",
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "187cf31c_3200add0",
+        "filename": "webrtc.gni",
+        "patchSetId": 41
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-23T10:15:19Z",
+      "side": 1,
+      "message": "I agree that that could make sense.\nThis does partly follow the pattern elsewhere in this file\nE.g., \nrtc_exclude_transient_suppressor \u003d false\nrtc_exclude_metrics_default \u003d build_with_chromium\nrtc_exclude_field_trial_default \u003d false\n\nbut there are also several examples of the oppsite \ne.g., \nrtc_include_builtin_audio_codecs \u003d true\n\n\nI personally is like the \"exclude\" term, since it kind of states what the deliberate action with this is and what the default behavior is that most users want: the intention is not to explicitly choose to include it, but rather to explicitly choose to exclude it.\n\nAnother aspect of keeping the \"exclude\" term is that it for APM we now already have added \"rtc_exclude_transient_suppressor\" and it would be nice to follow that pattern.\n\nWDYT?",
+      "parentUuid": "b2fb5e5d_ac035889",
       "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
