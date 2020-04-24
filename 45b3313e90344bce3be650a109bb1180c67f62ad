@@ -16,6 +16,24 @@
       "revId": "45b3313e90344bce3be650a109bb1180c67f62ad",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f97461b1_40621a6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-04-24T19:31:50Z",
+      "side": 1,
+      "message": "I will add this to https://webrtc-review.googlesource.com/c/src/+/173800 (which also changes the script).",
+      "parentUuid": "7c37867a_54ada71c",
+      "revId": "45b3313e90344bce3be650a109bb1180c67f62ad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
