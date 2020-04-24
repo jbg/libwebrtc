@@ -2,6 +2,167 @@
   "comments": [
     {
       "key": {
+        "uuid": "2bb3544e_3631e187",
+        "filename": "audio/audio_receive_stream_unittest.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "All of these can be parameterized, but perhaps it is not worth it for such a small set of configurations.",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 56
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dec517a9_ba3013d2",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "I think ASSERT_* is easier on the test framework.",
+      "range": {
+        "startLine": 313,
+        "startChar": 4,
+        "endLine": 313,
+        "endChar": 14
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d89d11d4_03c88877",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "Do we have test coverage of send_stream-\u003eGetStats() with nullptr APM?\n\nWDYT about having this test loop over use_null_audio_processing like the rest, and only EXPECT on the apm_statistics values if !use_null_audio_processing?",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 42
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f91d6c1_a6c8f12d",
+        "filename": "audio/audio_send_stream_unittest.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "Same question",
+      "range": {
+        "startLine": 462,
+        "startChar": 1,
+        "endLine": 465,
+        "endChar": 42
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62c444fb_75441b1f",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "This can also be moved below the if (!ap) check, right?",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 0
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5e1c775_cd65f608",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "Consider logging at LS_INFO if (!ap), similar to the verbosity of the rest of the code",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 3
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d47d30cc_08db16c7",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "Since invocation of these functions most likely originates in client-level API calls, WDYT about logging a warning that the functionality is disabled?",
+      "range": {
+        "startLine": 573,
+        "startChar": 1,
+        "endLine": 601,
+        "endChar": 0
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e3c40c6_46201b85",
         "filename": "media/engine/webrtc_voice_engine_unittest.cc",
         "patchSetId": 41
@@ -31,6 +192,52 @@
       "side": 1,
       "message": "Yes, my first approach was to do this here as well.\n\nHowever, since this is a fixture TEST_F, that failed with the simple loop approach. The problem was that the initial setup at the test-setup time should be different if a null APM should be used or not.\n\nI think that one maybe can workaround that even with the fixture approach by tweaking the setup procedure (it is definitely possible to do it without the fixture-approach) but I did not want to change the existing test-code too much.\n\nWDYT? Does that make sense? If not, what is best to do?: Move to non-fixture tests or try to tweak the setup process to work with this?",
       "parentUuid": "8e3c40c6_46201b85",
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c456c74_f464669e",
+        "filename": "media/engine/webrtc_voice_engine_unittest.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "You can signal that this is unused by omitting the parameter name.\n\nWebRtcVoiceEngineTestFake(const char* field_trials, bool)",
+      "range": {
+        "startLine": 194,
+        "startChar": 59,
+        "endLine": 194,
+        "endChar": 65
+      },
+      "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50399aa4_34335bb5",
+        "filename": "media/engine/webrtc_voice_engine_unittest.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-04-24T12:05:06Z",
+      "side": 1,
+      "message": "What do you think about taking and storing a \"use_null_audio_processing\" parameter, and place all related EXPECT calls behind a check `if (ues_null_audio_processing)`? Is there anything stopping us from doing this? Or does it make WebRtcVoiceEngineTestFake too hard to read?\n\n\nIt appears that there is _some_ support for parameterizing a test fixture.\nhttps://stackoverflow.com/questions/3152326/google-test-parameterized-tests-which-use-an-existing-test-fixture-class",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 0
+      },
       "revId": "f3b2b1636b4a2437523548ac4932d133f2a1ba8d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
