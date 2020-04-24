@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27a90cf9_4f2ae3c0",
+        "filename": "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-04-24T08:16:50Z",
+      "side": 1,
+      "message": "Is this version deprecated in favor of the next one?",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 1
+      },
+      "revId": "de80bceab059410ae3d137089200ba6894ee5903",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "855a773e_2d0277b1",
+        "filename": "test/pc/e2e/analyzer/video/video_quality_analyzer_injection_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-04-24T08:16:50Z",
+      "side": 1,
+      "message": "Can this be `const`?",
+      "range": {
+        "startLine": 72,
+        "startChar": 72,
+        "endLine": 72,
+        "endChar": 73
+      },
+      "revId": "de80bceab059410ae3d137089200ba6894ee5903",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "986167a4_05e6e0d8",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-04-24T08:16:50Z",
+      "side": 1,
+      "message": "This invalidates/destroys test::VideoFrameWriter* returned by MediaDumpManager::MaybeCreateVideoWriter.\n\nIn this case, we have already destroyed the owning MediaHelper class so this should be safe but maybe we can do this in the MediaHelper dtor (less coupling, we will not forget in the future is we move the code around).\n\nAnother question, the test::VideoFrameWriter* returned by MediaDumpManager::MaybeCreateVideoWriter gets passed down into other data members, are we sure they are already out of scope?",
+      "range": {
+        "startLine": 637,
+        "startChar": 2,
+        "endLine": 637,
+        "endChar": 38
+      },
+      "revId": "de80bceab059410ae3d137089200ba6894ee5903",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
