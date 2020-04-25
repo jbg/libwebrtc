@@ -94,6 +94,30 @@
       "revId": "efdff53176d621ca075f9e9547b248752ff414f9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3583f903_395f8923",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-04-25T13:39:48Z",
+      "side": 0,
+      "message": "Good points.\nI\u0027ve updated the RTP module to support pre-determining the overhead based on the header extensions actually registered. This way we can hopefully actually avoid on reconfiguration\nsince we shouldn\u0027t need to do it again after the first packet. The only case where the overhead could changed dynamically is if mid/rid is set and they are not sent on every packet. Just to guard against this I added a refresh on RTCP messages, since that is what triggers the condition that stops sending them. This should also mean we get regular updates.\n\nI further move the update out to ConfigureStream() since I had a hard time following in which cases we would return early in an undesirable way.\n\nAs a side bonus, RtpSender now just returns a plain value when checking the overhead for video/fec, instead of looping over all extensions (possibly for every sent packet).",
+      "parentUuid": "b9414495_d33fa261",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 539,
+        "endChar": 1
+      },
+      "revId": "efdff53176d621ca075f9e9547b248752ff414f9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
