@@ -27,7 +27,6 @@ rtc_library("agc") {
     "../../../common_audio",
     "../../../common_audio:common_audio_c",
     "../../../rtc_base:checks",
-    "../../../rtc_base:gtest_prod",
     "../../../rtc_base:logging",
     "../../../rtc_base:macromagic",
     "../../../rtc_base:rtc_base_approved",
