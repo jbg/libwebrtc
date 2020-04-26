@@ -22,6 +22,30 @@
       "revId": "66a9562fb678843daf00f7f7be86c602b59e24a1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d32b10d_3bb6e75b",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 47
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-04-26T20:20:44Z",
+      "side": 1,
+      "message": "Thanks!\nYes, and no. There is something wrong with the unittests, and it seems to be related to the destructor of WebRtcVoiceEngine. Before I could reproduce it locally, I had a theory that it was this warning (this code is run in the destructor) that triggered the failure, hence I changed this to try it.\nI have changed it back locally but have not yet uploaded the change.",
+      "parentUuid": "02791772_d6471387",
+      "range": {
+        "startLine": 606,
+        "startChar": 12,
+        "endLine": 606,
+        "endChar": 19
+      },
+      "revId": "66a9562fb678843daf00f7f7be86c602b59e24a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
