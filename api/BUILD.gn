@@ -925,6 +925,18 @@ if (rtc_include_tests) {
     ]
   }
 
+  rtc_library("mock_frame_transformer") {
+    visibility = [ "*" ]
+
+    testonly = true
+    sources = [ "test/mock_frame_transformer.h" ]
+
+    deps = [
+      "../api:frame_transformer_interface",
+      "../test:test_support",
+    ]
+  }
+
   rtc_source_set("fake_media_transport") {
     testonly = true
 

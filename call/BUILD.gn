@@ -396,6 +396,7 @@ if (rtc_include_tests) {
       "../api:array_view",
       "../api:create_frame_generator",
       "../api:mock_audio_mixer",
+      "../api:mock_frame_transformer",
       "../api:rtp_headers",
       "../api:rtp_parameters",
       "../api:transport_api",

@@ -14,6 +14,7 @@
 #include <memory>
 #include <string>
 
+#include "api/test/mock_frame_transformer.h"
 #include "call/rtp_transport_controller_send.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
@@ -819,17 +820,6 @@ TEST(RtpVideoSenderTest, CanSetZeroBitrateWithoutOverhead) {
 }
 
 TEST(RtpVideoSenderTest, SimulcastSenderRegistersFrameTransformers) {
-  class MockFrameTransformer : public FrameTransformerInterface {
-   public:
-    MOCK_METHOD3(TransformFrame,
-                 void(std::unique_ptr<video_coding::EncodedFrame> frame,
-                      std::vector<uint8_t> additional_data,
-                      uint32_t ssrc));
-    MOCK_METHOD2(RegisterTransformedFrameSinkCallback,
-                 void(rtc::scoped_refptr<TransformedFrameCallback>, uint32_t));
-    MOCK_METHOD1(UnregisterTransformedFrameSinkCallback, void(uint32_t));
-  };
-
   rtc::scoped_refptr<MockFrameTransformer> transformer =
       new rtc::RefCountedObject<MockFrameTransformer>();
 

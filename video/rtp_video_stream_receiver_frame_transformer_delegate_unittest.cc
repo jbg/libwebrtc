@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "api/call/transport.h"
+#include "api/test/mock_frame_transformer.h"
 #include "call/video_receive_stream.h"
 #include "modules/rtp_rtcp/source/rtp_descriptor_authentication.h"
 #include "modules/utility/include/process_thread.h"
@@ -107,25 +108,6 @@ class TestRtpVideoStreamReceiver : public TestRtpVideoStreamReceiverInitializer,
               (override));
 };
 
-class MockFrameTransformer : public FrameTransformerInterface {
- public:
-  ~MockFrameTransformer() override = default;
-  MOCK_METHOD(void,
-              TransformFrame,
-              (std::unique_ptr<video_coding::EncodedFrame>,
-               std::vector<uint8_t>,
-               uint32_t),
-              (override));
-  MOCK_METHOD(void,
-              RegisterTransformedFrameSinkCallback,
-              (rtc::scoped_refptr<TransformedFrameCallback>, uint32_t),
-              (override));
-  MOCK_METHOD(void,
-              UnregisterTransformedFrameSinkCallback,
-              (uint32_t),
-              (override));
-};
-
 TEST(RtpVideoStreamReceiverFrameTransformerDelegateTest,
      RegisterTransformedFrameCallbackSinkOnInit) {
   TestRtpVideoStreamReceiver receiver;
@@ -156,7 +138,7 @@ TEST(RtpVideoStreamReceiverFrameTransformerDelegateTest,
 TEST(RtpVideoStreamReceiverFrameTransformerDelegateTest, TransformFrame) {
   TestRtpVideoStreamReceiver receiver;
   rtc::scoped_refptr<MockFrameTransformer> frame_transformer(
-      new rtc::RefCountedObject<MockFrameTransformer>());
+      new rtc::RefCountedObject<testing::NiceMock<MockFrameTransformer>>());
   rtc::scoped_refptr<RtpVideoStreamReceiverFrameTransformerDelegate> delegate(
       new rtc::RefCountedObject<RtpVideoStreamReceiverFrameTransformerDelegate>(
           &receiver, frame_transformer, rtc::Thread::Current(),

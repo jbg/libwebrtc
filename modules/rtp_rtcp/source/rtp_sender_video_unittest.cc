@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "api/test/mock_frame_encryptor.h"
+#include "api/test/mock_frame_transformer.h"
 #include "api/transport/rtp/dependency_descriptor.h"
 #include "api/video/video_codec_constants.h"
 #include "api/video/video_timing.h"
@@ -873,20 +874,9 @@ TEST_P(RtpSenderVideoTest, PopulatesPlayoutDelay) {
   EXPECT_EQ(received_delay, kExpectedDelay);
 }
 
-class MockFrameTransformer : public FrameTransformerInterface {
- public:
-  MOCK_METHOD3(TransformFrame,
-               void(std::unique_ptr<video_coding::EncodedFrame> frame,
-                    std::vector<uint8_t> additional_data,
-                    uint32_t ssrc));
-  MOCK_METHOD2(RegisterTransformedFrameSinkCallback,
-               void(rtc::scoped_refptr<TransformedFrameCallback>, uint32_t));
-  MOCK_METHOD1(UnregisterTransformedFrameSinkCallback, void(uint32_t));
-};
-
 TEST_P(RtpSenderVideoTest, SendEncodedImageWithFrameTransformer) {
   rtc::scoped_refptr<MockFrameTransformer> transformer =
-      new rtc::RefCountedObject<MockFrameTransformer>();
+      new rtc::RefCountedObject<NiceMock<MockFrameTransformer>>();
   RTPSenderVideo::Config config;
   config.clock = &fake_clock_;
   config.rtp_sender = rtp_module_->RtpSender();
