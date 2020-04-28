@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a26c6b66_2b5527b7",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-28T08:53:27Z",
+      "side": 1,
+      "message": "feel free to use auto here.\nreturn type of the make_unique assume to be common knowledge\n\nhttps://google.github.io/styleguide/cppguide.html#Type_deduction\n(see first example in \"Local variable type deduction\" subsection)",
+      "range": {
+        "startLine": 919,
+        "startChar": 2,
+        "endLine": 919,
+        "endChar": 31
+      },
+      "revId": "8fd5109e1786e9d2251da31ccee2705325eaa892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f4118fe_148aa705",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-28T08:53:27Z",
+      "side": 1,
+      "message": "may be include code under test explicetely:\nrtp_sender_video \u003d nullptr;",
+      "range": {
+        "startLine": 944,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 1
+      },
+      "revId": "8fd5109e1786e9d2251da31ccee2705325eaa892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "695dbead_3b280750",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-28T08:53:27Z",
+      "side": 1,
+      "message": "::testing::Invoke can be omited (WillOnce accepts lambda directly)",
+      "range": {
+        "startLine": 966,
+        "startChar": 16,
+        "endLine": 966,
+        "endChar": 34
+      },
+      "revId": "8fd5109e1786e9d2251da31ccee2705325eaa892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04978e8a_cd88b171",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-28T08:53:27Z",
+      "side": 1,
+      "message": "::testing::SaveArg\u003c0\u003e(\u0026callback)\n\nhttps://github.com/google/googletest/blob/master/googlemock/docs/cheat_sheet.md#side-effects\n\n(also, might be cleaner to add alias for used ::testing names, i.e. add at the top of the file\nusing ::testing::SaveArg;\nso that here can write just SaveArg\u003c0\u003e )",
+      "range": {
+        "startLine": 967,
+        "startChar": 10,
+        "endLine": 968,
+        "endChar": 56
+      },
+      "revId": "8fd5109e1786e9d2251da31ccee2705325eaa892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d498749_e497280b",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-28T08:53:27Z",
+      "side": 1,
+      "message": "should it be EXPECT_CALL or ON_CALL(...).WillByDefault([\u0026callback] ... ); ?\nhttps://github.com/google/googletest/blob/master/googlemock/docs/cook_book.md#knowing-when-to-expect-useoncall",
+      "range": {
+        "startLine": 976,
+        "startChar": 2,
+        "endLine": 976,
+        "endChar": 13
+      },
+      "revId": "8fd5109e1786e9d2251da31ccee2705325eaa892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d71c99b0_70cf5c3b",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-28T08:53:27Z",
+      "side": 1,
+      "message": "there is a default value for test queue name, so you can use default constructor, if you wish.",
+      "range": {
+        "startLine": 981,
+        "startChar": 33,
+        "endLine": 981,
+        "endChar": 48
+      },
+      "revId": "8fd5109e1786e9d2251da31ccee2705325eaa892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36937cee_24e3cda7",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-28T08:53:27Z",
+      "side": 1,
+      "message": "I think this line deserves a comment:\n// Wait for all tasks posted to the encoder_queue.\n\n(hm... since it is common test pattern, may be there should be helper function in TaskQueueForTest instead. just a thought that is out of scope of this change)",
+      "range": {
+        "startLine": 989,
+        "startChar": 2,
+        "endLine": 989,
+        "endChar": 49
+      },
+      "revId": "8fd5109e1786e9d2251da31ccee2705325eaa892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
