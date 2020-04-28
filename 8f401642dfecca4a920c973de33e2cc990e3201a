@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ff6d788_227074b9",
+        "filename": "api/test/mock_transformable_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-04-28T13:50:24Z",
+      "side": 1,
+      "message": "Remove? They don\u0027t do anything...",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "8f401642dfecca4a920c973de33e2cc990e3201a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
