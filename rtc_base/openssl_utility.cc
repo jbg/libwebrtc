@@ -123,5 +123,12 @@ bool LoadBuiltinSSLRootCertificates(SSL_CTX* ctx) {
 }
 #endif  // WEBRTC_EXCLUDE_BUILT_IN_SSL_ROOT_CERTS
 
+#ifdef OPENSSL_IS_BORINGSSL
+CRYPTO_BUFFER_POOL* GetBufferPool() {
+  static CRYPTO_BUFFER_POOL* instance = CRYPTO_BUFFER_POOL_new();
+  return instance;
+}
+#endif
+
 }  // namespace openssl
 }  // namespace rtc
