@@ -41,7 +41,7 @@ VideoStreamInputState VideoStreamInputStateProvider::InputState() {
   int input_fps = frame_rate_provider_->GetInputFrameRate();
   rtc::CritScope lock(&crit_);
   input_state_.set_frames_per_second(
-      input_fps >= 0 ? absl::optional<int>(input_fps) : absl::nullopt);
+      input_fps > 0 ? absl::optional<int>(input_fps) : absl::nullopt);
   return input_state_;
 }
 
