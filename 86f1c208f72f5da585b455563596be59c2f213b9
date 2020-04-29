@@ -22,6 +22,30 @@
       "revId": "86f1c208f72f5da585b455563596be59c2f213b9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e251a670_c98645a2",
+        "filename": "api/video/test/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-04-29T14:32:35Z",
+      "side": 1,
+      "message": "It seems like the kind of mock that other tests should use rather than make their own versions but for now it isn\u0027t used elsewhere so I moved it inside fake_frame_rate_provider.h. Easy to move again in the future if we need it then.",
+      "parentUuid": "ef7f5aa1_3b86e636",
+      "range": {
+        "startLine": 39,
+        "startChar": 16,
+        "endLine": 39,
+        "endChar": 50
+      },
+      "revId": "86f1c208f72f5da585b455563596be59c2f213b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
