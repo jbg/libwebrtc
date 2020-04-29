@@ -35,3 +35,14 @@ rtc_source_set("mock_recordable_encoded_frame") {
     "../../../test:test_support",
   ]
 }
+
+rtc_source_set("mock_video_stream_encoder_observer") {
+  testonly = true
+  visibility = [ "*" ]
+  sources = [ "mock_video_stream_encoder_observer.h" ]
+
+  deps = [
+    "..:video_stream_encoder",
+    "../../../test:test_support",
+  ]
+}
