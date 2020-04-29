@@ -22,6 +22,30 @@
       "revId": "8f401642dfecca4a920c973de33e2cc990e3201a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12f87eed_9dde1544",
+        "filename": "test/mock_transformable_frame.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-04-29T20:51:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ff6d788_227074b9",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "8f401642dfecca4a920c973de33e2cc990e3201a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
