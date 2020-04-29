@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef7f5aa1_3b86e636",
+        "filename": "api/video/test/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-04-29T14:04:05Z",
+      "side": 1,
+      "message": "nit: do you plan to use this mock in other tests? So far it\u0027s included in exactly one target /call/adaptation:resource_adaptation_test_utilities\n\nMaybe just move the file to that target or just move it to fake_frame_rate_provider.h",
+      "range": {
+        "startLine": 39,
+        "startChar": 16,
+        "endLine": 39,
+        "endChar": 50
+      },
+      "revId": "86f1c208f72f5da585b455563596be59c2f213b9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
