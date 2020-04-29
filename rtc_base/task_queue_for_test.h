@@ -66,6 +66,12 @@ class RTC_LOCKABLE TaskQueueForTest : public rtc::TaskQueue {
   void SendTask(Closure&& task, rtc::Location loc) {
     ::webrtc::SendTask(loc, Get(), std::forward<Closure>(task));
   }
+
+  void RunUntilIdle() {
+    // Post an empty task on the queue and wait for it to finish, to ensure
+    // that all existing tasks posted on the queue get executed.
+    SendTask([]() {}, RTC_FROM_HERE);
+  }
 };
 
 }  // namespace webrtc
