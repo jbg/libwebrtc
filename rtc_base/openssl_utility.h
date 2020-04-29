@@ -35,6 +35,10 @@ void LogSSLErrors(const std::string& prefix);
 bool LoadBuiltinSSLRootCertificates(SSL_CTX* ssl_ctx);
 #endif  // WEBRTC_EXCLUDE_BUILT_IN_SSL_ROOT_CERTS
 
+#ifdef OPENSSL_IS_BORINGSSL
+CRYPTO_BUFFER_POOL* GetBufferPool();
+#endif
+
 }  // namespace openssl
 }  // namespace rtc
 
