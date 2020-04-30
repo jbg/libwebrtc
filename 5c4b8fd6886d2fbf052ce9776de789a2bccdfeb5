@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41ab930d_bbfecc80",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-04-30T08:53:28Z",
+      "side": 1,
+      "message": "Invoke not needed here either, pass lambda directly\n\n(testing::Invoke is actually rarely needed. I\u0027m not aware of a practical example. I think it is left-over from pre-lambda time when it was used as a Bind)",
+      "range": {
+        "startLine": 976,
+        "startChar": 21,
+        "endLine": 976,
+        "endChar": 39
+      },
+      "revId": "5c4b8fd6886d2fbf052ce9776de789a2bccdfeb5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
