@@ -62,6 +62,7 @@
 #include "video/send_delay_stats.h"
 #include "video/stats_counter.h"
 #include "video/video_receive_stream.h"
+#include "video/video_receive_stream2.h"
 #include "video/video_send_stream.h"
 
 namespace webrtc {
@@ -160,6 +161,12 @@ bool IsRtcp(const uint8_t* packet, size_t length) {
 }  // namespace
 
 namespace internal {
+
+#if 1
+using VideoReceiveStreamType = VideoReceiveStream2;
+#else
+using VideoReceiveStreamType = VideoReceiveStream;
+#endif
 
 class Call final : public webrtc::Call,
                    public PacketReceiver,
@@ -279,7 +286,7 @@ class Call final : public webrtc::Call,
   // creates them.
   std::set<AudioReceiveStream*> audio_receive_streams_
       RTC_GUARDED_BY(receive_crit_);
-  std::set<VideoReceiveStream*> video_receive_streams_
+  std::set<VideoReceiveStreamType*> video_receive_streams_
       RTC_GUARDED_BY(receive_crit_);
 
   std::map<std::string, AudioReceiveStream*> sync_stream_mapping_
@@ -837,10 +844,20 @@ webrtc::VideoReceiveStream* Call::CreateVideoReceiveStream(
 
   RegisterRateObserver();
 
-  VideoReceiveStream* receive_stream = new VideoReceiveStream(
+#if 1
+  TaskQueueBase* current = rtc::ThreadManager::Instance()->CurrentThread();
+  RTC_CHECK(current);
+  VideoReceiveStreamType* receive_stream = new VideoReceiveStream2(
+      task_queue_factory_, current, &video_receiver_controller_, num_cpu_cores_,
+      transport_send_ptr_->packet_router(), std::move(configuration),
+      module_process_thread_.get(), call_stats_.get(), clock_,
+      new VCMTiming(clock_));
+#else
+  VideoReceiveStreamType* receive_stream = new VideoReceiveStream(
       task_queue_factory_, &video_receiver_controller_, num_cpu_cores_,
       transport_send_ptr_->packet_router(), std::move(configuration),
       module_process_thread_.get(), call_stats_.get(), clock_);
+#endif
 
   const webrtc::VideoReceiveStream::Config& config = receive_stream->config();
   {
@@ -870,8 +887,8 @@ void Call::DestroyVideoReceiveStream(
   TRACE_EVENT0("webrtc", "Call::DestroyVideoReceiveStream");
   RTC_DCHECK_RUN_ON(&configuration_sequence_checker_);
   RTC_DCHECK(receive_stream != nullptr);
-  VideoReceiveStream* receive_stream_impl =
-      static_cast<VideoReceiveStream*>(receive_stream);
+  VideoReceiveStreamType* receive_stream_impl =
+      static_cast<VideoReceiveStreamType*>(receive_stream);
   const VideoReceiveStream::Config& config = receive_stream_impl->config();
   {
     WriteLockScoped write_lock(*receive_crit_);
@@ -1007,7 +1024,8 @@ void Call::SignalChannelNetworkState(MediaType media, NetworkState state) {
   UpdateAggregateNetworkState();
   {
     ReadLockScoped read_lock(*receive_crit_);
-    for (VideoReceiveStream* video_receive_stream : video_receive_streams_) {
+    for (VideoReceiveStreamType* video_receive_stream :
+         video_receive_streams_) {
       video_receive_stream->SignalNetworkState(video_network_state_);
     }
   }
@@ -1150,7 +1168,7 @@ void Call::ConfigureSync(const std::string& sync_group) {
   if (sync_audio_stream)
     sync_stream_mapping_[sync_group] = sync_audio_stream;
   size_t num_synced_streams = 0;
-  for (VideoReceiveStream* video_stream : video_receive_streams_) {
+  for (VideoReceiveStreamType* video_stream : video_receive_streams_) {
     if (video_stream->config().sync_group != sync_group)
       continue;
     ++num_synced_streams;
@@ -1187,7 +1205,7 @@ PacketReceiver::DeliveryStatus Call::DeliverRtcp(MediaType media_type,
   bool rtcp_delivered = false;
   if (media_type == MediaType::ANY || media_type == MediaType::VIDEO) {
     ReadLockScoped read_lock(*receive_crit_);
-    for (VideoReceiveStream* stream : video_receive_streams_) {
+    for (VideoReceiveStreamType* stream : video_receive_streams_) {
       if (stream->DeliverRtcp(packet, length))
         rtcp_delivered = true;
     }
