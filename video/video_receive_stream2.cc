@@ -217,7 +217,7 @@ VideoReceiveStream2::VideoReceiveStream2(
                                  this,     // OnCompleteFrameCallback
                                  config_.frame_decryptor,
                                  config_.frame_transformer),
-      rtp_stream_sync_(this),
+      rtp_stream_sync_(current_queue, this),
       max_wait_for_keyframe_ms_(KeyframeIntervalSettings::ParseFromFieldTrials()
                                     .MaxWaitForKeyframeMs()
                                     .value_or(kMaxWaitForKeyFrameMs)),
@@ -253,7 +253,6 @@ VideoReceiveStream2::VideoReceiveStream2(
   frame_buffer_.reset(
       new video_coding::FrameBuffer(clock_, timing_.get(), &stats_proxy_));
 
-  process_thread_->RegisterModule(&rtp_stream_sync_, RTC_FROM_HERE);
   // Register with RtpStreamReceiverController.
   media_receiver_ = receiver_controller->CreateReceiver(
       config_.rtp.remote_ssrc, &rtp_video_stream_receiver_);
@@ -273,7 +272,6 @@ VideoReceiveStream2::~VideoReceiveStream2() {
   RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
   RTC_LOG(LS_INFO) << "~VideoReceiveStream2: " << config_.ToString();
   Stop();
-  process_thread_->DeRegisterModule(&rtp_stream_sync_);
   task_safety_flag_->SetNotAlive();
 }
 
