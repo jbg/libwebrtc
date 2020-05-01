@@ -24,8 +24,12 @@
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
 #include <openssl/ssl.h>
+#ifdef OPENSSL_IS_BORINGSSL
+#include <openssl/pool.h>
+#else
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
+#endif
 
 #include "rtc_base/arraysize.h"
 #include "rtc_base/checks.h"
@@ -174,9 +178,6 @@ const unsigned char kFakeSSLCertificateLegacy[] = {
 // The server is deallocated. This client will have a peer certificate available
 // and is thus suitable for testing VerifyPeerCertMatchesHost.
 SSL* CreateSSLWithPeerCertificate(const unsigned char* cert, size_t cert_len) {
-  X509* x509 =
-      d2i_X509(nullptr, &cert, checked_cast<long>(cert_len));  // NOLINT
-  RTC_CHECK(x509);
 
   const unsigned char* key_ptr = kFakeSSLPrivateKey;
   EVP_PKEY* key = d2i_PrivateKey(
@@ -184,14 +185,31 @@ SSL* CreateSSLWithPeerCertificate(const unsigned char* cert, size_t cert_len) {
       checked_cast<long>(arraysize(kFakeSSLPrivateKey)));  // NOLINT
   RTC_CHECK(key);
 
-  SSL_CTX* ctx = SSL_CTX_new(SSLv23_method());
+#ifdef OPENSSL_IS_BORINGSSL
+  SSL_CTX* ctx = SSL_CTX_new(TLS_with_buffers_method());
+#else
+  SSL_CTX* ctx = SSL_CTX_new(TLS_method());
+#endif
   SSL* client = SSL_new(ctx);
   SSL* server = SSL_new(ctx);
   SSL_set_connect_state(client);
   SSL_set_accept_state(server);
 
+#ifdef OPENSSL_IS_BORINGSSL
+  bssl::UniquePtr<CRYPTO_BUFFER> cert_buffer(
+    CRYPTO_BUFFER_new(reinterpret_cast<uint8_t*>(&cert), cert_len, openssl::GetBufferPool()));
+  RTC_CHECK(cert_buffer);
+  std::vector<CRYPTO_BUFFER*> cert_buffers;
+  cert_buffers.push_back(cert_buffer.get());
+  RTC_CHECK(1 == SSL_set_chain_and_key(server, &cert_buffers[0], cert_buffers.size(),
+                                    key, nullptr));
+#else
+  X509* x509 =
+    d2i_X509(nullptr, &cert, checked_cast<long>(cert_len));  // NOLINT
+  RTC_CHECK(x509);
   RTC_CHECK(SSL_use_certificate(server, x509));
   RTC_CHECK(SSL_use_PrivateKey(server, key));
+#endif
 
   BIO* bio1;
   BIO* bio2;
@@ -221,13 +239,19 @@ SSL* CreateSSLWithPeerCertificate(const unsigned char* cert, size_t cert_len) {
   SSL_free(server);
   SSL_CTX_free(ctx);
   EVP_PKEY_free(key);
+#ifndef OPENSSL_IS_BORINGSSL
   X509_free(x509);
+#endif
   return client;
 }
 }  // namespace
 
 TEST(OpenSSLUtilityTest, VerifyPeerCertMatchesHostFailsOnNoPeerCertificate) {
-  SSL_CTX* ssl_ctx = SSL_CTX_new(DTLSv1_2_client_method());
+#ifdef OPENSSL_IS_BORINGSSLelse
+  SSL_CTX* ssl_ctx = SSL_CTX_new(DTLS_with_buffers_method());
+#else
+  SSL_CTX* ssl_ctx = SSL_CTX_new(DTLS_method());
+#endif
   SSL* ssl = SSL_new(ssl_ctx);
 
   EXPECT_FALSE(openssl::VerifyPeerCertMatchesHost(ssl, "webrtc.org"));
