@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "359adc78_d825f152",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-01T14:31:17Z",
+      "side": 1,
+      "message": "Should we do something like:\n\n  #ifndef WEBRTC_IOS\n  // TODO(webrtc:11489): On iOS this gets called on\n  // \"com.apple.coremedia.decompressionsession.clientcallback\"\n  // See VCMDecodedFrameCallback::Decoded for info on what thread/queue we may\n  // be on.\n\n  RTC_DCHECK_RUN_ON(\u0026decode_queue_);\n  #endif\n\n(also, if this is not under our control we might want to avoid the TODO and just reference the bug for more info?).",
+      "range": {
+        "startLine": 807,
+        "startChar": 0,
+        "endLine": 811,
+        "endChar": 39
+      },
+      "revId": "359270beaf4c840d10b46220c5c63586f3107799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c32410ad_b9d55c3e",
+        "filename": "video/video_quality_observer2.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-01T14:31:17Z",
+      "side": 1,
+      "message": "Can we remove this in this data member right away?",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 34
+      },
+      "revId": "359270beaf4c840d10b46220c5c63586f3107799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
