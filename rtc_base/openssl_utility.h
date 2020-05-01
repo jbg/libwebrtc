@@ -20,6 +20,18 @@ namespace rtc {
 // to OpenSSL that are commonly used and don't require global state should be
 // placed here.
 namespace openssl {
+
+#ifdef OPENSSL_IS_BORINGSSL
+// Does minimal parsing of a certificate (only verifying the presence of major
+// fields), primarily for the purpose of extracting the relevant out
+// parameters. Any that the caller is uninterested and can be null.
+bool ParseCertificate(CRYPTO_BUFFER* cert_buffer,
+                      std::vector<uint8_t>* signature_algorithm_oid,
+                      int64_t* expiration_time,
+                      std::vector<uint8_t>* subject_name,
+                      std::vector<uint8_t>* extensions);
+#endif
+
 // Verifies that the hostname provided matches that in the peer certificate
 // attached to this SSL state.
 bool VerifyPeerCertMatchesHost(SSL* ssl, const std::string& host);
@@ -34,6 +46,10 @@ void LogSSLErrors(const std::string& prefix);
 // of them can be added to the TrustStore for the provided context.
 bool LoadBuiltinSSLRootCertificates(SSL_CTX* ssl_ctx);
 #endif  // WEBRTC_EXCLUDE_BUILT_IN_SSL_ROOT_CERTS
+
+#ifdef OPENSSL_IS_BORINGSSL
+CRYPTO_BUFFER_POOL* GetBufferPool();
+#endif
 
 }  // namespace openssl
 }  // namespace rtc
