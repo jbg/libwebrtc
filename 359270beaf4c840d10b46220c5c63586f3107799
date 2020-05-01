@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1cda061e_d9fed6e4",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-01T17:50:32Z",
+      "side": 1,
+      "message": "Once I\u0027ve removed the locking from the class, it won\u0027t actually matter for this particular class. I expect that we\u0027ll end up not having a thread check here, but still have the comment that explains the calling context. The behaviour might not be exclusive to iOS but might rather be a matter of whether a \u0027hw\u0027 or sw (bundled) decoder is running.",
+      "parentUuid": "359adc78_d825f152",
+      "range": {
+        "startLine": 807,
+        "startChar": 0,
+        "endLine": 811,
+        "endChar": 39
+      },
+      "revId": "359270beaf4c840d10b46220c5c63586f3107799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c32410ad_b9d55c3e",
         "filename": "video/video_quality_observer2.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "359270beaf4c840d10b46220c5c63586f3107799",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e45c596_efb8912b",
+        "filename": "video/video_quality_observer2.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-01T17:50:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c32410ad_b9d55c3e",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 34
+      },
+      "revId": "359270beaf4c840d10b46220c5c63586f3107799",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
