@@ -29,7 +29,7 @@
 #include "rtc_base/task_utils/pending_task_safety_flag.h"
 #include "system_wrappers/include/clock.h"
 #include "video/receive_statistics_proxy2.h"
-#include "video/rtp_streams_synchronizer.h"
+#include "video/rtp_streams_synchronizer2.h"
 #include "video/rtp_video_stream_receiver.h"
 #include "video/transport_adapter.h"
 #include "video/video_stream_decoder2.h"
