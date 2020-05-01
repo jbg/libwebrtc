@@ -809,10 +809,21 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
   // See VCMDecodedFrameCallback::Decoded for info on what thread/queue we may
   // be on.
   // RTC_DCHECK_RUN_ON(&decode_queue_);
+  VideoFrameMetaData meta(frame, clock_->TimeInMilliseconds());
+  worker_thread_->PostTask(ToQueuedTask([safety = task_safety_flag_, meta, qp,
+                                         decode_time_ms, content_type, this]() {
+    if (!safety->alive())
+      return;
+    OnDecodedFrame(meta, qp, decode_time_ms, content_type);
+  }));
+}
 
+void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrameMetaData& frame,
+                                            absl::optional<uint8_t> qp,
+                                            int32_t decode_time_ms,
+                                            VideoContentType content_type) {
+  RTC_DCHECK_RUN_ON(&main_thread_);
   rtc::CritScope lock(&crit_);
-
-  const uint64_t now_ms = clock_->TimeInMilliseconds();
 
   const bool is_screenshare =
       videocontenttypehelpers::IsScreenshare(content_type);
@@ -826,7 +837,7 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
     video_quality_observer_.reset(new VideoQualityObserver());
   }
 
-  video_quality_observer_->OnDecodedFrame(frame.timestamp(), qp,
+  video_quality_observer_->OnDecodedFrame(frame.timestamp, qp,
                                           last_codec_type_);
 
   ContentSpecificStats* content_specific_stats =
@@ -851,28 +862,28 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrame& frame,
   stats_.decode_ms = decode_time_ms;
   stats_.total_decode_time_ms += decode_time_ms;
   if (enable_decode_time_histograms_) {
-    UpdateDecodeTimeHistograms(frame.width(), frame.height(), decode_time_ms);
+    UpdateDecodeTimeHistograms(frame.width, frame.height, decode_time_ms);
   }
 
   last_content_type_ = content_type;
-  decode_fps_estimator_.Update(1, now_ms);
+  decode_fps_estimator_.Update(1, frame.now_ms);
   if (last_decoded_frame_time_ms_) {
-    int64_t interframe_delay_ms = now_ms - *last_decoded_frame_time_ms_;
+    int64_t interframe_delay_ms = frame.now_ms - *last_decoded_frame_time_ms_;
     RTC_DCHECK_GE(interframe_delay_ms, 0);
     double interframe_delay = interframe_delay_ms / 1000.0;
     stats_.total_inter_frame_delay += interframe_delay;
     stats_.total_squared_inter_frame_delay +=
         interframe_delay * interframe_delay;
-    interframe_delay_max_moving_.Add(interframe_delay_ms, now_ms);
+    interframe_delay_max_moving_.Add(interframe_delay_ms, frame.now_ms);
     content_specific_stats->interframe_delay_counter.Add(interframe_delay_ms);
     content_specific_stats->interframe_delay_percentiles.Add(
         interframe_delay_ms);
     content_specific_stats->flow_duration_ms += interframe_delay_ms;
   }
   if (stats_.frames_decoded == 1) {
-    first_decoded_frame_time_ms_.emplace(now_ms);
+    first_decoded_frame_time_ms_.emplace(frame.now_ms);
   }
-  last_decoded_frame_time_ms_.emplace(now_ms);
+  last_decoded_frame_time_ms_.emplace(frame.now_ms);
 }
 
 void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrameMetaData& frame) {
