@@ -46,6 +46,33 @@ class VCMTiming;
 
 namespace internal {
 
+// Utility struct for grabbing metadata from a VideoFrame and processing it
+// asynchronously without needing the actual frame data.
+// Additionally the caller can bundle information from the current clock
+// when the metadata is captured, for accurate reporting and not needeing
+// multiple calls to clock->Now().
+struct VideoFrameMetaData {
+  VideoFrameMetaData(const webrtc::VideoFrame& frame, int64_t now)
+      : timestamp(frame.timestamp()),
+        timestamp_us(frame.timestamp_us()),
+        ntp_time_ms(frame.ntp_time_ms()),
+        width(frame.width()),
+        height(frame.height()),
+        now_ms(now) {}
+
+  int64_t render_time_ms() const {
+    return timestamp_us / rtc::kNumMicrosecsPerMillisec;
+  }
+
+  const uint32_t timestamp;  // RTP timestamp.
+  const int64_t timestamp_us;
+  const int64_t ntp_time_ms;
+  const int width;
+  const int height;
+
+  const int64_t now_ms;
+};
+
 class VideoReceiveStream2 : public webrtc::VideoReceiveStream,
                             public rtc::VideoSinkInterface<VideoFrame>,
                             public NackSender,

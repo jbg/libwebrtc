@@ -18,6 +18,7 @@
 #include "rtc_base/logging.h"
 #include "rtc_base/strings/string_builder.h"
 #include "system_wrappers/include/metrics.h"
+#include "video/video_receive_stream2.h"
 
 namespace webrtc {
 namespace internal {
@@ -136,20 +137,19 @@ void VideoQualityObserver::UpdateHistograms() {
   RTC_LOG(LS_INFO) << log_stream.str();
 }
 
-void VideoQualityObserver::OnRenderedFrame(const VideoFrame& frame,
-                                           int64_t now_ms) {
-  RTC_DCHECK_LE(last_frame_rendered_ms_, now_ms);
-  RTC_DCHECK_LE(last_unfreeze_time_ms_, now_ms);
+void VideoQualityObserver::OnRenderedFrame(const VideoFrameMetaData& frame) {
+  RTC_DCHECK_LE(last_frame_rendered_ms_, frame.now_ms);
+  RTC_DCHECK_LE(last_unfreeze_time_ms_, frame.now_ms);
 
   if (num_frames_rendered_ == 0) {
-    first_frame_rendered_ms_ = last_unfreeze_time_ms_ = now_ms;
+    first_frame_rendered_ms_ = last_unfreeze_time_ms_ = frame.now_ms;
   }
 
-  auto blocky_frame_it = blocky_frames_.find(frame.timestamp());
+  auto blocky_frame_it = blocky_frames_.find(frame.timestamp);
 
   if (num_frames_rendered_ > 0) {
     // Process inter-frame delay.
-    const int64_t interframe_delay_ms = now_ms - last_frame_rendered_ms_;
+    const int64_t interframe_delay_ms = frame.now_ms - last_frame_rendered_ms_;
     const double interframe_delays_secs = interframe_delay_ms / 1000.0;
 
     // Sum of squared inter frame intervals is used to calculate the harmonic
@@ -175,7 +175,7 @@ void VideoQualityObserver::OnRenderedFrame(const VideoFrame& frame,
         freezes_durations_.Add(interframe_delay_ms);
         smooth_playback_durations_.Add(last_frame_rendered_ms_ -
                                        last_unfreeze_time_ms_);
-        last_unfreeze_time_ms_ = now_ms;
+        last_unfreeze_time_ms_ = frame.now_ms;
       } else {
         // Count spatial metrics if there were no freeze.
         time_in_resolution_ms_[current_resolution_] += interframe_delay_ms;
@@ -196,14 +196,14 @@ void VideoQualityObserver::OnRenderedFrame(const VideoFrame& frame,
       smooth_playback_durations_.Add(last_frame_rendered_ms_ -
                                      last_unfreeze_time_ms_);
     }
-    last_unfreeze_time_ms_ = now_ms;
+    last_unfreeze_time_ms_ = frame.now_ms;
 
     if (num_frames_rendered_ > 0) {
-      pauses_durations_.Add(now_ms - last_frame_rendered_ms_);
+      pauses_durations_.Add(frame.now_ms - last_frame_rendered_ms_);
     }
   }
 
-  int64_t pixels = frame.width() * frame.height();
+  int64_t pixels = frame.width * frame.height;
   if (pixels >= kPixelsInHighResolution) {
     current_resolution_ = Resolution::High;
   } else if (pixels >= kPixelsInMediumResolution) {
@@ -217,7 +217,7 @@ void VideoQualityObserver::OnRenderedFrame(const VideoFrame& frame,
   }
 
   last_frame_pixels_ = pixels;
-  last_frame_rendered_ms_ = now_ms;
+  last_frame_rendered_ms_ = frame.now_ms;
 
   is_last_frame_blocky_ = blocky_frame_it != blocky_frames_.end();
   if (is_last_frame_blocky_) {
@@ -227,36 +227,37 @@ void VideoQualityObserver::OnRenderedFrame(const VideoFrame& frame,
   ++num_frames_rendered_;
 }
 
-void VideoQualityObserver::OnDecodedFrame(const VideoFrame& frame,
+void VideoQualityObserver::OnDecodedFrame(uint32_t frame_timestamp,
                                           absl::optional<uint8_t> qp,
                                           VideoCodecType codec) {
-  if (qp) {
-    absl::optional<int> qp_blocky_threshold;
-    // TODO(ilnik): add other codec types when we have QP for them.
-    switch (codec) {
-      case kVideoCodecVP8:
-        qp_blocky_threshold = kBlockyQpThresholdVp8;
-        break;
-      case kVideoCodecVP9:
-        qp_blocky_threshold = kBlockyQpThresholdVp9;
-        break;
-      default:
-        qp_blocky_threshold = absl::nullopt;
+  if (!qp)
+    return;
+
+  absl::optional<int> qp_blocky_threshold;
+  // TODO(ilnik): add other codec types when we have QP for them.
+  switch (codec) {
+    case kVideoCodecVP8:
+      qp_blocky_threshold = kBlockyQpThresholdVp8;
+      break;
+    case kVideoCodecVP9:
+      qp_blocky_threshold = kBlockyQpThresholdVp9;
+      break;
+    default:
+      qp_blocky_threshold = absl::nullopt;
+  }
+
+  RTC_DCHECK(blocky_frames_.find(frame_timestamp) == blocky_frames_.end());
+
+  if (qp_blocky_threshold && *qp > *qp_blocky_threshold) {
+    // Cache blocky frame. Its duration will be calculated in render callback.
+    if (blocky_frames_.size() > kMaxNumCachedBlockyFrames) {
+      RTC_LOG(LS_WARNING) << "Overflow of blocky frames cache.";
+      blocky_frames_.erase(
+          blocky_frames_.begin(),
+          std::next(blocky_frames_.begin(), kMaxNumCachedBlockyFrames / 2));
     }
 
-    RTC_DCHECK(blocky_frames_.find(frame.timestamp()) == blocky_frames_.end());
-
-    if (qp_blocky_threshold && *qp > *qp_blocky_threshold) {
-      // Cache blocky frame. Its duration will be calculated in render callback.
-      if (blocky_frames_.size() > kMaxNumCachedBlockyFrames) {
-        RTC_LOG(LS_WARNING) << "Overflow of blocky frames cache.";
-        blocky_frames_.erase(
-            blocky_frames_.begin(),
-            std::next(blocky_frames_.begin(), kMaxNumCachedBlockyFrames / 2));
-      }
-
-      blocky_frames_.insert(frame.timestamp());
-    }
+    blocky_frames_.insert(frame_timestamp);
   }
 }
 
