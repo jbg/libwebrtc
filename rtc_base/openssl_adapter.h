@@ -21,7 +21,12 @@
 #include "rtc_base/async_socket.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/message_handler.h"
+#include "rtc_base/openssl.h"
+#ifdef OPENSSL_IS_BORINGSSL
+#include "rtc_base/boringssl_identity.h"
+#else
 #include "rtc_base/openssl_identity.h"
+#endif
 #include "rtc_base/openssl_session_cache.h"
 #include "rtc_base/socket.h"
 #include "rtc_base/socket_address.h"
@@ -108,7 +113,14 @@ class OpenSSLAdapter final : public SSLAdapter, public MessageHandler {
   // In debug builds, logs info about the state of the SSL connection.
   static void SSLInfoCallback(const SSL* ssl, int where, int ret);
 #endif
+
+#if defined(OPENSSL_IS_BORINGSSL) && \
+    defined(WEBRTC_EXCLUDE_BUILT_IN_SSL_ROOT_CERTS)
+  static enum ssl_verify_result_t SSLVerifyCallback(SSL* ssl,
+                                                    uint8_t* out_alert);
+#else
   static int SSLVerifyCallback(int ok, X509_STORE_CTX* store);
+#endif
   friend class OpenSSLStreamAdapter;  // for custom_verify_callback_;
 
   // If the SSL_CTX was created with |enable_cache| set to true, this callback
@@ -122,7 +134,12 @@ class OpenSSLAdapter final : public SSLAdapter, public MessageHandler {
   SSLCertificateVerifier* ssl_cert_verifier_ = nullptr;
   // The current connection state of the (d)TLS connection.
   SSLState state_;
+
+#ifdef OPENSSL_IS_BORINGSSL
+  std::unique_ptr<BoringSSLIdentity> identity_;
+#else
   std::unique_ptr<OpenSSLIdentity> identity_;
+#endif
   // Indicates whethere this is a client or a server.
   SSLRole role_;
   bool ssl_read_needs_write_;
