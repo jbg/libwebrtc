@@ -41,6 +41,8 @@ class Clock;
 struct CodecSpecificInfo;
 
 namespace internal {
+// Declared in video_receive_stream2.h.
+struct VideoFrameMetaData;
 
 class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
                                public RtcpCnameCallback,
@@ -61,7 +63,7 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
   void OnSyncOffsetUpdated(int64_t video_playout_ntp_ms,
                            int64_t sync_offset_ms,
                            double estimated_freq_khz);
-  void OnRenderedFrame(const VideoFrame& frame);
+  void OnRenderedFrame(const VideoFrameMetaData& frame);
   void OnIncomingPayloadType(int payload_type);
   void OnDecoderImplementationName(const char* implementation_name);
 
@@ -130,7 +132,7 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
     rtc::HistogramPercentileCounter interframe_delay_percentiles;
   };
 
-  void QualitySample() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_);
+  void QualitySample(int64_t now) RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_);
 
   // Removes info about old frames and then updates the framerate.
   void UpdateFramerate(int64_t now_ms) const
