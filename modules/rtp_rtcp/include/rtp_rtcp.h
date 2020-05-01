@@ -38,7 +38,6 @@ namespace webrtc {
 
 // Forward declarations.
 class FrameEncryptorInterface;
-class OverheadObserver;
 class RateLimiter;
 class ReceiveStatisticsProvider;
 class RemoteBitrateEstimator;
@@ -113,7 +112,6 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     RtcEventLog* event_log = nullptr;
     SendPacketObserver* send_packet_observer = nullptr;
     RateLimiter* retransmission_rate_limiter = nullptr;
-    OverheadObserver* overhead_observer = nullptr;
     StreamDataCountersCallback* rtp_stats_callback = nullptr;
 
     int rtcp_report_interval_ms = 0;
@@ -317,6 +315,9 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
 
   virtual std::vector<RtpSequenceNumberMap::Info> GetSentRtpPacketInfos(
       rtc::ArrayView<const uint16_t> sequence_numbers) const = 0;
+
+  // Returns an average of the current per packet overhead (RTP headers).
+  virtual size_t GetPerPacketOverhead() const = 0;
 
   // **************************************************************************
   // RTCP

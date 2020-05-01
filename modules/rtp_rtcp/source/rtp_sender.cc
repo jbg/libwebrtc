@@ -84,6 +84,19 @@ constexpr RtpExtensionSize kVideoExtensionSizes[] = {
      RtpGenericFrameDescriptorExtension00::kMaxSizeBytes},
 };
 
+// Size info for header extensions that might be used in audio packets.
+constexpr RtpExtensionSize kAudioExtensionSizes[] = {
+    CreateExtensionSize<AbsoluteSendTime>(),
+    CreateExtensionSize<AbsoluteCaptureTimeExtension>(),
+    CreateExtensionSize<AudioLevel>(),
+    CreateExtensionSize<InbandComfortNoiseExtension>(),
+    CreateExtensionSize<TransmissionOffset>(),
+    CreateExtensionSize<TransportSequenceNumber>(),
+    CreateMaxExtensionSize<RtpStreamId>(),
+    CreateMaxExtensionSize<RepairedRtpStreamId>(),
+    CreateMaxExtensionSize<RtpMid>(),
+};
+
 bool HasBweExtension(const RtpHeaderExtensionMap& extensions_map) {
   return extensions_map.IsRegistered(kRtpExtensionTransportSequenceNumber) ||
          extensions_map.IsRegistered(kRtpExtensionTransportSequenceNumber02) ||
@@ -125,6 +138,8 @@ RTPSender::RTPSender(const RtpRtcp::Configuration& config,
       max_packet_size_(IP_PACKET_SIZE - 28),  // Default is IP-v4/UDP.
       last_payload_type_(-1),
       rtp_header_extension_map_(config.extmap_allow_mixed),
+      max_media_packet_header_(kRtpHeaderSize),
+      max_padding_fec_packet_header_(kRtpHeaderSize),
       // RTP variables
       sequence_number_forced_(false),
       always_send_mid_and_rid_(config.always_send_mid_and_rid),
@@ -170,6 +185,11 @@ rtc::ArrayView<const RtpExtensionSize> RTPSender::VideoExtensionSizes() {
                             arraysize(kVideoExtensionSizes));
 }
 
+rtc::ArrayView<const RtpExtensionSize> RTPSender::AudioExtensionSizes() {
+  return rtc::MakeArrayView(kAudioExtensionSizes,
+                            arraysize(kAudioExtensionSizes));
+}
+
 void RTPSender::SetExtmapAllowMixed(bool extmap_allow_mixed) {
   rtc::CritScope lock(&send_critsect_);
   rtp_header_extension_map_.SetExtmapAllowMixed(extmap_allow_mixed);
@@ -180,6 +200,7 @@ int32_t RTPSender::RegisterRtpHeaderExtension(RTPExtensionType type,
   rtc::CritScope lock(&send_critsect_);
   bool registered = rtp_header_extension_map_.RegisterByType(id, type);
   supports_bwe_extension_ = HasBweExtension(rtp_header_extension_map_);
+  UpdateHeaderSizes();
   return registered ? 0 : -1;
 }
 
@@ -187,6 +208,7 @@ bool RTPSender::RegisterRtpHeaderExtension(absl::string_view uri, int id) {
   rtc::CritScope lock(&send_critsect_);
   bool registered = rtp_header_extension_map_.RegisterByUri(id, uri);
   supports_bwe_extension_ = HasBweExtension(rtp_header_extension_map_);
+  UpdateHeaderSizes();
   return registered;
 }
 
@@ -197,15 +219,17 @@ bool RTPSender::IsRtpHeaderExtensionRegistered(RTPExtensionType type) const {
 
 int32_t RTPSender::DeregisterRtpHeaderExtension(RTPExtensionType type) {
   rtc::CritScope lock(&send_critsect_);
-  int32_t deregistered = rtp_header_extension_map_.Deregister(type);
+  rtp_header_extension_map_.Deregister(type);
   supports_bwe_extension_ = HasBweExtension(rtp_header_extension_map_);
-  return deregistered;
+  UpdateHeaderSizes();
+  return 0;
 }
 
 void RTPSender::DeregisterRtpHeaderExtension(absl::string_view uri) {
   rtc::CritScope lock(&send_critsect_);
   rtp_header_extension_map_.Deregister(uri);
   supports_bwe_extension_ = HasBweExtension(rtp_header_extension_map_);
+  UpdateHeaderSizes();
 }
 
 void RTPSender::SetMaxRtpPacketSize(size_t max_packet_size) {
@@ -369,7 +393,8 @@ std::vector<std::unique_ptr<RtpPacketToSend>> RTPSender::GeneratePadding(
   }
 
   size_t padding_bytes_in_packet;
-  const size_t max_payload_size = max_packet_size_ - RtpHeaderLength();
+  const size_t max_payload_size =
+      max_packet_size_ - FecOrPaddingPacketRtpHeaderLength();
   if (audio_configured_) {
     // Allow smaller padding packets for audio.
     padding_bytes_in_packet = rtc::SafeClamp<size_t>(
@@ -484,13 +509,14 @@ void RTPSender::EnqueuePackets(
   paced_sender_->EnqueuePackets(std::move(packets));
 }
 
-size_t RTPSender::RtpHeaderLength() const {
+size_t RTPSender::FecOrPaddingPacketRtpHeaderLength() const {
   rtc::CritScope lock(&send_critsect_);
-  size_t rtp_header_length = kRtpHeaderLength;
-  rtp_header_length += sizeof(uint32_t) * csrcs_.size();
-  rtp_header_length += RtpHeaderExtensionSize(kFecOrPaddingExtensionSizes,
-                                              rtp_header_extension_map_);
-  return rtp_header_length;
+  return max_padding_fec_packet_header_;
+}
+
+size_t RTPSender::MediaPacketRtpHeaderLength() const {
+  rtc::CritScope lock(&send_critsect_);
+  return max_media_packet_header_;
 }
 
 uint16_t RTPSender::AllocateSequenceNumber(uint16_t packets_to_send) {
@@ -603,6 +629,7 @@ void RTPSender::SetCsrcs(const std::vector<uint32_t>& csrcs) {
   RTC_DCHECK_LE(csrcs.size(), kRtpCsrcSize);
   rtc::CritScope lock(&send_critsect_);
   csrcs_ = csrcs;
+  UpdateHeaderSizes();
 }
 
 void RTPSender::SetSequenceNumber(uint16_t seq) {
@@ -791,5 +818,23 @@ RtpState RTPSender::GetRtxRtpState() const {
 int64_t RTPSender::LastTimestampTimeMs() const {
   rtc::CritScope lock(&send_critsect_);
   return last_timestamp_time_ms_;
+}
+
+void RTPSender::UpdateHeaderSizes() {
+  const size_t rtp_header_length =
+      kRtpHeaderLength + sizeof(uint32_t) * csrcs_.size();
+
+  max_padding_fec_packet_header_ =
+      rtp_header_length + RtpHeaderExtensionSize(kFecOrPaddingExtensionSizes,
+                                                 rtp_header_extension_map_);
+  if (audio_configured_) {
+    max_media_packet_header_ =
+        rtp_header_length +
+        RtpHeaderExtensionSize(kAudioExtensionSizes, rtp_header_extension_map_);
+  } else {
+    max_media_packet_header_ =
+        rtp_header_length +
+        RtpHeaderExtensionSize(kVideoExtensionSizes, rtp_header_extension_map_);
+  }
 }
 }  // namespace webrtc

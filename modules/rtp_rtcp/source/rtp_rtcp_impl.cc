@@ -273,6 +273,7 @@ void ModuleRtpRtcpImpl::SetMid(const std::string& mid) {
 void ModuleRtpRtcpImpl::SetCsrcs(const std::vector<uint32_t>& csrcs) {
   rtcp_sender_.SetCsrcs(csrcs);
   rtp_sender_->packet_generator.SetCsrcs(csrcs);
+  rtp_sender_->packet_sender.ResetPacketOverhead();
 }
 
 // TODO(pbos): Handle media and RTX streams separately (separate RTCP
@@ -399,6 +400,18 @@ ModuleRtpRtcpImpl::GetSentRtpPacketInfos(
     rtc::ArrayView<const uint16_t> sequence_numbers) const {
   RTC_DCHECK(rtp_sender_);
   return rtp_sender_->packet_sender.GetSentRtpPacketInfos(sequence_numbers);
+}
+
+size_t ModuleRtpRtcpImpl::GetPerPacketOverhead() const {
+  if (!rtp_sender_) {
+    return 0;
+  }
+  absl::optional<size_t> overhead =
+      rtp_sender_->packet_sender.GetMediaPerPacketOverhead();
+  if (overhead.has_value()) {
+    return *overhead;
+  }
+  return rtp_sender_->packet_generator.MediaPacketRtpHeaderLength();
 }
 
 size_t ModuleRtpRtcpImpl::MaxRtpPacketSize() const {
@@ -566,7 +579,11 @@ void ModuleRtpRtcpImpl::SetExtmapAllowMixed(bool extmap_allow_mixed) {
 int32_t ModuleRtpRtcpImpl::RegisterSendRtpHeaderExtension(
     const RTPExtensionType type,
     const uint8_t id) {
-  return rtp_sender_->packet_generator.RegisterRtpHeaderExtension(type, id);
+  if (rtp_sender_->packet_generator.RegisterRtpHeaderExtension(type, id) == 0) {
+    rtp_sender_->packet_sender.ResetPacketOverhead();
+    return 0;
+  }
+  return -1;
 }
 
 void ModuleRtpRtcpImpl::RegisterRtpHeaderExtension(absl::string_view uri,
@@ -574,15 +591,19 @@ void ModuleRtpRtcpImpl::RegisterRtpHeaderExtension(absl::string_view uri,
   bool registered =
       rtp_sender_->packet_generator.RegisterRtpHeaderExtension(uri, id);
   RTC_CHECK(registered);
+  rtp_sender_->packet_sender.ResetPacketOverhead();
 }
 
 int32_t ModuleRtpRtcpImpl::DeregisterSendRtpHeaderExtension(
     const RTPExtensionType type) {
-  return rtp_sender_->packet_generator.DeregisterRtpHeaderExtension(type);
+  rtp_sender_->packet_generator.DeregisterRtpHeaderExtension(type);
+  rtp_sender_->packet_sender.ResetPacketOverhead();
+  return 0;
 }
 void ModuleRtpRtcpImpl::DeregisterSendRtpHeaderExtension(
     absl::string_view uri) {
   rtp_sender_->packet_generator.DeregisterRtpHeaderExtension(uri);
+  rtp_sender_->packet_sender.ResetPacketOverhead();
 }
 
 // (TMMBR) Temporary Max Media Bit Rate.
