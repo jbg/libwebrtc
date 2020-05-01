@@ -60,6 +60,15 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
                       absl::optional<uint8_t> qp,
                       int32_t decode_time_ms,
                       VideoContentType content_type);
+
+  // Called asyncronously on the worker thread as a result of a call to the
+  // above OnDecodedFrame method, which is called back on the thread where
+  // the actual decoding happens.
+  void OnDecodedFrame(const VideoFrameMetaData& frame,
+                      absl::optional<uint8_t> qp,
+                      int32_t decode_time_ms,
+                      VideoContentType content_type);
+
   void OnSyncOffsetUpdated(int64_t video_playout_ntp_ms,
                            int64_t sync_offset_ms,
                            double estimated_freq_khz);
@@ -151,7 +160,8 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
   const bool enable_decode_time_histograms_;
 
   rtc::CriticalSection crit_;
-  int64_t last_sample_time_ RTC_GUARDED_BY(crit_);
+  int64_t last_sample_time_ RTC_GUARDED_BY(main_thread_);
+
   QualityThreshold fps_threshold_ RTC_GUARDED_BY(crit_);
   QualityThreshold qp_threshold_ RTC_GUARDED_BY(crit_);
   QualityThreshold variance_threshold_ RTC_GUARDED_BY(crit_);
