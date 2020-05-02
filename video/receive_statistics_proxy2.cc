@@ -241,18 +241,12 @@ void ReceiveStatisticsProxy::UpdateHistograms(
                << key_frames_permille << '\n';
   }
 
-  {
-    // We're not actually running on the decoder thread, but this function must
-    // be called after DecoderThreadStopped, which detaches the thread checker.
-    // It is therefore safe to access |qp_counters_|, which were updated on the
-    // decode thread earlier.
-    RTC_DCHECK_RUN_ON(&decode_queue_);
-    absl::optional<int> qp = qp_counters_.vp8.Avg(kMinRequiredSamples);
-    if (qp) {
-      RTC_HISTOGRAM_COUNTS_200("WebRTC.Video.Decoded.Vp8.Qp", *qp);
-      log_stream << "WebRTC.Video.Decoded.Vp8.Qp " << *qp << '\n';
-    }
+  absl::optional<int> qp = qp_counters_.vp8.Avg(kMinRequiredSamples);
+  if (qp) {
+    RTC_HISTOGRAM_COUNTS_200("WebRTC.Video.Decoded.Vp8.Qp", *qp);
+    log_stream << "WebRTC.Video.Decoded.Vp8.Qp " << *qp << '\n';
   }
+
   absl::optional<int> decode_ms = decode_time_counter_.Avg(kMinRequiredSamples);
   if (decode_ms) {
     RTC_HISTOGRAM_COUNTS_1000("WebRTC.Video.DecodeTimeInMs", *decode_ms);
@@ -596,6 +590,9 @@ void ReceiveStatisticsProxy::UpdateDecodeTimeHistograms(
     const std::string kDecodeTimeUmaPrefix =
         "WebRTC.Video.DecodeTimePerFrameInMs.";
 
+    // TODO(tommi): Remove
+    rtc::CritScope lock(&crit_);
+
     // Each histogram needs its own line for it to not be reused in the wrong
     // way when the format changes.
     if (last_codec_type_ == kVideoCodecVP9) {
@@ -741,7 +738,6 @@ void ReceiveStatisticsProxy::OnFrameBufferTimingsUpdated(
 
 void ReceiveStatisticsProxy::OnUniqueFramesCounted(int num_unique_frames) {
   RTC_DCHECK_RUN_ON(&main_thread_);
-  rtc::CritScope lock(&crit_);
   num_unique_frames_.emplace(num_unique_frames);
 }
 
@@ -843,12 +839,13 @@ void ReceiveStatisticsProxy::OnDecodedFrame(const VideoFrameMetaData& frame,
     video_quality_observer_.reset(new VideoQualityObserver());
   }
 
-  rtc::CritScope lock(&crit_);
   video_quality_observer_->OnDecodedFrame(frame.timestamp, qp,
                                           last_codec_type_);
 
   ContentSpecificStats* content_specific_stats =
       &content_specific_stats_[content_type];
+
+  rtc::CritScope lock(&crit_);
   ++stats_.frames_decoded;
   if (qp) {
     if (!stats_.qp_sum) {
@@ -901,17 +898,22 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrameMetaData& frame) {
   RTC_DCHECK_GT(frame.width, 0);
   RTC_DCHECK_GT(frame.height, 0);
 
-  // TODO(webrtc:11489): Remove lock once sync isn't needed.
-  rtc::CritScope lock(&crit_);
 
   video_quality_observer_->OnRenderedFrame(frame);
 
   ContentSpecificStats* content_specific_stats =
       &content_specific_stats_[last_content_type_];
   renders_fps_estimator_.Update(1, frame.now_ms);
-  ++stats_.frames_rendered;
-  stats_.width = frame.width;
-  stats_.height = frame.height;
+
+  {
+    // TODO(webrtc:11489): Remove lock once sync isn't needed.
+    rtc::CritScope lock(&crit_);
+
+    ++stats_.frames_rendered;
+    stats_.width = frame.width;
+    stats_.height = frame.height;
+  }
+
   render_fps_tracker_.AddSamples(1);
   render_pixel_tracker_.AddSamples(sqrt(frame.width * frame.height));
   content_specific_stats->received_width.Add(frame.width);
@@ -930,6 +932,7 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrameMetaData& frame) {
       content_specific_stats->e2e_delay_counter.Add(delay_ms);
     }
   }
+
   QualitySample(frame.now_ms);
 }
 
@@ -994,12 +997,17 @@ void ReceiveStatisticsProxy::OnDroppedFrames(uint32_t frames_dropped) {
 
 void ReceiveStatisticsProxy::OnPreDecode(VideoCodecType codec_type, int qp) {
   RTC_DCHECK_RUN_ON(&decode_queue_);
-  rtc::CritScope lock(&crit_);
-  last_codec_type_ = codec_type;
-  if (last_codec_type_ == kVideoCodecVP8 && qp != -1) {
-    qp_counters_.vp8.Add(qp);
-    qp_sample_.Add(qp);
-  }
+  worker_thread_->PostTask(
+      ToQueuedTask([safety = task_safety_flag_, codec_type, qp, this]() {
+        if (!safety->alive())
+          return;
+        RTC_DCHECK_RUN_ON(&main_thread_);
+        last_codec_type_ = codec_type;
+        if (last_codec_type_ == kVideoCodecVP8 && qp != -1) {
+          qp_counters_.vp8.Add(qp);
+          qp_sample_.Add(qp);
+        }
+      }));
 }
 
 void ReceiveStatisticsProxy::OnStreamInactive() {
