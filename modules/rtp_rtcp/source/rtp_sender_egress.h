@@ -57,8 +57,7 @@ class RtpSenderEgress {
   absl::optional<uint32_t> FlexFecSsrc() const { return flexfec_ssrc_; }
 
   void ProcessBitrateAndNotifyObservers();
-  DataRate SendBitrate() const;
-  DataRate NackOverheadRate() const;
+  std::map<RtpPacketMediaType, DataRate> GetSendRates() const;
   void GetDataCounters(StreamDataCounters* rtp_stats,
                        StreamDataCounters* rtx_stats) const;
 
@@ -132,8 +131,8 @@ class RtpSenderEgress {
   size_t rtp_overhead_bytes_per_packet_ RTC_GUARDED_BY(lock_);
   StreamDataCounters rtp_stats_ RTC_GUARDED_BY(lock_);
   StreamDataCounters rtx_rtp_stats_ RTC_GUARDED_BY(lock_);
-  RateStatistics total_bitrate_sent_ RTC_GUARDED_BY(lock_);
-  RateStatistics nack_bitrate_sent_ RTC_GUARDED_BY(lock_);
+  std::map<RtpPacketMediaType, RateStatistics> send_rates_
+      RTC_GUARDED_BY(lock_);
 
   // Maps sent packets' sequence numbers to a tuple consisting of:
   // 1. The timestamp, without the randomizing offset mandated by the RFC.
