@@ -318,6 +318,9 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   // Stop all client started tasks to prevent their access to any call related
   // objects after these objects will be destroyed during call tear down.
   executor_->Stop();
+
+  RTC_LOG(INFO) << "Test is done, After Stop().";
+
   // There is no guarantee, that last stats collection will happen at the end
   // of the call, so we force it after executor, which is among others is doing
   // stats collection, was stopped.
@@ -327,15 +330,24 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
         stats_poller.PollStatsAndNotifyObservers();
       },
       RTC_FROM_HERE);
+
+  RTC_LOG(INFO) << "Test is done, After PollStatsAndNotifyObservers().";
+
   // We need to detach AEC dumping from peers, because dump uses |task_queue_|
   // inside.
   alice_->DetachAecDump();
   bob_->DetachAecDump();
+
+  RTC_LOG(INFO) << "Test is done, After DetachAecDump().";
+
   // Tear down the call.
   signaling_thread->Invoke<void>(
       RTC_FROM_HERE,
       rtc::Bind(&PeerConnectionE2EQualityTest::TearDownCallOnSignalingThread,
                 this));
+
+  RTC_LOG(INFO) << "Test is done, After TearDownCallOnSignalingThread().";
+
   Timestamp end_time = Now();
   RTC_LOG(INFO) << "All peers are disconnected.";
   {
