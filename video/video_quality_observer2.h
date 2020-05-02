@@ -36,6 +36,8 @@ class VideoQualityObserver {
   VideoQualityObserver();
   ~VideoQualityObserver() = default;
 
+  bool is_paused() const { return is_paused_; }
+
   void OnDecodedFrame(uint32_t frame_timestamp,
                       absl::optional<uint8_t> qp,
                       VideoCodecType codec);
