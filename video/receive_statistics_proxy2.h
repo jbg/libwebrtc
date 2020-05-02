@@ -172,9 +172,9 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
   // Same as stats_.ssrc, but const (no lock required).
   const uint32_t remote_ssrc_;
   RateStatistics decode_fps_estimator_ RTC_GUARDED_BY(crit_);
-  RateStatistics renders_fps_estimator_ RTC_GUARDED_BY(crit_);
-  rtc::RateTracker render_fps_tracker_ RTC_GUARDED_BY(crit_);
-  rtc::RateTracker render_pixel_tracker_ RTC_GUARDED_BY(crit_);
+  RateStatistics renders_fps_estimator_ RTC_GUARDED_BY(main_thread_);
+  rtc::RateTracker render_fps_tracker_ RTC_GUARDED_BY(main_thread_);
+  rtc::RateTracker render_pixel_tracker_ RTC_GUARDED_BY(main_thread_);
   rtc::SampleCounter sync_offset_counter_ RTC_GUARDED_BY(crit_);
   rtc::SampleCounter decode_time_counter_ RTC_GUARDED_BY(crit_);
   rtc::SampleCounter jitter_buffer_delay_counter_ RTC_GUARDED_BY(crit_);
@@ -186,7 +186,7 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
   mutable rtc::MovingMaxCounter<int> interframe_delay_max_moving_
       RTC_GUARDED_BY(main_thread_);
   std::map<VideoContentType, ContentSpecificStats> content_specific_stats_
-      RTC_GUARDED_BY(crit_);
+      RTC_GUARDED_BY(main_thread_);
   MaxCounter freq_offset_counter_ RTC_GUARDED_BY(crit_);
   QpCounters qp_counters_ RTC_GUARDED_BY(decode_queue_);
   int64_t avg_rtt_ms_ RTC_GUARDED_BY(crit_);
@@ -197,13 +197,13 @@ class ReceiveStatisticsProxy : public VCMReceiveStatisticsCallback,
   absl::optional<int64_t> first_decoded_frame_time_ms_ RTC_GUARDED_BY(&crit_);
   absl::optional<int64_t> last_decoded_frame_time_ms_
       RTC_GUARDED_BY(main_thread_);
-  size_t num_delayed_frames_rendered_ RTC_GUARDED_BY(&crit_);
-  int64_t sum_missed_render_deadline_ms_ RTC_GUARDED_BY(&crit_);
+  size_t num_delayed_frames_rendered_ RTC_GUARDED_BY(main_thread_);
+  int64_t sum_missed_render_deadline_ms_ RTC_GUARDED_BY(main_thread_);
   // Mutable because calling Max() on MovingMaxCounter is not const. Yet it is
   // called from const GetStats().
   mutable rtc::MovingMaxCounter<TimingFrameInfo> timing_frame_info_counter_
       RTC_GUARDED_BY(&crit_);
-  absl::optional<int> num_unique_frames_ RTC_GUARDED_BY(crit_);
+  absl::optional<int> num_unique_frames_ RTC_GUARDED_BY(main_thread_);
   absl::optional<int64_t> last_estimated_playout_ntp_timestamp_ms_
       RTC_GUARDED_BY(&crit_);
   absl::optional<int64_t> last_estimated_playout_time_ms_

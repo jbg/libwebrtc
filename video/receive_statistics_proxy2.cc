@@ -741,7 +741,6 @@ void ReceiveStatisticsProxy::OnFrameBufferTimingsUpdated(
 
 void ReceiveStatisticsProxy::OnUniqueFramesCounted(int num_unique_frames) {
   RTC_DCHECK_RUN_ON(&main_thread_);
-  rtc::CritScope lock(&crit_);
   num_unique_frames_.emplace(num_unique_frames);
 }
 
@@ -901,17 +900,13 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrameMetaData& frame) {
   RTC_DCHECK_GT(frame.width, 0);
   RTC_DCHECK_GT(frame.height, 0);
 
-  // TODO(webrtc:11489): Remove lock once sync isn't needed.
-  rtc::CritScope lock(&crit_);
 
   video_quality_observer_->OnRenderedFrame(frame);
 
   ContentSpecificStats* content_specific_stats =
       &content_specific_stats_[last_content_type_];
   renders_fps_estimator_.Update(1, frame.now_ms);
-  ++stats_.frames_rendered;
-  stats_.width = frame.width;
-  stats_.height = frame.height;
+
   render_fps_tracker_.AddSamples(1);
   render_pixel_tracker_.AddSamples(sqrt(frame.width * frame.height));
   content_specific_stats->received_width.Add(frame.width);
@@ -930,6 +925,13 @@ void ReceiveStatisticsProxy::OnRenderedFrame(const VideoFrameMetaData& frame) {
       content_specific_stats->e2e_delay_counter.Add(delay_ms);
     }
   }
+
+  // TODO(webrtc:11489): Remove lock once sync isn't needed.
+  rtc::CritScope lock(&crit_);
+
+  ++stats_.frames_rendered;
+  stats_.width = frame.width;
+  stats_.height = frame.height;
   QualitySample(frame.now_ms);
 }
 
