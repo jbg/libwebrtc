@@ -129,6 +129,8 @@ RTPSenderVideo::RTPSenderVideo(const Config& config)
       playout_delay_pending_(false),
       red_payload_type_(config.red_payload_type),
       fec_generator_(config.fec_generator),
+      fec_type_(config.fec_type),
+      fec_overhead_bytes_(config.fec_overhead_bytes),
       video_bitrate_(1000, RateStatistics::kBpsScale),
       packetization_overhead_bitrate_(1000, RateStatistics::kBpsScale),
       frame_encryptor_(config.frame_encryptor),
@@ -189,14 +191,12 @@ void RTPSenderVideo::LogAndSendToNetwork(
 }
 
 size_t RTPSenderVideo::FecPacketOverhead() const {
-  size_t overhead = fec_generator_ ? fec_generator_->MaxPacketOverhead() : 0u;
+  size_t overhead = fec_overhead_bytes_;
   if (red_enabled()) {
     // The RED overhead is due to a small header.
     overhead += kRedForFecHeaderLength;
 
-    // TODO(bugs.webrtc.org/11340): Move this into UlpfecGenerator.
-    if (fec_generator_ &&
-        fec_generator_->GetFecType() == VideoFecGenerator::FecType::kUlpFec) {
+    if (fec_type_ == VideoFecGenerator::FecType::kUlpFec) {
       // For ULPFEC, the overhead is the FEC headers plus RED for FEC header
       // (see above) plus anything in RTP header beyond the 12 bytes base header
       // (CSRC list, extensions...)
@@ -207,13 +207,6 @@ size_t RTPSenderVideo::FecPacketOverhead() const {
     }
   }
   return overhead;
-}
-
-void RTPSenderVideo::SetFecParameters(const FecProtectionParams& delta_params,
-                                      const FecProtectionParams& key_params) {
-  if (fec_generator_) {
-    fec_generator_->SetProtectionParameters(delta_params, key_params);
-  }
 }
 
 void RTPSenderVideo::SetVideoStructure(
@@ -582,9 +575,6 @@ bool RTPSenderVideo::SendVideo(
     if (!rtp_sender_->AssignSequenceNumber(packet.get()))
       return false;
 
-    // No FEC protection for upper temporal layers, if used.
-    bool protect_packet = temporal_id == 0 || temporal_id == kNoTemporalIdx;
-
     packet->set_allow_retransmission(allow_retransmission);
 
     // Put packetization finish timestamp into extension.
@@ -592,8 +582,15 @@ bool RTPSenderVideo::SendVideo(
       packet->set_packetization_finish_time_ms(clock_->TimeInMilliseconds());
     }
 
-    if (protect_packet && fec_generator_) {
-      fec_generator_->AddPacketAndGenerateFec(*packet);
+    // No FEC protection for upper temporal layers, if used.
+    if (fec_type_.has_value() &&
+        (temporal_id == 0 || temporal_id == kNoTemporalIdx)) {
+      if (fec_generator_) {
+        fec_generator_->AddPacketAndGenerateFec(*packet);
+      } else {
+        // When deferred FEC generation is enabled, just mark the packet as
+        // protected here.
+      }
     }
 
     if (red_enabled()) {
@@ -626,9 +623,6 @@ bool RTPSenderVideo::SendVideo(
     // Fetch any FEC packets generated from the media frame and add them to
     // the list of packets to send.
     auto fec_packets = fec_generator_->GetFecPackets();
-
-    // TODO(bugs.webrtc.org/11340): Move sequence number assignment into
-    // UlpfecGenerator.
     const bool generate_sequence_numbers = !fec_generator_->FecSsrc();
     for (auto& fec_packet : fec_packets) {
       if (generate_sequence_numbers) {
@@ -690,10 +684,6 @@ bool RTPSenderVideo::SendEncodedImage(
 uint32_t RTPSenderVideo::VideoBitrateSent() const {
   rtc::CritScope cs(&stats_crit_);
   return video_bitrate_.Rate(clock_->TimeInMilliseconds()).value_or(0);
-}
-
-uint32_t RTPSenderVideo::FecOverheadRate() const {
-  return fec_generator_ ? fec_generator_->CurrentFecRate().bps<uint32_t>() : 0u;
 }
 
 uint32_t RTPSenderVideo::PacketizationOverheadBps() const {
