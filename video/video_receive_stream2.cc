@@ -383,6 +383,7 @@ void VideoReceiveStream2::Start() {
 
 void VideoReceiveStream2::Stop() {
   RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
+  RTC_LOG(LS_WARNING) << "********** STOP ***************";
   rtp_video_stream_receiver_.StopReceive();
 
   stats_proxy_.OnUniqueFramesCounted(
@@ -703,8 +704,13 @@ void VideoReceiveStream2::HandleFrameBufferTimeout() {
   // To avoid spamming keyframe requests for a stream that is not active we
   // check if we have received a packet within the last 5 seconds.
   bool stream_is_active = last_packet_ms && now_ms - *last_packet_ms < 5000;
-  if (!stream_is_active)
-    stats_proxy_.OnStreamInactive();
+  if (!stream_is_active) {
+    worker_thread_->PostTask(ToQueuedTask([safety = task_safety_flag_, this]() {
+      if (!safety->alive())
+        return;
+      stats_proxy_.OnStreamInactive();
+    }));
+  }
 
   if (stream_is_active && !IsReceivingKeyFrame(now_ms) &&
       (!config_.crypto_options.sframe.require_frame_encryption ||

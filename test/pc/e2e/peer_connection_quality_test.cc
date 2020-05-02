@@ -313,31 +313,48 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
     done.Wait(run_params.run_duration.ms());
   }
 
-  RTC_LOG(INFO) << "Test is done, initiating disconnect sequence.";
+  RTC_LOG(LS_WARNING) << "##########################################################################################################################################################################";
+  RTC_LOG(LS_WARNING) << "Test is done, initiating disconnect sequence.";
 
   // Stop all client started tasks to prevent their access to any call related
   // objects after these objects will be destroyed during call tear down.
   executor_->Stop();
+
+  RTC_LOG(LS_WARNING) << "##########################################################################################################################################################################";
+  RTC_LOG(LS_WARNING) << "Test is done, After Stop().";
+
   // There is no guarantee, that last stats collection will happen at the end
   // of the call, so we force it after executor, which is among others is doing
   // stats collection, was stopped.
   task_queue_->SendTask(
       [&stats_poller]() {
         // Get final end-of-call stats.
+  RTC_LOG(LS_WARNING) << "##########################################################################################################################################################################";
+        RTC_LOG(LS_WARNING) << "Test is done, Before PollStatsAndNotifyObservers.";
         stats_poller.PollStatsAndNotifyObservers();
       },
       RTC_FROM_HERE);
+
+  RTC_LOG(LS_WARNING) << "##########################################################################################################################################################################";
+  RTC_LOG(LS_WARNING) << "Test is done, After PollStatsAndNotifyObservers().";
+
   // We need to detach AEC dumping from peers, because dump uses |task_queue_|
   // inside.
   alice_->DetachAecDump();
   bob_->DetachAecDump();
+
+  RTC_LOG(LS_WARNING) << "Test is done, After DetachAecDump().";
+
   // Tear down the call.
   signaling_thread->Invoke<void>(
       RTC_FROM_HERE,
       rtc::Bind(&PeerConnectionE2EQualityTest::TearDownCallOnSignalingThread,
                 this));
+
+  RTC_LOG(LS_WARNING) << "Test is done, After TearDownCallOnSignalingThread().";
+
   Timestamp end_time = Now();
-  RTC_LOG(INFO) << "All peers are disconnected.";
+  RTC_LOG(LS_WARNING) << "All peers are disconnected.";
   {
     rtc::CritScope crit(&lock_);
     real_test_duration_ = end_time - start_time;
