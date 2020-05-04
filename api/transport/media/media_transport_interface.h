@@ -238,13 +238,6 @@ class MediaTransportInterface : public DataChannelTransportInterface {
   // Corresponding observers for audio and video overhead. Before destruction,
   // the observers must be unregistered by setting nullptr.
 
-  // TODO(nisse): Should move to per-stream objects, since packetization
-  // overhead can vary per stream, e.g., depending on negotiated extensions. In
-  // addition, we should move towards reporting total overhead including all
-  // layers. Currently, overhead of the lower layers is reported elsewhere,
-  // e.g., on route change between IPv4 and IPv6.
-  virtual void SetAudioOverheadObserver(OverheadObserver* observer) {}
-
   // Registers an observer for network change events. If the network route is
   // already established when the callback is added, |callback| will be called
   // immediately with the current network route. Before media transport is
