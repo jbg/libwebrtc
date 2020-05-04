@@ -22,6 +22,30 @@
       "revId": "59272379dedc5476748f5474bbe459069168e9c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75791f49_5b6b075f",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-04T20:10:00Z",
+      "side": 1,
+      "message": "Yes, that and AudioSendStream::ConfigureStream() should have us covered.\nNote that the unit tests now have less CallEncoder() calls because of this.\nOnBitrateAllocation() would have trigger encoder call, but since we capture that with an EXPECT_CALL in the tests, it never happens. Confusing tests...",
+      "parentUuid": "106febc3_af16eaf6",
+      "range": {
+        "startLine": 533,
+        "startChar": 2,
+        "endLine": 536,
+        "endChar": 3
+      },
+      "revId": "59272379dedc5476748f5474bbe459069168e9c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
