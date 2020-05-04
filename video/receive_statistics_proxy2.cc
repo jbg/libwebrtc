@@ -1015,11 +1015,11 @@ void ReceiveStatisticsProxy::OnStreamInactive() {
 }
 
 void ReceiveStatisticsProxy::OnRttUpdate(int64_t avg_rtt_ms) {
-  // TODO(webrtc:11490): This method is currently never called except from a
-  // unit test, GetStatsReportsDecodeTimingStats, and even then it has no
-  // effect. Once 11490 items in video_receive_stream2.cc have been addressed,
-  // we can uncomment the following:
-  // RTC_DCHECK_RUN_ON(&main_thread_);
+  RTC_DCHECK_RUN_ON(&main_thread_);
+  // TODO(webrtc:11490): Now that this method is being called, as part of fixing
+  // 11490, we can uncomment the below line. However, since it will affect
+  // stats, that change will be landed as a separate CL.
+
   // avg_rtt_ms_ = avg_rtt_ms;
 }
 
