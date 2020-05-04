@@ -47,6 +47,14 @@ std::unique_ptr<FrameGeneratorInterface> CreateFromYuvFileFrameGenerator(
                                             frame_repeat_count);
 }
 
+std::unique_ptr<FrameGeneratorInterface> CreateFromYuvFileFrameGenerator(
+    std::string filename,
+    size_t width,
+    size_t height) {
+  return CreateFromYuvFileFrameGenerator({std::move(filename)}, width, height,
+                                         /*frame_repeat_count=*/1);
+}
+
 std::unique_ptr<FrameGeneratorInterface> CreateFromIvfFileFrameGenerator(
     std::string filename) {
   return std::make_unique<IvfVideoFrameGenerator>(std::move(filename));
