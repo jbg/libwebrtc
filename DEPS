@@ -258,8 +258,19 @@ deps = {
   },
   'src/third_party/yasm/source/patched-yasm':
     'https://chromium.googlesource.com/chromium/deps/yasm/patched-yasm.git@720b70524a4424b15fc57e82263568c8ba0496ad',
-  'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@3f15275073fc339e14f39df61fbace5bad82e93d',
+  #'src/tools':
+  #  'https://chromium.googlesource.com/chromium/src/tools@3f15275073fc339e14f39df61fbace5bad82e93d',
+  'src/tools/clang':
+    'https://chromium.googlesource.com/chromium/src/tools/clang@5dc315c67dda834480e2b3c495849f4645efe6cb',
+
+  #'src/tools/code_coverage':
+    #'https://chromium.googlesource.com/chromium/src/tools/code_coverage.git@' +
+        #Var('code_coverage_revision'),
+
+  #'src/tools/memory':
+    #'https://chromium.googlesource.com/chromium/src/tools/memory@' +
+        #Var('tools_memory_revision'),
+
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@160b445a44e0daacf6f3f8570ca2707ec451f374',
 
