@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e4a5b29_dea698e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-04T12:21:27Z",
+      "side": 1,
+      "message": "Can you summarise what this change does for the history?\n\nwhile current line is helpful for reviewing, \nit might be bad choice for a first line (i.e. title) of the description:\nhttps://google.github.io/eng-practices/review/developer/cl-descriptions.html",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 84
+      },
+      "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eb01267_961359c1",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-04T12:21:27Z",
+      "side": 1,
+      "message": "This is a very strong assumption.\nHow can you guarantee it when main_thread_ is a custom task queue?\n(one way is to post a task to the main_thread_ and then block control thread until Task is done. That normally works in tests, but that risks a deadlock and, afaik, discouraged because of that.)\n\nfor non-destructor that kind of guarantee is achievable : method would either run on the task queue, or won\u0027t run at all.\nFor destructor I know how to guarantee that it is run on the task_queue or after that task_queue is stopped/deleted.\nBut since TaskQueue doesn\u0027t guarantee to run a posted task, I\u0027m not aware how to guarantee a destructor does run on that task queue.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 35
+      },
+      "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79921f24_cf545cd8",
+        "filename": "video/receive_statistics_proxy2.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-04T12:21:27Z",
+      "side": 1,
+      "message": "would \"\u003d\" work here?\n\nhttps://abseil.io/tips/88#best-practices-for-initialization\n\n\"Use {} initialization without the \u003d only if the above options don’t compile\"",
+      "range": {
+        "startLine": 204,
+        "startChar": 50,
+        "endLine": 205,
+        "endChar": 38
+      },
+      "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42bef766_a49ef80f",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-04T12:21:27Z",
+      "side": 1,
+      "message": "please prefer \"bugs.webrtc.org/11489\" spelling to make it easier for people not that familiar with webrtc to follow the link.\nhttps://webrtc.googlesource.com/src/+/HEAD/style-guide.md#todo-comments",
+      "range": {
+        "startLine": 494,
+        "startChar": 8,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
