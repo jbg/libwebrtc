@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebf2a363_d10af3e2",
+        "filename": "video/receive_statistics_proxy2.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-05-04T12:10:53Z",
+      "side": 1,
+      "message": "IIUC, this is the libjingle worker thread? Should we rename the member variable to match that, and maybe switch to a SequenceChecker?",
+      "range": {
+        "startLine": 217,
+        "startChar": 21,
+        "endLine": 217,
+        "endChar": 33
+      },
+      "revId": "7e2402943966c115ea5694b81fc37611752ff4b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
