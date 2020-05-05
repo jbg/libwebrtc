@@ -187,6 +187,30 @@
     },
     {
       "key": {
+        "uuid": "66b82c9b_40c50fc7",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-05T13:13:28Z",
+      "side": 1,
+      "message": "Upcoming changes will poll different stats, and I didn\u0027t want to add 4 methods or use one of those old-timey-looking GetStats(out1*, out2*, out3*, out4*). And yes - combining them into a total will happen too.\n\nI liked map mostly because it\u0027s intuitive how to use. Originally used an absl::flat_hash_map but got an error that this can\u0027t be used in rtp_rtcp.h interface. Not sure which ones are allowed?\nI tried looking for a map implementation where the key-set is fixed as construction time, but couldn\u0027t find one. Do you know of one?",
+      "parentUuid": "4b95ab23_90351856",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a91c5a8_3a6c416f",
         "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
         "patchSetId": 3
