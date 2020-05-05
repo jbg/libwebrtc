@@ -211,6 +211,30 @@
     },
     {
       "key": {
+        "uuid": "54e8a057_e4375efc",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T13:59:21Z",
+      "side": 1,
+      "message": "Yep, absl::flat_hash_map is not in the allowed absl types list because no one yet showed enough evidence its performance outweighs binary cost.\n\nNo, I\u0027m not aware of such map. The closest type I know is a flat_map \n(https://chromium.googlesource.com/chromium/src/+/master/base/containers/flat_map.h) but it is not available in webrtc either.\n\nbut in this cases where keys are numbers in range [0, 4] the best container seems to be std::array\u003cDataRate, RtpPacketMediaType::kCount\u003e\n\nwith a small modification to the enum:\nenum RtpPacketMediaType : int {\n  k...Audio \u003d 0,\n  ...\n  k...Fec,\n  kCount  // must be last, not actual enum value.\n};\n\n\nIt might be possible to wrap such pattern into helper class, but that might be over complication:\n\ntemplate\u003ctypename Value, typename Enum\u003e\nclass EnumMap {\n  static_assert(std::is_enum_v\u003cEnum\u003e, \"\");\n  using Storage \u003d std::array\u003cValue, Enum::kCount\u003e;\n public:\n  using mapped_type \u003d Storage::value_type;\n  using value_type \u003d std::pair\u003cconst Enum, Storage::value_type\u003e;\n  class iterator {\n   public:\n    value_type\u0026 operator*() { return ???; }\n   private: ???\n  };\n\n  Value\u0026 operator[](Enum index) { return storage_[index]; }\n  const Value\u0026 operator[](Enum index) const { return storage_[index]; }\n  iterator begin() { return ???; }\n  const_iterator begin() const { return ??? ;}\n  iterator end() { return ???; }\n  // etc.\n private:\n  Storage storage_;\n}",
+      "parentUuid": "66b82c9b_40c50fc7",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a91c5a8_3a6c416f",
         "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
         "patchSetId": 3
