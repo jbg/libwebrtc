@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "138a9ea5_84aa7a21",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "Consider using Timestamp: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/api/units/timestamp.h",
+      "range": {
+        "startLine": 504,
+        "startChar": 51,
+        "endLine": 504,
+        "endChar": 54
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d15e29d1_29041bda",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "nit: frame_meta",
+      "range": {
+        "startLine": 876,
+        "startChar": 71,
+        "endLine": 876,
+        "endChar": 76
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a461797_f019ee83",
+        "filename": "video/receive_statistics_proxy2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "Avoid forward declarations: https://webrtc.googlesource.com/src/+/HEAD/style-guide.md#forward-declarations",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 25
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8feb480a_243ed55b",
+        "filename": "video/video_quality_observer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "nit: frame_meta",
+      "range": {
+        "startLine": 137,
+        "startChar": 69,
+        "endLine": 137,
+        "endChar": 74
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "327a8f43_c19dc6c5",
+        "filename": "video/video_quality_observer2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "Avoid forward declarations",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 25
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d21ce5f0_9f194875",
+        "filename": "video/video_quality_observer2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "rtp_timestamp",
+      "range": {
+        "startLine": 39,
+        "startChar": 31,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "514b619d_3a80ea96",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "nit: Looks like this could be merged with the line below",
+      "range": {
+        "startLine": 492,
+        "startChar": 2,
+        "endLine": 492,
+        "endChar": 48
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af2492f5_f077babe",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "Is it possible for the VideoReceiveStream2 to destruct while this task is running?",
+      "range": {
+        "startLine": 507,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 49
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a67e3b28_25f7a31a",
+        "filename": "video/video_receive_stream2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "I know that the function is called just |timestamp|, but I think it would be clearer to hold it as |rtp_timestamp|.",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bbb7c92_4f15ddd8",
+        "filename": "video/video_receive_stream2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-05T09:37:11Z",
+      "side": 1,
+      "message": "This should be |decode_timestamp| or something like that? Also, consider using the Timestamp class.",
+      "range": {
+        "startLine": 73,
+        "startChar": 16,
+        "endLine": 73,
+        "endChar": 22
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
