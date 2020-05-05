@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f9b3606_c40bfc38",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-05T07:25:34Z",
+      "side": 1,
+      "message": "You probably want to keep the cast here and above, it adds a DCHECK",
+      "range": {
+        "startLine": 702,
+        "startChar": 34,
+        "endLine": 702,
+        "endChar": 39
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea7eb8cb_1062d0f9",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-05T07:25:34Z",
+      "side": 1,
+      "message": "This might seem better, but depending on the rate calculation used might not actually be equivalent to keeping a separate total rate. However, I guess that if we are moving away from the rate stats and to application based rate calculation, it might not matter that much. In that case I think it would be producent to document that choice here.\n\nMaybe something like:\n// This is not guaranteed to be equivalent to a global rate calculation, but this rate statistic is deprecated so we accept that approximation here.",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 804,
+        "endChar": 3
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a57d341_89de9667",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-05T07:25:34Z",
+      "side": 1,
+      "message": "std::map is quite inefficient as a data type for small data sets and it provides an order that is not obviously meaningful here. I\u0027d consider using unordered_map as a way to signal that the media types don\u0027t have any inherent ordering.\n\nIn this case though, if the usage below is representative there\u0027s two cases, either we are looking for the sum, or we want just one of the metrics. In that case I\u0027d suggest two separate methods, one returning the sum and one that takes the media type as argument.\n\nThe reason why we would want to use a map (or possibly vector\u003cpair\u003e) would be if we want to combine several sender egress rates after the fact.",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
