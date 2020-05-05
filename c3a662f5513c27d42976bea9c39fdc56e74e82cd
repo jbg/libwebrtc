@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "a9d18333_2c82eefb",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T11:54:00Z",
+      "side": 1,
+      "message": "I understand that assumption for object that leave on the stack and doesn\u0027t outlive the task it is created in. But that doesn\u0027t seems the case for this long lived object.\nThis is a normal assumption for a Thread or chromium\u0027s task runner where you can have guarantee the task would run. Yes, it make thread safety easier.\n\nI just do not know a good way to ensure that guarantee for a task queue. I\u0027m curious how it is done, because in my experience it is done either with a risk of a deadlock (block until posted task is done), or with a small, but non-zero risk of crash during destruction: Destructing the object off the task queue when request to delete the task queue happens shortly after request to delete the object that lives on that task queue.\n\nThat last scenario is my concern: it might be ok to delete the object off the task queue after that task queue is stopped/deleted, but newly added DCHECK would now crash instead.\nI\u0027m also not too sure about alive flag. Likely it won\u0027t case tsan race (more accurate solution can be not to touch the flag when running not on the task queue: that likely would mean task queue is stopped and thus setting the flag is not needed.)",
+      "parentUuid": "d2ace36e_95e66a51",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 35
+      },
+      "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79921f24_cf545cd8",
         "filename": "video/receive_statistics_proxy2.h",
         "patchSetId": 14
@@ -187,6 +211,30 @@
       "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5ce4d07_94594b6f",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T11:54:00Z",
+      "side": 1,
+      "message": "yes, it is how it is spelled in CL description where it is automatically converted into link,\nbut not when it is in code. Thus we suggest in webrtc style guide to use form that looks like and is a link. If you want more information about the TODO, you only need to copy-paste it into browser. Moreover, if you are guest in webrtc code, then url form is easy to understand how to use, while form \u0027webrtc:12345\u0027 would require extra work to follow.\n\n(On that note - webrtc:12345 is still better than username)",
+      "parentUuid": "4858e7cc_d44b2de5",
+      "range": {
+        "startLine": 494,
+        "startChar": 8,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
