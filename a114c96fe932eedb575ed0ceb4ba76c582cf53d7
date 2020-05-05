@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "938efed4_945ab247",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-05T05:20:05Z",
+      "side": 1,
+      "message": "Can you link to chromium:1068705 instead?\nthat will make asking for merge easier (only one CL on the bug).",
+      "revId": "a114c96fe932eedb575ed0ceb4ba76c582cf53d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
