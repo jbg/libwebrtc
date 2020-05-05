@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "3c5a749f_095a37dc",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T13:36:55Z",
+      "side": 1,
+      "message": "Luckily, it is the case for this class, VideoReceiveStream and generally all objects that are owned by the Call class and share their lifetime with the Call instance.\n\nThose classes are all implementation details in WebRTC by the way and not a part of the api/ directory. We\u0027ve found that there are in fact external projects that create instances of these classes in various different ways that do not conform with how the whole set of classes are designed to work together. That is an impossible way to maintain the internal implementation though since we have no idea how the classes are used and would in theory have to lock everything and take on related performance penalties even when the classes are being used correctly.\n\nSo that\u0027s why these classes have now been forked and moved into the \u0027internal\u0027 namespace, to make it clear that this is not an API.\n\nThat also gives us this opportunity to reset and clarify the expectations, such as by putting in this DCHECK, which states that \"if you hit this DCHECK, you are doing something that this class is not designed for\".\n\nWhile this isn\u0027t new code, it\u0027s a new file. The old file will be deprecated, not deleted for now, but the code that depends on them as they are now, won\u0027t break. However, if you\u0027re aware of such code, we need to change that code to use interfaces in the api/ directory and not depend on the internal implementation.",
+      "parentUuid": "a9d18333_2c82eefb",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 35
+      },
+      "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79921f24_cf545cd8",
         "filename": "video/receive_statistics_proxy2.h",
         "patchSetId": 14
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "yes, it is how it is spelled in CL description where it is automatically converted into link,\nbut not when it is in code. Thus we suggest in webrtc style guide to use form that looks like and is a link. If you want more information about the TODO, you only need to copy-paste it into browser. Moreover, if you are guest in webrtc code, then url form is easy to understand how to use, while form \u0027webrtc:12345\u0027 would require extra work to follow.\n\n(On that note - webrtc:12345 is still better than username)",
       "parentUuid": "4858e7cc_d44b2de5",
+      "range": {
+        "startLine": 494,
+        "startChar": 8,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "c3a662f5513c27d42976bea9c39fdc56e74e82cd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f52c08d_6fcb637e",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T13:36:55Z",
+      "side": 1,
+      "message": "ack - all fixed now. Well, all webrtc:11489 occurrences, I didn\u0027t make changes to other existing TODOs.",
+      "parentUuid": "a5ce4d07_94594b6f",
       "range": {
         "startLine": 494,
         "startChar": 8,
