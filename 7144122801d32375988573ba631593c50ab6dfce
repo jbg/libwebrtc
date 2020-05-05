@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a0843f3f_4e822a5b",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "Done.\n\nI tried to go a step further and update related members such as last_sample_time_ to Timestamp, constants such as kMinSampleLengthMs to TimeDelta, etc. But that resulted in quite a bit of changes and made me a bit nervous that I\u0027d accidentally introduce a regressions since the code is written around the assumption of \u0027ms\u0027 (derived from VideoFrame and Clock), so ultimately, at this time, I decided to not do that part of the changes, but the interface change here, I did, as well as the other decode_timestamp change.",
+      "parentUuid": "138a9ea5_84aa7a21",
+      "range": {
+        "startLine": 504,
+        "startChar": 51,
+        "endLine": 504,
+        "endChar": 54
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d15e29d1_29041bda",
         "filename": "video/receive_statistics_proxy2.cc",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "7144122801d32375988573ba631593c50ab6dfce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e5c6e13_60296015",
+        "filename": "video/receive_statistics_proxy2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d15e29d1_29041bda",
+      "range": {
+        "startLine": 876,
+        "startChar": 71,
+        "endLine": 876,
+        "endChar": 76
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b5bf9a98_8656ee1a",
+        "filename": "video/receive_statistics_proxy2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "In this case it\u0027s needed because the header that declares this type, includes this one. (possibly to avoid fwd declarations?)",
+      "parentUuid": "4a461797_f019ee83",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 25
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8feb480a_243ed55b",
         "filename": "video/video_quality_observer2.cc",
         "patchSetId": 5
@@ -91,6 +163,30 @@
       "revId": "7144122801d32375988573ba631593c50ab6dfce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67775e70_585fce99",
+        "filename": "video/video_quality_observer2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8feb480a_243ed55b",
+      "range": {
+        "startLine": 137,
+        "startChar": 69,
+        "endLine": 137,
+        "endChar": 74
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "6386d170_33aff6f4",
+        "filename": "video/video_quality_observer2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "Needs to be fwd declared here since this header is included by receive_statistics_proxy2.h which is included by video_receive_stream2.h which declares the struct.",
+      "parentUuid": "327a8f43_c19dc6c5",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 25
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d21ce5f0_9f194875",
         "filename": "video/video_quality_observer2.h",
         "patchSetId": 5
@@ -137,6 +257,30 @@
       "revId": "7144122801d32375988573ba631593c50ab6dfce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52903ea4_3fca1af6",
+        "filename": "video/video_quality_observer2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d21ce5f0_9f194875",
+      "range": {
+        "startLine": 39,
+        "startChar": 31,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "b856da06_c289db92",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "514b619d_3a80ea96",
+      "range": {
+        "startLine": 492,
+        "startChar": 2,
+        "endLine": 492,
+        "endChar": 48
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af2492f5_f077babe",
         "filename": "video/video_receive_stream2.cc",
         "patchSetId": 5
@@ -174,6 +342,30 @@
       "writtenOn": "2020-05-05T09:37:11Z",
       "side": 1,
       "message": "Is it possible for the VideoReceiveStream2 to destruct while this task is running?",
+      "range": {
+        "startLine": 507,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 49
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf03ea88_a3500ad5",
+        "filename": "video/video_receive_stream2.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "The task runs on the same thread/tq as VideoReceiveStream2 is destructed on, so it\u0027s not possible that the VRS2 instance is deleted exactly while the task is running, but it is possible that the instance gets deleted before the task runs. That case is taken care of by the task_safety_flag_, which will cause the task to be dropped if it runs post object deletion.",
+      "parentUuid": "af2492f5_f077babe",
       "range": {
         "startLine": 507,
         "startChar": 0,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "f7bec8e6_24d772cc",
+        "filename": "video/video_receive_stream2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "yup, good idea.",
+      "parentUuid": "a67e3b28_25f7a31a",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2bbb7c92_4f15ddd8",
         "filename": "video/video_receive_stream2.h",
         "patchSetId": 5
@@ -229,6 +445,30 @@
       "revId": "7144122801d32375988573ba631593c50ab6dfce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65a9e315_280ace5a",
+        "filename": "video/video_receive_stream2.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-05T17:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bbb7c92_4f15ddd8",
+      "range": {
+        "startLine": 73,
+        "startChar": 16,
+        "endLine": 73,
+        "endChar": 22
+      },
+      "revId": "7144122801d32375988573ba631593c50ab6dfce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
