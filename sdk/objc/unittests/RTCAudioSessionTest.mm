@@ -253,9 +253,11 @@ OCMLocation *OCMMakeLocation(id testCase, const char *fileCString, int line){
   };
 
   id mockAVAudioSession = OCMPartialMock([AVAudioSession sharedInstance]);
-  OCMStub([[mockAVAudioSession ignoringNonObjectArgs]
-      setActive:YES withOptions:0 error:((NSError __autoreleasing **)[OCMArg anyPointer])]).
-      andDo(setActiveBlock);
+  OCMStub([mockAVAudioSession setActive:YES
+                            withOptions:0
+                                  error:((NSError __autoreleasing **)[OCMArg anyPointer])])
+      .andDo(setActiveBlock)
+      .ignoringNonObjectArgs();
 
   id mockAudioSession = OCMPartialMock([RTC_OBJC_TYPE(RTCAudioSession) sharedInstance]);
   OCMStub([mockAudioSession session]).andReturn(mockAVAudioSession);
@@ -266,9 +268,11 @@ OCMLocation *OCMMakeLocation(id testCase, const char *fileCString, int line){
   EXPECT_TRUE([audioSession checkLock:nil]);
   // configureWebRTCSession is forced to fail in the above mock interface,
   // so activationCount should remain 0
-  OCMExpect([[mockAVAudioSession ignoringNonObjectArgs]
-      setActive:YES withOptions:0 error:((NSError __autoreleasing **)[OCMArg anyPointer])]).
-      andDo(setActiveBlock);
+  OCMExpect([mockAVAudioSession setActive:YES
+                              withOptions:0
+                                    error:((NSError __autoreleasing **)[OCMArg anyPointer])])
+      .andDo(setActiveBlock)
+      .ignoringNonObjectArgs();
   OCMExpect([mockAudioSession session]).andReturn(mockAVAudioSession);
   EXPECT_FALSE([audioSession configureWebRTCSession:&error]);
   EXPECT_EQ(0, audioSession.activationCount);
@@ -279,8 +283,8 @@ OCMLocation *OCMMakeLocation(id testCase, const char *fileCString, int line){
   [audioSession unlockForConfiguration];
 
   OCMVerify([mockAudioSession session]);
-  OCMVerify([[mockAVAudioSession ignoringNonObjectArgs] setActive:YES withOptions:0 error:&error]);
-  OCMVerify([[mockAVAudioSession ignoringNonObjectArgs] setActive:NO withOptions:0 error:&error]);
+  OCMVerify([mockAVAudioSession setActive:YES withOptions:0 error:&error]).ignoringNonObjectArgs();
+  OCMVerify([mockAVAudioSession setActive:NO withOptions:0 error:&error]).ignoringNonObjectArgs();
 
   [mockAVAudioSession stopMocking];
   [mockAudioSession stopMocking];
