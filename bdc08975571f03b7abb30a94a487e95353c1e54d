@@ -235,6 +235,30 @@
     },
     {
       "key": {
+        "uuid": "c459dba7_43c4b20c",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T14:01:50Z",
+      "side": 1,
+      "message": "Alternative (easier to use, more boilplate code to write) is to introduce a new type:\nstruct Bitrates {\n  DataRate video;\n  DataRate audio;\n  ...\n};\nwith a free helper function:\nDataRate TotalRate(const Bitrates\u0026 bitrates);",
+      "parentUuid": "54e8a057_e4375efc",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a91c5a8_3a6c416f",
         "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
         "patchSetId": 3
