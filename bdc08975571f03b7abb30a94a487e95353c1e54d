@@ -48,6 +48,98 @@
     },
     {
       "key": {
+        "uuid": "cca20470_59041016",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T08:57:25Z",
+      "side": 1,
+      "message": "or\nabsl::c_accumulate(bitrates, DataRate::Zero()\n\nto stress full container is accumlated and make it a bit shorter.",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 113,
+        "endChar": 44
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97f657cb_04457a05",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T08:57:25Z",
+      "side": 1,
+      "message": "take by const reference (no need to copy that pair)\n(though if you switch to some kind of vector, then full lambda wouldn\u0027t be needed)",
+      "range": {
+        "startLine": 115,
+        "startChar": 14,
+        "endLine": 115,
+        "endChar": 63
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b5588d4_9f53972d",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T08:57:25Z",
+      "side": 1,
+      "message": "can it be absent?",
+      "range": {
+        "startLine": 125,
+        "startChar": 17,
+        "endLine": 125,
+        "endChar": 58
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35acec3a_1ee1c27d",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T08:57:25Z",
+      "side": 1,
+      "message": "RTC_CHECK\n(to crash nicely when it is not true, instead of accessing memory one shouldn\u0027t)",
+      "range": {
+        "startLine": 493,
+        "startChar": 6,
+        "endLine": 493,
+        "endChar": 7
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6a57d341_89de9667",
         "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
         "patchSetId": 3
@@ -64,6 +156,53 @@
         "startChar": 1,
         "endLine": 60,
         "endChar": 40
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b95ab23_90351856",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T08:57:25Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "6a57d341_89de9667",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a91c5a8_3a6c416f",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-05T08:57:25Z",
+      "side": 1,
+      "message": "map where key is an integer in a dense range [0, x) probably better represented as a vector (std::array might be even better since number of elements never changes)",
+      "range": {
+        "startLine": 134,
+        "startChar": 2,
+        "endLine": 134,
+        "endChar": 29
       },
       "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
