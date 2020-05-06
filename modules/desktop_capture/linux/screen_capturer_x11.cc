@@ -293,6 +293,7 @@ bool ScreenCapturerX11::GetSourceList(SourceList* sources) {
 }
 
 bool ScreenCapturerX11::SelectSource(SourceId id) {
+  queue_.Reset();
   if (!use_randr_ || id == kFullDesktopScreenId) {
     selected_monitor_name_ = kFullDesktopScreenId;
     selected_monitor_rect_ =
