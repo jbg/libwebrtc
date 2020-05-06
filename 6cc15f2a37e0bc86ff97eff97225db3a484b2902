@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6b509fd7_ef58e0ce",
+        "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 9600
+      },
+      "writtenOn": "2020-05-06T22:52:26Z",
+      "side": 1,
+      "message": "Just a note I did try to solve the issue here first by changing the if to:\n\nif (!queue_.current_frame() || !queue_.current_frame()-\u003esize().equals(selected_monitor_rect_.size())) { ...\n\nThat is similar to how it\u0027s done in screen_capturer_win_gdi.cc, but for whatever reason that results in even worse crashing.\n\nI find the comment a bit confusing because it says \"from an older generation\" but the code actually just checks if current_frame() returned a nullptr.\n\nShould we change the comment? Maybe to something like:\n// Allocate the current frame buffer only if it is not already allocated.\n// Note we do not want to reallocate buffers at this point, since the caller\n// may still be reading from them.",
+      "revId": "6cc15f2a37e0bc86ff97eff97225db3a484b2902",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "76511618_42235bd8",
         "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
         "patchSetId": 1
@@ -16,6 +33,24 @@
       "revId": "6cc15f2a37e0bc86ff97eff97225db3a484b2902",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89a96312_c6444034",
+        "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 9600
+      },
+      "writtenOn": "2020-05-06T22:52:26Z",
+      "side": 1,
+      "message": "Yes, this is needed when SelectSource is called again after CaptureFrame.",
+      "parentUuid": "76511618_42235bd8",
+      "revId": "6cc15f2a37e0bc86ff97eff97225db3a484b2902",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
