@@ -293,6 +293,12 @@ bool ScreenCapturerX11::GetSourceList(SourceList* sources) {
 }
 
 bool ScreenCapturerX11::SelectSource(SourceId id) {
+  // Prevent the reuse of any frame buffers allocated for a previously selected
+  // source. This is required to stop crashes, or old data from appearing in
+  // a captured frame, when the new source is sized differently then the source
+  // that was selected at the time a reused frame buffer was created.
+  queue_.Reset();
+
   if (!use_randr_ || id == kFullDesktopScreenId) {
     selected_monitor_name_ = kFullDesktopScreenId;
     selected_monitor_rect_ =
