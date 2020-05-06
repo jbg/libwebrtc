@@ -46,6 +46,30 @@
       "revId": "8e082cfa2db89f72ef2a8534b34e844b682527a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f82df26_39995cc8",
+        "filename": "video/video_receive_stream2.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-06T10:19:36Z",
+      "side": 1,
+      "message": "Assuming we don\u0027t want to move VideoFrameMetaData to api/video/video_frame.h to avoid polluting the public API, then I guess the most correct thing would be to create a video/video_frame_meta_data.h to avoid all cycles and fwd declarations, but maybe it\u0027s not worth it...\n\nThis is a borderline nit anyway since it can easily be changed afterwards..",
+      "parentUuid": "b1606404_013b06eb",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 25
+      },
+      "revId": "8e082cfa2db89f72ef2a8534b34e844b682527a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
