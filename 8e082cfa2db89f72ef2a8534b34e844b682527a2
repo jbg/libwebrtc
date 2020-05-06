@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5e243e8_2e4c3285",
+        "filename": "video/video_receive_stream2.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-06T09:11:30Z",
+      "side": 1,
+      "message": "Maybe I\u0027m missing something, but it looks like it would make more sense for this struct to live in receive_statistics_proxy2.h, maybe even scoped as ReceiveStatisticsProxy::VideoFrameMetaData? WDYT?",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 25
+      },
+      "revId": "8e082cfa2db89f72ef2a8534b34e844b682527a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
