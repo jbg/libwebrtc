@@ -70,6 +70,30 @@
       "revId": "8e082cfa2db89f72ef2a8534b34e844b682527a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5624c08_df5d196e",
+        "filename": "video/video_receive_stream2.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-06T19:31:38Z",
+      "side": 1,
+      "message": "Agreed. I think that would be premature at this point, but I do suspect that it will make sense down the line as being able to decouple the metadata from the frame buffer for performance and thread/tq purposes becomes more commonly needed. I agree that we can cross that bridge when we get there.",
+      "parentUuid": "5f82df26_39995cc8",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 25
+      },
+      "revId": "8e082cfa2db89f72ef2a8534b34e844b682527a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
