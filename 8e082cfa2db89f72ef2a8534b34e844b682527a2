@@ -22,6 +22,30 @@
       "revId": "8e082cfa2db89f72ef2a8534b34e844b682527a2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1606404_013b06eb",
+        "filename": "video/video_receive_stream2.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-06T09:49:21Z",
+      "side": 1,
+      "message": "Moving it to receive_statistics_proxy2.h gets rid of one fwd declaration.\nMoving it to video_quality_observer2.h gets rid of two, so from that standpoint, we could put it there.\n\nHowever it feels a bit weird to me since it\u0027s used in VideoReceiveStream2 first, then ReceiveStatisticsProxy and finally VideoQualityObserver. The relationship between these classes is:\n\nVideoReceiveStream2\n-\u003e ReceiveStatisticsProxy\n  -\u003e VideoQualityObserver\n\nSo from that pov, it feels like a loop to be having the top-most class using an implementation detail of the inner most class in its implementation. I\u0027d rather have the type owned at the top level and then be used in the same way by the downstream classes. Does that make sense?",
+      "parentUuid": "e5e243e8_2e4c3285",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 25
+      },
+      "revId": "8e082cfa2db89f72ef2a8534b34e844b682527a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
