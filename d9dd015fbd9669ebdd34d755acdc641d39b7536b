@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6938e163_aa7d15ed",
+        "filename": "api/test/peerconnection_quality_test_fixture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-05-07T21:45:51Z",
+      "side": 1,
+      "message": "Should it be kNone or just optional. I\u0027m a bit worrying about overriding the default value, which is set on track. If we will use kNone here, then we need to keep in sync default here and default on track. If we will use optional here then we can skip changing the default on track if it\u0027s not set here.",
+      "range": {
+        "startLine": 173,
+        "startChar": 37,
+        "endLine": 173,
+        "endChar": 49
+      },
+      "revId": "d9dd015fbd9669ebdd34d755acdc641d39b7536b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
