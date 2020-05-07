@@ -113,9 +113,6 @@ class PeerConnectionE2EQualityTestFixture {
     // must be equal to |kDefaultSlidesWidth| and
     // |ScrollingParams::source_height| must be equal to |kDefaultSlidesHeight|.
     std::vector<std::string> slides_yuv_file_names;
-    // If true will set VideoTrackInterface::ContentHint::kText for current
-    // video track.
-    bool use_text_content_hint = true;
   };
 
   enum VideoGeneratorType { kDefault, kI420A, kI010 };
@@ -170,11 +167,10 @@ class PeerConnectionE2EQualityTestFixture {
     // Have to be unique among all specified configs for all peers in the call.
     // Will be auto generated if omitted.
     absl::optional<std::string> stream_label;
-
-    // If set, determines whether VideoTrackInterface::ContentHint::kText is set
-    // for the current video track.
-    // TODO(landrey) replace by use_text_content_hint boolean field.
-    absl::optional<ScreenShareConfig> screen_share_config;
+    // If true will set VideoTrackInterface::ContentHint::kText for current
+    // video track. In most of screen share testing cases this field
+    // should be set as true.
+    bool use_text_content_hint = false;
     // If specified this capturing device will be used to get input video. The
     // |capturing_device_index| is the index of required capturing device in OS
     // provided list of video devices. On Linux and Windows the list will be
