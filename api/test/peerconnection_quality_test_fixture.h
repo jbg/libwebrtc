@@ -118,8 +118,6 @@ class PeerConnectionE2EQualityTestFixture {
     bool use_text_content_hint = true;
   };
 
-  enum VideoGeneratorType { kDefault, kI420A, kI010 };
-
   // Config for Vp8 simulcast or Vp9 SVC testing.
   //
   // SVC support is limited:

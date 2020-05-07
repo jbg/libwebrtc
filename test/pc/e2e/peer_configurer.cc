@@ -20,8 +20,6 @@ namespace webrtc_pc_e2e {
 using AudioConfig = PeerConnectionE2EQualityTestFixture::AudioConfig;
 using VideoConfig = PeerConnectionE2EQualityTestFixture::VideoConfig;
 using RunParams = PeerConnectionE2EQualityTestFixture::RunParams;
-using VideoGeneratorType =
-    PeerConnectionE2EQualityTestFixture::VideoGeneratorType;
 using VideoCodecConfig = PeerConnectionE2EQualityTestFixture::VideoCodecConfig;
 
 void SetDefaultValuesForMissingParams(

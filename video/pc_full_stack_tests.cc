@@ -37,8 +37,6 @@ using VideoConfig =
     webrtc_pc_e2e::PeerConnectionE2EQualityTestFixture::VideoConfig;
 using AudioConfig =
     webrtc_pc_e2e::PeerConnectionE2EQualityTestFixture::AudioConfig;
-using VideoGeneratorType =
-    webrtc_pc_e2e::PeerConnectionE2EQualityTestFixture::VideoGeneratorType;
 using ScreenShareConfig =
     webrtc_pc_e2e::PeerConnectionE2EQualityTestFixture::ScreenShareConfig;
 using VideoSimulcastConfig =
