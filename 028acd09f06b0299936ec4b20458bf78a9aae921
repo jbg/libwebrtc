@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a773a652_20a8e718",
+        "filename": "call/adaptation/video_source_restrictions_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-07T09:37:18Z",
+      "side": 1,
+      "message": "nit: Also test a non-unlimited restriction with itself",
+      "revId": "028acd09f06b0299936ec4b20458bf78a9aae921",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95bf399e_5a10b866",
+        "filename": "call/adaptation/video_source_restrictions_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-07T09:37:18Z",
+      "side": 1,
+      "message": "nit: kHd30fps with kHd15fps or similar to exercise non-unlimited with non-unlimited",
+      "revId": "028acd09f06b0299936ec4b20458bf78a9aae921",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
