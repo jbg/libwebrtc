@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b7c243d9_297c0a73",
+        "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2020-05-07T07:12:09Z",
+      "side": 1,
+      "message": "\u0027git show 3d34f66292a\u0027 seems to be back from 2013 and the same comment about \"older generation\" is the same in a few capturers including ScreenCapturerMac. I was looking if the code was changed after that the comment was added. But the above commit moves code from chromium/src to webrtc so we would need to follow the changes from chromium/src. But that\u0027s fine so yes please just change the comment to what you suggested, thx",
+      "parentUuid": "6b509fd7_ef58e0ce",
+      "revId": "6cc15f2a37e0bc86ff97eff97225db3a484b2902",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "76511618_42235bd8",
         "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "Yes, this is needed when SelectSource is called again after CaptureFrame.",
       "parentUuid": "76511618_42235bd8",
+      "revId": "6cc15f2a37e0bc86ff97eff97225db3a484b2902",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dda96b8_51ac5fd4",
+        "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 6236
+      },
+      "writtenOn": "2020-05-07T07:12:09Z",
+      "side": 1,
+      "message": "Thx for adding the comment.",
+      "parentUuid": "89a96312_c6444034",
       "revId": "6cc15f2a37e0bc86ff97eff97225db3a484b2902",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
