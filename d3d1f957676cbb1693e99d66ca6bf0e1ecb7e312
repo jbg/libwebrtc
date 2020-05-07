@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85c646df_487e034d",
+        "filename": "modules/rtp_rtcp/source/rtp_sender.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 10107
+      },
+      "writtenOn": "2020-05-07T10:06:25Z",
+      "side": 1,
+      "message": "Is it possible to skip the default here? That way, if a new type is added to the enum, you\u0027d get a compile error if this switch statement is not updated.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 12
+      },
+      "revId": "d3d1f957676cbb1693e99d66ca6bf0e1ecb7e312",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
