@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5486c036_dc2ac1fa",
+        "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 9600
+      },
+      "writtenOn": "2020-05-07T21:13:05Z",
+      "side": 1,
+      "message": "Thanks for looking into that. I have changed top line of the comment.\n\nLooking at the code again while editing the comment I see that the crashes I was getting when I tried to fix the issue here may have been the result of the current frame having a matching size but incorrect top left for the monitor. I didn\u0027t verify that though because each recompile takes almost 20 minutes, and what we have works. There will be a lot of reallocation either way.",
+      "parentUuid": "b7c243d9_297c0a73",
+      "revId": "6cc15f2a37e0bc86ff97eff97225db3a484b2902",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76511618_42235bd8",
         "filename": "modules/desktop_capture/linux/screen_capturer_x11.cc",
         "patchSetId": 1
