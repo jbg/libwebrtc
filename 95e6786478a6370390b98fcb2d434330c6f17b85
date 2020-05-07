@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28bfe9d5_2e716564",
+        "filename": "rtc_base/system/file_wrapper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-07T13:40:54Z",
+      "side": 1,
+      "message": "\"and the wrapper is no longer responsible for closing it\"",
+      "range": {
+        "startLine": 70,
+        "startChar": 46,
+        "endLine": 71,
+        "endChar": 35
+      },
+      "revId": "95e6786478a6370390b98fcb2d434330c6f17b85",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
