@@ -37,7 +37,6 @@
 
 namespace webrtc {
 
-class CallStats;
 class ProcessThread;
 class RTPFragmentationHeader;
 class RtpStreamReceiverInterface;
@@ -46,6 +45,8 @@ class RtxReceiveStream;
 class VCMTiming;
 
 namespace internal {
+
+class CallStats;
 
 // Utility struct for grabbing metadata from a VideoFrame and processing it
 // asynchronously without needing the actual frame data.
