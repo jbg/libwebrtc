@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fc088b6b_fb56ade4",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-10T15:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f9b3606_c40bfc38",
+      "range": {
+        "startLine": 702,
+        "startChar": 34,
+        "endLine": 702,
+        "endChar": 39
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea7eb8cb_1062d0f9",
         "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-05T07:25:34Z",
       "side": 1,
       "message": "This might seem better, but depending on the rate calculation used might not actually be equivalent to keeping a separate total rate. However, I guess that if we are moving away from the rate stats and to application based rate calculation, it might not matter that much. In that case I think it would be producent to document that choice here.\n\nMaybe something like:\n// This is not guaranteed to be equivalent to a global rate calculation, but this rate statistic is deprecated so we accept that approximation here.",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 804,
+        "endChar": 3
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d576beda_feea2282",
+        "filename": "modules/rtp_rtcp/source/rtp_rtcp_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-10T15:19:03Z",
+      "side": 1,
+      "message": "Based on how the rate statics are implemented, I don\u0027t really see how we could end up with a different value now. For each type we have a sliding window kept in sync, and within that window we check how many bytes have been sent. Since the window is one second and we check for bits per second, we don\u0027t truncate the rates either.",
+      "parentUuid": "ea7eb8cb_1062d0f9",
       "range": {
         "startLine": 802,
         "startChar": 0,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "23082c88_6a1fb192",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-10T15:19:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "97f657cb_04457a05",
+      "range": {
+        "startLine": 115,
+        "startChar": 14,
+        "endLine": 115,
+        "endChar": 63
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b5588d4_9f53972d",
         "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
         "patchSetId": 3
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "ae762083_6c92dfc0",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-10T15:19:03Z",
+      "side": 1,
+      "message": "No.",
+      "parentUuid": "4b5588d4_9f53972d",
+      "range": {
+        "startLine": 125,
+        "startChar": 17,
+        "endLine": 125,
+        "endChar": 58
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35acec3a_1ee1c27d",
         "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
         "patchSetId": 3
@@ -137,6 +233,30 @@
       "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c43651c5_26d6b853",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-10T15:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35acec3a_1ee1c27d",
+      "range": {
+        "startLine": 493,
+        "startChar": 6,
+        "endLine": 493,
+        "endChar": 7
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -256,6 +376,30 @@
       "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2c5531a_bc84fb2e",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-10T15:19:03Z",
+      "side": 1,
+      "message": "I added a helper class RtpSendRates.\nptal",
+      "parentUuid": "c459dba7_43c4b20c",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "bdc08975571f03b7abb30a94a487e95353c1e54d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
