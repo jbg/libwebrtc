@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a162f3a0_1dcae070",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-10T16:33:36Z",
+      "side": 1,
+      "message": "Opted to have this outside, rather than a kNumberOfValues inside the enum. This is maybe a bit more brittle, but we avoid updating a bunch of switch statements with an ugly extra case-statement...",
+      "range": {
+        "startLine": 222,
+        "startChar": 24,
+        "endLine": 222,
+        "endChar": 38
+      },
+      "revId": "a8c532e8fd0f89d62a9ddf2290b547cc938f09c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
