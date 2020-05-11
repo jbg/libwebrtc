@@ -22,6 +22,30 @@
       "revId": "e4ed1a8f8cef9739afb572569f3009a8098fae59",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfdf8fee_0fe2843a",
+        "filename": "video/adaptation/quality_scaler_resource.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-11T12:43:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48995bf1_a668a1ba",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 64
+      },
+      "revId": "e4ed1a8f8cef9739afb572569f3009a8098fae59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
