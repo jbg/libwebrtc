@@ -39,7 +39,6 @@ CriticalSection::CriticalSection() {
 #else
   pthread_mutexattr_t mutex_attribute;
   pthread_mutexattr_init(&mutex_attribute);
-  pthread_mutexattr_settype(&mutex_attribute, PTHREAD_MUTEX_RECURSIVE);
 #if defined(WEBRTC_MAC)
   pthread_mutexattr_setpolicy_np(&mutex_attribute,
                                  _PTHREAD_MUTEX_POLICY_FAIRSHARE);
