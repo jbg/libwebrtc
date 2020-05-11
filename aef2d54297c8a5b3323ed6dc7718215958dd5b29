@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "63788704_4785e967",
+        "filename": "video/adaptation/quality_scaler_resource.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-11T13:34:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51d5679e_b273de2a",
+      "revId": "aef2d54297c8a5b3323ed6dc7718215958dd5b29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b89245c2_b4f9fd60",
         "filename": "video/adaptation/quality_scaler_resource.cc",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "aef2d54297c8a5b3323ed6dc7718215958dd5b29",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0073ea12_04e01dca",
+        "filename": "video/adaptation/quality_scaler_resource.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-11T13:34:25Z",
+      "side": 1,
+      "message": "Some kind of PreventAdaptUpDueToActiveCounts will be needed either way. Because if video is very static we will get very low qp any way. Thus quality scaler will always spam adaptUp.\n\nAdded the test.",
+      "parentUuid": "b89245c2_b4f9fd60",
+      "revId": "aef2d54297c8a5b3323ed6dc7718215958dd5b29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
