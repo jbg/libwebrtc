@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "745dcb80_feca9dc1",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-11T12:03:29Z",
+      "side": 1,
+      "message": "Alternatively we could check if the Qp scaler is on.\n  \n  stream_resource_manager_.quality_scaler_resource_.is_started()",
+      "range": {
+        "startLine": 1660,
+        "startChar": 6,
+        "endLine": 1660,
+        "endChar": 22
+      },
+      "revId": "eceac73a9196eac8ffdc94ff43c1e1c52c7d8d83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
