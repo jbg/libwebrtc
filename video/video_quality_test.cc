@@ -937,6 +937,8 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
                 VideoEncoderConfig::Vp9EncoderSpecificSettings>(vp9_settings);
       } else if (params_.video[video_idx].codec == "H264") {
         // Quality scaling is always on for H.264.
+      } else if (params_.video[video_idx].codec == "AV1X") {
+        // Do not crash on av1.
       } else {
         RTC_NOTREACHED() << "Automatic scaling not supported for codec "
                          << params_.video[video_idx].codec << ", stream "
