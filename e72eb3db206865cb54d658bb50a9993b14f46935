@@ -22,6 +22,30 @@
       "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2329f647_363c5340",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-11T11:41:16Z",
+      "side": 1,
+      "message": "It\u0027s used for both. qp_usage_handled_event() exposes it as an event and all tests are performing qp_usage_handled_event()-\u003eWait().\n\nDo you prefer I introduce a separate boolean for the destructor\u0027s DCHECK, which is the only flag usage, or leave as-is?",
+      "parentUuid": "17652177_ee431dc4",
+      "range": {
+        "startLine": 57,
+        "startChar": 13,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
