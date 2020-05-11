@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "94cd10c1_7d71386b",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-11T13:40:01Z",
+      "side": 1,
+      "message": "Use ASSERT_TRUE instead of DCHECK if possible. This won\u0027t crash the unit test program if triggered, just abort that one test.",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17652177_ee431dc4",
         "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
         "patchSetId": 1
@@ -66,6 +89,29 @@
         "startChar": 13,
         "endLine": 57,
         "endChar": 36
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35f5fc68_cddfbb6c",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-11T13:40:01Z",
+      "side": 1,
+      "message": "Is it possible use a fake/simulated thread instead? Faster tests and better time controls.",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 62
       },
       "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
