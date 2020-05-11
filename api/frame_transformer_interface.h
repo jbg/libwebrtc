@@ -48,6 +48,8 @@ class TransformableVideoFrameInterface : public TransformableFrameInterface {
   // TODO(bugs.webrtc.org/11380) remove from interface once
   // webrtc::RtpDescriptorAuthentication is exposed in api/.
   virtual std::vector<uint8_t> GetAdditionalData() const = 0;
+
+  virtual const RTPVideoHeader& GetRtpVideoHeader() const;
 };
 
 // Extends the TransformableFrameInterface to expose audio-specific information.
