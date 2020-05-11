@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e912b63f_76bc313c",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-11T14:08:48Z",
+      "side": 1,
+      "message": "It\u0027s not possible to ASSERT_TRUE inside of a destructor. But I could replace RTC_DCHECK_RUN_ON(encoder_queue_) with ASSERT_TRUE(encoder_queue_-\u003eIsCurrent()).",
+      "parentUuid": "94cd10c1_7d71386b",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17652177_ee431dc4",
         "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
         "patchSetId": 1
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "cb3a6a8d_f2ef1f35",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-11T14:08:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5becdd1_3deacf3b",
+      "range": {
+        "startLine": 57,
+        "startChar": 13,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35f5fc68_cddfbb6c",
         "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
         "patchSetId": 1
@@ -107,6 +155,30 @@
       "writtenOn": "2020-05-11T13:40:01Z",
       "side": 1,
       "message": "Is it possible use a fake/simulated thread instead? Faster tests and better time controls.",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 62
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbfe0af6_92a22ec5",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-11T14:08:48Z",
+      "side": 1,
+      "message": "The next CL will add the processing task queue anyway and there will be \"pinging\" between queues, so there is no point in getting rid of the task queue in this CL.\n\nAs to whether it is possible to create an encoder_queue_ that avoids spawning real threads in order to have a task queue but make testing faster: I don\u0027t know whether or not this is possible, but anecdotally I have seen tests where the unittests had a different threading model than the production code (e.g. having objects attach to he same sequence in testing but different sequences in production) and it failed to detect races because everything was by-definition thread safe inside of the test.\n\nI want my tests to have at least as many threads as the real thing to increase the chance of catching races, and in this case after the next CL I will need two task queues.",
+      "parentUuid": "35f5fc68_cddfbb6c",
       "range": {
         "startLine": 91,
         "startChar": 2,
