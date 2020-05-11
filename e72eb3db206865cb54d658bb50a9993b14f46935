@@ -46,6 +46,30 @@
       "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5becdd1_3deacf3b",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-11T11:55:38Z",
+      "side": 1,
+      "message": "If you have time, please make a separate bool.\nBut this is a nit, I lgtm\u0027ed already.",
+      "parentUuid": "2329f647_363c5340",
+      "range": {
+        "startLine": 57,
+        "startChar": 13,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
