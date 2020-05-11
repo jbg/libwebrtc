@@ -276,7 +276,8 @@ EncodedImageCallback::Result QualityAnalyzingVideoEncoder::OnEncodedImage(
   }
 
   if (!discard) {
-    // Analyzer should see only encoded images, that weren't discarded.
+    // Analyzer should see only encoded images, that weren't discarded. But all
+    // not discarded layers have to be passed.
     VideoQualityAnalyzerInterface::EncoderStats stats;
     stats.target_encode_bitrate = target_encode_bitrate;
     analyzer_->OnFrameEncoded(frame_id, encoded_image, stats);
