@@ -29,6 +29,11 @@
 namespace webrtc {
 namespace webrtc_pc_e2e {
 
+// Tells QualityAnalyzingVideoEncoder that it shouldn't mark any spatial stream
+// as to be discarded. In such case the top stream will be passed to
+// VideoQualityAnalyzerInterface as a reference.
+constexpr int kAnalyzeAnySpatialStream = -1;
+
 // QualityAnalyzingVideoEncoder is used to wrap origin video encoder and inject
 // VideoQualityAnalyzerInterface before and after encoder.
 //
