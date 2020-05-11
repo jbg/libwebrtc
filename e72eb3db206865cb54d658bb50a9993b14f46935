@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4d4abc1a_5088c1ec",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-11T14:32:33Z",
+      "side": 1,
+      "message": "Didn\u0027t know that, sounds good!",
+      "parentUuid": "e912b63f_76bc313c",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17652177_ee431dc4",
         "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
         "patchSetId": 1
@@ -188,6 +212,30 @@
       "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "676053e1_365ca989",
+        "filename": "video/adaptation/quality_scaler_resource_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-11T14:32:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cbfe0af6_92a22ec5",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 62
+      },
+      "revId": "e72eb3db206865cb54d658bb50a9993b14f46935",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
