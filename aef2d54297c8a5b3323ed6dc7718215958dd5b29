@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51d5679e_b273de2a",
+        "filename": "video/adaptation/quality_scaler_resource.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-11T13:16:27Z",
+      "side": 1,
+      "message": "Is it possible for quality_scaler_ to be enabled but for some reason qp is not set?\nThis \"else\" would be triggered if QP is missing from the frame - please add a DCHECK or \"if else if (!quality_scaler_)\"",
+      "revId": "aef2d54297c8a5b3323ed6dc7718215958dd5b29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b89245c2_b4f9fd60",
+        "filename": "video/adaptation/quality_scaler_resource.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-11T13:16:27Z",
+      "side": 1,
+      "message": "Since this will start spamming to adapt up on every frame this has to eventually be suppressed or else all adaptation logic would break (e.g. we are CPU limited but we keep adapting up anyway).\n\nI believe this CL will work as intended because PreventAdaptUpDueToActiveCounts will ignore VideoAdaptationReason::kQuality signals when its active_counts_ is 0.\n\nBut considering we want to get rid of adapt counter logic eventually, plus injecting new resources might introduce new cases where a resource is adapting up, now seems like a good time to add some tests.\n\nDo you have time to add a resource_adaptation_processor_unittest.cc that ensures that even if a fake resource is spamming kUnderuse we can still adapt down due to a different fake resource and that continuing to spam kUnderuse will not go back up?\n\nquality_scaler_resource_unittest.cc or video_stream_encoder_unittest.cc is also possible, but that\u0027s optional.",
+      "revId": "aef2d54297c8a5b3323ed6dc7718215958dd5b29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
