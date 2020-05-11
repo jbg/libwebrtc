@@ -22,6 +22,76 @@
       "revId": "a8c532e8fd0f89d62a9ddf2290b547cc938f09c8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b569354d_4a28cf23",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-11T08:47:54Z",
+      "side": 1,
+      "message": "I agree on the wish to avoid an ugly extra case. I\u0027m a bit weary about the fact that forgetting to update the line would result in an out of bounds write. \n\nI think we can at least add a warning about it. We could also add something like below that would catch the case of adding a value without updating the size:\n\nconstexpr bool validateNumMediaTypes(){\nswitch(static_cast\u003cRtpPacketMediaType\u003e(kNumMediaTypes)){\ncase RtpPacketMediaType::kAudio:\ncase RtpPacketMediaType::kVideo:\ncase RtpPacketMediaType::kRetransmission:\ncase RtpPacketMediaType::kForwardErrorCorrection:\ncase RtpPacketMediaType::kPadding:\nreturn false;\ndefault: return true;\n}\n}\nstatic_assert(validateNumMediaTypes(), \"\");",
+      "parentUuid": "a162f3a0_1dcae070",
+      "range": {
+        "startLine": 222,
+        "startChar": 24,
+        "endLine": 222,
+        "endChar": 38
+      },
+      "revId": "a8c532e8fd0f89d62a9ddf2290b547cc938f09c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76b830e8_471a9c53",
+        "filename": "modules/rtp_rtcp/include/rtp_rtcp_defines.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-11T08:47:54Z",
+      "side": 1,
+      "message": "Maybe it makes sense to use [] overload here (and below)? Afaict it behaves as expected for e.g. std::map so it would actually be clearer IMO.",
+      "range": {
+        "startLine": 404,
+        "startChar": 2,
+        "endLine": 404,
+        "endChar": 51
+      },
+      "revId": "a8c532e8fd0f89d62a9ddf2290b547cc938f09c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "accb0921_717ae628",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_egress.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-11T08:47:54Z",
+      "side": 1,
+      "message": "nit: there\u0027s a lot of these casts spread out now, maybe we should have a helper to convert between index and enum to keep the \"unsafe\" code at one place?",
+      "range": {
+        "startLine": 455,
+        "startChar": 32,
+        "endLine": 455,
+        "endChar": 51
+      },
+      "revId": "a8c532e8fd0f89d62a9ddf2290b547cc938f09c8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
