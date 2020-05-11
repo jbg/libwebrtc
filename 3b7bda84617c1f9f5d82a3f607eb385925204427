@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d8b4234_f9bd42ae",
+        "filename": "test/pc/e2e/analyzer/video/quality_analyzing_video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-11T13:47:05Z",
+      "side": 1,
+      "message": "Why can\u0027t you have target spatial index as optional?",
+      "range": {
+        "startLine": 35,
+        "startChar": 14,
+        "endLine": 35,
+        "endChar": 38
+      },
+      "revId": "3b7bda84617c1f9f5d82a3f607eb385925204427",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
