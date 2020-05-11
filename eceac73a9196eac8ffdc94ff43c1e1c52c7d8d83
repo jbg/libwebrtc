@@ -22,6 +22,30 @@
       "revId": "eceac73a9196eac8ffdc94ff43c1e1c52c7d8d83",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9ca388b_6e8a6d8c",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-11T12:38:34Z",
+      "side": 1,
+      "message": "Not in this case. The issue is that qp scaler is enabled for \"simulcast\" singlecast and frame drops trigger it. But frame drops are happen by mistake. We have input resolution as HD, but send only e.g. qvga stream at 100kbps, which is too low for HD, but good for QVGA. \n\nCleaner solution maybe to actually keep track of which streams at which resolution are enabled, but it would be too bulky and have more potential for new bugs.\n\nThis workaround is to explicitly disable this frame dropping for simulcast.",
+      "parentUuid": "745dcb80_feca9dc1",
+      "range": {
+        "startLine": 1660,
+        "startChar": 6,
+        "endLine": 1660,
+        "endChar": 22
+      },
+      "revId": "eceac73a9196eac8ffdc94ff43c1e1c52c7d8d83",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
