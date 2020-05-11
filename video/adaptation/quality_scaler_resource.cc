@@ -50,8 +50,13 @@ bool QualityScalerResource::QpFastFilterLow() {
 
 void QualityScalerResource::OnEncodeCompleted(const EncodedImage& encoded_image,
                                               int64_t time_sent_in_us) {
-  if (quality_scaler_ && encoded_image.qp_ >= 0)
+  if (quality_scaler_ && encoded_image.qp_ >= 0) {
     quality_scaler_->ReportQp(encoded_image.qp_, time_sent_in_us);
+  } else {
+    // If quality scaler got disabled mid-call or encoder stopped providing
+    // QP values, all quality-scaler imposed limits should be removed.
+    OnResourceUsageStateMeasured(ResourceUsageState::kUnderuse);
+  }
 }
 
 void QualityScalerResource::OnFrameDropped(
