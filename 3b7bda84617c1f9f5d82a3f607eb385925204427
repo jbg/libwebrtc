@@ -46,6 +46,30 @@
       "revId": "3b7bda84617c1f9f5d82a3f607eb385925204427",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9bd33b91_bc758433",
+        "filename": "test/pc/e2e/analyzer/video/quality_analyzing_video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-05-11T14:10:47Z",
+      "side": 1,
+      "message": "Discussed offline. Idea is to explicitly differentiate a case when we have simulcast/SVC enabled for stream and when we need to analyze all spatial layers for stream.",
+      "parentUuid": "4d8b4234_f9bd42ae",
+      "range": {
+        "startLine": 35,
+        "startChar": 14,
+        "endLine": 35,
+        "endChar": 38
+      },
+      "revId": "3b7bda84617c1f9f5d82a3f607eb385925204427",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
