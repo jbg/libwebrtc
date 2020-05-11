@@ -154,6 +154,8 @@ class VideoStreamAdapter {
     int framerate_fps_;
     // Indicates if request was to adapt up or down.
     enum class Mode { kAdaptUp, kAdaptDown } mode_;
+    // Degradation preference for the request.
+    DegradationPreference degradation_preference_;
 
     // This is a static method rather than an anonymous namespace function due
     // to namespace visiblity.

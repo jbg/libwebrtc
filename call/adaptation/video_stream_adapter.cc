@@ -462,9 +462,13 @@ Adaptation VideoStreamAdapter::GetAdaptationDown() const {
   bool last_adaptation_was_down =
       last_adaptation_request_ &&
       last_adaptation_request_->mode_ == AdaptationRequest::Mode::kAdaptDown;
-  // Don't adapt if we're awaiting a previous adaptation to have an effect.
+  // Don't adapt if we're awaiting a previous adaptation to have an effect or
+  // if we switched degradation preference.
   if (last_adaptation_was_down &&
-      degradation_preference_ == DegradationPreference::MAINTAIN_FRAMERATE &&
+      degradation_preference_ ==
+          last_adaptation_request_->degradation_preference_ &&
+      last_adaptation_request_->degradation_preference_ ==
+          DegradationPreference::MAINTAIN_FRAMERATE &&
       input_state_.frame_size_pixels().value() >=
           last_adaptation_request_->input_pixel_count_) {
     return Adaptation(adaptation_validation_id_,
@@ -542,7 +546,8 @@ void VideoStreamAdapter::ApplyAdaptation(const Adaptation& adaptation) {
   last_adaptation_request_.emplace(AdaptationRequest{
       input_state_.frame_size_pixels().value(),
       input_state_.frames_per_second(),
-      AdaptationRequest::GetModeFromAdaptationAction(adaptation.step().type)});
+      AdaptationRequest::GetModeFromAdaptationAction(adaptation.step().type),
+      degradation_preference_});
   // Adapt!
   source_restrictor_->ApplyAdaptationStep(adaptation.step(),
                                           degradation_preference_);

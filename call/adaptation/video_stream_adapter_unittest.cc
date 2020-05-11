@@ -552,6 +552,44 @@ TEST(VideoStreamAdapterTest, MaintainFramerate_AwaitingPreviousAdaptationUp) {
   }
 }
 
+TEST(VideoStreamAdapterTest,
+     MaintainFramerate_AdaptsDownAfterSwitchingDegradationPreference) {
+  VideoStreamAdapter adapter;
+  adapter.SetDegradationPreference(DegradationPreference::MAINTAIN_RESOLUTION);
+  FakeVideoStream fake_stream(&adapter, 1280 * 720, 30,
+                              kDefaultMinPixelsPerFrame);
+  // Adapt down once, should change FPS.
+  fake_stream.ApplyAdaptation(adapter.GetAdaptationDown());
+  EXPECT_EQ(1, adapter.adaptation_counters().fps_adaptations);
+
+  adapter.SetDegradationPreference(DegradationPreference::MAINTAIN_FRAMERATE);
+  // Adaptation down should apply after the degradation prefs change.
+  Adaptation adaptation = adapter.GetAdaptationDown();
+  EXPECT_EQ(Adaptation::Status::kValid, adaptation.status());
+  fake_stream.ApplyAdaptation(adaptation);
+  EXPECT_EQ(1, adapter.adaptation_counters().fps_adaptations);
+  EXPECT_EQ(1, adapter.adaptation_counters().resolution_adaptations);
+}
+
+TEST(VideoStreamAdapterTest,
+     MaintainResolution_AdaptsDownAfterSwitchingDegradationPreference) {
+  VideoStreamAdapter adapter;
+  adapter.SetDegradationPreference(DegradationPreference::MAINTAIN_FRAMERATE);
+  FakeVideoStream fake_stream(&adapter, 1280 * 720, 30,
+                              kDefaultMinPixelsPerFrame);
+  // Adapt down once, should change FPS.
+  fake_stream.ApplyAdaptation(adapter.GetAdaptationDown());
+  EXPECT_EQ(1, adapter.adaptation_counters().resolution_adaptations);
+
+  adapter.SetDegradationPreference(DegradationPreference::MAINTAIN_RESOLUTION);
+  Adaptation adaptation = adapter.GetAdaptationDown();
+  EXPECT_EQ(Adaptation::Status::kValid, adaptation.status());
+  fake_stream.ApplyAdaptation(adaptation);
+
+  EXPECT_EQ(1, adapter.adaptation_counters().fps_adaptations);
+  EXPECT_EQ(1, adapter.adaptation_counters().resolution_adaptations);
+}
+
 TEST(VideoStreamAdapterTest, PeekNextRestrictions) {
   VideoStreamAdapter adapter;
   // Any non-disabled DegradationPreference will do.
