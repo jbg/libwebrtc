@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48995bf1_a668a1ba",
+        "filename": "video/adaptation/quality_scaler_resource.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-11T12:01:03Z",
+      "side": 1,
+      "message": "This is a bit of a workaround for what we actually want but will work for now. What we actually want is that we can remove the QualityScalerResource when it is disabled (simulcast turned on) and \"revert\" its adaptations that were made. \n\nThis is a longer term project, related to https://crbug.com/webrtc/11553. Can you add a new bug or comment in that bug to implement removing resources, and add a TODO here for that bug?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 64
+      },
+      "revId": "e4ed1a8f8cef9739afb572569f3009a8098fae59",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
