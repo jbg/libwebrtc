@@ -82,6 +82,7 @@ class RTC_LOCKABLE RTC_EXPORT CriticalSection {
 #else  // !defined(WEBRTC_WIN) && !defined(WEBRTC_POSIX)
 #error Unsupported platform.
 #endif
+  mutable int recur_ = 0;
 };
 
 // CritScope, for serializing execution through a scope.
