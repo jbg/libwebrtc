@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c393fa62_09e2092d",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-12T13:39:50Z",
+      "side": 1,
+      "message": "Not the end of the world, but it makes the encoder wrapper depend on the ScalableVideoControllerNoLayering class.",
+      "parentUuid": "350e6db4_345a0397",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a71179a8_842bb318",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
         "patchSetId": 2
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "why? what would it add?\n\nIf someone decide to extend the Callback, e.g. with \u0027OnNewCodedVideoSequence\u0027, then with the strict mock this test can suddenly start to fail.\n\ni.e. this test doesn\u0027t care if anything else is called through the callback, it only verifies frame is dropped.",
       "parentUuid": "53cdd34e_b9d7cf96",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 71,
+        "endChar": 26
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77bf769a_646ac654",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-12T13:39:50Z",
+      "side": 1,
+      "message": "The idea was that you could get rid of\n  EXPECT_CALL(encoder_callback, OnEncodedImage).Times(0);\n\nbut what you said makes sense.\nSGTM.",
+      "parentUuid": "970c82f5_dac9fc22",
       "range": {
         "startLine": 71,
         "startChar": 2,

@@ -46,6 +46,30 @@
       "revId": "a56f32cb96415ae44dae9903e781450b82789782",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56e9703c_209a70bf",
+        "filename": "modules/video_coding/codecs/av1/frame_dependencies_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-12T13:39:50Z",
+      "side": 1,
+      "message": "I don\u0027t want to end up in a situation where we want to change the FrameDependencyStructure, but we can\u0027t because of it being used by our encoder wrappers.",
+      "parentUuid": "748164a9_8ad7a787",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 33
+      },
+      "revId": "a56f32cb96415ae44dae9903e781450b82789782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
