@@ -347,6 +347,7 @@ rtc_library("rtp_video_header") {
     "../../api/video:video_frame_type",
     "../../api/video:video_rtp_headers",
     "../../modules/video_coding:codec_globals_headers",
+    "../../rtc_base/system:rtc_export",
     "//third_party/abseil-cpp/absl/container:inlined_vector",
     "//third_party/abseil-cpp/absl/types:optional",
     "//third_party/abseil-cpp/absl/types:variant",

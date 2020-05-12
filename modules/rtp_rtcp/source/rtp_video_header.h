@@ -27,6 +27,7 @@
 #include "modules/video_coding/codecs/h264/include/h264_globals.h"
 #include "modules/video_coding/codecs/vp8/include/vp8_globals.h"
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
+#include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
 // Details passed in the rtp payload for legacy generic rtp packetizer.
@@ -42,7 +43,7 @@ using RTPVideoTypeHeader = absl::variant<absl::monostate,
                                          RTPVideoHeaderH264,
                                          RTPVideoHeaderLegacyGeneric>;
 
-struct RTPVideoHeader {
+struct RTC_EXPORT RTPVideoHeader {
   struct GenericDescriptorInfo {
     GenericDescriptorInfo();
     GenericDescriptorInfo(const GenericDescriptorInfo& other);
