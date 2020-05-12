@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "080061b6_9a882cc8",
+        "filename": "modules/video_coding/codecs/av1/scalable_video_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-12T15:54:41Z",
+      "side": 1,
+      "message": "Any replacement for this structure?\n\n  struct GenericFrameInfo : public FrameDependencyTemplate {\n    ...\n  }\n\nAlso not a great fit and also don\u0027t want to end up in the same situation as with the FrameDependencyStructure.",
+      "range": {
+        "startLine": 44,
+        "startChar": 22,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "18b92089dbdcff5f3db0c46910cb804cac01d475",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
