@@ -22,6 +22,30 @@
       "revId": "93ccc2d97e021560e5b0210b3c98fb1391c83730",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9aeaa149_2a74478a",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-12T09:50:29Z",
+      "side": 1,
+      "message": "That makes a lot of sense, I like it. Let\u0027s do that instead?\nLGTM regardless",
+      "parentUuid": "1c3e4fcf_e8b4f96d",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 54
+      },
+      "revId": "93ccc2d97e021560e5b0210b3c98fb1391c83730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
