@@ -177,6 +177,7 @@ public class PeerConnectionFactory {
     @Nullable private NetworkStatePredictorFactoryFactory networkStatePredictorFactoryFactory;
     @Nullable private MediaTransportFactoryFactory mediaTransportFactoryFactory;
     @Nullable private NetEqFactoryFactory neteqFactoryFactory;
+    private boolean forceInternalAudioDeviceIfNotProvided = false;
 
     private Builder() {}
 
@@ -265,14 +266,20 @@ public class PeerConnectionFactory {
       return this;
     }
 
+    public Builder setForceInternalAudioDeviceIfNotProvided(
+        boolean forceInternalAudioDeviceIfNotProvided) {
+      this.forceInternalAudioDeviceIfNotProvided = forceInternalAudioDeviceIfNotProvided;
+      return this;
+    }
+
     public PeerConnectionFactory createPeerConnectionFactory() {
       checkInitializeHasBeenCalled();
-      if (audioDeviceModule == null) {
+      if (audioDeviceModule == null && !forceInternalAudioDeviceIfNotProvided) {
         audioDeviceModule = JavaAudioDeviceModule.builder(ContextUtils.getApplicationContext())
                                 .createAudioDeviceModule();
       }
       return nativeCreatePeerConnectionFactory(ContextUtils.getApplicationContext(), options,
-          audioDeviceModule.getNativeAudioDeviceModulePointer(),
+          audioDeviceModule == null ? 0 : audioDeviceModule.getNativeAudioDeviceModulePointer(),
           audioEncoderFactoryFactory.createNativeAudioEncoderFactory(),
           audioDecoderFactoryFactory.createNativeAudioDecoderFactory(), videoEncoderFactory,
           videoDecoderFactory,
