@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "350e6db4_345a0397",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-12T12:59:04Z",
+      "side": 1,
+      "message": "not necessary. It is still a reasonable function.\n\nAlternative might be to add public function like\nstd::unique_ptr\u003cFrameDependenciesController\u003e CreateDefaultController() or\nCreateDefaultAv1Controller()\n\nI\u0027m not sure alternative is better.",
+      "parentUuid": "23e78861_a4ce9943",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a71179a8_842bb318",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c52c1800_2d3f18ef",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-12T12:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a71179a8_842bb318",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53cdd34e_b9d7cf96",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "970c82f5_dac9fc22",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-12T12:59:04Z",
+      "side": 1,
+      "message": "why? what would it add?\n\nIf someone decide to extend the Callback, e.g. with \u0027OnNewCodedVideoSequence\u0027, then with the strict mock this test can suddenly start to fail.\n\ni.e. this test doesn\u0027t care if anything else is called through the callback, it only verifies frame is dropped.",
+      "parentUuid": "53cdd34e_b9d7cf96",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 71,
+        "endChar": 26
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

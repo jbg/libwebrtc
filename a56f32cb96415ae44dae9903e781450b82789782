@@ -22,6 +22,30 @@
       "revId": "a56f32cb96415ae44dae9903e781450b82789782",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "748164a9_8ad7a787",
+        "filename": "modules/video_coding/codecs/av1/frame_dependencies_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-12T12:59:04Z",
+      "side": 1,
+      "message": "Long-term I hope it can be morphed into encoder-independent. Why?\n(currently it only pretends it is codec agnostic: it lacks features both for vp8 and for vp9 non-flexible mode)\n\n(Oh... also realised name doesn\u0027t make much sense: this class doesn\u0027t control frame_diffs directly...)",
+      "parentUuid": "c049dfde_90185d13",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 33
+      },
+      "revId": "a56f32cb96415ae44dae9903e781450b82789782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
