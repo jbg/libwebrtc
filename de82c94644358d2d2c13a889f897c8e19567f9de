@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23e78861_a4ce9943",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-12T12:00:36Z",
+      "side": 1,
+      "message": "This should be deprecated right?",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a71179a8_842bb318",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-12T12:00:36Z",
+      "side": 1,
+      "message": "Maybe use a smaller resolution to speed up the test?",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53cdd34e_b9d7cf96",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-12T12:00:36Z",
+      "side": 1,
+      "message": "Strict?",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 71,
+        "endChar": 26
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

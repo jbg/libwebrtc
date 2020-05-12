@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c049dfde_90185d13",
+        "filename": "modules/video_coding/codecs/av1/frame_dependencies_controller.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-12T12:00:36Z",
+      "side": 1,
+      "message": "Long term, is this class meant to be used for other encoders as well or do you intend to only use it for AV1?",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 33
+      },
+      "revId": "a56f32cb96415ae44dae9903e781450b82789782",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
