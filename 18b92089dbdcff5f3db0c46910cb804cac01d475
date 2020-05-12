@@ -22,6 +22,30 @@
       "revId": "18b92089dbdcff5f3db0c46910cb804cac01d475",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0703ca2d_c732da77",
+        "filename": "modules/video_coding/codecs/av1/scalable_video_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-12T16:02:43Z",
+      "side": 1,
+      "message": "Actually this one is a good fit.\nReplacing this struct would be inconvenient because of how this info is passed to the EncodedImageCallback, how CodecSpecificInfo structure is organised.\nSee new line366 in libaom_av1_encoder.cc\n\n(still not perfect fit, I consider extending this struct with chains [in addition to chain_diffs], active decode targets and keyframe flag. but that is for the later discussion.)\n\n(btw, what GenericFrameInfo is for, if not for this? on the other side, it doesn\u0027t have to derive from the FrameDependencyTemplate, it can copy some fields from there)",
+      "parentUuid": "080061b6_9a882cc8",
+      "range": {
+        "startLine": 44,
+        "startChar": 22,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "18b92089dbdcff5f3db0c46910cb804cac01d475",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
