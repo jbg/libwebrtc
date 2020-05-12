@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "9ff7d274_72cfd3f3",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-12T15:27:57Z",
+      "side": 1,
+      "message": "yes, that\u0027s the design:\naccomplish interface with a very shallow \u0027noop\u0027 implementation.\nIt adds no extra dependencies to the interface, but allow Av1 encoder to assume controller is always non-null.",
+      "parentUuid": "c393fa62_09e2092d",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "de82c94644358d2d2c13a889f897c8e19567f9de",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a71179a8_842bb318",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder_unittest.cc",
         "patchSetId": 2
