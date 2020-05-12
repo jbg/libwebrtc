@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0279b935_9dec3e97",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-05-12T15:49:37Z",
+      "side": 1,
+      "message": "nit: please leave an empty line between system and project imports.",
+      "range": {
+        "startLine": 12,
+        "startChar": 9,
+        "endLine": 12,
+        "endChar": 18
+      },
+      "revId": "755604d1d53502432b690192c369d475ff044370",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edc97abc_d5d86f71",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-05-12T15:49:37Z",
+      "side": 1,
+      "message": "If these types are exported you will also need to wrap them (and every use of them) in RCT_OBJC_TYPE. See the comment in RTCMacros for more info.\n\nmbonadei@: do you have an automated way to do this?",
+      "range": {
+        "startLine": 20,
+        "startChar": 11,
+        "endLine": 20,
+        "endChar": 30
+      },
+      "revId": "755604d1d53502432b690192c369d475ff044370",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
