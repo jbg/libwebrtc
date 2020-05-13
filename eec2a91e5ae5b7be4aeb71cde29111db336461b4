@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cc1a895_5d5d7aa0",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-13T10:13:25Z",
+      "side": 1,
+      "message": "Unrelated to this CL, but notice how if we use BALANCED then we don\u0027t guard against double-adapts. It certainly would make a lot more sense to have a generic \"cooldown mechanism\" than to monitor specific properties. Even if the adaptation was applied, it could have been applied 1 ms ago, and that would still be too soon to perform another adaptation because we couldn\u0027t possibly know yet whether or not the new setting was overuse or not.\n\nMaybe we can delete all this code if the Processor has a timestamp of the last adaptation request and makes sure that at least X seconds must have passed or something. WDYT?",
+      "revId": "eec2a91e5ae5b7be4aeb71cde29111db336461b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
