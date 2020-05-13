@@ -22,6 +22,30 @@
       "revId": "73f847ecf0695a0fd0bd08964814df486d731d8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9ea171f_99e6aba4",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-05-13T14:11:40Z",
+      "side": 1,
+      "message": "I thought so, I was confused that the build was green. Thanks Mirko!",
+      "parentUuid": "f6b62f2c_66e2f790",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "73f847ecf0695a0fd0bd08964814df486d731d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
