@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58976800_81fae247",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-13T09:38:06Z",
+      "side": 1,
+      "message": "Could replace this getter with a method \"WaitForQpUsageHandled\"",
+      "range": {
+        "startLine": 172,
+        "startChar": 2,
+        "endLine": 172,
+        "endChar": 75
+      },
+      "revId": "d64c42d75c66da1047579a4ce73abd476f558edb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
