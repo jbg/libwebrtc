@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f1646d41_1ad9764c",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-13T09:43:50Z",
+      "side": 1,
+      "message": "/*manual_reset\u003d*/true,\n/*initially_signaled\u003d*/false",
+      "range": {
+        "startLine": 161,
+        "startChar": 41,
+        "endLine": 161,
+        "endChar": 59
+      },
+      "revId": "d64c42d75c66da1047579a4ce73abd476f558edb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58976800_81fae247",
         "filename": "video/video_stream_encoder_unittest.cc",
         "patchSetId": 1
@@ -22,6 +45,29 @@
       "revId": "d64c42d75c66da1047579a4ce73abd476f558edb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6036715b_c709e971",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-13T09:43:50Z",
+      "side": 1,
+      "message": "Nit: it would be more readable if you hide event implementation detail inside the callback.\n\nPlease make this method |bool WaitForQpUsageHandled(int max_wait_ms)| instead of exposing rtc::Event.",
+      "range": {
+        "startLine": 172,
+        "startChar": 14,
+        "endLine": 172,
+        "endChar": 36
+      },
+      "revId": "d64c42d75c66da1047579a4ce73abd476f558edb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
