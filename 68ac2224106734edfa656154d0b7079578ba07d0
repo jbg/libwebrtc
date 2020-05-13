@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6bf254a_c424ca2b",
+        "filename": "rtc_base/task_utils/repeating_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-13T10:20:23Z",
+      "side": 1,
+      "message": "In case anyone is wondering how big of an effort it would be to keep using |task_queue_| as the checker, here\u0027s a preview:\nhttps://webrtc-review.googlesource.com/c/src/+/174828",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "68ac2224106734edfa656154d0b7079578ba07d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
