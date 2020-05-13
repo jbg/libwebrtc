@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6b62f2c_66e2f790",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-13T13:40:57Z",
+      "side": 1,
+      "message": "These types need to be wrapped not only when they are declared but everywhere (e.g. here https://cs.chromium.org/chromium/src/third_party/webrtc/sdk/objc/api/peerconnection/RTCPeerConnection%2BStats.mm?l\u003d31\u0026rcl\u003da81e9c82fc3fbc984f0f110407d1e44c9c01958a).\n\nThe build is green because the prefix is defined to nothing (https://cs.chromium.org/chromium/src/third_party/webrtc/sdk/objc/base/RTCMacros.h?l\u003d29\u0026rcl\u003da81e9c82fc3fbc984f0f110407d1e44c9c01958a).",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "73f847ecf0695a0fd0bd08964814df486d731d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
