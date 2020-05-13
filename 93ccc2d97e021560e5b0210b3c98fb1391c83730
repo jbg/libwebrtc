@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "22cd5318_fda533e9",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-13T09:52:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9aeaa149_2a74478a",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 54
+      },
+      "revId": "93ccc2d97e021560e5b0210b3c98fb1391c83730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16318f7c_8d3f211b",
         "filename": "call/adaptation/video_stream_adapter.cc",
         "patchSetId": 1
@@ -63,6 +87,24 @@
       "revId": "93ccc2d97e021560e5b0210b3c98fb1391c83730",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9e6ff91_a3bb2e0f",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-13T09:52:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16318f7c_8d3f211b",
+      "revId": "93ccc2d97e021560e5b0210b3c98fb1391c83730",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
