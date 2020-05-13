@@ -70,6 +70,30 @@
       "revId": "18b92089dbdcff5f3db0c46910cb804cac01d475",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af672d9b_4982be06",
+        "filename": "modules/video_coding/codecs/av1/scalable_video_controller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-13T14:57:14Z",
+      "side": 1,
+      "message": "ok, I tried to follow that\u0027s idea.\nthat force me to again redesign (improve) the interface between the controller and the encoder.\n\nGenericFrameInfo is now passed through. Also added option to modify it based on what encoder produced rather what encoder was requested to produce.",
+      "parentUuid": "d84eb504_fdc216b6",
+      "range": {
+        "startLine": 44,
+        "startChar": 22,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "18b92089dbdcff5f3db0c46910cb804cac01d475",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
