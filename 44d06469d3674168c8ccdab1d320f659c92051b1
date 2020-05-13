@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0a239eef_2d1c4ce6",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-13T11:32:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5564af68_34a7f0d8",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 60
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a3aa4c9_09605b20",
         "filename": "rtc_base/physical_socket_server.h",
         "patchSetId": 2
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "993262ac_34725cfe",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-13T11:32:18Z",
+      "side": 1,
+      "message": "Ack. But having them protected only by comments like this feels worse...",
+      "parentUuid": "49cee724_f98dcee3",
+      "range": {
+        "startLine": 121,
+        "startChar": 38,
+        "endLine": 121,
+        "endChar": 66
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43faf2cf_a0403f44",
         "filename": "rtc_base/physical_socket_server.h",
         "patchSetId": 2
@@ -131,6 +179,30 @@
       "side": 1,
       "message": "Good catch. But not sure how to annotate it. It is used exclusively in PhysicalSocketServer::WaitEpoll, and I guess the only reason it isn\u0027t a local variable is to reduce allocation work.\n\nIf the expectation is that only a single thread may call Wait (a public method on the SocketServer interface), that should be documented somehow.",
       "parentUuid": "43faf2cf_a0403f44",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 122,
+        "endChar": 48
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90fd2687_acdeb041",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-13T11:32:18Z",
+      "side": 1,
+      "message": "So protect it with a sequence checker? Or for this CL, just document the problem?",
+      "parentUuid": "5051d133_62926196",
       "range": {
         "startLine": 122,
         "startChar": 2,
