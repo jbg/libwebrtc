@@ -36,6 +36,52 @@
     },
     {
       "key": {
+        "uuid": "c8f87adf_5dd5f6b9",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-13T09:59:15Z",
+      "side": 1,
+      "message": "can be combined into\nEXPECT_THAT(header.generic-\u003edecode_target_indications,\n  ElementsAre(DecodeTargetIndication::kSwitch));",
+      "range": {
+        "startLine": 1026,
+        "startChar": 12,
+        "endLine": 1028,
+        "endChar": 55
+      },
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8566f755_a11db805",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-13T09:59:15Z",
+      "side": 1,
+      "message": "ditto: EXPECT_THAT(header.generic-\u003edependencies, ElementsAre(5));",
+      "range": {
+        "startLine": 1029,
+        "startChar": 0,
+        "endLine": 1030,
+        "endChar": 58
+      },
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7c37aad8_5044e5bb",
         "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
         "patchSetId": 4
@@ -47,6 +93,70 @@
       "writtenOn": "2020-05-13T07:58:03Z",
       "side": 1,
       "message": "This should move to api/, I think. If it\u0027s too complex to do that now, mark it as TODO.",
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ad16e87_f940617c",
+        "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-13T09:59:15Z",
+      "side": 1,
+      "message": "I think this class is too heavy and too dirty to move and use it in api.\n\nI would (optionally) suggest to create a new smaller, focused class for the video header exposed through insertable streams api.\n\nsomething like \nstruct GoodName {\n  int64_t frame_id;\n  bool is_keyframe;\n  int spatial_index;\n  int temporal_index;\n  std::vector\u003cint64_t\u003e frame_dependencies;\n  RenderResolution resolution;\n};\n\nTo make it easier to change in the future, may be make it a class from the start:\nclass GoodName {\n public:\n  int64_t FrameId() const { return frame_id_; }\n  ...\n\n  void SetFrameId(int64_t value) { frame_id_ \u003d value; }\n  ...\n\n private:\n  int64_t frame_id_;\n  ...\n};",
+      "parentUuid": "7c37aad8_5044e5bb",
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7814e4d5_98f3ecf4",
+        "filename": "video/rtp_video_stream_receiver_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-13T09:59:15Z",
+      "side": 1,
+      "message": "can you please be consistent how you create scoped_refptr from raw pointer:\nthis line you\u0027re using constructor syntax, next statement - assignment.\n\nI guess direct assignment is better in this case.\n\n(related article: https://abseil.io/tips/88)",
+      "range": {
+        "startLine": 188,
+        "startChar": 65,
+        "endLine": 188,
+        "endChar": 66
+      },
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f859e64_228ae51b",
+        "filename": "video/rtp_video_stream_receiver_frame_transformer_delegate_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-13T09:59:15Z",
+      "side": 1,
+      "message": "EXPECT_THAT(container, ElementsAre(...));\nhttps://github.com/google/googletest/blob/master/googlemock/docs/cheat_sheet.md#container-matchers",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 58
+      },
       "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
