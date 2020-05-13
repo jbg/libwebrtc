@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b5cb505_28a8e95e",
+        "filename": "video/video_stream_encoder_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2011,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-13T15:27:25Z",
+      "side": 1,
+      "message": "Either the comment above is wrong, or i misunderstand something. How come framerate is equal to kInputFps. Doesn\u0027t that mean that no restriction is set?\n\nAlso, since it\u0027s maintain framerate, isn\u0027t max_framerate_fps cleared?",
+      "range": {
+        "startLine": 2011,
+        "startChar": 2,
+        "endLine": 2011,
+        "endChar": 11
+      },
+      "revId": "ba35c6ef51632ef1e9b194b1d5f5837dd87d517a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
