@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fc1cfd3d_2c14811a",
+        "filename": "rtc_base/task_utils/repeating_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-13T15:53:04Z",
+      "side": 1,
+      "message": "replying below",
+      "parentUuid": "ddf77464_ce65e204",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 72
+      },
+      "revId": "68ac2224106734edfa656154d0b7079578ba07d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6bf254a_c424ca2b",
         "filename": "rtc_base/task_utils/repeating_task.h",
         "patchSetId": 3
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "There are a lot of changes in that CL, I\u0027m not sure if all of them are related. Is the issue that you want to stop the repeated task, not by actually using a task running on the task queue, but from a non-task that happens to be running on the same thread?\n\nIf we want that to be allowed behavior, maybe we should make it so that the TaskQueue checker use the SequenceChecker implementation underneath? Or make rtc::Thread do something like what I had to do for simulated threads that ran into a similar issue.",
       "parentUuid": "c6bf254a_c424ca2b",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "68ac2224106734edfa656154d0b7079578ba07d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfcb2ef3_b9bbdd75",
+        "filename": "rtc_base/task_utils/repeating_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-13T15:53:04Z",
+      "side": 1,
+      "message": "They\u0027re all related and because it turned out to be a lot of changes, I decided to take a different approach.\n\nThe delta between this CL and that CL, is two things:\n* Trying out an injectable timer in repeated_task* - you can ignore this part.\n* Working around the fact that a lot of tests are running on an rtc::Thread based implementation of TaskQueue, very often implicitly.\n\nThe TaskQueueBase::Current() method, is a static method. The IsCurrent() method is also not overridable and is basically an inline helper method in the TaskQueueBase interface that calls Current(). The RTC_DCHECK_RUN_ON() macro then basically calls the IsCurrent() method. But perhaps I\u0027m misunderstanding. Can you clarify what you mean with \"the TaskQueue checker use the SequenceChecker implementation underneath\"?",
+      "parentUuid": "57b8a210_08907384",
       "range": {
         "startLine": 51,
         "startChar": 2,
