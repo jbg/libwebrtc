@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5564af68_34a7f0d8",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-05-13T11:15:54Z",
+      "side": 1,
+      "message": "It doesn\u0027t look thread safe. But maybe it can be deleted? SetPosixSignalHandler appears unused.",
+      "parentUuid": "3dde0df0_44a77b25",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 60
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a3aa4c9_09605b20",
         "filename": "rtc_base/physical_socket_server.h",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "49cee724_f98dcee3",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-05-13T11:15:54Z",
+      "side": 1,
+      "message": "I\u0027d prefer to not do that in this cl, since it will get a bit ugly with more #if in the initializer list.",
+      "parentUuid": "4a3aa4c9_09605b20",
+      "range": {
+        "startLine": 121,
+        "startChar": 38,
+        "endLine": 121,
+        "endChar": 66
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43faf2cf_a0403f44",
         "filename": "rtc_base/physical_socket_server.h",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2020-05-13T11:00:12Z",
       "side": 1,
       "message": "Annotate this one?",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 122,
+        "endChar": 48
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5051d133_62926196",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-05-13T11:15:54Z",
+      "side": 1,
+      "message": "Good catch. But not sure how to annotate it. It is used exclusively in PhysicalSocketServer::WaitEpoll, and I guess the only reason it isn\u0027t a local variable is to reduce allocation work.\n\nIf the expectation is that only a single thread may call Wait (a public method on the SocketServer interface), that should be documented somehow.",
+      "parentUuid": "43faf2cf_a0403f44",
       "range": {
         "startLine": 122,
         "startChar": 2,
