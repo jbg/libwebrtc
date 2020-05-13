@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b21070f_5cad2742",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 8239
+      },
+      "writtenOn": "2020-05-13T20:12:52Z",
+      "side": 1,
+      "message": "These reformattings inside @implementation look a bit wrong to me, but that\u0027s what `git cl format` applied (as required by the presubmit checks).",
+      "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
