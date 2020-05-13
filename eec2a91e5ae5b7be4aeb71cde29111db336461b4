@@ -16,6 +16,24 @@
       "revId": "eec2a91e5ae5b7be4aeb71cde29111db336461b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62b213bb_44fdf4f8",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-13T12:05:02Z",
+      "side": 1,
+      "message": "I noticed that as well and agree. When I added BALANCED here there were some failing unit tests. \n\nI have filed https://crbug.com/webrtc/11570",
+      "parentUuid": "7cc1a895_5d5d7aa0",
+      "revId": "eec2a91e5ae5b7be4aeb71cde29111db336461b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
