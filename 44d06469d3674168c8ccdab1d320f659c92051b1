@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dde0df0_44a77b25",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-13T11:00:12Z",
+      "side": 1,
+      "message": "Annotate this one?",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 60
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a3aa4c9_09605b20",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-13T11:00:12Z",
+      "side": 1,
+      "message": "It looks like it should be possible to set all these in the initializer list instead, and make them const.",
+      "range": {
+        "startLine": 121,
+        "startChar": 38,
+        "endLine": 121,
+        "endChar": 66
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43faf2cf_a0403f44",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-13T11:00:12Z",
+      "side": 1,
+      "message": "Annotate this one?",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 122,
+        "endChar": 48
+      },
+      "revId": "44d06469d3674168c8ccdab1d320f659c92051b1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
