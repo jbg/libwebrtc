@@ -33,6 +33,91 @@
       "revId": "3f077b5a59c17090da4a8898563d728c93bed944",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c9a3827_abff68f9",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T11:37:06Z",
+      "side": 1,
+      "message": "Channel but that it is not used -\u003e Channel, but P2PTransportChannel is not used",
+      "revId": "3f077b5a59c17090da4a8898563d728c93bed944",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f388242_befb4246",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1316,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T11:37:06Z",
+      "side": 1,
+      "message": "s/case//\nactually, the comment is misplaced and superfluous. Delete it.",
+      "revId": "3f077b5a59c17090da4a8898563d728c93bed944",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7095c17_e83c6c0f",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T11:37:06Z",
+      "side": 1,
+      "message": "Is this using a fake clock? I hope it is, because otherwise we\u0027ve added 1.5 minutes to all the bots\u0027 runtimes....",
+      "revId": "3f077b5a59c17090da4a8898563d728c93bed944",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da8f5a6d_dc8fefc4",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T11:37:06Z",
+      "side": 1,
+      "message": "Again, delete.",
+      "revId": "3f077b5a59c17090da4a8898563d728c93bed944",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ad6dcc7_5f6ef4b4",
+        "filename": "p2p/base/port_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T11:37:06Z",
+      "side": 1,
+      "message": "This doesn\u0027t test your new timeout, since the default timeout is *also* DEAD_CONNECTION_RECEIVE_TIMEOUT. What you want to test is that the timers are separate, so set dead_connection_timeout_ms to some ridiculously high value.",
+      "revId": "3f077b5a59c17090da4a8898563d728c93bed944",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
