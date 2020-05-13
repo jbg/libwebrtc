@@ -153,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "914ff9d5_8d2ed263",
+        "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-13T11:35:24Z",
+      "side": 1,
+      "message": "optionality of the GenericDescriptorInfo is a historical artifact.\nother fields often absent, but still are there.\nI think it would be better not to carry over that into VideoMetadataHeader,\nbut instead use default values when RTPVideoHeader::generic \u003d\u003d absl::nullopt (and, may be, log a warning, at least at sending side)\n\nalternative design idea - make each field individually optional.\n(I\u0027m thinking how new fields can be added to the VideoMetadataHeader in the future. I have strong suspect there will be more fields in the future)\n\nor mix these two approaches: fields with reasonable defaults use those defaults (like 0 for temporal and spatial ids), other fields - individually wrapped into optional (like color_space)",
+      "parentUuid": "9f2a7f49_c9ef9527",
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7814e4d5_98f3ecf4",
         "filename": "video/rtp_video_stream_receiver_frame_transformer_delegate_unittest.cc",
         "patchSetId": 4
