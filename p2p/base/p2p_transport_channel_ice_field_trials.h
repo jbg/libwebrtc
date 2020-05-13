@@ -48,6 +48,9 @@ struct IceFieldTrials {
 
   // Sending a PING directly after a nomination on ICE_CONTROLLED-side.
   bool send_ping_on_nomination_ice_controlled = false;
+
+  // Connection dead timeout ms.
+  int dead_connection_timeout_ms = 30000;
 };
 
 }  // namespace cricket
