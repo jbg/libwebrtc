@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ddf77464_ce65e204",
+        "filename": "rtc_base/task_utils/repeating_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-13T14:26:26Z",
+      "side": 1,
+      "message": "Why can\u0027t those set themself as the current TQ? It should be as simple as using instantiating a TaskQueueBase::CurrentTaskQueueSetter around the execution of the pending tasks. I\u0027d consider that part of the expectations for anything that implements the TaskQueueBase interface and not having it there would break other code that have the same expectation as well.",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 72
+      },
+      "revId": "68ac2224106734edfa656154d0b7079578ba07d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6bf254a_c424ca2b",
         "filename": "rtc_base/task_utils/repeating_task.h",
         "patchSetId": 3
@@ -13,6 +36,30 @@
       "writtenOn": "2020-05-13T10:20:23Z",
       "side": 1,
       "message": "In case anyone is wondering how big of an effort it would be to keep using |task_queue_| as the checker, here\u0027s a preview:\nhttps://webrtc-review.googlesource.com/c/src/+/174828",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "68ac2224106734edfa656154d0b7079578ba07d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57b8a210_08907384",
+        "filename": "rtc_base/task_utils/repeating_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-13T14:26:26Z",
+      "side": 1,
+      "message": "There are a lot of changes in that CL, I\u0027m not sure if all of them are related. Is the issue that you want to stop the repeated task, not by actually using a task running on the task queue, but from a non-task that happens to be running on the same thread?\n\nIf we want that to be allowed behavior, maybe we should make it so that the TaskQueue checker use the SequenceChecker implementation underneath? Or make rtc::Thread do something like what I had to do for simulated threads that ran into a similar issue.",
+      "parentUuid": "c6bf254a_c424ca2b",
       "range": {
         "startLine": 51,
         "startChar": 2,
