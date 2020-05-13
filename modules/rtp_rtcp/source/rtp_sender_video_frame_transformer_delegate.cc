@@ -75,7 +75,7 @@ class TransformableVideoSenderFrame : public TransformableVideoFrameInterface {
     return RtpDescriptorAuthentication(header_);
   }
 
-  const RTPVideoHeader& GetHeader() const { return header_; }
+  const RTPVideoHeader& GetRtpVideoHeader() const override { return header_; }
   int GetPayloadType() const { return payload_type_; }
   absl::optional<VideoCodecType> GetCodecType() const { return codec_type_; }
   int64_t GetCaptureTimeMs() const { return capture_time_ms_; }
@@ -161,7 +161,7 @@ void RTPSenderVideoFrameTransformerDelegate::SendVideo(
       transformed_video_frame->GetCaptureTimeMs(),
       transformed_video_frame->GetData(),
       transformed_video_frame->GetFragmentationHeader(),
-      transformed_video_frame->GetHeader(),
+      transformed_video_frame->GetRtpVideoHeader(),
       transformed_video_frame->GetExpectedRetransmissionTimeMs());
 }
 
