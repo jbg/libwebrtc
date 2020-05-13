@@ -989,5 +989,50 @@ TEST_F(RtpSenderVideoWithFrameTransformerTest, OnTransformedFrameSendsVideo) {
   EXPECT_EQ(transport_.packets_sent(), 1);
 }
 
+TEST_F(RtpSenderVideoWithFrameTransformerTest,
+       TransformableFrameHeaderHasCorrectValue) {
+  rtc::scoped_refptr<MockFrameTransformer> mock_frame_transformer(
+      new rtc::RefCountedObject<NiceMock<MockFrameTransformer>>());
+  std::unique_ptr<RTPSenderVideo> rtp_sender_video =
+      CreateSenderWithFrameTransformer(mock_frame_transformer);
+  auto encoded_image = CreateDefaultEncodedImage();
+  RTPVideoHeader video_header;
+  video_header.width = 1280u;
+  video_header.height = 720u;
+  RTPVideoHeader::GenericDescriptorInfo& generic =
+      video_header.generic.emplace();
+  generic.frame_id = 10;
+  generic.temporal_index = 3;
+  generic.spatial_index = 2;
+  generic.decode_target_indications = {DecodeTargetIndication::kSwitch};
+  generic.dependencies = {5};
+
+  // Check that the transformable frame passed to the frame transformer has the
+  // correct header.
+  EXPECT_CALL(*mock_frame_transformer, Transform)
+      .WillOnce(
+          [](std::unique_ptr<TransformableFrameInterface> transformable_frame) {
+            auto frame =
+                absl::WrapUnique(static_cast<TransformableVideoFrameInterface*>(
+                    transformable_frame.release()));
+            ASSERT_TRUE(frame);
+            auto header = frame->GetRtpVideoHeader();
+            EXPECT_EQ(header.width, 1280u);
+            EXPECT_EQ(header.height, 720u);
+            ASSERT_TRUE(header.generic);
+            EXPECT_EQ(header.generic->frame_id, 10);
+            EXPECT_EQ(header.generic->temporal_index, 3);
+            EXPECT_EQ(header.generic->spatial_index, 2);
+            ASSERT_EQ(header.generic->decode_target_indications.size(), 1u);
+            EXPECT_EQ(header.generic->decode_target_indications[0],
+                      DecodeTargetIndication::kSwitch);
+            ASSERT_EQ(header.generic->dependencies.size(), 1u);
+            EXPECT_EQ(header.generic->dependencies[0], 5);
+          });
+  rtp_sender_video->SendEncodedImage(kPayload, kType, kTimestamp,
+                                     *encoded_image, nullptr, video_header,
+                                     kDefaultExpectedRetransmissionTimeMs);
+}
+
 }  // namespace
 }  // namespace webrtc
