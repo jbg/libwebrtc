@@ -135,6 +135,24 @@
     },
     {
       "key": {
+        "uuid": "9f2a7f49_c9ef9527",
+        "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-13T10:59:48Z",
+      "side": 1,
+      "message": "Sgtm, the only problem I see is that generic is optional in the RtpVideoHeader, so VideoMetadataHeader should probably contain an optional public version of GenericDescriptorInfo (VideoMetadataGeneric?) in it.\n\nstruct VideoMetadataGeneric {\n    int64_t frame_id \u003d 0;\n    int spatial_index \u003d 0;\n    int temporal_index \u003d 0;\n    absl::InlinedVector\u003cDecodeTargetIndication, 10\u003e decode_target_indications; // we discussed exposing this too for potential future use from JS API.\n    absl::InlinedVector\u003cint64_t, 5\u003e dependencies;\n  };\n\nstruct VideoMetadataHeader {\n  RenderResolution resolution;\n  absl::optional\u003cVideoMetadataGeneric\u003e generic;\n};",
+      "parentUuid": "4c7aca53_9968746a",
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7814e4d5_98f3ecf4",
         "filename": "video/rtp_video_stream_receiver_frame_transformer_delegate_unittest.cc",
         "patchSetId": 4
