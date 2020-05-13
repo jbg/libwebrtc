@@ -1217,7 +1217,7 @@ PhysicalSocketServer::PhysicalSocketServer() : fWait_(false) {
     epoll_fd_ = INVALID_SOCKET;
   }
 #endif
-  signal_wakeup_ = new Signaler(this, &fWait_);
+  signal_wakeup_ = std::make_unique<Signaler>(this, &fWait_);
 #if defined(WEBRTC_WIN)
   socket_ev_ = WSACreateEvent();
 #endif
@@ -1230,7 +1230,6 @@ PhysicalSocketServer::~PhysicalSocketServer() {
 #if defined(WEBRTC_POSIX)
   signal_dispatcher_.reset();
 #endif
-  delete signal_wakeup_;
 #if defined(WEBRTC_USE_EPOLL)
   if (epoll_fd_ != INVALID_SOCKET) {
     close(epoll_fd_);
@@ -1360,7 +1359,7 @@ bool PhysicalSocketServer::Wait(int cmsWait, bool process_io) {
   // (i.e. signaling) dispatcher, so "poll" will be used instead of the default
   // "select" to support sockets larger than FD_SETSIZE.
   if (!process_io) {
-    return WaitPoll(cmsWait, signal_wakeup_);
+    return WaitPoll(cmsWait, signal_wakeup_.get());
   } else if (epoll_fd_ != INVALID_SOCKET) {
     return WaitEpoll(cmsWait);
   }
@@ -1459,7 +1458,7 @@ bool PhysicalSocketServer::WaitSelect(int cmsWait, bool process_io) {
       for (Dispatcher* pdispatcher : dispatchers_) {
         // Query dispatchers for read and write wait state
         RTC_DCHECK(pdispatcher);
-        if (!process_io && (pdispatcher != signal_wakeup_))
+        if (!process_io && (pdispatcher != signal_wakeup_.get()))
           continue;
         int fd = pdispatcher->GetDescriptor();
         // "select"ing a file descriptor that is equal to or larger than
