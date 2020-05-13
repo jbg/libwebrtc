@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbf33aba_80ac706c",
+        "filename": "api/frame_transformer_interface.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T07:58:03Z",
+      "side": 1,
+      "message": "I assume you\u0027ll mark this as RTC_DEPRECATED once Chrome has rolled to the new API.",
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdd50b42_6bcb0c55",
+        "filename": "modules/rtp_rtcp/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T07:58:03Z",
+      "side": 1,
+      "message": "Why this change?\nIf it\u0027s just about the video header being exportable, does it need to be that way if it\u0027s in api/?",
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c37aad8_5044e5bb",
+        "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T07:58:03Z",
+      "side": 1,
+      "message": "This should move to api/, I think. If it\u0027s too complex to do that now, mark it as TODO.",
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
