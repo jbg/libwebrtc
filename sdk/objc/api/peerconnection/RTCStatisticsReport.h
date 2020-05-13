@@ -10,12 +10,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "RTCMacros.h"
+
 @class RTCStatistics;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /** A statistics report. Encapsulates a number of RTCStatistics objects. */
-@interface RTCStatisticsReport : NSObject
+RTC_OBJC_EXPORT
+@interface RTC_OBJC_TYPE (RTCStatisticsReport) : NSObject
 
 /** The timestamp of the report in microseconds since 1970-01-01T00:00:00Z. */
 @property(nonatomic, readonly) CFTimeInterval timestamp_us;
@@ -28,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /** A part of a report (a subreport) covering a certain area. */
-@interface RTCStatistics : NSObject
+RTC_OBJC_EXPORT
+@interface RTC_OBJC_TYPE (RTCStatistics) : NSObject
 
 /** The id of this subreport, e.g. "RTCMediaStreamTrack_receiver_2". */
 @property(nonatomic, readonly) NSString *id;
