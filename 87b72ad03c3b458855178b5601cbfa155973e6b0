@@ -117,6 +117,24 @@
     },
     {
       "key": {
+        "uuid": "4c7aca53_9968746a",
+        "filename": "modules/rtp_rtcp/source/rtp_video_header.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-13T10:25:41Z",
+      "side": 1,
+      "message": "After reading through the class ... agreed, this is not something Blink should have access to.\n\nIf we can have a read-only VideoMetadataHeader abstract class exposing exactly the fields we need, and an implementation class that takes an RTPVideoHeader as constructor argument ... that would be better.",
+      "parentUuid": "2ad16e87_f940617c",
+      "revId": "87b72ad03c3b458855178b5601cbfa155973e6b0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7814e4d5_98f3ecf4",
         "filename": "video/rtp_video_stream_receiver_frame_transformer_delegate_unittest.cc",
         "patchSetId": 4
