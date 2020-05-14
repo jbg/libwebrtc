@@ -499,19 +499,19 @@ void VideoAnalyzer::PollStats() {
     // |frames_decoded| and |frames_rendered| are used because they are more
     // accurate than |decode_frame_rate| and |render_frame_rate|.
     // The latter two are calculated on a momentary basis.
-    const double total_frames_duration_sec_double =
-        static_cast<double>(receive_stats.total_frames_duration_ms) / 1000.0;
-    if (total_frames_duration_sec_double > 0) {
+    const double total_frames_duration_sec =
+        receive_stats.total_inter_frame_delay;
+    if (total_frames_duration_sec > 0) {
       decode_frame_rate_ = static_cast<double>(receive_stats.frames_decoded) /
-                           total_frames_duration_sec_double;
+                           total_frames_duration_sec;
       render_frame_rate_ = static_cast<double>(receive_stats.frames_rendered) /
-                           total_frames_duration_sec_double;
+                           total_frames_duration_sec;
     }
 
     // Freeze metrics.
     freeze_count_ = receive_stats.freeze_count;
     total_freezes_duration_ms_ = receive_stats.total_freezes_duration_ms;
-    total_frames_duration_ms_ = receive_stats.total_frames_duration_ms;
+    total_frames_duration_ms_ = receive_stats.total_inter_frame_delay * 1000;
     sum_squared_frame_durations_ = receive_stats.sum_squared_frame_durations;
   }
 

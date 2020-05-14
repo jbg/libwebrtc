@@ -672,9 +672,10 @@ VideoReceiveStream::Stats ReceiveStatisticsProxy::GetStats() const {
   stats_.total_pauses_duration_ms =
       video_quality_observer_->TotalPausesDurationMs();
   stats_.total_frames_duration_ms =
-      video_quality_observer_->TotalFramesDurationMs();
+      video_quality_observer_->HarmonicFramesDuration().ms();
   stats_.sum_squared_frame_durations =
-      video_quality_observer_->SumSquaredFrameDurationsSec();
+      video_quality_observer_->HarmonicSumSquaredFrameDurations()
+          .seconds<double>();
   stats_.content_type = last_content_type_;
   stats_.timing_frame_info = timing_frame_info_counter_.Max(now_ms);
   stats_.jitter_buffer_delay_seconds =

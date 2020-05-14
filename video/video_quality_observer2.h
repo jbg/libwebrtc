@@ -13,10 +13,12 @@
 
 #include <stdint.h>
 
+#include <array>
 #include <set>
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/units/time_delta.h"
 #include "api/video/video_codec_type.h"
 #include "api/video/video_content_type.h"
 #include "rtc_base/numerics/moving_average.h"
@@ -48,8 +50,8 @@ class VideoQualityObserver {
   uint32_t NumPauses() const;
   uint32_t TotalFreezesDurationMs() const;
   uint32_t TotalPausesDurationMs() const;
-  uint32_t TotalFramesDurationMs() const;
-  double SumSquaredFrameDurationsSec() const;
+  TimeDelta HarmonicFramesDuration() const;
+  TimeDelta HarmonicSumSquaredFrameDurations() const;
 
   // Set |screenshare| to true if the last decoded frame was for screenshare.
   void UpdateHistograms(bool screenshare);
@@ -59,6 +61,13 @@ class VideoQualityObserver {
   static const uint32_t kAvgInterframeDelaysWindowSizeFrames;
 
  private:
+  static constexpr int kIgnoredHarmonicSamples = 30;
+
+  struct HarmonicStats {
+    TimeDelta sum_squared = TimeDelta::Seconds(0);
+    TimeDelta sum = TimeDelta::Seconds(0);
+  };
+
   enum Resolution {
     Low = 0,
     Medium = 1,
@@ -73,7 +82,8 @@ class VideoQualityObserver {
   // Decoded timestamp of the last delayed frame.
   int64_t last_unfreeze_time_ms_;
   rtc::MovingAverage render_interframe_delays_;
-  double sum_squared_interframe_delays_secs_;
+  int harmonic_stats_count_ = 0;
+  std::array<HarmonicStats, kIgnoredHarmonicSamples> harmonic_stats_;
   // An inter-frame delay is counted as a freeze if it's significantly longer
   // than average inter-frame delay.
   rtc::SampleCounter freezes_durations_;

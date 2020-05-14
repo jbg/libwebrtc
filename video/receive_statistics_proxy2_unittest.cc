@@ -53,6 +53,9 @@ class ReceiveStatisticsProxy2Test : public ::testing::Test {
   ~ReceiveStatisticsProxy2Test() override { statistics_proxy_.reset(); }
 
  protected:
+  // Same as in VideoQualityObserver.
+  static constexpr int kIgnoredHarmonicSamples = 30;
+
   // Convenience method to avoid too many explict flushes.
   VideoReceiveStream::Stats FlushAndGetStats() {
     loop_.Flush();
@@ -408,7 +411,7 @@ TEST_F(ReceiveStatisticsProxy2Test, ReportsFramesDuration) {
   // not the total time.
   fake_clock_.AdvanceTimeMilliseconds(5432);
 
-  for (int i = 0; i <= 10; ++i) {
+  for (int i = 0; i <= 10 + 2 * kIgnoredHarmonicSamples; ++i) {
     fake_clock_.AdvanceTimeMilliseconds(30);
     statistics_proxy_->OnRenderedFrame(MetaData(frame));
   }
@@ -422,7 +425,7 @@ TEST_F(ReceiveStatisticsProxy2Test, ReportsSumSquaredFrameDurations) {
   ASSERT_EQ(0u, stats.sum_squared_frame_durations);
 
   webrtc::VideoFrame frame = CreateFrame(kWidth, kHeight);
-  for (int i = 0; i <= 10; ++i) {
+  for (int i = 0; i <= 10 + 2 * kIgnoredHarmonicSamples; ++i) {
     fake_clock_.AdvanceTimeMilliseconds(30);
     statistics_proxy_->OnRenderedFrame(MetaData(frame));
   }
@@ -1401,25 +1404,33 @@ TEST_P(ReceiveStatisticsProxy2TestWithContent, HarmonicFrameRateIsReported) {
                               kFreezeDurationMs + kPauseDurationMs;
   webrtc::VideoFrame frame = CreateFrame(kWidth, kHeight);
 
-  for (int i = 0; i < kMinRequiredSamples; ++i) {
+  for (int i = 0; i < kMinRequiredSamples / 2; ++i) {
     fake_clock_.AdvanceTimeMilliseconds(kFrameDurationMs);
     statistics_proxy_->OnDecodedFrame(frame, absl::nullopt, 0, content_type_);
     statistics_proxy_->OnRenderedFrame(MetaData(frame));
+    loop_.Flush();
   }
 
   // Freezes and pauses should be included into harmonic frame rate.
   // Add freeze.
-  loop_.Flush();
   fake_clock_.AdvanceTimeMilliseconds(kFreezeDurationMs);
   statistics_proxy_->OnDecodedFrame(frame, absl::nullopt, 0, content_type_);
   statistics_proxy_->OnRenderedFrame(MetaData(frame));
+  loop_.Flush();
 
   // Add pause.
-  loop_.Flush();
   fake_clock_.AdvanceTimeMilliseconds(kPauseDurationMs);
   statistics_proxy_->OnStreamInactive();
   statistics_proxy_->OnDecodedFrame(frame, absl::nullopt, 0, content_type_);
   statistics_proxy_->OnRenderedFrame(MetaData(frame));
+  loop_.Flush();
+
+  for (int i = 0; i < kMinRequiredSamples / 2; ++i) {
+    fake_clock_.AdvanceTimeMilliseconds(kFrameDurationMs);
+    statistics_proxy_->OnDecodedFrame(frame, absl::nullopt, 0, content_type_);
+    statistics_proxy_->OnRenderedFrame(MetaData(frame));
+    loop_.Flush();
+  }
 
   FlushAndUpdateHistograms(absl::nullopt, StreamDataCounters(), nullptr);
   double kSumSquaredFrameDurationSecs =

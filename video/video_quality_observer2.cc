@@ -46,7 +46,6 @@ VideoQualityObserver::VideoQualityObserver()
       is_last_frame_blocky_(false),
       last_unfreeze_time_ms_(0),
       render_interframe_delays_(kAvgInterframeDelaysWindowSizeFrames),
-      sum_squared_interframe_delays_secs_(0.0),
       time_in_resolution_ms_(3, 0),
       current_resolution_(Resolution::Low),
       num_resolution_downgrades_(0),
@@ -122,13 +121,13 @@ void VideoQualityObserver::UpdateHistograms(bool screenshare) {
     log_stream << uma_prefix << ".NumberFreezesPerMinute "
                << num_freezes_per_minute << "\n";
 
-    if (sum_squared_interframe_delays_secs_ > 0.0) {
-      int harmonic_framerate_fps = std::round(
-          video_duration_ms / (1000 * sum_squared_interframe_delays_secs_));
+    double harmonic_framerate = HarmonicFramesDuration().ms<double>() /
+                                HarmonicSumSquaredFrameDurations().ms<double>();
+    if (harmonic_framerate > 0.0) {
       RTC_HISTOGRAM_COUNTS_SPARSE_100(uma_prefix + ".HarmonicFrameRate",
-                                      harmonic_framerate_fps);
+                                      std::round(harmonic_framerate));
       log_stream << uma_prefix << ".HarmonicFrameRate "
-                 << harmonic_framerate_fps << "\n";
+                 << std::round(harmonic_framerate) << "\n";
     }
   }
   RTC_LOG(LS_INFO) << log_stream.str();
@@ -147,16 +146,26 @@ void VideoQualityObserver::OnRenderedFrame(
   auto blocky_frame_it = blocky_frames_.find(frame_meta.rtp_timestamp);
 
   if (num_frames_rendered_ > 0) {
-    // Process inter-frame delay.
     const int64_t interframe_delay_ms =
         frame_meta.decode_timestamp.ms() - last_frame_rendered_ms_;
-    const double interframe_delays_secs = interframe_delay_ms / 1000.0;
 
-    // Sum of squared inter frame intervals is used to calculate the harmonic
-    // frame rate metric. The metric aims to reflect overall experience related
-    // to smoothness of video playback and includes both freezes and pauses.
-    sum_squared_interframe_delays_secs_ +=
-        interframe_delays_secs * interframe_delays_secs;
+    if (harmonic_stats_count_ > kIgnoredHarmonicSamples) {
+      const double interframe_delay_seconds = interframe_delay_ms / 1000.0;
+      const HarmonicStats& current =
+          harmonic_stats_[harmonic_stats_count_ % harmonic_stats_.size()];
+      HarmonicStats& next =
+          harmonic_stats_[(harmonic_stats_count_ + 1) % harmonic_stats_.size()];
+
+      // Sum of squared inter frame intervals is used to calculate the harmonic
+      // frame rate metric. The metric aims to reflect overall experience
+      // related to smoothness of video playback and includes both freezes and
+      // pauses.
+      next.sum = current.sum + TimeDelta::Seconds(interframe_delay_seconds);
+      next.sum_squared =
+          current.sum_squared + TimeDelta::Seconds(interframe_delay_seconds *
+                                                   interframe_delay_seconds);
+    }
+    harmonic_stats_count_++;
 
     if (!is_paused_) {
       render_interframe_delays_.AddSample(interframe_delay_ms);
@@ -282,12 +291,14 @@ uint32_t VideoQualityObserver::TotalPausesDurationMs() const {
   return pauses_durations_.Sum(kMinRequiredSamples).value_or(0);
 }
 
-uint32_t VideoQualityObserver::TotalFramesDurationMs() const {
-  return last_frame_rendered_ms_ - first_frame_rendered_ms_;
+TimeDelta VideoQualityObserver::HarmonicFramesDuration() const {
+  return harmonic_stats_[(harmonic_stats_count_ + 1) % harmonic_stats_.size()]
+      .sum;
 }
 
-double VideoQualityObserver::SumSquaredFrameDurationsSec() const {
-  return sum_squared_interframe_delays_secs_;
+TimeDelta VideoQualityObserver::HarmonicSumSquaredFrameDurations() const {
+  return harmonic_stats_[(harmonic_stats_count_ + 1) % harmonic_stats_.size()]
+      .sum_squared;
 }
 
 }  // namespace internal
