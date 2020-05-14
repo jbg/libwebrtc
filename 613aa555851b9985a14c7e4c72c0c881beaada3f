@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ccdcfa57_962972e4",
+        "filename": "api/DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f36b54e_350f1171",
+      "range": {
+        "startLine": 283,
+        "startChar": 1,
+        "endLine": 285,
+        "endChar": 4
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc73b8dd_e75ef344",
         "filename": "api/frame_transformer_interface.h",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-14T15:07:54Z",
       "side": 1,
       "message": "might need to hide the constructor into .cc file to avoid leaking RTPVideoHeader\n(or add an empty constructor or factory function for the metadata_ to hide into video_header_metadata.cc)",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 69
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c8576af_d61b02cc",
+        "filename": "api/frame_transformer_interface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "metadata_ gets removed in the next CL, I don\u0027t think it makes sense to create a cc file.",
+      "parentUuid": "bc73b8dd_e75ef344",
       "range": {
         "startLine": 42,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "490a8d9e_79e9a056",
+        "filename": "api/video_header_metadata.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afb65ee6_cd6dbcd2",
+      "range": {
+        "startLine": 19,
+        "startChar": 22,
+        "endLine": 19,
+        "endChar": 46
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67288f11_89d433ea",
         "filename": "api/video_header_metadata.cc",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2020-05-14T15:07:54Z",
       "side": 1,
       "message": "another advantage of not making all members const is option to initialize members in the body of the constructor:\n\nif (header.generic) {\n  spatial_index_ \u003d header.generic-\u003espatial_index;\n  frame_dependencies_.assign(header.generic-\u003edependencies.begin(), header.generic-\u003edependencies.end());\n   ....\n}\n\n\n(which might be a bit more readable)",
+      "range": {
+        "startLine": 33,
+        "startChar": 55,
+        "endLine": 33,
+        "endChar": 57
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "703b0ade_d90fe09b",
+        "filename": "api/video_header_metadata.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67288f11_89d433ea",
       "range": {
         "startLine": 33,
         "startChar": 55,
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "08423a69_5f917904",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4427c02_9a9fba7d",
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc4a17a2_58859eba",
         "filename": "api/video_header_metadata.h",
         "patchSetId": 6
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "a3cde011_caaa66e5",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc4a17a2_58859eba",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 53
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4f1b3da_2b1de17d",
         "filename": "api/video_header_metadata.h",
         "patchSetId": 6
@@ -145,6 +283,30 @@
       "writtenOn": "2020-05-14T15:07:54Z",
       "side": 1,
       "message": "thinking about alternative name:\nVideoFrameMetadata (since it is really metadata about the frame rather than header).",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a6237c7_b5a64881",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4f1b3da_2b1de17d",
       "range": {
         "startLine": 22,
         "startChar": 6,
@@ -180,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "0937dd95_4bbdfae2",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Copyable, done.",
+      "parentUuid": "49e63325_5293fdf0",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e03c703b_fe402a6d",
         "filename": "api/video_header_metadata.h",
         "patchSetId": 6
@@ -200,6 +386,30 @@
       "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81be6b43_08679668",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e03c703b_fe402a6d",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 10
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -226,6 +436,30 @@
     },
     {
       "key": {
+        "uuid": "6f4aa21a_13364376",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f9af591_d7addc99",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 16
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7dc01bd_d2352525",
         "filename": "api/video_header_metadata.h",
         "patchSetId": 6
@@ -237,6 +471,30 @@
       "writtenOn": "2020-05-14T15:07:54Z",
       "side": 1,
       "message": "you might want to avoid force copy here and\nreturn const reference instead of copy.\neither directly (const std::vector\u003cint64_t\u003e\u0026) or as a reference class (rtc::ArrayView\u003cconst int64_t\u003e)\n\n2nd option might be better since that would allow to change the underneath representation e.g. to absl::InlinedVector for less allocations.",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e763731d_0aa68c35",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7dc01bd_d2352525",
       "range": {
         "startLine": 32,
         "startChar": 2,
@@ -272,6 +530,30 @@
     },
     {
       "key": {
+        "uuid": "e2972ae2_e8235ec0",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Unless webrtc is transitioning to using RenderResolution I\u0027d prefer to have them separate in Blink to expose them in JS.",
+      "parentUuid": "72f87179_5db07b30",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 24
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24db59b7_8cb1ef68",
         "filename": "api/video_header_metadata.h",
         "patchSetId": 6
@@ -283,6 +565,30 @@
       "writtenOn": "2020-05-14T15:07:54Z",
       "side": 1,
       "message": "marking all members const make this class unassignable.\nMay be that is not right choice for a data class like this one.\n\nIt might be better to mark objects of this class const when you do not want to modify them.",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 8
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6e945e6_2f297fcf",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24db59b7_8cb1ef68",
       "range": {
         "startLine": 45,
         "startChar": 2,
@@ -318,6 +624,30 @@
     },
     {
       "key": {
+        "uuid": "49e53944_59ca9d40",
+        "filename": "api/video_header_metadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81cc593e_7a66fbc5",
+      "range": {
+        "startLine": 47,
+        "startChar": 20,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abf0ece8_a87d9777",
         "filename": "api/video_header_metadata_unittest.cc",
         "patchSetId": 6
@@ -338,6 +668,30 @@
       "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "736b91c2_601e33b0",
+        "filename": "api/video_header_metadata_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abf0ece8_a87d9777",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 32
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -364,6 +718,30 @@
     },
     {
       "key": {
+        "uuid": "534d1a42_e3fcd307",
+        "filename": "api/video_header_metadata_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50c23efb_6e988c98",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 75
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11cf7124_ec4458e2",
         "filename": "api/video_header_metadata_unittest.cc",
         "patchSetId": 6
@@ -375,6 +753,30 @@
       "writtenOn": "2020-05-14T15:07:54Z",
       "side": 1,
       "message": "may be EXPECT_EQ(metadata.GetFrameId(), absl::nullopt);\nto stress you are not comparing to zero.",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 38
+      },
+      "revId": "613aa555851b9985a14c7e4c72c0c881beaada3f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19267438_2d3394d4",
+        "filename": "api/video_header_metadata_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-05-14T16:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11cf7124_ec4458e2",
       "range": {
         "startLine": 50,
         "startChar": 2,
