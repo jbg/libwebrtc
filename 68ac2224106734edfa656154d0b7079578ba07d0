@@ -117,6 +117,30 @@
       "revId": "68ac2224106734edfa656154d0b7079578ba07d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da20227c_f1fc9352",
+        "filename": "rtc_base/task_utils/repeating_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-05-14T08:59:41Z",
+      "side": 1,
+      "message": "What I mean is that we probably should not have a TaskQueue specific check at all if we want to support combining TaskQueue semantics with rtc::Thread semantics, since this won\u0027t be the only place we\u0027ll run into the problem.",
+      "parentUuid": "dfcb2ef3_b9bbdd75",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "68ac2224106734edfa656154d0b7079578ba07d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
