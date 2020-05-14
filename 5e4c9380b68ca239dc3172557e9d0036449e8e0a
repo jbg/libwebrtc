@@ -34,6 +34,24 @@
       "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "582897cb_6c0d27ec",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-05-14T12:29:23Z",
+      "side": 1,
+      "message": "Ah crap, yeah it thinks it\u0027s a category. I\u0027d just reformat manually to something sane for now and force submit past the format check. As long as we don\u0027t touch these lines we should avoid the problem in the future.\n\nWe could also update clang-format, but I\u0027m not sure how easy that is.",
+      "parentUuid": "722efec2_f4e6628f",
+      "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
