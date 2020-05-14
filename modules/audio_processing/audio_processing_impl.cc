@@ -992,6 +992,10 @@ void AudioProcessingImpl::AllocateRenderQueue() {
 
 void AudioProcessingImpl::EmptyQueuedRenderAudio() {
   rtc::CritScope cs_capture(&crit_capture_);
+  EmptyQueuedRenderAudioLocked();
+}
+
+void AudioProcessingImpl::EmptyQueuedRenderAudioLocked() {
   if (submodules_.echo_control_mobile) {
     RTC_DCHECK(aecm_render_signal_queue_);
     while (aecm_render_signal_queue_->Remove(&aecm_capture_queue_buffer_)) {
@@ -1047,7 +1051,7 @@ int AudioProcessingImpl::ProcessStream(const int16_t* const src,
 }
 
 int AudioProcessingImpl::ProcessCaptureStreamLocked() {
-  EmptyQueuedRenderAudio();
+  EmptyQueuedRenderAudioLocked();
   HandleCaptureRuntimeSettings();
 
   // Ensure that not both the AEC and AECM are active at the same time.
