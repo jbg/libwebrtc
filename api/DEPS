@@ -280,6 +280,10 @@ specific_include_rules = {
     "+rtc_base/ref_count.h",
   ],
 
+  "video_header_metadata\.h": [
+    "+modules/rtp_rtcp/source/rtp_video_header.h",
+  ],
+
   # .cc files in api/ should not be restricted in what they can #include,
   # so we re-add all the top-level directories here. (That's because .h
   # files leak their #includes to whoever's #including them, but .cc files
