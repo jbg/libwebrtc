@@ -70,6 +70,24 @@
       "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52ffe583_ad60c33c",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 8239
+      },
+      "writtenOn": "2020-05-14T12:43:29Z",
+      "side": 1,
+      "message": "I reverted those two reformattings.",
+      "parentUuid": "4ad2c221_b9e27ed2",
+      "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
