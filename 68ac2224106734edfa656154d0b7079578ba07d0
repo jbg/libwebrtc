@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "23d6f2c4_a40f5d1d",
+        "filename": "rtc_base/task_utils/repeating_task.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-14T09:53:11Z",
+      "side": 1,
+      "message": "I figured out the issue with rtc::Thread and uploaded a CL for it. You\u0027re cc-ed.",
+      "parentUuid": "46a87e5f_bc069acc",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 72
+      },
+      "revId": "68ac2224106734edfa656154d0b7079578ba07d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6bf254a_c424ca2b",
         "filename": "rtc_base/task_utils/repeating_task.h",
         "patchSetId": 3
