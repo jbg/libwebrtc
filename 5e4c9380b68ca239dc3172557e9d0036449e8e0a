@@ -16,6 +16,24 @@
       "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "722efec2_f4e6628f",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-14T11:29:13Z",
+      "side": 1,
+      "message": "Yes, this looks strange. I suspect the macro confuses clang-format (Kari do you have any input on this?).",
+      "parentUuid": "9b21070f_5cad2742",
+      "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
