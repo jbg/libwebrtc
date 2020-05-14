@@ -52,6 +52,24 @@
       "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ad2c221_b9e27ed2",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-14T12:32:08Z",
+      "side": 1,
+      "message": "I am ok with this.\n\nKari, is this just an option to enable in https://webrtc.googlesource.com/src/+/refs/heads/master/.clang-format or it is a clang-format bug?",
+      "parentUuid": "582897cb_6c0d27ec",
+      "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
