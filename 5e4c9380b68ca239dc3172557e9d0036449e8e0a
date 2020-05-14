@@ -106,6 +106,24 @@
       "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9b8e07a_c01720ba",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-14T13:11:28Z",
+      "side": 1,
+      "message": "Makes sense, since you know ObjC syntax better than I do, can you file a crbug.com with component Tools\u003eLLVM?",
+      "parentUuid": "e1ea39f2_64f6300f",
+      "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
