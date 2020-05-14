@@ -264,12 +264,9 @@ class MediaChannel : public sigslot::has_slots<> {
 
   int SetOption(NetworkInterface::SocketType type,
                 rtc::Socket::Option opt,
-                int option) {
+                int option) RTC_LOCKS_EXCLUDED(network_interface_crit_) {
     rtc::CritScope cs(&network_interface_crit_);
-    if (!network_interface_)
-      return -1;
-
-    return network_interface_->SetOption(type, opt, option);
+    return SetOptionLocked(type, opt, option);
   }
 
   const webrtc::MediaTransportConfig& media_transport_config() const {
@@ -298,6 +295,15 @@ class MediaChannel : public sigslot::has_slots<> {
       rtc::scoped_refptr<webrtc::FrameTransformerInterface> frame_transformer);
 
  protected:
+  int SetOptionLocked(NetworkInterface::SocketType type,
+                      rtc::Socket::Option opt,
+                      int option)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(network_interface_crit_) {
+    if (!network_interface_)
+      return -1;
+    return network_interface_->SetOption(type, opt, option);
+  }
+
   bool DscpEnabled() const { return enable_dscp_; }
 
   // This is the DSCP value used for both RTP and RTCP channels if DSCP is
@@ -322,9 +328,11 @@ class MediaChannel : public sigslot::has_slots<> {
   int UpdateDscp() RTC_EXCLUSIVE_LOCKS_REQUIRED(network_interface_crit_) {
     rtc::DiffServCodePoint value =
         enable_dscp_ ? preferred_dscp_ : rtc::DSCP_DEFAULT;
-    int ret = SetOption(NetworkInterface::ST_RTP, rtc::Socket::OPT_DSCP, value);
+    int ret =
+        SetOptionLocked(NetworkInterface::ST_RTP, rtc::Socket::OPT_DSCP, value);
     if (ret == 0) {
-      ret = SetOption(NetworkInterface::ST_RTCP, rtc::Socket::OPT_DSCP, value);
+      ret = SetOptionLocked(NetworkInterface::ST_RTCP, rtc::Socket::OPT_DSCP,
+                            value);
     }
     return ret;
   }
