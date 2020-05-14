@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6f1dd27_43ef0133",
+        "filename": "video/video_quality_observer2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-05-14T12:47:29Z",
+      "side": 1,
+      "message": "The metric won\u0027t capture freezes in the beginning of call. Looks to me that we are trying to hide an issue instead of solving it.\n\nFor example, imagine a call where first key frame will be rendered and then video will frozen to N seconds due to some issue. Why should not this be reflected in harmonic frame rate? \n\nI won\u0027t exclude any samples from it, really.",
+      "range": {
+        "startLine": 64,
+        "startChar": 23,
+        "endLine": 64,
+        "endChar": 52
+      },
+      "revId": "3393e31533f7d61c89b2e134e740a21768cafb5d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
