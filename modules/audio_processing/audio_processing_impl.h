@@ -281,7 +281,9 @@ class AudioProcessingImpl : public AudioProcessing {
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void HandleRenderRuntimeSettings() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_);
 
-  void EmptyQueuedRenderAudio();
+  void EmptyQueuedRenderAudio() RTC_LOCKS_EXCLUDED(crit_capture_);
+  void EmptyQueuedRenderAudioLocked()
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_capture_);
   void AllocateRenderQueue()
       RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_render_, crit_capture_);
   void QueueBandedRenderAudio(AudioBuffer* audio)
