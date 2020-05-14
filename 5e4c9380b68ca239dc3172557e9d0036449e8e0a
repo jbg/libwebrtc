@@ -88,6 +88,24 @@
       "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1ea39f2_64f6300f",
+        "filename": "sdk/objc/api/peerconnection/RTCStatisticsReport.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-05-14T13:08:09Z",
+      "side": 1,
+      "message": "I can\u0027t find any option in clang-format that would make the formatter understand this correctly.\n\nI\u0027d guess this is actually a clang-format bug, as the compiler should be smart enough to figure this out. The last bracket should be treated as the category and everything between that and the @implementation/@interface should be the class name.",
+      "parentUuid": "52ffe583_ad60c33c",
+      "revId": "5e4c9380b68ca239dc3172557e9d0036449e8e0a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
