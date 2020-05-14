@@ -20,7 +20,7 @@ class MockRecoveredPacketReceiver : public RecoveredPacketReceiver {
  public:
   MOCK_METHOD(void,
               OnRecoveredPacket,
-              (const uint8_t* packet, size_t length),
+              (const uint8_t*, size_t length),
               (override));
 };
 
