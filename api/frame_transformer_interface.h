@@ -16,6 +16,7 @@
 
 #include "api/scoped_refptr.h"
 #include "api/video/encoded_frame.h"
+#include "api/video_header_metadata.h"
 #include "rtc_base/ref_count.h"
 
 namespace webrtc {
@@ -38,6 +39,7 @@ class TransformableFrameInterface {
 
 class TransformableVideoFrameInterface : public TransformableFrameInterface {
  public:
+  TransformableVideoFrameInterface() : metadata_(RTPVideoHeader()) {}
   virtual ~TransformableVideoFrameInterface() = default;
   virtual bool IsKeyFrame() const = 0;
 
@@ -48,6 +50,17 @@ class TransformableVideoFrameInterface : public TransformableFrameInterface {
   // TODO(bugs.webrtc.org/11380) remove from interface once
   // webrtc::RtpDescriptorAuthentication is exposed in api/.
   virtual std::vector<uint8_t> GetAdditionalData() const = 0;
+
+  // TODO(bugs.webrtc.org/11380) make pure virtual after implementating it
+  // downstream.
+  virtual const VideoHeaderMetadata& GetVideoHeaderMetadata() const {
+    return metadata_;
+  }
+
+ private:
+  // TODO(bugs.webrtc.org/11380) remove from interface once GetRtpVideoHeader is
+  // pure virtual.
+  VideoHeaderMetadata metadata_;
 };
 
 // Extends the TransformableFrameInterface to expose audio-specific information.

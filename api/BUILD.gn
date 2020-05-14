@@ -219,9 +219,19 @@ rtc_source_set("frame_transformer_interface") {
   sources = [ "frame_transformer_interface.h" ]
   deps = [
     ":scoped_refptr",
+    ":video_header_metadata",
     "../rtc_base:refcount",
     "video:encoded_frame",
   ]
+}
+
+rtc_source_set("video_header_metadata") {
+  visibility = [ "*" ]
+  sources = [
+    "video_header_metadata.cc",
+    "video_header_metadata.h",
+  ]
+  deps = [ "../modules/rtp_rtcp:rtp_video_header" ]
 }
 
 rtc_library("rtc_error") {
@@ -1005,6 +1015,7 @@ if (rtc_include_tests) {
       "scoped_refptr_unittest.cc",
       "test/create_time_controller_unittest.cc",
       "test/loopback_media_transport_unittest.cc",
+      "video_header_metadata_unittest.cc",
     ]
 
     deps = [
@@ -1019,6 +1030,7 @@ if (rtc_include_tests) {
       ":rtp_parameters",
       ":scoped_refptr",
       ":time_controller",
+      ":video_header_metadata",
       "../rtc_base:checks",
       "../rtc_base:gunit_helpers",
       "../rtc_base:rtc_base_approved",
