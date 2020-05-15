@@ -57,7 +57,6 @@ SimulatedTimeControllerImpl::CreateTaskQueue(
 
 std::unique_ptr<ProcessThread> SimulatedTimeControllerImpl::CreateProcessThread(
     const char* thread_name) {
-  rtc::CritScope lock(&lock_);
   auto process_thread =
       std::make_unique<SimulatedProcessThread>(this, thread_name);
   Register(process_thread.get());
@@ -114,14 +113,15 @@ void SimulatedTimeControllerImpl::RunReadyRunners() {
     }
     if (ready_runners_.empty())
       break;
-    while (!ready_runners_.empty()) {
-      auto* runner = ready_runners_.front();
-      ready_runners_.pop_front();
-      // Note that the RunReady function might indirectly cause a call to
-      // Unregister() which will recursively grab |lock_| again to remove items
-      // from |ready_runners_|.
+    std::list<SimulatedSequenceRunner*> ready_runners;
+    ready_runners.swap(ready_runners_);
+    lock_.Leave();
+    while (!ready_runners.empty()) {
+      auto* runner = ready_runners.front();
+      ready_runners.pop_front();
       runner->RunReady(current_time);
     }
+    lock_.Enter();
   }
 }
 
@@ -169,6 +169,7 @@ void SimulatedTimeControllerImpl::StartYield(TaskQueueBase* yielding_from) {
 void SimulatedTimeControllerImpl::StopYield(TaskQueueBase* yielding_from) {
   yielded_.erase(yielding_from);
 }
+
 }  // namespace sim_time_impl
 
 GlobalSimulatedTimeController::GlobalSimulatedTimeController(
