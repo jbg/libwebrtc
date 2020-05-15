@@ -10,7 +10,11 @@
 
 #include "rtc_base/critical_section.h"
 
+#include <execinfo.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "rtc_base/atomic_ops.h"
 #include "rtc_base/checks.h"
@@ -26,6 +30,29 @@
 #endif  // !RTC_DCHECK_IS_ON
 
 namespace rtc {
+
+void DoBacktrace() {
+  int j, nptrs;
+#define SIZE 100
+  void* buffer[100];
+  char** strings;
+
+  nptrs = backtrace(buffer, SIZE);
+
+  /* The call backtrace_symbols_fd(buffer, nptrs, STDOUT_FILENO)
+      would produce similar output to the following: */
+
+  strings = backtrace_symbols(buffer, nptrs);
+  if (strings == NULL) {
+    perror("backtrace_symbols");
+    exit(EXIT_FAILURE);
+  }
+
+  for (j = 0; j < nptrs; j++)
+    printf("%s\n", strings[j]);
+
+  free(strings);
+}
 
 CriticalSection::CriticalSection() {
 #if defined(WEBRTC_WIN)
@@ -110,7 +137,6 @@ void CriticalSection::Enter() const RTC_EXCLUSIVE_LOCK_FUNCTION() {
 
   owning_thread_ = self;
   ++recursion_;
-
 #else
   pthread_mutex_lock(&mutex_);
 #endif
@@ -127,6 +153,10 @@ void CriticalSection::Enter() const RTC_EXCLUSIVE_LOCK_FUNCTION() {
 #else
 #error Unsupported platform.
 #endif
+  if (++recur_ != 1) {
+    DoBacktrace();
+  }
+  RTC_CHECK(recur_ == 1);
 }
 
 bool CriticalSection::TryEnter() const RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
@@ -156,14 +186,19 @@ bool CriticalSection::TryEnter() const RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
   }
   ++recursion_count_;
 #endif
-  return true;
 #else
 #error Unsupported platform.
 #endif
+  if (++recur_ != 1) {
+    DoBacktrace();
+  }
+  RTC_CHECK(recur_ == 1);
+  return true;
 }
 
 void CriticalSection::Leave() const RTC_UNLOCK_FUNCTION() {
   RTC_DCHECK(CurrentThreadIsOwner());
+  --recur_;
 #if defined(WEBRTC_WIN)
   LeaveCriticalSection(&crit_);
 #elif defined(WEBRTC_POSIX)
