@@ -133,4 +133,47 @@ TEST(AudioFrameTest, CopyFrom) {
   EXPECT_EQ(0, memcmp(frame2.data(), frame1.data(), sizeof(samples)));
 }
 
+TEST(AudioFrameTest, SwapFrames) {
+  AudioFrame frame1, frame2;
+  int16_t samples1[kNumChannelsMono * kSamplesPerChannel];
+  for (size_t i = 0; i < kNumChannelsMono * kSamplesPerChannel; ++i) {
+    samples1[i] = i;
+  }
+  frame1.UpdateFrame(kTimestamp, samples1, kSamplesPerChannel, kSampleRateHz,
+                     AudioFrame::kPLC, AudioFrame::kVadActive,
+                     kNumChannelsMono);
+
+  int16_t samples2[(kNumChannelsMono + 1) * (kSamplesPerChannel + 1)] = {4711};
+  for (size_t i = 0; i < (kNumChannelsMono + 1) * (kSamplesPerChannel + 1);
+       ++i) {
+    samples2[i] = 1000 + i;
+  }
+  frame2.UpdateFrame(kTimestamp + 1, samples2, kSamplesPerChannel + 1,
+                     kSampleRateHz + 1, AudioFrame::kNormalSpeech,
+                     AudioFrame::kVadPassive, kNumChannelsMono + 1);
+
+  swap(frame1, frame2);
+
+  EXPECT_EQ(kTimestamp + 1, frame1.timestamp_);
+  ASSERT_EQ(kSamplesPerChannel + 1, frame1.samples_per_channel_);
+  EXPECT_EQ(kSampleRateHz + 1, frame1.sample_rate_hz_);
+  EXPECT_EQ(AudioFrame::kNormalSpeech, frame1.speech_type_);
+  EXPECT_EQ(AudioFrame::kVadPassive, frame1.vad_activity_);
+  ASSERT_EQ(kNumChannelsMono + 1, frame1.num_channels_);
+  for (size_t i = 0; i < (kNumChannelsMono + 1) * (kSamplesPerChannel + 1);
+       ++i) {
+    EXPECT_EQ(samples2[i], frame1.data()[i]);
+  }
+
+  EXPECT_EQ(kTimestamp, frame2.timestamp_);
+  ASSERT_EQ(kSamplesPerChannel, frame2.samples_per_channel_);
+  EXPECT_EQ(kSampleRateHz, frame2.sample_rate_hz_);
+  EXPECT_EQ(AudioFrame::kPLC, frame2.speech_type_);
+  EXPECT_EQ(AudioFrame::kVadActive, frame2.vad_activity_);
+  ASSERT_EQ(kNumChannelsMono, frame2.num_channels_);
+  for (size_t i = 0; i < kNumChannelsMono * kSamplesPerChannel; ++i) {
+    EXPECT_EQ(samples1[i], frame2.data()[i]);
+  }
+}
+
 }  // namespace webrtc
