@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "cebefa06_208c2665",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-15T12:38:32Z",
+      "side": 1,
+      "message": "Right, sorry, yes the |id| should still be there (and you keep it, good :)).\n\nIt does not differ from LayerFrameConfig, for some reason I added it here and updated the comments instead of commenting at the appropriate place.",
+      "parentUuid": "005faa8c_76e24cf1",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 3
+      },
+      "revId": "ea521ff3c422b860aa59c72296135873f77c1d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaf43976_32972c10",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
         "patchSetId": 8
@@ -93,6 +117,30 @@
       "revId": "ea521ff3c422b860aa59c72296135873f77c1d23",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "136a78ba_56074b05",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-15T12:38:32Z",
+      "side": 1,
+      "message": "LG",
+      "parentUuid": "03857079_e46c2bf6",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 3
+      },
+      "revId": "ea521ff3c422b860aa59c72296135873f77c1d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

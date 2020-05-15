@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9800258f_2d838afa",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-15T12:38:32Z",
+      "side": 1,
+      "message": "Just one last thing, lets say we want to stop encoding a higher layer due to bitrate or something, how do we notify the injected controller? Maybe this should just be a raw pointer?",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 61
+      },
+      "revId": "7af93528df4d2eb99c8aecd21cd2f0c3b00db292",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
