@@ -74,6 +74,8 @@ bool RtpDependencyDescriptorWriter::Write() {
     WriteExtendedFields();
     WriteFrameDependencyDefinition();
   }
+  // Zero remaining memory to avoid leaving it uninitialized.
+  WriteBits(/*val=*/0, bit_writer_.RemainingBitCount());
   return !build_failed_;
 }
 
