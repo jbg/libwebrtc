@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "005faa8c_76e24cf1",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-15T12:24:21Z",
+      "side": 1,
+      "message": "ok, moving initialisation (or rather stub for it) into InitEncode.\n\nbtw, how GoodNameFrameConfig differs to LayerFrameConfig?\n\n(except extra `id` field)",
+      "parentUuid": "600ac9d7_fefc92f3",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 3
+      },
+      "revId": "ea521ff3c422b860aa59c72296135873f77c1d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aaf43976_32972c10",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-15T11:37:00Z",
       "side": 1,
       "message": "Kind of weird to call Encode and then provide no config for how the frame should be encoded. Maybe add an RTC_LOG(LS_WARNING) message?",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 3
+      },
+      "revId": "ea521ff3c422b860aa59c72296135873f77c1d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03857079_e46c2bf6",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-15T12:24:21Z",
+      "side": 1,
+      "message": "if it is weird, then sure, let me add... can be even an error.\nand then I\u0027m not sure there is point in testing it.",
+      "parentUuid": "aaf43976_32972c10",
       "range": {
         "startLine": 257,
         "startChar": 0,
