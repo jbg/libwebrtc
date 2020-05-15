@@ -20,9 +20,9 @@
 #include "modules/audio_device/include/audio_device_defines.h"
 #include "rtc_base/buffer.h"
 #include "rtc_base/critical_section.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/thread_annotations.h"
-#include "rtc_base/thread_checker.h"
 
 namespace webrtc {
 
@@ -31,6 +31,40 @@ namespace webrtc {
 const size_t kMaxDeltaTimeInMs = 500;
 // TODO(henrika): remove when no longer used by external client.
 const size_t kMaxBufferSizeBytes = 3840;  // 10ms in stereo @ 96kHz
+
+namespace {
+#if RTC_DCHECK_IS_ON
+// Since rtc::ThreadChecker has been replaced with SequenceChecker, but the
+// AudioDeviceBuffer implementation is still being used in a way that is thread
+// specific and more than one TQ might be active on that thread in some tests,
+// a temporary workaround is to have a custom thread checker that only checks
+// the thread id.
+class RTC_LOCKABLE CustomThreadChecker {
+ public:
+  CustomThreadChecker() = default;
+
+  bool IsCurrent() const {
+    const rtc::PlatformThreadRef current = rtc::CurrentThreadRef();
+    rtc::CritScope scoped_lock(&lock_);
+    if (!valid_thread_) {
+      valid_thread_ = current;
+      return true;
+    }
+    return rtc::IsThreadRefEqual(valid_thread_, current);
+  }
+
+  void Detach() {
+    rtc::CritScope scoped_lock(&lock_);
+    valid_thread_ = 0;
+  }
+
+  rtc::CriticalSection lock_;
+  mutable rtc::PlatformThreadRef valid_thread_ = rtc::CurrentThreadRef();
+};
+#else
+class RTC_LOCKABLE CustomThreadChecker : public SequenceCheckerDoNothing {};
+#endif
+}  // namespace
 
 class AudioDeviceBuffer {
  public:
@@ -140,7 +174,7 @@ class AudioDeviceBuffer {
   // TODO(henrika): see if it is possible to refactor and annotate all members.
 
   // Main thread on which this object is created.
-  rtc::ThreadChecker main_thread_checker_;
+  CustomThreadChecker main_thread_checker_;
 
   rtc::CriticalSection lock_;
 
