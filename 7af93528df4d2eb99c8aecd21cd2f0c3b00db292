@@ -22,6 +22,30 @@
       "revId": "7af93528df4d2eb99c8aecd21cd2f0c3b00db292",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04f52ac4_1d250840",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-15T13:05:36Z",
+      "side": 1,
+      "message": "there are different ways.\ncontroller itself can take some structure at construction that controls it.\nor owning object can rely that Encoder will keep the svc_controller and save raw pointer to it.\nor controller might notice that there no more calls to OnEncodeDone with higher spatial layer and adjust itself accordingly.\n\nI did consider raw pointer, and switch between raw and unique ptr multiple times.\none of the reasons I settled on unique ptr is backward compatibility: to keep legacy constructor with no parameters work without horrible hacks.\n\nMay be later it will be more feasible to switch to raw pointer, but for now unique_ptr seems neater.",
+      "parentUuid": "9800258f_2d838afa",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 61
+      },
+      "revId": "7af93528df4d2eb99c8aecd21cd2f0c3b00db292",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
