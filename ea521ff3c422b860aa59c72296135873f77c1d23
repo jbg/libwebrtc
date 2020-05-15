@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "600ac9d7_fefc92f3",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-15T11:37:00Z",
+      "side": 1,
+      "message": "The way I see it is that the encoder has to be initialized to support the number of temporal and spatial layers we want to encode (if initialization for this is needed at all). After that we can just provide a GoodNameFrameConfig per frame encoded:\n\n  struct GoodNameFrameConfig {\n    bool is_keyframe \u003d false;\n\n    // Encoder need spatial/temporal layer so that it\u0027s internal rate controller can be used\n    // and so that it can decide whether to drop a frame or not.\n    int spatial_id \u003d 0;\n    int temporal_id \u003d 0;\n\n    // Describes which buffers encoder are allowed to reference and\n    // which buffers the encoder should update.\n    absl::InlinedVector\u003cCodecBufferUsage, kMaxEncoderBuffers\u003e buffers;\n  }",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 3
+      },
+      "revId": "ea521ff3c422b860aa59c72296135873f77c1d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaf43976_32972c10",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_encoder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-15T11:37:00Z",
+      "side": 1,
+      "message": "Kind of weird to call Encode and then provide no config for how the frame should be encoded. Maybe add an RTC_LOG(LS_WARNING) message?",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 3
+      },
+      "revId": "ea521ff3c422b860aa59c72296135873f77c1d23",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
