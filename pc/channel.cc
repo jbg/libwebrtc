@@ -162,6 +162,8 @@ BaseChannel::~BaseChannel() {
 bool BaseChannel::ConnectToRtpTransport() {
   RTC_DCHECK(rtp_transport_);
   if (!RegisterRtpDemuxerSink()) {
+    RTC_LOG(LS_ERROR) << "Failed to set up demuxing for content = "
+                      << content_name();
     return false;
   }
   rtp_transport_->SignalReadyToSend.connect(
@@ -697,7 +699,10 @@ bool BaseChannel::UpdateRemoteStreams_w(
                                    new_stream.ssrcs.end());
   }
   // Re-register the sink to update the receiving ssrcs.
-  RegisterRtpDemuxerSink();
+  if (!RegisterRtpDemuxerSink()) {
+    RTC_LOG(LS_ERROR) << "Failed to set up demuxing for content = "
+                      << content_name();
+  }
   remote_streams_ = streams;
   return ret;
 }
@@ -852,7 +857,8 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
     }
     // Need to re-register the sink to update the handled payload.
     if (!RegisterRtpDemuxerSink()) {
-      RTC_LOG(LS_ERROR) << "Failed to set up audio demuxing.";
+      RTC_LOG(LS_ERROR) << "Failed to set up audio demuxing for content = "
+                        << content_name();
       return false;
     }
   }
@@ -910,7 +916,8 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
                             "disable payload type demuxing";
     ClearHandledPayloadTypes();
     if (!RegisterRtpDemuxerSink()) {
-      RTC_LOG(LS_ERROR) << "Failed to update audio demuxing.";
+      RTC_LOG(LS_ERROR) << "Failed to update audio demuxing for content "
+                        << content_name();
       return false;
     }
   }
@@ -1027,7 +1034,8 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
     }
     // Need to re-register the sink to update the handled payload.
     if (!RegisterRtpDemuxerSink()) {
-      RTC_LOG(LS_ERROR) << "Failed to set up video demuxing.";
+      RTC_LOG(LS_ERROR) << "Failed to set up video demuxing for content = "
+                        << content_name();
       return false;
     }
   }
@@ -1123,7 +1131,8 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
                             "disable payload type demuxing";
     ClearHandledPayloadTypes();
     if (!RegisterRtpDemuxerSink()) {
-      RTC_LOG(LS_ERROR) << "Failed to update video demuxing.";
+      RTC_LOG(LS_ERROR) << "Failed to update video demuxing for content = "
+                        << content_name();
       return false;
     }
   }
@@ -1233,7 +1242,8 @@ bool RtpDataChannel::SetLocalContent_w(const MediaContentDescription* content,
   }
   // Need to re-register the sink to update the handled payload.
   if (!RegisterRtpDemuxerSink()) {
-    RTC_LOG(LS_ERROR) << "Failed to set up data demuxing.";
+    RTC_LOG(LS_ERROR) << "Failed to set up data demuxing for content = "
+                      << content_name();
     return false;
   }
 
