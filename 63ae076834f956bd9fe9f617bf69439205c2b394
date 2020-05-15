@@ -22,6 +22,30 @@
       "revId": "63ae076834f956bd9fe9f617bf69439205c2b394",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff65a217_b2c6d59e",
+        "filename": "test/time_controller/simulated_time_controller.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-05-15T16:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5da7cc5c_8cded123",
+      "range": {
+        "startLine": 116,
+        "startChar": 3,
+        "endLine": 119,
+        "endChar": 36
+      },
+      "revId": "63ae076834f956bd9fe9f617bf69439205c2b394",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
