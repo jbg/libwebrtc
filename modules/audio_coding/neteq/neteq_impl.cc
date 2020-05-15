@@ -140,7 +140,9 @@ NetEqImpl::NetEqImpl(const NetEq::Config& config,
                                 10,  // Report once every 10 s.
                                 tick_timer_.get()),
       no_time_stretching_(config.for_test_no_time_stretching),
-      enable_rtx_handling_(config.enable_rtx_handling) {
+      enable_rtx_handling_(config.enable_rtx_handling),
+      output_delay_chain_(config.extra_output_delay_blocks),
+      output_delay_chain_empty_(true) {
   RTC_LOG(LS_INFO) << "NetEq config: " << config.ToString();
   int fs = config.sample_rate_hz;
   if (fs != 8000 && fs != 16000 && fs != 32000 && fs != 48000) {
@@ -255,6 +257,25 @@ int NetEqImpl::GetAudio(AudioFrame* audio_frame,
              last_output_sample_rate_hz_ == 32000 ||
              last_output_sample_rate_hz_ == 48000)
       << "Unexpected sample rate " << last_output_sample_rate_hz_;
+
+  if (output_delay_chain_.size() > 0) {
+    if (output_delay_chain_empty_) {
+      for (auto& f : output_delay_chain_) {
+        f.CopyFrom(*audio_frame);
+      }
+      output_delay_chain_empty_ = false;
+      delayed_last_output_sample_rate_hz_ = last_output_sample_rate_hz_;
+    } else {
+      RTC_DCHECK_GE(output_delay_chain_ix_, 0);
+      RTC_DCHECK_LT(output_delay_chain_ix_, output_delay_chain_.size());
+      swap(output_delay_chain_[output_delay_chain_ix_], *audio_frame);
+      *muted = audio_frame->muted();
+      output_delay_chain_ix_ =
+          (output_delay_chain_ix_ + 1) % output_delay_chain_.size();
+      delayed_last_output_sample_rate_hz_ = audio_frame->sample_rate_hz();
+    }
+  }
+
   return kOK;
 }
 
@@ -399,6 +420,9 @@ absl::optional<uint32_t> NetEqImpl::GetPlayoutTimestamp() const {
 
 int NetEqImpl::last_output_sample_rate_hz() const {
   rtc::CritScope lock(&crit_sect_);
+  if (!output_delay_chain_.empty()) {
+    return delayed_last_output_sample_rate_hz_;
+  }
   return last_output_sample_rate_hz_;
 }
 

@@ -11,6 +11,7 @@
 #include "api/audio/audio_frame.h"
 
 #include <string.h>
+#include <utility>
 
 #include "rtc_base/checks.h"
 #include "rtc_base/time_utils.h"
@@ -20,6 +21,24 @@ namespace webrtc {
 AudioFrame::AudioFrame() {
   // Visual Studio doesn't like this in the class definition.
   static_assert(sizeof(data_) == kMaxDataSizeBytes, "kMaxDataSizeBytes");
+}
+
+void swap(AudioFrame& a, AudioFrame& b) {
+  using std::swap;
+  swap(a.timestamp_, b.timestamp_);
+  swap(a.elapsed_time_ms_, b.elapsed_time_ms_);
+  swap(a.ntp_time_ms_, b.ntp_time_ms_);
+  swap(a.samples_per_channel_, b.samples_per_channel_);
+  swap(a.sample_rate_hz_, b.sample_rate_hz_);
+  swap(a.num_channels_, b.num_channels_);
+  swap(a.speech_type_, b.speech_type_);
+  swap(a.vad_activity_, b.vad_activity_);
+  swap(a.profile_timestamp_ms_, b.profile_timestamp_ms_);
+  swap(a.packet_infos_, b.packet_infos_);
+  for (size_t i = 0; i < AudioFrame::kMaxDataSizeSamples; ++i) {
+    swap(a.data_[i], b.data_[i]);
+  }
+  swap(a.muted_, b.muted_);
 }
 
 void AudioFrame::Reset() {
