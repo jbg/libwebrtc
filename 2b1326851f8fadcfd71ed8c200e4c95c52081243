@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea558c81_f82e65d8",
+        "filename": "modules/audio_device/audio_device_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-15T13:34:09Z",
+      "side": 1,
+      "message": "I think we cannot use an anonymous namespace in an header (https://google.github.io/styleguide/cppguide.html#Unnamed_Namespaces_and_Static_Variables).",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 11
+      },
+      "revId": "2b1326851f8fadcfd71ed8c200e4c95c52081243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab751fca_f64cddc1",
+        "filename": "modules/audio_device/audio_device_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-15T13:34:09Z",
+      "side": 1,
+      "message": "I think we need a TODO linked to a bug to remove this.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "2b1326851f8fadcfd71ed8c200e4c95c52081243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
