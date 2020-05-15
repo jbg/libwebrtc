@@ -161,9 +161,27 @@ BaseChannel::~BaseChannel() {
 
 bool BaseChannel::ConnectToRtpTransport() {
   RTC_DCHECK(rtp_transport_);
-  if (!RegisterRtpDemuxerSink()) {
-    return false;
+  if (webrtc::RtpTransceiverDirectionHasSend(remote_content_direction_) ||
+      webrtc::RtpTransceiverDirectionHasRecv(local_content_direction_)) {
+    if (!RegisterRtpDemuxerSink()) {
+      RTC_LOG(LS_ERROR)
+          << "Failed to setup content (" << content_name_ << ") demuxing "
+          << " with remote_content_direction = "
+          << webrtc::RtpTransceiverDirectionToString(remote_content_direction_)
+          << " and local_content_direction = "
+          << webrtc::RtpTransceiverDirectionToString(local_content_direction_);
+
+      return false;
+    }
+  } else {
+    RTC_LOG(LS_INFO)
+        << "Skipped setup of  " << content_name_ << " demuxing "
+        << " due remote_content_direction = "
+        << webrtc::RtpTransceiverDirectionToString(remote_content_direction_)
+        << " and local_content_direction = "
+        << webrtc::RtpTransceiverDirectionToString(local_content_direction_);
   }
+
   rtp_transport_->SignalReadyToSend.connect(
       this, &BaseChannel::OnTransportReadyToSend);
   rtp_transport_->SignalNetworkRouteChanged.connect(
