@@ -35,6 +35,7 @@
 #include "modules/rtp_rtcp/source/rtp_sender_egress.h"
 #include "rtc_base/critical_section.h"
 #include "rtc_base/gtest_prod_util.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 
 namespace webrtc {
 
@@ -321,6 +322,9 @@ class ModuleRtpRtcpImpl : public RtpRtcp, public RTCPReceiver::ModuleRtpRtcp {
   int64_t rtt_ms() const;
 
   bool TimeToSendFullNackList(int64_t now) const;
+
+  SequenceChecker construction_thread_checker_;
+  SequenceChecker process_thread_checker_;
 
   std::unique_ptr<RtpSenderContext> rtp_sender_;
 
