@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45b5d4ca_597fa74e",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1638,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-18T10:11:33Z",
+      "side": 1,
+      "message": "nit: perhaps have the comment here too why we have this",
+      "range": {
+        "startLine": 1638,
+        "startChar": 6,
+        "endLine": 1638,
+        "endChar": 14
+      },
+      "revId": "d95ed8fb7221be9eef0ce213103fb1c45273c847",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
