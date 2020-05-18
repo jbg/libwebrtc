@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b55bfe4e_3e6bf324",
+        "filename": "modules/video_coding/chain_diff_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-18T11:55:47Z",
+      "side": 1,
+      "message": "changed to c++11 loop. yeps, looks simpler.\n\nvalue_or I find shorter, but not simpler in this case:\nexpression \"last_frame_in_chain.value_or(frame_id)\" doesn\u0027t have a valid meaning.\nno previous frame in the chain/setting result to 0 is a special case and I prefer to keep that visible.",
+      "parentUuid": "fede7755_6b59c782",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "8984e49813186b31c39acd4573b96f7ed255782b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb080701_f0c030b5",
         "filename": "modules/video_coding/chain_diff_calculator.cc",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f91776dc_d5c8a8ca",
+        "filename": "modules/video_coding/chain_diff_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-18T11:55:47Z",
+      "side": 1,
+      "message": "I guess it is a confusing premature optimisation. Removed. \n\nI was lazy to describe that frames with temporal_id \u003e 0 are not part of any chain.\nBut it seems better to describe it explicitly to catch cases where we forgot to describe chains.",
+      "parentUuid": "fb080701_f0c030b5",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 21
+      },
+      "revId": "8984e49813186b31c39acd4573b96f7ed255782b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad8b4158_26fd6535",
         "filename": "modules/video_coding/chain_diff_calculator.h",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "8984e49813186b31c39acd4573b96f7ed255782b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ace491e_f99c8da3",
+        "filename": "modules/video_coding/chain_diff_calculator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-18T11:55:47Z",
+      "side": 1,
+      "message": "I did consider that. But found that approach less nice:\n3 enum values is not enough, there is one more non-trivial case:\u0027resets chain, but not in chain\u0027. e.g. in S mode (simulcast) the key frame on lower layer may reset the 2nd chain, but not be part of it.\nWasn\u0027t sure how to nicely name and explain that enum value.\n\n(tbh short-term I do not plan to support that indication anyway, but technically calculator itself would support it: ResetAll and From do not have to take same vector\u003cbool\u003e for the same frame)",
+      "parentUuid": "ad8b4158_26fd6535",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 12
+      },
+      "revId": "8984e49813186b31c39acd4573b96f7ed255782b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
