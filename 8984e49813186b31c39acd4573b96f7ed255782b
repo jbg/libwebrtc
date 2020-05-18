@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fede7755_6b59c782",
+        "filename": "modules/video_coding/chain_diff_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-18T10:39:28Z",
+      "side": 1,
+      "message": "can be simplified to:\n\n  for (const auto\u0026 last_frame_in_chain : last_frame_in_chain_) {\n    result.push_back(frame_id - last_frame_in_chain.value_or(frame_id));\n  }",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "8984e49813186b31c39acd4573b96f7ed255782b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb080701_f0c030b5",
+        "filename": "modules/video_coding/chain_diff_calculator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-18T10:39:28Z",
+      "side": 1,
+      "message": "Why is |chains| allowed to be empty? Could you add a test for this?",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 21
+      },
+      "revId": "8984e49813186b31c39acd4573b96f7ed255782b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad8b4158_26fd6535",
+        "filename": "modules/video_coding/chain_diff_calculator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-18T10:39:28Z",
+      "side": 1,
+      "message": "WDYT about having an enum:\n\n  enum class ChainIndication {\n    kStartsChain,\n    kInChain,\n    kNotInChain\n  };\n\nThen we would have:\n\n  From(int64_t frame_id, const std::vector\u003cChainIndication\u003e\u0026 chains)\n\nand there would be no need for a separate Reset function.",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 12
+      },
+      "revId": "8984e49813186b31c39acd4573b96f7ed255782b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
