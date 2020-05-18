@@ -933,7 +933,9 @@ void VirtualSocketServer::SendTcp(VirtualSocket* socket) {
   if (!socket->ready_to_send_ &&
       (socket->send_buffer_.size() < send_buffer_capacity_)) {
     socket->ready_to_send_ = true;
+    socket->crit_.Leave();
     socket->SignalWriteEvent(socket);
+    socket->crit_.Enter();
   }
 }
 

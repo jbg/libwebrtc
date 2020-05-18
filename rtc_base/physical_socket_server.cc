@@ -1040,6 +1040,7 @@ PhysicalSocketServer::PhysicalSocketServer()
 #if defined(WEBRTC_WIN)
       socket_ev_(WSACreateEvent()),
 #endif
+      crit_(/*recursive=*/true),
       fWait_(false) {
 #if defined(WEBRTC_USE_EPOLL)
   if (epoll_fd_ == -1) {
