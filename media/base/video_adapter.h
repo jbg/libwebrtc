@@ -97,7 +97,8 @@ class VideoAdapter {
 
  private:
   // Determine if frame should be dropped based on input fps and requested fps.
-  bool KeepFrame(int64_t in_timestamp_ns);
+  bool KeepFrame(int64_t in_timestamp_ns)
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(critical_section_);
 
   int frames_in_;         // Number of input frames.
   int frames_out_;        // Number of output frames.
