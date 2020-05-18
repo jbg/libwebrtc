@@ -22,6 +22,30 @@
       "revId": "3ce9be5b06adae668dceb7b58a10db7cf8b563ef",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed252447_1f79fe11",
+        "filename": "modules/video_coding/chain_diff_calculator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-18T12:18:18Z",
+      "side": 1,
+      "message": "Done.\n\nwhile adding return here can be valid, I think it is better to try to recover a bit more (less chance chain_diffs would grow too much)",
+      "parentUuid": "1f3a1772_9be26a3e",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 50
+      },
+      "revId": "3ce9be5b06adae668dceb7b58a10db7cf8b563ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
