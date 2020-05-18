@@ -10,6 +10,8 @@
 
 #include "rtc_base/critical_section.h"
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 #include "rtc_base/atomic_ops.h"
@@ -27,7 +29,7 @@
 
 namespace rtc {
 
-CriticalSection::CriticalSection() {
+CriticalSection::CriticalSection(bool recursive) : recursive_(recursive) {
 #if defined(WEBRTC_WIN)
   InitializeCriticalSection(&crit_);
 #elif defined(WEBRTC_POSIX)
@@ -110,7 +112,6 @@ void CriticalSection::Enter() const RTC_EXCLUSIVE_LOCK_FUNCTION() {
 
   owning_thread_ = self;
   ++recursion_;
-
 #else
   pthread_mutex_lock(&mutex_);
 #endif
@@ -127,6 +128,7 @@ void CriticalSection::Enter() const RTC_EXCLUSIVE_LOCK_FUNCTION() {
 #else
 #error Unsupported platform.
 #endif
+  RTC_CHECK(++recur_ == 1 || recursive_);
 }
 
 bool CriticalSection::TryEnter() const RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
@@ -156,14 +158,16 @@ bool CriticalSection::TryEnter() const RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
   }
   ++recursion_count_;
 #endif
-  return true;
 #else
 #error Unsupported platform.
 #endif
+  RTC_CHECK(++recur_ == 1 || recursive_);
+  return true;
 }
 
 void CriticalSection::Leave() const RTC_UNLOCK_FUNCTION() {
   RTC_DCHECK(CurrentThreadIsOwner());
+  --recur_;
 #if defined(WEBRTC_WIN)
   LeaveCriticalSection(&crit_);
 #elif defined(WEBRTC_POSIX)
