@@ -21,6 +21,8 @@
 #include "api/video_codecs/video_encoder.h"
 #include "modules/video_coding/codecs/av1/libaom_av1_decoder.h"
 #include "modules/video_coding/codecs/av1/libaom_av1_encoder.h"
+#include "modules/video_coding/codecs/av1/scalable_video_controller.h"
+#include "modules/video_coding/codecs/av1/scalable_video_controller_no_layering.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/include/video_error_codes.h"
 #include "test/gmock.h"
@@ -29,10 +31,13 @@
 namespace webrtc {
 namespace {
 
+using ::testing::Each;
 using ::testing::ElementsAreArray;
 using ::testing::IsEmpty;
 using ::testing::Not;
 using ::testing::NotNull;
+using ::testing::Truly;
+using ::testing::Values;
 
 // Use small resolution for this test to make it faster.
 constexpr int kWidth = 320;
@@ -47,19 +52,11 @@ class TestAv1Encoder {
     CodecSpecificInfo codec_specific_info;
   };
 
-  TestAv1Encoder() : encoder_(CreateLibaomAv1Encoder()) {
-    RTC_CHECK(encoder_);
-    VideoCodec codec_settings;
-    codec_settings.width = kWidth;
-    codec_settings.height = kHeight;
-    codec_settings.maxFramerate = kFramerate;
-    VideoEncoder::Settings encoder_settings(
-        VideoEncoder::Capabilities(/*loss_notification=*/false),
-        /*number_of_cores=*/1, /*max_payload_size=*/1200);
-    EXPECT_EQ(encoder_->InitEncode(&codec_settings, encoder_settings),
-              WEBRTC_VIDEO_CODEC_OK);
-    EXPECT_EQ(encoder_->RegisterEncodeCompleteCallback(&callback_),
-              WEBRTC_VIDEO_CODEC_OK);
+  TestAv1Encoder() : encoder_(CreateLibaomAv1Encoder()) { InitEncoder(); }
+  explicit TestAv1Encoder(
+      std::unique_ptr<ScalableVideoController> svc_controller)
+      : encoder_(CreateLibaomAv1Encoder(std::move(svc_controller))) {
+    InitEncoder();
   }
   // This class requires pointer stability and thus not copyable nor movable.
   TestAv1Encoder(const TestAv1Encoder&) = delete;
@@ -92,16 +89,31 @@ class TestAv1Encoder {
     std::vector<Encoded>* storage_ = nullptr;
   };
 
+  void InitEncoder() {
+    RTC_CHECK(encoder_);
+    VideoCodec codec_settings;
+    codec_settings.width = kWidth;
+    codec_settings.height = kHeight;
+    codec_settings.maxFramerate = kFramerate;
+    VideoEncoder::Settings encoder_settings(
+        VideoEncoder::Capabilities(/*loss_notification=*/false),
+        /*number_of_cores=*/1, /*max_payload_size=*/1200);
+    EXPECT_EQ(encoder_->InitEncode(&codec_settings, encoder_settings),
+              WEBRTC_VIDEO_CODEC_OK);
+    EXPECT_EQ(encoder_->RegisterEncodeCompleteCallback(&callback_),
+              WEBRTC_VIDEO_CODEC_OK);
+  }
+
   EncoderCallback callback_;
   std::unique_ptr<VideoEncoder> encoder_;
 };
 
 class TestAv1Decoder {
  public:
-  TestAv1Decoder() {
-    decoder_ = CreateLibaomAv1Decoder();
+  explicit TestAv1Decoder(int decoder_id)
+      : decoder_id_(decoder_id), decoder_(CreateLibaomAv1Decoder()) {
     if (decoder_ == nullptr) {
-      ADD_FAILURE() << "Failed to create a decoder";
+      ADD_FAILURE() << "Failed to create a decoder#" << decoder_id_;
       return;
     }
     EXPECT_EQ(decoder_->InitDecode(/*codec_settings=*/nullptr,
@@ -121,7 +133,8 @@ class TestAv1Decoder {
                                      /*render_time_ms=*/image.capture_time_ms_);
     if (error != WEBRTC_VIDEO_CODEC_OK) {
       ADD_FAILURE() << "Failed to decode frame id " << frame_id
-                    << " with error code " << error;
+                    << " with error code " << error << " by decoder#"
+                    << decoder_id_;
       return;
     }
     decoded_ids_.push_back(frame_id);
@@ -156,10 +169,11 @@ class TestAv1Decoder {
     int num_called_ = 0;
   };
 
+  const int decoder_id_;
   std::vector<int64_t> requested_ids_;
   std::vector<int64_t> decoded_ids_;
   DecoderCallback callback_;
-  std::unique_ptr<VideoDecoder> decoder_;
+  const std::unique_ptr<VideoDecoder> decoder_;
 };
 
 std::vector<VideoFrame> GenerateFrames(size_t num_frames) {
@@ -181,7 +195,7 @@ std::vector<VideoFrame> GenerateFrames(size_t num_frames) {
 }
 
 TEST(LibaomAv1Test, EncodeDecode) {
-  TestAv1Decoder decoder;
+  TestAv1Decoder decoder(0);
   TestAv1Encoder encoder;
 
   std::vector<TestAv1Encoder::Encoded> encoded_frames;
@@ -201,6 +215,61 @@ TEST(LibaomAv1Test, EncodeDecode) {
   // Check each of them produced an output frame.
   EXPECT_EQ(decoder.num_output_frames(), decoder.decoded_frame_ids().size());
 }
+
+class LibaomAv1SvcTest
+    : public ::testing::TestWithParam<
+          std::function<std::unique_ptr<ScalableVideoController>()>> {};
+
+TEST_P(LibaomAv1SvcTest, EncodeAndDecodeAllDecodeTargets) {
+  std::unique_ptr<ScalableVideoController> svc_controller = GetParam()();
+  size_t num_decode_targets =
+      svc_controller->DependencyStructure().num_decode_targets;
+  TestAv1Encoder encoder(std::move(svc_controller));
+
+  std::vector<TestAv1Encoder::Encoded> encoded_frames;
+  for (const VideoFrame& frame : GenerateFrames(/*num_frames=*/4)) {
+    encoder.EncodeAndAppend(frame, &encoded_frames);
+  }
+  // Validate produced frames have correct dtis attached.
+  ASSERT_THAT(
+      encoded_frames, Each(Truly([&](const TestAv1Encoder::Encoded& frame) {
+        return frame.codec_specific_info.generic_frame_info &&
+               frame.codec_specific_info.generic_frame_info
+                       ->decode_target_indications.size() == num_decode_targets;
+      })));
+
+  // Though it might be nicer to have one test per decode target, such setup
+  // would require to reencode same video streams multiple time and thus is
+  // slower to run.
+  for (size_t dt = 0; dt < num_decode_targets; ++dt) {
+    TestAv1Decoder decoder(dt);
+    for (int64_t frame_idx = 0;
+         frame_idx < static_cast<int64_t>(encoded_frames.size()); ++frame_idx) {
+      const TestAv1Encoder::Encoded& frame = encoded_frames[frame_idx];
+      if (frame.codec_specific_info.generic_frame_info
+              ->decode_target_indications[dt] !=
+          DecodeTargetIndication::kNotPresent) {
+        decoder.Decode(frame_idx, frame.encoded_image);
+      }
+    }
+
+    // Check encoder produced some frames for this decoder to decode.
+    ASSERT_THAT(decoder.requested_frame_ids(), Not(IsEmpty()))
+        << "Decoder#" << dt;
+    // Check decoder found all of them valid.
+    EXPECT_THAT(decoder.decoded_frame_ids(),
+                ElementsAreArray(decoder.requested_frame_ids()))
+        << "Decoder#" << dt;
+    // Check each of them produced an output frame.
+    EXPECT_EQ(decoder.num_output_frames(), decoder.decoded_frame_ids().size())
+        << "Decoder#" << dt;
+  }
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    Svc,
+    LibaomAv1SvcTest,
+    Values(std::make_unique<ScalableVideoControllerNoLayering>));
 
 }  // namespace
 }  // namespace webrtc
