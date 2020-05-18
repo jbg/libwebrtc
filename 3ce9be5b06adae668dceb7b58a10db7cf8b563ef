@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f3a1772_9be26a3e",
+        "filename": "modules/video_coding/chain_diff_calculator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-18T12:02:14Z",
+      "side": 1,
+      "message": "Could you add a test case for when they differ in size? Or maybe it\u0027s easier to just return if they do.",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 50
+      },
+      "revId": "3ce9be5b06adae668dceb7b58a10db7cf8b563ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
