@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fdf5601_934f9105",
+        "filename": "pc/channel.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-18T13:06:47Z",
+      "side": 1,
+      "message": "how spammy is this for tests? in Chrome we already have the trace event for the dtor, does that help?",
+      "revId": "16c1ecab5a4b96fb97ac4ce81d2015c3de561eae",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
