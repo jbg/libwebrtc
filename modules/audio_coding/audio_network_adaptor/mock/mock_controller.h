@@ -19,10 +19,15 @@ namespace webrtc {
 class MockController : public Controller {
  public:
   virtual ~MockController() { Die(); }
-  MOCK_METHOD0(Die, void());
-  MOCK_METHOD1(UpdateNetworkMetrics,
-               void(const NetworkMetrics& network_metrics));
-  MOCK_METHOD1(MakeDecision, void(AudioEncoderRuntimeConfig* config));
+  MOCK_METHOD(void, Die, (), (override));
+  MOCK_METHOD(void,
+              UpdateNetworkMetrics,
+              (const NetworkMetrics& network_metrics),
+              (override));
+  MOCK_METHOD(void,
+              MakeDecision,
+              (AudioEncoderRuntimeConfig * config),
+              (override));
 };
 
 }  // namespace webrtc
