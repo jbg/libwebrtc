@@ -70,6 +70,7 @@ ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
       remote_bitrate_(configuration.remote_bitrate_estimator),
       rtt_stats_(configuration.rtt_stats),
       rtt_ms_(0) {
+  process_thread_checker_.Detach();
   if (!configuration.receiver_only) {
     rtp_sender_ = std::make_unique<RtpSenderContext>(configuration);
     // Make sure rtcp sender use same timestamp offset as rtp sender.
@@ -84,17 +85,21 @@ ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
   SetMaxRtpPacketSize(IP_PACKET_SIZE - kTcpOverIpv4HeaderSize);
 }
 
-ModuleRtpRtcpImpl::~ModuleRtpRtcpImpl() = default;
+ModuleRtpRtcpImpl::~ModuleRtpRtcpImpl() {
+  RTC_DCHECK_RUN_ON(&construction_thread_checker_);
+}
 
 // Returns the number of milliseconds until the module want a worker thread
 // to call Process.
 int64_t ModuleRtpRtcpImpl::TimeUntilNextProcess() {
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
   return std::max<int64_t>(0,
                            next_process_time_ - clock_->TimeInMilliseconds());
 }
 
 // Process any pending tasks such as timeouts (non time critical events).
 void ModuleRtpRtcpImpl::Process() {
+  RTC_DCHECK_RUN_ON(&process_thread_checker_);
   const int64_t now = clock_->TimeInMilliseconds();
   // TODO(bugs.webrtc.org/11581): Figure out why we need to call Process() 200
   // times a second.
