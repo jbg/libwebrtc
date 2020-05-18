@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2c9cef0_85824069",
+        "filename": "rtc_base/physical_socket_server.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-05-18T10:54:48Z",
+      "side": 1,
+      "message": "This one should also be assigned in the initializer list, and changed to unique_ptr. But first attempt at unique_ptr failed tests, so let\u0027s leave that out of this cl.",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 60
+      },
+      "revId": "7f8a861bcce36401b544efdc7e3925ac18033db9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
