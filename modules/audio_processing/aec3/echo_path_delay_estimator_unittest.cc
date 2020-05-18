@@ -194,7 +194,7 @@ TEST(EchoPathDelayEstimator, WrongCaptureBlockSize) {
 }
 
 // Verifies the check for non-null data dumper.
-TEST(EchoPathDelayEstimator, NullDataDumper) {
+TEST(EchoPathDelayEstimatorDeathTest, NullDataDumper) {
   EXPECT_DEATH(EchoPathDelayEstimator(nullptr, EchoCanceller3Config(), 1), "");
 }
 
