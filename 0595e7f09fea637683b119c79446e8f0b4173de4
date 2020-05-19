@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "edb58691_9fdecc57",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-19T15:39:44Z",
+      "side": 1,
+      "message": "made it dynamic. (and name one of the iterator variables \u0027temporal_unit\u0027 to stress what kind of frames it counts).",
+      "parentUuid": "f5b9216f_712c651e",
+      "range": {
+        "startLine": 230,
+        "startChar": 63,
+        "endLine": 230,
+        "endChar": 64
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e061fdfc_fd3e86f8",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
         "patchSetId": 1
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "\u003e It might be good idea to have different set of tests that validates encoding structure, in particular that it produces multiple frames for each decode targets.\n\u003e \n\u003e here I moved the requested_ids outside the TestAv1Decoder to make it more visible how it is assembled. hope that make it easier to read the expectation.\n\nActually, I now realize that you checked that the requested \u003d\u003d decoded, so I don\u0027t think you need to change this.\n\n\u003e I\u0027ve also adjusted expectation there are at least 2 frames for each decode target.\n\nSGTM\n\n\u003e Yes, There is no check stream was decoded correctly. This test trusts decoder would return an error if stream is not decodable. How to verify the decoded frames are correct?\n\nI\u0027m almost certain the the decoder will not return an error even if we don\u0027t decode the frames correctly, it can probably only detect high level problems (like no keyframe before delta frame, incompatible resolutions and so on). I don\u0027t know really. One idea would be to use the PSNR calculator to compare the input and output, and then make sure it stays above a certain threshold.",
       "parentUuid": "4942b174_26804dbe",
+      "range": {
+        "startLine": 257,
+        "startChar": 47,
+        "endLine": 257,
+        "endChar": 61
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a870a36_899b1773",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-19T15:39:44Z",
+      "side": 1,
+      "message": "adding psnr check seems noticable (and slightly unrelated) change, so I\u0027ve created a dedicated patch for it.",
+      "parentUuid": "bf4c2388_2e894a7e",
       "range": {
         "startLine": 257,
         "startChar": 47,
