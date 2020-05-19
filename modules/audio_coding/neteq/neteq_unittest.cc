@@ -1102,5 +1102,87 @@ TEST(NetEqNoTimeStretchingMode, RunTest) {
   EXPECT_EQ(0, stats.preemptive_rate);
 }
 
+namespace {
+class VectorAudioSink : public AudioSink {
+ public:
+  // Does not take ownership of the vector.
+  VectorAudioSink(std::vector<int16_t>* output_vector) : v_(output_vector) {}
+
+  virtual ~VectorAudioSink() = default;
+
+  bool WriteArray(const int16_t* audio, size_t num_samples) override {
+    v_->reserve(v_->size() + num_samples);
+    for (size_t i = 0; i < num_samples; ++i) {
+      v_->push_back(audio[i]);
+    }
+    return true;
+  }
+
+ private:
+  std::vector<int16_t>* const v_;
+};
+}  // namespace
+
+// Tests the extra output delay functionality of NetEq.
+TEST(NetEqOutputDelayTest, RunTest) {
+  // Lambda for running the test with different delays.
+  auto run_test = [](size_t delay, std::vector<int16_t>* output_vector) {
+    NetEq::Config config;
+    config.for_test_no_time_stretching = true;
+    config.extra_output_delay_blocks = delay;
+    auto codecs = NetEqTest::StandardDecoderMap();
+    NetEqPacketSourceInput::RtpHeaderExtensionMap rtp_ext_map = {
+        {1, kRtpExtensionAudioLevel},
+        {3, kRtpExtensionAbsoluteSendTime},
+        {5, kRtpExtensionTransportSequenceNumber},
+        {7, kRtpExtensionVideoContentType},
+        {8, kRtpExtensionVideoTiming}};
+    std::unique_ptr<NetEqInput> input = std::make_unique<NetEqRtpDumpInput>(
+        webrtc::test::ResourcePath("audio_coding/neteq_universal_new", "rtp"),
+        rtp_ext_map, absl::nullopt /*No SSRC filter*/);
+    std::unique_ptr<TimeLimitedNetEqInput> input_time_limit(
+        new TimeLimitedNetEqInput(std::move(input), 10000));
+    std::unique_ptr<AudioSink> output(new VectorAudioSink(output_vector));
+    NetEqTest::Callbacks callbacks;
+    NetEqTest test(config, CreateBuiltinAudioDecoderFactory(), codecs,
+                   /*text_log=*/nullptr, /*neteq_factory=*/nullptr,
+                   /*input=*/std::move(input_time_limit), std::move(output),
+                   callbacks);
+    test.Run();
+    return test.LifetimeStats();
+  };
+  std::vector<int16_t> output;
+  NetEqLifetimeStatistics stats_no_delay = run_test(0, &output);
+  std::vector<int16_t> output_delayed;
+  constexpr size_t kDelayBlocks = 10;
+  NetEqLifetimeStatistics stats_delay = run_test(kDelayBlocks, &output_delayed);
+
+  // Verify that the loss concealment remains unchanged. The point of the delay
+  // is to not affect the jitter buffering behavior.
+  // First verify that there are concealments in the test.
+  EXPECT_GT(stats_no_delay.concealed_samples, 0u);
+  // And that not all of the output is concealment.
+  EXPECT_GT(stats_no_delay.total_samples_received,
+            stats_no_delay.concealed_samples);
+  // Now verify that they remain unchanged by the delay.
+  EXPECT_EQ(stats_no_delay.concealed_samples, stats_delay.concealed_samples);
+  // Accelerate and pre-emptive expand should also be unchanged.
+  EXPECT_EQ(stats_no_delay.inserted_samples_for_deceleration,
+            stats_delay.inserted_samples_for_deceleration);
+  EXPECT_EQ(stats_no_delay.removed_samples_for_acceleration,
+            stats_delay.removed_samples_for_acceleration);
+  EXPECT_EQ(stats_no_delay.jitter_buffer_delay_ms,
+            stats_delay.jitter_buffer_delay_ms);
+
+  // Verify expected delay in decoded signal. The test vector uses 8 kHz sample
+  // rate, so the delay will be a multiple of 80 sample blocks.
+  constexpr size_t kExpectedDelaySamples = kDelayBlocks * 80;
+  for (size_t i = 0;
+       i < output.size() && i + kExpectedDelaySamples < output_delayed.size();
+       ++i) {
+    EXPECT_EQ(output[i], output_delayed[i + kExpectedDelaySamples]);
+  }
+}
+
 }  // namespace test
 }  // namespace webrtc

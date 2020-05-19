@@ -138,6 +138,7 @@ class NetEq {
     bool enable_rtx_handling = false;
     absl::optional<AudioCodecPairId> codec_pair_id;
     bool for_test_no_time_stretching = false;  // Use only for testing.
+    size_t extra_output_delay_blocks = 0;
   };
 
   enum ReturnCodes { kOK = 0, kFail = -1 };
