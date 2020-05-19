@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dacb8972_02abf0fd",
+        "filename": "api/audio/audio_frame.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2020-05-19T07:17:21Z",
+      "side": 1,
+      "message": "Changing to swap_ranges here.",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "8a6af5f2daefb5c3d2343234435ba22767c84a13",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
