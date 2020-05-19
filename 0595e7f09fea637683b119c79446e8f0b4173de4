@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a60feac2_3650610a",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-19T12:32:30Z",
+      "side": 1,
+      "message": "For more complex encoding structures we would need to generate more than just 4 frame to cover the whole structure, maybe 20 or 30 instead?",
+      "range": {
+        "startLine": 230,
+        "startChar": 63,
+        "endLine": 230,
+        "endChar": 64
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e061fdfc_fd3e86f8",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-19T12:32:30Z",
+      "side": 1,
+      "message": "Not sure this is true, maybe remove the comment?",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 19
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8817a41a_48dff4ba",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-05-19T12:32:30Z",
+      "side": 1,
+      "message": "Should we not expect specific frame_ids, or at least a certain number of frames decoded for a certain decode target? I think many tests could pass simply by a single keyframe being decoded.\n\nMaybe it\u0027s better to not parameterize, and have one test per encoding structure?\n\nAlso, we don\u0027t verify that the stream was correctly decoded either right, just that the decoder did not return an error?",
+      "range": {
+        "startLine": 257,
+        "startChar": 47,
+        "endLine": 257,
+        "endChar": 61
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
