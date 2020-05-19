@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f382dc02_d99c21a0",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-19T13:22:56Z",
+      "side": 1,
+      "message": "yep, may be 8 or 12 (looking at k-svc with 3 temporal layers and temporal shift).\nDo you have more complicated structure in mind?\n(note - these frames are temporal units, not layer frames)\n\nI can probably make it dynamic and keep encoding frames until there are at least... 3 frames for each decode target. Do you think dynamic number of frames would be better?",
+      "parentUuid": "a60feac2_3650610a",
+      "range": {
+        "startLine": 230,
+        "startChar": 63,
+        "endLine": 230,
+        "endChar": 64
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e061fdfc_fd3e86f8",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "00b9a57c_17418666",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-19T13:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e061fdfc_fd3e86f8",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 19
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8817a41a_48dff4ba",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2020-05-19T12:32:30Z",
       "side": 1,
       "message": "Should we not expect specific frame_ids, or at least a certain number of frames decoded for a certain decode target? I think many tests could pass simply by a single keyframe being decoded.\n\nMaybe it\u0027s better to not parameterize, and have one test per encoding structure?\n\nAlso, we don\u0027t verify that the stream was correctly decoded either right, just that the decoder did not return an error?",
+      "range": {
+        "startLine": 257,
+        "startChar": 47,
+        "endLine": 257,
+        "endChar": 61
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4942b174_26804dbe",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-19T13:22:56Z",
+      "side": 1,
+      "message": "It might be good idea to have different set of tests that validates encoding structure, in particular that it produces multiple frames for each decode targets.\n\nhere I moved the requested_ids outside the TestAv1Decoder to make it more visible how it is assembled. hope that make it easier to read the expectation.\nI\u0027ve also adjusted expectation there are at least 2 frames for each decode target.\n\nYes, There is no check stream was decoded correctly. This test trusts decoder would return an error if stream is not decodable. How to verify the decoded frames are correct?",
+      "parentUuid": "8817a41a_48dff4ba",
       "range": {
         "startLine": 257,
         "startChar": 47,
