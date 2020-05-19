@@ -402,6 +402,12 @@ class NetEqImpl : public webrtc::NetEq {
   bool no_time_stretching_ RTC_GUARDED_BY(crit_sect_);  // Only used for test.
   rtc::BufferT<int16_t> concealment_audio_ RTC_GUARDED_BY(crit_sect_);
   const bool enable_rtx_handling_ RTC_GUARDED_BY(crit_sect_);
+  std::vector<AudioFrame> output_delay_chain_ RTC_GUARDED_BY(crit_sect_);
+  const int output_delay_chain_ms_ RTC_GUARDED_BY(crit_sect_);
+  size_t output_delay_chain_ix_ RTC_GUARDED_BY(crit_sect_) = 0;
+  bool output_delay_chain_empty_ RTC_GUARDED_BY(crit_sect_) = true;
+  absl::optional<int> delayed_last_output_sample_rate_hz_
+      RTC_GUARDED_BY(crit_sect_);
 
  private:
   RTC_DISALLOW_COPY_AND_ASSIGN(NetEqImpl);
