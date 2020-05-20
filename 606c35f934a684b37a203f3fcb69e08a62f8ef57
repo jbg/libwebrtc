@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1d30731_deb8d19b",
+        "filename": "rtc_base/net_helpers.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-20T12:33:36Z",
+      "side": 1,
+      "message": "would be nice if this could optionally be injected. And in that case, allow injection based on the TaskQueueBase interface so that dependency on rtc::Thread could be avoided.",
+      "revId": "606c35f934a684b37a203f3fcb69e08a62f8ef57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4cdcf3a_9a3c471c",
+        "filename": "rtc_base/net_helpers.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-20T12:33:36Z",
+      "side": 1,
+      "message": "In this case, there might be a race from running the task and referencing |this|.\nI think you only need |this| to do the synchronization and post back the notification, so how about something like this:\n\n* add a ScopedTaskSafety object to the class. You could construct it when the class is constructed, or inside of Start() and then delete it when the task runs or the work is cancelled.\n\nThen in Start(), do something like:\n\npopup_thread-\u003ePostTask(ToQueuedTask([flag \u003d safety_.flag(), task_queue, addr]() {\n  std::vector\u003cIPAddress\u003e addresses;\n  int error \u003d\n      ResolveHostname(addr.hostname().c_str(), addr.family(), \u0026addresses);\n\n  task_queue-\u003ePostTask(\n      ToQueuedTask(flag, [this, error, addresses \u003d std::move(addresses)]() {\n        addresses_ \u003d std::move(addresses);\n        error_ \u003d error;\n        SignalDone(this);\n      });\n  }\n});\n\n\nThis way I don\u0027t think you need the lock, event or the ticket class. With some further tweaking, you might also be able to avoid having the addresses_ and error_ member variables.",
+      "revId": "606c35f934a684b37a203f3fcb69e08a62f8ef57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
