@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "333de005_6bc507b3",
+        "filename": "api/neteq/neteq.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-20T13:41:51Z",
+      "side": 1,
+      "message": "I would simply document the parameter as being a nonnegative integer multiple of 10 ms, and enforce it with [D]CHECK. Rounding is more complicated to describe and to test, and a nonstandard unit is harder to keep track of when reading the code.",
+      "parentUuid": "da03bd10_7511ca34",
+      "revId": "4563f31e8c4f5023aba045abafcca69413fc4dc2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2bb85379_ab0f58d7",
         "filename": "modules/audio_coding/neteq/neteq_impl.h",
         "patchSetId": 7
