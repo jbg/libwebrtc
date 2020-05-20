@@ -91,6 +91,8 @@ class RTC_EXPORT RateStatistics {
   // Bucket index of oldest counter recorded in buckets.
   int64_t oldest_index_;
 
+  int64_t newest_time_;
+
   // To convert counts/ms to desired units
   const float scale_;
 

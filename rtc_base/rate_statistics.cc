@@ -26,6 +26,7 @@ RateStatistics::RateStatistics(int64_t window_size_ms, float scale)
       num_samples_(0),
       oldest_time_(-window_size_ms),
       oldest_index_(0),
+      newest_time_(-window_size_ms),
       scale_(scale),
       max_window_size_ms_(window_size_ms),
       current_window_size_ms_(max_window_size_ms_) {}
@@ -36,6 +37,7 @@ RateStatistics::RateStatistics(const RateStatistics& other)
       num_samples_(other.num_samples_),
       oldest_time_(other.oldest_time_),
       oldest_index_(other.oldest_index_),
+      newest_time_(other.newest_time_),
       scale_(other.scale_),
       max_window_size_ms_(other.max_window_size_ms_),
       current_window_size_ms_(other.current_window_size_ms_) {
@@ -54,12 +56,16 @@ void RateStatistics::Reset() {
   num_samples_ = 0;
   oldest_time_ = -max_window_size_ms_;
   oldest_index_ = 0;
+  newest_time_ = -max_window_size_ms_;
   current_window_size_ms_ = max_window_size_ms_;
   for (int64_t i = 0; i < max_window_size_ms_; i++)
     buckets_[i] = Bucket();
 }
 
 void RateStatistics::Update(int64_t count, int64_t now_ms) {
+  RTC_DCHECK_GE(now_ms, newest_time_);
+  newest_time_ = now_ms;
+
   RTC_DCHECK_LE(0, count);
   if (now_ms < oldest_time_) {
     // Too old data is ignored.
