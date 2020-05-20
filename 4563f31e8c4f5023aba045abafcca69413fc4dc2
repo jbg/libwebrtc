@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2dac95d_645bcece",
+        "filename": "api/neteq/neteq.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-20T13:05:37Z",
+      "side": 1,
+      "message": "Document the new parameter? In particular, what\u0027s a block? *looks further down* OK, 10 ms. Can this parameter be in ms instead? Much easier to explain...",
+      "revId": "4563f31e8c4f5023aba045abafcca69413fc4dc2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bb85379_ab0f58d7",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-05-20T13:05:37Z",
+      "side": 1,
+      "message": "Document the new data members? In particular, there are nontrivial invariants.",
+      "revId": "4563f31e8c4f5023aba045abafcca69413fc4dc2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
