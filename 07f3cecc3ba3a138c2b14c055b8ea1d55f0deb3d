@@ -22,6 +22,30 @@
       "revId": "07f3cecc3ba3a138c2b14c055b8ea1d55f0deb3d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a10c881_e61b8df8",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 10726
+      },
+      "writtenOn": "2020-05-20T21:34:20Z",
+      "side": 1,
+      "message": "Perhaps for Chrome, yes.  When you roll this to Chrome you can decide what the default for Chrome should be.\n\nHowever, for standalone WebRTC, I think the default should be false because:\n\n1. Standalone WebRTC has only had this behavior since Jan 6th: https://webrtc-review.googlesource.com/c/src/+/165001.  So it\u0027s unlikely anyone is relying on it.\n2. It\u0027s too easy to get problematic behavior (you have to know to turn off DNS lookups).",
+      "parentUuid": "4abdf72b_88000161",
+      "range": {
+        "startLine": 514,
+        "startChar": 4,
+        "endLine": 514,
+        "endChar": 48
+      },
+      "revId": "07f3cecc3ba3a138c2b14c055b8ea1d55f0deb3d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
