@@ -777,6 +777,7 @@ if (rtc_include_tests) {
       "codecs/h264/test/h264_impl_unittest.cc",
       "codecs/multiplex/test/multiplex_adapter_unittest.cc",
       "codecs/test/video_encoder_decoder_instantiation_tests.cc",
+      "codecs/test/videocodec_test_libaom.cc",
       "codecs/test/videocodec_test_libvpx.cc",
       "codecs/vp8/test/mock_libvpx_interface.h",
       "codecs/vp8/test/vp8_impl_unittest.cc",
