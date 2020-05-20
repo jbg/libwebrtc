@@ -10,8 +10,6 @@
 
 #include "rtc_base/net_helpers.h"
 
-#include <memory>
-
 #if defined(WEBRTC_WIN)
 #include <ws2spi.h>
 #include <ws2tcpip.h>
@@ -26,8 +24,15 @@
 #endif
 #endif  // defined(WEBRTC_POSIX) && !defined(__native_client__)
 
+#include "api/task_queue/task_queue_base.h"
+#include "rtc_base/critical_section.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/ref_count.h"
+#include "rtc_base/ref_counted_object.h"
 #include "rtc_base/signal_thread.h"
+#include "rtc_base/synchronization/sequence_checker.h"
+#include "rtc_base/task_queue.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"  // for signal_with_thread...
 
 namespace rtc {
@@ -83,18 +88,51 @@ int ResolveHostname(const std::string& hostname,
 #endif  // !__native_client__
 }
 
-// AsyncResolver
-AsyncResolver::AsyncResolver() : SignalThread(), error_(-1) {}
+AsyncResolver::AsyncResolver()
+    : error_(-1),
+      ticket_(new RefCountedObject<Ticket>(&async_activity_done_)) {}
 
-AsyncResolver::~AsyncResolver() = default;
+AsyncResolver::~AsyncResolver() {
+  RTC_DCHECK(sequence_checker_.IsCurrent());
+  ticket_->CompleteActivity();
+  ticket_ = nullptr;
+  if (!async_activity_done_.Wait(/*give_up_after_ms=*/60 * 1000)) {
+    RTC_LOG(LS_ERROR) << "AsyncResolver: gave up waiting for async activity";
+  }
+}
 
 void AsyncResolver::Start(const SocketAddress& addr) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   addr_ = addr;
-  // SignalThred Start will kickoff the resolve process.
-  SignalThread::Start();
+  webrtc::TaskQueueBase* current_task_queue = webrtc::TaskQueueBase::Current();
+  auto ticket = ticket_;
+  auto popup_thread = Thread::Create();
+  popup_thread->Start();
+  popup_thread->PostTask(webrtc::ToQueuedTask(
+      [this, ticket = std::move(ticket), addr, current_task_queue] {
+        std::vector<IPAddress> addresses;
+        int error =
+            ResolveHostname(addr.hostname().c_str(), addr.family(), &addresses);
+
+        // Write variables & issue completion callback if still possible.
+        if (ticket->StartActivity()) {
+          CritScope lock(&mu_);
+          error_ = error;
+          addresses_ = std::move(addresses);
+
+          // Schedule completion callback. Being able to StartActivity()
+          // guarantees that the caller isn't destroyed (or will be during the
+          // course of posting).
+          current_task_queue->PostTask(
+              webrtc::ToQueuedTask([this] { SignalDone(this); }));
+          ticket->CompleteActivity();
+        }
+      }));
 }
 
 bool AsyncResolver::GetResolvedAddress(int family, SocketAddress* addr) const {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  CritScope lock(&mu_);
   if (error_ != 0 || addresses_.empty())
     return false;
 
@@ -109,20 +147,35 @@ bool AsyncResolver::GetResolvedAddress(int family, SocketAddress* addr) const {
 }
 
 int AsyncResolver::GetError() const {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  CritScope lock(&mu_);
   return error_;
 }
 
-void AsyncResolver::Destroy(bool wait) {
-  SignalThread::Destroy(wait);
+void AsyncResolver::Destroy(bool wait) {}
+
+const std::vector<IPAddress>& AsyncResolver::addresses() const {
+  return addresses_;
 }
 
-void AsyncResolver::DoWork() {
-  error_ =
-      ResolveHostname(addr_.hostname().c_str(), addr_.family(), &addresses_);
+AsyncResolver::Ticket::Ticket(Event* activity_done)
+    : activity_done_(activity_done) {}
+
+bool AsyncResolver::Ticket::StartActivity() {
+  ref_count_.IncRef();
+  if (ref_count_.HasOneRef()) {
+    // There is no receiver anymore, activity can't be started. Drop the ref
+    // just for consistency, but attempt no action.
+    ref_count_.DecRef();
+    return false;
+  }
+  return true;
 }
 
-void AsyncResolver::OnWorkDone() {
-  SignalDone(this);
+void AsyncResolver::Ticket::CompleteActivity() {
+  if (ref_count_.DecRef() == RefCountReleaseStatus::kDroppedLastRef) {
+    activity_done_->Set();
+  }
 }
 
 const char* inet_ntop(int af, const void* src, char* dst, socklen_t size) {
