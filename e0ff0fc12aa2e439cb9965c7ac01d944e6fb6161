@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "759f27c4_d1b53079",
+        "filename": "modules/audio_coding/neteq/neteq_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-05-20T07:15:03Z",
+      "side": 1,
+      "message": "[optional] This lambda is growing somewhat large. You can consider breaking it out into a function.",
+      "range": {
+        "startLine": 1138,
+        "startChar": 7,
+        "endLine": 1138,
+        "endChar": 15
+      },
+      "revId": "e0ff0fc12aa2e439cb9965c7ac01d944e6fb6161",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96888cfc_09153669",
+        "filename": "modules/audio_coding/neteq/neteq_unittest.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-05-20T07:15:03Z",
+      "side": 1,
+      "message": "Since mutable references are now allowed, and this is stored as a mutable reference, I think it would make sense for this to be a mutable reference as well.",
+      "range": {
+        "startLine": 1162,
+        "startChar": 27,
+        "endLine": 1162,
+        "endChar": 39
+      },
+      "revId": "e0ff0fc12aa2e439cb9965c7ac01d944e6fb6161",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1da44807_8d7ad63a",
         "filename": "modules/audio_coding/neteq/tools/neteq_test.h",
         "patchSetId": 5
@@ -13,6 +59,30 @@
       "writtenOn": "2020-05-19T19:58:50Z",
       "side": 1,
       "message": "Had to add this to get an opportunity to call for more stats at the end of the simulation.",
+      "range": {
+        "startLine": 64,
+        "startChar": 58,
+        "endLine": 64,
+        "endChar": 71
+      },
+      "revId": "e0ff0fc12aa2e439cb9965c7ac01d944e6fb6161",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e193501_f933dbe2",
+        "filename": "modules/audio_coding/neteq/tools/neteq_test.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-05-20T07:15:03Z",
+      "side": 1,
+      "message": "Makes sense.",
+      "parentUuid": "1da44807_8d7ad63a",
       "range": {
         "startLine": 64,
         "startChar": 58,
