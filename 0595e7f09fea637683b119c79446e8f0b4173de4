@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "b4223927_c5be4438",
+        "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-20T09:02:31Z",
+      "side": 1,
+      "message": "alternative approach is to make it part of the parameter.\n(I realised there are structures, like 8frame pattern for two or three temporal layers, where it is we might want to check full pattern rather than just a start of it. 3 frames per DT is bad guess there.)",
+      "parentUuid": "edb58691_9fdecc57",
+      "range": {
+        "startLine": 230,
+        "startChar": 63,
+        "endLine": 230,
+        "endChar": 64
+      },
+      "revId": "0595e7f09fea637683b119c79446e8f0b4173de4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e061fdfc_fd3e86f8",
         "filename": "modules/video_coding/codecs/av1/libaom_av1_unittest.cc",
         "patchSetId": 1
