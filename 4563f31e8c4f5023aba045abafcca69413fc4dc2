@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "da03bd10_7511ca34",
+        "filename": "api/neteq/neteq.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2020-05-20T13:26:06Z",
+      "side": 1,
+      "message": "It can be in ms, but the implementation becomes much easier if we restrict it to blocks of 10 ms. Two suggestions:\n1. Rename this to extra_output_delay_ms, which is then rounded (down?) to 10 ms blocks.\n2. Rename this to extra_output_delay_10ms_blocks, and keep the implementation as is.\n\nWDYT?",
+      "parentUuid": "c2dac95d_645bcece",
+      "revId": "4563f31e8c4f5023aba045abafcca69413fc4dc2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2bb85379_ab0f58d7",
         "filename": "modules/audio_coding/neteq/neteq_impl.h",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "4563f31e8c4f5023aba045abafcca69413fc4dc2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2684ef62_53528f5f",
+        "filename": "modules/audio_coding/neteq/neteq_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2020-05-20T13:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bb85379_ab0f58d7",
+      "revId": "4563f31e8c4f5023aba045abafcca69413fc4dc2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
