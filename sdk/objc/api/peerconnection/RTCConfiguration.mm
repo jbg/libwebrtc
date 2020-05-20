@@ -45,6 +45,8 @@
 @synthesize shouldPruneTurnPorts = _shouldPruneTurnPorts;
 @synthesize shouldPresumeWritableWhenFullyRelayed =
     _shouldPresumeWritableWhenFullyRelayed;
+@synthesize shouldEnableIceCandidateMdnsLookup = _shouldEnableIceCandidateMdnsLookup;
+@synthesize shouldEnableIceCandidateDnsLookup = _shouldEnableIceCandidateDnsLookup;
 @synthesize shouldSurfaceIceCandidatesOnIceTransportTypeChanged =
     _shouldSurfaceIceCandidatesOnIceTransportTypeChanged;
 @synthesize iceCheckMinInterval = _iceCheckMinInterval;
@@ -113,6 +115,8 @@
     _shouldPruneTurnPorts = config.prune_turn_ports;
     _shouldPresumeWritableWhenFullyRelayed =
         config.presume_writable_when_fully_relayed;
+    _shouldEnableIceCandidateMdnsLookup = config.enable_ice_candidate_mdns_lookup;
+    _shouldEnableIceCandidateDnsLookup = config.enable_ice_candidate_dns_lookup;
     _shouldSurfaceIceCandidatesOnIceTransportTypeChanged =
         config.surface_ice_candidates_on_ice_transport_type_changed;
     if (config.ice_check_min_interval) {
@@ -143,7 +147,7 @@
 - (NSString *)description {
   static NSString *formatString = @"RTC_OBJC_TYPE(RTCConfiguration): "
                                   @"{\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%d\n%d\n%d\n%d\n%d\n%d\n"
-                                  @"%d\n%@\n%d\n%d\n%d\n%d\n%d\n%@\n%d\n}\n";
+                                  @"%d\n%d\n%d\n%@\n%d\n%d\n%d\n%d\n%d\n%@\n%d\n}\n";
 
   return [NSString
       stringWithFormat:formatString,
@@ -162,6 +166,8 @@
                        _iceCandidatePoolSize,
                        _shouldPruneTurnPorts,
                        _shouldPresumeWritableWhenFullyRelayed,
+                       _shouldEnableIceCandidateMdnsLookup,
+                       _shouldEnableIceCandidateDnsLookup,
                        _shouldSurfaceIceCandidatesOnIceTransportTypeChanged,
                        _iceCheckMinInterval,
                        _disableLinkLocalNetworks,
@@ -243,6 +249,9 @@
   nativeConfig->prune_turn_ports = _shouldPruneTurnPorts ? true : false;
   nativeConfig->presume_writable_when_fully_relayed =
       _shouldPresumeWritableWhenFullyRelayed ? true : false;
+  nativeConfig->enable_ice_candidate_mdns_lookup =
+      _shouldEnableIceCandidateMdnsLookup ? true : false;
+  nativeConfig->enable_ice_candidate_dns_lookup = _shouldEnableIceCandidateDnsLookup ? true : false;
   nativeConfig->surface_ice_candidates_on_ice_transport_type_changed =
       _shouldSurfaceIceCandidatesOnIceTransportTypeChanged ? true : false;
   if (_iceCheckMinInterval != nil) {

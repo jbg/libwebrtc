@@ -101,6 +101,18 @@ struct IceConfig {
   // candidate pairs will succeed, even before a binding response is received.
   bool presume_writable_when_fully_relayed = false;
 
+  // If set to true, this means the ICE transport will do an mDNS
+  // lookup when it receives a remote ICE candidate that has a hostname that
+  // ends in ".local". This allows connectivity to remote ICE agents using
+  // mDNS candidates, as described in
+  // https://tools.ietf.org/html/draft-ietf-rtcweb-mdns-ice-candidates-04.
+  bool enable_ice_candidate_mdns_lookup = true;
+
+  // If set to true, this means the ICE transport will do a DNS
+  // lookup when it receives a remote ICE candidate that has hostnames that
+  // does not end in ".local".
+  bool enable_ice_candidate_dns_lookup = false;
+
   // If true, after the ICE transport type (as the candidate filter used by the
   // port allocator) is changed such that new types of ICE candidates are
   // allowed by the new filter, e.g. from CF_RELAY to CF_ALL, candidates that
@@ -170,6 +182,8 @@ struct IceConfig {
             bool prioritize_most_likely_candidate_pairs,
             int stable_writable_connection_ping_interval_ms,
             bool presume_writable_when_fully_relayed,
+            bool disable_ice_candidate_mdns_lookup,
+            bool disable_ice_candidate_dns_lookup,
             int regather_on_failed_networks_interval_ms,
             int receiving_switching_delay_ms);
   ~IceConfig();

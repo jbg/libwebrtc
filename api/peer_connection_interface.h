@@ -501,6 +501,18 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     // handshake can begin immediately.
     bool presume_writable_when_fully_relayed = false;
 
+    // If set to true, this means the ICE transport will do an mDNS
+    // lookup when it receives a remote ICE candidate that has a hostname that
+    // ends in ".local". This allows connectivity to remote ICE agents using
+    // mDNS candidates, as described in
+    // https://tools.ietf.org/html/draft-ietf-rtcweb-mdns-ice-candidates-04.
+    bool enable_ice_candidate_mdns_lookup = true;
+
+    // If set to true, this means the ICE transport will do a DNS
+    // lookup when it receives a remote ICE candidate that has hostnames that
+    // does not end in ".local".
+    bool enable_ice_candidate_dns_lookup = false;
+
     // If true, "renomination" will be added to the ice options in the transport
     // description.
     // See: https://tools.ietf.org/html/draft-thatcher-ice-renomination-00

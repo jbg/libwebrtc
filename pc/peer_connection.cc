@@ -882,6 +882,8 @@ bool PeerConnectionInterface::RTCConfiguration::operator==(
     bool prune_turn_ports;
     PortPrunePolicy turn_port_prune_policy;
     bool presume_writable_when_fully_relayed;
+    bool enable_ice_candidate_mdns_lookup;
+    bool enable_ice_candidate_dns_lookup;
     bool enable_ice_renomination;
     bool redetermine_role_on_ice_restart;
     bool surface_ice_candidates_on_ice_transport_type_changed;
@@ -943,6 +945,9 @@ bool PeerConnectionInterface::RTCConfiguration::operator==(
          turn_port_prune_policy == o.turn_port_prune_policy &&
          presume_writable_when_fully_relayed ==
              o.presume_writable_when_fully_relayed &&
+         enable_ice_candidate_mdns_lookup ==
+             o.enable_ice_candidate_mdns_lookup &&
+         enable_ice_candidate_dns_lookup == o.enable_ice_candidate_dns_lookup &&
          enable_ice_renomination == o.enable_ice_renomination &&
          redetermine_role_on_ice_restart == o.redetermine_role_on_ice_restart &&
          surface_ice_candidates_on_ice_transport_type_changed ==
@@ -6173,6 +6178,10 @@ cricket::IceConfig PeerConnection::ParseIceConfig(
   ice_config.continual_gathering_policy = gathering_policy;
   ice_config.presume_writable_when_fully_relayed =
       config.presume_writable_when_fully_relayed;
+  ice_config.enable_ice_candidate_mdns_lookup =
+      config.enable_ice_candidate_mdns_lookup;
+  ice_config.enable_ice_candidate_dns_lookup =
+      config.enable_ice_candidate_dns_lookup;
   ice_config.surface_ice_candidates_on_ice_transport_type_changed =
       config.surface_ice_candidates_on_ice_transport_type_changed;
   ice_config.ice_check_interval_strong_connectivity =

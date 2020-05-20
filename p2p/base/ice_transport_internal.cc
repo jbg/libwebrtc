@@ -22,6 +22,8 @@ IceConfig::IceConfig(int receiving_timeout_ms,
                      bool prioritize_most_likely_candidate_pairs,
                      int stable_writable_connection_ping_interval_ms,
                      bool presume_writable_when_fully_relayed,
+                     bool enable_ice_candidate_mdns_lookup,
+                     bool enable_ice_candidate_dns_lookup,
                      int regather_on_failed_networks_interval_ms,
                      int receiving_switching_delay_ms)
     : receiving_timeout(receiving_timeout_ms),
@@ -32,6 +34,8 @@ IceConfig::IceConfig(int receiving_timeout_ms,
       stable_writable_connection_ping_interval(
           stable_writable_connection_ping_interval_ms),
       presume_writable_when_fully_relayed(presume_writable_when_fully_relayed),
+      enable_ice_candidate_mdns_lookup(enable_ice_candidate_mdns_lookup),
+      enable_ice_candidate_dns_lookup(enable_ice_candidate_dns_lookup),
       regather_on_failed_networks_interval(
           regather_on_failed_networks_interval_ms),
       receiving_switching_delay(receiving_switching_delay_ms) {}

@@ -154,6 +154,8 @@ P2PTransportChannel::P2PTransportChannel(
               false /* prioritize_most_likely_candidate_pairs */,
               STRONG_AND_STABLE_WRITABLE_CONNECTION_PING_INTERVAL,
               true /* presume_writable_when_fully_relayed */,
+              true /* enable_ice_candidate_mdns_lookup */,
+              false /* enable_ice_candidate_dns_lookup */,
               REGATHER_ON_FAILED_NETWORKS_INTERVAL,
               RECEIVING_SWITCHING_DELAY) {
   RTC_DCHECK(allocator_ != nullptr);
@@ -562,6 +564,22 @@ void P2PTransportChannel::SetIceConfig(const IceConfig& config) {
       RTC_LOG(LS_INFO) << "Set presume writable when fully relayed to "
                        << config_.presume_writable_when_fully_relayed;
     }
+  }
+
+  if (config_.enable_ice_candidate_dns_lookup !=
+      config.enable_ice_candidate_dns_lookup) {
+    config_.enable_ice_candidate_dns_lookup =
+        config.enable_ice_candidate_dns_lookup;
+    RTC_LOG(LS_INFO) << "Set enable_ice_candidate_dns_lookup to "
+                     << config_.enable_ice_candidate_dns_lookup;
+  }
+
+  if (config_.enable_ice_candidate_dns_lookup !=
+      config.enable_ice_candidate_dns_lookup) {
+    config_.enable_ice_candidate_dns_lookup =
+        config.enable_ice_candidate_dns_lookup;
+    RTC_LOG(LS_INFO) << "Set enable_ice_candidate_dns_lookup to "
+                     << config_.enable_ice_candidate_dns_lookup;
   }
 
   config_.surface_ice_candidates_on_ice_transport_type_changed =
@@ -1194,7 +1212,12 @@ void P2PTransportChannel::AddRemoteCandidate(const Candidate& candidate) {
   }
 
   if (new_remote_candidate.address().IsUnresolvedIP()) {
-    ResolveHostnameCandidate(new_remote_candidate);
+    bool is_mdns =
+        absl::EndsWith(new_remote_candidate.address().hostname(), LOCAL_TLD);
+    if ((is_mdns && config_.enable_ice_candidate_mdns_lookup) ||
+        (!is_mdns && config_.enable_ice_candidate_dns_lookup)) {
+      ResolveHostnameCandidate(new_remote_candidate);
+    }
     return;
   }
 

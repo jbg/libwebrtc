@@ -467,6 +467,8 @@ public class PeerConnection {
     public boolean pruneTurnPorts;
     public PortPrunePolicy turnPortPrunePolicy;
     public boolean presumeWritableWhenFullyRelayed;
+    public boolean enableIceCandidateMdnsLookup;
+    public boolean enableIceCandidateDnsLookup;
     public boolean surfaceIceCandidatesOnIceTransportTypeChanged;
     // The following fields define intervals in milliseconds at which ICE
     // connectivity checks are sent.
@@ -582,6 +584,8 @@ public class PeerConnection {
       pruneTurnPorts = false;
       turnPortPrunePolicy = PortPrunePolicy.NO_PRUNE;
       presumeWritableWhenFullyRelayed = false;
+      enableIceCandidateMdnsLookup = true;
+      enableIceCandidateDnsLookup = false;
       surfaceIceCandidatesOnIceTransportTypeChanged = false;
       iceCheckIntervalStrongConnectivityMs = null;
       iceCheckIntervalWeakConnectivityMs = null;
@@ -693,6 +697,16 @@ public class PeerConnection {
     @CalledByNative("RTCConfiguration")
     boolean getPresumeWritableWhenFullyRelayed() {
       return presumeWritableWhenFullyRelayed;
+    }
+
+    @CalledByNative("RTCConfiguration")
+    boolean getEnableIceCandidateMdnsLookup() {
+      return enableIceCandidateMdnsLookup;
+    }
+
+    @CalledByNative("RTCConfiguration")
+    boolean getEnableIceCandidateDnsLookup() {
+      return enableIceCandidateDnsLookup;
     }
 
     @CalledByNative("RTCConfiguration")
