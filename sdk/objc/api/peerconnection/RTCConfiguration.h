@@ -144,6 +144,20 @@ RTC_OBJC_EXPORT
  */
 @property(nonatomic, assign) BOOL shouldPresumeWritableWhenFullyRelayed;
 
+/** If set to YES, this means the ICE transport will do an mDNS
+ *  lookup when it receives a remote ICE candidate that has a hostname that
+ *  ends in ".local". This allows connectivity to remote ICE agents using
+ *  mDNS candidates, as described in
+ *  https://tools.ietf.org/html/draft-ietf-rtcweb-mdns-ice-candidates-04.
+ */
+@property(nonatomic, assign) BOOL shouldEnableIceCandidateMdnsLookup;
+
+/** If set to YES, this means the ICE transport will do a DNS
+ *  lookup when it receives a remote ICE candidate that has hostnames that
+ *  does not end in ".local".
+ */
+@property(nonatomic, assign) BOOL shouldEnableIceCandidateDnsLookup;
+
 /* This flag is only effective when |continualGatheringPolicy| is
  * RTCContinualGatheringPolicyGatherContinually.
  *

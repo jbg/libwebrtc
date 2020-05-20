@@ -5651,4 +5651,62 @@ TEST(P2PTransportChannel, InjectIceController) {
       /* event_log = */ nullptr, &factory);
 }
 
+TEST_F(P2PTransportChannelTest, DisableDnsLookup) {
+  rtc::MockAsyncResolver mock_async_resolver;
+  webrtc::MockAsyncResolverFactory mock_async_resolver_factory;
+  ON_CALL(mock_async_resolver_factory, Create())
+      .WillByDefault(Return(&mock_async_resolver));
+
+  ConfigureEndpoints(OPEN, OPEN, kDefaultPortAllocatorFlags,
+                     kDefaultPortAllocatorFlags);
+  GetEndpoint(0)->network_manager_.set_mdns_responder(
+      std::make_unique<webrtc::FakeMdnsResponder>(rtc::Thread::Current()));
+  GetEndpoint(1)->async_resolver_factory_ = &mock_async_resolver_factory;
+
+  IceConfig ice_config = CreateIceConfig(1000, GATHER_ONCE);
+  ice_config.enable_ice_candidate_mdns_lookup = true;
+  ice_config.enable_ice_candidate_dns_lookup = false;
+  CreateChannels(ice_config, ice_config);
+
+  bool lookup_started = false;
+  ON_CALL(mock_async_resolver, Start(_))
+      .WillByDefault(Assign(&lookup_started, true));
+
+  ep1_ch1()->AddRemoteCandidate(
+      CreateUdpCandidate(LOCAL_PORT_TYPE, "hostname.com", 1, 100));
+
+  EXPECT_FALSE(lookup_started);
+
+  DestroyChannels();
+}
+
+TEST_F(P2PTransportChannelTest, DisableMdnsLookup) {
+  rtc::MockAsyncResolver mock_async_resolver;
+  webrtc::MockAsyncResolverFactory mock_async_resolver_factory;
+  ON_CALL(mock_async_resolver_factory, Create())
+      .WillByDefault(Return(&mock_async_resolver));
+
+  ConfigureEndpoints(OPEN, OPEN, kDefaultPortAllocatorFlags,
+                     kDefaultPortAllocatorFlags);
+  GetEndpoint(0)->network_manager_.set_mdns_responder(
+      std::make_unique<webrtc::FakeMdnsResponder>(rtc::Thread::Current()));
+  GetEndpoint(1)->async_resolver_factory_ = &mock_async_resolver_factory;
+
+  IceConfig ice_config = CreateIceConfig(1000, GATHER_ONCE);
+  ice_config.enable_ice_candidate_mdns_lookup = false;
+  ice_config.enable_ice_candidate_dns_lookup = true;
+  CreateChannels(ice_config, ice_config);
+
+  bool lookup_started = false;
+  ON_CALL(mock_async_resolver, Start(_))
+      .WillByDefault(Assign(&lookup_started, true));
+
+  ep1_ch1()->AddRemoteCandidate(
+      CreateUdpCandidate(LOCAL_PORT_TYPE, "foo.local", 1, 100));
+
+  EXPECT_FALSE(lookup_started);
+
+  DestroyChannels();
+}
+
 }  // namespace cricket

@@ -206,6 +206,11 @@ void JavaToNativeRTCConfiguration(
   rtc_config->presume_writable_when_fully_relayed =
       Java_RTCConfiguration_getPresumeWritableWhenFullyRelayed(jni,
                                                                j_rtc_config);
+  rtc_config->enable_ice_candidate_mdns_lookup =
+      Java_RTCConfiguration_getEnableIceCandidateMdnsLookup(jni, j_rtc_config);
+  rtc_config->enable_ice_candidate_dns_lookup =
+      Java_RTCConfiguration_getEnableIceCandidateDnsLookup(jni, j_rtc_config);
+
   rtc_config->surface_ice_candidates_on_ice_transport_type_changed =
       Java_RTCConfiguration_getSurfaceIceCandidatesOnIceTransportTypeChanged(
           jni, j_rtc_config);
