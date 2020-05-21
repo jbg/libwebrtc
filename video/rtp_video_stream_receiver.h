@@ -69,7 +69,8 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
                                public KeyFrameRequestSender,
                                public video_coding::OnCompleteFrameCallback,
                                public OnDecryptedFrameCallback,
-                               public OnDecryptionStatusChangeCallback {
+                               public OnDecryptionStatusChangeCallback,
+                               public RtpVideoFrameReceiver {
  public:
   // DEPRECATED due to dependency on ReceiveStatisticsProxy.
   RtpVideoStreamReceiver(
@@ -205,9 +206,11 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
   void AddSecondarySink(RtpPacketSinkInterface* sink);
   void RemoveSecondarySink(const RtpPacketSinkInterface* sink);
 
-  virtual void ManageFrame(std::unique_ptr<video_coding::RtpFrameObject> frame);
-
  private:
+  // Implements RtpVideoFrameReceiver.
+  void ManageFrame(
+      std::unique_ptr<video_coding::RtpFrameObject> frame) override;
+
   // Used for buffering RTCP feedback messages and sending them all together.
   // Note:
   // 1. Key frame requests and NACKs are mutually exclusive, with the
