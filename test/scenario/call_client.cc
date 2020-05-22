@@ -67,7 +67,7 @@ Call* CreateCall(TimeController* time_controller,
   call_config.audio_state = audio_state;
   call_config.trials = config.field_trials;
   return Call::Create(call_config, time_controller->GetClock(),
-                      time_controller->CreateProcessThread("CallModules"),
+                      SharedModuleThread::Create("Callhread", nullptr),
                       time_controller->CreateProcessThread("Pacer"));
 }
 
