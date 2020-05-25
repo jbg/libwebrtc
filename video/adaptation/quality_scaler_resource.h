@@ -15,9 +15,9 @@
 #include <queue>
 #include <string>
 
+#include "api/adaptation/resource.h"
 #include "api/video/video_adaptation_reason.h"
 #include "api/video_codecs/video_encoder.h"
-#include "call/adaptation/resource.h"
 #include "call/adaptation/resource_adaptation_processor_interface.h"
 #include "modules/video_coding/utility/quality_scaler.h"
 #include "rtc_base/critical_section.h"

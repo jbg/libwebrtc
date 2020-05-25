@@ -16,6 +16,7 @@
 #include <utility>
 
 #include "absl/memory/memory.h"
+#include "api/adaptation/test/fake_resource.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/test/mock_fec_controller_override.h"
 #include "api/test/mock_video_encoder.h"
@@ -26,7 +27,6 @@
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/vp8_temporal_layers.h"
 #include "api/video_codecs/vp8_temporal_layers_factory.h"
-#include "call/adaptation/test/fake_resource.h"
 #include "common_video/h264/h264_common.h"
 #include "common_video/include/video_frame_buffer.h"
 #include "media/base/video_adapter.h"

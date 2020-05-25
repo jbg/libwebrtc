@@ -18,6 +18,11 @@ namespace webrtc {
 class MockVideoStreamEncoder : public VideoStreamEncoderInterface {
  public:
   MOCK_METHOD(void,
+              AddAdaptationResource,
+              (rtc::scoped_refptr<Resource>),
+              (override));
+
+  MOCK_METHOD(void,
               SetSource,
               (rtc::VideoSourceInterface<VideoFrame>*,
                const DegradationPreference&),

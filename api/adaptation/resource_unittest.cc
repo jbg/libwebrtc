@@ -8,12 +8,12 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "call/adaptation/resource.h"
+#include "api/adaptation/resource.h"
 
 #include <memory>
 
+#include "api/adaptation/test/fake_resource.h"
 #include "api/scoped_refptr.h"
-#include "call/adaptation/test/fake_resource.h"
 #include "rtc_base/event.h"
 #include "rtc_base/task_queue_for_test.h"
 #include "test/gmock.h"

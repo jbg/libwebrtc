@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "call/adaptation/video_source_restrictions.h"
+#include "api/adaptation/video_source_restrictions.h"
 
 #include <limits>
 

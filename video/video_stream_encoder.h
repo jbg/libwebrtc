@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/units/data_rate.h"
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video/video_rotation.h"
@@ -27,7 +28,6 @@
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
 #include "call/adaptation/resource_adaptation_processor_interface.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "call/adaptation/video_stream_input_state_provider.h"
 #include "modules/video_coding/utility/frame_dropper.h"
 #include "rtc_base/critical_section.h"
@@ -65,6 +65,8 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
                      std::unique_ptr<OveruseFrameDetector> overuse_detector,
                      TaskQueueFactory* task_queue_factory);
   ~VideoStreamEncoder() override;
+
+  void AddAdaptationResource(rtc::scoped_refptr<Resource> resource) override;
 
   void SetSource(rtc::VideoSourceInterface<VideoFrame>* source,
                  const DegradationPreference& degradation_preference) override;
@@ -118,8 +120,7 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   // Used for injected test resources.
   // TODO(eshr): Move all adaptation tests out of VideoStreamEncoder tests.
   void InjectAdaptationResource(rtc::scoped_refptr<Resource> resource,
-                                VideoAdaptationReason reason)
-      RTC_RUN_ON(&encoder_queue_);
+                                VideoAdaptationReason reason);
 
   rtc::scoped_refptr<QualityScalerResource>
   quality_scaler_resource_for_testing();

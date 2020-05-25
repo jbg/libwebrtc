@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef CALL_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
-#define CALL_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
+#ifndef API_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
+#define API_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
 
 #include <utility>
 
@@ -80,4 +80,4 @@ bool DidDecreaseFrameRate(VideoSourceRestrictions restrictions_before,
 
 }  // namespace webrtc
 
-#endif  // CALL_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
+#endif  // API_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
