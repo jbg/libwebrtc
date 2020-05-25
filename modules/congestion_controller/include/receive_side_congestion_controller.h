@@ -20,6 +20,7 @@
 #include "modules/remote_bitrate_estimator/remote_estimator_proxy.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/critical_section.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 
 namespace webrtc {
 class RemoteBitrateEstimator;
@@ -39,7 +40,7 @@ class ReceiveSideCongestionController : public CallStatsObserver,
       PacketRouter* packet_router,
       NetworkStateEstimator* network_state_estimator);
 
-  ~ReceiveSideCongestionController() override {}
+  ~ReceiveSideCongestionController() override;
 
   virtual void OnReceivedPacket(int64_t arrival_time_ms,
                                 size_t payload_size,
@@ -100,6 +101,8 @@ class ReceiveSideCongestionController : public CallStatsObserver,
     RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(WrappingBitrateEstimator);
   };
 
+  SequenceChecker worker_checker_;
+  SequenceChecker network_checker_;
   const FieldTrialBasedConfig field_trial_config_;
   WrappingBitrateEstimator remote_bitrate_estimator_;
   RemoteEstimatorProxy remote_estimator_proxy_;
