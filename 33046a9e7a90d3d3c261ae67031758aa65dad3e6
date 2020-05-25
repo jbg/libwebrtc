@@ -22,6 +22,30 @@
       "revId": "33046a9e7a90d3d3c261ae67031758aa65dad3e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "472b17b3_34387fcb",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-25T13:55:50Z",
+      "side": 1,
+      "message": "When the object is constructed inside of Create(), the refcount goes up to 1.\n\nSo if Create() is called and then immediately the object is freed, we hit the \u003d\u003d0 case above. Only the creator of the object gets to specify a callback and the purpose of the callback is to know when the creator is again the only remaining owner of a reference.\n\nIn theory though, if A calls Create, hands a reference to B, then A calls Release() (before B), then we get here, execute the callback, and now B owns the last reference.\nIf A does something to the variable that it\u0027s in the middle of freeing, then yes there\u0027d be a problem, but that\u0027s like calling a method of a derived class from the destructor of a parent class - it\u0027s possible, but not a good idea 😊 Regardless, it should crash consistently in such a case. A would also need to specifically be designed to do one thing in the callback and a contradictory thing outside the callback.",
+      "parentUuid": "354a0e70_28858134",
+      "range": {
+        "startLine": 470,
+        "startChar": 27,
+        "endLine": 470,
+        "endChar": 31
+      },
+      "revId": "33046a9e7a90d3d3c261ae67031758aa65dad3e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
