@@ -32,7 +32,6 @@ char kTSanDefaultSuppressions[] =
     // https://code.google.com/p/webrtc/issues/detail?id=2080
     "race:rtc_base/logging.cc\n"
     "race:rtc_base/shared_exclusive_lock_unittest.cc\n"
-    "race:rtc_base/signal_thread_unittest.cc\n"
 
     // rtc_pc_unittests
     // https://code.google.com/p/webrtc/issues/detail?id=2079
