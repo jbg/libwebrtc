@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3216a4bf_0e94f537",
+        "filename": "modules/video_coding/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-25T07:50:15Z",
+      "side": 1,
+      "message": "need to guard with the build flag (like done below for h264):\n\nif (enable_libaom) {\n  sources +\u003d [ \"codecs/test/videocodec_test_libaom.cc\" ]\n}",
+      "range": {
+        "startLine": 780,
+        "startChar": 0,
+        "endLine": 780,
+        "endChar": 46
+      },
+      "revId": "f666dfeae50fe3f1caeb3a751c97f622dfe8f40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42fdb64c_76b51f1a",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_libaom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-25T07:50:15Z",
+      "side": 1,
+      "message": "Does this test really needs vp8 and vp9 headers?",
+      "revId": "f666dfeae50fe3f1caeb3a751c97f622dfe8f40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c22d531f_34ee7549",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_libaom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-25T07:50:15Z",
+      "side": 1,
+      "message": "nested namespace are discouraged, if it is easy not to use it, then please do not.\n\nhttps://abseil.io/tips/130",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 16
+      },
+      "revId": "f666dfeae50fe3f1caeb3a751c97f622dfe8f40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c21f7bda_ec92b5ad",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_libaom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-25T07:50:15Z",
+      "side": 1,
+      "message": "put alias inside unnamed namespace. (or better remove as unused)\n\nhttps://abseil.io/tips/119#summary\n\n\"Declare namespace aliases and using-declarations inside the innermost namespace, whether named or anonymous.\"",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 61
+      },
+      "revId": "f666dfeae50fe3f1caeb3a751c97f622dfe8f40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afcc7d50_f6f33277",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_libaom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-25T07:50:15Z",
+      "side": 1,
+      "message": "constexpr\n\nhttps://google.github.io/styleguide/cppguide.html#Static_and_Global_Variables\n\n\"Constant initialization of static storage duration variables should be marked with constexpr or where possible the ABSL_CONST_INIT attribute\"",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 5
+      },
+      "revId": "f666dfeae50fe3f1caeb3a751c97f622dfe8f40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86fadbcf_d2f2a568",
+        "filename": "modules/video_coding/codecs/test/videocodec_test_libaom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-25T07:50:15Z",
+      "side": 1,
+      "message": "why vp9?",
+      "range": {
+        "startLine": 66,
+        "startChar": 35,
+        "endLine": 66,
+        "endChar": 48
+      },
+      "revId": "f666dfeae50fe3f1caeb3a751c97f622dfe8f40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
