@@ -20,6 +20,7 @@
 #include "modules/remote_bitrate_estimator/remote_estimator_proxy.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/critical_section.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 
 namespace webrtc {
 class RemoteBitrateEstimator;
@@ -39,7 +40,7 @@ class ReceiveSideCongestionController : public CallStatsObserver,
       PacketRouter* packet_router,
       NetworkStateEstimator* network_state_estimator);
 
-  ~ReceiveSideCongestionController() override {}
+  ~ReceiveSideCongestionController() override;
 
   virtual void OnReceivedPacket(int64_t arrival_time_ms,
                                 size_t payload_size,
@@ -56,6 +57,9 @@ class ReceiveSideCongestionController : public CallStatsObserver,
 
   // This is send bitrate, used to control the rate of feedback messages.
   void OnBitrateChanged(int bitrate_bps);
+
+  // TODO(tommi): breaks on internal.
+  // private:
 
   // Implements Module.
   int64_t TimeUntilNextProcess() override;
@@ -89,6 +93,8 @@ class ReceiveSideCongestionController : public CallStatsObserver,
     void PickEstimatorFromHeader(const RTPHeader& header)
         RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_sect_);
     void PickEstimator() RTC_EXCLUSIVE_LOCKS_REQUIRED(crit_sect_);
+
+    SequenceChecker worker_checker_;
     RemoteBitrateObserver* observer_;
     Clock* const clock_;
     rtc::CriticalSection crit_sect_;
@@ -100,6 +106,8 @@ class ReceiveSideCongestionController : public CallStatsObserver,
     RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(WrappingBitrateEstimator);
   };
 
+  SequenceChecker worker_checker_;
+  SequenceChecker network_checker_;
   const FieldTrialBasedConfig field_trial_config_;
   WrappingBitrateEstimator remote_bitrate_estimator_;
   RemoteEstimatorProxy remote_estimator_proxy_;
