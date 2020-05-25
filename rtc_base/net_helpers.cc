@@ -10,8 +10,6 @@
 
 #include "rtc_base/net_helpers.h"
 
-#include <memory>
-
 #if defined(WEBRTC_WIN)
 #include <ws2spi.h>
 #include <ws2tcpip.h>
@@ -26,8 +24,11 @@
 #endif
 #endif  // defined(WEBRTC_POSIX) && !defined(__native_client__)
 
+#include "api/task_queue/task_queue_base.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/signal_thread.h"
+#include "rtc_base/task_queue.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"  // for signal_with_thread...
 
 namespace rtc {
@@ -83,18 +84,33 @@ int ResolveHostname(const std::string& hostname,
 #endif  // !__native_client__
 }
 
-// AsyncResolver
-AsyncResolver::AsyncResolver() : SignalThread(), error_(-1) {}
+AsyncResolver::AsyncResolver() : error_(-1) {}
 
-AsyncResolver::~AsyncResolver() = default;
+AsyncResolver::~AsyncResolver() {
+  RTC_DCHECK(sequence_checker_.IsCurrent());
+}
 
 void AsyncResolver::Start(const SocketAddress& addr) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   addr_ = addr;
-  // SignalThred Start will kickoff the resolve process.
-  SignalThread::Start();
+  webrtc::TaskQueueBase* current_task_queue = webrtc::TaskQueueBase::Current();
+  popup_thread_ = Thread::Create();
+  popup_thread_->Start();
+  popup_thread_->PostTask(webrtc::ToQueuedTask(
+      [this, flag = safety_.flag(), addr, current_task_queue] {
+        std::vector<IPAddress> addresses;
+        int error =
+            ResolveHostname(addr.hostname().c_str(), addr.family(), &addresses);
+        current_task_queue->PostTask(webrtc::ToQueuedTask(
+            std::move(flag), [this, error, addresses = std::move(addresses)] {
+              RTC_DCHECK_RUN_ON(&sequence_checker_);
+              ResolveDone(std::move(addresses), error);
+            }));
+      }));
 }
 
 bool AsyncResolver::GetResolvedAddress(int family, SocketAddress* addr) const {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   if (error_ != 0 || addresses_.empty())
     return false;
 
@@ -109,19 +125,23 @@ bool AsyncResolver::GetResolvedAddress(int family, SocketAddress* addr) const {
 }
 
 int AsyncResolver::GetError() const {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
   return error_;
 }
 
 void AsyncResolver::Destroy(bool wait) {
-  SignalThread::Destroy(wait);
+  RTC_DCHECK(sequence_checker_.IsCurrent());
+  delete this;
 }
 
-void AsyncResolver::DoWork() {
-  error_ =
-      ResolveHostname(addr_.hostname().c_str(), addr_.family(), &addresses_);
+const std::vector<IPAddress>& AsyncResolver::addresses() const {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  return addresses_;
 }
 
-void AsyncResolver::OnWorkDone() {
+void AsyncResolver::ResolveDone(std::vector<IPAddress> addresses, int error) {
+  addresses_ = addresses;
+  error_ = error;
   SignalDone(this);
 }
 
