@@ -33,6 +33,24 @@
       "revId": "606c35f934a684b37a203f3fcb69e08a62f8ef57",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bfa97ee_9acab8ce",
+        "filename": "rtc_base/net_helpers.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-05-25T07:27:01Z",
+      "side": 1,
+      "message": "I\u0027m not sure there is a race, because we only dereference the AsyncResolver instance once it\u0027s safe to do so (by ticket-\u003eStartActivity() which guarantees the object is not destroyed before). If there\u0027s still some race (is there?) we should look at why StartActivity \u0026 AsyncResolver dtor doesn\u0027t guarantee it.",
+      "parentUuid": "c4cdcf3a_9a3c471c",
+      "revId": "606c35f934a684b37a203f3fcb69e08a62f8ef57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
