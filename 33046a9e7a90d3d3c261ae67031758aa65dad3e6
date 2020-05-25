@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "354a0e70_28858134",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-25T12:48:44Z",
+      "side": 1,
+      "message": "What happens wrt this move if ref_count_ goes 0-\u003e1-\u003e2-\u003e1-\u003e2-\u003e1-\u003e0 ?\nWill the callback do the right thing if ref_count goes back up?",
+      "range": {
+        "startLine": 470,
+        "startChar": 27,
+        "endLine": 470,
+        "endChar": 31
+      },
+      "revId": "33046a9e7a90d3d3c261ae67031758aa65dad3e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
