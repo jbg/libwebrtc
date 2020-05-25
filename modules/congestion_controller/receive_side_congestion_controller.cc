@@ -10,6 +10,7 @@
 
 #include "modules/congestion_controller/include/receive_side_congestion_controller.h"
 
+#include "api/task_queue/task_queue_base.h"
 #include "modules/pacing/packet_router.h"
 #include "modules/remote_bitrate_estimator/include/bwe_defines.h"
 #include "modules/remote_bitrate_estimator/remote_bitrate_estimator_abs_send_time.h"
@@ -121,7 +122,9 @@ void ReceiveSideCongestionController::WrappingBitrateEstimator::
 ReceiveSideCongestionController::ReceiveSideCongestionController(
     Clock* clock,
     PacketRouter* packet_router)
-    : ReceiveSideCongestionController(clock, packet_router, nullptr) {}
+    : ReceiveSideCongestionController(clock, packet_router, nullptr) {
+  RTC_DCHECK(TaskQueueBase::Current()) << "No task queue";
+}
 
 ReceiveSideCongestionController::ReceiveSideCongestionController(
     Clock* clock,
@@ -131,7 +134,9 @@ ReceiveSideCongestionController::ReceiveSideCongestionController(
       remote_estimator_proxy_(clock,
                               packet_router,
                               &field_trial_config_,
-                              network_state_estimator) {}
+                              network_state_estimator) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+}
 
 void ReceiveSideCongestionController::OnReceivedPacket(
     int64_t arrival_time_ms,
