@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f63adaf6_ea8b54cc",
+        "filename": "api/adaptation/resource.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-25T15:02:20Z",
+      "side": 1,
+      "message": "Self-review: How do we get around the dependency on the task queues and reference counting? Is it part of the API, hidden by the base class implementation, or does the impl part need to be a separate class that Resource wraps around?",
+      "revId": "2ede0b25013ba2aca8280d3ed734d48f33a8a615",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
