@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cd8ad85_5b0688bf",
+        "filename": "pc/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-25T13:03:27Z",
+      "side": 1,
+      "message": "I am not sure LS_INFO will fix the problem (unless the test is running with LS_WARNING).\n\nShould we turn these logs into a RTC_DLOG or are they needed in release mode?",
+      "range": {
+        "startLine": 442,
+        "startChar": 4,
+        "endLine": 443,
+        "endChar": 79
+      },
+      "revId": "717b5d6f4506753f11efea2c02929bbe600ee8c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
