@@ -19,18 +19,26 @@
 
 #include <vector>
 
+#include "api/scoped_refptr.h"
 #include "rtc_base/async_resolver_interface.h"
+#include "rtc_base/critical_section.h"
+#include "rtc_base/event.h"
 #include "rtc_base/ip_address.h"
-#include "rtc_base/signal_thread.h"
+#include "rtc_base/ref_count.h"
+#include "rtc_base/ref_counter.h"
 #include "rtc_base/socket_address.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/system/rtc_export.h"
+#include "rtc_base/thread_annotations.h"
 
 namespace rtc {
 
 // AsyncResolver will perform async DNS resolution, signaling the result on
 // the SignalDone from AsyncResolverInterface when the operation completes.
-class RTC_EXPORT AsyncResolver : public SignalThread,
-                                 public AsyncResolverInterface {
+//
+// This class is thread-compatible, and all methods and destruction needs to
+// happen from the same rtc::Thread.
+class RTC_EXPORT AsyncResolver : public AsyncResolverInterface {
  public:
   AsyncResolver();
   ~AsyncResolver() override;
@@ -40,17 +48,30 @@ class RTC_EXPORT AsyncResolver : public SignalThread,
   int GetError() const override;
   void Destroy(bool wait) override;
 
-  const std::vector<IPAddress>& addresses() const { return addresses_; }
-  void set_error(int error) { error_ = error; }
-
- protected:
-  void DoWork() override;
-  void OnWorkDone() override;
+  const std::vector<IPAddress>& addresses() const;
 
  private:
-  SocketAddress addr_;
-  std::vector<IPAddress> addresses_;
-  int error_;
+  class Ticket : public rtc::RefCountInterface {
+   public:
+    explicit Ticket(Event* activity_done);
+
+    bool StartActivity();
+    void CompleteActivity();
+
+   private:
+    Event* activity_done_;
+    webrtc::webrtc_impl::RefCounter ref_count_{1};
+  };
+
+  SocketAddress addr_ RTC_GUARDED_BY(sequence_checker_);
+  CriticalSection mu_;
+  std::vector<IPAddress> addresses_ RTC_GUARDED_BY(mu_);
+  int error_ RTC_GUARDED_BY(mu_);
+
+  Event async_activity_done_;
+  scoped_refptr<Ticket> ticket_;
+
+  webrtc::SequenceChecker sequence_checker_;
 };
 
 // rtc namespaced wrappers for inet_ntop and inet_pton so we can avoid
