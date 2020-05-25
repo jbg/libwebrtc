@@ -16,6 +16,24 @@
       "revId": "f4d322cdc47aad5fa31f5bb9fb79ce355da97842",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cde79579_38194f0c",
+        "filename": "rtc_base/rate_statistics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-25T11:00:10Z",
+      "side": 1,
+      "message": "I thought about it but decided to not do it now for two reasons:\n* a bunch of call sites that need to be updated\n* changing the precision from ms to us can cause some subtle bugs (has happened to me in other refactorings)\n\nAgree though that this should be done in a follow-up. I\u0027ll add a todo.",
+      "parentUuid": "2e9c7c8b_1830ae36",
+      "revId": "f4d322cdc47aad5fa31f5bb9fb79ce355da97842",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
