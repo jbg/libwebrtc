@@ -70,6 +70,30 @@
       "revId": "33046a9e7a90d3d3c261ae67031758aa65dad3e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e7d448e_90487f27",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-25T15:45:16Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll add a comment to make that clear.",
+      "parentUuid": "6d5c7969_51c74d60",
+      "range": {
+        "startLine": 470,
+        "startChar": 27,
+        "endLine": 470,
+        "endChar": 31
+      },
+      "revId": "33046a9e7a90d3d3c261ae67031758aa65dad3e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
