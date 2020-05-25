@@ -46,6 +46,30 @@
       "revId": "33046a9e7a90d3d3c261ae67031758aa65dad3e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d5c7969_51c74d60",
+        "filename": "call/call.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-05-25T15:35:31Z",
+      "side": 1,
+      "message": "Ah, I got confused. This isn\u0027t called when there is only one remaining Call instance - it\u0027s when there is only the ref from CallFactory. Never mind about that then. 😊\n\nOne last comment though. If I understand it correctly, the lambda would reset the last ref counted instance which calls Release() and thus returns at L466. So when the lambda returns, |this| will have been deleted?\nI assume then that the kOtherRefsRemained return value doesn\u0027t hurt because the call site won\u0027t try to delete the already deleted instance.\nShould there be a comment warning that no member of this class must be referenced after calling moved_fn()?",
+      "parentUuid": "472b17b3_34387fcb",
+      "range": {
+        "startLine": 470,
+        "startChar": 27,
+        "endLine": 470,
+        "endChar": 31
+      },
+      "revId": "33046a9e7a90d3d3c261ae67031758aa65dad3e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
