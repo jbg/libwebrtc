@@ -26,7 +26,6 @@
 
 #include "api/task_queue/task_queue_base.h"
 #include "rtc_base/logging.h"
-#include "rtc_base/signal_thread.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"  // for signal_with_thread...
