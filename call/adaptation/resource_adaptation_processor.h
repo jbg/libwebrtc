@@ -16,15 +16,15 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/adaptation/resource.h"
+#include "api/adaptation/video_source_restrictions.h"
+#include "api/adaptation/video_stream_input_state.h"
 #include "api/rtp_parameters.h"
 #include "api/scoped_refptr.h"
 #include "api/video/video_frame.h"
 #include "api/video/video_stream_encoder_observer.h"
-#include "call/adaptation/resource.h"
 #include "call/adaptation/resource_adaptation_processor_interface.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "call/adaptation/video_stream_adapter.h"
-#include "call/adaptation/video_stream_input_state.h"
 #include "call/adaptation/video_stream_input_state_provider.h"
 #include "rtc_base/synchronization/sequence_checker.h"
 

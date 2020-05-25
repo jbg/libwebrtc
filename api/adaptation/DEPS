@@ -1,0 +1,12 @@
+specific_include_rules = {
+  # Implementing Resource requries implementing rtc::RefCountInterface. It also
+  # has a dependency on task queues and thread annotations.
+  "resource\.h": [
+    "+rtc_base/ref_count.h",
+    "+rtc_base/task_queue.h",
+    "+rtc_base/thread_annotations.h",
+  ],
+  "fake_resource\.h": [
+    "+rtc_base/ref_counted_object.h",
+  ],
+}

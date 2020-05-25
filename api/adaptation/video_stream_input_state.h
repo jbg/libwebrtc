@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef CALL_ADAPTATION_VIDEO_STREAM_INPUT_STATE_H_
-#define CALL_ADAPTATION_VIDEO_STREAM_INPUT_STATE_H_
+#ifndef API_ADAPTATION_VIDEO_STREAM_INPUT_STATE_H_
+#define API_ADAPTATION_VIDEO_STREAM_INPUT_STATE_H_
 
 #include "absl/types/optional.h"
 #include "api/video/video_codec_type.h"
@@ -46,4 +46,4 @@ class VideoStreamInputState {
 
 }  // namespace webrtc
 
-#endif  // CALL_ADAPTATION_VIDEO_STREAM_INPUT_STATE_H_
+#endif  // API_ADAPTATION_VIDEO_STREAM_INPUT_STATE_H_

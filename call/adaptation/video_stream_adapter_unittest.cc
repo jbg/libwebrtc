@@ -14,12 +14,12 @@
 #include <utility>
 
 #include "absl/types/optional.h"
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/video/video_adaptation_reason.h"
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/video_encoder_config.h"
 #include "call/adaptation/encoder_settings.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "rtc_base/string_encode.h"
 #include "test/field_trial.h"
 #include "test/gmock.h"

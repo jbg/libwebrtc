@@ -13,8 +13,10 @@
 
 #include <vector>
 
+#include "api/adaptation/resource.h"
 #include "api/fec_controller_override.h"
 #include "api/rtp_parameters.h"  // For DegradationPreference.
+#include "api/scoped_refptr.h"
 #include "api/units/data_rate.h"
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video/video_sink_interface.h"
@@ -48,6 +50,16 @@ class VideoStreamEncoderInterface : public rtc::VideoSinkInterface<VideoFrame> {
         VideoEncoderConfig::ContentType content_type,
         int min_transmit_bitrate_bps) = 0;
   };
+
+  // Adds the Resource to the ResourceAdaptationProcessor and
+  // VideoStreamEncoderResourceManager, allowing the video stream to adapt in
+  // response to overuse/underuse signals from the resource.
+  // TODO(https://crbug.com/webrtc/11565): When the Processor is moved to Call,
+  // the resource should be added to the Processor there. And when if/when
+  // the Manager does not need to know about the Resource's
+  // VideoAdaptationReason, this method could then be deleted altogether in
+  // favor of Call-level APIs only.
+  virtual void AddAdaptationResource(rtc::scoped_refptr<Resource> resource) = 0;
 
   // Sets the source that will provide video frames to the VideoStreamEncoder's
   // OnFrame method. |degradation_preference| control whether or not resolution

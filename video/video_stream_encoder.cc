@@ -357,6 +357,21 @@ void VideoStreamEncoder::SetFecControllerOverride(
   });
 }
 
+void VideoStreamEncoder::AddAdaptationResource(
+    rtc::scoped_refptr<Resource> resource) {
+  // The resource gets added to |stream_resource_manager_|. Because managed
+  // resources are removed on Stop(), the resource will be removed before the
+  // stream goes away.
+  //
+  // Any externally added resource is categorized as kCpu. One of the
+  // consequences of this is that if |resource| triggers overuse it will affect
+  // legacy stats for CPU like googAdaptationChanges, googCpuLimitedResolution
+  // and the histogram "AdaptChangesPerMinute.Cpu".
+  // TODO(hbos): Get rid of the dependency on VideoAdaptationReason and have
+  // AddAdaptationResource() replace InjectAdaptationResource().
+  InjectAdaptationResource(resource, VideoAdaptationReason::kCpu);
+}
+
 void VideoStreamEncoder::SetSource(
     rtc::VideoSourceInterface<VideoFrame>* source,
     const DegradationPreference& degradation_preference) {
