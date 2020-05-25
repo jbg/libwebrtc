@@ -20,7 +20,7 @@ namespace webrtc {
 
 EncodeUsageResource::EncodeUsageResource(
     std::unique_ptr<OveruseFrameDetector> overuse_detector)
-    : rtc::RefCountedObject<Resource>(),
+    : Resource(),
       overuse_detector_(std::move(overuse_detector)),
       is_started_(false),
       target_frame_rate_(absl::nullopt) {

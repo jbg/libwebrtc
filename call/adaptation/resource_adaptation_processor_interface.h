@@ -12,13 +12,13 @@
 #define CALL_ADAPTATION_RESOURCE_ADAPTATION_PROCESSOR_INTERFACE_H_
 
 #include "absl/types/optional.h"
+#include "api/adaptation/resource.h"
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/rtp_parameters.h"
 #include "api/scoped_refptr.h"
 #include "api/video/video_adaptation_counters.h"
 #include "api/video/video_frame.h"
 #include "call/adaptation/encoder_settings.h"
-#include "call/adaptation/resource.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "rtc_base/task_queue.h"
 
 namespace webrtc {

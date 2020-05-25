@@ -17,7 +17,7 @@
 namespace webrtc {
 
 QualityScalerResource::QualityScalerResource()
-    : rtc::RefCountedObject<Resource>(),
+    : Resource(),
       quality_scaler_(nullptr),
       num_handled_callbacks_(0),
       pending_callbacks_(),

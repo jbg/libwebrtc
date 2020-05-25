@@ -10,13 +10,13 @@
 
 #include "call/adaptation/resource_adaptation_processor.h"
 
+#include "api/adaptation/resource.h"
+#include "api/adaptation/test/fake_resource.h"
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/scoped_refptr.h"
 #include "api/video/video_adaptation_counters.h"
-#include "call/adaptation/resource.h"
 #include "call/adaptation/resource_adaptation_processor_interface.h"
 #include "call/adaptation/test/fake_frame_rate_provider.h"
-#include "call/adaptation/test/fake_resource.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "call/adaptation/video_stream_input_state_provider.h"
 #include "rtc_base/event.h"
 #include "rtc_base/task_queue_for_test.h"

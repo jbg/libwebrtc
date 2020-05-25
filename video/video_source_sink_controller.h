@@ -14,10 +14,10 @@
 #include <string>
 
 #include "absl/types/optional.h"
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/video/video_frame.h"
 #include "api/video/video_sink_interface.h"
 #include "api/video/video_source_interface.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "rtc_base/critical_section.h"
 
 namespace webrtc {

@@ -15,19 +15,18 @@
 #include <queue>
 #include <string>
 
+#include "api/adaptation/resource.h"
 #include "api/video/video_adaptation_reason.h"
 #include "api/video_codecs/video_encoder.h"
-#include "call/adaptation/resource.h"
 #include "call/adaptation/resource_adaptation_processor_interface.h"
 #include "modules/video_coding/utility/quality_scaler.h"
 #include "rtc_base/critical_section.h"
-#include "rtc_base/ref_counted_object.h"
 #include "rtc_base/task_queue.h"
 
 namespace webrtc {
 
 // Handles interaction with the QualityScaler.
-class QualityScalerResource : public rtc::RefCountedObject<Resource>,
+class QualityScalerResource : public Resource,
                               public QualityScalerQpUsageHandlerInterface {
  public:
   QualityScalerResource();

@@ -8,18 +8,20 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef CALL_ADAPTATION_RESOURCE_H_
-#define CALL_ADAPTATION_RESOURCE_H_
+#ifndef API_ADAPTATION_RESOURCE_H_
+#define API_ADAPTATION_RESOURCE_H_
 
 #include <string>
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/adaptation/video_source_restrictions.h"
+#include "api/adaptation/video_stream_input_state.h"
 #include "api/scoped_refptr.h"
-#include "call/adaptation/video_source_restrictions.h"
-#include "call/adaptation/video_stream_input_state.h"
 #include "rtc_base/ref_count.h"
+#include "rtc_base/ref_counted_object.h"
 #include "rtc_base/task_queue.h"
+#include "rtc_base/thread_annotations.h"
 
 namespace webrtc {
 
@@ -42,10 +44,8 @@ class ResourceListener {
       rtc::scoped_refptr<Resource> resource) = 0;
 };
 
-class Resource : public rtc::RefCountInterface {
+class Resource : public rtc::RefCountedObject<rtc::RefCountInterface> {
  public:
-  // By default, usage_state() is null until a measurement is made.
-  Resource();
   ~Resource() override;
 
   void Initialize(rtc::TaskQueue* encoder_queue,
@@ -73,6 +73,9 @@ class Resource : public rtc::RefCountInterface {
   virtual std::string name() const = 0;
 
  protected:
+  // By default, usage_state() is null until a measurement is made.
+  Resource();
+
   rtc::TaskQueue* encoder_queue() const;
   rtc::TaskQueue* resource_adaptation_queue() const;
 
@@ -89,4 +92,4 @@ class Resource : public rtc::RefCountInterface {
 
 }  // namespace webrtc
 
-#endif  // CALL_ADAPTATION_RESOURCE_H_
+#endif  // API_ADAPTATION_RESOURCE_H_

@@ -8,18 +8,17 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef CALL_ADAPTATION_TEST_FAKE_RESOURCE_H_
-#define CALL_ADAPTATION_TEST_FAKE_RESOURCE_H_
+#ifndef API_ADAPTATION_TEST_FAKE_RESOURCE_H_
+#define API_ADAPTATION_TEST_FAKE_RESOURCE_H_
 
 #include <string>
 
-#include "call/adaptation/resource.h"
-#include "rtc_base/ref_counted_object.h"
+#include "api/adaptation/resource.h"
 
 namespace webrtc {
 
 // Fake resource used for testing.
-class FakeResource : public rtc::RefCountedObject<Resource> {
+class FakeResource : public Resource {
  public:
   explicit FakeResource(std::string name);
   ~FakeResource() override;
@@ -49,4 +48,4 @@ class FakeResource : public rtc::RefCountedObject<Resource> {
 
 }  // namespace webrtc
 
-#endif  // CALL_ADAPTATION_TEST_FAKE_RESOURCE_H_
+#endif  // API_ADAPTATION_TEST_FAKE_RESOURCE_H_

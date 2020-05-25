@@ -19,11 +19,11 @@
 
 #include "absl/algorithm/container.h"
 #include "absl/base/macros.h"
+#include "api/adaptation/resource.h"
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/video/video_adaptation_reason.h"
 #include "api/video/video_source_interface.h"
-#include "call/adaptation/resource.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
 #include "rtc_base/strings/string_builder.h"
@@ -140,9 +140,7 @@ class VideoStreamEncoderResourceManager::InitialFrameDropper {
 
 VideoStreamEncoderResourceManager::PreventAdaptUpDueToActiveCounts::
     PreventAdaptUpDueToActiveCounts(VideoStreamEncoderResourceManager* manager)
-    : rtc::RefCountedObject<Resource>(),
-      manager_(manager),
-      adaptation_processor_(nullptr) {}
+    : Resource(), manager_(manager), adaptation_processor_(nullptr) {}
 
 void VideoStreamEncoderResourceManager::PreventAdaptUpDueToActiveCounts::
     SetAdaptationProcessor(
@@ -187,7 +185,7 @@ VideoStreamEncoderResourceManager::
     PreventIncreaseResolutionDueToBitrateResource::
         PreventIncreaseResolutionDueToBitrateResource(
             VideoStreamEncoderResourceManager* manager)
-    : rtc::RefCountedObject<Resource>(),
+    : Resource(),
       manager_(manager),
       encoder_settings_(absl::nullopt),
       encoder_target_bitrate_bps_(absl::nullopt) {}
@@ -258,7 +256,7 @@ bool VideoStreamEncoderResourceManager::
 
 VideoStreamEncoderResourceManager::PreventAdaptUpInBalancedResource::
     PreventAdaptUpInBalancedResource(VideoStreamEncoderResourceManager* manager)
-    : rtc::RefCountedObject<Resource>(),
+    : Resource(),
       manager_(manager),
       adaptation_processor_(nullptr),
       encoder_target_bitrate_bps_(absl::nullopt) {}

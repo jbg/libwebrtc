@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/adaptation/resource.h"
 #include "api/rtp_parameters.h"
 #include "api/scoped_refptr.h"
 #include "api/video/video_adaptation_counters.h"
@@ -30,7 +31,6 @@
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/video_encoder_config.h"
-#include "call/adaptation/resource.h"
 #include "call/adaptation/resource_adaptation_processor_interface.h"
 #include "call/adaptation/video_stream_adapter.h"
 #include "call/adaptation/video_stream_input_state_provider.h"
@@ -177,8 +177,7 @@ class VideoStreamEncoderResourceManager
 
   // Does not trigger adaptations, only prevents adapting up based on
   // |active_counts_|.
-  class PreventAdaptUpDueToActiveCounts final
-      : public rtc::RefCountedObject<Resource> {
+  class PreventAdaptUpDueToActiveCounts final : public Resource {
    public:
     explicit PreventAdaptUpDueToActiveCounts(
         VideoStreamEncoderResourceManager* manager);
@@ -206,8 +205,7 @@ class VideoStreamEncoderResourceManager
   };
 
   // Does not trigger adaptations, only prevents adapting up resolution.
-  class PreventIncreaseResolutionDueToBitrateResource final
-      : public rtc::RefCountedObject<Resource> {
+  class PreventIncreaseResolutionDueToBitrateResource final : public Resource {
    public:
     explicit PreventIncreaseResolutionDueToBitrateResource(
         VideoStreamEncoderResourceManager* manager);
@@ -239,8 +237,7 @@ class VideoStreamEncoderResourceManager
   };
 
   // Does not trigger adaptations, only prevents adapting up in BALANCED.
-  class PreventAdaptUpInBalancedResource final
-      : public rtc::RefCountedObject<Resource> {
+  class PreventAdaptUpInBalancedResource final : public Resource {
    public:
     explicit PreventAdaptUpInBalancedResource(
         VideoStreamEncoderResourceManager* manager);

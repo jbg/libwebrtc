@@ -15,9 +15,8 @@
 #include <string>
 
 #include "absl/types/optional.h"
+#include "api/adaptation/resource.h"
 #include "api/video/video_adaptation_reason.h"
-#include "call/adaptation/resource.h"
-#include "rtc_base/ref_counted_object.h"
 #include "rtc_base/task_queue.h"
 #include "video/adaptation/overuse_frame_detector.h"
 
@@ -28,7 +27,7 @@ namespace webrtc {
 // indirectly by usage in the ResourceAdaptationProcessor (which is only tested
 // because of its usage in VideoStreamEncoder); all tests are currently in
 // video_stream_encoder_unittest.cc.
-class EncodeUsageResource : public rtc::RefCountedObject<Resource>,
+class EncodeUsageResource : public Resource,
                             public OveruseFrameDetectorObserverInterface {
  public:
   explicit EncodeUsageResource(

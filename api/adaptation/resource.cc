@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "call/adaptation/resource.h"
+#include "api/adaptation/resource.h"
 
 #include "absl/algorithm/container.h"
 #include "rtc_base/checks.h"
@@ -18,7 +18,8 @@ namespace webrtc {
 ResourceListener::~ResourceListener() {}
 
 Resource::Resource()
-    : encoder_queue_(nullptr),
+    : rtc::RefCountedObject<rtc::RefCountInterface>(),
+      encoder_queue_(nullptr),
       resource_adaptation_queue_(nullptr),
       usage_state_(absl::nullopt),
       listener_(nullptr) {}
