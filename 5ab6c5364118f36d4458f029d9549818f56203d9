@@ -22,6 +22,30 @@
       "revId": "5ab6c5364118f36d4458f029d9549818f56203d9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c9b94cb_5c3f220a",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-26T09:38:52Z",
+      "side": 1,
+      "message": "I guess it\u0027s technically correct, but phrasing can be improved. Done.",
+      "parentUuid": "866d6779_b782a347",
+      "range": {
+        "startLine": 1006,
+        "startChar": 60,
+        "endLine": 1007,
+        "endChar": 65
+      },
+      "revId": "5ab6c5364118f36d4458f029d9549818f56203d9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
