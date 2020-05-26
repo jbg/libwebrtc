@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8f26ee1_1b4a2230",
+        "filename": "call/call.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-05-26T09:32:55Z",
+      "side": 0,
+      "message": "Nice removal!",
+      "range": {
+        "startLine": 1024,
+        "startChar": 6,
+        "endLine": 1025,
+        "endChar": 25
+      },
+      "revId": "25c77c1aea82347a613840144d3e8ac9be1e855f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
