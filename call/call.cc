@@ -270,6 +270,8 @@ class Call final : public webrtc::Call,
 
   Clock* const clock_;
   TaskQueueFactory* const task_queue_factory_;
+  TaskQueueBase* const worker_thread_;
+
 
   const int num_cpu_cores_;
   const rtc::scoped_refptr<SharedModuleThread> module_process_thread_;
@@ -327,7 +329,7 @@ class Call final : public webrtc::Call,
   std::map<uint32_t, ReceiveRtpConfig> receive_rtp_config_
       RTC_GUARDED_BY(configuration_sequence_checker_);
 
-  std::unique_ptr<RWLockWrapper> send_crit_;
+  std::unique_ptr<RWLockWrapper> send_crit_; // RTC_GUARDED_BY(configuration_sequence_checker_);
   // Audio and Video send streams are owned by the client that creates them.
   std::map<uint32_t, AudioSendStream*> audio_send_ssrcs_
       RTC_GUARDED_BY(send_crit_);
@@ -550,9 +552,10 @@ Call::Call(Clock* clock,
            TaskQueueFactory* task_queue_factory)
     : clock_(clock),
       task_queue_factory_(task_queue_factory),
+      worker_thread_(GetCurrentTaskQueueOrThread()),
       num_cpu_cores_(CpuInfo::DetectNumberOfCores()),
       module_process_thread_(std::move(module_process_thread)),
-      call_stats_(new CallStats(clock_, GetCurrentTaskQueueOrThread())),
+      call_stats_(new CallStats(clock_, worker_thread_)),
       bitrate_allocator_(new BitrateAllocator(this)),
       config_(config),
       audio_network_state_(kNetworkDown),
@@ -577,6 +580,7 @@ Call::Call(Clock* clock,
       transport_send_(std::move(transport_send)) {
   RTC_DCHECK(config.event_log != nullptr);
   RTC_DCHECK(config.trials != nullptr);
+  RTC_DCHECK(worker_thread_->IsCurrent());
   network_sequence_checker_.Detach();
 
   call_stats_->RegisterStatsObserver(&receive_side_cc_);
@@ -1102,6 +1106,7 @@ void Call::SignalChannelNetworkState(MediaType media, NetworkState state) {
 }
 
 void Call::OnAudioTransportOverheadChanged(int transport_overhead_per_packet) {
+  RTC_DCHECK_RUN_ON(&configuration_sequence_checker_);
   ReadLockScoped read_lock(*send_crit_);
   for (auto& kv : audio_send_ssrcs_) {
     kv.second->SetTransportOverhead(transport_overhead_per_packet);
