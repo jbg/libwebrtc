@@ -86,7 +86,8 @@ int ResolveHostname(const std::string& hostname,
 // AsyncResolver
 AsyncResolver::AsyncResolver() : SignalThread(), error_(-1) {}
 
-AsyncResolver::~AsyncResolver() = default;
+AsyncResolver::~AsyncResolver() {  *(volatile int*)0=0;      RTC_DCHECK(false);
+}
 
 void AsyncResolver::Start(const SocketAddress& addr) {
   addr_ = addr;

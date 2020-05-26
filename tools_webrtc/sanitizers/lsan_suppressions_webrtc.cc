@@ -19,7 +19,7 @@
 // kLSanDefaultSuppressions which contains LSan suppressions delimited by
 // newlines. See http://dev.chromium.org/developers/testing/leaksanitizer
 // for the instructions on writing suppressions.
-char kLSanDefaultSuppressions[] =
+char kLSanDefaultSuppressions[] ="";/*
 
     // ============ Leaks in third-party code shared with Chromium =============
     // These entries are copied from build/sanitizers/lsan_suppressions.cc in
@@ -100,5 +100,5 @@ char kLSanDefaultSuppressions[] =
 
     // End of suppressions.
     ;  // Please keep this semicolon.
-
+*/
 #endif  // LEAK_SANITIZER

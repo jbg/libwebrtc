@@ -19,6 +19,7 @@
 #include "rtc_base/message_handler.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 #include "rtc_base/thread.h"
+#include "rtc_base/logging.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace rtc {
@@ -128,8 +129,11 @@ class SignalThread : public sigslot::has_slots<>, protected MessageHandler {
     ~EnterExit() RTC_UNLOCK_FUNCTION() {
       bool d = (0 == --t_->refcount_);
       t_->cs_.Leave();
-      if (d)
+      if (d) {
+        RTC_LOG(LS_INFO)<< "***********delete";
+        //RTC_DCHECK(false);
         delete t_;
+      }
     }
 
    private:

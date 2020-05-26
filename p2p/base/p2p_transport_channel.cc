@@ -36,6 +36,13 @@
 
 namespace {
 
+class ResolverDeleter {
+ public:
+  void operator()(rtc::AsyncResolverInterface* resolver) {
+    resolver->Destroy(false);
+  }
+};
+
 cricket::PortInterface::CandidateOrigin GetOrigin(
     cricket::PortInterface* port,
     cricket::PortInterface* origin_port) {
@@ -1223,9 +1230,14 @@ void P2PTransportChannel::OnCandidateResolved(
   Candidate candidate = p->candidate_;
   resolvers_.erase(p);
   AddRemoteCandidateWithResolver(candidate, resolver);
-  invoker_.AsyncInvoke<void>(
-      RTC_FROM_HERE, thread(),
-      rtc::Bind(&rtc::AsyncResolverInterface::Destroy, resolver, false));
+  //std::unique_ptr<rtc::AsyncResolverInterface, ResolverDeleter> resolver_ptr(
+    //  resolver, ResolverDeleter());
+  invoker_.AsyncInvokeDelayed<void>(RTC_FROM_HERE, thread(),
+  rtc::Bind(&rtc::AsyncResolverInterface::Destroy, resolver, false), 100);/*
+                             [resolver = std::move(resolver)] {
+                               // resolver->Destroy(false) is called at the end
+                               // of this scope.
+                             }, 100);*/
 }
 
 void P2PTransportChannel::AddRemoteCandidateWithResolver(
