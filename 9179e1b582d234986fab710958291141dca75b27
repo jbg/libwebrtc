@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "227bc08d_d08fa9a5",
+        "filename": "call/call.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-05-26T17:19:05Z",
+      "side": 1,
+      "message": "Now that you\u0027re not entangled in locks, you might want to write these in a single if statement instead?",
+      "range": {
+        "startLine": 1145,
+        "startChar": 8,
+        "endLine": 1157,
+        "endChar": 9
+      },
+      "revId": "9179e1b582d234986fab710958291141dca75b27",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
