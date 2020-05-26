@@ -49,8 +49,8 @@
 #include "rtc_base/location.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/strings/string_builder.h"
-#include "rtc_base/synchronization/rw_lock_wrapper.h"
 #include "rtc_base/synchronization/sequence_checker.h"
+#include "rtc_base/task_utils/pending_task_safety_flag.h"
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/time_utils.h"
 #include "rtc_base/trace_event.h"
@@ -257,7 +257,7 @@ class Call final : public webrtc::Call,
       RTC_SHARED_LOCKS_REQUIRED(configuration_sequence_checker_);
 
   void UpdateSendHistograms(Timestamp first_sent_packet)
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(&bitrate_crit_);
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(configuration_sequence_checker_);
   void UpdateReceiveHistograms();
   void UpdateHistograms();
   void UpdateAggregateNetworkState();
@@ -270,12 +270,14 @@ class Call final : public webrtc::Call,
 
   Clock* const clock_;
   TaskQueueFactory* const task_queue_factory_;
+  TaskQueueBase* const worker_thread_;
 
   const int num_cpu_cores_;
   const rtc::scoped_refptr<SharedModuleThread> module_process_thread_;
   const std::unique_ptr<CallStats> call_stats_;
   const std::unique_ptr<BitrateAllocator> bitrate_allocator_;
   Call::Config config_;
+  // TODO(tommi): Replace with worker_thread_.
   SequenceChecker configuration_sequence_checker_;
   SequenceChecker network_sequence_checker_;
 
@@ -327,13 +329,13 @@ class Call final : public webrtc::Call,
   std::map<uint32_t, ReceiveRtpConfig> receive_rtp_config_
       RTC_GUARDED_BY(configuration_sequence_checker_);
 
-  std::unique_ptr<RWLockWrapper> send_crit_;
   // Audio and Video send streams are owned by the client that creates them.
   std::map<uint32_t, AudioSendStream*> audio_send_ssrcs_
-      RTC_GUARDED_BY(send_crit_);
+      RTC_GUARDED_BY(configuration_sequence_checker_);
   std::map<uint32_t, VideoSendStream*> video_send_ssrcs_
-      RTC_GUARDED_BY(send_crit_);
-  std::set<VideoSendStream*> video_send_streams_ RTC_GUARDED_BY(send_crit_);
+      RTC_GUARDED_BY(configuration_sequence_checker_);
+  std::set<VideoSendStream*> video_send_streams_
+      RTC_GUARDED_BY(configuration_sequence_checker_);
 
   using RtpStateMap = std::map<uint32_t, RtpState>;
   RtpStateMap suspended_audio_send_ssrcs_
@@ -359,17 +361,17 @@ class Call final : public webrtc::Call,
   absl::optional<int64_t> first_received_rtp_video_ms_;
   absl::optional<int64_t> last_received_rtp_video_ms_;
 
-  rtc::CriticalSection last_bandwidth_bps_crit_;
-  uint32_t last_bandwidth_bps_ RTC_GUARDED_BY(&last_bandwidth_bps_crit_);
+  uint32_t last_bandwidth_bps_ RTC_GUARDED_BY(&configuration_sequence_checker_);
   // TODO(holmer): Remove this lock once BitrateController no longer calls
   // OnNetworkChanged from multiple threads.
-  rtc::CriticalSection bitrate_crit_;
   uint32_t min_allocated_send_bitrate_bps_
-      RTC_GUARDED_BY(&network_sequence_checker_);
-  uint32_t configured_max_padding_bitrate_bps_ RTC_GUARDED_BY(&bitrate_crit_);
+      RTC_GUARDED_BY(&configuration_sequence_checker_);
+  uint32_t configured_max_padding_bitrate_bps_
+      RTC_GUARDED_BY(&configuration_sequence_checker_);
   AvgCounter estimated_send_bitrate_kbps_counter_
-      RTC_GUARDED_BY(&bitrate_crit_);
-  AvgCounter pacer_bitrate_kbps_counter_ RTC_GUARDED_BY(&bitrate_crit_);
+      RTC_GUARDED_BY(&configuration_sequence_checker_);
+  AvgCounter pacer_bitrate_kbps_counter_
+      RTC_GUARDED_BY(&configuration_sequence_checker_);
 
   ReceiveSideCongestionController receive_side_cc_;
 
@@ -377,6 +379,11 @@ class Call final : public webrtc::Call,
 
   const std::unique_ptr<SendDelayStats> video_send_delay_stats_;
   const int64_t start_ms_;
+
+  // Note that |task_safety_| needs to be at a greater scope than the task queue
+  // owned by |transport_send_| since calls might arrive on the network thread
+  // while Call is being deleted and the task queue is being torn down.
+  ScopedTaskSafety task_safety_;
 
   // Caches transport_send_.get(), to avoid racing with destructor.
   // Note that this is declared before transport_send_ to ensure that it is not
@@ -550,15 +557,15 @@ Call::Call(Clock* clock,
            TaskQueueFactory* task_queue_factory)
     : clock_(clock),
       task_queue_factory_(task_queue_factory),
+      worker_thread_(GetCurrentTaskQueueOrThread()),
       num_cpu_cores_(CpuInfo::DetectNumberOfCores()),
       module_process_thread_(std::move(module_process_thread)),
-      call_stats_(new CallStats(clock_, GetCurrentTaskQueueOrThread())),
+      call_stats_(new CallStats(clock_, worker_thread_)),
       bitrate_allocator_(new BitrateAllocator(this)),
       config_(config),
       audio_network_state_(kNetworkDown),
       video_network_state_(kNetworkDown),
       aggregate_network_up_(false),
-      send_crit_(RWLockWrapper::CreateRWLock()),
       event_log_(config.event_log),
       received_bytes_per_second_counter_(clock_, nullptr, true),
       received_audio_bytes_per_second_counter_(clock_, nullptr, true),
@@ -577,6 +584,7 @@ Call::Call(Clock* clock,
       transport_send_(std::move(transport_send)) {
   RTC_DCHECK(config.event_log != nullptr);
   RTC_DCHECK(config.trials != nullptr);
+  RTC_DCHECK(worker_thread_->IsCurrent());
   network_sequence_checker_.Detach();
 
   call_stats_->RegisterStatsObserver(&receive_side_cc_);
@@ -607,7 +615,6 @@ Call::~Call() {
   // Only update histograms after process threads have been shut down, so that
   // they won't try to concurrently update stats.
   if (first_sent_packet_ms) {
-    rtc::CritScope lock(&bitrate_crit_);
     UpdateSendHistograms(*first_sent_packet_ms);
   }
 
@@ -739,12 +746,9 @@ webrtc::AudioSendStream* Call::CreateAudioSendStream(
       module_process_thread_->process_thread(), transport_send_ptr_,
       bitrate_allocator_.get(), event_log_, call_stats_->AsRtcpRttStats(),
       suspended_rtp_state);
-  {
-    WriteLockScoped write_lock(*send_crit_);
-    RTC_DCHECK(audio_send_ssrcs_.find(config.rtp.ssrc) ==
-               audio_send_ssrcs_.end());
-    audio_send_ssrcs_[config.rtp.ssrc] = send_stream;
-  }
+  RTC_DCHECK(audio_send_ssrcs_.find(config.rtp.ssrc) ==
+             audio_send_ssrcs_.end());
+  audio_send_ssrcs_[config.rtp.ssrc] = send_stream;
 
   for (AudioReceiveStream* stream : audio_receive_streams_) {
     if (stream->config().rtp.local_ssrc == config.rtp.ssrc) {
@@ -767,11 +771,9 @@ void Call::DestroyAudioSendStream(webrtc::AudioSendStream* send_stream) {
   webrtc::internal::AudioSendStream* audio_send_stream =
       static_cast<webrtc::internal::AudioSendStream*>(send_stream);
   suspended_audio_send_ssrcs_[ssrc] = audio_send_stream->GetRtpState();
-  {
-    WriteLockScoped write_lock(*send_crit_);
-    size_t num_deleted = audio_send_ssrcs_.erase(ssrc);
-    RTC_DCHECK_EQ(1, num_deleted);
-  }
+
+  size_t num_deleted = audio_send_ssrcs_.erase(ssrc);
+  RTC_DCHECK_EQ(1, num_deleted);
 
   for (AudioReceiveStream* stream : audio_receive_streams_) {
     if (stream->config().rtp.local_ssrc == ssrc) {
@@ -800,13 +802,11 @@ webrtc::AudioReceiveStream* Call::CreateAudioReceiveStream(
 
   ConfigureSync(config.sync_group);
 
-  {
-    ReadLockScoped read_lock(*send_crit_);
-    auto it = audio_send_ssrcs_.find(config.rtp.local_ssrc);
-    if (it != audio_send_ssrcs_.end()) {
-      receive_stream->AssociateSendStream(it->second);
-    }
+  auto it = audio_send_ssrcs_.find(config.rtp.local_ssrc);
+  if (it != audio_send_ssrcs_.end()) {
+    receive_stream->AssociateSendStream(it->second);
   }
+
   UpdateAggregateNetworkState();
   return receive_stream;
 }
@@ -865,14 +865,12 @@ webrtc::VideoSendStream* Call::CreateVideoSendStream(
       std::move(config), std::move(encoder_config), suspended_video_send_ssrcs_,
       suspended_video_payload_states_, std::move(fec_controller));
 
-  {
-    WriteLockScoped write_lock(*send_crit_);
-    for (uint32_t ssrc : ssrcs) {
-      RTC_DCHECK(video_send_ssrcs_.find(ssrc) == video_send_ssrcs_.end());
-      video_send_ssrcs_[ssrc] = send_stream;
-    }
-    video_send_streams_.insert(send_stream);
+  for (uint32_t ssrc : ssrcs) {
+    RTC_DCHECK(video_send_ssrcs_.find(ssrc) == video_send_ssrcs_.end());
+    video_send_ssrcs_[ssrc] = send_stream;
   }
+  video_send_streams_.insert(send_stream);
+
   UpdateAggregateNetworkState();
 
   return send_stream;
@@ -900,19 +898,18 @@ void Call::DestroyVideoSendStream(webrtc::VideoSendStream* send_stream) {
   send_stream->Stop();
 
   VideoSendStream* send_stream_impl = nullptr;
-  {
-    WriteLockScoped write_lock(*send_crit_);
-    auto it = video_send_ssrcs_.begin();
-    while (it != video_send_ssrcs_.end()) {
-      if (it->second == static_cast<VideoSendStream*>(send_stream)) {
-        send_stream_impl = it->second;
-        video_send_ssrcs_.erase(it++);
-      } else {
-        ++it;
-      }
+
+  auto it = video_send_ssrcs_.begin();
+  while (it != video_send_ssrcs_.end()) {
+    if (it->second == static_cast<VideoSendStream*>(send_stream)) {
+      send_stream_impl = it->second;
+      video_send_ssrcs_.erase(it++);
+    } else {
+      ++it;
     }
-    video_send_streams_.erase(send_stream_impl);
   }
+  video_send_streams_.erase(send_stream_impl);
+
   RTC_CHECK(send_stream_impl != nullptr);
 
   VideoSendStream::RtpStateMap rtp_states;
@@ -1066,16 +1063,8 @@ Call::Stats Call::GetStats() const {
   receive_side_cc_.GetRemoteBitrateEstimator(false)->LatestEstimate(
       &ssrcs, &recv_bandwidth);
   stats.recv_bandwidth_bps = recv_bandwidth;
-
-  {
-    rtc::CritScope cs(&last_bandwidth_bps_crit_);
-    stats.send_bandwidth_bps = last_bandwidth_bps_;
-  }
-
-  {
-    rtc::CritScope cs(&bitrate_crit_);
-    stats.max_padding_bitrate_bps = configured_max_padding_bitrate_bps_;
-  }
+  stats.send_bandwidth_bps = last_bandwidth_bps_;
+  stats.max_padding_bitrate_bps = configured_max_padding_bitrate_bps_;
 
   return stats;
 }
@@ -1102,7 +1091,7 @@ void Call::SignalChannelNetworkState(MediaType media, NetworkState state) {
 }
 
 void Call::OnAudioTransportOverheadChanged(int transport_overhead_per_packet) {
-  ReadLockScoped read_lock(*send_crit_);
+  RTC_DCHECK_RUN_ON(&configuration_sequence_checker_);
   for (auto& kv : audio_send_ssrcs_) {
     kv.second->SetTransportOverhead(transport_overhead_per_packet);
   }
@@ -1111,21 +1100,10 @@ void Call::OnAudioTransportOverheadChanged(int transport_overhead_per_packet) {
 void Call::UpdateAggregateNetworkState() {
   RTC_DCHECK_RUN_ON(&configuration_sequence_checker_);
 
-  bool have_audio = false;
-  bool have_video = false;
-  {
-    ReadLockScoped read_lock(*send_crit_);
-    if (!audio_send_ssrcs_.empty())
-      have_audio = true;
-    if (!video_send_ssrcs_.empty())
-      have_video = true;
-  }
-
-  if (!audio_receive_streams_.empty())
-    have_audio = true;
-
-  if (!video_receive_streams_.empty())
-    have_video = true;
+  bool have_audio =
+      !audio_send_ssrcs_.empty() || !audio_receive_streams_.empty();
+  bool have_video =
+      !video_send_ssrcs_.empty() || !video_receive_streams_.empty();
 
   bool aggregate_network_up =
       ((have_video && video_network_state_ == kNetworkUp) ||
@@ -1159,42 +1137,39 @@ void Call::OnStartRateUpdate(DataRate start_rate) {
 void Call::OnTargetTransferRate(TargetTransferRate msg) {
   RTC_DCHECK(network_queue()->IsCurrent());
   RTC_DCHECK_RUN_ON(&network_sequence_checker_);
-  {
-    rtc::CritScope cs(&last_bandwidth_bps_crit_);
-    last_bandwidth_bps_ = msg.target_rate.bps();
-  }
 
   uint32_t target_bitrate_bps = msg.target_rate.bps();
   // For controlling the rate of feedback messages.
   receive_side_cc_.OnBitrateChanged(target_bitrate_bps);
   bitrate_allocator_->OnNetworkEstimateChanged(msg);
 
-  // Ignore updates if bitrate is zero (the aggregate network state is down).
-  if (target_bitrate_bps == 0) {
-    rtc::CritScope lock(&bitrate_crit_);
-    estimated_send_bitrate_kbps_counter_.ProcessAndPause();
-    pacer_bitrate_kbps_counter_.ProcessAndPause();
-    return;
-  }
+  worker_thread_->PostTask(
+      ToQueuedTask(task_safety_, [this, target_bitrate_bps]() {
+        RTC_DCHECK_RUN_ON(&configuration_sequence_checker_);
+        last_bandwidth_bps_ = target_bitrate_bps;
 
-  bool sending_video;
-  {
-    ReadLockScoped read_lock(*send_crit_);
-    sending_video = !video_send_streams_.empty();
-  }
+        // Ignore updates if bitrate is zero (the aggregate network state is
+        // down).
+        if (target_bitrate_bps == 0) {
+          estimated_send_bitrate_kbps_counter_.ProcessAndPause();
+          pacer_bitrate_kbps_counter_.ProcessAndPause();
+          return;
+        }
 
-  rtc::CritScope lock(&bitrate_crit_);
-  if (!sending_video) {
-    // Do not update the stats if we are not sending video.
-    estimated_send_bitrate_kbps_counter_.ProcessAndPause();
-    pacer_bitrate_kbps_counter_.ProcessAndPause();
-    return;
-  }
-  estimated_send_bitrate_kbps_counter_.Add(target_bitrate_bps / 1000);
-  // Pacer bitrate may be higher than bitrate estimate if enforcing min bitrate.
-  uint32_t pacer_bitrate_bps =
-      std::max(target_bitrate_bps, min_allocated_send_bitrate_bps_);
-  pacer_bitrate_kbps_counter_.Add(pacer_bitrate_bps / 1000);
+        bool sending_video = !video_send_streams_.empty();
+        if (!sending_video) {
+          // Do not update the stats if we are not sending video.
+          estimated_send_bitrate_kbps_counter_.ProcessAndPause();
+          pacer_bitrate_kbps_counter_.ProcessAndPause();
+          return;
+        }
+        estimated_send_bitrate_kbps_counter_.Add(target_bitrate_bps / 1000);
+        // Pacer bitrate may be higher than bitrate estimate if enforcing min
+        // bitrate.
+        uint32_t pacer_bitrate_bps =
+            std::max(target_bitrate_bps, min_allocated_send_bitrate_bps_);
+        pacer_bitrate_kbps_counter_.Add(pacer_bitrate_bps / 1000);
+      }));
 }
 
 void Call::OnAllocationLimitsChanged(BitrateAllocationLimits limits) {
@@ -1203,10 +1178,11 @@ void Call::OnAllocationLimitsChanged(BitrateAllocationLimits limits) {
 
   transport_send_ptr_->SetAllocatedSendBitrateLimits(limits);
 
-  min_allocated_send_bitrate_bps_ = limits.min_allocatable_rate.bps();
-
-  rtc::CritScope lock(&bitrate_crit_);
-  configured_max_padding_bitrate_bps_ = limits.max_padding_rate.bps();
+  worker_thread_->PostTask(ToQueuedTask(task_safety_, [this, limits]() {
+    RTC_DCHECK_RUN_ON(&configuration_sequence_checker_);
+    min_allocated_send_bitrate_bps_ = limits.min_allocatable_rate.bps();
+    configured_max_padding_bitrate_bps_ = limits.max_padding_rate.bps();
+  }));
 }
 
 void Call::ConfigureSync(const std::string& sync_group) {
@@ -1285,14 +1261,12 @@ PacketReceiver::DeliveryStatus Call::DeliverRtcp(MediaType media_type,
     }
   }
   if (media_type == MediaType::ANY || media_type == MediaType::VIDEO) {
-    ReadLockScoped read_lock(*send_crit_);
     for (VideoSendStream* stream : video_send_streams_) {
       stream->DeliverRtcp(packet, length);
       rtcp_delivered = true;
     }
   }
   if (media_type == MediaType::ANY || media_type == MediaType::AUDIO) {
-    ReadLockScoped read_lock(*send_crit_);
     for (auto& kv : audio_send_ssrcs_) {
       kv.second->DeliverRtcp(packet, length);
       rtcp_delivered = true;
