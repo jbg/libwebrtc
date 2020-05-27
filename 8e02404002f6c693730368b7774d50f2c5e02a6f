@@ -46,6 +46,30 @@
       "revId": "8e02404002f6c693730368b7774d50f2c5e02a6f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f20a00e_e3ce39a3",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-27T16:47:05Z",
+      "side": 1,
+      "message": "that is a place that write those settings, but I can\u0027t find any code that read and use these settings. so, why set them?",
+      "parentUuid": "d003902f_4715b3bd",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 22
+      },
+      "revId": "8e02404002f6c693730368b7774d50f2c5e02a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
