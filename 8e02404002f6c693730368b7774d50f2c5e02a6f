@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6af1355a_4f7da203",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-27T07:58:53Z",
+      "side": 1,
+      "message": "why do you need this? (for this change)\n\n[personally I would like to avoid it altogether and move away from union. not sure it is feasible short term.]",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 22
+      },
+      "revId": "8e02404002f6c693730368b7774d50f2c5e02a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
