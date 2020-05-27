@@ -581,6 +581,9 @@ Call::Call(Clock* clock,
 
   call_stats_->RegisterStatsObserver(&receive_side_cc_);
 
+  // Note: This may appear to be registering effectively the same module twice,
+  // but the first call registers the send side bitrate estimator
+  // (RemoteEstimatorProxy), the second one the receive side.
   module_process_thread_->process_thread()->RegisterModule(
       receive_side_cc_.GetRemoteBitrateEstimator(true), RTC_FROM_HERE);
   module_process_thread_->process_thread()->RegisterModule(&receive_side_cc_,

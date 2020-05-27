@@ -78,6 +78,7 @@ class RemoteBitrateEstimatorAbsSendTime : public RemoteBitrateEstimator {
                                     Clock* clock);
   ~RemoteBitrateEstimatorAbsSendTime() override;
 
+ private:
   void IncomingPacket(int64_t arrival_time_ms,
                       size_t payload_size,
                       const RTPHeader& header) override;

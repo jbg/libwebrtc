@@ -10,6 +10,7 @@
 
 #include "modules/congestion_controller/include/receive_side_congestion_controller.h"
 
+#include "api/task_queue/task_queue_base.h"
 #include "modules/pacing/packet_router.h"
 #include "modules/remote_bitrate_estimator/include/bwe_defines.h"
 #include "modules/remote_bitrate_estimator/remote_bitrate_estimator_abs_send_time.h"
@@ -32,12 +33,15 @@ ReceiveSideCongestionController::WrappingBitrateEstimator::
       min_bitrate_bps_(congestion_controller::GetMinBitrateBps()) {}
 
 ReceiveSideCongestionController::WrappingBitrateEstimator::
-    ~WrappingBitrateEstimator() = default;
+    ~WrappingBitrateEstimator() {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
+}
 
 void ReceiveSideCongestionController::WrappingBitrateEstimator::IncomingPacket(
     int64_t arrival_time_ms,
     size_t payload_size,
     const RTPHeader& header) {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
   rtc::CritScope cs(&crit_sect_);
   PickEstimatorFromHeader(header);
   rbe_->IncomingPacket(arrival_time_ms, payload_size, header);
@@ -57,12 +61,14 @@ int64_t ReceiveSideCongestionController::WrappingBitrateEstimator::
 void ReceiveSideCongestionController::WrappingBitrateEstimator::OnRttUpdate(
     int64_t avg_rtt_ms,
     int64_t max_rtt_ms) {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
   rtc::CritScope cs(&crit_sect_);
   rbe_->OnRttUpdate(avg_rtt_ms, max_rtt_ms);
 }
 
 void ReceiveSideCongestionController::WrappingBitrateEstimator::RemoveStream(
     unsigned int ssrc) {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
   rtc::CritScope cs(&crit_sect_);
   rbe_->RemoveStream(ssrc);
 }
@@ -70,12 +76,17 @@ void ReceiveSideCongestionController::WrappingBitrateEstimator::RemoveStream(
 bool ReceiveSideCongestionController::WrappingBitrateEstimator::LatestEstimate(
     std::vector<unsigned int>* ssrcs,
     unsigned int* bitrate_bps) const {
+  // Called from call.cc on worker, rtp_rtcp_impl2.cc on process thread (timer).
+  // TODO(tommi): Both should be calling from worker.
   rtc::CritScope cs(&crit_sect_);
   return rbe_->LatestEstimate(ssrcs, bitrate_bps);
 }
 
 void ReceiveSideCongestionController::WrappingBitrateEstimator::SetMinBitrate(
     int min_bitrate_bps) {
+  // TODO(tommi): Unclear what thread we'll be on here, could be on the
+  // "rtp_send_controller" task queue. If so, we could possibly post this update
+  // to the worker.
   rtc::CritScope cs(&crit_sect_);
   rbe_->SetMinBitrate(min_bitrate_bps);
   min_bitrate_bps_ = min_bitrate_bps;
@@ -83,6 +94,7 @@ void ReceiveSideCongestionController::WrappingBitrateEstimator::SetMinBitrate(
 
 void ReceiveSideCongestionController::WrappingBitrateEstimator::
     PickEstimatorFromHeader(const RTPHeader& header) {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
   if (header.extension.hasAbsoluteSendTime) {
     // If we see AST in header, switch RBE strategy immediately.
     if (!using_absolute_send_time_) {
@@ -110,6 +122,7 @@ void ReceiveSideCongestionController::WrappingBitrateEstimator::
 // Instantiate RBE for Time Offset or Absolute Send Time extensions.
 void ReceiveSideCongestionController::WrappingBitrateEstimator::
     PickEstimator() {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
   if (using_absolute_send_time_) {
     rbe_.reset(new RemoteBitrateEstimatorAbsSendTime(observer_, clock_));
   } else {
@@ -131,12 +144,26 @@ ReceiveSideCongestionController::ReceiveSideCongestionController(
       remote_estimator_proxy_(clock,
                               packet_router,
                               &field_trial_config_,
-                              network_state_estimator) {}
+                              network_state_estimator) {
+  network_checker_.Detach();
+  // RTC_DCHECK(TaskQueueBase::Current()) << "No task queue";
+  if (!TaskQueueBase::Current()) {
+    // TODO(tommi): Fails on internal.
+    RTC_LOG(LS_ERROR) << "No current TQ";
+  }
+}
+
+ReceiveSideCongestionController::~ReceiveSideCongestionController() {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
+}
 
 void ReceiveSideCongestionController::OnReceivedPacket(
     int64_t arrival_time_ms,
     size_t payload_size,
     const RTPHeader& header) {
+  // TODO(tommi): Fails on internal.
+  // RTC_DCHECK_RUN_ON(&worker_checker_);
+
   remote_estimator_proxy_.IncomingPacket(arrival_time_ms, payload_size, header);
   if (!header.extension.hasTransportSequenceNumber) {
     // Receive-side BWE.
@@ -147,11 +174,14 @@ void ReceiveSideCongestionController::OnReceivedPacket(
 
 void ReceiveSideCongestionController::SetSendPeriodicFeedback(
     bool send_periodic_feedback) {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
   remote_estimator_proxy_.SetSendPeriodicFeedback(send_periodic_feedback);
 }
 
 RemoteBitrateEstimator*
 ReceiveSideCongestionController::GetRemoteBitrateEstimator(bool send_side_bwe) {
+  // TODO(tommi): Fails on internal.
+  // RTC_DCHECK_RUN_ON(&worker_checker_);
   if (send_side_bwe) {
     return &remote_estimator_proxy_;
   } else {
@@ -162,6 +192,7 @@ ReceiveSideCongestionController::GetRemoteBitrateEstimator(bool send_side_bwe) {
 const RemoteBitrateEstimator*
 ReceiveSideCongestionController::GetRemoteBitrateEstimator(
     bool send_side_bwe) const {
+  RTC_DCHECK_RUN_ON(&worker_checker_);
   if (send_side_bwe) {
     return &remote_estimator_proxy_;
   } else {
@@ -171,10 +202,13 @@ ReceiveSideCongestionController::GetRemoteBitrateEstimator(
 
 void ReceiveSideCongestionController::OnRttUpdate(int64_t avg_rtt_ms,
                                                   int64_t max_rtt_ms) {
+  // As of CallStats2, this should be running on the worker thread.
+  RTC_DCHECK_RUN_ON(&worker_checker_);
   remote_bitrate_estimator_.OnRttUpdate(avg_rtt_ms, max_rtt_ms);
 }
 
 void ReceiveSideCongestionController::OnBitrateChanged(int bitrate_bps) {
+  RTC_DCHECK_RUN_ON(&network_checker_);
   remote_estimator_proxy_.OnBitrateChanged(bitrate_bps);
 }
 
