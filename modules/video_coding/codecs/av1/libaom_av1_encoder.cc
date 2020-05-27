@@ -37,12 +37,12 @@ namespace webrtc {
 namespace {
 
 // Encoder configuration parameters
-constexpr int kQpMax = 56;
+constexpr int kQpMax = 63;
 constexpr int kQpMin = 10;
 constexpr int kDefaultEncSpeed = 7;  // Use values 6, 7, or 8 for RTC.
 constexpr int kUsageProfile = 1;     // 0 = good quality; 1 = real-time.
 constexpr int kMinQindex = 58;       // Min qindex threshold for QP scaling.
-constexpr int kMaxQindex = 180;      // Max qindex threshold for QP scaling.
+constexpr int kMaxQindex = 255;      // Max qindex threshold for QP scaling.
 constexpr int kBitDepth = 8;
 constexpr int kLagInFrames = 0;  // No look ahead.
 constexpr int kRtpTicksPerSecond = 90000;
