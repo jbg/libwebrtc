@@ -111,6 +111,18 @@ int GetHigherResolutionThan(int pixel_count) {
              : std::numeric_limits<int>::max();
 }
 
+// static
+const char* Adaptation::StatusToString(Adaptation::Status status) {
+  switch (status) {
+    case Adaptation::Status::kValid:
+      return "kValid";
+    case Adaptation::Status::kLimitReached:
+      return "kLimitReached";
+    case Adaptation::Status::kAwaitingPreviousAdaptation:
+      return "kAwaitingPreviousAdaptation";
+  }
+}
+
 Adaptation::Step::Step(StepType type, int target)
     : type(type), target(target) {}
 
@@ -507,6 +519,7 @@ VideoSourceRestrictions VideoStreamAdapter::PeekNextRestrictions(
   if (adaptation.status() != Adaptation::Status::kValid)
     return source_restrictor_->source_restrictions();
   VideoSourceRestrictor restrictor_copy = *source_restrictor_;
+  RTC_LOG(LS_INFO) << "Peeking next restrictions...";
   restrictor_copy.ApplyAdaptationStep(adaptation.step(),
                                       degradation_preference_);
   return restrictor_copy.source_restrictions();
@@ -522,6 +535,7 @@ void VideoStreamAdapter::ApplyAdaptation(const Adaptation& adaptation) {
       input_state_.frame_size_pixels().value(),
       input_state_.frames_per_second(), adaptation.step().type});
   // Adapt!
+  RTC_LOG(LS_INFO) << "Applying adaptation...";
   source_restrictor_->ApplyAdaptationStep(adaptation.step(),
                                           degradation_preference_);
 }
