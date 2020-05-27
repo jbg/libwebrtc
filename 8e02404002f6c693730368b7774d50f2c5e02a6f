@@ -70,6 +70,30 @@
       "revId": "8e02404002f6c693730368b7774d50f2c5e02a6f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6083bbbb_744ea507",
+        "filename": "api/video_codecs/video_codec.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5366
+      },
+      "writtenOn": "2020-05-27T17:32:10Z",
+      "side": 1,
+      "message": "Those are codec specific settings for AV1 (very similar to VP9). It\u0027s not used now but for a fully functional AV1 codec, they\u0027ll be used anyway.\n\nThose settings are also useful when the test writes settings.\n\nWhen initializing encoder in the wrapper, there are some settings read from this structure i.e. key frame interval etc. which is set in VP9 but AV1 wrapper simply ignores it. Also AQ mode is just hard coded as 3 in the av1 wrapper, instead of reading from this structure.",
+      "parentUuid": "2f20a00e_e3ce39a3",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 22
+      },
+      "revId": "8e02404002f6c693730368b7774d50f2c5e02a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
