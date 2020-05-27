@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f413b86b_c4591f51",
+        "filename": "rtc_base/net_helpers.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-05-27T07:56:47Z",
+      "side": 1,
+      "message": "How do we guarantee that current_task_queue is alive at this point? Since we got it from TaskQueueBase::Current, it seems we know nothing about ownership. The interesting case, I guess, is when Destroy is called while this thread is blocking on name resolution.\n\nDoes the api specify from which thread calls SignalDone ?",
+      "range": {
+        "startLine": 105,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 26
+      },
+      "revId": "fbf4ad29584e703dcb906761589910911a454e5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d437d9db_9ff827ee",
+        "filename": "rtc_base/net_helpers.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-05-27T07:56:47Z",
+      "side": 1,
+      "message": "This argument is ignored. Can it be deleted? Do existing callers pass true or false?",
+      "range": {
+        "startLine": 135,
+        "startChar": 33,
+        "endLine": 135,
+        "endChar": 37
+      },
+      "revId": "fbf4ad29584e703dcb906761589910911a454e5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e727fcc_ec07778a",
+        "filename": "rtc_base/net_helpers.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-05-27T07:56:47Z",
+      "side": 1,
+      "message": "A name describing the condition would be clearer.",
+      "range": {
+        "startLine": 62,
+        "startChar": 7,
+        "endLine": 62,
+        "endChar": 23
+      },
+      "revId": "fbf4ad29584e703dcb906761589910911a454e5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
