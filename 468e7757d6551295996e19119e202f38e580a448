@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d39ff01d_9388e625",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-27T14:06:28Z",
+      "side": 1,
+      "message": "It\u0027s reporting it to all the adaptation listeners a couple of lines below",
+      "parentUuid": "dde71e4e_e8eabd67",
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd0b2773_2ac1c9b8",
         "filename": "call/adaptation/resource_adaptation_processor.cc",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f1e0473e_38cbc30e",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-27T14:06:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd0b2773_2ac1c9b8",
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa31cdf6_c2d0205d",
         "filename": "call/adaptation/resource_adaptation_processor.cc",
         "patchSetId": 1
@@ -47,6 +83,30 @@
       "writtenOn": "2020-05-27T12:24:56Z",
       "side": 1,
       "message": "I am a bit concerned with logging in here on all inputs. We know that the Qp scaler resource can signal adapt up on every frame, so I think this could be spammy.",
+      "range": {
+        "startLine": 277,
+        "startChar": 34,
+        "endLine": 277,
+        "endChar": 51
+      },
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45b1a567_f659356a",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-27T14:06:28Z",
+      "side": 1,
+      "message": "It only spams in the special case of QP scaler being disabled, but you\u0027re right, that is a problem, I\u0027ll see if I can reduce how often this special case is triggered before landing this CL.",
+      "parentUuid": "fa31cdf6_c2d0205d",
       "range": {
         "startLine": 277,
         "startChar": 34,
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "e9038052_fd934d65",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-27T14:06:28Z",
+      "side": 1,
+      "message": "It\u0027s to guard against recursion and its oddity is documented in the header. We could consider removing it or changing it to something nicer, but I\u0027m not going to touch it in a logging CL.",
+      "parentUuid": "86e54592_dbe29f50",
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffb295f9_7357a4ac",
         "filename": "call/adaptation/video_stream_adapter.cc",
         "patchSetId": 1
@@ -90,6 +168,24 @@
       "revId": "468e7757d6551295996e19119e202f38e580a448",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e818478_e963062d",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-27T14:06:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffb295f9_7357a4ac",
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
