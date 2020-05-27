@@ -37,7 +37,6 @@ namespace webrtc {
 namespace {
 
 // Encoder configuration parameters
-constexpr int kQpMax = 56;
 constexpr int kQpMin = 10;
 constexpr int kDefaultEncSpeed = 7;  // Use values 6, 7, or 8 for RTC.
 constexpr int kUsageProfile = 1;     // 0 = good quality; 1 = real-time.
@@ -162,7 +161,7 @@ int LibaomAv1Encoder::InitEncode(const VideoCodec* codec_settings,
   cfg_.g_input_bit_depth = kBitDepth;
   cfg_.kf_mode = AOM_KF_DISABLED;
   cfg_.rc_min_quantizer = kQpMin;
-  cfg_.rc_max_quantizer = kQpMax;
+  cfg_.rc_max_quantizer = encoder_settings_.qpMax;
   cfg_.g_usage = kUsageProfile;
 
   // Low-latency settings.
