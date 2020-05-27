@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "dde71e4e_e8eabd67",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-27T12:36:53Z",
+      "side": 1,
+      "message": "Not sure why the log message should be \"Reporting\" when the function is actually called \"updating\". But perhaps it is the function that has the wrong name?",
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd0b2773_2ac1c9b8",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-27T12:36:53Z",
+      "side": 1,
+      "message": "I would use English here - \"Not adapting up because DegradationPreference is DISABLED\".",
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fa31cdf6_c2d0205d",
         "filename": "call/adaptation/resource_adaptation_processor.cc",
         "patchSetId": 1
@@ -19,6 +53,40 @@
         "endLine": 277,
         "endChar": 51
       },
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86e54592_dbe29f50",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-27T12:36:53Z",
+      "side": 1,
+      "message": "The purpose of processing_in_progress_ seems unclear to me. We\u0027re already checking the sequence, so we should be single-threaded for all these operations anyway, and there seems to be no path by which one can return without processing_in_progress_ being set to false.\n\nSo what\u0027s the point? Guard against being called recursively? Wouldn\u0027t we already DCHECK out on that?",
+      "revId": "468e7757d6551295996e19119e202f38e580a448",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffb295f9_7357a4ac",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-05-27T12:36:53Z",
+      "side": 1,
+      "message": "I find log lines with \"...\" at the end visually annoying, as well as not very helpful.\nIn this case, you\u0027re logging at INFO while just saying \"this function has been called\". Worth it?",
       "revId": "468e7757d6551295996e19119e202f38e580a448",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
