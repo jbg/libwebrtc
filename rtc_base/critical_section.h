@@ -48,7 +48,8 @@ namespace rtc {
 // everywhere. CriticalSection is reentrant lock.
 class RTC_LOCKABLE RTC_EXPORT CriticalSection {
  public:
-  CriticalSection();
+ // Note: except for legacy code, recursive locks should not be used.
+  CriticalSection(bool recursive = false);
   ~CriticalSection();
 
   void Enter() const RTC_EXCLUSIVE_LOCK_FUNCTION();
@@ -82,6 +83,8 @@ class RTC_LOCKABLE RTC_EXPORT CriticalSection {
 #else  // !defined(WEBRTC_WIN) && !defined(WEBRTC_POSIX)
 #error Unsupported platform.
 #endif
+  mutable int recur_ = 0;
+  const bool recursive_;
 };
 
 // CritScope, for serializing execution through a scope.
