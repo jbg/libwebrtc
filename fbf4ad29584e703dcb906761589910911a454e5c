@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "698ecbca_d6110db5",
+        "filename": "rtc_base/net_helpers.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-05-27T08:47:32Z",
+      "side": 1,
+      "message": "Good question. The API of the class requires the same \"main\" thread context in all the methods (well, had to relax the Destroy context a bit, see docs). Since the AsyncResolver dtor is required to be called on the \"main\" thread, popup_thread_ is destroyed before \"main\" is destroyed.\n\nDestroying a thread will either result in TQ closures Posted to it be 1) destroyed or 2) executed.\nFor case 1) nothing will dereference current_task_queue.\nFor case 2), since we\u0027re executing, popup_thread_ exists which means AsyncResolver exists which means main thread exists, which means current_task_queue is okay to use.\n\nFor the internal TQ post, validity of |this| is governed by |flag|.",
+      "parentUuid": "f413b86b_c4591f51",
+      "range": {
+        "startLine": 105,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 26
+      },
+      "revId": "fbf4ad29584e703dcb906761589910911a454e5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437d9db_9ff827ee",
         "filename": "rtc_base/net_helpers.cc",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-27T07:56:47Z",
       "side": 1,
       "message": "This argument is ignored. Can it be deleted? Do existing callers pass true or false?",
+      "range": {
+        "startLine": 135,
+        "startChar": 33,
+        "endLine": 135,
+        "endChar": 37
+      },
+      "revId": "fbf4ad29584e703dcb906761589910911a454e5c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88d08706_dd33b552",
+        "filename": "rtc_base/net_helpers.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-05-27T08:47:32Z",
+      "side": 1,
+      "message": "Yeah thought about that too but the interface is too widely used and can\u0027t be changed in this CL.\n\nI\u0027ve only seen Destroy(false) callers.",
+      "parentUuid": "d437d9db_9ff827ee",
       "range": {
         "startLine": 135,
         "startChar": 33,
