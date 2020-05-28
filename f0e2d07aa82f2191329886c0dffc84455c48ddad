@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47c26314_65d513b6",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-28T17:16:45Z",
+      "side": 1,
+      "message": "I wonder if we can remove this (should be always true for iOS \u003e\u003d 11, but even on older iOS we probably want to skip, right?).",
+      "range": {
+        "startLine": 182,
+        "startChar": 27,
+        "endLine": 182,
+        "endChar": 53
+      },
+      "revId": "f0e2d07aa82f2191329886c0dffc84455c48ddad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
