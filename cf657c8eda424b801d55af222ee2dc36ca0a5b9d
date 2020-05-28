@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4adc5cfb_9039dd3a",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-28T14:07:07Z",
+      "side": 1,
+      "message": "I think best practice says use absl::StrCat instead. However that is banned in WebRTC, so string builder is preferred.",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 278,
+        "endChar": 61
+      },
+      "revId": "cf657c8eda424b801d55af222ee2dc36ca0a5b9d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
