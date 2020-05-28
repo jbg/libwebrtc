@@ -1037,6 +1037,7 @@ PhysicalSocketServer::PhysicalSocketServer()
       // amount of space to initially allocate in internal data structures.
       epoll_fd_(epoll_create(FD_SETSIZE)),
 #endif
+      crit_(/*recursive=*/true),
 #if defined(WEBRTC_WIN)
       socket_ev_(WSACreateEvent()),
 #endif
