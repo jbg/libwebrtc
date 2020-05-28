@@ -11,11 +11,21 @@
 #include "call/adaptation/resource_adaptation_processor.h"
 
 #include <algorithm>
+#include <string>
 #include <utility>
 
 #include "absl/algorithm/container.h"
+#include "rtc_base/logging.h"
 
 namespace webrtc {
+
+ResourceAdaptationProcessor::MitigationResultAndLogMessage::
+    MitigationResultAndLogMessage()
+    : result(MitigationResult::kAdaptationApplied), message() {}
+
+ResourceAdaptationProcessor::MitigationResultAndLogMessage::
+    MitigationResultAndLogMessage(MitigationResult result, std::string message)
+    : result(result), message(std::move(message)) {}
 
 ResourceAdaptationProcessor::ResourceAdaptationProcessor(
     VideoStreamInputStateProvider* input_state_provider,
@@ -30,6 +40,7 @@ ResourceAdaptationProcessor::ResourceAdaptationProcessor(
       is_screenshare_(false),
       stream_adapter_(std::make_unique<VideoStreamAdapter>()),
       last_reported_source_restrictions_(),
+      previous_mitigation_results_(),
       processing_in_progress_(false) {
   sequence_checker_.Detach();
 }
@@ -150,6 +161,7 @@ void ResourceAdaptationProcessor::MaybeUpdateEffectiveDegradationPreference() {
 
 void ResourceAdaptationProcessor::ResetVideoSourceRestrictions() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
+  RTC_LOG(INFO) << "Resetting restrictions";
   stream_adapter_->ClearRestrictions();
   adaptations_counts_by_resource_.clear();
   MaybeUpdateVideoSourceRestrictions(nullptr);
@@ -163,6 +175,10 @@ void ResourceAdaptationProcessor::MaybeUpdateVideoSourceRestrictions(
           stream_adapter_->source_restrictions(),
           effective_degradation_preference_);
   if (last_reported_source_restrictions_ != new_source_restrictions) {
+    RTC_LOG(INFO) << "Reporting new restrictions (in "
+                  << DegradationPreferenceToString(
+                         effective_degradation_preference_)
+                  << "): " << new_source_restrictions.ToString();
     last_reported_source_restrictions_ = std::move(new_source_restrictions);
     for (auto* adaptation_listener : adaptation_listeners_) {
       adaptation_listener->OnVideoSourceRestrictionsUpdated(
@@ -179,13 +195,30 @@ void ResourceAdaptationProcessor::OnResourceUsageStateMeasured(
     rtc::scoped_refptr<Resource> resource) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK(resource->usage_state().has_value());
+  RTC_LOG(INFO) << "Resource \"" << resource->name() << "\" just signalled "
+                << ResourceUsageStateToString(resource->usage_state().value());
+  MitigationResultAndLogMessage result_and_message;
   switch (resource->usage_state().value()) {
     case ResourceUsageState::kOveruse:
-      OnResourceOveruse(resource);
+      result_and_message = OnResourceOveruse(resource);
       break;
     case ResourceUsageState::kUnderuse:
-      OnResourceUnderuse(resource);
+      result_and_message = OnResourceUnderuse(resource);
       break;
+  }
+  // Maybe log the result of the operation.
+  if (previous_mitigation_results_.find(resource.get()) !=
+      previous_mitigation_results_.end()) {
+    // This resource has previously reported the same result and we haven't
+    // successfully adapted since - don't log to avoid spam.
+    return;
+  }
+  RTC_LOG(INFO) << result_and_message.message;
+  if (result_and_message.result == MitigationResult::kAdaptationApplied) {
+    previous_mitigation_results_.clear();
+  } else {
+    previous_mitigation_results_.insert(
+        std::make_pair(resource.get(), result_and_message.result));
   }
 }
 
@@ -198,7 +231,8 @@ bool ResourceAdaptationProcessor::HasSufficientInputForAdaptation(
           input_state.frames_per_second() >= kMinFrameRateFps);
 }
 
-void ResourceAdaptationProcessor::OnResourceUnderuse(
+ResourceAdaptationProcessor::MitigationResultAndLogMessage
+ResourceAdaptationProcessor::OnResourceUnderuse(
     rtc::scoped_refptr<Resource> reason_resource) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK(!processing_in_progress_);
@@ -210,15 +244,25 @@ void ResourceAdaptationProcessor::OnResourceUnderuse(
   for (const auto& resource : resources_) {
     resource->ClearUsageState();
   }
-  VideoStreamInputState input_state = input_state_provider_->InputState();
-  if (effective_degradation_preference_ == DegradationPreference::DISABLED ||
-      !HasSufficientInputForAdaptation(input_state)) {
+  if (effective_degradation_preference_ == DegradationPreference::DISABLED) {
     processing_in_progress_ = false;
-    return;
+    return MitigationResultAndLogMessage(
+        MitigationResult::kDisabled,
+        "Not adapting up because DegradationPreference is disabled");
+  }
+  VideoStreamInputState input_state = input_state_provider_->InputState();
+  if (!HasSufficientInputForAdaptation(input_state)) {
+    processing_in_progress_ = false;
+    return MitigationResultAndLogMessage(
+        MitigationResult::kInsufficientInput,
+        "Not adapting up because input is insufficient");
   }
   if (!IsResourceAllowedToAdaptUp(reason_resource)) {
     processing_in_progress_ = false;
-    return;
+    return MitigationResultAndLogMessage(
+        MitigationResult::kRejectedByAdaptationCounts,
+        "Not adapting up because this resource has not previously adapted down "
+        "(according to adaptation counters)");
   }
   // Update video input states and encoder settings for accurate adaptation.
   stream_adapter_->SetInput(input_state);
@@ -226,22 +270,25 @@ void ResourceAdaptationProcessor::OnResourceUnderuse(
   Adaptation adaptation = stream_adapter_->GetAdaptationUp();
   if (adaptation.status() != Adaptation::Status::kValid) {
     processing_in_progress_ = false;
-    return;
+    return MitigationResultAndLogMessage(
+        MitigationResult::kRejectedByAdapter,
+        std::string("Not adapting up because VideoStreamAdapter returned ") +
+            Adaptation::StatusToString(adaptation.status()));
   }
   // Are all resources OK with this adaptation being applied?
   VideoSourceRestrictions restrictions_before =
       stream_adapter_->source_restrictions();
   VideoSourceRestrictions restrictions_after =
       stream_adapter_->PeekNextRestrictions(adaptation);
-  if (!absl::c_all_of(resources_, [&input_state, &restrictions_before,
-                                   &restrictions_after, &reason_resource](
-                                      rtc::scoped_refptr<Resource> resource) {
-        return resource->IsAdaptationUpAllowed(input_state, restrictions_before,
-                                               restrictions_after,
-                                               reason_resource);
-      })) {
-    processing_in_progress_ = false;
-    return;
+  for (const auto& resource : resources_) {
+    if (!resource->IsAdaptationUpAllowed(input_state, restrictions_before,
+                                         restrictions_after, reason_resource)) {
+      processing_in_progress_ = false;
+      return MitigationResultAndLogMessage(
+          MitigationResult::kRejectedByResource,
+          "Not adapting up because resource \"" + resource->name() +
+              "\" disallowed it");
+    }
   }
   // Apply adaptation.
   stream_adapter_->ApplyAdaptation(adaptation);
@@ -253,9 +300,14 @@ void ResourceAdaptationProcessor::OnResourceUnderuse(
   // |adaptation_listeners_|.
   MaybeUpdateVideoSourceRestrictions(reason_resource);
   processing_in_progress_ = false;
+  return MitigationResultAndLogMessage(
+      MitigationResult::kAdaptationApplied,
+      "Adapted up successfully. Unfiltered adaptations: " +
+          stream_adapter_->adaptation_counters().ToString());
 }
 
-void ResourceAdaptationProcessor::OnResourceOveruse(
+ResourceAdaptationProcessor::MitigationResultAndLogMessage
+ResourceAdaptationProcessor::OnResourceOveruse(
     rtc::scoped_refptr<Resource> reason_resource) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK(!processing_in_progress_);
@@ -267,15 +319,18 @@ void ResourceAdaptationProcessor::OnResourceOveruse(
   for (const auto& resource : resources_) {
     resource->ClearUsageState();
   }
-  VideoStreamInputState input_state = input_state_provider_->InputState();
-  if (!input_state.has_input()) {
+  if (effective_degradation_preference_ == DegradationPreference::DISABLED) {
     processing_in_progress_ = false;
-    return;
+    return MitigationResultAndLogMessage(
+        MitigationResult::kDisabled,
+        "Not adapting down because DegradationPreference is disabled");
   }
-  if (effective_degradation_preference_ == DegradationPreference::DISABLED ||
-      !HasSufficientInputForAdaptation(input_state)) {
+  VideoStreamInputState input_state = input_state_provider_->InputState();
+  if (!HasSufficientInputForAdaptation(input_state)) {
     processing_in_progress_ = false;
-    return;
+    return MitigationResultAndLogMessage(
+        MitigationResult::kInsufficientInput,
+        "Not adapting down because input is insufficient");
   }
   // Update video input states and encoder settings for accurate adaptation.
   stream_adapter_->SetInput(input_state);
@@ -286,7 +341,10 @@ void ResourceAdaptationProcessor::OnResourceOveruse(
   }
   if (adaptation.status() != Adaptation::Status::kValid) {
     processing_in_progress_ = false;
-    return;
+    return MitigationResultAndLogMessage(
+        MitigationResult::kRejectedByAdapter,
+        std::string("Not adapting down because VideoStreamAdapter returned ") +
+            Adaptation::StatusToString(adaptation.status()));
   }
   // Apply adaptation.
   VideoSourceRestrictions restrictions_before =
@@ -302,11 +360,16 @@ void ResourceAdaptationProcessor::OnResourceOveruse(
   // |adaptation_listeners_|.
   MaybeUpdateVideoSourceRestrictions(reason_resource);
   processing_in_progress_ = false;
+  return MitigationResultAndLogMessage(
+      MitigationResult::kAdaptationApplied,
+      "Adapted down successfully. Unfiltered adaptations: " +
+          stream_adapter_->adaptation_counters().ToString());
 }
 
 void ResourceAdaptationProcessor::TriggerAdaptationDueToFrameDroppedDueToSize(
     rtc::scoped_refptr<Resource> reason_resource) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
+  RTC_LOG(INFO) << "TriggerAdaptationDueToFrameDroppedDueToSize called";
   VideoAdaptationCounters counters_before =
       stream_adapter_->adaptation_counters();
   OnResourceOveruse(reason_resource);
