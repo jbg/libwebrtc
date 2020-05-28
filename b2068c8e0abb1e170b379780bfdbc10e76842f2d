@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cef1f66b_12178773",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-05-28T15:30:37Z",
+      "side": 1,
+      "message": "Yes, we can!",
+      "revId": "b2068c8e0abb1e170b379780bfdbc10e76842f2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
