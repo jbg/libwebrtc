@@ -70,6 +70,30 @@
       "revId": "c33eeab2ca42bdb8c6d6477b11dff17d26d7ef6c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16c278d2_012360c0",
+        "filename": "test/pc/e2e/echo/echo_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-05-28T14:07:55Z",
+      "side": 0,
+      "message": "Done.",
+      "parentUuid": "6ec7a5cd_11588a4e",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 34
+      },
+      "revId": "c33eeab2ca42bdb8c6d6477b11dff17d26d7ef6c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
