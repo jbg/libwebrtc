@@ -261,7 +261,8 @@ Thread* Thread::Current() {
 }
 
 #if defined(WEBRTC_POSIX)
-ThreadManager::ThreadManager() : main_thread_ref_(CurrentThreadRef()) {
+ThreadManager::ThreadManager()
+    : crit_(/*recursive=*/true), main_thread_ref_(CurrentThreadRef()) {
 #if defined(WEBRTC_MAC)
   InitCocoaMultiThreading();
 #endif
@@ -279,7 +280,9 @@ void ThreadManager::SetCurrentThreadInternal(Thread* thread) {
 
 #if defined(WEBRTC_WIN)
 ThreadManager::ThreadManager()
-    : key_(TlsAlloc()), main_thread_ref_(CurrentThreadRef()) {}
+    : key_(TlsAlloc()),
+      crit_(/*recursive=*/true),
+      main_thread_ref_(CurrentThreadRef()) {}
 
 Thread* ThreadManager::CurrentThread() {
   return static_cast<Thread*>(TlsGetValue(key_));
@@ -356,6 +359,7 @@ Thread::Thread(std::unique_ptr<SocketServer> ss)
 Thread::Thread(SocketServer* ss, bool do_init)
     : fPeekKeep_(false),
       delayed_next_num_(0),
+      crit_(/*recursive=*/true),
       fInitialized_(false),
       fDestroyed_(false),
       stop_(0),

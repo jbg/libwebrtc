@@ -237,6 +237,7 @@ RtpVideoStreamReceiver2::RtpVideoStreamReceiver2(
       // directly with |rtp_rtcp_|.
       rtcp_feedback_buffer_(this, nack_sender, this),
       packet_buffer_(clock_, kPacketBufferStartSize, PacketBufferMaxSize()),
+      reference_finder_lock_(/*recursive=*/true),
       has_received_frame_(false),
       frames_decryptable_(false),
       absolute_capture_time_receiver_(clock) {
