@@ -92,6 +92,7 @@ JsepTransport::JsepTransport(
     std::unique_ptr<webrtc::DatagramTransportInterface> datagram_transport,
     webrtc::DataChannelTransportInterface* data_channel_transport)
     : network_thread_(rtc::Thread::Current()),
+      accessor_lock_(/*recursive=*/true),
       mid_(mid),
       local_certificate_(local_certificate),
       ice_transport_(std::move(ice_transport)),

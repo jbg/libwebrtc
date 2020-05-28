@@ -44,7 +44,7 @@ std::unique_ptr<ProcessThread> ProcessThread::Create(const char* thread_name) {
 }
 
 ProcessThreadImpl::ProcessThreadImpl(const char* thread_name)
-    : stop_(false), thread_name_(thread_name) {}
+    : lock_(/*recursive=*/true), stop_(false), thread_name_(thread_name) {}
 
 ProcessThreadImpl::~ProcessThreadImpl() {
   RTC_DCHECK(thread_checker_.IsCurrent());
