@@ -30,6 +30,7 @@ rtc_library("resource_adaptation") {
   deps = [
     "../../api:rtp_parameters",
     "../../api:scoped_refptr",
+    "../../api/task_queue:task_queue",
     "../../api/video:video_adaptation",
     "../../api/video:video_frame",
     "../../api/video:video_stream_encoder",
@@ -89,6 +90,7 @@ if (rtc_include_tests) {
       "../../api/video:video_stream_encoder",
       "../../rtc_base:rtc_base_approved",
       "../../test:test_support",
+      "../../video/adaptation:video_adaptation",  # bad
     ]
   }
 }

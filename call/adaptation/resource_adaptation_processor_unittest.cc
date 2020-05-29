@@ -78,8 +78,10 @@ class ResourceAdaptationProcessorTest : public ::testing::Test {
         processor_(std::make_unique<ResourceAdaptationProcessor>(
             &input_state_provider_,
             /*encoder_stats_observer=*/&frame_rate_provider_)) {
-    resource_->Initialize(&encoder_queue_, &resource_adaptation_queue_);
-    other_resource_->Initialize(&encoder_queue_, &resource_adaptation_queue_);
+    resource_->Initialize(encoder_queue_.Get(),
+                          resource_adaptation_queue_.Get());
+    other_resource_->Initialize(encoder_queue_.Get(),
+                                resource_adaptation_queue_.Get());
     rtc::Event event;
     resource_adaptation_queue_.PostTask([this, &event] {
       processor_->InitializeOnResourceAdaptationQueue();
@@ -397,7 +399,7 @@ TEST_F(ResourceAdaptationProcessorTest, AdaptingClearsResourceUsageState) {
         SetInputStates(true, kDefaultFrameRate, kDefaultFrameSize);
         resource_->set_usage_state(ResourceUsageState::kOveruse);
         EXPECT_EQ(1u, processor_listener_.restrictions_updated_count());
-        EXPECT_FALSE(resource_->usage_state().has_value());
+        EXPECT_FALSE(resource_->UsageState().has_value());
       },
       RTC_FROM_HERE);
 }
@@ -410,7 +412,7 @@ TEST_F(ResourceAdaptationProcessorTest,
         processor_->StartResourceAdaptation();
         resource_->set_usage_state(ResourceUsageState::kOveruse);
         EXPECT_EQ(0u, processor_listener_.restrictions_updated_count());
-        EXPECT_FALSE(resource_->usage_state().has_value());
+        EXPECT_FALSE(resource_->UsageState().has_value());
       },
       RTC_FROM_HERE);
 }
