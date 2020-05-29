@@ -24,11 +24,12 @@
 #include "rtc_base/critical_section.h"
 #include "rtc_base/ref_counted_object.h"
 #include "rtc_base/task_queue.h"
+#include "video/adaptation/video_stream_encoder_resource.h"
 
 namespace webrtc {
 
 // Handles interaction with the QualityScaler.
-class QualityScalerResource : public rtc::RefCountedObject<Resource>,
+class QualityScalerResource : public VideoStreamEncoderResource,
                               public QualityScalerQpUsageHandlerInterface {
  public:
   QualityScalerResource();
@@ -56,9 +57,7 @@ class QualityScalerResource : public rtc::RefCountedObject<Resource>,
       rtc::scoped_refptr<QualityScalerQpUsageHandlerCallbackInterface> callback)
       override;
 
-  std::string name() const override { return "QualityScalerResource"; }
-
-  // Resource implementation.
+  // VideoStreamEncoderResource implementation.
   void OnAdaptationApplied(
       const VideoStreamInputState& input_state,
       const VideoSourceRestrictions& restrictions_before,
@@ -73,21 +72,20 @@ class QualityScalerResource : public rtc::RefCountedObject<Resource>,
   void AbortPendingCallbacks();
 
   // Members accessed on the encoder queue.
-  std::unique_ptr<QualityScaler> quality_scaler_
-      RTC_GUARDED_BY(encoder_queue());
+  std::unique_ptr<QualityScaler> quality_scaler_ RTC_GUARDED_BY(encoder_queue_);
   // The timestamp of the last time we reported underuse because this resource
   // was disabled in order to prevent getting stuck with QP adaptations. Used to
   // make sure underuse reporting is not too spammy.
   absl::optional<int64_t> last_underuse_due_to_disabled_timestamp_ms_
-      RTC_GUARDED_BY(encoder_queue());
+      RTC_GUARDED_BY(encoder_queue_);
   // Every OnReportQpUsageHigh/Low() operation has a callback that MUST be
   // invoked on the |encoder_queue_|. Because usage measurements are reported on
   // the |encoder_queue_| but handled by the processor on the the
   // |resource_adaptation_queue_|, handling a measurement entails a task queue
   // "ping" round-trip. Multiple callbacks in-flight is thus possible.
-  size_t num_handled_callbacks_ RTC_GUARDED_BY(encoder_queue());
+  size_t num_handled_callbacks_ RTC_GUARDED_BY(encoder_queue_);
   std::queue<rtc::scoped_refptr<QualityScalerQpUsageHandlerCallbackInterface>>
-      pending_callbacks_ RTC_GUARDED_BY(encoder_queue());
+      pending_callbacks_ RTC_GUARDED_BY(encoder_queue_);
 
   // Members accessed on the adaptation queue.
   ResourceAdaptationProcessorInterface* adaptation_processor_
