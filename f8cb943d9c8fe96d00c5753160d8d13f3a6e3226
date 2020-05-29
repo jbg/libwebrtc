@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10d8d4ee_5aaa3d5c",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-29T12:17:32Z",
+      "side": 1,
+      "message": "If the IsAdaptationUpAllowed and OnAdaptationApplied methods are removed, and the UsageState/ClearUsageState are replaced with simply calling \"OnResourceUsageStateMeasured(this, state)\", would the resource need the task queue at all? \n\nIn this case the OnResourceUsageStateMeasured() would be an async call.\n\nI only see it potentially needing the queue for setting listeners.",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 70,
+        "endChar": 52
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7da2836_df139a59",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-29T12:17:32Z",
+      "side": 1,
+      "message": "Why the change to multiple listeners now?",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 70
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42776c8e_64806bb2",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-29T12:17:32Z",
+      "side": 1,
+      "message": "Should we change this to const char * since its generally a static string? Don\u0027t need to address in this CL.",
+      "range": {
+        "startLine": 79,
+        "startChar": 10,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d4312fa_1a621f2c",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-05-29T12:17:32Z",
+      "side": 1,
+      "message": "These should be moved to VSE-Resource I think. Resources outside of VSE won\u0027t be able to interpret which input state or source restrictions this is for.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 56
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
