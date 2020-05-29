@@ -120,6 +120,9 @@ deps = {
 
   'src/third_party/boringssl/src':
     'https://boringssl.googlesource.com/boringssl.git@78b3337a10a7f7b3495b6cb8140a74e265290898',
+  'src/third_party/google_benchmark/src': {
+    'url': 'https://chromium.googlesource.com/external/github.com/google/benchmark.git@367119482ff4abc3d73e4a109b410090fc281337',
+  },
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@2ffe116322aa4373d408a72b665fa7fe7a504d4a',
   'src/third_party/catapult':
