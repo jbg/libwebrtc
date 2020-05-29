@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "385afb2e_b2a2b96a",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-05-29T08:37:55Z",
+      "side": 1,
+      "message": "Prefer alphabetic insertion?",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 4
+      },
+      "revId": "8908a61a561b15911a5739e4417087c8f3482913",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
