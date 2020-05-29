@@ -36,15 +36,14 @@ class ResourceTest : public ::testing::Test {
  public:
   ResourceTest()
       : resource_adaptation_queue_("ResourceAdaptationQueue"),
-        encoder_queue_("EncoderQueue"),
-        fake_resource_(new FakeResource("FakeResource")) {
-    fake_resource_->Initialize(&encoder_queue_, &resource_adaptation_queue_);
+        fake_resource_(FakeResource::Create("FakeResource")) {
+    fake_resource_->RegisterAdaptationTaskQueue(
+        resource_adaptation_queue_.Get());
   }
 
  protected:
   const std::unique_ptr<TaskQueueFactory> task_queue_factory_;
   TaskQueueForTest resource_adaptation_queue_;
-  TaskQueueForTest encoder_queue_;
   rtc::scoped_refptr<FakeResource> fake_resource_;
 };
 
@@ -52,14 +51,14 @@ TEST_F(ResourceTest, RegisteringListenerReceivesCallbacks) {
   resource_adaptation_queue_.SendTask(
       [this] {
         StrictMock<MockResourceListener> resource_listener;
-        fake_resource_->SetResourceListener(&resource_listener);
+        fake_resource_->AddResourceListener(&resource_listener);
         EXPECT_CALL(resource_listener, OnResourceUsageStateMeasured(_))
             .Times(1)
             .WillOnce([](rtc::scoped_refptr<Resource> resource) {
-              EXPECT_EQ(ResourceUsageState::kOveruse, resource->usage_state());
+              EXPECT_EQ(ResourceUsageState::kOveruse, resource->UsageState());
             });
         fake_resource_->set_usage_state(ResourceUsageState::kOveruse);
-        fake_resource_->SetResourceListener(nullptr);
+        fake_resource_->RemoveResourceListener(&resource_listener);
       },
       RTC_FROM_HERE);
 }
@@ -68,8 +67,8 @@ TEST_F(ResourceTest, UnregisteringListenerStopsCallbacks) {
   resource_adaptation_queue_.SendTask(
       [this] {
         StrictMock<MockResourceListener> resource_listener;
-        fake_resource_->SetResourceListener(&resource_listener);
-        fake_resource_->SetResourceListener(nullptr);
+        fake_resource_->AddResourceListener(&resource_listener);
+        fake_resource_->RemoveResourceListener(&resource_listener);
         EXPECT_CALL(resource_listener, OnResourceUsageStateMeasured(_))
             .Times(0);
         fake_resource_->set_usage_state(ResourceUsageState::kOveruse);
