@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "014e658e_94bf0231",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-29T08:27:13Z",
+      "side": 1,
+      "message": "add default value (\u003d nullptr)",
+      "range": {
+        "startLine": 85,
+        "startChar": 31,
+        "endLine": 85,
+        "endChar": 32
+      },
+      "revId": "d73365feb3add085551002b1ebf0ceaa11efd082",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0272074e_442847bc",
+        "filename": "modules/rtp_rtcp/source/rtp_sender_video_frame_transformer_delegate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-05-29T08:27:13Z",
+      "side": 1,
+      "message": "may be avoid calling ::Current() twice:\nencoder_queue_ \u003d TaskQueueBase::Current();\nif (encoder_queue_ \u003d\u003d nullptr) {\n  encoder_queue_ \u003d worker_queue_;\n}\nRTC_CHECK(encoder_queue_);\n\nor\nTaskQueueBase* current \u003d TaskQueueBase::Current();\nencoder_queue_ \u003d current ? current : worker_queue_;",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 76
+      },
+      "revId": "d73365feb3add085551002b1ebf0ceaa11efd082",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
