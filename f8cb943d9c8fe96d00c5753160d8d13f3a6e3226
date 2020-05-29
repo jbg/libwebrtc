@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "c95c9983_7331c503",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-29T12:37:37Z",
+      "side": 1,
+      "message": "I\u0027m not really sure about the exact explanation, but RefCountedObject is supposed to be a leaf in the inheritance tree. Otherwise there might be a diamond inheritance from a non-interface class. Therefore it can not be used like that. This is why you won\u0027t be able to find a lot \"rtc::RefCountedObject\u003cRtc::RefCoountInterace\u003e\" in webrtc codebase. \nThere\u0027s only QualityScalerQpUsageHandlerCallbackInterface added by you also (could you please clean that up in a follow-up or this CL? Please don\u0027t inherit from RefCountedObject there)\n\nUsual pattern is to inherit only from RefCountInterface and use |new RefCountedObject\u003cT\u003e| when creating a T to be stored in rtc::scoped_refptr.",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 69
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "10d8d4ee_5aaa3d5c",
         "filename": "call/adaptation/resource.h",
         "patchSetId": 7
@@ -87,6 +110,52 @@
         "startChar": 0,
         "endLine": 103,
         "endChar": 56
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21db52a1_ed4cea90",
+        "filename": "call/adaptation/test/fake_resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-29T12:37:37Z",
+      "side": 1,
+      "message": "Once you revert a change to the Resource declaration, you can either revert this change or add\nRefCountedObject\u003cT\u003e in Create()",
+      "range": {
+        "startLine": 27,
+        "startChar": 28,
+        "endLine": 27,
+        "endChar": 36
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7065ec7_92de1308",
+        "filename": "video/adaptation/encode_usage_resource.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-05-29T12:37:37Z",
+      "side": 1,
+      "message": "RefCountedObject\u003cEncodeusageResource\u003e\n(after you fix inheritance issue)",
+      "range": {
+        "startLine": 24,
+        "startChar": 13,
+        "endLine": 24,
+        "endChar": 32
       },
       "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
