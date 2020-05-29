@@ -18,14 +18,22 @@
 
 namespace webrtc {
 
+// static
+rtc::scoped_refptr<EncodeUsageResource> EncodeUsageResource::Create(
+    std::unique_ptr<OveruseFrameDetector> overuse_detector) {
+  return new EncodeUsageResource(std::move(overuse_detector));
+}
+
 EncodeUsageResource::EncodeUsageResource(
     std::unique_ptr<OveruseFrameDetector> overuse_detector)
-    : rtc::RefCountedObject<Resource>(),
+    : VideoStreamEncoderResource("EncoderUsageResource"),
       overuse_detector_(std::move(overuse_detector)),
       is_started_(false),
       target_frame_rate_(absl::nullopt) {
   RTC_DCHECK(overuse_detector_);
 }
+
+EncodeUsageResource::~EncodeUsageResource() {}
 
 bool EncodeUsageResource::is_started() const {
   RTC_DCHECK_RUN_ON(encoder_queue());
@@ -81,7 +89,7 @@ void EncodeUsageResource::AdaptUp() {
   RTC_DCHECK_RUN_ON(encoder_queue());
   // Reference counting guarantees that this object is still alive by the time
   // the task is executed.
-  resource_adaptation_queue()->PostTask(
+  MaybePostTaskToResourceAdaptationQueue(
       [this_ref = rtc::scoped_refptr<EncodeUsageResource>(this)] {
         RTC_DCHECK_RUN_ON(this_ref->resource_adaptation_queue());
         this_ref->OnResourceUsageStateMeasured(ResourceUsageState::kUnderuse);
@@ -92,7 +100,7 @@ void EncodeUsageResource::AdaptDown() {
   RTC_DCHECK_RUN_ON(encoder_queue());
   // Reference counting guarantees that this object is still alive by the time
   // the task is executed.
-  resource_adaptation_queue()->PostTask(
+  MaybePostTaskToResourceAdaptationQueue(
       [this_ref = rtc::scoped_refptr<EncodeUsageResource>(this)] {
         RTC_DCHECK_RUN_ON(this_ref->resource_adaptation_queue());
         this_ref->OnResourceUsageStateMeasured(ResourceUsageState::kOveruse);
