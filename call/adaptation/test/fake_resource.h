@@ -12,15 +12,18 @@
 #define CALL_ADAPTATION_TEST_FAKE_RESOURCE_H_
 
 #include <string>
+#include <vector>
 
 #include "call/adaptation/resource.h"
 #include "rtc_base/ref_counted_object.h"
+#include "video/adaptation/video_stream_encoder_resource.h"
 
 namespace webrtc {
 
 // Fake resource used for testing.
-class FakeResource : public rtc::RefCountedObject<Resource> {
+class FakeResource : public VideoStreamEncoderResource {
  public:
+  // TODO: Create
   explicit FakeResource(std::string name);
   ~FakeResource() override;
 
@@ -28,8 +31,7 @@ class FakeResource : public rtc::RefCountedObject<Resource> {
   void set_is_adaptation_up_allowed(bool is_adaptation_up_allowed);
   size_t num_adaptations_applied() const;
 
-  // Resource implementation.
-  std::string name() const override { return name_; }
+  // VideoStreamEncoderResource implementation.
   bool IsAdaptationUpAllowed(
       const VideoStreamInputState& input_state,
       const VideoSourceRestrictions& restrictions_before,

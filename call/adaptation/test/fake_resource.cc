@@ -10,19 +10,20 @@
 
 #include "call/adaptation/test/fake_resource.h"
 
+#include <algorithm>
 #include <utility>
 
 namespace webrtc {
 
 FakeResource::FakeResource(std::string name)
-    : rtc::RefCountedObject<Resource>(),
-      name_(std::move(name)),
+    : VideoStreamEncoderResource(std::move(name)),
       is_adaptation_up_allowed_(true),
       num_adaptations_applied_(0) {}
 
 FakeResource::~FakeResource() {}
 
 void FakeResource::set_usage_state(ResourceUsageState usage_state) {
+  RTC_DCHECK_RUN_ON(resource_adaptation_queue_);
   OnResourceUsageStateMeasured(usage_state);
 }
 

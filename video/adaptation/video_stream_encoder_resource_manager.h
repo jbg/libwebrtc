@@ -43,6 +43,7 @@
 #include "video/adaptation/encode_usage_resource.h"
 #include "video/adaptation/overuse_frame_detector.h"
 #include "video/adaptation/quality_scaler_resource.h"
+#include "video/adaptation/video_stream_encoder_resource.h"
 
 namespace webrtc {
 
@@ -178,7 +179,7 @@ class VideoStreamEncoderResourceManager
   // Does not trigger adaptations, only prevents adapting up based on
   // |active_counts_|.
   class PreventAdaptUpDueToActiveCounts final
-      : public rtc::RefCountedObject<Resource> {
+      : public VideoStreamEncoderResource {
    public:
     explicit PreventAdaptUpDueToActiveCounts(
         VideoStreamEncoderResourceManager* manager);
@@ -188,9 +189,6 @@ class VideoStreamEncoderResourceManager
         ResourceAdaptationProcessorInterface* adaptation_processor);
 
     // Resource overrides.
-    std::string name() const override {
-      return "PreventAdaptUpDueToActiveCounts";
-    }
     bool IsAdaptationUpAllowed(
         const VideoStreamInputState& input_state,
         const VideoSourceRestrictions& restrictions_before,
@@ -202,12 +200,12 @@ class VideoStreamEncoderResourceManager
     // ResourceAdaptationProcessor, i.e. when IsAdaptationUpAllowed() is called.
     VideoStreamEncoderResourceManager* const manager_;
     ResourceAdaptationProcessorInterface* adaptation_processor_
-        RTC_GUARDED_BY(resource_adaptation_queue());
+        RTC_GUARDED_BY(resource_adaptation_queue_);
   };
 
   // Does not trigger adaptations, only prevents adapting up resolution.
   class PreventIncreaseResolutionDueToBitrateResource final
-      : public rtc::RefCountedObject<Resource> {
+      : public VideoStreamEncoderResource {
    public:
     explicit PreventIncreaseResolutionDueToBitrateResource(
         VideoStreamEncoderResourceManager* manager);
@@ -219,9 +217,6 @@ class VideoStreamEncoderResourceManager
         absl::optional<uint32_t> encoder_target_bitrate_bps);
 
     // Resource overrides.
-    std::string name() const override {
-      return "PreventIncreaseResolutionDueToBitrateResource";
-    }
     bool IsAdaptationUpAllowed(
         const VideoStreamInputState& input_state,
         const VideoSourceRestrictions& restrictions_before,
@@ -233,14 +228,14 @@ class VideoStreamEncoderResourceManager
     // ResourceAdaptationProcessor, i.e. when IsAdaptationUpAllowed() is called.
     VideoStreamEncoderResourceManager* const manager_;
     absl::optional<EncoderSettings> encoder_settings_
-        RTC_GUARDED_BY(resource_adaptation_queue());
+        RTC_GUARDED_BY(resource_adaptation_queue_);
     absl::optional<uint32_t> encoder_target_bitrate_bps_
-        RTC_GUARDED_BY(resource_adaptation_queue());
+        RTC_GUARDED_BY(resource_adaptation_queue_);
   };
 
   // Does not trigger adaptations, only prevents adapting up in BALANCED.
   class PreventAdaptUpInBalancedResource final
-      : public rtc::RefCountedObject<Resource> {
+      : public VideoStreamEncoderResource {
    public:
     explicit PreventAdaptUpInBalancedResource(
         VideoStreamEncoderResourceManager* manager);
@@ -252,9 +247,6 @@ class VideoStreamEncoderResourceManager
         absl::optional<uint32_t> encoder_target_bitrate_bps);
 
     // Resource overrides.
-    std::string name() const override {
-      return "PreventAdaptUpInBalancedResource";
-    }
     bool IsAdaptationUpAllowed(
         const VideoStreamInputState& input_state,
         const VideoSourceRestrictions& restrictions_before,
@@ -266,9 +258,9 @@ class VideoStreamEncoderResourceManager
     // ResourceAdaptationProcessor, i.e. when IsAdaptationUpAllowed() is called.
     VideoStreamEncoderResourceManager* const manager_;
     ResourceAdaptationProcessorInterface* adaptation_processor_
-        RTC_GUARDED_BY(resource_adaptation_queue());
+        RTC_GUARDED_BY(resource_adaptation_queue_);
     absl::optional<uint32_t> encoder_target_bitrate_bps_
-        RTC_GUARDED_BY(resource_adaptation_queue());
+        RTC_GUARDED_BY(resource_adaptation_queue_);
   };
 
   const rtc::scoped_refptr<PreventAdaptUpDueToActiveCounts>
