@@ -20,6 +20,7 @@
 #include "rtc_base/ref_counted_object.h"
 #include "rtc_base/task_queue.h"
 #include "video/adaptation/overuse_frame_detector.h"
+#include "video/adaptation/video_stream_encoder_resource.h"
 
 namespace webrtc {
 
@@ -28,7 +29,7 @@ namespace webrtc {
 // indirectly by usage in the ResourceAdaptationProcessor (which is only tested
 // because of its usage in VideoStreamEncoder); all tests are currently in
 // video_stream_encoder_unittest.cc.
-class EncodeUsageResource : public rtc::RefCountedObject<Resource>,
+class EncodeUsageResource : public VideoStreamEncoderResource,
                             public OveruseFrameDetectorObserverInterface {
  public:
   explicit EncodeUsageResource(
@@ -50,8 +51,6 @@ class EncodeUsageResource : public rtc::RefCountedObject<Resource>,
   // OveruseFrameDetectorObserverInterface implementation.
   void AdaptUp() override;
   void AdaptDown() override;
-
-  std::string name() const override { return "EncoderUsageResource"; }
 
  private:
   int TargetFrameRateAsInt();
