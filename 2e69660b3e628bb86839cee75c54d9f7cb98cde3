@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72131ffd_871d031b",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-05-29T15:17:57Z",
+      "side": 1,
+      "message": "Since we have worker_thread_ in many places, comments about \"the worker thread\", the fact that that thread also supports the TaskQueue interface and subsequently is and can be referenced to as \"worker_queue\", can we call this something else?\n\nNote that there\u0027s also a \"network thread\", and arguably this TQ\u0027s purpose is related to network code. In fact it was at some point referred to as network_queue(), until just this week:\n\nhttps://webrtc-review.googlesource.com/c/src/+/176226\n\nSo network_queue would also be confusing. Wdyt about send_transport_queue or transport_queue?\n\nDown the line I\u0027d like to move RTP work off of the worker thread (the libjingle worker thread) and have network related work happen on task queues that have a well defined role, so as we write the code that\u0027s already being associated with the TQs that we have, I think it\u0027s helpful to pick names that can not be confused with other concepts and ideally reflect their purpose (\"worker\" is pretty generic, so we should try to come up with a descriptive name of the tasks that commonly run on the queue).",
+      "revId": "2e69660b3e628bb86839cee75c54d9f7cb98cde3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
