@@ -22,6 +22,30 @@
       "revId": "8908a61a561b15911a5739e4417087c8f3482913",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df19a0e8_6730c247",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-05-29T08:41:09Z",
+      "side": 1,
+      "message": "Done, this file is not sorted (unfortunately) but I have moved this closed to \"google\" related stuff.",
+      "parentUuid": "385afb2e_b2a2b96a",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 4
+      },
+      "revId": "8908a61a561b15911a5739e4417087c8f3482913",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
