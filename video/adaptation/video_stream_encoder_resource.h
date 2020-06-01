@@ -1,5 +1,5 @@
 /*
- *  Copyright 2019 The WebRTC Project Authors. All rights reserved.
+ *  Copyright 2020 The WebRTC Project Authors. All rights reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -8,14 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef CALL_ADAPTATION_TEST_FAKE_RESOURCE_H_
-#define CALL_ADAPTATION_TEST_FAKE_RESOURCE_H_
+#ifndef VIDEO_ADAPTATION_VIDEO_STREAM_ENCODER_RESOURCE_H_
+#define VIDEO_ADAPTATION_VIDEO_STREAM_ENCODER_RESOURCE_H_
 
 #include <string>
 #include <vector>
 
 #include "absl/types/optional.h"
-#include "api/scoped_refptr.h"
 #include "api/task_queue/task_queue_base.h"
 #include "call/adaptation/resource.h"
 #include "rtc_base/critical_section.h"
@@ -23,17 +22,12 @@
 
 namespace webrtc {
 
-// Fake resource used for testing.
-class FakeResource : public Resource {
+class VideoStreamEncoderResource : public Resource {
  public:
-  static rtc::scoped_refptr<FakeResource> Create(std::string name);
+  ~VideoStreamEncoderResource() override;
 
-  explicit FakeResource(std::string name);
-  ~FakeResource() override;
-
-  void set_usage_state(ResourceUsageState usage_state);
-  void set_is_adaptation_up_allowed(bool is_adaptation_up_allowed);
-  size_t num_adaptations_applied() const;
+  // Registering task queues must be performed as part of initialization.
+  void RegisterEncoderTaskQueue(TaskQueueBase* encoder_queue);
 
   // Resource implementation.
   void RegisterAdaptationTaskQueue(
@@ -44,6 +38,7 @@ class FakeResource : public Resource {
   std::string Name() const override;
   absl::optional<ResourceUsageState> UsageState() const override;
   void ClearUsageState() override;
+  // Default implementations, may be overriden again by child classes.
   bool IsAdaptationUpAllowed(
       const VideoStreamInputState& input_state,
       const VideoSourceRestrictions& restrictions_before,
@@ -55,18 +50,39 @@ class FakeResource : public Resource {
       const VideoSourceRestrictions& restrictions_after,
       rtc::scoped_refptr<Resource> reason_resource) override;
 
+ protected:
+  explicit VideoStreamEncoderResource(std::string name);
+
+  void OnResourceUsageStateMeasured(ResourceUsageState usage_state);
+
+  // The caller is responsible for ensuring the task queue is still valid.
+  TaskQueueBase* encoder_queue() const;
+  // Validity of returned pointer is ensured by only allowing this method to be
+  // called on the adaptation task queue. Designed for use with RTC_GUARDED_BY.
+  // For posting from a different queue, use
+  // MaybePostTaskToResourceAdaptationQueue() instead, which only posts if the
+  // task queue is currently registered.
+  TaskQueueBase* resource_adaptation_queue() const;
+  template <typename Closure>
+  void MaybePostTaskToResourceAdaptationQueue(Closure&& closure) {
+    rtc::CritScope crit(&lock_);
+    if (!resource_adaptation_queue_)
+      return;
+    resource_adaptation_queue_->PostTask(ToQueuedTask(closure));
+  }
+
  private:
   rtc::CriticalSection lock_;
   const std::string name_;
-  TaskQueueBase* resource_adaptation_queue_;
-  bool is_adaptation_up_allowed_ RTC_GUARDED_BY(lock_);
-  size_t num_adaptations_applied_ RTC_GUARDED_BY(lock_);
+  // Treated as const after initialization.
+  TaskQueueBase* encoder_queue_;
+  TaskQueueBase* resource_adaptation_queue_ RTC_GUARDED_BY(lock_);
   absl::optional<ResourceUsageState> usage_state_
-      RTC_GUARDED_BY(resource_adaptation_queue_);
+      RTC_GUARDED_BY(resource_adaptation_queue());
   std::vector<ResourceListener*> listeners_
-      RTC_GUARDED_BY(resource_adaptation_queue_);
+      RTC_GUARDED_BY(resource_adaptation_queue());
 };
 
 }  // namespace webrtc
 
-#endif  // CALL_ADAPTATION_TEST_FAKE_RESOURCE_H_
+#endif  // VIDEO_ADAPTATION_VIDEO_STREAM_ENCODER_RESOURCE_H_
