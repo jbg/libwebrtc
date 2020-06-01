@@ -16,6 +16,24 @@
       "revId": "2e69660b3e628bb86839cee75c54d9f7cb98cde3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd4211eb_04917672",
+        "filename": "call/rtp_video_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-06-01T10:04:54Z",
+      "side": 1,
+      "message": "That makes sense, I think send_transport_queue is a good name. Renamed in https://webrtc-review.googlesource.com/c/src/+/176362, please have a look.",
+      "parentUuid": "72131ffd_871d031b",
+      "revId": "2e69660b3e628bb86839cee75c54d9f7cb98cde3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
