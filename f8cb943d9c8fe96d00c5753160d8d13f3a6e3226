@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "6e8e8ef1_681f9fab",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T15:59:36Z",
+      "side": 1,
+      "message": "Ack. I changed back to one listener.",
+      "parentUuid": "60a553f0_50751837",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 70
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42776c8e_64806bb2",
         "filename": "call/adaptation/resource.h",
         "patchSetId": 7
@@ -282,6 +306,30 @@
       "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80e6b895_1e660de8",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T15:59:36Z",
+      "side": 1,
+      "message": "Ack, you convinced me. Can I address this in a follow-up CL?",
+      "parentUuid": "aa5fb31b_d1fb9f67",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 56
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
