@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "60a553f0_50751837",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-06-01T11:47:03Z",
+      "side": 1,
+      "message": "Keep it to one listener, that is what we have today and most likely what I think will exist longer term. Multi-stream long term should be administered by a single resource manager, who reacts to overuse with a set of mitigations. Multi-stream \u003d\u003d 1 mitigation per stream.\n\nIn the near term, we can just clone the resource per-stream, as no co-ordination can happen between streams with the current design anyways. \n\nThe argument against the above is that we would have to change the api to support multiple listeners in the future, which is something I could be convinced of given some use case for it.",
+      "parentUuid": "c7188ae5_dfe0969f",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 70
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "42776c8e_64806bb2",
         "filename": "call/adaptation/resource.h",
         "patchSetId": 7
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "As-is the interface is incomplete (it doesn\u0027t say which stream is being adapted), but do you not see value in allowing a resource to reject an adaptation?\n\nThe before/after says something about delta pixels per second, which could be used for heuristics.\nOr a resource could say \"reject all requests to do HD\" for example, which may result in attempting to perform some other adaptation instead.\n\nOr should we just not support this and revisit it in the future?",
       "parentUuid": "0d4312fa_1a621f2c",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 56
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa5fb31b_d1fb9f67",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-06-01T11:47:03Z",
+      "side": 1,
+      "message": "As discussed offline, I don\u0027t see a value in this today. The problem is even harder than setting good usage boundaries as one must predict the impact of a change on a system - which could be impossible. Additionally, for most resources I think the benefit of such a method is not large. The cases where this could prevent toggling are rare and made even rarer with most-limited resource adaptation.",
+      "parentUuid": "205e2461_151fc913",
       "range": {
         "startLine": 93,
         "startChar": 0,
