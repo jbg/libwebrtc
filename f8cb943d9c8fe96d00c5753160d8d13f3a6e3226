@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dfd78cc6_dab6582e",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T10:10:23Z",
+      "side": 1,
+      "message": "OK. Done.",
+      "parentUuid": "c95c9983_7331c503",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 69
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10d8d4ee_5aaa3d5c",
         "filename": "call/adaptation/resource.h",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-29T12:17:32Z",
       "side": 1,
       "message": "If the IsAdaptationUpAllowed and OnAdaptationApplied methods are removed, and the UsageState/ClearUsageState are replaced with simply calling \"OnResourceUsageStateMeasured(this, state)\", would the resource need the task queue at all? \n\nIn this case the OnResourceUsageStateMeasured() would be an async call.\n\nI only see it potentially needing the queue for setting listeners.",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 70,
+        "endChar": 52
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c826b0a3_674acc8a",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T10:10:23Z",
+      "side": 1,
+      "message": "If the only thing that needs to be communicated is the usage state then we could let the listener perform the PostTask and have the Resource unaware of the task queues existence.\n\nHowever - assuming IsAdaptationUpAllowed() belongs to the interface (see other comment),\n\nIsAdaptationUpAllowed() is not only used for the adapt counter logic going away, for example both PreventIncreaseResolutionDueToBitrateResource and PreventAdaptUpInBalancedResource posts to the adaptation task queue what the encoder target bitrate is from the encoder queue, which is used by IsAdaptationUpAllowed() on the adaptation task queue.\n\nWhen we evaluate e.g. \"is adapting up allowed?\" based on some internal state then those states either need to be guarded by the adaptation task queue or by a mutex. If we expose the task queue, then we make it possible to calculate both UsageState() and IsAdaptationUpAllowed() based on the same internal state. If we have a mutex instead, then it\u0027s possible to have races in-between OnResourceUsageStateMeasured() and IsAdaptationUpAllowed().\n\nThose races might not be a big deal, but we do use the adaptation task queue for more than just usage state, and exposing that task queue allows guarding implementation-specific states with it.\n\nDo you think it\u0027s important to hide the task queue in favor of mutexes instead?",
+      "parentUuid": "10d8d4ee_5aaa3d5c",
       "range": {
         "startLine": 64,
         "startChar": 1,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c7188ae5_dfe0969f",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T10:10:23Z",
+      "side": 1,
+      "message": "Before proper multi stream support we might have multiple processors and thus multiple listeners. We could get around that or change the interface later, but I thought this was good excuse to get rid of the assumption that there is only one listener.\n\nBut let me know if you think I should keep it as only one listener and I\u0027ll change it back.",
+      "parentUuid": "b7da2836_df139a59",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 70
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "42776c8e_64806bb2",
         "filename": "call/adaptation/resource.h",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2020-05-29T12:17:32Z",
       "side": 1,
       "message": "Should we change this to const char * since its generally a static string? Don\u0027t need to address in this CL.",
+      "range": {
+        "startLine": 79,
+        "startChar": 10,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e160674_f5cd4064",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T10:10:23Z",
+      "side": 1,
+      "message": "In multi stream one might want to name the resource Ssrc:1337-EncodeUsageResource or something not a static string",
+      "parentUuid": "42776c8e_64806bb2",
       "range": {
         "startLine": 79,
         "startChar": 10,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "205e2461_151fc913",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T10:10:23Z",
+      "side": 1,
+      "message": "As-is the interface is incomplete (it doesn\u0027t say which stream is being adapted), but do you not see value in allowing a resource to reject an adaptation?\n\nThe before/after says something about delta pixels per second, which could be used for heuristics.\nOr a resource could say \"reject all requests to do HD\" for example, which may result in attempting to perform some other adaptation instead.\n\nOr should we just not support this and revisit it in the future?",
+      "parentUuid": "0d4312fa_1a621f2c",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 56
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "21db52a1_ed4cea90",
         "filename": "call/adaptation/test/fake_resource.h",
         "patchSetId": 7
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "fcc2a220_79e590a1",
+        "filename": "call/adaptation/test/fake_resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T10:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21db52a1_ed4cea90",
+      "range": {
+        "startLine": 27,
+        "startChar": 28,
+        "endLine": 27,
+        "endChar": 36
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7065ec7_92de1308",
         "filename": "video/adaptation/encode_usage_resource.cc",
         "patchSetId": 7
@@ -160,6 +304,30 @@
       "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fce0c1e_37aa0336",
+        "filename": "video/adaptation/encode_usage_resource.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-01T10:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7065ec7_92de1308",
+      "range": {
+        "startLine": 24,
+        "startChar": 13,
+        "endLine": 24,
+        "endChar": 32
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
