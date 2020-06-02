@@ -253,7 +253,7 @@ std::vector<RtpStreamSender> CreateRtpStreamSenders(
 
     configuration.need_rtp_packet_infos = rtp_config.lntf.enabled;
 
-    auto rtp_rtcp = RtpRtcp::Create(configuration);
+    auto rtp_rtcp = RtpRtcp::CreateInternal(configuration);
     rtp_rtcp->SetSendingStatus(false);
     rtp_rtcp->SetSendingMediaStatus(false);
     rtp_rtcp->SetRTCPStatus(RtcpMode::kCompound);

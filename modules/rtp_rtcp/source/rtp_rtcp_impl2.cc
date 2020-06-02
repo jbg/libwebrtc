@@ -48,8 +48,10 @@ ModuleRtpRtcpImpl2::RtpSenderContext::RtpSenderContext(
           &packet_history,
           config.paced_sender ? config.paced_sender : &non_paced_sender) {}
 
-std::unique_ptr<RtpRtcp> RtpRtcp::Create(const Configuration& configuration) {
+std::unique_ptr<RtpRtcp> RtpRtcp::CreateInternal(
+    const Configuration& configuration) {
   RTC_DCHECK(configuration.clock);
+  RTC_DCHECK(TaskQueueBase::Current());
   return std::make_unique<ModuleRtpRtcpImpl2>(configuration);
 }
 

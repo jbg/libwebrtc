@@ -507,7 +507,7 @@ ChannelReceive::ChannelReceive(
   if (frame_transformer)
     InitFrameTransformerDelegate(std::move(frame_transformer));
 
-  _rtpRtcpModule = RtpRtcp::Create(configuration);
+  _rtpRtcpModule = RtpRtcp::CreateInternal(configuration);
   _rtpRtcpModule->SetSendingMediaStatus(false);
   _rtpRtcpModule->SetRemoteSSRC(remote_ssrc_);
 

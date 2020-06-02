@@ -132,7 +132,7 @@ std::unique_ptr<RtpRtcp> CreateRtpRtcpModule(
   configuration.outgoing_transport = config.rtcp_send_transport;
   configuration.rtt_stats = rtt_stats;
   configuration.local_media_ssrc = config.local_ssrc;
-  return RtpRtcp::Create(configuration);
+  return RtpRtcp::CreateInternal(configuration);
 }
 
 }  // namespace

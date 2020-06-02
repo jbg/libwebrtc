@@ -159,7 +159,14 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
   };
 
   // Creates an RTP/RTCP module object using provided |configuration|.
-  static std::unique_ptr<RtpRtcp> Create(const Configuration& configuration);
+  static std::unique_ptr<RtpRtcp> DEPRECATED_Create(
+      const Configuration& configuration);
+
+  // Creates an RTP/RTCP module object using provided |configuration|.
+  // Note that this is an internal implementation detail of WebRTC that may
+  // change without notice.
+  static std::unique_ptr<RtpRtcp> CreateInternal(
+      const Configuration& configuration);
 
   // **************************************************************************
   // Receiver functions
