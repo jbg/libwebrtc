@@ -50,6 +50,7 @@ namespace rtcp {
 class TransportFeedback;
 }
 
+// TODO(tommi): See if we can remove Module.
 class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
  public:
   struct Configuration {
@@ -158,8 +159,10 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     RTC_DISALLOW_COPY_AND_ASSIGN(Configuration);
   };
 
+  // DEPRECATED.
   // Creates an RTP/RTCP module object using provided |configuration|.
-  static std::unique_ptr<RtpRtcp> Create(const Configuration& configuration);
+  static std::unique_ptr<RtpRtcp> DEPRECATED_Create(
+      const Configuration& configuration);
 
   // **************************************************************************
   // Receiver functions
