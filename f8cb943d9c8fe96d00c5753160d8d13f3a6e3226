@@ -333,6 +333,30 @@
     },
     {
       "key": {
+        "uuid": "ea7eb3d3_036ae74b",
+        "filename": "call/adaptation/resource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-06-02T07:39:22Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "80e6b895_1e660de8",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 56
+      },
+      "revId": "f8cb943d9c8fe96d00c5753160d8d13f3a6e3226",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21db52a1_ed4cea90",
         "filename": "call/adaptation/test/fake_resource.h",
         "patchSetId": 7
