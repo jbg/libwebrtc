@@ -8,14 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef CALL_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
-#define CALL_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
+#ifndef API_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
+#define API_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
 
 #include <string>
 #include <utility>
 
 #include "absl/types/optional.h"
-#include "rtc_base/strings/string_builder.h"
 
 namespace webrtc {
 
@@ -40,18 +39,7 @@ class VideoSourceRestrictions {
     return !(*this == rhs);
   }
 
-  std::string ToString() const {
-    rtc::StringBuilder ss;
-    ss << "{";
-    if (max_frame_rate_)
-      ss << " max_fps=" << max_frame_rate_.value();
-    if (max_pixels_per_frame_)
-      ss << " max_pixels_per_frame=" << max_pixels_per_frame_.value();
-    if (target_pixels_per_frame_)
-      ss << " target_pixels_per_frame=" << target_pixels_per_frame_.value();
-    ss << " }";
-    return ss.Release();
-  }
+  std::string ToString() const;
 
   // The source must produce a resolution less than or equal to
   // max_pixels_per_frame().
@@ -95,4 +83,4 @@ bool DidDecreaseFrameRate(VideoSourceRestrictions restrictions_before,
 
 }  // namespace webrtc
 
-#endif  // CALL_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_
+#endif  // API_ADAPTATION_VIDEO_SOURCE_RESTRICTIONS_H_

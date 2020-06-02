@@ -17,6 +17,8 @@
 #include <string>
 #include <vector>
 
+#include "api/adaptation/resource.h"
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/units/data_rate.h"
 #include "api/video/video_bitrate_allocator.h"
 #include "api/video/video_rotation.h"
@@ -28,9 +30,7 @@
 #include "api/video_codecs/video_encoder.h"
 #include "call/adaptation/adaptation_constraint.h"
 #include "call/adaptation/adaptation_listener.h"
-#include "call/adaptation/resource.h"
 #include "call/adaptation/resource_adaptation_processor_interface.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "call/adaptation/video_stream_input_state_provider.h"
 #include "modules/video_coding/utility/frame_dropper.h"
 #include "rtc_base/critical_section.h"

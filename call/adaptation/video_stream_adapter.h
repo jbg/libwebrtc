@@ -14,10 +14,10 @@
 #include <memory>
 
 #include "absl/types/optional.h"
+#include "api/adaptation/resource.h"
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/rtp_parameters.h"
 #include "api/video/video_adaptation_counters.h"
-#include "call/adaptation/resource.h"
-#include "call/adaptation/video_source_restrictions.h"
 #include "call/adaptation/video_stream_input_state.h"
 #include "modules/video_coding/utility/quality_scaler.h"
 #include "rtc_base/experiments/balanced_degradation_settings.h"

@@ -8,14 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef CALL_ADAPTATION_RESOURCE_H_
-#define CALL_ADAPTATION_RESOURCE_H_
+#ifndef API_ADAPTATION_RESOURCE_H_
+#define API_ADAPTATION_RESOURCE_H_
 
 #include <string>
 
+#include "api/adaptation/video_source_restrictions.h"
 #include "api/scoped_refptr.h"
-#include "call/adaptation/video_source_restrictions.h"
-#include "call/adaptation/video_stream_input_state.h"
 #include "rtc_base/ref_count.h"
 
 namespace webrtc {
@@ -64,4 +63,4 @@ class Resource : public rtc::RefCountInterface {
 
 }  // namespace webrtc
 
-#endif  // CALL_ADAPTATION_RESOURCE_H_
+#endif  // API_ADAPTATION_RESOURCE_H_

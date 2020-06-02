@@ -1,0 +1,5 @@
+specific_include_rules = {
+  "resource\.h": [
+    "+rtc_base/ref_count.h",
+  ],
+}
