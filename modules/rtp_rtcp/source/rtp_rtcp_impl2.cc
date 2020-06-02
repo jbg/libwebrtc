@@ -38,6 +38,15 @@ const int64_t kRtpRtcpBitrateProcessTimeMs = 10;
 const int64_t kDefaultExpectedRetransmissionTimeMs = 125;
 }  // namespace
 
+namespace internal {
+std::unique_ptr<RtpRtcp> CreateRtpRtcp(
+    const RtpRtcp::Configuration& configuration) {
+  RTC_DCHECK(configuration.clock);
+  RTC_DCHECK(TaskQueueBase::Current());
+  return std::make_unique<ModuleRtpRtcpImpl2>(configuration);
+}
+}  // namespace internal
+
 ModuleRtpRtcpImpl2::RtpSenderContext::RtpSenderContext(
     const RtpRtcp::Configuration& config)
     : packet_history(config.clock, config.enable_rtx_padding_prioritization),
@@ -47,11 +56,6 @@ ModuleRtpRtcpImpl2::RtpSenderContext::RtpSenderContext(
           config,
           &packet_history,
           config.paced_sender ? config.paced_sender : &non_paced_sender) {}
-
-std::unique_ptr<RtpRtcp> RtpRtcp::Create(const Configuration& configuration) {
-  RTC_DCHECK(configuration.clock);
-  return std::make_unique<ModuleRtpRtcpImpl2>(configuration);
-}
 
 ModuleRtpRtcpImpl2::ModuleRtpRtcpImpl2(const Configuration& configuration)
     : rtcp_sender_(configuration),

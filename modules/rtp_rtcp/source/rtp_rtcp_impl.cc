@@ -48,6 +48,13 @@ ModuleRtpRtcpImpl::RtpSenderContext::RtpSenderContext(
           &packet_history,
           config.paced_sender ? config.paced_sender : &non_paced_sender) {}
 
+// DEPRECATED.
+std::unique_ptr<RtpRtcp> RtpRtcp::Create(
+    const Configuration& configuration) {
+  RTC_DCHECK(configuration.clock);
+  return std::make_unique<ModuleRtpRtcpImpl>(configuration);
+}
+
 ModuleRtpRtcpImpl::ModuleRtpRtcpImpl(const Configuration& configuration)
     : rtcp_sender_(configuration),
       rtcp_receiver_(configuration, this),

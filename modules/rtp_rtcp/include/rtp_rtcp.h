@@ -158,8 +158,10 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     RTC_DISALLOW_COPY_AND_ASSIGN(Configuration);
   };
 
+  // DEPRECATED.
   // Creates an RTP/RTCP module object using provided |configuration|.
-  static std::unique_ptr<RtpRtcp> Create(const Configuration& configuration);
+  static std::unique_ptr<RtpRtcp> RTC_DEPRECATED Create(
+      const Configuration& configuration);
 
   // **************************************************************************
   // Receiver functions
@@ -463,6 +465,14 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
                                        bool decodability_flag,
                                        bool buffering_allowed) = 0;
 };
+
+namespace internal {
+// Creates an RTP/RTCP module object using provided |configuration|.
+// Note that this is an internal implementation detail of WebRTC that may
+// change without notice.
+std::unique_ptr<RtpRtcp> CreateRtpRtcp(
+    const RtpRtcp::Configuration& configuration);
+}  // namespace internal
 
 }  // namespace webrtc
 

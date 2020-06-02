@@ -530,7 +530,7 @@ ChannelSend::ChannelSend(
 
   configuration.local_media_ssrc = ssrc;
 
-  _rtpRtcpModule = RtpRtcp::Create(configuration);
+  _rtpRtcpModule = internal::CreateRtpRtcp(configuration);
   _rtpRtcpModule->SetSendingMediaStatus(false);
 
   rtp_sender_audio_ = std::make_unique<RTPSenderAudio>(
