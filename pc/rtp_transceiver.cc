@@ -114,7 +114,7 @@ RtpTransceiver::RtpTransceiver(
     : unified_plan_(true),
       media_type_(sender->media_type()),
       channel_manager_(channel_manager),
-      HeaderExtensionsToOffer_(std::move(header_extensions_offered)) {
+      header_extensions_to_offer_(std::move(header_extensions_offered)) {
   RTC_DCHECK(media_type_ == cricket::MEDIA_TYPE_AUDIO ||
              media_type_ == cricket::MEDIA_TYPE_VIDEO);
   RTC_DCHECK_EQ(sender->media_type(), receiver->media_type());
@@ -356,7 +356,53 @@ RTCError RtpTransceiver::SetCodecPreferences(
 
 std::vector<RtpHeaderExtensionCapability>
 RtpTransceiver::HeaderExtensionsToOffer() const {
-  return HeaderExtensionsToOffer_;
+  return header_extensions_to_offer_;
+}
+
+RTCError RtpTransceiver::SetOfferedRtpHeaderExtensions(
+    rtc::ArrayView<RtpHeaderExtensionCapability> header_extensions_to_offer) {
+  for (const auto& entry : header_extensions_to_offer) {
+    // Handle unsupported requests for mandatory extensions as per
+    // https://w3c.github.io/webrtc-extensions/#rtcrtptransceiver-interface.
+    // Note:
+    // - We do not handle setOfferedRtpHeaderExtensions algorithm step 2.1,
+    //   this has to be checked on a higher level. We naturally error out
+    //   in the handling of Step 2.2 if an unset URI is encountered.
+    // REVIEWER QUESTIONS:
+    // - Input on how to handle step 2.4? Any concrete extensions here?
+    // - I only found MID for unified plan is the only one which is mandatory...
+    //   are there others?
+    // - Do the RTCErrorTypes used make sense?
+
+    // Step 2.5.
+    // Use of the transceiver interface indicates unified plan is in effect,
+    // hence the MID extension needs to be enabled.
+    if (entry.uri == RtpExtension::kMidUri &&
+        entry.direction == RtpTransceiverDirection::kStopped) {
+      return RTCError(RTCErrorType::INVALID_MODIFICATION,
+                      "Attempted to stop a mandatory extension.");
+    }
+
+    // Step 2.2.
+    // Handle unknown extensions.
+    auto it = std::find_if(
+        header_extensions_to_offer_.begin(), header_extensions_to_offer_.end(),
+        [&entry](const auto& offered) { return entry.uri == offered.uri; });
+    if (it == header_extensions_to_offer_.end()) {
+      return RTCError(RTCErrorType::INVALID_PARAMETER,
+                      "Attempted to modify an unoffered extension.");
+    }
+  }
+
+  // Apply mutation after error checking.
+  for (const auto& entry : header_extensions_to_offer) {
+    auto it = std::find_if(
+        header_extensions_to_offer_.begin(), header_extensions_to_offer_.end(),
+        [&entry](const auto& offered) { return entry.uri == offered.uri; });
+    it->direction = entry.direction;
+  }
+
+  return RTCError::OK();
 }
 
 }  // namespace webrtc
