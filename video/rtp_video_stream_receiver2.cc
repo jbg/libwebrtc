@@ -34,7 +34,6 @@
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 #include "modules/rtp_rtcp/source/rtp_packet_received.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
-#include "modules/rtp_rtcp/source/rtp_rtcp_impl2.h"
 #include "modules/rtp_rtcp/source/video_rtp_depacketizer.h"
 #include "modules/rtp_rtcp/source/video_rtp_depacketizer_raw.h"
 #include "modules/utility/include/process_thread.h"
@@ -77,7 +76,7 @@ int PacketBufferMaxSize() {
   return packet_buffer_max_size;
 }
 
-std::unique_ptr<RtpRtcp> CreateRtpRtcpModule(
+std::unique_ptr<ModuleRtpRtcpImpl2> CreateRtpRtcpModule(
     Clock* clock,
     ReceiveStatistics* receive_statistics,
     Transport* outgoing_transport,
@@ -97,7 +96,8 @@ std::unique_ptr<RtpRtcp> CreateRtpRtcpModule(
   configuration.rtcp_cname_callback = rtcp_cname_callback;
   configuration.local_media_ssrc = local_ssrc;
 
-  std::unique_ptr<RtpRtcp> rtp_rtcp = ModuleRtpRtcpImpl2::Create(configuration);
+  std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp =
+      ModuleRtpRtcpImpl2::Create(configuration);
   rtp_rtcp->SetRTCPStatus(RtcpMode::kCompound);
 
   return rtp_rtcp;

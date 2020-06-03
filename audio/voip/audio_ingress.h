@@ -44,7 +44,7 @@ namespace webrtc {
 // smaller footprint.
 class AudioIngress : public AudioMixer::Source {
  public:
-  AudioIngress(RtpRtcp* rtp_rtcp,
+  AudioIngress(RtpRtcpInterface* rtp_rtcp,
                Clock* clock,
                ReceiveStatistics* receive_statistics,
                rtc::scoped_refptr<AudioDecoderFactory> decoder_factory);
@@ -122,8 +122,8 @@ class AudioIngress : public AudioMixer::Source {
   // Synchronizaton is handled internally by ReceiveStatistics.
   ReceiveStatistics* const rtp_receive_statistics_;
 
-  // Synchronizaton is handled internally by RtpRtcp.
-  RtpRtcp* const rtp_rtcp_;
+  // Synchronizaton is handled internally by RtpRtcpInterface.
+  RtpRtcpInterface* const rtp_rtcp_;
 
   // Synchronizaton is handled internally by acm2::AcmReceiver.
   acm2::AcmReceiver acm_receiver_;

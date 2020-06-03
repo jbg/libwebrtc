@@ -303,7 +303,7 @@ TEST_F(BandwidthEndToEndTest, RembWithSendSideBwe) {
     Clock* const clock_;
     uint32_t sender_ssrc_;
     int remb_bitrate_bps_;
-    std::unique_ptr<RtpRtcp> rtp_rtcp_;
+    std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp_;
     test::PacketTransport* receive_transport_;
     TestState state_;
     RateLimiter retransmission_rate_limiter_;
