@@ -121,6 +121,24 @@
       "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b3a4c88_50f81095",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-03T10:39:03Z",
+      "side": 1,
+      "message": "\u003e The expected type for T is uint16_t\n\nThen definitely use std::queue\u003cT\u003e, and copy the elements.\n\n\u003e Also switching to multiple queue will make size method linear instead of O(1)\n\nYes, I was wondering about the size method... is it supposed to return the size for the head with the longest queue? For what purpose?\n\n\u003e but on other case amount of heads expected to be ~3-5. So it\u0027s questionable. WDYT?\n\nWe can live with O(~3-5). It\u0027ll be negligible. If the number of heads were considerably larger, the thing we\u0027d start having trouble with is the extra memory used when by a separate queue per head, instead of one shared queue with separate head pointers. But with just a handful of heads, the queues would need to be very long for that to matter.",
+      "parentUuid": "e40188c9_9613253c",
+      "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
