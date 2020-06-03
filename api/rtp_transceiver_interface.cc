@@ -41,4 +41,9 @@ RtpTransceiverInterface::HeaderExtensionsToOffer() const {
   return {};
 }
 
+webrtc::RTCError RtpTransceiverInterface::SetOfferedRtpHeaderExtensions(
+    rtc::ArrayView<RtpHeaderExtensionCapability> header_extensions_to_offer) {
+  return webrtc::RTCError(webrtc::RTCErrorType::UNSUPPORTED_OPERATION);
+}
+
 }  // namespace webrtc
