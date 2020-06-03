@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "video/call_stats.h"
+#include "video/deprecated/call_stats.h"
 
 #include <memory>
 

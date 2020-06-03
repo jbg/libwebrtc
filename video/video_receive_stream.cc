@@ -48,7 +48,7 @@
 #include "rtc_base/trace_event.h"
 #include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/field_trial.h"
-#include "video/call_stats.h"
+#include "video/deprecated/call_stats.h"
 #include "video/frame_dumping_decoder.h"
 #include "video/receive_statistics_proxy.h"
 

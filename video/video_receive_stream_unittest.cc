@@ -34,7 +34,7 @@
 #include "test/gtest.h"
 #include "test/time_controller/simulated_time_controller.h"
 #include "test/video_decoder_proxy_factory.h"
-#include "video/call_stats.h"
+#include "video/deprecated/call_stats.h"
 
 namespace webrtc {
 namespace {

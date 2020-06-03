@@ -1,0 +1,30 @@
+# Copyright (c) 2020 The WebRTC project authors. All Rights Reserved.
+#
+# Use of this source code is governed by a BSD-style license
+# that can be found in the LICENSE file in the root of the source
+# tree. An additional intellectual property rights grant can be found
+# in the file PATENTS.  All contributing project authors may
+# be found in the AUTHORS file in the root of the source tree.
+
+import("../../webrtc.gni")
+
+rtc_library("call_stats") {
+  sources = [
+    "call_stats.cc",
+    "call_stats.h",
+  ]
+  deps = [
+    "../../modules:module_api",
+    "../../modules/rtp_rtcp:rtp_rtcp_format",
+    "../../modules/utility",
+    "../../rtc_base:checks",
+    "../../rtc_base:criticalsection",
+    "../../rtc_base:macromagic",
+    "../../rtc_base:rtc_base_approved",
+    "../../rtc_base:thread_checker",
+    "../../rtc_base/task_utils:to_queued_task",
+    "../../system_wrappers",
+    "../../system_wrappers:metrics",
+    "//third_party/abseil-cpp/absl/algorithm:container",
+  ]
+}
