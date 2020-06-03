@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "98e6cabe_e22b97b5",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2020-06-03T06:39:32Z",
+      "side": 1,
+      "message": "TODO(bugs.webrtc.org/XYZ):",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 16
+      },
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9c0641f5_b3902df8",
         "filename": "media/sctp/sctp_transport.cc",
         "patchSetId": 1
@@ -13,6 +36,75 @@
       "writtenOn": "2020-06-03T06:09:38Z",
       "side": 1,
       "message": "This is an invisible static global. Is that OK with the current guidelines?\nIn particular - who destroys it, and when?\n\nhttps://google.github.io/styleguide/cppguide.html#Static_and_Global_Variables\n\nIn most cases, the map size will be ~\u003d number of PeerConnections with DataChannel initialized, so order-of-magnitude 1 in normal case, up to 500 in exceptional cases.\n\nNot that big a deal to leave lying around, but still irritating.",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10c25fcc_72145f92",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2020-06-03T06:39:32Z",
+      "side": 1,
+      "message": "This should ideally be deleted when there are no SctpTransport instances remaining.",
+      "parentUuid": "9c0641f5_b3902df8",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd845f1b_9b799949",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2020-06-03T06:39:32Z",
+      "side": 1,
+      "message": "in case this doesn\u0027t work as expected, should we log an error if this fails?\nmaybe even RTC_DCHECK on failure?",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7b748f4_ef5faaca",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2020-06-03T06:39:32Z",
+      "side": 1,
+      "message": "take a look at the new lock type that Markus just introduced (absl mutex based)",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e59813e_07585dc6",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2020-06-03T06:39:32Z",
+      "side": 1,
+      "message": "is the problem really that a pointer value is being shared outside of the implementation or is the problem that we don\u0027t verify that value?\n\nI.e. what if this was a std::vector\u003c\u003e instead and the uintptr_t is just a cast of the pointer?\nThat in itself is just an implementation detail of this class, the uintptr_t would basically be treated as an opaque \"hash\" value that\u0027s still guaranteed to be unique.\n\nAs is, it looks like we\u0027re jumping through a lot of hoops just to get a unique value for another unique value when all we need is to make sure that we vet the value.",
       "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
