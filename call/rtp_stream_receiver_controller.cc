@@ -37,7 +37,8 @@ RtpStreamReceiverController::Receiver::~Receiver() {
   controller_->RemoveSink(sink_);
 }
 
-RtpStreamReceiverController::RtpStreamReceiverController() {
+RtpStreamReceiverController::RtpStreamReceiverController()
+    : lock_(/*recursive=*/true) {
   // At this level the demuxer is only configured to demux by SSRC, so don't
   // worry about MIDs (MIDs are handled by upper layers).
   demuxer_.set_use_mid(false);
