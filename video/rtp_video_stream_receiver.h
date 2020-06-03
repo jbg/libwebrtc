@@ -327,7 +327,7 @@ class RtpVideoStreamReceiver : public LossNotificationSender,
   bool receiving_ RTC_GUARDED_BY(worker_task_checker_);
   int64_t last_packet_log_ms_ RTC_GUARDED_BY(worker_task_checker_);
 
-  const std::unique_ptr<RtpRtcp> rtp_rtcp_;
+  const std::unique_ptr<DEPRECATED_RtpRtcp> rtp_rtcp_;
 
   video_coding::OnCompleteFrameCallback* complete_frame_callback_;
   KeyFrameRequestSender* const keyframe_request_sender_;
