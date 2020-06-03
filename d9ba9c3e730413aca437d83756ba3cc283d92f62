@@ -46,6 +46,63 @@
       "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62d7b70a_2081f855",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-03T09:50:51Z",
+      "side": 1,
+      "message": "It\u0027s probably a mistake to document this here; it should be an implementation detail. (Also, linked lists are probably the wrong implementation detail, but more on that below...)",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 24,
+        "endChar": 30
+      },
+      "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f02e342d_f21ffd1e",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-03T09:50:51Z",
+      "side": 1,
+      "message": "If I\u0027m guessing the meaning correctly, this should be e.g.\n\n\"A queue that allows more than one reader. Readers are independent, and all readers will see all elements; an inserted element stays in the queue until all readers have extracted it.\"",
+      "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76973bb2_251b35dd",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-03T09:50:51Z",
+      "side": 1,
+      "message": "Have you considered not building the low levels of this yourself? You could for example make a refcounted Node\u003cT\u003e class that holds a T, and then just have one std::queue\u003crtc::scoped_refptr\u003cNode\u003cT\u003e\u003e\u003e per head. (Or, if copying T is fine, just do std::queue\u003cT\u003e.) It may not be quite as efficient as building it yourself, but it should be much less work to build, review, and maintain.",
+      "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
