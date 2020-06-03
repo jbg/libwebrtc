@@ -195,7 +195,7 @@ class RtpSenderVideoTest : public ::testing::TestWithParam<bool> {
   SimulatedClock fake_clock_;
   LoopbackTransportTest transport_;
   RateLimiter retransmission_rate_limiter_;
-  std::unique_ptr<RtpRtcp> rtp_module_;
+  std::unique_ptr<ModuleRtpRtcpImpl2> rtp_module_;
   TestRtpSenderVideo rtp_sender_video_;
 };
 
@@ -948,7 +948,7 @@ class RtpSenderVideoWithFrameTransformerTest : public ::testing::Test {
   SimulatedClock fake_clock_;
   LoopbackTransportTest transport_;
   RateLimiter retransmission_rate_limiter_;
-  std::unique_ptr<RtpRtcp> rtp_module_;
+  std::unique_ptr<ModuleRtpRtcpImpl2> rtp_module_;
 };
 
 std::unique_ptr<EncodedImage> CreateDefaultEncodedImage() {
