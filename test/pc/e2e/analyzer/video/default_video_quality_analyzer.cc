@@ -66,6 +66,21 @@ double RateCounter::GetEventsPerSecond() const {
          (event_last_time_ - event_first_time_).us() * kMicrosPerSecond;
 }
 
+bool operator<(const StatsKey& a, const StatsKey& b) {
+  if (a.stream_label != b.stream_label) {
+    return a.stream_label < b.stream_label;
+  }
+  if (a.sender != b.sender) {
+    return a.sender < b.sender;
+  }
+  return a.receiver < b.receiver;
+}
+
+bool operator==(const StatsKey& a, const StatsKey& b) {
+  return a.stream_label == b.stream_label && a.sender == b.sender &&
+         a.receiver == b.receiver;
+}
+
 DefaultVideoQualityAnalyzer::DefaultVideoQualityAnalyzer(
     bool heavy_metrics_computation_enabled,
     int max_frames_in_flight_per_stream_count)
@@ -82,6 +97,10 @@ void DefaultVideoQualityAnalyzer::Start(
     rtc::ArrayView<const std::string> peer_names,
     int max_threads_count) {
   test_label_ = std::move(test_case_name);
+  for (int i = 0; i < static_cast<int>(peer_names.size()); ++i) {
+    peer_to_index_.insert({peer_names[i], i});
+    peer_by_index_.insert({i, peer_names[i]});
+  }
   for (int i = 0; i < max_threads_count; i++) {
     auto thread = std::make_unique<rtc::PlatformThread>(
         &DefaultVideoQualityAnalyzer::ProcessComparisonsThread, this,
@@ -107,54 +126,68 @@ uint16_t DefaultVideoQualityAnalyzer::OnFrameCaptured(
   // |next_frame_id| is atomic, so we needn't lock here.
   uint16_t frame_id = next_frame_id_++;
   Timestamp start_time = Timestamp::MinusInfinity();
+  int peer_index = peer_to_index_.at(std::string(peer_name));
   {
     rtc::CritScope crit(&lock_);
-    // Create a local copy of start_time_ to access it under |comparison_lock_|
-    // without holding a |lock_|
+    // Create a local copy of start_time_ to access it under
+    // |comparison_lock_| without holding a |lock_|
     start_time = start_time_;
   }
   {
     // Ensure stats for this stream exists.
     rtc::CritScope crit(&comparison_lock_);
-    if (stream_stats_.find(stream_label) == stream_stats_.end()) {
-      stream_stats_.insert({stream_label, StreamStats()});
-      // Assume that the first freeze was before first stream frame captured.
-      // This way time before the first freeze would be counted as time between
-      // freezes.
-      stream_last_freeze_end_time_.insert({stream_label, start_time});
+    // TODO(titovartem) maybe we need to make it faster...
+    for (auto& peer_entry : peer_to_index_) {
+      if (peer_index == peer_entry.second) {
+        continue;
+      }
+      StatsKey stats_key(stream_label, std::string(peer_name),
+                         peer_entry.first);
+      if (stream_stats_.find(stats_key) == stream_stats_.end()) {
+        stream_stats_.insert({stats_key, StreamStats()});
+        // Assume that the first freeze was before first stream frame captured.
+        // This way time before the first freeze would be counted as time
+        // between freezes.
+        stream_last_freeze_end_time_.insert({stats_key, start_time});
+      }
     }
   }
   {
     rtc::CritScope crit(&lock_);
+    stream_to_sender_[stream_label] = std::string(peer_name);
     frame_counters_.captured++;
-    stream_frame_counters_[stream_label].captured++;
+    for (auto& peer_entry : peer_by_index_) {
+      stream_frame_counters_[stream_label][peer_entry.first].captured++;
+    }
 
-    StreamState* state = &stream_states_[stream_label];
+    auto state_it = stream_states_.find(stream_label);
+    if (state_it == stream_states_.end()) {
+      stream_states_.insert(
+          {stream_label, StreamState(peer_index, peer_to_index_.size())});
+    }
+    StreamState* state = &stream_states_.at(stream_label);
     state->PushBack(frame_id);
     // Update frames in flight info.
     auto it = captured_frames_in_flight_.find(frame_id);
     if (it != captured_frames_in_flight_.end()) {
-      // We overflow uint16_t and hit previous frame id and this frame is still
-      // in flight. It means that this stream wasn't rendered for long time and
-      // we need to process existing frame as dropped.
-      auto stats_it = frame_stats_.find(frame_id);
-      RTC_DCHECK(stats_it != frame_stats_.end());
-
-      uint16_t oldest_frame_id = state->PopFront();
-      RTC_DCHECK_EQ(frame_id, oldest_frame_id);
-      frame_counters_.dropped++;
-      stream_frame_counters_[stream_label].dropped++;
-      AddComparison(it->second, absl::nullopt, true, stats_it->second);
+      // We overflow uint16_t and hit previous frame id and this frame is
+      // still in flight. It means that this stream wasn't rendered for long
+      // time and we need to process existing frame as dropped.
+      // uint16_t oldest_frame_id = state->PopFront();
+      // RTC_DCHECK_EQ(frame_id, oldest_frame_id);
+      // frame_counters_.dropped++;
+      // stream_frame_counters_[stream_label].dropped++;
+      // TODO(titovartem) fix for all peers
+      // AddComparison(it->second.frame(), absl::nullopt, true,
+      // stats_it->second);
 
       captured_frames_in_flight_.erase(it);
-      frame_stats_.erase(stats_it);
     }
-    captured_frames_in_flight_.insert(
-        std::pair<uint16_t, VideoFrame>(frame_id, frame));
+    captured_frames_in_flight_.emplace(
+        frame_id, FrameInFlight(stream_label, frame, /*captured_time=*/Now(),
+                                peer_to_index_.size()));
     // Set frame id on local copy of the frame
-    captured_frames_in_flight_.at(frame_id).set_id(frame_id);
-    frame_stats_.insert(std::pair<uint16_t, FrameStats>(
-        frame_id, FrameStats(stream_label, /*captured_time=*/Now())));
+    captured_frames_in_flight_.at(frame_id).SetFrameId(frame_id);
 
     // Update history stream<->frame mapping
     for (auto it = stream_to_frame_id_history_.begin();
@@ -167,8 +200,11 @@ uint16_t DefaultVideoQualityAnalyzer::OnFrameCaptured(
     // queued frame in order to avoid to use too much memory.
     if (state->GetAliveFramesCount() > max_frames_in_flight_per_stream_count_) {
       uint16_t frame_id_to_remove = state->MarkNextAliveFrameAsDead();
-      auto removed_count = captured_frames_in_flight_.erase(frame_id_to_remove);
-      RTC_DCHECK_EQ(removed_count, 1)
+      auto it = captured_frames_in_flight_.find(frame_id_to_remove);
+      RTC_DCHECK(it != captured_frames_in_flight_.end())
+          << "Alive frame not found";
+      bool is_removed = it->second.RemoveFrame();
+      RTC_DCHECK(is_removed)
           << "Invalid stream state: alive frame is removed already";
     }
   }
@@ -179,12 +215,15 @@ void DefaultVideoQualityAnalyzer::OnFramePreEncode(
     absl::string_view peer_name,
     const webrtc::VideoFrame& frame) {
   rtc::CritScope crit(&lock_);
-  auto it = frame_stats_.find(frame.id());
-  RTC_DCHECK(it != frame_stats_.end())
+  auto it = captured_frames_in_flight_.find(frame.id());
+  RTC_DCHECK(it != captured_frames_in_flight_.end())
       << "Frame id=" << frame.id() << " not found";
   frame_counters_.pre_encoded++;
-  stream_frame_counters_[it->second.stream_label].pre_encoded++;
-  it->second.pre_encode_time = Now();
+  for (auto& peer_entry : peer_by_index_) {
+    stream_frame_counters_[it->second.stream_label()][peer_entry.first]
+        .pre_encoded++;
+  }
+  it->second.SetPreEncodeTime(Now());
 }
 
 void DefaultVideoQualityAnalyzer::OnFrameEncoded(
@@ -193,18 +232,22 @@ void DefaultVideoQualityAnalyzer::OnFrameEncoded(
     const webrtc::EncodedImage& encoded_image,
     const EncoderStats& stats) {
   rtc::CritScope crit(&lock_);
-  auto it = frame_stats_.find(frame_id);
-  RTC_DCHECK(it != frame_stats_.end());
+  auto it = captured_frames_in_flight_.find(frame_id);
+  RTC_DCHECK(it != captured_frames_in_flight_.end());
   // For SVC we can receive multiple encoded images for one frame, so to cover
   // all cases we have to pick the last encode time.
-  if (it->second.encoded_time.IsInfinite()) {
+  if (it->second.encoded_time().IsInfinite()) {
     // Increase counters only when we meet this frame first time.
     frame_counters_.encoded++;
-    stream_frame_counters_[it->second.stream_label].encoded++;
+    for (auto& peer_entry : peer_by_index_) {
+      stream_frame_counters_[it->second.stream_label()][peer_entry.first]
+          .encoded++;
+    }
   }
-  it->second.encoded_time = Now();
-  it->second.encoded_image_size = encoded_image.size();
-  it->second.target_encode_bitrate += stats.target_encode_bitrate;
+  // TODO squash into single method
+  it->second.SetEncodedTime(Now());
+  it->second.SetEncodedImageSize(encoded_image.size());
+  it->second.AddTargetEncodeBitrate(stats.target_encode_bitrate);
 }
 
 void DefaultVideoQualityAnalyzer::OnFrameDropped(
@@ -218,14 +261,16 @@ void DefaultVideoQualityAnalyzer::OnFramePreDecode(
     uint16_t frame_id,
     const webrtc::EncodedImage& input_image) {
   rtc::CritScope crit(&lock_);
-  auto it = frame_stats_.find(frame_id);
-  RTC_DCHECK(it != frame_stats_.end());
-  RTC_DCHECK(it->second.received_time.IsInfinite())
+  auto it = captured_frames_in_flight_.find(frame_id);
+  RTC_DCHECK(it != captured_frames_in_flight_.end());
+
+  int peer_index = peer_to_index_.at(std::string(peer_name));
+  RTC_DCHECK(!it->second.has_received_time(peer_index))
       << "Received multiple spatial layers for stream_label="
-      << it->second.stream_label;
+      << it->second.stream_label();
   frame_counters_.received++;
-  stream_frame_counters_[it->second.stream_label].received++;
-  it->second.decode_start_time = Now();
+  stream_frame_counters_[it->second.stream_label()][peer_index].received++;
+  it->second.SetDecodeStartTime(peer_index, Now());
   // Determine the time of the last received packet of this video frame.
   RTC_DCHECK(!input_image.PacketInfos().empty());
   int64_t last_receive_time =
@@ -235,7 +280,7 @@ void DefaultVideoQualityAnalyzer::OnFramePreDecode(
                          return a.receive_time_ms() < b.receive_time_ms();
                        })
           ->receive_time_ms();
-  it->second.received_time = Timestamp::Millis(last_receive_time);
+  it->second.SetReceivedTime(peer_index, Timestamp::Millis(last_receive_time));
 }
 
 void DefaultVideoQualityAnalyzer::OnFrameDecoded(
@@ -243,11 +288,12 @@ void DefaultVideoQualityAnalyzer::OnFrameDecoded(
     const webrtc::VideoFrame& frame,
     const DecoderStats& stats) {
   rtc::CritScope crit(&lock_);
-  auto it = frame_stats_.find(frame.id());
-  RTC_DCHECK(it != frame_stats_.end());
+  auto it = captured_frames_in_flight_.find(frame.id());
+  RTC_DCHECK(it != captured_frames_in_flight_.end());
   frame_counters_.decoded++;
-  stream_frame_counters_[it->second.stream_label].decoded++;
-  it->second.decode_end_time = Now();
+  int peer_index = peer_to_index_.at(std::string(peer_name));
+  stream_frame_counters_[it->second.stream_label()][peer_index].decoded++;
+  it->second.SetDecodeEndTime(peer_index, Now());
 }
 
 void DefaultVideoQualityAnalyzer::OnFrameRendered(
@@ -259,80 +305,74 @@ void DefaultVideoQualityAnalyzer::OnFrameRendered(
   frame.set_video_frame_buffer(
       I420Buffer::Copy(*raw_frame.video_frame_buffer()->ToI420()));
 
+  int peer_index = peer_to_index_.at(std::string(peer_name));
+
   rtc::CritScope crit(&lock_);
-  auto stats_it = frame_stats_.find(frame.id());
-  RTC_DCHECK(stats_it != frame_stats_.end());
-  FrameStats* frame_stats = &stats_it->second;
-  // Update frames counters.
-  frame_counters_.rendered++;
-  stream_frame_counters_[frame_stats->stream_label].rendered++;
-
-  // Update current frame stats.
-  frame_stats->rendered_time = Now();
-  frame_stats->rendered_frame_width = frame.width();
-  frame_stats->rendered_frame_height = frame.height();
-
   // Find corresponding captured frame.
   auto frame_it = captured_frames_in_flight_.find(frame.id());
-  absl::optional<VideoFrame> captured_frame =
-      frame_it != captured_frames_in_flight_.end()
-          ? absl::optional<VideoFrame>(frame_it->second)
-          : absl::nullopt;
+  RTC_DCHECK(frame_it != captured_frames_in_flight_.end());
+  FrameInFlight* frame_in_flight = &frame_it->second;
+  absl::optional<VideoFrame> captured_frame = frame_in_flight->frame();
+  // Update frames counters.
+  frame_counters_.rendered++;
+  stream_frame_counters_[frame_in_flight->stream_label()][peer_index]
+      .rendered++;
+
+  // Update current frame stats.
+  frame_in_flight->SetRenderedTime(peer_index, Now());
+  frame_in_flight->SetRenderedFrameSize(peer_index, frame.width(),
+                                        frame.height());
 
   // After we received frame here we need to check if there are any dropped
   // frames between this one and last one, that was rendered for this video
   // stream.
 
-  const std::string& stream_label = frame_stats->stream_label;
-  StreamState* state = &stream_states_[stream_label];
+  const std::string& stream_label = frame_in_flight->stream_label();
+  StreamState* state = &stream_states_.at(stream_label);
+  const StatsKey stats_key(stream_label, peer_by_index_[state->owner()],
+                           std::string(peer_name));
   int dropped_count = 0;
-  while (!state->Empty() && state->Front() != frame.id()) {
+  while (!state->Empty() && state->Front(peer_index) != frame.id()) {
     dropped_count++;
-    uint16_t dropped_frame_id = state->PopFront();
+    uint16_t dropped_frame_id = state->PopFront(peer_index);
     // Frame with id |dropped_frame_id| was dropped. We need:
     // 1. Update global and stream frame counters
     // 2. Extract corresponding frame from |captured_frames_in_flight_|
-    // 3. Extract corresponding frame stats from |frame_stats_|
-    // 4. Send extracted frame to comparison with dropped=true
-    // 5. Cleanup dropped frame
+    // 3. Send extracted frame to comparison with dropped=true
+    // . Cleanup dropped frame
     frame_counters_.dropped++;
-    stream_frame_counters_[stream_label].dropped++;
+    stream_frame_counters_[stream_label][peer_index].dropped++;
 
-    auto dropped_frame_stats_it = frame_stats_.find(dropped_frame_id);
-    RTC_DCHECK(dropped_frame_stats_it != frame_stats_.end());
     auto dropped_frame_it = captured_frames_in_flight_.find(dropped_frame_id);
-    absl::optional<VideoFrame> dropped_frame =
-        dropped_frame_it != captured_frames_in_flight_.end()
-            ? absl::optional<VideoFrame>(dropped_frame_it->second)
-            : absl::nullopt;
+    RTC_DCHECK(dropped_frame_it != captured_frames_in_flight_.end());
+    absl::optional<VideoFrame> dropped_frame = dropped_frame_it->second.frame();
 
-    AddComparison(dropped_frame, absl::nullopt, true,
-                  dropped_frame_stats_it->second);
+    AddComparison(stats_key, dropped_frame, absl::nullopt, true,
+                  dropped_frame_it->second.GetStatsForPeer(peer_index));
 
-    frame_stats_.erase(dropped_frame_stats_it);
-    if (dropped_frame_it != captured_frames_in_flight_.end()) {
+    if (dropped_frame_it->second.IsAllReceived()) {
       captured_frames_in_flight_.erase(dropped_frame_it);
     }
   }
   RTC_DCHECK(!state->Empty());
-  state->PopFront();
+  state->PopFront(peer_index);
 
-  if (state->last_rendered_frame_time()) {
-    frame_stats->prev_frame_rendered_time =
-        state->last_rendered_frame_time().value();
+  if (state->last_rendered_frame_time(peer_index)) {
+    frame_in_flight->SetPrevFrameRenderedTime(
+        peer_index, state->last_rendered_frame_time(peer_index).value());
   }
-  state->set_last_rendered_frame_time(frame_stats->rendered_time);
+  state->set_last_rendered_frame_time(
+      peer_index, frame_in_flight->rendered_time(peer_index));
   {
     rtc::CritScope cr(&comparison_lock_);
-    stream_stats_[stream_label].skipped_between_rendered.AddSample(
-        dropped_count);
+    stream_stats_[stats_key].skipped_between_rendered.AddSample(dropped_count);
   }
-  AddComparison(captured_frame, frame, false, *frame_stats);
+  AddComparison(stats_key, captured_frame, frame, false,
+                frame_in_flight->GetStatsForPeer(peer_index));
 
-  if (frame_it != captured_frames_in_flight_.end()) {
+  if (frame_it->second.IsAllReceived()) {
     captured_frames_in_flight_.erase(frame_it);
   }
-  frame_stats_.erase(stats_it);
 }
 
 void DefaultVideoQualityAnalyzer::OnEncoderError(
@@ -374,18 +414,30 @@ void DefaultVideoQualityAnalyzer::Stop() {
     // between freezes.
     rtc::CritScope crit1(&lock_);
     rtc::CritScope crit2(&comparison_lock_);
-    for (auto& item : stream_stats_) {
-      const StreamState& state = stream_states_[item.first];
-      // If there are no freezes in the call we have to report
-      // time_between_freezes_ms as call duration and in such case
-      // |stream_last_freeze_end_time_| for this stream will be |start_time_|.
-      // If there is freeze, then we need add time from last rendered frame
-      // to last freeze end as time between freezes.
-      if (state.last_rendered_frame_time()) {
-        item.second.time_between_freezes_ms.AddSample(
-            (state.last_rendered_frame_time().value() -
-             stream_last_freeze_end_time_.at(item.first))
-                .ms());
+    for (auto& state_entry : stream_states_) {
+      const std::string& stream_label = state_entry.first;
+      const StreamState& stream_state = state_entry.second;
+      for (auto& peer_entry : peer_to_index_) {
+        const std::string& peer_name = peer_entry.first;
+        const int peer_index = peer_entry.second;
+
+        if (peer_index == stream_state.owner()) {
+          continue;
+        }
+
+        StatsKey stats_key(stream_label, peer_by_index_[stream_state.owner()],
+                           peer_name);
+
+        // If there are no freezes in the call we have to report
+        // time_between_freezes_ms as call duration and in such case
+        // |stream_last_freeze_end_time_| for this stream will be |start_time_|.
+        // If there is freeze, then we need add time from last rendered frame
+        // to last freeze end as time between freezes.
+        if (stream_state.last_rendered_frame_time(peer_index)) {
+          stream_stats_[stats_key].time_between_freezes_ms.AddSample(
+              stream_state.last_rendered_frame_time(peer_index).value().ms() -
+              stream_last_freeze_end_time_.at(stats_key).ms());
+        }
       }
     }
   }
@@ -394,9 +446,9 @@ void DefaultVideoQualityAnalyzer::Stop() {
 
 std::string DefaultVideoQualityAnalyzer::GetStreamLabel(uint16_t frame_id) {
   rtc::CritScope crit1(&lock_);
-  auto it = frame_stats_.find(frame_id);
-  if (it != frame_stats_.end()) {
-    return it->second.stream_label;
+  auto it = captured_frames_in_flight_.find(frame_id);
+  if (it != captured_frames_in_flight_.end()) {
+    return it->second.stream_label();
   }
   for (auto hist_it = stream_to_frame_id_history_.begin();
        hist_it != stream_to_frame_id_history_.end(); ++hist_it) {
@@ -408,10 +460,9 @@ std::string DefaultVideoQualityAnalyzer::GetStreamLabel(uint16_t frame_id) {
   RTC_CHECK(false) << "Unknown frame_id=" << frame_id;
 }
 
-std::set<std::string> DefaultVideoQualityAnalyzer::GetKnownVideoStreams()
-    const {
+std::set<StatsKey> DefaultVideoQualityAnalyzer::GetKnownVideoStreams() const {
   rtc::CritScope crit2(&comparison_lock_);
-  std::set<std::string> out;
+  std::set<StatsKey> out;
   for (auto& item : stream_stats_) {
     out.insert(item.first);
   }
@@ -423,14 +474,25 @@ const FrameCounters& DefaultVideoQualityAnalyzer::GetGlobalCounters() const {
   return frame_counters_;
 }
 
-const std::map<std::string, FrameCounters>&
+std::map<StatsKey, FrameCounters>
 DefaultVideoQualityAnalyzer::GetPerStreamCounters() const {
   rtc::CritScope crit(&lock_);
-  return stream_frame_counters_;
+  std::map<StatsKey, FrameCounters> out;
+  for (auto& stream_entry : stream_frame_counters_) {
+    const std::string& stream_label = stream_entry.first;
+    for (auto& receiver_entry : stream_entry.second) {
+      const int receiver_index = receiver_entry.first;
+      const FrameCounters& counters = receiver_entry.second;
+
+      StatsKey stats_key(stream_label, stream_to_sender_.at(stream_label),
+                         peer_by_index_.at(receiver_index));
+      out.insert({stats_key, counters});
+    }
+  }
+  return out;
 }
 
-std::map<std::string, StreamStats> DefaultVideoQualityAnalyzer::GetStats()
-    const {
+std::map<StatsKey, StreamStats> DefaultVideoQualityAnalyzer::GetStats() const {
   rtc::CritScope cri(&comparison_lock_);
   return stream_stats_;
 }
@@ -441,6 +503,7 @@ AnalyzerStats DefaultVideoQualityAnalyzer::GetAnalyzerStats() const {
 }
 
 void DefaultVideoQualityAnalyzer::AddComparison(
+    StatsKey stats_key,
     absl::optional<VideoFrame> captured,
     absl::optional<VideoFrame> rendered,
     bool dropped,
@@ -451,15 +514,17 @@ void DefaultVideoQualityAnalyzer::AddComparison(
   // If there too many computations waiting in the queue, we won't provide
   // frames itself to make future computations lighter.
   if (comparisons_.size() >= kMaxActiveComparisons) {
-    comparisons_.emplace_back(absl::nullopt, absl::nullopt, dropped,
-                              frame_stats, OverloadReason::kCpu);
+    comparisons_.emplace_back(std::move(stats_key), absl::nullopt,
+                              absl::nullopt, dropped, frame_stats,
+                              OverloadReason::kCpu);
   } else {
     OverloadReason overload_reason = OverloadReason::kNone;
     if (!captured && !dropped) {
       overload_reason = OverloadReason::kMemory;
     }
-    comparisons_.emplace_back(std::move(captured), std::move(rendered), dropped,
-                              frame_stats, overload_reason);
+    comparisons_.emplace_back(std::move(stats_key), std::move(captured),
+                              std::move(rendered), dropped, frame_stats,
+                              overload_reason);
   }
   comparison_available_event_.Set();
   StopExcludingCpuThreadTime();
@@ -519,7 +584,7 @@ void DefaultVideoQualityAnalyzer::ProcessComparison(
   const FrameStats& frame_stats = comparison.frame_stats;
 
   rtc::CritScope crit(&comparison_lock_);
-  auto stats_it = stream_stats_.find(frame_stats.stream_label);
+  auto stats_it = stream_stats_.find(comparison.stats_key);
   RTC_CHECK(stats_it != stream_stats_.end());
   StreamStats* stats = &stats_it->second;
   analyzer_stats_.comparisons_done++;
@@ -573,7 +638,7 @@ void DefaultVideoQualityAnalyzer::ProcessComparison(
                    3 * average_time_between_rendered_frames_ms)) {
         stats->freeze_time_ms.AddSample(time_between_rendered_frames.ms());
         auto freeze_end_it =
-            stream_last_freeze_end_time_.find(frame_stats.stream_label);
+            stream_last_freeze_end_time_.find(comparison.stats_key);
         RTC_DCHECK(freeze_end_it != stream_last_freeze_end_time_.end());
         stats->time_between_freezes_ms.AddSample(
             (frame_stats.prev_frame_rendered_time - freeze_end_it->second)
@@ -590,15 +655,18 @@ void DefaultVideoQualityAnalyzer::ReportResults() {
   rtc::CritScope crit1(&lock_);
   rtc::CritScope crit2(&comparison_lock_);
   for (auto& item : stream_stats_) {
-    ReportResults(GetTestCaseName(item.first), item.second,
-                  stream_frame_counters_.at(item.first));
+    ReportResults(GetTestCaseName(item.first.ToString()), item.second,
+                  stream_frame_counters_.at(item.first.stream_label)
+                      .at(peer_to_index_[item.first.receiver]));
   }
   test::PrintResult("cpu_usage", "", test_label_.c_str(), GetCpuUsagePercent(),
                     "%", false, ImproveDirection::kSmallerIsBetter);
   LogFrameCounters("Global", frame_counters_);
   for (auto& item : stream_stats_) {
-    LogFrameCounters(item.first, stream_frame_counters_.at(item.first));
-    LogStreamInternalStats(item.first, item.second);
+    LogFrameCounters(item.first.ToString(),
+                     stream_frame_counters_.at(item.first.stream_label)
+                         .at(peer_to_index_[item.first.receiver]));
+    LogStreamInternalStats(item.first.ToString(), item.second);
   }
   if (!analyzer_stats_.comparisons_queue_size.IsEmpty()) {
     RTC_LOG(INFO) << "comparisons_queue_size min="
@@ -753,35 +821,36 @@ double DefaultVideoQualityAnalyzer::GetCpuUsagePercent() {
   return static_cast<double>(cpu_time_) / wallclock_time_ * 100.0;
 }
 
-DefaultVideoQualityAnalyzer::FrameStats::FrameStats(std::string stream_label,
-                                                    Timestamp captured_time)
-    : stream_label(std::move(stream_label)), captured_time(captured_time) {}
-
 DefaultVideoQualityAnalyzer::FrameComparison::FrameComparison(
+    StatsKey stats_key,
     absl::optional<VideoFrame> captured,
     absl::optional<VideoFrame> rendered,
     bool dropped,
     FrameStats frame_stats,
     OverloadReason overload_reason)
-    : captured(std::move(captured)),
+    : stats_key(std::move(stats_key)),
+      captured(std::move(captured)),
       rendered(std::move(rendered)),
       dropped(dropped),
       frame_stats(std::move(frame_stats)),
       overload_reason(overload_reason) {}
 
-uint16_t DefaultVideoQualityAnalyzer::StreamState::PopFront() {
-  uint16_t frame_id = frame_ids_.front();
-  frame_ids_.pop_front();
-  if (dead_frames_count_ > 0) {
+uint16_t DefaultVideoQualityAnalyzer::StreamState::PopFront(int peer) {
+  size_t size_before = frame_ids_.size();
+  absl::optional<uint16_t> frame_id = frame_ids_.PopFront(peer);
+  RTC_DCHECK(frame_id.has_value());
+  size_t size_after = frame_ids_.size();
+  if ((dead_frames_count_ > 0) && (size_after < size_before)) {
     dead_frames_count_--;
   }
-  return frame_id;
+  return frame_id.value();
 }
 
 uint16_t DefaultVideoQualityAnalyzer::StreamState::MarkNextAliveFrameAsDead() {
-  uint16_t frame_id = frame_ids_[dead_frames_count_];
+  absl::optional<uint16_t> frame_id = frame_ids_.PopFront(owner_);
+  RTC_DCHECK(frame_id.has_value());
   dead_frames_count_++;
-  return frame_id;
+  return frame_id.value();
 }
 
 }  // namespace webrtc_pc_e2e
