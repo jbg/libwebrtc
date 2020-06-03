@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "af3eac0b_3350275d",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-03T22:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98e6cabe_e22b97b5",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 16
+      },
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c0641f5_b3902df8",
         "filename": "media/sctp/sctp_transport.cc",
         "patchSetId": 1
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "ba7bded6_49f5b3bb",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-03T22:46:35Z",
+      "side": 1,
+      "message": "I don\u0027t see how we can avoid it being global, but I at least now have it being destroyed.",
+      "parentUuid": "10c25fcc_72145f92",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd845f1b_9b799949",
         "filename": "media/sctp/sctp_transport.cc",
         "patchSetId": 1
@@ -77,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "832cc50a_d077c465",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-03T22:46:35Z",
+      "side": 1,
+      "message": "I was doing RTC_CHECK at the call site. Do you want me to change it to DCHECK or move it here?",
+      "parentUuid": "cd845f1b_9b799949",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7b748f4_ef5faaca",
         "filename": "media/sctp/sctp_transport.cc",
         "patchSetId": 1
@@ -88,6 +148,24 @@
       "writtenOn": "2020-06-03T06:39:32Z",
       "side": 1,
       "message": "take a look at the new lock type that Markus just introduced (absl mutex based)",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43712b43_26bad520",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-03T22:46:35Z",
+      "side": 1,
+      "message": "Where is this? I can\u0027t find anything in the git log and don\u0027t see any instance of absl::Mutex in the code base.",
+      "parentUuid": "f7b748f4_ef5faaca",
       "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -111,6 +189,24 @@
     },
     {
       "key": {
+        "uuid": "0e993900_e35c528a",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-03T22:46:35Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a problem that the address is being shared with the peer, since this negates ASLR and gives an attacker more information. It\u0027s also a problem that we don\u0027t vet the value.",
+      "parentUuid": "6e59813e_07585dc6",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc1938ad_58163a48",
         "filename": "media/sctp/sctp_transport.cc",
         "patchSetId": 1
@@ -128,6 +224,24 @@
     },
     {
       "key": {
+        "uuid": "c890c708_6f0b5d51",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-03T22:46:35Z",
+      "side": 1,
+      "message": "Ah, I suppose it will!",
+      "parentUuid": "fc1938ad_58163a48",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e27e3a05_3c3458a9",
         "filename": "media/sctp/sctp_transport.cc",
         "patchSetId": 1
@@ -142,6 +256,24 @@
       "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f158f64_8d9b81e2",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-03T22:46:35Z",
+      "side": 1,
+      "message": "Not every callback gives us the socket* pointer (specifically, OnSctpOutboundPacket doesn\u0027t).",
+      "parentUuid": "e27e3a05_3c3458a9",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
