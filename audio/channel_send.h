@@ -30,7 +30,6 @@ namespace webrtc {
 class FrameEncryptorInterface;
 class ProcessThread;
 class RtcEventLog;
-class RtpRtcp;
 class RtpTransportControllerSendInterface;
 
 struct CallSendStatistics {
@@ -97,7 +96,7 @@ class ChannelSendInterface {
 
   virtual void ProcessAndEncodeAudio(
       std::unique_ptr<AudioFrame> audio_frame) = 0;
-  virtual RtpRtcp* GetRtpRtcp() const = 0;
+  virtual RtpRtcpInterface* GetRtpRtcp() const = 0;
 
   // In RTP we currently rely on RTCP packets (|ReceivedRTCPPacket|) to inform
   // about RTT.

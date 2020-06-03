@@ -95,7 +95,7 @@ class AudioIngressTest : public ::testing::Test {
   SineWaveGenerator wave_generator_;
   NiceMock<MockTransport> transport_;
   std::unique_ptr<ReceiveStatistics> receive_statistics_;
-  std::unique_ptr<RtpRtcp> rtp_rtcp_;
+  std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp_;
   rtc::scoped_refptr<AudioEncoderFactory> encoder_factory_;
   rtc::scoped_refptr<AudioDecoderFactory> decoder_factory_;
   std::unique_ptr<TaskQueueFactory> task_queue_factory_;

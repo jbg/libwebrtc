@@ -63,7 +63,9 @@ class RtxLoopBackTransport : public webrtc::Transport {
         count_rtx_ssrc_(0),
         module_(NULL) {}
 
-  void SetSendModule(RtpRtcp* rtpRtcpModule) { module_ = rtpRtcpModule; }
+  void SetSendModule(RtpRtcpInterface* rtpRtcpModule) {
+    module_ = rtpRtcpModule;
+  }
 
   void DropEveryNthPacket(int n) { packet_loss_ = n; }
 
@@ -109,7 +111,7 @@ class RtxLoopBackTransport : public webrtc::Transport {
   int consecutive_drop_end_;
   uint32_t rtx_ssrc_;
   int count_rtx_ssrc_;
-  RtpRtcp* module_;
+  RtpRtcpInterface* module_;
   RtpStreamReceiverController stream_receiver_controller_;
   std::set<uint16_t> expected_sequence_numbers_;
 };
@@ -224,7 +226,7 @@ class RtpRtcpRtxNackTest : public ::testing::Test {
   }
 
   std::unique_ptr<ReceiveStatistics> receive_statistics_;
-  std::unique_ptr<RtpRtcp> rtp_rtcp_module_;
+  std::unique_ptr<ModuleRtpRtcpImpl2> rtp_rtcp_module_;
   std::unique_ptr<RTPSenderVideo> rtp_sender_video_;
   RtxLoopBackTransport transport_;
   const std::map<int, int> rtx_associated_payload_types_ = {
