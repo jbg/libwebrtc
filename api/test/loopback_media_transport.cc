@@ -147,7 +147,7 @@ MediaTransportPair::~MediaTransportPair() = default;
 
 MediaTransportPair::LoopbackDataChannelTransport::LoopbackDataChannelTransport(
     rtc::Thread* thread)
-    : thread_(thread) {}
+    : thread_(thread), sink_lock_(/*recursive=*/true) {}
 
 MediaTransportPair::LoopbackDataChannelTransport::
     ~LoopbackDataChannelTransport() {

@@ -24,7 +24,11 @@ namespace rtc {
 ///////////////////////////////////////////////////////////////////////////////
 
 DEPRECATED_SignalThread::DEPRECATED_SignalThread()
-    : main_(Thread::Current()), worker_(this), state_(kInit), refcount_(1) {
+    : main_(Thread::Current()),
+      worker_(this),
+      cs_(/*recursive=*/true),
+      state_(kInit),
+      refcount_(1) {
   main_->SignalQueueDestroyed.connect(
       this, &DEPRECATED_SignalThread::OnMainThreadDestroyed);
   worker_.SetName("SignalThread", this);
