@@ -103,6 +103,24 @@
       "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e40188c9_9613253c",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-03T10:20:14Z",
+      "side": 1,
+      "message": "Yep, I was thinking about it, basically even having separate stream state per each participant, so separate queue. The expected type for T is uint16_t, so it\u0027s not big one. Also switching to multiple queue will make size method linear instead of O(1), but on other case amount of heads expected to be ~3-5. So it\u0027s questionable. WDYT?",
+      "parentUuid": "76973bb2_251b35dd",
+      "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
