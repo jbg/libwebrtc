@@ -195,6 +195,9 @@ class RtpTransceiver final
   }
   std::vector<RtpHeaderExtensionCapability> HeaderExtensionsToOffer()
       const override;
+  RTCError SetOfferedRtpHeaderExtensions(
+      rtc::ArrayView<RtpHeaderExtensionCapability> header_extensions_to_offer)
+      override;
 
  private:
   void OnFirstPacketReceived(cricket::ChannelInterface* channel);
@@ -220,7 +223,7 @@ class RtpTransceiver final
   cricket::ChannelInterface* channel_ = nullptr;
   cricket::ChannelManager* channel_manager_ = nullptr;
   std::vector<RtpCodecCapability> codec_preferences_;
-  std::vector<RtpHeaderExtensionCapability> HeaderExtensionsToOffer_;
+  std::vector<RtpHeaderExtensionCapability> header_extensions_to_offer_;
 };
 
 BEGIN_SIGNALING_PROXY_MAP(RtpTransceiver)
