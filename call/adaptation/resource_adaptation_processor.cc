@@ -139,6 +139,12 @@ void ResourceAdaptationProcessor::RemoveResource(
   RTC_DCHECK(!is_resource_adaptation_enabled_);
   auto it = std::find(resources_.begin(), resources_.end(), resource);
   RTC_DCHECK(it != resources_.end());
+  auto most_limited_resources = FindMostLimitedResources().first;
+  if (most_limited_resources.size() == 1 &&
+      most_limited_resources.front() == resource) {
+    // The resource is most limited.
+    RemoveMostLimitedResourceRestrictions();
+  }
   resources_.erase(it);
 }
 
@@ -502,5 +508,7 @@ void ResourceAdaptationProcessor::UpdateResourceLimitations(
         reason_resource, adaptation_limits_by_resources_);
   }
 }
+
+void ResourceAdaptationProcessor::RemoveMostLimitedResourceRestrictions() {}
 
 }  // namespace webrtc

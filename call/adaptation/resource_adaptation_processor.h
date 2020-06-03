@@ -191,6 +191,7 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   // Resource::OnResourceUsageStateMeasured() ->
   // ResourceAdaptationProcessor::OnResourceOveruse() // Boom, not allowed.
   bool processing_in_progress_ RTC_GUARDED_BY(sequence_checker_);
+  void RemoveMostLimitedResourceRestrictions();
 };
 
 }  // namespace webrtc
