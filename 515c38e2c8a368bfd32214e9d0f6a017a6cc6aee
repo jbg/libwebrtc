@@ -111,6 +111,23 @@
     },
     {
       "key": {
+        "uuid": "fc1938ad_58163a48",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 6305
+      },
+      "writtenOn": "2020-06-03T07:10:40Z",
+      "side": 1,
+      "message": "Seems like this CL will also fix the issue: https://github.com/sctplab/usrsctp/issues/405 👍",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e27e3a05_3c3458a9",
         "filename": "media/sctp/sctp_transport.cc",
         "patchSetId": 1
