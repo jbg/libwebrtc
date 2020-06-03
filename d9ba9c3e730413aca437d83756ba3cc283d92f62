@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "143d69b3_a85549f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-03T09:37:40Z",
+      "side": 1,
+      "message": "Can you expand a bit more about why this is needed and which alternatives have been considered?\n\nI guess it is for a test case with this framework but having more info helps to review (and maybe find alternative solutions).",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
