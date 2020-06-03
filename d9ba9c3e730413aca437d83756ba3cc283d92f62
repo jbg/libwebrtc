@@ -139,6 +139,24 @@
       "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa4a70b9_144fe855",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-03T11:24:01Z",
+      "side": 1,
+      "message": "About size() - yep, it should return size of the longest queue.\nThe max queue size that is expected is max(uint16_t), but usually it\u0027s under 2k elements in max.\n\nOk, let me rewrite it then on multiqueue based implementation.",
+      "parentUuid": "3b3a4c88_50f81095",
+      "revId": "d9ba9c3e730413aca437d83756ba3cc283d92f62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
