@@ -31,6 +31,9 @@ WebRTC is written in C++14, but with some restrictions:
 
 [chromium-cpp]: https://chromium-cpp.appspot.com/
 
+Unlike the Chromium and Google C++ style guides, we do not allow C++20-style
+designated initializers.
+
 ### Abseil
 
 You may use a subset of the utilities provided by the [Abseil][abseil]
