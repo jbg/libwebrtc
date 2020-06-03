@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c0641f5_b3902df8",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-03T06:09:38Z",
+      "side": 1,
+      "message": "This is an invisible static global. Is that OK with the current guidelines?\nIn particular - who destroys it, and when?\n\nhttps://google.github.io/styleguide/cppguide.html#Static_and_Global_Variables\n\nIn most cases, the map size will be ~\u003d number of PeerConnections with DataChannel initialized, so order-of-magnitude 1 in normal case, up to 500 in exceptional cases.\n\nNot that big a deal to leave lying around, but still irritating.",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e27e3a05_3c3458a9",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-03T06:09:38Z",
+      "side": 1,
+      "message": "Deeper question: If we have a table ... why do we need the id at all?\nWhy can\u0027t we use the struct socket* pointer as the lookup key for finding the SctpTransport object?\nAnd if so, can we just set the id to a constant value (which leaks the minimum amount of info)?",
+      "revId": "515c38e2c8a368bfd32214e9d0f6a017a6cc6aee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
