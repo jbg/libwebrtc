@@ -50,8 +50,7 @@ namespace rtcp {
 class TransportFeedback;
 }
 
-// TODO(tommi): See if we can remove Module.
-class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
+class RtpRtcpInterface : public RtcpFeedbackSenderInterface {
  public:
   struct Configuration {
     Configuration() = default;
@@ -159,16 +158,6 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
     RTC_DISALLOW_COPY_AND_ASSIGN(Configuration);
   };
 
-  // DEPRECATED. Do not use. Currently instantiates a deprecated version of the
-  // RtpRtcp module.
-  static std::unique_ptr<RtpRtcp> RTC_DEPRECATED
-  Create(const Configuration& configuration) {
-    return DEPRECATED_Create(configuration);
-  }
-
-  static std::unique_ptr<RtpRtcp> DEPRECATED_Create(
-      const Configuration& configuration);
-
   // **************************************************************************
   // Receiver functions
   // **************************************************************************
@@ -199,11 +188,6 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
 
   virtual void SetExtmapAllowMixed(bool extmap_allow_mixed) = 0;
 
-  // (De)registers RTP header extension type and id.
-  // Returns -1 on failure else 0.
-  RTC_DEPRECATED virtual int32_t RegisterSendRtpHeaderExtension(
-      RTPExtensionType type,
-      uint8_t id) = 0;
   // Register extension by uri, triggers CHECK on falure.
   virtual void RegisterRtpHeaderExtension(absl::string_view uri, int id) = 0;
 
@@ -470,6 +454,32 @@ class RtpRtcp : public Module, public RtcpFeedbackSenderInterface {
                                        uint16_t last_received_seq_num,
                                        bool decodability_flag,
                                        bool buffering_allowed) = 0;
+};
+
+// DEPRECATED.
+class RtpRtcp : public Module, public RtpRtcpInterface {
+ public:
+  // DEPRECATED. Do not use. Currently instantiates a deprecated version of the
+  // RtpRtcp module.
+  static std::unique_ptr<RtpRtcp> RTC_DEPRECATED
+  Create(const Configuration& configuration) {
+    return DEPRECATED_Create(configuration);
+  }
+
+  static std::unique_ptr<RtpRtcp> DEPRECATED_Create(
+      const Configuration& configuration);
+
+  // (De)registers RTP header extension type and id.
+  // Returns -1 on failure else 0.
+  RTC_DEPRECATED virtual int32_t RegisterSendRtpHeaderExtension(
+      RTPExtensionType type,
+      uint8_t id) = 0;
+
+  // Requests new key frame.
+  // using PLI, https://tools.ietf.org/html/rfc4585#section-6.3.1.1
+  void SendPictureLossIndication() { SendRTCP(kRtcpPli); }
+  // using FIR, https://tools.ietf.org/html/rfc5104#section-4.3.1.2
+  void SendFullIntraRequest() { SendRTCP(kRtcpFir); }
 };
 
 }  // namespace webrtc

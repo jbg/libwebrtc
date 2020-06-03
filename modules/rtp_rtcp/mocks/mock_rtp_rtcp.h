@@ -27,7 +27,7 @@
 
 namespace webrtc {
 
-class MockRtpRtcp : public RtpRtcp {
+class MockRtpRtcpInterface : public RtpRtcpInterface {
  public:
   MOCK_METHOD(void,
               IncomingRtcpPacket,
@@ -45,10 +45,6 @@ class MockRtpRtcp : public RtpRtcp {
               (int8_t payload_type),
               (override));
   MOCK_METHOD(void, SetExtmapAllowMixed, (bool extmap_allow_mixed), (override));
-  MOCK_METHOD(int32_t,
-              RegisterSendRtpHeaderExtension,
-              (RTPExtensionType type, uint8_t id),
-              (override));
   MOCK_METHOD(void,
               RegisterRtpHeaderExtension,
               (absl::string_view uri, int id),
@@ -202,20 +198,12 @@ class MockRtpRtcp : public RtpRtcp {
                bool decodability_flag,
                bool buffering_allowed),
               (override));
-  MOCK_METHOD(void, Process, (), (override));
   MOCK_METHOD(void,
               SetVideoBitrateAllocation,
               (const VideoBitrateAllocation&),
               (override));
   MOCK_METHOD(RTPSender*, RtpSender, (), (override));
   MOCK_METHOD(const RTPSender*, RtpSender, (), (const, override));
-
- private:
-  // Mocking this method is currently not required and having a default
-  // implementation like
-  // MOCK_METHOD(int64_t, TimeUntilNextProcess, (), (override))
-  // can be dangerous since it can cause a tight loop on a process thread.
-  int64_t TimeUntilNextProcess() override { return 0xffffffff; }
 };
 
 }  // namespace webrtc

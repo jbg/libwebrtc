@@ -82,7 +82,7 @@ class RtpSenderAudioTest : public ::testing::Test {
 
   SimulatedClock fake_clock_;
   LoopbackTransportTest transport_;
-  std::unique_ptr<RtpRtcp> rtp_module_;
+  std::unique_ptr<ModuleRtpRtcpImpl2> rtp_module_;
   RTPSenderAudio rtp_sender_audio_;
 };
 
