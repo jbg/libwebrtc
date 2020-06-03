@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd668673_88339314",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-03T11:17:15Z",
+      "side": 0,
+      "message": "I wonder if we should change https://cs.chromium.org/chromium/src/third_party/webrtc/tools_webrtc/autoroller/roll_deps.py?l\u003d34-49\u0026rcl\u003d9d3626d15de7281952f7d4b41a596baf8ac2668e.",
+      "range": {
+        "startLine": 244,
+        "startChar": 2,
+        "endLine": 247,
+        "endChar": 4
+      },
+      "revId": "fae05624ec66e67618eb53183ea10d546f89560d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
