@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72f88d75_25fb3068",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-06-03T09:36:09Z",
+      "side": 1,
+      "message": "can you update the type here to be |const std::string\u0026|?",
+      "revId": "ef44d78b37542efebe51d67e41f8734676cbc948",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6995536_66b14dd0",
+        "filename": "pc/jsep_transport_controller.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-06-03T09:36:09Z",
+      "side": 1,
+      "message": "same here - it makes the code below a little easier to understand.",
+      "revId": "ef44d78b37542efebe51d67e41f8734676cbc948",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
