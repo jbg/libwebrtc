@@ -14,9 +14,6 @@
 #if defined(WEBRTC_POSIX)
 
 #include <pthread.h>
-#if defined(WEBRTC_MAC)
-#include <pthread_spis.h>
-#endif
 
 #include "rtc_base/thread_annotations.h"
 
@@ -24,16 +21,7 @@ namespace webrtc {
 
 class RTC_LOCKABLE MutexImpl final {
  public:
-  MutexImpl() {
-    pthread_mutexattr_t mutex_attribute;
-    pthread_mutexattr_init(&mutex_attribute);
-#if defined(WEBRTC_MAC)
-    pthread_mutexattr_setpolicy_np(&mutex_attribute,
-                                   _PTHREAD_MUTEX_POLICY_FAIRSHARE);
-#endif
-    pthread_mutex_init(&mutex_, &mutex_attribute);
-    pthread_mutexattr_destroy(&mutex_attribute);
-  }
+  MutexImpl() { pthread_mutex_init(&mutex_, nullptr); }
   MutexImpl(const MutexImpl&) = delete;
   MutexImpl& operator=(const MutexImpl&) = delete;
   ~MutexImpl() { pthread_mutex_destroy(&mutex_); }
