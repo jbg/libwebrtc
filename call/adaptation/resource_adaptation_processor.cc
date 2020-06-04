@@ -175,13 +175,23 @@ void ResourceAdaptationProcessor::AddResource(
 void ResourceAdaptationProcessor::RemoveResource(
     rtc::scoped_refptr<Resource> resource) {
   RTC_DCHECK_RUN_ON(resource_adaptation_queue_);
-  // TODO(hbos): Allow removing resources while
-  // |is_resource_adaptation_enabled_| by unregistering as a listener of the
-  // resource on removing it.
-  RTC_DCHECK(!is_resource_adaptation_enabled_);
+  RTC_DCHECK(resource);
   auto it = std::find(resources_.begin(), resources_.end(), resource);
-  RTC_DCHECK(it != resources_.end());
+  RTC_DCHECK(it != resources_.end()) << "Resource \"" << resource->Name()
+                                     << "\" was not a registered resource.";
+  std::vector<rtc::scoped_refptr<Resource>> most_limited_resources;
+  VideoStreamAdapter::RestrictionsWithCounters restrictions_with_counters;
+  std::tie(most_limited_resources, restrictions_with_counters) =
+      FindMostLimitedResources();
+
+  adaptation_limits_by_resources_.erase(resource);
+  if (is_resource_adaptation_enabled_ && most_limited_resources.size() == 1 &&
+      most_limited_resources.front() == resource) {
+    // The resource is most limited.
+    RemoveMostLimitedResourceRestrictions(restrictions_with_counters);
+  }
   resources_.erase(it);
+  resource->SetResourceListener(nullptr);
 }
 
 void ResourceAdaptationProcessor::AddAdaptationConstraint(
@@ -250,8 +260,7 @@ void ResourceAdaptationProcessor::ResetVideoSourceRestrictions() {
   stream_adapter_->ClearRestrictions();
   adaptation_limits_by_resources_.clear();
   for (auto restrictions_listener : restrictions_listeners_) {
-    restrictions_listener->OnResourceLimitationChanged(
-        nullptr, adaptation_limits_by_resources_);
+    restrictions_listener->OnResourceLimitationChanged(nullptr, {});
   }
   MaybeUpdateVideoSourceRestrictions(nullptr);
 }
@@ -356,13 +365,10 @@ ResourceAdaptationProcessor::OnResourceUnderuse(
   VideoSourceRestrictions restrictions_after = peek_restrictions.restrictions;
   // Check that resource is most limited...
   std::vector<rtc::scoped_refptr<Resource>> most_limited_resources;
-  VideoAdaptationCounters most_limited_restrictions;
+  VideoStreamAdapter::RestrictionsWithCounters most_limited_restrictions;
   std::tie(most_limited_resources, most_limited_restrictions) =
       FindMostLimitedResources();
 
-  RTC_DCHECK(!most_limited_resources.empty())
-      << "Can not have no limited resources when adaptation status is valid. "
-         "Should be kLimitReached.";
   for (const auto* constraint : adaptation_constraints_) {
     if (!constraint->IsAdaptationUpAllowed(input_state, restrictions_before,
                                            restrictions_after,
@@ -377,8 +383,9 @@ ResourceAdaptationProcessor::OnResourceUnderuse(
   }
   // If the most restricted resource is less limited than current restrictions
   // then proceed with adapting up.
-  if (most_limited_restrictions.Total() >=
-      stream_adapter_->adaptation_counters().Total()) {
+  if (!most_limited_resources.empty() &&
+      most_limited_restrictions.adaptation_counters.Total() >=
+          stream_adapter_->adaptation_counters().Total()) {
     // If |reason_resource| is not one of the most limiting resources then abort
     // adaptation.
     if (absl::c_find(most_limited_resources, reason_resource) ==
@@ -498,20 +505,24 @@ void ResourceAdaptationProcessor::TriggerAdaptationDueToFrameDroppedDueToSize(
   }
 }
 
-std::pair<std::vector<rtc::scoped_refptr<Resource>>, VideoAdaptationCounters>
+std::pair<std::vector<rtc::scoped_refptr<Resource>>,
+          VideoStreamAdapter::RestrictionsWithCounters>
 ResourceAdaptationProcessor::FindMostLimitedResources() const {
   std::vector<rtc::scoped_refptr<Resource>> most_limited_resources;
-  VideoAdaptationCounters most_limited_restrictions;
+  VideoStreamAdapter::RestrictionsWithCounters most_limited_restrictions{
+      VideoSourceRestrictions(), VideoAdaptationCounters()};
 
   for (const auto& resource_and_adaptation_limit_ :
        adaptation_limits_by_resources_) {
-    const VideoAdaptationCounters& counters =
+    const auto& restrictions_with_counters =
         resource_and_adaptation_limit_.second;
-    if (counters.Total() > most_limited_restrictions.Total()) {
-      most_limited_restrictions = counters;
+    if (restrictions_with_counters.adaptation_counters.Total() >
+        most_limited_restrictions.adaptation_counters.Total()) {
+      most_limited_restrictions = restrictions_with_counters;
       most_limited_resources.clear();
       most_limited_resources.push_back(resource_and_adaptation_limit_.first);
-    } else if (most_limited_restrictions == counters) {
+    } else if (most_limited_restrictions.adaptation_counters ==
+               restrictions_with_counters.adaptation_counters) {
       most_limited_resources.push_back(resource_and_adaptation_limit_.first);
     }
   }
@@ -523,12 +534,51 @@ void ResourceAdaptationProcessor::UpdateResourceLimitations(
     rtc::scoped_refptr<Resource> reason_resource,
     const VideoStreamAdapter::RestrictionsWithCounters&
         peek_next_restrictions) {
-  adaptation_limits_by_resources_[reason_resource] =
-      peek_next_restrictions.adaptation_counters;
+  adaptation_limits_by_resources_[reason_resource] = peek_next_restrictions;
+
+  std::map<rtc::scoped_refptr<Resource>, VideoAdaptationCounters> limitations;
+
+  absl::c_transform(
+      adaptation_limits_by_resources_,
+      std::inserter(limitations, limitations.end()),
+      [](const std::pair<rtc::scoped_refptr<Resource>,
+                         VideoStreamAdapter::RestrictionsWithCounters>& p) {
+        return std::make_pair(p.first, p.second.adaptation_counters);
+      });
 
   for (auto restrictions_listener : restrictions_listeners_) {
-    restrictions_listener->OnResourceLimitationChanged(
-        reason_resource, adaptation_limits_by_resources_);
+    restrictions_listener->OnResourceLimitationChanged(reason_resource,
+                                                       limitations);
+  }
+}
+
+void ResourceAdaptationProcessor::RemoveMostLimitedResourceRestrictions(
+    VideoStreamAdapter::RestrictionsWithCounters old_most_limited_restriction) {
+  if (adaptation_limits_by_resources_.empty()) {
+    // Only the resource being removed was adapted so reset restrictions.
+    ResetVideoSourceRestrictions();
+    return;
+  }
+
+  const VideoStreamAdapter::RestrictionsWithCounters next_limitations =
+      FindMostLimitedResources().second;
+  // Apply the next_limitations as the next restrictions.
+  Adaptation adapt_to = stream_adapter_->GetAdaptationTo(
+      next_limitations.adaptation_counters, next_limitations.restrictions);
+  RTC_DCHECK_EQ(adapt_to.status(), Adaptation::Status::kValid);
+  stream_adapter_->ApplyAdaptation(adapt_to);
+
+  RTC_LOG(INFO) << "Most limited resource removed. Restoring restrictions to "
+                   "next most limited restrictions: "
+                << next_limitations.restrictions.ToString() << " with counters "
+                << next_limitations.adaptation_counters.ToString();
+
+  MaybeUpdateVideoSourceRestrictions(nullptr);
+  auto input_state = input_state_provider_->InputState();
+  for (auto* adaptation_listener : adaptation_listeners_) {
+    adaptation_listener->OnAdaptationApplied(
+        input_state, old_most_limited_restriction.restrictions,
+        next_limitations.restrictions, nullptr);
   }
 }
 

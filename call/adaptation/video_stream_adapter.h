@@ -75,12 +75,20 @@ class Adaptation final {
     kDecreaseResolution,
     kIncreaseFrameRate,
     kDecreaseFrameRate,
+    kForce
   };
 
   struct Step {
     Step(StepType type, int target);
+    // StepType is forced
+    // TODO(eshr): Replace Step with union type
+    Step(VideoSourceRestrictions restrictions,
+         VideoAdaptationCounters counters);
     const StepType type;
-    const int target;  // Pixel or frame rate depending on |type|.
+    const absl::optional<int>
+        target;  // Pixel or frame rate depending on |type|.
+    const absl::optional<VideoSourceRestrictions> restrictions;
+    const absl::optional<VideoAdaptationCounters> counters;
   };
 
   // Constructs with a valid adaptation Step. Status is kValid.
@@ -129,6 +137,8 @@ class VideoStreamAdapter {
   // status code indicating the reason why we cannot adapt.
   Adaptation GetAdaptationUp() const;
   Adaptation GetAdaptationDown() const;
+  Adaptation GetAdaptationTo(const VideoAdaptationCounters& counters,
+                             const VideoSourceRestrictions& restrictions) const;
 
   struct RestrictionsWithCounters {
     VideoSourceRestrictions restrictions;
