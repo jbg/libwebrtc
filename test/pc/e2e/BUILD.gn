@@ -594,6 +594,7 @@ rtc_library("default_video_quality_analyzer") {
   ]
 
   deps = [
+    ":multi_head_queue",
     "../..:perf_test",
     "../../../api:array_view",
     "../../../api:video_quality_analyzer_api",
