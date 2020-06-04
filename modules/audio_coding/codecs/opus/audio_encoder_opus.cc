@@ -659,6 +659,7 @@ AudioEncoder::EncodedInfo AudioEncoderOpusImpl::EncodeImpl(
                Num10msFramesPerPacket() * SamplesPer10msFrame());
 
   const size_t max_encoded_bytes = SufficientOutputBufferSize();
+  const size_t primary_offset = encoded->size();
   EncodedInfo info;
   info.encoded_bytes = encoded->AppendData(
       max_encoded_bytes, [&](rtc::ArrayView<uint8_t> encoded) {
@@ -693,6 +694,16 @@ AudioEncoder::EncodedInfo AudioEncoderOpusImpl::EncodeImpl(
   // coding the background noise. Avoid flagging this frame as speech
   // (even though there is a probability of the frame being speech).
   info.speech = !dtx_frame && (consecutive_dtx_frames_ != 20);
+
+  if (info.speech && info.encoded_bytes >= 2) {
+    // Read Opus TOC and the SILK VAD bit when not in CELT mode.
+    uint8_t toc = encoded->data()[primary_offset];
+    if (!(toc & 0x80)) {
+      // The VAD bit is first in the bitstream so can be read without a
+      // range encoder. See https://tools.ietf.org/html/rfc6716#section-4.2.2
+      info.speech = (encoded->data()[primary_offset + 1] & 0x80) >> 7;
+    }
+  }
   info.encoder_type = CodecType::kOpus;
 
   // Increase or reset DTX counter.
