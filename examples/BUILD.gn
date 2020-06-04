@@ -673,6 +673,8 @@ if (is_linux || is_win) {
       "../test:field_trial",
       "../test:platform_video_capturer",
       "../test:rtp_test_utils",
+    ]
+    absl_deps = [
       "//third_party/abseil-cpp/absl/memory",
       "//third_party/abseil-cpp/absl/types:optional",
     ]
@@ -817,8 +819,8 @@ if (is_win || is_android) {
       "../rtc_base",
       "../test:platform_video_capturer",
       "../test:video_test_common",
-      "//third_party/abseil-cpp/absl/memory",
     ]
+    absl_deps = [ "//third_party/abseil-cpp/absl/memory" ]
     if (is_android) {
       deps += [
         "../modules/utility",

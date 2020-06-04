@@ -34,6 +34,8 @@ rtc_library("mutex") {
     "..:checks",
     "..:macromagic",
     "../system:unused",
+  ]
+  absl_deps = [
     "//third_party/abseil-cpp/absl/base:core_headers",
     "//third_party/abseil-cpp/absl/synchronization",
   ]
@@ -77,8 +79,8 @@ rtc_library("yield_policy") {
     "yield_policy.cc",
     "yield_policy.h",
   ]
-  deps = [
-    "..:checks",
+  deps = [ "..:checks" ]
+  absl_deps = [
     "//third_party/abseil-cpp/absl/base:config",
     "//third_party/abseil-cpp/absl/base:core_headers",
   ]
