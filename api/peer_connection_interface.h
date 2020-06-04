@@ -621,26 +621,6 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
     // TODO(webrtc:9719):  Delete this option.
     bool use_media_transport_for_data_channels = false;
 
-    // If MediaTransportFactory is provided in PeerConnectionFactory, this flag
-    // informs PeerConnection that it should use the DatagramTransportInterface
-    // for packets instead DTLS. It's invalid to set it to |true| if the
-    // MediaTransportFactory wasn't provided.
-    absl::optional<bool> use_datagram_transport;
-
-    // If MediaTransportFactory is provided in PeerConnectionFactory, this flag
-    // informs PeerConnection that it should use the DatagramTransport's
-    // implementation of DataChannelTransportInterface for data channels instead
-    // of SCTP-DTLS.
-    absl::optional<bool> use_datagram_transport_for_data_channels;
-
-    // If true, this PeerConnection will only use datagram transport for data
-    // channels when receiving an incoming offer that includes datagram
-    // transport parameters.  It will not request use of a datagram transport
-    // when it creates the initial, outgoing offer.
-    // This setting only applies when |use_datagram_transport_for_data_channels|
-    // is true.
-    absl::optional<bool> use_datagram_transport_for_data_channels_receive_only;
-
     // Defines advanced optional cryptographic settings related to SRTP and
     // frame encryption for native WebRTC. Setting this will overwrite any
     // settings set in PeerConnectionFactory (which is deprecated).

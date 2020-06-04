@@ -17,7 +17,6 @@
 #include <vector>
 
 #include "absl/algorithm/container.h"
-#include "api/test/fake_datagram_transport.h"
 #include "api/transport/media/media_transport_interface.h"
 
 namespace webrtc {
@@ -45,14 +44,6 @@ class FakeMediaTransportFactory : public MediaTransportFactory {
       rtc::Thread* network_thread,
       const MediaTransportSettings& settings) override {
     return RTCError(RTCErrorType::UNSUPPORTED_OPERATION);
-  }
-
-  RTCErrorOr<std::unique_ptr<DatagramTransportInterface>>
-  CreateDatagramTransport(rtc::Thread* network_thread,
-                          const MediaTransportSettings& settings) override {
-    return std::unique_ptr<DatagramTransportInterface>(
-        new FakeDatagramTransport(settings, transport_offer_.value_or(""),
-                                  transport_parameters_comparison_));
   }
 
   void set_transport_parameters_comparison(

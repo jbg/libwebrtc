@@ -68,12 +68,12 @@ rtc_library("field_trial_based_config") {
   ]
 }
 
+# TODO(nisse): Delete.
 rtc_source_set("datagram_transport_interface") {
   visibility = [ "*" ]
   sources = [
     "congestion_control_interface.h",
     "data_channel_transport_interface.h",
-    "datagram_transport_interface.h",
   ]
   deps = [
     ":network_control",

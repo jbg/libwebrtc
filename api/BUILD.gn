@@ -182,7 +182,6 @@ rtc_library("libjingle_peerconnection_api") {
     "rtc_event_log",
     "task_queue",
     "transport:bitrate_settings",
-    "transport:datagram_transport_interface",
     "transport:enums",
     "transport:network_control",
     "transport:webrtc_key_value_config",
@@ -955,13 +954,11 @@ if (rtc_include_tests) {
     testonly = true
 
     sources = [
-      "test/fake_datagram_transport.h",
       "test/fake_media_transport.h",
     ]
 
     deps = [
       "../rtc_base:checks",
-      "transport:datagram_transport_interface",
       "transport/media:media_transport_interface",
       "//third_party/abseil-cpp/absl/algorithm:container",
     ]
@@ -978,7 +975,6 @@ if (rtc_include_tests) {
     deps = [
       "../rtc_base",
       "../rtc_base:checks",
-      "transport:datagram_transport_interface",
       "transport/media:media_transport_interface",
       "//third_party/abseil-cpp/absl/algorithm:container",
     ]
@@ -1014,7 +1010,7 @@ if (rtc_include_tests) {
       "rtp_parameters_unittest.cc",
       "scoped_refptr_unittest.cc",
       "test/create_time_controller_unittest.cc",
-      "test/loopback_media_transport_unittest.cc",
+      # "test/loopback_media_transport_unittest.cc",
     ]
 
     deps = [
