@@ -19,6 +19,7 @@
 #include "api/scoped_refptr.h"
 #include "api/units/data_rate.h"
 #include "api/video/video_bitrate_allocation.h"
+#include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
 #include "modules/video_coding/codecs/vp9/svc_config.h"
 #include "modules/video_coding/include/video_coding_defines.h"

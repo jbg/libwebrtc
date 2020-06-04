@@ -11,6 +11,7 @@
 #include <bitset>
 
 #include "absl/types/optional.h"
+#include "api/rtp_headers.h"
 #include "modules/rtp_rtcp/include/rtp_header_extension_map.h"
 #include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor_extension.h"
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"

@@ -24,6 +24,7 @@
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/transport/field_trial_based_config.h"
 #include "api/video_codecs/video_encoder.h"
+#include "call/frame_count_observer.h"
 #include "call/rtp_config.h"
 #include "call/rtp_payload_params.h"
 #include "call/rtp_transport_controller_send_interface.h"

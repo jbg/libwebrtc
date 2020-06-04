@@ -19,6 +19,7 @@
 #include "absl/types/optional.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/units/timestamp.h"
+#include "call/frame_count_observer.h"
 #include "call/video_receive_stream.h"
 #include "modules/include/module_common_types.h"
 #include "modules/video_coding/include/video_coding_defines.h"

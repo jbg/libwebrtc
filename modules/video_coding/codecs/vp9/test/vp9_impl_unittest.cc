@@ -12,6 +12,7 @@
 #include "api/test/frame_generator_interface.h"
 #include "api/video/color_space.h"
 #include "api/video/i420_buffer.h"
+#include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
 #include "media/base/vp9_profile.h"

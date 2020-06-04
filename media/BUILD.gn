@@ -31,7 +31,7 @@ rtc_library("rtc_h264_profile_id") {
   ]
 
   deps = [
-    "..:webrtc_common",
+    "../api/video_codecs:video_codecs_api",
     "../rtc_base",
     "../rtc_base:checks",
     "../rtc_base:rtc_base_approved",
@@ -53,7 +53,6 @@ rtc_library("rtc_vp9_profile") {
   ]
 
   deps = [
-    "..:webrtc_common",
     "../api/video_codecs:video_codecs_api",
     "../rtc_base:rtc_base_approved",
     "../rtc_base/system:rtc_export",
@@ -83,7 +82,6 @@ rtc_library("rtc_media_base") {
     ":rtc_h264_profile_id",
     ":rtc_media_config",
     ":rtc_vp9_profile",
-    "..:webrtc_common",
     "../api:array_view",
     "../api:audio_options_api",
     "../api:frame_transformer_interface",
@@ -231,7 +229,6 @@ rtc_library("rtc_internal_video_codecs") {
     ":rtc_h264_profile_id",
     ":rtc_media_base",
     ":rtc_simulcast_encoder_adapter",
-    "../:webrtc_common",
     "../api/video:encoded_image",
     "../api/video:video_bitrate_allocation",
     "../api/video:video_frame",
@@ -279,7 +276,6 @@ rtc_library("rtc_audio_video") {
   deps = [
     ":rtc_constants",
     ":rtc_media_base",
-    "..:webrtc_common",
     "../api:call_api",
     "../api:libjingle_peerconnection_api",
     "../api:media_stream_interface",
@@ -397,7 +393,6 @@ rtc_library("rtc_data") {
   ]
   deps = [
     ":rtc_media_base",
-    "..:webrtc_common",
     "../api:call_api",
     "../api:transport_api",
     "../p2p:rtc_p2p",
@@ -536,7 +531,6 @@ if (rtc_include_tests) {
       ":rtc_sdp_fmtp_utils",
       ":rtc_simulcast_encoder_adapter",
       ":rtc_vp9_profile",
-      "../:webrtc_common",
       "../api:create_simulcast_test_fixture_api",
       "../api:libjingle_peerconnection_api",
       "../api:mock_video_bitrate_allocator",

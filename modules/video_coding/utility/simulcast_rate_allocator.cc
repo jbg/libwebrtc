@@ -20,6 +20,7 @@
 #include <tuple>
 #include <vector>
 
+#include "api/video_codecs/video_codec.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/experiments/rate_control_settings.h"
 #include "system_wrappers/include/field_trial.h"

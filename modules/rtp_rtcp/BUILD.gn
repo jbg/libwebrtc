@@ -244,7 +244,6 @@ rtc_library("rtp_rtcp") {
     "..:module_api",
     "..:module_api_public",
     "..:module_fec_api",
-    "../..:webrtc_common",
     "../../api:array_view",
     "../../api:frame_transformer_interface",
     "../../api:function_view",
@@ -320,7 +319,6 @@ rtc_library("rtcp_transceiver") {
   deps = [
     ":rtp_rtcp",
     ":rtp_rtcp_format",
-    "../../:webrtc_common",
     "../../api:array_view",
     "../../api:rtp_headers",
     "../../api:transport_api",
@@ -344,7 +342,7 @@ rtc_library("rtp_video_header") {
     "source/rtp_video_header.h",
   ]
   deps = [
-    "../../:webrtc_common",
+    "../../api:rtp_headers",
     "../../api/transport/rtp:dependency_descriptor",
     "../../api/video:video_frame",
     "../../api/video:video_frame_type",
@@ -507,7 +505,6 @@ if (rtc_include_tests) {
       ":rtp_rtcp",
       ":rtp_rtcp_format",
       "..:module_api",
-      "../..:webrtc_common",
       "../../api:array_view",
       "../../api:libjingle_peerconnection_api",
       "../../api:mock_frame_encryptor",

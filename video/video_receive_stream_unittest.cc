@@ -15,6 +15,7 @@
 #include <utility>
 #include <vector>
 
+#include "api/rtp_headers.h"
 #include "api/task_queue/default_task_queue_factory.h"
 #include "api/test/video/function_video_decoder_factory.h"
 #include "api/video_codecs/video_decoder.h"

@@ -15,7 +15,7 @@
 #include <string>
 
 #include "absl/types/optional.h"
-#include "common_types.h"  // NOLINT(build/include)
+#include "api/video_codecs/video_codec.h"
 #include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {

@@ -19,7 +19,6 @@
 #include "absl/types/optional.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_codec_type.h"
-#include "common_types.h"  // NOLINT(build/include_directory)
 #include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
@@ -74,6 +73,15 @@ struct VideoCodecVP9 {
 };
 
 // H264 specific.
+namespace H264 {
+enum Profile {
+  kProfileConstrainedBaseline,
+  kProfileBaseline,
+  kProfileMain,
+  kProfileConstrainedHigh,
+  kProfileHigh,
+};
+}  // namespace H264
 struct VideoCodecH264 {
   bool operator==(const VideoCodecH264& other) const;
   bool operator!=(const VideoCodecH264& other) const {
@@ -95,6 +103,25 @@ union VideoCodecUnion {
 };
 
 enum class VideoCodecMode { kRealtimeVideo, kScreensharing };
+
+struct SpatialLayer {
+  bool operator==(const SpatialLayer& other) const;
+  bool operator!=(const SpatialLayer& other) const { return !(*this == other); }
+
+  uint16_t width;
+  uint16_t height;
+  float maxFramerate;  // fps.
+  uint8_t numberOfTemporalLayers;
+  unsigned int maxBitrate;     // kilobits/sec.
+  unsigned int targetBitrate;  // kilobits/sec.
+  unsigned int minBitrate;     // kilobits/sec.
+  unsigned int qpMax;          // minimum quality
+  bool active;                 // encoded and sent.
+};
+
+// Simulcast is when the same stream is encoded multiple times with different
+// settings such as resolution.
+typedef SpatialLayer SimulcastStream;
 
 // Common video codec properties
 class RTC_EXPORT VideoCodec {

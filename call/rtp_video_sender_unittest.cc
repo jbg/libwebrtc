@@ -14,6 +14,7 @@
 #include <memory>
 #include <string>
 
+#include "call/frame_count_observer.h"
 #include "call/rtp_transport_controller_send.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "modules/rtp_rtcp/source/byte_io.h"

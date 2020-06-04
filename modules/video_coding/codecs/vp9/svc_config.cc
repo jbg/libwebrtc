@@ -14,6 +14,7 @@
 #include <cmath>
 #include <vector>
 
+#include "api/video_codecs/video_codec.h"
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
 #include "rtc_base/checks.h"
 

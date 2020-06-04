@@ -15,6 +15,7 @@
 #include <cmath>
 #include <limits>
 
+#include "api/rtp_headers.h"
 #include "modules/rtp_rtcp/include/rtp_cvo.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
 // TODO(bug:9855) Move kNoSpatialIdx from vp9_globals.h to common_constants

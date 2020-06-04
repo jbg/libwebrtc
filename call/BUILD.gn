@@ -71,6 +71,10 @@ rtc_source_set("audio_sender_interface") {
   deps = [ "../api/audio:audio_frame_api" ]
 }
 
+rtc_source_set("frame_count_observer") {
+  sources = [ "frame_count_observer.h" ]
+}
+
 # TODO(nisse): These RTP targets should be moved elsewhere
 # when interfaces have stabilized. See also TODO for |mock_rtp_interfaces|.
 rtc_library("rtp_interfaces") {
@@ -88,6 +92,7 @@ rtc_library("rtp_interfaces") {
     "rtp_transport_controller_send_interface.h",
   ]
   deps = [
+    ":frame_count_observer",
     "../api:array_view",
     "../api:fec_controller_api",
     "../api:frame_transformer_interface",
@@ -144,6 +149,7 @@ rtc_library("rtp_sender") {
   ]
   deps = [
     ":bitrate_configurator",
+    ":frame_count_observer",
     ":rtp_interfaces",
     "../api:array_view",
     "../api:bitrate_allocation",
@@ -298,6 +304,7 @@ rtc_library("video_stream_api") {
     "video_send_stream.h",
   ]
   deps = [
+    ":frame_count_observer",
     ":rtp_interfaces",
     "../api:frame_transformer_interface",
     "../api:rtp_headers",
@@ -389,6 +396,7 @@ if (rtc_include_tests) {
       ":bitrate_configurator",
       ":call",
       ":call_interfaces",
+      ":frame_count_observer",
       ":mock_rtp_interfaces",
       ":rtp_interfaces",
       ":rtp_receiver",

@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <vector>
 
+#include "api/video_codecs/video_codec.h"
 #include "modules/video_coding/codecs/vp9/svc_config.h"
 #include "rtc_base/checks.h"
 #include "test/field_trial.h"

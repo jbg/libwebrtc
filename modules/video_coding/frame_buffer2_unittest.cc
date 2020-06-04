@@ -16,6 +16,7 @@
 #include <memory>
 #include <vector>
 
+#include "api/rtp_headers.h"
 #include "modules/video_coding/frame_object.h"
 #include "modules/video_coding/jitter_estimator.h"
 #include "modules/video_coding/timing.h"
