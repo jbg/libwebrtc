@@ -140,7 +140,7 @@ RTCDataChannelStats::RTCDataChannelStats(std::string&& id, int64_t timestamp_us)
     : RTCStats(std::move(id), timestamp_us),
       label("label"),
       protocol("protocol"),
-      datachannelid("datachannelid"),
+      datachannelid("dataChannelIdentifier"),
       state("state"),
       messages_sent("messagesSent"),
       bytes_sent("bytesSent"),
