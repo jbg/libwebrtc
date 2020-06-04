@@ -16,6 +16,24 @@
       "revId": "ba2d6f74d8b1ae0cb4f818e23d652612730cba15",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "022cf866_6b34593a",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-06-04T19:43:01Z",
+      "side": 1,
+      "message": "i don\u0027t think anything in the silk/ subdirectory is considered part of the \"public\" api",
+      "parentUuid": "4f6d1f66_30d36fff",
+      "revId": "ba2d6f74d8b1ae0cb4f818e23d652612730cba15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
