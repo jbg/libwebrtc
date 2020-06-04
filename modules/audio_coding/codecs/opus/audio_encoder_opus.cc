@@ -67,6 +67,10 @@ constexpr int kOpusSupportedFrameLengths[] = {10, 20, 40, 60};
 // of -1.0 / ln(0.9999) = 10000 ms.
 constexpr float kAlphaForPacketLossFractionSmoother = 0.9999f;
 
+// After 20 DTX frames (MAX_CONSECUTIVE_DTX) Opus will send a frame
+// coding the background noise.
+constexpr int kMaxConsecutiveDtx = 20;
+
 // Optimize the loss rate to configure Opus. Basically, optimized loss rate is
 // the input loss rate rounded down to various levels, because a robustly good
 // audio quality is achieved by lowering the packet loss down.
@@ -692,7 +696,7 @@ AudioEncoder::EncodedInfo AudioEncoderOpusImpl::EncodeImpl(
   // After 20 DTX frames (MAX_CONSECUTIVE_DTX) Opus will send a frame
   // coding the background noise. Avoid flagging this frame as speech
   // (even though there is a probability of the frame being speech).
-  info.speech = !dtx_frame && (consecutive_dtx_frames_ != 20);
+  info.speech = !dtx_frame && (consecutive_dtx_frames_ != kMaxConsecutiveDtx);
   info.encoder_type = CodecType::kOpus;
 
   // Increase or reset DTX counter.
