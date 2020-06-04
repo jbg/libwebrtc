@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2e9f6a3_661a2846",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-06-04T20:00:03Z",
+      "side": 1,
+      "message": "this is needed for RED things where the offset *may* be non-zero.",
+      "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
