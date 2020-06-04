@@ -21,6 +21,11 @@
 #import "RTCAudioSessionConfiguration.h"
 #import "base/RTCLogging.h"
 
+class RecursiveCriticalSection : public rtc::CriticalSection {
+ public:
+  RecursiveCriticalSection() : rtc::CriticalSection(/*recursive=*/true) {}
+};
+
 NSString *const kRTCAudioSessionErrorDomain = @"org.webrtc.RTC_OBJC_TYPE(RTCAudioSession)";
 NSInteger const kRTCAudioSessionErrorLockRequired = -1;
 NSInteger const kRTCAudioSessionErrorConfiguration = -2;
@@ -35,7 +40,7 @@ NSString * const kRTCAudioSessionOutputVolumeSelector = @"outputVolume";
 // TODO(tkchin): Consider more granular locking. We're not expecting a lot of
 // lock contention so coarse locks should be fine for now.
 @implementation RTC_OBJC_TYPE (RTCAudioSession) {
-  rtc::CriticalSection _crit;
+  RecursiveCriticalSection _crit;
   AVAudioSession *_session;
   volatile int _activationCount;
   volatile int _lockRecursionCount;
