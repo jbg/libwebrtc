@@ -20,6 +20,7 @@
 #include "api/test/network_emulation_manager.h"
 #include "api/test/peerconnection_quality_test_fixture.h"
 #include "api/test/simulated_network.h"
+#include "api/video_codecs/video_codec.h"
 #include "call/simulated_network.h"
 #include "media/base/vp9_profile.h"
 #include "modules/video_coding/codecs/vp9/include/vp9.h"

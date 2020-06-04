@@ -25,6 +25,7 @@
 #include "api/rtc_event_log/rtc_event_log.h"
 #include "api/transport/bitrate_settings.h"
 #include "api/units/timestamp.h"
+#include "call/frame_count_observer.h"
 #include "call/rtp_config.h"
 #include "modules/rtp_rtcp/include/report_block_data.h"
 #include "modules/rtp_rtcp/include/rtcp_statistics.h"

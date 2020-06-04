@@ -13,6 +13,7 @@
 #include <memory>
 #include <utility>
 
+#include "api/rtp_headers.h"
 #include "api/video/video_codec_type.h"
 #include "api/video/video_frame_type.h"
 #include "common_video/h264/h264_common.h"

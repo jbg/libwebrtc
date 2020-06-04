@@ -23,6 +23,7 @@
 #include "absl/memory/memory.h"
 #include "absl/strings/match.h"
 #include "api/crypto/frame_encryptor_interface.h"
+#include "api/rtp_headers.h"
 #include "api/transport/rtp/dependency_descriptor.h"
 #include "modules/remote_bitrate_estimator/test/bwe_test_logging.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"

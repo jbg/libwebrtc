@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "absl/memory/memory.h"
+#include "api/rtp_headers.h"
 #include "api/test/mock_frame_encryptor.h"
 #include "api/transport/field_trial_based_config.h"
 #include "api/transport/rtp/dependency_descriptor.h"

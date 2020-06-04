@@ -19,6 +19,7 @@
 #include "absl/types/optional.h"
 #include "api/array_view.h"
 #include "api/frame_transformer_interface.h"
+#include "api/rtp_headers.h"
 #include "api/scoped_refptr.h"
 #include "api/task_queue/task_queue_base.h"
 #include "api/transport/rtp/dependency_descriptor.h"

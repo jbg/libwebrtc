@@ -13,6 +13,7 @@
 
 #include <vector>
 
+#include "api/rtp_headers.h"
 #include "api/video/encoded_image.h"
 #include "modules/rtp_rtcp/source/rtp_video_header.h"
 #include "modules/video_coding/include/video_codec_interface.h"

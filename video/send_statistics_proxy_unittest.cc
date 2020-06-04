@@ -23,6 +23,7 @@
 #include "api/video/video_codec_type.h"
 #include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder_config.h"
+#include "call/frame_count_observer.h"
 #include "rtc_base/fake_clock.h"
 #include "system_wrappers/include/metrics.h"
 #include "test/field_trial.h"

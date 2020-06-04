@@ -20,6 +20,7 @@
 #include "api/array_view.h"
 #include "api/transport/field_trial_based_config.h"
 #include "api/video_codecs/video_codec.h"
+#include "call/frame_count_observer.h"
 #include "call/rtp_transport_controller_send_interface.h"
 #include "modules/pacing/packet_router.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"

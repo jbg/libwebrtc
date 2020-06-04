@@ -23,7 +23,6 @@ rtc_library("media_transport_interface") {
     "..:network_control",
     "../..:array_view",
     "../..:rtc_error",
-    "../../..:webrtc_common",
     "../../../rtc_base",
     "../../../rtc_base:checks",
     "../../../rtc_base:rtc_base_approved",

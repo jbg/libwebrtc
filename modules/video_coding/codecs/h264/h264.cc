@@ -16,6 +16,7 @@
 
 #include "absl/types/optional.h"
 #include "api/video_codecs/sdp_video_format.h"
+#include "common_video/h264/h264_common.h"
 #include "media/base/media_constants.h"
 
 #if defined(WEBRTC_USE_H264)

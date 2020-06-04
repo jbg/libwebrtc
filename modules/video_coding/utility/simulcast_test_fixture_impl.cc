@@ -17,6 +17,7 @@
 
 #include "api/video/encoded_image.h"
 #include "api/video_codecs/sdp_video_format.h"
+#include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_encoder.h"
 #include "common_video/libyuv/include/webrtc_libyuv.h"
 #include "modules/video_coding/include/video_codec_interface.h"

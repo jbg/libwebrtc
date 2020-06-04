@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "absl/types/optional.h"
+#include "api/rtp_headers.h"
 #include "api/rtp_packet_infos.h"
 #include "api/scoped_refptr.h"
 #include "api/video/color_space.h"
@@ -26,7 +27,6 @@
 #include "api/video/video_frame_type.h"
 #include "api/video/video_rotation.h"
 #include "api/video/video_timing.h"
-#include "common_types.h"  // NOLINT(build/include_directory)
 #include "rtc_base/checks.h"
 #include "rtc_base/deprecation.h"
 #include "rtc_base/ref_count.h"

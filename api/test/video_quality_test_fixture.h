@@ -22,6 +22,7 @@
 #include "api/test/simulated_network.h"
 #include "api/transport/bitrate_settings.h"
 #include "api/transport/network_control.h"
+#include "api/video_codecs/video_codec.h"
 #include "api/video_codecs/video_decoder_factory.h"
 #include "api/video_codecs/video_encoder_config.h"
 #include "api/video_codecs/video_encoder_factory.h"

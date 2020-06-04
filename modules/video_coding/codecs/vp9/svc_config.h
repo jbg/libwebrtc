@@ -14,7 +14,7 @@
 
 #include <vector>
 
-#include "common_types.h"  // NOLINT(build/include)
+#include "api/video_codecs/video_codec.h"
 
 namespace webrtc {
 
