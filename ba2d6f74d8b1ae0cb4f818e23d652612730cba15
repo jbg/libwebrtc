@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f6d1f66_30d36fff",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-04T19:40:12Z",
+      "side": 1,
+      "message": "I was actually thinking in terms of #include \"third_party/opus/src/silk/define.h\" and using MAX_CONSECUTIVE_DTX from that file... but perhaps getting that dependency past the include rules is too hard....?",
+      "revId": "ba2d6f74d8b1ae0cb4f818e23d652612730cba15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
