@@ -34,6 +34,24 @@
       "revId": "ba2d6f74d8b1ae0cb4f818e23d652612730cba15",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a331825_ba0dd3e0",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 12217
+      },
+      "writtenOn": "2020-06-04T21:03:28Z",
+      "side": 1,
+      "message": "True! we generally don\u0027t want to expose Opus private APIs, even though technically possible.",
+      "parentUuid": "022cf866_6b34593a",
+      "revId": "ba2d6f74d8b1ae0cb4f818e23d652612730cba15",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
