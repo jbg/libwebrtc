@@ -62,15 +62,11 @@ class MultiHeadQueue {
     return queues_[index].front();
   }
 
-  // Returns true if for all readers there are no elements in the queue or
-  // false otherwise. Complexity O(readers_count).
-  bool IsEmpty() const {
-    for (auto& queue : queues_) {
-      if (!queue.empty()) {
-        return false;
-      }
-    }
-    return true;
+  // Returns true if for specified head there are no more elements in the queue
+  // or false otherwise. Complexity O(readers_count).
+  bool IsEmpty(int index) const {
+    RTC_CHECK_LT(index, queues_.size());
+    return queues_[index].empty();
   }
 
   // Returns size of the longest queue between all readers.
