@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d63a3af7_445e2cac",
+        "filename": "rtc_tools/rtc_event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-05T08:51:32Z",
+      "side": 1,
+      "message": "Why 300000? I\u0027m not familiar with the code, so to me it looks magical. Maybe some comment with an explanation should be added.",
+      "revId": "dcd195f9298d9eeb193d8645f0f09f1c5c44df35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
