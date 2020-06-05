@@ -16,6 +16,24 @@
       "revId": "e5b74d10dbd11b3a25d5b644032fd82e70746c05",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38208dac_73faf3b7",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-05T07:25:26Z",
+      "side": 1,
+      "message": "Heh. Turns out that win_chromium_x64_rel_ng runs the browsertest, but not the WPT tests, and linux_blink_rel runs the WPT test but not the browsertests. Getting all tests run is a challenge.....\n\nI think I\u0027ll just rename and send a PSA. One bad thing about the stats model is that it\u0027s impossible to instrument the API to count usage of deprecated stats; we can land this and wait for the screaming. Thinking about it, I\u0027ll send the PSA now....",
+      "parentUuid": "d15cae98_5c995ac6",
+      "revId": "e5b74d10dbd11b3a25d5b644032fd82e70746c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
