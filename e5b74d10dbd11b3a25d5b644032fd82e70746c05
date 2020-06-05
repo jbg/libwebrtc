@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d15cae98_5c995ac6",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-05T07:04:11Z",
+      "side": 1,
+      "message": "This is the string exposed in JavaScript, to land the change you need to updated the chromium whitelist, otherwise WebRtcBrowserTest.RunsAudioVideoWebRTCCallInTwoTabsGetStatsPromise fails (win_chromium_x64_rel_ng) and the CL would block being rolled into chromium.\nThis is the list: https://source.chromium.org/chromium/chromium/src/+/master:chrome/test/data/webrtc/peerconnection_getstats.js\n\nI would also require updating the C++ name for consistency to data_channel_identifier.\n\nIf you don\u0027t want to break apps that depend on the name being datachannelid though then keep both the old and new values around as separate stats members, and give them the same value.",
+      "revId": "e5b74d10dbd11b3a25d5b644032fd82e70746c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
