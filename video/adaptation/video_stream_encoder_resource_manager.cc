@@ -65,6 +65,30 @@ VideoAdaptationReason OtherReason(VideoAdaptationReason reason) {
   }
 }
 
+class FakeResource : public Resource {
+ public:
+  FakeResource() : queue_(TaskQueueBase::Current()) {
+    RTC_DCHECK(queue_);
+    queue_->PostDelayedTask(ToQueuedTask([this]() { Run(); }), 10000);
+    queue_->PostDelayedTask(ToQueuedTask([this]() { Run(); }), 20000);
+  }
+
+  std::string Name() const override {
+    return "FakePulsingResource";
+  }
+
+  void SetResourceListener(ResourceListener* listener) override {
+    listener_ = listener;
+  }
+ private:
+  void Run() {
+    listener_->OnResourceUsageStateMeasured(this, ResourceUsageState::kOveruse);
+  }
+
+  ResourceListener* listener_;
+  TaskQueueBase* queue_;
+};
+
 }  // namespace
 
 class VideoStreamEncoderResourceManager::InitialFrameDropper {
@@ -335,6 +359,7 @@ VideoStreamEncoderResourceManager::VideoStreamEncoderResourceManager(
       encode_usage_resource_(
           EncodeUsageResource::Create(std::move(overuse_detector))),
       quality_scaler_resource_(QualityScalerResource::Create()),
+      fake_resource_(new rtc::RefCountedObject<FakeResource>()),
       encoder_queue_(nullptr),
       resource_adaptation_queue_(nullptr),
       input_state_provider_(input_state_provider),
@@ -356,6 +381,7 @@ VideoStreamEncoderResourceManager::VideoStreamEncoderResourceManager(
   MapResourceToReason(encode_usage_resource_, VideoAdaptationReason::kCpu);
   MapResourceToReason(quality_scaler_resource_,
                       VideoAdaptationReason::kQuality);
+  MapResourceToReason(fake_resource_, VideoAdaptationReason::kCpu);
 }
 
 VideoStreamEncoderResourceManager::~VideoStreamEncoderResourceManager() {}

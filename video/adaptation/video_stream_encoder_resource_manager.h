@@ -277,6 +277,7 @@ class VideoStreamEncoderResourceManager
   const rtc::scoped_refptr<BalancedConstraint> balanced_constraint_;
   const rtc::scoped_refptr<EncodeUsageResource> encode_usage_resource_;
   const rtc::scoped_refptr<QualityScalerResource> quality_scaler_resource_;
+  const rtc::scoped_refptr<Resource> fake_resource_;
 
   rtc::TaskQueue* encoder_queue_;
   rtc::TaskQueue* resource_adaptation_queue_;
