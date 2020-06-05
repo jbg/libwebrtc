@@ -34,6 +34,24 @@
       "revId": "e5b74d10dbd11b3a25d5b644032fd82e70746c05",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "727daa6a_67aab458",
+        "filename": "stats/rtcstats_objects.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-05T14:11:44Z",
+      "side": 1,
+      "message": "Rename done.",
+      "parentUuid": "38208dac_73faf3b7",
+      "revId": "e5b74d10dbd11b3a25d5b644032fd82e70746c05",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
