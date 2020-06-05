@@ -20,8 +20,11 @@
 #include "api/video/video_frame_type.h"
 #include "modules/video_coding/chain_diff_calculator.h"
 #include "modules/video_coding/codecs/av1/scalability_structure_l1t2.h"
+#include "modules/video_coding/codecs/av1/scalability_structure_l1t3.h"
 #include "modules/video_coding/codecs/av1/scalability_structure_l2t1.h"
 #include "modules/video_coding/codecs/av1/scalability_structure_l2t1_key.h"
+#include "modules/video_coding/codecs/av1/scalability_structure_l3t1.h"
+#include "modules/video_coding/codecs/av1/scalability_structure_l3t3.h"
 #include "modules/video_coding/codecs/av1/scalability_structure_s2t1.h"
 #include "modules/video_coding/codecs/av1/scalable_video_controller.h"
 #include "modules/video_coding/frame_dependencies_calculator.h"
@@ -281,11 +284,17 @@ INSTANTIATE_TEST_SUITE_P(
     ScalabilityStructureTest,
     Values(SvcTestParam{"L1T2", std::make_unique<ScalabilityStructureL1T2>,
                         /*num_temporal_units=*/4},
+           SvcTestParam{"L1T3", std::make_unique<ScalabilityStructureL1T3>,
+                        /*num_temporal_units=*/8},
            SvcTestParam{"L2T1", std::make_unique<ScalabilityStructureL2T1>,
                         /*num_temporal_units=*/3},
            SvcTestParam{"L2T1Key",
                         std::make_unique<ScalabilityStructureL2T1Key>,
                         /*num_temporal_units=*/3},
+           SvcTestParam{"L3T1", std::make_unique<ScalabilityStructureL3T1>,
+                        /*num_temporal_units=*/3},
+           SvcTestParam{"L3T3", std::make_unique<ScalabilityStructureL3T3>,
+                        /*num_temporal_units=*/8},
            SvcTestParam{"S2T1", std::make_unique<ScalabilityStructureS2T1>,
                         /*num_temporal_units=*/3}),
     [](const testing::TestParamInfo<SvcTestParam>& info) {
