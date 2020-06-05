@@ -913,8 +913,14 @@ class RTCStatsReportVerifier {
       verifier.MarkMemberTested(outbound_stream.content_type, true);
       verifier.TestMemberIsDefined(outbound_stream.encoder_implementation);
       if (enable_simulcast_stats) {
-        verifier.TestMemberIsNonNegative<double>(
-            outbound_stream.frames_per_second);
+        // Sometimes the stream has not ramped up and FPS is undefind; we allow
+        // it to either be non-negative or undefined.
+        if (outbound_stream.frames_per_second.is_defined()) {
+          verifier.TestMemberIsNonNegative<double>(
+              outbound_stream.frames_per_second);
+        } else {
+          verifier.TestMemberIsUndefined(outbound_stream.frames_per_second);
+        }
         verifier.TestMemberIsNonNegative<uint32_t>(
             outbound_stream.frame_height);
         verifier.TestMemberIsNonNegative<uint32_t>(outbound_stream.frame_width);
