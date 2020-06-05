@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "454878d6_847f3a72",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-05T12:31:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d71c6fd7_9054f5f2",
+      "range": {
+        "startLine": 358,
+        "startChar": 38,
+        "endLine": 358,
+        "endChar": 51
+      },
+      "revId": "6d22ec53e08978e1f14fa2628998bf973a92218a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19d4e59e_1e898557",
         "filename": "PRESUBMIT.py",
         "patchSetId": 4
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "f1215431_30861f39",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-05T12:31:16Z",
+      "side": 1,
+      "message": "I have removed everything as you suggested.",
+      "parentUuid": "19d4e59e_1e898557",
+      "revId": "6d22ec53e08978e1f14fa2628998bf973a92218a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5bf2527_73c0df45",
         "filename": "abseil-in-webrtc.md",
         "patchSetId": 4
@@ -56,6 +98,24 @@
       "revId": "6d22ec53e08978e1f14fa2628998bf973a92218a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c98ee4fe_3e2db140",
+        "filename": "abseil-in-webrtc.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-05T12:31:16Z",
+      "side": 1,
+      "message": "Hhmm, I guess you are right. I haven\u0027t tried, I was trying to be proactive but this might be easier for developers. Just add it, the Chromium\u0027s component will not have these so if this is used in production code it will just break.\n\nLet me try.",
+      "parentUuid": "b5bf2527_73c0df45",
+      "revId": "6d22ec53e08978e1f14fa2628998bf973a92218a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
