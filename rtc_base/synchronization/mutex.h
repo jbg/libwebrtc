@@ -18,9 +18,7 @@
 #include "rtc_base/system/unused.h"
 #include "rtc_base/thread_annotations.h"
 
-#if defined(WEBRTC_ABSL_MUTEX)
-#include "rtc_base/synchronization/mutex_abseil.h"
-#elif defined(WEBRTC_WIN)
+#if defined(WEBRTC_WIN)
 #include "rtc_base/synchronization/mutex_critical_section.h"
 #elif defined(WEBRTC_POSIX)
 #include "rtc_base/synchronization/mutex_pthread.h"

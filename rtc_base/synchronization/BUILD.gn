@@ -35,7 +35,6 @@ rtc_library("mutex") {
     "..:macromagic",
     "../system:unused",
     "//third_party/abseil-cpp/absl/base:core_headers",
-    "//third_party/abseil-cpp/absl/synchronization",
   ]
 }
 
