@@ -71,6 +71,9 @@ class IceControllerInterface {
 
     // An optional recheck event for when a Switch() should be attempted again.
     absl::optional<IceControllerEvent> recheck_event;
+
+    // A vector with connection to run ForgetLearnedState on.
+    std::vector<const Connection*> forget_learned_state;
   };
 
   // This represents the result of a call to SelectConnectionToPing.
