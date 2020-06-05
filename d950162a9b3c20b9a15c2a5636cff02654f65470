@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5080804f_a15f53b9",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-05T12:39:11Z",
+      "side": 1,
+      "message": "there are 2 chains (see line above).\nthis line defined which of the 4 decode targets protected by which chain.",
+      "parentUuid": "24ea93de_fc6079b2",
+      "range": {
+        "startLine": 55,
+        "startChar": 48,
+        "endLine": 55,
+        "endChar": 58
+      },
+      "revId": "d950162a9b3c20b9a15c2a5636cff02654f65470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14cd0f50_eb5631f7",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "befb8564_afd83f2d",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-05T12:39:11Z",
+      "side": 1,
+      "message": "that would probably be more efficient.\nAlso, it would make sense to add FrameDependencyTemplateBuilder:\ncurrently larger GenericFrameInfo object is built, then it is converted into parent FrameDependencyTemplate object.\n\nI\u0027ll sketch something in a separate CL.",
+      "parentUuid": "14cd0f50_eb5631f7",
+      "range": {
+        "startLine": 57,
+        "startChar": 26,
+        "endLine": 57,
+        "endChar": 30
+      },
+      "revId": "d950162a9b3c20b9a15c2a5636cff02654f65470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49aaccdf_4f0e810c",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2020-06-05T12:29:25Z",
       "side": 1,
       "message": "Again, not for this CL but maybe we should add a LayerFrameConfig builder?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 74
+      },
+      "revId": "d950162a9b3c20b9a15c2a5636cff02654f65470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3c1f767_ab700914",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-05T12:39:11Z",
+      "side": 1,
+      "message": "Not sure that would be useful.\nin year c++20 it would make sense to write this differently:\nhttps://webrtc-review.googlesource.com/c/src/+/176377/2/modules/video_coding/codecs/av1/scalability_structure_l1t2.cc",
+      "parentUuid": "49aaccdf_4f0e810c",
       "range": {
         "startLine": 104,
         "startChar": 0,
