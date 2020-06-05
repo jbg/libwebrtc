@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a892cc7_e3fb6b6c",
+        "filename": "rtc_base/critical_section.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-05T09:23:15Z",
+      "side": 0,
+      "message": "I would imagine it works since the API is there since 10.7. I agree, better to force firstfit.",
+      "parentUuid": "71a90d39_aa1cb693",
+      "range": {
+        "startLine": 46,
+        "startChar": 33,
+        "endLine": 46,
+        "endChar": 64
+      },
+      "revId": "10594c3c46d47b30e11228009b40c69f9a760062",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c29e2d2_0d02f1be",
         "filename": "rtc_base/synchronization/mutex_pthread.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "10594c3c46d47b30e11228009b40c69f9a760062",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a587c6e5_f1873890",
+        "filename": "rtc_base/synchronization/mutex_pthread.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-05T09:23:15Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "6c29e2d2_0d02f1be",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 24
+      },
+      "revId": "10594c3c46d47b30e11228009b40c69f9a760062",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
