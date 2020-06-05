@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75dd9ed6_cc860c9e",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-05T14:30:46Z",
+      "side": 1,
+      "message": "It looks a bit unclear to me. I don\u0027t see them to be modified anywhere but in the Start method. And if this is correct - it can be that there is multiple indexes corresponds to one peer_name, but not vice versa.\nAlso, if there is one to many relation I would suggest to use std::multimap instead of std::map, so there will be no need for this cycle.",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f91e74f_f81231b9",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-05T14:30:46Z",
+      "side": 1,
+      "message": "Why does it starts with small letter (same for the last_rendered_frame_time) ?",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "166e97d2_ca04bbe9",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-05T14:30:46Z",
+      "side": 1,
+      "message": "Do I understand correctly, that it means that MultiHeadQueue::queues_[owner_] is the longest among the other queues? (otherwise I think we GetAliveFramesCount() should look something like: frame_ids_.size(owner_) - dead_frames_count_;)",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2c13ffb_66829868",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-05T14:30:46Z",
+      "side": 1,
+      "message": "I think the complexity is constant now",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
