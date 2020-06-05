@@ -291,6 +291,10 @@ bool P2PTransportChannel::MaybeSwitchSelectedConnection(
         result.recheck_event->recheck_delay_ms);
   }
 
+  for (const auto* con : result.forget_learned_state) {
+    const_cast<Connection*>(con)->ForgetLearnedState();
+  }
+
   return result.connection.has_value();
 }
 
