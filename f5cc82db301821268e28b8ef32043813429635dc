@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7689ec04_3bdf91de",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-05T09:28:40Z",
+      "side": 1,
+      "message": "Eldar can you make a CL to delete enable_simulcast_stats now that it has been shipped?",
+      "revId": "f5cc82db301821268e28b8ef32043813429635dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1429ad72_2c13dfb5",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-05T09:28:40Z",
+      "side": 1,
+      "message": "Eldar, does it make sense to you that this is sometimes undefined?\n\nThe unittest is not running for long enough to make stuff ramp up, so it\u0027s possible that its flaky because not enough frames have been processed yet. So I think it makes sense that we see a flake and this CL would fix that problem, just want to make sure we\u0027re not hiding a real issue here.",
+      "revId": "f5cc82db301821268e28b8ef32043813429635dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
