@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4f028cf_a0b24a48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-05T08:58:22Z",
+      "side": 1,
+      "message": "In a follow-up CL, can we add/remove QualityScalerResource from the processor instead of starting/stopping it (being \"started\" is not a general Resource concept, it\u0027s an implementation detail) and as such delete the spam-adapt-up-on-encoded-frame-if-not-started behavior?\n\nBlocked on listening/stop listening automatically on adding/removing, see other comments.",
+      "revId": "73a5f3cd535adfbd803d6e92fe5819ba91d88a2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b86ff73a_82557124",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-05T08:58:22Z",
+      "side": 1,
+      "message": "I think is_resource_adaptation_enabled_ is a remnant of old code not needed now.\n\nThe only thing that Start/StopResourceAdaptation() does is setting or nulling the resource\u0027s ResourceListener... It makes much more sense to listen to the resource on adding it and to stop listening to the resource on removing it. We don\u0027t need an independent mechanism for starting and stopping listening. And looking at calling places in video_stream_encoder.cc, we lazily start it if not already started when configuring the encoder and then it remains started until we permanently stop the VideoStreamEncoder.\n\nThe problem with only starting to listen in a separate function is that if we were to add a resource after we have previously removed it, we wouldn\u0027t be listening to it. Now this is prevented with RTC_DCHECK(!is_resource_adaptation_enabled_) inside AddResource() so it\u0027s not possible to run into this issue because we can\u0027t add it back, but this needs to be fixed for us to be able to add and remove on the fly.\n\nWe could address this in a separate CL, or we could do it now, up to you.",
+      "revId": "73a5f3cd535adfbd803d6e92fe5819ba91d88a2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9300a1eb_7626aa3a",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-05T08:58:22Z",
+      "side": 1,
+      "message": "Would MaybeUpdateVideoSourceRestrictions() trigger VideoStreamEncoderResourceManager::OnVideoSourceRestrictionsUpdated()\u0027s ResetActiveCounts() or was this code path deleted already? Want to make sure this doesn\u0027t trigger a bug in stats.\n\nWould this also trigger VideoStreamEncoder::OnVideoSourceRestrictionsUpdated()\u0027s logging say that the \u003cnull\u003e resource is causing sink updates? Not an issue though because the log in here has already said what just happened.\n\nAnyway I wonder if we can/should rid of the reason argument? Or is that future cleanup?",
+      "revId": "73a5f3cd535adfbd803d6e92fe5819ba91d88a2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
