@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09ec5d8e_426a0ad9",
+        "filename": "p2p/base/p2p_transport_channel.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-05T12:44:39Z",
+      "side": 1,
+      "message": "Supernit: Uppercase Verify",
+      "revId": "c5a3ea38458f6ec8eb029b903b08cd8c64c6c41d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
