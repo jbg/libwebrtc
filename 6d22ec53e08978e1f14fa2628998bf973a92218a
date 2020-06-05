@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d71c6fd7_9054f5f2",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-05T09:09:41Z",
+      "side": 1,
+      "message": "Python accepts both \u0027 and \" as string quotes. Use this to avoid having to escape quotes in string literals. (You already do this on the line above, in fact.)",
+      "range": {
+        "startLine": 358,
+        "startChar": 38,
+        "endLine": 358,
+        "endChar": 51
+      },
+      "revId": "6d22ec53e08978e1f14fa2628998bf973a92218a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19d4e59e_1e898557",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-05T09:09:41Z",
+      "side": 1,
+      "message": "Also check that these are *not* in absl_deps? In fact, maybe check that only allowed stuff is in absl_deps?",
+      "revId": "6d22ec53e08978e1f14fa2628998bf973a92218a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5bf2527_73c0df45",
+        "filename": "abseil-in-webrtc.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-05T09:09:41Z",
+      "side": 1,
+      "message": "Prefix this section with \"Exception:\"? Also, is there a single build target we can list here instead of saying \"Abseil Flags\"?\n\n...come to think of it, if Abseil Flags isn\u0027t present in Chromium, then build targets that depend on it won\u0027t work there, and there will be no problem if they are in absl_deps---but I presume you actually observed build errors, so what\u0027s wrong in my thinking?",
+      "revId": "6d22ec53e08978e1f14fa2628998bf973a92218a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
