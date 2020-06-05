@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2a4a9f41_9566d0e5",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-05T13:06:20Z",
+      "side": 1,
+      "message": "Right",
+      "parentUuid": "5080804f_a15f53b9",
+      "range": {
+        "startLine": 55,
+        "startChar": 48,
+        "endLine": 55,
+        "endChar": 58
+      },
+      "revId": "d950162a9b3c20b9a15c2a5636cff02654f65470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14cd0f50_eb5631f7",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
         "patchSetId": 1
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "Not sure that would be useful.\nin year c++20 it would make sense to write this differently:\nhttps://webrtc-review.googlesource.com/c/src/+/176377/2/modules/video_coding/codecs/av1/scalability_structure_l1t2.cc",
       "parentUuid": "49aaccdf_4f0e810c",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 74
+      },
+      "revId": "d950162a9b3c20b9a15c2a5636cff02654f65470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53916074_c972de18",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-05T13:06:20Z",
+      "side": 1,
+      "message": "Do you know when we will be able to use that syntax? Maybe it\u0027s worth to implement a builder until then?",
+      "parentUuid": "b3c1f767_ab700914",
       "range": {
         "startLine": 104,
         "startChar": 0,
