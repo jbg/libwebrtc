@@ -39,6 +39,30 @@
       "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e54577e4_a3ce2e66",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-06-05T09:02:55Z",
+      "side": 1,
+      "message": "in those cases, won\u0027t https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_coding/codecs/opus/opus_interface.cc;l\u003d734?q\u003dwebrtc_opus_\u0026ss\u003dchromium\u0026originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F be wrong too?\n\nIn configuration 2+3 is the first frame guaranteed to be a SILK frame? If yes this would extract from it and we\u0027d get *some* information out of it and we could take the VAD bits for the other channels into account too.\nIf not we might try limiting this to the SILK-only modes 0-11 but I think i\u0027ve seen webrtc switch into the hybrid modes quite often.\n\nI don\u0027t think we have a good way to extract the position of the second frame (other than parsing the bitstream which I\u0027d rather not) so if the first frame is not a SILK frame getting access to the first byte of the SILK layer would be quite tricky.",
+      "parentUuid": "ada17a2b_2220665b",
+      "range": {
+        "startLine": 704,
+        "startChar": 5,
+        "endLine": 704,
+        "endChar": 70
+      },
+      "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
