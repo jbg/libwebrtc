@@ -33,6 +33,24 @@
       "revId": "f5cc82db301821268e28b8ef32043813429635dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f348e546_018a511e",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-05T13:22:30Z",
+      "side": 1,
+      "message": "Can we make this conditional on other values rather than randomly accepting missing?\nI\u0027d suggest insisting that it\u0027s present if frames_encoded \u003e\u003d 2, and that it\u0027s undefined if frames_encoded \u003c 2. It seems that this function is called from VerifyStats, which is called from a large number of places - at least one of the tests should wait until 2 frames have been transmitted, so that we\u0027re reasonably sure we cover at least that case.",
+      "parentUuid": "1429ad72_2c13dfb5",
+      "revId": "f5cc82db301821268e28b8ef32043813429635dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
