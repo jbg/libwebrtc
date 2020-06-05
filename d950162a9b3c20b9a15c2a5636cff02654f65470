@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24ea93de_fc6079b2",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-05T12:29:25Z",
+      "side": 1,
+      "message": "Worth having 4 chains? Maybe just two?",
+      "range": {
+        "startLine": 55,
+        "startChar": 48,
+        "endLine": 55,
+        "endChar": 58
+      },
+      "revId": "d950162a9b3c20b9a15c2a5636cff02654f65470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14cd0f50_eb5631f7",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-05T12:29:25Z",
+      "side": 1,
+      "message": "WDYT about adding a Dtis(array_view\u003cDecodeTargetIndication\u003e dtis) function to the builder so you don\u0027t have to duplicate kDtis?\n\nNot in this CL though...",
+      "range": {
+        "startLine": 57,
+        "startChar": 26,
+        "endLine": 57,
+        "endChar": 30
+      },
+      "revId": "d950162a9b3c20b9a15c2a5636cff02654f65470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49aaccdf_4f0e810c",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-05T12:29:25Z",
+      "side": 1,
+      "message": "Again, not for this CL but maybe we should add a LayerFrameConfig builder?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 74
+      },
+      "revId": "d950162a9b3c20b9a15c2a5636cff02654f65470",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
