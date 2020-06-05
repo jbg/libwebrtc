@@ -63,6 +63,30 @@
       "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72180a87_3ca307f6",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-06-05T12:00:09Z",
+      "side": 1,
+      "message": "that frame_data in https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_coding/codecs/opus/opus_interface.cc;l\u003d734?q\u003dwebrtc_opus_\u0026ss\u003dchromium\u0026originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F seems to be the beginning of the opus frames after the headers (TOC byte plus extra bytes for the configs 2 and 3). \n\nI was actually not aware of that opus_packet_parse function (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_coding/codecs/opus/opus_interface.cc;drc\u003d422f9dd5df8e70ecca1e0aff83b0e2e114bc70aa;l\u003d699?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F), that function seems to give you all the information that you need as it seems to divide the opus payload in individual frames. The first byte of those frames would be the first byte on the Silk payload. In a similar way as done in the function WebRtcOpus_PacketHasFec you can get the number of Silk frames in the Silk payload. Once you know the number of Silk frames in the payload the vad flag can be something like, \nint vad_flags \u003d first_byte \u003e\u003e (8 - numberSilkFrames);\nbool speech \u003d vad_flags !\u003d 0;\n\n\nAnother option is that we limit your code to the configs that are guarantee to work like you suggested.",
+      "parentUuid": "e54577e4_a3ce2e66",
+      "range": {
+        "startLine": 704,
+        "startChar": 5,
+        "endLine": 704,
+        "endChar": 70
+      },
+      "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
