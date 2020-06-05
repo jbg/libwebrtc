@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2155055_1b7f7ccb",
+        "filename": "rtc_tools/rtc_event_log_visualizer/analyze_audio.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2020-06-05T06:34:06Z",
+      "side": 1,
+      "message": "Remove empty line?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "8c98cbb47831aa574b4d3d4d0087ee504825615b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65273d45_29f5c255",
+        "filename": "rtc_tools/rtc_event_log_visualizer/analyze_audio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5090
+      },
+      "writtenOn": "2020-06-05T06:34:06Z",
+      "side": 1,
+      "message": "Remove empty line?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "8c98cbb47831aa574b4d3d4d0087ee504825615b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
