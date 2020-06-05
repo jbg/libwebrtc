@@ -177,7 +177,6 @@ rtc_library("criticalsection") {
     ":checks",
     ":macromagic",
     ":platform_thread_types",
-    "synchronization:yield",
     "system:rtc_export",
     "system:unused",
   ]
