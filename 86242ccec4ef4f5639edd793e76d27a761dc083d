@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "551f13c4_8b78da15",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-06-05T11:25:42Z",
+      "side": 1,
+      "message": "The IceController is only given const pointers, and then it returns const pointers\nfor the P2PTransportChannel to operate on, that is the contract. The IceController shall not call any mutable methods.",
+      "parentUuid": "7e5bfb15_0d14551e",
+      "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "132b4914_d98186ef",
         "filename": "p2p/base/ice_controller_interface.h",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85df0e49_1dbf2e86",
+        "filename": "p2p/base/ice_controller_interface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-06-05T11:25:42Z",
+      "side": 1,
+      "message": "The IceController is only given const pointers, and then it returns const pointers\nfor the P2PTransportChannel to operate on.",
+      "parentUuid": "132b4914_d98186ef",
+      "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "e33e18c3_174ddd18",
+        "filename": "p2p/base/mock_ice_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-06-05T11:25:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffaab9bb_3101b6f4",
+      "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d16e54d_e505e398",
         "filename": "p2p/base/p2p_transport_channel.cc",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9a39c0f_f412c409",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-06-05T11:25:42Z",
+      "side": 1,
+      "message": "see above.",
+      "parentUuid": "3d16e54d_e505e398",
+      "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "7294ff03_9900c089",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5722,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-06-05T11:25:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be5328ef_0bada082",
+      "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e63abf1_99d2eda4",
         "filename": "p2p/base/p2p_transport_channel_unittest.cc",
         "patchSetId": 1
@@ -101,6 +191,24 @@
       "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9260d148_05a65279",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5749,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-06-05T11:25:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e63abf1_99d2eda4",
+      "revId": "86242ccec4ef4f5639edd793e76d27a761dc083d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
