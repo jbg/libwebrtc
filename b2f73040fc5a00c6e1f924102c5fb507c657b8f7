@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6029134_e1719b6b",
+        "filename": "rtc_base/synchronization/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-05T09:28:59Z",
+      "side": 0,
+      "message": "I think we need a GN variable to neutralize this dependency and add it only when we want to define WEBRTC_ABSL_MUTEX. See https://cs.chromium.org/chromium/src/third_party/webrtc/BUILD.gn?l\u003d264-266\u0026rcl\u003dc0df5fc25b82fc5a2071be55e5357ce786caf637.\n\n  if (rtc_absl_mutex) {\n    deps +\u003d [ \"//third_party/abseil-cpp/absl/synchronization\" ]\n  }\n\nAnd in //BUILD.gn add the define of the macro.",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 52
+      },
+      "revId": "b2f73040fc5a00c6e1f924102c5fb507c657b8f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae1af824_70e9c729",
+        "filename": "rtc_base/synchronization/mutex_abseil.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-05T09:28:59Z",
+      "side": 0,
+      "message": "We should keep this one because we use absl::Mutex in this file.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 39
+      },
+      "revId": "b2f73040fc5a00c6e1f924102c5fb507c657b8f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
