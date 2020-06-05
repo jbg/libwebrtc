@@ -29,6 +29,7 @@
 #include "rtc_base/numerics/samples_stats_counter.h"
 #include "rtc_base/platform_thread.h"
 #include "system_wrappers/include/clock.h"
+#include "test/pc/e2e/analyzer/video/multi_head_queue.h"
 #include "test/testsupport/perf_test.h"
 
 namespace webrtc {
@@ -127,6 +128,28 @@ struct AnalyzerStats {
   int64_t memory_overloaded_comparisons_done = 0;
 };
 
+struct StatsKey {
+  StatsKey(std::string stream_label, std::string sender, std::string receiver)
+      : stream_label(std::move(stream_label)),
+        sender(std::move(sender)),
+        receiver(std::move(receiver)) {}
+
+  std::string ToString() const {
+    return stream_label + "_" + sender + "_" + receiver;
+  }
+
+  // Label of video stream to which stats belongs to.
+  std::string stream_label;
+  // Name of the peer which send this stream.
+  std::string sender;
+  // Name of the peer on which stream was received.
+  std::string receiver;
+};
+
+// Required to use StatsKey as std::map key.
+bool operator<(const StatsKey& a, const StatsKey& b);
+bool operator==(const StatsKey& a, const StatsKey& b);
+
 class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
  public:
   explicit DefaultVideoQualityAnalyzer(
@@ -169,21 +192,19 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
                       const StatsReports& stats_reports) override {}
 
   // Returns set of stream labels, that were met during test call.
-  std::set<std::string> GetKnownVideoStreams() const;
+  std::set<StatsKey> GetKnownVideoStreams() const;
   const FrameCounters& GetGlobalCounters() const;
   // Returns frame counter per stream label. Valid stream labels can be obtained
   // by calling GetKnownVideoStreams()
-  const std::map<std::string, FrameCounters>& GetPerStreamCounters() const;
+  std::map<StatsKey, FrameCounters> GetPerStreamCounters() const;
   // Returns video quality stats per stream label. Valid stream labels can be
   // obtained by calling GetKnownVideoStreams()
-  std::map<std::string, StreamStats> GetStats() const;
+  std::map<StatsKey, StreamStats> GetStats() const;
   AnalyzerStats GetAnalyzerStats() const;
 
  private:
   struct FrameStats {
-    FrameStats(std::string stream_label, Timestamp captured_time);
-
-    std::string stream_label;
+    FrameStats(Timestamp captured_time) : captured_time(captured_time) {}
 
     // Frame events timestamp.
     Timestamp captured_time;
@@ -196,12 +217,11 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
     Timestamp rendered_time = Timestamp::MinusInfinity();
     Timestamp prev_frame_rendered_time = Timestamp::MinusInfinity();
 
+    int64_t encoded_image_size = 0;
     uint32_t target_encode_bitrate = 0;
 
     absl::optional<int> rendered_frame_width = absl::nullopt;
     absl::optional<int> rendered_frame_height = absl::nullopt;
-
-    int64_t encoded_image_size = 0;
   };
 
   // Describes why comparison was done in overloaded mode (without calculating
@@ -223,12 +243,14 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   //      because there were too many comparisons in the queue. |dropped| can be
   //      true or false showing was frame dropped or not.
   struct FrameComparison {
-    FrameComparison(absl::optional<VideoFrame> captured,
+    FrameComparison(StatsKey stats_key,
+                    absl::optional<VideoFrame> captured,
                     absl::optional<VideoFrame> rendered,
                     bool dropped,
                     FrameStats frame_stats,
                     OverloadReason overload_reason);
 
+    StatsKey stats_key;
     // Frames can be omitted if there too many computations waiting in the
     // queue.
     absl::optional<VideoFrame> captured;
@@ -244,26 +266,28 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   // Represents a current state of video stream.
   class StreamState {
    public:
-    void PushBack(uint16_t frame_id) { frame_ids_.emplace_back(frame_id); }
+    StreamState(int owner, int peers_count)
+        : owner_(owner), frame_ids_(peers_count) {}
 
-    uint16_t PopFront();
+    int owner() const { return owner_; }
 
-    bool Empty() { return frame_ids_.empty(); }
-
-    uint16_t Front() { return frame_ids_.front(); }
+    void PushBack(uint16_t frame_id) { frame_ids_.PushBack(frame_id); }
+    // Crash if state is empty.
+    uint16_t PopFront(int peer);
+    bool IsEmpty(int peer) const { return frame_ids_.IsEmpty(peer); }
+    // Crash if state is empty.
+    uint16_t Front(int peer) const { return frame_ids_.Front(peer).value(); }
 
     int GetAliveFramesCount() { return frame_ids_.size() - dead_frames_count_; }
-
     uint16_t MarkNextAliveFrameAsDead();
 
-    void set_last_rendered_frame_time(Timestamp time) {
-      last_rendered_frame_time_ = time;
-    }
-    absl::optional<Timestamp> last_rendered_frame_time() const {
-      return last_rendered_frame_time_;
-    }
+    void SetLastRenderedFrameTime(int peer, Timestamp time);
+    absl::optional<Timestamp> last_rendered_frame_time(int peer) const;
 
    private:
+    // Index of the owner. Owner's head in |frame_ids_| will point on last alive
+    // frame.
+    const int owner_;
     // To correctly determine dropped frames we have to know sequence of frames
     // in each stream so we will keep a list of frame ids inside the stream.
     // When the frame is rendered, we will pop ids from the list for until id
@@ -275,15 +299,92 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
     // If we received frame with id frame_id3, then we will pop frame_id1 and
     // frame_id2 and consider that frames as dropped and then compare received
     // frame with the one from |captured_frames_in_flight_| with id frame_id3.
-    std::deque<uint16_t> frame_ids_;
-    // Count of dead frames in the beginning of the deque.
-    int dead_frames_count_;
-    absl::optional<Timestamp> last_rendered_frame_time_ = absl::nullopt;
+    MultiHeadQueue<uint16_t> frame_ids_;
+    // Count of dead frames in the beginning of the |frame_ids_|.
+    int dead_frames_count_ = 0;
+    std::map<int, Timestamp> last_rendered_frame_time_;
   };
 
   enum State { kNew, kActive, kStopped };
 
-  void AddComparison(absl::optional<VideoFrame> captured,
+  class FrameInFlight {
+   public:
+    FrameInFlight(std::string stream_label,
+                  VideoFrame frame,
+                  Timestamp captured_time,
+                  int receivers_count)
+        : stream_label_(std::move(stream_label)),
+          receivers_count_(receivers_count),
+          frame_(std::move(frame)),
+          captured_time_(captured_time) {}
+
+    std::string stream_label() const { return stream_label_; }
+    absl::optional<VideoFrame> frame() const { return frame_; }
+    // Returns was frame removed or not.
+    bool RemoveFrame();
+    void SetFrameId(uint16_t id);
+
+    std::vector<int> GetPeersWhichDidntReceive();
+    bool DoesAllPeersReceived() {
+      return rendered_time_.size() == static_cast<size_t>(receivers_count_);
+    }
+
+    void SetPreEncodeTime(webrtc::Timestamp time) { pre_encode_time_ = time; }
+
+    void OnFrameEncoded(webrtc::Timestamp time,
+                        int64_t encoded_image_size,
+                        uint32_t target_encode_bitrate);
+    bool HasEncodedTime() const { return encoded_time_.IsFinite(); }
+
+    void OnFramePreDecode(int peer,
+                          webrtc::Timestamp received_time,
+                          webrtc::Timestamp decode_start_time);
+    bool HasReceivedTime(int peer) const {
+      return received_time_.find(peer) != received_time_.end();
+    }
+
+    void SetDecodeEndTime(int peer, webrtc::Timestamp time) {
+      decode_end_time_.insert({peer, time});
+    }
+
+    void OnFrameRendered(int peer,
+                         webrtc::Timestamp time,
+                         int width,
+                         int height);
+    webrtc::Timestamp rendered_time(int peer) const {
+      return rendered_time_.at(peer);
+    }
+    void SetPrevFrameRenderedTime(int peer, webrtc::Timestamp time) {
+      prev_frame_rendered_time_.insert({peer, time});
+    }
+
+    FrameStats GetStatsForPeer(int peer);
+
+   private:
+    const std::string stream_label_;
+    const int receivers_count_;
+    absl::optional<VideoFrame> frame_;
+
+    // Frame events timestamp.
+    Timestamp captured_time_;
+    Timestamp pre_encode_time_ = Timestamp::MinusInfinity();
+    Timestamp encoded_time_ = Timestamp::MinusInfinity();
+    // Time when last packet of a frame was received.
+    std::map<int, Timestamp> received_time_;
+    std::map<int, Timestamp> decode_start_time_;
+    std::map<int, Timestamp> decode_end_time_;
+    std::map<int, Timestamp> rendered_time_;
+    std::map<int, Timestamp> prev_frame_rendered_time_;
+
+    int64_t encoded_image_size_ = 0;
+    uint32_t target_encode_bitrate_ = 0;
+
+    std::map<int, int> rendered_frame_width_;
+    std::map<int, int> rendered_frame_height_;
+  };
+
+  void AddComparison(StatsKey stats_key,
+                     absl::optional<VideoFrame> captured,
                      absl::optional<VideoFrame> rendered,
                      bool dropped,
                      FrameStats frame_stats);
@@ -306,6 +407,9 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   // Returns name of current test case for reporting.
   std::string GetTestCaseName(const std::string& stream_label) const;
   Timestamp Now();
+  // Returns string representation of stats key for metrics naming. Used for
+  // backward compatibility by metrics naming for 2 peers cases.
+  std::string StatsKeyToMetricName(const StatsKey& key);
 
   void StartMeasuringCpuProcessTime();
   void StopMeasuringCpuProcessTime();
@@ -319,6 +423,10 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   std::atomic<uint16_t> next_frame_id_{0};
 
   std::string test_label_;
+  // Mapping from peer name to unique id, which will be used in internal
+  // structure for simplicity.
+  std::map<std::string, int> peer_to_index_;
+  std::map<int, std::string> peer_by_index_;
 
   rtc::CriticalSection lock_;
   State state_ RTC_GUARDED_BY(lock_) = State::kNew;
@@ -330,15 +438,16 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
   // 3. Next available frame id for newly captured frame is X
   // 4. There too many frames in flight for current video stream and X is the
   //    oldest frame id in this stream.
-  std::map<uint16_t, VideoFrame> captured_frames_in_flight_
+  std::map<uint16_t, FrameInFlight> captured_frames_in_flight_
       RTC_GUARDED_BY(lock_);
   // Global frames count for all video streams.
   FrameCounters frame_counters_ RTC_GUARDED_BY(lock_);
-  // Frame counters per each stream.
-  std::map<std::string, FrameCounters> stream_frame_counters_
+  // Frame counters per each stream per each receiver.
+  std::map<std::string, std::map<int, FrameCounters>> stream_frame_counters_
       RTC_GUARDED_BY(lock_);
-  std::map<uint16_t, FrameStats> frame_stats_ RTC_GUARDED_BY(lock_);
   std::map<std::string, StreamState> stream_states_ RTC_GUARDED_BY(lock_);
+  // Map from stream name to its sender.
+  std::map<std::string, std::string> stream_to_sender_ RTC_GUARDED_BY(lock_);
 
   // Stores history mapping between stream labels and frame ids. Updated when
   // frame id overlap. It required to properly return stream label after 1st
@@ -348,9 +457,9 @@ class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
       RTC_GUARDED_BY(lock_);
 
   rtc::CriticalSection comparison_lock_;
-  std::map<std::string, StreamStats> stream_stats_
+  std::map<StatsKey, StreamStats> stream_stats_
       RTC_GUARDED_BY(comparison_lock_);
-  std::map<std::string, Timestamp> stream_last_freeze_end_time_
+  std::map<StatsKey, Timestamp> stream_last_freeze_end_time_
       RTC_GUARDED_BY(comparison_lock_);
   std::deque<FrameComparison> comparisons_ RTC_GUARDED_BY(comparison_lock_);
   AnalyzerStats analyzer_stats_ RTC_GUARDED_BY(comparison_lock_);
