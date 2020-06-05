@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bf0cded_382edfd0",
+        "filename": "rtc_base/synchronization/mutex_benchmark.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-05T08:54:42Z",
+      "side": 1,
+      "message": "I would have solved this without manual looping:\n\n  for (const auto\u0026 s : state) {\n    static_cast\u003cvoid\u003e(s);  // Prevent unused-variable warnings.\n\nBut this way is fine too.",
+      "revId": "5944cd608641a56b7713c8afbf05dde1b6d43931",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
