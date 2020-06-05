@@ -87,6 +87,30 @@
       "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb112a6f_50b25344",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-06-05T13:05:29Z",
+      "side": 1,
+      "message": "hah, i\u0027ll try opus_packet_parse, thank you!",
+      "parentUuid": "72180a87_3ca307f6",
+      "range": {
+        "startLine": 704,
+        "startChar": 5,
+        "endLine": 704,
+        "endChar": 70
+      },
+      "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
