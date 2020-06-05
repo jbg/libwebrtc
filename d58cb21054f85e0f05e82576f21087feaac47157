@@ -16,6 +16,29 @@
       "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ada17a2b_2220665b",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-06-05T08:33:27Z",
+      "side": 1,
+      "message": "This would work for the case when the configuration bits in the TOC byte is equal to 0 meaning that there is just one frame in the packet (section 3.1 rfc6716). \nWhen you have more than one frame per packet this byte might not point out to the beginning of the Silk payload. Specifically, for configuration 2 and 3, that byte does not corresponds with the beginning of the Silk payload. Furthermore, when there are more than one frame in the Opus payload we might want to take a join decision for the VAD flag, for example, equal to speech if any of the frames have activity. \nIt would also be nice to include the option when more than 1 Silk frame has been coded in the frame. For example, the Silk payload could contain 2 subframes of 20 ms each and that bit would just give information of the first frame. You have here, https://source.chromium.org/chromium/chromium/src/+/master:third_party/opus/src/silk/dec_API.c;drc\u003d4481cd115f2c232c7d01a17898b5c6a62a21a2f8;l\u003d389?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F and example on how can be done for extracting the VAD information of each individual SILK subframe. And the TOC byte gives us the number of Silk frames in the Silk payload.\n\nIn summary, I think that your code works fine for the configurations on the TOC byte equal to 0 and 1. However, for the configuration equal to 1 is not taking into account all the frames in the payload. This current version would fail for the configuration 2 and 3. \n\nIn spite of the details that I just wrote, I think that this change is moving in the right direction for getting a more reliable VAD flag.",
+      "range": {
+        "startLine": 704,
+        "startChar": 5,
+        "endLine": 704,
+        "endChar": 70
+      },
+      "revId": "d58cb21054f85e0f05e82576f21087feaac47157",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
