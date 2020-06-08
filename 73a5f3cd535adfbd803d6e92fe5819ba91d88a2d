@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "cd5d9d7c_70ede335",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-06-08T10:02:21Z",
+      "side": 1,
+      "message": "I think you are right. Stop/Start is very confusing (especially when looking at removing QpScaler). I will look at removing these in this patch.",
+      "parentUuid": "b86ff73a_82557124",
+      "revId": "73a5f3cd535adfbd803d6e92fe5819ba91d88a2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9300a1eb_7626aa3a",
         "filename": "call/adaptation/resource_adaptation_processor.cc",
         "patchSetId": 4
@@ -65,6 +83,24 @@
       "writtenOn": "2020-06-05T08:58:22Z",
       "side": 1,
       "message": "Would MaybeUpdateVideoSourceRestrictions() trigger VideoStreamEncoderResourceManager::OnVideoSourceRestrictionsUpdated()\u0027s ResetActiveCounts() or was this code path deleted already? Want to make sure this doesn\u0027t trigger a bug in stats.\n\nWould this also trigger VideoStreamEncoder::OnVideoSourceRestrictionsUpdated()\u0027s logging say that the \u003cnull\u003e resource is causing sink updates? Not an issue though because the log in here has already said what just happened.\n\nAnyway I wonder if we can/should rid of the reason argument? Or is that future cleanup?",
+      "revId": "73a5f3cd535adfbd803d6e92fe5819ba91d88a2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ad2a766_135f8805",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-06-08T10:02:21Z",
+      "side": 1,
+      "message": "I think the Reason is still used somewhere. Will double check, and remove the arg in a followup if possible.",
+      "parentUuid": "9300a1eb_7626aa3a",
       "revId": "73a5f3cd535adfbd803d6e92fe5819ba91d88a2d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
