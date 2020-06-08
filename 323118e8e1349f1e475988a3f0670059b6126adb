@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5ea3e247_4f312a81",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l1t3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-08T14:17:32Z",
+      "side": 1,
+      "message": "doubled checked libaom rtc example for this structure - it uses single reference for 2nd T2 frame,\nso removed first one.\n\n(then again, encoder wrapper that supports predicting from only one buffer is free to ignore the 2nd buffer where referenced \u003d true. though for such case it would have been better to reverse order of mentioning buffers)",
+      "parentUuid": "e10bb160_168076ae",
+      "range": {
+        "startLine": 88,
+        "startChar": 27,
+        "endLine": 88,
+        "endChar": 77
+      },
+      "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee03ca7c_6b1e3c77",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ea4fe3f_1add8594",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-08T14:17:32Z",
+      "side": 1,
+      "message": "you\u0027re right, fixed.",
+      "parentUuid": "ee03ca7c_6b1e3c77",
+      "range": {
+        "startLine": 32,
+        "startChar": 18,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "164b981f_81b0a541",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-08T14:17:32Z",
+      "side": 1,
+      "message": "Right.... Fixed.",
+      "parentUuid": "2e8838c8_36bd4796",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 41
+      },
+      "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8651cf79_83546eda",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t3.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad768e3e_80c06ba0",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-08T14:17:32Z",
+      "side": 1,
+      "message": "I\u0027m not sure what would be right encoder buffers and dti in such case.\nSo added a warning for now.\n\nencoder buffers... probably should be {{/*id\u003d*/0..7, /*referenced\u003d*/false, /*updated\u003d*/true}},\nbut on the the other side it might be better to put such logic into encoder wrapper (it is allowed and encouraged to rewrite config.buffers from \"requested\" to \"actually used\").\n\nif all encoder buffers are updated on the KF, then DTI\u003dS*9 is the right one.",
+      "parentUuid": "8651cf79_83546eda",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 3
+      },
+      "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
