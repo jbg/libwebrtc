@@ -35,7 +35,7 @@ class PerfTestData {
 
 void BM_LockWithMutex(benchmark::State& state) {
   static PerfTestData test_data;
-  for (auto it = state.begin(); it != state.end(); ++it) {
+  for (auto s : state) {  // NOLINT
     benchmark::DoNotOptimize(test_data.AddToCounter(2));
   }
 }
