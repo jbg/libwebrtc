@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "8210225d_24273dfc",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "nit:\nI believe [] operator would be more clear.",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 46
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45a3e779_171ade09",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "peer_by_index[i] \u003d peer_names[i];",
+      "range": {
+        "startLine": 111,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 46
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "75dd9ed6_cc860c9e",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
         "patchSetId": 7
@@ -13,6 +59,87 @@
       "writtenOn": "2020-06-05T14:30:46Z",
       "side": 1,
       "message": "It looks a bit unclear to me. I don\u0027t see them to be modified anywhere but in the Start method. And if this is correct - it can be that there is multiple indexes corresponds to one peer_name, but not vice versa.\nAlso, if there is one to many relation I would suggest to use std::multimap instead of std::map, so there will be no need for this cycle.",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b173c28_dfe76ee3",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "It looks that the idea here is to check StatsKey for each pair of peers.\nYou should run the loop on index from 0 to |index_to_peer_.size()| and if current loop index isn\u0027t equal to |peer_index| do something with |peer_name| and |index_to_peer_[i]|. This code will be more readable once you change index_to_peer_ to be a vector.",
+      "parentUuid": "75dd9ed6_cc860c9e",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eab66a3e_f73f995d",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "again, prefer iterating over a vector index_to_peer_. Code will be clearer.",
+      "range": {
+        "startLine": 187,
+        "startChar": 6,
+        "endLine": 187,
+        "endChar": 47
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4dd9b5de_ea7aaabe",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "peer_by_index_.size() or peers_.size()",
+      "range": {
+        "startLine": 203,
+        "startChar": 32,
+        "endLine": 203,
+        "endChar": 46
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bb7e439_9b52dc72",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "Why do you increase counter for all the peers here? Also, it should be just a loop from 0 to peers_.size()-1 here. Unless you don\u0027t want to compare peers_[i] with peer_name.",
       "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -47,6 +174,92 @@
       "writtenOn": "2020-06-05T14:30:46Z",
       "side": 1,
       "message": "Do I understand correctly, that it means that MultiHeadQueue::queues_[owner_] is the longest among the other queues? (otherwise I think we GetAliveFramesCount() should look something like: frame_ids_.size(owner_) - dead_frames_count_;)",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a5317d8_1cf06ee2",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "\"Did\"",
+      "range": {
+        "startLine": 328,
+        "startChar": 9,
+        "endLine": 328,
+        "endChar": 13
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdc56e33_1d61720c",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "Nit: for readability, when you have a multiline definitions, please add empty lines between them and other declarations.",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d446fbc_10070885",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "This should be a vector. Maybe even rename it to |peers_|",
+      "range": {
+        "startLine": 429,
+        "startChar": 1,
+        "endLine": 429,
+        "endChar": 44
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f17cad1d_0fe43978",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-08T09:00:23Z",
+      "side": 1,
+      "message": "I don\u0027t like this structure. Can you make it a flat map and use StatsKey as a key?",
+      "range": {
+        "startLine": 446,
+        "startChar": 2,
+        "endLine": 446,
+        "endChar": 53
+      },
       "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
