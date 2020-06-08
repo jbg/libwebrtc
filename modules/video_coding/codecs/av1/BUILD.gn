@@ -41,6 +41,7 @@ rtc_source_set("scalable_video_controller") {
     "scalable_video_controller_no_layering.h",
   ]
   deps = [
+    "../../../../api:array_view",
     "../../../../api/transport/rtp:dependency_descriptor",
     "../../../../common_video/generic_frame_descriptor",
     "../../../../rtc_base:checks",
