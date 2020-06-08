@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "087e87b1_f237f9ee",
+        "filename": "rtc_base/synchronization/mutex_benchmark.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-08T15:59:16Z",
+      "side": 0,
+      "message": "Mirko, using explicit iterators makes benchmark fail with an assertion in debug mode on startup:\n\n  ../../third_party/google_benchmark/src/src/benchmark.cc:197: StartKeepRunning: Check `!started_ \u0026\u0026 !finished_\u0027 failed. \n\nThe range for makes things work again.\nI didn\u0027t look into why this happens, but the benchmark.h docs say we shouldn\u0027t call state.begin()/end() explicitly...",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 58
+      },
+      "revId": "4091d34171319a2dedd98a8abb6c870e51e5dff6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

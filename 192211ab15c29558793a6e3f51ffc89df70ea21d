@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b077560d_e511347a",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-08T15:59:16Z",
+      "side": 1,
+      "message": "Using the default std::memory_order_seq_cst looses us about 30% of the performance in uncontended cases:\n\n  Run on (12 X 4500 MHz CPU s)\n  CPU Caches:\n    L1 Data 32 KiB (x6)\n    L1 Instruction 32 KiB (x6)\n    L2 Unified 1024 KiB (x6)\n    L3 Unified 8448 KiB (x1)\n  Load Average: 0.51, 0.65, 0.71\n  ----------------------------------------------------------------------\n  Benchmark                            Time             CPU   Iterations\n  ----------------------------------------------------------------------\n  BM_LockWithMutex/threads:1        21.7 ns         21.7 ns     32171653\n  BM_LockWithMutex/threads:2        61.1 ns          122 ns      7390562\n  BM_LockWithMutex/threads:4        94.5 ns          354 ns      2115080\n  BM_LockWithMutex/threads:12        133 ns         1442 ns       481584",
+      "range": {
+        "startLine": 62,
+        "startChar": 54,
+        "endLine": 62,
+        "endChar": 74
+      },
+      "revId": "192211ab15c29558793a6e3f51ffc89df70ea21d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
