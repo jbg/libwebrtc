@@ -541,11 +541,14 @@ rtc_library("default_audio_quality_analyzer") {
     "../..:perf_test",
     "../../../api:audio_quality_analyzer_api",
     "../../../api:libjingle_peerconnection_api",
+    "../../../api:rtc_stats_api",
     "../../../api:stats_observer_interface",
     "../../../api:track_id_stream_label_map",
+    "../../../api/units:timestamp",
     "../../../rtc_base:criticalsection",
     "../../../rtc_base:logging",
     "../../../rtc_base:rtc_numerics",
+    "../../../system_wrappers",
   ]
 }
 
