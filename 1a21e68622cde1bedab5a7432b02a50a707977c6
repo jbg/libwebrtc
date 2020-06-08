@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e937422d_6108f5b6",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "This loop will be executed fully only got the 1st frame in stream (see comment below)\n\nFor stream counters update loop - I don\u0027t see other option, we have to go through all receivers in each method.\n\nAbout loop on line 193, that one will be executed only if we will go overlap of frame ids and will hit the steam\u0027s first frame by its last frame. It should be rare and unlikely event and means something already is very bad.",
+      "parentUuid": "d9bc321e_f0b1efd9",
+      "range": {
+        "startLine": 152,
+        "startChar": 6,
+        "endLine": 152,
+        "endChar": 74
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "067bdaea_c21fc08a",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a622e50_7def4b85",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "I think here CHECK make sense, but sometimes I prefer to continue run test, if we can tolerate failure, because gathering metrics is quite important. Tests usually are long, so rerun may be costly.",
+      "parentUuid": "067bdaea_c21fc08a",
+      "range": {
+        "startLine": 228,
+        "startChar": 10,
+        "endLine": 228,
+        "endChar": 11
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ffd0e4b6_d237bd80",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38b3a483_761f06e1",
+      "range": {
+        "startLine": 229,
+        "startChar": 14,
+        "endLine": 229,
+        "endChar": 35
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc492e44_637f89eb",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 8
@@ -91,6 +163,30 @@
       "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60605af4_a994ffa0",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc492e44_637f89eb",
+      "range": {
+        "startLine": 138,
+        "startChar": 11,
+        "endLine": 138,
+        "endChar": 56
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "28a76e5b_2dc02973",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93604877_611c915a",
+      "range": {
+        "startLine": 290,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 78
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ccfc55a_aeac2742",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 8
@@ -137,6 +257,30 @@
       "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7584e58a_b62d3620",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ccfc55a_aeac2742",
+      "range": {
+        "startLine": 318,
+        "startChar": 4,
+        "endLine": 318,
+        "endChar": 15
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "60ea3ef0_19f3895d",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "Yep, also there is a local var inside.",
+      "parentUuid": "bab95fa2_8ff99e25",
+      "range": {
+        "startLine": 324,
+        "startChar": 4,
+        "endLine": 324,
+        "endChar": 23
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44e62433_499c02ea",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 8
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "7114c958_2053281c",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44e62433_499c02ea",
+      "range": {
+        "startLine": 369,
+        "startChar": 4,
+        "endLine": 369,
+        "endChar": 53
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1246b941_2d8ffb13",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 8
@@ -206,6 +398,30 @@
       "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e99a04d_b5095e9a",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T18:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1246b941_2d8ffb13",
+      "range": {
+        "startLine": 370,
+        "startChar": 4,
+        "endLine": 380,
+        "endChar": 49
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
