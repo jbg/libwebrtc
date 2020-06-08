@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f5bae61a_f0375860",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8210225d_24273dfc",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 46
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45a3e779_171ade09",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a143cc4e_cabcbc5b",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Replaced with peers_ \u003d std::vector\u003cstd::string\u003e(peer_names.begin(), peer_names.end());",
+      "parentUuid": "45a3e779_171ade09",
+      "range": {
+        "startLine": 111,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 46
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -83,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "6f68671d_ac85d4a6",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Idea is to have 1:1 mapping between index and peer.\npeer_to_index_ maps each peer name to exactly 1 index and peer_by_index_ stores a backward index, so together they serve as bimap.",
+      "parentUuid": "75dd9ed6_cc860c9e",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eab66a3e_f73f995d",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
         "patchSetId": 7
@@ -103,6 +169,30 @@
       "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4460bb0e_e54196f2",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eab66a3e_f73f995d",
+      "range": {
+        "startLine": 187,
+        "startChar": 6,
+        "endLine": 187,
+        "endChar": 47
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -129,6 +219,30 @@
     },
     {
       "key": {
+        "uuid": "bf2457a2_d3ad32aa",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dd9b5de_ea7aaabe",
+      "range": {
+        "startLine": 203,
+        "startChar": 32,
+        "endLine": 203,
+        "endChar": 46
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9bb7e439_9b52dc72",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
         "patchSetId": 7
@@ -143,6 +257,24 @@
       "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87ed05eb_cee01adf",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Loop fixed. \nSender side counters are the same for all receivers, so it is why I loop through all peers. Added skipping sender to keep stats clean.",
+      "parentUuid": "9bb7e439_9b52dc72",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +295,24 @@
     },
     {
       "key": {
+        "uuid": "27a720c4_a040602e",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "For field getter that returns field unchanged usually methods have the same name as field",
+      "parentUuid": "1f91e74f_f81231b9",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "166e97d2_ca04bbe9",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 7
@@ -177,6 +327,24 @@
       "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee8c1590_a39524b1",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "It\u0027s not the longest, but the idea is that if we have single video stream like:\n1-\u003e2-\u003e3-\u003e4-\u003e5-\u003e6\nthen queues may look like:\n2-\u003e3-\u003e4-\u003e5-\u003e6 [owner]\n3-\u003e4-\u003e5-\u003e6 [1]\n1-\u003e2-\u003e3-\u003e4-\u003e5-\u003e6 [2]\n\nIt will mean that peer [1] received frames 1 and 2, peer [2] still didn\u0027t receive anything and queue size became too big, so frame 1 was removed from VideoAnalyzer (frame buffer was removed from |frames_in_flight_|). \n\nBut you are right, GetAliveFramesCount() can be simplified, but just to the frame_ids_.size(owner_). Done.",
+      "parentUuid": "166e97d2_ca04bbe9",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -200,6 +368,30 @@
       "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "783a2b1c_2cef62f2",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a5317d8_1cf06ee2",
+      "range": {
+        "startLine": 328,
+        "startChar": 9,
+        "endLine": 328,
+        "endChar": 13
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -243,6 +435,30 @@
     },
     {
       "key": {
+        "uuid": "2d6dc130_ead99d6e",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d446fbc_10070885",
+      "range": {
+        "startLine": 429,
+        "startChar": 1,
+        "endLine": 429,
+        "endChar": 44
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f17cad1d_0fe43978",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 7
@@ -266,6 +482,30 @@
     },
     {
       "key": {
+        "uuid": "7c579577_be9150b3",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "I also don\u0027t like it, but I before I though that I can\u0027t. Now I see, that I can, thanks :)",
+      "parentUuid": "f17cad1d_0fe43978",
+      "range": {
+        "startLine": 446,
+        "startChar": 2,
+        "endLine": 446,
+        "endChar": 53
+      },
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2c13ffb_66829868",
         "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
         "patchSetId": 7
@@ -280,6 +520,24 @@
       "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb929f0b_24ed2478",
+        "filename": "test/pc/e2e/analyzer/video/multi_head_queue.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-08T11:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2c13ffb_66829868",
+      "revId": "1d5187302e81ea360bd5621c3c8daffdb2abaccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
