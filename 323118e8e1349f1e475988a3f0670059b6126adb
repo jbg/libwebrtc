@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e10bb160_168076ae",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l1t3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-08T12:31:46Z",
+      "side": 1,
+      "message": "Not sure if we want to have this here. It might be the case that some encoder in RT mode only predicts from one buffer, even though it is allowed to predict from several. Not sure...",
+      "range": {
+        "startLine": 88,
+        "startChar": 27,
+        "endLine": 88,
+        "endChar": 77
+      },
+      "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee03ca7c_6b1e3c77",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-08T12:31:46Z",
+      "side": 1,
+      "message": "kSwitch?",
+      "range": {
+        "startLine": 32,
+        "startChar": 18,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e8838c8_36bd4796",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-08T12:31:46Z",
+      "side": 1,
+      "message": "Not needed, should be the same as Key, S2?",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 41
+      },
+      "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8651cf79_83546eda",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-08T12:31:46Z",
+      "side": 1,
+      "message": "What happens to S1 and S2 if the encoder decides to encode a keyframe? It looks like we will provide the wrong encoder_buffers and decoder_target_indications in that case?",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 3
+      },
+      "revId": "323118e8e1349f1e475988a3f0670059b6126adb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
