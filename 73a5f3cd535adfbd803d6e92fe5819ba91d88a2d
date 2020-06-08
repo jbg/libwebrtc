@@ -122,6 +122,24 @@
       "revId": "73a5f3cd535adfbd803d6e92fe5819ba91d88a2d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ef7f46b_a33a2734",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-06-08T15:36:00Z",
+      "side": 1,
+      "message": "I need to do this in a separate patch, its too much to clean here. TODO is already in place where this need to be fixed in the video_stream_encoder_resource_manger",
+      "parentUuid": "5ad2a766_135f8805",
+      "revId": "73a5f3cd535adfbd803d6e92fe5819ba91d88a2d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
