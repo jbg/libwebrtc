@@ -14,6 +14,7 @@
 
 #include "absl/container/inlined_vector.h"
 #include "absl/types/optional.h"
+#include "api/array_view.h"
 #include "api/transport/rtp/dependency_descriptor.h"
 #include "common_video/generic_frame_descriptor/generic_frame_info.h"
 
@@ -28,23 +29,65 @@ class ScalableVideoController {
     int num_spatial_layers = 1;
     int num_temporal_layers = 1;
   };
-  struct LayerFrameConfig {
+  class LayerFrameConfig {
+   public:
+    // Builders/setters.
+    LayerFrameConfig& Id(int value) {
+      id_ = value;
+      return *this;
+    }
+    LayerFrameConfig& Keyframe() {
+      is_keyframe_ = true;
+      return *this;
+    }
+    LayerFrameConfig& S(int value) {
+      spatial_id_ = value;
+      return *this;
+    }
+    LayerFrameConfig& T(int value) {
+      temporal_id_ = value;
+      return *this;
+    }
+    LayerFrameConfig& Reference(int buffer_id) {
+      buffers_.emplace_back(buffer_id, /*referenced=*/true, /*updated=*/false);
+      return *this;
+    }
+    LayerFrameConfig& Update(int buffer_id) {
+      buffers_.emplace_back(buffer_id, /*referenced=*/false, /*updated=*/true);
+      return *this;
+    }
+    LayerFrameConfig& ReferenceAndUpdate(int buffer_id) {
+      buffers_.emplace_back(buffer_id, /*referenced=*/true, /*updated=*/true);
+      return *this;
+    }
+
+    // Getters.
+    int Id() const { return id_; }
+    bool IsKeyframe() const { return is_keyframe_; }
+    int SpatialId() const { return spatial_id_; }
+    int TemporalId() const { return temporal_id_; }
+    const absl::InlinedVector<CodecBufferUsage, kMaxEncoderBuffers>& Buffers()
+        const {
+      return buffers_;
+    }
+
+   private:
     // Id to match configuration returned by NextFrameConfig with
     // (possibly modified) configuration passed back via OnEncoderDone.
     // The meaning of the id is an implementation detail of
     // the ScalableVideoController.
-    int id = 0;
+    int id_ = 0;
 
     // Indication frame should be encoded as a key frame. In particular when
     // `is_keyframe=true` property `CodecBufferUsage::referenced` should be
     // ignored and treated as false.
-    bool is_keyframe = false;
+    bool is_keyframe_ = false;
 
-    int spatial_id = 0;
-    int temporal_id = 0;
+    int spatial_id_ = 0;
+    int temporal_id_ = 0;
     // Describes how encoder which buffers encoder allowed to reference and
     // which buffers encoder should update.
-    absl::InlinedVector<CodecBufferUsage, kMaxEncoderBuffers> buffers;
+    absl::InlinedVector<CodecBufferUsage, kMaxEncoderBuffers> buffers_;
   };
 
   virtual ~ScalableVideoController() = default;
