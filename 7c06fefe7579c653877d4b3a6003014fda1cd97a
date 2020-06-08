@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "7c1ee8e2_e654422c",
+        "filename": "api/rtp_transceiver_interface.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-08T13:52:58Z",
+      "side": 1,
+      "message": "should it be \u003cconst RtpHeaderExtensionCapability\u003e?\n(i.e. is header_extensions_to_offer input-only parameter, or is it input-output parameter?)",
+      "range": {
+        "startLine": 140,
+        "startChar": 21,
+        "endLine": 140,
+        "endChar": 49
+      },
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f806096e_a3712f83",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-08T13:52:58Z",
+      "side": 1,
+      "message": "rtc::ArrayView\u003cconst T\u003e is often better parameter type than const std::vector\u003cT\u003e\u0026\n(the function only traverse the array)",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 60
+      },
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1e3f70f_2b4cfdb2",
         "filename": "pc/media_session.cc",
         "patchSetId": 8
@@ -13,6 +59,24 @@
       "writtenOn": "2020-06-08T07:24:09Z",
       "side": 1,
       "message": "any reason to allocate the extra variable instead of just wrapping push_back() around the constructor call? This is pass-by-value storage, no lifetime considerations.",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5644e5fe_e70f36a1",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-08T13:52:58Z",
+      "side": 1,
+      "message": "or\nexts.emplace_back(extension_with_direction.uri, extension_with_direction.preferred_id.value_or(1));\n\n(to also avoid extra move on the webrtc::RtpExtension)",
+      "parentUuid": "b1e3f70f_2b4cfdb2",
       "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -47,6 +111,24 @@
       "writtenOn": "2020-06-08T07:24:09Z",
       "side": 1,
       "message": "I think you can do this in one line or so using \"return std::filter(capabilities,\n  [](cap) { return cap.direction \u003d\u003d RtpTransceiverDirection::kStopped; })\" or something magical like that. Passing vectors by value is usually a Bad Habit.",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0a09ffa_6701bc63",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-08T13:52:58Z",
+      "side": 1,
+      "message": "in modern c++ passing (vector) by value is a good habit,\nmostly thanks to copy elision (https://abseil.io/tips/117),\nbut also thanks to cheap move constructor.\n\npassing by value is recommended by style guide\nhttps://google.github.io/styleguide/cppguide.html#Inputs_and_Outputs\n\n\"Prefer using return values over output parameters: they improve readability, and often provide the same or better performance.\"\n\n\nOn the other side, the magic for removing elements from the vector (without multiple shifting) is\n\ncapabilities.erase(std::remove_if(capabilities.begin(), capabilities.end(), [](const webrtc::RtpHeaderExtensionCapability\u0026 capability) {\n  return capability.direction \u003d\u003d RTPTransceiverDirection::kStopped;\n}), capabilities.end());\n\nhttps://en.cppreference.com/w/cpp/algorithm/remove",
+      "parentUuid": "0f703371_43bade4b",
       "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
