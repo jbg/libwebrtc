@@ -8,16 +8,16 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'd96e9f16ae852ec9dbd15bf17df3d440402413bb',
+  'chromium_revision': '734187142549c0a0d1606c8ed67626d1f56fc801',
 }
 
 deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@6e5def0362ee5a7f9f41fe0a95936032cbb33a3f',
+    'https://chromium.googlesource.com/chromium/src/base@12aafbd23b4cf72e67dd34c0f618caa18f8aa053',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@036a45efe67668d5c1520c6de8ed9a4f987daa16',
+    'https://chromium.googlesource.com/chromium/src/build@ec5f3c20a5cd3d56af260a11d1c4ad9093ff05cb',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@1b066f021638735d72aa799ae6bc37e0b8963c67',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -30,9 +30,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@4e6ae93982c8d9c299a43fab861ea6a616f8523b',
+    'https://chromium.googlesource.com/chromium/src/testing@43b9fc8cce3dedc163cf440650cfbf7702564425',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@32f94c7405b4781113a3544b575842b986ba8854',
+    'https://chromium.googlesource.com/chromium/src/third_party@42523fd401f15cd2e66870b89bc3fa547e5608ea',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -123,7 +123,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@2757a2c9c819fcae3784576aef0c8400c7ad06d7',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@69b4144bb101fbdfdda6ffb5257e89a3f28cb1cb',
+    'https://chromium.googlesource.com/catapult.git@03e7ff403592957f00e5af8c9ebe93d5939e335c',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
