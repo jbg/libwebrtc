@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1e3f70f_2b4cfdb2",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-08T07:24:09Z",
+      "side": 1,
+      "message": "any reason to allocate the extra variable instead of just wrapping push_back() around the constructor call? This is pass-by-value storage, no lifetime considerations.",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "947ad902_ef934a16",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-08T07:24:09Z",
+      "side": 1,
+      "message": "\"Unstopped\" is an ugly word, though. Can you call it DesiredRtpHeaderExtensionCapabilities?",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f703371_43bade4b",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-08T07:24:09Z",
+      "side": 1,
+      "message": "I think you can do this in one line or so using \"return std::filter(capabilities,\n  [](cap) { return cap.direction \u003d\u003d RtpTransceiverDirection::kStopped; })\" or something magical like that. Passing vectors by value is usually a Bad Habit.",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a8c5882_1b24ff65",
+        "filename": "pc/media_session.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-08T07:24:09Z",
+      "side": 1,
+      "message": "I know it\u0027s a pain to wirite, but can we call this GetOfferedRtpHeaderExtensionsWithIds?",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a50b18f3_5970a1d0",
+        "filename": "pc/media_session_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1989,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-08T07:24:09Z",
+      "side": 1,
+      "message": "can you make the extension IDs slightly less regular?\nIf something at some point assumes that the numbers are 1, 2, 3, 4 - the test should fail.",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b62593a2_19d3c762",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-08T07:24:09Z",
+      "side": 1,
+      "message": "MID for unified-plan is the only mandatory-to-use extension I know of.\n\nThis is already done below - you call it \"step 2.5\", but it\u0027s actually step 2.4.\n\nThe other mandatory-to-use extension is video orientation, referenced in https://tools.ietf.org/html/draft-ietf-rtcweb-video-06#section-4; only applicable to video.",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a208f3a6_3dab18b9",
+        "filename": "pc/rtp_transceiver_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-08T07:24:09Z",
+      "side": 1,
+      "message": "Here you could add a comment - it\u0027s hard to see when reading it that extensions[2] is the MID extension, and without that, you can\u0027t see the difference between this and AcceptsStoppedExtension.",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
