@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9bc321e_f0b1efd9",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "We tend to generate the StatsKey in a for loop for every captured frame (and multiple times, see below), is there a way to avoid this?",
+      "range": {
+        "startLine": 152,
+        "startChar": 6,
+        "endLine": 152,
+        "endChar": 74
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "067bdaea_c21fc08a",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "Given this is a test framework, maybe CHECK?\n\nI am always in doubt but crashing a test is cheap and increase correctness.",
+      "range": {
+        "startLine": 228,
+        "startChar": 10,
+        "endLine": 228,
+        "endChar": 11
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38b3a483_761f06e1",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "Maybe let\u0027s say something more, like \"Frame \u003cID\u003e supposed to be in flight but hasn\u0027t been found in captured_frames_in_flight_\".",
+      "range": {
+        "startLine": 229,
+        "startChar": 14,
+        "endLine": 229,
+        "endChar": 35
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc492e44_637f89eb",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "I know we do this in other places, but I am starting to think if we should use https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/strings/string_builder.h and avoid to create too many temporaries.\n\n(we might update to absl::StrFormat in the future but for now https://cs.chromium.org/chromium/src/third_party/webrtc/rtc_base/strings/string_builder.h is better than concatenating strings).",
+      "range": {
+        "startLine": 138,
+        "startChar": 11,
+        "endLine": 138,
+        "endChar": 56
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93604877_611c915a",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "I think this part needs to be updated. The internals of the class have changed form a simple queue to a multi-head queue and the concept of owner is not easy to grasp at first sight.",
+      "range": {
+        "startLine": 290,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 78
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ccfc55a_aeac2742",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "const std::string\u0026 ?",
+      "range": {
+        "startLine": 318,
+        "startChar": 4,
+        "endLine": 318,
+        "endChar": 15
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bab95fa2_8ff99e25",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "I guess this is a small vector so it is fine to copy?",
+      "range": {
+        "startLine": 324,
+        "startChar": 4,
+        "endLine": 324,
+        "endChar": 23
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44e62433_499c02ea",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "Let\u0027s mention that the key is the peer (id?).",
+      "range": {
+        "startLine": 369,
+        "startChar": 4,
+        "endLine": 369,
+        "endChar": 53
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1246b941_2d8ffb13",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-08T15:06:45Z",
+      "side": 1,
+      "message": "What about having 1 std::map with k\u003dpeer and v\u003dstruct with relevant timestamps?",
+      "range": {
+        "startLine": 370,
+        "startChar": 4,
+        "endLine": 380,
+        "endChar": 49
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
