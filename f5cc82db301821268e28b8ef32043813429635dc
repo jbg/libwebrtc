@@ -69,6 +69,24 @@
       "revId": "f5cc82db301821268e28b8ef32043813429635dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1610c2e_05fde8ec",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-09T08:47:59Z",
+      "side": 1,
+      "message": "If it triggers on \"bucket of time\" rather than \"number of frames\", the triggering condition is not easily accessible.\nThat\u0027s also behavior that is hard to test for, so the stats definition may need to mention this explicitly.\n\nI\u0027d say land this CL and add a TODO.",
+      "parentUuid": "15714d1a_44b5a7bf",
+      "revId": "f5cc82db301821268e28b8ef32043813429635dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
