@@ -15,6 +15,7 @@
 
 #include "absl/base/const_init.h"
 #include "rtc_base/checks.h"
+#include "rtc_base/platform_thread.h"
 #include "rtc_base/system/unused.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -34,18 +35,52 @@ namespace webrtc {
 // (i.e. non-reentrant etc).
 class RTC_LOCKABLE Mutex final {
  public:
-  Mutex() = default;
+  Mutex() : holder_(0) {}
   Mutex(const Mutex&) = delete;
   Mutex& operator=(const Mutex&) = delete;
 
-  void Lock() RTC_EXCLUSIVE_LOCK_FUNCTION() { impl_.Lock(); }
-  RTC_WARN_UNUSED_RESULT bool TryLock() RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
-    return impl_.TryLock();
+  void Lock() RTC_EXCLUSIVE_LOCK_FUNCTION() {
+    rtc::PlatformThreadRef current = CurrentThreadRefAssertingNotBeingHolder();
+    impl_.Lock();
+    holder_.store(current, std::memory_order_release);
   }
-  void Unlock() RTC_UNLOCK_FUNCTION() { impl_.Unlock(); }
+  RTC_WARN_UNUSED_RESULT bool TryLock() RTC_EXCLUSIVE_TRYLOCK_FUNCTION(true) {
+    rtc::PlatformThreadRef current = CurrentThreadRefAssertingNotBeingHolder();
+    if (impl_.TryLock()) {
+      holder_.store(current, std::memory_order_release);
+      return true;
+    }
+    return false;
+  }
+  void Unlock() RTC_UNLOCK_FUNCTION() {
+    holder_.store(0, std::memory_order_release);
+    impl_.Unlock();
+  }
 
  private:
+  rtc::PlatformThreadRef CurrentThreadRefAssertingNotBeingHolder() {
+    rtc::PlatformThreadRef holder = holder_.load(std::memory_order_acquire);
+    rtc::PlatformThreadRef current = rtc::CurrentThreadRef();
+    // TODO(bugs.webrtc.org/11567): remove this temporary check after migrating
+    // fully to Mutex.
+    RTC_CHECK_NE(holder, current);
+    return current;
+  }
+
   MutexImpl impl_;
+  // TODO(bugs.webrtc.org/11567): remove |holder_| after migrating fully to
+  // Mutex.
+  // |holder_| contains the PlatformThreadRef of the thread currently holding
+  // the lock, or 0.
+  // Remarks on the used memory orders: the atomic load in
+  // CurrentThreadRefAssertingNotBeingHolder() observes the effect of the stores
+  // to |holder_|. It's inherently racy WRT the lock operation, and it can
+  // observe a 0 when another thread just locked the mutex. This does not matter
+  // as we compare it to what we wrote ourselves, so memory_order_relaxed could
+  // work. To keep things tidy however we want to keep things sequentially
+  // consistent, so we use acquire/release which will not be reordered WRT the
+  // mutex locks/unlocks.
+  std::atomic<rtc::PlatformThreadRef> holder_;
 };
 
 // MutexLock, for serializing execution through a scope.
