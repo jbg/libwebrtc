@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4686df35_e9d224a8",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T07:55:04Z",
+      "side": 1,
+      "message": "Remove this change and initialize holder_ on line 73 instead?",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b072fb1f_a09ced6b",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T07:55:04Z",
+      "side": 1,
+      "message": "All three std::memory_order_release and the std::memory_order_acquire can be std::memory_order_relaxed if I\u0027m not mistaken, since we do not need to prevent any other memory accesses from being reordered past the atomic instructions.\n\nAlso, add a comment documenting your choice of memory order; these things are difficult enough to get right that it\u0027s very valuable to be able to read about what the author thought they were doing... A good place to do so might be in the comment for the data member on line 73.",
+      "range": {
+        "startLine": 45,
+        "startChar": 27,
+        "endLine": 45,
+        "endChar": 52
+      },
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64c2c705_89ab0cb8",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T07:55:04Z",
+      "side": 1,
+      "message": "Do we get stacktraces on all platforms that we care about?\n\nIf not, having the CHECK here will almost certainly make it useless; if it fires, the line number in the log will point here, and we will have no idea who the caller was or even what mutex they were about to deadlock on.",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea087334_82d79736",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T07:55:04Z",
+      "side": 1,
+      "message": "Document what this data member is?",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42602b82_e2be0292",
+        "filename": "rtc_base/synchronization/mutex_benchmark.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T07:55:04Z",
+      "side": 1,
+      "message": "Is the state type trivially and cheaply copyable? Otherwise, consider `const auto\u0026`.",
+      "range": {
+        "startLine": 39,
+        "startChar": 7,
+        "endLine": 39,
+        "endChar": 11
+      },
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
