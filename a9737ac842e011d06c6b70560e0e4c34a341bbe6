@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45f00421_778b7b73",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T14:39:57Z",
+      "side": 1,
+      "message": "What exactly does \"scream\" mean? Will a diagnostic message be printed? (Asking because we have a number of mutex implementations, and you are stating that they all have this feature.)",
+      "range": {
+        "startLine": 59,
+        "startChar": 50,
+        "endLine": 59,
+        "endChar": 72
+      },
+      "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab4a70f7_f8b07e52",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T14:39:57Z",
+      "side": 1,
+      "message": "You can\u0027t tell either way. In both cases, observing y indicates that the thread with ID y locked the mutex and wrote y, but in both cases that thread may already have released the mutex by the time we get around to reacting to that information. The one thing that we gain by our thread acquiring and the other thread releasing is that memory accesses it makes before the atomic instruction are guaranteed to appear to happen before memory accesses that we make after the atomic instruction.\n\nSince those two sets of memory accesses don\u0027t touch the same locations in memory, the acquire+release ordering is pointless.",
+      "range": {
+        "startLine": 86,
+        "startChar": 62,
+        "endLine": 88,
+        "endChar": 19
+      },
+      "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "679b5a28_7b4423de",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T14:39:57Z",
+      "side": 1,
+      "message": "\"Sequentially consistent\" has a specific meaning in the context of std::atomic; you get it by using std:: memory_order_seq_cst.",
+      "range": {
+        "startLine": 89,
+        "startChar": 37,
+        "endLine": 90,
+        "endChar": 37
+      },
+      "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38c8a141_fdb2a6ff",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T14:39:57Z",
+      "side": 1,
+      "message": "As I said in an earlier comment, I don\u0027t think this is true.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 31
+      },
+      "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

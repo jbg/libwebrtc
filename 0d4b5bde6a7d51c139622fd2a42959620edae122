@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f8ef7b4d_6ca52ae4",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T14:39:57Z",
+      "side": 1,
+      "message": "OK. Adding a small amount of extra work conditional on DCHECKs being enabled is usually OK, but it doesn\u0027t matter hugely either way.",
+      "parentUuid": "d0e39766_3f09ae10",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cb2809c_e08901b0",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 3
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Mutexes are required to be unlocked from the same thread that locked them, so if you don\u0027t mind I\u0027ll just document this as well for the same reasons above.",
       "parentUuid": "96a3a1e6_921590b9",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c9c900b_05bb2693",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T14:39:57Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "9f60ae6d_9885f131",
       "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
