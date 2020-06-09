@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7dcc79ab_d1c23afb",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T15:38:38Z",
+      "side": 1,
+      "message": "Example:\nhttps://pubs.opengroup.org/onlinepubs/009695399/functions/pthread_mutex_lock.html\n\n\"If the mutex type is PTHREAD_MUTEX_DEFAULT, attempting to recursively lock the mutex results in undefined behavior. Attempting to unlock the mutex if it was not locked by the calling thread results in undefined behavior. Attempting to unlock the mutex if it is not locked results in undefined behavior.\"\n\nWill adjust the wording.",
+      "parentUuid": "45f00421_778b7b73",
+      "range": {
+        "startLine": 59,
+        "startChar": 50,
+        "endLine": 59,
+        "endChar": 72
+      },
+      "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab4a70f7_f8b07e52",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f94ff6df_7297d865",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T15:38:38Z",
+      "side": 1,
+      "message": "We discussed offline. With acq/rel, reading y instead of 0 means the mutex was locked, with relaxed that bet is off. However this information isn\u0027t needed for anything so we agreed to back down to relaxed memory order. Forgive me, Herb.",
+      "parentUuid": "ab4a70f7_f8b07e52",
+      "range": {
+        "startLine": 86,
+        "startChar": 62,
+        "endLine": 88,
+        "endChar": 19
+      },
+      "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1fff9c4f_4069b5a2",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T15:38:38Z",
+      "side": 1,
+      "message": "Resolved as per offline discussion.",
+      "parentUuid": "679b5a28_7b4423de",
+      "range": {
+        "startLine": 89,
+        "startChar": 37,
+        "endLine": 90,
+        "endChar": 37
+      },
+      "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38c8a141_fdb2a6ff",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef610e6e_2b3bddfb",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T15:38:38Z",
+      "side": 1,
+      "message": "Resolved as per offline discussion.",
+      "parentUuid": "38c8a141_fdb2a6ff",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 31
+      },
+      "revId": "a9737ac842e011d06c6b70560e0e4c34a341bbe6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
