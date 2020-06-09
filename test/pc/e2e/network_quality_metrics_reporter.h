@@ -13,6 +13,7 @@
 
 #include <string>
 
+#include "api/stats/rtc_stats_report.h"
 #include "api/test/network_emulation_manager.h"
 #include "api/test/peerconnection_quality_test_fixture.h"
 #include "rtc_base/critical_section.h"
@@ -32,6 +33,9 @@ class NetworkQualityMetricsReporter
   void Start(absl::string_view test_case_name) override;
   void OnStatsReports(const std::string& pc_label,
                       const StatsReports& reports) override;
+  void OnStatsReports(
+      const std::string& pc_label,
+      const rtc::scoped_refptr<const RTCStatsReport>& report) override;
   void StopAndReportResults() override;
 
  private:
@@ -40,6 +44,9 @@ class NetworkQualityMetricsReporter
     // counters, enabled by field trial "WebRTC-UseStandardBytesStats".
     int64_t payload_bytes_received = 0;
     int64_t payload_bytes_sent = 0;
+
+    int64_t payload_bytes_received_new = 0;
+    int64_t payload_bytes_sent_new = 0;
   };
 
   static EmulatedNetworkStats PopulateStats(

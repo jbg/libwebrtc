@@ -11,6 +11,7 @@
 
 #include <utility>
 
+#include "api/stats/rtcstats_objects.h"
 #include "api/stats_types.h"
 #include "rtc_base/event.h"
 #include "system_wrappers/include/field_trial.h"
@@ -62,6 +63,35 @@ void NetworkQualityMetricsReporter::OnStatsReports(
   PCStats& stats = pc_stats_[pc_label];
   stats.payload_bytes_received = payload_bytes_received;
   stats.payload_bytes_sent = payload_bytes_sent;
+}
+
+void NetworkQualityMetricsReporter::OnStatsReports(
+    const std::string& pc_label,
+    const rtc::scoped_refptr<const RTCStatsReport>& report) {
+  rtc::CritScope cs(&lock_);
+  int64_t payload_bytes_received = 0;
+  int64_t payload_bytes_sent = 0;
+
+  auto inbound_stats = report->GetStatsOfType<RTCInboundRTPStreamStats>();
+  for (auto& stat : inbound_stats) {
+    // std::printf("Defined received: %d; val: %lu\n",
+    //            stat->bytes_received.is_defined(), *stat->bytes_received);
+    if (stat->bytes_received.is_defined()) {
+      payload_bytes_received += *stat->bytes_received;
+    }
+  }
+
+  auto outbound_stats = report->GetStatsOfType<RTCOutboundRTPStreamStats>();
+  for (auto& stat : outbound_stats) {
+    // std::printf("Defined sent: %d\n", stat->bytes_sent.is_defined());
+    if (stat->bytes_sent.is_defined()) {
+      payload_bytes_sent += *stat->bytes_sent;
+    }
+  }
+
+  PCStats& stats = pc_stats_[pc_label];
+  stats.payload_bytes_received_new = payload_bytes_received;
+  stats.payload_bytes_sent_new = payload_bytes_sent;
 }
 
 void NetworkQualityMetricsReporter::StopAndReportResults() {
@@ -125,9 +155,13 @@ void NetworkQualityMetricsReporter::ReportStats(
 
 void NetworkQualityMetricsReporter::ReportPCStats(const std::string& pc_label,
                                                   const PCStats& stats) {
-  ReportResult("payload_bytes_received", pc_label, stats.payload_bytes_received,
-               "sizeInBytes");
-  ReportResult("payload_bytes_sent", pc_label, stats.payload_bytes_sent,
+  //ReportResult("payload_bytes_received", pc_label, stats.payload_bytes_received,
+  //             "sizeInBytes");
+  ReportResult("payload_bytes_received", pc_label,
+               stats.payload_bytes_received_new, "sizeInBytes");
+  //ReportResult("payload_bytes_sent", pc_label, stats.payload_bytes_sent,
+  //             "sizeInBytes");
+  ReportResult("payload_bytes_sent", pc_label, stats.payload_bytes_sent_new,
                "sizeInBytes");
 }
 
