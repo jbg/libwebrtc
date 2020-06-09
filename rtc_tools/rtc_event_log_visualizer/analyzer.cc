@@ -1469,8 +1469,11 @@ void EventLogAnalyzer::CreateReceiveSideBweSimulationGraph(Plot* plot) {
     }
 
    private:
-    uint32_t last_bitrate_bps_;
-    bool bitrate_updated_;
+    // We don't know the start bitrate, but assume that it is the default 300
+    // kbps.
+    constexpr kDefaultStartBitrateKbps = 300;
+    uint32_t last_bitrate_bps_ = kDefaultStartBitrateKbps * 1000;
+    bool bitrate_updated_ = false;
   };
 
   std::multimap<int64_t, const RtpPacketType*> incoming_rtp;
