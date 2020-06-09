@@ -279,6 +279,9 @@ void FakeVideoSendStream::Stop() {
   sending_ = false;
 }
 
+void FakeVideoSendStream::AddAdaptationResource(
+    rtc::scoped_refptr<webrtc::Resource> resource) {}
+
 void FakeVideoSendStream::SetSource(
     rtc::VideoSourceInterface<webrtc::VideoFrame>* source,
     const webrtc::DegradationPreference& degradation_preference) {

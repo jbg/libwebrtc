@@ -522,6 +522,7 @@ if (rtc_include_tests) {
       "jsep_session_description_unittest.cc",
       "local_audio_source_unittest.cc",
       "media_stream_unittest.cc",
+      "peer_connection_adaptation_integrationtest.cc",
       "peer_connection_bundle_unittest.cc",
       "peer_connection_crypto_unittest.cc",
       "peer_connection_data_channel_unittest.cc",
