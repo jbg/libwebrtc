@@ -22,6 +22,30 @@
       "revId": "9d97a16c5b07a0d80f7e10d8e7a14b65de11c350",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01d1767e_13016064",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t3.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-09T13:28:12Z",
+      "side": 1,
+      "message": "DependencyDescriptor writer assumes templates are ordered the way they should go on the wire.\nIt fails to write templates otherwise.\n\n(alternative is to sort at runtime, prefer to avoid that alternative)\n\nwith a test that verifies that for each frame there is a perfect template, may be there is not that much point to read through templates carefully.\nDo you want me to also add a test there are no \u0027unused\u0027 templates?",
+      "parentUuid": "22443247_fce7a1dc",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 13
+      },
+      "revId": "9d97a16c5b07a0d80f7e10d8e7a14b65de11c350",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
