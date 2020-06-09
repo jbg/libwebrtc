@@ -16,6 +16,24 @@
       "revId": "dcd195f9298d9eeb193d8645f0f09f1c5c44df35",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66c5f82a_d6a69ba4",
+        "filename": "rtc_tools/rtc_event_log_visualizer/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-06-09T08:52:31Z",
+      "side": 1,
+      "message": "Done. 300000 is the default start bitrate in webrtc. It is not clear to me why we want to sample periodically in the first place, so I\u0027ll probably make a followup to only emit points if we have actual bitrate updates.",
+      "parentUuid": "d63a3af7_445e2cac",
+      "revId": "dcd195f9298d9eeb193d8645f0f09f1c5c44df35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
