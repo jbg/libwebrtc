@@ -51,6 +51,24 @@
       "revId": "f5cc82db301821268e28b8ef32043813429635dc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15714d1a_44b5a7bf",
+        "filename": "pc/rtc_stats_integrationtest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-09T08:02:16Z",
+      "side": 1,
+      "message": "If my reading of RateTracker::ComputeRateForInterval (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/rtc_base/rate_tracker.cc;l\u003d67;drc\u003dc77ccde5b729af314595e528d89837d2c890f94f;bpv\u003d1;bpt\u003d1?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F) is correct then we don\u0027t report an FPS other than 0 (which is reinterpreted as \"undefined\") unless at least one \"bucket\" of time has passed, and I don\u0027t really like to add assumptions about an implementation-specific number of ms has passed (besides, Time() may be different at different parts of the code, so even if we conclude that the 100 ms have passed, perhaps it had not at the time that ComputeRate was called).\n\nSome alternatives:\n- Land this CL as is but add a TODO.\n- Update the test to run until some condition is met, such as poll get stats periodically until FPS is defined.\n- Update the test to contine to run after the call has been set up until a significant amount of time has passed, say 1 or 5 seconds, and assume that most things should be stable by then.\n\nWDYT?",
+      "parentUuid": "f348e546_018a511e",
+      "revId": "f5cc82db301821268e28b8ef32043813429635dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
