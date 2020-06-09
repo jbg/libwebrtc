@@ -279,6 +279,9 @@ void FakeVideoSendStream::Stop() {
   sending_ = false;
 }
 
+void FakeVideoSendStream::AddAdaptationResource(
+    rtc::scoped_refptr<webrtc::Resource> resource) {}
+
 void FakeVideoSendStream::SetSource(
     rtc::VideoSourceInterface<webrtc::VideoFrame>* source,
     const webrtc::DegradationPreference& degradation_preference) {
@@ -613,6 +616,8 @@ int FakeCall::GetNumCreatedSendStreams() const {
 int FakeCall::GetNumCreatedReceiveStreams() const {
   return num_created_receive_streams_;
 }
+
+void FakeCall::AddResource(rtc::scoped_refptr<webrtc::Resource> resource) {}
 
 webrtc::Call::Stats FakeCall::GetStats() const {
   return stats_;

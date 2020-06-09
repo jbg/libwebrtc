@@ -65,6 +65,11 @@ class PeerConnection : public PeerConnectionInternal,
                        public rtc::MessageHandler,
                        public sigslot::has_slots<> {
  public:
+  Call* call() {
+    RTC_DCHECK_RUN_ON(worker_thread());
+    return call_.get();
+  }
+
   // A bit in the usage pattern is registered when its defining event occurs at
   // least once.
   enum class UsageEvent : int {
