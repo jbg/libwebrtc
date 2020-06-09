@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22443247_fce7a1dc",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t3.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-09T13:17:03Z",
+      "side": 1,
+      "message": "nit: Even though they are not ordered like that on the wire, maybe sort them by encoding order: S0T0, S1T0, S2T0, S0T2, S1T2, S2T2, S0T1, S1T1, S2T1....\n\nMakes things easier to read.",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 13
+      },
+      "revId": "9d97a16c5b07a0d80f7e10d8e7a14b65de11c350",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
