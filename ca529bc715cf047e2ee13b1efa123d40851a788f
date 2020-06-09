@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "943cc4f5_2fb8cba5",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T07:57:12Z",
+      "side": 1,
+      "message": "\u003e Do we get stacktraces on all platforms that we care about?\n\u003e \n\u003e If not, having the CHECK here will almost certainly make it useless; if it fires, the line number in the log will point here, and we will have no idea who the caller was or even what mutex they were about to deadlock on.\n\nThis might be affected by: https://bugs.chromium.org/p/webrtc/issues/detail?id\u003d11576.\n\nI am close to solve the case but I have no time to work on it today/tomorrow.",
+      "parentUuid": "64c2c705_89ab0cb8",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea087334_82d79736",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 2
