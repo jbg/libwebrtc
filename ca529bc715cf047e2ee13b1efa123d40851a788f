@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2c8da5f9_6ef28552",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T12:00:01Z",
+      "side": 1,
+      "message": "I think it\u0027ll work if you use the right syntax: https://godbolt.org/z/238WZi",
+      "parentUuid": "c88d8bc9_7192d053",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b072fb1f_a09ced6b",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 2
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "Good point. Herb discusses relaxed atomics in https://channel9.msdn.com/Shows/Going+Deep/Cpp-and-Beyond-2012-Herb-Sutter-atomic-Weapons-2-of-2 27.44 in to the talk with the mantra \"don\u0027t do it\" discussing 3 cases in Microsoft where 2/3 were broken or debatable.\n\nI think in this case relaxed would be okay if it weren\u0027t for the sequential consistency WRT the lock. Because the holder_ writes and reads could appear to be reordered across the absl::Mutex::Lock/Unlock calls. But it would probably still work because the mutex lock/unlock emit barriers on weak memory order platforms and these are sledgehammers on ARM/Power.\n\nDocumented the choice.",
       "parentUuid": "b072fb1f_a09ced6b",
+      "range": {
+        "startLine": 45,
+        "startChar": 27,
+        "endLine": 45,
+        "endChar": 52
+      },
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48d64db3_7f2e13c1",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T12:00:01Z",
+      "side": 1,
+      "message": "\u003e Documented the choice.\n\nExcellent.",
+      "parentUuid": "3d2cf6ec_eda81850",
       "range": {
         "startLine": 45,
         "startChar": 27,
@@ -131,6 +173,24 @@
       "side": 1,
       "message": "11576 just needs to be fixed. AFAIU we get stack traces in Chromium.",
       "parentUuid": "943cc4f5_2fb8cba5",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b28c9ae1_f102a30e",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T12:00:01Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "ba1e6814_607ca8f2",
       "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -207,6 +267,30 @@
       "side": 1,
       "message": "I think \"we shouldn\u0027t care\". go/totw/34 documents the practise without refs, and we already found one problem when attempting to use in another manner than recommended (\u003dwhat this change fixes).",
       "parentUuid": "42602b82_e2be0292",
+      "range": {
+        "startLine": 39,
+        "startChar": 7,
+        "endLine": 39,
+        "endChar": 11
+      },
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8a6aa09_3e289d81",
+        "filename": "rtc_base/synchronization/mutex_benchmark.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T12:00:01Z",
+      "side": 1,
+      "message": "In general, one has to care, or risk making unneeded expensive copies; go/totw/44 has general guidance regarding auto and ranged for loops, if you want details. However, docs written specifically for this benchmarking framework obviously trump that.",
+      "parentUuid": "9f236afc_f8a32dfc",
       "range": {
         "startLine": 39,
         "startChar": 7,

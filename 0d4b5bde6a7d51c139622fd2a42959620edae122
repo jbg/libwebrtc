@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2aeaebd_816abc70",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T12:00:01Z",
+      "side": 1,
+      "message": "DCHECK that holder_ is 0 before this store? Not because it could fail, but to document what we know to be the case.",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cb2809c_e08901b0",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T12:00:01Z",
+      "side": 1,
+      "message": "DCHECK that holder_ is 0 before this store?",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96a3a1e6_921590b9",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T12:00:01Z",
+      "side": 1,
+      "message": "DCHECK that holder_ is rtc::CurrentThreadRef() before this store?",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65422427_bca47c92",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-09T12:00:01Z",
+      "side": 1,
+      "message": "Because the writes are protected by the mutex, they cannot race with each other. Reads can\u0027t race with each other. So the only racy part is that a read may occur either before or after another thread writes to holder_ (they cannot be interleaved; even std::memory_order_relaxed guarantees that). But if our thread ID is x, other threads always change holder_ from y to z where y !\u003d x and z !\u003d x, so it makes no difference.\n\nNothing here requires us to prevent accesses to things other than holder_ itself from being reordered past the atomic instructions. Therefore, std::memory_order_relaxed is sufficient.",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
