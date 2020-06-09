@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d0e39766_3f09ae10",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T13:45:40Z",
+      "side": 1,
+      "message": "Are you okay if I just document this with a comment? Otherwise an extra atomic load (relaxed), or exchange.",
+      "parentUuid": "e2aeaebd_816abc70",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cb2809c_e08901b0",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "28e2742f_d23ecf3c",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T13:45:40Z",
+      "side": 1,
+      "message": "Same.",
+      "parentUuid": "9cb2809c_e08901b0",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96a3a1e6_921590b9",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f60ae6d_9885f131",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T13:45:40Z",
+      "side": 1,
+      "message": "Mutexes are required to be unlocked from the same thread that locked them, so if you don\u0027t mind I\u0027ll just document this as well for the same reasons above.",
+      "parentUuid": "96a3a1e6_921590b9",
+      "revId": "0d4b5bde6a7d51c139622fd2a42959620edae122",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
