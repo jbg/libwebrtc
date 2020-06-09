@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c5714d09_898b28ce",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "Ok, one thing to keep in mind is that based on how many frames we capture, peers and streams, we end up creating the same struct by copying (at least 1 time) 3 string many times.\n\nLet\u0027s not optimize now but this might be something we want to look into (maybe a follow up?).",
+      "parentUuid": "e937422d_6108f5b6",
+      "range": {
+        "startLine": 152,
+        "startChar": 6,
+        "endLine": 152,
+        "endChar": 74
+      },
+      "revId": "1a21e68622cde1bedab5a7432b02a50a707977c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "067bdaea_c21fc08a",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
         "patchSetId": 8

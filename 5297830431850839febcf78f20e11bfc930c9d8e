@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f1056d7_2b1e5a84",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "If we switch from std::map to an absl map container we will skip 1 copy for each frame captured (see \"Heterogeneous Lookup\" https://abseil.io/docs/cpp/guides/container).\n\nI don\u0027t remember why we moved away from absl maps (or may memory is failing me) in 2019. WDYT about using them here?\n\nI am a bit worried we copy a lot of strings in a component that should be quick.",
+      "range": {
+        "startLine": 145,
+        "startChar": 40,
+        "endLine": 145,
+        "endChar": 62
+      },
+      "revId": "5297830431850839febcf78f20e11bfc930c9d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdcf04d6_30200558",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "Should this be \"If we\"?",
+      "range": {
+        "startLine": 197,
+        "startChar": 9,
+        "endLine": 197,
+        "endChar": 11
+      },
+      "revId": "5297830431850839febcf78f20e11bfc930c9d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03eaccbf_bd1ce76d",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "and remove this if we use \"If we\".",
+      "range": {
+        "startLine": 198,
+        "startChar": 24,
+        "endLine": 198,
+        "endChar": 25
+      },
+      "revId": "5297830431850839febcf78f20e11bfc930c9d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d269cde5_0dc4546a",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "remove or rephrase.",
+      "range": {
+        "startLine": 392,
+        "startChar": 7,
+        "endLine": 392,
+        "endChar": 8
+      },
+      "revId": "5297830431850839febcf78f20e11bfc930c9d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a35915c7_81cd59e7",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "std::move?",
+      "range": {
+        "startLine": 574,
+        "startChar": 60,
+        "endLine": 574,
+        "endChar": 71
+      },
+      "revId": "5297830431850839febcf78f20e11bfc930c9d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a7470aa_d0a30772",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "Nit: HaveAllPeersReceived",
+      "range": {
+        "startLine": 965,
+        "startChar": 49,
+        "endLine": 965,
+        "endChar": 68
+      },
+      "revId": "5297830431850839febcf78f20e11bfc930c9d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "255f382b_44ff8af1",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "const \u0026 ?",
+      "range": {
+        "startLine": 200,
+        "startChar": 2,
+        "endLine": 200,
+        "endChar": 35
+      },
+      "revId": "5297830431850839febcf78f20e11bfc930c9d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50723446_2872bc85",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-09T16:28:53Z",
+      "side": 1,
+      "message": "const \u0026?",
+      "range": {
+        "startLine": 72,
+        "startChar": 42,
+        "endLine": 72,
+        "endChar": 67
+      },
+      "revId": "5297830431850839febcf78f20e11bfc930c9d8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
