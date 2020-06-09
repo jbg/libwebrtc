@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c88d8bc9_7192d053",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T10:17:49Z",
+      "side": 1,
+      "message": "It doesn\u0027t work due to compiler error.",
+      "parentUuid": "4686df35_e9d224a8",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b072fb1f_a09ced6b",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 2
@@ -39,6 +57,30 @@
       "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d2cf6ec_eda81850",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T10:17:49Z",
+      "side": 1,
+      "message": "Good point. Herb discusses relaxed atomics in https://channel9.msdn.com/Shows/Going+Deep/Cpp-and-Beyond-2012-Herb-Sutter-atomic-Weapons-2-of-2 27.44 in to the talk with the mantra \"don\u0027t do it\" discussing 3 cases in Microsoft where 2/3 were broken or debatable.\n\nI think in this case relaxed would be okay if it weren\u0027t for the sequential consistency WRT the lock. Because the holder_ writes and reads could appear to be reordered across the absl::Mutex::Lock/Unlock calls. But it would probably still work because the mutex lock/unlock emit barriers on weak memory order platforms and these are sledgehammers on ARM/Power.\n\nDocumented the choice.",
+      "parentUuid": "b072fb1f_a09ced6b",
+      "range": {
+        "startLine": 45,
+        "startChar": 27,
+        "endLine": 45,
+        "endChar": 52
+      },
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -77,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "ba1e6814_607ca8f2",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T10:17:49Z",
+      "side": 1,
+      "message": "11576 just needs to be fixed. AFAIU we get stack traces in Chromium.",
+      "parentUuid": "943cc4f5_2fb8cba5",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea087334_82d79736",
         "filename": "rtc_base/synchronization/mutex.h",
         "patchSetId": 2
@@ -91,6 +151,24 @@
       "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "235574da_3d7bbc74",
+        "filename": "rtc_base/synchronization/mutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T10:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea087334_82d79736",
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -114,6 +192,30 @@
       "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f236afc_f8a32dfc",
+        "filename": "rtc_base/synchronization/mutex_benchmark.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-06-09T10:17:49Z",
+      "side": 1,
+      "message": "I think \"we shouldn\u0027t care\". go/totw/34 documents the practise without refs, and we already found one problem when attempting to use in another manner than recommended (\u003dwhat this change fixes).",
+      "parentUuid": "42602b82_e2be0292",
+      "range": {
+        "startLine": 39,
+        "startChar": 7,
+        "endLine": 39,
+        "endChar": 11
+      },
+      "revId": "ca529bc715cf047e2ee13b1efa123d40851a788f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
