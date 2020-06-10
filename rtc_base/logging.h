@@ -556,6 +556,11 @@ class LogMessage {
 
   // The output streams and their associated severities
   static LogSink* streams_;
+  // Holds true with high probability if streams_ is empty, false with high
+  // probability otherwise. Operated on with std::memory_order_relaxed because
+  // complete correctness of operation depending on it is only eventually
+  // required.
+  static std::atomic<bool> streams_empty_;
 
   // Flags for formatting options
   static bool thread_, timestamp_;
