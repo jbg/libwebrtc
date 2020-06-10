@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bea6bb4f_e0856d9e",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-10T08:50:12Z",
+      "side": 1,
+      "message": "Is this really possible?\n\nWhile it is possible for an in-flight task to have a resource measurement arrive after removal, when that task is processed the Resource\u0027s listener will have been nulled, so listener_-\u003eOnResourceUsageStateMeasured() would not get executed due to \"if (listener_)\" guard on usage (otherwise there might be a use-after-free issue).",
+      "revId": "2d83aef690bfdf531983add4048d7b9a38b410ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
