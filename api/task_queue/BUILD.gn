@@ -52,7 +52,7 @@ rtc_library("task_queue_test") {
     # because this will break the WebRTC component build in Chromium.
     deps = [
       "../../../webrtc_overrides:webrtc_component",
-      "../../test:test_support",
+      "//testing/gtest",
     ]
     absl_deps = [
       "//third_party/abseil-cpp/absl/memory",
