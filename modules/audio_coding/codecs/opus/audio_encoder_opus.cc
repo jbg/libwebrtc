@@ -68,6 +68,10 @@ constexpr int kOpusSupportedFrameLengths[] = {10, 20, 40, 60};
 constexpr float kAlphaForPacketLossFractionSmoother = 0.9999f;
 constexpr float kMaxPacketLossFraction = 0.2f;
 
+// After 20 DTX frames (MAX_CONSECUTIVE_DTX) Opus will send a frame
+// coding the background noise.
+constexpr int kMaxConsecutiveDtx = 20;
+
 int CalculateDefaultBitrate(int max_playback_rate, size_t num_channels) {
   const int bitrate = [&] {
     if (max_playback_rate <= 8000) {
@@ -623,7 +627,7 @@ AudioEncoder::EncodedInfo AudioEncoderOpusImpl::EncodeImpl(
   // After 20 DTX frames (MAX_CONSECUTIVE_DTX) Opus will send a frame
   // coding the background noise. Avoid flagging this frame as speech
   // (even though there is a probability of the frame being speech).
-  info.speech = !dtx_frame && (consecutive_dtx_frames_ != 20);
+  info.speech = !dtx_frame && (consecutive_dtx_frames_ != kMaxConsecutiveDtx);
   info.encoder_type = CodecType::kOpus;
 
   // Increase or reset DTX counter.
