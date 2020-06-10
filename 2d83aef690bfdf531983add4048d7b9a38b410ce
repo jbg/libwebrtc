@@ -16,6 +16,24 @@
       "revId": "2d83aef690bfdf531983add4048d7b9a38b410ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e83529bd_a9e83478",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-06-10T09:30:24Z",
+      "side": 1,
+      "message": "It is possible! And I added a test for this. \n\nThe sequence is:\n\nResource queue: Overuse (push Overuse on adaptation queue) \nAdaptation queue: Remove resource \nAdaptation queue: Resource overused (pushed from resource queue)\n\nIn this case we get overuse for a resource that was removed.",
+      "parentUuid": "bea6bb4f_e0856d9e",
+      "revId": "2d83aef690bfdf531983add4048d7b9a38b410ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
