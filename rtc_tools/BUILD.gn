@@ -17,12 +17,12 @@ group("rtc_tools") {
   deps = [
     ":frame_analyzer",
     ":video_file_reader",
-    ":video_quality_analysis",
   ]
   if (!build_with_chromium) {
     deps += [
       ":psnr_ssim_analyzer",
       ":rgba_to_i420_converter",
+      ":video_quality_analysis",
     ]
     if (rtc_enable_protobuf) {
       deps += [ ":chart_proto" ]
@@ -86,34 +86,36 @@ rtc_library("video_file_writer") {
   ]
 }
 
-rtc_library("video_quality_analysis") {
-  testonly = true
-  sources = [
-    "frame_analyzer/linear_least_squares.cc",
-    "frame_analyzer/linear_least_squares.h",
-    "frame_analyzer/video_color_aligner.cc",
-    "frame_analyzer/video_color_aligner.h",
-    "frame_analyzer/video_geometry_aligner.cc",
-    "frame_analyzer/video_geometry_aligner.h",
-    "frame_analyzer/video_quality_analysis.cc",
-    "frame_analyzer/video_quality_analysis.h",
-    "frame_analyzer/video_temporal_aligner.cc",
-    "frame_analyzer/video_temporal_aligner.h",
-  ]
-  deps = [
-    ":video_file_reader",
-    "../api:array_view",
-    "../api:scoped_refptr",
-    "../api/video:video_frame",
-    "../api/video:video_frame_i420",
-    "../api/video:video_rtp_headers",
-    "../common_video",
-    "../rtc_base:checks",
-    "../rtc_base:rtc_base_approved",
-    "../test:perf_test",
-    "//third_party/libyuv",
-  ]
-  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
+if (!build_with_chromium) {
+  rtc_library("video_quality_analysis") {
+    testonly = true
+    sources = [
+      "frame_analyzer/linear_least_squares.cc",
+      "frame_analyzer/linear_least_squares.h",
+      "frame_analyzer/video_color_aligner.cc",
+      "frame_analyzer/video_color_aligner.h",
+      "frame_analyzer/video_geometry_aligner.cc",
+      "frame_analyzer/video_geometry_aligner.h",
+      "frame_analyzer/video_quality_analysis.cc",
+      "frame_analyzer/video_quality_analysis.h",
+      "frame_analyzer/video_temporal_aligner.cc",
+      "frame_analyzer/video_temporal_aligner.h",
+    ]
+    deps = [
+      ":video_file_reader",
+      "../api:array_view",
+      "../api:scoped_refptr",
+      "../api/video:video_frame",
+      "../api/video:video_frame_i420",
+      "../api/video:video_rtp_headers",
+      "../common_video",
+      "../rtc_base:checks",
+      "../rtc_base:rtc_base_approved",
+      "../test:perf_test",
+      "//third_party/libyuv",
+    ]
+    absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
+  }
 }
 
 rtc_executable("frame_analyzer") {
@@ -127,11 +129,13 @@ rtc_executable("frame_analyzer") {
     ":video_quality_analysis",
     "../api:scoped_refptr",
     "../rtc_base:stringutils",
-    "../test:perf_test",
     "//third_party/abseil-cpp/absl/flags:flag",
     "//third_party/abseil-cpp/absl/flags:parse",
     "//third_party/abseil-cpp/absl/strings",
   ]
+  if (!build_with_chromium) {
+    deps += [ "../test:perf_test" ]
+  }
 }
 
 # TODO(bugs.webrtc.org/11474): Enable this on win if needed. For now it
