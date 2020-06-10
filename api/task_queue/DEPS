@@ -6,5 +6,6 @@ specific_include_rules = {
   ],
   "task_queue_test\.h": [
     "+test/gtest.h",
+    "+testing/gtest/include/gtest/gtest.h",  # When build_with_chromium=true
   ],
 }
