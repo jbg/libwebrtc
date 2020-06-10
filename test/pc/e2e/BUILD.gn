@@ -57,7 +57,6 @@ rtc_library("peer_connection_quality_test_params") {
     "../../../api/rtc_event_log",
     "../../../api/task_queue",
     "../../../api/transport:network_control",
-    "../../../api/transport/media:media_transport_interface",
     "../../../api/video_codecs:video_codecs_api",
     "../../../rtc_base",
   ]
@@ -321,7 +320,6 @@ if (rtc_include_tests) {
       "../../../api/rtc_event_log",
       "../../../api/task_queue",
       "../../../api/transport:network_control",
-      "../../../api/transport/media:media_transport_interface",
       "../../../api/video_codecs:video_codecs_api",
       "../../../rtc_base",
     ]
