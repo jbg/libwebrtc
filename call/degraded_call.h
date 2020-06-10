@@ -81,6 +81,8 @@ class DegradedCall : public Call, private PacketReceiver {
 
   RtpTransportControllerSendInterface* GetTransportControllerSend() override;
 
+  void AddResource(rtc::scoped_refptr<Resource> resource) override;
+
   Stats GetStats() const override;
 
   void SignalChannelNetworkState(MediaType media, NetworkState state) override;

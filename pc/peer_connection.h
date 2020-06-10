@@ -219,6 +219,7 @@ class PeerConnection : public PeerConnectionInternal,
   PeerConnectionInterface::RTCConfiguration GetConfiguration() override;
   RTCError SetConfiguration(
       const PeerConnectionInterface::RTCConfiguration& configuration) override;
+  void AddAdaptationResource(rtc::scoped_refptr<Resource> resource) override;
   bool AddIceCandidate(const IceCandidateInterface* candidate) override;
   void AddIceCandidate(std::unique_ptr<IceCandidateInterface> candidate,
                        std::function<void(RTCError)> callback) override;

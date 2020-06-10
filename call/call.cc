@@ -214,6 +214,8 @@ class Call final : public webrtc::Call,
 
   RtpTransportControllerSendInterface* GetTransportControllerSend() override;
 
+  void AddResource(rtc::scoped_refptr<Resource> resource) override;
+
   Stats GetStats() const override;
 
   // Implements PacketReceiver.
@@ -1026,6 +1028,14 @@ void Call::DestroyFlexfecReceiveStream(FlexfecReceiveStream* receive_stream) {
 
 RtpTransportControllerSendInterface* Call::GetTransportControllerSend() {
   return transport_send_ptr_;
+}
+
+void Call::AddResource(rtc::scoped_refptr<Resource> resource) {
+  RTC_DCHECK_RUN_ON(worker_thread_);
+  // What about streams created after the fact?
+  for (VideoSendStream* stream : video_send_streams_) {
+    stream->AddAdaptationResource(resource);
+  }
 }
 
 Call::Stats Call::GetStats() const {

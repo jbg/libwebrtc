@@ -4151,6 +4151,21 @@ RTCError PeerConnection::SetConfiguration(
   return RTCError::OK();
 }
 
+void PeerConnection::AddAdaptationResource(
+    rtc::scoped_refptr<Resource> resource) {
+  if (!worker_thread()->IsCurrent()) {
+    return worker_thread()->Invoke<void>(RTC_FROM_HERE, [this, resource]() {
+      return AddAdaptationResource(resource);
+    });
+  }
+  RTC_DCHECK_RUN_ON(worker_thread());
+  if (!call_) {
+    // The PeerConnection has been closed.
+    return;
+  }
+  call_->AddResource(resource);
+}
+
 bool PeerConnection::AddIceCandidate(
     const IceCandidateInterface* ice_candidate) {
   RTC_DCHECK_RUN_ON(signaling_thread());
