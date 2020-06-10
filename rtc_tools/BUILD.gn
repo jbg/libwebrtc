@@ -17,12 +17,12 @@ group("rtc_tools") {
   deps = [
     ":frame_analyzer",
     ":video_file_reader",
-    ":video_quality_analysis",
   ]
   if (!build_with_chromium) {
     deps += [
       ":psnr_ssim_analyzer",
       ":rgba_to_i420_converter",
+      ":video_quality_analysis",
     ]
     if (rtc_enable_protobuf) {
       deps += [ ":chart_proto" ]
@@ -127,11 +127,13 @@ rtc_executable("frame_analyzer") {
     ":video_quality_analysis",
     "../api:scoped_refptr",
     "../rtc_base:stringutils",
-    "../test:perf_test",
     "//third_party/abseil-cpp/absl/flags:flag",
     "//third_party/abseil-cpp/absl/flags:parse",
     "//third_party/abseil-cpp/absl/strings",
   ]
+  if (!build_with_chromium) {
+    deps += [ "../test:perf_test" ]
+  }
 }
 
 # TODO(bugs.webrtc.org/11474): Enable this on win if needed. For now it
