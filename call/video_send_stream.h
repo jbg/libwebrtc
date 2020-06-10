@@ -18,10 +18,12 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "api/adaptation/resource.h"
 #include "api/call/transport.h"
 #include "api/crypto/crypto_options.h"
 #include "api/frame_transformer_interface.h"
 #include "api/rtp_parameters.h"
+#include "api/scoped_refptr.h"
 #include "api/video/video_content_type.h"
 #include "api/video/video_frame.h"
 #include "api/video/video_sink_interface.h"
@@ -214,6 +216,10 @@ class VideoSendStream {
   // Stops stream activity.
   // When a stream is stopped, it can't receive, process or deliver packets.
   virtual void Stop() = 0;
+
+  // Allow adapting VideoSendStream based on overuse/underuse signals from the
+  // |resource|.
+  virtual void AddAdaptationResource(rtc::scoped_refptr<Resource> resource) = 0;
 
   virtual void SetSource(
       rtc::VideoSourceInterface<webrtc::VideoFrame>* source,

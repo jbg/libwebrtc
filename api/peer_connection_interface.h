@@ -73,6 +73,7 @@
 #include <string>
 #include <vector>
 
+#include "api/adaptation/resource.h"
 #include "api/async_resolver_factory.h"
 #include "api/audio/audio_mixer.h"
 #include "api/audio_codecs/audio_decoder_factory.h"
@@ -1025,6 +1026,8 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
   // PeerConnectionInterface implement it.
   virtual RTCError SetConfiguration(
       const PeerConnectionInterface::RTCConfiguration& config);
+
+  virtual void AddAdaptationResource(rtc::scoped_refptr<Resource> resource) {}
 
   // Provides a remote candidate to the ICE Agent.
   // A copy of the |candidate| will be created and added to the remote

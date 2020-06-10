@@ -113,6 +113,7 @@ PROXY_METHOD0(PeerConnectionInterface::RTCConfiguration, GetConfiguration)
 PROXY_METHOD1(RTCError,
               SetConfiguration,
               const PeerConnectionInterface::RTCConfiguration&)
+PROXY_METHOD1(void, AddAdaptationResource, rtc::scoped_refptr<Resource>)
 PROXY_METHOD1(bool, AddIceCandidate, const IceCandidateInterface*)
 PROXY_METHOD2(void,
               AddIceCandidate,
