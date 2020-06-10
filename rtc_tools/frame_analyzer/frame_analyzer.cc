@@ -26,7 +26,10 @@
 #include "rtc_tools/frame_analyzer/video_temporal_aligner.h"
 #include "rtc_tools/video_file_reader.h"
 #include "rtc_tools/video_file_writer.h"
+
+#ifndef WEBRTC_CHROMIUM_BUILD
 #include "test/testsupport/perf_test.h"
+#endif
 
 ABSL_FLAG(int32_t, width, -1, "The width of the reference and test files");
 ABSL_FLAG(int32_t, height, -1, "The height of the reference and test files");
@@ -161,6 +164,7 @@ int main(int argc, char* argv[]) {
 
   webrtc::test::PrintAnalysisResults(absl::GetFlag(FLAGS_label), &results);
 
+#ifndef WEBRTC_CHROMIUM_BUILD
   std::string chartjson_result_file =
       absl::GetFlag(FLAGS_chartjson_result_file);
   if (!chartjson_result_file.empty()) {
@@ -168,6 +172,7 @@ int main(int argc, char* argv[]) {
       return 1;
     }
   }
+#endif
   std::string aligned_output_file = absl::GetFlag(FLAGS_aligned_output_file);
   if (!aligned_output_file.empty()) {
     webrtc::test::WriteVideoToFile(aligned_reference_video, aligned_output_file,
