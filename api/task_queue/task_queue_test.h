@@ -14,7 +14,12 @@
 #include <memory>
 
 #include "api/task_queue/task_queue_factory.h"
+
+#ifdef WEBRTC_CHROMIUM_BUILD
+#include "testing/gtest/include/gtest/gtest.h"
+#else
 #include "test/gtest.h"
+#endif
 
 namespace webrtc {
 
