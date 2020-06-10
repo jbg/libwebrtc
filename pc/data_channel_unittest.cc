@@ -26,6 +26,20 @@ using webrtc::SctpSidAllocator;
 
 static constexpr int kDefaultTimeout = 10000;
 
+namespace {
+webrtc::InternalDataChannelInit MakeChannelInit(
+    bool negotiated = false,
+    bool ordered = true,
+    webrtc::InternalDataChannelInit::OpenHandshakeRole role =
+        webrtc::InternalDataChannelInit::OpenHandshakeRole::kOpener) {
+  webrtc::DataChannelInit dci;
+  dci.id = 1;
+  dci.negotiated = negotiated;
+  dci.ordered = ordered;
+  return webrtc::InternalDataChannelInit(dci, role);
+}
+}  // namespace
+
 class FakeDataChannelObserver : public webrtc::DataChannelObserver {
  public:
   FakeDataChannelObserver()
@@ -302,8 +316,7 @@ TEST_F(SctpDataChannelTest, QueuedOpenMessageSent) {
 // state.
 TEST_F(SctpDataChannelTest, LateCreatedChannelTransitionToOpen) {
   SetChannelReady();
-  webrtc::InternalDataChannelInit init;
-  init.id = 1;
+  webrtc::InternalDataChannelInit init = MakeChannelInit();
   rtc::scoped_refptr<DataChannel> dc =
       DataChannel::Create(provider_.get(), cricket::DCT_SCTP, "test1", init);
   EXPECT_EQ(webrtc::DataChannelInterface::kConnecting, dc->state());
@@ -314,9 +327,8 @@ TEST_F(SctpDataChannelTest, LateCreatedChannelTransitionToOpen) {
 // message is received.
 TEST_F(SctpDataChannelTest, SendUnorderedAfterReceivesOpenAck) {
   SetChannelReady();
-  webrtc::InternalDataChannelInit init;
-  init.id = 1;
-  init.ordered = false;
+  webrtc::InternalDataChannelInit init =
+      MakeChannelInit(/*negotiated=*/false, /*ordered=*/false);
   rtc::scoped_refptr<DataChannel> dc =
       DataChannel::Create(provider_.get(), cricket::DCT_SCTP, "test1", init);
 
@@ -329,7 +341,7 @@ TEST_F(SctpDataChannelTest, SendUnorderedAfterReceivesOpenAck) {
 
   // Emulates receiving an OPEN_ACK message.
   cricket::ReceiveDataParams params;
-  params.ssrc = init.id;
+  params.ssrc = init.id();
   params.type = cricket::DMT_CONTROL;
   rtc::CopyOnWriteBuffer payload;
   webrtc::WriteDataChannelOpenAckMessage(&payload);
@@ -344,9 +356,8 @@ TEST_F(SctpDataChannelTest, SendUnorderedAfterReceivesOpenAck) {
 // message is received.
 TEST_F(SctpDataChannelTest, SendUnorderedAfterReceiveData) {
   SetChannelReady();
-  webrtc::InternalDataChannelInit init;
-  init.id = 1;
-  init.ordered = false;
+  webrtc::InternalDataChannelInit init =
+      MakeChannelInit(/*negotiated=*/false, /*ordered=*/false);
   rtc::scoped_refptr<DataChannel> dc =
       DataChannel::Create(provider_.get(), cricket::DCT_SCTP, "test1", init);
 
@@ -354,7 +365,7 @@ TEST_F(SctpDataChannelTest, SendUnorderedAfterReceiveData) {
 
   // Emulates receiving a DATA message.
   cricket::ReceiveDataParams params;
-  params.ssrc = init.id;
+  params.ssrc = init.id();
   params.type = cricket::DMT_TEXT;
   webrtc::DataBuffer buffer("data");
   dc->OnDataReceived(params, buffer.data);
@@ -442,10 +453,9 @@ TEST_F(SctpDataChannelTest, ReceiveDataWithValidSsrc) {
 // Tests that no CONTROL message is sent if the datachannel is negotiated and
 // not created from an OPEN message.
 TEST_F(SctpDataChannelTest, NoMsgSentIfNegotiatedAndNotFromOpenMsg) {
-  webrtc::InternalDataChannelInit config;
-  config.id = 1;
-  config.negotiated = true;
-  config.open_handshake_role = webrtc::InternalDataChannelInit::kNone;
+  webrtc::InternalDataChannelInit config =
+      MakeChannelInit(/*negotiated=*/true,
+                      /*ordered=*/true, webrtc::InternalDataChannelInit::kNone);
 
   SetChannelReady();
   rtc::scoped_refptr<DataChannel> dc =
@@ -505,10 +515,9 @@ TEST_F(SctpDataChannelTest, VerifyMessagesAndBytesReceived) {
 // Tests that OPEN_ACK message is sent if the datachannel is created from an
 // OPEN message.
 TEST_F(SctpDataChannelTest, OpenAckSentIfCreatedFromOpenMessage) {
-  webrtc::InternalDataChannelInit config;
-  config.id = 1;
-  config.negotiated = true;
-  config.open_handshake_role = webrtc::InternalDataChannelInit::kAcker;
+  webrtc::InternalDataChannelInit config = MakeChannelInit(
+      /*negotiated=*/true,
+      /*ordered=*/true, webrtc::InternalDataChannelInit::kAcker);
 
   SetChannelReady();
   rtc::scoped_refptr<DataChannel> dc =
@@ -516,7 +525,7 @@ TEST_F(SctpDataChannelTest, OpenAckSentIfCreatedFromOpenMessage) {
 
   EXPECT_EQ_WAIT(webrtc::DataChannelInterface::kOpen, dc->state(), 1000);
 
-  EXPECT_EQ(static_cast<unsigned int>(config.id),
+  EXPECT_EQ(static_cast<unsigned int>(config.id()),
             provider_->last_send_data_params().ssrc);
   EXPECT_EQ(cricket::DMT_CONTROL, provider_->last_send_data_params().type);
 }
@@ -525,7 +534,7 @@ TEST_F(SctpDataChannelTest, OpenAckSentIfCreatedFromOpenMessage) {
 TEST_F(SctpDataChannelTest, OpenAckRoleInitialization) {
   webrtc::InternalDataChannelInit init;
   EXPECT_EQ(webrtc::InternalDataChannelInit::kOpener, init.open_handshake_role);
-  EXPECT_FALSE(init.negotiated);
+  EXPECT_FALSE(init.negotiated());
 
   webrtc::DataChannelInit base;
   base.negotiated = true;

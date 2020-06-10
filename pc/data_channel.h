@@ -23,6 +23,7 @@
 #include "media/base/media_channel.h"
 #include "pc/channel.h"
 #include "rtc_base/async_invoker.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 
 namespace webrtc {
@@ -54,14 +55,43 @@ class DataChannelProviderInterface {
   virtual ~DataChannelProviderInterface() {}
 };
 
-// TODO(tommi): Change to not inherit from DataChannelInit but to have it as
-// a const member. Block access to the 'id' member since it cannot be const.
-struct InternalDataChannelInit : public DataChannelInit {
+// Encapsulates the DataChannelInit config and adds a handshake role state.
+// In order to keep the config as const as possible, the class does not expose
+// members of that struct directly, but rather through getters.
+// In cases where there's only a getter, the state is considered to be const
+// and the same throughout the lifetime of the instance. That value can
+// therefore be queried regardless of thread/sequence.
+// For state that is mutable (has a setter), the value must be queried and set
+// on the construction thread/sequence of the instance.
+class InternalDataChannelInit {
+ public:
   enum OpenHandshakeRole { kOpener, kAcker, kNone };
+
   // The default role is kOpener because the default |negotiated| is false.
-  InternalDataChannelInit() : open_handshake_role(kOpener) {}
+  explicit InternalDataChannelInit(OpenHandshakeRole role = kOpener);
   explicit InternalDataChannelInit(const DataChannelInit& base);
-  OpenHandshakeRole open_handshake_role;
+  InternalDataChannelInit(const DataChannelInit& base, OpenHandshakeRole role);
+
+  bool reliable() const;
+  bool ordered() const;
+
+  const absl::optional<int>& max_retransmit_time() const;
+  const absl::optional<int>& max_retransmits() const;
+  const std::string& protocol() const;
+  bool negotiated() const;
+  const absl::optional<Priority>& priority() const;
+
+  // Must be called on the construction thread/sequence.
+  int id() const;
+  void set_id(int id);
+
+  DataChannelInit CopyDataChannelInit() const;
+
+  const OpenHandshakeRole open_handshake_role;
+
+ private:
+  const DataChannelInit dci_;
+  webrtc::SequenceChecker checker_;
 };
 
 // Helper class to allocate unique IDs for SCTP DataChannels
@@ -121,43 +151,53 @@ class DataChannel : public DataChannelInterface, public sigslot::has_slots<> {
 
   static bool IsSctpLike(cricket::DataChannelType type);
 
-  virtual void RegisterObserver(DataChannelObserver* observer);
-  virtual void UnregisterObserver();
+  // DataChannelInterface implementation.
 
-  virtual std::string label() const { return label_; }
-  virtual bool reliable() const;
-  virtual bool ordered() const { return config_.ordered; }
+  void RegisterObserver(DataChannelObserver* observer) override;
+  void UnregisterObserver() override;
+
+  std::string label() const override { return label_; }
+  bool reliable() const override;
+  bool ordered() const override { return config_.ordered(); }
   // Backwards compatible accessors
-  virtual uint16_t maxRetransmitTime() const {
-    return config_.maxRetransmitTime ? *config_.maxRetransmitTime
+  uint16_t maxRetransmitTime() const override {
+    return config_.max_retransmit_time() ? *config_.max_retransmit_time()
+                                         : static_cast<uint16_t>(-1);
+  }
+  uint16_t maxRetransmits() const override {
+    return config_.max_retransmits() ? *config_.max_retransmits()
                                      : static_cast<uint16_t>(-1);
   }
-  virtual uint16_t maxRetransmits() const {
-    return config_.maxRetransmits ? *config_.maxRetransmits
-                                  : static_cast<uint16_t>(-1);
+
+  absl::optional<int> maxPacketLifeTime() const override {
+    return config_.max_retransmit_time();
   }
-  virtual absl::optional<int> maxPacketLifeTime() const {
-    return config_.maxRetransmitTime;
+
+  absl::optional<int> maxRetransmitsOpt() const override {
+    return config_.max_retransmits();
   }
-  virtual absl::optional<int> maxRetransmitsOpt() const {
-    return config_.maxRetransmits;
+
+  std::string protocol() const override { return config_.protocol(); }
+  bool negotiated() const override { return config_.negotiated(); }
+  int id() const override { return config_.id(); }
+  Priority priority() const override {
+    return config_.priority() ? *config_.priority() : Priority::kLow;
   }
-  virtual std::string protocol() const { return config_.protocol; }
-  virtual bool negotiated() const { return config_.negotiated; }
-  virtual int id() const { return config_.id; }
-  virtual Priority priority() const {
-    return config_.priority ? *config_.priority : Priority::kLow;
-  }
-  virtual int internal_id() const { return internal_id_; }
-  virtual uint64_t buffered_amount() const;
-  virtual void Close();
-  virtual DataState state() const { return state_; }
-  virtual RTCError error() const;
-  virtual uint32_t messages_sent() const { return messages_sent_; }
-  virtual uint64_t bytes_sent() const { return bytes_sent_; }
-  virtual uint32_t messages_received() const { return messages_received_; }
-  virtual uint64_t bytes_received() const { return bytes_received_; }
-  virtual bool Send(const DataBuffer& buffer);
+
+  uint64_t buffered_amount() const override;
+  void Close() override;
+  DataState state() const override { return state_; }
+  RTCError error() const override;
+  uint32_t messages_sent() const override { return messages_sent_; }
+  uint64_t bytes_sent() const override { return bytes_sent_; }
+  uint32_t messages_received() const override { return messages_received_; }
+  uint64_t bytes_received() const override { return bytes_received_; }
+  bool Send(const DataBuffer& buffer) override;
+
+  // Internal implementation.
+
+  // Specially generated per-instance id.
+  int internal_id() const { return internal_id_; }
 
   // Close immediately, ignoring any queued data or closing procedure.
   // This is called for RTP data channels when SDP indicates a channel should
@@ -286,7 +326,7 @@ class DataChannel : public DataChannelInterface, public sigslot::has_slots<> {
 
   const int internal_id_;
   const std::string label_;
-  const InternalDataChannelInit config_;
+  InternalDataChannelInit config_;
   DataChannelObserver* observer_;
   DataState state_;
   RTCError error_;
@@ -330,7 +370,7 @@ BYPASS_PROXY_CONSTMETHOD0(absl::optional<int>, maxRetransmitsOpt)
 BYPASS_PROXY_CONSTMETHOD0(absl::optional<int>, maxPacketLifeTime)
 BYPASS_PROXY_CONSTMETHOD0(std::string, protocol)
 BYPASS_PROXY_CONSTMETHOD0(bool, negotiated)
-// Can't bypass the proxy since the id may change.
+// Can't bypass the proxy since the id is not const.
 PROXY_CONSTMETHOD0(int, id)
 BYPASS_PROXY_CONSTMETHOD0(Priority, priority)
 PROXY_CONSTMETHOD0(DataState, state)
