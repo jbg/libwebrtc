@@ -20,7 +20,6 @@
 #include "api/candidate.h"
 #include "api/ice_transport_interface.h"
 #include "api/jsep.h"
-#include "api/transport/datagram_transport_interface.h"
 #include "media/sctp/sctp_transport_internal.h"
 #include "p2p/base/dtls_transport.h"
 #include "p2p/base/p2p_constants.h"
@@ -103,9 +102,7 @@ class JsepTransport : public sigslot::has_slots<> {
       std::unique_ptr<webrtc::RtpTransportInternal> datagram_rtp_transport,
       std::unique_ptr<DtlsTransportInternal> rtp_dtls_transport,
       std::unique_ptr<DtlsTransportInternal> rtcp_dtls_transport,
-      std::unique_ptr<SctpTransportInternal> sctp_transport,
-      std::unique_ptr<webrtc::DatagramTransportInterface> datagram_transport,
-      webrtc::DataChannelTransportInterface* data_channel_transport);
+      std::unique_ptr<SctpTransportInternal> sctp_transport);
 
   ~JsepTransport() override;
 
@@ -243,13 +240,6 @@ class JsepTransport : public sigslot::has_slots<> {
       return sctp_data_channel_transport_.get();
     }
     return data_channel_transport_;
-  }
-
-  // Returns datagram transport, if available.
-  webrtc::DatagramTransportInterface* datagram_transport() const
-      RTC_LOCKS_EXCLUDED(accessor_lock_) {
-    rtc::CritScope scope(&accessor_lock_);
-    return datagram_transport_.get();
   }
 
   // This is signaled when RTCP-mux becomes active and
@@ -406,10 +396,6 @@ class JsepTransport : public sigslot::has_slots<> {
       RTC_GUARDED_BY(network_thread_);
   absl::optional<std::vector<int>> recv_extension_ids_
       RTC_GUARDED_BY(network_thread_);
-
-  // Optional datagram transport (experimental).
-  std::unique_ptr<webrtc::DatagramTransportInterface> datagram_transport_
-      RTC_GUARDED_BY(accessor_lock_);
 
   std::unique_ptr<webrtc::RtpTransportInternal> datagram_rtp_transport_
       RTC_GUARDED_BY(accessor_lock_);
