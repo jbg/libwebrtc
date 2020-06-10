@@ -22,13 +22,13 @@ group("test") {
     ":test_renderer",
     ":test_support",
     ":video_test_common",
-    "pc/e2e",
   ]
 
   if (rtc_include_tests) {
     deps += [
       ":test_main",
       ":test_support_unittests",
+      "pc/e2e",
     ]
   }
 }
@@ -216,39 +216,6 @@ rtc_library("field_trial") {
   deps = [ "../system_wrappers:field_trial" ]
 }
 
-rtc_library("perf_test") {
-  visibility = [ "*" ]
-  testonly = true
-  sources = [
-    "testsupport/perf_result_reporter.cc",
-    "testsupport/perf_result_reporter.h",
-    "testsupport/perf_test.cc",
-    "testsupport/perf_test.h",
-    "testsupport/perf_test_histogram_writer.h",
-    "testsupport/perf_test_result_writer.h",
-  ]
-  deps = [
-    "../api:array_view",
-    "../rtc_base:checks",
-    "../rtc_base:criticalsection",
-    "../rtc_base:logging",
-    "../rtc_base:rtc_numerics",
-  ]
-  absl_deps = [
-    "//third_party/abseil-cpp/absl/flags:flag",
-    "//third_party/abseil-cpp/absl/types:optional",
-  ]
-  if (rtc_enable_protobuf) {
-    sources += [ "testsupport/perf_test_histogram_writer.cc" ]
-    deps += [
-      "//third_party/catapult/tracing/tracing:histogram",
-      "//third_party/catapult/tracing/tracing:reserved_infos",
-    ]
-  } else {
-    sources += [ "testsupport/perf_test_histogram_writer_no_protobuf.cc" ]
-  }
-}
-
 if (is_ios) {
   rtc_library("test_support_objc") {
     testonly = true
@@ -374,7 +341,47 @@ rtc_library("video_test_support") {
   }
 }
 
+rtc_library("perf_test") {
+  visibility = [ "*" ]
+  testonly = true
+  sources = [
+    "testsupport/perf_result_reporter.cc",
+    "testsupport/perf_result_reporter.h",
+    "testsupport/perf_test.cc",
+    "testsupport/perf_test.h",
+    "testsupport/perf_test_histogram_writer.h",
+    "testsupport/perf_test_result_writer.h",
+  ]
+  deps = [
+    "../api:array_view",
+    "../rtc_base:checks",
+    "../rtc_base:criticalsection",
+    "../rtc_base:logging",
+    "../rtc_base:rtc_numerics",
+  ]
+  absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
+  if (rtc_enable_protobuf) {
+    sources += [ "testsupport/perf_test_histogram_writer.cc" ]
+    deps += [
+      "//third_party/catapult/tracing/tracing:histogram",
+      "//third_party/catapult/tracing/tracing:reserved_infos",
+    ]
+  } else {
+    sources += [ "testsupport/perf_test_histogram_writer_no_protobuf.cc" ]
+  }
+}
+
 if (rtc_include_tests) {
+  rtc_library("resources_dir_flag") {
+    testonly = true
+    visibility = [ "*" ]
+    sources = [
+      "testsupport/resources_dir_flag.cc",
+      "testsupport/resources_dir_flag.h",
+    ]
+    absl_deps = [ "//third_party/abseil-cpp/absl/flags:flag" ]
+  }
+
   rtc_library("test_main_lib") {
     visibility = [ "*" ]
     testonly = true
@@ -609,16 +616,6 @@ rtc_library("fileutils") {
   if (is_win) {
     deps += [ "../rtc_base" ]
   }
-}
-
-rtc_library("resources_dir_flag") {
-  testonly = true
-  visibility = [ "*" ]
-  sources = [
-    "testsupport/resources_dir_flag.cc",
-    "testsupport/resources_dir_flag.h",
-  ]
-  absl_deps = [ "//third_party/abseil-cpp/absl/flags:flag" ]
 }
 
 # We separate header into own target to make it possible for downstream
