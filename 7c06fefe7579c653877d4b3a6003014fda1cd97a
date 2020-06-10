@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "0c4c32bc_e334fef5",
+        "filename": "pc/media_session.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-10T09:37:00Z",
+      "side": 1,
+      "message": "I think of \"stopped\" as the mechanism, \"desired\" as what we want to have - the result of applying the mechanism. But I\u0027m willing to grant you this one.",
+      "parentUuid": "141149de_3800a572",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f703371_43bade4b",
         "filename": "pc/media_session.cc",
         "patchSetId": 8
@@ -312,6 +330,24 @@
       "side": 1,
       "message": "Thanks, added video orientation.\nChanged to handle both 2.4 and 2.5 in the same if statement.\nI reordered the 2.2 section before the old 2.5 section. That will treat the unsupported direction for video orientation only when it\u0027s in the transceiver for video transceivers.\n\nAs a transceiver can send and/or receive video, to avoid coupling the logic here with the transceiver direction (which can change), I interpret https://tools.ietf.org/html/draft-ietf-rtcweb-rtp-usage-26#page-17 section 5.2.4 and 5.2.5 as that the extensions need to be kSendRecv, or we throw an error. Otherwise strangeties like\n\n  transceiver.setDirection(sendrecv)\n  transceiver.setOffered(orientation:sendonly) -\u003e ok\n  transceiver.setDirection(recvonly)\n  transceiver.setOffered(orientation:sendonly) -\u003e exception\n\nare possible. Wdyt?",
       "parentUuid": "b62593a2_19d3c762",
+      "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c73d8a1_b35a58a3",
+        "filename": "pc/rtp_transceiver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-10T09:37:00Z",
+      "side": 1,
+      "message": "Let\u0027s make them sendrecv for now. If someone wants directional, they can try to convince us they know what it means.\n(directional capabilities are kind of silly anyway. Overengineered.)",
+      "parentUuid": "eaa6deb2_86ede7c1",
       "revId": "7c06fefe7579c653877d4b3a6003014fda1cd97a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
