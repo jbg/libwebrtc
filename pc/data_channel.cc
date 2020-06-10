@@ -35,30 +35,98 @@ int GenerateUniqueId() {
   return ++g_unique_id;
 }
 
-}  // namespace
-
-InternalDataChannelInit::InternalDataChannelInit(const DataChannelInit& base)
-    : DataChannelInit(base), open_handshake_role(kOpener) {
-  // If the channel is externally negotiated, do not send the OPEN message.
-  if (base.negotiated) {
-    open_handshake_role = kNone;
-  } else {
-    // Datachannel is externally negotiated. Ignore the id value.
-    // Specified in createDataChannel, WebRTC spec section 6.1 bullet 13.
-    id = -1;
-  }
+DataChannelInit AdjustDefaultValues(const DataChannelInit& data_channel_init) {
+  DataChannelInit dci(data_channel_init);
   // Backwards compatibility: If base.maxRetransmits or base.maxRetransmitTime
   // have been set to -1, unset them.
-  if (maxRetransmits && *maxRetransmits == -1) {
+  if (dci.maxRetransmits && *dci.maxRetransmits == -1) {
     RTC_LOG(LS_ERROR)
         << "Accepting maxRetransmits = -1 for backwards compatibility";
-    maxRetransmits = absl::nullopt;
+    dci.maxRetransmits = absl::nullopt;
   }
-  if (maxRetransmitTime && *maxRetransmitTime == -1) {
+  if (dci.maxRetransmitTime && *dci.maxRetransmitTime == -1) {
     RTC_LOG(LS_ERROR)
         << "Accepting maxRetransmitTime = -1 for backwards compatibility";
-    maxRetransmitTime = absl::nullopt;
+    dci.maxRetransmitTime = absl::nullopt;
   }
+
+  if (!data_channel_init.negotiated) {
+    // Datachannel is externally negotiated. Ignore the id value.
+    // Specified in createDataChannel, WebRTC spec section 6.1 bullet 13.
+    dci.id = -1;
+  }
+
+  return dci;
+}
+
+InternalDataChannelInit::OpenHandshakeRole GetDefaultHandshakeRole(
+    const DataChannelInit& data_channel_init) {
+  // If the channel is externally negotiated, do not send the OPEN message.
+  return data_channel_init.negotiated ? InternalDataChannelInit::kNone
+                                      : InternalDataChannelInit::kOpener;
+}
+
+}  // namespace
+
+InternalDataChannelInit::InternalDataChannelInit(
+    OpenHandshakeRole role /*= kOpener*/)
+    : open_handshake_role(role) {}
+
+InternalDataChannelInit::InternalDataChannelInit(const DataChannelInit& base)
+    : InternalDataChannelInit(AdjustDefaultValues(base),
+                              GetDefaultHandshakeRole(base)) {}
+
+InternalDataChannelInit::InternalDataChannelInit(const DataChannelInit& base,
+                                                 OpenHandshakeRole role)
+    : open_handshake_role(role), dci_(base) {}
+
+bool InternalDataChannelInit::reliable() const {
+  return dci_.reliable;
+}
+bool InternalDataChannelInit::ordered() const {
+  return dci_.ordered;
+}
+
+const absl::optional<int>& InternalDataChannelInit::max_retransmit_time()
+    const {
+  return dci_.maxRetransmitTime;
+}
+
+const absl::optional<int>& InternalDataChannelInit::max_retransmits() const {
+  return dci_.maxRetransmits;
+}
+
+const std::string& InternalDataChannelInit::protocol() const {
+  return dci_.protocol;
+}
+
+bool InternalDataChannelInit::negotiated() const {
+  return dci_.negotiated;
+}
+
+const absl::optional<Priority>& InternalDataChannelInit::priority() const {
+  return dci_.priority;
+}
+
+int InternalDataChannelInit::id() const {
+  RTC_DCHECK_RUN_ON(&checker_);
+  return dci_.id;
+}
+
+void InternalDataChannelInit::set_id(int id) {
+  RTC_DCHECK_RUN_ON(&checker_);
+  // Not pretty, but this is the only member of DCI that we allow changing.
+  // The alternative, would be to either make the variable not const or to
+  // maintain a separate mutable variable to hold the id.
+  // Opting for the most constness right now to make sure to catch issues at
+  // compile time and chosing to live with this particular const_cast.
+  const_cast<DataChannelInit&>(dci_).id = id;
+}
+
+DataChannelInit InternalDataChannelInit::CopyDataChannelInit() const {
+  DataChannelInit dci = dci_;
+  dci.id = id();
+  return dci;
 }
 
 bool SctpSidAllocator::AllocateSid(rtc::SSLRole role, int* sid) {
@@ -178,22 +246,22 @@ DataChannel::DataChannel(const InternalDataChannelInit& config,
 
 bool DataChannel::Init() {
   if (data_channel_type_ == cricket::DCT_RTP) {
-    if (config_.reliable || config_.id != -1 || config_.maxRetransmits ||
-        config_.maxRetransmitTime) {
+    if (config_.reliable() || config_.id() != -1 || config_.max_retransmits() ||
+        config_.max_retransmit_time()) {
       RTC_LOG(LS_ERROR) << "Failed to initialize the RTP data channel due to "
                            "invalid DataChannelInit.";
       return false;
     }
     handshake_state_ = kHandshakeReady;
   } else if (IsSctpLike(data_channel_type_)) {
-    if (config_.id < -1 ||
-        (config_.maxRetransmits && *config_.maxRetransmits < 0) ||
-        (config_.maxRetransmitTime && *config_.maxRetransmitTime < 0)) {
+    if (config_.id() < -1 ||
+        (config_.max_retransmits() && *config_.max_retransmits() < 0) ||
+        (config_.max_retransmit_time() && *config_.max_retransmit_time() < 0)) {
       RTC_LOG(LS_ERROR) << "Failed to initialize the SCTP data channel due to "
                            "invalid DataChannelInit.";
       return false;
     }
-    if (config_.maxRetransmits && config_.maxRetransmitTime) {
+    if (config_.max_retransmits() && config_.max_retransmit_time()) {
       RTC_LOG(LS_ERROR)
           << "maxRetransmits and maxRetransmitTime should not be both set.";
       return false;
@@ -244,7 +312,7 @@ bool DataChannel::reliable() const {
   if (data_channel_type_ == cricket::DCT_RTP) {
     return false;
   } else {
-    return !config_.maxRetransmits && !config_.maxRetransmitTime;
+    return !config_.max_retransmits() && !config_.max_retransmit_time();
   }
 }
 
@@ -317,19 +385,19 @@ void DataChannel::SetReceiveSsrc(uint32_t receive_ssrc) {
 }
 
 void DataChannel::SetSctpSid(int sid) {
-  RTC_DCHECK_LT(config_.id, 0);
+  RTC_DCHECK_LT(config_.id(), 0);
   RTC_DCHECK_GE(sid, 0);
   RTC_DCHECK(IsSctpLike(data_channel_type_));
-  if (config_.id == sid) {
+  if (config_.id() == sid) {
     return;
   }
 
-  const_cast<InternalDataChannelInit&>(config_).id = sid;
+  config_.set_id(sid);
   provider_->AddSctpDataStream(sid);
 }
 
 void DataChannel::OnClosingProcedureStartedRemotely(int sid) {
-  if (IsSctpLike(data_channel_type_) && sid == config_.id &&
+  if (IsSctpLike(data_channel_type_) && sid == config_.id() &&
       state_ != kClosing && state_ != kClosed) {
     // Don't bother sending queued data since the side that initiated the
     // closure wouldn't receive it anyway. See crbug.com/559394 for a lengthy
@@ -345,7 +413,7 @@ void DataChannel::OnClosingProcedureStartedRemotely(int sid) {
 }
 
 void DataChannel::OnClosingProcedureComplete(int sid) {
-  if (IsSctpLike(data_channel_type_) && sid == config_.id) {
+  if (IsSctpLike(data_channel_type_) && sid == config_.id()) {
     // If the closing procedure is complete, we should have finished sending
     // all pending data and transitioned to kClosing already.
     RTC_DCHECK_EQ(state_, kClosing);
@@ -362,8 +430,8 @@ void DataChannel::OnTransportChannelCreated() {
   }
   // The sid may have been unassigned when provider_->ConnectDataChannel was
   // done. So always add the streams even if connected_to_provider_ is true.
-  if (config_.id >= 0) {
-    provider_->AddSctpDataStream(config_.id);
+  if (config_.id() >= 0) {
+    provider_->AddSctpDataStream(config_.id());
   }
 }
 
@@ -399,7 +467,7 @@ void DataChannel::OnDataReceived(const cricket::ReceiveDataParams& params,
   if (data_channel_type_ == cricket::DCT_RTP && params.ssrc != receive_ssrc_) {
     return;
   }
-  if (IsSctpLike(data_channel_type_) && params.sid != config_.id) {
+  if (IsSctpLike(data_channel_type_) && params.sid != config_.id()) {
     return;
   }
 
@@ -514,7 +582,8 @@ void DataChannel::UpdateState() {
         if (connected_to_provider_) {
           if (handshake_state_ == kHandshakeShouldSendOpen) {
             rtc::CopyOnWriteBuffer payload;
-            WriteDataChannelOpenMessage(label_, config_, &payload);
+            WriteDataChannelOpenMessage(label_, config_.CopyDataChannelInit(),
+                                        &payload);
             SendControlMessage(payload);
           } else if (handshake_state_ == kHandshakeShouldSendAck) {
             rtc::CopyOnWriteBuffer payload;
@@ -554,9 +623,9 @@ void DataChannel::UpdateState() {
           // OnClosingProcedureComplete will end up called asynchronously
           // afterwards.
           if (connected_to_provider_ && !started_closing_procedure_ &&
-              config_.id >= 0) {
+              config_.id() >= 0) {
             started_closing_procedure_ = true;
-            provider_->RemoveSctpDataStream(config_.id);
+            provider_->RemoveSctpDataStream(config_.id());
           }
         }
       }
@@ -626,9 +695,9 @@ bool DataChannel::SendDataMessage(const DataBuffer& buffer,
   cricket::SendDataParams send_params;
 
   if (IsSctpLike(data_channel_type_)) {
-    send_params.ordered = config_.ordered;
+    send_params.ordered = config_.ordered();
     // Send as ordered if it is still going through OPEN/ACK signaling.
-    if (handshake_state_ != kHandshakeReady && !config_.ordered) {
+    if (handshake_state_ != kHandshakeReady && !config_.ordered()) {
       send_params.ordered = true;
       RTC_LOG(LS_VERBOSE)
           << "Sending data as ordered for unordered DataChannel "
@@ -636,10 +705,10 @@ bool DataChannel::SendDataMessage(const DataBuffer& buffer,
     }
 
     send_params.max_rtx_count =
-        config_.maxRetransmits ? *config_.maxRetransmits : -1;
+        config_.max_retransmits() ? *config_.max_retransmits() : -1;
     send_params.max_rtx_ms =
-        config_.maxRetransmitTime ? *config_.maxRetransmitTime : -1;
-    send_params.sid = config_.id;
+        config_.max_retransmit_time() ? *config_.max_retransmit_time() : -1;
+    send_params.sid = config_.id();
   } else {
     send_params.ssrc = send_ssrc_;
   }
@@ -709,21 +778,21 @@ bool DataChannel::SendControlMessage(const rtc::CopyOnWriteBuffer& buffer) {
 
   RTC_DCHECK(IsSctpLike(data_channel_type_));
   RTC_DCHECK(writable_);
-  RTC_DCHECK_GE(config_.id, 0);
-  RTC_DCHECK(!is_open_message || !config_.negotiated);
+  RTC_DCHECK_GE(config_.id(), 0);
+  RTC_DCHECK(!is_open_message || !config_.negotiated());
 
   cricket::SendDataParams send_params;
-  send_params.sid = config_.id;
+  send_params.sid = config_.id();
   // Send data as ordered before we receive any message from the remote peer to
   // make sure the remote peer will not receive any data before it receives the
   // OPEN message.
-  send_params.ordered = config_.ordered || is_open_message;
+  send_params.ordered = config_.ordered() || is_open_message;
   send_params.type = cricket::DMT_CONTROL;
 
   cricket::SendDataResult send_result = cricket::SDR_SUCCESS;
   bool retval = provider_->SendData(send_params, buffer, &send_result);
   if (retval) {
-    RTC_LOG(LS_VERBOSE) << "Sent CONTROL message on channel " << config_.id;
+    RTC_LOG(LS_VERBOSE) << "Sent CONTROL message on channel " << config_.id();
 
     if (handshake_state_ == kHandshakeShouldSendAck) {
       handshake_state_ = kHandshakeReady;
