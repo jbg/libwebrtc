@@ -52,7 +52,6 @@
 // C++ target.
 // TODO(zhihuang): Remove nogncheck once MediaEngineInterface is moved to C++
 // API layer.
-#include "api/transport/media/media_transport_interface.h"
 #include "media/engine/webrtc_media_engine.h"  // nogncheck
 
 @implementation RTC_OBJC_TYPE (RTCPeerConnectionFactory) {
