@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 
+#include "api/adaptation/resource.h"
 #include "api/media_types.h"
 #include "call/audio_receive_stream.h"
 #include "call/audio_send_stream.h"
@@ -136,6 +137,8 @@ class Call {
   // TODO(srte): Move ownership of transport controller send out of Call and
   // remove this method interface.
   virtual RtpTransportControllerSendInterface* GetTransportControllerSend() = 0;
+
+  virtual void AddResource(rtc::scoped_refptr<Resource> resource) = 0;
 
   // Returns the call statistics, such as estimated send and receive bandwidth,
   // pacing delay, etc.
