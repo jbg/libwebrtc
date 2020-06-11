@@ -49,7 +49,12 @@ class PeerConnectionTestWrapper
       rtc::scoped_refptr<webrtc::AudioEncoderFactory> audio_encoder_factory,
       rtc::scoped_refptr<webrtc::AudioDecoderFactory> audio_decoder_factory);
 
+  rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> pc_factory()
+      const {
+    return peer_connection_factory_;
+  }
   webrtc::PeerConnectionInterface* pc() { return peer_connection_.get(); }
+  webrtc::FakeVideoTrackRenderer* renderer() { return renderer_.get(); }
 
   rtc::scoped_refptr<webrtc::DataChannelInterface> CreateDataChannel(
       const std::string& label,

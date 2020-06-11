@@ -257,6 +257,11 @@ DegradedCall::GetTransportControllerSend() {
   return call_->GetTransportControllerSend();
 }
 
+void DegradedCall::AddAdaptationResource(
+    rtc::scoped_refptr<Resource> resource) {
+  call_->AddAdaptationResource(std::move(resource));
+}
+
 Call::Stats DegradedCall::GetStats() const {
   return call_->GetStats();
 }
