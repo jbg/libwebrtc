@@ -20,6 +20,7 @@
 #include "api/video/color_space.h"
 #include "api/video/video_content_type.h"
 #include "api/video/video_frame_marking.h"
+#include "api/video/video_layers_allocation.h"
 #include "api/video/video_rotation.h"
 #include "api/video/video_timing.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
@@ -323,6 +324,27 @@ class InbandComfortNoiseExtension {
   }
   static bool Write(rtc::ArrayView<uint8_t> data,
                     absl::optional<uint8_t> level);
+};
+
+class VideoLayersAllocationExtension {
+ public:
+  using value_type = VideoLayersAllocation;
+  static constexpr RTPExtensionType kId = kRtpExtensionVideoLayersAllocation;
+  static constexpr const char kUri[] =
+      "http://www.webrtc.org/experiments/rtp-hdrext/video-layers-allocation";
+  static bool Parse(rtc::ArrayView<const uint8_t> data,
+                    VideoLayersAllocation* allocation);
+  static size_t ValueSize(const VideoLayersAllocation& allocation);
+  static bool Write(rtc::ArrayView<uint8_t> data,
+                    const VideoLayersAllocation& allocation);
+
+ private:
+  // Retruns size of the encoded extension.
+  // If |buffer| != nullptr, writes upto |size| bytes. Returns 0 if there's not
+  // enough bytes in the buffer.
+  static size_t Encode(uint8_t* buffer,
+                       const VideoLayersAllocation& allocation,
+                       size_t buffer_size);
 };
 
 }  // namespace webrtc

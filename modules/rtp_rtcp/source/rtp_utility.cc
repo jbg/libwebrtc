@@ -546,6 +546,10 @@ void RtpHeaderParser::ParseOneByteExtensionHeader(
           RTC_LOG(WARNING) << "Inband comfort noise extension unsupported by "
                               "rtp header parser.";
           break;
+        case kRtpExtensionVideoLayersAllocation:
+          RTC_LOG(WARNING) << "VideoLayersAllocation extension unsupported by "
+                              "rtp header parser.";
+          break;
         case kRtpExtensionNone:
         case kRtpExtensionNumberOfExtensions: {
           RTC_NOTREACHED() << "Invalid extension type: " << type;

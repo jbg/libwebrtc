@@ -60,6 +60,7 @@ enum RTPExtensionType : int {
   kRtpExtensionAbsoluteSendTime,
   kRtpExtensionAbsoluteCaptureTime,
   kRtpExtensionVideoRotation,
+  kRtpExtensionVideoLayersAllocation,
   kRtpExtensionTransportSequenceNumber,
   kRtpExtensionTransportSequenceNumber02,
   kRtpExtensionPlayoutDelay,

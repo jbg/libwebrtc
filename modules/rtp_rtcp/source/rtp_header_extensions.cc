@@ -17,6 +17,7 @@
 
 #include "modules/rtp_rtcp/include/rtp_cvo.h"
 #include "modules/rtp_rtcp/source/byte_io.h"
+#include "rtc_base/bit_buffer.h"
 // TODO(bug:9855) Move kNoSpatialIdx from vp9_globals.h to common_constants
 #include "modules/video_coding/codecs/interface/common_constants.h"
 #include "modules/video_coding/codecs/vp9/include/vp9_globals.h"
@@ -901,6 +902,325 @@ bool InbandComfortNoiseExtension::Write(rtc::ArrayView<uint8_t> data,
     data[0] = 0b1000'0000 | *level;
   }
   return true;
+}
+
+// VideoLayersAllocation extension.
+
+constexpr RTPExtensionType VideoLayersAllocationExtension::kId;
+constexpr const char VideoLayersAllocationExtension::kUri[];
+
+//  0                   1                   2
+//  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// | NS|Sid| C |T|X|Res| Bit encoded data...
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// NS: Number of spatial layers/simulcast streams - 1. 2 bits, thus allowing
+// passing number of layers/streams up-to 8.
+// Sid: Spatial layer/simulcast stream id, numbered from 0. 2 bits.
+// C: content type, 2 bit value. 00 - realtime video, 01 - screenshare.
+// T: indicates if all spatial layers have the same amount of temporal layers.
+// X: inidcates if frame-rates, resolution and switch points are present.
+// Res: 2 bits reserved for future use.
+// Bit encoded data: consists of following field written in order:
+//  1) T=1: Nt - 2-bit value of number of temporal layers - 1
+//     T=0: NS 2-bit values of numbers of temporal layers - 1 for all spatial
+//     layers from lower to higher.
+// TODO(!!!): revise encoding below.
+//  2) Bitrates: One value for each spatial x temporal layer. First all bitrates
+//     for the first spatial layer are written from the lower to higher temporal
+//     layer, then for the second, etc.
+//     All bitrates are in kbps, rounded up. If bitrate for some temporal layer
+//     is written as 0, all higher temporal layers are implicitly assumed to
+//     also be 0 and are skipped.
+//     All bitrates are total required bitrate to receive the corresponding
+//     layer, i.e. in simulcast mode they include only corresponding spatial
+//     layer, in full-svc all lower spatial layers are included. All lower
+//     temporal layers are also included.
+//     All bitrates are written in one of the following formats:
+//     0xxxxxxx - if the value fits in 7 bits,
+//     10xxxxxx xxxxxxxx - if the value fits in 14 bits,
+//     11xxxxxx xxxxxxxx xxxxxxxx - if the value fits in 22 bits
+//     The maximum possible encoded value per temporal layer is a little more
+//     than 4gbps
+// 3) [only if X bit is set]. Target framerates. In order of increasing spatial,
+//    then temporal id (the same as bitrates). Each one is written as a 8-bit
+//    values. Only for the temporal layers which have non-zero bitrate in
+//    section 2.
+// 4) [only if X bit is set]. Encoded width for all spatial layers in order from
+//    lower to higher. Each is a 16-bit value.
+// 5) [only if X bit is set]. Encoded height for all spatial layers in order
+//    from lower to higher. Each is a 16-bit value.
+// 6) [only if X bit is set]. Switch possiblity. Ns*(Ns-1) 2-bit values. First
+// Ns-1 values for switching from the lowest spatial layer to all other layers
+// in order. Then Ns-1 values for switching from the second spatial layer for
+// each possible "to" layer.
+// 2-bit values encode:
+//  00 - Can switch on any key-frame only
+//  01 - Can switch on any key-frame and this frame.
+//  10 - Can switch at this frame and at regular switch points.
+//  11 - Can switch at every frame.
+// The extention can be as small as 3 bytes (1 spatial layer with low bitrate)
+// as big as 86 bytes (4x4 layers with a very high bitrate and all data).
+
+size_t VideoLayersAllocationExtension::Encode(
+    uint8_t* buffer,
+    const VideoLayersAllocation& allocation,
+    size_t buffer_size) {
+  size_t bit_length = 0;
+  // nullptr buffer might be used to count size of the extension.
+  // BitBufferWriter works with nullptr buffer as long as its size is 0.
+  RTC_CHECK(buffer != nullptr || buffer_size == 0);
+  rtc::BitBufferWriter writer(buffer, buffer_size);
+
+  bit_length += 2;
+  if (allocation.num_spatial_layers > 4)
+    return 0;
+  writer.WriteBits(allocation.num_spatial_layers - 1, 2);
+
+  bit_length += 2;
+  writer.WriteBits(allocation.spatial_idx, 2);
+
+  bit_length += 2;
+  writer.WriteBits(
+      allocation.content_type == VideoContentType::SCREENSHARE ? 1 : 0, 2);
+
+  int sl_idx, tl_idx;
+  bool num_tls_is_constant = true;
+  for (sl_idx = 1; sl_idx < allocation.num_spatial_layers; ++sl_idx) {
+    if (allocation.num_temporal_layers[sl_idx] !=
+        allocation.num_temporal_layers[0]) {
+      num_tls_is_constant = false;
+    }
+  }
+
+  bit_length += 1;
+  writer.WriteBits(num_tls_is_constant ? 1 : 0, 1);
+
+  bit_length += 1;
+  writer.WriteBits(allocation.has_full_data ? 1 : 0, 1);
+
+  if (num_tls_is_constant) {
+    bit_length += 2;
+    if (allocation.num_temporal_layers[0] > 4)
+      return 0;
+    writer.WriteBits(allocation.num_temporal_layers[0] - 1, 2);
+  } else {
+    for (sl_idx = 0; sl_idx < allocation.num_spatial_layers; ++sl_idx) {
+      bit_length += 2;
+      if (allocation.num_temporal_layers[sl_idx] > 4)
+        return 0;
+      writer.WriteBits(allocation.num_temporal_layers[sl_idx] - 1, 2);
+    }
+  }
+
+  for (sl_idx = 0; sl_idx < allocation.num_spatial_layers; ++sl_idx) {
+    for (tl_idx = 0; tl_idx < allocation.num_temporal_layers[sl_idx];
+         ++tl_idx) {
+      int bitrate = allocation.target_bitrate_kbps[sl_idx][tl_idx];
+      if (bitrate < (1 << 7)) {
+        bit_length += 8;
+        writer.WriteBits(0, 1);
+        writer.WriteBits(bitrate, 7);
+      } else if (bitrate < (1 << 14)) {
+        bit_length += 16;
+        writer.WriteBits(0b10, 2);
+        writer.WriteBits(bitrate, 14);
+      } else if (bitrate < (1 << 22)) {
+        bit_length += 24;
+        writer.WriteBits(0b11, 2);
+        writer.WriteBits(bitrate, 22);
+      } else {
+        return 0;
+      }
+      if (bitrate == 0)
+        break;
+    }
+  }
+
+  if (allocation.has_full_data) {
+    for (sl_idx = 0; sl_idx < allocation.num_spatial_layers; ++sl_idx) {
+      for (tl_idx = 0; tl_idx < allocation.num_temporal_layers[sl_idx];
+           ++tl_idx) {
+        int bitrate = allocation.target_bitrate_kbps[sl_idx][tl_idx];
+        int framerate = allocation.target_framerate[sl_idx][tl_idx];
+        if (bitrate > 0) {
+          bit_length += 8;
+          if (framerate >= (1 << 8))
+            return 0;
+          writer.WriteBits(framerate, 8);
+        } else {
+          break;
+        }
+      }
+    }
+
+    for (sl_idx = 0; sl_idx < allocation.num_spatial_layers; ++sl_idx) {
+      bit_length += 16;
+      writer.WriteBits(allocation.width[sl_idx], 16);
+    }
+
+    for (sl_idx = 0; sl_idx < allocation.num_spatial_layers; ++sl_idx) {
+      bit_length += 16;
+      writer.WriteBits(allocation.height[sl_idx], 16);
+    }
+
+    for (int sl_from = 0; sl_from < allocation.num_spatial_layers; ++sl_from) {
+      for (int sl_to = 0; sl_to < allocation.num_spatial_layers; ++sl_to) {
+        if (sl_to == sl_from)
+          continue;
+        int value = 0;
+        switch (allocation.can_switch[sl_from][sl_to]) {
+          case SwitchPossibility::kNeedKeyFrame:
+            value = 0;
+            break;
+          case SwitchPossibility::kOnlyThisFrame:
+            value = 1;
+            break;
+          case SwitchPossibility::kRegularIntervals:
+            value = 2;
+            break;
+          case SwitchPossibility::kAnywhere:
+            value = 3;
+            break;
+        }
+        bit_length += 2;
+        writer.WriteBits(value, 2);
+      }
+    }
+  }
+
+  return (bit_length + 7) / 8;
+}
+
+bool VideoLayersAllocationExtension::Parse(rtc::ArrayView<const uint8_t> data,
+                                           VideoLayersAllocation* allocation) {
+  if (data.size() == 0)
+    return false;
+  rtc::BitBuffer reader(data.data(), data.size());
+  if (!allocation) return false;
+
+  uint32_t val;
+
+  if (!reader.ReadBits(&val, 2)) return false;
+  allocation->num_spatial_layers = val + 1;
+
+  if (!reader.ReadBits(&val, 2)) return false;
+  allocation->spatial_idx = val + 1;
+
+  if (!reader.ReadBits(&val, 2)) return false;
+  allocation->content_type = val == 1 ? VideoContentType::SCREENSHARE : VideoContentType::UNSPECIFIED;
+
+  int sl_idx, tl_idx;
+  bool num_tls_is_constant = false;
+  if (!reader.ReadBits(&val, 1)) return false;
+  num_tls_is_constant = val == 1;
+
+  if (!reader.ReadBits(&val, 1)) return false;
+  allocation->has_full_data = val == 1;
+
+  if (num_tls_is_constant) {
+   if (!reader.ReadBits(&val, 2)) return false;
+   for (sl_idx = 0; sl_idx < allocation->num_spatial_layers; ++sl_idx) {
+     allocation->num_temporal_layers[sl_idx] = val + 1;
+   }
+  } else {
+    for (sl_idx = 0; sl_idx < allocation->num_spatial_layers; ++sl_idx) {
+      if (!reader.ReadBits(&val, 2)) return false;
+      allocation->num_temporal_layers[sl_idx] = val + 1;
+    }
+  }
+
+  for (sl_idx = 0; sl_idx < allocation->num_spatial_layers; ++sl_idx) {
+    for (tl_idx = 0; tl_idx < allocation->num_temporal_layers[sl_idx];
+         ++tl_idx) {
+      uint32_t bit;
+      int bit_length = 0;
+      if (!reader.ReadBits(&bit, 1)) return false;
+      if (bit == 0) {
+        // 0xxxxxxx
+        bit_length = 7;
+        if (!reader.ReadBits(&val, 7)) return false;
+      } else {
+        if (!reader.ReadBits(&bit, 1)) return false;
+        if (bit == 0) {
+          // 10xxxxxx xxxxxxxx
+          bit_length = 14;
+        } else {
+          // 11xxxxxx xxxxxxxx xxxxxxxx
+          bit_length = 22;
+        }
+      }
+      if (!reader.ReadBits(&val, bit_length)) return false;
+      allocation->target_bitrate_kbps[sl_idx][tl_idx] = val;
+      if (val == 0)
+        break;
+    }
+    for (; tl_idx < allocation->num_temporal_layers[sl_idx]; ++tl_idx) {
+      allocation->target_bitrate_kbps[sl_idx][tl_idx] = 0;
+    }
+  }
+
+  if (allocation->has_full_data) {
+    for (sl_idx = 0; sl_idx < allocation->num_spatial_layers; ++sl_idx) {
+      for (tl_idx = 0; tl_idx < allocation->num_temporal_layers[sl_idx];
+           ++tl_idx) {
+        int bitrate = allocation->target_bitrate_kbps[sl_idx][tl_idx];
+        if (bitrate > 0) {
+          if (!reader.ReadBits(&val, 8)) return false;
+          allocation->target_framerate[sl_idx][tl_idx] = val;
+        } else {
+          break;
+        }
+      }
+      for (; tl_idx < allocation->num_temporal_layers[sl_idx]; ++tl_idx) {
+        allocation->target_bitrate_kbps[sl_idx][tl_idx] = 0;
+      }
+    }
+
+    for (sl_idx = 0; sl_idx < allocation->num_spatial_layers; ++sl_idx) {
+      if (!reader.ReadBits(&val, 16)) return false;
+      allocation->width[sl_idx] = val;
+    }
+
+    for (sl_idx = 0; sl_idx < allocation->num_spatial_layers; ++sl_idx) {
+      if (!reader.ReadBits(&val, 16)) return false;
+      allocation->height[sl_idx] = val;
+    }
+
+    for (int sl_from = 0; sl_from < allocation->num_spatial_layers; ++sl_from) {
+      for (int sl_to = 0; sl_to < allocation->num_spatial_layers; ++sl_to) {
+        if (sl_to == sl_from)
+          continue;
+        if (!reader.ReadBits(&val, 2)) return false;
+        switch (val) {
+          case 0:
+            allocation->can_switch[sl_from][sl_to] = SwitchPossibility::kNeedKeyFrame;
+            break;
+          case 1:
+            allocation->can_switch[sl_from][sl_to] = SwitchPossibility::kOnlyThisFrame;
+            break;
+          case 2:
+            allocation->can_switch[sl_from][sl_to] = SwitchPossibility::kRegularIntervals;
+            break;
+          default:
+            allocation->can_switch[sl_from][sl_to] = SwitchPossibility::kAnywhere;
+        }
+      }
+    }
+  }
+
+  return true;
+}
+
+size_t VideoLayersAllocationExtension::ValueSize(
+    const VideoLayersAllocation& allocation) {
+  return Encode(nullptr, allocation, 0);
+}
+
+bool VideoLayersAllocationExtension::Write(
+    rtc::ArrayView<uint8_t> data,
+    const VideoLayersAllocation& allocation) {
+  return Encode(data.data(), allocation, data.size()) == data.size();
 }
 
 }  // namespace webrtc

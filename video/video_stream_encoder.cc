@@ -1050,6 +1050,8 @@ void VideoStreamEncoder::SetEncoderRates(
        last_encoder_rate_settings_->rate_control != rate_settings.rate_control);
   if (last_encoder_rate_settings_ != rate_settings) {
     last_encoder_rate_settings_ = rate_settings;
+    // TODO(!!!): Mark rate settings as new, needed to be signalled in
+    // VideoLayersAllocation.
   }
 
   if (!encoder_) {
@@ -1452,6 +1454,15 @@ EncodedImageCallback::Result VideoStreamEncoder::OnEncodedImage(
   EncodedImage image_copy(encoded_image);
 
   frame_encode_metadata_writer_.FillTimingInfo(spatial_idx, &image_copy);
+
+  if (image_copy._frameType == VideoFrameType::kVideoFrameKey) {
+    // TODO(!!!): Fill full video layers allocation if it's not already attached
+    // by the encoder or doesn't have full data.
+  }
+
+  // TODO(!!!): if bitrate update is needed, put it into VideoLayersAllocation,
+  // create one if needed. Mark rate settings as already sent over. But only if
+  // the change is substantial or it's been enough since the last update.
 
   std::unique_ptr<RTPFragmentationHeader> fragmentation_copy =
       frame_encode_metadata_writer_.UpdateBitstream(codec_specific_info,

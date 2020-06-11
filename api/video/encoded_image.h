@@ -24,6 +24,7 @@
 #include "api/video/video_codec_type.h"
 #include "api/video/video_content_type.h"
 #include "api/video/video_frame_type.h"
+#include "api/video/video_layers_allocation.h"
 #include "api/video/video_rotation.h"
 #include "api/video/video_timing.h"
 #include "common_types.h"  // NOLINT(build/include_directory)
@@ -217,6 +218,7 @@ class RTC_EXPORT EncodedImage {
   // https://w3c.github.io/webrtc-pc/#dom-rtcrtpreceiver-getcontributingsources
   RtpPacketInfos packet_infos_;
   bool retransmission_allowed_ = true;
+  absl::optional<VideoLayersAllocation> video_layers_allocation_;
 };
 
 }  // namespace webrtc

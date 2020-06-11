@@ -22,6 +22,7 @@ rtc_library("video_rtp_headers") {
     "video_content_type.cc",
     "video_content_type.h",
     "video_frame_marking.h",
+    "video_layers_allocation.h",
     "video_rotation.h",
     "video_timing.cc",
     "video_timing.h",
