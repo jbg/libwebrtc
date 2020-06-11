@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77628fcc_33cb91f0",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-06-11T12:59:30Z",
+      "side": 1,
+      "message": "is this safe when info.encoded_bytes is equal to 0?",
+      "range": {
+        "startLine": 624,
+        "startChar": 69,
+        "endLine": 624,
+        "endChar": 83
+      },
+      "revId": "5ec409295503c98fbbe86b488f1a7d1e702b324d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb4bdaca_37382c8b",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-06-11T12:59:30Z",
+      "side": 1,
+      "message": "even if that flag was set to true on the past for Celt, I do not think that it is necessarily the right value. An option is to keep the old code and just update the flag when WebRtcOpus_PacketHasVoiceActivity is different from -1 but I would like to hear Minyue\u0027s opinion on this.",
+      "range": {
+        "startLine": 626,
+        "startChar": 4,
+        "endLine": 626,
+        "endChar": 97
+      },
+      "revId": "5ec409295503c98fbbe86b488f1a7d1e702b324d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
