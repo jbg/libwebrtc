@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae77345c_a5aba8ce",
+        "filename": "api/video/video_layers_allocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2020-06-11T13:54:40Z",
+      "side": 1,
+      "message": "2020",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "0dab01d7ee4de7e8988e01bbc977da08ccc8dee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad95e756_847ba1ff",
+        "filename": "api/video/video_layers_allocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2020-06-11T13:54:40Z",
+      "side": 1,
+      "message": "regular",
+      "range": {
+        "startLine": 29,
+        "startChar": 44,
+        "endLine": 29,
+        "endChar": 51
+      },
+      "revId": "0dab01d7ee4de7e8988e01bbc977da08ccc8dee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe8f41b_3a1bc5e3",
+        "filename": "api/video/video_layers_allocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2020-06-11T13:54:40Z",
+      "side": 1,
+      "message": "Maybe a TODO to make this more specific once this information exists?",
+      "range": {
+        "startLine": 31,
+        "startChar": 5,
+        "endLine": 31,
+        "endChar": 9
+      },
+      "revId": "0dab01d7ee4de7e8988e01bbc977da08ccc8dee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "576f09b1_2d89f70f",
+        "filename": "api/video/video_layers_allocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2020-06-11T13:54:40Z",
+      "side": 1,
+      "message": "I think std::max is constexpr now?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 68
+      },
+      "revId": "0dab01d7ee4de7e8988e01bbc977da08ccc8dee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08498b77_ba0f53a6",
+        "filename": "api/video/video_layers_allocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2020-06-11T13:54:40Z",
+      "side": 1,
+      "message": "Is that a common term? I\u0027ve not heard it before. The Wikipedia article, as it stands now, says \"purposes *other than* packet forwarding.\"",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 14
+      },
+      "revId": "0dab01d7ee4de7e8988e01bbc977da08ccc8dee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a58d014d_ee894b7f",
+        "filename": "api/video/video_layers_allocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2020-06-11T13:54:40Z",
+      "side": 1,
+      "message": "nit: You use SVC elsewhere in this file, so maybe do so here too?",
+      "range": {
+        "startLine": 50,
+        "startChar": 34,
+        "endLine": 50,
+        "endChar": 37
+      },
+      "revId": "0dab01d7ee4de7e8988e01bbc977da08ccc8dee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db0cf2f_960943bd",
+        "filename": "api/video/video_layers_allocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2020-06-11T13:54:40Z",
+      "side": 1,
+      "message": "Would it make sense to use a vector, or does this struct have to be POD for some reason?",
+      "revId": "0dab01d7ee4de7e8988e01bbc977da08ccc8dee1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
