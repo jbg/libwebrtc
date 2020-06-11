@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "38f62e28_16b66cf0",
+        "filename": "api/task_queue/task_queue_test.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-11T09:06:37Z",
+      "side": 1,
+      "message": "This code is already in test/gtest.h (https://cs.chromium.org/chromium/src/third_party/webrtc/test/gtest.h?l\u003d18\u0026rcl\u003d4c9b3c840df3baf5145d73ecb994ba24b87908c7) but it looked like this was pulling in absl/flags.\n\nWell, let me try to undo this change because I have done other changes after this hack, maybe it is not needed anymore.",
+      "parentUuid": "8fa398f4_69bd46b6",
+      "revId": "1afd2475b93137829f597e33f17b01ad8c21497e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f4d43997_adbf0e0c",
         "filename": "test/pc/e2e/BUILD.gn",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2020-06-11T08:58:37Z",
       "side": 1,
       "message": "Did you actually substantially modify 600 lines in this file, or is it just the Gerrit diff that makes it look that way?",
+      "revId": "1afd2475b93137829f597e33f17b01ad8c21497e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26880224_340bcefd",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-11T09:06:37Z",
+      "side": 1,
+      "message": "I have just moved all the targets of this file inside:\n\n  if (!build_with_chromium) {\n  }\n\nWow, the diff is quite strange.",
+      "parentUuid": "f4d43997_adbf0e0c",
       "revId": "1afd2475b93137829f597e33f17b01ad8c21497e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
