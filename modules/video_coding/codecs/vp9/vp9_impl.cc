@@ -517,6 +517,15 @@ int VP9EncoderImpl::InitEncode(const VideoCodec* inst,
       config_->g_profile = 0;
       config_->g_input_bit_depth = 8;
       break;
+    case VP9Profile::kProfile1:
+      // Hardcode to I444 since we have no way to signal image format at the
+      // moment even though VP9 profile 1 also supports I422 and I440.
+      img_fmt = VPX_IMG_FMT_I444;
+      bits_for_storage = 8;
+      config_->g_bit_depth = VPX_BITS_8;
+      config_->g_profile = 1;
+      config_->g_input_bit_depth = 8;
+      break;
     case VP9Profile::kProfile2:
       img_fmt = VPX_IMG_FMT_I42016;
       bits_for_storage = 16;
@@ -972,6 +981,18 @@ int VP9EncoderImpl::Encode(const VideoFrame& input_image,
       raw_->stride[VPX_PLANE_Y] = i420_buffer->StrideY();
       raw_->stride[VPX_PLANE_U] = i420_buffer->StrideU();
       raw_->stride[VPX_PLANE_V] = i420_buffer->StrideV();
+      break;
+    }
+    case VP9Profile::kProfile1: {
+      i444_buffer = input_image.video_frame_buffer()->ToI444();
+      // Image in vpx_image_t format.
+      // Input image is const. VPX's raw image is not defined as const.
+      raw_->planes[VPX_PLANE_Y] = const_cast<uint8_t*>(i444_buffer->DataY());
+      raw_->planes[VPX_PLANE_U] = const_cast<uint8_t*>(i444_buffer->DataU());
+      raw_->planes[VPX_PLANE_V] = const_cast<uint8_t*>(i444_buffer->DataV());
+      raw_->stride[VPX_PLANE_Y] = i444_buffer->StrideY();
+      raw_->stride[VPX_PLANE_U] = i444_buffer->StrideU();
+      raw_->stride[VPX_PLANE_V] = i444_buffer->StrideV();
       break;
     }
     case VP9Profile::kProfile2: {
