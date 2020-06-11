@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "093b7b66_8dfdd87e",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-11T14:23:23Z",
+      "side": 1,
+      "message": "nit: switch logging calls, so in the log it would be clear that resource was not registered while it was being removed.",
+      "revId": "7846e2c3ec2bc89d7da88c7ab5aa8663c3b38a1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c167658_7714bb32",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-06-11T14:23:23Z",
+      "side": 1,
+      "message": "nit: i believe a foreach style loop would be more readable here.",
+      "revId": "7846e2c3ec2bc89d7da88c7ab5aa8663c3b38a1e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
