@@ -869,7 +869,7 @@ TEST_F(StatsCollectorTest, ExtractDataInfo) {
   auto stats = CreateStatsCollector(pc);
 
   InternalDataChannelInit init;
-  init.id = kDataChannelId;
+  init.set_id(kDataChannelId);
   pc->AddSctpDataChannel(kDataChannelLabel, init);
 
   stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);

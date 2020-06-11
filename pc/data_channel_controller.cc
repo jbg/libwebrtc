@@ -237,14 +237,15 @@ bool DataChannelController::HandleOpenMessage_s(
     // Received OPEN message; parse and signal that a new data channel should
     // be created.
     std::string label;
-    InternalDataChannelInit config;
-    config.id = params.ssrc;
-    if (!ParseDataChannelOpenMessage(buffer, &label, &config)) {
+    DataChannelInit dci;
+    dci.id = params.ssrc;
+    if (!ParseDataChannelOpenMessage(buffer, &label, &dci)) {
       RTC_LOG(LS_WARNING) << "Failed to parse the OPEN message for ssrc "
                           << params.ssrc;
       return true;
     }
-    config.open_handshake_role = InternalDataChannelInit::kAcker;
+
+    InternalDataChannelInit config(dci, InternalDataChannelInit::kAcker);
     OnDataChannelOpenMessage(label, config);
     return true;
   }
@@ -280,8 +281,7 @@ DataChannelController::InternalCreateDataChannel(
         << "InternalCreateDataChannel: Data is not supported in this call.";
     return nullptr;
   }
-  InternalDataChannelInit new_config =
-      config ? (*config) : InternalDataChannelInit();
+  DataChannelInit new_config = config ? config->state() : DataChannelInit();
   if (DataChannel::IsSctpLike(data_channel_type_)) {
     if (new_config.id < 0) {
       rtc::SSLRole role;
@@ -298,8 +298,12 @@ DataChannelController::InternalCreateDataChannel(
     }
   }
 
-  rtc::scoped_refptr<DataChannel> channel(
-      DataChannel::Create(this, data_channel_type(), label, new_config));
+  rtc::scoped_refptr<DataChannel> channel(DataChannel::Create(
+      this, data_channel_type(), label,
+      InternalDataChannelInit(
+          new_config,
+          config ? config->open_handshake_role
+                 : InternalDataChannelInit::OpenHandshakeRole::kOpener)));
   if (!channel) {
     sid_allocator_.ReleaseSid(new_config.id);
     return nullptr;
