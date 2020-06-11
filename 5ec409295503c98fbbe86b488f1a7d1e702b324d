@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce926f49_d97412bc",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-06-11T14:14:37Z",
+      "side": 1,
+      "message": "yes. Tested on https://webrtc.github.io/samples/src/content/peerconnection/audio/ by setting useDtx \u003d true and then localStream.getAudioTracks()[0].enabled \u003d true which does produce empty packets.\n(speaking of this I am not sure if send_even_if_empty is needed; it seems the empty packets are not sent and the ones that need to be sent every 400ms are not empty)",
+      "parentUuid": "77628fcc_33cb91f0",
+      "range": {
+        "startLine": 624,
+        "startChar": 69,
+        "endLine": 624,
+        "endChar": 83
+      },
+      "revId": "5ec409295503c98fbbe86b488f1a7d1e702b324d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cb4bdaca_37382c8b",
         "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
         "patchSetId": 2
