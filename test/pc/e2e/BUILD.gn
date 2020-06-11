@@ -511,6 +511,7 @@ if (rtc_include_tests) {
       "../../../api/video:video_frame",
       "../../../api/video:video_frame_i420",
       "../../../modules/rtp_rtcp:rtp_rtcp_format",
+      "../../../rtc_base:stringutils",
       "../../../system_wrappers",
     ]
   }
@@ -604,6 +605,7 @@ rtc_library("default_video_quality_analyzer") {
   ]
 
   deps = [
+    ":multi_head_queue",
     "../..:perf_test",
     "../../../api:array_view",
     "../../../api:video_quality_analyzer_api",
