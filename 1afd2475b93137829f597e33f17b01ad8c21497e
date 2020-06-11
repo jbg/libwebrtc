@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fa398f4_69bd46b6",
+        "filename": "api/task_queue/task_queue_test.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-11T08:58:37Z",
+      "side": 1,
+      "message": "Is there a reason to not have this piece of magic in test/gtest.h, which IIRC exists solely to do magic around or include of the upstream gtest.h?",
+      "revId": "1afd2475b93137829f597e33f17b01ad8c21497e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4d43997_adbf0e0c",
+        "filename": "test/pc/e2e/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-11T08:58:37Z",
+      "side": 1,
+      "message": "Did you actually substantially modify 600 lines in this file, or is it just the Gerrit diff that makes it look that way?",
+      "revId": "1afd2475b93137829f597e33f17b01ad8c21497e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
