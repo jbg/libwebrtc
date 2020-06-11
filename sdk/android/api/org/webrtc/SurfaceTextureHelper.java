@@ -17,6 +17,7 @@ import android.opengl.GLES20;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import java.util.concurrent.Callable;
 import org.webrtc.EglBase.Context;
@@ -153,6 +154,8 @@ public class SurfaceTextureHelper {
   private boolean hasPendingTexture;
   private volatile boolean isTextureInUse;
   private boolean isQuitting;
+  private int minFrameRate;
+  private boolean forceFrame;
   private int frameRotation;
   private int textureWidth;
   private int textureHeight;
@@ -263,6 +266,33 @@ public class SurfaceTextureHelper {
     });
   }
 
+  /**
+   * Forces a minimum frame rate delivery to the listener.
+   *
+   * <p>If the producer connected to the SurfaceTexture doesn't deliver enough frames, the last one
+   * is re-delivered at regular intervals, with an increasing timestamp.
+   *
+   * <p>Set to 0 to revert to delivering only new frames.
+   */
+  public void setMinFrameRate(int minFrameRate) {
+    handler.post(() -> this.minFrameRate = minFrameRate);
+  }
+
+  private final Runnable forceFrameRunnable = this::forceFrame;
+
+  private void forceFrame() {
+    forceFrame = true;
+    tryDeliverTextureFrame();
+  }
+
+  private void enforceMinFrameRate() {
+    forceFrame = false;
+    handler.removeCallbacks(forceFrameRunnable);
+    if (minFrameRate != 0) {
+      handler.postDelayed(forceFrameRunnable, 1000 / minFrameRate);
+    }
+  }
+
   /** Set the rotation of the delivered frames. */
   public void setFrameRotation(int rotation) {
     handler.post(() -> this.frameRotation = rotation);
@@ -338,7 +368,8 @@ public class SurfaceTextureHelper {
     if (handler.getLooper().getThread() != Thread.currentThread()) {
       throw new IllegalStateException("Wrong thread.");
     }
-    if (isQuitting || !hasPendingTexture || isTextureInUse || listener == null) {
+    if (isQuitting || !(hasPendingTexture || forceFrame) || isTextureInUse || listener == null) {
+      enforceMinFrameRate();
       return;
     }
     if (textureWidth == 0 || textureHeight == 0) {
@@ -348,16 +379,21 @@ public class SurfaceTextureHelper {
       return;
     }
     isTextureInUse = true;
-    hasPendingTexture = false;
-
-    updateTexImage();
-
-    final float[] transformMatrix = new float[16];
-    surfaceTexture.getTransformMatrix(transformMatrix);
-    long timestampNs = surfaceTexture.getTimestamp();
+    long timestampNs;
+    if (hasPendingTexture) {
+      hasPendingTexture = false;
+      updateTexImage();
+      timestampNs = surfaceTexture.getTimestamp();
+    } else {
+      // Fake an increasing timestamp to force delivery of frames.
+      timestampNs = SystemClock.elapsedRealtimeNanos();
+    }
     if (timestampAligner != null) {
       timestampNs = timestampAligner.translateTimestamp(timestampNs);
     }
+
+    final float[] transformMatrix = new float[16];
+    surfaceTexture.getTransformMatrix(transformMatrix);
     final VideoFrame.TextureBuffer buffer =
         new TextureBufferImpl(textureWidth, textureHeight, TextureBuffer.Type.OES, oesTextureId,
             RendererCommon.convertMatrixToAndroidGraphicsMatrix(transformMatrix), handler,
@@ -368,6 +404,7 @@ public class SurfaceTextureHelper {
     final VideoFrame frame = new VideoFrame(buffer, frameRotation, timestampNs);
     listener.onFrame(frame);
     frame.release();
+    enforceMinFrameRate();
   }
 
   private void release() {
