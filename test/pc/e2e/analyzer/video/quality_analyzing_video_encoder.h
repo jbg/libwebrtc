@@ -51,7 +51,7 @@ constexpr int kAnalyzeAnySpatialStream = -1;
 // EncodedImage will be passed to origin callback, provided by user.
 //
 // Quality encoder registers its own callback in origin encoder at the same
-// time, when user registers his callback in quality encoder.
+// time, when user registers their callback in quality encoder.
 class QualityAnalyzingVideoEncoder : public VideoEncoder,
                                      public EncodedImageCallback {
  public:
