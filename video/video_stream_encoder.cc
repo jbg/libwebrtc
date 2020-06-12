@@ -289,7 +289,7 @@ VideoStreamEncoder::VideoStreamEncoder(
     resource_adaptation_processor_->SetResourceAdaptationQueue(
         resource_adaptation_queue_.Get());
     stream_resource_manager_.SetAdaptationProcessor(
-        resource_adaptation_processor_.get());
+        resource_adaptation_processor_.get(), video_stream_adapter_.get());
     resource_adaptation_processor_->AddResourceLimitationsListener(
         &stream_resource_manager_);
     video_stream_adapter_->AddRestrictionsListener(&stream_resource_manager_);
@@ -341,7 +341,7 @@ void VideoStreamEncoder::Stop() {
           &stream_resource_manager_);
       resource_adaptation_processor_->RemoveResourceLimitationsListener(
           &stream_resource_manager_);
-      stream_resource_manager_.SetAdaptationProcessor(nullptr);
+      stream_resource_manager_.SetAdaptationProcessor(nullptr, nullptr);
       resource_adaptation_processor_.reset();
     }
     shutdown_adaptation_processor_event.Set();

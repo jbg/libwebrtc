@@ -39,6 +39,8 @@ class VideoSourceRestrictionsListener {
       const VideoAdaptationCounters& adaptation_counters,
       rtc::scoped_refptr<Resource> reason,
       const VideoSourceRestrictions& unfiltered_restrictions) = 0;
+
+  virtual void OnVideoSourceRestrictionsCleared() {}
 };
 
 class VideoStreamAdapter;
