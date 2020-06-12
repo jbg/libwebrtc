@@ -137,9 +137,12 @@ rtc::scoped_refptr<DataChannel> DataChannel::Create(
     DataChannelProviderInterface* provider,
     cricket::DataChannelType dct,
     const std::string& label,
-    const InternalDataChannelInit& config) {
+    const InternalDataChannelInit& config,
+    rtc::Thread* signaling_thread,
+    rtc::Thread* network_thread) {
   rtc::scoped_refptr<DataChannel> channel(
-      new rtc::RefCountedObject<DataChannel>(config, provider, dct, label));
+      new rtc::RefCountedObject<DataChannel>(config, provider, dct, label,
+                                             signaling_thread, network_thread));
   if (!channel->Init()) {
     return nullptr;
   }
@@ -155,8 +158,12 @@ bool DataChannel::IsSctpLike(cricket::DataChannelType type) {
 DataChannel::DataChannel(const InternalDataChannelInit& config,
                          DataChannelProviderInterface* provider,
                          cricket::DataChannelType dct,
-                         const std::string& label)
-    : internal_id_(GenerateUniqueId()),
+                         const std::string& label,
+                         rtc::Thread* signaling_thread,
+                         rtc::Thread* network_thread)
+    : signaling_thread_(signaling_thread),
+      network_thread_(network_thread),
+      internal_id_(GenerateUniqueId()),
       label_(label),
       config_(config),
       observer_(nullptr),
@@ -174,7 +181,9 @@ DataChannel::DataChannel(const InternalDataChannelInit& config,
       receive_ssrc_set_(false),
       writable_(false),
       send_ssrc_(0),
-      receive_ssrc_(0) {}
+      receive_ssrc_(0) {
+  RTC_DCHECK_RUN_ON(signaling_thread_);
+}
 
 bool DataChannel::Init() {
   if (data_channel_type_ == cricket::DCT_RTP) {
@@ -229,7 +238,9 @@ bool DataChannel::Init() {
   return true;
 }
 
-DataChannel::~DataChannel() {}
+DataChannel::~DataChannel() {
+  RTC_DCHECK_RUN_ON(signaling_thread_);
+}
 
 void DataChannel::RegisterObserver(DataChannelObserver* observer) {
   observer_ = observer;
@@ -267,6 +278,10 @@ RTCError DataChannel::error() const {
 }
 
 bool DataChannel::Send(const DataBuffer& buffer) {
+  // TODO(bugs.webrtc.org/11547): Expect this method to be called on the network
+  // thread. Bring buffer management etc to the network thread and keep the
+  // operational state management on the signaling thread.
+
   buffered_amount_ += buffer.size();
   if (state_ != kOpen) {
     return false;

@@ -146,6 +146,14 @@ void DataChannelController::OnDataReceived(
   data_channel_transport_invoker_->AsyncInvoke<void>(
       RTC_FROM_HERE, signaling_thread(), [this, params, buffer] {
         RTC_DCHECK_RUN_ON(signaling_thread());
+        // TODO(bugs.webrtc.org/11547): The data being received should be
+        // delivered on the network thread. The way HandleOpenMessage_s works
+        // right now is that it's called for all types of buffers and operates
+        // as a selector function. Change this so that it's only called for
+        // buffers that it should be able to handle. Once we do that, we can
+        // deliver all other buffers on the network thread (change
+        // SignalDataChannelTransportReceivedData_s to
+        // SignalDataChannelTransportReceivedData_n).
         if (!HandleOpenMessage_s(params, buffer)) {
           SignalDataChannelTransportReceivedData_s(params, buffer);
         }
@@ -261,6 +269,7 @@ void DataChannelController::OnDataChannelOpenMessage(
     return;
   }
 
+  // TODO(bugs.webrtc.org/11547): Inject the network thread as well.
   rtc::scoped_refptr<DataChannelInterface> proxy_channel =
       DataChannelProxy::Create(signaling_thread(), channel);
   pc_->Observer()->OnDataChannel(std::move(proxy_channel));
@@ -299,7 +308,8 @@ DataChannelController::InternalCreateDataChannel(
   }
 
   rtc::scoped_refptr<DataChannel> channel(
-      DataChannel::Create(this, data_channel_type(), label, new_config));
+      DataChannel::Create(this, data_channel_type(), label, new_config,
+                          signaling_thread(), network_thread()));
   if (!channel) {
     sid_allocator_.ReleaseSid(new_config.id);
     return nullptr;
@@ -483,6 +493,7 @@ void DataChannelController::CreateRemoteRtpDataChannel(const std::string& label,
     return;
   }
   channel->SetReceiveSsrc(remote_ssrc);
+  // TODO(bugs.webrtc.org/11547): Inject the network thread as well.
   rtc::scoped_refptr<DataChannelInterface> proxy_channel =
       DataChannelProxy::Create(signaling_thread(), channel);
   pc_->Observer()->OnDataChannel(std::move(proxy_channel));
