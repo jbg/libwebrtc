@@ -22,11 +22,14 @@ namespace webrtc {
 
 struct EmulatedIpPacket {
  public:
+  // |loss_listener| will be invoked if this packet will be lost in the network.
   EmulatedIpPacket(const rtc::SocketAddress& from,
                    const rtc::SocketAddress& to,
                    rtc::CopyOnWriteBuffer data,
                    Timestamp arrival_time,
-                   uint16_t application_overhead = 0);
+                   uint16_t application_overhead = 0,
+                   absl::optional<std::function<void(const EmulatedIpPacket&)>>
+                       loss_listener = absl::nullopt);
   ~EmulatedIpPacket() = default;
   // This object is not copyable or assignable.
   EmulatedIpPacket(const EmulatedIpPacket&) = delete;
@@ -39,12 +42,21 @@ struct EmulatedIpPacket {
   const uint8_t* cdata() const { return data.cdata(); }
 
   size_t ip_packet_size() const { return size() + headers_size; }
+
+  void OnPacketLost() const {
+    if (loss_listener) {
+      loss_listener.value()(*this);
+    }
+  }
+
   rtc::SocketAddress from;
   rtc::SocketAddress to;
   // Holds the UDP payload.
   rtc::CopyOnWriteBuffer data;
   uint16_t headers_size;
   Timestamp arrival_time;
+
+  absl::optional<std::function<void(const EmulatedIpPacket&)>> loss_listener;
 };
 
 // Interface for handling IP packets from an emulated network. This is used with
@@ -67,6 +79,8 @@ struct EmulatedNetworkStats {
   int64_t packets_dropped = 0;
   // Total amount of bytes in dropped packets.
   DataSize bytes_dropped = DataSize::Zero();
+  // Total amount of packets that were sent and lost in the network.
+  int64_t sent_packets_loss = 0;
 
   DataSize first_received_packet_size = DataSize::Zero();
   DataSize first_sent_packet_size = DataSize::Zero();
