@@ -29,7 +29,7 @@ class MediaReceiverRtcpObserver {
   virtual ~MediaReceiverRtcpObserver() = default;
 
   // All message handlers have default empty implementation. This way user needs
-  // to implement only those she is interested in.
+  // to implement only those they are interested in.
   virtual void OnSenderReport(uint32_t sender_ssrc,
                               NtpTime ntp_time,
                               uint32_t rtp_time) {}
