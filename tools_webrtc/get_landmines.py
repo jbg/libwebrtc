@@ -54,6 +54,7 @@ def print_landmines():  # pylint: disable=invalid-name
            'landing (changing rtc_executable -> rtc_test on iOS)')
     print 'Another landmine for low_bandwidth_audio_test (webrtc:7430)'
     print 'Clobber to change neteq_rtpplay type to executable'
+    print 'Clobber win x86 bots.'
 
 
 def main():
