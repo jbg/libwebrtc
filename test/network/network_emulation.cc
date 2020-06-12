@@ -76,6 +76,8 @@ void LinkEmulation::Process(Timestamp at_time) {
       packet->packet.arrival_time =
           Timestamp::Micros(delivery_info.receive_time_us);
       receiver_->OnPacketReceived(std::move(packet->packet));
+    } else {
+      packet->packet.OnPacketLost();
     }
     while (!packets_.empty() && packets_.front().removed) {
       packets_.pop_front();
@@ -92,11 +94,14 @@ void NetworkRouterNode::OnPacketReceived(EmulatedIpPacket packet) {
     watcher_(packet);
   }
   if (filter_) {
-    if (!filter_(packet))
+    if (!filter_(packet)) {
+      packet.OnPacketLost();
       return;
+    }
   }
   auto receiver_it = routing_.find(packet.to.ipaddr());
   if (receiver_it == routing_.end()) {
+    packet.OnPacketLost();
     return;
   }
   RTC_CHECK(receiver_it != routing_.end());
@@ -209,7 +214,11 @@ void EmulatedEndpointImpl::SendPacket(const rtc::SocketAddress& from,
                                       uint16_t application_overhead) {
   RTC_CHECK(from.ipaddr() == peer_local_addr_);
   EmulatedIpPacket packet(from, to, std::move(packet_data),
-                          clock_->CurrentTime(), application_overhead);
+                          clock_->CurrentTime(), application_overhead,
+                          [this](const EmulatedIpPacket&) {
+                            RTC_DCHECK_RUN_ON(task_queue_);
+                            stats_.sent_packets_loss++;
+                          });
   task_queue_->PostTask([this, packet = std::move(packet)]() mutable {
     RTC_DCHECK_RUN_ON(task_queue_);
     Timestamp current_time = clock_->CurrentTime();
@@ -381,6 +390,7 @@ EmulatedNetworkStats EndpointsContainer::GetStats() const {
     stats.bytes_received += endpoint_stats.bytes_received;
     stats.packets_dropped += endpoint_stats.packets_dropped;
     stats.bytes_dropped += endpoint_stats.bytes_dropped;
+    stats.sent_packets_loss += endpoint_stats.sent_packets_loss;
     if (stats.first_packet_received_time >
         endpoint_stats.first_packet_received_time) {
       stats.first_packet_received_time =

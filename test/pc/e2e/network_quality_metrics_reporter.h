@@ -45,8 +45,7 @@ class NetworkQualityMetricsReporter
   static EmulatedNetworkStats PopulateStats(
       EmulatedNetworkManagerInterface* network);
   void ReportStats(const std::string& network_label,
-                   const EmulatedNetworkStats& stats,
-                   int64_t packet_loss);
+                   const EmulatedNetworkStats& stats);
   void ReportPCStats(const std::string& pc_label, const PCStats& stats);
   void ReportResult(const std::string& metric_name,
                     const std::string& network_label,

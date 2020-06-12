@@ -67,10 +67,8 @@ void NetworkQualityMetricsReporter::OnStatsReports(
 void NetworkQualityMetricsReporter::StopAndReportResults() {
   EmulatedNetworkStats alice_stats = PopulateStats(alice_network_);
   EmulatedNetworkStats bob_stats = PopulateStats(bob_network_);
-  ReportStats("alice", alice_stats,
-              alice_stats.packets_sent - bob_stats.packets_received);
-  ReportStats("bob", bob_stats,
-              bob_stats.packets_sent - alice_stats.packets_received);
+  ReportStats("alice", alice_stats);
+  ReportStats("bob", bob_stats);
 
   if (!webrtc::field_trial::IsEnabled(kUseStandardBytesStats)) {
     RTC_LOG(LS_ERROR)
@@ -98,8 +96,7 @@ EmulatedNetworkStats NetworkQualityMetricsReporter::PopulateStats(
 
 void NetworkQualityMetricsReporter::ReportStats(
     const std::string& network_label,
-    const EmulatedNetworkStats& stats,
-    int64_t packet_loss) {
+    const EmulatedNetworkStats& stats) {
   ReportResult("bytes_sent", network_label, stats.bytes_sent.bytes(),
                "sizeInBytes");
   ReportResult("packets_sent", network_label, stats.packets_sent, "unitless");
@@ -120,7 +117,8 @@ void NetworkQualityMetricsReporter::ReportStats(
                    ? stats.AverageReceiveRate().bytes_per_sec()
                    : 0,
                "bytesPerSecond");
-  ReportResult("sent_packets_loss", network_label, packet_loss, "unitless");
+  ReportResult("sent_packets_loss", network_label, stats.sent_packets_loss,
+               "unitless");
 }
 
 void NetworkQualityMetricsReporter::ReportPCStats(const std::string& pc_label,

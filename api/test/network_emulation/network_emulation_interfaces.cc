@@ -9,20 +9,25 @@
  */
 #include "api/test/network_emulation/network_emulation_interfaces.h"
 
+#include <utility>
+
 #include "rtc_base/net_helper.h"
 
 namespace webrtc {
-EmulatedIpPacket::EmulatedIpPacket(const rtc::SocketAddress& from,
-                                   const rtc::SocketAddress& to,
-                                   rtc::CopyOnWriteBuffer data,
-                                   Timestamp arrival_time,
-                                   uint16_t application_overhead)
+EmulatedIpPacket::EmulatedIpPacket(
+    const rtc::SocketAddress& from,
+    const rtc::SocketAddress& to,
+    rtc::CopyOnWriteBuffer data,
+    Timestamp arrival_time,
+    uint16_t application_overhead,
+    absl::optional<std::function<void(const EmulatedIpPacket&)>> loss_listener)
     : from(from),
       to(to),
       data(data),
       headers_size(to.ipaddr().overhead() + application_overhead +
                    cricket::kUdpHeaderSize),
-      arrival_time(arrival_time) {
+      arrival_time(arrival_time),
+      loss_listener(std::move(loss_listener)) {
   RTC_DCHECK(to.family() == AF_INET || to.family() == AF_INET6);
 }
 
