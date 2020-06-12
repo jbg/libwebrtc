@@ -261,6 +261,7 @@ void DataChannelController::OnDataChannelOpenMessage(
     return;
   }
 
+  // TODO(bugs.webrtc.org/11547): Inject the network thread as well.
   rtc::scoped_refptr<DataChannelInterface> proxy_channel =
       DataChannelProxy::Create(signaling_thread(), channel);
   pc_->Observer()->OnDataChannel(std::move(proxy_channel));
@@ -299,7 +300,8 @@ DataChannelController::InternalCreateDataChannel(
   }
 
   rtc::scoped_refptr<DataChannel> channel(
-      DataChannel::Create(this, data_channel_type(), label, new_config));
+      DataChannel::Create(this, data_channel_type(), label, new_config,
+                          signaling_thread(), network_thread()));
   if (!channel) {
     sid_allocator_.ReleaseSid(new_config.id);
     return nullptr;
@@ -483,6 +485,7 @@ void DataChannelController::CreateRemoteRtpDataChannel(const std::string& label,
     return;
   }
   channel->SetReceiveSsrc(remote_ssrc);
+  // TODO(bugs.webrtc.org/11547): Inject the network thread as well.
   rtc::scoped_refptr<DataChannelInterface> proxy_channel =
       DataChannelProxy::Create(signaling_thread(), channel);
   pc_->Observer()->OnDataChannel(std::move(proxy_channel));

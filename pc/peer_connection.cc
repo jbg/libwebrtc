@@ -2211,6 +2211,7 @@ rtc::scoped_refptr<DataChannelInterface> PeerConnection::CreateDataChannel(
     UpdateNegotiationNeeded();
   }
   NoteUsageEvent(UsageEvent::DATA_ADDED);
+  // TODO(bugs.webrtc.org/11547): Inject the network thread as well.
   return DataChannelProxy::Create(signaling_thread(), channel.get());
 }
 
