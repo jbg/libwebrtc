@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bfcea63_8060a481",
+        "filename": "test/explicit_key_value_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-06-12T17:43:14Z",
+      "side": 1,
+      "message": "Do we allow StrSplit nowadays? Check that we have other usages, previously it was banned, even in test code.\n\nIIRC there\u0027s a absl::StrSplit version that can output a map directly.",
+      "range": {
+        "startLine": 23,
+        "startChar": 36,
+        "endLine": 23,
+        "endChar": 59
+      },
+      "revId": "255eb7517e55372c7234a328bd72d5ce3dd23c32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5968ad62_d14c15ce",
+        "filename": "test/explicit_key_value_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-06-12T17:43:14Z",
+      "side": 1,
+      "message": "nit: inline as std::string(key) instead.",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 30
+      },
+      "revId": "255eb7517e55372c7234a328bd72d5ce3dd23c32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
