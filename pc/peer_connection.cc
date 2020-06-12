@@ -2211,7 +2211,8 @@ rtc::scoped_refptr<DataChannelInterface> PeerConnection::CreateDataChannel(
     UpdateNegotiationNeeded();
   }
   NoteUsageEvent(UsageEvent::DATA_ADDED);
-  return DataChannelProxy::Create(signaling_thread(), channel.get());
+  // return DataChannelProxy::Create(signaling_thread(), channel.get());
+  return DataChannelProxy::Create(network_thread(), channel.get());
 }
 
 void PeerConnection::RestartIce() {
