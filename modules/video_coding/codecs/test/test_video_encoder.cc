@@ -1,0 +1,77 @@
+/*
+ *  Copyright 2020 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree. An additional intellectual property rights grant can be found
+ *  in the file PATENTS.  All contributing project authors may
+ *  be found in the AUTHORS file in the root of the source tree.
+ */
+
+#include "modules/video_coding/codecs/test/test_video_encoder.h"
+
+#include <memory>
+#include <utility>
+#include <vector>
+
+#include "api/test/create_frame_generator.h"
+#include "api/test/frame_generator_interface.h"
+#include "api/transport/rtp/dependency_descriptor.h"
+#include "api/video/video_frame.h"
+#include "api/video/video_frame_type.h"
+#include "api/video_codecs/video_encoder.h"
+#include "modules/video_coding/include/video_codec_interface.h"
+#include "modules/video_coding/include/video_error_codes.h"
+#include "rtc_base/checks.h"
+
+namespace webrtc {
+namespace {
+
+class EncoderCallback : public EncodedImageCallback {
+ public:
+  std::vector<TestVideoEncoder::Encoded> ConsumeFrames() && {
+    return std::move(output_frames_);
+  }
+
+ private:
+  Result OnEncodedImage(
+      const EncodedImage& encoded_image,
+      const CodecSpecificInfo* codec_specific_info,
+      const RTPFragmentationHeader* /*fragmentation*/) override {
+    output_frames_.push_back({encoded_image, *codec_specific_info});
+    return Result(Result::Error::OK);
+  }
+
+  std::vector<TestVideoEncoder::Encoded> output_frames_;
+};
+
+}  // namespace
+
+std::vector<TestVideoEncoder::Encoded> TestVideoEncoder::Encode() {
+  std::unique_ptr<test::FrameGeneratorInterface> frame_buffer_generator =
+      test::CreateSquareFrameGenerator(
+          resolution_.Width(), resolution_.Height(),
+          test::FrameGeneratorInterface::OutputType::kI420, absl::nullopt);
+
+  EncoderCallback encoder_callback;
+  RTC_CHECK_EQ(encoder_.RegisterEncodeCompleteCallback(&encoder_callback),
+               WEBRTC_VIDEO_CODEC_OK);
+
+  uint32_t rtp_tick = 90000 / framerate_fps_;
+  std::vector<VideoFrameType> frame_types = {VideoFrameType::kVideoFrameDelta};
+  for (int i = 0; i < num_input_frames_; ++i) {
+    VideoFrame frame =
+        VideoFrame::Builder()
+            .set_video_frame_buffer(frame_buffer_generator->NextFrame().buffer)
+            .set_timestamp_rtp(rtp_timestamp_)
+            .build();
+    rtp_timestamp_ += rtp_tick;
+    RTC_CHECK_EQ(encoder_.Encode(frame, &frame_types), WEBRTC_VIDEO_CODEC_OK);
+  }
+
+  RTC_CHECK_EQ(encoder_.RegisterEncodeCompleteCallback(nullptr),
+               WEBRTC_VIDEO_CODEC_OK);
+  return std::move(encoder_callback).ConsumeFrames();
+}
+
+}  // namespace webrtc
