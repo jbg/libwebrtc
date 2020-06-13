@@ -146,6 +146,11 @@ class DataChannelController : public DataChannelProviderInterface,
       const std::vector<std::string>& active_channels,
       bool is_local_update) RTC_RUN_ON(signaling_thread());
 
+  // Called from SendData when data_channel_transport() is true.
+  bool DataChannelSendData(const cricket::SendDataParams& params,
+                           const rtc::CopyOnWriteBuffer& payload,
+                           cricket::SendDataResult* result);
+
   rtc::Thread* network_thread() const;
   rtc::Thread* signaling_thread() const;
 
@@ -189,6 +194,8 @@ class DataChannelController : public DataChannelProviderInterface,
 
   // Signals from |data_channel_transport_|.  These are invoked on the
   // signaling thread.
+  // TODO(bugs.webrtc.org/11547): These '_s' signals likely all belong on the
+  // network thread.
   sigslot::signal1<bool> SignalDataChannelTransportWritable_s
       RTC_GUARDED_BY(signaling_thread());
   sigslot::signal2<const cricket::ReceiveDataParams&,
