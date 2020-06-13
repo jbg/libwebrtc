@@ -189,6 +189,8 @@ class DataChannelController : public DataChannelProviderInterface,
 
   // Signals from |data_channel_transport_|.  These are invoked on the
   // signaling thread.
+  // TODO(bugs.webrtc.org/11547): These '_s' signals likely all belong on the
+  // network thread.
   sigslot::signal1<bool> SignalDataChannelTransportWritable_s
       RTC_GUARDED_BY(signaling_thread());
   sigslot::signal2<const cricket::ReceiveDataParams&,
