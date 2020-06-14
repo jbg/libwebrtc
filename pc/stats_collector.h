@@ -64,7 +64,13 @@ class StatsCollector {
   void RemoveLocalAudioTrack(AudioTrackInterface* audio_track, uint32_t ssrc);
 
   // Gather statistics from the session and store them for future use.
-  void UpdateStats(PeerConnectionInterface::StatsOutputLevel level);
+  // The 'on_done' callback will be issued on the same thread (signaling) as
+  // called UpdateStats, when stats have been updated done.
+  // If 'on_done' is set to nullptr, the update operation completes
+  // synchronously and blocks the current thread while waiting for any pending
+  // work to complete on other threads.
+  void UpdateStats(PeerConnectionInterface::StatsOutputLevel level,
+                   std::function<void()> on_done);
 
   // Gets a StatsReports of the last collected stats. Note that UpdateStats must
   // be called before this function to get the most recent stats. |selector| is

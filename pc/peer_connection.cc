@@ -134,7 +134,6 @@ enum {
   MSG_SET_SESSIONDESCRIPTION_SUCCESS = 0,
   MSG_SET_SESSIONDESCRIPTION_FAILED,
   MSG_CREATE_SESSIONDESCRIPTION_FAILED,
-  MSG_GETSTATS,
   MSG_REPORT_USAGE_PATTERN,
 };
 
@@ -156,14 +155,6 @@ struct CreateSessionDescriptionMsg : public rtc::MessageData {
 
   rtc::scoped_refptr<webrtc::CreateSessionDescriptionObserver> observer;
   RTCError error;
-};
-
-struct GetStatsMsg : public rtc::MessageData {
-  GetStatsMsg(webrtc::StatsObserver* observer,
-              webrtc::MediaStreamTrackInterface* track)
-      : observer(observer), track(track) {}
-  rtc::scoped_refptr<webrtc::StatsObserver> observer;
-  rtc::scoped_refptr<webrtc::MediaStreamTrackInterface> track;
 };
 
 // Check if we can send |new_stream| on a PeerConnection.
@@ -2056,12 +2047,15 @@ bool PeerConnection::GetStats(StatsObserver* observer,
                               StatsOutputLevel level) {
   TRACE_EVENT0("webrtc", "PeerConnection::GetStats");
   RTC_DCHECK_RUN_ON(signaling_thread());
+  RTC_DCHECK(observer);
+
+  // This check can be removed after some baking period of the above RTC_DCHECK
+  // of the same.
   if (!observer) {
     RTC_LOG(LS_ERROR) << "GetStats - observer is NULL.";
     return false;
   }
 
-  stats_->UpdateStats(level);
   // The StatsCollector is used to tell if a track is valid because it may
   // remember tracks that the PeerConnection previously removed.
   if (track && !stats_->IsValidTrack(track->id())) {
@@ -2069,8 +2063,24 @@ bool PeerConnection::GetStats(StatsObserver* observer,
                         << track->id();
     return false;
   }
-  signaling_thread()->Post(RTC_FROM_HERE, this, MSG_GETSTATS,
-                           new GetStatsMsg(observer, track));
+
+  observer->AddRef();
+  if (track)
+    track->AddRef();
+
+  stats_->UpdateStats(
+      level, [weak_ptr = weak_ptr_factory_.GetWeakPtr(), observer, track]() {
+        StatsReports reports;
+        if (weak_ptr) {
+          RTC_DCHECK_RUN_ON(weak_ptr->signaling_thread());
+          weak_ptr->stats_->GetStats(track, &reports);
+        }
+        observer->OnComplete(reports);
+        observer->Release();
+        if (track)
+          track->Release();
+      });
+
   return true;
 }
 
@@ -2665,7 +2675,7 @@ RTCError PeerConnection::ApplyLocalDescription(
 
   // Update stats here so that we have the most recent stats for tracks and
   // streams that might be removed by updating the session description.
-  stats_->UpdateStats(kStatsOutputLevelStandard);
+  stats_->UpdateStats(kStatsOutputLevelStandard, nullptr);
 
   // Take a reference to the old local description since it's used below to
   // compare against the new local description. When setting the new local
@@ -3120,7 +3130,7 @@ RTCError PeerConnection::ApplyRemoteDescription(
 
   // Update stats here so that we have the most recent stats for tracks and
   // streams that might be removed by updating the session description.
-  stats_->UpdateStats(kStatsOutputLevelStandard);
+  stats_->UpdateStats(kStatsOutputLevelStandard, nullptr);
 
   // Take a reference to the old remote description since it's used below to
   // compare against the new remote description. When setting the new remote
@@ -4469,7 +4479,7 @@ void PeerConnection::Close() {
   TRACE_EVENT0("webrtc", "PeerConnection::Close");
   // Update stats here so that we have the most recent stats for tracks and
   // streams before the channels are closed.
-  stats_->UpdateStats(kStatsOutputLevelStandard);
+  stats_->UpdateStats(kStatsOutputLevelStandard, nullptr);
 
   ChangeSignalingState(PeerConnectionInterface::kClosed);
   NoteUsageEvent(UsageEvent::CLOSE_CALLED);
@@ -4533,14 +4543,6 @@ void PeerConnection::OnMessage(rtc::Message* msg) {
       CreateSessionDescriptionMsg* param =
           static_cast<CreateSessionDescriptionMsg*>(msg->pdata);
       param->observer->OnFailure(std::move(param->error));
-      delete param;
-      break;
-    }
-    case MSG_GETSTATS: {
-      GetStatsMsg* param = static_cast<GetStatsMsg*>(msg->pdata);
-      StatsReports reports;
-      stats_->GetStats(param->track, &reports);
-      param->observer->OnComplete(reports);
       delete param;
       break;
     }
@@ -6254,6 +6256,7 @@ cricket::CandidateStatsList PeerConnection::GetPooledCandidateStats() const {
 std::map<std::string, std::string> PeerConnection::GetTransportNamesByMid()
     const {
   RTC_DCHECK_RUN_ON(signaling_thread());
+  rtc::Thread::ScopedDisallowBlockingCalls no_blocking_calls;
   std::map<std::string, std::string> transport_names_by_mid;
   for (const auto& transceiver : transceivers_) {
     cricket::ChannelInterface* channel = transceiver->internal()->channel();
@@ -6306,12 +6309,18 @@ bool PeerConnection::GetLocalCertificate(
   if (!certificate) {
     return false;
   }
+  // TODO(tommi): This call will hop over to the network thread if we're not
+  // already on the network thread. To avoid this, we should require
+  // GetLocalCertificate to be called on the network thread.
   *certificate = transport_controller_->GetLocalCertificate(transport_name);
   return *certificate != nullptr;
 }
 
 std::unique_ptr<rtc::SSLCertChain> PeerConnection::GetRemoteSSLCertChain(
     const std::string& transport_name) {
+  // TODO(tommi): This call will hop over to the network thread if we're not
+  // already on the network thread. To avoid this, we should require
+  // GetRemoteSSLCertChain to be called on the network thread.
   return transport_controller_->GetRemoteSSLCertChain(transport_name);
 }
 
