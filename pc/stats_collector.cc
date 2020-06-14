@@ -616,30 +616,80 @@ void StatsCollector::GetStats(MediaStreamTrackInterface* track,
 }
 
 void StatsCollector::UpdateStats(
-    PeerConnectionInterface::StatsOutputLevel level) {
+    PeerConnectionInterface::StatsOutputLevel level,
+    std::function<void()> on_done) {
   RTC_DCHECK(pc_->signaling_thread()->IsCurrent());
   double time_now = GetTimeNow();
+
+  // TODO(tommi): If we're in the middle of an async update:
+  // If no on_done specified:
+  // - Just return.
+  // If on_done is non-null:
+  // - Add it to an array of callbacks that will be executed when the update
+  //   operation completes.
+  //
+  // We probably need a special class to maintain the state of the async update
+  // operation:
+  // Owns all pending operations.
+  // Owns all 'on_done' callbacks.
+
   // Calls to UpdateStats() that occur less than kMinGatherStatsPeriod number of
   // ms apart will be ignored.
   const double kMinGatherStatsPeriod = 50;
   if (stats_gathering_started_ != 0 &&
       stats_gathering_started_ + kMinGatherStatsPeriod > time_now) {
-    return;
-  }
-  stats_gathering_started_ = time_now;
+    RTC_LOG(LS_INFO) << "Stats recently updated";
+  } else {
+    stats_gathering_started_ = time_now;
 
-  // TODO(tommi): All of these hop over to the worker thread to fetch
-  // information.  We could use an AsyncInvoker to run all of these and post
-  // the information back to the signaling thread where we can create and
-  // update stats reports.  That would also clean up the threading story a bit
-  // since we'd be creating/updating the stats report objects consistently on
-  // the same thread (this class has no locks right now).
-  ExtractSessionInfo();
-  ExtractBweInfo();
-  ExtractMediaInfo();
-  ExtractSenderInfo();
-  ExtractDataInfo();
-  UpdateTrackReports();
+    // TODO(tommi): All of these hop over to the worker thread to fetch
+    // information.  We could use an AsyncInvoker to run all of these and post
+    // the information back to the signaling thread where we can create and
+    // update stats reports.  That would also clean up the threading story a bit
+    // since we'd be creating/updating the stats report objects consistently on
+    // the same thread (this class has no locks right now).
+    ExtractSessionInfo();
+    ExtractBweInfo();
+    ExtractMediaInfo();
+    ExtractSenderInfo();
+    ExtractDataInfo();
+    UpdateTrackReports();
+  }
+
+  // TODO(tommi): If the caller provided an on_done callback:
+  // - all 'Extract' operations should have started all extraction operations
+  //   on other threads, asynchronously.
+  // - Keep track of outstanding async requests that we need to wait for
+  //   completion of.
+  // - Once all have been completed, call "on_done".
+  // If on_done is nullptr:
+  // - All Extract methods need to supply an event object for each pending
+  //   operation.
+  // - Once the pending work is done on a different thread, the event will be
+  //   signalled.
+  // - Each pending work item might need 'finalizing' work to happen on the
+  //   signaling thread. After waiting for all the pending work, we run
+  //   finalizers on the signaling thread, pefore returning.
+  //
+  // struct PendingExtractOperation {
+  //   // Executed on signaling thread after completion. Does finalization.
+  //   ~PendingExtractOperation();
+  //
+  //   // Called on the worker thread when the work is done.
+  //   // If in synchronous mode, sets event.
+  //   // If in async mode, posts to the signaling thread.
+  //   void SignalDone();
+  //
+  //   // Called by UpdateStats() if synchronous waiting is needed.
+  //   void WaitForComplete();  // Used when no on_done.
+  // };
+  //
+  // NOTE: All Extract methods should take into account that the current thread
+  // might be more than only 'signaling'. If worker and signaling are the same
+  // thread, the stats that need to be fetched on the worker thread, can be
+  // fetched directly.
+  if (on_done)
+    on_done();
 }
 
 StatsReport* StatsCollector::PrepareReport(bool local,
@@ -821,6 +871,7 @@ void StatsCollector::ExtractSessionInfo() {
   report->AddBoolean(StatsReport::kStatsValueNameInitiator,
                      pc_->initial_offerer());
 
+  // TODO(tommi): GetPooledCandidateStats hops to the network thread.
   cricket::CandidateStatsList pooled_candidate_stats_list =
       pc_->GetPooledCandidateStats();
 
@@ -833,6 +884,7 @@ void StatsCollector::ExtractSessionInfo() {
     transport_names.insert(entry.second);
   }
 
+  // TODO(tommi): GetTransportStatsByNames hops to the network thread.
   std::map<std::string, cricket::TransportStats> transport_stats_by_name =
       pc_->GetTransportStatsByNames(transport_names);
 
@@ -846,6 +898,7 @@ void StatsCollector::ExtractSessionInfo() {
     //
     StatsReport::Id local_cert_report_id, remote_cert_report_id;
     rtc::scoped_refptr<rtc::RTCCertificate> certificate;
+    // TODO(tommi): GetLocalCertificate will hop over to the network thread.
     if (pc_->GetLocalCertificate(transport_name, &certificate)) {
       StatsReport* r = AddCertificateReports(
           certificate->GetSSLCertificateChain().GetStats());
@@ -853,6 +906,7 @@ void StatsCollector::ExtractSessionInfo() {
         local_cert_report_id = r->id();
     }
 
+    // TODO(tommi): GetLocalCertificate will hop over to the network thread.
     std::unique_ptr<rtc::SSLCertChain> remote_cert_chain =
         pc_->GetRemoteSSLCertChain(transport_name);
     if (remote_cert_chain) {
@@ -924,6 +978,7 @@ void StatsCollector::ExtractBweInfo() {
   if (pc_->signaling_state() == PeerConnectionInterface::kClosed)
     return;
 
+  // TODO(tommi): GetCallStats hops to the worker thread.
   webrtc::Call::Stats call_stats = pc_->GetCallStats();
   cricket::BandwidthEstimationInfo bwe_info;
   bwe_info.available_send_bandwidth = call_stats.send_bandwidth_bps;
@@ -932,6 +987,8 @@ void StatsCollector::ExtractBweInfo() {
 
   // Fill in target encoder bitrate, actual encoder bitrate, rtx bitrate, etc.
   // TODO(holmer): Also fill this in for audio.
+  // TODO(tommi): GetTransceiversInternal() implicitly expects the signaling
+  // thread (which we're on right now).
   for (const auto& transceiver : pc_->GetTransceiversInternal()) {
     if (transceiver->media_type() != cricket::MEDIA_TYPE_VIDEO) {
       continue;

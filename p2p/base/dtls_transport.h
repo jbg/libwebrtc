@@ -222,8 +222,8 @@ class DtlsTransport : public DtlsTransportInternal {
 
   rtc::ThreadChecker thread_checker_;
 
-  std::string transport_name_;
-  int component_;
+  const std::string transport_name_;
+  const int component_;
   DtlsTransportState dtls_state_ = DTLS_TRANSPORT_NEW;
   // Underlying ice_transport, not owned by this class.
   IceTransportInternal* ice_transport_;
