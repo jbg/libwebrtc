@@ -616,7 +616,8 @@ void StatsCollector::GetStats(MediaStreamTrackInterface* track,
 }
 
 void StatsCollector::UpdateStats(
-    PeerConnectionInterface::StatsOutputLevel level) {
+    PeerConnectionInterface::StatsOutputLevel level,
+    std::function<void()> on_done) {
   RTC_DCHECK(pc_->signaling_thread()->IsCurrent());
   double time_now = GetTimeNow();
   // Calls to UpdateStats() that occur less than kMinGatherStatsPeriod number of
@@ -640,6 +641,9 @@ void StatsCollector::UpdateStats(
   ExtractSenderInfo();
   ExtractDataInfo();
   UpdateTrackReports();
+
+  if (on_done)
+    on_done();
 }
 
 StatsReport* StatsCollector::PrepareReport(bool local,
