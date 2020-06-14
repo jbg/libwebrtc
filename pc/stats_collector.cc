@@ -616,7 +616,8 @@ void StatsCollector::GetStats(MediaStreamTrackInterface* track,
 }
 
 void StatsCollector::UpdateStats(
-    PeerConnectionInterface::StatsOutputLevel level) {
+    PeerConnectionInterface::StatsOutputLevel level,
+    std::function<void()> on_done) {
   RTC_DCHECK(pc_->signaling_thread()->IsCurrent());
   double time_now = GetTimeNow();
   // Calls to UpdateStats() that occur less than kMinGatherStatsPeriod number of
@@ -624,22 +625,26 @@ void StatsCollector::UpdateStats(
   const double kMinGatherStatsPeriod = 50;
   if (stats_gathering_started_ != 0 &&
       stats_gathering_started_ + kMinGatherStatsPeriod > time_now) {
-    return;
-  }
-  stats_gathering_started_ = time_now;
+    RTC_LOG(LS_INFO) << "Stats recently updated";
+  } else {
+    stats_gathering_started_ = time_now;
 
-  // TODO(tommi): All of these hop over to the worker thread to fetch
-  // information.  We could use an AsyncInvoker to run all of these and post
-  // the information back to the signaling thread where we can create and
-  // update stats reports.  That would also clean up the threading story a bit
-  // since we'd be creating/updating the stats report objects consistently on
-  // the same thread (this class has no locks right now).
-  ExtractSessionInfo();
-  ExtractBweInfo();
-  ExtractMediaInfo();
-  ExtractSenderInfo();
-  ExtractDataInfo();
-  UpdateTrackReports();
+    // TODO(tommi): All of these hop over to the worker thread to fetch
+    // information.  We could use an AsyncInvoker to run all of these and post
+    // the information back to the signaling thread where we can create and
+    // update stats reports.  That would also clean up the threading story a bit
+    // since we'd be creating/updating the stats report objects consistently on
+    // the same thread (this class has no locks right now).
+    ExtractSessionInfo();
+    ExtractBweInfo();
+    ExtractMediaInfo();
+    ExtractSenderInfo();
+    ExtractDataInfo();
+    UpdateTrackReports();
+  }
+
+  if (on_done)
+    on_done();
 }
 
 StatsReport* StatsCollector::PrepareReport(bool local,
@@ -821,6 +826,7 @@ void StatsCollector::ExtractSessionInfo() {
   report->AddBoolean(StatsReport::kStatsValueNameInitiator,
                      pc_->initial_offerer());
 
+  // TODO(tommi): GetPooledCandidateStats hops to the network thread.
   cricket::CandidateStatsList pooled_candidate_stats_list =
       pc_->GetPooledCandidateStats();
 
@@ -833,6 +839,7 @@ void StatsCollector::ExtractSessionInfo() {
     transport_names.insert(entry.second);
   }
 
+  // TODO(tommi): GetTransportStatsByNames hops to the network thread.
   std::map<std::string, cricket::TransportStats> transport_stats_by_name =
       pc_->GetTransportStatsByNames(transport_names);
 
@@ -846,6 +853,7 @@ void StatsCollector::ExtractSessionInfo() {
     //
     StatsReport::Id local_cert_report_id, remote_cert_report_id;
     rtc::scoped_refptr<rtc::RTCCertificate> certificate;
+    // TODO(tommi): GetLocalCertificate will hop over to the network thread.
     if (pc_->GetLocalCertificate(transport_name, &certificate)) {
       StatsReport* r = AddCertificateReports(
           certificate->GetSSLCertificateChain().GetStats());
@@ -853,6 +861,7 @@ void StatsCollector::ExtractSessionInfo() {
         local_cert_report_id = r->id();
     }
 
+    // TODO(tommi): GetLocalCertificate will hop over to the network thread.
     std::unique_ptr<rtc::SSLCertChain> remote_cert_chain =
         pc_->GetRemoteSSLCertChain(transport_name);
     if (remote_cert_chain) {

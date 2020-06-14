@@ -612,7 +612,8 @@ class StatsCollectorTest : public ::testing::Test {
                              StatsCollectorForTest* stats,
                              const VoiceMediaInfo& voice_info,
                              StatsReports* reports) {
-    stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+    stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                       nullptr);
     stats->ClearUpdateStatsCacheForTest();
     stats->GetStats(nullptr, reports);
 
@@ -687,7 +688,8 @@ class StatsCollectorTest : public ::testing::Test {
     pc->SetRemoteCertChain(kTransportName,
                            remote_identity.cert_chain().Clone());
 
-    stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+    stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                       nullptr);
 
     StatsReports reports;
     stats->GetStats(nullptr, &reports);
@@ -846,7 +848,8 @@ TEST_F(StatsCollectorTest, FilterOutNegativeDataChannelId) {
 
   pc->AddSctpDataChannel("hacks");
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -872,7 +875,8 @@ TEST_F(StatsCollectorTest, ExtractDataInfo) {
   init.id = kDataChannelId;
   pc->AddSctpDataChannel(kDataChannelLabel, init);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -919,7 +923,8 @@ TEST_P(StatsCollectorTrackTest, BytesCounterHandles64Bits) {
 
   AddOutgoingVideoTrack(pc, stats.get());
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -958,7 +963,8 @@ TEST_P(StatsCollectorTrackTest, AudioBandwidthEstimationInfoIsReported) {
   call_stats.pacer_delay_ms = kPacerDelay;
   pc->SetCallStats(call_stats);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1008,7 +1014,8 @@ TEST_P(StatsCollectorTrackTest, VideoBandwidthEstimationInfoIsReported) {
   call_stats.pacer_delay_ms = kPacerDelay;
   pc->SetCallStats(call_stats);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1033,7 +1040,8 @@ TEST_F(StatsCollectorTest, SessionObjectExists) {
   auto pc = CreatePeerConnection();
   auto stats = CreateStatsCollector(pc);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1047,8 +1055,10 @@ TEST_F(StatsCollectorTest, OnlyOneSessionObjectExists) {
   auto pc = CreatePeerConnection();
   auto stats = CreateStatsCollector(pc);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1100,7 +1110,8 @@ TEST_P(StatsCollectorTrackTest, TrackAndSsrcObjectExistAfterUpdateSsrcStats) {
 
   AddOutgoingVideoTrack(pc, stats.get());
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1155,7 +1166,8 @@ TEST_P(StatsCollectorTrackTest, TransportObjectLinkedFromSsrcObject) {
 
   AddOutgoingVideoTrack(pc, stats.get());
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1189,7 +1201,8 @@ TEST_P(StatsCollectorTrackTest, RemoteSsrcInfoIsAbsent) {
   pc->AddVideoChannel("video", "transport");
   AddOutgoingVideoTrack(pc, stats.get());
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1218,7 +1231,8 @@ TEST_P(StatsCollectorTrackTest, RemoteSsrcInfoIsPresent) {
 
   AddOutgoingVideoTrack(pc, stats.get());
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1247,7 +1261,8 @@ TEST_P(StatsCollectorTrackTest, ReportsFromRemoteTrack) {
 
   AddIncomingVideoTrack(pc, stats.get());
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1311,7 +1326,8 @@ TEST_F(StatsCollectorTest, IceCandidateReport) {
   pc->AddVoiceChannel("audio", kTransportName);
   pc->SetTransportStats(kTransportName, channel_stats);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1426,7 +1442,8 @@ TEST_F(StatsCollectorTest, NoTransport) {
   // but with only a single dummy TransportChannelStats.
   pc->AddVoiceChannel("audio", "transport");
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1529,7 +1546,8 @@ TEST_P(StatsCollectorTrackTest, FilterOutNegativeInitialValues) {
   auto* voice_media_channel = pc->AddVoiceChannel("voice", "transport");
   voice_media_channel->SetStats(voice_info);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
 
   // Get stats for the local track.
   StatsReports reports;
@@ -1630,7 +1648,8 @@ TEST_P(StatsCollectorTrackTest, GetStatsAfterRemoveAudioStream) {
 
   stats->RemoveLocalAudioTrack(audio_track_.get(), kSsrcOfTrack);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1690,7 +1709,8 @@ TEST_P(StatsCollectorTrackTest, LocalAndRemoteTracksWithSameSsrc) {
   auto* voice_media_channel = pc->AddVoiceChannel("audio", "transport");
   voice_media_channel->SetStats(voice_info);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
 
   // Get stats for the local track.
   StatsReports reports;  // returned values.
@@ -1809,7 +1829,8 @@ TEST_P(StatsCollectorTrackTest, TwoLocalSendersWithSameTrack) {
   auto* voice_media_channel = pc->AddVoiceChannel("voice", "transport");
   voice_media_channel->SetStats(voice_info);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
 
   StatsReports reports;
   stats->GetStats(local_track.get(), &reports);
@@ -1858,7 +1879,8 @@ TEST_P(StatsCollectorTrackTest, VerifyVideoSendSsrcStats) {
   auto* video_media_channel = pc->AddVideoChannel("video", "transport");
   video_media_channel->SetStats(video_info);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
@@ -1886,7 +1908,8 @@ TEST_P(StatsCollectorTrackTest, VerifyVideoReceiveSsrcStatsNew) {
   auto* video_media_channel = pc->AddVideoChannel("video", "transport");
   video_media_channel->SetStats(video_info);
 
-  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard);
+  stats->UpdateStats(PeerConnectionInterface::kStatsOutputLevelStandard,
+                     nullptr);
   StatsReports reports;
   stats->GetStats(nullptr, &reports);
 
