@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "546340ad_6d6da528",
+        "filename": "modules/video_coding/codecs/test/test_video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-15T10:01:27Z",
+      "side": 1,
+      "message": "WDYT about VideoEncoderCallbackWrapper? In the testfiles we could then just shorten it by |using EncoderWrapper \u003d VideoEncoderCallbackWrapper;|",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "09b905193e7bbed29d7ce8a4e40fa90d542469fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
