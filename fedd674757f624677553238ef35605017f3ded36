@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f9a28f5_77c4b335",
+        "filename": "test/explicit_key_value_config.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-06-15T11:37:57Z",
+      "side": 1,
+      "message": "This means that we require a trailing / right?  Might make sense to make this explicit with a \u003c\u003c \"missing trailing /\"; since it might not be obvious why we have this check for an uninitiated.",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "fedd674757f624677553238ef35605017f3ded36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

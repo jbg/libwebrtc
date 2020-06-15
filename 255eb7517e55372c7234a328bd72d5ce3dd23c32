@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "260dce89_6d61c89d",
+        "filename": "test/explicit_key_value_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-06-15T11:37:57Z",
+      "side": 1,
+      "message": "Although it would make some sense to allow tools/tests to use such features, we don\u0027t allow them anyways to keep the rules simple.",
+      "parentUuid": "f9335a14_b815b70c",
+      "range": {
+        "startLine": 23,
+        "startChar": 36,
+        "endLine": 23,
+        "endChar": 59
+      },
+      "revId": "255eb7517e55372c7234a328bd72d5ce3dd23c32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5968ad62_d14c15ce",
         "filename": "test/explicit_key_value_config.cc",
         "patchSetId": 2
