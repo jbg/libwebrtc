@@ -70,6 +70,30 @@
       "revId": "09b905193e7bbed29d7ce8a4e40fa90d542469fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea907531_94e77933",
+        "filename": "modules/video_coding/codecs/test/test_video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-15T11:20:05Z",
+      "side": 1,
+      "message": "since I choose build class pattern over free function, I prefer noun over the verb.\n\nbut your new suggestion sounds better for free function pattern:\nstruct PrefixEncodedFrame { encoded_image; codec_specific_info; }\nstruct PrefixOptions { int num_frames_to_generate \u003d 1; RenderResolution res \u003d {1, 1} };\nstd::vector\u003cPrefixEncodedFrame\u003e GenerateFramesWithEncoder(VideoEncoder\u0026 encoder, PrefixOptions options \u003d {}); )",
+      "parentUuid": "1f38ec12_e1b21492",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "09b905193e7bbed29d7ce8a4e40fa90d542469fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
