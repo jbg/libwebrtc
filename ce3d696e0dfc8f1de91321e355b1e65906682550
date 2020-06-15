@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d550d5d9_10becba9",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-06-15T08:33:10Z",
+      "side": 1,
+      "message": "return DefaultDeblockParams(), here and below.",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "ce3d696e0dfc8f1de91321e355b1e65906682550",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfeeda5f_b3a0b039",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-06-15T08:33:10Z",
+      "side": 1,
+      "message": "By construction, I don\u0027t think this is risky right now. But it seems a bit unsafe to dereference the optional inside an if that could be true purely due to kIsArm?",
+      "range": {
+        "startLine": 206,
+        "startChar": 32,
+        "endLine": 206,
+        "endChar": 34
+      },
+      "revId": "ce3d696e0dfc8f1de91321e355b1e65906682550",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
