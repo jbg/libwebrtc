@@ -22,6 +22,30 @@
       "revId": "09b905193e7bbed29d7ce8a4e40fa90d542469fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef308081_f2ff6505",
+        "filename": "modules/video_coding/codecs/test/test_video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-15T10:58:15Z",
+      "side": 1,
+      "message": "let me think....\nit sounds generic.... but less generic than TestVideoEncoder (good!)\nbut .... it doesn\u0027t capture all the things this class does (in particular this class generates input frames).\nanother issue with the name - it tries to capture how this class does what it does, not what it does.\nThis thoughts lead me to another name idea:\nEncodedVideoFrameProducer/EncodedVideoFrameGenerator\n(that\u0027s sounds almost like VideoFrameEncoder except that it doesn\u0027t require source)",
+      "parentUuid": "546340ad_6d6da528",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "09b905193e7bbed29d7ce8a4e40fa90d542469fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
