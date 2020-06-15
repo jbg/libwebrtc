@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9335a14_b815b70c",
+        "filename": "test/explicit_key_value_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-06-15T11:17:52Z",
+      "side": 1,
+      "message": "You\u0027re right; it\u0027s banned per abseil-in-webrtc.md. It\u0027s not clear whether this applies to tests/tools though, since it is banned for binary size reasons.\n\nRewritten using string::find() instead.",
+      "parentUuid": "3bfcea63_8060a481",
+      "range": {
+        "startLine": 23,
+        "startChar": 36,
+        "endLine": 23,
+        "endChar": 59
+      },
+      "revId": "255eb7517e55372c7234a328bd72d5ce3dd23c32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5968ad62_d14c15ce",
         "filename": "test/explicit_key_value_config.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "255eb7517e55372c7234a328bd72d5ce3dd23c32",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59eb18ae_09272eb5",
+        "filename": "test/explicit_key_value_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-06-15T11:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5968ad62_d14c15ce",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 30
+      },
+      "revId": "255eb7517e55372c7234a328bd72d5ce3dd23c32",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
