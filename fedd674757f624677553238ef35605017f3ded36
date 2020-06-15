@@ -22,6 +22,30 @@
       "revId": "fedd674757f624677553238ef35605017f3ded36",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45ebedc2_bc002139",
+        "filename": "test/explicit_key_value_config.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-06-15T11:51:56Z",
+      "side": 1,
+      "message": "Sort-of. I added it to make it more apparent that this function reads the entire string but not more. However, the check itself is actually redundant, due to earlier checks that we always find a \"/\" and we only increment the position by 1 past that \"/\". Without being able to hit the check, it didn\u0027t seem useful to output an explanation. WDYT?",
+      "parentUuid": "6f9a28f5_77c4b335",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "fedd674757f624677553238ef35605017f3ded36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
