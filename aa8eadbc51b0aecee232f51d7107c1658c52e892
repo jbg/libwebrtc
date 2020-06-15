@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "293afaeb_03443f39",
+        "filename": "pc/data_channel.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-15T23:41:13Z",
+      "side": 1,
+      "message": "How did you imagine this working? My plan was actually to move everything *except* Send to the network thread, and have Send called on the signaling thread with a lock to protect queued_send_data_, triggering SendQueuedDataMessages asynchronously on the network thread. Maybe we\u0027re thinking the same thing but describing it differently.\n\nOne problem with this plan is that RTP data channels go through the worker thread... But I guess if we just gave the DataChannel worker_thread in place of network_thread it would work fine.",
+      "revId": "aa8eadbc51b0aecee232f51d7107c1658c52e892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
