@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8b49251_53d3e7d3",
+        "filename": "pc/stats_collector.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-06-15T09:37:07Z",
+      "side": 1,
+      "message": "I don\u0027t like this API ... we\u0027re effectively doing two completely different operations, one of which can be fire-and-forget, and the other which requires waiting, and separating them by the presence of an argument rather than the message signature.\n\nI\u0027d rather separate the two into UpdateStats (as present) and UpdateAndReturnStats (with callback). Then the fire-and-forget nature of UpdateStats for the call sites that currently use it is more obviously preserved.",
+      "revId": "bc3ec2cf99b2ed6ed930b355c2456dab263f3175",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
