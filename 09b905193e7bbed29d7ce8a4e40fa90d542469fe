@@ -46,6 +46,30 @@
       "revId": "09b905193e7bbed29d7ce8a4e40fa90d542469fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f38ec12_e1b21492",
+        "filename": "modules/video_coding/codecs/test/test_video_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-15T11:03:30Z",
+      "side": 1,
+      "message": "I think EncodedVideoFrameProducer sounds good, or maybe GenerateFramesWithEncoder? Pick whichever you think is best :)",
+      "parentUuid": "ef308081_f2ff6505",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "09b905193e7bbed29d7ce8a4e40fa90d542469fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
