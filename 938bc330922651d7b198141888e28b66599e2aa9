@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a29f7e23_08982f0c",
+        "filename": "pc/jsep_transport.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-06-16T15:42:56Z",
+      "side": 0,
+      "message": "Are OpaqueTransportParameters used for anything else? Maybe they can be deleted in a followup.",
+      "range": {
+        "startLine": 386,
+        "startChar": 15,
+        "endLine": 386,
+        "endChar": 40
+      },
+      "revId": "938bc330922651d7b198141888e28b66599e2aa9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
