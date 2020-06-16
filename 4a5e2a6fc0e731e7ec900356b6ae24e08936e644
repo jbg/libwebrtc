@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b06f617a_a864db66",
+        "filename": "test/DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-16T15:19:29Z",
+      "side": 1,
+      "message": "Is this needed?",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "4a5e2a6fc0e731e7ec900356b6ae24e08936e644",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
