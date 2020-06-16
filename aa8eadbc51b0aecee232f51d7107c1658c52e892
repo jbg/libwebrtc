@@ -16,6 +16,24 @@
       "revId": "aa8eadbc51b0aecee232f51d7107c1658c52e892",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4253fa6_f84005c5",
+        "filename": "pc/data_channel.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-06-16T10:19:41Z",
+      "side": 1,
+      "message": "I\u0027d like to optimize for the quickest path to the socket essentially. That\u0027s via SctpTransport::SendData, which runs on the network thread. The socket will have its buffers as well and our buffers come on top of that. Optimizing for our buffers/queues and make everything go through 2 or more layers of threads, is what I\u0027d like to avoid. The ideal case should be that a buffer can be sent straight to the socket, so let\u0027s allow for that.\n\nI also don\u0027t want to have locks for the queue. I don\u0027t think there\u0027s a need for that and even if we did need it, I wouldn\u0027t want that to happen on the signaling thread (which would then contend with other threads), which we want to eventually go away so that we can issue API calls on the application\u0027s main thread.",
+      "parentUuid": "293afaeb_03443f39",
+      "revId": "aa8eadbc51b0aecee232f51d7107c1658c52e892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
