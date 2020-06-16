@@ -34,6 +34,24 @@
       "revId": "aa8eadbc51b0aecee232f51d7107c1658c52e892",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6a6120e_b120232b",
+        "filename": "pc/data_channel.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-06-16T15:06:45Z",
+      "side": 1,
+      "message": "Re: \"One problem with this plan is that RTP data channels go through the worker thread... But I guess if we just gave the DataChannel worker_thread in place of network_thread it would work fine.\"\n\nGood point - In order to make it easier to control and control how the proxy is instantiated, I made a CL that makes the proxy itself an implementation detail:\n\nhttps://webrtc-review.googlesource.com/c/src/+/177344/\n\nThe point of doing that is to make it easier for us incorporate the network thread, probably by writing our own custom proxy and as a follow-up step, don\u0027t need one.",
+      "parentUuid": "f4253fa6_f84005c5",
+      "revId": "aa8eadbc51b0aecee232f51d7107c1658c52e892",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
