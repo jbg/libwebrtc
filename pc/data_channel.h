@@ -20,6 +20,7 @@
 #include "api/priority.h"
 #include "api/proxy.h"
 #include "api/scoped_refptr.h"
+#include "api/transport/data_channel_transport_interface.h"
 #include "media/base/media_channel.h"
 #include "pc/channel.h"
 #include "rtc_base/async_invoker.h"
