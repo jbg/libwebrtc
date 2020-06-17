@@ -260,6 +260,13 @@ void AddFrameLengthControllerConfig(
       kChracteristicPacketLossFraction[1]);
 }
 
+void AddPtimeControllerConfig(
+    audio_network_adaptor::config::ControllerManager* config) {
+  auto controller = config->add_controllers()->mutable_ptime_controller();
+  controller->set_min_payload_bitrate_bps(16000);
+  controller->set_use_stable_target_bitrate(true);
+}
+
 constexpr int kInitialBitrateBps = 24000;
 constexpr size_t kIntialChannelsToEncode = 1;
 constexpr bool kInitialDtxEnabled = true;
@@ -463,6 +470,14 @@ TEST(ControllerManagerTest, CreateFromConfigStringAndCheckReordering) {
                             ControllerType::FRAME_LENGTH, ControllerType::FEC,
                             ControllerType::CHANNEL, ControllerType::DTX,
                             ControllerType::BIT_RATE});
+}
+
+TEST(ControllerManagerTest, CreateSinglePtimeController) {
+  audio_network_adaptor::config::ControllerManager config;
+  AddPtimeControllerConfig(&config);
+  auto states = CreateControllerManager(config.SerializeAsString());
+  auto controllers = states.controller_manager->GetControllers();
+  EXPECT_TRUE(controllers.size() == 1);
 }
 #endif  // WEBRTC_ENABLE_PROTOBUF
 
