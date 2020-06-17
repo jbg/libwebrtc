@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4a47803_0b563040",
+        "filename": "test/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-17T09:39:04Z",
+      "side": 1,
+      "message": "Does this need to be public?\n\nIf you remove this line, it will be still visible by all the WebRTC targets but not from Chromium for example.",
+      "range": {
+        "startLine": 220,
+        "startChar": 2,
+        "endLine": 220,
+        "endChar": 22
+      },
+      "revId": "36d0d6cd2fce027ee0c6a80fc13ca3ee2ee1a3bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
