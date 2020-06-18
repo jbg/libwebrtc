@@ -55,7 +55,6 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
                                     public ResourceListener {
  public:
   ResourceAdaptationProcessor(
-      VideoStreamInputStateProvider* input_state_provider,
       VideoStreamEncoderObserver* encoder_stats_observer,
       VideoStreamAdapter* video_stream_adapter);
   ~ResourceAdaptationProcessor() override;
@@ -107,9 +106,6 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
       rtc::scoped_refptr<Resource> reason_resource) override;
 
  private:
-  bool HasSufficientInputForAdaptation(
-      const VideoStreamInputState& input_state) const;
-
   // If resource usage measurements happens off the adaptation task queue, this
   // class takes care of posting the measurement for the processor to handle it
   // on the adaptation task queue.
@@ -181,8 +177,6 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   TaskQueueBase* resource_adaptation_queue_;
   rtc::scoped_refptr<ResourceListenerDelegate> resource_listener_delegate_;
   // Input and output.
-  VideoStreamInputStateProvider* const input_state_provider_
-      RTC_GUARDED_BY(resource_adaptation_queue_);
   VideoStreamEncoderObserver* const encoder_stats_observer_
       RTC_GUARDED_BY(resource_adaptation_queue_);
   std::vector<ResourceLimitationsListener*> resource_limitations_listeners_
