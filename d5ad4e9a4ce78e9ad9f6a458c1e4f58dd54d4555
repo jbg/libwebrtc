@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a632827f_2998acc6",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-18T14:39:45Z",
+      "side": 1,
+      "message": "undefined behavior when num_decode_targets \u003d 32 and 1u is 32bit value.\n(double checked locally with ubsan)\n\nwhat is wrong with current way?\n\n(alternatively one can write \"(uint64_t{1} \u003c\u003c num_decode_targets) - 1\";\nI tried that and for fun went to godbolt and check how it compares with current version.\non some platforms it produce about same number of instructions, on some platforms - more).",
+      "parentUuid": "9ee63abd_a183c1a8",
+      "range": {
+        "startLine": 40,
+        "startChar": 10,
+        "endLine": 40,
+        "endChar": 51
+      },
+      "revId": "d5ad4e9a4ce78e9ad9f6a458c1e4f58dd54d4555",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bf69d6e_c08f9290",
         "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "90152b09_9bef2448",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-18T14:39:45Z",
+      "side": 1,
+      "message": "Let me extend comment a bit.\n\nHere is long one with alternative solution:\nI want nice behaviour when active_decode_targets are not set.\nThus currently I plan to use default value where all decode targets are active.\nat that point number of decode targets is unknown.\n\nbut somewhere need to strip unused decode targets. Otherwise on key frame it might look like decode targets are different from \u0027all active\u0027 and thus should be attached.\n\nAlternative solution is to pass \u0027inactive_decode_targets\u0027 variable (with natural default value of 0). but.... that is an extra negation.",
+      "parentUuid": "4bf69d6e_c08f9290",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 74,
+        "endChar": 45
+      },
+      "revId": "d5ad4e9a4ce78e9ad9f6a458c1e4f58dd54d4555",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4a9f4b1_032a640a",
         "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "d5ad4e9a4ce78e9ad9f6a458c1e4f58dd54d4555",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bacc56c1_65d6c396",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-18T14:39:45Z",
+      "side": 1,
+      "message": "first part is redundant (leftover when there was no helper function)\nsecond part imho belong here, it explains why need to calculate active chains (instead of setting unsent_on_chain_ to all chains). Ley me try to improve the comment.",
+      "parentUuid": "b4a9f4b1_032a640a",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 28
+      },
+      "revId": "d5ad4e9a4ce78e9ad9f6a458c1e4f58dd54d4555",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
