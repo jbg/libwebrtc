@@ -46,6 +46,30 @@
       "revId": "bc6cf687e26041a0b74172729d9d2d3638dcc979",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26f2678a_d2819826",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-06-18T14:48:54Z",
+      "side": 1,
+      "message": "agreed",
+      "parentUuid": "df6ded63_bd96f2ba",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 31
+      },
+      "revId": "bc6cf687e26041a0b74172729d9d2d3638dcc979",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
