@@ -105,7 +105,8 @@ TEST_P(ScalabilityStructureTest,
   FrameDependencyStructure structure =
       GetParam().svc_factory()->DependencyStructure();
   EXPECT_GT(structure.num_decode_targets, 0);
-  EXPECT_LE(structure.num_decode_targets, 32);
+  EXPECT_LE(structure.num_decode_targets,
+            DependencyDescriptor::kMaxNumDecodeTargets);
   EXPECT_GE(structure.num_chains, 0);
   EXPECT_LE(structure.num_chains, structure.num_decode_targets);
   if (structure.num_chains == 0) {
@@ -115,7 +116,8 @@ TEST_P(ScalabilityStructureTest,
                 AllOf(SizeIs(structure.num_decode_targets), Each(Ge(0)),
                       Each(Le(structure.num_chains))));
   }
-  EXPECT_THAT(structure.templates, SizeIs(Lt(size_t{64})));
+  EXPECT_THAT(structure.templates,
+              SizeIs(Lt(size_t{DependencyDescriptor::kMaxTemplates})));
 }
 
 TEST_P(ScalabilityStructureTest, TemplatesAreSortedByLayerId) {
