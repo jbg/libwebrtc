@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "372cbdd4_aba7d131",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-06-18T14:11:17Z",
+      "side": 1,
+      "message": "how do you feel about this:\n\nbool packet_loss_applied \u003d false;\nif (audio_network_adaptor_) {\n  auto config \u003d audio_network_adaptor_-\u003eGetEncoderRuntimeConfig();\n  ApplyAudioNetworkAdaptor(config);\n  if (config.uplink_packet_loss_fraction)\n    packet_loss_applied \u003d true;\n}\nif (!packet_loss_applied) {\n ...\n}",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 31
+      },
+      "revId": "bc6cf687e26041a0b74172729d9d2d3638dcc979",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
