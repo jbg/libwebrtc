@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "095e8859_314059f7",
+        "filename": "modules/audio_coding/audio_network_adaptor/config.proto",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-06-18T10:46:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "711b10fe_f778cce4",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 23
+      },
+      "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "717cc3a0_2b50fc64",
         "filename": "modules/audio_coding/audio_network_adaptor/config.proto",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9884351f_cf878056",
+        "filename": "modules/audio_coding/audio_network_adaptor/config.proto",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-06-18T10:46:28Z",
+      "side": 1,
+      "message": "changed to |use_slow_adaptation|.",
+      "parentUuid": "717cc3a0_2b50fc64",
+      "range": {
+        "startLine": 131,
+        "startChar": 16,
+        "endLine": 131,
+        "endChar": 41
+      },
+      "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "20a10adf_df15adcd",
+        "filename": "modules/audio_coding/audio_network_adaptor/controller_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-06-18T10:46:28Z",
+      "side": 1,
+      "message": "Editor added it. I guess because the file use unique_ptr.",
+      "parentUuid": "d8d6a351_46af066c",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a7b9566_479eec83",
         "filename": "modules/audio_coding/audio_network_adaptor/ptime_controller.cc",
         "patchSetId": 7
@@ -91,6 +163,30 @@
       "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0420fc38_cbcb2e53",
+        "filename": "modules/audio_coding/audio_network_adaptor/ptime_controller.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-06-18T10:46:28Z",
+      "side": 1,
+      "message": "Correct, added sort.",
+      "parentUuid": "7a7b9566_479eec83",
+      "range": {
+        "startLine": 48,
+        "startChar": 22,
+        "endLine": 48,
+        "endChar": 47
+      },
+      "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "8d728b80_014aa28a",
+        "filename": "modules/audio_coding/audio_network_adaptor/ptime_controller.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-06-18T10:46:28Z",
+      "side": 1,
+      "message": "I guess that is a bit confusing regarding the naming. min_payload_bitrate_bps_ is only intended for choosing the frame length, not assigning the encoder target bitrate. That minimum encoder bitrate should be controlled by the min bitrate in audio send stream.",
+      "parentUuid": "ccb049f2_acca53ac",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 16
+      },
+      "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "236c2512_4c106ff2",
         "filename": "modules/audio_coding/audio_network_adaptor/ptime_controller.cc",
         "patchSetId": 7
@@ -137,6 +257,30 @@
       "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6cc001c_a87707fb",
+        "filename": "modules/audio_coding/audio_network_adaptor/ptime_controller.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-06-18T10:46:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "236c2512_4c106ff2",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 61
+      },
+      "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "5878cab1_c619bc76",
+        "filename": "modules/audio_coding/audio_network_adaptor/ptime_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-06-18T10:46:28Z",
+      "side": 1,
+      "message": "Ah forgot to change back, removed.",
+      "parentUuid": "baaacf9a_d5a73c87",
+      "range": {
+        "startLine": 28,
+        "startChar": 58,
+        "endLine": 28,
+        "endChar": 62
+      },
+      "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d22c96e_90345499",
         "filename": "modules/audio_coding/audio_network_adaptor/ptime_controller_unittest.cc",
         "patchSetId": 7
@@ -183,6 +351,30 @@
       "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96644b94_eae85478",
+        "filename": "modules/audio_coding/audio_network_adaptor/ptime_controller_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-06-18T10:46:28Z",
+      "side": 1,
+      "message": "Changed to UseFastAdaptation.",
+      "parentUuid": "9d22c96e_90345499",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 47
+      },
+      "revId": "6b2a7bfba3f9e5277c76ead3e5d18a8b6932c9d0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
