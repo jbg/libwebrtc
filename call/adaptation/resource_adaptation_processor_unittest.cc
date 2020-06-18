@@ -294,7 +294,7 @@ TEST_F(ResourceAdaptationProcessorTest,
   resource_->SetUsageState(ResourceUsageState::kOveruse);
   EXPECT_EQ(1u, restrictions_listener_.restrictions_updated_count());
 
-  processor_->ResetVideoSourceRestrictions();
+  video_stream_adapter_->ClearRestrictions();
   EXPECT_EQ(0, restrictions_listener_.adaptation_counters().Total());
   other_resource_->SetUsageState(ResourceUsageState::kOveruse);
   EXPECT_EQ(1, restrictions_listener_.adaptation_counters().Total());

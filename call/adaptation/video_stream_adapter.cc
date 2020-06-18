@@ -355,9 +355,13 @@ const VideoAdaptationCounters& VideoStreamAdapter::adaptation_counters() const {
 void VideoStreamAdapter::ClearRestrictions() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   // Invalidate any previously returned Adaptation.
+  RTC_LOG(INFO) << "Resetting restrictions";
   ++adaptation_validation_id_;
   source_restrictor_->ClearRestrictions();
   last_adaptation_request_.reset();
+  for (auto& listener : restrictions_listeners_) {
+    listener->OnVideoSourceRestrictionsCleared();
+  }
   BroadcastVideoRestrictionsUpdate(nullptr);
 }
 

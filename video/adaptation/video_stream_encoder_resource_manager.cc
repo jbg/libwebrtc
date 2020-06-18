@@ -316,11 +316,13 @@ void VideoStreamEncoderResourceManager::Initialize(
 }
 
 void VideoStreamEncoderResourceManager::SetAdaptationProcessor(
-    ResourceAdaptationProcessorInterface* adaptation_processor) {
+    ResourceAdaptationProcessorInterface* adaptation_processor,
+    VideoStreamAdapter* stream_adapter) {
   RTC_DCHECK_RUN_ON(resource_adaptation_queue_);
   adaptation_processor_ = adaptation_processor;
   balanced_constraint_->SetAdaptationProcessor(adaptation_processor);
   quality_scaler_resource_->SetAdaptationProcessor(adaptation_processor);
+  stream_adapter_ = stream_adapter;
 }
 
 void VideoStreamEncoderResourceManager::SetDegradationPreferences(
@@ -722,13 +724,12 @@ void VideoStreamEncoderResourceManager::OnQualityRampUp() {
   // the adaptation queue, add logic to prevent use-after-free on |this|.
   resource_adaptation_queue_->PostTask([this] {
     RTC_DCHECK_RUN_ON(resource_adaptation_queue_);
-    if (!adaptation_processor_) {
+    if (!stream_adapter_) {
       // The processor nulled before this task had a chance to execute. This
       // happens if the processor is destroyed. No action needed.
       return;
     }
-    RTC_LOG(LS_INFO) << "Reset quality limitations.";
-    adaptation_processor_->ResetVideoSourceRestrictions();
+    stream_adapter_->ClearRestrictions();
   });
   quality_rampup_experiment_.reset();
 }

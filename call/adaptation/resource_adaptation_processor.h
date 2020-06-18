@@ -85,7 +85,6 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   void SetDegradationPreference(
       DegradationPreference degradation_preference) override;
   void SetIsScreenshare(bool is_screenshare) override;
-  void ResetVideoSourceRestrictions() override;
 
   // ResourceListener implementation.
   // Triggers OnResourceUnderuse() or OnResourceOveruse().
@@ -98,6 +97,8 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
       const VideoAdaptationCounters& adaptation_counters,
       rtc::scoped_refptr<Resource> reason,
       const VideoSourceRestrictions& unfiltered_restrictions) override;
+
+  void OnVideoSourceRestrictionsCleared() override;
 
   // May trigger 1-2 adaptations. It is meant to reduce resolution but this is
   // not guaranteed. It may adapt frame rate, which does not address the issue.
