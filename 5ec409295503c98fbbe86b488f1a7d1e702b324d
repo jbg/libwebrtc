@@ -69,6 +69,30 @@
       "revId": "5ec409295503c98fbbe86b488f1a7d1e702b324d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05175b12_c37dd151",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-06-18T17:26:28Z",
+      "side": 1,
+      "message": "btw, I looked and this gets put into the ssrc-audio-level extension here: https://cs.chromium.org/chromium/src/third_party/webrtc/modules/rtp_rtcp/source/rtp_sender_audio.cc?type\u003dcs\u0026g\u003d0\u0026l\u003d270\nit seems unlikely that anyone is relying on the current (wrong) results but if we change it we should do a quick \"posted\" PSA.",
+      "parentUuid": "cb4bdaca_37382c8b",
+      "range": {
+        "startLine": 626,
+        "startChar": 4,
+        "endLine": 626,
+        "endChar": 97
+      },
+      "revId": "5ec409295503c98fbbe86b488f1a7d1e702b324d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
