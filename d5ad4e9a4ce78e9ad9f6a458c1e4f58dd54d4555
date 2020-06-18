@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ee63abd_a183c1a8",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-18T14:10:08Z",
+      "side": 1,
+      "message": "(1u \u003c\u003c num_decode_targets) - 1?",
+      "range": {
+        "startLine": 40,
+        "startChar": 10,
+        "endLine": 40,
+        "endChar": 51
+      },
+      "revId": "d5ad4e9a4ce78e9ad9f6a458c1e4f58dd54d4555",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bf69d6e_c08f9290",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-18T14:10:08Z",
+      "side": 1,
+      "message": "Is there a good reason to accept input that does not make sense?",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 74,
+        "endChar": 45
+      },
+      "revId": "d5ad4e9a4ce78e9ad9f6a458c1e4f58dd54d4555",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4a9f4b1_032a640a",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-18T14:10:08Z",
+      "side": 1,
+      "message": "Move this comment to the implementation.",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 28
+      },
+      "revId": "d5ad4e9a4ce78e9ad9f6a458c1e4f58dd54d4555",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
