@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da254771_92d07868",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-22T12:37:56Z",
+      "side": 1,
+      "message": "Could you add a test for this?",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 3
+      },
+      "revId": "9444c73543a3a3a8e37b4aaead1f22d7eae9a2fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3179ecb_6209cb94",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-22T12:37:56Z",
+      "side": 1,
+      "message": "So the frame on line 173 was not part of any chain? Shouldn\u0027t it be?",
+      "range": {
+        "startLine": 179,
+        "startChar": 29,
+        "endLine": 179,
+        "endChar": 38
+      },
+      "revId": "9444c73543a3a3a8e37b4aaead1f22d7eae9a2fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7eae324_1721506d",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-22T12:37:56Z",
+      "side": 1,
+      "message": "Not sure if I get this, we have 3 DTs (2 active) and 3 chains. To send the updated ActiveDecodeTargetBitmask on all chains we would at most have to send it two times, right?",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 57
+      },
+      "revId": "9444c73543a3a3a8e37b4aaead1f22d7eae9a2fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
