@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a924e68f_5488e2e0",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-22T14:45:04Z",
+      "side": 1,
+      "message": "Good idea!\nspecially since it is broken (when chains are not used, decode_target_protected_by_chain should be empty and can\u0027t be used to detect number of decode targets. hm.... may it should always have num_decode_targets length, even when chains are unused. but that is a different subject.)\n...and also triggers an undefined behaviour (shift by 32 is not defined on a 32bit value).",
+      "parentUuid": "da254771_92d07868",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 3
+      },
+      "revId": "9444c73543a3a3a8e37b4aaead1f22d7eae9a2fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3179ecb_6209cb94",
         "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "70ce0ddc_7cb28dd5",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-22T14:45:04Z",
+      "side": 1,
+      "message": "I guess it is better to just remove it.\nIt was initially there to show that bitmask is attached even to a frame that is not part of any chain, but since then I\u0027ve remove that knowledge from the Helper, so it no longer adds value, I guess...",
+      "parentUuid": "a3179ecb_6209cb94",
+      "range": {
+        "startLine": 179,
+        "startChar": 29,
+        "endLine": 179,
+        "endChar": 38
+      },
+      "revId": "9444c73543a3a3a8e37b4aaead1f22d7eae9a2fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7eae324_1721506d",
         "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
         "patchSetId": 6
@@ -68,6 +116,30 @@
       "revId": "9444c73543a3a3a8e37b4aaead1f22d7eae9a2fd",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53978c3a_e8d9a4b9",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-22T14:45:04Z",
+      "side": 1,
+      "message": "not exactly. still need to send it on frames that are not part of any chain (they are not guaranteed to be received, but they still might... and new active decode target bitmask may affect decision if such frame should be forwarded).\nor, in theory, there might be two frames for chain#1 before next frame for chain#2\nso it can be more than twice.\n\n(and with current design it is not known if frame is part of the chain until next frame. Though currently unsupported, in future, in some corner cases encoder wrapper allowed to change it\u0027s mind if already sent frame is a part of some chain)\n\nanyway, based on your previous comment removed one extra frame, so it sent just twice now.",
+      "parentUuid": "d7eae324_1721506d",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 57
+      },
+      "revId": "9444c73543a3a3a8e37b4aaead1f22d7eae9a2fd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
