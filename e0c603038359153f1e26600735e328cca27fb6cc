@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b7f520a0_3e82ab71",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-22T15:53:43Z",
+      "side": 1,
+      "message": "when chains are used, the size of the array must be num_decode_targets.\nin particular it must include decode targets that are not protected.\nso in odd case when num_decode_targets !\u003d num_protected_decode_targgets,\nthis variable is num_decode_targets.\n(rearranged condition and added DCHECK for other corner case when this array is empty)",
+      "parentUuid": "c425fd89_99e3e192",
+      "range": {
+        "startLine": 72,
+        "startChar": 15,
+        "endLine": 72,
+        "endChar": 33
+      },
+      "revId": "e0c603038359153f1e26600735e328cca27fb6cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "277e64f6_998011c5",
         "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "e0c603038359153f1e26600735e328cca27fb6cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a58f54e_464a807b",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-22T15:53:43Z",
+      "side": 1,
+      "message": "yea, but when num_chains \u003d\u003d 0, this helper doesn\u0027t know num_decode_targets.\nthis checks added to catch case when active_decode_targets is left with it\u0027s default value and avoid printing warning in such simple case.\n\nAdded comment.",
+      "parentUuid": "277e64f6_998011c5",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 36
+      },
+      "revId": "e0c603038359153f1e26600735e328cca27fb6cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
