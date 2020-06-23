@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05b565e7_bdbed438",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-23T21:29:25Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 55,
+        "startChar": 19,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "e27a559a0ca0671ce79898ea280bc4baa8ba1b62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f008eaaf_00f796bb",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-06-23T21:29:25Z",
+      "side": 1,
+      "message": "it\n\n(You\u0027ve copy-pasted these errors in lots of places, so fix them all in a follow-up CL?)",
+      "range": {
+        "startLine": 55,
+        "startChar": 63,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "e27a559a0ca0671ce79898ea280bc4baa8ba1b62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
