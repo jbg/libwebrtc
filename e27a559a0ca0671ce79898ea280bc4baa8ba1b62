@@ -45,6 +45,54 @@
       "revId": "e27a559a0ca0671ce79898ea280bc4baa8ba1b62",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ca34b6b_5a679140",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-23T21:40:39Z",
+      "side": 1,
+      "message": "Oh, thanks! :) \n\nDone in webrtc.gni as well.",
+      "parentUuid": "f008eaaf_00f796bb",
+      "range": {
+        "startLine": 55,
+        "startChar": 63,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "e27a559a0ca0671ce79898ea280bc4baa8ba1b62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2df5ed_73a19b6f",
+        "filename": "test/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-06-23T21:40:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05b565e7_bdbed438",
+      "range": {
+        "startLine": 55,
+        "startChar": 19,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "e27a559a0ca0671ce79898ea280bc4baa8ba1b62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
