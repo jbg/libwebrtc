@@ -16,10 +16,6 @@ import sys
 import tempfile
 import unittest
 
-SRC = os.path.abspath(os.path.join(
-    os.path.dirname((__file__)), os.pardir, os.pardir, os.pardir, os.pardir))
-sys.path.append(os.path.join(SRC, 'third_party', 'pymock'))
-
 import mock
 
 from . import exceptions

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env vpython
 # pylint: disable=relative-import,protected-access,unused-argument
 
 #  Copyright 2017 The WebRTC project authors. All Rights Reserved.
@@ -11,10 +11,6 @@
 
 import os
 import sys
-
-SRC = os.path.abspath(
-    os.path.join(os.path.dirname((__file__)), os.pardir, os.pardir))
-sys.path.append(os.path.join(SRC, 'third_party', 'pymock'))
 
 import unittest
 import mock
