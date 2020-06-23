@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fceb38a8_6ab5e7c2",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-23T09:52:18Z",
+      "side": 1,
+      "message": "Here and elsewhere: Do we really want all this additional logging or can we remove it?",
+      "revId": "51c21dc79eb88d302971484cd12c1a7d3906886b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea580b40_a49299f4",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-06-23T09:52:18Z",
+      "side": 1,
+      "message": "Making it part of the adaptation state rather than this seemingly separate state that really has to be updated at a specific place in coordination with adaptation -- nice!",
+      "revId": "51c21dc79eb88d302971484cd12c1a7d3906886b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
