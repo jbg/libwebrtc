@@ -954,7 +954,6 @@ bool PeerConnectionInterface::RTCConfiguration::operator==(
          disable_ipv6_on_wifi == o.disable_ipv6_on_wifi &&
          max_ipv6_networks == o.max_ipv6_networks &&
          disable_link_local_networks == o.disable_link_local_networks &&
-         enable_rtp_data_channel == o.enable_rtp_data_channel &&
          screencast_min_bitrate == o.screencast_min_bitrate &&
          combined_audio_video_bwe == o.combined_audio_video_bwe &&
          enable_dtls_srtp == o.enable_dtls_srtp &&
@@ -1316,12 +1315,6 @@ bool PeerConnection::Initialize(
   sctp_factory_ = factory_->CreateSctpTransportInternalFactory();
 
   if (use_datagram_transport_for_data_channels_) {
-    if (configuration.enable_rtp_data_channel) {
-      RTC_LOG(LS_ERROR) << "enable_rtp_data_channel and "
-                           "use_datagram_transport_for_data_channels are "
-                           "incompatible and cannot both be set to true";
-      return false;
-    }
     if (configuration.enable_dtls_srtp && !*configuration.enable_dtls_srtp) {
       RTC_LOG(LS_INFO) << "Using data channel transport with no fallback";
       data_channel_controller_.set_data_channel_type(
@@ -1332,11 +1325,6 @@ bool PeerConnection::Initialize(
           cricket::DCT_DATA_CHANNEL_TRANSPORT_SCTP);
       config.sctp_factory = sctp_factory_.get();
     }
-  } else if (configuration.enable_rtp_data_channel) {
-    // Enable creation of RTP data channels if the kEnableRtpDataChannels is
-    // set. It takes precendence over the disable_sctp_data_channels
-    // PeerConnectionFactoryInterface::Options.
-    data_channel_controller_.set_data_channel_type(cricket::DCT_RTP);
   } else {
     // DTLS has to be enabled to use SCTP.
     if (!options.disable_sctp_data_channels && dtls_enabled_) {
