@@ -56,8 +56,13 @@ FrameDependencyStructure ScalabilityStructureL1T2::DependencyStructure() const {
 
 std::vector<ScalableVideoController::LayerFrameConfig>
 ScalabilityStructureL1T2::NextFrameConfig(bool restart) {
+  if (!active_decode_targets[0]) {
+    return {};
+  }
   if (restart) {
     next_pattern_ = kKeyFrame;
+  } else if (!active_decode_targets[1]) {
+    next_pattern_ = kDeltaFrameT0;
   }
   std::vector<LayerFrameConfig> result(1);
 
@@ -97,7 +102,19 @@ absl::optional<GenericFrameInfo> ScalabilityStructureL1T2::OnEncodeDone(
   frame_info->decode_target_indications.assign(std::begin(kDtis[config.Id()]),
                                                std::end(kDtis[config.Id()]));
   frame_info->part_of_chain = {config.TemporalId() == 0};
+  frame_info->active_decode_targets = active_decode_targets;
   return frame_info;
+}
+
+void ScalabilityStructureL1T2::OnRatesUpdated(
+    const VideoBitrateAllocation& bitrates) {
+  if (bitrates.GetBitrate(0, 0) == 0) {
+    active_decode_targets = 0;
+    return;
+  }
+  active_decode_targets.set(0, true);
+  active_decode_targets.set(1,
+                            bitrates.GetBitrate(0, /*temporal_index=*/1) > 0);
 }
 
 }  // namespace webrtc
