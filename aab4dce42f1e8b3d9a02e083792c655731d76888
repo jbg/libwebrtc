@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4b69faa7_54214fb6",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l1t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-25T13:50:02Z",
+      "side": 1,
+      "message": "ok, added some warning, does text make sense?",
+      "parentUuid": "c4ded957_e79ceac9",
+      "range": {
+        "startLine": 59,
+        "startChar": 7,
+        "endLine": 59,
+        "endChar": 29
+      },
+      "revId": "aab4dce42f1e8b3d9a02e083792c655731d76888",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e01878a7_980e4ba6",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l1t2.cc",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "80aeeafd_1fdc90eb",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l1t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-25T13:50:02Z",
+      "side": 1,
+      "message": "T0 frames are needed for the 2nd decode target, so it should be\nactive_decode_targets_.set(0, bitrates.GetBitrate(0, 0) \u003e 0);\nactive_decode_targets_.set(1, bitrates.GetBitrate(0, 0) \u003e 0 \u0026\u0026 bitrates.GetBitrate(0, 1) \u003e 0);\n\nbut then again, I\u0027m not really sure what does it mean\nbitrates.GetBitrate(0, 0) \u003d\u003d 0 \u0026\u0026 bitrates.GetBitrate(0, 1) \u003e 0\nso prefer to disable everything in that case.\n\nAdded a comment.",
+      "parentUuid": "e01878a7_980e4ba6",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 1
+      },
+      "revId": "aab4dce42f1e8b3d9a02e083792c655731d76888",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c91ff01_74c44123",
         "filename": "modules/video_coding/codecs/av1/scalable_video_controller.h",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "aab4dce42f1e8b3d9a02e083792c655731d76888",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e64ea74_24ba8feb",
+        "filename": "modules/video_coding/codecs/av1/scalable_video_controller.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-25T13:50:02Z",
+      "side": 1,
+      "message": "probably,\nNoLayering structure can probably ignore this signal,\nall other structures really need to adjust configurations to avoid producing inactive layers.\n\nadded a TODO",
+      "parentUuid": "1c91ff01_74c44123",
+      "range": {
+        "startLine": 84,
+        "startChar": 15,
+        "endLine": 84,
+        "endChar": 29
+      },
+      "revId": "aab4dce42f1e8b3d9a02e083792c655731d76888",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
