@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "be23079e_c8bbd94b",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l1t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-06-25T14:32:35Z",
+      "side": 1,
+      "message": "you were probably thinking about VideoBitrateAllocation::GetTemporalLayerSum\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/api/video/video_bitrate_allocation.h;l\u003d56;drc\u003d5963c7cf0a70e1abdf0e3f313c10cb8a161f6cdb?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F",
+      "parentUuid": "a45db665_7a90df65",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 1
+      },
+      "revId": "aab4dce42f1e8b3d9a02e083792c655731d76888",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c91ff01_74c44123",
         "filename": "modules/video_coding/codecs/av1/scalable_video_controller.h",
         "patchSetId": 1
