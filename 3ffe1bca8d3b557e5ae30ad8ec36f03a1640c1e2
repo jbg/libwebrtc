@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "f96ed131_5b38c8dc",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3665,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-06-25T20:11:13Z",
+      "side": 1,
+      "message": "At this point, the parameters have already been split by semicolons. So if you theoretically had a line like this:\n\na\u003dfmtp:100 foo;bar\n\nInstead of the whole \"foo;bar\" string being stored, only \"bar\" would be.",
+      "revId": "3ffe1bca8d3b557e5ae30ad8ec36f03a1640c1e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ffcb9640_ae39d1e8",
         "filename": "pc/webrtc_sdp_unittest.cc",
         "patchSetId": 1
