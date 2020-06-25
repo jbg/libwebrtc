@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98f80cbd_94ac2e9d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3637,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-06-25T15:53:36Z",
+      "side": 1,
+      "message": "drive by, wrong RFC",
+      "revId": "3ffe1bca8d3b557e5ae30ad8ec36f03a1640c1e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffcb9640_ae39d1e8",
+        "filename": "pc/webrtc_sdp_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-06-25T15:53:36Z",
+      "side": 1,
+      "message": "drive-by",
+      "revId": "3ffe1bca8d3b557e5ae30ad8ec36f03a1640c1e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
