@@ -63,29 +63,25 @@ struct SvcTestParam {
 
 class ScalabilityStructureTest : public TestWithParam<SvcTestParam> {
  public:
-  std::vector<GenericFrameInfo> GenerateAllFrames() {
+  std::vector<GenericFrameInfo> GenerateAllFrames(
+      ScalableVideoController& structure_controller) {
     std::vector<GenericFrameInfo> frames;
-
-    FrameDependenciesCalculator frame_deps_calculator;
-    ChainDiffCalculator chain_diff_calculator;
-    std::unique_ptr<ScalableVideoController> structure_controller =
-        GetParam().svc_factory();
     FrameDependencyStructure structure =
-        structure_controller->DependencyStructure();
+        structure_controller.DependencyStructure();
     for (int i = 0; i < GetParam().num_temporal_units; ++i) {
       for (auto& layer_frame :
-           structure_controller->NextFrameConfig(/*reset=*/false)) {
-        int64_t frame_id = static_cast<int64_t>(frames.size());
+           structure_controller.NextFrameConfig(/*reset=*/false)) {
+        int64_t frame_id = frame_id_++;
         bool is_keyframe = layer_frame.IsKeyframe();
         absl::optional<GenericFrameInfo> frame_info =
-            structure_controller->OnEncodeDone(std::move(layer_frame));
+            structure_controller.OnEncodeDone(std::move(layer_frame));
         EXPECT_TRUE(frame_info.has_value());
         if (is_keyframe) {
-          chain_diff_calculator.Reset(frame_info->part_of_chain);
+          chain_diff_calculator_.Reset(frame_info->part_of_chain);
         }
         frame_info->chain_diffs =
-            chain_diff_calculator.From(frame_id, frame_info->part_of_chain);
-        for (int64_t base_frame_id : frame_deps_calculator.FromBuffersUsage(
+            chain_diff_calculator_.From(frame_id, frame_info->part_of_chain);
+        for (int64_t base_frame_id : frame_deps_calculator_.FromBuffersUsage(
                  is_keyframe ? VideoFrameType::kVideoFrameKey
                              : VideoFrameType::kVideoFrameDelta,
                  frame_id, frame_info->encoder_buffers)) {
@@ -99,6 +95,11 @@ class ScalabilityStructureTest : public TestWithParam<SvcTestParam> {
     }
     return frames;
   }
+
+ private:
+  FrameDependenciesCalculator frame_deps_calculator_;
+  ChainDiffCalculator chain_diff_calculator_;
+  int64_t frame_id_ = 0;
 };
 
 TEST_P(ScalabilityStructureTest,
@@ -164,9 +165,11 @@ TEST_P(ScalabilityStructureTest, TemplatesMatchNumberOfDecodeTargetsAndChains) {
 }
 
 TEST_P(ScalabilityStructureTest, FrameInfoMatchesFrameDependencyStructure) {
-  FrameDependencyStructure structure =
-      GetParam().svc_factory()->DependencyStructure();
-  std::vector<GenericFrameInfo> frame_infos = GenerateAllFrames();
+  std::unique_ptr<ScalableVideoController> svc_controller =
+      GetParam().svc_factory();
+  FrameDependencyStructure structure = svc_controller->DependencyStructure();
+  std::vector<GenericFrameInfo> frame_infos =
+      GenerateAllFrames(*svc_controller);
   for (size_t frame_id = 0; frame_id < frame_infos.size(); ++frame_id) {
     const auto& frame = frame_infos[frame_id];
     EXPECT_GE(frame.spatial_id, 0) << " for frame " << frame_id;
@@ -180,9 +183,11 @@ TEST_P(ScalabilityStructureTest, FrameInfoMatchesFrameDependencyStructure) {
 }
 
 TEST_P(ScalabilityStructureTest, ThereIsAPerfectTemplateForEachFrame) {
-  FrameDependencyStructure structure =
-      GetParam().svc_factory()->DependencyStructure();
-  std::vector<GenericFrameInfo> frame_infos = GenerateAllFrames();
+  std::unique_ptr<ScalableVideoController> svc_controller =
+      GetParam().svc_factory();
+  FrameDependencyStructure structure = svc_controller->DependencyStructure();
+  std::vector<GenericFrameInfo> frame_infos =
+      GenerateAllFrames(*svc_controller);
   for (size_t frame_id = 0; frame_id < frame_infos.size(); ++frame_id) {
     EXPECT_THAT(structure.templates, Contains(frame_infos[frame_id]))
         << " for frame " << frame_id;
@@ -190,7 +195,10 @@ TEST_P(ScalabilityStructureTest, ThereIsAPerfectTemplateForEachFrame) {
 }
 
 TEST_P(ScalabilityStructureTest, FrameDependsOnSameOrLowerLayer) {
-  std::vector<GenericFrameInfo> frame_infos = GenerateAllFrames();
+  std::unique_ptr<ScalableVideoController> svc_controller =
+      GetParam().svc_factory();
+  std::vector<GenericFrameInfo> frame_infos =
+      GenerateAllFrames(*svc_controller);
   int64_t num_frames = frame_infos.size();
 
   for (int64_t frame_id = 0; frame_id < num_frames; ++frame_id) {
@@ -207,7 +215,10 @@ TEST_P(ScalabilityStructureTest, FrameDependsOnSameOrLowerLayer) {
 }
 
 TEST_P(ScalabilityStructureTest, NoFrameDependsOnDiscardableOrNotPresent) {
-  std::vector<GenericFrameInfo> frame_infos = GenerateAllFrames();
+  std::unique_ptr<ScalableVideoController> svc_controller =
+      GetParam().svc_factory();
+  std::vector<GenericFrameInfo> frame_infos =
+      GenerateAllFrames(*svc_controller);
   int64_t num_frames = frame_infos.size();
   FrameDependencyStructure structure =
       GetParam().svc_factory()->DependencyStructure();
@@ -236,9 +247,11 @@ TEST_P(ScalabilityStructureTest, NoFrameDependsOnDiscardableOrNotPresent) {
 }
 
 TEST_P(ScalabilityStructureTest, NoFrameDependsThroughSwitchIndication) {
-  FrameDependencyStructure structure =
-      GetParam().svc_factory()->DependencyStructure();
-  std::vector<GenericFrameInfo> frame_infos = GenerateAllFrames();
+  std::unique_ptr<ScalableVideoController> svc_controller =
+      GetParam().svc_factory();
+  FrameDependencyStructure structure = svc_controller->DependencyStructure();
+  std::vector<GenericFrameInfo> frame_infos =
+      GenerateAllFrames(*svc_controller);
   int64_t num_frames = frame_infos.size();
   std::vector<std::set<int64_t>> full_deps(num_frames);
 
@@ -284,6 +297,54 @@ TEST_P(ScalabilityStructureTest, NoFrameDependsThroughSwitchIndication) {
     }
   }
 }
+
+// TODO(danilchap): Merge with ScalabilityStructureTest when the functionality
+// implemented for all tested structures.
+class ScalabilityStructureSetRatesTest : public ScalabilityStructureTest {};
+
+TEST_P(ScalabilityStructureSetRatesTest, ProduceNoFrameForDisabledLayers) {
+  std::unique_ptr<ScalableVideoController> svc_controller =
+      GetParam().svc_factory();
+  ScalableVideoController::StreamLayersConfig structure =
+      GetParam().svc_factory()->StreamConfig();
+
+  VideoBitrateAllocation all_bitrates;
+  for (int sid = 0; sid < structure.num_spatial_layers; ++sid) {
+    for (int tid = 0; tid < structure.num_temporal_layers; ++tid) {
+      all_bitrates.SetBitrate(sid, tid, 100'000);
+    }
+  }
+
+  svc_controller->OnRatesUpdated(all_bitrates);
+  std::vector<GenericFrameInfo> frames = GenerateAllFrames(*svc_controller);
+
+  for (int sid = 0; sid < structure.num_spatial_layers; ++sid) {
+    for (int tid = 0; tid < structure.num_temporal_layers; ++tid) {
+      // When all layers were enabled, expect there was a frame for each layer.
+      EXPECT_THAT(frames,
+                  Contains(AllOf(Field(&GenericFrameInfo::spatial_id, sid),
+                                 Field(&GenericFrameInfo::temporal_id, tid))))
+          << "For layer (" << sid << "," << tid << ")";
+      VideoBitrateAllocation bitrates = all_bitrates;
+      bitrates.SetBitrate(sid, tid, 0);
+      svc_controller->OnRatesUpdated(bitrates);
+      // With layer (sid, tid) disabled, expect no frames are produced for it.
+      EXPECT_THAT(
+          GenerateAllFrames(*svc_controller),
+          Not(Contains(AllOf(Field(&GenericFrameInfo::spatial_id, sid),
+                             Field(&GenericFrameInfo::temporal_id, tid)))))
+          << "For layer (" << sid << "," << tid << ")";
+    }
+  }
+}
+
+// TODO(danilchap): Merge with ScalabilityStructureTest when the functionality
+// is implemented for all tested structures.
+INSTANTIATE_TEST_SUITE_P(Svc,
+                         ScalabilityStructureSetRatesTest,
+                         Values(SvcTestParam{
+                             "L1T2", std::make_unique<ScalabilityStructureL1T2>,
+                             /*num_temporal_units=*/4}));
 
 INSTANTIATE_TEST_SUITE_P(
     Svc,
