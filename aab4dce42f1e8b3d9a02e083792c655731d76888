@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "a45db665_7a90df65",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l1t2.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-06-25T14:22:55Z",
+      "side": 1,
+      "message": "Aha, I was kind of expecting that bitrates.GetBitrate(0, 0) \u003d\u003d 0 to imply that  bitrates.GetBitrate(0, 1) \u003d\u003d 0. Maybe not the case.",
+      "parentUuid": "80aeeafd_1fdc90eb",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 1
+      },
+      "revId": "aab4dce42f1e8b3d9a02e083792c655731d76888",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c91ff01_74c44123",
         "filename": "modules/video_coding/codecs/av1/scalable_video_controller.h",
         "patchSetId": 1
