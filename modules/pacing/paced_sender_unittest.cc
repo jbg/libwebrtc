@@ -44,7 +44,7 @@ class MockCallback : public PacketRouter {
                     const PacedPacketInfo& cluster_info));
   MOCK_METHOD1(
       GeneratePadding,
-      std::vector<std::unique_ptr<RtpPacketToSend>>(DataSize target_size));
+      std::vector<std::unique_ptr<RtpPacketToSend>>(size_t target_size_bytes));
 };
 
 class ProcessModeTrials : public WebRtcKeyValueConfig {
