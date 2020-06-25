@@ -63,10 +63,12 @@ AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
   // Allocate room for RFC 2198 header if there is redundant data.
   // Otherwise this will send the primary payload type without
   // wrapping in RED.
-  const size_t header_length_bytes = secondary_info_.encoded_bytes > 0 ? 5 : 0;
+  const bool encode_secondary =
+      secondary_info_.encoded_bytes > 0 && secondary_info_.speech;
+  const size_t header_length_bytes = encode_secondary ? 5 : 0;
   size_t secondary_length_bytes = 0;
 
-  if (secondary_info_.encoded_bytes > 0) {
+  if (encode_secondary) {
     encoded->SetSize(header_length_bytes);
     encoded->AppendData(secondary_encoded_);
     secondary_length_bytes = secondary_info_.encoded_bytes;
@@ -79,7 +81,7 @@ AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
   }
 
   // Actually construct the RFC 2198 header.
-  if (secondary_info_.encoded_bytes > 0) {
+  if (encode_secondary) {
     const uint32_t timestamp_delta =
         info.encoded_timestamp - secondary_info_.encoded_timestamp;
 
@@ -100,7 +102,7 @@ AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
   // intentional.
   info.redundant.push_back(info);
   RTC_DCHECK_EQ(info.redundant.size(), 1);
-  if (secondary_info_.encoded_bytes > 0) {
+  if (encode_secondary) {
     info.redundant.push_back(secondary_info_);
     RTC_DCHECK_EQ(info.redundant.size(), 2);
   }
