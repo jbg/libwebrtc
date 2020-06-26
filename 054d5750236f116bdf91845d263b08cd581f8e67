@@ -22,6 +22,30 @@
       "revId": "054d5750236f116bdf91845d263b08cd581f8e67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "522cd9dd_a677e18c",
+        "filename": "test/scenario/scenario_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-06-26T15:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3b3bc26_cb53a9df",
+      "range": {
+        "startLine": 145,
+        "startChar": 19,
+        "endLine": 145,
+        "endChar": 54
+      },
+      "revId": "054d5750236f116bdf91845d263b08cd581f8e67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
