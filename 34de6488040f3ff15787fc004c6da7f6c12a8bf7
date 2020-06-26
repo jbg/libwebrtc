@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68a5b2c5_4b449f4d",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-26T12:21:49Z",
+      "side": 1,
+      "message": "Stream label is unique for each stream, so how then grouping will work?",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 20
+      },
+      "revId": "34de6488040f3ff15787fc004c6da7f6c12a8bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5138efe_7fe977c4",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-26T12:21:49Z",
+      "side": 1,
+      "message": "Please add a comment why we do this check and what it means. What is 2?",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 32
+      },
+      "revId": "34de6488040f3ff15787fc004c6da7f6c12a8bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2817967_ec2e17f0",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-26T12:21:49Z",
+      "side": 1,
+      "message": "Let\u0027s use PeerConnectionE2EQualityTestFixture::QualityMetricsReporter here.\nI think you can update interface to accept analyzer_helper. But also we need to fill in video track info there too then.",
+      "range": {
+        "startLine": 26,
+        "startChar": 41,
+        "endLine": 26,
+        "endChar": 63
+      },
+      "revId": "34de6488040f3ff15787fc004c6da7f6c12a8bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
