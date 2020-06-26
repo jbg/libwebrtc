@@ -125,6 +125,7 @@ class PeerConnectionE2EQualityTest
   std::vector<std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>>>
       output_video_sinks_;
   AnalyzerHelper analyzer_helper_;
+  AnalyzerHelper sync_group_analyzer_helper_;
 
   rtc::CriticalSection lock_;
   TimeDelta real_test_duration_ RTC_GUARDED_BY(lock_) = TimeDelta::Zero();

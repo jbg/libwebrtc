@@ -33,6 +33,7 @@
 #include "test/pc/e2e/analyzer/audio/default_audio_quality_analyzer.h"
 #include "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h"
 #include "test/pc/e2e/analyzer/video/video_quality_metrics_reporter.h"
+#include "test/pc/e2e/cross_media_metrics_reporter.h"
 #include "test/pc/e2e/stats_poller.h"
 #include "test/pc/e2e/test_peer_factory.h"
 #include "test/testsupport/file_utils.h"
@@ -252,6 +253,11 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   quality_metrics_reporters_.push_back(
       std::make_unique<VideoQualityMetricsReporter>(clock_));
 
+  auto cross_media_metrics_reporter =
+      std::make_unique<CrossMediaMetricsReporter>();
+  cross_media_metrics_reporter->Start(test_case_name_,
+                                      &sync_group_analyzer_helper_);
+
   video_quality_analyzer_injection_helper_->Start(
       test_case_name_,
       std::vector<std::string>{alice_->params()->name.value(),
@@ -290,7 +296,8 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   // Setup stats poller.
   std::vector<StatsObserverInterface*> observers = {
       audio_quality_analyzer_.get(),
-      video_quality_analyzer_injection_helper_.get()};
+      video_quality_analyzer_injection_helper_.get(),
+      cross_media_metrics_reporter.get()};
   for (auto& reporter : quality_metrics_reporters_) {
     observers.push_back(reporter.get());
   }
@@ -350,6 +357,7 @@ void PeerConnectionE2EQualityTest::Run(RunParams run_params) {
   ReportGeneralTestResults();
   audio_quality_analyzer_->Stop();
   video_quality_analyzer_injection_helper_->Stop();
+  cross_media_metrics_reporter->Stop();
   for (auto& reporter : quality_metrics_reporters_) {
     reporter->StopAndReportResults();
   }
@@ -385,8 +393,10 @@ void PeerConnectionE2EQualityTest::OnTrackCallback(
       transceiver->receiver()->track();
   RTC_CHECK_EQ(transceiver->receiver()->stream_ids().size(), 2)
       << "Expected 2 stream ids: 1st - sync group, 2nd - unique stream label";
+  std::string sync_group = transceiver->receiver()->stream_ids()[0];
   std::string stream_label = transceiver->receiver()->stream_ids()[1];
   analyzer_helper_.AddTrackToStreamMapping(track->id(), stream_label);
+  sync_group_analyzer_helper_.AddTrackToStreamMapping(track->id(), sync_group);
   if (track->kind() != MediaStreamTrackInterface::kVideoKind) {
     return;
   }
