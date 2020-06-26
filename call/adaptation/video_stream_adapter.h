@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "absl/types/variant.h"
 #include "api/adaptation/resource.h"
 #include "api/rtp_parameters.h"
 #include "api/video/video_adaptation_counters.h"
@@ -79,65 +80,38 @@ class Adaptation final {
   // The status of this Adaptation. To find out how this Adaptation affects
   // VideoSourceRestrictions, see VideoStreamAdapter::PeekNextRestrictions().
   Status status() const;
+  const VideoStreamInputState& input_state() const;
+  const VideoSourceRestrictions& restrictions() const;
+  const VideoAdaptationCounters& counters() const;
   // Used for stats reporting.
   bool min_pixel_limit_reached() const;
 
-  const VideoStreamInputState& input_state() const;
-
  private:
-  // The adapter needs to know about step type and step target in order to
-  // construct and perform an Adaptation, which is a detail we do not want to
-  // expose to the public interface.
   friend class VideoStreamAdapter;
 
-  enum class StepType {
-    kIncreaseResolution,
-    kDecreaseResolution,
-    kIncreaseFrameRate,
-    kDecreaseFrameRate,
-    kForce
-  };
-
-  struct Step {
-    Step(StepType type, int target);
-    // StepType is kForce
-    Step(VideoSourceRestrictions restrictions,
-         VideoAdaptationCounters counters);
-    const StepType type;
-    // Pixel or frame rate depending on |type|.
-    // Only set when |type| is not kForce.
-    const absl::optional<int> target;
-    // Only set when |type| is kForce.
-    const absl::optional<VideoSourceRestrictions> restrictions;
-    // Only set when |type| is kForce.
-    const absl::optional<VideoAdaptationCounters> counters;
-  };
-
   // Constructs with a valid adaptation Step. Status is kValid.
-  Adaptation(int validation_id, Step step, VideoStreamInputState input_state);
   Adaptation(int validation_id,
-             Step step,
+             VideoSourceRestrictions restrictions,
+             VideoAdaptationCounters counters,
              VideoStreamInputState input_state,
              bool min_pixel_limit_reached);
   // Constructor when adaptation is not valid. Status MUST NOT be kValid.
   Adaptation(int validation_id,
              Status invalid_status,
-             VideoStreamInputState input_state);
-  Adaptation(int validation_id,
-             Status invalid_status,
              VideoStreamInputState input_state,
              bool min_pixel_limit_reached);
-
-  const Step& step() const;  // Only callable if |status_| is kValid.
 
   // An Adaptation can become invalidated if the state of VideoStreamAdapter is
   // modified before the Adaptation is applied. To guard against this, this ID
   // has to match VideoStreamAdapter::adaptation_validation_id_ when applied.
+  // TODO(eshr): Remove the id_ and validate the degradation preference and the
+  // input state instead.
   const int validation_id_;
   const Status status_;
-  const absl::optional<Step> step_;  // Only present if |status_| is kValid.
   const bool min_pixel_limit_reached_;
   // Input state when adaptation was made.
+  const VideoSourceRestrictions restrictions_;
+  const VideoAdaptationCounters counters_;
   const VideoStreamInputState input_state_;
 };
 
@@ -174,16 +148,9 @@ class VideoStreamAdapter {
   Adaptation GetAdaptationTo(const VideoAdaptationCounters& counters,
                              const VideoSourceRestrictions& restrictions);
 
-  struct RestrictionsWithCounters {
-    VideoSourceRestrictions restrictions;
-    VideoAdaptationCounters adaptation_counters;
-  };
-
   // Returns the restrictions that result from applying the adaptation, without
   // actually applying it. If the adaptation is not valid, current restrictions
   // are returned.
-  RestrictionsWithCounters PeekNextRestrictions(
-      const Adaptation& adaptation) const;
   // Updates source_restrictions() based according to the Adaptation.
   void ApplyAdaptation(const Adaptation& adaptation);
   void ApplyAdaptation(const Adaptation& adaptation,
@@ -198,6 +165,35 @@ class VideoStreamAdapter {
   bool HasSufficientInputForAdaptation(const VideoStreamInputState& input_state)
       const RTC_RUN_ON(&sequence_checker_);
 
+  enum class StepType {
+    kIncreaseResolution,
+    kDecreaseResolution,
+    kIncreaseFrameRate,
+    kDecreaseFrameRate,
+  };
+
+  struct Step {
+    Step(StepType type, int target);
+    const StepType type;
+    // Pixel or frame rate depending on |type|.
+    const int target;
+  };
+
+  using StepOrState = absl::variant<Step, Adaptation::Status>;
+  StepOrState GetAdaptationUpStep(const VideoStreamInputState& input_state)
+      const RTC_RUN_ON(&sequence_checker_);
+  StepOrState GetAdaptationDownStep(const VideoStreamInputState& input_state)
+      const RTC_RUN_ON(&sequence_checker_);
+  Adaptation GetAdaptationUp(const VideoStreamInputState& input_state) const
+      RTC_RUN_ON(&sequence_checker_);
+  Adaptation GetAdaptationDown(const VideoStreamInputState& input_state) const
+      RTC_RUN_ON(&sequence_checker_);
+
+  struct StepOrStateVisitor;
+  Adaptation StepOrStateToAdaptation(StepOrState step_or_state,
+                                     const VideoStreamInputState& input_state)
+      const RTC_RUN_ON(&sequence_checker_);
+
   // The input frame rate and resolution at the time of an adaptation in the
   // direction described by |mode_| (up or down).
   // TODO(https://crbug.com/webrtc/11393): Can this be renamed? Can this be
@@ -207,8 +203,13 @@ class VideoStreamAdapter {
     int input_pixel_count_;
     // Framerate received from the source at the time of the adaptation.
     int framerate_fps_;
-    // Degradation preference for the request.
-    Adaptation::StepType step_type_;
+    enum class ResolutionChange {
+      kNoChange,
+      kUp,
+      kDown,
+    };
+    // Previous resolution restriction.
+    ResolutionChange resolution_change;
   };
 
   SequenceChecker sequence_checker_ RTC_GUARDED_BY(&sequence_checker_);
@@ -245,6 +246,9 @@ class VideoStreamAdapter {
 
   std::vector<VideoSourceRestrictionsListener*> restrictions_listeners_
       RTC_GUARDED_BY(&sequence_checker_);
+
+  VideoSourceRestrictions restrictions_ RTC_GUARDED_BY(&sequence_checker_);
+  VideoAdaptationCounters counters_ RTC_GUARDED_BY(&sequence_checker_);
 };
 
 }  // namespace webrtc
