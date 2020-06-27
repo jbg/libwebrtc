@@ -198,20 +198,11 @@ void RtpSenderEgress::SendPacket(RtpPacketToSend* packet,
 
   if (send_success) {
     rtc::CritScope lock(&lock_);
+    // TODO(bugs.webrtc.org/11581): Update the stats on the worker thread
+    // (PostTask).
     UpdateRtpStats(*packet);
     media_has_been_sent_ = true;
   }
-}
-
-void RtpSenderEgress::ProcessBitrateAndNotifyObservers() {
-  if (!bitrate_callback_)
-    return;
-
-  rtc::CritScope lock(&lock_);
-  RtpSendRates send_rates = GetSendRatesLocked();
-  bitrate_callback_->Notify(
-      send_rates.Sum().bps(),
-      send_rates[RtpPacketMediaType::kRetransmission].bps(), ssrc_);
 }
 
 RtpSendRates RtpSenderEgress::GetSendRates() const {
@@ -232,6 +223,8 @@ RtpSendRates RtpSenderEgress::GetSendRatesLocked() const {
 
 void RtpSenderEgress::GetDataCounters(StreamDataCounters* rtp_stats,
                                       StreamDataCounters* rtx_stats) const {
+  // TODO(bugs.webrtc.org/11581): make sure rtx_rtp_stats_ and rtp_stats_ are
+  // only touched on the worker thread.
   rtc::CritScope lock(&lock_);
   *rtp_stats = rtp_stats_;
   *rtx_stats = rtx_rtp_stats_;
@@ -439,6 +432,8 @@ bool RtpSenderEgress::SendPacketToNetwork(const RtpPacketToSend& packet,
 void RtpSenderEgress::UpdateRtpStats(const RtpPacketToSend& packet) {
   int64_t now_ms = clock_->TimeInMilliseconds();
 
+  // TODO(bugs.webrtc.org/11581): make sure rtx_rtp_stats_ and rtp_stats_ are
+  // only touched on the worker thread.
   StreamDataCounters* counters =
       packet.Ssrc() == rtx_ssrc_ ? &rtx_rtp_stats_ : &rtp_stats_;
 
@@ -456,11 +451,24 @@ void RtpSenderEgress::UpdateRtpStats(const RtpPacketToSend& packet) {
   counters->transmitted.AddPacket(packet);
 
   RTC_DCHECK(packet.packet_type().has_value());
+  // TODO(bugs.webrtc.org/11581): send_rates_ should be touched only on the
+  // worker thread.
   send_rates_[static_cast<size_t>(*packet.packet_type())].Update(packet.size(),
                                                                  now_ms);
 
+  // TODO(bugs.webrtc.org/11581): These (stats related) stat callbacks should be
+  // issued on the worker thread.
   if (rtp_stats_callback_) {
     rtp_stats_callback_->DataCountersUpdated(*counters, packet.Ssrc());
+  }
+
+  // The bitrate_callback_ and rtp_stats_callback_ pointers in practice point
+  // to the same object, so these callbacks could be consolidated into one.
+  if (bitrate_callback_) {
+    RtpSendRates send_rates = GetSendRatesLocked();
+    bitrate_callback_->Notify(
+        send_rates.Sum().bps(),
+        send_rates[RtpPacketMediaType::kRetransmission].bps(), ssrc_);
   }
 }
 

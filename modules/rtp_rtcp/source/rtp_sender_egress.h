@@ -57,7 +57,6 @@ class RtpSenderEgress {
   absl::optional<uint32_t> RtxSsrc() const { return rtx_ssrc_; }
   absl::optional<uint32_t> FlexFecSsrc() const { return flexfec_ssrc_; }
 
-  void ProcessBitrateAndNotifyObservers() RTC_LOCKS_EXCLUDED(lock_);
   RtpSendRates GetSendRates() const RTC_LOCKS_EXCLUDED(lock_);
   void GetDataCounters(StreamDataCounters* rtp_stats,
                        StreamDataCounters* rtx_stats) const
