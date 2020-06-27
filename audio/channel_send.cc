@@ -213,7 +213,8 @@ class ChannelSend : public ChannelSendInterface,
 
   PacketRouter* packet_router_ RTC_GUARDED_BY(&worker_thread_checker_) =
       nullptr;
-  const std::unique_ptr<TransportFeedbackProxy> feedback_observer_proxy_;
+  const std::unique_ptr<TransportFeedbackProxy> feedback_observer_proxy_
+      RTC_GUARDED_BY(&worker_thread_checker_);
   const std::unique_ptr<RtpPacketSenderProxy> rtp_packet_pacer_proxy_;
   const std::unique_ptr<RateLimiter> retransmission_rate_limiter_;
 
@@ -248,37 +249,35 @@ class TransportFeedbackProxy : public TransportFeedbackObserver {
  public:
   TransportFeedbackProxy() : feedback_observer_(nullptr) {
     pacer_thread_.Detach();
-    network_thread_.Detach();
   }
 
   void SetTransportFeedbackObserver(
       TransportFeedbackObserver* feedback_observer) {
-    RTC_DCHECK(thread_checker_.IsCurrent());
-    rtc::CritScope lock(&crit_);
+    RTC_DCHECK_RUN_ON(&thread_checker_);
+    RTC_DCHECK(feedback_observer_ == nullptr || feedback_observer_ == nullptr)
+        << "TransportFeedbackObserver must not change during liftime of "
+           "ChannelSend.";
     feedback_observer_ = feedback_observer;
   }
 
   // Implements TransportFeedbackObserver.
   void OnAddPacket(const RtpPacketSendInfo& packet_info) override {
     RTC_DCHECK(pacer_thread_.IsCurrent());
-    rtc::CritScope lock(&crit_);
-    if (feedback_observer_)
-      feedback_observer_->OnAddPacket(packet_info);
+    RTC_DCHECK(feedback_observer_);
+    feedback_observer_->OnAddPacket(packet_info);
   }
 
   void OnTransportFeedback(const rtcp::TransportFeedback& feedback) override {
-    RTC_DCHECK(network_thread_.IsCurrent());
-    rtc::CritScope lock(&crit_);
-    if (feedback_observer_)
-      feedback_observer_->OnTransportFeedback(feedback);
+    RTC_DCHECK_RUN_ON(&thread_checker_);
+    RTC_DCHECK(feedback_observer_);
+    feedback_observer_->OnTransportFeedback(feedback);
   }
 
  private:
   rtc::CriticalSection crit_;
   rtc::ThreadChecker thread_checker_;
   rtc::ThreadChecker pacer_thread_;
-  rtc::ThreadChecker network_thread_;
-  TransportFeedbackObserver* feedback_observer_ RTC_GUARDED_BY(&crit_);
+  TransportFeedbackObserver* feedback_observer_;
 };
 
 class RtpPacketSenderProxy : public RtpPacketSender {
@@ -663,6 +662,8 @@ void ChannelSend::OnUplinkPacketLossRate(float packet_loss_rate) {
 }
 
 void ChannelSend::ReceivedRTCPPacket(const uint8_t* data, size_t length) {
+  RTC_DCHECK_RUN_ON(&worker_thread_checker_);
+
   // Deliver RTCP packet to RTP/RTCP module for parsing
   rtp_rtcp_->IncomingRtcpPacket(data, length);
 
