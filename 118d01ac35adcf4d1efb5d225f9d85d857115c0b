@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b018337_265744ad",
+        "filename": "audio/audio_send_stream.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-06-27T09:49:18Z",
+      "side": 0,
+      "message": "This comment seems outdated. In fact both libjingle and all tests now call this on the worker thread. Adding checker and removing comment.",
+      "range": {
+        "startLine": 509,
+        "startChar": 2,
+        "endLine": 511,
+        "endChar": 44
+      },
+      "revId": "118d01ac35adcf4d1efb5d225f9d85d857115c0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
