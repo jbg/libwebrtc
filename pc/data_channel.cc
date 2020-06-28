@@ -408,9 +408,13 @@ void DataChannel::SetReceiveSsrc(uint32_t receive_ssrc) {
 }
 
 void DataChannel::SetSctpSid(int sid) {
+  RTC_DCHECK_RUN_ON(signaling_thread_);
   RTC_DCHECK_LT(config_.id, 0);
   RTC_DCHECK_GE(sid, 0);
   RTC_DCHECK(IsSctpLike(data_channel_type_));
+  RTC_DCHECK_NE(handshake_state_, kHandshakeWaitingForAck);
+  RTC_DCHECK_EQ(state_, kConnecting);
+
   if (config_.id == sid) {
     return;
   }
