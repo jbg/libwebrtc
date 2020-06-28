@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "a2a89f7d_d8b92d7d",
+        "filename": "pc/webrtc_sdp.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3665,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-06-28T15:04:38Z",
+      "side": 1,
+      "message": "I think we can tolerate that. The two known examples of this syntax are telephone-event and red and everything else i\u0027m aware of is key-value. And I might find the following useful for RED:\n  a\u003dfmtp:96 111/111/111;vad\u003dfalse\nto control a potential combination with voice activity detection.",
+      "parentUuid": "f96ed131_5b38c8dc",
+      "revId": "3ffe1bca8d3b557e5ae30ad8ec36f03a1640c1e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ffcb9640_ae39d1e8",
         "filename": "pc/webrtc_sdp_unittest.cc",
         "patchSetId": 1
