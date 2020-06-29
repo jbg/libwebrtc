@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "80e7e058_b321ce41",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-29T14:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d44d8c7_e396a8cb",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 32
+      },
+      "revId": "1fe8a55085626b69eeacbd50030fa343f2ec8d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f417335e_214d6f3a",
         "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a37b775e_019e9997",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-29T14:10:46Z",
+      "side": 1,
+      "message": "Only two tracks can be synced. Fixed the comment to make it more clear.",
+      "parentUuid": "f417335e_214d6f3a",
+      "range": {
+        "startLine": 52,
+        "startChar": 30,
+        "endLine": 52,
+        "endChar": 31
+      },
+      "revId": "1fe8a55085626b69eeacbd50030fa343f2ec8d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a974ee78_d8f5029a",
         "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2020-06-29T11:44:35Z",
       "side": 1,
       "message": "I\u0027m thinking, all metrics are reported per audio or video stream. So data reported by sync group only may be hard to correlate with the rest. Should be include stream_label into reporting?",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 32
+      },
+      "revId": "1fe8a55085626b69eeacbd50030fa343f2ec8d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abb5716a_c9bd0721",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-29T14:10:46Z",
+      "side": 1,
+      "message": "I\u0027m not sure about it. The other way I see it is something like `alice-video/trak_is_ahead`. But I\u0027m not sure that it is easier to correlate. I think sync group name is intuitive enough usually.",
+      "parentUuid": "a974ee78_d8f5029a",
       "range": {
         "startLine": 83,
         "startChar": 17,
