@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b7221f91_745eed39",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-06-29T14:40:31Z",
+      "side": 1,
+      "message": "Obsolete.",
+      "parentUuid": "6e067932_cd281a6a",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 72
+      },
+      "revId": "3c2ae791831d71f6e284d4accc1b5a1183467a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6779b9e_2b67318d",
         "filename": "audio/channel_send.cc",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c7f1d340_663069bf",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-06-29T14:40:31Z",
+      "side": 1,
+      "message": "Yes, but this dcheck is for the member - not the parameter. I can add an extra dcheck that parameter is non-null.\n(Obsolete)",
+      "parentUuid": "b6779b9e_2b67318d",
+      "range": {
+        "startLine": 257,
+        "startChar": 15,
+        "endLine": 257,
+        "endChar": 47
+      },
+      "revId": "3c2ae791831d71f6e284d4accc1b5a1183467a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33574be5_c792a936",
         "filename": "audio/channel_send.cc",
         "patchSetId": 7
@@ -68,6 +116,30 @@
       "revId": "3c2ae791831d71f6e284d4accc1b5a1183467a6f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca85b2f1_2e4718d8",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-06-29T14:40:31Z",
+      "side": 1,
+      "message": "Obsolete.",
+      "parentUuid": "33574be5_c792a936",
+      "range": {
+        "startLine": 282,
+        "startChar": 21,
+        "endLine": 282,
+        "endChar": 36
+      },
+      "revId": "3c2ae791831d71f6e284d4accc1b5a1183467a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
