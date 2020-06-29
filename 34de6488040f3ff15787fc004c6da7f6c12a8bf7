@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "947ead16_d4ecef21",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-29T11:24:33Z",
+      "side": 1,
+      "message": "I were following Asa\u0027s example. Still waiting for an answer about it from her. But I believe you are right and in my case there is no need for grouping by time.",
+      "parentUuid": "68a5b2c5_4b449f4d",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 20
+      },
+      "revId": "34de6488040f3ff15787fc004c6da7f6c12a8bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5138efe_7fe977c4",
         "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f127446a_71b0636f",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-29T11:24:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5138efe_7fe977c4",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 32
+      },
+      "revId": "34de6488040f3ff15787fc004c6da7f6c12a8bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2817967_ec2e17f0",
         "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "34de6488040f3ff15787fc004c6da7f6c12a8bf7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ae4367a_be9e6c09",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-29T11:24:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2817967_ec2e17f0",
+      "range": {
+        "startLine": 26,
+        "startChar": 41,
+        "endLine": 26,
+        "endChar": 63
+      },
+      "revId": "34de6488040f3ff15787fc004c6da7f6c12a8bf7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
