@@ -140,6 +140,30 @@
       "revId": "1fe8a55085626b69eeacbd50030fa343f2ec8d40",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efb0a466_c0c225e4",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-29T17:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abb5716a_c9bd0721",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 32
+      },
+      "revId": "1fe8a55085626b69eeacbd50030fa343f2ec8d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
