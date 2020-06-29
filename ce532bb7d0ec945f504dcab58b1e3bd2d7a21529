@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9619380d_676ba810",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-29T17:49:10Z",
+      "side": 1,
+      "message": "It\u0027s a bit unclear which type is hidden here.",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 8
+      },
+      "revId": "ce532bb7d0ec945f504dcab58b1e3bd2d7a21529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf808d5c_5b711b74",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-29T17:49:10Z",
+      "side": 1,
+      "message": "Maybe we can join these structures?",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 4
+      },
+      "revId": "ce532bb7d0ec945f504dcab58b1e3bd2d7a21529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dbbb3e5_a4c05875",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-29T17:49:10Z",
+      "side": 1,
+      "message": "I worry will underlying strings outlive this map? Otherwise we may catch SIGSEGV here.",
+      "range": {
+        "startLine": 66,
+        "startChar": 11,
+        "endLine": 66,
+        "endChar": 28
+      },
+      "revId": "ce532bb7d0ec945f504dcab58b1e3bd2d7a21529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
