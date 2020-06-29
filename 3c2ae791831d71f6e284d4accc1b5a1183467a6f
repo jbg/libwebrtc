@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e067932_cd281a6a",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-06-29T12:57:36Z",
+      "side": 1,
+      "message": "nit:\nThis can be made a direct member instead of holding it in a unique_ptr, right?\nGets rid of one more lifetime one has to keep track of.",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 72
+      },
+      "revId": "3c2ae791831d71f6e284d4accc1b5a1183467a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6779b9e_2b67318d",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-06-29T12:57:36Z",
+      "side": 1,
+      "message": "I don\u0027t believe SetTransportFeedbackObserver can ever be called with a nullptr feedback_observer, right?\n\nSince the invocation from ResetSenderCongestionControlObjects is removed in this CL.",
+      "range": {
+        "startLine": 257,
+        "startChar": 15,
+        "endLine": 257,
+        "endChar": 47
+      },
+      "revId": "3c2ae791831d71f6e284d4accc1b5a1183467a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33574be5_c792a936",
+        "filename": "audio/channel_send.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-06-29T12:57:36Z",
+      "side": 1,
+      "message": "nit:\nwhile we\u0027re here - there is now a ThreadChecker thread_checker_ and a ThreadChecker pacer_thread_. Can you rename thread_checker_ to something more descriptive?",
+      "range": {
+        "startLine": 282,
+        "startChar": 21,
+        "endLine": 282,
+        "endChar": 36
+      },
+      "revId": "3c2ae791831d71f6e284d4accc1b5a1183467a6f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
