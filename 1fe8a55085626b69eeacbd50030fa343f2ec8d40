@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d44d8c7_e396a8cb",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-29T11:44:35Z",
+      "side": 1,
+      "message": "Should be renamed? Also please use snake_case variables naming style",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 32
+      },
+      "revId": "1fe8a55085626b69eeacbd50030fa343f2ec8d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f417335e_214d6f3a",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-29T11:44:35Z",
+      "side": 1,
+      "message": "Will it be fine if groups will have more tracks? Like 1 audio and 2+ video?",
+      "range": {
+        "startLine": 52,
+        "startChar": 30,
+        "endLine": 52,
+        "endChar": 31
+      },
+      "revId": "1fe8a55085626b69eeacbd50030fa343f2ec8d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a974ee78_d8f5029a",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-06-29T11:44:35Z",
+      "side": 1,
+      "message": "I\u0027m thinking, all metrics are reported per audio or video stream. So data reported by sync group only may be hard to correlate with the rest. Should be include stream_label into reporting?",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 32
+      },
+      "revId": "1fe8a55085626b69eeacbd50030fa343f2ec8d40",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
