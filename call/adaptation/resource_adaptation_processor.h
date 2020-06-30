@@ -85,7 +85,6 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   void SetDegradationPreference(
       DegradationPreference degradation_preference) override;
   void SetIsScreenshare(bool is_screenshare) override;
-  void ResetVideoSourceRestrictions() override;
 
   // ResourceListener implementation.
   // Triggers OnResourceUnderuse() or OnResourceOveruse().

@@ -83,7 +83,6 @@ class ResourceAdaptationProcessorInterface {
   virtual void SetDegradationPreference(
       DegradationPreference degradation_preference) = 0;
   virtual void SetIsScreenshare(bool is_screenshare) = 0;
-  virtual void ResetVideoSourceRestrictions() = 0;
 
   // May trigger one or more adaptations. It is meant to reduce resolution -
   // useful if a frame was dropped due to its size - however, the implementation

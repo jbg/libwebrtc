@@ -241,17 +241,6 @@ void ResourceAdaptationProcessor::MaybeUpdateEffectiveDegradationPreference() {
   stream_adapter_->SetDegradationPreference(effective_degradation_preference_);
 }
 
-// TODO(eshr): Move to stream adapter
-void ResourceAdaptationProcessor::ResetVideoSourceRestrictions() {
-  RTC_DCHECK_RUN_ON(resource_adaptation_queue_);
-  RTC_LOG(INFO) << "Resetting restrictions";
-  stream_adapter_->ClearRestrictions();
-  adaptation_limits_by_resources_.clear();
-  for (auto limitations_listener : resource_limitations_listeners_) {
-    limitations_listener->OnResourceLimitationChanged(nullptr, {});
-  }
-}
-
 void ResourceAdaptationProcessor::OnResourceUsageStateMeasured(
     rtc::scoped_refptr<Resource> resource,
     ResourceUsageState usage_state) {
@@ -518,8 +507,8 @@ void ResourceAdaptationProcessor::
     MaybeUpdateResourceLimitationsOnResourceRemoval(
         VideoStreamAdapter::RestrictionsWithCounters removed_limitations) {
   if (adaptation_limits_by_resources_.empty()) {
-    // Only the resource being removed was adapted so reset restrictions.
-    ResetVideoSourceRestrictions();
+    // Only the resource being removed was adapted so clear restrictions.
+    stream_adapter_->ClearRestrictions();
     return;
   }
 
@@ -560,6 +549,13 @@ void ResourceAdaptationProcessor::OnVideoSourceRestrictionsUpdated(
   if (reason) {
     UpdateResourceLimitations(reason,
                               {unfiltered_restrictions, adaptation_counters});
+  } else if (adaptation_counters.Total() == 0) {
+    // Adaptations are cleared.
+    adaptation_limits_by_resources_.clear();
+    previous_mitigation_results_.clear();
+    for (auto limitations_listener : resource_limitations_listeners_) {
+      limitations_listener->OnResourceLimitationChanged(nullptr, {});
+    }
   }
 }
 
