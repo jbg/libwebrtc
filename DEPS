@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '2c0b70ba550b9f616c050836191f40c1055acdb0',
+  'chromium_revision': 'cb1fb9fc0f9feb70391e5293e485cbf4386f0a42',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -39,7 +39,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@c73c4570809608635c7ad08b216eb4a6e44acb42',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@9c81e59e967b4a5b7c2c863dd865d4436ad19623',
+    'https://chromium.googlesource.com/chromium/src/third_party@29757ffa9df5f5f7e577d18f710ffff275403915',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -137,7 +137,7 @@ deps = {
   'src/third_party/colorama/src':
     'https://chromium.googlesource.com/external/colorama.git@799604a1041e9b3bc5d2789ecbd7e8db2e18e6b8',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@d9391fdb176da469e56f3a9d490cff8c89833262',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@d912aa91339c5563ee8a9cfbd362c6c252d58188',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@23b2a15c2595925c8ec0d3be9a51ec3257281bd1',
   'src/third_party/findbugs': {
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@032968cc33fa6526243e938bf4c4ccf7a8a337fd',
+    'https://chromium.googlesource.com/chromium/src/tools@02f4d232ac8b0bb4b363d7637a7c5350d781039a',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@4c095d04179dc725a300085ae21fe3b79900d072',
 
