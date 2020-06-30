@@ -34,6 +34,24 @@
       "revId": "34037b02a9e7c548e08e6879321a4db299ad0915",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9bc800a_91042c99",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-06-30T12:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd83c869_6114c341",
+      "revId": "34037b02a9e7c548e08e6879321a4db299ad0915",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
