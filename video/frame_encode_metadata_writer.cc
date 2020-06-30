@@ -213,25 +213,16 @@ FrameEncodeMetadataWriter::UpdateBitstream(
     return nullptr;
   }
 
-  rtc::Buffer modified_buffer;
-  std::unique_ptr<RTPFragmentationHeader> modified_fragmentation =
-      std::make_unique<RTPFragmentationHeader>();
-  modified_fragmentation->CopyFrom(*fragmentation);
-
   // Make sure that the data is not copied if owned by EncodedImage.
   const EncodedImage& buffer = *encoded_image;
-  SpsVuiRewriter::ParseOutgoingBitstreamAndRewriteSps(
-      buffer, fragmentation->fragmentationVectorSize,
-      fragmentation->fragmentationOffset, fragmentation->fragmentationLength,
-      encoded_image->ColorSpace(), &modified_buffer,
-      modified_fragmentation->fragmentationOffset,
-      modified_fragmentation->fragmentationLength);
+  auto modified = SpsVuiRewriter::ParseOutgoingBitstreamAndRewriteSps(
+      buffer, *fragmentation, encoded_image->ColorSpace());
 
   encoded_image->SetEncodedData(
       new rtc::RefCountedObject<EncodedImageBufferWrapper>(
-          std::move(modified_buffer)));
+          std::move(modified.buffer)));
 
-  return modified_fragmentation;
+  return std::move(modified.fragmentation);
 }
 
 void FrameEncodeMetadataWriter::Reset() {

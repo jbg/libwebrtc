@@ -15,9 +15,12 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <memory>
+
 #include "absl/types/optional.h"
 #include "api/video/color_space.h"
 #include "common_video/h264/sps_parser.h"
+#include "modules/include/module_common_types.h"
 #include "rtc_base/buffer.h"
 
 namespace webrtc {
@@ -55,15 +58,14 @@ class SpsVuiRewriter : private SpsParser {
   // The result is written to |output_buffer| and modified NAL unit offsets
   // and lenghts are written to |output_nalu_offsets| and |output_nalu_lenghts|
   // to account for any added data.
-  static void ParseOutgoingBitstreamAndRewriteSps(
+  struct RewrittenBitsream {
+    rtc::Buffer buffer;
+    std::unique_ptr<RTPFragmentationHeader> fragmentation;
+  };
+  static RewrittenBitsream ParseOutgoingBitstreamAndRewriteSps(
       rtc::ArrayView<const uint8_t> buffer,
-      size_t num_nalus,
-      const size_t* nalu_offsets,
-      const size_t* nalu_lengths,
-      const ColorSpace* color_space,
-      rtc::Buffer* output_buffer,
-      size_t* output_nalu_offsets,
-      size_t* output_nalu_lengths);
+      const RTPFragmentationHeader& nalus,
+      const ColorSpace* color_space);
 
  private:
   static ParseResult ParseAndRewriteSps(

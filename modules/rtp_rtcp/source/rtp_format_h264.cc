@@ -56,7 +56,7 @@ RtpPacketizerH264::RtpPacketizerH264(
   RTC_CHECK(packetization_mode == H264PacketizationMode::NonInterleaved ||
             packetization_mode == H264PacketizationMode::SingleNalUnit);
 
-  for (size_t i = 0; i < fragmentation.fragmentationVectorSize; ++i) {
+  for (size_t i = 0; i < fragmentation.Size(); ++i) {
     input_fragments_.push_back(
         payload.subview(fragmentation.Offset(i), fragmentation.Length(i)));
   }

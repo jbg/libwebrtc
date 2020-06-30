@@ -523,8 +523,8 @@ TEST(FrameEncodeMetadataWriterTest, RewritesH264BitstreamWithNonOptimalSps) {
 
   RTPFragmentationHeader fragmentation;
   fragmentation.VerifyAndAllocateFragmentationHeader(1);
-  fragmentation.fragmentationOffset[0] = 4;
-  fragmentation.fragmentationLength[0] = sizeof(original_sps) - 4;
+  fragmentation.SetOffset(0, 4);
+  fragmentation.SetLength(0, sizeof(original_sps) - 4);
 
   FakeEncodedImageCallback sink;
   FrameEncodeMetadataWriter encode_metadata_writer(&sink);
@@ -533,12 +533,11 @@ TEST(FrameEncodeMetadataWriterTest, RewritesH264BitstreamWithNonOptimalSps) {
                                              &fragmentation, &image);
 
   ASSERT_NE(modified_fragmentation, nullptr);
-  EXPECT_THAT(std::vector<uint8_t>(image.data(), image.data() + image.size()),
+  EXPECT_THAT(std::make_tuple(image.data(), image.size()),
               testing::ElementsAreArray(kRewrittenSps));
-  ASSERT_THAT(modified_fragmentation->fragmentationVectorSize, 1U);
-  EXPECT_EQ(modified_fragmentation->fragmentationOffset[0], 4U);
-  EXPECT_EQ(modified_fragmentation->fragmentationLength[0],
-            sizeof(kRewrittenSps) - 4);
+  ASSERT_EQ(modified_fragmentation->Size(), 1U);
+  EXPECT_EQ(modified_fragmentation->Offset(0), 4U);
+  EXPECT_EQ(modified_fragmentation->Length(0), sizeof(kRewrittenSps) - 4);
 }
 
 }  // namespace test
