@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "251e45a2_bd03dfb8",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-30T08:01:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9619380d_676ba810",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 8
+      },
+      "revId": "ce532bb7d0ec945f504dcab58b1e3bd2d7a21529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf808d5c_5b711b74",
         "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "1c203e60_42230ffc",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-30T08:01:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf808d5c_5b711b74",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 4
+      },
+      "revId": "ce532bb7d0ec945f504dcab58b1e3bd2d7a21529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7dbbb3e5_a4c05875",
         "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "ce532bb7d0ec945f504dcab58b1e3bd2d7a21529",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2ebb59e_7d22168f",
+        "filename": "test/pc/e2e/cross_media_metrics_reporter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-06-30T08:01:36Z",
+      "side": 1,
+      "message": "Since \"The caller is responsible for ensuring the TrackIdStreamLabelMap will be valid from Start() to StopAndReportResults().\" it should always be fine. But I agree that it is safer and more intuitive to just use std::string here.\nDone.",
+      "parentUuid": "7dbbb3e5_a4c05875",
+      "range": {
+        "startLine": 66,
+        "startChar": 11,
+        "endLine": 66,
+        "endChar": 28
+      },
+      "revId": "ce532bb7d0ec945f504dcab58b1e3bd2d7a21529",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
