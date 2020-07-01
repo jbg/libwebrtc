@@ -15,11 +15,17 @@
 #include <utility>
 
 #include "absl/types/optional.h"
+#include "absl/types/variant.h"
+#include "api/video/video_adaptation_counters.h"
 #include "api/video/video_adaptation_reason.h"
 #include "api/video_codecs/video_encoder.h"
+#include "call/adaptation/video_source_restrictions.h"
+#include "call/adaptation/video_stream_input_state.h"
+#include "rtc_base/checks.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/logging.h"
 #include "rtc_base/numerics/safe_conversions.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 
 namespace webrtc {
 
@@ -105,45 +111,17 @@ const char* Adaptation::StatusToString(Adaptation::Status status) {
   }
 }
 
-Adaptation::Step::Step(StepType type, int target) : type(type), target(target) {
-  RTC_DCHECK_NE(type, Adaptation::StepType::kForce);
-}
-
-Adaptation::Step::Step(VideoSourceRestrictions restrictions,
-                       VideoAdaptationCounters counters)
-    : type(Adaptation::StepType::kForce),
-      restrictions(restrictions),
-      counters(counters) {}
-
 Adaptation::Adaptation(int validation_id,
-                       Step step,
-                       VideoStreamInputState input_state)
-    : validation_id_(validation_id),
-      status_(Status::kValid),
-      step_(std::move(step)),
-      min_pixel_limit_reached_(false),
-      input_state_(input_state) {}
-
-Adaptation::Adaptation(int validation_id,
-                       Step step,
+                       VideoSourceRestrictions restrictions,
+                       VideoAdaptationCounters counters,
                        VideoStreamInputState input_state,
                        bool min_pixel_limit_reached)
     : validation_id_(validation_id),
       status_(Status::kValid),
-      step_(std::move(step)),
       min_pixel_limit_reached_(min_pixel_limit_reached),
-      input_state_(input_state) {}
-
-Adaptation::Adaptation(int validation_id,
-                       Status invalid_status,
-                       VideoStreamInputState input_state)
-    : validation_id_(validation_id),
-      status_(invalid_status),
-      step_(absl::nullopt),
-      min_pixel_limit_reached_(false),
-      input_state_(input_state) {
-  RTC_DCHECK_NE(status_, Status::kValid);
-}
+      restrictions_(std::move(restrictions)),
+      counters_(std::move(counters)),
+      input_state_(std::move(input_state)) {}
 
 Adaptation::Adaptation(int validation_id,
                        Status invalid_status,
@@ -151,9 +129,8 @@ Adaptation::Adaptation(int validation_id,
                        bool min_pixel_limit_reached)
     : validation_id_(validation_id),
       status_(invalid_status),
-      step_(absl::nullopt),
       min_pixel_limit_reached_(min_pixel_limit_reached),
-      input_state_(input_state) {
+      input_state_(std::move(input_state)) {
   RTC_DCHECK_NE(status_, Status::kValid);
 }
 
@@ -165,12 +142,16 @@ bool Adaptation::min_pixel_limit_reached() const {
   return min_pixel_limit_reached_;
 }
 
-const Adaptation::Step& Adaptation::step() const {
-  RTC_DCHECK_EQ(status_, Status::kValid);
-  return step_.value();
-}
 const VideoStreamInputState& Adaptation::input_state() const {
   return input_state_;
+}
+
+const VideoSourceRestrictions& Adaptation::restrictions() const {
+  return restrictions_;
+}
+
+const VideoAdaptationCounters& Adaptation::counters() const {
+  return counters_;
 }
 
 // VideoSourceRestrictor is responsible for keeping track of current
@@ -179,94 +160,130 @@ class VideoStreamAdapter::VideoSourceRestrictor {
  public:
   VideoSourceRestrictor() {}
 
-  VideoSourceRestrictions source_restrictions() const {
-    return source_restrictions_;
-  }
-  const VideoAdaptationCounters& adaptation_counters() const {
-    return adaptations_;
-  }
-  void ClearRestrictions() {
-    source_restrictions_ = VideoSourceRestrictions();
-    adaptations_ = VideoAdaptationCounters();
-  }
-
-  void ForceRestrictions(const VideoSourceRestrictions& restrictions,
-                         const VideoAdaptationCounters& counters) {
-    source_restrictions_ = restrictions;
-    adaptations_ = counters;
-  }
-
   void set_min_pixels_per_frame(int min_pixels_per_frame) {
     min_pixels_per_frame_ = min_pixels_per_frame;
   }
 
   int min_pixels_per_frame() const { return min_pixels_per_frame_; }
 
-  bool CanDecreaseResolutionTo(int target_pixels) const {
-    int max_pixels_per_frame = rtc::dchecked_cast<int>(
-        source_restrictions_.max_pixels_per_frame().value_or(
+  bool CanDecreaseResolutionTo(
+      int target_pixels,
+      const VideoSourceRestrictions& restrictions) const {
+    int max_pixels_per_frame =
+        rtc::dchecked_cast<int>(restrictions.max_pixels_per_frame().value_or(
             std::numeric_limits<int>::max()));
     return target_pixels < max_pixels_per_frame &&
            target_pixels >= min_pixels_per_frame_;
   }
 
-  bool CanIncreaseResolutionTo(int target_pixels) const {
+  bool CanIncreaseResolutionTo(
+      int target_pixels,
+      const VideoSourceRestrictions& restrictions) const {
     int max_pixels_wanted = GetIncreasedMaxPixelsWanted(target_pixels);
-    int max_pixels_per_frame = rtc::dchecked_cast<int>(
-        source_restrictions_.max_pixels_per_frame().value_or(
+    int max_pixels_per_frame =
+        rtc::dchecked_cast<int>(restrictions.max_pixels_per_frame().value_or(
             std::numeric_limits<int>::max()));
     return max_pixels_wanted > max_pixels_per_frame;
   }
 
-  bool CanDecreaseFrameRateTo(int max_frame_rate) const {
+  bool CanDecreaseFrameRateTo(
+      int max_frame_rate,
+      const VideoSourceRestrictions& restrictions) const {
     const int fps_wanted = std::max(kMinFrameRateFps, max_frame_rate);
-    return fps_wanted < rtc::dchecked_cast<int>(
-                            source_restrictions_.max_frame_rate().value_or(
-                                std::numeric_limits<int>::max()));
+    return fps_wanted <
+           rtc::dchecked_cast<int>(restrictions.max_frame_rate().value_or(
+               std::numeric_limits<int>::max()));
   }
 
-  bool CanIncreaseFrameRateTo(int max_frame_rate) const {
-    return max_frame_rate > rtc::dchecked_cast<int>(
-                                source_restrictions_.max_frame_rate().value_or(
-                                    std::numeric_limits<int>::max()));
+  bool CanIncreaseFrameRateTo(
+      int max_frame_rate,
+      const VideoSourceRestrictions& restrictions) const {
+    return max_frame_rate >
+           rtc::dchecked_cast<int>(restrictions.max_frame_rate().value_or(
+               std::numeric_limits<int>::max()));
   }
 
-  void ApplyAdaptationStep(const Adaptation::Step& step,
-                           DegradationPreference degradation_preference) {
-    switch (step.type) {
-      case Adaptation::StepType::kIncreaseResolution:
-        RTC_DCHECK(step.target);
-        IncreaseResolutionTo(step.target.value());
-        break;
-      case Adaptation::StepType::kDecreaseResolution:
-        RTC_DCHECK(step.target);
-        DecreaseResolutionTo(step.target.value());
-        break;
-      case Adaptation::StepType::kIncreaseFrameRate:
-        RTC_DCHECK(step.target);
-        IncreaseFrameRateTo(step.target.value());
-        // TODO(https://crbug.com/webrtc/11222): Don't adapt in two steps.
-        // GetAdaptationUp() should tell us the correct value, but BALANCED
-        // logic in DecrementFramerate() makes it hard to predict whether this
-        // will be the last step. Remove the dependency on
-        // adaptation_counters().
-        if (degradation_preference == DegradationPreference::BALANCED &&
-            adaptation_counters().fps_adaptations == 0 &&
-            step.target != std::numeric_limits<int>::max()) {
-          RTC_LOG(LS_INFO) << "Removing framerate down-scaling setting.";
-          IncreaseFrameRateTo(std::numeric_limits<int>::max());
-        }
-        break;
-      case Adaptation::StepType::kDecreaseFrameRate:
-        RTC_DCHECK(step.target);
-        DecreaseFrameRateTo(step.target.value());
-        break;
-      case Adaptation::StepType::kForce:
-        RTC_DCHECK(step.restrictions);
-        RTC_DCHECK(step.counters);
-        ForceRestrictions(step.restrictions.value(), step.counters.value());
-        break;
+  VideoStreamAdapter::RestrictionsWithCounters DecreaseResolutionTo(
+      int target_pixels,
+      const VideoSourceRestrictions& current_restrictions,
+      const VideoAdaptationCounters& current_adaptations) {
+    RTC_DCHECK(CanDecreaseResolutionTo(target_pixels, current_restrictions));
+    VideoSourceRestrictions restrictions = current_restrictions;
+    VideoAdaptationCounters adaptations = current_adaptations;
+    RTC_LOG(LS_INFO) << "Scaling down resolution, max pixels: "
+                     << target_pixels;
+    restrictions.set_max_pixels_per_frame(
+        target_pixels != std::numeric_limits<int>::max()
+            ? absl::optional<size_t>(target_pixels)
+            : absl::nullopt);
+    restrictions.set_target_pixels_per_frame(absl::nullopt);
+    ++adaptations.resolution_adaptations;
+    return {restrictions, adaptations};
+  }
+
+  VideoStreamAdapter::RestrictionsWithCounters IncreaseResolutionTo(
+      int target_pixels,
+      const VideoSourceRestrictions& current_restrictions,
+      const VideoAdaptationCounters& current_adaptations) {
+    RTC_DCHECK(CanIncreaseResolutionTo(target_pixels, current_restrictions));
+    int max_pixels_wanted = GetIncreasedMaxPixelsWanted(target_pixels);
+    VideoSourceRestrictions restrictions = current_restrictions;
+    VideoAdaptationCounters adaptations = current_adaptations;
+    RTC_LOG(LS_INFO) << "Scaling up resolution, max pixels: "
+                     << max_pixels_wanted;
+    restrictions.set_max_pixels_per_frame(
+        max_pixels_wanted != std::numeric_limits<int>::max()
+            ? absl::optional<size_t>(max_pixels_wanted)
+            : absl::nullopt);
+    restrictions.set_target_pixels_per_frame(
+        max_pixels_wanted != std::numeric_limits<int>::max()
+            ? absl::optional<size_t>(target_pixels)
+            : absl::nullopt);
+    --adaptations.resolution_adaptations;
+    RTC_DCHECK_GE(adaptations.resolution_adaptations, 0);
+    return {restrictions, adaptations};
+  }
+
+  VideoStreamAdapter::RestrictionsWithCounters DecreaseFrameRateTo(
+      int max_frame_rate,
+      const VideoSourceRestrictions& current_restrictions,
+      const VideoAdaptationCounters& current_adaptations) {
+    RTC_DCHECK(CanDecreaseFrameRateTo(max_frame_rate, current_restrictions));
+    max_frame_rate = std::max(kMinFrameRateFps, max_frame_rate);
+    RTC_LOG(LS_INFO) << "Scaling down framerate: " << max_frame_rate;
+    VideoSourceRestrictions restrictions = current_restrictions;
+    VideoAdaptationCounters adaptations = current_adaptations;
+    restrictions.set_max_frame_rate(max_frame_rate !=
+                                            std::numeric_limits<int>::max()
+                                        ? absl::optional<double>(max_frame_rate)
+                                        : absl::nullopt);
+    ++adaptations.fps_adaptations;
+    return {restrictions, adaptations};
+  }
+
+  VideoStreamAdapter::RestrictionsWithCounters IncreaseFrameRateTo(
+      int max_frame_rate,
+      bool is_balanced,
+      const VideoSourceRestrictions& current_restrictions,
+      const VideoAdaptationCounters& current_adaptations) {
+    RTC_DCHECK(CanIncreaseFrameRateTo(max_frame_rate, current_restrictions));
+    RTC_LOG(LS_INFO) << "Scaling up framerate: " << max_frame_rate;
+    VideoSourceRestrictions restrictions = current_restrictions;
+    VideoAdaptationCounters adaptations = current_adaptations;
+
+    restrictions.set_max_frame_rate(max_frame_rate !=
+                                            std::numeric_limits<int>::max()
+                                        ? absl::optional<double>(max_frame_rate)
+                                        : absl::nullopt);
+    --adaptations.fps_adaptations;
+    RTC_DCHECK_GE(adaptations.fps_adaptations, 0);
+    if (is_balanced && adaptations.fps_adaptations == 0 &&
+        max_frame_rate != std::numeric_limits<int>::max()) {
+      RTC_LOG(LS_INFO) << "Removing framerate down-scaling setting.";
+      restrictions.set_max_frame_rate(absl::nullopt);
     }
+
+    return {restrictions, adaptations};
   }
 
  private:
@@ -286,62 +303,8 @@ class VideoStreamAdapter::VideoSourceRestrictor {
     return (target_pixels * 12) / 5;
   }
 
-  void DecreaseResolutionTo(int target_pixels) {
-    RTC_DCHECK(CanDecreaseResolutionTo(target_pixels));
-    RTC_LOG(LS_INFO) << "Scaling down resolution, max pixels: "
-                     << target_pixels;
-    source_restrictions_.set_max_pixels_per_frame(
-        target_pixels != std::numeric_limits<int>::max()
-            ? absl::optional<size_t>(target_pixels)
-            : absl::nullopt);
-    source_restrictions_.set_target_pixels_per_frame(absl::nullopt);
-    ++adaptations_.resolution_adaptations;
-  }
-
-  void IncreaseResolutionTo(int target_pixels) {
-    RTC_DCHECK(CanIncreaseResolutionTo(target_pixels));
-    int max_pixels_wanted = GetIncreasedMaxPixelsWanted(target_pixels);
-    RTC_LOG(LS_INFO) << "Scaling up resolution, max pixels: "
-                     << max_pixels_wanted;
-    source_restrictions_.set_max_pixels_per_frame(
-        max_pixels_wanted != std::numeric_limits<int>::max()
-            ? absl::optional<size_t>(max_pixels_wanted)
-            : absl::nullopt);
-    source_restrictions_.set_target_pixels_per_frame(
-        max_pixels_wanted != std::numeric_limits<int>::max()
-            ? absl::optional<size_t>(target_pixels)
-            : absl::nullopt);
-    --adaptations_.resolution_adaptations;
-    RTC_DCHECK_GE(adaptations_.resolution_adaptations, 0);
-  }
-
-  void DecreaseFrameRateTo(int max_frame_rate) {
-    RTC_DCHECK(CanDecreaseFrameRateTo(max_frame_rate));
-    max_frame_rate = std::max(kMinFrameRateFps, max_frame_rate);
-    RTC_LOG(LS_INFO) << "Scaling down framerate: " << max_frame_rate;
-    source_restrictions_.set_max_frame_rate(
-        max_frame_rate != std::numeric_limits<int>::max()
-            ? absl::optional<double>(max_frame_rate)
-            : absl::nullopt);
-    ++adaptations_.fps_adaptations;
-  }
-
-  void IncreaseFrameRateTo(int max_frame_rate) {
-    RTC_DCHECK(CanIncreaseFrameRateTo(max_frame_rate));
-    RTC_LOG(LS_INFO) << "Scaling up framerate: " << max_frame_rate;
-    source_restrictions_.set_max_frame_rate(
-        max_frame_rate != std::numeric_limits<int>::max()
-            ? absl::optional<double>(max_frame_rate)
-            : absl::nullopt);
-    --adaptations_.fps_adaptations;
-    RTC_DCHECK_GE(adaptations_.fps_adaptations, 0);
-  }
-
   // Needed by CanDecreaseResolutionTo().
   int min_pixels_per_frame_ = 0;
-  // Current State.
-  VideoSourceRestrictions source_restrictions_;
-  VideoAdaptationCounters adaptations_;
 };
 
 VideoStreamAdapter::VideoStreamAdapter(
@@ -351,7 +314,7 @@ VideoStreamAdapter::VideoStreamAdapter(
       balanced_settings_(),
       adaptation_validation_id_(0),
       degradation_preference_(DegradationPreference::DISABLED),
-      last_adaptation_request_(absl::nullopt),
+      awaiting_frame_size_change_(absl::nullopt),
       last_video_source_restrictions_() {
   sequence_checker_.Detach();
 }
@@ -360,12 +323,12 @@ VideoStreamAdapter::~VideoStreamAdapter() {}
 
 VideoSourceRestrictions VideoStreamAdapter::source_restrictions() const {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  return source_restrictor_->source_restrictions();
+  return restrictions_;
 }
 
 const VideoAdaptationCounters& VideoStreamAdapter::adaptation_counters() const {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
-  return source_restrictor_->adaptation_counters();
+  return counters_;
 }
 
 void VideoStreamAdapter::ClearRestrictions() {
@@ -373,8 +336,9 @@ void VideoStreamAdapter::ClearRestrictions() {
   // Invalidate any previously returned Adaptation.
   RTC_LOG(INFO) << "Resetting restrictions";
   ++adaptation_validation_id_;
-  source_restrictor_->ClearRestrictions();
-  last_adaptation_request_.reset();
+  restrictions_ = VideoSourceRestrictions();
+  counters_ = VideoAdaptationCounters();
+  awaiting_frame_size_change_ = absl::nullopt;
   BroadcastVideoRestrictionsUpdate(nullptr);
 }
 
@@ -415,28 +379,65 @@ void VideoStreamAdapter::SetDegradationPreference(
   }
 }
 
+struct VideoStreamAdapter::RestrictionsOrStateVisitor {
+  Adaptation operator()(const RestrictionsWithCounters& r) const {
+    RTC_DCHECK_RUN_ON(&parent->sequence_checker_);
+    return Adaptation(parent->adaptation_validation_id_, r.first, r.second,
+                      input_state, min_pixel_limit_reached());
+  }
+  Adaptation operator()(const Adaptation::Status& status) const {
+    RTC_DCHECK_NE(status, Adaptation::Status::kValid);
+    RTC_DCHECK_RUN_ON(&parent->sequence_checker_);
+    return Adaptation(parent->adaptation_validation_id_, status, input_state,
+                      min_pixel_limit_reached());
+  }
+  bool min_pixel_limit_reached() const RTC_RUN_ON(&parent->sequence_checker_) {
+    return input_state.frame_size_pixels().has_value() &&
+           GetLowerFrameRateThan(input_state.frame_size_pixels().value()) <
+               parent->source_restrictor_->min_pixels_per_frame();
+  }
+
+  const VideoStreamAdapter* parent;
+  const VideoStreamInputState& input_state;
+};
+
+Adaptation VideoStreamAdapter::RestrictionsOrStateToAdaptation(
+    VideoStreamAdapter::RestrictionsOrState step_or_state,
+    const VideoStreamInputState& input_state) const {
+  RTC_DCHECK(!step_or_state.valueless_by_exception());
+  return absl::visit(RestrictionsOrStateVisitor{this, input_state},
+                     step_or_state);
+}
+
+Adaptation VideoStreamAdapter::GetAdaptationUp(
+    const VideoStreamInputState& input_state) const {
+  return RestrictionsOrStateToAdaptation(GetAdaptationUpStep(input_state),
+                                         input_state);
+}
+
 Adaptation VideoStreamAdapter::GetAdaptationUp() {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK_NE(degradation_preference_, DegradationPreference::DISABLED);
   VideoStreamInputState input_state = input_state_provider_->InputState();
   ++adaptation_validation_id_;
+  Adaptation adaptation = GetAdaptationUp(input_state);
+  return adaptation;
+}
+
+VideoStreamAdapter::RestrictionsOrState VideoStreamAdapter::GetAdaptationUpStep(
+    const VideoStreamInputState& input_state) const {
   if (!HasSufficientInputForAdaptation(input_state)) {
-    return Adaptation(adaptation_validation_id_,
-                      Adaptation::Status::kInsufficientInput, input_state);
+    return Adaptation::Status::kInsufficientInput;
   }
   source_restrictor_->set_min_pixels_per_frame(
       input_state.min_pixels_per_frame());
   // Don't adapt if we're awaiting a previous adaptation to have an effect.
-  bool last_request_increased_resolution =
-      last_adaptation_request_ && last_adaptation_request_->step_type_ ==
-                                      Adaptation::StepType::kIncreaseResolution;
-  if (last_request_increased_resolution &&
+  if (awaiting_frame_size_change_ &&
+      awaiting_frame_size_change_->pixels_increased &&
       degradation_preference_ == DegradationPreference::MAINTAIN_FRAMERATE &&
       input_state.frame_size_pixels().value() <=
-          last_adaptation_request_->input_pixel_count_) {
-    return Adaptation(adaptation_validation_id_,
-                      Adaptation::Status::kAwaitingPreviousAdaptation,
-                      input_state);
+          awaiting_frame_size_change_->frame_size_pixels) {
+    return Adaptation::Status::kAwaitingPreviousAdaptation;
   }
 
   // Maybe propose targets based on degradation preference.
@@ -446,12 +447,10 @@ Adaptation VideoStreamAdapter::GetAdaptationUp() {
       int target_fps =
           balanced_settings_.MaxFps(input_state.video_codec_type(),
                                     input_state.frame_size_pixels().value());
-      if (source_restrictor_->CanIncreaseFrameRateTo(target_fps)) {
-        return Adaptation(
-            adaptation_validation_id_,
-            Adaptation::Step(Adaptation::StepType::kIncreaseFrameRate,
-                             target_fps),
-            input_state);
+      if (source_restrictor_->CanIncreaseFrameRateTo(target_fps,
+                                                     restrictions_)) {
+        return source_restrictor_->IncreaseFrameRateTo(
+            target_fps, true, restrictions_, counters_);
       }
       // Scale up resolution.
       ABSL_FALLTHROUGH_INTENDED;
@@ -459,44 +458,36 @@ Adaptation VideoStreamAdapter::GetAdaptationUp() {
     case DegradationPreference::MAINTAIN_FRAMERATE: {
       // Attempt to increase pixel count.
       int target_pixels = input_state.frame_size_pixels().value();
-      if (source_restrictor_->adaptation_counters().resolution_adaptations ==
-          1) {
+      if (counters_.resolution_adaptations == 1) {
         RTC_LOG(LS_INFO) << "Removing resolution down-scaling setting.";
         target_pixels = std::numeric_limits<int>::max();
       }
       target_pixels = GetHigherResolutionThan(target_pixels);
-      if (!source_restrictor_->CanIncreaseResolutionTo(target_pixels)) {
-        return Adaptation(adaptation_validation_id_,
-                          Adaptation::Status::kLimitReached, input_state);
+      if (!source_restrictor_->CanIncreaseResolutionTo(target_pixels,
+                                                       restrictions_)) {
+        return Adaptation::Status::kLimitReached;
       }
-      return Adaptation(
-          adaptation_validation_id_,
-          Adaptation::Step(Adaptation::StepType::kIncreaseResolution,
-                           target_pixels),
-          input_state);
+      return source_restrictor_->IncreaseResolutionTo(target_pixels,
+                                                      restrictions_, counters_);
     }
     case DegradationPreference::MAINTAIN_RESOLUTION: {
       // Scale up framerate.
       int target_fps = input_state.frames_per_second();
-      if (source_restrictor_->adaptation_counters().fps_adaptations == 1) {
+      if (counters_.fps_adaptations == 1) {
         RTC_LOG(LS_INFO) << "Removing framerate down-scaling setting.";
         target_fps = std::numeric_limits<int>::max();
       }
       target_fps = GetHigherFrameRateThan(target_fps);
-      if (!source_restrictor_->CanIncreaseFrameRateTo(target_fps)) {
-        return Adaptation(adaptation_validation_id_,
-                          Adaptation::Status::kLimitReached, input_state);
+      if (!source_restrictor_->CanIncreaseFrameRateTo(target_fps,
+                                                      restrictions_)) {
+        return Adaptation::Status::kLimitReached;
       }
-      return Adaptation(
-          adaptation_validation_id_,
-          Adaptation::Step(Adaptation::StepType::kIncreaseFrameRate,
-                           target_fps),
-          input_state);
+      return source_restrictor_->IncreaseFrameRateTo(target_fps, false,
+                                                     restrictions_, counters_);
     }
     case DegradationPreference::DISABLED:
       RTC_NOTREACHED();
-      return Adaptation(adaptation_validation_id_,
-                        Adaptation::Status::kLimitReached, input_state);
+      return Adaptation::Status::kLimitReached;
   }
 }
 
@@ -505,26 +496,27 @@ Adaptation VideoStreamAdapter::GetAdaptationDown() {
   RTC_DCHECK_NE(degradation_preference_, DegradationPreference::DISABLED);
   VideoStreamInputState input_state = input_state_provider_->InputState();
   ++adaptation_validation_id_;
+  return RestrictionsOrStateToAdaptation(GetAdaptationDownStep(input_state),
+                                         input_state);
+}
+
+VideoStreamAdapter::RestrictionsOrState
+VideoStreamAdapter::GetAdaptationDownStep(
+    const VideoStreamInputState& input_state) const {
   if (!HasSufficientInputForAdaptation(input_state)) {
-    return Adaptation(adaptation_validation_id_,
-                      Adaptation::Status::kInsufficientInput, input_state);
+    return Adaptation::Status::kInsufficientInput;
   }
   source_restrictor_->set_min_pixels_per_frame(
       input_state.min_pixels_per_frame());
   // Don't adapt if we're awaiting a previous adaptation to have an effect or
   // if we switched degradation preference.
-  bool last_request_decreased_resolution =
-      last_adaptation_request_ && last_adaptation_request_->step_type_ ==
-                                      Adaptation::StepType::kDecreaseResolution;
-  if (last_request_decreased_resolution &&
+  if (awaiting_frame_size_change_ &&
+      !awaiting_frame_size_change_->pixels_increased &&
       degradation_preference_ == DegradationPreference::MAINTAIN_FRAMERATE &&
       input_state.frame_size_pixels().value() >=
-          last_adaptation_request_->input_pixel_count_) {
-    return Adaptation(adaptation_validation_id_,
-                      Adaptation::Status::kAwaitingPreviousAdaptation,
-                      input_state);
+          awaiting_frame_size_change_->frame_size_pixels) {
+    return Adaptation::Status::kAwaitingPreviousAdaptation;
   }
-
   // Maybe propose targets based on degradation preference.
   switch (degradation_preference_) {
     case DegradationPreference::BALANCED: {
@@ -532,12 +524,10 @@ Adaptation VideoStreamAdapter::GetAdaptationDown() {
       int target_fps =
           balanced_settings_.MinFps(input_state.video_codec_type(),
                                     input_state.frame_size_pixels().value());
-      if (source_restrictor_->CanDecreaseFrameRateTo(target_fps)) {
-        return Adaptation(
-            adaptation_validation_id_,
-            Adaptation::Step(Adaptation::StepType::kDecreaseFrameRate,
-                             target_fps),
-            input_state);
+      if (source_restrictor_->CanDecreaseFrameRateTo(target_fps,
+                                                     restrictions_)) {
+        return source_restrictor_->DecreaseFrameRateTo(
+            target_fps, restrictions_, counters_);
       }
       // Scale down resolution.
       ABSL_FALLTHROUGH_INTENDED;
@@ -546,52 +536,26 @@ Adaptation VideoStreamAdapter::GetAdaptationDown() {
       // Scale down resolution.
       int target_pixels =
           GetLowerResolutionThan(input_state.frame_size_pixels().value());
-      bool min_pixel_limit_reached =
-          target_pixels < source_restrictor_->min_pixels_per_frame();
-      if (!source_restrictor_->CanDecreaseResolutionTo(target_pixels)) {
-        return Adaptation(adaptation_validation_id_,
-                          Adaptation::Status::kLimitReached, input_state,
-                          min_pixel_limit_reached);
+      if (!source_restrictor_->CanDecreaseResolutionTo(target_pixels,
+                                                       restrictions_)) {
+        return Adaptation::Status::kLimitReached;
       }
-      return Adaptation(
-          adaptation_validation_id_,
-          Adaptation::Step(Adaptation::StepType::kDecreaseResolution,
-                           target_pixels),
-          input_state, min_pixel_limit_reached);
+      return source_restrictor_->DecreaseResolutionTo(target_pixels,
+                                                      restrictions_, counters_);
     }
     case DegradationPreference::MAINTAIN_RESOLUTION: {
       int target_fps = GetLowerFrameRateThan(input_state.frames_per_second());
-      if (!source_restrictor_->CanDecreaseFrameRateTo(target_fps)) {
-        return Adaptation(adaptation_validation_id_,
-                          Adaptation::Status::kLimitReached, input_state);
+      if (!source_restrictor_->CanDecreaseFrameRateTo(target_fps,
+                                                      restrictions_)) {
+        return Adaptation::Status::kLimitReached;
       }
-      return Adaptation(
-          adaptation_validation_id_,
-          Adaptation::Step(Adaptation::StepType::kDecreaseFrameRate,
-                           target_fps),
-          input_state);
+      return source_restrictor_->DecreaseFrameRateTo(target_fps, restrictions_,
+                                                     counters_);
     }
     case DegradationPreference::DISABLED:
       RTC_NOTREACHED();
-      return Adaptation(adaptation_validation_id_,
-                        Adaptation::Status::kLimitReached, input_state);
+      return Adaptation::Status::kLimitReached;
   }
-}
-
-VideoStreamAdapter::RestrictionsWithCounters
-VideoStreamAdapter::PeekNextRestrictions(const Adaptation& adaptation) const {
-  RTC_DCHECK_RUN_ON(&sequence_checker_);
-  RTC_DCHECK_EQ(adaptation.validation_id_, adaptation_validation_id_);
-  RTC_LOG(LS_INFO) << "PeekNextRestrictions called";
-  if (adaptation.status() != Adaptation::Status::kValid) {
-    return {source_restrictor_->source_restrictions(),
-            source_restrictor_->adaptation_counters()};
-  }
-  VideoSourceRestrictor restrictor_copy = *source_restrictor_;
-  restrictor_copy.ApplyAdaptationStep(adaptation.step(),
-                                      degradation_preference_);
-  return {restrictor_copy.source_restrictions(),
-          restrictor_copy.adaptation_counters()};
 }
 
 void VideoStreamAdapter::ApplyAdaptation(
@@ -599,17 +563,22 @@ void VideoStreamAdapter::ApplyAdaptation(
     rtc::scoped_refptr<Resource> resource) {
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   RTC_DCHECK_EQ(adaptation.validation_id_, adaptation_validation_id_);
-  RTC_LOG(LS_INFO) << "ApplyAdaptation called";
   if (adaptation.status() != Adaptation::Status::kValid)
     return;
   // Remember the input pixels and fps of this adaptation. Used to avoid
   // adapting again before this adaptation has had an effect.
-  last_adaptation_request_.emplace(AdaptationRequest{
-      adaptation.input_state_.frame_size_pixels().value(),
-      adaptation.input_state_.frames_per_second(), adaptation.step().type});
+  if (DidIncreaseResolution(restrictions_, adaptation.restrictions())) {
+    awaiting_frame_size_change_.emplace(
+        true, adaptation.input_state().frame_size_pixels().value());
+  } else if (DidDecreaseResolution(restrictions_, adaptation.restrictions())) {
+    awaiting_frame_size_change_.emplace(
+        false, adaptation.input_state().frame_size_pixels().value());
+  } else {
+    awaiting_frame_size_change_ = absl::nullopt;
+  }
   // Adapt!
-  source_restrictor_->ApplyAdaptationStep(adaptation.step(),
-                                          degradation_preference_);
+  restrictions_ = adaptation.restrictions();
+  counters_ = adaptation.counters();
   BroadcastVideoRestrictionsUpdate(resource);
 }
 
@@ -619,8 +588,8 @@ Adaptation VideoStreamAdapter::GetAdaptationTo(
   // Adapts up/down from the current levels so counters are equal.
   RTC_DCHECK_RUN_ON(&sequence_checker_);
   VideoStreamInputState input_state = input_state_provider_->InputState();
-  return Adaptation(adaptation_validation_id_,
-                    Adaptation::Step(restrictions, counters), input_state);
+  return Adaptation(adaptation_validation_id_, restrictions, counters,
+                    input_state, false);
 }
 
 void VideoStreamAdapter::BroadcastVideoRestrictionsUpdate(
@@ -633,10 +602,9 @@ void VideoStreamAdapter::BroadcastVideoRestrictionsUpdate(
   }
   for (auto* restrictions_listener : restrictions_listeners_) {
     restrictions_listener->OnVideoSourceRestrictionsUpdated(
-        filtered, source_restrictor_->adaptation_counters(), resource,
-        source_restrictions());
+        filtered, counters_, resource, source_restrictions());
   }
-  last_video_source_restrictions_ = source_restrictor_->source_restrictions();
+  last_video_source_restrictions_ = restrictions_;
   last_filtered_restrictions_ = filtered;
 }
 
@@ -647,5 +615,11 @@ bool VideoStreamAdapter::HasSufficientInputForAdaptation(
               DegradationPreference::MAINTAIN_RESOLUTION ||
           input_state.frames_per_second() >= kMinFrameRateFps);
 }
+
+VideoStreamAdapter::AwaitingFrameSizeChange::AwaitingFrameSizeChange(
+    bool pixels_increased,
+    int frame_size_pixels)
+    : pixels_increased(pixels_increased),
+      frame_size_pixels(frame_size_pixels) {}
 
 }  // namespace webrtc
