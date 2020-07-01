@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3a719f6_c33682e7",
+        "filename": "video/adaptation/video_stream_encoder_resource_manager.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-01T08:09:10Z",
+      "side": 1,
+      "message": "So now the only uses of adaptation processor in the VideoStreamEncoderResourceManager is for effective degradation preference and TriggerAdaptationDueToFrameDroppedDueToSize? :) I suspect this dependency can go away soon",
+      "revId": "5928df577a2faab59135310951670a00e5054a89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
