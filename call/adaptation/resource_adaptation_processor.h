@@ -22,6 +22,7 @@
 #include "api/rtp_parameters.h"
 #include "api/scoped_refptr.h"
 #include "api/task_queue/task_queue_base.h"
+#include "api/video/video_adaptation_counters.h"
 #include "api/video/video_frame.h"
 #include "api/video/video_stream_encoder_observer.h"
 #include "call/adaptation/adaptation_constraint.h"
@@ -141,6 +142,11 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
     std::string message;
   };
 
+  struct RestrictionsWithCounters {
+    VideoSourceRestrictions restrictions;
+    VideoAdaptationCounters adaptation_counters;
+  };
+
   // Performs the adaptation by getting the next target, applying it and
   // informing listeners of the new VideoSourceRestriction and adaptation
   // counters.
@@ -153,22 +159,21 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   // changes to ensure |effective_degradation_preference_| is up-to-date.
   void MaybeUpdateEffectiveDegradationPreference();
 
-  void UpdateResourceLimitations(
-      rtc::scoped_refptr<Resource> reason_resource,
-      const VideoStreamAdapter::RestrictionsWithCounters&
-          peek_next_restrictions) RTC_RUN_ON(resource_adaptation_queue_);
+  void UpdateResourceLimitations(rtc::scoped_refptr<Resource> reason_resource,
+                                 const VideoSourceRestrictions& restrictions,
+                                 const VideoAdaptationCounters& counters)
+      RTC_RUN_ON(resource_adaptation_queue_);
 
   // Searches |adaptation_limits_by_resources_| for each resource with the
   // highest total adaptation counts. Adaptation up may only occur if the
   // resource performing the adaptation is the only most limited resource. This
   // function returns the list of all most limited resources as well as the
   // corresponding adaptation of that resource.
-  std::pair<std::vector<rtc::scoped_refptr<Resource>>,
-            VideoStreamAdapter::RestrictionsWithCounters>
+  std::pair<std::vector<rtc::scoped_refptr<Resource>>, RestrictionsWithCounters>
   FindMostLimitedResources() const RTC_RUN_ON(resource_adaptation_queue_);
 
   void MaybeUpdateResourceLimitationsOnResourceRemoval(
-      VideoStreamAdapter::RestrictionsWithCounters removed_limitations)
+      RestrictionsWithCounters removed_limitations)
       RTC_RUN_ON(resource_adaptation_queue_);
 
   TaskQueueBase* resource_adaptation_queue_;
@@ -185,8 +190,7 @@ class ResourceAdaptationProcessor : public ResourceAdaptationProcessorInterface,
   std::vector<AdaptationListener*> adaptation_listeners_
       RTC_GUARDED_BY(resource_adaptation_queue_);
   // Purely used for statistics, does not ensure mapped resources stay alive.
-  std::map<rtc::scoped_refptr<Resource>,
-           VideoStreamAdapter::RestrictionsWithCounters>
+  std::map<rtc::scoped_refptr<Resource>, RestrictionsWithCounters>
       adaptation_limits_by_resources_
           RTC_GUARDED_BY(resource_adaptation_queue_);
   // Adaptation strategy settings.
