@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6aad2214_f5abc51b",
+        "filename": "modules/desktop_capture/win/window_capturer_win_gdi.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-01T16:07:51Z",
+      "side": 1,
+      "message": "use RTC_DCHECK?",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "867a76ab_3003b739",
+        "filename": "modules/desktop_capture/win/window_capturer_win_gdi.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-01T16:07:51Z",
+      "side": 1,
+      "message": "timeout",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65dcf672_9d9eb79a",
+        "filename": "modules/desktop_capture/win/window_capturer_win_gdi.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-01T16:07:51Z",
+      "side": 1,
+      "message": "nit: instead of this approach, we more often use the array itself + the arraysize template/macro for the size \u0027constant\u0027:\n\nWCHAR window_title[500]\n... arraysize(window_title) ...",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c9c0b20_a7a07696",
+        "filename": "modules/desktop_capture/win/window_capturer_win_gdi.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-01T16:07:51Z",
+      "side": 1,
+      "message": "nit: don\u0027t think you need the \"!\u003d FALSE\" since you\u0027re using \u0026\u0026",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d447180_f80ba426",
+        "filename": "modules/desktop_capture/win/window_capturer_win_gdi.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-01T16:07:51Z",
+      "side": 1,
+      "message": "RTC_DCHECK(!callback_);\n(same throughout)",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78c3012d_b0ff3b75",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-01T16:07:51Z",
+      "side": 1,
+      "message": "no compile error due to this?\n\nfor the TODO, can you file a bug for it and use TODO(bugs.webrtc.org/\u003cbugid\u003e): Foo",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
