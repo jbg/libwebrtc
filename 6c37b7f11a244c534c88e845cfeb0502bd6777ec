@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3d07103f_b173bc46",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T12:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f20d8e1_50a4021f",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef70d73_7a7d2fd7",
         "filename": "call/adaptation/video_stream_adapter.cc",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2020-06-29T13:38:10Z",
       "side": 1,
       "message": "If an Adaptation is now expressed as the actual target, and we do want to allow jumping to it, perhaps we should return the resulting target instead of expressing the result as a \"Step\"?\n\nI.e. we verify that the target is valid with CanIncreaseResolutionTo, but then we return the Adaptation of the resulting restrictions, and ApplyAdaptation is as simple as restrictor.restrictions_ \u003d adaptation_.restrictions;",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83e6beef_20fd61e6",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T12:11:22Z",
+      "side": 1,
+      "message": "This makes more sense than what is there!",
+      "parentUuid": "6ef70d73_7a7d2fd7",
       "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "e5d927f6_84c453b9",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T12:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1c4db08_70ecd976",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c17ab1c2_152e0047",
         "filename": "call/adaptation/video_stream_adapter.h",
         "patchSetId": 6
@@ -67,6 +121,24 @@
       "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc0eedcf_56d78f9f",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T12:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c17ab1c2_152e0047",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8b1c3438_aa7cfb2c",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T12:11:22Z",
+      "side": 1,
+      "message": "Will follow up with removing this.",
+      "parentUuid": "fde9f48c_8eb377e3",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65068d95_8cd35d08",
         "filename": "call/adaptation/video_stream_adapter.h",
         "patchSetId": 6
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "5bebbb3a_40b6ac76",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T12:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65068d95_8cd35d08",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "048aecf8_df6826c2",
         "filename": "call/adaptation/video_stream_adapter.h",
         "patchSetId": 6
@@ -115,6 +223,24 @@
       "writtenOn": "2020-06-29T13:38:10Z",
       "side": 1,
       "message": "Maybe tangental to this CL, so feel free to ignore this comment or address in a separate CL, but \"AdaptationRequest\" is such a confusing name for something representing where we were at when the previous adaptation happened.\n\nWondering if we could just store the last Adaptation instead (which includes a VideoStreamInputState), or the relevant VideoStreamInputState, instead of a separate struct. Though if the StepType has moved we would have to store that as well. But from StepType you can deduce ResolutionChange, so it may become superflous to introduce this new enum.\n\nAlso wondering if we want to continue supporting anti double-adapt logic like this if we allow jumping from any adaptation to any other one or if we can prevent double-adapt in the processor instead, but that is definitely not for this CL.",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58046399_270ed279",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T12:11:22Z",
+      "side": 1,
+      "message": "I agree with removing the Adaptation request. I can do that in this CL. Longer term, yeah, preventing double adaptation would be good.",
+      "parentUuid": "048aecf8_df6826c2",
       "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
