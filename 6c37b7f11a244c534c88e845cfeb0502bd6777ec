@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "f567a3da_904da45c",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T14:48:59Z",
+      "side": 1,
+      "message": "I have done this now. I can go even further if you think it is work it.\n\n- Remove the VideoSourceRestrictor. Move its functions into the VideoStreamAdapter as const functions that use the internal state of the VideoStreamAdapter to return the changed.\n- Replace the CanReduce/Reduce calls to VideoSourceRestrictor with just returning the State or Restrictions directly based on input state.\n- All helper functions moved to static functions.\n- The min_pixels_reached is fetched directly from the input state.",
+      "parentUuid": "83e6beef_20fd61e6",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1c4db08_70ecd976",
         "filename": "call/adaptation/video_stream_adapter.h",
         "patchSetId": 6
@@ -262,6 +280,24 @@
       "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bef25a94_78d29aac",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T14:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf5933fc_720a84fd",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
