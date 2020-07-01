@@ -244,6 +244,24 @@
       "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf5933fc_720a84fd",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-01T13:14:30Z",
+      "side": 1,
+      "message": "I can\u0027t actually remove the concept so easily, but will replace it with something more specific to this use of waiting for the input resolution to change.",
+      "parentUuid": "58046399_270ed279",
+      "revId": "6c37b7f11a244c534c88e845cfeb0502bd6777ec",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
