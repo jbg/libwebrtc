@@ -41,8 +41,16 @@ class RTC_EXPORT RTPFragmentationHeader {
   size_t Offset(size_t index) const { return fragmentationOffset[index]; }
   size_t Length(size_t index) const { return fragmentationLength[index]; }
 
-  // TODO(danilchap): Move all members to private section,
-  // simplify by replacing raw arrays with single std::vector<Fragment>
+  void SetOffset(size_t index, size_t value) {
+    fragmentationOffset[index] = value;
+  }
+  void SetLength(size_t index, size_t value) {
+    fragmentationLength[index] = value;
+  }
+
+ private:
+  // TODO(danilchap): Simplify by replacing raw arrays with single
+  // std::vector<Fragment>
   uint16_t fragmentationVectorSize;  // Number of fragmentations
   size_t* fragmentationOffset;       // Offset of pointer to data for each
                                      // fragmentation

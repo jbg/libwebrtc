@@ -24,6 +24,9 @@
 namespace webrtc {
 
 namespace {
+
+using ::testing::ElementsAreArray;
+
 enum SpsMode {
   kNoRewriteRequired_VuiOptimal,
   kRewriteRequired_NoVui,
@@ -397,35 +400,26 @@ TEST(SpsVuiRewriterOutgoingVuiTest, ParseOutgoingBitstreamOptimalVui) {
 
   rtc::Buffer buffer;
   const size_t kNumNalus = 2;
-  size_t nalu_offsets[kNumNalus];
-  size_t nalu_lengths[kNumNalus];
+  RTPFragmentationHeader nalus;
+  nalus.Resize(kNumNalus);
   buffer.AppendData(kStartSequence);
-  nalu_offsets[0] = buffer.size();
-  nalu_lengths[0] = optimal_sps.size();
+  nalus.SetOffset(0, buffer.size());
+  nalus.SetLength(0, optimal_sps.size());
   buffer.AppendData(optimal_sps);
   buffer.AppendData(kStartSequence);
-  nalu_offsets[1] = buffer.size();
-  nalu_lengths[1] = sizeof(kIdr1);
+  nalus.SetOffset(1, buffer.size());
+  nalus.SetLength(1, sizeof(kIdr1));
   buffer.AppendData(kIdr1);
 
-  rtc::Buffer modified_buffer;
-  size_t modified_nalu_offsets[kNumNalus];
-  size_t modified_nalu_lengths[kNumNalus];
+  auto modified = SpsVuiRewriter::ParseOutgoingBitstreamAndRewriteSps(
+      buffer, nalus, nullptr);
 
-  SpsVuiRewriter::ParseOutgoingBitstreamAndRewriteSps(
-      buffer, kNumNalus, nalu_offsets, nalu_lengths, nullptr, &modified_buffer,
-      modified_nalu_offsets, modified_nalu_lengths);
-
-  EXPECT_THAT(
-      std::vector<uint8_t>(modified_buffer.data(),
-                           modified_buffer.data() + modified_buffer.size()),
-      ::testing::ElementsAreArray(buffer.data(), buffer.size()));
-  EXPECT_THAT(std::vector<size_t>(modified_nalu_offsets,
-                                  modified_nalu_offsets + kNumNalus),
-              ::testing::ElementsAreArray(nalu_offsets, kNumNalus));
-  EXPECT_THAT(std::vector<size_t>(modified_nalu_lengths,
-                                  modified_nalu_lengths + kNumNalus),
-              ::testing::ElementsAreArray(nalu_lengths, kNumNalus));
+  EXPECT_THAT(modified.buffer, ElementsAreArray(buffer));
+  EXPECT_EQ(modified.fragmentation->Size(), kNumNalus);
+  EXPECT_EQ(modified.fragmentation->Offset(0), nalus.Offset(0));
+  EXPECT_EQ(modified.fragmentation->Length(0), nalus.Length(0));
+  EXPECT_EQ(modified.fragmentation->Offset(1), nalus.Offset(1));
+  EXPECT_EQ(modified.fragmentation->Length(1), nalus.Length(1));
 }
 
 TEST(SpsVuiRewriterOutgoingVuiTest, ParseOutgoingBitstreamNoVui) {
@@ -436,60 +430,46 @@ TEST(SpsVuiRewriterOutgoingVuiTest, ParseOutgoingBitstreamNoVui) {
 
   rtc::Buffer buffer;
   const size_t kNumNalus = 3;
-  size_t nalu_offsets[kNumNalus];
-  size_t nalu_lengths[kNumNalus];
+  RTPFragmentationHeader nalus;
+  nalus.Resize(3);
   buffer.AppendData(kStartSequence);
-  nalu_offsets[0] = buffer.size();
-  nalu_lengths[0] = sizeof(kIdr1);
+  nalus.SetOffset(0, buffer.size());
+  nalus.SetLength(0, sizeof(kIdr1));
   buffer.AppendData(kIdr1);
   buffer.AppendData(kStartSequence);
-  nalu_offsets[1] = buffer.size();
-  nalu_lengths[1] = sizeof(kSpsNaluType) + sps.size();
+  nalus.SetOffset(1, buffer.size());
+  nalus.SetLength(1, sizeof(kSpsNaluType) + sps.size());
   buffer.AppendData(kSpsNaluType);
   buffer.AppendData(sps);
   buffer.AppendData(kStartSequence);
-  nalu_offsets[2] = buffer.size();
-  nalu_lengths[2] = sizeof(kIdr2);
+  nalus.SetOffset(2, buffer.size());
+  nalus.SetLength(2, sizeof(kIdr2));
   buffer.AppendData(kIdr2);
 
   rtc::Buffer optimal_sps;
   GenerateFakeSps(kVuiNoFrameBuffering, &optimal_sps);
 
+  auto modified = SpsVuiRewriter::ParseOutgoingBitstreamAndRewriteSps(
+      buffer, nalus, /*color_space=*/nullptr);
+
   rtc::Buffer expected_buffer;
-  size_t expected_nalu_offsets[kNumNalus];
-  size_t expected_nalu_lengths[kNumNalus];
+  EXPECT_EQ(modified.fragmentation->Size(), kNumNalus);
+
   expected_buffer.AppendData(kStartSequence);
-  expected_nalu_offsets[0] = expected_buffer.size();
-  expected_nalu_lengths[0] = sizeof(kIdr1);
+  EXPECT_EQ(modified.fragmentation->Offset(0), expected_buffer.size());
+  EXPECT_EQ(modified.fragmentation->Length(0), sizeof(kIdr1));
   expected_buffer.AppendData(kIdr1);
   expected_buffer.AppendData(kStartSequence);
-  expected_nalu_offsets[1] = expected_buffer.size();
-  expected_nalu_lengths[1] = sizeof(kSpsNaluType) + optimal_sps.size();
+  EXPECT_EQ(modified.fragmentation->Offset(1), expected_buffer.size());
+  EXPECT_EQ(modified.fragmentation->Length(1),
+            sizeof(kSpsNaluType) + optimal_sps.size());
   expected_buffer.AppendData(kSpsNaluType);
   expected_buffer.AppendData(optimal_sps);
   expected_buffer.AppendData(kStartSequence);
-  expected_nalu_offsets[2] = expected_buffer.size();
-  expected_nalu_lengths[2] = sizeof(kIdr2);
+  EXPECT_EQ(modified.fragmentation->Offset(2), expected_buffer.size());
+  EXPECT_EQ(modified.fragmentation->Length(2), sizeof(kIdr2));
   expected_buffer.AppendData(kIdr2);
 
-  rtc::Buffer modified_buffer;
-  size_t modified_nalu_offsets[kNumNalus];
-  size_t modified_nalu_lengths[kNumNalus];
-
-  SpsVuiRewriter::ParseOutgoingBitstreamAndRewriteSps(
-      buffer, kNumNalus, nalu_offsets, nalu_lengths, nullptr, &modified_buffer,
-      modified_nalu_offsets, modified_nalu_lengths);
-
-  EXPECT_THAT(
-      std::vector<uint8_t>(modified_buffer.data(),
-                           modified_buffer.data() + modified_buffer.size()),
-      ::testing::ElementsAreArray(expected_buffer.data(),
-                                  expected_buffer.size()));
-  EXPECT_THAT(std::vector<size_t>(modified_nalu_offsets,
-                                  modified_nalu_offsets + kNumNalus),
-              ::testing::ElementsAreArray(expected_nalu_offsets, kNumNalus));
-  EXPECT_THAT(std::vector<size_t>(modified_nalu_lengths,
-                                  modified_nalu_lengths + kNumNalus),
-              ::testing::ElementsAreArray(expected_nalu_lengths, kNumNalus));
+  EXPECT_THAT(modified.buffer, ElementsAreArray(expected_buffer));
 }
 }  // namespace webrtc

@@ -143,12 +143,12 @@ bool H264CMSampleBufferToAnnexBBuffer(
   }
   RTC_DCHECK_EQ(bytes_remaining, (size_t)0);
 
-  std::unique_ptr<RTPFragmentationHeader> header(new RTPFragmentationHeader());
-  header->VerifyAndAllocateFragmentationHeader(frag_offsets.size());
+  auto header = std::make_unique<RTPFragmentationHeader>();
+  header->Resize(frag_offsets.size());
   RTC_DCHECK_EQ(frag_lengths.size(), frag_offsets.size());
   for (size_t i = 0; i < frag_offsets.size(); ++i) {
-    header->fragmentationOffset[i] = frag_offsets[i];
-    header->fragmentationLength[i] = frag_lengths[i];
+    header->SetOffset(i, frag_offsets[i]);
+    header->SetLength(i, frag_lengths[i]);
   }
   *out_header = std::move(header);
   CFRelease(contiguous_buffer);
