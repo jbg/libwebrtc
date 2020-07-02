@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b625fc8d_7e795ad2",
+        "filename": "call/adaptation/degradation_preference_listener.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:18:41Z",
+      "side": 1,
+      "message": "nit: Space between namespace and class",
+      "revId": "fe534a907ee289cff9445c49dbbe8f5f4b225d91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92dc7041_57c96b46",
+        "filename": "call/adaptation/degradation_preference_provider.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:18:41Z",
+      "side": 1,
+      "message": "Do we need to say anything about which task queue or thread the provider is expected to live on? How would this look in multi-stream?",
+      "revId": "fe534a907ee289cff9445c49dbbe8f5f4b225d91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e30b6ab_0686f268",
+        "filename": "call/adaptation/degradation_preference_provider.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:18:41Z",
+      "side": 1,
+      "message": "Should the provider have a setter for the listener? If sources from the same authority, the same class, it should be responsible for both the getter and informing the listener.\n\nOr if it is not one and the same, do we really need both a listener and a getter?",
+      "revId": "fe534a907ee289cff9445c49dbbe8f5f4b225d91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
