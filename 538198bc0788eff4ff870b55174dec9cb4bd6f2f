@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2bc157ed_7dc15a26",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T07:53:19Z",
+      "side": 1,
+      "message": "For sure, once https://webrtc-review.googlesource.com/c/src/+/178380 and this are merged!",
+      "parentUuid": "e7df6a73_3611b433",
+      "revId": "538198bc0788eff4ff870b55174dec9cb4bd6f2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c00892ff_d5374277",
         "filename": "call/adaptation/resource_adaptation_processor_interface.h",
         "patchSetId": 1
