@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e41f63e8_875e2a0e",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:39:10Z",
+      "side": 1,
+      "message": "nit: Rename |restrictions| to |current_restrictions| since it\u0027s not immediately obvious if restrictions refer to the current or the target restrictions.\nmicro-nit: for all of these I think \"current restrictions, target\" is a better argument order than \"target, current restrictions\"",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48757cd7_d46edf53",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:39:10Z",
+      "side": 1,
+      "message": "Very nice to see this part of the code get nuked:\n\n        IncreaseFrameRateTo(step.target.value());\n        // TODO(https://crbug.com/webrtc/11222): Don\u0027t adapt in two steps.\n        // GetAdaptationUp() should tell us the correct value, but BALANCED\n        // logic in DecrementFramerate() makes it hard to predict whether this\n        // will be the last step. Remove the dependency on\n        // adaptation_counters().\n        if (degradation_preference \u003d\u003d DegradationPreference::BALANCED \u0026\u0026\n            adaptation_counters().fps_adaptations \u003d\u003d 0 \u0026\u0026\n            step.target !\u003d std::numeric_limits\u003cint\u003e::max()) {\n          RTC_LOG(LS_INFO) \u003c\u003c \"Removing framerate down-scaling setting.\";\n          IncreaseFrameRateTo(std::numeric_limits\u003cint\u003e::max());\n        }\n\nAnd fixing https://crbug.com/webrtc/11719. I don\u0027t think I fully understood why it was needed - simply setting it like we do now is much more straight-forward. Nice.",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b82fa27d_9e9c5fec",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:39:10Z",
+      "side": 1,
+      "message": "nit: If my other comments were addressed, consider the convenience getter adaptation.RestrictionsWithCounters()",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5344e0ce_d0245cda",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:39:10Z",
+      "side": 1,
+      "message": "micro nit: prefer the same order as the getters: input state, restrictions, counters",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf6e921c_a0dc8317",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:39:10Z",
+      "side": 1,
+      "message": "RestrictionsWithCounters is already defined as a struct in ResourceAdaptationProcessor.\nPlace this somewhere where both resource_adaptation_processor.h and video_stream_adapter.h has access to it, and use the same struct in both places. (I much prefer a struct to an std::pair since it calls it members \"first\" and \"second\", not very descriptive.)",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ae9b81f_6268c9d2",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-02T09:39:10Z",
+      "side": 1,
+      "message": "Would it make sense to store the current state as either an Adaptation (applying becomes adaptation_ \u003d adaptation) or as a RestrictionsWithCounters?",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
