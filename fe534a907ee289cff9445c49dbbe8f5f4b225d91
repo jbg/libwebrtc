@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "683ff777_4bfbf0c7",
+        "filename": "call/adaptation/degradation_preference_listener.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T09:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b625fc8d_7e795ad2",
+      "revId": "fe534a907ee289cff9445c49dbbe8f5f4b225d91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92dc7041_57c96b46",
         "filename": "call/adaptation/degradation_preference_provider.h",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8fffd5c1_fa2ecacc",
+        "filename": "call/adaptation/degradation_preference_provider.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T09:26:29Z",
+      "side": 1,
+      "message": "Expected to be owned by the VideoStreamEncoder for now. In multi-stream it would look the same. Each VideoStreamAdapter would have an instance of the provider, and the ResourceAllocationProcessor would have many VideoStreamAdapters. ResourceAllocationProcessor can no longer reference degradation preferences directly. If there is some reason that it has too, that should be done via the VideoStreamAdapter.\n\nI don\u0027t think a comment is needed here.",
+      "parentUuid": "92dc7041_57c96b46",
+      "revId": "fe534a907ee289cff9445c49dbbe8f5f4b225d91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e30b6ab_0686f268",
         "filename": "call/adaptation/degradation_preference_provider.h",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "fe534a907ee289cff9445c49dbbe8f5f4b225d91",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5692f6bc_d0e3433d",
+        "filename": "call/adaptation/degradation_preference_provider.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T09:26:29Z",
+      "side": 1,
+      "message": "I left that up to the implementation. This way the listeners could be handled directly by the video stream encoder if the effective degradation preference is no longer needed.",
+      "parentUuid": "9e30b6ab_0686f268",
+      "revId": "fe534a907ee289cff9445c49dbbe8f5f4b225d91",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
