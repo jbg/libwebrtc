@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0b57fbe9_7a82c0cf",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T12:43:58Z",
+      "side": 1,
+      "message": "I will ignore this if I remove the VideoSourceRestrictor https://webrtc-review.googlesource.com/c/src/+/178200/6/call/adaptation/video_stream_adapter.cc#504",
+      "parentUuid": "e41f63e8_875e2a0e",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "48757cd7_d46edf53",
         "filename": "call/adaptation/video_stream_adapter.cc",
         "patchSetId": 8
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "339a2a4e_d0fdd81b",
+        "filename": "call/adaptation/video_stream_adapter.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T12:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b82fa27d_9e9c5fec",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5344e0ce_d0245cda",
         "filename": "call/adaptation/video_stream_adapter.h",
         "patchSetId": 8
@@ -67,6 +103,24 @@
       "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec0c0b04_a8dd4d31",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T12:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5344e0ce_d0245cda",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "36caa851_ba6a4c8c",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T12:43:58Z",
+      "side": 1,
+      "message": "Done. Moved the struct back in here.",
+      "parentUuid": "bf6e921c_a0dc8317",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ae9b81f_6268c9d2",
         "filename": "call/adaptation/video_stream_adapter.h",
         "patchSetId": 8
@@ -101,6 +173,24 @@
       "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8d4415d_d344622c",
+        "filename": "call/adaptation/video_stream_adapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-02T12:43:58Z",
+      "side": 1,
+      "message": "RestrictionsWithCounters can make some good sense, since they work nicely with the default case (empty restrictions and counters). Adaptation does not have a nice default value as it requires an input state etc, which are not possible to have by default.",
+      "parentUuid": "5ae9b81f_6268c9d2",
+      "revId": "bee23e746600438d6c8c0ee0341862a0c18db83a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
