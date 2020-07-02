@@ -962,7 +962,7 @@ rtc_library("rtc_base") {
   }
 
   if (is_ios) {
-    libs += [
+    frameworks = [
       "CFNetwork.framework",
       "Foundation.framework",
       "Security.framework",
