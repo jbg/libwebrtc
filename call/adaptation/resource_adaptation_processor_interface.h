@@ -61,13 +61,6 @@ class ResourceAdaptationProcessorInterface {
   virtual void SetResourceAdaptationQueue(
       TaskQueueBase* resource_adaptation_queue) = 0;
 
-  virtual DegradationPreference degradation_preference() const = 0;
-  // Reinterprets "balanced + screenshare" as "maintain-resolution".
-  // TODO(hbos): Don't do this. This is not what "balanced" means. If the
-  // application wants to maintain resolution it should set that degradation
-  // preference rather than depend on non-standard behaviors.
-  virtual DegradationPreference effective_degradation_preference() const = 0;
-
   // Starts or stops listening to resources, effectively enabling or disabling
   // processing.
   // TODO(https://crbug.com/webrtc/11172): Automatically register and unregister
@@ -90,9 +83,6 @@ class ResourceAdaptationProcessorInterface {
   virtual void RemoveAdaptationListener(
       AdaptationListener* adaptation_listener) = 0;
 
-  virtual void SetDegradationPreference(
-      DegradationPreference degradation_preference) = 0;
-  virtual void SetIsScreenshare(bool is_screenshare) = 0;
   virtual void ResetVideoSourceRestrictions() = 0;
 
   // May trigger one or more adaptations. It is meant to reduce resolution -
