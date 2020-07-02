@@ -11,6 +11,7 @@
 #ifndef VIDEO_ADAPTATION_QUALITY_SCALER_RESOURCE_H_
 #define VIDEO_ADAPTATION_QUALITY_SCALER_RESOURCE_H_
 
+#include <call/adaptation/degradation_preference_provider.h>
 #include <memory>
 #include <queue>
 #include <string>
@@ -34,13 +35,12 @@ class QualityScalerResource : public VideoStreamEncoderResource,
                               public AdaptationListener,
                               public QualityScalerQpUsageHandlerInterface {
  public:
-  static rtc::scoped_refptr<QualityScalerResource> Create();
+  static rtc::scoped_refptr<QualityScalerResource> Create(
+      DegradationPreferenceProvider* degradation_preference_provider);
 
-  QualityScalerResource();
+  explicit QualityScalerResource(
+      DegradationPreferenceProvider* degradation_preference_provider);
   ~QualityScalerResource() override;
-
-  void SetAdaptationProcessor(
-      ResourceAdaptationProcessorInterface* adaptation_processor);
 
   bool is_started() const;
 
@@ -91,10 +91,9 @@ class QualityScalerResource : public VideoStreamEncoderResource,
   size_t num_handled_callbacks_ RTC_GUARDED_BY(encoder_queue());
   std::queue<rtc::scoped_refptr<QualityScalerQpUsageHandlerCallbackInterface>>
       pending_callbacks_ RTC_GUARDED_BY(encoder_queue());
+  DegradationPreferenceProvider* const degradation_preference_provider_;
 
   // Members accessed on the adaptation queue.
-  ResourceAdaptationProcessorInterface* adaptation_processor_
-      RTC_GUARDED_BY(resource_adaptation_queue());
   bool clear_qp_samples_ RTC_GUARDED_BY(resource_adaptation_queue());
 };
 
