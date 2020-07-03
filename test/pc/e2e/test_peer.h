@@ -26,13 +26,79 @@ namespace webrtc {
 namespace webrtc_pc_e2e {
 
 // Describes a single participant in the call.
-class TestPeer final : public PeerConnectionWrapper {
+class TestPeer final {
  public:
-  using PeerConnectionWrapper::PeerConnectionWrapper;
-
   Params* params() const { return params_.get(); }
   PeerConfigurerImpl::VideoSource ReleaseVideoSource(size_t i) {
     return std::move(video_sources_[i]);
+  }
+
+  PeerConnectionFactoryInterface* pc_factory() {
+    return wrapper_->pc_factory();
+  }
+  PeerConnectionInterface* pc() { return wrapper_->pc(); }
+  MockPeerConnectionObserver* observer() { return wrapper_->observer(); }
+
+  // Calls CreateOffer with default options.
+  std::unique_ptr<SessionDescriptionInterface> CreateOffer() {
+    return wrapper_->CreateOffer();
+  }
+  // Calls CreateAnswer with the default options.
+  std::unique_ptr<SessionDescriptionInterface> CreateAnswer() {
+    return wrapper_->CreateAnswer();
+  }
+
+  bool SetLocalDescription(std::unique_ptr<SessionDescriptionInterface> desc,
+                           std::string* error_out = nullptr) {
+    return wrapper_->SetLocalDescription(std::move(desc), error_out);
+  }
+  // Calls the underlying PeerConnection's SetRemoteDescription method with the
+  // given session description and waits for the success/failure response.
+  // Returns true if the description was successfully set.
+  bool SetRemoteDescription(std::unique_ptr<SessionDescriptionInterface> desc,
+                            std::string* error_out = nullptr) {
+    return wrapper_->SetRemoteDescription(std::move(desc), error_out);
+  }
+
+  // The following are wrappers for the underlying PeerConnection's
+  // AddTransceiver method. They return the result of calling AddTransceiver
+  // with the given arguments, DCHECKing if there is an error.
+  rtc::scoped_refptr<RtpTransceiverInterface> AddTransceiver(
+      cricket::MediaType media_type,
+      const RtpTransceiverInit& init) {
+    return wrapper_->AddTransceiver(media_type, init);
+  }
+
+  // Wrapper for the underlying PeerConnection's AddTrack method. DCHECKs if
+  // AddTrack fails.
+  rtc::scoped_refptr<RtpSenderInterface> AddTrack(
+      rtc::scoped_refptr<MediaStreamTrackInterface> track,
+      const std::vector<std::string>& stream_ids = {}) {
+    return wrapper_->AddTrack(track, stream_ids);
+  }
+
+  // Calls the underlying PeerConnection's CreateDataChannel method with default
+  // initialization parameters.
+  rtc::scoped_refptr<DataChannelInterface> CreateDataChannel(
+      const std::string& label) {
+    return wrapper_->CreateDataChannel(label);
+  }
+
+  // Returns the signaling state of the underlying PeerConnection.
+  PeerConnectionInterface::SignalingState signaling_state() {
+    return wrapper_->signaling_state();
+  }
+
+  // Returns true if ICE has finished gathering candidates.
+  bool IsIceGatheringDone() { return wrapper_->IsIceGatheringDone(); }
+
+  // Returns true if ICE has established a connection.
+  bool IsIceConnected() { return wrapper_->IsIceConnected(); }
+
+  // Calls GetStats() on the underlying PeerConnection and returns the resulting
+  // report. If GetStats() fails, this method returns null and fails the test.
+  rtc::scoped_refptr<const RTCStatsReport> GetStats() {
+    return wrapper_->GetStats();
   }
 
   void DetachAecDump() {
@@ -52,9 +118,13 @@ class TestPeer final : public PeerConnectionWrapper {
            std::unique_ptr<MockPeerConnectionObserver> observer,
            std::unique_ptr<Params> params,
            std::vector<PeerConfigurerImpl::VideoSource> video_sources,
-           rtc::scoped_refptr<AudioProcessing> audio_processing);
+           rtc::scoped_refptr<AudioProcessing> audio_processing,
+           std::unique_ptr<rtc::Thread> worker_thread);
 
  private:
+  // Keeps ownership of worker thread.
+  std::unique_ptr<rtc::Thread> worker_thread_;
+  std::unique_ptr<PeerConnectionWrapper> wrapper_;
   std::unique_ptr<Params> params_;
   std::vector<PeerConfigurerImpl::VideoSource> video_sources_;
   rtc::scoped_refptr<AudioProcessing> audio_processing_;

@@ -121,6 +121,14 @@ bool operator==(const InternalStatsKey& a, const InternalStatsKey& b) {
 }
 
 DefaultVideoQualityAnalyzer::DefaultVideoQualityAnalyzer(
+    webrtc::Clock* clock,
+    DefaultVideoQualityAnalyzerOptions options)
+    : heavy_metrics_computation_enabled_(
+          options.heavy_metrics_computation_enabled),
+      max_frames_in_flight_per_stream_count_(
+          options.max_frames_in_flight_per_stream_count),
+      clock_(clock) {}
+DefaultVideoQualityAnalyzer::DefaultVideoQualityAnalyzer(
     bool heavy_metrics_computation_enabled,
     size_t max_frames_in_flight_per_stream_count)
     : heavy_metrics_computation_enabled_(heavy_metrics_computation_enabled),
