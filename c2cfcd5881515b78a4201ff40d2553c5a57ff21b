@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee7d0ab9_9c6a8c72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-03T15:48:55Z",
+      "side": 1,
+      "message": "Adatpation!",
+      "revId": "c2cfcd5881515b78a4201ff40d2553c5a57ff21b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7341626a_cf43648c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-03T15:48:55Z",
+      "side": 1,
+      "message": "Should this say \"now done\"?\nOr perhaps \"The VideoStreamAdapter\u0027s degradation preference is now configured to be the same as the effective degradation preference.\"",
+      "revId": "c2cfcd5881515b78a4201ff40d2553c5a57ff21b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19c93dcb_4258e522",
+        "filename": "call/adaptation/resource_adaptation_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-03T15:48:55Z",
+      "side": 1,
+      "message": "This comment used to be long to the method you deleted and needs to be deleted, now it looks like it belongs to UpdateResourceLimitations",
+      "revId": "c2cfcd5881515b78a4201ff40d2553c5a57ff21b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

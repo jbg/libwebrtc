@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43dcdd48_e9799d9d",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-03T15:48:55Z",
+      "side": 0,
+      "message": "Can we remove MitigationResult::kDisabled?",
+      "revId": "e3f0ef10ab974a4af3c12e955151792a1bc97fcb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
