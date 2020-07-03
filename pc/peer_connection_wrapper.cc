@@ -310,6 +310,8 @@ PeerConnectionWrapper::CreateDataChannel(const std::string& label) {
 
 PeerConnectionInterface::SignalingState
 PeerConnectionWrapper::signaling_state() {
+  std::printf("PeerConnectionWrapper call thread: %p\n",
+              rtc::Thread::Current());
   return pc()->signaling_state();
 }
 
