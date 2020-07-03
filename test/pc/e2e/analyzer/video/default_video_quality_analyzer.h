@@ -166,8 +166,19 @@ struct InternalStatsKey {
 bool operator<(const InternalStatsKey& a, const InternalStatsKey& b);
 bool operator==(const InternalStatsKey& a, const InternalStatsKey& b);
 
+struct DefaultVideoQualityAnalyzerOptions {
+  bool heavy_metrics_computation_enabled = true;
+  size_t max_frames_in_flight_per_stream_count =
+      kDefaultMaxFramesInFlightPerStream;
+};
+
 class DefaultVideoQualityAnalyzer : public VideoQualityAnalyzerInterface {
  public:
+  explicit DefaultVideoQualityAnalyzer(
+      webrtc::Clock* clock,
+      DefaultVideoQualityAnalyzerOptions options =
+          DefaultVideoQualityAnalyzerOptions());
+  // Keep for backward compatibility during migration. Will be removed soon.
   explicit DefaultVideoQualityAnalyzer(
       bool heavy_metrics_computation_enabled = true,
       size_t max_frames_in_flight_per_stream_count =
