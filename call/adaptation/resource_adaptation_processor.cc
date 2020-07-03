@@ -243,6 +243,10 @@ void ResourceAdaptationProcessor::OnResourceUsageStateMeasured(
     ResourceUsageState usage_state) {
   RTC_DCHECK_RUN_ON(resource_adaptation_queue_);
   RTC_DCHECK(resource);
+  if (usage_state == ResourceUsageState::kOveruse) {
+    RTC_LOG(LS_ERROR) << "Ignoring overuse signal from " << resource->Name();
+    return;
+  }
   // |resource| could have been removed after signalling.
   if (absl::c_find(resources_, resource) == resources_.end()) {
     RTC_LOG(INFO) << "Ignoring signal from removed resource \""
