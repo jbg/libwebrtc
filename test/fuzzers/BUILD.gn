@@ -434,14 +434,6 @@ webrtc_fuzzer_test("mdns_parser_fuzzer") {
   seed_corpus = "corpora/mdns-corpus"
 }
 
-webrtc_fuzzer_test("pseudotcp_parser_fuzzer") {
-  sources = [ "pseudotcp_parser_fuzzer.cc" ]
-  deps = [
-    "../../p2p:rtc_p2p",
-    "../../rtc_base",
-  ]
-}
-
 rtc_library("audio_processing_fuzzer_helper") {
   testonly = true
   sources = [
