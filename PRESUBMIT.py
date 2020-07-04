@@ -29,8 +29,6 @@ CPPLINT_EXCEPTIONS = [
   'modules/include/module_common_types.h',
   'modules/utility',
   'modules/video_capture',
-  'p2p/base/pseudo_tcp.cc',
-  'p2p/base/pseudo_tcp.h',
   'rtc_base',
   'sdk/android/src/jni',
   'sdk/objc',
