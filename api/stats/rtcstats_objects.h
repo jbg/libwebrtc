@@ -390,6 +390,10 @@ class RTC_EXPORT RTCRTPStreamStats : public RTCStats {
   // TODO(hbos): Not collected by |RTCStatsCollector|. crbug.com/657854
   // SLI count is only defined for |media_type == "video"|.
   RTCStatsMember<uint32_t> sli_count;
+  RTCStatsMember<uint32_t> frame_width;
+  RTCStatsMember<uint32_t> frame_height;
+  RTCStatsMember<uint32_t> frame_bit_depth;
+  RTCStatsMember<double> frames_per_second;
   RTCStatsMember<uint64_t> qp_sum;
 
  protected:
@@ -419,6 +423,18 @@ class RTC_EXPORT RTCInboundRTPStreamStats final : public RTCRTPStreamStats {
   // TODO(hbos): Collect and populate this value for both "audio" and "video",
   // currently not collected for "video". https://bugs.webrtc.org/7065
   RTCStatsMember<double> jitter;
+  RTCStatsMember<double> jitter_buffer_delay;
+  RTCStatsMember<uint64_t> jitter_buffer_emitted_count;
+  RTCStatsMember<uint64_t> total_samples_received;
+  RTCStatsMember<uint64_t> concealed_samples;
+  RTCStatsMember<uint64_t> silent_concealed_samples;
+  RTCStatsMember<uint64_t> concealement_events;
+  RTCStatsMember<uint64_t> inserted_samples_for_deceleration;
+  RTCStatsMember<uint64_t> removed_samples_for_acceleration;
+  RTCStatsMember<double> audio_level;
+  RTCStatsMember<double> total_audio_energy;
+  RTCStatsMember<double> total_samples_duration;
+  RTCStatsMember<int32_t> frames_received;
   // TODO(hbos): Collect and populate this value. https://bugs.webrtc.org/7065
   RTCStatsMember<double> round_trip_time;
   // TODO(hbos): Collect and populate this value. https://bugs.webrtc.org/7065
@@ -481,9 +497,6 @@ class RTC_EXPORT RTCOutboundRTPStreamStats final : public RTCRTPStreamStats {
   RTCStatsMember<uint32_t> key_frames_encoded;
   RTCStatsMember<double> total_encode_time;
   RTCStatsMember<uint64_t> total_encoded_bytes_target;
-  RTCStatsMember<uint32_t> frame_width;
-  RTCStatsMember<uint32_t> frame_height;
-  RTCStatsMember<double> frames_per_second;
   RTCStatsMember<uint32_t> frames_sent;
   RTCStatsMember<uint32_t> huge_frames_sent;
   // TODO(https://crbug.com/webrtc/10635): This is only implemented for video;

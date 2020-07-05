@@ -780,11 +780,18 @@ class RTCStatsReportVerifier {
       verifier->TestMemberIsNonNegative<uint32_t>(stream.fir_count);
       verifier->TestMemberIsNonNegative<uint32_t>(stream.pli_count);
       verifier->TestMemberIsNonNegative<uint32_t>(stream.nack_count);
+      verifier->TestMemberIsNonNegative<uint32_t>(stream.frame_width);
+      verifier->TestMemberIsNonNegative<uint32_t>(stream.frame_height);
+      verifier->TestMemberIsNonNegative<double>(stream.frames_per_second);
     } else {
       verifier->TestMemberIsUndefined(stream.fir_count);
       verifier->TestMemberIsUndefined(stream.pli_count);
       verifier->TestMemberIsUndefined(stream.nack_count);
+      verifier->TestMemberIsUndefined(stream.frame_width);
+      verifier->TestMemberIsUndefined(stream.frame_height);
+      verifier->TestMemberIsUndefined(stream.frames_per_second);
     }
+    verifier->TestMemberIsUndefined(stream.frame_bit_depth);
     verifier->TestMemberIsUndefined(stream.sli_count);
   }
 
@@ -821,10 +828,45 @@ class RTCStatsReportVerifier {
     if (inbound_stream.media_type.is_defined() &&
         *inbound_stream.media_type == "video") {
       verifier.TestMemberIsUndefined(inbound_stream.jitter);
+      verifier.TestMemberIsUndefined(inbound_stream.jitter_buffer_delay);
+      verifier.TestMemberIsUndefined(
+          inbound_stream.jitter_buffer_emitted_count);
+      verifier.TestMemberIsUndefined(inbound_stream.total_samples_received);
+      verifier.TestMemberIsUndefined(inbound_stream.concealed_samples);
+      verifier.TestMemberIsUndefined(inbound_stream.silent_concealed_samples);
+      verifier.TestMemberIsUndefined(inbound_stream.concealement_events);
+      verifier.TestMemberIsUndefined(
+          inbound_stream.inserted_samples_for_deceleration);
+      verifier.TestMemberIsUndefined(
+          inbound_stream.removed_samples_for_acceleration);
+      verifier.TestMemberIsUndefined(inbound_stream.audio_level);
+      verifier.TestMemberIsUndefined(inbound_stream.total_audio_energy);
+      verifier.TestMemberIsUndefined(inbound_stream.total_samples_duration);
+      verifier.TestMemberIsNonNegative<int32_t>(inbound_stream.frames_received);
     } else {
       verifier.TestMemberIsNonNegative<double>(inbound_stream.jitter);
+      verifier.TestMemberIsNonNegative<double>(
+          inbound_stream.jitter_buffer_delay);
+      verifier.TestMemberIsNonNegative<uint64_t>(
+          inbound_stream.jitter_buffer_emitted_count);
+      verifier.TestMemberIsPositive<uint64_t>(
+          inbound_stream.total_samples_received);
+      verifier.TestMemberIsNonNegative<uint64_t>(
+          inbound_stream.concealed_samples);
+      verifier.TestMemberIsNonNegative<uint64_t>(
+          inbound_stream.silent_concealed_samples);
+      verifier.TestMemberIsNonNegative<uint64_t>(
+          inbound_stream.concealement_events);
+      verifier.TestMemberIsNonNegative<uint64_t>(
+          inbound_stream.inserted_samples_for_deceleration);
+      verifier.TestMemberIsNonNegative<uint64_t>(
+          inbound_stream.removed_samples_for_acceleration);
+      verifier.TestMemberIsPositive<double>(inbound_stream.audio_level);
+      verifier.TestMemberIsPositive<double>(inbound_stream.total_audio_energy);
+      verifier.TestMemberIsPositive<double>(
+          inbound_stream.total_samples_duration);
+      verifier.TestMemberIsUndefined(inbound_stream.frames_received);
     }
-
     verifier.TestMemberIsUndefined(inbound_stream.round_trip_time);
     verifier.TestMemberIsUndefined(inbound_stream.packets_discarded);
     verifier.TestMemberIsUndefined(inbound_stream.packets_repaired);
