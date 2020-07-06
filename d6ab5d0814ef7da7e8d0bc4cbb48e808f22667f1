@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "bb23cad2_20e02282",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-07-06T20:47:05Z",
+      "side": 1,
+      "message": "\u003e Patch Set 4:\n\u003e \n\u003e Is there any way of preserving edit history for the implementation (perhaps by starting with \"git mv\" and then replacing the moved file with the new implementation)? It would help with review by highlighting what has actually changed, and it would aid future code-archaeology.\n\nThis is a great idea, I didn\u0027t know about git mv. Let me give this a shot and then I\u0027ll address Tommi\u0027s comments.",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6aad2214_f5abc51b",
         "filename": "modules/desktop_capture/win/window_capturer_win_gdi.cc",
         "patchSetId": 4
