@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7cc2e30_d84460c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-06T08:04:27Z",
+      "side": 1,
+      "message": "Add simulated time support",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "341217e8_d0305ae4",
+        "filename": "api/test/time_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-06T08:04:27Z",
+      "side": 1,
+      "message": "Should this be: \"Returns the thread instance if it is started\"?\n\nIn both cases I think we miss some information here, what happens if the thread is not started?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 41
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9450403_acbf9682",
+        "filename": "pc/peer_connection_wrapper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-06T08:04:27Z",
+      "side": 1,
+      "message": "Remove?",
+      "range": {
+        "startLine": 313,
+        "startChar": 2,
+        "endLine": 314,
+        "endChar": 38
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f38f82f2_ddb929de",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-06T08:04:27Z",
+      "side": 1,
+      "message": "Nice!\n\nMaybe since we are here, let\u0027s add a few lines of comments for this configuration.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 48
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ec52db_86b3416a",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-06T08:04:27Z",
+      "side": 1,
+      "message": "Since we now have DefaultVideoQualityAnalyzerOptions, should we use it here as well and avoid to unpack in the ctor?",
+      "range": {
+        "startLine": 497,
+        "startChar": 2,
+        "endLine": 498,
+        "endChar": 54
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e710239_e1060d92",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-06T08:04:27Z",
+      "side": 1,
+      "message": "Can this be nullptr?",
+      "range": {
+        "startLine": 196,
+        "startChar": 37,
+        "endLine": 196,
+        "endChar": 53
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8bb4a03_d411caf6",
+        "filename": "test/pc/e2e/test_peer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-06T08:04:27Z",
+      "side": 1,
+      "message": "Should this be \"The caller should DCHECK (maybe RTC_DCHECK is even more clear) to ensure AddTrack doesn\u0027t fail\" or is the wrapper AddTrack that DCHECKs?\n\nIf the latter, I would just remove the comment.",
+      "range": {
+        "startLine": 72,
+        "startChar": 66,
+        "endLine": 73,
+        "endChar": 20
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
