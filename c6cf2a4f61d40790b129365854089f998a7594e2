@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "665637c3_7adbe2b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-07-06T23:53:48Z",
+      "side": 1,
+      "message": "\u003e Patch Set 4:\n\u003e \n\u003e Is there any way of preserving edit history for the implementation (perhaps by starting with \"git mv\" and then replacing the moved file with the new implementation)? It would help with review by highlighting what has actually changed, and it would aid future code-archaeology.\n\nI tried this, and it worked locally, but it seems to not have worked on Gerrit 😞",
+      "revId": "c6cf2a4f61d40790b129365854089f998a7594e2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
