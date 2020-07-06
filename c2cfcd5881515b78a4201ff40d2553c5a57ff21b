@@ -86,6 +86,24 @@
       "revId": "c2cfcd5881515b78a4201ff40d2553c5a57ff21b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3867de5_efc896ca",
+        "filename": "call/adaptation/resource_adaptation_processor.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-07-06T08:52:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c93dcb_4258e522",
+      "revId": "c2cfcd5881515b78a4201ff40d2553c5a57ff21b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
