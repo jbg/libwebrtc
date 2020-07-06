@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ffdd953d_fb88a862",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-06T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7cc2e30_d84460c3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "341217e8_d0305ae4",
         "filename": "api/test/time_controller.h",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2020-07-06T08:04:27Z",
       "side": 1,
       "message": "Should this be: \"Returns the thread instance if it is started\"?\n\nIn both cases I think we miss some information here, what happens if the thread is not started?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 41
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0efc04b8_55e9c3a3",
+        "filename": "api/test/time_controller.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-06T08:57:50Z",
+      "side": 1,
+      "message": "Actually it will always return a thread. But it will invoke start method before returning, but won\u0027t check results...\n\nAlso updated comment a bit about not-null",
+      "parentUuid": "341217e8_d0305ae4",
       "range": {
         "startLine": 49,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d86c5515_46273bdb",
+        "filename": "pc/peer_connection_wrapper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-06T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9450403_acbf9682",
+      "range": {
+        "startLine": 313,
+        "startChar": 2,
+        "endLine": 314,
+        "endChar": 38
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f38f82f2_ddb929de",
         "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03c0ad6b_e0aab748",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-06T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f38f82f2_ddb929de",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 48
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "3602b136_46279251",
+        "filename": "test/pc/e2e/analyzer/video/default_video_quality_analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-06T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5ec52db_86b3416a",
+      "range": {
+        "startLine": 497,
+        "startChar": 2,
+        "endLine": 498,
+        "endChar": 54
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e710239_e1060d92",
         "filename": "test/pc/e2e/peer_connection_quality_test.cc",
         "patchSetId": 4
@@ -128,6 +248,30 @@
       "writtenOn": "2020-07-06T08:04:27Z",
       "side": 1,
       "message": "Can this be nullptr?",
+      "range": {
+        "startLine": 196,
+        "startChar": 37,
+        "endLine": 196,
+        "endChar": 53
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "152d83d9_040cbe4c",
+        "filename": "test/pc/e2e/peer_connection_quality_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-06T08:57:50Z",
+      "side": 1,
+      "message": "No",
+      "parentUuid": "4e710239_e1060d92",
       "range": {
         "startLine": 196,
         "startChar": 37,
@@ -160,6 +304,30 @@
       "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc9635c1_01da0386",
+        "filename": "test/pc/e2e/test_peer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-06T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8bb4a03_d411caf6",
+      "range": {
+        "startLine": 72,
+        "startChar": 66,
+        "endLine": 73,
+        "endChar": 20
+      },
+      "revId": "1d2f7c33a9fb3381d5fe967821dedde7f00a32b4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
