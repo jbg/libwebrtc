@@ -16,6 +16,23 @@
       "revId": "bea19eae1e189ca57261f98bd7e99f370e0a841c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29a8a1b2_20856a90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-07-06T09:57:34Z",
+      "side": 1,
+      "message": "and ios. probably slow simulators, i\u0027ll figure *something* out",
+      "revId": "bea19eae1e189ca57261f98bd7e99f370e0a841c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
