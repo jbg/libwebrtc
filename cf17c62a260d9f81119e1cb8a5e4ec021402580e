@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e027bd02_34d16bcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-07T19:32:54Z",
+      "side": 1,
+      "message": "ok thanks - so would you prefer to land this as is and then follow up with your improvements? (works for me)",
+      "revId": "cf17c62a260d9f81119e1cb8a5e4ec021402580e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
