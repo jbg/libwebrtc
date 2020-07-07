@@ -39,6 +39,30 @@
       "revId": "069130354ed5aafc96259b16476b6c609878dc12",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d100ed5c_65ab4407",
+        "filename": "modules/video_coding/jitter_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-07-07T09:49:50Z",
+      "side": 1,
+      "message": "What about taking a MutexLock at the beginning, and then just an Unlock/Lock call around the troublesome portion? I think clang warns if paths are misbehaving.",
+      "parentUuid": "79542a8c_95c9abf4",
+      "range": {
+        "startLine": 217,
+        "startChar": 2,
+        "endLine": 217,
+        "endChar": 16
+      },
+      "revId": "069130354ed5aafc96259b16476b6c609878dc12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
