@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bfc1fdd_65389d01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-07-07T09:25:02Z",
+      "side": 1,
+      "message": "lgtm\nwith an optional cleanup if you\u0027d like",
+      "revId": "069130354ed5aafc96259b16476b6c609878dc12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79542a8c_95c9abf4",
+        "filename": "modules/video_coding/jitter_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-07-07T09:25:02Z",
+      "side": 1,
+      "message": "I know this isn\u0027t new code but I really dislike the manual lock/release calls.\nAfaict this is only done in order to release the lock while caliing frame_event_-\u003eWait();\nCould we do something like have a\nabsl::optional\u003cMutexLock\u003e lock;\nemplace it at the beginning and the reset/emplace again around the bothersome portion?",
+      "range": {
+        "startLine": 217,
+        "startChar": 2,
+        "endLine": 217,
+        "endChar": 16
+      },
+      "revId": "069130354ed5aafc96259b16476b6c609878dc12",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
