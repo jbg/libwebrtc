@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "285894fa_400ce01d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-07T09:48:18Z",
+      "side": 1,
+      "message": "This is a backmerge, bots don\u0027t seem to work properly, I\u0027ll click the submit button instead of CQ.",
+      "revId": "4b6bd5a34eb9138d6577456677514886dcfdd3c6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
