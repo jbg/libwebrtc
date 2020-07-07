@@ -21,6 +21,7 @@
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/event.h"
 #include "rtc_base/ref_counted_object.h"
+#include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 #include "rtc_base/thread.h"
 
@@ -192,7 +193,7 @@ class GuardedAsyncInvoker : public sigslot::has_slots<> {
   bool AsyncInvoke(const Location& posted_from,
                    FunctorT&& functor,
                    uint32_t id = 0) {
-    CritScope cs(&crit_);
+    webrtc::MutexLock lock(&mutex_);
     if (thread_ == nullptr)
       return false;
     invoker_.AsyncInvoke<ReturnT, FunctorT>(
@@ -207,7 +208,7 @@ class GuardedAsyncInvoker : public sigslot::has_slots<> {
                           FunctorT&& functor,
                           uint32_t delay_ms,
                           uint32_t id = 0) {
-    CritScope cs(&crit_);
+    webrtc::MutexLock lock(&mutex_);
     if (thread_ == nullptr)
       return false;
     invoker_.AsyncInvokeDelayed<ReturnT, FunctorT>(
@@ -224,7 +225,7 @@ class GuardedAsyncInvoker : public sigslot::has_slots<> {
                    void (HostT::*callback)(ReturnT),
                    HostT* callback_host,
                    uint32_t id = 0) {
-    CritScope cs(&crit_);
+    webrtc::MutexLock lock(&mutex_);
     if (thread_ == nullptr)
       return false;
     invoker_.AsyncInvoke<ReturnT, FunctorT, HostT>(
@@ -242,7 +243,7 @@ class GuardedAsyncInvoker : public sigslot::has_slots<> {
                    void (HostT::*callback)(),
                    HostT* callback_host,
                    uint32_t id = 0) {
-    CritScope cs(&crit_);
+    webrtc::MutexLock lock(&mutex_);
     if (thread_ == nullptr)
       return false;
     invoker_.AsyncInvoke<ReturnT, FunctorT, HostT>(
@@ -255,9 +256,9 @@ class GuardedAsyncInvoker : public sigslot::has_slots<> {
   // Callback when |thread_| is destroyed.
   void ThreadDestroyed();
 
-  CriticalSection crit_;
-  Thread* thread_ RTC_GUARDED_BY(crit_);
-  AsyncInvoker invoker_ RTC_GUARDED_BY(crit_);
+  webrtc::Mutex mutex_;
+  Thread* thread_ RTC_GUARDED_BY(mutex_);
+  AsyncInvoker invoker_ RTC_GUARDED_BY(mutex_);
 };
 
 }  // namespace rtc
