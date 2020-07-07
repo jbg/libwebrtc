@@ -54,7 +54,7 @@ uint32_t RtpDependencyDescriptorReader::ReadBits(size_t bit_count) {
 
 uint32_t RtpDependencyDescriptorReader::ReadNonSymmetric(size_t num_values) {
   uint32_t value = 0;
-  if (!buffer_.ReadNonSymmetric(&value, num_values))
+  if (num_values > 1 && !buffer_.ReadNonSymmetric(&value, num_values))
     parsing_failed_ = true;
   return value;
 }
@@ -146,7 +146,7 @@ void RtpDependencyDescriptorReader::ReadTemplateChains() {
   if (structure->num_chains == 0)
     return;
   for (int i = 0; i < structure->num_decode_targets; ++i) {
-    uint32_t protected_by_chain = ReadNonSymmetric(structure->num_chains + 1);
+    uint32_t protected_by_chain = ReadNonSymmetric(structure->num_chains);
     structure->decode_target_protected_by_chain.push_back(protected_by_chain);
   }
   for (FrameDependencyTemplate& frame_template : structure->templates) {
