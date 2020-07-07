@@ -109,7 +109,7 @@ GuardedAsyncInvoker::GuardedAsyncInvoker() : thread_(Thread::Current()) {
 GuardedAsyncInvoker::~GuardedAsyncInvoker() {}
 
 bool GuardedAsyncInvoker::Flush(uint32_t id) {
-  CritScope cs(&crit_);
+  webrtc::MutexLock lock(&mutex_);
   if (thread_ == nullptr)
     return false;
   invoker_.Flush(thread_, id);
@@ -117,7 +117,7 @@ bool GuardedAsyncInvoker::Flush(uint32_t id) {
 }
 
 void GuardedAsyncInvoker::ThreadDestroyed() {
-  CritScope cs(&crit_);
+  webrtc::MutexLock lock(&mutex_);
   // We should never get more than one notification about the thread dying.
   RTC_DCHECK(thread_ != nullptr);
   thread_ = nullptr;
