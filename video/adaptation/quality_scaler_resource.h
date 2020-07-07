@@ -87,6 +87,11 @@ class QualityScalerResource : public VideoStreamEncoderResource,
   // Members accessed on the encoder queue.
   std::unique_ptr<QualityScaler> quality_scaler_
       RTC_GUARDED_BY(encoder_queue());
+  // The timestamp of the last time we reported underuse because this resource
+  // was disabled in order to prevent getting stuck with QP adaptations. Used to
+  // make sure underuse reporting is not too spammy.
+  absl::optional<int64_t> last_underuse_due_to_disabled_timestamp_ms_
+      RTC_GUARDED_BY(encoder_queue());
   // Every OnReportQpUsageHigh/Low() operation has a callback that MUST be
   // invoked on the encoder_queue(). Because usage measurements are reported on
   // the encoder_queue() but handled by the processor on the the

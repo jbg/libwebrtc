@@ -564,8 +564,10 @@ void VideoStreamEncoderResourceManager::ConfigureQualityScaler(
     const VideoEncoder::EncoderInfo& encoder_info) {
   RTC_DCHECK_RUN_ON(encoder_queue_);
   const auto scaling_settings = encoder_info.scaling_settings;
+  auto degradation_preference =
+      degradation_preference_provider_->degradation_preference();
   const bool quality_scaling_allowed =
-      IsResolutionScalingEnabled(degradation_preference_) &&
+      IsResolutionScalingEnabled(degradation_preference) &&
       scaling_settings.thresholds;
 
   // TODO(https://crbug.com/webrtc/11222): Should this move to
@@ -589,7 +591,7 @@ void VideoStreamEncoderResourceManager::ConfigureQualityScaler(
   }
 
   // Set the qp-thresholds to the balanced settings if balanced mode.
-  if (degradation_preference_ == DegradationPreference::BALANCED &&
+  if (degradation_preference == DegradationPreference::BALANCED &&
       quality_scaler_resource_->is_started()) {
     absl::optional<VideoEncoder::QpThresholds> thresholds =
         balanced_settings_.GetQpThresholds(

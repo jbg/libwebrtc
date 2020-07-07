@@ -88,7 +88,6 @@ class VideoStreamEncoderResourceManager
   // setting of the Processor, it does not belong to the Manager - can we get
   // rid of this?
   void SetDegradationPreferences(DegradationPreference degradation_preference);
-  DegradationPreference degradation_preference() const;
 
   // Starts the encode usage resource. The quality scaler resource is
   // automatically started on being configured.
@@ -235,6 +234,7 @@ class VideoStreamEncoderResourceManager
     DegradationPreferenceProvider* degradation_preference_provider_;
   };
 
+  // Thread safe.
   DegradationPreferenceProvider* const degradation_preference_provider_;
   const rtc::scoped_refptr<BitrateConstraint> bitrate_constraint_;
   const rtc::scoped_refptr<BalancedConstraint> balanced_constraint_;
@@ -252,7 +252,6 @@ class VideoStreamEncoderResourceManager
   // Thread-safe.
   VideoStreamEncoderObserver* const encoder_stats_observer_;
 
-  DegradationPreference degradation_preference_ RTC_GUARDED_BY(encoder_queue_);
   VideoSourceRestrictions video_source_restrictions_
       RTC_GUARDED_BY(encoder_queue_);
 

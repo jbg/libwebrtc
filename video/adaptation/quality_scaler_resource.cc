@@ -19,6 +19,12 @@
 
 namespace webrtc {
 
+namespace {
+
+const int64_t kUnderuseDueToDisabledCooldownMs = 1000;
+
+}  // namespace
+
 // static
 rtc::scoped_refptr<QualityScalerResource> QualityScalerResource::Create(
     DegradationPreferenceProvider* degradation_preference_provider,
@@ -32,6 +38,7 @@ QualityScalerResource::QualityScalerResource(
     QualityScalerResource::Listener* listener)
     : VideoStreamEncoderResource("QualityScalerResource"),
       quality_scaler_(nullptr),
+      last_underuse_due_to_disabled_timestamp_ms_(absl::nullopt),
       num_handled_callbacks_(0),
       pending_callbacks_(),
       degradation_preference_provider_(degradation_preference_provider),
@@ -87,6 +94,26 @@ void QualityScalerResource::OnEncodeCompleted(const EncodedImage& encoded_image,
   RTC_DCHECK_RUN_ON(encoder_queue());
   if (quality_scaler_ && encoded_image.qp_ >= 0) {
     quality_scaler_->ReportQp(encoded_image.qp_, time_sent_in_us);
+  } else if (!quality_scaler_) {
+    // Reference counting guarantees that this object is still alive by the time
+    // the task is executed.
+    // TODO(webrtc:11553): this is a workaround to ensure that all quality
+    // scaler imposed limitations are removed once qualty scaler is disabled
+    // mid call.
+    // Instead it should be done at a higher layer in the same way for all
+    // resources.
+    int64_t timestamp_ms = rtc::TimeMillis();
+    if (!last_underuse_due_to_disabled_timestamp_ms_.has_value() ||
+        timestamp_ms - last_underuse_due_to_disabled_timestamp_ms_.value() >=
+            kUnderuseDueToDisabledCooldownMs) {
+      last_underuse_due_to_disabled_timestamp_ms_ = timestamp_ms;
+      MaybePostTaskToResourceAdaptationQueue(
+          [this_ref = rtc::scoped_refptr<QualityScalerResource>(this)] {
+            RTC_DCHECK_RUN_ON(this_ref->resource_adaptation_queue());
+            this_ref->OnResourceUsageStateMeasured(
+                ResourceUsageState::kUnderuse);
+          });
+    }
   }
 }
 
