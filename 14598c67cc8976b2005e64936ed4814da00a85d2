@@ -16,6 +16,40 @@
       "revId": "14598c67cc8976b2005e64936ed4814da00a85d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fd73ace_1a1d9468",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-07T17:57:57Z",
+      "side": 1,
+      "message": "Nice use of the ScopedDisallowBlockingCalls construct!\n\nNit only. LGTM.\n\n",
+      "revId": "14598c67cc8976b2005e64936ed4814da00a85d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4407dfa_14eba380",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1877,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-07T17:57:57Z",
+      "side": 1,
+      "message": "Nit: involve -\u003e involves.\n\nThe sentence is convoluted. What about:\n\nWe jump to the worker thread and call GetStats on each media channel. At the same time we construct the TrackMediaInfoMap, which also needs info from the worker thread.",
+      "revId": "14598c67cc8976b2005e64936ed4814da00a85d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
