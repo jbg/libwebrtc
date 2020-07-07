@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6c9073fc_66e777eb",
+        "filename": "modules/desktop_capture/win/window_capturer_win_gdi.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-07-07T00:18:03Z",
+      "side": 1,
+      "message": "Despite how Gerrit makes it look, this is all existing code that was just moved from window_capturer_win.cc which is why a lot of it is out of style. I intentionally did not update this file to avoid having a larger than necessary patch set, but since Gerrit is not seeing this as a rename I guess that\u0027s not a concern anymore. I\u0027ll update this file to address your comments and more to bring it up to date with the current style guide soon.",
+      "parentUuid": "6aad2214_f5abc51b",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "867a76ab_3003b739",
         "filename": "modules/desktop_capture/win/window_capturer_win_gdi.cc",
         "patchSetId": 4
@@ -118,6 +136,24 @@
       "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adeaebec_c7ee8977",
+        "filename": "modules/desktop_capture/window_capturer_win.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-07-07T00:18:03Z",
+      "side": 1,
+      "message": "It\u0027s working fine for me, seems to have passed the CQ Dry Run too.\n\nAnd I\u0027ve filed https://crbug.com/webrtc/11760 to track this and updated the TODO, thanks for the suggestion!",
+      "parentUuid": "78c3012d_b0ff3b75",
+      "revId": "d6ab5d0814ef7da7e8d0bc4cbb48e808f22667f1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
