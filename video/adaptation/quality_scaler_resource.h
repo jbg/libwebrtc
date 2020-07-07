@@ -35,11 +35,20 @@ class QualityScalerResource : public VideoStreamEncoderResource,
                               public AdaptationListener,
                               public QualityScalerQpUsageHandlerInterface {
  public:
+  class Listener {
+   public:
+    virtual ~Listener() = default;
+    virtual void OnQualityScalerStopped() = 0;
+    virtual void OnQualityScalerStarted() = 0;
+  };
+
   static rtc::scoped_refptr<QualityScalerResource> Create(
-      DegradationPreferenceProvider* degradation_preference_provider);
+      DegradationPreferenceProvider* degradation_preference_provider,
+      Listener* listener);
 
   explicit QualityScalerResource(
-      DegradationPreferenceProvider* degradation_preference_provider);
+      DegradationPreferenceProvider* degradation_preference_provider,
+      Listener* listener);
   ~QualityScalerResource() override;
 
   bool is_started() const;
@@ -78,11 +87,6 @@ class QualityScalerResource : public VideoStreamEncoderResource,
   // Members accessed on the encoder queue.
   std::unique_ptr<QualityScaler> quality_scaler_
       RTC_GUARDED_BY(encoder_queue());
-  // The timestamp of the last time we reported underuse because this resource
-  // was disabled in order to prevent getting stuck with QP adaptations. Used to
-  // make sure underuse reporting is not too spammy.
-  absl::optional<int64_t> last_underuse_due_to_disabled_timestamp_ms_
-      RTC_GUARDED_BY(encoder_queue());
   // Every OnReportQpUsageHigh/Low() operation has a callback that MUST be
   // invoked on the encoder_queue(). Because usage measurements are reported on
   // the encoder_queue() but handled by the processor on the the
@@ -92,6 +96,7 @@ class QualityScalerResource : public VideoStreamEncoderResource,
   std::queue<rtc::scoped_refptr<QualityScalerQpUsageHandlerCallbackInterface>>
       pending_callbacks_ RTC_GUARDED_BY(encoder_queue());
   DegradationPreferenceProvider* const degradation_preference_provider_;
+  Listener* const listener_;
 
   // Members accessed on the adaptation queue.
   bool clear_qp_samples_ RTC_GUARDED_BY(resource_adaptation_queue());
