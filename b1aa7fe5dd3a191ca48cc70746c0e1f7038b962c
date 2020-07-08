@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "cd76d477_69c33a80",
+        "filename": "rtc_base/async_invoker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-07-08T09:32:55Z",
+      "side": 1,
+      "message": "OK! Will be fixed after rebase.",
+      "parentUuid": "53bb71ce_a3f53e2f",
+      "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "068406cc_c0c7331b",
         "filename": "sdk/android/native_api/jni/java_types.h",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2020-07-08T08:40:34Z",
       "side": 1,
       "message": "why is this needed?",
+      "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a176549e_fb85b1fb",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-07-08T09:32:55Z",
+      "side": 1,
+      "message": "Because it aggregates a mutex and they can\u0027t be moved, so this seems to have been an extremely bad idea before.",
+      "parentUuid": "068406cc_c0c7331b",
       "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
