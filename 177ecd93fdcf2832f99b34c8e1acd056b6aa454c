@@ -81,6 +81,30 @@
       "revId": "177ecd93fdcf2832f99b34c8e1acd056b6aa454c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f1681a7_7d13722d",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-07-08T06:54:04Z",
+      "side": 1,
+      "message": "Tuned the explanation a bit.",
+      "parentUuid": "370e1d5d_a5436ae2",
+      "range": {
+        "startLine": 561,
+        "startChar": 71,
+        "endLine": 563,
+        "endChar": 14
+      },
+      "revId": "177ecd93fdcf2832f99b34c8e1acd056b6aa454c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
