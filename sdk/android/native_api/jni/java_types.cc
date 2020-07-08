@@ -10,6 +10,7 @@
 
 #include "sdk/android/native_api/jni/java_types.h"
 
+#include <memory>
 #include <string>
 #include <utility>
 
@@ -35,11 +36,12 @@ Iterable::Iterable(Iterable&& other) = default;
 Iterable::~Iterable() = default;
 
 // Creates an iterator representing the end of any collection.
-Iterable::Iterator::Iterator() = default;
+Iterable::Iterator::Iterator()
+    : thread_checker_(std::make_unique<rtc::ThreadChecker>()) {}
 
 // Creates an iterator pointing to the beginning of the specified collection.
 Iterable::Iterator::Iterator(JNIEnv* jni, const JavaRef<jobject>& iterable)
-    : jni_(jni) {
+    : jni_(jni), thread_checker_(std::make_unique<rtc::ThreadChecker>()) {
   iterator_ = JNI_Iterable::Java_Iterable_iterator(jni, iterable);
   RTC_CHECK(!iterator_.is_null());
   // Start at the first element in the collection.
@@ -58,7 +60,7 @@ Iterable::Iterator::~Iterator() = default;
 
 // Advances the iterator one step.
 Iterable::Iterator& Iterable::Iterator::operator++() {
-  RTC_CHECK(thread_checker_.IsCurrent());
+  RTC_CHECK(thread_checker_->IsCurrent());
   if (AtEnd()) {
     // Can't move past the end.
     return *this;
@@ -93,7 +95,7 @@ ScopedJavaLocalRef<jobject>& Iterable::Iterator::operator*() {
 }
 
 bool Iterable::Iterator::AtEnd() const {
-  RTC_CHECK(thread_checker_.IsCurrent());
+  RTC_CHECK(thread_checker_->IsCurrent());
   return jni_ == nullptr || IsNull(jni_, iterator_);
 }
 
