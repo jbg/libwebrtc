@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d216c642_805d21cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "A few headers ar in the wrong order, LGTM with that changed.\n\nI made a few other comments as well, but that can be fixed at some other time, I assume this is more a search \u0026 replace change.",
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a26a0e4_fb88eb16",
+        "filename": "modules/audio_device/audio_device_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "Should not be within #ifdef WEBRTC_WIN, move to between current lines 31 and 32.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 43
+      },
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4786eede_94c1c6aa",
+        "filename": "modules/audio_device/linux/audio_device_alsa_linux.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "Move to below line 19.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 43
+      },
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "072f4f62_12b11f4f",
+        "filename": "modules/audio_device/linux/audio_device_pulse_linux.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "Move up",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 43
+      },
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "474215c9_50d1fb07",
+        "filename": "modules/audio_device/mac/audio_device_mac.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "You could change this to \"MutexLock lock(\u0026mutex_);\"",
+      "range": {
+        "startLine": 353,
+        "startChar": 2,
+        "endLine": 353,
+        "endChar": 16
+      },
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c934ae8_1a8d83e9",
+        "filename": "modules/audio_device/mac/audio_device_mac.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "and then remove this line.",
+      "range": {
+        "startLine": 378,
+        "startChar": 2,
+        "endLine": 378,
+        "endChar": 18
+      },
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b161135d_f32cfbd3",
+        "filename": "modules/audio_device/mac/audio_device_mac.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "I wonder if this is really needed, if it\u0027s only for the IDs?\nLet\u0027s not change anything here for now anyway :)",
+      "range": {
+        "startLine": 1475,
+        "startChar": 6,
+        "endLine": 1475,
+        "endChar": 36
+      },
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f7fbef4_80a6f337",
+        "filename": "modules/audio_device/mac/audio_device_mac.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2184,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "Could do a \"MutexLock lock(\u0026mutex_);\" here.",
+      "range": {
+        "startLine": 2184,
+        "startChar": 4,
+        "endLine": 2184,
+        "endChar": 18
+      },
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16b8b621_99206b1f",
+        "filename": "modules/audio_device/mac/audio_device_mac.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2279,
+      "author": {
+        "id": 5609
+      },
+      "writtenOn": "2020-07-08T07:38:27Z",
+      "side": 1,
+      "message": "and here too.",
+      "range": {
+        "startLine": 2279,
+        "startChar": 4,
+        "endLine": 2279,
+        "endChar": 18
+      },
+      "revId": "90702246561901d50ea4474267e3ebdb30cba5a0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
