@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b36023e2_a6749430",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T08:07:06Z",
+      "side": 1,
+      "message": "nice - any idea how this affects performance?",
+      "revId": "ce1ff6f8a741079194c58d93027fff195cd12fcd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94505a88_7d27d94a",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T08:07:06Z",
+      "side": 1,
+      "message": "loose -\u003e lose\n\nI think that this could be read like we might lose log statements in general, but this applies to particular streams and not for the general output, right? Assuming so then I think that we should call out that it\u0027s OK for the stream(s) that are being added/removed to miss some statements.",
+      "revId": "ce1ff6f8a741079194c58d93027fff195cd12fcd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
