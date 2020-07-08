@@ -52,6 +52,24 @@
       "revId": "a8839b58a7a4347787a78e4c3d56b126ed20098b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80695f6_9affd444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-07-08T09:42:15Z",
+      "side": 1,
+      "message": "Thanks a lot for trying this. I understand that it is very difficult to debug it if one does not have an android or iOS setup locally.",
+      "parentUuid": "c0ebdb04_cef4bbea",
+      "revId": "a8839b58a7a4347787a78e4c3d56b126ed20098b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
