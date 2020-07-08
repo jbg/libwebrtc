@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c32fd4ba_974cc4e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-07-08T08:09:40Z",
+      "side": 1,
+      "message": "I didn\u0027t see another option than disabling it which seems to be what is done for a lot of other tests too. I wouldn\u0027t be surprised if the root cause was either \"we can not read the test files\".\n\nShould be ok since there is no platform specific code here.",
+      "revId": "a8839b58a7a4347787a78e4c3d56b126ed20098b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
