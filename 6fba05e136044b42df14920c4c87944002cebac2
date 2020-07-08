@@ -16,6 +16,24 @@
       "revId": "6fba05e136044b42df14920c4c87944002cebac2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30d5dd26_0e3ec364",
+        "filename": "modules/video_capture/video_capture_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-07-08T16:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a258400a_4f217236",
+      "revId": "6fba05e136044b42df14920c4c87944002cebac2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
