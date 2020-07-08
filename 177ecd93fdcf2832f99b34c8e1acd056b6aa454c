@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ad3f9208_b5b56141",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-07-08T06:40:54Z",
+      "side": 1,
+      "message": "The migration to webrtc::Mutex lights up downstream performance tooling and WebRTC mutex operations are now visible there. I expect removing mutex locks will affect those profiles.",
+      "parentUuid": "db67e69e_beca5414",
+      "revId": "177ecd93fdcf2832f99b34c8e1acd056b6aa454c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1623098_ca1c5833",
         "filename": "rtc_base/logging.h",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2020-07-07T23:15:00Z",
       "side": 1,
       "message": "This is hard to parse. Is the point that it\u0027s OK to mistakenly suppress or emit a log message when the number of streams has very recently changed between zero and nonzero?",
+      "range": {
+        "startLine": 561,
+        "startChar": 71,
+        "endLine": 563,
+        "endChar": 14
+      },
+      "revId": "177ecd93fdcf2832f99b34c8e1acd056b6aa454c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "370e1d5d_a5436ae2",
+        "filename": "rtc_base/logging.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-07-08T06:40:54Z",
+      "side": 1,
+      "message": "Yes, that\u0027s correct (and unchanged compared to before). What explanation would you like to see?",
+      "parentUuid": "e1623098_ca1c5833",
       "range": {
         "startLine": 561,
         "startChar": 71,
