@@ -218,17 +218,23 @@ void TaskQueuePacedSender::MaybeProcessPackets(
     next_process_time = pacing_controller_.NextSendTime();
   }
 
-  const TimeDelta min_sleep = pacing_controller_.IsProbing()
-                                  ? PacingController::kMinSleepTime
-                                  : hold_back_window_;
+  const bool is_probing = pacing_controller_.IsProbing();
+  const TimeDelta min_sleep =
+      is_probing ? TimeDelta::Zero() : hold_back_window_;
   next_process_time = std::max(now + min_sleep, next_process_time);
 
-  TimeDelta sleep_time = next_process_time - now;
-  if (next_process_time_.IsMinusInfinity() ||
-      next_process_time <=
-          next_process_time_ - PacingController::kMinSleepTime) {
+  // Allow scheduled a new task if there is none currently sheduled, or if the
+  // new one is at least kMinSleepTime earlier than what is currently scheduled.
+  // If probing, allow overriding with a new sheduled task if the process time
+  // changes in any way.
+  if (next_process_time_.IsMinusInfinity() || is_probing
+          ? next_process_time != next_process_time_
+          : next_process_time <=
+                next_process_time_ - PacingController::kMinSleepTime) {
+    // Set a new scheduled process time and post a delayed task.
     next_process_time_ = next_process_time;
 
+    TimeDelta sleep_time = next_process_time - now;
     task_queue_.PostDelayedTask(
         [this, next_process_time]() { MaybeProcessPackets(next_process_time); },
         sleep_time.ms<uint32_t>());
