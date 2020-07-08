@@ -74,7 +74,12 @@ TEST(AudioCodingModuleTest, TestWebRtcVadDtx) {
   webrtc::TestWebRtcVadDtx().Perform();
 }
 
-TEST(AudioCodingModuleTest, TestOpusDtx) {
+#if !defined(WEBRTC_IOS) && !defined(WEBRTC_ANDROID)
+#define MAYBE_TestOpusDtx TestOpusDtx
+#else
+#define MAYBE_TestOpusDtx DISABLED_TestOpusDtx
+#endif
+TEST(AudioCodingModuleTest, MAYBE_TestOpusDtx) {
   webrtc::TestOpusDtx().Perform();
 }
 
