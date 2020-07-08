@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afd4c2d4_c803c70e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-08T12:12:52Z",
+      "side": 1,
+      "message": "s/opus/obvious/?",
+      "revId": "d7a9de2ec8bf82df51facee6957acdacab5d24db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
