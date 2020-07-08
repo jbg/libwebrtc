@@ -194,7 +194,11 @@ absl::optional<int64_t> PacketBuffer::LastReceivedKeyframePacketMs() const {
   MutexLock lock(&mutex_);
   return last_received_keyframe_packet_ms_;
 }
-
+void PacketBuffer::Configure(bool sps_pps_idr_in_keyframe) {
+  sps_pps_idr_is_h264_keyframe_ =
+      sps_pps_idr_in_keyframe ||
+      field_trial::IsEnabled("WebRTC-SpsPpsIdrIsH264Keyframe");
+}
 void PacketBuffer::ClearInternal() {
   for (auto& entry : buffer_) {
     entry = nullptr;
