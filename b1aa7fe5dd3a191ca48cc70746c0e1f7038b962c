@@ -54,6 +54,46 @@
     },
     {
       "key": {
+        "uuid": "f7e3af90_b29f62e7",
+        "filename": "sdk/android/native_api/jni/java_types.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T15:32:33Z",
+      "side": 1,
+      "message": "ah, I see - yeah this is a bit strange. Could we instead, not move the thread checker and instead add this here:\n\n... {\n  RTC_DCHECK_RUN_ON(\u0026thread_checker_);\n}\n\nWhich will both initialize the thread checker as well as ensure that we move the state on the right thread?",
+      "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2cdc2c2_913ebce6",
+        "filename": "sdk/android/native_api/jni/java_types.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T15:32:33Z",
+      "side": 1,
+      "message": "do you mind changing these to RTC_DCHECK_RUN_ON?\nThey shouldn\u0027t be CHECKs since that\u0027ll just be dead code.",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 11
+      },
+      "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "068406cc_c0c7331b",
         "filename": "sdk/android/native_api/jni/java_types.h",
         "patchSetId": 3
