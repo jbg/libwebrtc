@@ -21,6 +21,7 @@
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/event.h"
 #include "rtc_base/ref_counted_object.h"
+#include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
 #include "rtc_base/thread.h"
 
