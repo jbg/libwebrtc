@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f84b46b5_7064ca19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T08:40:34Z",
+      "side": 1,
+      "message": "thanks for fixing the iwyu issues",
+      "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53bb71ce_a3f53e2f",
+        "filename": "rtc_base/async_invoker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T08:40:34Z",
+      "side": 1,
+      "message": "I think we can simply remove this class and then you don\u0027t need to modify async_invoker.* (right?)\nuploaded a change here: https://webrtc-review.googlesource.com/c/src/+/178864/",
+      "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "068406cc_c0c7331b",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T08:40:34Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
