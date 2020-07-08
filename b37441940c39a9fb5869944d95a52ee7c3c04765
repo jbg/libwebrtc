@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe8e42cb_bca480e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T16:24:00Z",
+      "side": 1,
+      "message": "Thanks! lgtm assuming everything stays green 😊",
+      "revId": "b37441940c39a9fb5869944d95a52ee7c3c04765",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
