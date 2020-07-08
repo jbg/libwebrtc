@@ -168,6 +168,24 @@
       "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da7b051a_c9f42125",
+        "filename": "sdk/android/native_api/jni/java_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-07-08T17:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a176549e_fb85b1fb",
+      "revId": "b1aa7fe5dd3a191ca48cc70746c0e1f7038b962c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
