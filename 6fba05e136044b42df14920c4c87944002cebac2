@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a258400a_4f217236",
+        "filename": "modules/video_capture/video_capture_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-08T16:20:33Z",
+      "side": 1,
+      "message": "nit: since you\u0027re changing the name, you might as well change it to api_lock_\nWe had a discussion around it a while ago if we should follow the\nstyle guide even though the general style of the file was different\nand ended up agreeing to follow the style guide.\n(see e.g. apply_rotation_ below)",
+      "revId": "6fba05e136044b42df14920c4c87944002cebac2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
