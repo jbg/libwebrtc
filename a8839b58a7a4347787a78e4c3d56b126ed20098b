@@ -16,6 +16,24 @@
       "revId": "a8839b58a7a4347787a78e4c3d56b126ed20098b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "980e76e3_4f2743ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-07-08T08:24:21Z",
+      "side": 1,
+      "message": "Is this really caused by \"cannot read test files\". or is that the logic is different on mobile devices? As far as I can see from the failing tests (I have not investigate them deeply), it reads\n\n[02:22:40:INFO] ../../modules/audio_coding/test/TestVADDTX.cc:169: Failure\n[02:22:40:INFO] Expected equality of these values:\n[02:22:40:INFO]   0u\n[02:22:40:INFO]     Which is: 0\n[02:22:40:INFO]   st\n[02:22:40:INFO]     Which is: 11\n[02:22:40:INFO] stats[2] error.\n\nIf the difference in the outcome of mobile devices is expected, we can define the \"expects\" for android and iOS rather than disabling the tests? WDYT?",
+      "parentUuid": "c32fd4ba_974cc4e5",
+      "revId": "a8839b58a7a4347787a78e4c3d56b126ed20098b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
