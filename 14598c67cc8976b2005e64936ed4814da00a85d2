@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "782c3b41_005fb356",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-08T08:37:46Z",
+      "side": 1,
+      "message": "Yes I really like it, only found out about them recently. If I ever find more time for stats, I\u0027d like to add it to the rest of the stats collection algorithms.",
+      "parentUuid": "6fd73ace_1a1d9468",
+      "revId": "14598c67cc8976b2005e64936ed4814da00a85d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4407dfa_14eba380",
         "filename": "pc/rtc_stats_collector.cc",
         "patchSetId": 1
@@ -50,6 +68,24 @@
       "revId": "14598c67cc8976b2005e64936ed4814da00a85d2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e4261ef_39dbef11",
+        "filename": "pc/rtc_stats_collector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1877,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-08T08:37:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4407dfa_14eba380",
+      "revId": "14598c67cc8976b2005e64936ed4814da00a85d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
