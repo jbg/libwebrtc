@@ -34,6 +34,24 @@
       "revId": "a8839b58a7a4347787a78e4c3d56b126ed20098b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0ebdb04_cef4bbea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-07-08T09:30:35Z",
+      "side": 1,
+      "message": "the result is a bit difficult to read. stats[2] is stats[AudioFrameType::kAudioFrameCN]. I suspect this is the stereo test failing but the structure of the tests makes it a bit hard since they run all codecs and all scenarios in a single test (I herewith volunteer a follow-up CL to split that up a bit!).\n\nCan you hit the try button for me please, i\u0027ve added some logging to confirm.\nWe could set the expectation there to -1 to say \"we don\u0027t care if there is CN or not but it runs without CN on all other platforms\"",
+      "parentUuid": "980e76e3_4f2743ab",
+      "revId": "a8839b58a7a4347787a78e4c3d56b126ed20098b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
