@@ -18,7 +18,9 @@
 #define SDK_ANDROID_NATIVE_API_JNI_JAVA_TYPES_H_
 
 #include <jni.h>
+
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -93,7 +95,7 @@ class Iterable {
     JNIEnv* jni_ = nullptr;
     ScopedJavaLocalRef<jobject> iterator_;
     ScopedJavaLocalRef<jobject> value_;
-    rtc::ThreadChecker thread_checker_;
+    std::unique_ptr<rtc::ThreadChecker> thread_checker_;
 
     RTC_DISALLOW_COPY_AND_ASSIGN(Iterator);
   };
