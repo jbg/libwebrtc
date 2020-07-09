@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ea37ed03_9a3d0335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-09T15:25:19Z",
+      "side": 1,
+      "message": "Thanks Danil - removing it sounds like the right thing to then.",
+      "revId": "bfa32fc5469dbea6d2fea887c985c185bc394705",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52f2b8bf_656676e9",
         "filename": "modules/include/module_common_types.cc",
         "patchSetId": 1
