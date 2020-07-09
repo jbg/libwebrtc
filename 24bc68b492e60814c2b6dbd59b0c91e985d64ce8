@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e20621ba_ad5fe991",
+        "filename": "call/adaptation/resource_adaptation_processor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-09T11:06:20Z",
+      "side": 0,
+      "message": "Time to delete another MitigationResult enum: kRejectedByConstraint.",
+      "revId": "24bc68b492e60814c2b6dbd59b0c91e985d64ce8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

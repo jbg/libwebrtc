@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4b7a78d_7ec017f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-09T11:06:20Z",
+      "side": 1,
+      "message": "LGTM % nit!",
+      "revId": "35bd1f73cc4f1cc1997c44ff08e821eddd77d9cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
