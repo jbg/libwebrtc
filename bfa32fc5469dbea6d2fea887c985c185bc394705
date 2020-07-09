@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "b1171b95_2b051c1f",
+        "filename": "modules/include/module_common_types.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-09T08:58:40Z",
+      "side": 1,
+      "message": "while std::vector\u003cOffsetAndLength\u003e better long term, another potential long term solution is to get rid of RTPFragmentationHeader altogether. (bugs.webrtc.org/6471)\n\nbut this CL addresses smaller concrete problem.\n\nthe long-term solution (e.g. using std::vector\u003cOffsetAndLength\u003e) is noticably bigger effort and can\u0027t be done in a single CL (in particular because RTPFragmentationHeader is used outside of the webrtc and it\u0027s members are accessed directly, e.g. https://source.chromium.org/chromium/chromium/src/+/master:remoting/protocol/webrtc_dummy_video_encoder.cc;l\u003d47;drc\u003d9042d431051337663a13e20b85b4bd49534aa393?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F)",
+      "parentUuid": "a78de5d2_3f487dfe",
+      "revId": "bfa32fc5469dbea6d2fea887c985c185bc394705",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eeca3267_c0a7af79",
         "filename": "modules/include/module_common_types.cc",
         "patchSetId": 1
