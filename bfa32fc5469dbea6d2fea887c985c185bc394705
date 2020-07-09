@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "a78de5d2_3f487dfe",
+        "filename": "modules/include/module_common_types.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-09T08:50:40Z",
+      "side": 1,
+      "message": "\u003e I wonder if we can start using std:: for most of this.\n\u003e \n\u003e Ideally I\u0027d like to change fragmentationVector to |std::vector\u003csize_t\u003e fragmentations_;| and get rid of the fragmentationVectorSize variable, but it looks like the problem is bigger than that.  Is this essentially what  we\u0027re talking about?\n\u003e \n\u003e struct OffsetAndLength {\n\u003e   size_t offset;\n\u003e   size_t length;\n\u003e };\n\u003e \n\u003e std::vector\u003cOffsetAndLength\u003e fragmentations_;\n\nI saw a comment from danilchap@ about this: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/include/module_common_types.h;l\u003d44-45;drc\u003d7c06777ab088a2c5bcdddd1c80aff515fd894e17.\n\nSo maybe let\u0027s just rework the CL and do it right away?",
+      "parentUuid": "784d3564_d8a6ff14",
+      "revId": "bfa32fc5469dbea6d2fea887c985c185bc394705",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eeca3267_c0a7af79",
         "filename": "modules/include/module_common_types.cc",
         "patchSetId": 1
