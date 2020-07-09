@@ -2140,6 +2140,10 @@ std::vector<LoggedPacketInfo> ParsedRtcEventLog::GetPacketInfos(
           kStartingCaptureTimeTicks +
           stream->unwrap_capture_ticks.Unwrap(rtp.header.timestamp);
       // TODO(srte): Use logged sample rate when it is added to the format.
+      if (capture_ticks < 0) {
+        RTC_LOG(LS_WARNING) << "capture_ticks is negative. Skipping...";
+        return;
+      }
       capture_time = Timestamp::Seconds(
           capture_ticks /
           (stream->media_type == LoggedMediaType::kAudio ? 48000.0 : 90000.0));
@@ -2177,6 +2181,12 @@ std::vector<LoggedPacketInfo> ParsedRtcEventLog::GetPacketInfos(
         if (!last_feedback_base_time_us) {
           feedback_base_time = log_feedback_time;
         } else {
+          if (feedback.GetBaseDeltaUs(*last_feedback_base_time_us) < 0) {
+            RTC_LOG(LS_WARNING)
+                << "Diff between current feedback_base_time and last feedback "
+                   "time is negative, skipping the current feedback.";
+            return;
+          }
           feedback_base_time += TimeDelta::Micros(
               feedback.GetBaseDeltaUs(*last_feedback_base_time_us));
         }
