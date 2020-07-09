@@ -34,8 +34,7 @@ class RtpPacketizerH264 : public RtpPacketizer {
   // The payload_data must be exactly one encoded H264 frame.
   RtpPacketizerH264(rtc::ArrayView<const uint8_t> payload,
                     PayloadSizeLimits limits,
-                    H264PacketizationMode packetization_mode,
-                    const RTPFragmentationHeader& fragmentation);
+                    H264PacketizationMode packetization_mode);
 
   ~RtpPacketizerH264() override;
 

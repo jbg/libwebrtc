@@ -46,19 +46,18 @@ enum FuDefs : uint8_t { kSBit = 0x80, kEBit = 0x40, kRBit = 0x20 };
 
 }  // namespace
 
-RtpPacketizerH264::RtpPacketizerH264(
-    rtc::ArrayView<const uint8_t> payload,
-    PayloadSizeLimits limits,
-    H264PacketizationMode packetization_mode,
-    const RTPFragmentationHeader& fragmentation)
+RtpPacketizerH264::RtpPacketizerH264(rtc::ArrayView<const uint8_t> payload,
+                                     PayloadSizeLimits limits,
+                                     H264PacketizationMode packetization_mode)
     : limits_(limits), num_packets_left_(0) {
   // Guard against uninitialized memory in packetization_mode.
   RTC_CHECK(packetization_mode == H264PacketizationMode::NonInterleaved ||
             packetization_mode == H264PacketizationMode::SingleNalUnit);
 
-  for (size_t i = 0; i < fragmentation.fragmentationVectorSize; ++i) {
+  for (const auto& nalu :
+       H264::FindNaluIndices(payload.data(), payload.size())) {
     input_fragments_.push_back(
-        payload.subview(fragmentation.Offset(i), fragmentation.Length(i)));
+        payload.subview(nalu.payload_start_offset, nalu.payload_size));
   }
 
   if (!GeneratePackets(packetization_mode)) {
