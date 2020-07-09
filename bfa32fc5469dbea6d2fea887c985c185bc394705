@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40026f82_8deac995",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-09T08:08:16Z",
+      "side": 1,
+      "message": "LGTM but I am not an owner of this code. Adding tommi@ as a root owner.\n\n+danilchap@ FYI.",
+      "revId": "bfa32fc5469dbea6d2fea887c985c185bc394705",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
