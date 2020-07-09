@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2553edd_3ae615ad",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2138,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-09T14:06:48Z",
+      "side": 1,
+      "message": "Does that mean this constant has a wrong value or it is fine to skip?\n\nLooks like this was added exactly to avoid negative capture_ticks.",
+      "range": {
+        "startLine": 2138,
+        "startChar": 0,
+        "endLine": 2138,
+        "endChar": 67
+      },
+      "revId": "326c26cd83b744b6ba99c238ce735e625c474376",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
