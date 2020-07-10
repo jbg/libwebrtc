@@ -22,6 +22,30 @@
       "revId": "326c26cd83b744b6ba99c238ce735e625c474376",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edac3b01_3f4362a5",
+        "filename": "logging/rtc_event_log/rtc_event_log_parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2138,
+      "author": {
+        "id": 6290
+      },
+      "writtenOn": "2020-07-10T11:52:11Z",
+      "side": 1,
+      "message": "I don\u0027t know about this magic number:) Got crash on a file with negative capture_ticks value, but it is very rare. I did not dig into that.",
+      "parentUuid": "d2553edd_3ae615ad",
+      "range": {
+        "startLine": 2138,
+        "startChar": 0,
+        "endLine": 2138,
+        "endChar": 67
+      },
+      "revId": "326c26cd83b744b6ba99c238ce735e625c474376",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
