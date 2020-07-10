@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "b4497834_99155e8b",
+        "filename": "modules/include/module_common_types.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2020-07-10T15:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52f2b8bf_656676e9",
+      "revId": "bfa32fc5469dbea6d2fea887c985c185bc394705",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "784d3564_d8a6ff14",
         "filename": "modules/include/module_common_types.cc",
         "patchSetId": 1
@@ -106,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "abde05c7_afc1eeed",
+        "filename": "modules/include/module_common_types.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2020-07-10T15:59:00Z",
+      "side": 1,
+      "message": "Since I\u0027m not a chromium developer, the larger fix is outside the scope of what I can take on. I\u0027ll address the other feedback. Thanks for having a look at this!",
+      "parentUuid": "b1171b95_2b051c1f",
+      "revId": "bfa32fc5469dbea6d2fea887c985c185bc394705",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eeca3267_c0a7af79",
         "filename": "modules/include/module_common_types.cc",
         "patchSetId": 1
@@ -120,6 +156,24 @@
       "revId": "bfa32fc5469dbea6d2fea887c985c185bc394705",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b357255_15da977a",
+        "filename": "modules/include/module_common_types.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 6434
+      },
+      "writtenOn": "2020-07-10T15:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeca3267_c0a7af79",
+      "revId": "bfa32fc5469dbea6d2fea887c985c185bc394705",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
