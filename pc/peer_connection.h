@@ -207,9 +207,21 @@ class PeerConnection : public PeerConnectionInternal,
                    const RTCOfferAnswerOptions& options) override;
   void CreateAnswer(CreateSessionDescriptionObserver* observer,
                     const RTCOfferAnswerOptions& options) override;
+  // TODO(hbos): Legacy versions of SLD.
   void SetLocalDescription(SetSessionDescriptionObserver* observer,
                            SessionDescriptionInterface* desc) override;
   void SetLocalDescription(SetSessionDescriptionObserver* observer) override;
+  void SetLocalDescription(
+      std::unique_ptr<SessionDescriptionInterface> desc,
+      rtc::scoped_refptr<SetLocalDescriptionObserverInterface> observer)
+      override;
+  void SetLocalDescription(
+      rtc::scoped_refptr<SetLocalDescriptionObserverInterface> observer)
+      override;
+  // TODO(hbos): Private...
+  void SetLocalDescriptionParameterlessInternal(
+      rtc::scoped_refptr<CreateSessionDescriptionObserver> create_sdp_observer);
+  // TODO(hbos): Legacy version of SRD.
   void SetRemoteDescription(SetSessionDescriptionObserver* observer,
                             SessionDescriptionInterface* desc) override;
   void SetRemoteDescription(
@@ -329,6 +341,8 @@ class PeerConnection : public PeerConnectionInternal,
  private:
   class ImplicitCreateSessionDescriptionObserver;
   friend class ImplicitCreateSessionDescriptionObserver;
+  class SetLocalDescriptionObserverAdapter;
+  friend class SetLocalDescriptionObserverAdapter;
   class SetRemoteDescriptionObserverAdapter;
   friend class SetRemoteDescriptionObserverAdapter;
 
@@ -424,7 +438,7 @@ class PeerConnection : public PeerConnectionInternal,
       rtc::scoped_refptr<CreateSessionDescriptionObserver> observer);
   void DoSetLocalDescription(
       std::unique_ptr<SessionDescriptionInterface> desc,
-      rtc::scoped_refptr<SetSessionDescriptionObserver> observer);
+      rtc::scoped_refptr<SetLocalDescriptionObserverInterface> observer);
   void DoSetRemoteDescription(
       std::unique_ptr<SessionDescriptionInterface> desc,
       rtc::scoped_refptr<SetRemoteDescriptionObserverInterface> observer);

@@ -958,6 +958,12 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
   // description.
   // TODO(hbos): Make pure virtual when implemented by downstream projects.
   virtual void SetLocalDescription(SetSessionDescriptionObserver* observer) {}
+  // TODO(hbos): Also fix for the single param version.
+  virtual void SetLocalDescription(
+      std::unique_ptr<SessionDescriptionInterface> desc,
+      rtc::scoped_refptr<SetLocalDescriptionObserverInterface> observer) {}
+  virtual void SetLocalDescription(
+      rtc::scoped_refptr<SetLocalDescriptionObserverInterface> observer) {}
   // Sets the remote session description.
   // The PeerConnection takes the ownership of |desc| even if it fails.
   // The |observer| callback will be called when done.

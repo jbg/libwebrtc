@@ -16,6 +16,13 @@
 
 namespace webrtc {
 
+// TODO(hbos): Move to a separate file.
+class SetLocalDescriptionObserverInterface : public rtc::RefCountInterface {
+ public:
+  // On success, |error.ok()| is true.
+  virtual void OnSetLocalDescriptionComplete(RTCError error) = 0;
+};
+
 // An observer for PeerConnectionInterface::SetRemoteDescription(). The
 // callback is invoked such that the state of the peer connection can be
 // examined to accurately reflect the effects of the SetRemoteDescription

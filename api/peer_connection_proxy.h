@@ -102,6 +102,13 @@ PROXY_METHOD2(void,
               SessionDescriptionInterface*)
 PROXY_METHOD1(void, SetLocalDescription, SetSessionDescriptionObserver*)
 PROXY_METHOD2(void,
+              SetLocalDescription,
+              std::unique_ptr<SessionDescriptionInterface>,
+              rtc::scoped_refptr<SetLocalDescriptionObserverInterface>)
+PROXY_METHOD1(void,
+              SetLocalDescription,
+              rtc::scoped_refptr<SetLocalDescriptionObserverInterface>)
+PROXY_METHOD2(void,
               SetRemoteDescription,
               SetSessionDescriptionObserver*,
               SessionDescriptionInterface*)
