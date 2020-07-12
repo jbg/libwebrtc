@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b4841c37_45fd2774",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-12T11:24:32Z",
+      "side": 1,
+      "message": "I didn\u0027t have time to go through the CL yet but I will do it this week.\n\nAn early question, I was expecting some binary size reduction but instead I see binary size going up so I suspect the linker is not yet able to remove x509 related code.\n\nDavid, is there a macro to define or something like that to cause x509 code to be stripped or are we still depending on it in this CL?",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f45811b_e01c4bd6",
         "filename": "rtc_base/BUILD.gn",
         "patchSetId": 12
