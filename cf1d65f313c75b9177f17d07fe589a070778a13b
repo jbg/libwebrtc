@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4a21d79_0afcfe88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-07-12T17:46:27Z",
+      "side": 1,
+      "message": "Cursory look, seems fine. However:\n1. I\u0027m OOO, so I\u0027ll let philipel@ handle this.\n2. FrameEncodeMetadataWriter::UpdateBitstream() seems to still use the fragmentation header?\n3. See webrtc:11639, in case it is relevant.",
+      "revId": "cf1d65f313c75b9177f17d07fe589a070778a13b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
