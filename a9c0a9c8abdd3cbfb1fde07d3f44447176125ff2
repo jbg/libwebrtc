@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6c60c202_2769c284",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-12T11:21:19Z",
+      "side": 1,
+      "message": "Not that I am aware of but it is hard to say.\n\nIn general, we might want to avid supporting that case hence assuming always BoringSSL if rtc_build_ssl and OpenSSL if !rtc_build_sll. I am saying this because from the BoringSSL documentation I see:\n\n  Although BoringSSL is an open source project, it is not intended for general use, as OpenSSL \n  is. We don\u0027t recommend that third parties depend upon it. Doing so is likely to be \n  frustrating because there are no guarantees of API or ABI stability.\n\nSo I think it is good to assume that WebRTC clients should build with OpenSSL (rtc_build_sll\u003dfalse and https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/webrtc.gni;l\u003d84-86;drc\u003d5fbd758b880d70488d0616c88999eedc3274c2ee.\n\nDoes this make sense?",
+      "parentUuid": "8f45811b_e01c4bd6",
+      "range": {
+        "startLine": 886,
+        "startChar": 6,
+        "endLine": 886,
+        "endChar": 19
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a26a8ee_c6ca6b5e",
         "filename": "rtc_base/openssl_adapter.cc",
         "patchSetId": 12
