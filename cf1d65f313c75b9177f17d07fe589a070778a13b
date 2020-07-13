@@ -16,6 +16,24 @@
       "revId": "cf1d65f313c75b9177f17d07fe589a070778a13b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f3990fe_c741daea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-13T09:28:51Z",
+      "side": 1,
+      "message": "1. no rush. this cleanup can easily wait an extra month\n2. yep, UpdateBitstream updates fragmentation. after this change it would be possible to alter UpdateBitstream not to update fragmentation (and also infer it from bitstream rather than from passed struct). The cost is yet another  traverse through the frame to find the nalu bindings.\n3. This (or rather followup CL that cleans up SpsVuiRewrite) will make this bug obsolete. I guess one of the reason to get rid of the RTPFragmentationHeader is because it is a source of potential security bugs (another example is bugs.webrtc.org/11739 )\n\n(I\u0027ve also explored a bit how code can look without the RTPFragmentationHeader:\nhttps://webrtc-review.googlesource.com/c/src/+/179091)",
+      "parentUuid": "a4a21d79_0afcfe88",
+      "revId": "cf1d65f313c75b9177f17d07fe589a070778a13b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
