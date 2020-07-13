@@ -5334,78 +5334,8 @@ TEST_F(VideoStreamEncoderTest, SetsFrameTypesSimulcast) {
   video_stream_encoder_->Stop();
 }
 
-TEST_F(VideoStreamEncoderTest, RequestKeyframeInternalSource) {
-  // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
-  ResetEncoder("VP8", 1, 1, 1, false);
-  video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
-      DataRate::BitsPerSec(kTargetBitrateBps),
-      DataRate::BitsPerSec(kTargetBitrateBps),
-      DataRate::BitsPerSec(kTargetBitrateBps), 0, 0, 0);
-
-  // Call encoder directly, simulating internal source where encoded frame
-  // callback in VideoStreamEncoder is called despite no OnFrame().
-  fake_encoder_.InjectFrame(CreateFrame(1, nullptr), true);
-  EXPECT_TRUE(WaitForFrame(kDefaultTimeoutMs));
-  EXPECT_THAT(
-      fake_encoder_.LastFrameTypes(),
-      ::testing::ElementsAre(VideoFrameType{VideoFrameType::kVideoFrameKey}));
-
-  const std::vector<VideoFrameType> kDeltaFrame = {
-      VideoFrameType::kVideoFrameDelta};
-  // Need to set timestamp manually since manually for injected frame.
-  VideoFrame frame = CreateFrame(101, nullptr);
-  frame.set_timestamp(101);
-  fake_encoder_.InjectFrame(frame, false);
-  EXPECT_TRUE(WaitForFrame(kDefaultTimeoutMs));
-  EXPECT_THAT(
-      fake_encoder_.LastFrameTypes(),
-      ::testing::ElementsAre(VideoFrameType{VideoFrameType::kVideoFrameDelta}));
-
-  // Request key-frame. The forces a dummy frame down into the encoder.
-  fake_encoder_.ExpectNullFrame();
-  video_stream_encoder_->SendKeyFrame();
-  EXPECT_TRUE(WaitForFrame(kDefaultTimeoutMs));
-  EXPECT_THAT(
-      fake_encoder_.LastFrameTypes(),
-      ::testing::ElementsAre(VideoFrameType{VideoFrameType::kVideoFrameKey}));
-
-  video_stream_encoder_->Stop();
-}
-
-TEST_F(VideoStreamEncoderTest, AdjustsTimestampInternalSource) {
-  // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
-  ResetEncoder("VP8", 1, 1, 1, false);
-  video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
-      DataRate::BitsPerSec(kTargetBitrateBps),
-      DataRate::BitsPerSec(kTargetBitrateBps),
-      DataRate::BitsPerSec(kTargetBitrateBps), 0, 0, 0);
-
-  int64_t timestamp = 1;
-  EncodedImage image;
-  image.SetEncodedData(
-      EncodedImageBuffer::Create(kTargetBitrateBps / kDefaultFramerate / 8));
-  image.capture_time_ms_ = ++timestamp;
-  image.SetTimestamp(static_cast<uint32_t>(timestamp * 90));
-  const int64_t kEncodeFinishDelayMs = 10;
-  image.timing_.encode_start_ms = timestamp;
-  image.timing_.encode_finish_ms = timestamp + kEncodeFinishDelayMs;
-  fake_encoder_.InjectEncodedImage(image);
-  // Wait for frame without incrementing clock.
-  EXPECT_TRUE(sink_.WaitForFrame(kDefaultTimeoutMs));
-  // Frame is captured kEncodeFinishDelayMs before it's encoded, so restored
-  // capture timestamp should be kEncodeFinishDelayMs in the past.
-  EXPECT_EQ(sink_.GetLastCaptureTimeMs(),
-            fake_clock_.TimeNanos() / rtc::kNumNanosecsPerMillisec -
-                kEncodeFinishDelayMs);
-
-  video_stream_encoder_->Stop();
-}
-
 TEST_F(VideoStreamEncoderTest, DoesNotRewriteH264BitstreamWithOptimalSps) {
-  // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
+  // Setup test again.
   ResetEncoder("H264", 1, 1, 1, false);
 
   EncodedImage image(optimal_sps, sizeof(optimal_sps), sizeof(optimal_sps));
@@ -5437,8 +5367,7 @@ TEST_F(VideoStreamEncoderTest, RewritesH264BitstreamWithNonOptimalSps) {
                             0x00, 0x00, 0x03, 0x03, 0xF4,
                             0x05, 0x03, 0xC7, 0xC0};
 
-  // Configure internal source factory and setup test again.
-  encoder_factory_.SetHasInternalSource(true);
+  // Setup test again.
   ResetEncoder("H264", 1, 1, 1, false);
 
   EncodedImage image(original_sps, sizeof(original_sps), sizeof(original_sps));

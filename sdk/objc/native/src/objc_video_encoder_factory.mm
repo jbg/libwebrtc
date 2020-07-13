@@ -102,7 +102,6 @@ class ObjCVideoEncoder : public VideoEncoder {
                                             ScalingSettings::kOff;
 
     info.is_hardware_accelerated = true;
-    info.has_internal_source = false;
     return info;
   }
 
@@ -183,7 +182,6 @@ VideoEncoderFactory::CodecInfo ObjCVideoEncoderFactory::QueryVideoEncoder(
 
   CodecInfo codec_info;
   codec_info.is_hardware_accelerated = ![wrappedSoftwareFormats containsObject:formatName];
-  codec_info.has_internal_source = false;
   return codec_info;
 }
 

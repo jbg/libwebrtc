@@ -97,13 +97,6 @@ enum VideoFormat {
   kVP8,
 };
 
-VideoFrame CreateVideoFrame(int width, int height, int64_t timestamp_ms) {
-  return webrtc::VideoFrame::Builder()
-      .set_video_frame_buffer(I420Buffer::Create(width, height))
-      .set_rotation(webrtc::kVideoRotation_0)
-      .set_timestamp_ms(timestamp_ms)
-      .build();
-}
 }  // namespace
 
 class VideoSendStreamTest : public test::CallTest {
@@ -2280,9 +2273,6 @@ TEST_F(VideoSendStreamTest, CanReconfigureToUseStartBitrateAbovePreviousMax) {
 
   StartBitrateObserver encoder;
   test::VideoEncoderProxyFactory encoder_factory(&encoder);
-  // Since this test does not use a capturer, set |internal_source| = true.
-  // Encoder configuration is otherwise updated on the next video frame.
-  encoder_factory.SetHasInternalSource(true);
   GetVideoSendConfig()->encoder_settings.encoder_factory = &encoder_factory;
 
   CreateVideoStreams();
@@ -2351,124 +2341,6 @@ class StartStopBitrateObserver : public test::FakeEncoder {
   rtc::Event bitrate_changed_;
   absl::optional<int> bitrate_kbps_ RTC_GUARDED_BY(mutex_);
 };
-
-// This test that if the encoder use an internal source, VideoEncoder::SetRates
-// will be called with zero bitrate during initialization and that
-// VideoSendStream::Stop also triggers VideoEncoder::SetRates Start to be called
-// with zero bitrate.
-TEST_F(VideoSendStreamTest, VideoSendStreamStopSetEncoderRateToZero) {
-  test::NullTransport transport;
-  StartStopBitrateObserver encoder;
-  test::VideoEncoderProxyFactory encoder_factory(&encoder);
-  encoder_factory.SetHasInternalSource(true);
-  test::FrameForwarder forwarder;
-
-  SendTask(RTC_FROM_HERE, task_queue(),
-           [this, &transport, &encoder_factory, &forwarder]() {
-             CreateSenderCall();
-             CreateSendConfig(1, 0, 0, &transport);
-
-             sender_call_->SignalChannelNetworkState(MediaType::VIDEO,
-                                                     kNetworkUp);
-             GetVideoSendConfig()->encoder_settings.encoder_factory =
-                 &encoder_factory;
-
-             CreateVideoStreams();
-             // Inject a frame, to force encoder creation.
-             GetVideoSendStream()->Start();
-             GetVideoSendStream()->SetSource(&forwarder,
-                                             DegradationPreference::DISABLED);
-             forwarder.IncomingCapturedFrame(CreateVideoFrame(640, 480, 4));
-           });
-
-  EXPECT_TRUE(encoder.WaitForEncoderInit());
-
-  SendTask(RTC_FROM_HERE, task_queue(),
-           [this]() { GetVideoSendStream()->Start(); });
-  EXPECT_TRUE(encoder.WaitBitrateChanged(true));
-
-  SendTask(RTC_FROM_HERE, task_queue(),
-           [this]() { GetVideoSendStream()->Stop(); });
-  EXPECT_TRUE(encoder.WaitBitrateChanged(false));
-
-  SendTask(RTC_FROM_HERE, task_queue(),
-           [this]() { GetVideoSendStream()->Start(); });
-  EXPECT_TRUE(encoder.WaitBitrateChanged(true));
-
-  SendTask(RTC_FROM_HERE, task_queue(), [this]() {
-    DestroyStreams();
-    DestroyCalls();
-  });
-}
-
-// Tests that when the encoder uses an internal source, the VideoEncoder will
-// be updated with a new bitrate when turning the VideoSendStream on/off with
-// VideoSendStream::UpdateActiveSimulcastLayers, and when the VideoStreamEncoder
-// is reconfigured with new active layers.
-TEST_F(VideoSendStreamTest, VideoSendStreamUpdateActiveSimulcastLayers) {
-  test::NullTransport transport;
-  StartStopBitrateObserver encoder;
-  test::VideoEncoderProxyFactory encoder_factory(&encoder);
-  encoder_factory.SetHasInternalSource(true);
-  test::FrameForwarder forwarder;
-
-  SendTask(RTC_FROM_HERE, task_queue(),
-           [this, &transport, &encoder_factory, &forwarder]() {
-             CreateSenderCall();
-             // Create two simulcast streams.
-             CreateSendConfig(2, 0, 0, &transport);
-
-             sender_call_->SignalChannelNetworkState(MediaType::VIDEO,
-                                                     kNetworkUp);
-             GetVideoSendConfig()->encoder_settings.encoder_factory =
-                 &encoder_factory;
-
-             CreateVideoStreams();
-
-             // Inject a frame, to force encoder creation.
-             GetVideoSendStream()->Start();
-             GetVideoSendStream()->SetSource(&forwarder,
-                                             DegradationPreference::DISABLED);
-             forwarder.IncomingCapturedFrame(CreateVideoFrame(640, 480, 4));
-           });
-
-  EXPECT_TRUE(encoder.WaitForEncoderInit());
-
-  // When we turn on the simulcast layers it will update the BitrateAllocator,
-  // which in turn updates the VideoEncoder's bitrate.
-  SendTask(RTC_FROM_HERE, task_queue(), [this]() {
-    GetVideoSendStream()->UpdateActiveSimulcastLayers({true, true});
-  });
-  EXPECT_TRUE(encoder.WaitBitrateChanged(true));
-
-  GetVideoEncoderConfig()->simulcast_layers[0].active = true;
-  GetVideoEncoderConfig()->simulcast_layers[1].active = false;
-  SendTask(RTC_FROM_HERE, task_queue(), [this]() {
-    GetVideoSendStream()->ReconfigureVideoEncoder(
-        GetVideoEncoderConfig()->Copy());
-  });
-  // TODO(bugs.webrtc.org/8807): Currently we require a hard reconfiguration to
-  // update the VideoBitrateAllocator and BitrateAllocator of which layers are
-  // active. Once the change is made for a "soft" reconfiguration we can remove
-  // the expecation for an encoder init. We can also test that bitrate changes
-  // when just updating individual active layers, which should change the
-  // bitrate set to the video encoder.
-  EXPECT_TRUE(encoder.WaitForEncoderInit());
-  EXPECT_TRUE(encoder.WaitBitrateChanged(true));
-
-  // Turning off both simulcast layers should trigger a bitrate change of 0.
-  GetVideoEncoderConfig()->simulcast_layers[0].active = false;
-  GetVideoEncoderConfig()->simulcast_layers[1].active = false;
-  SendTask(RTC_FROM_HERE, task_queue(), [this]() {
-    GetVideoSendStream()->UpdateActiveSimulcastLayers({false, false});
-  });
-  EXPECT_TRUE(encoder.WaitBitrateChanged(false));
-
-  SendTask(RTC_FROM_HERE, task_queue(), [this]() {
-    DestroyStreams();
-    DestroyCalls();
-  });
-}
 
 TEST_F(VideoSendStreamTest, EncoderIsProperlyInitializedAndDestroyed) {
   class EncoderStateObserver : public test::SendTest, public VideoEncoder {

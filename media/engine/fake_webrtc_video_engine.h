@@ -133,7 +133,6 @@ class FakeWebRtcVideoEncoderFactory : public webrtc::VideoEncoderFactory {
   std::vector<webrtc::SdpVideoFormat> formats_;
   std::vector<FakeWebRtcVideoEncoder*> encoders_ RTC_GUARDED_BY(mutex_);
   int num_created_encoders_ RTC_GUARDED_BY(mutex_);
-  bool encoders_have_internal_sources_;
   bool vp8_factory_mode_;
 };
 

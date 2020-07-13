@@ -98,7 +98,6 @@ VideoEncoder::EncoderInfo::EncoderInfo()
       implementation_name("unknown"),
       has_trusted_rate_controller(false),
       is_hardware_accelerated(true),
-      has_internal_source(false),
       fps_allocation{absl::InlinedVector<uint8_t, kMaxTemporalStreams>(
           1,
           kMaxFramerateFraction)},
@@ -129,7 +128,6 @@ std::string VideoEncoder::EncoderInfo::ToString() const {
          ", has_trusted_rate_controller = "
       << has_trusted_rate_controller
       << ", is_hardware_accelerated = " << is_hardware_accelerated
-      << ", has_internal_source = " << has_internal_source
       << ", fps_allocation = [";
   bool first = true;
   for (size_t i = 0; i < fps_allocation->size(); ++i) {
@@ -190,8 +188,7 @@ bool VideoEncoder::EncoderInfo::operator==(const EncoderInfo& rhs) const {
   if (supports_native_handle != rhs.supports_native_handle ||
       implementation_name != rhs.implementation_name ||
       has_trusted_rate_controller != rhs.has_trusted_rate_controller ||
-      is_hardware_accelerated != rhs.is_hardware_accelerated ||
-      has_internal_source != rhs.has_internal_source) {
+      is_hardware_accelerated != rhs.is_hardware_accelerated) {
     return false;
   }
 
