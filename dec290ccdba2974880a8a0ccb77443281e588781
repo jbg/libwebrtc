@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "31db6ffa_58742b5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-07-13T08:13:28Z",
+      "side": 1,
+      "message": "I don\u0027t think the linked bug is that relevant for this issue.\n\nIf the test RTCStatsIntegrationTest.GetsStatsWhileClosingPeerConnection works fine with no flakes, maybe no action is needed. But there\u0027s a related disabled test, RTCStatsIntegrationTest.DISABLED_GetStatsWhileDestroyingPeerConnection and related bug bugs.webrtc.org/10041.\n\nIt would be good to figure out if that test should be deleted or reenabled.",
+      "parentUuid": "264bf141_4c25f0b2",
+      "revId": "dec290ccdba2974880a8a0ccb77443281e588781",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54b7d600_536cda17",
         "filename": "pc/rtc_stats_collector.cc",
         "patchSetId": 1
