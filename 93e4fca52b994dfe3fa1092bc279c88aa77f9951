@@ -22,6 +22,30 @@
       "revId": "93e4fca52b994dfe3fa1092bc279c88aa77f9951",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9167e3c5_422b7c47",
+        "filename": "modules/video_coding/codecs/av1/create_scalability_structure.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-14T12:02:05Z",
+      "side": 1,
+      "message": "this string (not \u0027NONE\u0027, but any other one) will eventually come from the api. so some code is needed to convert string into the structure. I do not see a reason to add an enum inbetween.\n\n(would rather prefer to pass factory function instead of enum, where needed.)",
+      "parentUuid": "42e352b0_890105db",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 10
+      },
+      "revId": "93e4fca52b994dfe3fa1092bc279c88aa77f9951",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
