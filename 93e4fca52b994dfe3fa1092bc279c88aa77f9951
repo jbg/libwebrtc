@@ -46,6 +46,30 @@
       "revId": "93e4fca52b994dfe3fa1092bc279c88aa77f9951",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "764e917a_3c114bbc",
+        "filename": "modules/video_coding/codecs/av1/create_scalability_structure.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-07-14T12:52:40Z",
+      "side": 1,
+      "message": "I don\u0027t think we should consider details about how webrtc interacts with javascript land, but even then I don\u0027t see why this couldn\u0027t be an enum all the way down? In other words, an enum defined in JS and then in chrome somewhere convert it into a webrtc enum.\n\nNot sure I get your idea with the factory function?",
+      "parentUuid": "9167e3c5_422b7c47",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 10
+      },
+      "revId": "93e4fca52b994dfe3fa1092bc279c88aa77f9951",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
