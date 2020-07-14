@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fbe90f3_3649fa7f",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-07-14T11:44:45Z",
+      "side": 1,
+      "message": "Unrelated to this CL, but this shouldn\u0027t be considered an unsupported use case right?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 5
+      },
+      "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b20c779_0eae55a0",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-07-14T11:44:45Z",
+      "side": 1,
+      "message": "Signaling to the remote side that no decode target is enabled is not really supported by the DD, right? Maybe I\u0027m missing something but this doesn\u0027t look right.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 3
+      },
+      "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "405264cc_32896f9c",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-07-14T11:44:45Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a valid case.",
+      "range": {
+        "startLine": 245,
+        "startChar": 5,
+        "endLine": 245,
+        "endChar": 56
+      },
+      "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
