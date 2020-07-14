@@ -164,6 +164,30 @@
       "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca32a774_ceb835a6",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-14T16:00:56Z",
+      "side": 1,
+      "message": "good point. that indeed would be a strange situation.\ntechnically it is still possible. It is encoder wrapper that controls both list of active decode targets and when frame should be emited.\nSo I\u0027ve added an error log when/if that happens.\n\n(there should be no race because active decode targets are propagated together with a frame, by design, to avoid races and thus avoid missing switch points)",
+      "parentUuid": "98d06c20_05f805ed",
+      "range": {
+        "startLine": 245,
+        "startChar": 5,
+        "endLine": 245,
+        "endChar": 56
+      },
+      "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
