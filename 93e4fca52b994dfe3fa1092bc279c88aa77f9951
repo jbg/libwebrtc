@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42e352b0_890105db",
+        "filename": "modules/video_coding/codecs/av1/create_scalability_structure.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-07-14T11:29:31Z",
+      "side": 1,
+      "message": "Is there are good reason to not use enums?",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 10
+      },
+      "revId": "93e4fca52b994dfe3fa1092bc279c88aa77f9951",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
