@@ -50,12 +50,9 @@ std::bitset<32> ActiveChains(
     if (dt < active_decode_targets.size() && !active_decode_targets[dt]) {
       continue;
     }
-    // chain_idx == num_chains is valid and means the decode target is
-    // not protected by any chain.
     int chain_idx = decode_target_protected_by_chain[dt];
-    if (chain_idx < num_chains) {
-      active_chains.set(chain_idx);
-    }
+    RTC_DCHECK_LT(chain_idx, num_chains);
+    active_chains.set(chain_idx);
   }
   return active_chains;
 }
@@ -115,14 +112,6 @@ void ActiveDecodeTargetsHelper::OnFrame(
   // encoder. Thus stop sending `active_decode_target` bitmask when it is sent
   // on all active chains rather than on all chains.
   unsent_on_chain_ = last_active_chains_;
-  if (unsent_on_chain_.none()) {
-    // Active decode targets are not protected by any chains. To be on the
-    // safe side always send the active_decode_targets_bitmask from now on.
-    RTC_LOG(LS_WARNING)
-        << "Active decode targets protected by no chains. (In)active decode "
-           "targets information will be send overreliably.";
-    unsent_on_chain_.set(1);
-  }
 }
 
 }  // namespace webrtc
