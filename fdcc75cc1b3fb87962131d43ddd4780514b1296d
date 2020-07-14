@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5e22415_66243f42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-07-14T13:02:45Z",
+      "side": 1,
+      "message": "Hey folks, please advise who might want to have a look as a second reviewer.",
+      "revId": "fdcc75cc1b3fb87962131d43ddd4780514b1296d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
