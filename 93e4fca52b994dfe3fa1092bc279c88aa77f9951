@@ -70,6 +70,30 @@
       "revId": "93e4fca52b994dfe3fa1092bc279c88aa77f9951",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e72209fb_4c5f6e71",
+        "filename": "modules/video_coding/codecs/av1/create_scalability_structure.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-14T15:22:56Z",
+      "side": 1,
+      "message": "I still do not see how enum can help address the problem I\u0027m trying to address:\nmake a step towards webrtc-svc spec, add flexibility in specifying scalability mode to use.\n\nwebrtc-svc defines scalabilityMode as a string. so there has to be a conversion from a string somewhere. My idea is to propagate the mode as a string through the stack and convert from string directly to the structure at the very end.\n\nstring is more flexible than enum.\nCurrently it helps to avoid duplicating string\u003c-\u003eClass mapping in two unittests.\nWith mode provided as string factory can e.g. automatically handle \u0027h\u0027 suffix, pass spatial scalability ratio separately from creating a class.\nIt is also not just about javascript land, e.g. I was looking into setting scalability mode in video_loopback tool. input there is also a string (a command line flag).\n\n(side note: ignore the idea of passing around factory function. It is a solution for a different problem, i.e. offtopic)",
+      "parentUuid": "764e917a_3c114bbc",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 10
+      },
+      "revId": "93e4fca52b994dfe3fa1092bc279c88aa77f9951",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
