@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "69c29f9f_9fdf42d5",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-14T12:31:24Z",
+      "side": 1,
+      "message": "Unsupported by the ActiveDecodeTargetsHelper/Unimplemented by libwebrtc.\nBut sure is supported by the spec.",
+      "parentUuid": "7fbe90f3_3649fa7f",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 5
+      },
+      "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b20c779_0eae55a0",
         "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6039fba0_d54cc758",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-14T12:31:24Z",
+      "side": 1,
+      "message": "it can be, but yes, not really supported. and not really implemented with this line.\nRemoved this block to reduce confusion and to avoid provoking relying on this mechanic (since it requires more than this line to actually work)",
+      "parentUuid": "2b20c779_0eae55a0",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 3
+      },
+      "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "405264cc_32896f9c",
         "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
         "patchSetId": 6
@@ -68,6 +116,30 @@
       "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb7a8b8e_7aef7ba0",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-14T12:31:24Z",
+      "side": 1,
+      "message": "yep, removed.\nnow it is undefined what Helper returns when all decode targets are inactive.",
+      "parentUuid": "405264cc_32896f9c",
+      "range": {
+        "startLine": 245,
+        "startChar": 5,
+        "endLine": 245,
+        "endChar": 56
+      },
+      "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
