@@ -140,6 +140,30 @@
       "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98d06c20_05f805ed",
+        "filename": "modules/rtp_rtcp/source/active_decode_targets_helper_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-07-14T12:42:45Z",
+      "side": 1,
+      "message": "How could we ever consider all decode targets to be inactive if we have a frame to send? If we generate a frame and then disable all decode targets, then for that particular frame the Helper should be called with the set of active decode targets that was active when the frame was encoded. If not it sounds like a race to me.",
+      "parentUuid": "bb7a8b8e_7aef7ba0",
+      "range": {
+        "startLine": 245,
+        "startChar": 5,
+        "endLine": 245,
+        "endChar": 56
+      },
+      "revId": "4ea9611334b0ebec3398dd122e0922629041d54e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
