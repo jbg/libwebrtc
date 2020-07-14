@@ -54,6 +54,42 @@
     },
     {
       "key": {
+        "uuid": "842529de_5458b19d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-14T07:58:19Z",
+      "side": 1,
+      "message": "\u003e We are still depending on it, specifically in LoadBuiltinSSLRootCertificates. Which isn\u0027t required by chromium at least, but is for native apps.\n\u003e \n\u003e I plan to try moving the code for using the system certificate stores from chromium to webrtc for this and other reasons.\n\nOk, now I remember. Thanks.",
+      "parentUuid": "b8294e4e_b61a3b1c",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1eb6506_f2e363bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-07-14T07:58:19Z",
+      "side": 1,
+      "message": "SG, but I think it is an important (and awaited, since it comes back every few months) change so I think it would be nice to keep moving this. Maybe slowly but since you have already done part of the work it would be nice to get the benefits.",
+      "parentUuid": "4b0e37d5_9b48e7b9",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f45811b_e01c4bd6",
         "filename": "rtc_base/BUILD.gn",
         "patchSetId": 12
