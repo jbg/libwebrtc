@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '812a4946f745782675d2e1f35b1b86f2fee6d985',
+  'chromium_revision': 'b29b0e0540ac950cb90236a21251ef49d102d109',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -22,7 +22,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@5f695d73785a0b0d34d162a5bc22672adb78b7e0',
+    'https://chromium.googlesource.com/chromium/src/base@621d94498e0e6037173f06f0db99137dbe2b0bda',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@7a85719da252d431dd828bf2bf61ed1420101dac',
   'src/buildtools':
@@ -37,9 +37,9 @@ deps = {
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@5990dd50d889203de13e537a76d8baab4a37b4d9',
+    'https://chromium.googlesource.com/chromium/src/testing@a5ba56c748f12ac1c4bd749f81185ef514ee9637',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@198ff7b877659aedd533c64bd985bf1f7e19e37f',
+    'https://chromium.googlesource.com/chromium/src/third_party@936cd5f059dc4bc043ee0de241481d79b91df3e4',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -137,7 +137,7 @@ deps = {
   'src/third_party/colorama/src':
     'https://chromium.googlesource.com/external/colorama.git@799604a1041e9b3bc5d2789ecbd7e8db2e18e6b8',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@fad2090a5e813bb61aa85ec1f7a565cc7ca09ccb',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@35dec5f127c3258b39c0e76bd6eff2f9a2ff4dae',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@d2dd36c03501e995e8ce2d792d834392b2e62bfe',
   'src/third_party/findbugs': {
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@ec6df7875fa97db117e4109958bed9faa2b4bd39',
+    'https://chromium.googlesource.com/chromium/src/tools@b76b5ac91a4c5a3a44eed362cb92066a76c3dc54',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@4c095d04179dc725a300085ae21fe3b79900d072',
 
