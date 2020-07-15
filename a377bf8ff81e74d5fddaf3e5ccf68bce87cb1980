@@ -16,6 +16,23 @@
       "revId": "a377bf8ff81e74d5fddaf3e5ccf68bce87cb1980",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9001ba20_fe7c6d48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-07-15T15:08:17Z",
+      "side": 1,
+      "message": "bear with me again :-)\n\nSo on master the behavior is as described in the very long comment and we have all three frame types and the same behaviour on linux + android. It classifies the silence in the beginning as speech followed by the 1-byte dtx frame which is (mis)classified as CN followed by lots of dtx silence.\n  https://webrtc-review.googlesource.com/c/src/+/179366\nhas the same debugging as this CL.\n\nThis change causes some change in behaviour. For stereo only. On some platforms.\n\nOn mobile there is one frame classified as speech followed by a bunch of CN frames followed by empty frames followed by speech:\nhttps://chromium-swarm.appspot.com/task?id\u003d4d6b212a439c8f10 (android)\nhttps://chromium-swarm.appspot.com/task?id\u003d4d6b32b6a0635710 (ios)\n(search for AudioCodingModuleTest, the stereo test starts at timestamp\u003d305563896)\n\nOn desktop there are a bunch of frames classified as speech followed by empty frames followed by speech. No comfort noise. See\nhttps://isolateserver.appspot.com/browse?namespace\u003ddefault-gzip\u0026digest\u003d49b729cc5ba5ac463aea890fdc8d211cbd539612\u0026as\u003dpassed-tests.log\n\nThe mobile VAD result seems more accurate to me but this might be using platform specific code for opus vad? It also seems like DTX is kicking earlier on mobile, there are more packets with len\u003d0.",
+      "revId": "a377bf8ff81e74d5fddaf3e5ccf68bce87cb1980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
