@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acc7599a_123b6290",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-07-15T11:26:16Z",
+      "side": 1,
+      "message": "can you +1 once more please? printf debugging, works everywhere :-)",
+      "revId": "a377bf8ff81e74d5fddaf3e5ccf68bce87cb1980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
