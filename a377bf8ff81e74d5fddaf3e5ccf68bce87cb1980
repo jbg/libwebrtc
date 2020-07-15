@@ -33,6 +33,24 @@
       "revId": "a377bf8ff81e74d5fddaf3e5ccf68bce87cb1980",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cf93588_12d79092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-07-15T20:44:03Z",
+      "side": 1,
+      "message": "Thanks for looking into it! I think that platform dependent behavior should be ok. could you modify the test so that we define different expected results on different platforms?",
+      "parentUuid": "9001ba20_fe7c6d48",
+      "revId": "a377bf8ff81e74d5fddaf3e5ccf68bce87cb1980",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
