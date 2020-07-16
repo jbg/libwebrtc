@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3045a23c_72f9f947",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-07-16T14:22:10Z",
+      "side": 1,
+      "message": "Follow-up on the previous CL. Patch set 1 has three different bot runs showing the behavior with logging, looks more similar now. And it worked on the first try! ;-)",
+      "revId": "206142f4ce4ede8dfb9c13813fd7fc2bb6e19e0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
