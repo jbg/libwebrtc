@@ -42,6 +42,9 @@ int32_t MonitoringAudioPacketizationCallback::SendData(
     const uint8_t* payload_data,
     size_t payload_len_bytes,
     int64_t absolute_capture_timestamp_ms) {
+  printf("frame_type %d payload_type %d ts=%d len=%zu\n",
+         static_cast<int>(frame_type), payload_type, timestamp,
+         payload_len_bytes);
   counter_[static_cast<int>(frame_type)]++;
   return next_->SendData(frame_type, payload_type, timestamp, payload_data,
                          payload_len_bytes, absolute_capture_timestamp_ms);
@@ -267,16 +270,13 @@ void TestOpusDtx::Perform() {
 
   acm_send_->ModifyEncoder([](std::unique_ptr<AudioEncoder>* encoder_ptr) {
     (*encoder_ptr)->SetDtx(true);
+    // Set a low target bitrate to get consistent behaviour across platforms.
+    (*encoder_ptr)->OnReceivedTargetAudioBitrate(24000);
   });
 
   expects[static_cast<int>(AudioFrameType::kEmptyFrame)] = 1;
   expects[static_cast<int>(AudioFrameType::kAudioFrameSpeech)] = 1;
-  // Android and iOS behave different with respect to the number of CN frames.
-#if defined(WEBRTC_IOS) || defined(WEBRTC_ANDROID)
   expects[static_cast<int>(AudioFrameType::kAudioFrameCN)] = 1;
-#else
-  expects[static_cast<int>(AudioFrameType::kAudioFrameCN)] = 0;
-#endif
   Run(webrtc::test::ResourcePath("audio_coding/teststereo32kHz", "pcm"), 32000,
       2, out_filename, true, expects);
 }
