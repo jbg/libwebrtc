@@ -57,6 +57,30 @@
       "revId": "cf1d65f313c75b9177f17d07fe589a070778a13b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34886785_a989e357",
+        "filename": "modules/rtp_rtcp/source/rtp_format_h264_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-16T13:53:17Z",
+      "side": 1,
+      "message": "sections B.1.1/B.1.2 in the same spec notes that it can be either.\n\n\"the fourbyte sequence 0x00000001 (which is to be interpreted as a zero_byte followed by a start_code_prefix_one_3bytes)\"\n\nH264::FindNaluIndices supports both.",
+      "parentUuid": "fa907914_571f845c",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 26
+      },
+      "revId": "cf1d65f313c75b9177f17d07fe589a070778a13b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
