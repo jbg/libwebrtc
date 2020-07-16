@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fdd58c4_483882f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-07-16T08:05:30Z",
+      "side": 1,
+      "message": "Updated the expectation (whether I did it right... is up to the bots)\n\nI could not resist digging a bit deeper and it looks like desktop goes into CELT mode which is still considered speech. But that investigation is probably best left to a followup issue :-)",
+      "revId": "29f0109b1f56ba4891150f54acc901ac6c99ba9b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
