@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5837459d_11e9f663",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-07-16T12:19:56Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me why this must be the same value as the min sleep time, could that be explained here, or should we add another constant that just happen to be the same value for now?",
+      "range": {
+        "startLine": 404,
+        "startChar": 31,
+        "endLine": 404,
+        "endChar": 44
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d74d5a4_8a552791",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-07-16T12:19:56Z",
+      "side": 1,
+      "message": "Why does this need to change? Was it wrong before?",
+      "range": {
+        "startLine": 577,
+        "startChar": 43,
+        "endLine": 577,
+        "endChar": 46
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ebd230f_02eb93fb",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-07-16T12:19:56Z",
+      "side": 1,
+      "message": "Add a comment explaining where this value comes from, looks very specific.",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 62
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "892b228d_c50052f1",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-07-16T12:19:56Z",
+      "side": 1,
+      "message": "nit: auto",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 36
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73c41571_2f8d776a",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-07-16T12:19:56Z",
+      "side": 1,
+      "message": "nit: /* field_name\u003d */ nullptr",
+      "range": {
+        "startLine": 99,
+        "startChar": 42,
+        "endLine": 99,
+        "endChar": 49
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
