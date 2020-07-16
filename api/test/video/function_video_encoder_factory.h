@@ -46,7 +46,6 @@ class FunctionVideoEncoderFactory final : public VideoEncoderFactory {
   CodecInfo QueryVideoEncoder(
       const SdpVideoFormat& /* format */) const override {
     CodecInfo codec_info;
-    codec_info.is_hardware_accelerated = false;
     codec_info.has_internal_source = false;
     return codec_info;
   }
