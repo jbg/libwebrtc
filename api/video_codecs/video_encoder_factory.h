@@ -28,9 +28,6 @@ class VideoEncoderFactory {
  public:
   // TODO(magjed): Try to get rid of this struct.
   struct CodecInfo {
-    // |is_hardware_accelerated| is true if the encoders created by this factory
-    // of the given codec will use hardware support.
-    bool is_hardware_accelerated = false;
     // |has_internal_source| is true if encoders created by this factory of the
     // given codec will use internal camera sources, meaning that they don't
     // require/expect frames to be delivered via webrtc::VideoEncoder::Encode.

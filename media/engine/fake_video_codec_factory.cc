@@ -46,7 +46,7 @@ std::vector<SdpVideoFormat> FakeVideoEncoderFactory::GetSupportedFormats()
 
 VideoEncoderFactory::CodecInfo FakeVideoEncoderFactory::QueryVideoEncoder(
     const SdpVideoFormat& format) const {
-  return VideoEncoderFactory::CodecInfo{false, false};
+  return VideoEncoderFactory::CodecInfo{false};
 }
 
 std::unique_ptr<VideoEncoder> FakeVideoEncoderFactory::CreateVideoEncoder(
