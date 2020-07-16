@@ -45,7 +45,6 @@ VideoEncoderFactory::CodecInfo InternalEncoderFactory::QueryVideoEncoder(
     const SdpVideoFormat& format) const {
   CodecInfo info;
   info.is_hardware_accelerated = false;
-  info.has_internal_source = false;
   return info;
 }
 
