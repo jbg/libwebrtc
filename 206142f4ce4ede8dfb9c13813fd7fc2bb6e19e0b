@@ -16,6 +16,23 @@
       "revId": "206142f4ce4ede8dfb9c13813fd7fc2bb6e19e0b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98ddf2b9_22f05fce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-07-16T14:27:26Z",
+      "side": 1,
+      "message": "This is interesting. It is ok to seek for an operating mode that the encoder behaves consistently across platforms. But I think we perhaps do not need to hide the fact that the behavior of the codec can be platform dependent.\n\nWould you add a comment there and say that default bitrate will result in divergence?",
+      "revId": "206142f4ce4ede8dfb9c13813fd7fc2bb6e19e0b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
