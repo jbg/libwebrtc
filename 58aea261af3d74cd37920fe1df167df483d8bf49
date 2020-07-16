@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c56be00e_4d6ae9d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-07-16T15:58:04Z",
+      "side": 1,
+      "message": "Updated. It\u0027s caused by the \"if its CELT consider it speech\" decision which is why lowering the target bitrate prevented this. Still wondering why it only affects the stereo case though...",
+      "revId": "58aea261af3d74cd37920fe1df167df483d8bf49",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
