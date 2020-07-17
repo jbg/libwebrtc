@@ -16,6 +16,23 @@
       "revId": "40c715ad6ffd5ea6c29a1c51f0850c4d29dc7c3b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b32672b_61f4f832",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-17T14:16:16Z",
+      "side": 1,
+      "message": "Björn, can I please have an approval for the api change.\n",
+      "revId": "40c715ad6ffd5ea6c29a1c51f0850c4d29dc7c3b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
