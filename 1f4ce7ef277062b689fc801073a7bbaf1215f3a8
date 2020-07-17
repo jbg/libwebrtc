@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "035784be_703eeef9",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-07-17T09:42:14Z",
+      "side": 1,
+      "message": "I can add another constant, with an explainer. It\u0027s since TaskQueuePacedSender rounds down to\nthe nearest ms, and the min sleep time was set to avoid rounding to 0.",
+      "parentUuid": "5837459d_11e9f663",
+      "range": {
+        "startLine": 404,
+        "startChar": 31,
+        "endLine": 404,
+        "endChar": 44
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d74d5a4_8a552791",
         "filename": "modules/pacing/pacing_controller.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a2aecdb_a2a65afd",
+        "filename": "modules/pacing/pacing_controller.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-07-17T09:42:14Z",
+      "side": 1,
+      "message": "I would classify that as wrong yes, tests added in this CL found it. It not a big issue, but result is that if the default padding packet size is 250bytes and the recommended probe size is 500bytes we will send a total of three packets so 750bytes.\nThings won\u0027t line up perfectly like that in real life, but it still bothered me.",
+      "parentUuid": "6d74d5a4_8a552791",
+      "range": {
+        "startLine": 577,
+        "startChar": 43,
+        "endLine": 577,
+        "endChar": 46
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1f764950_cf338020",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-07-17T09:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ebd230f_02eb93fb",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 62
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "892b228d_c50052f1",
         "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "5ca0a109_352c2e32",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-07-17T09:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "892b228d_c50052f1",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 36
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73c41571_2f8d776a",
         "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
         "patchSetId": 2
@@ -114,6 +210,30 @@
       "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfca57ac_aca74274",
+        "filename": "modules/pacing/task_queue_paced_sender_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-07-17T09:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73c41571_2f8d776a",
+      "range": {
+        "startLine": 99,
+        "startChar": 42,
+        "endLine": 99,
+        "endChar": 49
+      },
+      "revId": "1f4ce7ef277062b689fc801073a7bbaf1215f3a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
