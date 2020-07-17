@@ -39,6 +39,11 @@ constexpr TimeDelta kMaxElapsedTime = TimeDelta::Seconds(2);
 // time. Applies only to periodic mode.
 constexpr TimeDelta kMaxProcessingInterval = TimeDelta::Millis(30);
 
+// Allow probes to be processed slightly ahead of inteded send time. Currently
+// set to 1ms as this is intended to allow times be rounded down to the nearest
+// millisecond.
+constexpr TimeDelta kMaxEarlyProbeProcessing = TimeDelta::Millis(1);
+
 constexpr int kFirstPriority = 0;
 
 bool IsDisabled(const WebRtcKeyValueConfig& field_trials,
@@ -400,10 +405,13 @@ void PacingController::ProcessPackets() {
   Timestamp target_send_time = now;
   if (mode_ == ProcessMode::kDynamic) {
     target_send_time = NextSendTime();
+    TimeDelta early_execute_margin =
+        prober_.is_probing() ? kMaxEarlyProbeProcessing : TimeDelta::Zero();
     if (target_send_time.IsMinusInfinity()) {
       target_send_time = now;
-    } else if (now < target_send_time) {
+    } else if (now < target_send_time - early_execute_margin) {
       // We are too early, but if queue is empty still allow draining some debt.
+      // Probing is allowed to be sent up to kMinSleepTime early.
       TimeDelta elapsed_time = UpdateTimeAndGetElapsed(now);
       UpdateBudgetWithElapsedTime(elapsed_time);
       return;
@@ -571,7 +579,7 @@ void PacingController::ProcessPackets() {
 
     // Send done, update send/process time to the target send time.
     OnPacketSent(packet_type, packet_size, target_send_time);
-    if (recommended_probe_size && data_sent > *recommended_probe_size)
+    if (recommended_probe_size && data_sent >= *recommended_probe_size)
       break;
 
     if (mode_ == ProcessMode::kDynamic) {
