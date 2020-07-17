@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9272759c_ee59d1e5",
+        "filename": "modules/pacing/task_queue_paced_sender.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5531
+      },
+      "writtenOn": "2020-07-17T10:18:50Z",
+      "side": 1,
+      "message": "I find this hard to follow, could we split it into two conditions? eg if(controller.IsProbing()) ... else ...\n\nWhile there might be some redundant code I think it would make it clearer when and how things happen.",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 3
+      },
+      "revId": "2d73d7a5c7581ada770db9c32c1ec2adff96bb24",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
