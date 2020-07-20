@@ -16,6 +16,23 @@
       "revId": "89fa183abdc0af1c43a903b7d72d4397d98ae587",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04580d37_6a8bc4a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-07-20T09:33:35Z",
+      "side": 1,
+      "message": "not sure if adding to media_constants in the cricket is still a thing but since H265X was added...\n\"where do sdp string constants live\" seems like a very mixed bag, see e.g. kMediaProtocolAvpf",
+      "revId": "89fa183abdc0af1c43a903b7d72d4397d98ae587",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
