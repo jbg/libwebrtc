@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d4dcc70_c5ba39cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-07-20T09:31:27Z",
+      "side": 1,
+      "message": "FYI: There was no changes after speculative revert",
+      "revId": "89fa183abdc0af1c43a903b7d72d4397d98ae587",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
