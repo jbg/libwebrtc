@@ -22,6 +22,30 @@
       "revId": "a370485411cab28db071a61b7750f256b1626c17",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86cdf8e8_afd3818b",
+        "filename": "modules/rtp_rtcp/source/rtp_dependency_descriptor_reader.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-22T12:08:31Z",
+      "side": 1,
+      "message": "Updated the description (in the PR I\u0027ve also put a bit of motivation for the change)\nThe change in the comment in the \"api/transport/rtp/dependency_descriptor.h\" \nis another (pretty much full) description of the meaning of the change.",
+      "parentUuid": "d76e6337_bd9da1e0",
+      "range": {
+        "startLine": 149,
+        "startChar": 51,
+        "endLine": 149,
+        "endChar": 72
+      },
+      "revId": "a370485411cab28db071a61b7750f256b1626c17",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
