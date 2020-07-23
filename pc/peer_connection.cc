@@ -1171,11 +1171,20 @@ bool PeerConnection::Initialize(
 
   // The port allocator lives on the network thread and should be initialized
   // there.
-  const auto pa_result =
-      network_thread()->Invoke<InitializePortAllocatorResult>(
-          RTC_FROM_HERE,
-          rtc::Bind(&PeerConnection::InitializePortAllocator_n, this,
-                    stun_servers, turn_servers, configuration));
+  network_thread()->PostTask(RTC_FROM_HERE, [this, stun_servers, turn_servers,
+                                             configuration]() {
+    const auto pa_result = this->InitializePortAllocator_n(
+        stun_servers, turn_servers, configuration);
+    // Send information about IPv4/IPv6 status.
+    PeerConnectionAddressFamilyCounter address_family;
+    if (pa_result.enable_ipv6) {
+      address_family = kPeerConnection_IPv6;
+    } else {
+      address_family = kPeerConnection_IPv4;
+    }
+    RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.IPMetrics", address_family,
+                              kPeerConnectionAddressFamilyCounter_Max);
+  });
 
   // If initialization was successful, note if STUN or TURN servers
   // were supplied.
@@ -1185,16 +1194,6 @@ bool PeerConnection::Initialize(
   if (!turn_servers.empty()) {
     NoteUsageEvent(UsageEvent::TURN_SERVER_ADDED);
   }
-
-  // Send information about IPv4/IPv6 status.
-  PeerConnectionAddressFamilyCounter address_family;
-  if (pa_result.enable_ipv6) {
-    address_family = kPeerConnection_IPv6;
-  } else {
-    address_family = kPeerConnection_IPv4;
-  }
-  RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.IPMetrics", address_family,
-                            kPeerConnectionAddressFamilyCounter_Max);
 
   const PeerConnectionFactoryInterface::Options& options = factory_->options();
 
