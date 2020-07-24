@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "af845d18_f0d7ce68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-24T16:55:09Z",
+      "side": 1,
+      "message": "better description: \"the observer is called by posting a message back to the execution thread, delaying the call.\"",
+      "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "57da7e44_46476442",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
@@ -16,6 +33,57 @@
       "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f85d060_d9e6a225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-24T16:55:09Z",
+      "side": 1,
+      "message": "Looks good. Takes a while to read!\n\n",
+      "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddaf48d2_00da2307",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 2602,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-24T16:55:09Z",
+      "side": 1,
+      "message": "caught my eye ... will this cause OnNegotiationNeeded to be fired only the second time is_negotiation_needed_ is set to true? (first time it was false, so won\u0027t fire)",
+      "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61fc3ef2_65689a9b",
+        "filename": "pc/peer_connection_signaling_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-24T16:55:09Z",
+      "side": 1,
+      "message": "Naming nit: The tests that are for the new behavior shouldn\u0027thave \"WithNewObserver\" in the name - this name will be confusing if we forget to update them when we remove the old ones.",
+      "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
