@@ -839,10 +839,7 @@ class PeerConnection : public PeerConnectionInternal,
       RTC_RUN_ON(signaling_thread());
 
   // Called when first configuring the port allocator.
-  struct InitializePortAllocatorResult {
-    bool enable_ipv6;
-  };
-  InitializePortAllocatorResult InitializePortAllocator_n(
+  void InitializePortAllocator_n(
       const cricket::ServerAddresses& stun_servers,
       const std::vector<cricket::RelayServerConfig>& turn_servers,
       const RTCConfiguration& configuration);
