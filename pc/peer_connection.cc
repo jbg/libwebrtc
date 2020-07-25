@@ -1171,11 +1171,14 @@ bool PeerConnection::Initialize(
 
   // The port allocator lives on the network thread and should be initialized
   // there.
-  const auto pa_result =
-      network_thread()->Invoke<InitializePortAllocatorResult>(
-          RTC_FROM_HERE,
-          rtc::Bind(&PeerConnection::InitializePortAllocator_n, this,
-                    stun_servers, turn_servers, configuration));
+  if (network_thread()->IsCurrent()) {
+    InitializePortAllocator_n(stun_servers, turn_servers, configuration);
+  } else {
+    network_thread()->PostTask(
+        RTC_FROM_HERE, [this, stun_servers, turn_servers, configuration]() {
+          InitializePortAllocator_n(stun_servers, turn_servers, configuration);
+        });
+  }
 
   // If initialization was successful, note if STUN or TURN servers
   // were supplied.
@@ -1185,16 +1188,6 @@ bool PeerConnection::Initialize(
   if (!turn_servers.empty()) {
     NoteUsageEvent(UsageEvent::TURN_SERVER_ADDED);
   }
-
-  // Send information about IPv4/IPv6 status.
-  PeerConnectionAddressFamilyCounter address_family;
-  if (pa_result.enable_ipv6) {
-    address_family = kPeerConnection_IPv6;
-  } else {
-    address_family = kPeerConnection_IPv4;
-  }
-  RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.IPMetrics", address_family,
-                            kPeerConnectionAddressFamilyCounter_Max);
 
   const PeerConnectionFactoryInterface::Options& options = factory_->options();
 
@@ -5644,8 +5637,7 @@ SctpDataChannel* PeerConnection::FindDataChannelBySid(int sid) const {
   return data_channel_controller_.FindDataChannelBySid(sid);
 }
 
-PeerConnection::InitializePortAllocatorResult
-PeerConnection::InitializePortAllocator_n(
+void PeerConnection::InitializePortAllocator_n(
     const cricket::ServerAddresses& stun_servers,
     const std::vector<cricket::RelayServerConfig>& turn_servers,
     const RTCConfiguration& configuration) {
@@ -5708,9 +5700,16 @@ PeerConnection::InitializePortAllocator_n(
       configuration.GetTurnPortPrunePolicy(), configuration.turn_customizer,
       configuration.stun_candidate_keepalive_interval);
 
-  InitializePortAllocatorResult res;
-  res.enable_ipv6 = port_allocator_flags & cricket::PORTALLOCATOR_ENABLE_IPV6;
-  return res;
+  bool enable_ipv6 = port_allocator_flags & cricket::PORTALLOCATOR_ENABLE_IPV6;
+  // Send information about IPv4/IPv6 status.
+  PeerConnectionAddressFamilyCounter address_family;
+  if (enable_ipv6) {
+    address_family = kPeerConnection_IPv6;
+  } else {
+    address_family = kPeerConnection_IPv4;
+  }
+  RTC_HISTOGRAM_ENUMERATION("WebRTC.PeerConnection.IPMetrics", address_family,
+                            kPeerConnectionAddressFamilyCounter_Max);
 }
 
 bool PeerConnection::ReconfigurePortAllocator_n(
