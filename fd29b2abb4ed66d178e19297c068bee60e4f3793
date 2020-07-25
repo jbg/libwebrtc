@@ -16,6 +16,40 @@
       "revId": "fd29b2abb4ed66d178e19297c068bee60e4f3793",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af5ce3dc_34d2c6e6",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-25T19:38:37Z",
+      "side": 1,
+      "message": "is this only to cover the case if the network thread has been configured to be the same as the network thread?  (otherwise, I would expect it to be a bug if this method is called on the network thread).",
+      "revId": "fd29b2abb4ed66d178e19297c068bee60e4f3793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a4bd13b_cb3b1131",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-25T19:38:37Z",
+      "side": 1,
+      "message": "this changes the behavior so that when Initialize() returns, the port allocator may not be initialized. In order to preserve the current behavior, you need to wait for this to complete before returning.",
+      "revId": "fd29b2abb4ed66d178e19297c068bee60e4f3793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
