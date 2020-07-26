@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1a276a0a_81f08cf1",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-26T22:04:37Z",
+      "side": 1,
+      "message": "Yes I think that would both catch something we didn\u0027t think of as well as document when this would ever happen (since there\u0027s a DCHECK at the top of the function for the signaling thread).",
+      "parentUuid": "0e8f39e9_68c9457a",
+      "revId": "fd29b2abb4ed66d178e19297c068bee60e4f3793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a4bd13b_cb3b1131",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 6
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "Yep. I hope this changes should be quite safe. In case if we have a separate network thread:\n1. Any task posted to the network thread that will need port allocator will be executed after this one\n2. Any invoke done to the network thread will be executed after this task\n3. Any invoke from network thread will be done after this task, because the task from which it came is going after this.\n\nThe only case, if network thread is shared with another one, then some activities may be executed before, but here I hope on test coverage.\n\nNetwork activities shouldn\u0027t affect it too, because IIUC network isn\u0027t initialized here yet.\n\nWDYT?",
       "parentUuid": "0a4bd13b_cb3b1131",
+      "revId": "fd29b2abb4ed66d178e19297c068bee60e4f3793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11c09cff_41a24e21",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-07-26T22:04:37Z",
+      "side": 1,
+      "message": "I think it could still happen that initialization hasn\u0027t happened on the network thread after Initialize() finishes and we end up in a bad state.\nConsider Initialization being started while an Invoke is running on the network thread and then an invoke to the signaling thread were to happen which invokes again to the network thread. That would happen before PostTask would run.\n\nSo until we have a guarantee that Invokes are gone, I don\u0027t think we should risk the assumption that PostTask to the network thread is the only way we would ever interact with this state from other calling context (including locking etc if we also do that).",
+      "parentUuid": "782fb5b6_5d29731d",
       "revId": "fd29b2abb4ed66d178e19297c068bee60e4f3793",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
