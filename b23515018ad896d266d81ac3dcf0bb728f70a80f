@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3ab8ee5_b4600424",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-07-27T11:20:44Z",
+      "side": 1,
+      "message": "Should we annotate this with RTC_DEPRECATED, to avoid back sliding?",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 9
+      },
+      "revId": "b23515018ad896d266d81ac3dcf0bb728f70a80f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
