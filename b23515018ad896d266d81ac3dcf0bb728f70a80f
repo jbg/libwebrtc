@@ -46,6 +46,30 @@
       "revId": "b23515018ad896d266d81ac3dcf0bb728f70a80f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "675a0e41_1fef9988",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-07-27T11:46:26Z",
+      "side": 1,
+      "message": "Right, that makes sense. I didn\u0027t think about the new default implementation of the old method.",
+      "parentUuid": "a97c92a2_0ac039e8",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 9
+      },
+      "revId": "b23515018ad896d266d81ac3dcf0bb728f70a80f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
