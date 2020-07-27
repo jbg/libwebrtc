@@ -90,6 +90,23 @@
     },
     {
       "key": {
+        "uuid": "b239cfac_628aa5c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-27T10:27:21Z",
+      "side": 1,
+      "message": "I am not enamored of the type hierarchy proposed here.\n\nWe have SSLCertificate, with sublcasses BoringSSLCertificate and OpenSSLCertificate (and similar things in other places, I think). Then we have parts of the implementation of OpenSSLCertificate calling into BoringSSLCertificate depending on a compile-time flag (if I read it rightly).\n\nThis is not going to be easy to maintain, because it\u0027s not easy to explain.\n\nI would be happier if the SSLCertificate API was fully implemented by each of the subclasses, without cross-references between them, and the common code was extracted to shared utilities.\n\nThat might be a larger CL, but might get us to a better place in the end.\n\nBTW: The presubmit error is because of the blank line between Bug: and Change-Id, I think.",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f45811b_e01c4bd6",
         "filename": "rtc_base/BUILD.gn",
         "patchSetId": 12
