@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8104bb3_eeab0900",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-07-27T11:33:02Z",
+      "side": 1,
+      "message": "Henrik, feel free to not LGTM this CL if you don\u0027t think it makes sense for you to review it, but AFAICT you are the only one that could LGTM this right now.\n\nPTAL.",
+      "revId": "21aa90b817d047fa99e3cdbd5fdc2eb5aa552bcc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
