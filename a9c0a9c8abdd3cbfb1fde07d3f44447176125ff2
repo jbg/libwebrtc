@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "54aaf7a4_911e19d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-07-27T22:42:48Z",
+      "side": 1,
+      "message": "\u003e Then we have parts of the implementation of OpenSSLCertificate calling into BoringSSLCertificate depending on a compile-time flag (if I read it rightly).\n\nWhere are you seeing that? This CL doesn\u0027t even modify OpenSSLCertificate. Are you talking about OpenSSLStreamAdapter? It\u0027s really \"OpenSSLOrBoringSSLStreamAdapter\" but that name seems unwieldy.",
+      "parentUuid": "b239cfac_628aa5c0",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f45811b_e01c4bd6",
         "filename": "rtc_base/BUILD.gn",
         "patchSetId": 12
