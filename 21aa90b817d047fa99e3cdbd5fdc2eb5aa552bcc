@@ -16,6 +16,23 @@
       "revId": "21aa90b817d047fa99e3cdbd5fdc2eb5aa552bcc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d30ce662_7ceed077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2020-07-27T12:34:12Z",
+      "side": 1,
+      "message": "Looks like a clean and simple refactor CL.",
+      "revId": "21aa90b817d047fa99e3cdbd5fdc2eb5aa552bcc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
