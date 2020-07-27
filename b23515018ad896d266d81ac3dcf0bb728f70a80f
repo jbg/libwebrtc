@@ -22,6 +22,30 @@
       "revId": "b23515018ad896d266d81ac3dcf0bb728f70a80f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a97c92a2_0ac039e8",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-07-27T11:30:09Z",
+      "side": 1,
+      "message": "I would like to, but I do not see how to make it work:\nRTC_DEPRECATED prevents using this function from webrtc.\nSince external code overrides this function and expect it to be called, I do not see how I can avoid calling it.",
+      "parentUuid": "d3ab8ee5_b4600424",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 9
+      },
+      "revId": "b23515018ad896d266d81ac3dcf0bb728f70a80f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
