@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b9d0b33_157bfd64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-07-28T10:37:48Z",
+      "side": 1,
+      "message": "I don\u0027t want to know since when that was broken :-)",
+      "revId": "85c029156fd2de293c92bfa288c04ae0e82c7024",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
