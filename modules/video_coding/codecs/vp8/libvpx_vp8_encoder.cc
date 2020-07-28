@@ -277,7 +277,6 @@ vpx_enc_frame_flags_t LibvpxVp8Encoder::EncodeFlags(
 LibvpxVp8Encoder::LibvpxVp8Encoder(std::unique_ptr<LibvpxInterface> interface,
                                    VP8Encoder::Settings settings)
     : libvpx_(std::move(interface)),
-      experimental_cpu_speed_config_arm_(CpuSpeedExperiment::GetConfigs()),
       rate_control_settings_(RateControlSettings::ParseFromFieldTrials()),
       frame_buffer_controller_factory_(
           std::move(settings.frame_buffer_controller_factory)),
@@ -715,9 +714,8 @@ int LibvpxVp8Encoder::GetCpuSpeed(int width, int height) {
   if (number_of_cores_ <= 3)
     return -12;
 
-  if (experimental_cpu_speed_config_arm_) {
-    return CpuSpeedExperiment::GetValue(width * height,
-                                        *experimental_cpu_speed_config_arm_);
+  if (experimental_cpu_speed_config_arm_.GetValue(width * height).has_value()) {
+    return experimental_cpu_speed_config_arm_.GetValue(width * height).value();
   }
 
   if (width * height <= 352 * 288)
