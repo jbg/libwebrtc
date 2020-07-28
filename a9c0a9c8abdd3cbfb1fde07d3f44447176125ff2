@@ -125,6 +125,41 @@
     },
     {
       "key": {
+        "uuid": "2df85efa_3e35640e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-28T14:58:12Z",
+      "side": 1,
+      "message": "Yes, it\u0027s OpenSSLStreamAdapter that is the confused object. We could rename it to SSLStreamAdapterImpl, or we could complete the job of separation.",
+      "parentUuid": "54aaf7a4_911e19d9",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c539e8d9_269155c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-28T14:58:12Z",
+      "side": 1,
+      "message": "You\u0027re right.\n",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f45811b_e01c4bd6",
         "filename": "rtc_base/BUILD.gn",
         "patchSetId": 12
