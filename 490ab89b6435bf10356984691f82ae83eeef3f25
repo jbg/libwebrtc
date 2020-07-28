@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0a3eb1ab_de3bb0f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-28T08:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af845d18_f0d7ce68",
+      "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57da7e44_46476442",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "45e672b6_adbd87c7",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 2602,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-28T08:47:24Z",
+      "side": 1,
+      "message": "Yes UpdateNegotiationNeeded() aborts and doesn\u0027t fire OnRenegotiationNeeded() if is_negotiation_needed_ was already true when it was called. So for example, if you call addTransceiver() then is_negotiation_needed_ goes from false to true which queues an event to fire. If you call addTransceiver() again within the same task execution cycle, then UpdateNegotiationNeeded() is called again, but because is_negotiation_needed_ is already true we won\u0027t queue to fire another ONN event. This results in a single ONN event even though we made two changes, because by the time the event fires and we perform createOffer(), that offer will cover both changes.\n\nBut here if a negotiation was pending, then as soon as we return back to \"stable\" we need to check if there was anything more that needed negotiating that wasn\u0027t just negotiated. That is why we have this special \"fire OnRenegotiationNeeded() anyway\" upon returning to stable.\n\nExample: while exchanging an offer (signalingState is not stable) we perform addTransceiver. is_negotiation_needed_ is true but no event is fired due to our signaling state. When we get the answer back we\u0027re back to stable, but the old offer that we exchanged did not cover the newly added transceiver. This code makes ONN fire again on returning back to stable for a second offer to be exchanged.\n\nThe same logic can be found in both SLD and SRD.",
+      "parentUuid": "ddaf48d2_00da2307",
+      "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61fc3ef2_65689a9b",
         "filename": "pc/peer_connection_signaling_unittest.cc",
         "patchSetId": 10
@@ -84,6 +120,24 @@
       "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7f8e6fc_34950dd4",
+        "filename": "pc/peer_connection_signaling_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-07-28T08:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61fc3ef2_65689a9b",
+      "revId": "490ab89b6435bf10356984691f82ae83eeef3f25",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
