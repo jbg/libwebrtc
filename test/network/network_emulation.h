@@ -40,47 +40,43 @@ namespace webrtc {
 class EmulatedNetworkStatsImpl final : public EmulatedNetworkStats {
  public:
   EmulatedNetworkStatsImpl(
-      int64_t packets_sent,
-      DataSize bytes_sent,
       std::vector<rtc::IPAddress> local_addresses,
-      DataSize first_sent_packet_size,
-      Timestamp first_packet_sent_time,
-      Timestamp last_packet_sent_time,
+      std::map<rtc::IPAddress, EmulatedNetworkOutgoingStats>
+          outgoing_stats_per_destination,
       std::map<rtc::IPAddress, EmulatedNetworkIncomingStats>
           incoming_stats_per_source)
-      : packets_sent_(packets_sent),
-        bytes_sent_(bytes_sent),
-        local_addresses_(std::move(local_addresses)),
-        first_sent_packet_size_(first_sent_packet_size),
-        first_packet_sent_time_(first_packet_sent_time),
-        last_packet_sent_time_(last_packet_sent_time),
+      : local_addresses_(std::move(local_addresses)),
+        outgoing_stats_per_destination_(
+            std::move(outgoing_stats_per_destination)),
         incoming_stats_per_source_(std::move(incoming_stats_per_source)) {}
   ~EmulatedNetworkStatsImpl() override = default;
-
-  int64_t PacketsSent() const override { return packets_sent_; }
-
-  DataSize BytesSent() const override { return bytes_sent_; }
 
   std::vector<rtc::IPAddress> LocalAddresses() const override {
     return local_addresses_;
   }
 
+  int64_t PacketsSent() const override {
+    return GetOverallOutgoingStats().packets_sent;
+  }
+
+  DataSize BytesSent() const override {
+    return GetOverallOutgoingStats().bytes_sent;
+  }
+
   DataSize FirstSentPacketSize() const override {
-    return first_sent_packet_size_;
+    return GetOverallOutgoingStats().first_sent_packet_size;
   }
 
   Timestamp FirstPacketSentTime() const override {
-    return first_packet_sent_time_;
+    return GetOverallOutgoingStats().first_packet_sent_time;
   }
 
   Timestamp LastPacketSentTime() const override {
-    return last_packet_sent_time_;
+    return GetOverallOutgoingStats().last_packet_sent_time;
   }
 
   DataRate AverageSendRate() const override {
-    RTC_DCHECK_GE(packets_sent_, 2);
-    return (bytes_sent_ - first_sent_packet_size_) /
-           (last_packet_sent_time_ - first_packet_sent_time_);
+    return GetOverallOutgoingStats().AverageSendRate();
   }
 
   int64_t PacketsReceived() const override {
@@ -115,22 +111,23 @@ class EmulatedNetworkStatsImpl final : public EmulatedNetworkStats {
     return GetOverallIncomingStats().AverageReceiveRate();
   }
 
+  std::map<rtc::IPAddress, EmulatedNetworkOutgoingStats>
+  OutgoingStatsPerDestination() const override {
+    return outgoing_stats_per_destination_;
+  }
+
   std::map<rtc::IPAddress, EmulatedNetworkIncomingStats>
   IncomingStatsPerSource() const override {
     return incoming_stats_per_source_;
   }
 
  private:
+  EmulatedNetworkOutgoingStats GetOverallOutgoingStats() const;
   EmulatedNetworkIncomingStats GetOverallIncomingStats() const;
 
-  const int64_t packets_sent_;
-  const DataSize bytes_sent_;
   const std::vector<rtc::IPAddress> local_addresses_;
-
-  const DataSize first_sent_packet_size_;
-  const Timestamp first_packet_sent_time_;
-  const Timestamp last_packet_sent_time_;
-
+  const std::map<rtc::IPAddress, EmulatedNetworkOutgoingStats>
+      outgoing_stats_per_destination_;
   const std::map<rtc::IPAddress, EmulatedNetworkIncomingStats>
       incoming_stats_per_source_;
 };
@@ -142,7 +139,9 @@ class EmulatedNetworkStatsBuilder {
   EmulatedNetworkStatsBuilder();
   explicit EmulatedNetworkStatsBuilder(rtc::IPAddress local_ip);
 
-  void OnPacketSent(Timestamp sent_time, DataSize packet_size);
+  void OnPacketSent(Timestamp sent_time,
+                    rtc::IPAddress dest_ip,
+                    DataSize packet_size);
 
   void OnPacketDropped(rtc::IPAddress source_ip, DataSize packet_size);
 
@@ -157,18 +156,10 @@ class EmulatedNetworkStatsBuilder {
  private:
   SequenceChecker sequence_checker_;
 
-  int64_t packets_sent_ RTC_GUARDED_BY(sequence_checker_) = 0;
-  DataSize bytes_sent_ RTC_GUARDED_BY(sequence_checker_) = DataSize::Zero();
   std::vector<rtc::IPAddress> local_addresses_
       RTC_GUARDED_BY(sequence_checker_);
-
-  DataSize first_sent_packet_size_ RTC_GUARDED_BY(sequence_checker_) =
-      DataSize::Zero();
-  Timestamp first_packet_sent_time_ RTC_GUARDED_BY(sequence_checker_) =
-      Timestamp::PlusInfinity();
-  Timestamp last_packet_sent_time_ RTC_GUARDED_BY(sequence_checker_) =
-      Timestamp::MinusInfinity();
-
+  std::map<rtc::IPAddress, EmulatedNetworkOutgoingStats>
+      outgoing_stats_per_destination_ RTC_GUARDED_BY(sequence_checker_);
   std::map<rtc::IPAddress, EmulatedNetworkIncomingStats>
       incoming_stats_per_source_ RTC_GUARDED_BY(sequence_checker_);
 };

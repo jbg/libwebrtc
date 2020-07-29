@@ -61,6 +61,27 @@ class EmulatedNetworkReceiverInterface {
   virtual void OnPacketReceived(EmulatedIpPacket packet) = 0;
 };
 
+struct EmulatedNetworkOutgoingStats {
+  int64_t packets_sent = 0;
+  DataSize bytes_sent = DataSize::Zero();
+
+  DataSize first_sent_packet_size = DataSize::Zero();
+
+  // Timestamps are initialized to different infinities for simplifying
+  // computations. Client have to assume that it is some infinite value
+  // if unset. Client mustn't consider sign of infinit value.
+  Timestamp first_packet_sent_time = Timestamp::PlusInfinity();
+  Timestamp last_packet_sent_time = Timestamp::MinusInfinity();
+
+  DataRate AverageSendRate() const {
+    RTC_DCHECK_GE(packets_sent, 2);
+    RTC_DCHECK(first_packet_sent_time.IsFinite());
+    RTC_DCHECK(last_packet_sent_time.IsFinite());
+    return (bytes_sent - first_sent_packet_size) /
+           (last_packet_sent_time - first_packet_sent_time);
+  }
+};
+
 struct EmulatedNetworkIncomingStats {
   // Total amount of packets received with or without destination.
   int64_t packets_received = 0;
@@ -92,13 +113,13 @@ class EmulatedNetworkStats {
  public:
   virtual ~EmulatedNetworkStats() = default;
 
-  virtual int64_t PacketsSent() const = 0;
-
-  virtual DataSize BytesSent() const = 0;
-
   // List of IP addresses that were used to send data considered in this stats
   // object.
   virtual std::vector<rtc::IPAddress> LocalAddresses() const = 0;
+
+  virtual int64_t PacketsSent() const = 0;
+
+  virtual DataSize BytesSent() const = 0;
 
   virtual DataSize FirstSentPacketSize() const = 0;
   // Returns time of the first packet sent or infinite value if no packets were
@@ -127,6 +148,9 @@ class EmulatedNetworkStats {
   virtual Timestamp LastPacketReceivedTime() const = 0;
 
   virtual DataRate AverageReceiveRate() const = 0;
+
+  virtual std::map<rtc::IPAddress, EmulatedNetworkOutgoingStats>
+  OutgoingStatsPerDestination() const = 0;
 
   virtual std::map<rtc::IPAddress, EmulatedNetworkIncomingStats>
   IncomingStatsPerSource() const = 0;
