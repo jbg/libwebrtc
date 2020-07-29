@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41b3189f_0f85e3ce",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-07-29T14:43:09Z",
+      "side": 1,
+      "message": "I think it might have sense to move \"merging\" of two EmulatedNetworkOutgoingStats objects to a separate function. Since it is already used in two different places.",
+      "revId": "4321cf8e957ab8466c25c2f3a0c076a976ea1d9c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
