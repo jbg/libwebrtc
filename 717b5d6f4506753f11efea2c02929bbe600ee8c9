@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c8ccb391_bf755fa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-07-29T08:18:38Z",
+      "side": 1,
+      "message": "Yes, thank you Harald, sorry, I lost track of this change. Switched to RTC_DLOG and logged https://crbug.com/webrtc/11808 to add support for RTC_LOG_ONCE.",
+      "parentUuid": "27a2339f_75e88372",
+      "revId": "717b5d6f4506753f11efea2c02929bbe600ee8c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3cd8ad85_5b0688bf",
         "filename": "pc/channel.cc",
         "patchSetId": 1
@@ -63,6 +81,30 @@
       "revId": "717b5d6f4506753f11efea2c02929bbe600ee8c9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56f3ec35_2ecaf437",
+        "filename": "pc/channel.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 8594
+      },
+      "writtenOn": "2020-07-29T08:18:38Z",
+      "side": 1,
+      "message": "Switched to RTC_DLOG and logged https://crbug.com/webrtc/11808 to add support for RTC_LOG_ONCE.",
+      "parentUuid": "bc7e7a6c_40cd5946",
+      "range": {
+        "startLine": 442,
+        "startChar": 4,
+        "endLine": 443,
+        "endChar": 79
+      },
+      "revId": "717b5d6f4506753f11efea2c02929bbe600ee8c9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
