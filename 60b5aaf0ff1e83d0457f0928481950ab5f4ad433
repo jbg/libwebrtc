@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd82d030_8f155d7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-29T15:55:28Z",
+      "side": 1,
+      "message": "Christoffer, PTAL on /api changes",
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
