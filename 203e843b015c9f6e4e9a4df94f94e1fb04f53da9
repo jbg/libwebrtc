@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10d0d92a_294d5924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-07-30T21:40:52Z",
+      "side": 1,
+      "message": "Good idea, thanks",
+      "revId": "203e843b015c9f6e4e9a4df94f94e1fb04f53da9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22728b1f_76ec9a3e",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-07-30T21:40:52Z",
+      "side": 1,
+      "message": "Print err_code as well?",
+      "revId": "203e843b015c9f6e4e9a4df94f94e1fb04f53da9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
