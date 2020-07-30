@@ -257,8 +257,8 @@ VideoSendStreamImpl::VideoSendStreamImpl(
     // reasonable use cases as it allows adding the max of multiple streams
     // without wrappping around.
     const int kFallbackMaxBitrateBps = 10000000;
-    RTC_DLOG(LS_ERROR) << "ERROR: Initial encoder max bitrate = "
-                       << initial_encoder_max_bitrate << " which is <= 0!";
+    // RTC_DLOG(LS_ERROR) << "ERROR: Initial encoder max bitrate = "
+    //                    << initial_encoder_max_bitrate << " which is <= 0!";
     RTC_DLOG(LS_INFO) << "Using default encoder max bitrate = 10 Mbps";
     encoder_max_bitrate_bps_ = kFallbackMaxBitrateBps;
   }

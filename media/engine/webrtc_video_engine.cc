@@ -3318,9 +3318,9 @@ void WebRtcVideoChannel::ClearRecordableEncodedFrameCallback(uint32_t ssrc) {
   if (stream) {
     stream->ClearRecordableEncodedFrameCallback();
   } else {
-    RTC_LOG(LS_ERROR) << "Absent receive stream; ignoring clearing encoded "
-                         "frame sink for ssrc "
-                      << ssrc;
+    // RTC_LOG(LS_ERROR) << "Absent receive stream; ignoring clearing encoded "
+    //                      "frame sink for ssrc "
+    //                   << ssrc;
   }
 }
 

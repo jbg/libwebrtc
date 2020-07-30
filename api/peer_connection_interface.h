@@ -999,6 +999,11 @@ class RTC_EXPORT PeerConnectionInterface : public rtc::RefCountInterface {
   virtual void SetRemoteDescription(SetSessionDescriptionObserver* observer,
                                     SessionDescriptionInterface* desc) {}
 
+  // TODO(hbos): Document this...
+  virtual bool ShouldFireNegotiationNeededEvent(size_t event_id) {
+    return true;
+  }
+
   virtual PeerConnectionInterface::RTCConfiguration GetConfiguration() = 0;
 
   // Sets the PeerConnection's global configuration to |config|.
@@ -1165,6 +1170,14 @@ class PeerConnectionObserver {
   // Triggered when renegotiation is needed. For example, an ICE restart
   // has begun.
   virtual void OnRenegotiationNeeded() = 0;
+  // Used to fire spec-compliant onnegotiationneeded events, which should only
+  // fire when the operations chain is empty. The observer is responsible for
+  // queuing a task (e.g. Chromium: jump to main thread) that should MAYBE fire
+  // the event that is identified using |event_id|. If in the queued task
+  // PeerConnection's ShouldFireNegotiationNeededEvent() returns true, then the
+  // operations chain is still empty, the peer connection not further modified
+  // and the event should be fired. Otherwise, this event should not fire.
+  virtual void OnNegotiationNeededEvent(size_t event_id) {}
 
   // Called any time the legacy IceConnectionState changes.
   //
