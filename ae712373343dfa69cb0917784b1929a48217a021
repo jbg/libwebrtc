@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19e0189f_b527616f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-07-30T16:07:27Z",
+      "side": 1,
+      "message": "Better logging might have avoided a round trip in the issue :-)",
+      "revId": "ae712373343dfa69cb0917784b1929a48217a021",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
