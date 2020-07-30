@@ -16,6 +16,276 @@
       "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef03f20a_7bd308b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "Code looks correct but it took me a while to work out the intention so suggest adding a few comments.",
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91872b6_76cbf296",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "nit: due to AverageSendRate member this should probably be a class.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 6
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d925751_752d714c",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "nit:infite",
+      "range": {
+        "startLine": 72,
+        "startChar": 47,
+        "endLine": 72,
+        "endChar": 54
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40b8e065_76459350",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "I do not understand this sentence. Do you mean that client must detect infinities and treat them as unset?",
+      "range": {
+        "startLine": 71,
+        "startChar": 19,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a20a276_32be5483",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "Nice avoiding code replication here, but I was a bit confused for a while. Suggest adding a comment \"Accumulate outgoing traffic to a specific receiver across all senders or [the other use].\"",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 40
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da38e2e6_f757a5d1",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "Accumulate?",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39180674_091a6fe7",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "nit: destination",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 26,
+        "endChar": 38
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d9593cf_836352ce",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "Accumulate? \nAnd suggest comment: \"Accumulate the incoming traffic from a particular sender across all receivers.\"",
+      "range": {
+        "startLine": 38,
+        "startChar": 5,
+        "endLine": 38,
+        "endChar": 11
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08b48a4c_4b9111dc",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "\"Destination\" is confusing here, because function is actually aggregating across multiple destinations. Maybe be just use \"total\"? (Would work above as well).",
+      "range": {
+        "startLine": 40,
+        "startChar": 34,
+        "endLine": 40,
+        "endChar": 38
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71aa44ee_969b453d",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "nit: destination",
+      "range": {
+        "startLine": 88,
+        "startChar": 32,
+        "endLine": 88,
+        "endChar": 36
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79396d9f_5baa3dcb",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "Think this could be const?",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 47
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0ea9ed9_94c75aed",
+        "filename": "test/network/network_emulation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-30T11:45:34Z",
+      "side": 1,
+      "message": "nit: destination.",
+      "range": {
+        "startLine": 143,
+        "startChar": 35,
+        "endLine": 143,
+        "endChar": 39
+      },
+      "revId": "60b5aaf0ff1e83d0457f0928481950ab5f4ad433",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
