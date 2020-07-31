@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac7a6d02_f84e9e03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-07-31T20:23:25Z",
+      "side": 1,
+      "message": "Relanding because affected downstream code should be fixed.",
+      "revId": "6f760829fa21bf1602f6bed8b544025dfc1eefb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
