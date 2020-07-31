@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba5c09ed_2bffcc3d",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-31T07:47:14Z",
+      "side": 1,
+      "message": "While English is not my first language I maintain that \"append\" is misleading here, and this confused my for a good while yesterday (it suggests that function builds a list of stats for different endpoints). This function maybe \"aggregates\", \"accumulates\", or \"combines\" stats reports across different endpoints.\n\n\"aggregate: add (something) to the end of a written document.\"\n\"aggregate: a whole formed by combining several separate elements.\"\n\n(with exception: LocalAddresses is actually appended but I think that is a bug).",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 61
+      },
+      "revId": "040b2087da74b5181dd0ba5acf77ef3c817bf7bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd95b40b_a2cf7e22",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-31T07:47:14Z",
+      "side": 1,
+      "message": "Not really related to the change at hand, but doesn\u0027t this append the same local address multiple when when called in a loop across all endpoints? E.g. in an A, B, C scenario:\ncall for A adds B,C\ncall for B adds A,C\ncall for C adds A,B\nso now vector contains all local endpoints twice? Or? If correct, fine to fix in a follow up.",
+      "range": {
+        "startLine": 202,
+        "startChar": 2,
+        "endLine": 204,
+        "endChar": 3
+      },
+      "revId": "040b2087da74b5181dd0ba5acf77ef3c817bf7bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "060168ba_f0c3b91e",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5845
+      },
+      "writtenOn": "2020-07-31T07:47:14Z",
+      "side": 1,
+      "message": "I also maintain that this needs a comment. The code as such is an easy read, but what it achieves is very hard to deduce - I had to go to the function invocation to find out. So please add comments to make it clear. \n\nOr even better: this function is used in exactly one place, in network_emulation_manager.cc, where it is called in a loop. Why not add a function AggregateStatsAcrossAllEndpoints(ArrayView ...) that does the loop calling the (made private) function at hand?",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "040b2087da74b5181dd0ba5acf77ef3c817bf7bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
