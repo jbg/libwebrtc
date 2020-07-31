@@ -49,6 +49,17 @@ OperationsChain::~OperationsChain() {
   RTC_DCHECK(chained_operations_.empty());
 }
 
+void OperationsChain::SetOnChainEmptyCallback(
+    std::function<void()> on_chain_empty_callback) {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  on_chain_empty_callback_ = std::move(on_chain_empty_callback);
+}
+
+bool OperationsChain::IsEmpty() const {
+  RTC_DCHECK_RUN_ON(&sequence_checker_);
+  return chained_operations_.empty();
+}
+
 std::function<void()> OperationsChain::CreateOperationsChainCallback() {
   return [handle = rtc::scoped_refptr<CallbackHandle>(
               new CallbackHandle(this))]() { handle->OnOperationComplete(); };
@@ -62,6 +73,10 @@ void OperationsChain::OnOperationComplete() {
   // If there are any other operations chained, execute the next one.
   if (!chained_operations_.empty()) {
     chained_operations_.front()->Run();
+  } else {
+    // TODO(hbos): If this isn't set, all hell breaks loose. Make it mandatory
+    // or absl::optional.
+    on_chain_empty_callback_();
   }
 }
 
