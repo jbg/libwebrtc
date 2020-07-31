@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '48a5523b6bfb05cf716b091dd391207365e6b9d8',
+  'chromium_revision': '0cd1cd9ee323c84fb9cba4a005598025b000a82b',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -22,9 +22,9 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@e9d3f1bba4fe01ada87be369dad91e4f9d82d675',
+    'https://chromium.googlesource.com/chromium/src/base@346ede96cb0a5445933c25242303c5802dc53414',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@bd123e394065348a792f4ee53b64d30e3a44b5fb',
+    'https://chromium.googlesource.com/chromium/src/build@d9e2078223bd9493e61662634dc8e7b00d25ce22',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@42e94619588fd2f0ceb6cc29785592640703e6a1',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -33,13 +33,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@90a83d2868d36ff3ae52e16d39338c8eeac2b446',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@d1902a6282acabce88da7101b5052df67aaac902',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@558db657f28bd7d1a4042c546ae3f01d42d1211a',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@4e862e1f25f7dd5b01acd99f74dc431336e9a81e',
+    'https://chromium.googlesource.com/chromium/src/third_party@3a6a1578fb5ee4fa11fd0803b9a5606c9f6f0a83',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -130,14 +130,14 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@a740aa2625df2c0ed21ed7118bd8ab5faec375b8',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@26d2e8aa289bffcc75aff7598285c3720148985d',
+    'https://chromium.googlesource.com/catapult.git@2cd291aae824412377a3eb4cc76cb2ec7ee169c4',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
   'src/third_party/colorama/src':
     'https://chromium.googlesource.com/external/colorama.git@799604a1041e9b3bc5d2789ecbd7e8db2e18e6b8',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@343f63643b432ace2d2d4c253c6c327bb18c03ea',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@98b332f2dbbd25add6b0904cc9d01608ceeaa52d',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@d2dd36c03501e995e8ce2d792d834392b2e62bfe',
   'src/third_party/findbugs': {
@@ -208,7 +208,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@22b8657a5558de83e88093a85d302f0d0773bb9f',
+    'https://android.googlesource.com/platform/external/perfetto.git@39c302bccf3a67b44045c5d99badfd0fdea5a432',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@a1cee8dc919df1980d802e1a9bce1259ec34cba8',
   'src/third_party/libyuv':
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@5a5284b2606b028a082a167d18f6a522993f0cd9',
+    'https://chromium.googlesource.com/chromium/src/tools@aed8a0026224957c4ea91accbb3f07764c25ee7b',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@4c095d04179dc725a300085ae21fe3b79900d072',
 
