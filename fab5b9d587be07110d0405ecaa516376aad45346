@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "65c7019b_c1d1c154",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-31T12:55:25Z",
+      "side": 1,
+      "message": "the only thing I can think of that invalidates negotiationneded is \"rollback\" - is that what\u0027s alluded to here?",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "432f84fc_5c576700",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
@@ -16,6 +33,91 @@
       "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8071ea70_04234024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-31T12:55:25Z",
+      "side": 1,
+      "message": "Not sure we need one of the state variables, and wondering why a size_t is the right type.\nBasic logic seems good.\n",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6736d82_e8106cdc",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-31T12:55:25Z",
+      "side": 1,
+      "message": "why is event_id a size_t? It seems an odd choice for an ID.",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96e15f8c_42ea91a7",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 2608,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-31T12:55:25Z",
+      "side": 1,
+      "message": "This change switches the order of OnSetLocalDescriptionComplete and OnrenegotiationNeeded / GenerateNegotiationNeededEvent. Is the new order the intended one?\n(Same change observed below)",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1572a1d_ebe6f051",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 7451,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-31T12:55:25Z",
+      "side": 1,
+      "message": "I\u0027m trying to think of a case where UpdateNegotiationNeeded() would do something harmful if called on an empty chain. I can\u0027t think of any, and if there isn\u0027t one, update_negotiation_needed_on_empty_chain_ can be removed, always calling UpdateNegotiationNeeded() when the chain is empty.\n\nFewer state variables \u003d fewer things that can break. But if I\u0027m wrong, it\u0027s needed.",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d107a90_e54e8461",
+        "filename": "rtc_base/operations_chain_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-07-31T12:55:25Z",
+      "side": 1,
+      "message": "Does this mean that IsEmpty is a blocking invoke() to a different thread? Ouch.",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
