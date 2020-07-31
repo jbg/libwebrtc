@@ -609,17 +609,6 @@ TEST_P(PeerConnectionSignalingTest, CloseBeforeImplicitCreateOfferAndShutdown) {
   EXPECT_FALSE(observer->error().ok());
 }
 
-TEST_P(PeerConnectionSignalingTest,
-       CloseAfterImplicitCreateOfferAndShutdownWithOldObserver) {
-  auto caller = CreatePeerConnection();
-  auto observer = MockSetSessionDescriptionObserver::Create();
-  caller->pc()->SetLocalDescription(observer.get());
-  caller->pc()->Close();
-  caller.reset(nullptr);
-  // The old observer does not get invoked because posted messages are lost.
-  EXPECT_FALSE(observer->called());
-}
-
 TEST_P(PeerConnectionSignalingTest, CloseAfterImplicitCreateOfferAndShutdown) {
   auto caller = CreatePeerConnection();
   rtc::scoped_refptr<FakeSetLocalDescriptionObserver> observer(
