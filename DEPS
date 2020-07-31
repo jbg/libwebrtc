@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '48a5523b6bfb05cf716b091dd391207365e6b9d8',
+  'chromium_revision': '6800a530ad6a72d51a1970cddc9821be77cda466',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -33,13 +33,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@90a83d2868d36ff3ae52e16d39338c8eeac2b446',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@8b8c23274ff35842662e40caf690030b635346de',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@558db657f28bd7d1a4042c546ae3f01d42d1211a',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@4e862e1f25f7dd5b01acd99f74dc431336e9a81e',
+    'https://chromium.googlesource.com/chromium/src/third_party@b4977884ee62a1f07e63796f07b073c4ef1392f1',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -130,14 +130,14 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@a740aa2625df2c0ed21ed7118bd8ab5faec375b8',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@26d2e8aa289bffcc75aff7598285c3720148985d',
+    'https://chromium.googlesource.com/catapult.git@2cd291aae824412377a3eb4cc76cb2ec7ee169c4',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
   'src/third_party/colorama/src':
     'https://chromium.googlesource.com/external/colorama.git@799604a1041e9b3bc5d2789ecbd7e8db2e18e6b8',
   'src/third_party/depot_tools':
-    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@343f63643b432ace2d2d4c253c6c327bb18c03ea',
+    'https://chromium.googlesource.com/chromium/tools/depot_tools.git@98b332f2dbbd25add6b0904cc9d01608ceeaa52d',
   'src/third_party/ffmpeg':
     'https://chromium.googlesource.com/chromium/third_party/ffmpeg.git@d2dd36c03501e995e8ce2d792d834392b2e62bfe',
   'src/third_party/findbugs': {
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@5a5284b2606b028a082a167d18f6a522993f0cd9',
+    'https://chromium.googlesource.com/chromium/src/tools@e9dbf40a2e8defb4363878e4a4a45879ff6e7a48',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@4c095d04179dc725a300085ae21fe3b79900d072',
 
