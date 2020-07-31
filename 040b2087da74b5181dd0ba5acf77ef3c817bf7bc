@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "9a5efea0_41a0e81b",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-31T11:31:25Z",
+      "side": 1,
+      "message": "It can be used for multipeer too, but still one GetStats call collect stats for single peer.",
+      "parentUuid": "396930e2_19f647eb",
+      "range": {
+        "startLine": 202,
+        "startChar": 2,
+        "endLine": 204,
+        "endChar": 3
+      },
+      "revId": "040b2087da74b5181dd0ba5acf77ef3c817bf7bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "060168ba_f0c3b91e",
         "filename": "test/network/network_emulation.cc",
         "patchSetId": 4
