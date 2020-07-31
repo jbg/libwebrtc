@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fe67c744_0cee98d8",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-31T10:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba5c09ed_2bffcc3d",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 61
+      },
+      "revId": "040b2087da74b5181dd0ba5acf77ef3c817bf7bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd95b40b_a2cf7e22",
         "filename": "test/network/network_emulation.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "b9e82a7f_49720680",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-31T10:57:39Z",
+      "side": 1,
+      "message": "No. The idea is this:\nLet\u0027s say that we have endpoints A, B, C and D. When you collecting stats you are saying from which endpoints you want to do that. Endpoints usually grouped by peer. Ideas is that peer can have multiple network interfaces on their machine, so multiple endpoints.\n\nSo then you call GetStats({A, B}). During the call A and B will return separate stats for themselves, so you will have 2 EmulatedNetworkStats objects. Each will contain 1 IP address in its local_addresses_. For A it will be IP of A and for B it will be IP of B. Then these objects will merged into single result by using this method. So in local_addresses_ we will have both IPs. The result then will be returned to user.",
+      "parentUuid": "cd95b40b_a2cf7e22",
+      "range": {
+        "startLine": 202,
+        "startChar": 2,
+        "endLine": 204,
+        "endChar": 3
+      },
+      "revId": "040b2087da74b5181dd0ba5acf77ef3c817bf7bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "060168ba_f0c3b91e",
         "filename": "test/network/network_emulation.cc",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "040b2087da74b5181dd0ba5acf77ef3c817bf7bc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "711497c2_fe77f094",
+        "filename": "test/network/network_emulation.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-07-31T10:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "060168ba_f0c3b91e",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "040b2087da74b5181dd0ba5acf77ef3c817bf7bc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
