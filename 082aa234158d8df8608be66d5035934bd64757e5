@@ -50,6 +50,24 @@
       "revId": "082aa234158d8df8608be66d5035934bd64757e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5336bb3_a329f77d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-03T11:43:49Z",
+      "side": 1,
+      "message": "I gave it a try, but it looks like that code is used here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/sdk/android/src/jni/video_encoder_wrapper.cc;l\u003d96?q\u003dIsHardwareVideoEncoder\u0026ss\u003dchromium\n\nIt is used to populate VideoEncoder::EncoderInfo::is_hardware_accelerated, which is different from the related CodecInfo::is_hardware_accelerated, deleted in this cl.\n\nTo summarize: This cl leaves the VideoEncoder interface unchanged, and only deletes an unused feature from the VideoEncoderFactory interface.",
+      "parentUuid": "17341524_397b5e25",
+      "revId": "082aa234158d8df8608be66d5035934bd64757e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
