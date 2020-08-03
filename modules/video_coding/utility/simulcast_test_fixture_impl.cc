@@ -75,8 +75,7 @@ class SimulcastTestFixtureImpl::TestEncodedImageCallback
   }
 
   Result OnEncodedImage(const EncodedImage& encoded_image,
-                        const CodecSpecificInfo* codec_specific_info,
-                        const RTPFragmentationHeader* fragmentation) override {
+                        const CodecSpecificInfo* codec_specific_info) override {
     bool is_vp8 = (codec_specific_info->codecType == kVideoCodecVP8);
     bool is_h264 = (codec_specific_info->codecType == kVideoCodecH264);
     // Only store the base layer.
@@ -868,26 +867,24 @@ void SimulcastTestFixtureImpl::TestDecodeWidthHeightSet() {
   encoder_->RegisterEncodeCompleteCallback(&encoder_callback);
   decoder_->RegisterDecodeCompleteCallback(&decoder_callback);
 
-  EXPECT_CALL(encoder_callback, OnEncodedImage(_, _, _))
+  EXPECT_CALL(encoder_callback, OnEncodedImage(_, _))
       .Times(3)
-      .WillRepeatedly(
-          ::testing::Invoke([&](const EncodedImage& encoded_image,
-                                const CodecSpecificInfo* codec_specific_info,
-                                const RTPFragmentationHeader* fragmentation) {
-            EXPECT_EQ(encoded_image._frameType, VideoFrameType::kVideoFrameKey);
+      .WillRepeatedly([&](const EncodedImage& encoded_image,
+                          const CodecSpecificInfo* codec_specific_info) {
+        EXPECT_EQ(encoded_image._frameType, VideoFrameType::kVideoFrameKey);
 
-            size_t index = encoded_image.SpatialIndex().value_or(0);
-            // TODO(nisse): Why not size()
-            encoded_frame[index].SetEncodedData(
-                EncodedImageBuffer::Create(encoded_image.capacity()));
-            encoded_frame[index].set_size(encoded_image.size());
-            encoded_frame[index]._frameType = encoded_image._frameType;
-            encoded_frame[index]._completeFrame = encoded_image._completeFrame;
-            memcpy(encoded_frame[index].data(), encoded_image.data(),
-                   encoded_image.size());
-            return EncodedImageCallback::Result(
-                EncodedImageCallback::Result::OK, 0);
-          }));
+        size_t index = encoded_image.SpatialIndex().value_or(0);
+        // TODO(nisse): Why not size()
+        encoded_frame[index].SetEncodedData(
+            EncodedImageBuffer::Create(encoded_image.capacity()));
+        encoded_frame[index].set_size(encoded_image.size());
+        encoded_frame[index]._frameType = encoded_image._frameType;
+        encoded_frame[index]._completeFrame = encoded_image._completeFrame;
+        memcpy(encoded_frame[index].data(), encoded_image.data(),
+               encoded_image.size());
+        return EncodedImageCallback::Result(EncodedImageCallback::Result::OK,
+                                            0);
+      });
   EXPECT_EQ(0, encoder_->Encode(*input_frame_, NULL));
 
   EXPECT_CALL(decoder_callback, Decoded(_, _, _))
