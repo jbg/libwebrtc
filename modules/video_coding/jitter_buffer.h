@@ -17,7 +17,6 @@
 #include <set>
 #include <vector>
 
-#include "modules/include/module_common_types.h"
 #include "modules/include/module_common_types_public.h"
 #include "modules/utility/include/process_thread.h"
 #include "modules/video_coding/decoding_state.h"
