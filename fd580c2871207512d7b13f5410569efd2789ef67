@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc2e4b65_f1d22fed",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-08-03T15:43:05Z",
+      "side": 1,
+      "message": "I think it\u0027s better to specify the type `std::unique_ptr\u003cVideoQualityAnalyzerInterface\u003e` implicitly. Because otherwise the `static_cast` below look strange.\n\nPS: it looks like magic to me, that `auto` actually turns into `std::unique_ptr\u003cVideoQualityAnalyzerInterface\u003e`, and not `std::unique_ptr\u003cVideoQualityAnalyzer\u003e`, so there is no problems with conversion when calling `CreatePeerConnectionE2EQualityTestFixture`.",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 8
+      },
+      "revId": "fd580c2871207512d7b13f5410569efd2789ef67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
