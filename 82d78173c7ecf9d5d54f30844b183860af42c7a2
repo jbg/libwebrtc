@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "181caa4e_f42e0b73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-08-03T13:21:13Z",
+      "side": 1,
+      "message": "Please briefly describe the fix",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 55
+      },
+      "revId": "82d78173c7ecf9d5d54f30844b183860af42c7a2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
