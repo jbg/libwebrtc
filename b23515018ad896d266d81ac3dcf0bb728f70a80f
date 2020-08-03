@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "994c19bd_2768a609",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-03T07:28:46Z",
+      "side": 1,
+      "message": "Typo",
+      "range": {
+        "startLine": 7,
+        "startChar": 49,
+        "endLine": 7,
+        "endChar": 70
+      },
+      "revId": "b23515018ad896d266d81ac3dcf0bb728f70a80f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5fa0640_384da7d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-03T07:28:46Z",
+      "side": 1,
+      "message": "Nice.\n\nLonger term, I hope we can delete CodecSpecificInfo too (an EncodedInfo should include everything needed to get the frame onto the wire).",
+      "revId": "b23515018ad896d266d81ac3dcf0bb728f70a80f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3ab8ee5_b4600424",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 2
