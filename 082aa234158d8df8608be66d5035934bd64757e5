@@ -33,6 +33,23 @@
       "revId": "082aa234158d8df8608be66d5035934bd64757e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17341524_397b5e25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-08-03T11:12:30Z",
+      "side": 1,
+      "message": "Can we also delete this:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/sdk/android/src/jni/video_encoder_wrapper.cc;l\u003d425?q\u003dIsHardwareVideoEncoder\u0026ss\u003dchromium\n\nAlso remove @CalledByNative here:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/sdk/android/api/org/webrtc/VideoEncoder.java;l\u003d277?q\u003disHardwareEncoder\u0026ss\u003dchromium\n\nAnd maybe mark as @Deprecated.",
+      "revId": "082aa234158d8df8608be66d5035934bd64757e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
