@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fd3e906_5404d776",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-08-03T16:50:20Z",
+      "side": 1,
+      "message": "A downstream fix has now been landed, this reland is unchanged from the original. Ran the full \"internal_compile\".\n\nMagnus, PTAL",
+      "revId": "3f83c47e3c481d47bcb96fe05a61f841e669181c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
