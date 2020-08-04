@@ -70,6 +70,30 @@
       "revId": "fd580c2871207512d7b13f5410569efd2789ef67",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bec99eaf_2cea059d",
+        "filename": "test/pc/e2e/peer_connection_e2e_smoke_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 11540
+      },
+      "writtenOn": "2020-08-04T07:38:39Z",
+      "side": 1,
+      "message": "Strange, so `auto` turns into `std::unique_ptr\u003cVideoQualityAnalyzer\u003e`. But I thought that `std::unique_ptr\u003cVideoQualityAnalyzer\u003e` can\u0027t be implicitly converted to `std::unique_ptr\u003cVideoQualityAnalyzerInterface\u003e`. Interesting :)",
+      "parentUuid": "7afe1d08_9b2d980f",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 8
+      },
+      "revId": "fd580c2871207512d7b13f5410569efd2789ef67",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
