@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00cc4b93_47ed2ffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-08-04T10:43:30Z",
+      "side": 1,
+      "message": "Lets do this. Merged the helper function back since it was now duplicating logic and not helping anymore.",
+      "revId": "119a1813d3be03aabc01b12679b99a99cd2f0689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
