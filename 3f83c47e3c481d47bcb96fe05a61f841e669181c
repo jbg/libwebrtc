@@ -16,6 +16,23 @@
       "revId": "3f83c47e3c481d47bcb96fe05a61f841e669181c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a44ebc94_f3b893e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-08-04T15:01:39Z",
+      "side": 1,
+      "message": "Karl, requesting an RS-LGTM, PTAL",
+      "revId": "3f83c47e3c481d47bcb96fe05a61f841e669181c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
