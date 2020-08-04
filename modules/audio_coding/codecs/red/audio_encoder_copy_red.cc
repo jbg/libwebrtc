@@ -64,12 +64,12 @@ int AudioEncoderCopyRed::GetTargetBitrate() const {
 size_t AudioEncoderCopyRed::CalculateHeaderLength(size_t encoded_bytes) const {
   size_t header_size = 1;
   size_t bytes_available = max_packet_length_ - encoded_bytes;
-  if (secondary_info_.encoded_bytes > 0 &&
+  if (secondary_info_.encoded_bytes > 0 && secondary_info_.speech &&
       secondary_info_.encoded_bytes < bytes_available) {
     header_size += 4;
     bytes_available -= secondary_info_.encoded_bytes;
   }
-  if (tertiary_info_.encoded_bytes > 0 &&
+  if (tertiary_info_.encoded_bytes > 0 && tertiary_info_.speech &&
       tertiary_info_.encoded_bytes < bytes_available) {
     header_size += 4;
   }
@@ -99,7 +99,7 @@ AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
 
   size_t header_offset = 0;
   size_t bytes_available = max_packet_length_ - info.encoded_bytes;
-  if (tertiary_info_.encoded_bytes > 0 &&
+  if (tertiary_info_.encoded_bytes > 0 && tertiary_info_.speech &&
       tertiary_info_.encoded_bytes + secondary_info_.encoded_bytes <
           bytes_available) {
     encoded->AppendData(tertiary_encoded_);
@@ -115,7 +115,7 @@ AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
     bytes_available -= tertiary_info_.encoded_bytes;
   }
 
-  if (secondary_info_.encoded_bytes > 0 &&
+  if (secondary_info_.encoded_bytes > 0 && secondary_info_.speech &&
       secondary_info_.encoded_bytes < bytes_available) {
     encoded->AppendData(secondary_encoded_);
 
