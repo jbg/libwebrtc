@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'b0f163b235ee30da7ee0631bf7b79669d5921444',
+  'chromium_revision': 'b6c5f6fb90bfd614ce7c098d0fd496820409f14c',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -24,7 +24,7 @@ deps = {
   'src/base':
     'https://chromium.googlesource.com/chromium/src/base@2f569ccb6c07068d9aa803d1dd1cf854b0396df0',
   'src/build':
-    'https://chromium.googlesource.com/chromium/src/build@555138aa2d3516aa6f7612bc8b53839c5e613514',
+    'https://chromium.googlesource.com/chromium/src/build@6c915ac2af1a19a105b502d761d8a768e718ffc1',
   'src/buildtools':
     'https://chromium.googlesource.com/chromium/src/buildtools@61392178782cb7f6720228ab0cc4ef65a68c2824',
   # Gradle 4.3-rc4. Used for testing Android Studio project generation for WebRTC.
@@ -39,7 +39,7 @@ deps = {
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@dc9b1969e7b2fad0997eac147810af73fc4a13a6',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@a90e89998bf41af05cd39dfd36a18abb9421b7dd',
+    'https://chromium.googlesource.com/chromium/src/third_party@dcc6a37a2d352d5f69e53f7101e24e27abb36738',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -208,7 +208,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@d14d99cd75b8ec9f83cc738b3162c3fff0b74ef1',
+    'https://android.googlesource.com/platform/external/perfetto.git@7176f54720e6f5ff087e1fe6407191b5692a7aa2',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@a1cee8dc919df1980d802e1a9bce1259ec34cba8',
   'src/third_party/libyuv':
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@5df0acbf5f88da9599b2e93e3f075e3086daf1be',
+    'https://chromium.googlesource.com/chromium/src/tools@86027fc5e161137aec6e8c4e5454f621adabf636',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@4c095d04179dc725a300085ae21fe3b79900d072',
 
