@@ -51,6 +51,23 @@
       "revId": "fdcc75cc1b3fb87962131d43ddd4780514b1296d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d98eb8d1_79c17375",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9279
+      },
+      "writtenOn": "2020-08-04T08:14:55Z",
+      "side": 1,
+      "message": "Hey, this CL has been silent for a while now. @orphis, @brandtr please have a look and comment or help to find someone else to make the review.",
+      "revId": "fdcc75cc1b3fb87962131d43ddd4780514b1296d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
