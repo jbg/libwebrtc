@@ -136,6 +136,47 @@ constexpr std::array<int, 14> kSubHarmonicMultipliers = {
 constexpr std::array<int, 14> kInitialPitchPeriodThresholds = {
     {20, 45, 80, 125, 180, 245, 320, 405, 500, 605, 720, 845, 980, 1125}};
 
+// Represents a pitch gain as a ratio to compute IsGreaterThan() without
+// division and square root ops.
+class GainRatio {
+ public:
+  // Ctor. Given two frames (x and y), requires their cross-correlation |xy|,
+  // and the auto-correlations |xx| and |yy|.
+  GainRatio(float xy, float xx, float yy)
+      : numerator_(xy), denominator_square_(1.f + xx * yy) {}
+
+  float ComputeGain() const {
+    RTC_DCHECK_NE(denominator_square_, 0.f);
+    return numerator_ / std::sqrt(denominator_square_);
+  }
+
+  bool IsGreaterThan(float threshold) const {
+    RTC_DCHECK_GT(denominator_square_, 0);
+    // Evaluate (numerator / sqrt(denominator_square)) > threshold.
+    return (threshold < 0.f) ||
+           (numerator_ > 0 && (numerator_ * numerator_ >
+                               threshold * threshold * denominator_square_));
+  }
+
+ private:
+  // Not const to use the default copy assign operator.
+  float numerator_;
+  float denominator_square_;
+};
+
+// Stores information for a refined pitch candidate.
+struct RefinedPitchCandidate {
+  RefinedPitchCandidate(int period_24kHz, GainRatio gain, float xy, float yy)
+      : period_24kHz(period_24kHz), gain(gain), xy(xy), yy(yy) {}
+  int period_24kHz;
+  // Pitch strength information.
+  GainRatio gain;
+  // Additional pitch strength information used for the final estimation of
+  // pitch gain.
+  float xy;  // Cross-correlation.
+  float yy;  // Auto-correlation.
+};
+
 }  // namespace
 
 void Decimate2x(rtc::ArrayView<const float, kBufSize24kHz> src,
@@ -185,10 +226,10 @@ float ComputePitchGainThreshold(int candidate_pitch_period,
   // reduce the chance of false positives caused by a bias towards high
   // frequencies (originating from short-term correlations).
   float threshold = std::max(0.3f, 0.7f * g0 - lower_threshold_term);
-  if (static_cast<size_t>(t1) < 3 * kMinPitch24kHz) {
+  if (t1 < 3 * static_cast<int>(kMinPitch24kHz)) {
     // High frequency.
     threshold = std::max(0.4f, 0.85f * g0 - lower_threshold_term);
-  } else if (static_cast<size_t>(t1) < 2 * kMinPitch24kHz) {
+  } else if (t1 < 2 * static_cast<int>(kMinPitch24kHz)) {
     // Even higher frequency.
     threshold = std::max(0.5f, 0.9f * g0 - lower_threshold_term);
   }
@@ -304,42 +345,26 @@ PitchInfo CheckLowerPitchPeriodsAndComputePitchGain(
     PitchInfo prev_pitch_48kHz) {
   RTC_DCHECK_LE(kMinPitch48kHz, initial_pitch_period_48kHz);
   RTC_DCHECK_LE(initial_pitch_period_48kHz, kMaxPitch48kHz);
-  // Stores information for a refined pitch candidate.
-  struct RefinedPitchCandidate {
-    RefinedPitchCandidate() {}
-    RefinedPitchCandidate(int period_24kHz, float gain, float xy, float yy)
-        : period_24kHz(period_24kHz), gain(gain), xy(xy), yy(yy) {}
-    int period_24kHz;
-    // Pitch strength information.
-    float gain;
-    // Additional pitch strength information used for the final estimation of
-    // pitch gain.
-    float xy;  // Cross-correlation.
-    float yy;  // Auto-correlation.
-  };
 
   // Initialize.
   std::array<float, kMaxPitch24kHz + 1> yy_values;
   ComputeSlidingFrameSquareEnergies(pitch_buf,
                                     {yy_values.data(), yy_values.size()});
   const float xx = yy_values[0];
-  // Helper lambdas.
-  const auto pitch_gain = [](float xy, float yy, float xx) {
-    RTC_DCHECK_LE(0.f, xx * yy);
-    return xy / std::sqrt(1.f + xx * yy);
-  };
+
   // Initial pitch candidate gain.
-  RefinedPitchCandidate best_pitch;
-  best_pitch.period_24kHz =
+  const int initial_pitch_period_24kHz =
       std::min(initial_pitch_period_48kHz / 2, kMaxPitch24kHzInt - 1);
-  best_pitch.xy = ComputeAutoCorrelationCoeff(
-      pitch_buf, GetInvertedLag(best_pitch.period_24kHz), kMaxPitch24kHzInt);
-  best_pitch.yy = yy_values[best_pitch.period_24kHz];
-  best_pitch.gain = pitch_gain(best_pitch.xy, best_pitch.yy, xx);
+  const float initial_xy = ComputeAutoCorrelationCoeff(
+      pitch_buf, GetInvertedLag(initial_pitch_period_24kHz), kMaxPitch24kHzInt);
+  RefinedPitchCandidate best_pitch(
+      initial_pitch_period_24kHz,
+      {initial_xy, xx, yy_values[initial_pitch_period_24kHz]}, initial_xy,
+      yy_values[initial_pitch_period_24kHz]);
 
   // Store the initial pitch period information.
   const int initial_pitch_period = best_pitch.period_24kHz;
-  const float initial_pitch_gain = best_pitch.gain;
+  const float initial_pitch_gain = best_pitch.gain.ComputeGain();
 
   // Given the initial pitch estimation, check lower periods (i.e., harmonics).
   const auto alternative_period = [](int period, int k, int n) -> int {
@@ -377,14 +402,14 @@ PitchInfo CheckLowerPitchPeriodsAndComputePitchGain(
     float xy = 0.5f * (xy_primary_period + xy_secondary_period);
     float yy = 0.5f * (yy_values[candidate_pitch_period] +
                        yy_values[candidate_pitch_secondary_period]);
-    float candidate_pitch_gain = pitch_gain(xy, yy, xx);
 
     // Maybe update best period.
     float threshold = ComputePitchGainThreshold(
         candidate_pitch_period, k, initial_pitch_period, initial_pitch_gain,
         prev_pitch_48kHz.period / 2, prev_pitch_48kHz.gain);
-    if (candidate_pitch_gain > threshold) {
-      best_pitch = {candidate_pitch_period, candidate_pitch_gain, xy, yy};
+    GainRatio candidate_pitch_gain_ratio(xy, yy, xx);
+    if (candidate_pitch_gain_ratio.IsGreaterThan(threshold)) {
+      best_pitch = {candidate_pitch_period, candidate_pitch_gain_ratio, xy, yy};
     }
   }
 
@@ -394,7 +419,7 @@ PitchInfo CheckLowerPitchPeriodsAndComputePitchGain(
   float final_pitch_gain = (best_pitch.yy <= best_pitch.xy)
                                ? 1.f
                                : best_pitch.xy / (best_pitch.yy + 1.f);
-  final_pitch_gain = std::min(best_pitch.gain, final_pitch_gain);
+  final_pitch_gain = std::min(best_pitch.gain.ComputeGain(), final_pitch_gain);
   int final_pitch_period_48kHz = std::max(
       static_cast<int>(kMinPitch48kHz),
       PitchPseudoInterpolationLagPitchBuf(best_pitch.period_24kHz, pitch_buf));
