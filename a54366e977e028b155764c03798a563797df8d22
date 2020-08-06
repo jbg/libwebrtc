@@ -16,6 +16,23 @@
       "revId": "a54366e977e028b155764c03798a563797df8d22",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c97f75a_f0845a60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-08-06T05:23:21Z",
+      "side": 1,
+      "message": "extended vacation for Per probably :-)\nkwiberg: can you take a look please? ",
+      "revId": "a54366e977e028b155764c03798a563797df8d22",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
