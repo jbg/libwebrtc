@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5901028_025aedcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-08-06T06:20:50Z",
+      "side": 1,
+      "message": "good stuff % comments",
+      "revId": "d3aa3102e278b397f6013cb45e831b61d71ab6f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18ceb690_8e409f31",
+        "filename": "modules/audio_processing/agc2/rnn_vad/lp_residual.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-08-06T06:20:50Z",
+      "side": 1,
+      "message": "For simplicity, may consider something like\n\nfor (size_t i \u003d 1, const float* it; i \u003c y.size(); ++i, ++it) {\n  y[i] \u003d std::inner_product(it - std::max(0, i - kNumLpcCoefficients), it, reverse_lpc_coeffs.begin(), x[i]);\n}",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 3
+      },
+      "revId": "d3aa3102e278b397f6013cb45e831b61d71ab6f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d397543_50a1d6e6",
+        "filename": "modules/audio_processing/agc2/rnn_vad/lp_residual_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-08-06T06:20:50Z",
+      "side": 1,
+      "message": "why not updating the golden file?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 76
+      },
+      "revId": "d3aa3102e278b397f6013cb45e831b61d71ab6f6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
