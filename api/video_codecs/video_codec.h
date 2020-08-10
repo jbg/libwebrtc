@@ -103,7 +103,6 @@ class RTC_EXPORT VideoCodec {
 
   // Public variables. TODO(hta): Make them private with accessors.
   VideoCodecType codecType;
-  unsigned char plType;
 
   // TODO(nisse): Change to int, for consistency.
   uint16_t width;
