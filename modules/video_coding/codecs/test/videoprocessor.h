@@ -29,7 +29,6 @@
 #include "api/video/video_frame.h"
 #include "api/video_codecs/video_decoder.h"
 #include "api/video_codecs/video_encoder.h"
-#include "modules/include/module_common_types.h"
 #include "modules/video_coding/codecs/test/videocodec_test_stats_impl.h"
 #include "modules/video_coding/include/video_codec_interface.h"
 #include "modules/video_coding/utility/ivf_file_writer.h"
@@ -91,8 +90,7 @@ class VideoProcessor {
 
     Result OnEncodedImage(
         const webrtc::EncodedImage& encoded_image,
-        const webrtc::CodecSpecificInfo* codec_specific_info,
-        const webrtc::RTPFragmentationHeader* fragmentation) override {
+        const webrtc::CodecSpecificInfo* codec_specific_info) override {
       RTC_CHECK(codec_specific_info);
 
       // Post the callback to the right task queue, if needed.
