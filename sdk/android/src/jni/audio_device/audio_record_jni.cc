@@ -70,8 +70,8 @@ AudioRecordJni::AudioRecordJni(JNIEnv* env,
       audio_device_buffer_(nullptr) {
   RTC_LOG(INFO) << "ctor";
   RTC_DCHECK(audio_parameters_.is_valid());
-  Java_WebRtcAudioRecord_setNativeAudioRecord(env, j_audio_record_,
-                                              jni::jlongFromPointer(this));
+  Java_WebRtcAudioRecordInterface_setNativeAudioRecord(
+      env, j_audio_record_, jni::jlongFromPointer(this));
   // Detach from this thread since construction is allowed to happen on a
   // different thread.
   thread_checker_.Detach();
@@ -109,7 +109,7 @@ int32_t AudioRecordJni::InitRecording() {
   RTC_DCHECK(!recording_);
   ScopedHistogramTimer timer("WebRTC.Audio.InitRecordingDurationMs");
 
-  int frames_per_buffer = Java_WebRtcAudioRecord_initRecording(
+  int frames_per_buffer = Java_WebRtcAudioRecordInterface_initRecording(
       env_, j_audio_record_, audio_parameters_.sample_rate(),
       static_cast<int>(audio_parameters_.channels()));
   if (frames_per_buffer < 0) {
@@ -144,7 +144,7 @@ int32_t AudioRecordJni::StartRecording() {
     return 0;
   }
   ScopedHistogramTimer timer("WebRTC.Audio.StartRecordingDurationMs");
-  if (!Java_WebRtcAudioRecord_startRecording(env_, j_audio_record_)) {
+  if (!Java_WebRtcAudioRecordInterface_startRecording(env_, j_audio_record_)) {
     RTC_LOG(LS_ERROR) << "StartRecording failed";
     return -1;
   }
@@ -160,16 +160,17 @@ int32_t AudioRecordJni::StopRecording() {
   }
   // Check if the audio source matched the activated recording session but only
   // if a valid results exists to avoid invalid statistics.
-  if (Java_WebRtcAudioRecord_isAudioConfigVerified(env_, j_audio_record_)) {
+  if (Java_WebRtcAudioRecordInterface_isAudioConfigVerified(env_,
+                                                            j_audio_record_)) {
     const bool session_was_ok =
-        Java_WebRtcAudioRecord_isAudioSourceMatchingRecordingSession(
+        Java_WebRtcAudioRecordInterface_isAudioSourceMatchingRecordingSession(
             env_, j_audio_record_);
     RTC_HISTOGRAM_BOOLEAN("WebRTC.Audio.SourceMatchesRecordingSession",
                           session_was_ok);
     RTC_LOG(INFO) << "HISTOGRAM(WebRTC.Audio.SourceMatchesRecordingSession): "
                   << session_was_ok;
   }
-  if (!Java_WebRtcAudioRecord_stopRecording(env_, j_audio_record_)) {
+  if (!Java_WebRtcAudioRecordInterface_stopRecording(env_, j_audio_record_)) {
     RTC_LOG(LS_ERROR) << "StopRecording failed";
     return -1;
   }
@@ -201,20 +202,21 @@ void AudioRecordJni::AttachAudioBuffer(AudioDeviceBuffer* audioBuffer) {
 
 bool AudioRecordJni::IsAcousticEchoCancelerSupported() const {
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioRecord_isAcousticEchoCancelerSupported(
+  return Java_WebRtcAudioRecordInterface_isAcousticEchoCancelerSupported(
       env_, j_audio_record_);
 }
 
 bool AudioRecordJni::IsNoiseSuppressorSupported() const {
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioRecord_isNoiseSuppressorSupported(env_,
-                                                           j_audio_record_);
+  return Java_WebRtcAudioRecordInterface_isNoiseSuppressorSupported(
+      env_, j_audio_record_);
 }
 
 int32_t AudioRecordJni::EnableBuiltInAEC(bool enable) {
   RTC_LOG(INFO) << "EnableBuiltInAEC(" << enable << ")";
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioRecord_enableBuiltInAEC(env_, j_audio_record_, enable)
+  return Java_WebRtcAudioRecordInterface_enableBuiltInAEC(env_, j_audio_record_,
+                                                          enable)
              ? 0
              : -1;
 }
@@ -222,7 +224,8 @@ int32_t AudioRecordJni::EnableBuiltInAEC(bool enable) {
 int32_t AudioRecordJni::EnableBuiltInNS(bool enable) {
   RTC_LOG(INFO) << "EnableBuiltInNS(" << enable << ")";
   RTC_DCHECK(thread_checker_.IsCurrent());
-  return Java_WebRtcAudioRecord_enableBuiltInNS(env_, j_audio_record_, enable)
+  return Java_WebRtcAudioRecordInterface_enableBuiltInNS(env_, j_audio_record_,
+                                                         enable)
              ? 0
              : -1;
 }
