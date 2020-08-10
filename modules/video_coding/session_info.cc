@@ -16,7 +16,6 @@
 #include <vector>
 
 #include "absl/types/variant.h"
-#include "modules/include/module_common_types.h"
 #include "modules/include/module_common_types_public.h"
 #include "modules/video_coding/codecs/interface/common_constants.h"
 #include "modules/video_coding/codecs/vp8/include/vp8_globals.h"
