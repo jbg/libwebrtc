@@ -427,6 +427,7 @@ if (is_android) {
       "src/java/org/webrtc/audio/WebRtcAudioEffects.java",
       "src/java/org/webrtc/audio/WebRtcAudioManager.java",
       "src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+      "src/java/org/webrtc/audio/WebRtcAudioRecordInterface.java",
       "src/java/org/webrtc/audio/WebRtcAudioTrack.java",
       "src/java/org/webrtc/audio/WebRtcAudioUtils.java",
     ]

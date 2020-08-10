@@ -40,7 +40,7 @@ import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordStartErrorCode;
 import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordStateCallback;
 import org.webrtc.audio.JavaAudioDeviceModule.SamplesReadyCallback;
 
-class WebRtcAudioRecord {
+class WebRtcAudioRecord implements WebRtcAudioRecordInterface {
   private static final String TAG = "WebRtcAudioRecordExternal";
 
   // Requested size of each recorded buffer provided to the client.
@@ -213,20 +213,23 @@ class WebRtcAudioRecord {
     this.nativeAudioRecord = nativeAudioRecord;
   }
 
+  @Override
   @CalledByNative
-  boolean isAcousticEchoCancelerSupported() {
+  public boolean isAcousticEchoCancelerSupported() {
     return isAcousticEchoCancelerSupported;
   }
 
+  @Override
   @CalledByNative
-  boolean isNoiseSuppressorSupported() {
+  public boolean isNoiseSuppressorSupported() {
     return isNoiseSuppressorSupported;
   }
 
   // Returns true if a valid call to verifyAudioConfig() has been done. Should always be
   // checked before using the returned value of isAudioSourceMatchingRecordingSession().
+  @Override
   @CalledByNative
-  boolean isAudioConfigVerified() {
+  public boolean isAudioConfigVerified() {
     return isAudioConfigVerified;
   }
 
@@ -234,8 +237,9 @@ class WebRtcAudioRecord {
   // startRecording() has been called. Hence, should preferably be called in combination with
   // stopRecording() to ensure that it has been set properly. |isAudioConfigVerified| is
   // enabled in WebRtcAudioRecord to ensure that the returned value is valid.
+  @Override
   @CalledByNative
-  boolean isAudioSourceMatchingRecordingSession() {
+  public boolean isAudioSourceMatchingRecordingSession() {
     if (!isAudioConfigVerified) {
       Logging.w(TAG, "Audio configuration has not yet been verified");
       return false;
@@ -243,20 +247,23 @@ class WebRtcAudioRecord {
     return audioSourceMatchesRecordingSession;
   }
 
+  @Override
   @CalledByNative
-  private boolean enableBuiltInAEC(boolean enable) {
+  public boolean enableBuiltInAEC(boolean enable) {
     Logging.d(TAG, "enableBuiltInAEC(" + enable + ")");
     return effects.setAEC(enable);
   }
 
+  @Override
   @CalledByNative
-  private boolean enableBuiltInNS(boolean enable) {
+  public boolean enableBuiltInNS(boolean enable) {
     Logging.d(TAG, "enableBuiltInNS(" + enable + ")");
     return effects.setNS(enable);
   }
 
+  @Override
   @CalledByNative
-  private int initRecording(int sampleRate, int channels) {
+  public int initRecording(int sampleRate, int channels) {
     Logging.d(TAG, "initRecording(sampleRate=" + sampleRate + ", channels=" + channels + ")");
     if (audioRecord != null) {
       reportWebRtcAudioRecordInitError("InitRecording called twice without StopRecording.");
@@ -351,8 +358,9 @@ class WebRtcAudioRecord {
     }
   }
 
+  @Override
   @CalledByNative
-  private boolean startRecording() {
+  public boolean startRecording() {
     Logging.d(TAG, "startRecording");
     assertTrue(audioRecord != null);
     assertTrue(audioThread == null);
@@ -375,8 +383,9 @@ class WebRtcAudioRecord {
     return true;
   }
 
+  @Override
   @CalledByNative
-  private boolean stopRecording() {
+  public boolean stopRecording() {
     Logging.d(TAG, "stopRecording");
     assertTrue(audioThread != null);
     if (future != null) {
