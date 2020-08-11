@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3184003_d0b55d0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-11T12:14:11Z",
+      "side": 1,
+      "message": "PTAL. Only remaining use was the VCMDecoderDataBase, where I had to add a new member for the \"current\" payload type.",
+      "revId": "268f4b863d2dc5585d09a878bcd6b5b49510d0bd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
