@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d3dc08a_c8e2abba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-08-11T07:37:58Z",
+      "side": 1,
+      "message": "LGTM but I am not an owner (except for BUILD.gn files).",
+      "revId": "50543c68a5759f983fe833387fcbc7416ac44d29",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
