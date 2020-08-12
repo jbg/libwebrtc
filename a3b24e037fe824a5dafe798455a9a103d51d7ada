@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a3afea3_5328f2a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-12T21:26:41Z",
+      "side": 1,
+      "message": "sakal, can you take a look at sdk/android?",
+      "revId": "a3b24e037fe824a5dafe798455a9a103d51d7ada",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
