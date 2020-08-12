@@ -16,7 +16,6 @@
 // NetworkMonitorFactory::SetFactory.
 #include "rtc_base/network_monitor_factory.h"
 #include "rtc_base/third_party/sigslot/sigslot.h"
-#include "rtc_base/thread.h"
 
 namespace rtc {
 
@@ -79,36 +78,11 @@ class NetworkMonitorInterface {
   virtual void Start() = 0;
   virtual void Stop() = 0;
 
-  // Implementations should call this method on the base when networks change,
-  // and the base will fire SignalNetworksChanged on the right thread.
-  virtual void OnNetworksChanged() = 0;
-
   virtual AdapterType GetAdapterType(const std::string& interface_name) = 0;
   virtual AdapterType GetVpnUnderlyingAdapterType(
       const std::string& interface_name) = 0;
   virtual NetworkPreference GetNetworkPreference(
       const std::string& interface_name) = 0;
-};
-
-class NetworkMonitorBase : public NetworkMonitorInterface,
-                           public MessageHandler,
-                           public sigslot::has_slots<> {
- public:
-  NetworkMonitorBase();
-  ~NetworkMonitorBase() override;
-
-  void OnNetworksChanged() override;
-
-  void OnMessage(Message* msg) override;
-
-  AdapterType GetVpnUnderlyingAdapterType(
-      const std::string& interface_name) override;
-
- protected:
-  Thread* worker_thread() { return worker_thread_; }
-
- private:
-  Thread* worker_thread_;
 };
 
 }  // namespace rtc
