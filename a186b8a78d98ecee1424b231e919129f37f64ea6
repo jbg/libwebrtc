@@ -33,6 +33,24 @@
       "revId": "a186b8a78d98ecee1424b231e919129f37f64ea6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0926588b_b0881efd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-12T06:47:56Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ve added those now.\nPTAL",
+      "parentUuid": "64b07bbe_172cfbf3",
+      "revId": "a186b8a78d98ecee1424b231e919129f37f64ea6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
