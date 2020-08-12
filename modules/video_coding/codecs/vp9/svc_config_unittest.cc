@@ -22,7 +22,7 @@ TEST(SvcConfig, NumSpatialLayers) {
   const size_t first_active_layer = 0;
   const size_t num_spatial_layers = 2;
 
-  std::vector<SpatialLayer> spatial_layers =
+  std::vector<VideoSpatialLayer> spatial_layers =
       GetSvcConfig(kMinVp9SpatialLayerWidth << (num_spatial_layers - 1),
                    kMinVp9SpatialLayerHeight << (num_spatial_layers - 1), 30,
                    first_active_layer, max_num_spatial_layers, 1, false);
@@ -34,7 +34,7 @@ TEST(SvcConfig, AlwaysSendsAtLeastOneLayer) {
   const size_t max_num_spatial_layers = 6;
   const size_t first_active_layer = 5;
 
-  std::vector<SpatialLayer> spatial_layers =
+  std::vector<VideoSpatialLayer> spatial_layers =
       GetSvcConfig(kMinVp9SpatialLayerWidth, kMinVp9SpatialLayerHeight, 30,
                    first_active_layer, max_num_spatial_layers, 1, false);
   EXPECT_EQ(spatial_layers.size(), 1u);
@@ -45,7 +45,7 @@ TEST(SvcConfig, EnforcesMinimalRequiredParity) {
   const size_t max_num_spatial_layers = 3;
   const size_t kOddSize = 1023;
 
-  std::vector<SpatialLayer> spatial_layers =
+  std::vector<VideoSpatialLayer> spatial_layers =
       GetSvcConfig(kOddSize, kOddSize, 30,
                    /*first_active_layer=*/1, max_num_spatial_layers, 1, false);
   // Since there are 2 layers total (1, 2), divisiblity by 2 is required.
@@ -71,7 +71,7 @@ TEST(SvcConfig, SkipsInactiveLayers) {
   const size_t num_spatial_layers = 4;
   const size_t first_active_layer = 2;
 
-  std::vector<SpatialLayer> spatial_layers =
+  std::vector<VideoSpatialLayer> spatial_layers =
       GetSvcConfig(kMinVp9SpatialLayerWidth << (num_spatial_layers - 1),
                    kMinVp9SpatialLayerHeight << (num_spatial_layers - 1), 30,
                    first_active_layer, num_spatial_layers, 1, false);
@@ -83,14 +83,14 @@ TEST(SvcConfig, SkipsInactiveLayers) {
 TEST(SvcConfig, BitrateThresholds) {
   const size_t first_active_layer = 0;
   const size_t num_spatial_layers = 3;
-  std::vector<SpatialLayer> spatial_layers =
+  std::vector<VideoSpatialLayer> spatial_layers =
       GetSvcConfig(kMinVp9SpatialLayerWidth << (num_spatial_layers - 1),
                    kMinVp9SpatialLayerHeight << (num_spatial_layers - 1), 30,
                    first_active_layer, num_spatial_layers, 1, false);
 
   EXPECT_EQ(spatial_layers.size(), num_spatial_layers);
 
-  for (const SpatialLayer& layer : spatial_layers) {
+  for (const VideoSpatialLayer& layer : spatial_layers) {
     EXPECT_LE(layer.minBitrate, layer.maxBitrate);
     EXPECT_LE(layer.minBitrate, layer.targetBitrate);
     EXPECT_LE(layer.targetBitrate, layer.maxBitrate);
@@ -98,13 +98,13 @@ TEST(SvcConfig, BitrateThresholds) {
 }
 
 TEST(SvcConfig, ScreenSharing) {
-  std::vector<SpatialLayer> spatial_layers =
+  std::vector<VideoSpatialLayer> spatial_layers =
       GetSvcConfig(1920, 1080, 30, 1, 3, 3, true);
 
   EXPECT_EQ(spatial_layers.size(), 3UL);
 
   for (size_t i = 0; i < 3; ++i) {
-    const SpatialLayer& layer = spatial_layers[i];
+    const VideoSpatialLayer& layer = spatial_layers[i];
     EXPECT_EQ(layer.width, 1920);
     EXPECT_EQ(layer.height, 1080);
     EXPECT_EQ(layer.maxFramerate, (i < 1) ? 5 : (i < 2 ? 10 : 30));

@@ -95,7 +95,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
   int max_framerate = 0;
 
   for (size_t i = 0; i < streams.size(); ++i) {
-    SimulcastStream* sim_stream = &video_codec.simulcastStream[i];
+    VideoSpatialLayer* sim_stream = &video_codec.simulcastStream[i];
     RTC_DCHECK_GT(streams[i].width, 0);
     RTC_DCHECK_GT(streams[i].height, 0);
     RTC_DCHECK_GT(streams[i].max_framerate, 0);
@@ -177,7 +177,7 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
                  config.spatial_layers.size() ==
                      video_codec.VP9()->numberOfSpatialLayers);
 
-      std::vector<SpatialLayer> spatial_layers;
+      std::vector<VideoSpatialLayer> spatial_layers;
       if (!config.spatial_layers.empty()) {
         // Layering is set explicitly.
         spatial_layers = config.spatial_layers;
