@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e745d25_29d8e97d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-12T12:23:08Z",
+      "side": 1,
+      "message": "PTAL. Trying to take stuff out of common_types.h. And it belongs to api/ because it\u0027s part of the VideoCodec class and the VideoEncoder::InitEncode api.",
+      "revId": "9553a69d45f920b2ab49d50868f203ebfa483a9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0997bb5f_0b5da0e7",
+        "filename": "api/video_codecs/video_spatial_layer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-12T12:23:08Z",
+      "side": 1,
+      "message": "Maybe this alias can be deleted right away. The SpatialLayer alias is needed to not break chrome.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 42
+      },
+      "revId": "9553a69d45f920b2ab49d50868f203ebfa483a9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

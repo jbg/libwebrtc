@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90935f4b_1f080310",
+        "filename": "api/video_codecs/video_spatial_layer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-12T12:23:08Z",
+      "side": 1,
+      "message": "Is this a good name? Used to be SpatialLayer, with alias SimulcastStream.\n\nSome other alternatives: VideoLayer, VideoCodingLayer. Or leave it unchanged as SpatialLayer.\n\nIt also needs a brief comment on the purpose of this struct. Suggestions?",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "1290d6aee8a1f7ba3327f58f36c662a6176d1c4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "722d3f3b_2b031ddf",
+        "filename": "api/video_codecs/video_spatial_layer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-12T12:23:08Z",
+      "side": 1,
+      "message": "The type short is discouraged by style guide, and so are unsigned types (also below). Change to plain int, or int16_t ? Is the size of this struct (it\u0027s used for array members) important?",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 16
+      },
+      "revId": "1290d6aee8a1f7ba3327f58f36c662a6176d1c4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
