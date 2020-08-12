@@ -33,7 +33,7 @@ static VideoCodec Configure(size_t width,
   codec.mode = is_screen_sharing ? VideoCodecMode::kScreensharing
                                  : VideoCodecMode::kRealtimeVideo;
 
-  std::vector<SpatialLayer> spatial_layers =
+  std::vector<VideoSpatialLayer> spatial_layers =
       GetSvcConfig(width, height, 30, /*first_active_layer=*/0,
                    num_spatial_layers, num_temporal_layers, is_screen_sharing);
   RTC_CHECK_LE(spatial_layers.size(), kMaxSpatialLayers);
@@ -92,7 +92,7 @@ TEST(SvcRateAllocatorTest,
   VideoCodec codec = Configure(1280, 720, 3, 3, false);
   SvcRateAllocator allocator = SvcRateAllocator(codec);
 
-  const SpatialLayer* layers = codec.spatialLayers;
+  const VideoSpatialLayer* layers = codec.spatialLayers;
 
   VideoBitrateAllocation allocation = allocator.Allocate(
       VideoBitrateAllocationParameters(layers[0].minBitrate * 1000 / 2, 30));
@@ -106,7 +106,7 @@ TEST(SvcRateAllocatorTest, Disable640x360Layer) {
   VideoCodec codec = Configure(1280, 720, 3, 3, false);
   SvcRateAllocator allocator = SvcRateAllocator(codec);
 
-  const SpatialLayer* layers = codec.spatialLayers;
+  const VideoSpatialLayer* layers = codec.spatialLayers;
 
   size_t min_bitrate_for_640x360_layer_kbps =
       layers[0].minBitrate + layers[1].minBitrate;
@@ -123,7 +123,7 @@ TEST(SvcRateAllocatorTest, Disable1280x720Layer) {
   VideoCodec codec = Configure(1280, 720, 3, 3, false);
   SvcRateAllocator allocator = SvcRateAllocator(codec);
 
-  const SpatialLayer* layers = codec.spatialLayers;
+  const VideoSpatialLayer* layers = codec.spatialLayers;
 
   size_t min_bitrate_for_1280x720_layer_kbps =
       layers[0].minBitrate + layers[1].minBitrate + layers[2].minBitrate;
@@ -141,7 +141,7 @@ TEST(SvcRateAllocatorTest, BitrateIsCapped) {
   VideoCodec codec = Configure(1280, 720, 3, 3, false);
   SvcRateAllocator allocator = SvcRateAllocator(codec);
 
-  const SpatialLayer* layers = codec.spatialLayers;
+  const VideoSpatialLayer* layers = codec.spatialLayers;
 
   const uint32_t link_mbps = 100;
   VideoBitrateAllocation allocation = allocator.Allocate(
@@ -158,7 +158,7 @@ TEST(SvcRateAllocatorTest, MinBitrateToGetQualityLayer) {
   VideoCodec codec = Configure(1280, 720, 3, 1, true);
   SvcRateAllocator allocator = SvcRateAllocator(codec);
 
-  const SpatialLayer* layers = codec.spatialLayers;
+  const VideoSpatialLayer* layers = codec.spatialLayers;
 
   EXPECT_LE(codec.VP9()->numberOfSpatialLayers, 3U);
 
