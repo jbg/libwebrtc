@@ -19,7 +19,7 @@
 #include "absl/types/optional.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_codec_type.h"
-#include "common_types.h"  // NOLINT(build/include_directory)
+#include "api/video_codecs/video_spatial_layer.h"
 #include "rtc_base/system/rtc_export.h"
 
 namespace webrtc {
@@ -123,8 +123,8 @@ class RTC_EXPORT VideoCodec {
 
   unsigned int qpMax;
   unsigned char numberOfSimulcastStreams;
-  SimulcastStream simulcastStream[kMaxSimulcastStreams];
-  SpatialLayer spatialLayers[kMaxSpatialLayers];
+  VideoSpatialLayer simulcastStream[kMaxSimulcastStreams];
+  VideoSpatialLayer spatialLayers[kMaxSpatialLayers];
 
   VideoCodecMode mode;
   bool expect_encode_from_texture;
