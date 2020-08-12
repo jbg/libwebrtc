@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1ee5656_c04fe816",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-12T12:47:08Z",
+      "side": 1,
+      "message": "Cleanups. I realized how I could mark this function RTC_DEPRECATED before removing it.\n",
+      "revId": "02d49b9b63ee1b4c52877f523bf77b161e11ab68",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
