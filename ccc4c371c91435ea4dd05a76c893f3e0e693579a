@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e7b2f32_830dbff1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-12T01:54:09Z",
+      "side": 1,
+      "message": "PTAL, some more network monitor cleanup.",
+      "revId": "ccc4c371c91435ea4dd05a76c893f3e0e693579a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
