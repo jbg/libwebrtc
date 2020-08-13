@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "684cbb27_67b14cf1",
+        "filename": "api/video_codecs/video_spatial_layer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-08-13T09:35:00Z",
+      "side": 1,
+      "message": "SGTM, but I\u0027m not a video person.",
+      "parentUuid": "90935f4b_1f080310",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "1290d6aee8a1f7ba3327f58f36c662a6176d1c4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "722d3f3b_2b031ddf",
         "filename": "api/video_codecs/video_spatial_layer.h",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-08-12T12:23:08Z",
       "side": 1,
       "message": "The type short is discouraged by style guide, and so are unsigned types (also below). Change to plain int, or int16_t ? Is the size of this struct (it\u0027s used for array members) important?",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 16
+      },
+      "revId": "1290d6aee8a1f7ba3327f58f36c662a6176d1c4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc44a038_12e8fe54",
+        "filename": "api/video_codecs/video_spatial_layer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-08-13T09:35:00Z",
+      "side": 1,
+      "message": "Change to plain `int` unless you hear opinions to the contrary. (May be good to do in a separate CL, since that has little to do with the current CL.)",
+      "parentUuid": "722d3f3b_2b031ddf",
       "range": {
         "startLine": 22,
         "startChar": 2,
