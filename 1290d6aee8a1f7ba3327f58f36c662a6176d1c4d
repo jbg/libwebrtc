@@ -93,6 +93,30 @@
       "revId": "1290d6aee8a1f7ba3327f58f36c662a6176d1c4d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2b20832_7671cd0a",
+        "filename": "api/video_codecs/video_spatial_layer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-13T09:57:27Z",
+      "side": 1,
+      "message": "I gave it a quick try, and it seems a large enough change not make sense as part of this cl. First failure was a signedness warning in a test, because kMinVp9SpatialLayerWidth is defined as an unsigned type (size_t, in vp9_globals.h).\n\nAnd then there\u0027s a separate local definition of the same symbol in video_send_stream_tests.cc. And this one is a signed int.",
+      "parentUuid": "fc44a038_12e8fe54",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 16
+      },
+      "revId": "1290d6aee8a1f7ba3327f58f36c662a6176d1c4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
