@@ -28,6 +28,8 @@ rtc_library("video_codecs_api") {
     "video_encoder_config.cc",
     "video_encoder_config.h",
     "video_encoder_factory.h",
+    "video_spatial_layer.cc",
+    "video_spatial_layer.h",
     "vp8_frame_buffer_controller.h",
     "vp8_frame_config.cc",
     "vp8_frame_config.h",

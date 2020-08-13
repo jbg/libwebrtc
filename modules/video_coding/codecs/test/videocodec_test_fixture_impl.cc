@@ -67,7 +67,7 @@ void ConfigureSimulcast(VideoCodec* codec_settings) {
       /* is_screenshare = */ false, true);
 
   for (size_t i = 0; i < streams.size(); ++i) {
-    SimulcastStream* ss = &codec_settings->simulcastStream[i];
+    VideoSpatialLayer* ss = &codec_settings->simulcastStream[i];
     ss->width = static_cast<uint16_t>(streams[i].width);
     ss->height = static_cast<uint16_t>(streams[i].height);
     ss->numberOfTemporalLayers =
@@ -83,7 +83,7 @@ void ConfigureSimulcast(VideoCodec* codec_settings) {
 void ConfigureSvc(VideoCodec* codec_settings) {
   RTC_CHECK_EQ(kVideoCodecVP9, codec_settings->codecType);
 
-  const std::vector<SpatialLayer> layers = GetSvcConfig(
+  const std::vector<VideoSpatialLayer> layers = GetSvcConfig(
       codec_settings->width, codec_settings->height, kMaxFramerateFps,
       /*first_active_layer=*/0, codec_settings->VP9()->numberOfSpatialLayers,
       codec_settings->VP9()->numberOfTemporalLayers,
@@ -277,7 +277,7 @@ std::string VideoCodecTestFixtureImpl::Config::ToString() const {
   if (codec_settings.numberOfSimulcastStreams > 1) {
     for (int i = 0; i < codec_settings.numberOfSimulcastStreams; ++i) {
       ss << "\n\n--> codec_settings.simulcastStream[" << i << "]";
-      const SimulcastStream& simulcast_stream =
+      const VideoSpatialLayer& simulcast_stream =
           codec_settings.simulcastStream[i];
       ss << "\nwidth: " << simulcast_stream.width;
       ss << "\nheight: " << simulcast_stream.height;
