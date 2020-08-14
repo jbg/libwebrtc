@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ee816841_6f023473",
+        "filename": "api/video_codecs/video_spatial_layer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-14T12:35:01Z",
+      "side": 1,
+      "message": "Discussed with Erik, and he prefers to drop the Video prefix. I don\u0027t have a strong opinion either way, I just notices that almost all video types in api/ are named with a Video prefix (with EncodedImage likely being the most widely used exception).",
+      "parentUuid": "684cbb27_67b14cf1",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "1290d6aee8a1f7ba3327f58f36c662a6176d1c4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "722d3f3b_2b031ddf",
         "filename": "api/video_codecs/video_spatial_layer.h",
         "patchSetId": 1
