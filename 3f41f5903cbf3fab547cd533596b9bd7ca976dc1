@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea227788_73bb2023",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-14T13:37:14Z",
+      "side": 1,
+      "message": "Dropped the Video prefix,i.e., the name SpatialLayer unchanged, just declaration moved, and SimulcastStream alias deleted. ",
+      "revId": "3f41f5903cbf3fab547cd533596b9bd7ca976dc1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
