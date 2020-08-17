@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2985699b_7cb00470",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-17T07:28:32Z",
+      "side": 1,
+      "message": "This version has the Objective C change and no deprecation, will fix Android later.\nReady to merge?\n",
+      "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
