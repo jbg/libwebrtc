@@ -33,6 +33,29 @@
       "revId": "b8d6af5ce4d1c0eb95e55c11002bb7fa0274979c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1365dd44_7b366713",
+        "filename": "system_wrappers/source/cpu_features.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-08-17T09:04:50Z",
+      "side": 1,
+      "message": "On default configs this is an unused variable, can we move it inside the #ifdef?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "b8d6af5ce4d1c0eb95e55c11002bb7fa0274979c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
