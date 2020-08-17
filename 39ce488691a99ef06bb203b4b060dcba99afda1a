@@ -145,6 +145,30 @@
       "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69e250da_fa422dbd",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-08-17T07:56:25Z",
+      "side": 1,
+      "message": "There is `RTCLogError(...)`, but I don\u0027t think we should go that route for the reasons above.",
+      "parentUuid": "e86a1f63_ae0c4582",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

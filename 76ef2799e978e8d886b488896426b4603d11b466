@@ -16,6 +16,24 @@
       "revId": "76ef2799e978e8d886b488896426b4603d11b466",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da76562c_7cf4f663",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-08-17T07:56:25Z",
+      "side": 1,
+      "message": "In Obj-C land, the convention is usually that if the user of an API does not supply an error as an input, then they wish to ignore any errors. I suggest we just follow that and don\u0027t do anything if error is nil. (note that in obj-c we use `nil` instead of `null`, or just `!error`).",
+      "parentUuid": "368f971e_69b4c29a",
+      "revId": "76ef2799e978e8d886b488896426b4603d11b466",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
