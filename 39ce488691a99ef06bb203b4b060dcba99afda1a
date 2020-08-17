@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "a392b22b_c43df572",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-17T07:49:17Z",
+      "side": 1,
+      "message": "I hope it\u0027s fine. The guess is that not many people use it.",
+      "parentUuid": "e5d7e389_0ccc3e66",
+      "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d6d1adc_6cb865b3",
         "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.h",
         "patchSetId": 4
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "b8fbf4c4_afd25709",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-17T07:49:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d6d1adc_6cb865b3",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f9b1eb4_2c2eb06a",
         "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
         "patchSetId": 4
@@ -70,6 +112,30 @@
       "writtenOn": "2020-08-17T07:43:30Z",
       "side": 1,
       "message": "we need to also check that error !\u003d nil here",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e86a1f63_ae0c4582",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-17T07:49:17Z",
+      "side": 1,
+      "message": "Is there a LOG(ERROR) equivalent that can be used to warn the user about the programming error?",
+      "parentUuid": "5f9b1eb4_2c2eb06a",
       "range": {
         "startLine": 84,
         "startChar": 6,

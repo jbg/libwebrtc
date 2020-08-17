@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "368f971e_69b4c29a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-17T07:49:17Z",
+      "side": 1,
+      "message": "Not quite clear to me what to do if error is null. The user doesn\u0027t care if it succeeds or not, so call SetDirectionWithError and ignore the error?\nWould be nice to log something, but don\u0027t know if that\u0027s available in this context.\n\n",
+      "revId": "76ef2799e978e8d886b488896426b4603d11b466",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
