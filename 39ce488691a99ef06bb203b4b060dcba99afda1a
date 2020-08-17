@@ -16,6 +16,69 @@
       "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5d7e389_0ccc3e66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-08-17T07:43:30Z",
+      "side": 1,
+      "message": "This removes the old setDirection without error from the objc layer, I assume that\u0027s fine.",
+      "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d6d1adc_6cb865b3",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-08-17T07:43:30Z",
+      "side": 1,
+      "message": "this can be removed as it\u0027s not used.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f9b1eb4_2c2eb06a",
+        "filename": "sdk/objc/api/peerconnection/RTCRtpTransceiver.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5520
+      },
+      "writtenOn": "2020-08-17T07:43:30Z",
+      "side": 1,
+      "message": "we need to also check that error !\u003d nil here",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "39ce488691a99ef06bb203b4b060dcba99afda1a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
