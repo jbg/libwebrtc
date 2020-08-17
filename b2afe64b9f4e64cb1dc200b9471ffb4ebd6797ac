@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "7a653bde_f3647c4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-17T08:09:08Z",
+      "side": 1,
+      "message": "Thanks Niels, comments are addressed, PTAL!",
+      "parentUuid": "6d3e934d_14b830ad",
+      "revId": "b2afe64b9f4e64cb1dc200b9471ffb4ebd6797ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a622e88_f4b1fa41",
         "filename": "system_wrappers/source/cpu_features.cc",
         "patchSetId": 1
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "138a521a_3a1754b9",
+        "filename": "system_wrappers/source/cpu_features.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-17T08:09:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a622e88_f4b1fa41",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 25
+      },
+      "revId": "b2afe64b9f4e64cb1dc200b9471ffb4ebd6797ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4de1ef34_933227cc",
         "filename": "system_wrappers/source/cpu_features.cc",
         "patchSetId": 1
@@ -79,6 +121,30 @@
       "revId": "b2afe64b9f4e64cb1dc200b9471ffb4ebd6797ac",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39257924_1c3e9ac8",
+        "filename": "system_wrappers/source/cpu_features.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-17T08:09:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4de1ef34_933227cc",
+      "range": {
+        "startLine": 84,
+        "startChar": 20,
+        "endLine": 84,
+        "endChar": 27
+      },
+      "revId": "b2afe64b9f4e64cb1dc200b9471ffb4ebd6797ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
