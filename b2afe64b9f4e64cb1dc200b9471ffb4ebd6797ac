@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88273249_c122d281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-17T07:14:01Z",
+      "side": 1,
+      "message": "Hi, this PS just modify the cpu_features.cc according to nisse@\u0027s comments at https://webrtc-review.googlesource.com/c/src/+/181540, PTAL!",
+      "revId": "b2afe64b9f4e64cb1dc200b9471ffb4ebd6797ac",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
