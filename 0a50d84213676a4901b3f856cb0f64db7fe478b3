@@ -50,6 +50,24 @@
       "revId": "0a50d84213676a4901b3f856cb0f64db7fe478b3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16ce0df5_48de5cb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-18T01:10:54Z",
+      "side": 1,
+      "message": "Sure, PS has been rebased, thanks Mirko!",
+      "parentUuid": "43fa2743_7eab88ed",
+      "revId": "0a50d84213676a4901b3f856cb0f64db7fe478b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
