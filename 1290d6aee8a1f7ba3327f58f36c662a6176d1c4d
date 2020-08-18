@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "775b79e9_28653fd4",
+        "filename": "api/video_codecs/video_spatial_layer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 10798
+      },
+      "writtenOn": "2020-08-18T07:32:05Z",
+      "side": 1,
+      "message": "SGTM since the name is recognizably a video thing even without the \"video\" prefix. But I\u0027ve seen other cases where a \"video\" prefix is necessary to disambiguate from the corresponding audio thing, so some caution is called for.",
+      "parentUuid": "ee816841_6f023473",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "1290d6aee8a1f7ba3327f58f36c662a6176d1c4d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "722d3f3b_2b031ddf",
         "filename": "api/video_codecs/video_spatial_layer.h",
         "patchSetId": 1
