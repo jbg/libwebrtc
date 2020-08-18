@@ -16,6 +16,23 @@
       "revId": "119a1813d3be03aabc01b12679b99a99cd2f0689",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72d64e85_1d1d155b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-08-18T10:39:58Z",
+      "side": 1,
+      "message": "ping. Back to work :-)",
+      "revId": "119a1813d3be03aabc01b12679b99a99cd2f0689",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
