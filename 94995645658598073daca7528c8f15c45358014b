@@ -34,6 +34,23 @@
       "revId": "94995645658598073daca7528c8f15c45358014b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4b7b3dd_663172a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-08-19T15:54:10Z",
+      "side": 1,
+      "message": "I give another thought. As this increases the header size by 1 byte, and the information is not strongly needed at the moment, it could be good to add field-trial on it. I will update the CL if no objection.",
+      "revId": "94995645658598073daca7528c8f15c45358014b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
