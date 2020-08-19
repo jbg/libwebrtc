@@ -68,6 +68,52 @@
       "revId": "0a50d84213676a4901b3f856cb0f64db7fe478b3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52d5179b_64a9cfde",
+        "filename": "modules/audio_processing/aec3/adaptive_fir_filter_avx2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-19T12:55:32Z",
+      "side": 1,
+      "message": "I think the choice to move the AVX2 code into a separate file is the right one, considering that the adaptive_fir_filter.cc is so long.\nI\u0027ll follow up this CL with a CL that does the same think for the other variants of the implementations since I don\u0027t think it makes sense to have different approaches for the different variants.\n\nHowever, along my comment in the BUILD file I think that the code in this file should always be included in the builds and instead have #ifdef  build flags to control the inclusion of the code into the compilation.",
+      "range": {
+        "startLine": 21,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 60
+      },
+      "revId": "0a50d84213676a4901b3f856cb0f64db7fe478b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e94915e_a4cb931e",
+        "filename": "modules/audio_processing/aec3/adaptive_fir_filter_erl_avx2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-19T12:55:32Z",
+      "side": 1,
+      "message": "The file adaptive_fir_filter_erl.cc is not that large, and this method is so small, so I\u0027d suggest moving this code into that. It does not make sense for the AVX2 optimized code to be placed differently compared to the other code optimizations",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 1
+      },
+      "revId": "0a50d84213676a4901b3f856cb0f64db7fe478b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
