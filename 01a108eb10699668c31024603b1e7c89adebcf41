@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a436137_88cb24cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7036
+      },
+      "writtenOn": "2020-08-19T10:48:09Z",
+      "side": 1,
+      "message": "Sample output: Error configuring codec, error code: 8, details: ts_target_bitrate entries are not strictly increasing",
+      "revId": "01a108eb10699668c31024603b1e7c89adebcf41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
