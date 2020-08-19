@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fc6da46_878c5a78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2020-08-19T15:38:48Z",
+      "side": 1,
+      "message": "I don\u0027t have the context for this change, but you have my rubberstamp LGTM.",
+      "revId": "94995645658598073daca7528c8f15c45358014b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
