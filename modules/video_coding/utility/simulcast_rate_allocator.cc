@@ -335,7 +335,8 @@ int SimulcastRateAllocator::NumTemporalStreams(size_t simulcast_id) const {
 }
 
 void SimulcastRateAllocator::SetLegacyConferenceMode(bool enabled) {
-  legacy_conference_mode_ = enabled;
+  legacy_conference_mode_ =
+      enabled && codec_.mode == VideoCodecMode::kScreensharing;
 }
 
 }  // namespace webrtc
