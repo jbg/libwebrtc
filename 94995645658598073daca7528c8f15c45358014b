@@ -51,6 +51,23 @@
       "revId": "94995645658598073daca7528c8f15c45358014b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fee55ed9_7577fc25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-08-19T21:06:16Z",
+      "side": 1,
+      "message": "Adding field trial to RTP_RTCP module is far more tricky than adding it elsewhere. Basically system_wrapper/field_trial is forbidden, where the preferred field trial dependency is not all wired up in audio_sender, yes, it is ready in video sender.\n\nSo I will need more time on it.",
+      "revId": "94995645658598073daca7528c8f15c45358014b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
