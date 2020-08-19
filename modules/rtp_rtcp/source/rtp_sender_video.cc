@@ -446,7 +446,7 @@ bool RTPSenderVideo::SendVideo(
                                                single_packet->Csrcs()),
           single_packet->Timestamp(), kVideoPayloadTypeFrequency,
           Int64MsToUQ32x32(single_packet->capture_time_ms() + NtpOffsetMs()),
-          /*estimated_capture_clock_offset=*/absl::nullopt);
+          /*estimated_capture_clock_offset=*/0);
 
   auto first_packet = std::make_unique<RtpPacketToSend>(*single_packet);
   auto middle_packet = std::make_unique<RtpPacketToSend>(*single_packet);
