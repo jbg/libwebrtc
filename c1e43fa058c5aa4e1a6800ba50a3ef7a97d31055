@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4558e295_17094b06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-19T20:55:30Z",
+      "side": 1,
+      "message": "Nits only.\n\nThis exposes the information only thrhough the Java API, which means that only Android can get it.\nIs there a candidate pair change event reported in the regular C++ API too? Shuld it be exposed there?",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdfc45a_e9ee3ccc",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2134,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-19T20:55:30Z",
+      "side": 1,
+      "message": "If the RTC_DCHECK doesn\u0027t trigger, the std::max is unneccessary.",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6a8b818_be79af82",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-19T20:55:30Z",
+      "side": 1,
+      "message": "This is a do-nothing else branch - were you thinking of putting something in here?",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50923c80_cb216ae1",
+        "filename": "p2p/base/p2p_transport_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-19T20:55:30Z",
+      "side": 1,
+      "message": "Comment should mention which clock this is fetched from.",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7e8dcd1_1d322dc5",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-19T20:55:30Z",
+      "side": 1,
+      "message": "Don\u0027t you need a test for the case where the disconnect time is based on the last received data packet too?",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "577e35e7_9a617587",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-19T20:55:30Z",
+      "side": 1,
+      "message": "Grammar: Delete \"have\"",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
