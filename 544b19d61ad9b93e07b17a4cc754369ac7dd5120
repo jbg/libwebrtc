@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad0a6452_305338fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-19T12:51:29Z",
+      "side": 1,
+      "message": "Thanks for the CL!!!!\nI have initial comments.",
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74a77770_f44c3957",
+        "filename": "modules/audio_processing/aec3/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-19T12:51:29Z",
+      "side": 1,
+      "message": "When adding platform specific-code, there are basically two paths to go: either let the build-system decide whether to include the code, or using build-flags (in #ifdef) to include the code.\n\nThe rest of the AEC3 code uses the build-flag approach for the SSE2 and Neon code, but the approach taken here for AVX2 is the build-system approach.\n\nThat results in that we have a two different ways of handling this, which I don\u0027t think is good.\n\nWhile there are pros and cons with both variants I personally prefer the build-flag approach since\n-With that there is only one source of truth (the code) and a reader of the code only needs to look at the source code, and not the build files, to understand the code.\n-With that the code is more portable since it is less relying features of the  build system to work.\n\n\nRegardless of my personal preference I think that the right thing in this CL is to keep the approach used currently in AEC3 and instead use build-flags to control the building of the AVX2 code (similarly to the SSE2 code).\n\nThat will also avoid the necessity to break up the code in lots of smaller build targets.",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 272,
+        "endChar": 1
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42a39bac_d05bb0d2",
+        "filename": "modules/audio_processing/aec3/fft_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-19T12:51:29Z",
+      "side": 1,
+      "message": "The idea with putting the SSE2 code as part of the header file is to allow inlining if the compiler wants to. \nThis could make sense if the method is called in a loop (maybe in particular so since the default implementation is a simple transform operation).\n\nI think the the AVX2 code should follow the same pattern as the other code and put the method implementation here in the header file.",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 37
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e888331b_3c949037",
+        "filename": "modules/audio_processing/aec3/fft_data_avx2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-19T12:51:29Z",
+      "side": 1,
+      "message": "As mentioned elsewhere, please move this to the header file.",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a0539a7_69055d33",
+        "filename": "modules/audio_processing/aec3/matched_filter_avx2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-19T12:51:29Z",
+      "side": 1,
+      "message": "I think the choice to move the AVX2 code into a separate file is the right one, considering that the matched_filter.cc is so long.\nI\u0027ll follow up this CL with a CL that does the same think for the other variants of the MatchedFilterCore implementations since I don\u0027t think it makes sense to have different approaches for the different variants.\n\nHowever, along my comment in the BUILD file I think that the code in this file should always be included in the builds and instead have #ifdef  build flags to control the inclusion of the code into the compilation.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ab1e04b_85302658",
+        "filename": "modules/audio_processing/aec3/vector_math.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-19T12:51:29Z",
+      "side": 1,
+      "message": "As commented elsewhere, please follow the pattern used for SSE2 and add the implementation inline here.\n\nThat will allow inlining, and will also be consistent to how the Neon and SSE2 optimizations are made.",
+      "range": {
+        "startLine": 43,
+        "startChar": 1,
+        "endLine": 43,
+        "endChar": 41
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
