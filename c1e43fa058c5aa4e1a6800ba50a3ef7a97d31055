@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "be5d38a5_6be543b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-08-20T05:40:15Z",
+      "side": 1,
+      "message": "It is exposed in c++ API using the PeerConnectionObserver::OnIceSelectedCandidatePairChanged.\nI\u0027m thinking about adding it to SignalNetworkRouteChanged, but that can be done later.",
+      "parentUuid": "4558e295_17094b06",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cdfc45a_e9ee3ccc",
         "filename": "p2p/base/p2p_transport_channel.cc",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-08-19T20:55:30Z",
       "side": 1,
       "message": "If the RTC_DCHECK doesn\u0027t trigger, the std::max is unneccessary.",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5720608e_317ee148",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2134,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-08-20T05:40:15Z",
+      "side": 1,
+      "message": "it hasn\u0027t fired yet...but i\u0027ve only done finite testing,\njust \"hängslen och livrem\",\nWDYT ?",
+      "parentUuid": "5cdfc45a_e9ee3ccc",
       "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6fca078b_58c83ef0",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-08-20T05:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6a8b818_be79af82",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50923c80_cb216ae1",
         "filename": "p2p/base/p2p_transport_channel.h",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b576aa1_9a9419da",
+        "filename": "p2p/base/p2p_transport_channel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-08-20T05:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50923c80_cb216ae1",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2d4f7b73_6fdbd446",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-08-20T05:40:15Z",
+      "side": 1,
+      "message": "that is already tested above...\nI added scopes to make it clearer\nWDYT ?",
+      "parentUuid": "c7e8dcd1_1d322dc5",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "577e35e7_9a617587",
         "filename": "p2p/base/port.h",
         "patchSetId": 2
@@ -101,6 +191,24 @@
       "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2c3e07e_2105401f",
+        "filename": "p2p/base/port.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5613
+      },
+      "writtenOn": "2020-08-20T05:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "577e35e7_9a617587",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
