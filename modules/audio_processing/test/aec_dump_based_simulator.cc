@@ -438,7 +438,6 @@ void AecDumpBasedSimulator::HandleMessage(
     }
 
     ap_->ApplyConfig(apm_config);
-    ap_->SetExtraOptions(config);
   }
 }
 
