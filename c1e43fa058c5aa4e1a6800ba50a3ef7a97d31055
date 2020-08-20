@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "fe66050e_87b17f1d",
+        "filename": "p2p/base/p2p_transport_channel.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2134,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-20T09:50:42Z",
+      "side": 1,
+      "message": "Let it remain as-is for now.\nIf we ever get a ridiculously high value into last_data_received_ms_, that value will be locked in forever - but under random data corruption, we\u0027re dead anyway.",
+      "parentUuid": "5720608e_317ee148",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6a8b818_be79af82",
         "filename": "p2p/base/p2p_transport_channel.cc",
         "patchSetId": 2
@@ -174,6 +192,24 @@
       "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8777fdf7_7c844522",
+        "filename": "p2p/base/p2p_transport_channel_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-20T09:50:42Z",
+      "side": 1,
+      "message": "Looks good. I was reading the events as one long series, and missed the first call to the new function.",
+      "parentUuid": "2d4f7b73_6fdbd446",
+      "revId": "c1e43fa058c5aa4e1a6800ba50a3ef7a97d31055",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
