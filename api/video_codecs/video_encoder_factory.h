@@ -26,16 +26,6 @@ class VideoEncoder;
 // NOTE: This class is still under development and may change without notice.
 class VideoEncoderFactory {
  public:
-  // TODO(magjed): Try to get rid of this struct.
-  struct CodecInfo {
-    // |has_internal_source| is true if encoders created by this factory of the
-    // given codec will use internal camera sources, meaning that they don't
-    // require/expect frames to be delivered via webrtc::VideoEncoder::Encode.
-    // This flag is used as the internal_source parameter to
-    // webrtc::ViEExternalCodec::RegisterExternalSendCodec.
-    bool has_internal_source = false;
-  };
-
   // An injectable class that is continuously updated with encoding conditions
   // and selects the best encoder given those conditions.
   class EncoderSelectorInterface {
@@ -66,16 +56,6 @@ class VideoEncoderFactory {
   // called.
   virtual std::vector<SdpVideoFormat> GetImplementations() const {
     return GetSupportedFormats();
-  }
-
-  // Returns information about how this format will be encoded. The specified
-  // format must be one of the supported formats by this factory.
-
-  // TODO(magjed): Try to get rid of this method. Since is_hardware_accelerated
-  // is unused, only factories producing internal source encoders (in itself a
-  // deprecated feature) needs to override this method.
-  virtual CodecInfo QueryVideoEncoder(const SdpVideoFormat& format) const {
-    return CodecInfo();
   }
 
   // Creates a VideoEncoder for the specified format.

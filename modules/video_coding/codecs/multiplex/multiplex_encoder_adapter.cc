@@ -137,8 +137,6 @@ int MultiplexEncoderAdapter::InitEncode(
         encoder_info_.requested_resolution_alignment,
         encoder_impl_info.requested_resolution_alignment);
 
-    encoder_info_.has_internal_source = false;
-
     encoders_.emplace_back(std::move(encoder));
   }
   encoder_info_.implementation_name += ")";

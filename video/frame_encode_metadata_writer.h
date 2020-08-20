@@ -28,7 +28,7 @@ class FrameEncodeMetadataWriter {
   explicit FrameEncodeMetadataWriter(EncodedImageCallback* frame_drop_callback);
   ~FrameEncodeMetadataWriter();
 
-  void OnEncoderInit(const VideoCodec& codec, bool internal_source);
+  void OnEncoderInit(const VideoCodec& codec);
   void OnSetRates(const VideoBitrateAllocation& bitrate_allocation,
                   uint32_t framerate_fps);
 
@@ -69,7 +69,6 @@ class FrameEncodeMetadataWriter {
   Mutex lock_;
   EncodedImageCallback* const frame_drop_callback_;
   VideoCodec codec_settings_ RTC_GUARDED_BY(&lock_);
-  bool internal_source_ RTC_GUARDED_BY(&lock_);
   uint32_t framerate_fps_ RTC_GUARDED_BY(&lock_);
 
   // Separate instance for each simulcast stream or spatial layer.

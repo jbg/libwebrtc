@@ -234,7 +234,6 @@ class MockVideoEncoder : public VideoEncoder {
     info.requested_resolution_alignment = requested_resolution_alignment_;
     info.has_trusted_rate_controller = has_trusted_rate_controller_;
     info.is_hardware_accelerated = is_hardware_accelerated_;
-    info.has_internal_source = has_internal_source_;
     info.fps_allocation[0] = fps_allocation_;
     info.supports_simulcast = supports_simulcast_;
     return info;
@@ -282,10 +281,6 @@ class MockVideoEncoder : public VideoEncoder {
     is_hardware_accelerated_ = is_hardware_accelerated;
   }
 
-  void set_has_internal_source(bool has_internal_source) {
-    has_internal_source_ = has_internal_source;
-  }
-
   void set_fps_allocation(const FramerateFractions& fps_allocation) {
     fps_allocation_ = fps_allocation;
   }
@@ -312,7 +307,6 @@ class MockVideoEncoder : public VideoEncoder {
   int requested_resolution_alignment_ = 1;
   bool has_trusted_rate_controller_ = false;
   bool is_hardware_accelerated_ = false;
-  bool has_internal_source_ = false;
   int32_t init_encode_return_value_ = 0;
   VideoEncoder::RateControlParameters last_set_rates_;
   FramerateFractions fps_allocation_;
@@ -1257,28 +1251,6 @@ TEST_F(TestSimulcastEncoderAdapterFake,
   EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
 
   EXPECT_EQ(adapter_->GetEncoderInfo().requested_resolution_alignment, 28);
-}
-
-TEST_F(TestSimulcastEncoderAdapterFake, ReportsInternalSource) {
-  SimulcastTestFixtureImpl::DefaultSettings(
-      &codec_, static_cast<const int*>(kTestTemporalLayerProfile),
-      kVideoCodecVP8);
-  codec_.numberOfSimulcastStreams = 3;
-  adapter_->RegisterEncodeCompleteCallback(this);
-  EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
-  ASSERT_EQ(3u, helper_->factory()->encoders().size());
-
-  // All encoders have internal source, simulcast adapter reports true.
-  for (MockVideoEncoder* encoder : helper_->factory()->encoders()) {
-    encoder->set_has_internal_source(true);
-  }
-  EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
-  EXPECT_TRUE(adapter_->GetEncoderInfo().has_internal_source);
-
-  // One encoder does not have internal source, simulcast adapter reports false.
-  helper_->factory()->encoders()[2]->set_has_internal_source(false);
-  EXPECT_EQ(0, adapter_->InitEncode(&codec_, kSettings));
-  EXPECT_FALSE(adapter_->GetEncoderInfo().has_internal_source);
 }
 
 TEST_F(TestSimulcastEncoderAdapterFake, ReportsFpsAllocation) {
