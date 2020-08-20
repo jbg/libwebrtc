@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f4f1e0d_b86917e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-08-20T14:22:23Z",
+      "side": 1,
+      "message": "I made it.\n\nNow the CL is bit larger, but it isn\u0027t too complicated to review.\n\nPTAL again.",
+      "revId": "1a85f40c4054dd7acfb3c7c6a1dfcf55f136e62f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
