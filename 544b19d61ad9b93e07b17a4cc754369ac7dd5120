@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "759f10ac_d5929f9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-21T07:26:18Z",
+      "side": 1,
+      "message": "Thanks Per, comments replied, PTAL!",
+      "parentUuid": "ad0a6452_305338fb",
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74a77770_f44c3957",
         "filename": "modules/audio_processing/aec3/BUILD.gn",
         "patchSetId": 4
@@ -47,6 +65,30 @@
       "writtenOn": "2020-08-19T12:51:29Z",
       "side": 1,
       "message": "When adding platform specific-code, there are basically two paths to go: either let the build-system decide whether to include the code, or using build-flags (in #ifdef) to include the code.\n\nThe rest of the AEC3 code uses the build-flag approach for the SSE2 and Neon code, but the approach taken here for AVX2 is the build-system approach.\n\nThat results in that we have a two different ways of handling this, which I don\u0027t think is good.\n\nWhile there are pros and cons with both variants I personally prefer the build-flag approach since\n-With that there is only one source of truth (the code) and a reader of the code only needs to look at the source code, and not the build files, to understand the code.\n-With that the code is more portable since it is less relying features of the  build system to work.\n\n\nRegardless of my personal preference I think that the right thing in this CL is to keep the approach used currently in AEC3 and instead use build-flags to control the building of the AVX2 code (similarly to the SSE2 code).\n\nThat will also avoid the necessity to break up the code in lots of smaller build targets.",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 272,
+        "endChar": 1
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fda6812c_d0bc059c",
+        "filename": "modules/audio_processing/aec3/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-21T07:26:18Z",
+      "side": 1,
+      "message": "I have tried to use build-flag approach for SSE2 and AVX2 code before, the problem is that the avx2 version code needs to build with cflag \"-mavx2\", different version of intrinsic needs different cflag, eg, -mssse3, -msse4.1, -msse4.2, -mavx. And we need to use \"-mavx2\" for the file if we put sse2 and avx2 version in the same file, and this will cause the other non-intrincis code in sse2 version compiled with avx2 intrinsic, and it will fail exec with illegal instruction on devices which don\u0027t support avx2. IMHO, I think the general method is put the different version intrinsic code into different files and select file specific options. Like libvpx and libaom, https://source.chromium.org/chromium/chromium/src/+/master:third_party/libaom/BUILD.gn;l\u003d171;bpv\u003d1;\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/libvpx/BUILD.gn;l\u003d207;bpv\u003d1. What do you think?",
+      "parentUuid": "74a77770_f44c3957",
       "range": {
         "startLine": 152,
         "startChar": 2,
