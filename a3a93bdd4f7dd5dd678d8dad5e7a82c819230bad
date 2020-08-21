@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ffa6f69_b994f40d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-08-21T08:57:31Z",
+      "side": 1,
+      "message": "Opening the code review now. I will land this on Sept 3rd as per PSA.",
+      "revId": "a3a93bdd4f7dd5dd678d8dad5e7a82c819230bad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
