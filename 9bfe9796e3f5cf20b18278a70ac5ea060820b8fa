@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d9a51af_da0ae884",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-08-24T14:54:45Z",
+      "side": 1,
+      "message": "PTAL. The top-level header file common_types.h is included directly in only three places, so all other dependencies can be dropped.",
+      "revId": "9bfe9796e3f5cf20b18278a70ac5ea060820b8fa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
