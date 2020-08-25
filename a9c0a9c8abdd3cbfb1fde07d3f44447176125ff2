@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "211aca19_506d0b82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "OpenSSLStreamAdapter still is an accurate name though, since either way it\u0027s using *some* OpenSSL implementation. But I don\u0027t know if it would be worth splitting into two classes, when 90% of the code would be duplicated. SSLStreamAdapterImpl seems like the lesser of two evils, but would we then rename the other 5 openssl_-prefixed files?\n\nWhat if \"openssl_certificate\" were \"legacy_openssl_certificate\" instead? Maybe I\u0027m thinking about it too hard",
+      "parentUuid": "2df85efa_3e35640e",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f45811b_e01c4bd6",
         "filename": "rtc_base/BUILD.gn",
         "patchSetId": 12
@@ -207,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "6ee03e96_3dea8f11",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "It doesn\u0027t hurt much to add another build argument, so I went ahead and added \"rtc_openssl_is_boringssl\". I can remove it if you like.",
+      "parentUuid": "6c60c202_2769c284",
+      "range": {
+        "startLine": 886,
+        "startChar": 6,
+        "endLine": 886,
+        "endChar": 19
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35ddefa8_5835524f",
         "filename": "rtc_base/boringssl_certificate.cc",
         "patchSetId": 12
@@ -230,6 +272,30 @@
     },
     {
       "key": {
+        "uuid": "29ab48d6_13e4f605",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Good catch, this comment was just copied over from the X509 code.",
+      "parentUuid": "35ddefa8_5835524f",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 25
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34274020_d9c6e371",
         "filename": "rtc_base/openssl_adapter.cc",
         "patchSetId": 12
@@ -250,6 +316,47 @@
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0edc3f09_1e477f52",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34274020_d9c6e371",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 34
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24589371_289d8f18",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "It\u0027s been a while but I have no idea why I added this #ifdef; possibly because I was planning to change VerifyPeerCertMatchesHost but didn\u0027t end up doing so. Went ahead and removed it.",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -288,6 +395,24 @@
     },
     {
       "key": {
+        "uuid": "381f7e0e_074010d7",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "The reason for the lack of early returns is that bad certificates may be ignored due to ignore_bad_cert_ at the end of the function; same is true of the existing SSLVerifyCallback.\n\nI went ahead and split it into two functions, \"SSLVerifyCallback\" and\"SSLVerifyInternal\". It means we have four verification functions in total to keep track of though; let me know if you want me to change it back.",
+      "parentUuid": "257f1549_c43cdfdc",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9d44645a_c7020382",
         "filename": "rtc_base/openssl_key_pair.cc",
         "patchSetId": 12
@@ -299,6 +424,24 @@
       "writtenOn": "2020-06-04T22:18:51Z",
       "side": 1,
       "message": "I take it you all can\u0027t use bssl::UniquePtr here and don\u0027t have your own version? :-(",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88db5723_f857298d",
+        "filename": "rtc_base/openssl_key_pair.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "This is one of the classes that\u0027s supposed to compile with OpenSSL, so can\u0027t use that here.",
+      "parentUuid": "9d44645a_c7020382",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
@@ -328,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "71eb6b4c_52d098b7",
+        "filename": "rtc_base/openssl_key_pair.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6380ffc7_7303c697",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0f53c7e_a1b1cbae",
         "filename": "rtc_base/openssl_key_pair.cc",
         "patchSetId": 12
@@ -351,6 +518,30 @@
     },
     {
       "key": {
+        "uuid": "7a5b2f79_72ec80d5",
+        "filename": "rtc_base/openssl_key_pair.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0f53c7e_a1b1cbae",
+      "range": {
+        "startLine": 98,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 44
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8813903_4a6a57a3",
         "filename": "rtc_base/openssl_key_pair.cc",
         "patchSetId": 12
@@ -368,6 +559,41 @@
     },
     {
       "key": {
+        "uuid": "fd385b13_cc6397a3",
+        "filename": "rtc_base/openssl_key_pair.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Done. Though if it does have embedded NULs, why would we want them included?",
+      "parentUuid": "f8813903_4a6a57a3",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a8bf5ec_872fa4c2",
+        "filename": "rtc_base/openssl_key_pair.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Not sure why this was passing in \\0; as far as I can tell this is a user data pointer intended to be used by the callback, for which we\u0027re passing in nullptr...",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12283f45_2d4a55b8",
         "filename": "rtc_base/openssl_key_pair.cc",
         "patchSetId": 12
@@ -382,6 +608,24 @@
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a579472f_a5e70e79",
+        "filename": "rtc_base/openssl_key_pair.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12283f45_2d4a55b8",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -408,6 +652,30 @@
     },
     {
       "key": {
+        "uuid": "dafc38a3_02933c86",
+        "filename": "rtc_base/openssl_key_pair.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Ack; I should have pointed out that this is just moved code.",
+      "parentUuid": "4acca7f8_1652c943",
+      "range": {
+        "startLine": 25,
+        "startChar": 52,
+        "endLine": 25,
+        "endChar": 59
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b553d095_35a0bd94",
         "filename": "rtc_base/openssl_key_pair.h",
         "patchSetId": 12
@@ -422,6 +690,24 @@
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc8ec9e8_caadfc15",
+        "filename": "rtc_base/openssl_key_pair.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b553d095_35a0bd94",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -448,6 +734,30 @@
     },
     {
       "key": {
+        "uuid": "44f5d788_719d3edd",
+        "filename": "rtc_base/openssl_key_pair.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Can\u0027t think of any reason, fixed.",
+      "parentUuid": "c196dac3_bf30d1c3",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 39,
+        "endChar": 9
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb4d0750_1f2c8ee1",
         "filename": "rtc_base/openssl_session_cache_unittest.cc",
         "patchSetId": 12
@@ -471,6 +781,30 @@
     },
     {
       "key": {
+        "uuid": "9f45cfd3_777d434d",
+        "filename": "rtc_base/openssl_session_cache_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb4d0750_1f2c8ee1",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 43
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51c9d6e8_706b8178",
         "filename": "rtc_base/openssl_stream_adapter.cc",
         "patchSetId": 12
@@ -488,6 +822,81 @@
         "endLine": 975,
         "endChar": 25
       },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ced4eb8b_9751623c",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "Yep; fixed every other occurrence too.",
+      "parentUuid": "51c9d6e8_706b8178",
+      "range": {
+        "startLine": 975,
+        "startChar": 13,
+        "endLine": 975,
+        "endChar": 25
+      },
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8bfab2f_7fdb0db6",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "I forgot about this TODO. David, would using ssl_verify_retry buy us anything? Doesn\u0027t seem like it would make any difference; either this class needs to keep track of whether it\u0027s waiting (which it already has to do for the X509 implementation) or BoringSSL does.\n\nI guess you could argue that having BoringSSL handle it avoids the risk of WebRTC making a mistake.",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15bc8d02_1669439b",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "I don\u0027t remember if I pointed this out, but I reimplemented this using string_view rather than copying all the necessary functions from BoringSSL. I was careful to make sure this had all the necessary restrictions and effectively does the same thing, would be good to have another pair of eyes though. It did pass all the tests at least.\n\nExample of what the string views will be:\n\npattern: foo*.google.com\nhost: foobar.google.com\n\npattern prefix/suffix: \"foo\", \".google.com\"\nhost prefix/wildcard match/suffix:  \"foo\", \"bar\", \".google.com\"",
+      "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed1cde48_e84acb48",
+        "filename": "rtc_base/openssl_utility_unittest.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-25T01:12:34Z",
+      "side": 1,
+      "message": "I don\u0027t necessarily have to make the tests use TLS_with_buffers_method, but this did let me observe the difference in binary size easily. Any thoughts?",
       "revId": "a9c0a9c8abdd3cbfb1fde07d3f44447176125ff2",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
