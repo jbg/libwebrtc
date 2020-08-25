@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '0d713c9318ccea3b688d816ddf79967964cf7152',
+  'chromium_revision': '7b998c03f6edff00ff4ceaf23475869c527ab122',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -33,13 +33,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@117ae1b1c9acf70235f541bd6c07a9b6ac51070c',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@6d290fe9e1f5817d927f057c1c50b32b50256fef',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@7e103ffe645dde50098f22b10240d5d9cb6941ad',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@1fab87d09933e02434c146563b1c5c8614a3f5bb',
+    'https://chromium.googlesource.com/chromium/src/third_party@4769eb40a6029b7587bbfa4e638a23e6ddd28f45',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -208,7 +208,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@cd8de1d295b4bedf5b0b00a6655575881df8696a',
+    'https://android.googlesource.com/platform/external/perfetto.git@41db2fb64914bb8c4cd2261f8ecedf1ef3b28942',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@53747dfe65eaf670a7192f55117f3bf1e0280743',
   'src/third_party/libyuv':
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@69e6a443db3bd0785c8e48883648e7a711a8fd83',
+    'https://chromium.googlesource.com/chromium/src/tools@64e4d73aa3f5d87d11c0625bbd99c3bf50d639ed',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@4c095d04179dc725a300085ae21fe3b79900d072',
 
