@@ -51,6 +51,23 @@
       "revId": "d9ce9586094408950b8a89d6bb3a2e5e852af762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ee718ae_8e8c088c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-08-25T15:56:34Z",
+      "side": 1,
+      "message": "Karl, can I please have an approval for sdk/BUILD.gn ?",
+      "revId": "d9ce9586094408950b8a89d6bb3a2e5e852af762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
