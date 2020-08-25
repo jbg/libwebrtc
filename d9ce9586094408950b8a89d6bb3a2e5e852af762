@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fcb2d9d_19049fad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-08-25T14:42:58Z",
+      "side": 1,
+      "message": "This is a slice of your change that doesn\u0027t break downstream.",
+      "revId": "d9ce9586094408950b8a89d6bb3a2e5e852af762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
