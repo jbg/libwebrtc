@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ceefac92_8d1bdbd1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-08-25T08:25:50Z",
+      "side": 1,
+      "message": "Going in and out of a non-stable signaling state could invalidate it. We do not fire if we\u0027re currently negotiating, for example. But if we return back to stable, whether due to \"rollback\" or due to setting an answer, this may or may not trigger negotiation needed depending on states.\n\nWe also need to check if the operations chain is empty. If it isn\u0027t, we do not fire. Because the operations chain is implemented in webrtc which is not the same thread as in JS, there is the possibility of more operations having been chained in-between OnNegotiationNeededEvent() and the time when we will actually fire the event on the JS thread.\n\nChecking all conditions before firing avoids firing in the wrong states, race conditions or firing multiple times.",
+      "parentUuid": "65c7019b_c1d1c154",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "432f84fc_5c576700",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "e584c70b_4a94c639",
+        "filename": "api/peer_connection_interface.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-08-25T08:25:50Z",
+      "side": 1,
+      "message": "size_t was chosen because of C++\u0027s obsession with this type when it comes to indices and containers. But this is purely used as an identifier - I changed it to uint32_t.",
+      "parentUuid": "b6736d82_e8106cdc",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96e15f8c_42ea91a7",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 10
@@ -84,6 +120,24 @@
       "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8a7bf3a_d525aded",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 2608,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-08-25T08:25:50Z",
+      "side": 1,
+      "message": "Yes. Firing onnegotiationneeded before resolving the SLD promise would be a bug, fixing it is necessary for Perfect Negotiation to pass.\n\nThe bug was there previously but not evident in Chromium because of an artifical delay that is currently added before resolving the pending promise. But as soon as Chromium CL https://chromium-review.googlesource.com/c/chromium/src/+/2332158 lands and artificial delays are removed to fire events and promises as early as possible, getting the timing right all the way down to the C++ layers becomes a necessity.",
+      "parentUuid": "96e15f8c_42ea91a7",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "2e4eb10b_59fda18f",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 7451,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-08-25T08:25:50Z",
+      "side": 1,
+      "message": "I thought so too but when I removed it, negotiationneeded started firing after calling CreateOffer() on a newly created peer connection. Performing the additional check when the chain got empty here caused negotiation to be needed because the ICE credentials had not been negotiated, but the spec does not say to perform this check or fire the event unless you trigger negotiation needed by calling one of the RTP Media APIs first.\n\nThe spec does have an [[UpdateNegotiationNeededFlagOnEmptyChain]] internal slot and I think this edge case is the reason why it is needed. So I\u0027m keeping the variable to make sure we only check when the chain is empty if we\u0027ve already previously triggered negotiation needed.",
+      "parentUuid": "e1572a1d_ebe6f051",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d107a90_e54e8461",
         "filename": "rtc_base/operations_chain_unittest.cc",
         "patchSetId": 10
@@ -118,6 +190,24 @@
       "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20ec1685_f083f9b7",
+        "filename": "rtc_base/operations_chain_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-08-25T08:25:50Z",
+      "side": 1,
+      "message": "Yes but this IsEmpty is just a helper for the unit test, which has a separate thread for TEST_F code and for Operations Chain code. This is needed for testing purposes. The OperationsChain::IsEmpty and the PeerConnection usage of the operation chain is all done on one thread (the signaling thread) and does not cost any blocking-invokes.\n\nThis CL introduces 0 blocking invokes with regards to the PeerConnection\u0027s usage of the Operations Chain.\n\nThe only blocking invoke we\u0027ll have relating to negotiation needed events is when Chromium starts performing ShouldFireNegotiationNeededEvent() and as long as the Operations Chain lives in WebRTC and the JavaScript event is fired on a separate thread I don\u0027t see a way around this. The main thread vs signaling thread in chromium is a wider discussions, I\u0027ve ranted about this before. Moving the Operations Chain to Chromium would be difficult task I think and I do want it inside the WebRTC repo so that the APIs work in native clients as well.",
+      "parentUuid": "6d107a90_e54e8461",
+      "revId": "fab5b9d587be07110d0405ecaa516376aad45346",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
