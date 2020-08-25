@@ -38,7 +38,7 @@ struct CallHelpers<RetT(ArgT...)> {
   using function_type = RetT(VoidUnion*, ArgT...);
   // Helper for calling the `void_ptr` case of VoidUnion.
   template <typename F>
-  static RetT CallVoidPtr(VoidUnion* vu, ArgT... args) {
+  static RetT CallVoidPtr(VoidUnion* vu, ArgT&&... args) {
     return (*static_cast<F*>(vu->void_ptr))(std::forward<ArgT>(args)...);
   }
   // Helper for calling the `fun_ptr` case of VoidUnion.
@@ -48,7 +48,7 @@ struct CallHelpers<RetT(ArgT...)> {
   }
   // Helper for calling the `inline_storage` case of VoidUnion.
   template <typename F>
-  static RetT CallInlineStorage(VoidUnion* vu, ArgT... args) {
+  static RetT CallInlineStorage(VoidUnion* vu, ArgT&&... args) {
     return (*reinterpret_cast<F*>(&vu->inline_storage))(
         std::forward<ArgT>(args)...);
   }
