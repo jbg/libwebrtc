@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '0d713c9318ccea3b688d816ddf79967964cf7152',
+  'chromium_revision': '420fe2a931e0ae8fc88ffb8d4cb9901a8cd65287',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -33,7 +33,7 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@117ae1b1c9acf70235f541bd6c07a9b6ac51070c',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@0848f7cba2b4e37690c68b88905caefffe20e9aa',
     'condition': 'checkout_ios',
   },
   'src/testing':
@@ -208,7 +208,7 @@ deps = {
       'condition': 'checkout_android',
   },
   'src/third_party/perfetto':
-    'https://android.googlesource.com/platform/external/perfetto.git@cd8de1d295b4bedf5b0b00a6655575881df8696a',
+    'https://android.googlesource.com/platform/external/perfetto.git@d6482730a5b01e25e9888ad5baa82ae69d1d0cd8',
   'src/third_party/libvpx/source/libvpx':
     'https://chromium.googlesource.com/webm/libvpx.git@53747dfe65eaf670a7192f55117f3bf1e0280743',
   'src/third_party/libyuv':
