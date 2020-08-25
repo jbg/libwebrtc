@@ -33,6 +33,24 @@
       "revId": "d9ce9586094408950b8a89d6bb3a2e5e852af762",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b31b0ca_093fe175",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-08-25T14:57:25Z",
+      "side": 1,
+      "message": "the one you link breaks downstream project, I\u0027m not sure how to adjust it not to break it and thus make it submittable (i.e. how to update callback signature).\n\n(but other than that, yes, I would prefer CL that deletes more unused code)",
+      "parentUuid": "fa01130d_aba42f51",
+      "revId": "d9ce9586094408950b8a89d6bb3a2e5e852af762",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
