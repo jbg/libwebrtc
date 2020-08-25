@@ -19,7 +19,6 @@
 #endif
 #import "RTCCodecSpecificInfoH264.h"
 #import "RTCH264ProfileLevelId.h"
-#import "api/peerconnection/RTCRtpFragmentationHeader+Private.h"
 #import "api/peerconnection/RTCVideoCodecInfo+Private.h"
 #import "base/RTCCodecSpecificInfo.h"
 #import "base/RTCI420Buffer.h"
@@ -783,14 +782,8 @@ NSUInteger GetMaxSampleRate(const webrtc::H264::ProfileLevelId &profile_level_id
   }
 
   __block std::unique_ptr<rtc::Buffer> buffer = std::make_unique<rtc::Buffer>();
-  RTC_OBJC_TYPE(RTCRtpFragmentationHeader) * header;
   {
-    std::unique_ptr<webrtc::RTPFragmentationHeader> header_cpp;
-    bool result =
-        H264CMSampleBufferToAnnexBBuffer(sampleBuffer, isKeyframe, buffer.get(), &header_cpp);
-    header = [[RTC_OBJC_TYPE(RTCRtpFragmentationHeader) alloc]
-        initWithNativeFragmentationHeader:header_cpp.get()];
-    if (!result) {
+    if (!H264CMSampleBufferToAnnexBBuffer(sampleBuffer, isKeyframe, buffer.get())) {
       return;
     }
   }
@@ -818,6 +811,8 @@ NSUInteger GetMaxSampleRate(const webrtc::H264::ProfileLevelId &profile_level_id
   _h264BitstreamParser.GetLastSliceQp(&qp);
   frame.qp = @(qp);
 
+  RTC_OBJC_TYPE(RTCRtpFragmentationHeader) *header =
+      [[RTC_OBJC_TYPE(RTCRtpFragmentationHeader) alloc] init];
   BOOL res = _callback(frame, codecSpecificInfo, header);
   if (!res) {
     RTC_LOG(LS_ERROR) << "Encode callback failed";
