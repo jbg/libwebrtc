@@ -16,6 +16,23 @@
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a222fe7d_efa615c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-08-26T14:22:48Z",
+      "side": 1,
+      "message": "I think I\u0027m signing off on this one.\nI think the basis of my frustration is the fact that OpenSSL refers to 2 different things:\n- the API that we are using to access either BoringSSL or OpenSSL (second sense)\n- the implementation of that API in OpenSSL\n\nBut changing one of the names to something else is probably a large task and out of scope for this CL.\nApproving.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
