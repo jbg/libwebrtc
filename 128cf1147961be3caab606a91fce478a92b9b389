@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69b4bc48_4fb4a80b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2020-08-27T12:53:10Z",
+      "side": 1,
+      "message": "Moved from https://webrtc-review.googlesource.com/c/src/+/181883 to a separate cl.",
+      "revId": "128cf1147961be3caab606a91fce478a92b9b389",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
