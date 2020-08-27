@@ -114,6 +114,30 @@
       "revId": "0a50d84213676a4901b3f856cb0f64db7fe478b3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adbe52c1_65a3989e",
+        "filename": "modules/audio_processing/aec3/adaptive_fir_filter_erl_avx2.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-27T05:49:26Z",
+      "side": 1,
+      "message": "As commented elsewhere, let\u0027s keep this one as it is.",
+      "parentUuid": "1e94915e_a4cb931e",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 1
+      },
+      "revId": "0a50d84213676a4901b3f856cb0f64db7fe478b3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

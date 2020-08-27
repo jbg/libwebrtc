@@ -101,6 +101,30 @@
     },
     {
       "key": {
+        "uuid": "7b76f040_0b156a86",
+        "filename": "modules/audio_processing/aec3/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-27T05:49:26Z",
+      "side": 1,
+      "message": "I see your point! And do I understand it correctly that the intrinsics are inlined?\n\nThat then indeed means that we need to follow your approach here.\nLet\u0027s go for that.",
+      "parentUuid": "fda6812c_d0bc059c",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 272,
+        "endChar": 1
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42a39bac_d05bb0d2",
         "filename": "modules/audio_processing/aec3/fft_data.h",
         "patchSetId": 4
@@ -121,6 +145,30 @@
       "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32dda166_e5271268",
+        "filename": "modules/audio_processing/aec3/fft_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-27T05:49:26Z",
+      "side": 1,
+      "message": "As commented elsewhere, let\u0027s keep this one as it is.",
+      "parentUuid": "42a39bac_d05bb0d2",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 37
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -147,6 +195,30 @@
     },
     {
       "key": {
+        "uuid": "61185cba_8645d77e",
+        "filename": "modules/audio_processing/aec3/fft_data_avx2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-27T05:49:26Z",
+      "side": 1,
+      "message": "As commented elsewhere, let\u0027s keep this one as it is.",
+      "parentUuid": "e888331b_3c949037",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a0539a7_69055d33",
         "filename": "modules/audio_processing/aec3/matched_filter_avx2.cc",
         "patchSetId": 4
@@ -170,6 +242,30 @@
     },
     {
       "key": {
+        "uuid": "79ee91fe_91031560",
+        "filename": "modules/audio_processing/aec3/matched_filter_avx2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-27T05:49:26Z",
+      "side": 1,
+      "message": "As commented elsewhere, let\u0027s keep this one as it is.",
+      "parentUuid": "2a0539a7_69055d33",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ab1e04b_85302658",
         "filename": "modules/audio_processing/aec3/vector_math.h",
         "patchSetId": 4
@@ -181,6 +277,30 @@
       "writtenOn": "2020-08-19T12:51:29Z",
       "side": 1,
       "message": "As commented elsewhere, please follow the pattern used for SSE2 and add the implementation inline here.\n\nThat will allow inlining, and will also be consistent to how the Neon and SSE2 optimizations are made.",
+      "range": {
+        "startLine": 43,
+        "startChar": 1,
+        "endLine": 43,
+        "endChar": 41
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52703cc7_4e114a4b",
+        "filename": "modules/audio_processing/aec3/vector_math.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-27T05:49:26Z",
+      "side": 1,
+      "message": "As commented elsewhere, let\u0027s keep this one as it is.",
+      "parentUuid": "1ab1e04b_85302658",
       "range": {
         "startLine": 43,
         "startChar": 1,
