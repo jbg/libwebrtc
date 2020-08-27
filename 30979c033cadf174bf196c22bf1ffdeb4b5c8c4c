@@ -33,6 +33,24 @@
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da08d58b_6391c506",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-08-27T23:27:36Z",
+      "side": 1,
+      "message": "One more idea: could do \"x509_object_certificate\" and \"crypto_buffer_certificate\"? That\u0027s more representative of what the actual difference is and avoids the confusion.",
+      "parentUuid": "a222fe7d_efa615c8",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
