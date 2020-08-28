@@ -54,6 +54,23 @@
     },
     {
       "key": {
+        "uuid": "83729dda_885b8585",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-08-28T11:15:29Z",
+      "side": 1,
+      "message": "This is a really great CL! \nThanks you for adding the AVX2 optimizations to the WebRTC code!!!\n\nI have no comments on the code. Apart from reviewing the code I have tested the output quality achieved by the AVX2 code on a number of test cases and compared against the SSE2 counterpart and the differences in the audio output are negligible/non-audible (which is great).\n\nYou have an lgtm from me.\n\nAfter this CL has landed I will \n1) Create a CL that Activates the AVX2 code (which also involves adding a case in the unittests for that).\n2) Look into moving the SSE2 and Neon variants of the code into separate .cc files to follow the pattern introduced in this CL.\n\n",
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74a77770_f44c3957",
         "filename": "modules/audio_processing/aec3/BUILD.gn",
         "patchSetId": 4
