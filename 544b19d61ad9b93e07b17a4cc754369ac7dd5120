@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "f0a8df0a_e98ff524",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-31T02:53:25Z",
+      "side": 1,
+      "message": "Thanks for reviewing, Per! Patch set has been rebased.\nHi Mirko and Sam, could you take another look?",
+      "parentUuid": "83729dda_885b8585",
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74a77770_f44c3957",
         "filename": "modules/audio_processing/aec3/BUILD.gn",
         "patchSetId": 4
@@ -130,6 +148,30 @@
       "side": 1,
       "message": "I see your point! And do I understand it correctly that the intrinsics are inlined?\n\nThat then indeed means that we need to follow your approach here.\nLet\u0027s go for that.",
       "parentUuid": "fda6812c_d0bc059c",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 272,
+        "endChar": 1
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fef66770_7101ae99",
+        "filename": "modules/audio_processing/aec3/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-31T02:53:25Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right, putting the intrinsic code into header file can allow inlining if compiler wants.",
+      "parentUuid": "7b76f040_0b156a86",
       "range": {
         "startLine": 152,
         "startChar": 2,
@@ -283,6 +325,30 @@
     },
     {
       "key": {
+        "uuid": "12d80f46_98d75c8a",
+        "filename": "modules/audio_processing/aec3/matched_filter_avx2.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-31T02:53:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "79ee91fe_91031560",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ab1e04b_85302658",
         "filename": "modules/audio_processing/aec3/vector_math.h",
         "patchSetId": 4
@@ -327,6 +393,30 @@
       "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95d51e84_1f9edf9c",
+        "filename": "modules/audio_processing/aec3/vector_math.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-08-31T02:53:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52703cc7_4e114a4b",
+      "range": {
+        "startLine": 43,
+        "startChar": 1,
+        "endLine": 43,
+        "endChar": 41
+      },
+      "revId": "544b19d61ad9b93e07b17a4cc754369ac7dd5120",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
