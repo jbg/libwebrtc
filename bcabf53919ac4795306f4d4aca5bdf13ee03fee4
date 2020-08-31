@@ -46,6 +46,30 @@
       "revId": "bcabf53919ac4795306f4d4aca5bdf13ee03fee4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78d3f8ad_7c7563f4",
+        "filename": "tools_webrtc/flags_compatibility.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-08-31T07:25:37Z",
+      "side": 1,
+      "message": "\u003e Does feel a bit weird to create a directory in a script called \u0027flags_compatibility\u0027.\n\nYep, I think we should find another place for this. But LGTM for now since we have other problems to fix in the PinPoint integration. Can you add a TODO(bugs.webrtc.org/XXX) with the request to move this somewhere else?\n\n\u003e For perftests in Pinpoint, their swarming command runs run_performance_tests.py and the creation of the directory happens here:\n\u003e https://source.chromium.org/chromium/chromium/src/+/master:testing/scripts/run_performance_tests.py;l\u003d136\n\nAlso, should we use exist_ok\u003dTrue as a second argument to avoid errors in case the directory is already there (and maybe clean it before starting the test) or that is impossible?",
+      "parentUuid": "a853bb15_e1e24676",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 71
+      },
+      "revId": "bcabf53919ac4795306f4d4aca5bdf13ee03fee4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
