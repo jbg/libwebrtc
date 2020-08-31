@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b41bc41_f21c6ec4",
+        "filename": "tools_webrtc/flags_compatibility.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-08-31T06:39:43Z",
+      "side": 1,
+      "message": "Is this the only place we can do this?\n\nFor sure it is the best one since we are basically ready to run the binary, but I wonder how does it work on other perf tests, are they working by chance (e.g. the directory is already there)?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 71
+      },
+      "revId": "bcabf53919ac4795306f4d4aca5bdf13ee03fee4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
