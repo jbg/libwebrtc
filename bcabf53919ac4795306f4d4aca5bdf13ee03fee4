@@ -22,6 +22,30 @@
       "revId": "bcabf53919ac4795306f4d4aca5bdf13ee03fee4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a853bb15_e1e24676",
+        "filename": "tools_webrtc/flags_compatibility.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 12299
+      },
+      "writtenOn": "2020-08-31T07:06:28Z",
+      "side": 1,
+      "message": "Does feel a bit weird to create a directory in a script called \u0027flags_compatibility\u0027.\nFor perftests in Pinpoint, their swarming command runs run_performance_tests.py and the creation of the directory happens here:\nhttps://source.chromium.org/chromium/chromium/src/+/master:testing/scripts/run_performance_tests.py;l\u003d136",
+      "parentUuid": "6b41bc41_f21c6ec4",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 71
+      },
+      "revId": "bcabf53919ac4795306f4d4aca5bdf13ee03fee4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
