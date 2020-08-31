@@ -81,6 +81,30 @@
       "revId": "afa480e9288bd3bd32f1ce4d7cc9e3dca1e2604c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "749d563a_3784ca05",
+        "filename": "modules/audio_processing/aec3/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-08-31T08:42:57Z",
+      "side": 1,
+      "message": "I suspect this is not needed here but https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_processing/BUILD.gn;l\u003d287;drc\u003d0df0faefd5ea4df2364cccc0f8449431bf8200d0 should be a public_configs but this is not related to this CL and it is an unrelated build refactoring (to reduce brittleness).\n\nOk to land as is.",
+      "parentUuid": "3bc8a09a_8fcdc78d",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 38
+      },
+      "revId": "afa480e9288bd3bd32f1ce4d7cc9e3dca1e2604c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
