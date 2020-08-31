@@ -70,6 +70,30 @@
       "revId": "bcabf53919ac4795306f4d4aca5bdf13ee03fee4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49d0b530_5d8a9606",
+        "filename": "tools_webrtc/flags_compatibility.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 12299
+      },
+      "writtenOn": "2020-08-31T10:09:27Z",
+      "side": 1,
+      "message": "Added the TODO.\nI would leave the code without the exist_ok and the clean the same way it is done in run_performance_tests.py. If it\u0027s working for them it should work for us.",
+      "parentUuid": "78d3f8ad_7c7563f4",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 71
+      },
+      "revId": "bcabf53919ac4795306f4d4aca5bdf13ee03fee4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
