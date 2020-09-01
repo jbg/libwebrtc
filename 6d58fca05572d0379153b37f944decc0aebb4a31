@@ -39,6 +39,30 @@
       "revId": "6d58fca05572d0379153b37f944decc0aebb4a31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6dc3ebd_e712eafa",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-09-01T21:43:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75600f2c_2e8cce7e",
+      "range": {
+        "startLine": 420,
+        "startChar": 4,
+        "endLine": 420,
+        "endChar": 70
+      },
+      "revId": "6d58fca05572d0379153b37f944decc0aebb4a31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
