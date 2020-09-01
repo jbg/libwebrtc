@@ -936,6 +936,10 @@ class PeerConnection : public PeerConnectionInternal,
   RTCError UpdateSessionState(SdpType type,
                               cricket::ContentSource source,
                               const cricket::SessionDescription* description);
+  // Based on number of transceivers per media type, enabled or disable
+  // unsignalled stream support in the affected channels.
+  void UpdateUnsignalledStreamsState(cricket::ContentSource source)
+      RTC_RUN_ON(signaling_thread());
   // Push the media parts of the local or remote session description
   // down to all of the channels.
   RTCError PushdownMediaDescription(SdpType type, cricket::ContentSource source)
@@ -1336,6 +1340,9 @@ class PeerConnection : public PeerConnectionInternal,
   bool update_negotiation_needed_on_empty_chain_
       RTC_GUARDED_BY(signaling_thread()) = false;
   uint32_t negotiation_needed_event_id_ = 0;
+
+  bool allow_unsignalled_audio_ RTC_GUARDED_BY(signaling_thread()) = true;
+  bool allow_unsignalled_video_ RTC_GUARDED_BY(signaling_thread()) = true;
 
   DataChannelController data_channel_controller_;
   rtc::WeakPtrFactory<PeerConnection> weak_ptr_factory_
