@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6012a5b7_df844913",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-01T17:24:40Z",
+      "side": 1,
+      "message": "PTAL. Blocked on https://chromium-review.googlesource.com/c/chromium/src/+/2387018, but otherwise I think it\u0027s ready.",
+      "revId": "e6f945636f023bcebf19cc61657862199b998a87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
