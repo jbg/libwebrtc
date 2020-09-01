@@ -17,8 +17,10 @@
 #include <vector>
 
 #include "absl/types/optional.h"
+#include "rtc_base/async_invoker.h"
 #include "rtc_base/network_monitor.h"
 #include "rtc_base/network_monitor_factory.h"
+#include "rtc_base/thread.h"
 #include "rtc_base/thread_checker.h"
 #include "sdk/android/src/jni/jni_helpers.h"
 
@@ -61,7 +63,7 @@ struct NetworkInformation {
   std::string ToString() const;
 };
 
-class AndroidNetworkMonitor : public rtc::NetworkMonitorBase,
+class AndroidNetworkMonitor : public rtc::NetworkMonitorInterface,
                               public rtc::NetworkBinderInterface {
  public:
   AndroidNetworkMonitor(JNIEnv* env,
@@ -111,12 +113,13 @@ class AndroidNetworkMonitor : public rtc::NetworkMonitorBase,
       const rtc::IPAddress& address) const;
 
  private:
-  void OnNetworkConnected_w(const NetworkInformation& network_info);
-  void OnNetworkDisconnected_w(NetworkHandle network_handle);
+  void OnNetworkConnected_n(const NetworkInformation& network_info);
+  void OnNetworkDisconnected_n(NetworkHandle network_handle);
 
   const int android_sdk_int_;
   ScopedJavaGlobalRef<jobject> j_application_context_;
   ScopedJavaGlobalRef<jobject> j_network_monitor_;
+  rtc::Thread* network_thread_;
   rtc::ThreadChecker thread_checker_;
   bool started_ = false;
   std::map<std::string, rtc::AdapterType> adapter_type_by_name_;
@@ -127,6 +130,7 @@ class AndroidNetworkMonitor : public rtc::NetworkMonitorBase,
       network_preference_by_adapter_type_;
   bool find_network_handle_without_ipv6_temporary_part_;
   bool surface_cellular_types_;
+  rtc::AsyncInvoker invoker_;
 };
 
 class AndroidNetworkMonitorFactory : public rtc::NetworkMonitorFactory {
