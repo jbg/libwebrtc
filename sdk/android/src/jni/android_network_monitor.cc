@@ -30,6 +30,37 @@
 namespace webrtc {
 namespace jni {
 
+namespace {
+
+const char* NetworkTypeToString(NetworkType type) {
+  switch (type) {
+    case NETWORK_UNKNOWN:
+      return "UNKNOWN";
+    case NETWORK_ETHERNET:
+      return "ETHERNET";
+    case NETWORK_WIFI:
+      return "WIFI";
+    case NETWORK_5G:
+      return "5G";
+    case NETWORK_4G:
+      return "4G";
+    case NETWORK_3G:
+      return "3G";
+    case NETWORK_2G:
+      return "2G";
+    case NETWORK_UNKNOWN_CELLULAR:
+      return "UNKNOWN_CELLULAR";
+    case NETWORK_BLUETOOTH:
+      return "BLUETOOTH";
+    case NETWORK_VPN:
+      return "VPN";
+    case NETWORK_NONE:
+      return "NONE";
+  }
+}
+
+}  // namespace
+
 enum AndroidSdkVersion {
   SDK_VERSION_LOLLIPOP = 21,
   SDK_VERSION_MARSHMALLOW = 23
@@ -196,7 +227,8 @@ AndroidNetworkMonitor::AndroidNetworkMonitor(
     const JavaRef<jobject>& j_application_context)
     : android_sdk_int_(Java_NetworkMonitor_androidSdkInt(env)),
       j_application_context_(env, j_application_context),
-      j_network_monitor_(env, Java_NetworkMonitor_getInstance(env)) {}
+      j_network_monitor_(env, Java_NetworkMonitor_getInstance(env)),
+      network_thread_(rtc::Thread::Current()) {}
 
 AndroidNetworkMonitor::~AndroidNetworkMonitor() = default;
 
@@ -215,7 +247,7 @@ void AndroidNetworkMonitor::Start() {
   // This is kind of magic behavior, but doing this allows the SocketServer to
   // use this as a NetworkBinder to bind sockets on a particular network when
   // it creates sockets.
-  worker_thread()->socketserver()->set_network_binder(this);
+  network_thread_->socketserver()->set_network_binder(this);
 
   JNIEnv* env = AttachCurrentThreadIfNeeded();
   Java_NetworkMonitor_startMonitoring(
@@ -232,8 +264,8 @@ void AndroidNetworkMonitor::Stop() {
 
   // Once the network monitor stops, it will clear all network information and
   // it won't find the network handle to bind anyway.
-  if (worker_thread()->socketserver()->network_binder() == this) {
-    worker_thread()->socketserver()->set_network_binder(nullptr);
+  if (network_thread_->socketserver()->network_binder() == this) {
+    network_thread_->socketserver()->set_network_binder(nullptr);
   }
 
   JNIEnv* env = AttachCurrentThreadIfNeeded();
@@ -348,14 +380,12 @@ rtc::NetworkBindingResult AndroidNetworkMonitor::BindSocketToNetwork(
 
 void AndroidNetworkMonitor::OnNetworkConnected(
     const NetworkInformation& network_info) {
-  worker_thread()->Invoke<void>(
-      RTC_FROM_HERE, rtc::Bind(&AndroidNetworkMonitor::OnNetworkConnected_w,
+  network_thread_->Invoke<void>(
+      RTC_FROM_HERE, rtc::Bind(&AndroidNetworkMonitor::OnNetworkConnected_n,
                                this, network_info));
-  // Fire SignalNetworksChanged to update the list of networks.
-  OnNetworksChanged();
 }
 
-void AndroidNetworkMonitor::OnNetworkConnected_w(
+void AndroidNetworkMonitor::OnNetworkConnected_n(
     const NetworkInformation& network_info) {
   RTC_LOG(LS_INFO) << "Network connected: " << network_info.ToString();
   adapter_type_by_name_[network_info.interface_name] =
@@ -369,6 +399,7 @@ void AndroidNetworkMonitor::OnNetworkConnected_w(
   for (const rtc::IPAddress& address : network_info.ip_addresses) {
     network_handle_by_address_[address] = network_info.handle;
   }
+  SignalNetworksChanged();
 }
 
 absl::optional<NetworkHandle>
@@ -398,12 +429,12 @@ AndroidNetworkMonitor::FindNetworkHandleFromAddress(
 
 void AndroidNetworkMonitor::OnNetworkDisconnected(NetworkHandle handle) {
   RTC_LOG(LS_INFO) << "Network disconnected for handle " << handle;
-  worker_thread()->Invoke<void>(
+  network_thread_->Invoke<void>(
       RTC_FROM_HERE,
-      rtc::Bind(&AndroidNetworkMonitor::OnNetworkDisconnected_w, this, handle));
+      rtc::Bind(&AndroidNetworkMonitor::OnNetworkDisconnected_n, this, handle));
 }
 
-void AndroidNetworkMonitor::OnNetworkDisconnected_w(NetworkHandle handle) {
+void AndroidNetworkMonitor::OnNetworkDisconnected_n(NetworkHandle handle) {
   auto iter = network_info_by_handle_.find(handle);
   if (iter != network_info_by_handle_.end()) {
     for (const rtc::IPAddress& address : iter->second.ip_addresses) {
@@ -416,12 +447,15 @@ void AndroidNetworkMonitor::OnNetworkDisconnected_w(NetworkHandle handle) {
 void AndroidNetworkMonitor::OnNetworkPreference(
     NetworkType type,
     rtc::NetworkPreference preference) {
-  worker_thread()->Invoke<void>(RTC_FROM_HERE, [&] {
+  network_thread_->Invoke<void>(RTC_FROM_HERE, [&] {
+    RTC_LOG(LS_INFO) << "Android network monitor preference for "
+                     << NetworkTypeToString(type) << " changed to "
+                     << rtc::NetworkPreferenceToString(preference);
     auto adapter_type =
         AdapterTypeFromNetworkType(type, surface_cellular_types_);
     network_preference_by_adapter_type_[adapter_type] = preference;
+    SignalNetworksChanged();
   });
-  OnNetworksChanged();
 }
 
 void AndroidNetworkMonitor::SetNetworkInfos(
@@ -432,7 +466,7 @@ void AndroidNetworkMonitor::SetNetworkInfos(
   RTC_LOG(LS_INFO) << "Android network monitor found " << network_infos.size()
                    << " networks";
   for (const NetworkInformation& network : network_infos) {
-    OnNetworkConnected_w(network);
+    OnNetworkConnected_n(network);
   }
 }
 
@@ -499,7 +533,11 @@ AndroidNetworkMonitorFactory::CreateNetworkMonitor() {
 void AndroidNetworkMonitor::NotifyConnectionTypeChanged(
     JNIEnv* env,
     const JavaRef<jobject>& j_caller) {
-  OnNetworksChanged();
+  invoker_.AsyncInvoke<void>(RTC_FROM_HERE, network_thread_, [this] {
+    RTC_LOG(LS_INFO)
+        << "Android network monitor detected connection type change.";
+    SignalNetworksChanged();
+  });
 }
 
 void AndroidNetworkMonitor::NotifyOfActiveNetworkList(
