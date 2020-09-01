@@ -16,6 +16,29 @@
       "revId": "6d58fca05572d0379153b37f944decc0aebb4a31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75600f2c_2e8cce7e",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-01T10:09:04Z",
+      "side": 1,
+      "message": "Should we also log the new type/preference?",
+      "range": {
+        "startLine": 420,
+        "startChar": 4,
+        "endLine": 420,
+        "endChar": 70
+      },
+      "revId": "6d58fca05572d0379153b37f944decc0aebb4a31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
