@@ -1123,9 +1123,6 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
   RtpSendParametersFromMediaDescription(
       video, rtp_header_extensions,
       webrtc::RtpTransceiverDirectionHasRecv(video->direction()), &send_params);
-  if (video->conference_mode()) {
-    send_params.conference_mode = true;
-  }
   send_params.mid = content_name();
 
   VideoRecvParameters recv_params = last_recv_params_;

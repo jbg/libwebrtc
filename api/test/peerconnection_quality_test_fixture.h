@@ -392,9 +392,6 @@ class PeerConnectionE2EQualityTestFixture {
     // estimated by WebRTC stack will be multiplied on this multiplier and then
     // provided into VideoEncoder::SetRates(...).
     double video_encoder_bitrate_multiplier = 1.0;
-    // If true will set conference mode in SDP media section for all video
-    // tracks for all peers.
-    bool use_conference_mode = false;
     // If specified echo emulation will be done, by mixing the render audio into
     // the capture signal. In such case input signal will be reduced by half to
     // avoid saturation or compression in the echo path simulation.

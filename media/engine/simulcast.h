@@ -40,7 +40,6 @@ std::vector<webrtc::VideoStream> GetSimulcastConfig(
     int height,
     double bitrate_priority,
     int max_qp,
-    bool is_screenshare_with_conference_mode,
     bool temporal_layers_supported);
 
 // Gets the simulcast config layers for a non-screensharing case.

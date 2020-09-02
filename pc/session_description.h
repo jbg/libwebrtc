@@ -202,9 +202,6 @@ class MediaContentDescription {
     return send_streams_[0].has_ssrcs();
   }
 
-  virtual void set_conference_mode(bool enable) { conference_mode_ = enable; }
-  virtual bool conference_mode() const { return conference_mode_; }
-
   // https://tools.ietf.org/html/rfc4566#section-5.7
   // May be present at the media or session level of SDP. If present at both
   // levels, the media-level attribute overwrites the session-level one.
@@ -262,7 +259,6 @@ class MediaContentDescription {
   std::vector<webrtc::RtpExtension> rtp_header_extensions_;
   bool rtp_header_extensions_set_ = false;
   StreamParamsVec send_streams_;
-  bool conference_mode_ = false;
   webrtc::RtpTransceiverDirection direction_ =
       webrtc::RtpTransceiverDirection::kSendRecv;
   rtc::SocketAddress connection_address_;

@@ -1166,7 +1166,6 @@ TEST(PCFullStackTest, ScreenshareSlidesVP8_2TL) {
   run_params.video_codecs = {VideoCodecConfig(cricket::kVp8CodecName)};
   run_params.use_flex_fec = false;
   run_params.use_ulp_fec = false;
-  run_params.use_conference_mode = true;
   fixture->Run(std::move(run_params));
 }
 
@@ -1221,7 +1220,6 @@ TEST(PCFullStackTest, ScreenshareSlidesVP8_2TL_Simulcast) {
   run_params.video_codecs = {VideoCodecConfig(cricket::kVp8CodecName)};
   run_params.use_flex_fec = false;
   run_params.use_ulp_fec = false;
-  run_params.use_conference_mode = true;
   fixture->Run(std::move(run_params));
 }
 #endif  // !defined(WEBRTC_MAC) && !defined(WEBRTC_WIN)

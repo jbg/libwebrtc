@@ -897,22 +897,14 @@ size_t LibvpxVp8Encoder::SteadyStateSize(int sid, int tid) {
   const int encoder_id = encoders_.size() - 1 - sid;
   size_t bitrate_bps;
   float fps;
-  if ((SimulcastUtility::IsConferenceModeScreenshare(codec_) && sid == 0) ||
-      vpx_configs_[encoder_id].ts_number_layers <= 1) {
-    // In conference screenshare there's no defined per temporal layer bitrate
-    // and framerate.
-    bitrate_bps = vpx_configs_[encoder_id].rc_target_bitrate * 1000;
-    fps = codec_.maxFramerate;
-  } else {
-    bitrate_bps = vpx_configs_[encoder_id].ts_target_bitrate[tid] * 1000;
+  bitrate_bps = vpx_configs_[encoder_id].ts_target_bitrate[tid] * 1000;
+  fps = codec_.maxFramerate /
+        fmax(vpx_configs_[encoder_id].ts_rate_decimator[tid], 1.0);
+  if (tid > 0) {
+    // Layer bitrate and fps are counted as a partial sums.
+    bitrate_bps -= vpx_configs_[encoder_id].ts_target_bitrate[tid - 1] * 1000;
     fps = codec_.maxFramerate /
-          fmax(vpx_configs_[encoder_id].ts_rate_decimator[tid], 1.0);
-    if (tid > 0) {
-      // Layer bitrate and fps are counted as a partial sums.
-      bitrate_bps -= vpx_configs_[encoder_id].ts_target_bitrate[tid - 1] * 1000;
-      fps = codec_.maxFramerate /
-            fmax(vpx_configs_[encoder_id].ts_rate_decimator[tid - 1], 1.0);
-    }
+          fmax(vpx_configs_[encoder_id].ts_rate_decimator[tid - 1], 1.0);
   }
 
   if (fps < 1e-9)
@@ -1276,9 +1268,8 @@ VideoEncoder::EncoderInfo LibvpxVp8Encoder::GetEncoderInfo() const {
     for (size_t si = 0, encoder_idx = encoders_.size() - 1;
          si < encoders_.size(); ++si, --encoder_idx) {
       info.fps_allocation[si].clear();
-      if ((codec_.numberOfSimulcastStreams > si &&
-           !codec_.simulcastStream[si].active) ||
-          (si == 0 && SimulcastUtility::IsConferenceModeScreenshare(codec_))) {
+      if (codec_.numberOfSimulcastStreams > si &&
+          !codec_.simulcastStream[si].active) {
         // No defined frame rate fractions if not active or if using
         // ScreenshareLayers, leave vector empty and continue;
         continue;

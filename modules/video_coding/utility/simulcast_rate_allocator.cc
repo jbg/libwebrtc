@@ -40,8 +40,6 @@ static const float kBaseHeavy3TlRateAllocation[kMaxTemporalStreams] = {
     0.6f, 0.8f, 1.0f, 1.0f  // 3 layers {60%, 20%, 20%}
 };
 
-const uint32_t kLegacyScreenshareTl0BitrateKbps = 200;
-const uint32_t kLegacyScreenshareTl1BitrateKbps = 1000;
 }  // namespace
 
 float SimulcastRateAllocator::GetTemporalRateAllocation(
@@ -61,8 +59,7 @@ float SimulcastRateAllocator::GetTemporalRateAllocation(
 SimulcastRateAllocator::SimulcastRateAllocator(const VideoCodec& codec)
     : codec_(codec),
       stable_rate_settings_(StableTargetRateExperiment::ParseFromFieldTrials()),
-      rate_control_settings_(RateControlSettings::ParseFromFieldTrials()),
-      legacy_conference_mode_(false) {}
+      rate_control_settings_(RateControlSettings::ParseFromFieldTrials()) {}
 
 SimulcastRateAllocator::~SimulcastRateAllocator() = default;
 
@@ -227,20 +224,8 @@ void SimulcastRateAllocator::DistributeAllocationToTemporalLayers(
         allocated_bitrates_bps->GetSpatialLayerSum(simulcast_id) / 1000);
     const int num_temporal_streams = NumTemporalStreams(simulcast_id);
     uint32_t max_bitrate_kbps;
-    // Legacy temporal-layered only screenshare, or simulcast screenshare
-    // with legacy mode for simulcast stream 0.
-    if (codec_.mode == VideoCodecMode::kScreensharing &&
-        legacy_conference_mode_ && simulcast_id == 0) {
-      // TODO(holmer): This is a "temporary" hack for screensharing, where we
-      // interpret the startBitrate as the encoder target bitrate. This is
-      // to allow for a different max bitrate, so if the codec can't meet
-      // the target we still allow it to overshoot up to the max before dropping
-      // frames. This hack should be improved.
-      max_bitrate_kbps =
-          std::min(kLegacyScreenshareTl1BitrateKbps, target_bitrate_kbps);
-      target_bitrate_kbps =
-          std::min(kLegacyScreenshareTl0BitrateKbps, target_bitrate_kbps);
-    } else if (num_spatial_streams == 1) {
+
+    if (num_spatial_streams == 1) {
       max_bitrate_kbps = codec_.maxBitrate;
     } else {
       max_bitrate_kbps = codec_.simulcastStream[simulcast_id].maxBitrate;
@@ -250,14 +235,8 @@ void SimulcastRateAllocator::DistributeAllocationToTemporalLayers(
     if (num_temporal_streams == 1) {
       tl_allocation.push_back(target_bitrate_kbps);
     } else {
-      if (codec_.mode == VideoCodecMode::kScreensharing &&
-          legacy_conference_mode_ && simulcast_id == 0) {
-        tl_allocation = ScreenshareTemporalLayerAllocation(
-            target_bitrate_kbps, max_bitrate_kbps, simulcast_id);
-      } else {
-        tl_allocation = DefaultTemporalLayerAllocation(
-            target_bitrate_kbps, max_bitrate_kbps, simulcast_id);
-      }
+      tl_allocation = DefaultTemporalLayerAllocation(
+          target_bitrate_kbps, max_bitrate_kbps, simulcast_id);
     }
     RTC_DCHECK_GT(tl_allocation.size(), 0);
     RTC_DCHECK_LE(tl_allocation.size(), num_temporal_streams);
@@ -334,10 +313,6 @@ int SimulcastRateAllocator::NumTemporalStreams(size_t simulcast_id) const {
       codec_.codecType == kVideoCodecVP8 && codec_.numberOfSimulcastStreams == 0
           ? codec_.VP8().numberOfTemporalLayers
           : codec_.simulcastStream[simulcast_id].numberOfTemporalLayers);
-}
-
-void SimulcastRateAllocator::SetLegacyConferenceMode(bool enabled) {
-  legacy_conference_mode_ = enabled;
 }
 
 }  // namespace webrtc

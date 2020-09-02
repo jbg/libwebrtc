@@ -849,13 +849,6 @@ class VoiceMediaChannel : public MediaChannel, public Delayable {
 struct VideoSendParameters : RtpSendParameters<VideoCodec> {
   VideoSendParameters();
   ~VideoSendParameters() override;
-  // Use conference mode? This flag comes from the remote
-  // description's SDP line 'a=x-google-flag:conference', copied over
-  // by VideoChannel::SetRemoteContent_w, and ultimately used by
-  // conference mode screencast logic in
-  // WebRtcVideoChannel::WebRtcVideoSendStream::CreateVideoEncoderConfig.
-  // The special screencast behaviour is disabled by default.
-  bool conference_mode = false;
 
  protected:
   std::map<std::string, std::string> ToStringMap() const override;
