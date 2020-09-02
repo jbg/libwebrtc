@@ -63,16 +63,13 @@ struct PatchingParams {
   PatchingParams(
       std::vector<PeerConnectionE2EQualityTestFixture::VideoCodecConfig>
           video_codecs,
-      bool use_conference_mode,
       std::map<std::string, int> stream_label_to_simulcast_streams_count)
       : video_codecs(std::move(video_codecs)),
-        use_conference_mode(use_conference_mode),
         stream_label_to_simulcast_streams_count(
             stream_label_to_simulcast_streams_count) {}
 
   std::vector<PeerConnectionE2EQualityTestFixture::VideoCodecConfig>
       video_codecs;
-  bool use_conference_mode;
   std::map<std::string, int> stream_label_to_simulcast_streams_count;
 };
 
