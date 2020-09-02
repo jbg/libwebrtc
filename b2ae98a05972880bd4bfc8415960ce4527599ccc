@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5ae2c2e0_f5e7dba1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-09-02T21:05:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deb01a73_30fade98",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "b2ae98a05972880bd4bfc8415960ce4527599ccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a76ec991_4d67f696",
         "filename": "sdk/android/src/jni/android_network_monitor.cc",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "8a1b2a28_7181ffb2",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-09-02T21:05:27Z",
+      "side": 1,
+      "message": "Done; also added thread annotations to variables",
+      "parentUuid": "a76ec991_4d67f696",
+      "revId": "b2ae98a05972880bd4bfc8415960ce4527599ccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a7ffb50_87abd823",
         "filename": "sdk/android/src/jni/android_network_monitor.cc",
         "patchSetId": 3
@@ -56,6 +98,24 @@
       "revId": "b2ae98a05972880bd4bfc8415960ce4527599ccc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7affd9b5_00b5699f",
+        "filename": "sdk/android/src/jni/android_network_monitor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-09-02T21:05:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a7ffb50_87abd823",
+      "revId": "b2ae98a05972880bd4bfc8415960ce4527599ccc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
