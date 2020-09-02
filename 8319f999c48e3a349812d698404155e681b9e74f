@@ -56,6 +56,30 @@
       "revId": "8319f999c48e3a349812d698404155e681b9e74f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3988679f_3936ef98",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-02T20:25:55Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to state that. As you point out, we already rely on it. And we actually don\u0027t explicitly mention that it can \"not create it\" (i.e., return null).\nRather the comment states \"This creates an APM instance using the...\" which does not at all imply that it can fail.",
+      "parentUuid": "adfdfb60_9140b45b",
+      "range": {
+        "startLine": 739,
+        "startChar": 0,
+        "endLine": 742,
+        "endChar": 56
+      },
+      "revId": "8319f999c48e3a349812d698404155e681b9e74f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
