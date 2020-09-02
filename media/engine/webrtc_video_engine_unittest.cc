@@ -1813,7 +1813,6 @@ TEST_F(WebRtcVideoChannelBaseTest, GetStatsMultipleRecvStreams) {
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   cricket::VideoSendParameters parameters;
   parameters.codecs.push_back(DefaultCodec());
-  parameters.conference_mode = true;
   EXPECT_TRUE(channel_->SetSendParameters(parameters));
   EXPECT_TRUE(SetSend(true));
   EXPECT_TRUE(channel_->AddRecvStream(cricket::StreamParams::CreateLegacy(1)));
@@ -1864,7 +1863,6 @@ TEST_F(WebRtcVideoChannelBaseTest, GetStatsMultipleSendStreams) {
   EXPECT_TRUE(SetOneCodec(DefaultCodec()));
   cricket::VideoSendParameters parameters;
   parameters.codecs.push_back(DefaultCodec());
-  parameters.conference_mode = true;
   EXPECT_TRUE(channel_->SetSendParameters(parameters));
   EXPECT_TRUE(
       channel_->AddRecvStream(cricket::StreamParams::CreateLegacy(kSsrc)));
@@ -2032,7 +2030,6 @@ TEST_F(WebRtcVideoChannelBaseTest, SimulateConference) {
   EXPECT_TRUE(SetDefaultCodec());
   cricket::VideoSendParameters parameters;
   parameters.codecs.push_back(DefaultCodec());
-  parameters.conference_mode = true;
   EXPECT_TRUE(channel_->SetSendParameters(parameters));
   EXPECT_TRUE(SetSend(true));
   EXPECT_TRUE(channel_->AddRecvStream(cricket::StreamParams::CreateLegacy(1)));
@@ -2751,7 +2748,6 @@ TEST_F(WebRtcVideoChannelTest, RecvStreamWithSimAndRtx) {
   parameters.codecs = engine_.send_codecs();
   EXPECT_TRUE(channel_->SetSendParameters(parameters));
   EXPECT_TRUE(channel_->SetSend(true));
-  parameters.conference_mode = true;
   EXPECT_TRUE(channel_->SetSendParameters(parameters));
 
   // Send side.
@@ -3267,10 +3263,10 @@ TEST_F(WebRtcVideoChannelTest, UsesCorrectSettingsForScreencast) {
   EXPECT_TRUE(channel_->SetVideoSend(last_ssrc_, nullptr, nullptr));
 }
 
+#if 0
 TEST_F(WebRtcVideoChannelTest,
        ConferenceModeScreencastConfiguresTemporalLayer) {
   static const int kConferenceScreencastTemporalBitrateBps = 200 * 1000;
-  send_parameters_.conference_mode = true;
   channel_->SetSendParameters(send_parameters_);
 
   AddSendStream();
@@ -3302,6 +3298,7 @@ TEST_F(WebRtcVideoChannelTest,
 
   EXPECT_TRUE(channel_->SetVideoSend(last_ssrc_, nullptr, nullptr));
 }
+#endif
 
 TEST_F(WebRtcVideoChannelTest, SuspendBelowMinBitrateDisabledByDefault) {
   FakeVideoSendStream* stream = AddSendStream();
@@ -8170,11 +8167,9 @@ class WebRtcVideoChannelSimulcastTest : public ::testing::Test {
                                int capture_height,
                                size_t num_configured_streams,
                                size_t expected_num_streams,
-                               bool screenshare,
-                               bool conference_mode) {
+                               bool screenshare) {
     cricket::VideoSendParameters parameters;
     parameters.codecs.push_back(codec);
-    parameters.conference_mode = conference_mode;
     ASSERT_TRUE(channel_->SetSendParameters(parameters));
 
     std::vector<uint32_t> ssrcs = MAKE_VECTOR(kSsrcs3);
@@ -8207,18 +8202,10 @@ class WebRtcVideoChannelSimulcastTest : public ::testing::Test {
     EXPECT_LE(expected_num_streams, stream->GetConfig().rtp.ssrcs.size());
 
     std::vector<webrtc::VideoStream> expected_streams;
-    if (num_configured_streams > 1 || conference_mode) {
+    if (num_configured_streams > 1) {
       expected_streams = GetSimulcastConfig(
           /*min_layers=*/1, num_configured_streams, capture_width,
-          capture_height, webrtc::kDefaultBitratePriority, kDefaultQpMax,
-          screenshare && conference_mode, true);
-      if (screenshare && conference_mode) {
-        for (const webrtc::VideoStream& stream : expected_streams) {
-          // Never scale screen content.
-          EXPECT_EQ(stream.width, rtc::checked_cast<size_t>(capture_width));
-          EXPECT_EQ(stream.height, rtc::checked_cast<size_t>(capture_height));
-        }
-      }
+          capture_height, webrtc::kDefaultBitratePriority, kDefaultQpMax, true);
     } else {
       webrtc::VideoStream stream;
       stream.width = capture_width;
@@ -8258,13 +8245,8 @@ class WebRtcVideoChannelSimulcastTest : public ::testing::Test {
       EXPECT_GT(video_streams[i].max_qp, 0);
       EXPECT_EQ(expected_streams[i].max_qp, video_streams[i].max_qp);
 
-      EXPECT_EQ(num_configured_streams > 1 || conference_mode,
+      EXPECT_EQ(num_configured_streams > 1,
                 expected_streams[i].num_temporal_layers.has_value());
-
-      if (conference_mode) {
-        EXPECT_EQ(expected_streams[i].num_temporal_layers,
-                  video_streams[i].num_temporal_layers);
-      }
 
       if (i == num_streams - 1) {
         total_max_bitrate_bps += video_streams[i].max_bitrate_bps;
@@ -8318,35 +8300,27 @@ class WebRtcVideoChannelSimulcastTest : public ::testing::Test {
 };
 
 TEST_F(WebRtcVideoChannelSimulcastTest, SetSendCodecsWith2SimulcastStreams) {
-  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 640, 360, 2, 2, false,
-                          true);
+  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 640, 360, 2, 2, false);
 }
 
 TEST_F(WebRtcVideoChannelSimulcastTest, SetSendCodecsWith3SimulcastStreams) {
-  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 1280, 720, 3, 3, false,
-                          true);
+  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 1280, 720, 3, 3, false);
 }
 
 // Test that we normalize send codec format size in simulcast.
 TEST_F(WebRtcVideoChannelSimulcastTest, SetSendCodecsWithOddSizeInSimulcast) {
-  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 541, 271, 2, 2, false,
-                          true);
+  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 541, 271, 2, 2, false);
 }
 
 TEST_F(WebRtcVideoChannelSimulcastTest, SetSendCodecsForScreenshare) {
-  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 1280, 720, 3, 3, true,
-                          false);
+  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 1280, 720, 3, 3, true);
 }
 
+#if 0
 TEST_F(WebRtcVideoChannelSimulcastTest, SetSendCodecsForSimulcastScreenshare) {
-  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 1280, 720, 3, 2, true,
-                          true);
+  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 1280, 720, 3, 2, true);
 }
-
-TEST_F(WebRtcVideoChannelSimulcastTest, SimulcastScreenshareWithoutConference) {
-  VerifySimulcastSettings(cricket::VideoCodec("VP8"), 1280, 720, 3, 3, true,
-                          false);
-}
+#endif
 
 TEST_F(WebRtcVideoChannelBaseTest, GetSources) {
   EXPECT_THAT(channel_->GetSources(kSsrc), IsEmpty());

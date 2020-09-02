@@ -321,19 +321,6 @@ static const char kSdpSctpDataChannelWithCandidatesString[] =
     "a=mid:data_content_name\r\n"
     "a=sctpmap:5000 webrtc-datachannel 1024\r\n";
 
-static const char kSdpConferenceString[] =
-    "v=0\r\n"
-    "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
-    "s=-\r\n"
-    "t=0 0\r\n"
-    "a=msid-semantic: WMS\r\n"
-    "m=audio 9 RTP/SAVPF 111 103 104\r\n"
-    "c=IN IP4 0.0.0.0\r\n"
-    "a=x-google-flag:conference\r\n"
-    "m=video 9 RTP/SAVPF 120\r\n"
-    "c=IN IP4 0.0.0.0\r\n"
-    "a=x-google-flag:conference\r\n";
-
 static const char kSdpSessionString[] =
     "v=0\r\n"
     "o=- 18446744069414584320 18446462598732840960 IN IP4 127.0.0.1\r\n"
@@ -3253,41 +3240,6 @@ TEST_F(WebRtcSdpTest, DeserializeCandidateWithUfragPwd) {
   ref_candidate.set_username("user_rtp");
   ref_candidate.set_password("password_rtp");
   EXPECT_TRUE(jcandidate.candidate().IsEquivalent(ref_candidate));
-}
-
-TEST_F(WebRtcSdpTest, DeserializeSdpWithConferenceFlag) {
-  JsepSessionDescription jdesc(kDummyType);
-
-  // Deserialize
-  EXPECT_TRUE(SdpDeserialize(kSdpConferenceString, &jdesc));
-
-  // Verify
-  cricket::AudioContentDescription* audio =
-      cricket::GetFirstAudioContentDescription(jdesc.description());
-  EXPECT_TRUE(audio->conference_mode());
-
-  cricket::VideoContentDescription* video =
-      cricket::GetFirstVideoContentDescription(jdesc.description());
-  EXPECT_TRUE(video->conference_mode());
-}
-
-TEST_F(WebRtcSdpTest, SerializeSdpWithConferenceFlag) {
-  JsepSessionDescription jdesc(kDummyType);
-
-  // We tested deserialization already above, so just test that if we serialize
-  // and deserialize the flag doesn't disappear.
-  EXPECT_TRUE(SdpDeserialize(kSdpConferenceString, &jdesc));
-  std::string reserialized = webrtc::SdpSerialize(jdesc);
-  EXPECT_TRUE(SdpDeserialize(reserialized, &jdesc));
-
-  // Verify.
-  cricket::AudioContentDescription* audio =
-      cricket::GetFirstAudioContentDescription(jdesc.description());
-  EXPECT_TRUE(audio->conference_mode());
-
-  cricket::VideoContentDescription* video =
-      cricket::GetFirstVideoContentDescription(jdesc.description());
-  EXPECT_TRUE(video->conference_mode());
 }
 
 TEST_F(WebRtcSdpTest, SerializeAndDeserializeRemoteNetEstimate) {

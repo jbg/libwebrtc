@@ -218,7 +218,7 @@ RtpGenerator::RtpGenerator(const RtpGeneratorOptions& options)
 
     encoder_config.video_stream_factory =
         new rtc::RefCountedObject<cricket::EncoderStreamFactory>(
-            video_config.rtp.payload_name, /*max qp*/ 56, /*screencast*/ false,
+            video_config.rtp.payload_name, /*max qp*/ 56,
             /*screenshare enabled*/ false);
 
     // Setup the fake video stream for this.
