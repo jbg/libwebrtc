@@ -45,6 +45,7 @@
 #include "rtc_base/system/arch.h"
 #include "rtc_base/task_queue_for_test.h"
 #include "rtc_base/thread.h"
+#include "system_wrappers/include/cpu_features_wrapper.h"
 #include "test/gtest.h"
 #include "test/testsupport/file_utils.h"
 
@@ -348,6 +349,29 @@ bool ReadChunk(FILE* file,
   return true;
 }
 
+// Returns the reference file name that matches the current CPU
+// architecture/optimizations.
+std::string GetReferenceFilename() {
+#if defined(WEBRTC_AUDIOPROC_FIXED_PROFILE)
+  printf("---------------------------------------------------------------------------------------------------\n");
+  printf("Using fixed profile\n");
+  printf("---------------------------------------------------------------------------------------------------\n");
+  return test::ResourcePath("audio_processing/output_data_fixed", "pb");
+#elif defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE)
+  printf("---------------------------------------------------------------------------------------------------\n");
+  printf("Using float profile\n");
+
+  if (WebRtc_GetCPUInfo(kAVX2) != 0) {
+    printf("Using AVX2\n");
+    printf("---------------------------------------------------------------------------------------------------\n");
+    return test::ResourcePath("audio_processing/output_data_float_avx2", "pb");
+  }
+  printf("Using SSE2\n");
+  printf("---------------------------------------------------------------------------------------------------\n");
+  return test::ResourcePath("audio_processing/output_data_float", "pb");
+#endif
+}
+
 class ApmTest : public ::testing::Test {
  protected:
   ApmTest();
@@ -415,13 +439,7 @@ class ApmTest : public ::testing::Test {
 
 ApmTest::ApmTest()
     : output_path_(test::OutputPath()),
-#if defined(WEBRTC_AUDIOPROC_FIXED_PROFILE)
-      ref_filename_(
-          test::ResourcePath("audio_processing/output_data_fixed", "pb")),
-#elif defined(WEBRTC_AUDIOPROC_FLOAT_PROFILE)
-      ref_filename_(
-          test::ResourcePath("audio_processing/output_data_float", "pb")),
-#endif
+      ref_filename_(GetReferenceFilename()),
       output_sample_rate_hz_(0),
       num_output_channels_(0),
       far_file_(NULL),
