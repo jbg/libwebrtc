@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "0bdf44fb_16323379",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-09-02T12:11:32Z",
+      "side": 1,
+      "message": "This looks like clean! It also feels good to have someone who fully understands the standardized semantics, implementing this fix :)",
+      "revId": "21b5f69413941827a6cb31fbdd4c0d6289dc9063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "308b649d_cf692291",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 3
@@ -82,6 +99,24 @@
       "side": 1,
       "message": "Makes sense to me. Wouldn\u0027t be surprised if this has indeed been a problem, just hasn\u0027t been as readily noticed. I can think of several mitigating factors...",
       "parentUuid": "308b649d_cf692291",
+      "revId": "21b5f69413941827a6cb31fbdd4c0d6289dc9063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93a95380_a01dfa75",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2034,
+      "author": {
+        "id": 5023
+      },
+      "writtenOn": "2020-09-02T12:11:32Z",
+      "side": 1,
+      "message": "Yeah, I agree. I was supposed to add this support in my previous attempt at fixing this bug, but I dropped the ball on that.",
+      "parentUuid": "502f7d56_20d082cc",
       "revId": "21b5f69413941827a6cb31fbdd4c0d6289dc9063",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
