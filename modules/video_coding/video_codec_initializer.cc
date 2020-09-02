@@ -68,10 +68,6 @@ VideoCodec VideoCodecInitializer::VideoEncoderConfigToVideoCodec(
       break;
   }
 
-  video_codec.legacy_conference_mode =
-      config.content_type == VideoEncoderConfig::ContentType::kScreen &&
-      config.legacy_conference_mode;
-
   video_codec.numberOfSimulcastStreams =
       static_cast<unsigned char>(streams.size());
   video_codec.minBitrate = streams[0].min_bitrate_bps / 1000;

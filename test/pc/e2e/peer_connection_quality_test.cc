@@ -559,7 +559,6 @@ PeerConnectionE2EQualityTest::CreateSignalingInterceptor(
     }
   }
   PatchingParams patching_params(run_params.video_codecs,
-                                 run_params.use_conference_mode,
                                  stream_label_to_simulcast_streams_count);
   return std::make_unique<SignalingInterceptor>(patching_params);
 }

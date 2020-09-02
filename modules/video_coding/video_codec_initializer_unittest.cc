@@ -43,7 +43,6 @@ static const uint32_t kDefaultMaxBitrateBps = 2000000;
 static const uint32_t kDefaultMinTransmitBitrateBps = 400000;
 static const int kDefaultMaxQp = 48;
 static const uint32_t kScreenshareTl0BitrateBps = 120000;
-static const uint32_t kScreenshareConferenceTl0BitrateBps = 200000;
 static const uint32_t kScreenshareCodecTargetBitrateBps = 200000;
 static const uint32_t kScreenshareDefaultFramerate = 5;
 // Bitrates for the temporal layers of the higher screenshare simulcast stream.
@@ -173,23 +172,6 @@ TEST_F(VideoCodecInitializerTest, SingleStreamVp8ScreenshareInactive) {
   EXPECT_EQ(1u, codec_out_.numberOfSimulcastStreams);
   EXPECT_EQ(1u, codec_out_.VP8()->numberOfTemporalLayers);
   EXPECT_EQ(0U, bitrate_allocation.get_sum_bps());
-}
-
-TEST_F(VideoCodecInitializerTest, TemporalLayeredVp8ScreenshareConference) {
-  SetUpFor(VideoCodecType::kVideoCodecVP8, 1, 2, true);
-  streams_.push_back(DefaultScreenshareStream());
-  EXPECT_TRUE(InitializeCodec());
-  bitrate_allocator_->SetLegacyConferenceMode(true);
-
-  EXPECT_EQ(1u, codec_out_.numberOfSimulcastStreams);
-  EXPECT_EQ(2u, codec_out_.VP8()->numberOfTemporalLayers);
-  VideoBitrateAllocation bitrate_allocation =
-      bitrate_allocator_->Allocate(VideoBitrateAllocationParameters(
-          kScreenshareCodecTargetBitrateBps, kScreenshareDefaultFramerate));
-  EXPECT_EQ(kScreenshareCodecTargetBitrateBps,
-            bitrate_allocation.get_sum_bps());
-  EXPECT_EQ(kScreenshareConferenceTl0BitrateBps,
-            bitrate_allocation.GetBitrate(0, 0));
 }
 
 TEST_F(VideoCodecInitializerTest, TemporalLayeredVp8Screenshare) {
