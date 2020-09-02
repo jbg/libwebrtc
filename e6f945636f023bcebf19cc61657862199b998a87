@@ -67,6 +67,24 @@
       "revId": "e6f945636f023bcebf19cc61657862199b998a87",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efdf6120_afde9b5e",
+        "filename": "api/video/video_timing.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-02T13:35:45Z",
+      "side": 1,
+      "message": "It\u0027s tested explicitly in a couple of places. (And I think the above comment about \"union\" should be deleted. This used to not have any explicit initialization here which has caused a but or two. I\u0027m adding initialization here, and deleting explicit initialization where it\u0027s used).",
+      "parentUuid": "2ca3bb24_d54c66d2",
+      "revId": "e6f945636f023bcebf19cc61657862199b998a87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
