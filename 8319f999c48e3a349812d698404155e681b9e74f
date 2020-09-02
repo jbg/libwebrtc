@@ -16,6 +16,46 @@
       "revId": "8319f999c48e3a349812d698404155e681b9e74f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4540d739_d61940a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-09-02T06:59:12Z",
+      "side": 1,
+      "message": "This is great!",
+      "revId": "8319f999c48e3a349812d698404155e681b9e74f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "adfdfb60_9140b45b",
+        "filename": "modules/audio_processing/include/audio_processing.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-09-02T06:59:12Z",
+      "side": 1,
+      "message": "With this CL, the Create functions will never return a nullptr. Should we mention it in the comment here, to make it an explicit guarantee?\n\nWe kind of already rely on it.\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/media/engine/webrtc_media_engine_defaults.cc;l\u003d35;drc\u003d6e8b402a6231405b753919029c9027404325ea00",
+      "range": {
+        "startLine": 739,
+        "startChar": 0,
+        "endLine": 742,
+        "endChar": 56
+      },
+      "revId": "8319f999c48e3a349812d698404155e681b9e74f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
