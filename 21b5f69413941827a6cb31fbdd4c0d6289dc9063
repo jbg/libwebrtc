@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "5b332028_ab1468d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-09-02T07:50:52Z",
+      "side": 1,
+      "message": "Thanks a ton for taking this on Taylor! :)",
+      "revId": "21b5f69413941827a6cb31fbdd4c0d6289dc9063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "308b649d_cf692291",
         "filename": "media/engine/webrtc_voice_engine.cc",
         "patchSetId": 3
@@ -47,6 +64,24 @@
       "writtenOn": "2020-09-01T23:53:14Z",
       "side": 1,
       "message": "Note that this wasn\u0027t being done before, but I presume this issue exists for audio streams as well as video streams, even if nothing is being done to trigger it yet.",
+      "revId": "21b5f69413941827a6cb31fbdd4c0d6289dc9063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "502f7d56_20d082cc",
+        "filename": "media/engine/webrtc_voice_engine.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2034,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-09-02T07:50:52Z",
+      "side": 1,
+      "message": "Makes sense to me. Wouldn\u0027t be surprised if this has indeed been a problem, just hasn\u0027t been as readily noticed. I can think of several mitigating factors...",
+      "parentUuid": "308b649d_cf692291",
       "revId": "21b5f69413941827a6cb31fbdd4c0d6289dc9063",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
@@ -67,6 +102,29 @@
       "revId": "21b5f69413941827a6cb31fbdd4c0d6289dc9063",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bed56c07_eb9a9b3b",
+        "filename": "test/peer_scenario/tests/unsignaled_stream_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-09-02T07:50:52Z",
+      "side": 1,
+      "message": "Seems I forgot to initialize this to false.",
+      "range": {
+        "startLine": 93,
+        "startChar": 41,
+        "endLine": 93,
+        "endChar": 42
+      },
+      "revId": "21b5f69413941827a6cb31fbdd4c0d6289dc9063",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
