@@ -24,8 +24,6 @@ class SimulcastUtility {
   static bool ValidSimulcastParameters(const VideoCodec& codec,
                                        int num_streams);
   static int NumberOfTemporalLayers(const VideoCodec& codec, int spatial_id);
-  // TODO(sprang): Remove this hack when ScreenshareLayers is gone.
-  static bool IsConferenceModeScreenshare(const VideoCodec& codec);
 };
 
 }  // namespace webrtc

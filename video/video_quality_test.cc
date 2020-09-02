@@ -627,8 +627,7 @@ void VideoQualityTest::FillScalabilitySettings(
     encoder_config.simulcast_layers = std::vector<VideoStream>(num_streams);
     encoder_config.video_stream_factory =
         new rtc::RefCountedObject<cricket::EncoderStreamFactory>(
-            params->video[video_idx].codec, kDefaultMaxQp,
-            params->screenshare[video_idx].enabled, true);
+            params->video[video_idx].codec, kDefaultMaxQp, true);
     params->ss[video_idx].streams =
         encoder_config.video_stream_factory->CreateEncoderStreams(
             static_cast<int>(params->video[video_idx].width),
@@ -802,8 +801,7 @@ void VideoQualityTest::SetupVideo(Transport* send_transport,
     video_encoder_configs_[video_idx].video_stream_factory =
         new rtc::RefCountedObject<cricket::EncoderStreamFactory>(
             params_.video[video_idx].codec,
-            params_.ss[video_idx].streams[0].max_qp,
-            params_.screenshare[video_idx].enabled, true);
+            params_.ss[video_idx].streams[0].max_qp, true);
 
     video_encoder_configs_[video_idx].spatial_layers =
         params_.ss[video_idx].spatial_layers;

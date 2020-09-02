@@ -170,9 +170,6 @@ static const char kAttributeRid[] = "rid";
 static const char kAttributePacketization[] = "packetization";
 
 // Experimental flags
-static const char kAttributeXGoogleFlag[] = "x-google-flag";
-static const char kValueConference[] = "conference";
-
 static const char kAttributeRtcpRemoteEstimate[] = "remote-net-estimate";
 
 // Candidate
@@ -1627,12 +1624,6 @@ void BuildRtpContentAttributes(const MediaContentDescription* media_desc,
   // a=rtcp-rsize
   if (media_desc->rtcp_reduced_size()) {
     InitAttrLine(kAttributeRtcpReducedSize, &os);
-    AddLine(os.str(), message);
-  }
-
-  if (media_desc->conference_mode()) {
-    InitAttrLine(kAttributeXGoogleFlag, &os);
-    os << kSdpDelimiterColon << kValueConference;
     AddLine(os.str(), message);
   }
 
@@ -3203,16 +3194,6 @@ bool ParseContent(const std::string& message,
           return false;
         }
         media_desc->AddRtpHeaderExtension(extmap);
-      } else if (HasAttribute(line, kAttributeXGoogleFlag)) {
-        // Experimental attribute.  Conference mode activates more aggressive
-        // AEC and NS settings.
-        // TODO(deadbeef): expose API to set these directly.
-        std::string flag_value;
-        if (!GetValue(line, kAttributeXGoogleFlag, &flag_value, error)) {
-          return false;
-        }
-        if (flag_value.compare(kValueConference) == 0)
-          media_desc->set_conference_mode(true);
       } else if (HasAttribute(line, kAttributeMsid)) {
         if (!ParseMsidAttribute(line, &stream_ids, &track_id, error)) {
           return false;

@@ -88,9 +88,8 @@ class SimulcastRateAllocatorTest : public ::testing::TestWithParam<bool> {
     EXPECT_EQ(sum, actual.get_sum_bps());
   }
 
-  void CreateAllocator(bool legacy_conference_mode = false) {
+  void CreateAllocator() {
     allocator_.reset(new SimulcastRateAllocator(codec_));
-    allocator_->SetLegacyConferenceMode(legacy_conference_mode);
   }
 
   void SetupCodec3SL3TL(const std::vector<bool>& active_streams) {
@@ -669,60 +668,6 @@ class ScreenshareRateAllocationTest : public SimulcastRateAllocatorTest {
 INSTANTIATE_TEST_SUITE_P(ScreenshareTest,
                          ScreenshareRateAllocationTest,
                          ::testing::Bool());
-
-TEST_P(ScreenshareRateAllocationTest, ConferenceBitrateBelowTl0) {
-  SetupConferenceScreenshare(GetParam());
-  CreateAllocator(true);
-
-  VideoBitrateAllocation allocation =
-      allocator_->Allocate(VideoBitrateAllocationParameters(
-          kLegacyScreenshareTargetBitrateKbps * 1000, kFramerateFps));
-
-  // All allocation should go in TL0.
-  EXPECT_EQ(kLegacyScreenshareTargetBitrateKbps, allocation.get_sum_kbps());
-  EXPECT_EQ(kLegacyScreenshareTargetBitrateKbps,
-            allocation.GetBitrate(0, 0) / 1000);
-  EXPECT_EQ(allocation.is_bw_limited(), GetParam());
-}
-
-TEST_P(ScreenshareRateAllocationTest, ConferenceBitrateAboveTl0) {
-  SetupConferenceScreenshare(GetParam());
-  CreateAllocator(true);
-
-  uint32_t target_bitrate_kbps =
-      (kLegacyScreenshareTargetBitrateKbps + kLegacyScreenshareMaxBitrateKbps) /
-      2;
-  VideoBitrateAllocation allocation =
-      allocator_->Allocate(VideoBitrateAllocationParameters(
-          target_bitrate_kbps * 1000, kFramerateFps));
-
-  // Fill TL0, then put the rest in TL1.
-  EXPECT_EQ(target_bitrate_kbps, allocation.get_sum_kbps());
-  EXPECT_EQ(kLegacyScreenshareTargetBitrateKbps,
-            allocation.GetBitrate(0, 0) / 1000);
-  EXPECT_EQ(target_bitrate_kbps - kLegacyScreenshareTargetBitrateKbps,
-            allocation.GetBitrate(0, 1) / 1000);
-  EXPECT_EQ(allocation.is_bw_limited(), GetParam());
-}
-
-TEST_F(ScreenshareRateAllocationTest, ConferenceBitrateAboveTl1) {
-  // This test is only for the non-simulcast case.
-  SetupConferenceScreenshare(false);
-  CreateAllocator(true);
-
-  VideoBitrateAllocation allocation =
-      allocator_->Allocate(VideoBitrateAllocationParameters(
-          kLegacyScreenshareMaxBitrateKbps * 2000, kFramerateFps));
-
-  // Fill both TL0 and TL1, but no more.
-  EXPECT_EQ(kLegacyScreenshareMaxBitrateKbps, allocation.get_sum_kbps());
-  EXPECT_EQ(kLegacyScreenshareTargetBitrateKbps,
-            allocation.GetBitrate(0, 0) / 1000);
-  EXPECT_EQ(
-      kLegacyScreenshareMaxBitrateKbps - kLegacyScreenshareTargetBitrateKbps,
-      allocation.GetBitrate(0, 1) / 1000);
-  EXPECT_FALSE(allocation.is_bw_limited());
-}
 
 // This tests when the screenshare is inactive it should be allocated 0 bitrate
 // for all layers.
