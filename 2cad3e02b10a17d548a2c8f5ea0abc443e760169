@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4cf53465_146c2ef9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2020-09-02T08:33:23Z",
+      "side": 1,
+      "message": "Hello, I found a test problem when disabling the VP9 codec. PTAL.",
+      "revId": "2cad3e02b10a17d548a2c8f5ea0abc443e760169",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
