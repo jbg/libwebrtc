@@ -99,7 +99,6 @@ VideoSendParameters::~VideoSendParameters() = default;
 
 std::map<std::string, std::string> VideoSendParameters::ToStringMap() const {
   auto params = RtpSendParameters<VideoCodec>::ToStringMap();
-  params["conference_mode"] = (conference_mode ? "yes" : "no");
   return params;
 }
 

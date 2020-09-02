@@ -249,7 +249,7 @@ VideoEncoderConfig CreateVideoEncoderConfig(VideoStreamConfig config) {
                        VideoStreamConfig::Encoder::ContentType::kScreen;
     encoder_config.video_stream_factory =
         new rtc::RefCountedObject<cricket::EncoderStreamFactory>(
-            cricket_codec, kDefaultMaxQp, screenshare, screenshare);
+            cricket_codec, kDefaultMaxQp, screenshare);
   } else {
     encoder_config.video_stream_factory =
         new rtc::RefCountedObject<DefaultVideoStreamFactory>();
