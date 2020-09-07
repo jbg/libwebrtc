@@ -68,6 +68,41 @@
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e48bba5b_62fb7c31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-07T11:28:21Z",
+      "side": 1,
+      "message": "found this week-old comment that I hadn\u0027t sent...",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31a7fc47_d6edcd32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-07T11:28:21Z",
+      "side": 1,
+      "message": "All certificates are X.509, so that\u0027s misleading.\n\nI *think* (haven\u0027t checked the code) the difference is that a crypto_buffer contains the uninterpreted bag-of-bits, and unpacks it only when it has to, while the non-crypto-buffer form contains some kind of decoded structure where it\u0027s easy to get at the various pieces of information in the cert.\n\nIf that\u0027s the difference, I might call them \"PreParsedCertificate\" and \"EncodedCertificate\", but keeping consistency with what the actual libs call them is rather important for maintainability.",
+      "parentUuid": "da08d58b_6391c506",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
