@@ -13,6 +13,7 @@
 
 #include <stddef.h>
 
+#include "rtc_base/deprecation.h"
 #include "rtc_base/system/rtc_export.h"
 
 // This file contains constants related to media.
@@ -130,7 +131,8 @@ RTC_EXPORT extern const char kVp8CodecName[];
 RTC_EXPORT extern const char kVp9CodecName[];
 RTC_EXPORT extern const char kAv1CodecName[];
 RTC_EXPORT extern const char kH264CodecName[];
-RTC_EXPORT extern const char kHEVCCodecName[];
+RTC_EXPORT extern const char kHevcCodecName[];
+RTC_DEPRECATED RTC_EXPORT extern const char kHEVCCodecName[];
 
 // RFC 6184 RTP Payload Format for H.264 video
 RTC_EXPORT extern const char kH264FmtpProfileLevelId[];

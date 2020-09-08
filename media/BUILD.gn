@@ -107,6 +107,7 @@ rtc_library("rtc_media_base") {
     "../modules/rtp_rtcp:rtp_rtcp_format",
     "../rtc_base",
     "../rtc_base:checks",
+    "../rtc_base:deprecation",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:rtc_base_approved",
     "../rtc_base:rtc_task_queue",
