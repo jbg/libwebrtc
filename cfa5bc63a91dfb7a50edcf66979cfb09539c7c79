@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c22dec3_de38e7c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-08T09:43:58Z",
+      "side": 1,
+      "message": "Hi, do you think this is a reasonable approach? \n\nI guess the api change to make TargetLevelMs const should perhaps be a separate cl and we\u0027d need a way to transition downstream implementations.",
+      "revId": "cfa5bc63a91dfb7a50edcf66979cfb09539c7c79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb68f3ce_5cdca070",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-08T09:43:58Z",
+      "side": 1,
+      "message": "I think this is right for the new GetStats, but likely broken if used for old GetStats. What\u0027s the code path from old GetStats to here, if any?",
+      "range": {
+        "startLine": 807,
+        "startChar": 0,
+        "endLine": 807,
+        "endChar": 76
+      },
+      "revId": "cfa5bc63a91dfb7a50edcf66979cfb09539c7c79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
