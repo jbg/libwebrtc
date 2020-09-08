@@ -804,7 +804,7 @@ void ChannelReceive::SetDepacketizerToDecoderFrameTransformer(
 NetworkStatistics ChannelReceive::GetNetworkStatistics() const {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   NetworkStatistics stats;
-  acm_receiver_.GetNetworkStatistics(&stats);
+  acm_receiver_.GetNetworkStatistics(&stats, /*clobber_neteq_state=*/false);
   return stats;
 }
 
