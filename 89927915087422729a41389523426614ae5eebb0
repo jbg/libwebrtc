@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef8be6e_aa406108",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-08T17:46:48Z",
+      "side": 1,
+      "message": "These appear unused in webrtc. Some downstream projects need updating before this can be landed, though.",
+      "revId": "89927915087422729a41389523426614ae5eebb0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
