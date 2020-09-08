@@ -90,10 +90,10 @@ TEST_F(NetEqDecodingTest, MAYBE_TestBitExactness) {
                        "8d73c98645917cdeaaa01c20cf095ccc5a10b2b5");
 
   const std::string network_stats_checksum =
-      PlatformChecksum("3d186ea7e243abfdbd3d39b8ebf8f02a318117e4",
-                       "0b725774133da5dd823f2046663c12a76e0dbd79", "not used",
-                       "3d186ea7e243abfdbd3d39b8ebf8f02a318117e4",
-                       "3d186ea7e243abfdbd3d39b8ebf8f02a318117e4");
+      PlatformChecksum("8e50f528f245b7957db20ab406a72d81be60f5f4",
+                       "4260b22ea6d2723b2d573e50d2c1476680c7fa4c", "not used",
+                       "8e50f528f245b7957db20ab406a72d81be60f5f4",
+                       "8e50f528f245b7957db20ab406a72d81be60f5f4");
 
   DecodeAndCompare(input_rtp_file, output_checksum, network_stats_checksum,
                    absl::GetFlag(FLAGS_gen_ref));
