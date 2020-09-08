@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "fbcdf6b7_5ec5f8c4",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-08T13:51:15Z",
+      "side": 1,
+      "message": "So to distinguish, we\u0027d need two methods: VoiceMediaChannel::GetStats and VoiceMediaChannel::LegacyGetStats (or an extra argument). Which can then behave differently when they call down into NetEq.",
+      "parentUuid": "23b274ca_65c85b6a",
+      "range": {
+        "startLine": 807,
+        "startChar": 0,
+        "endLine": 807,
+        "endChar": 76
+      },
+      "revId": "cfa5bc63a91dfb7a50edcf66979cfb09539c7c79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea429253_040d0794",
         "filename": "modules/audio_coding/acm2/acm_receiver.cc",
         "patchSetId": 2
@@ -77,6 +101,30 @@
       "writtenOn": "2020-09-08T13:42:57Z",
       "side": 1,
       "message": "Why are some -1 or 1 instead of 0?",
+      "range": {
+        "startLine": 278,
+        "startChar": 34,
+        "endLine": 278,
+        "endChar": 36
+      },
+      "revId": "cfa5bc63a91dfb7a50edcf66979cfb09539c7c79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60484dce_3364a628",
+        "filename": "modules/audio_coding/acm2/acm_receiver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-08T13:51:15Z",
+      "side": 1,
+      "message": "Just for consistency with StatisticsCalculator::GetNetworkStatistics, which assigns -1 to the waiting-time related stats when no data is available.",
+      "parentUuid": "ea429253_040d0794",
       "range": {
         "startLine": 278,
         "startChar": 34,
