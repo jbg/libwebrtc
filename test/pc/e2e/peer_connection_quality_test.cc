@@ -109,7 +109,7 @@ PeerConnectionE2EQualityTest::PeerConnectionE2EQualityTest(
     std::unique_ptr<AudioQualityAnalyzerInterface> audio_quality_analyzer,
     std::unique_ptr<VideoQualityAnalyzerInterface> video_quality_analyzer)
     : time_controller_(time_controller),
-      task_queue_factory_(CreateDefaultTaskQueueFactory()),
+      task_queue_factory_(time_controller_.CreateTaskQueueFactory()),
       test_case_name_(std::move(test_case_name)),
       executor_(std::make_unique<TestActivitiesExecutor>(
           time_controller_.GetClock())) {
