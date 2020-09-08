@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abe005df_c208ba79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-09-08T14:49:57Z",
+      "side": 1,
+      "message": "This is plain cherry-pick to M86 branch.\nPlease +1 but don\u0027t land, approval pending...",
+      "revId": "93b7ddb198dac73d065c04a5dbba7fc3da2b18c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
