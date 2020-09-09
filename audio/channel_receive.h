@@ -99,7 +99,7 @@ class ChannelReceiveInterface : public RtpPacketSinkInterface {
   virtual double GetTotalOutputDuration() const = 0;
 
   // Stats.
-  virtual NetworkStatistics GetNetworkStatistics() const = 0;
+  virtual NetworkStatistics GetNetworkStatistics(bool enable_legacy) const = 0;
   virtual AudioDecodingCallStats GetDecodingCallStatistics() const = 0;
 
   // Audio+Video Sync.

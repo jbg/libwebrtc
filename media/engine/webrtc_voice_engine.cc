@@ -1249,10 +1249,10 @@ class WebRtcVoiceMediaChannel::WebRtcAudioReceiveStream {
     }
   }
 
-  webrtc::AudioReceiveStream::Stats GetStats() const {
+  webrtc::AudioReceiveStream::Stats GetStats(bool enable_legacy) const {
     RTC_DCHECK(worker_thread_checker_.IsCurrent());
     RTC_DCHECK(stream_);
-    return stream_->GetStats();
+    return stream_->GetStats(enable_legacy);
   }
 
   void SetRawAudioSink(std::unique_ptr<webrtc::AudioSinkInterface> sink) {
@@ -2300,7 +2300,8 @@ void WebRtcVoiceMediaChannel::OnReadyToSend(bool ready) {
       ready ? webrtc::kNetworkUp : webrtc::kNetworkDown);
 }
 
-bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
+bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info,
+                                       bool enable_legacy) {
   TRACE_EVENT0("webrtc", "WebRtcVoiceMediaChannel::GetStats");
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   RTC_DCHECK(info);
@@ -2353,7 +2354,8 @@ bool WebRtcVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
         continue;
       }
     }
-    webrtc::AudioReceiveStream::Stats stats = stream.second->GetStats();
+    webrtc::AudioReceiveStream::Stats stats =
+        stream.second->GetStats(enable_legacy);
     VoiceReceiverInfo rinfo;
     rinfo.add_ssrc(stats.remote_ssrc);
     rinfo.payload_bytes_rcvd = stats.payload_bytes_rcvd;
