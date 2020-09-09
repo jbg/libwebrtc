@@ -190,7 +190,7 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
      * Construct an AudioDeviceModule based on the supplied arguments. The caller takes ownership
      * and is responsible for calling release().
      */
-    public AudioDeviceModule createAudioDeviceModule() {
+    public JavaAudioDeviceModule createAudioDeviceModule() {
       Logging.d(TAG, "createAudioDeviceModule");
       if (useHardwareNoiseSuppressor) {
         Logging.d(TAG, "HW NS will be used.");
@@ -382,6 +382,16 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
   public void setPreferredInputDevice(AudioDeviceInfo preferredInputDevice) {
     Logging.d(TAG, "setPreferredInputDevice: " + preferredInputDevice);
     audioInput.setPreferredDevice(preferredInputDevice);
+  }
+
+  @RequiresApi(Build.VERSION_CODES.M)
+  public boolean setPreferredMicrophoneDirection(int direction) {
+    return audioInput.setPreferredMicrophoneDirection(direction);
+  }
+
+  @RequiresApi(Build.VERSION_CODES.M)
+  public boolean setPreferredMicrophoneFieldDimension(int direction) {
+    return audioInput.setPreferredMicrophoneFieldDimension(direction);
   }
 
   private static native long nativeCreateAudioDeviceModule(Context context,

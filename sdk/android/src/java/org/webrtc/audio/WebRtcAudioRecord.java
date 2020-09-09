@@ -351,6 +351,22 @@ class WebRtcAudioRecord {
     }
   }
 
+  @RequiresApi(Build.VERSION_CODES.M)
+  boolean setPreferredMicrophoneDirection(int direction) {
+    if (audioRecord != null) {
+      return audioRecord.setPreferredMicrophoneDirection(direction);
+    }
+    return false;
+  }
+
+  @RequiresApi(Build.VERSION_CODES.M)
+  boolean setPreferredMicrophoneFieldDimension(int zoom) {
+    if (audioRecord != null) {
+      return audioRecord.setPreferredMicrophoneFieldDimension(zoom);
+    }
+    return false;
+  }
+
   @CalledByNative
   private boolean startRecording() {
     Logging.d(TAG, "startRecording");
