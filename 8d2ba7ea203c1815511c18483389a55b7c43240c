@@ -16,6 +16,115 @@
       "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c498a846_fe511f28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-09T13:24:11Z",
+      "side": 1,
+      "message": "Code looks pretty good, but please add some more context to linked bug or commit message. Do you have some particular encoder or decoder in mind that handles NV12 efficiently?",
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c5d7bb7_509936de",
+        "filename": "api/video/nv12_buffer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-09T13:24:11Z",
+      "side": 1,
+      "message": "This is similar to I420Buffer. I wonder if the casts could be avoided (in both places), without making things overly verbose, by something like\n\nsize_t UVOffset() { return stride_y_ * height_; }  // as a private method\n\nconst uint8_t* NV12Buffer::DataUV() const {\n  return data_.get() + UVOffset();\n}\nuint8_t* NV12Buffer::MutableDataUV() {\n  return data_.get() + UVOffset();\n}\n\nBut not essential for this cl.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 1
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5761748f_77ce654b",
+        "filename": "api/video/nv12_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-09T13:24:11Z",
+      "side": 1,
+      "message": "Please add class comment, and describe or link to a definition of the NV12 format.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 56
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "518d4ea2_7211bfa8",
+        "filename": "api/video/test/nv12_buffer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-09T13:24:11Z",
+      "side": 1,
+      "message": "This kind of mirrors the production code under test. I think I\u0027d prefer a more explicit test not relying on libyuv. But I don\u0027t have that strong an opinion on that.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 76
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88575c2d_db57bce2",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-09T13:24:11Z",
+      "side": 1,
+      "message": "Do you expect to implement any other kinds of BiplanarYuvBuffer soon? If not, consider deleting one or both intermediate classes, to keep things simpler.",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 2
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
