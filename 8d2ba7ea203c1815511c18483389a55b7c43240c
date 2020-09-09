@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "aae3bcd5_62db4494",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-09T14:13:35Z",
+      "side": 1,
+      "message": "libvpx has NV12 support now, added information in the bug and the description.",
+      "parentUuid": "c498a846_fe511f28",
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c5d7bb7_509936de",
         "filename": "api/video/nv12_buffer.cc",
         "patchSetId": 4
@@ -56,6 +74,30 @@
       "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34e10eda_b4d1bf0d",
+        "filename": "api/video/nv12_buffer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-09T14:13:35Z",
+      "side": 1,
+      "message": "I don\u0027t like the const cast either, but kept it for consistency. I prefer removing them so will do as you suggested.",
+      "parentUuid": "0c5d7bb7_509936de",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 1
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "560e943f_617a9819",
+        "filename": "api/video/nv12_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-09T14:13:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5761748f_77ce654b",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 56
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "518d4ea2_7211bfa8",
         "filename": "api/video/test/nv12_buffer_unittest.cc",
         "patchSetId": 4
@@ -102,6 +168,30 @@
       "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bf38373_086e65d5",
+        "filename": "api/video/test/nv12_buffer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-09T14:13:35Z",
+      "side": 1,
+      "message": "Agreed, I can force set the YUV values instead.",
+      "parentUuid": "518d4ea2_7211bfa8",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 76
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -149,6 +239,30 @@
       "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73237fb1_5eed8470",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-09T14:13:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27c3479b_495bb50b",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 2
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
