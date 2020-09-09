@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c5b0853_dfde2a22",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-09T08:21:15Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 132,
+        "startChar": 6,
+        "endLine": 132,
+        "endChar": 22
+      },
+      "revId": "2686c10aab6dade6f1f5d52c0edafd51424812ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e660f7d7_1247d73a",
+        "filename": "api/video/nv12_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-09T08:21:15Z",
+      "side": 1,
+      "message": "(height+1)/2",
+      "range": {
+        "startLine": 25,
+        "startChar": 41,
+        "endLine": 25,
+        "endChar": 47
+      },
+      "revId": "2686c10aab6dade6f1f5d52c0edafd51424812ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "684fe6ff_b0d84f91",
+        "filename": "api/video/nv12_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-09T08:21:15Z",
+      "side": 1,
+      "message": "width + width%2",
+      "range": {
+        "startLine": 32,
+        "startChar": 39,
+        "endLine": 32,
+        "endChar": 44
+      },
+      "revId": "2686c10aab6dade6f1f5d52c0edafd51424812ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43b6cb2c_8a770aa8",
+        "filename": "api/video/nv12_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-09T08:21:15Z",
+      "side": 1,
+      "message": "((width+1) / 2)*2\nor\nwidth + width % 2\n\nThis is because there are ceil(width/2.0) columns, each one is 2 entries wide.",
+      "range": {
+        "startLine": 45,
+        "startChar": 27,
+        "endLine": 45,
+        "endChar": 32
+      },
+      "revId": "2686c10aab6dade6f1f5d52c0edafd51424812ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49f56fe9_90eed6e7",
+        "filename": "api/video/nv12_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-09T08:21:15Z",
+      "side": 1,
+      "message": "stride_y_",
+      "range": {
+        "startLine": 94,
+        "startChar": 23,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "2686c10aab6dade6f1f5d52c0edafd51424812ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67d096a2_36006ef8",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-09T08:21:15Z",
+      "side": 1,
+      "message": "Half resolution is NV12 detail. At Biplanar layer it can be anything.",
+      "range": {
+        "startLine": 183,
+        "startChar": 17,
+        "endLine": 183,
+        "endChar": 21
+      },
+      "revId": "2686c10aab6dade6f1f5d52c0edafd51424812ea",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
