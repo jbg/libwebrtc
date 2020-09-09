@@ -125,6 +125,30 @@
       "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27c3479b_495bb50b",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-09T13:27:33Z",
+      "side": 1,
+      "message": "Yes, we want to also add 16 bit biplanar format soon.",
+      "parentUuid": "88575c2d_db57bce2",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 2
+      },
+      "revId": "8d2ba7ea203c1815511c18483389a55b7c43240c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
