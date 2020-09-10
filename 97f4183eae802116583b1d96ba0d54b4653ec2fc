@@ -245,6 +245,30 @@
       "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62bf6877_94f944ac",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-10T17:02:41Z",
+      "side": 1,
+      "message": "not sure this is possible without massive refactor\nadded error log",
+      "parentUuid": "57031bb2_b5300756",
+      "range": {
+        "startLine": 356,
+        "startChar": 4,
+        "endLine": 356,
+        "endChar": 30
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
