@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "128fa5a9_dd1bda68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-10T17:01:00Z",
+      "side": 1,
+      "message": "\u003e I know too little of this code to properly review it.\n\u003e \n\u003e However, a general comment is that the CL description needs to be more through. I think a more thorough description is needed as well as a more descriptive title. In particular the term \"Micro\" is ambiguous/misleading and is not a generally used abbreviation for microphone. \n\noops.. i meant MicrophoneDirection",
+      "parentUuid": "e17f3b1d_f07a17a0",
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5275f5d8_146beb47",
         "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "21030689_60db1552",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-10T17:01:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5275f5d8_146beb47",
+      "range": {
+        "startLine": 387,
+        "startChar": 15,
+        "endLine": 387,
+        "endChar": 36
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7879de2_a3696859",
         "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
         "patchSetId": 1
@@ -62,6 +104,30 @@
       "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcb8cb73_d3fdc723",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-10T17:01:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7879de2_a3696859",
+      "range": {
+        "startLine": 388,
+        "startChar": 49,
+        "endLine": 388,
+        "endChar": 52
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -108,6 +174,54 @@
       "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca015f3f_c435e563",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-10T17:01:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1d2c7fb_3bfb4332",
+      "range": {
+        "startLine": 393,
+        "startChar": 58,
+        "endLine": 393,
+        "endChar": 67
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecc4ff4a_2f702787",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-10T17:01:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a580dfb8_2641c9f5",
+      "range": {
+        "startLine": 393,
+        "startChar": 54,
+        "endLine": 393,
+        "endChar": 57
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
