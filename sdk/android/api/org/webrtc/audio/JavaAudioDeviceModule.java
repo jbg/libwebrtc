@@ -10,6 +10,7 @@
 
 package org.webrtc.audio;
 
+import android.annotation.FloatRange;
 import android.content.Context;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
@@ -382,6 +383,39 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
   public void setPreferredInputDevice(AudioDeviceInfo preferredInputDevice) {
     Logging.d(TAG, "setPreferredInputDevice: " + preferredInputDevice);
     audioInput.setPreferredDevice(preferredInputDevice);
+  }
+
+  /**
+   * see
+   * https://developer.android.com/reference/android/media/MicrophoneDirection#setPreferredMicrophoneFieldDimension(float)
+   *
+   * Specifies the logical microphone (for processing). Applications can use this to specify
+   * which side of the device to optimize capture from. Typically used in conjunction with
+   * the camera capturing video.
+   * @param direction MIC_DIRECTION_UNSPECIFIED, MIC_DIRECTION_TOWARDS_USER,
+   *     MIC_DIRECTION_AWAY_FROM_USER, or MIC_DIRECTION_EXTERNAL
+   * @return true if sucessful.
+   */
+  @RequiresApi(Build.VERSION_CODES.Q)
+  public boolean setPreferredMicrophoneDirection(int direction) {
+    return audioInput.setPreferredMicrophoneDirection(direction);
+  }
+
+  /**
+   * see
+   * https://developer.android.com/reference/android/media/MicrophoneDirection#setPreferredMicrophoneFieldDimension(float)
+   *
+   * Specifies the zoom factor (i.e. the field dimension) for the selected microphone
+   * (for processing). The selected microphone is determined by the use-case for the stream.
+   *
+   * @param zoom the desired field dimension of microphone capture. Range is from -1 (wide angle),
+   * though 0 (no zoom) to 1 (maximum zoom).
+   * @return true if sucessful.
+   */
+  @RequiresApi(Build.VERSION_CODES.Q)
+  public boolean setPreferredMicrophoneFieldDimension(
+      @FloatRange(from = -1.0, to = 1.0) float zoom) {
+    return audioInput.setPreferredMicrophoneFieldDimension(zoom);
   }
 
   private static native long nativeCreateAudioDeviceModule(Context context,
