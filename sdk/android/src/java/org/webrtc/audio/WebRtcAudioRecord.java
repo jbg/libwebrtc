@@ -351,6 +351,24 @@ class WebRtcAudioRecord {
     }
   }
 
+  @RequiresApi(Build.VERSION_CODES.Q)
+  boolean setPreferredMicrophoneDirection(int direction) {
+    if (audioRecord != null) {
+      return audioRecord.setPreferredMicrophoneDirection(direction);
+    }
+    Logging.e(TAG, "audioRecord not created yet");
+    return false;
+  }
+
+  @RequiresApi(Build.VERSION_CODES.Q)
+  boolean setPreferredMicrophoneFieldDimension(int zoom) {
+    if (audioRecord != null) {
+      return audioRecord.setPreferredMicrophoneFieldDimension(zoom);
+    }
+    Logging.e(TAG, "audioRecord not created yet");
+    return false;
+  }
+
   @CalledByNative
   private boolean startRecording() {
     Logging.d(TAG, "startRecording");
