@@ -114,6 +114,30 @@
     },
     {
       "key": {
+        "uuid": "f5489877_e3da8ff5",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-10T13:08:49Z",
+      "side": 1,
+      "message": "Done (but with an extra argument, since that seemed simpler).\n\nThe change to the NetEqController interface will break downstream implementations. Would need to either back out that part for now, or do whatever little dance is needed to make that api change first.",
+      "parentUuid": "6242a78a_62a8e6cf",
+      "range": {
+        "startLine": 807,
+        "startChar": 0,
+        "endLine": 807,
+        "endChar": 76
+      },
+      "revId": "cfa5bc63a91dfb7a50edcf66979cfb09539c7c79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea429253_040d0794",
         "filename": "modules/audio_coding/acm2/acm_receiver.cc",
         "patchSetId": 2
