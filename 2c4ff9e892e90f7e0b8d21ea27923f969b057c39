@@ -46,6 +46,30 @@
       "revId": "2c4ff9e892e90f7e0b8d21ea27923f969b057c39",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5b1e928_6ebd6952",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 13704
+      },
+      "writtenOn": "2020-09-10T09:17:30Z",
+      "side": 1,
+      "message": "I chatted with Danil offline and skimmed through the code a bit and I don\u0027t think these two concepts map to each other.\n\nSince kHEVCCodecName is unused and H265X is not a standardized payload type I think it\u0027s better to remove this constant altogether.",
+      "parentUuid": "294c28b6_e8204b49",
+      "range": {
+        "startLine": 9,
+        "startChar": 43,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "2c4ff9e892e90f7e0b8d21ea27923f969b057c39",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
