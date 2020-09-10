@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e17f3b1d_f07a17a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-10T04:48:20Z",
+      "side": 1,
+      "message": "I know too little of this code to properly review it.\n\nHowever, a general comment is that the CL description needs to be more through. I think a more thorough description is needed as well as a more descriptive title. In particular the term \"Micro\" is ambiguous/misleading and is not a generally used abbreviation for microphone. ",
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
