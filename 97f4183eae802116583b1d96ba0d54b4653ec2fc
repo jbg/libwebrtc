@@ -16,6 +16,121 @@
       "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5275f5d8_146beb47",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-10T08:51:13Z",
+      "side": 1,
+      "message": "Is this correct? Docs says these APIs were added in API level 29.",
+      "range": {
+        "startLine": 387,
+        "startChar": 15,
+        "endLine": 387,
+        "endChar": 36
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7879de2_a3696859",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-10T08:51:13Z",
+      "side": 1,
+      "message": "The type is unclear here so I think we should add documentation what is expected as input.",
+      "range": {
+        "startLine": 388,
+        "startChar": 49,
+        "endLine": 388,
+        "endChar": 52
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a580dfb8_2641c9f5",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-10T08:51:13Z",
+      "side": 1,
+      "message": "The type is unclear here so I think we should add documentation what is expected as input.",
+      "range": {
+        "startLine": 393,
+        "startChar": 54,
+        "endLine": 393,
+        "endChar": 57
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1d2c7fb_3bfb4332",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-10T08:51:13Z",
+      "side": 1,
+      "message": "zoom",
+      "range": {
+        "startLine": 393,
+        "startChar": 58,
+        "endLine": 393,
+        "endChar": 67
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57031bb2_b5300756",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-10T08:51:13Z",
+      "side": 1,
+      "message": "Generally I don\u0027t like stateful APIs that fail silently. Here at least false is returned but would it be possible to instead force this to be called in the correct state? I think at least an error log would be good I think.",
+      "range": {
+        "startLine": 356,
+        "startChar": 4,
+        "endLine": 356,
+        "endChar": 30
+      },
+      "revId": "97f4183eae802116583b1d96ba0d54b4653ec2fc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
