@@ -138,6 +138,30 @@
     },
     {
       "key": {
+        "uuid": "e1d6652d_ecb7ff8c",
+        "filename": "audio/channel_receive.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-09-10T13:41:07Z",
+      "side": 1,
+      "message": "I think it might be possible to just add the const version of the function without removing the non-const one (although it can\u0027t be pure virtual at first). Then the existing one can be removed in a later CL once downstream is updated.",
+      "parentUuid": "f5489877_e3da8ff5",
+      "range": {
+        "startLine": 807,
+        "startChar": 0,
+        "endLine": 807,
+        "endChar": 76
+      },
+      "revId": "cfa5bc63a91dfb7a50edcf66979cfb09539c7c79",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea429253_040d0794",
         "filename": "modules/audio_coding/acm2/acm_receiver.cc",
         "patchSetId": 2
