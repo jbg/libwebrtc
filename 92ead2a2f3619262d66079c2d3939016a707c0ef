@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "205d2dbe_64b39cb2",
+        "filename": "modules/rtp_rtcp/source/rtcp_packet/compound_packet.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-09-11T13:20:26Z",
+      "side": 1,
+      "message": "no, there used to be an exception to iwyu style rule that having include in the matching header is enough,\nbut about a year ago that exception was removed to make rule and thus tooling simpler.",
+      "parentUuid": "c167c735_c5ae1f21",
+      "range": {
+        "startLine": 13,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "92ead2a2f3619262d66079c2d3939016a707c0ef",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f0612143_ce96df95",
         "filename": "modules/rtp_rtcp/source/rtcp_packet/compound_packet_unittest.cc",
         "patchSetId": 1
