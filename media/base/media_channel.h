@@ -834,7 +834,7 @@ class VoiceMediaChannel : public MediaChannel, public Delayable {
   // DTMF event 0-9, *, #, A-D.
   virtual bool InsertDtmf(uint32_t ssrc, int event, int duration) = 0;
   // Gets quality stats for the channel.
-  virtual bool GetStats(VoiceMediaInfo* info) = 0;
+  virtual bool GetStats(VoiceMediaInfo* info, bool enable_legacy) = 0;
 
   virtual void SetRawAudioSink(
       uint32_t ssrc,
