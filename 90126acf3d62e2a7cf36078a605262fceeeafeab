@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d7adf37_8a81f6a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-11T12:35:29Z",
+      "side": 1,
+      "message": "Extended the cl description. Should be landable, if the internal tests pass.\n\nHenrik, can you review as stats expert? Who else would you suggest for OWNER\u0027s review?\n\nI could also try to split it up, one cl per layer, if you think that makes things easier.",
+      "revId": "90126acf3d62e2a7cf36078a605262fceeeafeab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
