@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': '86121ae2967e4d07c7256c6be352f28e92398949',
+  'chromium_revision': 'f10c723b08e4b3046180146bb248d02488937e48',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -22,7 +22,7 @@ deps = {
   # TODO(kjellander): Move this to be Android-only once the libevent dependency
   # in base/third_party/libevent is solved.
   'src/base':
-    'https://chromium.googlesource.com/chromium/src/base@73944f028ad0ea80da7d2b82003c5234a22e5718',
+    'https://chromium.googlesource.com/chromium/src/base@5cb8483a1fbccf04133fc70946c90ea617d861fa',
   'src/build':
     'https://chromium.googlesource.com/chromium/src/build@70c88ee24c9e5f5df557875b1a0eb1d1868a2c61',
   'src/buildtools':
@@ -33,13 +33,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@f2002b3a38e91079a9c4b05221c3fcab8f5c8a13',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@bc3c13ceacacd6e07351e060757056a580a84b4f',
     'condition': 'checkout_ios',
   },
   'src/testing':
-    'https://chromium.googlesource.com/chromium/src/testing@be60d05e598071b7450bc88dd021635b3c06c7b8',
+    'https://chromium.googlesource.com/chromium/src/testing@39ec8a37542c0114b30dbaa9521c468060369528',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@bfc6d375e00a9f650ee85fd3d1e6491bfe7752dc',
+    'https://chromium.googlesource.com/chromium/src/third_party@c91d4ecf0dc6b0628dc4dace2467944d11670eb4',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -198,7 +198,7 @@ deps = {
   'src/third_party/libFuzzer/src':
     'https://chromium.googlesource.com/chromium/llvm-project/compiler-rt/lib/fuzzer.git@debe7d2d1982e540fbd6bd78604bf001753f9e74',
   'src/third_party/libjpeg_turbo':
-    'https://chromium.googlesource.com/chromium/deps/libjpeg_turbo.git@9d4f8005bc6c888e66b00fd00188531ee9bd3344',
+    'https://chromium.googlesource.com/chromium/deps/libjpeg_turbo.git@8ca19625de302b0af290e3e0cdeff24a1c272d39',
   'src/third_party/libsrtp':
     'https://chromium.googlesource.com/chromium/deps/libsrtp.git@650611720ecc23e0e6b32b0e3100f8b4df91696c',
   'src/third_party/libaom/source/libaom':
@@ -265,7 +265,7 @@ deps = {
     'condition': 'checkout_win',
   },
   'src/tools':
-    'https://chromium.googlesource.com/chromium/src/tools@e4c4eb613f397d62558ebc62a0fd3db9e58c00d5',
+    'https://chromium.googlesource.com/chromium/src/tools@16c0d430bd7572b9f2c7d2d5a6c5ea5856365e0b',
   'src/tools/swarming_client':
     'https://chromium.googlesource.com/infra/luci/client-py.git@4c095d04179dc725a300085ae21fe3b79900d072',
 
