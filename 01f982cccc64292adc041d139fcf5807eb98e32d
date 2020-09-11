@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "537c238b_25d1f2f6",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-11T10:50:45Z",
+      "side": 1,
+      "message": "I think we should add more context. i.e.:\nsetPreferredMicrophoneDirection failed: audioRecord not created yet",
+      "range": {
+        "startLine": 359,
+        "startChar": 20,
+        "endLine": 359,
+        "endChar": 47
+      },
+      "revId": "01f982cccc64292adc041d139fcf5807eb98e32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b496405f_fcaf40d9",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-11T10:50:45Z",
+      "side": 1,
+      "message": "I think we should add more context. i.e.:\nsetPreferredMicrophoneFieldDimension failed: audioRecord not created yet",
+      "range": {
+        "startLine": 368,
+        "startChar": 4,
+        "endLine": 368,
+        "endChar": 50
+      },
+      "revId": "01f982cccc64292adc041d139fcf5807eb98e32d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
