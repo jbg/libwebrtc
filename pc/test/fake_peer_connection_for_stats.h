@@ -36,7 +36,7 @@ class FakeVoiceMediaChannelForStats : public cricket::FakeVoiceMediaChannel {
   }
 
   // VoiceMediaChannel overrides.
-  bool GetStats(cricket::VoiceMediaInfo* info) override {
+  bool GetStats(cricket::VoiceMediaInfo* info, bool enable_legacy) override {
     if (stats_) {
       *info = *stats_;
       return true;

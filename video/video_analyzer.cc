@@ -522,7 +522,8 @@ void VideoAnalyzer::PollStats() {
   }
 
   if (audio_receive_stream_ != nullptr) {
-    AudioReceiveStream::Stats receive_stats = audio_receive_stream_->GetStats();
+    AudioReceiveStream::Stats receive_stats =
+        audio_receive_stream_->GetStats(/*enable_legacy=*/true);
     audio_expand_rate_.AddSample(receive_stats.expand_rate);
     audio_accelerate_rate_.AddSample(receive_stats.accelerate_rate);
     audio_jitter_buffer_ms_.AddSample(receive_stats.jitter_buffer_ms);

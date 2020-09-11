@@ -212,7 +212,8 @@ void ReceiveAudioStream::Stop() {
 
 AudioReceiveStream::Stats ReceiveAudioStream::GetStats() const {
   AudioReceiveStream::Stats result;
-  receiver_->SendTask([&] { result = receive_stream_->GetStats(); });
+  receiver_->SendTask(
+      [&] { result = receive_stream_->GetStats(/*enable_legacy=*/true); });
   return result;
 }
 
