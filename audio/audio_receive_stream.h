@@ -67,7 +67,7 @@ class AudioReceiveStream final : public webrtc::AudioReceiveStream,
   void Reconfigure(const webrtc::AudioReceiveStream::Config& config) override;
   void Start() override;
   void Stop() override;
-  webrtc::AudioReceiveStream::Stats GetStats() const override;
+  webrtc::AudioReceiveStream::Stats GetStats(bool enable_legacy) const override;
   void SetSink(AudioSinkInterface* sink) override;
   void SetGain(float gain) override;
   bool SetBaseMinimumPlayoutDelayMs(int delay_ms) override;

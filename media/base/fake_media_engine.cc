@@ -183,7 +183,7 @@ absl::optional<int> FakeVoiceMediaChannel::GetBaseMinimumPlayoutDelayMs(
   }
   return absl::nullopt;
 }
-bool FakeVoiceMediaChannel::GetStats(VoiceMediaInfo* info) {
+bool FakeVoiceMediaChannel::GetStats(VoiceMediaInfo* info, bool enable_legacy) {
   return false;
 }
 void FakeVoiceMediaChannel::SetRawAudioSink(
