@@ -33,6 +33,40 @@
       "revId": "90126acf3d62e2a7cf36078a605262fceeeafeab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b41608c4_fd00e3ba",
+        "filename": "audio/channel_receive.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-14T08:11:57Z",
+      "side": 1,
+      "message": "Document the new argument? And I\u0027d be glad if you gave it a more descriptive name, too---\"clear_stats\"?",
+      "revId": "90126acf3d62e2a7cf36078a605262fceeeafeab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d730f810_974c0ba9",
+        "filename": "modules/audio_coding/acm2/acm_receiver.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-14T08:11:57Z",
+      "side": 1,
+      "message": "Document the new argument?\nWhy not the same name as in other places?",
+      "revId": "90126acf3d62e2a7cf36078a605262fceeeafeab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
