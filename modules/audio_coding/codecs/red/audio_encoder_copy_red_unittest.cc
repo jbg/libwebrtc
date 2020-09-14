@@ -381,6 +381,43 @@ TEST_F(AudioEncoderCopyRedTest, RespectsPayloadMTU) {
   EXPECT_EQ(encoded_.size(), 5u + 500u + 400u);
 }
 
+TEST_F(AudioEncoderCopyRedTest, EncodesOnlyActiveSpeech) {
+  const int primary_payload_type = red_payload_type_ + 1;
+  AudioEncoder::EncodedInfo info;
+  info.encoded_bytes = 600;
+  info.encoded_timestamp = timestamp_;
+  info.payload_type = primary_payload_type;
+
+  EXPECT_CALL(*mock_encoder_, EncodeImpl(_, _, _))
+      .WillOnce(Invoke(MockAudioEncoder::FakeEncoding(info)));
+  Encode();
+
+  // Encode a non-speech packet.
+  info.encoded_timestamp = timestamp_;  // update timestamp.
+  info.encoded_bytes = 3;
+  info.speech = false;
+  EXPECT_CALL(*mock_encoder_, EncodeImpl(_, _, _))
+      .WillOnce(Invoke(MockAudioEncoder::FakeEncoding(info)));
+  Encode();  // Second call will produce a redundant encoding.
+
+  EXPECT_EQ(encoded_.size(), 5u + 600u + 3u);
+
+  info.encoded_timestamp = timestamp_;  // update timestamp.
+  info.encoded_bytes = 400;
+  info.speech = true;
+  EXPECT_CALL(*mock_encoder_, EncodeImpl(_, _, _))
+      .WillOnce(Invoke(MockAudioEncoder::FakeEncoding(info)));
+  Encode();  // Third call will encode as RED to protect the third packet.
+  EXPECT_EQ(encoded_.size(), 9u + 600u + 3u + 400u);
+
+  info.encoded_timestamp = timestamp_;  // update timestamp.
+  info.encoded_bytes = 400;
+  EXPECT_CALL(*mock_encoder_, EncodeImpl(_, _, _))
+      .WillOnce(Invoke(MockAudioEncoder::FakeEncoding(info)));
+  Encode();  // Fourth call will not encode the second non-speech packet.
+  EXPECT_EQ(encoded_.size(), 5u + 400u + 400u);
+}
+
 #if GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
 
 // This test fixture tests various error conditions that makes the
