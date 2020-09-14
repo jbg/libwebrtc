@@ -61,21 +61,6 @@ int AudioEncoderCopyRed::GetTargetBitrate() const {
   return speech_encoder_->GetTargetBitrate();
 }
 
-size_t AudioEncoderCopyRed::CalculateHeaderLength(size_t encoded_bytes) const {
-  size_t header_size = 1;
-  size_t bytes_available = max_packet_length_ - encoded_bytes;
-  if (secondary_info_.encoded_bytes > 0 &&
-      secondary_info_.encoded_bytes < bytes_available) {
-    header_size += 4;
-    bytes_available -= secondary_info_.encoded_bytes;
-  }
-  if (tertiary_info_.encoded_bytes > 0 &&
-      tertiary_info_.encoded_bytes < bytes_available) {
-    header_size += 4;
-  }
-  return header_size > 1 ? header_size : 0;
-}
-
 AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
     uint32_t rtp_timestamp,
     rtc::ArrayView<const int16_t> audio,
@@ -91,17 +76,44 @@ AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
   }
   RTC_DCHECK_GT(max_packet_length_, info.encoded_bytes);
 
+  size_t header_length_bytes = 1;
+  size_t bytes_available = max_packet_length_ - info.encoded_bytes;
+  bool encode_secondary = secondary_info_.encoded_bytes > 0 &&
+                          secondary_info_.speech &&
+                          secondary_info_.encoded_bytes < bytes_available;
+  if (encode_secondary) {
+    header_length_bytes += 4;
+    bytes_available -= secondary_info_.encoded_bytes + 4;
+  }
+  bool encode_tertiary = tertiary_info_.encoded_bytes > 0 &&
+                         tertiary_info_.speech &&
+                         tertiary_info_.encoded_bytes < bytes_available;
+  if (encode_tertiary) {
+    header_length_bytes += 4;
+  }
+  if (!encode_secondary && encode_tertiary) {
+    // Encoding tertiary without secondary gives ambigious output as the
+    // receiver can not tell what the sequence number of the redundant packet
+    // was.
+    if (secondary_info_.encoded_bytes + tertiary_info_.encoded_bytes <
+        bytes_available + 4) {
+      encode_secondary = true;
+      header_length_bytes += 4;
+    } else {
+      encode_tertiary = false;
+      header_length_bytes -= 4;
+    }
+  }
+  if (header_length_bytes == 1) {
+    header_length_bytes = 0;
+  }
   // Allocate room for RFC 2198 header if there is redundant data.
   // Otherwise this will send the primary payload type without
   // wrapping in RED.
-  const size_t header_length_bytes = CalculateHeaderLength(info.encoded_bytes);
   encoded->SetSize(header_length_bytes);
 
   size_t header_offset = 0;
-  size_t bytes_available = max_packet_length_ - info.encoded_bytes;
-  if (tertiary_info_.encoded_bytes > 0 &&
-      tertiary_info_.encoded_bytes + secondary_info_.encoded_bytes <
-          bytes_available) {
+  if (encode_tertiary) {
     encoded->AppendData(tertiary_encoded_);
 
     const uint32_t timestamp_delta =
@@ -112,11 +124,9 @@ AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
                  (timestamp_delta << 2) | (tertiary_info_.encoded_bytes >> 8));
     encoded->data()[header_offset + 3] = tertiary_info_.encoded_bytes & 0xff;
     header_offset += 4;
-    bytes_available -= tertiary_info_.encoded_bytes;
   }
 
-  if (secondary_info_.encoded_bytes > 0 &&
-      secondary_info_.encoded_bytes < bytes_available) {
+  if (encode_secondary) {
     encoded->AppendData(secondary_encoded_);
 
     const uint32_t timestamp_delta =
@@ -127,7 +137,6 @@ AudioEncoder::EncodedInfo AudioEncoderCopyRed::EncodeImpl(
                  (timestamp_delta << 2) | (secondary_info_.encoded_bytes >> 8));
     encoded->data()[header_offset + 3] = secondary_info_.encoded_bytes & 0xff;
     header_offset += 4;
-    bytes_available -= secondary_info_.encoded_bytes;
   }
 
   encoded->AppendData(primary_encoded);
