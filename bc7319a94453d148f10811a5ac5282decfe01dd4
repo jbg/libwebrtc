@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0da0e52e_baee54ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-09-14T07:59:27Z",
+      "side": 1,
+      "message": "ping. Boris Grozev found an interesting twist which required an update.\n\nIt is not possible to encode the current packet (N) and the second last packet as the receiver (or an SFU in the middle) has no way to tell [N, N-2] and [N, N-1] apart unless making assumptions about the clockrate/ptime and those assumptions are not safe.\nThe current implementation does \"also encode the secondary iff you have enough room\".\nThis is a bit more complicated than \"do not encode the tertiary if you do not encode secondary\" but theoretically gives a slightly higher protection. I don\u0027t think the practical difference is that bit.",
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
