@@ -37,6 +37,7 @@ group("rtc_tools") {
     if (rtc_enable_protobuf) {
       if (!build_with_chromium) {
         deps += [ ":event_log_visualizer" ]
+        deps += [ ":rtc_event_log_reencoder" ]
       }
       deps += [
         ":audioproc_f",
@@ -378,6 +379,43 @@ if (!build_with_chromium) {
         "//third_party/abseil-cpp/absl/types:optional",
       ]
     }
+
+    rtc_library("rtc_event_log_reencoder_utils") {
+      testonly = true
+      sources = [
+        "rtc_event_log_reencoder/reencode.cc",
+        "rtc_event_log_reencoder/reencode.h",
+      ]
+      deps = [
+        "../api:rtc_event_log_output_file",
+        "../api:rtp_headers",
+        "../api:rtp_parameters",
+        "../api/rtc_event_log",
+        "../api/rtc_event_log",
+        "../api/rtc_event_log:rtc_event_log_factory",
+        "../api/task_queue:default_task_queue_factory",
+        "../api/transport:network_control",
+        "../logging:ice_log",
+        "../logging:rtc_event_audio",
+        "../logging:rtc_event_bwe",
+        "../logging:rtc_event_frame_events",
+        "../logging:rtc_event_generic_packet_events",
+        "../logging:rtc_event_log2_proto",
+        "../logging:rtc_event_log_impl_encoder",
+        "../logging:rtc_event_log_parser",
+        "../logging:rtc_event_log_proto",
+        "../logging:rtc_event_pacing",
+        "../logging:rtc_event_rtp_rtcp",
+        "../logging:rtc_event_video",
+        "../logging:rtc_stream_config",
+        "../modules/remote_bitrate_estimator",
+        "../modules/rtp_rtcp:rtp_rtcp_format",
+        "../rtc_base:checks",
+        "../rtc_base:protobuf_utils",
+        "../rtc_base:rtc_base_approved",
+        "../rtc_base:rtc_base_tests_utils",
+      ]
+    }
   }
 }
 
@@ -448,6 +486,29 @@ if (rtc_include_tests) {
         "//third_party/abseil-cpp/absl/flags:parse",
         "//third_party/abseil-cpp/absl/flags:usage",
         "//third_party/abseil-cpp/absl/strings",
+      ]
+    }
+
+    rtc_executable("rtc_event_log_reencoder") {
+      testonly = true
+      sources = [ "rtc_event_log_reencoder/main.cc" ]
+      deps = [
+        ":rtc_event_log_reencoder_utils",
+        "../rtc_base:checks",
+        "../rtc_base:logging",
+        "../rtc_base:protobuf_utils",
+        "../rtc_base:rtc_base",
+        "../system_wrappers:field_trial",
+        "../test:field_trial",
+
+        #"../test:fileutils",
+        #"../test:test_support",
+
+        "../logging:rtc_event_log_parser",
+        "//third_party/abseil-cpp/absl/flags:config",
+        "//third_party/abseil-cpp/absl/flags:flag",
+        "//third_party/abseil-cpp/absl/flags:parse",
+        "//third_party/abseil-cpp/absl/flags:usage",
       ]
     }
   }

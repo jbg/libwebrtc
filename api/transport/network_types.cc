@@ -13,6 +13,9 @@
 #include <algorithm>
 
 namespace webrtc {
+
+constexpr int PacedPacketInfo::kNotAProbe;
+
 StreamsConfig::StreamsConfig() = default;
 StreamsConfig::StreamsConfig(const StreamsConfig&) = default;
 StreamsConfig::~StreamsConfig() = default;
