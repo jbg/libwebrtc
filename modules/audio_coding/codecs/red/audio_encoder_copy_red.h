@@ -72,8 +72,6 @@ class AudioEncoderCopyRed final : public AudioEncoder {
                          rtc::Buffer* encoded) override;
 
  private:
-  size_t CalculateHeaderLength(size_t encoded_bytes) const;
-
   std::unique_ptr<AudioEncoder> speech_encoder_;
   size_t max_packet_length_;
   int red_payload_type_;
