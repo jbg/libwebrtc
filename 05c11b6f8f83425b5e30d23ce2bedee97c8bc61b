@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b99a2230_62d844f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-09-15T00:42:05Z",
+      "side": 1,
+      "message": "Hi Tommi, Jaime,\n\nThis is the next CL in the series to add a window capturer that uses the Windows.Graphics.Capture APIs, PTAL.\n\nThanks,\nAustin Orion",
+      "revId": "05c11b6f8f83425b5e30d23ce2bedee97c8bc61b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
