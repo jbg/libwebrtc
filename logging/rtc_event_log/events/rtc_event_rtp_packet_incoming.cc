@@ -27,6 +27,18 @@ RtcEventRtpPacketIncoming::RtcEventRtpPacketIncoming(
 }
 
 RtcEventRtpPacketIncoming::RtcEventRtpPacketIncoming(
+    const RtpPacketReceived& packet,
+    size_t header_length)
+    : payload_length_(packet.payload_size()),
+      header_length_(header_length),
+      padding_length_(packet.padding_size()) {
+  header_.CopyHeaderFrom(packet);
+  RTC_DCHECK_GE(header_length, packet.headers_size());
+  RTC_DCHECK_LE(packet.size(),
+                payload_length_ + header_length_ + padding_length_);
+}
+
+RtcEventRtpPacketIncoming::RtcEventRtpPacketIncoming(
     const RtcEventRtpPacketIncoming& other)
     : RtcEvent(other.timestamp_us_),
       payload_length_(other.payload_length_),

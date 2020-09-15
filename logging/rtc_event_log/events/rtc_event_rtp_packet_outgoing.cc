@@ -29,6 +29,20 @@ RtcEventRtpPacketOutgoing::RtcEventRtpPacketOutgoing(
 }
 
 RtcEventRtpPacketOutgoing::RtcEventRtpPacketOutgoing(
+    const RtpPacketToSend& packet,
+    int probe_cluster_id,
+    size_t header_length)
+    : payload_length_(packet.payload_size()),
+      header_length_(header_length),
+      padding_length_(packet.padding_size()),
+      probe_cluster_id_(probe_cluster_id) {
+  header_.CopyHeaderFrom(packet);
+  RTC_DCHECK_GE(header_length_, packet.headers_size());
+  RTC_DCHECK_LE(packet.size(),
+                payload_length_ + header_length_ + padding_length_);
+}
+
+RtcEventRtpPacketOutgoing::RtcEventRtpPacketOutgoing(
     const RtcEventRtpPacketOutgoing& other)
     : RtcEvent(other.timestamp_us_),
       payload_length_(other.payload_length_),

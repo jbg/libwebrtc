@@ -22,6 +22,14 @@ class RtpPacketToSend;
 
 class RtcEventRtpPacketOutgoing final : public RtcEvent {
  public:
+  static std::unique_ptr<RtcEventRtpPacketOutgoing> CreateForTesting(
+      const RtpPacketToSend& packet,
+      int probe_cluster_id,
+      size_t header_length) {
+    return std::unique_ptr<RtcEventRtpPacketOutgoing>(
+        new RtcEventRtpPacketOutgoing(packet, probe_cluster_id, header_length));
+  }
+
   RtcEventRtpPacketOutgoing(const RtpPacketToSend& packet,
                             int probe_cluster_id);
   ~RtcEventRtpPacketOutgoing() override;
@@ -43,6 +51,9 @@ class RtcEventRtpPacketOutgoing final : public RtcEvent {
   int probe_cluster_id() const { return probe_cluster_id_; }
 
  private:
+  RtcEventRtpPacketOutgoing(const RtpPacketToSend& packet,
+                            int probe_cluster_id,
+                            size_t header_length);
   RtcEventRtpPacketOutgoing(const RtcEventRtpPacketOutgoing& other);
 
   RtpPacket header_;  // Only the packet's header will be stored here.

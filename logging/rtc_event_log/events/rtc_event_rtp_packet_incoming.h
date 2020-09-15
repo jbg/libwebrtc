@@ -22,6 +22,13 @@ class RtpPacketReceived;
 
 class RtcEventRtpPacketIncoming final : public RtcEvent {
  public:
+  static std::unique_ptr<RtcEventRtpPacketIncoming> CreateForTesting(
+      const RtpPacketReceived& packet,
+      size_t header_length) {
+    return std::unique_ptr<RtcEventRtpPacketIncoming>(
+        new RtcEventRtpPacketIncoming(packet, header_length));
+  }
+
   explicit RtcEventRtpPacketIncoming(const RtpPacketReceived& packet);
   ~RtcEventRtpPacketIncoming() override;
 
@@ -41,6 +48,8 @@ class RtcEventRtpPacketIncoming final : public RtcEvent {
   size_t padding_length() const { return padding_length_; }
 
  private:
+  RtcEventRtpPacketIncoming(const RtpPacketReceived& packet,
+                            size_t header_length);
   RtcEventRtpPacketIncoming(const RtcEventRtpPacketIncoming& other);
 
   RtpPacket header_;  // Only the packet's header will be stored here.
