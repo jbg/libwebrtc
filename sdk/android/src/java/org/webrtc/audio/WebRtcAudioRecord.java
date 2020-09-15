@@ -31,7 +31,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.webrtc.CalledByNative;
 import org.webrtc.Logging;
 import org.webrtc.ThreadUtils;
@@ -90,7 +92,7 @@ class WebRtcAudioRecord {
   private @Nullable AudioRecordThread audioThread;
   private @Nullable AudioDeviceInfo preferredDevice;
 
-  private @Nullable ScheduledExecutorService executor;
+  private final ScheduledExecutorService executor;
   private @Nullable ScheduledFuture<String> future;
 
   private volatile boolean microphoneMute;
@@ -179,14 +181,15 @@ class WebRtcAudioRecord {
 
   @CalledByNative
   WebRtcAudioRecord(Context context, AudioManager audioManager) {
-    this(context, audioManager, DEFAULT_AUDIO_SOURCE, DEFAULT_AUDIO_FORMAT,
-        null /* errorCallback */, null /* stateCallback */, null /* audioSamplesReadyCallback */,
-        WebRtcAudioEffects.isAcousticEchoCancelerSupported(),
+    this(context, newDefaultScheduler() /* scheduler */, audioManager, DEFAULT_AUDIO_SOURCE,
+        DEFAULT_AUDIO_FORMAT, null /* errorCallback */, null /* stateCallback */,
+        null /* audioSamplesReadyCallback */, WebRtcAudioEffects.isAcousticEchoCancelerSupported(),
         WebRtcAudioEffects.isNoiseSuppressorSupported());
   }
 
-  public WebRtcAudioRecord(Context context, AudioManager audioManager, int audioSource,
-      int audioFormat, @Nullable AudioRecordErrorCallback errorCallback,
+  public WebRtcAudioRecord(Context context, ScheduledExecutorService scheduler,
+      AudioManager audioManager, int audioSource, int audioFormat,
+      @Nullable AudioRecordErrorCallback errorCallback,
       @Nullable AudioRecordStateCallback stateCallback,
       @Nullable SamplesReadyCallback audioSamplesReadyCallback,
       boolean isAcousticEchoCancelerSupported, boolean isNoiseSuppressorSupported) {
@@ -197,6 +200,7 @@ class WebRtcAudioRecord {
       throw new IllegalArgumentException("HW NS not supported");
     }
     this.context = context;
+    this.executor = scheduler;
     this.audioManager = audioManager;
     this.audioSource = audioSource;
     this.audioFormat = audioFormat;
@@ -386,10 +390,6 @@ class WebRtcAudioRecord {
       }
       future = null;
     }
-    if (executor != null) {
-      executor.shutdownNow();
-      executor = null;
-    }
     audioThread.stopThread();
     if (!ThreadUtils.joinUninterruptibly(audioThread, AUDIO_RECORD_THREAD_JOIN_TIMEOUT_MS)) {
       Logging.e(TAG, "Join of AudioRecordJavaThread timed out");
@@ -569,10 +569,6 @@ class WebRtcAudioRecord {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
       return;
     }
-    if (executor != null) {
-      executor.shutdownNow();
-    }
-    executor = Executors.newSingleThreadScheduledExecutor();
 
     Callable<String> callable = () -> {
       logRecordingConfigurations(true /* verifyAudioConfig */);
@@ -703,5 +699,20 @@ class WebRtcAudioRecord {
       default:
         return "INVALID";
     }
+  }
+
+  private static final AtomicInteger nextSchedulerId = new AtomicInteger(0);
+
+  static ScheduledExecutorService newDefaultScheduler() {
+    AtomicInteger nextThreadId = new AtomicInteger(0);
+    return Executors.newScheduledThreadPool(0, new ThreadFactory() {
+      @Override
+      public Thread newThread(Runnable r) {
+        Thread thread = Executors.defaultThreadFactory().newThread(r);
+        thread.setName(String.format("WebRtcAudioRecordScheduler-%s-%s",
+            nextSchedulerId.getAndIncrement(), nextThreadId.getAndIncrement()));
+        return thread;
+      }
+    });
   }
 }
