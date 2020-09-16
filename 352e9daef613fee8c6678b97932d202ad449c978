@@ -22,6 +22,30 @@
       "revId": "352e9daef613fee8c6678b97932d202ad449c978",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24177955_b7bc8eda",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2020-09-16T09:57:44Z",
+      "side": 0,
+      "message": "It was added in https://webrtc-review.googlesource.com/c/src/+/150793 originally. See the description in that CL. I think it has been used and adds value when debugging issues. I don\u0027t know the details why this change is done but we should try to maintain the current logging functionality unless it is shown to cause issues.",
+      "parentUuid": "518ba264_0a26636a",
+      "range": {
+        "startLine": 572,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 60
+      },
+      "revId": "352e9daef613fee8c6678b97932d202ad449c978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
