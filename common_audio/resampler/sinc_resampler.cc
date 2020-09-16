@@ -127,12 +127,18 @@ void SincResampler::InitializeCPUSpecificFeatures() {
   convolve_proc_ = Convolve_NEON;
 #elif defined(WEBRTC_ARCH_X86_FAMILY)
   // Using AVX2 instead of SSE2 when AVX2 supported.
-  if (GetCPUInfo(kAVX2))
+  if (GetCPUInfo(kAVX2)) {
     convolve_proc_ = Convolve_AVX2;
-  else if (GetCPUInfo(kSSE2))
+    printf("Using AVX2 - Resampler\n");
+  }
+  else if (GetCPUInfo(kSSE2)) {
     convolve_proc_ = Convolve_SSE;
-  else
+    printf("Using SSE2 - Resampler\n");
+  }
+  else {
+    printf("Not using SIMD - Resampler\n");
     convolve_proc_ = Convolve_C;
+  }
 #else
   // Unknown architecture.
   convolve_proc_ = Convolve_C;
