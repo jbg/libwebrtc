@@ -46,6 +46,30 @@
       "revId": "352e9daef613fee8c6678b97932d202ad449c978",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c042651_bf8ec654",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-16T10:01:26Z",
+      "side": 0,
+      "message": "Right, I don\u0027t think this change intends to change anything around logging. I was just wondering if you had some reason to destroy and recreate the executor each time this method is called?",
+      "parentUuid": "24177955_b7bc8eda",
+      "range": {
+        "startLine": 572,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 60
+      },
+      "revId": "352e9daef613fee8c6678b97932d202ad449c978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
