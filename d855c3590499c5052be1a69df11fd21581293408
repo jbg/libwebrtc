@@ -22,6 +22,30 @@
       "revId": "d855c3590499c5052be1a69df11fd21581293408",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afde3791_3e14a8ee",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-16T16:07:24Z",
+      "side": 1,
+      "message": "the executor will live but remains very cheap, but thread will shutdown automatically\n\nthe usual use case is that this module is only created once per application start",
+      "parentUuid": "3738deca_e8bad720",
+      "range": {
+        "startLine": 220,
+        "startChar": 19,
+        "endLine": 220,
+        "endChar": 59
+      },
+      "revId": "d855c3590499c5052be1a69df11fd21581293408",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
