@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3738deca_e8bad720",
+        "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-16T09:48:24Z",
+      "side": 1,
+      "message": "Who will shut it down now?",
+      "range": {
+        "startLine": 220,
+        "startChar": 19,
+        "endLine": 220,
+        "endChar": 59
+      },
+      "revId": "d855c3590499c5052be1a69df11fd21581293408",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
