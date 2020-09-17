@@ -16,6 +16,23 @@
       "revId": "e5b8aef85e2f0a8f06c0a2167abcc7135dcf5c9e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf59e31c_bbf9025e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2020-09-17T17:10:45Z",
+      "side": 1,
+      "message": "CR -1 temporarily to avoid accidental landing before merge approval.",
+      "revId": "e5b8aef85e2f0a8f06c0a2167abcc7135dcf5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
