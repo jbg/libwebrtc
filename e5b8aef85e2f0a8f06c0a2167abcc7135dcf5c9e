@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "188c272c_4a5083b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2020-09-17T17:07:10Z",
+      "side": 1,
+      "message": "Hi PTAL,\n\nThis patch is the same as the original, except for some minor removals in socket_unittest.cc",
+      "revId": "e5b8aef85e2f0a8f06c0a2167abcc7135dcf5c9e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
