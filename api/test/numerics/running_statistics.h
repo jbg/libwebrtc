@@ -16,8 +16,8 @@
 #include <limits>
 
 #include "absl/types/optional.h"
+#include "api/test/numerics/math_utils.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/numerics/math_utils.h"
 
 namespace webrtc {
 

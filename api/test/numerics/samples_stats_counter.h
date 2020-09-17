@@ -14,9 +14,9 @@
 #include <vector>
 
 #include "api/array_view.h"
+#include "api/test/numerics/running_statistics.h"
 #include "api/units/timestamp.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/numerics/running_statistics.h"
 
 namespace webrtc {
 
