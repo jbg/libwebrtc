@@ -34,6 +34,10 @@ bool DeactivateTransparentMode() {
   return field_trial::IsEnabled("WebRTC-Aec3TransparentModeKillSwitch");
 }
 
+bool DeactivateTransparentModeHmm() {
+  return field_trial::IsEnabled("WebRTC-Aec3TransparentModeHmmKillSwitch");
+}
+
 bool DeactivateInitialStateResetAtEchoPathChange() {
   return field_trial::IsEnabled(
       "WebRTC-Aec3DeactivateInitialStateResetKillSwitch");
@@ -134,7 +138,6 @@ AecState::AecState(const EchoCanceller3Config& config,
           new ApmDataDumper(rtc::AtomicOps::Increment(&instance_count_))),
       config_(config),
       num_capture_channels_(num_capture_channels),
-      transparent_mode_activated_(!DeactivateTransparentMode()),
       deactivate_initial_state_reset_at_echo_path_change_(
           DeactivateInitialStateResetAtEchoPathChange()),
       full_reset_at_echo_path_change_(FullResetAtEchoPathChange()),
@@ -142,7 +145,6 @@ AecState::AecState(const EchoCanceller3Config& config,
           SubtractorAnalyzerResetAtEchoPathChange()),
       initial_state_(config_),
       delay_state_(config_, num_capture_channels_),
-      transparent_state_(config_),
       filter_quality_state_(config_, num_capture_channels_),
       erl_estimator_(2 * kNumBlocksPerSecond),
       erle_estimator_(2 * kNumBlocksPerSecond, config_, num_capture_channels_),
@@ -150,7 +152,15 @@ AecState::AecState(const EchoCanceller3Config& config,
       echo_audibility_(
           config_.echo_audibility.use_stationarity_properties_at_init),
       reverb_model_estimator_(config_, num_capture_channels_),
-      subtractor_output_analyzer_(num_capture_channels_) {}
+      subtractor_output_analyzer_(num_capture_channels_) {
+  if (!DeactivateTransparentMode()) {
+    if (DeactivateTransparentModeHmm()) {
+      transparent_state_ = std::make_unique<TransparentModeLegacy>(config_);
+    } else {
+      transparent_state_ = std::make_unique<TransparentModeHmm>();
+    }
+  }
+}
 
 AecState::~AecState() = default;
 
@@ -164,7 +174,9 @@ void AecState::HandleEchoPathChange(
     if (!deactivate_initial_state_reset_at_echo_path_change_) {
       initial_state_.Reset();
     }
-    transparent_state_.Reset();
+    if (transparent_state_) {
+      transparent_state_->Reset();
+    }
     erle_estimator_.Reset(true);
     erl_estimator_.Reset();
     filter_quality_state_.Reset();
@@ -277,13 +289,15 @@ void AecState::Update(
   initial_state_.Update(active_render, SaturatedCapture());
 
   // Detect whether the transparent mode should be activated.
-  transparent_state_.Update(delay_state_.MinDirectPathFilterDelay(),
-                            any_filter_consistent, any_filter_converged,
-                            all_filters_diverged, active_render,
-                            SaturatedCapture());
+  if (transparent_state_) {
+    transparent_state_->Update(delay_state_.MinDirectPathFilterDelay(),
+                               any_filter_consistent, any_filter_converged,
+                               all_filters_diverged, active_render,
+                               SaturatedCapture());
+  }
 
   // Analyze the quality of the filter.
-  filter_quality_state_.Update(active_render, TransparentMode(),
+  filter_quality_state_.Update(active_render, TransparentModeActive(),
                                SaturatedCapture(), external_delay,
                                any_filter_converged);
 
@@ -305,7 +319,7 @@ void AecState::Update(
   data_dumper_->DumpRaw("aec3_erl_time_domain", ErlTimeDomain());
   data_dumper_->DumpRaw("aec3_erle", Erle()[0]);
   data_dumper_->DumpRaw("aec3_usable_linear_estimate", UsableLinearEstimate());
-  data_dumper_->DumpRaw("aec3_transparent_mode", TransparentMode());
+  data_dumper_->DumpRaw("aec3_transparent_mode", TransparentModeActive());
   data_dumper_->DumpRaw("aec3_filter_delay",
                         filter_analyzer_.MinFilterDelayBlocks());
 
@@ -387,14 +401,63 @@ void AecState::FilterDelay::Update(
                                         filter_delays_blocks_.end());
 }
 
-AecState::TransparentMode::TransparentMode(const EchoCanceller3Config& config)
+void AecState::TransparentModeHmm::Reset() {
+  transparency_activated_ = false;
+  p_transparent_ = 0.f;
+}
+
+void AecState::TransparentModeHmm::Update(int filter_delay_blocks,
+                                          bool any_filter_consistent,
+                                          bool any_filter_converged,
+                                          bool all_filters_diverged,
+                                          bool active_render,
+                                          bool saturated_capture) {
+  // HMM is only updated during active render.
+  if (active_render) {
+    // Transition probability of both states.
+    constexpr float kPTransition = 0.000001f;
+
+    // Probability of observing converged filters in state "normal".
+    constexpr float kPOutputNormal = 0.05f;
+
+    // Probability of observing converged filters in state "transparent".
+    constexpr float kPOutputTransparent = 0.005f;
+
+    // Probability of transitioning to transparent state.
+    p_transparent_ = (1.f - p_transparent_) * kPTransition +
+                     p_transparent_ * (1.f - kPTransition);
+
+    // Joint probabilites of the observed output and respective states.
+    const float p_output_normal =
+        (1.f - p_transparent_) *
+        (any_filter_converged ? kPOutputNormal : (1.f - kPOutputNormal));
+    const float p_output_transparent =
+        p_transparent_ * (any_filter_converged ? kPOutputTransparent
+                                               : (1.f - kPOutputTransparent));
+
+    // Conditional probability of transparent state and the observed output.
+    p_transparent_ =
+        p_output_transparent / (p_output_normal + p_output_transparent);
+
+    // Transparent mode is only activated when its state probability is high.
+    // Dead zone between activation/deactivation thresholds to avoid switching
+    // back and forth.
+    if (p_transparent_ > 0.95f)
+      transparency_activated_ = true;
+    if (p_transparent_ < 0.5f)
+      transparency_activated_ = false;
+  }
+}
+
+AecState::TransparentModeLegacy::TransparentModeLegacy(
+    const EchoCanceller3Config& config)
     : bounded_erl_(config.ep_strength.bounded_erl),
       linear_and_stable_echo_path_(
           config.echo_removal_control.linear_and_stable_echo_path),
       active_blocks_since_sane_filter_(kBlocksSinceConsistentEstimateInit),
       non_converged_sequence_size_(kBlocksSinceConvergencedFilterInit) {}
 
-void AecState::TransparentMode::Reset() {
+void AecState::TransparentModeLegacy::Reset() {
   non_converged_sequence_size_ = kBlocksSinceConvergencedFilterInit;
   diverged_sequence_size_ = 0;
   strong_not_saturated_render_blocks_ = 0;
@@ -403,12 +466,12 @@ void AecState::TransparentMode::Reset() {
   }
 }
 
-void AecState::TransparentMode::Update(int filter_delay_blocks,
-                                       bool any_filter_consistent,
-                                       bool any_filter_converged,
-                                       bool all_filters_diverged,
-                                       bool active_render,
-                                       bool saturated_capture) {
+void AecState::TransparentModeLegacy::Update(int filter_delay_blocks,
+                                             bool any_filter_consistent,
+                                             bool any_filter_converged,
+                                             bool all_filters_diverged,
+                                             bool active_render,
+                                             bool saturated_capture) {
   ++capture_block_counter_;
   strong_not_saturated_render_blocks_ +=
       active_render && !saturated_capture ? 1 : 0;
