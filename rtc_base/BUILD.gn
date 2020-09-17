@@ -48,10 +48,10 @@ rtc_source_set("function") {
   deps = [ "system:assume" ]
 }
 
-rtc_source_set("cancer_stick_castle") {
+rtc_source_set("robot_caller") {
   sources = [
-    "cancer_stick_castle.cc",
-    "cancer_stick_castle.h",
+    "robot_caller.cc",
+    "robot_caller.h",
   ]
   deps = [
     ":function",
@@ -1070,13 +1070,13 @@ rtc_library("testclient") {
   ]
 }
 
-rtc_library("cancer_stick_castle_unittests") {
+rtc_library("robot_caller_unittests") {
   testonly = true
 
-  sources = [ "cancer_stick_castle_unittest.cc" ]
+  sources = [ "robot_caller_unittest.cc" ]
   deps = [
-    ":cancer_stick_castle",
     ":gunit_helpers",
+    ":robot_caller",
     ":rtc_base",
     "../api:function_view",
     "../test:test_support",

@@ -8,24 +8,24 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "rtc_base/cancer_stick_castle.h"
+#include "rtc_base/robot_caller.h"
 
 namespace webrtc {
-namespace cancer_stick_castle_impl {
+namespace robot_caller_impl {
 
-CancerStickCastleReceivers::CancerStickCastleReceivers() = default;
-CancerStickCastleReceivers::~CancerStickCastleReceivers() = default;
+RobotCallerReceivers::RobotCallerReceivers() = default;
+RobotCallerReceivers::~RobotCallerReceivers() = default;
 
-void CancerStickCastleReceivers::AddReceiverImpl(UntypedFunction* f) {
+void RobotCallerReceivers::AddReceiverImpl(UntypedFunction* f) {
   receivers_.push_back(std::move(*f));
 }
 
-void CancerStickCastleReceivers::Foreach(
+void RobotCallerReceivers::Foreach(
     rtc::FunctionView<void(UntypedFunction&)> fv) {
   for (auto& r : receivers_) {
     fv(r);
   }
 }
 
-}  // namespace cancer_stick_castle_impl
+}  // namespace robot_caller_impl
 }  // namespace webrtc

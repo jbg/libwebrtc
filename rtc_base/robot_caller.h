@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef RTC_BASE_CANCER_STICK_CASTLE_H_
-#define RTC_BASE_CANCER_STICK_CASTLE_H_
+#ifndef RTC_BASE_ROBOT_CALLER_H_
+#define RTC_BASE_ROBOT_CALLER_H_
 
 #include <utility>
 #include <vector>
@@ -19,12 +19,12 @@
 #include "rtc_base/system/assume.h"
 
 namespace webrtc {
-namespace cancer_stick_castle_impl {
+namespace robot_caller_impl {
 
-class CancerStickCastleReceivers {
+class RobotCallerReceivers {
  public:
-  CancerStickCastleReceivers();
-  ~CancerStickCastleReceivers();
+  RobotCallerReceivers();
+  ~RobotCallerReceivers();
   void AddReceiver(UntypedFunction&& f) {
     AddReceiverImpl(&f);
     // Assume that f was moved from and is now trivially destructible.
@@ -38,7 +38,7 @@ class CancerStickCastleReceivers {
   std::vector<UntypedFunction> receivers_;
 };
 
-}  // namespace cancer_stick_castle_impl
+}  // namespace robot_caller_impl
 
 // A collection of receivers (callable objects) that can be called all at once.
 // Optimized for minimal binary size.
@@ -49,7 +49,7 @@ class CancerStickCastleReceivers {
 // if they wish to stay in the CSC and another value if they wish to be removed.
 // It depends on what's convenient for the callers...
 template <typename... ArgT>
-class CancerStickCastle {
+class RobotCaller {
  public:
   template <typename F>
   void AddReceiver(F&& f) {
@@ -63,9 +63,9 @@ class CancerStickCastle {
   }
 
  private:
-  cancer_stick_castle_impl::CancerStickCastleReceivers receivers_;
+  robot_caller_impl::RobotCallerReceivers receivers_;
 };
 
 }  // namespace webrtc
 
-#endif  // RTC_BASE_CANCER_STICK_CASTLE_H_
+#endif  // RTC_BASE_ROBOT_CALLER_H_
