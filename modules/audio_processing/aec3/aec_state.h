@@ -107,8 +107,8 @@ class AecState {
   }
 
   // Returns whether the transparent mode is active
-  bool TransparentMode() const {
-    return transparent_mode_activated_ && transparent_state_.Active();
+  bool TransparentModeActive() const {
+    return transparent_state_ && transparent_state_->Active();
   }
 
   // Takes appropriate action at an echo path change.
@@ -152,7 +152,6 @@ class AecState {
   std::unique_ptr<ApmDataDumper> data_dumper_;
   const EchoCanceller3Config config_;
   const size_t num_capture_channels_;
-  const bool transparent_mode_activated_;
   const bool deactivate_initial_state_reset_at_echo_path_change_;
   const bool full_reset_at_echo_path_change_;
   const bool subtractor_analyzer_reset_at_echo_path_change_;
@@ -219,24 +218,58 @@ class AecState {
   } delay_state_;
 
   // Class for detecting and toggling the transparent mode which causes the
-  // suppressor to apply no suppression.
+  // suppressor to apply less suppression.
   class TransparentMode {
    public:
-    explicit TransparentMode(const EchoCanceller3Config& config);
+    virtual ~TransparentMode() {}
 
     // Returns whether the transparent mode should be active.
-    bool Active() const { return transparency_activated_; }
+    virtual bool Active() const = 0;
 
     // Resets the state of the detector.
-    void Reset();
+    virtual void Reset() = 0;
 
-    // Updates the detection deciscion based on new data.
+    // Updates the detection decision based on new data.
+    virtual void Update(int filter_delay_blocks,
+                        bool any_filter_consistent,
+                        bool any_filter_converged,
+                        bool all_filters_diverged,
+                        bool active_render,
+                        bool saturated_capture) = 0;
+  };
+
+  class TransparentModeHmm : public TransparentMode {
+   public:
+    bool Active() const override { return transparency_activated_; }
+
+    void Reset() override;
+
     void Update(int filter_delay_blocks,
                 bool any_filter_consistent,
                 bool any_filter_converged,
                 bool all_filters_diverged,
                 bool active_render,
-                bool saturated_capture);
+                bool saturated_capture) override;
+
+   private:
+    bool transparency_activated_ = false;
+    float p_transparent_ = 0.f;
+  };
+
+  class TransparentModeLegacy : public TransparentMode {
+   public:
+    explicit TransparentModeLegacy(const EchoCanceller3Config& config);
+
+    bool Active() const override { return transparency_activated_; }
+
+    void Reset() override;
+
+    void Update(int filter_delay_blocks,
+                bool any_filter_consistent,
+                bool any_filter_converged,
+                bool all_filters_diverged,
+                bool active_render,
+                bool saturated_capture) override;
 
    private:
     const bool bounded_erl_;
@@ -252,7 +285,9 @@ class AecState {
     size_t num_converged_blocks_ = 0;
     bool recent_convergence_during_activity_ = false;
     size_t strong_not_saturated_render_blocks_ = 0;
-  } transparent_state_;
+  };
+
+  std::unique_ptr<TransparentMode> transparent_state_;
 
   // Class for analyzing how well the linear filter is, and can be expected to,
   // perform on the current signals. The purpose of this is for using to
