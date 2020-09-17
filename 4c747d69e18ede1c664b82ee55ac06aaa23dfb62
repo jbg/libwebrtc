@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9b15106_23812b85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5706
+      },
+      "writtenOn": "2020-09-17T17:05:27Z",
+      "side": 1,
+      "message": "PTAL,\nThis patch includes the original patch plus the following methods from 86:\nvoid Thread::AllowInvokesToThread(Thread* thread)\nvoid Thread::DisallowAllInvokes()\nbool Thread::IsInvokeToThreadAllowed(rtc::Thread* target)\n\nAnd a rename of RecursiveCriticalSection in 86 to CriticalSection in 85.",
+      "revId": "4c747d69e18ede1c664b82ee55ac06aaa23dfb62",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
