@@ -829,6 +829,20 @@ class MetaBuildWrapper(object):
 
     is_android = 'target_os="android"' in vals['gn_args']
     is_linux = self.platform.startswith('linux') and not is_android
+    is_ios = 'target_os="ios"' in vals['gn_args']
+    is_win = 'target_os="win"' in vals['gn_args']
+
+    cmdline = []
+    if test_type == 'generated_script' or is_ios:
+      assert 'script' not in isolate_map[target], (
+          'generated_scripts can no longer customize the script path')
+      if is_win:
+        default_script = 'bin\\run_{}.bat'.format(target)
+      else:
+        default_script = 'bin/run_{}'.format(target)
+      script = isolate_map[target].get('script', default_script)
+      cmdline += [script]
+      return cmdline, []
 
     if test_type == 'nontest':
       self.WriteFailureAndRaise('We should not be isolating %s.' % target,
@@ -839,7 +853,6 @@ class MetaBuildWrapper(object):
       self.WriteFailureAndRaise('No command line for %s found (test type %s).'
                                 % (target, test_type), output_path=None)
 
-    cmdline = []
     extra_files = [
       '../../.vpython',
       '../../testing/test_env.py',
