@@ -33,6 +33,23 @@
       "revId": "13ba8ad2d5fb1a7d7a31421bb9b172b4e21f96e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6d33b8f_990b7cb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-17T14:06:12Z",
+      "side": 1,
+      "message": "Actually adding intended owners for review... Björn, Sam, PTAL.",
+      "revId": "13ba8ad2d5fb1a7d7a31421bb9b172b4e21f96e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
