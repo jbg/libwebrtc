@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "330bc62b_c6a98b78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2020-09-17T08:13:40Z",
+      "side": 1,
+      "message": "Wait for OK from Sami as well.",
+      "revId": "d855c3590499c5052be1a69df11fd21581293408",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3738deca_e8bad720",
         "filename": "sdk/android/api/org/webrtc/audio/JavaAudioDeviceModule.java",
         "patchSetId": 1
