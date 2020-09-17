@@ -2476,6 +2476,8 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::AddOrUpdateSink(
     encoder_sink_ = sink;
     source_->AddOrUpdateSink(encoder_sink_, wants);
   } else {
+    RTC_DCHECK(false);
+    /*
     // Subsequent calls to AddOrUpdateSink will happen on the encoder task
     // queue.
     invoker_.AsyncInvoke<void>(
@@ -2487,7 +2489,7 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::AddOrUpdateSink(
           if (source_ && encoder_sink_valid) {
             source_->AddOrUpdateSink(encoder_sink_, wants);
           }
-        });
+        });*/
   }
 }
 std::vector<VideoSenderInfo>

@@ -435,7 +435,7 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     // In order for the |invoker_| to protect other members from being
     // destructed as they are used in asynchronous tasks it has to be destructed
     // first.
-    rtc::AsyncInvoker invoker_;
+    //rtc::AsyncInvoker invoker_;
 
     // TODO(asapersson): investigate why setting
     // DegrationPreferences::MAINTAIN_RESOLUTION isn't sufficient to disable
