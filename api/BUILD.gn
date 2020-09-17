@@ -256,6 +256,25 @@ rtc_source_set("scoped_refptr") {
   sources = [ "scoped_refptr.h" ]
 }
 
+rtc_library("test_numerics") {
+  sources = [
+    "test/numerics/math_utils.h",
+    "test/numerics/running_statistics.h",
+    "test/numerics/samples_stats_counter.cc",
+    "test/numerics/samples_stats_counter.h",
+  ]
+  deps = [
+    ":array_view",
+    "../rtc_base:checks",
+    "../rtc_base:timeutils",
+    "units:timestamp",
+  ]
+  absl_deps = [
+    "//third_party/abseil-cpp/absl/algorithm:container",
+    "//third_party/abseil-cpp/absl/types:optional",
+  ]
+}
+
 rtc_source_set("video_quality_test_fixture_api") {
   visibility = [ "*" ]
   testonly = true
@@ -994,6 +1013,8 @@ if (rtc_include_tests) {
       "rtp_parameters_unittest.cc",
       "scoped_refptr_unittest.cc",
       "test/create_time_controller_unittest.cc",
+      "test/numerics/running_statistics_unittest.cc",
+      "test/numerics/samples_stats_counter_unittest.cc",
     ]
 
     deps = [
@@ -1006,6 +1027,7 @@ if (rtc_include_tests) {
       ":rtp_packet_info",
       ":rtp_parameters",
       ":scoped_refptr",
+      ":test_numerics",
       ":time_controller",
       "../rtc_base:checks",
       "../rtc_base:gunit_helpers",
@@ -1020,6 +1042,7 @@ if (rtc_include_tests) {
       "units:units_unittests",
       "video:video_unittests",
     ]
+    absl_deps = [ "//third_party/abseil-cpp/absl/algorithm:container" ]
   }
 
   rtc_library("compile_all_headers") {

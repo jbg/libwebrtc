@@ -16,9 +16,9 @@
 #include <limits>
 #include <numeric>
 
+#include "api/test/numerics/running_statistics.h"
 #include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/numerics/running_statistics.h"
 #include "rtc_base/strings/string_builder.h"
 
 namespace webrtc {

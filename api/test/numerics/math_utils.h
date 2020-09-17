@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef RTC_BASE_NUMERICS_MATH_UTILS_H_
-#define RTC_BASE_NUMERICS_MATH_UTILS_H_
+#ifndef API_TEST_NUMERICS_MATH_UTILS_H_
+#define API_TEST_NUMERICS_MATH_UTILS_H_
 
 #include <limits>
 #include <type_traits>
@@ -67,4 +67,4 @@ constexpr T minus_infinity_or_min() {
   return std::numeric_limits<T>::min();
 }
 
-#endif  // RTC_BASE_NUMERICS_MATH_UTILS_H_
+#endif  // API_TEST_NUMERICS_MATH_UTILS_H_

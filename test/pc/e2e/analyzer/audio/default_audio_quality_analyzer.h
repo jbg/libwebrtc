@@ -16,9 +16,9 @@
 
 #include "absl/strings/string_view.h"
 #include "api/test/audio_quality_analyzer_interface.h"
+#include "api/test/numerics/samples_stats_counter.h"
 #include "api/test/track_id_stream_info_map.h"
 #include "api/units/time_delta.h"
-#include "rtc_base/numerics/samples_stats_counter.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "test/testsupport/perf_test.h"
 
