@@ -789,6 +789,7 @@ if (rtc_include_tests) {
       "codecs/test/videocodec_test_stats_impl.h",
     ]
     deps = [
+      "../../api:test_numerics",
       "../../api:videocodec_test_fixture_api",
       "../../rtc_base:checks",
       "../../rtc_base:rtc_numerics",

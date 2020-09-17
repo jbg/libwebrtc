@@ -297,6 +297,7 @@ if (rtc_include_tests) {
       "../api:libjingle_peerconnection_api",
       "../api:rtc_event_log_output_file",
       "../api:test_dependency_factory",
+      "../api:test_numerics",
       "../api:video_quality_test_fixture_api",
       "../api/rtc_event_log:rtc_event_log_factory",
       "../api/task_queue",

@@ -17,11 +17,11 @@
 #include <vector>
 
 #include "api/task_queue/task_queue_base.h"
+#include "api/test/numerics/running_statistics.h"
 #include "api/video/video_source_interface.h"
 #include "modules/rtp_rtcp/source/rtp_packet.h"
 #include "modules/rtp_rtcp/source/video_rtp_depacketizer.h"
 #include "rtc_base/event.h"
-#include "rtc_base/numerics/running_statistics.h"
 #include "rtc_base/platform_thread.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/time_utils.h"
