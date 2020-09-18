@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11243643_2d0422b7",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-18T15:47:27Z",
+      "side": 1,
+      "message": "Where does this new dep come from?",
+      "revId": "c514e32dcd3bfe8c1eddb1df3f1c69ef77bccf87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a371682_5eda6c40",
+        "filename": "api/numerics/DEPS",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-18T15:47:27Z",
+      "side": 1,
+      "message": "If you wanted, you could blanket allow this for all API headers now that you\u0027ve wrapped it in a private namespace.",
+      "revId": "c514e32dcd3bfe8c1eddb1df3f1c69ef77bccf87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29489918_b87b68ba",
+        "filename": "rtc_base/numerics/math_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-18T15:47:27Z",
+      "side": 1,
+      "message": "Wow, did we have these in the global namespace before?",
+      "revId": "c514e32dcd3bfe8c1eddb1df3f1c69ef77bccf87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
