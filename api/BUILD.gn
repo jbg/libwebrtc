@@ -1020,6 +1020,7 @@ if (rtc_include_tests) {
       "units:units_unittests",
       "video:video_unittests",
     ]
+    absl_deps = [ "//third_party/abseil-cpp/absl/algorithm:container" ]
   }
 
   rtc_library("compile_all_headers") {
