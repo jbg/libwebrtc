@@ -20,6 +20,11 @@ const I420BufferInterface* VideoFrameBuffer::GetI420() const {
   return nullptr;
 }
 
+rtc::scoped_refptr<NV12BufferInterface> VideoFrameBuffer::GetNV12Native()
+    const {
+  return nullptr;
+}
+
 const I420ABufferInterface* VideoFrameBuffer::GetI420A() const {
   RTC_CHECK(type() == Type::kI420A);
   return static_cast<const I420ABufferInterface*>(this);

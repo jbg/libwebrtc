@@ -20,12 +20,14 @@
 
 #include "api/scoped_refptr.h"
 #include "api/video/i420_buffer.h"
+#include "api/video/nv12_buffer.h"
 #include "api/video/video_codec_constants.h"
 #include "api/video/video_frame_buffer.h"
 #include "api/video/video_rotation.h"
 #include "api/video_codecs/video_encoder.h"
 #include "api/video_codecs/video_encoder_factory.h"
 #include "api/video_codecs/video_encoder_software_fallback_wrapper.h"
+#include "common_video/libyuv/include/webrtc_libyuv.h"
 #include "media/base/video_common.h"
 #include "modules/video_coding/include/video_error_codes.h"
 #include "modules/video_coding/utility/simulcast_rate_allocator.h"
@@ -378,8 +380,11 @@ int SimulcastEncoderAdapter::Encode(
 
   // Temporary thay may hold the result of texture to i420 buffer conversion.
   rtc::scoped_refptr<I420BufferInterface> src_buffer;
+  rtc::scoped_refptr<NV12BufferInterface> nv12_src_buffer;
+  RTC_LOG(INFO) << "foo";
   int src_width = input_image.width();
   int src_height = input_image.height();
+  RTC_LOG(INFO) << "Iterating...";
   for (size_t stream_idx = 0; stream_idx < streaminfos_.size(); ++stream_idx) {
     // Don't encode frames in resolutions that we don't intend to send.
     if (!streaminfos_[stream_idx].send_stream) {
@@ -426,27 +431,55 @@ int SimulcastEncoderAdapter::Encode(
          streaminfos_[stream_idx]
              .encoder->GetEncoderInfo()
              .supports_native_handle)) {
+      RTC_LOG(INFO) << "Size equal, encoding...";
       int ret = streaminfos_[stream_idx].encoder->Encode(input_image,
                                                          &stream_frame_types);
       if (ret != WEBRTC_VIDEO_CODEC_OK) {
         return ret;
       }
     } else {
+      if (nv12_src_buffer == nullptr) {
+        nv12_src_buffer = input_image.video_frame_buffer()->GetNV12Native();
+      }
       if (src_buffer == nullptr) {
         src_buffer = input_image.video_frame_buffer()->ToI420();
       }
-      rtc::scoped_refptr<I420Buffer> dst_buffer =
-          I420Buffer::Create(dst_width, dst_height);
-
-      dst_buffer->ScaleFrom(*src_buffer);
-
       // UpdateRect is not propagated to lower simulcast layers currently.
       // TODO(ilnik): Consider scaling UpdateRect together with the buffer.
       VideoFrame frame(input_image);
-      frame.set_video_frame_buffer(dst_buffer);
+      if (src_buffer != nullptr) {
+        RTC_LOG(INFO) << "Found i420";
+        rtc::scoped_refptr<I420Buffer> dst_buffer =
+            I420Buffer::Create(dst_width, dst_height);
+
+        dst_buffer->ScaleFrom(*src_buffer);
+        frame.set_video_frame_buffer(dst_buffer);
+      } else if (nv12_src_buffer == nullptr) {
+        RTC_LOG(INFO) << "Scaling NV12";
+        rtc::scoped_refptr<NV12Buffer> dst_buffer =
+            NV12Buffer::Create(dst_width, dst_height);
+        // Use the weird scaling function...
+        std::vector<uint8_t> tmp_buffer;
+        tmp_buffer.reserve(nv12_src_buffer->ChromaWidth() *
+                               nv12_src_buffer->ChromaHeight() * 2 +
+                           dst_buffer->ChromaWidth() *
+                               dst_buffer->ChromaHeight() * 2);
+        NV12Scale(tmp_buffer.data(), nv12_src_buffer->DataY(),
+                  nv12_src_buffer->StrideY(), nv12_src_buffer->DataUV(),
+                  nv12_src_buffer->StrideUV(), nv12_src_buffer->width(),
+                  nv12_src_buffer->height(), dst_buffer->MutableDataY(),
+                  dst_buffer->StrideY(), dst_buffer->MutableDataUV(),
+                  dst_buffer->StrideUV(), dst_buffer->width(),
+                  dst_buffer->height());
+        frame.set_video_frame_buffer(dst_buffer);
+        RTC_LOG(INFO) << "Scaled NV12";
+      } else {
+        RTC_NOTREACHED();
+      }
       frame.set_rotation(webrtc::kVideoRotation_0);
       frame.set_update_rect(
           VideoFrame::UpdateRect{0, 0, frame.width(), frame.height()});
+      RTC_LOG(INFO) << "Encoder encode";
       int ret =
           streaminfos_[stream_idx].encoder->Encode(frame, &stream_frame_types);
       if (ret != WEBRTC_VIDEO_CODEC_OK) {

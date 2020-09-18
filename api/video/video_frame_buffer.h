@@ -76,6 +76,8 @@ class RTC_EXPORT VideoFrameBuffer : public rtc::RefCountInterface {
   // doesn't affect binary data at all. Another example is any I420A buffer.
   virtual const I420BufferInterface* GetI420() const;
 
+  virtual rtc::scoped_refptr<NV12BufferInterface> GetNV12Native() const;
+
   // These functions should only be called if type() is of the correct type.
   // Calling with a different type will result in a crash.
   const I420ABufferInterface* GetI420A() const;
@@ -203,12 +205,16 @@ class BiplanarYuv8Buffer : public BiplanarYuvBuffer {
 
 // Represents Type::kNV12. NV12 is full resolution Y and half-resolution
 // interleved UV.
-class NV12BufferInterface : public BiplanarYuv8Buffer {
+class RTC_EXPORT NV12BufferInterface : public BiplanarYuv8Buffer {
  public:
   Type type() const override;
 
   int ChromaWidth() const final;
   int ChromaHeight() const final;
+
+  rtc::scoped_refptr<NV12BufferInterface> GetNV12Native() const override {
+    return const_cast<NV12BufferInterface*>(this);
+  }
 
  protected:
   ~NV12BufferInterface() override {}

@@ -951,6 +951,7 @@ bool LibvpxVp8Encoder::UpdateVpxConfiguration(size_t stream_index) {
 
 int LibvpxVp8Encoder::Encode(const VideoFrame& frame,
                              const std::vector<VideoFrameType>* frame_types) {
+  RTC_LOG(INFO) << "Encode vp8";
   RTC_DCHECK_EQ(frame.width(), codec_.width);
   RTC_DCHECK_EQ(frame.height(), codec_.height);
 

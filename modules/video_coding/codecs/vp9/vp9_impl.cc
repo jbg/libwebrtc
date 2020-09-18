@@ -520,7 +520,7 @@ int VP9EncoderImpl::InitEncode(const VideoCodec* inst,
   unsigned int bits_for_storage = 8;
   switch (profile_) {
     case VP9Profile::kProfile0:
-      img_fmt = VPX_IMG_FMT_I420;
+      img_fmt = VPX_IMG_FMT_NV12;
       bits_for_storage = 8;
       config_->g_bit_depth = VPX_BITS_8;
       config_->g_profile = 0;
@@ -539,6 +539,7 @@ int VP9EncoderImpl::InitEncode(const VideoCodec* inst,
       config_->g_input_bit_depth = 10;
       break;
   }
+  RTC_LOG(INFO) << "Assuming format " << img_fmt;
 
   // Creating a wrapper to the image - setting image data to nullptr. Actual
   // pointer will be set in encode. Setting align to 1, as it is meaningless
@@ -869,6 +870,7 @@ int VP9EncoderImpl::Encode(const VideoFrame& input_image,
     // All spatial layers are disabled, return without encoding anything.
     return WEBRTC_VIDEO_CODEC_OK;
   }
+  RTC_LOG(INFO) << "VP9 encode";
 
   // We only support one stream at the moment.
   if (frame_types && !frame_types->empty()) {
@@ -979,19 +981,47 @@ int VP9EncoderImpl::Encode(const VideoFrame& input_image,
 
   // Keep reference to buffer until encode completes.
   rtc::scoped_refptr<I420BufferInterface> i420_buffer;
+  rtc::scoped_refptr<NV12BufferInterface> nv12_buffer;
   const I010BufferInterface* i010_buffer;
   rtc::scoped_refptr<const I010BufferInterface> i010_copy;
   switch (profile_) {
     case VP9Profile::kProfile0: {
-      i420_buffer = input_image.video_frame_buffer()->ToI420();
-      // Image in vpx_image_t format.
-      // Input image is const. VPX's raw image is not defined as const.
-      raw_->planes[VPX_PLANE_Y] = const_cast<uint8_t*>(i420_buffer->DataY());
-      raw_->planes[VPX_PLANE_U] = const_cast<uint8_t*>(i420_buffer->DataU());
-      raw_->planes[VPX_PLANE_V] = const_cast<uint8_t*>(i420_buffer->DataV());
-      raw_->stride[VPX_PLANE_Y] = i420_buffer->StrideY();
-      raw_->stride[VPX_PLANE_U] = i420_buffer->StrideU();
-      raw_->stride[VPX_PLANE_V] = i420_buffer->StrideV();
+      if (input_image.video_frame_buffer()->type() ==
+          VideoFrameBuffer::Type::kNV12) {
+        nv12_buffer = input_image.video_frame_buffer()->GetNV12Native();
+        if (raw_->fmt != VPX_IMG_FMT_NV12) {
+          RTC_LOG(INFO) << "Rewrapping raw image as NV12";
+          raw_ = vpx_img_wrap(nullptr, VPX_IMG_FMT_NV12, codec_.width,
+                              codec_.height, 1, nullptr);
+          raw_->bit_depth = 8;
+        }
+        RTC_DCHECK(nv12_buffer);
+        RTC_DCHECK(nv12_buffer->DataY());
+        RTC_DCHECK(nv12_buffer->DataUV());
+        raw_->planes[VPX_PLANE_Y] = const_cast<uint8_t*>(nv12_buffer->DataY());
+        raw_->planes[VPX_PLANE_U] = const_cast<uint8_t*>(nv12_buffer->DataUV());
+        raw_->planes[VPX_PLANE_V] =
+            const_cast<uint8_t*>(nv12_buffer->DataUV()) + 1;
+        raw_->stride[VPX_PLANE_Y] = nv12_buffer->StrideY();
+        raw_->stride[VPX_PLANE_U] = nv12_buffer->StrideUV();
+        raw_->stride[VPX_PLANE_V] = nv12_buffer->StrideUV();
+      } else {
+        i420_buffer = input_image.video_frame_buffer()->ToI420();
+        if (raw_->fmt != VPX_IMG_FMT_I420) {
+          RTC_LOG(INFO) << "Rewrapping raw image as NV12";
+          raw_ = vpx_img_wrap(nullptr, VPX_IMG_FMT_I420, codec_.width,
+                              codec_.height, 1, nullptr);
+          raw_->bit_depth = 8;
+        }
+        // Image in vpx_image_t format.
+        // Input image is const. VPX's raw image is not defined as const.
+        raw_->planes[VPX_PLANE_Y] = const_cast<uint8_t*>(i420_buffer->DataY());
+        raw_->planes[VPX_PLANE_U] = const_cast<uint8_t*>(i420_buffer->DataU());
+        raw_->planes[VPX_PLANE_V] = const_cast<uint8_t*>(i420_buffer->DataV());
+        raw_->stride[VPX_PLANE_Y] = i420_buffer->StrideY();
+        raw_->stride[VPX_PLANE_U] = i420_buffer->StrideU();
+        raw_->stride[VPX_PLANE_V] = i420_buffer->StrideV();
+      }
       break;
     }
     case VP9Profile::kProfile1: {

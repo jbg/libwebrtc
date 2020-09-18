@@ -936,52 +936,50 @@ void VideoStreamEncoder::OnFrame(const VideoFrame& video_frame) {
   int64_t post_time_us = rtc::TimeMicros();
   ++posted_frames_waiting_for_encode_;
 
-  encoder_queue_.PostTask(
-      [this, incoming_frame, post_time_us, log_stats]() {
-        RTC_DCHECK_RUN_ON(&encoder_queue_);
-        encoder_stats_observer_->OnIncomingFrame(incoming_frame.width(),
-                                                 incoming_frame.height());
-        ++captured_frame_count_;
-        const int posted_frames_waiting_for_encode =
-            posted_frames_waiting_for_encode_.fetch_sub(1);
-        RTC_DCHECK_GT(posted_frames_waiting_for_encode, 0);
-        CheckForAnimatedContent(incoming_frame, post_time_us);
-        bool cwnd_frame_drop =
-            cwnd_frame_drop_interval_ &&
-            (cwnd_frame_counter_++ % cwnd_frame_drop_interval_.value() == 0);
-        if (posted_frames_waiting_for_encode == 1 && !cwnd_frame_drop) {
-          MaybeEncodeVideoFrame(incoming_frame, post_time_us);
-        } else {
-          if (cwnd_frame_drop) {
-            // Frame drop by congestion window pusback. Do not encode this
-            // frame.
-            ++dropped_frame_cwnd_pushback_count_;
-            encoder_stats_observer_->OnFrameDropped(
-                VideoStreamEncoderObserver::DropReason::kCongestionWindow);
-          } else {
-            // There is a newer frame in flight. Do not encode this frame.
-            RTC_LOG(LS_VERBOSE)
-                << "Incoming frame dropped due to that the encoder is blocked.";
-            ++dropped_frame_encoder_block_count_;
-            encoder_stats_observer_->OnFrameDropped(
-                VideoStreamEncoderObserver::DropReason::kEncoderQueue);
-          }
-          accumulated_update_rect_.Union(incoming_frame.update_rect());
-          accumulated_update_rect_is_valid_ &= incoming_frame.has_update_rect();
-        }
-        if (log_stats) {
-          RTC_LOG(LS_INFO) << "Number of frames: captured "
-                           << captured_frame_count_
-                           << ", dropped (due to congestion window pushback) "
-                           << dropped_frame_cwnd_pushback_count_
-                           << ", dropped (due to encoder blocked) "
-                           << dropped_frame_encoder_block_count_
-                           << ", interval_ms " << kFrameLogIntervalMs;
-          captured_frame_count_ = 0;
-          dropped_frame_cwnd_pushback_count_ = 0;
-          dropped_frame_encoder_block_count_ = 0;
-        }
-      });
+  encoder_queue_.PostTask([this, incoming_frame, post_time_us, log_stats]() {
+    RTC_DCHECK_RUN_ON(&encoder_queue_);
+    encoder_stats_observer_->OnIncomingFrame(incoming_frame.width(),
+                                             incoming_frame.height());
+    ++captured_frame_count_;
+    const int posted_frames_waiting_for_encode =
+        posted_frames_waiting_for_encode_.fetch_sub(1);
+    RTC_DCHECK_GT(posted_frames_waiting_for_encode, 0);
+    CheckForAnimatedContent(incoming_frame, post_time_us);
+    bool cwnd_frame_drop =
+        cwnd_frame_drop_interval_ &&
+        (cwnd_frame_counter_++ % cwnd_frame_drop_interval_.value() == 0);
+    if (posted_frames_waiting_for_encode == 1 && !cwnd_frame_drop) {
+      MaybeEncodeVideoFrame(incoming_frame, post_time_us);
+    } else {
+      if (cwnd_frame_drop) {
+        // Frame drop by congestion window pusback. Do not encode this
+        // frame.
+        ++dropped_frame_cwnd_pushback_count_;
+        encoder_stats_observer_->OnFrameDropped(
+            VideoStreamEncoderObserver::DropReason::kCongestionWindow);
+      } else {
+        // There is a newer frame in flight. Do not encode this frame.
+        RTC_LOG(LS_VERBOSE)
+            << "Incoming frame dropped due to that the encoder is blocked.";
+        ++dropped_frame_encoder_block_count_;
+        encoder_stats_observer_->OnFrameDropped(
+            VideoStreamEncoderObserver::DropReason::kEncoderQueue);
+      }
+      accumulated_update_rect_.Union(incoming_frame.update_rect());
+      accumulated_update_rect_is_valid_ &= incoming_frame.has_update_rect();
+    }
+    if (log_stats) {
+      RTC_LOG(LS_INFO) << "Number of frames: captured " << captured_frame_count_
+                       << ", dropped (due to congestion window pushback) "
+                       << dropped_frame_cwnd_pushback_count_
+                       << ", dropped (due to encoder blocked) "
+                       << dropped_frame_encoder_block_count_ << ", interval_ms "
+                       << kFrameLogIntervalMs;
+      captured_frame_count_ = 0;
+      dropped_frame_cwnd_pushback_count_ = 0;
+      dropped_frame_encoder_block_count_ = 0;
+    }
+  });
 }
 
 void VideoStreamEncoder::OnDiscardedFrame() {
@@ -1296,14 +1294,24 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
 
   if (!is_buffer_type_supported) {
     // This module only supports software encoding.
-    rtc::scoped_refptr<I420BufferInterface> converted_buffer(
-        out_frame.video_frame_buffer()->ToI420());
+    rtc::scoped_refptr<NV12BufferInterface> maybe_nv12 =
+        out_frame.video_frame_buffer()->GetNV12Native();
+    if (maybe_nv12) {
+      RTC_LOG(WARNING) << "Using Nv12 frame with codec "
+                       << CodecTypeToPayloadString(send_codec_.codecType);
+      out_frame.set_video_frame_buffer(maybe_nv12);
+    } else {
+      rtc::scoped_refptr<I420BufferInterface> converted_buffer(
+          out_frame.video_frame_buffer()->ToI420());
 
-    if (!converted_buffer) {
-      RTC_LOG(LS_ERROR) << "Frame conversion failed, dropping frame.";
-      return;
+      if (!converted_buffer) {
+        RTC_LOG(LS_ERROR) << "Frame conversion failed, dropping frame.";
+        return;
+      }
+      out_frame.set_video_frame_buffer(converted_buffer);
     }
 
+    RTC_LOG(INFO) << "Set update rect";
     VideoFrame::UpdateRect update_rect = out_frame.update_rect();
     if (!update_rect.IsEmpty() &&
         out_frame.video_frame_buffer()->GetI420() == nullptr) {
@@ -1314,7 +1322,6 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
           VideoFrame::UpdateRect{0, 0, out_frame.width(), out_frame.height()};
     }
 
-    out_frame.set_video_frame_buffer(converted_buffer);
     out_frame.set_update_rect(update_rect);
   }
 
@@ -1322,6 +1329,7 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
   if ((crop_width_ > 0 || crop_height_ > 0) &&
       out_frame.video_frame_buffer()->type() !=
           VideoFrameBuffer::Type::kNative) {
+    RTC_LOG(INFO) << "Cropping";
     // If the frame can't be converted to I420, drop it.
     auto i420_buffer = video_frame.video_frame_buffer()->ToI420();
     if (!i420_buffer) {
@@ -1367,9 +1375,11 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
   }
 
   if (!accumulated_update_rect_is_valid_) {
+    RTC_LOG(INFO) << "Invalid rect";
     out_frame.clear_update_rect();
   } else if (!accumulated_update_rect_.IsEmpty() &&
              out_frame.has_update_rect()) {
+    RTC_LOG(INFO) << "Set acc rect";
     accumulated_update_rect_.Union(out_frame.update_rect());
     accumulated_update_rect_.Intersect(
         VideoFrame::UpdateRect{0, 0, out_frame.width(), out_frame.height()});
@@ -1381,6 +1391,7 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
   TRACE_EVENT_ASYNC_STEP0("webrtc", "Video", video_frame.render_time_ms(),
                           "Encode");
 
+  RTC_LOG(INFO) << "On encode started";
   stream_resource_manager_.OnEncodeStarted(out_frame, time_when_posted_us);
 
   RTC_DCHECK_LE(send_codec_.width, out_frame.width());
@@ -1397,9 +1408,14 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
 
   frame_encode_metadata_writer_.OnEncodeStarted(out_frame);
 
+  RTC_LOG(INFO) << "On encode->encode";
+  RTC_LOG(INFO) << "Encoder " << encoder_;
+  RTC_LOG(INFO) << "out_frame "
+                << static_cast<int>(out_frame.video_frame_buffer()->type());
   const int32_t encode_status = encoder_->Encode(out_frame, &next_frame_types_);
   was_encode_called_since_last_initialization_ = true;
 
+  RTC_LOG(INFO) << "Encode done with code " << encode_status;
   if (encode_status < 0) {
     if (encode_status == WEBRTC_VIDEO_CODEC_ENCODER_FAILURE) {
       RTC_LOG(LS_ERROR) << "Encoder failed, failing encoder format: "
