@@ -67,6 +67,23 @@
       "revId": "13ba8ad2d5fb1a7d7a31421bb9b172b4e21f96e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0111e044_8735e672",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-09-18T10:30:48Z",
+      "side": 1,
+      "message": "rtc_tools/ lgtm, but removing the graphs means that we can\u0027t visualize/debug neteq based on event logs. I\u0027d like Minyue\u0027s input on this.",
+      "revId": "13ba8ad2d5fb1a7d7a31421bb9b172b4e21f96e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
