@@ -328,8 +328,10 @@ int LibvpxVp8Decoder::ReturnFrame(
   last_frame_width_ = img->d_w;
   last_frame_height_ = img->d_h;
   // Allocate memory for decoded image.
-  rtc::scoped_refptr<I420Buffer> buffer =
-      buffer_pool_.CreateBuffer(img->d_w, img->d_h);
+  // rtc::scoped_refptr<I420Buffer> buffer =
+  //    buffer_pool_.CreateI420Buffer(img->d_w, img->d_h);
+  rtc::scoped_refptr<NV12Buffer> buffer =
+      buffer_pool_.CreateNV12Buffer(img->d_w, img->d_h);
   if (!buffer.get()) {
     // Pool has too many pending frames.
     RTC_HISTOGRAM_BOOLEAN("WebRTC.Video.LibvpxVp8Decoder.TooManyPendingFrames",
@@ -337,13 +339,19 @@ int LibvpxVp8Decoder::ReturnFrame(
     return WEBRTC_VIDEO_CODEC_NO_OUTPUT;
   }
 
-  libyuv::I420Copy(img->planes[VPX_PLANE_Y], img->stride[VPX_PLANE_Y],
+  /*libyuv::I420Copy(img->planes[VPX_PLANE_Y], img->stride[VPX_PLANE_Y],
                    img->planes[VPX_PLANE_U], img->stride[VPX_PLANE_U],
                    img->planes[VPX_PLANE_V], img->stride[VPX_PLANE_V],
                    buffer->MutableDataY(), buffer->StrideY(),
                    buffer->MutableDataU(), buffer->StrideU(),
                    buffer->MutableDataV(), buffer->StrideV(), img->d_w,
-                   img->d_h);
+                   img->d_h);*/
+  libyuv::I420ToNV12(img->planes[VPX_PLANE_Y], img->stride[VPX_PLANE_Y],
+                     img->planes[VPX_PLANE_U], img->stride[VPX_PLANE_U],
+                     img->planes[VPX_PLANE_V], img->stride[VPX_PLANE_V],
+                     buffer->MutableDataY(), buffer->StrideY(),
+                     buffer->MutableDataUV(), buffer->StrideUV(), img->d_w,
+                     img->d_h);
 
   VideoFrame decoded_image = VideoFrame::Builder()
                                  .set_video_frame_buffer(buffer)
