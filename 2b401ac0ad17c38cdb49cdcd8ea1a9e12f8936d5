@@ -16,6 +16,29 @@
       "revId": "2b401ac0ad17c38cdb49cdcd8ea1a9e12f8936d5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea945165_6a31ce22",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5147
+      },
+      "writtenOn": "2020-09-18T12:09:12Z",
+      "side": 1,
+      "message": "Looking forward to see what the new name for this will be, come the next CL. Or possibly you\u0027re just gonna decorate as NewFormatWithCherryOnTop. I can\u0027t wait. :-)",
+      "range": {
+        "startLine": 62,
+        "startChar": 36,
+        "endLine": 62,
+        "endChar": 63
+      },
+      "revId": "2b401ac0ad17c38cdb49cdcd8ea1a9e12f8936d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
