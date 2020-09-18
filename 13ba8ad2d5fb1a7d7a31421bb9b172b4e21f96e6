@@ -84,6 +84,24 @@
       "revId": "13ba8ad2d5fb1a7d7a31421bb9b172b4e21f96e6",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d34c9e6_775d519a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-18T10:38:50Z",
+      "side": 1,
+      "message": "To get that functionality back, you\u0027d need to change the neteq simulation to produce NetEqLifetimeStatistics, which are cumulative values more similar to the standard PC GetStats. (And it\u0027s only the packet loss rate graph, other neteq related graphs should be unchanged, I hope).",
+      "parentUuid": "0111e044_8735e672",
+      "revId": "13ba8ad2d5fb1a7d7a31421bb9b172b4e21f96e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
