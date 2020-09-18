@@ -21,6 +21,8 @@ rtc_library("network_emulation") {
     "../../../rtc_base",
     "../../../rtc_base:checks",
     "../../../rtc_base:rtc_base_approved",
+    "../../../rtc_base:rtc_numerics",
+    "../../numerics",
     "../../units:data_rate",
     "../../units:data_size",
     "../../units:timestamp",
