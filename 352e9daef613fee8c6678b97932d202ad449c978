@@ -118,6 +118,30 @@
       "revId": "352e9daef613fee8c6678b97932d202ad449c978",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75bc59b7_6e2097f2",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-18T10:36:20Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "607a54b1_ea14a3c3",
+      "range": {
+        "startLine": 572,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 60
+      },
+      "revId": "352e9daef613fee8c6678b97932d202ad449c978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

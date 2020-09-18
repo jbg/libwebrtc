@@ -63,6 +63,52 @@
       "revId": "d855c3590499c5052be1a69df11fd21581293408",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f7fa9b1_ce07ccfc",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-18T10:36:20Z",
+      "side": 1,
+      "message": "nit: Can you add a literal comment here.",
+      "range": {
+        "startLine": 708,
+        "startChar": 44,
+        "endLine": 708,
+        "endChar": 45
+      },
+      "revId": "d855c3590499c5052be1a69df11fd21581293408",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "570868b6_65b1ffee",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-18T10:36:20Z",
+      "side": 1,
+      "message": "This was previously single-threaded, have you confirmed it is safe?",
+      "range": {
+        "startLine": 708,
+        "startChar": 21,
+        "endLine": 708,
+        "endChar": 43
+      },
+      "revId": "d855c3590499c5052be1a69df11fd21581293408",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
