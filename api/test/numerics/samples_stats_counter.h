@@ -8,15 +8,15 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef RTC_BASE_NUMERICS_SAMPLES_STATS_COUNTER_H_
-#define RTC_BASE_NUMERICS_SAMPLES_STATS_COUNTER_H_
+#ifndef API_TEST_NUMERICS_SAMPLES_STATS_COUNTER_H_
+#define API_TEST_NUMERICS_SAMPLES_STATS_COUNTER_H_
 
 #include <vector>
 
 #include "api/array_view.h"
+#include "api/test/numerics/running_statistics.h"
 #include "api/units/timestamp.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/numerics/running_statistics.h"
 
 namespace webrtc {
 
@@ -116,4 +116,4 @@ SamplesStatsCounter operator/(const SamplesStatsCounter& counter, double value);
 
 }  // namespace webrtc
 
-#endif  // RTC_BASE_NUMERICS_SAMPLES_STATS_COUNTER_H_
+#endif  // API_TEST_NUMERICS_SAMPLES_STATS_COUNTER_H_
