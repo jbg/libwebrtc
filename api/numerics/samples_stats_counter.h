@@ -25,6 +25,8 @@ namespace webrtc {
 class SamplesStatsCounter {
  public:
   struct StatsSample {
+    StatsSample(double value, Timestamp time) : value(value), time(time) {}
+
     double value;
     Timestamp time;
   };
@@ -45,6 +47,8 @@ class SamplesStatsCounter {
 
   // Returns if there are any values in O(1) time.
   bool IsEmpty() const { return samples_.empty(); }
+  // Returns the amount of samples added into counter.
+  int64_t Size() const { return stats_.Size(); }
 
   // Returns min in O(1) time. This function may not be called if there are no
   // samples.
