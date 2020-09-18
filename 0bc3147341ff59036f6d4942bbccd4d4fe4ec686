@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1b29a318_24576bd1",
+        "filename": "common_video/include/video_frame_buffer_pool.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-18T13:20:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1b18c6a_3e9133e7",
+      "range": {
+        "startLine": 26,
+        "startChar": 58,
+        "endLine": 26,
+        "endChar": 68
+      },
+      "revId": "0bc3147341ff59036f6d4942bbccd4d4fe4ec686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5dd4a831_22a1d888",
         "filename": "common_video/include/video_frame_buffer_pool.h",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2020-09-18T13:06:24Z",
       "side": 1,
       "message": "Did you consider making this a template instead and recreate the whole buffer pool if the buffer type changes? Seems like we anyway delete all buffers internally if a new type of frames are created?",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 26
+      },
+      "revId": "0bc3147341ff59036f6d4942bbccd4d4fe4ec686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ca08a51_6285771c",
+        "filename": "common_video/include/video_frame_buffer_pool.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-18T13:20:38Z",
+      "side": 1,
+      "message": "Then it would require some interface and virtual classes to make it work with finch trial.\n\nIn current approach we can just use the buffer pool object.\n\nAnother complication here is that HDR vp9 output produces I010 buffer which doesn\u0027t translate to NV12. Therefore we might need to recreate the buffer pool on the fly if the video stream profile changes. That complicates already complex vp9 code paths even further.",
+      "parentUuid": "5dd4a831_22a1d888",
       "range": {
         "startLine": 33,
         "startChar": 6,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "3df6a2c9_016f05aa",
+        "filename": "common_video/include/video_frame_buffer_pool.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-18T13:20:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcab762a_a2d691a2",
+      "range": {
+        "startLine": 36,
+        "startChar": 37,
+        "endLine": 36,
+        "endChar": 51
+      },
+      "revId": "0bc3147341ff59036f6d4942bbccd4d4fe4ec686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a64b1215_d0a82c62",
         "filename": "common_video/include/video_frame_buffer_pool.h",
         "patchSetId": 5
@@ -91,6 +163,30 @@
       "revId": "0bc3147341ff59036f6d4942bbccd4d4fe4ec686",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e4d393d_d4a5bde2",
+        "filename": "common_video/include/video_frame_buffer_pool.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-18T13:20:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64b1215_d0a82c62",
+      "range": {
+        "startLine": 37,
+        "startChar": 28,
+        "endLine": 37,
+        "endChar": 42
+      },
+      "revId": "0bc3147341ff59036f6d4942bbccd4d4fe4ec686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
