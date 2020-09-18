@@ -142,6 +142,30 @@
       "revId": "352e9daef613fee8c6678b97932d202ad449c978",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75a7e235_accaf7ac",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-18T17:20:48Z",
+      "side": 0,
+      "message": "i think the ideal case is we pass the audioRecord object out post init for via callback for the client to log",
+      "parentUuid": "75bc59b7_6e2097f2",
+      "range": {
+        "startLine": 572,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 60
+      },
+      "revId": "352e9daef613fee8c6678b97932d202ad449c978",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
