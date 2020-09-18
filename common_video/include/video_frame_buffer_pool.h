@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef COMMON_VIDEO_INCLUDE_I420_BUFFER_POOL_H_
-#define COMMON_VIDEO_INCLUDE_I420_BUFFER_POOL_H_
+#ifndef COMMON_VIDEO_INCLUDE_VIDEO_FRAME_BUFFER_POOL_H_
+#define COMMON_VIDEO_INCLUDE_VIDEO_FRAME_BUFFER_POOL_H_
 
 #include <stddef.h>
 
@@ -17,6 +17,7 @@
 
 #include "api/scoped_refptr.h"
 #include "api/video/i420_buffer.h"
+#include "api/video/nv12_buffer.h"
 #include "rtc_base/race_checker.h"
 #include "rtc_base/ref_counted_object.h"
 
@@ -29,24 +30,18 @@ namespace webrtc {
 // changes, old buffers will be purged from the pool.
 // Note that CreateBuffer will crash if more than kMaxNumberOfFramesBeforeCrash
 // are created. This is to prevent memory leaks where frames are not returned.
-class I420BufferPool {
+class VideoFrameBufferPool {
  public:
-  I420BufferPool();
-  explicit I420BufferPool(bool zero_initialize);
-  I420BufferPool(bool zero_initialze, size_t max_number_of_buffers);
-  ~I420BufferPool();
+  VideoFrameBufferPool();
+  explicit VideoFrameBufferPool(bool zero_initialze);
+  VideoFrameBufferPool(bool zero_initialze, size_t max_number_of_buffers);
+  ~VideoFrameBufferPool();
 
   // Returns a buffer from the pool. If no suitable buffer exist in the pool
   // and there are less than |max_number_of_buffers| pending, a buffer is
   // created. Returns null otherwise.
-  rtc::scoped_refptr<I420Buffer> CreateBuffer(int width, int height);
-
-  // Returns a buffer from the pool with the explicitly specified stride.
-  rtc::scoped_refptr<I420Buffer> CreateBuffer(int width,
-                                              int height,
-                                              int stride_y,
-                                              int stride_u,
-                                              int stride_v);
+  rtc::scoped_refptr<I420Buffer> CreateI420Buffer(int width, int height);
+  rtc::scoped_refptr<NV12Buffer> CreateNV12Buffer(int width, int height);
 
   // Changes the max amount of buffers in the pool to the new value.
   // Returns true if change was successful and false if the amount of already
@@ -58,12 +53,11 @@ class I420BufferPool {
   void Release();
 
  private:
-  // Explicitly use a RefCountedObject to get access to HasOneRef,
-  // needed by the pool to check exclusive access.
-  using PooledI420Buffer = rtc::RefCountedObject<I420Buffer>;
+  rtc::scoped_refptr<VideoFrameBuffer>
+  GetExistingBuffer(int width, int height, VideoFrameBuffer::Type type);
 
   rtc::RaceChecker race_checker_;
-  std::list<rtc::scoped_refptr<PooledI420Buffer>> buffers_;
+  std::list<rtc::scoped_refptr<VideoFrameBuffer>> buffers_;
   // If true, newly allocated buffers are zero-initialized. Note that recycled
   // buffers are not zero'd before reuse. This is required of buffers used by
   // FFmpeg according to http://crbug.com/390941, which only requires it for the
@@ -76,4 +70,4 @@ class I420BufferPool {
 
 }  // namespace webrtc
 
-#endif  // COMMON_VIDEO_INCLUDE_I420_BUFFER_POOL_H_
+#endif  // COMMON_VIDEO_INCLUDE_VIDEO_FRAME_BUFFER_POOL_H_
