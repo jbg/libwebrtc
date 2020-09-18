@@ -34,6 +34,24 @@
       "revId": "9882af2330c34ebd057efe78a96f8a8981d8caf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9a35eea_daa55c5f",
+        "filename": "api/audio_codecs/opus/audio_encoder_opus_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:26:43Z",
+      "side": 1,
+      "message": "Would it somehow be possible to instead let the clients more explicitly choose the complexity rather than have a default complexity as a constant via #defines?\nWhat the right complexity is is a moving target as CPUs become more powerful, and what is right for one ARM platform is likely not right for another.\n\nI would advocate for always having a default complexity of 9, and let the clients explicitly set something else if they think that is more appropriate.\n\nRegarding the #define, I don\u0027t have any real opinion rather than that I think we should move away from having it. Maybe the best option would be to use Mirkos safer choice now, and the try to remove everything?",
+      "parentUuid": "162c34ba_2eea2d30",
+      "revId": "9882af2330c34ebd057efe78a96f8a8981d8caf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
