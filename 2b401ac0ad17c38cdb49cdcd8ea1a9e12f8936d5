@@ -39,6 +39,30 @@
       "revId": "2b401ac0ad17c38cdb49cdcd8ea1a9e12f8936d5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2576da33_de13696a",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-09-18T13:57:23Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s tricky. :) I\u0027d like to move to version numbers instead of names, but we\u0027ll see.",
+      "parentUuid": "ea945165_6a31ce22",
+      "range": {
+        "startLine": 62,
+        "startChar": 36,
+        "endLine": 62,
+        "endChar": 63
+      },
+      "revId": "2b401ac0ad17c38cdb49cdcd8ea1a9e12f8936d5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
