@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "af04ca46_828f55bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-09-18T11:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61b918ee_13dff07c",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "9c18e3272d8c07492c09b1d22ffc8919bbefb46b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb9c3b76_ac27111b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
@@ -53,6 +77,24 @@
       "writtenOn": "2020-09-18T11:34:56Z",
       "side": 1,
       "message": "Do you need to expose all three of these headers? Or just sample_stats_counter.h, as implied by the CL title?\n\nIt would be nice to split them into three separate targets, and only put the ons(s) you need in api/.",
+      "revId": "9c18e3272d8c07492c09b1d22ffc8919bbefb46b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46ad7b16_c47b8cbe",
+        "filename": "api/numerics/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-09-18T11:43:21Z",
+      "side": 1,
+      "message": "samples_stats_counter.h imports running_statistics.h. Theoretically I can split this class on API and implementation, then I can move running_statistics.h and math_utils.h to the private API, but it may be quite complicated. \n\nrunning_statistics.h on other hands requires math_utils.h, so it is why I put them all together. WDYT?",
+      "parentUuid": "8bc37608_c210a3e1",
       "revId": "9c18e3272d8c07492c09b1d22ffc8919bbefb46b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
