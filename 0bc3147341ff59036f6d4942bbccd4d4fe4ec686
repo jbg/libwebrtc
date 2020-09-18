@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "6f5121a3_9663a6df",
+        "filename": "common_video/include/video_frame_buffer_pool.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5525
+      },
+      "writtenOn": "2020-09-18T13:28:21Z",
+      "side": 1,
+      "message": "Those are good points for sure. No need to complicate it as long as we only have 2 frame types.",
+      "parentUuid": "5ca08a51_6285771c",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 26
+      },
+      "revId": "0bc3147341ff59036f6d4942bbccd4d4fe4ec686",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dcab762a_a2d691a2",
         "filename": "common_video/include/video_frame_buffer_pool.h",
         "patchSetId": 5
