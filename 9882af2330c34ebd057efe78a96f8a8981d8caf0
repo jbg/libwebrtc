@@ -16,6 +16,24 @@
       "revId": "9882af2330c34ebd057efe78a96f8a8981d8caf0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "162c34ba_2eea2d30",
+        "filename": "api/audio_codecs/opus/audio_encoder_opus_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-09-18T09:01:54Z",
+      "side": 1,
+      "message": "Yes, I thought about it and decided to restrict to macOS arm just to be sure we are not breaking downstream clients with unsupported configs but in that case they are probably already doing more changes than the ones required here. So I am open to simplify (waiting for Henrik and Per\u0027s review).",
+      "parentUuid": "e944411d_c3772c14",
+      "revId": "9882af2330c34ebd057efe78a96f8a8981d8caf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
