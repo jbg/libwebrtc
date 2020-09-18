@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d370cba_da9dabb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "Nice!\nThanks for the CL!!!",
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d440cb9c_b42b50b3",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "What about instead making a Create.. method that reads the killswitch and returns a unique pointer for the class. Then that can be used in the initializer list for the initialization of transparent_state_.",
+      "range": {
+        "startLine": 156,
+        "startChar": 2,
+        "endLine": 162,
+        "endChar": 3
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca5f9b51_094d946a",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "Please describe the term HMM somewhere in the code. As part of that, I think the description should include information on the states (the normal and transparent state) and what they mean.",
+      "range": {
+        "startLine": 415,
+        "startChar": 5,
+        "endLine": 415,
+        "endChar": 8
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "301d466d_10b50337",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "I don\u0027t think that we should use p to abbreviate probability. I would suggest either use prob, or fully spell out probability",
+      "range": {
+        "startLine": 421,
+        "startChar": 21,
+        "endLine": 421,
+        "endChar": 22
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07b0a6f0_b9e3e6e9",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "Could you please make a comment on how these values was, and should be, selected?",
+      "range": {
+        "startLine": 417,
+        "startChar": 4,
+        "endLine": 424,
+        "endChar": 49
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3727511_508280cf",
+        "filename": "modules/audio_processing/aec3/aec_state.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "For sake of readability I would suggest using local variables with namings that reflect what they are instead of at each step using p_transparent_\n\nWithin this method transparent_ stores 3 different probabilities\n1. The conditional probability of transparent state and the observed output from the previous frame.\n2. The Probability of transitioning to transparent state.\n3. The conditional probability of transparent state and the observed output for the current frame.\n\n\nI would suggest using \ncond_prob_last_frame_\nas state variable, and then use local variables with more descriptive names intease.",
+      "range": {
+        "startLine": 427,
+        "startChar": 4,
+        "endLine": 427,
+        "endChar": 18
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b684411_93313b50",
+        "filename": "modules/audio_processing/aec3/aec_state.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "A description is needed for the class.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 7
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05cd40ee_bf38774f",
+        "filename": "modules/audio_processing/aec3/aec_state.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "Is this the right order of the words?\nI don\u0027t think this is not a transparent mode hmm, but rather an HMM based transparent mode.\n\nIt is a bit of a detail, but to be it sounds weird. And I think it becomes more strange with the other class.\nTransparentModeLegacy sounds like the legacy of transparent mode.\n\nI would rather prefer LegacyTransparentMode for that.\n\n\nAnother aspect is that Hmm is an abbreviation that we should avoid (https://google.github.io/styleguide/cppguide.html#General_Naming_Rules). Can one make a more descriptive name without including an abbreviation?",
+      "range": {
+        "startLine": 241,
+        "startChar": 8,
+        "endLine": 241,
+        "endChar": 26
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29b31616_53492a96",
+        "filename": "modules/audio_processing/aec3/aec_state.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "I guess p stands for probability but it would be good to have it a bit more in writing since the abbreviation is not obvious.\n\nWhat about transparent_probability?",
+      "range": {
+        "startLine": 256,
+        "startChar": 10,
+        "endLine": 256,
+        "endChar": 24
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f6ec9f3_758e2328",
+        "filename": "modules/audio_processing/aec3/aec_state.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-18T12:52:37Z",
+      "side": 1,
+      "message": "A description is needed for the class.",
+      "range": {
+        "startLine": 259,
+        "startChar": 8,
+        "endLine": 259,
+        "endChar": 29
+      },
+      "revId": "8e9937388f19f3ad6ec031caab609e52dc6db4d2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
