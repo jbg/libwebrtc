@@ -2469,6 +2469,11 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::RemoveSink(
 void WebRtcVideoChannel::WebRtcVideoSendStream::AddOrUpdateSink(
     rtc::VideoSinkInterface<webrtc::VideoFrame>* sink,
     const rtc::VideoSinkWants& wants) {
+  // TODO(hbos): Following work for bugs.webrtc.org/11222 this thread check
+  // is still needed because of VideoSourceSinkController where we use a lock
+  // for synchronization. That design has leaked into this class.
+  // As per comment in https://webrtc-review.googlesource.com/c/src/+/165783
+  // we should switch to a design that doesn't affect....
   if (worker_thread_ == rtc::Thread::Current()) {
     // AddOrUpdateSink is called on |worker_thread_| if this is the first
     // registration of |sink|.
@@ -2476,6 +2481,9 @@ void WebRtcVideoChannel::WebRtcVideoSendStream::AddOrUpdateSink(
     encoder_sink_ = sink;
     source_->AddOrUpdateSink(encoder_sink_, wants);
   } else {
+    // RTC_DCHECK(false);
+    // TODO: Remove the need for this.
+
     // Subsequent calls to AddOrUpdateSink will happen on the encoder task
     // queue.
     invoker_.AsyncInvoke<void>(
