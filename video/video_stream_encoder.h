@@ -40,6 +40,7 @@
 #include "rtc_base/rate_statistics.h"
 #include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/task_queue.h"
+#include "rtc_base/task_utils/pending_task_safety_flag.h"
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/thread_checker.h"
 #include "system_wrappers/include/clock.h"
@@ -215,6 +216,9 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
                                int64_t time_when_posted_in_ms)
       RTC_RUN_ON(&encoder_queue_);
 
+  TaskQueueBase* const main_queue_;
+
+  // TODO: remove - we don't need a member variable.
   rtc::Event shutdown_event_;
 
   const uint32_t number_of_cores_;
@@ -228,9 +232,6 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   std::unique_ptr<VideoEncoderFactory::EncoderSelectorInterface> const
       encoder_selector_;
   VideoStreamEncoderObserver* const encoder_stats_observer_;
-  // |thread_checker_| checks that public methods that are related to lifetime
-  // of VideoStreamEncoder are called on the same thread.
-  rtc::ThreadChecker thread_checker_;
 
   VideoEncoderConfig encoder_config_ RTC_GUARDED_BY(&encoder_queue_);
   std::unique_ptr<VideoEncoder> encoder_ RTC_GUARDED_BY(&encoder_queue_)
@@ -437,6 +438,9 @@ class VideoStreamEncoder : public VideoStreamEncoderInterface,
   // Public methods are proxied to the task queues. The queues must be destroyed
   // first to make sure no tasks run that use other members.
   rtc::TaskQueue encoder_queue_;
+
+  // Used to cancel any potentially pending tasks to the main thread.
+  ScopedTaskSafety task_safety_;
 
   RTC_DISALLOW_COPY_AND_ASSIGN(VideoStreamEncoder);
 };

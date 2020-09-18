@@ -19,6 +19,7 @@
 #include "api/video/video_source_interface.h"
 #include "call/adaptation/video_source_restrictions.h"
 #include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 
 namespace webrtc {
 
@@ -30,6 +31,8 @@ class VideoSourceSinkController {
  public:
   VideoSourceSinkController(rtc::VideoSinkInterface<VideoFrame>* sink,
                             rtc::VideoSourceInterface<VideoFrame>* source);
+
+  ~VideoSourceSinkController();
 
   void SetSource(rtc::VideoSourceInterface<VideoFrame>* source);
   // Must be called in order for changes to settings to have an effect. This
@@ -54,6 +57,14 @@ class VideoSourceSinkController {
  private:
   rtc::VideoSinkWants CurrentSettingsToSinkWants() const
       RTC_EXCLUSIVE_LOCKS_REQUIRED(mutex_);
+
+  // Used to ensure that this class is called on threads/sequences that it was
+  // designed for. Although we do use a lock in some places, if we make calls
+  // outside this implementation, we risk leaking the current 'free threaded'
+  // design of this class into other implementations, that then become more
+  // restricted (i.e. must also adapt to handling calls from any thread).
+  // In practice, this represent's libjingle's worker thread.
+  SequenceChecker sequence_checker_;
 
   mutable Mutex mutex_;
   rtc::VideoSinkInterface<VideoFrame>* const sink_;

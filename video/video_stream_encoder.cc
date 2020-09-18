@@ -273,7 +273,8 @@ VideoStreamEncoder::VideoStreamEncoder(
     const VideoStreamEncoderSettings& settings,
     std::unique_ptr<OveruseFrameDetector> overuse_detector,
     TaskQueueFactory* task_queue_factory)
-    : shutdown_event_(true /* manual_reset */, false),
+    : main_queue_(TaskQueueBase::Current()),
+      shutdown_event_(true /* manual_reset */, false),
       number_of_cores_(number_of_cores),
       quality_scaling_experiment_enabled_(QualityScalingExperiment::Enabled()),
       sink_(nullptr),
@@ -342,6 +343,7 @@ VideoStreamEncoder::VideoStreamEncoder(
       encoder_queue_(task_queue_factory->CreateTaskQueue(
           "EncoderQueue",
           TaskQueueFactory::Priority::NORMAL)) {
+  RTC_DCHECK(main_queue_);
   RTC_DCHECK(encoder_stats_observer);
   RTC_DCHECK_GE(number_of_cores, 1);
 
@@ -369,13 +371,13 @@ VideoStreamEncoder::VideoStreamEncoder(
 }
 
 VideoStreamEncoder::~VideoStreamEncoder() {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(main_queue_);
   RTC_DCHECK(shutdown_event_.Wait(0))
       << "Must call ::Stop() before destruction.";
 }
 
 void VideoStreamEncoder::Stop() {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(main_queue_);
   video_source_sink_controller_.SetSource(nullptr);
 
   encoder_queue_.PostTask([this] {
@@ -407,7 +409,7 @@ void VideoStreamEncoder::Stop() {
 
 void VideoStreamEncoder::SetBitrateAllocationObserver(
     VideoBitrateAllocationObserver* bitrate_observer) {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(main_queue_);
   encoder_queue_.PostTask([this, bitrate_observer] {
     RTC_DCHECK_RUN_ON(&encoder_queue_);
     RTC_DCHECK(!bitrate_observer_);
@@ -450,7 +452,7 @@ VideoStreamEncoder::GetAdaptationResources() {
 void VideoStreamEncoder::SetSource(
     rtc::VideoSourceInterface<VideoFrame>* source,
     const DegradationPreference& degradation_preference) {
-  RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(main_queue_);
   video_source_sink_controller_.SetSource(source);
   input_state_provider_.OnHasInputChanged(source);
 
