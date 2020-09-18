@@ -15,7 +15,7 @@
 #include <limits>
 #include <vector>
 
-#include "rtc_base/numerics/math_utils.h"  // unsigned difference
+#include "api/numerics/math_utils.h"  // unsigned difference
 #include "test/gtest.h"
 
 namespace webrtc {

@@ -8,16 +8,16 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#ifndef RTC_BASE_NUMERICS_RUNNING_STATISTICS_H_
-#define RTC_BASE_NUMERICS_RUNNING_STATISTICS_H_
+#ifndef API_NUMERICS_RUNNING_STATISTICS_H_
+#define API_NUMERICS_RUNNING_STATISTICS_H_
 
 #include <algorithm>
 #include <cmath>
 #include <limits>
 
 #include "absl/types/optional.h"
+#include "api/numerics/math_utils.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/numerics/math_utils.h"
 
 namespace webrtc {
 
@@ -156,4 +156,4 @@ class RunningStatistics {
 
 }  // namespace webrtc
 
-#endif  // RTC_BASE_NUMERICS_RUNNING_STATISTICS_H_
+#endif  // API_NUMERICS_RUNNING_STATISTICS_H_
