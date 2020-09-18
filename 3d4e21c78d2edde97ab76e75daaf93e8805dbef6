@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62bf3a60_cba9a3ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-09-18T16:31:08Z",
+      "side": 1,
+      "message": "Hi Jamie, Tommi,\n\nThanks for your comments on this CL so far, I\u0027ve addressed them in the latest patchset. Can you please take another look? If you\u0027re busy, no worries, could you suggest another owner to take a look instead?\n\nThanks,\nAustin Orion",
+      "revId": "3d4e21c78d2edde97ab76e75daaf93e8805dbef6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
