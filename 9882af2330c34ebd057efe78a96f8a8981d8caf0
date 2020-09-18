@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e944411d_c3772c14",
+        "filename": "api/audio_codecs/opus/audio_encoder_opus_config.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-18T08:52:24Z",
+      "side": 1,
+      "message": "Can we make this simply\n\n  #if defined(WEBRTC_ANDROID) || defined(WEBRTC_IOS)\n\n?\n\nHenrik and Per, what do you think?",
+      "revId": "9882af2330c34ebd057efe78a96f8a8981d8caf0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
