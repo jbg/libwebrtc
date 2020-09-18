@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dedac6b1_2d0cf811",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-18T08:23:38Z",
+      "side": 1,
+      "message": "Make this target testonly? And give it visibility *, so that out-of-tree code can use it?",
+      "revId": "df7aa160314531f663cbf2fba466e61dda09a2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ea96d0_0c3a2eb6",
+        "filename": "api/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-18T08:23:38Z",
+      "side": 1,
+      "message": "Are you creating the test/numerics/ directory with this CL? If so, please put a BUILD.gn file in there instead. (This cannot be easily fixed afterwards.)",
+      "revId": "df7aa160314531f663cbf2fba466e61dda09a2e6",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
