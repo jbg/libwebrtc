@@ -242,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "468b15f7_0f7c8101",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-18T17:29:22Z",
+      "side": 1,
+      "message": "yes - it seems unnecessary. If the intent is to leave a reminder about the state variable, then you could also do that via a dcheck.",
+      "parentUuid": "c3565ad1_7fdc8871",
+      "revId": "05c11b6f8f83425b5e30d23ce2bedee97c8bc61b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e44c7d9_717de078",
         "filename": "modules/desktop_capture/win/wgc_capture_session.h",
         "patchSetId": 6
