@@ -435,6 +435,7 @@ class WebRtcVideoChannel : public VideoMediaChannel,
     // In order for the |invoker_| to protect other members from being
     // destructed as they are used in asynchronous tasks it has to be destructed
     // first.
+    // TODO: Remove.
     rtc::AsyncInvoker invoker_;
 
     // TODO(asapersson): investigate why setting
