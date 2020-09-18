@@ -98,6 +98,24 @@
       "revId": "9c18e3272d8c07492c09b1d22ffc8919bbefb46b",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2476bf8d_2af61d9a",
+        "filename": "api/numerics/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-18T11:52:50Z",
+      "side": 1,
+      "message": "It is preferable to have as little stuff as possible in api/, because refactoring and changes in general is more work for API code than for internal code.\n\nIf everything you want users to use is in samples_stats_counter.h, then I\u0027d strongly prefer if you moved only that file (and its .cc file) to api/, and left the other two in their original location.",
+      "parentUuid": "46ad7b16_c47b8cbe",
+      "revId": "9c18e3272d8c07492c09b1d22ffc8919bbefb46b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
