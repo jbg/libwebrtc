@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6e69b92_3d300599",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-19T10:20:30Z",
+      "side": 1,
+      "message": "There\u0027s probably not much value in having this link here. Unless maybe you add some explanatory text, e.g.\n\n  \"The name was chosen because just like a real-world robocaller [https://en.wikipedia.org/wiki/Robocall], webrtc::RoboCaller will call multiple recipients and give all of them the same message, without giving them the chance to reply.\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 38
+      },
+      "revId": "00725c52564298cd0dcb02f52c9f4c1103addb8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3268b67_f9553b05",
+        "filename": "rtc_base/robot_caller.h.orig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-19T10:20:30Z",
+      "side": 1,
+      "message": "This entire file looks like it should be deleted.",
+      "revId": "00725c52564298cd0dcb02f52c9f4c1103addb8c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
