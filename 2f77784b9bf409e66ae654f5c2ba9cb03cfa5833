@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68e1683a_e100f28c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-19T20:02:43Z",
+      "side": 1,
+      "message": "Super nitty nit: The line lengths are very uneven. Perhaps\n\nThe name was chosen because just like a real-world robocaller\n[https://en.wikipedia.org/wiki/Robocall], webrtc::RoboCaller will\ncall multiple recipients and give all of them the same message,\nwithout giving them the chance to reply.\n\n(re-flowed with Emacs.)",
+      "revId": "2f77784b9bf409e66ae654f5c2ba9cb03cfa5833",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
