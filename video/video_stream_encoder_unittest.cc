@@ -448,7 +448,7 @@ class CroppingVideoStreamFactory
 
 class AdaptingFrameForwarder : public test::FrameForwarder {
  public:
-  AdaptingFrameForwarder(TimeController* time_controller)
+  explicit AdaptingFrameForwarder(TimeController* time_controller)
       : time_controller_(time_controller), adaptation_enabled_(false) {}
   ~AdaptingFrameForwarder() override {}
 
@@ -5726,6 +5726,7 @@ TEST_F(VideoStreamEncoderTest, BitrateEncoderSwitch) {
       /*fraction_lost=*/0,
       /*rtt_ms=*/0,
       /*cwnd_reduce_ratio=*/0);
+  AdvanceTime(TimeDelta::Millis(0));
 
   video_stream_encoder_->Stop();
 }
@@ -5861,6 +5862,7 @@ TEST_F(VideoStreamEncoderTest, EncoderSelectorBitrateSwitch) {
       /*fraction_lost=*/0,
       /*rtt_ms=*/0,
       /*cwnd_reduce_ratio=*/0);
+  AdvanceTime(TimeDelta::Millis(0));
 
   video_stream_encoder_->Stop();
 }
@@ -5908,6 +5910,8 @@ TEST_F(VideoStreamEncoderTest, EncoderSelectorBrokenEncoderSwitch) {
 
   video_source_.IncomingCapturedFrame(CreateFrame(1, kDontCare, kDontCare));
   encode_attempted.Wait(3000);
+
+  AdvanceTime(TimeDelta::Millis(0));
 
   video_stream_encoder_->Stop();
 
