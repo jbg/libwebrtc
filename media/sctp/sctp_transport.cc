@@ -365,20 +365,20 @@ class SctpTransport::UsrSctpWrapper {
           << addr;
       return EINVAL;
     }
-    RTC_LOG(LS_VERBOSE) << "global OnSctpOutboundPacket():"
-                           "addr: "
-                        << addr << "; length: " << length
-                        << "; tos: " << rtc::ToHex(tos)
-                        << "; set_df: " << rtc::ToHex(set_df);
 
-    VerboseLogPacket(data, length, SCTP_DUMP_OUTBOUND);
+    if (RTC_LOG_CHECK_LEVEL(LS_VERBOSE)) {
+      RTC_LOG(LS_VERBOSE) << "global OnSctpOutboundPacket():"
+                             "addr: "
+                          << addr << "; length: " << length
+                          << "; tos: " << rtc::ToHex(tos)
+                          << "; set_df: " << rtc::ToHex(set_df);
+
+      VerboseLogPacket(data, length, SCTP_DUMP_OUTBOUND);
+    }
+
     // Note: We have to copy the data; the caller will delete it.
-    rtc::CopyOnWriteBuffer buf(reinterpret_cast<uint8_t*>(data), length);
-    // TODO(deadbeef): Why do we need an AsyncInvoke here? We're already on the
-    // right thread and don't need to unwind the stack.
-    transport->invoker_.AsyncInvoke<void>(
-        RTC_FROM_HERE, transport->network_thread_,
-        rtc::Bind(&SctpTransport::OnPacketFromSctpToNetwork, transport, buf));
+    transport->OnPacketFromSctpToNetwork(
+        rtc::CopyOnWriteBuffer(reinterpret_cast<uint8_t*>(data), length));
     return 0;
   }
 
