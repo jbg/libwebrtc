@@ -32,7 +32,6 @@
 #include "media/base/media_engine.h"
 #include "media/engine/constants.h"
 #include "media/engine/unhandled_packets_buffer.h"
-#include "rtc_base/async_invoker.h"
 #include "rtc_base/network_route.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
@@ -637,10 +636,6 @@ class WebRtcVideoChannel : public VideoMediaChannel,
   bool allow_codec_switching_ = false;
   absl::optional<EncoderSwitchRequestCallback::Config>
       requested_encoder_switch_;
-
-  // In order for the |invoker_| to protect other members from being destructed
-  // as they are used in asynchronous tasks it has to be destructed first.
-  rtc::AsyncInvoker invoker_;
 };
 
 class EncoderStreamFactory
