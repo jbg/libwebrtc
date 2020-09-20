@@ -206,8 +206,8 @@ bool SctpDataChannel::Init() {
   // Chrome glue and WebKit) are not wired up properly until after this
   // function returns.
   if (provider_->ReadyToSendData()) {
-    invoker_.AsyncInvoke<void>(RTC_FROM_HERE, rtc::Thread::Current(),
-                               [this] { OnTransportReady(true); });
+    rtc::Thread::Current()->PostTask(RTC_FROM_HERE,
+                                     [this] { OnTransportReady(true); });
   }
 
   return true;
