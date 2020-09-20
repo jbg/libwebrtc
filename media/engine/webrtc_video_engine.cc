@@ -821,97 +821,85 @@ bool WebRtcVideoChannel::SetSendParameters(const VideoSendParameters& params) {
 }
 
 void WebRtcVideoChannel::RequestEncoderFallback() {
-  invoker_.AsyncInvoke<void>(
-      RTC_FROM_HERE, worker_thread_, [this] {
-        RTC_DCHECK_RUN_ON(&thread_checker_);
-        if (negotiated_codecs_.size() <= 1) {
-          RTC_LOG(LS_WARNING)
-              << "Encoder failed but no fallback codec is available";
-          return;
-        }
+  RTC_DCHECK_RUN_ON(&thread_checker_);
+  if (negotiated_codecs_.size() <= 1) {
+    RTC_LOG(LS_WARNING) << "Encoder failed but no fallback codec is available";
+    return;
+  }
 
-        ChangedSendParameters params;
-        params.negotiated_codecs = negotiated_codecs_;
-        params.negotiated_codecs->erase(params.negotiated_codecs->begin());
-        params.send_codec = params.negotiated_codecs->front();
-        ApplyChangedParams(params);
-      });
+  ChangedSendParameters params;
+  params.negotiated_codecs = negotiated_codecs_;
+  params.negotiated_codecs->erase(params.negotiated_codecs->begin());
+  params.send_codec = params.negotiated_codecs->front();
+  ApplyChangedParams(params);
 }
 
 void WebRtcVideoChannel::RequestEncoderSwitch(
     const EncoderSwitchRequestCallback::Config& conf) {
-  invoker_.AsyncInvoke<void>(RTC_FROM_HERE, worker_thread_, [this, conf] {
-    RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(&thread_checker_);
 
-    if (!allow_codec_switching_) {
-      RTC_LOG(LS_INFO) << "Encoder switch requested but codec switching has"
-                          " not been enabled yet.";
-      requested_encoder_switch_ = conf;
-      return;
-    }
+  if (!allow_codec_switching_) {
+    RTC_LOG(LS_INFO) << "Encoder switch requested but codec switching has"
+                        " not been enabled yet.";
+    requested_encoder_switch_ = conf;
+    return;
+  }
 
-    for (const VideoCodecSettings& codec_setting : negotiated_codecs_) {
-      if (codec_setting.codec.name == conf.codec_name) {
-        if (conf.param) {
-          auto it = codec_setting.codec.params.find(*conf.param);
+  for (const VideoCodecSettings& codec_setting : negotiated_codecs_) {
+    if (codec_setting.codec.name == conf.codec_name) {
+      if (conf.param) {
+        auto it = codec_setting.codec.params.find(*conf.param);
+        if (it == codec_setting.codec.params.end())
+          continue;
 
-          if (it == codec_setting.codec.params.end()) {
-            continue;
-          }
+        if (conf.value && it->second != *conf.value)
+          continue;
+      }
 
-          if (conf.value && it->second != *conf.value) {
-            continue;
-          }
-        }
-
-        if (send_codec_ == codec_setting) {
-          // Already using this codec, no switch required.
-          return;
-        }
-
-        ChangedSendParameters params;
-        params.send_codec = codec_setting;
-        ApplyChangedParams(params);
+      if (send_codec_ == codec_setting) {
+        // Already using this codec, no switch required.
         return;
       }
-    }
 
-    RTC_LOG(LS_WARNING) << "Requested encoder with codec_name:"
-                        << conf.codec_name
-                        << ", param:" << conf.param.value_or("none")
-                        << " and value:" << conf.value.value_or("none")
-                        << "not found. No switch performed.";
-  });
+      ChangedSendParameters params;
+      params.send_codec = codec_setting;
+      ApplyChangedParams(params);
+      return;
+    }
+  }
+
+  RTC_LOG(LS_WARNING) << "Requested encoder with codec_name:" << conf.codec_name
+                      << ", param:" << conf.param.value_or("none")
+                      << " and value:" << conf.value.value_or("none")
+                      << "not found. No switch performed.";
 }
 
 void WebRtcVideoChannel::RequestEncoderSwitch(
     const webrtc::SdpVideoFormat& format) {
-  invoker_.AsyncInvoke<void>(RTC_FROM_HERE, worker_thread_, [this, format] {
-    RTC_DCHECK_RUN_ON(&thread_checker_);
+  RTC_DCHECK_RUN_ON(&thread_checker_);
 
-    for (const VideoCodecSettings& codec_setting : negotiated_codecs_) {
-      if (IsSameCodec(format.name, format.parameters, codec_setting.codec.name,
-                      codec_setting.codec.params)) {
-        VideoCodecSettings new_codec_setting = codec_setting;
-        for (const auto& kv : format.parameters) {
-          new_codec_setting.codec.params[kv.first] = kv.second;
-        }
+  for (const VideoCodecSettings& codec_setting : negotiated_codecs_) {
+    if (IsSameCodec(format.name, format.parameters, codec_setting.codec.name,
+                    codec_setting.codec.params)) {
+      VideoCodecSettings new_codec_setting = codec_setting;
+      for (const auto& kv : format.parameters) {
+        new_codec_setting.codec.params[kv.first] = kv.second;
+      }
 
-        if (send_codec_ == new_codec_setting) {
-          // Already using this codec, no switch required.
-          return;
-        }
-
-        ChangedSendParameters params;
-        params.send_codec = new_codec_setting;
-        ApplyChangedParams(params);
+      if (send_codec_ == new_codec_setting) {
+        // Already using this codec, no switch required.
         return;
       }
-    }
 
-    RTC_LOG(LS_WARNING) << "Encoder switch failed: SdpVideoFormat "
-                        << format.ToString() << " not negotiated.";
-  });
+      ChangedSendParameters params;
+      params.send_codec = new_codec_setting;
+      ApplyChangedParams(params);
+      return;
+    }
+  }
+
+  RTC_LOG(LS_WARNING) << "Encoder switch failed: SdpVideoFormat "
+                      << format.ToString() << " not negotiated.";
 }
 
 bool WebRtcVideoChannel::ApplyChangedParams(
