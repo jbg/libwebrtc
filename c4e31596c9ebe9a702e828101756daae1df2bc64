@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "91c12df0_390fc9fb",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-21T12:30:40Z",
+      "side": 1,
+      "message": "Yes I considered it. Here\u0027s why I decided to keep it on the worker thread:\n- The VSSC is constructed and destructed on the worker thread\n- It\u0027s a middle layer that forwards information downstream\n  - all the downstream implementation are tied to the worker thread\n  - callback to downstream on a known thread simplifies it and adds efficiency\n  - The VSSC calls out to external code not involved in the actual encoding.\n    Design wise, I preferred to make it so that you can\u0027t accidentally block\n    the encoder from a sink implementation (and the encoder is unaware).\n- Conceptually \u0027control\u0027 of the encoder queue, is from outside of it. As an example, the class that owns the queue, controls it from the worker thread.\n\nWhat about |sink_|?\n\nI think we should consider something similar for sink_ actually.\nThe first thing that VideoSendStreamImpl::OnEncoderConfigurationChanged does\nis to check if it\u0027s on the worker thread and if not, post to there.\n\nVideoSendStreamImpl::OnEncodedImage does that as well. However, it also forwards the call while still on the encoder queue to RtpVideoSender::OnEncodedImage where we end up grabbing multiple locks and competing with other threads, including the worker thread, eventually start building rtp packets, encryption, packetizing before sending it over to the pacer which hands it over to another thread. Basically There\u0027s a lot that happens on the encoder queue without the encoder code being aware of it.\n\nOn the receiver side, I\u0027ve changed this a lot so that things run on their own threads and to a large extent avoid running into locks or calling into external implementations that end up blocking the threads/queues. Querying for stats there for example, is subsequently lockless and thread-hop free. The sender side is still a few years behind, so I would take a look at the receiver side for ideas on threading and what objects should live where.",
+      "parentUuid": "947e21ad_a1dddd62",
+      "revId": "c4e31596c9ebe9a702e828101756daae1df2bc64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a57e7dd4_abe9ce94",
         "filename": "video/video_stream_encoder.h",
         "patchSetId": 17
@@ -85,6 +103,24 @@
       "revId": "c4e31596c9ebe9a702e828101756daae1df2bc64",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41f26e9a_941bf846",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-21T12:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a57e7dd4_abe9ce94",
+      "revId": "c4e31596c9ebe9a702e828101756daae1df2bc64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
