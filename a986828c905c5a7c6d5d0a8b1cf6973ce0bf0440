@@ -118,6 +118,30 @@
       "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95bc7676_517350d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-21T22:42:01Z",
+      "side": 1,
+      "message": "haha ok then 😊\n\nI thought the initial trick was to do the severity check before anything else ran, so that in addition to being about binary size, it was also about avoiding running unnecessary code paths. What was thinking would be interesting was to see if we could do both; minimize code size while at the same time don\u0027t incur a regression in terms of running unnecessary code.",
+      "parentUuid": "85146407_a7eb7653",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
