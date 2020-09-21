@@ -46,6 +46,30 @@
       "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0df2b3e4_b84f7088",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T20:03:33Z",
+      "side": 1,
+      "message": "We previously used a clever trick to reduce binary site at the call site for precisely this situation [https://source.chromium.org/chromium/_/webrtc/src.git/+/ee10ea8a4181dcad806ffb583495766da102528e], but apparently we no longer do. The binary size impact of this CL can probably be reduced by employing that trick again.\n\nBriefly, since making a function call with zero arguments takes fewer instructions than making a function call with one argument, and since the number of possible arguments (log severities) is small, and since ~all call sites know the severity statically, we can pass the severity as a template argument instead of as a regular argument and save space that way. The CPU cost of the extra indirection is small, since it\u0027s just a few instructions long and trivially branch predictable.\n\nIf you want, I can try this as a sequel to this CL.",
+      "parentUuid": "8a9bb32b_407affed",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
