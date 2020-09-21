@@ -142,6 +142,30 @@
       "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07441184_4a3147a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T22:52:18Z",
+      "side": 1,
+      "message": "No, the trick I\u0027ve been mentioning is about doing the initial, inlined severity check in a way that\u0027s less binary size costly. I have a CL for it here [https://webrtc-review.googlesource.com/c/src/+/184934], currently running try bots; locally, it saves 9.5 kB for me on arm64.",
+      "parentUuid": "95bc7676_517350d0",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
