@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa430556_ffa9316d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-09-21T12:45:02Z",
+      "side": 1,
+      "message": "Could we keep the packet loss rate metric in neteq and event log visualizer? I\u0027m still using it.",
+      "revId": "4461f059d180fe8c2886d422ebd1cb55b5c83e72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
