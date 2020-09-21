@@ -22,6 +22,30 @@
       "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a9bb32b_407affed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-21T16:04:49Z",
+      "side": 1,
+      "message": "+1 on styleguide update. Our logs are way to spammy which reduces usefulness and affects performance.\n\nI\u0027m also in favor of deleting log statements and make more use of DLOG where we\u0027re currently using INFO and VERBOSE. Some warning logs are also spammy and misleading (i.e. not reflecting something unexpected).",
+      "parentUuid": "1602d31a_9249a3ce",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
