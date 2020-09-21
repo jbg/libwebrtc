@@ -16,6 +16,23 @@
       "revId": "c4e31596c9ebe9a702e828101756daae1df2bc64",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a57e7dd4_abe9ce94",
+        "filename": "video/video_stream_encoder.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-21T09:04:29Z",
+      "side": 1,
+      "message": "nit: \"Remove This class is thread-safe\"",
+      "revId": "c4e31596c9ebe9a702e828101756daae1df2bc64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
