@@ -239,6 +239,24 @@
       "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32f76284_9c23b9bb",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T20:19:37Z",
+      "side": 1,
+      "message": "You don\u0027t have to put it in a separate header file; just keep it right here, where you define the struct now. And its methods can be inline, so also right here. And you won\u0027t have to write a constructor.\n\nDo you still think this is too much overhead?\n\nThe reason I asked for this is that as I was reviewing, I was unable to quickly find out such things as, what happens when the buffer overflows? when it underflows? And if it had been a separate class, this would have been simple, and would also have made the call sites simpler since they would no longer have the ring buffer logic in them.",
+      "parentUuid": "62cff27e_ce6afca3",
+      "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
