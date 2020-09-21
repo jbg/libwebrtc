@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "947e21ad_a1dddd62",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-21T09:08:44Z",
+      "side": 1,
+      "message": "Alternatively, did you consider moving VideoSourceSinkController to the encoder queue? Calls like this are now posted from the encoder queue instead of being invoked directly. And in other places, like SetSink, we already post to the encoder sink for the sake of sink_, so it would make sense if it lived there",
+      "revId": "c4e31596c9ebe9a702e828101756daae1df2bc64",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a57e7dd4_abe9ce94",
         "filename": "video/video_stream_encoder.h",
         "patchSetId": 17
