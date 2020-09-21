@@ -2534,6 +2534,36 @@ void PeerConnection::SetLocalDescription(
       });
 }
 
+void PeerConnection::RemoveStoppedTransceivers() {
+  // 3.2.10.1: For each transceiver in the connection's set of transceivers
+  //           run the following steps:
+  if (IsUnifiedPlan()) {
+    for (auto it = transceivers_.begin(); it != transceivers_.end();) {
+      const auto& transceiver = *it;
+      // 3.2.10.1.1: If transceiver is stopped, associated with an m= section
+      //             and the associated m= section is rejected in
+      //             connection.[[CurrentLocalDescription]] or
+      //             connection.[[CurrentRemoteDescription]], remove the
+      //             transceiver from the connection's set of transceivers.
+      if (transceiver->stopped()) {
+        const ContentInfo* content =
+            FindMediaSectionForTransceiver(transceiver, local_description());
+        if (content && content->rejected) {
+          RTC_LOG(LS_INFO) << "Dissociating transceiver"
+                           << " since the media section is being recycled.";
+          (*it)->internal()->set_mid(absl::nullopt);
+          (*it)->internal()->set_mline_index(absl::nullopt);
+          it = transceivers_.erase(it);
+        } else {
+          ++it;
+        }
+      } else {
+        ++it;
+      }
+    }
+  }
+}
+
 void PeerConnection::DoSetLocalDescription(
     std::unique_ptr<SessionDescriptionInterface> desc,
     rtc::scoped_refptr<SetLocalDescriptionObserverInterface> observer) {
@@ -2605,34 +2635,7 @@ void PeerConnection::DoSetLocalDescription(
   RTC_DCHECK(local_description());
 
   if (local_description()->GetType() == SdpType::kAnswer) {
-    // 3.2.10.1: For each transceiver in the connection's set of transceivers
-    //           run the following steps:
-    if (IsUnifiedPlan()) {
-      for (auto it = transceivers_.begin(); it != transceivers_.end();) {
-        const auto& transceiver = *it;
-        // 3.2.10.1.1: If transceiver is stopped, associated with an m= section
-        //             and the associated m= section is rejected in
-        //             connection.[[CurrentLocalDescription]] or
-        //             connection.[[CurrentRemoteDescription]], remove the
-        //             transceiver from the connection's set of transceivers.
-        if (transceiver->stopped()) {
-          const ContentInfo* content =
-              FindMediaSectionForTransceiver(transceiver, local_description());
-
-          if (content && content->rejected) {
-            RTC_LOG(LS_INFO) << "Dissociating transceiver"
-                             << " since the media section is being recycled.";
-            (*it)->internal()->set_mid(absl::nullopt);
-            (*it)->internal()->set_mline_index(absl::nullopt);
-            it = transceivers_.erase(it);
-          } else {
-            ++it;
-          }
-        } else {
-          ++it;
-        }
-      }
-    }
+    RemoveStoppedTransceivers();
 
     // TODO(deadbeef): We already had to hop to the network thread for
     // MaybeStartGathering...
@@ -3100,6 +3103,7 @@ void PeerConnection::DoSetRemoteDescription(
   RTC_DCHECK(remote_description());
 
   if (type == SdpType::kAnswer) {
+    RemoveStoppedTransceivers();
     // TODO(deadbeef): We already had to hop to the network thread for
     // MaybeStartGathering...
     network_thread()->Invoke<void>(
