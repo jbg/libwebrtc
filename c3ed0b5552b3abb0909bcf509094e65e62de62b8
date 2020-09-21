@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89ddfac4_690db4fc",
+        "filename": "rtc_base/robo_caller.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T07:35:23Z",
+      "side": 1,
+      "message": "I thought this bug was fixed already? Do you need to rebase your change?",
+      "range": {
+        "startLine": 80,
+        "startChar": 23,
+        "endLine": 80,
+        "endChar": 25
+      },
+      "revId": "c3ed0b5552b3abb0909bcf509094e65e62de62b8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
