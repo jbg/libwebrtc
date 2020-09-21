@@ -17,43 +17,51 @@
 #include "rtc_base/numerics/safe_minmax.h"
 
 namespace webrtc {
-
 namespace {
-void ShiftBuffer(std::array<float, kPeakEnveloperBufferSize>* buffer_) {
-  // Move everything one element back.
-  std::copy(buffer_->begin() + 1, buffer_->end(), buffer_->begin());
-}
+
+constexpr float kMinLevelDbfs = -90.f;
+
+// Min/max margins are based on speech crest-factor.
+constexpr float kMinMarginDb = 12.f;
+constexpr float kMaxMarginDb = 25.f;
+
+constexpr int kRingBuffCapacity = kPeakEnveloperBufferSize;
+
 }  // namespace
 
 SaturationProtector::PeakEnveloper::PeakEnveloper() = default;
 
 void SaturationProtector::PeakEnveloper::Process(float frame_peak_dbfs) {
-  // Update the delayed buffer and the current superframe peak.
-  current_superframe_peak_dbfs_ =
-      std::max(current_superframe_peak_dbfs_, frame_peak_dbfs);
+  RTC_DCHECK_EQ(peak_delay_buffer_.buffer.size(), kRingBuffCapacity);
+  RTC_DCHECK_LT(peak_delay_buffer_.next, kRingBuffCapacity);
+  RTC_DCHECK_LE(peak_delay_buffer_.size, kRingBuffCapacity);
+
+  // Get the max peak over `kPeakEnveloperSuperFrameLengthMs` ms.
+  max_peaks_dbfs_ = std::max(max_peaks_dbfs_, frame_peak_dbfs);
   speech_time_in_estimate_ms_ += kFrameDurationMs;
   if (speech_time_in_estimate_ms_ > kPeakEnveloperSuperFrameLengthMs) {
-    speech_time_in_estimate_ms_ = 0;
-    const bool buffer_full = elements_in_buffer_ == kPeakEnveloperBufferSize;
-    if (buffer_full) {
-      ShiftBuffer(&peak_delay_buffer_);
-      *peak_delay_buffer_.rbegin() = current_superframe_peak_dbfs_;
-    } else {
-      peak_delay_buffer_[elements_in_buffer_] = current_superframe_peak_dbfs_;
-      elements_in_buffer_++;
+    // Push `max_peaks_dbfs_` back into the ring buffer.
+    peak_delay_buffer_.buffer[peak_delay_buffer_.next++] = max_peaks_dbfs_;
+    if (peak_delay_buffer_.next == kRingBuffCapacity) {
+      peak_delay_buffer_.next = 0;
     }
-    current_superframe_peak_dbfs_ = -90.f;
+    if (peak_delay_buffer_.size < kRingBuffCapacity) {
+      peak_delay_buffer_.size++;
+    }
+    // Reset.
+    speech_time_in_estimate_ms_ = 0;
+    max_peaks_dbfs_ = kMinLevelDbfs;
   }
 }
 
 float SaturationProtector::PeakEnveloper::Query() const {
-  float result;
-  if (elements_in_buffer_ > 0) {
-    result = peak_delay_buffer_[0];
-  } else {
-    result = current_superframe_peak_dbfs_;
-  }
-  return result;
+  RTC_DCHECK_LT(peak_delay_buffer_.next, kRingBuffCapacity);
+  return peak_delay_buffer_.size == 0
+             ? max_peaks_dbfs_
+             : peak_delay_buffer_
+                   .buffer[peak_delay_buffer_.size == kRingBuffCapacity
+                               ? peak_delay_buffer_.next
+                               : 0];
 }
 
 SaturationProtector::SaturationProtector(ApmDataDumper* apm_data_dumper)
@@ -81,7 +89,8 @@ void SaturationProtector::UpdateMargin(
                    difference_db * (1.f - kSaturationProtectorDecayConstant);
   }
 
-  last_margin_ = rtc::SafeClamp<float>(last_margin_, 12.f, 25.f);
+  last_margin_ =
+      rtc::SafeClamp<float>(last_margin_, kMinMarginDb, kMaxMarginDb);
 }
 
 float SaturationProtector::LastMargin() const {
