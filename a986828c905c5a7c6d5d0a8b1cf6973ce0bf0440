@@ -70,6 +70,30 @@
       "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4523fbd_281f8487",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-21T20:40:11Z",
+      "side": 1,
+      "message": "Looks like it got removed here and that it was a conscious decision:\nhttps://webrtc-review.googlesource.com/c/src/+/97440/\n\nI think it would be an interesting exercise to bring it back, but not super urgent (imo).",
+      "parentUuid": "0df2b3e4_b84f7088",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
