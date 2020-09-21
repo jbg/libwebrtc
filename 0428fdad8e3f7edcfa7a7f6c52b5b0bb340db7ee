@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6352600_a1346d0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2020-09-21T13:13:28Z",
+      "side": 1,
+      "message": "Thanks for the review!\nI have broken out the TransparentMode code from aec_state.cc and put it in its own file.\nI have also renamed the two TransparentMode implementations and tried to make the HMM code easier to read.",
+      "revId": "0428fdad8e3f7edcfa7a7f6c52b5b0bb340db7ee",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
