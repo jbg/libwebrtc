@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a59191bf_d1fc0fe2",
+        "filename": "rtc_base/robo_caller.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T19:23:32Z",
+      "side": 1,
+      "message": "Excellent, you got rid of the problem.",
+      "revId": "8a89371edaab98903e08dea9a1591faa2c847037",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
