@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "13cda61e_8ae05746",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T13:09:22Z",
+      "side": 1,
+      "message": "Split this part out into a separate CL? The combined CL is a lot of work to read. (This may not be as necessary if making a ring buffer class simplifies the code sufficiently, but I doubt it would be a bad idea even so.)",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a44a6537_aaa83bb6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -16,6 +39,92 @@
       "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9f650de_07dcfdc3",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T13:09:22Z",
+      "side": 1,
+      "message": "Is the cast necessary?",
+      "range": {
+        "startLine": 28,
+        "startChar": 34,
+        "endLine": 28,
+        "endChar": 50
+      },
+      "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "227a5cf6_df277691",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T13:09:22Z",
+      "side": 1,
+      "message": "This cast isn\u0027t necessary; RTC_DCHECK_* can compare integers of different types.",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 32
+      },
+      "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2de6de02_5684decb",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T13:09:22Z",
+      "side": 1,
+      "message": "Updates",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 11
+      },
+      "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4edeb48_75444c8c",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T13:09:22Z",
+      "side": 1,
+      "message": "Turn this into a class, so that the ring buffer logic is separated from the rest?",
+      "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
