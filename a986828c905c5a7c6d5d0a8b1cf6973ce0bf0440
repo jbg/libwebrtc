@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1602d31a_9249a3ce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-09-21T15:36:23Z",
+      "side": 1,
+      "message": "If I read the graph correctly rtc::ToHex was counting for 0.87% which is a lot if it was coming from LS_VERBOSE logging.\n\nThe regression is 32 KiB on arm64, I am happy to land as is (unless kwiberg@ has an idea about how to mitigate the call site size) but I would like to propose an aggressive reduction in the amount of logs we have in the codebase (being it RTC_LOG -\u003e RTC_DLOG or just a plain delete of log statements). Somehow we need to mitigate the binary size regression and logging too much is bad for perf as well.\n\nWDYT about something similar to what Chromium does ( https://chromium.googlesource.com/chromium/src/+/master/styleguide/c++/c++.md#logging, \"Remove most logging calls before checking in...\").",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
