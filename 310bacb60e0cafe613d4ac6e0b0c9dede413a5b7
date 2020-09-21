@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78928ccc_7c8f55d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-21T08:50:36Z",
+      "side": 1,
+      "message": "There\u0027s trouble with this CL up in Chrome-land, but from a specs + webrtc-layer perspective, I think it\u0027s right now.\n\nSee https://github.com/w3c/webrtc-pc/issues/2576 for today\u0027s \"spec issue discovered while implementing\".\n",
+      "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
