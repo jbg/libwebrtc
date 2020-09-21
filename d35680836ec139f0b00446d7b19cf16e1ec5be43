@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04ed8613_8d045950",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-21T11:11:55Z",
+      "side": 1,
+      "message": "Can you add docs this happens on an arbitrary thread",
+      "range": {
+        "startLine": 450,
+        "startChar": 14,
+        "endLine": 450,
+        "endChar": 40
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13f9ab23_0a43968e",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-21T11:11:55Z",
+      "side": 1,
+      "message": "This should never happen now right?",
+      "range": {
+        "startLine": 455,
+        "startChar": 4,
+        "endLine": 455,
+        "endChar": 30
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfbee4a8_567e24a0",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-21T11:11:55Z",
+      "side": 1,
+      "message": "What if the audio record has been stopped/released?\n\nAt least docs say:\nReleases the native AudioRecord resources. The object can no longer be used and the reference should be set to null after a call to release()",
+      "range": {
+        "startLine": 465,
+        "startChar": 44,
+        "endLine": 465,
+        "endChar": 63
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
