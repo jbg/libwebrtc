@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff2cfc2d_ad7c2dd7",
+        "filename": "api/numerics/samples_stats_counter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-09-21T08:19:56Z",
+      "side": 1,
+      "message": "Maybe NumSamples would be clearer? On the other hand, Size matches RunningStatistics? WDYT?",
+      "range": {
+        "startLine": 49,
+        "startChar": 10,
+        "endLine": 49,
+        "endChar": 14
+      },
+      "revId": "0237a3b2fcc8f63205b38b952b9021455f7758fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2ddea43_171c0c92",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-09-21T08:19:56Z",
+      "side": 1,
+      "message": "The two functions above also refers to the same type of dropped packets, i.e. received but no known destination?",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 34
+      },
+      "revId": "0237a3b2fcc8f63205b38b952b9021455f7758fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "182c67c9_28d8ee80",
+        "filename": "test/network/network_emulation.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-09-21T08:19:56Z",
+      "side": 1,
+      "message": "This include was missing before this CL?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "0237a3b2fcc8f63205b38b952b9021455f7758fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
