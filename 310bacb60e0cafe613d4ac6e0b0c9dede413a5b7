@@ -16,6 +16,74 @@
       "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2b5b893_2c8cda38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-21T09:57:27Z",
+      "side": 1,
+      "message": "LGTM % comments",
+      "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "724505b1_2b9915b6",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2534,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-21T09:57:27Z",
+      "side": 1,
+      "message": "I prefer DCHECK(IsUnifiedPlan()); since transceivers are UP-only.\nOtherwise doing \"if (!IsUnifiedPlan()) return;\" avoids the method-long indentation, but then the function name should perhaps be updated to RemoveStoppedTransceiversIfUnifiedPlan().",
+      "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c953add_41fa4e81",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2542,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-21T09:57:27Z",
+      "side": 1,
+      "message": "Continue early to avoid indentations:\n\nif (!transceiver-\u003estopped()) {\n  ++it;\n  continue;\n}",
+      "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa2b8111_6d2dd742",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2547,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-21T09:57:27Z",
+      "side": 1,
+      "message": "Optionally, instead of searching m\u003d sections, could you simply do the following?\n\nif ((*it)-\u003einternal()-\u003emid().has_value()) {\n  (*it)-\u003einternal()-\u003eset_mid(absl::nullopt);\n  (*it)-\u003einternal()-\u003eset_mline_index(absl::nullopt);\n}\nit \u003d transceivers_.erase(it);\n\nTo cover both cases.",
+      "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
