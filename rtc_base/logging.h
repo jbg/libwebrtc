@@ -599,7 +599,7 @@ class LogMessage {
 //////////////////////////////////////////////////////////////////////
 
 #define RTC_LOG_FILE_LINE(sev, file, line)            \
-  RTC_LOG_ENABLED() &&                                \
+  RTC_LOG_ENABLED() && !rtc::LogMessage::IsNoop(sev) &&                                \
       ::rtc::webrtc_logging_impl::LogCall() &         \
           ::rtc::webrtc_logging_impl::LogStreamer<>() \
               << ::rtc::webrtc_logging_impl::LogMetadata(file, line, sev)
