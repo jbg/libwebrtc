@@ -16,6 +16,24 @@
       "revId": "4461f059d180fe8c2886d422ebd1cb55b5c83e72",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc4fbc8d_cf47cea6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-21T13:06:45Z",
+      "side": 1,
+      "message": "I would encourage you to arrange so that the event log visualizer can work with standard stats corresponding to https://w3c.github.io/webrtc-stats/#dom-rtcinboundrtpstreamstats. We shouldn\u0027t have stats generation in the production code used only by this tool. \n\nBut I don\u0027t know how much work that is. If you query NetEq specifically for stats, maybe NetEqLifetimeStatistics::concealed_samples is a reasonable replacement (although not exactly identical)?\n\nI think the standard packetsLost stat originates in RTP receive code, before NetEq, so that might be a larger change. Or maybe it\u0027s easy to hook in an RtpReceiveStatistics object?\n\nIf audio owners prefer to revert some or all of this change, that\u0027s their call, of course.",
+      "parentUuid": "aa430556_ffa9316d",
+      "revId": "4461f059d180fe8c2886d422ebd1cb55b5c83e72",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
