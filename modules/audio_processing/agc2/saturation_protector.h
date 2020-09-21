@@ -14,7 +14,6 @@
 #include <array>
 
 #include "modules/audio_processing/agc2/agc2_common.h"
-#include "modules/audio_processing/agc2/vad_with_level.h"
 
 namespace webrtc {
 
@@ -27,10 +26,10 @@ class SaturationProtector {
   SaturationProtector(ApmDataDumper* apm_data_dumper,
                       float extra_saturation_margin_db);
 
-  // Update the margin estimate. This method should be called whenever a frame
-  // is reliably classified as 'speech'.
-  void UpdateMargin(const VadWithLevel::LevelAndProbability& vad_data,
-                    float last_speech_level_estimate);
+  // Updates the margin by analyzing the estimated speech level
+  // `speech_level_dbfs` and the peak power `speech_peak_dbfs` for an observed
+  // frame which is reliably classified as "speech".
+  void UpdateMargin(float speech_peak_dbfs, float speech_level_dbfs);
 
   // Returns latest computed margin.
   float LastMargin() const;

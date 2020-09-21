@@ -77,7 +77,7 @@ void AdaptiveModeLevelEstimator::UpdateEstimation(
   last_estimate_with_offset_dbfs_ = estimate_numerator_ / estimate_denominator_;
 
   if (use_saturation_protector_) {
-    saturation_protector_.UpdateMargin(vad_data,
+    saturation_protector_.UpdateMargin(vad_data.speech_peak_dbfs,
                                        last_estimate_with_offset_dbfs_);
     DebugDumpEstimate();
   }

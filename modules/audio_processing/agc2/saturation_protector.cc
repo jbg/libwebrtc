@@ -84,12 +84,11 @@ SaturationProtector::SaturationProtector(ApmDataDumper* apm_data_dumper,
       last_margin_(GetInitialSaturationMarginDb()),
       extra_saturation_margin_db_(extra_saturation_margin_db) {}
 
-void SaturationProtector::UpdateMargin(
-    const VadWithLevel::LevelAndProbability& vad_data,
-    float last_speech_level_estimate) {
-  peak_enveloper_.Process(vad_data.speech_peak_dbfs);
+void SaturationProtector::UpdateMargin(float speech_peak_dbfs,
+                                       float speech_level_dbfs) {
+  peak_enveloper_.Process(speech_peak_dbfs);
   const float delayed_peak_dbfs = peak_enveloper_.Query();
-  const float difference_db = delayed_peak_dbfs - last_speech_level_estimate;
+  const float difference_db = delayed_peak_dbfs - speech_level_dbfs;
 
   if (last_margin_ < difference_db) {
     last_margin_ = last_margin_ * kSaturationProtectorAttackConstant +
