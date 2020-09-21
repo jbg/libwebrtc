@@ -94,6 +94,30 @@
       "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85146407_a7eb7653",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-21T21:58:35Z",
+      "side": 1,
+      "message": "Well, that CL basically removed the whole callsite logging check and moved it into the body of the logging function; your CL here is the \"interesting excercise\" of basically reverting that CL, to a state where we once again have callsite logging checks---except now the callsite logging checks no longer have the clever optimization.",
+      "parentUuid": "e4523fbd_281f8487",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "a986828c905c5a7c6d5d0a8b1cf6973ce0bf0440",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
