@@ -257,6 +257,24 @@
       "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67339e58_1983d692",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T07:31:55Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "32f76284_9c23b9bb",
+      "revId": "ce6b60a61473d48e3ae286fe132447f2838e6793",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
