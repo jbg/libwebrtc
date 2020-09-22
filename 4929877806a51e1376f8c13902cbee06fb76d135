@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcb0d23c_95f0249e",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T07:37:40Z",
+      "side": 1,
+      "message": "kMinLevelDbfs",
+      "range": {
+        "startLine": 61,
+        "startChar": 34,
+        "endLine": 61,
+        "endChar": 35
+      },
+      "revId": "4929877806a51e1376f8c13902cbee06fb76d135",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
