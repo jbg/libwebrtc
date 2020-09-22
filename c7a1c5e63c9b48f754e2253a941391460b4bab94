@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed0a76c8_79057709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T13:25:16Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "c7a1c5e63c9b48f754e2253a941391460b4bab94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39a010ca_f80ff89a",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T13:25:16Z",
+      "side": 1,
+      "message": "a\n\n(More cases below.)",
+      "range": {
+        "startLine": 76,
+        "startChar": 56,
+        "endLine": 76,
+        "endChar": 59
+      },
+      "revId": "c7a1c5e63c9b48f754e2253a941391460b4bab94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eab5e158_8d5caa28",
+        "filename": "api/test/network_emulation/network_emulation_interfaces.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T13:25:16Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 141,
+        "startChar": 13,
+        "endLine": 141,
+        "endChar": 15
+      },
+      "revId": "c7a1c5e63c9b48f754e2253a941391460b4bab94",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
