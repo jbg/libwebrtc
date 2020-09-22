@@ -36,8 +36,8 @@ const I010BufferInterface* VideoFrameBuffer::GetI010() const {
 }
 
 const NV12BufferInterface* VideoFrameBuffer::GetNV12() const {
-  RTC_CHECK(type() == Type::kNV12);
-  return static_cast<const NV12BufferInterface*>(this);
+  // Overridden by subclasses that can return NV12 buffers without conversion.
+  return nullptr;
 }
 
 VideoFrameBuffer::Type I420BufferInterface::type() const {
@@ -98,6 +98,10 @@ int NV12BufferInterface::ChromaWidth() const {
 
 int NV12BufferInterface::ChromaHeight() const {
   return (height() + 1) / 2;
+}
+
+const NV12BufferInterface* NV12BufferInterface::GetNV12() const {
+  return this;
 }
 
 }  // namespace webrtc
