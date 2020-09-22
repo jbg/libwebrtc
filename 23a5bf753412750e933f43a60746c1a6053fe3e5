@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "5a0a5737_2e171c8f",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef6a6664_ca5c48e3",
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbdf0646_d43a5fed",
         "filename": "modules/audio_processing/agc2/saturation_protector.cc",
         "patchSetId": 10
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "e688fb83_e4b798da",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbdf0646_d43a5fed",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9745c329_073de1b8",
         "filename": "modules/audio_processing/agc2/saturation_protector.cc",
         "patchSetId": 10
@@ -70,6 +112,30 @@
       "writtenOn": "2020-09-22T11:04:15Z",
       "side": 1,
       "message": "Since the only caller uses a default value, you cal *almost* get rid of the whole test for emptiness and optional return value here by initializing the ring buffer with that default value. That would mean that the default value stays in the ring buffer until it\u0027s evicted, though, whereas currently Front() will start returning a \"real\" value as soon as one has been inserted.",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 3
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc9ab042_5183f844",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "That was my first attempt and it\u0027s doable if `buffer_[0]` (or `buffer_[next_]`) is used instead of `current_superframe_peak_dbfs_`.  However, that would mean to go back to the initial version of this CL.\n\nMore importantly note that it takes time until the first item is pushed back into the ring buffer and until then the value returned by `PeakEnveloper::Query()` may change (it\u0027s the max over kPeakEnveloperSuperFrameLengthMs ms of audio).",
+      "parentUuid": "9745c329_073de1b8",
       "range": {
         "startLine": 49,
         "startChar": 2,
@@ -99,6 +165,24 @@
     },
     {
       "key": {
+        "uuid": "34b6aa92_d0111c8c",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "PeakEnveloper is removed in the child CL so, if ok for you, I would leave as it is.",
+      "parentUuid": "070cfdb6_c3a76b8c",
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4e84cdf_5132555b",
         "filename": "modules/audio_processing/agc2/saturation_protector.cc",
         "patchSetId": 10
@@ -119,6 +203,30 @@
       "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44d47d6c_20f232ff",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "Nope. PeakEnveloper::Reset() also resets the ring buffer.",
+      "parentUuid": "e4e84cdf_5132555b",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 50
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +253,30 @@
     },
     {
       "key": {
+        "uuid": "e7f25198_a93b01f0",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d29a516_20e8b8e6",
+      "range": {
+        "startLine": 48,
+        "startChar": 48,
+        "endLine": 48,
+        "endChar": 58
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e735e842_d825571f",
         "filename": "modules/audio_processing/agc2/saturation_protector.h",
         "patchSetId": 10
@@ -165,6 +297,30 @@
       "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85b82f6d_b63992c1",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e735e842_d825571f",
+      "range": {
+        "startLine": 48,
+        "startChar": 72,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -191,6 +347,30 @@
     },
     {
       "key": {
+        "uuid": "891deb36_f8e35da3",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d50c27f_e69c9408",
+      "range": {
+        "startLine": 51,
+        "startChar": 19,
+        "endLine": 51,
+        "endChar": 31
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ee28465_eef04f71",
         "filename": "modules/audio_processing/agc2/saturation_protector.h",
         "patchSetId": 10
@@ -205,6 +385,24 @@
       "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "195822ca_7b86b84b",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-22T12:44:27Z",
+      "side": 1,
+      "message": "Formally, it\u0027s neither a ring buffer nor a shift register.\n\nI wouldn\u0027t call it \"shift register\" since it\u0027s not a *constant* delay unit - during the first steps the delay is less than kPeakEnveloperBufferSize.\n\nI could think of an exotic class name (e.g., DelayBuffer), but that could raise questions. \n\nSo, given that a ring buffer is the underlying implementation, I\u0027d name after that.\n\nI added a class docstring.",
+      "parentUuid": "2ee28465_eef04f71",
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
