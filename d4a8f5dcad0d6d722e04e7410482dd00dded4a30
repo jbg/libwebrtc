@@ -16,6 +16,52 @@
       "revId": "d4a8f5dcad0d6d722e04e7410482dd00dded4a30",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a09d9eb_3cf36684",
+        "filename": "test/pc/e2e/analyzer/video/default_encoded_image_data_injector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-09-22T14:07:04Z",
+      "side": 1,
+      "message": "Maybe make this method create and return EncodedImage?",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 59
+      },
+      "revId": "d4a8f5dcad0d6d722e04e7410482dd00dded4a30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d586d8c_a7264beb",
+        "filename": "test/pc/e2e/analyzer/video/single_process_encoded_image_data_injector_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-09-22T14:07:04Z",
+      "side": 1,
+      "message": "Maybe make this method create and return EncodedImage?",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 59
+      },
+      "revId": "d4a8f5dcad0d6d722e04e7410482dd00dded4a30",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
