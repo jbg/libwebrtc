@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f4e71c4_446d23eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "Much better. And I agree with your decision to not have the methods inline in the class definition, given their size.",
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef6a6664_ca5c48e3",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "Do this with default member initalizers instead? And if you additionally can live with the constructor being inline, you won\u0027t even have to declare a default constructor at all.",
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbdf0646_d43a5fed",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "Optionally use rtc::SafeEq so that you don\u0027t have to cast. (More cases below.)",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9745c329_073de1b8",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "Since the only caller uses a default value, you cal *almost* get rid of the whole test for emptiness and optional return value here by initializing the ring buffer with that default value. That would mean that the default value stays in the ring buffer until it\u0027s evicted, though, whereas currently Front() will start returning a \"real\" value as soon as one has been inserted.",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 3
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "070cfdb6_c3a76b8c",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "Default member initializers here too?",
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4e84cdf_5132555b",
+        "filename": "modules/audio_processing/agc2/saturation_protector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "You\u0027ve made a method for this.",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 50
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d29a516_20e8b8e6",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "it",
+      "range": {
+        "startLine": 48,
+        "startChar": 48,
+        "endLine": 48,
+        "endChar": 58
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e735e842_d825571f",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "oldest",
+      "range": {
+        "startLine": 48,
+        "startChar": 72,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d50c27f_e69c9408",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "oldest",
+      "range": {
+        "startLine": 51,
+        "startChar": 19,
+        "endLine": 51,
+        "endChar": 31
+      },
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ee28465_eef04f71",
+        "filename": "modules/audio_processing/agc2/saturation_protector.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-22T11:04:15Z",
+      "side": 1,
+      "message": "This looks more like a shift register than a ring buffer to me. Or, more precisely, what I initially expected when reading the name RingBuffer was a queue/fifo implemented with a ring buffer, since that\u0027s what one usually uses ring buffers for. However, what you have here is pretty much a shift register implemented with a ring buffer (a shift register with delay D has two operations: write a new value, and read the value that was written D writes ago).\n\nConsider calling it ShiftRegister, and/or explaining the above in a comment that applies to the whole class.",
+      "revId": "23a5bf753412750e933f43a60746c1a6053fe3e5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
