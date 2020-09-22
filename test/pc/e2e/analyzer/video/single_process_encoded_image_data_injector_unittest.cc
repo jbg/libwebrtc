@@ -42,7 +42,6 @@ TEST(SingleProcessEncodedImageDataInjector, InjectExtractDiscardFalse) {
   EXPECT_EQ(out.id, 512);
   EXPECT_FALSE(out.discard);
   EXPECT_EQ(out.image.size(), 10ul);
-  EXPECT_EQ(out.image.capacity(), 10ul);
   EXPECT_EQ(out.image.SpatialLayerFrameSize(0).value_or(0), 0ul);
   for (int i = 0; i < 10; ++i) {
     EXPECT_EQ(out.image.data()[i], i + 1);
@@ -63,7 +62,6 @@ TEST(SingleProcessEncodedImageDataInjector, InjectExtractDiscardTrue) {
   EXPECT_EQ(out.id, 512);
   EXPECT_TRUE(out.discard);
   EXPECT_EQ(out.image.size(), 0ul);
-  EXPECT_EQ(out.image.capacity(), 10ul);
   EXPECT_EQ(out.image.SpatialLayerFrameSize(0).value_or(0), 0ul);
 }
 
@@ -83,7 +81,6 @@ TEST(SingleProcessEncodedImageDataInjector, InjectWithUnsetSpatialLayerSizes) {
   EXPECT_EQ(out.id, 512);
   EXPECT_FALSE(out.discard);
   EXPECT_EQ(out.image.size(), 10ul);
-  EXPECT_EQ(out.image.capacity(), 10ul);
   for (int i = 0; i < 10; ++i) {
     EXPECT_EQ(out.image.data()[i], i + 1);
   }
@@ -112,7 +109,6 @@ TEST(SingleProcessEncodedImageDataInjector, InjectWithZeroSpatialLayerSizes) {
   EXPECT_EQ(out.id, 512);
   EXPECT_FALSE(out.discard);
   EXPECT_EQ(out.image.size(), 10ul);
-  EXPECT_EQ(out.image.capacity(), 10ul);
   for (int i = 0; i < 10; ++i) {
     EXPECT_EQ(out.image.data()[i], i + 1);
   }
@@ -152,7 +148,6 @@ TEST(SingleProcessEncodedImageDataInjector, Inject3Extract3) {
   EXPECT_EQ(out1.id, 510);
   EXPECT_FALSE(out1.discard);
   EXPECT_EQ(out1.image.size(), 10ul);
-  EXPECT_EQ(out1.image.capacity(), 10ul);
   EXPECT_EQ(out1.image.SpatialLayerFrameSize(0).value_or(0), 0ul);
   for (int i = 0; i < 10; ++i) {
     EXPECT_EQ(out1.image.data()[i], i + 1);
@@ -160,12 +155,10 @@ TEST(SingleProcessEncodedImageDataInjector, Inject3Extract3) {
   EXPECT_EQ(out2.id, 520);
   EXPECT_TRUE(out2.discard);
   EXPECT_EQ(out2.image.size(), 0ul);
-  EXPECT_EQ(out2.image.capacity(), 10ul);
   EXPECT_EQ(out2.image.SpatialLayerFrameSize(0).value_or(0), 0ul);
   EXPECT_EQ(out3.id, 520);
   EXPECT_FALSE(out3.discard);
   EXPECT_EQ(out3.image.size(), 10ul);
-  EXPECT_EQ(out3.image.capacity(), 10ul);
   EXPECT_EQ(out3.image.SpatialLayerFrameSize(0).value_or(0), 0ul);
   for (int i = 0; i < 10; ++i) {
     EXPECT_EQ(out3.image.data()[i], i + 21);
@@ -213,7 +206,6 @@ TEST(SingleProcessEncodedImageDataInjector, InjectExtractFromConcatenated) {
   EXPECT_EQ(out.id, 512);
   EXPECT_FALSE(out.discard);
   EXPECT_EQ(out.image.size(), 2 * 10ul);
-  EXPECT_EQ(out.image.capacity(), 3 * 10ul);
   for (int i = 0; i < 10; ++i) {
     EXPECT_EQ(out.image.data()[i], i + 1);
     EXPECT_EQ(out.image.data()[i + 10], i + 21);
@@ -266,7 +258,6 @@ TEST(SingleProcessEncodedImageDataInjector,
   EXPECT_EQ(out.id, 512);
   EXPECT_TRUE(out.discard);
   EXPECT_EQ(out.image.size(), 0ul);
-  EXPECT_EQ(out.image.capacity(), 3 * 10ul);
   EXPECT_EQ(out.image.SpatialIndex().value_or(0), 2);
   for (int i = 0; i < 3; ++i) {
     EXPECT_EQ(out.image.SpatialLayerFrameSize(i).value_or(0), 0ul);
@@ -289,7 +280,6 @@ TEST(SingleProcessEncodedImageDataInjector, InjectOnceExtractTwice) {
   EXPECT_EQ(out.id, 512);
   EXPECT_FALSE(out.discard);
   EXPECT_EQ(out.image.size(), 10ul);
-  EXPECT_EQ(out.image.capacity(), 10ul);
   EXPECT_EQ(out.image.SpatialLayerFrameSize(0).value_or(0), 0ul);
   for (int i = 0; i < 10; ++i) {
     EXPECT_EQ(out.image.data()[i], i + 1);
@@ -301,7 +291,6 @@ TEST(SingleProcessEncodedImageDataInjector, InjectOnceExtractTwice) {
   EXPECT_EQ(out.id, 512);
   EXPECT_FALSE(out.discard);
   EXPECT_EQ(out.image.size(), 10ul);
-  EXPECT_EQ(out.image.capacity(), 10ul);
   EXPECT_EQ(out.image.SpatialLayerFrameSize(0).value_or(0), 0ul);
   for (int i = 0; i < 10; ++i) {
     EXPECT_EQ(out.image.data()[i], i + 1);
