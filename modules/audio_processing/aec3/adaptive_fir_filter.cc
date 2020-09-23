@@ -494,6 +494,18 @@ AdaptiveFirFilter::AdaptiveFirFilter(size_t max_size_partitions,
   ZeroFilter(0, max_size_partitions_, &H_);
 
   SetSizePartitions(current_size_partitions_, true);
+#if defined(WEBRTC_ARCH_X86_FAMILY)
+  switch (optimization) {
+    case Aec3Optimization::kSse2:
+      printf("Using SSE2-AdaptiveFirFilter\n");
+      break;
+    case Aec3Optimization::kAvx2:
+      printf("Using AVX2-AdaptiveFirFilter\n");
+      break;
+    default:
+      printf("Not using SIMD-AdaptiveFirFilter\n");
+  }
+#endif
 }
 
 AdaptiveFirFilter::~AdaptiveFirFilter() = default;
@@ -555,8 +567,10 @@ void AdaptiveFirFilter::Filter(const RenderBuffer& render_buffer,
 #if defined(WEBRTC_ARCH_X86_FAMILY)
     case Aec3Optimization::kSse2:
       aec3::ApplyFilter_Sse2(render_buffer, current_size_partitions_, H_, S);
+      // printf("Using SSE2-AdaptiveFirFilter\n");
       break;
     case Aec3Optimization::kAvx2:
+      // printf("Using AVX2-AdaptiveFirFilter\n");
       aec3::ApplyFilter_Avx2(render_buffer, current_size_partitions_, H_, S);
       break;
 #endif

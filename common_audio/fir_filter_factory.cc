@@ -39,10 +39,13 @@ FIRFilter* CreateFirFilter(const float* coefficients,
   if (GetCPUInfo(kAVX2)) {
     filter =
         new FIRFilterAVX2(coefficients, coefficients_length, max_input_length);
+    printf("Using AVX2 - FirFilter\n");
   } else if (GetCPUInfo(kSSE2)) {
     filter =
         new FIRFilterSSE2(coefficients, coefficients_length, max_input_length);
+    printf("Using SSE2 - FirFilter\n");
   } else {
+    printf("Not using SIMD - FiRFilter\n");
     filter = new FIRFilterC(coefficients, coefficients_length);
   }
 #elif defined(WEBRTC_HAS_NEON)
@@ -50,6 +53,7 @@ FIRFilter* CreateFirFilter(const float* coefficients,
       new FIRFilterNEON(coefficients, coefficients_length, max_input_length);
 #else
   filter = new FIRFilterC(coefficients, coefficients_length);
+  printf("Not using SIMD - FiRFilter\n");
 #endif
 
   return filter;
