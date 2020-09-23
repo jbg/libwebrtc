@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "78fbc408_e0851102",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-23T11:21:18Z",
+      "side": 1,
+      "message": "I see, I wonder if it ever makes sense for audioRecord to be null in those cases though... I understood the logging case because it was delayed.",
+      "parentUuid": "e0306c5e_b49c3794",
+      "range": {
+        "startLine": 455,
+        "startChar": 4,
+        "endLine": 455,
+        "endChar": 30
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cfbee4a8_567e24a0",
         "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
         "patchSetId": 2
@@ -112,6 +136,76 @@
         "startChar": 44,
         "endLine": 465,
         "endChar": 63
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5cb0890_013eb218",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-23T11:21:18Z",
+      "side": 1,
+      "message": "I was thinking previously it was a field so it would stop in audioRecord \u003d\u003d null check. Now it is a method argument.\n\nI actually see you added a check in callable now if the record has changed that I guess will protect against this.\n\nSeems sketchy from threading point of view though since technically the audio record can be release in between these calls.",
+      "parentUuid": "d7f71673_53e53e7f",
+      "range": {
+        "startLine": 465,
+        "startChar": 44,
+        "endLine": 465,
+        "endChar": 63
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "360f2b9a_2aefca52",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-23T11:21:18Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this condition be reversed?",
+      "range": {
+        "startLine": 578,
+        "startChar": 10,
+        "endLine": 578,
+        "endChar": 42
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f1a5abb_7934b833",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-23T11:21:18Z",
+      "side": 1,
+      "message": "I think we need to add more information here. If you see this warning it is not clear what it means. Also maybe it shouldn\u0027t be a warning at all. (I think it is expected to happen.)",
+      "range": {
+        "startLine": 581,
+        "startChar": 24,
+        "endLine": 581,
+        "endChar": 48
       },
       "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
