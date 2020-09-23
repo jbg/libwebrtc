@@ -56,6 +56,30 @@
       "revId": "b008dd61ef4a59f753d7edbd28c45ba17bbcd40f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "747b68f1_b98e1167",
+        "filename": "modules/video_coding/frame_buffer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-23T12:27:31Z",
+      "side": 1,
+      "message": "That collides with the name of the size() method. Changed to oldSize instead.",
+      "parentUuid": "f6f709e7_4b7a027b",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 101,
+        "endChar": 17
+      },
+      "revId": "b008dd61ef4a59f753d7edbd28c45ba17bbcd40f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
