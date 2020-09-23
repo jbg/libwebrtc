@@ -314,8 +314,7 @@ TEST(SingleProcessEncodedImageDataInjector, InjectOnceExtractTwice) {
 #if RTC_DCHECK_IS_ON && GTEST_HAS_DEATH_TEST && !defined(WEBRTC_ANDROID)
 EncodedImage DeepCopyEncodedImage(const EncodedImage& source) {
   EncodedImage copy = source;
-  copy.SetEncodedData(EncodedImageBuffer::Create(source.size()));
-  memcpy(copy.data(), source.data(), source.size());
+  copy.SetEncodedData(EncodedImageBuffer::Create(source.data(), source.size()));
   return copy;
 }
 
