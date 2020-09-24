@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "e0f4c11d_be9a10e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-24T12:30:46Z",
+      "side": 1,
+      "message": "Maybe. On one hand, we could gain a few cycles by avoiding refcount updates (involving atomic operations). On the other hand, it adds a bit of complexity to add rvalue versions and think about when std::move is appropriate.",
+      "parentUuid": "7b3406f2_fe3bba44",
+      "revId": "91dd4f7cae38d4786cd54656d3df13b9d33427dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4f2a8e5_2b3f5239",
         "filename": "modules/video_coding/utility/simulcast_test_fixture_impl.cc",
         "patchSetId": 4
