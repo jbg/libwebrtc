@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "083f51d8_23ab7cd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-24T09:00:35Z",
+      "side": 1,
+      "message": "PTAL.\n\nFor the data injectors, I wonder if they still need to be so complex, now that in-place modification is no longer an option. It might work fine to have the injector just allocate a slightly larger EncodedImage and stuff everything it needs into the payload, without any side data?",
+      "revId": "91dd4f7cae38d4786cd54656d3df13b9d33427dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4f2a8e5_2b3f5239",
+        "filename": "modules/video_coding/utility/simulcast_test_fixture_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-24T09:00:35Z",
+      "side": 1,
+      "message": "Unclear why this deep copying is needed, could perhaps be simplified to\n\nencoded_key_frame_ \u003d encoded_image;\n\nThat might break if some users of this class for some reason use unowned buffers, so perhaps best left for some other cl.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 57
+      },
+      "revId": "91dd4f7cae38d4786cd54656d3df13b9d33427dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
