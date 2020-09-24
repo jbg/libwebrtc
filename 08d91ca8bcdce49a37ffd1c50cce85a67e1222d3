@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51eca0bf_6a8b90fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-24T06:06:50Z",
+      "side": 1,
+      "message": "Awesome!\nLGTM % Some minor comments",
+      "revId": "08d91ca8bcdce49a37ffd1c50cce85a67e1222d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39712e1c_c786b315",
+        "filename": "modules/audio_processing/aec3/transparent_mode.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-24T06:06:50Z",
+      "side": 1,
+      "message": "I would suggest changing this to something slightly more descriptive (my preference would be `out`).",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 15
+      },
+      "revId": "08d91ca8bcdce49a37ffd1c50cce85a67e1222d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70364986_22a9d27e",
+        "filename": "modules/audio_processing/aec3/transparent_mode.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-24T06:06:50Z",
+      "side": 1,
+      "message": "I think it is good to add a DCHECK against this being zero. At least it will show the reader that that cannot happen",
+      "range": {
+        "startLine": 102,
+        "startChar": 33,
+        "endLine": 102,
+        "endChar": 78
+      },
+      "revId": "08d91ca8bcdce49a37ffd1c50cce85a67e1222d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41b0d64f_f762a845",
+        "filename": "modules/audio_processing/aec3/transparent_mode.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-09-24T06:06:50Z",
+      "side": 1,
+      "message": "Nit: The if-elseif-else can be replaced by simple if-statements with returns.",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 0
+      },
+      "revId": "08d91ca8bcdce49a37ffd1c50cce85a67e1222d3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
