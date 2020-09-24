@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6f07d696_aad57353",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-24T18:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04ed8613_8d045950",
+      "range": {
+        "startLine": 450,
+        "startChar": 14,
+        "endLine": 450,
+        "endChar": 40
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f9ab23_0a43968e",
         "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
         "patchSetId": 2
@@ -93,6 +117,30 @@
       "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7af66877_bf63f43e",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-24T18:03:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "78fbc408_e0851102",
+      "range": {
+        "startLine": 455,
+        "startChar": 4,
+        "endLine": 455,
+        "endChar": 30
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "0619ff6c_be19b64c",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-24T18:03:38Z",
+      "side": 1,
+      "message": "which is fine.. because it cant log anything useful\nand the future is cancelled when we \"stopRecording\"",
+      "parentUuid": "d5cb0890_013eb218",
+      "range": {
+        "startLine": 465,
+        "startChar": 44,
+        "endLine": 465,
+        "endChar": 63
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "360f2b9a_2aefca52",
         "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
         "patchSetId": 2
@@ -190,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "03767c7a_af5e2edc",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-24T18:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "360f2b9a_2aefca52",
+      "range": {
+        "startLine": 578,
+        "startChar": 10,
+        "endLine": 578,
+        "endChar": 42
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f1a5abb_7934b833",
         "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
         "patchSetId": 2
@@ -210,6 +306,30 @@
       "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65511661_7b2faa5d",
+        "filename": "sdk/android/src/java/org/webrtc/audio/WebRtcAudioRecord.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 7103
+      },
+      "writtenOn": "2020-09-24T18:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f1a5abb_7934b833",
+      "range": {
+        "startLine": 581,
+        "startChar": 24,
+        "endLine": 581,
+        "endChar": 48
+      },
+      "revId": "d35680836ec139f0b00446d7b19cf16e1ec5be43",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
