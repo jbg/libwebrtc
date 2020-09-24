@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "126e0d84_1c5fd918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9741
+      },
+      "writtenOn": "2020-09-24T01:29:34Z",
+      "side": 1,
+      "message": "Mirko, can you please help to run the CQ?",
+      "revId": "204af66c92f2d31525fb2d5b658f353ae66367dd",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
