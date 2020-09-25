@@ -151,6 +151,7 @@ rtc_library("rtc_base_approved") {
     ":stringutils",
     ":thread_checker",
     ":timeutils",
+    "synchronization:sequence_checker",
   ]
 }
 
@@ -817,6 +818,7 @@ rtc_library("rtc_base") {
     "system:inline",
     "system:rtc_export",
     "task_utils:pending_task_safety_flag",
+    "task_utils:repeating_task",
     "task_utils:to_queued_task",
     "third_party/base64",
     "third_party/sigslot",
@@ -1439,6 +1441,7 @@ if (rtc_include_tests) {
       "memory:fifo_buffer",
       "synchronization:mutex",
       "synchronization:synchronization_unittests",
+      "task_utils:pending_task_safety_flag",
       "task_utils:to_queued_task",
       "third_party/sigslot",
     ]
