@@ -245,9 +245,13 @@ class BufferQueueStream : public rtc::BufferQueue, public rtc::StreamInterface {
                          size_t buffer_len,
                          size_t* read,
                          int* error) override {
-    if (!ReadFront(buffer, buffer_len, read)) {
+    const bool was_writable = is_writable();
+    if (!ReadFront(buffer, buffer_len, read))
       return rtc::SR_BLOCK;
-    }
+
+    if (!was_writable)
+      NotifyWritableForTest();
+
     return rtc::SR_SUCCESS;
   }
 
@@ -256,9 +260,13 @@ class BufferQueueStream : public rtc::BufferQueue, public rtc::StreamInterface {
                           size_t data_len,
                           size_t* written,
                           int* error) override {
-    if (!WriteBack(data, data_len, written)) {
+    const bool was_readable = is_readable();
+    if (!WriteBack(data, data_len, written))
       return rtc::SR_BLOCK;
-    }
+
+    if (!was_readable)
+      NotifyReadableForTest();
+
     return rtc::SR_SUCCESS;
   }
 
@@ -266,9 +274,9 @@ class BufferQueueStream : public rtc::BufferQueue, public rtc::StreamInterface {
   void Close() override {}
 
  protected:
-  void NotifyReadableForTest() override { PostEvent(rtc::SE_READ, 0); }
+  void NotifyReadableForTest() { PostEvent(rtc::SE_READ, 0); }
 
-  void NotifyWritableForTest() override { PostEvent(rtc::SE_WRITE, 0); }
+  void NotifyWritableForTest() { PostEvent(rtc::SE_WRITE, 0); }
 };
 
 class SSLDummyStreamDTLS : public SSLDummyStreamBase {
