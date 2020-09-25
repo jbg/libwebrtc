@@ -142,7 +142,6 @@ BaseChannel::BaseChannel(rtc::Thread* worker_thread,
   RTC_DCHECK_RUN_ON(worker_thread_);
   RTC_DCHECK(ssrc_generator_);
   demuxer_criteria_.mid = content_name;
-  RTC_LOG(LS_INFO) << "Created channel: " << ToString();
 }
 
 BaseChannel::~BaseChannel() {
@@ -156,7 +155,6 @@ BaseChannel::~BaseChannel() {
   // the media channel may try to send on the dead transport channel. NULLing
   // is not an effective strategy since the sends will come on another thread.
   media_channel_.reset();
-  RTC_LOG(LS_INFO) << "Destroyed channel: " << ToString();
 }
 
 std::string BaseChannel::ToString() const {
@@ -364,7 +362,6 @@ void BaseChannel::OnWritableState(bool writable) {
 
 void BaseChannel::OnNetworkRouteChanged(
     absl::optional<rtc::NetworkRoute> network_route) {
-  RTC_LOG(LS_INFO) << "Network route for " << ToString() << " was changed.";
 
   RTC_DCHECK_RUN_ON(network_thread());
   rtc::NetworkRoute new_route;
@@ -520,7 +517,6 @@ void BaseChannel::EnableMedia_w() {
   if (enabled_)
     return;
 
-  RTC_LOG(LS_INFO) << "Channel enabled: " << ToString();
   enabled_ = true;
   UpdateMediaSendRecvState_w();
 }
@@ -530,7 +526,6 @@ void BaseChannel::DisableMedia_w() {
   if (!enabled_)
     return;
 
-  RTC_LOG(LS_INFO) << "Channel disabled: " << ToString();
   enabled_ = false;
   UpdateMediaSendRecvState_w();
 }
@@ -550,9 +545,6 @@ void BaseChannel::ChannelWritable_n() {
     return;
   }
 
-  RTC_LOG(LS_INFO) << "Channel writable (" << ToString() << ")"
-                   << (was_ever_writable_ ? "" : " for the first time");
-
   was_ever_writable_ = true;
   writable_ = true;
   UpdateMediaSendRecvState();
@@ -563,7 +555,6 @@ void BaseChannel::ChannelNotWritable_n() {
   if (!writable_)
     return;
 
-  RTC_LOG(LS_INFO) << "Channel not writable (" << ToString() << ")";
   writable_ = false;
   UpdateMediaSendRecvState();
 }
@@ -867,7 +858,6 @@ bool VoiceChannel::SetLocalContent_w(const MediaContentDescription* content,
                                      std::string* error_desc) {
   TRACE_EVENT0("webrtc", "VoiceChannel::SetLocalContent_w");
   RTC_DCHECK_RUN_ON(worker_thread());
-  RTC_LOG(LS_INFO) << "Setting local voice description for " << ToString();
 
   RTC_DCHECK(content);
   if (!content) {
@@ -931,7 +921,6 @@ bool VoiceChannel::SetRemoteContent_w(const MediaContentDescription* content,
                                       std::string* error_desc) {
   TRACE_EVENT0("webrtc", "VoiceChannel::SetRemoteContent_w");
   RTC_DCHECK_RUN_ON(worker_thread());
-  RTC_LOG(LS_INFO) << "Setting remote voice description for " << ToString();
 
   RTC_DCHECK(content);
   if (!content) {
@@ -1022,9 +1011,6 @@ void VideoChannel::UpdateMediaSendRecvState_w() {
     RTC_LOG(LS_ERROR) << "Failed to SetSend on video channel: " + ToString();
     // TODO(gangji): Report error back to server.
   }
-
-  RTC_LOG(LS_INFO) << "Changing video state, send=" << send << " for "
-                   << ToString();
 }
 
 void VideoChannel::FillBitrateInfo(BandwidthEstimationInfo* bwe_info) {
@@ -1037,7 +1023,6 @@ bool VideoChannel::SetLocalContent_w(const MediaContentDescription* content,
                                      std::string* error_desc) {
   TRACE_EVENT0("webrtc", "VideoChannel::SetLocalContent_w");
   RTC_DCHECK_RUN_ON(worker_thread());
-  RTC_LOG(LS_INFO) << "Setting local video description for " << ToString();
 
   RTC_DCHECK(content);
   if (!content) {
@@ -1134,7 +1119,6 @@ bool VideoChannel::SetRemoteContent_w(const MediaContentDescription* content,
                                       std::string* error_desc) {
   TRACE_EVENT0("webrtc", "VideoChannel::SetRemoteContent_w");
   RTC_DCHECK_RUN_ON(worker_thread());
-  RTC_LOG(LS_INFO) << "Setting remote video description for " << ToString();
 
   RTC_DCHECK(content);
   if (!content) {
@@ -1286,7 +1270,6 @@ bool RtpDataChannel::SetLocalContent_w(const MediaContentDescription* content,
                                        std::string* error_desc) {
   TRACE_EVENT0("webrtc", "RtpDataChannel::SetLocalContent_w");
   RTC_DCHECK_RUN_ON(worker_thread());
-  RTC_LOG(LS_INFO) << "Setting local data description for " << ToString();
 
   RTC_DCHECK(content);
   if (!content) {
@@ -1348,7 +1331,6 @@ bool RtpDataChannel::SetRemoteContent_w(const MediaContentDescription* content,
                                         std::string* error_desc) {
   TRACE_EVENT0("webrtc", "RtpDataChannel::SetRemoteContent_w");
   RTC_DCHECK_RUN_ON(worker_thread());
-  RTC_LOG(LS_INFO) << "Setting remote data description for " << ToString();
 
   RTC_DCHECK(content);
   if (!content) {
@@ -1370,7 +1352,6 @@ bool RtpDataChannel::SetRemoteContent_w(const MediaContentDescription* content,
   RtpHeaderExtensions rtp_header_extensions =
       GetFilteredRtpHeaderExtensions(data->rtp_header_extensions());
 
-  RTC_LOG(LS_INFO) << "Setting remote data description for " << ToString();
   DataSendParameters send_params = last_send_params_;
   RtpSendParametersFromMediaDescription<DataCodec>(
       data, rtp_header_extensions,
@@ -1420,9 +1401,6 @@ void RtpDataChannel::UpdateMediaSendRecvState_w() {
 
   // Trigger SignalReadyToSendData asynchronously.
   OnDataChannelReadyToSend(send);
-
-  RTC_LOG(LS_INFO) << "Changing data state, recv=" << recv << " send=" << send
-                   << " for " << ToString();
 }
 
 void RtpDataChannel::OnMessage(rtc::Message* pmsg) {

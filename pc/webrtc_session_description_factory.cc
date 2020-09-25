@@ -312,7 +312,6 @@ void WebRtcSessionDescriptionFactory::OnMessage(rtc::Message* msg) {
       rtc::ScopedRefMessageData<rtc::RTCCertificate>* param =
           static_cast<rtc::ScopedRefMessageData<rtc::RTCCertificate>*>(
               msg->pdata);
-      RTC_LOG(LS_INFO) << "Using certificate supplied to the constructor.";
       SetCertificate(param->data());
       delete param;
       break;

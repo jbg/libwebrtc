@@ -236,8 +236,6 @@ VideoReceiveStream2::VideoReceiveStream2(
       decode_queue_(task_queue_factory_->CreateTaskQueue(
           "DecodingQueue",
           TaskQueueFactory::Priority::HIGH)) {
-  RTC_LOG(LS_INFO) << "VideoReceiveStream2: " << config_.ToString();
-
   RTC_DCHECK(worker_thread_);
   RTC_DCHECK(config_.renderer);
   RTC_DCHECK(call_stats_);
@@ -277,7 +275,6 @@ VideoReceiveStream2::VideoReceiveStream2(
 
 VideoReceiveStream2::~VideoReceiveStream2() {
   RTC_DCHECK_RUN_ON(&worker_sequence_checker_);
-  RTC_LOG(LS_INFO) << "~VideoReceiveStream2: " << config_.ToString();
   Stop();
 }
 
