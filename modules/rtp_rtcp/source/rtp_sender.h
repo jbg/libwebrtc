@@ -29,7 +29,6 @@
 #include "modules/rtp_rtcp/source/rtp_packet_history.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_config.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_interface.h"
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/deprecation.h"
 #include "rtc_base/random.h"
 #include "rtc_base/rate_statistics.h"
@@ -50,6 +49,10 @@ class RTPSender {
             RtpPacketSender* packet_sender);
 
   ~RTPSender();
+
+  RTPSender() = delete;
+  RTPSender(const RTPSender&) = delete;
+  RTPSender& operator=(const RTPSender&) = delete;
 
   void SetSendingMediaStatus(bool enabled) RTC_LOCKS_EXCLUDED(send_mutex_);
   bool SendingMedia() const RTC_LOCKS_EXCLUDED(send_mutex_);
@@ -230,8 +233,6 @@ class RTPSender {
   bool supports_bwe_extension_ RTC_GUARDED_BY(send_mutex_);
 
   RateLimiter* const retransmission_rate_limiter_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RTPSender);
 };
 
 }  // namespace webrtc

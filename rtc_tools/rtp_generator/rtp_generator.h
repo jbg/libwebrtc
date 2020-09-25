@@ -27,7 +27,6 @@
 #include "call/rtp_config.h"
 #include "call/video_send_stream.h"
 #include "media/engine/webrtc_video_engine.h"
-#include "rtc_base/constructor_magic.h"
 #include "test/frame_generator_capturer.h"
 #include "test/rtp_file_reader.h"
 #include "test/rtp_file_writer.h"
@@ -81,6 +80,11 @@ class RtpGenerator final : public webrtc::Transport {
   explicit RtpGenerator(const RtpGeneratorOptions& options);
   // Cleans up the VideoSendStream.
   ~RtpGenerator() override;
+
+  RtpGenerator() = delete;
+  RtpGenerator(const RtpGenerator&) = delete;
+  RtpGenerator& operator=(const RtpGenerator&) = delete;
+
   // Generates an rtp_dump that is written out to
   void GenerateRtpDump(const std::string& rtp_dump_path);
 
@@ -113,9 +117,6 @@ class RtpGenerator final : public webrtc::Transport {
   std::vector<uint32_t> durations_ms_;
   uint32_t start_ms_ = 0;
   std::unique_ptr<TaskQueueFactory> task_queue_;
-
-  // This object cannot be copied.
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RtpGenerator);
 };
 
 }  // namespace webrtc

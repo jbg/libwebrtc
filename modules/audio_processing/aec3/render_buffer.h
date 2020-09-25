@@ -23,7 +23,6 @@
 #include "modules/audio_processing/aec3/fft_data.h"
 #include "modules/audio_processing/aec3/spectrum_buffer.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/constructor_magic.h"
 
 namespace webrtc {
 
@@ -34,6 +33,10 @@ class RenderBuffer {
                SpectrumBuffer* spectrum_buffer,
                FftBuffer* fft_buffer);
   ~RenderBuffer();
+
+  RenderBuffer() = delete;
+  RenderBuffer(const RenderBuffer&) = delete;
+  RenderBuffer& operator=(const RenderBuffer&) = delete;
 
   // Get a block.
   const std::vector<std::vector<std::vector<float>>>& Block(
@@ -105,7 +108,6 @@ class RenderBuffer {
   const SpectrumBuffer* const spectrum_buffer_;
   const FftBuffer* const fft_buffer_;
   bool render_activity_ = false;
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RenderBuffer);
 };
 
 }  // namespace webrtc

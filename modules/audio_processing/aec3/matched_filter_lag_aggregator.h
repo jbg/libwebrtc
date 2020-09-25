@@ -17,7 +17,6 @@
 #include "api/audio/echo_canceller3_config.h"
 #include "modules/audio_processing/aec3/delay_estimate.h"
 #include "modules/audio_processing/aec3/matched_filter.h"
-#include "rtc_base/constructor_magic.h"
 
 namespace webrtc {
 
@@ -33,6 +32,11 @@ class MatchedFilterLagAggregator {
       const EchoCanceller3Config::Delay::DelaySelectionThresholds& thresholds);
   ~MatchedFilterLagAggregator();
 
+  MatchedFilterLagAggregator() = delete;
+  MatchedFilterLagAggregator(const MatchedFilterLagAggregator&) = delete;
+  MatchedFilterLagAggregator& operator=(const MatchedFilterLagAggregator&) =
+      delete;
+
   // Resets the aggregator.
   void Reset(bool hard_reset);
 
@@ -47,8 +51,6 @@ class MatchedFilterLagAggregator {
   int histogram_data_index_ = 0;
   bool significant_candidate_found_ = false;
   const EchoCanceller3Config::Delay::DelaySelectionThresholds thresholds_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(MatchedFilterLagAggregator);
 };
 }  // namespace webrtc
 
