@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "91669273_36fed0e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-09-25T12:20:14Z",
+      "side": 1,
+      "message": "Ah, the description precedes https://webrtc-review.googlesource.com/c/src/+/178565 which moves from \"one redundant packet\" to two. A distance of two seemed like a good compromise between bandwidth usage and resiliency given the analysis in https://webrtchacks.com/red-improving-audio-quality-with-redundancy/ but we have some very early results that indicate we might have to go higher when there is lots of packet loss.",
+      "parentUuid": "128a72e1_40ec1a5f",
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ffb4ea4_c81f2dc5",
         "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
         "patchSetId": 5
@@ -64,6 +82,30 @@
       "writtenOn": "2020-09-25T09:07:41Z",
       "side": 1,
       "message": "It can be nice if we write a comment here saying that the rfc2198 specifies that the primary encoding has a header length equal to 1 and the redundant payloads have header lengths equal to 4 bytes.",
+      "range": {
+        "startLine": 79,
+        "startChar": 31,
+        "endLine": 79,
+        "endChar": 32
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95e99700_47168a73",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-09-25T12:20:14Z",
+      "side": 1,
+      "message": "Will update, named constants make sense.",
+      "parentUuid": "4ffb4ea4_c81f2dc5",
       "range": {
         "startLine": 79,
         "startChar": 31,
@@ -99,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "e536a26f_73e79545",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-09-25T12:20:14Z",
+      "side": 1,
+      "message": "The concern we had was about intermediaries (SFUs) that may want to strip or insert additional packets.\nFor example you might not have received packet N-2 and N-1 but now you receive a RED packet N with N-2.\nAssuming an endpoint that does not support RED on the other end you want to forward both N-2 (which you have lost) and N. But if there is a gap in the encoding you can\u0027t tell whether the RED packet contains N-1 or N-2.\n\nAnd then you have things like adaptivePtime...",
+      "parentUuid": "b12f45cd_71664950",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 11
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7bab0316_46a621eb",
         "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
         "patchSetId": 5
@@ -110,6 +176,30 @@
       "writtenOn": "2020-09-25T09:07:41Z",
       "side": 1,
       "message": "this should be a -, shouldn\u0027t be?",
+      "range": {
+        "startLine": 99,
+        "startChar": 24,
+        "endLine": 99,
+        "endChar": 25
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eef7fd6_11206c06",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-09-25T12:20:14Z",
+      "side": 1,
+      "message": "It is wrong, but worse than that. Bear with me... lets assume that\n- the primary is 100 bytes long\n- the secondary is 200 bytes long but doesn\u0027t have the speech flag set so encode_secondary is false.\n- the tertiary is 300 bytes long and has the speech flag set so (so we run into this branch)\n- max_packet_length is 606 bytes\n\nThen bytes available is 506 (606 - 100) in line 80.\nWe run into this branch, add 200 and 300 which is smaller than 506 + 4.\nSo we encode primary, secondary, tertiary and add the 9 byte header. Which brings us up to 609 bytes but we only have 606 available so are doing the wrong thing.\n\nThe correct calculation would be\nsecondary + tertiarty + header length for primary and tertiary (5) + the additional four header bytes for the secondary we did not include \u003c\u003d bytes_available\n\nThis gets easier to understand when one modifies bytes_available to subtract the header bytes (i.e. - 1 in line 80, it is done in line 86 already and needs to be subtract another 4 after line 92). Then the condition becomes\nseconary + tertiary + the he additional four header bytes for the secondary we did not include \u003c bytes_available\n\nDoes that make more sense?",
+      "parentUuid": "7bab0316_46a621eb",
       "range": {
         "startLine": 99,
         "startChar": 24,
@@ -145,6 +235,30 @@
     },
     {
       "key": {
+        "uuid": "884ab4ea_e9bd65a7",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-09-25T12:20:14Z",
+      "side": 1,
+      "message": "(see also your comment below)\nYes, this results in a mix of raw opus and RED. I think that is ok.\nReceivers might have to deal with situations where no RED is used when there is no packet loss and then RED is used with packet loss (even though I really want RED to be used even at 0% loss to protect against sporadic random loss)",
+      "parentUuid": "661f1623_28ccd8ed",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0660a145_6a4136b3",
         "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
         "patchSetId": 5
@@ -165,6 +279,30 @@
       "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b47fa630_219736f4",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-09-25T12:20:14Z",
+      "side": 1,
+      "message": "see other comment above",
+      "parentUuid": "0660a145_6a4136b3",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 3
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
