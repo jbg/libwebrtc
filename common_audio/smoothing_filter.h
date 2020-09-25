@@ -14,7 +14,6 @@
 #include <stdint.h>
 
 #include "absl/types/optional.h"
-#include "rtc_base/constructor_magic.h"
 
 namespace webrtc {
 
@@ -44,6 +43,10 @@ class SmoothingFilterImpl final : public SmoothingFilter {
   explicit SmoothingFilterImpl(int init_time_ms);
   ~SmoothingFilterImpl() override;
 
+  SmoothingFilterImpl() = delete;
+  SmoothingFilterImpl(const SmoothingFilterImpl&) = delete;
+  SmoothingFilterImpl& operator=(const SmoothingFilterImpl&) = delete;
+
   void AddSample(float sample) override;
   absl::optional<float> GetAverage() override;
   bool SetTimeConstantMs(int time_constant_ms) override;
@@ -64,8 +67,6 @@ class SmoothingFilterImpl final : public SmoothingFilter {
   float alpha_;
   float state_;
   int64_t last_state_time_ms_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(SmoothingFilterImpl);
 };
 
 }  // namespace webrtc

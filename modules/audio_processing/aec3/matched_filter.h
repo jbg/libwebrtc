@@ -17,7 +17,6 @@
 
 #include "api/array_view.h"
 #include "modules/audio_processing/aec3/aec3_common.h"
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/system/arch.h"
 
 namespace webrtc {
@@ -106,6 +105,10 @@ class MatchedFilter {
 
   ~MatchedFilter();
 
+  MatchedFilter() = delete;
+  MatchedFilter(const MatchedFilter&) = delete;
+  MatchedFilter& operator=(const MatchedFilter&) = delete;
+
   // Updates the correlation with the values in the capture buffer.
   void Update(const DownsampledRenderBuffer& render_buffer,
               rtc::ArrayView<const float> capture);
@@ -139,8 +142,6 @@ class MatchedFilter {
   const float excitation_limit_;
   const float smoothing_;
   const float matching_filter_threshold_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(MatchedFilter);
 };
 
 }  // namespace webrtc
