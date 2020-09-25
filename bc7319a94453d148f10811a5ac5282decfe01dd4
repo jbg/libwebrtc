@@ -142,6 +142,29 @@
       "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0660a145_6a4136b3",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-25T09:11:24Z",
+      "side": 1,
+      "message": "I guess that this code answers my question about needing or not needing headers for the Red encoding.",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 3
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
