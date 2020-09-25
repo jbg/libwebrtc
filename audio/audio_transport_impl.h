@@ -19,7 +19,6 @@
 #include "modules/audio_device/include/audio_device.h"
 #include "modules/audio_processing/include/audio_processing.h"
 #include "modules/audio_processing/typing_detection.h"
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
 
@@ -31,6 +30,10 @@ class AudioTransportImpl : public AudioTransport {
  public:
   AudioTransportImpl(AudioMixer* mixer, AudioProcessing* audio_processing);
   ~AudioTransportImpl() override;
+
+  AudioTransportImpl() = delete;
+  AudioTransportImpl(const AudioTransportImpl&) = delete;
+  AudioTransportImpl& operator=(const AudioTransportImpl&) = delete;
 
   int32_t RecordedDataIsAvailable(const void* audioSamples,
                                   const size_t nSamples,
@@ -85,8 +88,6 @@ class AudioTransportImpl : public AudioTransport {
   AudioFrame mixed_frame_;
   // Converts mixed audio to the audio device output rate.
   PushResampler<int16_t> render_resampler_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(AudioTransportImpl);
 };
 }  // namespace webrtc
 

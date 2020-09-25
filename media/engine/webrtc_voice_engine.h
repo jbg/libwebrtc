@@ -26,7 +26,6 @@
 #include "media/base/media_engine.h"
 #include "media/base/rtp_utils.h"
 #include "rtc_base/buffer.h"
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/network_route.h"
 #include "rtc_base/task_queue.h"
 #include "rtc_base/thread_checker.h"
@@ -53,6 +52,10 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
       rtc::scoped_refptr<webrtc::AudioProcessing> audio_processing,
       const webrtc::WebRtcKeyValueConfig& trials);
   ~WebRtcVoiceEngine() override;
+
+  WebRtcVoiceEngine() = delete;
+  WebRtcVoiceEngine(const WebRtcVoiceEngine&) = delete;
+  WebRtcVoiceEngine& operator=(const WebRtcVoiceEngine&) = delete;
 
   // Does initialization that needs to occur on the worker thread.
   void Init() override;
@@ -133,8 +136,6 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
   // redundancy for opus audio.
   const bool audio_red_for_opus_trial_enabled_;
   const bool minimized_remsampling_on_mobile_trial_enabled_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(WebRtcVoiceEngine);
 };
 
 // WebRtcVoiceMediaChannel is an implementation of VoiceMediaChannel that uses
@@ -148,6 +149,10 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
                           const webrtc::CryptoOptions& crypto_options,
                           webrtc::Call* call);
   ~WebRtcVoiceMediaChannel() override;
+
+  WebRtcVoiceMediaChannel() = delete;
+  WebRtcVoiceMediaChannel(const WebRtcVoiceMediaChannel&) = delete;
+  WebRtcVoiceMediaChannel& operator=(const WebRtcVoiceMediaChannel&) = delete;
 
   const AudioOptions& options() const { return options_; }
 
@@ -339,8 +344,6 @@ class WebRtcVoiceMediaChannel final : public VoiceMediaChannel,
       unsignaled_frame_decryptor_;
 
   const bool audio_red_for_opus_trial_enabled_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(WebRtcVoiceMediaChannel);
 };
 }  // namespace cricket
 

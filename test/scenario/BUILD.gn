@@ -15,7 +15,6 @@ rtc_library("column_printer") {
     "column_printer.h",
   ]
   deps = [
-    "../../rtc_base:macromagic",
     "../../rtc_base:stringutils",
     "../logging:log_writer",
   ]

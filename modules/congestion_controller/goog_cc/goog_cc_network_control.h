@@ -33,7 +33,6 @@
 #include "modules/congestion_controller/goog_cc/delay_based_bwe.h"
 #include "modules/congestion_controller/goog_cc/probe_controller.h"
 #include "modules/congestion_controller/goog_cc/send_side_bandwidth_estimation.h"
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/experiments/field_trial_parser.h"
 #include "rtc_base/experiments/rate_control_settings.h"
 
@@ -49,6 +48,10 @@ class GoogCcNetworkController : public NetworkControllerInterface {
   GoogCcNetworkController(NetworkControllerConfig config,
                           GoogCcConfig goog_cc_config);
   ~GoogCcNetworkController() override;
+
+  GoogCcNetworkController() = delete;
+  GoogCcNetworkController(const GoogCcNetworkController&) = delete;
+  GoogCcNetworkController& operator=(const GoogCcNetworkController&) = delete;
 
   // NetworkControllerInterface
   NetworkControlUpdate OnNetworkAvailability(NetworkAvailability msg) override;
@@ -137,8 +140,6 @@ class GoogCcNetworkController : public NetworkControllerInterface {
   bool previously_in_alr_ = false;
 
   absl::optional<DataSize> current_data_window_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(GoogCcNetworkController);
 };
 
 }  // namespace webrtc

@@ -128,7 +128,6 @@
 #include <stack>
 #include <string>
 
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/synchronization/mutex.h"
 
 #define BWE_TEST_LOGGING_GLOBAL_CONTEXT(name)                             \
@@ -265,8 +264,9 @@ class Logging {
     Context(const char* name, int64_t timestamp_ms, bool enabled);
     ~Context();
 
-   private:
-    RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(Context);
+    Context() = delete;
+    Context(const Context&) = delete;
+    Context& operator=(const Context&) = delete;
   };
 
   static Logging* GetInstance();

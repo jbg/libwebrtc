@@ -14,7 +14,6 @@
 #include <string>
 #include <vector>
 
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/strings/string_builder.h"
 #include "test/logging/log_writer.h"
 

@@ -111,13 +111,16 @@ class DEPRECATED_SignalThread : public sigslot::has_slots<>,
    public:
     explicit Worker(DEPRECATED_SignalThread* parent);
     ~Worker() override;
+
+    Worker() = delete;
+    Worker(const Worker&) = delete;
+    Worker& operator=(const Worker&) = delete;
+
     void Run() override;
     bool IsProcessingMessagesForTesting() override;
 
    private:
     DEPRECATED_SignalThread* parent_;
-
-    RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(Worker);
   };
 
   class RTC_SCOPED_LOCKABLE EnterExit {
@@ -138,10 +141,12 @@ class DEPRECATED_SignalThread : public sigslot::has_slots<>,
         delete t_;
     }
 
+    EnterExit() = delete;
+    EnterExit(const EnterExit&) = delete;
+    EnterExit& operator=(const EnterExit&) = delete;
+
    private:
     DEPRECATED_SignalThread* t_;
-
-    RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(EnterExit);
   };
 
   void Run();
