@@ -33,6 +33,115 @@
       "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "128a72e1_40ec1a5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-25T09:07:41Z",
+      "side": 1,
+      "message": "Thanks for this change and sorry for the delay in getting back to you. I have some comments and some more general questions: \n- If we are encoding a primary, secondary and tertiary payload, we are not doubling but making the bitrate 3 times larger. In the description of the CL, you mentioned doubling. \n- Why 3 redundant payload and not 2 or N? I am not suggesting any code changes yet, I am trying to understand the decision. ",
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ffb4ea4_c81f2dc5",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-25T09:07:41Z",
+      "side": 1,
+      "message": "It can be nice if we write a comment here saying that the rfc2198 specifies that the primary encoding has a header length equal to 1 and the redundant payloads have header lengths equal to 4 bytes.",
+      "range": {
+        "startLine": 79,
+        "startChar": 31,
+        "endLine": 79,
+        "endChar": 32
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b12f45cd_71664950",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-25T09:07:41Z",
+      "side": 1,
+      "message": "The timestamps are in the secondary and tertiary header (at least the timestamp difference), it is true that there is not a direct mapping between timestamps and sequence number for some codecs but, why is this a problem? is it because we always want to encode with a hop between packets equal to 1?",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 11
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bab0316_46a621eb",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-25T09:07:41Z",
+      "side": 1,
+      "message": "this should be a -, shouldn\u0027t be?",
+      "range": {
+        "startLine": 99,
+        "startChar": 24,
+        "endLine": 99,
+        "endChar": 25
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "661f1623_28ccd8ed",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-25T09:07:41Z",
+      "side": 1,
+      "message": "I did probably miss it, I tried to find it in the RFC 2198 and I could\u0027t. Where does it say that if you do not carry redundant data you do not need to use the 1 byte header?\nI think that you still need that 1 byte header for specifying which codec is being used for the primary encoding. The RTP headers will have the payload type that corresponds to the RED codec and you need to specify somewhere which codec is used for that primary encoding. What am I missing?\n\nIf we change the payload type of the RTP header then we are not doing a RED encoding but something else.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
