@@ -266,9 +266,9 @@ class BufferQueueStream : public rtc::BufferQueue, public rtc::StreamInterface {
   void Close() override {}
 
  protected:
-  void NotifyReadableForTest() override { PostEvent(rtc::SE_READ, 0); }
+  void NotifyReadableForTest() { PostEvent(rtc::SE_READ, 0); }
 
-  void NotifyWritableForTest() override { PostEvent(rtc::SE_WRITE, 0); }
+  void NotifyWritableForTest() { PostEvent(rtc::SE_WRITE, 0); }
 };
 
 class SSLDummyStreamDTLS : public SSLDummyStreamBase {
