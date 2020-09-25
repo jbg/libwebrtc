@@ -243,6 +243,10 @@ class WeakPtrFactory {
 
   ~WeakPtrFactory() { ptr_ = nullptr; }
 
+  WeakPtrFactory() = delete;
+  WeakPtrFactory(const WeakPtrFactory&) = delete;
+  WeakPtrFactory& operator=(const WeakPtrFactory&) = delete;
+
   WeakPtr<T> GetWeakPtr() {
     RTC_DCHECK(ptr_);
     return WeakPtr<T>(weak_reference_owner_.GetRef(), ptr_);
@@ -263,7 +267,6 @@ class WeakPtrFactory {
  private:
   internal::WeakReferenceOwner weak_reference_owner_;
   T* ptr_;
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(WeakPtrFactory);
 };
 
 }  // namespace rtc

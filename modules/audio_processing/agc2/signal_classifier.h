@@ -18,7 +18,6 @@
 #include "common_audio/third_party/ooura/fft_size_128/ooura_fft.h"
 #include "modules/audio_processing/agc2/down_sampler.h"
 #include "modules/audio_processing/agc2/noise_spectrum_estimator.h"
-#include "rtc_base/constructor_magic.h"
 
 namespace webrtc {
 
@@ -32,6 +31,10 @@ class SignalClassifier {
   explicit SignalClassifier(ApmDataDumper* data_dumper);
   ~SignalClassifier();
 
+  SignalClassifier() = delete;
+  SignalClassifier(const SignalClassifier&) = delete;
+  SignalClassifier& operator=(const SignalClassifier&) = delete;
+
   void Initialize(int sample_rate_hz);
   SignalType Analyze(rtc::ArrayView<const float> signal);
 
@@ -41,13 +44,15 @@ class SignalClassifier {
     FrameExtender(size_t frame_size, size_t extended_frame_size);
     ~FrameExtender();
 
+    FrameExtender() = delete;
+    FrameExtender(const FrameExtender&) = delete;
+    FrameExtender& operator=(const FrameExtender&) = delete;
+
     void ExtendFrame(rtc::ArrayView<const float> x,
                      rtc::ArrayView<float> x_extended);
 
    private:
     std::vector<float> x_old_;
-
-    RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(FrameExtender);
   };
 
   ApmDataDumper* const data_dumper_;
@@ -59,7 +64,6 @@ class SignalClassifier {
   int consistent_classification_counter_;
   SignalType last_signal_type_;
   const OouraFft ooura_fft_;
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(SignalClassifier);
 };
 
 }  // namespace webrtc
