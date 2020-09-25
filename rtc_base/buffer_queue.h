@@ -19,6 +19,7 @@
 #include "rtc_base/buffer.h"
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/synchronization/mutex.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/thread_annotations.h"
 
 namespace rtc {
@@ -50,6 +51,7 @@ class BufferQueue {
   virtual void NotifyWritableForTest() {}
 
  private:
+  webrtc::SequenceChecker sequence_checker_;
   size_t capacity_;
   size_t default_size_;
   mutable webrtc::Mutex mutex_;
