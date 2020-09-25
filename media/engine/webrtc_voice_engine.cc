@@ -256,7 +256,6 @@ WebRtcVoiceEngine::WebRtcVoiceEngine(
   // This may be called from any thread, so detach thread checkers.
   worker_thread_checker_.Detach();
   signal_thread_checker_.Detach();
-  RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::WebRtcVoiceEngine";
   RTC_DCHECK(decoder_factory);
   RTC_DCHECK(encoder_factory);
   // The rest of our initialization will happen in Init.
@@ -264,7 +263,6 @@ WebRtcVoiceEngine::WebRtcVoiceEngine(
 
 WebRtcVoiceEngine::~WebRtcVoiceEngine() {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::~WebRtcVoiceEngine";
   if (initialized_) {
     StopAecDump();
 
@@ -278,7 +276,6 @@ WebRtcVoiceEngine::~WebRtcVoiceEngine() {
 
 void WebRtcVoiceEngine::Init() {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
-  RTC_LOG(LS_INFO) << "WebRtcVoiceEngine::Init";
 
   // TaskQueue expects to be created/destroyed on the same thread.
   low_priority_worker_queue_.reset(

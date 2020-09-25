@@ -584,13 +584,9 @@ WebRtcVideoEngine::WebRtcVideoEngine(
     const webrtc::WebRtcKeyValueConfig& trials)
     : decoder_factory_(std::move(video_decoder_factory)),
       encoder_factory_(std::move(video_encoder_factory)),
-      trials_(trials) {
-  RTC_LOG(LS_INFO) << "WebRtcVideoEngine::WebRtcVideoEngine()";
-}
+      trials_(trials) {}
 
-WebRtcVideoEngine::~WebRtcVideoEngine() {
-  RTC_LOG(LS_INFO) << "WebRtcVideoEngine::~WebRtcVideoEngine";
-}
+WebRtcVideoEngine::~WebRtcVideoEngine() = default;
 
 VideoMediaChannel* WebRtcVideoEngine::CreateMediaChannel(
     webrtc::Call* call,
