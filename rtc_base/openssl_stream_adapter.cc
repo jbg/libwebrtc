@@ -34,6 +34,7 @@
 #include "rtc_base/openssl_identity.h"
 #include "rtc_base/ssl_certificate.h"
 #include "rtc_base/stream.h"
+#include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/thread.h"
 #include "rtc_base/time_utils.h"
 #include "system_wrappers/include/field_trial.h"
@@ -50,7 +51,6 @@
 
 namespace rtc {
 namespace {
-
 // SRTP cipher suite table. |internal_name| is used to construct a
 // colon-separated profile strings which is needed by
 // SSL_CTX_set_tlsext_use_srtp().
@@ -268,6 +268,7 @@ static long stream_ctrl(BIO* b, int cmd, long num, void* ptr) {
 OpenSSLStreamAdapter::OpenSSLStreamAdapter(
     std::unique_ptr<StreamInterface> stream)
     : SSLStreamAdapter(std::move(stream)),
+      owner_(rtc::Thread::Current()),
       state_(SSL_NONE),
       role_(SSL_CLIENT),
       ssl_read_needs_write_(false),
@@ -282,6 +283,7 @@ OpenSSLStreamAdapter::OpenSSLStreamAdapter(
           !webrtc::field_trial::IsDisabled("WebRTC-LegacyTlsProtocols")) {}
 
 OpenSSLStreamAdapter::~OpenSSLStreamAdapter() {
+  timeout_task_.Stop();  // Needed?
   Cleanup(0);
 }
 
@@ -787,6 +789,30 @@ void OpenSSLStreamAdapter::OnEvent(StreamInterface* stream,
   }
 }
 
+void OpenSSLStreamAdapter::PostEvent(int events, int err) {
+  owner_->PostTask(webrtc::ToQueuedTask(
+      task_safety_, [this, events, err]() { SignalEvent(this, events, err); }));
+}
+
+void OpenSSLStreamAdapter::SetTimeout(int delay_ms) {
+  RTC_DCHECK_GT(delay_ms, 0);
+  RTC_DCHECK(!timeout_task_.Running());
+
+  timeout_task_ = webrtc::RepeatingTaskHandle::DelayedStart(
+      rtc::Thread::Current(), webrtc::TimeDelta::Millis(delay_ms),
+      [flag = task_safety_.flag(), this]() {
+        if (flag->alive()) {
+          RTC_LOG(LS_INFO) << "DTLS timeout expired";
+          timeout_task_.Stop();
+          DTLSv1_handle_timeout(ssl_);
+          ContinueSSL();
+        } else {
+          RTC_NOTREACHED();
+        }
+        return webrtc::TimeDelta::PlusInfinity();
+      });
+}
+
 int OpenSSLStreamAdapter::BeginSSL() {
   RTC_DCHECK(state_ == SSL_CONNECTING);
   // The underlying stream has opened.
@@ -837,7 +863,7 @@ int OpenSSLStreamAdapter::ContinueSSL() {
   RTC_DCHECK(state_ == SSL_CONNECTING);
 
   // Clear the DTLS timer
-  Thread::Current()->Clear(this, MSG_TIMEOUT);
+  timeout_task_.Stop();
 
   const int code = (role_ == SSL_CLIENT) ? SSL_connect(ssl_) : SSL_accept(ssl_);
   const int ssl_error = SSL_get_error(ssl_, code);
@@ -869,9 +895,7 @@ int OpenSSLStreamAdapter::ContinueSSL() {
       struct timeval timeout;
       if (DTLSv1_get_timeout(ssl_, &timeout)) {
         int delay = timeout.tv_sec * 1000 + timeout.tv_usec / 1000;
-
-        Thread::Current()->PostDelayed(RTC_FROM_HERE, delay, this, MSG_TIMEOUT,
-                                       0);
+        SetTimeout(delay);
       }
     } break;
 
@@ -948,18 +972,7 @@ void OpenSSLStreamAdapter::Cleanup(uint8_t alert) {
   peer_cert_chain_.reset();
 
   // Clear the DTLS timer
-  Thread::Current()->Clear(this, MSG_TIMEOUT);
-}
-
-void OpenSSLStreamAdapter::OnMessage(Message* msg) {
-  // Process our own messages and then pass others to the superclass
-  if (MSG_TIMEOUT == msg->message_id) {
-    RTC_LOG(LS_INFO) << "DTLS timeout expired";
-    DTLSv1_handle_timeout(ssl_);
-    ContinueSSL();
-  } else {
-    StreamInterface::OnMessage(msg);
-  }
+  timeout_task_.Stop();
 }
 
 SSL_CTX* OpenSSLStreamAdapter::SetupSSLContext() {
