@@ -24,6 +24,7 @@
 #include "rtc_base/ssl_stream_adapter.h"
 #include "rtc_base/stream.h"
 #include "rtc_base/strings/string_builder.h"
+#include "rtc_base/synchronization/sequence_checker.h"
 #include "rtc_base/thread_checker.h"
 
 namespace rtc {
@@ -54,6 +55,7 @@ class StreamInterfaceChannel : public rtc::StreamInterface {
                           int* error) override;
 
  private:
+  webrtc::SequenceChecker sequence_checker_;
   IceTransportInternal* ice_transport_;  // owned by DtlsTransport
   rtc::StreamState state_;
   rtc::BufferQueue packets_;
