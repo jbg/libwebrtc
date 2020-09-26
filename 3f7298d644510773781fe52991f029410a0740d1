@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6e24aa1_752cf122",
+        "filename": "rtc_base/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-09-26T10:48:27Z",
+      "side": 0,
+      "message": "Nice!! 😊\n\nThis has been on the back-burner for a while! Thanks for cleaning this up!",
+      "range": {
+        "startLine": 787,
+        "startChar": 4,
+        "endLine": 792,
+        "endChar": 7
+      },
+      "revId": "3f7298d644510773781fe52991f029410a0740d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
