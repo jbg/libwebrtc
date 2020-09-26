@@ -16,6 +16,92 @@
       "revId": "7b1900dd675fe4ddf9dafc667776dd74e1332c48",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efcc8055_099bcd92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-26T06:46:32Z",
+      "side": 1,
+      "message": "Thanks for your comments. I think that we should write this code in a more generic way and be ready for sending up to N redundant packets. What do you think?",
+      "revId": "7b1900dd675fe4ddf9dafc667776dd74e1332c48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8cd6742_50241557",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-26T06:46:32Z",
+      "side": 1,
+      "message": "please add the RFC number, e.g., audio coding (RFC 2198).",
+      "range": {
+        "startLine": 29,
+        "startChar": 35,
+        "endLine": 29,
+        "endChar": 47
+      },
+      "revId": "7b1900dd675fe4ddf9dafc667776dd74e1332c48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96b60de6_ec2afc67",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-26T06:46:32Z",
+      "side": 1,
+      "message": "This is not 2 anymore. I think that we should write this class to be able to add N encodings instead of a fixed number. \nWe should also add a comment saying that without redundancy a payload of the embedded encoding is returned.",
+      "range": {
+        "startLine": 31,
+        "startChar": 33,
+        "endLine": 31,
+        "endChar": 54
+      },
+      "revId": "7b1900dd675fe4ddf9dafc667776dd74e1332c48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03fcea9d_15c046d5",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-26T06:46:32Z",
+      "side": 1,
+      "message": "wouldn\u0027t it be better to gather this as an std::array\u003cEncoderInfoLeaf, kNumberRedundantPayload\u003e encoder_info_; and std::array\u003crtc::Buffer, kNumberRedundantPayloads\u003e redundant_encoded_;?",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 33
+      },
+      "revId": "7b1900dd675fe4ddf9dafc667776dd74e1332c48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

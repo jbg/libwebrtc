@@ -165,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "a7b8e3b5_acf9b072",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-26T06:46:32Z",
+      "side": 1,
+      "message": "You have all the information about the timestamp and you know which part of the audio it is lost. You can write something like \"Do not allow gaps in audio in the redundant part of the RED payload\". \n\nIt will not be strange if in the future you want to do exactly the opposite and encode RED with a packet distance equal to M, that is, encode N and N-M in the same RED packet (not saying is a good idea but it is an option).",
+      "parentUuid": "e536a26f_73e79545",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 11
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7bab0316_46a621eb",
         "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
         "patchSetId": 5
@@ -200,6 +224,30 @@
       "side": 1,
       "message": "It is wrong, but worse than that. Bear with me... lets assume that\n- the primary is 100 bytes long\n- the secondary is 200 bytes long but doesn\u0027t have the speech flag set so encode_secondary is false.\n- the tertiary is 300 bytes long and has the speech flag set so (so we run into this branch)\n- max_packet_length is 606 bytes\n\nThen bytes available is 506 (606 - 100) in line 80.\nWe run into this branch, add 200 and 300 which is smaller than 506 + 4.\nSo we encode primary, secondary, tertiary and add the 9 byte header. Which brings us up to 609 bytes but we only have 606 available so are doing the wrong thing.\n\nThe correct calculation would be\nsecondary + tertiarty + header length for primary and tertiary (5) + the additional four header bytes for the secondary we did not include \u003c\u003d bytes_available\n\nThis gets easier to understand when one modifies bytes_available to subtract the header bytes (i.e. - 1 in line 80, it is done in line 86 already and needs to be subtract another 4 after line 92). Then the condition becomes\nseconary + tertiary + the he additional four header bytes for the secondary we did not include \u003c bytes_available\n\nDoes that make more sense?",
       "parentUuid": "7bab0316_46a621eb",
+      "range": {
+        "startLine": 99,
+        "startChar": 24,
+        "endLine": 99,
+        "endChar": 25
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66063120_62851b30",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-26T06:46:32Z",
+      "side": 1,
+      "message": "It makes sense but I think that we might be able to write this in a simpler way: e.g:\n  bool encode_tertiary \u003d tertiary_info_.encoded_bytes \u003e 0 \u0026\u0026\n                         tertiary_info_.speech \u0026\u0026\n                         tertiary_info_.encoded_bytes + secondary_info_.encoded_bytes \u003c (bytes_available - 2*4 - 1); \n  bool encode_secondary \u003d encode_tertiary || ( secondary_info_.encoded_bytes \u003e 0 \u0026\u0026\n                          secondary_info_.speech \u0026\u0026\n                          secondary_info_.encoded_bytes \u003c bytes_available - 4 - 1 );\n\n\nNote that this might be easy to do it in a loop so it easily generalizes to N redundant packets.",
+      "parentUuid": "0eef7fd6_11206c06",
       "range": {
         "startLine": 99,
         "startChar": 24,
@@ -252,6 +300,53 @@
         "startChar": 0,
         "endLine": 112,
         "endChar": 21
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceeebf52_d2990208",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-26T06:46:32Z",
+      "side": 1,
+      "message": "Yes, it makes sense to mix those codecs. Let\u0027s write a comment in the documentation of the class so it is clear to the users of this RED encodec.",
+      "parentUuid": "884ab4ea_e9bd65a7",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae10486_303bd4e2",
+        "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 6876
+      },
+      "writtenOn": "2020-09-26T06:46:32Z",
+      "side": 1,
+      "message": "Again, this looks like a perfect loop to me and can be generalized to N.",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 140,
+        "endChar": 3
       },
       "revId": "bc7319a94453d148f10811a5ac5282decfe01dd4",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
