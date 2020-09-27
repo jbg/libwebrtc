@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efb35d90_d7600bcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-27T22:16:34Z",
+      "side": 1,
+      "message": "This CL contains a lot of ugly get-it-to-work-with-no-change code, but I think the basic split is the right one. I was pleasantly surprised that both weak pointers and the operations chain moved neatly into the new module with no need for special hacks.\n\nDo you think the approach looks workable?\n",
+      "revId": "bffbb301f2cff9a8c29a82df422b1ae569f9399c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
