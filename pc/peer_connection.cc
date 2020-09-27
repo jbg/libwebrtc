@@ -100,10 +100,6 @@ const char kSdpWithoutIceUfragPwd[] =
     "Called with SDP without ice-ufrag and ice-pwd.";
 const char kSessionError[] = "Session error code: ";
 const char kSessionErrorDesc[] = "Session error description: ";
-const char kDtlsSrtpSetupFailureRtp[] =
-    "Couldn't set up DTLS-SRTP on RTP channel.";
-const char kDtlsSrtpSetupFailureRtcp[] =
-    "Couldn't set up DTLS-SRTP on RTCP channel.";
 
 namespace {
 
@@ -5675,6 +5671,7 @@ void PeerConnection::OnSctpDataChannelClosed(DataChannelInterface* channel) {
       static_cast<SctpDataChannel*>(channel));
 }
 
+// Runs on the signaling thread.
 rtc::scoped_refptr<RtpTransceiverProxyWithInternal<RtpTransceiver>>
 PeerConnection::GetAudioTransceiver() const {
   // This method only works with Plan B SDP, where there is a single
@@ -6349,11 +6346,6 @@ void PeerConnection::OnCertificateReady(
   transport_controller_->SetLocalCertificate(certificate);
 }
 
-void PeerConnection::OnDtlsSrtpSetupFailure(cricket::BaseChannel*, bool rtcp) {
-  SetSessionError(SessionError::kTransport,
-                  rtcp ? kDtlsSrtpSetupFailureRtcp : kDtlsSrtpSetupFailureRtp);
-}
-
 void PeerConnection::OnTransportControllerConnectionState(
     cricket::IceConnectionState state) {
   switch (state) {
@@ -6628,8 +6620,20 @@ RTCErrorOr<const cricket::ContentGroup*> PeerConnection::GetEarlyBundleGroup(
 }
 
 RTCError PeerConnection::CreateChannels(const SessionDescription& desc) {
+  RTC_DCHECK(!IsUnifiedPlan()) << "This code path is Plan B only";
+
   // Creating the media channels. Transports should already have been created
   // at this point.
+
+  // TODO(tommi): The Create and Destroy methods need to be shifted to the
+  // worker thread.  Currently the SetChannel methods seem to have some
+  // association with the signaling thread, but it seems likely that there
+  // are races there and in at least one case, there's an invoke to the worker
+  // in order to set the value.
+  // Perhaps the best thing is to shift this whole operation over to the worker.
+  // Note that GetAudioTransceiver() might then need to be called first, here
+  // on the signaling thread.
+
   const cricket::ContentInfo* voice = cricket::GetFirstAudioContent(&desc);
   if (voice && !voice->rejected &&
       !GetAudioTransceiver()->internal()->channel()) {
@@ -6680,8 +6684,6 @@ cricket::VoiceChannel* PeerConnection::CreateVoiceChannel(
   if (!voice_channel) {
     return nullptr;
   }
-  voice_channel->SignalDtlsSrtpSetupFailure.connect(
-      this, &PeerConnection::OnDtlsSrtpSetupFailure);
   voice_channel->SignalSentPacket.connect(this,
                                           &PeerConnection::OnSentPacket_w);
   voice_channel->SetRtpTransport(rtp_transport);
@@ -6704,8 +6706,6 @@ cricket::VideoChannel* PeerConnection::CreateVideoChannel(
   if (!video_channel) {
     return nullptr;
   }
-  video_channel->SignalDtlsSrtpSetupFailure.connect(
-      this, &PeerConnection::OnDtlsSrtpSetupFailure);
   video_channel->SignalSentPacket.connect(this,
                                           &PeerConnection::OnSentPacket_w);
   video_channel->SetRtpTransport(rtp_transport);
@@ -6737,9 +6737,6 @@ bool PeerConnection::CreateDataChannel(const std::string& mid) {
       if (!data_channel_controller_.rtp_data_channel()) {
         return false;
       }
-      data_channel_controller_.rtp_data_channel()
-          ->SignalDtlsSrtpSetupFailure.connect(
-              this, &PeerConnection::OnDtlsSrtpSetupFailure);
       data_channel_controller_.rtp_data_channel()->SignalSentPacket.connect(
           this, &PeerConnection::OnSentPacket_w);
       data_channel_controller_.rtp_data_channel()->SetRtpTransport(
