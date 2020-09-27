@@ -380,6 +380,11 @@ void BaseChannel::OnNetworkRouteChanged(
   });
 }
 
+sigslot::signal1<ChannelInterface*>& BaseChannel::SignalFirstPacketReceived() {
+  RTC_DCHECK_RUN_ON(signaling_thread_);
+  return SignalFirstPacketReceived_;
+}
+
 void BaseChannel::OnTransportReadyToSend(bool ready) {
   invoker_.AsyncInvoke<void>(RTC_FROM_HERE, worker_thread_,
                              [=] { media_channel_->OnReadyToSend(ready); });
@@ -776,6 +781,7 @@ void BaseChannel::OnMessage(rtc::Message* pmsg) {
       break;
     }
     case MSG_FIRSTPACKETRECEIVED: {
+      RTC_DCHECK_RUN_ON(signaling_thread_);
       SignalFirstPacketReceived_(this);
       break;
     }
