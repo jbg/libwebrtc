@@ -145,10 +145,6 @@ class BaseChannel : public ChannelInterface,
     return remote_streams_;
   }
 
-  sigslot::signal2<BaseChannel*, bool> SignalDtlsSrtpSetupFailure;
-  void SignalDtlsSrtpSetupFailure_n(bool rtcp);
-  void SignalDtlsSrtpSetupFailure_s(bool rtcp);
-
   // Used for latency measurements.
   sigslot::signal1<ChannelInterface*>& SignalFirstPacketReceived() override {
     return SignalFirstPacketReceived_;
