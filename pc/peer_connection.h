@@ -919,7 +919,6 @@ class PeerConnection : public PeerConnectionInternal,
   // WebRTCSessionDescriptionFactory. Should happen before setLocalDescription.
   void OnCertificateReady(
       const rtc::scoped_refptr<rtc::RTCCertificate>& certificate);
-  void OnDtlsSrtpSetupFailure(cricket::BaseChannel*, bool rtcp);
 
   // Non-const versions of local_description()/remote_description(), for use
   // internally.
@@ -1006,6 +1005,13 @@ class PeerConnection : public PeerConnectionInternal,
   // Helper methods to create media channels.
   cricket::VoiceChannel* CreateVoiceChannel(const std::string& mid)
       RTC_RUN_ON(signaling_thread());
+  cricket::VoiceChannel* CreateVoiceChannel_w(
+      const std::string& mid,
+      const cricket::MediaConfig& media_config,
+      bool srtp_required,
+      CryptoOptions crypto_options,
+      const cricket::AudioOptions& audio_options,
+      RtpTransportInternal* rtp_transport);
   cricket::VideoChannel* CreateVideoChannel(const std::string& mid)
       RTC_RUN_ON(signaling_thread());
   bool CreateDataChannel(const std::string& mid) RTC_RUN_ON(signaling_thread());
