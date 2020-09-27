@@ -230,11 +230,13 @@ PeerConnectionFactory::CreateAudioSource(const cricket::AudioOptions& options) {
 
 bool PeerConnectionFactory::StartAecDump(FILE* file, int64_t max_size_bytes) {
   RTC_DCHECK(signaling_thread_->IsCurrent());
+  // TODO(tommi): Post to worker.
   return channel_manager_->StartAecDump(FileWrapper(file), max_size_bytes);
 }
 
 void PeerConnectionFactory::StopAecDump() {
   RTC_DCHECK(signaling_thread_->IsCurrent());
+  // TODO(tommi): Post to worker.
   channel_manager_->StopAecDump();
 }
 
