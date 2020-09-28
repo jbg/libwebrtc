@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a84fee52_b996b104",
+        "filename": "test/fake_vp8_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-09-28T16:10:18Z",
+      "side": 1,
+      "message": "Add a comment that this is e.g. a {1/4, 1/2, 1} allocation for num layers \u003d 3.",
+      "range": {
+        "startLine": 121,
+        "startChar": 6,
+        "endLine": 122,
+        "endChar": 76
+      },
+      "revId": "e3795e7f1d555bd801870383b79f5e239d83d4d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
