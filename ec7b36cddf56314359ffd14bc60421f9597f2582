@@ -16,6 +16,24 @@
       "revId": "ec7b36cddf56314359ffd14bc60421f9597f2582",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2462f24_9f392ed2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-09-28T08:47:11Z",
+      "side": 1,
+      "message": "If this is the cause, sounds like it would be better to fix the root cause. However, we should avoid making a copy because this will cost performance.",
+      "parentUuid": "c546c182_794934b3",
+      "revId": "ec7b36cddf56314359ffd14bc60421f9597f2582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
