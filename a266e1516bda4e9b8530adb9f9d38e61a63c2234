@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71695090_bc66c963",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T13:41:37Z",
+      "side": 1,
+      "message": "Since this is code that is never called, I suppose it\u0027s OK to delete them.\nI do worry what we do when a DTLS setup failure actually happens - we\u0027ll have to resurrect the code at the time, I suppose.\n",
+      "revId": "a266e1516bda4e9b8530adb9f9d38e61a63c2234",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
