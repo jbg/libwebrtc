@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "661565c1_1e6e946c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-28T14:54:34Z",
+      "side": 1,
+      "message": "PTAL. These don\u0027t seem useful anymore.",
+      "revId": "985468bbe5aee0780a7fa5e2baad9816a38243a1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
