@@ -1615,6 +1615,10 @@ VideoEncoder::EncoderInfo VP9EncoderImpl::GetEncoderInfo() const {
       }
     }
   }
+  if (profile_ == VP9Profile::kProfile0) {
+    info.supported_pixel_formats = {VideoFrameBuffer::Type::kNV12,
+                                    VideoFrameBuffer::Type::kI420};
+  }
   return info;
 }
 

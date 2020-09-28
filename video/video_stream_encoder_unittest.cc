@@ -21,6 +21,7 @@
 #include "api/test/mock_video_encoder.h"
 #include "api/video/builtin_video_bitrate_allocator_factory.h"
 #include "api/video/i420_buffer.h"
+#include "api/video/nv12_buffer.h"
 #include "api/video/video_adaptation_reason.h"
 #include "api/video/video_bitrate_allocation.h"
 #include "api/video_codecs/video_encoder.h"
@@ -129,6 +130,31 @@ class FakeNativeBuffer : public webrtc::VideoFrameBuffer {
   rtc::Event* const event_;
   const int width_;
   const int height_;
+};
+
+// A fake native buffer that is backed by an NV12 buffer.
+class FakeNV12NativeBuffer : public webrtc::VideoFrameBuffer {
+ public:
+  FakeNV12NativeBuffer(rtc::Event* event, int width, int height)
+      : nv12_buffer_(NV12Buffer::Create(width, height)), event_(event) {}
+
+  webrtc::VideoFrameBuffer::Type type() const override { return Type::kNative; }
+  int width() const override { return nv12_buffer_->width(); }
+  int height() const override { return nv12_buffer_->height(); }
+  rtc::scoped_refptr<webrtc::I420BufferInterface> ToI420() override {
+    RTC_NOTREACHED();
+    return nv12_buffer_->ToI420();
+  }
+  const NV12BufferInterface* GetNV12() const { return nv12_buffer_; }
+
+ private:
+  friend class rtc::RefCountedObject<FakeNV12NativeBuffer>;
+  ~FakeNV12NativeBuffer() override {
+    if (event_)
+      event_->Set();
+  }
+  rtc::scoped_refptr<NV12Buffer> nv12_buffer_;
+  rtc::Event* const event_;
 };
 
 class CpuOveruseDetectorProxy : public OveruseFrameDetector {
@@ -746,6 +772,22 @@ class VideoStreamEncoderTest : public ::testing::Test {
             .set_timestamp_ms(99)
             .set_rotation(kVideoRotation_0)
             .build();
+    frame.set_ntp_time_ms(ntp_time_ms);
+    return frame;
+  }
+
+  VideoFrame CreateFakeNV12NativeFrame(int64_t ntp_time_ms,
+                                       rtc::Event* destruction_event,
+                                       int width,
+                                       int height) const {
+    VideoFrame frame = VideoFrame::Builder()
+                           .set_video_frame_buffer(
+                               new rtc::RefCountedObject<FakeNV12NativeBuffer>(
+                                   destruction_event, width, height))
+                           .set_timestamp_rtp(99)
+                           .set_timestamp_ms(99)
+                           .set_rotation(kVideoRotation_0)
+                           .build();
     frame.set_ntp_time_ms(ntp_time_ms);
     return frame;
   }
@@ -1481,6 +1523,17 @@ TEST_F(VideoStreamEncoderTest, DropFrameWithFailedI420ConversionWithCrop) {
   ExpectDroppedFrame();
   EXPECT_TRUE(frame_destroyed_event.Wait(kDefaultTimeoutMs));
   video_stream_encoder_->Stop();
+}
+
+TEST_F(VideoStreamEncoderTest, NativeFrameBackedByNV12FrameIsEncoded) {
+  video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
+      DataRate::BitsPerSec(kTargetBitrateBps),
+      DataRate::BitsPerSec(kTargetBitrateBps),
+      DataRate::BitsPerSec(kTargetBitrateBps), 0, 0, 0);
+
+  rtc::Event frame_destroyed_event;
+  video_source_.IncomingCapturedFrame(
+      CreateFakeNV12NativeFrame(1, &frame_destroyed_event));
 }
 
 TEST_F(VideoStreamEncoderTest, DropsFramesWhenCongestionWindowPushbackSet) {
