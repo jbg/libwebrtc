@@ -368,4 +368,30 @@ TEST(RedPayloadSplitter, WrongPayloadLength) {
   packet_list.pop_front();
 }
 
+// Test that we reject packets too short to contain a RED header.
+TEST(RedPayloadSplitter, RejectsTruncatedPackets) {
+  RedPayloadSplitter splitter;
+
+  uint8_t payload_types[] = {0, 0};
+  const int kTimestampOffset = 160;
+
+  PacketList packet_list;
+  // Truncate the packet.
+  packet_list.push_back(CreateRedPayload(2, payload_types, kTimestampOffset));
+  packet_list.front().payload.SetSize(5);
+  EXPECT_FALSE(splitter.SplitRed(&packet_list));
+  EXPECT_TRUE(packet_list.empty());
+
+  // Truncate the packet such that the first block can not be parsed.
+  packet_list.push_back(CreateRedPayload(2, payload_types, kTimestampOffset));
+  packet_list.front().payload.SetSize(4);
+  EXPECT_FALSE(splitter.SplitRed(&packet_list));
+  EXPECT_FALSE(packet_list.empty());
+
+  // Truncate the packet such that the first block can not be parsed.
+  packet_list.front().payload.SetSize(3);
+  EXPECT_FALSE(splitter.SplitRed(&packet_list));
+  EXPECT_FALSE(packet_list.empty());
+}
+
 }  // namespace webrtc
