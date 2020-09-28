@@ -34,6 +34,24 @@
       "revId": "bffbb301f2cff9a8c29a82df422b1ae569f9399c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d0c4850_cf657853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:34:57Z",
+      "side": 1,
+      "message": "You might want to check the logic around PeerConnection.Close(). There\u0027s some moving of stuff there that could use a pair of extra eyes. Also in the destructor of PeerConnection, which turned out to have an interesting interaction with the weak pointers; I think I got it to behave exactly as before, but it wasn\u0027t obvious that it had to be that way.",
+      "parentUuid": "02f8c694_f34a99f4",
+      "revId": "bffbb301f2cff9a8c29a82df422b1ae569f9399c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }

@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d0f76c13_e74c3303",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:34:57Z",
+      "side": 1,
+      "message": "Thanks for the quick review!\n\nYes, this is a *ton* of moving things around.\n",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "310ebfe2_55748455",
         "filename": "pc/peer_connection.h",
         "patchSetId": 8
@@ -16,6 +33,24 @@
       "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30f89bf1_f9e52c83",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:34:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "310ebfe2_55748455",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -36,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "282510c1_fc71513c",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:34:57Z",
+      "side": 1,
+      "message": "Because RTC_RUN_ON(foo_-\u003esignaling_thread()) is butt-ugly. I used that for variable access, but for access to functions that will become part of PeerConnection\u0027s public interface, I changed all those into RTC_DCHECK_RUN_ON inside the function. Same static analysis can be performed, but the caller site doesn\u0027t have to care.",
+      "parentUuid": "2288eb80_699e9050",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e5784bf_f7c29791",
         "filename": "pc/peer_connection.h",
         "patchSetId": 8
@@ -47,6 +100,24 @@
       "writtenOn": "2020-09-28T11:01:16Z",
       "side": 1,
       "message": "Do you envision transceivers continuing to live in the PeerConnection with accessors for getting/setting/adding or is this something to be moved? My mental picture is that transceivers belong to the PC but a separate \"JSEP\" module is reading and writing to that set in our current implementation.\n\nIf we implemented \"JSEP\" as a *true* in-parallel operation, we may consider copying the set of transceivers at SLD/SRD and then surfacing the results at SLD/SRD completion.\n\nThe spec introduced a \"jsepSetOfTransceivers\" when I pointed out the spec not being thread safe when Jan-Ivar insisted they be the same object. So there are different ways to implement this.\n\nAnyway I\u0027m rambling again... This is not important for this CL or the current implementation of running SLD/SRD on the signaling thread, but it may influence our mental picture of where objects belong.",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f982a9f8_66f74191",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:34:57Z",
+      "side": 1,
+      "message": "transceivers_ is the big thing that I don\u0027t feel like this split settles. In my mind, the existence of transceivers is a result of SDP + Unified Plan; a SDP-less peerconnection wouldn\u0027t have them. So conceptually, they belong in sdp_offer_answer. There are also multiple things that happen with transceivers - such as the list of transceivers that might be affected by a rollback, but is not linked to the main transceiver list - that make me unhappy.\n\nBut in the current state, 9/10 of the accesses to transceivers_ is in the peer_connection.cc file. So statistically, they shouldn\u0027t move.\n\nI\u0027m leaving the issue of transceivers_ for a later refactoring.",
+      "parentUuid": "2e5784bf_f7c29791",
       "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
