@@ -169,8 +169,28 @@ std::string VideoEncoder::EncoderInfo::ToString() const {
   }
   oss << "] "
          ", supports_simulcast = "
-      << supports_simulcast << "}";
+      << supports_simulcast;
+
+  oss << ", supported_pixel_formats = [";
+  for (size_t i = 0; i < supported_pixel_formats.size(); ++i) {
+    if (i > 0)
+      oss << ", ";
+    oss << VideoFrameBufferTypeToString(supported_pixel_formats.at(i));
+  }
+  oss << "]";
+  oss << "}";
   return oss.str();
+}
+
+bool VideoEncoder::EncoderInfo::PixelFormatSupported(
+    VideoFrameBuffer::Type type) const {
+  if (supported_pixel_formats.empty()) {
+    return type == VideoFrameBuffer::Type::kI420 ||
+           (supports_native_handle && type == VideoFrameBuffer::Type::kNative);
+  }
+  return std::find(supported_pixel_formats.begin(),
+                   supported_pixel_formats.end(),
+                   type) != supported_pixel_formats.end();
 }
 
 bool VideoEncoder::EncoderInfo::operator==(const EncoderInfo& rhs) const {

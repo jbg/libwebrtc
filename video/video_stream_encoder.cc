@@ -1309,7 +1309,8 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
   const bool is_buffer_type_supported =
       buffer_type == VideoFrameBuffer::Type::kI420 ||
       (buffer_type == VideoFrameBuffer::Type::kNative &&
-       info.supports_native_handle);
+       info.supports_native_handle) ||
+      info.PixelFormatSupported(buffer_type);
 
   if (!is_buffer_type_supported) {
     // This module only supports software encoding.
