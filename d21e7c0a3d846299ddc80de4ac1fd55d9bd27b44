@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "3c188f86_56c0c238",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T13:05:35Z",
+      "side": 1,
+      "message": "OK let\u0027s do it this way then. Ship it!",
+      "parentUuid": "d2d4fa69_2fb94ff5",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "310ebfe2_55748455",
         "filename": "pc/peer_connection.h",
         "patchSetId": 8
