@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "fa370880_ce297c28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T12:21:03Z",
+      "side": 1,
+      "message": "Giving my +1 but pointing out a change that may or may not cause problems so please consider it before landing",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b60cee16_38656551",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T12:21:03Z",
+      "side": 1,
+      "message": "Order prior to this CL:\n- Set signaling state to closed\n- Set ICE and connection state to close and fire fire events.\n- Fire onsignalingstatechange.\n\nIn this CL:\n- Set ICE and connection state to close and fire fire events.\n- Set signaling state to closed and fire onsignalingstatechange.\n\nSo if you were to inspect the pc.signaling_state() inside of the observer for ICE or connection states you may be surprised to have it not be closed. I don\u0027t know if this would cause a real problem today but this could potentially cause problems if we copy states inside of the observers and expose this order of events.\n\nMight I suggest you do one of the following...\na) Revert the changes and do a fix in a follow-up CL that is careful with the events.\nb) Move sdp_handler_.Close() to before these lines? Then signaling state still changes first even if you could inspect the pc and see that ICE is not closed yet. Or maybe that\u0027s just as bad?\n\nNot sure if this is a real problem but this is the kind of change that could slip past our tests.",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "310ebfe2_55748455",
         "filename": "pc/peer_connection.h",
         "patchSetId": 8
@@ -89,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "2f94adbc_7139cf54",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T12:21:03Z",
+      "side": 1,
+      "message": "Alright sounds good, as long as we\u0027re nog changing any actual threading behavior.",
+      "parentUuid": "282510c1_fc71513c",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e5784bf_f7c29791",
         "filename": "pc/peer_connection.h",
         "patchSetId": 8
@@ -121,6 +173,24 @@
       "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c8d21a2_5726f65a",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T12:21:03Z",
+      "side": 1,
+      "message": "Sounds good.\n\nAnd it\u0027s not clear cut. You could argue that they conceptually belong to sdp_offer_answer since they are API control knobs for the m\u003d sections. But you could also argue that conceptually it\u0027s just a sender-and-receiver pair and this API could work regardless of the underlying negotiation mechanism (which just \"happens to be SDP today\"). But no matter how you slice it, they\u0027re tightly coupled down to mid and onnegotiationneeded. I think you\u0027re right in that they wouldn\u0027t exist if not for SDP.",
+      "parentUuid": "f982a9f8_66f74191",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
