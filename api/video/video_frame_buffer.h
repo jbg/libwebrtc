@@ -87,6 +87,8 @@ class RTC_EXPORT VideoFrameBuffer : public rtc::RefCountInterface {
   ~VideoFrameBuffer() override {}
 };
 
+const char* VideoFrameBufferTypeToString(VideoFrameBuffer::Type type);
+
 // This interface represents planar formats.
 class PlanarYuvBuffer : public VideoFrameBuffer {
  public:
