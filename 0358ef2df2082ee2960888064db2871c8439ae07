@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5ac29cae_6c397353",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-09-28T09:26:41Z",
+      "side": 1,
+      "message": "Why that would be better?\n(which group \"NoFrameDependsOnDiscardableOrNotPresent\" should be in, dependencies or dti?)\nI might it useful to add more tests that verifies interaction between different aspects?\n(e.g. frame that is a part of a chain protecting decode target dt mustn\u0027t be NotPresent or Discardable for that dt.\nOr that frame from chain X doesn\u0027t depend on frame that is not from chain X)\n\n(writing INSTANTIATE_... several times is not a big deal)",
+      "parentUuid": "0a842445_5435efb1",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 39
+      },
+      "revId": "0358ef2df2082ee2960888064db2871c8439ae07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6aa11f6e_5517368a",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_unittest.cc",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "0358ef2df2082ee2960888064db2871c8439ae07",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32e1e6af_f61c010a",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-09-28T09:26:41Z",
+      "side": 1,
+      "message": "bitrates \u003d all_bitrates\nbitrates.SetBitrate(...)\n\ndisables single layer each time. i.e. order doesn\u0027t matter.\nAdded a comment.\n\n(disabling all combination of layers is too much.\npicking an order might be more reasonable, but I\u0027m unsure if disabled from top spatial layer, then temporal layer is the only feasible option. e.g. vp9 sometimes disables just the bottom spatial layer. Even though motivation for that is different than limited bandwidth.)",
+      "parentUuid": "6aa11f6e_5517368a",
+      "range": {
+        "startLine": 307,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 67
+      },
+      "revId": "0358ef2df2082ee2960888064db2871c8439ae07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
