@@ -920,7 +920,6 @@ class PeerConnection : public PeerConnectionInternal,
   // WebRTCSessionDescriptionFactory. Should happen before setLocalDescription.
   void OnCertificateReady(
       const rtc::scoped_refptr<rtc::RTCCertificate>& certificate);
-  void OnDtlsSrtpSetupFailure(cricket::BaseChannel*, bool rtcp);
 
   // Non-const versions of local_description()/remote_description(), for use
   // internally.
@@ -1007,8 +1006,22 @@ class PeerConnection : public PeerConnectionInternal,
   // Helper methods to create media channels.
   cricket::VoiceChannel* CreateVoiceChannel(const std::string& mid)
       RTC_RUN_ON(signaling_thread());
+  cricket::VoiceChannel* CreateVoiceChannel_w(
+      const std::string& mid,
+      const cricket::MediaConfig& media_config,
+      bool srtp_required,
+      const CryptoOptions& crypto_options,
+      const cricket::AudioOptions& audio_options,
+      RtpTransportInternal* rtp_transport);
   cricket::VideoChannel* CreateVideoChannel(const std::string& mid)
       RTC_RUN_ON(signaling_thread());
+  cricket::VideoChannel* CreateVideoChannel_w(
+      const std::string& mid,
+      const cricket::MediaConfig& config,
+      bool srtp,
+      const CryptoOptions& crypto,
+      const cricket::VideoOptions& options,
+      RtpTransportInternal* transport);
   bool CreateDataChannel(const std::string& mid) RTC_RUN_ON(signaling_thread());
 
   bool SetupDataChannelTransport_n(const std::string& mid)
@@ -1114,6 +1127,7 @@ class PeerConnection : public PeerConnectionInternal,
   // Destroys the given ChannelInterface.
   // The channel cannot be accessed after this method is called.
   void DestroyChannelInterface(cricket::ChannelInterface* channel);
+  void DestroyChannelInterface_w(cricket::ChannelInterface* channel);
 
   // JsepTransportController::Observer override.
   //
