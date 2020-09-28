@@ -16,6 +16,24 @@
       "revId": "a266e1516bda4e9b8530adb9f9d38e61a63c2234",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5073bd7c_a7321047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-28T14:22:06Z",
+      "side": 1,
+      "message": "Yes, agreed - as it was, I feel it was a bit misleading. The code wasn\u0027t thread safe though since the signals would have been used on different threads without locks.",
+      "parentUuid": "71695090_bc66c963",
+      "revId": "a266e1516bda4e9b8530adb9f9d38e61a63c2234",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
