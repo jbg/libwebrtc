@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ef3e3e8f_ddf9b0a8",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-09-28T10:06:39Z",
+      "side": 1,
+      "message": "If we test everything about the scalability structure in one test then it\u0027s a bit harder to figure out what failed, so testing different aspects could give a better signal. It might be hard though since there is a lot of interactions between the different parts of the DD.\n\nI don\u0027t have a clear idea about what I am suggesting, feel free to ignore my initial comment :)",
+      "parentUuid": "5ac29cae_6c397353",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 39
+      },
+      "revId": "0358ef2df2082ee2960888064db2871c8439ae07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6aa11f6e_5517368a",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_unittest.cc",
         "patchSetId": 2
