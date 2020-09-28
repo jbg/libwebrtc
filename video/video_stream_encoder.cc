@@ -1304,37 +1304,6 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
 
   VideoFrame out_frame(video_frame);
 
-  const VideoFrameBuffer::Type buffer_type =
-      out_frame.video_frame_buffer()->type();
-  const bool is_buffer_type_supported =
-      buffer_type == VideoFrameBuffer::Type::kI420 ||
-      (buffer_type == VideoFrameBuffer::Type::kNative &&
-       info.supports_native_handle);
-
-  if (!is_buffer_type_supported) {
-    // This module only supports software encoding.
-    rtc::scoped_refptr<I420BufferInterface> converted_buffer(
-        out_frame.video_frame_buffer()->ToI420());
-
-    if (!converted_buffer) {
-      RTC_LOG(LS_ERROR) << "Frame conversion failed, dropping frame.";
-      return;
-    }
-
-    VideoFrame::UpdateRect update_rect = out_frame.update_rect();
-    if (!update_rect.IsEmpty() &&
-        out_frame.video_frame_buffer()->GetI420() == nullptr) {
-      // UpdatedRect is reset to full update if it's not empty, and buffer was
-      // converted, therefore we can't guarantee that pixels outside of
-      // UpdateRect didn't change comparing to the previous frame.
-      update_rect =
-          VideoFrame::UpdateRect{0, 0, out_frame.width(), out_frame.height()};
-    }
-
-    out_frame.set_video_frame_buffer(converted_buffer);
-    out_frame.set_update_rect(update_rect);
-  }
-
   // Crop frame if needed.
   if ((crop_width_ > 0 || crop_height_ > 0) &&
       out_frame.video_frame_buffer()->type() !=
