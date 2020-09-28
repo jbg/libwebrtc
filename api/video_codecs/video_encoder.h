@@ -254,6 +254,14 @@ class RTC_EXPORT VideoEncoder {
     // in such case the encoder should return
     // WEBRTC_VIDEO_CODEC_ERR_SIMULCAST_PARAMETERS_NOT_SUPPORTED.
     bool supports_simulcast;
+
+    // Supported frame types. If empty it is assumed that,
+    // if (supports_native_handle == true)
+    //   supported_pixel_formats = { kNative };
+    // else
+    //   supported_pixel_formats = { kI420 };
+    std::vector<VideoFrameBuffer::Type> supported_pixel_formats;
+    bool PixelFormatSupported(VideoFrameBuffer::Type type) const;
   };
 
   struct RTC_EXPORT RateControlParameters {
