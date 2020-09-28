@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ab0a6e5_d4c97464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-28T15:02:30Z",
+      "side": 1,
+      "message": "This file is unused in webrtc, and from the name, I\u0027d expect it shouldn\u0027t be used by any webrtc applications either.",
+      "revId": "061c7f3ead234bbd114039ea0aedf9d72306fe89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
