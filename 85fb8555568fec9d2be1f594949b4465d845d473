@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c890d76c_5b747ba3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2020-09-28T09:59:01Z",
+      "side": 1,
+      "message": "Thanks for reviewing. I have now updated the CL by removing all suppression in transparent mode.",
+      "revId": "85fb8555568fec9d2be1f594949b4465d845d473",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

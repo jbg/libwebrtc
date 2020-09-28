@@ -56,6 +56,30 @@
       "revId": "3436e5f9eba9a61fd0fec0c8c416e9b39062728d",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4db83c7d_9654a41c",
+        "filename": "modules/audio_processing/aec3/residual_echo_estimator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5116
+      },
+      "writtenOn": "2020-09-28T09:59:01Z",
+      "side": 1,
+      "message": "Further testing shows it actually can be zero. Changing the CL to disable suppression completely.",
+      "parentUuid": "b60c241e_ad19c367",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 53
+      },
+      "revId": "3436e5f9eba9a61fd0fec0c8c416e9b39062728d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
