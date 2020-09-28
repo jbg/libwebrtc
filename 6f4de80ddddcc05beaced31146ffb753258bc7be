@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfe8a262_a9c776d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:42:35Z",
+      "side": 1,
+      "message": "Thanks for the review! Forgot to send these replies when I made them.\n",
+      "revId": "6f4de80ddddcc05beaced31146ffb753258bc7be",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}

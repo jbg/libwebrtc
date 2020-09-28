@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "89c40d47_37969798",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2534,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:42:35Z",
+      "side": 1,
+      "message": "I may be pining for something that\u0027s too far out to worry about, but I want to make the code such that it looks the way it should when Plan B goes away.\n\nSwitching to early return.",
+      "parentUuid": "724505b1_2b9915b6",
+      "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c953add_41fa4e81",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 3
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "fdf2117d_b3fe073e",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2542,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:42:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c953add_41fa4e81",
+      "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa2b8111_6d2dd742",
         "filename": "pc/peer_connection.cc",
         "patchSetId": 3
@@ -81,6 +117,24 @@
       "writtenOn": "2020-09-21T09:57:27Z",
       "side": 1,
       "message": "Optionally, instead of searching m\u003d sections, could you simply do the following?\n\nif ((*it)-\u003einternal()-\u003emid().has_value()) {\n  (*it)-\u003einternal()-\u003eset_mid(absl::nullopt);\n  (*it)-\u003einternal()-\u003eset_mline_index(absl::nullopt);\n}\nit \u003d transceivers_.erase(it);\n\nTo cover both cases.",
+      "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b23b4aa_fdc5c865",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2547,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-28T11:42:35Z",
+      "side": 1,
+      "message": "The two cases are logically distinct - the first section is code that was already there, the second is a case that bit me while testing. I don\u0027t feel safe assuming that the maps and the markings are universally consistent.\n\nIt caused me to file the spec issue https://github.com/w3c/webrtc-pc/issues/2576 - rereading the text, I\u0027m not clear that it even says that we should remove them there. I\u0027ll add a comment (and file a webrtc bug to keep track of it).",
+      "parentUuid": "aa2b8111_6d2dd742",
       "revId": "310bacb60e0cafe613d4ac6e0b0c9dede413a5b7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
