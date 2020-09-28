@@ -265,8 +265,9 @@ class Logging {
     Context(const char* name, int64_t timestamp_ms, bool enabled);
     ~Context();
 
-   private:
-    RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(Context);
+    Context() = delete;
+    Context(const Context&) = delete;
+    Context& operator=(const Context&) = delete;
   };
 
   static Logging* GetInstance();

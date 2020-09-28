@@ -110,6 +110,12 @@ class CaptureTransportVerificationProcessor : public BlockProcessor {
   explicit CaptureTransportVerificationProcessor(size_t num_bands) {}
   ~CaptureTransportVerificationProcessor() override = default;
 
+  CaptureTransportVerificationProcessor() = delete;
+  CaptureTransportVerificationProcessor(
+      const CaptureTransportVerificationProcessor&) = delete;
+  CaptureTransportVerificationProcessor& operator=(
+      const CaptureTransportVerificationProcessor&) = delete;
+
   void ProcessCapture(
       bool level_change,
       bool saturated_microphone_signal,
@@ -124,9 +130,6 @@ class CaptureTransportVerificationProcessor : public BlockProcessor {
   void GetMetrics(EchoControl::Metrics* metrics) const override {}
 
   void SetAudioBufferDelay(int delay_ms) override {}
-
- private:
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(CaptureTransportVerificationProcessor);
 };
 
 // Class for testing that the render data is properly received by the block
@@ -135,6 +138,12 @@ class RenderTransportVerificationProcessor : public BlockProcessor {
  public:
   explicit RenderTransportVerificationProcessor(size_t num_bands) {}
   ~RenderTransportVerificationProcessor() override = default;
+
+  RenderTransportVerificationProcessor() = delete;
+  RenderTransportVerificationProcessor(
+      const RenderTransportVerificationProcessor&) = delete;
+  RenderTransportVerificationProcessor& operator=(
+      const RenderTransportVerificationProcessor&) = delete;
 
   void ProcessCapture(
       bool level_change,
@@ -161,7 +170,6 @@ class RenderTransportVerificationProcessor : public BlockProcessor {
  private:
   std::deque<std::vector<std::vector<std::vector<float>>>>
       received_render_blocks_;
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RenderTransportVerificationProcessor);
 };
 
 class EchoCanceller3Tester {
@@ -183,6 +191,10 @@ class EchoCanceller3Tester {
                        1,
                        fullband_frame_length_ * 100,
                        1) {}
+
+  EchoCanceller3Tester() = delete;
+  EchoCanceller3Tester(const EchoCanceller3Tester&) = delete;
+  EchoCanceller3Tester& operator=(const EchoCanceller3Tester&) = delete;
 
   // Verifies that the capture data is properly received by the block processor
   // and that the processor data is properly passed to the EchoCanceller3
@@ -602,8 +614,6 @@ class EchoCanceller3Tester {
   const int fullband_frame_length_;
   AudioBuffer capture_buffer_;
   AudioBuffer render_buffer_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(EchoCanceller3Tester);
 };
 
 std::string ProduceDebugText(int sample_rate_hz) {

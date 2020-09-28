@@ -31,7 +31,6 @@
 #include "modules/rtp_rtcp/source/rtcp_packet/report_block.h"
 #include "modules/rtp_rtcp/source/rtcp_packet/tmmb_item.h"
 #include "modules/rtp_rtcp/source/rtp_rtcp_interface.h"
-#include "rtc_base/constructor_magic.h"
 #include "rtc_base/random.h"
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
@@ -66,6 +65,10 @@ class RTCPSender final {
 
   explicit RTCPSender(const RtpRtcpInterface::Configuration& config);
   virtual ~RTCPSender();
+
+  RTCPSender() = delete;
+  RTCPSender(const RTCPSender&) = delete;
+  RTCPSender& operator=(const RTCPSender&) = delete;
 
   RtcpMode Status() const RTC_LOCKS_EXCLUDED(mutex_rtcp_sender_);
   void SetRTCPStatus(RtcpMode method) RTC_LOCKS_EXCLUDED(mutex_rtcp_sender_);
@@ -308,8 +311,6 @@ class RTCPSender final {
       const RtcpContext&);
   // Map from RTCPPacketType to builder.
   std::map<uint32_t, BuilderFunc> builders_;
-
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RTCPSender);
 };
 }  // namespace webrtc
 

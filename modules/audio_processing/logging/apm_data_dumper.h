@@ -26,7 +26,6 @@
 #include "common_audio/wav_file.h"
 #include "rtc_base/checks.h"
 #endif
-#include "rtc_base/constructor_magic.h"
 
 // Check to verify that the define is properly set.
 #if !defined(WEBRTC_APM_DEBUG_DUMP) || \
@@ -53,6 +52,10 @@ class ApmDataDumper {
   explicit ApmDataDumper(int instance_index);
 
   ~ApmDataDumper();
+
+  ApmDataDumper() = delete;
+  ApmDataDumper(const ApmDataDumper&) = delete;
+  ApmDataDumper& operator=(const ApmDataDumper&) = delete;
 
   // Activates or deactivate the dumping functionality.
   static void SetActivated(bool activated) {
@@ -277,7 +280,6 @@ class ApmDataDumper {
                         int num_channels,
                         WavFile::SampleFormat format);
 #endif
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(ApmDataDumper);
 };
 
 }  // namespace webrtc

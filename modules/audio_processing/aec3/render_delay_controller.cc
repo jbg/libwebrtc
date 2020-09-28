@@ -25,7 +25,6 @@
 #include "modules/audio_processing/logging/apm_data_dumper.h"
 #include "rtc_base/atomic_ops.h"
 #include "rtc_base/checks.h"
-#include "rtc_base/constructor_magic.h"
 
 namespace webrtc {
 
@@ -37,6 +36,11 @@ class RenderDelayControllerImpl final : public RenderDelayController {
                             int sample_rate_hz,
                             size_t num_capture_channels);
   ~RenderDelayControllerImpl() override;
+  RenderDelayControllerImpl() = delete;
+  RenderDelayControllerImpl(const RenderDelayControllerImpl&) = delete;
+  RenderDelayControllerImpl& operator=(const RenderDelayControllerImpl&) =
+      delete;
+
   void Reset(bool reset_delay_confidence) override;
   void LogRenderCall() override;
   absl::optional<DelayEstimate> GetDelay(
@@ -57,7 +61,6 @@ class RenderDelayControllerImpl final : public RenderDelayController {
   size_t capture_call_counter_ = 0;
   int delay_change_counter_ = 0;
   DelayEstimate::Quality last_delay_estimate_quality_;
-  RTC_DISALLOW_IMPLICIT_CONSTRUCTORS(RenderDelayControllerImpl);
 };
 
 DelayEstimate ComputeBufferDelay(
