@@ -244,6 +244,18 @@ TEST(Vp9ImplTest, EncoderWith2SpatialLayers) {
   EXPECT_EQ(frames[1].encoded_image.SpatialIndex(), 1);
 }
 
+TEST(Vp9ImplTest, EncoderSupportsNV12AndI420InProfile0) {
+  std::unique_ptr<VideoEncoder> encoder = VP9Encoder::Create();
+  VideoCodec codec_settings = DefaultCodecSettings();
+
+  EXPECT_EQ(encoder->InitEncode(&codec_settings, kSettings),
+            WEBRTC_VIDEO_CODEC_OK);
+  EXPECT_THAT(
+      encoder->GetEncoderInfo().supported_pixel_formats,
+      ::testing::UnorderedElementsAreArray(
+          {VideoFrameBuffer::Type::kI420, VideoFrameBuffer::Type::kNV12}));
+}
+
 TEST_F(TestVp9Impl, EncoderExplicitLayering) {
   // Override default settings.
   codec_settings_.VP9()->numberOfTemporalLayers = 1;
