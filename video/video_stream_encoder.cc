@@ -1309,21 +1309,31 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
   const bool is_buffer_type_supported =
       buffer_type == VideoFrameBuffer::Type::kI420 ||
       (buffer_type == VideoFrameBuffer::Type::kNative &&
-       info.supports_native_handle);
+       info.supports_native_handle) ||
+      info.PixelFormatSupported(buffer_type);
 
   if (!is_buffer_type_supported) {
     // This module only supports software encoding.
-    rtc::scoped_refptr<I420BufferInterface> converted_buffer(
-        out_frame.video_frame_buffer()->ToI420());
-
+    rtc::scoped_refptr<VideoFrameBuffer> converted_buffer;
+    bool converted_to_i420 = false;
+    if (info.PixelFormatSupported(VideoFrameBuffer::Type::kNV12)) {
+      converted_buffer = const_cast<NV12BufferInterface*>(
+          out_frame.video_frame_buffer()->GetNV12());
+    }
+    if (!converted_buffer) {
+      // If type unsupported and there was no suitable inner buffer, convert to
+      // I420.
+      converted_buffer = out_frame.video_frame_buffer()->ToI420();
+      converted_to_i420 =
+          (out_frame.video_frame_buffer()->GetI420() == nullptr);
+    }
     if (!converted_buffer) {
       RTC_LOG(LS_ERROR) << "Frame conversion failed, dropping frame.";
       return;
     }
 
     VideoFrame::UpdateRect update_rect = out_frame.update_rect();
-    if (!update_rect.IsEmpty() &&
-        out_frame.video_frame_buffer()->GetI420() == nullptr) {
+    if (!update_rect.IsEmpty() && converted_to_i420) {
       // UpdatedRect is reset to full update if it's not empty, and buffer was
       // converted, therefore we can't guarantee that pixels outside of
       // UpdateRect didn't change comparing to the previous frame.
