@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5c54c0a_60ccec3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-28T12:54:03Z",
+      "side": 1,
+      "message": "TBR landing, since it\u0027s a reland with no changes.",
+      "revId": "6d80405785eb79bb59f62326a5b1a5f50779d264",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
