@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77e5c2a9_29fab43f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-09-28T16:07:00Z",
+      "side": 1,
+      "message": "Simulations show negligible impact on end-user experience. Default-enabling but leaving in place for the moment in case real-world usage should show a different behavior.",
+      "revId": "97fac33e9e1a770c60a7ab2abd7faf90cfe92cf5",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
