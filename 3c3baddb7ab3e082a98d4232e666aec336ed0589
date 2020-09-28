@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86502229_d073bba7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T10:38:25Z",
+      "side": 1,
+      "message": "Minor comments but they\u0027re repeated in multiple places. Can you comment about support of decoding directly to NV12 versus decoding to I420 and then converting?",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f59ac2e_69fb62de",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T10:38:25Z",
+      "side": 1,
+      "message": "So we still decode to I420 and then convert to NV12. Is it not possible to decode directly to NV12? Should we add a TODO or is this not supported?",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "052eb139_4b0f0392",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T10:38:25Z",
+      "side": 1,
+      "message": "Now that we have multiple pools, rename this one to i420_pool_?\n\nActually, that might still not be entirely clear unless you know why we have two pools. How about renaming the variables after what the pools are used for, since there is nothing preventing us from outputting something other than NV12 in the future? Just a suggestion but how about?\n\npool_ is renamed ffmpeg_destination_pool_ // The ffmpeg decoder outputs in this format.\nnv12_buffer_pool_ is renamed decoder_output_pool_ // Frames are delivered to the callbacks in this format.\n\nBecause the output pool is only used when the output pixel format is different than the destination pool, consider making it std::unique_ptr\u003c\u003e and having it be null if not used.",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67ae7cd3_f46a3f81",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T10:38:25Z",
+      "side": 1,
+      "message": "Prefer a new enum class with kI420 and kNV12 values, or, if reusing an existing pixel format enum, DCHECK that the format we pick is one of the supported formats. Variable name could be \"output_pixel_format_\"",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7a255e4_7f78bbd5",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T10:38:25Z",
+      "side": 1,
+      "message": "Same question here: Is there no support in decoding directly to NV12? TODO or not supported?",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d15f584_c89df18a",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T10:38:25Z",
+      "side": 1,
+      "message": "Same comment, different place: I prefer an enum",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c449931_d8e64d5b",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T10:38:25Z",
+      "side": 1,
+      "message": "Same comments different place",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddcb126e_24625130",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T10:38:25Z",
+      "side": 1,
+      "message": "Same comments different place",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
