@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "4ad7997a_02020e34",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-09-28T10:34:34Z",
+      "side": 1,
+      "message": "one test sure would be bad idea, but there are several tests cases grouped into single test suite.\nFailures are reported at the test case level.\n\nhttps://github.com/google/googletest/blob/master/googletest/docs/primer.md#beware-of-the-nomenclature",
+      "parentUuid": "ef3e3e8f_ddf9b0a8",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 39
+      },
+      "revId": "0358ef2df2082ee2960888064db2871c8439ae07",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6aa11f6e_5517368a",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_unittest.cc",
         "patchSetId": 2
