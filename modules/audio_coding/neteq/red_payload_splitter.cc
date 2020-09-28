@@ -43,6 +43,7 @@ bool RedPayloadSplitter::SplitRed(PacketList* packet_list) {
     const Packet& red_packet = *it;
     assert(!red_packet.payload.empty());
     const uint8_t* payload_ptr = red_packet.payload.data();
+    size_t payload_length = red_packet.payload.size();
 
     // Read RED headers (according to RFC 2198):
     //
@@ -67,6 +68,10 @@ bool RedPayloadSplitter::SplitRed(PacketList* packet_list) {
     bool last_block = false;
     size_t sum_length = 0;
     while (!last_block) {
+      if (payload_length == 0) {
+        RTC_LOG(LS_WARNING) << "SplitRed header too short";
+        return false;
+      }
       RedHeader new_header;
       // Check the F bit. If F == 0, this was the last block.
       last_block = ((*payload_ptr & 0x80) == 0);
@@ -78,7 +83,12 @@ bool RedPayloadSplitter::SplitRed(PacketList* packet_list) {
         new_header.timestamp = red_packet.timestamp;
         new_header.payload_length = red_packet.payload.size() - sum_length;
         payload_ptr += 1;  // Advance to first payload byte.
+        payload_length -= 1;
       } else {
+        if (payload_length < 4) {
+          RTC_LOG(LS_WARNING) << "SplitRed header too short";
+          return false;
+        }
         // Bits 8 through 21 are timestamp offset.
         int timestamp_offset =
             (payload_ptr[1] << 6) + ((payload_ptr[2] & 0xFC) >> 2);
@@ -87,6 +97,7 @@ bool RedPayloadSplitter::SplitRed(PacketList* packet_list) {
         new_header.payload_length =
             ((payload_ptr[2] & 0x03) << 8) + payload_ptr[3];
         payload_ptr += 4;  // Advance to next RED header.
+        payload_length -= 4;
       }
       sum_length += new_header.payload_length;
       sum_length += 4;  // Account for RED header size of 4 bytes.
