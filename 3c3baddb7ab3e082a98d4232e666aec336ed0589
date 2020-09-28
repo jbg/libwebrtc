@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4a276bd1_b119fa2b",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T14:45:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e1e40577_ea036795",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "052eb139_4b0f0392",
         "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.h",
         "patchSetId": 4
@@ -121,6 +139,24 @@
       "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5058159a_6a7f76d2",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T14:45:32Z",
+      "side": 1,
+      "message": "OK the comment is optional to address but I\u0027ll just add a bit of reasoning for using an enum.\n\nIt\u0027s a style thing, \"nv12_output: true\" vs \"nv12_output: false\" is less clear in meaning than \"output_format: NV12\" vs \"output_format: I420\" since for a boolean one might as \"so what is the output if we don\u0027t do nv12?\" and you would have to look at the implementation to find out. But anyway this parameter isn\u0027t being passed around outside the class so it has a very small footprint - feel free to keep the boolean if you prefer that.",
+      "parentUuid": "eb563fde_82f50d56",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     },
     {
       "key": {
