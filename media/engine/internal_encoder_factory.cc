@@ -1,3 +1,4 @@
+#include <iostream>
 /*
  *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
  *
@@ -21,6 +22,8 @@
 #include "modules/video_coding/codecs/vp8/include/vp8.h"
 #include "modules/video_coding/codecs/vp9/include/vp9.h"
 #include "rtc_base/logging.h"
+#include "system_wrappers/include/field_trial.h"
+#include "video/stream_from_file_encoder.h"
 
 namespace webrtc {
 
@@ -43,6 +46,18 @@ std::vector<SdpVideoFormat> InternalEncoderFactory::GetSupportedFormats()
 
 std::unique_ptr<VideoEncoder> InternalEncoderFactory::CreateVideoEncoder(
     const SdpVideoFormat& format) {
+  std::cout << "CreateVideoEncoder\n";
+
+  std::string preencoded_ivf_file =
+      field_trial::FindFullName("WebRTC-PreencodedIvfFile");
+  if (!preencoded_ivf_file.empty()) {
+    // Because '/' can't be used inside a field trial parameter, we use ':'
+    // instead.
+    std::replace(preencoded_ivf_file.begin(), preencoded_ivf_file.end(), ':',
+                 '/');
+    return StreamFromFileEncoder::Create(preencoded_ivf_file);
+  }
+
   if (absl::EqualsIgnoreCase(format.name, cricket::kVp8CodecName))
     return VP8Encoder::Create();
   if (absl::EqualsIgnoreCase(format.name, cricket::kVp9CodecName))
