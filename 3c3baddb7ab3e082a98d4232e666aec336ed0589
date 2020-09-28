@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "e1e40577_ea036795",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-28T13:58:34Z",
+      "side": 1,
+      "message": "It\u0027s not fundamentally supported, as VPX bitstream is structured around separate Y,U and V planes. It\u0027s technically possible to smear the conversion in libvpx code, but it will still be an extra conversion, even if hidden.\n\nIn VP8 case, we can collocate this conversion with already existing copy operation with a smaller overhead than a separate conversion. In VP9 and H264 - it\u0027s not possible at all.",
+      "parentUuid": "4f59ac2e_69fb62de",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "052eb139_4b0f0392",
         "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.h",
         "patchSetId": 4
@@ -50,6 +68,24 @@
       "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cc34611_8ad4e40c",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-28T13:58:34Z",
+      "side": 1,
+      "message": "Done.\n\nNot using unique_ptr to not complicate the code. It\u0027s small enough overhead for now, and in the future it will be on or off via gn flags, so no overhead at all.",
+      "parentUuid": "052eb139_4b0f0392",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "eb563fde_82f50d56",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-28T13:58:34Z",
+      "side": 1,
+      "message": "This is a stop-gap solution so we could roll it out with a finch trial for measurement.\n\nIn the end, nv12 will be hardcoded in chrome and enabled via gn args (but not in webrtc by default).\n\nTherefore enum is not really suitable here.",
+      "parentUuid": "67ae7cd3_f46a3f81",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7a255e4_7f78bbd5",
         "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
         "patchSetId": 4
@@ -84,6 +138,24 @@
       "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd52dd61_3b662e6e",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-28T13:58:34Z",
+      "side": 1,
+      "message": "Not supported. Added a comment.",
+      "parentUuid": "d7a255e4_7f78bbd5",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "01e8608c_f530444c",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-28T13:58:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c449931_d8e64d5b",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddcb126e_24625130",
         "filename": "modules/video_coding/codecs/vp9/vp9_impl.h",
         "patchSetId": 4
@@ -135,6 +225,24 @@
       "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f2aa02f_41902754",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-28T13:58:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ddcb126e_24625130",
+      "revId": "3c3baddb7ab3e082a98d4232e666aec336ed0589",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
