@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9669308e_b08d0710",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-09-28T07:11:26Z",
+      "side": 1,
+      "message": "Nit:\n\n#include \u003cfunctional\u003e\n\nSince we use std::function.",
+      "revId": "cd4b53f5cd9738752a397136be51831f361fd91b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7286e42_cf44a6b5",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1247,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-09-28T07:11:26Z",
+      "side": 1,
+      "message": "bugs.webrtc.org/11992?",
+      "range": {
+        "startLine": 1247,
+        "startChar": 10,
+        "endLine": 1247,
+        "endChar": 15
+      },
+      "revId": "cd4b53f5cd9738752a397136be51831f361fd91b",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
