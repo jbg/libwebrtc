@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "310ebfe2_55748455",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T11:01:16Z",
+      "side": 1,
+      "message": "Add a bug reference.",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2288eb80_699e9050",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T11:01:16Z",
+      "side": 1,
+      "message": "Why have to removed RTC_RUN_ON(signaling_thread()) here and elsewhere? Is something changing with regards to threading or is there a limitation in the compile-time checks when multiple classes are used and have their own reference to the thread?\n\nI wonder if you can get around that with RTC_RUN_ON(foo-\u003esignaling_thread()) but I don\u0027t want to hold off landing unnecessarily.",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e5784bf_f7c29791",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T11:01:16Z",
+      "side": 1,
+      "message": "Do you envision transceivers continuing to live in the PeerConnection with accessors for getting/setting/adding or is this something to be moved? My mental picture is that transceivers belong to the PC but a separate \"JSEP\" module is reading and writing to that set in our current implementation.\n\nIf we implemented \"JSEP\" as a *true* in-parallel operation, we may consider copying the set of transceivers at SLD/SRD and then surfacing the results at SLD/SRD completion.\n\nThe spec introduced a \"jsepSetOfTransceivers\" when I pointed out the spec not being thread safe when Jan-Ivar insisted they be the same object. So there are different ways to implement this.\n\nAnyway I\u0027m rambling again... This is not important for this CL or the current implementation of running SLD/SRD on the signaling thread, but it may influence our mental picture of where objects belong.",
+      "revId": "d21e7c0a3d846299ddc80de4ac1fd55d9bd27b44",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}

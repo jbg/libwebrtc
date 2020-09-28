@@ -16,6 +16,24 @@
       "revId": "bffbb301f2cff9a8c29a82df422b1ae569f9399c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02f8c694_f34a99f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-09-28T11:01:16Z",
+      "side": 1,
+      "message": "The CL looks like it is mostly moving things, so I\u0027m happy with this as a first step. But see questions asked before I +1 it.\n\nIf there is anything I should take a closer look at do let me know. While I have scrolled through the entire CL, it is obviously too big to look at line-by-line, so if anything changed I would likely have missed it.",
+      "parentUuid": "efb35d90_d7600bcb",
+      "revId": "bffbb301f2cff9a8c29a82df422b1ae569f9399c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
