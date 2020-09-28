@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c546c182_794934b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 14229
+      },
+      "writtenOn": "2020-09-28T07:02:21Z",
+      "side": 1,
+      "message": "That\u0027s stupid.\nDeadlocks cause this problem:\nThread1: encoder_queue_ \u003d\u003esrc\\video\\video_stream_encoder.cc：Stop()\u003d\u003eReleaseEncoder()\nThread2: deliverEncodedImage()\u003d\u003esrc\\java\\org\\webrtc\\HardwareVideoEncoder.java:callback.onEncodedFrame(encodedImage, new CodecSpecificInfo());\n       \u003d\u003esrc\\sdk\\android\\src\\jni\\video_encoder_wrapper.cc:OnEncodedFrame\u003d\u003ecallback_-\u003eOnEncodedImage(frame_copy, \u0026info); // !! now frame ref is 2\n       \u003d\u003esrc\\video\\video_stream_encoder.cc：encoder_queue_.PostTask(frame...)\nThread1: ReleaseEncoder()\u003d\u003esrc\\java\\org\\webrtc\\HardwareVideoEncoder.java:ThreadUtils.joinUninterruptibly(5 seconds)\u003d\u003ecodec \u003d null;\nThread2: deliverEncodedImage()\u003d\u003ecodec.releaseOutputBuffer(index, false);\u003d\u003ebut codec is null. crash!!\n\nIt\u0027s bound to block for 5 seconds\u003d\u003ereleaseCodecOnOutputThread:outputBuffersBusyCount.waitForZero(); !!! ref is 1\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nSolution: src\\sdk\\android\\src\\jni\\video_encoder_wrapper.cc:OnEncodedFrame copy new frame\n\nIt\u0027s hard to describe. The reason is waiting for each other.\nUsing try {} to solve the problem is very funny, and the attitude is not correct",
+      "revId": "ec7b36cddf56314359ffd14bc60421f9597f2582",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
