@@ -16,6 +16,24 @@
       "revId": "aaf1a026e7816e430ce6d3054fa1b6dd62f4cf28",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c1fc3f9_f880abb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-29T08:30:39Z",
+      "side": 1,
+      "message": "Not sure, but there\u0027s a two byte change in apk size. \n\nDo you want me to check some particular binary?",
+      "parentUuid": "40eab2da_4695b985",
+      "revId": "aaf1a026e7816e430ce6d3054fa1b6dd62f4cf28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
