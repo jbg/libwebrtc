@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "003dd8fd_96b90a90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-29T12:17:49Z",
+      "side": 1,
+      "message": "Ilya and Nisse,\n\nI have investigated your idea Nisse, and it appears like the check for the frame being I420 can be removed. All implementations for video encoders that I see are converting the frame themselves. That is, no implementation assumed I420 format and just called \"GetI420\".\n\nTo be sure, I am also running internal_tests to double check no breakage internally.",
+      "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
