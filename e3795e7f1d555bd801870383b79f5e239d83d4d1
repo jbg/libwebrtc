@@ -22,6 +22,30 @@
       "revId": "e3795e7f1d555bd801870383b79f5e239d83d4d1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2a7bbf2_f80156d5",
+        "filename": "test/fake_vp8_encoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5578
+      },
+      "writtenOn": "2020-09-29T17:34:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a84fee52_b996b104",
+      "range": {
+        "startLine": 121,
+        "startChar": 6,
+        "endLine": 122,
+        "endChar": 76
+      },
+      "revId": "e3795e7f1d555bd801870383b79f5e239d83d4d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
