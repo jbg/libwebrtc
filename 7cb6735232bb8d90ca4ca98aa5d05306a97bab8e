@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "472dfe28_b16776b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-29T11:47:23Z",
+      "side": 1,
+      "message": "I have tried a few things, but it seems like a conversion is still needed for native frames. However, the I420 conversion can be removed and done inside the codecs instead. I will upload a new version with this.",
+      "parentUuid": "181805cc_7a7250b3",
+      "revId": "7cb6735232bb8d90ca4ca98aa5d05306a97bab8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f1f1931_6a62317c",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 8
