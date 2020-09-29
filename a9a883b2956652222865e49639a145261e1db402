@@ -16,6 +16,23 @@
       "revId": "a9a883b2956652222865e49639a145261e1db402",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300de1bb_94f807df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-09-29T12:00:13Z",
+      "side": 1,
+      "message": "nice! Wanna just merge my changes (if the fuzzer finds them?)",
+      "revId": "a9a883b2956652222865e49639a145261e1db402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
