@@ -33,6 +33,24 @@
       "revId": "052f49b301cddeae7d853d573c714ff50199f2f7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcbbc0d6_9ec9a58a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-09-29T14:56:57Z",
+      "side": 1,
+      "message": "ah... that draft shouldn\u0027t have been published. Just ignore :-)",
+      "parentUuid": "224d2be3_aa43ea8d",
+      "revId": "052f49b301cddeae7d853d573c714ff50199f2f7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
