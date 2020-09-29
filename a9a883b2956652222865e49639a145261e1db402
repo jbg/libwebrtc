@@ -33,6 +33,69 @@
       "revId": "a9a883b2956652222865e49639a145261e1db402",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cfbb0666_04c86b20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-09-29T14:11:46Z",
+      "side": 1,
+      "message": "This fuzzer is very slow compared to the prototypical fuzzer. If you - as a NetEq connoisseur - see anything about it that could significantly improve efficiency, please consider following up this CL. Maybe it is just in the nature of NetEq\u0027s size.\n\n\"You should aim for at least 1,000 exec/s from your fuzz target locally before submitting it to the Chromium repository.\" I think this fuzzer is in the low 10s.\nhttps://chromium.googlesource.com/chromium/src/+/master/testing/libfuzzer/efficient_fuzzing.md",
+      "revId": "a9a883b2956652222865e49639a145261e1db402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38601fbb_ff1d85ef",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-09-29T14:11:46Z",
+      "side": 1,
+      "message": "We may confuse the fuzzer more than we help it by imagining an endianness in its input, especially when reading a single byte, but I see you\u0027re just following the pattern of past fuzzer authors.",
+      "range": {
+        "startLine": 129,
+        "startChar": 8,
+        "endLine": 129,
+        "endChar": 63
+      },
+      "revId": "a9a883b2956652222865e49639a145261e1db402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31f372ad_0d800d94",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5119
+      },
+      "writtenOn": "2020-09-29T14:11:46Z",
+      "side": 1,
+      "message": "Would a memcpy do the job just as well, but faster?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 5
+      },
+      "revId": "a9a883b2956652222865e49639a145261e1db402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
