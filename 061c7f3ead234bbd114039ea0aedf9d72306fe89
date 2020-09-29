@@ -16,6 +16,23 @@
       "revId": "061c7f3ead234bbd114039ea0aedf9d72306fe89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0369913a_f2e52435",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-29T07:54:55Z",
+      "side": 1,
+      "message": "Hi, it seems magjed@ (ooo) is sole owner of sdk/. Would make sense to (1) have more owners, and (2) move build rules into objc/ and android/ sub directories. But in the mean time, I need root owner approval for changing sdk/BUILD.gn. PTAL.",
+      "revId": "061c7f3ead234bbd114039ea0aedf9d72306fe89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
