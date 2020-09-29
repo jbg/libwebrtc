@@ -16,6 +16,29 @@
       "revId": "392a8513d6b427e231df97256ceb6437b910b922",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6406f5ba_005aab54",
+        "filename": "system_wrappers/source/cpu_features.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-29T13:14:21Z",
+      "side": 1,
+      "message": "I find it a bit odd to use different field trial names for enabling and disabling, but otherwise looks good.",
+      "range": {
+        "startLine": 82,
+        "startChar": 37,
+        "endLine": 82,
+        "endChar": 65
+      },
+      "revId": "392a8513d6b427e231df97256ceb6437b910b922",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
