@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19b0d890_3632b0df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-09-29T18:00:04Z",
+      "side": 1,
+      "message": "Sorry for the delay on this CL, I was OOO on vacation last week. I\u0027ll be fixing the remaining presubmit errors and submitting this today.",
+      "revId": "97761f0add8f2c90f36f593db80d74d325b80baf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
