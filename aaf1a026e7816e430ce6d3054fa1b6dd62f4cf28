@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40eab2da_4695b985",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-29T08:23:19Z",
+      "side": 1,
+      "message": "Nice!\n\nDoes this result in any changes to the binary, or are the before and after binaries identical?",
+      "revId": "aaf1a026e7816e430ce6d3054fa1b6dd62f4cf28",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
