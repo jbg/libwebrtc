@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1227c61c_a24ee1cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2020-09-29T01:06:03Z",
+      "side": 1,
+      "message": "I wrote a patch for sdk/objc. PTAL.",
+      "revId": "f75394de0a67e2e8cb14e8aebea995d2bd102b87",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
