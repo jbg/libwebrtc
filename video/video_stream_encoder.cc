@@ -1306,12 +1306,11 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
 
   const VideoFrameBuffer::Type buffer_type =
       out_frame.video_frame_buffer()->type();
-  const bool is_buffer_type_supported =
-      buffer_type == VideoFrameBuffer::Type::kI420 ||
+  const bool convert_native_buffer =
       (buffer_type == VideoFrameBuffer::Type::kNative &&
-       info.supports_native_handle);
+       !info.supports_native_handle);
 
-  if (!is_buffer_type_supported) {
+  if (convert_native_buffer) {
     // This module only supports software encoding.
     rtc::scoped_refptr<I420BufferInterface> converted_buffer(
         out_frame.video_frame_buffer()->ToI420());
