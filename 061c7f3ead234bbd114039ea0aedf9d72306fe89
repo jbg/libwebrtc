@@ -33,6 +33,24 @@
       "revId": "061c7f3ead234bbd114039ea0aedf9d72306fe89",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f11bff8b_aca266b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091
+      },
+      "writtenOn": "2020-09-29T08:37:11Z",
+      "side": 1,
+      "message": "Sounds like a good idea to add owners but there are very few who knows e.g objc. I am not suitable.",
+      "parentUuid": "0369913a_f2e52435",
+      "revId": "061c7f3ead234bbd114039ea0aedf9d72306fe89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
