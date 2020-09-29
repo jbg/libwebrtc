@@ -79,6 +79,46 @@
       "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c03d939_be57a585",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-29T13:08:42Z",
+      "side": 1,
+      "message": "lgtm. Might be worthy of a PSA to webrtc-discuss, since it\u0027s effectively a change to the VideoEncoder interface. If you plan to followup with deleting the supports_native_handle flag, you could announce that in the same message.",
+      "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5285c3e9_0b2060c8",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-09-29T13:08:42Z",
+      "side": 1,
+      "message": "Nit: I would drop this variable, and write the condition directly in the below if statement.",
+      "range": {
+        "startLine": 1309,
+        "startChar": 13,
+        "endLine": 1309,
+        "endChar": 34
+      },
+      "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
