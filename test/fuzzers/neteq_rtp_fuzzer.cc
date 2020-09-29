@@ -8,6 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <algorithm>
 #include <cmath>
 #include <memory>
 #include <vector>
@@ -64,6 +65,7 @@ class FuzzRtpInput : public NetEqInput {
                                       std::numeric_limits<int64_t>::max()));
     packet_ = input_->PopPacket();
     FuzzHeader();
+    MaybeFuzzPayload();
   }
 
   absl::optional<int64_t> NextPacketTime() const override {
@@ -79,6 +81,7 @@ class FuzzRtpInput : public NetEqInput {
     std::unique_ptr<PacketData> packet_to_return = std::move(packet_);
     packet_ = input_->PopPacket();
     FuzzHeader();
+    MaybeFuzzPayload();
     return packet_to_return;
   }
 
@@ -114,6 +117,33 @@ class FuzzRtpInput : public NetEqInput {
         ByteReader<uint32_t>::ReadLittleEndian(&data_[data_ix_]);
     data_ix_ += sizeof(uint32_t);
     RTC_CHECK_EQ(data_ix_ - start_ix, kNumBytesToFuzz);
+  }
+
+  void MaybeFuzzPayload() {
+    // Read one byte of fuzz data to determine how many payload bytes to fuzz.
+    if (data_ix_ + 1 > data_.size()) {
+      ended_ = true;
+      return;
+    }
+    size_t bytes_to_fuzz =
+        ByteReader<uint8_t>::ReadLittleEndian(&data_[data_ix_]);
+    data_ix_ += sizeof(uint8_t);
+
+    // Restrict number of bytes to fuzz to 16; a reasonably low number enough to
+    // cover a few RED headers. Also don't write outside the payload length.
+    bytes_to_fuzz = std::min(bytes_to_fuzz % 16, packet_->payload.size());
+
+    if (data_ix_ + bytes_to_fuzz > data_.size()) {
+      ended_ = true;
+      return;
+    }
+
+    for (size_t ix = 0; ix < bytes_to_fuzz; ++ix) {
+      RTC_DCHECK_LT(data_ix_, data_.size());
+      packet_->payload[ix] =
+          ByteReader<uint8_t>::ReadLittleEndian(&data_[data_ix_]);
+      data_ix_ += sizeof(uint8_t);
+    }
   }
 
   bool ended_ = false;
