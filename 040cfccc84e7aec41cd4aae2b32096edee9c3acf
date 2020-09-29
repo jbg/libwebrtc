@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "02825df3_05c90072",
+        "filename": "rtc_base/buffer_queue.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-29T11:05:19Z",
+      "side": 1,
+      "message": "Yes! Done. I modified the BufferQueueStream test class to not inherit from BufferQueue (use containment instead).",
+      "parentUuid": "96e09043_f5031548",
+      "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "611c3bf1_33711c0c",
         "filename": "rtc_base/buffer_queue.h",
         "patchSetId": 11
@@ -64,6 +82,24 @@
       "writtenOn": "2020-09-29T08:38:49Z",
       "side": 1,
       "message": "One could argue that this class is too low-level to worry about concurrency, and that it shouldn\u0027t even have a sequence checker. Given that it used to have its own mutex, though, maybe a sequence checker is called for.",
+      "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e01f3cf4_f900887d",
+        "filename": "rtc_base/buffer_queue.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-09-29T11:05:19Z",
+      "side": 1,
+      "message": "Agree - since it\u0027s already in production this feels more likely to trigger alarm bells if some other expectations exist that I\u0027m not aware of.\nAlso, it would be great if sequence checker was completely free in non dchecked builds 😄",
+      "parentUuid": "611c3bf1_33711c0c",
       "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
