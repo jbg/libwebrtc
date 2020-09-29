@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "680b2340_67eb5ef1",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-29T13:57:33Z",
+      "side": 1,
+      "message": "Obsolete with the new implementation.",
+      "parentUuid": "7f1f1931_6a62317c",
+      "revId": "7cb6735232bb8d90ca4ca98aa5d05306a97bab8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0af34f_eaece02a",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 8
@@ -109,6 +127,30 @@
       "revId": "7cb6735232bb8d90ca4ca98aa5d05306a97bab8e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e72d6de6_ce9797e1",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-29T13:57:33Z",
+      "side": 1,
+      "message": "Obseleted by new revision.",
+      "parentUuid": "0e0af34f_eaece02a",
+      "range": {
+        "startLine": 260,
+        "startChar": 37,
+        "endLine": 260,
+        "endChar": 44
+      },
+      "revId": "7cb6735232bb8d90ca4ca98aa5d05306a97bab8e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }

@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "cff1f16b_2267baef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-29T13:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c73ca1c_4885fe33",
+      "range": {
+        "startLine": 12,
+        "startChar": 62,
+        "endLine": 12,
+        "endChar": 69
+      },
+      "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5398b571_e9e51cc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-29T13:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b24bd4c_b4713851",
+      "range": {
+        "startLine": 12,
+        "startChar": 7,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "003dd8fd_96b90a90",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
@@ -99,6 +147,24 @@
     },
     {
       "key": {
+        "uuid": "d9c199a2_6a2f6a5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-29T13:57:33Z",
+      "side": 1,
+      "message": "Good point. I can\u0027t see anybody having used it assuming I420 since the interface accepts the base class, but it is probably best to announce this first before merging. I can just prep all my future work on this patch.",
+      "parentUuid": "3c03d939_be57a585",
+      "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5285c3e9_0b2060c8",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 12
@@ -119,6 +185,30 @@
       "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1fa3cca_20e03dd4",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-09-29T13:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5285c3e9_0b2060c8",
+      "range": {
+        "startLine": 1309,
+        "startChar": 13,
+        "endLine": 1309,
+        "endChar": 34
+      },
+      "revId": "46ddd85c7a7f7aef0e05098ef8d6cd5284527d9f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
