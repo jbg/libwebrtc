@@ -16,6 +16,75 @@
       "revId": "71db2c00a5e95296309c30f731be1d9ec0f826c1",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7ac3ddb_6c26330f",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-09-29T10:24:40Z",
+      "side": 1,
+      "message": "it seems that level computation was only for the dumping, and does not affect last_level_dbfs_, or do I misread something?",
+      "range": {
+        "startLine": 133,
+        "startChar": 2,
+        "endLine": 133,
+        "endChar": 18
+      },
+      "revId": "71db2c00a5e95296309c30f731be1d9ec0f826c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e84aa34_f4e74d27",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-09-29T10:24:40Z",
+      "side": 1,
+      "message": "last_level_dbfs_, as I think we don\u0027t need to call getter inside the class.",
+      "range": {
+        "startLine": 163,
+        "startChar": 30,
+        "endLine": 163,
+        "endChar": 40
+      },
+      "revId": "71db2c00a5e95296309c30f731be1d9ec0f826c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84f6be75_47082b59",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 7015
+      },
+      "writtenOn": "2020-09-29T10:24:40Z",
+      "side": 1,
+      "message": "name does not match. should it?",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 18
+      },
+      "revId": "71db2c00a5e95296309c30f731be1d9ec0f826c1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
