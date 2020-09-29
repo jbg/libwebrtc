@@ -53,6 +53,42 @@
     },
     {
       "key": {
+        "uuid": "776e5649_ed315913",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2020-09-29T15:12:56Z",
+      "side": 1,
+      "message": "I think you can land yours first.",
+      "parentUuid": "300de1bb_94f807df",
+      "revId": "a9a883b2956652222865e49639a145261e1db402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "493a908f_41db0f10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2020-09-29T15:12:56Z",
+      "side": 1,
+      "message": "Yeah. This one decodes audio and does a lot of that processing. Essentially runs all of NetEq for each iteration. We could speed it up by doing fake-decoding for all, but that would require some engineering efforts to create fake decoders for all variants (since the fuzzer will hit all possible decoders). And they still need to produce some kind of output of the right lenght.",
+      "parentUuid": "cfbb0666_04c86b20",
+      "revId": "a9a883b2956652222865e49639a145261e1db402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38601fbb_ff1d85ef",
         "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
         "patchSetId": 1
@@ -64,6 +100,30 @@
       "writtenOn": "2020-09-29T14:11:46Z",
       "side": 1,
       "message": "We may confuse the fuzzer more than we help it by imagining an endianness in its input, especially when reading a single byte, but I see you\u0027re just following the pattern of past fuzzer authors.",
+      "range": {
+        "startLine": 129,
+        "startChar": 8,
+        "endLine": 129,
+        "endChar": 63
+      },
+      "revId": "a9a883b2956652222865e49639a145261e1db402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "affcab0e_f951797f",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2020-09-29T15:12:56Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "38601fbb_ff1d85ef",
       "range": {
         "startLine": 129,
         "startChar": 8,
@@ -96,6 +156,30 @@
       "revId": "a9a883b2956652222865e49639a145261e1db402",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c895d8b9_ee08cfa1",
+        "filename": "test/fuzzers/neteq_rtp_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2020-09-29T15:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31f372ad_0d800d94",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 5
+      },
+      "revId": "a9a883b2956652222865e49639a145261e1db402",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
