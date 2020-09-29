@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8394ceb6_926b1a3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-29T07:56:22Z",
+      "side": 1,
+      "message": "Thanks Jakob!",
+      "revId": "6a6b84d48595990c3af82f6160ba5ada96bc073f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00e2c631_4f30de4b",
         "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator.cc",
         "patchSetId": 6
@@ -22,6 +39,30 @@
       "revId": "6a6b84d48595990c3af82f6160ba5ada96bc073f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a3f29c2_fe26ba71",
+        "filename": "modules/audio_processing/agc2/adaptive_mode_level_estimator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-09-29T07:56:22Z",
+      "side": 1,
+      "message": "Yes, I know it\u0027s better to add sth when used, but the goal of this CL is to remove clutter in the child one which introduces a fundamental change.",
+      "parentUuid": "00e2c631_4f30de4b",
+      "range": {
+        "startLine": 52,
+        "startChar": 54,
+        "endLine": 53,
+        "endChar": 4
+      },
+      "revId": "6a6b84d48595990c3af82f6160ba5ada96bc073f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
