@@ -435,23 +435,6 @@ class SctpTransport::UsrSctpWrapper {
     return transport;
   }
 
-  // TODO(crbug.com/webrtc/11899): This is a legacy callback signature, remove
-  // when usrsctp is updated.
-  static int SendThresholdCallback(struct socket* sock, uint32_t sb_free) {
-    // Fired on our I/O thread. SctpTransport::OnPacketReceived() gets
-    // a packet containing acknowledgments, which goes into usrsctp_conninput,
-    // and then back here.
-    SctpTransport* transport = GetTransportFromSocket(sock);
-    if (!transport) {
-      RTC_LOG(LS_ERROR)
-          << "SendThresholdCallback: Failed to get transport for socket "
-          << sock << "; possibly was already destroyed.";
-      return 0;
-    }
-    transport->OnSendThresholdCallback();
-    return 0;
-  }
-
   static int SendThresholdCallback(struct socket* sock,
                                    uint32_t sb_free,
                                    void* ulp_info) {
