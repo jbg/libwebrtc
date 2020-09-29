@@ -16,6 +16,57 @@
       "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0d0c6da_722a1ac9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-29T08:38:49Z",
+      "side": 1,
+      "message": "Nice! There is much in BufferQueue that wants rewriting, but this is a good step in the right direction.",
+      "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96e09043_f5031548",
+        "filename": "rtc_base/buffer_queue.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-29T08:38:49Z",
+      "side": 1,
+      "message": "Can you make it final?",
+      "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "611c3bf1_33711c0c",
+        "filename": "rtc_base/buffer_queue.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-09-29T08:38:49Z",
+      "side": 1,
+      "message": "One could argue that this class is too low-level to worry about concurrency, and that it shouldn\u0027t even have a sequence checker. Given that it used to have its own mutex, though, maybe a sequence checker is called for.",
+      "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
