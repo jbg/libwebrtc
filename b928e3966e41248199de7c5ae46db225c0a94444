@@ -16,6 +16,24 @@
       "revId": "b928e3966e41248199de7c5ae46db225c0a94444",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55780a21_ce1d8cbd",
+        "filename": "modules/video_coding/codecs/h264/h264_decoder_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-09-29T09:07:06Z",
+      "side": 1,
+      "message": "Well, since it\u0027s defined as \"preferred\" and not guaranteed output format, it would not even add DCHECKS.\n\nE.g. in the vp9 case the output might be I010, I444 or I420/NV12 depending on the bitstream and it\u0027s impossible to know in advance what to request.",
+      "parentUuid": "1f503efa_8f950ca0",
+      "revId": "b928e3966e41248199de7c5ae46db225c0a94444",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
