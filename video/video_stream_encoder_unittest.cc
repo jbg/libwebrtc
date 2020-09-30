@@ -1561,8 +1561,6 @@ TEST_F(VideoStreamEncoderTest, NonI420FramesShouldNotBeConvertedToI420) {
   video_stream_encoder_->Stop();
 }
 
-// TODO(webrtc:11977): When a native frame backed by an NV12 image is possible,
-// the frame should be encoded in NV12.
 TEST_F(VideoStreamEncoderTest, NativeFrameBackedByNV12FrameIsEncodedFromI420) {
   video_stream_encoder_->OnBitrateUpdatedAndWaitForManagedResources(
       DataRate::BitsPerSec(kTargetBitrateBps),
@@ -1573,7 +1571,7 @@ TEST_F(VideoStreamEncoderTest, NativeFrameBackedByNV12FrameIsEncodedFromI420) {
   video_source_.IncomingCapturedFrame(CreateFakeNV12NativeFrame(
       1, &frame_destroyed_event, codec_width_, codec_height_));
   WaitForEncodedFrame(1);
-  EXPECT_EQ(VideoFrameBuffer::Type::kI420,
+  EXPECT_EQ(VideoFrameBuffer::Type::kNV12,
             fake_encoder_.GetLastInputPixelFormat());
   video_stream_encoder_->Stop();
 }
