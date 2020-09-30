@@ -76,6 +76,10 @@ class RTC_EXPORT VideoFrameBuffer : public rtc::RefCountInterface {
   // doesn't affect binary data at all. Another example is any I420A buffer.
   virtual const I420BufferInterface* GetI420() const;
 
+  // Return a VideoFrameBuffer from a kNative buffer that is trivially adaptable
+  // to some VideoFrameBuffer readable by webrtc.
+  virtual rtc::scoped_refptr<VideoFrameBuffer> GetNativeFrame();
+
   // These functions should only be called if type() is of the correct type.
   // Calling with a different type will result in a crash.
   const I420ABufferInterface* GetI420A() const;
