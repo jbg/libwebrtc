@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0b1bbc27_b257c28e",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-09-30T16:38:13Z",
+      "side": 1,
+      "message": "for consistency with other scalability structures (with multiple temporal layers) I\u0027ve introduced small enum. so this should look better now.",
+      "parentUuid": "a300deeb_42481f0b",
+      "range": {
+        "startLine": 91,
+        "startChar": 24,
+        "endLine": 91,
+        "endChar": 25
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9341c838_3b4ba654",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "bbca0e08_90439785",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-09-30T16:38:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9341c838_3b4ba654",
+      "range": {
+        "startLine": 117,
+        "startChar": 46,
+        "endLine": 117,
+        "endChar": 47
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a72ef8ed_c96dc5eb",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2020-09-30T15:42:51Z",
       "side": 1,
       "message": "Haven\u0027t really though about this before, but is there an overload that just takes something array-like so that you don\u0027t have to pass begin/end iterator?",
+      "range": {
+        "startLine": 128,
+        "startChar": 47,
+        "endLine": 129,
+        "endChar": 73
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27f2c08c_afe29ae3",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-09-30T16:38:13Z",
+      "side": 1,
+      "message": "I\u0027m not aware of such method:\nInlinedVector, same as std::vector has some overloads for operator\u003d and assign methods, in particular they accept same type of the container and initializer list,\nbut they do not accept any other container.\nhttps://en.cppreference.com/w/cpp/container/vector/operator%3D\nhttps://en.cppreference.com/w/cpp/container/vector/assign\n\nwould you find it cleaner to use copy helper?\nabsl::c_copy(dtis, std::back_inserter(frame_info-\u003edecode_target_indications));\nor\nframe_info-\u003edecode_target_indications.resize(dtis.size());\nabsl::c_copy(dtis, frame_info-\u003edecode_target_indications.begin());",
+      "parentUuid": "a72ef8ed_c96dc5eb",
       "range": {
         "startLine": 128,
         "startChar": 47,
@@ -91,6 +163,30 @@
       "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3560768f_91d2518d",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-09-30T16:38:13Z",
+      "side": 1,
+      "message": "I like idea of the kNumSpatialLayers constant a bit better, since it can be used more naturally through the code.",
+      "parentUuid": "73f0718f_bc8fe969",
+      "range": {
+        "startLine": 42,
+        "startChar": 32,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
