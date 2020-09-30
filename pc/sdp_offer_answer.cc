@@ -2139,11 +2139,10 @@ RTCError SdpOfferAnswerHandler::UpdateSessionState(
                              ? PeerConnectionInterface::kHaveLocalPrAnswer
                              : PeerConnectionInterface::kHaveRemotePrAnswer);
   } else {
-    RTC_DCHECK_RUN_ON(pc_->signaling_thread());
     RTC_DCHECK(type == SdpType::kAnswer);
     ChangeSignalingState(PeerConnectionInterface::kStable);
     pc_->transceivers_.DiscardStableStates();
-    pc_->have_pending_rtp_data_channel_ = false;
+    have_pending_rtp_data_channel_ = false;
   }
 
   // Update internal objects according to the session description's media
@@ -2246,14 +2245,11 @@ RTCError SdpOfferAnswerHandler::Rollback(SdpType desc_type) {
     transceiver->internal()->set_mline_index(state.mline_index());
   }
   pc_->transport_controller_->RollbackTransports();
-  {
-    RTC_DCHECK_RUN_ON(pc_->signaling_thread());
-    if (pc_->have_pending_rtp_data_channel_) {
-      pc_->DestroyDataChannelTransport();
-      pc_->have_pending_rtp_data_channel_ = false;
-    }
-    pc_->transceivers_.DiscardStableStates();
+  if (have_pending_rtp_data_channel_) {
+    pc_->DestroyDataChannelTransport();
+    have_pending_rtp_data_channel_ = false;
   }
+  pc_->transceivers_.DiscardStableStates();
   pending_local_description_.reset();
   pending_remote_description_.reset();
   ChangeSignalingState(PeerConnectionInterface::kStable);
@@ -2284,7 +2280,6 @@ RTCError SdpOfferAnswerHandler::Rollback(SdpType desc_type) {
 }
 
 bool SdpOfferAnswerHandler::IsUnifiedPlan() const {
-  RTC_DCHECK_RUN_ON(pc_->signaling_thread());
   return pc_->IsUnifiedPlan();
 }
 
