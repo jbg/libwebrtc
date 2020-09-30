@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a300deeb_42481f0b",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-09-30T15:42:51Z",
+      "side": 1,
+      "message": "kConfigRestartId, or maybe just set the id to the correct dti_index directly and add a comment that you pass the dti_index in the id?",
+      "range": {
+        "startLine": 91,
+        "startChar": 24,
+        "endLine": 91,
+        "endChar": 25
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9341c838_3b4ba654",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-09-30T15:42:51Z",
+      "side": 1,
+      "message": "kConfigRestartId",
+      "range": {
+        "startLine": 117,
+        "startChar": 46,
+        "endLine": 117,
+        "endChar": 47
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a72ef8ed_c96dc5eb",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-09-30T15:42:51Z",
+      "side": 1,
+      "message": "Haven\u0027t really though about this before, but is there an overload that just takes something array-like so that you don\u0027t have to pass begin/end iterator?",
+      "range": {
+        "startLine": 128,
+        "startChar": 47,
+        "endLine": 129,
+        "endChar": 73
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73f0718f_bc8fe969",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-09-30T15:42:51Z",
+      "side": 1,
+      "message": "Maybe std::array\u003cbool, 3\u003e and call |use_temporal_dependency_.size()| instead of a hard coded \"3\" or just define \"kNumSpatialLayers\", and use it in other places",
+      "range": {
+        "startLine": 42,
+        "startChar": 32,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
