@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf0658c8_6ae8affa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-09-30T13:54:36Z",
+      "side": 1,
+      "message": "Austin, I created this reland but I think it is better if you do it to retain authorship.\n\nCan you just change \u003cWindows.Graphics.Capture.h\u003e with an all lowercase \u003cwindows.graphics.capture.h\u003e?",
+      "revId": "77afd10af884347642bd5f15dfb631b4f3494ebb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
