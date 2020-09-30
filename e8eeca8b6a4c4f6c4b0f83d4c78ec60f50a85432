@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd511e29_901fe4be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-09-30T22:14:47Z",
+      "side": 1,
+      "message": "Must have the CL per day....\n",
+      "revId": "e8eeca8b6a4c4f6c4b0f83d4c78ec60f50a85432",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
