@@ -335,6 +335,8 @@ config("common_config") {
         "-Wthread-safety",
         "-Winconsistent-missing-override",
         "-Wundef",
+        "-Wnonportable-include-path",
+        "-Wnonportable-system-include-path",
       ]
 
       # use_xcode_clang only refers to the iOS toolchain, host binaries use
