@@ -121,6 +121,24 @@
       "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0ef7a26_3c51ed3e",
+        "filename": "rtc_base/buffer_queue.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-09-30T09:55:09Z",
+      "side": 1,
+      "message": "https://webrtc-review.googlesource.com/c/src/+/173331 is now landed.",
+      "parentUuid": "6a7f166b_e16b95b9",
+      "revId": "040cfccc84e7aec41cd4aae2b32096edee9c3acf",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
