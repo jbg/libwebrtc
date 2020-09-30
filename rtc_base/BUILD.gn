@@ -129,6 +129,10 @@ rtc_library("rtc_base_approved") {
       "win/windows_version.h",
     ]
     data_deps = [ "//build/win:runtime_libs" ]
+    cflags += [
+      "-Wnonportable-include-path",
+      "-Wnonportable-system-include-path",
+    ]
   }
 
   if (is_nacl) {
