@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "d25ed17b_a4427f62",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-09-30T16:57:08Z",
+      "side": 1,
+      "message": "I think it\u0027s cleaner as it is.",
+      "parentUuid": "27f2c08c_afe29ae3",
+      "range": {
+        "startLine": 128,
+        "startChar": 47,
+        "endLine": 129,
+        "endChar": 73
+      },
+      "revId": "deb231b259afbf285ff1762daa43b2c019d825db",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73f0718f_bc8fe969",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l3t1.h",
         "patchSetId": 2
