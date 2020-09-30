@@ -34,6 +34,29 @@
       "revId": "77afd10af884347642bd5f15dfb631b4f3494ebb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "459c865d_fd782907",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-09-30T19:27:56Z",
+      "side": 1,
+      "message": "Is this a new UWP API?\n\nI wonder if we can add a build time switch to avoid building it by default. E.g. an rtc_enable_win_wgc in https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/webrtc.gni and move this file and its .cc file in a separate build target. It might require more changes but if you can find a way to do it this can be re-landed more quickly.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "77afd10af884347642bd5f15dfb631b4f3494ebb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
