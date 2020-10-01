@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "7938e22d_d9e37aed",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-01T16:46:58Z",
+      "side": 1,
+      "message": "right, I forgot I\u0027ve restored the comments on each line.",
+      "parentUuid": "1b2e2231_cb7af53f",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 19
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e714bfbc_c84ae087",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
         "patchSetId": 2
@@ -82,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "e59cceb2_71a19d48",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-01T16:46:58Z",
+      "side": 1,
+      "message": "removed use_spatial_dependency boolean. \nI guess that is better because condition is actually different.",
+      "parentUuid": "e714bfbc_c84ae087",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 105,
+        "endChar": 34
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6315ddb0_ed4ca2ef",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
         "patchSetId": 2
@@ -93,6 +141,30 @@
       "writtenOn": "2020-10-01T16:05:48Z",
       "side": 1,
       "message": "Maybe:\n  if (ActiveDecodeTarget(/*sid\u003d*/0, /*tid\u003d*/1) || ActiveDecodeTarget(/*sid\u003d*/1, /*tid\u003d*/1) {\n    next_pattern_ \u003d kDeltaT1;\n  }\n\nand remove the if case on line 77.",
+      "range": {
+        "startLine": 115,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 30
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fdf9b91_fa089b47",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-01T16:46:58Z",
+      "side": 1,
+      "message": "that will miss the case where active decode targets change right after T0 frame is produced.\nspecially if T1 is deactivated.\n\n(Do you think I should add a unit tests with edge cases like that one?)",
+      "parentUuid": "6315ddb0_ed4ca2ef",
       "range": {
         "startLine": 115,
         "startChar": 6,
@@ -128,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "ee12e455_613eb333",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-01T16:46:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "020419a2_007e46c8",
+      "range": {
+        "startLine": 177,
+        "startChar": 54,
+        "endLine": 177,
+        "endChar": 55
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab207e3a_ee573346",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
         "patchSetId": 2
@@ -139,6 +235,30 @@
       "writtenOn": "2020-10-01T16:05:48Z",
       "side": 1,
       "message": "WDYT about replacing these with an enum:\n\n  enum DecodeTarget {\n    S0T0,\n    S0T1,\n    S1T0,\n    S1T1,\n  };\n\nThen you can simply do |ActiveDecodeTarget(S0T0)| or |.Reference(BufferIndex(S0T0))| and stuff like that.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 3
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3414926_76dcf7b5",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-01T16:46:58Z",
+      "side": 1,
+      "message": "I did consider that, but there are few places where I pass variable rather than constant. Enum doesn\u0027t work in that case (or looks less nice and wouldn\u0027t scale to 3 layers)",
+      "parentUuid": "ab207e3a_ee573346",
       "range": {
         "startLine": 51,
         "startChar": 0,
@@ -174,6 +294,30 @@
     },
     {
       "key": {
+        "uuid": "c220bc81_b00d763e",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-01T16:46:58Z",
+      "side": 1,
+      "message": "there are multiple places where I read it, but single place where I write it.\nAdded a setter instead of DecodeTargetIndex function. looks nicer.\n\nalso slightly renamed getter and setter",
+      "parentUuid": "9977f468_428e0380",
+      "range": {
+        "startLine": 59,
+        "startChar": 7,
+        "endLine": 59,
+        "endChar": 25
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f4b8511_0fee8707",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
         "patchSetId": 2
@@ -188,6 +332,24 @@
       "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3968b66_895e7f6a",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-01T16:46:58Z",
+      "side": 1,
+      "message": "oops",
+      "parentUuid": "2f4b8511_0fee8707",
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
