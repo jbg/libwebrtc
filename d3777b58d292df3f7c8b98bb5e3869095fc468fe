@@ -16,6 +16,178 @@
       "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c46eff6_e39ce0a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-01T16:05:48Z",
+      "side": 1,
+      "message": "LG, just some comments about style",
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b2e2231_cb7af53f",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-01T16:05:48Z",
+      "side": 1,
+      "message": "Clearer if you just remove these comments I think.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 19
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e714bfbc_c84ae087",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-01T16:05:48Z",
+      "side": 1,
+      "message": "Maybe:\n  if (sid \u003e 1) {\n    ...\n  }\n\nand remove use_spatial_dependency",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 105,
+        "endChar": 34
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6315ddb0_ed4ca2ef",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-01T16:05:48Z",
+      "side": 1,
+      "message": "Maybe:\n  if (ActiveDecodeTarget(/*sid\u003d*/0, /*tid\u003d*/1) || ActiveDecodeTarget(/*sid\u003d*/1, /*tid\u003d*/1) {\n    next_pattern_ \u003d kDeltaT1;\n  }\n\nand remove the if case on line 77.",
+      "range": {
+        "startLine": 115,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 30
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "020419a2_007e46c8",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-01T16:05:48Z",
+      "side": 1,
+      "message": "/*tid\u003d*/",
+      "range": {
+        "startLine": 177,
+        "startChar": 54,
+        "endLine": 177,
+        "endChar": 55
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab207e3a_ee573346",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-01T16:05:48Z",
+      "side": 1,
+      "message": "WDYT about replacing these with an enum:\n\n  enum DecodeTarget {\n    S0T0,\n    S0T1,\n    S1T0,\n    S1T1,\n  };\n\nThen you can simply do |ActiveDecodeTarget(S0T0)| or |.Reference(BufferIndex(S0T0))| and stuff like that.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 3
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9977f468_428e0380",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-01T16:05:48Z",
+      "side": 1,
+      "message": "DecodeTargetActive\n\nMaybe return a std::bitset::reference, or maybe add a SetActiveDecodeTarget function as well?\n\nI don\u0027t feel strongly about it, but it is a little weird to have a getter but not setter.",
+      "range": {
+        "startLine": 59,
+        "startChar": 7,
+        "endLine": 59,
+        "endChar": 25
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f4b8511_0fee8707",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-01T16:05:48Z",
+      "side": 1,
+      "message": "_",
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
