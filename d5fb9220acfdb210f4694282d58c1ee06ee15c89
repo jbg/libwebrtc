@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a8b18e79_1c3d46f6",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-01T08:15:25Z",
+      "side": 1,
+      "message": "In a future follow up I can mark this as deprecated and send a PSA for phasing it out.",
+      "parentUuid": "370c9e94_97ca239b",
+      "revId": "d5fb9220acfdb210f4694282d58c1ee06ee15c89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d0cc131_bccda627",
         "filename": "api/video/video_frame_buffer.h",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2020-10-01T08:06:44Z",
       "side": 1,
       "message": "I\u0027m not sure about that name. \n\nConvertFromNativeFrame(), MapNativeFrame(), maybe any other suggestions?\n\nGetNativeFrame is confusing, since it\u0027s already kNative frame, and as with other Get* methods, it\u0027s logical, that it should be just a trivial operation, returning some specific type, and should always succeed.",
+      "range": {
+        "startLine": 81,
+        "startChar": 47,
+        "endLine": 81,
+        "endChar": 61
+      },
+      "revId": "d5fb9220acfdb210f4694282d58c1ee06ee15c89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c82ba7f5_c66e4cce",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-01T08:15:25Z",
+      "side": 1,
+      "message": "I like convert or something similar. I don\u0027t like map because in the context of mapped memory I would expect needing to unmap.",
+      "parentUuid": "4d0cc131_bccda627",
       "range": {
         "startLine": 81,
         "startChar": 47,
