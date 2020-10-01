@@ -218,6 +218,30 @@
       "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ff2ce42_15b97f94",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-01T16:18:10Z",
+      "side": 1,
+      "message": "The task_safety_ flag is for all events posted to the object, including ones via PostEvent. We want to cancel the timed task specifically, not all task.",
+      "parentUuid": "3ae6425b_59d4a2a0",
+      "range": {
+        "startLine": 828,
+        "startChar": 8,
+        "endLine": 828,
+        "endChar": 49
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
