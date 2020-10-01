@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "152beb48_dbd2c2e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-01T13:36:21Z",
+      "side": 1,
+      "message": "There\u0027s no more recursive locking, right?",
+      "revId": "7c46de6ec6fafadbe29f9e7f0b416a85ee3cc3c3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
