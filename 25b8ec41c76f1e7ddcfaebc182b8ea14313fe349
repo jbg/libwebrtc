@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "851a5d49_77de4745",
+        "filename": "rtc_base/memory/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-01T12:39:36Z",
+      "side": 1,
+      "message": "I would like to do that but it proved more complicated since other targets are not consistently marked correctly and some are mixed test and production. So I opted for at least leaving this comment in there for future visitors.",
+      "parentUuid": "e22fa61a_3e20cbeb",
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86dd7473_398d8927",
         "filename": "rtc_base/openssl_stream_adapter.cc",
         "patchSetId": 11
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "cb7f4773_36894bf8",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-01T12:39:36Z",
+      "side": 1,
+      "message": "I think you may have misread the comment and the dcheck. Can you look again?",
+      "parentUuid": "86dd7473_398d8927",
+      "range": {
+        "startLine": 813,
+        "startChar": 1,
+        "endLine": 814,
+        "endChar": 29
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d64dfbae_167199a7",
         "filename": "rtc_base/openssl_stream_adapter.cc",
         "patchSetId": 11
@@ -53,6 +95,30 @@
       "writtenOn": "2020-10-01T11:55:20Z",
       "side": 1,
       "message": "Why have a repeating task if it won\u0027t repeat?",
+      "range": {
+        "startLine": 828,
+        "startChar": 8,
+        "endLine": 828,
+        "endChar": 49
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6939c5fc_5a7faa87",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-01T12:39:36Z",
+      "side": 1,
+      "message": "It\u0027s what we have to cancel delayed tasks. Despite the name, the class is actually designed to handle this case. Furthermore the callback returns an ms value indicating the delta until next execution (i.e. the ms value supplied to DelayedStart only applies to the first occurance).",
+      "parentUuid": "d64dfbae_167199a7",
       "range": {
         "startLine": 828,
         "startChar": 8,
