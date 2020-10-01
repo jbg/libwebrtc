@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1c4b9f11_3d2f9eb5",
+        "filename": "rtc_base/memory/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-01T13:35:00Z",
+      "side": 1,
+      "message": "OK. Add something like\n\n  // TODO: Tag with `testonly \u003d true` once all users are correctly tagged.\n\n?",
+      "parentUuid": "851a5d49_77de4745",
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86dd7473_398d8927",
         "filename": "rtc_base/openssl_stream_adapter.cc",
         "patchSetId": 11
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "I think you may have misread the comment and the dcheck. Can you look again?",
       "parentUuid": "86dd7473_398d8927",
+      "range": {
+        "startLine": 813,
+        "startChar": 1,
+        "endLine": 814,
+        "endChar": 29
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71e5d7f1_2c437736",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-01T13:35:00Z",
+      "side": 1,
+      "message": "Hmm. I see the same thing that I saw the first time. Namely:\n\n  * The comment doesn\u0027t say so, but the one call site of this function gets `delay_ms` from the return value of DTLSv1_get_timeout. So I interpreted the comment as meaning roughly that `delay_ms` is often 0, and that you are unhappy about this.\n\n  * The DCHECK unambiguously states that `delay_ms` is greater than 0.\n\nWhere is my mistake?",
+      "parentUuid": "cb7f4773_36894bf8",
       "range": {
         "startLine": 813,
         "startChar": 1,
@@ -128,6 +170,30 @@
       "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ae6425b_59d4a2a0",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-01T13:35:00Z",
+      "side": 1,
+      "message": "OK. I would have assumed that a plain PostDelayedTask would be convenient, especially since you already have task_safety_ here to support cancellation.",
+      "parentUuid": "6939c5fc_5a7faa87",
+      "range": {
+        "startLine": 828,
+        "startChar": 8,
+        "endLine": 828,
+        "endChar": 49
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
