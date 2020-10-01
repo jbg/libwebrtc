@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12894995_353bcf0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-01T13:12:07Z",
+      "side": 1,
+      "message": "I don\u0027t see any change to complexity in this CL. Old description? Uncommited changes?",
+      "range": {
+        "startLine": 9,
+        "startChar": 52,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "4264059d948d3a16000c87b69b7a438f6969745f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c7b4db6_940d65be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-01T13:12:07Z",
+      "side": 1,
+      "message": "There\u0027s an issue here: Checks at [1] ignore active flags in vp9. \n\nVideoStreamEncoder won\u0027t call |InitEncode| [2] if only some layers were enabled/disabled on the fly (that\u0027s because the encoder can skip generation of KF in some cases).\n\nThis means that if someone manages to init the encoder with the top layer disabled and then enables it, the encoder would try to encode resolution bigger than that it was configured to do. I assume everything will go down in fires in that case.\n\nOn the other hand, if the first InitEncode has all the layers enabled, then disabling a layer later won\u0027t save any memory.\n\nAlways triggering InitEncode() in VideoStreamEncoder |active| flags changed is not the best idea, as it will generate unnecessary key-frames.\n\nI suggest you abandon memory savings and only change complexity in SetSvcRates, which already calculates last active layer [3] (which is first_active_layer_+num_active_layers_-1).\n\n[1] https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/video/video_stream_encoder.cc;l\u003d137;drc\u003df5e261aaf65cdf2eb903cdf40d651846be44f447\n\n[2] https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/video/video_stream_encoder.cc;l\u003d758;drc\u003d92402e1a4b9182848bdc7b9c6ee9f88753703abe\n\n[3] https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.cc;l\u003d396;drc\u003db6f002b55f7df746bef22264687a18991a8fa23a",
+      "revId": "4264059d948d3a16000c87b69b7a438f6969745f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3c23fc3_4b479e49",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-01T13:12:07Z",
+      "side": 1,
+      "message": "I worry, that this approach is inconsistent with the bitrate allocation in the case of non continuous active flags. E.g. if the user passes {true, false, true} in active flags in SetParamters. \n\nSo you need to run the loop forward until you find the first false after true.",
+      "revId": "4264059d948d3a16000c87b69b7a438f6969745f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
