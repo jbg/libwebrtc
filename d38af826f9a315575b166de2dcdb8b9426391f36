@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "db5f611c_5bddaef0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-10-01T14:17:09Z",
+      "side": 1,
+      "message": "I have verified it by patching into Chrome. I focused mostly on the case where user updates the active layers there. Verified with loopback and network emulator that bwe allocation triggers this correctly too.\n\n\n[733592:3:1001/154409.771147:WARNING:vp9_impl.cc(428)] Setting VP9 speed to 7 based on highest resolution being 640 x 360\n[733592:6:1001/154410.256605:WARNING:video_stream_encoder.cc(705)] ReconfigureEncoder:\nSimulcast streams:\n0: 1280x720 fps: 60 min_kbps: 29 target_kbps: 2500 max_kbps: 2500 max_fps: 60 max_qp: 56 num_tl: 3 active: true\nSpatial layers:\n0: 320x180 fps: 60 min_kbps: 29 target_kbps: 95 max_kbps: 142 max_qp: 0 num_tl: 3 active: true\n1: 640x360 fps: 60 min_kbps: 193 target_kbps: 305 max_kbps: 418 max_qp: 0 num_tl: 3 active: false\n2: 1280x720 fps: 60 min_kbps: 481 target_kbps: 1002 max_kbps: 1524 max_qp: 0 num_tl: 3 active: false\n\n[733592:6:1001/154410.278235:WARNING:vp9_impl.cc(428)] Setting VP9 speed to 5 based on highest resolution being 320 x 180\n...\n[733592:3:1001/154418.770749:WARNING:vp9_impl.cc(428)] Setting VP9 speed to 5 based on highest resolution being 320 x 180\n[733592:3:1001/154419.227827:WARNING:video_stream_encoder.cc(705)] ReconfigureEncoder:\nSimulcast streams:\n0: 1280x720 fps: 60 min_kbps: 29 target_kbps: 2500 max_kbps: 2500 max_fps: 60 max_qp: 56 num_tl: 3 active: true\nSpatial layers:\n0: 640x360 fps: 60 min_kbps: 29 target_kbps: 305 max_kbps: 459 max_qp: 0 num_tl: 3 active: true\n1: 1280x720 fps: 60 min_kbps: 481 target_kbps: 1002 max_kbps: 1524 max_qp: 0 num_tl: 3 active: false\n\n[733592:3:1001/154419.271917:WARNING:vp9_impl.cc(428)] Setting VP9 speed to 7 based on highest resolution being 640 x 360\n\n\nMaybe I should spend the time to do the same thing I did for vp8 so it\u0027s actually feasible to test this code... :/",
+      "parentUuid": "35a3989a_ad565db4",
+      "revId": "d38af826f9a315575b166de2dcdb8b9426391f36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04d7d58a_b530446f",
         "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "d38af826f9a315575b166de2dcdb8b9426391f36",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0149426f_9b1c9a14",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5524
+      },
+      "writtenOn": "2020-10-01T14:17:09Z",
+      "side": 1,
+      "message": "Every seems to set that to 1, but yeah maybe shouldn\u0027t rely on it :D",
+      "parentUuid": "04d7d58a_b530446f",
+      "revId": "d38af826f9a315575b166de2dcdb8b9426391f36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
