@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "370c9e94_97ca239b",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-01T08:06:44Z",
+      "side": 1,
+      "message": "With the new method, GetI420 may be downgraded to be like the other Get* methods.",
+      "revId": "d5fb9220acfdb210f4694282d58c1ee06ee15c89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d0cc131_bccda627",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-01T08:06:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure about that name. \n\nConvertFromNativeFrame(), MapNativeFrame(), maybe any other suggestions?\n\nGetNativeFrame is confusing, since it\u0027s already kNative frame, and as with other Get* methods, it\u0027s logical, that it should be just a trivial operation, returning some specific type, and should always succeed.",
+      "range": {
+        "startLine": 81,
+        "startChar": 47,
+        "endLine": 81,
+        "endChar": 61
+      },
+      "revId": "d5fb9220acfdb210f4694282d58c1ee06ee15c89",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
