@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e22fa61a_3e20cbeb",
+        "filename": "rtc_base/memory/BUILD.gn",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-01T11:55:20Z",
+      "side": 1,
+      "message": "Is it possible to replace the comment with `testonly \u003d true`, which says the same thing in a machine readable way?",
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86dd7473_398d8927",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-01T11:55:20Z",
+      "side": 1,
+      "message": "This seems inadvisable to check in. You should only ever DCHECK conditions that always hold. So you need to decide if the delay is always \u003e0 (in which case the DCHECK is fine but the comment should go away) or if it can be 0, in which case the code must handle it.",
+      "range": {
+        "startLine": 813,
+        "startChar": 1,
+        "endLine": 814,
+        "endChar": 29
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d64dfbae_167199a7",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-01T11:55:20Z",
+      "side": 1,
+      "message": "Why have a repeating task if it won\u0027t repeat?",
+      "range": {
+        "startLine": 828,
+        "startChar": 8,
+        "endLine": 828,
+        "endChar": 49
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
