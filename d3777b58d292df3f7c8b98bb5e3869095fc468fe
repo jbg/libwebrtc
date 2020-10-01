@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e8d3de6_9408325c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-01T14:43:20Z",
+      "side": 1,
+      "message": "I\u0027m considering that may be ScalabilityStructureFullSvc class that supports any number of spatial and up to 3 temporal layers layers would be easier to support long term. Sketching a structure with both temporal and spatial scalability is a step towards understanding how more general code would look like.\n\ndo you find this step helpful, or do you think I should jump directly to generic FullSvc scalability structure?",
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
