@@ -126,6 +126,30 @@
     },
     {
       "key": {
+        "uuid": "be22f43f_5befe0f0",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2020-10-01T14:05:06Z",
+      "side": 1,
+      "message": "the dcheck states greater or equal.\n\nThe return value from DTLSv1_get_timeout being 0 isn\u0027t ideal since it implies callback now, which has a bit of overhead, especially if it occurs multiple times back to back. I think that this is being discussed upstream but I don\u0027t expect it to change anytime soon. If the comment is confusing, I can remove it.",
+      "parentUuid": "71e5d7f1_2c437736",
+      "range": {
+        "startLine": 813,
+        "startChar": 1,
+        "endLine": 814,
+        "endChar": 29
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d64dfbae_167199a7",
         "filename": "rtc_base/openssl_stream_adapter.cc",
         "patchSetId": 11
