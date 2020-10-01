@@ -81,6 +81,30 @@
       "revId": "77afd10af884347642bd5f15dfb631b4f3494ebb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb5ac206_c75f2a24",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 12416
+      },
+      "writtenOn": "2020-10-01T20:31:22Z",
+      "side": 1,
+      "message": "The \u003cwindows.graphics.capture.h\u003e header is included in the Windows SDK v10.0.19041. Is that not the required version for building WebRTC? Perhaps the downstream project is using an out of date SDK.\n\nI can add a build flag to prevent building this by default for now, but we do eventually want to turn this on by default. At that time the downstream project will either have to update their SDK or set the flag to false in their clone. \n\nUnless there is some way that I am unaware of to check the SDK version at build time?",
+      "parentUuid": "9bae0c2d_54ee5d93",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "77afd10af884347642bd5f15dfb631b4f3494ebb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
