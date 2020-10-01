@@ -501,6 +501,19 @@ int VP9EncoderImpl::InitEncode(const VideoCodec* inst,
 
   num_spatial_layers_ = inst->VP9().numberOfSpatialLayers;
   RTC_DCHECK_GT(num_spatial_layers_, 0);
+
+  // Determine resolution of highest active spatial layer. We never need to
+  // encoder above this resolution.
+  size_t highest_active_spatial_layer = 0;
+  for (size_t i = num_spatial_layers_ - 1; i > 0; --i) {
+    if (inst->spatialLayers[i].active) {
+      highest_active_spatial_layer = i;
+      break;
+    }
+  }
+  int width = codec_.spatialLayers[highest_active_spatial_layer].width;
+  int height = codec_.spatialLayers[highest_active_spatial_layer].height;
+
   num_temporal_layers_ = inst->VP9().numberOfTemporalLayers;
   if (num_temporal_layers_ == 0) {
     num_temporal_layers_ = 1;
@@ -544,12 +557,11 @@ int VP9EncoderImpl::InitEncode(const VideoCodec* inst,
   // Creating a wrapper to the image - setting image data to nullptr. Actual
   // pointer will be set in encode. Setting align to 1, as it is meaningless
   // (actual memory is not allocated).
-  raw_ =
-      vpx_img_wrap(nullptr, img_fmt, codec_.width, codec_.height, 1, nullptr);
+  raw_ = vpx_img_wrap(nullptr, img_fmt, width, height, 1, nullptr);
   raw_->bit_depth = bits_for_storage;
 
-  config_->g_w = codec_.width;
-  config_->g_h = codec_.height;
+  config_->g_w = width;
+  config_->g_h = height;
   config_->rc_target_bitrate = inst->startBitrate;  // in kbit/s
   config_->g_error_resilient = is_svc_ ? VPX_ERROR_RESILIENT_DEFAULT : 0;
   // Setting the time base of the codec.
