@@ -37,15 +37,32 @@ class ScalabilityStructureL2T2 : public ScalableVideoController {
   absl::optional<GenericFrameInfo> OnEncodeDone(
       LayerFrameConfig config) override;
 
+  void OnRatesUpdated(const VideoBitrateAllocation& bitrates) override;
+
  private:
   enum FramePattern {
     kKey,
     kDeltaT1,
     kDeltaT0,
   };
-  LayerFrameConfig KeyFrameConfig() const;
+  static constexpr int kNumSpatialLayers = 2;
+  static constexpr int kNumTemporalLayers = 2;
+
+  // Index of the decode target with top layer (`sid`, `tid`)
+  static constexpr int DecodeTargetIndex(int sid, int tid) {
+    return sid * kNumTemporalLayers + tid;
+  }
+  // Index of the buffer to store last frame for layer (`sid`, `tid`)
+  static constexpr int BufferIndex(int sid, int tid) {
+    return tid * kNumSpatialLayers + sid;
+  }
+  bool ActiveDecodeTarget(int sid, int tid) const {
+    return active_decode_targets_[DecodeTargetIndex(sid, tid)];
+  }
 
   FramePattern next_pattern_ = kKey;
+  bool use_temporal_dependency_on_t0[kNumSpatialLayers] = {false, false};
+  std::bitset<32> active_decode_targets_ = 0b1111;
 };
 
 }  // namespace webrtc
