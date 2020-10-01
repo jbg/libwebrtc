@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35a3989a_ad565db4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-01T14:00:01Z",
+      "side": 1,
+      "message": "I realize it\u0027s not easy to test this, but could you at least add debug output and run video_loopback with multiple spatial layers? It should due to bw rampup first enable some layers and then the highest also. Confirm that the complexity is decreasing as expected.\n\nWith my comment addressed it looks correct, but libvpx might behave not as you expect it.",
+      "revId": "d38af826f9a315575b166de2dcdb8b9426391f36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04d7d58a_b530446f",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-01T14:00:01Z",
+      "side": 1,
+      "message": "multiply by svc_params_.scaling_factor_num[i]",
+      "revId": "d38af826f9a315575b166de2dcdb8b9426391f36",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
