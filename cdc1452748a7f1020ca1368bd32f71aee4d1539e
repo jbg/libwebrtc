@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "4bdabfdc_9edf7783",
+        "filename": "modules/video_coding/generic_decoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-02T08:49:55Z",
+      "side": 1,
+      "message": "Apparently, given how the decoding work on android it looks like we simply can\u0027t remove the decode time provided.",
+      "parentUuid": "7888ae2b_c40f3034",
+      "range": {
+        "startLine": 106,
+        "startChar": 32,
+        "endLine": 106,
+        "endChar": 46
+      },
+      "revId": "cdc1452748a7f1020ca1368bd32f71aee4d1539e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a7bf7c3_db5a36fe",
         "filename": "modules/video_coding/generic_decoder.cc",
         "patchSetId": 1
