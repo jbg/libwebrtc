@@ -150,6 +150,30 @@
     },
     {
       "key": {
+        "uuid": "d5ae4e3c_1d2e2405",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-02T10:33:15Z",
+      "side": 1,
+      "message": "Ah, my mistake---I missed the \"or equal\" part, as you noted.\n\nI would not remove the comment, but maybe write out some of the implied context, e.g.\n\n  // We need to accept 0 delay here as well as \u003e0 delay, because DTLSv1_get_timeout seems to frequently return 0 ms.",
+      "parentUuid": "be22f43f_5befe0f0",
+      "range": {
+        "startLine": 813,
+        "startChar": 1,
+        "endLine": 814,
+        "endChar": 29
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d64dfbae_167199a7",
         "filename": "rtc_base/openssl_stream_adapter.cc",
         "patchSetId": 11
@@ -233,6 +257,30 @@
       "side": 1,
       "message": "The task_safety_ flag is for all events posted to the object, including ones via PostEvent. We want to cancel the timed task specifically, not all task.",
       "parentUuid": "3ae6425b_59d4a2a0",
+      "range": {
+        "startLine": 828,
+        "startChar": 8,
+        "endLine": 828,
+        "endChar": 49
+      },
+      "revId": "25b8ec41c76f1e7ddcfaebc182b8ea14313fe349",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8eef32c7_2062d123",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-02T10:33:15Z",
+      "side": 1,
+      "message": "Ah, then I see how this might be the right trade-off. Thanks.\n\nTo help those unfamiliar with the return value semantics, consider appending e.g.\n\n  // Never run this callback again.\n\nto this return statement.",
+      "parentUuid": "3ff2ce42_15b97f94",
       "range": {
         "startLine": 828,
         "startChar": 8,
