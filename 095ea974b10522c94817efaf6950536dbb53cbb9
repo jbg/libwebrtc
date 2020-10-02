@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7bea090_2bc58920",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-10-02T19:58:07Z",
+      "side": 1,
+      "message": "Karl, could you please take a look at this reland? It is the same CL again.",
+      "revId": "095ea974b10522c94817efaf6950536dbb53cbb9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
