@@ -536,6 +536,8 @@ rtc_library("desktop_capture_generic") {
 
   if (rtc_enable_win_wgc) {
     sources += [
+      "win/desktop_frame_win_wgc.cc",
+      "win/desktop_frame_win_wgc.h",
       "win/wgc_capture_session.cc",
       "win/wgc_capture_session.h",
       "win/window_capturer_win_wgc.cc",

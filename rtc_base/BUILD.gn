@@ -125,6 +125,10 @@ rtc_library("rtc_base_approved") {
 
   if (is_win) {
     sources += [
+      "win/get_activation_factory.cc",
+      "win/get_activation_factory.h",
+      "win/hstring.cc",
+      "win/hstring.h",
       "win/windows_version.cc",
       "win/windows_version.h",
     ]
