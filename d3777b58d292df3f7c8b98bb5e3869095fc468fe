@@ -201,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "3e34c4d8_e1f11843",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-02T10:04:04Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "07bf830a_0fd5df20",
+      "range": {
+        "startLine": 115,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 30
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "020419a2_007e46c8",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
         "patchSetId": 2
@@ -307,6 +331,30 @@
       "side": 1,
       "message": "Do we aim to make this generic to any LXTX (for reasonable big Xs)?",
       "parentUuid": "d3414926_76dcf7b5",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 3
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd6ba0a3_6163f2ee",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-02T10:04:04Z",
+      "side": 1,
+      "message": "This code looks repeatitive, so yes, I would like to put repeating part into base class. It seems it would work for any number of spatial layers and up to 3 temporal layers.\nMay be it would work for K-SVC and S-mode similarly too, but I haven\u0027t thought about it yet.",
+      "parentUuid": "89f33987_61bcdc32",
       "range": {
         "startLine": 51,
         "startChar": 0,
