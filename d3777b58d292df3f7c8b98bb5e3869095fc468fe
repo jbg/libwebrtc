@@ -177,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "07bf830a_0fd5df20",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-02T08:44:15Z",
+      "side": 1,
+      "message": "Right, please add\n\n  // Check if T0 was disabled in between between calls to NextFrameConfig\n\nor something like that to line 77",
+      "parentUuid": "3fdf9b91_fa089b47",
+      "range": {
+        "startLine": 115,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 30
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "020419a2_007e46c8",
         "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.cc",
         "patchSetId": 2
@@ -259,6 +283,30 @@
       "side": 1,
       "message": "I did consider that, but there are few places where I pass variable rather than constant. Enum doesn\u0027t work in that case (or looks less nice and wouldn\u0027t scale to 3 layers)",
       "parentUuid": "ab207e3a_ee573346",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 3
+      },
+      "revId": "d3777b58d292df3f7c8b98bb5e3869095fc468fe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89f33987_61bcdc32",
+        "filename": "modules/video_coding/codecs/av1/scalability_structure_l2t2.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-02T08:44:15Z",
+      "side": 1,
+      "message": "Do we aim to make this generic to any LXTX (for reasonable big Xs)?",
+      "parentUuid": "d3414926_76dcf7b5",
       "range": {
         "startLine": 51,
         "startChar": 0,
