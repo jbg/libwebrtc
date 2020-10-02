@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "791ea3dd_175f8c74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12214
+      },
+      "writtenOn": "2020-10-02T11:29:48Z",
+      "side": 1,
+      "message": "It looks like we might need higher level of redunancy soon (I am trying to get the results we have into a shape where we can actually have a discussion about them) so I\u0027ll give it a try in a different CL.\n\nAlso thanks for reading not just the diff and finding some things I missed!",
+      "parentUuid": "efcc8055_099bcd92",
+      "revId": "7b1900dd675fe4ddf9dafc667776dd74e1332c48",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8cd6742_50241557",
         "filename": "modules/audio_coding/codecs/red/audio_encoder_copy_red.h",
         "patchSetId": 6
