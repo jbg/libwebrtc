@@ -114,6 +114,30 @@
     },
     {
       "key": {
+        "uuid": "98b87f91_9db54bcf",
+        "filename": "modules/video_coding/generic_decoder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-02T09:36:34Z",
+      "side": 1,
+      "message": "The way I understand things is that the output from the decoder is put into a HW buffer, which can\u0027t be reused until the frame already in that buffer is released. This means that WebRTC will block the decoder from outputting the next frame until the current frame has been rendered.",
+      "parentUuid": "f18999f7_fb07014d",
+      "range": {
+        "startLine": 106,
+        "startChar": 32,
+        "endLine": 106,
+        "endChar": 46
+      },
+      "revId": "cdc1452748a7f1020ca1368bd32f71aee4d1539e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a7bf7c3_db5a36fe",
         "filename": "modules/video_coding/generic_decoder.cc",
         "patchSetId": 1
