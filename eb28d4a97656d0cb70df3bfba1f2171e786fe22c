@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96c3d70a_00148109",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6720
+      },
+      "writtenOn": "2020-10-04T15:45:22Z",
+      "side": 1,
+      "message": "Can you link to a bug with context?",
+      "revId": "eb28d4a97656d0cb70df3bfba1f2171e786fe22c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
