@@ -16,6 +16,23 @@
       "revId": "eb28d4a97656d0cb70df3bfba1f2171e786fe22c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0f88b1d_2f8bba6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-10-04T19:10:19Z",
+      "side": 1,
+      "message": "I removed myself from the reviewers list since I don\u0027t know this code at all and cannot properly review it.",
+      "revId": "eb28d4a97656d0cb70df3bfba1f2171e786fe22c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
