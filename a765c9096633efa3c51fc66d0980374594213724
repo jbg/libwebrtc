@@ -16,6 +16,24 @@
       "revId": "a765c9096633efa3c51fc66d0980374594213724",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e58c4dbe_4bbdd638",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-05T08:55:00Z",
+      "side": 1,
+      "message": "The purpose is to provide a way to avoid conversions where possible. If a frame is captured from a source in NV12, in which case we can provide access to that without requiring conversion to I420. For example, in Chrome a native frame is wrapped to adapt a webrtc buffer. However the backing frame may be in a non-I420 format, like when we capture onto a GPU, the frame is in NV12. This method allows access without an extra conversion or copy.\n\nIn the example above, it could be that the data is not trivially accessible, in which case this method would just return null and ToI420 would be needed.",
+      "parentUuid": "9da031f9_bc77f510",
+      "revId": "a765c9096633efa3c51fc66d0980374594213724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
