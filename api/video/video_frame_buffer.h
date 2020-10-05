@@ -75,13 +75,16 @@ class RTC_EXPORT VideoFrameBuffer : public rtc::RefCountInterface {
   // memory buffer. Therefore it must have type kNative. Yet, ToI420()
   // doesn't affect binary data at all. Another example is any I420A buffer.
   virtual const I420BufferInterface* GetI420() const;
+  // In a similar manner as GetI420, NV12 frames can be returned from kNative
+  // frames if the underlying frame type is NV12. Otherwise, this method returns
+  // nullptr.
+  virtual const NV12BufferInterface* GetNV12() const;
 
   // These functions should only be called if type() is of the correct type.
   // Calling with a different type will result in a crash.
   const I420ABufferInterface* GetI420A() const;
   const I444BufferInterface* GetI444() const;
   const I010BufferInterface* GetI010() const;
-  const NV12BufferInterface* GetNV12() const;
 
  protected:
   ~VideoFrameBuffer() override {}
@@ -209,6 +212,8 @@ class NV12BufferInterface : public BiplanarYuv8Buffer {
 
   int ChromaWidth() const final;
   int ChromaHeight() const final;
+
+  const NV12BufferInterface* GetNV12() const override;
 
  protected:
   ~NV12BufferInterface() override {}

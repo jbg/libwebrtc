@@ -1315,17 +1315,23 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
           VideoFrameBuffer::Type::kNative &&
       !info.supports_native_handle) {
     // This module only supports software encoding.
-    rtc::scoped_refptr<I420BufferInterface> converted_buffer(
-        out_frame.video_frame_buffer()->ToI420());
-
+    rtc::scoped_refptr<const VideoFrameBuffer> converted_buffer =
+        out_frame.video_frame_buffer()->GetNV12();
+    bool converted_to_i420 = false;
+    if (!converted_buffer) {
+      converted_buffer = out_frame.video_frame_buffer()->GetI420();
+    }
+    if (!converted_buffer) {
+      converted_buffer = out_frame.video_frame_buffer()->ToI420();
+      converted_to_i420 = true;
+    }
     if (!converted_buffer) {
       RTC_LOG(LS_ERROR) << "Frame conversion failed, dropping frame.";
       return;
     }
 
     VideoFrame::UpdateRect update_rect = out_frame.update_rect();
-    if (!update_rect.IsEmpty() &&
-        out_frame.video_frame_buffer()->GetI420() == nullptr) {
+    if (!update_rect.IsEmpty() && converted_to_i420) {
       // UpdatedRect is reset to full update if it's not empty, and buffer was
       // converted, therefore we can't guarantee that pixels outside of
       // UpdateRect didn't change comparing to the previous frame.
@@ -1333,7 +1339,11 @@ void VideoStreamEncoder::EncodeVideoFrame(const VideoFrame& video_frame,
           VideoFrame::UpdateRect{0, 0, out_frame.width(), out_frame.height()};
     }
 
-    out_frame.set_video_frame_buffer(converted_buffer);
+    // Note: const_cast is needed since VideoFrame only accepts scoped_refptr
+    // of non-const VideoFrameBuffer. However all usage of VideoFrameBuffer is
+    // const except ToI420.
+    out_frame.set_video_frame_buffer(
+        const_cast<VideoFrameBuffer*>(converted_buffer.get()));
     out_frame.set_update_rect(update_rect);
   }
 
