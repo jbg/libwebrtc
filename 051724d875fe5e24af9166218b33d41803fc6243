@@ -110,6 +110,30 @@
       "revId": "051724d875fe5e24af9166218b33d41803fc6243",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecfa92d0_1f70ffba",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-05T14:12:26Z",
+      "side": 1,
+      "message": "It seems right to make AndroidVideoBuffer override it. Not sure why it has the extra jni argument, or from where it is used (I found no calls from a quick search). Sami, can you shed some light on this?",
+      "parentUuid": "e643f971_50ebd9b7",
+      "range": {
+        "startLine": 84,
+        "startChar": 47,
+        "endLine": 84,
+        "endChar": 59
+      },
+      "revId": "051724d875fe5e24af9166218b33d41803fc6243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
