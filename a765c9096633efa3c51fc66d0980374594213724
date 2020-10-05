@@ -57,6 +57,30 @@
       "revId": "a765c9096633efa3c51fc66d0980374594213724",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e263719_6af448ec",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-05T09:06:04Z",
+      "side": 1,
+      "message": "It was needed because I rebased and merged wrong... fixed!",
+      "parentUuid": "117e975a_105e9801",
+      "range": {
+        "startLine": 1344,
+        "startChar": 55,
+        "endLine": 1344,
+        "endChar": 60
+      },
+      "revId": "a765c9096633efa3c51fc66d0980374594213724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
