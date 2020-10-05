@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "76e9191d_39e46102",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-05T14:02:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d5ef55c_e7227ae9",
+      "range": {
+        "startLine": 79,
+        "startChar": 47,
+        "endLine": 79,
+        "endChar": 74
+      },
+      "revId": "051724d875fe5e24af9166218b33d41803fc6243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e43be5d9_f0a6b176",
         "filename": "api/video/video_frame_buffer.h",
         "patchSetId": 3
@@ -62,6 +86,30 @@
       "revId": "051724d875fe5e24af9166218b33d41803fc6243",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e643f971_50ebd9b7",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-05T14:02:42Z",
+      "side": 1,
+      "message": "Renamed.\n\nIt fits well with AndroidVideoBuffer::CropAndScale since that one has an extra argument (jni). Other parameters have the same meaning.\n\nIf we would want to leverage efficient scaling available on android platform we should override this new method in AndroidVideoBuffer and call there the existing method.",
+      "parentUuid": "e43be5d9_f0a6b176",
+      "range": {
+        "startLine": 84,
+        "startChar": 47,
+        "endLine": 84,
+        "endChar": 59
+      },
+      "revId": "051724d875fe5e24af9166218b33d41803fc6243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
