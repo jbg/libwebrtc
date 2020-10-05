@@ -33,6 +33,24 @@
       "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8039e19f_8d66cc94",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 7755
+      },
+      "writtenOn": "2020-10-05T14:04:51Z",
+      "side": 1,
+      "message": "this is only called from SRD which avoids the common snooping usage.",
+      "parentUuid": "74669531_39de36f2",
+      "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
