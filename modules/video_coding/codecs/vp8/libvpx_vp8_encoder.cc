@@ -1243,7 +1243,7 @@ int LibvpxVp8Encoder::GetEncodedPartitions(const VideoFrame& input_image,
 
 VideoEncoder::EncoderInfo LibvpxVp8Encoder::GetEncoderInfo() const {
   EncoderInfo info;
-  info.supports_native_handle = false;
+  info.supports_native_handle = true;
   info.implementation_name = "libvpx";
   info.has_trusted_rate_controller =
       rate_control_settings_.LibvpxVp8TrustedRateController();
