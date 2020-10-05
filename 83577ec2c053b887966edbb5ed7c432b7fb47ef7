@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "622132f9_4361b0e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-05T12:05:50Z",
+      "side": 1,
+      "message": "Did we have any filed bug about deleting supports_native_handle?\n\nWould the following approach work: Change all encoders included in webrtc to advertise supports_native_handle \u003d true, and call ToI420 as needed?",
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d41a88ef_03dca308",
         "filename": "api/video/video_frame_buffer.h",
         "patchSetId": 7
