@@ -15,6 +15,7 @@
 
 #include "api/video/i010_buffer.h"
 #include "api/video/i420_buffer.h"
+#include "api/video/nv12_buffer.h"
 #include "rtc_base/bind.h"
 #include "rtc_base/time_utils.h"
 #include "test/fake_texture_frame.h"
@@ -155,6 +156,29 @@ rtc::scoped_refptr<PlanarYuvBuffer> CreateGradient(VideoFrameBuffer::Type type,
 
   RTC_DCHECK(type == VideoFrameBuffer::Type::kI010);
   return I010Buffer::Copy(*buffer);
+}
+
+rtc::scoped_refptr<NV12BufferInterface> CreateNV12Gradient(int width,
+                                                           int height) {
+  rtc::scoped_refptr<NV12Buffer> buffer(NV12Buffer::Create(width, height));
+  // Initialize with gradient, Y = 128(x/w + y/h), U = 256 x/w, V = 256 y/h
+  for (int x = 0; x < width; x++) {
+    for (int y = 0; y < height; y++) {
+      buffer->MutableDataY()[x + y * width] =
+          128 * (x * height + y * width) / (width * height);
+    }
+  }
+  int chroma_width = buffer->ChromaWidth();
+  int chroma_height = buffer->ChromaHeight();
+  for (int x = 0; x < chroma_width; x++) {
+    for (int y = 0; y < chroma_height; y++) {
+      buffer->MutableDataUV()[x * 2 + y * buffer->StrideUV()] =
+          255 * x / (chroma_width - 1);
+      buffer->MutableDataUV()[x * 2 + 1 + y * buffer->StrideUV()] =
+          255 * y / (chroma_height - 1);
+    }
+  }
+  return buffer;
 }
 
 // The offsets and sizes describe the rectangle extracted from the
@@ -494,6 +518,16 @@ INSTANTIATE_TEST_SUITE_P(All,
                          TestPlanarYuvBuffer,
                          ::testing::Values(VideoFrameBuffer::Type::kI420,
                                            VideoFrameBuffer::Type::kI010));
+
+TEST(TestNV12Buffer, CropAndScale) {
+  rtc::scoped_refptr<VideoFrameBuffer> buf = CreateNV12Gradient(640, 480);
+
+  // Crop 40 from left, 0 from right and 30 from top and bottom and scale down
+  // by 2.
+  rtc::scoped_refptr<VideoFrameBuffer> scaled_buffer =
+      buf->ScaleAndCrop(40, 30, 600, 420, 320, 240);
+  CheckCrop(*scaled_buffer->ToI420(), 0.0625, 0.0625, 0.9375, 0.875);
+}
 
 class TestPlanarYuvBufferRotate
     : public ::testing::TestWithParam<
