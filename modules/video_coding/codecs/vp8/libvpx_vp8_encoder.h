@@ -92,6 +92,11 @@ class LibvpxVp8Encoder : public VideoEncoder {
   size_t SteadyStateSize(int sid, int tid);
 
   bool UpdateVpxConfiguration(size_t stream_index);
+  void PrepareRawImagesForEncoding(
+      const rtc::scoped_refptr<VideoFrameBuffer>& frame);
+  void MaybeUpdatePixelFormat(vpx_img_fmt fmt);
+  void PrepareI420Image(const I420BufferInterface* frame);
+  void PrepareNV12Image(const NV12BufferInterface* frame);
 
   const std::unique_ptr<LibvpxInterface> libvpx_;
 
