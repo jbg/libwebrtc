@@ -16,6 +16,52 @@
       "revId": "051724d875fe5e24af9166218b33d41803fc6243",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d5ef55c_e7227ae9",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-05T13:37:54Z",
+      "side": 1,
+      "message": "Fix spelling and phrasing.",
+      "range": {
+        "startLine": 79,
+        "startChar": 47,
+        "endLine": 79,
+        "endChar": 74
+      },
+      "revId": "051724d875fe5e24af9166218b33d41803fc6243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e43be5d9_f0a6b176",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-05T13:37:54Z",
+      "side": 1,
+      "message": "CropAndScale, since it\u0027s cropped first. Please coordinate with android devs to make it fit well with AndroidVideoBuffer::CropAndScale (see https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/sdk/android/src/jni/video_frame.h;drc\u003d10542f21c8e4e2d60b136fab45338f2b1e132dde;l\u003d45)",
+      "range": {
+        "startLine": 84,
+        "startChar": 47,
+        "endLine": 84,
+        "endChar": 59
+      },
+      "revId": "051724d875fe5e24af9166218b33d41803fc6243",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
