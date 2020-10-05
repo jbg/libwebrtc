@@ -83,6 +83,11 @@ class RTC_EXPORT VideoFrameBuffer : public rtc::RefCountInterface {
   const I010BufferInterface* GetI010() const;
   const NV12BufferInterface* GetNV12() const;
 
+  // Return a VideoFrameBuffer from a kNative buffer that is trivially
+  // convertable to some non-native VideoFrameBuffer. Otherwise, returns
+  // nullptr.
+  virtual rtc::scoped_refptr<VideoFrameBuffer> ConvertFromNativeFrame();
+
  protected:
   ~VideoFrameBuffer() override {}
 };
