@@ -50,6 +50,23 @@
       "revId": "eb28d4a97656d0cb70df3bfba1f2171e786fe22c",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a90a7878_7e6c7bc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5825
+      },
+      "writtenOn": "2020-10-05T10:41:40Z",
+      "side": 1,
+      "message": "We should start configuring degradation preference via Peerconnection - https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/sdk/android/api/org/webrtc/RtpParameters.java;l\u003d280\n",
+      "revId": "eb28d4a97656d0cb70df3bfba1f2171e786fe22c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
