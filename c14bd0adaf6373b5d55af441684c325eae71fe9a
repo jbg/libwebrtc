@@ -16,6 +16,23 @@
       "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74669531_39de36f2",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-10-05T13:54:11Z",
+      "side": 1,
+      "message": "I\u0027m leaving this one to Harald, I think he has an opinion about this. If offer-only ones are interesting on its own the alternative would be to add an additional histogram (count both cases)",
+      "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
