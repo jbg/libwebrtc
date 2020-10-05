@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9da031f9_bc77f510",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-05T08:39:07Z",
+      "side": 1,
+      "message": "Hi, can you explain the usecase? If we have a native frame (typically a gpu texture), and need a frame in main memory for software encoding, why isn\u0027t ToI420() good enough? The implementation I\u0027m aware of should be reasonably efficient, https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/sdk/android/api/org/webrtc/YuvConverter.java;drc\u003df2889bbaf40c37b80fad129dede112107b0af103;l\u003d125",
+      "revId": "a765c9096633efa3c51fc66d0980374594213724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
