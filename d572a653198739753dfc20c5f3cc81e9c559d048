@@ -2,6 +2,92 @@
   "comments": [
     {
       "key": {
+        "uuid": "aa1f2edf_afb6c099",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-05T09:45:19Z",
+      "side": 1,
+      "message": "The binary size increase should come from the new libyuv functions this CL is using for the first time, is this correct?\n\nSee other comments, aside form that this LG.",
+      "revId": "d572a653198739753dfc20c5f3cc81e9c559d048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "574cb116_b7a8873d",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-05T09:45:19Z",
+      "side": 1,
+      "message": "rtc_source_set to avoid the libtool issue.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 11
+      },
+      "revId": "d572a653198739753dfc20c5f3cc81e9c559d048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a27deff_87ecb22e",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-05T09:45:19Z",
+      "side": 1,
+      "message": "same here.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 11
+      },
+      "revId": "d572a653198739753dfc20c5f3cc81e9c559d048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0e1b3fc_c3f4b596",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-05T09:45:19Z",
+      "side": 1,
+      "message": "same here.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 11
+      },
+      "revId": "d572a653198739753dfc20c5f3cc81e9c559d048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c578f445_f47f8454",
         "filename": "api/video/video_frame_buffer.cc",
         "patchSetId": 2
