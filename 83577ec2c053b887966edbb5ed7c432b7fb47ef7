@@ -76,6 +76,30 @@
     },
     {
       "key": {
+        "uuid": "cb41c09b_6b6c9a4b",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-05T12:25:52Z",
+      "side": 1,
+      "message": "If we need to generalize ToI420(), I would suggest something like\n\n// Returns a memory-backed frame buffer, in one of the listed formats, or null if none \n// supported. All sub classes are expected to support kI420.\nvirtual rtc::scoped_refptr\u003cVideoFrameBuffer\u003e ToMemoryFrameBuffer(rtc::ArrayView\u003cType\u003e types);\n\nIt could be extended further to pass a list of types and priorities etc, but I think that\u0027s overkill for now.",
+      "parentUuid": "d41a88ef_03dca308",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b802f955_5610cdab",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 7
