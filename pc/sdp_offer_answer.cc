@@ -1801,8 +1801,9 @@ void SdpOfferAnswerHandler::DoSetRemoteDescription(
                  "Rollback not supported in Plan B"));
     return;
   }
-  if (desc->GetType() == SdpType::kOffer) {
-    // Report to UMA the format of the received offer.
+  if (desc->GetType() == SdpType::kOffer ||
+      desc->GetType() == SdpType::kAnswer) {
+    // Report to UMA the format of the received offer or answer.
     pc_->ReportSdpFormatReceived(*desc);
   }
 
