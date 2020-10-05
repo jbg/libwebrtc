@@ -76,6 +76,24 @@ class RTC_EXPORT VideoFrameBuffer : public rtc::RefCountInterface {
   // doesn't affect binary data at all. Another example is any I420A buffer.
   virtual const I420BufferInterface* GetI420() const;
 
+  // A format specific scale function. Default implemantation works by
+  // converting to I420. But more efficient implementations may override it,
+  // especially for kNative.
+  // First, the image is cropped to |crop_width| and |crop_height| and then
+  // scaled to |scaled_width| and |scaled_height|.
+  virtual rtc::scoped_refptr<VideoFrameBuffer> CropAndScale(int offset_x,
+                                                            int offset_y,
+                                                            int crop_width,
+                                                            int crop_height,
+                                                            int scaled_width,
+                                                            int scaled_height);
+
+  // Alias for common use case.
+  rtc::scoped_refptr<VideoFrameBuffer> Scale(int scaled_width,
+                                             int scaled_height) {
+    return CropAndScale(0, 0, width(), height(), scaled_width, scaled_height);
+  }
+
   // These functions should only be called if type() is of the correct type.
   // Calling with a different type will result in a crash.
   const I420ABufferInterface* GetI420A() const;
@@ -174,6 +192,13 @@ class I010BufferInterface : public PlanarYuv16BBuffer {
   int ChromaWidth() const final;
   int ChromaHeight() const final;
 
+  rtc::scoped_refptr<VideoFrameBuffer> CropAndScale(int offset_x,
+                                                    int offset_y,
+                                                    int crop_width,
+                                                    int crop_height,
+                                                    int scaled_width,
+                                                    int scaled_height) override;
+
  protected:
   ~I010BufferInterface() override {}
 };
@@ -209,6 +234,13 @@ class NV12BufferInterface : public BiplanarYuv8Buffer {
 
   int ChromaWidth() const final;
   int ChromaHeight() const final;
+
+  rtc::scoped_refptr<VideoFrameBuffer> CropAndScale(int offset_x,
+                                                    int offset_y,
+                                                    int crop_width,
+                                                    int crop_height,
+                                                    int scaled_width,
+                                                    int scaled_height) override;
 
  protected:
   ~NV12BufferInterface() override {}
