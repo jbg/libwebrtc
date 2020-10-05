@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "83f016d2_bffe0647",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-05T11:26:13Z",
+      "side": 1,
+      "message": "It is fine, there is not a lot we can do (unless we want to make things harder to read and test), just rely on the linker to remove unneeded sections.",
+      "parentUuid": "9f48b6e1_f028db4c",
+      "revId": "d572a653198739753dfc20c5f3cc81e9c559d048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "574cb116_b7a8873d",
         "filename": "api/video/BUILD.gn",
         "patchSetId": 2
