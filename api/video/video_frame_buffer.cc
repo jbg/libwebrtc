@@ -40,6 +40,10 @@ const NV12BufferInterface* VideoFrameBuffer::GetNV12() const {
   return static_cast<const NV12BufferInterface*>(this);
 }
 
+rtc::scoped_refptr<VideoFrameBuffer> VideoFrameBuffer::GetNativeFrame() {
+  return nullptr;
+}
+
 VideoFrameBuffer::Type I420BufferInterface::type() const {
   return Type::kI420;
 }
