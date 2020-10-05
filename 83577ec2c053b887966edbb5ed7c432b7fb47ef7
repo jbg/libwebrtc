@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d41a88ef_03dca308",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 6337
+      },
+      "writtenOn": "2020-10-05T11:45:18Z",
+      "side": 1,
+      "message": "As I understand it will make a non-native frame with a same pixel format as it was in native. From this comments it\u0027s a bit unclear what this method is doing.",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b802f955_5610cdab",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 7
