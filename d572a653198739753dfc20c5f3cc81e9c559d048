@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c578f445_f47f8454",
+        "filename": "api/video/video_frame_buffer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-05T09:17:36Z",
+      "side": 1,
+      "message": "Why not just *this?",
+      "range": {
+        "startLine": 143,
+        "startChar": 27,
+        "endLine": 143,
+        "endChar": 43
+      },
+      "revId": "d572a653198739753dfc20c5f3cc81e9c559d048",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
