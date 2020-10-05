@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cda10628_4e816767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-05T08:30:03Z",
+      "side": 1,
+      "message": "PTAL.\n\nI am not super happy with the method name, so feel free to suggest something better. ",
+      "revId": "f134d07add4dde59dc48514d3b84b18b99d98821",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
