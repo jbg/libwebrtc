@@ -129,6 +129,30 @@
       "revId": "77afd10af884347642bd5f15dfb631b4f3494ebb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53d360fd_78be5f39",
+        "filename": "modules/desktop_capture/win/wgc_capture_session.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-05T11:20:03Z",
+      "side": 1,
+      "message": "I think the proposed solution is good. A PSA on discuss-webrtc@ might be needed when the default value will change.",
+      "parentUuid": "6c1c396b_894a8a1c",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "77afd10af884347642bd5f15dfb631b4f3494ebb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
