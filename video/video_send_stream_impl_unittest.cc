@@ -89,6 +89,10 @@ class MockRtpVideoSender : public RtpVideoSenderInterface {
               OnBitrateUpdated,
               (BitrateAllocationUpdate, int),
               (override));
+  MOCK_METHOD(void,
+              OnVideoLayersAllocationUpdated,
+              (VideoLayersAllocation),
+              (override));
   MOCK_METHOD(uint32_t, GetPayloadBitrateBps, (), (const, override));
   MOCK_METHOD(uint32_t, GetProtectionBitrateBps, (), (const, override));
   MOCK_METHOD(void, SetEncodingData, (size_t, size_t, size_t), (override));

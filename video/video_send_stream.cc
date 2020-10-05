@@ -30,6 +30,8 @@ namespace webrtc {
 namespace {
 
 constexpr char kTargetBitrateRtcpFieldTrial[] = "WebRTC-Target-Bitrate-Rtcp";
+constexpr char kVideoLayersAllocationFieldTrial[] =
+    "WebRTC-Video-Layers-Allocation-Ext";
 
 size_t CalculateMaxHeaderSize(const RtpConfig& config) {
   size_t header_size = kRtpHeaderSize;
@@ -113,10 +115,17 @@ VideoSendStream::VideoSendStream(
   // it was created on.
   thread_sync_event_.Wait(rtc::Event::kForever);
   send_stream_->RegisterProcessThread(module_process_thread);
+
+  // TODO - move these checks to video_stream_encoder_...
   // TODO(sprang): Enable this also for regular video calls by default, if it
   // works well.
   if (encoder_config.content_type == VideoEncoderConfig::ContentType::kScreen ||
       field_trial::IsEnabled(kTargetBitrateRtcpFieldTrial)) {
+    video_stream_encoder_->SetBitrateAllocationObserver(send_stream_.get());
+  }
+  if ((encoder_config.spatial_layers.size() > 1 ||
+       encoder_config.simulcast_layers.size() > 1) &&
+      !field_trial::IsDisabled(kVideoLayersAllocationFieldTrial)) {
     video_stream_encoder_->SetBitrateAllocationObserver(send_stream_.get());
   }
 

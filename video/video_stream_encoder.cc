@@ -21,11 +21,15 @@
 #include "absl/types/optional.h"
 #include "api/task_queue/queued_task.h"
 #include "api/task_queue/task_queue_base.h"
+#include "api/units/timestamp.h"
 #include "api/video/encoded_image.h"
 #include "api/video/i420_buffer.h"
 #include "api/video/video_adaptation_reason.h"
+#include "api/video/video_bitrate_allocation.h"
 #include "api/video/video_bitrate_allocator_factory.h"
 #include "api/video/video_codec_constants.h"
+#include "api/video/video_codec_type.h"
+#include "api/video/video_layers_allocation.h"
 #include "api/video_codecs/video_encoder.h"
 #include "call/adaptation/resource_adaptation_processor.h"
 #include "call/adaptation/video_stream_adapter.h"
@@ -177,6 +181,56 @@ VideoBitrateAllocation UpdateAllocationFromEncoderInfo(
   }
   new_allocation.set_bw_limited(allocation.is_bw_limited());
   return new_allocation;
+}
+
+// Converts a VideoBitrateAllocation that contains allocated bitrate per layer,
+// and an EncoderInfo that contains information about the actual encoder
+// structure used by a codec. Stream structures can be Ksvc, Full SVC, Simulcast
+// etc.
+VideoLayersAllocation CreateVideoLayersAllocation(
+    const VideoCodec& encoder_config,
+    const VideoBitrateAllocation& allocation,
+    const VideoEncoder::EncoderInfo& encoder_info) {
+  VideoLayersAllocation layers_allocation;
+  if (allocation.get_sum_bps() == 0) {
+    return layers_allocation;
+  }
+
+  if (encoder_config.numberOfSimulcastStreams > 0) {
+    for (int si = 0; si < encoder_config.numberOfSimulcastStreams; ++si) {
+      layers_allocation.resolution_and_frame_rate.emplace_back(
+          VideoLayersAllocation::ResolutionAndFrameRate(
+              {.width = encoder_config.simulcastStream[si].width,
+               .height = encoder_config.simulcastStream[si].height,
+               .frame_rate = static_cast<uint8_t>(
+                   encoder_config.simulcastStream[si].maxFramerate)}));
+      if (encoder_info.fps_allocation[si].size() == 1 &&
+          allocation.IsSpatialLayerUsed(si)) {
+        // One TL is signalled to be used by the encoder. Do not distribute
+        // bitrate allocation across TLs (use sum at ti:0).
+        layers_allocation.target_bitrate[si].push_back(
+            allocation.GetSpatialLayerSum(si));
+      } else {
+        // Assume the encoder obeys the allocation.
+        uint32_t layer_bitrate = 0;
+        for (int ti = 0; ti < kMaxTemporalStreams; ++ti) {
+          if (allocation.HasBitrate(si, ti)) {
+            layer_bitrate += allocation.GetBitrate(si, ti);
+          }
+          if (layer_bitrate > 0) {
+            layers_allocation.target_bitrate[si].push_back(layer_bitrate);
+          }
+        }
+      }
+    }
+  } else {
+    // todo Populate resolution using SpatialLayer struct?  Or can all other
+    // codecs be populated this way?
+  }
+
+  // TODO SVC
+  // TODO kSVC
+  return layers_allocation;
 }
 
 }  //  namespace
@@ -856,7 +910,7 @@ void VideoStreamEncoder::ReconfigureEncoder() {
     last_encoder_rate_settings_.reset();
     rate_settings.rate_control.framerate_fps = GetInputFramerateFps();
 
-    SetEncoderRates(UpdateBitrateAllocationAndNotifyObserver(rate_settings));
+    SetEncoderRates(UpdateBitrateAllocation(rate_settings));
   }
 
   encoder_stats_observer_->OnEncoderReconfigured(encoder_config_, streams);
@@ -1035,7 +1089,7 @@ void VideoStreamEncoder::TraceFrameDropEnd() {
 }
 
 VideoStreamEncoder::EncoderRateSettings
-VideoStreamEncoder::UpdateBitrateAllocationAndNotifyObserver(
+VideoStreamEncoder::UpdateBitrateAllocation(
     const EncoderRateSettings& rate_settings) {
   VideoBitrateAllocation new_allocation;
   // Only call allocators if bitrate > 0 (ie, not suspended), otherwise they
@@ -1046,24 +1100,9 @@ VideoStreamEncoder::UpdateBitrateAllocationAndNotifyObserver(
         rate_settings.rate_control.framerate_fps));
   }
 
-  if (bitrate_observer_ && new_allocation.get_sum_bps() > 0) {
-    if (encoder_ && encoder_initialized_) {
-      // Avoid too old encoder_info_.
-      const int64_t kMaxDiffMs = 100;
-      const bool updated_recently =
-          (last_encode_info_ms_ && ((clock_->TimeInMilliseconds() -
-                                     *last_encode_info_ms_) < kMaxDiffMs));
-      // Update allocation according to info from encoder.
-      bitrate_observer_->OnBitrateAllocationUpdated(
-          UpdateAllocationFromEncoderInfo(
-              new_allocation,
-              updated_recently ? encoder_info_ : encoder_->GetEncoderInfo()));
-    } else {
-      bitrate_observer_->OnBitrateAllocationUpdated(new_allocation);
-    }
-  }
 
   EncoderRateSettings new_rate_settings = rate_settings;
+  new_rate_settings.rate_control.target_bitrate = new_allocation;
   new_rate_settings.rate_control.bitrate = new_allocation;
   // VideoBitrateAllocator subclasses may allocate a bitrate higher than the
   // target in order to sustain the min bitrate of the video codec. In this
@@ -1133,6 +1172,24 @@ void VideoStreamEncoder::SetEncoderRates(
         rate_settings.rate_control.bitrate,
         static_cast<uint32_t>(rate_settings.rate_control.framerate_fps + 0.5));
     stream_resource_manager_.SetEncoderRates(rate_settings.rate_control);
+    if (bitrate_observer_ &&
+        rate_settings.rate_control.target_bitrate.get_sum_bps() > 0) {
+      VideoEncoder::EncoderInfo encoder_info = encoder_->GetEncoderInfo();
+      // Inform the transport about the new targets.
+      // Changing rate/layers may change the codec structure.
+      VideoBitrateAllocation updated_allocation =
+          UpdateAllocationFromEncoderInfo(
+              rate_settings.rate_control.target_bitrate, encoder_info);
+      VideoLayersAllocation layers_allocation = CreateVideoLayersAllocation(
+          send_codec_, rate_settings.rate_control.target_bitrate, encoder_info);
+      // TODO(perkj, webrtc::...): Deprecate RTCP XR Target rate and replace
+      // with VideoLayerAllocationExtension.
+
+      // TODO - now... rate limit how often OnLayersAllocationUpdated is called?
+      // How often is it called...?
+      bitrate_observer_->OnLayersAllocationUpdated(layers_allocation);
+      bitrate_observer_->OnBitrateAllocationUpdated(updated_allocation);
+    }
   }
 }
 
@@ -1184,8 +1241,7 @@ void VideoStreamEncoder::MaybeEncodeVideoFrame(const VideoFrame& video_frame,
       EncoderRateSettings new_rate_settings = *last_encoder_rate_settings_;
       new_rate_settings.rate_control.framerate_fps =
           static_cast<double>(framerate_fps);
-      SetEncoderRates(
-          UpdateBitrateAllocationAndNotifyObserver(new_rate_settings));
+      SetEncoderRates(UpdateBitrateAllocation(new_rate_settings));
     }
     last_parameters_update_ms_.emplace(now_ms);
   }
@@ -1726,7 +1782,7 @@ void VideoStreamEncoder::OnBitrateUpdated(DataRate target_bitrate,
   EncoderRateSettings new_rate_settings{
       VideoBitrateAllocation(), static_cast<double>(framerate_fps),
       link_allocation, target_bitrate, stable_target_bitrate};
-  SetEncoderRates(UpdateBitrateAllocationAndNotifyObserver(new_rate_settings));
+  SetEncoderRates(UpdateBitrateAllocation(new_rate_settings));
 
   if (target_bitrate.bps() != 0)
     encoder_target_bitrate_bps_ = target_bitrate.bps();

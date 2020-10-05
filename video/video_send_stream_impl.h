@@ -110,7 +110,6 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   absl::optional<float> configured_pacing_factor_;
 
  private:
-  // Implements BitrateAllocatorObserver.
   uint32_t OnBitrateUpdated(BitrateAllocationUpdate update) override;
 
   void OnEncoderConfigurationChanged(
@@ -130,6 +129,7 @@ class VideoSendStreamImpl : public webrtc::BitrateAllocatorObserver,
   void OnDroppedFrame(EncodedImageCallback::DropReason reason) override;
 
   // Implements VideoBitrateAllocationObserver.
+  void OnLayersAllocationUpdated(const VideoLayersAllocation& layers) override;
   void OnBitrateAllocationUpdated(
       const VideoBitrateAllocation& allocation) override;
 

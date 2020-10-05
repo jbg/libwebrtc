@@ -34,6 +34,7 @@
 #include "modules/rtp_rtcp/source/rtp_generic_frame_descriptor_extension.h"
 #include "modules/rtp_rtcp/source/rtp_header_extensions.h"
 #include "modules/rtp_rtcp/source/rtp_packet_to_send.h"
+#include "modules/rtp_rtcp/source/rtp_video_layers_allocation_extension.h"
 #include "modules/rtp_rtcp/source/time_util.h"
 #include "rtc_base/checks.h"
 #include "rtc_base/experiments/field_trial_parser.h"
@@ -140,6 +141,8 @@ RTPSenderVideo::RTPSenderVideo(const Config& config)
               : (kRetransmitBaseLayer | kConditionallyRetransmitHigherLayers)),
       last_rotation_(kVideoRotation_0),
       transmit_color_space_next_frame_(false),
+      last_set_layers_allocation_(Timestamp::MinusInfinity()),
+      last_sent_layers_allocation_(Timestamp::MinusInfinity()),
       current_playout_delay_{-1, -1},
       playout_delay_pending_(false),
       forced_playout_delay_(LoadVideoPlayoutDelayOverride(config.field_trials)),
@@ -275,12 +278,19 @@ void RTPSenderVideo::SetVideoStructureUnderLock(
   video_structure_->structure_id = structure_id;
 }
 
+void RTPSenderVideo::SetVideoLayersAllocation(
+    const VideoLayersAllocation& allocation) {
+  RTC_DCHECK_RUNS_SERIALIZED(&send_checker_);
+  layers_allocation_ = allocation;
+  last_set_layers_allocation_ = clock_->CurrentTime();
+}
+
 void RTPSenderVideo::AddRtpHeaderExtensions(
     const RTPVideoHeader& video_header,
     const absl::optional<AbsoluteCaptureTime>& absolute_capture_time,
     bool first_packet,
     bool last_packet,
-    RtpPacketToSend* packet) const {
+    RtpPacketToSend* packet) {
   // Send color space when changed or if the frame is a key frame. Keep
   // sending color space information until the first base layer frame to
   // guarantee that the information is retrieved by the receiver.
@@ -404,6 +414,20 @@ void RTPSenderVideo::AddRtpHeaderExtensions(
       packet->SetExtension<RtpGenericFrameDescriptorExtension00>(
           generic_descriptor);
     }
+  }
+
+  if (layers_allocation_ && first_packet &&
+      (video_header.frame_type == VideoFrameType::kVideoFrameKey ||
+       last_sent_layers_allocation_ < last_set_layers_allocation_
+       // &&  packet belongs to base layer???? Can that be checked?
+       // Should we also resend the last alloction if enough time have passed?
+       )) {
+    VideoLayersAllocation allocation = layers_allocation_.value();
+    if (video_header.frame_type == VideoFrameType::kVideoFrameKey) {
+      allocation.resolution_and_frame_rate.clear();
+    }
+    packet->SetExtension<RtpVideoLayersAllocationExtension>(allocation);
+    last_sent_layers_allocation_ = last_set_layers_allocation_;
   }
 }
 

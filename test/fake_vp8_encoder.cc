@@ -110,6 +110,14 @@ CodecSpecificInfo FakeVp8Encoder::EncodeHook(EncodedImage& encoded_image) {
 VideoEncoder::EncoderInfo FakeVp8Encoder::GetEncoderInfo() const {
   EncoderInfo info;
   info.implementation_name = "FakeVp8Encoder";
+  MutexLock lock(&mutex_);
+  for (int sid = 0; sid < config_.numberOfSimulcastStreams; ++sid) {
+    int number_of_temporal_layers =
+        config_.simulcastStream[sid].numberOfTemporalLayers;
+    info.fps_allocation[sid] =
+        absl::InlinedVector<uint8_t, kMaxTemporalStreams>(
+            number_of_temporal_layers, 255 / number_of_temporal_layers);
+  }
   return info;
 }
 

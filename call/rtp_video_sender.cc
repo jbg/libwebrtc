@@ -579,6 +579,17 @@ EncodedImageCallback::Result RtpVideoSender::OnEncodedImage(
   return Result(Result::OK, rtp_timestamp);
 }
 
+void RtpVideoSender::OnVideoLayersAllocationUpdated(
+    VideoLayersAllocation layers) {
+  MutexLock lock(&mutex_);
+  if (IsActiveLocked()) {
+    for (size_t i = 0; i < rtp_streams_.size(); ++i) {
+      layers.simulcast_id = i;
+      rtp_streams_[i].sender_video->SetVideoLayersAllocation(layers);
+    }
+  }
+}
+
 void RtpVideoSender::OnBitrateAllocationUpdated(
     const VideoBitrateAllocation& bitrate) {
   MutexLock lock(&mutex_);

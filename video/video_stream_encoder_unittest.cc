@@ -584,6 +584,10 @@ class MockableSendStatisticsProxy : public SendStatisticsProxy {
 class MockBitrateObserver : public VideoBitrateAllocationObserver {
  public:
   MOCK_METHOD(void,
+              OnLayersAllocationUpdated,
+              (const VideoLayersAllocation&),
+              (override));
+  MOCK_METHOD(void,
               OnBitrateAllocationUpdated,
               (const VideoBitrateAllocation&),
               (override));

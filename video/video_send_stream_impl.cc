@@ -423,6 +423,22 @@ void VideoSendStreamImpl::SignalEncoderTimedOut() {
   }
 }
 
+void VideoSendStreamImpl::OnLayersAllocationUpdated(
+    const VideoLayersAllocation& layers) {
+  if (!worker_queue_->IsCurrent()) {
+    auto ptr = weak_ptr_;
+    worker_queue_->PostTask([=] {
+      if (!ptr.get())
+        return;
+      ptr->OnLayersAllocationUpdated(layers);
+    });
+    return;
+  }
+
+  RTC_DCHECK_RUN_ON(worker_queue_);
+  rtp_video_sender_->OnVideoLayersAllocationUpdated(layers);
+}
+
 void VideoSendStreamImpl::OnBitrateAllocationUpdated(
     const VideoBitrateAllocation& allocation) {
   if (!worker_queue_->IsCurrent()) {
@@ -442,8 +458,8 @@ void VideoSendStreamImpl::OnBitrateAllocationUpdated(
     if (video_bitrate_allocation_context_) {
       // If new allocation is within kMaxVbaSizeDifferencePercent larger than
       // the previously sent allocation and the same streams are still enabled,
-      // it is considered "similar". We do not want send similar allocations
-      // more once per kMaxVbaThrottleTimeMs.
+      // it is considered "similar". We do not want to send similar allocations
+      // more than once per kMaxVbaThrottleTimeMs.
       const VideoBitrateAllocation& last =
           video_bitrate_allocation_context_->last_sent_allocation;
       const bool is_similar =

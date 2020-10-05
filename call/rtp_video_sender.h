@@ -136,6 +136,8 @@ class RtpVideoSender : public RtpVideoSenderInterface,
       const CodecSpecificInfo* codec_specific_info)
       RTC_LOCKS_EXCLUDED(mutex_) override;
 
+  void OnVideoLayersAllocationUpdated(VideoLayersAllocation layers)
+      RTC_LOCKS_EXCLUDED(mutex_) override;
   void OnBitrateAllocationUpdated(const VideoBitrateAllocation& bitrate)
       RTC_LOCKS_EXCLUDED(mutex_) override;
 

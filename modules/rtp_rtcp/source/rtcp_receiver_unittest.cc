@@ -128,6 +128,10 @@ class MockVideoBitrateAllocationObserver
     : public VideoBitrateAllocationObserver {
  public:
   MOCK_METHOD(void,
+              OnLayersAllocationUpdated,
+              (const VideoLayersAllocation& layers),
+              (override));
+  MOCK_METHOD(void,
               OnBitrateAllocationUpdated,
               (const VideoBitrateAllocation& allocation),
               (override));

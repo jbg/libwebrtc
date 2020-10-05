@@ -13,6 +13,7 @@
 
 #include "api/units/data_rate.h"
 #include "api/video/video_bitrate_allocation.h"
+#include "api/video/video_layers_allocation.h"
 
 namespace webrtc {
 
@@ -51,6 +52,8 @@ class VideoBitrateAllocationObserver {
   VideoBitrateAllocationObserver() {}
   virtual ~VideoBitrateAllocationObserver() {}
 
+  virtual void OnLayersAllocationUpdated(
+      const VideoLayersAllocation& layers) = 0;
   virtual void OnBitrateAllocationUpdated(
       const VideoBitrateAllocation& allocation) = 0;
 };
