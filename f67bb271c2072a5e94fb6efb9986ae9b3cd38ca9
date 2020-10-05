@@ -22,6 +22,30 @@
       "revId": "f67bb271c2072a5e94fb6efb9986ae9b3cd38ca9",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb65ba15_e1a203de",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 3298,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-05T20:53:49Z",
+      "side": 0,
+      "message": "I wondered about that too, given that these functions take an excessive number of member references from peerconnection. I may move them back. But they are never called from anywhere but SdpOfferAnswerHandler, indicating that they don\u0027t really belong in peerconnection\u0027s public surface either.\n\nI\u0027ll leave them in SdpOfferAnswerHandler for now. I suspect that we\u0027ll want to factor out the handling of channels (creation, deletion, modification) into a separate handler class that both PeerConnection and SdpOfferAnswerHandler can depend on.",
+      "parentUuid": "d80d3e5d_13e752f5",
+      "range": {
+        "startLine": 3298,
+        "startChar": 39,
+        "endLine": 3298,
+        "endChar": 57
+      },
+      "revId": "f67bb271c2072a5e94fb6efb9986ae9b3cd38ca9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
     }
   ]
 }
