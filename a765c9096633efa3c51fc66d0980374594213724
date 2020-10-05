@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "59e16368_2670a543",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-05T09:58:12Z",
+      "side": 1,
+      "message": "Ok, so chromium wraps it\u0027s own frame representation in a kNative VideoFrameBuffer, regardless of actual representation. Is this the relevant class:\n https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/renderer/platform/webrtc/webrtc_video_frame_adapter.cc;drc\u003da66879efd8bd5cdcd54d5de99245bce9b881df10;l\u003d159\n\n?\n\nThe right way would be for chromium to let WebRtcVideoFrameAdapter::type() return kNV12, if that\u0027s the underlying representation, and implement a cheap GetNV12() method. How difficult is that?\n\nI\u0027m a bit confused about the GPU case you mention, though. In that case, copying seems unavoidable, when processed with a software encoder?\n\nAlternatively (but a bit more complex), mark all relevant chrome encoders as \"supports_native_handle\", pass on the kNative frame as is in videoStreamEncoder, and leave to the chromium encoder to unwrap the WebRtcVideoFrameAdapter to get back its own MediaFrame and do the right thing with it. In general, I\u0027d the expect that any application that passes frames with kNative into webrtc\u0027s pipeline will also inject codecs that understand the application\u0027s kNative format.",
+      "parentUuid": "e58c4dbe_4bbdd638",
+      "revId": "a765c9096633efa3c51fc66d0980374594213724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "117e975a_105e9801",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 4
