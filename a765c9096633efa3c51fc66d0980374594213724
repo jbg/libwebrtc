@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "96a40ecb_7a3767d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-05T10:10:48Z",
+      "side": 1,
+      "message": "Yes, this is the relevant class.\nHowever, it has to return kNative, otherwise the HW encoder in chromium won\u0027t be able to figure out if the passed frame is actually WebrtcVideoFrameAdapter, which holds a media::VideoFrame. They already all \"supports_native_handle\".",
+      "parentUuid": "59e16368_2670a543",
+      "revId": "a765c9096633efa3c51fc66d0980374594213724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "117e975a_105e9801",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 4
