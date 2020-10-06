@@ -87,6 +87,24 @@
       "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "481b712e_8b05287c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T11:08:45Z",
+      "side": 1,
+      "message": "I\u0027m not really familiar with current android code (that\u0027s why I added Sami as reviewer), but I\u0027m fairly sure we\u0027ve had code implementing scaling of texture frames by just tweaking a transformation matrix.\n\nAs for having encoders handle scaling/conversion, they can already handle conversion (via ToI420, and we\u0027re discussing generalizing it for other pixel formats supported directly by the encoder). If required, I wouldn\u0027t oppose forcing them to also handle crop and scale, provided we make sure utilities are in place to make it easy without lots of code duplication. But keeping it out of encoders is better, if we can do it without a performance penalty.\n\nThe current code path broken by this cl seems somewhat inefficient. If I understand it correctly, it will convert texture frames to I420, possibly crop to discard som of the I420 pixels, and then scale in main memory using libyuv. The scaled frames are then passed to the VP8 software encoder. Is thet right? It would be more efficient to \"crop and scale\" the texture frame by tweaking the transformation matrix, and have actual scaling done on the GPU as part of ToI420.",
+      "parentUuid": "588ecf0f_eaf08b3b",
+      "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
