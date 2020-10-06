@@ -108,6 +108,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4ac8c41_f2acef13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-06T15:19:33Z",
+      "side": 1,
+      "message": "If we don\u0027t add any default implementations, then all native classes (webrtcVideoFrameAdapter, AndroidVideoFrame, ios, webrtc_internal classes,...) would have to implement CropAndScale or there would be crash with a pure virtual call. So, it would be a useless interface, which we can\u0027t use until all 1st party projects implement it. That\u0027s unrealistic to wait for that. But even if we waited for that...\n\nEven trivial implementation would need video_frame_XXX or complete copy of it to store the result somewhere, so we will have i420 in the end anyway.\n\nSeparating i010 and nv12 is possible, but i don\u0027t like to have some frames in one target and some in others. Then everything was modular it had at least some sense. They are not that big to warrant this separation.",
+      "parentUuid": "85731720_5754e792",
+      "revId": "100f429813af16366225c789f1d88c096801c18e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cd154dc_0d8c774a",
