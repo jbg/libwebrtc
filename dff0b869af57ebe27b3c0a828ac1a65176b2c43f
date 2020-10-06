@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b687971_58551967",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-10-06T04:56:16Z",
+      "side": 1,
+      "message": "Nice! Thanks for the CL!\nlgtm",
+      "revId": "dff0b869af57ebe27b3c0a828ac1a65176b2c43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f2b503a_6518f3ec",
+        "filename": "audio/voip/voip_core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-10-06T04:56:16Z",
+      "side": 1,
+      "message": "This comment does not seem intirely correct. At the least, it should probably be rephrased.\nIt describes what happens when process_thread is set to nullptr, but not what happens when it is set to something different.",
+      "range": {
+        "startLine": 57,
+        "startChar": 5,
+        "endLine": 57,
+        "endChar": 50
+      },
+      "revId": "dff0b869af57ebe27b3c0a828ac1a65176b2c43f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
