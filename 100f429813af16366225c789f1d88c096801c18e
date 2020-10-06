@@ -90,6 +90,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85731720_5754e792",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T14:22:21Z",
+      "side": 1,
+      "message": "\u003e The main issue is that I420BufferInterface must have the implementation, or we might get pure virtual calls occasionally.\n\nWhen would that happen? I420BufferInterface is also an abstract class, right?\n\n\u003e VideoFrameBuffer must return I420BufferInterface, so we can\u0027t separate these two in different targets either.\n\nI would be a bit happier with tying VideoFrameBuffer in the same target as I420Buffer, if that\u0027s really hard to avoid, than also including the concrete classes for *all* other pixelformats in the same target.",
+      "parentUuid": "41e172d6_b2a26466",
+      "revId": "100f429813af16366225c789f1d88c096801c18e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cd154dc_0d8c774a",
