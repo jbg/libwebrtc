@@ -33,6 +33,24 @@
       "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d144382_11536735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T09:32:15Z",
+      "side": 1,
+      "message": "I wouldn\u0027t want scaling logic in encoders, but I was hoping that your cl (linke din previous comment) to add VideoFramebuffer::CropAndScale would let us keep the logic in VideoStreamEncoder, but make it work fine also with kNative.",
+      "parentUuid": "36db0950_ee286f9d",
+      "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
