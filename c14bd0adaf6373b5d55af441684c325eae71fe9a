@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "62f6e1ee_317dc4dd",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,27 @@
       "side": 1,
       "message": "follow-up on the discussion in the bug. This changes the definition of the metric",
       "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6eeb32_7ee82134",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-06T13:56:20Z",
+      "side": 1,
+      "message": "Afraid of metric jumps...\n",
+      "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "74669531_39de36f2",
         "filename": "pc/sdp_offer_answer.cc",
@@ -31,10 +49,10 @@
       "side": 1,
       "message": "I\u0027m leaving this one to Harald, I think he has an opinion about this. If offer-only ones are interesting on its own the alternative would be to add an additional histogram (count both cases)",
       "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8039e19f_8d66cc94",
         "filename": "pc/sdp_offer_answer.cc",
@@ -49,8 +67,25 @@
       "message": "this is only called from SRD which avoids the common snooping usage.",
       "parentUuid": "74669531_39de36f2",
       "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "379b9551_96a8ff1a",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-06T13:56:20Z",
+      "side": 1,
+      "message": "This would cause a sudden break in metrics, because the number of measurements is being doubled (or whatever the relative number of incoming vs outgoing offer/answers is).\n\nI\u0027d prefer to pass desc-\u003eGetType() to ReportSdpFormatReceived in this case, and log the answers to an additional histogram (WebRTC.PeerConnection.SdpAnswerFormatReceived).\n\n(I think you have to add the histogram to a file up in Chrome-land too in order to record it)",
+      "parentUuid": "8039e19f_8d66cc94",
+      "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
