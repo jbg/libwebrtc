@@ -214,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "58263987_3697c3e0",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-06T08:49:06Z",
+      "side": 1,
+      "message": "\u003e Maybe the long term play here is to separate kNative from type.\n\nIt\u0027s impossible, since the native frame may use any weird pixel format. So, some place-holder value for non-webrtc-defined pixel format is needed. Also that change would break existing implementations.",
+      "parentUuid": "e3769d90_c243e4ef",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b802f955_5610cdab",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 7
