@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96942ee0_c6378dbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T09:03:45Z",
+      "side": 1,
+      "message": "PTAL. The android failure is a DCHECK\n\n10-06 08:04:18.157  5572  5672 E rtc     : #\n10-06 08:04:18.157  5572  5672 E rtc     : # Fatal error in: ../../modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc, line 958\n10-06 08:04:18.157  5572  5672 E rtc     : # last system error: 11\n10-06 08:04:18.157  5572  5672 E rtc     : # Check failed: frame.width() \u003d\u003d codec_.width (320 vs. 160)\n10-06 08:04:18.157  5572  5672 E rtc     : # \n\nI think the reason is that when the ToI420 call is postponed, and no longer done in VideoStreamEncoder the crop-and-scale logic in VideoStreamEncoder stops working, see https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/video/video_stream_encoder.cc;drc\u003d895556e19c081ba9a5f0e015f0fe95745d677b55;l\u003d1343.\n\nThis may work better after https://webrtc-review.googlesource.com/c/src/+/186303 is landed and properly integrated with android jni code.",
+      "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
