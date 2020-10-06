@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "b7dbc48f_f5c9711b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-06T07:52:42Z",
+      "side": 1,
+      "message": "1) I think removing the native handle makes a lot of sense. All software encoders end up converting a frame type they can\u0027t encode using \"ToI420\" eventually anyways. However, there could be a case for supports_native_handle that I don\u0027t know. \n\n2) The Chrome encoders only handle media::VideoFrames, so if a non-kNative frame reaches there it performs a copy from webrtc::VideFrameBuffer into media::VideoFrame, which we want to avoid.",
+      "parentUuid": "4417c18a_f356725b",
+      "revId": "a765c9096633efa3c51fc66d0980374594213724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "117e975a_105e9801",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 4

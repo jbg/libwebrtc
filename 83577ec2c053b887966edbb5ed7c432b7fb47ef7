@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "1a85514d_25315316",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-06T07:52:42Z",
+      "side": 1,
+      "message": "I would be fine for doing that for libvpx, and perhaps deprecating and removing supports_native_handle as I suggested above. However, we still want a way to avoid conversions where possible, so having an option to get the frame without conversion would be best.",
+      "parentUuid": "622132f9_4361b0e7",
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d41a88ef_03dca308",
         "filename": "api/video/video_frame_buffer.h",
         "patchSetId": 7
@@ -88,6 +106,30 @@
       "side": 1,
       "message": "If we need to generalize ToI420(), I would suggest something like\n\n// Returns a memory-backed frame buffer, in one of the listed formats, or null if none \n// supported. All sub classes are expected to support kI420.\nvirtual rtc::scoped_refptr\u003cVideoFrameBuffer\u003e ToMemoryFrameBuffer(rtc::ArrayView\u003cType\u003e types);\n\nIt could be extended further to pass a list of types and priorities etc, but I think that\u0027s overkill for now.",
       "parentUuid": "d41a88ef_03dca308",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f2d5e01_fc684b91",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-06T07:52:42Z",
+      "side": 1,
+      "message": "Perhaps a separate option for getting the native frame pixel format would work better, which would result in only one conversion of the native frame. This would somewhat the storage type from the pixel format. Something like,\n\nType GetNativePixelFormat();\nrtc::scoped_refptr\u003cVideoFrameBuffer\u003e ToMainMemoryFrameBuffer(); // returns frame in pixel format\n\nand then when an encoder receives a kNative frame, it can use the GetNativePixelFormat method to determine if it should copy it to main memory or just convert it to I420. \n\nWhat do you think?",
+      "parentUuid": "cb41c09b_6b6c9a4b",
       "range": {
         "startLine": 86,
         "startChar": 2,
