@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "5229e9de_35fd8827",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-06T08:36:07Z",
+      "side": 1,
+      "message": "Evan, you are slightly incorrect here. If chrome receives I420 frame, it will wrap it in media::VideoFrame. So no copy is done there at this point. However, if the encoder requires the data in the GPU memory, it will be copied there.\n\nNiels, supports_native_handle is also used in SimulcastEncoderAdapter and VideoStreamEncoder for scaling logic. So you can\u0027t just make SW encoders report that they support kNative. They should also perform scaling if the input resolution is different from the configured resolution. But there\u0027s an issue here, since update_rect logic will have to be duplicated in all 3 encoders.\n\nWe put this support_native_handle because common logic for all encoders is gathered in VideoStreamEncoder.",
+      "parentUuid": "902b22dc_96984c34",
+      "revId": "a765c9096633efa3c51fc66d0980374594213724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "117e975a_105e9801",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 4
