@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a50dc27_ec8261d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T11:38:43Z",
+      "side": 1,
+      "message": "Code looks basically good. I don\u0027t understand the BUILD target changes, though. \n\nAnd I\u0027d really like to hear Sami\u0027s opinion on how to implement the new method for texture frames on android. (An iOS point of view would be good too, I don\u0027t know at all how we deal with native frames there).",
+      "revId": "100f429813af16366225c789f1d88c096801c18e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2cd154dc_0d8c774a",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T11:38:43Z",
+      "side": 1,
+      "message": "Why these BUILD.gn changes? Not explained in the commit message.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 53
+      },
+      "revId": "100f429813af16366225c789f1d88c096801c18e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3033e478_878c4261",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T11:38:43Z",
+      "side": 1,
+      "message": "\"implem_e_ntation\"",
+      "range": {
+        "startLine": 79,
+        "startChar": 47,
+        "endLine": 79,
+        "endChar": 61
+      },
+      "revId": "100f429813af16366225c789f1d88c096801c18e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    }
+  ]
+}
