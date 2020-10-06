@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "7a50dc27_ec8261d8",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Code looks basically good. I don\u0027t understand the BUILD target changes, though. \n\nAnd I\u0027d really like to hear Sami\u0027s opinion on how to implement the new method for texture frames on android. (An iOS point of view would be good too, I don\u0027t know at all how we deal with native frames there).",
       "revId": "100f429813af16366225c789f1d88c096801c18e",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "79b0df37_21f82010",
         "filename": "/PATCHSET_LEVEL",
@@ -32,10 +33,10 @@
       "message": "Now there\u0027s a default implementation of CropAndScale for some buffers (I420, NV12, I010, and default via ToI420). But these operations require some place to store the result. It\u0027s done with I420Buffer, which is in video_frame_i420 target. \n\nSo videoFrameBuffer interface now requires some default implementation of I420 buffer to work. Hence I needed to merge the targets together.",
       "parentUuid": "7a50dc27_ec8261d8",
       "revId": "100f429813af16366225c789f1d88c096801c18e",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4ffcd45f_45e8b241",
         "filename": "/PATCHSET_LEVEL",
@@ -50,10 +51,10 @@
       "message": "Also regarding android. The change is mostly with Chromium in mind, but should work for any client. After this CL I will switch webrtc to perform scaling via this new interface. Then android team would need to override this method for kNative frames.",
       "parentUuid": "79b0df37_21f82010",
       "revId": "100f429813af16366225c789f1d88c096801c18e",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "04ce956a_aa71ff81",
         "filename": "/PATCHSET_LEVEL",
@@ -68,10 +69,28 @@
       "message": "We should strive to avoid any non-trivial implementation or dependencies on interface classes. Can we make it a pure abstract method on the interface (with just a temporary default implementation returning null, until the concrete classes are updated)?\n\nI would expect that the resulting code duplication is pretty small, let me know if that\u0027s wrong.\n\n\u003e Also regarding android. The change is mostly with Chromium in mind, but should work for any client. After this CL I will switch webrtc to perform scaling via this new interface. Then android team would need to override this method for kNative frames.\n\nThis sounds all good to me, it\u0027s just that I\u0027d really like to see confirmation from someone familiar with the current android code.",
       "parentUuid": "4ffcd45f_45e8b241",
       "revId": "100f429813af16366225c789f1d88c096801c18e",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e172d6_b2a26466",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-06T14:00:57Z",
+      "side": 1,
+      "message": "I also would like to have a pure interface, but I couldn\u0027t find the way to do it.\n\nThe main issue is that I420BufferInterface must have the implementation, or we might get pure virtual calls occasionally. VideoFrameBuffer must return I420BufferInterface, so we can\u0027t separate these two in different targets either.",
+      "parentUuid": "04ce956a_aa71ff81",
+      "revId": "100f429813af16366225c789f1d88c096801c18e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "2cd154dc_0d8c774a",
         "filename": "api/video/BUILD.gn",
@@ -91,10 +110,10 @@
         "endChar": 53
       },
       "revId": "100f429813af16366225c789f1d88c096801c18e",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4d24eb10_01a4124f",
         "filename": "api/video/BUILD.gn",
@@ -115,10 +134,10 @@
         "endChar": 53
       },
       "revId": "100f429813af16366225c789f1d88c096801c18e",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "3033e478_878c4261",
         "filename": "api/video/video_frame_buffer.h",
@@ -138,10 +157,10 @@
         "endChar": 61
       },
       "revId": "100f429813af16366225c789f1d88c096801c18e",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "093b4526_f202a1dd",
         "filename": "api/video/video_frame_buffer.h",
@@ -162,8 +181,7 @@
         "endChar": 61
       },
       "revId": "100f429813af16366225c789f1d88c096801c18e",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
