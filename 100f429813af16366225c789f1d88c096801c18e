@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "04ce956a_aa71ff81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T13:25:12Z",
+      "side": 1,
+      "message": "We should strive to avoid any non-trivial implementation or dependencies on interface classes. Can we make it a pure abstract method on the interface (with just a temporary default implementation returning null, until the concrete classes are updated)?\n\nI would expect that the resulting code duplication is pretty small, let me know if that\u0027s wrong.\n\n\u003e Also regarding android. The change is mostly with Chromium in mind, but should work for any client. After this CL I will switch webrtc to perform scaling via this new interface. Then android team would need to override this method for kNative frames.\n\nThis sounds all good to me, it\u0027s just that I\u0027d really like to see confirmation from someone familiar with the current android code.",
+      "parentUuid": "4ffcd45f_45e8b241",
+      "revId": "100f429813af16366225c789f1d88c096801c18e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2cd154dc_0d8c774a",
         "filename": "api/video/BUILD.gn",
         "patchSetId": 4
