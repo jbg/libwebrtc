@@ -598,7 +598,7 @@ void LibaomAv1Encoder::SetRates(const RateControlParameters& parameters) {
 
 VideoEncoder::EncoderInfo LibaomAv1Encoder::GetEncoderInfo() const {
   EncoderInfo info;
-  info.supports_native_handle = false;
+  info.supports_native_handle = true;
   info.implementation_name = "libaom";
   info.has_trusted_rate_controller = true;
   info.is_hardware_accelerated = false;

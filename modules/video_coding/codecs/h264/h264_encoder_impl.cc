@@ -608,7 +608,7 @@ void H264EncoderImpl::ReportError() {
 
 VideoEncoder::EncoderInfo H264EncoderImpl::GetEncoderInfo() const {
   EncoderInfo info;
-  info.supports_native_handle = false;
+  info.supports_native_handle = true;
   info.implementation_name = "OpenH264";
   info.scaling_settings =
       VideoEncoder::ScalingSettings(kLowH264QpThreshold, kHighH264QpThreshold);
