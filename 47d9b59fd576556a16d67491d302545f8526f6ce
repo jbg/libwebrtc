@@ -16,6 +16,23 @@
       "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36db0950_ee286f9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-06T09:08:31Z",
+      "side": 1,
+      "message": "This would break scaling logic.\n\nE.g. here:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/video/video_stream_encoder.cc;l\u003d1343;drc\u003d895556e19c081ba9a5f0e015f0fe95745d677b55\n\nThe frame is already converted to I420, because SW encoders don\u0027t support native.\n\nThe same happens in SimulcastEncoderAdater:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/media/engine/simulcast_encoder_adapter.cc;l\u003d425;drc\u003dc5a74ffba49e90a9382c9eb6a795fe7d6abd74a1\n\nTo make this work you need to also copy all scaling logic in to each individual encoder.",
+      "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
