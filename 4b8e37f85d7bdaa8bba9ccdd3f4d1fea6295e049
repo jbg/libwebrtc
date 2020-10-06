@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28ea0236_4dafc18c",
+        "filename": "modules/video_coding/codecs/vp8/libvpx_vp8_encoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-06T09:17:32Z",
+      "side": 1,
+      "message": "nit: add empty lines between.",
+      "revId": "4b8e37f85d7bdaa8bba9ccdd3f4d1fea6295e049",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    }
+  ]
+}
