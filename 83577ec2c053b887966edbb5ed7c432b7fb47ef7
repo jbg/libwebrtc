@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "e3769d90_c243e4ef",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-06T08:45:31Z",
+      "side": 1,
+      "message": "Maybe the long term play here is to separate kNative from type. That is, separate the pixel format from the way the frame is stored and able to be accessed, like how it is in media::VideoFrame. How one reads the data depends on the storage type, and the data layout depends on the pixel format. Additionally, conversion methods to arbitrary formats could be supported, and backed by hardware where applicable.\n\nAs to move forward in the short term, a single method to get the native frame data to main memory still seems to me the way forward.",
+      "parentUuid": "b20972c6_4d949b93",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b802f955_5610cdab",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 7
