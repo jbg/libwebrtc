@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4ffcd45f_45e8b241",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-06T13:03:26Z",
+      "side": 1,
+      "message": "Also regarding android. The change is mostly with Chromium in mind, but should work for any client. After this CL I will switch webrtc to perform scaling via this new interface. Then android team would need to override this method for kNative frames.",
+      "parentUuid": "79b0df37_21f82010",
+      "revId": "100f429813af16366225c789f1d88c096801c18e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2cd154dc_0d8c774a",
         "filename": "api/video/BUILD.gn",
         "patchSetId": 4
