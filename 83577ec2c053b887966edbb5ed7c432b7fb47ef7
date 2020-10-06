@@ -142,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "659b5caf_c92b6589",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T08:22:52Z",
+      "side": 1,
+      "message": "\u003e What do you think?\n\nTo me, kNative means an opaque representation. I don\u0027t quite like the concept of \"native pixel format\", since it makes sense only for this quirky usecase of wrapping and unwrapping media::VideoFrame. \n\nWith the method I propose, an encoder supporting more than I420, e.g., NV12 or I010, etc, will just pass its list to ToMainMemoryFrame, and the input VideoFrameBuffer can select an appropriate format depending on efficiency and fidelity. E.g., if input is a gpu texture, it could be converted to I010 if the encoder supports that. Which could make sense if the texture represents more than 8 bits per pixel, or to reduce rounding errors when converting between color spaces. I think that\u0027s a better generalization of ToI420.",
+      "parentUuid": "9f2d5e01_fc684b91",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b802f955_5610cdab",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 7

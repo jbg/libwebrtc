@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "902b22dc_96984c34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-06T08:22:52Z",
+      "side": 1,
+      "message": "\u003e 1) I think removing the native handle makes a lot of sense. All software encoders end up converting a frame type they can\u0027t encode using \"ToI420\" eventually anyways. \n\nI made a cl to try that out,see https://webrtc-review.googlesource.com/c/src/+/186702\n\n\u003e However, there could be a case for supports_native_handle that I don\u0027t know. \n\nAs far as I\u0027m aware, it\u0027s only used for the conversion logic in VideoStreamEncoder.\n\n\u003e 2) The Chrome encoders only handle media::VideoFrames, so if a non-kNative frame reaches there it performs a copy from webrtc::VideFrameBuffer into media::VideoFrame, which we want to avoid.\n\nOuch. Instead of unwrapping (which depends on kNative), could you wrap a VideoFrameBuffer (I420 or NV12 pixel format) in a media::VideoFrame, without copying (STORAGE_UNOWNED_MEMORY)? For safety, one would need the new media::VideoFrame (or the code that created it) hold on to a reference to the VideoFrameBuffer which in turn will hold a reference to the underlying media::VideoFrame. \n\nThis gets a bit silly, but from a webrtc api point of view, it\u0027s nice and clean. To turn it into something less silly, I guess chromium\u0027s encoder apis would need to be refactored to accept something less heavy weight than a media::VideoFrame. I.e., define an interface providing precisely what encoders need, and let media::VideoFrame implement that interface.",
+      "parentUuid": "b7dbc48f_f5c9711b",
+      "revId": "a765c9096633efa3c51fc66d0980374594213724",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "117e975a_105e9801",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 4
