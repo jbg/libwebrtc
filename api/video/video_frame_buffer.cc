@@ -10,9 +10,26 @@
 
 #include "api/video/video_frame_buffer.h"
 
+#include "api/video/i010_buffer.h"
+#include "api/video/i420_buffer.h"
+#include "api/video/nv12_buffer.h"
 #include "rtc_base/checks.h"
 
 namespace webrtc {
+
+rtc::scoped_refptr<VideoFrameBuffer> VideoFrameBuffer::CropAndScale(
+    int offset_x,
+    int offset_y,
+    int crop_width,
+    int crop_height,
+    int scaled_width,
+    int scaled_height) {
+  rtc::scoped_refptr<I420Buffer> result =
+      I420Buffer::Create(scaled_width, scaled_height);
+  result->CropAndScaleFrom(*this->ToI420(), offset_x, offset_y, crop_width,
+                           crop_height);
+  return result;
+}
 
 const I420BufferInterface* VideoFrameBuffer::GetI420() const {
   // Overridden by subclasses that can return an I420 buffer without any
@@ -88,6 +105,19 @@ int I010BufferInterface::ChromaHeight() const {
   return (height() + 1) / 2;
 }
 
+rtc::scoped_refptr<VideoFrameBuffer> I010BufferInterface::CropAndScale(
+    int offset_x,
+    int offset_y,
+    int crop_width,
+    int crop_height,
+    int scaled_width,
+    int scaled_height) {
+  rtc::scoped_refptr<I010Buffer> result =
+      I010Buffer::Create(scaled_width, scaled_height);
+  result->CropAndScaleFrom(*this, offset_x, offset_y, crop_width, crop_height);
+  return result;
+}
+
 VideoFrameBuffer::Type NV12BufferInterface::type() const {
   return Type::kNV12;
 }
@@ -100,4 +130,16 @@ int NV12BufferInterface::ChromaHeight() const {
   return (height() + 1) / 2;
 }
 
+rtc::scoped_refptr<VideoFrameBuffer> NV12BufferInterface::CropAndScale(
+    int offset_x,
+    int offset_y,
+    int crop_width,
+    int crop_height,
+    int scaled_width,
+    int scaled_height) {
+  rtc::scoped_refptr<NV12Buffer> result =
+      NV12Buffer::Create(scaled_width, scaled_height);
+  result->CropAndScaleFrom(*this, offset_x, offset_y, crop_width, crop_height);
+  return result;
+}
 }  // namespace webrtc
