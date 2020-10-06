@@ -51,6 +51,24 @@
       "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "010cf70a_56cf9fa2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-06T09:52:17Z",
+      "side": 1,
+      "message": "Native frames could implement this in theory I think, returning their underlying data type scaled.",
+      "parentUuid": "9d144382_11536735",
+      "revId": "47d9b59fd576556a16d67491d302545f8526f6ce",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
+      "unresolved": false
     }
   ]
 }
