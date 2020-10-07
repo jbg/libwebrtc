@@ -113,6 +113,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e077d676_e48c6996",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-07T14:07:40Z",
+      "side": 1,
+      "message": "\u003e Nisse, if there\u0027s no default implementation we can\u0027t use this method until all 1st party VideoFrameBuffer descendants implemented it. That would be pure a virtual call. That\u0027s a lot of waiting around (chrome/android/ios/internal projects all have their implementations). I could change the interface to return nullptr VideoFrameBuffer in default implementation. But then any use of the new interface would require much more code to call it. Instead, one of the ideas behind this interface is to simplify webrtc code, not complicate it.\n\nI think those 3 steps are standard procedure: 1. Add dummy default implementation returning null. 2. Add real implementation in all known subclasses. 3. Delete default implementation, make in pure virtual on the interface. (And I usually make the cl for (3) right after landing \n(1), run test bots, to see what needs fixing for (2)).\n\nBut if you and Mirko agree the dependency on libyuv is reasonable, I won\u0027t insist. We can go through it later, in case it turns out the dependency causes any real problems, e.g., for audio-only or data-only use of PeerConnection.",
+      "parentUuid": "841c79f4_c4383ff8",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d8f09d0_a9657328",
