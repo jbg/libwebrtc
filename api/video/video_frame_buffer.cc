@@ -40,6 +40,12 @@ const NV12BufferInterface* VideoFrameBuffer::GetNV12() const {
   return static_cast<const NV12BufferInterface*>(this);
 }
 
+rtc::scoped_refptr<VideoFrameBuffer> VideoFrameBuffer::ToMemoryFrameBuffer(
+    rtc::ArrayView<Type> types) {
+  RTC_DCHECK(type() == Type::kNative);
+  return nullptr;
+}
+
 VideoFrameBuffer::Type I420BufferInterface::type() const {
   return Type::kI420;
 }
