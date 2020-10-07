@@ -33,6 +33,23 @@
       "message": "Thanks for fixing!",
       "revId": "bf19910cf93a8dc8020e903cd3faefa2d6fa0a3a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce5acf7_0f402fd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8046
+      },
+      "writtenOn": "2020-10-07T15:16:09Z",
+      "side": 1,
+      "message": "Makes sense. Thank you for fixing issues I introduced.",
+      "revId": "bf19910cf93a8dc8020e903cd3faefa2d6fa0a3a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
