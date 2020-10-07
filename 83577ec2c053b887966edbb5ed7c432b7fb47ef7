@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8d76b83_6e60e370",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-07T09:40:31Z",
+      "side": 1,
+      "message": "Pixel format could be optional. However, all of this would rely on the encoders themselves making decisions about what format is needed. \n\nAlternatively I could resurrect the idea of preferred pixel formats for encoders, which would list what formats they accept. In which case the video stream encoder can figure out the right path here. \n\nA third way would be to have utility functions for this which properly handles scaling, conversion and update rect which can be re-used in all of the encoders.",
+      "parentUuid": "58263987_3697c3e0",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b802f955_5610cdab",
         "filename": "video/video_stream_encoder.cc",
         "patchSetId": 7
