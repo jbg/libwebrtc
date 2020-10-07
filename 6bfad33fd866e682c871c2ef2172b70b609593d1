@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ccc15e_f7b5f6c9",
+        "filename": "modules/desktop_capture/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-07T14:59:49Z",
+      "side": 0,
+      "message": "I am doing this because is_linux on a default build should already be part of rtc_use_pipewire (https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/webrtc.gni;l\u003d111-115;drc\u003da43178c871cbb05f02b1b1d419c7a2520366763b), consider that is_desktop_linux will be replaced by is_linux (https://webrtc-review.googlesource.com/c/src/+/186424).",
+      "range": {
+        "startLine": 150,
+        "startChar": 6,
+        "endLine": 152,
+        "endChar": 31
+      },
+      "revId": "6bfad33fd866e682c871c2ef2172b70b609593d1",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
