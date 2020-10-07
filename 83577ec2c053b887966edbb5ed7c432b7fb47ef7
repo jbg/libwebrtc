@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "1b1f5202_96add85a",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "The webcodec spec for video frame is here:\n\nhttps://wicg.github.io/web-codecs/#videoframe\n",
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "24085f33_7d84cb2f",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "(Intended to send these questions earlier)",
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "622132f9_4361b0e7",
         "filename": "/PATCHSET_LEVEL",
@@ -48,10 +49,10 @@
       "side": 1,
       "message": "Did we have any filed bug about deleting supports_native_handle?\n\nWould the following approach work: Change all encoders included in webrtc to advertise supports_native_handle \u003d true, and call ToI420 as needed?",
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1a85514d_25315316",
         "filename": "/PATCHSET_LEVEL",
@@ -66,10 +67,10 @@
       "message": "I would be fine for doing that for libvpx, and perhaps deprecating and removing supports_native_handle as I suggested above. However, we still want a way to avoid conversions where possible, so having an option to get the frame without conversion would be best.",
       "parentUuid": "622132f9_4361b0e7",
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d41a88ef_03dca308",
         "filename": "api/video/video_frame_buffer.h",
@@ -89,10 +90,10 @@
         "endChar": 13
       },
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "cb41c09b_6b6c9a4b",
         "filename": "api/video/video_frame_buffer.h",
@@ -113,10 +114,10 @@
         "endChar": 13
       },
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "9f2d5e01_fc684b91",
         "filename": "api/video/video_frame_buffer.h",
@@ -137,10 +138,10 @@
         "endChar": 13
       },
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "659b5caf_c92b6589",
         "filename": "api/video/video_frame_buffer.h",
@@ -161,10 +162,10 @@
         "endChar": 13
       },
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "b20972c6_4d949b93",
         "filename": "api/video/video_frame_buffer.h",
@@ -185,10 +186,10 @@
         "endChar": 13
       },
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e3769d90_c243e4ef",
         "filename": "api/video/video_frame_buffer.h",
@@ -209,10 +210,10 @@
         "endChar": 13
       },
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "58263987_3697c3e0",
         "filename": "api/video/video_frame_buffer.h",
@@ -233,10 +234,10 @@
         "endChar": 13
       },
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "b802f955_5610cdab",
         "filename": "video/video_stream_encoder.cc",
@@ -256,8 +257,31 @@
         "endChar": 27
       },
       "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e8b47b_3d13bed8",
+        "filename": "video/video_stream_encoder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-07T09:26:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b802f955_5610cdab",
+      "range": {
+        "startLine": 1340,
+        "startChar": 7,
+        "endLine": 1342,
+        "endChar": 27
+      },
+      "revId": "83577ec2c053b887966edbb5ed7c432b7fb47ef7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
