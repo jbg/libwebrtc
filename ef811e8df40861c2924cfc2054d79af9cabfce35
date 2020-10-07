@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60bf43c0_568cf0ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-07T12:42:00Z",
+      "side": 1,
+      "message": "Hmm, so it looks like the linter is reading the config from another location.\n\nI suggest we skip pre-submit for this.",
+      "revId": "ef811e8df40861c2924cfc2054d79af9cabfce35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
