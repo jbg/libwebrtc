@@ -16,6 +16,144 @@
       "message": "api/ lgtm.\n\nHope the android method can be resurrected and made to work for this purpose reasonably soon.",
       "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c0f6e5_1f74959a",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-10-07T12:45:08Z",
+      "side": 1,
+      "message": "This forces a dependency from PeerConnection interface to Libyuv forcing everyone to depend on it. It might have binary size implications. Mirko, PTAL.",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d8f09d0_a9657328",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-10-07T12:45:08Z",
+      "side": 1,
+      "message": "Should this be a case like I010 above?",
+      "range": {
+        "startLine": 161,
+        "startChar": 40,
+        "endLine": 161,
+        "endChar": 58
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432834db_687ef892",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-10-07T12:45:08Z",
+      "side": 1,
+      "message": "TBH it would make sense to me to check a few more point in this method than the corners.",
+      "range": {
+        "startLine": 187,
+        "startChar": 5,
+        "endLine": 187,
+        "endChar": 14
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41be5f15_8c430990",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-10-07T12:45:08Z",
+      "side": 1,
+      "message": "Would probably make sense to add tests for I420 and I010 as well?",
+      "range": {
+        "startLine": 522,
+        "startChar": 9,
+        "endLine": 522,
+        "endChar": 13
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "774368cb_4b440043",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-10-07T12:45:08Z",
+      "side": 1,
+      "message": "nit: I think literal comments would add clarity here",
+      "range": {
+        "startLine": 528,
+        "startChar": 24,
+        "endLine": 528,
+        "endChar": 26
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e426d2aa_7ddd9fac",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-10-07T12:45:08Z",
+      "side": 1,
+      "message": "nit: Can you add calculations for these values instead for clarity, also would benefit from literal comments I think",
+      "range": {
+        "startLine": 529,
+        "startChar": 38,
+        "endLine": 529,
+        "endChar": 67
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
