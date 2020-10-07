@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e4dc49f_8a7966a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-07T11:48:47Z",
+      "side": 1,
+      "message": "api/ lgtm.\n\nHope the android method can be resurrected and made to work for this purpose reasonably soon.",
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
