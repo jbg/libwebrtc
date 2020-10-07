@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "dc455603_1a58e96b",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Polite ping for this CL.",
       "revId": "368abe47db128019e61038db570f251e2dcfe994",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "547cef22_9c1a17a3",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "Forgot I had to commit it, sorry for the wait.",
       "revId": "368abe47db128019e61038db570f251e2dcfe994",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3210025d_c5e78f2a",
         "filename": "/PATCHSET_LEVEL",
@@ -48,10 +49,27 @@
       "side": 1,
       "message": "It seems like the presubmit check doesn\u0027t like the new Python style. (The unmodified PEP-8 style should be used in the new file.)\n\nhttps://chromium.googlesource.com/chromium/src/+/master/styleguide/python/python.md#our-previous-python-style",
       "revId": "368abe47db128019e61038db570f251e2dcfe994",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "058fe638_7d113a35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5249
+      },
+      "writtenOn": "2020-10-07T11:33:59Z",
+      "side": 1,
+      "message": "Mirko landed the python linting changes in https://webrtc-review.googlesource.com/c/src/+/186664 so this should be landable now pending Mirko\u0027s comments on this CL.",
+      "revId": "368abe47db128019e61038db570f251e2dcfe994",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "fb18fc25_7cf9736e",
         "filename": "tools_webrtc/apple/copy_framework_header.py",
@@ -71,8 +89,7 @@
         "endChar": 3
       },
       "revId": "368abe47db128019e61038db570f251e2dcfe994",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": true
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
