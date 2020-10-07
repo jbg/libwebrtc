@@ -16,6 +16,29 @@
       "message": "Still lgtm.",
       "revId": "621cad69ba60701eeda5a2343efe63b24a85acfc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "272e3e56_48dc7da1",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-10-07T15:00:47Z",
+      "side": 1,
+      "message": "Sorry for late comment but would it make sense to add an optional argument with the preferred output format? This would make it sometimes possible to do the crop + scale + conversion in a single operation making it more efficient, WDYT? Would be easier to add now than when we already have a bunch of implementations :)",
+      "range": {
+        "startLine": 84,
+        "startChar": 47,
+        "endLine": 84,
+        "endChar": 59
+      },
+      "revId": "621cad69ba60701eeda5a2343efe63b24a85acfc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
