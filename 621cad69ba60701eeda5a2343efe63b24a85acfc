@@ -63,6 +63,30 @@
       },
       "revId": "621cad69ba60701eeda5a2343efe63b24a85acfc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74e4f0b2_9785caab",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5112
+      },
+      "writtenOn": "2020-10-07T15:09:57Z",
+      "side": 1,
+      "message": "My idea was for example if frame buffer is NV21, and the codec requires I420, it could in theory be possible do the conversion + crop + scale in a single step.\n\nMaybe this is all theoretical, I don\u0027t know what encoders really need. :)\n\nOtherwise the CL lgtm.",
+      "parentUuid": "9c7aad3d_fbcd2226",
+      "range": {
+        "startLine": 84,
+        "startChar": 47,
+        "endLine": 84,
+        "endChar": 59
+      },
+      "revId": "621cad69ba60701eeda5a2343efe63b24a85acfc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
