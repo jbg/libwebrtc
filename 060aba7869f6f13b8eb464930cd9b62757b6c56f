@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad9a3e6e_1512d809",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-07T13:29:25Z",
+      "side": 1,
+      "message": "Ah, I missed this added dependency, but it\u0027s a hard to avoid consequence of having a working default implementation.\n\nCan we try harder to move implementation to the concrete classes? The CropAndScaleFrom utility methods should make it reasonably easy to implement in the concrete subclasses.\n\nI understand the tradeoff with code duplication, but I really never understood the claimed problem of a pure method occasionally resulting on null pointer calls.",
+      "parentUuid": "16c0f6e5_1f74959a",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d8f09d0_a9657328",
         "filename": "common_video/video_frame_unittest.cc",
         "patchSetId": 8
