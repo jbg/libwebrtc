@@ -69,6 +69,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42507477_fbce221b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2020-10-07T12:03:00Z",
+      "side": 1,
+      "message": "I rebased the CL and ran git cl presubmit again, but it still shows warnings on my pc. Hope to pass the trybots.",
+      "parentUuid": "058fe638_7d113a35",
+      "revId": "368abe47db128019e61038db570f251e2dcfe994",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb18fc25_7cf9736e",
@@ -82,6 +100,30 @@
       "writtenOn": "2020-10-05T08:45:54Z",
       "side": 1,
       "message": "I think this should be removed.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 3
+      },
+      "revId": "368abe47db128019e61038db570f251e2dcfe994",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6eec131_e1423b6e",
+        "filename": "tools_webrtc/apple/copy_framework_header.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 9405
+      },
+      "writtenOn": "2020-10-07T12:03:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb18fc25_7cf9736e",
       "range": {
         "startLine": 13,
         "startChar": 0,
