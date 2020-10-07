@@ -16,6 +16,24 @@
       "message": "Hmm, so it looks like the linter is reading the config from another location.\n\nI suggest we skip pre-submit for this.",
       "revId": "ef811e8df40861c2924cfc2054d79af9cabfce35",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd128f5b_a05103e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10080
+      },
+      "writtenOn": "2020-10-07T12:54:05Z",
+      "side": 1,
+      "message": "OK. What should I do? In my understanding, \u0027git cl upload --bypass-hooks\u0027 doesn\u0027t skip server side trybots.",
+      "parentUuid": "60bf43c0_568cf0ff",
+      "revId": "ef811e8df40861c2924cfc2054d79af9cabfce35",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
