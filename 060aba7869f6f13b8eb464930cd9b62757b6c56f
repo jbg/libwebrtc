@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c680b6f_501fe8e3",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-07T13:17:41Z",
+      "side": 1,
+      "message": "Thanks Sami.\n\nYes, it is ~12 KiB and it is unfortunate but if I understand correctly there is not a lot we can do to avoid this dependency since actual implementations are needed (other than dropping the feature which I don\u0027t know if it is feasible).",
+      "parentUuid": "16c0f6e5_1f74959a",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d8f09d0_a9657328",
         "filename": "common_video/video_frame_unittest.cc",
         "patchSetId": 8
