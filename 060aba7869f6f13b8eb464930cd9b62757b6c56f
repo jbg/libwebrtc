@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "841c79f4_c4383ff8",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-07T13:48:52Z",
+      "side": 1,
+      "message": "Yes, unfortunately it\u0027s unavoidable. 12kb doesn\u0027t seem to be that much.\n\nNisse, if there\u0027s no default implementation we can\u0027t use this method until all 1st party VideoFrameBuffer descendants implemented it. That would be pure a virtual call. That\u0027s a lot of waiting around (chrome/android/ios/internal projects all have their implementations). I could change the interface to return nullptr VideoFrameBuffer in default implementation. But then any use of the new interface would require much more code to call it. Instead, one of the ideas behind this interface is to simplify webrtc code, not complicate it.\n\nLastly, in the end all these implementations would still depend on libyuv: not in all cases specialised texture based scaling solution would be possible, so if these classes use CropAndScaleFrom, as you suggested, they would rely on libyuv still.",
+      "parentUuid": "2c680b6f_501fe8e3",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d8f09d0_a9657328",
         "filename": "common_video/video_frame_unittest.cc",
         "patchSetId": 8
@@ -102,6 +126,30 @@
       "writtenOn": "2020-10-07T12:45:08Z",
       "side": 1,
       "message": "Should this be a case like I010 above?",
+      "range": {
+        "startLine": 161,
+        "startChar": 40,
+        "endLine": 161,
+        "endChar": 58
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bd66b15_73884df4",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-07T13:48:52Z",
+      "side": 1,
+      "message": "Not possible since I010 is exactly like I420, but 16 bit instead of 8 but, while NV12 have different planes format. Implementing a special Copy method just for the test seems too much.",
+      "parentUuid": "9d8f09d0_a9657328",
       "range": {
         "startLine": 161,
         "startChar": 40,
@@ -137,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bc5e5ed_296f7c39",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-07T13:48:52Z",
+      "side": 1,
+      "message": "Since it\u0027s a gradient, if scaling parameters messed somewhere, that would be noticeable on corners. Unless the scale function itself is buggy. Which is tested in libyuv.",
+      "parentUuid": "432834db_687ef892",
+      "range": {
+        "startLine": 187,
+        "startChar": 5,
+        "endLine": 187,
+        "endChar": 14
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41be5f15_8c430990",
         "filename": "common_video/video_frame_unittest.cc",
         "patchSetId": 8
@@ -148,6 +220,30 @@
       "writtenOn": "2020-10-07T12:45:08Z",
       "side": 1,
       "message": "Would probably make sense to add tests for I420 and I010 as well?",
+      "range": {
+        "startLine": 522,
+        "startChar": 9,
+        "endLine": 522,
+        "endChar": 13
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c0898b1_2d95bcdf",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-07T13:48:52Z",
+      "side": 1,
+      "message": "They are already there, called TestPlanarYuvBuffer.CropAndScale16x9",
+      "parentUuid": "41be5f15_8c430990",
       "range": {
         "startLine": 522,
         "startChar": 9,
@@ -181,6 +277,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbf0916_5db05b55",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-07T13:48:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "774368cb_4b440043",
+      "range": {
+        "startLine": 528,
+        "startChar": 24,
+        "endLine": 528,
+        "endChar": 26
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e426d2aa_7ddd9fac",
@@ -194,6 +314,30 @@
       "writtenOn": "2020-10-07T12:45:08Z",
       "side": 1,
       "message": "nit: Can you add calculations for these values instead for clarity, also would benefit from literal comments I think",
+      "range": {
+        "startLine": 529,
+        "startChar": 38,
+        "endLine": 529,
+        "endChar": 67
+      },
+      "revId": "060aba7869f6f13b8eb464930cd9b62757b6c56f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7127786_57561ecd",
+        "filename": "common_video/video_frame_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-07T13:48:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e426d2aa_7ddd9fac",
       "range": {
         "startLine": 529,
         "startChar": 38,
