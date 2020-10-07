@@ -39,6 +39,30 @@
       },
       "revId": "621cad69ba60701eeda5a2343efe63b24a85acfc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c7aad3d_fbcd2226",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-07T15:07:15Z",
+      "side": 1,
+      "message": "The idea is that it stays the best possible format. For kNative it should stay kNative. Then it might be converted to some of webrtc formats if needed with other methods (Evan is adding one currently).",
+      "parentUuid": "272e3e56_48dc7da1",
+      "range": {
+        "startLine": 84,
+        "startChar": 47,
+        "endLine": 84,
+        "endChar": 59
+      },
+      "revId": "621cad69ba60701eeda5a2343efe63b24a85acfc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
