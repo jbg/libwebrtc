@@ -159,6 +159,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "381b7fda_8c0126c0",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-08T08:19:30Z",
+      "side": 1,
+      "message": "\u003e Also, write here that does that only if the conversion is pixel perfect.\n\nThat makes the method a bit less useful; I view it as a generalization of ToI420, and at some point, I would be happy to retire the latter.\n\nIs there some other reasonable way to deal with this? Return a separate bool/enum saying if conversion is pixel perfect? Or add update_rect as an input argument and return value?\n\nIt might be fine to have that restriction for now, but then this method looks like a workaround usable only for chromium\u0027s odd way of using kNative frames, rather than a generally useful api.",
+      "parentUuid": "f7272c0a_4d79ec63",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 52
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41dcbc42_cb1bc5f0",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 6
