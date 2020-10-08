@@ -92,6 +92,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ef8b18_42451e38",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-08T10:44:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "92994d33_86649d42",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "621cad69ba60701eeda5a2343efe63b24a85acfc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "272e3e56_48dc7da1",
