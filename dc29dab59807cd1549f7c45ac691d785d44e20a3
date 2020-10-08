@@ -24,6 +24,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02a12fb5_efef0302",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T08:37:36Z",
+      "side": 1,
+      "message": "Great point. fixed.",
+      "parentUuid": "2b8040a6_4eef0972",
+      "range": {
+        "startLine": 12,
+        "startChar": 19,
+        "endLine": 12,
+        "endChar": 38
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af989174_10ccaabe",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-10-08T07:58:12Z",
       "side": 1,
       "message": "I think this concept is weird. Can you rephrase, and either refer to the chroium usecase, or write something about cases where conversion from kNative to a format other than I420 is more efficient.",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 16,
+        "endChar": 54
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba52941b_57d26ab4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T08:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af989174_10ccaabe",
       "range": {
         "startLine": 16,
         "startChar": 21,
