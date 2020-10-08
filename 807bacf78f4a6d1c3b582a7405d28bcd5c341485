@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b9282e6_1ade5416",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T07:33:56Z",
+      "side": 1,
+      "message": "Ilya, Nisse, here is new attempt for mapping native frames. Please take a look.",
+      "revId": "807bacf78f4a6d1c3b582a7405d28bcd5c341485",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
