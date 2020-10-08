@@ -104,6 +104,24 @@
       "parentUuid": "379b9551_96a8ff1a",
       "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302fc0d5_e4fe1790",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-08T12:37:50Z",
+      "side": 1,
+      "message": "I don\u0027t think order matters. It\u0027s just strings.",
+      "parentUuid": "d72ac36c_6f8a2ac7",
+      "revId": "c14bd0adaf6373b5d55af441684c325eae71fe9a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
