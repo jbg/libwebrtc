@@ -39,6 +39,30 @@
       },
       "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83717a4_0ed6d73e",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T09:59:04Z",
+      "side": 1,
+      "message": "Can also be removed if we replace the InlineVector with an unordered_set. Wdyt?",
+      "parentUuid": "654aee51_5a7be227",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
