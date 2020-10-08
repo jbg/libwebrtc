@@ -35,6 +35,41 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1552f8_e6b22b16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-08T10:40:57Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "68df9b37_1f4bc706",
+      "revId": "d9323abe83eb5de53d51f4299bd94bec3ff47c4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b441ab_270798f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-08T10:40:57Z",
+      "side": 1,
+      "message": "Thanks.\n\nSo to recap, taking the dependency is fine/trivial. The regression was coming from using I010 and nv12  buffers functions in api/video/video_frame_buffer.cc.",
+      "revId": "d9323abe83eb5de53d51f4299bd94bec3ff47c4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22f42145_ee547221",

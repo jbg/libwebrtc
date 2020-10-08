@@ -71,6 +71,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92994d33_86649d42",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-08T10:40:57Z",
+      "side": 1,
+      "message": "I suspect this can be removed as well.",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "621cad69ba60701eeda5a2343efe63b24a85acfc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "272e3e56_48dc7da1",
         "filename": "api/video/video_frame_buffer.h",
         "patchSetId": 9
