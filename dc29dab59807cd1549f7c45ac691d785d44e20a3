@@ -255,6 +255,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1613c5e1_3dce1e10",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-08T08:34:27Z",
+      "side": 1,
+      "message": "Having an output bool parameter would almost solve the issue for me.\n\nReplacing ToI420 with with method would look cleaner, but I\u0027m afraid it would greatly complicate any use of webrtc by third party developers. Before they needed to only implement ToI420 and be done with it. Now they need to process all possible frame buffer types.\nWell, if we swear that we would never call this method without kI420 then that\u0027s technically the same as implementing ToI420.\n\nThen, there\u0027s a little issue that if the conversion is not pixel perfect we would prefer I420, since libvpx NV12 support is just reducing the cost of NV12-\u003eI420 conversion by collocating it with an unavoidable copy operation.\n\nSo my suggestion is - have two parameters: types and a bool only_bit_perfect_copy_allowed? Then in webrtc we could first call it with {nv12/i420}, true, then, if that fails, {i420, false}\n\nThen in the comment here we could state that the absolute minimum of {kI420, false} is needed to be implemented.",
+      "parentUuid": "381b7fda_8c0126c0",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 52
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41dcbc42_cb1bc5f0",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 6
