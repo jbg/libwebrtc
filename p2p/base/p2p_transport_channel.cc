@@ -210,12 +210,39 @@ void P2PTransportChannel::AddAllocatorSession(
   RTC_DCHECK_RUN_ON(network_thread_);
 
   session->set_generation(static_cast<uint32_t>(allocator_sessions_.size()));
+  session->RCSignalPortReady.AddReceiver(
+      [this](PortAllocatorSession* session, PortInterface* port) {
+        OnPortReady(session, port);
+      });
+  session->SignalPortsPruned.AddReceiver(
+      [this](PortAllocatorSession* session,
+             const std::vector<PortInterface*>& ports) {
+        OnPortsPruned(session, ports);
+      });
+  session->RCSignalCandidatesReady.AddReceiver(
+      [this](PortAllocatorSession* session,
+             const std::vector<Candidate>& candidates) {
+        OnCandidatesReady(session, candidates);
+      });
+  session->SignalCandidateError.AddReceiver(
+      [this](PortAllocatorSession* session,
+             const IceCandidateErrorEvent& event) {
+        OnCandidateError(session, event);
+      });
+  session->RCSignalCandidatesRemoved.AddReceiver(
+      [this](PortAllocatorSession* session,
+             const std::vector<Candidate>& candidates) {
+        OnCandidatesRemoved(session, candidates);
+      });
+  session->RCSignalCandidatesAllocationDone.AddReceiver(
+      [this](PortAllocatorSession* session) {
+        OnCandidatesAllocationDone(session);
+      });
+
+  // Keeping the sigslot code
   session->SignalPortReady.connect(this, &P2PTransportChannel::OnPortReady);
-  session->SignalPortsPruned.connect(this, &P2PTransportChannel::OnPortsPruned);
   session->SignalCandidatesReady.connect(
       this, &P2PTransportChannel::OnCandidatesReady);
-  session->SignalCandidateError.connect(this,
-                                        &P2PTransportChannel::OnCandidateError);
   session->SignalCandidatesRemoved.connect(
       this, &P2PTransportChannel::OnCandidatesRemoved);
   session->SignalCandidatesAllocationDone.connect(
