@@ -87,6 +87,30 @@
       },
       "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33da4b7a_39ea0957",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-10-08T10:31:17Z",
+      "side": 1,
+      "message": "As we\u0027re accessing preferred_pixel_formats every frame, we need to pass the ref to it in constant time. I may speak against myself but undordered_set is probably way more overhead than just using an array. But this constant is ugly. Since we\u0027re not updating |preferred_pixel_formats| every time, the storage type for it is not that important. Wdyt changing back to std::vector\u003c\u003e?",
+      "parentUuid": "3bc84bd6_81419a4d",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
