@@ -48,6 +48,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42277b2f_9370cc5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T09:32:42Z",
+      "side": 1,
+      "message": "This is not the case in Chrome, conversion is done in software when adapting the frame from NV12. This could change in the future but regardless, if we can avoid the conversion at all then we want to do that.",
+      "parentUuid": "9ff53889_b4204134",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 67
+      },
+      "revId": "4470c230d9ec0bd7719649460e76ce0cf82abaf9",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e304785b_c8abbb4c",

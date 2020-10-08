@@ -72,6 +72,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3107b044_64bfe9a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T09:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3345573_4e0cc81f",
+      "range": {
+        "startLine": 12,
+        "startChar": 19,
+        "endLine": 12,
+        "endChar": 38
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af989174_10ccaabe",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "maybe, \", for example in the case where the capturer emits NV12 and is passed to libvpx which supports NV12\".",
       "parentUuid": "af989174_10ccaabe",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 16,
+        "endChar": 54
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcab3254_4f1b37a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T09:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "781a25a4_8b0a2ae6",
       "range": {
         "startLine": 16,
         "startChar": 21,
@@ -373,6 +421,54 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d003ad8_5cc171f7",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T09:32:42Z",
+      "side": 1,
+      "message": "Discussed offline, will move forward with the current design: Only return a frame if the conversion is pixel perfect.",
+      "parentUuid": "1613c5e1_3dce1e10",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 52
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6542b04a_b5ec3edc",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T09:32:42Z",
+      "side": 1,
+      "message": "See above comment, discussed and resolved offline.",
+      "parentUuid": "1613c5e1_3dce1e10",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 52
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca5df05a_92445da5",
@@ -409,6 +505,30 @@
       "writtenOn": "2020-10-08T08:40:51Z",
       "side": 1,
       "message": "Can you write a word on if ordering matters? If not, does it make sense to use an unordered set instead?",
+      "range": {
+        "startLine": 258,
+        "startChar": 4,
+        "endLine": 258,
+        "endChar": 58
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "530d43ba_1e4f3d01",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T09:32:42Z",
+      "side": 1,
+      "message": "Ordering does not matter. I still like the InlinedVector, its implied that duplicates shouldn\u0027t exist. Updated the comment.",
+      "parentUuid": "f8d46207_68f1fa45",
       "range": {
         "startLine": 258,
         "startChar": 4,
@@ -550,6 +670,30 @@
       "writtenOn": "2020-10-08T08:40:51Z",
       "side": 1,
       "message": "Is there an ordering implied here? If so why is I420 prefered over NV12 (doesn\u0027t match VP8 change above)?",
+      "range": {
+        "startLine": 1661,
+        "startChar": 38,
+        "endLine": 1661,
+        "endChar": 69
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceb8d956_c85bfb35",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1661,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T09:32:42Z",
+      "side": 1,
+      "message": "Order is not relevant.",
+      "parentUuid": "e2984734_a314601b",
       "range": {
         "startLine": 1661,
         "startChar": 38,
