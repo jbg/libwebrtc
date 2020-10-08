@@ -63,6 +63,30 @@
       },
       "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc84bd6_81419a4d",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-08T09:59:29Z",
+      "side": 1,
+      "message": "Maybe it should be moved to api/video_codecs/video_encoder.h as a part of EncoderInfo API.",
+      "parentUuid": "654aee51_5a7be227",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
