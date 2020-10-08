@@ -64,6 +64,29 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "961420ba_245b7c04",
+        "filename": "api/video/video_frame_buffer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-08T08:09:04Z",
+      "side": 1,
+      "message": "nit: RTC_CHECK",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abc79dc2_211dec19",
@@ -82,6 +105,53 @@
         "startChar": 0,
         "endLine": 79,
         "endChar": 26
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97cf9fbb_4e657a53",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-08T08:09:04Z",
+      "side": 1,
+      "message": "Yes, it\u0027s making it non-virtual and always returning this for kI420 buffers.\n\nThis method is currently used to check if the kNative is trivially convertible to I420. The newly implemented method does even more than that and is cleaner.",
+      "parentUuid": "abc79dc2_211dec19",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 26
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7272c0a_4d79ec63",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-08T08:09:04Z",
+      "side": 1,
+      "message": "in the main memory\n\nAlso, write here that does that only if the conversion is pixel perfect.\nOtherwise, it could always return ToI420(), since kI420 is always passed int |types|.",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 52
       },
       "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
