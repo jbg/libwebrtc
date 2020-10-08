@@ -176,6 +176,30 @@
       },
       "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2722345_55b41a81",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T12:57:22Z",
+      "side": 1,
+      "message": "I didn\u0027t realize that it isn\u0027t a max size. I moved the constant to video_codec_constants in that case. It shouldn\u0027t have to be updated.",
+      "parentUuid": "8d63e40b_1368b64d",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
