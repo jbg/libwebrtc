@@ -56,6 +56,30 @@
       },
       "revId": "d9323abe83eb5de53d51f4299bd94bec3ff47c4e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a8b0d0_6dfd939c",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5117
+      },
+      "writtenOn": "2020-10-08T10:40:05Z",
+      "side": 1,
+      "message": "There were a few in first party projects, but I\u0027ve already fixed them.\nI tried to do public_deps at first, but got a presubmit warnings saying that it\u0027s banned.",
+      "parentUuid": "22f42145_ee547221",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 6
+      },
+      "revId": "d9323abe83eb5de53d51f4299bd94bec3ff47c4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
