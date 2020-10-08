@@ -152,6 +152,30 @@
       },
       "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d63e40b_1368b64d",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-08T11:59:19Z",
+      "side": 1,
+      "message": "As I understand it, the size pass in the InlineVector template isn\u0027t a maximum size, it will just fall back to heap allocation if it is exceeded. So I was thinking that using 2 or 3 would cover the common case and reduce overhead every type the GetEncoderInfo method is called.\n\nAnd note that GetEncoderInfo returns a value rather than a reference, so there will be an extra allocation per call for each member that use heap allocation.",
+      "parentUuid": "4d0a476e_64f7843e",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "364aaf6cc91ef6eee4c93004040f6562350c1d31",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
