@@ -87,6 +87,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "905b9fc2_91bc54a2",
+        "filename": "api/video/video_frame_buffer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T08:30:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "961420ba_245b7c04",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abc79dc2_211dec19",
@@ -124,6 +148,30 @@
       "side": 1,
       "message": "Yes, it\u0027s making it non-virtual and always returning this for kI420 buffers.\n\nThis method is currently used to check if the kNative is trivially convertible to I420. The newly implemented method does even more than that and is cleaner.",
       "parentUuid": "abc79dc2_211dec19",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 26
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e773c29_6b96b538",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T08:30:28Z",
+      "side": 1,
+      "message": "I just added a note that we want it to be non-virtual.",
+      "parentUuid": "97cf9fbb_4e657a53",
       "range": {
         "startLine": 78,
         "startChar": 0,
@@ -183,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76938880_4feadb44",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T08:30:28Z",
+      "side": 1,
+      "message": "That is a good point. I could return a pair here with the refptr and a bool signalling if the frame was a pixel perfect conversion. This allows for accelerated conversions to happen, instead of copying the raw frame and then converting using ToI420 in software for example.",
+      "parentUuid": "f7272c0a_4d79ec63",
+      "range": {
+        "startLine": 90,
+        "startChar": 31,
+        "endLine": 90,
+        "endChar": 52
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41dcbc42_cb1bc5f0",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 6
@@ -206,6 +278,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b639879_214d0010",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T08:30:28Z",
+      "side": 1,
+      "message": "This makes sense! Good suggestion.",
+      "parentUuid": "41dcbc42_cb1bc5f0",
+      "range": {
+        "startLine": 258,
+        "startChar": 78,
+        "endLine": 259,
+        "endChar": 24
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb73ed80_a4e2a98b",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 6
@@ -217,6 +313,30 @@
       "writtenOn": "2020-10-08T07:58:12Z",
       "side": 1,
       "message": "Consider using absl::InlineVector.",
+      "range": {
+        "startLine": 261,
+        "startChar": 4,
+        "endLine": 261,
+        "endChar": 15
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c5631ab_3e4ed312",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 8683
+      },
+      "writtenOn": "2020-10-08T08:30:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb73ed80_a4e2a98b",
       "range": {
         "startLine": 261,
         "startChar": 4,
