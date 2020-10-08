@@ -16,6 +16,46 @@
       "message": "Now the increase is:\n3.015 MiB\t3.015 MiB\t+8 B\t+0.0003%\tapks/AppRTCMobile.apk\tandroid_compile_arm_rel\n4.202 MiB\t4.202 MiB\t+304 B\t+0.0069%\tlibjingle_peerconnection_so.so\tandroid_compile_arm_rel\n3.570 MiB\t3.570 MiB\t+9 B\t+0.0002%\tapks/AppRTCMobile.apk\tandroid_compile_arm64_rel\n6.827 MiB\t6.828 MiB\t+736 B\t+0.0103%\tlibjingle_peerconnection_so.so\tandroid_compile_arm64_rel\n53.604 MiB\t53.608 MiB\t+4.61 KiB\t+0.0084%\tobj/libwebrtc.a\tlinux_compile_rel\n\nThe increase on linux is with the new scaling functions for NV12. Android is up by 9 bytes.",
       "revId": "d9323abe83eb5de53d51f4299bd94bec3ff47c4e",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68df9b37_1f4bc706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-08T10:30:05Z",
+      "side": 1,
+      "message": "Nice.",
+      "revId": "d9323abe83eb5de53d51f4299bd94bec3ff47c4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f42145_ee547221",
+        "filename": "api/video/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-08T10:30:05Z",
+      "side": 1,
+      "message": "If there are downstream targets for some reason depending on this one but not on video_frame, we\u0027d need public_deps here. (That\u0027s generally discouraged, but acceptable when needed for temporary aliases).",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 6
+      },
+      "revId": "d9323abe83eb5de53d51f4299bd94bec3ff47c4e",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
