@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3345573_4e0cc81f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-10-08T08:40:51Z",
+      "side": 1,
+      "message": "This could actually be the case, but it doesn\u0027t matter. What matters is that the frame is accessible from the CPU. Maybe the words can be wordsmithed to clarify that.",
+      "parentUuid": "2b8040a6_4eef0972",
+      "range": {
+        "startLine": 12,
+        "startChar": 19,
+        "endLine": 12,
+        "endChar": 38
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af989174_10ccaabe",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -84,6 +108,30 @@
       "writtenOn": "2020-10-08T08:37:36Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "af989174_10ccaabe",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 16,
+        "endChar": 54
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781a25a4_8b0a2ae6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-10-08T08:40:51Z",
+      "side": 1,
+      "message": "maybe, \", for example in the case where the capturer emits NV12 and is passed to libvpx which supports NV12\".",
       "parentUuid": "af989174_10ccaabe",
       "range": {
         "startLine": 16,
@@ -327,6 +375,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca5df05a_92445da5",
+        "filename": "api/video/video_frame_buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-10-08T08:40:51Z",
+      "side": 1,
+      "message": "Can we change this name here to GetMappedFrameBuffer() instead? Because this is more accurately describing what\u0027s going on.",
+      "range": {
+        "startLine": 95,
+        "startChar": 47,
+        "endLine": 95,
+        "endChar": 66
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d46207_68f1fa45",
+        "filename": "api/video_codecs/video_encoder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-10-08T08:40:51Z",
+      "side": 1,
+      "message": "Can you write a word on if ordering matters? If not, does it make sense to use an unordered set instead?",
+      "range": {
+        "startLine": 258,
+        "startChar": 4,
+        "endLine": 258,
+        "endChar": 58
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41dcbc42_cb1bc5f0",
         "filename": "api/video_codecs/video_encoder.h",
         "patchSetId": 6
@@ -438,6 +532,29 @@
         "startChar": 4,
         "endLine": 261,
         "endChar": 15
+      },
+      "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2984734_a314601b",
+        "filename": "modules/video_coding/codecs/vp9/vp9_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1661,
+      "author": {
+        "id": 9515
+      },
+      "writtenOn": "2020-10-08T08:40:51Z",
+      "side": 1,
+      "message": "Is there an ordering implied here? If so why is I420 prefered over NV12 (doesn\u0027t match VP8 change above)?",
+      "range": {
+        "startLine": 1661,
+        "startChar": 38,
+        "endLine": 1661,
+        "endChar": 69
       },
       "revId": "dc29dab59807cd1549f7c45ac691d785d44e20a3",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
