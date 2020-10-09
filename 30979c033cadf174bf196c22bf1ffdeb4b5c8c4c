@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "e1c940df_57e78df8",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Responded to all comments, left a couple of my own upon re-reviewing myself",
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "a222fe7d_efa615c8",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "I think I\u0027m signing off on this one.\nI think the basis of my frustration is the fact that OpenSSL refers to 2 different things:\n- the API that we are using to access either BoringSSL or OpenSSL (second sense)\n- the implementation of that API in OpenSSL\n\nBut changing one of the names to something else is probably a large task and out of scope for this CL.\nApproving.",
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "da08d58b_6391c506",
         "filename": "/PATCHSET_LEVEL",
@@ -49,10 +50,10 @@
       "message": "One more idea: could do \"x509_object_certificate\" and \"crypto_buffer_certificate\"? That\u0027s more representative of what the actual difference is and avoids the confusion.",
       "parentUuid": "a222fe7d_efa615c8",
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "9aff3750_c0f47eb6",
         "filename": "/PATCHSET_LEVEL",
@@ -66,10 +67,10 @@
       "side": 1,
       "message": "David, do you want to take one last look before I submit?",
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "e48bba5b_62fb7c31",
         "filename": "/PATCHSET_LEVEL",
@@ -83,10 +84,10 @@
       "side": 1,
       "message": "found this week-old comment that I hadn\u0027t sent...",
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "31a7fc47_d6edcd32",
         "filename": "/PATCHSET_LEVEL",
@@ -101,8 +102,450 @@
       "message": "All certificates are X.509, so that\u0027s misleading.\n\nI *think* (haven\u0027t checked the code) the difference is that a crypto_buffer contains the uninterpreted bag-of-bits, and unpacks it only when it has to, while the non-crypto-buffer form contains some kind of decoded structure where it\u0027s easy to get at the various pieces of information in the cert.\n\nIf that\u0027s the difference, I might call them \"PreParsedCertificate\" and \"EncodedCertificate\", but keeping consistency with what the actual libs call them is rather important for maintainability.",
       "parentUuid": "da08d58b_6391c506",
       "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
-      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767",
-      "unresolved": false
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6698475_36f0fcb9",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Gosh we need to write a bssl::CertBuilder... :-(",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1dcf85_ff5a08f8",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Unused?",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe487b25_e8c988f6",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "This is... a mess. RSA should include the NULL while ECDSA should omit it. Actual enforcement of this is a bit all over the place. :-(",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b62bddb_28a13531",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "No need to flush rdns if you\u0027re already flushing cbb. It\u0027ll take care of the rest.",
+      "range": {
+        "startLine": 145,
+        "startChar": 5,
+        "endLine": 145,
+        "endChar": 25
+      },
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b7b16d_6dffc43e",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Since this is BoringSSL-specific already:\n\nbssl::UniquePtr\u003cASN1_TIME\u003e asn1_time(ASN1_TIME_new());\netc.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db233970_5257cc41",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Note this does no parsing at all. Dunno if that matters for WebRTC.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e5f88a_fdb1a761",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Optional: This works, but you can probably avoid the macro by turning the CBS into an absl::Span\u003cconst uint8_t\u003e and using the equality function. (Although std::span took away equality[*], so I dunno what their plan is. Maybe we\u0027ll have absl::ranges::equal first.)\n\n[*] https://abseil.io/blog/20180531-regular-types",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b189ec_ef340628",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "I expect we can drop all the DSA OIDs. While we do parse them, unless you go out of your way to do so, BoringSSL won\u0027t verify DSA signatures anyway.",
+      "range": {
+        "startLine": 316,
+        "startChar": 59,
+        "endLine": 316,
+        "endChar": 71
+      },
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ebf3d4_3f0e4905",
+        "filename": "rtc_base/boringssl_certificate.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Rather than making a CBS, you can just pass CRYPTO_BUFFER_data and CRYPTO_BUFFER_len to this function. Ditto below.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e468a57_a5104606",
+        "filename": "rtc_base/boringssl_identity.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "This doesn\u0027t handle newlines right, but I guess SSLIdentity::PemToDer doesn\u0027t either.\n\nI took a stab at documenting OpenSSL\u0027s PEM functions (probably no sense in bifurcating those, though we really should rewrite that parser), so you could also use that if you like.\nhttps://boringssl-review.googlesource.com/c/boringssl/+/43426/",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a359cb_c2533cba",
+        "filename": "rtc_base/boringssl_identity.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Not sure this line is reachable, since last_position + 1 starts out at 0.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb4d6ce4_661d4149",
+        "filename": "rtc_base/boringssl_identity.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "It looks like this will find all instances of ---BEGIN CERTIFICATE---, except at position 0, and chop the string between them. So if position 0 is another instance, it works. But otherwise it\u0027ll get confused. That is, if certificate_chain is:\n\n  \"--BEGIN CERT--...---BEGIN CERT---...---BEGIN CERT---...\"\n\ncertificate_strings will be:\n\n  [\"---BEGIN CERT---...\", \"---BEGIN CERT---...\", \"---BEGIN CERT---...\"]\n\nBut if certificate_chain is, say:\n\n  \"blah--BEGIN PRIVATE KEY...---BEGIN CERT---...---BEGIN CERT---...\"\n\ncertificate_strings will be:\n\n  [\"blah--BEGIN PRIVATE KEY...\", \"---BEGIN CERT---...\", \"---BEGIN CERT---...\"]\n\nSeems that first one will fail to parse because there\u0027s no cert in there.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "633c1ace_5d0e456e",
+        "filename": "rtc_base/boringssl_identity.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "(It\u0027ll only return 0 or 1, so also okay to treat it as a boolean. Whatever works. We\u0027d really like to return bool, but C...)",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8cacb97_5d605b41",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Since rtc_builtin_ssl_root_certificates pulls in both SSLIdentity implementations, is there a risk of memory error if someone gets their hand on an OpenSSLIdentity?\n\nOn that note... when does rtc_builtin_ssl_root_certificates need OpenSSLIdentity? Seems that just controls WEBRTC_EXCLUDE_BUILT_IN_SSL_ROOT_CERTS, which in turn is used here. That seems to use X509 objects directly, so perhaps we don\u0027t need to pull it in at all?\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/rtc_base/openssl_utility.cc;drc\u003d0e22286ee95d2bd711f81d73f1178343fbacc890;l\u003d105\n\nEdit: Ah, I see where it\u0027s pulled in.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64b4c81b_f208d1ed",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "(FWIW, this should be impossible. But no harm in checking.)",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf31653b_958d4613",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "(I noticed this is all the interface supports, so nothing to change here, but if you\u0027re verifying against some roots, you probably want to keep the cert chain.)",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f0339c1_9af2d043",
+        "filename": "rtc_base/openssl_adapter.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "This is the one place where OpenSSL{Certificate,Identity} is used in an OPENSSL_IS_BORINGSSL build, right? Perhaps we should at least only include openssl_certificate.{h,cc} and not openssl_identity.{h,cc}.\n\nIt is still a little weird, though, that which SSLCertificate implementation is used for this callback depends on whether you pulled in the built-in roots. This is a public API I assume. Is that the interface we want to expose? (Another option would be to consistently use BoringSSLCertificate and just serialize the X509 to bytes if OPENSSL_IS_BORINGSSL.)",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed4ca72e_4a706ed1",
+        "filename": "rtc_base/openssl_key_pair.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Didn\u0027t look at this very carefully and assumed it was just moved over from openssl_identity.cc.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05df81c6_c545f4f3",
+        "filename": "rtc_base/openssl_stream_adapter.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "ssl_verify_retry will pause the handshake at that point. You\u0027ll then get SSL_ERROR_WANT_CERTIFICATE_VERIFY over in ContinueSSL(). The next time you call SSL_connect() or SSL_accept() it will, like if we\u0027re blocked on transport I/O, try this callback again. Dunno if that\u0027s what you want. (I\u0027m not familiar with when peer_certificate_digest_algorithm_ gets set up.)",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6594925_179f793e",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Oof. It\u0027d be nice if we didn\u0027t have to carry an extra implementation of name-matching and name-extracting logic. I can try to at least extract BoringSSL\u0027s into a separate function, if that\u0027d help. That wouldn\u0027t pull in the rest of crypto/x509.\n\nBut taking a step back, I\u0027m wondering if we\u0027re slicing this wrong. (I certainly didn\u0027t file the original bug intending we\u0027d reimplement that! :-( ) This is only reachable via OpenSSLAdapter::SSLPostConnectionCheck(), when it\u0027s actually verifying a certificate against a name, right? That is, this is doing a real certificate verification, instead of WebRTC\u0027s funny hash match? (Which is OpenSSLStreamAdapter.) I\u0027m assuming Chromium doesn\u0027t use this class, just OpenSSLStreamAdapter. Is that right?\n\nIIRC, you mentioned other WebRTC consumers also want the size gains, but still need real certificate verification. And thus the plan was for those consumers to call out to the OS since, X509 or CRYPTO_BUFFER, they need a source of roots.\n\nGiven that that rtc::SSLCertificateVerifier can\u0027t express a certificate chain, it seems the CRYPTO_BUFFER codepath isn\u0027t usable for this anyway. So we\u0027d need to adjust the interface anyway. If we do, why not move the hostname verification inside it too? If you\u0027re using, say, Android\u0027s verifier, you may as well use Android\u0027s name-matching logic. That leaves WebRTC not really needing to extract complex information out of a certificate, which is probably simpler all around.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51d4b039_7951c854",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Probably check CBS_len(\u0026certificate) \u003d\u003d 0 to check for trailing data.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b386c9a8_1b6404a6",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Similarly check CBS_len(\u0026tbs_certificate) is empty.",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e2fe8ad_3b05a3b0",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "(If SSL_get0_peer_certificates returns non-NULL, it should never be empty. However, it *is* possible for it to return NULL if there is no peer certificate. This would happen if ssl is a server which either didn\u0027t request client certs, or requested them but allowed the client to remain anonymous. But if you\u0027ve configured it to require client certs then, yeah, there\u0027ll always be one.)",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd0fe205_2609ce48",
+        "filename": "rtc_base/openssl_utility.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "FWIW, Chrome and most browsers no longer looks at this one. Although we haven\u0027t managed to get it out of BoringSSL yet. :-/",
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81aa3f08_433cc6a5",
+        "filename": "webrtc.gni",
+        "patchSetId": 16
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5602
+      },
+      "writtenOn": "2020-10-09T21:25:03Z",
+      "side": 1,
+      "message": "Optional / probably not the prevailing style: it\u0027s not in keeping with Chromium\u0027s style, but since BoringSSL gives you an OPENSSL_IS_BORINGSSL ifdef already, another option would be to always include boringssl_*.cc and just wrap the whole files in ifdefs.\n\n(That\u0027s what we usually do in BoringSSL. We have to support far too many buildsystems, so we try to put the build logic in the source as much as possible.)",
+      "range": {
+        "startLine": 225,
+        "startChar": 2,
+        "endLine": 225,
+        "endChar": 26
+      },
+      "revId": "30979c033cadf174bf196c22bf1ffdeb4b5c8c4c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
