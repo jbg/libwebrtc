@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8246ad91_7f3e4195",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-13T12:48:35Z",
+      "side": 1,
+      "message": "Would be nice of more of the methods and member variables of ConnectionContext could be const. And add thread annotations for those members that aren\u0027t construction-time const.",
+      "revId": "32e3e5dcbb16b5a5a1147f857d816f65ab5a70da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1130444_a497e279",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-13T12:48:35Z",
+      "side": 1,
+      "message": "If possible, prefer real includes over forward declarations.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "32e3e5dcbb16b5a5a1147f857d816f65ab5a70da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c7f994a_e6aae543",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-13T12:48:35Z",
+      "side": 1,
+      "message": "Spelling.",
+      "range": {
+        "startLine": 71,
+        "startChar": 5,
+        "endLine": 71,
+        "endChar": 22
+      },
+      "revId": "32e3e5dcbb16b5a5a1147f857d816f65ab5a70da",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
