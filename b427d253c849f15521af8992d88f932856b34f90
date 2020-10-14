@@ -16,6 +16,57 @@
       "message": "I think this refactoring is clean now.\nThe PeerConnectionFactory contains resources needed to create stuff. It will be deallocated when nobody wants to create stuff any more.\n\nThe ConnectionResources contains resources that are needed while a call is active. It will be deallocated when the last factory or PeerConnection that depends on it disappears.\n\nThis may change the lifetime of some objects; the last bug was that call_factory needed to survive until the end of the call(s); it\u0027s not just a creator object.",
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61383cce_f91a7576",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-10-14T12:54:21Z",
+      "side": 1,
+      "message": "LGTM. Questions and suggestions added, but nothing blocking landing",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de39ef3d_e3de82b4",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-10-14T12:54:21Z",
+      "side": 1,
+      "message": "Nice :)",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820b58b2_a4dfd48f",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-10-14T12:54:21Z",
+      "side": 1,
+      "message": "If the purpose of this is to share context between PCs consider setting up a \"hello world\" type of peer connection test that uses multiple PCs with the same context.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

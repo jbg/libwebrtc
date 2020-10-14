@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf24718_0c86eb0b",
+        "filename": "pc/peer_connection_factory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5142
+      },
+      "writtenOn": "2020-10-14T12:54:21Z",
+      "side": 0,
+      "message": "Why are some factories moved but others stay where they are? Can the remaining ones have different states for different PCs?",
+      "revId": "3e0a5fc2097e6867909d68d3b0c3e8f89e4864b2",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
