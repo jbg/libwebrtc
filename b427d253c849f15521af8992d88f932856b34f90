@@ -69,6 +69,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "615e8e82_44e47e7d",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "I\u0027ll take a stab at it..... it worked. Done!",
+      "parentUuid": "d2ce90a7_8be0ac22",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09374afa_2c9b036d",
@@ -82,6 +100,24 @@
       "writtenOn": "2020-10-14T17:11:16Z",
       "side": 1,
       "message": "similarly here with MaybeWrapCurrentThread().\n\nIdeally I\u0027d like to remove all of this magic since this always pulls in the thread wrappers etc even if the caller doesn\u0027t want/need it.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06adf050_45da5315",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09374afa_2c9b036d",
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -120,6 +156,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0a5c5f2_43e279ed",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "537683f6_bc3a7581",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73e8fa54_50ea3bcb",
@@ -137,6 +191,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8195341_65c51ef3",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73e8fa54_50ea3bcb",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dbe02ef_b59cf533",
@@ -150,6 +222,24 @@
       "writtenOn": "2020-10-14T17:11:16Z",
       "side": 1,
       "message": "do we expect this to be called on any thread?",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2958bbf3_81bec7e7",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "Just on the worker thread and signaling thread :-( Added a comment for later refactoring.",
+      "parentUuid": "4dbe02ef_b59cf533",
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -173,6 +263,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f03df993_39ec8359",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird that the tests that have multiple PCs use separate factories.... perhaps I\u0027ll modify some of them. But this is a pure refactoring CL.",
+      "parentUuid": "820b58b2_a4dfd48f",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3da88210_910ec547",
         "filename": "pc/connection_context.h",
         "patchSetId": 2
@@ -184,6 +292,30 @@
       "writtenOn": "2020-10-14T13:31:55Z",
       "side": 1,
       "message": "This can affect all peer connections using the context. Can it be used mid-call, or is the intention that SetOptions should only be called before the first peer connection using this context is created? Please document.\n\nThere\u0027s no explicit synchronization, please document which threads are expected to read and write the options. If the setter method can be changed to a construction time setting, that\u0027s even better, but  perhaps out of scope for this cl.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 74
+      },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ace3ec_7b09fabf",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "This is \"the sins of the fathers\" area .... I managed to add a great deal of constness and RTC_GUARDED_BY, but a few issues were discovered and got comments added. Luckily I seem to have been able to make all the pointers that were accessed on multiple threads const.",
+      "parentUuid": "3da88210_910ec547",
       "range": {
         "startLine": 42,
         "startChar": 0,
@@ -219,6 +351,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d40893a_6bc107fd",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "The only caller to Initialize seems to be this piece of code:\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/peer_connection_factory.cc;l\u003d52;drc\u003da450ab794839b63f9c2ba982f738945f90e9fee2;bpv\u003d1;bpt\u003d1\n\nThe reason for the odd pattern seems to be that Initialize must be called on the signalling thread, but until we\u0027ve created the PeerConnectionFactory, we don\u0027t know what the signaling thread will end up being.\n\nProbably good for another refactoring round.",
+      "parentUuid": "50fb416f_8ab76462",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee28da37_dc5745da",
         "filename": "pc/connection_context.h",
         "patchSetId": 2
@@ -230,6 +386,24 @@
       "writtenOn": "2020-10-14T17:11:16Z",
       "side": 1,
       "message": "if signaling_thread_ et al, are not const, then these getters (I guess all of them) are prone to race conditions.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a50cedaa_1844a43c",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "They were const-in-practice; I was able to make them const-in-declaration after applying tricks to the constructor. Hooray!",
+      "parentUuid": "ee28da37_dc5745da",
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -247,6 +421,24 @@
       "writtenOn": "2020-10-14T17:11:16Z",
       "side": 1,
       "message": "rtc::Thread* const network_thread_; ?\n(sam for other vars)",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7866c33e_802b768c",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd80caf1_636fa0d3",
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -287,6 +479,30 @@
       "writtenOn": "2020-10-14T17:11:16Z",
       "side": 1,
       "message": "+1 on as much constness as we can get away with 😊",
+      "parentUuid": "199342f6_2d33af46",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 48
+      },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ff3736_b9b8c38c",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "With a bit of helper magic, this seemed to work. Added constness wherever it would compile.",
       "parentUuid": "199342f6_2d33af46",
       "range": {
         "startLine": 87,

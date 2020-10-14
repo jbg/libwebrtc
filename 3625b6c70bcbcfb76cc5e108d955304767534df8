@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5c73c2_1b031a1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T19:39:08Z",
+      "side": 1,
+      "message": "PTAL - I think the new class looked much better after addressing the comments!\n",
+      "revId": "3625b6c70bcbcfb76cc5e108d955304767534df8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
