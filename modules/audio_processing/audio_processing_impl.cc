@@ -571,8 +571,30 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
           config.gain_controller1.analog_gain_controller
               .enable_digital_adaptive;
 
+  const auto& adaptive_agc2 = config_.gain_controller2.adaptive_digital;
+  const auto& adaptive_agc2_new = config.gain_controller2.adaptive_digital;
   const bool agc2_config_changed =
-      config_.gain_controller2.enabled != config.gain_controller2.enabled;
+      config_.gain_controller2.enabled != config.gain_controller2.enabled ||
+      config_.gain_controller2.fixed_digital.gain_db !=
+          config.gain_controller2.fixed_digital.gain_db ||
+      adaptive_agc2.enabled != adaptive_agc2_new.enabled ||
+      adaptive_agc2.vad_probability_attack !=
+          adaptive_agc2_new.vad_probability_attack ||
+      adaptive_agc2.level_estimator != adaptive_agc2_new.level_estimator ||
+      adaptive_agc2.level_estimator_adjacent_speech_frames_threshold !=
+          adaptive_agc2_new.level_estimator_adjacent_speech_frames_threshold ||
+      adaptive_agc2.use_saturation_protector !=
+          adaptive_agc2_new.use_saturation_protector ||
+      adaptive_agc2.initial_saturation_margin_db !=
+          adaptive_agc2_new.initial_saturation_margin_db ||
+      adaptive_agc2.extra_saturation_margin_db !=
+          adaptive_agc2_new.extra_saturation_margin_db ||
+      adaptive_agc2.gain_applier_adjacent_speech_frames_threshold !=
+          adaptive_agc2_new.gain_applier_adjacent_speech_frames_threshold ||
+      adaptive_agc2.max_gain_change_db_per_second !=
+          adaptive_agc2_new.max_gain_change_db_per_second ||
+      adaptive_agc2.max_output_noise_level_dbfs !=
+          adaptive_agc2_new.max_output_noise_level_dbfs;
 
   const bool voice_detection_config_changed =
       config_.voice_detection.enabled != config.voice_detection.enabled;
