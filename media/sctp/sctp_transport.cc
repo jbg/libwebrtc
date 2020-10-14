@@ -901,8 +901,7 @@ bool SctpTransport::ConfigureSctpSocket() {
 
   // Subscribe to SCTP event notifications.
   int event_types[] = {SCTP_ASSOC_CHANGE, SCTP_PEER_ADDR_CHANGE,
-                       SCTP_SEND_FAILED_EVENT, SCTP_SENDER_DRY_EVENT,
-                       SCTP_STREAM_RESET_EVENT};
+                       SCTP_SENDER_DRY_EVENT, SCTP_STREAM_RESET_EVENT};
   struct sctp_event event = {0};
   event.se_assoc_id = SCTP_ALL_ASSOC;
   event.se_on = 1;
