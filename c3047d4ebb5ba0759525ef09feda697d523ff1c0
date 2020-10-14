@@ -18,6 +18,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11f82aff_9b6811ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-10-14T09:50:22Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "c3047d4ebb5ba0759525ef09feda697d523ff1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecb7fd14_9eac8f98",
@@ -31,6 +48,24 @@
       "writtenOn": "2020-10-14T08:59:37Z",
       "side": 1,
       "message": "Here we previously didn\u0027t set config.output_audio_filename, but now we do. Is that intentional?",
+      "revId": "c3047d4ebb5ba0759525ef09feda697d523ff1c0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b4972dc_b3e5db54",
+        "filename": "api/test/neteq_simulator_factory.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-10-14T09:50:22Z",
+      "side": 1,
+      "message": "Yes that is intentional, it seems like I forgot to update one of the code paths in a previous CL. They should both be identical.",
+      "parentUuid": "ecb7fd14_9eac8f98",
       "revId": "c3047d4ebb5ba0759525ef09feda697d523ff1c0",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
