@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d02d3432_3e95329c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-14T13:31:55Z",
+      "side": 1,
+      "message": "Nice! A couple of comments on const and thread synchronization.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "de39ef3d_e3de82b4",
         "filename": "pc/connection_context.cc",
         "patchSetId": 2
@@ -65,6 +82,75 @@
       "writtenOn": "2020-10-14T12:54:21Z",
       "side": 1,
       "message": "If the purpose of this is to share context between PCs consider setting up a \"hello world\" type of peer connection test that uses multiple PCs with the same context.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da88210_910ec547",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-14T13:31:55Z",
+      "side": 1,
+      "message": "This can affect all peer connections using the context. Can it be used mid-call, or is the intention that SetOptions should only be called before the first peer connection using this context is created? Please document.\n\nThere\u0027s no explicit synchronization, please document which threads are expected to read and write the options. If the setter method can be changed to a construction time setting, that\u0027s even better, but  perhaps out of scope for this cl.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 74
+      },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fb416f_8ab76462",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-14T13:31:55Z",
+      "side": 1,
+      "message": "Refactoring to eliminate this method would be desirable, but perhaps out of scope for current cl.\n\nIf create/init can fail, could use a static Create method that performs all logic that is potentially failing, return null on failure, and then pass fully initialized ChannelManager et al to a private constructor.",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "199342f6_2d33af46",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-14T13:31:55Z",
+      "side": 1,
+      "message": "Those of these that are initialized at construction time can be marked const. The thread pointers can be initialized at construction time and be made const, with a bit more effort.  With initializers like\n\n  owned_network_thread_(network_thread ? nullptr : [](){code to create and return thread;}()),\n  network_thread_(network_thread ? network_thread : owned_network_thread_.get()),",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 48
+      },
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
