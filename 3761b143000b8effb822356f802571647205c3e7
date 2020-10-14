@@ -56,6 +56,30 @@
       },
       "revId": "3761b143000b8effb822356f802571647205c3e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd42f39_881e79e3",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-14T10:49:16Z",
+      "side": 1,
+      "message": "Happy to do that! I initially followed the existing approach for consistency, but I much prefer to define \u003d\u003d and !\u003d. While we could define those operators in the anon ns in audio_processing_impl.cc, I eventually chose to define as struct members since it\u0027s less error prone and I could add unit tests.",
+      "parentUuid": "af69d98e_c0b191a6",
+      "range": {
+        "startLine": 576,
+        "startChar": 2,
+        "endLine": 597,
+        "endChar": 56
+      },
+      "revId": "3761b143000b8effb822356f802571647205c3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
