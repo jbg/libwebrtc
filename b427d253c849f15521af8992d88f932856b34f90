@@ -52,6 +52,40 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2ce90a7_8be0ac22",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "if you make network_thread_ const, you could set it with a helper method (and consolidate this and the next code blocks).\n\n\u003cin the initializer list\u003e\nnetwork_thread_(MaybeStartNewThread(dependencies.network_thread, \"pc_network_thread\", \u0026owned_network_thread_),",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09374afa_2c9b036d",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "similarly here with MaybeWrapCurrentThread().\n\nIdeally I\u0027d like to remove all of this magic since this always pulls in the thread wrappers etc even if the caller doesn\u0027t want/need it.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "de39ef3d_e3de82b4",
@@ -65,6 +99,57 @@
       "writtenOn": "2020-10-14T12:54:21Z",
       "side": 1,
       "message": "Nice :)",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "537683f6_bc3a7581",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "thread check?",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e8fa54_50ea3bcb",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "return channel_manager_-\u003eInit();",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dbe02ef_b59cf533",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "do we expect this to be called on any thread?",
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -134,6 +219,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee28da37_dc5745da",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "if signaling_thread_ et al, are not const, then these getters (I guess all of them) are prone to race conditions.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd80caf1_636fa0d3",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "rtc::Thread* const network_thread_; ?\n(sam for other vars)",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "199342f6_2d33af46",
         "filename": "pc/connection_context.h",
         "patchSetId": 2
@@ -151,6 +270,115 @@
         "endLine": 95,
         "endChar": 48
       },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c33a5bf_b4d5e17e",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "+1 on as much constness as we can get away with 😊",
+      "parentUuid": "199342f6_2d33af46",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 48
+      },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc9f1f0_7e7b6389",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "std::move() (to avoid an additional AddRef/Release)",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9d61401_c0696c5e",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "can you remove explicit?",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ff3f5e_642fec60",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "let\u0027s keep the thread check",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8807968a_b33c2dfe",
+        "filename": "pc/peer_connection_factory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "could replace all of these with RTC_DCHECK_RUN_ON(signaling_thread());",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e1a693_21237945",
+        "filename": "pc/peer_connection_factory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-14T17:11:16Z",
+      "side": 1,
+      "message": "I think that generally we\u0027ve not added const methods that return non const pointers. In this case I understand why you\u0027re doing it but I feel that while most of the time we use \u0027const\u0027 to restrict usage of a method to specific scenarios, but here we\u0027re actually loosening the restrictions. Unless there\u0027s a clear reason for doing that, I\u0027d prefer we skip it.",
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
