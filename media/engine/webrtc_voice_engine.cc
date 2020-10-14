@@ -2276,6 +2276,7 @@ void WebRtcVoiceMediaChannel::OnNetworkRouteChanged(
 bool WebRtcVoiceMediaChannel::MuteStream(uint32_t ssrc, bool muted) {
   RTC_DCHECK(worker_thread_checker_.IsCurrent());
   const auto it = send_streams_.find(ssrc);
+  RTC_LOG(LS_ERROR) << "@@ MuteStream muted: " << muted;
   if (it == send_streams_.end()) {
     RTC_LOG(LS_WARNING) << "The specified ssrc " << ssrc << " is not in use.";
     return false;
@@ -2294,6 +2295,8 @@ bool WebRtcVoiceMediaChannel::MuteStream(uint32_t ssrc, bool muted) {
   webrtc::AudioProcessing* ap = engine()->apm();
   if (ap) {
     ap->set_output_will_be_muted(all_muted);
+    RTC_LOG(LS_ERROR) << "@@ MuteStream set AudioProcessing all_muted: "
+                      << all_muted;
   }
 
   return true;

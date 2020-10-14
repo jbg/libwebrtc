@@ -70,6 +70,7 @@ void VideoTrack::set_content_hint(ContentHint hint) {
 
 bool VideoTrack::set_enabled(bool enable) {
   RTC_DCHECK(signaling_thread_checker_.IsCurrent());
+  RTC_LOG(LS_ERROR) << "@@ set_enabled to " << enable;
   worker_thread_->Invoke<void>(RTC_FROM_HERE, [enable, this] {
     RTC_DCHECK(worker_thread_->IsCurrent());
     for (auto& sink_pair : sink_pairs()) {

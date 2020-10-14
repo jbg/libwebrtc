@@ -694,6 +694,9 @@ void AudioProcessingImpl::set_output_will_be_muted(bool muted) {
   if (submodules_.agc_manager.get()) {
     submodules_.agc_manager->SetCaptureMuted(capture_.output_will_be_muted);
   }
+  // If output is muted, it is not used.
+  RTC_LOG(LS_ERROR) << "@@ Set CaptureOutputUsedSetting to " << !muted;
+  SetRuntimeSetting(RuntimeSetting::CreateCaptureOutputUsedSetting(!muted));
 }
 
 void AudioProcessingImpl::SetRuntimeSetting(RuntimeSetting setting) {

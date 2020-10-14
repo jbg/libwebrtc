@@ -480,6 +480,7 @@ sigslot::signal0<>* AudioRtpSender::GetOnDestroyedSignal() {
 
 void AudioRtpSender::OnChanged() {
   TRACE_EVENT0("webrtc", "AudioRtpSender::OnChanged");
+  RTC_LOG(LS_ERROR) << "AudioRtpSender OnChanged set to " << track_->enabled();
   RTC_DCHECK(!stopped_);
   if (cached_track_enabled_ != track_->enabled()) {
     cached_track_enabled_ = track_->enabled();
