@@ -16,6 +16,46 @@
       "message": "Hi Per,\nCould you PTAL?\nAlessio",
       "revId": "3761b143000b8effb822356f802571647205c3e7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f960552_9a92a4b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-10-14T05:14:23Z",
+      "side": 1,
+      "message": "lgtm\nbut please consider the suggestion in the comment",
+      "revId": "3761b143000b8effb822356f802571647205c3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af69d98e_c0b191a6",
+        "filename": "modules/audio_processing/audio_processing_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5125
+      },
+      "writtenOn": "2020-10-14T05:14:23Z",
+      "side": 1,
+      "message": "An alternative would be to implement the \u003d\u003d or !\u003d operators in the config struct. \nIt is quite clear that this approach of doing these checks do not scale well for ApplyConfig.",
+      "range": {
+        "startLine": 576,
+        "startChar": 2,
+        "endLine": 597,
+        "endChar": 56
+      },
+      "revId": "3761b143000b8effb822356f802571647205c3e7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
