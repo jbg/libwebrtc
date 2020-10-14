@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0ad1e5_87d6862b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-14T12:26:50Z",
+      "side": 1,
+      "message": "I think this refactoring is clean now.\nThe PeerConnectionFactory contains resources needed to create stuff. It will be deallocated when nobody wants to create stuff any more.\n\nThe ConnectionResources contains resources that are needed while a call is active. It will be deallocated when the last factory or PeerConnection that depends on it disappears.\n\nThis may change the lifetime of some objects; the last bug was that call_factory needed to survive until the end of the call(s); it\u0027s not just a creator object.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
