@@ -125,6 +125,52 @@ static const size_t kMaxAllowedValuesOfSamplesPerFrame = 480;
 // TODO(peah): Decrease this once we properly handle hugely unbalanced
 // reverse and forward call numbers.
 static const size_t kMaxNumFramesToBuffer = 100;
+
+bool operator!=(const AudioProcessing::Config::GainController1& a,
+                const AudioProcessing::Config::GainController1& b) {
+  return a.enabled != b.enabled || a.mode != b.mode ||
+         a.target_level_dbfs != b.target_level_dbfs ||
+         a.compression_gain_db != b.compression_gain_db ||
+         a.enable_limiter != b.enable_limiter ||
+         a.analog_level_minimum != b.analog_level_minimum ||
+         a.analog_level_maximum != b.analog_level_maximum ||
+         a.analog_gain_controller.enabled != b.analog_gain_controller.enabled ||
+         a.analog_gain_controller.startup_min_volume !=
+             b.analog_gain_controller.startup_min_volume ||
+         a.analog_gain_controller.clipped_level_min !=
+             b.analog_gain_controller.clipped_level_min ||
+         a.analog_gain_controller.enable_agc2_level_estimator !=
+             b.analog_gain_controller.enable_agc2_level_estimator ||
+         a.analog_gain_controller.enable_digital_adaptive !=
+             b.analog_gain_controller.enable_digital_adaptive;
+}
+
+bool operator!=(const AudioProcessing::Config::GainController2& a,
+                const AudioProcessing::Config::GainController2& b) {
+  return a.enabled != b.enabled ||
+         a.fixed_digital.gain_db != b.fixed_digital.gain_db ||
+         a.adaptive_digital.enabled != b.adaptive_digital.enabled ||
+         a.adaptive_digital.vad_probability_attack !=
+             b.adaptive_digital.vad_probability_attack ||
+         a.adaptive_digital.level_estimator !=
+             b.adaptive_digital.level_estimator ||
+         a.adaptive_digital.level_estimator_adjacent_speech_frames_threshold !=
+             b.adaptive_digital
+                 .level_estimator_adjacent_speech_frames_threshold ||
+         a.adaptive_digital.use_saturation_protector !=
+             b.adaptive_digital.use_saturation_protector ||
+         a.adaptive_digital.initial_saturation_margin_db !=
+             b.adaptive_digital.initial_saturation_margin_db ||
+         a.adaptive_digital.extra_saturation_margin_db !=
+             b.adaptive_digital.extra_saturation_margin_db ||
+         a.adaptive_digital.gain_applier_adjacent_speech_frames_threshold !=
+             b.adaptive_digital.gain_applier_adjacent_speech_frames_threshold ||
+         a.adaptive_digital.max_gain_change_db_per_second !=
+             b.adaptive_digital.max_gain_change_db_per_second ||
+         a.adaptive_digital.max_output_noise_level_dbfs !=
+             b.adaptive_digital.max_output_noise_level_dbfs;
+}
+
 }  // namespace
 
 // Throughout webrtc, it's assumed that success is represented by zero.
@@ -545,34 +591,10 @@ void AudioProcessingImpl::ApplyConfig(const AudioProcessing::Config& config) {
       config_.echo_canceller.mobile_mode != config.echo_canceller.mobile_mode;
 
   const bool agc1_config_changed =
-      config_.gain_controller1.enabled != config.gain_controller1.enabled ||
-      config_.gain_controller1.mode != config.gain_controller1.mode ||
-      config_.gain_controller1.target_level_dbfs !=
-          config.gain_controller1.target_level_dbfs ||
-      config_.gain_controller1.compression_gain_db !=
-          config.gain_controller1.compression_gain_db ||
-      config_.gain_controller1.enable_limiter !=
-          config.gain_controller1.enable_limiter ||
-      config_.gain_controller1.analog_level_minimum !=
-          config.gain_controller1.analog_level_minimum ||
-      config_.gain_controller1.analog_level_maximum !=
-          config.gain_controller1.analog_level_maximum ||
-      config_.gain_controller1.analog_gain_controller.enabled !=
-          config.gain_controller1.analog_gain_controller.enabled ||
-      config_.gain_controller1.analog_gain_controller.startup_min_volume !=
-          config.gain_controller1.analog_gain_controller.startup_min_volume ||
-      config_.gain_controller1.analog_gain_controller.clipped_level_min !=
-          config.gain_controller1.analog_gain_controller.clipped_level_min ||
-      config_.gain_controller1.analog_gain_controller
-              .enable_agc2_level_estimator !=
-          config.gain_controller1.analog_gain_controller
-              .enable_agc2_level_estimator ||
-      config_.gain_controller1.analog_gain_controller.enable_digital_adaptive !=
-          config.gain_controller1.analog_gain_controller
-              .enable_digital_adaptive;
+      config_.gain_controller1 != config.gain_controller1;
 
   const bool agc2_config_changed =
-      config_.gain_controller2.enabled != config.gain_controller2.enabled;
+      config_.gain_controller2 != config.gain_controller2;
 
   const bool voice_detection_config_changed =
       config_.voice_detection.enabled != config.voice_detection.enabled;
