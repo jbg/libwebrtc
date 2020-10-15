@@ -326,6 +326,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d46873db_9b101605",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-15T07:51:32Z",
+      "side": 1,
+      "message": "Sounds good enough for now.",
+      "parentUuid": "21ace3ec_7b09fabf",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 74
+      },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50fb416f_8ab76462",
@@ -363,6 +387,30 @@
       "side": 1,
       "message": "The only caller to Initialize seems to be this piece of code:\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/pc/peer_connection_factory.cc;l\u003d52;drc\u003da450ab794839b63f9c2ba982f738945f90e9fee2;bpv\u003d1;bpt\u003d1\n\nThe reason for the odd pattern seems to be that Initialize must be called on the signalling thread, but until we\u0027ve created the PeerConnectionFactory, we don\u0027t know what the signaling thread will end up being.\n\nProbably good for another refactoring round.",
       "parentUuid": "50fb416f_8ab76462",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f71e4827_acc50ed7",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-15T07:51:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0d40893a_6bc107fd",
       "range": {
         "startLine": 44,
         "startChar": 2,
@@ -595,6 +643,24 @@
       "writtenOn": "2020-10-14T17:11:16Z",
       "side": 1,
       "message": "I think that generally we\u0027ve not added const methods that return non const pointers. In this case I understand why you\u0027re doing it but I feel that while most of the time we use \u0027const\u0027 to restrict usage of a method to specific scenarios, but here we\u0027re actually loosening the restrictions. Unless there\u0027s a clear reason for doing that, I\u0027d prefer we skip it.",
+      "revId": "b427d253c849f15521af8992d88f932856b34f90",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83908e5d_ee6b1156",
+        "filename": "pc/peer_connection_factory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-15T07:51:32Z",
+      "side": 1,
+      "message": "I think it\u0027s kind-of normal with a pointer that is const but points to a non-const object. This class could have a bunch of\n\n  const std::unique_ptr\u003cFoo\u003e foo_;\n\nwith the understanding that the pointer is set at construction time, and may be safely read by any thread. While the pointed-to object may have mutable state and it\u0027s own synchronization or thread checkers to coordinate access.\n\nAnd an accessor method for the foo_ pointer could then be const, but I don\u0027t have a strong opinion on that. It\u0027s more important that the member variable is const.",
+      "parentUuid": "32e1a693_21237945",
       "revId": "b427d253c849f15521af8992d88f932856b34f90",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }

@@ -16,6 +16,29 @@
       "message": "As for the concern with const functions returning non-const pointers, this is a misfeature that\u0027s been there for a while. I tried skipping the constness on some, but then I got several errors for cases where they were called with a const \"this\".\n\nThe correct solution is probably to double-declare the accessors (one const returning a const pointer, one non-const returning a non-const pointer), and then just deal with the places that still don\u0027t compile.\n\nLater CL.\n",
       "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "429e0084_94e5294d",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-15T07:51:32Z",
+      "side": 1,
+      "message": "Spelling.",
+      "range": {
+        "startLine": 79,
+        "startChar": 5,
+        "endLine": 79,
+        "endChar": 9
+      },
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
