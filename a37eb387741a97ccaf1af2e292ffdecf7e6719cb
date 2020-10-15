@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e74bb7a_bae237cd",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-15T10:22:23Z",
+      "side": 1,
+      "message": "Indeed. Luckily it\u0027s purely internal.",
+      "parentUuid": "4baa3fc1_d3cd6bb8",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a9ce55b_33e658e3",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-10-15T10:10:18Z",
       "side": 1,
       "message": "nit: thread_holder-\u003eget()",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2013cec8_d54c62c5",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-15T10:22:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1a9ce55b_33e658e3",
       "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -69,6 +105,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73c2128b_ef2b4078",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-15T10:22:23Z",
+      "side": 1,
+      "message": "I don\u0027t care that much about constness of wraps_current_hread_, because it\u0027s not exposed in any way, shape or form - it\u0027s purely info passed from the constructor to the destructor.\n\nSame with the owned_*_thread member variables.",
+      "parentUuid": "c6db4563_acb433f9",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8301663a_a7c11415",
@@ -82,6 +136,24 @@
       "writtenOn": "2020-10-15T10:10:18Z",
       "side": 1,
       "message": "looks like this is a const candidate as well - fine to leave a todo for now.",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcbbdaee_6a42faa8",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-15T10:22:23Z",
+      "side": 1,
+      "message": "Yep, it\u0027s possible with another helper function.",
+      "parentUuid": "8301663a_a7c11415",
       "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },

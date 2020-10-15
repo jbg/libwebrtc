@@ -33,6 +33,23 @@
       "message": "Great - I think we should just land this as is. I left some minor ponderings since I\u0027d already written them, but this is already a substantial improvement.",
       "revId": "78cc3d32c05f80377a9c725027ac732a27adee56",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a20614e_eb2a4211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-15T10:22:23Z",
+      "side": 1,
+      "message": "Thanks - submitting as-is!\nThis affects my next refactoring piece, so it\u0027s good to unblock that.\n",
+      "revId": "78cc3d32c05f80377a9c725027ac732a27adee56",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
