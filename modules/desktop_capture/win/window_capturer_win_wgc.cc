@@ -118,7 +118,6 @@ void WindowCapturerWinWgc::CaptureFrame() {
   }
 
   if (!frame) {
-    RTC_LOG(LS_WARNING) << "GetMostRecentFrame returned an empty frame.";
     callback_->OnCaptureResult(DesktopCapturer::Result::ERROR_TEMPORARY,
                                /*frame=*/nullptr);
     return;
