@@ -20,6 +20,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4baa3fc1_d3cd6bb8",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-15T10:10:18Z",
+      "side": 1,
+      "message": "fyi - the style guide does allow passing by non-const reference now. That might make this look a bit simpler (avoid the dereferencing).",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a9ce55b_33e658e3",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-15T10:10:18Z",
+      "side": 1,
+      "message": "nit: thread_holder-\u003eget()",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6db4563_acb433f9",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-15T10:10:18Z",
+      "side": 1,
+      "message": "I guess that for this to be \"const-able\" you\u0027d have to have a struct with a Thread* and a bool (and this function returns such an object) - or possibly a std::pair\u003c\u003e. Still possible though ;)",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8301663a_a7c11415",
+        "filename": "pc/connection_context.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-15T10:10:18Z",
+      "side": 1,
+      "message": "looks like this is a const candidate as well - fine to leave a todo for now.",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "429e0084_94e5294d",
         "filename": "pc/connection_context.h",
         "patchSetId": 4
@@ -61,6 +129,40 @@
         "endLine": 79,
         "endChar": 9
       },
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5040b145_367fda24",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-15T10:10:18Z",
+      "side": 1,
+      "message": "don\u0027t suppose we could make this const? 😐",
+      "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8276c72_64ae57e5",
+        "filename": "pc/connection_context.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5508
+      },
+      "writtenOn": "2020-10-15T10:10:18Z",
+      "side": 1,
+      "message": "w00t!",
       "revId": "a37eb387741a97ccaf1af2e292ffdecf7e6719cb",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
