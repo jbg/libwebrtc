@@ -16,6 +16,52 @@
       "message": "This version now has the IWYU script.\n",
       "revId": "6a95f3fbf7d298e9a036afe87e89f037523bfafa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f46ac62_91efe993",
+        "filename": "tools_webrtc/iwyu",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-16T14:11:55Z",
+      "side": 1,
+      "message": "On Linux, we might need more macros, like -DWEBRTC_LINUX but I am not sure what this does.\n\nIs it just to suggest the preprocessor what to expand?",
+      "range": {
+        "startLine": 11,
+        "startChar": 41,
+        "endLine": 11,
+        "endChar": 55
+      },
+      "revId": "6a95f3fbf7d298e9a036afe87e89f037523bfafa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b9598d_8b971393",
+        "filename": "tools_webrtc/iwyu",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-16T14:11:55Z",
+      "side": 1,
+      "message": "Nice.\n\nIIUC, at the moment the tool is replicating #includes we have in the .h file to the .cc file (it doesn\u0027t says: \"Ok, you are #including in the .h file so I don\u0027t add that to the .cc file\").\n\nThis might be a small regression since we will generate a really big file after the preprocessor has finished to run.\n\nMaybe there is a flag also for that?\n\n+Karl: WDYT?",
+      "range": {
+        "startLine": 11,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "6a95f3fbf7d298e9a036afe87e89f037523bfafa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
