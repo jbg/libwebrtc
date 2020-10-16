@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dea4787_f4d5dbe2",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5087
+      },
+      "writtenOn": "2020-10-16T09:18:32Z",
+      "side": 0,
+      "message": "These should not be removed since we use RTC_CHECK and RTC_LOG. If we rely on transitive #includes we might have a brittle build in the future (remove the include in a header file included here will break the build).",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "711de82cd1ce75d9e7c0a1230fa080a5eaf6b07d",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
