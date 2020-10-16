@@ -11,7 +11,7 @@
 #ifndef MODULES_AUDIO_MIXER_OUTPUT_RATE_CALCULATOR_H_
 #define MODULES_AUDIO_MIXER_OUTPUT_RATE_CALCULATOR_H_
 
-#include <vector>
+#include "api/array_view.h"
 
 namespace webrtc {
 
@@ -20,7 +20,7 @@ namespace webrtc {
 class OutputRateCalculator {
  public:
   virtual int CalculateOutputRate(
-      const std::vector<int>& preferred_sample_rates) = 0;
+      rtc::ArrayView<const int> preferred_sample_rates) = 0;
   virtual ~OutputRateCalculator() {}
 };
 

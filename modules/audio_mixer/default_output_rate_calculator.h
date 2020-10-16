@@ -13,6 +13,7 @@
 
 #include <vector>
 
+#include "api/array_view.h"
 #include "modules/audio_mixer/output_rate_calculator.h"
 
 namespace webrtc {
@@ -26,7 +27,7 @@ class DefaultOutputRateCalculator : public OutputRateCalculator {
   // AudioProcessing::NativeRate. If |preferred_sample_rates| is
   // empty, returns |kDefaultFrequency|.
   int CalculateOutputRate(
-      const std::vector<int>& preferred_sample_rates) override;
+      rtc::ArrayView<const int> preferred_sample_rates) override;
   ~DefaultOutputRateCalculator() override {}
 };
 
