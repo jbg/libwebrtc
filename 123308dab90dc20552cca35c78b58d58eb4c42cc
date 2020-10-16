@@ -33,6 +33,24 @@
       "message": "Add a comment about not subscribing to the SCTP_SEND_FAILED_EVENT until \u003cbug reference in usrcsctp\u003e is fixed - it seems like a strange thing to not care about.",
       "revId": "123308dab90dc20552cca35c78b58d58eb4c42cc",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "661e3459_9d36d556",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-10-16T21:07:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0953258a_42e52bc9",
+      "revId": "123308dab90dc20552cca35c78b58d58eb4c42cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
