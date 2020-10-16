@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "964cf2fe_b0c4e16a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13849
+      },
+      "writtenOn": "2020-10-16T16:23:53Z",
+      "side": 1,
+      "message": "PTAL!\n\nNote that I didn\u0027t end up using shrink_to_fit as it looks like it is a \u0027non-binding\u0027 request so it isn\u0027t guaranteed to occur and there is a cost associated with it when it does occur.",
+      "revId": "d0c02eccfd573f784490b802ca990440400de839",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
