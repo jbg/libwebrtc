@@ -20,31 +20,13 @@
 #include <vector>
 
 #include "api/peer_connection_interface.h"
-#include "api/transport/data_channel_transport_interface.h"
-#include "api/turn_customizer.h"
-#include "pc/connection_context.h"
-#include "pc/data_channel_controller.h"
-#include "pc/ice_server_parsing.h"
-#include "pc/jsep_transport_controller.h"
-#include "pc/peer_connection_factory.h"
 #include "pc/peer_connection_internal.h"
 #include "pc/peer_connection_message_handler.h"
-#include "pc/rtc_stats_collector.h"
-#include "pc/rtp_sender.h"
-#include "pc/rtp_transceiver.h"
-#include "pc/sctp_transport.h"
 #include "pc/sdp_offer_answer.h"
 #include "pc/stats_collector.h"
 #include "pc/stream_collection.h"
 #include "pc/transceiver_list.h"
 #include "pc/usage_pattern.h"
-#include "pc/webrtc_session_description_factory.h"
-#include "rtc_base/experiments/field_trial_parser.h"
-#include "rtc_base/operations_chain.h"
-#include "rtc_base/race_checker.h"
-#include "rtc_base/task_utils/pending_task_safety_flag.h"
-#include "rtc_base/unique_id_generator.h"
-#include "rtc_base/weak_ptr.h"
 
 namespace webrtc {
 
