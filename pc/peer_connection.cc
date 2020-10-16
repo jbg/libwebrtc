@@ -10,57 +10,110 @@
 
 #include "pc/peer_connection.h"
 
+#include <limits.h>
+#include <stddef.h>
+#include <sys/socket.h>
 #include <algorithm>
-#include <limits>
 #include <memory>
-#include <queue>
 #include <set>
 #include <utility>
 #include <vector>
 
 #include "absl/algorithm/container.h"
 #include "absl/strings/match.h"
+#include "api/adaptation/resource.h"
+#include "api/async_resolver_factory.h"
+#include "api/candidate.h"
+#include "api/data_channel_interface.h"
+#include "api/dtls_transport_interface.h"
+#include "api/ice_transport_interface.h"
 #include "api/jsep_ice_candidate.h"
-#include "api/jsep_session_description.h"
-#include "api/media_stream_proxy.h"
-#include "api/media_stream_track_proxy.h"
+#include "api/media_stream_interface.h"
+#include "api/packet_socket_factory.h"
 #include "api/rtc_error.h"
 #include "api/rtc_event_log/rtc_event_log.h"
-#include "api/rtc_event_log_output_file.h"
+#include "api/rtc_event_log_output.h"
 #include "api/rtp_parameters.h"
+#include "api/rtp_receiver_interface.h"
+#include "api/rtp_sender_interface.h"
+#include "api/rtp_transceiver_direction.h"
+#include "api/rtp_transceiver_interface.h"
+#include "api/sctp_transport_interface.h"
+#include "api/set_local_description_observer_interface.h"
+#include "api/set_remote_description_observer_interface.h"
+#include "api/stats/rtc_stats_collector_callback.h"
+#include "api/task_queue/queued_task.h"
+#include "api/transport/bitrate_settings.h"
+#include "api/transport/data_channel_transport_interface.h"
+#include "api/transport/webrtc_key_value_config.h"
 #include "api/uma_metrics.h"
 #include "api/video/builtin_video_bitrate_allocator_factory.h"
-#include "call/call.h"
-#include "logging/rtc_event_log/ice_logger.h"
+#include "api/video/video_bitrate_allocator_factory.h"
+#include "api/video/video_codec_constants.h"
+#include "call/audio_state.h"
+#include "call/packet_receiver.h"
+#include "media/base/media_config.h"
 #include "media/base/rid_description.h"
-#include "media/sctp/sctp_transport.h"
+#include "media/base/stream_params.h"
+#include "modules/rtp_rtcp/include/rtp_rtcp_defines.h"
+#include "p2p/base/connection.h"
+#include "p2p/base/connection_info.h"
+#include "p2p/base/dtls_transport_internal.h"
+#include "p2p/base/p2p_constants.h"
+#include "p2p/base/p2p_transport_channel.h"
+#include "p2p/base/port_allocator.h"
+#include "p2p/base/transport_description.h"
+#include "p2p/base/transport_info.h"
 #include "pc/audio_rtp_receiver.h"
-#include "pc/audio_track.h"
-#include "pc/channel.h"
+#include "pc/channel_interface.h"
 #include "pc/channel_manager.h"
-#include "pc/dtmf_sender.h"
-#include "pc/media_stream.h"
-#include "pc/media_stream_observer.h"
-#include "pc/remote_audio_source.h"
-#include "pc/rtp_media_utils.h"
+#include "pc/data_channel_utils.h"
+#include "pc/dtls_transport.h"
+#include "pc/ice_server_parsing.h"
+#include "pc/rtc_stats_collector.h"
 #include "pc/rtp_receiver.h"
-#include "pc/rtp_sender.h"
+#include "pc/sctp_data_channel.h"
 #include "pc/sctp_transport.h"
-#include "pc/sctp_utils.h"
 #include "pc/sdp_offer_answer.h"
-#include "pc/sdp_utils.h"
-#include "pc/stream_collection.h"
+#include "pc/session_description.h"
+#include "pc/stats_collector.h"
+#include "pc/transport_stats.h"
 #include "pc/video_rtp_receiver.h"
-#include "pc/video_track.h"
+#include "pc/webrtc_session_description_factory.h"
 #include "rtc_base/bind.h"
-#include "rtc_base/checks.h"
+#include "rtc_base/helpers.h"
+#include "rtc_base/ip_address.h"
+#include "rtc_base/location.h"
 #include "rtc_base/logging.h"
+#include "rtc_base/net_helper.h"
+#include "rtc_base/network_constants.h"
+#include "rtc_base/robo_caller.h"
+#include "rtc_base/rtc_certificate.h"
+#include "rtc_base/rtc_certificate_generator.h"
+#include "rtc_base/socket_address.h"
+#include "rtc_base/ssl_certificate.h"
 #include "rtc_base/string_encode.h"
-#include "rtc_base/strings/string_builder.h"
+#include "rtc_base/task_utils/pending_task_safety_flag.h"
 #include "rtc_base/task_utils/to_queued_task.h"
 #include "rtc_base/trace_event.h"
-#include "system_wrappers/include/clock.h"
 #include "system_wrappers/include/metrics.h"
+
+namespace cricket {
+class SimulcastDescription;
+class SimulcastLayerList;
+struct SimulcastLayer;
+}  // namespace cricket
+namespace rtc {
+class CopyOnWriteBuffer;
+struct SentPacket;
+}  // namespace rtc
+namespace webrtc {
+class RtpTransportInternal;
+class TurnCustomizer;
+namespace metrics {
+class Histogram;
+}  // namespace metrics
+}  // namespace webrtc
 
 using cricket::ContentInfo;
 using cricket::ContentInfos;
