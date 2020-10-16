@@ -75,6 +75,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13dcc3c6_90316088",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-16T12:19:29Z",
+      "side": 1,
+      "message": "An alternative approach to returning ArrayViews that point into vectors owned by the class is to have methods that take a vector output argument where they put the values; it is then the responsibility of the caller to ensure that the vector isn\u0027t reallocated fresh each time. The advantage of this approach is that one doesn\u0027t have to make assumptions about how long the returned ArrayView will point to live data, which is good in general and necessary in case of thread safety.\n\nThe current approach seems to work well here, though.",
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73dfbe34_c2238387",
