@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7c882e8_f6e60895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-16T13:44:47Z",
+      "side": 1,
+      "message": "LGTM, PTAL at nit",
+      "revId": "53d93120b177a497e789d8a47b8d448e1f172057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20de371b_033f1ebb",
+        "filename": "modules/video_coding/svc/scalability_structure_key_svc_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-16T13:44:47Z",
+      "side": 1,
+      "message": "nit: Maybe validate everything before the restart, then clear |frames| and then validate the rest. Or maybe have two vectors for before and after the reset?",
+      "range": {
+        "startLine": 124,
+        "startChar": 25,
+        "endLine": 124,
+        "endChar": 38
+      },
+      "revId": "53d93120b177a497e789d8a47b8d448e1f172057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
