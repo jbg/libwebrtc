@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76fcd6f_ff5e6dc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-16T15:01:13Z",
+      "side": 1,
+      "message": "Thanks!\n",
+      "revId": "024dcb56e51081abee2b48b06800de0f3fefa7f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3da0a469_f515d650",
@@ -48,6 +65,30 @@
       "writtenOn": "2020-10-16T12:12:11Z",
       "side": 1,
       "message": "the",
+      "range": {
+        "startLine": 110,
+        "startChar": 44,
+        "endLine": 110,
+        "endChar": 47
+      },
+      "revId": "024dcb56e51081abee2b48b06800de0f3fefa7f8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c65d6f_6c03f53e",
+        "filename": "pc/peer_connection.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-16T15:01:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3da0a469_f515d650",
       "range": {
         "startLine": 110,
         "startChar": 44,
