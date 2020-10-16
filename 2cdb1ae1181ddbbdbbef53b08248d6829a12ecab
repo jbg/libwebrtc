@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f62572_1a7fcd63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-16T10:19:31Z",
+      "side": 1,
+      "message": "web",
+      "range": {
+        "startLine": 7,
+        "startChar": 35,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "20612860_a06915cc",
@@ -31,6 +54,46 @@
       "writtenOn": "2020-10-16T10:10:49Z",
       "side": 1,
       "message": "Great CL!!!",
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa6aea3d_3267475c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-16T10:19:31Z",
+      "side": 1,
+      "message": "LGTM, great work Olga!",
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73dfbe34_c2238387",
+        "filename": "modules/audio_mixer/audio_mixer_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-16T10:19:31Z",
+      "side": 1,
+      "message": "Returns true if `a` is preferred over `b` as a source to be mixed.",
+      "range": {
+        "startLine": 61,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 57
+      },
       "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -76,6 +139,98 @@
         "startChar": 6,
         "endLine": 118,
         "endChar": 27
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cdb9edd_f968246b",
+        "filename": "modules/audio_mixer/audio_mixer_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-16T10:19:31Z",
+      "side": 1,
+      "message": "Note that `AudioFrame::swap` is available (see https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/api/audio/audio_frame.h;l\u003d63). I wonder if we can replace this call to the copy-assign ctor with a swap operation (maybe in a follow-up CL since it requires more code).",
+      "range": {
+        "startLine": 193,
+        "startChar": 73,
+        "endLine": 194,
+        "endChar": 19
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e197cd12_fbfaaf75",
+        "filename": "modules/audio_mixer/audio_mixer_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-16T10:19:31Z",
+      "side": 1,
+      "message": "We might get better performance if leverage `AudioFrame::swap` here. However, not sure if possible since `p.audio_frame` is also used below.",
+      "range": {
+        "startLine": 220,
+        "startChar": 6,
+        "endLine": 220,
+        "endChar": 77
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81faf3aa_b5024ba9",
+        "filename": "modules/audio_mixer/audio_mixer_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-16T10:19:31Z",
+      "side": 1,
+      "message": "this struct can be private and fw decl can be used as done for `HelperContainers` since in this .h file it\u0027s only used as template arg for a unique ptr",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 21
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b3ef307_9a4a7ccb",
+        "filename": "modules/audio_mixer/audio_mixer_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-16T10:19:31Z",
+      "side": 1,
+      "message": "`const AudioFrame* const`, since the output mix signal is written into `audio_frame_for_mixing` (argument in `AudioMixerImpl::Mix`)",
+      "range": {
+        "startLine": 80,
+        "startChar": 17,
+        "endLine": 80,
+        "endChar": 34
       },
       "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
