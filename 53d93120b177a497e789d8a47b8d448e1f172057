@@ -39,6 +39,30 @@
       },
       "revId": "53d93120b177a497e789d8a47b8d448e1f172057",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "705cc612_002358b1",
+        "filename": "modules/video_coding/svc/scalability_structure_key_svc_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5019
+      },
+      "writtenOn": "2020-10-16T17:23:20Z",
+      "side": 1,
+      "message": "I prefer not to interleave act and assert blocks (i.e. do not want to validate and clear frames before adding more).\n\nI did consider two vectors, but not too sure it would be cleaner: I do not want leave an impression a new vector triggers a key frame (I did consider wrapper.GenerateFrames to trigger a key frame when an empty vector is passed)\n\nHowever there is no need to test last 3 frame twice.\n\nSlightly rewrote these last two expectation, hoping it better shows there happen to be two coded video sequences in this test.",
+      "parentUuid": "20de371b_033f1ebb",
+      "range": {
+        "startLine": 124,
+        "startChar": 25,
+        "endLine": 124,
+        "endChar": 38
+      },
+      "revId": "53d93120b177a497e789d8a47b8d448e1f172057",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
