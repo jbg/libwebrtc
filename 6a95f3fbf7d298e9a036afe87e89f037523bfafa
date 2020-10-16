@@ -62,6 +62,30 @@
       },
       "revId": "6a95f3fbf7d298e9a036afe87e89f037523bfafa",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd721a46_8b934cfc",
+        "filename": "tools_webrtc/iwyu",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-16T20:47:14Z",
+      "side": 1,
+      "message": "When given no flags, it complained that endianness wasn\u0027t defined. Defining -DWEBRTC_POSIX silenced the error.\nLet\u0027s check in and iterate :-)",
+      "parentUuid": "8f46ac62_91efe993",
+      "range": {
+        "startLine": 11,
+        "startChar": 41,
+        "endLine": 11,
+        "endChar": 55
+      },
+      "revId": "6a95f3fbf7d298e9a036afe87e89f037523bfafa",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

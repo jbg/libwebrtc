@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32291a1c_7c617c45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-16T20:47:14Z",
+      "side": 1,
+      "message": "More trickery - I found a way to use grep (!) to eliminate the duplicated #includes\nbetween the .h file and the .cc file.\n\nNew script: tools_webrtc/apply-iwyu\n",
+      "revId": "42d11d09362b5164ce00ab9bac846ed4aba6bdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
