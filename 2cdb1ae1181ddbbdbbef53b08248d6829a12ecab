@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "579bad55_a4bd4485",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2f62572_1a7fcd63",
+      "range": {
+        "startLine": 7,
+        "startChar": 35,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "20612860_a06915cc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -92,6 +116,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64eae077_02f4b377",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "Here the problem is we want to return less elements that the vector contains, without reallocating the vector. So even when receiving vector as an output argument we may still want to return ArrayView.",
+      "parentUuid": "13dcc3c6_90316088",
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73dfbe34_c2238387",
@@ -105,6 +147,30 @@
       "writtenOn": "2020-10-16T10:19:31Z",
       "side": 1,
       "message": "Returns true if `a` is preferred over `b` as a source to be mixed.",
+      "range": {
+        "startLine": 61,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 57
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18a99028_e333a886",
+        "filename": "modules/audio_mixer/audio_mixer_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73dfbe34_c2238387",
       "range": {
         "startLine": 61,
         "startChar": 3,
@@ -138,6 +204,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e69dd20_fc92c45f",
+        "filename": "modules/audio_mixer/audio_mixer_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd58d0fb_565b6480",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 3
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf5a4968_f88015c2",
@@ -151,6 +241,30 @@
       "writtenOn": "2020-10-16T10:10:49Z",
       "side": 1,
       "message": "I think a typical mixer implementation is to have 3 main sources.\n\nI would suggest pre-allocating this to ensure that there is space for 3 elements (the size of each element is so low since only pointers are stored so I think it should be fine to do that.)\n\nI would therefore suggesting putting \naudio_source_list_.reserve(3);\n in the body of the constructor.\n\nOne more comment is that I don\u0027t think this initialization line is needed in the initializer list.",
+      "range": {
+        "startLine": 118,
+        "startChar": 6,
+        "endLine": 118,
+        "endChar": 27
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d1a4bd_f5e2562f",
+        "filename": "modules/audio_mixer/audio_mixer_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "Not sure about this, but implemented as requested.",
+      "parentUuid": "cf5a4968_f88015c2",
       "range": {
         "startLine": 118,
         "startChar": 6,
@@ -184,6 +298,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c65710ae_9224b5f7",
+        "filename": "modules/audio_mixer/audio_mixer_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "This SourceFrame is just a weird struct with pointers, so I\u0027m not sure we\u0027ll gain anything here.",
+      "parentUuid": "6cdb9edd_f968246b",
+      "range": {
+        "startLine": 193,
+        "startChar": 73,
+        "endLine": 194,
+        "endChar": 19
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e197cd12_fbfaaf75",
@@ -197,6 +335,30 @@
       "writtenOn": "2020-10-16T10:19:31Z",
       "side": 1,
       "message": "We might get better performance if leverage `AudioFrame::swap` here. However, not sure if possible since `p.audio_frame` is also used below.",
+      "range": {
+        "startLine": 220,
+        "startChar": 6,
+        "endLine": 220,
+        "endChar": 77
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81101a95_3efc0eb9",
+        "filename": "modules/audio_mixer/audio_mixer_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "These are pointers.",
+      "parentUuid": "e197cd12_fbfaaf75",
       "range": {
         "startLine": 220,
         "startChar": 6,
@@ -230,6 +392,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6defac53_be5a1ca7",
+        "filename": "modules/audio_mixer/audio_mixer_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81faf3aa_b5024ba9",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 21
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b3ef307_9a4a7ccb",
@@ -243,6 +429,30 @@
       "writtenOn": "2020-10-16T10:19:31Z",
       "side": 1,
       "message": "`const AudioFrame* const`, since the output mix signal is written into `audio_frame_for_mixing` (argument in `AudioMixerImpl::Mix`)",
+      "range": {
+        "startLine": 80,
+        "startChar": 17,
+        "endLine": 80,
+        "endChar": 34
+      },
+      "revId": "2cdb1ae1181ddbbdbbef53b08248d6829a12ecab",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf3ed2b_43cf9d9b",
+        "filename": "modules/audio_mixer/audio_mixer_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-16T15:54:34Z",
+      "side": 1,
+      "message": "Unfortunately not: RemixFrame() in FrameCombiner downmixes source frames: https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_mixer/audio_frame_manipulator.cc;drc\u003d57f4b8bbb8d389e9fca6e602caff3008197018a1;l\u003d58",
+      "parentUuid": "8b3ef307_9a4a7ccb",
       "range": {
         "startLine": 80,
         "startChar": 17,
