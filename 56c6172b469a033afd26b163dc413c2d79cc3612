@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c76f6a78_77c0e9c6",
+        "filename": "modules/video_coding/svc/scalability_structure_key_svc.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-16T09:23:41Z",
+      "side": 1,
+      "message": "I realize this now, but maybe it would be simpler to keep FramePattern::kKey and then change this to an absl::optional\u003cFramePattern\u003e. Then we would not need to have the {kKey, kDelta} in the .cc file.\n\nWDYT?",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 37
+      },
+      "revId": "56c6172b469a033afd26b163dc413c2d79cc3612",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eee01412_e9d588e4",
+        "filename": "modules/video_coding/svc/scalability_structure_key_svc_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-16T09:23:41Z",
+      "side": 1,
+      "message": "WDYT about renaming this to \"GenerateAndCheckFrames\", \"GenerateFrameAndCheckRefs\" or something similar?",
+      "range": {
+        "startLine": 48,
+        "startChar": 19,
+        "endLine": 48,
+        "endChar": 33
+      },
+      "revId": "56c6172b469a033afd26b163dc413c2d79cc3612",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dafed13_f5a52e39",
+        "filename": "modules/video_coding/svc/scalability_structure_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5527
+      },
+      "writtenOn": "2020-10-16T09:23:41Z",
+      "side": 1,
+      "message": "Weird formatting... Is this what the formatter gave you?",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 58
+      },
+      "revId": "56c6172b469a033afd26b163dc413c2d79cc3612",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
