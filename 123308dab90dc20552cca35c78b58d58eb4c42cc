@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb0a289f_169a4867",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-16T05:52:46Z",
+      "side": 1,
+      "message": "LGTM, but leave the breadcrumbs so that we know why we don\u0027t listen to the problematic event.\n",
+      "revId": "123308dab90dc20552cca35c78b58d58eb4c42cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0953258a_42e52bc9",
+        "filename": "media/sctp/sctp_transport.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-16T05:52:46Z",
+      "side": 1,
+      "message": "Add a comment about not subscribing to the SCTP_SEND_FAILED_EVENT until \u003cbug reference in usrcsctp\u003e is fixed - it seems like a strange thing to not care about.",
+      "revId": "123308dab90dc20552cca35c78b58d58eb4c42cc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
