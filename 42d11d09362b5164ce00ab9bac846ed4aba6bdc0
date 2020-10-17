@@ -41,6 +41,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e579a0c4_e6580fcd",
+        "filename": "pc/peer_connection.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-17T06:37:15Z",
+      "side": 1,
+      "message": "System headers are a general problem. So far I\u0027ve found 2 that are probably OS dependent and guarded by #ifdefs in real configs; I ended up having a separate ban-file for them, currently with two entries. There will probably be more.",
+      "parentUuid": "57181383_7be21eec",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 23
+      },
+      "revId": "42d11d09362b5164ce00ab9bac846ed4aba6bdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d20c5b6_066c0b23",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-10-16T21:30:23Z",
       "side": 1,
       "message": "Also here.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 23
+      },
+      "revId": "42d11d09362b5164ce00ab9bac846ed4aba6bdc0",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba2d4b07_850f05c3",
+        "filename": "pc/sdp_offer_answer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-17T06:37:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1d20c5b6_066c0b23",
       "range": {
         "startLine": 13,
         "startChar": 0,
