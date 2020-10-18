@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "894d3a0a_4f315ccc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5634
+      },
+      "writtenOn": "2020-10-18T19:45:22Z",
+      "side": 1,
+      "message": "I did send out a PSA to webrtc-eng to celebrate the success :-)\n",
+      "revId": "1f7eab68c0ce267b935f9ea3544d3105d7fd19dc",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
