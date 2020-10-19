@@ -10,7 +10,7 @@ vars = {
   # chromium waterfalls. More info at: crbug.com/570091.
   'checkout_configuration': 'default',
   'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration == "default"',
-  'chromium_revision': 'cb51eef7acd81ae25ae478d9417add04db934178',
+  'chromium_revision': 'c6dd1c45895945b14110ef2c2fc57ebae43a1094',
 
   # This can be overridden, e.g. with custom_vars, to download a nonstandard
   # Xcode version in build/mac_toolchain.py
@@ -33,13 +33,13 @@ deps = {
     'condition': 'checkout_android',
   },
   'src/ios': {
-    'url': 'https://chromium.googlesource.com/chromium/src/ios@bedb281b7e1c3f2484ddf29eb6913a1d83bc404d',
+    'url': 'https://chromium.googlesource.com/chromium/src/ios@9392810a1f89b41006cc6122aeeafc47f472e2f0',
     'condition': 'checkout_ios',
   },
   'src/testing':
     'https://chromium.googlesource.com/chromium/src/testing@3a89edfa61576671fc4ca7d728625af6316b3860',
   'src/third_party':
-    'https://chromium.googlesource.com/chromium/src/third_party@27d9d388f752dee82ac4b1a556d13b141a59c8e0',
+    'https://chromium.googlesource.com/chromium/src/third_party@e49e8d377c328676855ec60d3fc691ab92599a47',
 
   'src/buildtools/linux64': {
     'packages': [
@@ -130,7 +130,7 @@ deps = {
   'src/third_party/breakpad/breakpad':
     'https://chromium.googlesource.com/breakpad/breakpad.git@9c4671f2e3a63c0f155d9b2511192d0b5fa7f760',
   'src/third_party/catapult':
-    'https://chromium.googlesource.com/catapult.git@91f276e903b3495d5fd4ad74e289e0893787d9a1',
+    'https://chromium.googlesource.com/catapult.git@d384f3643dbeebaea0e3a6c5245d90644a755fbc',
   'src/third_party/ced/src': {
     'url': 'https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git@ba412eaaacd3186085babcd901679a48863c7dd5',
   },
