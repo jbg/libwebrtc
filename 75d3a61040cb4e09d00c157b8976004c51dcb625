@@ -33,6 +33,24 @@
       "message": "Could you instead do\n\n  return CalculateOutputRateFromRange(preferred_sample_rates);\n\n?\n\nThis is the usual idiom when replacing a virtual function with a similar virtual function; it allows callers to call either the old or the new function, and callees to implement either the old or the new function (or both).",
       "revId": "75d3a61040cb4e09d00c157b8976004c51dcb625",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0821b57_eb243fd9",
+        "filename": "modules/audio_mixer/output_rate_calculator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5826
+      },
+      "writtenOn": "2020-10-19T12:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "942924d3_2350e8f1",
+      "revId": "75d3a61040cb4e09d00c157b8976004c51dcb625",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
