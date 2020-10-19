@@ -730,6 +730,7 @@ TEST_F(CallPerfTest, Bitrate_Kbps_NoPadWithoutMinTransmitBitrate) {
 #endif
 TEST_F(CallPerfTest, MAYBE_KeepsHighBitrateWhenReconfiguringSender) {
   static const uint32_t kInitialBitrateKbps = 400;
+  static const uint32_t kMaxInitialOverheadKbps = 20;
   static const uint32_t kReconfigureThresholdKbps = 600;
 
   class VideoStreamFactory
@@ -773,7 +774,9 @@ TEST_F(CallPerfTest, MAYBE_KeepsHighBitrateWhenReconfiguringSender) {
         uint32_t expected_bitrate = last_set_bitrate_kbps_ > 0
                                         ? last_set_bitrate_kbps_
                                         : kInitialBitrateKbps;
-        EXPECT_EQ(expected_bitrate, config->startBitrate)
+        EXPECT_TRUE(config->startBitrate <= expected_bitrate &&
+                    config->startBitrate >=
+                        expected_bitrate - kMaxInitialOverheadKbps)
             << "Encoder not initialized at expected bitrate.";
         EXPECT_EQ(kDefaultWidth, config->width);
         EXPECT_EQ(kDefaultHeight, config->height);
