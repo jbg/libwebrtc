@@ -18,6 +18,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "881ebbde_3893dc6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-10-20T09:20:44Z",
+      "side": 1,
+      "message": "Unit test added in https://webrtc-review.googlesource.com/c/src/+/188583\n\nThis is a cherry-pick to M87.",
+      "parentUuid": "4e2b0f5f_f1d3d4b7",
+      "revId": "168aa2ca02c324fb34bb11c90d6ac47a847c5c2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbb8b8a0_10c842d7",
@@ -31,6 +49,30 @@
       "writtenOn": "2020-10-20T08:58:44Z",
       "side": 1,
       "message": "Same comment as on the other file.",
+      "range": {
+        "startLine": 699,
+        "startChar": 2,
+        "endLine": 699,
+        "endChar": 45
+      },
+      "revId": "168aa2ca02c324fb34bb11c90d6ac47a847c5c2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ed5313_1fa96f98",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_legacy.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-10-20T09:20:44Z",
+      "side": 1,
+      "message": "Same answer :)",
+      "parentUuid": "bbb8b8a0_10c842d7",
       "range": {
         "startLine": 699,
         "startChar": 2,
@@ -64,6 +106,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7404f77_0e74386b",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-10-20T09:20:44Z",
+      "side": 1,
+      "message": "Correct. It\u0027s possible that that it could be changed to some other type, but that would require other changes as well.",
+      "parentUuid": "1e2a5f1c_a793c952",
+      "range": {
+        "startLine": 293,
+        "startChar": 38,
+        "endLine": 293,
+        "endChar": 53
+      },
+      "revId": "168aa2ca02c324fb34bb11c90d6ac47a847c5c2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0199317d_46c2d8f5",
@@ -77,6 +143,30 @@
       "writtenOn": "2020-10-20T08:58:44Z",
       "side": 1,
       "message": "I don\u0027t think that\u0027s the same as:\n\n  std::vector\u003cuint8_t\u003e buffer;\n  buffer.reserve(base_event-\u003epacket().size());\n\nBecause I think the version you\u0027re using now is compelled to zero out the contents.\nSee #4 in https://en.cppreference.com/w/cpp/container/vector/vector - default-inserted instances of T, which in this case are 0s, I think.\nBut you probably just want to allocate some memory, and don\u0027t care about the values, as you\u0027re about to overwrite them anyway?",
+      "range": {
+        "startLine": 347,
+        "startChar": 4,
+        "endLine": 347,
+        "endChar": 61
+      },
+      "revId": "168aa2ca02c324fb34bb11c90d6ac47a847c5c2f",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c5eb9b_21f42836",
+        "filename": "logging/rtc_event_log/encoder/rtc_event_log_encoder_new_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 5150
+      },
+      "writtenOn": "2020-10-20T09:20:44Z",
+      "side": 1,
+      "message": "I don\u0027t care about the values, but reserve() doesn\u0027t set the size, and I don\u0027t think it would be good practice to index past size()",
+      "parentUuid": "0199317d_46c2d8f5",
       "range": {
         "startLine": 347,
         "startChar": 4,
