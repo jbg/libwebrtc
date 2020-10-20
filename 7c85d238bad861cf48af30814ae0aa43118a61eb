@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "886b8601_fe33dca5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-10-20T20:37:06Z",
+      "side": 1,
+      "message": "PTAL. The only difference from the original CL is that UpdatePayloadTypeDemuxingState is still located in peer_connection.cc rather than sdp_offer_answer.cc.",
+      "revId": "7c85d238bad861cf48af30814ae0aa43118a61eb",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
