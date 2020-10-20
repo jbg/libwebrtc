@@ -35,6 +35,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8746b1b7_fd9b8c0d",
+        "filename": "call/call_perf_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-10-20T09:07:58Z",
+      "side": 1,
+      "message": "See my other comment.",
+      "parentUuid": "1a5e1865_01e6be35",
+      "revId": "ec962308bd1be309004595b3412aa9de54f5f9a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6479262_b52f1f54",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-10-20T08:12:12Z",
       "side": 1,
       "message": "Is this a bug?",
+      "revId": "ec962308bd1be309004595b3412aa9de54f5f9a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdba0f6b_5ef960e2",
+        "filename": "call/call_perf_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-10-20T09:07:58Z",
+      "side": 1,
+      "message": "No there is an EXPECT_EQ on the configured bitrate which becomes slightly lower due to subtracting the overhead. However, it\u0027s kind of hard to test since it depends on how we calculate that overhead (which is also not done correctly). I could update the test to check if the configured bitrate falls in an acceptable range, but there might be some better way since I really don\u0027t know these parts well. WDYT?",
+      "parentUuid": "d6479262_b52f1f54",
       "revId": "ec962308bd1be309004595b3412aa9de54f5f9a8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -75,6 +111,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11b0401b_dc3cd1fe",
+        "filename": "modules/audio_coding/codecs/opus/audio_encoder_opus_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-10-20T09:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8424a3e4_70890b8d",
+      "range": {
+        "startLine": 203,
+        "startChar": 31,
+        "endLine": 203,
+        "endChar": 42
+      },
+      "revId": "ec962308bd1be309004595b3412aa9de54f5f9a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30df1535_b19b133c",
@@ -88,6 +148,24 @@
       "writtenOn": "2020-10-20T08:12:26Z",
       "side": 1,
       "message": "Same thing here, shouldn\u0027t we update these tests so they don\u0027t need to disable the field trial? Alternatively, if this requires that someone knowledgeable with this test to take a look, you could add a todo and file a bug.",
+      "revId": "ec962308bd1be309004595b3412aa9de54f5f9a8",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff3a9406_ba9c6ed4",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2769,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-10-20T09:07:58Z",
+      "side": 1,
+      "message": "See my other comment. Added a TODO.\nSeems like sprang@ took the lazy way out last time as well :)",
+      "parentUuid": "30df1535_b19b133c",
       "revId": "ec962308bd1be309004595b3412aa9de54f5f9a8",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
