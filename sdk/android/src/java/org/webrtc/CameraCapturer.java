@@ -43,9 +43,9 @@ abstract class CameraCapturer implements CameraVideoCapturer {
           Logging.d(TAG, "Create session done. Switch state: " + switchState);
           uiThreadHandler.removeCallbacks(openCameraTimeoutRunnable);
           synchronized (stateLock) {
-            capturerObserver.onCapturerStarted(true /* success */);
             sessionOpening = false;
             currentSession = session;
+            capturerObserver.onCapturerStarted(true /* success */);
             cameraStatistics = new CameraStatistics(surfaceHelper, eventsHandler);
             firstFrameObserved = false;
             stateLock.notifyAll();
@@ -356,6 +356,24 @@ abstract class CameraCapturer implements CameraVideoCapturer {
         switchCameraInternal(switchEventsHandler, cameraName);
       }
     });
+  }
+
+  /**
+   * Returns the current camera session. This method will return
+   * null if the capturer is stopped.
+   */
+  @Nullable
+  public CameraSession getCameraSession() {
+    return currentSession;
+  }
+
+  /**
+   * Returns the camera thread Handler. This method will return
+   * null if the capturer has been disposed.
+   */
+  @Nullable
+  public Handler getHandler() {
+    return cameraThreadHandler;
   }
 
   @Override

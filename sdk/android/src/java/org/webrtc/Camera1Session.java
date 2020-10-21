@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 import org.webrtc.CameraEnumerationAndroid.CaptureFormat;
 
 @SuppressWarnings("deprecation")
-class Camera1Session implements CameraSession {
+public class Camera1Session implements CameraSession {
   private static final String TAG = "Camera1Session";
   private static final int NUMBER_OF_CAPTURE_BUFFERS = 3;
 
@@ -48,7 +48,6 @@ class Camera1Session implements CameraSession {
   private SessionState state;
   private boolean firstFrameReported;
 
-  // TODO(titovartem) make correct fix during webrtc:9175
   @SuppressWarnings("ByteBufferBackingArray")
   public static void create(final CreateSessionCallback callback, final Events events,
       final boolean captureToTexture, final Context applicationContext,
@@ -96,11 +95,7 @@ class Camera1Session implements CameraSession {
     }
 
     if (!captureToTexture) {
-      final int frameSize = captureFormat.frameSize();
-      for (int i = 0; i < NUMBER_OF_CAPTURE_BUFFERS; ++i) {
-        final ByteBuffer buffer = ByteBuffer.allocateDirect(frameSize);
-        camera.addCallbackBuffer(buffer.array());
-      }
+      initializeCallbackBuffer(captureFormat, camera);
     }
 
     // Calculate orientation manually and send it as CVO insted.
@@ -108,6 +103,24 @@ class Camera1Session implements CameraSession {
 
     callback.onDone(new Camera1Session(events, captureToTexture, applicationContext,
         surfaceTextureHelper, cameraId, camera, info, captureFormat, constructionTimeNs));
+  }
+
+  /**
+   * Initialize the camera callback buffer.
+   *
+   * This method can be used when starting the session or to re-initialize the
+   * session after applying an update to the camera object.
+   *
+   * TODO(titovartem) make correct fix during webrtc:9175
+   */
+  @SuppressWarnings("ByteBufferBackingArray")
+  public static void initializeCallbackBuffer(
+      CaptureFormat captureFormat, android.hardware.Camera camera) {
+    final int frameSize = captureFormat.frameSize();
+    for (int i = 0; i < NUMBER_OF_CAPTURE_BUFFERS; ++i) {
+      final ByteBuffer buffer = ByteBuffer.allocateDirect(frameSize);
+      camera.addCallbackBuffer(buffer.array());
+    }
   }
 
   private static void updateCameraParameters(android.hardware.Camera camera,
@@ -188,6 +201,20 @@ class Camera1Session implements CameraSession {
     }
   }
 
+  /**
+   * Get the camera object.
+   */
+  public android.hardware.Camera getCamera() {
+    return this.camera;
+  }
+
+  /**
+   * Get the current capture format.
+   */
+  public CaptureFormat getCaptureFormat() {
+    return this.captureFormat;
+  }
+
   private void startCapturing() {
     Logging.d(TAG, "Start capturing");
     checkIsOnCameraThread();
@@ -245,7 +272,12 @@ class Camera1Session implements CameraSession {
     Logging.d(TAG, "Stop done");
   }
 
-  private void listenForTextureFrames() {
+  /**
+   * Start listening for frames captured to a surface texture.
+   *
+   * This method should only be used if |captureToTexture| is true.
+   */
+  public void listenForTextureFrames() {
     surfaceTextureHelper.startListening((VideoFrame frame) -> {
       checkIsOnCameraThread();
 
@@ -274,7 +306,12 @@ class Camera1Session implements CameraSession {
     });
   }
 
-  private void listenForBytebufferFrames() {
+  /**
+   * Start listening for frames captured to a buffer.
+   *
+   * This method should only be used if |captureToTexture| is false.
+   */
+  public void listenForBytebufferFrames() {
     camera.setPreviewCallbackWithBuffer(new android.hardware.Camera.PreviewCallback() {
       @Override
       public void onPreviewFrame(final byte[] data, android.hardware.Camera callbackCamera) {
