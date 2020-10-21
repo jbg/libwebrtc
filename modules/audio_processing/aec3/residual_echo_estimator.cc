@@ -23,19 +23,18 @@
 namespace webrtc {
 namespace {
 
+<<<<<<< HEAD   (dc8f44 Fixing ASAN container-overflow error in DxgiOutputDuplicator)
 bool ModelReverbInNonlinearMode() {
   return !field_trial::IsEnabled("WebRTC-Aec3NonlinearModeReverbKillSwitch");
 }
 
 constexpr float kDefaultTransparentModeGain = 0.f;
+=======
+constexpr float kDefaultTransparentModeGain = 0.01f;
+>>>>>>> CHANGE (7481ba AEC3: Prevent transparent mode from leaking low volume echo)
 
 float GetTransparentModeGain() {
-  if (field_trial::IsEnabled(
-          "WebRTC-Aec3NoSuppressionInTransparentModeKillSwitch")) {
-    return 0.01f;
-  } else {
-    return kDefaultTransparentModeGain;
-  }
+  return kDefaultTransparentModeGain;
 }
 
 float GetEarlyReflectionsDefaultModeGain(
