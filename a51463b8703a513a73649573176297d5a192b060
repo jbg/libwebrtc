@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55a33b35_bce679ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6276
+      },
+      "writtenOn": "2020-10-21T23:21:02Z",
+      "side": 1,
+      "message": "This patch set provides an alternative implementation to a previous patch set.\n\nhttps://webrtc-review.googlesource.com/c/src/+/187446\n\nIn contrast to this previous patch set, this change allows direct access to the CameraSession and related objects so that developers can modify an ongoing session.",
+      "revId": "a51463b8703a513a73649573176297d5a192b060",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
