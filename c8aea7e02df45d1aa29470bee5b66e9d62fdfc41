@@ -52,6 +52,42 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cfb07aa_4ddcd261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-10-22T11:03:37Z",
+      "side": 1,
+      "message": "That would be awesome, thanks.",
+      "parentUuid": "6b48a008_f0afb8ac",
+      "revId": "c8aea7e02df45d1aa29470bee5b66e9d62fdfc41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e9b602_d26f8543",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-10-22T11:03:37Z",
+      "side": 1,
+      "message": "Yeah exactly.",
+      "parentUuid": "c46f3582_627fdd3a",
+      "revId": "c8aea7e02df45d1aa29470bee5b66e9d62fdfc41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c220bf9a_896198a6",
@@ -65,6 +101,30 @@
       "writtenOn": "2020-10-22T10:31:13Z",
       "side": 1,
       "message": "I found bugs.webrtc.org/xxx a preferred notation.\n\nI would also like the bug be assigned.",
+      "range": {
+        "startLine": 2764,
+        "startChar": 10,
+        "endLine": 2764,
+        "endChar": 22
+      },
+      "revId": "c8aea7e02df45d1aa29470bee5b66e9d62fdfc41",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce9130a9_52e0fd96",
+        "filename": "video/video_send_stream_tests.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2764,
+      "author": {
+        "id": 8038
+      },
+      "writtenOn": "2020-10-22T11:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c220bf9a_896198a6",
       "range": {
         "startLine": 2764,
         "startChar": 10,
