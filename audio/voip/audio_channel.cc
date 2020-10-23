@@ -129,4 +129,53 @@ void AudioChannel::StopPlay() {
   }
 }
 
+void AudioChannel::GetDecodingStatistics(DecodingStatistics& decoding_stats) {
+  AudioDecodingCallStats stats = ingress_->GetDecodingStatistics();
+  decoding_stats.calls_to_silence_generator = stats.calls_to_silence_generator;
+  decoding_stats.calls_to_neteq = stats.calls_to_neteq;
+  decoding_stats.decoded_normal = stats.decoded_normal;
+  decoding_stats.decoded_neteq_plc = stats.decoded_neteq_plc;
+  decoding_stats.decoded_codec_plc = stats.decoded_codec_plc;
+  decoding_stats.decoded_cng = stats.decoded_cng;
+  decoding_stats.decoded_plc_cng = stats.decoded_plc_cng;
+  decoding_stats.decoded_muted_output = stats.decoded_muted_output;
+}
+
+void AudioChannel::GetNetEqStatistics(NetEqStatistics& neteq_stats) {
+  NetworkStatistics stats = ingress_->GetNetworkStatistics();
+  neteq_stats.current_buffer_size_ms = stats.currentBufferSize;
+  neteq_stats.preferred_buffer_size_ms = stats.preferredBufferSize;
+  neteq_stats.jitter_peaks_found = stats.jitterPeaksFound;
+  neteq_stats.expand_rate = stats.currentExpandRate;
+  neteq_stats.speech_expand_rate = stats.currentSpeechExpandRate;
+  neteq_stats.preemptive_rate = stats.currentPreemptiveRate;
+  neteq_stats.accelerate_rate = stats.currentAccelerateRate;
+  neteq_stats.secondary_decoded_rate = stats.currentSecondaryDecodedRate;
+  neteq_stats.secondary_discarded_rate = stats.currentSecondaryDiscardedRate;
+  neteq_stats.mean_waiting_time_ms = stats.meanWaitingTimeMs;
+  neteq_stats.median_waiting_time_ms = stats.medianWaitingTimeMs;
+  neteq_stats.min_waiting_time_ms = stats.minWaitingTimeMs;
+  neteq_stats.max_waiting_time_ms = stats.maxWaitingTimeMs;
+  neteq_stats.total_samples_received = stats.totalSamplesReceived;
+  neteq_stats.concealed_samples = stats.concealedSamples;
+  neteq_stats.concealment_events = stats.concealmentEvents;
+  neteq_stats.jitter_buffer_delay_ms = stats.jitterBufferDelayMs;
+  neteq_stats.jitter_buffer_emitted_count = stats.jitterBufferEmittedCount;
+  neteq_stats.jitter_buffer_target_delay_ms = stats.jitterBufferTargetDelayMs;
+  neteq_stats.inserted_samples_for_deceleration =
+      stats.insertedSamplesForDeceleration;
+  neteq_stats.removed_samples_for_acceleration =
+      stats.removedSamplesForAcceleration;
+  neteq_stats.silent_concealed_samples = stats.silentConcealedSamples;
+  neteq_stats.fec_packets_received = stats.fecPacketsReceived;
+  neteq_stats.fec_packets_discarded = stats.fecPacketsDiscarded;
+  neteq_stats.delayed_packet_outage_samples = stats.delayedPacketOutageSamples;
+  neteq_stats.relative_packet_arrival_delay_ms =
+      stats.relativePacketArrivalDelayMs;
+  neteq_stats.interruption_count = stats.interruptionCount;
+  neteq_stats.total_interruption_duration_ms =
+      stats.totalInterruptionDurationMs;
+  neteq_stats.packet_buffer_flushes = stats.packetBufferFlushes;
+}
+
 }  // namespace webrtc
