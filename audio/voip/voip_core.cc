@@ -382,4 +382,20 @@ bool VoipCore::SendDtmfEvent(ChannelId channel,
   return false;
 }
 
+void VoipCore::GetDecodingStatistics(ChannelId channel,
+                                     DecodingStatistics& decoding_stats) {
+  // Failure to locate channel is logged internally in GetChannel.
+  if (auto audio_channel = GetChannel(channel)) {
+    audio_channel->GetDecodingStatistics(decoding_stats);
+  }
+}
+
+void VoipCore::GetNetEqStatistics(ChannelId channel,
+                                  NetEqStatistics& neteq_stats) {
+  // Failure to locate channel is logged internally in GetChannel.
+  if (auto audio_channel = GetChannel(channel)) {
+    audio_channel->GetNetEqStatistics(neteq_stats);
+  }
+}
+
 }  // namespace webrtc
