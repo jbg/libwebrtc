@@ -102,6 +102,7 @@ void WindowCapturerWinWgc::CaptureFrame() {
     hr = capture_session->StartCapture();
     if (FAILED(hr)) {
       RTC_LOG(LS_ERROR) << "Failed to start capture: " << hr;
+      ongoing_captures_.erase(window_);
       callback_->OnCaptureResult(DesktopCapturer::Result::ERROR_PERMANENT,
                                  /*frame=*/nullptr);
       return;
@@ -112,13 +113,13 @@ void WindowCapturerWinWgc::CaptureFrame() {
   hr = capture_session->GetMostRecentFrame(&frame);
   if (FAILED(hr)) {
     RTC_LOG(LS_ERROR) << "GetMostRecentFrame failed: " << hr;
+    ongoing_captures_.erase(window_);
     callback_->OnCaptureResult(DesktopCapturer::Result::ERROR_PERMANENT,
                                /*frame=*/nullptr);
     return;
   }
 
   if (!frame) {
-    RTC_LOG(LS_WARNING) << "GetMostRecentFrame returned an empty frame.";
     callback_->OnCaptureResult(DesktopCapturer::Result::ERROR_TEMPORARY,
                                /*frame=*/nullptr);
     return;

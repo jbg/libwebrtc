@@ -51,9 +51,6 @@ class WindowCapturerWinWgc final : public DesktopCapturer {
   // that we will return a frame for when CaptureFrame is called.
   HWND window_ = nullptr;
 
-  // This helps us enumerate the list of windows that we can capture.
-  WindowCaptureHelperWin window_capture_helper_;
-
   // A Direct3D11 device that is shared amongst the WgcCaptureSessions, who
   // require one to perform the capture.
   Microsoft::WRL::ComPtr<::ID3D11Device> d3d11_device_;
@@ -62,6 +59,9 @@ class WindowCapturerWinWgc final : public DesktopCapturer {
   // WgcCaptureSession. This is where we will get the frames for the window
   // from, when requested.
   std::map<HWND, WgcCaptureSession> ongoing_captures_;
+
+  // This helps us enumerate the list of windows that we can capture.
+  WindowCaptureHelperWin window_capture_helper_;
 };
 
 }  // namespace webrtc
