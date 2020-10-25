@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d504c991_4ae7d5c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "fetch",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0925ec9f_9f25dab6",
@@ -14,6 +37,171 @@
       "writtenOn": "2020-10-23T22:24:34Z",
       "side": 1,
       "message": "Please take a look. Thanks!",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8df8039c_8ccda6c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "Because I lack the NetEq expertise, my review specifically doesn\u0027t cover\n\n* whether these stats are the right ones, and\n\n* whether resetting stats on read like this is the right way to go; I know we\u0027ve discussed resetting vs. not resetting in the past, but I don\u0027t remember the outcome.\n\npeah@, can you cover these points?",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "917bf448_0f9833cf",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "Regarding choice of integer types here and below,\n\n* Avoid unsigned types unless there\u0027s a compelling reason. That negative values are never supposed to occur is not a compelling enough reason.\n* Consider if plain `int` might work well in the places where you now use 16-bit numbers. They do take more space, but is that significant?\n\nhttps://google.github.io/styleguide/cppguide.html#Integer_Types",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "420777d5_ab37981d",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "In order to make this extra clear, would it be a good idea to have two sub structs, one for the counters that reset on each call, and one for the ones that don\u0027t?",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef2535e3_1544da24",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "Document whether these stat are reset on each call or not?",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f9db7b_825c131a",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "Well, some of them. Could you elaborate here?",
+      "range": {
+        "startLine": 110,
+        "startChar": 37,
+        "endLine": 110,
+        "endChar": 79
+      },
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4339ffd_9cebe6c8",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "Could these two simply return the stats structs instead of having them as output arguments? RVO should ensure there is no performance loss.",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf887292_56037a30",
+        "filename": "audio/voip/test/audio_channel_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "/*number_of_channels\u003d*/1",
+      "range": {
+        "startLine": 160,
+        "startChar": 20,
+        "endLine": 160,
+        "endChar": 44
+      },
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07988098_ad06ba36",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "Hmmm. I wonder if no one ever is going to lose a bunch of time trying to figure out why their stats look strange, when in fact they were never written to... Do you feel strongly about not having a return value that indicates success or failure? (Together with my other suggestion, this would mean returning optional\u003cDecodingStatistics\u003e.)",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c1019df_082dbe4d",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-25T01:48:04Z",
+      "side": 1,
+      "message": "Same.",
       "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
