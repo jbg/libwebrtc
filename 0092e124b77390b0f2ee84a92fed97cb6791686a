@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f00a8553_fd563167",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d504c991_4ae7d5c2",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0925ec9f_9f25dab6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -75,6 +99,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf423b6_d50feec4",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "917bf448_0f9833cf",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "420777d5_ab37981d",
@@ -92,6 +134,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfebcd41_b9a3c252",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "420777d5_ab37981d",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef2535e3_1544da24",
@@ -105,6 +165,24 @@
       "writtenOn": "2020-10-25T01:48:04Z",
       "side": 1,
       "message": "Document whether these stat are reset on each call or not?",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b929bb_9eb03e75",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef2535e3_1544da24",
       "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -132,6 +210,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b7d3e68_3a2a3c75",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77f9db7b_825c131a",
+      "range": {
+        "startLine": 110,
+        "startChar": 37,
+        "endLine": 110,
+        "endChar": 79
+      },
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4339ffd_9cebe6c8",
@@ -145,6 +247,24 @@
       "writtenOn": "2020-10-25T01:48:04Z",
       "side": 1,
       "message": "Could these two simply return the stats structs instead of having them as output arguments? RVO should ensure there is no performance loss.",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3911cdc9_c6220eee",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4339ffd_9cebe6c8",
       "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -172,6 +292,30 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca29389_d45deeed",
+        "filename": "audio/voip/test/audio_channel_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "I originally had it like that but git cl format inserted the space in between.",
+      "parentUuid": "bf887292_56037a30",
+      "range": {
+        "startLine": 160,
+        "startChar": 20,
+        "endLine": 160,
+        "endChar": 44
+      },
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07988098_ad06ba36",
@@ -189,6 +333,24 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c3eb557_b3ce1338",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "Thanks, I agree that using optional would be good idea.",
+      "parentUuid": "07988098_ad06ba36",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c1019df_082dbe4d",
@@ -202,6 +364,24 @@
       "writtenOn": "2020-10-25T01:48:04Z",
       "side": 1,
       "message": "Same.",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba50e484_d5886712",
+        "filename": "audio/voip/voip_core.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 10558
+      },
+      "writtenOn": "2020-10-26T19:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c1019df_082dbe4d",
       "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
