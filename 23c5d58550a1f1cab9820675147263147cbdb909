@@ -16,6 +16,23 @@
       "message": "Any reviewer: PTAL!\nCherry pick for M87. Couldn\u0027t create the CL via Gerrit UI due to account permission issues.",
       "revId": "23c5d58550a1f1cab9820675147263147cbdb909",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf1725c_c66fe9a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5122
+      },
+      "writtenOn": "2020-10-26T10:10:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "23c5d58550a1f1cab9820675147263147cbdb909",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
