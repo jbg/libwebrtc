@@ -382,4 +382,20 @@ bool VoipCore::SendDtmfEvent(ChannelId channel,
   return false;
 }
 
+absl::optional<DecodingStatistics> VoipCore::GetDecodingStatistics(
+    ChannelId channel) {
+  if (auto audio_channel = GetChannel(channel)) {
+    return audio_channel->GetDecodingStatistics();
+  }
+  return absl::nullopt;
+}
+
+absl::optional<NetEqStatistics> VoipCore::GetNetEqStatistics(
+    ChannelId channel) {
+  if (auto audio_channel = GetChannel(channel)) {
+    return audio_channel->GetNetEqStatistics();
+  }
+  return absl::nullopt;
+}
+
 }  // namespace webrtc
