@@ -73,6 +73,30 @@
       },
       "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e8ea858_cfeb980b",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-27T08:49:41Z",
+      "side": 1,
+      "message": "New code and apis should not provide any self-resetting stats. Is there any good reason that we can\u0027t stick to the same values as the standard GetStats, which don\u0027t reset anything? See https://webrtc-review.googlesource.com/c/src/+/183600\n\nI.e., call NetEq::CurrentNetworkStatistics and NetEqImpl::GetLifetimeStatistics, but not the legacy NetEq::NetworkStatistics?",
+      "parentUuid": "26dde7df_90e5ae7f",
+      "range": {
+        "startLine": 114,
+        "startChar": 12,
+        "endLine": 114,
+        "endChar": 38
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }
