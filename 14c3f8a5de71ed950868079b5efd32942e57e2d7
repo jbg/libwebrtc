@@ -37,6 +37,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74184862_4b2b7051",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-10-27T09:43:02Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it\u0027s a good idea to expose this to the API, is there anything useful here that\u0027s not included in the standardized metrics?",
+      "range": {
+        "startLine": 18,
+        "startChar": 7,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b493fee5_7fef9af6",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-10-27T09:43:02Z",
+      "side": 1,
+      "message": "I think DTX is counted as codec plc (since it is implemented by Opus).",
+      "range": {
+        "startLine": 30,
+        "startChar": 50,
+        "endLine": 30,
+        "endChar": 61
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d19062b_499e3efd",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-10-27T09:43:02Z",
+      "side": 1,
+      "message": "Note that api/neteq/neteq.h already contains an identical struct, NetEqLifetimeStatistics. Why not include that file and use it here?",
+      "range": {
+        "startLine": 40,
+        "startChar": 9,
+        "endLine": 40,
+        "endChar": 24
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "badeb9e5_b57faa0d",
         "filename": "api/voip/voip_statistics.h",
         "patchSetId": 4
@@ -48,6 +117,29 @@
       "writtenOn": "2020-10-27T04:57:13Z",
       "side": 1,
       "message": "It seems strange that these two are 32 bits while all the others need 64 bits.",
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21786536_dbc4713c",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-10-27T09:43:02Z",
+      "side": 1,
+      "message": "These metrics are all non-standard and deprecated, I would recommend to remove these. We are trying to migrate away from these metrics because their implementation is problematic. The internal counters for these metrics reset on every call to getStats(), and now they will also reset on every call to VoipStatistics::GetNetEqStatistics. In addition these metrics have accuracy/rounding issues that make them sensitive to the polling interval. \n\nThe standardized metrics in the lifetime metrics should contain almost the same information without having these issues.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 0
+      },
       "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -89,6 +181,30 @@
       "side": 1,
       "message": "New code and apis should not provide any self-resetting stats. Is there any good reason that we can\u0027t stick to the same values as the standard GetStats, which don\u0027t reset anything? See https://webrtc-review.googlesource.com/c/src/+/183600\n\nI.e., call NetEq::CurrentNetworkStatistics and NetEqImpl::GetLifetimeStatistics, but not the legacy NetEq::NetworkStatistics?",
       "parentUuid": "26dde7df_90e5ae7f",
+      "range": {
+        "startLine": 114,
+        "startChar": 12,
+        "endLine": 114,
+        "endChar": 38
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb8135f_0f8b5751",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-10-27T09:43:02Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "8e8ea858_cfeb980b",
       "range": {
         "startLine": 114,
         "startChar": 12,
