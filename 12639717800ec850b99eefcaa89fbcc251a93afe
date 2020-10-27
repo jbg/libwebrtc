@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150a298c_2c6e19b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5053
+      },
+      "writtenOn": "2020-10-27T21:54:19Z",
+      "side": 1,
+      "message": "hta: You may want to look at changes to ssl_identity_unittest.cc and ssl_stream_adapter_unittest.cc; I noticed a couple areas where test coverage was missing.\n\ndavidben: Addressed all of your comments, except for the subject alt name matching. Let me know what you\u0027d like to do about that.",
+      "revId": "12639717800ec850b99eefcaa89fbcc251a93afe",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
