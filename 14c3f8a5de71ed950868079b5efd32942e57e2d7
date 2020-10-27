@@ -16,6 +16,63 @@
       "message": "Thanks! PTAL!",
       "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8527a8fe_196c4972",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-27T04:57:13Z",
+      "side": 1,
+      "message": "Adding ivoc@ as NetEq specialist reviewer since peah@ is OOO all week I think.",
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "badeb9e5_b57faa0d",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-27T04:57:13Z",
+      "side": 1,
+      "message": "It seems strange that these two are 32 bits while all the others need 64 bits.",
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26dde7df_90e5ae7f",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-27T04:57:13Z",
+      "side": 1,
+      "message": "Sorry to bring a new idea at this point, but we\u0027ve had some problems in the past where multiple subsystems were polling stats and each getting less than the full set because of exactly this sort of resetting behavior...\n\nWhat if we simply did not reset any of the stats, ever, but provided an operator- for the stats structs? Then callers who wanted the \"counts since last call\" behavior could simply save the stats from last time, and subtract the old from the new. That way, both lifetime and since-last-time stats are easily available, and multiple callers cannot disrupt each other. And as an added bonus, the stats polling methods can be `const`.\n\n(This would apply to DecodingStatistics too, presumably.)",
+      "range": {
+        "startLine": 114,
+        "startChar": 12,
+        "endLine": 114,
+        "endChar": 38
+      },
+      "revId": "14c3f8a5de71ed950868079b5efd32942e57e2d7",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     }
   ]
 }

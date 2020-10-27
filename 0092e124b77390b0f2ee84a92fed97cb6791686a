@@ -119,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "134f0edd_b038c700",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-27T04:57:13Z",
+      "side": 1,
+      "message": "There are still a whole bunch of uint64_ts that I suspect could be int64_ts.",
+      "parentUuid": "ddf423b6_d50feec4",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "420777d5_ab37981d",
         "filename": "api/voip/voip_statistics.h",
         "patchSetId": 2
@@ -148,6 +166,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "420777d5_ab37981d",
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c3d792_7099d1b0",
+        "filename": "api/voip/voip_statistics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-27T04:57:13Z",
+      "side": 1,
+      "message": "It seems somewhat asymmetrical to embed the non-resetting struct in the resetting struct, instead of having both as members of a third struct. But I\u0027ll quit nagging and leave the choice up to you...\n\nUpdate: See my other comment below for an alternative suggestion.",
+      "parentUuid": "cfebcd41_b9a3c252",
       "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
@@ -306,6 +342,30 @@
       "side": 1,
       "message": "I originally had it like that but git cl format inserted the space in between.",
       "parentUuid": "bf887292_56037a30",
+      "range": {
+        "startLine": 160,
+        "startChar": 20,
+        "endLine": 160,
+        "endChar": 44
+      },
+      "revId": "0092e124b77390b0f2ee84a92fed97cb6791686a",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d7f53a_03f39d48",
+        "filename": "audio/voip/test/audio_channel_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5126
+      },
+      "writtenOn": "2020-10-27T04:57:13Z",
+      "side": 1,
+      "message": "The equals sign is the important part, but if you include it, I think clang-format won\u0027t insist on a space. See line 157.",
+      "parentUuid": "bca29389_d45deeed",
       "range": {
         "startLine": 160,
         "startChar": 20,
