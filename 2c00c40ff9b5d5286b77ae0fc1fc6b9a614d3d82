@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0fc7358_4b9cc5b7",
+        "filename": "modules/desktop_capture/screen_capturer_helper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-28T13:59:10Z",
+      "side": 0,
+      "message": "It\u0027s unclear to me if these members may be accessed on multiple threads.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 21
+      },
+      "revId": "2c00c40ff9b5d5286b77ae0fc1fc6b9a614d3d82",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
