@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "563f6bdc_6f8f5042",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-28T14:24:06Z",
+      "side": 1,
+      "message": "PTAL. This appears to be a useless lock.",
+      "revId": "349270156261a3891f4c0ba738fe9e533b111cad",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
