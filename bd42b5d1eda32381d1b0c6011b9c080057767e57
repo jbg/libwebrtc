@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a826e51_b68d8e74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5234
+      },
+      "writtenOn": "2020-10-28T13:39:48Z",
+      "side": 1,
+      "message": "PTAL. I stumbled on this while reviewing usage of RWLockWrapper.",
+      "revId": "bd42b5d1eda32381d1b0c6011b9c080057767e57",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    }
+  ]
+}
