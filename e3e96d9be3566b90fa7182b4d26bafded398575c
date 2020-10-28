@@ -35,6 +35,23 @@
       "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5df8f578_dadddbb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5607
+      },
+      "writtenOn": "2020-10-28T14:02:02Z",
+      "side": 1,
+      "message": "Thanks for the changes, this looks like a good starting point. If it turns out we are missing any metrics later we can consider adding new metrics to the lifetime stats.",
+      "revId": "e3e96d9be3566b90fa7182b4d26bafded398575c",
+      "serverId": "58829da1-049c-39fb-b951-ebdcd0984767"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02eac53e_5ef5ad50",
